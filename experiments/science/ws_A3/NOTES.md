@@ -590,3 +590,155 @@ Asked, "only if you still have budget": (4) position A17.7 (Bennett bracket: `K 
 concentration statement with its constant for bounded-difference functions under a Markov chain / a Gibbs
 measure in the uniqueness regime (leads, unverified: Marton; Kontorovich–Ramanan; Külske; Chazottes–Collet–
 Külske–Redig).  Read A17 parts (6), (7) in the tree (lines 1319–1471 of the addenda file).
+
+**Readings for the second addition (all `[full text]` of the passages named unless marked):**
+* Hoeffding 1963 again, p. 16–17 (scanned): "Theorem 3. If X_1, …, X_n are independent, EX_i = 0, X_i ≤ b … then for 0 < t < b,
+  Pr{X̄ ≥ t} ≤ {(1 + bt/σ²)^{−(1+bt/σ²)σ²/(b²+σ²)}(1 − t/b)^{−(1−t/b)b²/(b²+σ²)}}^n (2.8) ≤ e^{−(nt/b)[(1+σ²/bt)ln(1+bt/σ²) − 1]} (2.9)";
+  "Here the summands are assumed to be bounded only from above"; "Inequality (2.8) is the best that can be
+  obtained from (1.7) under the present assumptions.  It is the minimum with respect to h of the right-hand side
+  of (1.7) when the X_i have the distribution Pr{X_i = −σ²/b} = b²/(b²+σ²), Pr{X_i = b} = σ²/(b²+σ²) (2.10)";
+  "The bound (2.9) is due to Bennett ([2], inequality (8b)).  (… His first proof assumes |X_i| ≤ b (= his M), a
+  second proof (pp. 42–3) uses only X_i ≤ b.)"; p. 20: "the bound in (2.8) is an increasing function of σ²".
+  My copy has pp. 13–22 only; the proof of Theorem 3 (with the mgf lemma) is on later pages — not seen.
+* Fan, Grama, Liu, arXiv:1109.4359v5 (Stochastic Process. Appl. 122 (2012) 3545–3559 per the arXiv record), §1,
+  Lemma 3.1: "Bennett [2] and Hoeffding [18] used a more precise estimation
+  φ_i(λ) ≤ (1/(1+σ_i²))exp{−λσ_i²} + (σ_i²/(1+σ_i²))exp{λ}, λ ≥ 0, (3) for any ξ_i satisfying ξ_i ≤ 1.  Bennett's
+  estimation (3) is sharp with the equality attained when P(ξ_i = 1) = σ_i²/(1+σ_i²) and P(ξ_i = −σ_i²) = 1/(1+σ_i²)";
+  "Lemma 3.1. If ξ is a random variable such that ξ ≤ 1, Eξ ≤ 0 and Eξ² = σ², then, for any λ ≥ 0, [same bound]" —
+  "which, in the special case of centered random variables, has been proved by Bennett [2]"; reference [2]:
+  "Bennett, G., 1962. Probability inequalities for the sum of independent random variables, J. Amer. Statist.
+  Assoc. 57, No. 297, 33–45."  With ξ = Y/b, λ = b this *is* A17.7's `W(b, σ²)`.
+* Pinelis, arXiv:0902.4058v1 (Ann. Inst. H. Poincaré Probab. Stat. 50(1):15–27 (2014) per the arXiv record), §1:
+  "The Bennett-Hoeffding inequality … is based on an upper bound on the exponential moments of S:
+  E e^{λS} ≤ BH_exp(λ) := exp{((e^{λy} − 1 − λy)/y²)σ²}" (1.3) = A17.7's weaker form; "exact bounds refining the
+  Bennett-Hoeffding ones were obtained by Pinelis and Utev" (third moments).
+* van Handel, "Probability in High Dimension", APC 550 lecture notes, Princeton, version 21 Dec 2016: Thm 2.3
+  "Tensorization of variance: Var[f(X_1,…,X_n)] ≤ E[Σ_i Var_i f]"; Cor. 2.4 "Var[f] ≤ ¼E[Σ_i (D_i f)²]" (`D_i f` =
+  sup − inf in coordinate `i`); Notes: "The tensorization property of the variance is classical.  It is sometimes
+  called the Efron-Stein inequality after [58]" (Efron & Stein, The jackknife estimate of variance, Ann. Statist.
+  9(3)).  Raginsky & Sason, arXiv:1212.4663v8: Thm 3.3.7 "Efron–Stein–Steele inequality"; Thm 2.2.2 McDiarmid with
+  the mgf step (2.2.32) `E[e^{tξ_k}|F_{k−1}] ≤ exp(t²d_k²/8)`.  ⇒ both attributions in A17.6/A17.7 hold.
+* Kontorovich & Ramanan, Ann. Probab. 36(6) (2008) 2126–2158, doi:10.1214/07-AOP384 (header of arXiv:math/0609835v2):
+  mixing coefficients `η̄_ij` (sup TV distance between the laws of `X_j^n` given two prefixes differing in the
+  `i`-th symbol), `‖Δ_n‖_∞ = max_i(1 + η̄_{i,i+1} + … + η̄_{i,n})`; Thm 1.1: `P{|φ − Eφ| ≥ t} ≤ 2exp(−t²/(2nc²‖Δ_n‖²_∞))` for
+  `c`-Lipschitz `φ` (Hamming); Thm 1.2 (Markov chains): same with `M_n = max_i(1 + θ_i + θ_iθ_{i+1} + …)`,
+  `θ_i = sup‖p_i(·|x′) − p_i(·|x″)‖_TV`, and `M_n ≤ 1/(1−θ)` if `θ_i ≤ θ < 1`; Thm 2.1: martingale differences
+  `‖V_i(φ)‖_∞ ≤ H_{n,i}`; "The constants in the exponent … are not sharp — indeed, for the independent case … a
+  sharper bound can be obtained by replacing n/2 by 2n".
+* Chazottes, Collet, Külske, Redig, arXiv:math/0503483v2: coupling matrix `D^σ_{i,i+j} = max_{a,b} P̂^σ_{i,a,b}(σ^{(1)}_{i+j} ≠ σ^{(2)}_{i+j})`,
+  `D = sup_σ D^σ`; "(9) E(e^{λV_i}|F_{i−1})(σ) ≤ e^{λ²(D^σδg)_i²/8}", "(10) … ≤ e^{−λt}exp(λ²‖Dδg‖²/8)"; Thm 1:
+  `P{|g − Eg| ≥ t} ≤ 2exp(−2t²/(‖D‖²_{ℓ²}‖δg‖²_{ℓ²}))`; Thm 2: `E(g − Eg)² ≤ ‖D^{(2)}‖²_{ℓ²}‖δg‖²_{ℓ²}`; "In [10], C. Külske
+  obtained an exponential concentration inequality for functions of Gibbs random fields in the Dobrushin
+  uniqueness regime" ([10] = Comm. Math. Phys. 239, 29–51 (2003)); Dobrushin matrix `C_{x,y}`, `Δ = Σ_n C^n`, and
+  "From [10, Lemma 1] … ≤ Σ_y(1_{x,y} + Δ_{y,x})δ_y g"; Marton cited as [14], [15].
+* Free-energy perturbation with a certified second-order bound: WebSearch (X) `rigorous upper bound on the
+  remainder of the second-order cumulant expansion of the Zwanzig free energy perturbation formula … "Bennett's
+  inequality" OR "Bernstein inequality" …` → nothing of the kind; leads read at `[abstract]`: Greeff,
+  arXiv:2009.14321 ("the ratio of the third order to the second order term … ∼0.1, indicating good convergence").
+  PubMed: two long queries → 0 hits; `free energy perturbation cumulant expansion` → 9; `"free energy" bounds
+  "second order" Gibbs-Bogoliubov` → 0.  Kept (according to PubMed, `[abstract]`): Wang, Mei, Ryde, Chem Sci
+  15(23):8786–8799 (2024), doi:10.1039/d4sc00140k ("for Gaussian distributions … free energies can be accurately
+  approximated using a second-order cumulant expansion … distributions that are skewed towards more negative
+  values than a Gaussian present greater challenges … making standard criteria unreliable.  We propose a
+  practical approach"); Mathis, Li, Greeff, Blaschke, Rehn, J Phys Condens Matter (2026),
+  doi:10.1088/1361-648X/aec29c ("FEPT … does not improve systematically with perturbative order").
+  **Not found:** a rigorous bound on the remainder from a variance bound and a one-sided bound.
+* Numerics: C9 added (120 two-state Markov chains: mgf, Rényi and variance bounds with `1/(1−θ)²` never violated,
+  largest ratios 0.10, 0.06, 0.02; Bennett's two-point bound on 20 000 random laws: never violated, attained).
+appended at 00:45 UTC
+
+### step 15 — second addition, second round; report brought up to date (00:50–01:01 UTC, machine clock)
+**arXiv API queries of step 14 (six; results as returned):** `ti:"Concentration inequalities for dependent random
+variables via the martingale method"` → math/0609835v2 (Kontorovich, Ramanan; "Annals of Probability 2008, Vol. 36,
+No. 6, 2126-2158"); `ti:"Concentration inequalities for random fields via coupling"` → math/0503483v2 (Chazottes,
+Collet, Kuelske, Redig); `ti:"On the Bennett-Hoeffding inequality"` → 0902.4058v1 (Pinelis; AIHP 50(1):15–27 (2014));
+`ti:"Hoeffding" AND ti:"supermartingales" AND au:Fan` → 1109.4359v5 (Fan, Grama, Liu; SPA 122 (2012) 3545–3559);
+`au:Kulske AND ti:"Concentration inequalities"` → math/0503483v2 again; `au:Marton AND ti:"measure concentration"` →
+math/0410168v1 (Marton, "Measure concentration for Euclidean distance in the case of dependent random variables",
+Annals of Probability 2004, Vol. 32, No. 3B, 2526-2544) — not opened.
+
+**Bibliographic checks against the texts read (no memory):**
+* Efron & Stein: van Handel's reference [58] = "Efron, B., Stein, C.: The jackknife estimate of variance. Ann.
+  Statist. 9(3), 586–596 (1981)"; Raginsky–Sason's [144] the same paper.
+* Marton, as cited by Chazottes et al.: [14] Probab. Theory Related Fields 110 (1998) 427–439; [15] Studia Sci. Math.
+  Hungar. 40 (2003) 95–113 ("In [15], K. Marton obtained exponential concentration results for a class of Gibbs
+  random fields under a strong mixing condition lying between Dobrushin-Shlosman condition and its weakening");
+  [16] Ann. Probab. 32 (2004) 2526–2544.  As cited by Kontorovich–Ramanan: [19] "Marton, K. (1995). A measure
+  concentration inequality for contracting Markov chains. Geom. Funct. Anal. 6 556–571"; [20] (1996) Ann. Probab. 24
+  857–866; [21] (1998); [22] (2003); [23] (2004); and "concentration inequalities around the median that are
+  qualitatively similar to the one obtained in Theorem 1.2 were obtained for strictly contracting Markov chains in
+  [20] (see Proposition 1) and for a class of stationary Markov processes in [21] (see Proposition 4′)".  ⇒ the
+  coordinator's lead "Marton, mid 1990s" is confirmed as a citation; no Marton paper opened.
+* arXiv:2602.18482 (side hit of W13) is Hoffmann, Schebek, Klein, Noé, Rogal, "Boltzmann Generators for Condensed
+  Matter via Riemannian Flow Matching" — not relevant, not read.
+
+**Second round on "free-energy perturbation with a certified second-order bound":**
+* W14 (`WebSearch`, extended): `rigorous second-order bound on free energy difference beyond Gibbs-Bogoliubov
+  inequality: upper bound on the remainder using variance of the perturbation energy and a bound on the
+  perturbation, classical statistical mechanics perturbation theory "upper and lower bounds" free energy "second
+  order"` → no such bound; leads: tandfonline 10.1080/00268976.2024.2391484 (Delle Site–Hartmann), arXiv:1507.00563
+  (review; "Decoster established a sequence of inequalities which generalize the Gibbs-Bogoliubov inequality"),
+  arXiv:2608.07246 (two-sided Bogoliubov inequality in von Neumann algebras; not opened).
+* W15 (`WebSearch`, standard): `"Sharpening Jensen's inequality" Liao Berg Jensen gap bounded by variance arXiv` →
+  arXiv:1707.08644.
+* arXiv API (nine queries): `ti:"Sharpening Jensen" AND au:Liao` → 1707.08644v2; `ti:"Jensen gap" AND abs:"variance"` →
+  2610.33786v1 (Hu, Wang, "Jensen gaps and the decomposition principle"; not opened); `abs:"free energy perturbation"
+  AND abs:"Bennett inequality"` → 0; `abs:"cumulant expansion" AND abs:"free energy" AND abs:"rigorous bound"` → 0;
+  `ti:"Computationally feasible bounds for the free energy"` → 2403.10918v1; `ti:"two-sided Bogoliubov inequality"` →
+  2111.10282v3 (Reible, Hartmann, Delle Site; Lett. Math. Phys. 112, 97 (2022)), 2501.04564v1, 2608.07246v1 (none
+  opened); `au:Decoster AND ti:"variational"` → 0; `ti:"thermodynamical perturbations"` → 29 (Decoster not among the
+  four shown); `au:Decoster AND abs:"Bogoliubov"` → 0.  Total arXiv queries now 76.
+* Crossref (three bibliographic queries): Decoster, "Variational principles and thermodynamical perturbations",
+  J. Phys. A: Math. Gen. 37(39), 9051–9070 (2004), doi:10.1088/0305-4470/37/39/001; Delle Site & Hartmann, Molecular
+  Physics 123(7–8) (issued 2024-08-20), doi:10.1080/00268976.2024.2391484; Liao & Berg, The American Statistician
+  73(3), 278–281, doi:10.1080/00031305.2017.1419145.
+* Unpaywall (one look-up, Decoster's DOI): is_oa true, best location = the publisher's PDF.  `getpdf.sh decoster2004`
+  → HTML challenge page ("Just a moment…"), not a PDF.  `WebFetch` on the DOI → redirect → IOP article page:
+  the tool summarised the abstract (sequences of inequalities generalising Gibbs–Bogoliubov / Peierls / Bogoliubov,
+  as rearrangements of perturbation expansions giving exact bounds; anharmonic oscillator as illustration) and would
+  quote only "provides a method for calculating the partition function or the free energy of a system"; `WebFetch` on
+  the PDF address → IOP error page.  ⇒ Decoster 2004 NOT opened; `[fetch-tool]` for the abstract.
+* Consensus (one query, no filters; first use of this tool): `rigorous upper and lower bounds on free energy
+  differences in free energy perturbation using the variance of the energy difference, beyond the Gibbs-Bogoliubov
+  inequality` → 3 records: He et al., "FEAT: Free energy Estimators with Adaptive Transport" (2026, J. Stat. Mech.);
+  Delle Site & Hartmann (2024, Molecular Physics); Rahbar et al., "Thermodynamic potentials from a probabilistic
+  view on the system-environment interaction energy" (2025, arXiv).  Links are in the report, §4.9.  None states a
+  second-order bound from the reference ensemble alone (abstracts as returned by the tool).
+* Downloads: ax_1707.08644 (11 pp.), ax_1507.00563 (60 pp.), ax_2403.10918 (24 pp.), decoster2004 (HTML, refused).
+  Totals from the filesystem: 79 targets, 65 PDFs.
+
+**Readings (`[full text]` of the passages named):**
+* Liao & Berg, arXiv:1707.08644v2, pp. 1–6: Theorem 1 (`inf h·var ≤ E φ(X) − φ(EX) ≤ sup h·var`,
+  `h(x; ν) = (φ(x) − φ(ν))/(x − ν)² − φ′(ν)/(x − ν)`), Lemma 1 (φ′ convex ⇒ h increasing), Example 1 (mgf).  No mention of
+  Bennett or Hoeffding (grep).  Applied to exp with `X ≤ EX + b`: `e^K − 1 ≤ (σ²/b²)(e^b − 1 − b)` ⇒ the middle form
+  `W ≤ ln(1 + (σ²/b²)(e^b − 1 − b)) ≤ (σ²/b²)(e^b − 1 − b)`; lower half with `X ≥ EX − a`: `K ≥ ln(1 + Var·(e^{−a} − 1 + a)/a²)`.
+* Delle Site & Hartmann, arXiv:2403.10918v1: abstract; "Theorem 3.1 (Two-sided Bogoliubov inequality) …
+  E_{µne}[G] ≤ −β⁻¹ log E_{µe}[e^{−βG}] ≤ E_{µe}[G] (24)"; proof: upper bound = Jensen (25), lower bound from
+  Donsker–Varadhan, "KL(µne, µe) = −βE_{µne}[G] − log E_{µe}[e^{−βG}]" (26); §3.3: "−β⁻¹ log E_{µe}[e^{−βG}] = E_{µe}[G] −
+  (β/2)Var_{µe}(G) + O(β²) (32).  Since the free energy is in general neither convex nor concave as a function of β,
+  we cannot expect the mean-variance approximation to provide an upper or lower bound.  Yet, in practice, and this
+  is empirically demonstrated below, the mean-variance approximation turns out to be a fairly accurate
+  approximation that resides between the upper and lower bounds."
+* Kuzemsky, arXiv:1507.00563v1, pp. 29–30: "A. Decoster [39] established a sequence of inequalities which generalize
+  the the Gibbs-Bogoliubov inequality in classical statistical mechanics and the Peierls and Bogoliubov inequalities
+  in quantum mechanics; they can be presented as rearrangements of perturbation expansions, which provide exact
+  bounds which are used in variational calculations."; [39] = "A. Decoster, Variational principles and
+  thermodynamical perturbations. J. Phys.: Math. Gen. 37, 9051 (2004)".
+
+**Numerics:** `check_math.py` C9 extended (helper `bennett_W`): `W ≤ ln(1 + weak) ≤ weak` on 20 000 laws (largest
+W/ln(1+weak) = 1.000000); with a floor and a variance bound inflated by random factors in [1, 3]: largest gap/W =
+0.989782; lower half: largest ratio 0.999975.  One-off 50-digit grid check (mpmath, 9 × 8 values of (b, σ²)):
+max(W − ln(1 + weak)) = −1.5e−17 < 0.  Script re-run with `-W error`: rc 0, about 45 s.
+
+**Report:** §4.11 extended ((c′) Liao–Berg; second round (i)–(iii); classification with the Decoster caveat; sentence
+to write; Marton as cited); §1 table rows "A17.7" and "A17.6, non-product reference"; "How far I got"; §3 row C9;
+§4.9 (W13–W15, arXiv 76, PubMed second addition, Consensus, Crossref, WebFetch, downloads 79/65); §4.10 (47 full-text
+sources); §5 items 6–7; §6 item 2; §7 (coordinator); "What I could not access".  Tables re-checked for consistent
+column counts (5 tables, 105 rows), backticks balanced per paragraph.
+
+**Lessons of this step.**  (1) A "not found" after one web search was too thin: the second search with different
+words found a paper that says in so many words that the second-order truncation is not a bound, and a pointer to a
+paper (Decoster 2004) that may contain rigorous higher-order bounds — which I could not open.  The classification
+stays "(4) not found", with that paper named as unread.  (2) My own count "Marton's papers of the 1990s" was a
+memory; the reference lists of the two papers read give the actual years.
+appended at 01:01 UTC

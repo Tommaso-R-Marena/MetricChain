@@ -213,3 +213,17 @@ had estimated without looking, about an hour too late; they are replaced by step
   for 116 / 451 / 8 / 19 points (smallest margins +0.002172, +0.001263, +0.024910, +0.005590).  Hull of the 14 exact
   profile points: 1.631346 (Qhull; exact rational sum over the cones of its 18 facets agrees) — so vol K ≥ 1.6313.
 * Report updated (§4.5, verdict table, §9, §10, request R9-E1, "What I did not check").
+
+### step 12 (00:47, read from `uptime`; machine load 16) — final passes
+* Re-read the whole report against the outputs; corrections made: "eleven centre types" (not ten); the random-profile
+  test of Thm 11.90(a) is labelled weak (random profiles stay 1.7e-4..5e-3 below the supremum; not an optimised
+  search); run times in §7 taken from the outputs; duality brackets described as "closed in all printed digits";
+  the Lean oleans are "present in .lake/build", I did not build them.
+* `r9_sites.py` now stops after the data points unless called with `all` (the later tests are in `r9_sites2.py`);
+  `out/sites.txt` regenerated from it.
+* README.md written.
+* Final message to the coordinator: verdict per item, findings classified, corrections owed, the semigroup result,
+  what was not checked, path of the report.
+* `r9_extremal.c` / `r9_extremal.py`: the first 21-bead bridge with A = (1,6,10;1) and the first 14-bead bridge with
+  B = (0,3,4) from the enumeration; their real concatenation (38 beads), counted by the O(n²) definition, has the
+  error vector (1, 9, 14, 1), norm 60: the constants of Lemma 11.68 are attained.

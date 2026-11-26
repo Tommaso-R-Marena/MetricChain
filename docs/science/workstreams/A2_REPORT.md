@@ -38,6 +38,7 @@ regularised known part.  **Lever arm (G16).**  The law itself is immediate from 
 weighted-`ℓ¹` displacement form is a standard *certificate* in robot motion planning (Schwarzer–Saha–Latombe
 2005, Lemma 2); the consequences for certification were not found.  I replicated the exponent `3/2` with own
 code and find the sharp asymptotic constant `2√2/3 = 0.943` at the central torsion (the report states `≥ 0.824`).
+**[Note added at checkpoint 38 — this sentence is wrong as a claim of sharpening: the theory division's workstream G report, §2.1(c)–(d), has the bound, its proof, the extremal arm and the general constant `(2/√3) sin(δ/2) sin(θ/2)`, of which `0.824` and `0.943` are the values at two parameter sets.  Corrections: SCI-RES-0007 §2, SCI-REV-0009 §2; `DEAD_ENDS.md` SD38.]**
 **Profile classes (G19).**  The profile envelope is, up to normalisation, the *second lower bound of the
 Gromov–Wasserstein distance* (Mémoli 2011) — the Wasserstein distance between global distance distributions —
 whose zero set is exactly Patterson homometry.  What the literature answers about identifiability: generic
@@ -285,7 +286,7 @@ end-to-end distance of `j` bonds, attained by the all-trans zigzag), so `I_arm �
 the axis and attains it (numerics: `0.2264` at `m = 80`).  Hence, for uniform constants over all conformations,
 `sup_x 2√(2I_red) = (2√2/3)·b·m^{3/2}(1 + o(1)) = 0.943·b m^{3/2}` at the central torsion and `(4/3)·b·m^{3/2}` for
 a torsion much closer to one end than to the other.  Theorem 11.36's "`c_i ≥ 0.824·Λ b m_i^{3/2}` for every
-position" is confirmed and is not sharp in the constant.  *A physical caveat on the word "law"* **[N for coils,
+position" is confirmed and is not sharp in the constant.  **[Note added at checkpoint 38 — "not sharp in the constant" is false: `0.824 = (2/√3) sin 60° sin 55.5°` is the limit of `c_i^ver/(Λ b m_i^{3/2})` at the report's parameters; and the `4/3` "far from the centre" above is the looser form `2√(2I_red)`, a weaker bound than theirs, not a second sharp constant.  The three-line argument and the extremal arm of this paragraph are in workstream G §2.1(c).  SCI-REV-0009 §2.]**  *A physical caveat on the word "law"* **[N for coils,
 H for globules]**: `m^{3/2}` is the worst case over conformations and is forced by extended arms.  For typical
 ideal-coil conformations `√I_arm ∝ m` (median `1.17·m` in my sample), and for compact conformations of radius
 `∝ m^{1/3}` one expects `√I_arm ∝ m^{5/6}`.  Any positive power suffices for Theorem 11.37, so its conclusion

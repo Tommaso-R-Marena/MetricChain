@@ -1,0 +1,9 @@
+V6 E 0.70 3 --N 20000 --kind obc2
+V6 E 0.70 4 --N 20000 --kind obc2
+V6 E 0.70 5 --N 20000 --kind obc2
+V8 P2 0.70 4 --N 20000 --kind obc2 --siteres
+V8 P2 0.70 5 --N 20000 --kind obc2 --siteres
+S4 E 0.70 3 --N 20000 --kind obc2
+S4 E 0.70 4 --N 20000 --kind obc2
+L8 E 0.60 4 --N 20000 --kind obc2
+L8 E 0.60 5 --N 20000 --kind obc2

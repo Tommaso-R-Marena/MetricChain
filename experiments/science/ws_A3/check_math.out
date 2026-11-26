@@ -61,4 +61,6 @@ C9  Markov-chain reference: mgf and Renyi bounds with the coupling-matrix consta
     and Bennett's sharp two-point bound (A17.7) on random laws
     120 random two-state chains with random r: largest ln E e^(lam(r-Er)) / (lam^2 K/(8(1-theta)^2)) = 0.0967; largest D_p/(p^2 K/(8(p-1)(1-theta)^2)) = 0.0602; largest Var/(K/(1-theta)^2) = 0.0214  (all must be <= 1)
     Bennett two-point bound: largest gap/W(b, s2) = 1.000000 (<= 1); largest W/((s2/b^2)(e^b-1-b)) = 1.000000 (<= 1)
+    middle form: largest W/ln(1 + (s2/b^2)(e^b-1-b)) = 1.000000 (<= 1); with a floor and a variance bound that are not tight: largest gap/W(b', s2') = 0.989782 (<= 1)
+    lower half (needs the exact variance and a ceiling a above the mean): largest ln(1 + s2 (e^-a - 1 + a)/a^2)/gap = 0.999975 (<= 1)
 done

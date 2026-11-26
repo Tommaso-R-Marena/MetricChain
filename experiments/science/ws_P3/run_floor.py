@@ -87,7 +87,10 @@ def main():
     dev = float(np.abs(G.bulk_energy(chk) - G.energy(chk)).max())
     assert dev < 1e-8, dev
     res["bulk_vs_own_evaluator"] = dev
-    d, nb, _ = pw.anchored_terms(G, x0, M, progress=20, energy=G.bulk_energy)
+    import hashlib
+    ah = hashlib.sha1(str((tuple(x0), [list(map(int, dd)) for dd in G.dom])).encode()).hexdigest()[:10]
+    cache_file = os.path.join(HERE, "cache", f"ball_{seq.replace(':', 'c')}_{bb}_t{tau:.2f}_{kind}_M{M}_{ah}.npz")
+    d, nb, _ = pw.anchored_terms(G, x0, M, progress=20, energy=G.bulk_energy, cache_file=cache_file)
     res.update(t_ball=time.time() - t1)
     for s in range(3, M + 1):
         vals = [np.abs(arr).max() for U, arr in d.items() if len(U) == s]
@@ -206,6 +209,10 @@ def main():
         res.update(range_bracket_lo=br2[0], range_bracket_hi=br2[1], W_min_sampled=Wmin_s, W_max_sampled=Wmax_s, eN=eN)
         # Bennett bracket with the certified (b, s2) of the model m_-: ln Z(E) = ln Z(m_-) - E r + K, 0 <= K <= W_cert;
         # the mean E r from the samples with Chebyshev's inequality and the CERTIFIED variance bound
+        rS = BETA * gap
+        res.update(r_mean=float(rS.mean()), r_var=float(rS.var(ddof=1)), r_min=float(rS.min()), r_max=float(rS.max()))
+        print(f"    sampled remainder r = beta(E - m_-) under pi_(m_-): mean {rS.mean():.4e}, variance {rS.var(ddof=1):.4e}, min {rS.min():.4e}, max {rS.max():.4e} kT "
+              f"(certified: 0 <= r <= u, E u = {b0:.4e}, E u^2 = {s20:.4e})", flush=True)
         rbar = BETA * float(gap.mean())
         tch = math.sqrt(s20 / (N * delta))
         br3 = (lnZlo - rbar - tch, lnZlo - rbar + tch + W0)
@@ -233,6 +240,8 @@ def main():
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
     if gam is not None and not tag:
         tag = "_siteres"
+    if wopt is not None and wopt != 8:
+        tag += f"_w{wopt}"
     fn = os.path.join(HERE, "out", f"floor_{seq.replace(':', 'c')}_{bb}_t{tau:.2f}_{kind}_m{m}{tag}.json")
     json.dump(res, open(fn, "w"), indent=1)
     print(f"    [{res['seconds']:.0f}s] -> {os.path.relpath(fn, HERE)}", flush=True)

@@ -24,6 +24,15 @@ Related message/request IDs: SCI-MSG-0001 §6 (announced); SCI-REV-0004 (Lemma 1
                              THY-MSG-0011 §4
 ```
 
+> **Corrected by SCI-REV-0009 §2 (checkpoint 38), after a second-round review (workstream R9).**
+> (1) In the replacement text offered for finding M1, the clause "and without a field these two
+> exponents are the uniform cube's" needs "and with one phase (a symmetric convex rate function:
+> `B = 0` and `βJ ≤ 1`, every antiferromagnet)": beyond the junction it is false by Proposition
+> 11.81(b) of the report we were reviewing — a slip of ours, found by the theory division
+> (THY-RES-0007 §1.2).  (2) In m3 the two numbers are `0.1441` and `0.0202`, not `0.1439` and
+> `0.0201`.  The text below is left as sent.
+
+
 # Review of §11.25: the mathematics is sound; the headline covers two of three exponents; one proof step is missing and supplied
 
 Full report: `docs/science/workstreams/R1_REPORT.md` (15 sections; scripts and outputs in

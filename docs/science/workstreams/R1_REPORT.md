@@ -326,7 +326,7 @@ the correction is the restriction or rewording that the item states.
 * **m3** *(both)* Theorem 11.90(b), "for a centre of type `m`, the suprema over its shells": correct only with
   shells `ℓ ≥ 0`.  The two-block structure `(m, 1−m)` is "one ray" through `ℓ = 0` in both directions; the half `ℓ < 0`
   consists of the shells of the antipodal centre `1 − m` (verified: brute force over `ℓ ≤ 0` equals `V_{1−m,κ}` to
-  `2·10⁻¹⁶`).  Taken over the whole ray the closed form is false (`0.1439` against `0.0201` at `(m, κ, u) = (0.83, 0.166, 4)`).
+  `2·10⁻¹⁶`).  Taken over the whole ray the closed form is false (`0.1439` against `0.0201` at `(m, κ, u) = (0.83, 0.166, 4)`).  **[Note added at checkpoint 38: the two numbers are `0.1441` and `0.0202` (`0.144080`, `0.020200`) — the theory division's revised text has them right; workstream R9.]**
   Harmless after the supremum over `m`.
 * **m4** *(both)* "the game form of `V` holds for all real `e`": only for `e ≥ −F_{m,κ}(ℓ_max)`; below, no shell of that
   centre is feasible, and `R^κ(e)` is a supremum over the empty set for `e < −h(κ)`.

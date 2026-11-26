@@ -15,3 +15,12 @@
  0.0055 0.0055 0.0055 0.0054 0.0051 0.0046 0.0037 0.0028 0.0019 0.001 ]; sum = 8.22273e-02 (= Gamma_5 up to rounding); floating-point allowance per site <= 4.37e-04
     Gamma_5 = 8.22273e-02 kcal/mol (self 9.749e-05, cross 8.213e-02) + floating-point allowance 1.00e-07 = 1.00000e-07 = 0.0000 kT   [69.4s]
       ball evaluations 4096/87441  17s
+      ball evaluations 86016/87441  296s
+    ball of radius 4: 87441 evaluations of g (0.00251 % of the domain) [306.0s]; sum_T max|d_T| (order 3) = 2.114e-01; sum_T max|d_T| (order 4) = 1.199e-02
+    models: ln Z(m_-) = 518.293650, ln Z(m_+) = 518.233156: deterministic certified bracket of ln Z(E), width 0.06049 nats; rho_cert = max(m_+ - m_-) = 0.30405 kcal/mol = 0.5100 kT (min 1.59e-05); min m_- = -306.5687, min m_+ = -306.5687 kcal/mol [0.9s]
+    BENNETT inputs, certified (kT units): model m_-: floor lo = 0 of r = beta(E - m_-), b_cert = E u = 6.1017e-02, s2_cert = E u^2 = 4.7767e-03, W(b, s2) = 2.3728e-03 nats | midpoint model m_0: b_cert = 2.8525e-01, s2_cert = 1.1755e-03, W = 6.4681e-04 nats (ln Z(m_0) = 518.263273) [0.1s]
+    SAMPLING: N = 50000 exact samples of pi_(m_-) (22739 distinct; mean number of sites off the anchor 3.58), E evaluated at each [280.0s]; W in [0.6005, 1], mean 0.969160, std 1.64e-02; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [518.259818, 518.264825] (width 0.00501 nats); point estimate 518.262324; Gibbs-Bogoliubov lower bound (same confidence) 518.259083; mean gap 1.8761e-02, max sampled gap 7.6190e-02 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [518.165826, 518.293642] (width 0.12782 nats); W sampled in [0.880029, 0.999991]
+    Bennett bracket (certified b, s2; mean by Chebyshev, delta = 0.05): ln Z(E) in [518.260799, 518.265936] (width 0.00514 nats = W_cert 2.37e-03 + 2 x 1.38e-03)
+    [658s] -> out/floor_V20_P2_t0.70_gbn2_m5_siteres.json
+BATCH DONE batch_D.txt

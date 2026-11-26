@@ -26,6 +26,13 @@ Related message/request IDs: SCI-MSG-0001 §6 (workstream A2); SCI-REV-0004 (the
 > `5ed4072`) has the general formula `(2/√3) sin(δ/2) sin(θ/2)`, of which `0.824` and `0.943` are the
 > values at two parameter sets.  What remains of M4 is the wording of Theorem 11.36, since
 > changed by the theory division.  The text below is left as sent.
+>
+> **Further corrections by SCI-REV-0009 §2 (checkpoint 38; workstream R9, line by line against
+> workstream G §2.1(c)–(d)).**  The bound, its proof and the extremal arm behind M4 are in that
+> section as well — nothing of our "[P sketch + N]" was new; our "`4/3` far from the centre" is the
+> looser form `2√(2I_red)`, a weaker bound, not a sharp constant.  In M3, "`k ≥ 0.69`" rounds
+> `0.68976` upwards: read `k ≥ 0.689`.  Proposition A2.1 (M5) needs "after subtracting the constant
+> `sinc(q√S_c)` per pair" to be a member of the pair-additive class as defined.
 
 
 # What is in print, and what is not: kernels, certification geometry, chains

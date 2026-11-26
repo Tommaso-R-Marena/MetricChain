@@ -76,6 +76,60 @@ theorem lemma1a_div {X Θ : Type*} {G : (X → ℝ) → Prop} {Φ : (X → ℝ) 
   rw [div_le_iff₀ hB]
   exact lemma1a O alg P hP hP1 hcorr hg₀ alt halt hO hsens hcap
 
+open Classical in
+/-- **Lemma 1 (b) (non-adaptive algorithms with an oracle), weighted form.**  An oracle
+algorithm is *non-adaptive* if for each seed `ω` and oracle answer `o` its query set `Q ω o`
+does not depend on the instance.  Let `(g j, g' j)` be pairs of members of the class, **all
+with the same oracle answer `o₀`**, with `|Φ (g' j) − Φ (g j)| > ε`.  For weights `wgt ≥ 0` such
+that every point lies in difference sets `{g' j ≠ g j}` of total weight at most `B`:
+`(1 − 2δ) · Σ_j wgt j ≤ E[#evaluations with the answer o₀] · B`.
+
+This is the theory division's `MetricChain.nonadaptive_expected_queries_ge` applied to the
+plain algorithm `alg ω o₀` and the class `{g ∈ G : O g = o₀}`. -/
+theorem lemma1b_weighted {X Θ : Type*} {G : (X → ℝ) → Prop} {Φ : (X → ℝ) → ℝ}
+    (O : (X → ℝ) → Θ) {Ω : Type*} [Fintype Ω]
+    (alg : Ω → Θ → MetricChain.QueryAlgorithm X) (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω)
+    (hP1 : ∑ ω, P ω = 1) {ε δ : ℝ}
+    (hcorr : ∀ g, G g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω => |(alg ω (O g)).output g - Φ g| ≤ ε / 2), P ω)
+    (Q : Ω → Θ → Finset X) (hna : ∀ ω o g, (alg ω o).queries g = Q ω o) (o₀ : Θ)
+    {J : Type*} [Fintype J] (g g' : J → X → ℝ) (hg : ∀ j, G (g j)) (hg' : ∀ j, G (g' j))
+    (hO : ∀ j, O (g j) = o₀) (hO' : ∀ j, O (g' j) = o₀)
+    (hsens : ∀ j, ε < |Φ (g' j) - Φ (g j)|) (wgt : J → ℝ) (hwgt : ∀ j, 0 ≤ wgt j) {B : ℝ}
+    (hcap : ∀ a, ∑ j ∈ univ.filter (fun j => g' j a ≠ g j a), wgt j ≤ B) :
+    (1 - 2 * δ) * ∑ j, wgt j ≤ (∑ ω, P ω * (Q ω o₀).card) * B := by
+  have hcorr' : ∀ f : X → ℝ, (G f ∧ O f = o₀) →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω => |(alg ω o₀).output f - Φ f| ≤ ε / 2), P ω := by
+    rintro f ⟨hf, hOf⟩
+    have h := hcorr f hf
+    rw [hOf] at h
+    exact h
+  exact MetricChain.nonadaptive_expected_queries_ge (G := fun f => G f ∧ O f = o₀) (Φ := Φ)
+    (fun ω => alg ω o₀) P hP hP1 hcorr' (fun ω => Q ω o₀) (fun ω f => hna ω o₀ f) g g'
+    (fun j => ⟨hg j, hO j⟩) (fun j => ⟨hg' j, hO' j⟩) hsens wgt hwgt hcap
+
+open Classical in
+/-- **Lemma 1 (b), counting form** (the statement of the report): if every point lies in at most
+`B` of the difference sets `D_j = {g' j ≠ g j}`, then
+`(1 − 2δ) · |J| ≤ E[#evaluations] · B`. -/
+theorem lemma1b {X Θ : Type*} {G : (X → ℝ) → Prop} {Φ : (X → ℝ) → ℝ}
+    (O : (X → ℝ) → Θ) {Ω : Type*} [Fintype Ω]
+    (alg : Ω → Θ → MetricChain.QueryAlgorithm X) (P : Ω → ℝ) (hP : ∀ ω, 0 ≤ P ω)
+    (hP1 : ∑ ω, P ω = 1) {ε δ : ℝ}
+    (hcorr : ∀ g, G g →
+      1 - δ ≤ ∑ ω ∈ univ.filter (fun ω => |(alg ω (O g)).output g - Φ g| ≤ ε / 2), P ω)
+    (Q : Ω → Θ → Finset X) (hna : ∀ ω o g, (alg ω o).queries g = Q ω o) (o₀ : Θ)
+    {J : Type*} [Fintype J] (g g' : J → X → ℝ) (hg : ∀ j, G (g j)) (hg' : ∀ j, G (g' j))
+    (hO : ∀ j, O (g j) = o₀) (hO' : ∀ j, O (g' j) = o₀)
+    (hsens : ∀ j, ε < |Φ (g' j) - Φ (g j)|) {B : ℝ}
+    (hcap : ∀ a, ((univ.filter fun j => g' j a ≠ g j a).card : ℝ) ≤ B) :
+    (1 - 2 * δ) * (Fintype.card J : ℝ) ≤ (∑ ω, P ω * (Q ω o₀).card) * B := by
+  have h := lemma1b_weighted O alg P hP hP1 hcorr Q hna o₀ g g' hg hg' hO hO' hsens
+    (fun _ => (1 : ℝ)) (fun _ => zero_le_one) (B := B) (fun a => by
+      rw [Finset.sum_const, nsmul_eq_mul, mul_one]
+      exact hcap a)
+  rwa [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one] at h
+
 end OracleLemma
 
 /-! # Part 8: the one-body oracle on the cube; the family of alternatives of Theorem A -/
@@ -141,6 +195,29 @@ theorem oracle_packing_weights {π : (ι → Bool) → ℝ} {u : ℝ}
       rw [Finset.mem_filter] at hj ⊢
       exact ⟨hj.1, fun h => hj.2 (congrArg (fun t => -Real.log t) h)⟩
     exact_mod_cast Finset.card_le_card hsub
+
+open Classical in
+/-- **The correctness hypothesis of Theorem A is satisfiable** (so the theorem is not vacuous):
+for `ε ≥ 0`, `δ ≥ 0` the algorithm that evaluates `ψ` everywhere and returns `ln A(ψ)` (the
+theory division's `fullQueryAlgorithm`, ignoring the oracle; one seed) is `(ε/2, δ)`-correct
+on every class. -/
+theorem exists_correct_oracle_algorithm (π : (ι → Bool) → ℝ) (u : ℝ) {ε δ : ℝ} (hε : 0 ≤ ε)
+    (hδ : 0 ≤ δ) :
+    ∃ (alg : Unit → (ι → ℝ) → MetricChain.QueryAlgorithm (ι → Bool)) (P : Unit → ℝ),
+      (∀ ω, 0 ≤ P ω) ∧ ∑ ω, P ω = 1 ∧
+      ∀ ψ : (ι → Bool) → ℝ, LipH u ψ → 1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+        |(alg ω (oracle1 π ψ)).output ψ - logA π ψ| ≤ ε / 2), P ω := by
+  refine ⟨fun _ _ => MetricChain.fullQueryAlgorithm (logA π), fun _ => 1,
+    fun _ => zero_le_one, by simp, fun ψ _ => ?_⟩
+  have hfil : (univ.filter fun _ω : Unit =>
+      |(MetricChain.fullQueryAlgorithm (logA π)).output ψ - logA π ψ| ≤ ε / 2) = univ := by
+    apply Finset.filter_true_of_mem
+    intro ω _
+    show |logA π ψ - logA π ψ| ≤ ε / 2
+    rw [sub_self, abs_zero]
+    linarith
+  rw [hfil, Finset.sum_const, Finset.card_univ, Fintype.card_unit, one_smul]
+  linarith
 
 /-! ### Site permutations: number of ones, masses, densities, dips -/
 
@@ -1492,7 +1569,10 @@ end ScienceL3
 #print axioms ScienceL3.lemma1a_weighted
 #print axioms ScienceL3.lemma1a
 #print axioms ScienceL3.lemma1a_div
+#print axioms ScienceL3.lemma1b_weighted
+#print axioms ScienceL3.lemma1b
 #print axioms ScienceL3.oracle_packing_weights
+#print axioms ScienceL3.exists_correct_oracle_algorithm
 #print axioms ScienceL3.massW_densW_dipW_of_wt_eq
 #print axioms ScienceL3.dipW_pos_iff
 #print axioms ScienceL3.barW_invariant

@@ -1,5 +1,6 @@
 import Mathlib
 import proofs.Frontiers.QueryLowerBound
+import proofs.Frontiers.NonAdaptive
 
 /-!
 # Theorem A of workstream F: the adaptive bound survives an exact one-body marginal oracle
@@ -9,12 +10,13 @@ Science division, workstream L3.  Source: `docs/science/workstreams/SF_REPORT.md
 
 This file imports Mathlib and, read-only, the theory division's
 `proofs/Frontiers/QueryLowerBound.lean` (for `MetricChain.QueryAlgorithm` and the packing bound
-`MetricChain.expected_queries_ge_packing`).  Parts 1–6 are repeated verbatim from
+`MetricChain.expected_queries_ge_packing`) and `proofs/Frontiers/NonAdaptive.lean` (for
+`MetricChain.nonadaptive_expected_queries_ge`, used only in Lemma 1 (b)).  Parts 1–6 are repeated verbatim from
 `Compensation.lean` (same directory; that file imports Mathlib only), because the files of this
 directory cannot import each other.  New here:
 
-* Part 7 — **Lemma 1 (a)** in the oracle-indexed model of workstream L1
-  (`lemma1a_weighted`, `lemma1a`): an oracle algorithm is a family `alg ω o` of query algorithms
+* Part 7 — **Lemma 1 (a)** and **Lemma 1 (b)** in the oracle-indexed model of workstream L1
+  (`lemma1a_weighted`, `lemma1a`, `lemma1a_div`; `lemma1b_weighted`, `lemma1b`): an oracle algorithm is a family `alg ω o` of query algorithms
   indexed by the seed `ω` and the oracle's answer `o`; on the instance `g` it runs
   `alg ω (O g)`.  Derived from `MetricChain.expected_queries_ge_packing` applied to the class
   restricted to the instances with the oracle answer of `g₀`.

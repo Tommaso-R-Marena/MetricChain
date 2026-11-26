@@ -237,3 +237,48 @@ Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and i
   2.7-3.9 (fixed-side), 3.0-6.3 (same side chain), 4.2-5.5 (two side chains).
   => term by term the bound is nearly sharp; the factor 100-1400 of the full bound is entirely the
   lost cancellation of the pair sum.
+
+## 00:42-00:47  Second coordinator message (chain model with a window) -- what I do with it
+
+* Message (received ~00:44): an ANOVA chain model mc(w) with pairs within a window w along the chain
+  has, by exact enumeration on 27 instances, a remainder with b <= 0.47 kT, sigma <= 0.017 kT for
+  Val on strand/PPII at w = 1; suggestion: take m = chain model with w = 2 for item 4, certify floor
+  and variance of r = g - m for that m, and report sampled statistics of r at the large size next to
+  enumerated ones.  (Read: `pi_inference/chain_model_real.log`, header and the Val/PPII rows.)
+* I was past that point (certified banded models with exact Z and exact sampling already run at
+  n = 20 with band 8), but two things are worth adding and are cheap in my framework:
+  (1) my band width IS the window: run the n = 20 instance with band w = 1, 2 (the pairs beyond the
+      window then go into the certified slack u, explicit and small) and report certified b, s2, W;
+  (2) sampled mean / variance / minimum of r at n = 20 next to enumerated values at n = 6..12.
+* Implemented: cache of the ball values on disk (`cache/ball_*.npz`; re-runs with another band reuse
+  the 87 441 evaluations), sample statistics of r in the JSON, `_w<band>` tag.  Batch G started 00:46.
+* Test (Val8/PPII, m = 5, site penalties, band 2; 6561 states enumerated): deterministic bracket
+  0.054 nats; certified b = 0.054 kT, s2 = 3.5e-3, W = 1.8e-3 nats (model m_-); midpoint model:
+  certified W = 4.6e-4; enumerated for the midpoint model b = 0.053, s2 = 7.6e-5, K = 3.8e-5 -- the
+  coordinator's ANOVA chain w = 2 on the same peptide: b = 0.058, sigma = 0.0071, K = 2.5e-5.
+  So the anchored banded model behaves like the ANOVA chain model, and it comes with a certificate.
+
+## 00:47-01:00  Long-chain constants; OBC2 works; report skeleton written; waiting for batches
+
+* `logs/x04_gamma_long.log` (certified Gamma_3..6, kcal/mol; wall 8-120 s per instance):
+    Val/E   n=16: 52.8  2.32  0.0609 0.00140 | n=20: 68.8 3.08 0.0828 0.00195 | n=30: 108.6 4.97 0.138 0.00334 | n=40: 148.5 6.86 0.192 0.00473
+    Val/P2  n=20: 61.9  2.82  0.0822 0.00180 | n=30: 98.1 4.58 0.137 0.00311
+    Leu/E   n=24: 401   36.3  2.07   0.109   | n=32: 554  50.8 2.96  0.158
+    Leu/P2  n=24: 243   20.3  1.15   0.055
+    Leu/H   n=24: 3468  769   140    21.6     (helix: hopeless at every order tried)
+  Linear in n (Val/E: 3.99, 0.189, 0.0055, 0.00014 per residue for m = 3..6).
+* OBC2: `GBModel(kind="obc2")` agrees with OpenMM Reference to 3e-12 (Val4/E, 12 fresh states).
+  Batch H (9 OBC2 runs) queued.  First numbers: Val6/E Gamma_3 = 4.49, Gamma_4 = 0.084 kcal/mol
+  (GBn2: 12.96, 0.432): OBC2 constants are 3-5 times smaller.
+* Partial results so far (81 runs, 79 enumerated, 2.5e6 state checks): 0 violations of the sandwich;
+  anchor = global minimiser in 79/79; truth inside all Hoeffding / sample-range / Bennett brackets.
+* Site-penalty floors, exact cost numbers Z(m_-)/Z(E) - 1 [M]:
+    m = 3 (P2's 5(d) with analysis-only constants):  Val/E n=4,6,8,10: 0.48, 16, 1.1e3, 9.6e4;
+                                                    Val/P2 n=4,6,8,10: 10.5, 1.5e4, 6.1e7, 2.8e11
+    m = 4:  Val/E 0.002, 0.008, 0.015, 0.022;  Val/P2 0.020, 0.118, 0.256, 0.416  (n = 4, 6, 8, 10)
+    m = 5:  Val8/E 2.9e-4
+  constant-bound floors: m = 3 e^{beta Gamma_3}: 1e9-1e125; m = 4 Val 0.2-13, Leu 3-4e10; m = 5 Val <= 0.05, Leu 0.1-2.5.
+* Report: sections 2.9 (Proposition 6, Bennett inputs) and 3 (skeleton with table blocks filled by
+  `mk_report.py --fill`) written.  Batches F (site penalties, final script), G (Val20 with bands 1, 2, 8
+  + enumerated analogues), A2/B2 (constant bound: Leu, Ser, Phe, Lys, LKSE), H (OBC2) are running under
+  load 13; machine shared.

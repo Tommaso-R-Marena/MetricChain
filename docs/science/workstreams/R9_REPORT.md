@@ -161,8 +161,8 @@ for van Doren et al. (A2_REPORT line 365), "searches thin" (line 481), `L_{H,p}`
 
 Read where applied: SCI-REV-0003 m1–m9 (9 of 9; m7 in the errata of `U_REPORT.md`);
 SCI-REV-0001 m1–m12 (12 of 12); SCI-REV-0002 m1–m8 (8 of 8); SCI-REV-0005 m1–m4, m6–m10 (9 of
-12; not m5, m11, m12, which went to the errata of `W_REPORT.md`).  Checked by own derivation
-or own code — 4 of 9, 7 of 12, 4 of 8 and 5 of 12:
+12; not m5, m11, m12, which went to the errata of `W_REPORT.md`); SCI-REV-0006 M6, M7 (2 of 2,
+read only).  Checked by own derivation or own code — 4 of 9, 7 of 12, 4 of 8 and 5 of 12:
 
 | finding | where | check | result |
 |---|---|---|---|
@@ -175,7 +175,7 @@ or own code — 4 of 9, 7 of 12, 4 of 8 and 5 of 12:
 | R1 m4, m5, m6 | 6955–6977, 6943–6949 | re-derived (value `−e` for `e ≤ −F(ℓ*)`; the two forms of the cube's function; where strictness holds) | correct |
 | R1 m11 (table, centre types, cusp) | 6978–6988 | `r9_minor.py` | all twelve values and eleven centre types to the printed digits; `N^κ(10⁻¹²) = N^κ(0⁺) − 5.800·10⁻⁷` |
 | R2 m1 (bookkeeping for the Lean form) | 5264–5278 | re-derived; costs `28, 42, 44` re-counted by height; `r9_semi.c`: appending three beads costs at most `(1, 6, 9; 1)` for `N ≤ 20` | correct |
-| R2 m3 (maxima of the concatenation error) | 5225–5236 | `r9_cobound.c`, all pairs with `N ≤ 13`: `(1, 6, 8, 1)`, norm 41; `r9_semi.c`: `A`-part `(1, 5, 7, 1)`, norm 37 at `N ≤ 16`, `B`-part `(0, 3, 4)` first at 14 beads | ✓; **new:** the `A`-part reaches its proved bound `(1, 6, 10; 1)`, norm 44, at 21 beads — so the error bound `(1, 9, 14; 1)`, norm `β = 60`, of Lemma 11.68 is attained (`N₁ = 21`, `N₂ = 14`) |
+| R2 m3 (maxima of the concatenation error) | 5225–5236 | `r9_cobound.c`, all pairs with `N ≤ 13`: `(1, 6, 8, 1)`, norm 41; `r9_semi.c`: `A`-part `(1, 5, 7, 1)`, norm 37 at `N ≤ 16`, `B`-part `(0, 3, 4)` first at 14 beads | ✓; **new:** the `A`-part reaches its proved bound `(1, 6, 10; 1)`, norm 44, at 21 beads — so the error bound `(1, 9, 14; 1)`, norm `β = 60`, of Lemma 11.68 is attained: a real concatenation of a 21-bead and a 14-bead bridge with exactly this error vector is in `out/extremal.txt` (`r9_extremal.py`, counted by the `O(n²)` definition) |
 | R2 m4 (the third hand inequality) | 5425–5430 | re-derived from `C(d,2) ≤ (5d − 8)/2`, `≤ 3d/2`, two end beads | `h₈ ≤ 2h₃ + 3N + 3` ✓ |
 | R2 m6, N1 (helix; interior) | 5456–5465 | `r9_long.py`: helix for `N` up to 1 001 | bridge, `h = (0, 0, N−3)`, `g = N−3`; and it is *clean* (§4) |
 | R5 m1 (ranges of the dictionary) | 7503–7512 | `E_sp(0.3a) − 0.3a = −0.00817` on the cube, `u = 1` | "`−0.008`" ✓ |
@@ -632,7 +632,7 @@ that the concatenation inherits its ends.
 **Does `β = 60` disappear?**  For `Γ` and `Γ̂` the error is zero.  For the densities
 `(h, g)/N` of arbitrary bridges the one-sided rate improves from `(β + 3R)/(N+3) = 168/(N+3)`
 to `3R/(N+3) = 108/(N+3)`: what remains is the normalisation.  `β = 60` itself is sharp as a
-bound on the concatenation error: it is attained with `N₁ = 21`, `N₂ = 14`, hence for all larger
+bound on the concatenation error: it is attained with `N₁ = 21`, `N₂ = 14` (verified by a real concatenation, `out/extremal.txt`), hence for all larger
 sizes (a head added to `x¹` or a tail added to `x²` does not change the end that matters).  Practical gain for
 the numbers of §11.22.  *Without coordinates* (`r9_inner_volume.py`): each explicit bridge
 gives a point of `𝒦` within `29.5/(N+3)` of `(h + (½, 9/2, 7))/(N+3)`, so the proved inner volume
@@ -689,7 +689,9 @@ Nothing became false in a theorem, no number changed without a stated reason (al
 removed numeric tokens of the word diff in §§11.22–11.26 were listed with
 `r9_numdiff.py` and read), and no cross-reference I followed is wrong (harness labels
 XIV.5, XX.5, XXI.5, XXI.6, XXII.5, DEAD.25, DEAD.27 exist; `lower_end_any` is in
-`SliceRefinement.lean`; the check directories exist).  What I found:
+`SliceRefinement.lean`; the check directories exist).  One pair of numbers differs from
+the ones our review printed, without a note — `0.0202`, `0.1441` at line 6965 — and theirs are
+the right ones (§1.6, R1 m3).  What I found:
 
 1. **Lines 5282–5284, false as stated (new text).**  "At the boundary the abstract
    hypotheses give no rate (for `d = 1`, where the limit is a point, a super-additive
@@ -790,14 +792,18 @@ outside the directory is written; R4's module is imported with bytecode writing 
 | `gcc … -o bin/r9_cobound r9_cobound.c`; `bin/r9_cobound 13 0 2`, `… 1 2` | all pairs of arbitrary bridges: coboundary identities | `3.5·10⁸` pairs | 2 × 6.3 min |
 | `r9_semigroup_analysis.py` | tables against R2's; set-level closure; generated lattice; counts, hulls, holes | — | 1 min |
 | `r9_long.py`, `r9_certificate.py`, `r9_head2.py` | long random bridges; the unimodular certificate; head 2 + tail 3 | — | 1 min, 20 s, 2 min |
+| `bin/r9_extremal 21 14 > out/extremal_raw.txt`; `r9_extremal.py` | one bridge with the largest `A`, one with the largest `B`; their real concatenation has the error `(1, 9, 14; 1)`, norm 60 | 21 + 14 beads | 20 s |
 | `r9_packing_volume.py`, `r9_inner_volume.py` | packings (exact), volumes, arithmetic of §11.22; improved inner volume | — | 10 s |
 | `r9_witness_ends.py 64`, `r9_witness_ends.py 128 "12/5"`; `r9_exact_packing.py` | the ten explicit bridges re-generated (authors' builder), verified, end corrections; packings and hull volume on exact vertices | 12 041 – 166 199 beads | 2 min, 1.5 min, 10 s |
-| `r9_Eprime.py` | `E′` against `E` with R4's `twins_exact.py` | 8 rows | 4 min |
-| `r9_sites.py`, `r9_sites2.py`, `r9_chi2_check.py` | site functions with duality brackets; ceiling; `χ²` step | — | 3, 9, 1 min |
+| `r9_Eprime.py` | `E′` against `E` with R4's `twins_exact.py` | 8 rows | a few minutes |
+| `r9_sites.py`, `r9_sites2.py`, `r9_chi2_check.py` | site functions with duality brackets; ceiling; `χ²` step | — | 1 min, about 10 min, 1 min |
 | `r9_minor.py`, `r9_slices.py`, `r9_m1_input.py`, `r9_lever.py` | sampled minor findings; Theorem 11.90(a) at `e < 0`; the lever-arm constants | — | 1–4 min each |
 | `r9_diffview.py LO HI`, `r9_numdiff.py LO HI` | compact word diff of the theory report between `dcdfea6` and `658b77f` | — | seconds |
 | `lean/*.lean` | scratch copies; `lake env lean <absolute path>` from the repository root | 2 files | 1–2 min |
 
+No linear programme was solved in this workstream: the optimisations are smooth convex
+problems closed by duality brackets, grid searches without a solver, or exact rational
+arithmetic; the lattice computations are integer arithmetic.
 Outputs are in `out/` (and `lean/out_*.txt`).  A false alarm of mine is recorded in
 `NOTES.md` (step 9): a tolerance below the grid resolution in `r9_chi2_check.py` reported
 93 "violations", all at points inside the window.
@@ -901,13 +907,14 @@ not about an additive statistic with a cutoff **[H]**.
 * **The reviewer's finite-`N` certificates N5** — not re-derived by them, nor by me.
 * **Exactness:** the volumes `1.5632`, `3.125`, `1.6192` are floating point (Qhull);
   the packings and the certificate determinants are exact; the lattice checks are
-  integer arithmetic.  Site functions carry duality brackets of at most `10⁻¹²`.
+  integer arithmetic.  Site functions carry duality brackets that are closed in all nine
+  printed digits.
 * **The ten explicit bridges** were re-generated with the *authors'* builder (I did not
   read `build.py`); what is mine is the verification from coordinates and the end
   corrections.  The hull volume `1.6313` uses Qhull's facet list (floating point) with
   exact arithmetic on it.
 * **Lean:** the two files were compiled from scratch copies with `lake env lean`
-  against the oleans present in the repository (built at `5ed4072`); no `lake build`.
+  against the oleans present in `.lake/build` (I did not build or rebuild anything).
   I did not compile `AxiomAudit.lean` or `SliceRefinement.lean`.
 * **`lake env lean` on `TwoRoundsExpected` uses the stored olean of `TwoRounds`**; that the
   olean matches the source is assumed (the source is byte-identical to `5ed4072`).

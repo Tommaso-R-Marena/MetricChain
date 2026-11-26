@@ -1,7 +1,7 @@
 # Workstream A3 — prior art: certifying a free energy by sampling from a model (box classes, floors, Rényi balls)
 
 Science division, independent workstream A3.  Started 2026-11-25 23:33 UTC; this version written
-2026-11-26 between 00:25 and 00:45 UTC (machine clock).
+2026-11-26 between 00:25 and 01:05 UTC (machine clock).
 Statements positioned: **T1–T4** (theory division, forthcoming theory report §11.30; read in
 `THY-RES-0007.md` §4 and in the theory `RESEARCH_LOG.md`, "Resume here (cycle 10, fourteenth
 checkpoint)", item 1 (a)–(e), export `thy_ro_658b77f`) and **O1–O2** (ours: addendum A17 of
@@ -27,7 +27,7 @@ to PubMed" and carry DOI links.
 ## How far I got
 
 **Done.**  All six statements are classified (§1, §4), each with the closest statement in print side
-by side and a sentence to write.  About 77 sources were located; 38 were read in the passages that
+by side and a sentence to write.  About 93 sources were located; 47 were read in the passages that
 matter at `[full text]` level (§4.10), among them the three that decide the verdicts: Hoeffding's
 1963 paper (scanned pages), the differential-privacy papers that contain T1's constant and the
 sharpening of O2, and a February 2026 preprint (Block–Shetty) that contains O1 in unhinted form.
@@ -35,7 +35,11 @@ Three statements of my own came out of the comparison and were checked numerical
 a sharpening of A17.6 by the factor `p/(p−1)`; the fact that at the centre of a constant box the
 hint is worth nothing; and that T1's bound is weaker than the inequality in Hoeffding's own proof
 whenever the mean is known.  **No error was found in T1–T4 or O1–O2**; three of their sentences
-say more than the literature allows (§4.8).
+say more than the literature allows (§4.8).  Two additions of the coordinator were taken up while
+the work was running: the three leads on variational inference and flows (§4.5(f),(g), §4.7), and the
+positioning of A17.7 and of the non-product extension of A17.6 (§4.11): the attributions "Bennett 1962 /
+Hoeffding 1963" and "Efron–Stein" are confirmed against sources read in full, and a certified second-order
+bound in free-energy perturbation was not found (one candidate paper, Decoster 2004, could not be opened).
 
 **Not done.**  The original of Dagum–Karp–Luby–Ross could not be opened (eight routes tried); it is
 positioned through three papers that restate its theorems.  Zwanzig (1954), Specht (1960),
@@ -87,6 +91,8 @@ improved from `p²K/(8(p−1))` to `(p−1)K/8 + Σ_i L(c_i) ≤ pK/8` (so `D_2 
 | T4 | lower bound = a mean, `w² ln(1/δ)/(2ε²)`; upper bound `e^{ρ₋}`; "the floor is the one assumption sampling cannot replace"; unhinted bracket | **(2)**; the unhinted bracket **(1)**; the slogan **(3)** and too strong | Liu–Fisher–Ihler 2015, Cor. 3.2 `[full text]`; Grosse–Ghahramani–Adams, arXiv:1511.02543, §4 `[full text]`; Bahadur–Savage 1956 via Wang–Ramdas `[full text of the secondary source]` | a query-complexity statement of the asymmetry for free energies |
 | O1 | Rényi balls: hinted cost `Θ(e^{κ}/ε^{p/(p−1)})`; without a hint `ε^{−max(2, p/(p−1))}`; KL: `exp(Θ(κ/ε))`; moments of `r` useless | A17.3, A17.4: **(1) in print** (unhinted, sampling model); A17.2 (hinted): **(2) direct corollary**; A17.5(ii): **(3)** | Block–Shetty, arXiv:2602.23535, Thms 5, 6, 8, Props 1–2 `[full text]`; Kunsch–Novak–Rudolf, arXiv:1805.08637, Thms 3.9, 3.10, Cor. 3.14 `[full text]` | reading the one-sided cost as a *verification* cost; finite spaces with atoms; explicit constants |
 | O2 | product reference: `D_p ≤ p²K/(8(p−1))`, `D_2 ≤ K/2` | **(2) direct corollary**, and improvable to `pK/8` | Cesar–Rogers, arXiv:2004.07223, Lemma 3.2 `[full text]`; Bun–Steinke, arXiv:1605.02065, Lemma 2.2 `[full text]` | the application to remainders of a force field |
+| A17.7 | Bennett bracket: floor `b` below the mean and variance `σ²` ⇒ Jensen gap `≤ ln[(b²e^{−σ²/b} + σ²e^b)/(b²+σ²)] ≤ (σ²/b²)(e^b − 1 − b)`; `Var ≤ ¼Σc_i²` | the inequality, its extremal law and both attributions: **(1) in print as stated**; its use as a certified second-order bound in free-energy perturbation: **(4) not found** | Hoeffding 1963, Thm 3, (2.8)–(2.10) `[full text, scanned]`; Fan–Grama–Liu, arXiv:1109.4359, eq. (3), Lemma 3.1 `[full text]`; van Handel's lecture notes, Thm 2.3, Cor. 2.4 `[full text]` | a rigorous second-order bound from the reference ensemble alone, in the sources retrieved (Delle Site–Hartmann 2024 `[full text]`: the second-order truncation is no bound); Decoster 2004, which claims rigorous higher-order bounds, was not accessible |
+| A17.6, non-product reference | (asked for: one citable statement with its constant) | **(2)**: `D_p ≤ p²‖D‖²K/(8(p−1))` follows from a theorem in print | Chazottes–Collet–Külske–Redig, arXiv:math/0503483, Thm 1 with (9)–(10) `[full text]`; Kontorovich–Ramanan (Ann. Probab. 2008), Thm 1.2 `[full text]` | the sharp constant `p/8` (needs the conditional free energy of the remainder) |
 
 Additional items of A17: the direction of the divergence ("every row is `D(π_g‖π)`") is **(1) in
 print** — Jarzynski 2006, eq. (45), as an estimate; Chatterjee–Diaconis 2018, Theorem 1.1, as a
@@ -234,7 +240,7 @@ carrying target mass `≈ ε`) costs `1/q` to *detect* and `ε/q` to *select wit
 
 ## 3. Numerics
 
-One script, `experiments/science/ws_A3/check_math.py` (numpy + mpmath; about 20 s; run
+One script, `experiments/science/ws_A3/check_math.py` (numpy + mpmath; under a minute; run
 `python3 -W error check_math.py > check_math.out`).  It checks only the identities and inequalities of §2;
 it is not evidence about the literature.
 
@@ -249,6 +255,7 @@ it is not evidence about the literature.
 | C6 | T3's count is `ε` × the largest variance term of a `[0,1]` variable with the same mean | 4 parameter pairs | exact |
 | C7 | A3.3(a): exact worst-case failure probability of the no-hint rule over two- and three-level alternatives; the theory division's example | 3 parameter triples; `2001 × 41` alternatives each | failure probabilities 0.048, 0.029, 0.006 (`≤ δ`); **545** evaluations without a hint against **1088** quoted for the hinted spot check |
 | C8 | Hoeffding's mean-dependent bound | 19 467 random laws (533 nearly degenerate ones skipped) | never violated; median 0.77 of `L(w)` |
+| C9 | §4.11: for a two-state Markov-chain reference with contraction `θ`: `ln E e^{λ(r−Er)} ≤ λ²K/(8(1−θ)²)`, `D_p ≤ p²K/(8(p−1)(1−θ)²)`, `Var ≤ K/(1−θ)²`; and Bennett's sharp two-point bound `W(b, σ²)` of A17.7 | 120 random chains (`n = 5, 7, 9`) with random `r`, exact enumeration; 20 000 random laws | never violated (largest ratios 0.10, 0.06, 0.02 — loose for random `r`); Bennett: largest gap/`W` = 1.000000, attained; `W ≤ ln(1 + (σ²/b²)(e^b − 1 − b)) ≤ (σ²/b²)(e^b − 1 − b)` always; with a floor and a variance bound that are not tight, gap/`W` ≤ 0.990; the lower half of §4.11(c′): largest ratio 0.99998 |
 
 *Two lessons recorded.*  The first version of the hill-climb in C5 "found" ratios up to 1.16 and the
 first version of C8 a ratio 1.001: both were rounding noise at scales where `D_p` (a difference of
@@ -798,7 +805,7 @@ source for the slogan is Minka (2005).
 
 ### 4.9 Search log
 
-All searches on 2026-11-25 (from 23:33 UTC) and 2026-11-26 (to 00:25 UTC); the step-by-step record with
+All searches on 2026-11-25 (from 23:33 UTC) and 2026-11-26 (to 01:00 UTC); the step-by-step record with
 outcomes is `experiments/science/ws_A3/NOTES.md`.  No query contained anything identifying the project.
 
 **`WebSearch`** (S = standard, X = extended), in order:
@@ -817,8 +824,17 @@ outcomes is `experiments/science/ws_A3/NOTES.md`.  No query contained anything i
 | W10 | X | `free energy perturbation exponential averaging rigorous finite-sample confidence interval "lower bound" on energy difference bounded perturbation concentration inequality certified error bar Zwanzig estimator non-asymptotic guarantee` | **no** certified error bar for exponential averaging; Kofke's manuscript (downloaded) |
 | W11 | X | `"Rényi divergence" bounded class of targets importance sampling normalizing constant minimax sample complexity lower bound "exp(D_" OR "e^{D_" relative accuracy ε^{-p/(p-1)} OR "ε^{-α/(α-1)}" heavy-tailed importance weights` | **arXiv:2602.23535** (Block–Shetty), Block–Polyanskiy's own page |
 | W12 | X | `query complexity of verifying a claimed partition function or sum of positive weights given a pointwise upper bound on each weight: sampling proportional to the slack …, Θ((U/Z − 1)/ε) evaluations, lower bound by disjoint sets; "sum estimation" "proportional sampling" verification with advice` | **nothing** matching T3; arXiv:2602.23535 and arXiv:2404.02414 again |
+| W13 | X | `rigorous upper bound on the remainder of the second-order cumulant expansion of the Zwanzig free energy perturbation formula in terms of the variance of the energy difference and a one-sided bound; "Bennett's inequality" OR "Bernstein inequality" free energy difference exponential average bound variance` | **nothing** of the kind; arXiv:2009.14321 (Greeff) and arXiv:2602.18482 as side hits (the first read at abstract level) |
+| W14 | X | `rigorous second-order bound on free energy difference beyond Gibbs-Bogoliubov inequality: upper bound on the remainder using variance of the perturbation energy and a bound on the perturbation, classical statistical mechanics perturbation theory "upper and lower bounds" free energy "second order"` | **no** such bound; Delle Site–Hartmann (Molecular Physics 2024; read afterwards from arXiv:2403.10918), a review (arXiv:1507.00563) that points to Decoster 2004, arXiv:2608.07246 (not opened) |
+| W15 | S | `"Sharpening Jensen's inequality" Liao Berg Jensen gap bounded by variance arXiv` | arXiv:1707.08644 (downloaded and read); arXiv:2502.03988, 2212.11429 as side hits (not opened) |
 
-**arXiv API** (`arxiv_q.py` / `arxiv_batch.py`; title or author queries, 61 in all).  Identifiers obtained and
+**arXiv API** (`arxiv_q.py` / `arxiv_batch.py`; title, author or abstract queries, 76 in all; fifteen of them for
+the second addition.  Six gave math/0609835, math/0503483, 0902.4058, 1109.4359 and Marton's math/0410168 (not
+opened).  Nine more gave 1707.08644, 2403.10918, the three "two-sided Bogoliubov inequality" preprints
+2111.10282, 2501.04564, 2608.07246 (not opened) and 2610.33786 (not opened); `ti:"thermodynamical
+perturbations"` → 29 hits without Decoster's paper among those shown; and **no hit** for `abs:"free energy
+perturbation" AND abs:"Bennett inequality"`, `abs:"cumulant expansion" AND abs:"free energy" AND abs:"rigorous
+bound"`, `au:Decoster AND ti:"variational"`, `au:Decoster AND abs:"Bogoliubov"`).  Identifiers obtained and
 verified by the returned titles: cond-mat/0603185, 1601.02637, 1511.01437, 1511.06196, 1209.1727, 1509.05845,
 2302.04658, 1605.02065, 1909.13830, 2004.07223, 1611.00328, 1602.02311, 2208.01893, 1511.02543, 1805.08637,
 0904.0625, 0910.2858, physics/0208015, physics/0201046, 1505.06217, 1508.00335, 1805.05135, 1004.0581,
@@ -842,28 +858,41 @@ scoring search algorithm partition functions molecular ensembles` → 1; `Lilien
 AND ensemble-based scoring` → 2; `Ojewole AA[Author] AND Donald BR[Author] AND K*` → 2; `BBK* branch and bound over
 K* sparse residue interaction graphs` → 0; `Lu N[Author] AND Kofke DA[Author] AND accuracy free-energy
 perturbation` → 1 (not the 2001 papers, which PubMed does not list).  Full text obtained for PMC3263346
-only; PMC returned no text for PMC240657 and PMC7185359.
+only; PMC returned no text for PMC240657 and PMC7185359.  For the second addition: `free energy perturbation
+cumulant expansion second-order (bound OR rigorous OR inequality)` → 0; `rigorous upper lower bounds free energy
+difference molecular simulation variance fluctuation inequality` → 0; `free energy perturbation cumulant
+expansion` → 9 (two kept); `"free energy" bounds "second order" Gibbs-Bogoliubov` → 0.
 
-**Crossref API** (records, to avoid bibliographic details from memory): seven DOI look-ups and eight
-bibliographic queries (listed in `NOTES.md`, step 10).  One DOI I had guessed turned out to belong to
+**Consensus** (tool `search`; one query, no filters; the plan returns three records): `rigorous upper and
+lower bounds on free energy differences in free energy perturbation using the variance of the energy
+difference, beyond the Gibbs-Bogoliubov inequality` →
+[1] [FEAT: Free energy Estimators with Adaptive Transport *](https://consensus.app/papers/details/w:a87d6152-f99e-4a72-8356-d820b463e335/?utm_source=claude_code) (Jiajun He et al., 2026, Journal of Statistical Mechanics Theory and Experiment, 23 citations);
+[2] [Computationally feasible bounds for the free energy of nonequilibrium steady states, applied to simple models of heat conduction](https://consensus.app/papers/details/w:0c4edba8-3925-443a-b80f-81b992b82a74/?utm_source=claude_code) (Luigi Delle Site et al., 2024, Molecular Physics, 6 citations);
+[3] [Thermodynamic potentials from a probabilistic view on the system-environment interaction energy](https://consensus.app/papers/details/w:41f5dc3d-674a-4905-8ffa-598313a4f74c/?utm_source=claude_code) (Mohammad Rahbar et al., 2025, arXiv, 3 citations).
+Used in §4.11 as "Consensus [1]–[3]"; [2] had been found by W14 and was read in full from arXiv.
+
+**Crossref API** (records, to avoid bibliographic details from memory): seven DOI look-ups and eleven
+bibliographic queries (listed in `NOTES.md`, steps 10 and 15).  One DOI I had guessed turned out to belong to
 another paper and was discarded.
 
 **`WebFetch`**: SIAM (403), academia.edu (403), Project Euclid (empty page), PMC page of Gore et al.
 (automatic reading; formulas are images), the AIP abstract page of Lu–Kofke II through its DOI
-(automatic reading; the tool would not reproduce the abstract verbatim).
+(automatic reading; the tool would not reproduce the abstract verbatim); the IOP page of Decoster's paper
+(automatic reading of the abstract, summarised by the tool; the PDF address returned an error page).
 
-**Direct downloads** (`getpdf.sh`): 67 targets, 54 PDFs (52 distinct papers).  Refused or failed: SIAM (challenge page),
+**Direct downloads** (`getpdf.sh`): 79 targets, 65 PDFs (63 distinct papers).  Refused or failed: SIAM (challenge page),
+IOP (challenge page; Unpaywall lists that PDF as the open copy of Decoster's paper),
 CiteSeerX (redirect to archive.org, connection reset), ResearchGate, the former ICSI address of the
 report version of Dagum–Karp–Luby–Ross (404/403), Project Euclid (bot wall), Europe PMC, PMC and PNAS PDFs
 of Gore et al. (challenge pages), one Kyoto repository address (HTML).
 
 ### 4.10 Sources and what was read
 
-**Read at `[full text]` level in the passages named (38).**
+**Read at `[full text]` level in the passages named (47; the last nine for the second addition).**
 
 | source | identifier | passages read | used for |
 |---|---|---|---|
-| Hoeffding, American Statistical Association Journal, March 1963 (JASA 58(301), 13–30 per Crossref) | scanned PDF on a university course page | pp. 13–14, 20–22 (page images) | T1 |
+| Hoeffding, American Statistical Association Journal, March 1963 (JASA 58(301), 13–30 per Crossref) | scanned PDF on a university course page (pp. 13–22 only) | pp. 13–14, 16–17, 20–22 (page images) | T1, A17.7 |
 | Fujii, Lee, Seo, RIMS Kôkyûroku 1259 (2002) 1–10 | Kyoto University RIMS PDF | pp. 1–2 | T1 (Specht) |
 | Furuichi | arXiv:1004.0581v3 | p. 1, Lemma 2.1, references | T1 |
 | Dong, Durfee, Rogers | arXiv:1909.13830v2 | abstract, Def. 2.2, Cor. 2.1, Thm 1, Def. 2.4, §3.4, Lemma 4.1–4.2, appendix passage | T1, O2 |
@@ -901,6 +930,15 @@ of Gore et al. (challenge pages), one Kyoto repository address (HTML).
 | Wang, Ramdas | arXiv:2202.01250v6 | §10.1 | T4 |
 | Metelli, Papini, Faccio, Restelli | arXiv:1809.06098v2 | §§3–4 passages, Thm 4.1 | T4, O1 |
 | Georgiev, Lilien, Donald, J Comput Chem 29(10):1527–42 (2008) — according to PubMed | [doi:10.1002/jcc.20909](https://doi.org/10.1002/jcc.20909), PMC3263346 | §4, Proposition 3 | T2 |
+| Fan, Grama, Liu (Stochastic Process. Appl. 122 (2012) 3545–3559 per the arXiv record) | arXiv:1109.4359v5 | §1, Lemma 3.1, references | A17.7 |
+| Pinelis (Ann. Inst. H. Poincaré Probab. Stat. 50(1):15–27 (2014) per the arXiv record) | arXiv:0902.4058v1 | §1, first page | A17.7 |
+| van Handel, "Probability in High Dimension", APC 550 lecture notes (21 Dec 2016) | Princeton web page | §2.1 (Thm 2.3, Cor. 2.4), notes to chapter 2 | A17.7, A17.6 |
+| Raginsky, Sason | arXiv:1212.4663v8 | §2.2.3 (Thm 2.2.2 with proof), Thm 3.3.7 | A17.6, A17.7 |
+| Kontorovich, Ramanan, Ann. Probab. 36(6) (2008) 2126–2158 (as printed on the arXiv version) | arXiv:math/0609835v2 | abstract, §1 (Thms 1.1, 1.2), Thm 2.1, Remark 2.1 | A17.6 non-product |
+| Chazottes, Collet, Külske, Redig | arXiv:math/0503483v2 | abstract, introduction, §2.1–2.3 (Thms 1–2, proof of Thm 1), §3.1 | A17.6 non-product |
+| Liao, Berg (The American Statistician 73(3), 278–281 per Crossref) | arXiv:1707.08644v2 | pp. 1–6 (Thm 1, Lemma 1, Example 1) | A17.7 |
+| Delle Site, Hartmann (Molecular Physics 123(7–8), 2024 per Crossref) | arXiv:2403.10918v1 | abstract, Thm 3.1 and the start of its proof, §3.3 | A17.7 (use in free-energy perturbation) |
+| Kuzemsky | arXiv:1507.00563v1 | abstract; one passage on pp. 29–30; reference [39] | A17.7 (pointer to Decoster) |
 
 **`[abstract]` (the paper's own abstract; for PubMed items "according to PubMed"):** Lu–Adhikari–Kofke
 ([doi:10.1103/PhysRevE.68.026122](https://doi.org/10.1103/PhysRevE.68.026122)); Wu–Kofke
@@ -915,15 +953,224 @@ Lu–Kofke–Woolf ([doi:10.1002/jcc.10369](https://doi.org/10.1002/jcc.10369));
 ([doi:10.1371/journal.pcbi.1007447](https://doi.org/10.1371/journal.pcbi.1007447)); Hahn–Then (arXiv:0904.0625v3,
 0910.2858v2); Sanz-Alonso (arXiv:1608.08814v1); Atar–Chowdhary–Dupuis (arXiv:1310.6391v1, with the formula
 of Thm 2.1).
-**`[fetch-tool]`:** Lu & Kofke II (doi:10.1063/1.1405449).
+**`[fetch-tool]`:** Lu & Kofke II (doi:10.1063/1.1405449); Decoster (doi:10.1088/0305-4470/37/39/001), abstract.
 **Downloaded, not read (titles checked only):** Kearns–Saul (arXiv:1301.7392), Bentkus (arXiv:math/0410159),
 Mironov (arXiv:1702.07476), Lugosi–Mendelson (arXiv:1906.04280), Sason–Verdú (arXiv:1508.00335; headings
 of the bounded-relative-information theorems only), Yunger Halpern et al. (arXiv:1505.06217), Zuckerman–
 Woolf (arXiv:physics/0208015), Waudby-Smith–Ramdas (arXiv:2010.09686), Naesseth–Lindsten–Blei
-(arXiv:2003.10374), Birrell et al. (arXiv:1911.09580), Huber (arXiv:2210.12861; first page).
+(arXiv:2003.10374), Birrell et al. (arXiv:1911.09580), Huber (arXiv:2210.12861; first page), Hoffmann et al.
+(arXiv:2602.18482; a side hit of W13, not relevant).
 **`[record]` only:** see "What I could not access".
 **`[abstract]`, added last:** Goldwasser–Rothblum–Shafer–Yehudayoff, ECCC Report No. 58 (2020); Gur et al.,
-arXiv:2404.08158v1 (with the statement of Thm 1.4).
+arXiv:2404.08158v1 (with the statement of Thm 1.4).  For the second addition: Greeff, arXiv:2009.14321; according to
+PubMed, Wang–Mei–Ryde ([doi:10.1039/d4sc00140k](https://doi.org/10.1039/d4sc00140k)) and Mathis et al.
+([doi:10.1088/1361-648X/aec29c](https://doi.org/10.1088/1361-648X/aec29c)); through Consensus, He et al. and Rahbar et al.
+(Consensus [1], [3] of §4.9).  **`[record]`, second addition:** Reible–Hartmann–Delle Site (arXiv:2111.10282; Lett.
+Math. Phys. 112, 97 (2022) per the arXiv listing), Marton (arXiv:math/0410168), Hu–Wang (arXiv:2610.33786).
+
+### 4.11 Second addition from the coordinator: A17.7 (the Bennett bracket) and reference measures that are not products
+
+*(Written after the rest of the report; A17 parts (6) and (7) were read in the tree.  Part (6) —
+measured divergences — raises no prior-art question and is not discussed.)*
+
+**A17.7 — statement.**  With `r ≥ E r − b` (a one-sided floor `b` below the mean) and `Var r ≤ σ²` under the
+model, the Jensen gap `K = ln E e^{−(r − E r)}` satisfies
+`K ≤ W(b, σ²) := ln[(b²e^{−σ²/b} + σ²e^{b})/(b² + σ²)] ≤ (σ²/b²)(e^{b} − 1 − b)`, with equality in the first inequality for
+the two-point law that has a state at the floor with probability `σ²/(b² + σ²)`.
+
+*In print.*
+
+(a) **Hoeffding 1963, Theorem 3** `[full text: p. 16–17 and p. 20, scanned]`: "Theorem 3.  If `X_1, …, X_n` are
+independent, `EX_i = 0`, `X_i ≤ b` (i = 1, …, n), then for `0 < t < b`,
+`Pr{X̄ ≥ t} ≤ {(1 + bt/σ²)^{−(1+bt/σ²)σ²/(b²+σ²)}(1 − t/b)^{−(1−t/b)b²/(b²+σ²)}}^n` (2.8) `≤ e^{−(nt/b)[(1+σ²/bt)ln(1+bt/σ²) − 1]}` (2.9).
+Here the summands are assumed to be bounded only from above. … Inequality (2.8) is the best that can be
+obtained from (1.7) under the present assumptions.  It is the minimum with respect to h of the right-hand
+side of (1.7) when the `X_i` have the distribution `Pr{X_i = −σ²/b} = b²/(b² + σ²)`, `Pr{X_i = b} = σ²/(b² + σ²)` (2.10). …
+The bound (2.9) is due to Bennett ([2], inequality (8b)).  (Bennett's notation is different from mine.  His
+first proof assumes `|X_i| ≤ b` (= his M), a second proof (pp. 42–3) uses only `X_i ≤ b`.)"  And p. 20: "the bound
+in (2.8) is an increasing function of σ²".  **So the two-point extremal law is stated by Hoeffding, (2.10),
+and the weaker exponential form is attributed by him to Bennett.**  The moment-generating-function
+inequality itself is in the proof of Theorem 3, on pages my copy does not contain (it ends at p. 22).
+(b) **The inequality at the level of the moment generating function, with the extremal law.**  Fan, Grama,
+Liu, "Hoeffding's inequality for supermartingales", arXiv:1109.4359v5 (Stochastic Process. Appl. 122 (2012)
+3545–3559 per the arXiv record) `[full text: §1, Lemma 3.1]`: "Bennett [2] and Hoeffding [18] used a more
+precise estimation `φ_i(λ) ≤ (1/(1 + σ_i²)) exp{−λσ_i²} + (σ_i²/(1 + σ_i²)) exp{λ}`, `λ ≥ 0`, (3) for any `ξ_i` satisfying
+`ξ_i ≤ 1`.  Bennett's estimation (3) is sharp with the equality attained when `P(ξ_i = 1) = σ_i²/(1 + σ_i²)` and
+`P(ξ_i = −σ_i²) = 1/(1 + σ_i²)`"; "Lemma 3.1.  If ξ is a random variable such that `ξ ≤ 1`, `Eξ ≤ 0` and `Eξ² = σ²`,
+then, for any `λ ≥ 0`, `E(e^{λξ}) ≤ (1/(1 + σ²)) exp{−λσ²} + (σ²/(1 + σ²)) exp{λ}`", "which, in the special case of
+centered random variables, has been proved by Bennett [2]" — [2] being "Bennett, G., 1962.  Probability
+inequalities for the sum of independent random variables, J. Amer. Statist. Assoc. 57, No. 297, 33–45."
+With `ξ = −(r − E r)/b`, variance `σ²/b²` and `λ = b` this is `e^{K} ≤ (b²e^{−σ²/b} + σ²e^{b})/(b² + σ²)`: **A17.7, as stated,
+with its extremal law.**  (The lemma is stated with `Eξ² = σ²`; "`≤ σ²`" follows because the right-hand side
+increases with `σ²` — one line: its derivative in `s = σ²` has the sign of `e^{hb + hs/b} − (1 + hb + hs/b) ≥ 0`.)
+(c) **The weaker form.**  Pinelis, "On the Bennett–Hoeffding inequality", arXiv:0902.4058v1 (Ann. Inst. H.
+Poincaré Probab. Stat. 50(1):15–27 (2014) per the arXiv record) `[full text: §1, first page]`: "The
+Bennett-Hoeffding inequality … is based on an upper bound on the exponential moments of S:
+`E e^{λS} ≤ BH_exp(λ) := exp{((e^{λy} − 1 − λy)/y²)σ²}` for all `λ > 0`" (1.3) — at `λ = 1`, `y = b` this is
+`K ≤ (σ²/b²)(e^{b} − 1 − b)`.  He adds that "exact bounds refining the Bennett-Hoeffding ones were obtained by
+Pinelis and Utev" using third moments — a sharper known result if a third-moment bound were ever
+available; not needed here.
+(c′) **The same bound in the language of the Jensen gap.**  Liao & Berg, "Sharpening Jensen's inequality",
+arXiv:1707.08644v2 (The American Statistician 73(3), 278–281, doi:10.1080/00031305.2017.1419145 per Crossref)
+`[full text: pp. 1–6]`: "Theorem 1.  Let X be a one-dimensional random variable with mean µ, and P(X ∈ (a, b)) = 1
+… Let ϕ(x) is a twice differentiable function on (a, b), and define function
+`h(x; ν) := (ϕ(x) − ϕ(ν))/(x − ν)² − ϕ′(ν)/(x − ν)`.  Then
+`inf_{x∈(a,b)}{h(x; µ)} var(X) ≤ E[ϕ(X)] − ϕ(E[X]) ≤ sup_{x∈(a,b)}{h(x; µ)} var(X)`" (2); "Lemma 1.  If ϕ′(x) is convex, then
+h(x; µ) is monotonically increasing in x"; and "Example 1 (Moment Generating Function)".  With `ϕ = exp` and
+`X = −r ≤ −E r + b` the supremum sits at the upper end and (2) reads `e^{K} − 1 ≤ (σ²/b²)(e^{b} − 1 − b)`: a form between
+A17.7's two,
+
+    W(b, σ²)  ≤  ln(1 + (σ²/b²)(e^{b} − 1 − b))  ≤  (σ²/b²)(e^{b} − 1 − b)        [checked: C9, and at 50 digits on a grid]
+
+The paper mentions neither Bennett nor Hoeffding.  Its lower half sharpens the *cheap* side by the same
+token [P from K; checked, C9]: if `r ≤ E r + a` everywhere, then `K ≥ ln(1 + Var_π(r)(e^{−a} − 1 + a)/a²)` — a
+second-order improvement of the Gibbs–Bogoliubov bound, which needs a ceiling on the remainder and the
+variance itself (not a bound on it).
+(d) Bennett's own paper was not opened.
+
+*The variance input, "`Var r ≤ ¼Σc_i²` (Efron–Stein)".*  van Handel, "Probability in High Dimension" (APC 550
+lecture notes, Princeton, version of 21 December 2016) `[full text: §2.1]`: "Theorem 2.3 (Tensorization of
+variance).  We have `Var[f(X_1, …, X_n)] ≤ E[Σ_i Var_i f(X_1, …, X_n)]` whenever `X_1, …, X_n` are independent";
+"Corollary 2.4 (Bounded difference inequalities).  We have `Var[f(X_1, …, X_n)] ≤ ¼E[Σ_i (D_i f(X_1, …, X_n))²]`", `D_i f`
+being the supremum minus the infimum over the `i`-th coordinate; and in the notes to the chapter: "The
+tensorization property of the variance is classical.  It is sometimes called the Efron-Stein inequality
+after [58], where it was used to investigate Tukey's jackknife estimator."  Raginsky & Sason,
+arXiv:1212.4663v8 `[full text: Thm 3.3.7, Thm 2.2.2 with proof]`: "Theorem 3.3.7 (Efron–Stein–Steele
+inequality) … `var[f(X^n)] ≤ Σ_i E[var(f(X^n) | X̄^i)]`"; and, for A17.6's other attribution, McDiarmid's inequality
+with the step "`E[e^{tξ_k} | F_{k−1}] ≤ exp(t²d_k²/8)`" (2.2.32).  **Both attributions are correct** — the constant
+`¼` is the tensorization inequality followed by "a variable with range `c_i` has variance at most `c_i²/4`".
+Efron & Stein ("The jackknife estimate of variance", Ann. Statist. 9(3), 586–596 (1981), as cited by van
+Handel) was not opened.
+
+*Is "free-energy perturbation with a certified second-order bound" in the molecular-simulation
+literature?*  **Not found.**  First round (§4.9: web query W13 and four PubMed queries): what came back
+treats the truncation of the cumulant expansion empirically: Greeff, "Free energy perturbation theory at low
+temperature", arXiv:2009.14321 `[abstract]`: the cumulant series of Zwanzig, convergence judged by "the ratio
+of the third order to the second order term in the expansion is found to be ∼0.1, indicating good
+convergence"; according to PubMed, Wang, Mei, Ryde, Chem Sci 15(23):8786–8799 (2024),
+[doi:10.1039/d4sc00140k](https://doi.org/10.1039/d4sc00140k) `[abstract]`: "for Gaussian distributions … free energies
+can be accurately approximated using a second-order cumulant expansion … distributions that are skewed
+towards more negative values than a Gaussian present greater challenges in achieving convergence, making
+standard criteria unreliable.  We propose a practical approach to assess the convergence"; and Mathis, Li,
+Greeff, Blaschke, Rehn, J Phys Condens Matter (2026),
+[doi:10.1088/1361-648X/aec29c](https://doi.org/10.1088/1361-648X/aec29c) `[abstract]`: free-energy perturbation theory
+"does not improve systematically with perturbative order".  The second of these names, as the hard case,
+exactly the extremal law of A17.7 (weight on rare, strongly negative energy differences).  No paper
+retrieved bounds the remainder rigorously from a variance bound and a one-sided bound.
+
+A second round (web query W14, one Consensus query, nine more arXiv-API queries; §4.9) gave three things.
+(i) Delle Site & Hartmann, "Computationally feasible bounds for the free energy of nonequilibrium steady
+states, applied to simple models of heat conduction", arXiv:2403.10918v1 (Molecular Physics 123(7–8), 2024,
+doi:10.1080/00268976.2024.2391484 per Crossref) `[full text: abstract, Thm 3.1, §3.3]`.  The rigorous bracket there is
+of first order at both ends — "Theorem 3.1 (Two-sided Bogoliubov inequality) … `E_{µne}[G] ≤ −β⁻¹ log E_{µe}[e^{−βG}] ≤ E_{µe}[G]`"
+(24) — and its lower end is an average under the *other* ensemble.  Of the second order they write:
+"`−β⁻¹ log E_{µe}[e^{−βG}] = E_{µe}[G] − (β/2)Var_{µe}(G) + O(β²)` (32).  Since the free energy is in general neither convex
+nor concave as a function of β, we cannot expect the mean-variance approximation to provide an upper or
+lower bound.  Yet, in practice, and this is empirically demonstrated below, the mean-variance approximation
+turns out to be a fairly accurate approximation that resides between the upper and lower bounds."  This is
+what A17.7 can be set against: a two-sided bracket exists when *both* ensembles are sampled (in A17's
+notation `−E_π r ≤ ln Z(g) − ln Z(ĝ) ≤ −E_{π_g} r`, the upper end being an average under the target, with gap
+`D_KL(π_g‖π)` by their eq. (26)); the second-order term computed from the reference alone is used as an
+approximation and explicitly not as a bound.
+(ii) Kuzemsky's review of the Bogoliubov variational principle, arXiv:1507.00563v1 `[full text: one passage,
+pp. 29–30, and reference [39]]`: "A. Decoster [39] established a sequence of inequalities which generalize the
+the Gibbs-Bogoliubov inequality in classical statistical mechanics and the Peierls and Bogoliubov
+inequalities in quantum mechanics; they can be presented as rearrangements of perturbation expansions,
+which provide exact bounds which are used in variational calculations."  The paper is Decoster, "Variational
+principles and thermodynamical perturbations", J. Phys. A: Math. Gen. 37(39), 9051–9070 (2004),
+doi:10.1088/0305-4470/37/39/001 (record per Crossref); its abstract `[fetch-tool]` says the same and adds an
+illustration on an anharmonic oscillator.  **I could not open it** (publisher's challenge page; the fetch
+tool got an error page).  It is the one source I met that claims rigorous bounds beyond first order in
+thermodynamic perturbation theory.  From the two descriptions these are *variational* bounds, that is,
+improvements of the Gibbs–Bogoliubov side — a guess from the abstract, not a reading — and not a bound on
+the opposite side from a floor and a variance; it has to be read before the use made in A17.7 is called
+new.
+(iii) Consensus (one query; three records, `[abstract]` as returned by the tool; list in §4.9): He et al.,
+"FEAT: Free energy Estimators with Adaptive Transport" (2026) — "variational upper and lower bounds on free
+energy differences" next to estimators built on the escorted Jarzynski equality and the Crooks theorem
+(Consensus [1]); Delle Site & Hartmann again (Consensus [2]); Rahbar et al., "Thermodynamic potentials from a
+probabilistic view on the system-environment interaction energy" (2025) — "a general equality … from which
+an inequality follows - aligned with Jensen's inequality applied to the Gibbs-Bogoliubov-Feynman bound"
+(Consensus [3]).  None of the three abstracts states a second-order bound from the reference ensemble alone.
+
+*Comparison and classification.*  The inequality of A17.7, its extremal law and its weaker form:
+**(1) in print as stated** (Bennett 1962 as reported by Hoeffding and by Fan–Grama–Liu; Hoeffding 1963,
+Theorem 3 and (2.10)).  The attribution in A17.7 ("Bennett 1962, Hoeffding 1963, sharp two-point form") is
+right; the precise division of labour, as far as I could read: the exponential form (2.9) is Bennett's
+(8b); the sharper form and the statement of the extremal two-point distribution are in Hoeffding; the
+moment-generating-function lemma is credited to Bennett by Fan–Grama–Liu.  Its use as a *certificate* for
+first-order perturbation theory of a free energy — a floor and a variance bound in, a bracket out — :
+**(4) not found** in the sources retrieved (two extended web searches, four PubMed queries, one Consensus
+query, eleven arXiv-API queries), with one paper that claims rigorous bounds beyond first order (Decoster
+2004) not opened.  *Remark.*  T1 and A17.7 are the two
+moment-generating-function lemmas of one paper: range and mean (Hoeffding's Theorem 2, eqs. (4.12)–(4.13))
+against a one-sided bound and the variance (his Theorem 3).
+
+*Sentence to write.*  "The bound is Bennett's inequality in the sharp form of Hoeffding (1963, Theorem 3,
+inequality (2.8), with the extremal two-point distribution (2.10); the exponential form (2.9) is Bennett
+1962, inequality (8b)); for a product reference the variance input is the tensorization
+(Efron–Stein–Steele) inequality with bounded differences, `Var r ≤ ¼Σc_i²`.  We did not find it used as a
+certified second-order bound in free-energy perturbation: there the rigorous bracket is the two-sided
+Bogoliubov inequality, which needs averages under both ensembles; the second-order (mean–variance)
+truncation is an approximation that is in general neither an upper nor a lower bound (Delle Site and
+Hartmann 2024); and its convergence is judged empirically (e.g. Greeff 2020; Wang, Mei and Ryde 2024)."
+(For us, not for the text: Decoster (2004) has to be read first — see (ii) above.)
+
+**Reference measures that are not products — one citable statement with its constant.**
+
+(a) **Chazottes, Collet, Külske, Redig, "Concentration inequalities for random fields via coupling",
+arXiv:math/0503483v2** `[full text: abstract, introduction, §2.1–2.3 with Thms 1–2 and the proof of Thm 1, §3.1]`.
+For a measure on `A^n` let `D^σ_{i,i+j} := max_{a,b} P̂^σ_{i,a,b}(σ^{(1)}_{i+j} ≠ σ^{(2)}_{i+j})` be the probability that two copies of the
+future, coupled given the same past and the values `a`, `b` at site `i`, differ at site `i + j`; `D := sup_σ D^σ`;
+`δ_i g` the oscillation of `g` at site `i`.  "THEOREM 1.  Let n ∈ ℕ be arbitrary.  Assume that (6) holds [`‖D‖_{ℓ²} < ∞`].
+Then, for all functions `g : A^n → ℝ`, we have the inequality
+`P{|g − Eg| ≥ t} ≤ 2 exp(−2t²/(‖D‖²_{ℓ²(ℕ)}‖δg‖²_{ℓ²(ℕ)}))` for all `t > 0`", proved through "(9)
+`E(e^{λV_i} | F_{i−1})(σ) ≤ e^{λ²(D^σδg)_i²/8}`" and "(10) … `≤ e^{−λt} exp(λ²‖Dδg‖²_{ℓ²(ℕ)}/8)`"; "THEOREM 2. …
+`E(g − Eg)² ≤ ‖D^{(2)}‖²_{ℓ²(ℕ)}‖δg‖²_{ℓ²(ℕ)}`" with `D^{(2)}_{i,j} = E[(D^σ_{i,j})²]^{1/2}`.  For a product measure `D` is the identity
+and (10) is McDiarmid's bound with its sharp constant.  On Gibbs fields: "In [10], C. Külske obtained an
+exponential concentration inequality for functions of Gibbs random fields in the Dobrushin uniqueness
+regime"; with Dobrushin's matrix `C_{x,y}` (condition `sup_x Σ_y C_{x,y} < 1`) and `Δ := Σ_{n≥0} C^n`, "From [10, Lemma 1],
+we have the estimate `|∫g(η)P(dη|σ_{<x}, +_x) − ∫g(η)P(dη|σ_{<x}, −_x)| ≤ Σ_y (1_{x,y} + Δ_{y,x})δ_y g`" — [10] being Külske, Comm.
+Math. Phys. 239, 29–51 (2003), not opened.  Marton is cited next to it: "In [15], K. Marton obtained exponential
+concentration results for a class of Gibbs random fields under a strong mixing condition lying between
+Dobrushin-Shlosman condition and its weakening" — [15] being Studia Sci. Math. Hungar. 40 (2003) 95–113; not
+opened.
+(b) **Kontorovich & Ramanan, "Concentration inequalities for dependent random variables via the
+martingale method", Ann. Probab. 36(6) (2008) 2126–2158, doi:10.1214/07-AOP384 (as printed on
+arXiv:math/0609835v2)** `[full text: §1 with Thms 1.1, 1.2; Thm 2.1, Remark 2.1]`.  Mixing coefficients `η̄_{ij}` (the
+largest total-variation distance between the laws of `X_j, …, X_n` given two pasts that differ only in
+the `i`-th symbol), `‖Δ_n‖_∞ = max_i(1 + η̄_{i,i+1} + ⋯ + η̄_{i,n})`.  "Theorem 1.1. … `φ : S^n → ℝ` is a c-Lipschitz function
+(with respect to the Hamming metric) … Then for any `t > 0`, `P{|φ − Eφ| ≥ t} ≤ 2 exp(−t²/(2nc²‖Δ_n‖²_∞))`."
+"Theorem 1.2" (Markov chains, contraction coefficients `θ_i = sup_{x′,x″} ‖p_i(·|x′) − p_i(·|x″)‖_TV`):
+"`P{|φ − Eφ| ≥ t} ≤ 2 exp(−t²/(2nc²M_n²))`", `M_n = max_i(1 + θ_i + θ_iθ_{i+1} + ⋯)`, and "`M_n ≤ 1/(1 − θ)`" when `θ_i ≤ θ < 1`.
+"Theorem 2.1": the martingale differences of a 1-Lipschitz function satisfy `‖V_i(φ)‖_∞ ≤ 1 + Σ_{j>i} η̄_{ij}`.  Their own
+caveat: "The constants in the exponent … are not sharp — indeed, for the independent case … a sharper bound
+can be obtained by replacing n/2 by 2n."  On the lead "Marton, mid 1990s": "concentration inequalities around
+the median that are qualitatively similar to the one obtained in Theorem 1.2 were obtained for strictly
+contracting Markov chains in [20] (see Proposition 1) and for a class of stationary Markov processes in [21]
+(see Proposition 4′)" — [20] = Marton, Ann. Probab. 24 (1996) 857–866, [21] = Probab. Theory Related Fields 110
+(1998) 427–439, and their [19] is Marton, "A measure concentration inequality for contracting Markov chains",
+Geom. Funct. Anal. 6, 556–571 (printed there with the year 1995).  None of Marton's papers was opened: the
+lead is confirmed as a citation only.
+
+*What follows for A17.6 and A17.7 [P from K; checked on 120 random two-state Markov chains, C9: no
+violation].*  A17.6's own route (the moment generating function of `r` under the model at `λ = p`, then
+Jensen) uses only (10); hence for any reference `π` with `‖D‖_{ℓ²} < ∞`
+
+    D_p(π_g ‖ π)  ≤  p² ‖D‖² K / (8(p − 1)),        Var_π r  ≤  ‖D^{(2)}‖² K,        K = Σ_i c_i²,
+
+i.e. **A17.6 with `K` replaced by `‖D‖²K`**, and a variance input for A17.7 with `‖D^{(2)}‖²` in place of `¼`; for a
+Markov chain with contraction coefficient `θ < 1` the standard coupling gives `D_{i,i+j} ≤ θ^j` and `‖D‖ ≤ 1/(1 − θ)`.
+The sharper route of A3.2 (composition, constant `p/8`) does not extend this way: it needs the oscillations
+`c̃_i` of the *conditional free energy* of the remainder, an exponential functional that the coupling matrix
+does not control linearly (§5, item 6).  So for interacting references the citable bound keeps the
+factor `p/(p − 1)`.
+
+*The one citable statement.*  Chazottes–Collet–Külske–Redig, Theorem 1, with its constant `2/(‖D‖²‖δg‖²)` in
+the exponent (equivalently the moment-generating-function bound `exp(λ²‖D‖²‖δg‖²/8)`), reading level
+`[full text]` of the arXiv version; for Gibbs fields under Dobrushin's condition the result is attributed
+there to Külske (2003), which I did not open; for Markov chains Kontorovich–Ramanan, Theorem 1.2, with
+`M_n ≤ 1/(1 − θ)` and a constant that is not sharp by the factor 4.
 
 ---
 
@@ -954,7 +1201,11 @@ arXiv:2404.08158v1 (with the statement of Thm 1.4).
    the `c̃_i` are for a model with interactions: they are not bounded by the one-site oscillations of `r`,
    because the law of the later sites moves with `x_i`; bounding them is a question about the influence
    of one site on the rest (the mixing condition A17.6 alludes to, and the theory division's P2-T3 in
-   another form).
+   another form).  What can be cited meanwhile is the non-sharp bound of §4.11 (`K` replaced by `‖D‖²K`, factor
+   `p/(p − 1)` kept).
+7. **Decoster (2004).**  The one paper met that claims rigorous bounds beyond first order in thermodynamic
+   perturbation theory (§4.11) could not be opened; whether it contains a bound on the side of A17.7 is
+   open.  Likewise Bennett (1962) itself and the proof pages of Hoeffding's Theorem 3.
 
 ## 6. The three most promising next steps
 
@@ -966,7 +1217,8 @@ arXiv:2404.08158v1 (with the statement of Thm 1.4).
 2. **Measure the ranges `c̃_i` for chain models** (§5, item 6).  For a model sampled site by site (a
    chain, or any model of small tree-width) the remark after A3.2 gives
    `D_p(π_g‖π) ≤ Σ_i[(p − 1)c̃_i²/8 + L(c̃_i)]`, a statement about sequential samplers that the product-measure
-   version cannot reach; whether it is useful depends on whether the `c̃_i` stay bounded along the chain.
+   version cannot reach; whether it is useful depends on whether the `c̃_i` stay bounded along the chain
+   (the citable alternative, with the coupling matrix and a worse constant, is in §4.11).
    Numerics first: chains of 6–12 sites by transfer matrix, remainders of the kinds measured in
    workstreams P and P2.
 3. **Measure which row a real remainder is in, with the estimator that matches the row.**  The
@@ -1026,6 +1278,14 @@ arXiv:2404.08158v1 (with the statement of Thm 1.4).
 
 * The verdict on O1 changes what A17 may claim; §4.5 has the sentence.  A17.6 can be replaced by A3.2
   (proof in §2, check C5); A5 can be sharpened to `L(w)`.
+* A17.7: both attributions hold (§4.11); the sentence to write is there.  For the non-product extension of
+  A17.6 the citable theorem is Chazottes–Collet–Külske–Redig, Theorem 1 (constant `‖D‖²` in front of `K`); the
+  sharp constant of A3.2 does not carry over.  "Free-energy perturbation with a certified second-order bound"
+  was not found — two extended web searches, four PubMed queries, one Consensus query, eleven arXiv
+  queries — so "not found", not "new"; and **Decoster, J. Phys. A 37 (2004) 9051–9070, should be obtained
+  through a library before the claim is made** (it states rigorous generalisations of the Gibbs–Bogoliubov
+  inequality to higher order; I could not open it).  A17.7 may add two lines from §4.11(c′): the intermediate
+  form `ln(1 + (σ²/b²)(e^b − 1 − b))`, and the second-order improvement of the cheap side.
 * If a second reader is assigned, the highest-value hour is on Block–Shetty's appendices (are Theorems 6
   and 8 proved as stated?) and on locating the original of Dagum–Karp–Luby–Ross through a library.
 
@@ -1054,5 +1314,13 @@ arXiv:2404.08158v1 (with the statement of Thm 1.4).
   **Tal**, **Gilmer–Saks–Srinivasan**, **Kulkarni–Tal**, **Grossman–Komargodski–Naor**: not located in an open copy
   or not looked for beyond one query; none is quoted.  (Years in this list that are not supported by a
   record in §4.9 are from the brief or from memory.)
+* For the second addition: **Bennett** (J. Amer. Statist. Assoc. 57 (1962) 33–45, as cited by Fan–Grama–Liu),
+  **Hoeffding 1963, pp. 23–30** (the proof of Theorem 3; my scanned copy stops at p. 22), **Efron & Stein** (1981),
+  **Külske** (Comm. Math. Phys. 239 (2003) 29–51, as cited by Chazottes et al.), **Marton**'s papers (1995/1996,
+  1998, 2003, 2004, as cited by Kontorovich–Ramanan and by Chazottes et al.; the last is arXiv:math/0410168,
+  located, not opened), **Pinelis–Utev**: not opened.  **Decoster**, J. Phys. A: Math. Gen. 37(39), 9051–9070
+  (2004): IOP returns a challenge page to a direct download and an error page to the fetch tool (Unpaywall
+  lists the publisher's PDF as open); abstract through an automatic reading only.  **Reible–Hartmann–Delle
+  Site** (arXiv:2111.10282) and the other "two-sided Bogoliubov inequality" preprints: located, not opened.
 * **archive.org** is unreachable from this machine (connection reset by the proxy), which closed the
   usual route to old technical reports.

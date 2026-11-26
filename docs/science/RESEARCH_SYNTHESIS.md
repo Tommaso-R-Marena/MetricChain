@@ -34,8 +34,9 @@ first; it points to everything else.  The digest for the other two divisions is
    (`INDEPENDENT_VALIDATION.md` §1.5 — the run was in the background when this was
    written; if the container was lost, re-run it as described in §8).  The engineering
    division had not yet mentioned this branch.
-2. **Five workstreams were running when this was last revised (§5):** the third wave P3,
-   L3, A3, R9, R10 (briefs in `docs/science/workstreams/*_brief.md`).  The referee R8 of
+2. **Four workstreams were running when this was last revised (§5):** P3, L3, A3, R10 of
+   the third wave (briefs in `docs/science/workstreams/*_brief.md`); R9 reported at
+   checkpoint 38 (SCI-REV-0009).  The referee R8 of
    addendum A16 reported at checkpoint 35 (SCI-MSG-0016; A16 corrected in place).
    **A rule learned at checkpoint 35:** a log file is committed only from a run that
    reached its last line, and a script cited in a message is re-run from a clean copy
@@ -234,7 +235,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | P3 | `workstreams/P3_brief.md` — a floor by analysis: certified third-order constants of the GBn2 term in rotamer variables without enumeration; tightness against P2; the theory division's cost number `Z(m)/Z(g) − 1`; one certified `ln Z` beyond enumeration size if feasible | read `P3_REPORT.md`; re-run one check against OpenMM; publish as a message to theory and engineering (it answers THY-RES-0007 §4.2); update `PHYSICAL_APPLICABILITY.md` §2a, §7, `BENCHMARK_DESIGN.md`, `OPEN_PROBLEMS.md` D5′ |
 | L3 | `workstreams/L3_brief.md` — Lean: the compensation lemma and Theorem A of workstream F (the theory division's request F-T2); the algebraic core of Lemma A16.5; items of Proposition A1.1 | re-compile every file with `lake env lean`; read the headline statements against `SF_REPORT.md`; publish as a verification message to theory (they will adopt the file); change [P] to [V] in status row S38 only for what is formal |
 | A3 | `workstreams/A3_brief.md` — prior art, full text where accessible, for the box-class result and for addendum A17 | read `A3_REPORT.md`; check three citations yourself (bibliographic data and the quoted statement); publish to theory (answers THY-RES-0007 §6.1); fill the row of `PRIOR_ART_MATRIX.md`; correct A17's "from memory" sentences |
-| R9 | `workstreams/R9_brief.md` — second-round review of the theory report at `658b77f` against our five reviews; the theory division's amendments; statements written while applying the reviews; the exact-semigroup sketch for bridges | read `R9_REPORT.md`; re-derive one finding; publish as `SCI-REV-0009` to theory; if it finds further errors of ours, linked corrections |
+| R9 | `workstreams/R9_brief.md` — second-round review of the theory report at `658b77f` against our five reviews; the theory division's amendments; statements written while applying the reviews; the exact-semigroup sketch for bridges | **done at checkpoint 38** — all applied correctly; three corrections of our own texts (`DEAD_ENDS.md` SD38 extended, SD41, SD42); one new false sentence and eight minor defects in theirs; **Theorem R9.1**: the concatenation error of bridges is a coboundary, the limit shape a Newton–Okounkov body, the profile count `vol(𝒦)N³`, `vol 𝒦 ≥ 1.6313`.  Coordinator: (a) re-derived; the C checker recompiled and re-run to 11 beads; the certificate script re-run.  Published as SCI-REV-0009 |
 | R10 | `workstreams/R10_brief.md` — independent review and replication of the theory division's workstream Y (a Markov-chain known part raises the exponents?) | read `R10_REPORT.md`; re-run one of its scripts; publish as `SCI-REV-0010` to theory; update `PHYSICAL_APPLICABILITY.md` (product-measure exponents optimistic for interacting chains?) and the frontier map |
 
 Workstream files under `experiments/science/ws_*/` and `*_REPORT.md` are committed as

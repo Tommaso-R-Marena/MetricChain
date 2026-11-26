@@ -481,3 +481,182 @@ floor itself: the certificate must be a function, not a constant.
 | `ln Z(m₊) ≤ ln Z(E) ≤ ln Z(m₋)`, `min m₋ ≤ min E ≤ min m₊` | follows; `ln Z(m_∓)` in double precision |
 | sampled brackets | [P]/[K] §2.7, probability `≥ 1 − δ` over the sampler |
 | anything about a real peptide in water | **not claimed** |
+
+---
+
+## 3. Numerics: what was computed, sizes, results, how to re-run
+
+All scripts are in `experiments/science/ws_P3/`; run them from there with
+`OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python3 -B <script>`.  P2's modules
+(`scbuild.py`, `fbmodel.py`) and P's (`pepbuild.py`, `fastff.py`) are imported read-only for the
+geometry, the clash scores, the tables of `f` and — for bulk evaluations only — P2's block
+evaluator of `g` (five times faster than mine; every run re-checks 48 random states against my
+own evaluator, deviation `< 10⁻⁸` asserted, `≤ 3·10⁻¹¹` observed).  The machine was shared (load
+7–14 on 4 cores during the runs), so wall times are upper bounds.
+
+| script | what | output |
+|---|---|---|
+| `p3core.py`, `t01_validate.py` | my GBn2/OBC2 evaluator with self/cross split and descreening tables; validation on fresh states against OpenMM (Reference, double), a table-free evaluation and P2's evaluator | `logs/t01_validate_gbn2.log` |
+| `t03_fp.py` | `g` and the tables against 40-digit arithmetic | `logs/t03_fp.log` |
+| `mixdiff.py`, `x01_explore.py` | exact mixed differences by enumeration: self part, cross part, context dependence, orders 1–5 | `logs/x01_explore.log` |
+| `dfun.py`, `encl.py` | closed-form derivatives; rigorous enclosure tables (`mpmath.iv`) | `cache/atom_*.npz`, `cache/zeta_*.npz` |
+| `termwise.py`, `x02_termwise.py`, `x03_breakdown.py`, `t04_tight.py`, `run_tight.sh` | per-subset bound, class mode; exploration with sampled suprema; the rigorous comparison with P2's enumerated `c_ijk` | `logs/x02*.log`, `logs/x03*.log`, `logs/t04_tight_*.log`, `out/tight_*.json` |
+| `gfbound.py`, `t02_gf.py`, `t06_pairtest.py`, `x04_gamma.py` | anchored mode summed over all subsets; tests (generating function = explicit sums; bound ≥ exact; single-term sharpness); `Γ_m` for long chains | `logs/t02_gf_V5E.log`, `logs/t06_pairtest.log`, `logs/x04_gamma_*.log` |
+| `t05_identity.py` | Proposition 1 and Corollary L1 numerically | `logs/t05_identity.log` |
+| `pwmodel.py`, `run_floor.py`, `run_batch.sh`, `batch_*.txt` | anchored terms from the ball, banded models, transfer matrix, exact sampling, moments; the end-to-end pipeline with enumeration checks | `logs/floor_*.log`, `out/floor_*.json` |
+| `mk_tables.py`, `mk_report.py` | tables | `out/tables.md`, `out/report_tables.md` |
+
+To re-run everything: `python3 -B t01_validate.py gbn2; python3 -B t03_fp.py V6 E 0.70 3;
+python3 -B t05_identity.py; python3 -B t02_gf.py V5 E 0.70 5; python3 -B t06_pairtest.py V5 E 0.70 60;
+bash run_tight.sh; for b in A2 B2 F G H; do bash run_batch.sh batch_$b.txt logs/floor_batch_$b.log; done;
+bash run_batch.sh batch_D.txt logs/floor_big_V20.log; python3 -B mk_report.py`.  (The first run
+builds the enclosure tables: about 4 minutes.  Batches `A`, `B` contain the constant-bound
+runs of Val that were made first; `C`, `E` are superseded by `F`.)
+
+**Totals.**  <!--T:stats-->
+(to be filled)
+<!--/T:stats-->
+
+### 3.1 What has to be bounded [M, exact enumeration, `x01_explore.py`]
+
+Anchor `x⁰ = argmin E`; sums over all subsets of the given order; kcal/mol.
+
+| instance | Σ `c_T` order 3: total / self part / cross part | at the anchor context only | Σ order 4 (total) | Σ order 5 | `g − I₂g` | `g − I₃g` |
+|---|---|---|---|---|---|---|
+| Ser₄/E τ.70 (6 561) | 0.0096 / 0.0138 / 0.0118 | 0.0094 | 2.5·10⁻⁴ | — | [−0.0026, 0.0030] | [−8·10⁻⁵, 1·10⁻⁴] |
+| Ser₄/H τ.70 (2 916) | 0.082 / 0.026 / 0.075 | 0.082 | 2.3·10⁻⁴ | — | [−0.016, 0.047] | [−8·10⁻⁵, 1.3·10⁻⁴] |
+| Val₆/E τ.70 (729) | 0.031 / 0.086 / 0.075 | 0.027 | 0.0022 | 4.3·10⁻⁵ | [−0.0041, 0.0049] | [−3.3·10⁻⁴, 5.2·10⁻⁴] |
+| Leu₆/H τ.60 (64) | 0.27 / 0.60 / 0.68 | 0.16 | 0.061 | 0.0042 | [−0.019, 0.057] | [−0.030, 0.004] |
+| Leu₈/H τ.60 (256) | 1.23 / 1.26 / 1.75 | 0.75 | 0.29 | 0.029 | [−0.067, 0.249] | [−0.088, 0.012] |
+
+My enumeration reproduces P2's constants where both exist (Ser₃/E `c₁₂₃ = 4.026·10⁻³`; Val₆/E
+max 5.850·10⁻³, sum 3.075·10⁻²; P2: 4.03·10⁻³, and the same two numbers in its JSON) — an
+**independent replication** of those entries with different code for `g`, the domain and the
+differences.  Three facts set the task: the exact constants fall by a factor 10–20 per order
+on the strand but only 3–10 on the helix; the self and the cross part are each as large as or
+larger than the total already at third order; and the dependence of `Δ_T g` on the context is
+weak on the strand (0–20 %) and strong for some helix triples.
+
+### 3.2 How tight is analysis alone? [M: rigorous bound against P2's enumeration, `t04_tight.py`]
+
+Class-mode bound `ĉ_ijk` of Theorem 3 with the interval enclosures — tables only, no value of
+`g` — against P2's enumerated `c_ijk` on its product domain `X′` (kcal/mol):
+
+<!--T:tight-->
+(to be filled)
+<!--/T:tight-->
+
+`ĉ_ijk ≥ c_ijk` in every triple (asserted).  **Ratio certified/measured, per class of side
+chain: apolar (Val, Leu) 200–1 400; aromatic (Phe) 90–170; polar (Ser) 40–100; charged (Lys)
+33–77; the heteropolymer 90–160.**  By the brief's own criterion this is a negative result.  The
+last column shows where the loss is: the self part of the bound alone is 0.5–30 times the
+measured total, the rest is the cross part.
+
+*The loss is cancellation, not slack in the inequalities* [M, `t06_pairtest.py`].  With all
+charges set to zero except those of one atom or one pair of atoms, `g` is a single term and
+nothing can cancel.  For 108 random single terms (Val₅/E and Ser₄/H) and all subsets of order 3
+and 4 — 1 268 cases — the certified bound is never below the exact constant and exceeds it by
+a median factor **1.1** (self term, fixed atom), **1.8–2.5** (self term, side-chain atom),
+**1.8–2.3** (pair of fixed atoms), **2.7–3.9** (fixed atom and side-chain atom), **3.0–6.3**
+(two atoms of one side chain), **4.2–5.5** (atoms of two side chains); the smallest ratios are
+1.00–2.0.  Term by term the theorem is nearly sharp; summed over the pairs of a neutral
+molecule it is two to three orders of magnitude too large.
+
+### 3.3 Certified remainder constants `Γ_m` [P + rigorous numerics; `gfbound.py`, `x04_gamma.py`, `run_floor.py`]
+
+`Γ_m = Σ_{|T| = m} ĉ_T` in anchored mode, kcal/mol (divide by 0.596 for `k_BT`); anchor from
+coordinate descent on `E`.  No value of `g` enters except the `≈ n·k` evaluations of the descent.
+
+<!--T:gamma-->
+(to be filled)
+<!--/T:gamma-->
+
+*Findings.*  (i) `Γ_m` grows linearly with the chain on extended backbones: Val on the strand,
+`n = 30 → 40`: 3.99, 0.189, 0.0055, 0.00014 kcal/mol per residue for `m = 3, 4, 5, 6`.
+(ii) It falls by a factor 22–46 per order for Val (strand and PPII), 11–22 for Leu on strand
+and PPII, and only 4–8 for Leu on the helix, where `Γ₆` is still 8 kcal/mol at 16 residues and
+22 kcal/mol at 24.  (iii) The cost is negligible: `Γ₃ … Γ₆` of a 40-residue chain (652 atoms)
+take 15, 15, 27 and 49 s; the site penalties `γ_i` take `n + 1` such evaluations.
+(iv) Against the exact sums of anchored constants (Val₅/E, enumeration): `Γ₃, Γ₄, Γ₅` are 794,
+412 and 244 times too large — the looseness of §3.2 is there at every order, and is paid once.
+
+### 3.4 What the floor buys: `ρ`, the cost number, the brackets [M: exact enumeration of `E` against the certified models]
+
+For each instance: `m₋ ≤ E ≤ m₊` from Theorem 5 with truncation order `m`; then, by enumeration
+of all states, `ρ = max(E − m₋)` and the theory division's cost number `Z(m₋)/Z(E) − 1`
+(`= 𝔼_{π_E} e^{β(E − m₋)} − 1`); `ρ_cert = max(m₊ − m₋)` and the deterministic bracket need no
+enumeration.  Sampled brackets: `N = 20 000`, `δ = 0.05`.
+
+**(a) Constant remainder bound** (`m₋ = model − Γ_m`):
+
+<!--T:floor_const-->
+(to be filled)
+<!--/T:floor_const-->
+
+**(b) Site penalties** (`m₋ = model − Σ_i γ_i[x_i ≠ x⁰_i]`).  For `m = 3` this is P2's Statement
+5(d) — `f + I₂g − Σγ_i[x_i ≠ x⁰_i]` — with constants certified by analysis alone:
+
+<!--T:floor_site-->
+(to be filled)
+<!--/T:floor_site-->
+
+*Reading.*  ⟨READ-3.4⟩
+
+### 3.5 One instance beyond enumeration, end to end [P for the validity; M for the numbers]
+
+⟨BIG-3.5⟩
+
+<!--T:big-->
+(to be filled)
+<!--/T:big-->
+
+### 3.6 Certified inputs of the Bennett bracket; the window; do the remainder statistics extrapolate? [P + M]
+
+(Proposition 6; the coordinator's two additions.)  `r = β(E − m)`; all numbers in `k_BT` and
+nats; site-penalty models; "enum." = exact, by enumeration of the instance; the last column
+is from `N` samples of `π_{m₋}`.
+
+<!--T:bennett-->
+(to be filled)
+<!--/T:bennett-->
+
+*Reading.*  ⟨READ-3.6⟩
+
+### 3.7 Optional (a): `Σ_i c_i²` of the certified remainder
+
+For the remainder `R = g − I_{m−1}g`, the argument of Proposition 1 with site `i` placed last in
+the ordering gives `R(x) − R(x′) = R_i(x) − R_i(x′)` when `x, x′` differ at site `i` only, with
+`|R_i| ≤ Σ_{T∋i, |T|=m} ĉ_T = m γ_i`; hence the **certified one-site oscillations**
+`c_i(R) ≤ 2 m γ_i` [P; `c_i^{exact} ≤ c_i^{cert}` checked in every enumerated run of the table].
+
+<!--T:osc-->
+(to be filled)
+<!--/T:osc-->
+
+*Reading.*  ⟨READ-3.7⟩
+
+### 3.8 Optional (b): OBC2 [M, small sample]
+
+My evaluator handles OBC2 (`GBSAOBC2Force`: no neck term, `tanh(ψ − 0.8ψ² + 4.85ψ³)`, offset
+0.009 nm) with the same code; against OpenMM's Reference platform on fresh states the deviation
+is `3·10⁻¹²` kcal/mol (Val₄/E, 12 states).  Same pipeline, same domains:
+
+<!--T:obc2-->
+(to be filled)
+<!--/T:obc2-->
+
+*Reading.*  ⟨READ-3.8⟩
+
+### 3.9 Controls
+
+1. Evaluator: OpenMM Reference (double), table-free evaluation, P2's evaluator, 40-digit
+   arithmetic (§2.0).  2. Domains: `pruned_domain` = P2's `shape_pruned` in 24 of 24 cases.
+3. P2's constants reproduced by my enumeration (§3.1).  4. Proposition 1 to `2·10⁻¹³` (§2.1).
+5. Enclosures against sampled maxima (ratio `≥ 1`, `≤ 1.0001`).  6. Generating function against
+explicit sums over subsets, `2·10⁻¹⁶`.  7. Bound against exact constants: class mode 562
+triples, anchored mode all subsets of orders 3–5 of Val₅/E, single terms 1 268 cases — no
+violation.  8. Sandwich `m₋ ≤ E ≤ m₊` at every state of every enumerated instance; transfer
+matrix against enumeration; transfer-matrix moments against direct sums; Bennett inequalities
+(see Totals).  9. Two independent certificates of the same number: for Val₂₀/PPII the `m = 5`
+brackets lie inside the `m = 4` brackets (§3.5).
+*Not a control:* nothing here was checked by a second person or by a proof assistant.

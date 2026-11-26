@@ -283,7 +283,7 @@ the zero function plays for adaptive algorithms in Theorem 11.25(a).*  (As there
 instance is trivial with a hint: `A(ψ⁰_{s¹})` does not depend on the centre, so an algorithm
 that is told the instance up to its centre needs no evaluation.  The cost is the price of
 being correct on the twins.)  Finite `n`: the rows of the
-table hold with `E' = −n⁻¹ ln max(p₁, p₂)`, which equals the printed `E` to four digits.
+table hold with `E' = −n⁻¹ ln max(p₁, p₂)`, which equals the printed `E` to four digits.  **[Note added at checkpoint 38: too strong at small `n` — it exceeds the printed `E` by at most `6.1·10⁻⁵` (`u = 2`, `n = 200`: `0.1130` against `0.1129`) and by less than `10⁻⁵` from `n = 800` on; found by the theory division (THY-RES-0007 §1.1), confirmed by workstream R9 with this workstream's own code.]**
 
 ---
 

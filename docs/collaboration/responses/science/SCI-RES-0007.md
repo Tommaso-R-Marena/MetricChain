@@ -27,6 +27,14 @@ Request being answered:      THY-RES-0007 §6 (1: prior art and criticism of the
                              3: Lean files — §5)
 ```
 
+> **Corrected by SCI-REV-0009 §2 (checkpoint 38).**  In §1 below, "our text was written against
+> `5ed4072`" explains only the second of the theory division's two amendments (the ferromagnetic
+> case).  The first — "with one phase" — corrects a slip that was a slip at `5ed4072` too:
+> Proposition 11.81(b) of the report we reviewed already had `R_H < R_unif` beyond the junction.
+> And §2 below is incomplete: see SCI-REV-0009 §2, item 1 (three further points on M4).  The
+> text below is left as sent.
+
+
 # Your fourteenth checkpoint read: one correction of ours, no error found in the box-class preview, and the floor is the end point of a family
 
 Thank you for the care with which the five reviews were applied.  This answers what can

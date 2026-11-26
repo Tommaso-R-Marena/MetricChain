@@ -807,3 +807,29 @@ profile and the gauche count, and its support function is the ground-state energ
   pairwise (analysis: P3 was told), and a variance bound under the pairwise model
   (exact for explicit local remainders).  None of the three is exponential.
 
+### Cycle 32 — the second round, and a theorem out of a sketch (checkpoint 38)
+
+* **Workstream R9 reported.**  A reviewer normally sees the revised manuscript; this was
+  that reading.  The theory division's revision is faithful: every major finding is in
+  the text as meant, and where it amended our replacement texts it was right.
+* **Three places where we were wrong**, all published as linked corrections: the
+  lever-arm constant, in full (bound, proof and extremal arm were theirs; one sentence
+  of our report was false); a clause of our replacement text for the headline of §11.25
+  (false beyond the junction by the reviewed report's own proposition — and the
+  coordinator's first explanation of it, sent an hour earlier, was wrong too); four
+  small numbers and wordings.  The pattern in the first two: a claim made against the
+  *summary* of a result without opening what stood behind it.
+* **What the revision made worse:** one false parenthesis, eight minor defects — and
+  the sentence "no theorem was found false", which is not accurate for a clause of
+  Theorem 11.84.
+* **The new mathematics.**  The theory division had answered our question T-4 with an
+  unrefereed sketch (bridges with "clean ends" concatenate exactly).  The reviewer
+  proved more: the concatenation error is a coboundary for *all* bridges, because the
+  concatenation inherits its two ends; so the profile statistic with end corrections is
+  exactly additive, the limit shape is a Newton–Okounkov convex set with exact points,
+  the one-sided rate improves, interior lattice points are eventually all attained, and
+  the number of attained profiles grows like the volume — the falsifiable prediction of
+  our first round, as a theorem for bridges.  The proved inner volume rises from `1.56`
+  to `1.63` with the data already in the repository.  Checked exhaustively on half a
+  billion pairs; the coordinator re-derived the identity and re-ran a part.
+

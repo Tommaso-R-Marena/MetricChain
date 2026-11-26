@@ -15,7 +15,3 @@ S5 Theorem A, every finite ingredient, 184 parameter sets over 7 site groups (Z2
 S6 A16.5 [20000 cases]: identity (a): rel. error 3.77e-15; concavity violation -9.23e-10; grid max of f minus f(clipped level), all t* > 0: 5.74e-16; rearrangement sum H(rho) - sum H(rho') over 20000 dominated pairs: max 3.55e-15
 S7 A1.1 [300 random class members, n <= 5]: item 1 (all conditioning sets): worst violation 3.33e-16; item 2: max of KL - n*R(r) = 4.44e-16; equality at the two cones to 3.55e-15
 S8 Chernoff form [1680 cases, n = 2..8]: max of H_(k,r) - (n+1) e^(tr) rho_t^n = -2.000e+00 (never positive)
-
-real	0m9.205s
-user	0m7.148s
-sys	0m0.036s

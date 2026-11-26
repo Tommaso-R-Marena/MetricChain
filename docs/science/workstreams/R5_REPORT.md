@@ -247,7 +247,7 @@ for all `ξ, c > 0`
     lim_{η↓0} limsup_{N→∞} sup{ |𝐧|^{-1} ln C(𝐧, ξ|𝐧|, e^{−c|𝐧|}) : |𝐧| ≥ N, ‖𝐧/|𝐧| − λ‖₁ ≤ η } ≤ T(ξ)
 
 (equivalently: along every sequence of chains with compositions tending to `λ`).  With this definition the induction
-of Theorem 11.54 goes through verbatim: the inner block of a chain within `η` of `λ` is within `η + m/((1−φ)|𝐧|)` of `λ`,
+of Theorem 11.54 goes through verbatim: the inner block of a chain within `η` of `λ` is within `η + m/((1−φ)|𝐧|)` of `λ` **[note added at checkpoint 38: `2m/((1−φ)|𝐧|)` — `m` is wrong for three or more site types; found by the theory division (THY-RES-0007 §1.4(a)), re-derived by workstream R9; immaterial for the theorem]**,
 only finitely many rates occur, and the one-level bound is uniform by (G2).
 
 **(G2) Uniformity of the outer exponent.**  Let `λ°` be the composition of the outer block (`n_o` sites), `x > 0`,

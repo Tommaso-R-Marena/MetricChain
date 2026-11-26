@@ -163,3 +163,44 @@ from a scratch copy.
   1e-7).  Bound at Y's (L,t): p=0.4: 0.034040 (Y 0.034026); p=0.3: 0.040143 (Y 0.040115);
   p=0.2: 0.044618 (Y 0.044599).  Mine are 1.4e-5..2.8e-5 HIGHER (both are valid lower bounds;
   to be explained after reading their code).  L=16 at p=0.3: 0.040166.
+* [r10_05 h: 491 s; a: ~15 min under load] Prop. I, all four p (my M_L = over-relaxed Arimoto,
+  2500 iterations; ANY M_L gives a valid bound):
+  h >= at Y's (L,t): 0.034040 / 0.040143 / 0.044618 / 0.044372  (Y: 0.034026 / 0.040115 /
+  0.044599 / 0.044378).  Mine higher by 1.4e-5..2.8e-5 at p=0.4,0.3,0.2 and lower by 6e-6 at
+  p=0.1.  With L=16: 0.040166 (p=0.3), 0.044739 (p=0.2), 0.044732 (p=0.1): slightly better.
+  a >= (t=0.999): 0.116089 (L=10) / 0.127042 (L=10) / 0.130486 (L=10) / 0.116429 (L=14)
+  (Y "best of both": 0.116817 [= Prop. H, replicated exactly] / 0.126444 / 0.129797 / 0.116632).
+  All twelve lower ends of Y's table 0.2 are therefore confirmed as valid lower bounds
+  (replicated to <= 3e-5 for h, exactly for E_F, to <= 7e-4 for a) and all lie above the cube.
+* [r10_07d_upper_ends.py 0.3 801: 233 s] own SAFE tilt recursion, p=0.3:
+  E <= 0.232400 = E_F + 3e-11  (Y: 0.232538);  a <= 0.140224 (q~=0.27) (Y: 0.140860);
+  h <= 0.044719 (largest grid value 0.044523 at t=0.431, q~=0.2589; interval rule with
+  adaptive refinement, 62 grid points; tails t*E_up and (1-t)*a_up) (Y: 0.044995; 0.044821).
+  => Y's upper ends at p=0.3 are confirmed (mine are slightly smaller, i.e. Y's are valid
+  and a little conservative), and the threshold bracket closes: E_inf = E_F at p=0.3.
+* [r10_07c, small p] p=0.01, t=0.15, q~=0.03: safe 0.068892, 0.067813, 0.067224 (G=401,801,
+  1601; converging like the cell width to about 0.0666); the restricted-mode power iteration
+  does NOT close its ratio bracket ([0.0218, 0.0666]) -- the lower ends 0.0218 (p=0.01) and
+  0.0025 (p=0.001) I printed earlier in the session are unconverged and must not be quoted.
+  Conclusion: at p=0.01 the relaxed value is about 0.067 per site, far above every lower
+  bound I have (0.0254): the tilt-state relaxation is useless for deciding small p.
+* [r10_blockfield.py] NEW lower bound of mine (Prop. I with the two uniform fields on blocks
+  of ANY length L, via a DP over (first, last, magnetisation); identity checked against the
+  definition, 18 cases, 6e-16).  u=1: p=0.05: h >= 0.037540 (L=6, t=0.307) = 1.288 x cube;
+  p=0.02: h >= 0.029973 (L=7, t=0.256) = 1.029 x cube; p=0.01: 0.025390 (0.871 x cube).
+  => "raised" is PROVED for h down to p=0.02 at u=1 (Y: undecided for p<=0.05).
+* [large slopes, probes] p=0.3: u=3: safe tilt upper bound at t=0.4: 0.1821 > cube h 0.1728;
+  u=4: 0.2436 (q~=0.40) vs cube 0.2392; Markov-label lower bounds 0.1596 / 0.2219 (c*=0 at
+  u=4: i.i.d. labels, instance = zero residual).  Neither direction provable at u>=3.
+* [r10_11_small_slope.py] small-slope law F*(t) ~ (t(1-t)/2) u^2 V, V = max Lipschitz variance:
+  binary symmetric chain n<=5, ALL vertices: V_n = (1/4)Var(m) exactly for p<1/2 (maximiser =
+  uniform field), = (1/4)Var(staggered m) for p=0.7; F*_4(t;u)/(u^2 t(1-t)/2) = 1.7168,
+  1.7725, 1.7871, 1.7908 (u=0.4,0.2,0.1,0.05; t=0.3) -> V_4 = 1.7920.
+  Frustrated chain (nn ferro, nnn antiferro), n=5: V_5 is attained by a MODULATED site-wise
+  label (e.g. --+++), V_5 = 1.962 vs zero-wave-vector (1/4)Var(m) = 1.014 (J1=.5,J2=-.5);
+  2.390 vs 0.530 (J1=.3,J2=-.8).  => "scales with the k=0 susceptibility" is FALSE in
+  general; the right quantity is V (for ferromagnets V = chi).
+  Potts q=3, n=2 (763 integer Lipschitz functions, 534 vertices): J>=0: V_2 = Var(N_a) =
+  (2/9)(2+2 lam2); J=-1: V_2 = 0.563 > Var(N_a) = 0.326.  Ratio check u->0 at J=0.7:
+  0.59698, 0.57909, 0.56839, 0.56267 -> 0.55670.  (n=3 enumeration ran out of memory:
+  replaced by LP ascent, see below.)

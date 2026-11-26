@@ -2,7 +2,7 @@
 P3 -- pairwise models on the product domain: known part, anchors, anchored expansion data,
 banded lower/upper models, exact partition functions and exact sampling by transfer matrix.
 """
-import itertools, math, time
+import itertools, math, time, os
 import numpy as np
 from p3core import KT300, BETA
 
@@ -78,7 +78,7 @@ def ball_states(k, x0, M):
     return out, tot
 
 
-def anchored_terms(G, x0, M, chunk=4096, progress=None, energy=None):
+def anchored_terms(G, x0, M, chunk=4096, progress=None, energy=None, cache_file=None):
     """Anchored (cut-HDMR) terms d_U(x_U), |U| <= M, of the GB energy at the anchor x0, from the values of g on
     the Hamming ball of radius M (evaluated here).  Returns (dict U -> array over ALL states of the sites of U
     (zero where some x_i = x0_i), number of evaluations, dict U -> g on the full sub-grid)."""
@@ -86,12 +86,21 @@ def anchored_terms(G, x0, M, chunk=4096, progress=None, energy=None):
     blocks, tot = ball_states(k, x0, M)
     allst = np.concatenate([b for _, b in blocks], axis=0)
     ef = energy if energy is not None else G.energy
-    vals = np.empty(tot)
-    t0 = time.time()
-    for s in range(0, tot, chunk):
-        vals[s:s + chunk] = ef(allst[s:s + chunk])
-        if progress and (s // chunk) % progress == 0:
-            print(f"      ball evaluations {min(tot, s + chunk)}/{tot}  {time.time() - t0:.0f}s", flush=True)
+    vals = None
+    if cache_file is not None and os.path.exists(cache_file):
+        z = np.load(cache_file)
+        if z["states"].shape == allst.shape and np.array_equal(z["states"], allst):
+            vals = z["vals"]
+            print(f"      ball values read from {os.path.basename(cache_file)}", flush=True)
+    if vals is None:
+        vals = np.empty(tot)
+        t0 = time.time()
+        for s in range(0, tot, chunk):
+            vals[s:s + chunk] = ef(allst[s:s + chunk])
+            if progress and (s // chunk) % progress == 0:
+                print(f"      ball evaluations {min(tot, s + chunk)}/{tot}  {time.time() - t0:.0f}s", flush=True)
+        if cache_file is not None and tot >= 5000:
+            np.savez(cache_file, states=allst.astype(np.int16), vals=vals)
     gval = {}
     pos = 0
     for U, b in blocks:

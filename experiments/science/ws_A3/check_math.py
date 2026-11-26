@@ -28,6 +28,8 @@ report (COMMON rule 3: numerics before theory).
   C9  Reference = two-state Markov chain with contraction theta: ln E e^{lam(r-Er)} <= lam^2 K/(8(1-theta)^2),
       D_p <= p^2 K/(8(p-1)(1-theta)^2), Var <= K/(1-theta)^2  (corollaries of Chazottes-Collet-Kuelske-Redig,
       Thms 1-2, with the Markov coupling); and the sharp two-point Bennett bound W(b, s2) of addendum A17.7.
+      Also W <= ln(1 + (s2/b^2)(e^b-1-b)) <= (s2/b^2)(e^b-1-b) and the lower half ln(1 + s2 (e^-a-1+a)/a^2) <= gap
+      (Liao-Berg, Theorem 1, applied to exp).
   C5 also checks the refined bound D_p <= (p-1)K/8 + sum_i L(c_i)   (bounded range => zCDP, composed).
   C5 (last block) checks the same bound for NON-product reference measures with the ranges c~_i of the
       conditional free energy F_i = -ln E_pi[e^{-r} | x_<=i]  (remark after A3.2 in the report).
@@ -449,8 +451,16 @@ for n in [5, 7, 9]:
             worst_dp = max(worst_dp, renyi(pg, pi, p) / (p * p * normD2 * K / (8 * (p - 1))))
 print(f"    {cnt9} random two-state chains with random r: largest ln E e^(lam(r-Er)) / (lam^2 K/(8(1-theta)^2)) = {worst_mgf:.4f};"
       f" largest D_p/(p^2 K/(8(p-1)(1-theta)^2)) = {worst_dp:.4f}; largest Var/(K/(1-theta)^2) = {worst_var:.4f}  (all must be <= 1)")
+def bennett_W(bb, s2):
+    """Sharp two-point bound of A17.7: ln[(b^2 e^{-s2/b} + s2 e^b)/(b^2 + s2)]."""
+    return math.log((bb * bb * math.exp(-s2 / bb) + s2 * math.exp(bb)) / (bb * bb + s2))
+
+
 worst_b = 0.0
 att = 0.0
+worst_mid = 0.0       # W / ln(1 + (s2/b^2)(e^b-1-b))   -- the "variance times divided difference" form (Liao-Berg Thm 1)
+worst_slack = 0.0     # gap / W(b', s2') with a floor and a variance bound that are not tight
+worst_low = 0.0       # ln(1 + s2 (e^{-a}-1+a)/a^2) / gap, a = E r' - min: the lower half of the same theorem (cheap side)
 for _ in range(20000):
     k = int(rng.integers(2, 7))
     y = rng.normal(0, float(rng.choice([0.3, 1.0, 3.0])), k)
@@ -461,8 +471,19 @@ for _ in range(20000):
     if bb < 1e-3 or s2 < 1e-8:
         continue
     gap = math.log(float(np.dot(pr, np.exp(y))))
-    W = math.log((bb * bb * math.exp(-s2 / bb) + s2 * math.exp(bb)) / (bb * bb + s2))
+    W = bennett_W(bb, s2)
+    weak = (s2 / bb ** 2) * (math.exp(bb) - 1 - bb)
+    mid = math.log1p(weak)
     worst_b = max(worst_b, gap / W)
-    att = max(att, W / ((s2 / bb ** 2) * (math.exp(bb) - 1 - bb)))
+    att = max(att, W / weak)
+    worst_mid = max(worst_mid, W / mid)
+    b2, s22 = bb * (1 + float(rng.uniform(0, 2))), s2 * (1 + float(rng.uniform(0, 2)))
+    worst_slack = max(worst_slack, gap / bennett_W(b2, s22))
+    aa = -float(y.min())                             # Y >= -a  (the remainder is at most a above its mean)
+    if aa > 1e-3:
+        worst_low = max(worst_low, math.log1p(s2 * (math.exp(-aa) - 1 + aa) / aa ** 2) / gap)
 print(f"    Bennett two-point bound: largest gap/W(b, s2) = {worst_b:.6f} (<= 1); largest W/((s2/b^2)(e^b-1-b)) = {att:.6f} (<= 1)")
+print(f"    middle form: largest W/ln(1 + (s2/b^2)(e^b-1-b)) = {worst_mid:.6f} (<= 1);"
+      f" with a floor and a variance bound that are not tight: largest gap/W(b', s2') = {worst_slack:.6f} (<= 1)")
+print(f"    lower half (needs the exact variance and a ceiling a above the mean): largest ln(1 + s2 (e^-a - 1 + a)/a^2)/gap = {worst_low:.6f} (<= 1)")
 print("done")

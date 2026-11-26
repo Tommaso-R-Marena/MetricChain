@@ -1,4 +1,4 @@
-# Workstream L3 — Lean: the compensation lemma and Theorem A of workstream F; Lemma A16.5 given Harper; Proposition A1.1, items 1–2
+# Workstream L3 — Lean: Lemmas 0–3 and Theorem A of workstream F, complete; Lemma A16.5 given Harper; Proposition A1.1, items 1–2
 
 *Lean 4.31.0 + Mathlib (the repository's pinned version, `v4.31.0`, commit `fabf563a`).  Four files
 in `experiments/science/ws_L3/`; running log `NOTES.md` (clock readings); numerics `sanity_numerics.py`;
@@ -30,31 +30,38 @@ numerics), and then proved them in Lean.
 
 ## 1. Verdicts
 
-**Everything the brief asked for under items 1–4 is machine-checked, and nothing in SF_REPORT §2.0–§2.2
-was found false.**  (1) **Lemma 3 (compensation) is [V] in full**, in a form more general than the
-paper's: any positive reference weight invariant under any *set* of site permutations that is
-transitive on the sites (no group structure is used), any normalised invariant class member as
-compensator; the report's form (Bernoulli reference, compensator `w̃_{γ₂}`) is a corollary.  The linear
-equation holds site by site with no sign condition and no invariance at all (`oneW_compensated`).
-(2) **Lemma 1 (a) is [V]** in the oracle-indexed model of workstream L1, for an arbitrary oracle, class
-and target, by reduction to the theory division's `MetricChain.expected_queries_ge_packing`.
-(3) **Lemma 0 (window) is [V]**, for marginals and — more generally — for every conditional law given
-any pattern on any set of other sites (this is item 1 of Proposition A1.1), and for any reference weight
-with Bernoulli odds at the site; "the additive instances fill the window" is [V]; the rigidity
-sentence ("at a cone the oracle reveals the instance") is not formalised.
+**Lemmas 0, 1, 2, 3 and Theorem A of SF_REPORT §2.1–§2.2 are machine-checked in full — every part of
+the four lemmas and all three displays of Theorem A — with no statement of the report taken as a
+hypothesis, and nothing in §2.0–§2.2 was found false.**  (Not formal: side remarks only — that at a
+cone "one evaluation certifies `ln A`", that `J` is exponentially small, Remarks (2), (3) of Lemma 3,
+which are comments.)
+(1) **Lemma 3 (compensation) is [V]**, in a form more general than the paper's: any positive reference
+weight invariant under any *set* of site permutations that is transitive on the sites (no group
+structure is used), any normalised invariant class member as compensator; the report's form
+(Bernoulli reference, compensator `w̃_{γ₂}`) is a corollary.  The linear equation holds site by site with
+no sign condition and no invariance at all (`oneW_compensated`).
+(2) **Lemma 1 is [V]**, (a) and (b), in the oracle-indexed model of workstream L1, for an arbitrary
+oracle, class and target, by reduction to the theory division's
+`MetricChain.expected_queries_ge_packing` and `MetricChain.nonadaptive_expected_queries_ge`.
+(3) **Lemma 0 is [V]**, all three sentences: the window — for marginals and, more generally, for every
+conditional law given any pattern on any set of other sites (item 1 of Proposition A1.1), and for any
+reference weight with Bernoulli odds at the site; the additive instances fill the window; rigidity at
+a cone.
 (4) **Lemma 2 is [V]** (both bounds proved, not assumed), in an abstract form — two arbitrary
-probability vectors, any observable with values in `[0,1]` — and for the dips of the report, including a
-site-by-site version that the report does not state.  **Theorem A, the every-`n` statement
-`E|Q(ψ₀)| ≥ (1 − 2δ)/(n·H_{k,r})`, is [V]** with *no hypothesis taken on trust*: on `{0,1}ⁿ` with the
-cyclic shifts (`theoremA_fin`) and, more generally, for sites indexed by any finite group acting on
-itself by translation (`theoremA_group`).  Its second display (the Chernoff form with `ρ_t`) and the
-"in particular" with `C_m` are **not** formalised (the brief marks them optional).
-(5) **Lemma A16.5:** workstream R8 had already machine-checked the algebraic core that the brief lists
+probability vectors, any observable with values in `[0,1]` — and for the dips of the report, with a
+site-by-site version that the report does not state.
+(5) **Theorem A is [V]**: `E|Q(ψ₀)| ≥ (1 − 2δ)/(n·H_{k,r})` (`theoremA_fin`); the Chernoff form
+`H_{k,r} ≤ (n+1)·e^{tr}·ρ_t(k/n;γ)ⁿ`, hence `E|Q(ψ₀)| ≥ (1 − 2δ)e^{−tr}ρ_t(k/n;γ)^{−n}/(n(n+1))` for every
+`t ≥ 0` (`Hkr_le_chernoff`, `theoremA_fin_chernoff`); and the last display with `C_m`, at one instance
+that does not depend on `t` (`theoremA_fin_Cm`).  All of it also for sites indexed by any finite group
+acting on itself by translation (`theoremA_group…`), of which the cyclic shifts of `{0,1}ⁿ` are the case
+`Fin n`.
+(6) **Lemma A16.5:** workstream R8 had already machine-checked the algebraic core that the brief lists
 ((a)–(d)); I did not redo it.  I added the step R8's report names as missing — **the rearrangement step
 with Harper's theorem as an explicit hypothesis** — and with it **Lemma A16.5 itself, conditional on
 Harper's inequality and on the level** (`A16.lemmaA16_5_of_harper`), plus concavity of `f_η`, the
 maximiser for every level (hills included) and the case `η = 0`.
-(6) **Proposition A1.1, items 1 and 2, are [V]**: item 1 as `condMarg_mem_window`; item 2 —
+(7) **Proposition A1.1, items 1 and 2, are [V]**: item 1 as `condMarg_mem_window`; item 2 —
 `KL(ν_ψ ‖ Bern(r)ⁿ) ≤ n·max{KL(a₀‖r), KL(a₁‖r)}`, equality at the two cones, and "this is the supremum
 over the class" — as `Chain.a1_item2_lip`, `Chain.a1_item2_cone0/1`, `Chain.a1_item2_isGreatest`, on top
 of workstream L2's general chain rule.
@@ -66,11 +73,12 @@ the open one **[V]** (`no_compensation_at_upper_end`, `no_compensation_at_lower_
 the open window" are [V] too).  (F2) In Theorem A the proof gives `1 + b ≤ β`, not just `b ≤ β`, so the
 accuracy threshold improves from `ln(1 + (e^r − 1)/(1 + β))` to `ln(1 + (e^r − 1)/β)` **[V]**
 (`theoremA_group_sharp`).  (F3) The hypotheses `u > 0`, `n ≥ 2`, `1 ≤ k ≤ n − 1` of Theorem A are
-redundant (they follow from `|γ| ≤ u`, `r > 0`, `k ≤ n` and `(e^r − 1)ω_m > 1`); `r > 0` and `k ≤ n` are
-not.  (F4) In the last step of the proof of Theorem A ("`η ↓ 0`") the instance `ψ₀` depends on `η`, so
-a limit does not give a bound at one instance; the displayed bound is nevertheless true as stated,
-because the constant `C_m` has slack and one fixed small `η` suffices **[P, mine; not formalised]**.
-In Lemma A16.5 the plateau needs only `φ(t_pl) ≥ 0`, not `= 0` **[V]**.
+redundant for its first two displays (they follow from `|γ| ≤ u`, `r > 0`, `k ≤ n` and
+`(e^r − 1)ω_m > 1`); `r > 0` and `k ≤ n` are not.  (F4) In the last step of the proof of Theorem A
+("`r = ln(1 + max{…}) + η`, `η ↓ 0`") the instance `ψ₀` depends on `η`, so the limit does not give the
+displayed bound at one instance; the display is nevertheless true as stated, with the explicit depth
+`e^r = C_m e^ε` **[V]** (`theoremA_fin_Cm`).  In Lemma A16.5 the plateau needs only `φ(t_pl) ≥ 0`, not
+`= 0` **[V]**.
 
 ## 2. Statements
 
@@ -78,16 +86,39 @@ In Lemma A16.5 the plateau needs only `φ(t_pl) ≥ 0`, not `= 0` **[V]**.
 
 | file | lines | theorems | imports | content |
 |---|---|---|---|---|
-| `Compensation.lean` | 1 616 | 101 | **Mathlib only** | the cone `𝒲_u` and the class `L_u`; Lemma 3 (i), (ii) complete; Lemma 0 (window), also for conditional laws (A1.1 item 1); Lemma 2 |
-| `TheoremA.lean` | 2 427 | 137 | Mathlib + `proofs.Frontiers.QueryLowerBound` (theory division, read-only: `MetricChain.QueryAlgorithm`, `MetricChain.expected_queries_ge_packing`) | Parts 1–6 = `Compensation.lean` verbatim; Part 7: Lemma 1 (a); Part 8: the family of alternatives; Part 9: Theorem A |
+| `Compensation.lean` | 1 825 | 106 | **Mathlib only** | the cone `𝒲_u` and the class `L_u`; Lemma 3 (i), (ii) and its Remark (1); Lemma 0 complete, also for conditional laws (A1.1 item 1); Lemma 2 |
+| `TheoremA.lean` | 3 362 | 166 | Mathlib + the theory division's `proofs.Frontiers.QueryLowerBound` and `proofs.Frontiers.NonAdaptive` (read-only: `MetricChain.QueryAlgorithm`, `expected_queries_ge_packing`, `nonadaptive_expected_queries_ge`) | Parts 1–6 = `Compensation.lean` verbatim; Part 7: Lemma 1 (a), (b); Part 8: the family of alternatives; Part 9: Theorem A, first display; Part 10: Chernoff form; Part 11: last display |
 | `A16Rearrangement.lean` | 344 | 22 | **Mathlib only** | Part 0 = the needed declarations of R8's `A16Core.lean`, verbatim; Part 1 (new): rearrangement, Lemma A16.5 given Harper |
 | `ChainRuleCube.lean` | 655 | 34 | **Mathlib only** | Part 0 = L2's chain rule (`ws_L2/Window.lean`, lines 69–93, 421–757), verbatim; Part 1 (new): A1.1 item 2 |
+
+**Paper statement → Lean declaration** (details and differences in §2.2–§2.8):
+
+| paper statement | headline declaration(s) | file |
+|---|---|---|
+| SF §2.0: `ψ ∈ L_u ⟺ e^{−ψ} ∈ 𝒲_u`; `𝒲_u` closed under `+`, positive multiples, max, min | `lipH_iff_inCone`; `InCone.add`, `InCone.smul`, `inCone_max`, `inCone_min` | `Compensation` |
+| Lemma 0, window | `lemma0_window_lipH` (`window_of_site_odds_nonneg`) | `Compensation` |
+| Lemma 0, additive instances fill the window | `lemma0_additive_fill` | `Compensation` |
+| Lemma 0, rigidity at a cone | `lemma0_rigidity_lipH` | `Compensation` |
+| Lemma 1 (a) | `lemma1a` (`lemma1a_weighted`, `lemma1a_div`, `oracle_packing_weights`) | `TheoremA` |
+| Lemma 1 (b) | `lemma1b` (`lemma1b_weighted`) | `TheoremA` |
+| Lemma 2, `e^r − 1 ≤ E_{k,r} ≤ e^r` | `lemma2_mass` (`excess_mass_bounds`) | `Compensation` |
+| Lemma 2, `|c_{k,r} − c₀(k/n)| ≤ 1/(e^r − 1)` | `lemma2_dens`, `densW_coneW` (`excess_mean_bound`; site by site: `lemma2_site`) | `Compensation` |
+| Lemma 2, "depend on `(k,r)` only"; the dip is in the class; `D_{s,r}` | `massW_densW_dipW_of_wt_eq`; `baseW_add_dipW_inCone`; `dipW_pos_iff` | `TheoremA`; `Compensation`; `TheoremA` |
+| Lemma 3 (i) | `lemma3_i` (`margW_eq_densW`, `margW_add`) | `Compensation` |
+| Lemma 3 (ii) | `lemma3_compensation`, `lemma3_compensation_bernoulli` (`oneW_compensated`, `massW_compensated`) | `Compensation` |
+| Lemma 3, Remark (1) | `window_of_equal_marginals`, `lemma3_compensation_exists`, `no_compensation_at_upper_end`, `no_compensation_at_lower_end` | `Compensation` |
+| Theorem A, first display | `theoremA_fin` (`theoremA_group_sharp`, `theoremA_group`, `theoremA_group_div`) | `TheoremA` |
+| Theorem A, second display (`ρ_t`) | `Hkr_le_chernoff`, `theoremA_fin_chernoff` (`binomial_mode_bound`, `card_wt_eq`) | `TheoremA` |
+| Theorem A, last display (`C_m`) | `theoremA_fin_Cm` (`theoremA_group_Cm`) | `TheoremA` |
+| Lemma A16.5, given Harper's theorem and the level | `A16.lemmaA16_5_of_harper` (`A16.sum_comp_le_of_card_le`, `A16.tail_of_harper`, `A16.F_eq_clip`, `A16.f_concaveOn`) | `A16Rearrangement` |
+| Proposition A1.1, item 1 | `condMarg_mem_window_lipH` | `Compensation` |
+| Proposition A1.1, item 2 | `Chain.a1_item2_lip`, `Chain.a1_item2_cone0`, `Chain.a1_item2_cone1`, `Chain.a1_item2_isGreatest` | `ChainRuleCube` |
 
 The files of `experiments/science/` are not in the lake library and cannot import each other; this is
 why two files repeat earlier material (L1 and L2 did the same).  `TheoremA.lean` is *generated* by
 `assemble.py` from `parts/TheoremA_head.txt`, the body of `Compensation.lean` and
 `parts/TheoremA_tail.txt`, so the repeated part is literally the same text.  The theory division's
-`.olean` for `proofs.Frontiers.QueryLowerBound` was already on disk; I did not rebuild it.  The
+`.olean` files for `proofs.Frontiers.QueryLowerBound` and `NonAdaptive` were already on disk; I did not rebuild them.  The
 `#print axioms` lines cover it (axioms are tracked through imports).
 
 ### 2.1 Definitions
@@ -122,6 +153,8 @@ used.
 | `o(ψ)` | `oracle1 π ψ` | `fun i => margW π (fun x => e^{−ψ x}) i` |
 | `ω, ω_m, κ, β` | `omegaW p u`, `omegaM p u k n`, `kappaA p u r k n`, `betaA p u r k n` | `p₊ − p₋`; `ω·min(k/n, 1 − k/n)`; `ω_m − 1/(e^r − 1)`; `ω/κ` |
 | `H_{k,r}` | `Hkr ι p u γ r k` | `(max_x #{s : wt s = k ∧ 0 < dipW p u γ r s x}) / #{s : wt s = k}` |
+| `ρ_t(m;γ)` | `rhoT p u γ t m` | `max_{a∈{1,0}} [(1 − m)·ratioS p u γ false a ^ t + m·ratioS p u γ true a ^ t]` (real powers), `ratioS p u γ b a = π_b(a)/π_γ(a)`, `π_0 = Bern(p₋)`, `π_1 = Bern(p₊)` |
+| `C_m` | `CmA p u k n` | `1 + 2/min(k/n, 1 − k/n) + 2/ω_m` |
 | `μ_w(x_i = 1 ∣ x_P = y_P)` | `condMarg π w P y i` | `margW (cylRef π P y) w i`, `cylRef π P y x = if ∀ j ∈ P, x j = y j then π x else 0` (`condMarg_eq` **[V]**: it is the ratio of the two cylinder masses) |
 
 **A design decision that shortens everything:** an additive instance with *site-dependent* fields has
@@ -203,7 +236,7 @@ site, with no sign condition and no invariance:
 and `massW_compensated`: `A(w₀) = A_w(p₂ − c_w)/(p₂ − c_Δ)`.
 
 **Remark (1) of the paper** ("compensation by class members is possible iff `c_Δ ∈ [p₋, p₊]`; always
-possible in the open window"), as three theorems **[V]**:
+possible in the open window"), as four theorems **[V]**:
 `window_of_equal_marginals` (only if: equal marginals of `w₀` and `w₀ + Δ` force the marginal of `Δ`
 into the window), `lemma3_compensation_exists` (if `p₋ < c_Δ < p₊`: some `γ₂ ∈ {−u, +u}` and `b ≥ 0`
 work; `b = 0` when `c_Δ = c_w`), and `no_compensation_at_upper_end`, `no_compensation_at_lower_end` (at
@@ -240,7 +273,17 @@ instances fill `[p₋, p₊]`.  If all `n` marginals are at ends of the window, 
 non-negative reference weight `π` with `π(x^{i←1})·(1 − p) = π(x^{i←0})·p` and positive mass.
 `lemma0_additive_fill`: for `u ≥ 0` and every `c ∈ [p₋, p₊]` there is `γ ∈ [−u, u]` such that `w̃_γ` is in
 the class and has all marginals equal to `c` (intermediate value theorem; `pTilt_anti`,
-`pTilt_strictAnti`: `γ ↦ p_γ` is decreasing).
+`pTilt_strictAnti`: `γ ↦ p_γ` is decreasing).  The third sentence:
+
+    theorem lemma0_rigidity_lipH {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {ψ : (ι → Bool) → ℝ}
+        (hψ : LipH u ψ) (s : ι → Bool)
+        (h : ∀ i, margW (refW p) (fun x => Real.exp (-ψ x)) i =
+          if s i = true then pTilt p (-u) else pTilt p u) :
+        ∀ x, ψ x = ψ s + u * (hammingDist x s : ℝ)
+
+(`lemma0_rigidity` in the weights: `w = w(s)·e^{−u·d_H(·,s)}`; through `flip_eq_of_marg_eq_upper`,
+`flip_eq_of_marg_eq_lower`: a marginal at an end of the window forces every flip at that site to
+change the weight by exactly `e^{±u}` — a sum of non-negative terms that vanishes.)
 
 **Proposition A1.1, item 1** (paper: "for every order of the coordinates and every prefix,
 `ν_ψ(y_i = 1 | y_{<i}) ∈ [a₀, a₁]`", `a₀ = p₋`, `a₁ = p₊`):
@@ -255,9 +298,10 @@ order and every prefix" (`P` = the sites before `i`) and Lemma 0 (`P = ∅`).  (
 workstream L2: `ScienceL2.condLaw_mem_window` (`ws_L2/Window.lean`) is the same statement for arbitrary
 finite alphabets in "window" form `π(a)p(b) ≤ e^{d(a,b)}π(b)p(a)`; the present theorem is its two-letter
 case with the window written as the interval `[p₋, p₊]`, proved directly (bijection `x ↦ x⁽ⁱ⁾`
-between `{x_i = 0}` and `{x_i = 1}`), not derived from L2's file, which cannot be imported.  (3) The
-third sentence of Lemma 0 (rigidity at a cone) is **not formalised**.  (4) No sign condition on `u` in
-the window statements (for `u < 0` and `n ≥ 1` the class is empty).
+between `{x_i = 0}` and `{x_i = 1}`), not derived from L2's file, which cannot be imported.  (3) Rigidity
+is stated with the constant made explicit (`ψ = ψ(s) + u·d(·,s)`); the remark "one evaluation certifies
+`ln A` exactly" is not a separate formal statement.  (4) No sign condition on `u` in the window and
+rigidity statements (for `u < 0` and `n ≥ 1` the class is empty).
 
 ### 2.5 Lemma 2 (the excess of a dip is the cone law) [V]
 
@@ -291,7 +335,7 @@ bound.  (3) **Stronger than the paper:** `lemma2_site` — every one-body margin
 excess is within `1/(e^r − 1)` of the corresponding marginal `π_{s_i}(1)` of the cone law, site by
 site.  (4) "Depend on `(k,r)` only" is stated as equality for two centres of equal weight.
 
-### 2.6 Lemma 1 (a) (indistinguishability with an oracle) [V]
+### 2.6 Lemma 1 (indistinguishability with an oracle), (a) and (b) [V]
 
 **Paper.**  `ψ₀, ψ_j ∈ L_u` with `o(ψ_j) = o(ψ₀)`, `|ln A(ψ_j) − ln A(ψ₀)| > ε`, `D_j = {ψ_j ≠ ψ₀}`.  Every
 `(ε/2, δ)`-correct oracle algorithm makes on `ψ₀` at least `(1 − 2δ)·|J| / max_x #{j : x ∈ D_j}`
@@ -329,8 +373,13 @@ query set and an output for every instance, consistent on instances that agree o
 class that contains every decision tree) indexed by a seed `ω` of a **finite** probability space
 `(Ω, P)` and by the oracle's answer; on `g` it runs `alg ω (O g)`.  Randomness with infinitely many
 seeds is not covered (as in L1 and the theory division).  (3) Division-free conclusion; `B` is any
-bound on the multiplicities, not necessarily their maximum.  (4) Lemma 1 (b) (non-adaptive) is not
-formalised (not asked).
+bound on the multiplicities, not necessarily their maximum.  (4) **Lemma 1 (b)** (paper: pairs
+`(ψ_j, ψ′_j)` in `L_u`, all `2|J|` instances with the same oracle answer, `|ln A(ψ_j) − ln A(ψ′_j)| > ε`;
+every non-adaptive `(ε/2, δ)`-correct oracle algorithm makes at least
+`(1 − 2δ)|J|/max_x #{j : x ∈ D_j}` evaluations in expectation) is `lemma1b` (`lemma1b_weighted`), from
+`MetricChain.nonadaptive_expected_queries_ge` in the same way: "non-adaptive" is
+`∀ ω o g, (alg ω o).queries g = Q ω o`; the common answer is a parameter `o₀`; the conclusion is
+`(1 − 2δ)·|J| ≤ (Σ_ω P ω·|Q ω o₀|)·B`.  It was not asked for and is not used in Theorem A.
 
 ### 2.7 Theorem A (every `n`; adaptive algorithms with an exact one-body oracle) [V]
 
@@ -365,7 +414,51 @@ translation, `n = |ι|`; conclusion in the division-free form `1 − 2δ ≤ E|Q
 larger threshold `ε < ln(1 + (e^r − 1)/β)`; the other three are corollaries of it); `Hkr_pos`
 (`H_{k,r} > 0`, so the division is legitimate).
 
-**How it is assembled** (all in `TheoremA.lean`; nothing is assumed).
+**The second display** (paper: "`(1 − 2δ)/(n·H_{k,r}) ≥ (1 − 2δ)·e^{−tr}·ρ_t(k/n;γ)^{−n}/(n(n+1))` for
+every `t ≥ 0`") — Part 10:
+
+    theorem Hkr_le_chernoff {p u γ r t : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (ht : 0 ≤ t) {k : ℕ}
+        (hk0 : 0 < k) (hkn : k < Fintype.card ι) :
+        Hkr ι p u γ r k ≤ ((Fintype.card ι : ℝ) + 1) *
+          (Real.exp (t * r) * rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι)
+
+and `theoremA_fin_chernoff` / `theoremA_group_chernoff`: under the hypotheses of `theoremA_fin`, with
+the same `γ₂`, `b`, `ψ₀`, for every `t ≥ 0`:
+`1 − 2δ ≤ E|Q(ψ₀)| · (n · ((n + 1) · (e^{t·r} · ρ_t(k/n;γ)ⁿ)))`.
+Ingredients **[V]**: `one_le_of_dipW_pos` (Markov with real powers: `x ∈ D_{s,r}` ⇒
+`1 ≤ e^{tr}∏_i (π_{s_i}(x_i)/π_γ(x_i))^t`), `dipCount_mul_le` (sum over all centres with the weights
+`Bern(m)^{⊗n}` by `sum_prodW`; each factor is at most `ρ_t`), `refW_eq_pow`
+(`Bern(m)^{⊗n}(s) = m^{|s|}(1 − m)^{n−|s|}`), `card_wt_eq` (`|T_j| = C(n,j)`), and
+**`binomial_mode_bound`**: `1 ≤ (n + 1)·C(n,k)·(k/n)^k·(1 − k/n)^{n−k}` for `0 < k < n`, from `add_pow`
+and `binomPmf_le_mode` (the binomial weights with parameter `k/n` increase up to `j = k` and decrease
+afterwards: `binomPmf_step`, `binomPmf_le_succ`, `binomPmf_succ_le`).
+
+**The last display** (paper: "for every `ε > 0` and `0 ≤ t ≤ 1`, choosing `r` suitably,
+`E|Q(ψ₀)| ≥ (1 − 2δ)·e^{−tε}·ρ_t(k/n;γ)^{−n}/(C_m·n(n+1))`, `C_m := 1 + 2/m̲ + 2/ω_m`") — Part 11:
+
+    theorem theoremA_fin_Cm {n : ℕ} [NeZero n] {p u γ ε : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+        (hu : 0 < u) (hγ : |γ| ≤ u) (hε : 0 ≤ ε) {k : ℕ} (hk0 : 0 < k) (hkn : k < n) :
+        ∃ γ₂ : ℝ, (γ₂ = -u ∨ γ₂ = u) ∧ ∃ b : ℝ, 0 ≤ b ∧
+          b ≤ 2 / min ((k : ℝ) / n) (1 - (k : ℝ) / n) ∧
+          LipH u (fun x : Fin n → Bool => -Real.log (baseW p γ x + b * baseW p γ₂ x)) ∧
+          ∀ (Ω : Type v) [Fintype Ω]
+            (alg : Ω → (Fin n → ℝ) → MetricChain.QueryAlgorithm (Fin n → Bool)) (P : Ω → ℝ),
+            (∀ ω, 0 ≤ P ω) → ∑ ω, P ω = 1 → ∀ δ : ℝ,
+            (∀ ψ : (Fin n → Bool) → ℝ, LipH u ψ → 1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+              |(alg ω (oracle1 (refW p) ψ)).output ψ - logA (refW p) ψ| ≤ ε / 2), P ω) →
+            ∀ t : ℝ, 0 ≤ t → t ≤ 1 →
+            1 - 2 * δ ≤
+              (∑ ω, P ω * (((alg ω (oracle1 (refW p)
+                  fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x))).queries
+                  fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x)).card : ℝ)) *
+                ((n : ℝ) * (((n : ℝ) + 1) *
+                  (CmA p u k n * (Real.exp (t * ε) * rhoT p u γ t ((k : ℝ) / n) ^ n))))
+
+proved with the explicit depth `r = ln C_m + ε`: then `e^r − 1 ≥ 2/m̲ + 2/ω_m`, so `(e^r − 1)ω_m > 2`,
+`κ > ω_m/2`, `β < 2/m̲`; `C_m e^ε − 1 ≥ (1 + 2/m̲)(e^ε − 1)` gives `ε < ln(1 + (e^r − 1)/(1 + β))`; and
+`e^{tr} = C_m^t e^{tε} ≤ C_m e^{tε}` for `t ≤ 1`.  The instance `ψ₀` depends on `ε` and not on `t`.
+
+**How the first display is assembled** (all in `TheoremA.lean`; nothing is assumed).
 (a) Family: `barW p u γ r s` (the translation average of the dip at `s`), `s ∈ T_k`.
 `baseW_add_barW_inCone`: `w̃_γ + Δ̄_s ∈ 𝒲_u` (an average of `n` dips: `InCone.sum`, `InCone.smul`,
 `baseW_add_dipW_inCone`).  `barW_invariant`: invariance under the translations (`barW_shift`, by
@@ -396,12 +489,20 @@ larger threshold `ε < ln(1 + (e^r − 1)/β)`; the other three are corollaries 
    algorithm may depend on `ψ₀`).
 5. `ε`, `δ` are arbitrary reals (for `δ ≥ ½` the bound is vacuous).
 6. `H_{k,r}` is defined by counting: the maximum over `x` of `#{s : |s| = k, Δ_{s,r}(x) > 0}`, divided by
-   `|T_k|`; `|T_k| = C(n,k)` is not used and not proved.
-7. **Not formalised:** the second inequality of the display,
-   `(1 − 2δ)/(n·H_{k,r}) ≥ (1 − 2δ)·e^{−tr}·ρ_t(k/n;γ)^{−n}/(n(n+1))`, and the "in particular" with
-   `C_m` (optional in the brief).  Corollary A is outside the brief.
-8. The proof does not call `lemma3_compensation`; it uses the same linear equation through
+   `|T_k|` (`|T_k| = C(n,k)`: `card_wt_eq`).
+7. *Second display.*  Stated division-free, `1 − 2δ ≤ E|Q(ψ₀)|·n(n+1)·e^{tr}·ρ_t(k/n;γ)ⁿ`; the powers
+   `(·)^t` are real powers (`Real.rpow`) of positive numbers, `(·)ⁿ` a natural power.  The paper's chain
+   "`(1 − 2δ)/(nH) ≥ (1 − 2δ)e^{−tr}ρ^{−n}/(n(n+1))`" presupposes `1 − 2δ ≥ 0`; the formal statement does
+   not need it.  `Hkr_le_chernoff` needs `0 < k < n`, which in `theoremA_fin_chernoff` is derived from
+   the hypotheses.
+8. *Last display.*  `ε ≥ 0` instead of `ε > 0`; `u > 0` and `0 < k < n` are hypotheses here (the
+   condition `(e^r − 1)ω_m > 1`, from which they followed, is now a conclusion about the chosen `r`);
+   the depth is `r = ln C_m + ε`, not the paper's `ln(1 + max{2/ω_m, (1 + 2/m̲)(e^ε − 1)}) + η`
+   (finding F4); `b ≤ 2/m̲` is part of the statement.
+9. The proof does not call `lemma3_compensation`; it uses the same linear equation through
    `exists_compensator`, because the case `c_{k,r} = p_γ` needs `b = 0`.
+10. Corollary A (the exponent `R^max`) is outside the brief and not formalised: it needs the
+   single-letter optimisation (`F*`, the saddle) of the theory report on top of `theoremA_fin_Cm`.
 
 ### 2.8 Items 5 and 6
 
@@ -477,16 +578,17 @@ F1. **Remark (1) after Lemma 3: the window must be open.**  "Compensation by cla
 F2. **Theorem A: `1 + b ≤ β`.**  In both cases of the proof `1 + b = (p₊ − p_γ)/(p₊ − c)` resp.
     `(p_γ − p₋)/(c − p₋)`, which is `≤ ω/κ`.  So `b ≤ β − 1`, and the hypothesis on the accuracy can be
     weakened to `ε < ln(1 + (e^r − 1)/β)` **[V]** (`exists_compensator`, `theoremA_group_sharp`).
-F3. **Theorem A: redundant hypotheses.**  `u > 0` follows from `(e^r − 1)ω_m > 1` (and `u ≥ 0` from
-    `|γ| ≤ u`); `1 ≤ k ≤ n − 1` and `n ≥ 2` follow from `(e^r − 1)ω_m > 1`, `r > 0`, `k ≤ n`.  `r > 0`
+F3. **Theorem A: redundant hypotheses (first two displays).**  `u > 0` follows from
+    `(e^r − 1)ω_m > 1` (and `u ≥ 0` from `|γ| ≤ u`); `1 ≤ k ≤ n − 1` and `n ≥ 2` follow from `(e^r − 1)ω_m > 1`, `r > 0`, `k ≤ n`.  `r > 0`
     and `k ≤ n` cannot be dropped from the formal statement: with `k > n` one has `ω_m < 0` and
     `(e^r − 1)ω_m > 1` is satisfiable by `r < 0`, while `T_k = ∅`.
-F4. **Theorem A, last display, "`η ↓ 0`"** **[P, mine; not formalised].**  With
+F4. **Theorem A, last display, "`η ↓ 0`".**  With
     `r = ln(1 + max{2/ω_m, (1 + 2/m̲)(e^ε − 1)}) + η` the instance `ψ₀` (through `b`, `γ₂`) depends on
-    `η`, so letting `η ↓ 0` does not produce one instance with the limiting bound.  No limit is needed:
-    `1 + max{…} ≤ (1 + 2/m̲)e^ε + 2/ω_m − 2/m̲`, which is smaller than `C_m e^ε` by
-    `(2/ω_m)(e^ε − 1) + 2/m̲ > 0`, so any fixed `η` with `e^η ≤ C_m e^ε/((1 + 2/m̲)e^ε + 2/ω_m − 2/m̲)`
-    gives `e^{tr} ≤ C_m e^{tε}` for `0 ≤ t ≤ 1`.  The display is true as stated.
+    `η`, and what the proof shows for each `η > 0` is the bound with an extra factor `e^{−tη}` at the
+    instance `ψ₀^{(η)}`; letting `η ↓ 0` does not produce one instance with the displayed bound.  No
+    limit is needed: the explicit depth `e^r = C_m e^ε` satisfies all three requirements, and the
+    display holds at one instance, for all `t ∈ [0,1]` simultaneously **[V]** (`theoremA_group_Cm`,
+    `theoremA_fin_Cm`).
 F5. **Lemma 2 gives a closed interval.**  The proof of Theorem A says `c_{k,r} ∈ (p₋ + κ, p₊ − κ)`;
     Lemma 2 as stated (with `≤`) gives the closed interval, which is what is used and formalised.
 F6. **Lemma 3 (i) does not need the cone; the linear equation needs neither signs nor invariance**
@@ -499,7 +601,7 @@ F9. **Model of an algorithm** (Lemma 1 (a), Theorem A): finite seed space; the t
 
 ## 3. Numerics
 
-`experiments/science/ws_L3/sanity_numerics.py` (own code; fixed seed; about 7 s; output in
+`experiments/science/ws_L3/sanity_numerics.py` (own code; fixed seed; about 10 s; output in
 `sanity_numerics_output.txt`).  Purpose: to try to falsify the **formal statements with their
 generalised hypotheses** before proving them.  Nothing below is evidence for a theorem — the theorems
 are proved.  All **[N]**:
@@ -513,6 +615,7 @@ are proved.  All **[N]**:
 | S4 Lemma 2, abstract | 20 000 random pairs of probability vectors, random `f ∈ [0,1]` | never violated (slack `≥ 3.6e−2` in the density bound) |
 | S5 every finite ingredient of Theorem A | 184 parameter sets, the 7 site groups above, `p ∈ {0.1, 0.3, 0.5, 0.7}`, `u ∈ {1, 1.5, 2, 3}`, all `1 ≤ k < n`, two depths | all assertions pass: one `(E, c)` per `T_k`; Lemma 2; `c ∈ [p₋+κ, p₊−κ]`; `0 ≤ b ≤ β`; `w₀`, `w₁^{(s)}` in the cone; all marginals equal `c` (`< 1e−9`); gap `≥ ln(1 + (e^r−1)/(1+β))`; counting bound |
 | S6 A16.5, the new pieces | 20 000 cases | identity (a) `3.8e−15`; concavity never violated; `f` on a grid never exceeds `f` at the clipped level, for all `t* > 0` (`5.7e−16`); rearrangement on 20 000 dominated pairs: never violated (`3.6e−15`) |
+| S8 Chernoff form of Theorem A | `n = 2 … 8`, 4 parameter sets, all `1 ≤ k < n`, 3 depths, `t ∈ {0, ¼, ½, 1, 2}`: 1 680 cases; exhaustive | `H_{k,r} − (n+1)e^{tr}ρ_tⁿ` never positive (the bound is very slack at these sizes); binomial mode bound holds |
 | S7 A1.1 items 1–2 | 300 random members, `n ≤ 5`, all sites, **all** conditioning sets | item 1: worst violation `3.3e−16`; item 2: `max(KL − n·R(r)) = 4.4e−16`; equality at the two cones to `3.6e−15` |
 
 For small `n` the bound of Theorem A is weak (in S5 a point typically lies in the support of every
@@ -529,56 +632,62 @@ This workstream formalises statements of other workstreams; it makes no novelty 
 configurations with the same number of ones differ by a site permutation"), `Fintype.equivOfCardEq`,
 `Fintype.card_subtype`, `Equiv.sum_comp`, `Equiv.prod_comp`, `Fintype.sum_equiv`,
 `Finset.exists_subset_card_eq`, `Finset.card_biUnion_le`, `intermediate_value_Icc'`,
-`Real.convexOn_mul_log`, `Finset.sum_range_sub`, `hammingDist_eq_zero`.  `Fin n` has an `AddCommGroup`
+`Real.convexOn_mul_log`, `Finset.sum_range_sub`, `hammingDist_eq_zero`; for the Chernoff form:
+`Real.one_le_rpow`, `Real.mul_rpow`, `Real.exp_mul`, `Real.finsetProd_rpow`, `add_pow`,
+`Nat.choose_succ_right_eq`, `Finset.card_powersetCard`, `Finset.prod_ite`.  I did not find (and did not
+search the library for) a ready-made statement that the binomial weights are largest at the mode;
+`binomPmf_le_mode` is proved here by the ratio of consecutive terms.  `Fin n` has an `AddCommGroup`
 instance for `[NeZero n]` (checked with `inferInstance`).
 Read in full: `SF_REPORT.md` §1–§2.4; `ws_L1/MarginalOracle.lean` (to line 920);
 `proofs/Frontiers/QueryLowerBound.lean` lines 97–300; `ws_L2/Window.lean` lines 1–760;
-`ws_R8/A16Core.lean`; addendum A16 part (c) (Lemma A16.5); `R8_REPORT.md` §2.4 and §7; `A1_REPORT.md`
-§2.5; `L2_REPORT.md` §1–§2.7.
+`ws_R8/A16Core.lean`; addendum A16 part (c) (Lemma A16.5); `R8_REPORT.md` §2.4 and request T-R8-1 of
+§7; `A1_REPORT.md` §2.5; `L2_REPORT.md` §1, §2.1, §2.6–§7; `proofs/Frontiers/NonAdaptive.lean`
+lines 37–72.
 
 ## 5. Not done, and why
 
-* **Theorem A, the Chernoff form** `H_{k,r} ≤ (n+1)·e^{tr}·ρ_t(k/n;γ)ⁿ` and the "in particular" with `C_m`
-  (optional in the brief).  What it needs beyond this work: `|T_k| = C(n,k)`, "the binomial pmf with
-  parameter `k/n` is largest at `k`" (so that `Unif(T_k)` is `Bern(k/n)^{⊗n}` conditioned on an event of
-  probability `≥ 1/(n+1)`), a Markov step with real powers; the product-sum identity is already here
-  (`sum_prodW`).  Finding F4 would be the place to start for the last display.
-* **Lemma 0, third sentence** (if all marginals are at ends of the window, `ψ` is a cone up to a
-  constant).
-* **Lemma 1 (b), Theorem B, Corollaries A, B, §2.5–§2.7 of the SF report** (not asked).
+* **Corollaries A and B, Theorem B, §2.3–§2.7 of the SF report** — outside the brief.  Corollary A needs
+  the single-letter optimisation of the theory report on top of `theoremA_fin_Cm`; Theorem B needs the
+  theory division's truncated cones.  (Lemma 1 (b), which Theorem B uses, is done.)
 * **Lemma A16.5:** Harper's theorem itself, existence and uniqueness of the level `c*`
-  (`dU/dc = −μ(P)(1 + c + U)`), membership of the plateau in the class, the sub-case "sizes that are
-  not ball sizes" (it is the same theorem with another `ρ'`), Remark (4).
-* **Proposition A1.1:** items 3 and 4; the capacity reading of `a`.
-* The theory division's `proofs/Frontiers/QueryLowerBound.lean` was imported as compiled; I did not
-  recompile it.
+  (`dU/dc = −μ(P)(1 + c + U)`), membership of the plateau in the class, Remark (4).  ("Sizes that are
+  not ball sizes" is the same theorem with another `ρ'`.)
+* **Proposition A1.1:** items 3 (Azuma–Hoeffding) and 4 (the truncation step); the capacity reading of
+  `a`.
+* The remark in Lemma 0 that at a cone "one evaluation certifies `ln A` exactly" is not a separate
+  formal statement (it is immediate from `lemma0_rigidity_lipH`).
+* The theory division's `proofs/Frontiers/QueryLowerBound.lean` and `NonAdaptive.lean` were imported
+  as compiled; I did not recompile them.
+* No statement here is about infinitely many seeds, about `n → ∞`, or about exponents; everything is
+  for fixed finite `n`.
 
 ## 6. Three next steps
 
-1. The Chernoff form of Theorem A (see §5) and then Corollary A, which needs only the single-letter
-   optimisation on top of it; with `theoremA_group_sharp` and finding F4 the last display can be
-   proved at one fixed instance.
-2. Theorem B (non-adaptive): Lemma 1 (b) is `MetricChain.nonadaptive_expected_queries_ge` restricted to
-   a common oracle answer exactly as Lemma 1 (a) is here; Lemma 3 is already in the generality needed
-   (`w = c̄_s^{tr}`, `Δ = c̄_s − c̄_s^{tr}`); what is missing is the cyclic average of the theory
-   division's truncated cones (`truncate_lipschitz_insert`, …) and the type-class counting.
-3. Lemma A16.5 unconditionally on the cube: Harper's theorem in the erosion form
-   `#{x : dist(x, Dᶜ) ≥ k} ≤ #{x : dist(x, D*ᶜ) ≥ k}`.  Mathlib has the Kruskal–Katona and
-   Harper-type material for set families (`Mathlib/Combinatorics/SetFamily/`); whether the vertex
-   isoperimetric inequality of the cube is there in a usable form was **not checked**.
+1. **Corollary A** (the adaptive exponent with the oracle is `R^max`): what remains after
+   `theoremA_fin_Cm` is the single-letter side — `ρ_{t*}(k/n;γ*)ⁿ ≤ e^{L}·e^{−nF*(t*)}` for
+   `k = round(m*n)` — i.e. the definitions of `F`, `F*`, the saddle and a Lipschitz bound for `ρ_t` in
+   `m`.  If the theory division has `F*` in Lean, this is a short file.
+2. **Theorem B (non-adaptive):** `lemma1b` and `lemma3_compensation` are already in the generality
+   needed (`w = c̄_s^{tr}`, `Δ = c̄_s − c̄_s^{tr}`); what is missing is the translation average of the
+   theory division's truncated cones (`truncate_lipschitz_insert`, …) and the type-class counting.
+3. **Lemma A16.5 unconditionally on the cube:** Harper's theorem in the erosion form
+   `#{x : dist(x, Dᶜ) ≥ k} ≤ #{x : dist(x, D*ᶜ) ≥ k}`.  Mathlib has Kruskal–Katona and related
+   material under `Mathlib/Combinatorics/SetFamily/`; whether the vertex isoperimetric inequality of the
+   cube is there in a usable form was **not checked**.
 
 ## 7. Requests
 
 **To the theory division.**
 (a) `experiments/science/ws_L3/Compensation.lean` depends on Mathlib only and can be moved under
-`proofs/` as it is; `TheoremA.lean` then reduces to its Parts 7–9 (`parts/TheoremA_tail.txt`) with
-`import` of the first file and of `proofs.Frontiers.QueryLowerBound`.  If Proposition 11.109 is
-rewritten on the strength of workstream F: the formal Theorem A is `ScienceL3.theoremA_fin`; its
-sharper form (`theoremA_group_sharp`, finding F2) and the redundancy of three hypotheses (F3) may be
-worth carrying over; Remark (1) of Lemma 3 should say "open window" (F1).
-(b) `ScienceL3.lemma1a` is `expected_queries_ge_packing` with an oracle; the non-adaptive analogue from
-`nonadaptive_expected_queries_ge` is the same three lines.  If you add an oracle-indexed algorithm to
-`QueryLowerBound.lean`, these two statements are the natural interface.
+`proofs/` as it is; `TheoremA.lean` then reduces to its Parts 7–11 (`parts/TheoremA_tail.txt`) with
+`import` of the first file and of `proofs.Frontiers.QueryLowerBound`, `proofs.Frontiers.NonAdaptive`.  If Proposition 11.109 is
+rewritten on the strength of workstream F: the formal Theorem A is `ScienceL3.theoremA_fin` (first
+display), `theoremA_fin_chernoff` (second) and `theoremA_fin_Cm` (last); the sharper form
+(`theoremA_group_sharp`, finding F2), the redundancy of three hypotheses (F3) and the explicit depth
+`e^r = C_m e^ε` (F4) may be worth carrying over; Remark (1) of Lemma 3 should say "open window" (F1).
+(b) `ScienceL3.lemma1a` and `ScienceL3.lemma1b` are `expected_queries_ge_packing` and
+`nonadaptive_expected_queries_ge` with an oracle (three lines each).  If you add an oracle-indexed
+algorithm to `QueryLowerBound.lean`, these two statements are the natural interface.
 (c) (from R8's T-R8-1) the rearrangement step is now formal: `ScienceL3.A16.sum_comp_le_of_card_le`;
 with Harper's theorem in the erosion form as a Lean statement, `A16.lemmaA16_5_of_harper` gives Lemma
 A16.5 for every support.
@@ -588,15 +697,16 @@ A16.5 for every support.
 ## Appendix: how to re-compile; axioms
 
     export PATH="$HOME/.lean/lean-4.31.0-linux/bin:$PATH"; cd /home/user/MetricChain
-    lake env lean /home/user/MetricChain/experiments/science/ws_L3/Compensation.lean        # ~25 s
-    lake env lean /home/user/MetricChain/experiments/science/ws_L3/TheoremA.lean            # ~30 s
-    lake env lean /home/user/MetricChain/experiments/science/ws_L3/A16Rearrangement.lean    # ~15 s
-    lake env lean /home/user/MetricChain/experiments/science/ws_L3/ChainRuleCube.lean       # ~15 s
+    lake env lean /home/user/MetricChain/experiments/science/ws_L3/Compensation.lean        # 20-50 s
+    lake env lean /home/user/MetricChain/experiments/science/ws_L3/TheoremA.lean            # 50-180 s
+    lake env lean /home/user/MetricChain/experiments/science/ws_L3/A16Rearrangement.lean    # 15-35 s
+    lake env lean /home/user/MetricChain/experiments/science/ws_L3/ChainRuleCube.lean       # 15-45 s
     python3 experiments/science/ws_L3/assemble.py          # regenerates TheoremA.lean from its parts
     python3 experiments/science/ws_L3/sanity_numerics.py   # §3
 
 or `bash experiments/science/ws_L3/check_all.sh` (writes `check_log.txt`).  Each file ends with
-`#print axioms` for its headline theorems (33 + 23 + 8 + 11 lines); every line of the last run reads
+`#print axioms` for its headline theorems (35 + 32 + 8 + 11 = 86 lines); every line of the last run
+(`check_log.txt`, 2026-11-26 00:53–00:57 UTC: four exit codes 0, no warning) reads
 `… depends on axioms: [propext, Classical.choice, Quot.sound]`.
 
 | file | content |
