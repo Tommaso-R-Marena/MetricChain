@@ -150,7 +150,8 @@ alone.  Corrected in §2 (Level 3), §3(b) and §8 item 2.
 following were audited by nobody as statements: §§7–9 and 12 of the theory report;
 nineteen rows of §10 by row (G18, G20–G22, G24, G26, G27, G29–G40); the Scientific
 Discovery Division's Conjecture R10.3; and everything added to the report after the
-audits (Theorems 11.53a, 11.53b, Lemma 11.58b – Theorem 11.58d, §11.33, the remarks after
+audits (Theorems 11.53a, 11.53b, Lemma 11.58b – Theorem 11.58e — classified by the coordinator
+alone in §6a —, §11.33, the remarks after
 Theorems 11.32, 11.33 and in 11.116(e)).  Of its three questions (a product reference in
 the adaptive upper bounds — the antiferromagnetic Curie–Weiss known part; a two-sided
 tail estimate for the `p`-biased cube; site types growing with `n` and chains without
@@ -169,9 +170,11 @@ LEVEL 0  THE UNIFORM CUBE, one slope, no known part, exact evaluations, worst ca
          complete at the exponential scale:
            fixed samples: exponent θ_na; plain Monte Carlo optimal            11.44 [P], 11.45 [V core]
            adaptive without a hint = hinted: θ_hint (extensive accuracy) 11.54; h (bounded) 11.58  [P]
-           n·h − O(1) ≤ ln N ≤ n·h + O(√(n ln n))                             11.58a [P]
+           n·h − O(1) ≤ ln N ≤ n·h + O(n^(1/3) (ln n)^(2/3))                  11.58a(c), 11.58e [P]
+           at an accuracy g·n:  ln N ≤ n·θ_hint(g) + O((ln n)²)               11.58e(g) [P]
            rounds of adaptivity; k-body marginal oracle changes no exponent   11.84–11.87, 11.104 [P]
            k nested levels: exponent h + (2π²h²θ_hint″(0) + o(1))/k²          Theorem 11.53b [P, refereed internally]
+           certified upper bounds for that exponent at every k               11.58e(f) [P + interval arithmetic]
          the only level with an exact tail function (Harper) and a bounded-accuracy adaptive theorem
     |
     |  lost: exact isoperimetry (AA2 S1), every bounded-accuracy adaptive bound, the sub-exponential
@@ -405,7 +408,7 @@ The directive asks that these be named.
 | voxel enclosures in dimension `d` | cost grows like `d^{d/2}` | AA1, hierarchy L5 |
 | the abstract nesting theorem with a tail function that is valid but not sharp | ball-volume bound: exponent `0.197` for `0.029`; transport bound: the certified cap on the sample is `10^{14}`–`10^{24}` on the cubes of dimension 30 and 60 (runs may close much earlier, but below the threshold rate `u²/8` they do not close before the atom) | workstream N §4(e), corrected by its referee |
 | the nested adaptive algorithm at bounded accuracy (11.56, 11.58, 11.58a) | the `O(√(n ln n))` term has explicit but large constants; the sizes at which a certified separation from plain Monte Carlo is reported are those of §11.19, remarks (1a), (1b); the schedule of Theorem 11.58a itself costs more than the non-adaptive bound `n·a` up to `n ≈ 2·10⁴` at `u = 1` (our referee R12: `2.1·10⁴`; the science division's SCI-REV-0017: `2.04·10⁴`) | theory report §11.19 |
-| the rate theorem for `k` nested levels | asymptotic in `k`; no certified upper constants at finite `k` (exact lower bounds exist for the Gaussian pair) | `docs/workstreams/R_REPORT.md` §12 |
+| the rate theorem for `k` nested levels | asymptotic in `k`; exact lower bounds exist for the Gaussian pair; since Theorem 11.58e(f) there are certified *upper* bounds for the cube at every `k` computed (given two paper statements), which from `k = 3` on are not the exponents themselves | `docs/workstreams/R_REPORT.md` §12; theory report Theorem 11.58e |
 
 ## 6. New counterexamples and new positive facts found by the audits
 
@@ -444,6 +447,44 @@ its own before it opened ours (SCI-REV-0022 §1): correct.
   is redundant; a `K`-level lower bound valid for every failure probability below one
   (AA2).  These are recorded in the audit reports with their arguments and have **not**
   been refereed or integrated into the theory report.
+
+## 6a. Added after the audits: the finite-`n` bounds of Lemma 11.58b – Theorem 11.58e
+
+*The coordinator's classification (2026-11-26), in the same categories; not made by the
+independent readers of the two audits, and subject to the lesson of §1a: every P below
+names the statement or check that supports it.  Evidence in brackets.*
+
+| statement | assumption | category | evidence |
+|---|---|---|---|
+| Lemma 11.58b (one level over a maximum of lines) | slopes in `[0, 1]` | F | with a slope above one the inequality fails; such a line has to be cut to slope one first (workstream Q2 §6.2, its referee §1.4) |
+| | one line nonnegative at the dominant rung (a flat line, or a finite range) | F | negative control: violations up to `8 551` nats (Q2 referee); harness XVI.9(c) |
+| | a common finite range of the lines | P | the same proof without it (Q2 referee, finding 1; confirmed by the referee of `Z_REPORT.md`): what is used is "nonincreasing with slope at least `−1`" |
+| | the exact tail function of the uniform cube (Lemma 11.55(d)) | Q | used only as `ln(1/π†) ≤ n_o·θ_na(e) + O(ln n)`: a tail function sharp up to polynomial factors at every block size; known for the uniform cube only (§11.33; Level 0 of §2) |
+| | the threshold `3(n_o + 1)e^{2u + e^u + n_oe}`, the ladder of step one, `λ = 1`, `η = ½` | C | constants of one proof; `ℓ₀` is attained up to a few nats (harness XVI.9: `0.26`) |
+| Proposition 11.58c(b) (the chain) | a block with `m·B′ ≥ 𝒳 + P̄_cnt + ln 4` | F for "once" | with half the block every level adds the deficit (harness XVI.9(e): `57`–`73` nats over four to six levels) |
+| | one tolerance parameter along the chain | C | the workstream's remark 5 |
+| | a flat type of the family served at the coarse rung | ? | the chain is used on the flat majorant of a family with slopes (Theorem 11.58e(c)); whether a chain that uses the slopes loses less is not known |
+| Theorem 11.58d | the epochs of the `O(1/k)` proof (one line per epoch) | P | replaced by convex families in Theorem 11.58e, with a better order |
+| Theorem 11.58e (a)–(d) | **convexity of the family of lines** | F | for a non-convex family the line-by-line value is not a bound (`DEAD_ENDS.md` D64; harness XVI.7; the referee's controls) |
+| | slopes capped at one | E for the accounting; C at the next level's zero accuracy | the shift of the accuracy by `X₀ ≈ ln n` costs `X₀` only because slopes are at most one; at vanishing accuracy the next level does not see steeper slopes (part (e): the slope-capped hull) |
+| | the inner tolerance zero in the step | X for the exponents of finite depth | the recursion itself uses a positive tolerance and is strictly better from the third level on (`0.3612·a` against `0.3633·a`); same limit constant |
+| | a chain after every level | C | a chain every `r` levels gives a smaller constant (the report's remark 3); without any chain the loss is `½k²·ln n` and the order is back to `√(n ln n)` (F for "no chain at all") |
+| | `W₀ ≡ 0` and a flat base | E | the referee's repair of Lemma A1 |
+| Theorem 11.58e (e) | (H1): the dual function has a twice differentiable maximum | X | with a kink at the fixed point the tops decrease like `1/k` (Theorem 11.53a(e)) and this method gives `O(√(n ln n))` again |
+| | infinite slope of `θ_na` at zero | C | used for the description of the tops as "where the image becomes infinite"; for a finite slope the next top is `max_B min(B, (1 − W(B))a)` (the referee: by hand only) |
+| | a restart near the fixed point; a range condition | P | the envelope sequence needs neither (Proposition A5 of the addendum, refereed) |
+| Theorem 11.58e (f) | parts (a), (e) | E | the certified numbers are rigorous *given* those paper statements; the arithmetic is interval and exact |
+| Theorem 11.58e (g) | `θ_na(e) → 0`; `J` differentiable below its maximiser | P | differentiability only names a subgradient — any supergradient does (the referee, §2.8) |
+| | a fixed rate `g` | ? | the constant of the proof is of order `1/g²`; a statement uniform in `g`, or at accuracies between bounded and extensive, is not proved (numerically the defect is largest at accuracy zero for `k ≤ 60`) |
+| all of 11.58b–e | the uniform cube, independent blocks | Q / E | as for Lemma 11.58b; with dependence see §11.33 (a certified class-relative influence, or a false certificate) |
+| | free computation | X (not counted) | the design computes the curves and one minimisation per level |
+| | effectiveness | — | `n₀`, `C′` and the rate at which the tops approach `h` are not produced by the proofs |
+
+**Computationally:** the bound of Theorem 11.58e is, as a formula at `u = 1`, above the
+non-adaptive cost at `n = 10⁴` and below every earlier bound from `n ≈ 3·10⁴` on; it describes
+`k` nested levels and `k` chains of `≈ n/ln n` levels each, in a regime of the level theorem
+that no simulation covers.  Evaluated exactly (certified costs, no run): two levels over
+the real base at `n = 50 000` cost `e^{2818}` against `e^{5547}` non-adaptive.
 
 ## 7. Errors and overstatements found, and what was done
 
@@ -501,8 +542,10 @@ its own before it opened ours (SCI-REV-0022 §1): correct.
    Lemma 11.62 with its lower counterpart — the analogue of Lemma 11.55(b), (c); a first
    computation: both functionals over all subsets of the 4-cube.
 4. **A lower bound for adaptive algorithms above the hinted one** — between `n·h + ½ ln n`
-   (numerically) and `n·h + O(√(n ln n))`; and whether nested analyses can reach
-   `n·h + O(n^{1/3})`, which the `1/k²` law suggests and nothing establishes.
+   (numerically) and the upper bound, which since this file was first written has gone
+   from `n·h + O(√(n ln n))` to `n·h + O(n^{1/3}(ln n)^{2/3})` (Theorem 11.58e, §6a).  That analyses
+   of nested algorithms through types cannot go below `n·h + Ω(n^{1/3})` is a heuristic, not
+   a theorem (the referee of `Z_REPORT.md`, finding F4); whether any algorithm can is open.
 5. **The class threshold and finite-temperature exponents with an interacting known
    part**; the exponents of Level 4 as costs.
 6. **Upper bounds for genuinely heterogeneous sites** (a number of types growing with `n`).

@@ -1,10 +1,34 @@
 # Workstream Z, addendum — the envelope sequence: the assembly from the non-adaptive base, without a restart
 
 *Coordinator, 2026-11-26 (written while `Z_REPORT.md` was with its referee, and kept in a file of
-its own for that reason; to be merged into the report after the review).  Paper proofs,
-**unrefereed**; the numerics are floating point on grids [N].  Notation and the quoted
+its own for that reason).  Paper proofs; the numerics are floating point on grids [N] unless
+they are called certified.  **Refereed internally** (an AI referee, not external peer review):
+`docs/workstreams/Z_ADDENDUM_REVIEW.md`, with its own code in
+`experiments/workstreams/Z/review_addendum/` — "no error of substance; every numbered statement
+is correct as stated or correct after a repair of wording"; its ten findings are applied
+below and listed in the note that follows.  **Sections A6a and A6b were added after the
+review and have not been seen by the referee.**  Notation and the quoted
 statements are those of `Z_REPORT.md` §1 and of `R_REPORT.md` (`θ = θ_na` satisfying (H0), (H1) there;
 `a = θ(0+)`, `h` the fixed point, `Σ` the slope map, `p_j` the orbit curves, `M_{W,b}`, `𝓔(W, b)`).*
+
+> **Coordinator's note after the review (2026-11-26).**  The referee re-derived every step
+> and replicated the numerics with code that shares nothing with ours (the envelope
+> sequence for the cube at three slopes and the Gaussian pair; the comparison with the
+> fixed-rate sequence and a cut chain; Lemma A1 on envelope curves; the second and third
+> level of the recursion by brute force; the geometric convergence of A9; two rows of the
+> table of A8).  Applied in place: **(1)** the sentence after Theorem Z′ "the envelope
+> schedule has the smaller `b_k` at every `k`" was wrong — Corollary A4 compares sequences
+> from the same start (A7); **(2)** "`b_j = τ_j`" is not an open question: it holds at `j = 2`
+> and fails at `j = 3` — now section A6a, with a proof of the first and a computation of
+> the second that was made here independently; **(3)** the factors `3.5, 7, 21` of A8 were
+> against Theorem A of Q2, not "every earlier bound"; **(4)** a grid artefact in the
+> quoted ratios, and "approached from below" is specific to the pair; **(5)** the
+> constant of Theorem Z″: the proof gives `1/g²`, the heuristic `1/g`; **(6)** Lemma A1 needs
+> `W₀ ≡ 0`; **(7)** Theorem Z″ is for `0 < g < ε*`; **(8)**–**(10)** two rounded numbers and
+> three points of wording in proofs.  Not checked by the referee: the finite-`n`
+> statements that Theorems Z′, Z″ are conditional on (read, not re-derived), the one-level
+> test and the nests in envelope mode (not re-run), pairs with a finite slope at zero (by
+> hand only); nothing of the referee's is certified.
 
 ## A0. What changes
 
@@ -17,7 +41,9 @@ This addendum isolates what they use (*admissible sequences*, A1), shows that th
 sequence** — the best convex sub-solution of the slope map — is admissible from the flat
 family at the non-adaptive exponent `a`, with no restart and no range condition (A3), that
 its top values decrease to `h` (A4) at the sharp rate `c_*²/j²` (A5), and that at the exponent
-level they bound the level recursion from the first level on, `τ_j ≤ b_j` (A6).  Theorem Z then
+level they bound the level recursion from the first level on, `τ_j ≤ b_j` (A6) — with equality
+at the second level and, numerically, a strict inequality from the third (A6a); certified
+values of such bounds are in A6b.  Theorem Z then
 holds for the schedule "envelope levels over the chain on the base bracket" (A7), which as
 a formula improves on every earlier bound from `n ≈ 3·10⁴` on at `u = 1` (A8).  **At extensive
 accuracies the same schedule gives `ln N(n; g·n, δ) ≤ n·θ_hint(g) + O((ln n)²)`** (A9), because at a
@@ -37,9 +63,10 @@ continuous with `W(0) = 0`.  For a family put `b⁺(W, b) := sup{B ∈ [0, b] : 
 **Lemma A1 [P; from the proof of Proposition U and Corollary U′ of `R_REPORT.md`].**  *For an
 admissible sequence, every `j ≥ 0`, every `g > 0` and every `η > 0` there is `φ ∈ (0, 1)` with*
 `max_{𝓔(W_j, b_j)} Ψ_g(φ; ·) ≤ M_{W_{j+1}, b_{j+1}}(g) + η`.  *Consequently Propositions Z3, Z4 and §6 of
-`Z_REPORT.md` hold for every admissible sequence with `b₀ ≤ a` over every base family of flat type
-`b₀` with least accuracy at most one; and at the exponent level, if `T ≤ M_{W_j, b_j}` for a
-nonincreasing `T ≥ 0`, then `min(T, R[T]) ≤ M_{W_{j+1}, b_{j+1}}`.*
+`Z_REPORT.md` hold for every admissible sequence with `W₀ ≡ 0` and `b₀ ≤ a` over every base family of
+flat type `b₀` with least accuracy at most one (a flat type `b₀` is the type of the grid family of
+`W₀` only if `W₀` vanishes at the top — the referee's repair; both sequences below have `W₀ ≡ 0`); and at
+the exponent level, if `T ≤ M_{W_j, b_j}` for a nonincreasing `T ≥ 0`, then `min(T, R[T]) ≤ M_{W_{j+1}, b_{j+1}}`.*
 *Proof.*  As in Proposition Z1(2): `inf_{e>g} max_𝓔 Φ_g = max_𝓔 inf_{e>g} Φ_g ≤ sup{B − Σ(B, W_j(B))·g : B ≤ b_j, Σ(B, W_j(B)) < ∞}`;
 every such `B` is at most `b⁺(W_j, b_j) ≤ b_{j+1}` by (S1), and `B − Σ(B, W_j(B))g ≤ B − W_{j+1}(B)g` by (S2).  The
 exponent-level statement is Corollary U′ (whose hypothesis "`W′ ≤ Σ(·, W)` on `[0, b′]`" is used
@@ -89,7 +116,8 @@ convex minorant of the function whose envelope is `W_{j+1}`, hence `V_{j+1} ≤ 
 *Proof.*  Lemma A3 at every step gives the form and (S2); (S1) holds with equality.  `b₁ = a` because
 `Σ(B, 0) < ∞` exactly for `B < a` when `θ` has infinite slope at zero, and for all `B ≤ a` otherwise.
 `W_{j+1} ≤ Σ(·, W_j) ≤ Σ(·, p_j) = p_{j+1}` by induction.  `b_j ≥ h` by Lemma A3, and `b_j > h` because the points
-`(B, W_{j−1}(B))` stay regular a little beyond `h`: `W_{j−1}(h) ≤ L < 1 − h/a` and `W_{j−1}` is continuous.  ∎
+`(B, W_{j−1}(B))` stay regular a little beyond `h`: `W_{j−1}(h) ≤ L < 1 − h/a` and `W_{j−1}` is continuous
+(`L < 1 − h/a` is consequence (ii) of (H1) in `R_REPORT.md` — the one place where (H1) enters; (P2) is `p_j(h) ≤ L`).  ∎
 
 So no range condition and no restart are needed: capping at one and taking the convex
 envelope *are* the two requirements that "pull against each other" in §5 of `R_REPORT.md`,
@@ -115,7 +143,7 @@ positive factor), nondecreasing, continuous, zero at `0`.  On `[0, c_{j+1}]`, `V
 the numbers `v_j := V_j(c_∞)` satisfy `v_{j+1} = (v_j + κ)/G_j` with `κ := c_∞/h − 1 > 0`.  If `G_∞ > 1`, `v_j → κ/(G_∞ − 1)`,
 and `κ/(G_∞ − 1) = (c_∞/h − 1)/(c_∞/h − c_∞/a − 1) > 1`; if `G_∞ = 1`, `v_j → ∞`.  Either way `v_j > 1 − c_∞/a` for some `j`,
 so `c_{j+1} < c_∞`: a contradiction.
-*From then on they converge to `h`.*  Let `c_{j₀} ≤ c⁎`.  For `j ≥ j₀`, `G_j = 1` and `V_{j+1} = (V_j + B/h − 1)₊ ≥ V_j + (B/h − 1)`,
+*From then on they converge to `h`.*  Let `c_{j₀} ≤ c⁎` (`j₀` exists by the previous step; it is not explicit).  For `j ≥ j₀`, `G_j = 1` and `V_{j+1} = (V_j + B/h − 1)₊ ≥ V_j + (B/h − 1)`,
 so `V_{j₀+i}(B) ≥ i·(B/h − 1)` for `B ≥ h`, and `c_{j₀+i+1}` is at most the root of `i(B/h − 1) = 1 − B/a`:
 
     c_{j₀+i+1} − h  ≤  h·(1 − h/a)/(i + h/a).
@@ -141,7 +169,8 @@ sequence with `b_{k₁} ≤ b^cut_0` and `W_{k₁} ≥ 0`; by Corollary A4, `b_{
 sequence of A3: `T_j ≤ M_{W_j, b_j}` on `(0, ∞)`, in particular `τ_j ≤ b_j`, for every `j ≥ 1`.*
 *Proof.*  `j = 1`: `θ` is convex and nonincreasing, so it is the upper envelope of its tangent
 lines, `θ(x) = sup{B − Σ(B, 0)·x : 0 ≤ B < a}` ((Σ3): the line through `(0, B)` tangent to `θ` has slope
-`−Σ(B, 0)`); and `W₁ ≤ min(1, Σ(·, 0))`, `b₁ = a`, so `B − Σ(B, 0)x ≤ B − W₁(B)x ≤ M_{W₁, a}(x)`.  Step: Lemma A1.  ∎
+`−Σ(B, 0)`; where `θ` is affine near zero the supremum is a limit `B ↑ a`); and `W₁ ≤ min(1, Σ(·, 0))`, `b₁ = a`, so
+`B − Σ(B, 0)x ≤ B − W₁(B)x ≤ M_{W₁, a}(x)`.  Step: Lemma A1.  ∎
 
 So the tops of the envelope sequence are upper bounds for the exponent of `j` nested
 levels **for every `j`**, where the proof of Theorem R gave an upper bound only beyond an
@@ -150,14 +179,121 @@ unquantified restart level.  In floating point (`experiments/workstreams/Z/z4_en
 
 | `j` | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 20 | 40 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| `b_j/a` | 1 | 0.5004 | 0.3633 | 0.3128 | 0.2914 | 0.2813 | 0.2728 | 0.2691 | 0.2642 | 0.2631 |
+| `b_j/a` | 1 | 0.5004 | 0.3633 | 0.3128 | 0.2914 | 0.2813 | 0.2728 | 0.2691 | 0.2642 | 0.2630 |
 | `j²(b_j − h)/c_*²` | 1.15 | 1.48 | 1.41 | 1.25 | 1.12 | 1.05 | 1.008 | 1.001 | 0.996 | 0.996 |
 
-(`h/a = 0.2626`.)  The exact recursion has `τ₂ = 0.500a`, `τ₃ = 0.361a` (theory report §11.19): the
-bound is within `0.1` and `0.6` per cent there — consistent with the remark of `R_REPORT.md` §5
-that this dynamics is the exact dynamics of the best convex majorant, which is not
-proved and not used.  **These numbers are not certified** (floating point; a convex
-envelope of grid values is not a minorant between the grid points).
+(`h/a = 0.2626`.)  The recursion itself has `τ_k/a = 0.5004, 0.361, 0.311, 0.290, 0.280` at `k = 2, …, 6`
+(theory report §11.19): **the bound is an equality at `k = 2` and is `0.5` to `0.6` per cent above
+from `k = 3` on** — section A6a has the proof of the first and the computation of the second.
+The envelope sequence is the best *admissible* sequence (Corollary A4), i.e. the best that
+the line-by-line step of Proposition U can give; it is not the recursion.  (An earlier
+version of this paragraph said "within `0.1` per cent" at `k = 2` — the rounding of a quoted
+`0.500` — and left `b_j = τ_j` open; the referee and a computation of ours made at the same
+time settle it.)  **The numbers of this table are floating point** (a convex envelope of grid
+values is not a minorant between the grid points, and the grid errs downwards, by about
+`10⁻⁷·a` at `k = 80` — the referee); certified upper bounds are in section A6b.
+
+## A6a. Where the envelope step is exact, and where it is not  *(added after the review; not seen by the referee)*
+
+For a nonincreasing `T ≥ 0` on `[0, ∞)` let
+
+    τ(T) := inf_{0<φ<1} sup_{γ≥0} [ min(γ, φa) + (1 − φ)·T(γ/(1 − φ)) ]
+
+— the level formula at vanishing accuracy (theory report §11.19, remark (1): `τ_{k+1} = τ(T_k)`) — and
+`T^♯(x) := sup_{0≤y≤x} (y + T(y)) − x`, the least function above `T` all of whose slopes are at least `−1`.
+
+**Proposition A12 [P].**
+(a) *`τ(T) = inf_{x>0} a·(x + T^♯(x))/(a + x) = τ(T^♯)`: at vanishing accuracy a level sees the family below it only
+through `T^♯`; slopes steeper than one are worth nothing to the next level.*
+(b) *For a family `(W, b)`: `M_{W,b}^♯ = M_{W,b}`; `M_{env f, b} = M_{f, b}` for every `f : [0, b] → [0, 1]` (the convex
+envelope loses nothing); and `τ(M_{W,b}) = max_{0≤B≤b} min(B, (1 − W(B))·a)`, which is `b⁺(W, b)` for a pair with
+infinite slope at zero.  So **the envelope step is exact at vanishing accuracy**: `b_{j+1} = τ(M_{W_j, b_j})`.*
+(c) *`θ^♯ = max(θ, a − ·) = M_{W₁, a}`.  Hence `τ₂ = b₂` for every pair with infinite slope at zero.*
+(d) *In general `τ_{j+1} = τ(T_j^♯) ≤ τ(M_{W_j, b_j}) = b_{j+1}`, with equality as long as `T_j^♯ = M_{W_j, b_j}`.*
+
+*Proof.*  (a) With `y = γ/(1 − φ)`, `x = φa/(1 − φ)` the bracket is `(1 − φ)[min(y, x) + T(y)]`; for `y ≥ x` it is at most
+its value at `y = x` (`T` is nonincreasing), so the supremum is `(1 − φ)·sup_{y≤x}(y + T(y)) = (1 − φ)(x + T^♯(x))`, and
+`1 − φ = a/(a + x)`.  `y + T^♯(y) = sup_{z≤y}(z + T(z))` is nondecreasing, so `(T^♯)^♯ = T^♯`.
+(b) The slopes of `M_{W,b}` lie in `[−1, 0]`.  For `x > 0`, `sup_B (B − x·f(B))` is `x` times the conjugate of `f` at `1/x`,
+and a function and its lower convex envelope have the same conjugate.  By (a),
+`τ(M_{W,b}) = inf_φ [φa + (1 − φ)M_{W,b}(x)] = inf_φ max_B [(1 − φ)B + (1 − W(B))φa]`; the bracket is linear in `φ` and
+concave in `B`, so by the minimax theorem this is `max_B inf_φ = max_B min(B, (1 − W(B))a)`.  For infinite slope at
+zero `Σ(B, W(B)) < ∞` iff `B < (1 − W(B))a` (or `B = 0`), and `B` increases while `(1 − W(B))a` decreases.
+(c) `y + θ(y)` is convex with the value `a` at `0`, so `sup_{y≤x}(y + θ(y)) = max(a, x + θ(x))`.  By (b),
+`M_{W₁, a}(x) = sup_B (B − x·min(1, Σ(B, 0)))`: the lines with `Σ(B, 0) ≤ 1` are the tangent lines of `θ` with slopes
+in `[−1, 0]`, whose supremum is `θ(x)` where `θ′(x) ≥ −1` and is below `a − x` before; the others give `sup B − x = a − x`.
+Then `τ₂ = τ(θ) = τ(θ^♯) = τ(M_{W₁, a}) = b₂`.  (d) `T_j ≤ M_{W_j, b_j}` (Proposition A8) and `τ` is monotone.  ∎
+
+For the cube `x + θ(x) − a` changes sign once, at `x* > 0`, and `τ₂ = b₂ = a²/(a + x*)`.
+
+**From the third level on the envelope tops are strictly above the true exponents [N].**
+(`experiments/workstreams/Z/z7_exactness.py` → `out_z7_exactness_u1.txt`; cube, `u = 1`; floating point.  The
+referee, whose brief did not include this section, found the same independently and adds in a
+postscript that (b) and (c) of Proposition A12 hold numerically to `10⁻¹⁵`, and that a first value of ours,
+`0.361296·a`, was a grid of step `10⁻³` in the outer fraction sitting at a kink — corrected below.)
+
+| | value | |
+|---|---|---|
+| `τ₂`, closed form `a²/(a + x*)` | `0.055517524915 = 0.500410018·a` | |
+| `b₂`, envelope sequence on a grid of 8 000 / certified upper bound (A6b) | `0.055517524693` / `0.055517525617` | equal, as proved |
+| `τ₃ = τ(T₂)`, with `T₂ = min(θ, R[θ])` computed by direct minimisation over `(φ, β)` at 420 rates, the outer fraction of the third level refined to `10⁻⁹` | `0.361189·a` | the referee, by brute force with another mesh: `0.361184·a`; the theory report has `0.361·a` |
+| `τ(M_{W₂, b₂})`, the same operator on the envelope majorant | `0.363303·a` | |
+| `b₃` | `0.363301·a` | `b₃ − τ₃ = 2.1·10⁻³·a` |
+
+*Where the loss is.*  The second level `T₂` is below its envelope majorant `M₂ := M_{W₂, b₂}` at every positive
+accuracy rate computed, because the true level uses a positive inner tolerance (`β/g` between `0.45` and `0.007` at
+the minimiser), which the line-by-line step (`β = 0`, Lemma M of `R_REPORT.md`) does not: `M₂ − T₂` is `0.03·a` to
+`0.13·a` for `g ≤ 0.2ε*`, where `T₂` falls more steeply than slope `−1` — by (a) the next level does not see
+that part: there `T₂^♯ = M₂ = b₂ − g` — and `3.7·10⁻³·a`, `1.8·10⁻³·a`, `7·10⁻⁴·a` at `g = 0.4ε*, 0.5ε*, 0.6ε*`, where
+`T₂^♯ = T₂ < M₂`: this part the third level sees (its optimal outer fraction `φ = 0.278` puts the inner accuracy
+rate at `0.36ε*`).  Against the theory report's values of the recursion itself, `τ_k/a = 0.5004, 0.361, 0.311,
+0.290, 0.280` for `k = 2, …, 6`, the envelope tops `b_k/a = 0.5004, 0.3633, 0.3128, 0.2914, 0.2813` are equal at `k = 2`
+and `0.5` to `0.6` per cent above from `k = 3` on; both sequences have the same asymptotics (A5).  So the envelope
+sequence is the exact solution of the recursion **restricted to families that are handed down as convex sets
+of lines with the inner tolerance zero**, not of the recursion: a step that also carried the tolerance would
+close the gap at the exponent level (not written; at finite `n` the tolerance is what Lemma U's finite range
+and the drops of workstream Q2 are about).
+
+## A6b. Certified tops  *(added after the review; not seen by the referee)*
+
+The tops in the table of A6 are floating-point numbers.  Admissibility asks only for `≤` in (S2) and `≥` in (S1),
+so a *lower* bound of the slope map suffices, and that needs no optimisation:
+
+**Proposition A13 (multi-rate sequences) [P].**  *Let `(V, c)` be a family that is a maximum of the zero line and
+finitely many lines `ℓ_i`, let `(e_m, ϑ_m)` be pairs with `ϑ_m ≥ θ(e_m)`, and `ā ≥ a`.  Then every line*
+
+    [ B − ϑ_m·(1 − ℓ_i(B)) ] / e_m            *is below*  `Σ(B, V(B))`  *on*  `[0, c]`.
+
+*Hence, if `c′ ≤ c` satisfies `c′ + ā·V(c′) ≥ ā` or `c′ = c`, and `V′` is a maximum of the zero line and of lines that
+are below such lines on `[0, c′]`, with `V′(c′) ≤ 1`, then `(V, c), (V′, c′)` are two consecutive members of an
+admissible sequence (pair with infinite slope at zero).*
+*Proof.*  `Σ(B, s) ≥ [B − (1 − s)θ(e_m)]/e_m ≥ [B − (1 − s)ϑ_m]/e_m` for `s ≤ 1`, and the right side is nondecreasing in
+`s`; `ℓ_i ≤ V ≤ 1` on `[0, c]`.  (S1): `Σ(B, V(B)) < ∞` forces `B ≤ (1 − V(B))a ≤ (1 − V(B))ā`, and `B + āV(B)` is
+increasing.  `V′` is convex (a maximum of lines), nondecreasing (the slopes `(1 + ϑ_mα_i)/e_m` are positive), zero
+at zero (every such line is nonpositive at `0`).  ∎
+
+`z6_certified_tops.py` builds such a sequence for the cube from `V₀ ≡ 0` on `[0, ā]`: `θ(e) = KL(ρ‖½)` with
+`KL(ρ‖p_u) = e`, so for a floating-point `ρ` the pair "an upper bound of `KL(ρ‖p_u)`, an upper bound of `KL(ρ‖½)`" is
+valid (interval arithmetic, 30 digits, rounded outwards); the lines are stored as doubles with the slope
+rounded down and the intercept rounded down; which lines and rates are used is chosen in floating point (one
+line per sample point, the rate by a golden-section search) and affects the quality only; the upper hull, the
+tangent line from `(c′, 1)` that caps the curve at one, the values at the top and the inequality
+`c′ + āV(c′) ≥ ā` are computed in exact rational arithmetic.  By Lemma A1 and Proposition A8 its tops are
+**rigorous upper bounds for the exponents of the level recursion, `τ_j ≤ c_j`** — given those two statements —
+and `T_j(g) ≤ max_B (B − V_j(B)g)` at every rate (the maximum is evaluated exactly at the vertices).
+
+| `j` | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 20 | 40 | 80 | 200 | 400 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| certified `c_j/a ≥ τ_j/a`, `u = 1` | `0.500410024` | `0.363300653` | `0.312791462` | `0.291376787` | `0.281323250` | `0.272750695` | `0.269065250` | `0.264243938` | `0.263047017` | `0.262747193` | `0.262663126` | `0.262651110` |
+| `u = 2` | `0.505615446` | `0.383347314` | `0.341033400` | `0.323697863` | `0.315235252` | `0.307181543` | `0.303467854` | `0.298465858` | `0.297189804` | | | |
+| `u = ½` | `0.500026741` | `0.358645034` | `0.305680047` | `0.282897289` | `0.272167511` | `0.263247512` | `0.259553884` | `0.254793046` | `0.253620656` | | | |
+
+(`h/a = 0.262647098, 0.296757, 0.253231` at `u = 1, 2, ½`; 3 000 sample points per level, 4 000 for the run to 400
+levels; `out_z6_certified_*.txt`.  The referee's postscript: all thirty certified tops lie above its own
+envelope tops, by at most `6·10⁻⁷·a`, as Corollary A4 requires; the script itself was not refereed.)  The certified tops exceed the floating-point envelope tops by `3·10⁻⁸` to
+`2·10⁻³` of their distance to `h` (the larger figure at 80 levels); at 400 levels `j²(c_j − h)/c_*² = 1.0009`.
+Harness XVI.11 runs a small instance with its exact-arithmetic checks, the comparison with the closed form
+for two levels, and three negative controls (eleven mutations, all caught).
 
 ## A7. Theorem Z for the envelope schedule
 
@@ -176,8 +312,13 @@ of flat type `a`; the unrolling and the orders are those of §6 of `Z_REPORT.md`
 rate is Propositions A6, A7.  ∎
 
 The theorem of `Z_REPORT.md` (cut curves over a base of `M₁` epochs) is the same statement for
-another admissible sequence; by Corollary A4 the envelope schedule has the smaller `b_k` at
-every `k`, and it needs no base beyond the bracket.  One level is spent on turning the flat
+another admissible sequence.  The two start at different heights (`a` against `h + ε₁`), so
+Corollary A4 does not compare them level by level — at `u = 1`, `(s_t, ε₁) = (L + 0.05, 0.003)` the
+envelope tops are `b_k − h = 2.81h, 0.905h, 0.383h, 0.191h, 0.109h` at `k = 1, …, 5` against
+`b^cut_k − h = 0.103h` (the referee's counterexample to an earlier sentence here).  What A4 gives
+is `b_{k₁+i} ≤ b^cut_i` for all `i`, `k₁` the first level with `b_{k₁} ≤ h + ε₁` (`k₁ = 6` at `u = 1`): `k₁ + i`
+envelope levels over the bracket do at least as well as `i` cut levels over the base of
+`M₁` epochs (43 levels there).  The envelope schedule needs no base beyond the bracket.  One level is spent on turning the flat
 type of the base into the curve `W₁` (`b₁ = a`): typing the base bracket by the tangent lines
 of `θ_na` instead (a finite-`n` form of Theorem 11.45 with a logarithmic error, not in the
 repository) would save it.
@@ -185,7 +326,7 @@ repository) would save it.
 ## A8. Numbers [N], and one level exactly
 
 As formulas (`z2_formula.py`, mode `env`; `u = 1`, `δ = 0.05`, `ε = 1`; entries are `ln(evaluations) − n·h` in
-nats; the per-level loss is that of §7 of `Z_REPORT.md`, about `37`–`50` times `ln n`):
+nats; the per-level loss is that of §7 of `Z_REPORT.md`, `31` to `50` times `ln n` over the rows of the table):
 
 | `n` | non-adaptive: `n(a − h)` | Theorem 11.58a | Theorem A of Q2 | cut curves (`Z_REPORT.md`) | **envelope schedule** (`k`) | of which `n(b_k − h)` / chains / levels / base |
 |---|---|---|---|---|---|---|
@@ -201,11 +342,18 @@ nats; the per-level loss is that of §7 of `Z_REPORT.md`, about `37`–`50` time
 | `10^{15}` | `8.18·10^{13}` | `4.25·10⁸` | `2.35·10⁸` | `1.19·10⁷` | **`1.13·10⁷`** (4510) | `3.50·10⁶` / `6.89·10⁶` / `8.91·10⁵` / `643` |
 
 So, as formulas at `u = 1`: at `n = 10⁴` every bound is above the non-adaptive cost; from
-`n ≈ 3·10⁴` on the envelope schedule is below the non-adaptive cost and below every earlier
-bound — by a factor `1.6` in the excess over `n·h` at `10⁵`, `1.9` at `10⁶`–`10⁷`, `3.5` at `10^{10}`, `7` at `10^{12}`,
-`21` at `10^{15}`.  The tops `b_k` are computed for `k ≤ 80` (grid 8 000) and taken as `h + c_*²/k²` beyond
-(the limit of `k²(b_k − h)/c_*²` is one and is approached from below: `0.9958, 0.9968, 0.9973` at
-`k = 20, 40, 80`).  The caveats of §7 of `Z_REPORT.md` apply: evaluations of formulas, floating
+`n ≈ 3·10⁴` on (conservatively: the formulas cross near `1.5·10⁴`) the envelope schedule is below
+the non-adaptive cost and below every earlier bound.  In the excess over `n·h` it is below
+Theorem A of Q2 by the factors `1.6` at `10⁵`, `1.9` at `10⁶`–`10⁷`, `3.5` at `10^{10}`, `7` at `10^{12}`, `21` at `10^{15}`,
+and below the cut-curve bound of `Z_REPORT.md` by `1.83, 1.47, 1.27, 1.15, 1.07, 1.05` at
+`10⁷, 10⁸, 10⁹, 10^{10}, 10^{12}, 10^{15}` (an earlier version quoted the first list as "against every
+earlier bound").  The tops `b_k` are computed for `k ≤ 80` (grid 8 000) and taken as `h + c_*²/k²` beyond.
+For the cube at `u = 1` the ratio `k²(b_k − h)/c_*²` approaches its limit one from below — `0.996, 0.997,
+0.998` at `k = 20, 40, 80` without a grid (the referee, who followed it to `k = 800`; our grid values
+`0.9958, 0.9968, 0.9973` carry a grid artefact in the last digits; the certified upper bounds of
+A6b have `0.9960, 0.9978, 0.9989` and `1.0009` at `k = 400`) — so there the extrapolation is an
+upper estimate; this is specific to the pair (for the Gaussian pair the limit is
+approached from above).  The caveats of §7 of `Z_REPORT.md` apply: evaluations of formulas, floating
 point, no run of any algorithm, nests evaluated exactly only at small sizes.
 
 One level exactly (`z1_onelevel.py`, mode `env`): Proposition Z3 on the grid families of the
@@ -251,7 +399,9 @@ nondecreasing in its second argument, of a convex function), `H(0) = 0`, and
 whole of `[0, b_k]`, then `f = H` is convex and `W_k = H`: nothing to prove.  Otherwise `f` is equal to `H` up to
 the point `β < b_k` where `H` reaches one, and to one beyond.  Its lower convex envelope is `H` on
 `[0, B_t]` and, on `[B_t, b_k]`, the line through `(b_k, 1)` that supports `H` at `B_t`, where `B_t` is the
-last point whose tangent line has a value at most one at `b_k` (that function is convex,
+last point whose tangent line has a value at most one at `b_k` — at a kink "tangent" means a
+supporting line, and if no point has such a line then `B_t = 0` and the envelope is the chord
+from the origin (Gaussian pair, `k = 1`: `W₁(B) = B`) — (that function is convex,
 below `f`, and every convex minorant of `f` is below it: on `[B_t, b_k]` by the chord).  For
 `B ≤ h − η` the right derivative of `H` is at most `(H(h) − H(B))/(h − B) ≤ L/η`, and the tangent line at `B`
 has at `b_k` the value `[H(B) + H′(B+)(h − B)] + H′(B+)(b_k − h) ≤ H(h) + (L/η)(b_k − h) < 1`.  So `B_t > h − η`.
@@ -272,7 +422,9 @@ and `g·λ_η^{k − k(η)} ≤ m/3` for `k ≥ k₁` (Proposition A6).  Let `k 
 Finally `λ_η^{k − k(η)} ≤ λ_η^{k − k₁}` because `k(η) ≤ k₁`.  ∎
 
 **Theorem Z″ (extensive accuracies) [P, conditional as Theorem Z′].**  *Fix `u`, `δ` and an accuracy
-rate `g > 0`.  There are `n₀` and `C = C(u, g)` such that for all `n ≥ n₀`*
+rate `0 < g < ε*` (`ε*` the rate from which `θ_na` vanishes; for `g ≥ ε*` the statement is true and
+empty — `θ_hint(g) = 0` and the non-adaptive bracket already costs `exp(O(ln n))`).  There are
+`n₀ = n₀(u, δ, g)` and `C = C(u, g)` such that for all `n ≥ n₀`*
 
     ln N(n; g·n, δ)  ≤  n·θ_hint(g) + C·(ln n)².
 
@@ -282,10 +434,15 @@ dimension `n`, a certified cost of at most `max_{𝔏_k}[n·B − σ·x̂] + Ê_
 `n·g·λ_η^{k − k₁} ≤ 1` and `k = O(ln n)`.  ∎
 
 Theorem 11.54 of the theory report has `exp(n·θ_hint(g) + o(n))` at extensive accuracies; this is
-`exp(n·θ_hint(g) + O((ln n)²))`, against the hinted lower bound.  The constant grows like `1/g` as
-`g → 0` (`1 − λ_η ≈ η/(hL)`, and `η` of the order of `m ≈ ½θ_hint″(0)g²`… — heuristically the defect is
-`≈ 2θ_hint″(0)·g²·e^{−kg/h}` for `kg/h ≫ 1`, from the profile of `R_REPORT.md` §8a, which would give
-`C ≈ (h/g)·c_Z`); the proof above does not track it.  In between — accuracies `x̂` with
+`exp(n·θ_hint(g) + O((ln n)²))`, against the hinted lower bound.  *The constant.*  The proof above
+gives a constant of order `c_Z·hL/η` with `η` of the order of `m ≈ ½θ_hint″(0)g²`, i.e. **of order `1/g²`**
+as `g → 0` (the referee: `≈ 300·c_Z·(h/g)²` at `u = 1`); it does not track it.  The true number
+of levels is smaller: at a fixed rate the defect decays like `κ_g^k`,
+`κ_g = 1 − g/(J(t_g) + (1 − t_g)g)` with `J′(t_g) = g` — the contraction factor of Lemma A9 at the
+intercept that matters, `B = J(t_g)` — which is `e^{−g/h}` to first order in `g` (`0.364` against
+`0.368` at `g = h`, `0.116` against `0.135` at `g = 2h`; the referee) and would give `C ≈ (h/g)·c_Z`: a
+constant of order `1/g` is the heuristic value (the profile of `R_REPORT.md` §8a has the defect
+`≈ 2θ_hint″(0)·g²·e^{−kg/h}` for `kg/h ≫ 1`), not what is proved.  In between — accuracies `x̂` with
 `1 ≪ x̂ ≪ n` — the same schedule interpolates, heuristically
 `n·θ_hint(x̂/n) + O(min{n^{1/3}(ln n)^{2/3}, (n/x̂)·(ln n)²})`; only the two ends are proved.
 
@@ -306,10 +463,12 @@ Theorem 11.54 of the theory report has `exp(n·θ_hint(g) + o(n))` at extensive 
 ## A10. What is not proved
 
 * Everything listed in §9 of `Z_REPORT.md`.
-* This addendum is unrefereed.  Its exponent-level statements (A1–A8) are short and
-  self-contained given `R_REPORT.md`; the numerical values of the tops are floating point.
-* That the envelope dynamics is the *exact* dynamics of the best convex majorant of `T_k`
-  (so that `b_j = τ_j`) is not proved; A6 gives `τ_j ≤ b_j`.
+* The addendum has been refereed internally (see its head); A6a and A6b were added
+  afterwards and are unrefereed.  The tops in the table of A6 are floating point; those
+  of A6b are certified given Lemma A1 and Proposition A8.
+* The envelope sequence is **not** the level recursion: `τ₂ = b₂`, and `τ_j < b_j` from the third
+  level on (A6a; numerically).  A step for families that also carries the inner tolerance
+  — which is what the recursion gains — is not written.
 * In A9 the constant `C(u, g)` is not tracked, the intermediate accuracies are a heuristic,
   and the matching lower bound at extensive accuracies is the hinted one of the theory
   report (Theorems 11.25(a), 11.54), not re-derived here.

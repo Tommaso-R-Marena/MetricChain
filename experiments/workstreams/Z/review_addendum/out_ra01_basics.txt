@@ -1,0 +1,39 @@
+== constants ==
+cube u = 1     a = 0.11094407  h = 0.02913914  L = 0.490034  theta_hint''(0) = 4.244978  c_*^2 = 0.07114732  h/a = 0.26265  eps* = 0.120115  1 - h/a = 0.73735
+cube u = 2     a = 0.32781333  h = 0.09728091  L = 0.464544  theta_hint''(0) = 1.231779  c_*^2 = 0.23010054  h/a = 0.29676  eps* = 0.433781  1 - h/a = 0.70324
+cube u = 0.5   a = 0.03029986  h = 0.00767287  L = 0.497425  theta_hint''(0) = 16.248710  c_*^2 = 0.01888269  h/a = 0.25323  eps* = 0.030930  1 - h/a = 0.74677
+Gaussian pair  a = 1.00000000  h = 0.25000000  L = 0.500000  theta_hint''(0) = 0.500000  c_*^2 = 0.61685028  h/a = 0.25000  eps* = 1.000000  1 - h/a = 0.75000
+brief (cube u = 1): a = 0.110944, h = 0.029139, L = 0.4900, theta_hint''(0) = 4.245, c_*^2 = 0.071147
+cube u = 1: theta_hint''(0) = 1/(u^2 rho_h (1 - rho_h)) = 4.244978;  theta(h) - h = -6.94e-17;  theta'(0+) check: theta(1e-10)/a = 0.999943
+
+== J (closed form) against inf_e [(1-t) theta(e) + t e] from theta itself ==
+cube u = 1     max |J - J_direct| over 49 values of t: 2.53e-16
+cube u = 2     max |J - J_direct| over 49 values of t: 3.96e-16
+Gaussian pair  max |J - J_direct| over 49 values of t: 8.33e-17
+
+== Sigma through J against the supremum over e from theta itself (random regular points) ==
+cube u = 1     300 points: max rel. difference J-route vs direct sup = 8.40e-12;  scalar vs vectorised = 1.37e-11
+cube u = 2     300 points: max rel. difference J-route vs direct sup = 7.18e-12;  scalar vs vectorised = 1.32e-11
+cube u = 0.5   300 points: max rel. difference J-route vs direct sup = 1.48e-11;  scalar vs vectorised = 2.76e-11
+Gaussian pair  300 points: max rel. difference J-route vs direct sup = 1.47e-14;  scalar vs vectorised = 2.96e-15;  against B(1-s)/(1-s-B): 2.96e-15
+
+== partial derivatives of Sigma (1/e*, theta(e*)/e*) against finite differences ==
+cube u = 1     max rel. error of the analytic partials: 8.35e-08
+Gaussian pair  max rel. error of the analytic partials: 2.79e-09
+
+== Sigma(B, s) >= s + B/h - 1 (the rate e = h; used for the fixed-rate sequence of A6) and Sigma(h, L) = L ==
+cube u = 1     min over 2000 points of Sigma - (s + B/h - 1) = 4.158e-13;   Sigma(h, L) - L = 0.00e+00;  L < 1 - h/a: True
+cube u = 2     min over 2000 points of Sigma - (s + B/h - 1) = 1.500e-07;   Sigma(h, L) - L = 3.33e-16;  L < 1 - h/a: True
+Gaussian pair  min over 2000 points of Sigma - (s + B/h - 1) = 4.201e-08;   Sigma(h, L) - L = 0.00e+00;  L < 1 - h/a: True
+
+== joint convexity and monotonicity of Sigma (random midpoints) ==
+cube u = 1     max of Sigma(mid) - mean (must be <= 0): -1.40e-07;   max violation of monotonicity: -6.35e-03
+Gaussian pair  max of Sigma(mid) - mean (must be <= 0): -4.72e-09;   max violation of monotonicity: -9.52e-04
+
+== theta_hint: closed form against sup_t [J(t) - t g] ==
+cube u = 1     max difference: 9.19e-17;  theta_hint(0) - h = -1.39e-17, -theta_hint'(0) - L = 7.21e-09, theta_hint''(0) - vartheta = -4.33e-04
+cube u = 2     max difference: 2.22e-16;  theta_hint(0) - h = 2.78e-17, -theta_hint'(0) - L = 2.19e-09, theta_hint''(0) - vartheta = -1.32e-04
+Gaussian pair  max difference: 5.55e-17;  theta_hint(0) - h = 0.00e+00, -theta_hint'(0) - L = -1.81e-13, theta_hint''(0) - vartheta = -3.04e-09
+
+== the convex-envelope routine against the brute-force definition (random data, 200 cases of 40 points) ==
+max difference: 2.22e-16

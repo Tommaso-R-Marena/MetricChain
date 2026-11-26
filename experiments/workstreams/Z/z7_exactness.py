@@ -129,12 +129,19 @@ def main():
     T2 = np.minimum.accumulate(T2)
     def T2f(xx):
         return np.where(xx >= estar, 0.0, np.interp(xx, gg, T2))
+    def lvl3(phi):
+        gam = np.concatenate([[0.0], np.geomspace(1e-8, 1.0, 4000) * phi * a, np.linspace(1.0, 6.0, 400) * phi * a])
+        return float(np.max(np.minimum(gam, phi * a) + (1 - phi) * T2f(gam / (1 - phi))))
     best3 = (math.inf, None)
-    for phi in np.linspace(0.01, 0.99, 981):
-        gam = np.concatenate([[0.0], np.geomspace(1e-8, 1.0, 1500) * max(phi * a, 1e-12) * 1.0, np.linspace(1.0, 6.0, 200) * phi * a])
-        val = float(np.max(np.minimum(gam, phi * a) + (1 - phi) * T2f(gam / (1 - phi))))
-        if val < best3[0]:
-            best3 = (val, phi)
+    lo3, hi3 = 0.01, 0.99
+    for _ in range(4):                       # the minimiser sits at a kink: refine the grid of outer fractions around it
+        grid3 = np.linspace(lo3, hi3, 981)
+        for phi in grid3:
+            val = lvl3(float(phi))
+            if val < best3[0]:
+                best3 = (val, float(phi))
+        step3 = (hi3 - lo3) / 980
+        lo3, hi3 = max(1e-4, best3[1] - 3 * step3), min(1 - 1e-4, best3[1] + 3 * step3)
     tau3 = best3[0]
     # the same operator applied to the majorant M_2 instead of T_2 (what the envelope step bounds)
     best3m = math.inf
@@ -142,7 +149,7 @@ def main():
         gam = np.concatenate([[0.0], np.geomspace(1e-8, 1.0, 1500) * phi * a, np.linspace(1.0, 6.0, 200) * phi * a])
         m2v = np.max(xs[None, :] - W2[None, :] * (gam / (1 - phi))[:, None], axis=1)
         best3m = min(best3m, float(np.max(np.minimum(gam, phi * a) + (1 - phi) * m2v)))
-    print("(3) tau_3 from T_2 (grid of 420 rates, linear interpolation): %.10f = %.6f a  (phi = %.3f);  the same operator on the majorant M_2: %.10f = %.6f a;  envelope top b_3: %.10f = %.6f a"
+    print("(3) tau_3 from T_2 (grid of 420 rates, linear interpolation; outer fraction refined to 1e-9): %.10f = %.6f a  (phi = %.6f);  the same operator on the majorant M_2: %.10f = %.6f a;  envelope top b_3: %.10f = %.6f a"
           % (tau3, tau3 / a, best3[1], best3m, best3m / a, E.b[3], E.b[3] / a))
     print("    (b_3 - tau_3)/a = %.3e;   (b_3 - R[M_2](0))/a = %.3e" % ((E.b[3] - tau3) / a, (E.b[3] - best3m) / a))
 

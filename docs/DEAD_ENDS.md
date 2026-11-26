@@ -2473,3 +2473,59 @@ by the proof" is a conjecture that the statement survives, and should carry eith
 other proof or the words "not known".  The audit's F tags — the ones with a
 counterexample attached — were the reliable ones (8 of 10, and the other two were
 mislabelled kinds of true observations).
+
+## D68. Workstream Z: what its two referees and our own checks removed — a limsup constant read off a table, "smaller at every level", "exactness left open", an induction that fails from ten levels on (after the twenty-third checkpoint of cycle 10)  **[`docs/workstreams/Z_REVIEW.md`, `Z_ADDENDUM_REVIEW.md`; `experiments/workstreams/Z/z7_exactness.py`, `z8_defect_profile.py`]**
+
+No numbered statement of `Z_REPORT.md` or `Z_ADDENDUM.md` was found wrong by its referee.
+What was wrong, and is kept here:
+
+1. **A limsup constant taken from the last row of a table.**  "`c_Z ≈ 50`, so the constant of
+   the limsup is `10.6`" were the values at `n = 10^{15}`; the per-level loss divided by `ln n` is
+   still increasing there, its limit by the report's own formulas is `52.0` (`52.9` for
+   `k = n^{1/2}`), and the limsup constant that the proof gives is `10.9`.  *Lesson:* a constant of
+   a limit is computed from the formula, not read off the largest size evaluated.
+2. **"`q(n, Λ) = O(ln n + ln ln Λ)`"** — it is `O(ln n + ln Λ)`; the proof used only `Λ ≤ n²`, where
+   both are `O(ln n)`.
+3. **"By Corollary A4 the envelope schedule has the smaller top at every level"** — false:
+   the comparison lemma is for sequences from the same start, and the two schedules
+   start at `a` and at `h + ε₁`.  At `u = 1` the envelope tops are `2.81h, 0.905h, 0.383h, 0.191h,
+   0.109h` above `h` at levels one to five, the restarted chain `0.103h` from its first.  What
+   the lemma gives is a comparison after a shift of the index.
+4. **"Whether the envelope dynamics is exact (`b_j = τ_j`) is not proved" — it is false from
+   the third level on, and true at the second.**  The sentence left open something that
+   the theory report's own table decided (`τ₃ = 0.361·a` there, `b₃ = 0.3633·a`), and described
+   an agreement "within 0.1 per cent" at two levels that was the rounding of a quoted
+   `0.500`.  The referee and a computation of ours made at the same time found the same:
+   equality at two levels (now proved: at vanishing accuracy a level sees the family
+   below it only through its slope-capped hull, and the hull of the non-adaptive
+   exponent is the first envelope), and `τ₃ = 0.3612·a < b₃ = 0.3633·a`, because the true second
+   level uses a positive inner tolerance and lies below its envelope majorant where the
+   third level looks.  *Lesson:* before writing "not proved", check whether the numbers
+   already in the report say "false".
+5. **Factors attributed to the wrong comparison** ("below every earlier bound by `3.5, 7,
+   21`": against Theorem A of Q2; against the cut-curve bound `1.15, 1.07, 1.05`), a grid
+   artefact in a quoted ratio (`0.9973` for `0.998`), "approached from below" stated without
+   "for this pair", and a constant "of order `1/g`" where the proof gives `1/g²`.
+6. **The barrier `n·h + Ω(n^{1/3})` "of the analysis"** was stated as a fact in a summary and
+   is a heuristic: a chain of `n/m` levels costs its additive term once, so "a level
+   multiplies the certified cost by a constant" does not give an additive loss per
+   level.
+7. **An induction that fails.**  Numerically the defect of the envelope majorant,
+   `M_k(g) − θ_hint(g)`, is largest at `g = 0` at every level computed (`k ≤ 60`, `u = 1, 2`) —
+   equivalently the envelope curve lies above the fixed-point curve of the slope map
+   shifted right by `b_k − h` — which would make the `n^{1/3}` bound uniform over all accuracy
+   scales.  The obvious proof (the image of the shifted curve dominates the next shifted
+   curve) needs `(b_k − h)²/(θ_hint″(0)h²) ≥ b_k − b_{k+1}` near the top and fails from about ten
+   levels on; a pointwise contraction of the defect by `θ_hint(g)/(g + θ_hint(g))` covers
+   `g ≳ 2h/k`, the slope of the top lines covers `g ≲ c/k²`, and the range in between is the
+   scaling window of the bottleneck.  Not proved; recorded as an observation.
+8. **Our own numerics.**  A first precise computation of the three-level recursion timed
+   out (a bisection inside a triple loop; replaced by a table with a checked
+   interpolation error of `1.6·10⁻¹²`); the first harness check of the two-level closed
+   form "failed" because the grid minimum over the outer fraction lies above the true
+   minimum by `10⁻⁵`, more than the gap being tested (`4·10⁻⁷`): the closed form is now
+   evaluated at its crossing point.  The same mistake once more, caught by the referee:
+   our first value of the three-level exponent, `0.361296·a`, came from a grid of step `10⁻³`
+   in the outer fraction with the minimiser at a kink; refined, it is `0.361189·a` (the
+   referee: `0.361184·a`).  *Rule:* a minimum over a grid is reported with the grid refined
+   until the digits quoted are stable.

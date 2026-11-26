@@ -1,0 +1,36 @@
+# cube u = 1, delta = 0.05, eps = 1; entries: ln(evaluations) - n h in nats.  Tops: referee's structural sequence (k <= 600).
+#       n     n(a-h)    Thm 11.58a   Theorem A(Q2)  | envelope schedule: total    k    n(b_k-h)   chains    levels    base   (chains+levels)/(k ln n) | addendum: total (k)
+  10^4           818        1080         1002     |       1025       2      263.8     442.2     134.6      184       31.31               |  1025 (2)
+  10^4.5        2587        2101         2148     |       1627       3      353.1     851.2     219.1    203.6       34.43               |  1627 (3)
+  10^5          8180        3936         3949     |       2476       4      556.3      1381     315.2    223.4       36.84               |  2476 (4)
+  10^6      8.18e+04   1.206e+04    1.059e+04     |       5648       6       2072      2771     541.9    263.5       39.97               |  5648 (6)
+  10^7      8.18e+05    3.67e+04    2.613e+04     |   1.38e+04      12       4931      7340      1223    304.2       44.27               |  13800 (12)
+  10^8      8.18e+06   1.162e+05     7.02e+04     |  3.333e+04      24   1.23e+04  1.796e+04      2724    345.3       46.79               |  33300 (24)
+  10^9      8.18e+07   3.738e+05     2.06e+05     |  7.866e+04      51  2.728e+04  4.461e+04      6387    386.8       48.25               |  78700 (52)
+  10^10     8.18e+08   1.215e+06    6.466e+05     |  1.833e+05     105  6.444e+04  1.04e+05  1.439e+04    428.8       48.97               |  184000 (104)
+
+# the excess over n h: best earlier bound in the table of A8 (non-adaptive, 11.58a, Theorem A, and the cut curves of Z_REPORT as quoted there) / envelope schedule
+  n = 10^5:  best earlier = 11.58a                                   3936;  factor 1.59   (against Theorem A alone: 1.59;  against the cut curves: 3.02)
+  n = 10^6:  best earlier = Theorem A                           1.059e+04;  factor 1.87   (against Theorem A alone: 1.87;  against the cut curves: 2.04)
+  n = 10^7:  best earlier = cut curves (Z_REPORT, as quoted)     2.52e+04;  factor 1.83   (against Theorem A alone: 1.89;  against the cut curves: 1.83)
+  n = 10^8:  best earlier = cut curves (Z_REPORT, as quoted)     4.91e+04;  factor 1.47   (against Theorem A alone: 2.11;  against the cut curves: 1.47)
+  n = 10^9:  best earlier = cut curves (Z_REPORT, as quoted)     9.97e+04;  factor 1.27   (against Theorem A alone: 2.62;  against the cut curves: 1.27)
+  n = 10^10:  best earlier = cut curves (Z_REPORT, as quoted)      2.1e+05;  factor 1.15   (against Theorem A alone: 3.53;  against the cut curves: 1.15)
+# n = 10^12, 10^15 (from the table of A8 itself): 6.76e6/9.68e5 = 6.98 and 2.35e8/1.13e7 = 20.80 against Theorem A;  1.04e6/9.68e5 = 1.07 and 1.19e7/1.13e7 = 1.05 against the cut curves
+
+# where does the envelope schedule fall below the non-adaptive cost and below the earlier bounds?
+#        n     n(a-h)    Thm 11.58a   Theorem A   envelope (k)     below non-adaptive   below 11.58a   below Theorem A
+    10000      818.0      1080.5      1001.8      1024.5 (2)        False                True           False
+    12000      981.7      1221.9      1168.1      1090.7 (2)        False                True           True 
+    14000     1145.3      1361.1      1334.8      1153.3 (2)        False                True           True 
+    16000     1308.9      1483.0      1465.8      1214.5 (2)        True                 True           True 
+    18000     1472.5      1581.8      1589.0      1275.2 (2)        True                 True           True 
+    20000     1636.1      1661.6      1703.1      1335.8 (2)        True                 True           True 
+    22000     1799.7      1739.9      1791.2      1394.7 (2)        True                 True           True 
+    25000     2045.1      1854.9      1921.7      1482.2 (2)        True                 True           True 
+    28000     2290.5      1967.4      2041.2      1569.5 (2)        True                 True           True 
+    31623     2586.9      2100.7      2148.1      1627.1 (3)        True                 True           True 
+    40000     3272.2      2400.1      2391.1      1745.7 (3)        True                 True           True 
+    50000     4090.2      2746.1      2675.3      1881.4 (3)        True                 True           True 
+    70000     5726.3      3291.7      3232.2      2140.3 (3)        True                 True           True 
+   100000     8180.5      3936.5      3948.9      2476.2 (4)        True                 True           True 

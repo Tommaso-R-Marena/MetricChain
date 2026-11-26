@@ -79,7 +79,7 @@ models and non-decomposable residuals; (ii) temperature-aware dominance and voxe
 *certificate rules* (D1, D3, D4); (iii) finite-angle torsion-to-RMSD certificates and the
 resulting envelope for SE(3)-invariant residuals (C4); and (iv) a machine-checked certificate
 algebra and library covering all of it, including formalizations (to our knowledge new in Lean)
-of several known results.  The results of the later research phases (§§10–12; rows G1–G42 of §10), which
+of several known results.  The results of the later research phases (§§10–12; rows G1–G43 of §10), which
 were developed in response to that assessment and were reviewed by further independent
 referees (`reviews/R2` – `R12`), are classified separately there; §0.3 is a map of them.
 
@@ -90,7 +90,7 @@ referees (`reviews/R2` – `R12`), are classified separately there; §0.3 is a m
 | certification geometry | certificates = coverings by slack balls; exponents on product landscapes at zero and finite temperature; hardness; best-first search | §§11.1–11.9 | machine-checked cores; refereed (R2) as the sections stood at its review; Theorem 11.18a and Propositions 11.18b–f are later and were reviewed, in part, by the Scientific Discovery Division (the duality of 11.18b(e) and part of 11.18f(c″) by no one) |
 | query complexity of all algorithms | lower bounds for every randomised algorithm (dips, generalised dips), thresholds, the accuracy diagram on the cube, the exact exponent with a hint | §11.10 | one-shot lower bounds machine-checked; the rest paper proofs, refereed in part: R3 (Theorems 11.22–11.25 as they then stood; not Theorems 11.23(c) and 11.26, which appeared during its review, nor the type-covering lemma and Merhav's theorem behind the paper upper bounds of Theorems 11.9 and 11.15, which the section uses) and R4 (the workstream report behind the exponent with a hint; Theorems 11.27–11.28 as stated here were outside its brief) |
 | second-order and correlated uncertainty | quadratic law for dense second-order classes; classes that are linear in features; pair-distance profiles for chains and their kernel | §§11.7, 11.12, 11.17 | inequalities and kernel machine-checked; refereed: §11.7 with the first row (R2), §11.12 by the reviewer of its workstream (R_E), §11.17 by R6 and R_P — except the kernel (Proposition 11.50), which is not refereed |
-| algorithms **without a hint** on the cube | non-adaptive exponent `θ_na` (Monte Carlo is optimal); adaptive exponent = the hinted one, at extensive and at every bounded accuracy; **at a bounded accuracy the cost is `exp(n·h + O(√(n ln n)))`, against `exp(n·h − O(1))` from below** (Theorem 11.58a); the exponent of `k` nested levels is `h + (2π²h²θ_hint″(0) + o(1))/k²` (Theorem 11.53b) | §§11.16, 11.18, 11.19 | recursion and bracket algebra machine-checked; algorithms paper proofs, refereed (R5, R7, R8); the sub-exponential term a paper proof, refereed (R12) and reviewed with replication by the Scientific Discovery Division (SCI-REV-0017); the rate of the recursion a paper proof with machine-checked line lemmas, refereed internally (two referees, no error of substance) |
+| algorithms **without a hint** on the cube | non-adaptive exponent `θ_na` (Monte Carlo is optimal); adaptive exponent = the hinted one, at extensive and at every bounded accuracy; **at a bounded accuracy the cost is `exp(n·h + O(n^{1/3}(ln n)^{2/3}))`, against `exp(n·h − O(1))` from below** (Theorem 11.58e; `O(√(n ln n))` in Theorems 11.58a, 11.58d), **and at an accuracy `g·n` it is `exp(n·θ_hint(g) + O((ln n)²))`** (Theorem 11.58e(g)); the exponent of `k` nested levels is `h + (2π²h²θ_hint″(0) + o(1))/k²` (Theorem 11.53b), with certified upper bounds at every `k` computed (Theorem 11.58e(f): `0.500411·a`, `0.363301·a`, …, `0.262652·a` at `k = 2, 3, …, 400` for `u = 1`, against `h = 0.262647·a`) | §§11.16, 11.18, 11.19 | recursion and bracket algebra machine-checked; algorithms paper proofs, refereed (R5, R7, R8); the `√(n ln n)` term a paper proof, refereed (R12) and reviewed with replication by the Scientific Discovery Division (SCI-REV-0017); the rate of the recursion a paper proof with machine-checked line lemmas, refereed internally (two referees, no error of substance); Theorems 11.58b–11.58e paper proofs, refereed internally (three referees with independent code: no error of substance), the certified tops and the equality at two levels unrefereed |
 | a **known part** (field) | single-letter exponents; the right sample is flat in the order parameter; the hardest instance is additive, not the zero residual; a new asymptotic isoperimetric theorem | §11.20 | paper proofs, refereed (R9); shift identity machine-checked |
 | the common structure | the shear law; every game function yields a pair, and the level recursion converges | §11.21 | the theorem about game functions (Theorem 11.66) machine-checked; the shear law as a statement about algorithms is the paper Theorems 11.44, 11.45, 11.54, 11.61, 11.64 |
 | **chains in the thermodynamic limit** | a convex limit shape for profile sets of bridges; certificate sizes of bridges converge to its covering number off a countable, unidentified set of accuracies; every limit point of the certificate sizes of all walks at `(L, ε₁) = (1, ½)` lies between 116 and 3 627 (first version: "bounds `50 … 3 627`"); rate exactly `N^{-1/3}` at the compact end of the shape, `N^{-1/2}` or better at interior points | §11.22 | abstract limit theorems machine-checked; lattice lemmas paper proofs checked with independent code; reviewed by the Scientific Discovery Division (SCI-REV-0002: no false theorem; headline reworded; lower bound raised from 50 to 116 with the section's own tools); conjecture for unrestricted walks |
@@ -1553,6 +1553,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G40 | **The sub-exponential term of the adaptive cost without a hint.**  At every bounded accuracy the least number of evaluations of an adaptive algorithm without a hint on the cube class is between `exp(n·h − O(1))` and `exp(n·h + O(√(n ln n)))` (Theorem 11.58a): an explicit schedule of about `√(n/ln n)` nested levels, built on the epochs of the machine-checked rate (each level as in the proof; the choice of servers by certified cost is optional).  Two kinds of level: a *slope step* is built at accuracies `x̂ ≥ X₀(n) = 1 + ln(6(n+1)) + 2u + e^u + h` on an outer block of `⌊(x̂ − X₀(n))/h⌋ + 1` sites with the closure threshold `e^{x̂ − O(1)}`, where the closing radius is at least `ρ_h·n_o` and the outer sample costs at most `e^{n_o h}` up to polynomial factors (Lemma 11.55(d)) — it loses `(a/h + 4)·ln n + O_{u,δ}(1)` nats (`39` at `u = 1`); a *drop* works at a bounded threshold and loses `e^{O(√n)}` (Lemma 11.55(c), with the leading constant `u`), one per epoch, with summable constants.  The failure probabilities handed down are uniform over the depth because the outer block's `n_o ln 2` is taken out of the dimension.  The earlier text called `n^{3/4}` the heuristic limit of the method; that was wrong | the epoch arithmetic **[V]** (`RateFull.lean`, the Scientific Discovery Division's); the hinted lower bound **[V]** (Theorem 11.25(a)) with three lines **[P]**; Lemmas 11.55(c), (d), the two steps, the induction over epochs and the choice of the depth **[P]**; harness XVI.5 (the two lemmas on exact tables, the arithmetic, the accuracies of both kinds of level, the lower bound) **[N]**; the formula and nests of up to seven levels evaluated exactly by the workstream and by the referee **[N]** | cycle 10, workstream Q (commissioned at the twenty-first checkpoint), every step re-derived by the coordinator; **refereed (`reviews/R12`: "the main claim survives, with the constants as stated", no major finding, six minor points applied)**; **reviewed with replication by the Scientific Discovery Division (SCI-REV-0017: "proved as stated, given its inputs", nine minor points applied; the bound reproduced from the text alone)**; rests on Theorem 11.56 (paper, refereed, replicated in part by two divisions) in a regime that no run with real inner procedures covers (the outer loop of a slope step has been run against a simulated inner oracle); not machine-checked; **prior art not searched** (the question is internal to this report's algorithm family) |
 | G41 | **The rate of the level recursion.**  The exponent of `k` nested levels at accuracy zero is `h + (2π²h²θ_hint″(0) + o(1))/k²` (Theorem 11.53b; `0.641·a/k²` on the cube at `u = 1`, `(π²/16)/k²` for the Gaussian pair), for every convex non-adaptive exponent function whose dual has a twice differentiable maximum; with a kink at the fixed point the rate is `1/k`, so the general `O(1/k)` bound cannot be improved over the class of all convex pairs.  The recursion acts on lines through a one-dimensional map with a saddle-node at the hinted exponent (Theorem 11.53a); the lower bound is the passage time of the orbit of a minorant line; the upper bound needs that a *convex* family of lines moves line by line (a minimax theorem) and a convex sub-solution cut from the orbit curves.  A statement about the analysis of nested algorithms at the level of exponents: no cost at finite `n` follows, and no constant at finite `k` is certified from above | Lemmas L and M, the iteration of the lower bound, the Gaussian slope map and three instances **[V]** (`LineDynamics.lean`); the slope map, the passage time, one level for convex families, the sub-solution and the range condition **[P]**; harness XVI.6, XVI.8 (13 mutations) and exact rational lower bounds for the Gaussian pair **[N]** | cycle 10, after the twenty-second checkpoint: the coordinator's proof (`docs/workstreams/R_REPORT.md`), written after the workstream commissioned for it ended without output; **refereed internally by two independent referees with their own code: no error of substance in either half, minor findings applied**; the law was first seen numerically ("`0.65/k²`", workstream H); the mathematics is a classical slow passage through a saddle-node combined with a minimax argument — no novelty claimed for either; **prior art for the recursion itself not searched** (it is internal to this report's algorithm family) |
 | G42 | **The nested algorithm in the structure it uses** (§11.33).  The level theorem holds for an outer integrand on any probability space with an upper and a lower *tail function* (Theorem 11.118; the cube with identical constants); for two blocks, and for a dependent known part with a certified *class-relative influence* between the blocks — dependence costs slope (Theorem 11.119).  **Obstructions:** on Gauss space with Euclidean-Lipschitz functions the tail functions are exact and dimension-free and nesting over a fixed split of the coordinates gains nothing, while the hinted lower bound holds in high dimension (Theorem 11.120) — the dividing line is additivity of the envelope over independent parts, not discreteness; with unbounded influence the algorithm returns a **false certificate** (Proposition 11.121); an exponential moment is necessary and sufficient for any certified upper bound (Proposition 11.122).  A tail profile whose relative exponent does not increase gives a pair of exponent functions (Proposition 11.123); the assembly of the levels into an adaptive bound in the abstract setting is a plan, not a proof; 25 assumptions of the level theorems classified | nothing machine-checked (the machine-checked `HintPair` theorem is quoted for Proposition 11.123(a)); paper proofs **[P]**; 2 624 simulated runs of the outer loop in valid settings, the invalid brackets of Proposition 11.121 in 80 of 80 runs **[N]** | cycle 10, after the twenty-second checkpoint, under the research owner's directive on generality: workstream N (`docs/workstreams/N_REPORT.md`); **refereed internally (`docs/workstreams/N_REVIEW.md`): the level theorem and its variants correct as stated, the false certificate reproduced with independent code (120 of 120 runs), one proposition a plan, one claim on a non-sharp tail function wrong — corrected in §11.33**; Gaussian isoperimetry and a spherical cap bound quoted from memory; prior art not searched |
+| G43 | **The `1/k²` law at finite `n`, certified exponents of `k` levels, extensive accuracies** (Lemma 11.58b – Theorem 11.58e; it improves row G40).  One nested level over a family whose certified cost is a *maximum of lines* maps the family line by line with an error of five logarithms (Lemma 11.58b), a drop loses no `√n` at a logarithmic accuracy and a chain of levels with short outer blocks returns to a bounded accuracy for an additive term paid once (Proposition 11.58c): `n·h + 6.56·√(n ln n)` at `u = 1` with no term of order `√n` (Theorem 11.58d).  Carrying a **convex family of lines** through the levels — the minimax step of the rate theorem — gives `ln N ≤ n·b_k + k·c_Z·ln n + O(ln n)` for every admissible sequence of families; the *envelope sequence* (cap at slope one, lower convex envelope of the image under the slope map) is admissible from the non-adaptive exponent with no restart, has the smallest tops, `k²(b_k − h) → 2π²h²θ_hint″(0)`, and bounds the exponent of `k` nested levels at every `k`, with equality at `k = 2` and strictly from `k = 3` on: **`ln N(n; ε, δ) ≤ n·h + O(n^{1/3}(ln n)^{2/3})`**; certified tops by interval and exact rational arithmetic; at an accuracy `g·n` the exponent of the schedule converges geometrically in the number of levels: **`ln N(n; g·n, δ) ≤ n·θ_hint(g) + O((ln n)²)`** | all **[P]**: workstream Q2 (refereed internally: correct as stated) and the coordinator's `Z_REPORT.md`, `Z_ADDENDUM.md` (two internal referees with independent code: no error of substance; the certified tops and the equality at two levels added afterwards, unrefereed); harness XVI.9, XVI.10, XVI.11 **[N]**; exact evaluations of the certified cost: about 380 000 single levels, nests of two to seven levels (about six million node checks, no violation), two envelope levels over the real base at `n = 50 000` (`e^{2818}` against `e^{5547}` non-adaptive); nothing machine-checked | cycle 10, after the twenty-third checkpoint; the rate `1/k²` of the recursion (row G41) was the missing input; prior art: none searched beyond that of rows G39–G41 (the question is internal to this model) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -5172,8 +5173,9 @@ which has the proof in full).  By itself the rate does not make the `o(n)` of Th
 and 11.58 explicit: for that the sub-exponential factors of a family with `k` nested levels
 have to be bounded uniformly in `k`.  The first version of this remark said that they are
 not.  **For an explicit schedule built on the epochs of this proof they are, and the
-`o(n)` of Theorem 11.58 is `O(√(n ln n))` — Theorem 11.58a.**  (At extensive accuracies the
-term of Theorem 11.54 is still unquantified.)
+`o(n)` of Theorem 11.58 is `O(√(n ln n))` — Theorem 11.58a.**  With convex families of lines in
+place of single-line epochs it is `O(n^{1/3}(ln n)^{2/3})`, and at extensive accuracies the term
+of Theorem 11.54 is `O((ln n)²)` — Theorem 11.58e.
 
 **Theorem 11.53a (the recursion at the level of lines: the slope map, and a saddle-node at the hinted exponent) [V for (a), (b′), (d) and for the iteration in (c): `LineDynamics.lean`; P for (b), (c), (e): the coordinator's proofs, `docs/workstreams/R_REPORT.md` §§1–5, **refereed internally by two independent referees with their own code** (`docs/workstreams/R_REVIEW_B.md`: the slope map, the lower bound, the passage time; `docs/workstreams/R_REVIEW_A.md`: one level for convex families, the sub-solutions, the range condition, the upper bound) — **no error of substance in either half**; a brute force on the operator `R` itself, the chain on six pairs and the recursion iterated to 61 levels on pairs the author had not used confirm the statements and the constant to `0.1` per cent; their minor findings (two wrong expository sentences, a remark valid only for an infinite slope at zero, an over-statement of a numerical check, routine steps left unwritten) are applied in the report; internal reviews are not external peer review].**
 *Everything here is a statement about the non-adaptive exponent function alone: nothing of
@@ -5332,11 +5334,13 @@ slope at zero and are not of this kind).
 analysis of the nested algorithms at the level of exponents: `k` nested levels, *analysed by
 `R`*, have the exponent `h + (c_*² + o(1))/k²` at accuracy zero.  It is not a statement about
 algorithms that are not nested in this way, the `o(1)` has no rate (no certified constants at
-finite `k`), and it gives no cost at finite `n`: with `k ≍ n^{1/3}` levels and a loss of `O(ln n)` per
-level one would expect `n·h + O(n^{1/3}(ln n)^{2/3})`, but that needs the sub-exponential factors
-of `k` levels uniformly in `k` and **is not established** (the schedule of Theorem 11.58a, built
+finite `k`), and by itself it gives no cost at finite `n`: with `k ≍ n^{1/3}` levels and a loss of `O(ln n)` per
+level one would expect `n·h + O(n^{1/3}(ln n)^{2/3})`, which needs the sub-exponential factors
+of `k` levels uniformly in `k` (the schedule of Theorem 11.58a, built
 on single lines, is confined to `O(√(n ln n))` because single-line epochs have the rate `1/k`
-only: `DEAD_ENDS.md` D64).
+only: `DEAD_ENDS.md` D64).  **Both gaps have since been closed by Theorem 11.58e**: the cost
+`n·h + O(n^{1/3}(ln n)^{2/3})` for a schedule of convex families, and certified upper bounds for the
+exponent at every finite `k` (which are not the exponents themselves from the third level on).
 (4) *Not machine-checked:* (b), the passage time, (e) (it needs a minimax theorem), the
 sub-solution argument and the range condition.  Machine-checked: Lemmas L and M, the
 iteration of (c), the Gaussian slope map, three numerical instances.
@@ -5974,7 +5978,8 @@ accuracy.  Its purpose is the order of the error term.  (ii) **Not the true orde
 `√(n ln n)` is an upper bound for this method.  With a rate `C/k²` *for an explicit schedule
 whose levels lose `O(ln n)`* the level term would drop to `O(n^{1/3}(ln n)^{2/3})` and the bound
 would be `n·h + O(√n)` — a conjecture; the observed `0.65a/k²` concerns the exact recursion,
-for which no such schedule is known.  The `C₁√n` of *this schedule* comes from its drops,
+for which no such schedule is known (**since proved, with both terms gone: Theorem 11.58e
+below has `n·h + O(n^{1/3}(ln n)^{2/3})`, by a schedule of convex families of lines**).  The `C₁√n` of *this schedule* comes from its drops,
 which work at a bounded threshold on an outer block of positive fraction (Lemma
 11.55(c)); the workstream's report takes a `√n` to be unavoidable for the family, because
 the finest rung of the top level calls a bounded-accuracy procedure.  We do not think it
@@ -5991,7 +5996,8 @@ rate alone.  (iii) **No lower bound**
 beyond the hinted one of (c), `n·h − O(1)`.  (iv) **Extensive accuracies** — the `o(n)` of Theorem 11.54 — are not
 treated: the step at an accuracy rate `g` has outer accuracy rate `g + θ_hint(g) ≥ h`, again
 bounded away from zero, so `n·θ_hint(g) + O(√(n ln n))` is expected by the same method
-(conjecture; not written).  (v) **It rests on Theorem 11.56 far from the parameters at
+(conjecture; not written — **since proved with a smaller term, `n·θ_hint(g) + O((ln n)²)`: Theorem
+11.58e(g)**).  (v) **It rests on Theorem 11.56 far from the parameters at
 which that theorem was simulated** — thresholds `e^{Θ(n)}` together with ladders of `Θ(n)`
 rungs that end at `x_L = b` exactly, up to `√(n/ln n)` nested levels, inner failure
 probabilities `e^{−Θ(n)}`, and the abort rule in the form "before every query, every inner
@@ -6134,9 +6140,173 @@ uses one chain at the top — is cheaper.
 *What it is not.*  Everything said of Theorem 11.58a under (i), (iii)–(vi) applies, with one more
 kind of level in a regime that no simulation covers (chains of about `n/ln n` levels, inner
 failure probabilities `e^{−Θ(n)}`).  The order `√(n ln n)` is that of the rate `c₁/k` of the epochs and
-is not improved here.  (An improvement of the order — `n^{1/3}(ln n)^{2/3}`, by carrying a convex family
-of lines through the levels — is the subject of `docs/workstreams/Z_REPORT.md`, under internal
-review when this was written.)
+is not improved here; it is in the next theorem, by carrying a convex family of lines
+through the levels.
+
+**Theorem 11.58e (the `1/k²` law at finite `n`: `n·h + O(n^{1/3}(ln n)^{2/3})`; certified exponents of `k` levels; extensive
+accuracies) [P: the coordinator's proofs, `docs/workstreams/Z_REPORT.md` and `Z_ADDENDUM.md`; both refereed
+internally with independent code — `Z_REVIEW.md` ((a)–(d) for the cut curves of Theorem 11.53b: "no error of
+substance", seven findings of wording and numbers applied) and `Z_ADDENDUM_REVIEW.md` (the general form, (e),
+(g): "no error of substance", ten findings applied); (f) and the equality in (e) were added after the reviews
+and are unrefereed; rests on Theorem 11.56, Lemma 11.58b(ii), Proposition 11.58c(b), Proposition 11.57(a) and
+Theorems 11.53a, 11.53b; harness XVI.10, XVI.11; exact nests of two to seven levels; not machine-checked].**
+Call `(W, b)` a *family* if `b > 0` and `W : [0, b] → [0, 1]` is convex, nondecreasing and continuous with `W(0) = 0`; it
+stands for the lines `B − W(B)·x`, `0 ≤ B ≤ b`, with upper envelope `M_{W,b}(x) = max_B (B − W(B)x)`.  A sequence of
+families `(W_j, b_j)_{j≥0}` is *admissible* if `b_j ≥ b_{j+1} ≥ sup{B ≤ b_j : Σ(B, W_j(B)) < ∞}` and `W_{j+1} ≤ Σ(·, W_j(·))` on
+`[0, b_{j+1}]` (`Σ` the slope map of Theorem 11.53a).
+(a) *The minimax step* (from the proof of Theorem 11.53b: a convex family moves line by line).  For an
+admissible sequence, every `j`, every accuracy rate `g > 0` and every `η > 0` there is an outer fraction
+`φ ∈ (0, 1)` with
+
+    max_{B ≤ b_j, W_j(B) ≤ s ≤ 1} [ (1 − φ)·B + (1 − s)·φ·θ_na(g/φ) ]  ≤  M_{W_{j+1}, b_{j+1}}(g) + η ;
+
+and if `T ≤ M_{W_j, b_j}` for the level recursion of Theorem 11.53, then `min(T, R[T]) ≤ M_{W_{j+1}, b_{j+1}}`.
+(b) *One level.*  Let `N ≥ 2`, and let a family of bracket procedures for the dimensions `d ≤ N`, with least
+accuracy at most one, have certified costs at most `max [d·B − σ·x] + E` over the lines `(B, σ = W_j(B))`, `B` in a
+grid of spacing `1/N` of `[0, b_j]`.  For a target accuracy `x̂ ≥ X₀(N) + 1`, `X₀(d) = 2 + ln(3(d + 1)) + 2u + e^u`, take
+the level of Lemma 11.58b in dimension `d` with tolerance one, outer rate `e = (x̂ − X₀(d))/n_o` and the outer block
+that minimises `max [(d − n_o)B + (1 − σ)n_o·θ_na(e)]` over the grid (enumeration for `d ≤ ⌊1/(2u)⌋ + 2`).  The resulting
+family has certified costs at most `max [d·B − σ·x̂] + E⁺` over the grid lines of `W_{j+1}`,
+
+    E⁺(d, x; Λ) = E(d, 1; Λ + q(d, Λ)) + ℓ₀(d, Λ) + X₀(d) + O(1)        (≈ E + 5 ln d),
+
+and least accuracy `X₀(N) + 1 ≈ ln N`.
+(c) *Back to the accuracy one.*  The chain of Proposition 11.58c(b) on the flat majorant `d·b_{j+1}` of that family,
+used below the accuracy `X₀(N) + 1`, and the family itself above it, form a family with least accuracy
+`α ≤ 1` and certified costs at most `max [d·B − σ·x] + Ê` over the same grid lines, `Ê = E⁺ + A_T + X₀(N) + 2`, at
+**every** accuracy `x ≥ α`.
+(d) *The bound.*  Hence for every admissible sequence with `W₀ ≡ 0` and `b₀ ≤ a`, every base family of flat type
+`b₀` with least accuracy at most one and error `E₀`, there are `n₀ = n₀(u, δ)` and constants `c_Z = c_Z(u)` and `C′ = C′(u)` such that for all `n ≥ n₀`, `0 < ε ≤ 1` and `1 ≤ k ≤ n^{1/2}`
+
+    ln N(n; ε, δ)  ≤  n·b_k + k·c_Z·ln n + E₀ + C′·(ln n + ln(1/ε)),
+
+and more generally the cost at any accuracy `x̂ ≥ X₀(n) + 1` is at most `exp(n·M_{W_k, b_k}(x̂/n) + k·c_Z·ln n + E₀ + C′ ln n)`.
+(The constant `c_Z(u)` is the loss of one level and one chain per `ln n`: `47` to `50` at `u = 1` over the sizes of the table below,
+`52.0` in the limit along `k ≍ n^{1/3}`, and `52.9` serves for all `k ≤ n^{1/2}`.)
+(e) *The envelope sequence.*  `W₀ ≡ 0` on `[0, a]`; `b_{j+1} = sup{B ≤ b_j : Σ(B, W_j(B)) < ∞}`; `W_{j+1}` the lower convex
+envelope of `min(1, Σ(B, W_j(B)))` on `[0, b_{j+1}]`.  It is admissible with no further condition — no restart, no
+range condition; among admissible sequences from the same start it has the smallest tops (the step is
+monotone); `b_j ↓ h` with `j²·(b_j − h) → 2π²h²θ_hint″(0)`; and at the exponent level **`τ_j ≤ b_j` for every `j ≥ 1`**
+(`T_j ≤ M_{W_j, b_j}` at every accuracy) — an upper bound for the exponent of `j` nested levels from the first
+level on, where Theorem 11.53b has one only beyond an unquantified restart.  *Where it is exact:* the
+level formula at vanishing accuracy sees the family below it only through its slope-capped hull
+`T^♯(x) = sup_{y≤x}(y + T(y)) − x`, and the convex envelope loses nothing, so `b_{j+1}` is exactly the value of that
+formula on `M_{W_j, b_j}`; since `θ_na^♯ = max(θ_na, a − ·)` is the envelope of the first family, **`τ₂ = b₂`** (for the
+cube `a²/(a + x*)`, `θ_na(x*) = a − x*`).  From the third level on the recursion is strictly better
+(`τ₃ = 0.3612·a < b₃ = 0.3633·a` at `u = 1` **[N]**; found by the referee and by us independently): the second
+level lies below its envelope majorant at the accuracy rates the third level uses, because it uses a
+positive inner tolerance, which the line-by-line step does not.  Both sequences have the same constant
+in the limit.  The base of this sequence is the chain on the base bracket (Theorem 11.58d with no epoch:
+flat type `a`, `E₀ = O(ln n)`).  Consequently
+
+    ln N(n; ε, δ)  ≤  n·h + O( n^{1/3}·(ln n)^{2/3} ),
+    limsup_{n→∞} ( ln N(n; ε, δ) − n·h ) / ( n^{1/3}(ln n)^{2/3} )  ≤  (3/2)·( 4π²h²θ_hint″(0) )^{1/3}·c_Z^{2/3}        (≈ 10.9 at u = 1),
+
+against `n·h − O(1)` from below (Theorem 11.58a(c)).
+(f) *Certified tops.*  Admissibility asks for a lower bound of the slope map only, and
+`Σ(B, s) ≥ [B − (1 − s)·ϑ]/e` for every pair with `ϑ ≥ θ_na(e)`.  So a sequence whose curves are maxima of finitely
+many lines, each of the form `[B − ϑ(1 − ℓ(B))]/e` for a line `ℓ` of the previous curve and such a pair, capped
+at one by the tangent from the top, with tops `c′` verified by `c′ + ā·V(c′) ≥ ā` for an upper bound `ā ≥ a`, is
+admissible; for the cube the pairs come from `θ_na(KL(ρ‖p_u)) = KL(ρ‖½)` by interval arithmetic, the lines
+are rounded outwards, and the hull, the cap and the tops are checked in exact rational arithmetic
+(`experiments/workstreams/Z/z6_certified_tops.py`).  Given (a) and (e), its tops are rigorous upper bounds for
+the exponents of the level recursion:
+
+| `j` | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 20 | 40 | 80 | 400 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| `τ_j/a ≤` (`u = 1`; `h/a = 0.262647`) | `0.500411` | `0.363301` | `0.312792` | `0.291377` | `0.281324` | `0.272751` | `0.269066` | `0.264244` | `0.263048` | `0.262748` | `0.262652` |
+| `u = 2` (`h/a = 0.296757`) | `0.505616` | `0.383348` | `0.341034` | `0.323698` | `0.315236` | `0.307182` | `0.303468` | `0.298466` | `0.297190` | | |
+| `u = ½` (`h/a = 0.253231`) | `0.500027` | `0.358646` | `0.305681` | `0.282898` | `0.272168` | `0.263248` | `0.259554` | `0.254794` | `0.253621` | | |
+
+(rounded up in the last digit; the floating-point envelope tops lie below them by `3·10⁻⁸` to `2·10⁻³` of their
+distance to `h`).  The same curves give `T_j(g) ≤ max_B (B − V_j(B)g)` at every rate, evaluated exactly.
+(g) *Extensive accuracies: geometric convergence.*  Let `θ_na(e) → 0` and `J` be differentiable below its
+maximiser (the cube; the Gaussian pair).  Below the fixed point the orbits of the slope map converge
+geometrically — `t₁(B) − p_i(B) ≤ t₁(B)·(hL/(hL + η))^i` for `B ≤ h − η`, `t₁` the inverse of `J` — and near the bottom the
+envelope is the image itself; hence for every rate `0 < g < ε*` there are `η > 0` and `k₁` with
+
+    θ_hint(g)  ≤  M_{W_k, b_k}(g)  ≤  θ_hint(g) + g·(hL/(hL + η))^{k − k₁}        (k ≥ k₁),
+
+and by (d) with `k = O(ln n)` levels
+
+    ln N(n; g·n, δ)  ≤  n·θ_hint(g) + C(u, g)·(ln n)²        (n ≥ n₀(u, δ, g)),
+
+where Theorem 11.54 has `o(n)`.  The constant of this proof is of order `1/g²` as `g → 0`; the true number of
+levels is of order `(h/g)·ln n` (at a fixed rate the defect decays like `κ^k`, `κ = 1 − g/(J(t) + (1 − t)g)` at
+`J′(t) = g`), which is not proved.
+
+*Proof* (the two reports have every step).  (a): in the proof of Theorem 11.53b the level operator is bounded
+by `inf_e max Φ` over the convex set of lines `{(B, s) : W_j(B) ≤ s ≤ 1}`; by Sion's minimax theorem this is
+`max inf_e Φ ≤ sup{B − Σ(B, W_j(B))g}`, and the two conditions of admissibility turn the right side into
+`M_{W_{j+1}, b_{j+1}}(g)`.  (b): by Lemma 11.58b(ii) the level with the fraction `φ = n_o/d` costs at most
+`d·max_{grid}[(1 − φ)B + (1 − σ)φθ_na(g/φ)] + ℓ₀ + E` at `g = (x̂ − X₀(d))/d`; the bracket is `a`-Lipschitz in `φ` (it is the
+perspective of the convex function `θ_na`), so rounding the fraction of (a) to a multiple of `1/d` costs `O(1)`;
+the grid costs `d/N ≤ 1`; and shifting the accuracy by `X₀(d)` costs at most `X₀(d)` **because slopes are at most
+one** — lines of slope above one, which such a level produces, are not claimed.  The accuracy of the level
+is at most `x̂` by the formula of Theorem 11.56 (with a nat to spare — the referee).  (c): Proposition
+11.58c(b); the top grid line has slope at most one.  Without (c) the least accuracy grows by `≈ ln n` per
+level, a family that is `ξ` behind costs `e^{σξ}` more at every later level, and `k` levels lose `≈ ½k²·ln n`: back
+to `√(n ln n)`.  (d): induction over the levels, unrolling the errors as in Theorem 11.58d; the quantity
+`ln(1/δ) + (dimension)·ln 2` grows by `O(ln n)` per level and by less than `n·a` per chain, and enters
+logarithmically.  (e): `min(1, ·)` and the convex envelope keep the three properties of a family, and
+`W_{j+1} ≤ Σ(·, W_j)` by construction.  Monotonicity: if `(V_j, c_j)` is admissible and starts above, then
+`b_j ≤ c_j` and `W_j ≥ V_j` by induction (`Σ` is nondecreasing in the slope; `V_{j+1}` is a convex minorant of what
+`W_{j+1}` is the envelope of).  Convergence: the *fixed-rate sequence* `V_{j+1} = (V_j + B/h − 1)₊/G_j` on `[0, c_{j+1}]`, `c_{j+1}`
+the root of `V_j(B) = 1 − B/a`, `G_j = max{1, c_{j+1}(1/h − 1/a)}`, is admissible (`Σ(B, s) ≥ s + B/h − 1`: the rate `e = h`),
+its tops reach `ah/(a − h)` after finitely many steps and then satisfy `c − h ≤ h(1 − h/a)/(i + h/a)` — a ten-line
+proof of the rate `O(1/k)` without epochs.  The sharp rate: once the envelope top is below `h + ε₁`, the cut
+orbit curves of Theorem 11.53b restarted there are admissible and start above, so the envelope top `i`
+levels later is at most their `i`-th top; the lower bound is `b_j ≥ τ_j`.  `τ_j ≤ b_j`: `θ_na` is the envelope of its
+tangent lines `B − Σ(B, 0)x`, and `W₁ ≤ Σ(·, 0)`; then (a).  The equality at two levels: in the level formula at
+vanishing accuracy, `inf_φ sup_γ [min(γ, φa) + (1 − φ)T(γ/(1 − φ))] = inf_x a·(x + T^♯(x))/(a + x)`; for an envelope
+`M_{W,b}` this is `max_B min(B, (1 − W(B))a)` by the minimax theorem, which is the next top.  (f): the displayed
+line is below `Σ(B, V(B))` because the bracket decreases in `ϑ` and increases in the slope; the rest is
+arithmetic that the script checks exactly.  (g): the subgradient of `s ↦ Σ(B, s)` at its fixed point `t₁` is
+`θ_na(e₁)/e₁ = 1 − J′/(B + (1 − t₁)J′) ≤ hL/(hL + η)`; lines with intercepts within `η` of `h` are harmless at the
+rate `g` once `b_k − h`, `(L − t₁(h − η))g` and the geometric term are each a third of the margin
+`θ_hint(g) − (h − Lg) > 0`.  The order in (e): `min_k [n·C/k² + k·c_Z ln n]` at `k ≈ (2Cn/(c_Z ln n))^{1/3}`.  ∎
+
+*Numbers* (`u = 1`; `docs/workstreams/Z_ADDENDUM.md`, `experiments/workstreams/Z/`).  The bound of (d), (e) as a
+formula, `δ = 0.05`, `ε = 1`, in nats above `n·h`, against Theorem 11.58d (best number of epochs) and the
+non-adaptive `n(a − h)` (two rows reproduced by the referee):
+
+| `n` | `10⁴` | `3.2·10⁴` | `10⁵` | `10⁶` | `10⁸` | `10^{10}` | `10^{12}` |
+|---|---|---|---|---|---|---|---|
+| non-adaptive | `818` | `2 590` | `8 180` | `8.2·10⁴` | `8.2·10⁶` | `8.2·10⁸` | `8.2·10^{10}` |
+| Theorem 11.58d | `1 002` | `2 148` | `3 949` | `1.06·10⁴` | `7.0·10⁴` | `6.5·10⁵` | `6.8·10⁶` |
+| **this theorem** (levels `k`) | `1 025` (2) | **`1 627`** (3) | **`2 476`** (4) | **`5 648`** (6) | **`3.3·10⁴`** (24) | **`1.8·10⁵`** (104) | **`9.7·10⁵`** (484) |
+
+(the tops are the floating-point envelope tops for `k ≤ 80` and `h + 2π²h²θ_hint″(0)/k²` beyond — for the cube at
+`u = 1` an upper estimate as far as it has been computed, `k ≤ 800`; the certified tops of (f) change the
+entries by less than one part in a thousand).  *Exact evaluations of the certified cost* — no run of an
+algorithm: one level over saturating inner families, every admissible outer block, `d ≤ 2·10⁴`, slopes `¼` to
+`4`: about 380 000 levels by us and by the referee with two evaluators, no violation of (a), of (b) or of
+the accuracy, least slack `1.1` nats in (a) (equality to `10⁻³` where no cap is active) and `15.6` in (b); the
+measured loss of a level is about half of what (b) allows.  Nests of two to seven levels with their
+chains: the referee's 5.26 million node checks (cut curves, saturating bases, `n ≤ 10⁵`) and ours (envelope
+curves; three levels at `n = 3 000`, `u = 2`: 462 595 checks), no violation.  **Two envelope levels over the real
+base at `n = 50 000`, `u = 1`: certified `e^{2818}` evaluations at accuracy one** (285 761 checks of the induction),
+against `e^{5547}` non-adaptive and `n·h = 1 457` — `1 361` nats above `n·h`, less than the formula gives at `n = 3.2·10⁴`.
+*What it is not.*  (i) **The true order**: nothing is known between `n·h − O(1)` and this bound.  That the method
+cannot go below `n·h + Ω(n^{1/3})` is a heuristic: `b_k − h ≥ τ_k − h ≥ c/k²` for every admissible sequence is a
+theorem, but "every level that lowers the exponent loses an additive constant against its type" is not
+(the referee's finding F4 — a chain of `n/m` levels costs its additive term once).  (ii) **The level
+recursion**: from the third level on the exponent of `k` nested levels is strictly below the envelope top (by `0.5`–`0.6`
+per cent at `k = 3, …, 6`); a step for families that also carries the inner tolerance is not written.
+(iii) **Effective or certified end to end**: `n₀`, `C′` and the rate at which `k²(b_k − h)` approaches its limit
+are not produced by the proofs; the tops are certified only through (f), the table evaluates formulas,
+and at `n = 10⁴` every bound is still above the non-adaptive one.  (iv) **A practical algorithm**: `k` nested
+levels and `k` chains of `≈ n/ln n` levels each, in a regime of Theorem 11.56 that no simulation covers; the
+design computes the curves (free in this model).  (v) **Beyond the uniform cube**: (a), (e) and (f) hold
+for every convex pair of exponent functions with infinite slope at zero (with a kink at the fixed
+point the tops decrease like `1/k` and the bound is again `O(√(n ln n))`); (b)–(d) and the costs in (g) need
+the level theorem with a tail function that is sharp up to polynomial factors at every block size,
+known for the uniform cube only (§11.33; with a field the isoperimetric statement is asymptotic).
+(vi) **Uniform in the accuracy**: (e) is for bounded and (g) for extensive accuracies; in between the
+same schedule gives `n·M_{W_k, b_k}(x̂/n)` plus the level losses, and numerically the defect
+`M_{W_k, b_k}(g) − θ_hint(g)` is largest at `g = 0` for every `k ≤ 60` (so that the bound of (e) would hold at every
+accuracy relative to `n·θ_hint(x̂/n)`), which is not proved — the obvious induction fails from about ten levels
+on.  (vii) Machine checks: none.
 
 *The picture for the cube class, complete at the exponential scale down to accuracies
 `e^{-o(n)}`:*

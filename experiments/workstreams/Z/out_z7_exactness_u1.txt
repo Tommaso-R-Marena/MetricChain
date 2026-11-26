@@ -20,5 +20,5 @@
       0.9000   0.0003033388   0.0002886242   (0.9974, 0.0000)   0.0002886322   +7.233e-08
       0.9500   0.0000739261   0.0000721403   (0.9994, 0.0000)   0.0000721401   -1.980e-09
     largest (M_2 - T_2)/a over these rates: 1.258e-01   (zero would mean: the envelope majorant IS the second level)
-(3) tau_3 from T_2 (grid of 420 rates, linear interpolation): 0.0400836530 = 0.361296 a  (phi = 0.278);  the same operator on the majorant M_2: 0.0403062674 = 0.363303 a;  envelope top b_3: 0.0403060530 = 0.363301 a
-    (b_3 - tau_3)/a = 2.005e-03;   (b_3 - R[M_2](0))/a = -1.933e-06
+(3) tau_3 from T_2 (grid of 420 rates, linear interpolation; outer fraction refined to 1e-9): 0.0400717432 = 0.361189 a  (phi = 0.278215);  the same operator on the majorant M_2: 0.0403062674 = 0.363303 a;  envelope top b_3: 0.0403060530 = 0.363301 a
+    (b_3 - tau_3)/a = 2.112e-03;   (b_3 - R[M_2](0))/a = -1.933e-06

@@ -685,16 +685,59 @@ Euclidean-Lipschitz functions when the coordinates are split into fixed blocks �
 dividing line is whether the envelope is additive over independent parts, not whether
 the space is discrete — and with unbounded influence it **returns a false certificate**
 (reproduced by the referee in every one of 120 runs).  **The audit**: two independent
-readers classified 499 assumptions of 156 numbered statements (one in five is
+readers classified the assumptions of 156 numbered statements with 513 tags (one in five is
 load-bearing in the sense that a counterexample exists without it, one in seven is of
 unknown status); it found one theorem that had lost a hypothesis when it was adopted
 from its workstream (second-order classes below the Curie–Weiss coupling are cheap only
-for an *additive* known part: restored, with counterexamples), eleven stale sentences
+for an *additive* known part: restored, with counterexamples), eight stale sentences
 and 47 sentences — almost all in summaries, this file included — that stated more than
 is proved; all are corrected and recorded one by one.  The Scientific Discovery
 Division's review of the sub-exponential term (item (xxii)) found it proved as stated,
 reproduced its numbers from the text alone, and ran the outer loop of its main level
 for the first time; its nine minor points are applied.
+(xxiv) *The `1/k²` law at finite size; certified exponents of `k` levels; extensive
+accuracies; the audit audited* (theory report Lemma 11.58b – Theorem 11.58e, the remarks
+after Theorem 11.32 and in Theorems 11.116(e), 11.117(d); `docs/workstreams/Q2_REPORT.md`,
+`Z_REPORT.md`, `Z_ADDENDUM.md` with their three internal reviews; `docs/ASSUMPTION_AUDIT.md`
+§1a).  **Without a hint, adaptive algorithms on the cube class need at most
+`exp(n·h + O(n^{1/3}(ln n)^{2/3}))` evaluations at every bounded accuracy** — the rate `1/k²` of
+item (xxiii) turned into a cost — **and at most `exp(n·θ_hint(g) + O((ln n)²))` at an accuracy
+`g·n`** (the hinted exponents; lower bounds `n·h − O(1)` and the hinted one).  Three steps.
+A workstream removed the `√n` of item (xxii): one level over a family whose certified
+cost is a maximum of lines moves every line with an error of five logarithms, and a
+chain of levels with short outer blocks returns from a logarithmic to a bounded accuracy
+for an additive term that is paid once.  Then every level hands down a *convex family
+of lines* instead of one line, and the minimax step of the rate proof makes the family
+move line by line; the best such sequence — cap the slopes at one, take the lower
+convex envelope of the image — starts at the non-adaptive exponent, needs no restart,
+and its top values bound the exponent of `k` nested levels **at every `k`**: exactly at
+`k = 2`, by half a per cent too much from `k = 3` on (the true recursion gains from a
+positive inner tolerance, which lines handed down one by one do not carry), with the
+same limit constant.  Those bounds are computed with interval and exact rational
+arithmetic: `0.500411·a`, `0.363301·a`, `0.312792·a`, …, `0.262652·a` at `k = 2, 3, 4, …, 400` for
+`u = 1`, against `h = 0.262647·a`.  At a positive accuracy rate the bottleneck of the slope
+map is out of reach of the lines that matter, and the exponent converges geometrically
+in the number of levels.  As formulas at `u = 1` the new bound is above the non-adaptive
+cost at `n = 10⁴` and below every earlier bound from about `3·10⁴` on; evaluated exactly
+(certified cost, no run), two levels of the new schedule over the real base at
+`n = 50 000` cost `e^{2818}` against `e^{5547}` non-adaptive, with `n·h = 1457`.  Paper proofs —
+the workstream's and the coordinator's — refereed internally by three referees with
+independent code (no error of substance; 23 findings of wording and numbers applied);
+the certified computation and the equality at two levels were added afterwards and are
+unrefereed; nothing is machine-checked; the constant in `O(n^{1/3}(ln n)^{2/3})` is about `10.9`
+at `u = 1` and the schedule is not a practical algorithm.  **The audit of item (xxiii) was
+itself reviewed on a sample** by the Scientific Discovery Division: its tag "false when
+removed" can be trusted, its tag "needed only by the proof" could not — two such
+hypotheses are needed by the statements (an additive true residual in the covering
+sandwich for dense second-order classes, where a boundary member is certified by
+`n + 1` evaluations against a bound of `2ⁿ`; homogeneity for the limit along a chain, which
+need not exist), four more are of unknown status, and one statement of ignorance
+contradicted our own report (the adaptive exponent *is* determined for one family of
+interacting known parts).  All corrected; the first was replicated here with a linear
+programme of our own.  That division also derived the weak-coupling coefficient of the
+chain exponents — the direction in which a nearest-neighbour coupling moves the
+non-adaptive exponent changes sign at the slope `1.5055` — which we confirmed by a
+brute-force capacity computation and record as its result and an open question.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
@@ -720,9 +763,11 @@ computation, reviewed and replicated by the Scientific Discovery Division); the 
 sub-exponential term `O(√(n ln n))` of Theorem 11.58a is a refereed paper proof for a
 schedule that has been evaluated exactly only at depths and sizes where it is not yet
 better than the plain bracket; the rate `1/k²` of the nested levels (Theorem 11.53b) is a
-refereed paper proof about exponents, asymptotic in the number of levels, with no
-certified constant from above at any finite number of levels and no consequence yet
-for the cost at finite size; the level theorem on general probability spaces (§11.33)
+refereed paper proof about exponents, asymptotic in the number of levels; the bound
+`n·h + O(n^{1/3}(ln n)^{2/3})` built on it (Theorem 11.58e) is a refereed paper proof whose
+constants are not effective, whose tops are certified only given two of its own paper
+statements, and whose schedule has been evaluated exactly only up to two levels over
+the real base and seven over idealised ones; the level theorem on general probability spaces (§11.33)
 is a refereed paper proof whose cost guarantee is vacuous wherever no sharp tail
 function is known — everywhere but the uniform cube and Gauss space at bounded
 accuracy; its
