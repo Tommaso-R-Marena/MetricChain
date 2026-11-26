@@ -11,7 +11,7 @@ Related theorem or experiment: Theorem K1 = Theorem 11.56; Theorem 11.25(a); The
 Related message/request IDs: ENG-MSG-0006 §2 (the research owner's directive on generality: "heterogeneous … nonuniform local parameters"); ENG-RES-0015 (the homogeneous recursion this extends)
 ```
 
-# For cubes whose sites have different slopes there is a certified algorithm with finite-size constants: make every outer block out of sites of one type.  Its bound is up to three times lower in the exponent than treating all sites as the steepest, and two to five times the exact lower bound
+# For cubes whose sites have different slopes there is a certified algorithm with finite-size constants and sharp tables: make every outer block out of sites of one type.  With a tenth of the sites steep its bound is a seventh to two thirds of what treating all sites as the steepest gives; at `n = 16 000` it is `1.3` to `2.1` times the exact lower bound
 
 Labels: **[P]** paper argument, here always ours and unrefereed; **[X]** exact evaluation of
 formulas; **[L]** literal runs with real fluctuations and exact truth.  Units in this
@@ -36,9 +36,10 @@ message: **nats per site** (the constant `a` differs from type to type).
    relate.)
 3. **Bounds** **[X]** (§5): on 75 mixtures of two types the certified bound of this
    "type-aligned" nesting is below that of the homogeneous algorithm run with the largest
-   slope (which is admissible by inclusion) in all but a few nearly homogeneous cells at
-   the smallest size, and is a third to a half of it when a tenth to a quarter of the sites
-   are steep.
+   slope (which is admissible by inclusion) in all but a few nearly homogeneous cells,
+   where it is above by at most `0.004` nats per site; it is `0.14`–`0.69` of it when a tenth
+   to a quarter of the sites are steep.  Mixed outer blocks with your sorted-slope bound
+   (Lemma N14), put into the same recursion, give the homogeneous bound again (§5).
 4. **Lower bound** **[P, X]** (§3): the argument of Theorem 11.25(a) with weighted dips gives a
    lower bound for every algorithm that is computable exactly at every `n`; it exceeds the
    asymptotic exponent by a term that shrinks with `n`.
@@ -165,10 +166,52 @@ of that message for both columns, and the top level is the same (certified accur
 `0.8715`, `δ = 0.05`).  The homogeneous column does not depend on the mixture: it is the
 uniform cube with slope `u_H`.
 
+The ratio of the type-aligned bound to the homogeneous one (smallest and largest over the
+five pairs of slopes), and to the lower bound:
+
+<!-- TABLE:x014_ratios -->
+<!-- /TABLE:x014_ratios -->
+
 The hypotheses of the protocol (written after five preliminary cells, before the job):
 
 <!-- TABLE:x014_summary -->
 <!-- /TABLE:x014_summary -->
+
+H1 is refuted where nine tenths of the sites are steep: there a family without mixed
+outer blocks is marginally worse than treating the cube as homogeneous.  H3's lower end
+(`1.5`) was too cautious.
+
+### 5.1 Mixed outer blocks with the sorted-slope bound, in the same recursion **[X]**
+
+Your Lemma N14 bounds the upper tail on a cube with several slopes by sorting the slopes
+along the depth; the same argument applied to Lemma K.1(b) gives the lower tail function
+`T(k) = Σ_j C(m, j)·e^{−U_{(j−k)₊}}`, `U_i` the sum of the `i` largest slopes (**[P]**, ours; both
+inequalities hold for every one of the 65 534 proper subsets of a four-site cube with two
+slopes: `tests/eng/test_hetero.py`).  With these tables a *mixed* outer block — the same
+fraction of every type, the split of Theorem 11.101 — is a candidate like any other:
+
+<!-- TABLE:x014_mixed -->
+<!-- /TABLE:x014_mixed -->
+
+<!-- TABLE:x014_mixed_summary -->
+<!-- /TABLE:x014_mixed_summary -->
+
+So at finite `n`, as at the exponential scale (your remark after Lemma N14), the
+sorted-slope bound buys nothing over inclusion: what makes a mixture cheaper is an
+outer block whose tail function is *sharp*, and today that means a block of one kind.
+
+### 5.2 A continuous profile of slopes, binned **[X]**
+
+Every site its own slope (equally spaced on `[½, 2]`) — "genuinely heterogeneous sites" in
+your assumption audit.  Bin the slopes into `m` classes and give every site the largest
+slope of its class: the binned class contains the original one, so its certified bound
+is a bound for the original (your Proposition N19 does this at the level of exponents).
+
+<!-- TABLE:x014_profile -->
+<!-- /TABLE:x014_profile -->
+
+<!-- TABLE:x014_profile_caption -->
+<!-- /TABLE:x014_profile_caption -->
 
 ## 6. Literal runs on small cubes **[L]**
 

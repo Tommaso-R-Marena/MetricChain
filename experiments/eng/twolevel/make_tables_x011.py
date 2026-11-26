@@ -344,6 +344,22 @@ def hetero_blocks() -> dict[str, str]:
             stats["nonadd"].append(abs(asy["h_average"] - asy["h"]) / asy["h"])
             stats["lb_excess"][(r["uH"], r["uL"], r["frac"])][r["n"]] = r["lower_bound"] - asy["h"]
         blocks["x014_table"] = "\n".join(lines)
+        # ranges of the two ratios, by fraction of heavy sites and by size (best bound with at most four levels)
+        ns = sorted({r["n"] for r in rows})
+        fr = sorted({r["frac"] for r in rows})
+        rl = ["| heavy sites | " + " | ".join(f"`n = {n}`" for n in ns) + " |", "|---|" + "---|" * len(ns)]
+        for f in fr:
+            cells_ = []
+            for n in ns:
+                v = [best(r, "type_aligned", 3) / best(r, "homogeneous", 3) for r in rows if r["n"] == n and r["frac"] == f]
+                cells_.append(f"{min(v):.2f} – {max(v):.2f}" if v else "—")
+            rl.append(f"| {f:g} | " + " | ".join(cells_) + " |")
+        cells_ = []
+        for n in ns:
+            v = [best(r, "type_aligned", 3) / r["lower_bound"] for r in rows if r["n"] == n]
+            cells_.append(f"{min(v):.2f} – {max(v):.2f}" if v else "—")
+        rl.append("| **bound / lower bound, all mixtures** | " + " | ".join(cells_) + " |")
+        blocks["x014_ratios"] = "\n".join(rl)
         mono = sum(1 for d in stats["lb_excess"].values() if len(d) >= 2 and all(d[a_] > d[b] > 0 for a_, b in zip(sorted(d), sorted(d)[1:])))
         full = sum(1 for d in stats["lb_excess"].values() if len(d) >= 2)
         blocks["x014_summary"] = (
@@ -361,6 +377,38 @@ def hetero_blocks() -> dict[str, str]:
     slopes = (0.25, 0.5, 1.0, 2.0, 4.0)
     blocks["x014_tstar"] = ("| slope `u` | " + " | ".join(f"{u:g}" for u in slopes) + " |\n|---|" + "---|" * len(slopes) + "\n| maximising `t` of a chain of that type alone | "
                             + " | ".join(f"{tstar(u):.3f}" for u in slopes) + " |")
+    pm = RESULTS / "x014_mixed.json"
+    if pm.exists():
+        dm = json.loads(pm.read_text())
+        ml = ["| `(u_H, u_L)` | heavy sites | levels | homogeneous with `u_H` | outer blocks of one type (exact tables) | mixed outer blocks (sorted-slope tables) | both |", "|---|---|---|---|---|---|---|"]
+        diffs = []
+        for r in dm:
+            for x in r["levels"]:
+                ml.append(f"| ({r['uH']:g}, {r['uL']:g}) | {r['frac']:g} | {x['levels']} | {x['homogeneous']:.4f} | {x['aligned']:.4f} | {x['mixed']:.4f} | {x['both']:.4f} |")
+                diffs.append((x["mixed"] - x["homogeneous"], x["mixed"] / x["homogeneous"], x["aligned"] / x["mixed"], r["frac"], x["both_top_is_mixed"], x["both"] < x["aligned"] - 1e-9))
+        blocks["x014_mixed"] = "\n".join(ml)
+        low = [d for d in diffs if d[3] <= 0.1]
+        rest = [d for d in diffs if d[3] > 0.1]
+        blocks["x014_mixed_summary"] = (
+            f"`n = {dm[0]['n']}`, nats per site; {len(dm)} mixtures, {len(diffs)} rows.  Mixed outer blocks with the sorted-slope tables against the homogeneous bound: "
+            f"between `{min(d[1] for d in rest):.3f}` and `{max(d[1] for d in rest):.3f}` of it where at least a quarter of the sites is steep"
+            + (f", `{min(d[1] for d in low):.3f}`–`{max(d[1] for d in low):.3f}` where a tenth is" if low else "")
+            + f".  Blocks of one type against mixed blocks: `{min(d[2] for d in diffs):.2f}`–`{max(d[2] for d in diffs):.2f}` of the mixed bound.  "
+            f"The union of the two families is better than blocks of one type alone in {sum(1 for d in diffs if d[5])} of {len(diffs)} rows.")
+    pp = RESULTS / "x014_profile1.jsonl"
+    prof = jl("x014_profile1.jsonl")
+    if prof:
+        pl = ["| `n` | classes `m` | exponent of the binned class | certified bound per site with 2 / 3 / 4 / 5 levels | best / exponent of the profile |", "|---|---|---|---|---|"]
+        for r in sorted(prof, key=lambda r: (r["n"], r["m"])):
+            vals, cur = [], None
+            for x in r["rows"]:
+                if x.get("bound") is not None:
+                    cur = x["bound"] if cur is None else min(cur, x["bound"])
+                vals.append(("—" if cur is None else f"{cur:.4f}") + ("" if x["complete"] else "*"))
+            pl.append(f"| {r['n']} | {r['m']} | {r['h_binned']:.5f} | " + " / ".join(vals) + f" | {(cur / r['h_profile']):.2f} |")
+        blocks["x014_profile"] = "\n".join(pl)
+        blocks["x014_profile_caption"] = (f"Slopes equally spaced on `[{prof[0]['u_min']:g}, {prof[0]['u_max']:g}]`; asymptotic exponent of the profile itself "
+                                          f"`{prof[0]['h_profile']:.5f}` per site.  An asterisk: the search reached its time limit; the number is the best bound found.")
     p = RESULTS / "x014_literal.json"
     if p.exists():
         d = json.loads(p.read_text())
