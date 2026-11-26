@@ -64,6 +64,9 @@ def main() -> int:
     ap.add_argument("--quick", action="store_true")
     ap.add_argument("--time-limit", type=float, default=600.0)
     ap.add_argument("--max-nodes", type=int, default=200_000)
+    ap.add_argument("--baseline-time-limit", type=float, default=900.0,
+                    help="seconds allowed to toulbar2 per instance (the first quick run had no limit and was stopped "
+                         "by hand while toulbar2 worked on a 60-site instance)")
     ap.add_argument("--out", default=str(HERE / "results.jsonl"))
     args = ap.parse_args()
     sha = commit()
@@ -72,7 +75,14 @@ def main() -> int:
             model = (random_contact_model(seed=seed, n=n, kmax=kmax) if gen == "contact"
                      else random_pair_model(seed, n=n, kmax=kmax, density=1.0, scale_bits=3, kmin=2))
             unit = Fraction(1, 2 ** model.scale_bits)
-            tb = solve_gmec(model)
+            try:
+                tb = solve_gmec(model, time_limit=int(args.baseline_time_limit))
+            except RuntimeError as exc:           # toulbar2 gave no proven optimum within its limit: an outcome, recorded
+                out.write(json.dumps({"experiment": "SB-X-002", "kind": "validation-synthetic", "generator": gen, "n": n,
+                                      "kmax": kmax, "seed": seed, "commit": sha, "outcome": "baseline-timeout",
+                                      "reason": str(exc)}, sort_keys=True) + "\n")
+                out.flush()
+                continue
             for eps in (Fraction(0), Fraction(1, 1000)):
                 row = {"experiment": "SB-X-002", "kind": "validation-synthetic", "generator": gen, "n": n,
                        "kmax": kmax, "seed": seed, "eps": str(eps), "commit": sha, "pairs": len(model.pair),
