@@ -1,0 +1,58 @@
+==============================================================================================================
+P1. the tail profile of the cube from exact tables; the uniform one-sided statement (U)
+==============================================================================================================
+  u=0.5  m=  100: sup|w_m - w| = 0.0308, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0420 (0.91 ln m/m);  m=  400: sup|w_m - w| = 0.0151, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0160 (1.07 ln m/m);  m= 1600: sup|w_m - w| = 0.0075, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0077 (1.67 ln m/m);  m=12800: sup|w_m - w| = 0.0026, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0026 (3.58 ln m/m)
+  u=1.0  m=  100: sup|w_m - w| = 0.0622, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0692 (1.50 ln m/m);  m=  400: sup|w_m - w| = 0.0303, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0320 (2.14 ln m/m);  m= 1600: sup|w_m - w| = 0.0149, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0154 (3.33 ln m/m);  m=12800: sup|w_m - w| = 0.0052, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0053 (7.15 ln m/m)
+  u=2.0  m=  100: sup|w_m - w| = 0.1244, sup[(1/m)ln(Xi/q) - x(theta)] = 0.1385 (3.01 ln m/m);  m=  400: sup|w_m - w| = 0.0606, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0640 (4.27 ln m/m);  m= 1600: sup|w_m - w| = 0.0299, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0307 (6.66 ln m/m);  m=12800: sup|w_m - w| = 0.0105, sup[(1/m)ln(Xi/q) - x(theta)] = 0.0106 (14.30 ln m/m)
+
+==============================================================================================================
+P2. Proposition N7 for the cube profile: HintPair fields, J, the dual formulas
+==============================================================================================================
+  u=0.5: a=0.03030 h=0.00767 E=0.03093 | shear monotone True, w convex True | identity 2.6e-16, e + theta_hint nondecreasing True, theta_hint >= h - e True, theta_na(h) = h 1.0e-16 | J: 3.7e-05 | theta_hint = max_t[J - te]: 1.9e-11, theta_na = sup (J - tau x)/(1-tau): 2.7e-11
+  u=1.0: a=0.11094 h=0.02914 E=0.12011 | shear monotone True, w convex True | identity 3.1e-16, e + theta_hint nondecreasing True, theta_hint >= h - e True, theta_na(h) = h 1.1e-16 | J: 3.7e-05 | theta_hint = max_t[J - te]: 7.7e-11, theta_na = sup (J - tau x)/(1-tau): 1.8e-10
+  u=2.0: a=0.32781 h=0.09728 E=0.43378 | shear monotone True, w convex True | identity 2.8e-16, e + theta_hint nondecreasing True, theta_hint >= h - e True, theta_na(h) = h 0.0e+00 | J: 1.4e-06 | theta_hint = max_t[J - te]: 2.9e-10, theta_na = sup (J - tau x)/(1-tau): 4.5e-10
+  u=4.0: a=0.60305 h=0.23925 E=1.32500 | shear monotone True, w convex True | identity 3.1e-16, e + theta_hint nondecreasing True, theta_hint >= h - e True, theta_na(h) = h 0.0e+00 | J: 1.4e-06 | theta_hint = max_t[J - te]: 1.2e-09, theta_na = sup (J - tau x)/(1-tau): 1.3e-09
+
+==============================================================================================================
+P3. a profile without the shear condition: the transport (bounded-differences) profile on the cube
+    w_T(theta) = sup_x [u x - max(theta, 2 x^2)] = u^2/8 (theta <= u^2/8),  u sqrt(theta/2) - theta (theta >= u^2/8)
+==============================================================================================================
+  u=0.5: formula against the definition 9.8e-06;  relative tail exponent x_T = w_T + theta increasing in theta: True  (range 0.0312 .. 0.2944);
+        threshold E_T = u^2/8 = 0.0312 (true 0.0309);  theta_hint,T(0) = u^2/2 = 0.1251 (true h = 0.0077; enumeration ln 2 = 0.6931)
+        closing exponent at the accuracy x = e + theta_hint,T(e), e = 0 (x = 0.1251; relative tail at the atom scale 0.2944 > x): 0.6931 = ln 2, i.e. only below the atom; the identity theta_na(e + theta_hint(e)) = theta_hint(e) holds: False
+  u=1.0: formula against the definition 1.2e-05;  relative tail exponent x_T = w_T + theta increasing in theta: True  (range 0.1250 .. 0.5887);
+        threshold E_T = u^2/8 = 0.1250 (true 0.1201);  theta_hint,T(0) = u^2/2 = 0.5001 (true h = 0.0291; enumeration ln 2 = 0.6931)
+        closing exponent at the accuracy x = e + theta_hint,T(e), e = 0 (x = 0.5001; relative tail at the atom scale 0.5887 > x): 0.6931 = ln 2, i.e. only below the atom; the identity theta_na(e + theta_hint(e)) = theta_hint(e) holds: False
+
+==============================================================================================================
+P4. valid tail functions on the cube that are not sharp: exponents against the truth
+    ball-volume: Xi(q) <= q (e^{u r_in(q)} - 1), r_in = radius of the largest ball of measure <= q:  w_in(theta) = u rho(theta) - theta
+==============================================================================================================
+     u |    h true    h ball  h transp |    E true    E ball  E transp |   na(E/2)   na ball
+  0.25 |   0.00194   0.07668   0.03125 |   0.00779   0.12500   0.00781 |   0.00067   0.61283   
+  0.50 |   0.00767   0.12683   0.12500 |   0.03093   0.25000   0.03125 |   0.00262   0.55519   
+  1.00 |   0.02914   0.19697   0.50000 |   0.12011   0.50000   0.12500 |   0.00979   0.46602   
+  2.00 |   0.09728   0.28430   2.00000 |   0.43378   1.00000   0.50000 |   0.03106   0.34989   (transport bound above enumeration: vacuous)
+
+==============================================================================================================
+P5. heterogeneous families: two kinds of binary sites (uniform measure), slopes u_1, u_2, fractions lambda_1, lambda_2
+    J_beta = beta_1 J_{u_1} + beta_2 J_{u_2};  Rhat_beta(e) = max_t [J_beta(t) - te];  Theta_na^beta(x) = sup_tau (J_beta(tau) - tau x)/(1 - tau)
+==============================================================================================================
+  one kind, u = 1: sup-formulas against the cube's functions: theta_na 1.8e-09, theta_hint 1.9e-09
+  one kind, u = 1: tau_2/a = 0.5004  (K_REPORT, erratum SCI-REV-0014: 0.5004)
+  slopes [2.0, 0.5] fractions [0.5, 0.5]:  a = 0.17906, h = 0.05246;  Proposition N8 on 400 random splits: min [bracket - Rhat] = 2.16e-05 [>= 0]
+      two levels at accuracy 0:  proportional split: tau_2 = 0.09102 (0.5083 a) at phi = 0.50;   best split: tau_2 = 0.09035 (0.5046 a) with the outer block taking 52% of the sites of slope 2.00 and 18% of the sites of slope 0.50
+  slopes [3.0, 1.0] fractions [0.3, 0.7]:  a = 0.22835, h = 0.07204;  Proposition N8 on 400 random splits: min [bracket - Rhat] = 1.47e-04 [>= 0]
+      two levels at accuracy 0:  proportional split: tau_2 = 0.11712 (0.5129 a) at phi = 0.49;   best split: tau_2 = 0.11533 (0.5051 a) with the outer block taking 75% of the sites of slope 3.00 and 0% of the sites of slope 1.00
+  slopes [1.5, 0.25] fractions [0.5, 0.5]:  a = 0.11292, h = 0.03123;  Proposition N8 on 400 random splits: min [bracket - Rhat] = 1.28e-05 [>= 0]
+      two levels at accuracy 0:  proportional split: tau_2 = 0.05684 (0.5033 a) at phi = 0.50;   best split: tau_2 = 0.05667 (0.5019 a) with the outer block taking 50% of the sites of slope 1.50 and 45% of the sites of slope 0.25
+
+==============================================================================================================
+P6. the sorted-slope Harper bound at the exponential scale (two kinds in equal parts, u_1 > u_2): its profile is
+    w_s(theta) = max_{rho' <= rho(theta)} [U(rho - rho') - KL(rho'||1/2)],  U(x) = u_1 x (x <= 1/2), against the true profile Rhat^{-1}
+==============================================================================================================
+  slopes [2.0, 0.5]:  h (true, Theorem 11.101) = 0.05246;  from the sorted-slope bound: 0.09738;  homogeneous cube with the larger slope: 0.09728
+  slopes [1.5, 1.0]:  h (true, Theorem 11.101) = 0.04483;  from the sorted-slope bound: 0.06057;  homogeneous cube with the larger slope: 0.06052
+  slopes [1.0, 0.25]:  h (true, Theorem 11.101) = 0.01554;  from the sorted-slope bound: 0.02914;  homogeneous cube with the larger slope: 0.02914
+
+failed checks: 0    time 39.3 s
