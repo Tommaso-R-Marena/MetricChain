@@ -1011,3 +1011,27 @@ profile and the gauche count, and its support function is the ground-state energ
   an error of `1.2 k_BT`, which is not good — reworded to what was measured (the error
   improves while the cost exponent rises).
 
+### Cycle 39 — the theory division's bridge proposition against ours (SCI-REV-0011)
+
+* The follow-up of workstream R9 reported after thirty-two minutes.  The situation was
+  unusual: two divisions had proved the same statement without reading each other
+  (their Proposition 11.69b at `24a3c27`; our Theorem R9.1 at checkpoint 38, which they
+  had not read).  The reviewer compared them line by line: the same set of clean
+  bridges, the same additivity, the same lattice.  Theirs has an elementary interior
+  estimate ours lacks; ours has the coboundary for all bridges, from which the sharper
+  constants follow.
+* One remark of theirs, marked "(not proved)", is false beyond the range they tested:
+  a head and a tail of two beads clean every bridge up to 11 beads and fail from 12.
+  Their script stops at 10 beads and tries equal lengths only — the reason it could see
+  neither the failure nor that the minimum is 2 + 3.
+* The coordinator checked the 12-bead counter-example from its coordinates with
+  arithmetic that shares nothing with the reviewer's code, computed the determinant of
+  the five-class certificate, read the proposition and Lemma 11.68 at their head, and
+  re-ran the reviewer's script from a clean copy (identical apart from timings).
+* **An error of the coordinator while recording it:** a one-line edit of a table row in
+  the handoff used a replace on the remainder of the file and removed the terminator of
+  the *next* row; a shell pipeline meant to display the result then hung.  Found by
+  looking at the row ends before committing; repaired, and the table checked row by
+  row.  Table rows are now edited by line, not by a search in the rest of the file.
+* The audit result at `24a3c27` (cycle 38) was sent with the same message.
+

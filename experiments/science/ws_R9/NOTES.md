@@ -235,3 +235,70 @@ New files of this follow-up are named `r9b_*`; the deliverable is `docs/science/
 
 ### b-step 1 — start (time read from `date -u` in the command that wrote this entry)
 Thu Nov 26 01:53:38 UTC 2026
+
+Read (in full): theory report at `24a3c27` lines 5466–5660 (Lemma 11.68, Theorem 11.69, Propositions 11.69a, 11.69b),
+6036–6056 (prior art), 9407–9410 (§12 (a4)), row G24 (line 1471); THY-RES-0009 §2; `t4_head_tail.py`,
+`t4_lattice_index.py`, their two outputs, `out_t4_semigroup.txt`, the README rows; harness XVIII.7 (lines 6792–6861 of
+`experiments/falsify_conjectures.py`), its result line in `docs/falsification_output.txt` (line 111) and the five
+mutation entries.  NOT read: the rest of the harness (10 558 lines) that `t4_lattice_index.py` executes as a module;
+Kaveh–Khovanskii.
+
+### b-step 2 — re-derivation (paper)
+* Definition: theirs = mine.  Given (i), the three linker pairs at separation exactly 3 are across trans torsions
+  (squared distance 19), so "beyond its chain neighbours" and "at chain separation at least 3" select the same pairs.
+  The rod test of their second implementation is equivalent by R9.1(a), first line, with x² or x¹ the three-bead rod.
+* (a): their proof is right; it is the case A = B = 0 of R9.1(a).  0 ∈ S_M for M ≥ 6: the zigzag.
+* (b): right.  The tail is the linker; the linker above the extended bridge is t4, t5, t6, at heights ≥ H + 4.  Cost =
+  A(x, c1) + B(x) exactly (head and tail ≥ 4 apart in height; s3 has no pair), so ≤ (1,9,14;1), norm 60, not only 168.
+* (c): the estimate 6(m+1)R/M is right: |k_i m/M − λ_i| ≤ m/M + λ_i (M − mT)/M, sum < 5m/M + (m+6)/M.  It holds for
+  every M ≥ 6 (for M < m + 6 the point is 0 and the bound exceeds R).  The same five points serve a neighbourhood of p.
+  Clean bridges with at most 9 beads have h3 = 0 (tables of the first round; rank 4 up to 9 beads), interior points have
+  p3 > 0, so the common level m(p) is at least 13 for every interior point: their constant is at least 6·14·36 = 3024.
+* One-sided rate through their (b): (9R + 168)/(N+9) = 492/(N+9); with the exact cost and signs 324/(N+9); neither is
+  better than the 168/(N+3) they keep.  108/(N+3) needs the exact point q̂/(N+3), i.e. the coboundary.
+* My own 7.5 in R9.1(f) can be 5 (round in the cumulative coordinates): 113/(N+3).  7.5 is valid, not optimal.
+
+### b-step 3 — re-run of THEIR code (`r9b_rerun_theirs.sh`)
+* Both scripts unchanged from the export, working directory inside ws_R9, bytecode off: exit 0, 3 s and 4 s, outputs
+  identical (cmp) to their published files; nothing left behind, no `__pycache__` in the export
+  (`out/r9b_rerun_compare.txt`).  A first trial run (started at 01:57 with the working directory /tmp, before this script existed) wrote
+  `out/tmp_r9b/rerun_t4_head_tail.{txt,exit}` and `out/tmp_r9b/rerun_t4_lattice_index.{txt,exit}`; both had ended with
+  "exit 0".  The coordinator's snapshot commit `f5df52b` (01:57:31) captured these four files.  I removed them when the
+  driver had produced `out/r9b_rerun_*.txt` (byte-identical: `git show HEAD:… | cmp`), so `git status` lists them as
+  deleted — intended; they are superseded and not cited.  No state-changing git command was run.
+
+### b-step 4 — own code (`r9b_check.py` → `out/r9b_check.txt`, 86 s, exit 0)
+* A: all bridges from the origin, 3..12 beads (24 484), three tests of "clean" — mine, their `in_S` (their code on my
+  enumeration), the rod test (my code): no disagreement.  Counts 4, 8, 16, 40, 96, 256, 636, 1680 (, 4460, 11752) of
+  4, 8, 20, 48, 116, 312, 804, 2144 (, 5732, 15296) = theirs = 4 × my first-round counts.  (i) but not (ii): first at
+  9 beads (16); (i) but not (iii): first at 8 beads (8).
+* B1: 176 400 ordered pairs of clean bridges ≤ 8 beads, their normalisation: no failure.  B2: 298 704 ordered pairs of
+  arbitrary (bridge, c1) × bridge ≤ 8 beads: error = A + B in all; 640 pairs of two NON-clean bridges have error 0
+  (8 × 80) — the last clause of the harness text XVIII.7 is not true for every pair (their own statistics say 182 of
+  200).
+* C: (kh, kt) ∈ {1,2,3}² on the 3964 pairs ≤ 10 beads: 1+1 3832, 2+2 and 3+3 3964 (= theirs), largest change
+  (0,2,6;1), norm 15.  N = 11: 2+2 never fails; N = 12: 2+2 fails in 4 of 4350 (first two bonds fixed) — the same
+  counts as `r9_semi.c` in the first round; explicit 12-bead bridge printed (t3 sees bead 3, which is at the top
+  height).  The 38-bead bridge (14-bead B-extremal below, 21-bead A-extremal above) costs exactly (1,9,14;1), norm 60.
+* D: distinct vectors 1, 3, 6, 10, 16, 28, 45, 82, 146, 255 for N ≤ 3..12; rank 5 and index 1 from N ≤ 10; two 5×5
+  minors 4 and 15; five vectors of clean bridges with at most 10 beads with determinant 1 (two routines).
+* No false alarm in this follow-up.  One script version was replaced before its log was kept (first version of
+  `r9b_check.py` without the columns "(ii) fails, (iii) fails", the count 8 × 80 and the sympy determinant; its output
+  agreed with the final one in everything else and was overwritten).
+
+### b-step 5 — one more use of THEIR code, and the final log
+* `r9b_harness_counts.py` (their harness helpers `ls_enum`, `ls_concat`, `ls_profile` and their function `clean`, my
+  driver): 4, 8, 16, 40, 96, 256, 636, 1680 clean of 4, 8, 20, 48, 116, 312, 804, 2144, and 4460 of 5732 at 11 beads —
+  the second implementation gives the published counts too (their published harness output has only the totals 508
+  and 420 for 3..8 beads).  `out/r9b_harness_counts.txt`.
+* `r9b_check.py` extended twice more (direct count for 11 and 12 beads without fixing the bonds: 0 of 6520, 16 of
+  17400; largest h3 among clean bridges: 0 up to 9 beads, 1 from 10 on; header comment) and re-run each time; every
+  re-run reached its last line with exit 0 and differed from the previous one only in the added lines and the
+  timings.  The stored `out/r9b_check.txt` is from the final version of the script (86 s).
+* First-round numbers cited in the addendum re-read from `out/semi_enum22.txt`: head 2 + tail 2 not clean in 4 of 4350
+  (N = 12), 32 of 11738 (N = 13), 92570 of 13527394 (N = 20); head 1 + tail 3 in 2 of 90 (N = 8); 21220319 pairs tried
+  in all.
+* Export checked after all runs: no file newer than its creation, no `__pycache__`.
+
+### b-step 6 — addendum written: `docs/science/workstreams/R9_ADDENDUM.md`; README rows added; hand-back
+Thu Nov 26 02:24:06 UTC 2026

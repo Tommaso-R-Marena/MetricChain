@@ -1,0 +1,93 @@
+A. clean bridges; all bridges from the origin, first two bonds not fixed (the theory division's normalisation)
+    N  bridges  (i) holds  clean: mine  their in_S  rod test | tests disagree | (i) holds but (ii) fails, (iii) fails | published by them (clean, bridges)
+    3       4        4           4          4         4  |     0          |      0,     0                        | (4, 4)  agrees
+    4       8        8           8          8         8  |     0          |      0,     0                        | (8, 8)  agrees
+    5      20       16          16         16        16  |     0          |      0,     0                        | (16, 20)  agrees
+    6      48       40          40         40        40  |     0          |      0,     0                        | (40, 48)  agrees
+    7     116       96          96         96        96  |     0          |      0,     0                        | (96, 116)  agrees
+    8     312      264         256        256       256  |     0          |      0,     8                        | (256, 312)  agrees
+    9     804      688         636        636       636  |     0          |     16,    40                        | (636, 804)  agrees
+   10    2144     1832        1680       1680      1680  |     0          |     88,    88                        | (1680, 2144)  agrees
+   11    5732     4944        4460       4460      4460  |     0          |    248,   288                        | -
+   12   15296    13192       11752      11752     11752  |     0          |    768,   736                        | -
+   bridges with 3..12 beads on which the three tests do not all agree: 0      [9 s]
+
+B1. all 176400 ordered pairs of the 420 clean bridges with 3..8 beads (first two bonds not fixed), real concatenations:
+    not a self-avoiding walk with N1+N2+3 beads: 0; not a bridge: 0; (h,g) not exactly additive: 0; not clean: 0   (profile cross-checked against the O(n^2) definition on 3528 of them)   [30 s]
+
+B2. all 298704 ordered pairs ((x1, c1), x2) of arbitrary bridges with 3..8 beads (588 pairs (bridge, c1), 508 bridges):
+    error of the real concatenation different from A(x1, c1) + B(x2): 0
+    both clean        :  176400 pairs, error exactly 0 in 176400
+    exactly one clean :  107520 pairs, error exactly 0 in 36960
+    neither clean     :   14784 pairs, error exactly 0 in 640
+    non-clean (x1, c1) with A(x1, c1) = 0: 8;  non-clean x2 with B(x2) = 0: 80;  product 640
+    example of two NON-clean bridges with error 0: x1 (8 beads) has A = (0, 0, 0, 0), B = (0, 1, 2, 0); x2 (5 beads) has A = (0, 0, 1, 1), B = (0, 0, 0, 0)
+      x1 = [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-1, 1, -1), (0, 2, -2), (1, 3, -1)]
+      x2 = [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 1, 3), (-2, 2, 4)]
+    [37 s]
+
+C. zigzag head of kh and tail of kt beads on every (bridge, admissible c1) with 3..10 beads (first two bonds not fixed)
+   kh kt   clean / all     largest change of (h,g), componentwise, among the clean ones | among all | largest norm | (h,g) of the result differs from qhat = (h,g) + A + B
+    1  1   3832 / 3964     (0, 1, 4, 1)   |   (0, 2, 5, 1)   |    14   |   132
+    1  2   3884 / 3964     (0, 1, 4, 1)   |   (0, 2, 5, 1)   |    14   |   80
+    1  3   3884 / 3964     (0, 1, 4, 1)   |   (0, 2, 5, 1)   |    14   |   80
+    2  1   3908 / 3964     (0, 2, 6, 1)   |   (0, 2, 6, 1)   |    15   |   56
+    2  2   3964 / 3964     (0, 2, 6, 1)   |   (0, 2, 6, 1)   |    15   |   0
+    2  3   3964 / 3964     (0, 2, 6, 1)   |   (0, 2, 6, 1)   |    15   |   0
+    3  1   3908 / 3964     (0, 2, 6, 1)   |   (0, 2, 6, 1)   |    15   |   56
+    3  2   3964 / 3964     (0, 2, 6, 1)   |   (0, 2, 6, 1)   |    15   |   0
+    3  3   3964 / 3964     (0, 2, 6, 1)   |   (0, 2, 6, 1)   |    15   |   0
+   theirs (out_t4_head_tail.txt, equal lengths only): k = 1: 3832 of 3964, [0, 1, 4, 1];  k = 2 and 3: 3964 of 3964, [0, 2, 6, 1]
+   [5 s]
+   N = 11, first two bonds FIXED (multiply by 4 for their normalisation): 1630 pairs (bridge, c1); NOT clean after head kh + tail kt:
+        1+1: 71;  1+2: 36;  1+3: 36;  2+1: 36;  2+2: 0;  2+3: 0;  3+1: 36;  3+2: 0;  3+3: 0
+   N = 12, first two bonds FIXED (multiply by 4 for their normalisation): 4350 pairs (bridge, c1); NOT clean after head kh + tail kt:
+        1+1: 197;  1+2: 104;  1+3: 100;  2+1: 100;  2+2: 4;  2+3: 0;  3+1: 100;  3+2: 4;  3+3: 0
+   N = 11, first two bonds NOT fixed (their normalisation, counted directly): 6520 pairs (bridge, c1); head 2 + tail 2 NOT clean: 0; head 2 + tail 3 NOT clean: 0
+   N = 12, first two bonds NOT fixed (their normalisation, counted directly): 17400 pairs (bridge, c1); head 2 + tail 2 NOT clean: 16; head 2 + tail 3 NOT clean: 0
+   a bridge with 12 beads that head 2 + tail 2 does not clean (first found):
+      x  = [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 3, 5), (4, 2, 6), (5, 1, 5), (6, 2, 4), (5, 3, 3), (4, 2, 2), (3, 3, 1)]
+      c1 = (-1, 1, 1);   b' of x is an up-bond: False;   A(x, c1) = (1, 3, 5, 1), B(x) = (0, 0, 0, 0)
+      beads of x at the height of its last bead (3): indices [3, 5, 9, 11]
+      extended bridge y = s2, s1, x, t1, t2 (16 beads): (i) holds: True;  A(y) = (0, 0, 1, 0),  B(y) = (0, 0, 0, 0)
+      site 1 above y, (0, 6, 2) (it is t3 of x), and bead 5 of y, (1, 3, 3) (bead 3 of x): squared distance 11, chain separation 11
+      with head 2 + tail 3 the result is clean: True;  (h,g): x (0, 4, 11, 5), head 2 + tail 2 (1, 7, 15, 6), head 2 + tail 3 (1, 7, 16, 6)
+   [4 s]
+   the sharp cost: z = (the 14-bead bridge with B = (0, 3, 4, 0)) o (the 21-bead bridge with A = (1, 6, 10, 1)), 38 beads, (h,g) = (7, 34, 51, 20)
+      c1 = (-1, 1, 1): A(z, c1) = (0, 2, 3, 1), B(z) = (0, 3, 4, 0); head 3 + tail 3: clean True, change of (h,g) = (0, 5, 7, 1), norm 28
+      c1 = (-1, 1, 1): A(z, c1) = (0, 2, 3, 1), B(z) = (0, 3, 4, 0); head 2 + tail 3: clean True, change of (h,g) = (0, 5, 7, 1), norm 28
+      c1 = (1, 1, -1): A(z, c1) = (1, 6, 10, 1), B(z) = (0, 3, 4, 0); head 3 + tail 3: clean True, change of (h,g) = (1, 9, 14, 1), norm 60
+      c1 = (1, 1, -1): A(z, c1) = (1, 6, 10, 1), B(z) = (0, 3, 4, 0); head 2 + tail 3: clean True, change of (h,g) = (1, 9, 14, 1), norm 60
+
+D. the lattice generated by (h3, h8, h11, g; N+3) of the clean bridges with at most N beads (own enumeration with the first two bonds fixed)
+   N <=  3:     1 clean bridges with N beads (largest h3 among them: 0);   1 distinct vectors so far; rank 1; index in Z^5: not of full rank      theirs: 1 vectors, rank 1
+   N <=  4:     2 clean bridges with N beads (largest h3 among them: 0);   3 distinct vectors so far; rank 2; index in Z^5: not of full rank      theirs: 3 vectors, rank 2
+   N <=  5:     4 clean bridges with N beads (largest h3 among them: 0);   6 distinct vectors so far; rank 2; index in Z^5: not of full rank      theirs: 6 vectors, rank 2
+   N <=  6:    10 clean bridges with N beads (largest h3 among them: 0);  10 distinct vectors so far; rank 2; index in Z^5: not of full rank      theirs: 10 vectors, rank 2
+   N <=  7:    24 clean bridges with N beads (largest h3 among them: 0);  16 distinct vectors so far; rank 3; index in Z^5: not of full rank      theirs: 16 vectors, rank 3
+   N <=  8:    64 clean bridges with N beads (largest h3 among them: 0);  28 distinct vectors so far; rank 4; index in Z^5: not of full rank      theirs: 28 vectors, rank 4
+   N <=  9:   159 clean bridges with N beads (largest h3 among them: 0);  45 distinct vectors so far; rank 4; index in Z^5: not of full rank      theirs: 45 vectors, rank 4
+   N <= 10:   420 clean bridges with N beads (largest h3 among them: 1);  82 distinct vectors so far; rank 5; index in Z^5: 1      theirs: 82 vectors, rank 5
+            basis (N <= 10): [[1, 4, 6, 5, 13], [0, 1, 3, 3, 10], [0, 0, 1, 1, 7], [0, 0, 0, -1, -13], [0, 0, 0, 0, 1]]
+   N <= 11:  1115 clean bridges with N beads (largest h3 among them: 1); 146 distinct vectors so far; rank 5; index in Z^5: 1      theirs: 146 vectors, rank 5
+   N <= 12:  2938 clean bridges with N beads (largest h3 among them: 1); 255 distinct vectors so far; rank 5; index in Z^5: 1
+   certificate independent of the row reduction (N <= 10): gcd of 2 5x5 minors = 1 after 3 random 5-subsets:
+      det =     4  for  [(0, 1, 3, 3, 11), (0, 1, 4, 4, 13), (1, 6, 11, 7, 13), (0, 0, 4, 4, 12), (1, 6, 11, 6, 13)]
+      det =    15  for  [(1, 6, 11, 6, 13), (0, 1, 3, 3, 11), (0, 0, 1, 1, 12), (0, 2, 4, 4, 13), (0, 1, 5, 4, 13)]
+   five clean bridges with at most 10 beads whose vectors have determinant +-1: [(0, 0, 6, 6, 13), (1, 4, 6, 5, 13), (0, 3, 6, 4, 11), (0, 1, 6, 5, 13), (0, 2, 7, 6, 13)]
+      determinant by my elimination: 1;  by sympy (exact rational arithmetic): 1
+      determinants by sympy of the minors above: 4, 15
+   [1 s]
+
+E. constants (R = 36, beta = 60, beta' = 28; M = N + 3)
+   cost of making a bridge clean: theirs, 11.69b(b): at most 6 beta' = 168;  exactly A + B <= (1,9,14;1), norm 60 (attained, part C)
+   one-sided rate, dist((h,g)/N, K^br) for an arbitrary bridge with N beads:
+     Theorem 11.69 (unchanged at 24a3c27): (beta + 3R)/(N+3) = 168/(N+3)
+     through 11.69b(b) with its constant (clean bridge with N+6 beads, level N+9): (9R + 6 beta')/(N+9) = 492/(N+9)
+     the same with the exact cost A + B >= 0 (each coordinate of 9(h,g)/N - (A+B) is at most the larger): 9R/(N+9) = 324/(N+9)
+     R9.1(d), exact point qhat/(N+3) of the bridge itself: 3R/(N+3) = 108/(N+3)
+   interior rate:
+     theirs: dist(p, S_M/M) <= 6 (m+1) R / M = 216 (m(p)+1)/M for every M >= 6, plus 3R/(M-3) = 108/(M-3) for the normalisation
+     R9.1(f): (7.5 + 108)/(N+3) for N >= N0(compact set); rounding in the cumulative coordinates gives 5 in place of 7.5:
+       rounding (h3,h8,h11,g) coordinatewise: at most 5*0.5 + 3*1.0 + 1.5 + 0.5 = 7.5;  rounding (h3, h3+h8, h3+h8+h11, g): at most (5 + 3 + 1 + 1)/2 = 5.0
+total time 86 s

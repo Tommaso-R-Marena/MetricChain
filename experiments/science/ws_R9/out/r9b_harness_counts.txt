@@ -1,0 +1,11 @@
+harness helpers (their code): N, bridges returned by ls_enum(N, bridge=True), clean among them (their function), distinct first-two-bond pairs
+  N =  3: bridges     4, clean     4, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (1, 1), times 4: (4, 4)
+  N =  4: bridges     8, clean     8, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (2, 2), times 4: (8, 8)
+  N =  5: bridges    20, clean    16, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (4, 5), times 4: (16, 20)
+  N =  6: bridges    48, clean    40, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (10, 12), times 4: (40, 48)
+  N =  7: bridges   116, clean    96, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (24, 29), times 4: (96, 116)
+  N =  8: bridges   312, clean   256, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (64, 78), times 4: (256, 312)
+  N =  9: bridges   804, clean   636, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (159, 201), times 4: (636, 804)
+  N = 10: bridges  2144, clean  1680, first-two-bond pairs 4  = published (clean, bridges);  my first-round counts with the first two bonds fixed: (420, 536), times 4: (1680, 2144)
+  N = 11: bridges  5732, clean  4460, first-two-bond pairs 4;  my first-round counts with the first two bonds fixed: (1115, 1433), times 4: (4460, 5732)
+totals for 3..8 beads: bridges 508, clean 420   (their harness line XVIII.7: bridges=508, clean=420)
