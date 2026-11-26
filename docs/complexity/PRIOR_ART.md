@@ -56,7 +56,7 @@ partition function.
 | # | source | how inspected (date) | what it establishes for us |
 |---|---|---|---|
 | B-I | Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke, *Distinguishing Phylogenetic Level-2 Networks with Quartets and Inter-Taxon Quartet Distances*, Bull. Math. Biol. 2025, doi:10.1007/s11538-025-01549-4 | arXiv:2507.17308v2, **read in full** (2026-11-26) | definitions; Theorem 4.7 (level-2 bloblets); conjectures B1, B2; open problem B3 |
-| B-II | VibeMathed entry "All-level NANUQ circularity and exact displayed-split support" (https://vibemathed.com/problem/all-level-nanuq-circularity-and-exact-displayed-split-support), submitted 30 Sep 2026 | public HTML page fetched and **read in full** (2026-11-26).  The linked repository (github.com/Sodelin/…, commit `cba23504…`, directory `research/nanuq-all-level-2026-09-29/`) was **not inspected**: this session is not authorised to read third-party repositories (attach request denied 2026-11-26) | an *unreviewed* claim of a computer-assisted proof of B1 and B2 at every level and for any number of blobs, with exact support; mentions a "six-label reduction", "exact finite certificate", "composition identity", a parameter domain for a "four-score family" (relevant to B3), and that "planarity cannot be dropped for exact support" |
+| B-II | VibeMathed entry "All-level NANUQ circularity and exact displayed-split support" (https://vibemathed.com/problem/all-level-nanuq-circularity-and-exact-displayed-split-support), submitted 30 Sep 2026 | public HTML page fetched and **read in full** (2026-11-26).  The linked repository (github.com/Sodelin/…, commit `cba23504…`, directory `research/nanuq-all-level-2026-09-29/`) was **not inspected**: this session is not authorised to read third-party repositories (attach request denied 2026-11-26) | an *unreviewed* claim of a computer-assisted proof of B1 and B2 at every level and for any number of blobs, with exact support; mentions a "six-label reduction", "exact finite certificate", "composition identity", a parameter domain for a "four-score family" (relevant to B3), and that "planarity cannot be dropped for exact support".  Its verification paragraph says that "two implementations cover 84,076 plane-tree and duplication instances, 122 distinct quartet systems and 24,667 anchor coefficients"; **`122 = 1 + 3 + 16 + 102 = |𝒜_3| + |𝒜_4| + |𝒜_5| + |𝒜_6|`** (noticed by our referee, REV-0002 finding 2; the sentence re-read by us in the saved page).  So the method — a six-leaf reduction, plane trees with duplicated leaves, composition — very probably coincides with ours (CX-T5, CX-T6, CX-T9).  Nothing on the page concerns non-galled networks (our CX-T7) or sharpness (CX-T8) |
 | B-III | *Encoding level-3 semi-directed phylogenetic networks by quarnets and quinnets*, arXiv:2610.07855 | PDF downloaded; **not yet read** | — |
 | B-IV | Chepoi, Fichet, *A note on circular decomposable metrics*, Geom. Dedicata 69 (1998) | **not read**; used through B-I Prop. 2.8 | Kalmanson ⇔ circular decomposable; split weights `α_ij` |
 | B-V | Allman, Baños, Rhodes, *NANUQ*, Algorithms Mol. Biol. 14 (2019) | **not read**; known through B-I | level-1 case |
@@ -69,5 +69,13 @@ Searches (2026-11-26, "extended" mode):
    → B-I (arXiv, journal, PMC), a *Correction* to B-I dated 2026-01-14 (a figure; PMC12804282, title only),
    the NANUQ and NANUQ⁺ papers; **nothing** on whether "galled" is necessary and no non-galled example.
 
-Consequences for novelty statements: any statement of ours about B1/B2 must say "independently of,
-and after, the unreviewed claim B-II, whose proof we have not seen".
+Searches by the referee (REV-0002; nine web searches and four page fetches, 2026-11-26): (i) no proof or
+disproof of the Section 6 conjectures of B-I other than B-II — nothing on arXiv or in a journal, no follow-up
+in the first author's publication list, B-III only cites NANUQ⁺; (ii) nothing on the necessity of "galled" or
+on a non-galled counterexample; (iii) NANUQ⁺ proves statements for sunlets only; the 2026 Correction to B-I
+concerns an omitted figure panel.
+
+Consequences for novelty statements: CX-T6 (and with it the method, CX-T5, CX-T9) is to be described as **an
+independent rediscovery, in all likelihood, of the unreviewed claim B-II, whose proof we have not seen**; no
+priority is claimed for it.  For CX-T7 (galled cannot be dropped), CX-T8 (sharpness) and CX-T13 (parametric
+family, in our extension) no prior art was found; a failure to find it is not proof of novelty.

@@ -1,9 +1,10 @@
 # The NANUQ metric: a local criterion, all galled planar networks, and why "galled" cannot be dropped
 
-Working paper of the complexity division, first version 2026-11-26.  Register: `THEOREMS.md` CX-T5–CX-T8.
-Problem: `OPEN_PROBLEMS.md` B (Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke, *Distinguishing
-Phylogenetic Level-2 Networks with Quartets and Inter-Taxon Quartet Distances*, Bull. Math. Biol. 2025;
-cited as [HABIMRW] by section number of arXiv:2507.17308v2).
+Working paper of the complexity division, first version 2026-11-26; **revised 2026-11-26 after the internal
+adversarial review `COMPLEXITY-REV-0002`** (what changed: §11).  Register: `THEOREMS.md` CX-T5–CX-T9, CX-T13,
+CX-V3.  Problem: `OPEN_PROBLEMS.md` B (Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke,
+*Distinguishing Phylogenetic Level-2 Networks with Quartets and Inter-Taxon Quartet Distances*, Bull. Math.
+Biol. 2025; cited as [HABIMRW] by the numbering of arXiv:2507.17308v2).  References are listed in §12.
 
 ## 0. What is here, and how it relates to what others have claimed
 
@@ -17,36 +18,53 @@ networks of the class (B1) and circular decomposability for level-3 bloblets (B2
    exactly the system.  Network-free; the 5-point terms are automatically right.
 2. **Theorem 7 (all galled outer-labeled planar networks)** [P + X].  Every network of the class of
    [HABIMRW] — any level, any number of blobs — satisfies the criterion.  This contains B1 and B2.
-   *An all-level statement of this kind was claimed on 2026-09-29 in an unreviewed third-party repository
-   (`PRIOR_ART.md` B-II).  We have not seen that proof and could not inspect it; ours was derived
-   independently on 2026-11-26.  If theirs is correct, priority for the statement is theirs.*
-3. **Theorem 9 (galled cannot be dropped)** [X].  An explicit outer-labeled planar level-2 bloblet on
+   **This is in all likelihood a rediscovery.**  The same all-level statement was posted on 2026-09-30 in
+   an unreviewed third-party entry (`PRIOR_ART.md` B-II), whose public summary names "a six-label
+   reduction, exact finite certificate and composition identity" and counts "plane-tree and duplication
+   instances" and "122 distinct quartet systems" — and `122 = 1 + 3 + 16 + 102` is the number of systems of
+   our class 𝒜 on 3, 4, 5 and 6 leaves (observation of the referee).  So not only the statement but
+   probably the method (a six-leaf criterion, planar trees with duplicated leaves, composition along cut
+   edges) coincides.  We have not seen that proof — this session could not read the repository — and
+   derived ours independently on 2026-11-26; neither is peer reviewed.  If theirs is correct, priority is
+   theirs.
+3. **Theorem 9 (galled cannot be dropped)** [X + P].  An explicit outer-labeled planar level-2 bloblet on
    seven leaves that is not galled, whose NANUQ metric is Kalmanson for none of the 360 circular orders;
-   and a family in which one displayed split has weight tending to `−∞`.  We found no such example in
-   the literature (search recorded in `PRIOR_ART.md` §B).
+   and a two-parameter family in which a displayed split has weight exactly `2 − C(s+t, 2)`.  This concerns
+   the NANUQ metric of [HABIMRW] Def. 4.1; the multiplicity-weighted "displayed quartet metric" of their
+   §3 is circular decomposable for every outer-labeled planar network (their Corollary 3.4).  We and the
+   referee found no such example in the literature (searches recorded in `PRIOR_ART.md` §B).
 4. **Theorem 10 (the criterion is sharp)** [X].  Among classes of tree-generated circular split systems
    closed under restriction and under replacing a leaf by a cherry, the class defined by the criterion is
-   the largest one on which the NANUQ metric is circular decomposable (for the given order) with exact
-   support: each of the 23 six-point systems it excludes is, or becomes after doubling a few leaves, a
-   system whose metric fails.
+   the largest one on which the NANUQ metric is circular decomposable (for the given order) **with exact
+   support**: each of the 23 six-point systems it excludes is, or becomes after doubling a few leaves, a
+   system whose metric fails — in most cases by having the wrong support while remaining Kalmanson.  This
+   is a statement about classes of split systems, not about classes of networks (§7).
 5. **Theorem 11 (the parametric family, problem B3)** [P + X].  For the four-parameter family of quartet
    distances of NANUQ⁺ the conclusion holds on the whole class exactly when `ρ_o = ρ_s` and
    `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the *Modified NANUQ* distance is outside this set and fails on an explicit
    level-1 network with eight leaves, but it works when every hybrid node has a leaf child.
 
-Labels: [P] paper proof (ours, internally reviewed only), [X] exact finite computation with integer
-arithmetic (programs in `experiments/complexity/nanuq/`, listed in §9).  Nothing here is machine-checked.
+Labels: [P] paper proof (ours; internally reviewed only), [X] exact finite computation with integer
+arithmetic (programs in `experiments/complexity/nanuq/`, listed in §10), [V] checked by the Lean kernel
+(`experiments/complexity/lean/NanuqFinite.lean`: the finite facts of Lemma 4, of Lemma 8 for a given list
+of systems, of Proposition 2 on five and six points, and the numbers 150 / 141 / 127 of §7 — not the
+general proofs), [K] a known result that we cite.
+
+Numbering.  Lemmas and propositions are numbered 1–8, A, B, 0, B0; theorems 4, 6, 7, 9, 10, 11.  The theorem
+numbers are kept from the first version because other files cite them ("Theorem 6" was "Theorem 6′").
 
 ---
 
 ## 1. Definitions
 
-**Circular orders and splits.**  `X = {x_1,…,x_n}`, `n ≥ 4`, with the circular order `C = (x_1,…,x_n)`
-(indices mod `n`).  The *gap* `g_i` lies between `x_i` and `x_{i+1}`.  For `i ≠ j` the circular split
+**Circular orders and splits.**  `X = {x_1,…,x_n}` with the circular order `C = (x_1,…,x_n)`
+(indices mod `n`).  Metrics and split weights are considered for `n ≥ 4`; split systems, restrictions and
+the classes of §4 for `n ≥ 2` (they occur as pieces in §5).  The *gap* `g_i` lies between `x_i` and `x_{i+1}`.  For `i ≠ j` the circular split
 `S_ij = U_ij | V_ij` has `U_ij = {x_{i+1},…,x_j}`.  A split is trivial if a side is a singleton.  A set `Σ` of
 circular splits is *tree-generated* if it is a union of split systems of binary trees with leaf set `X`
-whose splits are circular for `C` (it then contains all trivial splits).  For `Y ⊆ X`, `|Y| ≥ 4`, the
-restriction `Σ|_Y` is the set of non-empty splits `A∩Y | B∩Y`; it is tree-generated for `C|_Y`.
+whose splits are circular for `C` (it then contains all trivial splits; for `n ≤ 3` it consists of them).
+For `Y ⊆ X`, `|Y| ≥ 2`, the restriction `Σ|_Y` is the set of non-empty splits `A∩Y | B∩Y`; it is
+tree-generated for `C|_Y`.
 
 **Displayed quartets.**  For four leaves `a,b,c,d` in this circular order, `Σ` *displays* `ab|cd` if some
 split of `Σ` separates `{a,b}` from `{c,d}`, and `ad|bc` likewise (a circular split never separates `{a,c}`
@@ -61,23 +79,49 @@ d_Σ(x,y) = 2n − 4 + 2 Σ_{ {z,w} ⊆ X∖{x,y} } ρ_xy(z,w),        d_Σ(x,x)
 ```
 
 **Split weights.**  `α_ij(d) = d(x_i,x_j) + d(x_{i+1},x_{j+1}) − d(x_i,x_{j+1}) − d(x_{i+1},x_j)`.  By Chepoi–Fichet
-([HABIMRW] Prop. 2.8; [K]) a symmetric `d` with zero diagonal equals `½ Σ α_ij δ_{S_ij}`; `d` is circular
+([HABIMRW] Prop. 2.8; a known result, [K]) a symmetric `d` with zero diagonal equals `½ Σ α_ij δ_{S_ij}`; `d` is circular
 decomposable for `C` iff all `α_ij ≥ 0`, and then its support is `{S_ij : α_ij > 0}`.
 
-**Networks.**  For a semi-directed network `N` on `X`, `T(N)` is the set of its displayed trees and
-`Split(T(N))` the union of their split systems; the displayed quartets of `N` are the quartets of its
-displayed trees ([HABIMRW] §5: `Q(N) = Q(T(N))`).  `d_N` is the NANUQ metric of [HABIMRW] Def. 4.1.
+**Networks** (definitions of [HABIMRW] §2).  A binary *semi-directed network* `N` on `X` is obtained from
+a rooted binary network whose root is the least stable ancestor of `X` (a *rooted partner*) by undirecting
+the non-hybrid edges and suppressing the root; it may have parallel edges.  `T(N)` is the set of trees
+*displayed* by `N` (delete one hybrid edge per hybrid node — a *switching* — then clean up) and
+`Split(T(N))` the union of their split systems.  For `Y ⊆ X`, `|Y| ≥ 2`, the *subnetwork* `N|_Y` is the
+union of all up-down paths between leaves of `Y`, with degree-2 nodes suppressed (Def. 2.5); for `|Y| = 4`
+it is a *quarnet*.  The NANUQ metric `d_N` (Def. 4.1) is `d_N(x,y) = Σ_{z,w} 2ρ_xy(N|_{xyzw}) + 2n − 4`,
+where `ρ_xy` of a quarnet is the **unweighted** average of `ρ_xy(T)` over the quartet trees `T` that the
+quarnet displays (their Eq. (10)).
+
+**Lemma 0 (restriction commutes with display) [P].**  For a semi-directed network `N` on `X` and `Y ⊆ X`,
+`|Y| ≥ 2`:  `T(N|_Y) = { T|_Y : T ∈ T(N) }`.
+
+This is used, with multiplicities and without separate proof, in the proof of [HABIMRW] Lemma 3.2.
+
+*Proof.*  Work in a rooted partner.  In a switching every node other than the root has exactly one parent,
+so a switching is a spanning tree, and its path between two leaves goes up to their last common ancestor
+and down again: it is an up-down path.  Let `U` be the union of the up-down paths of `N` between leaves of
+`Y`; `N|_Y` is `U` with degree-2 nodes suppressed, a semi-directed network, so its switchings are trees
+containing `Y`.  (⊇) Let `S` be a switching of `N` and `S_Y` the union of its paths between leaves of `Y`.
+Then `S_Y ⊆ U`, and `S_Y` contains at most one hybrid edge at each node; a switching of `U` that keeps, at
+each of its hybrid nodes, the edge lying in `S_Y` if there is one contains `S_Y`, and being a tree it
+displays the same tree on `Y` as `S`.  (⊆) Let `S'` be a switching of `U`.  Choose a switching `S` of `N`
+that keeps the edge of `S'` at every node with both hybrid edges in `U`, and the hybrid edge lying in `U`
+at every node with exactly one hybrid edge in `U`.  Then `S' ⊆ S`, so the paths of `S` between leaves of `Y`
+are those of `S'`.  ∎
 
 **Lemma 1 [P].**  If `N` is outer-labeled planar with induced circular order `C`, then `Σ = Split(T(N))` is a
 tree-generated circular split system for `C` and `d_N = d_Σ`.
 
 *Proof.*  Every displayed tree is planar for `C`, so its splits are circular ([HABIMRW] Prop. 2.9), and
-the displayed trees are binary: tree-generated.  A tree displays `ab|cd` iff one of its splits separates
-`{a,b}` from `{c,d}`; so the set of displayed quartets on each 4-set is the same for `N` and `Σ`, and the
-two metrics are defined from these sets by the same formula.  ∎
+the displayed trees are binary: tree-generated.  By Lemma 0 the quartet trees displayed by the quarnet
+`N|_{xyzw}` are the restrictions `T|_{xyzw}`, `T ∈ T(N)`; a tree restricts to `ab|cd` iff one of its splits
+separates `{a,b}` from `{c,d}`.  So for each 4-set the set of quartet trees over which Eq. (10) averages is
+the set of quartets displayed by `Σ`, and the two metrics are defined from these sets by the same
+formula.  ∎
 
 So the conjectures are statements about a family of circular split systems.  They are *not* true for
-all tree-generated systems: on six points 9 of the 150 tree-generated systems fail (CX-D2).
+all tree-generated systems: on six points 9 of the 150 tree-generated systems fail (§7; `DEAD_ENDS.md`
+CX-D2).
 
 ---
 
@@ -156,9 +200,10 @@ leaves, in each of its twelve dihedral labellings `y_1,…,y_6`, satisfies
 system is locally NANUQ-positive (take `(u_1,z,w,u_p,v_1,v_q) = (y_1,…,y_6)`; by Lemma 3, `S_ij ∉ Σ` iff
 `u_1u_p|v_1v_q` is not displayed, a property of the restriction).
 
-**Lemma 4 (the 5-point terms take care of themselves) [X].**  For *every* tree-generated system on five
+**Lemma 4 (the 5-point terms take care of themselves) [X, V].**  For *every* tree-generated system on five
 points, in every placement: `Φ5 ∈ {0, ½, 1}`, `Φ5 = 0` if `u_1u_p|v_1v_q` is not displayed, and
-`Ψ ∈ {0, ½, 1}`.  (16 systems × 10 placements; `five_point_facts.py`.)
+`Ψ ∈ {0, ½, 1}`.  (16 systems × 10 placements; `five_point_facts.py`; Lean: `five_point_facts`, with the
+trees and the tree-generated systems defined inside Lean, not imported.)
 
 **Theorem 4 (local criterion) [P, using Lemma 4].**  If a tree-generated circular split system `Σ` on
 `n ≥ 4` points is locally NANUQ-positive, then `d_Σ` is circular decomposable for `C` and its support is
@@ -198,8 +243,8 @@ So negativity is the failure of a *union property*: two displayed splits that bo
 *positions* (the splits of `T` circular), with pairwise disjoint pairs of circularly adjacent positions
 (*twins*).  Its leaves are the unpaired positions and the pairs, in the induced circular order; its
 *displayed trees* are obtained from `T` by deleting one position of each pair; its split system `Σ(T)` is
-the union of their split systems.  `𝒜_n` is the set of such systems on `n` leaves (so at most `n` pairs,
-`|P| ≤ 2n`).
+the union of their split systems.  `𝒜_n`, `n ≥ 2`, is the set of such systems on `n` leaves (so at most `n`
+pairs, `|P| ≤ 2n`); `𝒜_2` and `𝒜_3` consist of the one system of trivial splits.
 
 **Proposition 6 (union property in 𝒜) [P].**  In an 𝒜-system: if a displayed split separates `{z,w}` from
 `{a_1,a_2,a_3}` and a displayed split separates `{z,w}` from `{a_2,a_3,a_4}` (leaves in the circular order
@@ -210,8 +255,10 @@ everywhere in 𝒜 (Lemma 5).
 an interval of `P`, together with a choice of one position per pair: a leaf lies on the side of `I` iff its
 chosen position is in `I`.  Let `I_1`, `I_2` be the intervals of the two given splits: `I_1` contains a
 position of each of `a_1,a_2,a_3` and misses a position of `z` and one of `w`; `I_2` likewise for `a_2,a_3,a_4`.
-Both contain the positions lying between those of `a_2` and of `a_3`, so they intersect.  We claim that some
-position lies in neither.  Otherwise every position missed by `I_1` lies in `I_2` and conversely, so `z` and
+An interval that contains a position of `a_2` and a position of `a_3` contains one of the two arcs between
+them; the arc through `a_4, z, w, a_1` contains every position of `z`, and `I_1`, `I_2` each miss one; so
+each of `I_1`, `I_2` contains the short arc between its positions of `a_2` and `a_3`, in particular the
+last position of `a_2`: they intersect.  We claim that some position lies in neither.  Otherwise every position missed by `I_1` lies in `I_2` and conversely, so `z` and
 `w` are twin pairs and each of `I_1`, `I_2` contains exactly one position of `z` and one of `w`.  An interval
 containing a position of `a_2`, exactly one position of `w` and exactly one of `z` is the interval from the
 second position of `w` to the first position of `z`; so `I_1 = I_2`, and they miss common positions — a
@@ -220,44 +267,53 @@ contradiction.  Two edges of a tree whose sides `I_1`, `I_2` intersect and miss 
 choosing these positions (the choices at different pairs are independent) gives a displayed tree with a
 split separating `{z,w}` from `{a_1,a_2,a_3,a_4}`.  ∎
 
-This is the structural reason behind the theorem of [HABIMRW] and its extension: *all displayed trees of
-a galled planar network are restrictions of one planar tree, with independent choices*.  In a network
-that is not galled the choices are not independent, the union property fails, and so does the theorem
-(§6).
+This is the structural reason behind the theorem of [HABIMRW] and its extension: *when every hybrid node
+has a leaf child, all displayed trees are restrictions of one planar tree, with independent choices*
+(Lemma A); a general galled planar network is glued from such pieces along cut edges (Lemma B).  In a
+network that is not galled the choices need not be independent, the union property can fail, and then so
+can the theorem (§6) — although most non-galled planar networks still satisfy its conclusion (§6, Remark 3).
 
-**Substitution.**  For circular split systems `Σ_1` on `X_1 ∋ p` and `Σ_2` on `X_2 ∋ r`, the system
-`Σ_1 ∘_{p,r} Σ_2` on `(X_1∖p) ∪ (X_2∖r)` (circular order: that of `X_1` with `p` replaced by `X_2∖r` in the
-order following `r`) consists of the splits of `Σ_1` with `p` replaced by `X_2∖r` and the splits of `Σ_2` with
-`r` replaced by `X_1∖p`.  Let `𝒞` be the smallest class of systems containing all `𝒜_n` and closed under `∘`.
+**Substitution.**  For circular split systems `Σ_1` on `X_1 ∋ p` and `Σ_2` on `X_2 ∋ r`, `|X_1|, |X_2| ≥ 2`,
+the system `Σ_1 ∘_{p,r} Σ_2` on `(X_1∖p) ∪ (X_2∖r)` (circular order: that of `X_1` with `p` replaced by
+`X_2∖r` in the order following `r`) consists of the splits of `Σ_1` with `p` replaced by `X_2∖r` and the
+splits of `Σ_2` with `r` replaced by `X_1∖p`.  (A factor with two leaves does nothing: `Σ_1 ∘_{p,r} Σ_2` is
+then the other factor with `r`, resp. `p`, renamed.)  Let `𝒞` be the smallest class of systems containing
+all `𝒜_n`, `n ≥ 2`, and closed under `∘`.
 
 **Lemma 7 (restrictions) [P].**  (i) The restriction of an 𝒜-system to `Y` is an 𝒜-system on `Y`
 (restrict `T` to the positions of the leaves of `Y`; twins stay adjacent).  (ii) For `Y` meeting both
 `X_1∖p` and `X_2∖r`,  `(Σ_1 ∘ Σ_2)|_Y = Σ_1|_{(Y∩X_1)∪p} ∘ Σ_2|_{(Y∩X_2)∪r}`; if `Y` misses one of them the
 restriction is a restriction of the other factor.  (iii) Consequently every restriction of a system of
-`𝒞` to `m ≤ 6` leaves lies in `𝒞_m`, the set of systems on `m` leaves obtained from `𝒜_{≤ 6}` by
+`𝒞` to `m` leaves, `2 ≤ m ≤ 6`, lies in `𝒞_m`, the set of systems on `m` leaves obtained from `𝒜_{≤ 6}` by
 substitutions all of whose intermediate systems have at most 6 leaves.
 
 *Proof.*  (i), (ii) are immediate from the definitions (displayed trees restrict to displayed trees; a
 restricted tree's splits are the restricted splits).  (iii) by induction on the construction of the
-system: in (ii) both factors have at most `|Y| − 1 + 1 ≤ 6` leaves.  ∎
+system: in (ii) both factors have at least 2 and at most `|Y| − 1 + 1 ≤ 6` leaves.  ∎
 
-**Lemma 8 (finite check) [X].**  `|𝒜_4| = 3`, `|𝒜_5| = 16`, `|𝒜_6| = 102`;  `|𝒞_4| = 3`, `|𝒞_5| = 16`,
-`|𝒞_6| = 108`; every system of `𝒞_6` is 6-locally good (and satisfies the 5-point facts on all its
-5-subsets).  Programs: `twin_trees.py`, `verify_class.py`, `characterize6.py`.  (`𝒜_6` is computed from all
-binary trees on `6 + k` circular positions, `k ≤ 6`, with all choices of `k` disjoint adjacent pairs.)
+**Lemma 8 (finite check) [X; the last assertion also V].**  `|𝒜_4| = 3`, `|𝒜_5| = 16`, `|𝒜_6| = 102`;
+`|𝒞_4| = 3`, `|𝒞_5| = 16`, `|𝒞_6| = 108`; every system of `𝒞_6` is 6-locally good (and satisfies the
+5-point facts on all its 5-subsets).  Programs: `twin_trees.py`, `verify_class.py`, `characterize6.py`.
+(`𝒜_6` is computed from all binary trees on `6 + k` circular positions, `k ≤ 6`, with all choices of `k`
+disjoint adjacent pairs; the closure from factors with at least three leaves, two-leaf factors being
+trivial.)  The 108 systems fall into 17 classes under rotation and reflection, 16 of them in `𝒜_6`; they
+are listed with their values of `Φ6` in Appendix B, so that the last assertion can be checked by hand; it
+is also checked by the Lean kernel for the list of 108 systems (`closure_locally_good`;
+`export_lean_lists.py` checks that the list in the Lean file is the computed closure).  The referee
+recomputed 1 / 3 / 16 / 102 and 108 with independent code.
 
-**Theorem 6′ (class 𝒞) [P + X].**  Every system of `𝒞` is 6-locally good; hence, by Theorem 4, its
-NANUQ metric is circular decomposable with support exactly the system.
+**Theorem 6 (class 𝒞) [P + X].**  Every system of `𝒞` on `n ≥ 4` leaves is 6-locally good; hence, by
+Theorem 4, its NANUQ metric is circular decomposable with support exactly the system.
 
-*Proof.*  Lemma 7(iii) and Lemma 8.  ∎
+*Proof.*  Lemma 7(iii) and Lemma 8 (for `n ≤ 5` there is nothing to check).  ∎
 
 ---
 
 ## 5. All galled outer-labeled planar networks
 
-**Lemma A (hybrids with a leaf child) [P].**  Let `N` be a binary semi-directed network with an
-outer-labeled planar embedding inducing `C`, in which every hybrid node is adjacent to a leaf.  Then
-`Split(T(N)) ∈ 𝒜_n`.
+**Lemma A (hybrids with a leaf child) [P].**  Let `N` be a binary semi-directed network on `n ≥ 2` leaves
+with an outer-labeled planar embedding inducing `C`, in which every hybrid node is adjacent to a leaf.
+Then `Split(T(N)) ∈ 𝒜_n`.
 
 *Proof.*  For each hybrid node `h` with parents `p_h`, `p'_h` and leaf `x_h`, delete `h` and `x_h` and attach
 two new leaves `x_h^-` to `p_h` and `x_h^+` to `p'_h`.  The result `T` is a tree: the switching of `N` that keeps
@@ -266,35 +322,62 @@ parent), and `T` is this tree with `h` suppressed and one pendant leaf `x_h^+` a
 internal nodes have degree 3.  In the embedding, `h` and `x_h` can be replaced by two leaves drawn along
 the two sides of the path `h x_h`, so `T` is planar with `x_h^-`, `x_h^+` adjacent on the outer face in the
 place of `x_h`.  Deleting the hybrid edge `p'_h h` of `N` corresponds to deleting `x_h^+` of `T`.  So the
-displayed trees of `N` are those of the 𝒜-structure.  ∎
+displayed trees of `N` are those of the 𝒜-structure.  (The two parents of `h` may coincide — parallel
+edges — and a hybrid edge may pass through the suppressed root; the argument is unchanged.)  ∎
+
+**Lemma B0 (the edge below a hybrid node is a cut edge) [P].**  Let `N` be a binary semi-directed galled
+network and `h` a hybrid node with child `c`.  Then `c` is not a hybrid node and `e = (h,c)` is a cut edge.
+
+([HABIMRW] state after Def. 2.3, without proof, that in the binary case "galled" is equivalent to every
+hybrid node being an articulation node.  The proof below is the referee's.)
+
+*Proof.*  Work in a rooted partner; "galled" is Def. 2.3(vi): for every hybrid node the two hybrid edges
+entering it lie on a cycle of the underlying graph that contains no other hybrid edge.  If `c` were a
+hybrid node, its cycle would contain the hybrid edge `(h,c)` and a second edge at `h`, which is a hybrid
+edge entering `h`: impossible.  Let `D` be the set of descendants of `c`, `c` included.  If `e` lay on a
+cycle, some other edge would join `D` to its complement; as `D` is closed under taking children it is
+directed from some `a ∉ D` to some `b ∈ D`, and `b ≠ c` because the only parent of `c` is `h`.  Then `b` also
+has a parent `a' ∈ D`, so `b` is a hybrid node.  Its cycle, minus `b`, is a path from `a'` to `a` without
+hybrid edges.  It leaves `D`; the edges entering `D` are `e` and hybrid edges (the head of any other edge
+entering `D` has a second parent in `D`); so the path uses `e`, arrives at `h`, and must continue along one
+of the two other edges at `h`, which are hybrid edges (`a ≠ h` because `b ≠ c`): a contradiction.  ∎
 
 **Lemma B (cutting below a hybrid) [P].**  Let `N` be binary, semi-directed, outer-labeled planar and
-galled, and `h` a hybrid node whose child is not a leaf.  The edge `e` from `h` to its child is a cut
-edge ([HABIMRW] §2.1: in a binary galled network every hybrid node is an articulation node; the two
-hybrid edges lie on a cycle).  Cut `e` and cap both ends with new leaves `p` (at `h`) and `r`.  The two
-pieces `N_1 ∋ p`, `N_2 ∋ r` are again outer-labeled planar with the induced circular orders, each of their
-hybrid nodes has its third edge a cut edge, every switching of a piece is a tree, and
+galled, on at least two leaves, and `h` a hybrid node whose child `c` is not a leaf.  Cut the cut edge
+`e = (h,c)` and cap both ends with new leaves `p` (at `h`) and `r` (at `c`).  The two pieces `N_1 ∋ p`,
+`N_2 ∋ r` are binary semi-directed networks on at least two leaves each, outer-labeled planar with the
+induced circular orders, and galled; each has fewer hybrid nodes with a non-leaf child than `N`; and
 `Split(T(N)) = Split(T(N_1)) ∘_{p,r} Split(T(N_2))`.
 
-*Proof.*  A switching of `N` is a spanning tree containing the bridge `e`; removing `e` leaves spanning
-trees of the two sides, and conversely switchings of the pieces combine.  So the displayed trees of `N`
-are exactly the trees obtained by joining a displayed tree of `N_1` and one of `N_2` at `p`, `r`, and the
-splits of a joined tree are those described in the definition of `∘`.  Bridges of `N` other than `e` remain
-bridges of the pieces; planarity and the outer face are inherited.  ∎
+*Proof.*  Let `D` be the set of descendants of `c` in a rooted partner `N⁺`.  By Lemma B0 no edge other than
+`e` joins `D` to the rest.  *`N_1`*: replace `D` by the leaf `p`; this is a rooted binary network whose root
+is still the least stable ancestor of its leaves, and it has a leaf other than `p` (otherwise every path
+from the root to a leaf of `N⁺` would pass through `h`).  *`N_2`*: a new root with children `r` and `c`,
+above the network induced on `D`; the root is the least stable ancestor because `r` is its child, and `c`,
+not being a leaf, has a leaf below it.  Suppressing the roots gives the two pieces.  A cycle of `N` does
+not contain the cut edge `e`, so the cycle required by Def. 2.3(vi) for a hybrid node of a piece lies in
+that piece: the pieces are galled.  A planar embedding of `N` with the leaves on the outer face gives one
+of each piece by contracting the other side of `e` to a point (the leaves on one side of a cut edge are
+consecutive in the circular order).  In `N_1` the node `h` now has a leaf child and the other hybrid nodes
+are unchanged; `N_2` does not contain `h`.  Finally, a switching of `N` is a spanning tree containing the
+bridge `e`; removing `e` leaves switchings of the two pieces, and conversely switchings of the pieces
+combine.  So the displayed trees of `N` are exactly the trees obtained by joining a displayed tree of `N_1`
+and one of `N_2` at `p`, `r`, and the splits of a joined tree are those described in the definition of
+`∘`.  ∎
 
-(The pieces need not be semi-directed networks in the sense of [HABIMRW] — a rooted partner may not
-exist for `N_2` — but only the properties listed in Lemma B are used: Lemma A needs only that the
-switchings are trees.)
+(The first version called the pieces "marked networks" and said that `N_2` might have no rooted partner;
+that was wrong and unnecessary — REV-0002, finding 4.  The referee cut 4000 explicit networks: both pieces
+were always valid networks of the class; the piece `N_1` had two leaves in 159 cases and three in 304.)
 
 **Theorem 7 (all levels, any number of blobs) [P + X].**  Let `N` be a binary semi-directed network on
 `n ≥ 4` leaves that is outer-labeled planar and galled (no bound on the level, any number of blobs).
 Then `d_N` is circular decomposable, for every circular order induced by `N`, and its support is exactly
 `Split(T(N))`.
 
-*Proof.*  Induct on the number `μ` of hybrid nodes whose child is not a leaf, in the class of planar
-"marked" networks described in Lemma B.  If `μ = 0`, `Split(T(N)) ∈ 𝒜 ⊆ 𝒞` by Lemma A.  Otherwise cut
-below such a hybrid: both pieces have smaller `μ` (in `N_1` the node `h` now has the leaf `p`; `N_2` does not
-contain `h`), their systems are in `𝒞` by induction, and so is the substitution.  Theorem 6′ and Lemma 1
+*Proof.*  We show, for all networks of this kind on `n ≥ 2` leaves, that `Split(T(N)) ∈ 𝒞`, by induction on
+the number `μ` of hybrid nodes whose child is not a leaf.  If `μ = 0`, `Split(T(N)) ∈ 𝒜_n ⊆ 𝒞` by Lemma A.
+Otherwise cut below such a hybrid node: by Lemma B both pieces are networks of the same kind with smaller
+`μ`, their systems are in `𝒞` by induction, and so is the substitution.  For `n ≥ 4`, Theorem 6 and Lemma 1
 finish the proof.  ∎
 
 In particular: Conjecture B1 (all of `N_2`) and Conjecture B2 (level-3 bloblets, with the exact support)
@@ -332,31 +415,67 @@ NANUQ metric (order `a1,a2,b,x,y,c,d`):
 21 25 27 26 24 17  0
 ```
 
-**Theorem 9 [X].**  (a) For the planar order, the displayed split `{x,y} | {a1,a2,b,c,d}` has weight
-`α = d(b,y) + d(x,c) − d(b,c) − d(x,y) = 24 + 24 − 29 − 20 = −1`.  (b) `d_{N*}` is not circular decomposable:
-for each of the 360 circular orders of the seven leaves some `α_ij` is negative.  (c) In the family
-`N(s,t)` (the same blob with `t` leaves `a_i` and `s` leaves `d_i`, attached along the cycle or as pendant
-clades) the weight of `{x,y} | rest` is negative for all tested `s + t ≥ 3` (bloblet version) and decreases
-quadratically (`−13` at `s = t = 3`).  Programs: `counterexample7.py`, `verify_nongalled.py`,
-`verify_nongalled2.py` (built on `netcalc.py`, which works from the explicit rooted network and shares
-no code with the split-system programs), `nongalled_family.py`.
+**The family `N(s,t)`**, `s,t ≥ 0`.  *Bloblet version*: the same blob with `t` leaves `a_1,…,a_t` hanging
+along the path from the root to `p1` and `s` leaves `d_1,…,d_s` along the path from the root to `q1` (`d_1`
+nearest to `q1`); `N* = N(1,2)`.  *Clade version*: the `a_i` form one pendant clade and the `d_j` another,
+each attached to the cycle at a single point (on the root–`p1` path, resp. the root–`q1` path).  Circular order `(a_1,…,a_t, b, x, y, c, d_1,…,d_s)`.  In both versions the
+four displayed trees are obtained from those of `N*` in the obvious way (`nongalled_formula.py` lists them).
+
+**Theorem 9 [X + P].**  (a) For the planar order, the displayed split `{x,y} | {a1,a2,b,c,d}` of `N*` has
+weight `α = d(b,y) + d(x,c) − d(b,c) − d(x,y) = 24 + 24 − 29 − 20 = −1`.  (b) `d_{N*}` is not circular
+decomposable: for each of the 360 circular orders of the seven leaves some `α_ij` is negative.  (c) For
+all `s,t ≥ 0` the weight of the displayed split `{x,y} | rest` of `N(s,t)`, for the planar order, is
+
+```
+α = 2 − C(s+t, 2)      (bloblet version),            α = 2 − s·t      (clade version).
+```
+
+Programs: `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py` (built on `netcalc.py`, which
+works from the explicit rooted network and shares no code with the split-system programs),
+`nongalled_family.py`, `nongalled_formula.py`.  The referee recomputed (a), (b) and 11 values of each
+formula in (c) with independent code.
+
+*Proof of (c).*  Here `U = (x,y)` and `V = (c, d_1,…,d_s, a_1,…,a_t, b)`, so by Proposition 2
+`α/2 = Φ4 + Σ_z Φ5'(z) + Σ_{z,w} Φ6'(z,w)` with `z, w` running over the `d_j` and the `a_i`.  Each term
+depends only on the restriction of the split system to `x, y, c, b` and the one or two leaves `z, w`, which
+is the split system of the member of the family having only those leaves (restrict the four displayed
+trees).  So six numbers have to be computed, on 4, 5, 5, 6, 6 and 6 leaves [X]: `Φ4 = 1`; `Φ5' = 0` for a
+leaf `d` and for a leaf `a`; and `Φ6' = −½` for each of the three kinds of pair in the bloblet version,
+while in the clade version `Φ6' = −½` for a pair `(d_j, a_i)` and `0` for two leaves of the same clade.
+Hence `α/2 = 1 − ½·C(s+t,2)`, resp. `1 − ½·st`.  ∎
 
 *Why.*  The restriction of `Split(T(N*))` to `{d, a_i, b, x, y, c}` contains every circular split of these six
 leaves except `{d,a_i} | {b,x,y,c}`.  With `z = d`, `w = a_i`, `(a_1,…,a_4) = (b,x,y,c)`: the displayed trees
 cut `{d,a_i}` off from `{b,x,y}` (when `x,y` hang on the `b` side) and from `{x,y,c}` (when they hang on the `c`
-side) but never from all four — the union property fails because `y` follows `x` when `h1` switches.  Each
-such pair contributes `Φ6 = −½`; there are `st` of them, against `O(s+t)` positive terms.
+side) but never from all four — the union property fails because `y` follows `x` when `h1` switches.
 
 So Theorem 4.7 of [HABIMRW] does not extend to outer-labeled planar level-2 networks that are not
 galled, not even for bloblets, and not even with the weaker conclusion "circular decomposable for some
-order".
+order" (shown for `N*`).
+
+**Remarks.**
+1. *Which metric.*  The statement is about the NANUQ metric of [HABIMRW] Def. 4.1, whose `ρ` ignores the
+   multiplicities of displayed quartets (their Eq. (10)) — the metric of their Theorem 4.7 and of their
+   conjectures.  Their multiplicity-weighted *displayed quartet metric* is circular decomposable with support
+   `Split(T(N))` for **every** outer-labeled planar network (their Corollary 3.4), `N*` included (the
+   referee computed weight `5` for `{x,y}|rest` there).  The failure is specific to the multiplicity-free
+   averaging outside the galled class.
+2. *Seven leaves are needed* for two hybrid nodes: in the bloblet version the weight is negative exactly for
+   `s + t ≥ 3`, and according to the referee's exhaustive pass over the outer-labeled planar networks with
+   two hybrid nodes on 4, 5 and 6 leaves (obtained by hybrid insertion) none violates the conclusion.
+3. *Most non-galled planar networks still satisfy the conclusion.*  In the referee's enumeration on 7
+   leaves, of 60 196 non-galled insertion sequences 664 give a negative weight (all bloblets) and 1 252 a
+   wrong support only (none of them bloblets).  We have not classified the non-galled planar networks for
+   which the conclusion holds.
 
 ---
 
 ## 7. The criterion is sharp
 
 On six points there are 150 tree-generated systems; 141 have a NANUQ metric that is Kalmanson with exact
-support; 127 are 6-locally good; 108 are in `𝒞` (`characterize6.py`).
+support; 127 are 6-locally good; 108 are in `𝒞` (`characterize6.py`; the first three numbers are also
+checked by the Lean kernel from definitions inside Lean, `tg6_length`, `tg6_globally_good`,
+`tg6_locally_good`, and were recomputed by the referee).
 
 **Theorem 10 [X + P].**  (a) The 9 systems that fail globally are, up to rotation and reflection, two:
 all nine non-trivial splits except two antipodal 2-splits (negative weight), and all except a 2-split
@@ -374,6 +493,16 @@ Kalmanson for the given order with support exactly the system, if and only if it
 *Proof of the last sentence.*  "If": Theorem 4.  "Only if": a member with a 6-point restriction outside
 the 127 has that restriction, and its blow-ups, in the class; by (a), (b) one of them fails.  ∎
 
+*What "sharp" does and does not mean* (REV-0002, finding 10).  (i) The failure in "only if" is a failure of
+*Kalmanson with exact support*.  Of the 9 six-point systems that fail, 6 remain Kalmanson and only have a
+positive weight on an undisplayed split (the second type in (a)); according to the referee, 12 of the 14
+minimal blow-ups in (b) likewise remain Kalmanson with a wrong support, larger blow-ups reach a negative
+weight for 17 of the 23 excluded systems, and for the 6 systems missing a 2-split and its crossing 3-split
+no blow-up with multiplicities `≤ 3` and at most 11 leaves does.  So for "Kalmanson" alone the criterion is
+not known to be sharp.  (ii) The closure operations are those of abstract split systems.  (iii) The
+statement is about classes of split systems: 19 of the 127 systems are not displayed by any network of the
+class of [HABIMRW] on six leaves (next paragraph), so nothing sharp is claimed about classes of networks.
+
 By §5 the galled outer-labeled planar networks on six leaves give systems of `𝒞_6`, hence at most 108 of the
 127 (and exactly 108 according to a second generator, `multiblob.py`, which builds networks blob by blob and
 respects the existence of a rooted partner); the remaining 19 systems satisfy the criterion and are not
@@ -389,8 +518,11 @@ version) define, for `ρ = (ρ_c, ρ_s, ρ_a, ρ_o) ∈ (ℝ_{≥0})^4`,
 `ρ_s` if it is a tree separating `x` from `y`, `ρ_a` if it has a 4-cycle with `x,y` adjacent, `ρ_o` if it has a
 4-cycle with `x,y` opposite.  NANUQ is `(0, 1, ½, 1)`; their *Modified NANUQ* distance is `(½, 1, ½, 1)`.
 [HABIMRW] §6 asks "whether some of our results can be extended to a parametric family of distances, as
-introduced in [All+25a]".  For planar quartet systems we read "4-cycle" as "both planar quartets are
-displayed" (for level-1 networks this is the original definition).
+introduced in [All+25a]".  NANUQ⁺ defines the family for level-1 networks, where a quarnet is a tree or has
+a 4-cycle.  **Beyond level 1 we have to choose an extension, and the choice is ours**: for a quarnet of an
+outer-labeled planar network we read "4-cycle" as "both planar quartets are displayed" and "tree" as "one
+is" — the reading under which `(0,1,½,1)` is the NANUQ metric of [HABIMRW] Def. 4.1.  Theorem 11 is a theorem
+about this extension.
 
 **Theorem 11 [P + X].**  Let `ρ ∈ (ℝ_{≥0})^4`.
 
@@ -454,24 +586,119 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
 ## 9. What is not shown
 
 * Nothing about networks that are not outer-labeled planar.
-* Theorem 9 gives one family; we have not classified the non-galled planar networks for which the
-  statement survives (it does on six leaves for `N(1,1)`).
+* The non-galled planar networks for which the conclusion survives are not classified (§6, Remark 3).
+* For "Kalmanson" without exact support the sharpness of the criterion is open (§7).
 * For the class of bloblets alone the exact parameter domain is not determined (condition (b) of Theorem 11
   is sufficient; our necessity witnesses use pendant clades).
-* The finite checks are computations by this division; the proofs are internally reviewed only.
-* Theorem 7 was reached independently, but after a third-party claim of the same statement.
+* Theorem 7 was reached independently, but after a third-party claim of the same statement whose method
+  probably coincides with ours (§0).
+* The proofs are paper proofs by this division with one internal adversarial review (REV-0002), which is
+  not academic peer review.  Theorem 11 was outside the referee's brief and received spot checks only.
+  Lemma 0, Lemma B0, the rewritten Lemma B and the proof of Theorem 9(c) were written or rewritten after
+  the review.
 
-## 10. Reproduction (`experiments/complexity/nanuq/`, Python 3 + `networkx`)
+## 10. Reproduction
+
+Our programs: `experiments/complexity/nanuq/` (Python 3 + `networkx`).
 
 | program | what it establishes | time |
 |---|---|---|
 | `five_point_facts.py` | Lemma 4 | seconds |
 | `check_decomposition.py` | Proposition 2 (identity), non-negativity of all local terms on network systems with ≤ 7 leaves | minutes |
 | `verify_class.py` | Lemma 8: `𝒜_n`, `𝒞_n` for `n ≤ 6`; agreement with a second generator (`multiblob.py`) | ≈ 1 min |
+| `class_table6.py` | Appendix B | seconds |
 | `characterize6.py` | the numbers 150 / 141 / 127 / 108, Theorem 10 | ≈ 2 min |
-| `test_bloblets.py k n…`, `test_multiblob.py n` | direct test of the conclusion of Theorem 7 on all bloblets of level `k` / all networks with `n` leaves | minutes |
-| `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py`, `nongalled_family.py` | Theorem 9 | seconds–minutes |
+| `test_bloblets.py k n…`, `test_multiblob.py n` | the conclusion of Theorem 7 on all bloblets of level `k` / all networks with `n` leaves, **as generated from twin trees and substitution** | minutes |
+| `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py`, `nongalled_family.py`, `nongalled_formula.py` | Theorem 9 | seconds–minutes |
 | `exhaust_all_systems.py`, `exhaust_tree_generated.py` | CX-D2 | seconds |
 | `parametric_theorem.py` | Theorem 11(a): parametric decomposition identity, local forms on `𝒞_{≤6}`, witnesses | ≈ 2 min |
 | `parametric_classA.py`, `parametric_witnesses_A.py`, `parametric_o_gt_s_witness.py` | Theorem 11(b): local forms on `𝒜_{≤6}`, witnesses with non-hybrid `z,w` | minutes |
 | `modified_nanuq_witness.py` | Theorem 11(c), from the explicit rooted network | seconds |
+| `export_lean_lists.py` | the list `C6` in the Lean file is the computed closure | ≈ 30 s |
+
+**Which tests are independent of the structure lemmas** (REV-0002, finding 1).  `test_bloblets.py` and
+`test_multiblob.py` build their networks from the twin-tree and substitution description, so they
+presuppose Lemmas A and B and test only the split-system part of Theorem 7.  Tests of Theorem 7 that start
+from **explicit rooted networks** — generated by inserting hybrid edges into trees and filtered by the
+definitions themselves (Def. 2.3(vi) for "galled", a planarity test, the LSA condition) — were written by
+the referee with code that shares nothing with ours and are kept in
+`experiments/complexity/reviews/rev2_nanuq/`:
+
+| referee's program | what it does | result reported in REV-0002 |
+|---|---|---|
+| `t3b_random.py`, `t3b_random_big.py` | random galled outer-labeled planar networks, 6–13 leaves, levels 1–8 | 74 661 distinct networks, no failure of Theorem 7 |
+| `t_exhaust.py n k` | all networks from all tree shapes on `n` leaves by `≤ k` hybrid insertions | 4 leaves `k ≤ 3`, 5 leaves `k ≤ 3`, 6 and 7 leaves `k ≤ 2`: no failure |
+| `t_lemmaAB.py` | Lemmas A, B, 7(iii) on explicit networks | 1 422 762 six-leaf restrictions all in `𝒞_6`; substitution identity on 4000 cuts |
+| `t3a_nstar.py`, `t9c_family.py`, `t_exhaust_ng.py` | `N*`, the family, non-galled survey | Theorem 9 confirmed |
+| `t3c_counts.py`, `t3d_blowups.py`, `t_extra.py` | counts 16 / 150 / 141 / 127 / 108, blow-ups, 7-point systems | Theorem 10 confirmed as stated |
+| `t_anchor.py`, `t1_defs.py`, `quarnet.py` | the five NANUQ matrices of Table 1 of [HABIMRW]; a literal implementation of Def. 2.5 | external anchor reproduced; 0 mismatches on 9 155 four-sets |
+
+We re-ran `t_exhaust.py 5 2` and a 300-network batch of `t3b_random.py` from the repository copy
+(2026-11-26): no failure.
+
+Lean: `experiments/complexity/lean/NanuqFinite.lean` (`lake env lean …`, about 3.5 minutes): Lemma 4;
+Proposition 2 on all tree-generated systems on five and six points; 150 / 141 / 127; "6-locally good ⇒
+Kalmanson with exact support" on six points; doubled five-point systems are 6-locally good (Theorem 10(c));
+all 108 systems of the list `C6` are 6-locally good.  Axioms: `propext`, `Quot.sound`.
+
+## 11. Changes after the review COMPLEXITY-REV-0002
+
+| finding | change |
+|---|---|
+| 1 (major): the direct tests of Theorem 7 presuppose its structure lemmas | §10 says so; the referee's explicit-network tests are in the repository and listed |
+| 2 (major): the method probably coincides with the earlier third-party claim (122 systems) | §0 item 2, §9, `PRIOR_ART.md` B-II, `THEOREMS.md` |
+| 3: Lemma 1 cited a notation as if it were a statement | Lemma 0 with proof; Lemma 1 rewritten |
+| 4, 5: "marked networks" undefined; pieces with 2 or 3 leaves; wrong remark on rooted partners | classes and substitution defined for `n ≥ 2`; Lemma B states and proves that the pieces are networks of the class; induction of Theorem 7 restated |
+| 6: the cut-edge fact rested on an unproved remark of the source | Lemma B0 (the referee's proof) |
+| 7: a sentence in the proof of Proposition 6 was empty for adjacent leaves | sentence replaced |
+| 8: "all displayed trees … one planar tree" only true in class 𝒜; "so does the theorem" too strong | paragraph after Proposition 6 rewritten |
+| 9: `st` vs `C(s+t,2)`; "tending to −∞" unproved | Theorem 9(c) with exact formulas for both versions and a proof (`nongalled_formula.py`) |
+| 10: "sharp" needs a qualifier | paragraph "What 'sharp' does and does not mean" in §7; §0 item 4 |
+| 11: the failure is specific to the multiplicity-free metric; minimality; survey | §6 Remarks 1–3; §0 item 3 |
+| 12: print the classes of `𝒞_6` | Appendix B (`class_table6.py`); kernel check of the same fact in Lean |
+| 13: undefined labels, numbering, no bibliography | labels and numbering note in §0; "Theorem 6′" renamed; §12 |
+| 14: the reading of "4-cycle" above level 1 is ours | stated in §8 |
+
+## 12. References
+
+* [HABIMRW] N. Holtgrefe, E. S. Allman, H. Baños, L. van Iersel, V. Moulton, J. A. Rhodes, K. Wicke,
+  *Distinguishing Phylogenetic Level-2 Networks with Quartets and Inter-Taxon Quartet Distances*, Bull. Math.
+  Biol. (2025), doi:10.1007/s11538-025-01549-4; arXiv:2507.17308v2 (read in full).
+* [All+25a] E. S. Allman, H. Baños, J. A. Rhodes, K. Wicke, *NANUQ⁺: A divide-and-conquer approach to network
+  estimation*, Algorithms Mol. Biol. 20:14 (2025) (the section on quartet distances read).
+* [ABR19] E. S. Allman, H. Baños, J. A. Rhodes, *NANUQ: a method for inferring species networks from gene
+  trees under the coalescent model*, Algorithms Mol. Biol. 14 (2019) (not read; known through [HABIMRW]).
+* V. Chepoi, B. Fichet, *A note on circular decomposable metrics*, Geom. Dedicata 69 (1998) (not read; used
+  through [HABIMRW] Prop. 2.8).
+* Third-party entry "All-level NANUQ circularity and exact displayed-split support", vibemathed.com,
+  submitted 2026-09-30 (public summary read; the linked repository not inspected) — `PRIOR_ART.md` B-II.
+* COMPLEXITY-REV-0002, internal adversarial review of this note
+  (`docs/collaboration/messages/complexity/`).
+
+## Appendix B.  The 17 classes of `𝒞_6`
+
+Leaves `1,…,6` in circular order.  A representative of each class under rotation and reflection, given by
+its non-trivial splits (the side not containing leaf 1).  The last two columns give the values of `2Φ6` in
+the twelve dihedral placements `(y_1,…,y_6)`, according to whether `y_1y_4|y_5y_6` is displayed; the
+six-point condition is that no value is negative and that the last column contains only zeros.
+(`class_table6.py`.)
+
+| # | non-trivial splits | class size | in 𝒜 | 2Φ6, split displayed | 2Φ6, split not displayed |
+|---|---|---|---|---|---|
+| 1 | 23 234 2345 | 6 | yes | 0 (×4) | 0 (×8) |
+| 2 | 23 56 234 | 6 | yes | 0 (×4) | 0 (×8) |
+| 3 | 23 45 2345 | 2 | yes | 2 (×6) | 0 (×6) |
+| 4 | 23 34 234 2345 | 12 | yes | 0 (×6) | 0 (×6) |
+| 5 | 23 45 234 2345 | 6 | yes | 1 (×6) | 0 (×6) |
+| 6 | 23 56 234 456 | 3 | yes | 0 (×4) | 0 (×8) |
+| 7 | 23 34 45 234 2345 | 12 | yes | 0 (×2), 1 (×6) | 0 (×4) |
+| 8 | 23 34 234 345 2345 | 12 | yes | 0 (×6) | 0 (×6) |
+| 9 | 23 34 56 234 2345 | 3 | yes | 0 (×8) | 0 (×4) |
+| 10 | 23 45 234 345 2345 | 6 | no | 0 (×6) | 0 (×6) |
+| 11 | 23 34 45 234 345 2345 | 6 | yes | 0 (×6), 1 (×2) | 0 (×4) |
+| 12 | 23 34 45 56 234 2345 | 6 | yes | 0 (×4), 1 (×6) | 0 (×2) |
+| 13 | 23 34 45 56 234 456 | 6 | yes | 0 (×8) | 0 (×4) |
+| 14 | 23 34 56 234 345 2345 | 6 | yes | 0 (×8) | 0 (×4) |
+| 15 | 23 34 45 56 234 345 2345 | 12 | yes | 0 (×8), 1 (×2) | 0 (×2) |
+| 16 | 23 34 45 56 234 345 2345 3456 | 3 | yes | 0 (×8), 1 (×4) | — |
+| 17 | 23 34 45 56 234 345 456 2345 3456 | 1 | yes | 0 (×12) | — |

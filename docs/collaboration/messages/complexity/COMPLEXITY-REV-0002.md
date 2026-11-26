@@ -164,3 +164,27 @@ Everything is in `/tmp/claude-0/-home-user-MetricChain/70d1e32f-7f3d-51c2-b433-c
 - https://arxiv.org/pdf/2610.07855
 - https://link.springer.com/article/10.1007/s11538-025-01564-5
 - https://arxiv.org/pdf/1905.07050
+
+---------------------------------------------------------------------------------------------------------------
+DISPOSITION (by the division, 2026-11-26; the revised note is docs/complexity/NANUQ_LOCAL_CRITERION.md, §11)
+---------------------------------------------------------------------------------------------------------------
+
+| # | severity | finding (short) | disposition |
+|---|---|---|---|
+| 1 | major | the direct tests of Theorem 7 presuppose Lemmas A and B | **Accepted.**  §10 now says which tests are independent of the structure lemmas; the referee's explicit-network programs are kept in `experiments/complexity/reviews/rev2_nanuq/` and listed with their results; two of them were re-run by us from the repository copy. |
+| 2 | major | the method probably coincides with the earlier third-party claim (122 = 1+3+16+102) | **Accepted.**  §0 item 2, §9, `PRIOR_ART.md` B-II and `THEOREMS.md` now describe Theorem 7 and its method as a probable rediscovery; the quoted sentence was re-read by us in the saved page.  "Not found in print" dropped for CX-T5, CX-T9. |
+| 3 | minor, must fix | Lemma 1 cited a notation | **Accepted.**  New Lemma 0 (restriction commutes with display) with proof; Lemma 1 rewritten on top of it. |
+| 4 | minor | "marked networks" undefined; wrong remark that `N_2` may lack a rooted partner | **Accepted.**  Lemma B now proves that both pieces are networks of the class; the remark is withdrawn. |
+| 5 | minor | pieces with 2 or 3 leaves vs the standing `n ≥ 4` | **Accepted.**  Split systems, class 𝒜 and substitution are defined for `n ≥ 2`; Theorem 4 is applied only to the final system. |
+| 6 | minor | the cut-edge fact rested on an unproved remark of the source | **Accepted.**  Lemma B0, with the referee's proof. |
+| 7 | minor | empty sentence in the proof of Proposition 6 | **Accepted.**  Replaced by the correct statement. |
+| 8 | minor | over-general sentences after Proposition 6 | **Accepted.**  Rewritten. |
+| 9 | minor | `st` vs `C(s+t,2)`; "tending to −∞" unproved | **Accepted.**  Theorem 9(c) now gives the exact weights `2 − C(s+t,2)` and `2 − st` with a proof from Proposition 2 and six local values (`nongalled_formula.py`). |
+| 10 | minor | "sharp" needs a qualifier | **Accepted.**  §7 "What 'sharp' does and does not mean"; the referee's numbers are quoted as the referee's. |
+| 11 | minor | the failure is specific to the multiplicity-free metric; minimality; survey | **Accepted.**  §6 Remarks 1–3 (the survey numbers are quoted as the referee's). |
+| 12 | minor | print the classes of `𝒞_6` | **Accepted.**  Appendix B (17 classes with their values of `Φ6`); in addition the fact is now checked by the Lean kernel (`NanuqFinite.lean`). |
+| 13 | editorial | undefined labels, numbering, no bibliography | **Accepted** in part: labels defined, "Theorem 6′" renamed, references added; the theorem numbers are kept (other files cite them) with a numbering note. |
+| 14 | minor | the reading of "4-cycle" above level 1 is ours | **Accepted.**  Stated in §8 and in `THEOREMS.md` CX-T13. |
+
+Theorem 11 was outside the referee's brief (spot checks only) and remains unreviewed.  The texts written after the
+review (Lemma 0, Lemma B0, the new Lemma B, the proof of Theorem 9(c)) have not been reviewed either.
