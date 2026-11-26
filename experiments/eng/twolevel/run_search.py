@@ -123,6 +123,7 @@ def tasks(job: str) -> list[dict]:
               largest sizes so that a task stays near a quarter of an hour of one core
     claims    searches that maximise the slack of a claim of Theorem 11.56 instead of the cost
     converge  larger budgets and other seeds on a few cells (is the search budget the limitation?)
+    converge2 the same question at the two largest sizes, phi = 0.5, all three slopes
     """
     out = []
     if job == "cost":
@@ -143,6 +144,13 @@ def tasks(job: str) -> list[dict]:
                 for seed in (2, 3):
                     bud = (20000, 10000) if n <= 1000 else (12000, 6000)
                     out.append(dict(u=1.0, n=n, phi=phi, budget=bud[0], budget_general=bud[1], seed=seed, objectives=("cost",)))
+    elif job == "converge2":
+        # the two largest sizes had the smallest budgets in job M-008 (SCI-REV-0008, R7-ENG-4): three times those
+        # budgets and two other seeds, at the outer fraction that is best against the worst instance there
+        for u in US:
+            for n, bud in ((64000, (7500, 3750)), (128000, (4500, 2250))):
+                for seed in (2, 3):
+                    out.append(dict(u=u, n=n, phi=0.5, budget=bud[0], budget_general=bud[1], seed=seed, objectives=("cost",)))
     elif job == "smoke":
         out.append(dict(u=1.0, n=250, phi=0.5, budget=300, budget_general=150, seed=1, objectives=("cost",)))
         out.append(dict(u=2.0, n=500, phi=0.65, budget=300, budget_general=150, seed=1, objectives=("count",)))

@@ -128,6 +128,25 @@ def constants(P: Params, outer: CubeTables) -> Constants:
     )
 
 
+def lowered_sample_cap(P: Params, outer: CubeTables, C: Constants, lK: float | None = None) -> float:
+    """ln of the sample cap ``2 max{e^lam M_dagger, M_ddagger}`` of THY-RES-0004 §3 (the theory division's remark after
+    Theorem 11.56; the corner ``r_dagger < Delta`` as closed in SCI-REV-0007 §2).  Claim: in every run of Algorithm
+    2L+, on or off the good event, every sample is ``K`` or has fewer points than this.
+
+    ``Delta = ceil(lam/u)``, ``pi_ddagger = 2^{-n_o} |B(n_o, r_dagger - Delta)|``, ``M_ddagger = K/((1 - eta) pi_ddagger)``,
+    and ``M_ddagger = K 2^{n_o}/(1 - eta)`` if ``r_dagger < Delta``.  ``lK`` replaces ``ln K`` (runs with K scaled down).
+    The constants ``m_max``, ``K`` and ``C_max`` of this module still use the theorem's ``M_bar``; this function is
+    what the stored runs are tested against (``experiments/eng/twolevel/lowered_cap.py``)."""
+    lK = C.lK if lK is None else lK
+    lM_dag = lK - math.log(1 - P.eta) - C.lpi_dag
+    delta = math.ceil(P.lam / P.u - 1e-12)
+    if C.r_dag >= delta:
+        lM_dd = lK - math.log(1 - P.eta) - (outer.lball_at(C.r_dag - delta) - P.n_o * LN2)
+    else:
+        lM_dd = lK + P.n_o * LN2 - math.log(1 - P.eta)
+    return LN2 + max(P.lam + lM_dag, lM_dd)
+
+
 # ---------------------------------------------------------------------------------------------
 # The base family (Proposition 11.57(a) = K0): the two-sample bracket with a certified width
 # ---------------------------------------------------------------------------------------------

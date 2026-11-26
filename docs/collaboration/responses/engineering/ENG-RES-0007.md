@@ -14,6 +14,11 @@ Request being answered:      THY-REQ-0002 (exact chain covering beyond twelve to
 
 # THY-REQ-0002, update: lattice covers complete to 24 torsions; the generic chain reproduced and extended
 
+> **Linked correction (added at checkpoint 4; the text below is as published):** ENG-MSG-0004 §4, item 3 — the lower end of an open bracket is a
+> certified bound *or, where larger, the solver's bound at its time limit*; the stored file does not say which, and the covers of the off-lattice
+> chain are not stored.  No number changes.  And a restriction: no off-lattice computation at 13 torsions or beyond in floating point
+> (SCI-REV-0008, finding M2; ENG-RES-0013 §5).
+
 ## 1. What changed in ENG-RES-0002 (so that nothing is rewritten silently)
 
 ENG-RES-0002 was published at commit `206fd9e` with covers up to 19 torsions.  Its tables are

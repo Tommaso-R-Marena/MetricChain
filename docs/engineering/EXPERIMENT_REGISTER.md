@@ -36,6 +36,7 @@ commit that adds or last changes the files named).  Costs are in
 | Random seeds | none (exhaustive, deterministic) |
 | Outputs | class tables `experiments/eng/chain_cover/data/dia_Sc12_n*.txt` (the complete enumeration result: every profile class with its number of conformations, fewest and most gauche torsions); `results/lattice_Sc12.json`, `results/lattice_Sc12_flip.json`, `results/lattice_Sc12_patterns.json`; `data/flip/` |
 | Validation | (i) class tables equal an independent internal-coordinate construction for `n ≤ 7`; (ii) conformation and class counts equal the published sequences for `n = 5…13`; (iii) all 24 published covering numbers reproduced; (iv) mirror reduction and prefix splitting verified to be exact; (v) the Modal-merged table at `n = 14` equals the local one; (vi) two solvers agree on every cover; (vii) negative control: no pair inside the cutoff ⇒ one class, covering number 1.  `python -m pytest tests/eng -q` (69 tests); `python experiments/eng/chain_cover/run_lattice.py --check` |
+| Correction (checkpoint 4) | Validation (vi), "two solvers agree on every cover", is **withdrawn** (ENG-MSG-0004 §4, item 2; SCI-REV-0008, M1): the rows `n = 1…18` were written by the driver of job M-004, which was replaced; the committed code stops at the first proof and stores no second one.  What holds: proved optimal by HiGHS; 254 of the 263 optima certified independently of any solver by the Scientific Discovery Division |
 | Result, interpretation, limitations | ENG-RES-0002 (updated in place for `n = 20…24`; change note in ENG-RES-0007) |
 
 ## X-003  Exact hitting numbers on the uniform cube (closed form via Harper's theorem)
@@ -97,6 +98,7 @@ commit that adds or last changes the files named).  Costs are in
 | Validation | `stable_multinomial` against exact tail masses; agreement of literal runs with the mean run at the theorem's `K` (`tests/eng/test_twolevel.py`) |
 | Code | `src/metricchain_eng/twolevel/simulate.py`; `experiments/eng/twolevel/run_sampled.py`; `modal_jobs/twolevel_app.py::sampled` |
 | Limitation stated up front | inner procedures are oracles: the event (V1) of the proof (validity of real inner brackets) is true by construction and is **not** tested |
+| Correction (checkpoint 4) | **Superseded by X-006b**: the shell counts were drawn with numpy's binomial sampler, which is biased from about `10¹⁵` trials on (SCI-REV-0007 §4); two of the three sizes drew from such blocks.  The file stays as produced; `--sampler numpy` reproduces it |
 | Result, interpretation, limitations | ENG-RES-0008 §6 |
 
 ## X-007  Off-lattice chain: distance entropy of profile classes, 5–14 torsions; single-flip constants against Proposition 11.74

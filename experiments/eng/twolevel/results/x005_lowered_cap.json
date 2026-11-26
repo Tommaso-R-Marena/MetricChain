@@ -1,0 +1,88 @@
+{
+ "jobs": {
+  "cost": {
+   "runs": 2808,
+   "samples_above_K": 2808,
+   "above_M_dagger": 22,
+   "above_lowered_cap": 0,
+   "max_l_over_M_dagger": 0.5686766943964656,
+   "max_l_over_cap": -1.0341713685366507,
+   "min_l_cap_over_M_dagger": 1.20753755745136,
+   "max_l_cap_over_M_dagger": 5.35658627467204,
+   "min_l_Mbar_over_cap": 5.977534216847246,
+   "worst": {
+    "u": 0.5,
+    "n": 350,
+    "phi": 0.45,
+    "kind": "cost",
+    "family": "monotone",
+    "oracle": "top",
+    "sample_over_M_dagger": 1.765928641292889,
+    "sample_over_cap": 0.3555208546690528,
+    "cap_over_M_dagger": 4.967159079702247,
+    "r_dag": 46
+   }
+  },
+  "claims": {
+   "runs": 1080,
+   "samples_above_K": 1080,
+   "above_M_dagger": 0,
+   "above_lowered_cap": 0,
+   "max_l_over_M_dagger": -0.06562787171822748,
+   "max_l_over_cap": -1.527785425110757,
+   "min_l_cap_over_M_dagger": 1.2141386855889778,
+   "max_l_cap_over_M_dagger": 3.502912907486774,
+   "min_l_Mbar_over_cap": 9.037130340227549,
+   "worst": {
+    "u": 0.5,
+    "n": 1000,
+    "phi": 0.35,
+    "kind": "cost_minus_cap",
+    "family": "monotone",
+    "oracle": "top",
+    "sample_over_M_dagger": 0.9364792898871502,
+    "sample_over_cap": 0.21701573314213188,
+    "cap_over_M_dagger": 4.315259895345073,
+    "r_dag": 112
+   }
+  },
+  "converge": {
+   "runs": 48,
+   "samples_above_K": 48,
+   "above_M_dagger": 0,
+   "above_lowered_cap": 0,
+   "max_l_over_M_dagger": -2.504685404700595,
+   "max_l_over_cap": -4.505723246717352,
+   "min_l_cap_over_M_dagger": 1.7565725071897305,
+   "max_l_cap_over_M_dagger": 2.001037842016757,
+   "min_l_Mbar_over_cap": 9.895680349636294,
+   "worst": {
+    "u": 1.0,
+    "n": 1000,
+    "phi": 0.5,
+    "kind": "cost",
+    "family": "monotone",
+    "oracle": "top",
+    "sample_over_M_dagger": 0.08170129678664481,
+    "sample_over_cap": 0.011045598604333073,
+    "cap_over_M_dagger": 7.396728752626792,
+    "r_dag": 107
+   }
+  }
+ },
+ "by_u": {
+  "0.5": {
+   "max_l_over_M_dagger": 0.5686766943964656,
+   "max_l_over_cap": -1.0341713685366507
+  },
+  "1.0": {
+   "max_l_over_M_dagger": -0.863772884520408,
+   "max_l_over_cap": -3.006712576755632
+  },
+  "2.0": {
+   "max_l_over_M_dagger": 0.2671604367310181,
+   "max_l_over_cap": -4.903323558307164
+  }
+ },
+ "seconds": 120.31096887588501
+}

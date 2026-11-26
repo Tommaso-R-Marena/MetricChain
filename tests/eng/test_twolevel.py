@@ -255,9 +255,12 @@ def test_mutation_without_the_harper_term_breaks_a_claim():
         tabs = CubeTables(n_o, u)
         P = Params(n=n_o, n_o=n_o, u=u, lam=0.5, eta=0.25, etap=0.1, theta=0.1, nu1=2 * math.exp(u) * n_o / 0.1, b=0.5,
                    delta=0.05, xs=(0.0,) * 7)
-        ev = Evaluator(P, tabs, harper=False, enforce_abort=False)
         F = u * np.arange(n_o + 1, dtype=float)
-        R = ev.run(Instance(radial_law(F, tabs), psi0=float(F[n_o // 2])), "bottom")
+        inst = Instance(radial_law(F, tabs), psi0=float(F[n_o // 2]))
+        # baseline first: a mutant counts as caught only if the unmutated run passes on the same instance
+        # (the hole the theory division found in its own mutation runner: THEORY_TO_ENGINEERING.md, item 13)
+        assert Evaluator(P, tabs, harper=True, enforce_abort=False).run(inst, "bottom").violations() == []
+        R = Evaluator(P, tabs, harper=False, enforce_abort=False).run(inst, "bottom")
         broken += bool(R.violations())
     assert broken >= 1
 

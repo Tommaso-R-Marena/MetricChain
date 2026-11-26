@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_CONTAINERS = 50          # half of the workspace-wide limit of 100 concurrent containers (COMPUTE_LEDGER, "limits"):
                              # engineering jobs are run one at a time and never fill the workspace
 TIMEOUT_S = 3600
+LONG_TIMEOUT_S = 10800      # job converge2 only
 SAMPLED_TIMEOUT_S = 1500    # literal runs: the longest task of job M-011 took 456 s; the exact sampler costs up to 1.7 times more
 USD_PER_CORE_HOUR = 0.0473 + 1.0 * 0.0080        # one core + 1 GiB (rates of 2026-11-25, docs/engineering/COMPUTE_LEDGER.md)
 
@@ -49,6 +50,18 @@ image = (
 
 @app.function(image=image, cpu=1.0, memory=1024, timeout=TIMEOUT_S, max_containers=MAX_CONTAINERS, retries=0)
 def search_task(task: dict) -> dict:
+    sys.path.insert(0, "/root/src")
+    sys.path.insert(0, "/root/experiments/eng/twolevel")
+    import run_search
+
+    kw = dict(task)
+    kw["objectives"] = tuple(kw["objectives"])
+    return run_search.cell(**kw)
+
+
+@app.function(image=image, cpu=1.0, memory=1024, timeout=LONG_TIMEOUT_S, max_containers=MAX_CONTAINERS, retries=0)
+def search_task_long(task: dict) -> dict:
+    """``search_task`` with a three-hour limit, for job ``converge2`` (its longest task is estimated at 1.8 hours)."""
     sys.path.insert(0, "/root/src")
     sys.path.insert(0, "/root/experiments/eng/twolevel")
     import run_search
@@ -118,10 +131,15 @@ def sampled(runs_full: int = 5000, runs_reduced: int = 1000, runs_invalid: int =
 
 
 @app.local_entrypoint()
-def main(job: str = "smoke"):
+def main(job: str = "smoke", ledger: str = ""):
+    import subprocess
+
     sys.path.insert(0, str(ROOT / "src"))
     sys.path.insert(0, str(ROOT / "experiments" / "eng" / "twolevel"))
     import run_search
+
+    fn, timeout = (search_task_long, LONG_TIMEOUT_S) if job == "converge2" else (search_task, TIMEOUT_S)
+    commit = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
 
     todo = run_search.tasks(job)
     out = ROOT / "experiments" / "eng" / "twolevel" / "results" / f"x005_{job}.jsonl"
@@ -134,13 +152,14 @@ def main(job: str = "smoke"):
     todo = [t for t in todo if (t["u"], t["n"], t["phi"], t["seed"], tuple(sorted(t["objectives"]))) not in done]
     expected = sum(run_search.estimated_core_seconds(t) for t in todo) / 3600.0
     print(f"job {job}: {len(todo)} tasks ({len(done)} already stored); expected {expected:.1f} core-hours = ${expected * USD_PER_CORE_HOUR:.2f}; "
-          f"worst case (every task to its timeout) ${len(todo) * TIMEOUT_S / 3600.0 * USD_PER_CORE_HOUR:.2f}", flush=True)
+          f"worst case (every task to its timeout) ${len(todo) * timeout / 3600.0 * USD_PER_CORE_HOUR:.2f}", flush=True)
     if not todo:
         return
     todo.sort(key=run_search.estimated_core_seconds, reverse=True)      # longest first
     n_done = 0
     with out.open("a") as fh:
-        for r in search_task.map(todo, order_outputs=False):
+        for r in fn.map(todo, order_outputs=False):
+            r.update(commit=commit, job=ledger)                # provenance, stored with every row from checkpoint 4 on
             fh.write(json.dumps(r) + "\n")
             fh.flush()
             n_done += 1

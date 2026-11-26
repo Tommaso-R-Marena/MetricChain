@@ -44,6 +44,9 @@ six containers did not finish in 22 minutes and were stopped (job M-004).
 geometric algorithm that exploits the three-dimensional structure of the profile set has
 not been tried.
 
+*Correction (checkpoint 4, ENG-MSG-0004 §4, item 3):* "`[certified lower bound, verified cover]`" above overstates the lower end — it is the
+larger of the certified bound and the bound the solver reported at its time limit (10 of the 25 open lattice brackets are the latter).
+
 ## ED-4  Reading a plateau off a short range of sizes
 
 The covering number at `ε = N/2`, `L = 1`, is 5 for four consecutive sizes (6 to 9
@@ -84,3 +87,32 @@ Run instead (X-006): the outer loop with real fluctuations and oracle brackets, 
 scaled down until the events of the proof do fail.  Real inner brackets beyond 13
 coordinates remain undone; the honest way to do them is a small outer cube (`n_o ≤ 18`) with
 a large inner one, a few hundred runs per instance.
+
+## ED-8  numpy's binomial sampler for counts drawn from `10¹⁵` trials and more — biased; found by another division, not by us
+
+**What was done.**  The literal simulation of Algorithm 2L⁺ (X-006, job M-011) drew the
+numbers of sample points per shell by sequential conditional binomials with
+`numpy.random.Generator.binomial(n, p)`, `n` up to `2.7·10¹⁷`.  Its only test of the sampler
+(`test_stable_multinomial_samples_far_tail_cells`) checked cells with mean counts of 36 and
+72 at `n = 2⁵⁵` to five standard errors over 400 draws — a resolution of 3–4 %, in a window
+where the defect is below 1 %.
+
+**What is wrong.**  For `n` of about `10¹⁵` and more, counts with a mean between about 60 and
+`10⁴` have a wrong mean (up to −0.8 % at `n = 2⁶¹`) and a wrong variance (−6 % already at
+`n = 2⁵³`); the defect depends on the digits of `n`, not only on its size
+(`experiments/eng/twolevel/binomial_bias.py`; ENG-RES-0013 §1.1).  Reported by the Scientific
+Discovery Division (SCI-REV-0007 §4), which had fallen into it first and re-run.
+
+**What it cost.**  Nothing in the conclusions: all cases were run again with an exact
+sampler (X-006b, job M-012) and every statistic agrees within sampling error
+(ENG-RES-0013 §1.4).  But a published frequency ("0 of 585 000") rested for a day on a
+sampler nobody had tested in the regime it was used in.
+
+**What replaces it.**  `metricchain_eng.twolevel.sampling.binomial_exact`: numpy's sampler
+up to `2³¹` trials, exact Poissonisation with collision thinning beyond.  The one branch
+that still calls numpy at large `n` (means above `10⁹`) is named in the code.
+
+**Rule.**  A random-number routine is tested *in the regime in which it is used* — the
+largest `n`, the means that matter — against exact moments with enough draws to see an
+error of the size that would matter, before a frequency computed with it is published.
+A test that passes at a resolution of 3 % says nothing about a 1 % defect.

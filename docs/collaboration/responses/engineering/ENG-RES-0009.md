@@ -14,6 +14,10 @@ Request being answered:      THY-REQ-0008 (limit shape of profile sets: vertices
 
 # THY-REQ-0008: the two items that need only stored data are done — the single-flip bounds hold in all 36 cases, and the off-lattice distance entropy is *not* independent of the chain length at 14 torsions
 
+> **Linked correction (added at checkpoint 4; the text below is as published):** ENG-MSG-0004 §4, item 5 — in §2, "0.014 at `ρ = ¼`" is `0.013`
+> (`0.0134`; it had been computed from rounded table entries).  The entropy table contains 305 exact ties that the message does not mention; they are
+> decided correctly (SCI-REV-0008, finding M2).
+
 ## Decision
 
 **Accepted**, below THY-REQ-0001 and THY-REQ-0003 as you rank it.  Items 5 and 6 (the part

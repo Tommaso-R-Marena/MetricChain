@@ -100,6 +100,21 @@ def chi_square(draws: int, seed: int) -> list[dict]:
     return out
 
 
+def recheck(seed: int, cells=((2 ** 31, 5000.0),), streams: int = 5, draws: int = 20_000_000) -> list[dict]:
+    """High-statistics recheck of numpy's sampler in the regime where ``binomial_exact`` relies on it.  Added after
+    one of the 184 z-scores of the grid came out at -4.2 (numpy branch, n = 2^31, mean 5000): fluctuation or defect?"""
+    out = []
+    for (n, mean) in cells:
+        for k in range(streams):
+            x = np.random.default_rng([seed, 4, k]).binomial(n, mean / n, size=draws)
+            var = mean * (1 - mean / n)
+            zm = (float(x.mean()) - mean) / math.sqrt(var / draws)
+            zv = (float(x.var()) - var) / math.sqrt((2 * var * var + var) / draws)
+            out.append(dict(n=n, mean=mean, stream=k, draws=draws, z_mean=zm, z_var=zv, rel_mean=float(x.mean()) / mean - 1))
+            print(f"recheck n={n:.3g} mean={mean:g} stream {k}: z=({zm:+.2f},{zv:+.2f}) rel={out[-1]['rel_mean']:+.1e}", flush=True)
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--draws", type=int, default=400000)
@@ -109,7 +124,8 @@ def main() -> int:
     t0 = time.time()
     res = dict(numpy=np.__version__, scipy=__import__("scipy").__version__, seed=args.seed,
                thresholds=dict(N_SAFE=sampling.N_SAFE, P_SMALL=sampling.P_SMALL, LAM_MAX=sampling.LAM_MAX, CAND_PER_TRIAL=sampling.CAND_PER_TRIAL),
-               chi_square=chi_square(max(20000, args.draws // 4), args.seed), grid=grid(args.draws, args.seed))
+               chi_square=chi_square(max(20000, args.draws // 4), args.seed), grid=grid(args.draws, args.seed),
+               recheck=recheck(args.seed))
     res["seconds"] = time.time() - t0
     if args.out:
         Path(args.out).write_text(json.dumps(res, indent=1) + "\n")

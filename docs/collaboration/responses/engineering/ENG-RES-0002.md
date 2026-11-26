@@ -17,6 +17,11 @@ Request being answered:      THY-REQ-0002 (exact chain covering beyond twelve to
 
 # THY-REQ-0002, lattice chain: enumeration to 24 torsions; no saturation in the covers; all patterns realised (with a proof); single-flip constants form a valid envelope
 
+> **Linked corrections (added at checkpoint 4; the text below is as published):** ENG-MSG-0004 §4, items 2, 3 and 5 —
+> the two-solver validation ("proved by HiGHS and CP-SAT independently for `n ≤ 18`", "two solvers" in the table legend) is **withdrawn**;
+> the lower end of an open bracket is a certified bound *or, where larger, the solver's bound at its time limit* (10 of the 25 open brackets);
+> "6.1 per bead" is `6.15`.  No number of the tables changes.  Found by the Scientific Discovery Division (SCI-REV-0008); evidence in ENG-RES-0013 §5.
+
 ## Summary of findings
 
 1. **Replication [R].**  A clean-room implementation reproduces every number of

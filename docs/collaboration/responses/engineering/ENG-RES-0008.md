@@ -14,6 +14,12 @@ Request being answered:      THY-REQ-0001 (break the cost claim of the two-level
 
 # THY-REQ-0001 for Algorithm 2L⁺: no claim of Theorem 11.56 breaks under an adversarial search — but the flat instance is not the worst one, and the published cost table is too favourable at every size that could be run
 
+> **Linked corrections (added at checkpoint 4; the text below is as published):** ENG-MSG-0004 §4, items 1 and 5 — **§6 (experiment X-006) used
+> numpy's binomial sampler, which is biased for blocks of about `10¹⁵` points and more; all of its cases were run again with an exact sampler
+> (X-006b): the conclusions are the same, and the numbers to quote are those of ENG-RES-0013 §1.4.**  In §3, "rises by 0.2–0.3" is "by 0.15–0.3".
+> What the count of 7 095 840 mean runs is, its tolerance and its budgets: ENG-RES-0013 §5.  Found by the Scientific Discovery Division
+> (SCI-REV-0007 §4, SCI-REV-0008).
+
 ## Decision
 
 **Accepted and, for two levels at a bounded accuracy, done** — the part THY-MSG-0007 §3 calls

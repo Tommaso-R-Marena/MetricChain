@@ -16,6 +16,8 @@ from __future__ import annotations
 import argparse
 import json
 import math
+
+import numpy as np
 import re
 import sys
 from collections import defaultdict
@@ -162,6 +164,31 @@ def build() -> dict[str, str]:
             lines.append(f"| {u:g} | {n} | {s['phi_mm']:.2f} | {f3(s['minimax'])} | {s['claimed_mm']:.4f} | {d:+.3f} | {d * math.sqrt(n):.1f} | {d * c.a:.4f} | {s['cap_at_mm'] - s['minimax']:.3f} |")
     blocks["trend"] = "\n".join(lines)
 
+    # ---- how fast does the excess decay?  (added after SCI-REV-0008: "about like 1/sqrt(n)" was not what the data show) ----
+    lines = ["| `u` | sizes fitted | least-squares slope of `ln(excess)` against `ln n` | local slopes between consecutive sizes (least, largest) | fit `A/√n + B/n`: `A`, `B` | largest relative residual of that fit |",
+             "|---|---|---|---|---|---|"]
+    slopes_all = []
+    for u in us:
+        pts = [(n, summary[(u, n)]["minimax"] - summary[(u, n)]["claimed_mm"]) for n in sorted(n for (uu, n) in summary if uu == u)]
+        pts = [(n, d) for n, d in pts if d > 0]
+        if len(pts) < 4:
+            continue
+        x = np.log([n for n, _ in pts])
+        y = np.log([d for _, d in pts])
+        slope = float(np.polyfit(x, y, 1)[0])
+        local = [float((y[i + 1] - y[i]) / (x[i + 1] - x[i])) for i in range(len(pts) - 1)]
+        M = np.array([[n ** -0.5, 1.0 / n] for n, _ in pts])
+        dv = np.array([d for _, d in pts])
+        # relative least squares: every size has the same weight
+        coef, *_ = np.linalg.lstsq(M / dv[:, None], np.ones(len(pts)), rcond=None)
+        res = float(np.max(np.abs(M @ coef / dv - 1)))
+        slopes_all.append(slope)
+        lines.append(f"| {u:g} | {pts[0][0]}–{pts[-1][0]} ({len(pts)}) | {slope:.2f} | {min(local):.2f}, {max(local):.2f} | {coef[0]:.2f}, {coef[1]:.0f} | {100 * res:.0f} % |")
+    blocks["trend_fit"] = "\n".join(lines)
+    if slopes_all:
+        blocks["trend_fit_summary"] = (f"Fitted over all sizes of the grid, the excess over the claimed exponent decays like `n^(−p)` with `p` between "
+                                       f"{-max(slopes_all):.2f} and {-min(slopes_all):.2f} for the three slopes — faster than `1/√n`.")
+
     # ---- the whole phi-profile at three sizes ---------------------------------------------------------------
     lines = ["| `u` | `n` | quantity | " + " | ".join(f"`φ = {p:.2f}`" for p in run_search.PHIS) + " |", "|---|---|---|" + "---|" * len(run_search.PHIS)]
     for u in us:
@@ -293,10 +320,11 @@ def build() -> dict[str, str]:
         blocks["converge"] = "\n".join(lines)
 
     # ---- X-006: literal runs with real fluctuations ----------------------------------------------------------
-    for xp, pre in ((RESULTS / "x006_sampled.jsonl", "sampled"), (RESULTS / "x006_preview.jsonl", "preview")):
+    for xp, pre in ((RESULTS / "x006_sampled.jsonl", "sampled"), (RESULTS / "x006_preview.jsonl", "preview"), (RESULTS / "x006b_sampled.jsonl", "sampledb")):
         if not xp.exists():
             continue
-        runs6 = [json.loads(line) for line in xp.read_text().splitlines() if line.strip()]
+        # the invalid inner behaviour "dear" (X-006b) is reported in its own block: validity means nothing there
+        runs6 = [r for r in (json.loads(line) for line in xp.read_text().splitlines() if line.strip()) if r["oracle"] != "dear"]
         full = [r for r in runs6 if r["k_scale"] == 1.0]
         if not full:
             continue
@@ -353,6 +381,8 @@ def build() -> dict[str, str]:
                 lines.append(f"| {name} | {t[0]:,} | {t[1]:,} ({100 * t[1] / max(t[0], 1):.0f} %) | {t[2]:,} ({100 * t[2] / max(t[0], 1):.2f} %) |")
             blocks[pre + "_profiles"] = "\n".join(lines)
 
+    blocks.update(x006b_blocks())
+
     # ---- the maximising instances ----------------------------------------------------------------------------
     lines = ["| `u` | `n` | `φ` | family / oracle | cost `/(n a)` | closing | sample `ln M/(n_o a)` | `r` of closure (`r†`, `p_u n_o`) | reference at radius | profile: (from, to, slope/`u`) |", "|---|---|---|---|---|---|---|---|---|---|"]
     for u in us:
@@ -371,6 +401,199 @@ def build() -> dict[str, str]:
                 lines.append(f"| {u:g} | {n} | {phi:.2f} | {s['family']} / {s['oracle']} | {s['best_value'] / (n * c['a']):.3f} | {run['status'].replace('closed-', '')} | "
                              f"{run['lM_max'] / (c['n_o'] * c['a']):.3f} | {run['r_close']} ({c['constants']['r_dag']}, {cu.p_u * c['n_o']:.0f}) | {s['d0']} | `{prof}` |")
     blocks["maximisers"] = "\n".join(lines)
+    return blocks
+
+
+def _scale(s: float) -> str:
+    return "1" if s == 1 else "1/" + str(round(1 / s))
+
+
+def x009_blocks() -> dict[str, str]:
+    """X-009: C_max of Theorem 11.56 against the non-adaptive lower bound (SCI-REV-0007 R6-E1)."""
+    sp = RESULTS / "x009_separation.json"
+    if not sp.exists():
+        return {}
+    d = json.loads(sp.read_text())
+    blocks: dict[str, str] = {}
+    diffs = []
+    for r in d["validation"]:
+        mine = (r["lCmax_at_half"], r["lLB_na"], r["plain"], r["hinted"])
+        diffs += [abs(round(m, 1) - t) for m, t in zip(mine, r["theirs"])]
+    dcap = []
+    for r in d["validation_cap"]:
+        dcap += [abs(round(r["lCmax_cap_at_055"], 2) - r["theirs"][0]), abs(round(r["lLB_na"], 2) - r["theirs"][1])]
+    blocks["separation_validation"] = (
+        f"All {len(diffs)} numbers of the table of SCI-REV-0007 §5 / `R6_REPORT.md` §2.9 ({len(d['validation'])} sizes; `ln C_max` at `φ = 0.5`, `ln LB_na`, the plain "
+        f"bracket, the hinted lower bound) are reproduced to the digit given: {sum(x < 1e-9 for x in diffs)} of {len(diffs)} identical after rounding to one decimal"
+        + (f" (largest difference {max(diffs):.1f})" if max(diffs) > 1e-9 else "")
+        + f".  The {len(dcap)} numbers of its table with the lowered cap (`φ = 0.55`): {sum(x < 1e-9 for x in dcap)} of {len(dcap)} identical after rounding to two decimals"
+        + (f" (largest difference {max(dcap):.2f})" if max(dcap) > 1e-9 else "") + ".")
+    lines = ["| `u` | cost bound | sizes examined | least size with the bound below `LB_na` (margin in `ln`, best `φ`) | larger sizes at which it is above again | below at every examined size from | "
+             "their first grid size |", "|---|---|---|---|---|---|---|"]
+    theirs = {(1.0, "lCmax"): 1400, (2.0, "lCmax"): 540, (0.5, "lCmax"): 4700, (1.0, "lCmax_cap"): 1300, (2.0, "lCmax_cap"): 500, (0.5, "lCmax_cap"): 4150}
+    for u in (0.5, 1.0, 2.0):
+        w = sorted([r for r in d["window"] if r["u"] == u] + [r for r in d["beyond"] if r["u"] == u], key=lambda r: r["n"])
+        for key, name, pk in (("lCmax", "`C_max` (Theorem 11.56)", "phi"), ("lCmax_cap", "`C_max` with the lowered cap", "phi_cap")):
+            ok = [r for r in w if r[key] < r["lLB_na"]]
+            first = ok[0]
+            bad_later = [r["n"] for r in w if r["n"] > first["n"] and not r[key] < r["lLB_na"]]
+            stable = min(r["n"] for r in w if all(q[key] < q["lLB_na"] for q in w if q["n"] >= r["n"]))
+            lines.append(f"| {u:g} | {name} | {w[0]['n']}–{w[-1]['n']} ({len(w)}) | **{first['n']}** ({first['lLB_na'] - first[key]:.2f}, {first[pk]:.2f}) | "
+                         f"{', '.join(map(str, bad_later)) if bad_later else 'none'} | **{stable}** | {theirs[(u, key)]} |")
+    blocks["separation_window"] = "\n".join(lines)
+    lp = RESULTS / "x005_lowered_cap.json"
+    if lp.exists():
+        lc = json.loads(lp.read_text())["jobs"]
+        runs = sum(j["runs"] for j in lc.values())
+        w = max(lc.values(), key=lambda j: j["max_l_over_cap"])
+        blocks["lowered_cap_x005"] = (
+            f"All {runs:,} stored instances of X-005 re-evaluated (the maximisers of {runs - 2 * sum(j['runs'] for j in lc.values()) // 6:,} searches under every objective, "
+            f"and the flat instances): samples at or above the lowered cap: **{sum(j['above_lowered_cap'] for j in lc.values())}**; samples above `M†`: "
+            f"{sum(j['above_M_dagger'] for j in lc.values())}; the largest sample is `{math.exp(max(j['max_l_over_M_dagger'] for j in lc.values())):.2f}·M†`, which is "
+            f"{w['worst']['sample_over_cap']:.3f} of the lowered cap there (`u = {w['worst']['u']:g}`, `n = {w['worst']['n']}`, `φ = {w['worst']['phi']:.2f}`).  Over the cells the "
+            f"lowered cap is between `{math.exp(min(j['min_l_cap_over_M_dagger'] for j in lc.values())):.1f}·M†` and `{math.exp(max(j['max_l_cap_over_M_dagger'] for j in lc.values())):.0f}·M†`, "
+            f"and the theorem's `M̄` is at least `{math.exp(min(j['min_l_Mbar_over_cap'] for j in lc.values())):.0f}` times larger than it.")
+    return blocks
+
+
+def x006b_blocks() -> dict[str, str]:
+    """X-006b: the sampler defect, the exposure of job M-011, old against new, the invalid inner behaviour, the lowered cap."""
+    blocks: dict[str, str] = {}
+    bp = RESULTS / "x006b_binomial_bias.json"
+    if bp.exists():
+        d = json.loads(bp.read_text())
+        g = d["grid"]
+        means = [m for m in sorted({r["mean"] for r in g}) if m in (29.0, 60.0, 92.0, 500.0, 5000.0, 1e5, 1e7)]
+        lines = ["| trials `n` | " + " | ".join(f"mean {m:g}" for m in means) + " |", "|---|" + "---|" * len(means)]
+        for n in sorted({r["n"] for r in g}):
+            cells = []
+            for m in means:
+                r = next(x for x in g if x["n"] == n and x["mean"] == m)
+                bad = max(abs(r["numpy_z_mean"]), abs(r["numpy_z_var"])) > 5
+                cells.append(("**" if bad else "") + f"{r['numpy_z_mean']:+.1f} / {r['numpy_z_var']:+.1f}" + (f" ({100 * r['numpy_rel_mean']:+.2f} %)**" if bad else ""))
+            lines.append(f"| `{n:.3g}` | " + " | ".join(cells) + " |")
+        blocks["binomial_bias"] = "\n".join(lines)
+        ez = [abs(r["exact_z_mean"]) for r in g] + [abs(r["exact_z_var"]) for r in g]
+        worst = max(g, key=lambda r: max(abs(r["exact_z_mean"]), abs(r["exact_z_var"])))
+        nb = sum(max(abs(r["numpy_z_mean"]), abs(r["numpy_z_var"])) > 5 for r in g)
+        small = [r for r in g if r["n"] <= 10 ** 14]
+        rc = d.get("recheck", [])
+        blocks["binomial_summary"] = (
+            f"numpy {d['numpy']}, {g[0]['draws']:,} draws per cell.  numpy's sampler: {nb} of {len(g)} cells have a z-score above 5 in absolute value, all of them at "
+            f"`n ≥ {min(r['n'] for r in g if max(abs(r['numpy_z_mean']), abs(r['numpy_z_var'])) > 5):.0e}`; the largest relative error of the mean is "
+            f"`{100 * min(r['numpy_rel_mean'] for r in g):+.2f} %` (`n = {min(g, key=lambda r: r['numpy_rel_mean'])['n']:.3g}`, mean {min(g, key=lambda r: r['numpy_rel_mean'])['mean']:g}); "
+            f"at `n ≤ 10¹⁴` the largest z-score is {max(max(abs(r['numpy_z_mean']), abs(r['numpy_z_var'])) for r in small):.1f} in {2 * len(small)} scores.  "
+            f"The exact sampler on the same grid: largest z-score **{max(ez):.1f}** in {len(ez)} scores (cell `n = {worst['n']:.3g}`, mean {worst['mean']:g}, branch "
+            f"`{worst['exact_branch']}`)"
+            + (f"; that cell is numpy's own sampler at `n = 2³¹`, and {len(rc)} further streams of {rc[0]['draws']:,} draws each give z-scores of the mean between "
+               f"{min(r['z_mean'] for r in rc):+.1f} and {max(r['z_mean'] for r in rc):+.1f} — a fluctuation" if rc and worst["exact_branch"] == "numpy" else "")
+            + f".  Chi-square tests of the Poissonisation step against the exact law, {len(d['chi_square'])} cases from `n = 12` to `n = 2⁶¹`: p-values between "
+            f"{min(c['p_value'] for c in d['chi_square']):.2f} and {max(c['p_value'] for c in d['chi_square']):.2f}.")
+    blocks.update(x009_blocks())
+    xb, xa = RESULTS / "x006b_sampled.jsonl", RESULTS / "x006_sampled.jsonl"
+    if not (xb.exists() and xa.exists()):
+        return blocks
+    new_all = [json.loads(line) for line in xb.read_text().splitlines() if line.strip()]
+    old = [json.loads(line) for line in xa.read_text().splitlines() if line.strip()]
+    new = [r for r in new_all if r["oracle"] != "dear"]
+    dear = [r for r in new_all if r["oracle"] == "dear"]
+    key = lambda r: (r["u"], r["n_o"], r["profile"], r["oracle"], r["k_scale"])       # noqa: E731
+    oldm = {key(r): r for r in old}
+    pairs = [(oldm[key(r)], r) for r in new if key(r) in oldm]
+    sizes = sorted({(r["u"], r["n_o"]) for r in new})
+    scales = sorted({r["k_scale"] for r in new}, reverse=True)
+    # exposure: the largest block from which a shell count is drawn is half the largest sample
+    lines = ["| `u` | `n_o` | `K` scale | largest sample of a run | largest block drawn from | cases with a block of `10¹⁵` points or more |", "|---|---|---|---|---|---|"]
+    for (u, n_o) in sizes:
+        for sc in scales:
+            rows = [r for r in new if (r["u"], r["n_o"], r["k_scale"]) == (u, n_o, sc)]
+            if rows:
+                mm = max(r["M_max"] for r in rows)
+                lines.append(f"| {u:g} | {n_o} | {_scale(sc)} | `{mm:.1e}` | `{mm / 2:.1e}` | {sum(r['M_max'] / 2 >= 1e15 for r in rows)} of {len(rows)} |")
+    blocks["exposure"] = "\n".join(lines)
+    exposed = [(a, b) for a, b in pairs if b["M_max"] / 2 >= 1e15]
+    clean = [(a, b) for a, b in pairs if b["M_max"] / 2 < 1e15]
+
+    def z2(x1, n1, x2, n2):
+        pp = (x1 + x2) / (n1 + n2)
+        return 0.0 if pp in (0.0, 1.0) else (x1 / n1 - x2 / n2) / math.sqrt(pp * (1 - pp) * (1 / n1 + 1 / n2))
+    lines = ["| `u` | `n_o` | `K` scale | runs (each version) | good event failed: numpy sampler → exact sampler | z | bracket invalid: numpy → exact | z | invalid on the good event (both) | largest per-case z (good event, invalid) |",
+             "|---|---|---|---|---|---|---|---|---|---|"]
+    for (u, n_o) in sizes:
+        for sc in scales:
+            pr = [(a, b) for a, b in pairs if (b["u"], b["n_o"], b["k_scale"]) == (u, n_o, sc)]
+            if not pr:
+                continue
+            n1 = sum(a["runs"] - a["skipped"] for a, _ in pr)
+            n2 = sum(b["runs"] - b["skipped"] for _, b in pr)
+            g1, g2 = sum(a["good_event_failed"] for a, _ in pr), sum(b["good_event_failed"] for _, b in pr)
+            i1, i2 = sum(a["invalid"] for a, _ in pr), sum(b["invalid"] for _, b in pr)
+            zc = [(abs(z2(a["good_event_failed"], a["runs"], b["good_event_failed"], b["runs"])), abs(z2(a["invalid"], a["runs"], b["invalid"], b["runs"]))) for a, b in pr]
+            lines.append(f"| {u:g} | {n_o} | {_scale(sc)} | {n1:,}" + ("" if n1 == n2 else f" / {n2:,}") + f" | {g1:,} → {g2:,} | {z2(g1, n1, g2, n2):+.1f} | {i1:,} → {i2:,} | {z2(i1, n1, i2, n2):+.1f} | "
+                         f"{sum(a['invalid_on_good_event'] for a, _ in pr) + sum(b['invalid_on_good_event'] for _, b in pr)} | {max(z[0] for z in zc):.1f}, {max(z[1] for z in zc):.1f} |")
+    blocks["sampled_compare"] = "\n".join(lines)
+    allz = [abs(z2(a[k], a["runs"], b[k], b["runs"])) for a, b in pairs for k in ("good_event_failed", "invalid")]
+    nz = [z for z in allz if z > 0]
+    fullp = [(a, b) for a, b in pairs if b["k_scale"] == 1.0]
+    blocks["sampled_compare_summary"] = (
+        f"{len(pairs)} cases were run with both samplers ({len(exposed)} of them drew from blocks of `10¹⁵` points or more, {len(clean)} did not).  "
+        f"With the theorem's `K`: numpy sampler {sum(a['good_event_failed'] + a['invalid'] for a, _ in fullp)} failures of the good event or invalid brackets in "
+        f"{sum(a['runs'] for a, _ in fullp):,} runs, exact sampler {sum(b['good_event_failed'] + b['invalid'] for _, b in fullp)} in {sum(b['runs'] for _, b in fullp):,}.  "
+        f"Over all cases and both statistics, {len(nz)} per-case comparisons are not 0 against 0; their largest two-sample z-score is {max(nz) if nz else 0.0:.1f}, "
+        f"and {sum(z > 3 for z in nz)} exceed 3 (expected by chance among {len(nz)}: {len(nz) * 0.0027:.1f}).")
+    # the invalid inner behaviour
+    if dear:
+        lines = ["| `u` | `n_o` | `n_i` | cost of the last rung `ln C_L` | `ln C_max` | cases | runs | closed | stopped by the query budget | stopped otherwise | runs above `C_max` | largest `ln(evaluations) − ln C_max` |",
+                 "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+        import run_sampled
+        from metricchain_eng.twolevel.ckernel import Evaluator
+        for (u, n_o, n_i) in sorted({(r["u"], r["n_o"], r["n_i"]) for r in dear}):
+            rows = [r for r in dear if (r["u"], r["n_o"], r["n_i"]) == (u, n_o, n_i)]
+            ev = Evaluator(run_sampled.params(u, n_o, n_i))
+            budget = sum(r["abort_reasons"].get("abort-query budget", 0) for r in rows)
+            lines.append(f"| {u:g} | {n_o} | {n_i} | {float(ev.lC[-1]):.1f} | {ev.lCmax:.1f} | {len(rows)} | {sum(r['runs'] for r in rows):,} | {sum(r['closed'] for r in rows):,} | {budget:,} | "
+                         f"{sum(r['aborted'] for r in rows) - budget} | {sum(r['cost_bound_exceeded'] for r in rows)} | {max(r['lqueries_max_all'] - r['lCmax'] for r in rows):+.2f} |")
+        blocks["sampledb_dear"] = "\n".join(lines)
+        blocks["sampledb_dear_summary"] = (
+            f"{sum(r['runs'] for r in dear):,} runs with the invalid inner behaviour in {len(dear)} cases: "
+            f"{sum(r['abort_reasons'].get('abort-query budget', 0) for r in dear):,} were stopped by the abort rule on the query budget, "
+            f"{sum(r['closed'] for r in dear):,} closed, and **{sum(r['cost_bound_exceeded'] for r in dear)}** spent more than `C_max` evaluations; "
+            f"with valid inner behaviours and the theorem's `K`: {sum(r['cost_bound_exceeded'] for r in new if r['k_scale'] == 1.0)} of "
+            f"{sum(r['runs'] for r in new if r['k_scale'] == 1.0):,}.")
+    # literal runs against the lowered sample cap of THY-RES-0004 §3
+    import run_sampled
+    from metricchain_eng.twolevel.alg2l import lowered_sample_cap
+    from metricchain_eng.twolevel.ckernel import Evaluator
+    evs = {}
+    lines = ["| `u` | `n_o` | `K` scale | cases | largest sample `/ M†` | lowered cap `/ M†` | largest sample / lowered cap | theorem's `M̄ / M†` | cases with a sample at or above the lowered cap |",
+             "|---|---|---|---|---|---|---|---|---|"]
+    n_viol = n_cases = 0
+    worst_ratio = 0.0
+    for (u, n_o) in sizes:
+        for sc in scales:
+            rows = [r for r in new_all if (r["u"], r["n_o"], r["k_scale"]) == (u, n_o, sc) and r["n_i"] == 6]
+            if not rows:
+                continue
+            ev = evs.setdefault((u, n_o), Evaluator(run_sampled.params(u, n_o, 6)))
+            P = run_sampled.params(u, n_o, 6)
+            rat, capm, viol = [], [], 0
+            for r in rows:
+                lK = math.log(r["K"])
+                lcap = lowered_sample_cap(P, ev.outer, ev.C, lK)
+                lMd = lK - math.log(1 - P.eta) - ev.C.lpi_dag
+                lM = math.log(r["M_max"])
+                rat.append((lM - lMd, lM - lcap))
+                capm.append(lcap - lMd)
+                viol += (r["M_max"] > r["K"]) and (lM >= lcap - 1e-12)
+            n_viol += viol
+            n_cases += len(rows)
+            worst_ratio = max(worst_ratio, math.exp(max(x[1] for x in rat)))
+            lmbar = math.log(2 * (1 + P.eta) * ev.C.nu0) + P.lam
+            lines.append(f"| {u:g} | {n_o} | {_scale(sc)} | {len(rows)} | {math.exp(max(x[0] for x in rat)):.2f} | {math.exp(capm[0]):.2f} | {math.exp(max(x[1] for x in rat)):.3f} | "
+                         f"`{math.exp(lmbar):.1e}` | {viol} |")
+    blocks["sampledb_cap"] = "\n".join(lines)
+    blocks["sampledb_cap_summary"] = (f"In the {sum(r['runs'] for r in new_all if r['n_i'] == 6):,} literal runs of X-006b with `n_i = 6` ({n_cases} cases, valid and invalid inner behaviours, "
+                                      f"`K` from the theorem's value down to 4) the largest sample reached {worst_ratio:.3f} of the lowered cap; cases with a sample at or above it: **{n_viol}**.")
     return blocks
 
 
