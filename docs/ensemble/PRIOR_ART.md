@@ -135,6 +135,33 @@ formulation of Donoho's theory with the dual written as a certificate.  E7′: n
 it combines E5 with classical facts on parallel platforms.  **No search has yet been made
 for E13, E16, E7′ beyond what is listed here** (obligation OB10).
 
+## 5b. Part VI (third checkpoint)
+
+| source | what it has | level |
+|---|---|---|
+| Baldi–Vershynin, "Polynomial threshold functions, hyperplane arrangements, and random tensors", arXiv 1803.10868v3 (2019); first version titled "Boolean polynomial threshold functions and random tensors" | **Theorem 4.2 (resilience of linear independence):** for `dn^{0.02} ≤ t ≤ 0.001n` and `m < C(n − Cn/log n − t, ≤d)`, with probability above `1 − 2^{−t/4}` the span of the lifts `x_i^{≤d}` of `m` random sign vectors contains no `u^{≤d}`, `u ∈ {−1,1}^n`, other than `±x_i^{≤d}`; "for tensors of any order `d > 1`, Theorem 4.2 is new", proved from Theorem 4.1 "using an argument that is inspired by Odlyzko's method".  Theorem 4.1 = Abbe–Shpilka–Wigderson's Theorem 4.5 (linear independence for `m < C(n − log C(n,≤d) − t, ≤d)`, probability `1 − 2^{−t}`).  Theorem 3.3: Cover-type upper bound on the number of polynomial threshold functions.  Main result: `log₂ T(n,d) ≈ n·C(n,≤d)` | **statements read verbatim** in the PDF of v3 (text extracted locally); proofs (Sections 5–6) not read; journal reference not found |
+| Abbe–Shpilka–Wigderson, "Reed–Muller codes for random erasures and errors", arXiv 1411.4590 (STOC 2015; IEEE Trans. Inform. Theory 61 (2015) per the previous source's bibliography) | Theorem 1.3 / 4.5: `(1−o(1))C(m,≤r)` random columns of the evaluation matrix of monomials of degree `≤ r` are linearly independent w.h.p., `r = O(√(m/log m))` | partial (abstract and introduction through a fetch; Theorem 4.5 as quoted by Baldi–Vershynin) |
+| Chiantini–Coppens, "Grassmannians of secant varieties", arXiv math/0005202 | Corollary 1.3 (generalised trisecant lemma): over `ℂ`, `X ⊂ ℙ^r` integral non-degenerate of dimension `n`; if `k < r − n` a general `(k+1)`-secant `k`-plane meets `X` in exactly `k + 1` points; proof by induction from the classical trisecant lemma | statement read through a fetch (ar5iv); the journal version (Forum Math. 2001, from memory) not checked |
+| Curto–Fialkow (flat extensions of moment matrices); Laurent's survey on sums of squares and moment matrices | a positive moment matrix with a flat extension has a unique, rank-atomic representing measure | memory |
+| Gardner, "Multiconnected neural network models" (1987); Baldi–Venkatesh (1987); Krotov–Hopfield, "Dense associative memory" (2016) | capacity of order `n^{p−1}` of associative memories with `p`-body interactions (single-flip stability) | memory |
+| tensor decomposition: generic identifiability of low-rank tensors (Chiantini–Ciliberto; Chiantini–Ottaviani–Vannieuwenhoven) | uniqueness of the decomposition of a generic tensor of small rank among decompositions of the same rank | memory; **not searched** for the measure-theoretic statement of the torus corollary |
+
+**Classification.**  E18: elementary; a formulation that puts E10, flat extensions and the
+Geometric Inference Division's certificate under one statement, plus the observation that
+the zero set may exceed the support.  E18′: elementary.  **E19(a) is a published theorem
+(Baldi–Vershynin 2019) and our derivation of it is a rediscovery:** on 2026-11-26 we
+proved, by revealing coordinates one at a time as Odlyzko does and using
+Abbe–Shpilka–Wigderson for the first batch, that the span of the lifted conformers contains
+no other lifted vertex up to `(1−ε)n²/2`; a search made before writing it up found the
+theorem, with the same method, for every degree.  Nothing of that derivation is claimed.
+E19(b)–(d): synthesis — the readings "ground states of an explicit `2d`-body energy,
+identified among all ensembles", "pair data with a prior on the number of conformers" and
+the Cover-type bound; we did not find the contrast `n²/2` (with the prior) against `2n`
+(without) stated.  E19(e), C3: numerical; not searched (the literature on higher-order
+associative memories counts stable patterns, not exact ground-state sets).  E20: synthesis
+of the trisecant lemma with E18; for moment problems this is classical.  E20′: elementary;
+the two-point statement on the torus was not searched (obligation OB16).
+
 ## 6. Search log (2026-11-26)
 
 1. "globally rigid graphs M-connected rigidity matroid higher dimensions" — found
@@ -170,6 +197,14 @@ interior); Fraiman–Moreno–Ransford (Heppes' theorem for `k + 1` subspaces). 
 by the review: the exact hypotheses of the 1967 text of Vitushkin–Henkin; Odlyzko's
 original (the PDF was unreachable); the theorem number of Garamvölgyi–Gortler–Jordán in
 the journal version.
+
+17. "Abbe Shpilka Wigderson Reed-Muller codes random erasures … linearly independent" —
+    found; abstract and introduction fetched (Theorem 1.3).
+18. "span of random rank-one sign matrices … contains no other … Odlyzko" — found
+    Baldi–Vershynin (the theorem we had just re-derived); PDF text extracted and read.
+19. "Chiantini Ciliberto generalized trisecant lemma …" — the statement is Corollary 1.3
+    of Chiantini–Coppens (fetched); a real version exists (Ranestad–Seigal–Wang 2024,
+    not read).
 
 Not searched yet (obligations): quantitative Heppes (to compare with O4); "random faces of
 the cut polytope" (O1); identifiability of secant varieties of measurement varieties (O5);

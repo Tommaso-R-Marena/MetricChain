@@ -8,7 +8,7 @@ import pathlib, subprocess, sys, time
 
 here = pathlib.Path(__file__).resolve().parent
 scripts = ["exposedness_checks.py", "rigidity_checks.py", "pair_capacity_checks.py", "finite_temperature_checks.py",
-           "platform_checks.py"]
+           "platform_checks.py", "lifted_checks.py"]
 lines, ok = [], True
 for name in scripts:
     t0 = time.time()

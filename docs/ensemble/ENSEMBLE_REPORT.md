@@ -1,8 +1,9 @@
 # Ensemble report — what an ensemble is determined by
 
 **Ensemble Identifiability and Certified Inference Division.**  Branch
-`research/ensemble-identifiability`.  Version 2 (second checkpoint, 2026-11-26; version 1 was the
-first checkpoint, commit `a570520`; §7 lists what changed).
+`research/ensemble-identifiability`.  Version 3 (third checkpoint, 2026-11-26: Part VI added;
+version 2 was the second checkpoint, commit `1a067b5`; version 1 the first, commit `a570520`;
+§7 lists what changed).
 
 Labels: **[V]** machine-checked in Lean 4 + Mathlib (declaration named; axioms `propext`,
 `Classical.choice`, `Quot.sound` only) · **[P]** paper proof given here · **[K]** known, cited
@@ -11,7 +12,8 @@ evidence only (script named) · **[C]** conjecture.  Review status: Parts I–II
 have had one internal adversarial review by a subagent of this division
 (`reviews/ER1_internal_review.md`; an AI review, not academic peer review), whose findings
 are applied here (§7); the science division has contributed one proposition and has a
-review of Part II in progress; Parts IV and V have been read by nobody but their author.
+review of Part II in progress; Parts IV and V are under a second internal review that has
+not yet reported; Part VI has been read by nobody but its author.
 "New" below always means "not found in the search documented in `PRIOR_ART.md`".
 
 ---
@@ -19,7 +21,7 @@ review of Part II in progress; Parts IV and V have been read by nobody but their
 ## 0. Summary
 
 An unknown probability measure `μ` (an *ensemble*) on a configuration space `X` is seen
-through means of observables, `y_i = ∫ φ_i dμ + ε_i`.  This report answers, for three kinds
+through means of observables, `y_i = ∫ φ_i dμ + ε_i`.  This report answers, for several kinds
 of data, the first question of that model: **which ensembles are determined by the data,
 how stably, and with what certificate.**
 
@@ -32,7 +34,7 @@ how stably, and with what certificate.**
 | E5 | **Splices on a variety.**  For a polynomial feature map `F : ℝ^D → ℝ^m` without constant coordinates: for generic `K`-tuples no vector assembled coordinate-wise from the feature vectors of *different* points lies on the feature variety — for every `K` — **iff the algebraic matroid of the coordinates of `F` is connected**; if it is not, splices are realisable on an open set of pairs | P | new (not found); closest: unlabeled PCA (linear, unknown subspace) and the product lemma of Garamvölgyi–Gortler–Jordán |
 | E6–E8 | **Distributional ensemble rigidity.**  For a graph on at least `d+2` vertices the following are equivalent: `G` is generically globally rigid in `ℝ^d`; every generic finite ensemble of frameworks, *with any number of conformers*, is determined modulo congruence, among all ensembles, by the laws of its edge lengths.  Then `2K` moments of each squared edge length suffice for `K` conformers — `2K|E|` scalar means — with the explicit certificate `Σ_e Π_i (ℓ_e² − ℓ_e(x_i)²)²`.  Mean squared distances alone determine no ensemble at all | P, given two cited theorems (global rigidity is generic; globally rigid ⇒ connected rigidity matroid, 2022) | new (not found) |
 | E7′ | **Conformers that share rigid parts, smallest case.**  Two rigid bodies joined by `m` generic legs: for generic attachment points and poses the leg-length laws determine every finite ensemble of relative poses when `m ≥ dim SE(d) + 1` (seven in space, four in the plane), and fail to on an open set when `2 ≤ m ≤ dim SE(d)` — one leg more than rigidity | P, given a K fact on generic lines | new (not found) |
-| E9 | Pair correlations on `{±1}ⁿ`: every ensemble with at most three conformers is determined; four conformers need not be (explicit) | K (the cut polytope is 3-neighbourly); the example N/P | known |
+| E9 | Pair correlations on `{±1}ⁿ`: every ensemble with at most three conformers is determined (explicit certificate, §4c.1); four conformers need not be (explicit) | P (also K: the cut polytope is 3-neighbourly); the example N/P | known; the certificate proof is ours |
 | E10 | **Typical supports.**  For `K ≤ n − 10n/ln n` independent uniform conformers, with probability `1 − O(K³(¾)ⁿ + K²2^{−n})` *every* ensemble supported on them is determined by its pair correlations among all ensembles, with the explicit certificate `‖P^⊥x‖²` | P given K (Odlyzko 1988); self-contained proof for `K < 0.2933 n` | synthesis |
 | E11 | For `K ≥ (2+ε)n` random conformers, with high probability **no** ensemble supported on all of them is determined by pair correlations (any weights); for `K/n → α > 6.338` the pair correlations of every ensemble with positive weights on them are those of a full-support ensemble (explicit for equal weights) | P given K (Cover; Bai–Yin, Sheppard) | (a) synthesis: the classical capacity bound of pair-interaction associative memories read through E1; (b) not found, elementary |
 | E12 | **Adaptivity.**  A fixed set of pairs that determines every two-conformer ensemble must contain *all* `n(n−1)/2` pairs; adaptively, `rn − r(r+1)/2` pair correlations determine the whole correlation matrix of any ensemble of correlation rank `r ≤ K` (certified, no assumption); for typical supports every certificate needs `Ω(Kn/ln(en/K))` pairs | P; K (Cover's counting) | formulation / synthesis |
@@ -41,6 +43,9 @@ how stably, and with what certificate.**
 | E15T | **The same with an interacting known part.**  The thermal union bound holds with the same constant for *every* reference that is log-supermodular in the disagreement variables — any Ising-type known part, on any graph and of any range, all of whose bonds are satisfied by the centre; if the centre violates a bond the bound is false (exact counterexamples on chains).  Frustration is the obstruction | P given K (FKG; marginals of log-supermodular measures); the obstruction N | new (not found) |
 | E16 | **A bimodal ensemble identified by one pair observable.**  For even `n` the double cone `∝ exp((b/2)|M_a|)` is the unique maximiser of `E[M_a²]` over the cube class; for odd `n` the maximisers are a segment parametrised by the population difference of the two basins | P | new (not found); elementary |
 | E17 | **Noise.**  For a convex class and Gaussian noise `σ` the minimax root-mean-square error of a mean `E_μψ` is between `0.199·ω(2σ)` and `0.5·ω(2σ)`, with `ω(ε) = min_λ{ε‖λ‖₂ + range over the class of ψ − λ·Φ}`: the dual certificate of the identified interval is the near-minimax linear estimator | P (elementary); K (Donoho 1994: factor 1.25) | formulation of a known theory |
+| E18 | **Lifted certificates.**  For a lift `v` with the entries of `vv^*` in the span of the data, `‖P^⊥v(x)‖²` is a non-negative function in the span; if its zero set is finite with linearly independent `v(x)v(x)^*`, every ensemble on the conformers is determined among all ensembles — also when the zero set is larger than the support.  Three conformers on the cube: a self-contained proof of E9(a).  **With a prior on the number of atoms** (finite `X`): flat-isolated supports are determined among ensembles with at most `K` atoms for all weights outside a null set (E18′) | P | elementary; formulation (flat extensions, E10 and the geometry division's certificate are instances) |
+| E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, about that of a Gaussian cloud of the same size | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e) N | synthesis; the probabilistic core is a published theorem (rediscovery on our side) |
+| E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`.  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′) | P given K (generalised trisecant lemma); E20′ P, its combinatorial core V (`twoStateCert_eq_zero_iff`) | synthesis; E20′ elementary (not searched) |
 
 The thread through the report is one sentence, stated with its two conditions: **on a
 finite configuration space an ensemble is determined by a family of observables exactly
@@ -182,7 +187,8 @@ linear modulus (E1.1).
 **Corollary E1.3 (observables that are quadratic in the coordinates) [P].**
 (a) On `ℝ^D`, an ensemble with finite second moments is determined by its first and second
 moments among such ensembles iff it is a conformation.  (b) Let `G` be any graph on `N`
-points in `ℝ^d` — the complete graph included.  No ensemble of frameworks with a
+points in `ℝ^d` — the complete graph included — and let the configuration space be all of
+`(ℝ^d)^N`, with no statewise constraint.  No ensemble of frameworks with a
 non-degenerate conformer is determined modulo congruence by its mean squared edge lengths:
 if `μ` does not give probability one to "all edges have length zero", and `R ≥ 0` is
 independent of the configuration `p` with `R² ∈ {0, 2}` with probability `½` each, then the
@@ -207,7 +213,13 @@ obstruction independently (every structure has the mean squared distances of a m
 collinear ones; its `ENSEMBLE_RIGIDITY.md`, Proposition 3.1) and showed what removes it:
 if every state obeys the same bond constraints — the ensemble lives on the configuration
 space of a chain, not on `(ℝ^d)^N` — mean squared distances do determine mixtures, from an
-exactly known chain length on (its Theorems B and C).  In the language of Theorem E1 the
+exactly known chain length on (its Theorems B and C; two generic states from ten atoms
+on, its Theorem I).  The qualifier "no statewise constraint" in (b) was asked for by that
+division (GEOMETRY-RES-0001 §0) and is accepted: the random rescaling of the proof leaves
+a constrained configuration space.  That division now calls determination of a
+conformation by the means of the squared lengths *second-moment rigidity*; it lies
+between global and universal rigidity, whereas determination by the laws (Theorem E7) is
+global rigidity.  In the language of Theorem E1 the
 constraints shrink the configuration space until the zero set of a non-negative quadratic
 form, an affine subspace of `(ℝ^d)^N`, meets it in finitely many points.  The first data that
 can are two different moments of the same distance (equality in Jensen's inequality), and
@@ -730,16 +742,17 @@ matrices `xxᵀ`, `x ∈ S`, are affinely independent.
 
 ### 4.1 The worst case
 
-**Proposition E9 [K; the example P/N].**  (a) Every ensemble with at most three conformers
+**Proposition E9 [P; also K].**  (a) Every ensemble with at most three conformers
 is determined by its pair correlations among all ensembles.  (b) Four conformers need not
 be: on `n = 4` sites the uniform ensemble on `(+,+,+,+)`, `(+,−,−,+)`, `(+,−,+,−)`, `(+,+,−,−)`
 has `C = I`, the pair correlations of the uniform ensemble on the cube.
 
-(a) is the theorem that the cut polytope is 3-neighbourly (stated, as best possible, in
-Ziegler's *Lectures on 0/1-polytopes* for the correlation polytope `COR(n) ≅ CUT(n+1)`;
-Deza–Laurent, *Geometry of Cuts and Metrics*; neither read in the original — obligation
-OB3) — three distinct vertices of a polytope are affinely independent — together with
-Theorem E1.  (b): the four vectors are the rows of a
+(a) is proved in §4c.1 (Remark 1 to Theorem E18), with the explicit certificate `‖P^⊥x‖²`:
+the sign vectors in the span of three conformers are the conformers and at most one more
+vertex.  It is also the theorem that the cut polytope is 3-neighbourly (stated, as best
+possible, in Ziegler's *Lectures on 0/1-polytopes* for the correlation polytope
+`COR(n) ≅ CUT(n+1)`; Deza–Laurent, *Geometry of Cuts and Metrics*; neither read in the
+original) together with Theorem E1; our proof does not use the citation.  (b): the four vectors are the rows of a
 Hadamard matrix, so its columns are orthogonal.  *Numerical check* **[N]**
 (`experiments/ensemble/pair_capacity_checks.py`, C4): by linear programming, all triples of
 vertices containing a fixed one are faces for `n = 5, 6` (105 and 465 triples); 10 of 455
@@ -1250,6 +1263,279 @@ minimum is noise amplification `‖λ‖` against the part of the target that th
 observables do not explain.  *Numerical check* **[N]** (F5): the duality with the `ℓ^∞` data
 norm on 200 random instances, gap `5·10⁻¹⁵`.
 
+## 4c. Part VI — Lifted supports: what sum-of-squares certificates reach, and what knowing the number of conformers buys
+
+The certificate of Theorem E10 is a positive semidefinite form in the configuration.  The
+same construction with other *lifts* of the configuration gives: the capacity of
+higher-order data on the cube; a theorem for generic conformers on any irreducible variety,
+torsion angles included; a certificate form of "identified but not exposed"; and an exact
+statement of what a prior on the number of conformers adds.  Epistemic status in one
+sentence: the principle (E18) is elementary, the two probabilistic and geometric inputs
+(E19(a), E20) are published theorems — the first of which we re-derived before finding it
+(`PRIOR_ART.md` §5b, `DEAD_ENDS.md` ED15) — and what is ours is the synthesis and the
+readings (b)–(e) of E19, E18′ and E20′.
+
+### 4c.1 The principle
+
+A *lift* is a map `v : X → 𝕂^{N×q}` (`𝕂 = ℝ` or `ℂ`; `q = 1` is a vector lift) such that every
+entry of `v(x)v(x)^*` is a combination of `1` and the observables, with coefficients in `𝕂`.
+For a finite `S ⊂ X` put `U = Σ_{x∈S} col v(x)`, let `P` be the orthogonal projector on `U`, and
+
+    f_S(x) = ‖(I − P) v(x)‖_F² ,        Z_S = { x ∈ X : col v(x) ⊆ U }  ⊇ S .
+
+**Theorem E18 (lifted certificates).**  `f_S` is a non-negative function in the real span of
+`{1, Φ}` with zero set `Z_S`.  If `Z_S` is finite and the Hermitian matrices `v(x)v(x)^*`,
+`x ∈ Z_S`, are linearly independent over `ℝ`, then every ensemble supported in `Z_S` — in
+particular every ensemble supported in `S`, whatever its weights — is determined by the
+means of `Φ` among all Borel probability measures on `X`.  Two cases:
+(i) `Z_S = S` (*`S` is lift-isolated*) and the subspaces `col v(x)`, `x ∈ S`, are linearly
+independent: then the matrices are independent automatically and `f_S` exposes `S` in the
+sense of Theorem E1;
+(ii) `Z_S ⊋ S`: the ensemble is identified although `f_S` does not expose `S` — the
+certificate form of the non-exposed case of Theorem E1(b).
+
+**[P]**; elementary.
+
+*Proof.*  `f_S(x) = tr((I − P) v(x)v(x)^*)` is real and is a combination of entries of
+`vv^*`, hence of `1` and `Φ`; it vanishes iff `(I − P)v(x) = 0`.  If `ν` has the data of `μ` and
+`μ` is carried by `Z_S`, then `∫f_S dν = ∫f_S dμ = 0`, so `ν(X ∖ Z_S) = 0`, and
+`Σ_{x∈Z_S} (ν(x) − μ(x)) v(x)v(x)^* = 0` because every entry is an affine function of the
+data and the total masses agree; independence gives `ν = μ`.  In case (i), if
+`Σ_x h_x v(x)v(x)^* = 0`, compress with a projection onto `col v(x₀)` along the sum of the
+other column spaces: `h_{x₀} v(x₀)v(x₀)^* = 0`.  ∎
+
+| configuration space and data | lift `v` | `Z_S = S` means | where |
+|---|---|---|---|
+| cube, pair correlations | `x` | the only sign vectors in the span of the conformers are `±` the conformers | Theorem E10 (Odlyzko) |
+| cube, correlations of even order `≤ 2d` | `z^{≤d}`: all monomials of degree `≤ d` in `z_j = x_1x_j` | no other lifted vertex in the span of the lifted conformers | Theorem E19 (Baldi–Vershynin) |
+| torus `𝕋^r`, Fourier coefficients with indices in `{−1,0,1}^r` | `⊗_k (1, e^{iφ_k})` | the secant span meets the Segre variety only in the atoms | Theorem E20 (trisecant lemma) |
+| `ℝ^D`, moments of degree `≤ 2t` | monomials of degree `≤ t` | — | classical: flat extensions (Curto–Fialkow) **[K, memory]** |
+| chains with fixed bond geometry, mean squared distances | centred coordinate matrix (`q = 3`) | the chains that are linear images of the stacked conformers are the conformers | the Geometric Inference Division's Theorems B, G(a), I (its GEOMETRY-RES-0001 §0: "your E1 is the principle, our Theorem G(a) an instance") |
+
+*Remarks.*  1. **Three conformers, constructively** (this replaces the citation in
+Proposition E9(a)).  Let `x¹, x², x³` be sign vectors, pairwise different modulo sign; they
+are linearly independent (a dependency `ax¹ + bx² + cx³ = 0` with `|a| ≥ |b| ≥ |c| > 0` forces
+`|a| = |b| + |c|` and then `x² = ±x³`).  Up to a global sign every coordinate shows one of the
+four patterns `(+,+,+), (+,+,−), (+,−,+), (−,+,+)`, and at least three of them occur (if only
+two did, two of the vectors would agree up to sign).  A sign vector `ax¹ + bx² + cx³` needs
+`|a+b+c| = |a+b−c| = |a−b+c| = |−a+b+c| = 1` on the patterns that occur: with all four,
+`(a,b,c) = ±e_i` only; with three, also `±(s₁, s₂, s₃)` for one choice of signs.  So `Z_S` is
+`S` or `S` and one more vertex `y = s₁x¹ + s₂x² + s₃x³`, and `yyᵀ` is not a combination of
+the `x^i x^{iᵀ}` because the six matrices `x^i x^{jᵀ} + x^j x^{iᵀ}` are independent.  By
+Theorem E18, every ensemble on three conformers is determined by its pair correlations,
+with the certificate `‖P^⊥x‖²` — for two conformers `Z_S = S` — **[P]**; exhaustive check
+for `n = 6` (L5: 4 960 triples; a fourth vertex in 2 880 of them).
+2. *A sum-of-squares certificate cannot reach beyond the dimension of the lift:* if the
+column spaces fill `𝕂^N`, `f_S ≡ 0`.
+3. *Stability.*  On a finite `X`, Proposition E1.1 applies with the gap
+`γ = min_{X∖Z_S} f_S`; on a continuum `f_S` has at best quadratic growth and the modulus is
+that of Proposition E2.2.
+
+### 4c.2 What knowing the number of conformers buys (finite spaces)
+
+**Proposition E18′ (a prior on the number of atoms).**  Let `X` be finite, `S ⊂ X` with `K`
+elements, `Φ` affinely independent on `S`, and suppose `S` is *flat-isolated*: no `y ∉ S` has
+`Φ(y)` in the affine hull of `Φ(S)`.  Then there is a finite union `H` of proper affine
+subspaces of `{w : Σ_a w_a = 1}` such that for every weight vector `w ∉ H` the ensemble
+`μ_w = Σ_a w_a δ_{x_a}` is the only ensemble **with at most `K` atoms** that has the data of
+`μ_w`.  **[P]**; elementary.
+
+*Proof.*  Let `L = aff Φ(S)`, of dimension `K − 1`, and let `ν` have support `S'`, `|S'| ≤ K`, and
+the data `b` of `μ_w`; `L' = aff Φ(S')`.  Then `b ∈ L ∩ L'`.  If `L ⊄ L'`, the weights `w` with
+`Aμ_w ∈ L'` form a proper affine subspace `H_{S'}`.  If `L ⊆ L'`, then `L' = L` by dimension, so
+`Φ(S') ⊂ L`, so `S' ⊆ S` by flat isolation, and `ν = μ_w` by affine independence.  Take
+`H = ∪ H_{S'}` over the finitely many `S'` of the first kind.  ∎
+
+So with the number of conformers known, what is needed is a condition on *one* extra
+point at a time (no other vertex on the flat); without it, the whole face must be exposed
+(Theorem E1).  Theorem E19(c) shows how far apart the two are.  The restriction to
+weights outside `H` cannot simply be dropped: on the cube with five sites, for every
+flat-isolated support of 6 or 7 conformers that is not a face there are *some* weights for
+which another ensemble with as many conformers has the same pair data (L3) — at that size
+`K` is more than half the number of observables; whether exceptional weights exist for
+`n < K ≪ n²/4` at large `n` is Problem O9.
+
+### 4c.3 The cube: data of higher order
+
+For a conformer `x` (modulo the flip) let `z_j = x_1x_j`, `j = 2, …, n`, and `ξ_d(x) = z^{≤d}`, the
+vector of all monomials of degree at most `d` in `z` (the constant included), of dimension
+`L_d = C(n−1, ≤d) = Σ_{j≤d} C(n−1, j)`.  The entries of `ξ_dξ_dᵀ` are the monomials of degree at
+most `2d` in `z`, i.e. exactly the correlations `x_A`, `|A|` even, `|A| ≤ 2d`.
+
+**Theorem E19 (data of even order at most `2d`; `d` fixed, random conformers).**
+(a) **[K]** (Baldi–Vershynin 2019, Theorems 4.1 and 4.2; the first is Abbe–Shpilka–Wigderson
+2015, Theorem 4.5.)  There is an absolute constant `C` such that for `d(n−1)^{0.02} ≤ t ≤
+0.001(n−1)` and `K < C(n − 1 − C(n−1)/log(n−1) − t, ≤d)`, with probability at least
+`1 − 2^{−t/4} − 2^{−t}` the vectors `ξ_d(x^a)` are linearly independent and their span contains
+no `ξ_d(y)`, `y` a vertex of the cube, other than themselves.  In particular this holds with
+probability tending to one for `K ≤ (1 − ε)L_d ~ (1−ε) n^d/d!`.
+(b) **[P given (a)]**  On that event every ensemble supported on the `K` conformers —
+whatever its weights — is determined among all ensembles on the cube by its correlations
+of even order at most `2d`, and the conformers are exactly the ground states of the
+explicit energy `‖P^⊥ξ_d(x)‖²`, with interactions of even order at most `2d`.  (`d = 1` is
+Theorem E10.)
+(c) **[P given (a)]**  (*Pair data and a prior on the number of conformers.*)  On the event
+of (a) with `d = 2` — so for `K ≤ (1−ε)n²/2` — and for all weights outside a finite union of
+proper affine subspaces, the ensemble is the only ensemble **with at most `K` conformers**
+that has its pair correlations.  By Theorem E11(a), for `K ≥ (2+ε)n` it is not the only
+ensemble with them.  So for `2n < K < n²/2` the number of conformers is exactly the prior
+that restores identifiability, and not knowing it costs a factor of order `n` in capacity.
+(d) **[P given K: Cover]**  (*An upper bound without a prior.*)  Let
+`D_odd = Σ_{j odd, j ≤ 2d−1} C(n−1, j) ~ n^{2d−1}/(2d−1)!`.  If `K ≥ (2+ε)D_odd`, then with
+probability at least `1 − e^{−c(ε)D_odd} − K²(n+1)2^{1−n}` the conformers are not the zero set of
+any non-negative function with interactions of even order at most `2d`, and no ensemble
+supported on all of them is determined by its correlations of even order at most `2d`.
+(e) **[N]**  For `d = 2` (two- and four-body data) the truth is far above (b): by exact
+linear programming over all states, the number of random conformers that form a face
+with frequency one half is about `76`, `152`, `233` for `n = 8, 10, 12` — against the lift
+dimensions `29, 46, 67`, beyond which no certificate of the form (b) exists, and the bounds
+`84, 186, 352` of (d).
+(f) **[N]**  (*A Gaussian control.*)  If the feature vectors of the `2^{n−1}` states are
+replaced by independent Gaussian vectors of the same dimension, the same computation
+gives thresholds of about `78` and `142` for the sizes of `n = 8, 10`: for four-body data the
+cube behaves like a generic cloud of as many points in as many dimensions (and is slightly
+more neighbourly).  For pair data it does not: at `n = 12` the Gaussian cloud stops near
+`K = 11` and the cube near `13`, at `n = 14` near `11.5` against `16`, and asymptotically the
+Gaussian value is `n/(4 ln 2) ≈ 0.36n`
+(the weak-neighbourliness threshold of Donoho and Tanner, `K ≈ D/(2 ln(N/D))` for `N` points
+in dimension `D ≪ N`; **[K, memory]**) against `1.1n`–`1.2n` for the cube.
+
+*Proof.*  (a) is the cited theorem applied to the independent uniform vectors
+`z^a ∈ {±1}^{n−1}` (their Theorem 4.2 excludes vectors `u^{≤d}` "different from `±x_i^{≤d}`"; the
+constant coordinate rules out the minus sign, and `u^{≤d} = (z^a)^{≤d}` forces `u = z^a`);
+linear independence is their Theorem 4.1 with the same `t`, whose range of `K` is larger.
+(b) is Theorem E18(i) with the lift `ξ_d`.  (c) For `d = 2` the vector `ξ_2(x)` is `(1, Φ(x))`
+with `Φ` the pair observables, so linear independence of the `ξ_2(x^a)` is affine independence
+of `Φ` on `S`, and "no other `ξ_2(y)` in the span" is flat isolation (the constant coordinate
+makes the coefficients sum to one); apply Proposition E18′.  (d) As in Theorem E11(a): if
+`f = Σ_{|A| even ≤ 2d} c_A x_A ≥ 0` has zero set `±S`, flipping site `v` of a conformer gives
+`−2x^a_v g_v(x^a) > 0` with `g_v = Σ_{A∋v} c_A x_{A∖v}`, a combination of the `D_odd` odd monomials
+of degree at most `2d − 1` in the other sites; so the labels `−x^a_v` of `K` points of `ℝ^{D_odd}`
+are realised by a linear threshold function through the origin; there are at most
+`2Σ_{i<D_odd} C(K−1, i)` such labellings (Cover), and the labels are uniform and independent
+of the points.  ∎
+
+*Numerical checks* **[N]** (`lifted_checks.py`; `kbody_capacity.py` for (e), stored in
+`output_threshold.txt`).  L1: lift isolation for `d = 2` at `n = 12` (66 pair observables):
+frequency `1.000, 1.000, 1.000, 0.995, 0.955` at `K = 24, 33, 49, 54, 66` — far beyond `2n = 24`.
+L2: `n = 8`, four-body data: 38 lift-isolated supports with 12 to 24 conformers, identification
+confirmed by a linear programme over all states in all 38.  L3: `n = 5`, exhaustive over all
+supports of the same size: flat-isolated non-faces, random weights — no twin with at most
+`K` atoms.
+
+**Reading.**  Three numbers describe what data of order `2d` can do for random conformers:
+`n^d/d!` are certified by a sum of squares of degree `d`; at most `2n^{2d−1}/(2d−1)!` can be
+identified at all; with a prior on the number of conformers and generic weights, data of
+order `d` already reach `n^d/d!`.  For pair data the first two differ by a factor two and
+the truth is near `1.1n`–`1.2n` (§4.4).  For four-body data they differ by a factor of order
+`n`, and at the sizes we can compute the truth is 2.6 to 3.5 times the sum-of-squares
+range, growing with `n`, and equal within a few per cent to the threshold of a Gaussian
+cloud of the same size — whose asymptotic value, `D/(2 ln(N/D)) ≈ n³/(48 ln 2)`, is of order
+`n³` (Problem O2, Conjecture C3).  This is a gap between *identifiable* and *certifiable by
+the natural certificate* that is not a constant, the cube's version of the gap the
+Geometric Inference Division found on chains (identifiable from 10 atoms, linearly
+certifiable from 12).
+
+**Conjecture C3.**  For fixed `d ≥ 2` the largest `K` for which `K` random conformers are, with
+probability tending to one, the ground states of an energy of even order at most `2d` is of
+order `n^{2d−1}`; in particular sums of squares of degree `d` certify a vanishing fraction of
+the identified supports.  (Evidence: (d), (e), and the Gaussian control (f), whose
+asymptotic value is `n^{2d−1}/(2 ln 2·(2d)!)`; for `d = 1` the cube exceeds that value
+threefold.  We have no proof of any lower bound above `L_d`.)
+
+### 4c.4 Generic conformers on a variety; torsion angles
+
+**Theorem E20 (generic conformers: the certified capacity is the codimension of the lifted
+variety).**  Let `𝒳` be an irreducible complex variety, `v : 𝒳 → ℂ^N` a regular map whose image
+spans `ℂ^N`, `𝒱 ⊂ ℙ^{N−1}` the closure of the image of `[v]`, and `c = N − 1 − dim 𝒱`.  Let the
+configuration space `X ⊂ 𝒳` be Zariski dense, with `[v]` injective on `X`, and let the
+observables span the entries of `vv^*` on `X`.  Then for every `K ≤ c` and all
+`(x_1, …, x_K) ∈ X^K` outside a proper Zariski-closed subset, the support `{x_i}` is
+lift-isolated with independent `v(x_i)`; hence every ensemble supported on it is determined
+by the means of the observables among all Borel probability measures on `X`.
+**[P given K]**: the generalised trisecant lemma (Chiantini–Coppens, Corollary 1.3: for an
+integral non-degenerate `𝒱 ⊂ ℙ^{N−1}` over `ℂ` and `K − 1 < c`, the span of `K` general points of
+`𝒱` meets `𝒱` in exactly those points).
+
+*Proof.*  The exceptional set of the lemma is a proper closed subset of `𝒱^K`; its preimage
+in `𝒳^K` is closed and proper because `[v]^K` has dense image, and `X^K` is Zariski dense in
+`𝒳^K`.  For a tuple outside it, a point `y ∈ X` with `v(y)` in the span has `[v(y)]` among the
+`[v(x_i)]`, so `y` is one of the `x_i`.  General points of a non-degenerate variety are
+linearly independent as long as their number is at most `N`.  Theorem E18(i).  ∎
+
+At `K = c + 1` the secant span meets `𝒱` in `deg 𝒱` points when the intersection is finite, and
+Theorem E18(ii) still applies whenever the rank-one matrices on the finitely many zeros in
+`X` are independent.
+
+**Corollary (torsion angles: the torus `𝕋^r` with multilinear data).**  Let the data be the
+Fourier coefficients `∫ e^{i a·φ} dμ`, `a ∈ {−1, 0, 1}^r` — the means of all products of
+`1, cos φ_k, sin φ_k` over the angles.  With `v(φ) = ⊗_k (1, e^{iφ_k})` the variety `𝒱` is the Segre
+embedding of `(ℙ¹)^r` in `ℙ^{2^r − 1}`, of dimension `r` and degree `r!`, and `𝕋^r` is Zariski dense
+in it.  So **every generic ensemble of `K ≤ 2^r − r − 1` points of `𝕋^r` is determined by these
+data among all probability measures on the torus**, with a certificate that is a sum of
+squared moduli of multilinear polynomials: `K ≤ 4` for three angles, `11` for four, `26` for
+five.  For `r = 3` and `K = 5` the certificate has six zeros on the torus (the sixth point
+of the secant 4-plane; it is fixed by the antiholomorphic involution `z ↦ 1/z̄`, so it lies
+on the torus), and in the instances computed the six rank-one matrices are independent,
+so those ensembles are identified as well (**[N]**, L4).
+
+**Proposition E20′ (two states on a torus; an explicit certificate).**  Let `p, q ∈ 𝕋^r`
+differ in the angles `k ∈ D` and agree in the others (`k ∈ E`).  With
+`a_k = 2 − 2cos(φ_k − p_k)`, `b_k = 2 − 2cos(φ_k − q_k)`,
+
+    f(φ) = Σ_{k∈E} a_k + Σ_{k≠l, k,l∈D} a_k b_l
+
+is a non-negative trigonometric polynomial that uses only frequencies supported on at
+most two angles.  If `|D| ≥ 2` its zero set is `{p, q}`, and **every two-state ensemble on
+`p, q` is determined among all probability measures on the torus by the means of the
+products of `1, cos, sin` of at most two angles**.  If `|D| = 1` no two-state ensemble on
+`p, q` is determined by the multilinear data of any order.  **[P]**; elementary.  The
+combinatorial core is **[V]**: `Ensemble.twoStateCert_eq_zero_iff` — for non-negative `a`,
+`b` that never vanish together on an index set in which every element has another one,
+`Σ_{k≠l} a_k b_l = 0` iff all `a_k` vanish or all `b_k` vanish — with
+`Ensemble.twoStateCert_nonneg` and `Ensemble.twoStateCert_unique_eq_zero` (one differing
+angle: the certificate is identically zero).  That `a_k = 2 − 2cos(φ_k − p_k)` is
+non-negative and vanishes only at `p_k`, the terms over `E`, and the passage from the zero
+set to identification (Theorem E1) are on paper.
+
+*Proof.*  `f(φ) = 0` iff `φ_k = p_k` on `E` and, for all `k ≠ l` in `D`, `φ_k = p_k` or `φ_l = q_l`.  Let
+`A = {k ∈ D : φ_k = p_k}`.  If `A = D`, `φ = p`.  Otherwise take `k ∈ D ∖ A`: then `φ_l = q_l ≠ p_l` for
+all `l ≠ k` in `D`, so each such `l` is outside `A`, and applying the same to `l` gives `φ_k = q_k`:
+`φ = q`.  The data separate `p` from `q`; Theorem E1.  If `D = {k}`: on the circle where the
+other angles are fixed every multilinear observable is affine in `(cos φ_k, sin φ_k)`, and
+the first Fourier coefficient of `(1−w)δ_{p_k} + wδ_{q_k}`, a point of the open disc, is that of
+infinitely many other measures on the circle.  ∎
+
+*Relation to the science division's SCI-RES-0029 §3.*  Its (a) — two states that differ in
+one torsion are never identified from mean squared distances — is the case `|D| = 1`; its
+(c) — mean squared distances of a chain are a linear image of the Fourier coefficients
+with indices in `{−1,0,1}` of the torsion distribution — is what makes the torus the right
+model; and it leaves open whether two states that differ in two or three torsions are
+identified, since the Geometric Inference Division's linear certificate (its condition
+(CC)) fails there.  Proposition E20′ answers the question *on the torus*: yes, with an
+explicit certificate, as soon as two torsions differ.  For chains this becomes a theorem
+under two statements that are not ours and that we have not checked: that every
+competing state keeps the shared segments rigid (the Geometric Inference Division's
+Lemma 2.2, as used in SCI-RES-0029), and that the mean squared distances span the
+products of `1, cos, sin` of at most two of the differing torsions (rank 9 of 9 for two
+torsions in the science division's computation; not reported for three).
+
+### 4c.5 Identified, certified, and the gap between them
+
+| setting | certified by the natural sum of squares up to | identified up to | not identified beyond |
+|---|---|---|---|
+| cube, pair data, random conformers | `n − 10n/ln n` (E10) | about `1.1n`–`1.2n` **[N]** (§4.4) | `2n` (E11(a)) |
+| cube, two- and four-body data, random conformers | `(1−o(1))n²/2` (E19(b)) | 2.6 to 3.5 times the lift dimension for `n = 8, 10, 12`, about the threshold of a Gaussian cloud **[N]** | `n³/3` (E19(d)) |
+| cube, pair data, at most `K` conformers assumed, generic weights | — | `(1−o(1))n²/2` (E19(c)) | `n²/2` (dimension) |
+| torus `𝕋^r`, multilinear data, generic atoms | `2^r − r − 1` (E20); `2^r − r` for `r = 2` (E20′) and, in computed instances, `r = 3` | not known | not known (a count of double-point conditions suggests `(3^r − 1)/(r+1)`) |
+| chains, mean squared distances, two generic states (Geometric Inference Division) | 12 atoms (its Theorem C) | 10 atoms (its Theorem I) | 8 atoms (its numerics) |
+
+In every row where both are known, the identified range is strictly larger than the range
+of the natural certificate; in the second row the two may differ in order.  What a kernel
+would have to check beyond the sum of squares — a non-negativity that is not a square, on
+a finite space — is the question we put to the theory and complexity divisions
+(ENSEMBLE-MSG-0004).
+
 ---
 
 ## 5. What this says inside the programme
@@ -1298,12 +1584,14 @@ norm on 200 random instances, gap `5·10⁻¹⁵`.
 
 | item | status |
 |---|---|
-| Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`: twelve headline theorems and three non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning.  What is machine-checked is named at each theorem; everything else is a paper proof |
-| numerics | `experiments/ensemble/run_all.py` runs the five scripts whose numbers are quoted (output in `experiments/ensemble/output.txt`); the threshold computations of §4.4 are separate (`capacity_threshold.py`, `capacity_cutting_plane.py`, `symmetric_stability.py`; output in `output_threshold.txt`) |
-| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  The science division has accepted a review of E5, E7, E8, E1.3 and §5 (its workstream R21; SCI-RES-0028) and has already contributed Proposition E2.2.  Parts IV and V, Theorem E7′, E11(a) and §4.4 are new in version 2 and have been read by nobody but their author.  No external peer review |
-| prior art | `PRIOR_ART.md`: the searches of the first checkpoint; for Parts IV and V and E7′ no search has been made yet (obligation OB10) |
+| Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`: sixteen headline theorems and four non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning; the Lean stages of the programme's `scripts/audit_all.sh` pass on this branch (the status file records the Python stages).  What is machine-checked is named at each theorem; everything else is a paper proof.  Of Part VI only the combinatorial core of E20′ is machine-checked; for finite `X` the last step of E18 is `eq_of_exposing_certificate` applied to the zero set |
+| numerics | `experiments/ensemble/run_all.py` runs the six scripts whose numbers are quoted (output in `experiments/ensemble/output.txt`); the threshold computations of §4.4 and §4c.3 are separate (`capacity_threshold.py`, `capacity_cutting_plane.py`, `symmetric_stability.py`, `kbody_capacity.py`; output in `output_threshold.txt`) |
+| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  The science division has accepted a review of E5, E7, E8, E1.3 and §5 (its workstream R21; SCI-RES-0028) and has already contributed Proposition E2.2.  Parts IV and V, Theorem E7′ and §4.4 (version 2) are under a second internal review, commissioned at the third checkpoint and not yet reported; Part VI (version 3) has been read by nobody but its author.  No external peer review |
+| prior art | `PRIOR_ART.md`: the searches of the first checkpoint and those of the internal review; for Parts IV and V and E7′ two searches (obligation OB10); for Part VI the two cited theorems were read in the sources (§5b), E18′, E20′ and C3 were not searched (OB16) |
 
 ## 7. Corrections and changes since version 1 (commit `a570520`)
+
+*(Items 1–6: version 2, commit `1a067b5`.  Item 7: version 3.)*
 
 1. **Theorem E11 strengthened and restated** (linked correction of ENSEMBLE-MSG-0002 §1,
    in ENSEMBLE-MSG-0003).  Version 1: "beyond `6.34n` random conformers (equal populations)
@@ -1356,6 +1644,12 @@ norm on 200 random instances, gap `5·10⁻¹⁵`.
    * *Remarks of the review on version-2 material:* E7′(a) was false for one leg and
      E7′(b) exchanged two quantifiers without an argument; E13(a) needs a finite envelope.
      All three are corrected.
+7. **Version 3 (third checkpoint): Part VI added** (§4c: Theorems E18, E18′, E19, E20,
+   Proposition E20′, Conjecture C3; Problems O9, O10; O2 answered in part).  Proposition
+   E9(a) has its own proof now (§4c.1) and no longer rests on a citation.  Corollary
+   E1.3(b) carries the qualifier "no statewise constraint" asked for by the Geometric
+   Inference Division.  The probabilistic core of E19 is a published theorem that we
+   re-derived before finding it; it is cited, not claimed (`DEAD_ENDS.md` ED15).
 
 ## 8. Limitations
 
@@ -1395,9 +1689,12 @@ norm on 200 random instances, gap `5·10⁻¹⁵`.
   Conjecture C2).
   A proof would need certificates that are not positive semidefinite forms (lower bound)
   and an obstruction finer than single-site stability (upper bound).
-* **O2 (`k`-body data).**  The same for all correlations of order at most `k = 2t`: is the
-  capacity of order `n^t`?  (Certificate: the projector on the span of the lifted
-  conformers; needed: an analogue of Odlyzko's theorem for tensor powers.)
+* **O2 (`k`-body data).**  Answered in part by Theorem E19: for data of even order at most
+  `2d`, `(1−ε)n^d/d!` random conformers are certified by the projector on the lifted
+  conformers (the analogue of Odlyzko's theorem for tensor lifts is Baldi–Vershynin 2019),
+  and nothing is identified beyond `(2+ε)n^{2d−1}/(2d−1)!`.  Open: the true order for
+  `d ≥ 2` (Conjecture C3: `n^{2d−1}`); any certificate that is not a sum of squares of
+  degree `d`; the constant for `d = 1` (Problem O1).
 * **O3 (conformers with common rigid parts).**  If the conformers agree on a set `J₀` of
   features and are generic otherwise, is the ensemble identified from the laws of the
   remaining features iff the contraction `𝓜/J₀` is connected?  Settled for two rigid
@@ -1430,3 +1727,14 @@ norm on 200 random instances, gap `5·10⁻¹⁵`.
 * **O8 (noise).**  The minimax risk of a linear target over a convex class of ensembles
   under Gaussian noise is, up to a constant, a modulus of continuity (Donoho 1994).
   Compute it for the classes of this report; decide what adaptivity gains under noise.
+* **O9 (a prior on the number of conformers, all weights).**  Proposition E18′ excludes a
+  null set of weights.  For random conformers on the cube with `n ≪ K ≪ n²/4`, is every
+  ensemble on them — all weights — the only one with at most `K` conformers and its pair
+  correlations?  Equivalently: is the span of the lifted conformers disjoint from the
+  span of any `K` other lifted vertices?  (Resilience against one vertex is the theorem
+  of Baldi and Vershynin; at `n = 5`, where `K > m/2`, exceptional weights exist.)
+* **O10 (the torus beyond sums of squares).**  For generic atoms on `𝕋^r` with multilinear
+  data: is the largest identified `K` equal to `2^r − r`, to the count `⌊(3^r − 1)/(r+1)⌋`, or
+  in between?  For chains: do mean squared distances span the pairwise products needed
+  by Proposition E20′ when three or more torsions differ (a question to the science and
+  geometry divisions)?

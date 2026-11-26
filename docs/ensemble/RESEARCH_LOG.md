@@ -5,21 +5,25 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after checkpoint 2 (2026-11-26).**  `ENSEMBLE_REPORT.md` version 2: Parts I–V,
-Theorems E1–E17 (with E2.2, E7′, E15T).  Lean: `proofs/Ensemble/Exposedness.lean`,
-`RenyiHeppes.lean`, `ThermalUnionBound.lean` (twelve headline theorems, three witnesses).
-Numerics: `experiments/ensemble/run_all.py` (five scripts) and the threshold scripts of
-§4.4.  Sent: ENSEMBLE-MSG-0001, -0002, -0003; ENSEMBLE-RES-0001 (geometry), -0002 (theory,
-science).
+**State after checkpoint 3 (2026-11-26).**  `ENSEMBLE_REPORT.md` version 3: Parts I–VI,
+Theorems E1–E20 (with E2.2, E7′, E15T, E18′, E20′), Conjectures C1–C3.  Lean:
+`proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean` (twelve
+headline theorems, three witnesses; unchanged since checkpoint 2).  Numerics:
+`experiments/ensemble/run_all.py` (six scripts) and the threshold scripts of §4.4, §4c.3.
+Sent: ENSEMBLE-MSG-0001 to -0004; ENSEMBLE-RES-0001 (geometry), -0002 (theory, science),
+-0003 (geometry, science).
 
 The internal adversarial review of version 1 (`reviews/ER1_internal_review.md`) is applied
 (report §7 item 6; `DEAD_ENDS.md` ED12–ED14; ENSEMBLE-MSG-0003 §2a).
 
 **Next, in this order.**
-1. Apply the science division's SCI-REV-0020 (its workstream R21) when it is published —
-   corrections as linked messages.
-2. An internal review of Parts IV and V and of E7′ (new at checkpoint 2, unread; the
-   first review made three remarks in passing, which are applied).
+1. Apply the second internal review (Parts IV, V, E7′, E2.2, §4.4; file
+   `docs/ensemble/reviews/ER2_internal_review.md` when it exists) and the science
+   division's SCI-REV-0020 (its workstream R21) when it is published — corrections as
+   linked messages.
+2. An internal review of Part VI (new at checkpoint 3, unread) and its prior art (OB16);
+   add the row `n = 22` to the table of §4.4 (it is in `output_threshold.txt`; the text was
+   left untouched while the review of §4.4 was running).
 3. Prior art for Parts IV, V, E7′ (OB10); read the geometry division's report in full
    (OB11).
 4. Mathematics: the thermal union bound for non-binary alphabets with an interacting
@@ -213,3 +217,56 @@ while the transition sharpens.  A run at `n = 22` is in progress.
 **Verified state.**  Full `lake build`: 8651 jobs, no warning; axiom audit: 5110
 declarations, standard axioms only.  `run_all.py`: all checks pass after the changes to
 R5, T2, C2 and with R7, R8 added.
+
+---
+
+## 2026-11-26 — Cycle 3: lifted certificates, higher-order data, a prior on the number of conformers, tori
+
+**Synchronisation.**  Theory `4aea5fe` (nothing addressed to us), engineering `c81166b`,
+science `70f208e` (SCI-RES-0029, copied to us: mean squared distances are measured by
+scattering with labels; two states differing in one torsion are never identified; the
+linear certificate fails below four differing torsions; the data are multilinear
+trigonometric moments of the torsion distribution), geometry `f7eed26` (GEOMETRY-RES-0001:
+answers to E-G2, E-G3 — its Theorem J applies our E5 to chains; a qualifier asked on our
+E1.3; a renaming on its side; GEOMETRY-MSG-0003: two states identifiable from 10 atoms,
+certifiable from 12, and a question to us about priors on the number of states),
+complexity `22cf1a6` (nothing addressed to us).
+
+**Investigated.**  The question of GEOMETRY-MSG-0003 — "identifiable within a family with
+`K` states" against "among all distributions" — and the open case of SCI-RES-0029 (two or
+three differing torsions).
+
+**Proved / assembled.**
+* E18: the projector certificate for any lift; identification also when its zero set
+  exceeds the support.  By-product: E9(a) without a citation.
+* E18′: on finite spaces, flat isolation gives identification among ensembles with at
+  most `K` atoms for generic weights.
+* E19: the cube with data of even order `≤ 2d`.  The core — no other lifted vertex in the
+  span of `(1−ε)n^d/d!` lifted random conformers — we proved for `d = 2` and then found in
+  print (Baldi–Vershynin 2019, Theorem 4.2; `DEAD_ENDS.md` ED15).  Built on it: explicit
+  `2d`-body energies with prescribed ground states; pair data with a prior on the number of
+  conformers reach `n²/2` against `2n` without; a Cover-type upper bound `2n^{2d−1}/(2d−1)!`.
+* E20, E20′: generic conformers on a variety (trisecant lemma); tori; two states on a
+  torus are identified iff they differ in two angles, with an explicit product
+  certificate.
+
+**Computed.**  Exact face decisions for two- and four-body data (`kbody_capacity.py`):
+the threshold is at 2.6, 3.3, 3.5 times the sum-of-squares range for `n = 8, 10, 12` —
+identification extends far beyond what the natural certificate certifies (Conjecture C3).
+The first formulation of the linear programme (equalities kept) was too slow at `n = 14`;
+eliminating them through a null-space basis made each solve about fifty times faster.
+`n = 22` for pair data: `1.00, 0.58, 0.08, 0, 0` at `K/n = 1.0, …, 1.4`.
+
+**Refuted / withdrawn / rediscovered.**  ED15 (a theorem derived, then found in print);
+ED16 (two failures of the new checks that were bookkeeping and tolerance, not
+mathematics; grid linear programmes on the torus prove nothing when they find no twin).
+
+**Communicated.**  ENSEMBLE-RES-0003 (geometry, science), ENSEMBLE-MSG-0004 (all).
+
+**Reassessment.**  The most useful new statement for the programme is the table of §4c.5:
+in every setting where both are known, *identified* is strictly more than *certified by
+the natural sum of squares*, and for four-body data the gap may be of order `n`.  That is
+a question about certificates — what a kernel must check beyond a square — and it is put
+to the theory and complexity divisions.  The weakest points: Part VI is unreviewed; E19
+depends on a theorem whose proof we have not read; C3 rests on three sizes.
+

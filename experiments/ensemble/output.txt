@@ -1,4 +1,4 @@
-===== exposedness_checks.py (exit 0, 39 s) =====
+===== exposedness_checks.py (exit 0, 37 s) =====
 T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiable instances)
 T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
 T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
@@ -35,7 +35,7 @@ R7 identified with chimeras: ok
 R8 non-generic twin on the line: ok
     4-cycle on the line, x = (8,0,3,5), x' = (8,3,5,0): lengths (8, 3, 2, 3) and (5, 2, 5, 8), no shared length; complementary splices that both close up: [((8, 2, 2, 8), (5, 3, 5, 3))]
 PASS
-===== pair_capacity_checks.py (exit 0, 17 s) =====
+===== pair_capacity_checks.py (exit 0, 26 s) =====
 C1 Littlewood-Offord lemma: ok
     7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4 at c = ('-1', '-1', '-1')
 C2 sign vectors in random spans: ok
@@ -87,7 +87,7 @@ F6 an interacting reference (Theorem E15T): ok
     complete graphs on 4..7 sites, every bond satisfied (12 references, 1200 members): max of TV - sum of deficits = +2.28e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +4.44e-16
     chains of three sites with one bond violated by the centre (5 cases, exact): max of TV - sum of deficits = +0.965, +0.522, +0.024, +0.062, +0.294
 PASS
-===== platform_checks.py (exit 0, 97 s) =====
+===== platform_checks.py (exit 0, 111 s) =====
 P1 matroid of the legs: ok
     d = 2, 3 legs: rank 3, connected = False
     d = 2, 4 legs: rank 3, connected = True
@@ -102,5 +102,22 @@ P2 planar platform: ok
 P3 spatial platform: ok
     d = 3, 7 legs: smallest residual over 80 non-constant splices = 2.366e-03 (true pose: 5.5e-15)
     d = 3, 6 legs (free matroid): splices of nearby poses realised in 20/20 cases
+PASS
+===== lifted_checks.py (exit 0, 158 s) =====
+L1 lift isolation on the cube: ok
+    n = 10 (45 pair observables): lift-isolated frequency K = 20: 1.000, K = 22: 1.000, K = 33: 0.925, K = 35: 0.950, K = 45: 0.520
+    n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955
+L2 four-body data: ok
+    n = 8, 4-body data (99 features): 38 lift-isolated supports with K = 12..24 (the pair-data capacity is below 2n = 16): identification confirmed by the fibre LP in 38; 10 supports not isolated (skipped)
+L3 a prior on the number of conformers: ok
+    n = 5, K = 6, 7: 3 supports flat-isolated but not faces (not identified among all ensembles), 6 faces; random weights with a twin of at most K atoms: 0 (expected 0); non-faces for which SOME weights have such a twin: 3 of 3
+L4 torus: ok
+    two-state certificate on the r-torus, r = 2..5, 40 random pairs (some angles shared): every zero found is one of the two states; smallest value at distance > 0.3 from both: 0.007
+    2-torus, 24 x 24 grid, nine product observables: two states differing in both angles identified in 9 sampled cases; differing in one angle: not identified in 3 case(s)
+    r = 3, K = 4 generic points: 4 zeros of the projector certificate found (expected 4); rank-one matrices on the zero set linearly independent: True
+    r = 3, K = 5 generic points: 6 zeros of the projector certificate found (expected 6); rank-one matrices on the zero set linearly independent: True
+    r = 4, K = 11 generic points: 11 zeros of the projector certificate found (expected 11); rank-one matrices on the zero set linearly independent: True
+L5 three conformers: ok
+    n = 6: 4960 triples of conformers; sign vectors in the span beyond the three: at most 1 (present in 2880 triples); zero sets with affinely dependent pair features: 0
 PASS
 ALL PASS

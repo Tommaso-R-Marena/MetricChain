@@ -118,3 +118,29 @@ failure of identification there is for the trivial reason that one length does n
 pose.  Its proof of (b) took the pose first and the extra leg generic afterwards, while
 the statement fixes generic attachment points first; the dimension count on the incidence
 set that justifies the exchange is now written out.  Found by the review ER1 in passing.
+
+**ED15 (a theorem derived, then found in print).**  For the third checkpoint we proved that
+the span of the pair-lifted vectors of up to `(1−ε)n²/2` random conformers contains no other
+lifted vertex ("Odlyzko's theorem for symmetric squares"): reveal a first batch of
+coordinates, where Abbe–Shpilka–Wigderson's independence theorem makes the coefficients
+of a candidate unique; exclude candidates with few non-zero coefficients by a rank count;
+and bound the probability that each further coordinate is consistent by Odlyzko's lemma on
+sign vectors in a subspace.  The search made before writing it up — the first query about
+spans of random rank-one sign matrices — returned Baldi and Vershynin (2019), Theorem 4.2:
+the same statement for every degree, with the same method.  Recorded as a rediscovery;
+the report cites the theorem and claims only what is built on it (E19(b)–(e)).  *Lesson:
+search before proving when the statement has an obvious name ("Odlyzko for tensors");
+the hour was not wasted — knowing the proof made it possible to check that the published
+statement, in its `≤ d` lift with the constant coordinate, is exactly what E18 needs.*
+
+**ED16 (two checks that failed for reasons of code, not of mathematics).**  The first run
+of the torus checks (L4) reported that two states differing in both angles were *not*
+identified, and that the projector certificate of five generic points on the 3-torus had
+twelve zeros where six were expected.  The first was `True + True == True` for numpy
+booleans in the test's bookkeeping (the linear programme had found the ensemble
+identified, to `10⁻¹⁴`); the second was near-duplicate minimisers of a degenerate zero
+that a tolerance of `10⁻⁴` did not merge.  Both were found by printing the quantities
+before touching the mathematics.  A grid linear programme on the torus proves
+non-identification when it finds a twin and proves nothing when it does not; the
+exploratory grid runs for larger `K` are therefore not quoted in the report.
+

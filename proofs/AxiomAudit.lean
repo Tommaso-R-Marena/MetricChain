@@ -90,6 +90,7 @@ import proofs.Frontiers.GibbsRecovery
 import proofs.Ensemble.Exposedness
 import proofs.Ensemble.RenyiHeppes
 import proofs.Ensemble.ThermalUnionBound
+import proofs.Ensemble.TwoStateCertificate
 import proofs.AuditCommand
 
 /-!
@@ -2065,6 +2066,43 @@ theorem ensemble_thermal_union_bound_witness :
 end MetricChain.NonVacuity
 
 #print axioms MetricChain.NonVacuity.ensemble_thermal_union_bound_witness
+
+/-! ### Ensemble division, third checkpoint: the zero set of the two-state certificate
+(`docs/ensemble/ENSEMBLE_REPORT.md` §4c.4, Proposition E20′) -/
+
+#print axioms MetricChain.Ensemble.all_left_or_all_right
+#print axioms MetricChain.Ensemble.twoStateCert_eq_zero_iff
+#print axioms MetricChain.Ensemble.twoStateCert_nonneg
+#print axioms MetricChain.Ensemble.twoStateCert_unique_eq_zero
+
+namespace MetricChain.NonVacuity
+
+/-- Non-vacuity of `Ensemble.twoStateCert_eq_zero_iff`: on two coordinates, with `a = (0, 0)` (the
+configuration sits at the first state) and `b = (1, 1)`, the hypotheses hold and the certificate
+vanishes; with `a = (1, 0)`, `b = (0, 1)` (a chimera of the two states) they hold and it does not. -/
+theorem ensemble_two_state_certificate_witness :
+    Ensemble.twoStateCert (ι := Fin 2) ![0, 0] ![1, 1] = 0
+      ∧ Ensemble.twoStateCert (ι := Fin 2) ![1, 0] ![0, 1] ≠ 0 := by
+  have htwo : ∀ k : Fin 2, ∃ l, l ≠ k := by decide
+  constructor
+  · refine (Ensemble.twoStateCert_eq_zero_iff (ι := Fin 2) ![0, 0] ![1, 1] ?_ ?_ ?_ htwo).mpr
+      (Or.inl ?_)
+    · intro k; fin_cases k <;> simp
+    · intro k; fin_cases k <;> simp
+    · intro k; fin_cases k <;> simp
+    · intro k; fin_cases k <;> simp
+  · intro h
+    have h' := (Ensemble.twoStateCert_eq_zero_iff (ι := Fin 2) ![1, 0] ![0, 1] ?_ ?_ ?_ htwo).mp h
+    · rcases h' with h1 | h1
+      · have := h1 0; simp at this
+      · have := h1 1; simp at this
+    · intro k; fin_cases k <;> simp
+    · intro k; fin_cases k <;> simp
+    · intro k; fin_cases k <;> simp
+
+end MetricChain.NonVacuity
+
+#print axioms MetricChain.NonVacuity.ensemble_two_state_certificate_witness
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/
