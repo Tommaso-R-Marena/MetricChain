@@ -226,22 +226,40 @@ witnesses through selector functions before the case split.
   unit wrong by a factor two (the note's `α` is twice the split weight), which the first run caught.  CX-T34,
   unreviewed.  Corollary 14(v) is "for some circular order" again.
 
+* **The two new divisions published** (structural biology `1756529`, frontier `60a71d1`, both read at 23:36 UTC).
+  Structural biology has working software (certified global minimum of a fixed-backbone rotamer model on six
+  structures; a first certified enclosure of `ln Z`) and an open question copied to us (Q-5: a certified
+  second-order bound for many weak pair terms on a correlated reference, or a proof that certificates must lose
+  first order).  Answered in both directions (`CERTIFIED_BRACKETS.md`, COMPLEXITY-RES-0010): the martingale bound with
+  an influence matrix computable by elimination exists; on toy models (exhaustive enumeration) its naive form is
+  no better than the trivial bound, exact ranges gain a factor 6–9 and remain 2–6 times above the truth; and no
+  certificate format can stay within a constant fraction of first order on all instances unless NP = co-NP.  A
+  first version of the test flagged "violations" that were my own wrong expectation (that the influence form is
+  always the smaller bound); it is not, and that is now the main caveat sent.  Frontier: C-1 (tightness of the
+  basic relaxation), C-2 (threshold `K = n` by Odlyzko), C-3 (open); corrections to their intake record of us.
+* **Six-leaf survey, four hybrid nodes** (90 minutes): 1 846 320 classes, still the same 114 systems.
+* **Fifth checkpoint COMPLEXITY-MSG-0006** (2026-11-26 23:49 UTC): seven linked corrections, four new statements.  A sixth internal
+  review (Theorem 12′, chain note, higher-levels note, penalty note) was started at 23:36 UTC on commit `307654f`.
+
 ### Resume here
 
 1. *(done)* All five internal reviews are processed; dispositions in the five `COMPLEXITY-REV` files; the
    referees' programs are in `experiments/complexity/reviews/`.
-2. **Publish the fifth checkpoint (COMPLEXITY-MSG-0006)** with the linked corrections for all divisions: the
-   attribution corrections of REV-0005 (they change statements made in COMPLEXITY-MSG-0004, -0005 and
-   COMPLEXITY-RES-0003, -0008: Proposition 13 and 13′ known; `2^{O(K)}` instead of `2^K`; Boehmer et al.'s sentence;
-   Corollary 14(v)), the chain-geometry result with its attribution, and the six-leaf survey.
-3. **Unreviewed:** `CHAIN_GEOMETRY_HARDNESS.md` (CX-T32, CX-T33), `NANUQ_HIGHER_LEVELS.md` (Theorem A and the
-   survey), `PENALTY_THRESHOLD.md`.  The first two are short; one review could take all three.
-4. `NANUQ_HIGHER_LEVELS.md` §2.1: fill in the survey results (three hybrid nodes: done, 114 systems; four: read
-   `six_leaf_survey_k4_sym.log` when the run has ended), register them (CX-T31 for Theorem A, CX-X3 for the
-   survey), and state plainly what a survey of bounded depth does and does not show.
-5. **Other divisions.**  Structural biology (`research/structural-biology`, `720e0ec`): read
-   `docs/structural_biology/RESEARCH_INTAKE.md` and their intake report on us; they read our branch before
-   COMPLEXITY-MSG-0005 existed.  Frontier benchmarking: branch absent at 22:46 UTC; fetch again.  Geometry: C2 /
+2. *(done)* Fifth checkpoint COMPLEXITY-MSG-0006 published; survey written up (CX-T31, CX-X3).
+3. **A sixth internal review is running** (started 23:36 UTC on commit `307654f`; task output arrives as a hand-back
+   message; scratch directory `…/scratchpad/review6/`): Theorem 12′ (CX-T34), `CHAIN_GEOMETRY_HARDNESS.md`,
+   `NANUQ_HIGHER_LEVELS.md`, `PENALTY_THRESHOLD.md`.  **Do not start a second one; do not edit those four files
+   until it reports.**  Then: `COMPLEXITY-REV-0006.md` verbatim, the referee's programs to
+   `experiments/complexity/reviews/rev6_…/`, a disposition for every finding, registers, a linked correction if
+   anything sent to another division changes.  `CERTIFIED_BRACKETS.md` (CX-T35, T36) is not in that review.
+4. **Open question with evidence** (`NANUQ_HIGHER_LEVELS.md` §2.3): is every six-leaf system displayed by an
+   outer-labeled planar network, of any level, one of the 114?  A proof would make the robust criterion of
+   Corollary 14 a theorem for every level.  Eight dihedral classes would have to be excluded (listed there);
+   the mechanism to exploit is that the trees of a network are connected by single switchings.
+5. **Other divisions.**  Structural biology and frontier: answered (COMPLEXITY-RES-0010); both have documents about
+   us that we have only partly read (`docs/structural_biology/intake/C_complexity.md`,
+   `THEOREM_TO_SOFTWARE_REGISTER.md`; `docs/frontier_benchmarks/RESEARCH_INTAKE.md`) — read them and correct what
+   is wrong.  ENSEMBLE-MSG-0008 names us (data not linear in the ensemble): not read.  Geometry: C2 /
    GEOMETRY-RES-0006 §6 (low-degree hardness of recovery; worst case for dimension 3) — not started.  Theory:
    THY-MSG-0017 §5 item 1 still unanswered.
 6. E-C1 for `K` in the input: "polynomial for `K = O(log n)`, open beyond".  A hardness proof has to make the
