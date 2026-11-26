@@ -17,10 +17,11 @@ evaluation only.
 | to implement the checkers / solvers | [`docs/BLUEPRINT.md`](docs/BLUEPRINT.md) |
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
 | what turned out false, weaker, or already known | [`docs/DEAD_ENDS.md`](docs/DEAD_ENDS.md) |
+| which assumption of which theorem is essential, an artefact of the proof, or a convenience; the hierarchy from the most tractable model outwards; statements whose guarantees are computationally vacuous | [`docs/ASSUMPTION_AUDIT.md`](docs/ASSUMPTION_AUDIT.md) (synthesis), [`docs/audit/`](docs/audit) (theorem by theorem; the record of the 61 corrections it led to) |
 | the literature checks behind the novelty assessments | [`docs/prior_art/`](docs/prior_art) |
 | the independent referee reports on the theory report (twelve so far) | [`docs/reviews/R1_referee_report.md`](docs/reviews/R1_referee_report.md), [`R2`](docs/reviews/R2_referee_report.md), [`R3`](docs/reviews/R3_referee_report.md), [`R4`](docs/reviews/R4_referee_report.md), [`R5`](docs/reviews/R5_referee_report.md), [`R6`](docs/reviews/R6_referee_report.md), [`R7`](docs/reviews/R7_referee_report.md), [`R8`](docs/reviews/R8_referee_report.md), [`R9`](docs/reviews/R9_referee_report.md), [`R10`](docs/reviews/R10_referee_report.md), [`R11`](docs/reviews/R11_referee_report.md), [`R12`](docs/reviews/R12_referee_report.md) |
 | the independent reviews of the workstream reports | [`docs/reviews/`](docs/reviews) (`R_B_review.md`, `R_C_review.md`, `R_D_review.md`, `R_E_review.md`, `R_G_review.md`, `R_P_review.md`) |
-| collaboration between three research divisions on three branches — this one (theory), the Computational Research Division (`research/ubuntu-engineering`) and the Scientific Discovery, Translation & Independent Validation Division (`research/scientific-translation`); the other two branches are read-only from here and are never merged: protocol, status, messages, requests and responses | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md), state in [`status/theory.md`](docs/collaboration/status/theory.md) |
+| collaboration between six research divisions on six branches — this one (theory), the Computational Research Division (`research/ubuntu-engineering`), the Scientific Discovery, Translation & Independent Validation Division (`research/scientific-translation`), and, since 26 November 2026, Ensemble Identifiability and Certified Inference (`research/ensemble-identifiability`), Geometric Inference, Rigidity and Inverse Problems (`research/geometric-inference`) and Mathematical Biology and Computational Complexity (`research/biological-complexity`); the other branches are read-only from here and are never merged: protocol, status, messages, requests and responses | [`docs/collaboration/`](docs/collaboration/README.md), digest in [`THEORY_TO_ENGINEERING.md`](docs/collaboration/THEORY_TO_ENGINEERING.md), state in [`status/theory.md`](docs/collaboration/status/theory.md) |
 | reports of independent exploratory workstreams (as delivered; not part of the theory report unless it says so) | [`docs/workstreams/`](docs/workstreams) |
 
 ## Layout
@@ -655,6 +656,42 @@ machine-checked with a separate order of the sites for every term — which remo
 maximum over the states of a term's host sites, for at most `m` hosts and not for
 `m + 1` — together with the anchored split of a pair table; and a lemma bounds what a
 bound that ignores the signs of charges loses on a cluster with a net charge.
+(xxiii) *The rate of the nested levels; what the nested algorithm needs in general; an
+audit of every assumption* (theory report Theorems 11.53a, 11.53b, §11.33;
+`docs/ASSUMPTION_AUDIT.md`; under the research owner's directive on generality of
+26 November 2026).  **The exponent of `k` nested levels at accuracy zero is
+`h + (2π²h²θ_hint″(0) + o(1))/k²`** — `0.641·a/k²` on the cube at `u = 1` — for every convex
+non-adaptive exponent function with a smooth, strictly convex fixed point; with a kink
+there the rate is `1/k`, so the general bound cannot be improved over all convex pairs.
+One level acts on *lines* through a one-dimensional map that is jointly convex and has
+a saddle-node exactly at the hinted exponent; the lower bound is the slow passage of an
+orbit through that bottleneck (line lemma machine-checked); the upper bound needs a
+minimax theorem — a *convex* family of lines moves line by line, a non-convex one does
+not — and a convex sub-solution cut from the orbit curves.  For exponent functions with
+slope at most one at zero the recursion is solved exactly by those curves; for the
+Gaussian pair the lower bound is `1/(4cos²(π/(2k+1)))` in closed form.  A paper proof by
+the coordinator (the workstream commissioned for it produced nothing), refereed
+internally by two independent referees with their own code — no error of substance; a
+statement about the *analysis* of nested algorithms at the level of exponents: no cost
+at finite size follows from it yet.  **What the nested algorithm needs** was extracted
+by a workstream and refereed: it works for an integrand on any probability space with
+two *tail functions* (the cube's constants are reproduced exactly), and under a
+certified bound on the influence between the blocks of a dependent known part
+(dependence costs slope); it **provably gains nothing** on Gauss space with
+Euclidean-Lipschitz functions when the coordinates are split into fixed blocks — the
+dividing line is whether the envelope is additive over independent parts, not whether
+the space is discrete — and with unbounded influence it **returns a false certificate**
+(reproduced by the referee in every one of 120 runs).  **The audit**: two independent
+readers classified 499 assumptions of 156 numbered statements (one in five is
+load-bearing in the sense that a counterexample exists without it, one in seven is of
+unknown status); it found one theorem that had lost a hypothesis when it was adopted
+from its workstream (second-order classes below the Curie–Weiss coupling are cheap only
+for an *additive* known part: restored, with counterexamples), eleven stale sentences
+and 47 sentences — almost all in summaries, this file included — that stated more than
+is proved; all are corrected and recorded one by one.  The Scientific Discovery
+Division's review of the sub-exponential term (item (xxii)) found it proved as stated,
+reproduced its numbers from the text alone, and ran the outer loop of its main level
+for the first time; its nine minor points are applied.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,
@@ -679,7 +716,13 @@ from four thousand (theory report §11.19, remarks (1) and (1b); the coordinator
 computation, reviewed and replicated by the Scientific Discovery Division); the explicit
 sub-exponential term `O(√(n ln n))` of Theorem 11.58a is a refereed paper proof for a
 schedule that has been evaluated exactly only at depths and sizes where it is not yet
-better than the plain bracket; its
+better than the plain bracket; the rate `1/k²` of the nested levels (Theorem 11.53b) is a
+refereed paper proof about exponents, asymptotic in the number of levels, with no
+certified constant from above at any finite number of levels and no consequence yet
+for the cost at finite size; the level theorem on general probability spaces (§11.33)
+is a refereed paper proof whose cost guarantee is vacuous wherever no sharp tail
+function is known — everywhere but the uniform cube and Gauss space at bounded
+accuracy; its
 extension to a field as known part is refereed but its nested algorithm has never been
 simulated end to end, and its
 algorithms are
