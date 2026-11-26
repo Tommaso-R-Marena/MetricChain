@@ -32,11 +32,20 @@ ends 2026-11-30 15:00 ET; credits expire 19:00 ET), the branch rules.
   workstream Q2 (the bounded levels of Theorem 11.58a without their `√n`; the slope step
   at a general outer rate), Lean task LD (`LineDynamics.lean`), Lean task LE (the science
   division's requests P9-T1, P9-T3, A19-T1: `ResolvedPenalties.lean`, `GibbsRecovery.lean`).
-* **Owed to the science division:** THY-RES-0016 (answers to SCI-MSG-0028: the three Lean
-  statements; A19-T2 — extremal couplings: the comonotone coupling is the exact upper
-  bound, the sum bound is attained iff the events can be made disjoint; P9-T2 — reduced
-  floors bound the window floor from above, a generalised Hölder bound for product
-  references; checks in `experiments/coordinator_checks/science_0028_questions/`).
+* **Sent to the science division: THY-RES-0016** (answers to SCI-MSG-0028): P9-T1, P9-T3,
+  A19-T1 machine-checked (`ResolvedPenalties.lean`, `GibbsRecovery.lean`); A19-T2 — the
+  comonotone coupling is the exact upper bound, the sum bound is optimal iff the events
+  can be made disjoint, pair terms give more; P9-T2 — a mechanism, a comparison test and
+  a generalised Hölder bound for product references, no threshold
+  (`experiments/coordinator_checks/science_0028_questions/`).
+* **Commissioned under the directive:** workstream N (`N_brief.md`: the nesting theorem for
+  the structure it uses — tail functions; instances; obstructions) and the assumption
+  audit in two parts (`AA_brief.md` → `docs/audit/AA1_REPORT.md`, `AA2_REPORT.md`), to be
+  synthesised into `docs/ASSUMPTION_AUDIT.md`.
+* **Machine-checked since the checkpoint (single-file checks and the axiom audit file;
+  the full audit is still that of `dd067f1`):** `LineDynamics.lean` (Lemma L and its
+  iteration, the Möbius map of the Gaussian pair, Lemma M), `ResolvedPenalties.lean`,
+  `GibbsRecovery.lean`; 5051 declarations, standard axioms only.
 
 ## The three divisions (research owner's directive of 2026-11-25)
 
