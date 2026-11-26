@@ -65,7 +65,7 @@ def build_model(pdb_id: str):
     tables = build_energy_tables(str(PDB_DIR / f"{pdb_id}.pdb"), **MODEL_PARAMS)
     seconds = time.perf_counter() - t0
     meta = {"source": tables.meta.get("source"), "model_params": MODEL_PARAMS, "scale_bits": SCALE_BITS,
-            "units": "kcal/mol", "sites": [{k: s.get(k) for k in ("chain", "resseq", "resname", "n_states")}
+            "units": "kcal/mol", "sites": [{k: s.get(k) for k in ("chain", "resnum", "resname", "n_states")}
                                             for s in tables.meta.get("sites", [])]}
     model = PairModel.from_float(tables.unary, tables.pair, scale_bits=SCALE_BITS, meta=meta)
     return model, seconds, tables.meta
@@ -86,6 +86,8 @@ def run_one(pdb_id: str) -> dict:
     t0 = time.perf_counter()
     result = check_min_certificate(mincert.loads(text, model=model))
     t_check = time.perf_counter() - t0
+    if not (result.accepted and result.full_box and result.certified_gap == 0):
+        raise SystemExit(f"{pdb_id}: no zero-gap certificate over the full state set ({result.reason})")
     counts = mincert.count_nodes(cert.root)
     native = tuple(0 for _ in range(model.n))
     row = {
@@ -94,6 +96,7 @@ def run_one(pdb_id: str) -> dict:
         "sites": model.n, "states_min": min(model.sizes), "states_max": max(model.sizes),
         "states_total": sum(model.sizes), "pairs": len(model.pair),
         "certificate_accepted": bool(result.accepted),
+        "box_is_full": bool(result.full_box),      # only then is the bound a bound on the global minimum
         "certified_lower_bound_kcal": str(result.lower_bound), "witness_energy_kcal": str(result.witness_energy),
         "certified_gap_kcal": str(result.certified_gap),
         "certified_lower_bound_float": float(result.lower_bound),
@@ -107,7 +110,7 @@ def run_one(pdb_id: str) -> dict:
         "cert_message_integers": counts["message_integers"], "cert_bytes": len(text),
         "cert_sha256": hashlib.sha256(text.encode()).hexdigest(),
         "platform": f"{platform.python_implementation()} {platform.python_version()} on {platform.machine()}",
-        "versions": tmeta.get("versions"),
+        "versions": tmeta.get("software"),
     }
     return row
 
@@ -125,8 +128,8 @@ def check_all() -> int:
         verdict = "instance checksum differs: the instance was not reproduced bit for bit on this machine"
         if ok_sha:
             res = check_min_certificate(mincert.loads(text, model=model))
-            verdict = f"accepted={res.accepted} lower={res.lower_bound} gap={res.certified_gap}"
-            ok_sha = res.accepted and str(res.lower_bound) == row["certified_lower_bound_kcal"]
+            verdict = f"accepted={res.accepted} full_box={res.full_box} lower={res.lower_bound} gap={res.certified_gap}"
+            ok_sha = res.accepted and res.full_box and str(res.lower_bound) == row["certified_lower_bound_kcal"]
         print(f"{pdb_id}: instance {'ok' if sha == row['model_sha256'] else 'DIFFERS'}; "
               f"certificate file {'ok' if ok_cert else 'DIFFERS'}; {verdict}")
         failures += 0 if (ok_sha and ok_cert) else 1

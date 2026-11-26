@@ -214,10 +214,12 @@ def _exact_bound(P: _Problem, D: list, mint: dict) -> int:
 
 def certify_gmec(model: PairModel, eps: Fraction = Fraction(0), witness=None, message_bits: int = 12,
                  max_nodes: int = 100_000, max_sweeps: int = 300, tol: float = 1e-12,
-                 time_limit: float | None = None) -> MinCertificate:
+                 time_limit: float | None = None, domains=None) -> MinCertificate:
     """Find a configuration `x*` and a certificate that `E(x) >= E(x*) - eps` for every `x`.
 
     `eps` is an exact rational in energy units (`0` asks for a proof of exact optimality).
+    `domains` restricts the claim to a box (a non-empty list of states per site); the witness
+    then lies in that box and the certificate is about that box only.
     Raises :class:`CertificationBudgetExceeded` (an abstention) when `max_nodes` branch-and-bound
     nodes or `time_limit` seconds do not suffice.
     """
@@ -230,7 +232,15 @@ def certify_gmec(model: PairModel, eps: Fraction = Fraction(0), witness=None, me
     t0 = time.monotonic()
     state = {"nodes": 0, "sweeps": 0}
 
-    D0 = [np.arange(k, dtype=np.int64) for k in P.sizes]
+    if domains is None:
+        domains = [list(range(k)) for k in P.sizes]
+    domains = [sorted(int(a) for a in d) for d in domains]
+    if len(domains) != n or any((not d) or d[0] < 0 or d[-1] >= k or len(set(d)) != len(d)
+                                for d, k in zip(domains, P.sizes)):
+        raise ValueError("domains must give a non-empty, duplicate-free list of existing states for every site")
+    D0 = [np.array(d, dtype=np.int64) for d in domains]
+    if witness is not None and any(int(a) not in d for a, d in zip(witness, domains)):
+        witness = None                       # a witness outside the box is of no use
     if witness is None:
         dual = _Dual(P, D0, None)
         dual.run(max_sweeps=min(max_sweeps, 50), target=np.inf, tol=tol)
@@ -292,5 +302,5 @@ def certify_gmec(model: PairModel, eps: Fraction = Fraction(0), witness=None, me
     meta = {"producer": "metricchain_sb.gmec.certify_gmec", "eps": str(Fraction(eps)),
             "bnb_nodes": state["nodes"], "seconds": round(time.monotonic() - t0, 3),
             "message_bits": message_bits, "max_sweeps": max_sweeps}
-    return MinCertificate(model=model, message_bits=message_bits, domains=[list(range(k)) for k in P.sizes],
+    return MinCertificate(model=model, message_bits=message_bits, domains=domains,
                           lower_bound=int(lower), witness=tuple(int(a) for a in best["x"]), root=root, meta=meta)

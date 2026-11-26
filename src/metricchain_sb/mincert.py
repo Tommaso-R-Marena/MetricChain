@@ -1,7 +1,8 @@
 """Certificates of lower bounds on minimum energies ("min" certificates).
 
 Mathematical content (the theory division's kernel `verify`, `proofs/CertificateAlgebra.lean`;
-soundness `verify_sound` **[V]**): a certificate is a tree over a box `D = prod_i D_i` of
+soundness `verify_sound` **[V]**, applied to the `PairInstance` whose table `J i j` is our pair
+table for `i < j` and zero for `i > j`): a certificate is a tree over a box `D = prod_i D_i` of
 configurations with nodes
 
 * ``leaf``    — a reparameterisation (dual) bound: messages `m[(i, j)][a]` for every listed pair
@@ -12,8 +13,9 @@ configurations with nodes
 
   and the leaf is accepted iff `L <= B`;
 * ``branch``  — a case split on the state of one site (every state of its current domain needs a child);
-* ``prune``   — Goldstein dead-end elimination of state `r` of site `i` by a dominator `t` of the
-  current domain: accepted iff `h_i(r) - h_i(t) + sum_{j ~ i} min_{s in D_j} (J_ij(r, s) - J_ij(t, s)) >= 0`;
+* ``prune``   — Goldstein dead-end elimination of state `r` of site `i` by a dominator `t != r` of
+  the current domain: accepted iff `t in D_i`, `t != r` and
+  `h_i(r) - h_i(t) + sum_{j ~ i} min_{s in D_j} (J_ij(r, s) - J_ij(t, s)) >= 0`;
   the rest of the certificate is checked on the box without `r`.
 
 Accepted  ==>  `L <= E(x)` for every `x` in the box.
@@ -278,17 +280,87 @@ def _model_to_json(model: PairModel) -> dict:
         "scale_bits": model.scale_bits,
         "unary": [[int(v) for v in u.tolist()] for u in model.unary],
         "pair": {f"{i},{j}": [[int(v) for v in row] for row in t.tolist()] for (i, j), t in model.pair.items()},
-        "meta": model.meta,
+        "meta": json.dumps(model.meta, sort_keys=True),      # opaque text: never interpreted by a checker
     }
 
 
+def _strict_int(value, what: str) -> int:
+    """An integer of the file: a JSON integer and nothing else (no float, boolean or string)."""
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise MalformedCertificate(f"{what}: expected an integer, got {type(value).__name__}")
+    return value
+
+
+def _strict_pair_key(key, what: str):
+    parts = key.split(",") if isinstance(key, str) else []
+    if len(parts) != 2 or not all(t.isdigit() and str(int(t)) == t for t in parts):
+        raise MalformedCertificate(f"{what}: key {key!r} is not of the canonical form 'i,j'")
+    return int(parts[0]), int(parts[1])
+
+
+def _strict_load(text: str):
+    """Parse JSON so that a file has one reading: duplicate keys, floating-point literals and
+    the non-standard constants NaN / Infinity are errors."""
+    def no_duplicates(pairs):
+        out = {}
+        for key, value in pairs:
+            if key in out:
+                raise MalformedCertificate(f"duplicate key {key!r}")
+            out[key] = value
+        return out
+
+    def no_float(literal):
+        raise MalformedCertificate(f"non-integer number {literal!r}")
+
+    try:
+        return json.loads(text, object_pairs_hook=no_duplicates, parse_float=no_float, parse_constant=no_float)
+    except MalformedCertificate:
+        raise
+    except (ValueError, RecursionError) as exc:
+        raise MalformedCertificate(f"not valid JSON ({type(exc).__name__})") from exc
+
+
+def _meta_from_text(text) -> dict:
+    """Metadata travel as one opaque JSON string, so that the strictly parsed part of a file
+    contains integers only; metadata are provenance and are never read by a checker."""
+    if text is None:
+        return {}
+    if not isinstance(text, str):
+        raise MalformedCertificate("meta must be a string holding JSON text")
+    try:
+        meta = json.loads(text)
+    except ValueError as exc:
+        raise MalformedCertificate("meta is not JSON text") from exc
+    if not isinstance(meta, dict):
+        raise MalformedCertificate("meta must hold a JSON object")
+    return meta
+
+
 def _model_from_json(doc: dict) -> PairModel:
+    if not isinstance(doc, dict) or not isinstance(doc.get("unary"), list) or not isinstance(doc.get("pair"), dict):
+        raise MalformedCertificate("embedded instance: need 'unary' (list) and 'pair' (object)")
+    unary = []
+    for i, row in enumerate(doc["unary"]):
+        if not isinstance(row, list):
+            raise MalformedCertificate("embedded instance: unary rows must be lists")
+        unary.append(np.array([_strict_int(v, f"unary[{i}]") for v in row], dtype=object))
     pair = {}
     for key, table in doc["pair"].items():
-        i, j = (int(s) for s in key.split(","))
-        pair[(i, j)] = np.array(table, dtype=object)
-    return PairModel(unary=[np.array(u, dtype=object) for u in doc["unary"]], pair=pair,
-                     scale_bits=int(doc["scale_bits"]), meta=doc.get("meta", {}))
+        i, j = _strict_pair_key(key, "embedded instance")
+        if not isinstance(table, list) or not all(isinstance(r, list) for r in table):
+            raise MalformedCertificate("embedded instance: pair tables must be lists of lists")
+        arr = np.empty((len(table), len(table[0]) if table else 0), dtype=object)
+        for a, r in enumerate(table):
+            if len(r) != arr.shape[1]:
+                raise MalformedCertificate("embedded instance: ragged pair table")
+            for b, v in enumerate(r):
+                arr[a, b] = _strict_int(v, f"pair[{key}]")
+        pair[(i, j)] = arr
+    try:
+        return PairModel(unary=unary, pair=pair, scale_bits=_strict_int(doc.get("scale_bits"), "scale_bits"),
+                         meta=_meta_from_text(doc.get("meta")))
+    except (ValueError, TypeError) as exc:
+        raise MalformedCertificate(f"embedded instance: {exc}") from exc
 
 
 def _node_to_json(node: dict) -> dict:
@@ -308,23 +380,40 @@ def _node_to_json(node: dict) -> dict:
 
 
 def _node_from_json(doc: dict) -> dict:
+    if not isinstance(doc, dict):
+        raise MalformedCertificate("certificate node must be an object")
     kind = doc.get("node")
     if kind == "leaf":
         m = {}
-        for key, vec in doc.get("m", {}).items():
-            i, j = (int(s) for s in key.split(","))
-            m[(i, j)] = [int(v) for v in vec]
+        messages = doc.get("m", {})
+        if not isinstance(messages, dict):
+            raise MalformedCertificate("leaf: m must be an object")
+        for key, vec in messages.items():
+            if not isinstance(vec, list):
+                raise MalformedCertificate("leaf: a message must be a list")
+            m[_strict_pair_key(key, "leaf message")] = [_strict_int(v, "leaf message") for v in vec]
         return {"node": "leaf", "m": m}
     if kind == "branch":
-        return {"node": "branch", "site": int(doc["site"]),
-                "children": {int(a): _node_from_json(c) for a, c in doc["children"].items()}}
+        children = doc.get("children")
+        if not isinstance(children, dict):
+            raise MalformedCertificate("branch: children must be an object")
+        out = {}
+        for a, c in children.items():
+            if not (isinstance(a, str) and a.isdigit() and str(int(a)) == a):
+                raise MalformedCertificate(f"branch: child key {a!r} is not a canonical natural number")
+            out[int(a)] = _node_from_json(c)
+        return {"node": "branch", "site": _strict_int(doc.get("site"), "branch site"), "children": out}
     if kind == "prunes":
-        node = _node_from_json(doc["rest"])
+        node = _node_from_json(doc.get("rest"))
         if node["node"] == "prune":
             raise MalformedCertificate("a 'prunes' node must not be followed directly by another one")
-        for site, remove, dominator in reversed(doc["steps"]):
-            node = {"node": "prune", "site": int(site), "remove": int(remove), "dominator": int(dominator),
-                    "rest": node}
+        steps = doc.get("steps")
+        if not isinstance(steps, list) or not all(isinstance(t, list) and len(t) == 3 for t in steps):
+            raise MalformedCertificate("prunes: steps must be a list of [site, remove, dominator]")
+        for site, remove, dominator in reversed(steps):
+            node = {"node": "prune", "site": _strict_int(site, "prune site"),
+                    "remove": _strict_int(remove, "prune remove"),
+                    "dominator": _strict_int(dominator, "prune dominator"), "rest": node}
         return node
     raise MalformedCertificate(f"unknown node kind {kind!r}")
 
@@ -349,16 +438,18 @@ def dumps(cert: MinCertificate, include_model: bool = True) -> str:
         "claim": {"lower_bound": int(cert.lower_bound),
                   "witness": None if cert.witness is None else [int(a) for a in cert.witness]},
         "certificate": _node_to_json(cert.root),
-        "meta": cert.meta,
+        "meta": json.dumps(cert.meta, sort_keys=True),
     })
     return json.dumps(doc, separators=(",", ":"))
 
 
 def loads(text: str, model: PairModel | None = None) -> MinCertificate:
-    """Parse a certificate file.  For a detached file the instance must be supplied and must have
-    the checksum recorded in the file; an embedded instance must have its recorded checksum too."""
-    doc = json.loads(text)
-    if doc.get("format") != "structbio-mincert/1":
+    """Parse a certificate file, strictly: duplicate keys, non-integer numbers and wrong types are
+    errors (:class:`MalformedCertificate`), so that a file has exactly one reading.  For a detached
+    file the instance must be supplied and must have the checksum recorded in the file; an embedded
+    instance must have its recorded checksum too."""
+    doc = _strict_load(text)
+    if not isinstance(doc, dict) or doc.get("format") != "structbio-mincert/1":
         raise MalformedCertificate("unknown format")
     if "model" in doc:
         model = _model_from_json(doc["model"])
@@ -366,9 +457,15 @@ def loads(text: str, model: PairModel | None = None) -> MinCertificate:
         raise MalformedCertificate("detached certificate: the instance must be supplied")
     if model_sha256(model) != doc.get("model_sha256"):
         raise MalformedCertificate("the instance does not have the checksum recorded in the certificate")
-    witness = doc["claim"].get("witness")
-    return MinCertificate(model=model, message_bits=int(doc["message_bits"]),
-                          domains=[[int(a) for a in d] for d in doc["domains"]],
-                          lower_bound=int(doc["claim"]["lower_bound"]),
-                          witness=None if witness is None else tuple(int(a) for a in witness),
-                          root=_node_from_json(doc["certificate"]), meta=doc.get("meta", {}))
+    claim = doc.get("claim")
+    domains = doc.get("domains")
+    if not isinstance(claim, dict) or not isinstance(domains, list) or not all(isinstance(d, list) for d in domains):
+        raise MalformedCertificate("need 'claim' (object) and 'domains' (list of lists)")
+    witness = claim.get("witness")
+    if witness is not None and not isinstance(witness, list):
+        raise MalformedCertificate("witness must be a list or null")
+    return MinCertificate(model=model, message_bits=_strict_int(doc.get("message_bits"), "message_bits"),
+                          domains=[[_strict_int(a, "domain") for a in d] for d in domains],
+                          lower_bound=_strict_int(claim.get("lower_bound"), "lower_bound"),
+                          witness=None if witness is None else tuple(_strict_int(a, "witness") for a in witness),
+                          root=_node_from_json(doc.get("certificate")), meta=_meta_from_text(doc.get("meta")))

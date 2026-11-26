@@ -215,3 +215,50 @@ def test_detached_certificate_needs_the_instance_with_the_recorded_checksum(tmp_
     other = small_models()[6]
     with pytest.raises(mincert.MalformedCertificate):
         mincert.loads(text, model=other)                     # wrong instance: checksum mismatch
+
+
+def test_loader_is_strict_so_that_a_file_has_one_reading():
+    """Found by an internal review (2026-11-26): duplicate keys were accepted (last one wins) and
+    non-integers were passed through `int()`; one file could then be read two ways."""
+    from metricchain_sb import mincert
+    model = small_models()[4]
+    cert = certify_gmec(model, eps=Fraction(0))
+    text = mincert.dumps(cert)
+    assert check_min_certificate(mincert.loads(text)).accepted
+    doc = json.loads(text)
+
+    def rejected(mutated_text):
+        with pytest.raises(mincert.MalformedCertificate):
+            mincert.loads(mutated_text)
+        return True
+
+    assert rejected(text[:-1] + ',"message_bits":0}')                         # duplicate key
+    for path, value in [(("claim", "lower_bound"), doc["claim"]["lower_bound"] + 0.5),
+                        (("claim", "lower_bound"), True),
+                        (("claim", "lower_bound"), str(doc["claim"]["lower_bound"])),
+                        (("message_bits",), 12.0),
+                        (("model", "scale_bits"), 1.5)]:
+        bad = json.loads(text)
+        target = bad
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = value
+        assert rejected(json.dumps(bad))
+    bad = json.loads(text)
+    bad["domains"][0][0] = float(bad["domains"][0][0]) + 0.25
+    assert rejected(json.dumps(bad))
+    bad = json.loads(text)
+    bad["model"]["unary"][0][0] = bad["model"]["unary"][0][0] + 0.5            # a table entry that is not an integer
+    assert rejected(json.dumps(bad))
+    assert rejected(text.replace('"format":"structbio-mincert/1"', '"format":"structbio-mincert/1","extra":NaN'))
+
+
+def test_check_result_says_whether_the_claim_covers_every_state_of_every_site():
+    """A certificate over a sub-box is a true statement about that sub-box only; whoever reads an
+    acceptance as 'global minimum' must know which case holds (internal review, 2026-11-26)."""
+    model = small_models()[7]
+    full = check_min_certificate(certify_gmec(model, eps=Fraction(0)))
+    assert full.accepted and full.full_box is True
+    domains = [[0] if k > 1 else [0] for k in model.sizes]
+    part = check_min_certificate(certify_gmec(model, eps=Fraction(0), domains=domains))
+    assert part.accepted and part.full_box is (all(k == 1 for k in model.sizes))

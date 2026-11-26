@@ -8,8 +8,10 @@ floating point, no search.  Every integer handled is bounded in absolute value b
 wrapped), so numpy `int64` arithmetic is exact.
 
 Semantics.  Identical to the theory division's kernel `verify` restricted to leaf / branch / prune
-nodes (`proofs/CertificateAlgebra.lean`; soundness theorem `verify_sound`, **[V]**), with pair
-tables stored in one orientation (`verify_sound_real_symm` covers that reading).  The checker's
+nodes (`proofs/CertificateAlgebra.lean`; soundness theorem `verify_sound`, **[V]**), for the
+`PairInstance` whose table `J i j` is our pair table when `i < j` and zero when `i > j` (the
+kernel's energy and its leaf and prune inequalities use the two orientations only through
+their sum, so storing each pair once is that instance and needs no further theorem).  The checker's
 *implementation* is not formally verified; it is tested against the theory division's reference
 checker and against exhaustive enumeration (`tests/structbio/test_mincert.py`).
 
@@ -37,6 +39,8 @@ class CheckResult:
     lower_bound: Fraction | None = None
     witness_energy: Fraction | None = None
     certified_gap: Fraction | None = None
+    full_box: bool | None = None      # True iff the root box contains every state of every site: only then
+                                      # is an accepted bound a bound on the *global* minimum of the instance
     stats: dict = field(default_factory=dict)
 
 
@@ -132,7 +136,8 @@ def _check(cert: MinCertificate) -> CheckResult:
             stack.append((node["rest"], D2))
 
     unit = 2 ** cert.unit_bits
-    result = CheckResult(True, "accepted", lower_bound=Fraction(L, unit), stats=stats)
+    full_box = all(sorted(d) == list(range(k)) for d, k in zip(cert.domains, model.sizes))
+    result = CheckResult(True, "accepted", lower_bound=Fraction(L, unit), full_box=full_box, stats=stats)
     w = cert.witness
     if w is not None and all(w[i] in cert.domains[i] for i in range(n)):
         result.witness_energy = model.energy(w)
