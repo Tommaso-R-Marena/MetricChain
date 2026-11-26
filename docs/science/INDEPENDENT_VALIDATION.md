@@ -169,8 +169,34 @@ a second hole in its mutation runner: a mutant that *crashes* inside a test was 
 as caught, and one old mutation had been "caught" in this way for eleven checkpoints.
 Our three replications ran that runner as committed, so their counts of caught
 mutations (266 of 267; 341 of 342; 373 of 374) include mutants that may have crashed
-rather than been detected.  The replication at `24a3c27` (§1.6, running when this was
-written) uses the repaired runner.
+rather than been detected.  The replication at `24a3c27` (§1.6) uses the repaired runner.
+
+### 1.6 The theory division's audit at its head `24a3c27` (sixteenth checkpoint) — passes on this machine, with the repaired mutation runner
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive 24a3c27` extracted outside the repository; the build directory of the run at `b2d3e9c` re-used |
+| start / end (UTC) | 2026-11-26 01:50:05 / 02:21:46 (32 min wall clock, on a machine shared with three workstreams) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **65 files, 34 791 lines; `Build completed successfully (8623 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 3655 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 452 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` |
+| mutation tests | **411 mutations: 410 caught, 1 expected pass, 0 not as expected**; 131 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 180 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_24a3c27.log` |
+
+The numbers are those of the theory division's status file at this head (65 files; 3655
+declarations; 411 mutations, 410 caught, one expected pass).  New at this commit and
+therefore re-checked here for the first time outside their machine:
+`proofs/Frontiers/ThirdOrderModel.lean`, `ShareCertificates.lean`, `HilbertBall.lean`
+(present in the built tree; their statements are being read by our workstreams P4 and
+L4, not by this run).  **The mutation runner at this head is the repaired one** — read
+by the coordinator: `experiments/mutation_tests.py` lines 74–79 classify a mutant whose
+test ends with an exception as "NOT AS EXPECTED (the mutant crashed)", and line 8 of its
+header states the rule — so "410 caught" here means detected, not crashed, which the
+counts of §1.1, §1.4, §1.5 could not claim.  *Kind of check:* a re-run of their script on
+a third machine; one function of the runner read.  Not done: reading the 37 mutations
+added since `b2d3e9c`; running the harness in its full (non-quick) mode.
 
 
 ## 2. Reviews

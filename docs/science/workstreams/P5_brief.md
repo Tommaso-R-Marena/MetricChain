@@ -1,7 +1,9 @@
-# Workstream P5 (NOT LAUNCHED — a ready brief) — the compact case: a certified bound that sees the cancellation between self and cross terms
+# Workstream P5 (launched at checkpoint 43, 2026-11-26 02:20 UTC) — the compact case: a certified bound that sees the cancellation between self and cross terms
 
-*Brief written by the coordinator at checkpoint 42 (2026-11-26) for whoever continues.
-It was not launched: four workstreams were running and their reports come first.  Read
+*Brief written by the coordinator at checkpoint 42 (2026-11-26).  It was held back while
+four workstreams were running and launched, unchanged, when the first of them (R10) had
+reported.  If its agent is gone, its notes and draft are in `experiments/science/ws_P5/`
+and `P5_REPORT.md`.  Read
 `COMMON.md` first (pins out of date), then `P3_REPORT.md` in full — this workstream
 starts where P3 stops.*
 

@@ -19,9 +19,11 @@ first; it points to everything else.  The digest for the other two divisions is
    this was written:** workstream P4 (share certificates on P2's instances; review of
    Theorem 11.18a, Propositions 11.18b, 11.18c), workstream L4 (Lean: the two-point
    Bennett–Hoeffding bound; the remainder identity of P3), a follow-up of R9 on their
-   Proposition 11.69b (`workstreams/R9_ADDENDUM.md`), and the replication of their audit
-   at `24a3c27` in a scratch copy (`INDEPENDENT_VALIDATION.md` §1.6 when complete; if the
-   container was lost, re-run as in §8).  On completion of each: read the report, check
+   Proposition 11.69b (`workstreams/R9_ADDENDUM.md`).  **The replication of their audit at
+   `24a3c27` is done: `AUDIT PASSED`, their counts exactly, with the repaired mutation
+   runner** (`INDEPENDENT_VALIDATION.md` §1.6; not yet reported to them — include it in
+   the next message).  **Also running since checkpoint 43: workstream P5** (the compact
+   case, `workstreams/P5_brief.md`; §7 item 2).  On completion of each: read the report, check
    one thing yourself, publish to theory — P4 and R9b as `SCI-REV-0011`/`-0012` or one
    message, L4 as a verification message with checksums as in SCI-MSG-0019).  Before that: theory `b2d3e9c` (their
    fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
@@ -150,7 +152,7 @@ published statements are linked messages, never silent rewrites.
    engineering branch was reviewed and replicated** (SCI-REV-0008, workstream R7,
    checkpoint 33): no wrong number; 254 of 263 published optima certified without a
    solver's search; two findings on the record.  **The theory division's audit passes on
-   our machine** at three of its commits (`INDEPENDENT_VALIDATION.md` §§1.1, 1.4, 1.5).  One displayed claim false as stated (one-line repair), one proof
+   our machine** at four of its commits (`INDEPENDENT_VALIDATION.md` §§1.1, 1.4, 1.5, 1.6 — the last with its repaired mutation runner).  One displayed claim false as stated (one-line repair), one proof
    step missing (supplied), two gaps in a written proof (closed), a proved bracket
    improvable with the section's own tools, and in every section a headline that outruns
    its theorems — for §11.25 materially (two of three exponents).
@@ -317,10 +319,16 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
 ## 7. What to do next, ranked (revised at checkpoint 40)
 
 1. **Done at checkpoint 43: R10** (the theory division's workstream Y; SCI-REV-0010;
-   finding 9d).  What it leaves, in order of value: (i) the physically usable statement —
-   Conjecture R10.3 for ferromagnetic chains *with a field* (the helix–coil chain away
-   from its midpoint): upper side from their Proposition F at second order, lower side
-   from block fields (`OPEN_PROBLEMS.md` I8); (ii) the crossover slope (I7; a vertex
+   finding 9d).  Done by the coordinator right after it: the law at *fixed length* for the
+   Zimm–Bragg chain with any `s` (it is associated, so R10.2 applies) — a closed form for
+   the infinite chain, `S_∞ = (1+s)/√((1−s)²+4σs)`, and exact tables for peptide lengths,
+   where the factor is limited by the length (`11.5` at 20 residues for `σ = 10⁻³`, not `32`)
+   and the second-order regime ends at `0.14 k_BT` per residue (`PHYSICAL_APPLICABILITY.md`
+   §3a; `pi_inference/helix_coil_structure_factor.py`).  What is left, in order of value:
+   (i) Conjecture R10.3 in its proper order of limits (first `n → ∞`) for chains with a
+   field: upper side from their Proposition F at second order — whose site form takes a
+   maximum over the previous letter where the truth has an average, so the block form is
+   needed — lower side from block fields (`OPEN_PROBLEMS.md` I8); (ii) the crossover slope (I7; a vertex
    enumeration for blocks of four and five sites decides it — request R10-E1, or a
    double-description code of our own); (iii) a hidden-Markov reference for the
    tilt-state recursion, which by the period-four argument is necessary for any upper
@@ -334,8 +342,10 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
    nothing* (the certificate sees any model only through the band `m₊ − m₋`; the
    midpoint model, which P3 ran, is optimal; addendum A17 (10), "Limits"); (b) the pair
    form of the penalties at order `m` (the theory division's Theorem 11.18a at `m = 3`;
-   workstream P4 item 4); (c) **group-wise signed tails** — a brief is written and not
-   launched: `workstreams/P5_brief.md`; (d) a stand-alone checker of the certificate
+   workstream P4 item 4); (c) **group-wise signed tails** — **workstream P5, launched at
+   checkpoint 43 and running when this was written** (`workstreams/P5_brief.md`; on
+   completion: read `P5_REPORT.md`, check one thing, publish to theory and engineering);
+   (d) a stand-alone checker of the certificate
    (request P3-E1); (e) a buried, non-homopeptide instance (request P2-E1).
 3. **Benchmark B10 in full** (`BENCHMARK_DESIGN.md`): variational and likelihood fits on
    the real instances; a buried environment (request P2-E1 to engineering).
@@ -364,7 +374,7 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
   likewise `eng_ro`; scripts that read the engineering class tables take their directory
   from `MC_ENG_DATA` (`experiments/science/README.md`).
 * **Replicating the theory division's audit at one of its commits** (done at `5ed4072`,
-  `658b77f`; running at `b2d3e9c` when this was written): outside the repository,
+  `658b77f`, `b2d3e9c`, `24a3c27`): outside the repository,
   `git archive <commit> | tar -x -C <dir>`; `mkdir <dir>/.lake; ln -s <repo>/.lake/packages <dir>/.lake/packages`
   (valid while `lean-toolchain`, `lake-manifest.json`, `lakefile.lean` are unchanged — check
   with `git diff`); optionally copy an earlier `.lake/build` to save the first build;

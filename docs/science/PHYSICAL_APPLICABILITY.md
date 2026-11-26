@@ -423,15 +423,52 @@ removes candidates (a pinned configuration with isolated spins leaks `e^{2K}` ti
 more): the independent-site values of `a` and `h` are **pessimistic**.  The threshold does
 not reverse because it is governed by the cooperative perturbation at every slope.
 
-*Helix–coil chain at its midpoint (Zimm–Bragg weights, `s = 1`; second order in `u`).*
-`S(0) = σ^{−1/2}`: `32` for `σ = 10⁻³`, `100` for `σ = 10⁻⁴`.  For a residual whose
-single-residue effect is below about `σ^{1/2} k_BT` the cost exponents and the threshold
-accuracy (`E ≈ u²S(0)/8` per residue) are `σ^{−1/2}` times those of independent two-state
-residues [P at fixed length and second order; the variance checked over all vertices at
-five residues; the bulk value by the two-state formula, verified by the coordinator from
-the eigenvalues `1 ± σ^{1/2}`].  It is the query-complexity counterpart of addendum
-A14(ii).  Beyond that envelope the response saturates and nothing of the second-order
-statement survives.
+*Helix–coil chains (Zimm–Bragg weights `s`, `σ`; second order in `u`)  [P at fixed length and second order; numbers
+**[M]**, exact transfer matrices checked by enumeration, `experiments/science/pi_inference/helix_coil_structure_factor.py`].*
+The Zimm–Bragg measure is associated (its pair weights have determinant `s(1 − σ) > 0`), so by
+Propositions R10.1–R10.2 the game function of an `n`-residue chain is, to second order
+in the single-residue envelope `u`, `(t(1−t)/2)·u²·Var(N_h)` with `N_h` the number of helical
+residues: `E_n, a_n ≈ u²Var(N_h)/2`, `h_n ≈ u²Var(N_h)/8`.  Relative to independent residues
+with the same one-residue helix probabilities the factor is `S_n = Var(N_h)/Σθ_i(1−θ_i)`;
+for the infinite chain
+
+    S_∞(s, σ) = (1 + s)/√((1 − s)² + 4σs)        (σ^{−1/2} at the midpoint s = 1; 17.5 at s = 1.1 and 4.9 at s = 1.5 for σ = 10⁻³)
+
+(the structure factor at zero wave vector; the closed form checked against the transfer
+matrix at 20 000 residues for five parameter pairs).  **The infinite-chain value is not
+the value for a peptide:** the cooperative length `σ^{−1/2}` (32 residues for `σ = 10⁻³`,
+100 for `10⁻⁴`) exceeds the length of most helical peptides, and the factor is then
+limited by the length.
+
+| `n` (`σ = 10⁻³`) | `s` at the chain's own midpoint (largest `Var(N_h)`) | helix fraction there | `Var(N_h)` | `S_n` | `Var(N_h)/(2n)` (independent residues at `θ = ½`: `0.125`) | `1/sd(N_h)` (`k_BT` per residue) |
+|---|---|---|---|---|---|---|
+| 10 | `1.75` | `0.45` | `16.4` | `6.9` | `0.82` | `0.25` |
+| 20 | `1.24` | `0.43` | `52.1` | `11.5` | `1.30` | `0.14` |
+| 30 | `1.12` | `0.42` | `100` | `15.1` | `1.67` | `0.10` |
+| 50 | `1.05` | `0.42` | `219` | `20.1` | `2.19` | `0.068` |
+| 100 | `1.015` | `0.43` | `575` | `25.8` | `2.88` | `0.042` |
+| 1 000 | `1.001` | `0.49` | `7 665` | `31.1` | `3.83` | `0.011` |
+| ∞ | `1` | `0.5` | — | `31.6` | `3.95` | `0` |
+
+(For `σ = 10⁻⁴`: `S_n = 14.2`, `19.9`, `48.8` at 20, 30, 100 residues, against `100` for the
+infinite chain.  At `s = 1` a short chain is almost all coil — helix fraction `0.07` at 20
+residues for `σ = 10⁻³` — and its variance is small; the table is at each chain's own
+midpoint.)  Reading [H]: for a twenty-residue peptide at its helix–coil midpoint an
+unknown residual with single-residue effect `u` costs about **ten times** what it costs
+for independent two-state residues, in all three second-order quantities, *as long as*
+`u·sd(N_h) ≲ 1`, i.e. `u ≲ 0.14 k_BT` per residue (about `0.08 kcal/mol` at 300 K) — beyond
+that the response saturates (the ensemble is nearly all-or-none: `Var(N_h) = 52` against
+the largest possible `n²/4 = 100`) and nothing of the second-order statement survives;
+at several `k_BT` per residue the other regime of the table above applies.  This is
+the query-complexity counterpart of addendum A14(ii), and of a sensitivity the field
+knows from practice: according to PubMed, Best and Hummer (J. Phys. Chem. B 113 (2009)
+9004–15, [doi:10.1021/jp901540t](https://doi.org/10.1021/jp901540t)) report that force
+fields "differ significantly in their alpha-helical propensities" and that "simple
+backbone energy corrections" reproduce the helix fraction of short peptides [abstract
+only; the size of their corrections is not in the abstract and is not quoted here].
+Not established: that the residual of a real force field, as a function of helix–coil
+states, has a single-residue envelope of this size — §2 and §2a measure envelopes per
+torsion and per rotamer on a fixed backbone.
 
 *Where the measured residuals sit.*  Same-lineage torsion refits (`βc ≈ 0.5–3` per
 torsion; §2) straddle the crossover; charge-model changes and the solvent term
