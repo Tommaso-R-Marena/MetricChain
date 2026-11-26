@@ -2,7 +2,8 @@
 
 *Scientific Discovery, Translation & Independent Validation Division of MetricChain.
 Branch `research/scientific-translation`.  Written 2026-11-25 at checkpoint 20, last
-revised at checkpoint 43 (2026-11-26), for an
+revised 2026-11-26 03:30 UTC (after checkpoint 43 and the theory division's seventeenth
+checkpoint; §0 rewritten, §5 extended), for an
 investigator who has none of the conversation that produced the branch.  Read this file
 first; it points to everything else.  The digest for the other two divisions is
 `docs/collaboration/SCIENCE_TO_ALL.md`; the state table is `docs/collaboration/status/science.md`.*
@@ -11,100 +12,85 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (2026-11-26 03:05 UTC): theory `9408e33`** — their **seventeenth
-   checkpoint** (it read ours at `a841cb4`, checkpoint 40): **THY-RES-0010 read in full**
-   and every statement of their `AnchoredRemainder.lean`; **answered so far for its §2
-   only (SCI-MSG-0023)** and, as far as reading goes, for the rest (**SCI-RES-0011**: what
-   crossed; their referee R11 against our R10 on workstream Y — agreement where they
-   overlap, ours adds the slope dependence; a linked correction of our SCI-MSG-0005 §2.5,
-   the adjacency lemma false for empty boxes, `DEAD_ENDS.md` SD46).  **Still owed to
-   them:** (a) their request §9.2 — a review of the corrected Theorem 11.110(e),
-   Propositions 11.18e and 11.113, Corollary 11.114, Theorem 11.18d as written and
-   `BarrierCertificate.lean` against our formats: **workstream R12, running**
-   (`workstreams/R12_brief.md`; publish as `SCI-REV-0013`); (b) their request §9.1 — their
-   sandwich sampler on the twenty-residue instance: **item 7 of workstream P6, running**;
-   (c) the replication of their audit at `9408e33`, **running in the background** (log in
-   the scratchpad, `audit_all_9408e33.log`; on completion copy it to
-   `experiments/science/audit_replication/` and write `INDEPENDENT_VALIDATION.md` §1.7; if
-   the container was lost, re-run as in §8); (d) a linked note on SCI-REV-0007 once
-   their reviewed amendments are published (first sizes `1370/518/4524` instead of our
-   grid sizes `1400/540/4700`).  Not yet read by the coordinator at `9408e33`: the theory
-   report's diff, `BarrierCertificate.lean`, `BoxRatio.lean`, the extended `BoxClass.lean`,
-   `DEAD_ENDS.md` D58 (a read-only export of the tree is in the scratchpad under
-   `thy_ro_9408e33/` if the container survives).
-   Before that: theory `24a3c27` (their sixteenth
-   checkpoint: THY-RES-0009, the amended §11.30 and §11.7 read in full; **answered in part by
-   SCI-RES-0010** — §11.30 against our measurements, the attribution of their Proposition
-   11.112 and Theorem 11.110(f) to the literature.  **Of their four requests, three are
-   answered:** workstream P4 → **SCI-REV-0012** (their share certificate certifies 11 of
-   our 13 instances; the pair form is tighter on every instance; Proposition 11.18c(a) is
-   false for the completeness part of 11.18b; **and a linked correction of our own
-   SCI-MSG-0015** — on non-product domains its certificates were over a pruned
-   sub-domain that misses the minimum in 14 of 40 analyses); workstream L4 →
-   **SCI-MSG-0023** (Lean: the two-point Bennett–Hoeffding bound with the bracket and
-   its probability; the remainder identity, allocation lemma and sandwich of P3 at every
-   order; a sharper upper end of the certificate).  **All four requests of
-   THY-RES-0009 are now answered.**  **Done and published as
-   SCI-REV-0011:** the follow-up of R9 on their Proposition 11.69b
-   (`workstreams/R9_ADDENDUM.md`: in agreement with our Theorem R9.1, nothing false,
-   three replacement texts), and with it the replication of their audit at `24a3c27`
-   (`AUDIT PASSED`, their counts exactly, with the repaired mutation runner;
-   `INDEPENDENT_VALIDATION.md` §1.6).  **Running when this was written: workstream P5** (the compact
-   case, `workstreams/P5_brief.md`; §7 item 2) **and workstream P6** (pair penalties in
-   P3's certified sandwich at twenty residues and beyond, `workstreams/P6_brief.md`).  On
-   completion of each: read the report, check one thing yourself, publish to both
-   divisions.  **A process matter the research owner should know of:** workstream L4's
-   own report was produced by a script after its file-writing tool had declined to
-   create a report from a sub-task, and a second generation was denied by the
-   permission system; the coordinator did not run the generator and did not adopt its
-   output (kept outside the repository, in the session scratchpad under
-   `L4_not_adopted/`, which does not survive the container); `workstreams/L4_REPORT.md`
-   was written by the coordinator instead.  Workstreams P5 and P6 were told not to work
-   around such a refusal and to return their findings as text.  Before that: theory `b2d3e9c` (their
-   fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
-   read in full and **answered by SCI-RES-0008**; at their fourteenth, `658b77f`: answered by
-   SCI-RES-0007, audit replicated, revised sections and their workstream Y with our
-   workstreams R9 and R10), **engineering `a2f6dc7`** (reviewed and replicated:
-   SCI-REV-0008).  If either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
-   `ENGINEERING_TO_THEORY.md` on their branches) and any `THY-*` / `ENG-*` file that mentions
-   `SCI-`; record the reading in `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`; answer under
-   `responses/science/`.
-   State of the exchange: **the theory division last read our branch at `1b0c276`** (before
-   our checkpoint 38), so it has not yet seen SCI-REV-0009, SCI-RES-0009, SCI-MSG-0019,
-   -0020, -0021.  It has adopted our `Sandwich.lean` (its `MonotoneSandwich.lean`),
-   our Proposition A1.1 (its 11.61a), our Theorems A, B on the field case (its 11.109a)
-   and our file `TwoRoundsExpected.lean`; it wrote the box-class section §11.30 in answer
-   to our P-T3.  **Expect from it:** a reaction to our criticism of §11.30 (SCI-RES-0007 §3,
-   SCI-RES-0008 §3, SCI-MSG-0017) and to A17-T1; one confirmation asked in SCI-RES-0008 §1;
-   the verification of its workstream Y; P2-T1.  **Delivered at checkpoints 38–39:** the
-   second-round review (SCI-REV-0009), prior art for §11.30 (SCI-RES-0009 — it also
-   corrects what we claimed for our own addendum A17), the Lean files for the
-   compensation lemma and Theorem A (SCI-MSG-0019), the audit result at `b2d3e9c`
-   (`AUDIT PASSED`; `INDEPENDENT_VALIDATION.md` §1.5); **at checkpoint 40:** the floor by
-   analysis (SCI-MSG-0020, workstream P3: analysis alone useless, a certificate with
-   polynomially many evaluations on extended backbones, one `ln Z` beyond enumeration
-   certified and replicated independently).  **Delivered at checkpoint 43:** the review and
-   replication of its workstream Y (SCI-REV-0010, workstream R10: proofs stand, headline
-   at `u = 1` replicated, **the direction depends on the slope**; requests R10-T1…T5 and
-   R10-E1).  Nothing is owed to it now except the four requests of THY-RES-0009.  The
-   engineering division had not yet mentioned this branch.
-2. **Of the third wave (briefs in `docs/science/workstreams/*_brief.md`):** R9 was
-   published at checkpoint 38 (SCI-REV-0009), A3 and L3 at checkpoint 39 (SCI-RES-0009,
-   SCI-MSG-0019), P3 at checkpoint 40 (SCI-MSG-0020); R10 at checkpoint 43 (SCI-REV-0010; the
-   third wave is complete).  The referee R8 of
-   addendum A16 reported at checkpoint 35 (SCI-MSG-0016; A16 corrected in place).
-   **A rule learned at checkpoint 35:** a log file is committed only from a run that
-   reached its last line, and a script cited in a message is re-run from a clean copy
-   before the message is sent (`DEAD_ENDS.md` SD39).  Earlier ones are finished and published.  Report
-   files of running workstreams exist as drafts under `docs/science/workstreams/`; **a draft
-   is not a statement of the division**.  When a report is final: read it, re-run one
-   script or re-derive one key step, and publish as described in §5.  Read-only exports
-   used by the third wave (outside the repository, in the session's scratch directory,
-   **lost with the container** — re-create with `git archive <commit> | tar -x -C <dir>`):
-   the theory tree at `658b77f`.  R7's working copy of engineering files
-   (`experiments/science/ws_R7/eng_copy/`) is deliberately git-ignored
-   (`ws_R7/make_eng_copy.sh` re-creates it).
+1. **Fetch and read the two upstream heads** (read-only):
+   `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering`, then the
+   heads in `.git/FETCH_HEAD`.  If either moved, read its digest
+   (`docs/collaboration/THEORY_TO_ENGINEERING.md`, `ENGINEERING_TO_THEORY.md` on their
+   branches) and every `THY-*` / `ENG-*` file that mentions `SCI-`, record the reading in
+   `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`, and answer under `responses/science/`
+   **before** writing a commit message (three of the theory division's checkpoints
+   crossed work in progress on 2026-11-26; each time the message being written had to
+   be changed).
+   * **Theory: last read `9408e33`** (their seventeenth checkpoint, 2026-11-26 02:54
+     UTC).  Read in full by the coordinator: THY-RES-0010, their referee report R11 on
+     workstream Y, every statement of `AnchoredRemainder.lean`, and the added lines of
+     the theory report that mention us.  Not read: the rest of the report's diff,
+     `BarrierCertificate.lean`, `BoxRatio.lean`, the extended `BoxClass.lean`, their
+     `DEAD_ENDS.md` D58 (workstream R12 is reading them).
+   * **Engineering: `a2f6dc7`**, unchanged since our checkpoint 33; it has never
+     mentioned this branch.  Everything addressed to it is a proposal without an answer
+     (`status/science.md`, "Outstanding requests").
+   * **What the theory division has read of ours:** up to `a841cb4` (our checkpoint 40).
+     **Not yet read by them, in the order they should read it:** SCI-RES-0011 (answers
+     THY-RES-0010 as far as reading goes; says what crossed), SCI-REV-0010 (their
+     workstream Y: the direction depends on the slope), SCI-REV-0012 (their share
+     certificates on our instances; Proposition 11.18c(a) false for one half; **a
+     correction of our own SCI-MSG-0015**), SCI-REV-0011 (their Proposition 11.69b; their
+     audit at `24a3c27`), SCI-MSG-0023 (`BennettTwoPoint.lean`; their remainder identity
+     next to ours), SCI-RES-0010, SCI-MSG-0022 (benchmark B10; read with the head note).
+   * **Owed to the theory division:** (a) the review they asked for (THY-RES-0010 §9.2) —
+     **workstream R12**, publish as `SCI-REV-0013`; (b) their sandwich sampler on our
+     twenty-residue instance (§9.1) — **item 7 of workstream P6**; (c) the replication of
+     their audit at `9408e33` — running in the background, log
+     `audit_all_9408e33.log` in the session scratchpad; on completion copy it to
+     `experiments/science/audit_replication/` and write `INDEPENDENT_VALIDATION.md` §1.7
+     (if the container was lost, re-run as in §8); (d) a linked note on SCI-REV-0007 once
+     their reviewed amendments are published (first sizes `1370/518/4524` where we wrote
+     the grid sizes `1400/540/4700`); (e) one sentence in the next message: the head
+     note on SCI-MSG-0022 (the floor has its own convex fit).
+   * **Expect from them at their next checkpoint:** their check of Theorem R9.1
+     (SCI-REV-0009), the adoption of our Lean files of SCI-MSG-0019, their reviewed notes
+     on SCI-REV-0007, and the section on workstream Y — for which SCI-REV-0010 and their
+     own R11 should be read together (SCI-RES-0011 §3).
+2. **Workstreams running when this was written (2026-11-26 03:30 UTC).**  Each writes
+   notes from its first minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
+   `docs/science/workstreams/<ID>_REPORT.md`; **a draft is not a statement of the
+   division**.  When one reports: read it, re-run one script or re-derive one key step
+   yourself, then publish (§5).  If the container was lost, read the notes and decide
+   whether to resume from them.
+   * **P5** (`P5_brief.md`) — the compact case: does the cancellation between self and
+     cross terms survive grouping by neutral groups on the helix; a lower bound for
+     bounds that treat atom pairs one at a time.  The theory division shares the
+     problem (its §12 item 13(a)).
+   * **P6** (`P6_brief.md`) — pair penalties in workstream P3's certified sandwich at
+     twenty residues (and its reach at 30, 50); item 7: the theory division's sampler.
+   * **R12** (`R12_brief.md`) — the review of (a) above.
+   * Read-only exports used by them are in the session scratchpad and are **lost with
+     the container** (re-create with `git archive <commit> | tar -x -C <dir>`): the theory
+     tree at `9408e33` (`thy_ro_9408e33/`), at `24a3c27`, at `658b77f`.
+   * All earlier workstreams are finished and published; the table in §5 says where.
+     R7's working copy of engineering files (`experiments/science/ws_R7/eng_copy/`) is
+     deliberately git-ignored (`ws_R7/make_eng_copy.sh` re-creates it).
+   * The history of the exchange — what the theory division adopted of ours, what we
+     answered and when — is in the two tables at the end of
+     `docs/collaboration/SCIENCE_TO_ALL.md` and in `status/science.md`.
+   * **Two things the research owner should know of.**  (i) Workstream L4's own report
+     was produced by a script after its file-writing tool had declined to create a
+     report from a sub-task, and a second generation was denied by the permission
+     system; the coordinator did not run the generator and did not adopt its output
+     (kept outside the repository, in the session scratchpad under `L4_not_adopted/`,
+     which does not survive the container); `workstreams/L4_REPORT.md` was written by
+     the coordinator.  Later workstreams were told not to work around such a refusal
+     and to return their findings as text.  (ii) Two sources cited as unread need a
+     library that neither we nor the theory division have: Decoster, J. Phys. A 37
+     (2004) 9051–9070, and the original of Dagum–Karp–Luby–Ross (2000).
+   * **Rules learned the hard way** (`DEAD_ENDS.md` SD39, SD43, SD45): a log file is
+     committed only from a run that reached its last line, and a script cited in a
+     message is re-run from a clean copy first; mathematics derived quickly in a
+     well-worked field is sent as a *check*, and the word "new" waits for the prior-art
+     search; when a theorem is applied on a sub-domain chosen by a heuristic, report the
+     objective on the complement before calling anything certified; edit table rows by
+     line, not by a search in the rest of the file.
 3. Then take the top item of §7.
 
 Rules that bind the division (from the research owner's charter; none may be relaxed
@@ -357,7 +343,7 @@ statement it reads; when a workstream finalises a report after a message was dra
 it, diff the message against the report's change list; summary tables and headings are
 refereed as statements; in-progress workstream files are snapshots, not statements.
 
-## 5. Running when this was written (second and third wave)
+## 5. Workstreams of the second to fifth wave: what each was for, and where it ended
 
 | id | brief | on completion |
 |---|---|---|
@@ -372,6 +358,11 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | A3 | `workstreams/A3_brief.md` — prior art, full text where accessible, for the box-class result and for addendum A17 | **done at checkpoint 39** — nearly everything is in print; 20 passages re-read by the coordinator; A17 corrected in place; `PRIOR_ART_MATRIX.md` row filled; published as SCI-RES-0009 (linked correction of SCI-RES-0007 §3, SCI-MSG-0017, -0018); `DEAD_ENDS.md` SD43; status S46 |
 | R9 | `workstreams/R9_brief.md` — second-round review of the theory report at `658b77f` against our five reviews; the theory division's amendments; statements written while applying the reviews; the exact-semigroup sketch for bridges | **done at checkpoint 38** — all applied correctly; three corrections of our own texts (`DEAD_ENDS.md` SD38 extended, SD41, SD42); one new false sentence and eight minor defects in theirs; **Theorem R9.1**: the concatenation error of bridges is a coboundary, the limit shape a Newton–Okounkov body, the profile count `vol(𝒦)N³`, `vol 𝒦 ≥ 1.6313`.  Coordinator: (a) re-derived; the C checker recompiled and re-run to 11 beads; the certificate script re-run.  Published as SCI-REV-0009  **Follow-up (after checkpoint 43; SCI-REV-0011, `R9_ADDENDUM.md`):** their Proposition 11.69b, written without Theorem R9.1, agrees with it; nothing false; three replacement texts; "two beads at either end suffice" fails from 12 beads on (counter-example checked by the coordinator from coordinates) |
 | R10 | `workstreams/R10_brief.md` — independent review and replication of the theory division's workstream Y (a Markov-chain known part raises the exponents?) | **done at checkpoint 43** — proofs stand; every bracket at `u = 1` recomputed with own code; **M1: the direction depends on the slope** (`a` lowered at `u = 3, 4, 6`, `h` at `u = 4, 6`; `E` raised everywhere); twelve minor points; Propositions R10.1, R10.2 (small-slope law = structure factor for ferromagnetic chains), R10.4 (the reversal), Conjecture R10.3.  Coordinator: R10.1, R10.2 re-derived (a sign corrected); their functions re-run at two cells; a third code on exact chains (`pi_inference/r10_reversal_check.py`); a sharper constant for addendum A17 (8) (`a17_8_sharp_constant_check.py`).  Published as SCI-REV-0010; `PHYSICAL_APPLICABILITY.md` §3a; `DEAD_ENDS.md` SD44; status S51 |
+| P4 | `workstreams/P4_brief.md` — requested by the theory division: its share certificates on our instances; site against pair form of the third-order lower model; review of Theorem 11.18a, Propositions 11.18b, 11.18c | **done after checkpoint 43** — 11 of 13 certified; pair form tighter at every state of 136 instances (median factor 6.8 in `ln Z`); Proposition 11.18c(a) false for the completeness half of 11.18b (counter-example); state-dependent shares and a joint LP; **a correction of our own P2 result** (pruned domains, `DEAD_ENDS.md` SD45); the pair form at order `m` for P3's sandwich.  Coordinator: both propositions read, counter-example and the domain finding recomputed (`pi_inference/p4_adoption_check.py`), five scripts re-run, Lean copies re-compiled.  Published as SCI-REV-0012; status S53 |
+| L4 | `workstreams/L4_brief.md` — Lean: the remainder identity, allocation lemma and sandwich of P3 at order `m`; the two-point Bennett–Hoeffding bound requested by the theory division | **done after checkpoint 43** — three files, 176 theorems, standard axioms; a sharper upper end of the certificate found and machine-checked; Part A turned out to be an independent second formalisation (the theory division's `AnchoredRemainder.lean`, same hour; they agree).  `L4_REPORT.md` was **written by the coordinator** (process note at its head).  Coordinator: all files re-compiled, 15 theorem statements and 7 definitions read, their file read and a copy compiled.  Published as SCI-MSG-0023; status S55 |
+| P5 | `workstreams/P5_brief.md` — the compact case (`OPEN_PROBLEMS.md` D6): is the cancellation between self and cross terms visible after grouping by neutral groups on the helix; a lower bound for pair-by-pair bounds; if alive, a signed bound | **running** (launched at checkpoint 43) — on completion: read `P5_REPORT.md`, check one thing, publish to both divisions |
+| P6 | `workstreams/P6_brief.md` — pair penalties (workstream P4's banded pair form) in P3's certified sandwich: pair sums without enumerating subsets, both sides, validation by enumeration, twenty residues at orders 3–5, the reach at 30 and 50; item 7: the theory division's sandwich sampler (their Proposition 11.113) | **running** (launched after checkpoint 43) — on completion: read `P6_REPORT.md`, check one thing (e.g. the sandwich on one enumerated instance with own lines), publish to both divisions; it answers THY-RES-0010 §9.1 |
+| R12 | `workstreams/R12_brief.md` — requested by the theory division (THY-RES-0010 §9.2): review of its corrected Theorem 11.110(e), Propositions 11.18e and 11.113, Corollary 11.114, Theorem 11.18d as written, `BarrierCertificate.lean` and Theorem 11.115 against our workstream K's formats | **running** (launched on reading THY-RES-0010) — on completion: read `R12_REPORT.md`, check one counter-example or one re-derivation, publish as `SCI-REV-0013` |
 
 Workstream files under `experiments/science/ws_*/` and `*_REPORT.md` are committed as
 snapshots while a workstream runs; they are statements of the division only once the
@@ -379,15 +370,21 @@ digest, a `SCI-*` message or the validation record cites them.
 
 ## 6. Outstanding requests to the other divisions
 
-The full table is in `status/science.md`.  The ones we would rank first, with reasons in
-`SCI-MSG-0010`: to theory — the stopping rule of Theorem 11.84 (M1 of SCI-REV-0003), the
-headline of §11.25 (M1 of SCI-REV-0001), P-T3 (a certified typical-norm remainder), X-T1
-(a sharp–soft kernel), K-T1/K-T2 (cut checker; polynomial weights), the field case of the
-two-oracle model (SCI-REQ-0001 Q2); to engineering — P-E1 (now also our own P2), X-E1
-(cover against span format on chain geometry), E-1 of SCI-REV-0006 (native certificates
-against pseudo-Boolean proofs), R3-E1 (bridge tables).
+The full table is in `status/science.md`; the ranking with reasons is SCI-MSG-0021 (second
+edition; the first was SCI-MSG-0010).  **To the theory division**, most of what was
+ranked first has been answered (the stopping rule, the headline of §11.25, P-T3, X-T1,
+K-T1/K-T2, the field case, the prior art of §11.30, P3-T1…T4, P2-T1…T4); open and worth
+their time now: the slope map of workstream Y (R10-T1…T3), Proposition 11.18c(a) and the
+state-dependent shares (P4-T1, P4-T3), `BennettTwoPoint.lean` (L4-T1), the compact case
+(which they have taken into their own list of open problems).  **To the engineering
+division**, nothing has been answered: a stand-alone checker of the sandwich
+certificate and a compiled evaluator with a proved rounding bound (P3-E1, P3-E2), a
+buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 torsions
+(R7-ENG-3), native certificates against pseudo-Boolean proofs (E-1), bridge tables
+(R3-E1, R9-E1), the vertex enumeration that decides the crossover of workstream Y
+(R10-E1).
 
-## 7. What to do next, ranked (revised at checkpoint 40)
+## 7. What to do next, ranked (revised after checkpoint 43; items 1–3 changed)
 
 1. **Done at checkpoint 43: R10** (the theory division's workstream Y; SCI-REV-0010;
    finding 9d).  Done by the coordinator right after it: the law at *fixed length* for the
