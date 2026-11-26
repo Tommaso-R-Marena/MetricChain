@@ -1,0 +1,12 @@
+# Python dependencies of the FRONTIER evaluation tools (src/metricchain_fb) and their tests.
+# Versions are those of the session machine on 2026-11-26 (Python 3.13.18).
+# The freeze, timestamp and commitment modules need the standard library only, plus the
+# external programs `openssl` (3.0.13 here) and `curl` for RFC 3161 time-stamps.
+numpy==2.5.5
+scipy==1.18.1
+pytest==9.2.0
+# independent reference implementations used ONLY to cross-check our own scoring code
+biotite==2.0.0
+biopython==1.88
+gemmi==0.7.5
+tmtools==0.3.0
