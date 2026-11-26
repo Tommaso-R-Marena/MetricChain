@@ -1,0 +1,159 @@
+# A computable localisation criterion for a product reference tilted by non-negative tables
+
+Working paper of the complexity division, 2026-11-26.  Written in answer to THY-MSG-0017 §5 item 3 (theory
+division: "a computable criterion (Kotecký–Preiss type or algorithmic, via zero-freeness) for the hypergraph
+of penalty tables"), THY-RES-0016 §5 (iv) ("a computable *threshold* — a bound that is tight up to the
+transition") and SCI-RES-0027 Q-CX3 / SCI-RES-0031 §1 (science division: the transition of a floor is governed
+by an extremal ratio).  Register: `THEOREMS.md` CX-T21, CX-T22.  **Unreviewed.**  Labels: [P] paper proof, [N]
+numerical check against exact enumeration on toy models, [K] known, cited.
+
+Nothing here is new mathematics: these are the standard inequalities for a gas of polymers with
+non-negative activities, and a project-selection (max-flow) computation, applied to the object the two
+divisions asked about.  What may be useful is which bound to compute and where it stops working.
+
+## 1. Setting
+
+Sites `1,…,n`; each site has an *anchor* state and finitely many *off* states.  The reference `P_0` is a
+**product** measure; `q_i = P_0(site i off)`.  Tables `γ_U ≥ 0` (`U` a set of sites) with `γ_U(x_U) = 0` unless
+every site of `U` is off; `G = Σ_U γ_U`.  The quantity of interest is
+
+```
+gain(λ) = ln ⟨ e^{λ G} ⟩_0 .
+```
+
+(In the notation of THY-RES-0016 §5: `ln⟨e^{βΣγ_U}⟩` with all tables multiplied by `λ`.)  Two tables are
+*adjacent* if they share a site; a set `Γ` of tables is *connected* if it is connected under adjacency;
+`supp Γ` is the union of its tables.  For a set `S` of sites, `q(S) = Π_{i∈S} q_i` and
+`γ^max(S) = Σ_{U ⊆ S} max γ_U`.  The *site graph* joins two sites that lie in a common table; `Δ` is its
+maximum degree and `k_min` the smallest size of a table.
+
+## 2. A bracket that is first-order exact and stays sharp up to the transition
+
+**Theorem 1 [P].**  Let `w_λ(Γ) = ⟨ Π_{U∈Γ} (e^{λγ_U} − 1) ⟩_0 ≥ 0` and `W(λ) = Σ_{Γ connected} w_λ(Γ)`.  Then
+
+```
+max( λ⟨G⟩_0 , ln(1 + W(λ)) )   ≤   gain(λ)   ≤   W(λ) .
+```
+
+Both bounds remain valid if the sum is restricted in the lower bound to any family of connected sets, and
+in the upper bound if the omitted sets are bounded as in Theorem 2.
+
+*Proof.*  `e^{λG} = Π_U (1 + f_U)` with `f_U = e^{λγ_U} − 1 ≥ 0`, so `⟨e^{λG}⟩_0 = Σ_𝒮 ⟨Π_{U∈𝒮} f_U⟩_0` over sets
+`𝒮` of tables.  The connected components of `𝒮` have disjoint supports and `P_0` is a product, so the
+expectation factorises: `⟨e^{λG}⟩_0 = Σ Π_c w_λ(Γ_c)` over families of pairwise site-disjoint connected sets.
+Keeping the empty family and the families of one set gives `≥ 1 + W`; dropping the disjointness gives
+`≤ Π_Γ (1 + w_λ(Γ)) ≤ e^W`.  `gain ≥ λ⟨G⟩_0` is Jensen's inequality.  ∎
+
+The first-order term of `W` is `λ⟨G⟩_0` (single tables), so the bracket has the right slope at `λ = 0`, and
+`W − ln(1+W) ≤ W²/2`: **as long as `W(λ)` is small the bracket is tight**, whatever the size of the tables.
+On toy models (§5) `W` agrees with the exact gain to three or four digits up to the extremal ratio `λ_0`
+of §3, where the first-order number is wrong by a factor of thousands and the Hölder–Finner bound of
+THY-RES-0016 §5 (iii) by a factor of hundreds; beyond the transition `W` is useless (it grows like the
+exponential of the gain) and the other bounds take over.
+
+**Theorem 2 (an explicit Kotecký–Preiss-type criterion) [P; K for the count of connected sets].**
+Let `λ_0 = min_S ( Σ_{i∈S} ln(1/q_i) ) / γ^max(S)` over sets `S` with `γ^max(S) > 0`, `q_max = max_i q_i`, and
+`ε(λ) = eΔ · q_max^{1 − λ/λ_0}`.  For every `s ≥ 0`,
+
+```
+Σ_{Γ connected, |supp Γ| > s} w_λ(Γ)   ≤   Σ_{S connected, |S| > s} q(S) e^{λγ^max(S)}   ≤   n · ε^{s'} / ( eΔ · s' · (1 − ε) )
+```
+
+whenever `ε(λ) < 1`, with `s' = max(s + 1, k_min)`.  In particular, for
+
+```
+λ  <  λ* = λ_0 · ( 1 − ln(eΔ) / ln(1/q_max) )
+```
+
+`gain(λ) ≤ W(λ) ≤ n ε^{k_min} / (eΔ k_min (1 − ε))`, and the sum of `w_λ(Γ)` over the connected sets with
+support of size at most `s` approximates `W(λ)` with an error that decreases geometrically in `s`.
+
+*Proof.*  `w_λ(Γ) ≤ q(supp Γ)·Π_{U∈Γ}(e^{λ max γ_U} − 1)`, because the product vanishes unless all sites of
+`supp Γ` are off.  Summing over the `Γ` with a given support `S`:
+`Σ Π_{U∈Γ}(e^{λ max γ_U} − 1) ≤ Π_{U ⊆ S} e^{λ max γ_U} = e^{λγ^max(S)}`.  By the definition of `λ_0`,
+`λγ^max(S) ≤ (λ/λ_0) Σ_{i∈S} ln(1/q_i)`, so `q(S) e^{λγ^max(S)} ≤ Π_{i∈S} q_i^{1−λ/λ_0} ≤ q_max^{(1−λ/λ_0)|S|}`.  A
+graph of maximum degree `Δ` has at most `(eΔ)^{k−1}` connected vertex sets of size `k` containing a given
+vertex [K: a standard count], each set being counted `k` times when the vertex varies; supports have at
+least `k_min` sites.  Sum the geometric series.  ∎
+
+So **the threshold of the criterion is the zero-temperature threshold `λ_0` reduced by an entropy factor**
+`1 − ln(eΔ)/ln(1/q_max)`: it is tight up to the transition when a displaced site is expensive
+(`ln(1/q) ≫ ln Δ`) — the regime of the science division's instances, where a displaced residue costs eight
+to nine `kT` — and it is void when off states are common (in the toy models with `q ≈ 0.3` it says nothing,
+although `W` itself is still excellent there).
+
+## 3. The threshold is a densest-sub-hypergraph problem
+
+**Proposition 3 [P; K for project selection].**  `λ_0` is computable in polynomial time for an arbitrary
+hypergraph of tables: for a given `λ`, `max_S ( λγ^max(S) − Σ_{i∈S} ln(1/q_i) )` is a *project-selection*
+(maximum-weight closure) problem — each table is a project of profit `λ·max γ_U` that requires all its sites,
+each site costs `ln(1/q_i)` — solved by one minimum cut in the network source → tables → their sites → sink;
+`λ_0` is the largest `λ` for which the maximum is `0` (bisection or Dinkelbach's iteration).  The minimum cut
+at `λ_0` also distributes every table maximum over its sites with loads `λ_0 c_i ≤ ln(1/q_i)`.
+
+**Proposition 4 (the other side) [P].**  For every state `x`, `gain(λ) ≥ λG(x) + ln P_0(x)`.  With
+`λ_1 = min_x ln(1/P_0(x)) / G(x)` and `x*` a minimiser, `gain(λ) ≥ (λ/λ_1 − 1)·ln(1/P_0(x*))` for `λ > λ_1`.
+Always `λ_0 ≤ λ_1`; they differ because `λ_0` uses the table maxima and the total off-probabilities, and
+ignores the factors `1 − q_j` of the sites that stay at the anchor.
+
+So the transition is located between `λ* ≤ λ_0` (below which the gain is certified to be `≤ W`, small) and
+`λ_1` (above which the gain is at least a multiple of the cost of the extremal state): the science
+division's observation that "`λ_c` is, to first approximation, the least ratio (cost of a state)/(its
+penalty) over states — an extremal quantity, not a mean", as a two-sided statement.
+
+**Complexity [P, K].**  (i) `λ_0` (binary relaxation: one off state per site, tables at their maxima):
+polynomial for every hypergraph, by Proposition 3.  (ii) `λ_1` with tables that depend on the off states:
+NP-hard on general hypergraphs already for pair tables and two off states per site (with `γ_ij = 1` when the
+two off states differ, deciding whether `max_x (λG(x) + ln P_0(x)) > 0` for large `λ` contains MAX-CUT);
+polynomial on a band by dynamic programming over the window, with Dinkelbach's iteration for the ratio.
+(iii) Exact evaluation of `gain(λ)` in the binary relaxation with pair tables is the partition function of
+a ferromagnetic Ising model with external fields; from memory, not checked at the sources [K?]: it is
+#P-hard exactly, has a fully polynomial randomised approximation scheme when all effective fields have
+one sign (Jerrum–Sinclair 1993) — here: when `λ Σ_j max γ_ij ≤ 2 ln((1−q_i)/q_i)` at every site, or the
+reverse at every site — and is as hard as #BIS to approximate with fields of mixed signs
+(Goldberg–Jerrum 2007); truncated cluster expansions give deterministic approximation algorithms under a
+Kotecký–Preiss condition (Helmuth–Perkins–Regts 2019).  (iv) Below `λ*`, Theorem 2 gives a certified
+bracket of prescribed width from the polymers with small support — for bounded `Δ` and table size,
+polynomially many terms for a fixed support size.
+
+## 4. Limits
+
+* **Product reference only**, like the Finner bound.  For a band (Markov) reference the factorisation over
+  site-disjoint polymers fails; one can apply the result to a product-reduced floor (your comparison
+  principle, THY-RES-0016 §5 (ii)), or treat the base interactions as further tables of both signs, for
+  which only the absolute-value form of the Kotecký–Preiss criterion is available — not worked out here.
+* `W(λ)` has exponentially many terms in general; on a band it costs as much as the floor itself, so its
+  use is where no transfer matrix exists, or truncated with the tail bound of Theorem 2.
+* The explicit criterion is void when `q_max ≥ 1/(eΔ)`.
+* Not tested on the science division's instances (their tables live on their branch; their reference is a
+  band model).  Tested only on the toy models of §5.
+
+## 5. Numerical check [N] (`experiments/complexity/penalty_threshold/price_bound.py`)
+
+Eight sites (six in one case), three states, product reference, random tables on pairs and/or triples within
+a window of three; exact gain by enumeration of all states; `λ_0` by max-flow and by brute force over site
+sets (equal in all cases); `λ_1` by brute force.  Every inequality of Theorems 1, 2 and Propositions 3, 4 is
+asserted for ten values of `λ` in six cases and two seeds (logs `toy_run_seed3.log`, `toy_run_seed7.log`).
+A low-temperature case (`q_i` between 0.002 and 0.01, triple tables, `λ_1 = 1.15 λ_0`):
+
+| `λ/λ_0` | exact gain | first order | `ln(1+W)` | `W` | Finner, `p_U = d` | explicit bound (Thm 2) |
+|---|---|---|---|---|---|---|
+| 0.10 | 9.139e-07 | 6.7e-07 | 9.139e-07 | 9.139e-07 | 1.9e-06 | 1.0e-03 |
+| 0.25 | 3.921e-06 | 1.7e-06 | 3.921e-06 | 3.921e-06 | 4.0e-05 | 1.1e-02 |
+| 0.50 | 2.476e-05 | 3.4e-06 | 2.476e-05 | 2.476e-05 | 7.1e-03 | void |
+| 0.75 | 2.128e-04 | 5.0e-06 | 2.128e-04 | 2.128e-04 | 0.95 | void |
+| 0.90 | 1.917e-03 | 6.0e-06 | 1.917e-03 | 1.919e-03 | 4.5 | void |
+| 1.00 | 1.864e-02 | 6.7e-06 | 1.864e-02 | 1.882e-02 | 7.8 | void |
+| 1.25 | 3.55 | 8.4e-06 | 3.55 | 33.9 | 17.0 | void |
+| 1.50 | 11.7 | 1.0e-05 | 11.7 | 1.2e+05 | 27.4 | void |
+
+(Above the transition `ln(1+W)` is close to the exact gain only because the system is small; it is not
+extensive.)  With `q_i` between 0.05 and 0.3 the explicit criterion is void, and `W` is within 0.1 % to 25 %
+of the exact gain for `λ ≤ λ_0`, against factors 1.2 to 10 for the Finner bound.
+
+## 6. Sources
+
+Not read for this note; cited from memory as standard: Kotecký–Preiss (1986) for the convergence criterion of
+polymer expansions; Picard (1976) for maximum closure / project selection; Dinkelbach (1967) for ratio
+optimisation; Jerrum–Sinclair (1993), Goldberg–Jerrum (2007), Helmuth–Perkins–Regts (2019) for §3 (iii).  The
+Finner bound and the comparison principle are quoted from THY-RES-0016 §5.

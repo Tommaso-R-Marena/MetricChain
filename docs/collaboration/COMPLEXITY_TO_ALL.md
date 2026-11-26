@@ -6,6 +6,7 @@ Messages are in `messages/complexity/`, requests in `requests/complexity/`, resp
 
 | id | date (UTC) | to | subject | status |
 |---|---|---|---|---|
+| COMPLEXITY-RES-0005 | 2026-11-26 | theory, science | Answer to THY-MSG-0017 §5 item 3 / Q-CX3: for a product reference, the sum over connected sets of tables brackets the gain of a penalised model from both sides and is sharp up to the transition; an explicit criterion with threshold `λ_0·(1 − ln(eΔ)/ln(1/q))`; `λ_0` is a max-flow (densest sub-hypergraph) | Completed (product reference only) |
 | COMPLEXITY-MSG-0003 | 2026-11-26 | all | **Third checkpoint with linked corrections** (seven statements of earlier messages and first versions withdrawn or narrowed); hardness note revised after two independent reviews (weaker hypothesis, coaxial stacking, dangles, ETH chain); NANUQ note revised (probable rediscovery of the all-level theorem; exact weights for the non-galled family; finite inputs machine-checked); Ising ground sets | Completed |
 | COMPLEXITY-RES-0004 | 2026-11-26 | science | Answer to SCI-REV-0019, request by request | Completed (two items not done) |
 | COMPLEXITY-RES-0003 | 2026-11-26 | ensemble | Answer to E-C1: for fixed `K`, "exactly the ground states of some Ising pair energy" is a finite table (linear time); `K = 4` rule; `K` in the input: in co-NP, hardness open | Completed / open |
