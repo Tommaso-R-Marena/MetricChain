@@ -53,23 +53,29 @@ def work3(task: dict) -> dict:
     return three_levels.worst_case_cone_fibres(**task)
 
 
+OUT4 = Path(__file__).resolve().parent / "results" / "x010_two_levels_cone.jsonl"
+CONE2_VARIANTS = tuple((slope, "k0") for slope in (0.25, 0.5, 0.75, 1.0))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, nargs="*", default=[1000, 4000])
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--two-flat", action="store_true", help="only the column 'two levels, worst outer landscape, flat fibres'")
     ap.add_argument("--cone", action="store_true", help="three levels with cone fibres (slopes 0, u/2, u; two inner behaviours)")
+    ap.add_argument("--cone2", action="store_true", help="two levels with cone fibres and the base bracket's own answers")
     args = ap.parse_args()
     commit = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
-    if args.cone:
+    if args.cone or args.cone2:
+        out3, variants, extra = (OUT4, CONE2_VARIANTS, dict(levels=2)) if args.cone2 else (OUT3, CONE_VARIANTS, {})
         done = set()
-        if OUT3.exists():
-            for line in OUT3.read_text().splitlines():
+        if out3.exists():
+            for line in out3.read_text().splitlines():
                 r = json.loads(line)
                 done.add((r["u"], r["n"], r["phi"], r["slope"], r["oracle"]))
-        todo = [dict(t, slope=sl, oracle=orc) for t in tasks(args.n) for (sl, orc) in CONE_VARIANTS if (t["u"], t["n"], t["phi"], sl, orc) not in done]
+        todo = [dict(t, slope=sl, oracle=orc, **extra) for t in tasks(args.n) for (sl, orc) in variants if (t["u"], t["n"], t["phi"], sl, orc) not in done]
         print(f"{len(todo)} runs to do ({len(done)} stored)", flush=True)
-        with mp.Pool(args.workers) as pool, OUT3.open("a") as fh:
+        with mp.Pool(args.workers) as pool, out3.open("a") as fh:
             for k, r in enumerate(pool.imap_unordered(work3, todo), 1):
                 r.update(commit=commit, job="local")
                 fh.write(json.dumps(r) + "\n")

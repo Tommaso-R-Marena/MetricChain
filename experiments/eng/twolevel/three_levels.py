@@ -329,7 +329,7 @@ def cone_run(u: float, n: int, phi: float, slope: float, oracle: str, *, lam: fl
 
 
 def worst_case_cone_fibres(u: float, n: int, phi: float, slope: float, oracle: str, budget: int = 4000, budget_general: int = 2000,
-                           seed: int = 1, k: int = 8) -> dict:
+                           seed: int = 1, k: int = 8, levels: int = 3) -> dict:
     """Three levels on a real instance with adversarial fibres: psi(a, z) = F_o(a) + slope u |z|, the outer landscape
     F_o searched (the families of X-005), every fibre the cone of slope ``slope`` u in the inner dimension.
 
@@ -337,7 +337,8 @@ def worst_case_cone_fibres(u: float, n: int, phi: float, slope: float, oracle: s
     served by K0 costs what K0 costs and returns a bracket placed by ``oracle``; a rung served by the middle level
     costs the mean run of that two-level design *on the cone* (``cone_run``, same ``oracle`` for its base brackets)
     and returns the bracket that run returns.  Every value is the cost of one instance under one valid inner
-    behaviour: a lower bound on the worst case of three levels."""
+    behaviour: a lower bound on the worst case of three levels.  ``levels=2`` serves every rung by K0 (the
+    like-for-like two-level run on the same instances; the result is still stored under ``worst3_cone_fibres``)."""
     from metricchain_eng.twolevel.adversary import Family, Search
 
     a = cube_constants(u).a
@@ -347,7 +348,7 @@ def worst_case_cone_fibres(u: float, n: int, phi: float, slope: float, oracle: s
     lC, alphas, betas, mid_cost_flat, mid_cost_cone, bad = [-math.inf], [], [], [], [], 0
     for r in rows:
         x = r["x"]
-        use_mid = r["middle"] is not None and r["middle"][0] < r["k0"][0]
+        use_mid = levels == 3 and r["middle"] is not None and r["middle"][0] < r["k0"][0]
         if use_mid:
             m = cone_run(u, n_i, slope=slope, oracle=oracle, l_inv_delta=C.l_inv_delta_p, **r["design"])
             bad += int((not m["closed"]) or bool(m["violations"]))
@@ -373,7 +374,7 @@ def worst_case_cone_fibres(u: float, n: int, phi: float, slope: float, oracle: s
         S = Search(Family(ev, k=k, monotone=monotone), "bottom", "cost", positions=(alphas, betas), fixed_c_in=c_in)
         res = S.run(bud, seed=seed)
         best, neval, nviol = max(best, res.best_value), neval + res.n_eval, nviol + len(res.violations)
-    return dict(u=u, n=n, phi=phi, slope=slope, oracle=oracle, worst3_cone_fibres=best / (n * a), n_eval=neval, outer_violations=nviol,
+    return dict(u=u, n=n, phi=phi, slope=slope, oracle=oracle, levels=levels, worst3_cone_fibres=best / (n * a), n_eval=neval, outer_violations=nviol,
                 middle_runs_not_closed_or_violating=bad, served_by_middle=len(mid_cost_cone),
                 largest_middle_cost_ratio=max((c - f for c, f in zip(mid_cost_cone, mid_cost_flat)), default=0.0))
 
