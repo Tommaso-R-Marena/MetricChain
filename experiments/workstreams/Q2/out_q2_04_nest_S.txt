@@ -1,0 +1,18 @@
+# Workstream Q2, check 4: the nested design of Theorem A, exact certified cost, node-by-node check of the induction
+# eps = 0.8715 (as in section 7.3 of Q_REPORT), delta = 0.05; costs and bounds in units of n a
+#  u    n     M  levels on a path  mode  | exact   bound of Theorem A   (n B_M)/(n a)  | chain levels evaluated; slope levels built; D' levels / passed through | node checks  viol  least slack: induction (chains, D', slope steps); D' as built; S as built; ball of the chains | time
+# stages: 
+
+# stage S: awkward small sizes -- every n from 2 to 200, M = 0, 1, 2, eps in {0.8715, 0.01}, delta in {0.05, e^{-n}}, both variants
+#  u   M   designs   node checks   violations   least slack of the induction   chain levels / slope levels / D' levels built   largest exact cost / (n ln 2)
+  0.5  0   1592     1592    0      81.34   0 / 0 / 0   1.0000   [0 s]
+  0.5  1   1592    18504    0      80.65   0 / 0 / 784   1.0000   [1 s]
+  0.5  2   1592    35416    0      80.80   0 / 0 / 1568   1.0000   [3 s]
+  1.0  0   1592     1592    0     100.96   0 / 0 / 0   1.0000   [3 s]
+  1.0  1   1592    21184    0     100.22   0 / 0 / 784   1.0000   [4 s]
+  1.0  2   1592    40776    0     100.31   0 / 0 / 1568   1.0000   [6 s]
+  2.0  0   1592     1592    0      64.79   0 / 0 / 0   1.0000   [6 s]
+  2.0  1   1592    29536    0      64.50   0 / 0 / 784   1.0000   [7 s]
+  2.0  2   1592    57480    0      64.50   0 / 0 / 1568   1.0000   [9 s]
+
+# done in 9 s

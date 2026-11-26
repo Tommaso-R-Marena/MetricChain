@@ -1,0 +1,90 @@
+== (Sigma1) joint convexity / monotonicity (random points of the regular region, sigma_direct)
+  quadratic (1 - e)_+^2                    max [Sigma(mid) - mean]/scale = -2.81e-09   monotone violation = 0.00e+00
+  (1 - sqrt e)_+^3                         max [Sigma(mid) - mean]/scale = -1.02e-09   monotone violation = 0.00e+00
+  exp(-2 e)                                max [Sigma(mid) - mean]/scale = -1.90e-09   monotone violation = 0.00e+00
+  0.1 + 0.9 exp(-3 e)                      max [Sigma(mid) - mean]/scale = +0.00e+00   monotone violation = 0.00e+00
+  cube u = 2 (from KL definitions)         max [Sigma(mid) - mean]/scale = -2.92e-07   monotone violation = 0.00e+00
+== (Sigma2) finite below the line B = (1 - s) a, infinite above (ratio at e = 1e-13, 1e-10 as a probe)
+  quadratic (1 - e)_+^2                    B = 0.999(1-s)a: Sigma = 1.3557;   B = 1.001(1-s)a: ratio at e = 1e-10: 7.000e+06, at 1e-13: 7.000e+09
+  (1 - sqrt e)_+^3                         B = 0.999(1-s)a: Sigma = 1572.9005;   B = 1.001(1-s)a: ratio at e = 1e-10: 7.210e+06, at 1e-13: 7.007e+09
+  exp(-2 e)                                B = 0.999(1-s)a: Sigma = 1.3379;   B = 1.001(1-s)a: ratio at e = 1e-10: 7.000e+06, at 1e-13: 7.000e+09
+  0.1 + 0.9 exp(-3 e)                      B = 0.999(1-s)a: Sigma = 1.8016;   B = 1.001(1-s)a: ratio at e = 1e-10: 7.000e+06, at 1e-13: 7.000e+09
+  cube u = 2 (from KL definitions)         B = 0.999(1-s)a: Sigma = 448.0538;   B = 1.001(1-s)a: ratio at e = 1e-10: 2.359e+06, at 1e-13: 2.297e+09
+== (Sigma3) attainment.  Interior points: the scan maximiser is interior and the value is the sup.
+  quadratic (1 - e)_+^2                    maximiser found in the interior of (0, inf) whenever Sigma > 0: True
+  (1 - sqrt e)_+^3                         maximiser found in the interior of (0, inf) whenever Sigma > 0: True
+  exp(-2 e)                                maximiser found in the interior of (0, inf) whenever Sigma > 0: True
+  0.1 + 0.9 exp(-3 e)                      maximiser found in the interior of (0, inf) whenever Sigma > 0: True
+  cube u = 2 (from KL definitions)         maximiser found in the interior of (0, inf) whenever Sigma > 0: True
+   BOUNDARY B = (1 - s) a with a finite slope at zero: 0 < Sigma < inf but the supremum is NOT attained
+   quadratic pair, s = 0.3, B = 0.7: closed form (1 - s)(2 - e) for e <= 1: sup = 1.400 = Sigma, ratio at e = 1e-1, 1e-3, 1e-6: 1.330000 1.399300 1.399999
+   exp(-2e), s = 0.3, B = 0.7: sup = (1 - s)*2 = 1.400, ratio at e = 1e-1, 1e-3, 1e-6: 1.268885 1.398601 1.399999 (strictly below)
+== (Sigma4) subgradient inequality at a maximiser e1 of (B1, s1)
+  quadratic (1 - e)_+^2                    max of RHS - Sigma(B, s) = +0.00e+00 (should be <= 0 up to rounding)
+  (1 - sqrt e)_+^3                         max of RHS - Sigma(B, s) = +0.00e+00 (should be <= 0 up to rounding)
+  exp(-2 e)                                max of RHS - Sigma(B, s) = +0.00e+00 (should be <= 0 up to rounding)
+  0.1 + 0.9 exp(-3 e)                      max of RHS - Sigma(B, s) = +0.00e+00 (should be <= 0 up to rounding)
+  cube u = 2 (from KL definitions)         max of RHS - Sigma(B, s) = +0.00e+00 (should be <= 0 up to rounding)
+== (Sigma5) D(B, s) = Sigma - s  against  min{w >= -s : Psi_s(w) >= B}, Psi direct and through J
+  quadratic (1 - e)_+^2                    |D - min w| direct 4.4e-16, through J 1.1e-15;   min of D - (B - h)/h over B >= h: +5.93e-08
+  (1 - sqrt e)_+^3                         |D - min w| direct 9.4e-14, through J 1.2e-12;   min of D - (B - h)/h over B >= h: +8.89e-08
+  exp(-2 e)                                |D - min w| direct 2.8e-16, through J 3.3e-16;   min of D - (B - h)/h over B >= h: +2.97e-07
+  0.1 + 0.9 exp(-3 e)                      |D - min w| direct 1.6e-15, through J 6.7e-16;   min of D - (B - h)/h over B >= h: +3.45e-08
+  cube u = 2 (from KL definitions)         |D - min w| direct 2.3e-14, through J 6.9e-14;   min of D - (B - h)/h over B >= h: +3.61e-07
+   fixed points of s -> Sigma(B, s) against the roots of J(s) = B, for B = 0.8 h:
+  quadratic (1 - e)_+^2                    s = 0.35410711: Sigma - s = +0.0e+00  s = 0.69442719: Sigma - s = +inf
+  (1 - sqrt e)_+^3                         s = 0.28389173: Sigma - s = +0.0e+00  s = 0.76176381: Sigma - s = +3.3e-16
+  exp(-2 e)                                s = 0.23940347: Sigma - s = +2.8e-17  s = 0.65874867: Sigma - s = -3.6e-15
+  0.1 + 0.9 exp(-3 e)                      s = 0.20342122: Sigma - s = +5.6e-17  s = 0.68746656: Sigma - s = -1.4e-15
+  cube u = 2 (from KL definitions)         s = 0.25164455: Sigma - s = +5.6e-17  s = 0.69137044: Sigma - s = -7.8e-16
+   pair with theta(inf) = 0.1 > 0 and B = 0.05 < theta(inf): Sigma(B, 0) = 0.000e+00 (s = 0 IS a fixed point) while J(0) = 0.1000 != B
+   -> the sentence 'the fixed points are the solutions of J(s) = B: two for B < h' needs theta(inf) < B (wording).
+   multiplier at the saddle-node: Sigma(h, L) - L, the maximiser, and the two partial derivatives (central differences)
+  quadratic (1 - e)_+^2                    Sigma(h,L) - L = +2.2e-16   argmax/h = 1.000000   dSigma/ds = 1.000000   h dSigma/dB = 1.000000   -1/J'' = 0.17888 vs vartheta = 0.17889
+  (1 - sqrt e)_+^3                         Sigma(h,L) - L = +3.3e-16   argmax/h = 1.000000   dSigma/ds = 1.000000   h dSigma/dB = 1.000000   -1/J'' = 0.79205 vs vartheta = 0.79205
+  exp(-2 e)                                Sigma(h,L) - L = +0.0e+00   argmax/h = 1.000000   dSigma/ds = 1.000000   h dSigma/dB = 1.000000   -1/J'' = 0.26818 vs vartheta = 0.26818
+  0.1 + 0.9 exp(-3 e)                      Sigma(h,L) - L = +1.7e-16   argmax/h = 1.000000   dSigma/ds = 1.000000   h dSigma/dB = 1.000000   -1/J'' = 0.40226 vs vartheta = 0.40226
+  cube u = 2 (from KL definitions)         Sigma(h,L) - L = +4.4e-16   argmax/h = 1.000000   dSigma/ds = 1.000000   h dSigma/dB = 1.000000   -1/J'' = 1.23178 vs vartheta = 1.23178
+== (Sigma6)  D(h + delta, L + v) h / (delta + v^2/(2 vartheta))
+  quadratic (1 - e)_+^2
+     v =             -0.100   -0.030   -0.010   -0.003   -0.001   +0.000   +0.001   +0.003   +0.010   +0.030   +0.100
+     delta = 1e-02 :  0.5908   0.8621   0.9736   1.0198   1.0341   1.0416   1.0492   1.0649   1.1273   1.4153      inf
+     delta = 1e-04 :  0.5502   0.7986   0.9258   0.9800   0.9938   1.0004   1.0071   1.0221   1.0917   1.3801      inf
+     delta = 1e-06 :  0.5497   0.7964   0.9202   0.9747   0.9919   1.0000   1.0083   1.0269   1.0976   1.3826      inf
+     delta = 1e-08 :  0.5497   0.7963   0.9201   0.9744   0.9913   1.0000   1.0089   1.0272   1.0977   1.3827      inf
+  (1 - sqrt e)_+^3
+     v =             -0.100   -0.030   -0.010   -0.003   -0.001   +0.000   +0.001   +0.003   +0.010   +0.030   +0.100
+     delta = 1e-02 :  0.7771   0.9474   1.0085   1.0317   1.0385   1.0420   1.0455   1.0525   1.0779   1.1588   1.6011
+     delta = 1e-04 :  0.7422   0.9067   0.9684   0.9908   0.9972   1.0004   1.0036   1.0102   1.0347   1.1160   1.5382
+     delta = 1e-06 :  0.7417   0.9053   0.9663   0.9898   0.9967   1.0000   1.0033   1.0105   1.0361   1.1170   1.5381
+     delta = 1e-08 :  0.7416   0.9053   0.9663   0.9896   0.9965   1.0000   1.0035   1.0106   1.0362   1.1170   1.5381
+  exp(-2 e)
+     v =             -0.100   -0.030   -0.010   -0.003   -0.001   +0.000   +0.001   +0.003   +0.010   +0.030   +0.100
+     delta = 1e-02 :  0.6885   0.8994   0.9830   1.0162   1.0262   1.0312   1.0364   1.0469   1.0858   1.2229   3.1413
+     delta = 1e-04 :  0.6665   0.8672   0.9525   0.9861   0.9956   1.0003   1.0051   1.0149   1.0540   1.1906   2.5361
+     delta = 1e-06 :  0.6663   0.8663   0.9506   0.9847   0.9950   1.0000   1.0051   1.0159   1.0556   1.1912   2.5328
+     delta = 1e-08 :  0.6663   0.8663   0.9506   0.9846   0.9948   1.0000   1.0053   1.0160   1.0556   1.1912   2.5328
+  0.1 + 0.9 exp(-3 e)
+     v =             -0.100   -0.030   -0.010   -0.003   -0.001   +0.000   +0.001   +0.003   +0.010   +0.030   +0.100
+     delta = 1e-02 :  0.7466   0.9255   0.9897   1.0143   1.0216   1.0253   1.0290   1.0366   1.0642   1.1558   1.8011
+     delta = 1e-04 :  0.7206   0.8951   0.9640   0.9897   0.9968   1.0002   1.0038   1.0110   1.0397   1.1374   1.7463
+     delta = 1e-06 :  0.7202   0.8938   0.9617   0.9883   0.9962   1.0000   1.0038   1.0120   1.0418   1.1386   1.7462
+     delta = 1e-08 :  0.7202   0.8938   0.9617   0.9881   0.9960   1.0000   1.0040   1.0122   1.0419   1.1386   1.7462
+  cube u = 2 (from KL definitions)
+     v =             -0.100   -0.030   -0.010   -0.003   -0.001   +0.000   +0.001   +0.003   +0.010   +0.030   +0.100
+     delta = 1e-02 :  0.7565   0.9894   1.0856   1.1238   1.1351   1.1409   1.1467   1.1586   1.2018   1.3438   2.2391
+     delta = 1e-04 :  0.7055   0.8879   0.9591   0.9880   0.9968   1.0012   1.0057   1.0148   1.0471   1.1472   1.7236
+     delta = 1e-06 :  0.7053   0.8886   0.9598   0.9874   0.9956   1.0000   1.0044   1.0129   1.0437   1.1434   1.7187
+     delta = 1e-08 :  0.7053   0.8886   0.9599   0.9876   0.9958   1.0000   1.0042   1.0127   1.0436   1.1434   1.7187
+   uniformity: sup over |v| <= eta, delta <= delta0 (grids of 41 x 9 points) of |ratio - 1|
+  quadratic (1 - e)_+^2                    eta, delta0 = (.1,1e-2) (.03,1e-3) (.01,1e-4) (.003,1e-5) (.001,1e-6): inf  0.3827  0.0977  0.0272  0.0089
+  (1 - sqrt e)_+^3                         eta, delta0 = (.1,1e-2) (.03,1e-3) (.01,1e-4) (.003,1e-5) (.001,1e-6): 0.6011  0.1170  0.0362  0.0106  0.0035
+  exp(-2 e)                                eta, delta0 = (.1,1e-2) (.03,1e-3) (.01,1e-4) (.003,1e-5) (.001,1e-6): 2.1413  0.1912  0.0556  0.0160  0.0053
+  0.1 + 0.9 exp(-3 e)                      eta, delta0 = (.1,1e-2) (.03,1e-3) (.01,1e-4) (.003,1e-5) (.001,1e-6): 0.8011  0.1386  0.0419  0.0122  0.0040
+  cube u = 2 (from KL definitions)         eta, delta0 = (.1,1e-2) (.03,1e-3) (.01,1e-4) (.003,1e-5) (.001,1e-6): 1.2391  0.1673  0.0471  0.0135  0.0044
+== (Sigma7) c(eta) = min{D(h, s) : 0 <= s <= s_t, |s - L| >= eta},  s_t = (L + 1 - h/a)/2
+  quadratic (1 - e)_+^2                    s_t = 0.5854: c = 4.039e-02 at s = 0.453  c = 5.249e-03 at s = 0.523  c = 6.877e-04 at s = 0.543   [eta^2/(2 vartheta h) = 7.318e-04 at eta = 0.01]
+  (1 - sqrt e)_+^3                         s_t = 0.6730: c = 2.544e-02 at s = 0.431  c = 2.836e-03 at s = 0.501  c = 3.380e-04 at s = 0.521   [eta^2/(2 vartheta h) = 3.412e-04 at eta = 0.01]
+  exp(-2 e)                                s_t = 0.5170: c = 2.922e-02 at s = 0.360  c = 3.433e-03 at s = 0.430  c = 4.327e-04 at s = 0.450   [eta^2/(2 vartheta h) = 4.373e-04 at eta = 0.01]
+  0.1 + 0.9 exp(-3 e)                      s_t = 0.5380: c = 2.331e-02 at s = 0.360  c = 2.618e-03 at s = 0.430  c = 3.228e-04 at s = 0.450   [eta^2/(2 vartheta h) = 3.235e-04 at eta = 0.01]
+  cube u = 2 (from KL definitions)         s_t = 0.5839: c = 2.953e-02 at s = 0.364  c = 3.364e-03 at s = 0.434  c = 4.224e-04 at s = 0.454   [eta^2/(2 vartheta h) = 4.173e-04 at eta = 0.01]

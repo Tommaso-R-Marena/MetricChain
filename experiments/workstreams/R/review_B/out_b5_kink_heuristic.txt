@@ -1,0 +1,55 @@
+== (a) Proposition K
+  kinked max(1-3e, 1/2-e, 0): h = 0.250000000000, [L1, L2] = [0.500000, 0.750000]
+     J(L1), J((L1+L2)/2), J(L2), J(L1 - 0.02), J(L2 + 0.02): 0.250000000 0.250000000 0.250000000 0.240000000 0.230000000
+     delta = 1e-02: max |D - delta/h| on [L1, s_max] = 7.6e-17;  D - delta/h at s_max + 1e-3: +inf, at L1 - 1e-3: +3.47e-17;  n* = 5, p_n finite for n <= 7 (ok), p_{n*} <= s_max: True
+     delta = 1e-03: max |D - delta/h| on [L1, s_max] = 1.1e-16;  D - delta/h at s_max + 1e-3: +inf, at L1 - 1e-3: +3.47e-18;  n* = 61, p_n finite for n <= 63 (ok), p_{n*} <= s_max: True
+     delta = 1e-04: max |D - delta/h| on [L1, s_max] = 1.6e-16;  D - delta/h at s_max + 1e-3: +inf, at L1 - 1e-3: +8.00e-04;  n* = 623, p_n finite for n <= 626 (ok), p_{n*} <= s_max: True
+     k: B_inf(k) - h  [bound (L2-L1)h/(k+2)]  k(B_inf - h):  1: 7.500e-01 [2.083e-02] 0.75000; 2: 8.333e-02 [1.562e-02] 0.16667; 3: 3.571e-02 [1.250e-02] 0.10714; 5: 1.667e-02 [8.929e-03] 0.08333; 10: 7.143e-03 [5.208e-03] 0.07143; 20: 3.333e-03 [2.841e-03] 0.06667; 80: 7.937e-04 [7.622e-04] 0.06349; 320: 1.961e-04 [1.941e-04] 0.06275
+     all B_inf(k) - h >= bound: True;   (L2 - L1) h = 0.06250
+  kink: max((1-sqrt e)^2, 1/4 + 0.4 (1/4 - e)): h = 0.250000000000, [L1, L2] = [0.285714, 0.500000]
+     J(L1), J((L1+L2)/2), J(L2), J(L1 - 0.02), J(L2 + 0.02): 0.250000000 0.250000000 0.250000000 0.232857143 0.249600000
+     delta = 1e-02: max |D - delta/h| on [L1, s_max] = 2.0e-16;  D - delta/h at s_max + 1e-3: +3.86e-06, at L1 - 1e-3: +3.47e-17;  n* = 3, p_n finite for n <= 10 (ok), p_{n*} <= s_max: True
+     delta = 1e-03: max |D - delta/h| on [L1, s_max] = 1.1e-16;  D - delta/h at s_max + 1e-3: +4.00e-06, at L1 - 1e-3: +3.47e-18;  n* = 52, p_n finite for n <= 67 (ok), p_{n*} <= s_max: True
+     delta = 1e-04: max |D - delta/h| on [L1, s_max] = 6.7e-17;  D - delta/h at s_max + 1e-3: +4.01e-06, at L1 - 1e-3: +7.10e-04;  n* = 534, p_n finite for n <= 574 (ok), p_{n*} <= s_max: True
+     k: B_inf(k) - h  [bound (L2-L1)h/(k+2)]  k(B_inf - h):  1: 7.500e-01 [1.786e-02] 0.75000; 2: 1.500e-01 [1.339e-02] 0.30000; 3: 7.538e-02 [1.071e-02] 0.22615; 5: 2.861e-02 [7.653e-03] 0.14305; 10: 1.012e-02 [4.464e-03] 0.10122; 20: 4.111e-03 [2.435e-03] 0.08223; 80: 8.232e-04 [6.533e-04] 0.06586; 320: 1.851e-04 [1.664e-04] 0.05923
+     all B_inf(k) - h >= bound: True;   (L2 - L1) h = 0.05357
+  kink, L1 = 0: max(1 - 3e, 1/4): h = 0.250000000000, [L1, L2] = [0.000000, 0.750000]
+     J(L1), J((L1+L2)/2), J(L2), J(L1 - 0.02), J(L2 + 0.02): 0.250000000 0.250000000 0.250000000 0.250000000 0.230000000
+     delta = 1e-02: max |D - delta/h| on [L1, s_max] = 3.5e-17;  D - delta/h at s_max + 1e-3: +inf, at L1 - 1e-3: +nan;  n* = 17, p_n finite for n <= 19 (ok), p_{n*} <= s_max: True
+     delta = 1e-03: max |D - delta/h| on [L1, s_max] = 3.1e-17;  D - delta/h at s_max + 1e-3: +inf, at L1 - 1e-3: +nan;  n* = 186, p_n finite for n <= 188 (ok), p_{n*} <= s_max: True
+     delta = 1e-04: max |D - delta/h| on [L1, s_max] = 4.4e-17;  D - delta/h at s_max + 1e-3: +inf, at L1 - 1e-3: +nan;  n* = 1873, p_n finite for n <= 1875 (ok), p_{n*} <= s_max: True
+     k: B_inf(k) - h  [bound (L2-L1)h/(k+2)]  k(B_inf - h):  1: 7.500e-01 [6.250e-02] 0.75000; 2: 1.500e-01 [4.688e-02] 0.30000; 3: 8.333e-02 [3.750e-02] 0.25000; 5: 4.412e-02 [2.679e-02] 0.22059; 10: 2.027e-02 [1.562e-02] 0.20270; 20: 9.740e-03 [8.523e-03] 0.19481; 80: 2.366e-03 [2.287e-03] 0.18927; 320: 5.873e-04 [5.823e-04] 0.18794
+     all B_inf(k) - h >= bound: True;   (L2 - L1) h = 0.18750
+== (b) p = 1: theta affine near h (Gaussian with the chord over [0.16, 0.36]); h = 0.26, L = 1/2
+  h = 0.2600000000; one-sided slopes of J at L: J'(L-) = 0.200000, -J'(L+) = 0.200000 (corner);  predicted multipliers of Sigma(h, .) at L: 0.444444 below, 2.250000 above
+  measured: (Sigma(h, L - x) - L)/(-x) at x = 1e-3, 1e-5: 0.444444 0.444444;   (Sigma(h, L + x) - L)/x: 2.250000 2.250000
+  passage time N_t(delta), s_t = 0.6:  delta, N, N/ln(1/delta)   [prediction 1/ln(1/lam_-) + 1/ln(lam_+) = 2.4663]
+     1e-03    10  1.4476
+     1e-05    21  1.8240
+     1e-07    32  1.9853
+     1e-09    43  2.0750
+     1e-11    55  2.1715
+     1e-13    66  2.2049
+  B_inf(k) - h and the ratio of consecutive values   [prediction exp(-rate) = 0.66667]
+     k =  2: 1.219660e-01   ratio per level -
+     k =  4: 2.525183e-02   ratio per level 0.45502
+     k =  6: 8.764952e-03   ratio per level 0.58915
+     k =  8: 3.521529e-03   ratio per level 0.63386
+     k = 10: 1.499647e-03   ratio per level 0.65257
+     k = 12: 6.542439e-04   ratio per level 0.66050
+     k = 14: 2.884081e-04   ratio per level 0.66395
+     k = 16: 1.277187e-04   ratio per level 0.66546
+     k = 18: 5.667287e-05   ratio per level 0.66613
+     k = 20: 2.517001e-05   ratio per level 0.66643
+     k = 22: 1.118313e-05   ratio per level 0.66656
+     k = 24: 4.969581e-06   ratio per level 0.66662
+     k = 26: 2.208565e-06   ratio per level 0.66665
+     k = 28: 9.815570e-07   ratio per level 0.66666
+     k = 30: 4.362422e-07   ratio per level 0.66666
+== (c) other exponents p
+  quartic contact: 1/4 - x + 8 x^4, x = e - 1/4  (p = 4/3): h = 0.2500000000, a = 0.53125;  local exponent of h - J(L + v) between v = 0.002 and 0.02: 1.339 (p = 1.333)
+     N_t(delta) at delta = 1e-4, 1e-6, 1e-8, 1e-10: 15 60 201 648;  local exponents 0.3010 0.2625 0.2542  (prediction (p-1)/p = 0.2500)
+     B_inf(k) - h at k = 10..320: 4.621e-04 5.236e-05 4.688e-06 3.582e-07 2.492e-08 1.646e-09;  local exponents 3.1417 3.4814 3.7099 3.8456 3.9202  (prediction p/(p-1) = 4.0000)
+  |x|^{3/2} contact: 1/4 - x + 2 |x|^{3/2}  (p = 3): h = 0.2500000000, a = 0.75000;  local exponent of h - J(L + v) between v = 0.002 and 0.02: 3.032 (p = 3.000)
+     N_t(delta) at delta = 1e-4, 1e-6, 1e-8, 1e-10: 260 5711 123085 2651793;  local exponents 0.6709 0.6667 0.6667  (prediction (p-1)/p = 0.6667)
+     B_inf(k) - h at k = 10..320: 1.286e-02 4.831e-03 1.745e-03 6.178e-04 2.172e-04 7.635e-05;  local exponents 1.4126 1.4686 1.4984 1.5080 1.5085  (prediction p/(p-1) = 1.5000)

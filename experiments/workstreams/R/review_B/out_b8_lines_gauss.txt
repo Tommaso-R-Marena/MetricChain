@@ -1,0 +1,6 @@
+gauss level 2: tau = 0.5000000000, B_inf = 0.3819660113;  max_{B,x} [line - T_k] = -4.21e-09 at (B, slope, x) = (0.01910, 0.0195, 9.610e-01);  T_k - envelope of the lines: median 7.02e-02, max 1.13e-01 (x > 1e-4, T > 1e-3)
+gauss level 3: tau = 0.3552342303, B_inf = 0.3079785284;  max_{B,x} [line - T_k] = -2.38e-09 at (B, slope, x) = (0.05313, 0.0563, 8.874e-01);  T_k - envelope of the lines: median 2.37e-02, max 4.42e-02 (x > 1e-4, T > 1e-3)
+gauss level 5: tau = 0.2784168109, B_inf = 0.2715541293;  max_{B,x} [line - T_k] = -9.15e-10 at (B, slope, x) = (0.06449, 0.0693, 8.613e-01);  T_k - envelope of the lines: median 2.34e-03, max 6.13e-03 (x > 1e-4, T > 1e-3)
+gauss level 10: tau = 0.2559952586, B_inf = 0.2556795628;  max_{B,x} [line - T_k] = -2.17e-10 at (B, slope, x) = (0.02812, 0.0290, 9.420e-01);  T_k - envelope of the lines: median 2.03e-04, max 6.37e-04 (x > 1e-4, T > 1e-3)
+gauss level 20: tau = 0.2515108626, B_inf = 0.2514735819;  max_{B,x} [line - T_k] = -1.49e-10 at (B, slope, x) = (0.09493, 0.1062, 7.876e-01);  T_k - envelope of the lines: median 4.55e-05, max 5.48e-04 (x > 1e-4, T > 1e-3)
+gauss level 40: tau = 0.2503811710, B_inf = 0.2503764484;  max_{B,x} [line - T_k] = -1.51e-10 at (B, slope, x) = (0.22659, 0.3470, 3.060e-01);  T_k - envelope of the lines: median 1.95e-04, max 5.86e-04 (x > 1e-4, T > 1e-3)

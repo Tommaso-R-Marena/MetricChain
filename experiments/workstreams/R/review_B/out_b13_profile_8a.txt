@@ -1,0 +1,13 @@
+(a) f(0) = 19.738614 (2 pi^2 = 19.739209);  f(2) = 2.934802 (pi^2/2 - 2 = 2.934802);  f(3) = 1.500000 (3/2)
+    zeta = 0.5: f = 9.089317, f' = -8.45224, ODE residual zeta f'^2/2 + zeta f' + (zeta - 2) f = -4.94e-06
+    zeta = 1.0: f = 5.992025, f' = -4.60334, ODE residual zeta f'^2/2 + zeta f' + (zeta - 2) f = -1.27e-06
+    zeta = 2.0: f = 2.934802, f' = -2.00000, ODE residual zeta f'^2/2 + zeta f' + (zeta - 2) f = +4.38e-09
+    zeta = 3.0: f = 1.500000, f' = -1.00000, ODE residual zeta f'^2/2 + zeta f' + (zeta - 2) f = +8.88e-16
+    zeta = 4.0: f = 0.767892, f' = -0.51841, ODE residual zeta f'^2/2 + zeta f' + (zeta - 2) f = -3.57e-04
+(b) position of the orbit, pair (1 - sqrt e)_+^3
+    k =  100:  z=0.50: k (p_k - L) = -0.2669, prediction -0.2683; z=1.00: k (p_k - L) = -0.1863, prediction -0.1882; z=1.57: k (p_k - L) = +0.0034, prediction +0.0000; z=2.20: k (p_k - L) = +0.4797, prediction +0.4694; z=2.80: k (p_k - L) = +2.4086, prediction +2.3085
+    k =  400:  z=0.50: k (p_k - L) = -0.2680, prediction -0.2683; z=1.00: k (p_k - L) = -0.1878, prediction -0.1882; z=1.57: k (p_k - L) = +0.0008, prediction +0.0000; z=2.20: k (p_k - L) = +0.4718, prediction +0.4694; z=2.80: k (p_k - L) = +2.3314, prediction +2.3085
+    k = 1600:  z=0.50: k (p_k - L) = -0.2682, prediction -0.2683; z=1.00: k (p_k - L) = -0.1881, prediction -0.1882; z=1.57: k (p_k - L) = +0.0002, prediction +0.0000; z=2.20: k (p_k - L) = +0.4700, prediction +0.4694; z=2.80: k (p_k - L) = +2.3138, prediction +2.3085
+(c) the recursion's profile against f
+    (1 - sqrt e)_+^3, k = 61:  zeta = 0: 19.920 (f = 19.739);  zeta = .25, .5, 1, 2, 3, 5:  11.890 (f = 11.765)  9.194 (f = 9.089)  6.068 (f = 5.992)  2.977 (f = 2.935)  1.523 (f = 1.500)  0.394 (f = 0.388)
+    Gaussian, k = 40:  zeta = 0: 19.516 (f = 19.739);  zeta = .25, .5, 1, 2, 3, 5:  11.610 (f = 11.765)  8.959 (f = 9.089)  5.895 (f = 5.992)  2.876 (f = 2.935)  1.465 (f = 1.500)  0.376 (f = 0.388)

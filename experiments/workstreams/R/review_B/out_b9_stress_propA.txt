@@ -1,0 +1,70 @@
+0.3 exp(-e):  a = 0.300000, h = 0.236755311
+   k = 1: tau_k = 0.300000000   B_inf(k) = 0.300000000   tau_k - B_inf(k) = +2.776e-16   tau_k - h = 6.324e-02
+   k = 2: tau_k = 0.254688419   B_inf(k) = 0.254688412   tau_k - B_inf(k) = +7.030e-09   tau_k - h = 1.793e-02
+   k = 3: tau_k = 0.245590944   B_inf(k) = 0.245590828   tau_k - B_inf(k) = +1.166e-07   tau_k - h = 8.836e-03
+   k = 4: tau_k = 0.242121869   B_inf(k) = 0.242121703   tau_k - B_inf(k) = +1.667e-07   tau_k - h = 5.367e-03
+   k = 5: tau_k = 0.240397647   B_inf(k) = 0.240397579   tau_k - B_inf(k) = +6.796e-08   tau_k - h = 3.642e-03
+   k = 6: tau_k = 0.239404426   B_inf(k) = 0.239404332   tau_k - B_inf(k) = +9.375e-08   tau_k - h = 2.649e-03
+   k = 7: tau_k = 0.238775412   B_inf(k) = 0.238775387   tau_k - B_inf(k) = +2.549e-08   tau_k - h = 2.020e-03
+   k = 8: tau_k = 0.238350050   B_inf(k) = 0.238350001   tau_k - B_inf(k) = +4.843e-08   tau_k - h = 1.595e-03
+   k = 9: tau_k = 0.238048024   B_inf(k) = 0.238047951   tau_k - B_inf(k) = +7.367e-08   tau_k - h = 1.293e-03
+   min over k of tau_k - B_inf(k): +2.776e-16  -> Proposition A holds
+max(1 - 10e, 0.05):  a = 1.000000, h = 0.090909091
+   k = 1: tau_k = 1.000000000   B_inf(k) = 1.000000000   tau_k - B_inf(k) = +2.220e-16   tau_k - h = 9.091e-01
+   k = 2: tau_k = 0.512820513   B_inf(k) = 0.132420091   tau_k - B_inf(k) = +3.804e-01   tau_k - h = 4.219e-01
+   k = 3: tau_k = 0.350570538   B_inf(k) = 0.105664665   tau_k - B_inf(k) = +2.449e-01   tau_k - h = 2.597e-01
+   k = 4: tau_k = 0.269551894   B_inf(k) = 0.097541934   tau_k - B_inf(k) = +1.720e-01   tau_k - h = 1.786e-01
+   k = 5: tau_k = 0.221025967   B_inf(k) = 0.094151073   tau_k - B_inf(k) = +1.269e-01   tau_k - h = 1.301e-01
+   k = 6: tau_k = 0.188745700   B_inf(k) = 0.092553662   tau_k - B_inf(k) = +9.619e-02   tau_k - h = 9.784e-02
+   k = 7: tau_k = 0.165749549   B_inf(k) = 0.091758480   tau_k - B_inf(k) = +7.399e-02   tau_k - h = 7.484e-02
+   k = 8: tau_k = 0.148554467   B_inf(k) = 0.091351784   tau_k - B_inf(k) = +5.720e-02   tau_k - h = 5.765e-02
+   k = 9: tau_k = 0.135227537   B_inf(k) = 0.091140899   tau_k - B_inf(k) = +4.409e-02   tau_k - h = 4.432e-02
+   min over k of tau_k - B_inf(k): +2.220e-16  -> Proposition A holds
+(1 + e)^-4:  a = 1.000000, h = 0.324717957
+   k = 1: tau_k = 1.000000000   B_inf(k) = 1.000000000   tau_k - B_inf(k) = +3.331e-16   tau_k - h = 6.753e-01
+   k = 2: tau_k = 0.518790617   B_inf(k) = 0.465007756   tau_k - B_inf(k) = +5.378e-02   tau_k - h = 1.941e-01
+   k = 3: tau_k = 0.403394927   B_inf(k) = 0.392226639   tau_k - B_inf(k) = +1.117e-02   tau_k - h = 7.868e-02
+   k = 4: tau_k = 0.369379660   B_inf(k) = 0.365526237   tau_k - B_inf(k) = +3.853e-03   tau_k - h = 4.466e-02
+   k = 5: tau_k = 0.354241232   B_inf(k) = 0.352340772   tau_k - B_inf(k) = +1.900e-03   tau_k - h = 2.952e-02
+   k = 6: tau_k = 0.345843623   B_inf(k) = 0.344755468   tau_k - B_inf(k) = +1.088e-03   tau_k - h = 2.113e-02
+   k = 7: tau_k = 0.340644697   B_inf(k) = 0.339957129   tau_k - B_inf(k) = +6.876e-04   tau_k - h = 1.593e-02
+   k = 8: tau_k = 0.337182447   B_inf(k) = 0.336716190   tau_k - B_inf(k) = +4.663e-04   tau_k - h = 1.246e-02
+   k = 9: tau_k = 0.334748751   B_inf(k) = 0.334418838   tau_k - B_inf(k) = +3.299e-04   tau_k - h = 1.003e-02
+   min over k of tau_k - B_inf(k): +3.331e-16  -> Proposition A holds
+0.1 + 0.9 exp(-3e):  a = 1.000000, h = 0.384217879
+   k = 1: tau_k = 1.000000000   B_inf(k) = 1.000000000   tau_k - B_inf(k) = +2.220e-16   tau_k - h = 6.158e-01
+   k = 2: tau_k = 0.548238931   B_inf(k) = 0.530355669   tau_k - B_inf(k) = +1.788e-02   tau_k - h = 1.640e-01
+   k = 3: tau_k = 0.459546804   B_inf(k) = 0.457119186   tau_k - B_inf(k) = +2.428e-03   tau_k - h = 7.533e-02
+   k = 4: tau_k = 0.429770483   B_inf(k) = 0.429124151   tau_k - B_inf(k) = +6.463e-04   tau_k - h = 4.555e-02
+   k = 5: tau_k = 0.415224704   B_inf(k) = 0.414982433   tau_k - B_inf(k) = +2.423e-04   tau_k - h = 3.101e-02
+   k = 6: tau_k = 0.406838885   B_inf(k) = 0.406724292   tau_k - B_inf(k) = +1.146e-04   tau_k - h = 2.262e-02
+   k = 7: tau_k = 0.401503872   B_inf(k) = 0.401443483   tau_k - B_inf(k) = +6.039e-05   tau_k - h = 1.729e-02
+   k = 8: tau_k = 0.397882383   B_inf(k) = 0.397847096   tau_k - B_inf(k) = +3.529e-05   tau_k - h = 1.366e-02
+   k = 9: tau_k = 0.395303596   B_inf(k) = 0.395281072   tau_k - B_inf(k) = +2.252e-05   tau_k - h = 1.109e-02
+   min over k of tau_k - B_inf(k): +2.220e-16  -> Proposition A holds
+kink at h, smooth left piece:  a = 1.000000, h = 0.250000000
+   k = 1: tau_k = 1.000000000   B_inf(k) = 1.000000000   tau_k - B_inf(k) = +3.331e-16   tau_k - h = 7.500e-01
+   k = 2: tau_k = 0.500000000   B_inf(k) = 0.400000000   tau_k - B_inf(k) = +1.000e-01   tau_k - h = 2.500e-01
+   k = 3: tau_k = 0.370570188   B_inf(k) = 0.325384039   tau_k - B_inf(k) = +4.519e-02   tau_k - h = 1.206e-01
+   k = 4: tau_k = 0.317095944   B_inf(k) = 0.292269473   tau_k - B_inf(k) = +2.483e-02   tau_k - h = 6.710e-02
+   k = 5: tau_k = 0.289969827   B_inf(k) = 0.278609674   tau_k - B_inf(k) = +1.136e-02   tau_k - h = 3.997e-02
+   k = 6: tau_k = 0.276640328   B_inf(k) = 0.271386331   tau_k - B_inf(k) = +5.254e-03   tau_k - h = 2.664e-02
+   k = 7: tau_k = 0.269710637   B_inf(k) = 0.266866516   tau_k - B_inf(k) = +2.844e-03   tau_k - h = 1.971e-02
+   k = 8: tau_k = 0.265664130   B_inf(k) = 0.263858644   tau_k - B_inf(k) = +1.805e-03   tau_k - h = 1.566e-02
+   k = 9: tau_k = 0.263004790   B_inf(k) = 0.261726169   tau_k - B_inf(k) = +1.279e-03   tau_k - h = 1.300e-02
+   min over k of tau_k - B_inf(k): +3.331e-16  -> Proposition A holds
+1 - sqrt(e):  a = 1.000000, h = 0.381966011
+   k = 1: tau_k = 1.000000000   B_inf(k) = 1.000000000   tau_k - B_inf(k) = +2.220e-16   tau_k - h = 6.180e-01
+   k = 2: tau_k = 0.500000000   B_inf(k) = 0.500000000   tau_k - B_inf(k) = +1.110e-16   tau_k - h = 1.180e-01
+   k = 3: tau_k = 0.428573980   B_inf(k) = 0.428571429   tau_k - B_inf(k) = +2.551e-06   tau_k - h = 4.661e-02
+   k = 4: tau_k = 0.407986209   B_inf(k) = 0.407984405   tau_k - B_inf(k) = +1.804e-06   tau_k - h = 2.602e-02
+   k = 5: tau_k = 0.398827439   B_inf(k) = 0.398826595   tau_k - B_inf(k) = +8.438e-07   tau_k - h = 1.686e-02
+   k = 6: tau_k = 0.393863391   B_inf(k) = 0.393862049   tau_k - B_inf(k) = +1.342e-06   tau_k - h = 1.190e-02
+   k = 7: tau_k = 0.390840976   B_inf(k) = 0.390840322   tau_k - B_inf(k) = +6.548e-07   tau_k - h = 8.875e-03
+   k = 8: tau_k = 0.388854355   B_inf(k) = 0.388854029   tau_k - B_inf(k) = +3.255e-07   tau_k - h = 6.888e-03
+   k = 9: tau_k = 0.387475194   B_inf(k) = 0.387474216   tau_k - B_inf(k) = +9.787e-07   tau_k - h = 5.509e-03
+   min over k of tau_k - B_inf(k): +1.110e-16  -> Proposition A holds
+
+real	0m45.055s
+user	0m38.246s
+sys	0m6.184s
