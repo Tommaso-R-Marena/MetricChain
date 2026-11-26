@@ -19,6 +19,8 @@
 'ScienceL3.lemma0_window' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lemma0_window_lipH' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lemma0_additive_fill' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.lemma0_rigidity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.lemma0_rigidity_lipH' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.condMarg_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.condMarg_mem_window' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.condMarg_mem_window_lipH' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -32,6 +34,6 @@
 'ScienceL3.lemma2_dens' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.densW_coneW' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-real	0m30.860s
-user	0m17.831s
-sys	0m2.103s
+real	0m35.884s
+user	0m18.620s
+sys	0m2.218s

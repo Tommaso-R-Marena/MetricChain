@@ -202,6 +202,10 @@ if __name__ == "__main__":
         t, hp, hd = s.h(); Ep, Ed = s.E(); ap, ad = s.a()
         P(f"  pi = {tuple(round(x, 5) for x in pi)}: h in [{hp:.7f}, {hd:.7f}]  a in [{ap:.7f}, {ad:.7f}]  E in [{Ep:.7f}, {Ed:.7f}]")
     P("  report: uniform E = 0.119499, h = 0.030654, a = 0.123284;  (0.05,0.5,0.45): E = 0.120196;  (0.3,0.35,0.35): h = 0.030572, a = 0.122951")
+    if 'all' not in sys.argv[1:]:
+        # the tests below (ceiling, weight-1/2 laws, chi^2 step) are run by r9_sites2.py with lighter parameters;
+        # `r9_sites.py all` runs them here with the heavier ones (more than 15 minutes).
+        sys.exit(0)
     # ------------------------------------------------------------------ 2(c)(b): the ceiling for every envelope
     rng = np.random.default_rng(20261126)
     worst = 0.0; ncase = 0; worst_h = 0.0

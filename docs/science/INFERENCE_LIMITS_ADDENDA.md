@@ -1504,6 +1504,47 @@ product-measure form is 4–100 times above the measured `D_2`, and `1/(1−θ)�
 worse.  It is a certificate of the right kind with the wrong constant for apolar side
 chains; the sharper inputs remain the one-sided floor and the variance of (7).
 
+### (9) Is a chain enough as the tractable model? [M, exact enumeration; added after checkpoint 37]
+
+A pairwise model is exactly solvable only on a graph of small tree-width (the theory
+division's remark on our SCI-MSG-0015).  So the practical question is whether the
+*tractable* part can be cut down to a chain.  `experiments/science/pi_inference/chain_model_real.py`
+(three seconds): on the 27 product-domain homopeptide instances (valine 6–12, leucine
+6–8, serine 4–6 residues; strand, PPII, helix), ANOVA terms of the *total* energy `g`,
+models `m_c(w) = g₀ + Σ_i g_i + Σ_{0<j−i≤w} g_ij` (a chain with couplings up to `w` residues apart —
+transfer matrices at any length), remainder `r = β(g − m_c)` with everything else in it.
+
+| family | model | floor `b` | `σ` | error of first-order perturbation theory `K` | Bennett `W` | `D_2` |
+|---|---|---|---|---|---|---|
+| Val, strand / PPII (8) | nearest neighbours, `w = 1` | `≤ 0.47` | `≤ 0.017` | `≤ 1.5·10⁻⁴` | `≤ 1.7·10⁻⁴` | `≤ 2.8·10⁻⁴` |
+| | `w = 2` | `≤ 0.11` | `≤ 0.009` | `≤ 3.8·10⁻⁵` | `≤ 3.9·10⁻⁵` | `≤ 7.5·10⁻⁵` |
+| Ser, strand / PPII (6) | `w = 1` | `≤ 0.36` | `≤ 0.17` | `≤ 0.013` | `≤ 0.016` | `≤ 0.023` |
+| | `w = 2` | `≤ 0.03` | `≤ 0.010` | `≤ 4.9·10⁻⁵` | `≤ 4.9·10⁻⁵` | `≤ 9.7·10⁻⁵` |
+| Leu, PPII (2) | `w = 1` | `≤ 0.04` | `≤ 0.035` | `≤ 6.0·10⁻⁴` | `≤ 6.2·10⁻⁴` | `≤ 1.1·10⁻³` |
+| Leu, Ser on the helix (5) | `w = 1` or `2` | up to `3.7` | up to `0.36` | up to `0.082` | up to `0.29` | up to `0.24` |
+| | all pairs | `≤ 0.22` | `≤ 0.013` | `≤ 7.8·10⁻⁵` | `≤ 8.1·10⁻⁵` | `≤ 1.5·10⁻⁴` |
+
+9. **On a strand or a PPII backbone a next-nearest-neighbour chain is, in the sense
+   that matters for a certificate, the whole solvated side-chain ensemble** of these
+   homopeptides: first-order perturbation theory from it is accurate to `5·10⁻⁵` nats,
+   and a floor of `0.1 k_BT` with a variance of `(0.01 k_BT)²` would certify it.  On the
+   helix the pairs `i, i+3` and `i, i+4` are needed (side chains one turn apart touch), as
+   one would expect — a window of four, still a chain.
+10. **Consequence for size.**  A chain model has an exact partition function and exact
+   samples at any length, so the three ingredients of a certified solvated side-chain
+   free energy at fifty or five hundred residues are: transfer matrices (exist), a
+   sampled mean of the remainder (cheap), and a *proved* one-sided floor and variance
+   bound for the remainder of the chosen chain model — the only missing piece, and a
+   statement about one energy function, not about algorithms.
+(The other six of the 27 instances are degenerate: valine on the helix has one state
+per interior residue, and leucine on the strand two states per site with the ensemble
+on one of them — `K < 10⁻¹³` for every model.)
+*Not shown here:* the tables of `m_c` were obtained from the full enumeration (ANOVA
+averages); at a size beyond enumeration they must come from elsewhere (anchored
+expansions, a smaller instance), and the remainder statistics at that size are an
+extrapolation until measured (workstream P3 was told).  Homopeptides only; no charged
+side chains in this part (their domains are not products).
+
 ### Reading (kept apart from the statements)
 
 1. **"Independent of the size of the system" is true of a constant box and moves the

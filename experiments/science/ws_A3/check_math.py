@@ -25,6 +25,9 @@ report (COMMON rule 3: numerics before theory).
       two- and three-level alternatives), and N(m) is the hinted count of T3 up to the factor ln(1/delta).
   C8  Hoeffding's (4.12)-(4.13): ln E e^{Y-EY} <= -w p + ln(1 - p + p e^w), p = (EY - min Y)/w, on random laws;
       it is never larger than L(w) and equals it only at the extremal p.
+  C9  Reference = two-state Markov chain with contraction theta: ln E e^{lam(r-Er)} <= lam^2 K/(8(1-theta)^2),
+      D_p <= p^2 K/(8(p-1)(1-theta)^2), Var <= K/(1-theta)^2  (corollaries of Chazottes-Collet-Kuelske-Redig,
+      Thms 1-2, with the Markov coupling); and the sharp two-point Bennett bound W(b, s2) of addendum A17.7.
   C5 also checks the refined bound D_p <= (p-1)K/8 + sum_i L(c_i)   (bounded range => zCDP, composed).
   C5 (last block) checks the same bound for NON-product reference measures with the ranges c~_i of the
       conditional free energy F_i = -ln E_pi[e^{-r} | x_<=i]  (remark after A3.2 in the report).
@@ -410,4 +413,56 @@ for _ in range(20000):
     ratios.append(hb / L(w))
 print(f"    {20000 - skipped} laws ({skipped} nearly degenerate ones skipped): largest gap/Hoeffding bound = {mxh:.6f} (<= 1);"
       f" Hoeffding bound / L(w): median {float(np.median(ratios)):.3f}, max {max(ratios):.6f} (<= 1)")
+# ----------------------------------------------------------------------------------------------- C9
+print("C9  Markov-chain reference: mgf and Renyi bounds with the coupling-matrix constant 1/(1-theta)^2,")
+print("    and Bennett's sharp two-point bound (A17.7) on random laws")
+worst_mgf = 0.0
+worst_dp = 0.0
+worst_var = 0.0
+cnt9 = 0
+for n in [5, 7, 9]:
+    states = all_states(n, 2)
+    N = len(states)
+    flip = [np.arange(N) ^ (1 << (n - 1 - i)) for i in range(n)]
+    for _ in range(40):
+        a, b_ = rng.uniform(0.05, 0.95, 2)          # P(1|0) = a, P(1|1) = b_
+        theta = abs(a - b_)                          # contraction coefficient (TV distance between the rows)
+        p0 = rng.uniform(0.05, 0.95)
+        pi = np.where(states[:, 0] == 1, p0, 1 - p0)
+        for i in range(1, n):
+            prev, cur = states[:, i - 1], states[:, i]
+            p1 = np.where(prev == 1, b_, a)
+            pi = pi * np.where(cur == 1, p1, 1 - p1)
+        r = rng.normal(0, float(rng.choice([0.3, 1.0])), N)
+        c = np.array([np.max(np.abs(r - r[flip[i]])) for i in range(n)])
+        K = float(np.sum(c ** 2))
+        normD2 = 1.0 / (1.0 - theta) ** 2            # ||D||^2 <= (sum_j theta^j)^2 for the Markov coupling
+        Er = float(np.dot(pi, r))
+        cnt9 += 1
+        worst_var = max(worst_var, float(np.dot(pi, (r - Er) ** 2)) / (normD2 * K))
+        for lam in [-3.0, -1.0, 1.0, 2.0, 4.0]:
+            lm = math.log(float(np.dot(pi, np.exp(lam * (r - Er)))))
+            worst_mgf = max(worst_mgf, lm / (lam * lam * normD2 * K / 8))
+        pg = pi * np.exp(-(r - r.min()))
+        pg /= pg.sum()
+        for p in [1.5, 2.0, 4.0]:
+            worst_dp = max(worst_dp, renyi(pg, pi, p) / (p * p * normD2 * K / (8 * (p - 1))))
+print(f"    {cnt9} random two-state chains with random r: largest ln E e^(lam(r-Er)) / (lam^2 K/(8(1-theta)^2)) = {worst_mgf:.4f};"
+      f" largest D_p/(p^2 K/(8(p-1)(1-theta)^2)) = {worst_dp:.4f}; largest Var/(K/(1-theta)^2) = {worst_var:.4f}  (all must be <= 1)")
+worst_b = 0.0
+att = 0.0
+for _ in range(20000):
+    k = int(rng.integers(2, 7))
+    y = rng.normal(0, float(rng.choice([0.3, 1.0, 3.0])), k)
+    pr = dirichlet(k, float(rng.choice([0.2, 1.0])))
+    y = y - float(np.dot(pr, y))                     # centred: Y = -(r - E r)
+    bb = float(y.max())
+    s2 = float(np.dot(pr, y * y))
+    if bb < 1e-3 or s2 < 1e-8:
+        continue
+    gap = math.log(float(np.dot(pr, np.exp(y))))
+    W = math.log((bb * bb * math.exp(-s2 / bb) + s2 * math.exp(bb)) / (bb * bb + s2))
+    worst_b = max(worst_b, gap / W)
+    att = max(att, W / ((s2 / bb ** 2) * (math.exp(bb) - 1 - bb)))
+print(f"    Bennett two-point bound: largest gap/W(b, s2) = {worst_b:.6f} (<= 1); largest W/((s2/b^2)(e^b-1-b)) = {att:.6f} (<= 1)")
 print("done")

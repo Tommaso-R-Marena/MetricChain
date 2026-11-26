@@ -561,7 +561,14 @@ was done.
    are a floor of a few `k_BT` and a variance of `(0.04 k_BT)²` for the remainder beyond
    pairwise — the first by analysis of the energy function (workstream P3), the second
    computable for explicit local remainders.  The instance values were obtained by
-   enumeration: a test of sharpness, not a certificate.
+   enumeration: a test of sharpness, not a certificate.  *Added after checkpoint 37
+   (addendum A17 (8), (9)):* the first-order bounds hold for a Markov-chain reference
+   with contraction coefficients in place of independence (proved; 700 random chains);
+   and **on the real homopeptide instances a next-nearest-neighbour chain — exactly
+   solvable at any length — already leaves a remainder with floor `≤ 0.11 k_BT` and
+   `σ ≤ 0.01 k_BT` on a strand or PPII backbone** (on the helix pairs up to four residues
+   apart are needed).  The only missing piece of a certified solvated side-chain free
+   energy at any length is a proved floor and variance bound for that remainder.
 
 ## Do not rely on (yet)
 

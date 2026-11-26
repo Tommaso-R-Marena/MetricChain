@@ -21,8 +21,15 @@ directory cannot import each other.  New here:
 * Part 8 — the same in the weights, for the one-body marginal oracle on the cube
   (`oracle_packing_weights`); the family of alternatives of Theorem A (cyclic averages of dips,
   `barW`) with its invariance, mass, density, membership of the class and the counting bound.
-* Part 9 — **Theorem A, the every-`n` statement** (`theoremA_group`, `theoremA_fin`,
-  `theoremA_fin_div`).
+* Part 9 — **Theorem A, the every-`n` statement** `E|Q(ψ₀)| ≥ (1 − 2δ)/(n·H_{k,r})`
+  (`theoremA_group_sharp`, `theoremA_group`, `theoremA_group_div`, `theoremA_fin`).
+* Part 10 — **the Chernoff form** `H_{k,r} ≤ (n+1)·e^{tr}·ρ_t(k/n; γ)ⁿ` (`Hkr_le_chernoff`, from the
+  binomial mode bound `binomial_mode_bound` and `card_wt_eq`), and Theorem A with it
+  (`theoremA_group_chernoff`, `theoremA_fin_chernoff`).
+* Part 11 — **the last display of Theorem A**, with the constant `C_m`
+  (`theoremA_group_Cm`, `theoremA_fin_Cm`).
+
+Nothing is assumed: no statement of the report enters as a hypothesis.
 -/
 
 set_option autoImplicit false
@@ -160,6 +167,34 @@ theorem hammingDist_flipAt (x : ι → Bool) (i : ι) : hammingDist (flipAt x i)
   · rintro rfl
     rw [flipAt_same]
     cases x j <;> simp
+
+/-- Flipping a coordinate of `y` at which it differs from `x` lowers the Hamming distance by
+one. -/
+theorem hammingDist_flipAt_right {x y : ι → Bool} {i : ι} (hi : x i ≠ y i) {d : ℕ}
+    (hd : hammingDist x y = d + 1) : hammingDist x (flipAt y i) = d := by
+  have hset : (univ.filter fun j => x j ≠ flipAt y i j) =
+      (univ.filter fun j => x j ≠ y j).erase i := by
+    ext j
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_erase]
+    by_cases hj : j = i
+    · subst hj
+      rw [flipAt_same]
+      constructor
+      · intro h1
+        exfalso
+        revert hi h1
+        cases x j <;> cases y j <;> simp
+      · rintro ⟨h1, _⟩
+        exact absurd rfl h1
+    · rw [flipAt_ne y hj]
+      exact ⟨fun h1 => ⟨hj, h1⟩, fun h1 => h1.2⟩
+  have hmem : i ∈ univ.filter fun j => x j ≠ y j := by
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+    exact hi
+  have hcard : (univ.filter fun j => x j ≠ y j).card = d + 1 := hd
+  show (univ.filter fun j => x j ≠ flipAt y i j).card = d
+  rw [hset, Finset.card_erase_of_mem hmem, hcard]
+  rfl
 
 /-- A function that rises by at most `u` under every single flip rises by at most `u · d_H`. -/
 theorem sub_le_mul_hammingDist {u : ℝ} {ψ : (ι → Bool) → ℝ}
@@ -1010,6 +1045,170 @@ theorem lemma0_additive_fill {p u c : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hu : 0 �
   refine ⟨γ, hγu, tiltW_inCone hp0 hp1 (fun _ => hγu), fun i => ?_⟩
   rw [margW_tiltW hp0 hp1]
   exact hγc
+
+/-! ### Lemma 0, third sentence: rigidity at the ends of the window -/
+
+/-- If the marginal at site `i` is the upper end `p₊` of the window, every flip `0 → 1` at `i`
+multiplies the weight by exactly `e^{u}`. -/
+theorem flip_eq_of_marg_eq_upper {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {w : (ι → Bool) → ℝ}
+    (hw : InCone u w) (i : ι) (h : margW (refW p) w i = pTilt p (-u)) :
+    ∀ x, x i = false → w (flipAt x i) = Real.exp u * w x := by
+  have hπ := refW_pos (ι := ι) hp0 hp1
+  have hmass := massW_pos hπ hw.1
+  have hsum := oneW_add_zeroW (refW p) w i
+  have hflip := oneW_eq_sum_flip (refW p) w i
+  have heq : (1 - p) * oneW (refW p) w i = p * Real.exp u * zeroW (refW p) w i := by
+    unfold margW pTilt at h
+    rw [div_eq_div_iff hmass.ne' (tiltZ_pos hp0 hp1 (-u)).ne', ← hsum] at h
+    unfold tiltZ at h
+    rw [neg_neg] at h
+    linarith
+  have hterms : ∀ x : ι → Bool, 0 ≤ (if x i = true then 0
+      else refW p x * p * (Real.exp u * w x - w (flipAt x i))) := by
+    intro x
+    split_ifs
+    · exact le_rfl
+    · exact mul_nonneg (mul_nonneg (hπ x).le hp0.le) (sub_nonneg.mpr (hw.2 x i).2)
+  have hsum0 : ∑ x, (if x i = true then 0
+      else refW p x * p * (Real.exp u * w x - w (flipAt x i))) = 0 := by
+    have e : ∑ x, (if x i = true then 0
+        else refW p x * p * (Real.exp u * w x - w (flipAt x i))) =
+        p * Real.exp u * zeroW (refW p) w i - (1 - p) * oneW (refW p) w i := by
+      rw [hflip]
+      unfold zeroW
+      rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_sub_distrib]
+      refine Finset.sum_congr rfl fun x _ => ?_
+      by_cases hx : x i = true
+      · rw [if_pos hx, if_pos hx, if_pos hx]
+        ring
+      · rw [if_neg hx, if_neg hx, if_neg hx]
+        have hx' : x i = false := by simpa using hx
+        have h1 := refW_flip_odds p x i hx'
+        linear_combination (w (flipAt x i)) * h1
+    rw [e, heq]
+    ring
+  intro x hx
+  have h0 := (Finset.sum_eq_zero_iff_of_nonneg fun x _ => hterms x).mp hsum0 x
+    (Finset.mem_univ x)
+  rw [if_neg (by rw [hx]; exact Bool.false_ne_true)] at h0
+  have hne : refW p x * p ≠ 0 := (mul_pos (hπ x) hp0).ne'
+  have h2 := (mul_eq_zero.mp h0).resolve_left hne
+  linarith
+
+/-- If the marginal at site `i` is the lower end `p₋` of the window, every flip `0 → 1` at `i`
+multiplies the weight by exactly `e^{−u}`. -/
+theorem flip_eq_of_marg_eq_lower {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {w : (ι → Bool) → ℝ}
+    (hw : InCone u w) (i : ι) (h : margW (refW p) w i = pTilt p u) :
+    ∀ x, x i = false → w (flipAt x i) = Real.exp (-u) * w x := by
+  have hπ := refW_pos (ι := ι) hp0 hp1
+  have hmass := massW_pos hπ hw.1
+  have hsum := oneW_add_zeroW (refW p) w i
+  have hflip := oneW_eq_sum_flip (refW p) w i
+  have heq : (1 - p) * oneW (refW p) w i = p * Real.exp (-u) * zeroW (refW p) w i := by
+    unfold margW pTilt at h
+    rw [div_eq_div_iff hmass.ne' (tiltZ_pos hp0 hp1 u).ne', ← hsum] at h
+    unfold tiltZ at h
+    linarith
+  have hterms : ∀ x : ι → Bool, 0 ≤ (if x i = true then 0
+      else refW p x * p * (w (flipAt x i) - Real.exp (-u) * w x)) := by
+    intro x
+    split_ifs
+    · exact le_rfl
+    · exact mul_nonneg (mul_nonneg (hπ x).le hp0.le) (sub_nonneg.mpr (hw.2 x i).1)
+  have hsum0 : ∑ x, (if x i = true then 0
+      else refW p x * p * (w (flipAt x i) - Real.exp (-u) * w x)) = 0 := by
+    have e : ∑ x, (if x i = true then 0
+        else refW p x * p * (w (flipAt x i) - Real.exp (-u) * w x)) =
+        (1 - p) * oneW (refW p) w i - p * Real.exp (-u) * zeroW (refW p) w i := by
+      rw [hflip]
+      unfold zeroW
+      rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_sub_distrib]
+      refine Finset.sum_congr rfl fun x _ => ?_
+      by_cases hx : x i = true
+      · rw [if_pos hx, if_pos hx, if_pos hx]
+        ring
+      · rw [if_neg hx, if_neg hx, if_neg hx]
+        have hx' : x i = false := by simpa using hx
+        have h1 := refW_flip_odds p x i hx'
+        linear_combination (-(w (flipAt x i))) * h1
+    rw [e, heq]
+    ring
+  intro x hx
+  have h0 := (Finset.sum_eq_zero_iff_of_nonneg fun x _ => hterms x).mp hsum0 x
+    (Finset.mem_univ x)
+  rw [if_neg (by rw [hx]; exact Bool.false_ne_true)] at h0
+  have hne : refW p x * p ≠ 0 := (mul_pos (hπ x) hp0).ne'
+  have h2 := (mul_eq_zero.mp h0).resolve_left hne
+  linarith
+
+/-- **Lemma 0, third sentence (rigidity), in the weights.**  If all `n` one-body marginals of a
+class member are at ends of the window, with pattern `s` (`μ_w(x_i = 1) = p₊` iff `s_i = 1`),
+then `w = w(s)·e^{−u·d_H(·, s)}`: the member is the cone at `s`, up to a constant factor. -/
+theorem lemma0_rigidity {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {w : (ι → Bool) → ℝ}
+    (hw : InCone u w) (s : ι → Bool)
+    (h : ∀ i, margW (refW p) w i = if s i = true then pTilt p (-u) else pTilt p u) :
+    ∀ x, w x = w s * Real.exp (-u * (hammingDist x s : ℝ)) := by
+  -- a flip away from `s` multiplies the weight by `e^{−u}`
+  have hkey : ∀ (y : ι → Bool) (i : ι), y i = s i → w (flipAt y i) = Real.exp (-u) * w y := by
+    intro y i hyi
+    rcases Bool.eq_false_or_eq_true (s i) with hs | hs
+    · -- `s i = true`: the marginal is `p₊`
+      have hi := h i
+      rw [if_pos hs] at hi
+      have hz : flipAt y i i = false := by
+        rw [flipAt_same, hyi, hs]
+        rfl
+      have h1 := flip_eq_of_marg_eq_upper hp0 hp1 hw i hi (flipAt y i) hz
+      rw [flipAt_flipAt] at h1
+      rw [h1, ← mul_assoc, ← Real.exp_add, neg_add_cancel, Real.exp_zero, one_mul]
+    · -- `s i = false`: the marginal is `p₋`
+      have hi := h i
+      rw [if_neg (by rw [hs]; exact Bool.false_ne_true)] at hi
+      exact flip_eq_of_marg_eq_lower hp0 hp1 hw i hi y (hyi.trans hs)
+  intro x
+  induction' hd : hammingDist x s with d ih generalizing x
+  · rw [hammingDist_eq_zero] at hd
+    subst hd
+    simp
+  · have hne : x ≠ s := by
+      intro hxs
+      rw [← hammingDist_eq_zero, hd] at hxs
+      exact Nat.succ_ne_zero d hxs
+    obtain ⟨i, hi⟩ := Function.ne_iff.mp hne
+    have hd' : hammingDist s x = d + 1 := by
+      rw [hammingDist_comm]
+      exact hd
+    have hy : hammingDist (flipAt x i) s = d := by
+      rw [hammingDist_comm]
+      exact hammingDist_flipAt_right (Ne.symm hi) hd'
+    have hyi : flipAt x i i = s i := by
+      rw [flipAt_same]
+      revert hi
+      cases x i <;> cases s i <;> simp
+    have h1 := ih (flipAt x i) hy
+    have h2 := hkey (flipAt x i) i hyi
+    rw [flipAt_flipAt] at h2
+    rw [h2, h1]
+    push_cast
+    rw [← mul_assoc, mul_comm (Real.exp (-u)) (w s), mul_assoc, ← Real.exp_add]
+    congr 2
+    ring
+
+/-- **Lemma 0, third sentence (rigidity), in the energies:** if `ψ ∈ L_u` has all its one-body
+marginals at ends of the window, with pattern `s`, then `ψ = ψ(s) + u·d_H(·, s)` — at a cone the
+oracle reveals the instance up to a constant. -/
+theorem lemma0_rigidity_lipH {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1) {ψ : (ι → Bool) → ℝ}
+    (hψ : LipH u ψ) (s : ι → Bool)
+    (h : ∀ i, margW (refW p) (fun x => Real.exp (-ψ x)) i =
+      if s i = true then pTilt p (-u) else pTilt p u) :
+    ∀ x, ψ x = ψ s + u * (hammingDist x s : ℝ) := by
+  intro x
+  have h1 := lemma0_rigidity hp0 hp1 (lipH_iff_inCone.mp hψ) s h x
+  have h2 : Real.exp (-ψ x) = Real.exp (-ψ s + -u * (hammingDist x s : ℝ)) := by
+    rw [Real.exp_add]
+    exact h1
+  have h3 := Real.exp_injective h2
+  linarith
 
 /-! ### Conditional laws (Proposition A1.1, item 1, of `A1_REPORT.md` §2.5) -/
 

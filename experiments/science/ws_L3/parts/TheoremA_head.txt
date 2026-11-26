@@ -21,8 +21,15 @@ directory cannot import each other.  New here:
 * Part 8 — the same in the weights, for the one-body marginal oracle on the cube
   (`oracle_packing_weights`); the family of alternatives of Theorem A (cyclic averages of dips,
   `barW`) with its invariance, mass, density, membership of the class and the counting bound.
-* Part 9 — **Theorem A, the every-`n` statement** (`theoremA_group`, `theoremA_fin`,
-  `theoremA_fin_div`).
+* Part 9 — **Theorem A, the every-`n` statement** `E|Q(ψ₀)| ≥ (1 − 2δ)/(n·H_{k,r})`
+  (`theoremA_group_sharp`, `theoremA_group`, `theoremA_group_div`, `theoremA_fin`).
+* Part 10 — **the Chernoff form** `H_{k,r} ≤ (n+1)·e^{tr}·ρ_t(k/n; γ)ⁿ` (`Hkr_le_chernoff`, from the
+  binomial mode bound `binomial_mode_bound` and `card_wt_eq`), and Theorem A with it
+  (`theoremA_group_chernoff`, `theoremA_fin_chernoff`).
+* Part 11 — **the last display of Theorem A**, with the constant `C_m`
+  (`theoremA_group_Cm`, `theoremA_fin_Cm`).
+
+Nothing is assumed: no statement of the report enters as a hypothesis.
 -/
 
 set_option autoImplicit false

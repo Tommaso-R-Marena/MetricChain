@@ -668,7 +668,7 @@ tables agree with R2's for `N ≤ 22`):
 | 22 | 1 617 | 0.152 | 4.2 | 1 778 | 0.909 | 0.84 |
 | 24 | 2 350 | 0.170 | 4.4 | 2 565 | 0.916 | 0.93 |
 
-(i) `|P_N|/N³` reaches `0.17` at 24 beads against `vol 𝒦 ≥ 1.56` (now `≥ 1.61`): the count is at
+(i) `|P_N|/N³` reaches `0.17` at 24 beads against `vol 𝒦 ≥ 1.56` (now `≥ 1.63`): the count is at
 most a ninth of its asymptote, the local exponent is still above 4 and falling.  **The
 tables cannot test the constant**; they are consistent with convergence from below, as
 the surface law (`N^{−1/3}`) predicts.  A2's own plausibility estimate said as much.
@@ -785,8 +785,8 @@ outside the directory is written; R4's module is imported with bytecode writing 
 
 | script | what | size | time |
 |---|---|---|---|
-| `gcc -O3 -march=native -o bin/r9_semi r9_semi.c`; `bin/r9_semi 22 0 20 out` | enumeration, clean flags, cleaning tests from coordinates, class tables `out/r9_tab_N*.txt` | 3–22 beads | 9 min |
-| `bin/r9_semi 13 13 0 out 0 2`, `… 1 2` | all pairs of clean bridges | `1.6·10⁸` pairs | 2 × 3.3 min |
+| `gcc -O3 -march=native -o bin/r9_semi r9_semi.c`; `bin/r9_semi 22 0 20 out` | enumeration, clean flags, cleaning tests from coordinates, class tables `out/r9_tab_N*.txt` | 3–22 beads | 7 min |
+| `bin/r9_semi 13 13 0 out 0 2`, `… 1 2` | all pairs of clean bridges | `1.6·10⁸` pairs | 2 × 3.2 min |
 | `gcc … -o bin/r9_cobound r9_cobound.c`; `bin/r9_cobound 13 0 2`, `… 1 2` | all pairs of arbitrary bridges: coboundary identities | `3.5·10⁸` pairs | 2 × 6.3 min |
 | `r9_semigroup_analysis.py` | tables against R2's; set-level closure; generated lattice; counts, hulls, holes | — | 1 min |
 | `r9_long.py`, `r9_certificate.py`, `r9_head2.py` | long random bridges; the unimodular certificate; head 2 + tail 3 | — | 1 min, 20 s, 2 min |
