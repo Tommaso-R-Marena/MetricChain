@@ -1,0 +1,188 @@
+r20_theorem.py  instance set 'tiny'  crosscheck=True orbits=True
+loop-energy functions:
+  H1_stack_only                [H] stack -1, everything else 0
+  H2_penalties                 [H] stack -3; bulge 2+u; interior 3+u; multiloop 4+k+u; exterior 0
+  H3_hash_0to9                 [H] stack -5; bulge/interior/multi: pseudo-random integer in 0..9 (crc32 of the loop, seed 1)
+  H4_hash_0to3                 [H] stack -2; bulge/interior/multi: pseudo-random integer in 0..3 (seed 2)
+  H5_boundary_zero             [H] stack -7; bulge/interior/multi exactly 0 (boundary of H2)
+  GEN1_H2star_delta1           [GEN] (H2*) with delta=1: every bulge/interior/multiloop has energy sigma*b(f)+1 < 0 (b = item bonds on it); prediction: S1, S3-S5 unchanged, S2 with gap min(|sigma|,delta)=1
+  GEN2_H2star_mixed            [GEN] bulge with b>=2 item bonds: sigma*(b-1); bulge with b=1: -1; interior/multi: sigma*b+3; prediction gap 3
+  GEN3_coax_weaker             [GEN] stack -2; flush nick (coaxial stack) kappa=-1 with sigma<kappa<=0; other loops 0; prediction: E* = sigma*M + kappa*(n-m), gap kappa-sigma = 1, minimisers = tilings
+  GEN4_coax_equal_bulge_pos    [GEN] stack -2; flush nick -2 (coaxial stack as strong as a stack); bulge/interior/multi +1; prediction (for B>=2): E* = sigma*m*(B-1), gap min(|sigma|,1) = 1, minimisers = tilings
+  GEN5_dangles_small           [GEN] stack -3; exterior loops: -1 per unpaired base covalently next to a pair ('some dangles'); other 0; prediction (|sigma| > D_G + D_C = 2): E* = sigma*M + d*(m-1), gap |sigma|-2 = 1, minimisers = tilings
+  GEN6_exterior_constant       [GEN] stack -3; EVERY exterior loop -2 (a constant): energies shift by -2c for all structures; the entry E* omits the shift on purpose, see the special handling (shift = -2*(n+1))
+  CTRL1_H0_coax_equal          [CTRL] (H0) dropped: a flush nick ('stack across a nick') gets sigma=-1; bulge/interior/multi 0
+  CTRL2_H2_bulge_as_stack      [CTRL] (H2) dropped: every bulge gets sigma=-1
+  CTRL3_H1_sigma_zero          [CTRL] (H1) dropped: sigma = 0 (all loops 0)
+  CTRL4_H2star_delta0          [CTRL] (H2*) at delta=0: bulge/interior/multi get sigma*b(f)
+  CTRL5_dangles_large          [CTRL] (H0) dropped: 'dangles' of -2 per base with |sigma|=3 < D_G+D_C=4; tested against the GEN5 prediction E* = sigma*M + d*(m-1) (minimisers = tilings), which must fail
+
+instance a=[2, 1] m=1 B=3 : n=2 c=3 N=6 M=1  solvable=True  Til=2  L=1  prod(mu_s!)=1  Til/prod=2
+  connected unpseudoknotted labelled structures: 14   max st = 1   (orders: 2)   time 0.0 s
+  labelled count by number of stacks k: 0:12 1:2
+  U1 (st<=M, max st=M iff solvable) violations: 0   U2 (R=1): 0   U3 (unique order): 0   U4 (faces/nicks): 0   U5 (free action; orbits=14): 0
+  crosscheck (unpruned enumeration 40 structures, connected by union-find 14): agrees
+  H1_stack_only                [H] sigma= -1  E*=  -1  min=  -1 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H2_penalties                 [H] sigma= -3  E*=  -3  min=  -3 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H3_hash_0to9                 [H] sigma= -5  E*=  -5  min=  -5 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H4_hash_0to3                 [H] sigma= -2  E*=  -2  min=  -2 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H5_boundary_zero             [H] sigma= -7  E*=  -7  min=  -7 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN1_H2star_delta1           [GEN] sigma= -4  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN2_H2star_mixed            [GEN] sigma= -6  E*=  -6  min=  -6 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN3_coax_weaker             [GEN] sigma= -2  E*=  -3  min=  -3 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN4_coax_equal_bulge_pos    [GEN] sigma= -2  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN5_dangles_small           [GEN] sigma= -3  E*=  -3  min=  -3 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN6_exterior_constant       [GEN] sigma= -3  E*=  -9  min=  -9 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL1_H0_coax_equal          [CTRL] sigma= -1  E*=  -1  min=  -2 (#min=2)  #at E*=4 (non-tiling 4; tilings off E* 2; orbits 0)  viol S1..S5 = 1 0 1 1 1  decision right
+  CTRL2_H2_bulge_as_stack      [CTRL] sigma= -1  E*=  -1  min=  -1 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL3_H1_sigma_zero          [CTRL] sigma=  0  E*=   0  min=   0 (#min=14)  #at E*=14 (non-tiling 12; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL4_H2star_delta0          [CTRL] sigma= -4  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL5_dangles_large          [CTRL] sigma= -3  E*=  -3  min=  -4 (#min=12)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 1 0 0 0 0  decision right
+instance a=[2, 2] m=2 B=2 : n=2 c=3 N=9 M=2  solvable=True  Til=2  L=1  prod(mu_s!)=2  Til/prod=1
+  connected unpseudoknotted labelled structures: 82   max st = 2   (orders: 2)   time 0.0 s
+  labelled count by number of stacks k: 0:64 1:16 2:2
+  U1 (st<=M, max st=M iff solvable) violations: 0   U2 (R=1): 0   U3 (unique order): 0   U4 (faces/nicks): 0   U5 (free action; orbits=41): 0
+  crosscheck (unpruned enumeration 140 structures, connected by union-find 82): agrees
+  H1_stack_only                [H] sigma= -1  E*=  -2  min=  -2 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  H2_penalties                 [H] sigma= -3  E*=  -6  min=  -6 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  H3_hash_0to9                 [H] sigma= -5  E*= -10  min= -10 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  H4_hash_0to3                 [H] sigma= -2  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  H5_boundary_zero             [H] sigma= -7  E*= -14  min= -14 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN1_H2star_delta1           [GEN] sigma= -4  E*=  -8  min=  -8 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN2_H2star_mixed            [GEN] sigma= -6  E*= -12  min= -12 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN3_coax_weaker             [GEN] sigma= -2  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN4_coax_equal_bulge_pos    [GEN] sigma= -2  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN5_dangles_small           [GEN] sigma= -3  E*=  -7  min=  -7 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN6_exterior_constant       [GEN] sigma= -3  E*= -12  min= -12 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL1_H0_coax_equal          [CTRL] sigma= -1  E*=  -2  min=  -2 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL2_H2_bulge_as_stack      [CTRL] sigma= -1  E*=  -2  min=  -2 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL3_H1_sigma_zero          [CTRL] sigma=  0  E*=   0  min=   0 (#min=82)  #at E*=82 (non-tiling 80; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL4_H2star_delta0          [CTRL] sigma= -4  E*=  -8  min=  -8 (#min=2)  #at E*=2 (non-tiling 0; tilings off E* 0; orbits 1)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL5_dangles_large          [CTRL] sigma= -3  E*=  -8  min= -10 (#min=24)  #at E*=10 (non-tiling 8; tilings off E* 0; orbits 1)  viol S1..S5 = 1 0 1 1 0  decision right
+instance a=[1, 1, 2] m=2 B=2 : n=3 c=4 N=9 M=1  solvable=True  Til=4  L=1  prod(mu_s!)=2  Til/prod=2
+  connected unpseudoknotted labelled structures: 54   max st = 1   (orders: 6)   time 0.0 s
+  labelled count by number of stacks k: 0:50 1:4
+  U1 (st<=M, max st=M iff solvable) violations: 0   U2 (R=1): 0   U3 (unique order): 0   U4 (faces/nicks): 0   U5 (free action; orbits=27): 0
+  crosscheck (unpruned enumeration 420 structures, connected by union-find 54): agrees
+  H1_stack_only                [H] sigma= -1  E*=  -1  min=  -1 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H2_penalties                 [H] sigma= -3  E*=  -3  min=  -3 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H3_hash_0to9                 [H] sigma= -5  E*=  -5  min=  -5 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H4_hash_0to3                 [H] sigma= -2  E*=  -2  min=  -2 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  H5_boundary_zero             [H] sigma= -7  E*=  -7  min=  -7 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN1_H2star_delta1           [GEN] sigma= -4  E*=  -4  min=  -4 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN2_H2star_mixed            [GEN] sigma= -6  E*=  -6  min=  -6 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN3_coax_weaker             [GEN] sigma= -2  E*=  -3  min=  -3 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN4_coax_equal_bulge_pos    [GEN] sigma= -2  E*=  -4  min=  -4 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN5_dangles_small           [GEN] sigma= -3  E*=  -4  min=  -4 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN6_exterior_constant       [GEN] sigma= -3  E*= -11  min= -11 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL1_H0_coax_equal          [CTRL] sigma= -1  E*=  -1  min=  -2 (#min=6)  #at E*=32 (non-tiling 32; tilings off E* 4; orbits 0)  viol S1..S5 = 1 0 1 1 1  decision right
+  CTRL2_H2_bulge_as_stack      [CTRL] sigma= -1  E*=  -1  min=  -1 (#min=6)  #at E*=6 (non-tiling 2; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL3_H1_sigma_zero          [CTRL] sigma=  0  E*=   0  min=   0 (#min=54)  #at E*=54 (non-tiling 50; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL4_H2star_delta0          [CTRL] sigma= -4  E*=  -4  min=  -4 (#min=6)  #at E*=6 (non-tiling 2; tilings off E* 0; orbits 2)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL5_dangles_large          [CTRL] sigma= -3  E*=  -5  min=  -6 (#min=48)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 2)  viol S1..S5 = 1 0 0 0 0  decision right
+instance a=[3, 1] m=2 B=2 : n=2 c=3 N=9 M=2  solvable=False  Til=0  L=0  prod(mu_s!)=1  Til/prod=0
+  connected unpseudoknotted labelled structures: 62   max st = 1   (orders: 2)   time 0.0 s
+  labelled count by number of stacks k: 0:52 1:10
+  U1 (st<=M, max st=M iff solvable) violations: 0   U2 (R=1): 0   U3 (unique order): 0   U4 (faces/nicks): 0   U5 (free action; orbits=62): 0
+  crosscheck (unpruned enumeration 140 structures, connected by union-find 62): agrees
+  H1_stack_only                [H] sigma= -1  E*=  -2  min=  -1 (#min=10)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H2_penalties                 [H] sigma= -3  E*=  -6  min=  -3 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H3_hash_0to9                 [H] sigma= -5  E*= -10  min=  -5 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H4_hash_0to3                 [H] sigma= -2  E*=  -4  min=  -2 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H5_boundary_zero             [H] sigma= -7  E*= -14  min=  -7 (#min=10)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN1_H2star_delta1           [GEN] sigma= -4  E*=  -8  min=  -7 (#min=10)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN2_H2star_mixed            [GEN] sigma= -6  E*= -12  min=  -9 (#min=4)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN3_coax_weaker             [GEN] sigma= -2  E*=  -4  min=  -3 (#min=2)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN4_coax_equal_bulge_pos    [GEN] sigma= -2  E*=  -4  min=  -3 (#min=2)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN5_dangles_small           [GEN] sigma= -3  E*=  -7  min=  -6 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN6_exterior_constant       [GEN] sigma= -3  E*= -12  min=  -9 (#min=10)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL1_H0_coax_equal          [CTRL] sigma= -1  E*=  -2  min=  -2 (#min=2)  #at E*=2 (non-tiling 2; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL2_H2_bulge_as_stack      [CTRL] sigma= -1  E*=  -2  min=  -2 (#min=2)  #at E*=2 (non-tiling 2; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL3_H1_sigma_zero          [CTRL] sigma=  0  E*=   0  min=   0 (#min=62)  #at E*=62 (non-tiling 62; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 1 1 0  decision WRONG
+  CTRL4_H2star_delta0          [CTRL] sigma= -4  E*=  -8  min=  -8 (#min=10)  #at E*=10 (non-tiling 10; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL5_dangles_large          [CTRL] sigma= -3  E*=  -8  min= -10 (#min=6)  #at E*=14 (non-tiling 14; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+instance a=[2, 2, 2] m=2 B=3 : n=3 c=4 N=13 M=3  solvable=False  Til=0  L=0  prod(mu_s!)=6  Til/prod=0
+  connected unpseudoknotted labelled structures: 2262   max st = 2   (orders: 6)   time 0.3 s
+  labelled count by number of stacks k: 0:1464 1:696 2:102
+  U1 (st<=M, max st=M iff solvable) violations: 0   U2 (R=1): 0   U3 (unique order): 0   U4 (faces/nicks): 0   U5 (free action; orbits=377): 0
+  crosscheck (unpruned enumeration 5544 structures, connected by union-find 2262): agrees
+  H1_stack_only                [H] sigma= -1  E*=  -3  min=  -2 (#min=102)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H2_penalties                 [H] sigma= -3  E*=  -9  min=  -6 (#min=96)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H3_hash_0to9                 [H] sigma= -5  E*= -15  min= -10 (#min=96)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H4_hash_0to3                 [H] sigma= -2  E*=  -6  min=  -4 (#min=96)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H5_boundary_zero             [H] sigma= -7  E*= -21  min= -14 (#min=102)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN1_H2star_delta1           [GEN] sigma= -4  E*= -12  min= -11 (#min=6)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN2_H2star_mixed            [GEN] sigma= -6  E*= -18  min= -13 (#min=6)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN3_coax_weaker             [GEN] sigma= -2  E*=  -7  min=  -6 (#min=6)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN4_coax_equal_bulge_pos    [GEN] sigma= -2  E*=  -8  min=  -7 (#min=6)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN5_dangles_small           [GEN] sigma= -3  E*= -10  min=  -9 (#min=96)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN6_exterior_constant       [GEN] sigma= -3  E*= -17  min= -14 (#min=102)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL1_H0_coax_equal          [CTRL] sigma= -1  E*=  -3  min=  -4 (#min=6)  #at E*=72 (non-tiling 72; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL2_H2_bulge_as_stack      [CTRL] sigma= -1  E*=  -3  min=  -3 (#min=6)  #at E*=6 (non-tiling 6; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL3_H1_sigma_zero          [CTRL] sigma=  0  E*=   0  min=   0 (#min=2262)  #at E*=2262 (non-tiling 2262; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 1 1 0  decision WRONG
+  CTRL4_H2star_delta0          [CTRL] sigma= -4  E*= -12  min= -12 (#min=6)  #at E*=6 (non-tiling 6; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL5_dangles_large          [CTRL] sigma= -3  E*= -11  min= -14 (#min=192)  #at E*=240 (non-tiling 240; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+instance a=[3, 2, 1] m=2 B=3 : n=3 c=4 N=13 M=3  solvable=True  Til=4  L=1  prod(mu_s!)=1  Til/prod=4
+  connected unpseudoknotted labelled structures: 1716   max st = 3   (orders: 6)   time 0.1 s
+  labelled count by number of stacks k: 0:1212 1:442 2:58 3:4
+  U1 (st<=M, max st=M iff solvable) violations: 0   U2 (R=1): 0   U3 (unique order): 0   U4 (faces/nicks): 0   U5 (free action; orbits=1716): 0
+  crosscheck (unpruned enumeration 5544 structures, connected by union-find 1716): agrees
+  H1_stack_only                [H] sigma= -1  E*=  -3  min=  -3 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  H2_penalties                 [H] sigma= -3  E*=  -9  min=  -9 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  H3_hash_0to9                 [H] sigma= -5  E*= -15  min= -15 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  H4_hash_0to3                 [H] sigma= -2  E*=  -6  min=  -6 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  H5_boundary_zero             [H] sigma= -7  E*= -21  min= -21 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN1_H2star_delta1           [GEN] sigma= -4  E*= -12  min= -12 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN2_H2star_mixed            [GEN] sigma= -6  E*= -18  min= -18 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN3_coax_weaker             [GEN] sigma= -2  E*=  -7  min=  -7 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN4_coax_equal_bulge_pos    [GEN] sigma= -2  E*=  -8  min=  -8 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN5_dangles_small           [GEN] sigma= -3  E*= -10  min= -10 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN6_exterior_constant       [GEN] sigma= -3  E*= -17  min= -17 (#min=4)  #at E*=4 (non-tiling 0; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL1_H0_coax_equal          [CTRL] sigma= -1  E*=  -3  min=  -4 (#min=6)  #at E*=52 (non-tiling 52; tilings off E* 4; orbits 0)  viol S1..S5 = 1 0 1 1 1  decision right
+  CTRL2_H2_bulge_as_stack      [CTRL] sigma= -1  E*=  -3  min=  -3 (#min=6)  #at E*=6 (non-tiling 2; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL3_H1_sigma_zero          [CTRL] sigma=  0  E*=   0  min=   0 (#min=1716)  #at E*=1716 (non-tiling 1712; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL4_H2star_delta0          [CTRL] sigma= -4  E*= -12  min= -12 (#min=42)  #at E*=42 (non-tiling 38; tilings off E* 0; orbits 4)  viol S1..S5 = 0 0 1 1 0  decision right
+  CTRL5_dangles_large          [CTRL] sigma= -3  E*= -11  min= -14 (#min=48)  #at E*=160 (non-tiling 156; tilings off E* 0; orbits 4)  viol S1..S5 = 1 0 1 1 0  decision right
+instance a=[4, 2] m=2 B=3 : n=2 c=3 N=13 M=4  solvable=False  Til=0  L=0  prod(mu_s!)=1  Til/prod=0
+  connected unpseudoknotted labelled structures: 1374   max st = 3   (orders: 2)   time 0.1 s
+  labelled count by number of stacks k: 0:846 1:426 2:92 3:10
+  U1 (st<=M, max st=M iff solvable) violations: 0   U2 (R=1): 0   U3 (unique order): 0   U4 (faces/nicks): 0   U5 (free action; orbits=1374): 0
+  crosscheck (unpruned enumeration 1848 structures, connected by union-find 1374): agrees
+  H1_stack_only                [H] sigma= -1  E*=  -4  min=  -3 (#min=10)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H2_penalties                 [H] sigma= -3  E*= -12  min=  -9 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H3_hash_0to9                 [H] sigma= -5  E*= -20  min= -15 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H4_hash_0to3                 [H] sigma= -2  E*=  -8  min=  -6 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  H5_boundary_zero             [H] sigma= -7  E*= -28  min= -21 (#min=10)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN1_H2star_delta1           [GEN] sigma= -4  E*= -16  min= -15 (#min=32)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN2_H2star_mixed            [GEN] sigma= -6  E*= -24  min= -21 (#min=14)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN3_coax_weaker             [GEN] sigma= -2  E*=  -8  min=  -7 (#min=2)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN4_coax_equal_bulge_pos    [GEN] sigma= -2  E*=  -8  min=  -7 (#min=2)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN5_dangles_small           [GEN] sigma= -3  E*= -13  min= -12 (#min=8)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  GEN6_exterior_constant       [GEN] sigma= -3  E*= -18  min= -15 (#min=10)  #at E*=0 (non-tiling 0; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 0 0 0  decision right
+  CTRL1_H0_coax_equal          [CTRL] sigma= -1  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 2; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL2_H2_bulge_as_stack      [CTRL] sigma= -1  E*=  -4  min=  -4 (#min=2)  #at E*=2 (non-tiling 2; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL3_H1_sigma_zero          [CTRL] sigma=  0  E*=   0  min=   0 (#min=1374)  #at E*=1374 (non-tiling 1374; tilings off E* 0; orbits 0)  viol S1..S5 = 0 0 1 1 0  decision WRONG
+  CTRL4_H2star_delta0          [CTRL] sigma= -4  E*= -16  min= -16 (#min=56)  #at E*=56 (non-tiling 56; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+  CTRL5_dangles_large          [CTRL] sigma= -3  E*= -14  min= -17 (#min=4)  #at E*=54 (non-tiling 54; tilings off E* 0; orbits 0)  viol S1..S5 = 0 1 1 1 0  decision WRONG
+
+SUMMARY  set 'tiny': 7 instances (4 solvable, 3 not), 5564 connected labelled structures enumerated, 0.6 s
+  model-independent checks, violations:  U1=0  U2=0  U3=0  U4=0  U5=0
+  per loop-energy function: number of instances violating S1..S5 and number of wrong decisions
+  H1_stack_only                [H   ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  H2_penalties                 [H   ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  H3_hash_0to9                 [H   ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  H4_hash_0to3                 [H   ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  H5_boundary_zero             [H   ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  GEN1_H2star_delta1           [GEN ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  GEN2_H2star_mixed            [GEN ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  GEN3_coax_weaker             [GEN ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  GEN4_coax_equal_bulge_pos    [GEN ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  GEN5_dangles_small           [GEN ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  GEN6_exterior_constant       [GEN ] S1=0 S2=0 S3=0 S4=0 S5=0 wrong decisions=0   -> ok (0 violations)
+  CTRL1_H0_coax_equal          [CTRL] S1=3 S2=3 S3=6 S4=6 S5=3 wrong decisions=3   -> control fails as it must
+  CTRL2_H2_bulge_as_stack      [CTRL] S1=0 S2=3 S3=5 S4=5 S5=0 wrong decisions=3   -> control fails as it must
+  CTRL3_H1_sigma_zero          [CTRL] S1=0 S2=0 S3=7 S4=7 S5=0 wrong decisions=3   -> control fails as it must
+  CTRL4_H2star_delta0          [CTRL] S1=0 S2=3 S3=5 S4=5 S5=0 wrong decisions=3   -> control fails as it must
+  CTRL5_dangles_large          [CTRL] S1=4 S2=3 S3=5 S4=5 S5=0 wrong decisions=3   -> control fails as it must
+RESULT: PASS (classes H and GEN: 0 violations; every control violated)
+END r20_theorem.py

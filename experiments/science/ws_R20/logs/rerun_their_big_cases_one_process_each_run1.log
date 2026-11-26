@@ -1,0 +1,37 @@
+r20_rerun_cases.py: 12 cases read from their script; start 2026-11-26T17:27:46Z
+items=[2, 2, 3, 1] m=2 B=4 model=stack sigma=1: connected structures=66552 MFE=-4 target=-4 #MFE-structures=8 labelled tilings=8 OK [3.1s]
+items=[2, 2, 3, 1] m=2 B=4 model=random sigma=3: connected structures=66552 MFE=-12 target=-12 #MFE-structures=8 labelled tilings=8 OK [3.0s]
+CASE-RESULT OK maxrss_MB=113
+items=[3, 3, 2] m=2 B=4 model=stack sigma=1: connected structures=46002 MFE=-4 target=-5 #MFE-structures=70 labelled tilings=0 OK [0.8s]
+items=[3, 3, 2] m=2 B=4 model=random sigma=3: connected structures=46002 MFE=-12 target=-15 #MFE-structures=64 labelled tilings=0 OK [0.9s]
+CASE-RESULT OK maxrss_MB=73
+items=[3, 3, 1, 1] m=2 B=4 model=stack sigma=1: connected structures=50568 MFE=-4 target=-4 #MFE-structures=16 labelled tilings=16 OK [2.7s]
+items=[3, 3, 1, 1] m=2 B=4 model=random sigma=3: connected structures=50568 MFE=-12 target=-12 #MFE-structures=16 labelled tilings=16 OK [2.7s]
+CASE-RESULT OK maxrss_MB=90
+items=[2, 2, 2, 2] m=2 B=4 model=stack sigma=1: connected structures=87576 MFE=-4 target=-4 #MFE-structures=24 labelled tilings=24 OK [3.1s]
+items=[2, 2, 2, 2] m=2 B=4 model=random sigma=3: connected structures=87576 MFE=-12 target=-12 #MFE-structures=24 labelled tilings=24 OK [3.0s]
+CASE-RESULT OK maxrss_MB=148
+items=[3, 2, 2, 1] m=2 B=4 model=stack sigma=1: connected structures=66552 MFE=-4 target=-4 #MFE-structures=8 labelled tilings=8 OK [2.7s]
+items=[3, 2, 2, 1] m=2 B=4 model=random sigma=3: connected structures=66552 MFE=-12 target=-12 #MFE-structures=8 labelled tilings=8 OK [2.6s]
+CASE-RESULT OK maxrss_MB=113
+items=[2, 1, 2, 1, 3] m=3 B=3 model=stack sigma=1: connected structures=513120 MFE=-4 target=-4 #MFE-structures=48 labelled tilings=48 OK [56.9s]
+items=[2, 1, 2, 1, 3] m=3 B=3 model=random sigma=3: connected structures=513120 MFE=-12 target=-12 #MFE-structures=48 labelled tilings=48 OK [55.4s]
+CASE-RESULT OK maxrss_MB=964
+items=[2, 2, 2, 3] m=3 B=3 model=stack sigma=1: connected structures=409488 MFE=-4 target=-5 #MFE-structures=300 labelled tilings=0 OK [14.0s]
+items=[2, 2, 2, 3] m=3 B=3 model=random sigma=3: connected structures=409488 MFE=-12 target=-15 #MFE-structures=288 labelled tilings=0 OK [13.8s]
+CASE-RESULT OK maxrss_MB=699
+items=[2, 2, 2, 2, 1] m=3 B=3 model=stack sigma=1: connected structures=676920 MFE=-3 target=-4 #MFE-structures=2400 labelled tilings=0 OK [58.5s]
+items=[2, 2, 2, 2, 1] m=3 B=3 model=random sigma=3: connected structures=676920 MFE=-9 target=-12 #MFE-structures=2304 labelled tilings=0 OK [58.8s]
+CASE-RESULT OK maxrss_MB=1288
+items=[4, 4, 2] m=2 B=5 model=stack sigma=1: connected structures=762294 MFE=-6 target=-7 #MFE-structures=70 labelled tilings=0 OK [20.3s]
+items=[4, 4, 2] m=2 B=5 model=random sigma=3: connected structures=762294 MFE=-18 target=-21 #MFE-structures=64 labelled tilings=0 OK [18.7s]
+CASE-RESULT OK maxrss_MB=1286
+items=[3, 3, 4] m=2 B=5 model=stack sigma=1: connected structures=836544 MFE=-6 target=-7 #MFE-structures=38 labelled tilings=0 OK [22.2s]
+items=[3, 3, 4] m=2 B=5 model=random sigma=3: connected structures=836544 MFE=-18 target=-21 #MFE-structures=32 labelled tilings=0 OK [18.0s]
+CASE-RESULT OK maxrss_MB=1399
+CASE-RESULT MEMORYERROR under the 2 GB cap
+items=[4, 3, 3] m=2 B=5 model=stack sigma=1: connected structures=836544 MFE=-6 target=-7 #MFE-structures=38 labelled tilings=0 OK [18.9s]
+items=[4, 3, 3] m=2 B=5 model=random sigma=3: connected structures=836544 MFE=-18 target=-21 #MFE-structures=32 labelled tilings=0 OK [17.7s]
+CASE-RESULT OK maxrss_MB=1399
+SUMMARY: cases OK (both models): 11; cases stopped by MemoryError under 2 GB: 1; other failures or mismatches: 0; elapsed 461.8 s
+END r20_rerun_cases.py

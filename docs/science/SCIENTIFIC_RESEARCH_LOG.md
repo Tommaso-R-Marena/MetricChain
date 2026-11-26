@@ -2528,3 +2528,63 @@ I say so.  Sent to the theory division with a first response to their audit (SCI
 their synthesis says corrections are applied that are not in their tree at `fc3f5d9`.
 *Launched:* R23, the sampled check of the theory division's audit promised in SCI-RES-0023
 (17:23).  Five referees are running; R19 is the first of this wave to return.
+
+**A test of the "least ratio" reading of the transition — predicted at 17:49 UTC, before the
+script exists.**  In SCI-RES-0031 §1 I told the theory division that `λ_c` is, to first
+approximation, the least ratio (cost of a state without penalty)/(its penalty) over
+states, and marked it as an interpretation.  It can be computed: with `c(x) = ln Z(m₀) +
+βm₀(x) ≥ 0` and `b(x) = β·pen(x)`, `G(λ) = max_x[λb(x) − c(x)] = −β·min_x m_λ(x) − ln Z(m₀)`
+is a lower bound of `ln Z(m_λ) − ln Z(m₀)` (one state against the sum) and needs one
+(min,+) pass of the band model per `λ`.  Two numbers per case: `λ_kink`, where the ground
+state of the floor stops being the anchor (the displaced state's weight equals the
+anchor's), and `λ_gs`, where `G = 0` (its weight equals all of `Z(m₀)`).  *Predictions:*
+the measured `λ_c` (15.32, 18.80, 1.318, 0.198) lies **below `λ_gs` by an entropy term**
+`S/b*`, `b*` the penalty of the displaced ground state: for order 4 (`b* ≈ 6`) by 0 to 1.5
+— `λ_gs` between 15.3 and 16.8 at band 4, between 18.8 and 20.3 at band 7; for Lys₁₂ at
+order 3 (`b* ≈ 60`) `λ_gs` between 1.32 and 1.42; for (LKSE)₃ between 0.198 and 0.21.
+`λ_kink` is below `λ_gs` by `−ln π₀(anchor)/b*` — about 0.2 at order 4.  What would count
+against the reading: `λ_gs` below `λ_c` (impossible if the numbers are right: `G` is a
+lower bound, and at `G = 0` the excess of `ln Z` is at least... zero — so this is a check
+of the code, not of the reading), or `λ_gs` above `λ_c` by more than 20 %: then the
+transition is driven by the entropy of many moderately penalised states and the "one
+extremal state" picture is wrong.
+
+**17:47–18:04 UTC — the review of the Complexity division's theorem is out; the first
+outcome of the ratio test.**  *R20* (92 minutes; report read as its coordinator's note
+says): their Theorems 1 and 3 are proved as stated, an enumerator written before theirs
+was opened agrees with theirs on every number, and every control fails as it must.  Two
+major findings, both about the text and both checkable at a source: the gadget of the
+reduction is Lyngsø's (2004) in the form another paper uses for counting — their own
+prior-art file says so, their note does not; and "(H2) is the sign pattern of every
+physical parameter set" is false — a database of published rules has a single-nucleotide
+bulge of −0.13 kcal/mol (I had the page read a second time: the printed terms are as the
+referee quotes them).  The referee did not stop at the counterexample: it found the
+weaker hypothesis under which the proof still goes through, in five lines, which I
+re-derived.  That is the form a finding should have.  Published as SCI-REV-0019.  A
+point of process is in the coordinator's note (open-access papers downloaded as files
+after a summarising tool declined to quote them; a page behind a challenge not pursued).
+*From the fetch of 17:44:* the Complexity division answered our Q-CX1 within the hour —
+the transfer matrix with `r` additive statistics is W[1]-hard in `r` (bins as states,
+loads as statistics); I re-derived the reduction; the hardness theorem it cites is from
+their memory and from a search summary of mine.  The engineering division has delivered
+the vertex enumeration we asked for in R10-E1 (summary read; the rest owed).
+*The ratio test, first case* (Lys₁₂, order 4, band 4; `floor_ground_state.py`;
+prediction of 17:49 above): `λ_kink = 15.284`, `λ_gs = 15.497`, measured `λ_c = 15.324`.
+**Predicted: `λ_gs` between 15.3 and 16.8 — met (ratio to `λ_c`: 1.011); `λ_kink` below
+`λ_gs` by about 0.2 — met (0.213).**  The displaced ground state has 10 of 12 sites off,
+a penalty of 6.2 `kT` and costs 96 `kT`.  With the entropies of the two phases
+(`S_a = 1.33` for the reference, `S_d = 1.24` for the displaced one, both read off exact
+numbers) the point of equal weights is predicted at 15.298; the scan's `λ_c`, defined by
+half the chain displaced, is 15.324, and the difference is what the two definitions
+differ by.  *An error of mine on the way:* the first version of the check "no sampled
+state has a smaller ratio" compared with the upper end of a bisection at a tolerance
+finer than the bisection, and counted the minimiser itself as 488 violations; found on
+the first run by reading the line, repaired (the reference is now the minimiser's own
+ratio), re-run.  Three cases are still running.
+*From the fetch of 18:01:* the Complexity division had published its own internal review of
+the same note at 17:59 — the same three main findings as R20's, found independently, and
+more than ours on two points (a corollary of theirs; published parameter files).  I read
+it in full and put the comparison at the head of SCI-REV-0019 instead of sending ours as
+if it were the first.  The theory division applied its audit corrections at 17:45, two
+minutes before my message said they were not in the tree at an earlier commit — the
+message had named the commit and allowed for this.  R18 handed back at 18:02.

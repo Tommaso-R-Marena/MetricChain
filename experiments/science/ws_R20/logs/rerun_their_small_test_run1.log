@@ -1,0 +1,16 @@
+[driver] running test_partition_reduction.py from /home/user/MetricChain/experiments/science/ws_R20/rerun_copy under python 3.13.18, isolated, address-space cap 2.0 GB, start 2026-11-26T17:07:44Z
+items=[1, 2, 1, 2] m=2 B=3 model=stack sigma=1: connected structures=2040 MFE=-2 target=-2 #MFE-structures=16 labelled tilings=16 OK [0.1s]
+items=[1, 2, 1, 2] m=2 B=3 model=random sigma=2: connected structures=2040 MFE=-4 target=-4 #MFE-structures=16 labelled tilings=16 OK [0.1s]
+items=[2, 2, 2] m=2 B=3 model=stack sigma=1: connected structures=2262 MFE=-2 target=-3 #MFE-structures=102 labelled tilings=0 OK [0.0s]
+items=[2, 2, 2] m=2 B=3 model=random sigma=2: connected structures=2262 MFE=-4 target=-6 #MFE-structures=96 labelled tilings=0 OK [0.0s]
+items=[3, 1, 1, 1] m=2 B=3 model=stack sigma=1: connected structures=1536 MFE=-2 target=-2 #MFE-structures=12 labelled tilings=12 OK [0.1s]
+items=[3, 1, 1, 1] m=2 B=3 model=random sigma=2: connected structures=1536 MFE=-4 target=-4 #MFE-structures=12 labelled tilings=12 OK [0.1s]
+items=[3, 3] m=2 B=3 model=stack sigma=1: connected structures=1514 MFE=-4 target=-4 #MFE-structures=2 labelled tilings=2 OK [0.0s]
+items=[3, 3] m=2 B=3 model=random sigma=2: connected structures=1514 MFE=-8 target=-8 #MFE-structures=2 labelled tilings=2 OK [0.0s]
+items=[1, 1, 1, 3] m=2 B=3 model=stack sigma=1: connected structures=1536 MFE=-2 target=-2 #MFE-structures=12 labelled tilings=12 OK [0.2s]
+items=[1, 1, 1, 3] m=2 B=3 model=random sigma=2: connected structures=1536 MFE=-4 target=-4 #MFE-structures=12 labelled tilings=12 OK [0.2s]
+items=[2, 2, 1, 1] m=2 B=3 model=stack sigma=1: connected structures=2040 MFE=-2 target=-2 #MFE-structures=16 labelled tilings=16 OK [0.1s]
+items=[2, 2, 1, 1] m=2 B=3 model=random sigma=2: connected structures=2040 MFE=-4 target=-4 #MFE-structures=16 labelled tilings=16 OK [0.2s]
+ALL OK
+[driver] completed; elapsed 1.4 s; max RSS 16 MB; end 2026-11-26T17:07:45Z
+[driver] END

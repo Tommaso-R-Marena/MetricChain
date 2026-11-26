@@ -1,0 +1,25 @@
+theorem_medium_c_reduced_run1.log  set medium_c           1 instances ( 0 solvable,  1 not)      4363800 structures     2.6 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+theorem_medium_d_reduced_run1.log  set medium_d           1 instances ( 1 solvable,  0 not)      3319680 structures    41.4 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+theorem_large_reduced_a_run1.log   set large_reduced_a    3 instances ( 2 solvable,  1 not)    571111224 structures   245.3 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+theorem_large_reduced_b_run1.log   set large_reduced_b    2 instances ( 1 solvable,  1 not)     53302254 structures   325.4 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+
+TOTAL over the logs above: 7 instances (4 solvable, 3 not), 632096958 connected labelled structures; U totals {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+loop function                  class   S1   S2   S3   S4   S5  wrong  instances (not solvable) it was run on
+H1_stack_only                  H        0    0    0    0    0      0  7 (3)
+H2_penalties                   H        0    0    0    0    0      0  7 (3)
+H3_hash_0to9                   H        0    0    0    0    0      0  7 (3)
+H4_hash_0to3                   H        0    0    0    0    0      0  7 (3)
+H5_boundary_zero               H        0    0    0    0    0      0  7 (3)
+GEN1_H2star_delta1             GEN      0    0    0    0    0      0  7 (3)
+GEN2_H2star_mixed              GEN      0    0    0    0    0      0  7 (3)
+GEN3_coax_weaker               GEN      0    0    0    0    0      0  7 (3)
+GEN4_coax_equal_bulge_pos      GEN      0    0    0    0    0      0  7 (3)
+GEN5_dangles_small             GEN      0    0    0    0    0      0  7 (3)
+GEN6_exterior_constant         GEN      0    0    0    0    0      0  7 (3)
+GEN7_coax_equal_Abulge_only    GEN      0    0    0    0    0      0  7 (3)
+CTRL1_H0_coax_equal            CTRL     4    3    7    7    4      3  7 (3)
+CTRL2_H2_bulge_as_stack        CTRL     0    3    4    4    0      3  7 (3)
+CTRL3_H1_sigma_zero            CTRL     0    0    7    7    0      3  7 (3)
+CTRL4_H2star_delta0            CTRL     0    3    5    5    0      3  7 (3)
+CTRL5_dangles_large            CTRL     4    3    7    7    0      3  7 (3)
+END r20_aggregate.py
