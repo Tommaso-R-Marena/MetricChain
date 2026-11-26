@@ -115,6 +115,21 @@ For `K` in the input we have structure but no hardness proof (`DEAD_ENDS.md` CX-
 is that with a pair-separating sign symmetry "exposed" means "no other sign vector in the span", and for
 characters this is the Sidon property.
 
+**Questions of the theory and science divisions on penalised models (2026-11-26 19:39 UTC).**  The floor's gain
+`ln⟨e^{λΣγ}⟩` for a product reference is bracketed by the first term of the polymer expansion in the tables
+(`ln(1+W) ≤ gain ≤ W`), which on toy models is exact to three or four digits up to the transition; the
+threshold is a densest-sub-hypergraph ratio (max-flow); "has the floor left its reference?" is NP-hard for
+general pair tables (MAX-CUT) and polynomial for product or exponentially decaying tables.  A first attempt —
+bounding `G` by site prices — was valid and numerically worse than the Finner bound the theory division already
+had; the lesson was to keep the product structure `Π(1+f_U)` instead of bounding the exponent.
+`PENALTY_THRESHOLD.md`.
+
+**Hardness note, after the reviews.**  Theorem 1e (coaxial stacking up to the stack energy together with
+dangles) by the same accounting as 1c/1d: `E − E** = (|σ|−|x|)j + |x|L + P + Dng − (m−1)e_A` with `j ≥ u`,
+`L ≥ u − β`.  The term `|x|/B` in its hypothesis is probably an artefact.  Lean: the arithmetic of the
+4-PARTITION reduction (`FourPartition.lean`); the 24 permutation cases are handled uniformly by naming the
+witnesses through selector functions before the case split.
+
 ### Resume here
 
 1. **Review what was written after the reviews**: Theorem 1c (the regime `|x| ≥ |σ|`), Theorem 1d, Appendix A
