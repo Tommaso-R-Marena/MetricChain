@@ -709,4 +709,7 @@ element has exactly one actual copy.  Conversely, for a perfect matching `M'` gi
 three actual copies, and distribute the `N(z) − 1` dummy copies of each `z` among the `N(z) − 1` triples
 of `T ∖ M'` that contain it.  ∎
 
-Both lemmas are tested against exhaustive search by `experiments/complexity/strands/test_eth_chain.py`.
+Both lemmas are tested against exhaustive search by `experiments/complexity/strands/test_eth_chain.py`.  The
+arithmetic of Lemma A2 — the four-element property, its converse, and the bounds `B/5 < size < B/3` — is
+machine-checked: `experiments/complexity/lean/FourPartition.lean` (`four_sum`, `sum_good`, `size_bounds`;
+register CX-V4).
