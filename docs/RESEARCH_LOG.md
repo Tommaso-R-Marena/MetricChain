@@ -1898,12 +1898,121 @@ branch) seen, not read.
 declarations; harness 158 tests (130 must survive, 28 documented refutations); 374
 mutations (373 caught, one expected pass), every selection's baseline checked first.
 
-### Resume here (cycle 10, fifteenth checkpoint)
+### Cycle 10, sixteenth checkpoint (2026-11-26): the science division's rotamer requests answered; an exact semigroup for bridges; the hypercircle band; §11.30 corrected by its critics
 
-Verified state: every module under `proofs/` (62 files) builds with zero warnings and is walked
-by the axiom audit (3603 declarations); the harness (158 registered tests: 130 that must
-survive, 28 documented refutations) and its mutation tests (374 mutations: 373 caught, one
-expected pass; baselines checked) pass; `scripts/audit_all.sh`
+*What was asked.*  The Scientific Discovery Division had sent, since the fourteenth
+checkpoint: SCI-MSG-0015 (class constants of a solvent term measured in rotamer
+variables; requests P2-T1 … P2-T4), SCI-REV-0006 T-4 (do bridges with clean ends form an
+exact semigroup?), SCI-MSG-0007 (the hypercircle band as a certificate, X-T1 … X-T4),
+SCI-MSG-0005 (barrier certificates, K-T1 … K-T4), SCI-REV-0007 and -0008 (reviews), and —
+arriving while this checkpoint was being closed — SCI-RES-0007, SCI-RES-0008, SCI-MSG-0016,
+-0017, -0018: criticism of §11.30 as published one checkpoint earlier, two results that
+extend it, and a correction of a sentence in our THY-RES-0008.
+
+*What was done.*
+
+* **Third-order classes reduce to a pairwise model** (theory report Theorem 11.18a;
+  `proofs/Frontiers/ThirdOrderModel.lean`, machine-checked).  The interpolant of order two
+  is the star part plus the second mixed differences at the reference
+  (`anchoredInterp_three`); with site and pair penalties that cover the triple constants
+  the model `E₀ + I₂g − Σγ_i − Σγ_ij` is a pairwise lower bound of the energy
+  (`thirdOrder_pairwise_lower`), and the pairwise kernel is sound on it
+  (`verify_sound_thirdOrder`).  The division's site form `γ_i = ⅓Σ_{T∋i}c_T` is one choice; the
+  pair form `γ_ij = ⅓Σ_{T⊇{i,j}}c_T` is tighter at the same cost.  Harness XI.16.
+* **Share certificates** (Proposition 11.18b; `ShareCertificates.lean`).  Split every pair
+  constant between its two sites so that no site carries more than its excitation
+  energy: sound (machine-checked; the row-sum condition is the split in halves and is
+  thereby machine-checked for the first time), and for additive known parts complete
+  (max-flow min-cut, on paper).  For pairwise known parts: the same with deficits.
+  Harness XI.17.  *A first draft of part (c) was false and was rewritten before commit*
+  (D57 item 3).
+* **Domains with pairwise exclusions** (Proposition 11.18c): the right condition is that
+  the domain be closed under resetting sites to the reference, not that it be connected
+  (counterexample `{00, 01, 11}`).  Harness XI.18.
+* **Bridges with clean ends form an exact semigroup** (Proposition 11.69b; request T-4):
+  hence the limit shape of §11.22 is the convex body of a graded semigroup of lattice
+  points, interior points are approached at rate `1/N`, and the semigroup generates `ℤ⁵`
+  (clean bridges of at most ten beads suffice: `t4_lattice_index.py`).  Up to seven beads
+  "clean" is automatic once the bond before the last is an up-bond; from eight beads on
+  it is not, and the harness test (XVIII.7) had to be made to include that size (D57
+  item 2).
+* **The hypercircle band as a certificate** (Proposition 11.50a; `HilbertBall.lean`,
+  machine-checked; request X-T1); two rows of the §10 cost table and the converse reading
+  of the exponential price (X-T2, X-T4).  Harness XIV.6.
+* **§11.30 corrected and extended.**  (i) The headline "does not depend on the size of
+  the system" is withdrawn everywhere: the cost of a box class is the Boltzmann factor of
+  the free-energy distance to its floor, and for a remainder that is a sum over the
+  system that distance is extensive.  (ii) The illustration with sup-norm widths is
+  replaced by the division's measured one-sided distances (its label [M]; prices, not
+  certificates).  (iii) "The floor is the one assumption that sampling cannot replace"
+  holds inside box classes only; our sentence in §12 item 13(b) that an
+  exponential-moment constraint without a floor is defeated by one hidden state was
+  wrong.  (iv) Adopted as the division's, re-derived on paper and tested here: **a
+  one-sided floor with an a-priori variance brackets `ln Z` with no exponential bill**
+  (Theorem 11.110(f): Bennett's inequality in its two-point form; harness XXIV.6), and
+  **the floor is the end `p = ∞` of a family** — an a-priori bound `κ` on a Rényi divergence
+  of order `p` of the true ensemble from the model costs `Θ(e^κ/ε^{p/(p−1)})` with a hint, a
+  Kullback–Leibler bound `e^{κ/(1−e^{−ε})}` up to factors in `ε` and `δ`, polynomial moments
+  alone the number of states (Proposition 11.112; harness XXIV.7).  Our additions: the
+  divergence form holds on the cone `{D_p ≤ κ}` and not only on balls; the two bounds of
+  the Kullback–Leibler row differ by factors in `ε` only; with a floor that is a function
+  (a lower model `m`) the cost number is `e^{F(E) − F(m)} − 1` and the sampler is rejection
+  from `π_m` — which joins §11.30 to Theorem 11.18a, as the division observed.  D57 items
+  5 and 6.
+* **Two small requests of SCI-REV-0008** applied in §11.19: the tail-function remark
+  after Theorem 11.56 had dropped the engineering division's restriction to a common
+  fibre offset; and what the "7 095 840 mean runs" are.
+* **A linked correction of our own message** THY-RES-0008 §2 (in THY-RES-0009 §8): the
+  game form with `t` confined to `[0, 1]` *is* `R̄ = max(R, −e)` at negative arguments; what
+  over-estimates is the dual with `t` unrestricted.  The report was right; the message
+  named the wrong object.
+* **The mutation runner counted a crashing mutant as caught** (one mutation, for eleven
+  checkpoints).  It now requires three things: the unmutated test passes in the same
+  mode, the mutant runs to its end, and the harness itself reports the failure (D57
+  item 1).
+* **numpy's binomial sampler is biased low for `n ≳ 10¹⁷`** at means between 60 and `10⁴` —
+  the science division's finding (SCI-REV-0007 §4), confirmed here with our own script;
+  the harness is not affected; workstream K's `stable_multinomial.py` is (D57 item 4;
+  the correction is part of applying SCI-REV-0007, below).
+
+*Novelty, honestly.*  Nothing in this checkpoint is deep.  Theorem 11.18a and
+Proposition 11.18b are the natural completion of the second-order theorems of §11.4 and
+are elementary; their value is that a measured class of real energy terms now has a
+machine-checked certificate format.  Proposition 11.69b is the science division's
+observation, proved.  Proposition 11.50a is the hypercircle inequality of optimal
+recovery.  Theorem 11.110(f) is Bennett's inequality and Proposition 11.112 is Hölder,
+Minkowski and Chebyshev in this query model — the science division's, and classical.
+The one thing that changes how the programme should be read is negative and is theirs:
+the "size-free" class of the fifteenth checkpoint is not size-free for any remainder
+that grows with the system, and what a certificate of a real solvated free energy would
+need is now stated precisely — a proved one-sided floor of a few `k_BT` and a proved
+variance bound for the remainder beyond a pairwise (or chain) model.
+
+*In the repository now.*  Lean: `ThirdOrderModel.lean`, `ShareCertificates.lean`,
+`HilbertBall.lean`.  Harness: XI.16–XI.18, XIV.6, XVIII.7, XXIV.6, XXIV.7 and their
+mutations.  `experiments/coordinator_checks/limit_shape_review/t4_head_tail.py`,
+`t4_lattice_index.py`.  `DEAD_ENDS.md` D57 (six items).  Blueprint §6.4 (rules 7, 8), §6.6
+(step 3a).  Message THY-RES-0009 (to the science division, copy to engineering).
+
+*Running when this checkpoint was closed, and **not in the repository**.*  Three
+assistants work in the session's scratch space; their results exist only there until
+they are reviewed and integrated, and a later session without that scratch space must
+redo them from the specifications in "Resume here": (i) the point-by-point application
+of SCI-REV-0007 (a patch for §§11.18–11.19 and a corrected sampler for workstream K);
+(ii) an independent referee (R11) of workstream Y; (iii) a Lean workstream for barrier
+certificates (K-T1, K-T2).
+
+**Audit at this checkpoint:** `scripts/audit_all.sh` exits 0; 65 Lean files, 3655 audited
+declarations; harness 165 tests (137 must survive, 28 documented refutations); 411
+mutations (410 caught, one expected pass), 131 baseline runs of the unmutated harness,
+no mutant ending in an exception.
+
+### Resume here (cycle 10, sixteenth checkpoint)
+
+Verified state: every module under `proofs/` (65 files) builds with zero warnings and is walked
+by the axiom audit (3655 declarations); the harness (165 registered tests: 137 that must
+survive, 28 documented refutations) and its mutation tests (411 mutations: 410 caught, one
+expected pass; baselines checked, crashing mutants rejected) pass; `scripts/audit_all.sh`
 exits 0.  **Three divisions** work on three branches (this one; `research/ubuntu-engineering`;
 `research/scientific-translation`); the other two are read-only for us and are fetched at
 every checkpoint (`docs/collaboration/status/theory.md`).  Refereed or independently reviewed:
@@ -1911,9 +2020,13 @@ theory report §§11.16–11.17 (R5, R6, R_P), §11.18 (R7), §11.19 (R8), §11.
 and — by the Scientific Discovery Division — §11.22 (SCI-REV-0002), §11.24 (SCI-REV-0003), §11.25
 (SCI-REV-0001), Theorems 11.99 and 11.101 of §11.26 (SCI-REV-0005), the prior-art columns
 (SCI-REV-0004, -0006).  Machine-checked: §11.21.  **The coordinator's own proofs, checked
-numerically, no referee:** §11.27, §11.30; §11.28 has since been reviewed and replicated by
-the Scientific Discovery Division (SCI-RES-0005), and §11.29 consists of our criterion and
-of that division's theorems, re-derived and replicated by us;
+numerically, no referee:** §11.27; Propositions 11.18b (completeness), 11.18c, 11.69b (the
+sound parts of 11.18a, 11.18b, 11.50a are machine-checked); §11.28 has since been reviewed
+and replicated by the Scientific Discovery Division (SCI-RES-0005); §11.29 consists of our
+criterion and of that division's theorems, re-derived and replicated by us and read back
+by it (SCI-RES-0008); §11.30 (a)–(e) were re-derived by that division from the statements
+(no error; SCI-RES-0007, -0008), its part (f) and Proposition 11.112 are that division's,
+re-derived by us on paper and tested, not machine-checked;
 Proposition 11.81(c) in its completed form, the remark on sample sizes after Theorem 11.56,
 the `χ²` bound and the rate in Theorem 11.97(c).  **Not refereed:** the revised Theorem 11.44,
 Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c).  **Not checked by anyone:** the
@@ -1921,7 +2034,10 @@ two-level algorithms with three levels or in the extensive regime under an adver
 search, or in the batched schedule; the nested algorithm with a field or with several
 site types end to end; Theorem 11.63 on sets without symmetry for `n > 6`.  **Delivered and
 unverified:** workstream Y (`docs/workstreams/Y_REPORT.md`).  **Received and not yet
-applied:** SCI-REV-0007.  In priority order:
+applied:** SCI-REV-0007 (its sampler finding is confirmed, D57 item 4).  **Three
+assistants were at work on items 0, 1 and 2 when this checkpoint was closed; their
+output is in the session's scratch space, not in the repository — if that space is
+gone, start the item from its specification here.**  In priority order:
 
 0. **Apply SCI-REV-0007** (science branch, `docs/collaboration/messages/science/SCI-REV-0007.md`;
    its report `docs/science/workstreams/R6_REPORT.md`; read with
@@ -1943,13 +2059,24 @@ applied:** SCI-REV-0007.  In priority order:
    between 60 and `10⁴` — the harness itself draws binomials only at cube dimensions and
    is not affected; and make the harness report how often the Harper step of Theorem
    11.56 is exercised (their mutation "no Harper term" is detected in 1 of 47 runs).
-   Then a reply (THY-RES-0009).
-1. **SCI-MSG-0015, P2-T1 and P2-T4** (accepted in THY-RES-0007 §7, THY-RES-0008 §6).  P2-T1:
-   for third-order constants `c_T` (`|T| = 3`) and `γ_i = ⅓Σ_{T∋i}c_T`, the function
-   `f + I₂g − Σ_iγ_i[x_i ≠ x⁰_i]` is a pairwise lower bound of the energy — state it next to
-   Theorem 11.18, prove, machine-check, with soundness of the pairwise kernel on it.
-   P2-T4: record next to the second-order theorems that moving a pairwise term between
-   known part and residual changes `c_i`, `c_ij` and not `c_ijk` (done for the box in §11.30).
+   The bias is confirmed here (numpy 2.5.3: mean `91.26` for `92` at `n = 2⁶¹`; nothing at
+   `n ≤ 10¹⁶`): replace the binomial draws of `stable_multinomial.py` at large counts by an
+   exact method (e.g. a Poisson or normal approximation with a proved error is *not*
+   exact — use inversion on the conditional law of the small count, or split the count
+   into blocks below `10¹⁶`), re-run the affected tables of §11.19 and say which numbers
+   moved.  Then a reply (THY-RES-0010).
+1. **Barrier certificates** (SCI-MSG-0005; accepted in THY-RES-0009 §4).  **K-T1:** take the
+   division's `KineticsCertificates.lean` (its branch, `experiments/science/`; compile it
+   first) into `proofs/Frontiers/` and add the tree checker: `BCert`, `bverify`, and
+   `bverify_sound : bverify c I a b L = true → ∀ walk of single-site moves from a to b,
+   ∃ j, L ≤ I.energy (p j)`, with a residual version on `verifyR`; the one new lemma is
+   that two boxes contain configurations differing in at most one site iff at most one
+   coordinate has disjoint domains.  **K-T2:** is `zverify2_sound` valid verbatim over an
+   ordered commutative semiring in place of `ℚ≥0` (truncated polynomials with the
+   coefficientwise order: one chain certificate would bracket all level partition
+   functions of a site-additive statistic), and the same for the tropical kernel over
+   min-plus polynomials?  K-T3 (the set of heights is a closed interval), K-T4 (critical
+   depth) are not started.
 
 2. **Verify workstream Y** (`docs/workstreams/Y_REPORT.md`): the two exact block reductions
    (U), (L′); the sandwich `F⁻_L/L ≤ F_∞ ≤ F⁺_L/L`; the claim that a nearest-neighbour
@@ -1957,28 +2084,44 @@ applied:** SCI-REV-0007.  In priority order:
    the negative result on Markov type classes.  Re-derive, re-compute with own code
    (transfer matrices; small chains by enumeration), then a section of the theory report
    and harness tests.  It contrasts with §11.25 (functions of the type never raise the
-   two covered exponents) and matters for the science division's assessment.
+   two covered exponents) and matters for the science division's assessment.  The
+   science division is replicating Y independently (its workstream R10): compare with
+   its result before citing either.
 3. **The middle slice `κ = ½` for adaptive algorithms without a hint** (Conjecture 11.94(iii)
    on that slice alone; request T7 of SCI-REV-0001, agreed in THY-RES-0007): it decides the
    adaptive exponent of every antiferromagnet without a field.
-4. **The exact-semigroup observation for bridges** (request T-4 of SCI-REV-0006;
-   `experiments/coordinator_checks/limit_shape_review/t4_semigroup.py`): re-derive the two
-   claims (clean ends concatenate exactly; a head and a tail of five beads make any bridge
-   clean); then the limit shape is the Newton–Okounkov set of an exact semigroup.  And
-   machine-check Proposition 11.69a (request T-3).
+4. **What a certificate of a real solvated free energy still needs** (§11.30 as amended;
+   §12 item 13(a)).  The science division's measurements say that for neutral side
+   chains on a fixed backbone first-order perturbation theory from a pairwise (often a
+   chain) model is accurate to `10⁻³ k_BT`, and Theorem 11.110(f) says what would certify
+   it: a proved one-sided floor of a few `k_BT` and a proved variance bound for the
+   remainder beyond that model.  On our side: (a) machine-check the two-point Bennett
+   bound (A17-T4; the reduction to two-point laws on top of `jensen_bracket` in
+   `BoxClass.lean`); (b) a variance bound with a computable constant for a function with
+   bounded one-site or one-pair oscillations under a chain measure — the division's
+   A17.8 gives `¼ΣC_i²` with Dobrushin coefficients; an exact variance by transfer
+   matrices for an explicit sum of local tables would be sharper and is a finite
+   computation that a kernel could check; (c) an instance-optimal sampler for Rényi
+   balls of finite order (A17-T2); (d) the box with a mean-energy datum (A17-T3).  The
+   floor itself is the division's workstream P3 (analysis of the generalised-Born term).
+   Also still open: a machine-checked Proposition 11.69a (request T-3; less urgent since
+   Proposition 11.69b).
 5. **The query complexity of observable free energies** (theory report §12 item 11(a)):
    how many evaluations certify `ln[Z(A)/Z(B)]`; notes on the traps in THY-RES-0006 §2 (a
    macrostate is not a closed world; straddling dips cancel).  The box class of §11.30
    is the case without geometry and a good first instance (§12 item 13(c)).
-6. Requests of the science division not yet answered: SCI-MSG-0005 (certified kinetics:
-   a tree cut checker; a Z-kernel over polynomial weights), SCI-MSG-0007 (ellipsoid
-   classes; a sharp–soft kernel), SCI-MSG-0006, -0008, SCI-MSG-0012 §4, SCI-RES-0002 P-T1,
-   P-T2, P-T4.  Read them in full before answering.  Open research questions of
-   SCI-MSG-0015: P2-T2 (a sufficient condition of maximum-density type for a pairwise
-   known part) and P2-T3 (product-space theorems on domains with pairwise exclusions).
-   SCI-MSG-0013 (their tail lemma with an energy constraint): read, not checked.
-   Awaited from them: prior art and criticism for §11.30, a review of the rewritten
-   §11.29, a Lean statement of the compensation lemma (THY-RES-0008 §7).
+6. Requests of the science division not yet answered: SCI-MSG-0007 X-T3 (is the supremum
+   of the annealed free energy over a Frobenius ball attained at the Curie–Weiss
+   matrix?), SCI-MSG-0005 K-T3, K-T4, SCI-MSG-0006, -0008, SCI-MSG-0012 §4, SCI-RES-0002
+   P-T1, P-T2, P-T4; SCI-MSG-0013 (their tail lemma with an energy constraint) and
+   SCI-MSG-0016 (its correction) are read, not checked.  Answered at this checkpoint:
+   SCI-MSG-0015 (P2-T1 … P2-T4), SCI-REV-0006 T-4, SCI-MSG-0007 X-T1, X-T2, X-T4,
+   SCI-RES-0007 A17-T1, SCI-MSG-0018 A17-T4 (paper and harness), SCI-REV-0008 R7-THY-1, -2.
+   Awaited from them: prior art for §11.30 (their workstream A3), a Lean statement of the
+   compensation lemma (L3), a floor by analysis (P3), a second-round review of the
+   sections revised at the fourteenth checkpoint (R9), a replication of workstream Y
+   (R10), a test of the share certificate of Proposition 11.18b(d) on their 13
+   instances, and their reading of THY-RES-0009.
 
 The list of the thirteenth checkpoint continues to hold from here on; its items follow with
 letters, brought up to date where the reviews changed them:
@@ -1998,8 +2141,8 @@ letters, brought up to date where the reviews changed them:
 (b) **Synchronise with `research/ubuntu-engineering` and `research/scientific-translation`** at
    every checkpoint (read-only; never merge).  From the science division everything that
    was awaited has arrived and is applied (the five reviews; THY-REQ-0011 answered in
-   full; SCI-RES-0005, SCI-RES-0006 applied; SCI-REV-0007 received, item 0); awaited now:
-   its answer to THY-RES-0008.  Open on the engineering side: THY-REQ-0001 (two levels at bounded
+   full; SCI-RES-0005, SCI-RES-0006, SCI-RES-0007, -0008 applied; SCI-REV-0007 received,
+   item 0); awaited now: its answer to THY-RES-0009.  Open on the engineering side: THY-REQ-0001 (two levels at bounded
    accuracy done, ENG-RES-0008; three levels, the extensive regime and the batched schedule
    open), -0003, -0004, the rest of -0002, -0007, -0008 (items 1–4), -0009, -0010.
 (c) **Known parts with spatial structure** — **workstream Y has reported** (item 2 above):

@@ -1545,6 +1545,8 @@ def leaf_rule_best_bound(h, J, domains):
     cost = np.zeros(nv)
     cost[: n + len(pairs)] = -1.0
     res = linprog(cost, A_ub=np.array(rows), b_ub=np.array(rhs), bounds=[(None, None)] * nv, method="highs")
+    if res.status != 0:                 # unbounded or infeasible: the rule gives no finite bound.  Report that as a value, so
+        return math.inf                 # that a mis-modelled rule shows up as a failed comparison and not as an exception
     return -res.fun
 
 
@@ -1677,7 +1679,8 @@ def t_bnb_lower_bound(rng, trials):
         lp_primal = lp_bound(n, edges, _box(dom))                    # local-polytope LP on the edges
         lp_kernel = leaf_rule_best_bound(h, J, _box(dom))             # the kernel's leaf rule on the joint instance
         lp_blocks = sum(leaf[s] for s in blocks)
-        if abs(lp_primal - lp_blocks) > 1e-7 or abs(lp_kernel - lp_blocks) > 1e-7:
+        if not (math.isfinite(lp_kernel) and math.isfinite(lp_blocks)) \
+                or abs(lp_primal - lp_blocks) > 1e-7 or abs(lp_kernel - lp_blocks) > 1e-7:
             return False, dict(reason="leaf bound does not decompose over the triangles", box=dom, lp_primal=lp_primal,
                                leaf_rule=lp_kernel, sum_of_blocks=lp_blocks)
         for i in range(n):
@@ -3131,6 +3134,256 @@ def t_dead_additive_extremal_dependent(rng, trials):
         return False, dict(reason="dependent reference: a non-additive residual beats every additive one",
                            best_additive=add, best_overall=full, recorded_residual=gap(mu, g_star))
     return True, dict(best_additive=add, best_overall=full)
+
+
+def to3_mixed_max(g, T):
+    """max over base points and target states of |third mixed difference of g over the sites T| (exact, by broadcasting):
+    for each axis of T the operator 'value at the target state minus value at the base state' adds one index."""
+    A = np.moveaxis(g, T, (0, 1, 2))
+    for ax in (0, 2, 4):                      # after each step the handled axis has become two axes (base, target)
+        A = np.expand_dims(np.moveaxis(A, ax, 0), 0) - np.expand_dims(np.moveaxis(A, ax, 0), 1)   # [base, target, ...]
+        A = np.moveaxis(A, (0, 1), (ax, ax + 1))
+    return float(np.abs(A).max())
+
+
+@conjecture("XI.16 Third-order classes reduce to pairwise lower models (theory report Theorem 11.18a; ThirdOrderModel.lean: anchoredInterp_three, thirdOrder_pairwise_lower, thirdOrder_pairwise_lower_thirds, thirdOrder_pairwise_lower_pair_thirds — a request of the Scientific Discovery Division, P2-T1): with c_T the exact bound of the third mixed differences of a residual g over the triple T, the interpolant I_2 g of order two around a reference (values of g on the Hamming ball of radius 2) satisfies |g - I_2 g| <= sum of c_T over the triples of changed sites; that sum is at most the pair penalty sum_{changed pairs} gamma_ij, gamma_ij = (1/3) sum_{T containing i, j} c_T, which is at most the site penalty sum_{changed sites} gamma_i, gamma_i = (1/3) sum_{T containing i} c_T; so I_2 g minus either penalty is a pairwise function below g, the pair form being the tighter one, with equality at a pure three-body term")
+def t_third_order_pairwise(rng, trials):
+    stats = dict(instances=0, configs=0, pair_tighter=0, worst_slack=math.inf, equal_at_triple=0, direct_checks=0)
+    for it in range(max(30, trials // 8)):
+        n = int(rng.integers(3, 6))
+        ks = [int(k) for k in rng.integers(2, 4, size=n)]
+        mode = it % 3
+        if mode == 0:                                                        # pairwise plus small three-body terms
+            g = np.zeros(ks)
+            for (i, j) in itertools.combinations(range(n), 2):
+                t = rng.normal(size=(ks[i], ks[j]))
+                g = g + np.moveaxis(t.reshape([ks[i], ks[j]] + [1] * (n - 2)), (0, 1), (i, j))
+            g = g + 0.1 * rng.normal(size=ks)
+        elif mode == 1:                                                      # an arbitrary function
+            g = rng.normal(size=ks)
+        else:                                                                # a pure three-body term on the first three sites
+            g = np.zeros(ks)
+            idx = tuple([1, 1, 1] + [slice(None)] * (n - 3))
+            g[idx] = -float(rng.uniform(0.5, 2.0))
+        triples = list(itertools.combinations(range(n), 3))
+        c = {T: to3_mixed_max(g, T) for T in triples}
+        if n == 3:                                                           # the vectorised constant against its definition
+            direct = 0.0
+            for x in itertools.product(*[range(k) for k in ks]):
+                for b in itertools.product(*[range(k) for k in ks]):
+                    direct = max(direct, abs(sum((-1) ** (3 - len(U)) * g[tuple(b[i] if i in U else x[i] for i in range(3))]
+                                                 for r in range(4) for U in itertools.combinations(range(3), r))))
+            if abs(direct - c[(0, 1, 2)]) > 1e-12:
+                return False, dict(reason="third mixed difference: vectorised maximum against the definition", direct=direct, fast=c[(0, 1, 2)])
+            stats["direct_checks"] += 1
+        gam = [sum(c[T] for T in triples if i in T) / 3 for i in range(n)]
+        gam2 = {(i, j): sum(c[T] for T in triples if i in T and j in T) / 3 for (i, j) in itertools.combinations(range(n), 2)}
+        x0 = tuple(int(rng.integers(k)) for k in ks) if mode != 2 else tuple([0] * n)
+        sub = lambda x, U: tuple(x[i] if i in U else x0[i] for i in range(n))
+        tighter = False
+        for x in itertools.product(*[range(k) for k in ks]):
+            S = [i for i in range(n) if x[i] != x0[i]]
+            I2 = g[x0] + sum(g[sub(x, (i,))] - g[x0] for i in S) \
+                + sum(g[sub(x, (i, j))] - g[sub(x, (i,))] - g[sub(x, (j,))] + g[x0] for (i, j) in itertools.combinations(S, 2))
+            B = sum(c[T] for T in itertools.combinations(S, 3))
+            pair = sum(gam2[p] for p in itertools.combinations(S, 2))
+            site = sum(gam[i] for i in S)
+            r = float(g[x] - I2)
+            if abs(r) > B + 1e-9:
+                return False, dict(reason="remainder of the interpolant of order two exceeds the sum of the triple constants", n=n, x=x, r=r, B=B)
+            if B > pair + 1e-9 or pair > site + 1e-9:
+                return False, dict(reason="the penalties are not ordered: triples <= pair form <= site form", n=n, x=x, B=B, pair=pair, site=site)
+            if len(S) < 3 and abs(r) > 1e-9:
+                return False, dict(reason="the interpolant of order two is not exact on the ball of radius two", x=x, r=r)
+            tighter = tighter or pair < site - 1e-9
+            stats["worst_slack"] = min(stats["worst_slack"], pair - abs(r))
+            stats["configs"] += 1
+        if mode == 2:
+            x = tuple([1, 1, 1] + [0] * (n - 3))
+            T = (0, 1, 2)
+            if abs(abs(g[x]) - c[T]) > 1e-12 or abs(gam2[(0, 1)] + gam2[(0, 2)] + gam2[(1, 2)] - c[T]) > 1e-12 \
+                    or abs(gam[0] + gam[1] + gam[2] - c[T]) > 1e-12:
+                return False, dict(reason="a pure three-body term does not attain both pairwise lower models at its triple", n=n)
+            stats["equal_at_triple"] += 1
+        stats["pair_tighter"] += int(tighter)
+        stats["instances"] += 1
+    if stats["pair_tighter"] == 0 or stats["equal_at_triple"] == 0 or stats["direct_checks"] == 0:
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+def sh_feasible(n, edges, cap):
+    """Is there a share certificate?  edges: list of (sites, weight); every weight must be split among the sites of its
+    edge (nonnegative shares adding up to the weight) so that the load of every site is at most its capacity.  Linear
+    programme: maximise the slack t with loads <= cap - t; returns the largest t (>= 0 iff a certificate exists)."""
+    from scipy.optimize import linprog
+    edges = [(T, w) for (T, w) in edges if w > 0]
+    if not edges:
+        return float(min(cap))
+    nv = sum(len(T) for T, _ in edges)
+    A_eq, b_eq, A_ub, col = [], [], np.zeros((n, nv + 1)), 0
+    for T, w in edges:
+        row = np.zeros(nv + 1)
+        for i in T:
+            row[col] = 1.0
+            A_ub[i, col] = 1.0
+            col += 1
+        A_eq.append(row); b_eq.append(w)
+    A_ub[:, nv] = 1.0                                                       # load_i + t <= cap_i
+    cvec = np.zeros(nv + 1); cvec[nv] = -1.0
+    res = linprog(cvec, A_ub=A_ub, b_ub=np.asarray(cap, float), A_eq=np.asarray(A_eq), b_eq=np.asarray(b_eq),
+                  bounds=[(0, None)] * nv + [(None, None)], method="highs")
+    return float(-res.fun) if res.status == 0 else -math.inf
+
+
+@conjecture("XI.17 Share certificates for sharp-minimum conditions of second and third order (theory report Proposition 11.18b; ShareCertificates.lean: pairSum_le_of_shares, secondOrder_certified_of_shares, secondOrder_certified_of_rowSum, cover_of_site_shares — an answer to request P2-T2 of the Scientific Discovery Division): with an additive known part, least single-site excitation energies Delta_i and pair constants c_ij, the reference is the certified minimiser iff no set S of sites has sum_{i<j in S} c_ij > sum_{i in S} Delta_i (the exact criterion of Theorem 11.17), iff every c_ij can be split between its two sites with loads at most Delta_i (max-flow min-cut); the row-sum condition is the split in halves, sufficient and not necessary; the same with triple constants c_T split among three sites; with a pairwise known part and the deficits w_ij = max over changed states of [c_ij - second difference of the known part]_+ the split is sufficient for the reference to minimise the pairwise lower model")
+def t_share_certificates(rng, trials):
+    stats = dict(pairs=0, pair_yes=0, rowsum_yes=0, shares_not_rowsum=0, triples=0, triple_yes=0, thirds_yes=0,
+                 pairwise=0, pairwise_cert=0, pairwise_exact=0, pairwise_rowsum=0)
+    subsets = lambda n: (S for r in range(1, n + 1) for S in itertools.combinations(range(n), r))
+    for it in range(max(60, trials // 4)):
+        n = int(rng.integers(3, 8))
+        c = np.triu(rng.exponential(1.0, size=(n, n)) * (rng.random((n, n)) < 0.6), 1)
+        c = c + c.T
+        delta = rng.exponential(1.0, size=n) * float(rng.choice([0.6, 1.0, 1.6])) * (n - 1) * 0.3
+        over = max(sum(c[i, j] for i, j in itertools.combinations(S, 2)) - sum(delta[i] for i in S) for S in subsets(n))
+        if abs(over) < 1e-7:
+            continue
+        exact = over < 0
+        t = sh_feasible(n, [((i, j), c[i, j]) for i, j in itertools.combinations(range(n), 2)], delta)
+        if (t >= -1e-9) != exact:
+            return False, dict(reason="pairs: a share certificate exists iff no set of sites is over-dense — violated", n=n, over=over, slack=t)
+        rowsum = bool((0.5 * c.sum(axis=1) <= delta + 1e-12).all())
+        if rowsum and not exact:
+            return False, dict(reason="the row-sum condition holds and the exact criterion fails", n=n)
+        stats["pairs"] += 1; stats["pair_yes"] += int(exact); stats["rowsum_yes"] += int(rowsum)
+        stats["shares_not_rowsum"] += int(exact and not rowsum)
+        # triples
+        m = int(rng.integers(3, 7))
+        triples = list(itertools.combinations(range(m), 3))
+        cT = {T: float(rng.exponential(1.0)) * float(rng.random() < 0.7) for T in triples}
+        d3 = rng.exponential(1.0, size=m) * float(rng.choice([0.5, 1.0, 2.0])) * len(triples) / m
+        over3 = max(sum(cT[T] for T in itertools.combinations(S, 3)) - sum(d3[i] for i in S) for S in subsets(m))
+        if abs(over3) >= 1e-7:
+            t3 = sh_feasible(m, [(T, cT[T]) for T in triples], d3)
+            if (t3 >= -1e-9) != (over3 < 0):
+                return False, dict(reason="triples: a share certificate exists iff no set of sites is over-dense — violated", m=m, over=over3, slack=t3)
+            thirds = all(sum(cT[T] for T in triples if i in T) / 3 <= d3[i] + 1e-12 for i in range(m))
+            if thirds and over3 > 0:
+                return False, dict(reason="the rule of thirds holds and the exact criterion fails", m=m)
+            stats["triples"] += 1; stats["triple_yes"] += int(over3 < 0); stats["thirds_yes"] += int(thirds)
+        # a pairwise known part: the split of the deficits is sufficient for the reference to minimise the lower model
+        nn = int(rng.integers(3, 6))
+        ks = [int(k) for k in rng.integers(2, 4, size=nn)]
+        h = [rng.normal(size=k) + 1.5 * np.arange(k) for k in ks]                # the reference state 0 is favoured
+        J = {(i, j): 0.4 * rng.normal(size=(ks[i], ks[j])) for i, j in itertools.combinations(range(nn), 2)}
+        cc = np.triu(0.3 * rng.exponential(1.0, size=(nn, nn)), 1); cc = cc + cc.T
+        def L(x):                                                              # the pairwise lower model, reference 0
+            S = [i for i in range(nn) if x[i] != 0]
+            return sum(h[i][x[i]] for i in range(nn)) + sum(J[(i, j)][x[i], x[j]] for i, j in itertools.combinations(range(nn), 2)) \
+                - sum(cc[i, j] for i, j in itertools.combinations(S, 2))
+        x0 = tuple([0] * nn)
+        exc = [min(L(tuple(a if l == i else 0 for l in range(nn))) - L(x0) for a in range(1, ks[i])) for i in range(nn)]
+        w = {}
+        for i, j in itertools.combinations(range(nn), 2):
+            T = J[(i, j)]
+            w[(i, j)] = max(max(cc[i, j] - (T[a, b] - T[a, 0] - T[0, b] + T[0, 0]) for a in range(1, ks[i]) for b in range(1, ks[j])), 0.0)
+        tt = sh_feasible(nn, [(p, w[p]) for p in w], exc)
+        is_min = all(L(x) >= L(x0) - 1e-10 for x in itertools.product(*[range(k) for k in ks]))
+        if tt >= 1e-9 and not is_min:
+            return False, dict(reason="pairwise known part: a share certificate exists and the reference does not minimise the lower model", nn=nn, slack=tt)
+        halves = all(0.5 * sum(w[p] for p in w if i in p) <= exc[i] for i in range(nn))
+        if halves and not is_min:
+            return False, dict(reason="pairwise known part: the row-sum condition holds and the reference does not minimise the lower model", nn=nn)
+        stats["pairwise"] += 1; stats["pairwise_cert"] += int(tt >= 1e-9); stats["pairwise_exact"] += int(is_min)
+        stats["pairwise_rowsum"] += int(halves)
+    if min(stats["pair_yes"], stats["pairs"] - stats["pair_yes"], stats["shares_not_rowsum"], stats["triple_yes"],
+           stats["triples"] - stats["triple_yes"], stats["pairwise_cert"]) == 0:
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+@conjecture("XI.18 Second- and third-order remainders on domains with pairwise exclusions (theory report Proposition 11.18c; an answer to request P2-T3 of the Scientific Discovery Division): let D be a product of site alphabets minus forbidden pairs of states, x0 in D a reference, and D' the configurations of D all of whose changed states are compatible with the reference states of every other site; then D' is closed under resetting any set of sites to the reference, and for every function g on D', with constants c_ij (c_T) taken as the largest second (third) mixed differences over the rectangles (boxes) that lie inside D', |g - star part| <= sum of c_ij over the changed pairs and |g - I_2 g| <= sum of c_T over the changed triples at every point of D'; D itself need not be closed under resetting, and connectivity by single-site moves is not enough: on the three-point domain {00, 01, 11} the second-order class puts no constraint on the value at 11")
+def t_remainder_on_domains(rng, trials):
+    stats = dict(instances=0, points=0, not_reset_closed=0, strict_subdomain=0, worst2=0.0, worst3=0.0, tight2=0)
+    for it in range(max(40, trials // 6)):
+        n = int(rng.integers(3, 6))
+        ks = [int(k) for k in rng.integers(2, 4, size=n)]
+        forb = set()
+        for i, j in itertools.combinations(range(n), 2):
+            for a in range(ks[i]):
+                for b in range(ks[j]):
+                    if (a, b) != (0, 0) and rng.random() < (0.10 if a and b else 0.07):
+                        forb.add((i, a, j, b))
+        ok = lambda x: all((i, x[i], j, x[j]) not in forb for i, j in itertools.combinations(range(n), 2))
+        D = [x for x in itertools.product(*[range(k) for k in ks]) if ok(x)]
+        good = [[a for a in range(ks[i]) if a == 0 or all((min(i, j), a if i < j else 0, max(i, j), 0 if i < j else a) not in forb
+                                                        for j in range(n) if j != i)] for i in range(n)]
+        Dp = set(x for x in D if all(x[i] in good[i] for i in range(n)))
+        reset = lambda x, U: tuple(x[i] if i in U else 0 for i in range(n))
+        chg = lambda x: [i for i in range(n) if x[i] != 0]
+        for x in Dp:                                                         # D' is closed under resetting
+            S = chg(x)
+            for r in range(len(S) + 1):
+                for U in itertools.combinations(S, r):
+                    if reset(x, U) not in Dp:
+                        return False, dict(reason="D' is not closed under resetting sites to the reference", x=x, U=U)
+        Dset = set(D)
+        stats["not_reset_closed"] += int(any(reset(x, U) not in Dset for x in D for r in range(len(chg(x)) + 1)
+                                             for U in itertools.combinations(chg(x), r)))
+        stats["strict_subdomain"] += int(len(Dp) < len(D))
+        mode = it % 3
+        g = {x: float(rng.normal()) for x in Dp}
+        if mode == 1:                                                        # nearly additive: small constants
+            hh = [rng.normal(size=k) for k in ks]
+            g = {x: sum(hh[i][x[i]] for i in range(n)) + 0.05 * float(rng.normal()) for x in Dp}
+        # constants from the rectangles and boxes that lie inside D'
+        c2 = {p: 0.0 for p in itertools.combinations(range(n), 2)}
+        c3 = {T: 0.0 for T in itertools.combinations(range(n), 3)}
+        def moved(x, T, b):
+            y = list(x)
+            for i, v in zip(T, b):
+                y[i] = v
+            return tuple(y)
+        for x in Dp:
+            for p in c2:
+                for b in itertools.product(*[range(ks[i]) for i in p]):
+                    pts = [moved(x, [p[q] for q in U], [b[q] for q in U]) for r in range(3) for U in itertools.combinations(range(2), r)]
+                    if all(y in Dp for y in pts):
+                        sgn = [(-1) ** (2 - r) for r in range(3) for U in itertools.combinations(range(2), r)]
+                        c2[p] = max(c2[p], abs(sum(s * g[y] for s, y in zip(sgn, pts))))
+            for T in c3:
+                for b in itertools.product(*[range(ks[i]) for i in T]):
+                    pts = [moved(x, [T[q] for q in U], [b[q] for q in U]) for r in range(4) for U in itertools.combinations(range(3), r)]
+                    if all(y in Dp for y in pts):
+                        sgn = [(-1) ** (3 - r) for r in range(4) for U in itertools.combinations(range(3), r)]
+                        c3[T] = max(c3[T], abs(sum(s * g[y] for s, y in zip(sgn, pts))))
+        x0 = tuple([0] * n)
+        for x in Dp:
+            S = chg(x)
+            star = g[x0] + sum(g[reset(x, (i,))] - g[x0] for i in S)
+            I2 = star + sum(g[reset(x, (i, j))] - g[reset(x, (i,))] - g[reset(x, (j,))] + g[x0] for i, j in itertools.combinations(S, 2))
+            B2 = sum(c2[p] for p in itertools.combinations(S, 2))
+            B3 = sum(c3[T] for T in itertools.combinations(S, 3))
+            if abs(g[x] - star) > B2 + 1e-9:
+                return False, dict(reason="second-order remainder exceeds the pair constants on a reset-closed domain", x=x, r=g[x] - star, B=B2)
+            if abs(g[x] - I2) > B3 + 1e-9:
+                return False, dict(reason="third-order remainder exceeds the triple constants on a reset-closed domain", x=x, r=g[x] - I2, B=B3)
+            if len(S) == 2 and abs(abs(g[x] - star) - B2) < 1e-12 and B2 > 0:
+                stats["tight2"] += 1
+            stats["worst2"] = max(stats["worst2"], abs(g[x] - star) - B2)
+            stats["worst3"] = max(stats["worst3"], abs(g[x] - I2) - B3)
+            stats["points"] += 1
+        stats["instances"] += 1
+    # connectivity is not enough: D = {00, 01, 11}; no rectangle lies inside D, so every function on D has all its second
+    # differences bounded by 0, and the value at 11 is not determined by the values at 00 and 01
+    D3 = {(0, 0), (0, 1), (1, 1)}
+    rect = [x for x in D3 if all(y in D3 for y in ((x[0], 1 - x[1]), (1 - x[0], x[1]), (1 - x[0], 1 - x[1])))]
+    if rect:
+        return False, dict(reason="the three-point domain contains a rectangle")
+    if stats["not_reset_closed"] == 0 or stats["strict_subdomain"] == 0 or stats["tight2"] == 0:
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
 
 
 # ----------------------------------------------------------------------------------------------
@@ -5071,6 +5324,60 @@ def t_debye_profile_class(rng, trials):
     return True, stats
 
 
+@conjecture("XIV.6 Residuals in a Hilbert ball: the hypercircle band (theory report Proposition 11.50a; HilbertBall.lean: cauchy_schwarz, hypercircle_band, ball_certificate_sound — the statement proposed by the Scientific Discovery Division, SCI-MSG-0007, X-T1): for a Gram kernel K on a finite set, a member g = K alpha and its interpolant s on an evaluated set A, (g(x) - s(x))^2 <= (|g|^2 - |s|^2) * P_lam(x)^2 for every rule lam supported on A, P_lam(x)^2 = K(x,x) - 2 sum_a lam_a K(a,x) + sum lam lam K the squared power function; with the optimal rule the bound is attained at every x by a member with the same data and the same norm; and a lower bound L <= F + s - r with r >= sqrt(|g|^2 - |s|^2) P is a lower bound of F + g")
+def t_hilbert_ball(rng, trials):
+    stats = dict(instances=0, points=0, worst=-math.inf, attained=0, sound=0)
+    for _ in range(max(40, trials // 5)):
+        N = int(rng.integers(6, 15)); m = int(rng.integers(3, N + 2))
+        Phi = rng.normal(size=(m, N))
+        K = Phi.T @ Phi + 1e-9 * np.eye(N)
+        alpha = rng.normal(size=N)
+        g = K @ alpha
+        nA = int(rng.integers(1, min(m, N - 1) + 1))
+        A = rng.choice(N, size=nA, replace=False)
+        KAA = K[np.ix_(A, A)]
+        if np.linalg.cond(KAA) > 1e8:
+            continue
+        gamma = np.linalg.solve(KAA, g[A])
+        s = K[:, A] @ gamma
+        if np.abs(s[A] - g[A]).max() > 1e-7 * (1 + np.abs(g).max()):
+            return False, dict(reason="the interpolant does not reproduce the data")
+        n2g, n2s = float(alpha @ K @ alpha), float(gamma @ KAA @ gamma)
+        if n2s > n2g * (1 + 1e-9) + 1e-9:
+            return False, dict(reason="the interpolant has a larger norm than the member", n2g=n2g, n2s=n2s)
+        BA2 = max(n2g - n2s, 0.0)
+        F = rng.normal(size=N)
+        for x in range(N):
+            lam_opt = np.linalg.solve(KAA, K[A, x])
+            for lam in (lam_opt, lam_opt + 0.3 * rng.normal(size=nA), np.zeros(nA)):
+                P2 = float(K[x, x] - 2 * lam @ K[A, x] + lam @ KAA @ lam)
+                slack = BA2 * P2 - (g[x] - s[x]) ** 2
+                stats["worst"] = max(stats["worst"], -slack / (1 + BA2 * P2))
+                if slack < -1e-7 * (1 + BA2 * P2):
+                    return False, dict(reason="the band is violated", x=x, lhs=(g[x] - s[x]) ** 2, rhs=BA2 * P2)
+            P2 = float(K[x, x] - K[A, x] @ lam_opt)                          # the power function of the optimal rule
+            if P2 > 1e-6 and BA2 > 1e-9:
+                beta = np.zeros(N); beta[x] = 1.0; beta[A] -= lam_opt          # representer of the error functional
+                gstar = s + math.sqrt(BA2 / P2) * (K @ beta)
+                coef = np.zeros(N); coef[A] = gamma; coef = coef + math.sqrt(BA2 / P2) * beta
+                if np.abs(gstar[A] - g[A]).max() > 1e-6 * (1 + np.abs(g).max()) or abs(float(coef @ K @ coef) - n2g) > 1e-6 * (1 + n2g):
+                    return False, dict(reason="the extremal member does not have the data and the norm of the member", x=x)
+                if abs((gstar[x] - s[x]) ** 2 - BA2 * P2) > 1e-6 * (1 + BA2 * P2):
+                    return False, dict(reason="the band is not attained by the extremal member", x=x)
+                stats["attained"] += 1
+            stats["points"] += 1
+        # soundness of a certified lower bound: r = sqrt(B_A^2) * P (optimal rule), L = min(F + s - r)
+        Pv = np.array([max(float(K[x, x] - K[A, x] @ np.linalg.solve(KAA, K[A, x])), 0.0) for x in range(N)])
+        L = float((F + s - np.sqrt(BA2 * Pv) - 1e-9).min())
+        if L > float((F + g).min()) + 1e-7:
+            return False, dict(reason="a certified lower bound exceeds the true minimum", L=L, true=float((F + g).min()))
+        stats["sound"] += 1
+        stats["instances"] += 1
+    if stats["attained"] == 0 or stats["instances"] < 10:
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
 # ---------------------------------------------------------------------------------------------------------------
 # XV. Adaptive algorithms without a hint (theory report 11.18): the level recursion and the two-level bracket
 # ---------------------------------------------------------------------------------------------------------------
@@ -6479,6 +6786,78 @@ def t_ls_concatenation(rng, trials):
         bad = check(N1, int(rng.integers(len(br[N1]))), N2, int(rng.integers(len(br[N2]))))
         if bad:
             return False, bad
+    return True, stats
+
+
+@conjecture("XVIII.7 Bridges with clean ends form an exact semigroup (theory report Proposition 11.69b; request T-4 of the Scientific Discovery Division's review SCI-REV-0006): call a bridge clean if the bond before its last bond is an up-bond and neither the linker of Lemma 11.68 placed above it nor the one placed below it has a pair within the cutoff with the bridge beyond the chain neighbours (equivalently: concatenating a three-bead bridge above it, or below it, changes (h, g) by nothing); then the concatenation of two clean bridges is a clean bridge with N1 + N2 + 3 beads and exactly additive (h3, h8, h11, g); every bridge becomes clean when a three-bead bridge is concatenated below and above it, at a cost within the constants of Lemma 11.68; not every bridge is clean, and for bridges that are not clean the concatenation error does not vanish")
+def t_ls_exact_semigroup(rng, trials):
+    nmax = 8              # up to 7 beads a bridge is clean iff the bond before its last bond is an up-bond; from 8 beads on not
+    br = {N: ls_enum(N, bridge=True) for N in range(3, nmax + 1)}
+    z3 = br[3][0]
+    prof = lambda w: ls_profile(w)
+    diff = lambda a, b, c=None: tuple(a[k] - b[k] - (c[k] if c else 0) for k in range(4))
+
+    def up_before_last(w):
+        return w[-2][1] - w[-3][1] == 1
+
+    def clean(w):
+        if not up_before_last(w):
+            return False
+        top, _, n1 = ls_concat(w, z3, 0)
+        bot, _, n2 = ls_concat(z3, w, 0)
+        return n1 == 1 and n2 == 1 and diff(prof(top), prof(w)) == (0, 0, 0, 0) and diff(prof(bot), prof(w)) == (0, 0, 0, 0)
+
+    if prof(z3) != (0, 0, 0, 0) or not clean(z3):
+        return False, dict(reason="the three-bead bridge is not a clean bridge with (h, g) = 0")
+    stats = dict(bridges=0, clean=0, pairs=0, made_clean=0, max_cost=(0, 0, 0, 0), dirty_pairs_with_error=0)
+    members = []
+    for N in br:
+        for w in br[N]:
+            stats["bridges"] += 1
+            if clean(w):
+                stats["clean"] += 1
+                members.append(w)
+            if N <= nmax - 1:                                                # a three-bead bridge below and above
+                for which in ((0, 1) if not up_before_last(w) else (0,)):
+                    y1, _, _ = ls_concat(z3, w, 0)
+                    y, _, _ = ls_concat(y1, z3, which)
+                    if not (ls_valid_walk(y) and ls_is_bridge(y) and len(y) == N + 12):
+                        return False, dict(reason="head and tail do not give a bridge with N + 12 beads", N=N)
+                    if not clean(y):
+                        return False, dict(reason="a bridge with a three-bead bridge below and above it is not clean", N=N)
+                    d = diff(prof(y), prof(w))
+                    if not (0 <= d[0] <= 2 and 0 <= d[1] <= 18 and 0 <= d[2] <= 28 and 0 <= d[3] <= 2):
+                        return False, dict(reason="the cost of head and tail exceeds twice the constants of Lemma 11.68", d=d)
+                    stats["max_cost"] = tuple(max(a, b) for a, b in zip(stats["max_cost"], d))
+                    stats["made_clean"] += 1
+    if stats["clean"] in (0, stats["bridges"]):
+        return False, dict(reason="clean bridges: none, or all", **stats)
+    for _ in range(max(300, 2 * trials)):
+        x1, x2 = members[int(rng.integers(len(members)))], members[int(rng.integers(len(members)))]
+        y, down, ncop = ls_concat(x1, x2, 0)
+        if ncop != 1 or down or not (ls_valid_walk(y) and ls_is_bridge(y) and len(y) == len(x1) + len(x2) + 3):
+            return False, dict(reason="the concatenation of two clean bridges is not a bridge with N1 + N2 + 3 beads")
+        if diff(prof(y), prof(x1), prof(x2)) != (0, 0, 0, 0):
+            return False, dict(reason="(h, g) is not exactly additive on clean bridges", d=diff(prof(y), prof(x1), prof(x2)))
+        if len(y) <= 16 and not clean(y):
+            return False, dict(reason="the concatenation of two clean bridges is not clean", N=len(y))
+        stats["pairs"] += 1
+    for x in members:                                                        # every clean bridge of the largest size with itself
+        if len(x) == nmax:
+            y, down, ncop = ls_concat(x, x, 0)
+            if diff(prof(y), prof(x), prof(x)) != (0, 0, 0, 0):
+                return False, dict(reason="(h, g) is not exactly additive on clean bridges", d=diff(prof(y), prof(x), prof(x)))
+            stats["pairs"] += 1
+    dirty = [w for N in br for w in br[N] if not clean(w)]
+    stats["up_but_not_clean"] = sum(1 for w in dirty if up_before_last(w))
+    if stats["up_but_not_clean"] == 0:
+        return False, dict(reason="no bridge whose bond before the last is an up-bond fails to be clean: the two conditions on the ends would be vacuous", **stats)
+    for _ in range(200):
+        x1, x2 = dirty[int(rng.integers(len(dirty)))], dirty[int(rng.integers(len(dirty)))]
+        y, down, ncop = ls_concat(x1, x2, 0)
+        stats["dirty_pairs_with_error"] += int(diff(prof(y), prof(x1), prof(x2)) != (0, 0, 0, 0))
+    if stats["dirty_pairs_with_error"] == 0:
+        return False, dict(reason="no concatenation error among bridges that are not clean: the restriction would be empty", **stats)
     return True, stats
 
 
@@ -9428,6 +9807,259 @@ def t_box_empirical_bernstein(rng, trials):
         eb0, _ = bx_upper_bounds(np.zeros((1, m)), delta)
         if abs(float(eb0[0]) - 7 * math.log(2 / delta) / (3 * (m - 1))) > 1e-12:
             return False, dict(reason="value at zero sample variance")
+    return True, stats
+
+
+@conjecture("XXIV.6 A one-sided floor and an a-priori variance bracket the free energy without an exponential bill (theory report Theorem 11.110(f); Bennett's inequality in its two-point form — proposed for this place by the Scientific Discovery Division, SCI-MSG-0018): if the remainder r has mean r_bar, lies above r_bar - b and has variance at most sigma^2 under the known measure, then 0 <= K = ln E exp(-(r - r_bar)) <= W(b, sigma^2) = ln[(b^2 e^{-sigma^2/b} + sigma^2 e^b)/(b^2 + sigma^2)] <= (sigma^2/b^2)(e^b - 1 - b); the first bound is attained by the law with a state at the floor of probability sigma^2/(b^2 + sigma^2); it is monotone in b and in sigma^2, so that bounds on both suffice; and it is far below the two-point Jensen gap L(w) of the two-sided width when the variance is small")
+def t_bennett_bracket(rng, trials):
+    W = lambda b, s2: math.log((b * b * math.exp(-s2 / b) + s2 * math.exp(b)) / (b * b + s2))
+    stats = dict(laws=0, worst=-math.inf, attained=0, closest=math.inf, gain=0.0)
+    for _ in range(max(400, 4 * trials)):
+        k = int(rng.integers(2, 9))
+        pr = rng.dirichlet(np.ones(k) * float(rng.choice([0.3, 1.0, 3.0])))
+        x = rng.normal(size=k) * float(rng.choice([0.2, 1.0, 3.0]))
+        if rng.random() < 0.3:                                               # a rare deep dip
+            pr = np.append(pr * (1 - 1e-3), 1e-3); x = np.append(x, -float(rng.uniform(2, 8)))
+        x = x - float(pr @ x)
+        b, s2 = -float(x.min()), float(pr @ (x * x))
+        if b < 1e-6 or s2 < 1e-12:
+            continue
+        K = math.log(float(pr @ np.exp(-x)))
+        w = W(b, s2)
+        stats["worst"] = max(stats["worst"], K - w)
+        stats["closest"] = min(stats["closest"], w - K)
+        if K < -1e-12 or K > w + 1e-10:
+            return False, dict(reason="the centred cumulant is outside [0, W(b, sigma^2)]", K=K, W=w, b=b, s2=s2)
+        if w > s2 / (b * b) * (math.exp(b) - 1 - b) + 1e-10:
+            return False, dict(reason="W exceeds Bennett's exponential bound", W=w, b=b, s2=s2)
+        b2, s22 = b * float(rng.uniform(1, 2)), s2 * float(rng.uniform(1, 2))    # weaker bounds remain bounds
+        if K > W(b2, s2) + 1e-10 or K > W(b, s22) + 1e-10 or W(b, s2) > W(b2, s22) + 1e-10:
+            return False, dict(reason="W is not monotone in the floor or in the variance", b=b, s2=s2)
+        # the two-point law attains W
+        p0 = s2 / (b * b + s2)
+        xs, ps = np.array([-b, s2 / b]), np.array([p0, 1 - p0])
+        if abs(float(ps @ xs)) > 1e-10 or abs(float(ps @ (xs * xs)) - s2) > 1e-9 * (1 + s2) \
+                or abs(math.log(float(ps @ np.exp(-xs))) - w) > 1e-9 * (1 + abs(w)):
+            return False, dict(reason="the two-point law does not attain W", b=b, s2=s2)
+        stats["attained"] += 1
+        width = float(x.max() - x.min())
+        Lw = math.log(math.expm1(width) / width) - 1 + width / math.expm1(width)
+        if K > Lw + 1e-10:
+            return False, dict(reason="the centred cumulant exceeds the two-point Jensen gap of the width", K=K, L=Lw)
+        stats["gain"] = max(stats["gain"], Lw - w)
+        stats["laws"] += 1
+    # the regime of the measured instances: a floor of a few units and a small variance
+    if not (W(3.7, 0.036 ** 2) < 3.5e-3 and W(0.08, 0.19 ** 2) < 0.0165):
+        return False, dict(reason="values of W at the two quoted parameter pairs", a=W(3.7, 0.036 ** 2), b=W(0.08, 0.19 ** 2))
+    if stats["laws"] < 100 or stats["gain"] <= 0:
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+@conjecture("XXIV.7 The floor is the end p = infinity of a family (theory report Proposition 11.112; the statements are the Scientific Discovery Division's, addendum A17 of its inference-limits notes and SCI-RES-0007, re-derived here).  With Y = exp(-r), mu = E Y under the known measure and the Renyi ball {||Y||_p <= B}: (a) two members that differ exactly on D satisfy pi(D) >= (|mu - mu'|/B)^(p/(p-1)), with equality in the limit of a flat alternative on an empty background; (b) hence every member whose ln mu differs from the hint's by more than eps differs from it on a set of mass at least q* = ((1 - e^-eps) mu/B)^(p/(p-1)), and the constant 1 - e^-eps cannot be replaced by e^eps - 1; (c) the alternative hint + (B - B0) q^(-1/p) on a set of mass q stays in the ball and raises mu by exactly (B - B0) q^(1-1/p), so that disjoint sets of mass above q_low = ((e^eps - 1) mu/(B - B0))^(p/(p-1)) give at least floor(1/(2 q_low)) alternatives, and the sample size of (b) is within the factor 2 ln(1/delta)/(1-2 delta) * (e^eps B/(B - B0))^(p/(p-1)) of the lower bound; (d) for p >= 2, ||Y||_2^2 <= mu^((p-2)/(p-1)) B^(p/(p-1)), with equality at two-level members; (e) Kullback-Leibler balls at the centre: every alternative with |ln mu'| > eps differs on a set of mass at least exp(-(kappa + ln 2)/(1 - e^-eps)), attained up to 1 per cent at eps = ln 2, and the two-level alternatives reach down to q_kappa with (1 - e^-eps) ln(eta/q_kappa) = kappa + eps up to a correction of order q_kappa; (f) on a product measure, one-site oscillations c_i give D_p <= p^2 sum c_i^2/(8(p-1)), and the additive instance on the uniform cube has D_p = n[ln cosh(pu/2) - p ln cosh(u/2)]/(p-1); (g) a root-mean-square bound alone allows a change of ln mu by 86 at sigma = 0.1")
+def t_renyi_family(rng, trials):
+    orders = [1.5, 2.0, 3.0, 6.0, math.inf]
+    expo = lambda p: 1.0 if math.isinf(p) else p / (p - 1)
+    inv = lambda p: 0.0 if math.isinf(p) else 1.0 / p
+    norm = lambda pr, Y, p: float(Y.max()) if math.isinf(p) else float(pr @ Y ** p) ** (1 / p)
+    stats = dict(alternatives=0, closest=math.inf, two_level=0, closest_spot=math.inf, packings=0,
+                 norm_closest=math.inf, kl=0, kl_closest=math.inf, cube=0, cube_largest=0.0)
+    for it in range(max(60, trials)):
+        p = orders[it % len(orders)]
+        e = expo(p)
+        N = int(rng.integers(8, 60))
+        pr = rng.dirichlet(np.ones(N))
+        flat = it % 4 == 0                                    # an (almost) empty background: Hoelder is tight
+        Y = np.full(N, 1e-9) if flat else np.exp(-rng.normal(0, float(rng.uniform(0.2, 2.0)), N))
+        mu, B0 = float(pr @ Y), norm(pr, Y, p)
+        B = (1.0 if flat else B0) * float(rng.uniform(1.2, 3.0))
+        D = rng.random(N) < float(rng.uniform(0.05, 0.5))
+        if not D.any() or D.all():
+            D[:] = False; D[int(rng.integers(N))] = True
+        q = float(pr[D].sum())
+        # (a) alternatives on the boundary of the ball that differ from Y exactly on D
+        alts = []
+        for shape in (np.ones(N), rng.random(N) + 0.05):
+            if math.isinf(p):
+                t = B / float(shape[D].max())
+            else:
+                t = ((B ** p - float(pr[~D] @ Y[~D] ** p)) / float(pr[D] @ shape[D] ** p)) ** (1 / p)
+            Y1 = np.where(D, t * shape, Y)
+            if norm(pr, Y1, p) > B * (1 + 1e-9):
+                return False, dict(reason="the alternative of the test left the ball", p=p)
+            alts.append(Y1)
+        alts.append(np.where(D, Y * 1e-12, Y))                 # lowered to (almost) nothing on D
+        for Y1 in alts:
+            dmu = abs(float(pr @ Y1) - mu)
+            ratio = q / (dmu / B) ** e if dmu > 0 else math.inf
+            stats["closest"] = min(stats["closest"], ratio)
+            stats["alternatives"] += 1
+            if ratio < 1 - 1e-9:
+                return False, dict(reason="two members of a Renyi ball differ on a set smaller than the detection lemma allows",
+                                   p=p, q=q, dmu=dmu, B=B, ratio=ratio)
+        # (d) the second moment between the first and the p-th
+        if p >= 2 and not flat:
+            for Yt in (Y, np.where(D, Y, 1e-9 * Y)):
+                m1, m2, mp = float(pr @ Yt), float(pr @ Yt ** 2), norm(pr, Yt, p)
+                bound = m1 * mp if math.isinf(p) else m1 ** ((p - 2) / (p - 1)) * mp ** (p / (p - 1))
+                stats["norm_closest"] = min(stats["norm_closest"], bound / m2)
+                if m2 > bound * (1 + 1e-9):
+                    return False, dict(reason="the second moment exceeds its interpolation bound", p=p, m2=m2, bound=bound)
+        # (b) the spot check: a two-level hint whose upper level, lowered, changes ln mu by just more than eps
+        eps = float(rng.uniform(0.05, 1.0))
+        s, eta = 1 - math.exp(-eps), math.expm1(eps)
+        qq = float(10 ** rng.uniform(-6, -1))
+        prt = np.array([qq, 1 - qq])
+        l = 1.0
+        h = eta * 1.0001 * l * (1 - qq) / qq
+        Yh = np.array([h, l]); Yalt = np.array([h * 1e-12, l])
+        muh, Bh = float(prt @ Yh), norm(prt, Yh, p)
+        if abs(math.log(float(prt @ Yalt)) - math.log(muh)) <= eps:
+            return False, dict(reason="the alternative of the test does not change ln mu by more than eps")
+        qstar = (s * muh / Bh) ** e
+        stats["two_level"] += 1
+        stats["closest_spot"] = min(stats["closest_spot"], qq / qstar)
+        if qq < qstar * (1 - 1e-9):
+            return False, dict(reason="an alternative that changes ln mu by more than eps differs from the hint on a set of mass below q*",
+                               p=p, eps=eps, q=qq, qstar=qstar)
+        # (c) the alternatives of the lower bound
+        if not flat:
+            a = (B - B0) * q ** (-inv(p))
+            Y1 = Y + a * D
+            if norm(pr, Y1, p) > B * (1 + 1e-9):
+                return False, dict(reason="the alternative of the lower bound leaves the ball", p=p, q=q, norm=norm(pr, Y1, p), B=B)
+            gain = float(pr @ Y1) - mu
+            if abs(gain - (B - B0) * q ** (1 - inv(p))) > 1e-9 * (B - B0):
+                return False, dict(reason="the alternative of the lower bound does not raise mu by (B - B0) q^(1-1/p)", p=p)
+            qlow = (eta * mu / (B - B0)) ** e
+            if q > qlow * (1 + 1e-9) and math.log(float(pr @ Y1)) - math.log(mu) <= eps:
+                return False, dict(reason="a set of mass above q_low does not change ln mu by more than eps", p=p, q=q, qlow=qlow)
+    # (c) continued: the packing at the centre of a ball on a fine-grained measure, and the size of the bracket
+    for p in orders:
+        e = expo(p)
+        for eps, delta, ratioB in ((0.2, 0.05, 6.0), (1.0, 0.1, 3.0), (0.5, 0.05, 20.0)):
+            N = 20000
+            pr = rng.dirichlet(np.ones(N) * 5.0)
+            mu = B0 = 1.0; B = ratioB
+            s, eta = 1 - math.exp(-eps), math.expm1(eps)
+            qlow = (eta * mu / (B - B0)) ** e
+            if pr.max() > qlow:
+                continue
+            groups, acc = 0, 0.0
+            for w in pr:
+                acc += float(w)
+                if acc > qlow:
+                    if acc > 2 * qlow * (1 + 1e-12):
+                        return False, dict(reason="a group of the greedy packing is heavier than 2 q_low")
+                    aq = (B - B0) * acc ** (1 - inv(p))        # gain of the alternative on this group
+                    if math.log(mu + aq) - math.log(mu) <= eps:
+                        return False, dict(reason="a group of the packing does not change ln mu by more than eps", p=p)
+                    groups += 1; acc = 0.0
+            if groups < math.floor(1 / (2 * qlow)):
+                return False, dict(reason="fewer disjoint alternatives than floor(1/(2 q_low))", p=p, groups=groups, qlow=qlow)
+            upper = math.ceil(math.log(1 / delta) / (s * mu / B) ** e)
+            lower = (1 - 2 * delta) * groups
+            if groups >= 5 and upper > 2 * math.log(1 / delta) / (1 - 2 * delta) * (math.exp(eps) * B / (B - B0)) ** e * lower * 1.25 + 1:
+                return False, dict(reason="the sample size of the spot check is not within the stated factor of the lower bound",
+                                   p=p, upper=upper, lower=lower)
+            stats["packings"] += 1
+    # (e) Kullback-Leibler balls at the centre
+    def kl_two_level(lq, eps):                                 # D_1 of the alternative 1 + a 1_D, a q = e^eps - 1, q = e^lq
+        eta = math.expm1(eps)
+        qm = math.exp(lq)
+        return -eps + (qm + eta) * math.exp(-eps) * (math.log(eta) - lq + math.log1p(qm / eta))
+    for it in range(max(60, trials)):
+        eps = math.log(2) if it % 3 == 0 else float(rng.uniform(0.05, 1.0))
+        s, eta = 1 - math.exp(-eps), math.expm1(eps)
+        kappa = float(rng.uniform(3.0, 40.0))
+        # the formula against a direct evaluation
+        qm = float(10 ** rng.uniform(-8, -1))
+        a = eta / qm
+        prt, Yt = np.array([qm, 1 - qm]), np.array([1 + a, 1.0])
+        dens = Yt / float(prt @ Yt)
+        direct = float(prt @ (dens * np.log(dens)))
+        if abs(direct - kl_two_level(math.log(qm), eps)) > 1e-9 * (1 + abs(direct)) or abs(math.log(float(prt @ Yt)) - eps) > 1e-12:
+            return False, dict(reason="the divergence of the two-level alternative is not given by the formula", q=qm, eps=eps)
+        lo_l, hi_l = -5000.0, math.log(eta)                    # D_1 decreases in q: the smallest admissible mass, in logarithms
+        if kl_two_level(hi_l, eps) > kappa:
+            continue
+        for _ in range(200):
+            mid = (lo_l + hi_l) / 2
+            if kl_two_level(mid, eps) > kappa:
+                lo_l = mid
+            else:
+                hi_l = mid
+        lqk = hi_l
+        floor_l = -(kappa + math.log(2)) / s
+        if lqk < floor_l - 1e-9:
+            return False, dict(reason="a two-level alternative of a Kullback-Leibler ball sits on a set smaller than the detection bound",
+                               eps=eps, kappa=kappa, ln_q=lqk, ln_bound=floor_l)
+        if it % 3 == 0 and kappa > 10:
+            stats["kl_closest"] = min(stats["kl_closest"], math.exp(lqk - floor_l))
+        corr = kappa + eps - s * (math.log(eta) - lqk)
+        qk = math.exp(lqk)
+        if corr < -1e-9 or corr > qk * math.exp(-eps) * (math.log(eta) - lqk + 1 + qk / eta) + 1e-9:
+            return False, dict(reason="the threshold of the two-level alternatives is not exp(-(kappa + eps)/s) up to the stated correction",
+                               eps=eps, kappa=kappa, ln_q=lqk, corr=corr)
+        # random alternatives at the centre, upward and downward
+        N = int(rng.integers(6, 40))
+        pr = rng.dirichlet(np.ones(N))
+        D = rng.random(N) < float(rng.uniform(0.05, 0.5))
+        if not D.any() or D.all():
+            D[:] = False; D[int(rng.integers(N))] = True
+        for sign in (1.0, -1.0):
+            Y1 = np.where(D, np.exp(sign * rng.uniform(0.0, 12.0, N)), 1.0)
+            m1 = float(pr @ Y1)
+            dens = Y1 / m1
+            d1 = float(pr @ (dens * np.log(dens)))
+            e1 = abs(math.log(m1)) * 0.999
+            if e1 < 1e-6:
+                continue
+            s1 = 1 - math.exp(-e1)
+            if float(pr[D].sum()) < math.exp(-(d1 + math.log(2)) / s1) * (1 - 1e-9):
+                return False, dict(reason="an alternative of a Kullback-Leibler ball differs from the centre on a set smaller than the detection bound",
+                                   d1=d1, eps=e1, q=float(pr[D].sum()))
+        stats["kl"] += 1
+    # (f) first-order constants on a product measure (enumeration)
+    for it in range(max(12, trials // 5)):
+        n = int(rng.integers(5, 10))
+        X = np.array([[(v >> i) & 1 for i in range(n)] for v in range(2 ** n)], dtype=float)
+        additive = it % 3 == 0
+        if additive:
+            u = [0.05, 0.5, 2.0][(it // 3) % 3]; pp = 0.5
+            r = u * X.sum(axis=1)
+        else:
+            pp = float(rng.uniform(0.2, 0.8))
+            J = np.triu(rng.normal(0, 0.4, (n, n)), 1)
+            r = X @ rng.normal(0, 0.6, n) + np.einsum("vi,ij,vj->v", X, J, X) + rng.normal(0, 0.2, 2 ** n)
+        pr = np.prod(np.where(X == 1, pp, 1 - pp), axis=1)
+        idx = np.arange(2 ** n)
+        K = sum(float(np.abs(r - r[idx ^ (1 << i)]).max()) ** 2 for i in range(n))
+        Y = np.exp(-(r - r.min()))
+        mu = float(pr @ Y)
+        for p in (1.5, 2.0, 4.0):
+            dp = math.log(float(pr @ (Y / mu) ** p)) / (p - 1)
+            bound = p * p * K / (8 * (p - 1))
+            stats["cube_largest"] = max(stats["cube_largest"], dp / bound)
+            if dp > bound + 1e-9:
+                return False, dict(reason="a Renyi divergence exceeds the bound from one-site oscillations", p=p, dp=dp, bound=bound)
+            if additive:
+                exact = n * (math.log(math.cosh(p * u / 2)) - p * math.log(math.cosh(u / 2))) / (p - 1)
+                if abs(dp - exact) > 1e-9 * (1 + exact):
+                    return False, dict(reason="the divergence of the additive instance is not the closed form", p=p, dp=dp, exact=exact)
+                if p == 2.0 and abs(dp - n * math.log1p(math.tanh(u / 2) ** 2)) > 1e-9 * (1 + dp):
+                    return False, dict(reason="the chi-square form of the additive instance", dp=dp)
+        stats["cube"] += 1
+    # (g) a root-mean-square bound alone certifies nothing
+    sigma, qd = 0.1, 1e-6
+    d = sigma / math.sqrt(qd)
+    change = math.log1p(qd * math.expm1(d))
+    if not (abs(d - 100) < 1e-9 and 86.0 < change < 86.4):
+        return False, dict(reason="the size of the dip that a root-mean-square budget allows", d=d, change=change)
+    if not (stats["closest"] < 1.001 and stats["closest_spot"] < 1.05 and stats["norm_closest"] < 1.001
+            and stats["kl_closest"] < 1.01 and stats["packings"] >= 8 and stats["cube"] >= 12
+            and stats["cube_largest"] > 0.7 and stats["kl"] >= 30):
+        return False, dict(reason="cases not exercised, or a bound never close to attained", **stats)
     return True, stats
 
 

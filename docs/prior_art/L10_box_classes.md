@@ -28,3 +28,20 @@ variance-based convergence criteria for exponential averaging (Wang, Sun, arXiv:
 and Kofke's bias measure are diagnostics for an estimator on sampled data; neither is a
 guarantee against unsampled configurations, which is the point of the floor in Theorem
 11.110 and of the documented refutation DEAD.28.
+
+## Addendum at the sixteenth checkpoint (26 November 2026): the two results adopted from the Scientific Discovery Division
+
+**Reading level: none on our side.**  Nothing below was searched or opened by the theory
+division; the attributions are from memory, ours and the science division's (its messages
+SCI-RES-0007 §3(4), SCI-MSG-0018 say the same of their side), and the division's
+full-text reading (its workstream A3) had not reported when this was written.
+
+| statement in §11.30 | what it is | attribution, and its status |
+|---|---|---|
+| Theorem 11.110(f): `0 ≤ K ≤ W(b, σ²) ≤ (σ²/b²)(e^b − 1 − b)` for a variable bounded on one side with a variance bound, the two-point law extremal | the one-sided moment-generating-function bound behind Bennett's inequality | G. Bennett, J. Amer. Statist. Assoc. 57 (1962); W. Hoeffding (1963), the inequality for variables bounded above with given variance — **from memory; no source opened by either division**; the sharp form is tested numerically here (harness XXIV.6) |
+| Proposition 11.112(a)–(c): detection in an `L^p` ball, the hinted cost `e^κ/ε^{p/(p−1)}`, the Chebyshev certificate for `p ≥ 2` | Hölder's, Minkowski's and Chebyshev's inequalities in the query model of this report | no source: elementary; whether the *statement* (certification cost against a Rényi-divergence bound, with a hint) is in the literature is not known to us — the division compares with the two terms of the stopping-rule theorem of Dagum, Karp, Luby and Ross, from memory |
+| Proposition 11.112(d): a Kullback–Leibler bound costs `e^{κ/(1−e^{−ε})}` | data processing for the binary divergence | elementary; compare the `e^{KL}` sample-size rule of Chatterjee and Diaconis (row above), which is a statement about typical accuracy at an instance, in the opposite direction of the divergence — the division's remark |
+| Proposition 11.112(e): `D_p ≤ p²Σc_i²/(8(p−1))` from one-site oscillations on a product measure | the bounded-differences bound on the moment generating function | McDiarmid (1989) — **from memory**; for a Markov-chain reference the division cites Marton and Kontorovich–Ramanan, **from memory, unverified** (its Proposition A17.8, which we have read and not otherwise checked) |
+| the variance bound `¼Σc_i²` used in Theorem 11.110(f) | the Efron–Stein inequality with bounded differences | **from memory** |
+
+No novelty is claimed for any row by either division.

@@ -1,0 +1,4 @@
+head and tail of 1 zigzag beads: 3832 of 3964 extended bridges (3..10 beads, every admissible c1) are in S; largest change of (h, g) among those: [0, 1, 4, 1]
+head and tail of 2 zigzag beads: 3964 of 3964 extended bridges (3..10 beads, every admissible c1) are in S; largest change of (h, g) among those: [0, 2, 6, 1]
+head and tail of 3 zigzag beads: 3964 of 3964 extended bridges (3..10 beads, every admissible c1) are in S; largest change of (h, g) among those: [0, 2, 6, 1]
+head and tail of 4 zigzag beads: 3964 of 3964 extended bridges (3..10 beads, every admissible c1) are in S; largest change of (h, g) among those: [0, 2, 6, 1]

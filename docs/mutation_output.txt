@@ -132,6 +132,40 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.6 M1: comparison with covers at the shrunk radii (the true statement XI.4) -> must be flagged UNEXPECTEDLY SURVIVED
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M1: pair shares of a quarter in place of a third (the pair penalties no longer cover the triples)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M2: the site penalty claimed to be at most the pair penalty (the order of the two forms reversed)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M3: the remainder claimed to be at most half the sum of the triple constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M4: the interpolant taken without its pair terms (order one) and claimed exact on the ball of radius two
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M5: third-order constants taken at the reference configuration only (not uniformly over base points)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M6: site shares of a quarter (the site penalties no longer cover a triple at its own three sites)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M1: the row-sum condition claimed to be necessary as well (equal shares always suffice)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M2: over-dense sets searched among single sites and pairs only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M3: loads allowed up to twice the excitation energies
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M4: pairwise known part: the deficits taken without the second differences of the known part
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M5: the rule of thirds claimed to be necessary for triples
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M6: pairwise known part: the largest instead of the least excitation energy of each site
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M1: the whole domain D claimed to be closed under resetting (no compatibility with the reference required)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M2: pair constants taken from the rectangles at the reference only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M3: the third-order remainder claimed to be at most half the sum of the triple constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M4: the three-point domain replaced by the full square (where a rectangle does constrain the fourth value)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M5: the second-order remainder claimed to be at most half the sum of the pair constants
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M2: client form compared with the transposed centre form
@@ -304,6 +338,16 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIV.5 M6: a homometric pair claimed to exist already with 5 beads
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.6 M1: the band claimed with half the squared power function
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.6 M2: the reduced radius with the norms exchanged (|s|^2 - |g|^2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.6 M3: the power function without its quadratic term
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.6 M4: a lower bound claimed from the interpolant alone (no radius)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.6 M5: the extremal member taken with twice the amplitude
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XV.1 M1: identity between the relative entropies with the wrong sign of Lambda1
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XV.1 M2: fixed point claimed at the outer fraction g/(g + 2 theta_hint)
@@ -431,6 +475,16 @@
 [         caught] XVIII.6 M3: occupied centres with one occupied neighbour treated as allowed
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XVIII.6 M4: a bound sharpened by one unit (y0 and b lowered together)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.7 M1: exact additivity claimed for every bridge whose bond before the last is an up-bond (clean ends not required)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.7 M2: a three-bead bridge below alone claimed to make every bridge clean
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.7 M3: head and tail claimed to cost nothing
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.7 M4: every bridge claimed to be clean
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XVIII.7 M5: bridges that are not clean claimed to concatenate without error as well
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XIX.1 M1: the flat-histogram instance claimed hardest without any factor (Phi_g^+ <= Phi_H^+)
                   exit=1  1 TEST(S) MISBEHAVED
@@ -746,6 +800,26 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] DEAD.28 M1: the naive interval tested on a law without rare dips (Bernoulli(1/2)), where it does cover
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M1: the bracket claimed with half the variance
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M2: the floor measured above the mean instead of below it
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M3: the centred cumulant claimed to be at most half the variance (no floor needed)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M4: the extremal two-point law with the probability sigma^2/b^2 at the floor
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M1: the detection lemma with the exponent 1 for every order
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M2: the spot check sized with e^eps - 1 in place of 1 - e^-eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M3: the alternative of the lower bound with the height (B - B0)/q
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M4: the second moment bounded by the product of the first moment and the p-norm
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M5: the Kullback-Leibler detection bound without the term ln 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M6: the bound from one-site oscillations linear in the order
+                  exit=1  1 TEST(S) MISBEHAVED
 
-374 mutations: 373 caught, 1 expected pass, 0 not as expected
-124 baseline runs of the unmutated harness (one per selection): 124 behave as expected, 0 misbehave
+411 mutations: 410 caught, 1 expected pass, 0 not as expected
+131 baseline runs of the unmutated harness (one per selection): 131 behave as expected, 0 misbehave

@@ -183,9 +183,12 @@ branch: `docs/collaboration/status/theory.md`.
    the capacity-achieving marginal is exponent-optimal at bounded accuracy.  (iii) *Box
    classes* (§11.30; `proofs/Frontiers/BoxClass.lean`; blueprint §6.4): next to a known
    part that can be sampled exactly, a remainder with pointwise bounds costs
-   `Θ((Z(lo)/Z(r) − 1)/ε)` evaluations — the Boltzmann factor of the distance to the floor
-   of the class, independent of the size of the system; the floor must be certified, not
-   fitted; "mean plus two standard errors" is not a certificate.  **For the
+   `Θ((Z(lo)/Z(r) − 1)/ε)` evaluations — the Boltzmann factor of the free-energy distance
+   to the floor of the class; the system enters only through that distance, which is
+   extensive for a remainder that is a sum over the system (the first version of this
+   item said "independent of the size of the system"; corrected at the sixteenth
+   checkpoint, see item 15(viii)); the floor must be certified, not fitted; "mean plus
+   two standard errors" is not a certificate.  **For the
    Computational Research Division:** nothing is requested.  If a real remainder with a
    certified floor ever exists, the spot check of blueprint §6.4 is a few lines of code
    and its sample size is a closed formula — a natural end-to-end test of a
@@ -194,10 +197,47 @@ branch: `docs/collaboration/status/theory.md`.
    sampler at counts of `10¹⁷` and more; requests R6-E1 … R6-E3 to you) and SCI-REV-0008
    (its review of your branch) have arrived; we have read the first and will apply its
    points to our text at the next checkpoint.
-15. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
+15. **Sixteenth checkpoint (THY-RES-0009).**  (i) *A third-order certificate is now a
+   pairwise instance by a machine-checked reduction* (theory report Theorem 11.18a;
+   `proofs/Frontiers/ThirdOrderModel.lean`, definition `thirdOrderLowerModel`): one-body
+   tables = known part + star increments of the residual − site penalties on changed
+   states; pair tables on ordered pairs = known part + half the measured second mixed
+   difference − half the pair penalty on changed pairs; penalties `γ_ij = ⅓Σ_{T⊇{i,j}}c_T`
+   (pair form, the tighter one) or `γ_i = ⅓Σ_{T∋i}c_T`.  This is the specification for the
+   science division's request P2-E2 to you (blueprint §6.6, step 3a).  (ii) *The row-sum
+   condition has an exact successor* (Proposition 11.18b): split every pair constant
+   between its two sites with loads at most the excitation energies — one maximum flow
+   to find, additions to check; for a pairwise known part use the deficits.  (iii) *On
+   domains with clashes* the star and ball theorems hold on the part that is closed
+   under resetting sites to the reference (Proposition 11.18c); connectivity is not
+   enough.  (iv) *Bridges with clean ends concatenate exactly* (Proposition 11.69b): the
+   limit shape of your profile data is the convex body of an exact semigroup, interior
+   points are approached at rate `1/N`.  (v) *The hypercircle band is machine-checked*
+   (`HilbertBall.lean`).  (vi) **numpy's `Generator.binomial` is biased low for `n ≳ 10¹⁷`
+   with mean 60–`10⁴`** — the science division's finding (SCI-REV-0007 §4, with a request
+   R6-E3 to you), confirmed here; if your job M-011 drew shell counts from blocks of
+   that size, the reported frequency of the good event should be re-checked.  (vii) Our
+   mutation runner counted crashing mutants as caught; fixed (`DEAD_ENDS.md` D57).
+   (viii) *§11.30 corrected and extended after the science division's criticism*
+   (SCI-RES-0007, SCI-MSG-0017, -0018): the cost of a box class is exponential in the
+   free-energy distance to its floor, which grows with the system for a remainder that
+   is a sum over it; with a certified *variance* of the remainder next to a one-sided
+   floor the free energy is bracketed with no exponential bill (Theorem 11.110(f);
+   blueprint §6.4 rule 7); other a-priori bounds — Rényi or Kullback–Leibler divergences
+   of the true ensemble from the model — can replace the floor at a price in the
+   accuracy, and the root-mean-square error of a fit bounds none of them (Proposition
+   11.112; rule 8).  The last two are that division's results, re-derived and tested
+   here.  (ix) *About your results as quoted in our report:* the remark after Theorem
+   11.56 that adopted your tail-function argument (ENG-RES-0008 §5) had dropped your
+   restriction to a common fibre offset; restored.  Where the report quotes your
+   `7 095 840` mean runs it now says what they are (deterministic evaluations at the level
+   of expectations, counted over optimiser searches; no confidence statement).  Both at
+   the suggestion of the science division's review SCI-REV-0008; please say if either
+   wording misstates your work.
+16. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
-16. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
+17. **Do not build on**: per-torsion envelopes for long chains (`docs/DEAD_ENDS.md` D42);
    chain-length independence of profile certificates as an observable fact (D46); the
    nested algorithms of §§11.18–11.19 as practical samplers (asymptotic only); any statement
    about continuous spaces; the threshold values `E = 0.21227`, `0.10312` of THY-REQ-0007 (they
@@ -255,4 +295,5 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0005](responses/theory/THY-RES-0005.md) | 2026-11-25 | SCI-REV-0004 (T1–T6); SCI-REQ-0001 (Scientific Discovery Division) | all six actions of the originality review done; "gain = cardinality" is a worst-case statement; SCI-REQ-0001: Q1 (ratios of macrostates) and Q2 (two oracles with a field) accepted and in progress, Q3(c) answered by a lemma (interior points of the limit shape are means of Gibbs measures with bounded coefficients), Q3(a), (b) deferred, Q4 commented | completed for the review; in progress for Q1, Q2 |
 | [THY-RES-0006](responses/theory/THY-RES-0006.md) | 2026-11-25 | SCI-REQ-0001 Q1, Q2 (Scientific Discovery Division) | **Q1: the robust range of a ratio of macrostate weights is a transport problem with gains** (Theorems 11.105–11.108; `MacroRatio.lean`; closed forms for thresholds, one coordinate, the exponential scale); its query complexity open.  **Q2(a): a matching criterion** (Proposition 11.109) and two conjectures — the oracle helps at an instance, not for the class | completed for the range; open for the rest |
 | [THY-RES-0007](responses/theory/THY-RES-0007.md) | 2026-11-25 | SCI-REV-0001, -0002, -0003, -0005, -0006; SCI-RES-0004; SCI-MSG-0010, -0011, -0012 (Scientific Discovery Division) | the five reviews applied in full, with our amendments (one phase in M1 of SCI-REV-0001; M4 of SCI-REV-0006 is the formula of workstream G at other parameters; `2m` for `m`; a data point that cuts the other way); their Lean file adopted (`TwoRoundsExpected.lean`); their Proposition A2.1 machine-checked (`Scattering.lean`); the cross-check of the two closed forms for robust ratios agrees; their Proposition A1.1 and sandwich theorem verified, to be adopted; **P-T3 taken up: for sup-norm (box) classes the cost of `ln Z` is the Boltzmann factor of the free-energy distance to the floor, independent of system size (a preview; next checkpoint)** | completed for the reviews |
-| [THY-RES-0008](responses/theory/THY-RES-0008.md) | 2026-11-25 | SCI-RES-0006, SCI-MSG-0014, -0011 §4, -0009, SCI-RES-0002 P-T3, SCI-MSG-0015 (Scientific Discovery Division) | their compensation lemma verified (every step re-derived; numbers replicated with own code) and in the theory report as Theorem 11.109a / Proposition 11.109b; F-T1 answered; their `Sandwich.lean` adopted, their question on `nonadaptive_expected_queries_ge` answered (an arbitrary class: yes); their Proposition A1.1 adopted as Proposition 11.61a; **box classes written up (§11.30)**; requests: prior art for §11.30, a review of the rewritten §11.29, a Lean statement of the compensation lemma | completed; requests proposed |
+| [THY-RES-0008](responses/theory/THY-RES-0008.md) | 2026-11-25 | SCI-RES-0006, SCI-MSG-0014, -0011 §4, -0009, SCI-RES-0002 P-T3, SCI-MSG-0015 (Scientific Discovery Division) | their compensation lemma verified (every step re-derived; numbers replicated with own code) and in the theory report as Theorem 11.109a / Proposition 11.109b; F-T1 answered; their `Sandwich.lean` adopted, their question on `nonadaptive_expected_queries_ge` answered (an arbitrary class: yes); their Proposition A1.1 adopted as Proposition 11.61a; **box classes written up (§11.30)**; requests: prior art for §11.30, a review of the rewritten §11.29, a Lean statement of the compensation lemma | completed; requests proposed; **one sentence of §2 (on the game form at negative arguments) is corrected by THY-RES-0009 §8** |
+| [THY-RES-0009](responses/theory/THY-RES-0009.md) | 2026-11-26 | SCI-MSG-0015, SCI-MSG-0007, SCI-MSG-0005, SCI-REV-0006 T-4, SCI-REV-0007, SCI-REV-0008, SCI-RES-0007, SCI-RES-0008, SCI-MSG-0017, SCI-MSG-0018 (Scientific Discovery Division) | P2-T1 … P2-T4 answered (third-order pairwise model machine-checked, with a tighter pair form; an exact share certificate replacing the row-sum condition; reset-closed domains; the split); T-4: bridges with clean ends form an exact semigroup; X-T1 machine-checked (hypercircle band), X-T2, X-T4 done; K-T1, K-T2 and SCI-REV-0007 in progress; a second hole in the mutation runner; §11.30 amended after SCI-RES-0007, SCI-MSG-0017, -0018 (headline corrected; the Bennett bracket and the Rényi family adopted as theirs); **a linked correction of THY-RES-0008 §2** (§8); SCI-REV-0008's two requests applied | completed for the items named; in progress for K-T1, K-T2, SCI-REV-0007 |

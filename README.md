@@ -145,9 +145,28 @@ gradient part of an asymmetric envelope (normal form, machine-checked).  Second-
 structure does not rescue certification when its constants are dense: the uncertainty left by
 any set of evaluations grows quadratically with the distance to it (machine-checked), so the
 price is exponential unless the excitation energies are of the order of `c·n`.
+The exponential price is a property of the *class*, not of a certificate format and not
+of worst-case reasoning as such: the lower bounds hold at every instance, so no procedure
+that is correct on a first-order class can be cheap on any of its subclasses, and a
+cheaper paradigm must say which members it gives up.  Two classes with other geometry are
+treated next to it — a Hilbert ball, in which evaluations combine linearly (the
+hypercircle band, machine-checked: `HilbertBall.lean`; proposed by the Scientific
+Discovery Division), and a box around a known part that can be sampled (below).
 Minimal certificates are NP-hard to find and best-first search is
 competitive only with covers at shrunk radii.  Under weak second-order coupling, `n(k−1)+1`
-evaluations give an exact reduction to the pairwise kernel.  The one-shot lower bounds (for
+evaluations give an exact reduction to the pairwise kernel; *when* the coupling is weak
+enough is now an exact, cheaply checked condition for independent known parts — the
+pair constants must be splittable between their two sites so that no site carries more
+than its excitation energy (a maximum-flow certificate; the older "row-sum" rule is the
+split in halves; machine-checked in the sound direction, `ShareCertificates.lean`).  With
+third-order constants the values on a Hamming ball of radius two give a pairwise lower
+model that the same kernel certifies (`ThirdOrderModel.lean`), and — unlike the
+second-order reduction — it does not depend on how the energy is divided between known
+part and residual.  On domains with forbidden pairs of states these reductions hold on
+the part of the domain that is closed under resetting sites to the reference, and
+connectivity is not enough.  (The last three statements answer questions of the
+Scientific Discovery Division, which measured such constants for a solvent term on
+fixed synthetic model peptides; measured constants are not certified ones.)  The one-shot lower bounds (for
 certificates and for all algorithms), the search guarantee and the second-order reduction are
 machine-checked; the matching upper bounds are paper proofs (type covering, Harper's theorem),
 for which the single-letter identities and exact counts were checked numerically.
@@ -307,7 +326,11 @@ chain length at which it is approached `10³`–`10⁵` beads or more [N, an est
 converges with a surface correction of exact order `N^{-1/3}` at its compact end, but no
 theorem says when the certificate sizes are near their limit points.  (The first version
 of this paragraph said "the plateau is between 50 and 3 627 evaluations … and it is reached
-only at `10³`–`10⁵` beads".)  The
+only at `10³`–`10⁵` beads".)  Bridges whose two ends are "clean" concatenate *exactly*, so the
+limit shape is the convex body of an exact semigroup of lattice points (a classical
+object; a question of the Scientific Discovery Division): in its interior the finite
+sets fill in at rate `1/N`, and eventually every integer profile with an interior density
+is attained by some bridge.  The
 coordinator's brief for this workstream had the profile distance wrong (D48).  Machine-checked:
 the two abstract theorems behind it — Fekete's lemma for sets and the stability of covering
 numbers (`SetLimit.lean`, `CoverStability.lean`); the lattice lemmas that feed them are paper
@@ -468,11 +491,23 @@ the Scientific Discovery Division after its measurements on force-field terms;
 beyond the placement**).  If the energy is a known function whose ensemble can be sampled
 exactly plus a remainder with pointwise bounds, the number of evaluations that certifies
 the free energy is the Boltzmann factor of *how far below the known function the truth
-may lie*, divided by the accuracy — and **does not depend on the size of the system**, in
-contrast to every class above.  The upper side of the free energy (a mean) is cheap; the
-floor is the one assumption that sampling cannot replace — a constant fitted on samples
-is not one, and the usual "mean plus two standard errors" is not a certificate; ground
-states do not share the benefit.
+may lie* — a free-energy distance in `k_BT` — divided by the accuracy.  **The system enters
+only through that distance, not through its number of states or variables**; for a
+remainder that is a sum over a growing system the distance grows with it, so the
+exponential is moved into the right coordinate, not removed (our first statement of this
+result said "does not depend on the size of the system", which the Scientific Discovery
+Division rightly criticised).  The upper side of the free energy (a mean) is cheap.
+Inside such a class the floor is the one assumption that sampling cannot replace — a
+constant fitted on samples is not one, and the usual "mean plus two standard errors" is
+not a certificate; ground states do not share the benefit.  Two additions are that
+division's (re-derived and tested here, not machine-checked): with a certified *variance*
+of the remainder next to a one-sided floor the free energy is bracketed with no
+exponential bill at all (Bennett's inequality), and the floor is the end of a family —
+an a-priori bound on a Rényi or Kullback–Leibler divergence of the true ensemble from the
+model can take its place at a price in the accuracy, while the root-mean-square error
+that a fit reports certifies nothing on its own.  On that division's enumerated
+force-field instances the prices range from negligible to astronomically large and are
+not predicted by fit quality; none of those numbers is a certificate.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

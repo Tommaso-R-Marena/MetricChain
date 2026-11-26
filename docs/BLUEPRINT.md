@@ -455,7 +455,8 @@ oscillations, and the gap is second order in the cell size.
 (theory report §11.30; `proofs/Frontiers/BoxClass.lean`; unrefereed).  If `E = f̂ + r` with
 `lo ≤ r ≤ hi` pointwise and independent exact samples from `π ∝ e^{−f̂}` are available (a product
 measure; a chain or a tree by the elimination rules of §6.3), free energies are certified
-by sampling, with confidence `1 − δ`, at a cost that does not grow with the system:
+by sampling, with confidence `1 − δ`, at a cost that depends on the system only through the
+free-energy distance between the truth and the floor of the class:
 
 ```
 lower side (Gibbs–Bogoliubov, a mean):
@@ -469,8 +470,14 @@ no algorithm of any kind does better than
 ```
 
 Rules that follow.  (1) What you pay for is the **floor** — how far below the known function
-the truth may lie, `Z(lo)/Z(r)`; at the centre of a constant box `(e^{ρ₋} − 1)/ε`.  The ceiling
-and the size of the system do not enter.  (2) The floor must be **certified**, by analysis of
+the truth may lie, `Z(lo)/Z(r) = e^{F(E) − F(m)}` for the lower model `m = f̂ + lo`; at the centre
+of a constant box `(e^{ρ₋} − 1)/ε`.  The ceiling and the number of states do not enter; the
+size of the system enters through the floor, which for a remainder that is a sum over the
+system grows with it — put as much as can be sampled exactly into the known part before
+quoting a floor (theory report §11.30, "measured remainders").  The sampler is rejection
+from the Gibbs measure of the lower model: accept `x ∼ π_m` with probability
+`1 − e^{−(r(x) − lo(x))}` (dip half) or `e^{−(r(x) − lo(x))} − e^{−(hi(x) − lo(x))}` (bump half).
+(2) The floor must be **certified**, by analysis of
 the functional form of the remainder; a constant fitted or observed on samples is not a
 floor, and no statistic of the sample replaces one — "mean plus two standard errors" fails
 with probability about `e^{−1}` at a remainder with one deep well of probability `1/N`
@@ -481,6 +488,27 @@ must be exact; a Markov chain without a certified mixing time voids the guarante
 result is for `ln Z` of the whole domain at positive temperature: a minimum needs every state
 within the floor of the optimum, and ratios of macrostate weights are not covered.  (6) These
 certificates are probabilistic and are **not** checked by any kernel of this repository.
+(7) **If a variance bound can be certified as well, use it** (Theorem 11.110(f); the
+Scientific Discovery Division's proposal; Bennett's inequality, paper-level, harness XXIV.6):
+
+```
+given a certified floor lo ≤ r and a certified bound Var_π(r) ≤ σ²; N samples of π, sample mean r̄, η = σ/√(Nδ):
+    ln Z₀ − r̄ − η  ≤  ln Z  ≤  ln Z₀ − r̄ + η + W(r̄ + η − lo, σ²)           with probability ≥ 1 − δ
+    W(b, σ²) = ln[(b² e^{−σ²/b} + σ² e^{b})/(b² + σ²)]  ≤  (σ²/b²)(e^{b} − 1 − b)                     paper (Bennett, Chebyshev)
+```
+
+No hint is needed and nothing is exponential unless `W` is — but `W` is exponential in the
+floor, so this helps exactly when the floor is a few `k_BT` and the variance small (the
+situation the division measured for the remainder beyond a pairwise fit of a solvent term:
+floor `≤ 3.7 k_BT`, standard deviation `≤ 0.04 k_BT`, `W ≤ 3.3·10⁻³` — measured by enumeration,
+not certified).  The variance must be a bound known in advance: an exact finite sum for an
+explicit sum of local tables under a chain model, `¼Σc_i²` from one-site oscillations under
+a product measure; the sample variance is not one.  (8) **Do not read a price off the
+quality of a fit.**  What a certificate pays for is a divergence of the *true ensemble from
+the model* (Proposition 11.112: an a-priori bound `κ` on the Rényi divergence of order `p`
+costs about `e^{κ}/ε^{p/(p−1)}` evaluations with a hint); the root-mean-square error under the
+model, which is what a fit reports, bounds none of them, and on the division's instances it
+fell while the price rose by thirteen orders of magnitude.
 
 ### 6.5 Multi-state comparison
 
@@ -601,6 +629,29 @@ same evaluations can report a larger bound; the exit `y = x0` is exact
 the pair remainder at `y`.  For partition functions use the same two pairwise models in the
 weight domain (`Z(E₀ + g_star + R) ≤ Z ≤ Z(E₀ + g_star − R)`, both certified by §6.3).  The
 constants `c_ij` are the producer's obligation; none are certified here for a concrete residual.
+
+**Step 3a — third-order constants: the ball instead of the star** (theory report Theorem
+11.18a; `proofs/Frontiers/ThirdOrderModel.lean`).  If certified bounds `c_T` on the third mixed
+differences over triples of sites are available, evaluate the residual on the Hamming ball
+of radius two around the reference (`1 + Σ_i(k_i−1) + Σ_{i<j}(k_i−1)(k_j−1)` evaluations, about
+`n²k²/2`) and certify the pairwise model
+
+```
+E₀ + I₂g − Σ_{i<j both changed} γ_ij ,        γ_ij = ⅓ Σ_{T ⊇ {i,j}} c_T          (pair form; the tighter one)
+E₀ + I₂g − Σ_{i changed} γ_i ,                γ_i  = ⅓ Σ_{T ∋ i} c_T              (site form)
+```
+
+with the min kernel (`verify_sound_thirdOrder`): `I₂g` is the star part plus the second mixed
+differences at the reference, so it enters the one-body and pair tables directly.  Any
+nonnegative shares of each `c_T` among its sites and pairs that add up to one may be used
+instead of thirds; the checker verifies the shares, not their choice.  Two things differ
+from the star.  The lower model does not depend on how the energy is split between `E₀`
+and the residual — a pairwise term may be moved from one to the other without changing
+`c_T` or the model — whereas the star's constants `c_i`, `c_ij` do (measured by the Scientific
+Discovery Division: for polar and charged side chains in rotamer variables the star fails
+for this reason and the ball certifies).  And the pairwise model is a relaxation, not the
+exact envelope (which is a three-body function).  As everywhere: the constants are the
+producer's obligation; measured maxima over an enumerated domain are not certified bounds.
 
 **Step 4 — a probabilistic guarantee instead (free energies).**  When a statement that holds
 with probability `1 − δ` is acceptable, the free-energy difference between the target and a
@@ -1023,12 +1074,14 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 374 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 411 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in
 the same mode and fails if that baseline misbehaves (a mutant of a failing test would be
-"caught" for the wrong reason — this happened once, `docs/DEAD_ENDS.md` D55 item 12).  The
+"caught" for the wrong reason — this happened once, `docs/DEAD_ENDS.md` D55 item 12).  A mutant
+that ends with an exception instead of a verdict is rejected as well (a crash is not a
+detection — this also happened once, D57 item 1).  The
 audit script runs it, and starts with a self-test in which
 planted violations (an incomplete proof, forbidden tokens) must be detected.  Use
 it as the executable reading of the schema and as a regression oracle for faster checkers.

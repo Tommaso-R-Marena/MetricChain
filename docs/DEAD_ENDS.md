@@ -563,6 +563,17 @@ residuals.
   evaluates the residual, deterministic or randomised (theory report §11.10;
   `instance_query_complexity`, `expected_queries_ge_exp_weights_min`,
   `binary_randomized_exponential`).
+* *The converse reading* (added at the sixteenth checkpoint of cycle 10 at the request of
+  the Scientific Discovery Division, SCI-MSG-0007 X-T4).  The lower bounds are
+  *instance-wise*: an algorithm that is correct on a first-order class pays that class's
+  price at every instance — in particular at the instances of any benign subclass.  So
+  "assume the benign class and fall back if the data contradict it" is not available (the
+  contradiction costs exponentially many evaluations to see), and **a cheaper paradigm
+  necessarily gives up correctness on the first-order class and should say which members
+  it gives up**.  The exponential price is the geometry of the class — evaluations
+  combine by a minimum — not the worst-case quantifier: in a Hilbert ball they combine
+  linearly (theory report Proposition 11.50a), in a box around a sampleable known part
+  they combine through a mean (§11.30); both are different assumptions, not weaker ones.
 
 ## D29. "The finite-temperature exponent holds for every accuracy `ε = o(n)`" — FALSE for exponentially small accuracies  **[Lean]**
 
@@ -1776,3 +1787,75 @@ had passed the coordinator's own check and, in three cases, an earlier referee's
    does not mention it.  The reference was from memory.  It is now in
    `docs/prior_art/L10_box_classes.md` with its reading level (a search summary), and
    its use is tested by simulation.
+
+## D57. A second way for a mutation to be "caught" for the wrong reason, a condition that was vacuous at the sizes tested, and a statement written before its model was looked at (sixteenth checkpoint of cycle 10)
+
+1. **A mutant that crashes is not a mutant that is caught.**  The harness reports a test
+   that raises an exception as "ERROR" and exits with code 1, and the mutation runner
+   counted every exit code 1 as "caught".  One of the oldest mutations (VII.1 M2b, a
+   mis-modelled leaf rule) made a linear programme unbounded, the test then negated
+   `None`, and the crash was recorded as a detection — for eleven checkpoints.  Found when
+   the mutants of a new test were inspected one by one for *why* they fail.  Now: the
+   runner rejects a mutant if any test of it ends with an exception, or if it does not
+   reach the harness's own verdict line; the leaf-bound function returns `+∞` for an
+   unsolved programme, and the test treats a non-finite bound as a failed comparison.
+   With D55 item 12 this makes three conditions for "caught": the unmutated test passes
+   in the same mode, the mutant runs to its end, and the harness itself reports the
+   failure.  All 380 mutations existing at that time were re-run under the new rule:
+   one crash, no other change.
+2. **A condition that was vacuous at the sizes tested** (harness XVIII.7, mutation M1).
+   The exact semigroup of Proposition 11.69b needs three conditions on a bridge: the bond
+   before the last is an up-bond, and no pair between a linker and the bridge at either
+   end.  Up to 7 beads the second and third hold automatically whenever the first does,
+   so a test restricted to 7 beads (the quick mode) could not distinguish the proposition
+   from the false statement without them.  From 8 beads on they can fail (8 of 264).  The
+   test now always includes 8 beads and requires that such bridges exist.  *The same
+   pattern for the third time in two checkpoints* (D55 item 12, D56 item 4): a clause of
+   a statement is tested only if the test set contains a case in which that clause, and
+   nothing else, decides.
+3. **A statement written before its model was looked at** (first draft of Proposition
+   11.18b(c), corrected before it was committed).  "With third-order constants and an
+   additive known part the exact criterion is: no set of sites is over-dense with respect
+   to the triples."  False as stated: the lower model of third order contains the
+   *measured* second mixed differences of the residual on the ball, which have no sign,
+   so the criterion is a pairwise minimisation with those terms, and the triple-density
+   condition is exact only when they (and the known pair terms) vanish.  The
+   combinatorial equivalence that the harness tests (shares exist iff no over-dense set)
+   was true all along; the sentence connecting it to the model was not.  *Lesson:* a
+   harness test of a combinatorial lemma does not test the sentence that applies it.
+4. **A sampler called "stable" that is not, at the sizes it was written for** (found by the
+   Scientific Discovery Division, SCI-REV-0007 §4; confirmed here).  numpy's
+   `Generator.binomial(n, p)` is biased low for `n ≳ 10¹⁷` with mean between about 60 and
+   `10⁴` (mean `91.26` instead of `92` at `n = 2⁶¹`, `z = −49` in `4·10⁵` draws; `−0.21 %` at `n = 10¹⁸`,
+   `np = 500`; nothing detected at `n ≤ 10¹⁶`, at `np = 20`, or for the Poisson sampler).
+   Workstream K's `stable_multinomial.py` sends exactly those nodes to it.  The harness
+   itself draws binomials only at cube dimensions and is not affected; which published
+   numbers of §11.19 are, and the corrected sampler, are the subject of the next
+   checkpoint (the review is being applied).
+5. **A headline that was true of a constant box and misleading for everything else, and
+   an illustration with the wrong number** (theory report §11.30 as published at the
+   fifteenth checkpoint; found by the Scientific Discovery Division, SCI-RES-0007 §3(1)
+   and SCI-MSG-0017).  The section said that the cost of a box class "does not depend on
+   the size of the system", and illustrated it with floors of `3.7` and `15.6 k_BT` "whatever
+   the chain length".  The theorem is right and both sentences mislead.  The cost is the
+   Boltzmann factor of the free-energy distance to the floor; for a remainder that is a
+   sum over a growing system that distance grows with the system, so the exponential is
+   renamed, not removed — and the two numbers were two-sided sup norms of *one* remainder
+   at two chain lengths, taken from the division's own pilot, where the theorem charges a
+   one-sided distance.  The division then measured that distance on 74 enumerated
+   instances: between `0.07` and `243`, linear in the chain length in every family, and
+   unrelated to the width.  *Lessons:* a class whose defining constant depends on the size
+   must not be headlined as size-free; and a theorem should be illustrated with the
+   quantity it charges for, computed for the example, not with the nearest number at
+   hand.
+6. **"Without a floor a single hidden state defeats every sampler" — true of polynomial
+   moments, false of exponential ones** (theory report §12 item 13(b) and the first
+   "reading" of §11.30 as published at the fifteenth checkpoint; corrected by the
+   division's Rényi family, SCI-RES-0007 §3(3)).  We had dismissed moment constraints
+   under the known measure in one sentence, with the example `E_π e^{−2(r − r̄)} ≤ κ`.  That
+   example is an *exponential* moment, i.e. a ball in `L²(π)` for the Boltzmann factor of
+   the remainder, and there a hidden state of mass `q` can raise the partition sum by at
+   most `B√q` (Hölder): the cost is `e^{κ}/ε²`, not the number of states.  What a single
+   hidden state defeats is every bound on *polynomial* moments of the remainder energy
+   (mean, root mean square).  The sentence was written without the two-line computation
+   that decides it.  Now Proposition 11.112, tested in harness XXIV.7.

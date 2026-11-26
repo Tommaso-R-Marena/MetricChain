@@ -59,6 +59,9 @@ import proofs.Frontiers.MacroRatio
 import proofs.Frontiers.Scattering
 import proofs.Frontiers.BoxClass
 import proofs.Frontiers.MonotoneSandwich
+import proofs.Frontiers.ThirdOrderModel
+import proofs.Frontiers.ShareCertificates
+import proofs.Frontiers.HilbertBall
 import proofs.AuditCommand
 
 /-!
@@ -545,6 +548,30 @@ import proofs.AuditCommand
 #print axioms ScienceL2.stepField_sandwich_mean
 #print axioms ScienceL2.cube_sandwich_strict_witness
 #print axioms ScienceL2.cube_sandwich_fails_negative_beta
+
+-- Third-order residual classes reduce to pairwise lower models (theory report Theorem 11.18a)
+#print axioms MetricChain.anchoredInterp_three
+#print axioms MetricChain.thirdOrderLowerModel_energy
+#print axioms MetricChain.thirdOrder_pairwise_lower
+#print axioms MetricChain.cover_of_site_shares
+#print axioms MetricChain.thirdOrder_pairwise_lower_thirds
+#print axioms MetricChain.cover_of_pair_thirds
+#print axioms MetricChain.thirdOrder_pairwise_lower_pair_thirds
+#print axioms MetricChain.verify_sound_thirdOrder
+#print axioms MetricChain.thirdOrder_witness
+
+-- Share certificates for the second-order sharp-minimum condition (theory report Proposition 11.18b)
+#print axioms MetricChain.pairSum_le_of_shares
+#print axioms MetricChain.secondOrder_certified_of_shares
+#print axioms MetricChain.secondOrder_certified_of_rowSum
+
+-- Residuals in a Hilbert ball: the hypercircle band as a certificate (theory report Proposition 11.50a)
+#print axioms MetricChain.Hypercircle.cauchy_schwarz
+#print axioms MetricChain.Hypercircle.hypercircle_band
+#print axioms MetricChain.Hypercircle.ball_certificate_sound
+#print axioms MetricChain.Hypercircle.verify_sound_ball
+#print axioms MetricChain.Hypercircle.isKernel_of_features
+#print axioms MetricChain.Hypercircle.band_witness
 #print axioms MetricChain.GamePair.exactRec_congr
 #print axioms MetricChain.GamePair.HintShape.pair
 #print axioms MetricChain.GamePair.HintShape.exists_pair

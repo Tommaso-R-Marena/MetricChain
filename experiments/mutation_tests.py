@@ -4,7 +4,8 @@
 A test that cannot fail proves nothing.  Each mutation below is a small textual change to a scratch
 COPY of `experiments/falsify_conjectures.py` (the repository file is never modified) that makes one
 tested claim false, or breaks the test's own modelling of the claim; the affected test is then run
-in quick mode.  A mutation is *caught* when the harness reports a misbehaving test (exit code 1).
+in quick mode.  A mutation is *caught* when the harness reports a misbehaving test (exit code 1)
+**and no test of the mutant ended with an exception**: a mutant that crashes has refuted nothing.
 
 Exactly one mutation is expected to pass: `DEAD.5 M2` restricts the search for a counterexample to
 product references, where none exists, so the test must fall back to its explicit two-site
@@ -69,8 +70,13 @@ def run(label, edits, only, extra=("--quick",)):
     out = subprocess.run([sys.executable, path, "--only", only, *extra], capture_output=True, text=True)
     verdict = out.stdout.strip().splitlines()[-1] if out.stdout.strip() else "(no output)"
     want_pass = label.startswith(EXPECTED_PASS)
-    ok = (out.returncode == 0) if want_pass else (out.returncode == 1)
-    status = ("expected pass" if want_pass else "caught") if ok else "NOT AS EXPECTED"
+    # "caught" means that the harness itself ran to its end and reported a counterexample (or a documented refutation that
+    # disappeared).  A mutant that raises an exception inside a test (status ERROR), or that does not run at all, has refuted
+    # nothing: the mutation is then badly written and is reported as such.
+    crashed = any(line.startswith("[" + "ERROR".rjust(24) + "]") for line in out.stdout.splitlines()) \
+        or (out.returncode != 0 and "TEST(S) MISBEHAVED" not in verdict)
+    ok = ((out.returncode == 0) if want_pass else (out.returncode == 1)) and not crashed
+    status = ("expected pass" if want_pass else "caught") if ok else ("NOT AS EXPECTED (the mutant crashed)" if crashed else "NOT AS EXPECTED")
     print(f"[{status:>15}] {label}\n                  exit={out.returncode}  {verdict}")
     if not ok:
         RESULTS["bad"] += 1
@@ -146,7 +152,7 @@ MUTS["VII1"] = [
      [("                row[P(i, j)] = 2.0", "                row[P(i, j)] = 1.0")], "VII.1"),
     ("VII.1 M2c: leaf = exact minimum in tables AND validation switched off (only the search result can catch it)",
      [("        leaf[state] = leaf_rule_best_bound(h, J, _box(state))", "        leaf[state] = max(1.0, leaf_rule_best_bound(h, J, _box(state)))"),
-      ("        if abs(lp_primal - lp_blocks) > 1e-7 or abs(lp_kernel - lp_blocks) > 1e-7:", "        if False:")], "VII.1"),
+      ("        if not (math.isfinite(lp_kernel) and math.isfinite(lp_blocks)) \\\n                or abs(lp_primal - lp_blocks) > 1e-7 or abs(lp_kernel - lp_blocks) > 1e-7:", "        if False:")], "VII.1"),
     ("VII.1 M3: branch charges only the cheaper child (block search)",
      [("                    best = min(best, rec(kids[0]) + rec(kids[1]))\n                    if use_prune:\n                        for r in range(2):\n                            if unsound_prune or prune[s, i, r]:",
        "                    best = min(best, min(rec(kids[0]), rec(kids[1])))\n                    if use_prune:\n                        for r in range(2):\n                            if unsound_prune or prune[s, i, r]:")], "VII.1"),
@@ -1143,6 +1149,112 @@ MUTS["XXIII"] += [
        '        Dbar = dips[0]\n        E = float((pi * Dbar).sum())\n        c = float((pi * Dbar * wt).sum() / (n * E))\n        c0 = (1 - k / n) * pm + (k / n) * pp\n        if not (math.exp(r) - 1 - 1e-10')], 'XXIII.7'),
     ('XXIII.7 M10: the depth of the dips in Theorem A taken as the accuracy (without the loss ln(1 + beta) of the compensator)',
      [('        r = hi\n        kap = omm - 1 / math.expm1(r)', '        r = eps - 3.0\n        kap = omm - 1 / math.expm1(r)')], 'XXIII.7'),
+]
+
+MUTS["XI"] += [
+    ('XI.16 M1: pair shares of a quarter in place of a third (the pair penalties no longer cover the triples)',
+     [('        gam2 = {(i, j): sum(c[T] for T in triples if i in T and j in T) / 3 for (i, j) in itertools.combinations(range(n), 2)}',
+       '        gam2 = {(i, j): sum(c[T] for T in triples if i in T and j in T) / 4 for (i, j) in itertools.combinations(range(n), 2)}')], 'XI.16'),
+    ('XI.16 M2: the site penalty claimed to be at most the pair penalty (the order of the two forms reversed)',
+     [('            if B > pair + 1e-9 or pair > site + 1e-9:', '            if B > pair + 1e-9 or site > pair + 1e-9:')], 'XI.16'),
+    ('XI.16 M3: the remainder claimed to be at most half the sum of the triple constants',
+     [('            if abs(r) > B + 1e-9:\n                return False, dict(reason="remainder of the interpolant of order two', '            if abs(r) > 0.5 * B + 1e-9:\n                return False, dict(reason="remainder of the interpolant of order two')], 'XI.16'),
+    ('XI.16 M4: the interpolant taken without its pair terms (order one) and claimed exact on the ball of radius two',
+     [('            I2 = g[x0] + sum(g[sub(x, (i,))] - g[x0] for i in S) \\\n                + sum(g[sub(x, (i, j))] - g[sub(x, (i,))] - g[sub(x, (j,))] + g[x0] for (i, j) in itertools.combinations(S, 2))',
+       '            I2 = g[x0] + sum(g[sub(x, (i,))] - g[x0] for i in S)')], 'XI.16'),
+    ('XI.16 M5: third-order constants taken at the reference configuration only (not uniformly over base points)',
+     [('        c = {T: to3_mixed_max(g, T) for T in triples}\n', '        c = {T: max(abs(sum((-1) ** (3 - len(U)) * g[tuple(b[i] if i in U else 0 for i in range(n))] for r in range(4) for U in itertools.combinations(T, r))) for b in itertools.product(*[range(k) for k in ks])) for T in triples}\n')], 'XI.16'),
+    ('XI.16 M6: site shares of a quarter (the site penalties no longer cover a triple at its own three sites)',
+     [('        gam = [sum(c[T] for T in triples if i in T) / 3 for i in range(n)]', '        gam = [sum(c[T] for T in triples if i in T) / 4 for i in range(n)]')], 'XI.16'),
+]
+
+MUTS["XI"] += [
+    ('XI.17 M1: the row-sum condition claimed to be necessary as well (equal shares always suffice)',
+     [('        if rowsum and not exact:', '        if rowsum != exact:')], 'XI.17'),
+    ('XI.17 M2: over-dense sets searched among single sites and pairs only',
+     [('    subsets = lambda n: (S for r in range(1, n + 1) for S in itertools.combinations(range(n), r))',
+       '    subsets = lambda n: (S for r in range(1, 3) for S in itertools.combinations(range(n), r))')], 'XI.17'),
+    ('XI.17 M3: loads allowed up to twice the excitation energies',
+     [('    res = linprog(cvec, A_ub=A_ub, b_ub=np.asarray(cap, float), A_eq=np.asarray(A_eq), b_eq=np.asarray(b_eq),',
+       '    res = linprog(cvec, A_ub=A_ub, b_ub=2 * np.asarray(cap, float), A_eq=np.asarray(A_eq), b_eq=np.asarray(b_eq),')], 'XI.17'),
+    ('XI.17 M4: pairwise known part: the deficits taken without the second differences of the known part',
+     [('            w[(i, j)] = max(max(cc[i, j] - (T[a, b] - T[a, 0] - T[0, b] + T[0, 0]) for a in range(1, ks[i]) for b in range(1, ks[j])), 0.0)',
+       '            w[(i, j)] = max(cc[i, j], 0.0)')], 'XI.17'),
+    ('XI.17 M5: the rule of thirds claimed to be necessary for triples',
+     [('            if thirds and over3 > 0:', '            if thirds != (over3 < 0):')], 'XI.17'),
+    ('XI.17 M6: pairwise known part: the largest instead of the least excitation energy of each site',
+     [('        exc = [min(L(tuple(a if l == i else 0 for l in range(nn))) - L(x0) for a in range(1, ks[i])) for i in range(nn)]',
+       '        exc = [max(L(tuple(a if l == i else 0 for l in range(nn))) - L(x0) for a in range(1, ks[i])) for i in range(nn)]')], 'XI.17'),
+]
+
+MUTS["XI"] += [
+    ('XI.18 M1: the whole domain D claimed to be closed under resetting (no compatibility with the reference required)',
+     [('        Dp = set(x for x in D if all(x[i] in good[i] for i in range(n)))', '        Dp = set(D)')], 'XI.18'),
+    ('XI.18 M2: pair constants taken from the rectangles at the reference only',
+     [('        for x in Dp:\n            for p in c2:\n                for b in itertools.product(*[range(ks[i]) for i in p]):',
+       '        for x in Dp:\n            for p in c2:\n                for b in (itertools.product(*[range(ks[i]) for i in p]) if x == tuple([0] * n) else ()):')], 'XI.18'),
+    ('XI.18 M3: the third-order remainder claimed to be at most half the sum of the triple constants',
+     [('            if abs(g[x] - I2) > B3 + 1e-9:', '            if abs(g[x] - I2) > 0.5 * B3 + 1e-9:')], 'XI.18'),
+    ('XI.18 M4: the three-point domain replaced by the full square (where a rectangle does constrain the fourth value)',
+     [('    D3 = {(0, 0), (0, 1), (1, 1)}', '    D3 = {(0, 0), (0, 1), (1, 1), (1, 0)}')], 'XI.18'),
+    ('XI.18 M5: the second-order remainder claimed to be at most half the sum of the pair constants',
+     [('            if abs(g[x] - star) > B2 + 1e-9:', '            if abs(g[x] - star) > 0.5 * B2 + 1e-9:')], 'XI.18'),
+]
+
+MUTS["XVIII"] += [
+    ('XVIII.7 M1: exact additivity claimed for every bridge whose bond before the last is an up-bond (clean ends not required)',
+     [('        if not up_before_last(w):\n            return False\n        top, _, n1 = ls_concat(w, z3, 0)',
+       '        return up_before_last(w)\n        top, _, n1 = ls_concat(w, z3, 0)')], 'XVIII.7'),
+    ('XVIII.7 M2: a three-bead bridge below alone claimed to make every bridge clean',
+     [('                    y, _, _ = ls_concat(y1, z3, which)\n                    if not (ls_valid_walk(y) and ls_is_bridge(y) and len(y) == N + 12):',
+       '                    y = y1\n                    if not (ls_valid_walk(y) and ls_is_bridge(y) and len(y) == N + 6):')], 'XVIII.7'),
+    ('XVIII.7 M3: head and tail claimed to cost nothing',
+     [('                    if not (0 <= d[0] <= 2 and 0 <= d[1] <= 18 and 0 <= d[2] <= 28 and 0 <= d[3] <= 2):',
+       '                    if d != (0, 0, 0, 0):')], 'XVIII.7'),
+    ('XVIII.7 M4: every bridge claimed to be clean',
+     [('    if stats["clean"] in (0, stats["bridges"]):', '    if stats["clean"] != stats["bridges"]:')], 'XVIII.7'),
+    ('XVIII.7 M5: bridges that are not clean claimed to concatenate without error as well',
+     [('    if stats["dirty_pairs_with_error"] == 0:', '    if stats["dirty_pairs_with_error"] > 0:')], 'XVIII.7'),
+]
+
+MUTS["XIV"] += [
+    ('XIV.6 M1: the band claimed with half the squared power function',
+     [('                slack = BA2 * P2 - (g[x] - s[x]) ** 2', '                slack = 0.5 * BA2 * P2 - (g[x] - s[x]) ** 2')], 'XIV.6'),
+    ('XIV.6 M2: the reduced radius with the norms exchanged (|s|^2 - |g|^2)',
+     [('        BA2 = max(n2g - n2s, 0.0)', '        BA2 = max(n2s - n2g, 0.0)')], 'XIV.6'),
+    ('XIV.6 M3: the power function without its quadratic term',
+     [('                P2 = float(K[x, x] - 2 * lam @ K[A, x] + lam @ KAA @ lam)', '                P2 = float(K[x, x] - 2 * lam @ K[A, x])')], 'XIV.6'),
+    ('XIV.6 M4: a lower bound claimed from the interpolant alone (no radius)',
+     [('        L = float((F + s - np.sqrt(BA2 * Pv) - 1e-9).min())', '        L = float((F + s - 1e-9).min())')], 'XIV.6'),
+    ('XIV.6 M5: the extremal member taken with twice the amplitude',
+     [('                gstar = s + math.sqrt(BA2 / P2) * (K @ beta)\n                coef = np.zeros(N); coef[A] = gamma; coef = coef + math.sqrt(BA2 / P2) * beta',
+       '                gstar = s + 2 * math.sqrt(BA2 / P2) * (K @ beta)\n                coef = np.zeros(N); coef[A] = gamma; coef = coef + 2 * math.sqrt(BA2 / P2) * beta')], 'XIV.6'),
+]
+
+MUTS["XXIV"] += [
+    ('XXIV.6 M1: the bracket claimed with half the variance',
+     [('        w = W(b, s2)\n        stats["worst"] = max(stats["worst"], K - w)', '        w = W(b, s2 / 2)\n        stats["worst"] = max(stats["worst"], K - w)')], 'XXIV.6'),
+    ('XXIV.6 M2: the floor measured above the mean instead of below it',
+     [('        b, s2 = -float(x.min()), float(pr @ (x * x))', '        b, s2 = float(x.max()), float(pr @ (x * x))')], 'XXIV.6'),
+    ('XXIV.6 M3: the centred cumulant claimed to be at most half the variance (no floor needed)',
+     [('        if w > s2 / (b * b) * (math.exp(b) - 1 - b) + 1e-10:', '        if K > s2 / 2 + 1e-10:')], 'XXIV.6'),
+    ('XXIV.6 M4: the extremal two-point law with the probability sigma^2/b^2 at the floor',
+     [('        p0 = s2 / (b * b + s2)', '        p0 = min(s2 / (b * b), 0.999)')], 'XXIV.6'),
+]
+
+MUTS["XXIV"] += [
+    ('XXIV.7 M1: the detection lemma with the exponent 1 for every order',
+     [('            ratio = q / (dmu / B) ** e if dmu > 0 else math.inf', '            ratio = q / (dmu / B) if dmu > 0 else math.inf')], 'XXIV.7'),
+    ('XXIV.7 M2: the spot check sized with e^eps - 1 in place of 1 - e^-eps',
+     [('        qstar = (s * muh / Bh) ** e', '        qstar = (eta * muh / Bh) ** e')], 'XXIV.7'),
+    ('XXIV.7 M3: the alternative of the lower bound with the height (B - B0)/q',
+     [('            a = (B - B0) * q ** (-inv(p))', '            a = (B - B0) / q')], 'XXIV.7'),
+    ('XXIV.7 M4: the second moment bounded by the product of the first moment and the p-norm',
+     [('                bound = m1 * mp if math.isinf(p) else m1 ** ((p - 2) / (p - 1)) * mp ** (p / (p - 1))', '                bound = m1 * mp')], 'XXIV.7'),
+    ('XXIV.7 M5: the Kullback-Leibler detection bound without the term ln 2',
+     [('        floor_l = -(kappa + math.log(2)) / s', '        floor_l = -kappa / s')], 'XXIV.7'),
+    ('XXIV.7 M6: the bound from one-site oscillations linear in the order',
+     [('            bound = p * p * K / (8 * (p - 1))', '            bound = p * K / (8 * (p - 1))')], 'XXIV.7'),
 ]
 
 which = sys.argv[1:] or list(MUTS)
