@@ -5,10 +5,10 @@ own copy (`git show origin/claude/determined-ride-og1u7j:docs/collaboration/READ
 sections "Layout and ownership", "Rules", "Message format" and "Synchronisation" are kept
 consistent with it, and everything below "Engineering addendum" is specific to this branch.*
 
-Seven independent research divisions work on this repository under one research owner (two
+Eight independent research divisions work on this repository under one research owner (two
 at the start; the third introduced by the owner on 2026-11-25 and confirmed to this division
-on 2026-11-26; three more authorised by the owner on 2026-11-26, and a seventh later the same
-day — `docs/engineering/DIRECTIVES.md`, D-3, D-4 and D-6):
+on 2026-11-26; three more authorised by the owner on 2026-11-26, a seventh and an eighth
+later the same day — `docs/engineering/DIRECTIVES.md`, D-3, D-4, D-6 and D-7):
 
 | division | branch (writes only here) | mailbox prefix / digest |
 |---|---|---|
@@ -19,6 +19,7 @@ day — `docs/engineering/DIRECTIVES.md`, D-3, D-4 and D-6):
 | **Geometric Inference, Rigidity and Inverse Problems** (geometry) | `research/geometric-inference` | `messages/geometry/` / `GEOMETRY_TO_ALL.md` |
 | **Mathematical Biology and Computational Complexity** (complexity) | `research/biological-complexity` | `messages/complexity/` / `COMPLEXITY_TO_ALL.md` |
 | **Structural & Computational Biology, Software Development and Applications** (structural biology) | `research/structural-biology` | its own prefix, read from its branch / `STRUCTURAL_BIOLOGY_TO_ALL.md` |
+| **Frontier Benchmarking, Experimental Evidence and Scientific Evaluation** (frontier) | `research/frontier-benchmarks` | its own prefix, read from its branch / `FRONTIER_BENCHMARKS_TO_ALL.md` |
 
 Mandates of the three new divisions, in the owner's words: *ensemble* — "Measure theory, moment
 problems, ensemble identifiability, partial identification, optimal transport, information
@@ -46,15 +47,32 @@ The earlier boundary of scope (no biological sequence engineering, no target-spe
 functional optimisation, no experimental execution without separate authorisation) is
 unchanged.
 
+The eighth division (owner's directive of 2026-11-26, about 22:40 UTC; D-7) is to "establish
+rigorous scientific evaluations of MetricChain's mathematical and computational innovations
+against the strongest relevant contemporary approaches and appropriately scoped
+experimental evidence".  Its branch did not exist yet when this copy was updated
+(2026-11-26 22:45 UTC).  **Roles in an evaluation, as the owner fixed them:** "Frontier
+Benchmarking designs independent evaluations, maintains benchmark integrity, assesses
+comparative evidence, and communicates scientifically consequential deficiencies";
+Structural Biology develops the software; "Ubuntu independently reviews implementations,
+executes substantial computations, and coordinates Modal"; Scientific Discovery evaluates
+physical relevance, assumptions, novelty and validity; the mathematical divisions the
+foundations.  Engineering does not design the evaluations ("Do not duplicate the new
+division's evaluation mandate"); it says when an implementation is not ready to be run,
+runs what is ready, accounts for the cost, and keeps the evidence that a prediction
+existed unchanged at a stated time (`docs/engineering/benchmarks/PREDICTION_FREEZE.md`).
+The owner's distinctions are kept in every statement: *genuine blind assessment*,
+*pre-leaderboard assessment*, *retrospective evaluation*.
+
 Each division writes exclusively to its own branch and reads the others' branches without
 modifying them.  No automatic merges, no force pushes, no changes to `main`, no pull requests
-without the research owner's explicit authorisation.  All seven may read each other's
+without the research owner's explicit authorisation.  All eight may read each other's
 mathematics directly; imported results are checked, not accepted, and are cited with their
 originating branch, exact commit, assumptions, proof status and limitations.
 
 **Shared computation.**  By the owner's directive of 2026-11-26 (D-5) the engineering division
-coordinates substantial shared Modal computations and benchmarking for all seven divisions
-(D-6 extends D-5 to the seventh).
+coordinates substantial shared Modal computations and benchmarking for all eight divisions
+(D-6 and D-7 extend D-5 to the seventh and the eighth).
 A request for computation is sent through the mailbox and states: the mathematical claim,
 the exact source commit, the assumptions, the proposed method, baselines, correctness
 criteria, expected outputs, a resource estimate and a stopping condition.  The queue, with
@@ -91,6 +109,7 @@ docs/collaboration/
     GEOMETRY_TO_ALL.md,   messages/geometry/   and its requests, responses, status   geometry
     COMPLEXITY_TO_ALL.md, messages/complexity/ and its requests, responses, status   complexity
     STRUCTURAL_BIOLOGY_TO_ALL.md and the mailbox directories that division chooses  structural biology
+    FRONTIER_BENCHMARKS_TO_ALL.md and the mailbox directories that division chooses  frontier
 ```
 
 Every message names its recipients.  `ENGINEERING_TO_THEORY.md` keeps its name and is this

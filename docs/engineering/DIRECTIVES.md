@@ -348,3 +348,86 @@ corrected):
   or synthetic data) is inside our mandate; a request to design or optimise sequences or
   to optimise against a specific biological target would be outside it, and would be
   declined with a reference to this paragraph and reported to the research owner.
+
+## D-7 — Eighth division (frontier benchmarking); CASP17 assessment feasibility (2026-11-26, received about 22:40 UTC; two texts)
+
+Addressed to this division.  "Continue your existing research mission, branch restrictions,
+autonomous research loop, scientific scope, safety requirements, and resource
+limitations."  Operative content of the first text:
+
+1. **An eighth division is authorised**: "Frontier Benchmarking, Experimental Evidence and
+   Scientific Evaluation Division", branch `research/frontier-benchmarks`, digest
+   `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md`.  "Its purpose is to establish rigorous
+   scientific evaluations of MetricChain's mathematical and computational innovations
+   against the strongest relevant contemporary approaches and appropriately scoped
+   experimental evidence."
+2. **Responsibilities** ("remains intact"): the mathematical divisions develop foundational
+   mathematics; Structural Biology develops research software; "Ubuntu independently
+   reviews implementations, executes substantial computations, and coordinates Modal";
+   Scientific Discovery evaluates physical relevance, assumptions, novelty and scientific
+   validity; "Frontier Benchmarking designs independent evaluations, maintains benchmark
+   integrity, assesses comparative evidence, and communicates scientifically consequential
+   deficiencies."
+3. **CASP17**: "The official CASP17 results are scheduled for release on November 29, 2026.
+   The official modeling season has already ended.  We are not claiming official
+   participation."  The new division "will investigate whether scientifically defensible
+   pre-reference-release evaluations remain feasible for appropriately scoped public
+   benchmarks".  "Maintain strict distinctions between genuine blind assessment,
+   pre-leaderboard assessment, and retrospective evaluation.  Do not assume that all CASP17
+   references remain confidential.  Respect frozen predictions, contamination controls, and
+   separation between development and held-out evidence."
+4. It will also investigate "broader scientific evaluation opportunities involving
+   structural characterization, conformational ensembles, intrinsic disorder,
+   thermodynamics, structural uncertainty, geometric inference, and other authorized
+   mathematical and physical questions".
+5. For us: read its findings through the existing protocol; "Update your copy of the
+   collaboration protocol to recognize all eight divisions"; answer its questions and
+   requests "according to your existing responsibilities"; "If frontier evaluation exposes
+   a mathematical limitation, investigate whether it motivates a stronger theorem, a
+   constructive algorithm, a generalization, or a rigorous obstruction."  "Do not abandon
+   your primary research responsibilities.  Do not duplicate the new division's evaluation
+   mandate.  Ubuntu remains responsible for substantial shared computation."  "Do not
+   create additional repositories, modify other divisions' branches, expand spending
+   limits, circumvent safeguards, or undertake work outside the existing research
+   charter."
+6. "Our overarching objective is to determine whether genuinely new mathematical principles
+   can produce superior computational structural biology methods.  Scientific rigor,
+   independence, empirical accuracy, computational efficiency, and reproducibility take
+   precedence over favorable appearances."
+
+Second text (the same message), in full: "In addition to your existing responsibilities,
+coordinate directly with the Frontier Benchmarking Division regarding time-sensitive CASP17
+assessment feasibility and other scientifically justified benchmark requests.  Preserve
+independently timestamped prediction artifacts and exact computational provenance.  Do not
+execute immature implementations merely to meet the November 29 deadline.  Prioritize
+scientifically defensible comparisons, independent replication, fair computational
+accounting, and rigorous assessment.  Continue your existing autonomous computational
+research loop while remote jobs execute.  Do not expand existing spending limits or
+scientific scope.  Communicate any implementation defects, invalid evaluation assumptions,
+contamination risks, or computational obstacles immediately to the relevant divisions.  A
+negative or inconclusive benchmark result is acceptable.  A scientifically misleading
+positive result is not."
+
+**How this division reads it** (our interpretation, recorded so that it can be corrected):
+
+* *Who does what in an evaluation.*  The frontier division designs the evaluation and
+  guards its integrity; the structural-biology division builds the software; we (i)
+  verify that software independently (D-6), (ii) run the substantial computations and
+  account for them, and (iii) keep the evidence that a prediction existed, unchanged, at
+  a stated time.  We do not design the evaluation ("Do not duplicate the new division's
+  evaluation mandate"); we do say when an implementation is not ready to be run, and we
+  do not run it then ("Do not execute immature implementations merely to meet the
+  November 29 deadline").
+* *"Independently timestamped".*  A timestamp we write ourselves proves nothing.  Our
+  procedure (`docs/engineering/benchmarks/PREDICTION_FREEZE.md`): every prediction artifact
+  is listed with its SHA-256 in a manifest that is committed and **pushed to the public
+  repository before the reference it will be compared with is opened by anyone in the
+  programme**; the hosting service's own record of the push and the compute platform's
+  own record of the run are the timestamps that do not depend on us.  A further
+  timestamp from a service outside the programme would be stronger; using one means
+  sending a hash to a service the research owner has not named, so it is proposed, not
+  done.
+* *Scope.*  Predicting or characterising the structure of a given sequence is
+  fixed-sequence structural characterisation and inside the charter; nothing in D-7
+  lifts the boundary on sequence engineering, target-specific functional optimisation or
+  experiments.  Spending limits are unchanged ("Do not expand existing spending limits").
