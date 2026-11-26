@@ -199,7 +199,7 @@ for the original goal is negative: the verified per-torsion constants are square
 moments of inertia of the lighter arm and therefore grow like the power 3/2 of the distance
 to the chain end (per-joint lever-arm bounds of this kind are standard in robot motion
 planning; new is the consequence), so the weighted-Hamming route cannot certify long chains
-(D42).  §12 of the
+(proved at the zero residual of an additive known part on a product domain; D42).  §12 of the
 report says what a publication would still need.
 
 **Cycle 10 (refereed: `docs/reviews/R5_referee_report.md`, `R6_referee_report.md`,
@@ -501,7 +501,8 @@ range.
 **the theorems are the Scientific Discovery Division's; our first version had two
 conjectures in their place, one true for a different reason and one with a wrong formula
 and two wrong numbers — `docs/DEAD_ENDS.md` D56**).  Knowing all one-body averages of the true
-ensemble exactly changes neither class exponent, for any system size: the hard instance
+ensemble exactly changes neither class exponent (the lower bounds hold for every system
+size): the hard instance
 is a mixture of two simple ensembles whose averages already equal those of the same
 mixture with a hidden well.  At a *given* instance — the known part itself — the same data
 do exclude wells: a few per cent of the exponent for weak fields, most of it for strong

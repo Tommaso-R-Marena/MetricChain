@@ -74,7 +74,7 @@ models and non-decomposable residuals; (ii) temperature-aware dominance and voxe
 *certificate rules* (D1, D3, D4); (iii) finite-angle torsion-to-RMSD certificates and the
 resulting envelope for SE(3)-invariant residuals (C4); and (iv) a machine-checked certificate
 algebra and library covering all of it, including formalizations (to our knowledge new in Lean)
-of several known results.  The results of the later research phases (§§10–12; rows G1–G24 of §10), which
+of several known results.  The results of the later research phases (§§10–12; rows G1–G40 of §10), which
 were developed in response to that assessment and were reviewed by further independent
 referees (`reviews/R2` – `R12`), are classified separately there; §0.3 is a map of them.
 
@@ -1729,7 +1729,7 @@ different sections.
 
 | what is known about the residual `g` | certificate / deterministic procedures | randomised, told the instance in advance ("hint": the task is *verification*) | randomised, no hint, sample fixed in advance | randomised, no hint, adaptive (*search*) |
 |---|---|---|---|---|
-| **first-order**: `g(x) − g(y) ≤ d(x,y)`, weighted Hamming `d`, product landscape | a covering by slack balls (`isCertificate_iff_cover`); exponential, `exp(nR*)`, unless every site is sharp (Theorems 11.6–11.9); `2^{n(1−o(1))}` on the cube at the zero residual | `exp(n θ_hint(ε₁))` below an accuracy threshold, a bounded number above it (Theorems 11.25, 11.28); single-letter game value at additive instances (11.27) | cube, zero known part: `exp(n θ_na(ε₁))`, `θ_na > θ_hint` (Theorems 11.44, 11.45) | cube, zero known part: `exp(n θ_hint(ε₁))` — the hint is worth nothing (Theorem 11.54); also at every bounded accuracy, `exp(nh)` against `exp(na)` for a sample fixed in advance (Theorem 11.58, refereed); with a field as known part, `exp(nR^max(ε₁))`, the hinted exponent of the hardest additive instance, against `exp(nθ_na(ε₁))` for the best fixed sample, which is uniform on type classes (Theorems 11.61, 11.64, under review) |
+| **first-order**: `g(x) − g(y) ≤ d(x,y)`, weighted Hamming `d`, product landscape | a covering by slack balls (`isCertificate_iff_cover`); for independent sites of fixed types and an additive residual strictly inside the envelope: exponential, `exp(nR*)`, unless every site is sharp (Theorems 11.6–11.9); `2^{n(1−o(1))}` on the cube at the zero residual | `exp(n θ_hint(ε₁))` below an accuracy threshold, a bounded number above it (Theorems 11.25, 11.28); single-letter game value at additive instances (11.27) | cube, zero known part: `exp(n θ_na(ε₁))`, `θ_na > θ_hint` (Theorems 11.44, 11.45) | cube, zero known part: `exp(n θ_hint(ε₁))` — the hint is worth nothing (Theorem 11.54); also at every bounded accuracy, `exp(nh)` against `exp(na)` for a sample fixed in advance (Theorem 11.58, refereed); with a field as known part, `exp(nR^max(ε₁))`, the hinted exponent of the hardest additive instance, against `exp(nθ_na(ε₁))` for the best fixed sample, which is uniform on type classes (Theorems 11.61, 11.64; refereed, R9) |
 | **second-order**: mixed differences bounded by `c_ij` | a star of `n + 1` evaluations determines `g` up to `Σ c_ij` over the changed pairs (`secondOrder_remainder`); with dense constants of order one the cost is exponential again (Theorem 11.31, D40) | a transition at finite temperature (Theorem 11.33) | — | — |
 | **linear in `p` known features**, coefficients in a box | `rank ≤ p` evaluations determine `g` everywhere; before that, every linear combination of evaluations gives a bracket (`linRes_span_upper`, `linRes_span_exact`); a kernel for minima (`verifyLTop_sound`) | no lower bound known (a generic evaluation sees every perturbation) | — | — |
 | **pair-additive with `L`-Lipschitz radial functions** (chains) | number of evaluations bounded independently of `N` at extensive accuracy, by a numerically vacuous bound; polynomial on lattices at every accuracy (Proposition 11.49).  **Not what one sees at any size that can be enumerated**: measured growth is linear in `N` on the lattice through 27 beads and geometric off-lattice through 15 beads (§11.17, data of the Computational Research Division).  For the lattice chain the limit is identified (§11.22): the covering number of a convex limit shape — proved for bridges off a countable, unidentified set of accuracies, conjectured for all walks; every limit point of the certificate sizes of all walks at `(L, ε₁) = (1, ½)` lies between 116 and 3 627 **[P, computer-assisted]**; a few hundred for the limit and `10³`–`10⁵` beads or more for the chain length at which it is approached are estimates **[N]** (wording after the review SCI-REV-0002; first version: "between 50 and 3 627 …, reached at `10³`–`10⁵` beads") | — | — | — |
@@ -3741,7 +3741,7 @@ threshold and accuracy diagram of Theorem 11.25 (the corner of the Holzmüller�
 which the dimension grows and no approximation of the residual is affordable).  The proofs are
 short.
 
-### 11.11 A normal form: the known part is the gradient part of an asymmetric envelope
+### 11.11 A normal form: for minima and their certificates the known part is the gradient part of an asymmetric envelope
 
 Found by workstream C and confirmed in full by its independent reviewer (`workstreams/C_REPORT.md`,
 Theorem C1; `reviews/R_C_review.md`: all parts re-derived, exhaustive exact tests on 5100
@@ -10396,7 +10396,7 @@ function in place of a sup bound — what must be certified, and can it be estim
 sampling with a guarantee?*  This section answers it for the simplest class in which the
 question makes sense.  The mathematics is elementary and classical in spirit (free-energy
 perturbation, Zwanzig 1954; Monte Carlo integration); what it adds to this report is a class
-in which the cost of `ln Z` **depends on the system only through one free-energy
+in which the cost of `ln Z`, for an algorithm that is given the instance as a hint, **depends on the system only through one free-energy
 difference — the distance from the instance to the floor of the class, in `k_BT` — and not
 through the number of states or of variables**, with matching bounds, and the exact form of
 the assumption that sampling cannot replace inside such a class.  (An earlier version of
@@ -11978,7 +11978,10 @@ its branch.
    only; excluded volume ignored), prove the lower constant of the lever-arm law, and a lower
    bound for the RMSD format when its constant is extensive.
 10. **Second-order classes at finite temperature** (Theorem 11.33): sharpen the polynomial
-   bound below the Curie–Weiss coupling; non-homogeneous constants (Dobrushin's condition is
+   bound below the Curie–Weiss coupling; a known part with interactions — what replaces the
+   hypothesis "`f` additive" of (a) (the proof needs Dobrushin's condition for `f + g`), and
+   where the boundary between polynomial and exponential then lies (it moves: remark after
+   the theorem); non-homogeneous constants (Dobrushin's condition is
    then a row-sum condition); `k`-state sites; the continuous analogue and its relation to the
    smoothness classes of Holzmüller–Bach.  **Observables other than `ln Z`** (Theorem 11.35):
    close the interval between `H/√2` and `H` for the magnetisation at weak coupling.

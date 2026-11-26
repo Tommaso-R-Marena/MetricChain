@@ -30,7 +30,9 @@ corrections to the theory report and the README are recorded item by item in
 `docs/audit/APPLIED_CORRECTIONS.md`.  The table for the nested algorithm rests on workstream
 N, which is under independent review at the time of writing; the rate theorem likewise.
 Classifications are judgements with evidence attached; where the evidence is "not known"
-the reports say so, and §8 collects those cases.
+the reports say so, and §8 collects those cases.  Line numbers in the two audit reports
+and in the record of corrections refer to the theory report and the README as the audits
+read them (commit `020e990`); the corrections made both files longer.
 
 ## 1. The categories, and the counts
 

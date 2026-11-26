@@ -509,7 +509,9 @@ against `0.1074`.
 *What survives.*  The fixed-`β` duality `sup_g ln E e^{β(g − E g)} = sup_ν [β·W − KL]`
 (`logMGF_le_transport_entropy` and Theorem 11.14) holds for every reference; additive two-level
 residuals give a computable lower bound, Wasserstein-matrix constants `‖Γc‖²` an upper bound.
-Open: binary Markov trees (no counterexample in 21 000 random binary 3-chains).
+Open: binary Markov trees (no counterexample in 21 000 random binary 3-chains).  *(Closed
+later: additivity fails for binary Markov trees as well — a star; D41.  For open binary
+chains without tilt no counterexample is known.)*
 
 ## D26. "Best-first search is within one evaluation of the smallest certificate" — FALSE without radius augmentation  **[harness: DEAD.6, XI.4] [Lean]**
 
@@ -651,7 +653,8 @@ on such an instance; it now has a fallback.
 *Correct statement.*  A way out *under weak coupling*: a star certifies iff the second-order
 sharp-minimum condition holds; sufficient is the row-sum condition
 `½ Σ_{j≠i} c_ij ≤` measured single-site excitation energies.  Lower bounds for dense constants
-are open.
+are open.  *(Closed later: the quadratic law and the cost `2^{n − o(n)}` of dense second-order
+classes; D40, theory report Theorems 11.31–11.32.)*
 
 ## D33. "Exponential separation of the partition kernel on every chain" — NARROWER than described  **[Lean]**
 
