@@ -1172,3 +1172,21 @@ profile and the gauche count, and its support function is the ground-state energ
   rounding convention"); nothing read supports that, and it was replaced by what their
   message says.
 
+### Cycle 44 — a sentence of two hours ago corrected: the floor has its own fit
+
+* SCI-MSG-0022 and addendum A17 (12) said that the floor "is the one no fit controls".
+  Writing down the least-`D_p` objective to see what a floor-targeted fit would be
+  showed that it is convex in the natural parameters for every `p > 1` — a log-sum-exp
+  of affine functions plus a log-partition function — so the floor-optimal fit is the
+  limit `p → ∞` of a family of convex programmes.  (The same line shows that the
+  least-`D_2` fit, which both texts called non-convex, is convex.)  Computed by
+  continuation in `p` on the 40 instances with at most 59 049 states: the floor falls
+  to 13.5 % of the least-`D_2` fit's in the median.  Head note on the message, item 24
+  in the addendum; to be mentioned in the next message to the theory division.
+* A first run stopped on an assertion (an ordering of optimal values that holds only up
+  to the optimiser's tolerance when the family contains the truth exactly); its partial
+  log was discarded, the tolerance stated, and the cited log is from the second run,
+  which reached its last line.
+* The lesson is the one of `DEAD_ENDS.md` SD43 in small: "no X does Y" was written after
+  trying four X.
+

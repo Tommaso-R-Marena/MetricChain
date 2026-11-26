@@ -1950,9 +1950,11 @@ the uniform measure), `LSs` (least squares under the surrogate's own measure, it
     median and up to `3.2` nats (a factor 26 in `e^{D_∞}`) within one (instance, family)
     pair; `D_∞/rms` ranges from `0.7` to `386`; the variational fit never has the smallest
     floor and has the largest in 17 of 42 pairs (`CHI`: smallest in 26).  So the
-    worst-case quantity, the one a certificate needs, is the one a fit does not control
-    and the root-mean-square error does not predict — part (10)'s "a sampled floor is not
-    a floor" in another guise.
+    worst-case quantity, the one a certificate needs, is the one that none of these four
+    fits controls and the root-mean-square error does not predict — part (10)'s "a
+    sampled floor is not a floor" in another guise.  *(Corrected after the first version
+    of this item, which said "the one a fit does not control": the floor has a fit of
+    its own — item 24.)*
 22. **The split matters more than the fit — by orders of magnitude**
     (`b10_split_table.py`).  Part (6) took the vacuum force field `f` as the model and the
     solvent term as the remainder.  For serine with three to six residues:
@@ -1982,6 +1984,29 @@ the uniform measure), `LSs` (least squares under the surrogate's own measure, it
     not converge in 25 (frozen or nearly frozen ensembles); a quasi-Newton minimisation
     of `KL(q‖π_g)` did everywhere.
 
+24. **The floor has its own fit, and it is a convex programme** (`b10_floor_fit.py`; added
+    after the first version of this part).  For an exponential family `q_θ ∝ e^{s_θ}` and
+    every order `p > 1`,
+    `D_p(π_g‖q_θ) = (p−1)^{−1} ln Σ_x exp(p ln π_g(x) − (p−1)s_θ(x)) + ln Z_θ` is convex in `θ`
+    (a log-sum-exp of affine functions plus a log-partition function) [P, elementary].
+    So the least-`D_p` fits are convex for all `1 < p ≤ ∞`, maximum likelihood is their
+    limit `p → 1`, and `p = ∞` minimises the floor; only the variational fit is not
+    convex.  (The first version of this part called the least-`D_2` fit non-convex; its
+    two starts agreed because it is convex.)  Following `p = 2, 4, …, 256` with warm starts
+    on the 40 instances with at most 59 049 states (80 (instance, family) pairs, 55 of
+    them non-trivial): **the floor of the least-`D_256` fit is `2.6–47 %` of the floor of
+    the least-`D_2` fit, `13.5 %` in the median** — `0.35` nats gained in the median, `1.5` at
+    most — **for `7·10⁻⁴` nats of `D_2` in the median (`0.034` at most)**.  The least possible
+    floor in the family is bracketed between `min_q D_256` and the floor attained, within
+    `0.036` nats in the median (`0.16` at most).  Example, Ser₅ on the helix, independent
+    residues: `D_∞ = 3.1` (maximum likelihood), `1.25` (least `D_2`), **`0.42`** (least
+    `D_256`; least possible `≥ 0.39`), with `D_2 = 0.092, 0.090, 0.118`.  After the floor fit
+    the largest floor over all pairs is `0.42 k_BT` for independent residues and `0.13` for
+    the chain.  *What this is not:* a certificate — the fit minimises a maximum over all
+    states, which is known here by enumeration; beyond enumeration a floor has to be
+    proved (part (10)), and a floor-optimal fit computed from samples would be the
+    sampled floor of item 13 again.
+
 *Consequences.*  (i) For the design of the tractable model of parts (9)–(10): fit the
 *solvated* energy, as those parts did; never use the vacuum force field as the model
 and the solvent term as the remainder for polar side chains.  (ii) For the theory
@@ -1991,12 +2016,13 @@ correction) is not the one with the small residual; the class constants measured
 low-order model)` are the ones a certificate pays for (P3 bounded exactly these, order
 by order).  (iii) For hypothesis H11: demote it — fit direction is a second-order
 matter wherever a fitted model is perturbatively close; what remains true is that the
-*floor* is not controlled by any fit, and that an unfitted model can be exponentially
+*floor* is not controlled by the usual fits (it has its own, item 24), and that an
+unfitted model can be exponentially
 expensive while looking adequate in root mean square (part (6); the planted control).
 *Limits.*  Homopeptides of valine, leucine, serine on product domains, at most
-531 441 states; two families; `VAR` and `CHI` are non-convex and were minimised from two
-starts (one start for the ten instances above 20 000 states) — the two starts agreed to
-`10⁻⁸` in the objective wherever both were run; exact sums, nothing
+531 441 states; two families; `VAR` is non-convex (`CHI` is convex, item 24) and both
+were minimised from two starts (one start for the ten instances above 20 000 states) —
+the two starts agreed to `10⁻⁸` in the objective wherever both were run; exact sums, nothing
 sampled; no charged side chains, where the split should matter most.
 
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)

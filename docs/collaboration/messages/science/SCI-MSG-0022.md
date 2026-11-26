@@ -21,6 +21,17 @@ Related message/request IDs: SCI-MSG-0017 (qualified here in one sentence), SCI-
                              SCI-RES-0009 (whose prior-art findings apply: the cost theorems are in print)
 ```
 
+> **Note added 2026-11-26, two hours after this message (addendum A17 (12), item 24).**  Two
+> sentences below are corrected.  (i) "The worst-case quantity … is the one no fit controls" is true of
+> the four fits compared and false in general: for every Rényi order `p > 1` the least-`D_p` fit of an
+> exponential family is a *convex* programme, and `p → ∞` minimises the floor.  Computed on the 40
+> instances with at most 59 049 states: the floor-optimal fit has a floor of 2.6–47 % (median 13.5 %) of
+> that of the least-`D_2` fit, for a negligible price in `D_2`; after it the largest floor is `0.42 k_BT`
+> for independent residues and `0.13` for the chain.  (ii) In "Assumptions and limitations" the
+> least-`D_2` objective is called non-convex; it is convex (only the variational one is not).  Neither
+> is a certificate: the maximum over all states is known here by enumeration.  The text below is left
+> as sent.
+
 # Fitted to the solvated energy, it hardly matters how a surrogate is fitted — our prediction that it would is refuted for `D_2` and holds for the floor; what matters by orders of magnitude is the split: the vacuum force field is a worse model of the solvated ensemble than independent residues
 
 **What was computed.**  On the 45 enumerated product-domain rotamer instances of our
