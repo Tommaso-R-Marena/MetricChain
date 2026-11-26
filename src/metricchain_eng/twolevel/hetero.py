@@ -47,8 +47,10 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
+from scipy.special import gammaln
+
 from .certified import WIDE_PHIS, acc_const, k0_lcost, k0_lcost_vec, tables
-from .tables import LN2, cube_constants
+from .tables import LN2, CubeTables, cube_constants
 
 Block = tuple          # ((u_1, n_1), ..., (u_m, n_m)), slopes distinct and decreasing, counts positive
 
@@ -91,6 +93,117 @@ def remove(B: Block, j: int, k: int) -> Block:
     return tuple((v, m - k if i == j else m) for i, (v, m) in enumerate(B) if not (i == j and m == k))
 
 
+def remove_comp(B: Block, comp: Block) -> Block:
+    """The block ``B`` without the sites of the composition ``comp`` (a sub-multiset of B)."""
+    have = dict(B)
+    for u, k in comp:
+        if have.get(u, 0) < k:
+            raise ValueError("composition is not part of the block")
+        have[u] -= k
+    return make_block(have.items())
+
+
+# ---------------------------------------------------------------------------------------------
+# Tables of a *mixed* outer block: the sorted-slope bounds
+# ---------------------------------------------------------------------------------------------
+def _window_logsum(prefix: np.ndarray, suffix: np.ndarray, lo: np.ndarray, hi: np.ndarray) -> np.ndarray:
+    """ln sum_{i=lo}^{hi} e^{a_i} from ln-prefix sums (prefix[i] = ln sum_{i'<=i}) and ln-suffix sums; -inf where hi < lo.
+    The difference of prefix sums is used where the terms grow with i and that of suffix sums where they decay, so
+    that no subtraction of nearly equal numbers occurs in either tail."""
+    n = prefix.size
+    out = np.full(lo.shape, -np.inf)
+    ok = hi >= lo
+    lo_c = np.clip(lo, 0, n - 1)
+    hi_c = np.clip(hi, 0, n - 1)
+    p_hi = prefix[hi_c]
+    p_lo = np.where(lo_c > 0, prefix[np.maximum(lo_c - 1, 0)], -np.inf)
+    s_lo = suffix[lo_c]
+    s_hi = np.where(hi_c < n - 1, suffix[np.minimum(hi_c + 1, n - 1)], -np.inf)
+    with np.errstate(divide="ignore", invalid="ignore", over="ignore"):
+        via_p = p_hi + np.log1p(-np.exp(np.minimum(p_lo - p_hi, 0.0)))
+        via_s = s_lo + np.log1p(-np.exp(np.minimum(s_hi - s_lo, 0.0)))
+    use_p = (p_hi - p_lo) >= (s_lo - s_hi)                    # the better conditioned of the two differences
+    out[ok] = np.where(use_p, via_p, via_s)[ok]
+    return out
+
+
+@dataclass
+class MixedTables(CubeTables):
+    """Tables of the m-cube whose sites have several slopes, for the sorted-slope tail bounds.
+
+    Let U_j be the sum of the j largest slopes.  For V > 0 with -ln V in the class of d_u on Q_m:
+
+      upper tail (Lemma N14 of the theory division's workstream N [P; theirs]):
+          |{V > s}| <= |B(m, r)|, r <= m - 1   ==>   E (V - s)_+ <= s 2^-m E_r,
+          E_r = sum_{j=1}^{r+1} (e^{U_j} - e^{U_{j-1}}) |B(m, r + 1 - j)|;
+      lower tail (the same argument applied to Lemma K.1(b) [P; ours]):
+          |{V >= t}| >= |B(m, k)|              ==>   E min(V, t) >= t 2^-m T(k),
+          T(k) = sum_j C(m, j) e^{-U_{(j - k)_+}}
+      (a point at Hamming distance i from a set is at weighted distance at most U_i from it; then Harper's theorem for
+      the neighbourhoods, as in the uniform cube).
+
+    With one slope these are the tables of ``CubeTables``.  ``u`` is the largest slope (the value of the ratio at
+    radius 0 is e^{U_1} - 1)."""
+
+    comp: Block = ()
+
+    def __post_init__(self) -> None:
+        comp = self.comp
+        m = dim(comp)
+        if m != self.m or abs(umax(comp) - self.u) > 0:
+            raise ValueError("composition does not match (m, u)")
+        j = np.arange(m + 1, dtype=float)
+        self.lbinom = gammaln(m + 1.0) - gammaln(j + 1.0) - gammaln(m - j + 1.0)
+        self.lball = np.logaddexp.accumulate(self.lbinom)
+        r = np.arange(m + 1)
+        k = np.arange(m + 1)
+        lE = np.full(m + 1, -np.inf)
+        lTail = np.full(m + 1, -np.inf)                      # ln sum_{i>=1} C(m, k+i) e^{-U_i}
+        a_t, base = 0, 0.0                                   # segment (a_t, b_t] of the sorted slopes; U_{a_t} = base
+        for u, cnt in comp:                                  # slopes in decreasing order
+            b_t = a_t + cnt
+            # E_r: sum_{j=a_t+1}^{min(b_t, r+1)} (e^u - 1) e^{base + u (j - a_t - 1)} |B(m, r+1-j)|
+            #    = (e^u - 1) e^{base + u (r - a_t)} sum_{i=max(0, r+1-b_t)}^{r-a_t} |B(m, i)| e^{-u i}
+            seq = self.lball - u * j
+            pre = np.logaddexp.accumulate(seq)
+            suf = np.logaddexp.accumulate(seq[::-1])[::-1]
+            w = _window_logsum(pre, suf, np.maximum(0, r + 1 - b_t), r - a_t)
+            lE = np.logaddexp(lE, math.log(math.expm1(u)) + base + u * (r - a_t) + w)
+            # tail of T(k): sum_{i=a_t+1}^{min(b_t, m-k)} C(m, k+i) e^{-base - u (i - a_t)}
+            #    = e^{-base + u (k + a_t)} sum_{jj=k+a_t+1}^{min(k+b_t, m)} C(m, jj) e^{-u jj}
+            seq2 = self.lbinom - u * j
+            pre2 = np.logaddexp.accumulate(seq2)
+            suf2 = np.logaddexp.accumulate(seq2[::-1])[::-1]
+            w2 = _window_logsum(pre2, suf2, k + a_t + 1, np.minimum(k + b_t, m))
+            lTail = np.logaddexp(lTail, -base + u * (k + a_t) + w2)
+            a_t, base = b_t, base + u * cnt
+        self.lE = lE
+        self.lT = np.logaddexp(self.lball, lTail)
+        self.lGt = np.concatenate([[math.log(math.expm1(self.u))], self.lE[1:] - self.lball[:-1]])
+
+
+_mixed: dict = {}
+_mixed_total = 0
+MIXED_BUDGET = 2_000_000
+
+
+def mixed_tables(comp: Block) -> CubeTables:
+    """Tables of an outer block with the composition ``comp``: the exact ones of the uniform cube if it has one
+    slope, the sorted-slope ones otherwise (cached with a bound on memory)."""
+    global _mixed_total
+    if len(comp) == 1:
+        return tables(comp[0][1], comp[0][0])
+    t = _mixed.pop(comp, None)
+    if t is None:
+        t = MixedTables(m=dim(comp), u=umax(comp), comp=comp)
+        _mixed_total += t.m
+        while _mixed_total > MIXED_BUDGET and _mixed:
+            old = next(iter(_mixed))
+            _mixed_total -= _mixed.pop(old).m
+    _mixed[comp] = t
+    return t
+
+
 # ---------------------------------------------------------------------------------------------
 # Base procedure, constants of one level
 # ---------------------------------------------------------------------------------------------
@@ -120,9 +233,14 @@ class HDesign:
     ltheta: float | None = None
     bounded: bool = True
     name: str = ""
+    comp: Block | None = None       # a *mixed* outer block (sites of several types): then j, k are ignored
 
     def lth(self) -> float:
         return math.log(self.theta) if self.ltheta is None else self.ltheta
+
+    def outer(self, B: Block) -> Block:
+        """The composition of the outer block."""
+        return self.comp if self.comp is not None else ((B[self.j][0], self.k),)
 
 
 @dataclass
@@ -159,10 +277,17 @@ class HConstants:
 
 def constants(B: Block, D: HDesign, l_inv_delta: float) -> HConstants | None:
     """The constants of Theorem K1 in the form (2) of the module's header; None if the level does not exist."""
-    u_o, n_j = B[D.j]
-    if not 0 < D.k <= n_j or D.k == dim(B):
-        return None
-    inner = remove(B, D.j, D.k)
+    if D.comp is None:
+        u_o, n_j = B[D.j]
+        if not 0 < D.k <= n_j or D.k == dim(B):
+            return None
+        comp = ((u_o, D.k),)
+    else:
+        comp = D.comp
+        if not 0 < dim(comp) < dim(B):
+            return None
+        u_o = umax(comp)                                    # enters the design choice nu_1 only
+    inner = remove_comp(B, comp)
     x0 = 2 * omega(inner)
     if not (D.b > 0 and x0 > D.b):
         return None
@@ -171,11 +296,11 @@ def constants(B: Block, D: HDesign, l_inv_delta: float) -> HConstants | None:
     xs = [x0 * (D.b / x0) ** (l / D.Lr) for l in range(D.Lr + 1)]
     xs[-1] = D.b
     lth = D.lth()
-    n_o = D.k
+    n_o = dim(comp)
     nu1 = max(1.0, math.exp(math.log(2 * n_o) + u_o - lth)) if D.bounded else 1.0
     J = math.ceil((2 * omega(B) + D.b + n_o * LN2) / D.lam)
     nu0 = max((J + 1) * math.expm1(D.lam) / D.etap, nu1) / (1 - D.eta)
-    outer = tables(n_o, u_o)
+    outer = mixed_tables(comp)
     r_dag = outer.r_dagger(D.eta, None, nu0, lth=lth)
     lpi = outer.lpi_dagger(r_dag)
     m_max = math.ceil((math.log(2 * (1 + D.eta) * nu0 / (1 - D.eta)) + D.lam - lpi) / LN2)
@@ -211,36 +336,69 @@ def outer_choices(B: Block, phis=WIDE_PHIS):
     return out
 
 
-def candidates(B: Block, x: float, phis=WIDE_PHIS):
+def proportional_comps(B: Block, phis=WIDE_PHIS):
+    """Mixed outer blocks: the same fraction of the sites of every type (the splits of Theorem 11.101)."""
+    if len(B) < 2:
+        return []
+    out, seen = [], set()
+    for p in phis:
+        comp = make_block((u, int(math.floor(p * n))) for u, n in B)
+        if len(comp) < 2 or comp in seen or dim(comp) >= dim(B):
+            continue
+        seen.add(comp)
+        out.append(comp)
+    return out
+
+
+def candidates(B: Block, x: float, phis=WIDE_PHIS, blocks: str = "aligned"):
     """The family "wide" of ``certified.py`` with the outer block chosen among the types: the bounded design
     (lam = eta = eta' = theta = c = min(x/12, 1/3)) with three tolerances, and for x >= 8 the extensive design
-    (lam = 1, eta = 1/2, eta' = 1, the largest theta) with three tolerances."""
+    (lam = 1, eta = 1/2, eta' = 1, the largest theta) with three tolerances.
+
+    ``blocks``: "aligned" — outer blocks of one type (exact tables); "mixed" — outer blocks with the same fraction of
+    every type (sorted-slope tables; for a block of one type this is the same as "aligned"); "both"."""
     out = []
     c = min(x / 12, 1 / 3)
     bmax = x - acc_const(c) - 1e-6
     lp = l2p(B)
-    for j, k in outer_choices(B, phis):
-        x0 = 2 * (omega(B) - B[j][0] * k)
+    choices = []                                             # (j, k, comp, label, x0)
+    if blocks in ("aligned", "both") or len(B) == 1:
+        choices += [(j, k, None, f"{k}x[u={B[j][0]:g}]", 2 * (omega(B) - B[j][0] * k)) for j, k in outer_choices(B, phis)]
+    if blocks in ("mixed", "both"):
+        choices += [(0, 0, comp, "mixed" + str(tuple(n for _, n in comp)), 2 * (omega(B) - omega(comp))) for comp in proportional_comps(B, phis)]
+    for j, k, comp, label, x0 in choices:
         for bm, tag in ((x / 2, "x/2"), (bmax, "max"), (0.75 * bmax, "0.75max")):
             if bm <= 0 or bm > bmax or x0 <= bm * 1.5:
                 continue
-            out.append(HDesign(j=j, k=k, lam=c, eta=c, etap=c, b=bm, Lr=30, theta=c, bounded=True,
-                               name=f"bounded(c={c:.3f},b={tag},outer={k}x[u={B[j][0]:g}])"))
+            out.append(HDesign(j=j, k=k, lam=c, eta=c, etap=c, b=bm, Lr=30, theta=c, bounded=True, comp=comp,
+                               name=f"bounded(c={c:.3f},b={tag},outer={label})"))
         if x >= 8:
             for bfrac in (0.25, 0.5, 0.125):
                 bm = bfrac * x
                 if x0 <= bm * 1.5:
                     continue
                 lth = (x - bm) + math.log1p(-(3 * math.e + 1 + math.exp(lp - bm)) * math.exp(-(x - bm)))
-                out.append(HDesign(j=j, k=k, lam=1.0, eta=0.5, etap=1.0, b=bm, Lr=30, ltheta=lth, bounded=False,
-                                   name=f"extensive(b={bfrac:g}x,outer={k}x[u={B[j][0]:g}])"))
+                out.append(HDesign(j=j, k=k, lam=1.0, eta=0.5, etap=1.0, b=bm, Lr=30, ltheta=lth, bounded=False, comp=comp,
+                                   name=f"extensive(b={bfrac:g}x,outer={label})"))
     return out
 
 
 def top_design(j: int, k: int, b: float = 0.5, lam: float = 0.2, eta: float = 0.05, etap: float = 0.05, theta: float = 0.05,
-               Lr: int = 40) -> HDesign:
-    """The top level of X-011 (certified accuracy 0.8715) with the outer block ``k`` sites of type ``j``."""
-    return HDesign(j=j, k=k, lam=lam, eta=eta, etap=etap, b=b, Lr=Lr, theta=theta, bounded=True, name=f"top(outer={k} of type {j})")
+               Lr: int = 40, comp: Block | None = None) -> HDesign:
+    """The top level of X-011 (certified accuracy 0.8715) with the outer block ``k`` sites of type ``j``, or the mixed
+    composition ``comp``."""
+    return HDesign(j=j, k=k, lam=lam, eta=eta, etap=etap, b=b, Lr=Lr, theta=theta, bounded=True, comp=comp,
+                   name=f"top(outer={k} of type {j})" if comp is None else f"top(outer=mixed{tuple(n for _, n in comp)})")
+
+
+def top_choices(B: Block, phis=WIDE_PHIS, blocks: str = "aligned"):
+    """Top designs to try: (j, k, comp) for outer blocks of one type and/or proportional mixed ones."""
+    out = []
+    if blocks in ("aligned", "both") or len(B) == 1:
+        out += [(j, k, None) for j, k in outer_choices(B, phis)]
+    if blocks in ("mixed", "both"):
+        out += [(0, 0, comp) for comp in proportional_comps(B, phis)]
+    return out
 
 
 # ---------------------------------------------------------------------------------------------
@@ -263,8 +421,11 @@ class HBound:
 class HSearch:
     """min over the candidates of the certified cost of at most ``depth`` nested levels above base brackets, on blocks."""
 
-    def __init__(self, phis=WIDE_PHIS, coarse_rule: bool = True):
+    def __init__(self, phis=WIDE_PHIS, coarse_rule: bool = True, blocks: str = "aligned"):
+        if blocks not in ("aligned", "mixed", "both"):
+            raise ValueError(blocks)
         self.phis = phis
+        self.blocks = blocks
         self.coarse_rule = coarse_rule
         self.nodes = 0
         self.levels = 0
@@ -280,7 +441,7 @@ class HSearch:
         inc, desc = c0, kind0
         ranked = []
         bound = min(inc, cutoff)
-        for D in candidates(B, x, self.phis):
+        for D in candidates(B, x, self.phis, self.blocks):
             C = constants(B, D, lid)
             if C is None or C.x_out > x + 1e-9 or LN2 + C.lM_bar >= bound:
                 continue

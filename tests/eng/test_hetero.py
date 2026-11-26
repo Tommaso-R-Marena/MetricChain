@@ -121,3 +121,91 @@ def test_type_aligned_bound_is_consistent_and_beats_inclusion_on_a_mixed_block()
     for l, s in enumerate(best.servers, start=1):
         if isinstance(s, H.HBound):
             assert s.xout <= C.xs[l] + 1e-9 and s.block == C.inner
+
+
+# ---------------------------------------------------------------------------------------------
+# Mixed outer blocks: the sorted-slope tables
+# ---------------------------------------------------------------------------------------------
+def _brute_sorted(comp):
+    """E_r and T(k) of the sorted-slope bounds straight from their definitions."""
+    slopes = sorted([u for u, n in comp for _ in range(n)], reverse=True)
+    m = len(slopes)
+    U = [0.0]
+    for s in slopes:
+        U.append(U[-1] + s)
+    binom = [math.comb(m, j) for j in range(m + 1)]
+    ball = [sum(binom[: r + 1]) for r in range(m + 1)]
+    E = [math.fsum((math.exp(U[j]) - math.exp(U[j - 1])) * ball[r + 1 - j] for j in range(1, min(r + 1, m) + 1)) for r in range(m + 1)]
+    T = [math.fsum(binom[j] * math.exp(-U[max(j - k, 0)]) for j in range(m + 1)) for k in range(m + 1)]
+    return E, T, U
+
+
+@pytest.mark.parametrize("comp", [((2.0, 3), (0.5, 4)), ((1.3, 1), (0.9, 2), (0.2, 6)), ((4.0, 10), (1.0, 30)), ((0.7, 12),)])
+def test_mixed_tables_equal_their_definition(comp):
+    comp = H.make_block(comp)
+    Tm = H.MixedTables(m=H.dim(comp), u=H.umax(comp), comp=comp)
+    E, T, _ = _brute_sorted(comp)
+    assert np.allclose(Tm.lE, np.log(E), rtol=0, atol=1e-9)
+    assert np.allclose(Tm.lT, np.log(T), rtol=0, atol=1e-9)
+    if len(comp) == 1:                                           # one slope: the tables of the uniform cube
+        Tc = cert.tables(H.dim(comp), comp[0][0])
+        m = H.dim(comp)
+        # radii r <= m - 1 only: at r = m the uniform table counts a depth m + 1 that no set has, and no caller uses it
+        for a, b in ((Tm.lE[:m], Tc.lE[:m]), (Tm.lT, Tc.lT), (Tm.lGt[:m], Tc.lGt[:m]), (Tm.lball, Tc.lball)):
+            assert np.allclose(a, b, rtol=0, atol=1e-9)
+
+
+def test_mixed_tables_large_block_is_stable():
+    """Against the definition in exact rational arithmetic is too slow at this size; check the equal-slope limit and
+    monotonicity instead: E_r increases with r, T(k) increases with k, and both lie between the uniform tables of the
+    smallest and of the largest slope."""
+    comp = H.make_block([(2.0, 1500), (0.5, 2500)])
+    Tm = H.MixedTables(m=4000, u=2.0, comp=comp)
+    lo, hi = cert.tables(4000, 0.5), cert.tables(4000, 2.0)
+    assert np.all(np.diff(Tm.lE) > 0) and np.all(np.diff(Tm.lT) >= -1e-9)
+    assert np.all(Tm.lE <= hi.lE + 1e-9) and np.all(Tm.lE >= lo.lE - 1e-9)
+    assert np.all(Tm.lT >= hi.lT - 1e-9) and np.all(Tm.lT <= lo.lT + 1e-9)
+
+
+def test_sorted_slope_tail_bounds_hold_for_every_set_of_a_small_mixed_cube():
+    """Both tail inequalities at their extremal functions, for *every* subset of a 4-site cube with two slopes:
+    the largest E(V - s)_+/s over the class given {V > s} = D is 2^-m sum_{x in D} (e^{rho(x, D^c)} - 1), and the
+    smallest E min(V, t)/t given {V >= t} = S is 2^-m sum_x e^{-rho(x, S)}."""
+    us = np.array([1.7, 1.7, 0.4, 0.4])
+    comp = H.make_block([(1.7, 2), (0.4, 2)])
+    m = 4
+    Tm = H.MixedTables(m=m, u=1.7, comp=comp)
+    X = np.array(list(itertools.product((0, 1), repeat=m)))
+    dist = np.abs(X[:, None, :] - X[None, :, :]) @ us                # weighted distance between all pairs
+    ball = np.exp(Tm.lball)
+    for mask in range(1, 2 ** (2 ** m) - 1):
+        inD = np.array([(mask >> i) & 1 for i in range(2 ** m)], dtype=bool)
+        size = int(inD.sum())
+        # upper tail: D = {V > s}
+        r = int(np.searchsorted(ball, size - 1e-9))                  # least r with |B(m, r)| >= |D|
+        if r <= m - 1:
+            rho = dist[np.ix_(inD, ~inD)].min(axis=1)
+            assert np.sum(np.expm1(rho)) <= math.exp(Tm.lE[r]) * (1 + 1e-12)
+        # lower tail: S = {V >= t}
+        k = int(np.searchsorted(ball, size + 1e-9, side="right")) - 1    # largest k with |B(m, k)| <= |S|
+        rho_s = np.where(inD, 0.0, dist[:, inD].min(axis=1))
+        assert np.sum(np.exp(-rho_s)) >= math.exp(Tm.lT[k]) * (1 - 1e-12)
+
+
+def test_mixed_blocks_generalise_aligned_ones():
+    B = H.make_block([(2.0, 900), (0.5, 1100)])
+    # a composition of one type gives the constants of the aligned design
+    Da = H.top_design(0, 400)
+    Dm = H.top_design(0, 0, comp=((2.0, 400),))
+    Ca, Cm = H.constants(B, Da, LID), H.constants(B, Dm, LID)
+    assert (Ca.J, Ca.K, Ca.inner) == (Cm.J, Cm.K, Cm.inner) and abs(Ca.lM_bar - Cm.lM_bar) < 1e-12
+    # the union of the two families is at least as good as either
+    def best(blocks):
+        S = H.HSearch(blocks=blocks)
+        vals = [S.top(B, H.top_design(j, k, comp=c), LID, 2) for j, k, c in H.top_choices(B, blocks=blocks)]
+        return min(v.lCmax for v in vals if v is not None)
+    a, mx, both = best("aligned"), best("mixed"), best("both")
+    assert both <= min(a, mx) + 1e-9
+    # proportional splits of a two-type block are genuinely mixed, and the inner block is what is left
+    comp = H.proportional_comps(B)[0]
+    assert len(comp) == 2 and H.remove_comp(B, comp) == H.make_block([(u, n - dict(comp)[u]) for u, n in B])
