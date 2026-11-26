@@ -84,6 +84,9 @@ import proofs.Frontiers.SymmetricPairHypothesis
 import proofs.Frontiers.SplitRule
 import proofs.Frontiers.CoreGreedy
 import proofs.Frontiers.TermOrders
+import proofs.Frontiers.LineDynamics
+import proofs.Frontiers.ResolvedPenalties
+import proofs.Frontiers.GibbsRecovery
 import proofs.AuditCommand
 
 /-!
@@ -1918,6 +1921,40 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.term_orders_sharp_host_moves
 #print axioms MetricChain.anchoredSplit_sandwich_extrema
 #print axioms MetricChain.anchoredSplit_exact_at_anchor
+
+/-! ### The level recursion at the level of lines (theory report Theorem 11.53a; `LineDynamics.lean`) -/
+
+#print axioms MetricChain.LineDynamics.line_le_Rstep
+#print axioms MetricChain.LineDynamics.lines_le_exactRec
+#print axioms MetricChain.LineDynamics.le_sSup_exactRec
+#print axioms MetricChain.LineDynamics.gauss_slope_map
+#print axioms MetricChain.LineDynamics.gauss_slope_map_least
+#print axioms MetricChain.LineDynamics.gauss_lines_le_exactRec
+#print axioms MetricChain.LineDynamics.gauss_level_two_ge
+#print axioms MetricChain.LineDynamics.gauss_level_three_ge
+#print axioms MetricChain.LineDynamics.StepLE.monotoneS_step
+#print axioms MetricChain.LineDynamics.StepLE.line_step
+#print axioms MetricChain.LineDynamics.StepLE.line_step_rate
+#print axioms MetricChain.LineDynamics.gauss_level_two_majorant
+
+/-! ### State-dependent penalties charged to sub-tuples, and the recovery of known slack
+(requests P9-T1, P9-T3, A19-T1 of the Scientific Discovery Division, SCI-MSG-0028;
+`ResolvedPenalties.lean`, `GibbsRecovery.lean`) -/
+
+#print axioms MetricChain.ResolvedPenalties.resolved_allocation
+#print axioms MetricChain.ResolvedPenalties.resolved_allocation_univ
+#print axioms MetricChain.ResolvedPenalties.resolved_allocation_max
+#print axioms MetricChain.ResolvedPenalties.reduction_step
+#print axioms MetricChain.ResolvedPenalties.anchored_remainder_bound_orders_state
+#print axioms MetricChain.ResolvedPenalties.anchored_remainder_bound_orders_off_anchor
+#print axioms MetricChain.ResolvedPenalties.resolved_remainder_bound
+#print axioms MetricChain.GibbsRecovery.lower_jensen
+#print axioms MetricChain.GibbsRecovery.lower_product
+#print axioms MetricChain.GibbsRecovery.upper_jensen
+#print axioms MetricChain.GibbsRecovery.upper_product
+#print axioms MetricChain.GibbsRecovery.log_Z_le_of_steps
+#print axioms MetricChain.GibbsRecovery.log_Z_le_ueStep_iterate
+#print axioms MetricChain.GibbsRecovery.log_Z_le_upStep_iterate
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

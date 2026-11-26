@@ -7478,6 +7478,309 @@ def t_extensive_threshold(rng, trials):
     return True, stats
 
 
+class LdPair:
+    """The pair (theta_na, theta_hint) of the level recursion with what the line lemmas use: the cube at slope u, or
+    the Gaussian small-slope limit (u = None): theta_na(e) = (1 - sqrt e)^2, theta_hint(y) = (1 - y)^2/4."""
+
+    def __init__(self, u, ngrid=20001):
+        self.u = u
+        if u is None:
+            self.a, self.h, self.estar, self.Lh, self.H2 = 1.0, 0.25, 1.0, 0.5, 0.5
+            self.e = np.exp(np.linspace(math.log(1e-9), 0.0, ngrid))
+            self.kap = (1 - np.sqrt(self.e)) ** 2
+        else:
+            pu, lam, epsstar, a, h = lv_consts(u)
+            self.pu, self.lam, self.estar, self.a, self.h = pu, lam, epsstar, a, h
+            rho_h = lam / u
+            self.Lh = math.log((1 - rho_h) / rho_h) / u
+            self.H2 = 1 / (u * u * rho_h * (1 - rho_h))
+            t = np.linspace(1e-3, 1.0, ngrid)
+            rho = pu + (0.5 - pu) * t ** 2
+            self.e = rho * np.log(rho / pu) + (1 - rho) * np.log((1 - rho) / (1 - pu))
+            self.kap = rho * np.log(2 * rho) + (1 - rho) * np.log(2 * (1 - rho))
+
+    def theta_na(self, e):
+        if self.u is None:
+            return (1 - math.sqrt(e)) ** 2 if e < 1 else 0.0
+        return na_theta_na(self.u, e)
+
+    def theta_hint(self, y):
+        if self.u is None:
+            return (1 - y) ** 2 / 4 if y < 1 else 0.0
+        return na_theta_hint(self.u, y)
+
+    def J(self, t):
+        """min over rho of KL(rho||1/2) + t (u rho - Lambda_1): the concave dual of theta_hint."""
+        if self.u is None:
+            return t - t * t
+        L = lambda v: math.log(2 / (1 + math.exp(-v)))
+        return L(t * self.u) - t * L(self.u)
+
+    def sigma(self, B, s):
+        """the slope map Sigma_B(s) = sup_e [B - (1 - s) theta_na(e)]/e on the grid, and the maximising e."""
+        r = (B - (1 - s) * self.kap) / self.e
+        j = int(np.argmax(r))
+        return float(r[j]), float(self.e[j]), 0 < j < len(r) - 1
+
+
+def ld_bracket(P, T, g, phi, beta, ngam=300):
+    """sup over gamma >= beta of min(gamma, mu) + (1 - phi) T(gamma/(1 - phi)); the grid contains beta and max(beta, mu)."""
+    mu = phi * P.theta_na((g - beta) / phi)
+    top = max(beta, mu)
+    gam = np.unique(np.concatenate([[beta, top], np.linspace(beta, top, ngam)]))
+    return max(min(x, mu) + (1 - phi) * T(x / (1 - phi)) for x in gam), mu
+
+
+def ld_gauss_tau_lb(k):
+    """the largest B whose tangent line of the Gaussian theta_na stays regular for k - 1 values of the Moebius orbit,
+    from the closed form (k - 1) theta(B) + phi_0(B) = pi (bisection), and from the orbit itself."""
+    def angle(B):
+        rt = math.sqrt(4 * B - 1)
+        th = math.atan2(rt, 1 - 2 * B)
+        ph0 = math.atan2((1 - B) * rt, 1 - 3 * B)                     # arccot((1 - 3B)/((1 - B) rt)) in (0, pi)
+        return (k - 1) * th + ph0
+    lo, hi = 0.25 + 1e-15, 0.5 - 1e-12
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if angle(mid) < math.pi else (lo, mid)
+    closed = lo
+
+    def survives(B):
+        s = B / (1 - B)
+        for _ in range(k - 1):
+            if not s < 1 - B:
+                return False
+            s = B * (1 - s) / (1 - s - B)
+        return True
+    lo, hi = 0.25 + 1e-15, 0.5 - 1e-12
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if survives(mid) else (lo, mid)
+    return closed, lo
+
+
+@conjecture("XVI.6 The level recursion at the level of lines (theory report Theorem 11.53a; Lean: LineDynamics.lean for (a) and (e)).  (a) Lemma L: if T(x) >= B - sigma x for all x > 0 with 0 <= sigma, and sigma' = Sigma_B(sigma) = sup_e [B - (1 - sigma) theta_na(e)]/e is finite, then for every outer fraction phi and tolerance beta the bracket of the level is at least B - sigma' g - evaluated at gamma = max(beta, mu); and for T equal to the line the infimum over (phi, beta) is B - sigma' g: lines are propagated exactly by the slope map.  (b) The slope map of the cube solves (1 - sigma + sigma') J(sigma'/(1 - sigma + sigma')) = B with J(t) = Lambda(t u) - t Lambda(u), Lambda(v) = ln(2/(1 + e^{-v})); J is the concave dual of theta_hint (theta_hint(x) = max_t [J(t) - t x]), J(L_h) = h = max J, J''(L_h) = -1/theta_hint''(0); the tangent line of theta_na with slope s has the intercept (1 + s) J(s/(1 + s)); and near the bottleneck Sigma_B(sigma) - sigma = [delta + (sigma - L_h)^2/(2 theta_hint''(0))]/h up to 10 per cent for B = h + delta, delta <= 10^{-3} h, |sigma - L_h| <= 0.02.  (c) For the Gaussian pair the slope map is the Moebius map sigma' = B (1 - sigma)/(1 - sigma - B), and the largest intercept B whose tangent line stays regular (slope below 1 - B) through k - 1 values of the orbit is the root of (k - 1) theta(B) + phi_0(B) = pi, theta = arctan(sqrt(4B - 1)/(1 - 2B)), phi_0 = arccot((1 - 3B)/((1 - B) sqrt(4B - 1))): a lower bound tau_k^LB of the exponent of k levels at accuracy zero, 0.381966 at k = 2, within 2 per cent of 1/4 + (pi^2/16)/(k + 1/2)^2 from k = 10 on and within 0.5 per cent from k = 20 on (above it).  (d) For the cube the lower bound from the tangent lines of theta_na is below the machine-checked upper bound h + c_1/(k + c_2) at every k, and k^2 (tau_k^LB - h) approaches 2 pi^2 h^2 theta_hint''(0) (within 5 per cent at k = 40, u = 1/2, 1, 2).  (e) Lemma M: if T is nonincreasing and T(x) <= B - sigma x on (0, R] with sigma <= 1, then for phi = g/e the bracket is at most (1 - phi) B + (1 - sigma) mu whenever mu/(1 - phi) <= R.  (f) Duality for convex majorants: for M the maximum of finitely many lines with slopes in [0, 1], inf_e max_lines [B - (g/e)(B - (1 - s) theta_na(e))] equals the supremum over the convex hull of the lines of the infimum over e (two lines suffice) - the level operator commutes with taking tangent lines")
+def t_line_dynamics(rng, trials):
+    quick = trials < 100
+    stats = dict(lemma_L=0, least_slack_L=math.inf, sharp_L=0, worst_sharp_L=0.0, map_eq=0, worst_map_eq=0.0, dual_J=0,
+                 bottleneck=0, worst_bottleneck=0.0, gauss_k=0, cube_k=0, lemma_M=0, least_slack_M=math.inf,
+                 duality=0, worst_gap=0.0, mixed_pairs=0)
+    pairs = [LdPair(None), LdPair(0.5), LdPair(1.0), LdPair(2.0)]
+    # (a) Lemma L by brute force over (phi, beta); the bound is attained for the line itself
+    for P in pairs:
+        for _ in range(12 if quick else 60):
+            sig = rng.uniform(0.0, 0.9)
+            B = rng.uniform(0.3, 0.97) * (1 - sig) * P.a
+            sp, e_at, interior = P.sigma(B, sig)
+            if sp < sig:                              # possible only for lines below the tangents of theta_hint (B < J(sigma) <= h)
+                if B >= P.h:
+                    return False, dict(reason="Sigma_B(sigma) is below sigma for a line with intercept at least h", pair=P.u, B=B, sigma=sig)
+                continue
+            w = rng.uniform(0.0, 0.5)
+            T = lambda x, B=B, sig=sig, w=w: max(B - sig * x, 0.0) + w * P.theta_na(x)
+            for _ in range(8 if quick else 25):
+                g = rng.uniform(1e-3, 0.95) * P.estar
+                phi = rng.choice([rng.uniform(0.001, 0.999), min(0.999, g / e_at) if e_at > g else rng.uniform(0.001, 0.999)])
+                beta = g * rng.choice([1e-6, 1e-3, rng.uniform(0.0, 1.0)])
+                beta = min(max(beta, 1e-9), g * (1 - 1e-9))
+                val, mu = ld_bracket(P, T, g, phi, beta)
+                bound = B - sp * (1 + 1e-6) * g
+                if val < bound - 1e-9:
+                    return False, dict(reason="Lemma L: a bracket below B - Sigma_B(sigma) g", pair=P.u, B=B, sigma=sig, g=g, phi=phi, beta=beta)
+                stats["least_slack_L"] = min(stats["least_slack_L"], val - bound)
+                stats["lemma_L"] += 1
+            # sharpness: T = the line, phi = g/e*, beta -> 0
+            if interior and B >= P.h:
+                g = rng.uniform(0.02, 0.6) * e_at
+                line = lambda x, B=B, sig=sig: B - sig * x
+                val, mu = ld_bracket(P, line, g, g / e_at, 1e-9 * g)
+                gap = abs(val - (B - sp * g))
+                if gap > 2e-3 * P.a:
+                    return False, dict(reason="the slope map is not attained for the line itself", pair=P.u, B=B, sigma=sig, g=g, gap=gap)
+                stats["worst_sharp_L"] = max(stats["worst_sharp_L"], gap / P.a)
+                stats["sharp_L"] += 1
+    # (b) the slope map of the cube and the dual function J
+    for P in pairs[1:]:
+        u, h, a = P.u, P.h, P.a
+        if abs(P.J(P.Lh) - h) > 1e-12 or any(P.J(P.Lh + d) > h + 1e-13 for d in (-0.3, -0.05, -1e-3, 1e-3, 0.05, 0.3)):
+            return False, dict(reason="J(L_h) is not h = max J", u=u)
+        d = 1e-4
+        J2 = (P.J(P.Lh + d) - 2 * P.J(P.Lh) + P.J(P.Lh - d)) / d ** 2
+        if abs(J2 * P.H2 + 1) > 1e-4:
+            return False, dict(reason="J''(L_h) is not -1/theta_hint''(0)", u=u, J2=J2, H2=P.H2)
+        ts = np.linspace(0.0, 1.0, 20001)
+        Jt = np.array([P.J(t) for t in ts])
+        for x in (0.05, 0.2, 0.5, 0.8):
+            xx = x * P.estar
+            if abs(float(np.max(Jt - ts * xx)) - P.theta_hint(xx)) > 1e-7:
+                return False, dict(reason="theta_hint is not the dual of J", u=u, x=xx)
+            stats["dual_J"] += 1
+        for s in (0.1, 0.5, 1.0, 3.0):
+            inter = float(np.min(P.kap + s * P.e))
+            if abs(inter - (1 + s) * P.J(s / (1 + s))) > 1e-6:
+                return False, dict(reason="the intercept of the tangent line of theta_na is not (1 + s) J(s/(1 + s))", u=u, s=s)
+            stats["dual_J"] += 1
+        for _ in range(40 if quick else 200):
+            sig = rng.uniform(0.0, 0.9)
+            B = rng.uniform(0.3, 0.97) * (1 - sig) * a
+            sp, e_at, interior = P.sigma(B, sig)
+            if not interior:
+                continue
+            w = 1 - sig + sp
+            err = abs(w * P.J(sp / w) - B)
+            if err > 1e-6 * a:
+                return False, dict(reason="the slope map does not solve (1 - s + s') J(s'/(1 - s + s')) = B", u=u, B=B, sigma=sig, err=err)
+            stats["worst_map_eq"] = max(stats["worst_map_eq"], err / a)
+            stats["map_eq"] += 1
+        for delta in (1e-3 * h, 1e-4 * h):
+            for z in (-0.02, -0.01, 0.0, 0.01, 0.02):
+                sp, e_at, interior = P.sigma(h + delta, P.Lh + z)
+                pred = (delta + z * z / (2 * P.H2)) / h
+                rel = abs((sp - P.Lh - z) / pred - 1)
+                if rel > 0.1:
+                    return False, dict(reason="bottleneck expansion of the slope map off by more than 10 per cent", u=u, delta=delta, z=z, rel=rel)
+                stats["worst_bottleneck"] = max(stats["worst_bottleneck"], rel)
+                stats["bottleneck"] += 1
+    # (c) the Gaussian pair: Moebius map, closed form of the lower bound
+    G = pairs[0]
+    for _ in range(40 if quick else 200):
+        sig = rng.uniform(0.0, 0.7)
+        B = rng.uniform(0.05, 0.95) * (1 - sig)
+        sp, e_at, interior = G.sigma(B, sig)
+        if abs(sp - B * (1 - sig) / (1 - sig - B)) > 1e-5 * max(1.0, sp):
+            return False, dict(reason="the slope map of the Gaussian pair is not the Moebius map", B=B, sigma=sig, sup=sp)
+    for k in list(range(2, 13)) + [20, 40, 80]:
+        closed, orbit = ld_gauss_tau_lb(k)
+        if abs(closed - orbit) > 1e-9:
+            return False, dict(reason="closed form and orbit of the Gaussian lower bound differ", k=k, closed=closed, orbit=orbit)
+        if k == 2 and abs(closed - (3 - math.sqrt(5)) / 2) > 1e-9:
+            return False, dict(reason="tau_2^LB of the Gaussian pair is not (3 - sqrt 5)/2", value=closed)
+        rel = (closed - 0.25) * (k + 0.5) ** 2 / (math.pi ** 2 / 16) - 1
+        if k >= 10 and not 0 < rel < (0.02 if k < 20 else 0.005):
+            return False, dict(reason="Gaussian lower bound against (pi^2/16)/(k + 1/2)^2: not within 2 per cent (k >= 10) / 0.5 per cent (k >= 20), or below it",
+                               k=k, value=closed, rel=rel)
+        stats["gauss_k"] += 1
+    # (d) the cube: lower bound from lines against the machine-checked upper bound, and against the constant
+    for P in pairs[1:]:
+        u, h, a = P.u, P.h, P.a
+        kappa = h * h * a / ((a - h) * (a + h) * (2 * a - h))
+        c1, c2 = h * (1 + kappa) / kappa, (a + h) * (2 * a - h) / (h * a) - 2
+        const = 2 * math.pi ** 2 * h * h * P.H2
+
+        def s0(B):                                   # slope of the tangent line of theta_na with intercept B
+            lo, hi = 1e-9, 1e6
+            for _ in range(200):
+                mid = math.sqrt(lo * hi)
+                lo, hi = (mid, hi) if (1 + mid) * P.J(mid / (1 + mid)) < B else (lo, mid)
+            return lo
+
+        def survives(B, k):
+            s = s0(B)
+            for _ in range(k - 1):
+                if not s < 1 - B / a:
+                    return False
+                s = P.sigma(B, s)[0]
+            return True
+        for k in ((2, 3, 5, 10, 40) if quick else (2, 3, 4, 5, 7, 10, 15, 20, 40, 80)):
+            lo, hi = h * (1 + 1e-12), a
+            if not survives(lo, k):
+                return False, dict(reason="a line with intercept h does not stay regular", u=u, k=k)
+            for _ in range(50):
+                mid = (lo + hi) / 2
+                lo, hi = (mid, hi) if survives(mid, k) else (lo, mid)
+            if lo > h + c1 / (k + c2) + 1e-12:
+                return False, dict(reason="the lower bound from lines exceeds the machine-checked upper bound", u=u, k=k, lb=lo)
+            ratio = k * k * (lo - h) / const
+            if ratio > 1.0 + 1e-6 or (k >= 40 and ratio < 0.95) or ratio < 0.8:
+                return False, dict(reason="k^2 (tau_k^LB - h) against 2 pi^2 h^2 theta_hint''(0)", u=u, k=k, ratio=ratio)
+            stats["cube_k"] += 1
+    # (e) Lemma M: a majorant line on a range
+    for P in pairs:
+        for _ in range(40 if quick else 200):
+            sig = rng.uniform(0.0, 1.0)
+            R = rng.uniform(0.02, 0.6) * P.estar
+            B = sig * R + rng.uniform(0.05, 1.0) * P.a
+            w = rng.uniform(0.0, 1.0)
+            TR = max(0.0, B - (sig + w) * R)
+            T = lambda x, B=B, sig=sig, w=w, R=R, TR=TR: max(0.0, B - (sig + w) * x) if x <= R else TR * math.exp(-(x - R))
+            e = rng.uniform(0.05, 0.98) * P.estar
+            tna = P.theta_na(e)
+            if tna <= 0:
+                continue
+            g = rng.uniform(0.01, 0.99) * R * e / (tna + R)
+            phi = g / e
+            beta = g * 10 ** rng.uniform(-9, -2)
+            val, mu = ld_bracket(P, T, g, phi, beta)
+            if mu / (1 - phi) > R:
+                continue
+            bound = (1 - phi) * B + (1 - sig) * mu
+            if val > bound + 1e-9:
+                return False, dict(reason="Lemma M: a bracket above (1 - phi) B + (1 - sigma) mu", pair=P.u, B=B, sigma=sig, R=R, g=g, e=e)
+            stats["least_slack_M"] = min(stats["least_slack_M"], bound - val)
+            stats["lemma_M"] += 1
+    # (f) duality for a maximum of lines
+    for P in pairs:
+        for _ in range(6 if quick else 30):
+            nl = int(rng.integers(2, 6))
+            lines = [(rng.uniform(0.15, 1.0) * P.a, rng.uniform(0.0, 1.0)) for _ in range(nl)]
+            g = rng.uniform(0.01, 0.5) * P.estar
+            m = P.e > g * 1.0001
+            ee, kk = P.e[m], P.kap[m]
+            F = np.array([Bq - (g / ee) * (Bq - (1 - sq) * kk) for Bq, sq in lines])
+            primal = float(np.min(np.max(F, axis=0)))
+            dual = -math.inf
+            lam = np.linspace(0.0, 1.0, 401)[:, None]
+            arg = None
+            for i in range(nl):
+                for j in range(i, nl):
+                    v = np.min(lam * F[i][None, :] + (1 - lam) * F[j][None, :], axis=1)
+                    q = int(np.argmax(v))
+                    if float(v[q]) > dual:
+                        dual, arg = float(v[q]), (i, j, float(lam[q, 0]))
+            if dual > primal + 1e-9:
+                return False, dict(reason="weak duality violated (harness)", pair=P.u)
+            gap = (primal - dual) / P.a
+            if gap > 2e-3:
+                return False, dict(reason="duality gap for a maximum of lines: inf_e max_lines exceeds the supremum over the hull of inf_e",
+                                   pair=P.u, lines=lines, g=g, primal=primal, dual=dual)
+            stats["worst_gap"] = max(stats["worst_gap"], gap)
+            stats["duality"] += 1
+            stats["mixed_pairs"] += (arg[0] != arg[1] and 0.0 < arg[2] < 1.0)
+    if not (stats["lemma_L"] > 200 and stats["least_slack_L"] < 1e-2 and stats["sharp_L"] >= 20 and stats["map_eq"] >= 60
+            and stats["bottleneck"] >= 30 and stats["lemma_M"] >= 60 and stats["least_slack_M"] < 1e-3
+            and stats["duality"] >= 20 and stats["mixed_pairs"] >= 3 and stats["gauss_k"] >= 14 and stats["cube_k"] >= 15):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+@conjecture("XVI.7 [refuted: DEAD_ENDS D64] Propagating the lines of a convex majorant one by one - without the concave hull of the new slopes - and reading off sup min(B, (1 - s) a) gives an upper bound of the next exponent at accuracy zero.  For the Gaussian pair: T_1 = theta_na <= (1 - x)_+ with lines (B, s) = (s, s), the first level is 1/2, the Moebius map sends (s, s) to slope s (1 - s)/(1 - 2s), and the formula gives tau_3 <= 1/3; but tau_3 >= 1/(2 sqrt 2) = 0.3536, because T_2 >= theta_hint and T_2(0+) = 1/2 (lines with s in (0.382, 1/2) jump over the window of slopes [1 - B, 1] in which a line can be dropped)", expect_fail=True)
+def t_naive_lines(rng, trials):
+    G = LdPair(None)
+    s0 = np.linspace(1e-6, 0.5 - 1e-6, 200001)
+    slope = s0 * (1 - s0) / (1 - 2 * s0)
+    naive = float(np.max(np.minimum(s0, 1 - slope)))
+    # tau_3 = inf_phi (1 - phi) sup_{x <= X} (x + T_2(x)), X = phi/(1 - phi); T_2(0+) = 1/2 and T_2 >= theta_hint give
+    # tau_3 >= inf_phi max((1 - phi)/2, (1 - phi)(X + theta_hint(X))) = inf_phi max((1 - phi)/2, 1/(4 (1 - phi)))
+    phis = np.linspace(1e-6, 1 - 1e-6, 400001)
+    X = phis / (1 - phis)
+    hint = np.where(X < 1, (1 - X) ** 2 / 4, 0.0)
+    lower = float(np.min(np.maximum((1 - phis) / 2, (1 - phis) * (X + hint))))
+    # the two ingredients, numerically: the first level is 1/2, and no (phi, beta) on a grid takes R[theta_na](g) below 1/2 - 0.01 at small g
+    first = float(np.min(np.maximum(1 - phis, np.where(X <= 1, 0.0, phis))))
+    g = 1e-5
+    least = math.inf
+    for phi in np.linspace(0.02, 0.98, 49):
+        for bf in (1e-3, 0.03, 0.3, 0.9):
+            val, mu = ld_bracket(G, G.theta_na, g, float(phi), bf * g, ngam=120)
+            least = min(least, val)
+    if abs(naive - 1 / 3) > 1e-4 or abs(first - 0.5) > 1e-4 or least < 0.49 or abs(lower - 1 / (2 * math.sqrt(2))) > 1e-4:
+        return True, dict(reason="harness: an ingredient of the refutation is off", naive=naive, first=first, least=least, lower=lower)
+    if naive < lower - 1e-3:
+        return False, dict(reason="the naive line formula gives tau_3 <= %.4f for the Gaussian pair, but tau_3 >= %.4f" % (naive, lower),
+                           naive=naive, lower_bound_of_tau3=lower, level_two=first)
+    return True, dict(naive=naive, lower=lower)
+
+
 
 # ----------------------------------------------------------------------------------------------
 # XVII. With a known part (a field): the p-biased cube (theory report 11.20)

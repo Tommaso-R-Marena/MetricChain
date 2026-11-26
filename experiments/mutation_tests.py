@@ -1615,6 +1615,37 @@ MUTS["XVI"] += [
      [('                if not kstar < rho_h * n + (eps + math.log(2)) / u:', '                if not kstar < rho_h * n:')], 'XVI.5'),
 ]
 
+MUTS["XVI"] += [
+    ("XVI.6 M1: a minorant line claimed to keep its slope under one level (B - sigma g instead of B - Sigma_B(sigma) g)",
+     [('                bound = B - sp * (1 + 1e-6) * g', '                bound = B - sig * g')], 'XVI.6'),
+    ("XVI.6 M2: the slope map without the factor 1 - sigma in front of theta_na",
+     [('        r = (B - (1 - s) * self.kap) / self.e', '        r = (B - self.kap) / self.e')], 'XVI.6'),
+    ("XVI.6 M3: the dual function J without its linear term (Lambda(t u) instead of Lambda(t u) - t Lambda(u))",
+     [('        return L(t * self.u) - t * L(self.u)', '        return L(t * self.u)')], 'XVI.6'),
+    ("XVI.6 M4: the Moebius map of the Gaussian pair with the denominator 1 - sigma",
+     [('        if abs(sp - B * (1 - sig) / (1 - sig - B)) > 1e-5 * max(1.0, sp):', '        if abs(sp - B * (1 - sig) / (1 - sig)) > 1e-5 * max(1.0, sp):')], 'XVI.6'),
+    ("XVI.6 M5: the closed form of the Gaussian lower bound with k rotations instead of k - 1",
+     [('        return (k - 1) * th + ph0', '        return k * th + ph0')], 'XVI.6'),
+    ("XVI.6 M6: Lemma M without the term (1 - sigma) mu (the line claimed to keep its intercept times 1 - phi only)",
+     [('            bound = (1 - phi) * B + (1 - sig) * mu', '            bound = (1 - phi) * B')], 'XVI.6'),
+    ("XVI.6 M7: duality claimed with the generating lines only (no convex combinations): the naive line propagation",
+     [('                for j in range(i, nl):\n                    v = np.min(lam * F[i][None, :]', '                for j in range(i, i + 1):\n                    v = np.min(lam * F[i][None, :]')], 'XVI.6'),
+    ("XVI.6 M8: the bottleneck expansion with (sigma - L_h)^2/theta_hint'' in place of (sigma - L_h)^2/(2 theta_hint'')",
+     [('                pred = (delta + z * z / (2 * P.H2)) / h', '                pred = (delta + z * z / P.H2) / h')], 'XVI.6'),
+    ("XVI.6 M9: lines of the cube followed up to slope 1 instead of 1 - B/a (beyond the regular range)",
+     [('                if not s < 1 - B / a:\n                    return False\n                s = P.sigma(B, s)[0]', '                if not s < 1:\n                    return False\n                s = P.sigma(B, s)[0]')], 'XVI.6'),
+    ("XVI.6 M10: the intercept of the tangent line of theta_na with slope s claimed to be (1 + s) J(s)",
+     [('            if abs(inter - (1 + s) * P.J(s / (1 + s))) > 1e-6:', '            if abs(inter - (1 + s) * P.J(s)) > 1e-6:')], 'XVI.6'),
+    ("XVI.6 M11: the constant of the rate claimed to be pi^2 h^2 theta_hint'' (half of 2 pi^2 h^2 theta_hint'')",
+     [('        const = 2 * math.pi ** 2 * h * h * P.H2\n', '        const = math.pi ** 2 * h * h * P.H2\n')], 'XVI.6'),
+    ("XVI.6 M12: the Gaussian lower bound compared with (pi^2/16)/k^2 instead of (pi^2/16)/(k + 1/2)^2",
+     [('        rel = (closed - 0.25) * (k + 0.5) ** 2 / (math.pi ** 2 / 16) - 1', '        rel = (closed - 0.25) * k ** 2 / (math.pi ** 2 / 16) - 1')], 'XVI.6'),
+    ("XVI.7 M1: the naive formula evaluated without propagating the slopes (the refutation disappears)",
+     [('    naive = float(np.max(np.minimum(s0, 1 - slope)))', '    naive = float(np.max(np.minimum(s0, 1 - s0)))')], 'XVI.7'),
+    ("XVI.7 M2: the lower bound of tau_3 computed without the value 1/2 of the second level at accuracy zero",
+     [('    lower = float(np.min(np.maximum((1 - phis) / 2, (1 - phis) * (X + hint))))', '    lower = float(np.min((1 - phis) * (X + hint)))')], 'XVI.7'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

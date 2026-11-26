@@ -2520,6 +2520,86 @@ dropped from Lemma 11.55(c); the allocation rule without its range).
 coordinator): the referee R12; the Lean file `TermOrders.lean`.  Both other branches were
 fetched at the start (unchanged) and before the commit (science `08ec47c`, engineering `ce71724`).
 
+### After the twenty-second checkpoint (2026-11-26, afternoon): the rate of the level recursion; the research owner's supplementary directive
+
+*Not a checkpoint.  The audited state is `dd067f1`; what follows is work in progress,
+committed so that it does not live in a conversation only.*
+
+**What was found (the coordinator; mathematics in `docs/workstreams/R_brief.md` §2,
+numerics in `experiments/coordinator_checks/level_rate/`).**  The question was item
+0-zero-zero (c) below: the observed `(τ_k − h)/a ≈ 0.65/k²` against the proved `c₁/k`.
+
+1. *Continuum limit.*  With `S = x + T` nondecreasing the step is
+   `T′(g) ≤ inf_e (1 − g/e)·S(gθ_na(e)/(e − g))`; for small accuracy and small defect
+   `D = T − θ_hint` this is a discrete Hopf–Lax step,
+   `∂_k D = −x[D/h + (∂_x D)²/(2q)]`, `q = h·θ_hint″(0)`, with the similarity solution
+   `D = (qh/k²) f(kx/h)`, `ζf′²/2 + ζf′ + (ζ−2)f = 0`, which has to pass the folded saddle
+   `(3, 3/2)`: `f(0) = 19.7392088 = 2π²` (`ode_f0.py`).
+2. *The same in absolute variables.*  A nest is a path `G(s)` (accuracy of the level whose
+   inner dimension is `s`); the excess exponent is `½θ_hint″(0)∫G′²`, the number of levels
+   `h∫ds/G`; with `W(ρ) = kG(ρn)/(hn)`: minimise `∫_0^1 W′²` subject to `∫_0^1 dρ/W = 1`,
+   `W(0) = W(1) = 0` — after `r = 1/ρ`, `V = W/ρ` (the Emden–Fowler equation `V″ = −c/(rV²)`
+   becomes autonomous) this is **radial Kepler motion over one period**: a cycloid,
+   minimum `4π²` by the virial theorem.  So the optimal nest raises the accuracy from the
+   base, peaks when half of the coordinates are inside, and returns to the bounded
+   accuracy at the top.
+3. *The discrete statement that can be proved* (Lemma L): a line `B − σx` below `T` stays
+   below `min(T, R[T])` with the slope `Σ_B(σ) = sup_e [B − (1−σ)θ_na(e)]/e`; with the concave
+   dual `J` of `θ_hint` (`J(t) = Λ(tu) − tΛ(u)` on the cube, `t − t²` for the Gaussian pair) the
+   new slope solves `(1 − σ + σ′)J(σ′/(1 − σ + σ′)) = B`; for the Gaussian pair it is the
+   Möbius map `σ′ = B(1−σ)/(1−σ−B)`, parabolic at `B = h`, elliptic above with rotation
+   angle `≈ 4√(B − h)`: **a saddle-node at the hinted exponent**, and the passage time
+   `π√(2θ_hint″(0)h²/δ)` of its ghost is the `1/k²` law with the constant
+   `2π²h²θ_hint″(0)` (cube: `2π²h²/(u²ρ_h(1−ρ_h))`, `0.6413a` at `u = 1`; Gaussian: `π²/16`, and
+   the lower bound has the closed form `(k−1)θ(B) + φ₀(B) = π`, i.e. `≈ ¼ + (π²/16)/(k+½)²`).
+4. *Numbers.*  Grid recursion (interpolating, not one-sided): ratio to the constant
+   `0.9960, 0.9982` at `k = 100, 160` (Gaussian), `0.9947, 0.9959` at `k = 100, 120` (cube,
+   `u = 1`); lower bound from lines `0.9902, 0.9938, 0.9969` at `k = 100, 160, 320` (Gaussian),
+   `0.9918` at `k = 120` (cube), below the grid value at every `k`.
+5. *For upper bounds* (not proved; the plan): on convex majorants with slopes in `[−1, 0]`
+   the step commutes with taking minorant lines (Sion: the bracket is affine in the line,
+   quasi-convex in `e` because `θ_na` is convex), so the majorant recursion is again the
+   slope map — on the **convex hull** of the lines, with slopes capped at one and the
+   concave hull of the new dual curve taken; the top value is where the dual curve
+   crosses `s = 1 − B/a`, and it relaxes towards the front of the regular lines by a
+   factor at most `1 − h/a` per level.  `DEAD_ENDS.md` D64 has what went wrong on the way
+   (lines propagated one by one; single-line epochs: rate `C/k` only).
+6. *What it would give at finite `n`:* with a schedule whose lines pass the bottleneck in
+   parallel and levels that lose `O(ln n)`: `n·h + O(n^{1/3}(ln n)^{2/3})` instead of
+   `O(√(n ln n))` — **not established**; it needs workstream R (B2), workstream Q2 (both
+   parts) and an assembly that is not written.
+
+**Running when this was written** (briefs in `docs/workstreams/`): R (the rate: rigorous
+lower bound, certified upper numerics, an upper bound), Q2 (Part A: the drop at
+logarithmic accuracy and the chain back to bounded accuracy; Part B: the slope step at
+a general outer rate, and for maxima of lines), LD (Lean: `LineDynamics.lean`), LE (Lean:
+`ResolvedPenalties.lean`, `GibbsRecovery.lean` for the science division's SCI-MSG-0028).
+Their reports go to `docs/workstreams/{R,Q2}_REPORT.md`; each is to be read line by line
+by the coordinator and then refereed before anything enters the theory report.
+Written and passing, not yet in an audited checkpoint: harness XVI.6 (line lemmas, slope
+map, Gaussian closed form, duality; 12 mutations, all caught) and XVI.7 (a documented
+refutation; 2 mutations).
+
+**The research owner's supplementary directive (received 15:05 UTC, relayed in
+THY-MSG-0016).**  More generality (heterogeneous, dependent, continuous, non-product,
+non-concentrated systems), an assumption audit of every major theorem in six categories
+with a hierarchy, obstruction theorems, computational consequences; rigour and scope
+unchanged.  What it changes in the plan:
+
+* (G1) the rate theory is to be stated for an abstract pair `(θ_na, θ_hint)` — it uses
+  nothing else — and instantiated (cube, Gaussian, field, several site types);
+* (G2) **an abstract nesting theorem**: Theorems 11.52/11.56 for what their proofs use —
+  two independent blocks; a class closed under fibres and under `−ln` of fibre averages
+  ((F1), (F2)); a tail function of the outer class in place of Harper's balls; a trivial
+  bracket — with instances (cube; Gaussian space with `u√n`-Lipschitz functions, whose
+  pair is exactly the "Gaussian pair": hinted exponent `(u²/8)(1 − 2e/u²)²`; heterogeneous
+  products) and with the first non-product case: a known part with bounded influence
+  `L` (log-density ratio of the conditional law of the inner block at most `L` per unit
+  change of the outer block), where (F2) holds with `u + L`;
+* (G3) `docs/ASSUMPTION_AUDIT.md`, written by adversarial readers, theorem by theorem;
+* (G4) the open problem to be named as such: no lower bound for adaptive algorithms
+  without a hint beyond the hinted one.
+
 ### Resume here (cycle 10, twenty-second checkpoint)
 
 Verified state: every module under `proofs/` (87 files) builds with zero warnings and is walked

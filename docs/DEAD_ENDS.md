@@ -2306,3 +2306,54 @@ final version corrected one condition (the lower bound is proved with the consta
 `max{1, (ε + ln 2)/u}`, not `(ε + ln 2)/u`, at small sizes) and two numbers that had been
 copied from it.  *Lesson:* a referee's report is integrated when the referee hands it
 back, not when its file appears.
+
+## D64. Lines of a majorant propagated one by one, single-line epochs with the best rates, and a tolerance guessed before it was computed (after the twenty-second checkpoint of cycle 10; the coordinator's analysis of the rate of the level recursion)
+
+*Context.*  Theorem 11.53a: under one level of the recursion a line `B − σx` below `T`
+stays below `T′` with the new slope `Σ_B(σ) = sup_e [B − (1−σ)θ_na(e)]/e` (Lemma L), and the
+slope map has a saddle-node at `B = h`.  Three things that looked like consequences and
+are not:
+
+1. **"The same map propagates the lines of a convex majorant, so
+   `τ′ ≤ sup_lines min(B, (1−s)a)`."**  False as soon as a line's new slope jumps over the
+   window `[1 − B/a, 1]` in which a line can be dropped at accuracy zero.  Gaussian pair:
+   `T_1 = θ_na ≤ (1 − x)_+`, lines `(B, s) = (s, s)`, first level `τ₂ = ½`; the map sends `(s, s)`
+   to the slope `s(1−s)/(1−2s)`, the formula gives `τ₃ ≤ ⅓` — but `τ₃ ≥ 1/(2√2) = 0.3536`
+   (from `T_2 ≥ θ_hint` and `T_2(0+) = ½`), and `τ₃ = 0.3559` on the grid.  What is true: for a
+   *convex* majorant with slopes in `[−1, 0]` the level operator commutes with taking
+   minorant lines (Sion's minimax theorem: the bracket is affine in the line and
+   quasi-convex in the outer rate), but the supremum is over the **convex hull** of the
+   lines, the new slopes have to be capped at one, and the concave hull of the new dual
+   curve has to be taken: the lines with `s ∈ (0.382, ½)` jump beyond slope `1`, are capped,
+   and the chord from the capped point to the regular lines crosses the dropping window
+   at `0.357`.  Harness XVI.7 (a documented refutation); mutation XVI.6 M7 is the same
+   error inside the duality check (31 of 120 random families need a genuine mixture of
+   two lines).  The coordinator made this error in its first numerical comparison and
+   found it because the "upper bound" came out below the grid value at `k = 3`.
+2. **"With the outer rate of every slope step chosen freely, the epoch schedule of
+   Theorem 11.58a has the rate `C/k²`."**  It has `C/k` (`experiments/coordinator_checks/level_rate/epochs.py`:
+   `k²(B_k − h)` grows linearly in `k`, for the Gaussian pair and the cube at `u = ½, 1, 2`).
+   A single line that starts flat after a drop does pass the bottleneck in
+   `π√(2θ_hint″(0)h²/δ)` levels instead of `h/δ`, but the range on which it is a majorant is
+   only `O(√δ)` at the bottleneck (before it, the range tends to the fixed point
+   `e − θ_na(e) → 0` of `R ↦ Re/(θ_na(e) + R)` as the rate `e` tends to `h`), `O(δ^{3/2})` at the
+   end, and the drop is proportional to the range: `δ^{3/2}` per epoch of `δ^{−1/2}` levels,
+   again `dδ/dk ≈ −δ²`.  The `1/k²` law of the exact recursion comes from the lines with
+   *all* intercepts in `(h, τ]` passing the bottleneck in parallel; a schedule needs
+   several lines at once (a type that is a maximum of lines), not better rates for one.
+3. **A tolerance written into a statement before the number was computed.**  The first
+   version of harness XVI.6 claimed the Gaussian lower bound to be "within 1 per cent of
+   `¼ + (π²/16)/(k + ½)²` from `k = 10` on"; it is `1.5` per cent above at `k = 10` (within `2`
+   per cent from `10`, `0.5` per cent from `20`).  The harness refused the claim on its first
+   run, which is what it is for.
+
+*Process.*  The brief of the Lean task for these lemmas was first written to the path of
+an existing brief of an earlier workstream with the same letter; the earlier file was
+restored from the repository at once and the new brief renamed (`LD_brief.md`).  Before
+naming a workstream, list the directory.
+
+*What worked.*  Deriving the continuum limit first (a Hopf–Lax step, a similarity
+solution through a folded saddle, a Kepler problem — three independent routes to the
+same `2π²`) and only then looking for the discrete statement that can be proved; and
+comparing every candidate bound with the grid recursion at small `k`, where an error of
+this kind is large.

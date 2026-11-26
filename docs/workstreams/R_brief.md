@@ -192,3 +192,17 @@ particular), and the coordinator's numerics are not one-sided.
 At most 40 lines: the theorems proved (with constants), what is certified numerically
 and to which `k`, the status of Conjecture R, the schedule of part C, the weakest link,
 errors found elsewhere, files created.
+
+## Errata (added by the coordinator; the text above is left as it was briefed)
+
+* §2.2, found by the Lean task LD (2026-11-26): "`Σ_B(σ)` finite iff `B ≤ (1 − σ)·a`" must be
+  strict — at `B = (1 − σ)a` the supremum is `+∞` (the slope of `θ_na` at `0` is infinite; for the
+  Gaussian pair the Möbius map has its pole at `σ + B = 1`).  Accordingly the Consequence
+  needs `s_j < 1 − B/a`.  It also uses `s_j ≤ s_{j+1}` (Lemma L needs `σ ≤ σ′`), which is automatic
+  for `B ≥ h`; and its hypothesis "`s₀ ≤ 1`" is not needed.
+* Lemma L, the iteration along the exact recursion, the Möbius map of the Gaussian pair
+  with its minimality, two numerical witnesses (`T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10` for the Gaussian
+  pair) and Lemma M with the line step at a general outer rate are machine-checked:
+  `proofs/Frontiers/LineDynamics.lean` (`line_le_Rstep`, `lines_le_exactRec`, `le_sSup_exactRec`,
+  `gauss_slope_map`, `gauss_slope_map_least`, `gauss_lines_le_exactRec`, `gauss_level_two_ge`,
+  `gauss_level_three_ge`, `StepLE.monotoneS_step`, `StepLE.line_step`, `StepLE.line_step_rate`).

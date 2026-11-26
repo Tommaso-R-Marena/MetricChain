@@ -98,3 +98,8 @@ At most 25 lines: the list of theorems with their final statements' hypotheses i
 differ from §2, the result of the single-file check (exit status, no warnings that
 matter), the axioms each theorem depends on, anything in the mathematics of
 `R_brief.md` §2.2/§2.6 that turned out to need a correction.
+
+## Erratum (coordinator, after the task)
+
+(L5) The Möbius orbit of `B = 3/10` is `3/7 → 12/19 → 21/13`, not "`3/7, 12/11 · …`" as written
+above; the task computed it and used the right numbers (`gauss_level_three_minorant`).
