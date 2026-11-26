@@ -1,0 +1,1347 @@
+{
+ "note": "crossing = floating-point bisection (numerical); certified = interval arithmetic at the two neighbouring slopes with two decimals",
+ "rows": [
+  {
+   "L": 3,
+   "p": "0.45",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "above"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [],
+   "seconds": 0.4
+  },
+  {
+   "L": 3,
+   "p": "0.45",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "above"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [],
+   "seconds": 1.4
+  },
+  {
+   "L": 3,
+   "p": "0.4",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 7.2672,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "7.26",
+      "lower": "0.687343483830",
+      "upper": "0.687343483831",
+      "cube_lo": "0.687343341788",
+      "cube_hi": "0.687343341789",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "7.27",
+      "lower": "0.687394041777",
+      "upper": "0.687394041778",
+      "cube_lo": "0.687394096932",
+      "cube_hi": "0.687394096933",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 0.1
+  },
+  {
+   "L": 3,
+   "p": "0.4",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "above"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [],
+   "seconds": 1.3
+  },
+  {
+   "L": 3,
+   "p": "0.3",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "below"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 2.6224,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "2.62",
+      "lower": "0.445125182932",
+      "upper": "0.445125182933",
+      "cube_lo": "0.445073249849",
+      "cube_hi": "0.445073249850",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "2.63",
+      "lower": "0.446563251874",
+      "upper": "0.446563251875",
+      "cube_lo": "0.446726583156",
+      "cube_hi": "0.446726583157",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 0.2
+  },
+  {
+   "L": 3,
+   "p": "0.3",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "above"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [],
+   "seconds": 1.4
+  },
+  {
+   "L": 3,
+   "p": "0.2",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "below"
+    ],
+    [
+     3.0,
+     "below"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 2.1957,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "2.19",
+      "lower": "0.366974167507",
+      "upper": "0.366974167508",
+      "cube_lo": "0.366633768980",
+      "cube_hi": "0.366633768981",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "2.20",
+      "lower": "0.368356233204",
+      "upper": "0.368356233205",
+      "cube_lo": "0.368612784727",
+      "cube_hi": "0.368612784728",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 0.3
+  },
+  {
+   "L": 3,
+   "p": "0.2",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 3.585,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "3.58",
+      "lower": "0.212891525941",
+      "upper": "0.212933111408",
+      "cube_lo": "0.212870163600",
+      "cube_hi": "0.212870163601",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "3.59",
+      "lower": "0.213414879907",
+      "upper": "0.213456560149",
+      "cube_lo": "0.213524595234",
+      "cube_hi": "0.213524595235",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 7.3
+  },
+  {
+   "L": 3,
+   "p": "0.1",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "below"
+    ],
+    [
+     2.5,
+     "below"
+    ],
+    [
+     3.0,
+     "below"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 1.9539,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "1.95",
+      "lower": "0.317606319698",
+      "upper": "0.317606319699",
+      "cube_lo": "0.317247057021",
+      "cube_hi": "0.317247057022",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "1.96",
+      "lower": "0.318816302854",
+      "upper": "0.318816302855",
+      "cube_lo": "0.319370787480",
+      "cube_hi": "0.319370787481",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 0.4
+  },
+  {
+   "L": 3,
+   "p": "0.1",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 3.1904,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "3.19",
+      "lower": "0.186359143098",
+      "upper": "0.186395546792",
+      "cube_lo": "0.186379797844",
+      "cube_hi": "0.186379797845",
+      "below_cube": false,
+      "lower_end_above_cube": false
+     },
+     "below_at": {
+      "u": "3.20",
+      "lower": "0.186904555696",
+      "upper": "0.186941055515",
+      "cube_lo": "0.187081811690",
+      "cube_hi": "0.187081811691",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 7.9
+  },
+  {
+   "L": 4,
+   "p": "0.45",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "above"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [],
+   "seconds": 0.1
+  },
+  {
+   "L": 4,
+   "p": "0.45",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "above"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [],
+   "seconds": 3.6
+  },
+  {
+   "L": 4,
+   "p": "0.4",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 3.7067,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "3.70",
+      "lower": "0.579466387579",
+      "upper": "0.579466387580",
+      "cube_lo": "0.579454355380",
+      "cube_hi": "0.579454355381",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "3.71",
+      "lower": "0.580316840075",
+      "upper": "0.580316840076",
+      "cube_lo": "0.580322553608",
+      "cube_hi": "0.580322553609",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 4.7
+  },
+  {
+   "L": 4,
+   "p": "0.4",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "above"
+    ],
+    [
+     5.0,
+     "above"
+    ],
+    [
+     6.0,
+     "above"
+    ],
+    [
+     8.0,
+     "above"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [],
+   "seconds": 3.6
+  },
+  {
+   "L": 4,
+   "p": "0.3",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "below"
+    ],
+    [
+     3.0,
+     "below"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 2.2409,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "2.24",
+      "lower": "0.376488638146",
+      "upper": "0.376488638147",
+      "cube_lo": "0.376459989012",
+      "cube_hi": "0.376459989013",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "2.25",
+      "lower": "0.378137478666",
+      "upper": "0.378137478667",
+      "cube_lo": "0.378404325620",
+      "cube_hi": "0.378404325621",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 4.8
+  },
+  {
+   "L": 4,
+   "p": "0.3",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "above"
+    ],
+    [
+     12.0,
+     "above"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 3.4521,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "3.45",
+      "lower": "0.204225602257",
+      "upper": "0.204265853073",
+      "cube_lo": "0.204247570157",
+      "cube_hi": "0.204247570158",
+      "below_cube": false,
+      "lower_end_above_cube": false
+     },
+     "below_at": {
+      "u": "3.46",
+      "lower": "0.204835325255",
+      "upper": "0.204875621466",
+      "cube_lo": "0.204918372995",
+      "cube_hi": "0.204918372996",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    },
+    {
+     "numerical_crossing": 9.4053,
+     "direction": "up",
+     "not_decided_at": {
+      "u": "9.41",
+      "lower": "0.430078775722",
+      "upper": "0.430163055514",
+      "cube_lo": "0.430162484241",
+      "cube_hi": "0.430162484242",
+      "below_cube": false,
+      "lower_end_above_cube": false
+     },
+     "below_at": {
+      "u": "9.40",
+      "lower": "0.429877607281",
+      "upper": "0.429961551003",
+      "cube_lo": "0.429964368471",
+      "cube_hi": "0.429964368472",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 28.8
+  },
+  {
+   "L": 4,
+   "p": "0.2",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "below"
+    ],
+    [
+     2.5,
+     "below"
+    ],
+    [
+     3.0,
+     "below"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 1.9724,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "1.97",
+      "lower": "0.321637672499",
+      "upper": "0.321637672500",
+      "cube_lo": "0.321489366563",
+      "cube_hi": "0.321489366564",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "1.98",
+      "lower": "0.323108428275",
+      "upper": "0.323108428276",
+      "cube_lo": "0.323602706458",
+      "cube_hi": "0.323602706459",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 4.6
+  },
+  {
+   "L": 4,
+   "p": "0.2",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "above"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 3.1338,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "3.13",
+      "lower": "0.182158325781",
+      "upper": "0.182193907875",
+      "cube_lo": "0.182143898726",
+      "cube_hi": "0.182143898727",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "3.14",
+      "lower": "0.182716346259",
+      "upper": "0.182752037439",
+      "cube_lo": "0.182852689940",
+      "cube_hi": "0.182852689941",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 15.7
+  },
+  {
+   "L": 4,
+   "p": "0.1",
+   "kind": "a",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     1.5,
+     "above"
+    ],
+    [
+     2.0,
+     "below"
+    ],
+    [
+     2.5,
+     "below"
+    ],
+    [
+     3.0,
+     "below"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 1.758,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "1.75",
+      "lower": "0.274578947745",
+      "upper": "0.274578947746",
+      "cube_lo": "0.273840433566",
+      "cube_hi": "0.273840433567",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "1.76",
+      "lower": "0.275858427295",
+      "upper": "0.275858427296",
+      "cube_lo": "0.276046212374",
+      "cube_hi": "0.276046212375",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 1.7
+  },
+  {
+   "L": 4,
+   "p": "0.1",
+   "kind": "h",
+   "sign_table": [
+    [
+     1.0,
+     "above"
+    ],
+    [
+     2.0,
+     "above"
+    ],
+    [
+     2.5,
+     "above"
+    ],
+    [
+     3.0,
+     "below"
+    ],
+    [
+     4.0,
+     "below"
+    ],
+    [
+     5.0,
+     "below"
+    ],
+    [
+     6.0,
+     "below"
+    ],
+    [
+     8.0,
+     "below"
+    ],
+    [
+     10.0,
+     "below"
+    ],
+    [
+     12.0,
+     "below"
+    ]
+   ],
+   "crossings": [
+    {
+     "numerical_crossing": 2.8799,
+     "direction": "down",
+     "not_decided_at": {
+      "u": "2.87",
+      "lower": "0.163513271113",
+      "upper": "0.163545211854",
+      "cube_lo": "0.163345153711",
+      "cube_hi": "0.163345153712",
+      "below_cube": false,
+      "lower_end_above_cube": true
+     },
+     "below_at": {
+      "u": "2.88",
+      "lower": "0.164038783275",
+      "upper": "0.164070819146",
+      "cube_lo": "0.164080561883",
+      "cube_hi": "0.164080561884",
+      "below_cube": true,
+      "lower_end_above_cube": false
+     }
+    }
+   ],
+   "seconds": 16.3
+  }
+ ],
+ "seconds_total": 104.2
+}

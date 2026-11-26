@@ -1,0 +1,38 @@
+{
+ "L": 1,
+ "dimension": 1,
+ "inequalities": 2,
+ "group_order": 4,
+ "max_vertices": 10000000,
+ "chambers": [
+  {
+   "lo": "0",
+   "hi": "inf",
+   "r0": "102/101",
+   "n_vertices": 2,
+   "n_orbits": 1,
+   "sum_degree_over_orbits": 1,
+   "degree_min": 1,
+   "degree_max": 1,
+   "degree_mean_over_vertices": 1.0,
+   "A_range": [
+    0,
+    0
+   ],
+   "B_range": [
+    0,
+    1
+   ],
+   "vertices_ending_at_lo": 2,
+   "vertices_ending_at_hi": 0,
+   "orbits_ending_at_lo": 1,
+   "orbits_ending_at_hi": 0,
+   "seconds": 0.01,
+   "sha256_multiset": "9789123f57f26fe0f5c431868e6f11d3ba94e26f5ce3bfc9a450c9e679f6e5bf",
+   "file": "orbits_L1_0.npz"
+  }
+ ],
+ "stopped": [],
+ "wall_checks": [],
+ "seconds_total": 0.0
+}

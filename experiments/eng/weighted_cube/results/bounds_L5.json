@@ -1,0 +1,620 @@
+{
+ "L": 5,
+ "p_grid": [
+  "0.45",
+  "0.4",
+  "0.3",
+  "0.2",
+  "0.1"
+ ],
+ "u_grid": [
+  "0.5",
+  "1",
+  "1.5",
+  "2",
+  "2.5",
+  "3",
+  "4",
+  "6"
+ ],
+ "part": "0/1",
+ "per": "site",
+ "decimals": 12,
+ "cells": [
+  {
+   "p": "0.45",
+   "u": "0.5",
+   "ustar": "0.554042321418745",
+   "ratio": "1.10808464284",
+   "cube": {
+    "a_lo": "0.030299861980",
+    "a_hi": "0.030299861981",
+    "h_lo": "0.007672866478",
+    "h_hi": "0.007672866479"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.45",
+   "u": "1",
+   "ustar": "1.10020301481367",
+   "ratio": "1.10020301481",
+   "cube": {
+    "a_lo": "0.110944071671",
+    "a_hi": "0.110944071672",
+    "h_lo": "0.029139138501",
+    "h_hi": "0.029139138502"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.45",
+   "u": "1.5",
+   "ustar": "1.63494264039161",
+   "ratio": "1.08996176026",
+   "cube": {
+    "a_lo": "0.218095616867",
+    "a_hi": "0.218095616868",
+    "h_lo": "0.060521279337",
+    "h_hi": "0.060521279338"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.45",
+   "u": "2",
+   "ustar": "2.15893398434098",
+   "ratio": "1.07946699217",
+   "cube": {
+    "a_lo": "0.327813325472",
+    "a_hi": "0.327813325473",
+    "h_lo": "0.097280907746",
+    "h_hi": "0.097280907747"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.45",
+   "u": "2.5",
+   "ustar": "2.67464818172151",
+   "ratio": "1.06985927269",
+   "cube": {
+    "a_lo": "0.424611996214",
+    "a_hi": "0.424611996215",
+    "h_lo": "0.135582224915",
+    "h_hi": "0.135582224916"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.45",
+   "u": "3",
+   "ustar": "3.1846232386778",
+   "ratio": "1.06154107956",
+   "cube": {
+    "a_lo": "0.502282209453",
+    "a_hi": "0.502282209454",
+    "h_lo": "0.172830873729",
+    "h_hi": "0.172830873730"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.45",
+   "u": "4",
+   "ustar": "4.19467175445417",
+   "ratio": "1.04866793861",
+   "cube": {
+    "a_lo": "0.603052412793",
+    "a_hi": "0.603052412794",
+    "h_lo": "0.239249644474",
+    "h_hi": "0.239249644475"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.45",
+   "u": "6",
+   "ustar": "6.19985229700724",
+   "ratio": "1.03330871617",
+   "cube": {
+    "a_lo": "0.675835756482",
+    "a_hi": "0.675835756483",
+    "h_lo": "0.336075841881",
+    "h_hi": "0.336075841882"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "0.5",
+   "ustar": "0.620391218422359",
+   "ratio": "1.24078243684",
+   "cube": {
+    "a_lo": "0.030299861980",
+    "a_hi": "0.030299861981",
+    "h_lo": "0.007672866478",
+    "h_hi": "0.007672866479"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "1",
+   "ustar": "1.21826955441418",
+   "ratio": "1.21826955441",
+   "cube": {
+    "a_lo": "0.110944071671",
+    "a_hi": "0.110944071672",
+    "h_lo": "0.029139138501",
+    "h_hi": "0.029139138502"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "1.5",
+   "ustar": "1.78722822948086",
+   "ratio": "1.19148548632",
+   "cube": {
+    "a_lo": "0.218095616867",
+    "a_hi": "0.218095616868",
+    "h_lo": "0.060521279337",
+    "h_hi": "0.060521279338"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "2",
+   "ustar": "2.33223177441451",
+   "ratio": "1.16611588721",
+   "cube": {
+    "a_lo": "0.327813325472",
+    "a_hi": "0.327813325473",
+    "h_lo": "0.097280907746",
+    "h_hi": "0.097280907747"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "2.5",
+   "ustar": "2.8605445087408",
+   "ratio": "1.1442178035",
+   "cube": {
+    "a_lo": "0.424611996214",
+    "a_hi": "0.424611996215",
+    "h_lo": "0.135582224915",
+    "h_hi": "0.135582224916"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "3",
+   "ustar": "3.37804825693463",
+   "ratio": "1.12601608564",
+   "cube": {
+    "a_lo": "0.502282209453",
+    "a_hi": "0.502282209454",
+    "h_lo": "0.172830873729",
+    "h_hi": "0.172830873730"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "4",
+   "ustar": "4.39532147229406",
+   "ratio": "1.09883036807",
+   "cube": {
+    "a_lo": "0.603052412793",
+    "a_hi": "0.603052412794",
+    "h_lo": "0.239249644474",
+    "h_hi": "0.239249644475"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.4",
+   "u": "6",
+   "ustar": "6.40408859410984",
+   "ratio": "1.06734809902",
+   "cube": {
+    "a_lo": "0.675835756482",
+    "a_hi": "0.675835756483",
+    "h_lo": "0.336075841881",
+    "h_hi": "0.336075841882"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "0.5",
+   "ustar": "0.809739005562106",
+   "ratio": "1.61947801112",
+   "cube": {
+    "a_lo": "0.030299861980",
+    "a_hi": "0.030299861981",
+    "h_lo": "0.007672866478",
+    "h_hi": "0.007672866479"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "1",
+   "ustar": "1.5261054457097",
+   "ratio": "1.52610544571",
+   "cube": {
+    "a_lo": "0.110944071671",
+    "a_hi": "0.110944071672",
+    "h_lo": "0.029139138501",
+    "h_hi": "0.029139138502"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "1.5",
+   "ustar": "2.15669245273199",
+   "ratio": "1.43779496849",
+   "cube": {
+    "a_lo": "0.218095616867",
+    "a_hi": "0.218095616868",
+    "h_lo": "0.060521279337",
+    "h_hi": "0.060521279338"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "2",
+   "ustar": "2.733586760448",
+   "ratio": "1.36679338022",
+   "cube": {
+    "a_lo": "0.327813325472",
+    "a_hi": "0.327813325473",
+    "h_lo": "0.097280907746",
+    "h_hi": "0.097280907747"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "2.5",
+   "ustar": "3.27907924527608",
+   "ratio": "1.31163169811",
+   "cube": {
+    "a_lo": "0.424611996214",
+    "a_hi": "0.424611996215",
+    "h_lo": "0.135582224915",
+    "h_hi": "0.135582224916"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "3",
+   "ustar": "3.8062061299414",
+   "ratio": "1.26873537665",
+   "cube": {
+    "a_lo": "0.502282209453",
+    "a_hi": "0.502282209454",
+    "h_lo": "0.172830873729",
+    "h_hi": "0.172830873730"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "4",
+   "ustar": "4.83228507386701",
+   "ratio": "1.20807126847",
+   "cube": {
+    "a_lo": "0.603052412793",
+    "a_hi": "0.603052412794",
+    "h_lo": "0.239249644474",
+    "h_hi": "0.239249644475"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.3",
+   "u": "6",
+   "ustar": "6.84527326380346",
+   "ratio": "1.1408788773",
+   "cube": {
+    "a_lo": "0.675835756482",
+    "a_hi": "0.675835756483",
+    "h_lo": "0.336075841881",
+    "h_hi": "0.336075841882"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "0.5",
+   "ustar": "1.13874306673314",
+   "ratio": "2.27748613347",
+   "cube": {
+    "a_lo": "0.030299861980",
+    "a_hi": "0.030299861981",
+    "h_lo": "0.007672866478",
+    "h_hi": "0.007672866479"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "1",
+   "ustar": "1.98074737052114",
+   "ratio": "1.98074737052",
+   "cube": {
+    "a_lo": "0.110944071671",
+    "a_hi": "0.110944071672",
+    "h_lo": "0.029139138501",
+    "h_hi": "0.029139138502"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "1.5",
+   "ustar": "2.65615669871652",
+   "ratio": "1.77077113248",
+   "cube": {
+    "a_lo": "0.218095616867",
+    "a_hi": "0.218095616868",
+    "h_lo": "0.060521279337",
+    "h_hi": "0.060521279338"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "2",
+   "ustar": "3.25200706305656",
+   "ratio": "1.62600353153",
+   "cube": {
+    "a_lo": "0.327813325472",
+    "a_hi": "0.327813325473",
+    "h_lo": "0.097280907746",
+    "h_hi": "0.097280907747"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "2.5",
+   "ustar": "3.80667790647855",
+   "ratio": "1.52267116259",
+   "cube": {
+    "a_lo": "0.424611996214",
+    "a_hi": "0.424611996215",
+    "h_lo": "0.135582224915",
+    "h_hi": "0.135582224916"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "3",
+   "ustar": "4.3386538126309",
+   "ratio": "1.44621793754",
+   "cube": {
+    "a_lo": "0.502282209453",
+    "a_hi": "0.502282209454",
+    "h_lo": "0.172830873729",
+    "h_hi": "0.172830873730"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "4",
+   "ustar": "5.36899464450486",
+   "ratio": "1.34224866113",
+   "cube": {
+    "a_lo": "0.603052412793",
+    "a_hi": "0.603052412794",
+    "h_lo": "0.239249644474",
+    "h_hi": "0.239249644475"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.2",
+   "u": "6",
+   "ustar": "7.38396818830576",
+   "ratio": "1.23066136472",
+   "cube": {
+    "a_lo": "0.675835756482",
+    "a_hi": "0.675835756483",
+    "h_lo": "0.336075841881",
+    "h_hi": "0.336075841882"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.1",
+   "u": "0.5",
+   "ustar": "1.80966517596689",
+   "ratio": "3.61933035193",
+   "cube": {
+    "a_lo": "0.030299861980",
+    "a_hi": "0.030299861981",
+    "h_lo": "0.007672866478",
+    "h_hi": "0.007672866479"
+   },
+   "chamber": [
+    "3",
+    "4"
+   ],
+   "n_vertices": 1965480,
+   "n_orbits": 2719,
+   "a": {
+    "lower": "0.095526156042",
+    "upper": "0.095526156043",
+    "method": "screened",
+    "n_interval_evaluations": 5,
+    "float_lower": 0.0955261560424506,
+    "float_upper": 0.09552615604245074,
+    "support": 5,
+    "rounds": 2,
+    "below_cube": false,
+    "ratio_to_cube": 3.1526927780426823,
+    "sitewise_float": 0.0955237812832513,
+    "sitewise_is_optimal": false
+   },
+   "h": {
+    "lower": "0.033376671899",
+    "upper": "0.033383323641",
+    "method": "screened",
+    "n_grid": 151,
+    "n_interval_evaluations": 310,
+    "t_best": 0.42695312500000004,
+    "float_lower": 0.033376671899939384,
+    "float_upper": 0.03338332364097765,
+    "below_cube": false,
+    "ratio_to_cube": 4.3508281730916805
+   },
+   "seconds": {
+    "a": 1.1,
+    "h": 30.88
+   }
+  },
+  {
+   "p": "0.1",
+   "u": "1",
+   "ustar": "2.74972673550765",
+   "ratio": "2.74972673551",
+   "cube": {
+    "a_lo": "0.110944071671",
+    "a_hi": "0.110944071672",
+    "h_lo": "0.029139138501",
+    "h_hi": "0.029139138502"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.1",
+   "u": "1.5",
+   "ustar": "3.44927550884685",
+   "ratio": "2.2995170059",
+   "cube": {
+    "a_lo": "0.218095616867",
+    "a_hi": "0.218095616868",
+    "h_lo": "0.060521279337",
+    "h_hi": "0.060521279338"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.1",
+   "u": "2",
+   "ustar": "4.05403842344932",
+   "ratio": "2.02701921172",
+   "cube": {
+    "a_lo": "0.327813325472",
+    "a_hi": "0.327813325473",
+    "h_lo": "0.097280907746",
+    "h_hi": "0.097280907747"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.1",
+   "u": "2.5",
+   "ustar": "4.61277467525804",
+   "ratio": "1.8451098701",
+   "cube": {
+    "a_lo": "0.424611996214",
+    "a_hi": "0.424611996215",
+    "h_lo": "0.135582224915",
+    "h_hi": "0.135582224916"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.1",
+   "u": "3",
+   "ustar": "5.1468354554603",
+   "ratio": "1.71561181849",
+   "cube": {
+    "a_lo": "0.502282209453",
+    "a_hi": "0.502282209454",
+    "h_lo": "0.172830873729",
+    "h_hi": "0.172830873730"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.1",
+   "u": "4",
+   "ustar": "6.17897368325007",
+   "ratio": "1.54474342081",
+   "cube": {
+    "a_lo": "0.603052412793",
+    "a_hi": "0.603052412794",
+    "h_lo": "0.239249644474",
+    "h_hi": "0.239249644475"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  },
+  {
+   "p": "0.1",
+   "u": "6",
+   "ustar": "8.19477350070224",
+   "ratio": "1.36579558345",
+   "cube": {
+    "a_lo": "0.675835756482",
+    "a_hi": "0.675835756483",
+    "h_lo": "0.336075841881",
+    "h_hi": "0.336075841882"
+   },
+   "chamber": null,
+   "note": "the chamber of u*/u was not enumerated (vertex limit)"
+  }
+ ],
+ "seconds_total": 32.2
+}
