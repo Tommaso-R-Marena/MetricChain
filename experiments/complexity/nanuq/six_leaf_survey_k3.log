@@ -1,0 +1,20 @@
+rooted planar trees: 126
+hybrid nodes = 0: 126 rooted labelled networks  {'C6': 126}   |  distinct systems so far, by status: {'C6': 14}  (total 14 of 150)   [29s]
+hybrid nodes = 1: 2988 rooted labelled networks  {'C6': 2988}   |  distinct systems so far, by status: {'C6': 71}  (total 71 of 150)   [30s]
+hybrid nodes = 2: 59706 rooted labelled networks  {'C6': 59442, 'pattern, ok': 264}   |  distinct systems so far, by status: {'C6': 107, 'pattern, ok': 6}  (total 113 of 150)   [80s]
+   ... 5000 of 59706 parents, 105600 networks so far [210s]
+   ... 10000 of 59706 parents, 208152 networks so far [344s]
+   ... 15000 of 59706 parents, 314938 networks so far [480s]
+   ... 20000 of 59706 parents, 411735 networks so far [607s]
+   ... 25000 of 59706 parents, 507291 networks so far [733s]
+   ... 30000 of 59706 parents, 603135 networks so far [859s]
+   ... 35000 of 59706 parents, 700543 networks so far [990s]
+   ... 40000 of 59706 parents, 796928 networks so far [1121s]
+   ... 45000 of 59706 parents, 888179 networks so far [1246s]
+   ... 50000 of 59706 parents, 982706 networks so far [1371s]
+   ... 55000 of 59706 parents, 1070893 networks so far [1493s]
+hybrid nodes = 3: 1151442 rooted labelled networks  {'C6': 1140042, 'pattern, ok': 11400}   |  distinct systems so far, by status: {'C6': 108, 'pattern, ok': 6}  (total 114 of 150)   [1604s]
+
+examples of networks whose six-leaf system is not 6-locally good (one per dihedral class):
+  [pattern, ok] first seen with 2 hybrid nodes; missing splits (masks) ['011110']
+       v5: h6, h9544; v4: v5, L3; v3: v4, L2; v2: v3, L1; v1: p9544, L0; p6: L5, h6; h6: L4; p9544: v2, h9544; h9544: p6

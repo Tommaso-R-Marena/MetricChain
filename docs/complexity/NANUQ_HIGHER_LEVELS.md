@@ -97,7 +97,7 @@ of leaves.  (e) makes this a finite procedure for every blob: a blob with `p` po
 splits to examine, and each polynomial needs the local terms of the bloblet with at most two leaves per
 position.  What is missing beyond level 2 is the list of blobs.
 
-## 2. Six leaves and three hybrid nodes
+## 2. Six leaves and up to four hybrid nodes
 
 Which of the 150 tree-generated six-point systems are displayed by outer-labeled planar networks?  By
 Theorem A only the answer for networks on six leaves matters for the robust question, and by [LC] §7 the
@@ -110,4 +110,78 @@ with a positive weight on an undisplayed split (a 2-split and the 3-split incomp
 outer-labeled planar for a fixed circular order, by repeated hybrid insertion into the 126 rooted planar
 trees, and records the systems they display.
 
-*(Results: §2.1, filled in from the logs of the program.)*
+### 2.1 What is enumerated
+
+Rooted binary networks on the leaves `0,…,5`, built from a rooted planar tree (all 126 of them, i.e. all root
+positions) by `k` successive *insertions*: choose two different edges `a→b`, `c→d` of the current network with `d`
+not an ancestor of `a`, subdivide the first by a tree node `p` and the second by a hybrid node `h`, and add the
+edge `p→h`.  A network is kept if it is outer-labeled planar for the circular order `(0,…,5)` — tested as
+planarity of the underlying graph together with the hexagon through the leaves and an apex joined to all
+leaves (the wheel has one embedding, and the network must lie in its hexagonal face).  Networks are identified by
+their unfolding, with the option `sym` up to the twelve rotations and reflections of the labels.  For every
+network the union of the split systems of the trees of its switchings is recorded.
+
+*What this does and does not cover.*  The networks have no parallel edges at any stage, and the root is never
+moved (a root with a hybrid child is obtained by inserting the hybrid node on an edge leaving the root).  A network
+all of whose reductions by one hybrid edge produce parallel edges — for instance one containing a blob with only
+two incident cut edges, such as two nested triangles — is not generated; such blobs do not change the displayed
+trees, but we have not proved that every outer-labeled planar network on six leaves with `k` hybrid nodes has the
+split system of a generated one.  The enumeration is therefore **a survey [X], not a classification**.  For
+`k ≤ 2` it agrees with the theorems of [LC] (galled networks give `𝒞_6`; a nested blob gives in addition exactly the
+six images of one system, Theorem 12, Step 1).
+
+### 2.2 Results
+
+| hybrid nodes | rooted labelled networks | up to rotation and reflection | systems found so far |
+|---|---|---|---|
+| 0 | 126 | 12 | 14, all in `𝒞_6` |
+| 1 | 2 988 | 253 | 71, all in `𝒞_6` |
+| 2 | 59 706 | 5 000 | 113 = 107 of `𝒞_6` + 6 |
+| 3 | 1 151 442 | 96 095 | **114 = all 108 of `𝒞_6` + the same 6** |
+| 4 | not run | 1 846 320 | **114 — nothing new** |
+
+The six systems outside `𝒞_6` are the six images of one system: **all nine non-trivial circular splits except one
+2-split** — the system of the nested blob with six positions (`N[3,1,1]`, `N[4,1,0]`).  It contains the forbidden
+pattern of [LC] Corollary 5′, so it is outside `𝒦′`, and its own metric at six leaves is still circular
+decomposable with the right support (it is one of the 14 systems of that kind).  With at most three hybrid nodes
+the survey finds **none** of the 19 six-locally good systems outside `𝒞_6`, none of the other 8 systems that
+contain the pattern but are good at six leaves, none of the 3 systems with a negative weight and none of the 6
+with a wrong support — and the same holds with four hybrid nodes.  Among the 1 151 442 labelled networks with
+three hybrid nodes, 11 400 display one of the six systems; among the 1 846 320 classes with four, 28 091.
+
+The 36 systems that never occur form eight classes under rotation and reflection (2-splits and 3-splits of a
+representative, leaves `1,…,6`):
+
+| status at six leaves | class size | 2-splits | 3-splits |
+|---|---|---|---|
+| negative weight | 3 | 12 23 45 56 | 123 234 345 |
+| wrong support | 6 | 12 23 34 45 61 | 123 234 |
+| good | 12 | 12 23 34 56 | 123 345 |
+| good | 3 | 12 23 45 56 | 234 345 |
+| good | 1 | all six | none |
+| good | 3 | all six | 123 |
+| pattern, good at six leaves | 2 | 12 34 56 | 123 234 345 |
+| pattern, good at six leaves | 6 | 12 23 34 56 | 123 234 345 |
+
+(`six_leaf_survey.py 3`, 27 minutes: log `six_leaf_survey_k3.log`; `six_leaf_survey.py 4 sym`, 90 minutes: log
+`six_leaf_survey_k4_sym.log`; the two runs agree on the systems for `k ≤ 3`.  `six_leaf_examples.py` re-derives the
+example networks printed in a log from the explicit network with `netcalc.py`.)
+
+### 2.3 What follows, and what does not
+
+1. **[X] For every outer-labeled planar network on six leaves that the survey generates with at most four hybrid
+   nodes, the NANUQ metric is circular decomposable with support exactly the displayed splits.**  (All 114
+   systems are globally good at six leaves.)  The smallest known failure has seven leaves ([LC] §6).
+2. **[P + X] For blobs with at most four hybrid nodes the robust criterion would be the one of level 2.**
+   By Theorem A(b), `Σ ∈ 𝒦` iff no six positions of a blob carry a system outside the 127 six-locally good ones.
+   *If the six-position systems of blobs with at most four hybrid nodes are those found by the survey*, the only
+   such system is "all nine splits except one 2-split", and membership in `𝒦` and in `𝒦′` coincide — as for
+   level 2 ([LC] Corollary 14).  The hypothesis in italics is what the survey supports and does not prove (§2.1).
+   **Open question:** is every tree-generated system displayed by an outer-labeled planar network on six leaves,
+   of any level, one of these 114?  We do not state it as a conjecture; four levels of a survey are the evidence.
+3. **Not shown.**  Whether a network of level 5 or more — or one not generated by the survey — can display, on
+   six of its leaves, a system with a negative weight or a wrong support (which would give a six-leaf
+   counterexample, impossible for level at most 2);
+   whether the 19 good systems outside `𝒞_6` occur at all; a list of the blobs of level 3 that are not galled,
+   with their critical splits — by Theorem A(e) each critical weight is again a quadratic polynomial in the sizes
+   of the positions, but we have not computed these polynomials.

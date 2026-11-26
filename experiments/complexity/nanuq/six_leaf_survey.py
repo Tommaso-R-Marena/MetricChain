@@ -19,7 +19,10 @@ number of hybrid nodes, the systems that occur, by status
     'WRONG SUPPORT' Kalmanson, positive weight on an undisplayed split (6),
 with one example network for every dihedral class that is not 6-locally good.
 
-Usage:  python3 six_leaf_survey.py [max number of hybrid nodes]      (default 2; 3 takes long)
+Usage:  python3 six_leaf_survey.py [max number of hybrid nodes [sym]]     (default 2; 3 takes half an hour)
+With the second argument "sym" the networks are identified up to the twelve rotations and reflections of the leaf
+labels (one representative per class is kept and extended; the systems of a class are the images of the system of
+the representative), which makes four hybrid nodes feasible.
 """
 import sys
 import time
@@ -84,7 +87,26 @@ def planar_trees():
     return nets
 
 
-def unfolding_key(net, root, par):
+DIHEDRAL = []
+for _r in range(N):
+    for _refl in (False, True):
+        DIHEDRAL.append({f"L{q}": f"L{(((-q) % N if _refl else q) + _r) % N}" for q in range(N)})
+
+
+def mask_image(m, ren):
+    mm = 0
+    for q in range(N):
+        if (m >> q) & 1:
+            mm |= 1 << int(ren[f"L{q}"][1:])
+    return min(mm, FULL ^ mm)
+
+
+def canonical_key(net, root, par):
+    """smallest unfolding key over the twelve dihedral relabellings of the leaves"""
+    return min(unfolding_key(net, root, par, ren) for ren in DIHEDRAL)
+
+
+def unfolding_key(net, root, par, rename=None):
     memo = {}
 
     def key(v):
@@ -92,7 +114,7 @@ def unfolding_key(net, root, par):
             return memo[v]
         ch = net[v]
         if not ch:
-            r = v
+            r = v if rename is None else rename[v]
         elif len(ch) == 1:
             r = "[" + key(ch[0]) + "]"
         else:
@@ -248,20 +270,27 @@ def describe(net, root):
 
 if __name__ == "__main__":
     kmax = int(sys.argv[1]) if len(sys.argv) > 1 else 2
+    SYM = len(sys.argv) > 2 and sys.argv[2] == "sym"
+    keyfun = canonical_key if SYM else unfolding_key
     t0 = time.time()
     info = classify_systems()
     counter = [0]
     level = {}
     for net, root in planar_trees():
         par = parents(net)
-        level[unfolding_key(net, root, par)] = (net, root)
-    print(f"rooted planar trees: {len(level)}", flush=True)
+        level[keyfun(net, root, par)] = (net, root)
+    print(f"rooted planar trees{' up to rotation and reflection' if SYM else ''}: {len(level)}", flush=True)
     seen_systems = {}
     examples = {}
     def record(net, root, par, k, stats):
         sysk = system_of(net, root, par)
         st, _ = info[sysk]
         stats[st] = stats.get(st, 0) + 1
+        if SYM:
+            for ren in DIHEDRAL:
+                img = frozenset(mask_image(m, ren) for m in sysk)
+                if img not in seen_systems:
+                    seen_systems[img] = k
         if sysk not in seen_systems:
             seen_systems[sysk] = k
         if st not in ("C6", "good"):
@@ -274,7 +303,7 @@ if __name__ == "__main__":
         for sysk, kk in seen_systems.items():
             st = info[sysk][0]
             by_status[st] = by_status.get(st, 0) + 1
-        print(f"hybrid nodes = {k}: {count} rooted labelled networks  {stats}   |  distinct systems so far, by "
+        print(f"hybrid nodes = {k}: {count} rooted {'networks up to rotation and reflection' if SYM else 'labelled networks'}  {stats}   |  distinct systems so far, by "
               f"status: {dict(sorted(by_status.items()))}  (total {len(seen_systems)} of {len(info)})   "
               f"[{time.time() - t0:.0f}s]", flush=True)
 
@@ -297,7 +326,7 @@ if __name__ == "__main__":
                 sysk = system_of(new, root, par)
                 if sysk is None:
                     continue
-                ukey = unfolding_key(new, root, par)
+                ukey = keyfun(new, root, par)
                 if ukey in keys:
                     continue
                 if not planar_with_order(new):

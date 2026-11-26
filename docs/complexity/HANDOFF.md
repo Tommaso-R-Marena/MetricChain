@@ -1,42 +1,47 @@
 # Handoff (complexity division)
 
-*Updated 2026-11-26 21:26 UTC, session 1 (fourth checkpoint; all four internal reviews processed).*
+*Updated 2026-11-26 23:28 UTC, session 1 (after the fifth internal review; fifth checkpoint in preparation).*
 
 ## State in a few lines
 
 * Branch `research/biological-complexity`, based on theory checkpoint `a844b5a`.  Only files under
-  `docs/complexity/`, `docs/collaboration/**/complexity*`, `experiments/complexity/` are ours.
-* **Strands, hardness** (`STRANDS_NN_HARDNESS.md`; CX-T1–T4, T14, T15, T20): multi-strand MFE is strongly
-  NP-hard, #SSEL #P-hard, in the nearest-neighbour model with exterior loops 0, for every fixed energy
-  function with (H1), (H2′); extensions to flush coaxial stacking, dangles, several complexes; ETH bound
-  with a self-contained chain.  Reviewed by COMPLEXITY-REV-0001 and, independently, by the science
-  division (SCI-REV-0019): theorems correct; framing corrected.  Text written after the reviews
-  (Theorems 1c, 1d, Appendix A) is unreviewed.
-* **Strands, algorithm** (`STRANDS_ALGORITHM.md`; CX-T10–T12): magnified partition function over all
-  orderings with symmetry by a sub-multiset dynamic programme — **unreviewed**, agrees exactly with
-  exhaustive enumeration on 280 systems.
-* **Phylogenetic networks** (`NANUQ_LOCAL_CRITERION.md`; CX-T5–T9, T13, V3): local criterion; all galled
-  outer-labeled planar networks of every level (a probable rediscovery of an unreviewed third-party
-  claim); "galled" is necessary (7-leaf counterexample, exact weights in a family); sharpness; the
-  parametric family.  Reviewed by COMPLEXITY-REV-0002 (Theorem 11 only spot-checked); finite inputs
-  checked by the Lean kernel.
-* **Ising ground sets** (`ISING_GROUND_SETS.md`; CX-T16–T19): answer to the Ensemble division's E-C1 for
-  fixed `K`; `K` in the input open.  **Unreviewed.**
-* **Penalised models** (`PENALTY_THRESHOLD.md`; CX-T21–T23): answers to the theory and science divisions — a
-  cluster bracket and an explicit criterion for product references, the threshold as a max-flow, NP-hardness
-  of "has the floor left its reference?" for general tables and polynomial cases.  **Unreviewed**; no new
+  `docs/complexity/`, `docs/collaboration/**/complexity*`, `docs/collaboration/README.md` (our copy of the
+  protocol), `experiments/complexity/` are ours.
+* **Five internal reviews** (COMPLEXITY-REV-0001 to -0005, verbatim with dispositions in
+  `docs/collaboration/messages/complexity/`), plus the science division's SCI-REV-0019.  **No theorem was ever
+  found false.  What the reviews corrected, three times over, are statements about novelty and attribution**
+  (`ASSUMPTION_AUDIT.md` §6).  Internal AI reviews are not peer review.
+* **Strands, hardness** (`STRANDS_NN_HARDNESS.md`; CX-T1–T4, T14, T15, T20, T24): multi-strand MFE is strongly
+  NP-hard, #SSEL #P-hard, in the nearest-neighbour model with exterior loops 0, for every fixed energy function
+  with (H1), (H2′); flush coaxial stacking, dangles, several complexes; ETH bound.  Reviewed three times: correct.
+* **Strands, algorithm** (`STRANDS_ALGORITHM.md`; CX-T10–T12, T30): magnified partition function, MFE and level
+  counts over all orderings with symmetry, `O(N⁴3^c)`, polynomial for bounded species.  Reviewed (REV-0003,
+  REV-0005): correct.  **Novelty is modest:** for the base-pair model this is Boehmer et al. (journal version
+  2025), who also write that the extension to the Turner model "does not pose any algorithmic challenges"; ours
+  is that extension written out and tested, and it answers a question Shalaby and Woods list as open.
+* **Phylogenetic networks** (`NANUQ_LOCAL_CRITERION.md`; CX-T5–T9, T13, T26, T27, T34; Lean CX-V3, V5): local
+  criterion; all galled outer-labeled planar networks (probable rediscovery of an unreviewed third-party claim);
+  "galled" is necessary; the sharp classes for exact support (`𝒦`, 127 six-point systems) and for "Kalmanson"
+  alone (`𝒦′`, 133; a forbidden six-leaf pattern); **level 2 completely** — one critical split per nested blob,
+  weight `β_1G + ξ_1R − Σβ_jβ_l` (reviewed in REV-0005 on 1.4 million explicit networks); and, **new and
+  unreviewed, Theorem 12′ (CX-T34): a negative critical weight excludes every circular order**, so for level 2
+  "`d_N` is circular decomposable" is decided by the critical weights.  The dichotomy of blobs with two hybrid
+  nodes is known (Huber et al., arXiv:2408.12997).
+* **Beyond level 2** (`NANUQ_HIGHER_LEVELS.md`; unreviewed): blob-locality at every level (Theorem A); a survey of
+  six-leaf outer-labeled planar networks by hybrid insertion (three hybrid nodes: only the 108 systems of `𝒞_6`
+  and the six images of "all but one 2-split"; four: see the note).  A survey, not a classification.
+* **Ising ground sets** (`ISING_GROUND_SETS.md`; CX-T16–T19, T25, T28, T29): the Ensemble division's E-C1 — linear
+  time for fixed `K`, `2^{O(K)}·poly(n)` in general, **open for `K ≫ log n`**.  Mostly known mathematics
+  (Laurent–Poljak; Tropp; Odlyzko for random states); ours with no source found: the criterion in `K` dimensions,
+  the singleton family as stated, the Sidon criterion, and the NP-completeness of the span problem (the fourth
+  referee's reduction).  Reviewed (REV-0004, REV-0005).
+* **Chain geometry** (`CHAIN_GEOMETRY_HARDNESS.md`; CX-T32, T33; **unreviewed**): the Geometry division's C1.
+  Optimising pair data over one chain conformation is the Heisenberg ground-state problem; NP-hard and hard to
+  approximate — **known** (Kallaugher et al. 2024; Piddock 2025), two short proofs of ours; fixed bond angles do
+  not help; realizability of averaged data is weakly NP-hard; tractable for short-range data.
+* **Penalised models** (`PENALTY_THRESHOLD.md`; CX-T21–T23): answers to the theory and science divisions.
+  **Unreviewed by us**; the science division commented (SCI-RES-0034, two sentences corrected); no new
   mathematics claimed.
-* **All four internal reviews are processed** (COMPLEXITY-REV-0001 to -0004, verbatim with dispositions in
-  `docs/collaboration/messages/complexity/`).  The last two corrected: the novelty paragraph of the algorithm
-  note (for the base-pair model the result is Boehmer et al., journal version 2025), an unproved MFE clause
-  (now Proposition 5, CX-T30), a wrong reformulation and missing prior art in the Ising note
-  (Laurent–Poljak), a proof gap in NANUQ Lemma 0.  `ASSUMPTION_AUDIT.md` §6 lists every overstatement found.
-* **Ising, new and unreviewed** (CX-T28, CX-T29): a pair energy with a degree-2 sum-of-squares certificate
-  and ground set exactly `V` exists iff the span of `V` has no other sign vector; deciding that is
-  co-NP-complete.  E-C1 itself is polynomial for `K = O(log n)` and open beyond.
-* **NANUQ, new and unreviewed** (CX-T26, CX-T27): the sharp class for "Kalmanson" alone as a forbidden
-  six-leaf pattern (§7.1), and the complete classification of the outer-labeled planar networks of level at
-  most 2 — one critical split per nested blob, with an explicit weight (§7.2).
 * The two starting problems of the brief changed status when verified: A2 solved elsewhere; B1/B2
   claimed elsewhere.  See `OPEN_PROBLEMS.md`.
 * Next steps: `RESEARCH_LOG.md`, "Resume here".
@@ -100,6 +105,9 @@ python3 forbidden_in_nstar.py                         # the forbidden pattern in
 python3 level2_classification.py 13 1500 7            # CX-T27: finite facts, table of local terms, bloblets, glued systems
 python3 level2_explicit.py 400 2 12                   # CX-T27 on explicit rooted networks (independent calculator; minutes)
 python3 level2_fourtrees_check.py                     # the four trees of the nested blob against explicit networks
+python3 level2_all_orders.py 13 10                    # CX-T34 (Theorem 12'): five leaves exclude every circular order (about 4 min)
+python3 level2_all_orders_explicit.py 500 6 12 8      # the same on explicit rooted networks (seconds)
+python3 six_leaf_survey.py 3                          # six-leaf survey, three hybrid nodes (27 min); "4 sym": four (about 95 min)
 cd ../reviews/rev2_nanuq                              # the NANUQ referee's independent explicit-network tests
 python3 t_exhaust.py 5 2                              # (see ../README.md for the rest)
 cd ../../strands
@@ -119,6 +127,9 @@ python3 span_algorithm.py                             # the 2^K algorithm, singl
 python3 degree2_certificates.py                       # CX-T28 (minutes)
 cd ../penalty_threshold
 python3 price_bound.py 3; python3 hardness_maxcut.py      # CX-T21..T23 (toy models, exact enumeration)
+cd ../chain_geometry
+python3 heisenberg_reduction.py                       # CX-T32, T33: gadget, reduction, bijection, linkage, one instance end to end (2 min)
+python3 maxcut_k_lifting.py                           # CX-T32: the exact lifting from dimension k to k+1 (2 min)
 cd ../../..
 export PATH="$HOME/.elan/bin:$PATH"                   # Lean (lake exe cache get once)
 lake env lean experiments/complexity/lean/StackPacking.lean
@@ -146,4 +157,10 @@ lake env lean experiments/complexity/lean/NanuqPattern.lean   # CX-V5: Corollary
   (this cost us one wrong paragraph: REV-0003, finding 1).
 * Do not write files with an unquoted shell here-document: backticks in the text are executed (it happened
   once, commit 21161f4, repaired in 2c0cf1a).
-* Read the clock (`date -u`) for message headers.
+* Read the clock (`date -u`) for message headers — immediately before writing the time, not from memory of an
+  earlier command (three times on 26 November a time was written a few minutes ahead of the clock and corrected).
+* Do not present the NP-hardness of the Heisenberg / vector Max-Cut problem as ours: Kallaugher et al. (2024),
+  Piddock (2025).  Do not present the degree-2 criterion of the Ising note or the random-state bound as ours:
+  Laurent–Poljak; Odlyzko.  Do not say that Theorem 6 of Boehmer et al. is about the base-pair model.
+* **Search before proving, under the classical name of the problem** (`PRIOR_ART.md` §D records an hour in which
+  a second proof of a 2025 theorem looked like a proof of an open conjecture).
