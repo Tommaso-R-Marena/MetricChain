@@ -37,6 +37,11 @@ class Tilt:
         us = self.us
         self.edges = np.linspace(-us, us, G + 1)
         self.mid = 0.5 * (self.edges[1:] + self.edges[:-1])
+        if mode == "restricted":
+            # nodes of the restricted adversary: G equidistant points INCLUDING the end points +-u*
+            # (the extremal policies, e.g. the uniform field, live exactly at the ends)
+            self.mid = np.linspace(-us, us, G)
+        self.tolr = 1e-11 if mode == "restricted" else 0.0
         if mode == "safe":
             lamL, lamR = self.edges[:-1], self.edges[1:]          # cell ends of lambda
             mmL, mmR = self.edges[:-1], self.edges[1:]            # cell ends of mu-
@@ -60,8 +65,8 @@ class Tilt:
             # (4) theta_+ max >= -u  ->  mu+ (right end) >= a4(lamR, mmL)
             arg = (np.exp(LamR + u) * (p + (1 - p) * np.exp(-MmL)) - (1 - p)) / p
             a4 = np.where(arg > 0, -np.log(np.maximum(arg, 1e-300)), np.inf)
-        lower = np.maximum(a1, a4)
-        upper = np.minimum(b2, b3)
+        lower = np.maximum(a1, a4) - self.tolr
+        upper = np.minimum(b2, b3) + self.tolr
         # smallest j with cellR[j] >= lower ; largest j with cellL[j] <= upper
         jlo = np.searchsorted(cellR, lower.ravel(), side="left").reshape(G, G)
         jhi = (np.searchsorted(cellL, upper.ravel(), side="right") - 1).reshape(G, G)

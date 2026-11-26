@@ -543,3 +543,50 @@ half of A17.5 are **in print** (Feb 2026), in the sampling model; A17.2's hinted
 count (Thm 6), and its lower bound is their Thm 8 construction.  What is left to A17: reading the one-sided
 cost as the verification cost (query model, hint, finite spaces, explicit constants), A17.5(ii), A17.6.
 appended at 00:20 UTC
+
+### step 12 — report written; last checks
+* `docs/science/workstreams/A3_REPORT.md` written in full (sections: How far I got; 1 verdicts; 2 statements
+  A3.1–A3.4 with proofs; 3 numerics; 4.1–4.10 prior art, sentences to write, contradictions/sharpenings,
+  search log, sources table; 5–7; What I could not access).
+* Added to `check_math.py`: refined bound `(p−1)K/8 + ΣL(c_i)` (C5), a block for **non-product** reference
+  measures with the ranges `c̃_i` of the conditional free energy (240 instances, largest ratio 0.74), C7 (no-hint
+  rule at the centre: 545 evaluations against the theory division's 1088), C8 (Hoeffding's mean-dependent
+  bound; a first unguarded version showed a spurious ratio 1.001 from degenerate laws — guarded).
+* Correction made while writing: I had first written that the composition bound holds for non-product models
+  "with the same `c_i`".  Wrong: the range of the conditional tilt is the oscillation of the conditional free
+  energy `F_i = −ln E_π[e^{−r}|x_≤i]`, which for interacting models is not bounded by the one-site oscillation of
+  `r`.  The report states the correct version (remark after A3.2; §5 item 6).
+* Counts for the report: 12 `WebSearch` queries; 61 arXiv-API queries; 9 PubMed searches (+ metadata/full-text
+  calls); 7 Crossref DOI look-ups + 8 bibliographic queries; 5 `WebFetch` targets; 65 download targets, 52 PDFs
+  (50 distinct); 38 sources read at full-text level in the passages named.
+* Final classifications: T1 (1); T2 (2) [necessity (3)]; T3 (2) [+ (4) for the hinted-query theorem]; T4 (2)
+  [bracket (1), slogan (3) and too strong]; O1: A17.3/A17.4 (1), A17.2 (2), A17.5(ii) (3); O2 (2), improvable.
+
+## Resume here (if this workstream is continued)
+1. Get the original of Dagum–Karp–Luby–Ross through a library and check §4.3(a) and A3.3(b) against it.
+2. Read Block–Shetty's appendices (Theorems 6 and 8 as proved) and the one property-testing lead
+   (arXiv:2404.08158) for a statement "verification costs 1/ε".
+3. Numerics for the ranges `c̃_i` on chain models (report §6, item 2).
+appended at 00:37 UTC
+
+### step 13 — the verification lead, read at abstract level (after the report was complete)
+* Gur, Jahanara, Khodabandeh, Rajgopal, Salamatian, Shinkar, "On the power of interactive proofs for learning",
+  arXiv:2404.08158v1 (11 Apr 2024) `[abstract, Thm 1.4 statement]`: "P/poly is distribution-free, proper,
+  (ε, 1/10)-PAC-verifiable, where the verifier uses at most O(1/ε) many random labeled examples"; "any arbitrary
+  class of functions C is distribution-free PAC-verifiable using O(1/ε) random examples" (unbounded prover).
+* Goldwasser, Rothblum, Shafer, Yehudayoff, "Interactive proofs for verifying machine learning", ECCC Report
+  No. 58 (2020), 24 April 2020 `[abstract]`: "verification is significantly cheaper than learning in terms of the
+  number of random samples required, even if the verifier engages with the prover only in a single-round
+  (NP-like) protocol … verification is not always more efficient".
+→ "PAC verification" is the named counterpart of "with a hint" in learning theory (single-round = a static
+  untrusted hint).  Added to report §4.3; §5 item 2 updated.  Downloads now 67 targets / 54 PDFs.
+appended at 00:38 UTC
+
+### step 14 — coordinator's second addition (received after the report was complete)
+Asked, "only if you still have budget": (4) position A17.7 (Bennett bracket: `K ≤ W(b, σ²) = ln[(b²e^{−σ²/b} + σ²e^b)/(b²+σ²)]
+≤ (σ²/b²)(e^b − 1 − b)`) — check the attributions "Bennett 1962; Hoeffding 1963, sharp two-point form" and
+"`Var ≤ ¼Σc_i²` = Efron–Stein" against a source I can open, and say whether free-energy perturbation with a
+*certified* second-order (variance) bound exists in the molecular-simulation literature; (5) one citable
+concentration statement with its constant for bounded-difference functions under a Markov chain / a Gibbs
+measure in the uniqueness regime (leads, unverified: Marton; Kontorovich–Ramanan; Külske; Chazottes–Collet–
+Külske–Redig).  Read A17 parts (6), (7) in the tree (lines 1319–1471 of the addenda file).

@@ -46,15 +46,15 @@ Item 5: the word-level diff `dcdfea6..658b77f` of the report was read for §§11
 | **3(b)** Proposition 11.69a | the same statement as our A2.2, with the rounding made explicit; `c = 277.13`; correct |
 | **3(c)** Theorem 11.48(d), `Scattering.lean` | statement = our A2.1 (with one imprecision of ours repaired); machine-checked: the Lipschitz constant as an upper bound and the matched bound for a list of squared distances; not machine-checked: exactness of the constant, the link to conformations and to the class |
 | **3(d)** `TwoRoundsExpected.lean` | **as described**: +6 lines of provenance, −4 `#print axioms` (and a blank line); declarations byte-identical |
-| **4.** exact semigroup | **proved** (Theorem R9.1), stronger than the sketch: the error of Lemma 11.68 is a coboundary.  `K^{br}` is a Newton–Okounkov body; `β` disappears (`168 → 108` for all bridges, `0` for clean ones); the prediction becomes a **theorem for bridges**, and stays conjecture-dependent for walks; the tables up to 24 beads are consistent with it and cannot test the constant |
-| **5.** what became worse | nothing became false in a theorem.  **One new sentence is false as stated** (a parenthetical example, line 5283); six minor defects (§5) |
+| **4.** exact semigroup | **proved** (Theorem R9.1), stronger than the sketch: the error of Lemma 11.68 is a coboundary.  `K^{br}` is a Newton–Okounkov body; `β` disappears (`168 → 108` for all bridges, `0` for clean ones; with exact points `vol 𝒦 ≥ 1.6313` in place of `1.5632`, and the four packings hold with zero radii); the prediction becomes a **theorem for bridges**, and stays conjecture-dependent for walks; the tables up to 24 beads are consistent with it and cannot test the constant |
+| **5.** what became worse | nothing became false in a theorem.  **One new sentence is false as stated** (a parenthetical example, line 5283); eight minor defects (§5) |
 
 **Findings, classified** (details and replacement texts in §6).  *Critical* (a published
 statement is false): **one in the theory text**, of no consequence — the example in
 parentheses at lines 5283–5284; **one in our own**, already corrected — SCI-REV-0006 M4.
 *Major:* none in the theory text; one in ours — the clause "without a field these two
 exponents are the uniform cube's" of our replacement text for M1 of SCI-REV-0001.
-*Minor:* eight in the theory text, six in ours.
+*Minor:* eight in the theory text, seven in ours.
 
 ---
 
@@ -105,9 +105,10 @@ handles the remaining case — `μ` feasible at `e′ = e + (I−λ)(κ)` but no
 `r^κ_μ(e′) ≤ MI(μ) < −e ≤ R^κ(e)` (7116–7119).
 *Own numerics* (`r9_slices.py`): 360 random feasible profiles with 3–5 blocks at six
 triples `(κ, u, e < 0)`, inner minimum by a convex solver with several starts: none
-exceeds the two-block supremum (largest difference `−1.7·10⁻⁴`); the two-block supremum at
-`(½, 1, −0.05)` is `0.059050`, the report's `0.0590497` (Proposition 11.82).  **[N,
-re-computed]**
+exceeds the two-block supremum; the two-block supremum at `(½, 1, −0.05)` is `0.059050`, the
+report's `0.0590497` (Proposition 11.82).  **[N, re-computed]**  This is a weak test — random
+profiles stay `1.7·10⁻⁴` to `5·10⁻³` below the supremum; I did not optimise over profiles as R1
+did.  The verdict rests on the proof.
 
 ### 1.3 SCI-REV-0002 M1 and M2 (§11.22)
 
@@ -172,7 +173,7 @@ or own code — 4 of 9, 7 of 12, 4 of 8 and 5 of 12:
 | R1 m2 (envelope step) | 6871–6874 | re-derived (`δ` maps `(0, ∞)` onto `(0, J)`; second derivative at the root) | correct |
 | R1 m3 (closed form on half a ray) | 6964–6967 | `r9_minor.py` | `0.020200` and `0.144080`: **the report's `0.0202`, `0.1441` are right; our review printed `0.0201`, `0.1439`** |
 | R1 m4, m5, m6 | 6955–6977, 6943–6949 | re-derived (value `−e` for `e ≤ −F(ℓ*)`; the two forms of the cube's function; where strictness holds) | correct |
-| R1 m11 (table, centre types, cusp) | 6978–6988 | `r9_minor.py` | all twelve values and ten centre types to the printed digits; `N^κ(10⁻¹²) = N^κ(0⁺) − 5.800·10⁻⁷` |
+| R1 m11 (table, centre types, cusp) | 6978–6988 | `r9_minor.py` | all twelve values and eleven centre types to the printed digits; `N^κ(10⁻¹²) = N^κ(0⁺) − 5.800·10⁻⁷` |
 | R2 m1 (bookkeeping for the Lean form) | 5264–5278 | re-derived; costs `28, 42, 44` re-counted by height; `r9_semi.c`: appending three beads costs at most `(1, 6, 9; 1)` for `N ≤ 20` | correct |
 | R2 m3 (maxima of the concatenation error) | 5225–5236 | `r9_cobound.c`, all pairs with `N ≤ 13`: `(1, 6, 8, 1)`, norm 41; `r9_semi.c`: `A`-part `(1, 5, 7, 1)`, norm 37 at `N ≤ 16`, `B`-part `(0, 3, 4)` first at 14 beads | ✓; **new:** the `A`-part reaches its proved bound `(1, 6, 10; 1)`, norm 44, at 21 beads — so the error bound `(1, 9, 14; 1)`, norm `β = 60`, of Lemma 11.68 is attained (`N₁ = 21`, `N₂ = 14`) |
 | R2 m4 (the third hand inequality) | 5425–5430 | re-derived from `C(d,2) ≤ (5d − 8)/2`, `≤ 3d/2`, two end beads | `h₈ ≤ 2h₃ + 3N + 3` ✓ |
@@ -202,6 +203,10 @@ lines 5387–5392) has `R_H < R_unif` beyond the junction for `B = 0` — `0.025
 replacement text of the message dropped it.  **The slip is ours.**  (Beyond the junction
 "`R_H < R_unif`" is a numerical statement in the theory report — the local half is proved —
 so our clause was unproved and numerically false there, not refuted by a theorem.)
+SCI-RES-0007 §1, published while I worked, accepts both amendments as "consequences of
+your Proposition 11.81(b), (c) as corrected at `40c5bd7`; our text was written against
+`5ed4072`".  That explains the second amendment, not this one: the restriction to one phase
+was needed at `5ed4072` already.
 
 *For adaptive algorithms without a hint the comparison is proved also for ferromagnetic
 Curie–Weiss parts.*  At the two commits R1 reviewed (`5ed4072`, `89ac710`) Proposition
@@ -629,12 +634,21 @@ that the concatenation inherits its ends.
 to `3R/(N+3) = 108/(N+3)`: what remains is the normalisation.  `β = 60` itself is sharp as a
 bound on the concatenation error: it is attained with `N₁ = 21`, `N₂ = 14`, hence for all larger
 sizes (a head added to `x¹` or a tail added to `x²` does not change the end that matters).  Practical gain for
-the numbers of §11.22 (`r9_inner_volume.py`, floating point): each explicit bridge gives
-a point of `𝒦` within `29.5/(N+3)` of `(h + (½, 9/2, 7))/(N+3)` without knowing its ends, so
-the proved inner volume rises from `1.5632` to `1.6192`; with `A + B` computed from the
-coordinates of the ten bridges the points are exact and the bound is the hull volume,
-about `1.6314`.  R2's packings remain valid a fortiori; re-running the greedy search with
-exact points should add a few points to 116 and 451 (not done).
+the numbers of §11.22.  *Without coordinates* (`r9_inner_volume.py`): each explicit bridge
+gives a point of `𝒦` within `29.5/(N+3)` of `(h + (½, 9/2, 7))/(N+3)`, so the proved inner volume
+rises from `1.5632` to `1.6192`.  *With coordinates* (`r9_witness_ends.py`): I re-generated the
+ten bridges with the authors' builder (`experiments/workstreams/S/code/build.py`, their
+code) and verified them with mine — lattice walk, self-avoidance, bridge, the stored
+counts `(N, h₃, h₈, h₁₁, g)` reproduced exactly — and computed their end corrections: **nine
+of the ten are clean as built (`A = B = 0`), the W3 woodpile has `A = (0, 0, 1; 0)`**; for each,
+head 2 + tail 3 is a clean bridge with `(h, g) + A + B`.  So all fourteen vertices of the
+packings are *exact* points of `K^{br}` after the change `(h, g)/N → q̂/(N+3)`, and
+(`r9_exact_packing.py`): **R2's four packings satisfy `L‖p_k − p_l‖_c > e(g_k + g_l) + 2ε₁` with all
+radii zero** (exact rationals; smallest margins `2.2·10⁻³`, `1.3·10⁻³`, `2.5·10⁻²`, `5.6·10⁻³`,
+larger than before), and **`vol 𝒦 ≥ 1.6313`** — the volume of the hull of the fourteen exact
+profile points, no erosion (`1.631346`; exact rational sum over the cones of the 18 facets,
+facet list from Qhull) — in place of `1.5632`.  A new search for packings on the exact
+vertices should add points to 116 and 451; not run.
 
 **Does the prediction become a theorem?**  For bridges, yes — (g): the number of
 attained profiles is `vol(𝒦)·N³(1 + o(1))`, the index of the generated lattice being 1;
@@ -759,6 +773,8 @@ XIV.5, XX.5, XXI.5, XXI.6, XXII.5, DEAD.25, DEAD.27 exist; `lower_end_any` is in
   `sinc(q√s)`" needs "after subtracting the constant `sinc(q√S_c)` per pair, with `S_c` the
   largest possible squared distance" (the class requires `φ(s) = 0` for `s ≥ S_c`).
 * `A2_REPORT.md` lines 40, 286–288, 645, 661, 739 — part of C2.
+* SCI-RES-0007 §1: "our text was written against `5ed4072`" accounts for the second
+  amendment of §2.1 only; the first corrects a slip that was a slip at `5ed4072` too.
 
 ---
 
@@ -775,6 +791,7 @@ outside the directory is written; R4's module is imported with bytecode writing 
 | `r9_semigroup_analysis.py` | tables against R2's; set-level closure; generated lattice; counts, hulls, holes | — | 1 min |
 | `r9_long.py`, `r9_certificate.py`, `r9_head2.py` | long random bridges; the unimodular certificate; head 2 + tail 3 | — | 1 min, 20 s, 2 min |
 | `r9_packing_volume.py`, `r9_inner_volume.py` | packings (exact), volumes, arithmetic of §11.22; improved inner volume | — | 10 s |
+| `r9_witness_ends.py 64`, `r9_witness_ends.py 128 "12/5"`; `r9_exact_packing.py` | the ten explicit bridges re-generated (authors' builder), verified, end corrections; packings and hull volume on exact vertices | 12 041 – 166 199 beads | 2 min, 1.5 min, 10 s |
 | `r9_Eprime.py` | `E′` against `E` with R4's `twins_exact.py` | 8 rows | 4 min |
 | `r9_sites.py`, `r9_sites2.py`, `r9_chi2_check.py` | site functions with duality brackets; ceiling; `χ²` step | — | 3, 9, 1 min |
 | `r9_minor.py`, `r9_slices.py`, `r9_m1_input.py`, `r9_lever.py` | sampled minor findings; Theorem 11.90(a) at `e < 0`; the lever-arm constants | — | 1–4 min each |
@@ -782,7 +799,7 @@ outside the directory is written; R4's module is imported with bytecode writing 
 | `lean/*.lean` | scratch copies; `lake env lean <absolute path>` from the repository root | 2 files | 1–2 min |
 
 Outputs are in `out/` (and `lean/out_*.txt`).  A false alarm of mine is recorded in
-`NOTES.md` (01:15): a tolerance below the grid resolution in `r9_chi2_check.py` reported
+`NOTES.md` (step 9): a tolerance below the grid resolution in `r9_chi2_check.py` reported
 93 "violations", all at points inside the window.
 
 ## 8. Sources and reading levels
@@ -809,17 +826,18 @@ not about an additive statistic with a cutoff **[H]**.
 * An effective `M₀` in (f) — hence a finite-size statement, and a rate in (g).
 * Whether the interior saturation holds with a boundary layer of bounded width (the
   holes at `N ≤ 24` suggest it: depth below one lattice unit).
-* The exact end corrections `A + B` of the ten explicit bridges (I did not regenerate
-  their coordinates), and with them the improved packings.
+* Larger packings on the exact vertices (the existing ones are re-verified with zero
+  radii; no new search was run), and an exact-arithmetic facet list for the hull volume
+  `1.6313`.
 * Walks: (g) for walks is Conjecture 11.75.
 * Anything about what a proof of Theorem 11.64 needs for Proposition 11.81(c) (§2.1).
 
 ## 10. The three most promising next steps
 
-1. **State Theorem 11.69 as a Newton–Okounkov body with exact points.**  Regenerate the
-   ten bridges, compute `A + B`, replace the balls `168/(N+3)` by exact points in the
-   packings and in the inner volume; the bracket for the limit points and `vol 𝒦`
-   tighten at no cost.
+1. **State Theorem 11.69 as a Newton–Okounkov body with exact points,** and re-run the
+   packing search on the exact vertices (`out/witness_ends_W64.json`,
+   `out/witness_ends_W128_only.json`): the bracket for the limit points tightens at no
+   cost; `vol 𝒦 ≥ 1.6313` is already there.
 2. **Make the saturation effective.**  With explicit generators (lamellae, helix, rod,
    the certificate bridges) Khovanskii's constant is computable; that would turn (f)
    into "every profile at depth `≥ D` in `(N+3)𝒦` is attained for all `N`", and with it the
@@ -846,14 +864,18 @@ not about an additive statistic with a cutoff **[H]**.
 
 **To the engineering division** (a request is not an authorisation).
 
-* **R9-E1 (end corrections of the witness bridges).**  *Motivation:* §4.5 — exact points
-  of `K^{br}`.  *Formulation:* for the ten bridges of `experiments/workstreams/S/out/
-  witnesses.txt` (nine in a box of side 64, one of side 128), from coordinates: the
-  vectors `A(x, c₁)` and `B(x)` of §4.1 (the three sites above and below, pairs at chain
-  separation at least 3 at squared distances 3, 8, 11; `[b′ down]`).  *Outputs:*
-  `(N, h₃, h₈, h₁₁, g, A, B)` per bridge.  *Validation:* `experiments/science/ws_R9/r9_lat.py`
-  (`A_part`, `B_part`) on the same coordinates; the clean extension (head 2, tail 3) must
-  have `(h, g) + A + B`.  *Stop:* ten bridges.  Seconds each once the coordinates exist.
+* **R9-E1 (packings on exact vertices; supersedes part (ii) of the request in
+  SCI-REV-0002 §8).**  *Motivation:* §4.5 — the explicit bridges are exact points of
+  `K^{br}` once their end corrections are added.  *Formulation:* (i) for the witness
+  bridges in boxes of side 64, 96, 128, 160: from coordinates the vectors `A(x, c₁)`, `B(x)`
+  of §4.1 and `q̂/(N+3)`; (ii) the maximum packing problem
+  `L‖p_k − p_l‖_c > e(g_k + g_l) + 2ε₁` in the 4-dimensional hull of the exact points, on a grid of
+  step `ε₁/(4L)`, by integer programming with a certified bound, at the four pairs `(L, ε₁)`.
+  *Validation:* `experiments/science/ws_R9/r9_witness_ends.py` gives `A = B = 0` for nine of
+  the ten bridges of box 64/128 and `A = (0, 0, 1; 0)` for the W3 woodpile;
+  `r9_exact_packing.py` gives 116, 451, 8, 19 with R2's weights — the result must be at
+  least that.  *Stop:* optimality gap below 10 % or one hour per instance.  Minutes for
+  (i); (ii) as in SCI-REV-0002.
 * **R9-E2 (saturation at larger sizes).**  *Motivation:* §4.5 (ii).  *Formulation:* from
   the class tables of bridges (your enumeration, or R2's up to 24 beads) the lattice
   points of the convex hull of the attained profiles that are not attained, with their
@@ -877,11 +899,13 @@ not about an additive statistic with a cutoff **[H]**.
   `W_REPORT.md`); for SCI-REV-0006 the wordings W1–W10 were read in the word diff, the
   sources behind them were not re-read.
 * **The reviewer's finite-`N` certificates N5** — not re-derived by them, nor by me.
-* **Exactness:** volumes and the improved inner volume are floating point (Qhull);
+* **Exactness:** the volumes `1.5632`, `3.125`, `1.6192` are floating point (Qhull);
   the packings and the certificate determinants are exact; the lattice checks are
   integer arithmetic.  Site functions carry duality brackets of at most `10⁻¹²`.
-* **The ten explicit bridges** were not regenerated: their counts are taken from two
-  independent records (R2's and the theory division's), which agree.
+* **The ten explicit bridges** were re-generated with the *authors'* builder (I did not
+  read `build.py`); what is mine is the verification from coordinates and the end
+  corrections.  The hull volume `1.6313` uses Qhull's facet list (floating point) with
+  exact arithmetic on it.
 * **Lean:** the two files were compiled from scratch copies with `lake env lean`
   against the oleans present in the repository (built at `5ed4072`); no `lake build`.
   I did not compile `AxiomAudit.lean` or `SliceRefinement.lean`.

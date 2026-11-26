@@ -2466,6 +2466,607 @@ theorem theoremA_fin {n : ℕ} [NeZero n] {p u γ r : ℝ} (hp0 : 0 < p) (hp1 : 
   rw [Fintype.card_fin] at h
   exact h
 
+/-! # Part 10: the Chernoff form of Theorem A, `H_{k,r} ≤ (n+1)·e^{tr}·ρ_t(k/n; γ)ⁿ` -/
+
+/-- The binomial weights `C(n,j) m^j (1 − m)^{n−j}`. -/
+def binomPmf (n : ℕ) (m : ℝ) (j : ℕ) : ℝ := (n.choose j : ℝ) * m ^ j * (1 - m) ^ (n - j)
+
+theorem binomPmf_nonneg (n : ℕ) {m : ℝ} (hm0 : 0 ≤ m) (hm1 : m ≤ 1) (j : ℕ) :
+    0 ≤ binomPmf n m j :=
+  mul_nonneg (mul_nonneg (Nat.cast_nonneg _) (pow_nonneg hm0 _)) (pow_nonneg (by linarith) _)
+
+theorem sum_binomPmf (n : ℕ) (m : ℝ) : ∑ j ∈ Finset.range (n + 1), binomPmf n m j = 1 := by
+  have h := add_pow m (1 - m) n
+  rw [add_sub_cancel, one_pow] at h
+  rw [h]
+  exact Finset.sum_congr rfl fun j _ => by
+    unfold binomPmf
+    ring
+
+/-- The ratio of consecutive binomial weights, cross-multiplied. -/
+theorem binomPmf_step {n : ℕ} (m : ℝ) {j : ℕ} (hj : j < n) :
+    binomPmf n m (j + 1) * (((j : ℝ) + 1) * (1 - m)) = binomPmf n m j * (((n : ℝ) - j) * m) := by
+  have h1 : (n.choose (j + 1) : ℝ) * ((j : ℝ) + 1) = (n.choose j : ℝ) * ((n : ℝ) - j) := by
+    have h := Nat.choose_succ_right_eq n j
+    have h' : ((n.choose (j + 1) * (j + 1) : ℕ) : ℝ) = ((n.choose j * (n - j) : ℕ) : ℝ) := by
+      rw [h]
+    push_cast [Nat.cast_sub hj.le] at h'
+    exact h'
+  have h2 : n - j = n - (j + 1) + 1 := by omega
+  unfold binomPmf
+  rw [h2, pow_succ, pow_succ]
+  linear_combination (m ^ j * m * (1 - m) ^ (n - (j + 1)) * (1 - m)) * h1
+
+/-- For `m = k/n`, `0 < k < n`, the binomial weights increase up to `j = k` … -/
+theorem binomPmf_le_succ {n k : ℕ} (hk0 : 0 < k) (hkn : k < n) {j : ℕ} (hj : j + 1 ≤ k) :
+    binomPmf n ((k : ℝ) / n) j ≤ binomPmf n ((k : ℝ) / n) (j + 1) := by
+  have hn : (0 : ℝ) < n := by exact_mod_cast lt_trans hk0 hkn
+  have hkR : (k : ℝ) < n := by exact_mod_cast hkn
+  have hjR : (j : ℝ) + 1 ≤ k := by exact_mod_cast hj
+  have hm0 : 0 ≤ (k : ℝ) / n := div_nonneg (Nat.cast_nonneg _) hn.le
+  have hm1 : (k : ℝ) / n < 1 := (div_lt_one hn).mpr hkR
+  have hstep := binomPmf_step ((k : ℝ) / n) (lt_of_lt_of_le (Nat.lt_succ_self j) (hj.trans hkn.le))
+  have hc : ((j : ℝ) + 1) * (1 - (k : ℝ) / n) ≤ ((n : ℝ) - j) * ((k : ℝ) / n) := by
+    rw [← sub_nonneg]
+    have e : ((n : ℝ) - j) * ((k : ℝ) / n) - ((j : ℝ) + 1) * (1 - (k : ℝ) / n) =
+        ((n : ℝ) * ((k : ℝ) - j - 1) + k) / n := by
+      field_simp
+      ring
+    rw [e]
+    exact div_nonneg (add_nonneg (mul_nonneg hn.le (by linarith)) (Nat.cast_nonneg _)) hn.le
+  have hpos : 0 < ((j : ℝ) + 1) * (1 - (k : ℝ) / n) :=
+    mul_pos (by positivity) (by linarith)
+  have hb := binomPmf_nonneg n hm0 hm1.le j
+  have h3 : binomPmf n ((k : ℝ) / n) j * (((j : ℝ) + 1) * (1 - (k : ℝ) / n)) ≤
+      binomPmf n ((k : ℝ) / n) (j + 1) * (((j : ℝ) + 1) * (1 - (k : ℝ) / n)) := by
+    rw [hstep]
+    exact mul_le_mul_of_nonneg_left hc hb
+  exact le_of_mul_le_mul_right h3 hpos
+
+/-- … and decrease from `j = k` on. -/
+theorem binomPmf_succ_le {n k : ℕ} (hk0 : 0 < k) (hkn : k < n) {j : ℕ} (hkj : k ≤ j)
+    (hj : j < n) : binomPmf n ((k : ℝ) / n) (j + 1) ≤ binomPmf n ((k : ℝ) / n) j := by
+  have hn : (0 : ℝ) < n := by exact_mod_cast lt_trans hk0 hkn
+  have hkR : (k : ℝ) < n := by exact_mod_cast hkn
+  have hjR : (k : ℝ) ≤ j := by exact_mod_cast hkj
+  have hm0 : 0 ≤ (k : ℝ) / n := div_nonneg (Nat.cast_nonneg _) hn.le
+  have hm1 : (k : ℝ) / n < 1 := (div_lt_one hn).mpr hkR
+  have hstep := binomPmf_step ((k : ℝ) / n) hj
+  have hc : ((n : ℝ) - j) * ((k : ℝ) / n) ≤ ((j : ℝ) + 1) * (1 - (k : ℝ) / n) := by
+    rw [← sub_nonneg]
+    have e : ((j : ℝ) + 1) * (1 - (k : ℝ) / n) - ((n : ℝ) - j) * ((k : ℝ) / n) =
+        ((n : ℝ) * ((j : ℝ) + 1 - k) - k) / n := by
+      field_simp
+      ring
+    rw [e]
+    refine div_nonneg ?_ hn.le
+    nlinarith
+  have hpos : 0 < ((j : ℝ) + 1) * (1 - (k : ℝ) / n) :=
+    mul_pos (by positivity) (by linarith)
+  have hb := binomPmf_nonneg n hm0 hm1.le j
+  have h3 : binomPmf n ((k : ℝ) / n) (j + 1) * (((j : ℝ) + 1) * (1 - (k : ℝ) / n)) ≤
+      binomPmf n ((k : ℝ) / n) j * (((j : ℝ) + 1) * (1 - (k : ℝ) / n)) := by
+    rw [hstep]
+    exact mul_le_mul_of_nonneg_left hc hb
+  exact le_of_mul_le_mul_right h3 hpos
+
+/-- **The binomial weights with parameter `k/n` are largest at `j = k`.** -/
+theorem binomPmf_le_mode {n k : ℕ} (hk0 : 0 < k) (hkn : k < n) {j : ℕ} (hj : j ≤ n) :
+    binomPmf n ((k : ℝ) / n) j ≤ binomPmf n ((k : ℝ) / n) k := by
+  have hup : ∀ d : ℕ, d ≤ k →
+      binomPmf n ((k : ℝ) / n) (k - d) ≤ binomPmf n ((k : ℝ) / n) k := by
+    intro d
+    induction d with
+    | zero =>
+      intro _
+      exact le_rfl
+    | succ d ih =>
+      intro hd
+      have h1 := ih (by omega)
+      have h2 := binomPmf_le_succ hk0 hkn (j := k - (d + 1)) (by omega)
+      have e : k - (d + 1) + 1 = k - d := by omega
+      rw [e] at h2
+      exact h2.trans h1
+  have hdown : ∀ d : ℕ, k + d ≤ n →
+      binomPmf n ((k : ℝ) / n) (k + d) ≤ binomPmf n ((k : ℝ) / n) k := by
+    intro d
+    induction d with
+    | zero =>
+      intro _
+      exact le_rfl
+    | succ d ih =>
+      intro hd
+      have h1 := ih (by omega)
+      have h2 := binomPmf_succ_le hk0 hkn (j := k + d) (by omega) (by omega)
+      exact h2.trans h1
+  rcases le_total j k with h | h
+  · have h1 := hup (k - j) (by omega)
+    have e : k - (k - j) = j := by omega
+    rw [e] at h1
+    exact h1
+  · have h1 := hdown (j - k) (by omega)
+    have e : k + (j - k) = j := by omega
+    rw [e] at h1
+    exact h1
+
+/-- **`Unif(T_k)` is `Bern(k/n)^{⊗n}` conditioned on an event of probability `≥ 1/(n+1)`:**
+`1 ≤ (n + 1)·C(n,k)·(k/n)^k·(1 − k/n)^{n−k}` for `0 < k < n`. -/
+theorem binomial_mode_bound {n k : ℕ} (hk0 : 0 < k) (hkn : k < n) :
+    1 ≤ ((n : ℝ) + 1) * binomPmf n ((k : ℝ) / n) k := by
+  have h := sum_binomPmf n ((k : ℝ) / n)
+  have h2 : ∑ j ∈ Finset.range (n + 1), binomPmf n ((k : ℝ) / n) j ≤
+      ∑ _j ∈ Finset.range (n + 1), binomPmf n ((k : ℝ) / n) k :=
+    Finset.sum_le_sum fun j hj =>
+      binomPmf_le_mode hk0 hkn (Nat.lt_succ_iff.mp (Finset.mem_range.mp hj))
+  rw [h, Finset.sum_const, Finset.card_range, nsmul_eq_mul] at h2
+  push_cast at h2
+  exact h2
+
+omit [AddGroup ι] in
+/-- `|T_j| = C(n, j)`. -/
+theorem card_wt_eq (j : ℕ) :
+    (univ.filter fun s : ι → Bool => wt s = j).card = (Fintype.card ι).choose j := by
+  rw [← Finset.card_univ (α := ι), ← Finset.card_powersetCard j (univ : Finset ι)]
+  refine Finset.card_bij (fun s _ => univ.filter fun i => s i = true) ?_ ?_ ?_
+  · intro s hs
+    rw [Finset.mem_powersetCard]
+    exact ⟨Finset.subset_univ _, (Finset.mem_filter.mp hs).2⟩
+  · intro s₁ _ s₂ _ h
+    funext i
+    have h' : (i ∈ univ.filter fun i => s₁ i = true) ↔ (i ∈ univ.filter fun i => s₂ i = true) := by
+      rw [h]
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and] at h'
+    exact Bool.eq_iff_iff.mpr h'
+  · intro t ht
+    refine ⟨fun i => decide (i ∈ t), ?_, ?_⟩
+    · rw [Finset.mem_filter]
+      refine ⟨Finset.mem_univ _, ?_⟩
+      unfold wt
+      rw [← (Finset.mem_powersetCard.mp ht).2]
+      congr 1
+      ext i
+      simp
+    · ext i
+      simp
+
+omit [DecidableEq ι] [AddGroup ι] in
+/-- `Bern(m)^{⊗n}(s) = m^{|s|}(1 − m)^{n−|s|}`. -/
+theorem refW_eq_pow (m : ℝ) (s : ι → Bool) :
+    refW m s = m ^ wt s * (1 - m) ^ (Fintype.card ι - wt s) := by
+  have h : ∀ i, bernW m (s i) = if s i = true then m else 1 - m := by
+    intro i
+    cases s i <;> rfl
+  have hc := Finset.card_filter_add_card_filter_not (s := (univ : Finset ι))
+    (fun i => s i = true)
+  rw [Finset.card_univ] at hc
+  have e : (univ.filter fun i => ¬s i = true).card = Fintype.card ι - wt s := by
+    unfold wt
+    omega
+  show ∏ i, bernW m (s i) = _
+  rw [Finset.prod_congr rfl fun i _ => h i, Finset.prod_ite, Finset.prod_const,
+    Finset.prod_const, e]
+  rfl
+
+omit [DecidableEq ι] [AddGroup ι] in
+theorem refW_nonneg {m : ℝ} (hm0 : 0 ≤ m) (hm1 : m ≤ 1) (s : ι → Bool) : 0 ≤ refW m s := by
+  refine Finset.prod_nonneg fun i _ => ?_
+  cases s i
+  · show 0 ≤ 1 - m
+    linarith
+  · exact hm0
+
+theorem siteLaw_pos {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ℝ) (a : Bool) :
+    0 < siteLaw p γ a := by
+  have hZ := tiltZ_pos hp0 hp1 γ
+  cases a
+  · exact div_pos (by linarith) hZ
+  · exact div_pos (mul_pos hp0 (Real.exp_pos _)) hZ
+
+/-- The likelihood ratio of one site: `π_b(a)/π_γ(a)`, with `π_0 = Bern(p₋)` (`b = false`) and
+`π_1 = Bern(p₊)` (`b = true`) the two letters of the vertex channel. -/
+def ratioS (p u γ : ℝ) (b a : Bool) : ℝ :=
+  siteLaw p (if b = true then -u else u) a / siteLaw p γ a
+
+theorem ratioS_pos {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ : ℝ) (b a : Bool) :
+    0 < ratioS p u γ b a :=
+  div_pos (siteLaw_pos hp0 hp1 _ a) (siteLaw_pos hp0 hp1 γ a)
+
+/-- **`ρ_t(m; γ) = max_{a ∈ {0,1}} [(1 − m)(π_0(a)/π_γ(a))^t + m(π_1(a)/π_γ(a))^t]`**
+(real powers). -/
+def rhoT (p u γ t m : ℝ) : ℝ :=
+  max ((1 - m) * ratioS p u γ false true ^ t + m * ratioS p u γ true true ^ t)
+    ((1 - m) * ratioS p u γ false false ^ t + m * ratioS p u γ true false ^ t)
+
+omit [DecidableEq ι] [AddGroup ι] in
+/-- **The Markov step:** if `x ∈ D_{s,r}` then `1 ≤ e^{tr} ∏_i (π_{s_i}(x_i)/π_γ(x_i))^t`, `t ≥ 0`. -/
+theorem one_le_of_dipW_pos {p u γ r t : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (ht : 0 ≤ t)
+    {s x : ι → Bool} (h : 0 < dipW p u γ r s x) :
+    1 ≤ Real.exp (t * r) * ∏ i, ratioS p u γ (s i) (x i) ^ t := by
+  rw [dipW_pos_iff hp0 hp1] at h
+  have e1 : refW p x * baseW p γ x = ∏ i, siteLaw p γ (x i) :=
+    refW_mul_tiltW p (fun _ => γ) x
+  have e2 : refW p x * coneW p u s x = ∏ i, siteLaw p (coneField u s i) (x i) :=
+    refW_mul_tiltW p (coneField u s) x
+  rw [e1, e2] at h
+  have hpos : 0 < ∏ i, siteLaw p γ (x i) :=
+    Finset.prod_pos fun i _ => siteLaw_pos hp0 hp1 γ (x i)
+  have hratio : ∏ i, ratioS p u γ (s i) (x i) =
+      (∏ i, siteLaw p (coneField u s i) (x i)) / ∏ i, siteLaw p γ (x i) := by
+    rw [← Finset.prod_div_distrib]
+    rfl
+  have h1 : 1 < Real.exp r * ∏ i, ratioS p u γ (s i) (x i) := by
+    rw [hratio, ← mul_div_assoc, lt_div_iff₀ hpos, one_mul]
+    exact h
+  have h2 := Real.one_le_rpow h1.le ht
+  rw [Real.mul_rpow (Real.exp_pos r).le
+      (Finset.prod_nonneg fun i _ => (ratioS_pos hp0 hp1 u γ (s i) (x i)).le),
+    ← Real.exp_mul, ← Real.finsetProd_rpow _ _
+      (fun i _ => (ratioS_pos hp0 hp1 u γ (s i) (x i)).le), mul_comm r t] at h2
+  exact h2
+
+omit [AddGroup ι] in
+/-- **The Chernoff step:** with the weights `Bern(m)^{⊗n}` on the centres,
+`#{s ∈ T_k : x ∈ D_{s,r}} · m^k(1 − m)^{n−k} ≤ e^{tr} ρ_t(m; γ)ⁿ` for `t ≥ 0`, `0 ≤ m ≤ 1`. -/
+theorem dipCount_mul_le {p u γ r t m : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (ht : 0 ≤ t)
+    (hm0 : 0 ≤ m) (hm1 : m ≤ 1) (k : ℕ) (x : ι → Bool) :
+    (dipCount p u γ r k x : ℝ) * (m ^ k * (1 - m) ^ (Fintype.card ι - k)) ≤
+      Real.exp (t * r) * rhoT p u γ t m ^ Fintype.card ι := by
+  have hS : ∑ s : ι → Bool, refW m s * ∏ i, ratioS p u γ (s i) (x i) ^ t =
+      ∏ i, (m * ratioS p u γ true (x i) ^ t + (1 - m) * ratioS p u γ false (x i) ^ t) := by
+    have h1 : ∀ s : ι → Bool, refW m s * ∏ i, ratioS p u γ (s i) (x i) ^ t =
+        prodW (fun i b => bernW m b * ratioS p u γ b (x i) ^ t) s := by
+      intro s
+      show (∏ i, bernW m (s i)) * ∏ i, ratioS p u γ (s i) (x i) ^ t =
+        ∏ i, bernW m (s i) * ratioS p u γ (s i) (x i) ^ t
+      rw [Finset.prod_mul_distrib]
+    rw [Finset.sum_congr rfl fun s _ => h1 s, sum_prodW]
+    rfl
+  have hfac : ∀ i, m * ratioS p u γ true (x i) ^ t + (1 - m) * ratioS p u γ false (x i) ^ t ≤
+      rhoT p u γ t m := by
+    intro i
+    unfold rhoT
+    cases x i
+    · exact le_trans (le_of_eq (add_comm _ _)) (le_max_right _ _)
+    · exact le_trans (le_of_eq (add_comm _ _)) (le_max_left _ _)
+  have hfac0 : ∀ i, 0 ≤ m * ratioS p u γ true (x i) ^ t +
+      (1 - m) * ratioS p u γ false (x i) ^ t := fun i =>
+    add_nonneg (mul_nonneg hm0 (Real.rpow_nonneg (ratioS_pos hp0 hp1 u γ true (x i)).le t))
+      (mul_nonneg (by linarith) (Real.rpow_nonneg (ratioS_pos hp0 hp1 u γ false (x i)).le t))
+  have hprod : ∏ i, (m * ratioS p u γ true (x i) ^ t + (1 - m) * ratioS p u γ false (x i) ^ t) ≤
+      rhoT p u γ t m ^ Fintype.card ι := by
+    calc ∏ i, (m * ratioS p u γ true (x i) ^ t + (1 - m) * ratioS p u γ false (x i) ^ t)
+        ≤ ∏ _i : ι, rhoT p u γ t m :=
+          Finset.prod_le_prod (fun i _ => hfac0 i) (fun i _ => hfac i)
+      _ = rhoT p u γ t m ^ Fintype.card ι := by rw [Finset.prod_const, Finset.card_univ]
+  have hL : (dipCount p u γ r k x : ℝ) * (m ^ k * (1 - m) ^ (Fintype.card ι - k)) =
+      ∑ s ∈ univ.filter (fun s : ι → Bool => wt s = k ∧ 0 < dipW p u γ r s x), refW m s := by
+    have hterm : ∀ s ∈ univ.filter (fun s : ι → Bool => wt s = k ∧ 0 < dipW p u γ r s x),
+        refW m s = m ^ k * (1 - m) ^ (Fintype.card ι - k) := by
+      intro s hs
+      rw [refW_eq_pow, (Finset.mem_filter.mp hs).2.1]
+    rw [Finset.sum_congr rfl hterm, Finset.sum_const, nsmul_eq_mul]
+    rfl
+  rw [hL]
+  calc ∑ s ∈ univ.filter (fun s : ι → Bool => wt s = k ∧ 0 < dipW p u γ r s x), refW m s
+      ≤ ∑ s ∈ univ.filter (fun s : ι → Bool => wt s = k ∧ 0 < dipW p u γ r s x),
+          refW m s * (Real.exp (t * r) * ∏ i, ratioS p u γ (s i) (x i) ^ t) :=
+        Finset.sum_le_sum fun s hs =>
+          le_mul_of_one_le_right (refW_nonneg hm0 hm1 s)
+            (one_le_of_dipW_pos hp0 hp1 ht (Finset.mem_filter.mp hs).2.2)
+    _ ≤ ∑ s : ι → Bool, refW m s * (Real.exp (t * r) * ∏ i, ratioS p u γ (s i) (x i) ^ t) :=
+        Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _) fun s _ _ =>
+          mul_nonneg (refW_nonneg hm0 hm1 s) (mul_nonneg (Real.exp_pos _).le
+            (Finset.prod_nonneg fun i _ =>
+              Real.rpow_nonneg (ratioS_pos hp0 hp1 u γ (s i) (x i)).le t))
+    _ = Real.exp (t * r) * ∑ s : ι → Bool, refW m s * ∏ i, ratioS p u γ (s i) (x i) ^ t := by
+        rw [Finset.mul_sum]
+        exact Finset.sum_congr rfl fun s _ => by ring
+    _ = Real.exp (t * r) *
+          ∏ i, (m * ratioS p u γ true (x i) ^ t + (1 - m) * ratioS p u γ false (x i) ^ t) := by
+        rw [hS]
+    _ ≤ Real.exp (t * r) * rhoT p u γ t m ^ Fintype.card ι :=
+        mul_le_mul_of_nonneg_left hprod (Real.exp_pos _).le
+
+omit [AddGroup ι] in
+/-- **The Chernoff bound on `H_{k,r}`** (the second inequality of Theorem A): for every `t ≥ 0`
+and `0 < k < n`, `H_{k,r} ≤ (n + 1)·e^{tr}·ρ_t(k/n; γ)ⁿ`. -/
+theorem Hkr_le_chernoff {p u γ r t : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (ht : 0 ≤ t) {k : ℕ}
+    (hk0 : 0 < k) (hkn : k < Fintype.card ι) :
+    Hkr ι p u γ r k ≤ ((Fintype.card ι : ℝ) + 1) *
+      (Real.exp (t * r) * rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι) := by
+  have hn : (0 : ℝ) < Fintype.card ι := by exact_mod_cast lt_trans hk0 hkn
+  have hm0 : 0 ≤ (k : ℝ) / Fintype.card ι := div_nonneg (Nat.cast_nonneg _) hn.le
+  have hm1 : (k : ℝ) / Fintype.card ι ≤ 1 :=
+    ((div_lt_one hn).mpr (by exact_mod_cast hkn)).le
+  have hmode := binomial_mode_bound hk0 hkn
+  have hC : (0 : ℝ) < (Fintype.card ι).choose k := by exact_mod_cast Nat.choose_pos hkn.le
+  obtain ⟨x, _, hx⟩ := Finset.exists_mem_eq_sup' (univ_nonempty (α := ι → Bool))
+    (fun x : ι → Bool => dipCount p u γ r k x)
+  have h1 := dipCount_mul_le (u := u) (γ := γ) (r := r) hp0 hp1 ht hm0 hm1 k x
+  unfold Hkr
+  rw [card_wt_eq, div_le_iff₀ hC, hx]
+  unfold binomPmf at hmode
+  calc (dipCount p u γ r k x : ℝ)
+      ≤ (dipCount p u γ r k x : ℝ) * (((Fintype.card ι : ℝ) + 1) *
+          (((Fintype.card ι).choose k : ℝ) * ((k : ℝ) / Fintype.card ι) ^ k *
+            (1 - (k : ℝ) / Fintype.card ι) ^ (Fintype.card ι - k))) :=
+        le_mul_of_one_le_right (Nat.cast_nonneg _) hmode
+    _ = ((Fintype.card ι : ℝ) + 1) * ((Fintype.card ι).choose k : ℝ) *
+          ((dipCount p u γ r k x : ℝ) * (((k : ℝ) / Fintype.card ι) ^ k *
+            (1 - (k : ℝ) / Fintype.card ι) ^ (Fintype.card ι - k))) := by ring
+    _ ≤ ((Fintype.card ι : ℝ) + 1) * ((Fintype.card ι).choose k : ℝ) *
+          (Real.exp (t * r) *
+            rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι) :=
+        mul_le_mul_of_nonneg_left h1 (mul_nonneg (by linarith) hC.le)
+    _ = ((Fintype.card ι : ℝ) + 1) * (Real.exp (t * r) *
+          rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι) *
+            ((Fintype.card ι).choose k : ℝ) := by ring
+
+open Classical in
+/-- **Theorem A, both displays (every `n`; any finite group of sites):** in the situation of
+`theoremA_group`, for every `t ≥ 0`,
+
+    1 − 2δ ≤ E[#evaluations on ψ₀] · n · (n + 1) · e^{tr} · ρ_t(k/n; γ)ⁿ,
+
+i.e. `E|Q(ψ₀)| ≥ (1 − 2δ)·e^{−tr}·ρ_t(k/n; γ)^{−n}/(n(n + 1))`. -/
+theorem theoremA_group_chernoff {p u γ r : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hγ : |γ| ≤ u)
+    (hr : 0 < r) {k : ℕ} (hk : k ≤ Fintype.card ι)
+    (hcond : 1 < (Real.exp r - 1) * omegaM p u k (Fintype.card ι)) :
+    ∃ γ₂ : ℝ, (γ₂ = -u ∨ γ₂ = u) ∧ ∃ b : ℝ, 0 ≤ b ∧ b ≤ betaA p u r k (Fintype.card ι) ∧
+      LipH u (fun x : ι → Bool => -Real.log (baseW p γ x + b * baseW p γ₂ x)) ∧
+      ∀ (Ω : Type v) [Fintype Ω]
+        (alg : Ω → (ι → ℝ) → MetricChain.QueryAlgorithm (ι → Bool)) (P : Ω → ℝ),
+        (∀ ω, 0 ≤ P ω) → ∑ ω, P ω = 1 → ∀ ε δ : ℝ,
+        ε < Real.log (1 + (Real.exp r - 1) / (1 + betaA p u r k (Fintype.card ι))) →
+        (∀ ψ : (ι → Bool) → ℝ, LipH u ψ → 1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+          |(alg ω (oracle1 (refW p) ψ)).output ψ - logA (refW p) ψ| ≤ ε / 2), P ω) →
+        ∀ t : ℝ, 0 ≤ t →
+        1 - 2 * δ ≤
+          (∑ ω, P ω * (((alg ω (oracle1 (refW p)
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x))).queries
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x)).card : ℝ)) *
+            ((Fintype.card ι : ℝ) * (((Fintype.card ι : ℝ) + 1) *
+              (Real.exp (t * r) *
+                rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι))) := by
+  -- `0 < k < n` follows from the hypotheses
+  have hu : 0 ≤ u := (abs_nonneg γ).trans hγ
+  have hR1 : 0 < Real.exp r - 1 := by
+    have h := Real.one_lt_exp_iff.mpr hr
+    linarith
+  have hω0 : 0 ≤ omegaW p u := by
+    unfold omegaW
+    linarith [pTilt_anti hp0 hp1 (by linarith : -u ≤ u)]
+  have hωm : 0 < omegaM p u k (Fintype.card ι) := by
+    by_contra h
+    have h1 := mul_nonpos_of_nonneg_of_nonpos hR1.le (not_lt.mp h)
+    linarith
+  have hmin : 0 < min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι) := by
+    by_contra h
+    have h1 := mul_nonpos_of_nonneg_of_nonpos hω0 (not_lt.mp h)
+    unfold omegaM at hωm
+    linarith
+  have hn : (0 : ℝ) < Fintype.card ι := by
+    have h0 : 0 < Fintype.card ι := Fintype.card_pos_iff.mpr ⟨0⟩
+    exact_mod_cast h0
+  have hk0 : 0 < k := by
+    have h1 : 0 < (k : ℝ) / Fintype.card ι := lt_of_lt_of_le hmin (min_le_left _ _)
+    have h2 : (0 : ℝ) < k := by
+      by_contra h
+      have h3 := div_nonpos_of_nonpos_of_nonneg (not_lt.mp h) hn.le
+      linarith
+    exact_mod_cast h2
+  have hkn : k < Fintype.card ι := by
+    have h1 : 0 < 1 - (k : ℝ) / Fintype.card ι := lt_of_lt_of_le hmin (min_le_right _ _)
+    have h2 : (k : ℝ) / Fintype.card ι < 1 := by linarith
+    rw [div_lt_one hn] at h2
+    exact_mod_cast h2
+  obtain ⟨γ₂, hγ₂, b, hb0, hbβ, hlip, h⟩ := theoremA_group (ι := ι) hp0 hp1 hγ hr hk hcond
+  refine ⟨γ₂, hγ₂, b, hb0, hbβ, hlip, fun Ω _ alg P hP hP1 ε δ hε hcorr t ht => ?_⟩
+  have h1 := h Ω alg P hP hP1 ε δ hε hcorr
+  have hH := Hkr_le_chernoff (ι := ι) (u := u) (γ := γ) (r := r) hp0 hp1 ht hk0 hkn
+  have hEQ : 0 ≤ ∑ ω, P ω * (((alg ω (oracle1 (refW p)
+      fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x))).queries
+      fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x)).card : ℝ) :=
+    Finset.sum_nonneg fun ω _ => mul_nonneg (hP ω) (Nat.cast_nonneg _)
+  exact h1.trans (mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hH hn.le) hEQ)
+
+open Classical in
+/-- **Theorem A on `{0,1}ⁿ` with the cyclic shifts, the Chernoff form:** for every `t ≥ 0`,
+`1 − 2δ ≤ E|Q(ψ₀)| · n(n + 1) · e^{tr} · ρ_t(k/n; γ)ⁿ`. -/
+theorem theoremA_fin_chernoff {n : ℕ} [NeZero n] {p u γ r : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    (hγ : |γ| ≤ u) (hr : 0 < r) {k : ℕ} (hk : k ≤ n)
+    (hcond : 1 < (Real.exp r - 1) * omegaM p u k n) :
+    ∃ γ₂ : ℝ, (γ₂ = -u ∨ γ₂ = u) ∧ ∃ b : ℝ, 0 ≤ b ∧ b ≤ betaA p u r k n ∧
+      LipH u (fun x : Fin n → Bool => -Real.log (baseW p γ x + b * baseW p γ₂ x)) ∧
+      ∀ (Ω : Type v) [Fintype Ω]
+        (alg : Ω → (Fin n → ℝ) → MetricChain.QueryAlgorithm (Fin n → Bool)) (P : Ω → ℝ),
+        (∀ ω, 0 ≤ P ω) → ∑ ω, P ω = 1 → ∀ ε δ : ℝ,
+        ε < Real.log (1 + (Real.exp r - 1) / (1 + betaA p u r k n)) →
+        (∀ ψ : (Fin n → Bool) → ℝ, LipH u ψ → 1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+          |(alg ω (oracle1 (refW p) ψ)).output ψ - logA (refW p) ψ| ≤ ε / 2), P ω) →
+        ∀ t : ℝ, 0 ≤ t →
+        1 - 2 * δ ≤
+          (∑ ω, P ω * (((alg ω (oracle1 (refW p)
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x))).queries
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x)).card : ℝ)) *
+            ((n : ℝ) * (((n : ℝ) + 1) *
+              (Real.exp (t * r) * rhoT p u γ t ((k : ℝ) / n) ^ n))) := by
+  have hk' : k ≤ Fintype.card (Fin n) := by
+    rw [Fintype.card_fin]
+    exact hk
+  have hcond' : 1 < (Real.exp r - 1) * omegaM p u k (Fintype.card (Fin n)) := by
+    rw [Fintype.card_fin]
+    exact hcond
+  have h := theoremA_group_chernoff (ι := Fin n) (γ := γ) hp0 hp1 hγ hr hk' hcond'
+  rw [Fintype.card_fin] at h
+  exact h
+
+/-! # Part 11: the last display of Theorem A (the constant `C_m`) -/
+
+/-- `C_m = 1 + 2/m̲ + 2/ω_m`, `m̲ = min(k/n, 1 − k/n)`. -/
+def CmA (p u : ℝ) (k n : ℕ) : ℝ :=
+  1 + 2 / min ((k : ℝ) / n) (1 - (k : ℝ) / n) + 2 / omegaM p u k n
+
+theorem rhoT_nonneg {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (u γ t : ℝ) {m : ℝ} (hm0 : 0 ≤ m)
+    (hm1 : m ≤ 1) : 0 ≤ rhoT p u γ t m :=
+  le_max_of_le_left (add_nonneg
+    (mul_nonneg (by linarith) (Real.rpow_nonneg (ratioS_pos hp0 hp1 u γ false true).le t))
+    (mul_nonneg hm0 (Real.rpow_nonneg (ratioS_pos hp0 hp1 u γ true true).le t)))
+
+open Classical in
+/-- **Theorem A, the last display (every `n`; any finite group of sites).**  `0 < p < 1`,
+`u > 0`, `|γ| ≤ u`, `ε ≥ 0`, `0 < k < n`.  With the depth `r = ln C_m + ε` there are
+`γ₂ ∈ {−u, +u}` and `b ∈ [0, 2/m̲]` such that `ψ₀ = −ln(w̃_γ + b·w̃_{γ₂}) ∈ L_u` and every
+`(ε/2, δ)`-correct oracle algorithm satisfies, **for every `t ∈ [0, 1]`**,
+
+    1 − 2δ ≤ E|Q(ψ₀)| · n(n + 1) · C_m · e^{tε} · ρ_t(k/n; γ)ⁿ,
+
+i.e. `E|Q(ψ₀)| ≥ (1 − 2δ)·e^{−tε}·ρ_t(k/n; γ)^{−n}/(C_m·n(n + 1))`.  The instance does not depend
+on `t`.  (The report takes `r = ln(1 + max{2/ω_m, (1 + 2/m̲)(e^ε − 1)}) + η`, `η ↓ 0`; the fixed
+choice `e^r = C_m e^ε` gives the stated bound at one instance.) -/
+theorem theoremA_group_Cm {p u γ ε : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hu : 0 < u)
+    (hγ : |γ| ≤ u) (hε : 0 ≤ ε) {k : ℕ} (hk0 : 0 < k) (hkn : k < Fintype.card ι) :
+    ∃ γ₂ : ℝ, (γ₂ = -u ∨ γ₂ = u) ∧ ∃ b : ℝ, 0 ≤ b ∧
+      b ≤ 2 / min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι) ∧
+      LipH u (fun x : ι → Bool => -Real.log (baseW p γ x + b * baseW p γ₂ x)) ∧
+      ∀ (Ω : Type v) [Fintype Ω]
+        (alg : Ω → (ι → ℝ) → MetricChain.QueryAlgorithm (ι → Bool)) (P : Ω → ℝ),
+        (∀ ω, 0 ≤ P ω) → ∑ ω, P ω = 1 → ∀ δ : ℝ,
+        (∀ ψ : (ι → Bool) → ℝ, LipH u ψ → 1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+          |(alg ω (oracle1 (refW p) ψ)).output ψ - logA (refW p) ψ| ≤ ε / 2), P ω) →
+        ∀ t : ℝ, 0 ≤ t → t ≤ 1 →
+        1 - 2 * δ ≤
+          (∑ ω, P ω * (((alg ω (oracle1 (refW p)
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x))).queries
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x)).card : ℝ)) *
+            ((Fintype.card ι : ℝ) * (((Fintype.card ι : ℝ) + 1) *
+              (CmA p u k (Fintype.card ι) * (Real.exp (t * ε) *
+                rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι)))) := by
+  have hn : (0 : ℝ) < Fintype.card ι := by exact_mod_cast lt_trans hk0 hkn
+  have hm0 : 0 < (k : ℝ) / Fintype.card ι := div_pos (by exact_mod_cast hk0) hn
+  have hm1 : (k : ℝ) / Fintype.card ι < 1 := (div_lt_one hn).mpr (by exact_mod_cast hkn)
+  have hmm : 0 < min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι) :=
+    lt_min hm0 (by linarith)
+  have hω : 0 < omegaW p u := by
+    unfold omegaW
+    linarith [pTilt_strictAnti hp0 hp1 (by linarith : -u < u)]
+  have hωm : 0 < omegaM p u k (Fintype.card ι) := mul_pos hω hmm
+  have ha : 0 < 2 / min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι) :=
+    div_pos two_pos hmm
+  have hc : 0 < 2 / omegaM p u k (Fintype.card ι) := div_pos two_pos hωm
+  have hCm : 1 < CmA p u k (Fintype.card ι) := by
+    unfold CmA
+    linarith
+  -- the depth
+  obtain ⟨r, hrdef⟩ : ∃ r : ℝ, r = Real.log (CmA p u k (Fintype.card ι)) + ε := ⟨_, rfl⟩
+  have hexp : Real.exp r = CmA p u k (Fintype.card ι) * Real.exp ε := by
+    rw [hrdef, Real.exp_add, Real.exp_log (by linarith)]
+  have hLpos : 0 < Real.log (CmA p u k (Fintype.card ι)) := Real.log_pos hCm
+  have hr : 0 < r := by
+    rw [hrdef]
+    linarith
+  have hεexp : 1 ≤ Real.exp ε := Real.one_le_exp hε
+  have hR : 2 / min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι) +
+      2 / omegaM p u k (Fintype.card ι) ≤ Real.exp r - 1 := by
+    rw [hexp]
+    unfold CmA
+    nlinarith [mul_nonneg (by linarith : (0 : ℝ) ≤ 1 +
+      2 / min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι) +
+      2 / omegaM p u k (Fintype.card ι)) (sub_nonneg.mpr hεexp)]
+  have hR1 : 0 < Real.exp r - 1 := by linarith
+  have h2 : 2 / omegaM p u k (Fintype.card ι) < Real.exp r - 1 := by linarith
+  have h3 : 2 < (Real.exp r - 1) * omegaM p u k (Fintype.card ι) := by
+    have h := mul_lt_mul_of_pos_right h2 hωm
+    rw [div_mul_cancel₀ _ hωm.ne'] at h
+    exact h
+  have hcond : 1 < (Real.exp r - 1) * omegaM p u k (Fintype.card ι) := by linarith
+  have hκ : omegaM p u k (Fintype.card ι) / 2 < kappaA p u r k (Fintype.card ι) := by
+    unfold kappaA
+    have h4 : 1 / (Real.exp r - 1) < omegaM p u k (Fintype.card ι) / 2 := by
+      rw [div_lt_div_iff₀ hR1 two_pos]
+      linarith
+    linarith
+  have hκpos : 0 < kappaA p u r k (Fintype.card ι) := by linarith
+  have hβ : betaA p u r k (Fintype.card ι) <
+      2 / min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι) := by
+    unfold betaA
+    rw [div_lt_div_iff₀ hκpos hmm]
+    unfold omegaM at hκ
+    linarith
+  have hβ0 : 0 ≤ betaA p u r k (Fintype.card ι) := div_nonneg hω.le hκpos.le
+  have hthr : ε < Real.log (1 + (Real.exp r - 1) / (1 + betaA p u r k (Fintype.card ι))) := by
+    rw [Real.lt_log_iff_exp_lt (add_pos_of_pos_of_nonneg one_pos
+      (div_nonneg hR1.le (by linarith)))]
+    have h5 : (1 + 2 / min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι)) *
+        (Real.exp ε - 1) ≤ Real.exp r - 1 := by
+      rw [hexp]
+      unfold CmA
+      nlinarith [mul_nonneg hc.le (by linarith : (0 : ℝ) ≤ Real.exp ε)]
+    have h6 : Real.exp ε - 1 < (Real.exp r - 1) / (1 + betaA p u r k (Fintype.card ι)) := by
+      rw [lt_div_iff₀ (by linarith)]
+      rcases eq_or_lt_of_le (sub_nonneg.mpr hεexp) with h0 | hpos
+      · rw [← h0, zero_mul]
+        exact hR1
+      · have h7 := mul_lt_mul_of_pos_left
+          (by linarith : 1 + betaA p u r k (Fintype.card ι) <
+            1 + 2 / min ((k : ℝ) / Fintype.card ι) (1 - (k : ℝ) / Fintype.card ι)) hpos
+        linarith
+    linarith
+  obtain ⟨γ₂, hγ₂, b, hb0, hbβ, hlip, h⟩ :=
+    theoremA_group_chernoff (ι := ι) hp0 hp1 hγ hr hkn.le hcond
+  refine ⟨γ₂, hγ₂, b, hb0, by linarith, hlip, fun Ω _ alg P hP hP1 δ hcorr t ht0 ht1 => ?_⟩
+  have h1 := h Ω alg P hP hP1 ε δ hthr hcorr t ht0
+  have hexpt : Real.exp (t * r) ≤ CmA p u k (Fintype.card ι) * Real.exp (t * ε) := by
+    rw [hrdef, mul_add, Real.exp_add]
+    refine mul_le_mul_of_nonneg_right ?_ (Real.exp_pos _).le
+    calc Real.exp (t * Real.log (CmA p u k (Fintype.card ι)))
+        ≤ Real.exp (Real.log (CmA p u k (Fintype.card ι))) :=
+          Real.exp_le_exp.mpr (by nlinarith)
+      _ = CmA p u k (Fintype.card ι) := Real.exp_log (by linarith)
+  have hρ : 0 ≤ rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι :=
+    pow_nonneg (rhoT_nonneg hp0 hp1 u γ t hm0.le hm1.le) _
+  have hEQ : 0 ≤ ∑ ω, P ω * (((alg ω (oracle1 (refW p)
+      fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x))).queries
+      fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x)).card : ℝ) :=
+    Finset.sum_nonneg fun ω _ => mul_nonneg (hP ω) (Nat.cast_nonneg _)
+  refine h1.trans (mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left
+    (mul_le_mul_of_nonneg_left ?_ (by linarith)) hn.le) hEQ)
+  calc Real.exp (t * r) * rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι
+      ≤ CmA p u k (Fintype.card ι) * Real.exp (t * ε) *
+          rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι :=
+        mul_le_mul_of_nonneg_right hexpt hρ
+    _ = CmA p u k (Fintype.card ι) * (Real.exp (t * ε) *
+          rhoT p u γ t ((k : ℝ) / Fintype.card ι) ^ Fintype.card ι) := mul_assoc _ _ _
+
+open Classical in
+/-- **Theorem A on `{0,1}ⁿ` with the cyclic shifts, the last display:** for `ε ≥ 0`, `0 < k < n`
+there is an instance `ψ₀ = −ln(w̃_γ + b·w̃_{γ₂}) ∈ L_u` at which every `(ε/2, δ)`-correct oracle
+algorithm has, for every `t ∈ [0, 1]`,
+`1 − 2δ ≤ E|Q(ψ₀)| · n(n + 1) · C_m · e^{tε} · ρ_t(k/n; γ)ⁿ`. -/
+theorem theoremA_fin_Cm {n : ℕ} [NeZero n] {p u γ ε : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    (hu : 0 < u) (hγ : |γ| ≤ u) (hε : 0 ≤ ε) {k : ℕ} (hk0 : 0 < k) (hkn : k < n) :
+    ∃ γ₂ : ℝ, (γ₂ = -u ∨ γ₂ = u) ∧ ∃ b : ℝ, 0 ≤ b ∧
+      b ≤ 2 / min ((k : ℝ) / n) (1 - (k : ℝ) / n) ∧
+      LipH u (fun x : Fin n → Bool => -Real.log (baseW p γ x + b * baseW p γ₂ x)) ∧
+      ∀ (Ω : Type v) [Fintype Ω]
+        (alg : Ω → (Fin n → ℝ) → MetricChain.QueryAlgorithm (Fin n → Bool)) (P : Ω → ℝ),
+        (∀ ω, 0 ≤ P ω) → ∑ ω, P ω = 1 → ∀ δ : ℝ,
+        (∀ ψ : (Fin n → Bool) → ℝ, LipH u ψ → 1 - δ ≤ ∑ ω ∈ univ.filter (fun ω =>
+          |(alg ω (oracle1 (refW p) ψ)).output ψ - logA (refW p) ψ| ≤ ε / 2), P ω) →
+        ∀ t : ℝ, 0 ≤ t → t ≤ 1 →
+        1 - 2 * δ ≤
+          (∑ ω, P ω * (((alg ω (oracle1 (refW p)
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x))).queries
+              fun x => -Real.log (baseW p γ x + b * baseW p γ₂ x)).card : ℝ)) *
+            ((n : ℝ) * (((n : ℝ) + 1) *
+              (CmA p u k n * (Real.exp (t * ε) * rhoT p u γ t ((k : ℝ) / n) ^ n)))) := by
+  have hkn' : k < Fintype.card (Fin n) := by
+    rw [Fintype.card_fin]
+    exact hkn
+  have h := theoremA_group_Cm (ι := Fin n) (γ := γ) hp0 hp1 hu hγ hε hk0 hkn'
+  rw [Fintype.card_fin] at h
+  exact h
+
 end TheoremA
 
 end ScienceL3
@@ -2495,3 +3096,10 @@ end ScienceL3
 #print axioms ScienceL3.Hkr_pos
 #print axioms ScienceL3.theoremA_group_div
 #print axioms ScienceL3.theoremA_fin
+#print axioms ScienceL3.binomial_mode_bound
+#print axioms ScienceL3.card_wt_eq
+#print axioms ScienceL3.Hkr_le_chernoff
+#print axioms ScienceL3.theoremA_group_chernoff
+#print axioms ScienceL3.theoremA_fin_chernoff
+#print axioms ScienceL3.theoremA_group_Cm
+#print axioms ScienceL3.theoremA_fin_Cm

@@ -21,7 +21,14 @@
 'ScienceL3.Hkr_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.theoremA_group_div' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.theoremA_fin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.binomial_mode_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.card_wt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.Hkr_le_chernoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.theoremA_group_chernoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.theoremA_fin_chernoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.theoremA_group_Cm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.theoremA_fin_Cm' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-real	0m29.918s
-user	0m23.361s
-sys	0m2.304s
+real	1m39.271s
+user	0m45.918s
+sys	0m2.403s

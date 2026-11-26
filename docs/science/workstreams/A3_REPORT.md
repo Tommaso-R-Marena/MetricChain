@@ -27,7 +27,7 @@ to PubMed" and carry DOI links.
 ## How far I got
 
 **Done.**  All six statements are classified (§1, §4), each with the closest statement in print side
-by side and a sentence to write.  About 75 sources were located; 38 were read in the passages that
+by side and a sentence to write.  About 77 sources were located; 38 were read in the passages that
 matter at `[full text]` level (§4.10), among them the three that decide the verdicts: Hoeffding's
 1963 paper (scanned pages), the differential-privacy papers that contain T1's constant and the
 sharpening of O2, and a February 2026 preprint (Block–Shetty) that contains O1 in unhinted form.
@@ -354,10 +354,11 @@ according to PubMed, Lilien, Stevens, Anderson, Donald, J Comput Biol 12(6):740�
 [doi:10.1089/cmb.2005.12.740](https://doi.org/10.1089/cmb.2005.12.740) `[abstract]`: "an efficient deterministic
 approximation algorithm, capable of approximating our scoring function to arbitrary precision".  Later
 members of the family (according to PubMed; `[abstract]` only): Ojewole, Jou, Fowler, Donald, J Comput Biol
-25(7):726–739 (2018), [doi:10.1089/cmb.2017.0267](https://doi.org/10.1089/cmb.2017.0267) (BBK\*); Jou, Holt, Lowegard,
-Donald (2020), [doi:10.1089/cmb.2019.0315](https://doi.org/10.1089/cmb.2019.0315) (MARK\*: "provable ε-approximations
-to partition functions … by computing provable, admissible pairwise-minimized energy lower bounds … and
-using the A* enumeration algorithm"); Lowegard et al., PLoS Comput Biol 16(6):e1007447 (2020),
+25(7):726–739 (2018), [doi:10.1089/cmb.2017.0267](https://doi.org/10.1089/cmb.2017.0267) (BBK\*); the MARK\* paper,
+[doi:10.1089/cmb.2019.0315](https://doi.org/10.1089/cmb.2019.0315) (PMID 31855059; authors and year — Jou, Holt, Lowegard, Donald, 2020 — as in workstream P2's record of the same
+entry; from the abstract retrieved by me: "provable ε-approximations to partition functions … by
+computing provable, admissible pairwise-minimized energy lower bounds … and using the A* enumeration
+algorithm"); Lowegard et al., PLoS Comput Biol 16(6):e1007447 (2020),
 [doi:10.1371/journal.pcbi.1007447](https://doi.org/10.1371/journal.pcbi.1007447) ("Often, reaching an
 ε-approximation … takes a prohibitive amount of time and space").  *(This literature is about sequence
 design, which is outside our scope; it is cited only for the certificate scheme on one fixed-sequence
@@ -466,9 +467,19 @@ randomised verifier (d).  In machine learning: Grosse–Ghahramani–Adams (§4.
 are given a hint in the form of an exact posterior sample" — for a different object (a sample of the
 target, which gives the *upper* bound by running the estimator in reverse).  In statistics: two-point
 testing lower bounds (Devroye et al., Block–Shetty) are already "hinted" — both candidates are known —
-which is why, in the sampling model, a hint cannot beat them.  One search on "verification cheaper
-than estimation" returned an interactive-proofs line (arXiv:2404.08158, `[search snippet]`: "sample
-complexity of O(1/ε) for … PAC-verification"), not read.
+which is why, in the sampling model, a hint cannot beat them.  In learning theory the counterpart has a
+name, **PAC verification**: Goldwasser, Rothblum, Shafer, Yehudayoff, "Interactive proofs for verifying
+machine learning", ECCC Report No. 58 (2020) `[abstract]`: "using a source of labeled data and interaction
+with an untrusted prover, what is the complexity of verifying that a given hypothesis is 'approximately
+correct'? … for a specific hypothesis class, verification is significantly cheaper than learning in terms
+of the number of random samples required, even if the verifier engages with the prover only in a
+single-round (NP-like) protocol … Third, we show that verification is not always more efficient"; and
+Gur, Jahanara, Khodabandeh, Rajgopal, Salamatian, Shinkar, arXiv:2404.08158v1 `[abstract, Thm 1.4]`: "the
+verifier uses at most O(1/ε) many random labeled examples".  A single-round protocol with an untrusted
+prover is a hint in the theory division's sense (correct on every input, cheap when the hint is
+right); the objects verified there are hypotheses and their losses, not sums of weights, and I read
+abstracts only.  The parallel is nevertheless exact in one respect: "verification is not always more
+efficient" there, and here the hint is worth nothing at flat instances (A3.3).
 
 *Comparison.*  Known: the cost quantity `Z(lo)/Z(g)` (b); the count `M/ε` for excluding missed mass (a, c);
 the verifier model and the covering/packing duality (d); needle lower bounds linear in the sup-ratio
@@ -802,7 +813,7 @@ outcomes is `experiments/science/ws_A3/NOTES.md`.  No query contained anything i
 | W6 | X | `"A typical approach to estimate an unknown quantity" "design an experiment that produces a random variable Z distributed in [0,1]" … full text pdf download` | academia.edu and ResearchGate listings (both refused) |
 | W7 | S | `Specht 1960 "Zur Theorie der elementaren Mittel" Math. Z. 74 91-98 Specht's theorem "arithmetic mean" "geometric mean" ratio upper bound …` | Springer record; RIMS Kôkyûroku PDFs (two downloaded) |
 | W8 | S | `Liu Fisher Ihler "Probabilistic Variational Bounds for Graphical Models" NIPS 2015 pdf …` | proceedings PDF (downloaded) |
-| W9 | X | `verifying a claimed mean or sum with an untrusted hint: O(1/ε) queries versus Θ(1/ε²) for estimation; "randomized certificate complexity" OR "fractional block sensitivity" of approximate counting / approximate sum; interactive proofs verifying machine learning quadratically fewer samples` | **nothing** on certificate complexity of approximate sums; arXiv:2404.08158 as a side hit (snippet only) |
+| W9 | X | `verifying a claimed mean or sum with an untrusted hint: O(1/ε) queries versus Θ(1/ε²) for estimation; "randomized certificate complexity" OR "fractional block sensitivity" of approximate counting / approximate sum; interactive proofs verifying machine learning quadratically fewer samples` | **nothing** on certificate complexity of approximate sums; arXiv:2404.08158 as a side hit (abstract read afterwards, with the ECCC report it builds on) |
 | W10 | X | `free energy perturbation exponential averaging rigorous finite-sample confidence interval "lower bound" on energy difference bounded perturbation concentration inequality certified error bar Zwanzig estimator non-asymptotic guarantee` | **no** certified error bar for exponential averaging; Kofke's manuscript (downloaded) |
 | W11 | X | `"Rényi divergence" bounded class of targets importance sampling normalizing constant minimax sample complexity lower bound "exp(D_" OR "e^{D_" relative accuracy ε^{-p/(p-1)} OR "ε^{-α/(α-1)}" heavy-tailed importance weights` | **arXiv:2602.23535** (Block–Shetty), Block–Polyanskiy's own page |
 | W12 | X | `query complexity of verifying a claimed partition function or sum of positive weights given a pointwise upper bound on each weight: sampling proportional to the slack …, Θ((U/Z − 1)/ε) evaluations, lower bound by disjoint sets; "sum estimation" "proportional sampling" verification with advice` | **nothing** matching T3; arXiv:2602.23535 and arXiv:2404.02414 again |
@@ -841,7 +852,7 @@ another paper and was discarded.
 (automatic reading; formulas are images), the AIP abstract page of Lu–Kofke II through its DOI
 (automatic reading; the tool would not reproduce the abstract verbatim).
 
-**Direct downloads** (`getpdf.sh`): 65 targets, 52 PDFs (50 distinct papers).  Refused or failed: SIAM (challenge page),
+**Direct downloads** (`getpdf.sh`): 67 targets, 54 PDFs (52 distinct papers).  Refused or failed: SIAM (challenge page),
 CiteSeerX (redirect to archive.org, connection reset), ResearchGate, the former ICSI address of the
 report version of Dagum–Karp–Luby–Ross (404/403), Project Euclid (bot wall), Europe PMC, PMC and PNAS PDFs
 of Gore et al. (challenge pages), one Kyoto repository address (HTML).
@@ -911,7 +922,8 @@ of the bounded-relative-information theorems only), Yunger Halpern et al. (arXiv
 Woolf (arXiv:physics/0208015), Waudby-Smith–Ramdas (arXiv:2010.09686), Naesseth–Lindsten–Blei
 (arXiv:2003.10374), Birrell et al. (arXiv:1911.09580), Huber (arXiv:2210.12861; first page).
 **`[record]` only:** see "What I could not access".
-**`[search snippet]`:** arXiv:2404.08158.
+**`[abstract]`, added last:** Goldwasser–Rothblum–Shafer–Yehudayoff, ECCC Report No. 58 (2020); Gur et al.,
+arXiv:2404.08158v1 (with the statement of Thm 1.4).
 
 ---
 
@@ -922,8 +934,9 @@ Woolf (arXiv:physics/0208015), Waudby-Smith–Ramdas (arXiv:2010.09686), Naesset
    bound is stated in expectation or with probability `1 − δ`, nor its model of computation in the
    authors' words; A3.3(b) uses only what the restatement gives.
 2. **Whether a statement of T3 with a hint exists in property testing or interactive proofs** ("proofs
-   of proximity", verification of learning, annotated data streams).  One extended search, nothing read.
-   This is the literature where "verification costs `1/ε`, estimation `1/ε²`" would be stated if it is.
+   of proximity", PAC verification, annotated data streams).  One extended search; two abstracts read
+   (§4.3).  This is the literature where "verification costs `1/ε`, estimation `1/ε²`" for a mean or a sum
+   would be stated if it is; I did not find it there in the abstracts and did not read the bodies.
 3. **Whether Block–Shetty's lower bounds extend to the query model with atoms and a hint.**  Their
    Theorem 7 assumes a non-atomic base measure; Kunsch–Novak–Rudolf's transfer to general randomised
    algorithms also needs a partition into small equal cells.  On a finite space with heavy states the
@@ -1038,7 +1051,8 @@ Woolf (arXiv:physics/0208015), Waudby-Smith–Ramdas (arXiv:2010.09686), Naesset
   only (PMC returned no text for the one tried).
 * **Dagum & Luby** (1997), **Mathé** (1995), **Durfee & Rogers**, **van Erven & Harremoës**, **McDiarmid**,
   **Cortes–Mansour–Mohri** (2010), **Lou–Dechter–Ihler** (2017), **Gajek–Niemiro–Pokarowski** (2013),
-  **Goldwasser et al.**, **Tal**, **Gilmer–Saks–Srinivasan**, **Kulkarni–Tal**, **Grossman–Komargodski–Naor**: not
-  located in an open copy or not looked for beyond one query; none is quoted.
+  **Tal**, **Gilmer–Saks–Srinivasan**, **Kulkarni–Tal**, **Grossman–Komargodski–Naor**: not located in an open copy
+  or not looked for beyond one query; none is quoted.  (Years in this list that are not supported by a
+  record in §4.9 are from the brief or from memory.)
 * **archive.org** is unreachable from this machine (connection reset by the proxy), which closed the
   usual route to old technical reports.

@@ -54,3 +54,18 @@ for r in sorted([r for r in runs if r["siteres"] and r["kind"] == "gbn2"], key=k
     e = np.array(r["osc_rem"]) / KT if "osc_rem" in r else None
     print(f"| {r['seq']}/{r['bb']} τ{r['tau']:.2f} | {r['m']} | {fmt(c.max())} | {fmt(float((c ** 2).sum()))} | "
           + (f"{fmt(e.max())} | {fmt(float((e ** 2).sum()))} |" if e is not None else "— | — |"))
+
+print("\n### Certified inputs of the Bennett bracket (kT units; site-penalty models; K = true Jensen gap, by enumeration)\n")
+print("| instance | m | model | b_cert | b enum | s2_cert | s2 enum | W(b_cert, s2_cert) nats | W(enum b, s2) | true K | Bennett bracket width (nats), N |")
+print("|---|---|---|---|---|---|---|---|---|---|---|")
+for r in sorted([r for r in runs if r["siteres"] and r["kind"] == "gbn2" and "bennett" in r], key=key):
+    for nm, lab in (("lower", "m_-"), ("mid", "m_0")):
+        bd = r["bennett"][nm]
+        en = "b_enum" in bd
+        bw = f"{fmt(r['bennett_bracket_hi'] - r['bennett_bracket_lo'])}, {r['N']}" if nm == "lower" and "bennett_bracket_lo" in r else "—"
+        print(f"| {r['seq']}/{r['bb']} τ{r['tau']:.2f} | {r['m']} | {lab} | {fmt(bd['b_cert'])} | {fmt(bd['b_enum']) if en else '—'} | {fmt(bd['s2_cert'])} | "
+              f"{fmt(bd['s2_enum']) if en else '—'} | {fmt(bd['W_cert'])} | {fmt(bd['W_enum']) if en else '—'} | {fmt(bd['K_true']) if en else '—'} | {bw} |")
+nb = [r for r in runs if "bennett" in r and r.get("enum")]
+print(f"\nBennett checks: {len(nb)} enumerated runs with both models; asserted in every one: b <= b_cert, Var r <= s2_cert, 0 <= K <= W(enum) <= W(cert); "
+      f"true ln Z inside the Bennett bracket in {sum(1 for r in nb if r.get('truth_in_bennett_bracket'))} of {sum(1 for r in nb if 'truth_in_bennett_bracket' in r)} runs; "
+      f"largest relative deviation of the transfer-matrix moments from direct sums: {max(max(r['bennett'][nm].get('moments_dev', 0.0) for nm in ('lower', 'mid')) for r in nb) if nb else 0:.1e}")

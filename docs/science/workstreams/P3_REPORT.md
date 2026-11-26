@@ -417,7 +417,63 @@ same instance says that the *true* third-order budget is large there as well.
 `N_ball` evaluations of `g`.  They are polynomially many and no joint state space is enumerated,
 but the claim "a floor by analysis" holds only in the combined form of Theorem 5.
 
-### 2.9 What is certified, by what
+### 2.9 Proposition 6 [P; checked by enumeration] — certified inputs of the floor-plus-variance (Bennett) bracket
+
+*(Added at the coordinator's request during the work: a certified one-sided floor of the
+remainder beyond a stated pairwise model, a certified bound of its variance under that
+model, and the resulting `W(b, s²)`; addendum A17, part 7.)*
+
+Let `m₋ ≤ E ≤ m₊` be the models of Theorem 5 and `u := β(m₊ − m₋) ≥ 0` — an **explicit banded
+pairwise function**, known without evaluating `E` anywhere outside the ball.
+
+*(i) Model `m := m₋`, remainder `r := β(E − m₋)`.*  Then on all of `X`
+`lo := 0 ≤ r ≤ u`; hence, with expectations under `π_{m₋}`,
+
+```
+b := 𝔼 r − inf r  ≤  b_cert := 𝔼 u,            Var r  ≤  𝔼 r²  ≤  s²_cert := 𝔼 u².
+```
+
+*(ii) Midpoint model `m₀ := (m₋ + m₊)/2`, `r₀ := β(E − m₀)`.*  Then `|r₀| ≤ u/2`, so the constant
+`lo₀ := −βρ_cert/2` is a floor of `r₀`, and under `π_{m₀}`
+
+```
+b  ≤  b_cert := (𝔼 u + βρ_cert)/2,             Var r₀  ≤  s²_cert := 𝔼 u² / 4.
+```
+
+*(iii) Both moments are computed exactly* (up to double rounding of sums of positive terms): the
+elimination of Theorem 5 is run over polynomials of degree 2, i.e. the conditional means of
+the partial sum of `u` and of its square are propagated with the message
+(`pwmodel.BandModel.moments`; cost `O(n k^{w+1})`).
+*(iv) Consequently* (Bennett's inequality in its sharp two-point form, [K] classical, as stated
+in addendum A17(7); `W` is non-decreasing in both arguments because the class
+`{Y ≤ b, 𝔼Y = 0, Var Y ≤ s²}` grows with them)
+
+```
+0  ≤  K := ln Z(E) − ln Z(m) + 𝔼_{π_m} r  ≤  W(b_cert, s²_cert),     W(b, s²) = ln[(b² e^{−s²/b} + s² e^{b})/(b² + s²)],
+```
+
+*and with `N` samples of `π_m` and Chebyshev's inequality with the **certified** variance, with
+probability `≥ 1 − δ`:*
+`ln Z(E) ∈ [ln Z(m) − r̄ − t, ln Z(m) − r̄ + t + W(b_cert, s²_cert)]`, `t = √(s²_cert/(Nδ))`.
+
+*Proof.*  (i) and (ii) are the sandwich `m₋ ≤ E ≤ m₊` read in units of `k_BT`; `𝔼r ≤ 𝔼u`
+because `r ≤ u` pointwise; `Var r ≤ 𝔼r²`.  (iv) Apply Bennett's bound to `Y = 𝔼r − r ≤ b`. ∎
+
+*Checks.*  In every enumerated run the script computes the exact `b`, `Var r`, `K` of both
+models and asserts `b ≤ b_cert`, `Var r ≤ s²_cert`, `0 ≤ K ≤ W(b, Var r) ≤ W(b_cert, s²_cert)`,
+and compares the transfer-matrix moments of `u` with direct sums (agreement `< 10⁻⁹` relative):
+no failure (§3.6).
+
+*What decides the size of the certified inputs.*  `u` consists of twice the remainder
+penalties plus the slack of the minorants of the evaluated terms of order `3 … m−1`; it knows
+nothing about the *actual* remainder, which is 250–800 times smaller than its certified bound.
+With a **constant** remainder bound `u ≈ 2βΓ_m` everywhere, so `b_cert ≈ 2βΓ_m`, `s²_cert ≈ (2βΓ_m)²`
+however concentrated `r` is: the route is then no better than the range.  With **site penalties**
+`u` vanishes at the anchor and grows with the number of sites off the anchor, and the certified
+`b` and `s²` are small whenever `π_m` stays near the anchor.  This is the same lesson as for the
+floor itself: the certificate must be a function, not a constant.
+
+### 2.10 What is certified, by what
 
 | statement | status |
 |---|---|

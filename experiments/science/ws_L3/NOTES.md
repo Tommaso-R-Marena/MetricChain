@@ -108,3 +108,15 @@ Lean 4.31.0 + pinned Mathlib (v4.31.0, rev fabf563a).  Compile command (single f
   powers pointwise; (B) `Σ_s Bern(m)ⁿ(s) ∏ ratio^t = ∏_i [...]` by `sum_prodW`; (C) `refW m s = m^k(1−m)^{n−k}` on `T_k`;
   (D) `|T_k| = C(n,k)`; (E) binomial mode bound `1 ≤ (n+1)·C(n,k)(k/n)^k(1−k/n)^{n−k}` by the ratio argument and
   `add_pow`.
+* 00:39 — **the Chernoff form of Theorem A is machine-checked** (`TheoremA.lean` Part 10, compiled exit 0 first time,
+  no warning): `binomPmf_step`, `binomPmf_le_mode`, `binomial_mode_bound` (`1 ≤ (n+1)·C(n,k)(k/n)^k(1−k/n)^{n−k}`),
+  `card_wt_eq` (`|T_j| = C(n,j)`), `refW_eq_pow`, `one_le_of_dipW_pos` (Markov with real powers),
+  `dipCount_mul_le`, `Hkr_le_chernoff` (`H_{k,r} ≤ (n+1) e^{tr} ρ_t(k/n;γ)ⁿ`, `t ≥ 0`, `0 < k < n`),
+  `theoremA_group_chernoff`, `theoremA_fin_chernoff`.  Numerics S8 (1 680 cases, n = 2..8) passes.
+  Remaining of Theorem A: only the "in particular" with `C_m` (a choice of `r`).
+* 00:43 — **the last display of Theorem A is machine-checked** (`TheoremA.lean` Part 11: `theoremA_group_Cm`,
+  `theoremA_fin_Cm`): with the explicit depth `r = ln C_m + ε` (so `e^r = C_m e^ε`) one instance `ψ₀` (independent of
+  `t`) satisfies `1 − 2δ ≤ E|Q(ψ₀)|·n(n+1)·C_m·e^{tε}·ρ_t(k/n;γ)ⁿ` for all `t ∈ [0,1]`.  This replaces the report's
+  "`r = ln(1 + max{…}) + η`, `η ↓ 0`" (finding F4: there the instance depends on `η`).  Checks used:
+  `e^r − 1 ≥ 2/m̲ + 2/ω_m` ⇒ `(e^r−1)ω_m > 2`, `κ > ω_m/2`, `β < 2/m̲`; `C_m e^ε − 1 ≥ (1 + 2/m̲)(e^ε − 1)`;
+  `e^{tr} = C_m^t e^{tε} ≤ C_m e^{tε}`.  Compiled exit 0, no warning.  So all three displays of Theorem A are [V].

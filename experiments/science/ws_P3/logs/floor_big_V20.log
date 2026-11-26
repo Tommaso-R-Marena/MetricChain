@@ -1,1 +1,17 @@
 === V20 on P2, tau 0.7, gbn2, truncation order m = 4: atoms 332, sites 20, states/site 3..3, |X| = 3.49e+09; anchor E = -306.5687 kcal/mol; band w = 8
+    site penalties gamma_i (kcal/mol) = [0.0416 0.0786 0.1136 0.1473 0.1654 0.1718 0.1742 0.175  0.1753 0.1754
+ 0.1754 0.1752 0.1749 0.1741 0.1715 0.1645 0.1452 0.1083 0.0734 0.0407]; sum = 2.82134e+00 (= Gamma_4 up to rounding); floating-point allowance per site <= 4.96e-05
+    Gamma_4 = 2.82134e+00 kcal/mol (self 1.922e-02, cross 2.802e+00) + floating-point allowance 1.00e-07 = 1.00000e-07 = 0.0000 kT   [25.5s]
+      ball evaluations 4096/9921  8s
+    ball of radius 3: 9921 evaluations of g (0.000285 % of the domain) [22.6s]; sum_T max|d_T| (order 3) = 2.114e-01
+    models: ln Z(m_-) = 519.219855, ln Z(m_+) = 517.484288: deterministic certified bracket of ln Z(E), width 1.73557 nats; rho_cert = max(m_+ - m_-) = 5.75844 kcal/mol = 9.6592 kT (min 1.59e-05); min m_- = -306.5687, min m_+ = -306.5687 kcal/mol [0.1s]
+    BENNETT inputs, certified (kT units): model m_-: floor lo = 0 of r = beta(E - m_-), b_cert = E u = 2.1087e+00, s2_cert = E u^2 = 5.2679e+00, W(b, s2) = 1.5051e+00 nats | midpoint model m_0: b_cert = 5.6927e+00, s2_cert = 9.2217e-01, W = 2.2012e+00 nats (ln Z(m_0) = 518.263449) [0.1s]
+    SAMPLING: N = 50000 exact samples of pi_(m_-) (29321 distinct; mean number of sites off the anchor 4.27), E evaluated at each [148.9s]; W in [0.0001, 1], mean 0.383001, std 1.69e-01; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [518.244153, 518.275870] (width 0.03172 nats); point estimate 518.260137; Gibbs-Bogoliubov lower bound (same confidence) 518.103473; mean gap 6.3057e-01, max sampled gap 1.9656e+00 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [515.922749, 519.219846] (width 3.29710 nats); W sampled in [0.036993, 0.999991]
+    Bennett bracket (certified b, s2; mean by Chebyshev, delta = 0.05): ln Z(E) in [518.116235, 519.713174] (width 1.59694 nats = W_cert 1.51e+00 + 2 x 4.59e-02)
+    [200s] -> out/floor_V20_P2_t0.70_gbn2_m4_siteres.json
+=== V20 on P2, tau 0.7, gbn2, truncation order m = 5: atoms 332, sites 20, states/site 3..3, |X| = 3.49e+09; anchor E = -306.5687 kcal/mol; band w = 8
+    site penalties gamma_i (kcal/mol) = [0.0011 0.002  0.0029 0.0038 0.0047 0.0052 0.0054 0.0055 0.0055 0.0055
+ 0.0055 0.0055 0.0055 0.0054 0.0051 0.0046 0.0037 0.0028 0.0019 0.001 ]; sum = 8.22273e-02 (= Gamma_5 up to rounding); floating-point allowance per site <= 4.37e-04
+    Gamma_5 = 8.22273e-02 kcal/mol (self 9.749e-05, cross 8.213e-02) + floating-point allowance 1.00e-07 = 1.00000e-07 = 0.0000 kT   [69.4s]
+      ball evaluations 4096/87441  17s

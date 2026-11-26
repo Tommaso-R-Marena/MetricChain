@@ -1470,6 +1470,40 @@ uncertified in every such scheme is the part of the true energy that is in neith
 model nor the explicit remainder (fourth order and beyond): the same question one order
 up, with — if the pattern of (6) continues — a smaller floor.
 
+### (8) The same for a chain as reference: contraction coefficients in place of independence [P; added after checkpoint 37]
+
+A17.6 and the variance bound of (7) assumed a product reference.  A known part with
+nearest-neighbour couplings along the chain is a Markov chain, and the martingale
+method gives the same statements with computable constants.
+
+**Proposition A17.8 (Markov-chain reference) [P — the martingale method; in the
+literature for Markov chains under the names of Marton and of Kontorovich–Ramanan,
+**from memory, unverified**; 700 random chains and remainders by exact enumeration, `n ≤ 9`,
+alphabets of 2–4 letters: no violation, largest ratios `0.98` for the variance and the
+moment generating function].**  Let `π` be a Markov chain on `S_1 × … × S_n` with kernels
+`P_k` from `x_k` to `x_{k+1}` and Dobrushin coefficients
+`θ_k = max_{a,a′} TV(P_k(a,·), P_k(a′,·))`; let `r` have one-site oscillations `c_j`; put
+
+    C_i := Σ_{j ≥ i} c_j · θ_i θ_{i+1} ⋯ θ_{j−1}        (C_i = c_i for a product measure; C_i = Σ_{j≥i} c_j if nothing mixes).
+
+Then `Var_π r ≤ ¼ Σ_i C_i²` and `ln E_π e^{λ(r − E r)} ≤ λ² Σ_i C_i²/8` for every real `λ`; hence, for
+`π_g ∝ π e^{−r}`, `D_p(π_g‖π) ≤ p² Σ_i C_i²/(8(p−1))`, in particular `D_2 ≤ Σ_i C_i²/2`.
+*Proof.*  Let `M_i = E[r | x_1 … x_i]`.  For two values `a, a′` of `x_i` and the same past, couple
+the two futures by the maximal coupling of each transition, staying together once
+they meet: `P(x_j ≠ x′_j) ≤ θ_i ⋯ θ_{j−1}`.  Since `r(x) − r(x′) ≤ Σ_j c_j 1[x_j ≠ x′_j]`, the two
+conditional expectations differ by at most `C_i`; so the martingale increment
+`M_i − M_{i−1}` has conditional range at most `C_i`, conditional variance at most `C_i²/4`, and
+Hoeffding's lemma applies to it.  Sum the variances; multiply the conditional moment
+generating functions.  The divergence bound is the proof of A17.6.  ∎
+*What it gives.*  With `θ_k ≤ θ < 1` and `c_j ≤ c`: `C_i ≤ c/(1 − θ)`, so all bounds of A17.6
+and (7) hold for a chain with `c` replaced by `c/(1 − θ)` — a correlation length in units
+of sites.  Everything is computed from the transfer matrices of the known part; no
+sampling and no enumeration.  For a known part of bounded tree-width, block the sites.
+*What it does not give.*  The size of the bound: on the real instances of (6) even the
+product-measure form is 4–100 times above the measured `D_2`, and `1/(1−θ)²` makes it
+worse.  It is a certificate of the right kind with the wrong constant for apolar side
+chains; the sharper inputs remain the one-sided floor and the variance of (7).
+
 ### Reading (kept apart from the statements)
 
 1. **"Independent of the size of the system" is true of a constant box and moves the

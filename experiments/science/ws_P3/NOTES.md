@@ -215,3 +215,25 @@ Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and i
   Bennett bracket with N = 5000: width 8.5e-4 nats.  With the CONSTANT remainder bound (m = 4) the
   same route gives b_cert = 1.26, s2_cert = 1.58, W = 0.64 nats: useless -- the bounds [0, u] cannot
   see that r is nearly constant; site penalties are essential for this route.
+
+## 00:36-00:42  Val20/PPII at m = 5; a sharp test of the pair bound
+
+* Val20/PPII, m = 5, site penalties (old script, `logs/floor_big_V20_prebennett.log`): ball of radius 4 =
+  87 441 evaluations (2.5e-5 of the 3.49e9 states); Gamma_5 = 0.082 kcal/mol (gamma_i <= 0.0055);
+  DETERMINISTIC certified bracket ln Z(E) in [518.2211, 518.3057] (0.085 nats, no sampling);
+  N = 50 000: Hoeffding [518.2598, 518.2649] (0.0051 nats).  462 s.  It lies inside the m = 4 bracket
+  [518.2442, 518.2759]: two different certificates agree.
+* The floating-point allowance (1e-7 per evaluated value, accumulated linearly over all 2^|U| values of
+  all d_U) was 8.7e-3 kcal/mol at m = 5, n = 20: a third of the deterministic bracket.  Made it
+  site-resolved (d_U is exactly zero in floating point unless U is inside the changed set):
+  eps_i = eps_g sum_{U ni i} 2^|U|/|U|.  Re-running V20 (batch D) and all site-resolved small
+  instances (batch E -> final batch F) with the final script.
+  NOTE: 1e-7 per evaluation is an ALLOWANCE (measured error <= 2e-12); a proof for the summation order
+  inside numexpr was not attempted -> "what I did not check".
+* `t06_pairtest.py` (`logs/t06_pairtest.log`): all charges zero except one pair (or one atom): the
+  certified bound of that single term against its exact anchored constant, all subsets of order 3, 4:
+  Val5/E 60 random terms, Ser4/H 48: NO violation in 1 268 cases; bound/exact minimum 1.00-2.0,
+  median 1.1 (self, fixed atom), 1.8-2.5 (self, side-chain atom), 1.8-2.3 (fixed-fixed pair),
+  2.7-3.9 (fixed-side), 3.0-6.3 (same side chain), 4.2-5.5 (two side chains).
+  => term by term the bound is nearly sharp; the factor 100-1400 of the full bound is entirely the
+  lost cancellation of the pair sum.

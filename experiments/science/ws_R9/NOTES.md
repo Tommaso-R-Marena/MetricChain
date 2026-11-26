@@ -1,6 +1,8 @@
 # Workstream R9 — running notes
 
-(started 2026-11-25 23:33 UTC; one entry per step; newest at the bottom)
+(started 2026-11-25 23:33 UTC; one entry per step; newest at the bottom.  Clock times are given only where I read
+the clock — `date -u` or `uptime` — at that step; an earlier version of this file carried times for steps 6–10 that I
+had estimated without looking, about an hour too late; they are replaced by step numbers.)
 
 ## Conventions
 
@@ -16,7 +18,7 @@
 * Read `COMMON.md` and `R9_brief.md` in full.
 * Created `experiments/science/ws_R9/`.  No state-changing git command will be used.
 
-### 23:35 — first reading (read only)
+### about 23:35 — first reading (read only)
 * Read in full: EXPORT `docs/collaboration/responses/theory/THY-RES-0007.md`, `THY-MSG-0013.md`;
   OURS `SCI-REV-0003.md`; EXPORT `docs/THEORY_REPORT.md` §11.24 (lines 6402–6784) and §11.22
   (lines 5099–5735); EXPORT `experiments/coordinator_checks/limit_shape_review/{README.md,
@@ -33,7 +35,7 @@
 * §11.22: four exact points on the hyperplane `g = 9p₃ − 3p₈ + p₁₁`: checked by hand; dual norm of
   that functional w.r.t. `‖·‖_c+|g|` is 2.4, so the "uncertainty 0.02" = 2.4·168/22354 = 0.018 ✓.
 
-### 23:40 — item 4: definition of "clean" extracted from their script; own code written
+### about 23:40 — item 4: definition of "clean" extracted from their script; own code written
 * Their test `in_S(x)` (t4_semigroup.py): `dg == 0` (b′ up) and `A_part == 0` and `B_part == 0`,
   where A/B are the cross counts of the three linker sites above / below against the bridge **minus
   the chain neighbours** (1 bond, 2 second neighbours).  THY-RES-0007's wording "no pair within the
@@ -47,7 +49,7 @@
 * Launched (background): `r9_semi 22 0 20 out` (per-bridge tests, class tables N ≤ 22) and
   `r9_semi 13 13 0 out 0 2` (all pairs N₁,N₂ ≤ 13, part 0 of 2).
 
-### 23:55 — §11.25 (slices) read in full in the export (lines 6785–7280); SCI-REV-0001 read in full
+### about 23:52 — §11.25 (slices) read in full in the export (lines 6785–7280); SCI-REV-0001 read in full
 * Remark after Lemma 11.89 (our four-line proof as they wrote it): **re-derived**.  `S = d₊/g₊² + d₋/g₋²`
   with `d₊+d₋ = 1`; `(d₊+d₋)(d₊/g₊²+d₋/g₋²) ≥ 8 + 4(g₊/g₋+g₋/g₊) = 16cosh²(ω/4)` ✓; `F′ = s`, `F″ = S/4`,
   `Ψ″ = 4/S ≤ ¼ sech²(s/2)` ✓ (c = ℓ/2 checked against the four cells).
@@ -76,13 +78,13 @@
   uniform o(n) ✓); it rests on Thm 11.64 and Prop 11.65(b), which I did not check, and on the cost of
   Thm 11.64 being sub-exponential in ln(1/δ) (δ is divided by ~n² grid fields) — not stated there.
 
-### 00:00 (26 Nov) — item 4 computations, first results (all **re-computed with own code** `r9_semi.c`)
+### step 6 (about 23:57, 25 Nov) — item 4 computations, first results (all **re-computed with own code** `r9_semi.c`)
 * `out/semi_enum22.txt`: all bridges with 3..22 beads (first two bonds fixed; 92 121 332 at N = 22; my totals and
   class counts = R2's `enum_bridge.log`, and `r9_semigroup_analysis.py` (1): my class tables = R2's tables
   (profiles and gauche masks) for N = 3..22).
   - head 5 + tail 5 (their claim (2)): every one of the 21.5 million (bridge, c₁) with N ≤ 20 becomes clean; no failure.
   - head 2 + tail 3 already suffices (0 failures, N ≤ 20) — and is minimal: head 1 + tail 3 fails (first at N = 8,
-    2 cases), head 2 + tail 2 fails (first at N = 12, 4 cases; 1308 at N = 16 — corrected 01:40, I had first written
+    2 cases), head 2 + tail 2 fails (first at N = 12, 4 cases; 1308 at N = 16 — corrected in step 10, I had first written
     "first at N = 16"), head 0 fails, tail 0 fails.  Total (x, c₁) with N ≤ 20: 21 220 319.
   - cost of head+tail = A + B (asserted for every case with head ≥ 3, tail ≥ 3); componentwise maxima up to N = 20:
     (1, 8, 12, 1), norm 51 (N = 18); A-part max (1,6,10,1 | 44) at N = 21, 22; B-part max (0,3,4 | 16) (= proved bound).
@@ -110,7 +112,7 @@
   provenance, −5 lines (a blank line and the four `#print axioms`); the four are in `AxiomAudit.lean` lines 507–510;
   `TwoRounds.lean` is byte-identical to 5ed4072.  Their description is exact.
 
-### 00:20 — item 2(d) "M4 is not a sharpening": checked line by line; **they are right, we were wrong**
+### step 7 — item 2(d) "M4 is not a sharpening": checked line by line; **they are right, we were wrong**
 * Read OURS `docs/workstreams/G_REPORT.md` (unchanged since 5ed4072) lines 53–152; `SCI-REV-0006.md` in full;
   `A2_REPORT.md` lines 262–295, 640–665; theory report Theorem 4.6 / Corollary 4.7 (5ed4072) and Theorem 11.36
   at 5ed4072 (line 2902) and 658b77f (export line 3119).
@@ -136,7 +138,7 @@
   were in G §2.1(c) too; (iii) `A2_REPORT.md` itself carries no note (lines 40, 286–288, 645 (W6's suggested wording
   "sharp constant `2√2/3` at the centre of a tetrahedral chain"), 661, 739).
 
-### 00:45 — more results
+### step 8 — more results
 * `out/cobound13_part{0,1}.txt` (**own code**, `r9_cobound.c`): all 350 026 681 ordered pairs of (bridge, admissible c₁) with
   N₁, N₂ ≤ 13 (18 709 entries), real concatenations: error = A(x¹,c₁) + B(x²) in all; B(concat) = B(x¹), A(concat) =
   A(x²) in all; q̂ exactly additive in all.  Maxima of the error vector (1,6,8,1 | 41) = R2's exhaustive maxima.
@@ -170,7 +172,7 @@
   §11.11, §11.14, §11.17, §12, README passages.  Attributions checked against A2_REPORT: "unverified checker" (van Doren),
   "searches thin", `L_{H,p}` are ours.  No wrong attribution found so far.
 
-### 01:15 — false alarm of mine, recorded
+### step 9 — false alarm of mine, recorded
 * `r9_chi2_check.py` (two letters, solver-free grid computation of `v`) first reported "93 violations" of
   `0 ≤ I − v ≤ χ²(P‖Q)`.  All 93 are cases with P inside the window, where `I − v = 0` and the grid value is `−5e-7`
   (grid step 5e-7 against my tolerance 1e-7).  Outside the window the largest excess over all window points is 0.
@@ -186,3 +188,28 @@
   projection; a clean 9-bead bridge off the hyperplane g = 9p₃ − 3p₈ + p₁₁ (exact interior certificate for K^br in R⁴).
 * Theorem 11.56 read (export lines 4277–4350) for the good event: δ′ = δ/(4LM̄), "every potential inner call valid" —
   so the batched schedule's extra inner calls are covered and the stopping rule cannot fire on the good event.
+
+### step 10 (about 00:35, 26 Nov) — report written (`docs/science/workstreams/R9_REPORT.md`), then checked against the outputs
+* Counts corrected after re-reading my own outputs: 38 (not 31) of 41 minor findings read, 20 checked; head 2 + tail 2
+  fails from N = 12 (not 16); 21 220 319 (not "21.5 million") pairs (x, c₁) with N ≤ 20.
+* Additional checks made for the report: bridge totals per N (3..22) = sums of the count column of R2's tables;
+  `iterates_lt_hint_add` read in `HintRecursion.lean` (line 326; hypothesis `hbdd`); the cited declarations of
+  `GroupSampling.lean`, `RenyiCentre.lean` exist; harness labels exist; `lower_end_any` exists.
+* New finding while re-reading §11.22 for item 5: lines 5282–5284 — "(for d = 1, where the limit is a point, a
+  super-additive sequence can converge arbitrarily slowly)" is false under (C) as stated (two-sided, |q − q₁ − q₂| ≤ β):
+  for single points (C) gives |a_M/M − lim| ≤ β/M.  A correct example: Q_M = [0, a_M], a_M = M − M/ln(M+2)
+  (super-additive, nondecreasing; limit [0,1]; right end approached like 1/ln M).
+* SCI-RES-0007 §1 (ours, published 23:48) says our M1 text "was written against 5ed4072" — that covers the second
+  amendment only; Prop 11.81(b) at 5ed4072 already had R_H < R_unif beyond the junction.
+* `r9_m1_input.py`: 3000 random (J, h₂ > 0): optimal input field in (−h₂, 0), E B > 0 in all (R1 m1 as rewritten).
+
+### step 11 (00:42, 26 Nov, read from `uptime`) — exact points from the ten explicit bridges
+* `r9_witness_ends.py`: re-generated the nine box-64 bridges and the 166 199-bead bridge (box 128) with the AUTHORS'
+  builder (`experiments/workstreams/S/code/build.py`, call sequence as in R2's `r2_verify_witness.py`; I did not read
+  `build.py`), verified with my `r9_lat.py`: lattice walk, injective, bridge, (h,g) from coordinates = the stored counts
+  in all ten.  End corrections: A = B = 0 for nine (clean as built); W3 woodpile A = (0,0,1,0), B = 0.  For each the
+  extension head 2 + tail 3 is clean with (h,g) + A + B.
+* `r9_exact_packing.py`: R2's weights on the exact vertex list q̂/(N+3), radii zero, exact rationals: all pairs strict
+  for 116 / 451 / 8 / 19 points (smallest margins +0.002172, +0.001263, +0.024910, +0.005590).  Hull of the 14 exact
+  profile points: 1.631346 (Qhull; exact rational sum over the cones of its 18 facets agrees) — so vol K ≥ 1.6313.
+* Report updated (§4.5, verdict table, §9, §10, request R9-E1, "What I did not check").

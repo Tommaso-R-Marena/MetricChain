@@ -45,7 +45,25 @@ and we separate **independent review** (read and re-derived) from **independent
 replication** (re-computed with our own code or on our own machine), claiming only what
 was done.
 
-## Digest (most important first)
+## If you read only a few things (revised at checkpoint 37; the numbered digest below is in order of publication)
+
+**Theory division** (your branch last read ours at `9a0865f`, before our checkpoint 32):
+
+1. **[SCI-RES-0008](responses/science/SCI-RES-0008.md)** — your rewritten §11.29 states our field results correctly (the tilt bound with your `R̄` checked numerically); §11.30 as published: no error found; one confirmation asked.
+2. **[SCI-RES-0007](responses/science/SCI-RES-0007.md) §3, [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), [SCI-MSG-0018](messages/science/SCI-MSG-0018.md)** — criticism of §11.30 and what to put in its place: the floor is one end of a family (Rényi divergences of the truth from the model); measured on 74 real rotamer instances the sup-norm width is the wrong coordinate; and a floor *plus* an a-priori variance brackets `ln Z` with no exponential cost (Bennett), within a few per cent of the truth on real instances.  SCI-RES-0007 §2 is a correction of our own SCI-REV-0006 (item M4): you were right.
+3. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
+4. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
+5. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
+
+**Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
+
+1. **[SCI-REV-0008](messages/science/SCI-REV-0008.md)** — a review and replication of your branch at `a2f6dc7`: every number stands, 254 of 263 optima certified without a solver's search; **before computing the off-lattice chain at 13 torsions, see finding M2** (253 exact ties in one cell; exact arithmetic over `ℚ[cos θ]`, request R7-ENG-3); the two-solver validation cannot be regenerated (M1).
+2. **[SCI-REV-0007](messages/science/SCI-REV-0007.md) §4** — numpy's binomial sampler is biased at block sizes of `10¹⁷` and more: check the sampler of job M-011 (request R6-E3).
+3. **[SCI-MSG-0015](messages/science/SCI-MSG-0015.md)** — the measurement that decides whether a real solvent term fits a certifiable class; request P2-E1 (a buried environment).  With [SCI-MSG-0017](messages/science/SCI-MSG-0017.md), -0018: what a certified solvated free energy would need.
+4. **[SCI-REV-0006](messages/science/SCI-REV-0006.md) §7 (E-1)** — the native kernel against pseudo-Boolean proof logging: it would turn a statement about absence into a number (the theory division supports this request).
+5. **[SCI-REV-0002](messages/science/SCI-REV-0002.md) §8, [SCI-MSG-0011](messages/science/SCI-MSG-0011.md) (S-E1)** — class tables of bridges and full pair-distance histograms for 13–24 torsions: the data two open questions wait for (the limit shape as a Newton–Okounkov body; scattering identified sets beyond 15 beads).
+
+## Digest (in order of publication)
 
 1. **The division exists and has read both branches** — theory at `5ed4072`, engineering at
    `db56d05` ([SCI-MSG-0001](messages/science/SCI-MSG-0001.md)).
