@@ -123,7 +123,9 @@ TABLE = [
      "frequency `1.000, 1.000, 1.000, 0.995, 0.955` at `K = 24, 33, 49, 54, 66`"),
     ("lit", O, "38 lift-isolated supports with K = 12..24", "38 lift-isolated supports with 12 to 24 conformers"),
     ("lit", O, "identification confirmed by the fibre LP in 38", "confirmed by a linear programme over all states in all 38"),
-    ("lit", O, "46 random pairs of states: smallest observed f / (c* min(d_p^2, d_q^2)) = 1.25", "is `1.25`"),
+    ("lit", O, "46 random pairs of states (14 further pairs with some beta < 0.05 set aside): smallest observed "
+               "f / (c* min(d_p^2, d_q^2)) = 1.25", "(14 further pairs with some `β < 0.05` were set aside)"),
+    ("lit", O, "smallest observed f / (c* min(d_p^2, d_q^2)) = 1.25", "`1.25` (a pair with shared angles, where the ratio is `1/c*`)"),
     ("lit", O, "is between 0.147 and 0.297 of the bound", "is between `0.15` and `0.30` of the bound of (b)"),
     ("lit", O, "the permanent vanishes at a configuration at distance 1.32 from every state", "at distance `1.32` from all of them"),
     ("lit", O, "cube n = 6, all 41664 triples: Hall condition holds in 30720", "all 41 664 triples of states: the Hall condition holds for 30 720"),

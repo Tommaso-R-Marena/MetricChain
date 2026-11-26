@@ -131,6 +131,7 @@ argument of the theory of associative memories.
 
 | source | what it has | level |
 |---|---|---|
+| Angers–Delampady, arXiv 0805.3209, Theorem 5.1 | the threshold rule for the range of an expectation over a density-ratio class, attributed there to DeRobertis and Hartigan | read by the science division's referee (SCI-MSG-0033 §3, SCI-RES-0037 §2); not opened here.  The 1981 paper itself has been opened by nobody |
 | DeRobertis–Hartigan (1981); Berger, Wasserman and others on density-ratio classes | ranges of posterior expectations over classes `l ≤ dμ/dπ ≤ u` (the separable envelope); threshold rule | memory (also named by the science division for theory report §11.28) |
 | Efron–Stein / martingale-difference decompositions; `L¹` Poincaré and isoperimetric inequalities on product spaces (Talagrand 1993; Bobkov–Götze 1999); influences of monotone functions equal their covariances with the coordinates | every analytic ingredient of E15: the proof is an `L¹` martingale decomposition plus monotonicity of the density | memory |
 | Holley / FKG inequalities | the population bound of E15T(a) | memory |
@@ -198,6 +199,30 @@ the Cover-type bound; we did not find the contrast `n²/2` (with the prior) agai
 associative memories counts stable patterns, not exact ground-state sets).  E20: synthesis
 of the trisecant lemma with E18; for moment problems this is classical.  E20′: elementary;
 the two-point statement on the torus was not searched (obligation OB16).
+
+*Added by the third internal review (ER3; its table of citations, with the level at
+which each was read, is §4 of `reviews/ER3_internal_review.md`):*
+
+| source | what it has | level |
+|---|---|---|
+| **Kahle, "Neighborliness of marginal polytopes", arXiv 0809.0786 (2010), Theorem 13** | the marginal polytope of a hierarchical model whose smallest non-face has `g` elements is `(2^{g−1} − 1)`-neighbourly, for any finite alphabets, and this is sharp.  With all margins of order `≤ t`: every ensemble with at most `2^t − 1` atoms is determined by the data of order `t`.  **Contains E9(a) (`t = 2`), gives the worst-case capacity `2^{2d} − 1` missing from E19, and is stronger than E21 on finite product spaces** | statement read by the reviewer (PDF); not opened by us |
+| Donoho–Tanner, "Counting faces of randomly-projected polytopes when the projection radically lowers dimension", arXiv math/0607364, Theorems 1.2, 1.6 | weak neighbourliness threshold `ρ_W^+(δ)`, `∼ |2 log δ|^{−1}` as `δ → 0`: the Gaussian control of E19(f) is this curve (76.4, 142.0, 215.2 at our sizes) | statements read by the reviewer; the converse half outside proportional growth not found stated |
+| Cover (1965), "Geometrical and statistical properties of systems of linear inequalities …" | Theorem 1 and §III (polynomial surfaces; inequality for the vertices of the cube, which are not in general position): E19(d) is the paper's own "separating capacity" for polynomial threshold functions | read by the reviewer in the original (scan) |
+| Baldi–Vershynin; Chiantini–Coppens | as above | statements re-read by the reviewer in the PDFs: quoted correctly; the hypothesis on `t` of Theorem 4.2 is empty below `n ≈ 1 150` (`d = 1`) |
+| Curto–Fialkow–Möller (extremal truncated moment problem); Schmidt (MUSIC, 1986); Foucart–Rauhut §2.2 (generic uniqueness of sparsest representations) | neighbours of E18 and E18′ | reviewer's memory, unconfirmed |
+| Venkatesh–Baldi (1991), Baldi–Venkatesh (1987); Jiang–Sidiropoulos–ten Berge (2001); Bocci–Chiantini (2013) | capacity of order `n^d` for interactions of order `d`; almost-sure identifiability of multidimensional harmonic retrieval among models with a given number of harmonics; identifiability of tensors of format `2 × … × 2` | search summaries (reviewer) |
+
+| **Johnston–Lovitz–Vijayaraghavan, "Computing linear sections of varieties: quantum entanglement, tensor decompositions and beyond", arXiv 2212.03851 (FOCS 2023), Theorem 2** | for an irreducible variety cut out by a fraction `δ` of the forms of degree `d` (non-degenerate of order `d − 1`): a subspace of dimension `R ≤ δ(n + d − 1)/d!` spanned by `s` generic points of the variety and `R − s` generic vectors contains only those points; an algorithm based on the Nullstellensatz (linear algebra in the `d`-th symmetric power) recovers and certifies them in time `n^{O(d)}`; NP-hard in the worst case, already for rank-one matrices; over `ℝ` or `ℂ` (abstract).  **The literature of the checking problem for our lifted certificates** (is the zero set exactly the support?) and a published answer, in the generic case, to our question E-T4 | pointed out by the Geometric Inference Division (GEOMETRY-MSG-0008 §2); abstract and Section 1 with Theorem 2 read through a fetch of the HTML of v3; proofs and later sections not read |
+| Derksen–Johnston–Lovitz, "X-arability of mixed quantum states", arXiv 2409.18948; Dastidar–Weicht–Wein, "Improving the threshold for finding rank-1 matrices in a subspace", arXiv 2504.17947 | hierarchies (semidefinite, eigencomputation, linear systems) for membership in the convex hull of a variety; the threshold for planted rank-one matrices improved from `mn/4` to `mn/2`, failure beyond `mn/√2` | abstracts only (fetch) |
+
+**Classification after ER3.**  E18: formulation, known in substance.  E18′: formulation
+(the `ℓ⁰`/`ℓ¹` contrast of sparse recovery in the non-negative setting).  E19(b), (c):
+synthesis; (d): Cover's bound, not a new bound; **the deterministic capacity `2^{2d} − 1` is
+known (Kahle) and was missing**; (f) reproduces a known curve; C3: no source known.  E20:
+synthesis.  E20′, E20″: elementary, new in the sense of not found (two further searches
+by the reviewer).  E20a (five generic states on `𝕋³`) and E22 (three states on `𝕋²` are
+never determined): the reviewer's, not found in print.  E21: on finite product spaces
+weaker than Kahle's theorem; on tori not found.  OB16 is closed at this level.
 
 ## 6. Search log (2026-11-26)
 

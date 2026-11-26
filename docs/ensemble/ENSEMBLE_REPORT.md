@@ -17,8 +17,11 @@ peer review), whose findings are applied here (§7); the science division has re
 Part II independently (its SCI-REV-0020; applied) and checked Theorem E15 with its own
 code (SCI-RES-0032); Part VI has had a third internal review
 (`reviews/ER3_internal_review.md`: no numbered statement false, two major and nine minor
-findings) **whose corrections are not yet in the text below** — until they are, that
-review is the authority on the defects of §4c.  No external peer review of anything.
+findings), applied here (§7 item 14).  The main statement of Proposition E15U was
+re-derived and replicated by the science division (SCI-RES-0038).  Unreviewed: the rest
+of E15U, Proposition E17.1, and the statements added to Part VI from the review itself
+(E20a, E22, two constants of E20″), which we re-derived but nobody else has read.  No
+external peer review of anything.
 "New" below always means "not found in the search documented in `PRIOR_ART.md`".
 
 ---
@@ -49,10 +52,10 @@ how stably, and with what certificate.**
 | E15U | **The exact condition for the thermal union bound.**  For binary sites and any reference: the bound holds for every member of the class iff `E[N | U] − E[N | U^c] ≥ 1` under the polarised member for every up-set `U` of the disagreement order (`N` the number of disagreements) — conditioning on an increasing event raises the mean number of disagreements by at least one; likewise the population bound iff every site is non-negatively correlated with every up-set, and stochastic domination iff positive association.  Necessary: each site's disagreement is non-negatively correlated with the number of the others; at weak coupling this is also sufficient (frustration is tolerated if every site's bonds are satisfied on balance); in general it is not (a three-body example in closed form; a four-site pair model) | P | new (not found); elementary |
 | E16 | **A bimodal ensemble identified by one pair observable.**  For even `n` the double cone `∝ exp((b/2)|M_a|)` is the unique maximiser of `E[M_a²]` over the cube class; for odd `n` the maximisers are a segment parametrised by the population difference of the two basins | P | new (not found); elementary |
 | E17 | **Noise.**  For a convex class and Gaussian noise `σ` the minimax root-mean-square error of a mean `E_μψ` is between `0.335·ω(2σ)` and `0.5·ω(2σ)`, with `ω(ε) = min_λ{ε‖λ‖₂ + range over the class of ψ − λ·Φ}`: the dual certificate of the identified interval is the near-minimax linear estimator | P (elementary: the exact Bayes risk of two points); K (Donoho 1994: factor 1.25) | formulation of a known theory |
-| E18 | **Lifted certificates.**  For a lift `v` with the entries of `vv^*` in the span of the data, `‖P^⊥v(x)‖²` is a non-negative function in the span; if its zero set is finite with linearly independent `v(x)v(x)^*`, every ensemble on the conformers is determined among all ensembles — also when the zero set is larger than the support.  Three conformers on the cube: a self-contained proof of E9(a).  **With a prior on the number of atoms** (finite `X`): flat-isolated supports are determined among ensembles with at most `K` atoms for all weights outside a null set (E18′) | P | elementary; formulation (flat extensions, E10 and the geometry division's certificate are instances) |
-| E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, about that of a Gaussian cloud of the same size | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e) N | synthesis; the probabilistic core is a published theorem (rediscovery on our side) |
-| E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`.  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights, all constants explicit (E20″) | P given K (generalised trisecant lemma); E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary (not searched) |
-| E21 | **`K` states on a product space: the permanent certificate.**  If every set `I` of at least two states has at least `|I|` coordinates at which its states do not all coincide (for instance: pairwise at least `K` differing coordinates), the permanent of the matrix of coordinate-wise distances to the states vanishes exactly at the states; on a torus the ensemble is then determined by multilinear data of order `K`.  For `K = 2`: E20′ | P; the zero set V (`permCert_eq_zero_iff`, `permCert_zero_set`, via Hall's theorem) | elementary (Hall / Frobenius–König); not searched |
+| E18 | **Lifted certificates.**  For a lift `v` with the entries of `vv^*` in the span of the data, `‖P^⊥v(x)‖²` is a non-negative function in the span; if its zero set is finite, the ensemble is determined among all ensembles iff it is determined among ensembles on that finite set (in particular if the `v(x)v(x)^*` are affinely independent there) — also when the zero set is larger than the support.  Three conformers on the cube: a self-contained proof of E9(a).  **With a prior on the number of atoms** (finite `X`): flat-isolated supports are determined among ensembles with at most `K` atoms for all weights outside a null set (E18′) | P | elementary; formulation (flat extensions, E10 and the geometry division's certificate are instances) |
+| E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, within a few per cent of the known threshold of a Gaussian cloud of the same size.  Worst case (known: Kahle 2010): any `2^{2d} − 1` conformers are determined | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e), (f) N; (g) K | synthesis; the probabilistic core is a published theorem (rediscovery on our side); (d) is Cover's capacity bound read through E1 |
+| E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`, and five generic states on `𝕋³` (E20a).  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights to order `τ`, all constants explicit (E20″).  **Three states on a torus of two angles are never determined by bilinear data** (E22) | P given K (generalised trisecant lemma; Carathéodory–Toeplitz for E22); E20a P given one computation; E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary, new (not found); E20a, E22 and two of the constants of E20″ are the internal review's (ER3) |
+| E21 | **`K` states on a product space: the permanent certificate.**  If every set `I` of at least two states has at least `|I|` coordinates at which its states do not all coincide (for instance: pairwise at least `K` differing coordinates), the permanent of the matrix of coordinate-wise distances to the states vanishes exactly at the states; on a torus the ensemble is then determined by multilinear data of order `K`.  For `K = 2`: E20′.  On finite product spaces this is weaker than a published theorem (Kahle 2010: `2^K − 1` states, no condition) | P; the zero set V (`permCert_eq_zero_iff`, `permCert_zero_set`, via Hall's theorem) | elementary (Hall / Frobenius–König); on tori not found; on finite product spaces superseded, except for the explicit formula |
 
 The thread through the report is one sentence, stated with its two conditions: **on a
 finite configuration space an ensemble is determined by a family of observables exactly
@@ -1337,10 +1340,17 @@ has a member with given marginals `μ_i` is the closed form
 `b_min = max_i max_{s≠t} [ln(μ_i(t)π_i(s)/(μ_i(s)π_i(t)))]₊/δ_i(s, t)`.  (b) and (c) are statements
 about the *polarised* member.  On that division's two five-residue instances with exact
 least envelopes the bound is true and not empty (it overstates the distance to the
-polarised member by a factor `1.4` to `1.5`), and as a test of the class it never fires:
-the true ensemble is far from polarised (total variation `0.43` to `0.64`), and as the class
-shrinks the polarised member moves towards it.  Our suggestion that the bound could
-certify a violation of the class (ENSEMBLE-MSG-0003, E-S3) is withdrawn.
+polarised member by a factor `1.4` to `1.5`), and as a test of the class it adds nothing:
+with the exact total variation as datum it fires only for classes scaled below `0.03` of
+the true one (`0.15` on sub-systems; that division's corrected figures, SCI-MSG-0033 §2.2),
+because the true ensemble is far from polarised (total variation `0.43` to `0.64`) and the
+polarised member moves towards it as the class shrinks.  Our suggestion that the bound
+could certify a violation of the class (ENSEMBLE-MSG-0003, E-S3) is withdrawn.  *On the
+hypotheses* (the same message, from its referee's 44 412 programmes on 13 classes): (a)
+and (b) use only the single-site costs into the centre — no symmetry, no additivity, no
+triangle inequality; the triangle inequality through the centre is what makes the
+polarised product a member; and the product structure of the one-body marginals needs
+both a product reference and a site-additive envelope, as assumed here.
 
 *Proof.*  Write `w = μ/π`, `w* = μ*_a/π ∝ e^{−d(·,a)}`.
 (a) `d(x, a) ≤ d(x, y) + d(y, a)`, so `w*(y) ≤ e^{d(x,y)} w*(x)`: `μ*_a ∈ 𝒫`.  For `μ ∈ 𝒫` and two
@@ -1538,6 +1548,17 @@ other disagreements.
 **[P]**, elementary; new in the sense of not found (two searches, `PRIOR_ART.md` §5a; for a
 product measure (C) is the Poincaré inequality for monotone Boolean functions).  It
 answers the question that the review ER2 left open ("I have no characterisation").
+*Independent check.*  Statement (C) was re-derived by the science division's coordinator
+with a proof of its own — the layer-cake formula and one integral inequality — and
+replicated by code written from the statement on 950 random measures on two to four
+sites, in both directions (SCI-RES-0038; an AI review and replication, not peer review;
+(A), (B), (C′) and the consequences below were not checked there).  Its remark on the
+hypothesis: the "only if" needs **every** slope positive — for a frozen site (`b_i = 0`) no
+member density varies along that site, and the condition is needed only for up-sets that
+are invariant under switching it (its instance with slopes `(0, 1, 1)`: the least
+difference is `1.052` over the four invariant up-sets and `0.523` over all eighteen, and the
+bound holds).  It also notes that for the two-level members the excess over the bound is
+exactly `t·ν(U)ν(U^c)(1 − m_U)/(1 + tν(U))`, `m_U = E_ν[N | U] − E_ν[N | U^c]`.
 
 *Proof.*  One principle gives all four.  (1) The density `r = μ/ν` of a member is
 non-decreasing in `e` (proof of E15T).  (2) Conversely, for every up-set `U` and
@@ -1659,11 +1680,19 @@ observables, are members in the interior of the class.  The science division's r
 of the same theorem for a *certified sandwich* `l ≤ w ≤ u` — a first-order class with
 reference `√(lu)` and the hub metric `d(x, y) = (D(x) + D(y))/2`, `D = ln(u/l)`; in robust
 statistics the density-ratio class (DeRobertis–Hartigan 1981, **[K]** from memory) — is the
-sharpest form of this (SCI-RES-0032 §4, theirs): the face of maximisers of `E f` puts the
-energy at the floor above a threshold of `f` and at the ceiling below it, so **the ensemble
-of a true energy strictly inside its sandwich is never identified by averaged data; data
-shrink the identified set and pin only "bang-bang" members**, with the stability bound
-`TV(μ, μ_f) ≤ (t* − E_μ f)/γ`, `γ = min_x |f(x) − t*|`.  The science division's Theorem 2 exhibits such
+sharpest form of this (SCI-RES-0032 §4 as corrected by SCI-MSG-0033 §1.2; theirs): the face
+of maximisers of `E f` puts the energy at the floor where `f` exceeds its upper end `t*` and at
+the ceiling below it, and leaves the weights on the level set `{f = t*}` free; so a member is
+identified iff, for some `f` in the span, it is of this form **and the data determine its
+weights on the level set** — the injectivity clause of E13(b).  **A member strictly inside
+its sandwich at every state is not identified by fewer than `|X| − 1` independent means; a
+member strictly inside on `s` states of one level set can be, by `s + 1` means.**  (Our
+fourth checkpoint quoted that division's first version — "the ensemble of a true energy
+strictly inside its sandwich is never identified; data pin only bang-bang members" — as
+what E13(b) gives.  It is not: the clause on injectivity had been dropped, and that
+division withdrew the sentence, with a four-state counterexample of its referee, before
+our commit; SCI-RES-0037.)  Its stability bound `TV(μ, μ_f) ≤ (t* − E_μ f)/γ`,
+`γ = min_x |f(x) − t*|`, is valid, with best constant `max_y (1 − μ_f(y))/|f(y) − t*|`.  The science division's Theorem 2 exhibits such
 members (mixtures of polarised basins over a code) and the uniform ensemble — the zero
 residual, the hardest instance of the theory division's diagram for algorithms with a hint
 — is the most interior of all.  We state this as an observation, not as a theorem relating
@@ -1775,12 +1804,16 @@ functions, and neither the duality nor the certificates above apply as stated.
 The certificate of Theorem E10 is a positive semidefinite form in the configuration.  The
 same construction with other *lifts* of the configuration gives: the capacity of
 higher-order data on the cube; a theorem for generic conformers on any irreducible variety,
-torsion angles included; a certificate form of "identified but not exposed"; and an exact
-statement of what a prior on the number of conformers adds.  Epistemic status in one
+torsion angles included; a certificate form of "identified but not exposed"; and a
+sufficient condition for what a prior on the number of conformers adds.  Epistemic status in one
 sentence: the principle (E18) is elementary, the two probabilistic and geometric inputs
 (E19(a), E20) are published theorems — the first of which we re-derived before finding it
 (`PRIOR_ART.md` §5b, `DEAD_ENDS.md` ED15) — and what is ours is the synthesis and the
-readings (b)–(e) of E19, E18′ and E20′.
+readings (b)–(e) of E19, E18′ and E20′.  *Review.*  This Part was examined by the internal
+review ER3 (`reviews/ER3_internal_review.md`, with its own code; an AI review, not peer
+review): no numbered statement was found false; its two major and nine minor findings
+are applied below and listed in §7 (item 14), together with the corrections asked for by
+the Geometric Inference and Complexity divisions.
 
 ### 4c.1 The principle
 
@@ -1791,25 +1824,38 @@ For a finite `S ⊂ X` put `U = Σ_{x∈S} col v(x)`, let `P` be the orthogonal 
     f_S(x) = ‖(I − P) v(x)‖_F² ,        Z_S = { x ∈ X : col v(x) ⊆ U }  ⊇ S .
 
 **Theorem E18 (lifted certificates).**  `f_S` is a non-negative function in the real span of
-`{1, Φ}` with zero set `Z_S`.  If `Z_S` is finite and the Hermitian matrices `v(x)v(x)^*`,
-`x ∈ Z_S`, are linearly independent over `ℝ`, then every ensemble supported in `Z_S` — in
-particular every ensemble supported in `S`, whatever its weights — is determined by the
-means of `Φ` among all Borel probability measures on `X`.  Two cases:
-(i) `Z_S = S` (*`S` is lift-isolated*) and the subspaces `col v(x)`, `x ∈ S`, are linearly
-independent: then the matrices are independent automatically and `f_S` exposes `S` in the
-sense of Theorem E1;
-(ii) `Z_S ⊋ S`: the ensemble is identified although `f_S` does not expose `S` — the
-certificate form of the non-exposed case of Theorem E1(b).
+`{1, Φ}` with zero set `Z_S`, and every probability measure that has the data of an ensemble
+supported in `Z_S` is itself supported in `Z_S`.  Hence, **if `Z_S` is finite, an ensemble
+supported in `Z_S` is determined by the means of `Φ` among all Borel probability measures on
+`X` if and only if it is determined among the ensembles on the finite set `Z_S`** — by
+Theorem E1(a) applied on `Z_S`: iff no real `h ≠ 0` on `Z_S` with `Σ_x h(x) = 0` and
+`Σ_x h(x)Φ(x) = 0` is non-negative off the support.  In particular:
+(i) if `Z_S = S` (*`S` is lift-isolated*), `v(x) ≠ 0` for `x ∈ S`, and the subspaces `col v(x)`,
+`x ∈ S`, are linearly independent, then every ensemble on `S`, whatever its weights, is
+determined, and `f_S` exposes `S` in the sense of Theorem E1;
+(ii) if `Z_S ⊋ S` is finite and the matrices `v(x)v(x)^*`, `x ∈ Z_S`, are affinely independent
+(over `ℝ`), every ensemble supported in `Z_S` is determined although `f_S` does not expose `S` —
+the certificate form of the non-exposed case of Theorem E1(b).
 
-**[P]**; elementary.
+**[P]**; elementary.  The general form with the finite problem on `Z_S` is the refinement
+that the Geometric Inference Division asked for (GEOMETRY-RES-0005 §1: its nine-atom
+instances have a finite `Z_S` whose points are affinely dependent for dimensional reasons,
+and the ensemble is identified all the same) and that the review ER3 found necessary on
+the torus (`r = 4`, twelve states: when all 24 zeros are real the 24 matrices satisfy one
+linear relation, of both signs off the states, and the ensemble is identified).  The
+hypothesis `v ≠ 0` in (i) cannot be dropped (review ER3, F8: three configurations with
+lifts `0, 0, 1`, observable `|v|²`, `S` the first two: `Z_S = S`, the column spaces `{0}`, `{0}`
+are independent, and `δ_{x₀}`, `δ_{x₀′}` have the same data); no lift used in this report
+vanishes anywhere.
 
 *Proof.*  `f_S(x) = tr((I − P) v(x)v(x)^*)` is real and is a combination of entries of
 `vv^*`, hence of `1` and `Φ`; it vanishes iff `(I − P)v(x) = 0`.  If `ν` has the data of `μ` and
-`μ` is carried by `Z_S`, then `∫f_S dν = ∫f_S dμ = 0`, so `ν(X ∖ Z_S) = 0`, and
-`Σ_{x∈Z_S} (ν(x) − μ(x)) v(x)v(x)^* = 0` because every entry is an affine function of the
-data and the total masses agree; independence gives `ν = μ`.  In case (i), if
+`μ` is carried by `Z_S`, then `∫f_S dν = ∫f_S dμ = 0`, so `ν(X ∖ Z_S) = 0`: the comparison is
+between ensembles on `Z_S`, where Theorem E1(a) applies.  For (i) and (ii): the difference
+`h = ν − μ` has `Σ_x h(x) = 0` and `Σ_{x∈Z_S} h(x) v(x)v(x)^* = 0`, because every entry of `vv^*` is
+an affine function of the data; affine independence gives `h = 0`.  In case (i), if
 `Σ_x h_x v(x)v(x)^* = 0`, compress with a projection onto `col v(x₀)` along the sum of the
-other column spaces: `h_{x₀} v(x₀)v(x₀)^* = 0`.  ∎
+other column spaces: `h_{x₀} v(x₀)v(x₀)^* = 0`, so `h_{x₀} = 0` because `v(x₀) ≠ 0`.  ∎
 
 | configuration space and data | lift `v` | `Z_S = S` means | where |
 |---|---|---|---|
@@ -1831,7 +1877,9 @@ two did, two of the vectors would agree up to sign).  A sign vector `ax¹ + bx²
 the `x^i x^{iᵀ}` because the six matrices `x^i x^{jᵀ} + x^j x^{iᵀ}` are independent.  By
 Theorem E18, every ensemble on three conformers is determined by its pair correlations,
 with the certificate `‖P^⊥x‖²` — for two conformers `Z_S = S` — **[P]**; exhaustive check
-for `n = 6` (L5: 4 960 triples; a fourth vertex in 2 880 of them).
+for `n = 6` (L5: 4 960 triples; a fourth vertex in 2 880 of them).  The statement itself is
+known: it is the case `t = 2` of a theorem of Kahle (2010) quoted in §4c.3 (g); what is
+ours is this certificate proof.
 2. *A sum-of-squares certificate cannot reach beyond the dimension of the lift:* if the
 column spaces fill `𝕂^N`, `f_S ≡ 0`.
 3. *Stability.*  On a finite `X`, Proposition E1.1 applies with the gap
@@ -1856,11 +1904,17 @@ the data `b` of `μ_w`; `L' = aff Φ(S')`.  Then `b ∈ L ∩ L'`.  If `L ⊄ L'
 So with the number of conformers known, what is needed is a condition on *one* extra
 point at a time (no other vertex on the flat); without it, the whole face must be exposed
 (Theorem E1).  Theorem E19(c) shows how far apart the two are.  The restriction to
-weights outside `H` cannot simply be dropped: on the cube with five sites, for every
-flat-isolated support of 6 or 7 conformers that is not a face there are *some* weights for
-which another ensemble with as many conformers has the same pair data (L3) — at that size
-`K` is more than half the number of observables; whether exceptional weights exist for
-`n < K ≪ n²/4` at large `n` is Problem O9.
+weights outside `H` cannot simply be dropped.  On the cube with five sites **every**
+flat-isolated support that is not a face has exceptional weights, at every size: by the
+exhaustive computation of the review ER3 (every support, every competing support) there
+are `40, 496, 2 416, 6 240, 9 130, 6 000, 1 072` such supports with `K = 4, …, 10` conformers;
+for each of them some positive weights — for all but 32 of them the uniform weights —
+have a twin with at most `K` atoms, and random weights never do.  (Our own check L3 samples
+nine supports, three of which are of this kind; version 3 said "for every … (L3)", which
+that check does not establish.)  The smallest example is the Hadamard quadruple of E9(b)
+on four of the five sites, `+++++, +++−−, ++−+−, ++−−+`, with uniform weights; its twin is
+the quadruple of the other parity, `++++−, +++−+, ++−++, ++−−−`.  Whether exceptional weights
+exist for `n < K ≪ n²/4` at large `n` is Problem O9.
 
 ### 4c.3 The cube: data of higher order
 
@@ -1871,11 +1925,14 @@ most `2d` in `z`, i.e. exactly the correlations `x_A`, `|A|` even, `|A| ≤ 2d`.
 
 **Theorem E19 (data of even order at most `2d`; `d` fixed, random conformers).**
 (a) **[K]** (Baldi–Vershynin 2019, Theorems 4.1 and 4.2; the first is Abbe–Shpilka–Wigderson
-2015, Theorem 4.5.)  There is an absolute constant `C` such that for `d(n−1)^{0.02} ≤ t ≤
-0.001(n−1)` and `K < C(n − 1 − C(n−1)/log(n−1) − t, ≤d)`, with probability at least
+2015, Theorem 4.5.)  There is an absolute constant `C₀` such that for `d(n−1)^{0.02} ≤ t ≤
+0.001(n−1)` and `K < C(n − 1 − C₀(n−1)/log(n−1) − t, ≤d)` (a binomial sum, as in `L_d`), with
+probability at least
 `1 − 2^{−t/4} − 2^{−t}` the vectors `ξ_d(x^a)` are linearly independent and their span contains
 no `ξ_d(y)`, `y` a vertex of the cube, other than themselves.  In particular this holds with
-probability tending to one for `K ≤ (1 − ε)L_d ~ (1−ε) n^d/d!`.
+probability tending to one for `K ≤ (1 − ε)L_d ~ (1−ε) n^d/d!`.  (The hypothesis on `t` is empty
+below `n ≈ 1 150` for `d = 1` and `n ≈ 2 340` for `d = 2` — remark of the review ER3: the
+numerical checks at `n ≤ 12` are independent evidence, not instances of the theorem.)
 (b) **[P given (a)]**  On that event every ensemble supported on the `K` conformers —
 whatever its weights — is determined among all ensembles on the cube by its correlations
 of even order at most `2d`, and the conformers are exactly the ground states of the
@@ -1894,19 +1951,40 @@ any non-negative function with interactions of even order at most `2d`, and no e
 supported on all of them is determined by its correlations of even order at most `2d`.
 (e) **[N]**  For `d = 2` (two- and four-body data) the truth is far above (b): by exact
 linear programming over all states, the number of random conformers that form a face
-with frequency one half is about `76`, `152`, `233` for `n = 8, 10, 12` — against the lift
-dimensions `29, 46, 67`, beyond which no certificate of the form (b) exists, and the bounds
-`84, 186, 352` of (d).
-(f) **[N]**  (*A Gaussian control.*)  If the feature vectors of the `2^{n−1}` states are
-replaced by independent Gaussian vectors of the same dimension, the same computation
-gives thresholds of about `78`, `142`, `214` for the sizes of `n = 8, 10, 12` (the cube: `76`,
-`152`, `233`): for four-body data the cube behaves like a generic cloud of as many points in
-as many dimensions, and is slightly but increasingly more neighbourly (ratios `0.97`,
-`1.07`, `1.09`).  For pair data it does not: at `n = 12` the Gaussian cloud stops near
-`K = 11` and the cube near `13`, at `n = 14` near `11.5` against `16`, and asymptotically the
-Gaussian value is `n/(4 ln 2) ≈ 0.36n`
-(the weak-neighbourliness threshold of Donoho and Tanner, `K ≈ D/(2 ln(N/D))` for `N` points
-in dimension `D ≪ N`; **[K, memory]**) against `1.1n`–`1.2n` for the cube.
+with frequency one half is about `76`, `150`, `233` for `n = 8, 10, 12` (uncertainties about
+`±1`, `±2`, `±5`) — against the lift dimensions `29, 46, 67`, beyond which no certificate of
+the form (b) exists, and the values `2D_odd = 84, 186, 352` of (d).  (How these numbers are
+obtained: `kbody_capacity.py` prints face frequencies on a grid of `K`, for 40, 20 and 20
+random supports per `K`; the half-points are linear interpolations of the stored lines,
+`76.4, 154.0, 234.3`.  The review ER3 re-estimated them with its own linear programme and
+more supports: `76.2` (95 %: `75.4…76.9`) and `148.9` (`147.4…151.0`); at `n = 12` a replicate
+with 16 supports per `K` puts the half-point near `236`.  `2D_odd` is where the bound of (d)
+on the probability is about one half, not a bound at these sizes: the stored frequency
+at `K = 85`, `n = 8`, is `0.025`.)
+(f) **[N]**  (*A Gaussian control, which is a known curve.*)  If the feature vectors of the
+`2^{n−1}` states are replaced by independent Gaussian vectors of the same dimension, the
+same computation gives half-points of about `78`, `142`, `214` for the sizes of `n = 8, 10, 12`
+(one cloud per run, 40, 20, 12 supports per `K`).  This reproduces theory and need not be
+simulated: the weak-neighbourliness threshold `ρ_W^+(D/N)·D` of Donoho and Tanner
+(**[K]**; their paper was read by the review ER3, which computed the curve) gives
+`76.4, 142.0, 215.2`.  So for four-body data the cube behaves like a generic cloud of as
+many points in as many dimensions at these sizes (ratios cube/Gaussian `0.98`, `1.04`,
+`1.09`).  For pair data it is more neighbourly: the half-points are near `13` (cube) and
+`10.9` (curve) at `n = 12`, near `16` and `11.5` at `n = 14` — ratios `1.2` and `1.4`.
+Asymptotically the Gaussian threshold is `D/(2 ln(N/D))` for `D ≪ N`, that is `n/(4 ln 2) ≈
+0.36n` for pair data — reached slowly (`0.91n, 0.82n, 0.67n, 0.51n, 0.42n, 0.38n` at
+`n = 12, 14, 20, 40, 100, 400`) — and of order `n^{2d−1}` in general; at the sizes computed
+here (`D/N = 0.77, 0.50, 0.27` for four-body data) the asymptote is not the relevant value.
+(g) **[K]**  (*The worst case.*)  Kahle, "Neighborliness of marginal polytopes" (2010),
+Theorem 13 (read by the review ER3): on a finite product space with any alphabets, the
+polytope of marginals of order at most `t` is `(2^t − 1)`-neighbourly, and this is sharp.  So
+**every** ensemble with at most `2^t − 1` conformers is determined, among all ensembles, by
+the marginals of order `t` — with no condition on the conformers.  For even correlations of
+order at most `2d` modulo the flip (all correlations of order at most `2d` in `z`): any
+`2^{2d} − 1` conformers — `3` for pair data, which is Proposition E9(a), `15` for two- and
+four-body data (checked by the review: 300 random 15-sets each at `n = 6, 7, 8` are faces;
+an explicit 16-set is not).  Random conformers do far better, by (a)–(e); (g) is what
+holds for every instance.
 
 *Proof.*  (a) is the cited theorem applied to the independent uniform vectors
 `z^a ∈ {±1}^{n−1}` (their Theorem 4.2 excludes vectors `u^{≤d}` "different from `±x_i^{≤d}`"; the
@@ -1927,29 +2005,42 @@ of the points.  ∎
 `output_threshold.txt`).  L1: lift isolation for `d = 2` at `n = 12` (66 pair observables):
 frequency `1.000, 1.000, 1.000, 0.995, 0.955` at `K = 24, 33, 49, 54, 66` — far beyond `2n = 24`.
 L2: `n = 8`, four-body data: 38 lift-isolated supports with 12 to 24 conformers, identification
-confirmed by a linear programme over all states in all 38.  L3: `n = 5`, exhaustive over all
-supports of the same size: flat-isolated non-faces, random weights — no twin with at most
-`K` atoms.
+confirmed by a linear programme over all states in all 38.  L3: `n = 5`, nine sampled
+supports of 6 or 7 conformers, each against **all** competing supports of the same size:
+the three that are flat-isolated non-faces have no twin with at most `K` atoms for random
+weights and have one for some weights (the exhaustive version, over all supports, is the
+review's: §4c.2).  L1 decides "in the span" with a tolerance `10⁻⁷`; the review's exact
+arithmetic modulo a prime agrees on 600 supports (smallest non-zero distance met:
+`2·10⁻⁶`), and its own run gives `0.993, 0.960` where ours gives `0.995, 0.955`.
 
 **Reading.**  Three numbers describe what data of order `2d` can do for random conformers:
 `n^d/d!` are certified by a sum of squares of degree `d`; at most `2n^{2d−1}/(2d−1)!` can be
-identified at all; with a prior on the number of conformers and generic weights, data of
-order `d` already reach `n^d/d!`.  For pair data the first two differ by a factor two and
+identified at all; with a prior on the number of conformers and generic weights, pair
+data already reach `n²/2` (E19(c): this is the case `d = 2`; for other even `d` the same
+argument would need the lift `ξ_d` to be the feature vector of data of order `d`, which we
+have not written out).  For pair data the first two differ by a factor two and
 the truth is near `1.1n`–`1.2n` (§4.4).  For four-body data they differ by a factor of order
 `n`, and at the sizes we can compute the truth is 2.6 to 3.5 times the sum-of-squares
-range, growing with `n`, and equal within a few per cent to the threshold of a Gaussian
-cloud of the same size — whose asymptotic value, `D/(2 ln(N/D)) ≈ n³/(48 ln 2)`, is of order
-`n³` (Problem O2, Conjecture C3).  This is a gap between *identifiable* and *certifiable by
-the natural certificate* that is not a constant, the cube's version of the gap the
+range and within 2 %, 4 % and 9 % of the threshold of a Gaussian cloud of the same size,
+whose asymptotic value is of order `n³` (Problem O2, Conjecture C3).  Neither number is
+evidence for the *order*: the Gaussian cloud's own ratio to the lift dimension is `2.63,
+3.09, 3.21` at `n = 8, 10, 12`, stays near `3.2` up to `n = 20`, and only then grows (`3.6, 4.1,
+5.2` at `n = 30, 40, 60`; computed from the Donoho–Tanner curve by the review ER3).  So the
+gap between *identifiable* and *certifiable by the natural certificate* **may** not be a
+constant here (that is Conjecture C3) — the cube's possible version of the gap the
 Geometric Inference Division found on chains (identifiable from 10 atoms, linearly
 certifiable from 12).
 
 **Conjecture C3.**  For fixed `d ≥ 2` the largest `K` for which `K` random conformers are, with
 probability tending to one, the ground states of an energy of even order at most `2d` is of
 order `n^{2d−1}`; in particular sums of squares of degree `d` certify a vanishing fraction of
-the identified supports.  (Evidence: (d), (e), and the Gaussian control (f), whose
-asymptotic value is `n^{2d−1}/(2 ln 2·(2d)!)`; for `d = 1` the cube exceeds that value
-threefold.  We have no proof of any lower bound above `L_d`.)
+the identified supports.  (Evidence, all of it indirect: the upper bound (d) is of this
+order; a Gaussian cloud of the same size has a threshold of this order asymptotically,
+`n^{2d−1}/(2 ln 2·(2d)!)`; and at the sizes computed the cube is within a few per cent of
+such a cloud for four-body data (ratios `0.98, 1.04, 1.09`) and above it for pair data
+(`1.2`, `1.4`), where the cube's `1.1n`–`1.2n` is about three times the Gaussian asymptote
+`0.36n`.  The computed sizes are far from the asymptotic regime of either.  We have no proof of any lower bound above
+`L_d`, and no source for the conjecture.)
 
 ### 4c.4 Generic conformers on a variety; torsion angles
 
@@ -1965,15 +2056,36 @@ by the means of the observables among all Borel probability measures on `X`.
 integral non-degenerate `𝒱 ⊂ ℙ^{N−1}` over `ℂ` and `K − 1 < c`, the span of `K` general points of
 `𝒱` meets `𝒱` in exactly those points).
 
-*Proof.*  The exceptional set of the lemma is a proper closed subset of `𝒱^K`; its preimage
-in `𝒳^K` is closed and proper because `[v]^K` has dense image, and `X^K` is Zariski dense in
-`𝒳^K`.  For a tuple outside it, a point `y ∈ X` with `v(y)` in the span has `[v(y)]` among the
+*Proof.*  The exceptional set of the lemma is contained in a proper closed subset of `𝒱^K`;
+its preimage in `𝒳^K` under `[v]^K` (defined where `v ≠ 0`, an open dense set) is contained in
+a proper closed subset because `[v]^K` has dense image, and `X^K` is Zariski dense in `𝒳^K`.  For a tuple outside it, a point `y ∈ X` with `v(y)` in the span has `[v(y)]` among the
 `[v(x_i)]`, so `y` is one of the `x_i`.  General points of a non-degenerate variety are
 linearly independent as long as their number is at most `N`.  Theorem E18(i).  ∎
 
-At `K = c + 1` the secant span meets `𝒱` in `deg 𝒱` points when the intersection is finite, and
-Theorem E18(ii) still applies whenever the rank-one matrices on the finitely many zeros in
-`X` are independent.
+At `K = c + 1` the secant span meets `𝒱` in `deg 𝒱` points, counted with multiplicity, when the
+intersection is finite; Theorem E18 then reduces identification to the finitely many of
+them that lie in `X`.
+
+*The literature of the checking problem* (pointed out by the Geometric Inference Division,
+GEOMETRY-MSG-0008 §2).  E20 says that a generic secant span contains no further point of
+the lifted variety; it does not say how to *verify* that for a given instance.  That is
+the problem of Johnston, Lovitz and Vijayaraghavan, "Computing linear sections of
+varieties" (FOCS 2023, arXiv 2212.03851; **[K]**, Theorem 2 read through a fetch of the
+arXiv text, proofs not read): for an irreducible variety cut out by a fraction `δ` of all
+forms of degree `d`, a subspace of dimension `R ≤ δ(n + d − 1)/d!` spanned by `s` generic points
+of the variety and `R − s` generic vectors contains only those `s` points of it, and an
+algorithm based on the Nullstellensatz — linear algebra in the `d`-th symmetric power —
+recovers them, and certifies it, in time `n^{O(d)}`; in the worst case the problem is
+NP-hard, already for matrices of rank one.  So for *generic* conformers on a variety
+there is a certificate of lift isolation that a kernel can check by linear algebra — the
+first level of a hierarchy, which is how that division now proves identifiability of
+chains from 10, 16 and 30 atoms for two, three and four states (its Theorem I′) — and for
+*given* conformers there is none in general, in agreement with the Complexity division's
+NP-completeness on the cube (§4.2).  Their range (a constant fraction of the ambient
+dimension for varieties with many equations) is smaller than the `c` of E20; for the
+sign vectors of the cube their theorem does not apply (the variety is a finite set of
+points).  This is the published form of the certificate format that our question E-T4
+asked the theory division for.
 
 **Corollary (torsion angles: the torus `𝕋^r` with multilinear data).**  Let the data be the
 Fourier coefficients `∫ e^{i a·φ} dμ`, `a ∈ {−1, 0, 1}^r` — the means of all products of
@@ -1982,10 +2094,42 @@ embedding of `(ℙ¹)^r` in `ℙ^{2^r − 1}`, of dimension `r` and degree `r!`,
 in it.  So **every generic ensemble of `K ≤ 2^r − r − 1` points of `𝕋^r` is determined by these
 data among all probability measures on the torus**, with a certificate that is a sum of
 squared moduli of multilinear polynomials: `K ≤ 4` for three angles, `11` for four, `26` for
-five.  For `r = 3` and `K = 5` the certificate has six zeros on the torus (the sixth point
-of the secant 4-plane; it is fixed by the antiholomorphic involution `z ↦ 1/z̄`, so it lies
-on the torus), and in the instances computed the six rank-one matrices are independent,
-so those ensembles are identified as well (**[N]**, L4).
+five.
+
+**Proposition E20a (one more on three angles: five generic states on `𝕋³`).**  Every
+generic ensemble of five states on `𝕋³` is determined by the multilinear data among all
+probability measures on the torus — one more than the `2^r − r − 1 = 4` of the Corollary.
+**[P]**, given that the secant 4-plane of five general points of the Segre threefold meets
+it in finitely many points, which is **[N]** (in 5 000 of 5 000 random instances: exactly
+six points); the argument is the review's (ER3, F5), which replaced our "in the instances
+computed" — check L4 computes one instance.
+
+*Proof.*  (1) *A lemma.*  Let `v_1, …, v_K` be linearly independent and `v_{K+1} = Σ_i a_i v_i` with
+at least two `a_i ≠ 0`.  Then the `K + 1` matrices `v_i v_i^*` are linearly independent: the
+`v_i v_j^*`, `i, j ≤ K`, are independent, the coefficient of `v_i v_j^*` (`i ≠ j`) in
+`Σ_l h_l v_l v_l^*` is `h_{K+1} a_i ā_j`, so `h_{K+1} = 0`, and then all `h_i = 0`.  (2) The span map from
+five-tuples of points of the threefold `𝒱 ⊂ ℙ⁷` to 4-planes goes between varieties of the
+same dimension 15, and its fibre through a tuple whose plane meets `𝒱` in finitely many
+points is finite; so it is dominant, and the secant plane of five general points is a
+general 4-plane, which meets `𝒱` in `deg 𝒱 = 6` distinct points.  (3) The sixth point is
+fixed by the antiholomorphic involution `z ↦ 1/z̄`, which fixes the five, so it lies on the
+torus; its lift is a combination of the five lifts with at least two non-zero
+coefficients, because it is a different point of `ℙ⁷`.  (4) By (1) the six rank-one matrices
+on `Z_S` are independent: Theorem E18(ii).  ∎
+
+*Beyond that* **[N]** (review ER3; its scripts are in `reviews/ER3_scripts/`).  Six generic
+states on `𝕋³` are **not** determined: every competing measure lives on the real curve
+where the projector certificate vanishes, and a linear programme over measures on that
+curve finds an ensemble with the same 26 data and most of its mass away from the states
+in 10 of 10 random instances (on the curve the 27 products span 12 functions, and six
+double zeros are 12 conditions).  For four angles: twelve generic states are determined
+in all 40 instances computed — in 35 by E18(ii), in 5, where all 24 zeros of the
+certificate are real and the 24 matrices satisfy one linear relation, by the finite
+problem on `Z_S`; with thirteen the answer depends on the configuration (an explicit twin
+in 2 of 4 instances, undecided in the other 2).  So the largest number of generic states
+that multilinear data determine is `2^r − r` for `r = 2` (E20′ and E22 below: proved) and
+`r = 3` (five: E20a; not six: numerical); for `r ≥ 4` it is not known and may depend on the
+configuration (Problem O10).
 
 **Proposition E20′ (two states on a torus; an explicit certificate).**  Let `p, q ∈ 𝕋^r`
 differ in the angles `k ∈ D` and agree in the others (`k ∈ E`).  With
@@ -2018,7 +2162,9 @@ infinitely many other measures on the circle.  ∎
 In the situation of E20′ with `|D| ≥ 2`, let `β_k = 2 − 2cos(p_k − q_k) ∈ (0, 4]` for `k ∈ D`, let
 `d²(φ, p) = Σ_k |e^{iφ_k} − e^{ip_k}|²` be the squared chordal distance on the torus, and
 
-    c_D = min_{k∈D} β_k / 4   if |D| ≥ 3 ,      c_D = β_kβ_l / (4(β_k + β_l))   if D = {k, l} ,      c* = min(1, c_D) .
+    c* = min_{k∈D} β_k / 4   if |D| ≥ 3 ,        c* = β_kβ_l / (4(β_k + β_l))   if D = {k, l}
+
+(both are at most `1`, since `β ≤ 4`).
 
 (a) (*Quadratic growth.*)  `f(φ) ≥ c*·min(d²(φ, p), d²(φ, q))` for every `φ ∈ 𝕋^r`.
 (b) (*Stability.*)  Let `Φ` be the observables `cos φ_k, sin φ_k` (all `k`) and the products
@@ -2029,14 +2175,22 @@ probability measure `ν` on the torus with `‖E_νΦ − E_μΦ‖_∞ ≤ τ`,
 
 `Λ` being the `ℓ¹` norm of the coefficients of `f`.
 (c) (*Weights.*)  With `ε = Λτ/c*`, `N_q = {φ : d(φ, q) < d(φ, p)}` and `β_max = max_{k∈D} β_k`:
-`|ν(N_q) − w_q| ≤ (4√ε + ε + 2√2·τ)/β_max`.
+`|ν(N_q) − w_q| ≤ (4√ε + ε + 2√2·τ)/β_max`; and, linearly in `τ`, for any two differing angles
+`k ≠ l`:
+
+    |ν(N_q) − w_q|  ≤  12ε/(β_kβ_l) + [ 2√2·(1/β_k + 1/β_l) + (8 + 8√2)/(β_kβ_l) ]·τ .
+
+(d) (*A second growth constant.*)  For `|D| ≥ 3`, (a) and (b) also hold with
+`c* = β_(1)β_(2)/(64|D|)`, `β_(1), β_(2)` the two largest of the `β_k`; so one may take the larger
+of the two constants.  This matters when one differing angle nearly coincides: then
+`min_k β_k/4` collapses and the certificate does not.
 
 **[P]**; the inequality of (a) on the differing angles is **[V]**:
 `Ensemble.twoStateCert_growth_three` (three or more coordinates, `c ≤ min θ`) and
 `Ensemble.twoStateCert_growth_two` (two coordinates, `c(θ_0 + θ_1) ≤ θ_0θ_1`, `θ > 0`), for
 non-negative `a_k`, `b_k` with `θ_k ≤ a_k` or `θ_k ≤ b_k` at every coordinate; that squared
-chordal distances satisfy this with `θ_k = β_k/4`, the angles of `E`, and (b), (c) are on
-paper.  (The first draft of the two-coordinate statement allowed `θ = 0`; the kernel
+chordal distances satisfy this with `θ_k = β_k/4`, the angles of `E`, and (b), (c), (d) are on
+paper.  The linear bound of (c) and the constant of (d) are the review's (ER3, F6).  (The first draft of the two-coordinate statement allowed `θ = 0`; the kernel
 rejected it, rightly: the hypothesis on `c` is then empty.)
 
 *Proof.*  (a) Write `a_k, b_k` for the squared chordal distances of `e^{iφ_k}` from `e^{ip_k}`,
@@ -2047,24 +2201,42 @@ have `b ≥ θ`, every inner sum `Σ_{l≠k} b_l` is at least `min θ`, so `F �
 `a ≥ θ`, `F ≥ (min θ)·B`; with three coordinates one of the two happens.  With `D = {k, l}` the
 remaining case is `a_k < θ_k` (so `b_k ≥ θ_k`) and `a_l ≥ θ_l`: then `F ≥ a_lb_k ≥ a_lθ_k` and
 `A < θ_k + a_l ≤ a_l(θ_k + θ_l)/θ_l`, so `F ≥ θ_kθ_l/(θ_k + θ_l)·A`.  On `E`, `a_k = b_k`, and
-`f = Σ_E a_k + F ≥ min(1, c_D)·(Σ_E a_k + min(A, B))`.
+`f = Σ_E a_k + F ≥ c*·(Σ_E a_k + min(A, B))` because `c* ≤ 1`.
 (b) `∫ f dμ = 0` and `f = c_0 + λ·Φ`, so `∫ f dν = λ·(E_νΦ − E_μΦ) ≤ ‖λ‖₁τ`; then (a).  Expanding
 `a_k = 2 − 2cos p_k cos φ_k − 2 sin p_k sin φ_k` and the products gives the bound on `Λ`.
 (c) Take `k` with `β_k = β_max` and `g = a_k/β_k`: `g(p) = 0`, `g(q) = 1`, `E_μ g = w_q`, and
 `|E_νg − w_q| ≤ 2√2τ/β_k`.  On `N_q`, `|g − 1| = |a_k − β_k|/β_k ≤ 4d(φ, q)/β_k`; elsewhere
-`g ≤ d²(φ, p)/β_k`.  So `|E_νg − ν(N_q)| ≤ (4√ε + ε)/β_k` by the Cauchy–Schwarz inequality.  ∎
+`g ≤ d²(φ, p)/β_k`.  So `|E_νg − ν(N_q)| ≤ (4√ε + ε)/β_k` by the Cauchy–Schwarz inequality.
+For the linear bound take `h = 1 − (1 − a_k/β_k)(1 − a_l/β_l)`, which is in the span, with
+`h(p) = 0`, `h(q) = 1`, so `E_μh = w_q`.  Everywhere `|h| ≤ (β_k + β_l + 4)·d²(φ, p)/(β_kβ_l)` (expand, and
+use `a_ka_l ≤ 4 min(a_k, a_l)`), and `|h − 1| = |β_k − a_k||β_l − a_l|/(β_kβ_l) ≤ 8d²(φ, q)/(β_kβ_l)`, because
+`|a_k − β_k| ≤ 4√b_k` (a difference of squares of two chords that differ by at most `√b_k`).
+Hence `|E_νh − ν(N_q)| ≤ 12ε/(β_kβ_l)`, and `|E_νh − E_μh|` is at most `τ` times the `ℓ¹` norm of the
+non-constant coefficients of `h`, the bracket.
+(d) Let `k, l` carry the two largest `θ`.  If `b_k ≥ θ_k` and `b_l ≥ θ_l`, every inner sum
+`Σ_{m≠j} b_m` is at least `min(θ_k, θ_l)`, so `F ≥ min(θ_k, θ_l)·A`; if `a_k ≥ θ_k` and `a_l ≥ θ_l`,
+`F ≥ min(θ_k, θ_l)·B`; otherwise, say `a_k ≥ θ_k` and `b_l ≥ θ_l`, `F ≥ a_kb_l ≥ θ_kθ_l ≥ θ_kθ_l·min(A, B)/(4|D|)`,
+since `A, B ≤ 4|D|`.  As `θ ≤ 1`, in all cases `F ≥ θ_kθ_l/(4|D|)·min(A, B)`.  ∎
 
 *What this adds.*  On a continuous configuration space no sharp certificate exists
 (Proposition E2.2) and the modulus is a square root; the science division has insisted,
 rightly, that a quadratic-growth certificate with an uncomputed constant is a qualitative
-statement.  Here every constant is explicit.  The order is optimal: splitting the atom at
-`q` into two atoms at angles `q_k ± δ` changes every datum by `O(δ²)` and
-`∫ min(d_p², d_q²) dν` by about `w_qδ²`.  *Numerical check* **[N]** (L6): over 46 random pairs of
-states on tori with two to five angles, the smallest value found for
-`f/(c*·min(d_p², d_q²))`, by sampling and by adversarial minimisation, is `1.25` — the
-constant of (a) is within a quarter of the best possible in the worst case found; on a
-`30 × 30` grid of the 2-torus the largest `∫ min(d_p², d_q²) dν` compatible with the data
-(a linear programme) is between `0.15` and `0.30` of the bound of (b).
+statement.  Here every constant is explicit.  The order of (b) is optimal: splitting the
+atom at `q` into two atoms at angles `q_k ± δ` changes every datum by `O(δ²)` and
+`∫ min(d_p², d_q²) dν` by about `w_qδ²`.  The constants are not: `c*` is attained only in the
+direction of the shared angles; on the differing angles it is conservative by a factor 2
+to 4 for `|D| = 2` (109 pairs of the review) and by much more for `|D| ≥ 3` when one
+differing angle nearly coincides, which is what (d) repairs; and the first bound of (c)
+is of order `√τ` where the truth is linear in `τ` (the second bound; in the review's five
+configurations the first is 16 to 330 times the true deviation and vacuous at
+`τ = 10⁻²`).  *Numerical check* **[N]** (L6): over 46 random pairs of states on tori with
+two to five angles (14 further pairs with some `β < 0.05` were set aside), the smallest
+value found for `f/(c*·min(d_p², d_q²))`, by sampling and by adversarial minimisation, is
+`1.25` (a pair with shared angles, where the ratio is `1/c*`); on a `30 × 30` grid of the
+2-torus the largest `∫ min(d_p², d_q²) dν` compatible with the data (a linear programme)
+is between `0.15` and `0.30` of the bound of (b) — the grid is too coarse for the extremal
+measures at `τ = 10⁻³`; with grids refined around the states the review finds up to `0.42`.
+The review's own runs, with gaps down to `10⁻³` radian, found no violation of (a).
 
 **Proposition E21 (`K` states on a product space: the permanent certificate).**  Let
 `X = Π_{k≤r} X_k`, let `s¹, …, s^K ∈ X` be distinct, and for every state `i` and coordinate `k`
@@ -2089,7 +2261,9 @@ means of the products of `1, cos, sin` over at most `K` angles.  For `K = 2` the
 is "the two states differ in at least two angles": Proposition E20′.
 
 **[P]**; elementary, by Hall's marriage theorem (equivalently the Frobenius–König theorem
-on vanishing permanents) **[K]**.  (a) and (b) are **[V]**:
+on vanishing permanents) **[K]**.  (a) and the first sentence of (b) are **[V]** (the
+clause "for instance …" and the second sentence of (b) follow at once from the first
+declaration and are not formalised):
 `Ensemble.permCert_eq_zero_iff` (for non-negative entries the permanent vanishes iff some
 set of states sees fewer coordinates than it has members; Mathlib's Hall theorem) and
 `Ensemble.permCert_zero_set` (for states and a configuration in a product space with one
@@ -2123,44 +2297,120 @@ zero set for every one, and the zero set is strictly larger than the triple for 
 uses all multilinear data and reaches `2^r − r − 1` *generic* states.  E21 trades number for
 explicitness and for a condition that can be read off the states.  2. On the cube
 (`a^i_k = 1 − x_ks^i_k`) the same permanent is an explicit energy of order `K`, with fields,
-whose ground states are exactly `K` given conformers satisfying the Hall condition — a
-deterministic statement; for random conformers Theorem E19 does far better.  3. The Hall
-condition is sufficient for this certificate, not necessary for identification: four
-generic states on `𝕋³` violate it (three coordinates, four states) and are identified by
-Theorem E20, with data of order three.  When it fails for a pair, identification itself
-fails on the torus (E20′, `|D| = 1`); for three states that differ in two angles only, the
-count of conditions (three double points impose nine conditions on the nine-dimensional
-span) indicates that it fails generically.
+whose ground states are exactly `K` given conformers satisfying the Hall condition.  **On
+a cube, and on any finite product space, this is weaker than a published theorem**
+(Kahle 2010; §4c.3 (g)): data of order `K` determine every ensemble with at most `2^K − 1`
+conformers, with no condition — on `{0,1}⁴` with data of order three, 352 of the 560 triples
+violate the Hall condition and are identified all the same (review ER3).  What E21 adds
+there is an explicit formula for the energy; its content is on tori, where the
+neighbourliness fails already for two states (E20′, `|D| = 1`).  3. The Hall condition is
+sufficient for this certificate, not necessary for identification: four generic states on
+`𝕋³` violate it (three coordinates, four states) and are identified by Theorem E20, with
+data of order three.  When it fails for a pair, identification itself fails on the torus
+(E20′, `|D| = 1`); and three states that differ in two angles only are **never** identified
+— Proposition E22.  (Version 3 argued this by "three double points impose nine
+conditions on the nine-dimensional span", which is false: the rank is 8 for every triple,
+because the squared modulus of the bilinear form through the three states is in the
+kernel; found by the review ER3, which also supplied the argument that follows.)
 
-*Relation to the science division's SCI-RES-0029 §3.*  Its (a) — two states that differ in
-one torsion are never identified from mean squared distances — is the case `|D| = 1`; its
-(c) — mean squared distances of a chain are a linear image of the Fourier coefficients
-with indices in `{−1,0,1}` of the torsion distribution — is what makes the torus the right
-model; and it leaves open whether two states that differ in two or three torsions are
-identified, since the Geometric Inference Division's linear certificate (its condition
-(CC)) fails there.  Proposition E20′ answers the question *on the torus*: yes, with an
-explicit certificate, as soon as two torsions differ.  For chains this becomes a theorem
-under two statements that are not ours and that we have not checked: that every
-competing state keeps the shared segments rigid (the Geometric Inference Division's
-Lemma 2.2, as used in SCI-RES-0029), and that the mean squared distances span the
-products of `1, cos, sin` of at most two of the differing torsions (rank 9 of 9 for two
-torsions in the science division's computation; not reported for three).
+**Proposition E22 (three states on a torus of two angles are never determined by bilinear
+data).**  Let the data be the means of `u(φ_1)v(φ_2)`, `u, v ∈ {1, cos, sin}`.  No ensemble with
+three atoms on `𝕋²` is determined by them among all probability measures on `𝕋²`.
+Consequently three states on `𝕋^r` that differ in two angles only are not determined by
+the multilinear data of any order, and two is the largest number of states that bilinear
+data on `𝕋²` ever determine (E20′).  **[P]**, given **[K]** the Carathéodory–Toeplitz theorem
+(a positive definite Toeplitz matrix has infinitely many representing measures); the
+proof is the review's (ER3, F1), re-derived by us.
+
+*Proof.*  If two of the states share an angle, the two-state part is not determined
+(E20′, `|D| = 1`) and replacing it by a twin gives a twin of the whole.  Otherwise let
+`z_k = e^{iφ_k}` and let `B = u_0 + u_1z_1 + u_2z_2 + u_3z_1z_2 ≢ 0` vanish at the three states (four
+coefficients, three conditions).  `|B|²` is in the span of the data and has mean zero under
+the ensemble `μ`, so every measure `ν` with the data of `μ` lives on `Γ = {B = 0} ∩ 𝕋²`.  `B` is not
+a product of a function of `z_1` and a function of `z_2` — the zero set of a product
+contains at most two points that differ pairwise in both angles — so `Γ` is the graph of a
+Möbius map `z_2 = M(z_1)`, which sends three points of the unit circle into the unit
+circle, hence the circle onto itself; after replacing `φ_2` by `−φ_2` if necessary (the data
+are invariant), `M(z) = c(z − a)/(1 − āz)` with `|c| = 1`, `|a| < 1`.  On `Γ`, with `z_1 = e^{iθ}`, since
+`1/(1 − āz_1) = (1 − a z̄_1)/|z_1 − a|²`,
+
+    z_2 = c·(z_1 − 2a + a² z̄_1) / |z_1 − a|² ,
+
+and `|z_1 − a|²` is a trigonometric polynomial of degree one.  So each of the nine products
+`z_1^α z_2^β`, `α, β ∈ {−1, 0, 1}`, restricted to `Γ`, equals `T(θ)/|e^{iθ} − a|²` with `T` a trigonometric
+polynomial of degree at most two.  Therefore a measure `ν` on `Γ` has the data of `μ` as soon
+as the measures `ν/|e^{iθ} − a|²` and `μ/|e^{iθ} − a|²` on the circle have the same Fourier
+coefficients of order at most two.  The second is a positive measure with three atoms,
+so its `3 × 3` Toeplitz matrix is positive definite and it has infinitely many such
+partners; each gives a probability measure `ν ≠ μ` with the data of `μ` (the total mass is
+one of the data).  For `𝕋^r`: put the shared angles at their common values.  ∎
+
+*An explicit twin* (control B2-07 of `BENCHMARK_CONTROLS.md`, verified by its generator):
+the uniform ensembles on `{(0, 0), (2π/3, 2π/3), (4π/3, 4π/3)}` and on
+`{(π/3, π/3), (π, π), (5π/3, 5π/3)}` have the same nine data (`E cos φ_1 cos φ_2 =
+E sin φ_1 sin φ_2 = ½`, the other six non-constant means zero; here `B = z_2 − z_1`).  *A warning
+for numerical checks* (review ER3): a linear programme over a product grid of angles
+cannot test non-identification here — three states of a `24 × 24` grid are "identified"
+among measures on the grid in 38 of 40 cases, because the grid has no other point on `Γ`.
+Our check L4 uses such a grid for two states; it did not give a false answer with the
+stored seed, and would for two states that differ in one angle by one grid step.
+
+*What these statements are not: chains.*  Version 3 said here that Proposition E20′
+"becomes a theorem for chains" under two statements of other divisions that we had not
+checked.  **Both fail as we wrote them, and the transfer is withdrawn** (linked
+correction: ENSEMBLE-RES-0004 §3; `DEAD_ENDS.md` ED21).  (i) Competing ensembles of a chain
+of rigid segments do not live on the torus of the differing torsions: consecutive
+segments may also be related by a reflection in a plane through the hinge bond, so they
+live on `O(2)^r`, with `2^r` components, of which the torus is the one of proper rotations
+(Geometric Inference Division, GEOMETRY-RES-0005 §2; the science division's SCI-REV-0021).
+(ii) For three differing torsions the mean squared distances span a 19-dimensional
+space that contains the products over *adjacent* pairs of torsions only
+(GEOMETRY-RES-0005 §3).  What survives on our side is a statement about measures on a
+torus, in a form that uses fewer data: **for any connected graph `Γ` on the differing
+angles,**
+
+    f_Γ(φ) = Σ_{k∈E} a_k + Σ_{{k,l}∈Γ} (a_kb_l + a_lb_k)
+
+**is non-negative and vanishes exactly at the two states** (each term forces `(φ_k, φ_l)` to be
+`(p_k, p_l)` or `(q_k, q_l)`, and connectedness propagates the choice), so two states are
+determined by the single-angle means and the pair products along any spanning tree of
+the differing angles — `2r + 4(|D| − 1)` numbers.  With `Γ` a path this is the Geometric
+Inference Division's adjacent-pair certificate, which is the one that lies in the span
+of the chain data; the growth constant of E20″ is for the complete graph, and the
+constant for a path has not been computed.  The statement for chains — a two-state
+mixture is identifiable unless two of the rotations `R_1`, `R_2`, `R_1R_2` are half-turns — is
+that division's and the science division's, not ours.  By the science division's account
+(SCI-RES-0036) E20′ does transfer to chains on the component of proper rotations, with
+the adjacent-pair certificate; a certificate in closed form on all `2^r` components is not
+known (numerically one exists for two torsions in general position), and for two
+half-turns the two states are not identifiable — a case that E20′, read on chains, would
+have asserted.
 
 ### 4c.5 Identified, certified, and the gap between them
 
 | setting | certified by the natural sum of squares up to | identified up to | not identified beyond |
 |---|---|---|---|
 | cube, pair data, random conformers | `n − 10n/ln n` (E10) | about `1.1n`–`1.2n` **[N]** (§4.4) | `2n` (E11(a)) |
-| cube, two- and four-body data, random conformers | `(1−o(1))n²/2` (E19(b)) | 2.6 to 3.5 times the lift dimension for `n = 8, 10, 12`, about the threshold of a Gaussian cloud **[N]** | `n³/3` (E19(d)) |
+| cube, two- and four-body data, random conformers | `(1−o(1))n²/2` (E19(b)) | 2.6 to 3.5 times the lift dimension for `n = 8, 10, 12` (half-points about 76, 150, 233), within 2 to 9 % of the threshold of a Gaussian cloud **[N]** | `n³/3` (E19(d)) |
+| cube or any finite product space, data of order `t`, **any** conformers | — | `2^t − 1` conformers, sharp (**[K]**: Kahle 2010; pair data on the cube: 3, E9(a)) | `2^t − 1` in the worst case |
 | cube, pair data, at most `K` conformers assumed, generic weights | — | `(1−o(1))n²/2` (E19(c)) | `n²/2` (dimension) |
-| torus `𝕋^r`, multilinear data, generic atoms | `2^r − r − 1` (E20); `2^r − r` for `r = 2` (E20′) and, in computed instances, `r = 3` | not known | not known (a count of double-point conditions suggests `(3^r − 1)/(r+1)`) |
-| chains, mean squared distances, two generic states (Geometric Inference Division) | 12 atoms (its Theorem C) | 10 atoms (its Theorem I) | 8 atoms (its numerics) |
+| torus `𝕋^r`, multilinear data, generic atoms | `2^r − r − 1` by lift isolation (E20); `2^r − r` with a finite zero set, for `r = 2` (E20′) and `r = 3` (E20a) | `2` for `r = 2`; `5` for `r = 3`; `12` for `r = 4` in 40 computed instances **[N]** | `2` for `r = 2` (E22); `5` for `r = 3` **[N]**; for `r ≥ 4` not known, and it may depend on the configuration |
+| chains, mean squared distances, two generic states (Geometric Inference Division) | 12 atoms (its Theorem C); by a linear-algebra certificate of higher level: 10 atoms, and 16 and 30 atoms for three and four states (its Theorem I′, GEOMETRY-MSG-0008) | 10 atoms (its Theorem I) | 8 atoms (its numerics) |
 
-In every row where both are known, the identified range is strictly larger than the range
-of the natural certificate; in the second row the two may differ in order.  What a kernel
-would have to check beyond the sum of squares — a non-negativity that is not a square, on
-a finite space — is the question we put to the theory and complexity divisions
-(ENSEMBLE-MSG-0004).
+In the rows for the cube and for chains the identified range is strictly larger than the
+range of the natural certificate, and in the second row the two may differ in order
+(Conjecture C3); on the torus with two or three angles they coincide once the
+finite-zero-set form of E18 is counted as the natural certificate.  (Version 3 gave, for
+the torus, a "count of double-point conditions" suggesting `(3^r − 1)/(r + 1)`: the count is
+false and the value is not the threshold — review ER3, F1.)  What a kernel would have to
+check beyond the sum of squares — a non-negativity that is not a square, on a finite
+space — is the question we put to the theory and complexity divisions
+(ENSEMBLE-MSG-0004).  The Complexity division's answer so far (COMPLEXITY-RES-0007, -0008;
+§4.2): a sum of squares of degree `d'` that vanishes on the conformers forces them into
+the zero set of a polynomial of degree `d'`, so in the second row a certificate needs
+degree at least 6 beyond `n²/2` conformers and at least 8 beyond `n³/6`; and for pair data a
+certificate of degree 2 exists iff the span of the conformers contains no other sign
+vector, which at the sizes one can enumerate is the exception (§4.2).
 
 ---
 
@@ -2216,13 +2466,14 @@ a finite space — is the question we put to the theory and complexity divisions
 |---|---|
 | Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`, `PermanentCertificate.lean`: twenty-four headline theorems and eight non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning; the programme's `scripts/audit_all.sh` passes on this branch (the status file records exactly which tree each stage was run on).  What is machine-checked is named at each theorem; everything else is a paper proof.  Of Part VI only the combinatorial cores of E20′, E20″ and E21 are machine-checked; for finite `X` the last step of E18 is `eq_of_exposing_certificate` applied to the zero set |
 | numerics | `experiments/ensemble/run_all.py` runs the six scripts whose numbers are quoted (output in `experiments/ensemble/output.txt`) and then `check_quotes.py`, which fails the run if a number quoted in a "Numerical check" passage is no longer the one in the stored output (about eighty sentences are tied to output lines; three review findings had been numbers that no script printed); the threshold computations of §4.2, §4.4 and §4c.3 are separate (`capacity_threshold.py`, `capacity_cutting_plane.py`, `symmetric_stability.py`, `kbody_capacity.py`, `degree2_vs_face.py`; output in `output_threshold.txt`) |
-| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  A second internal review (`reviews/ER2_internal_review.md`, with its own scripts in `reviews/ER2_scripts/`; again an AI review) of Parts IV and V, Theorem E7′, Proposition E2.2, Remark E2.3 and §4.4 found no critical defect, four major ones — a false converse in the title and summary of E15T, numbers quoted for check F6 that the script did not print, an overstatement in E2.2, a false sentence and a factor two in E2.3 — and twelve minor ones; all are applied and listed in §7 (item 10).  The science division reviewed Part II independently (SCI-REV-0020, its workstream R21: applied, item 9), contributed Proposition E2.2 and Proposition B, and replicated Theorem E15 with its own code (SCI-RES-0032: applied, item 11).  Part VI (version 3) has had a third internal review (`reviews/ER3_internal_review.md`: no numbered statement false; two major and nine minor findings), **not yet applied** (obligation OB24).  Propositions E15U and E17.1 are unreviewed.  No external peer review |
-| prior art | `PRIOR_ART.md`: the searches of the first checkpoint and those of the internal reviews ER1 and ER2 (with the level at which each source was read); two searches for E15U; for Part VI the two cited theorems were read in the sources (§5b), E18′, E20′ and C3 were not searched (OB16) |
+| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  A second internal review (`reviews/ER2_internal_review.md`, with its own scripts in `reviews/ER2_scripts/`; again an AI review) of Parts IV and V, Theorem E7′, Proposition E2.2, Remark E2.3 and §4.4 found no critical defect, four major ones — a false converse in the title and summary of E15T, numbers quoted for check F6 that the script did not print, an overstatement in E2.2, a false sentence and a factor two in E2.3 — and twelve minor ones; all are applied and listed in §7 (item 10).  The science division reviewed Part II independently (SCI-REV-0020, its workstream R21: applied, item 9), contributed Proposition E2.2 and Proposition B, and replicated Theorem E15 with its own code (SCI-RES-0032: applied, item 11).  Part VI (version 3) has had a third internal review (`reviews/ER3_internal_review.md`, with scripts in `reviews/ER3_scripts/`: no numbered statement false; two major findings — a false count of conditions in a remark, a sentence attributed to a check that only samples — and nine minor ones), applied (item 14).  The main statement of Proposition E15U was re-derived and replicated by the science division (SCI-RES-0038); the rest of E15U, Proposition E17.1, and the statements taken into Part VI from the review (E20a, E22, the second constant and the linear weight bound of E20″) are unreviewed.  No external peer review |
+| prior art | `PRIOR_ART.md`: the searches of the first checkpoint and those of the internal reviews ER1 and ER2 (with the level at which each source was read); two searches for E15U; for Part VI the sources of the review ER3 (five read in the original by the reviewer, among them Kahle's theorem, which we had missed) and the paper of Johnston, Lovitz and Vijayaraghavan pointed out by the Geometric Inference Division (§5b) |
 
 ## 7. Corrections and changes since version 1 (commit `a570520`)
 
 *(Items 1–6: version 2, commit `1a067b5`.  Item 7: version 3, commit `32f547a`.  Item 8: commit
-`8d42f60`.  Items 9–12: the fourth checkpoint, commit `527bf02`.  Item 13: after it.)*
+`8d42f60`.  Items 9–12: the fourth checkpoint, commit `527bf02`.  Item 13: commit `d7cbd91`.
+Items 14–15: the fifth checkpoint.)*
 
 1. **Theorem E11 strengthened and restated** (linked correction of ENSEMBLE-MSG-0002 §1,
    in ENSEMBLE-MSG-0003).  Version 1: "beyond `6.34n` random conformers (equal populations)
@@ -2366,7 +2617,56 @@ a finite space — is the question we put to the theory and complexity divisions
    result means as a computation, with readiness levels) and `BENCHMARK_CONTROLS.md`
    (synthetic controls with verified ground truth).  **Part VI is still the text of
    commit `8d42f60`: the internal review ER3 has reported and is not yet applied** (see
-   `reviews/ER3_internal_review.md` and obligation OB24 before relying on §4c).
+   `reviews/ER3_internal_review.md` and obligation OB24 before relying on §4c).  *(Applied
+   since: item 14.)*
+14. **Internal review ER3 applied to Part VI** (`reviews/ER3_internal_review.md`), together
+   with the corrections asked for by the Geometric Inference and Complexity divisions
+   (obligations OB20, OB24).  No numbered statement was false.  Withdrawn or corrected:
+   * *F1 (major).*  "Three double points impose nine conditions on the nine-dimensional
+     span" (Remark 3 to E21; the torus row of §4c.5; Problem O10) is false — the rank is 8
+     for every triple — and the value `(3^r − 1)/(r+1)` it suggested is not the threshold.
+     The conclusion is true for another reason and for every triple: Proposition E22
+     (the review's argument).  `DEAD_ENDS.md` ED24.
+   * *F2 (major).*  "For every flat-isolated support of 6 or 7 conformers … (L3)" cited a
+     check that samples nine supports.  The sentence is true (exhaustive computation of
+     the review, now quoted) and holds at every size, so the explanation given for it was
+     wrong.
+   * *F3, F4.*  The thresholds of E19(e), (f) were interpolated by hand: method, trial
+     counts and uncertainties are stated; `152` is `150 ± 2`; the Gaussian control is the
+     Donoho–Tanner curve; "a gap that is not a constant" stated Conjecture C3 as a fact;
+     "threefold" mixed an asymptote with finite sizes.
+   * *F5.*  Five generic states on `𝕋³`: a proposition (E20a), not "computed instances";
+     E18 restated with the finite problem on the zero set — which is also the Geometric
+     Inference Division's refinement (GEOMETRY-RES-0005 §1).
+   * *F6.*  E20″: `min(1, ·)` was idle; the sentence on sharpness was an artefact of the
+     shared angles; a second growth constant and a bound on the weights that is linear in
+     the tolerance (the review's) are added.
+   * *F7.*  Kahle's theorem (2010) — `2^t − 1` conformers are always determined by data of
+     order `t` — is cited next to E9(a), E19 and E21; E21 is weaker on finite product
+     spaces.
+   * *F8.*  E18(i) needs `v ≠ 0` on the support (a counterexample to the clause as it
+     stood; no lift of the report vanishes).
+   * *F9–F11.*  What checks L1, L3–L7 cover; "(a) and the first sentence of (b)" of E21
+     are machine-checked; wording.
+   * *Other divisions.*  The conditional transfer of E20′ to chains is withdrawn and
+     replaced by the statement for any connected graph of pairs (GEOMETRY-RES-0005 §§2–3);
+     the Complexity division's degree bounds are in §4c.5.
+15. **Messages received at the fifth checkpoint, applied** (ENSEMBLE-RES-0006):
+   * *A sentence we had quoted from the science division was withdrawn by it* (SCI-RES-0037,
+     SCI-MSG-0033 §1.2): "the ensemble of a true energy strictly inside its sandwich is
+     never identified by averaged data; data pin only bang-bang members", printed in bold
+     in our "Reading of Part IV" at the fourth checkpoint as what E13(b) gives.  It is
+     false as printed (a four-state counterexample of that division's referee): the
+     injectivity clause of E13(b) had been dropped.  Replaced by the correct form.
+   * "As a test of the class the thermal bound never fires" → "fires only below `0.03` of
+     the true scale" (its corrected figures); two remarks of its referee on the hypotheses
+     of E15.
+   * Proposition E15U: an independent re-derivation and replication of its main statement
+     by the science division (SCI-RES-0038) is recorded, with its refinement for sites of
+     slope zero.
+   * The literature of the checking problem for lifted certificates
+     (Johnston–Lovitz–Vijayaraghavan 2023; pointed out by the Geometric Inference
+     Division) is cited in §4c.4, and that division's new thresholds in §4c.5.
 
 ## 8. Limitations
 
@@ -2480,9 +2780,19 @@ a finite space — is the question we put to the theory and complexity divisions
   ensemble on them — all weights — the only one with at most `K` conformers and its pair
   correlations?  Equivalently: is the span of the lifted conformers disjoint from the
   span of any `K` other lifted vertices?  (Resilience against one vertex is the theorem
-  of Baldi and Vershynin; at `n = 5`, where `K > m/2`, exceptional weights exist.)
+  of Baldi and Vershynin.  On five sites every flat-isolated non-face has exceptional
+  weights, at every size `K = 4, …, 10` — exhaustive computation of the review ER3, §4c.2;
+  our earlier explanation "`K` more than half the number of observables" does not account
+  for `K = 4, 5`.  A heuristic of the review for large `n`: exceptional weights need a set
+  `T` of other states with `conv Φ(T)` meeting the flat of the support at a point whose
+  coefficients have at least `|T|` positive entries, and for `n ≪ K ≪ n²/4` a generic count
+  makes `|T|` larger than `K`; not an answer.)
 * **O10 (the torus beyond sums of squares).**  For generic atoms on `𝕋^r` with multilinear
-  data: is the largest identified `K` equal to `2^r − r`, to the count `⌊(3^r − 1)/(r+1)⌋`, or
-  in between?  For chains: do mean squared distances span the pairwise products needed
-  by Proposition E20′ when three or more torsions differ (a question to the science and
-  geometry divisions)?
+  data, what is the largest number of states that is always (generically) identified?
+  **Answered for `r = 2` and, numerically on one side, for `r = 3`: it is `2^r − r`** (two
+  states: E20′, E22; five: E20a; not six: explicit twins in 10 of 10 instances, review
+  ER3).  For `r = 4`: twelve in all 40 computed instances; thirteen: a twin in 2 of 4
+  instances, the other 2 undecided — the answer may depend on the configuration and not
+  only on the number.  Open: a proof for six states on `𝕋³`; `r ≥ 4`.  (Version 3 asked
+  whether the answer is "the count `⌊(3^r − 1)/(r+1)⌋`": that count was wrong.  Its question
+  about chains is answered by the Geometric Inference Division: adjacent pairs only.)

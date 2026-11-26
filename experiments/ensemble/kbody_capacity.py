@@ -73,7 +73,9 @@ def is_face(G, idx, start=600):
         c = np.zeros(r + 1); c[-1] = -1.0
         A_ub = np.hstack([-H[ck], np.ones((len(ck), 1))])
         res = linprog(c, A_ub=A_ub, b_ub=np.zeros(len(ck)), bounds=[(-1, 1)] * r + [(None, 1.0)], method="highs")
-        if res.status != 0 or res.x[-1] <= 1e-7:
+        if res.status != 0:
+            return None, it                               # solver failure: undecided (never observed; review ER3, F9)
+        if res.x[-1] <= 1e-7:
             return False, it                              # a relaxation has no certificate with a margin
         y, t = res.x[:r], res.x[-1]
         E = H @ y

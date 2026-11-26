@@ -1,8 +1,27 @@
 # Status of the Ensemble Identifiability and Certified Inference Division
 
-*Updated 2026-11-26, about 22:20 UTC (after the fourth checkpoint; see the commit time).  Branch `research/ensemble-identifiability`.*
+*Updated 2026-11-26, about 22:45 UTC (fifth checkpoint; see the commit time).  Branch `research/ensemble-identifiability`.*
 
 ## State
+
+**Fifth checkpoint** (ENSEMBLE-MSG-0007, ENSEMBLE-RES-0006; report §7 items 14, 15):
+
+* *The internal review of Part VI (ER3) applied.*  No numbered statement was false.  A
+  count of conditions on the torus was false (its conclusion true for another reason);
+  thresholds were hand interpolations; a published theorem (Kahle 2010) contains E9(a)
+  and supersedes E21 on finite product spaces; E18 is restated with the finite problem
+  on the zero set (also asked for by the Geometric Inference Division); the transfer of
+  E20′ to chains is withdrawn in the text.  Added from the review: **three states on a
+  torus of two angles are never determined by bilinear data** (E22); **five generic
+  states on a torus of three angles are** (E20a); a second growth constant and a linear
+  weight bound in E20″.  Every Part of the report has now had one review.
+* *A sentence we had quoted from the Science division and that it withdrew is out of
+  Part IV* (SCI-RES-0037): "only bang-bang members are pinned by averaged data".
+* *Proposition E15U* (the exact condition for the thermal union bound): its main
+  statement was re-derived and replicated by the Science division (SCI-RES-0038).
+* *The checking problem for lifted certificates has a literature*
+  (Johnston–Lovitz–Vijayaraghavan 2023; pointed out by the Geometric Inference Division):
+  certificates by linear algebra for generic instances, NP-hard for given ones — cited.
 
 **Supplementary directive of the research owner (2026-11-26, received about 22:00 UTC):** a
 seventh division (Structural & Computational Biology, Software Development and
@@ -16,7 +35,8 @@ eighteen reference instances whose verdicts are verified in exact arithmetic
 engineering division's; Proposition E17.1 (correlated noise; an observation function
 known up to a uniform error is exactly an enlarged tolerance; a parametric family gives
 a certified outer bound).  **The new division's branch was created at about 22:16 UTC at the
-theory division's commit `b2caab6`; it has no commit of its own and no digest yet.**
+theory division's commit `b2caab6`; at 22:27 UTC it still had no commit of its own and no
+digest.**
 
 **Fourth checkpoint** (ENSEMBLE-MSG-0005; ENSEMBLE-RES-0004, -0005):
 
@@ -100,12 +120,12 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 
 | division | branch | last commit read | what was read |
 |---|---|---|---|
-| theory | `claude/determined-ride-og1u7j` | `4692f59` | THY-MSG-0018 §3 in full (at `7f879d4`; the rest of that message not read); since then commit titles and the list of changed files only — no new collaboration file |
-| science | `research/scientific-translation` | `88c9a90` | SCI-REV-0020 in full; `docs/science/workstreams/R21_REPORT.md` §§2, 7 in full, the rest in part; SCI-RES-0032 in full; headers of SCI-REV-0021, -0022, SCI-MSG-0031, -0032, SCI-RES-0033, -0034 (not addressed to us); the diffs of its digest and status |
-| engineering | `research/ubuntu-engineering` | `c81166b` | commit log (unchanged since the third checkpoint) |
-| geometry | `research/geometric-inference` | `288b2de` | GEOMETRY-RES-0005 in full; GEOMETRY-MSG-0006 §1 and GEOMETRY-MSG-0007 §2 in full; the rest of those two, GEOMETRY-RES-0003, -0004 and GEOMETRY-REV-0001 not read |
-| complexity | `research/biological-complexity` | `12e6d36` | COMPLEXITY-RES-0003, -0007, -0008 in full; `ISING_GROUND_SETS.md`, COMPLEXITY-REV-0003, -0004 not opened |
-| structural biology | `research/structural-biology` | `b2caab6` (the theory division's commit at which the branch was created) | absent at 22:00 UTC; present at 22:16 UTC with no commit of its own and no `STRUCTURAL_BIOLOGY_TO_ALL.md`; nothing to read yet |
+| theory | `claude/determined-ride-og1u7j` | `6ebcccd` | THY-MSG-0018 §3 in full (at `7f879d4`); since then commit titles and the list of changed files only — no new collaboration file |
+| science | `research/scientific-translation` | `4661a03` | in full: SCI-REV-0020, SCI-RES-0032, SCI-RES-0036, SCI-RES-0037, SCI-RES-0038; SCI-MSG-0033 §§1, 2.2 in full, the rest by its headings; headers only: SCI-REV-0021, -0022, -0023, SCI-MSG-0031, -0032, -0034, SCI-RES-0033, -0034, -0035.  Its protocol for evaluating structural-biology software (checkpoint 65) not read |
+| engineering | `research/ubuntu-engineering` | `c683fde` | the change of its protocol copy (seven divisions; how software benchmarks are reviewed before execution); its queue not read |
+| geometry | `research/geometric-inference` | `b0734aa` | GEOMETRY-RES-0005 and GEOMETRY-MSG-0008 in full; GEOMETRY-MSG-0006 §1 and GEOMETRY-MSG-0007 §2 in full; GEOMETRY-RES-0006 header only; its report only through these messages |
+| complexity | `research/biological-complexity` | `75266b2` | COMPLEXITY-RES-0003, -0007, -0008 in full; COMPLEXITY-MSG-0004 where it names us; COMPLEXITY-MSG-0005 (its orientation for the new division) header only |
+| structural biology | `research/structural-biology` | `b2caab6` (the theory division's commit at which the branch was created) | absent at 22:00 UTC; present at 22:16 and 22:27 UTC with no commit of its own and no `STRUCTURAL_BIOLOGY_TO_ALL.md`; nothing to read yet |
 
 ## Verified state at the head of the branch
 
@@ -121,10 +141,11 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
   re-run after the last edits of the documents.  Files of other divisions changed here:
   only `proofs/AxiomAudit.lean` (imports, `#print axioms` lines and witnesses appended) and
   `docs/collaboration/README.md` (an addendum).
-* Numerics: `python3 experiments/ensemble/run_all.py` — six scripts, then
-  `check_quotes.py` (every number quoted in a "Numerical check" passage of the report is
-  the one in the stored output): all pass (`experiments/ensemble/output.txt`).  Threshold
-  computations and the degree-2 table: `output_threshold.txt`.
+* Numerics: `python3 experiments/ensemble/run_all.py` — seven scripts (the last regenerates
+  and verifies the benchmark controls), then `check_quotes.py` (every number quoted in a
+  "Numerical check" passage of the report is the one in the stored output): all pass
+  (`experiments/ensemble/output.txt`).  Threshold computations and the degree-2 table:
+  `output_threshold.txt`.  `proofs/` is unchanged since the audit of the fourth checkpoint.
 
 ## What is and is not reviewed
 
@@ -133,8 +154,9 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | Lean statements | kernel-checked; the statements of `ThermalUnionBound.lean` were compared with the report by the review ER2 (they match); the others were read by the author only |
 | Parts I–III (version 1) | internal adversarial review ER1 (a subagent of this division; AI review, not peer review): every numbered statement confirmed, five major and thirteen minor corrections, **all applied**.  Part II also reviewed independently by the Science division (SCI-REV-0020: every step re-derived, no gap; four major and ten minor findings on what the statements may be read as, **all applied**) |
 | Parts IV, V, E7′, E2.2, E2.3, §4.4 (version 2) | internal adversarial review ER2 (same kind): no critical defect; four major findings — among them a false converse in E15T — and twelve minor, **all applied**; E15 replicated by the Science division with its own code (SCI-RES-0032) |
-| Proposition E15U (new at this checkpoint) | **read by nobody but the author**; checked against exact linear programmes on 40 instances |
-| Part VI (version 3; E18–E21) | internal adversarial review ER3 **reported** (22:03 UTC; `docs/ensemble/reviews/ER3_internal_review.md`): no numbered statement false; two major and nine minor findings — a false count in a remark (its conclusion is true for another reason), a published theorem (Kahle 2010) that supersedes E21 on finite product spaces, conservative constants.  **Its findings are not yet applied**: the text of Part VI is still that of commit `8d42f60` (obligation OB24); nor are the corrections asked for by GEOMETRY-RES-0005 and COMPLEXITY-RES-0007/-0008 (OB20) |
+| Proposition E15U | main statement re-derived and replicated by the Science division (SCI-RES-0038); the other three characterisations and the consequences **read by nobody but the author** |
+| Proposition E17.1 (observation models) | immediate; **read by nobody but the author** |
+| Part VI (version 3; E18–E21) | internal adversarial review ER3: no numbered statement false; two major and nine minor findings, **all applied**; five cited sources read in the original by the reviewer.  The statements taken from the review (E20a, E22, two constants of E20″) were re-derived by us and **read by nobody else** |
 | prior art | `PRIOR_ART.md`: first-checkpoint searches; the sources of ER1 and ER2 with the level at which each was read; two searches for E15U; Part VI: two cited theorems read in the sources, the rest unsearched (OB16) |
 
 No external peer review of anything.

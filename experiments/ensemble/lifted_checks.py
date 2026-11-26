@@ -8,9 +8,11 @@ L1  Cube, degree-2 lift xi(x) = (1, x_i x_j): frequency with which the span of t
 L2  Cube n = 8, data = all correlations of even order <= 4: whenever K random conformers are lift-isolated for
     the degree-2 lift, a linear programme over all 128 states confirms that an ensemble on them is the only
     ensemble with its data (Theorem E19(b)); the certificate ||P^perp xi(x)||^2 vanishes exactly on them.
-L3  Cube n = 5 (16 states, 10 pair observables), exhaustive: supports that are flat-isolated but not faces.
-    Random weights: no other ensemble with at most K atoms has the same pair data (Proposition E18');
-    among all ensembles: not identified.  Also: whether SOME weights admit a twin with at most K atoms.
+L3  Cube n = 5 (16 states, 10 pair observables): NINE SAMPLED supports with 6 or 7 conformers, each tested
+    against ALL competing supports of the same size (exhaustive in the competitors only; the exhaustive
+    computation over all supports is in docs/ensemble/reviews/ER3_scripts/er3_e18prime.py).  For those that are
+    flat-isolated but not faces: random weights — no other ensemble with at most K atoms has the same pair data
+    (Proposition E18'); among all ensembles: not identified.  Also: whether SOME weights admit a twin.
 L4  Torus: (a) the explicit two-state certificate sum_{k != l} |z_k - p_k|^2 |z_l - q_l|^2 vanishes exactly at
     the two states (r = 2..5 angles, states differing in at least two angles), and a grid linear programme
     confirms identification for r = 2; (b) generic K points on the 3-torus: the projector certificate has
@@ -325,12 +327,13 @@ def two_state_f(phi, p, q, E, D):
 
 def test_L6():
     out = []; ok = True
-    worst = np.inf; cases = 0
+    worst = np.inf; cases = 0; skipped = 0
     for r in (2, 3, 4, 5):
         for shared in range(0, r - 1):
             for _ in range(6):
                 p, q, E, D, beta, cstar = two_state_setup(r, shared)
                 if beta.min() < 0.05:
+                    skipped += 1
                     continue                                 # nearly coincident angles: constant tiny, skip
 
                 def ratio(phi):
@@ -345,8 +348,8 @@ def test_L6():
                         best = min(best, res.fun)
                 worst = min(worst, best / cstar); cases += 1
                 ok &= best >= cstar * (1 - 1e-9)
-    out.append(f"    growth inequality, r = 2..5, {cases} random pairs of states: smallest observed "
-               f"f / (c* min(d_p^2, d_q^2)) = {worst:.2f} (must be >= 1)")
+    out.append(f"    growth inequality, r = 2..5, {cases} random pairs of states ({skipped} further pairs with some "
+               f"beta < 0.05 set aside): smallest observed f / (c* min(d_p^2, d_q^2)) = {worst:.2f} (must be >= 1)")
     # (b) stability on a grid of the 2-torus
     Gd = 30; ang = 2 * np.pi * np.arange(Gd) / Gd
     grid = np.array([(x, y) for x in ang for y in ang])

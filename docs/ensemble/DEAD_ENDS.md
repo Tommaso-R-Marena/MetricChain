@@ -234,3 +234,22 @@ no counterexample was found by the same adversarial search (1 650 restarts); tha
 is left open without a conjecture.  *Lesson: before writing "in every instance tried",
 let an optimiser try.*
 
+**ED24 (a count of conditions that was never computed; and what a grid cannot show).**
+Remark 3 to Proposition E21, the torus row of the table of §4c.5 and Problem O10 said that
+"three double points impose nine conditions on the nine-dimensional span" of the bilinear
+data on a torus of two angles, concluded that three states "generically" fail to be
+identified, and extrapolated the count to a conjectural threshold `(3^r − 1)/(r + 1)`.  The
+rank was never computed.  It is 8 for every triple: the squared modulus of the bilinear
+form through the three states lies in the span, vanishes at the states with its
+gradient, and is not zero.  Read with the right rank the count would have suggested the
+opposite conclusion.  The conclusion is nevertheless true — for *every* triple, by a
+different argument (competing measures live on a circle on which the data are
+trigonometric moments of order two of a weighted measure: Proposition E22) — and the
+extrapolated threshold is wrong (`r = 3`: five generic states are identified, six are
+not).  All of this was found by the third internal review (ER3, F1).  The same review
+points out why our numerical habit could not have caught it: a linear programme over a
+*product grid* of angles reports three states as identified in 38 of 40 cases, because
+the twin lives on a curve that misses the grid.  *Lessons: a parameter count is a
+computation — do it; on a continuous space, look for twins on the zero set of the
+certificate, not on a grid.*
+

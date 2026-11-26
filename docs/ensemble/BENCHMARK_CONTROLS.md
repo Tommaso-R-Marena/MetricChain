@@ -45,7 +45,7 @@ equalities; intervals against closed forms).  Numbers in quotes are exact ration
 | B2-04 | two triangles with sides `(3,4,5)`, `(4,5,6)`; laws of the three sides | `NOT IDENTIFIED`; twin `(3,5,6)`, `(4,4,5)` | a free rigidity matroid: lengths can be spliced (E5(b)) |
 | B2-05 | `K₄` in the plane, two conformers with no length in common, six edge-length laws | `NOT IDENTIFIED`; twin by reflecting one point in each | E7 needs *jointly* generic conformers (the science division's Example D1) |
 | B2-06 | five points, all distances but one; two conformers sharing a triangle | `NOT IDENTIFIED`; twin by exchanging the positions of one mobile point | a shared rigid part (Example D2; Problem O3) |
-| B2-07 | three states on a torus of two angles; nine bilinear trigonometric means | `NOT IDENTIFIED`; explicit twin | no three states on this torus are determined (internal review ER3, F1) |
+| B2-07 | three states on a torus of two angles; nine bilinear trigonometric means | `NOT IDENTIFIED`; explicit twin | no three states on this torus are determined (Proposition E22) |
 | B2-08 | two rigid bodies in the plane, collinear attachment points, six leg lengths, **one** pose | `NOT IDENTIFIED`; the mirror pose | E7′ excludes planar bodies: a mirror pose for any number of legs |
 | B3-01 | one vertex of a regular 360-gon, means of `(cos, sin)` | `IDENTIFIED`; but with each mean known within `10⁻⁴`, 66 % of the mass can be elsewhere, and within `2·10⁻⁴` all of it | E1.1: constant `1/γ = 6 566`; on a continuum the modulus is a square root (E1.2, E2.2) |
 | B4-01 | four conformers on `{±1}⁸` whose span contains a fifth sign vector, 28 pair correlations | `IDENTIFIED` (exact LP certificate); the projection certificate must abstain | E10 and the Complexity division's Proposition 13 |
@@ -112,8 +112,8 @@ separately:
 * Families 1 and 5 have statistical ground truth beyond the sizes that can be enumerated
   (the thresholds are conjectural: C2, C3); only instance-wise verdicts from exact
   computation are ground truth.
-* B2-07 rests on a statement of our internal review of Part VI that is in the review
-  file and not yet in the report; the twin itself is verified by the generator.
+* B2-07 rests on Proposition E22, which comes from our internal review of Part VI and has
+  been read by nobody else; the twin itself is verified by the generator.
 * On tori and other continuous spaces a search restricted to a product grid can report
   `IDENTIFIED` falsely, because the twin does not lie on the grid (B2-07); one of our own
   early checks had this defect.

@@ -271,11 +271,11 @@ add(id="B2-07", family="not identified", title="Three states on a torus of two a
     data={"E cos*cos": "1/2", "E sin*sin": "1/2", "the other six non-constant means": "0"},
     question="Is the ensemble determined by the nine means among all probability measures on the torus?",
     expected={"verdict": "NOT_IDENTIFIED", "twin": {"conformers_in_units_of_pi": [["1/3", "1/3"], ["1", "1"], ["5/3", "5/3"]], "weights": ["1/3"] * 3},
-              "remark": "no three-state ensemble on this torus is determined by these data (internal review ER3, F1); two states that "
+              "remark": "no three-state ensemble on this torus is determined by these data (Proposition E22); two states that "
                         "differ in both angles are (Proposition E20')",
               "trap": "a search restricted to a product grid of angles reports IDENTIFIED: the twin does not lie on the grid"},
     why="Every measure with the data lives on the circle where the bilinear form through the three states vanishes, and there the data are trigonometric moments of order at most two.",
-    source="section 4c.4; internal review ER3, F1")
+    source="section 4c.4 (Proposition E22; found by the internal review ER3)")
 
 def leg_lengths_sq(theta, t, U, V):
     c, s = math.cos(theta), math.sin(theta)

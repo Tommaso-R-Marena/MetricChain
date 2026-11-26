@@ -148,8 +148,14 @@ The class `{μ : μ(y)π(x) ≤ e^{d(x,y)}μ(x)π(y)}` is a polytope in the weig
 the data among its members" is again exposedness (of a face, with injective data), and
 bounds on means have exact flow certificates (the science division's format; exactness
 is LP duality).  LP of size `M²` unless the envelope has structure.  Reviewed by ER2.
-*Caveat.*  A member strictly inside the class is never identified by fewer than `M − 1`
-observables; data shrink the identified set, they do not pin interior members.
+*Caveat.*  A member with no tight constraint is not identified by fewer than `M − 1`
+independent observables.  For a box of weights `l ≤ w ≤ u` (a certified sandwich; the
+science division's reading, SCI-MSG-0033 §1.2): a member is identified iff, for some `f` in
+the span, its weights are at the ceiling where `f` exceeds its upper end `t*`, at the floor
+below it, and the data determine its weights on the level set `{f = t*}` — so a member
+strictly inside on `s` states of one level set can be identified by `s + 1` means.  (An
+earlier, stronger sentence — "only bang-bang members are pinned" — was withdrawn by that
+division; do not implement it.)
 
 ## 2. Product spaces that cannot be enumerated
 
@@ -188,7 +194,7 @@ and four-body data).
 nothing about stability (no gap), and it is a worst-case number: random conformers do far
 better (P1, and Theorem E19 for higher order).  The certificate still has to be computed
 (F1 on an enumerable space).
-*Status in our report.*  Not yet cited there (obligation OB24).
+*Status in our report.*  Cited as E19(g) (§4c.3); found by our internal review ER3.
 
 ### P2 — Reading as few pair correlations as possible  (Theorem E12(b), §4.3) — **R2**
 
@@ -230,7 +236,7 @@ about an instance.
 
 ## 4. Continuous configuration spaces with explicit constants
 
-### T1 — Two states on a torus of angles  (Propositions E20′, E20″, §4c.4) — **R1 (reviewed; corrections pending)**
+### T1 — Two states on a torus of angles  (Propositions E20′, E20″, E22, §4c.4) — **R2**
 
 Two states `p, q` of `r` angles are determined among all probability measures on the torus
 by the means of `cos`, `sin` of single angles and of products over pairs of differing
@@ -241,16 +247,17 @@ within `O(√τ)`.  Zero set and growth inequality are [V] (`Ensemble.twoStateCe
 `twoStateCert_growth_three`, `twoStateCert_growth_two`); the passage to angles and the
 stability bound are on paper.  Evaluating the bound is `O(r²)` arithmetic.
 *Review.*  The internal review ER3 (2026-11-26) re-derived the proofs and attacked them
-numerically: zero set, growth inequality and stability bound are correct; the constant
-`c*` is conservative (by a factor 2 to 4 for two differing angles, and much more when one
-of three differing angles nearly coincides); the bound on the weights is of order `√τ`
-where order `τ` is provable; three states on a torus of two angles are **never**
-determined by bilinear data (control B2-07).
-*Not ready because* those corrections are not yet in the report (obligation OB24); and
-because for chains of rigid segments the configuration space is not this torus (mirrored
-assemblies; only adjacent pairs of torsions are in the span of squared distances —
-Geometric Inference Division, GEOMETRY-RES-0005).  The statement for chains is that
-division's.
+numerically: zero set, growth inequality and stability bound are correct; its
+corrections are in the report (a second growth constant for the case that one of three
+differing angles nearly coincides; a bound on the weights that is linear in `τ`).  Three
+states on a torus of two angles are **never** determined by bilinear data (Proposition
+E22; control B2-07): a tool must not extend the two-state statement by analogy.
+*Caveat to carry.*  A statement about probability measures on a torus with multilinear
+trigonometric means as data.  For chains of rigid segments the configuration space is
+not this torus (mirrored assemblies; only adjacent pairs of torsions are in the span of
+squared distances — Geometric Inference Division, GEOMETRY-RES-0005); the statement for
+chains is that division's.  The graph form of the certificate (any spanning tree of the
+differing angles) has no computed growth constant yet.
 
 ### T2 — `K` states on a product space: the permanent certificate  (Proposition E21) — **R1**
 
@@ -307,6 +314,13 @@ an untrusted solver, a trusted checker — and on structured spaces the open pro
 certificate *format* for "the ground states of this energy are exactly `S`, with gap `γ`"
 whose size can be bounded (our question E-T4 to the theory division; the Complexity
 division's degree bounds say that sums of squares of low degree will not do in general).
+For the first half — "the span of the lifted conformers meets the lifted variety in no
+other point" — a format exists in the literature **for generic instances**: the
+Nullstellensatz certificates of Johnston, Lovitz and Vijayaraghavan (FOCS 2023), linear
+algebra in a symmetric power, in time `n^{O(d)}`, valid when the variety has many equations
+and the conformers are generic; in the worst case the problem is NP-hard.  The Geometric
+Inference Division uses its first level for chains (its Theorem I′).  It gives no gap,
+hence no stability constant.
 
 ## 7. Observation models: what is covered, and what is not
 
@@ -325,8 +339,9 @@ division's degree bounds say that sums of squares of low degree will not do in g
 
 ## 8. Proof obligations that bear on software
 
-* Part VI (E18–E21, E20″): reviewed internally (ER3: no numbered statement false); its
-  corrections are not yet in the report (OB24).  Proposition E15U: unreviewed (OB23).
+* Part VI (E18–E21, E20″): reviewed internally (ER3: no numbered statement false) and
+  corrected.  Unreviewed: Proposition E15U (OB23); the statements taken into Part VI from
+  that review (E20a, E22, two constants of E20″: OB26).
 * F5: paper proof; the cited minimax theory not read in the original.
 * L2: no stability modulus (Problem O4); several rigid bodies (Problem O3).
 * P1: no certificate format between the projection certificate and exhaustive

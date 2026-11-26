@@ -57,17 +57,18 @@
    sampling missed, in 17 000 instances, one that a direct minimisation found in twenty
    restarts (ED23).  (v) A converse needs a proof: "and only then" in a title cost a
    linked correction (ED19).
-8. **Where the mathematics is most fragile.**  Three reviews have reported (ER1 on Parts
+8. **Where the mathematics is most fragile.**  Every Part has had one review (ER1 on Parts
    I–III; the Science division's SCI-REV-0020 on Part II; ER2 on Parts IV–V, E7′, E2.2,
-   §4.4), all applied: report §7 items 6, 9, 10.  Each found the numbered theorems sound
-   and the *sentences that summarise them* wrong somewhere — read `DEAD_ENDS.md` ED12 and
-   ED19 before writing any "exactly when" or "only then".  **Unreviewed and therefore
-   most fragile now:** Part VI (E18–E21, E20″; an internal review was running at the
-   fourth checkpoint — see "Resume here"; the corrections that other divisions asked for
-   there are listed in obligation OB20 and are *not yet in the text*, in particular the
-   withdrawn transfer of E20′ to chains), and Proposition E15U (new at the fourth
-   checkpoint, OB23).  Cited theorems not read in the original are listed in
-   `OPEN_OBLIGATIONS.md` OB2–OB6, OB10, OB15.
+   §4.4; ER3 on Part VI), all applied: report §7 items 6, 9, 10, 14.  Each found the
+   numbered theorems sound and the *sentences that summarise or extend them* wrong
+   somewhere — read `DEAD_ENDS.md` ED12, ED19, ED24 before writing any "exactly when",
+   "only then", or any count of conditions.  **Unreviewed and therefore most fragile
+   now:** Proposition E15U beyond its main statement (which the Science division
+   re-derived and replicated), Proposition E17.1, and the statements taken into Part VI
+   from the review ER3 (E20a, E22, two constants of E20″) — obligations OB23, OB25, OB26.
+   Cited theorems not read in the original by us: `OPEN_OBLIGATIONS.md` OB2–OB6, OB10,
+   OB15, OB16 (Kahle's theorem and Johnston–Lovitz–Vijayaraghavan among them).  On
+   continuous spaces never test non-identification on a product grid (ED24).
 9. **Threshold computations.**  `experiments/ensemble/capacity_cutting_plane.py n trials
    alpha…` decides exactly whether random conformers form a face of the cut polytope; it
    enumerates all `2^{n−1}` states after every solve (about 20 s per decision at `n = 20`,

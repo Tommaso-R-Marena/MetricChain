@@ -5,49 +5,43 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after checkpoint 4 (2026-11-26, about 22:10 UTC).**  `ENSEMBLE_REPORT.md` version 3
-with the corrections of §7 items 8–11: Parts I–VI, Theorems E1–E21 (with E2.2, E7′, E15T,
-**E15U**, E18′, E20′, E20″), Conjectures C1–C3.  Lean: `proofs/Ensemble/Exposedness.lean`,
-`RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`,
-`PermanentCertificate.lean` (twenty-four headline theorems, eight witnesses);
-`scripts/audit_all.sh` passed on the tree of the checkpoint (5145 declarations).
-Numerics: `experiments/ensemble/run_all.py` (six scripts, then `check_quotes.py`) and the
-threshold scripts of §4.4, §4c.3, `degree2_vs_face.py`.  Sent: ENSEMBLE-MSG-0001 to -0005;
-ENSEMBLE-RES-0001 to -0005.
+**State after checkpoint 5 (2026-11-26, about 22:45 UTC).**  `ENSEMBLE_REPORT.md` version 3
+with the corrections of §7 items 8–15: Parts I–VI, Theorems E1–E22 (with E2.2, E7′, E15T,
+E15U, E17.1, E18′, E20a, E20′, E20″), Conjectures C1–C3.  **Every Part has had one review**
+(ER1: I–III; the Science division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all applied.
+Lean: `proofs/Ensemble/` five modules (twenty-four headline theorems, eight witnesses);
+`scripts/audit_all.sh` passed at checkpoint 4 (`527bf02`; 5145 declarations) and `proofs/` is
+unchanged since.  Numerics: `experiments/ensemble/run_all.py` (seven scripts, then
+`check_quotes.py`).  Software-facing documents: `SOFTWARE_INTERFACE.md`,
+`BENCHMARK_CONTROLS.md` (+ `experiments/ensemble/benchmarks/controls_v1.json`).  Sent:
+ENSEMBLE-MSG-0001 to -0007; ENSEMBLE-RES-0001 to -0006.
 
-Reviews applied: ER1 (Parts I–III), SCI-REV-0020 (Part II, the Science division's), ER2
-(Parts IV–V, E7′, E2.2, §4.4).  **Running when this was written:** ER3, the internal review
-of Part VI (a subagent; it writes `docs/ensemble/reviews/ER3_internal_review.md` and scripts
-under `reviews/ER3_scripts/`, which exist uncommitted in the working tree and were left
-out of the checkpoint commit on purpose).  If the session ended before it reported, the
-review must be commissioned again — nothing of it is in the repository.
+**Standing instructions** of the research owner's supplementary directive are in
+`HANDOFF.md` item 3a.  The seventh division's branch `research/structural-biology` existed
+without any content of its own at 22:27 UTC: read its digest at every synchronisation.
 
 **Next, in this order.**
-1. **Part VI.**  Apply ER3 when it reports, together with the deferred corrections of
-   obligation OB20: E18(ii) as "zero set finite ⇒ a finite problem on it" (GEOMETRY-RES-0005
-   §1); the two-state certificate for a connected graph of pairs; **the paragraph
-   "Relation to the science division's SCI-RES-0029 §3" of §4c.4 still carries the
-   withdrawn conditional transfer to chains** (ENSEMBLE-RES-0004 §3, `DEAD_ENDS.md` ED21) —
-   replace it; the degree bounds of COMPLEXITY-RES-0007/-0008 in the table of §4c.5.
-2. **Proposition E15U** (the exact condition for the thermal union bound) has been read
-   by nobody but its author: commission a review, or machine-check its core (the
-   layer-cake decomposition of a monotone function into up-set indicators is the only
-   step with content; obligation OB23).  Open inside it: three sites with pair
-   interactions (no counterexample to the single-site form, no proof); a usable family
-   of up-sets for pair models.
-3. Mathematics, by expected value: (i) a proof of anything about the threshold of §4.4
-   (O1/C2) — note the caution of §4.2: cubes of 22 sites are far from the asymptotic
-   regime; (ii) the capacity of higher-order data (C3) — a lower bound above the
-   sum-of-squares range would be new; (iii) several rigid bodies (O3), now knowing that
-   connectivity of the matroid is not the whole criterion (planar bodies); (iv) a
-   quantitative no-chimera constant (O4, with geometry and science).
+1. **Synchronise** (seven branches).  Answer whatever the Structural Biology division
+   asks; its first questions will show which configuration spaces and data types it
+   means to use (ENSEMBLE-MSG-0006, "Requested response").
+2. **Unreviewed statements** (do not present them as implementable): E15U beyond its
+   main statement, E17.1, E20a, E22, the new constants of E20″ (OB23, OB25, OB26).  A
+   review by a subagent, or a machine check of the layer-cake core of E15U.
+3. **Research under the directive** (task list item "Cycle 5"): (i) data that are not
+   linear in the ensemble — nothing we have covers them; a first theorem on what
+   identification means for quadratic data (order parameters) would be new ground;
+   (ii) certificate formats on product spaces: the Nullstellensatz certificates of
+   Johnston–Lovitz–Vijayaraghavan for lift isolation, a format that also certifies a gap
+   (E-T4); (iii) certified lower bounds on the number of conformers; (iv) the torus for
+   four angles (twelve states identified in 40 instances; thirteen configuration-dependent)
+   and a proof for six states on three angles; (v) thresholds C2, C3 — only with a proof
+   idea; more numerics at small `n` are far from the asymptotic regime (§4.2).
 4. Append the four-body rows for `n = 14` to `output_threshold.txt` and §4c.3 if the
    background run finished (its log is in the session scratchpad, not in the repository;
-   the first row was: `K = 280`, face frequency `1.000` on 10 trials, 4 740 s).
-5. Machine checks: E15(c) as a statement about class members (OB13); E12(a); the
-   Littlewood–Offord lemma of E10.
-6. Synchronise (`HANDOFF.md` item 3) before any of this; re-run `scripts/audit_all.sh`
-   before a checkpoint that changes `proofs/`.
+   first row: `K = 280`, face frequency `1.000` on 10 trials, 4 740 s per value of `K`).
+5. Machine checks: E15(c) as a statement about class members (OB13); a torus instance
+   for the witness of the two-coordinate growth inequality; E12(a).
+6. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
 
 ---
 
@@ -395,4 +389,42 @@ capacity `2^t − 1` on product spaces and supersedes E21 there; five generic st
 certificate formats on product spaces; data that are not linear in the ensemble
 (nothing covers them); certified lower bounds on the number of conformers; a review of
 E15U and E17.1.
+
+---
+
+## 2026-11-26 — Checkpoint 5: the review of Part VI applied; crossings with the Science division
+
+**Applied (ER3).**  Report §7 item 14.  The one false sentence was a count of conditions
+that had never been computed (`DEAD_ENDS.md` ED24); the review replaced it by a theorem
+(E22: no three states on a torus of two angles are determined by bilinear data) and
+added a second (E20a: five generic states on three angles are).  We re-derived both and
+the two new constants of E20″ before taking them in.  Kahle's theorem (2010) is the
+worst-case capacity on product spaces; our E21 is weaker there.
+
+**Crossing.**  Our fourth checkpoint printed in bold a sentence of the Science division
+("only bang-bang members are pinned by averaged data") that it had withdrawn forty-seven
+minutes earlier, in a message we had not yet fetched; removed (SCI-RES-0037).  The same
+division re-derived and replicated the main statement of E15U (SCI-RES-0038) within
+half an hour of our asking.
+
+**Literature.**  Johnston–Lovitz–Vijayaraghavan (FOCS 2023), pointed out by the Geometric
+Inference Division: the problem "does this span meet this variety in no other point" —
+the checking problem of every lifted certificate — has an algorithm with certificates
+for generic instances and is NP-hard in the worst case.  It is a published answer, for
+generic instances, to the question we had put to the theory division (E-T4).
+
+**Verified.**  `run_all.py` (seven scripts, then `check_quotes.py`): all pass.
+
+**Communicated.**  ENSEMBLE-MSG-0007 (all; linked correction of ENSEMBLE-MSG-0004,
+ENSEMBLE-RES-0003, ENSEMBLE-RES-0005 §2), ENSEMBLE-RES-0006 (science, geometry).
+
+**Reassessment.**  After three internal reviews and two external ones the pattern is
+stable: the numbered theorems survive; what fails are sentences that generalise from
+them — a converse (E15T), a count (E21 Remark 3), a quoted reading (the sandwich) — and
+numbers written from exploratory runs.  The remedies in place: `check_quotes.py` for the
+numbers, adversarial search before any "in every instance tried", and reviews before a
+statement is offered for implementation (`SOFTWARE_INTERFACE.md` readiness levels).  The
+most valuable new mathematics of the day came out of the reviews themselves (E15U from
+ER2's open question; E20a and E22 from ER3).  Next research should go where nothing we
+have applies: data that are not linear in the ensemble.
 
