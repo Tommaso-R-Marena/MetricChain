@@ -144,18 +144,21 @@ minimiser (label [CK] each; [M]).  *Reproduce:* `python experiments/structbio/fl
 | 1BPI | 36 | 0.1102 | 0.00032 | yes | 10 | 22 | 28 |
 | 1PGA | 46 | 0.0068 | 0.00052 | yes | 20 | 36 | 73 |
 | 2IGD | 49 | 0.0039 | 0.00058 | yes | 26 | 33 | 80 |
-| 1UBQ | 65 | (appended to `results.jsonl` when its run ends) | | | | | |
+| 1UBQ | 65 | 0.0050 | 0.00102 | yes | 26 | 47 | 621 |
 
 `RT = 0.593` kcal/mol.  Crambin, per residue (largest gaps): Tyr29 55.8, Tyr44 18.3, Arg17 6.5,
 Arg10 3.3, Ile35 3.1 kcal/mol; the fourteen smallest are below 0.6 (hydroxyl rotamers of Thr and
-Ser lowest: 0.045, 0.057).
+Ser lowest: 0.045, 0.057).  Ubiquitin: Lys27 14.8, Leu67 10.7, Leu15 7.3, Phe45 6.9, Tyr59 6.0,
+Leu71 5.0 — the residues the model pins down are those of its hydrophobic core and its buried
+lysine; the three smallest gaps are 0.005 to 0.017 (Thr55, Val5, Thr12).  The largest search
+for one ubiquitin gap took 52 branch-and-bound nodes and 91 s.
 
 What it shows.  (1) Uniqueness of the minimiser, certified.  (2) Robustness to rounding: the
 gap exceeds twice the rounding margin in every structure, so the minimiser of the integer
 tables is the unique minimiser of the float tables as well (a corollary tested in
 `tests/structbio/test_stability.py`).  (3) The unfavourable part, and the scientifically
 relevant one: the gap to the second-best configuration is a few hundredths of a kcal/mol or
-less, and 61 to 81 % of the residues can change state for less than `3RT`.  The certified
+less, and 61 to 81 % of the residues can change state for less than `3RT` (ubiquitin: 72 %).  The certified
 global minimum of this model is one configuration among very many of nearly equal energy; it
 is not a description of the model's ensemble, let alone of the protein.  These are the first
 numbers here that the exact solver's answer does not already contain; an uncertified solver
