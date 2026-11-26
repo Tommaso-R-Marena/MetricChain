@@ -1,6 +1,6 @@
 # Scientific frontier map
 
-*Science division.  **Version 5** (2026-11-26, checkpoint 40: after the second and third waves of workstreams — F, P2, L2, R6, R7, R8, R9, P3, L3, A3 —
+*Science division.  **Version 5.1** (2026-11-26, checkpoint 43: one row of §4 answered — an interacting known part, workstream R10; version 5 was of checkpoint 40: after the second and third waves of workstreams — F, P2, L2, R6, R7, R8, R9, P3, L3, A3 —
 the theory division's fourteenth and fifteenth checkpoints, and addenda A16–A17; rows F1, F3, F5, F6, F8, F12 and §§3–4 rewritten; change notes at the end.
 Version 4.1 was of 2026-11-25).  A map of what the science of molecular
 conformations cannot reliably establish today, why, and what precise problem each
@@ -117,9 +117,14 @@ barrier), not totals.
 | **the compact case**: a certified bound that sees the cancellation between self and cross terms (helix, buried side chains, charges) | `OPEN_PROBLEMS.md` D6; SCI-MSG-0020 (P3-T1…T4, P3-E1, P3-E2) | **open — the problem the physical line ends on** |
 | the hinted query complexity on a finite space with heavy states (the covering programme of randomised certificate complexity) | SCI-RES-0009 §4 (A3-T6) | open |
 | is Hoeffding's Theorem 3 used as a certified second-order bound in free-energy perturbation | SCI-RES-0009 §3 | not found; Decoster (2004) unread — needs a library |
-| does an interaction along the chain raise the exponents (the theory division's unverified workstream Y) | workstream R10 | **running** |
+| does an interaction along the chain raise the exponents (the theory division's workstream Y) | workstream R10; SCI-REV-0010 | **answered for one model, and not by "yes"**: for a two-state nearest-neighbour chain all three exponents rise at `u = 1` (theirs; replicated), by the structure factor at small slopes (proved at second order); at `u ≥ 2–3` the two cost exponents fall below the independent-site values (proved from their own recursion); the threshold rises at every slope.  Open: the crossover slope (R10-T2, R10-E1); the small-slope law for the infinite chain (Conjecture R10.3); more than two states, a field |
 
 ## Change note
+
+*Version 5.1 (checkpoint 43).*  The last row of §4 (an interacting known part; the theory
+division's workstream Y) is answered by workstream R10 (SCI-REV-0010): the direction of
+the effect depends on the per-site envelope.  The physical consequence is in
+`PHYSICAL_APPLICABILITY.md` §3a; nothing else in the map changes.
 
 *Version 5 (checkpoint 40).*  Rows F1, F3, F5, F6, F8, F12 rewritten or extended after the
 second and third waves: the sampling route of F1 is in print (A3) and has one certified

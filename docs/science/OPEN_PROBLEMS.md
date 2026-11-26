@@ -90,7 +90,7 @@ published request.*
 | H6 | **What are averaged data worth in an ellipsoid class of order `m` when `k < m`?**  The two-oracle question between the polytope (nothing) and `k ≥ m` (everything) | ends only | — | us |
 | H7 | **Adversary or noise?**  Whether the remainder of a real many-body term outside a pair-additive class behaves like an adversary (amplified) or like noise (averaged) | pilot: sup/RMS 4–8 | SCI-RES-0002 P-T2, P-T3 | us + engineering |
 
-## I. From the reviews of theory report §§11.25, 11.26 (workstreams R1, R5)
+## I. From the reviews of theory report §§11.25, 11.26 (workstreams R1, R5) and of the theory division's workstream Y (R10; rows I7–I9)
 
 | # | problem | what is known | sent | best placed |
 |---|---|---|---|---|
@@ -100,4 +100,7 @@ published request.*
 | I4 | **Concavity of the two-letter site function** (= concavity in `ρ` of `max_p E_0(ρ, p)` for binary-input binary-output channels) | true on 500 + earlier random sites | SCI-REV-0005 R5-T3 | theory |
 | I5 | **The error term of the isoperimetric input** of §11.26 (proof: `n^{−1/(2q_max+2)}`; evidence `ln n/n`) and a first simulation of the nested algorithm beyond two letters | nothing simulated | SCI-REV-0005 R5-E1 | engineering |
 | I6 | **The junction of Proposition 11.81(b)**: does it come earlier than `βJ*` at large slopes, as attributed to referee R10? | not reproduced by our reviewer up to 97 % of `βJ*`, `u ≤ 6` | SCI-REV-0001 §6 | theory (publish R10's report) |
+| I7 | **The crossover slope of an interacting chain.**  For the two-state nearest-neighbour chain: at which per-site slope `u_c(p)` do `a` and `h` fall below the independent-site values?  A proof of `F_∞(t) = (1−t) ln 2 − e^{−tu}cosh²(Kt) + o(e^{−tu})` would settle all large slopes | raised proved for `u ≤ 1` (`h`: `u ≤ 2`), lowered proved for `a` at `u ≥ 3` (`p ≤ 0.3` computed) and `h` at `u ≥ 4` (`p ≤ 0.2`); between, every lower bound for `a` is below the cube and every upper bound above; no Markov reference can prove the reversal (the period-four label) | SCI-REV-0010 R10-T2, R10-E1 | theory; engineering (vertex enumeration for blocks of four and five) |
+| I8 | **The small-slope law for the infinite chain (Conjecture R10.3).**  `lim_{u→0} F_∞(t; u)/u² = (t(1−t)/2)·v*`, `v*` the largest variance per site of a Lipschitz function, for homogeneous finite-range chains; physically usable form: exponents `= S(0) ×` independent residues for envelopes below `k_BT` over the cooperative length (helix–coil: `σ^{−1/2}`) | proved at fixed length (R10.1, R10.2); for `F_∞` the upper side proved for the symmetric two-state chain, the lower side a sketch; the general quantity is not the susceptibility (exact counter-examples) | SCI-REV-0010 R10-T3 | theory; us |
+| I9 | **The threshold of the chain at strong coupling.**  Is `E_n = ln Z_n(u/2)/Z_n(0)` for all `n`?  Is the maximiser of the tilt-state relaxation at `p = 0.1`, `Q = π` realisable by a member of the class? | equality for `n ≤ 5`; `E_∞ ∈ [0.401719, 0.403619]` at `p = 0.1`, `u = 1` (closed to `10⁻¹⁰` at `p ≥ 0.2`) | SCI-REV-0010 R10-T5 | theory |
 

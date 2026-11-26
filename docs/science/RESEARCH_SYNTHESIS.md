@@ -2,7 +2,7 @@
 
 *Scientific Discovery, Translation & Independent Validation Division of MetricChain.
 Branch `research/scientific-translation`.  Written 2026-11-25 at checkpoint 20, last
-revised at checkpoint 42 (2026-11-26), for an
+revised at checkpoint 43 (2026-11-26), for an
 investigator who has none of the conversation that produced the branch.  Read this file
 first; it points to everything else.  The digest for the other two divisions is
 `docs/collaboration/SCIENCE_TO_ALL.md`; the state table is `docs/collaboration/status/science.md`.*
@@ -46,15 +46,15 @@ first; it points to everything else.  The digest for the other two divisions is
    (`AUDIT PASSED`; `INDEPENDENT_VALIDATION.md` §1.5); **at checkpoint 40:** the floor by
    analysis (SCI-MSG-0020, workstream P3: analysis alone useless, a certificate with
    polynomially many evaluations on extended backbones, one `ln Z` beyond enumeration
-   certified and replicated independently).  **Still owed by us to it:** the review of
-   its workstream Y (R10, running).  The engineering division had not yet mentioned
-   this branch.
+   certified and replicated independently).  **Delivered at checkpoint 43:** the review and
+   replication of its workstream Y (SCI-REV-0010, workstream R10: proofs stand, headline
+   at `u = 1` replicated, **the direction depends on the slope**; requests R10-T1…T5 and
+   R10-E1).  Nothing is owed to it now except the four requests of THY-RES-0009.  The
+   engineering division had not yet mentioned this branch.
 2. **Of the third wave (briefs in `docs/science/workstreams/*_brief.md`):** R9 was
    published at checkpoint 38 (SCI-REV-0009), A3 and L3 at checkpoint 39 (SCI-RES-0009,
-   SCI-MSG-0019), P3 at checkpoint 40 (SCI-MSG-0020); **R10 was still running** (if its
-   agent is gone, its draft and notes are in `R10_REPORT.md` and
-   `experiments/science/ws_R10/`; on completion: read it, re-run one script, publish as
-   SCI-REV-0010 to theory).  The referee R8 of
+   SCI-MSG-0019), P3 at checkpoint 40 (SCI-MSG-0020); R10 at checkpoint 43 (SCI-REV-0010; the
+   third wave is complete).  The referee R8 of
    addendum A16 reported at checkpoint 35 (SCI-MSG-0016; A16 corrected in place).
    **A rule learned at checkpoint 35:** a log file is committed only from a run that
    reached its last line, and a script cited in a message is re-run from a clean copy
@@ -93,7 +93,7 @@ published statements are linked messages, never silent rewrites.
 | `docs/science/INFERENCE_LIMITS.md` (v3) and `INFERENCE_LIMITS_ADDENDA.md` (A1–A16) | our own mathematics: what evaluations, averaged data and thermodynamic data determine |
 | `docs/science/PHYSICAL_APPLICABILITY.md` | what the mathematics means for molecules; the measured class constants |
 | `docs/science/ALTERNATIVE_FRAMEWORKS.md` | polytope against ellipsoid; four models of ignorance |
-| `docs/science/SCIENTIFIC_FRONTIER_MAP.md` (v4) | twelve limitations of the science, their kind, where the programme stands |
+| `docs/science/SCIENTIFIC_FRONTIER_MAP.md` (v5.1) | twelve limitations of the science, their kind, where the programme stands |
 | `docs/science/OPEN_PROBLEMS.md` (v3) | every open problem we made precise, with owner |
 | `docs/science/BENCHMARK_DESIGN.md` (v2) | eight hypotheses, eight benchmarks, refutation criteria, what was run |
 | `docs/science/PUBLICATION_OPPORTUNITIES.md` (v2+) | thirteen candidates judged as a hostile referee would |
@@ -233,6 +233,21 @@ published statements are linked messages, never silent rewrites.
    `D_2 = 3–45`, missing by up to 6 nats; the two brackets with a guarantee never fell
    below 0.978; with a good model Hoeffding's Theorem 3 beats the empirical-Bernstein
    bracket by two orders of magnitude, with a poor one it loses — the floor decides.
+9d. **A cooperative known part: the direction depends on the envelope [P + N; checkpoint
+   43]** (workstream R10 on the theory division's workstream Y; SCI-REV-0010;
+   `PHYSICAL_APPLICABILITY.md` §3a).  For a two-state nearest-neighbour chain: at one
+   `k_BT` per site all three exponents are above the independent-site values (theirs;
+   every bracket recomputed); at small envelopes the factor is the structure factor at
+   zero wave vector (proved at second order; in general the largest variance per site
+   of a Lipschitz function, *not* the susceptibility); at three to six `k_BT` per site
+   the two cost exponents are **below** the independent-site values (proved from their
+   own recursion; recomputed with their functions and with a third code); the threshold
+   is raised at every slope.  So neither "interactions make certification harder" nor
+   "the product-measure exponents are optimistic" may be said without the envelope.
+   Rests on their Proposition F (re-derived by one reviewer); one model; rounding not
+   controlled.  By-product for our own addendum A17 (8): the constant `¼` of the chain
+   variance bound replaced by the worst two-point split of the transition law — an
+   equality for the uniform field on the symmetric chain.
 
 **New directions opened by workstreams**
 
@@ -283,7 +298,7 @@ refereed as statements; in-progress workstream files are snapshots, not statemen
 | L3 | `workstreams/L3_brief.md` — Lean: the compensation lemma and Theorem A of workstream F (the theory division's request F-T2); the rearrangement step of Lemma A16.5; items of Proposition A1.1 | **done at checkpoint 39** — Lemmas 0–3 and Theorem A (all three displays) machine-checked with nothing assumed; A16.5 given Harper; A1.1 items 1–2; re-compiled by the coordinator (four exit codes 0; standard axioms); ten statements read in the files; published as SCI-MSG-0019; status S47; two notes added to `SF_REPORT.md` |
 | A3 | `workstreams/A3_brief.md` — prior art, full text where accessible, for the box-class result and for addendum A17 | **done at checkpoint 39** — nearly everything is in print; 20 passages re-read by the coordinator; A17 corrected in place; `PRIOR_ART_MATRIX.md` row filled; published as SCI-RES-0009 (linked correction of SCI-RES-0007 §3, SCI-MSG-0017, -0018); `DEAD_ENDS.md` SD43; status S46 |
 | R9 | `workstreams/R9_brief.md` — second-round review of the theory report at `658b77f` against our five reviews; the theory division's amendments; statements written while applying the reviews; the exact-semigroup sketch for bridges | **done at checkpoint 38** — all applied correctly; three corrections of our own texts (`DEAD_ENDS.md` SD38 extended, SD41, SD42); one new false sentence and eight minor defects in theirs; **Theorem R9.1**: the concatenation error of bridges is a coboundary, the limit shape a Newton–Okounkov body, the profile count `vol(𝒦)N³`, `vol 𝒦 ≥ 1.6313`.  Coordinator: (a) re-derived; the C checker recompiled and re-run to 11 beads; the certificate script re-run.  Published as SCI-REV-0009 |
-| R10 | `workstreams/R10_brief.md` — independent review and replication of the theory division's workstream Y (a Markov-chain known part raises the exponents?) | read `R10_REPORT.md`; re-run one of its scripts; publish as `SCI-REV-0010` to theory; update `PHYSICAL_APPLICABILITY.md` (product-measure exponents optimistic for interacting chains?) and the frontier map |
+| R10 | `workstreams/R10_brief.md` — independent review and replication of the theory division's workstream Y (a Markov-chain known part raises the exponents?) | **done at checkpoint 43** — proofs stand; every bracket at `u = 1` recomputed with own code; **M1: the direction depends on the slope** (`a` lowered at `u = 3, 4, 6`, `h` at `u = 4, 6`; `E` raised everywhere); twelve minor points; Propositions R10.1, R10.2 (small-slope law = structure factor for ferromagnetic chains), R10.4 (the reversal), Conjecture R10.3.  Coordinator: R10.1, R10.2 re-derived (a sign corrected); their functions re-run at two cells; a third code on exact chains (`pi_inference/r10_reversal_check.py`); a sharper constant for addendum A17 (8) (`a17_8_sharp_constant_check.py`).  Published as SCI-REV-0010; `PHYSICAL_APPLICABILITY.md` §3a; `DEAD_ENDS.md` SD44; status S51 |
 
 Workstream files under `experiments/science/ws_*/` and `*_REPORT.md` are committed as
 snapshots while a workstream runs; they are statements of the division only once the
@@ -301,11 +316,15 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
 
 ## 7. What to do next, ranked (revised at checkpoint 40)
 
-1. **Process R10 when it reports** (§5): the review and replication of the theory
-   division's workstream Y (a nearest-neighbour interaction as known part); publish as
-   SCI-REV-0010.  Its notes so far: a small-slope law `F*(t) ~ (t(1−t)/2)u²V` with `V` the
-   largest variance of a Lipschitz function, and "scales with the `k = 0` susceptibility"
-   false in general — to be connected with addendum A17 (8).
+1. **Done at checkpoint 43: R10** (the theory division's workstream Y; SCI-REV-0010;
+   finding 9d).  What it leaves, in order of value: (i) the physically usable statement —
+   Conjecture R10.3 for ferromagnetic chains *with a field* (the helix–coil chain away
+   from its midpoint): upper side from their Proposition F at second order, lower side
+   from block fields (`OPEN_PROBLEMS.md` I8); (ii) the crossover slope (I7; a vertex
+   enumeration for blocks of four and five sites decides it — request R10-E1, or a
+   double-description code of our own); (iii) a hidden-Markov reference for the
+   tilt-state recursion, which by the period-four argument is necessary for any upper
+   bound below the cube.  None of the three was started.
 2. **Certify the compact case** (`OPEN_PROBLEMS.md` D6) — the problem the programme's most
    physical line now ends on.  Done at checkpoint 40: a certified `ln Z` at twenty
    residues on an extended backbone (P3; SCI-MSG-0020), replicated independently

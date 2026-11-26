@@ -51,6 +51,13 @@ at 300 K.*
    (at least 19, 12 and 11 % of the conformations at 3, 4 and 5 residues, measured).  For same-lineage refits it
    says "one to three evaluations".  The regime in which exponents discriminate
    (`βc` between about 0.5 and 3) is occupied, in the pilot, only by torsion refits.
+   **And the exponents are those of independent sites: with a cooperative known part
+   they move in a direction that depends on the envelope (workstream R10, checkpoint
+   43) [P + N, one two-state chain]:** below about one `k_BT` per site all three rise, at
+   small envelopes by the structure factor at zero wave vector; at several `k_BT` per
+   site the two cost exponents fall below the independent-site values and only the
+   threshold stays raised (§3a).  The discriminating regime straddles the crossover, so
+   no single direction may be quoted for it.
 4. **The class is expensive, not the function.**  The actual solvent residual has a Jensen
    gap of 2–3 nats where its own first-order class allows 71–178.  Worst-case class
    statements are, for this residual, pessimistic by two orders of magnitude.  This is the
@@ -226,6 +233,13 @@ readings of theorems about an idealised class; none has met a measurement].**
 * That "local data are worthless" — the theorem is about the worst member of a class;
   at a trusted model they exclude a part of the hidden states that is small in a weak
   field and large in a strong one (workstream F).
+* That "interactions make certification harder", or that "the product-measure exponents
+  are optimistic for real chains", without the range of the envelope: in the one
+  interacting model worked out it is true for the threshold at every slope and for the
+  cost exponents up to about one `k_BT` per site, and false for the cost exponents at
+  several `k_BT` per site (§3a).  Nor that the small-slope factor is "the
+  susceptibility": it is the largest variance of a Lipschitz function, which is the
+  zero-wave-vector susceptibility only for ferromagnetic (associated) chains.
 * That anything here has been compared with a measurement.  Nothing has.
 
 ## 7. Under which physical assumptions do the exponential lower bounds stop applying?
@@ -377,3 +391,58 @@ report's §4).  That is the next measurement (request P2-E1).
   decisive missing measurement is now the same third-order constants in a **buried**
   environment (request P2-E1 of SCI-MSG-0015), and the missing theorem an a-priori bound
   on them.
+
+### 3a. A cooperative known part: optimistic below one `k_BT` per site, pessimistic above several  [P + N; the theory division's workstream Y at `658b77f`, reviewed and replicated by our workstream R10, `workstreams/R10_REPORT.md`; SCI-REV-0010]
+
+*The model, and nothing more than the model.*  A two-state chain with a
+nearest-neighbour coupling `K = ln((1−p)/p)` in units of `k_BT` and no field (neighbours
+differ with probability `p`; correlation length `−1/ln(1−2p)`: `1.1`, `2.0`, `4.5` sites at
+`p = 0.3, 0.2, 0.1`), and a residual of which only an envelope is known: one flip changes
+it by at most `u` (in `k_BT`).  "Cost" is the number of evaluations of the residual needed
+to certify `ln Z` to an accuracy proportional to the length; `E` is the accuracy below
+which the cost is exponential, `h` and `a` the exponents of the adaptive and
+non-adaptive cost.  The comparison is with independent sites of the same one-site
+marginals and the same envelope ("the cube").  No observable occurs and nothing is
+fitted to a molecule.
+
+| regime | what is established | status |
+|---|---|---|
+| `u = 1`, `p ∈ {0.4, 0.3, 0.2, 0.1}` | all three exponents **above** the cube's (at `p = 0.3`: `h` +38 % to +54 %, `a` +15 % to +26 %, `E × 1.93`) | the theory division's result; proofs re-derived and every bracket recomputed with our own code (lower ends: every algorithm, every length; upper ends and the reading of `h`, `a` as exponents of algorithms: given theorems of the theory report that R10 did not re-derive) |
+| small envelopes, `u·S(0) ≲ 1` | the three exponents are, to second order in `u`, those of independent sites times **the structure factor at zero wave vector**, `S(0) = (1−p)/p` — in general: times the largest variance per site of a Lipschitz function, which is `S(0)` exactly when the chain is ferromagnetic (associated) and is the dominant collective mode otherwise | **[P]** at fixed length (Propositions R10.1, R10.2; checked over all vertices to five sites); for the infinite chain the upper side is proved, the lower side is a sketch; "the susceptibility" is **false in general** (exact counter-examples: antiferromagnetic and frustrated chains) |
+| large envelopes: `u = 3, 4, 6` (`p = 0.3, 0.2, 0.1`), `u = 2.5` (`p = 0.2, 0.1`), `u = 2` (`p = 0.1`) | the non-adaptive exponent `a` is **below** the cube's (by 1–16 %); at `u = 4, 6` and `p = 0.2, 0.1` so is `h` (by 1–8 %) | **[P]** given the theory division's Proposition F (a martingale recursion, re-derived by R10), evaluated with duality brackets; recomputed with the theory division's own functions (by R10 and by the coordinator) and with a third code on exact finite chains (`pi_inference/r10_reversal_check.py`) |
+| every slope | the threshold `E` is **above** the cube's (`E ≥ E_F > ln cosh(u/2)`, closed form; factor `2.19 … 1.15` for `u = 0.5 … 6` at `p = 0.3`) | [P] |
+| between (`a` for `1.5 ≤ u ≤ 2.5` at `p ≥ 0.3`; `h` for `2.5 ≤ u ≤ 3`); strong coupling `p ≤ 0.01` | undecided | — |
+
+*Reading [H].*  Below about one `k_BT` per site the cheapest way for an unknown residual
+to move `ln Z` is a perturbation the chain answers collectively — a field over a domain —
+and cooperativity multiplies its effect: the independent-site exponents are
+**optimistic**, by a factor that is the size of the cooperative unit.  At several `k_BT`
+per site the residual can make a single configuration dominant, certification becomes
+a search among the configurations that could have been made dominant, and the coupling
+removes candidates (a pinned configuration with isolated spins leaks `e^{2K}` times
+more): the independent-site values of `a` and `h` are **pessimistic**.  The threshold does
+not reverse because it is governed by the cooperative perturbation at every slope.
+
+*Helix–coil chain at its midpoint (Zimm–Bragg weights, `s = 1`; second order in `u`).*
+`S(0) = σ^{−1/2}`: `32` for `σ = 10⁻³`, `100` for `σ = 10⁻⁴`.  For a residual whose
+single-residue effect is below about `σ^{1/2} k_BT` the cost exponents and the threshold
+accuracy (`E ≈ u²S(0)/8` per residue) are `σ^{−1/2}` times those of independent two-state
+residues [P at fixed length and second order; the variance checked over all vertices at
+five residues; the bulk value by the two-state formula, verified by the coordinator from
+the eigenvalues `1 ± σ^{1/2}`].  It is the query-complexity counterpart of addendum
+A14(ii).  Beyond that envelope the response saturates and nothing of the second-order
+statement survives.
+
+*Where the measured residuals sit.*  Same-lineage torsion refits (`βc ≈ 0.5–3` per
+torsion; §2) straddle the crossover; charge-model changes and the solvent term
+(`βc ≈ 2–53`) are on the large-envelope side, where — in this model — the
+independent-site cost exponents overstate and the threshold understates.  Whether a
+backbone with a helix–coil equilibrium behaves like the two-state chain here is not
+established: the envelope classes measured in §2 and §2a are per torsion or per rotamer
+on a *fixed* backbone, not per helix–coil state.
+
+*Limits.*  One chain, two states, one coupling, one slope, no field; the proved
+reversal cells rest on a proposition that only the theory division and one reviewer
+have derived; floating-point rounding is not controlled; the crossover slope is not
+located; nothing was simulated.
+

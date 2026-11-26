@@ -1,0 +1,15 @@
+# V homopeptide on backbone E, chain model with window W = 2, tables refitted on samples (3 rounds of 30000); k_BT at 300 K
+   built V10 on E: 172 atoms, states per site [3], window W=2; 184 GB evaluations for the model tables; 1 s
+      standard deviation of the remainder under the model before each refit: 0.0028, 0.0000, 0.0000
+   V10_E fitted (validation): ln Z(m) = 288.9216;  remainder over 4000 samples of pi_m: mean +0.00000, sd 0.00009, min -0.0015, max +0.0051 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 288.9216 +- 0.00000 (standard error);  exponential-average estimate of K = 4.27e-09;  Bennett W at the sampled floor b = 0.002 and variance: 4.28e-09
+      EXACT (enumeration): ln Z(g) = 288.9216;  E r = +0.00000, sd 0.00005, floor b = 0.018, K = 1.42e-09, Bennett W = 1.43e-09;  first-order error = K;  sampled first-order - exact = -0.00000
+   built V50 on E: 812 atoms, states per site [3], window W=2; 1024 GB evaluations for the model tables; 16 s
+      standard deviation of the remainder under the model before each refit: 0.0065, 0.0002, 0.0002
+   V50_E fitted: ln Z(m) = 1197.4086;  remainder over 4000 samples of pi_m: mean +0.00000, sd 0.00012, min -0.0017, max +0.0035 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 1197.4086 +- 0.00000 (standard error);  exponential-average estimate of K = 6.73e-09;  Bennett W at the sampled floor b = 0.002 and variance: 6.73e-09
+      (number of rotamer assignments: about 10^23.9; evaluations used for the fit: 90000)
+
+real	22m57.274s
+user	16m32.273s
+sys	6m22.629s

@@ -1634,6 +1634,35 @@ conditional expectations differ by at most `C_i`; so the martingale increment
 `M_i − M_{i−1}` has conditional range at most `C_i`, conditional variance at most `C_i²/4`, and
 Hoeffding's lemma applies to it.  Sum the variances; multiply the conditional moment
 generating functions.  The divergence bound is the proof of A17.6.  ∎
+*A sharper constant [P, elementary; added at checkpoint 43, prompted by workstream R10
+(SCI-REV-0010 §5); `a17_8_sharp_constant_check.py`].*  The step "conditional range `C_i` ⇒
+conditional variance `≤ C_i²/4`" gives away what the transition law knows.  The variance
+is convex in the function, so over functions with range `C` under a law `q` it is
+largest at an indicator:
+
+    Var_π r ≤ Σ_i v_i C_i²,      v_i := max_b v(P_{i−1}(b, ·)),      v(q) := max_A q(A)(1 − q(A)) ≤ ¼
+
+(`v_1` from the initial law).  For two letters `v(q) = q(0)q(1)`, and the increment is a
+two-point variable, for which the Kearns–Saul inequality replaces Hoeffding's lemma:
+
+    ln E_π e^{λ(r − E r)} ≤ λ² Σ_i κ_i C_i²,      κ_i := max_b κ(P_{i−1}(b, 1)),      κ(q) := (1 − 2q)/(4 ln((1−q)/q)) ≤ ⅛
+
+(**[K]** Kearns and Saul, UAI 1998, pp. 311–319; proved, and stated to be attained for
+every `q` at some `t`, as Theorem 4 / inequality (3) of Berend and Kontorovich, "On the
+concentration of the missing mass", arXiv:1210.3248 — statement taken from a fetch of
+the arXiv HTML rendering, not read in the typeset version by the coordinator; checked
+here on a grid of `2·10⁶` points, largest ratio `1.000000`).  Hence, for two letters,
+`D_p(π_g‖π) ≤ p²Σκ_iC_i²/(p−1)`.  Checks by exact enumeration: 700 random chains and
+remainders (`n ≤ 9`, 2–4 letters), no violation of the variance bound; 352 binary ones,
+no violation of the bound on the moment generating function (largest ratio `0.9965`);
+gain over the constant `¼`: median `1.07`, up to `5.2`.  **For the symmetric two-state chain
+(neighbours differ with probability `p`) the bound is an equality at every length for
+the uniform field** `r = (u/2)Σs_i`: `Var_π r = ¼C_1² + p(1−p)Σ_{i≥2}C_i²`, per site
+`(u²/4)(1−p)/p` in the limit — the structure factor at zero wave vector, which
+workstream R10 identified as the small-slope factor of the theory division's chain
+(Propositions R10.1–R10.2).  There the constant `¼` overshoots by `1/(4p(1−p))`: `1.19` at
+`p = 0.3`, `2.78` at `p = 0.1`.  No novelty is claimed: it is the martingale method with
+the variance of a two-point law, and no search was made.
 *What it gives.*  With `θ_k ≤ θ < 1` and `c_j ≤ c`: `C_i ≤ c/(1 − θ)`, so all bounds of A17.6
 and (7) hold for a chain with `c` replaced by `c/(1 − θ)` — a correlation length in units
 of sites.  Everything is computed from the transfer matrices of the known part; no
@@ -1736,6 +1765,8 @@ the same script so that its output name is distinct).
 | Ser₂₀, strand | `1.76, 0.018, 0.004` | `0.0022` | `287.3297 ± 0.00003` | est. `2.4·10⁻⁶` | `0.015` / — |
 | Ser₃₀, strand | `2.02, 0.027, 0.006` | `0.0029` | `399.5579 ± 0.00005` | est. `4.1·10⁻⁶` | `0.016` / — |
 | Ser₂₀, strand, **`W = 3`** (consistency) | `1.20, 0.007, 0.002` | `0.0012` | `287.3297 ± 0.00002` — the same as with `W = 2` | est. `7·10⁻⁷` | `0.008` / — |
+| Val₁₀, strand, `W = 2` (validation) | `0.0028, < 10⁻⁴, < 10⁻⁴` | `0.00009` (`0.00005`) | exact `288.9216`; sampled − exact `< 10⁻⁵` | exact `1.4·10⁻⁹` | `0.002` / `0.018` |
+| Val₅₀, strand | `0.0065, 0.0002, 0.0002` | `0.00012` | `1197.4086 ± 0.000002` — the same as with anchored tables | est. `7·10⁻⁹` | `0.002` / — |
 | Val₁₀, PPII, `W = 2` (validation) | `0.026, 0.0031, 0.0030` | `0.0033` (`0.0031`) | exact `291.3352`; sampled − exact `= −1·10⁻⁵` | exact `4.8·10⁻⁶` | `0.025` / **`0.162`** |
 | **Val₂₀, PPII** | `0.046, 0.0048, 0.0049` | `0.0048` | **`518.2626 ± 0.0001`** | est. `1.1·10⁻⁵` | `0.052` / — |
 | Leu₈, helix, `W = 4` (validation) | `0.040, 0.0001, 0.0001` | **`0.00012` (`0.00036`)** | exact `264.6485` | exact `6.5·10⁻⁸` (sampled estimate `7·10⁻⁹`) | `0.004` / **`0.182`** |
@@ -1751,9 +1782,9 @@ the same script so that its output name is distinct).
     that the exponential-average estimates of the first table were *low*, as they must
     be when the remainder is wide (Ser₃₀: true gap `399.558 − 397.798 = 1.76`, estimated
     `1.69`; a Gaussian remainder of that width would give `2.0`).
-13. **A sampled floor is not a floor, and the fit makes it worse.**  The four
+13. **A sampled floor is not a floor, and the fit makes it worse.**  The five
     validation rows have the exact values next to the sampled ones: the exact floor is
-    `2.7`, `6.5`, **`45` and `230` times** the sampled one; for leucine on the helix the
+    `2.7`, `6.5`, `9`, **`45` and `230` times** the sampled one; for leucine on the helix the
     sampled variance is **nine times too small at eight residues and seventy times at
     sixteen**, and the gap estimated from the samples is too small by the same factors —
     after 90 000 fitting evaluations on domains of 256 and 65 536 states.  The regression

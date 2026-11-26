@@ -283,3 +283,19 @@ exponent irrelevant; constants in the limit shape.
   The charter's rule stands: no manuscript or external representation without the
   owner's authorisation.
 
+*Note at checkpoint 43 (workstream R10; SCI-REV-0010).*  The theory division's workstream
+Y would be the first treatment of the query-complexity exponents with an interacting
+known part.  As a publication it now has a referee's answer to the obvious question
+("is this a general effect?"): no — raised at small and moderate slopes, by the structure
+factor at small ones (a theorem at second order), lowered at large slopes for the two
+cost exponents, raised for the threshold throughout.  A paper that states the map is
+stronger than one that states the headline; a paper that states the headline alone
+would be corrected by its first reader with their own Proposition F.  What a hostile
+referee would still ask: the crossover slope; a proof of the large-slope expansion; the
+small-slope law for the infinite chain (the lower side is a sketch); controlled
+rounding for the "certified" numerical brackets; a model with more than two states or a
+field; and the prior art, which neither division has searched beyond snippets
+(Rényi divergence rates of Markov sources; moment Lyapunov exponents; homomorphisms of
+the cube to `ℤ`).  The small-slope law and the reversal are R10's; the charter's rule
+stands: no manuscript or external representation without the owner's authorisation.
+

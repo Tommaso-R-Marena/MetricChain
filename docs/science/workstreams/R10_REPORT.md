@@ -50,7 +50,7 @@ computation.
 | 6 | Lemma A (every algorithm, every `n`, any reference measure) | proved from 11.27(a),(b) [V] | **proved**, given the statement of Theorem 11.27(a),(b) as printed in the theory report | REVIEW (I did not open the Lean file) | §3.1 below |
 | 7 | Lemma B (product theorem) | proved given strong duality | **proved** | REVIEW; numerically row 1 | §3.1 |
 | 8 | Lemma C (monotonicity, bounded changes of the law) | proved | **proved** | REVIEW | §3.1 |
-| 9 | Proposition D (a)–(d): `F⁺_L` sub-additive, `F⁻_L` super-additive, sandwich, gap `≤ tC`, limit | proved | **proved** (with the caveat Y states: at `m = 0` it needs `u > K`, `u > 2K` for `L = 1`) | REVIEW + REPL of every number of §4.2 (`−0.0415 … −0.1150`, `+0.0189 … +0.0351`, `0.096`) and of `F*_n(0.45)/n = 0.02895, 0.03280, 0.03359, 0.03354` | `r10_08_sandwich`, `r10_03_small_n A` |
+| 9 | Proposition D (a)–(d): `F⁺_L` sub-additive, `F⁻_L` super-additive, sandwich, gap `≤ tC`, limit | proved | **proved** (with the caveat Y states: at `m = 0` it needs `u > K`, `u > 2K` for `L = 1`) | REVIEW + REPL of the numbers of §4.2 (`−0.0415 … −0.1150`, `+0.0189 … +0.0351`, `0.096`) and of `F*_n(0.45)/n = 0.02895, 0.03280, 0.03359, 0.03354`; "`≤ 0.09`" for the plain `F_L` is consistent with my exact values (largest ratio `0.086`, by hand from the log) | `r10_08_sandwich`, `r10_03_small_n A` |
 | 10 | Theorem E(a): lower bound for every algorithm and every `n` | proved; only 11.27(b) [V] | **proved** (given rows 6, 9) | REVIEW | §3.1 |
 | 11 | Theorem E(b), (c): adaptive and non-adaptive exponents as iterated limits | proved given 11.101(b); 11.95, 11.98(d) | **conditional, as Y says**; the steps that are Y's own (the reductions, `R̂_∞(ε₁ − C/L) → R̂_∞(ε₁)`, the bound `τ ≤ a/(a + ε₁)` on the maximiser) re-derived; the cited theorems not re-derived.  Status of the inputs at `658b77f`: §3.2 | REVIEW of the logic only | §3.2 |
 | 12 | Theorem E(d), (e); inhomogeneous chains [sketch]; open side question `inf_L a⁺_L/L = a_∞` | — / sketch / open | **not checked** | — | §12 |
@@ -65,7 +65,7 @@ computation.
 | 21 | Proposition J(c): `E_∞ = E_F` at `p = 0.4, 0.3, 0.2` "up to margins `1–2·10⁻⁴`" | numerical evaluation of a proved bound | **confirmed and sharpened**: the margin is an artefact of Y's cells; my safe value is `E_F + 1·10⁻¹¹, 3·10⁻¹¹, 5·10⁻¹¹` | REPL | `r10_07d_upper_ends`, `r10_07a` |
 | 22 | Proposition J(d): at `p = 0.1` the relaxation is not tight, `E_∞ ∈ [0.40172, 0.41799]` | — | **true for the reference `Q = π` only**; with the reference Markov(`q̃ ≥ 0.12`) the relaxation is tight; `E_∞ ∈ [0.401719, 0.403619]` | REPL | `r10_07f_p01_scan` |
 | 23 | Conjecture `E_n = ln Z_n(u/2)/Z_n(0)` for all `n`, `p` | conjecture | **not settled** | — | §12 |
-| 24 | Tables 6.1 (U) and 6.2 (L′) | numerical | **replicated**: 36 entries, largest deviation `4.9·10⁻⁶`; 19 entries incl. the best gaps `m`, identical | REPL | `r10_08_sandwich` |
+| 24 | Tables 6.1 (U) and 6.2 (L′) | numerical | **replicated**: 6.1: 36 entries, largest deviation `4.9·10⁻⁶`; 6.2: the 19 entries of the (L′) columns incl. the best gaps `m`, identical; the column "(L), `L = 3`" (4 entries) **not checked** | REPL | `r10_08_sandwich` |
 | 25 | Table 6.3, tilt-state columns: `h ≤ 0.036163, 0.044995, 0.054353, 0.066765`; `a ≤ 0.121446, 0.140860, 0.160745, 0.192774`; `E ≤ … 0.232538, 0.310956, …` | numerical evaluation of proved bounds | **valid upper bounds** (mine are all smaller): `h ≤ 0.036028, 0.044719, 0.054121, 0.062762`; `a ≤ 0.120996, 0.140182, 0.160048, 0.172043`; `E ≤ 0.169127, 0.232400, 0.310766, 0.403619` | REPL (own safe scheme) | `r10_07d`, `r10_07e`, `r10_07f`, `r10_07g` |
 | 26 | Table 6.4: the lower ends | proved formulas, numerical | **replicated** (rows 17–19); `a ≥`: mine `0.116817, 0.127042, 0.130486, 0.116429` against `0.116817, 0.126444, 0.129797, 0.116632` | REPL | `r10_04`, `r10_05` |
 | 27 | §6.4 exact site-wise optimum for `n = 6 … 12`, "sparse and slowly varying" label law, best domain lengths, "best estimate `0.0405–0.041`" | numerical | **not checked** | — | §12 |
@@ -272,7 +272,7 @@ symmetric, `0 < t < 1`.  Then
 and `V` is attained at a vertex.  Consequently `E_X, a_X = u²V/2 + O(u³)` and `h_X = u²V/8 + O(u³)`.  The `O(u³)`
 depends on the diameter of `(X, d₀)`: nothing is uniform in `n`.
 *Proof.*  Upper bound with the centre `Q = π`: `(1−t)D_t(π_φ‖π) = t ln E_π e^{−φ} − ln E_π e^{−tφ}`, whose cumulant
-expansion is `(t − t²)κ₂(φ)/2 + (t − t³)κ₃(φ)/6 + …`.  Lower bound with the two labels `±u f*`, weights `½, ½`
+expansion is `(t − t²)κ₂(φ)/2 − (t − t³)κ₃(φ)/6 + …` (sign of the third-order term corrected by the coordinator; it does not enter the statement).  Lower bound with the two labels `±u f*`, weights `½, ½`
 (`−f*` is in the class because `d₀` is symmetric): `Σ_x (½π₊^t + ½π₋^t)^{1/t} = 1 − (1−t)u²Var(f*)/2 + O(u³)`.  For
 `E` and `a` the same two labels and the same centre.  ∎
 *Checks.*  Binary chain, `n = 4`, all 990 vertices, `t = 0.3`: `F*_4/(u²t(1−t)/2) = 1.7168, 1.7725, 1.7871, 1.7908`
@@ -406,7 +406,8 @@ at the worse end of the cell, `KL` rewards at cell ends (convex), the Shannon re
 (ample: `|f″| ≤ 1.3`; in fact `KL(τ‖q)` is convex in `τ(+)` and `τ(+)` is monotone in `λ`, so no slack is needed),
 value function `≤ 0` with the smallest transition weights.  Each step is correct.  Mine (`r10_tilt.py`): cells
 inside `[−u*, u*]`, feasibility of a box decided by corner values (exact monotonicity), the same treatment of
-stage factors.  Agreement: mine `≤` Y's everywhere, by `0.3–1 %`; on finite chains the safe value is never below
+stage factors.  Agreement: mine `≤` Y's everywhere, by `0.3–0.6 %` for `p ≥ 0.2` (same range of references; at `p = 0.1` by `6–11 %`
+because of the wider range, m6); on finite chains the safe value is never below
 the exact maximum over all vertices (144 cases, smallest margin `1.2·10⁻³`).  Floating-point rounding is
 controlled in neither.
 
@@ -572,8 +573,10 @@ directly capacity and `max_t F*`; validation: `L = 3` gives 96 vertices and `a �
 ## 10. How to re-run
 
 All from `experiments/science/ws_R10/` with `export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1` (one core each;
-times measured on the shared 4-core machine, some under load).  Each command writes the log named; every log
-cited in this report is from a run that reached its last line.
+times measured on the shared 4-core machine, some under load).  Each command writes the log named (redirect
+the output to it); every log cited in this report is from a run that reached its last line.  (The logs of
+`r10_07f`, `r10_09b` and of the `check` part of `r10_05` end with their last result line; all others end with a
+`time` line or the shell's timing.)
 
 | command | log | time |
 |---|---|---|
@@ -596,7 +599,7 @@ cited in this report is from a run that reached its last line.
 | `python3 -u r10_10_map.py` | `r10_10_map.log` | 2 min |
 | `python3 -u r10_16_blockfield_check.py` | `r10_16_blockfield_check.log` | 1 s |
 | `python3 -u r10_11_small_slope.py` | `r10_11_small_slope.log` | 65 s |
-| `python3 -u r10_13_reversal.py 0.45 0.4 0.3` ; `… 0.2 0.1` | `r10_13_reversal_a.log`, `_b.log` | T13 |
+| `python3 -u r10_13_reversal.py 0.45 0.4 0.3` ; `… 0.2 0.1` | `r10_13_reversal_a.log`, `_b.log` | 10 min ; 15 min |
 | `python3 -u r10_14_rerun_their_functions.py <copy of experiments/workstreams/Y/code at 658b77f>` | `r10_14_rerun_their_functions.log` | 10 min |
 | `python3 -u r10_15_large_slope_checks.py` | `r10_15_large_slope_checks.log` | 103 s |
 
@@ -638,3 +641,40 @@ Lyapunov exponents, two methods), `r10_tilt.py` (tilt-state recursion; modes `sa
 * Prior art: no full text read; no systematic novelty search.
 * The proved-lowered cells rest on Proposition F, which I re-derived and tested on finite chains but which no
   third party has refereed.
+
+---
+
+## Coordinator's note (2026-11-26, before publication as SCI-REV-0010)
+
+*What the coordinator did with this report, so that the message claims no more than was done.*
+
+1. **Read in full**; the message SCI-REV-0010 was compared with it number by number (the verdict table, the
+   table of M1, the minor findings, §§3.4–3.5, §5, §8, §12).
+2. **Re-derived:** both expansions in the proof of Proposition R10.1 (the cumulant expansion of
+   `t ln E e^{−φ} − ln E e^{−tφ}`, where the third-order term has the opposite sign to the one first printed —
+   corrected above; and `Σ_x(½π₊^t + ½π₋^t)^{1/t} = 1 − (1−t)u²Var f/2 + O(u³)`); Proposition R10.2 (the
+   covariance of two nondecreasing functions); `S(0) = σ^{−1/2}` for the helix–coil chain at its midpoint, from
+   the eigenvalues `1 ± σ^{1/2}` of the symmetrised transfer matrix; the explicit example of m2 by hand (the
+   classes `{1101, 1011}` and `{0101}`, the values `2, 4` and `1`), including that the quantile convention of
+   `r10_09b_trunc_example.py` is the one of the theory division's `y08` (level = the `(⌊q·|class|⌋ + 1)`-th
+   value from the favourable side).
+3. **Re-ran the theory division's own functions** (`ylib.py` at `658b77f`, scratch copy) through a driver of the
+   coordinator's at two of the reversal cells: capacity bracket `/3 = 0.495806` at `(p, u) = (0.3, 3)` and
+   `0.467509` at `(0.2, 3)`, cube `0.502282` (0.7 s).
+4. **Computed with a third code** (`experiments/science/pi_inference/r10_reversal_check.py`, written from the
+   definitions: integer height functions as vertices, Blahut–Arimoto with duality brackets): the exact
+   capacities `a_n` of chains of one to four sites at `u = 1, 3, 4` and `p = 0.5, 0.3, 0.2, 0.1`.  Vertex counts
+   `2, 6, 38, 990`; `a_4 = 0.572656` at `(0.1, 1)` as in Y and here; increments at `(0.3, 3)`:
+   `0.458217, 0.462282, 0.462258` and at `(0.3, 4)`: `0.570383, 0.570894, 0.570907` — the digits of §3.5.
+   **A caution the same log shows:** increments of short chains are not monotone and are no evidence of a
+   direction by themselves — at `(0.1, 1)` the last increment is `0.9908` of the cube, although `a_∞ ≥ 1.05 ×`
+   cube is proved there (Proposition I).  The proved cells rest on Proposition F, not on increments.
+5. **Followed up the connection of §3.4 to addendum A17.8**: the constant `¼` of the variance bound can be
+   replaced by the worst two-point split of the transition law, the bound is then an *equality* at every
+   length for the uniform field on the symmetric two-state chain, and for two letters the Kearns–Saul
+   inequality sharpens the bound on the moment generating function
+   (`experiments/science/pi_inference/a17_8_sharp_constant_check.py`; addendum A17 (8), remark added).
+6. **Not re-run by the coordinator:** every script of `experiments/science/ws_R10/`.  **Not re-derived by the
+   coordinator:** Proposition F (the reviewer's re-derivation was read, and the chain-rule argument for the
+   capacity form was followed step by step); Propositions G–J; the tilt-state discretisations.
+

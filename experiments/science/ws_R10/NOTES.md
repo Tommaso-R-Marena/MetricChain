@@ -310,3 +310,29 @@ from a scratch copy.
   0.097726 (u=2; x1.013, 1.027, 1.005): h RAISED at u=2 for p=0.4,0.3,0.2.
   a >= 0.2147/0.2148/0.2022 (u=1.5; cube 0.2181) and 0.3069/0.2978/0.2712 (u=2; cube 0.3278):
   below the cube -> a undecided at u=1.5, 2 for these p.
+* [final housekeeping] Reruns complete so far: r10_07a (three modes; restricted with end
+  points: bracket [0.043998, 0.044349] at G=1601 does not close, exactly as in Y's own output;
+  restricted_mid closes at 0.044357; threshold: safe = restricted = E_F at every G),
+  r10_07b (144 cases, safe >= exact), r10_09b (example logged), r10_10_map (121 s; slope
+  table at p=0.3 identical to Y except u=0.05: 2.260 vs 2.271; small p: block fields 0.037540
+  at p=0.05, 0.029973 at p=0.02; at p=0.01 the block-field values with L>2 are REJECTED by my
+  N=48/96 operator check -> the earlier inline number 0.025390 is withdrawn, best checked
+  lower bound there is 0.023164 from Markov labels), r10_07c (252 s; safe 0.068892,
+  0.067813, 0.067224), r10_13 chunk a (570 s; identical to the earlier partial run),
+  r10_05 check (27 cases, 1.2e-15), r10_16_blockfield_check (36 cases vs definition 8e-16;
+  Lambda_blk vs exact increments 1e-9 at the decisive (p,L,t)).  r10_13 chunk b running.
+* Report written: docs/science/workstreams/R10_REPORT.md (verdict table of 38 rows; one
+  major finding M1 = slope-dependence of the direction, with proved reversal cells; twelve
+  minor findings; small-slope law R10.1/R10.2 with status table; connection to A17.8/A17.6;
+  re-run table; lists of what was not settled / not checked).
+* Things done only inline (no log, NOT cited in the report): the first Arimoto speed test;
+  a probe of the tilt upper bound for h at u=3,4 (above the cube); a probe of the tilt bound
+  at p=0.01, 0.001 (safe values far above every lower bound; restricted lower ends
+  unconverged); the first block-field table (superseded by r10_10_map and r10_16).
+* [end] r10_13 chunk b complete (862 s); the thirteen proved-lowered cells quoted in the
+  report (M1 table) verified digit by digit against r10_13_reversal_a/b.log by a script.
+  No placeholder left in the report; every cited log ends with its last line.  No background
+  job of mine is running.  Write scope respected: this directory and
+  docs/science/workstreams/R10_REPORT.md only; no state-changing git command; their export
+  untouched (a scratch copy of experiments/workstreams/Y/code was made in the session
+  scratchpad for r10_14).

@@ -950,3 +950,40 @@ profile and the gauche count, and its support function is the ground-state energ
   our instances and a review of three statements; L4: Lean for the two-point bound and
   for our remainder identity; a follow-up of R9 on their bridge proposition), and the
   replication of their audit at the new head.
+
+### Cycle 37 — the review of the theory division's workstream Y (checkpoint 43)
+
+* Workstream R10 reported after two and a half hours: 28 scripts, a verdict table of 38
+  rows, own code written before theirs was opened.  Every proof of Y stands; every
+  bracket at `u = 1` is reproduced (lower ends and the Markov recursion to every printed
+  digit; the tilt-state upper ends with a differently built safe discretisation).
+* **The finding is about what the headline is a statement of.**  Y computed at one slope
+  and wrote "an interaction raises all three exponents".  R10 predicted from a
+  first-order argument (a pinned configuration with isolated spins leaks `e^{2K}` times
+  more) that the direction must reverse at large slopes, and then proved it with Y's own
+  Proposition F: `a` below the cube at `u = 3, 4, 6`, `h` at `u = 4, 6`.  The threshold does
+  not reverse.  The same argument explains why no Markov reference can prove the
+  reversal (the period-four label leaks like the cube).
+* The coordinator's checks: both expansions of Proposition R10.1 (the third-order term
+  was printed with the wrong sign; irrelevant to the statement, corrected), the FKG
+  step of R10.2, the example of m2 by hand and its quantile convention against the
+  theory division's script, their `ylib` functions at two cells, and the exact
+  capacities of chains of one to four sites with a third code.  **The third code showed
+  a trap:** increments of short chains are not monotone — at `(p, u) = (0.1, 1)` the
+  fourth increment is below the cube although the limit is proved above it.  Recorded
+  as `DEAD_ENDS.md` SD44 (ii); the message says "indicative and no more".
+* **Our own brief had the over-reading in it** ("product-measure exponents optimistic for
+  interacting chains?" as the sentence to enter in `PHYSICAL_APPLICABILITY.md`).  The
+  section written instead (§3a) has a table by regime and an entry in "what must not be
+  claimed".
+* A by-product for addendum A17 (8), found by following R10's remark on the constant:
+  "range ⇒ variance ≤ range²/4" can be replaced by the worst two-point split of the
+  transition law; with it the variance bound is an *equality* at every length for the
+  uniform field on the symmetric two-state chain (checked exactly for `n` up to 4 096),
+  and for two letters the Kearns–Saul inequality sharpens the moment generating
+  function (statement taken from a fetch of the arXiv HTML of Berend–Kontorovich;
+  checked on a grid).  700 random chains by enumeration: no violation; median gain 1.07.
+* Message parameters made exact before sending: "for `p ≤ 0.3`" was replaced by the
+  computed set `p = 0.3, 0.2, 0.1` — the report's shorthand would have claimed cells that
+  were not computed.
+
