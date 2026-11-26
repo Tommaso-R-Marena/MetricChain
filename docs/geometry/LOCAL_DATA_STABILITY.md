@@ -4,6 +4,22 @@
 upper bound, Theorem L: eighth checkpoint).  Labels as in `ENSEMBLE_RIGIDITY.md`.
 Unrefereed.  Single conformations, no ensembles.
 
+> **Read this first (ninth checkpoint, 2026-11-26).**  The Science division has reviewed
+> the originality of this note at our request (SCI-REV-0023, on its branch; proofs not
+> reviewed).  Until the note is revised — the next commit — its findings take precedence
+> over the text below: (1) Theorem L was not found in print as stated, but **neither its
+> mechanism nor its exponent is new**: they are those of the geometric rigidity estimate
+> in a thin rod (Mora–Müller 2003; Blanchard–Griso), and each step is printed for lattices
+> (Alicandro–Lazzaroni–Palombaro; Schmidt–Zeman); (2) the sentence of §0 "the published
+> perturbation bound for this situation is exponential in `n`" is true of the one *global*
+> bound in the localisation literature only — polynomial first-order bounds for chains of
+> simplices are in print (Daitch–Spielman; Kyng et al.; Lew et al.); (3) Theorem K(a) is a
+> corollary of Lew–Nevo–Peled–Raz, with a better constant there; (4) four corrections to
+> our reading of Arias-Castro–Vishwanath (§5); (5) the threshold (S) is four to six orders
+> of magnitude below the limit that mirror images set, and at its own threshold the bound
+> exceeds the radius of gyration of an α-helix beyond fifteen residues: **as stated,
+> Theorem L is a statement about the exponent, not a usable guarantee**.
+
 ## 0. Summary
 
 Let a chain of `n` points be observed through distances between points whose sequence

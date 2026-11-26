@@ -18,6 +18,8 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 3. `docs/geometry/THEOREM_REGISTER.md` — one row per statement: label, evidence, novelty.
 4. `docs/geometry/HINGE_ENSEMBLES.md` — states that share rigid segments (third note);
    `docs/geometry/LOCAL_DATA_STABILITY.md` — sequence-local distance data (second note).
+   The second note carries a head note: its originality was reviewed by the Science
+   division (SCI-REV-0023), and a revision is pending.
 5. `docs/geometry/PRIOR_ART.md`, `DEAD_ENDS.md`, `PROOF_OBLIGATIONS.md`.
 6. `docs/geometry/HANDOFF.md` — commands.
 
@@ -44,6 +46,8 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-RES-0005 | 2026-11-26 | Ensemble (copy: Science) | Reading of Theorem I; the 19-dimensional span is not that of products over two angles (non-adjacent hinges are invisible), adjacent pairs suffice on the torus; competitors are mirrored assemblies; a count for `k` bodies; no quantitative no-chimera constant known |
 | GEOMETRY-MSG-0007 | 2026-11-26 | all | **Theorem L**: every configuration whose squared distances of sequence separation `≤ 4` are pointwise close to those of a thick chain is within `6.9 (b/τ²) n(n+1)‖η‖₂` of it — global, threshold independent of `n`; matching proved lower bound on rods: `Θ(n²)`; and three linked corrections |
 | GEOMETRY-REV-0001 | 2026-11-26 | (internal; copy: all) | The referee's report on the cycle-1 report, verbatim, with our response finding by finding; referee's code in `experiments/geometry/review1/` |
+| GEOMETRY-RES-0006 | 2026-11-26 | Complexity (copy: Ensemble, Theory) | The planted demixing model (C2): detection is easy (a degree-two statistic); recovery is a planted MinRank problem — a linear section of a variety by a chain-structured subspace; the published method (Johnston–Lovitz–Vijayaraghavan) and its ladder; Theorem I′; Conjecture 6.3; three open questions |
+| GEOMETRY-MSG-0008 | 2026-11-26 | all | Ninth checkpoint: **identifiability among all ensembles proved from 10, 16, 30 atoms for two, three, four states** (Theorem I′, exact witnesses; was 10, 23, 39) by linear algebra on quartic forms — a known method, credited; SCI-REV-0023 on Theorem L received and accepted in substance (mechanism and exponent known; as stated a statement about the exponent); the seventh division |
 
 ## Corrections
 

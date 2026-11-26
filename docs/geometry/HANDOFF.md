@@ -37,8 +37,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 41 tests, about 50 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 29 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 43 tests, about 70 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 31 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
@@ -46,6 +46,12 @@ python3 experiments/geometry/exact_4d_extreme.py        # Theorem D(b)
 python3 experiments/geometry/exact_hierarchy_witness.py # Theorem E(d), exact witness
 python3 experiments/geometry/exact_general_position.py 5  # hypothesis of Theorem F', exact
 python3 experiments/geometry/exact_nonlinear_threshold.py 10 0 0   # Theorem I; needs Singular (apt-get install -y singular); 80 s over Q
+python3 experiments/geometry/exact_demix4.py            # Theorem I' for K = 2, 3 (both bond angles), about 6 min
+python3 experiments/geometry/exact_demix4.py --verify 3 17   # the same rank on the pivot rows in integer arithmetic at a second prime (4 min)
+python3 experiments/geometry/exact_demix4.py 4 30       # Theorem I' for four states, 27 min, 1.5 GB
+python3 experiments/geometry/exact_demix4.py --mutate   # two planted errors; exit status 1 = both caught
+python3 experiments/geometry/demix4.py                  # DEMIX-4 in floating point: certificate and recovery below the conic threshold
+python3 experiments/geometry/minrank_prediction.py 10 10   # Hilbert function, regularity, heuristic thresholds of the higher levels
 python3 experiments/geometry/explore_below.py 7 8 9     # two states below the threshold (numerical)
 python3 experiments/geometry/demix.py                   # DEMIX on synthetic ensembles
 python3 experiments/geometry/hierarchy_example.py       # Theorem E(d), numerical instance
@@ -60,7 +66,8 @@ python3 experiments/geometry/local_data_upper.py        # Theorem L and the tube
 python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \
-         research/ensemble-identifiability research/biological-complexity; do git fetch origin "$b"; done
+         research/ensemble-identifiability research/biological-complexity research/structural-biology; do git fetch origin "$b"; done
+# (research/structural-biology: the seventh division, authorised 2026-11-26; not on the remote at 22:02 UTC)
 # the Ensemble division's report: git show origin/research/ensemble-identifiability:docs/ensemble/ENSEMBLE_REPORT.md
 ```
 
@@ -104,8 +111,10 @@ of any ensemble by the square root of its data mismatch.  The thresholds are exa
 `⌈(9K² + K + 8)/4⌉` atoms for the linear certificate (exact for `K ≤ 20`; for every `K` a
 proof from `(9K² − 5K + 6)/2` atoms on, by concavity of the generic rank); `⌊9K/2⌋ + 1` for identifiability
 itself (a theorem for two states, where 7 and 8 atoms provably-numerically fail; a
-conjecture beyond); `2K + 3` for local identifiability within `K` states; sequence
-separation `K + 3`.  For one state this is classical rigidity theory read for ensembles, and
+conjecture beyond — **proved from 16 atoms for three states and from 30 for four**, by a
+second, quartic linear certificate whose mechanism is the published one for linear
+sections of varieties: `ENSEMBLE_RIGIDITY.md` §6.2, Theorem I′); `2K + 3` for local
+identifiability within `K` states; sequence separation `K + 3`.  For one state this is classical rigidity theory read for ensembles, and
 it yields a notion — second-moment rigidity — implied by universal rigidity together with
 the conic condition and implying global rigidity together with it (not by universal
 rigidity alone: `DEAD_ENDS.md` DG-13).  The conic condition is sufficient, not necessary, and
@@ -114,4 +123,7 @@ that share rigid segments (hinges) the conic condition fails and identifiability
 by a finite list of mirrored assemblies (`HINGE_ENSEMBLES.md`; first by the Science
 division).  Second topic: distances between points close along the chain determine a thick
 chain with a stability constant of order `n²` — a global upper bound (Theorem L) and a
-matching lower bound on rods (`LOCAL_DATA_STABILITY.md`).
+matching lower bound on rods (`LOCAL_DATA_STABILITY.md`).  Mechanism and exponent are those
+of the thin-rod rigidity estimate (SCI-REV-0023), and with its present threshold and
+constants Theorem L is a statement about the exponent; a threshold-free version is sketched
+in `RESEARCH_LOG.md` ("Resume here", item 2) and not yet written or checked.

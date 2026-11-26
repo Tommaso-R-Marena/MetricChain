@@ -61,7 +61,19 @@ every conformation obeys the same local constraints (bond lengths, bond angles)?
    sharp threshold for all `K`, and anything for position-dependent bond angles, is open].
 5. **A polynomial-time demixing algorithm with a certificate** (§6): eigen-decomposition of the
    centred `M`, one linear system, one symmetric eigenproblem.  The certificate of uniqueness
-   is a rank.
+   is a rank.  Below the conic threshold the same works one level up (§6.2, ninth
+   checkpoint): the rank conditions, read as linear equations on quartic forms, certify and
+   demix two states from 11 atoms, three from 17 and four from 30 (against 12, 23, 39), and
+   one atom lower modulo a known rank-2 point at infinity — the first rungs of a ladder of
+   polynomial-time certificates between the conic condition and identifiability.  With
+   exact witnesses this **proves identifiability among all ensembles from 10, 16 and 30
+   atoms for two, three and four states** (Theorem I′ [P-exact]).
+   **The method of §6.2 is not ours**: it is the algorithm of Johnston, Lovitz and
+   Vijayaraghavan (2023) for the intersection of a linear subspace with a variety (the
+   first level of their "Nullstellensatz hierarchy"), applied to the subspace that the
+   averaged data define; what is ours there is the reduction, the thresholds for the
+   structured subspaces that chains give, and an obstruction that generic subspaces do
+   not have.
 6. **A global quantitative theorem** (§7, Theorem G): under the conic condition
    `W₂(ν, μ)² ≤ C·‖M(ν) − M(μ)‖` for *every* ensemble `ν`, with an explicit dual certificate
    (a positive semidefinite "ensemble stress"); the exponent is optimal.  With incomplete
@@ -495,13 +507,17 @@ Evidence for (d): the exact computation of (b); numerically the same threshold a
 |---|---|---|---|---|
 | parameter count allows local identifiability within `K`-state ensembles (complete data; Theorem H) | `n ≥ 4` | `n ≥ 7` | `n ≥ 9` | `n ≥ 2K + 3` (`K ≥ 2`) |
 | identifiable among all ensembles | `n ≥ 5` **[P]** | `n ≥ 10` **[P, exact]** (Theorem I); `n = 9` **[N]**; fails for `n ≤ 8` **[N]** | `n ≥ 14` **[N]** | `n ≥ ⌊9K/2⌋ + 1` **[C]** |
+| degree-4 certificate `h_4 = K` (Proposition 6.2, Theorem I′): demixing by linear algebra on quartic forms **[P-exact]** | `n ≥ 5` | `n ≥ 11` | `n ≥ 17` | `K = 4`: `n ≥ 30` proved; at least `6K − 1` and, for large `K`, about `0.89K²` (necessary) |
+| identifiable among all ensembles, **proved** (Theorems A, I, I′; (CC) otherwise) | `n ≥ 5` | `n ≥ 10` | `n ≥ 16` | `K = 4`: `n ≥ 30`; `K ≥ 5`: the conic threshold |
 | conic condition (CC): linear certificate, polynomial-time demixing **[P, exact]** | `n ≥ 5` | `n ≥ 12` | `n ≥ 23` | `n ≥ ⌈(9K²+K+8)/4⌉` |
 
 The middle row is where the set `𝒫(z)` of chains that are linear images of the stacked
 configuration is expected to contain nothing but the `K` states: counting the unknowns of
 `A` modulo `O(3)` against the equations, `9K − 3 < 2n − 3`.  This count is a heuristic — the
 affine space `I + 𝒩(z)` is not generic, and the complex solution set is larger than the real
-one (§5.5).  Where we can check it, it predicts correctly where `𝒫(z)` reduces to the states
+one (§5.5).  (Between the second and the last row there is not one gap but a ladder of
+polynomial-time certificates of increasing degree: §6.2.)  Where we can check it, it predicts
+correctly where `𝒫(z)` reduces to the states
 (`K = 2`: `n = 10`, Theorem I; `K = 3`: `n = 14` numerically), but identifiability itself can
 start earlier: for `K = 2` at `n = 9`, `𝒫(z)` has 2 to 10 further points and the ensemble is
 still identifiable in every instance computed (6 by us, 18 by the referee, GEOMETRY-REV-0001);
@@ -734,7 +750,9 @@ separation 4 suffices for every `K`.  The price of a mean is exactly the depende
 
 ---
 
-## 6. A demixing algorithm with a certificate
+## 6. Demixing algorithms with certificates
+
+### 6.1 At and above the conic threshold: DEMIX
 
 **Algorithm DEMIX.**  Input: a symmetric matrix `M` and the statewise data `(E₀, ℓ)`.
 1. `G = −½ J M J` (`J` the centring projection); eigen-decomposition; `r = rank G`; if `d ∤ r`
@@ -779,6 +797,239 @@ threshold (`s* ≈ 7·10⁻³` at `K = 2, n = 12` against `8·10⁻²` at `n = 1
 were misquoted in earlier versions — SCI-REV-0021 F10).  This is a statement
 about one implementation on synthetic instances, not a stability theorem; the stability
 theorem is §7.
+
+### 6.2 Below the conic threshold: a hierarchy of linear-algebra certificates (DEMIX-`D`)
+
+*Whose method this is.*  Finding the points of a variety in a linear subspace by lifting to
+symmetric powers and one simultaneous diagonalisation, with a certificate of completeness,
+is the algorithm of Johnston, Lovitz and Vijayaraghavan ("Computing linear sections of
+varieties: quantum entanglement, tensor decompositions and beyond", FOCS 2023,
+arXiv 2212.03851) — the first level of what they call the Nullstellensatz hierarchy; higher
+levels are analysed by Derksen, Johnston and Lovitz (arXiv 2409.18948).  Proposition 6.2
+(a)–(c) below is that method, written for the subspace `L` and the symmetric matrices of
+rank at most `d`, with the elementary remark that the certificate persists to higher
+degrees.  Their theorems are for *generic* subspaces spanned by generic points of the
+variety; ours is a structured one (cut out by rank-one conditions `eᵀPe = c·ℓ_e²` along a
+chain), to which they do not apply.  What this section adds is therefore: the reduction of
+ensemble identifiability to such a linear section (Remark 5.1); items (d)–(f); the computed
+thresholds; and the conjecture at the end.  Reading level and details: `PRIOR_ART.md` §3b.
+
+Below the conic threshold the linear system of DEMIX has too many solutions: the space
+
+    L = { P ∈ Sym(dK) : eᵀPe = c·ℓ_e² for all E₀-edge vectors e of Z, some c ∈ ℝ },    m = dim L,
+
+is larger than the span of the `K` block projectors `P_k = Q₀ᵀ(E_k/w_k)Q₀` it contains, and the
+states are the points of rank at most `d` of `L` (Remark 5.1).  Treat the `(d+1) × (d+1)` minors
+of `P ∈ L` as *linear* equations on forms of higher degree: for `D ≥ d + 1` let `𝓙_D` be the space
+of forms of degree `D` on `L` spanned by the minors times forms of degree `D − d − 1`, and
+
+    h_D = C(m + D − 1, D) − dim 𝓙_D .
+
+**Proposition 6.2 [P, elementary; (a)–(c) are the Johnston–Lovitz–Vijayaraghavan mechanism — K; the thresholds N].**  Let `M = M(μ)` for a `K`-mixture whose stack spans.
+(a) `h_D ≥ K` for every `D`; and if `h_D = K` then `h_{D′} = K` for all `D′ ≥ D`.
+(a′) *Monotonicity.*  If `L′ ⊂ L` is a linear subspace that contains `P_1, …, P_K` and
+`h_D(L) = K`, then `h_D(L′) = K`: the certificate persists when atoms, or any further statewise
+constraints, are added.
+(b) **If `h_D = K`, then the matrices of rank at most `d` in `L` — real or complex — are exactly
+the multiples of `P_1, …, P_K`.**  Hence `𝒫(Z) = {P_k}`, the mixture is identifiable among all
+ensembles (Theorem B′), and the hypotheses (H), (H′) of Theorem G′ hold.  `h_D = K` is a rank:
+a certificate of identifiability computed by linear algebra in dimension `C(m + D − 1, D)`,
+polynomial in `K` for fixed `D`.
+(c) *DEMIX-`D`.*  If `h_D = K`, the annihilator of `𝓙_D` in `Sym^D(L)` is spanned by the `D`-th
+powers of the `P_k`; contracting it with forms of degree `D − 1` gives `span{P_1, …, P_K}`, and
+a generic element of that span has the blocks as eigenspaces, as in DEMIX.  For an arbitrary
+realizable input the output is verified directly (`K` positive semidefinite matrices of rank
+`d` in `L` with mutually orthogonal ranges and a positive combination equal to `I`); then the
+input is the datum of that `K`-mixture and of no other ensemble.
+(d) (CC) implies `h_{d+1} = K`: the hierarchy starts at the conic condition.
+(e) *A counting bound for `D = 4`, `d = 3`.*  The `4 × 4` minors of a symmetric `N × N` matrix
+span a space of dimension `δ₄(N) = N²(N + 1)(N − 1)²(N − 2)²(N − 3)/2880`, so `h_4 = K` requires
+`C(m + 3, 4) − K ≤ δ₄(3K)`: for large `K`, `n ≳ 0.89 K²` against `2.25 K²` for (CC).
+(f) *A structural obstruction.*  For chains with `n ≤ 6K − 2` atoms `L` contains a matrix of
+rank 2 (`abᵀ + baᵀ` with `a`, `b` orthogonal to the first and to the last `3K − 1` stacked bond
+vectors, as in the proof of Theorem I), so `h_D ≥ K + 1` for every `D`: the certificate needs
+`n ≥ 6K − 1`.
+(h) *The certificate modulo structural points.*  Let `Q_1, …, Q_r ∈ L` have rank at most `d − 1`
+and `c(Q_i) = 0`, and let `Λ_D` be the span of the functionals `f ↦ ∂_v f(Q_i)`, `v ∈ L`, on forms of
+degree `D` (for one point, `dim Λ_D = m`).  Then `h_D ≥ K + dim Λ_D`; and **if `h_D = K + dim Λ_D`
+for some `D ≥ d + 1`, every matrix of rank at most `d` in `L ⊗ ℂ` with `c ≠ 0` is a multiple of one
+of the `P_k`**, these points are reduced, and the mixture is identifiable among all ensembles
+(a state of a competing ensemble has `c = 1`).
+
+*Proof.*  (a) Every element of `𝓙_D` vanishes at the `P_k`, which are linearly independent in
+`L`; the evaluations at `K` linearly independent points are linearly independent on forms of
+any degree `D ≥ 1` (use `λ_k^D` for linear forms with `λ_k(P_l) = δ_kl`).  So `𝓙_D ⊂ I_D`, the
+forms of degree `D` vanishing at the `K` points, of codimension `K`: `h_D ≥ K`, with equality iff
+`𝓙_D = I_D`.  The ideal of `K` linearly independent points is generated by linear forms and
+quadrics (`μ` vanishing on their span; `λ_kλ_l`, `k < l`), so `I_{D+1} = L^*·I_D ⊂ 𝓙_{D+1}`.
+(b) If `P ∈ L ⊗ ℂ` has rank at most `d`, all minors and hence all of `𝓙_D = I_D` vanish at `P`;
+the products of `μ` with forms of degree `D − 1` and of `λ_kλ_l` with forms of degree `D − 2`
+all vanish at `P` only if `P` is a multiple of one `P_k`.  The saturation of the ideal of minors is then the radical ideal of
+the `K` points: they are reduced, which is (H′).
+(c) Linear algebra; the verification makes the input the datum of a `K`-mixture, to which (b)
+applies.  (d) Under (CC), `L = span{P_k}` and `P = Σ t_kP_k` is block-scalar: its minors are, up
+to signs, all monomials of degree `d + 1` in which no `t_k` has exponent above `d` — all but
+the `K` pure powers.  (e) The minors span the irreducible representation of `GL_N` with
+Young diagram of four rows of length two; its dimension is given by the hook-content formula
+(checked numerically for `N = 4, …, 8`: 1, 15, 105, 490, 1764).  (f) Each constrained edge
+vector lies in `a^⊥ ∪ b^⊥`.
+(a′) Restriction of forms from `L` to `L′` is onto; it maps `𝓙_D(L)` onto `𝓙_D(L′)` and the forms
+vanishing at the `P_k` onto the forms on `L′` vanishing at the `P_k` (extend a form on `L′` by
+composing it with a linear projection `L → L′`).
+(h) The gradient of a `(d+1) × (d+1)` minor consists of minors of size `d`, which vanish on
+matrices of rank at most `d − 1`: every element of `𝓙_D` vanishes to second order at the `Q_i`,
+so `Λ_D` annihilates `𝓙_D`.  So do the evaluations at the `P_k`, and these are independent
+modulo `Λ_D`: if `Σ α_k f(P_k) = λ(f)` for all `f`, with `λ ∈ Λ_D`, apply it to `f = c²g`, `g` of
+degree `D − 2`; `λ(c²g) = 0` because `c²` vanishes to second order where `c = 0`, and `c(P_k) = 1`,
+so `Σ α_k g(P_k) = 0` for all `g`, hence `α = 0`.  This gives `h_D ≥ K + dim Λ_D`, with equality
+iff `𝓙_D` is the space of *all* forms that vanish at the `P_k` and are annihilated by `Λ_D`.
+In that case `c²g ∈ 𝓙_D` for every form `g` of degree `D − 2` vanishing at the `P_k`; if `P` has
+rank at most `d` and `c(P) ≠ 0`, then `g(P) = 0` for all those `g`, and since `D − 2 ≥ 2` the
+argument of (b) shows that `P` is a multiple of one `P_k`.  Near `P_k` the function `c` is a
+unit, so the forms `g` lie in the ideal of minors there, and they generate the ideal of a
+reduced point.  ∎
+
+(g) *Completeness* **[K]**.  `h_D = K` for some `D` if and only if the scheme of points of rank
+at most `d` of `ℙ(L ⊗ ℂ)` consists of the `K` projectors, each reduced — that is, iff (H) and
+(H′) hold: for large `D`, `h_D` is the Hilbert polynomial of that scheme.  (For subspaces
+that meet the variety only in 0, Derksen–Johnston–Lovitz show — their Theorem 1.11, as
+reported by an automated reading — that the level needed is at most the
+Castelnuovo–Mumford regularity plus one, with equality in the worst case, when the
+coordinate ring is Cohen–Macaulay; for the symmetric matrices of rank at
+most 3 of size `3K` the regularity is 6, 9, 15, 18, 24 for `K = 2, …, 6`, computed from the
+Hilbert series below.)  The ladder therefore certifies a property that is *stronger* than
+identifiability: for two states at ten atoms the ensemble is identifiable (Theorem I) and no
+`h_D` equals 2, because of the structural point (f), which lies at `c = 0` and is no chain;
+at nine atoms there are further real points and identifiability holds for another reason
+(§5.5).
+
+**Theorem I′ [P-exact] (identifiability among all ensembles below the conic threshold, for
+two, three and four states).**  Let the bond angle be the one with `cos θ = −5/13`, or the
+tetrahedral one, or any angle outside a finite set.  For generic `K`-state ensembles of
+chains with `n` atoms:
+
+| `K` | `h_4 = K` (Proposition 6.2 (b)) | `h_4 = K + m`, one structural point (Proposition 6.2 (h)) | information threshold | (CC) |
+|---|---|---|---|---|
+| 2 | `n ≥ 11` | `n = 10` | 10 | 12 |
+| 3 | `n ≥ 17` | `n = 16` | 14 [N] | 23 |
+| 4 | `n ≥ 30` | — | 19 [C] | 39 |
+
+In all these cases the symmetric matrices of rank at most 3 in `L ⊗ ℂ` with `c ≠ 0` are exactly
+the multiples of the `K` block projectors, each a reduced point; hence **the ensemble is
+identifiable among all ensembles from its averaged squared distances** — with any number of
+states, or any probability distribution on conformations, as competitor — and (H), (H′)
+hold.  In the cases of the first column DEMIX-4 recovers states and weights by linear
+algebra.  The line `K = 2` is a second proof of Theorem I, by linear algebra in place of a
+Gröbner basis; the lines `K = 3, 4` are new (the proved thresholds were the conic ones, 23
+and 39).
+
+*Proof* (`experiments/geometry/exact_demix4.py`).  For each `K`, each of the two angles and the
+smallest `n` of each column there is a witness with rational torsion parameters at which,
+modulo `p = 65521`, the values of the `4 × 4` minors at `C(m + 3, 4) + 8` points of `L_p` have rank
+
+| `K, n` | `m` | quartic forms | rank of the minors | jets at the structural point |
+|---|---|---|---|---|
+| 2, 10 | 5 | 70 | 63 | 5 |
+| 2, 11 | 3 | 15 | 13 | — |
+| 3, 16 | 17 | 4 845 | 4 825 | 17 |
+| 3, 17 | 15 | 3 060 | 3 057 | — |
+| 4, 30 | 22 | 12 650 | 12 646 | — |
+| 4, 32 | 18 | 5 985 | 5 981 | — |
+
+(for four states only the angle with `cos θ = −5/13`).  The rank modulo `p` of the values is at
+most the rank modulo `p` of the coefficients, which is at most their rank over the field of
+the witness (`ℚ` or `ℚ(√2)`) — here one needs `dim L_p = dim L`, which holds because the
+constraint matrix has full row rank modulo `p` — and that rank is at most `C(m + 3, 4) − K − dim Λ_4`
+by Proposition 6.2 (a), (h).  Equality throughout: `h_4 = K`, respectively `h_4 = K + m` with the
+structural point `Q = abᵀ + baᵀ` of (f) (which exists for every chain with `n = 6K − 2`, has rank 2
+when the stack spans, and has `c = 0`).  Only lower bounds on ranks enter, so an unlucky prime
+or unlucky points could make the computation fail but not prove a false statement; the case
+`K = 3`, `n = 17` was recomputed with integer arithmetic only at a second prime
+(`--verify`).  The set of parameters (bond angle, torsions) at which the rank is maximal is
+Zariski open and, by the witness, not empty; it therefore contains a generic point of the
+torus of torsions over every bond angle outside a finite set, and over the angles of the
+witnesses.  For larger `n` in the first column: the first atoms of a generic longer chain
+form a generic chain of the witness length, and (a′) applies.  The conclusions are
+Proposition 6.2 (b) and (h).  ∎
+
+*Remarks.*  (1) Floating-point computations at bond angle 111° agree (`demix4.py`: states
+recovered to RMSD `10⁻⁷` for three states at 19 to 22 atoms; `h_4 = 4` for four states at 30 to
+38 atoms).  Floating point is not reliable for the *value* of `h_4` in the structural case
+(three states at 16 atoms: 21 and 24 in two runs, 20 exactly).  (2) At `n = 6K − 2` the
+states can still be extracted by linear algebra — an annihilator `φ` of `𝓙_4`, applied to
+`c²g`, is a combination of the evaluations of `g` at the `P_k` — but `demix4.py` does not
+implement this.  (3) For three states at 14 and 15 atoms the structural locus is larger
+(two lines and seven points at 15 atoms) and quartics are too few by the count (e); a
+certificate there needs `D ≥ 5`.  Not done: `PROOF_OBLIGATIONS.md` O-15.
+
+**Thresholds in floating point** (`experiments/geometry/demix4.py`; chains with bond angle 111°,
+one instance per entry, **all** minors) **[N]**: `h_4 = 2` from 11 atoms (two states); `h_4 = 3`
+from 17 (three states; at 16 the structural point); `h_4 = 4` at 30, 32, 34, 36, 38 atoms
+(four states; below 30 not computed: at `n = 24`, where the count (e) first allows it, the
+linear algebra has size 66 045).
+
+**What the theory for generic subspaces says, and where chains differ.**
+*Identifiability.*  A generic subspace through `K` points of a variety `X` meets it nowhere
+else iff its dimension is at most the codimension of `X`; for the cone of symmetric
+`3K × 3K` matrices of rank at most 3 (dimension `9K − 3`) and `m = dim L` this reads
+`n ≥ ⌊9K/2⌋ + 1` — the information threshold of §5.2, which for chains is proved for two
+states (Theorem I) and conjectured otherwise.
+*The first level.*  For generic subspaces Johnston–Lovitz–Vijayaraghavan prove success up to
+a constant fraction of that dimension (their formula, evaluated for our variety, gives
+`m ≲ K²/40`: no information for the `K` of interest), and Dastidar–Weich–Wein conjecture, for
+rank one, that the first level succeeds exactly when a dimension count allows it.  Our
+count (e) is the analogue for symmetric rank 3, and the computations support the analogous
+statement for chains with one correction, the obstruction (f):
+
+**Conjecture 6.3 [C].**  For chains in general position with `K` states, `h_4 = K` if (and, by
+(e) and (f), only if) `n ≥ max(n_c(K), 6K − 1)`, where `n_c(K)` is the least `n` with
+`C(m + 3, 4) − K ≤ δ₄(3K)` (`n_c = 10, 16, 24` for `K = 2, 3, 4`).  *Evidence:* `K = 2` and `K = 3`
+completely, in the instances of the table; `K = 4` only well above the conjectured
+threshold 24.
+
+*Higher levels* (`experiments/geometry/minrank_prediction.py`) **[C, heuristic]**.  The
+coordinate ring of `X` has Hilbert function `HF_X(D) = Σ_{λ ⊢ D, at most 3 parts} dim S_{2λ}(ℂ^{3K})`
+(checked against the degree 112 of the symmetric `6 × 6` matrices of rank at most 3).  If
+the `2n − 4` linear conditions that cut out `L` acted on it as generic linear forms are
+expected to (maximal rank), level `D` would succeed from the first `n` at which a
+coefficient of `HS_X(t)(1 − t)^{2n−4}` of degree at most `D` is non-positive:
+
+| `K` | information | obstruction `6K − 1` | `D = 4` | 5 | 6 | 7 | 8 | 10 | (CC) |
+|---|---|---|---|---|---|---|---|---|---|
+| 2 | 10 | 11 | 10 | 10 | 10 | 10 | 10 | 10 | 12 |
+| 3 | 14 | 17 | 16 | 15 | 15 | 15 | 15 | 14 | 23 |
+| 4 | 19 | 23 | 24 | 22 | 21 | 20 | 19 | 19 | 39 |
+| 6 | 28 | 35 | 45 | 40 | 36 | 33 | 32 | 30 | 85 |
+| 10 | 46 | 59 | 109 | 92 | 80 | 72 | 66 | 58 | 230 |
+
+For `D = 4` this is the count (e), and it reproduces the computed 10 and 16 (raised to 11
+and 17 by the obstruction).  What is *proved*, for generic subspaces without planted
+points, is weaker: a constant level certifies subspaces of dimension `(1 − ε)` times the
+ambient one (Derksen–Johnston–Lovitz, Theorem 1.8 — in our parametrisation `n ≥ 2.25 εK²`),
+and their sufficient count (Theorem 1.9, as reported by an automated reading: level `D`
+certifies once `HF_X(D) < C(c + D, D)`, `c` the codimension of the subspace), evaluated for
+our variety at ten states, gives level 8 from 195 atoms and level 48 from 96 — against 66
+and fewer than 58 in the heuristic table.
+
+So the gap between identifiability and the linear certificate (§5.2) is not one gap but a
+ladder: each degree `D` gives a polynomial-time certificate and algorithm valid from a
+threshold `n_D(K)` on, with `n_{d+1}` at most the conic threshold and `n_D` non-increasing in
+`D` (by (a)).  For two and three states degree 4 already reaches the structural limit
+`6K − 1`.  For large `K` the first level cannot go below `0.89 K²` atoms (e); a constant level
+reaches `εK²` atoms for every constant `ε > 0` if the heuristic is right (for generic
+subspaces without planted points this is the theorem just quoted); and at the information
+threshold `4.5K` the level is of the order of the regularity, hence of `K`, and the cost
+`K^{Θ(K)}` — the regime in which the same problem for generic subspaces (MinRank with as
+many constraints as the dimension count allows) has no known polynomial-time algorithm
+**[from memory]**.  How the level grows between these two ends for chain-structured
+subspaces, and whether any polynomial-time method does better than the ladder, is the
+precise form of the complexity question of GEOMETRY-REQ-0004 (C2); it is put to the
+Complexity division in GEOMETRY-RES-0006.  Two warnings from the computations: a random sample of the minors does
+not span `𝓙_4` (for four states at 38 atoms 30 000 of the 122 760 minors give `h_4 = 13`:
+the forms of low degree in the directions transverse to the span of the projectors come
+from few, nearly principal, minors), and the method as implemented costs a singular value
+decomposition of size `C(m + 3, 4)`, `m ≈ 4.5K² − 2n` — polynomial, not practical beyond a
+few states.
 
 ---
 

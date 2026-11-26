@@ -18,6 +18,8 @@ MUTATIONS = [
     ("drop_angle_edges", "conic_threshold_float"),
     ("demix_wrong_block", "demix_recovers"),
     ("band_K_plus_2", "jacobian_exact"),
+    ("demix4_principal_only", "demix4_below_conic"),
+    ("demix4_exact_ignore_structural", "demix4_exact_witness"),
     ("lemma_R_minus_one", "lemma_R_reachability"),
     ("profile_drop_angle_edges", "conic_rank_profile"),
     ("general_position_one_more", "general_position_exact"),

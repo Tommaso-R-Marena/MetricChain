@@ -351,7 +351,41 @@ def general_position_exact():
     return not bad, f"failures {bad}" if bad else "every window of 3K + 1 stacked points affinely independent"
 
 
+@test
+def demix4_below_conic():
+    """Proposition 6.2: the degree-4 certificate HF = K holds, and DEMIX-4 recovers the states by
+    linear algebra, below the conic threshold (K = 2 at n = 11; K = 3 at n = 21); it refuses at
+    K = 2, n = 10, where the rank-3 locus has a structural point at infinity (HF = 7)."""
+    import demix4 as D4
+    msgs, ok = [], True
+    for K, n in ((2, 11), (3, 21)):
+        good, info, errs = D4.demo(K, n, seed=7 * K + n, principal_only=(MUT == "demix4_principal_only"))
+        ok &= good and info["HF"] == K
+        msgs.append(f"K={K}, n={n}: HF={info['HF']}" + (f", RMSD {errs[0]:.0e}" if errs else ""))
+    good, info, _ = D4.demo(2, 10, seed=3)
+    ok &= (not good) and info["HF"] == 7
+    msgs.append(f"K=2, n=10: HF={info['HF']} (refused)")
+    return ok, "; ".join(msgs)
+
+
 # ------------------------------------------------------------------ section 5.5
+
+@test
+def demix4_exact_witness():
+    """Theorem I' (section 6.2): at rational witnesses, modulo a prime, the 4 x 4 minors span all
+    quartic forms on L through the K states (K = 2, n = 11; K = 3, n = 17), or all those that
+    are also singular at the structural point (K = 2, n = 10) -- Proposition 6.2 (b), (h)."""
+    import exact_demix4 as X4
+    mut = MUT == "demix4_exact_ignore_structural"       # planted error: claim h_4 = K at n = 6K - 2
+    cases = [(2, 10, "rational"), (2, 10, "tetrahedral"), (2, 11, "rational"), (2, 11, "tetrahedral")]
+    cases += [] if QUICK else [(3, 17, "rational")]
+    ok, out = X4.self_test(), []
+    for K, n, g in cases:
+        proved, info = X4.certify(K, n, g, structural=not mut)
+        ok &= proved
+        out.append(f"K={K} n={n} {g[:3]}: rank_p {info['rank']} + jets {info['jets']} of {info['nmon']}")
+    return ok, "; ".join(out)
+
 @test
 def nonlinear_threshold_exact():
     """Theorem I: for K = 2, n = 10 the rank <= 3 locus of P(L) has degree 7 = 1 + 1 + 5 (the two

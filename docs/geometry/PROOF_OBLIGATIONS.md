@@ -42,10 +42,13 @@ distinct approach.
 two states** (Theorem I, G1.25): exact elimination with Singular, installed in our own
 environment after GEOMETRY-REQ-0001 was written; the answer is not the one the request
 expected — the scheme has degree 7, not 2, because of a structural rank-2 point at infinity
-(`DEAD_ENDS.md` DG-9).  Still open: (a) `K ≥ 3` — the scheme at infinity is
-positive-dimensional at the conjectured threshold `⌊9K/2⌋ + 1`, and a direct Gröbner basis
-(the `4 × 4` minors of a `9 × 9` pencil in 21 variables for `K = 3`) is out of reach as posed;
-a reduction that removes the structural part is needed; (b) `K = 2`, `n = 9`: identifiable in
+(`DEAD_ENDS.md` DG-9).  **Partly discharged for three and four states** (Theorem I′, G1.31,
+ninth checkpoint): identifiable from 16 atoms (three states) and from 30 (four), by a
+linear-algebra certificate on quartic forms with exact witnesses; the same method re-proves
+two states at 10 atoms.  Still open: (a) `K = 3` at 14 and 15 atoms, `K = 4` at 19 to 29,
+`K ≥ 5` below the conic threshold — at the conjectured threshold `⌊9K/2⌋ + 1` the scheme at
+infinity is positive-dimensional and the certificate needs a higher level (O-15);
+(b) `K = 2`, `n = 9`: identifiable in
 six instances although further chains exist — is it generic, and is there a proof?
 (c) `K = 2`, `n = 7, 8`: non-identifiability is numerical (explicit competing ensembles to
 `10⁻¹⁴`); a proof would show that the identity is interior to the convex hull of `𝒫(z)`.
@@ -126,3 +129,29 @@ Also open: torsion changes that are multiples of `π`; hinges closer than three 
 **O-14.  Theorem F″ (block sums) has no instance.**  A semidefinite programme for a labelling
 scheme of the kind the Science division describes (SCI-RES-0029 §2) has not been run.
 
+
+**O-15.  The ladder below the conic threshold (§6.2).**  Proved: Proposition 6.2 (what the
+certificates `h_D = K` and `h_D = K + dim Λ_D` imply; the count; the structural point) —
+elementary, the mechanism being Johnston–Lovitz–Vijayaraghavan's — and Theorem I′ (exact
+witnesses: two states from 10 atoms, three from 16, four from 30).  Not proved:
+(i) **Conjecture 6.3** — for chains in general position `h_4 = K` from `max(count, 6K − 1)`
+atoms on.  Open cases: four states at 24 to 29 atoms.  `exact_demix4.py 4 28` is feasible
+locally (about 3 hours, 4.5 GB); 26 and 24 need the echelon form stored in 16-bit integers
+and many hours — a candidate for a request to Engineering, not sent.  A proof for all `K`
+would need the restriction of the Schur module of the `4 × 2` rectangle to forms on `L` to
+have maximal rank; the method of Dastidar–Weich–Wein for rank one (zero out variables, a
+block triangular square matrix with distinct monomials on the diagonal blocks) is the place
+to start.
+(ii) The thresholds of the higher levels: the table of `minrank_prediction.py` is a
+heuristic (maximal rank for non-generic linear forms), checked only at `D = 4`.
+(iii) **Three states at 15 and 14 atoms.**  At 15 atoms the structural locus is two lines
+and seven points, the count excludes `D = 4`, and the natural statement is
+`h_5 = K + dim Λ_5` (33 649 quintic forms; `exact_demix4.py` handles `D = 4` only).  At 14
+atoms — the information threshold — the level predicted for generic sections is 10, out of
+reach.  Whether the first-order jets along a positive-dimensional structural locus account
+for the whole defect, as they do for an isolated point, is not known.
+(iv) All statements are for generic chains at two bond angles and at all but finitely
+many others; no statement for a given other angle, none for position-dependent angles.
+(v) DEMIX-4 at `n = 6K − 2` (extraction through `c²g`) is described, not implemented.
+(vi) Noise: nothing.  The certificate is a rank; its stability constant is the smallest
+singular value of a matrix of size `C(m + 3, 4)` and was not studied.

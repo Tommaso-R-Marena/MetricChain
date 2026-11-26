@@ -5,37 +5,85 @@ Branch `research/geometric-inference`, created 2026-11-26 from the theory checkp
 
 ## Resume here
 
-State at the eighth checkpoint (see `HANDOFF.md` for commands and environment):
+State at the ninth checkpoint (see `HANDOFF.md` for commands and environment):
 
 1. **Cycle 1 result:** `docs/geometry/ENSEMBLE_RIGIDITY.md` — second-moment rigidity of
    conformational ensembles (stacking; conic criterion; identifiability of mixtures among all
    ensembles; thresholds; DEMIX; stress certificates; global `W₂` theorem; second-moment
-   rigidity, which sits between global and universal rigidity *once the conic condition is
-   added to both*; realizable set versus its semidefinite relaxation; range `K + 3`).
-   Register: `THEOREM_REGISTER.md`.  **Internally reviewed** (GEOMETRY-REV-0001): no false
-   theorem; four overstated sentences and sixteen minor defects corrected (`DEAD_ENDS.md`
-   DG-13 … DG-17).  Everything written after `e8e2582` is unreviewed.
-2. **Cycle 2:** `LOCAL_DATA_STABILITY.md` — the stability constant of sequence-local distance
-   data: lower bounds (Theorem K, with (c) now proved for chains in a tube) and a **global
-   upper bound of order `n²`** (Theorem L; frames of overlapping windows).  Open there: sharp
-   constants; compact chains (between `n` and `n²`); general lateration graphs; random
-   noise.  An independent prior-art check of Theorem L is requested from Science.
-3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments).  Its main
-   statement is the Science division's Proposition R22-1 (earlier); ours is an independent
-   second derivation with additions (see the head of the note).  Open: O-12 (several
-   states), O-13 (a stability theorem / dual certificate; R22-GEO-5), O-14 (block sums),
-   R22-GEO-3 (short segments), R22-GEO-4 (a certified `κ`).
-   **Owed to other divisions:** Complexity — a planted model for the
-   identifiability–certification gap (COMPLEXITY-RES-0002).  Theory's two follow-ups
-   (THY-MSG-0018 §4: the worst-case constant of one torsion move as a profile; the sharp
-   Procrustes–Gram constant) are optional.
-4. **Open, in priority order** (`PROOF_OBLIGATIONS.md`): O-1 (the sharp conic threshold for
-   every `K` — now one statement: the last increment of the concave generic rank is 2; notes
-   on three "types" of a first defect are in O-1), O-3 (a certified second-moment rigid, not
-   universally rigid example; GEOMETRY-REQ-0006), O-2(a)–(c), O-4, O-5 (a certified `κ`).
-5. **Waiting for:** Science's review SCI-REV-0021; answers to GEOMETRY-REQ-0001, -0005,
-   -0006.  Next synchronisation: fetch all five branches and look for `GEOMETRY` in their
-   `docs/collaboration/`.
+   rigidity; realizable set versus its semidefinite relaxation; range `K + 3`).
+   Register: `THEOREM_REGISTER.md`.  Internally reviewed up to `e8e2582`
+   (GEOMETRY-REV-0001) and by the Science division (SCI-REV-0021).  **New at the ninth
+   checkpoint, unreviewed: §6.2** — certificates below the conic threshold (Proposition 6.2;
+   Theorem I′: identifiable among all ensembles from 10, 16, 30 atoms for two, three, four
+   states, exact witnesses; Conjecture 6.3).  The method is Johnston–Lovitz–Vijayaraghavan's
+   (`PRIOR_ART.md` §3b).
+2. **Cycle 2:** `LOCAL_DATA_STABILITY.md` — Theorem K (lower bounds) and Theorem L (global
+   upper bound of order `n²`).  **Its originality was reviewed by Science (SCI-REV-0023):
+   mechanism and exponent known; as stated a statement about the exponent.**  The note has
+   a head note and is to be revised next: *the threshold (S) can very probably be removed
+   altogether* — use complete five-point windows (all ten distances of five consecutive
+   points have separation at most 4) with the Procrustes–Gram inequality
+   `min_R ‖U − XR‖_F² ≤ ‖UUᵀ − XXᵀ‖_F²/(2(√2 − 1)σ_r(X)²)` (short proof: optimal alignment makes
+   `XᵀU` symmetric positive semidefinite; expand), compare the frames of consecutive windows
+   on their shared tetrahedron, telescope.  Worked out on paper in the session of the ninth
+   checkpoint: `‖Y − gX‖_F ≤ 1.3 (b/(s τ)) (n + 3)² ‖η‖₂` for **every** `Y`, `η` the errors of
+   all squared distances of separation at most 4, `s`, `τ` the smallest singular values of
+   the centred five- and four-point windows.  **Not yet written, not yet checked
+   numerically** — do both before quoting it (task 16).  It also gives local constants and
+   a version for any separation `K ≥ 4`, i.e. answers the three questions of SCI-REV-0023 §5.
+3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments; the main
+   statement is the Science division's Proposition R22-1).  Open: O-12, O-13, O-14,
+   R22-GEO-3, -4, -5.
+4. **Owed:** GEOMETRY-RES-0007 to Science (response to SCI-REV-0023: requests A4-GEO-1 … -6,
+   the revised Theorem L, question 1).  **The research owner's supplementary directive**
+   (about 22:00 UTC): a seventh division, Structural and Computational Biology (branch
+   `research/structural-biology`, not on the remote at 22:02 UTC) — send it an orientation
+   (seven items), `docs/geometry/IMPLEMENTATION_GUIDE.md` (specifications of what is ready
+   for software: DEMIX, DEMIX-4, the certificates, with proof status, Lean declarations,
+   assumptions, input and output, complexity, counterexamples, conditioning, validation)
+   and `docs/geometry/BENCHMARKS.md` (unique / non-unique / locally-not-globally
+   identifiable / identifiable-but-hard / ill-conditioned / assumption-violating instances).
+   Distinguish global identifiability, local identifiability, algorithmic recoverability
+   and efficient certification; claim nothing about real molecular systems.
+5. **Open, in priority order** (`PROOF_OBLIGATIONS.md`): O-15 (Conjecture 6.3: four states
+   at 24 to 29 atoms — `exact_demix4.py 4 28` is feasible locally in about three hours;
+   three states at 15 atoms needs degree 5 and the structural locus; stability of the rank
+   certificate under noise), O-1, O-3, O-2 (b)–(d), O-4, O-5.
+6. **Next synchronisation:** fetch all six other branches (the sixth is
+   `research/structural-biology`) and look for `GEOMETRY` in their `docs/collaboration/`.
+
+## 2026-11-26, ninth checkpoint (work from 20:11 UTC; see the commit time)
+
+**The planted model for Complexity became a section of the report.**  Writing down "what
+would a low-degree analysis be about" for COMPLEXITY-RES-0002 led to: below the conic
+threshold the states are the rank-3 points of the solution space `L` of the linear system
+(a MinRank problem), and the `4 × 4` minors can be used as linear equations on quartics.
+First numerical results (`demix4.py`): the certificate `h_4 = K` holds from 11 atoms for
+two states and 17 for three; states recovered to `10⁻⁷`.
+**Prior art, before commit** (DG-21): this is the algorithm of Johnston–Lovitz–Vijayaraghavan
+(linear sections of varieties), with higher levels by Derksen–Johnston–Lovitz and the
+dimension count as conjectured exact threshold by Dastidar–Weich–Wein; three papers read
+in part through fetches.  §6.2 and GEOMETRY-RES-0006 rewritten to say so.  A crude
+asymptotic claim was removed after evaluating it (DG-22).
+**Exact arithmetic** (`exact_demix4.py`): rational chain witnesses reduced modulo 65521;
+all minors by Laplace expansion in `int64`; streaming reduced echelon form with products
+in `float64` (exact below `2^53`); the rank lower bound `C(m+3,4) − K` proves the
+certificate.  Proved: `K = 2, n = 11`; `K = 3, n = 17` (both angles; integer cross-check at
+a second prime); `K = 4, n = 32` (8 min) and `n = 30` (27 min, 77 323 of 122 760 minors read).
+**The structural point is harmless** (Proposition 6.2 (h)): at `n = 6K − 2` the space `L`
+contains one rank-2 matrix with `c = 0`; the minors vanish to second order there, which
+costs exactly `m = dim L` conditions; exact ranks give `h_4 = K + m` at `K = 2, n = 10`
+(63 of 70) and `K = 3, n = 16` (4825 of 4845), and then the only rank-3 points with `c ≠ 0`
+are the states.  Floating point had given 21 and 24 for the second defect instead of 20
+(DG-23).  Hence **Theorem I′**: identifiable among all ensembles from 10, 16, 30 atoms.
+**A planted error that was not an error:** the first mutation of the new test ("principal
+minors only") is not a mutation at `K = 2, n = 11` — the fifteen principal minors already
+span the thirteen-dimensional space there — and the mutation harness reported it as
+missed.  Replaced by "ignore the structural point" (must fail at `K = 2, n = 10`).
+**Fetch at 21:55 UTC:** SCI-REV-0023 (originality review of Theorem L, with a relevance
+assessment); SCI-RES-0036; COMPLEXITY-RES-0008 and -MSG-0004; Ensemble's E20″, E21; nothing
+from Engineering or Theory addressed to us.  Then the research owner's supplementary
+directive (seventh division).  Harness: 43 tests, 31 mutations caught.
 
 ## 2026-11-26, eighth checkpoint (work from 19:42 UTC; see the commit time)
 

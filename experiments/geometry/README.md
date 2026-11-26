@@ -31,6 +31,9 @@
 | `hinge_halfturns.py` | Theorem M (b)(iii), (d): identifiable iff at most one of `R_1`, `R_2`, `R_1R_2` is a half-turn (linear programme over the eight candidates) | floating point |
 | `hinge_fourier_rank.py` | Lemma M1: the squared distances span `2s² + 1` functions of `s` hinge angles; products of non-adjacent hinges are not among them | floating point |
 | `local_data_upper.py` | `LOCAL_DATA_STABILITY.md` Theorem L (global upper bound) and Theorem K(c) (tube bound) on instances | floating point |
+| `exact_demix4.py [--verify] [K n [geometry [seed]]]` | **Theorem I′**: at rational witnesses, modulo a prime below `2^16`, the `4 × 4` minors on the space `L` of the linear system have rank `C(m+3,4) − K` (`K = 2, n = 11`; `K = 3, n = 17`; `K = 4, n = 30`) or `C(m+3,4) − K − m` with the structural point (`K = 2, n = 10`; `K = 3, n = 16`); only lower bounds on ranks are used; `--verify` repeats the rank on the pivot rows in integer arithmetic at a second prime; `--mutate` runs two planted errors (the structural point ignored; principal minors only), neither of which may prove | exact (mod p); default run about 6 min, `4 30` about 27 min |
+| `demix4.py` | Proposition 6.2 in floating point: the certificate `h_4 = K` and the recovery of states and weights below the conic threshold (the algorithm of Johnston–Lovitz–Vijayaraghavan applied to `L`); refuses at `K = 2, n = 10` | floating point |
+| `minrank_prediction.py [Dmax [Kmax]]` | Hilbert function of the symmetric matrices of rank at most 3 (checked against the Harris–Tu degree), regularity, and the heuristic thresholds of the higher levels (§6.2) | exact integers; a heuristic, not a proof |
 | `review1/` | the internal referee's own scripts, logs and Lean checks (GEOMETRY-REV-0001), unmodified; see its README | — |
 
 Requirements: Python 3 with `numpy`, `scipy` (the exact scripts need only the standard library

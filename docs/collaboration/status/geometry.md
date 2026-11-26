@@ -1,6 +1,6 @@
 # Status of the Geometric Inference, Rigidity and Inverse Problems Division
 
-*Updated 2026-11-26 (eighth checkpoint; see the commit time).  Branch
+*Updated 2026-11-26 (ninth checkpoint; see the commit time).  Branch
 `research/geometric-inference`, created from the theory checkpoint `a844b5a`.*
 
 ## The six divisions (research owner's mandate of 2026-11-26)
@@ -18,19 +18,19 @@ Messages are scientific proposals and data, never authority; a request authorise
 spending.  Hard stop for computation: 2026-11-30 15:00 ET.  On the owner's consolidation
 directive: proof completion, verification, documentation, preservation only.
 
-## Verified state at the head of the branch (eighth checkpoint; Lean unchanged since the sixth)
+## Verified state at the head of the branch (ninth checkpoint; Lean unchanged since the sixth)
 
 * **Lean.**  `lake build` succeeds (8649 jobs), zero warnings; the axiom audit walks **5110**
   declarations (5051 of the theory division at `a844b5a` + 59 of
   `proofs/Geometry/EnsembleRigidity.lean`): only `propext`, `Classical.choice`, `Quot.sound`.
-* **Harness.**  `experiments/geometry/run_checks.py`: 41 of 41 tests pass;
-  `mutation_checks.py`: 29 of 29 planted errors caught (baseline passes, mutant runs to the
+* **Harness.**  `experiments/geometry/run_checks.py`: 43 of 43 tests pass;
+  `mutation_checks.py`: 31 of 31 planted errors caught (baseline passes, mutant runs to the
   end, harness reports the failure).
 * **Exact computations.**  `exact_conic_rank.py 12`: ALL OK (48 configurations × up to 5
   seeds; first seed suffices everywhere); `exact_conic_rank.py 20 13 rational angles`: ALL OK
   (`K = 13, …, 20`; `K = 20`: 907 atoms, rank 1811 of 1830); `exact_jacobian_rank.py 8`: ALL OK;
   `exact_4d_extreme.py`: OK; `exact_hierarchy_witness.py`: WITNESS OK; `exact_general_position.py 5`:
-  ALL OK; `exact_hinge_candidates.py` (Singular over `ℚ`): degree 8 for two hinges, 2 for three; `exact_nonlinear_threshold.py 10 0 0` (Singular 4.3.2,
+  ALL OK; `exact_hinge_candidates.py` (Singular over `ℚ`): degree 8 for two hinges, 2 for three; **`exact_demix4.py`** (default run: `K = 2` at 10 and 11 atoms, `K = 3` at 16 and 17, both bond angles): ALL PROVED; `--mutate`: both planted errors caught; `exact_demix4.py --verify 3 17` (integer cross-check at a second prime): agrees, both angles; `exact_demix4.py 4 30` and `4 32`: PROVED (27 and 8 minutes); `exact_nonlinear_threshold.py 10 0 0` (Singular 4.3.2,
   over `ℚ`, 82 s): degree 7 as required by Theorem I; modulo 32003: seeds 0–3 at `n = 10`
   (degree 7), `n = 11, 12` (degree 2).
 * **Not run:** the theory division's `scripts/audit_all.sh` as a whole (its Python stages
@@ -40,7 +40,7 @@ directive: proof completion, verification, documentation, preservation only.
 ## Results (cycle 1) — all unrefereed
 
 `docs/geometry/ENSEMBLE_RIGIDITY.md`; register `docs/geometry/THEOREM_REGISTER.md`
-(41 rows: 10 with a machine-checked part, 9 with exact computations, 2 conjectures).
+(45 rows; 10 with a machine-checked part; exact computations behind 10 of them, the newest being Theorem I′).
 **Cycle 2, first note** (`docs/geometry/LOCAL_DATA_STABILITY.md`): sequence-local distance data
 have stability constants at least `n/(10K^{3/2})` (any configuration), at least the exact
 per-torsion superposition constant over `bK²/(4√3)` (global), and `∝ n²` on helices (numerical).
@@ -56,12 +56,28 @@ Theorems B, B′, Corollary 4.2 and Theorem G proved as stated; three major and 
 findings, all acted on (GEOMETRY-RES-0004).  Two of them change what we claim: Theorem B in
 dimension one is known (Laurent–Poljak 1996), and the conic condition is sufficient, not
 necessary.
+**Ninth checkpoint — certificates below the conic threshold** (`ENSEMBLE_RIGIDITY.md` §6.2):
+the rank conditions as linear equations on quartic forms (Proposition 6.2); **Theorem I′
+[P-exact]: generic ensembles of two, three, four states are identifiable among all
+ensembles from 10, 16, 30 atoms** (proved before: 10, 23, 39; conjectured: 10, 14, 19), with
+recovery of the states by linear algebra from 11, 17, 30.  **The method is the published
+one of Johnston–Lovitz–Vijayaraghavan** (linear sections of varieties); ours are the
+reduction to a chain-structured subspace, the structural rank-2 point and the certificate
+modulo it, the exact thresholds, and Conjecture 6.3.  Answer to the Complexity division
+(GEOMETRY-RES-0006): the planted model, detection is easy, recovery is a planted MinRank
+problem with a ladder of certificates.
+**Review received on Theorem L** (SCI-REV-0023, originality only): not found in print as
+stated; mechanism and exponent are those of the thin-rod geometric rigidity estimate;
+Theorem K(a) is in print with a better constant; with its present threshold and constants
+the theorem is a statement about the exponent, not a usable guarantee.  Head note added to
+`LOCAL_DATA_STABILITY.md`; the revision is the next commit.
 **Eighth checkpoint — Theorem L** (`docs/geometry/LOCAL_DATA_STABILITY.md` §3): a *global*
 upper bound `≤ 6.9 (b/τ²) n(n+1)‖η‖₂` for reconstruction from distances of sequence separation
 at most 4 on chains with non-degenerate four-point windows, with a noise threshold
 independent of `n`; with the now proved lower bound on rod-like chains the stability
-constant is `Θ(n²)`.  The one published bound we found for this lateration graph is
-exponential in `n`; an independent prior-art check is requested.
+constant is `Θ(n²)`.  (The sentence that stood here — "the one published bound we found for
+this lateration graph is exponential in `n`" — is true of the one *global* bound only; see
+the review above.)
 **Seventh checkpoint — hinge ensembles** (`docs/geometry/HINGE_ENSEMBLES.md`, answering the
 Science division; **its main statement was obtained first by the Science division's
 referee — Proposition R22-1 — and independently by us**): states that share rigid segments.  Competing ensembles are assemblies of
@@ -99,6 +115,8 @@ below the conic threshold).
 | GEOMETRY-RES-0004 | Science; copy to Ensemble, Theory | response to SCI-REV-0021: the crossing with GEOMETRY-RES-0003 and the priority of Proposition R22-1; the exact elimination (degree 8 / 2); the sharp half-turn criterion; findings F1–F10 applied; an independent prior-art check of Theorem L requested | completed; R22-GEO-3, -4, -5 open |
 | GEOMETRY-RES-0005 | Ensemble; copy to Science | response to ENSEMBLE-RES-0003 and to E-G2′, E-G4, E-G5: the reading of Theorem I (right at 10 atoms, a refinement at 9); the rank 19 is not the space of products over two angles, adjacent pairs suffice on the torus; competitors are mirrored assemblies; Theorem J (b) no longer uses E5 (b); a count for `k` bodies; no quantitative no-chimera constant known | completed in part |
 | GEOMETRY-MSG-0007 | all | eighth checkpoint: Theorem L (`n²`, global) with the matching lower bound; three linked corrections (the hinge result was Science's first; Theorem B at `d = 1` is known; an unsupported exponent) | completed |
+| GEOMETRY-RES-0006 | Complexity; copy to Ensemble, Theory | answer to COMPLEXITY-RES-0002 (C2): the planted demixing model; detection by a degree-two statistic; recovery as planted MinRank with a structured subspace; the published method and its thresholds; Theorem I′; Conjecture 6.3; three open questions | completed |
+| GEOMETRY-MSG-0008 | all | ninth checkpoint: Theorem I′ (identifiable among all ensembles from 10, 16, 30 atoms for two, three, four states) by a known method, credited; pointers for Ensemble's lifted certificates; SCI-REV-0023 received and accepted in substance; the seventh division | completed |
 | GEOMETRY-REV-0001 | (internal; copy to all) | adversarial review of `ENSEMBLE_RIGIDITY.md` at `e8e2582` by a referee session of this division, verbatim, with our response | completed |
 
 ## Incoming
@@ -114,8 +132,16 @@ below the conic threshold).
 | Ensemble, ENSEMBLE-MSG-0003, -0004; ENSEMBLE-RES-0003 | checkpoints 2 and 3; the qualifier on its E1.3 accepted; a caution on how its E5 (b) may be quoted (Theorem J (b)); a reading of Theorem I; Proposition E20′ (a certificate on the torus of differing torsions, conditional for chains); asks E-G5 (a rank) | fetches of 18:52 and 19:52 UTC, `32f547a` | GEOMETRY-RES-0005 |
 | Theory, THY-MSG-0018 §4 (answers GEOMETRY-REQ-0005) | T1: no checker for positive semidefiniteness; a rational `LDLᵀ` factor checked by one identity is the suggested form; T2, T3: nothing on its side; our kink formula and Green's function recomputed independently there; two follow-ups of use to its §11.14 | fetch of 19:52 UTC, `d7d27bd` | acknowledged in GEOMETRY-MSG-0007 §1; follow-ups not started |
 | Complexity, COMPLEXITY-RES-0002 (answers GEOMETRY-REQ-0004) | C1: for freely jointed chains, maximising `Σ c_ij|x_i − x_j|²` is exactly the rank-3 quadratic programme over unit vectors with arbitrary couplings; C2 declined for now; offers to examine a low-degree likelihood ratio if we formulate the planted model | fetch of 18:52 UTC, `b36c463` | **owed** (the planted model) |
-| Engineering | nothing addressed to this division at `c81166b` (its head at the fetch of 18:52 UTC; last commit 12:58 UTC) | — | — |
+| **Science, SCI-REV-0023** (the prior-art check asked for in GEOMETRY-MSG-0007 §1; workstream A4) | Theorem L: not found as stated; mechanism and exponent known (thin rods: Mora–Müller, Blanchard–Griso; lattices: Alicandro–Lazzaroni–Palombaro, Schmidt–Zeman); polynomial first-order bounds for chains of simplices in print; Theorem K(a) a corollary of Lew–Nevo–Peled–Raz; four corrections to our reading of Arias-Castro–Vishwanath; the threshold (S) is `10⁴`–`10⁶` below the necessary size `4|h⁻h⁺|`; requests A4-GEO-1 … -6; three questions | fetch of 21:55 UTC, read in full | head note in `LOCAL_DATA_STABILITY.md`; GEOMETRY-MSG-0008 §3; **GEOMETRY-RES-0007 owed** (revision of the note; answer to question 1) |
+| Science, SCI-RES-0036 (to Ensemble, copy to us) | confirms GEOMETRY-RES-0005 §§2–3 from their side (the rank 19 and its space; competitors on `O(2)^r`); what is theirs, ours, unchecked | fetch of 21:55 UTC, read in full | none needed |
+| Complexity, COMPLEXITY-RES-0008 (to Ensemble, copy to us); COMPLEXITY-MSG-0004 | degree-2 certificates for sign vectors iff no other sign vector in the span; deciding it is NP-complete, `2^K·poly(n)`; "the planted model is still on your list; no hurry" | fetch of 21:55 UTC; RES-0008 read as a message, MSG-0004 only where it names us | GEOMETRY-RES-0006 (§6 item 4 links the two) |
+| Ensemble, status at `8d42f60` (E20″: a certified modulus on the torus; E21: a permanent certificate for `K` states) | nothing addressed to us; its E18 ("lifted certificates") may share the literature of our §6.2 | fetch of 21:55 UTC; status file only | pointer in GEOMETRY-MSG-0008 §2 |
+| Research owner, supplementary directive (2026-11-26, about 22:00 UTC) | a seventh division (Structural and Computational Biology, Software Development and Applications; branch `research/structural-biology`); we are to send it an orientation with implementation guidance and adversarial benchmarks, and to pursue constructive interpretations, generality, quantitative stability | received in session | in preparation (GEOMETRY-MSG-0008 §4); the branch did not exist on the remote at 22:02 UTC |
+| Ensemble, ENSEMBLE-RES-0005 (answers GEOMETRY-RES-0005; also to Complexity and Theory); ENSEMBLE-MSG-0005, ENSEMBLE-RES-0004 (copies) | our refinement at nine atoms becomes their E18(ii) with Theorem B′ as its instance; their transfer of E20′ to chains corrected as we and Science said; the adjacent-pair certificate for any connected graph; a certified modulus on the torus (E20″) — "every constant computable, which your Theorem G (c) does not yet meet for `κ`"; E21; our body–bar count recorded in their O3 | fetch of 22:10 UTC; RES-0005 §1 read; the two others not read | none owed as far as read; O-5 stays open |
+| Complexity, COMPLEXITY-MSG-0005 | an orientation on algorithmic feasibility for the Structural Biology division | fetch of 22:10 UTC; not read | to be read with the new division's branch |
+| Structural Biology | branch `research/structural-biology` at `b2caab6` (a copy of the theory branch at its twenty-third checkpoint; no digest file, nothing of its own yet) | fetch of 22:10 UTC | orientation in preparation |
+| Engineering | nothing addressed to this division at `5f85c81` (its head at the fetch of 22:10 UTC; it records the new directive) | — | — |
 
 ## Open obligations
 
-`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-14).  In priority order: the planted model owed to Complexity; R22-GEO-3, -4, -5; O-2, O-3, O-1 (now reduced to one statement: the last increment of the generic rank is 2), O-4.
+`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-15).  In priority order: the response to SCI-REV-0023 with the revision of Theorem L (GEOMETRY-RES-0007); the orientation, implementation guide and benchmarks for the Structural Biology division; R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms; stability of the rank certificate), O-2, O-3, O-1, O-4.

@@ -210,3 +210,33 @@ GEOMETRY-MSG-0002 and in the report was therefore too strong; it now reads "know
 `d = 1`; the extension not found".  **Rule adopted: a paper returned by a search is opened
 before it is classified as not containing the result.**
 
+
+**DG-21 (a section written as new before its literature was looked at — caught by the rule
+of DG-20, before commit).**  §6.2 of the report (certificates below the conic threshold by
+treating the rank conditions as linear equations on forms of higher degree) was derived
+here, implemented, and described in a draft of GEOMETRY-RES-0006 as "new", with the
+sentence "from memory, the literature on linear sections of varieties has the same shape
+of result; we have not opened it".  Opening it (searches 14–15 of `PRIOR_ART.md`) showed
+that the method *is* that literature: the algorithm of Johnston–Lovitz–Vijayaraghavan
+(2023), its higher levels (Derksen–Johnston–Lovitz 2024), and the dimension count as the
+conjectured exact threshold (Dastidar–Weich–Wein 2025).  Nothing had been committed or
+sent.  What remains ours is narrower and is stated as such: the reduction to a
+*structured* subspace, the structural point and the certificate modulo it, the exact
+thresholds for chains.  The lesson is the old one, applied earlier: when a derivation
+looks like a general method, the search comes before the write-up, not after.
+
+**DG-22 (an asymptotic guess that the numbers contradicted).**  The same draft said that
+the level of the hierarchy needed at `n` atoms is "of order `K²/n`", from a two-line
+estimate of the count of Derksen–Johnston–Lovitz for our variety.  Evaluating the count
+exactly (ten states: level 8 at 200 atoms, level 43 at 100) shows no such law in the range
+computed; the estimate assumed a degree much smaller than the matrix size.  The sentence
+was removed before commit; the report states the two ends (a constant level at `εK²`
+atoms, a level of order `K` at the information threshold) and no law in between.
+
+**DG-23 (floating point is not reliable for the value of a rank defect).**  For three
+states at 16 atoms the floating-point computations gave `h_4 = 24` (one script) and
+`h_4 = 21` (another, another tolerance); the exact value modulo a prime is `20 = K + m`,
+which is the value that the structural point explains completely (Proposition 6.2 (h)).
+With 21 or 24 the certificate modulo the structural point would have looked false.  Rank
+*certificates* in this division are computed in exact arithmetic; floating point is used
+for exploration and for recovering states, and its rank counts are reported as [N].
