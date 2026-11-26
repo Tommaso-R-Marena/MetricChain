@@ -1646,6 +1646,36 @@ MUTS["XVI"] += [
      [('    lower = float(np.min(np.maximum((1 - phis) / 2, (1 - phis) * (X + hint))))', '    lower = float(np.min((1 - phis) * (X + hint)))')], 'XVI.7'),
 ]
 
+# The rate of the level recursion (theory report Theorem 11.53b; docs/workstreams/R_REPORT.md)
+MUTS["XVI"] += [
+    ("XVI.8 M1: Proposition U with a bound that is too small (image slopes multiplied by 1.1)",
+     [('    U = float(np.max(Bg[fin] - sig[fin] * g))\n    beta = 1e-9 * g\n\n    def fz(z):', '    U = float(np.max(Bg[fin] - 1.1 * sig[fin] * g))\n    beta = 1e-9 * g\n\n    def fz(z):')], 'XVI.8'),
+    ("XVI.8 M2: Proposition U claimed for families of lines that are not convex",
+     [('            r = rt_prop_u(P, rng, False)', '            r = rt_prop_u(P, rng, True)')], 'XVI.8'),
+    ("XVI.8 M3: the passage time with the constant pi h sqrt(theta_hint''(0)) (a factor sqrt 2 missing)",
+     [('        cstar = math.pi * P.h * math.sqrt(2 * P.vt)\n        prev = 0.0', '        cstar = math.pi * P.h * math.sqrt(P.vt)\n        prev = 0.0')], 'XVI.8'),
+    ("XVI.8 M4: the bottleneck expansion with v^2/theta_hint''(0) instead of v^2/(2 theta_hint''(0))",
+     [('            r = D * P.h / (d + v * v / (2 * P.vt))', '            r = D * P.h / (d + v * v / P.vt)')], 'XVI.8'),
+    ("XVI.8 M5: the range condition claimed from the wide start b_0 = h + 0.15 (no restart near h)",
+     [('    wst, bs, exc = rt_chain(G, G.L + 0.05, G.h + 0.02, jmax)', '    wst, bs, exc = rt_chain(G, G.L + 0.05, G.h + 0.15, jmax)')], 'XVI.8'),
+    ("XVI.8 M6: consecutive slopes at the cut claimed not to grow (bound 1 instead of the multiplier)",
+     [('            excess = max(excess, nxt[1] / cur[1] - (gs + gB / cur[1]))', '            excess = max(excess, nxt[1] / cur[1] - 1.0)')], 'XVI.8'),
+    ("XVI.8 M7: the kinked pair with twice the lower bound, 2 (L_2 - L_1) h/(k + 2)",
+     [('        if lo - K.h < (K.L2 - K.L1) * K.h / (k + 2) - 1e-12:', '        if lo - K.h < 2 * (K.L2 - K.L1) * K.h / (k + 2) - 1e-12:')], 'XVI.8'),
+    ("XVI.8 M8: theta_hint''(0) = theta_na''(h)/(1 + |theta_na'(h)|)^2 (wrong power)",
+     [("abs(r2 / (1 + r1) ** 3 / P.vt - 1) > 1e-3:", "abs(r2 / (1 + r1) ** 2 / P.vt - 1) > 1e-3:")], 'XVI.8'),
+    ("XVI.8 M9: the slope map claimed jointly concave",
+     [('            if vm > lam * v1 + (1 - lam) * v2 + 1e-9 * (1 + v1 + v2):', '            if vm < lam * v1 + (1 - lam) * v2 - 1e-9 * (1 + v1 + v2):')], 'XVI.8'),
+    ("XVI.8 M10: the chain bound claimed below the constant, j^2 (b_j - h) < 2 pi^2 h^2 theta_hint''(0)",
+     [('    if not (1.0 < rend < r20):', '    if not (rend < 1.0):')], 'XVI.8'),
+    ("XVI.8 M11: the orbit curves claimed concave in B",
+     [('                if fin[i + 1] - 2 * fin[i] + fin[i - 1] < -1e-9 * max(1.0, abs(fin[i])):', '                if fin[i + 1] - 2 * fin[i] + fin[i - 1] > 1e-9 * max(1.0, abs(fin[i])):')], 'XVI.8'),
+    ("XVI.8 M12: the kinked pair with the step 2 delta/h on the flat part",
+     [('            if abs(K.sigma(K.h + d, s) - s - w0) > 1e-12:', '            if abs(K.sigma(K.h + d, s) - s - 2 * w0) > 1e-12:')], 'XVI.8'),
+    ("XVI.8 M13: Proposition U claimed with strict slack (the bound never attained: R <= U - 1e-3 a)",
+     [('    if worst > 1e-5:\n        return False, dict(reason="Proposition U: the level operator exceeds', '    if worst > -1e-3:\n        return False, dict(reason="Proposition U: the level operator exceeds')], 'XVI.8'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

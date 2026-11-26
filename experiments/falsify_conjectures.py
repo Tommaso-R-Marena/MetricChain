@@ -7781,6 +7781,292 @@ def t_naive_lines(rng, trials):
     return True, dict(naive=naive, lower=lower)
 
 
+class RtPair:
+    """A pair through its dual function J(t) = inf_e [(1 - t) theta_na(e) + t e]: the Gaussian pair (u = None), the cube
+    at slope u, or the kinked pair theta_na = max(1 - 3e, 1/2 - e, 0) (u = 'kink').  Exact slope map
+    Sigma(B, s) = t'(1 - s)/(1 - t'), Q(t') = B/(1 - s), Q = J/(1 - t); partial derivatives 1/e*, theta_na(e*)/e*
+    with e* = J + (1 - t') J', theta_na(e*) = J - t' J'  (docs/workstreams/R_REPORT.md, sections 1-2)."""
+
+    def __init__(self, u):
+        self.u = u
+        if u is None:
+            self.a, self.h, self.L, self.vt = 1.0, 0.25, 0.5, 0.5
+        elif u == 'kink':
+            self.a, self.h, self.L1, self.L2 = 1.0, 0.25, 0.5, 0.75
+        else:
+            pu, lam, epsstar, a, h = lv_consts(u)
+            self.a, self.h, self.lam = a, h, lam
+            rho_h = lam / u
+            self.L = math.log((1 - rho_h) / rho_h) / u
+            self.vt = 1 / (u * u * rho_h * (1 - rho_h))          # theta_hint''(0)
+        if u != 'kink':
+            self.const = 2 * math.pi ** 2 * self.h ** 2 * self.vt
+
+    def J(self, t):
+        if self.u is None:
+            return t - t * t
+        if self.u == 'kink':
+            return min(1.0 - t, 0.25, 0.5 * t)
+        return math.log(2 / (1 + math.exp(-t * self.u))) - t * self.lam
+
+    def dJ(self, t):
+        if self.u is None:
+            return 1 - 2 * t
+        return self.u / (1 + math.exp(t * self.u)) - self.lam
+
+    def theta_na(self, e):
+        if self.u is None:
+            return (1 - math.sqrt(e)) ** 2 if e < 1 else 0.0
+        if self.u == 'kink':
+            return max(1 - 3 * e, 0.5 - e, 0.0)
+        return na_theta_na(self.u, e)
+
+    def regular(self, B, s):
+        if self.u == 'kink':
+            return s < 1.0 and B <= (1.0 - s) * self.a           # finite slope at zero: the boundary is regular
+        return s < 1.0 and B < (1.0 - s) * self.a
+
+    def tprime(self, y):
+        """Q^{-1}(y), Q(t) = J(t)/(1 - t)."""
+        if self.u is None:
+            return y
+        lo, hi = 0.0, 1.0
+        for _ in range(90):
+            mid = 0.5 * (lo + hi)
+            lo, hi = (mid, hi) if self.J(mid) < y * (1.0 - mid) else (lo, mid)
+        return 0.5 * (lo + hi)
+
+    def sigma(self, B, s):
+        if not self.regular(B, s):
+            return math.inf
+        if self.u == 'kink':                                     # piecewise linear: the supremum is at a vertex or a limit
+            v = max(0.0, (B - (1 - s) * 0.25) / 0.25, B / 0.5)
+            return max(v, 3 * (1 - s)) if B == (1.0 - s) * self.a else v
+        tp = self.tprime(B / (1.0 - s))
+        return tp * (1.0 - s) / (1.0 - tp)
+
+    def grad(self, B, s):
+        tp = self.tprime(B / (1.0 - s))
+        e = self.J(tp) + (1 - tp) * self.dJ(tp)
+        th = self.J(tp) - tp * self.dJ(tp)
+        return tp * (1.0 - s) / (1.0 - tp), 1.0 / e, th / e
+
+    def orbit(self, B, n):
+        """p_n(B): n steps of the slope map from the flat line (inf once not regular)."""
+        s = 0.0
+        for _ in range(n):
+            s = self.sigma(B, s)
+            if not math.isfinite(s):
+                return math.inf
+        return s
+
+    def orbit_slope(self, B, n):
+        """(p_n(B), dp_n/dB) by the chain rule."""
+        p, dp = 0.0, 0.0
+        for _ in range(n):
+            if not self.regular(B, p):
+                return math.inf, math.inf
+            p, gB, gs = self.grad(B, p)
+            dp = gB + gs * dp
+        return p, dp
+
+
+def rt_chain(P, s_t, b0, jmax):
+    """The restarted chain of cut orbit curves (R_REPORT section 6): returns (largest W_{j+1}(b_{j+1}), list of
+    (j, b_j), worst excess of m_{j+1}/m_j over its bound)."""
+    h, a = P.h, P.a
+
+    def cut(j):
+        if P.orbit(b0, j) <= s_t:
+            return None
+        lo, hi = h, b0
+        for _ in range(70):
+            mid = 0.5 * (lo + hi)
+            lo, hi = (mid, hi) if P.orbit(mid, j) <= s_t else (lo, mid)
+        return lo, P.orbit_slope(lo, j)[1]
+    b, worst, bs, excess = b0, 0.0, [], -math.inf
+    cur = cut(1)
+    for j in range(1, jmax + 1):
+        nxt = cut(j + 1)
+        if cur is None:
+            b_next = b
+        else:
+            Bt, m = cur
+            b_next = min(b, Bt + (1 - s_t - Bt / a) / (m + 1 / a))
+        if nxt is None or b_next <= nxt[0]:
+            Wn = P.orbit(b_next, j + 1)
+        else:
+            Wn = s_t + nxt[1] * (b_next - nxt[0])
+        if nxt is not None and cur is not None:
+            sig1 = P.orbit(nxt[0], j)
+            _, gB, gs = P.grad(nxt[0], sig1)
+            excess = max(excess, nxt[1] / cur[1] - (gs + gB / cur[1]))
+        worst = max(worst, Wn)
+        bs.append((j, b))
+        b, cur = b_next, nxt
+    return worst, bs, excess
+
+
+def rt_prop_u(P, rng, concave, nB=800):
+    """One random case of Proposition U: (R_ref - U)/a, R_ref = the bracket of R at beta -> 0 minimised over phi = g/e
+    (grid in z = ln(e/g - 1), then golden section: the function is quasi-convex in e), U = sup_B (B - Sigma(B, W(B)) g)."""
+    b = rng.uniform(0.3, 1.0) * P.a
+    c1, c2 = sorted([rng.uniform(0, b), rng.uniform(0, b)])
+    a1, a2 = rng.uniform(0, 2 / b), rng.uniform(0, 6 / b)
+    w0 = [0.0, 0.0, rng.uniform(0, 0.3)][int(rng.integers(0, 3))]
+    Bg = np.linspace(0, b, nB)
+    W = np.maximum(w0, np.maximum(a1 * (Bg - c1), a2 * (Bg - c2)))
+    if W[-1] > 1:
+        W = W / W[-1] * rng.uniform(0.5, 1.0)
+    if concave:
+        W = rng.uniform(0.3, 0.9) * np.sqrt(Bg / b)
+    sig = np.array([P.sigma(float(B), float(w)) for B, w in zip(Bg, W)])
+    fin = np.isfinite(sig)
+    g = rng.uniform(0.01, 1.2) * P.h
+    U = float(np.max(Bg[fin] - sig[fin] * g))
+    beta = 1e-9 * g
+
+    def fz(z):
+        phi = 1.0 / (1.0 + math.exp(z))
+        mu = phi * P.theta_na((g - beta) / phi)
+        return mu + (1 - phi) * float(np.max(Bg - W * (max(beta, mu) / (1 - phi))))
+    zs = [-25 + 37 * i / 160 for i in range(161)]
+    best, ib = min((fz(z), i) for i, z in enumerate(zs))
+    lo, hi = zs[max(ib - 1, 0)], zs[min(ib + 1, 160)]
+    gr = (math.sqrt(5) - 1) / 2
+    x1, x2 = hi - gr * (hi - lo), lo + gr * (hi - lo)
+    f1, f2 = fz(x1), fz(x2)
+    for _ in range(60):
+        if f1 <= f2:
+            hi, x2, f2 = x2, x1, f1
+            x1 = hi - gr * (hi - lo)
+            f1 = fz(x1)
+        else:
+            lo, x1, f1 = x1, x2, f2
+            x2 = lo + gr * (hi - lo)
+            f2 = fz(x2)
+    return (min(best, f1, f2) - U) / P.a
+
+
+@conjecture("XVI.8 The rate of the level recursion (theory report Theorem 11.53b; docs/workstreams/R_REPORT.md): lim k^2 (tau_k - h) = 2 pi^2 h^2 theta_hint''(0).  Ingredients, each tested: (a) the slope map Sigma(B, s) = sup_e [B - (1 - s) theta_na(e)]/e is jointly convex and nondecreasing in both arguments; (b) the orbit curves p_j(B) = Sigma(B, p_{j-1}(B)), p_0 = 0, are convex and nondecreasing in B; (c) the bottleneck: Sigma(h + delta, L + v) - (L + v) = [delta + v^2/(2 theta_hint''(0))]/h up to a factor 1 + 8|v| + 0.002 for |v| <= 0.02, delta = 10^{-6} h; (d) the passage time: sqrt(delta) N_t(delta) increases to pi h sqrt(2 theta_hint''(0)) as delta -> 0 (within 6 per cent at delta = 10^{-4} h and 2.5 per cent at 10^{-5} h, from below), N_t the number of steps of the orbit of the flat line with intercept h + delta to exceed the slope L + 0.05; (e) Proposition U: for T the upper envelope of the lines (B, W(B)), W convex nondecreasing with values in [0, 1], the level operator satisfies R[T](g) <= sup_B (B - Sigma(B, W(B)) g), with equality for beta -> 0 - and for a concave W the right side is exceeded (convexity cannot be dropped); (f) the chain of cut orbit curves restarted from a flat majorant b_0 = h + 0.02 at the slope level L + 0.05 (Gaussian pair; the cube at u = 1 from h + 0.003): the cut curve of level j + 1 stays below slope one on [0, b_{j+1}] at every level (the range condition), the ratio of consecutive slopes at the cut is below its bound, j^2 (b_j - h)/(2 pi^2 h^2 theta_hint''(0)) decreases towards one from above - while from the wide start b_0 = h + 0.15 the range condition fails; (g) a kink of theta_na at its fixed point (theta_na = max(1 - 3e, 1/2 - e, 0), J flat on [1/2, 3/4]): the step of the slope map is exactly delta/h on the flat part and the lower bound from lines is at least (L_2 - L_1) h/(k + 2) above h - the rate 1/k; (h) theta_hint''(0) = -1/J''(L) = theta_na''(h)/(1 + |theta_na'(h)|)^3")
+def t_rate_theorem(rng, trials):
+    quick = trials < 100
+    stats = dict(convex=0, curves=0, prop_u=0, chain_levels=0)
+    G, C1 = RtPair(None), RtPair(1.0)
+    pairs = [G, C1, RtPair(float(rng.uniform(0.5, 2.5)))]
+    # (a) joint convexity, monotonicity
+    for P in pairs:
+        for _ in range(150 if quick else 1200):
+            s1, s2 = rng.uniform(0, 0.95), rng.uniform(0, 0.95)
+            B1, B2 = rng.uniform(0, (1 - s1) * P.a * 0.98), rng.uniform(0, (1 - s2) * P.a * 0.98)
+            lam = rng.uniform(0.05, 0.95)
+            v1, v2 = P.sigma(B1, s1), P.sigma(B2, s2)
+            vm = P.sigma(lam * B1 + (1 - lam) * B2, lam * s1 + (1 - lam) * s2)
+            if vm > lam * v1 + (1 - lam) * v2 + 1e-9 * (1 + v1 + v2):
+                return False, dict(reason="the slope map is not jointly convex", pair=P.u, B=(B1, B2), s=(s1, s2), lam=lam)
+            dB, ds = rng.uniform(0, 0.01) * P.a, rng.uniform(0, 0.01)
+            if P.regular(B1 + dB, s1 + ds) and P.sigma(B1 + dB, s1 + ds) < v1 - 1e-10:
+                return False, dict(reason="the slope map is not nondecreasing", pair=P.u, B=B1, s=s1)
+            stats["convex"] += 1
+    # (b) orbit curves
+    for P in pairs:
+        Bs = np.linspace(0.2 * P.h, 1.6 * P.h, 81 if quick else 241)
+        for j in ((1, 2, 5, 12) if quick else (1, 2, 3, 5, 8, 12, 20, 40)):
+            vals = [P.orbit(float(B), j) for B in Bs]
+            fin = [v for v in vals if math.isfinite(v)]
+            if any(vals[i] > vals[i + 1] + 1e-12 for i in range(len(vals) - 1)):
+                return False, dict(reason="an orbit curve is not nondecreasing in B", pair=P.u, j=j)
+            for i in range(1, len(fin) - 1):
+                if fin[i + 1] - 2 * fin[i] + fin[i - 1] < -1e-9 * max(1.0, abs(fin[i])):
+                    return False, dict(reason="an orbit curve is not convex in B", pair=P.u, j=j, B=float(Bs[i]))
+            stats["curves"] += 1
+    # (c) bottleneck, (d) passage time
+    ratios = {}
+    for P in pairs:
+        d = 1e-6 * P.h
+        for v in (-0.02, -0.01, -0.005, 0.0, 0.005, 0.01, 0.02):
+            D = P.sigma(P.h + d, P.L + v) - (P.L + v)
+            r = D * P.h / (d + v * v / (2 * P.vt))
+            if abs(r - 1) > 8 * abs(v) + 2e-3:
+                return False, dict(reason="bottleneck expansion of the slope map", pair=P.u, v=v, ratio=r)
+        cstar = math.pi * P.h * math.sqrt(2 * P.vt)
+        prev = 0.0
+        for dd, tol in ((1e-3, 0.2), (1e-4, 0.06)) + (() if quick else ((1e-5, 0.025),)):
+            s, n = 0.0, 0
+            while s <= P.L + 0.05:
+                s = P.sigma(P.h * (1 + dd), s)
+                n += 1
+            r = math.sqrt(dd * P.h) * n / cstar
+            if not (prev < r < 1.0 and 1 - r < tol):
+                return False, dict(reason="passage time against pi h sqrt(2 theta_hint''(0)/delta)", pair=P.u, delta_over_h=dd, ratio=r)
+            prev = r
+        ratios[str(P.u)] = round(prev, 4)
+    # (e) Proposition U and its negative control
+    worst, least = -math.inf, math.inf
+    for P, n in ((G, 6 if quick else 40), (C1, 2 if quick else 10)):
+        for _ in range(n):
+            r = rt_prop_u(P, rng, False)
+            worst, least = max(worst, r), min(least, r)
+            stats["prop_u"] += 1
+    if worst > 1e-5:
+        return False, dict(reason="Proposition U: the level operator exceeds the envelope of the image lines for a convex family", excess_over_a=worst)
+    if least < -1e-5:
+        return False, dict(reason="Proposition U: the bound is not attained at beta -> 0", deficit_over_a=least)
+    ctrl = max(rt_prop_u(G, rng, True) for _ in range(4 if quick else 12))
+    if ctrl < 1e-3:
+        return True, dict(reason="harness: the negative control (a concave family of lines) shows no excess", ctrl=ctrl)
+    # (f) the chain
+    jmax = 40 if quick else 120
+    wst, bs, exc = rt_chain(G, G.L + 0.05, G.h + 0.02, jmax)
+    if wst > 1.0:
+        return False, dict(reason="range condition of the chain fails (Gaussian pair, b_0 = h + 0.02)", largest=wst)
+    if exc > 1e-9:
+        return False, dict(reason="ratio of consecutive slopes at the cut exceeds its bound", excess=exc)
+    r20 = [j * j * (b - G.h) / G.const for j, b in bs if j == 20][0]
+    rend = bs[-1][0] ** 2 * (bs[-1][1] - G.h) / G.const
+    if not (1.0 < rend < r20):
+        return False, dict(reason="j^2 (b_j - h)/const does not decrease towards one from above", at_20=r20, at_end=rend)
+    stats["chain_levels"] += jmax
+    if not quick:
+        wst_c, bs_c, exc_c = rt_chain(C1, C1.L + 0.05, C1.h + 0.003, 30)
+        if wst_c > 1.0 or exc_c > 1e-9:
+            return False, dict(reason="chain for the cube at u = 1", largest=wst_c, excess=exc_c)
+        stats["chain_levels"] += 30
+    wide, _, _ = rt_chain(G, G.L + 0.05, G.h + 0.15, 30)
+    if wide <= 1.0:
+        return True, dict(reason="harness: the wide start does not violate the range condition", largest=wide)
+    # (g) the kinked pair
+    K = RtPair('kink')
+    for d in (1e-2, 1e-3):
+        w0 = d / K.h
+        smax = K.L2 - (1 - K.L2) * w0
+        for s in (0.5, 0.55, 0.62, 0.7, smax):
+            if abs(K.sigma(K.h + d, s) - s - w0) > 1e-12:
+                return False, dict(reason="kinked pair: the step on the flat part is not delta/h", delta=d, s=s)
+    for k in ((5, 20) if quick else (5, 20, 80, 200)):
+        lo, hi = K.h, K.a
+        for _ in range(50):
+            mid = 0.5 * (lo + hi)
+            lo, hi = (mid, hi) if math.isfinite(K.orbit(mid, k)) else (lo, mid)
+        if lo - K.h < (K.L2 - K.L1) * K.h / (k + 2) - 1e-12:
+            return False, dict(reason="kinked pair: lower bound from lines below (L2 - L1) h/(k + 2)", k=k, value=lo - K.h)
+    # (h) theta_hint''(0) through theta_na at its fixed point
+    for P in pairs:
+        e = P.h
+        de = 1e-4 * e
+        t0, tp, tm = P.theta_na(e), P.theta_na(e + de), P.theta_na(e - de)
+        r1, r2 = (tm - tp) / (2 * de), (tp - 2 * t0 + tm) / de ** 2
+        if abs(t0 - e) > 1e-9 or abs(r1 / (1 + r1) - P.L) > 1e-5 or abs(r2 / (1 + r1) ** 3 / P.vt - 1) > 1e-3:
+            return False, dict(reason="theta_hint''(0) against theta_na''(h)/(1 + |theta_na'(h)|)^3", pair=P.u,
+                               fixed_point_error=t0 - e, L=r1 / (1 + r1), ratio=r2 / (1 + r1) ** 3 / P.vt)
+        d2 = 1e-4
+        J2 = (P.J(P.L + d2) - 2 * P.J(P.L) + P.J(P.L - d2)) / d2 ** 2
+        if abs(-1 / J2 / P.vt - 1) > 1e-4 or abs(P.J(P.L) - P.h) > 1e-12:
+            return False, dict(reason="theta_hint''(0) against -1/J''(L), or max J against h", pair=P.u)
+    stats.update(passage_ratio=ratios, prop_u_excess=worst, control=round(ctrl, 4), range_largest=round(wst, 4),
+                 chain_ratio=(round(r20, 4), round(rend, 4)), wide_start=round(wide, 3))
+    return True, stats
+
 
 # ----------------------------------------------------------------------------------------------
 # XVII. With a known part (a field): the p-biased cube (theory report 11.20)
