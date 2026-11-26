@@ -14,6 +14,7 @@ The recursion: `T_1 = θ_na`, `T_{k+1} = min(T_k, R[T_k])`, `τ_k = sup T_k` (th
 | `iterate_exact.py pair levels [ratio] [ne]` | the recursion on a geometric grid (`10^{-11}` … `ε*`), linear interpolation, the infimum over `(φ, β)` on a grid of outer rates `e` and tolerance fractions; prints `τ_k`, `k²(τ_k − h)`, its ratio to the conjectured constant, and the scaled defect profile `k²(T_k − θ_hint)(ζh/k)/(h²θ_hint″(0))` at `ζ = ¼, ½, 1, 2, 3, 5` | `out_iterate_gauss_160.txt`, `out_iterate_cube1_120.txt` |
 | `lines_lb.py` | the lower bound `τ_k^{LB}` from minorant lines (Lemma L): tangent lines of `θ_na` iterated by the slope map `Σ_B` until they leave the regular range `s < 1 − B/a`; bisection over the intercept `B` | `out_lines_lb.txt` |
 | `ode_f0.py` | the similarity profile: `ζf′²/2 + ζf′ + (ζ−2)f = 0` through its folded saddle `(3, 3/2)`; `f(0) = 19.7392088 = 2π²` | `out_ode_f0.txt` |
+| `dual_ub_gauss.py` | the upper-bound dynamics in dual variables for the Gaussian pair (`R_brief.md` §2.5 made concrete: a convex majorant is described by `S(B)`, the least slope of a line with intercept `B` below it; one level sends `S` to the lower convex envelope of `min(1, Σ_B(S(B)))` on `[0, τ′]`, `τ′` the root of `S(B) = 1 − B/a`) — on a grid, **not one-sided** | `out_dual_ub_gauss.txt` |
 | `epochs.py` | single-line epochs with optimised outer rates (the calculus of Theorem 11.58a with the rate of every slope step chosen freely): `k²(B_k − h)` grows linearly in `k` — this schedule has the rate `C/k` only | `out_epochs.txt` |
 
 Readings (2026-11-26):
@@ -26,6 +27,13 @@ Readings (2026-11-26):
   `0.9918` at `k = 120`.
 * The scaled defect profiles of the two pairs agree (e.g. at `ζ = 2`: `2.933` and `2.91` against
   `f(2) = 2.931` of the ODE).
+* The dual upper-bound dynamics (`dual_ub_gauss.py`; uncertified): `τ_2 = ½`, `τ_3 = 5/14 = 0.35714`
+  (grid recursion `0.35593`), and `lower bound ≤ grid recursion ≤ dual upper bound` at every `k`
+  computed; `k²(τ_k^{UB} − h)/const = 1.00016, 1.00006, 1.00001` at `k = 100, 160, 320`.  For large `k` the
+  three sequences behave like `const/(k + c)²` with `c = ½` (lower bound: the root of
+  `(k−1)θ(B) + φ₀(B) = π`), `c ≈ 0.15`–`0.2` (grid recursion) and `c ≈ 0` (dual upper bound: the root
+  of `kθ(B) = π` up to `O(k⁻⁴)` — the naive line formula, which is wrong at small `k`, becomes
+  right to higher order).
 * An error made on the way and kept as a warning: propagating the lines of a convex
   *majorant* by the same slope map and reading off `sup min(B, (1−s)a)` is **not** an upper
   bound once a line's slope jumps beyond `1` (it gave `τ₃ ≤ ⅓` for the Gaussian pair, where
