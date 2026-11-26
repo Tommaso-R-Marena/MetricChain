@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 15:52 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 15:58 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -68,9 +68,11 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      known joint law; P9-T2: a mechanism, a comparison principle — `ln Z` of a
      further-reduced floor bounds the wanted floor's from above, so a narrow band that
      stays localised decides for the wide one — and a Finner bound for product
-     references) **read in full; the answer is OWED: SCI-RES-0024**, with the numbers of
-     the narrow-band test from `first_order_recovery_K12_m4_w{4,5,6,7}.log`; the second
-     commit (`a844b5a`: numerics of their level recursion) was not read.
+     references) **read in full; answered: SCI-RES-0024** (the narrow-band numbers; pair
+     terms not built; **promised there: a scan of the floor in the penalty strength `λ`
+     on Lys₁₂ at orders 3, 4 and (LKSE)₃ at order 3 — a transfer-matrix run per `λ`, to
+     test their reading that a floor leaves the anchor by a first-order transition**); the
+     second commit (`a844b5a`: numerics of their level recursion) was not read.
      **Before it, `3cf14b9`** (15:28 UTC, work in progress (2)): **THY-MSG-0016
      read in full; answered: SCI-RES-0023.**  They relay the owner's directive too (all
      three divisions have it from the owner; the three copies agree), **write the
@@ -261,20 +263,15 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    with the coordinator's note; the coordinator's own check in
    `experiments/science/r17_verification/`).  **Owed to the engineering division:** a referee of
    ENG-RES-0014 §1 and §4 (accepted in SCI-RES-0022 §4; a workstream, not launched).
-   **Work of the
-   coordinator in progress, not in this commit** (research log, cycle 60): held-site
-   passes for a window anywhere on the chain (`pi_inference/held_site_laws.py`, with a
-   changed `first_order_recovery.py` — in the working tree only; the committed driver
-   and its thirteen logs are those of checkpoint 45), the regression re-runs of those
-   thirteen cases with the changed driver (twelve finished, one running at 15:26 UTC),
-   and Lys₂₀ on the helix from its order-3 ball with workstream P9's order-4 tables —
-   **finished 15:16 UTC: `[800.5150660, 800.5154710]`, `4.05·10⁻⁴` nats, all checks
-   pass; prediction and outcome in the research log, cycle 60; the log file itself is
-   in the working tree and is committed with part (20) of the addenda, which is not
-   yet written**.  If the container was lost: the method is
-   described in the research log; the ball takes 19 minutes (`pi_inference/ball_cache.py`
-   — also only in the working tree: `L.setup`, `pw.ball_states`, `G.bulk_energy`), the
-   tables 26 minutes on two cores (`p9_verification/dump_theta2.py` with `K=m`).
+   **The coordinator's work on general held-site passes is finished and committed**
+   (addendum A17 (20), items 77–81; finding 9t): `pi_inference/held_site_laws.py`, the
+   changed `first_order_recovery.py`, its thirteen re-produced logs and the log of
+   Lys₂₀ (`[800.5150660, 800.5154710]`, `4.05·10⁻⁴` nats).  **From a fresh clone** the
+   Lys₂₀ run needs its ball (`python3 -B pi_inference/ball_cache.py K20 H 3`, 19 minutes)
+   and workstream P9's tables through `python3 -B p9_verification/dump_theta2.py K20 4
+   --part 0 2` and `--part 1 2` (26 minutes each, in parallel), neither tracked.
+   **Runs of the coordinator going when this was written:** the replication of the
+   theory division's audit at `3cf14b9` (item 1).
    Each workstream writes notes from its first
    minute to `experiments/science/ws_<ID>/NOTES.md` and a report to
    `docs/science/workstreams/<ID>_REPORT.md`; **a draft is not a statement of the
@@ -713,6 +710,25 @@ preservation.
    begins near `5·10¹⁴` trials, not `10¹⁷` (*and lower still — between `2·10¹⁴` and
    `2.5·10¹⁴` by the theory division's second scan; linked correction SCI-RES-0016 §4*),
    and our "corrected" re-run had never exercised its correction; the sizes of our separation statement were first sizes of a grid.
+9t. **Held-site passes for a window anywhere on the chain; the recovery on a chain
+    longer than twice the band [P, elementary; X on Lys₅ and LKSE:5 at band 2; M;
+    unrefereed] (addendum A17 (20), items 77–81; SCI-RES-0024 §4).**  The law of a held
+    site and any window of a band model is `exp(forward message with the site held +
+    backward message + terms inside the window)`; group statistics agree with
+    enumeration to `9·10⁻¹³`.  All thirteen recovery runs of finding 9q were repeated
+    with it: **same items, same digits; more items, a bracket inside the published one
+    at both ends** (Lys₁₂ order 4 `8.30·10⁻⁵ → 8.16·10⁻⁵`; (LKSE)₃ order 5
+    `1.43·10⁻⁴ → 1.41·10⁻⁴`; band 4 `6.9·10⁻⁴ → 6.4·10⁻⁴`) — the logs in the tree are
+    those of the changed driver, the earlier ones are at commit `90abf0e`.  An
+    expectation was wrong ("identical"), and so was a hope: routing the items that had
+    no route tightens the narrow bands by 6–8 per cent only; the loss is between the
+    groups (the theory division's THY-RES-0016 §4: not removable from the group laws
+    alone when the events overlap; pair terms would reduce it — not built).  **Lys₂₀,
+    `5.5·10¹⁷` states, predicted before the run: sandwich 0.0181, corrected
+    `[800.5150660, 800.5154710]`, `4.05·10⁻⁴` nats from 385 566 evaluations**; the
+    tables checked entry by entry at 20 000 states.  No further instance of this kind
+    is run in this phase (the owner's directive D-1).
+
 9s. **Review of the theory division's Theorem 11.58a [review, replication, re-run; an
     internal review] (workstream R17; SCI-REV-0017).**  The adaptive cost without a hint
     on the cube class is `exp(n·h + O(√(n ln n)))`: **proved as stated, given Theorem 11.56

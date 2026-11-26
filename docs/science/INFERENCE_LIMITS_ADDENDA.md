@@ -3379,7 +3379,7 @@ this part has been read by a referee; the part continues (18), whose items are n
     of the stage-2 tables; **a referee** — parts (13)–(19) have had none except for Lemma
     A17.16, the greedy lemma and one section of SCI-RES-0017.
 
-### (20) After part (19): why the sign-blind bound is slack on lysine — the theory division's question, measured [M; one peptide, one order; added 2026-11-26; further items follow as they are finished]
+### (20) After part (19): why the sign-blind bound is slack on lysine (the theory division's question, measured); held-site passes for a window anywhere on the chain; all thirteen recovery runs repeated; a charged chain of twenty residues [M for item 76; P, elementary, for item 77; X on four enumerated instances; M for the rest; added 2026-11-26; not refereed]
 
 76. **Between two ammonium groups the mixed-difference kernel is not nearly constant**
     [M; `experiments/science/p8_verification/kernel_spread.py`, `kernel_spread_K5.log`;
@@ -3438,6 +3438,142 @@ this part has been read by a referee; the part continues (18), whose items are n
     *Limits.*  One peptide, one order, five points (the maxima), two definitions of the
     head group; the sign-blind values are exact for the blocks, not for the whole
     remainder.
+
+77. **Held-site passes for a window anywhere on the chain** [P, elementary; X;
+    `experiments/science/pi_inference/held_site_laws.py`].  Item 70 computes, under a band
+    model, the exact joint law of one held site and the *last* `w` sites (or, on the
+    mirrored chain, the first `w`), which serves every item of a chain of at most `2w`
+    sites and leaves the others without a route.  For a window `s … s+w−1` anywhere to
+    the right of the held site `i`:
+
+        law(x_i = b, x_s … x_{s+w−1})  ∝  exp(F_b + B + I),
+
+    `F_b` the message of the forward elimination of the sites `0 … s−1` with `x_i` held at
+    `b`, `B` the message of the backward elimination of the sites `n−1 … s+w` — the forward
+    message of the mirrored chain, computed once per model — and `I` the terms that lie
+    inside the window.  Every term of a band model (largest site minus smallest at most
+    `w`) is in exactly one of the three: a term whose first site is at most `s − 1` cannot
+    reach `s + w`, so it is in `F_b`; one whose last site is at least `s + w` starts at `s`
+    or later and is in `B`; the rest are inside.  *Routing.*  An item on sites `U` gets the
+    route of item 70 where it has one — so that chains of at most `2w` sites are treated
+    as before; else its first site is held if its other sites span at most `w − 1`, or its
+    last site if the others do (the kept end where both would do, as in item 70); items
+    with the same direction, held site and window form a group; windows are shared
+    greedily among the items of a held site.  Items in which neither end can be held —
+    two sites at each end, or sites spread over more than `w` either way — still have no
+    route and are left out, which keeps every bound valid.  *Cost.*  One forward and one
+    backward sweep per model, and per held site and state a propagation from the held
+    site to its furthest window (Lys₂₀ at band 7: 156 groups, 464 s, 5.5 GB).
+    *Test at every state* (Lys₅ and LKSE:5 at band 2, where the chain is longer than
+    `2w`): four items go through a window inside the chain (18 of 25 routed, 14 before);
+    every clamped total mass is one to `5·10⁻¹⁴`; **the five group statistics agree with
+    enumeration to `9·10⁻¹³`**; the hypotheses hold at every state and the two controls
+    fail (229 329 and 112 163 violations on Lys₅); the exact `ln Z` is inside every
+    corrected bracket.
+
+78. **The thirteen runs of items 71, 73, 74 repeated with the general module — and an
+    expectation of mine that was wrong** [X for four rows; M; `first_order_recovery_*.log`,
+    which are now the logs of the changed driver; the numbers of part (19) are those of
+    commit `90abf0e`].  Before the runs I wrote that the band-7 cases "must reproduce the
+    committed brackets digit for digit".  They do in every row that uses only the old
+    routes — far pairs; far pairs and terms; all three stages where no item goes through
+    an inner window (Lys₅ at band 3, twice; Lys₁₂ at order 3) — and not in the last row
+    of the others, **because four-site subsets that had no route now have one**.  The
+    statement that holds, in all thirteen: *same items, same digits; more items, a
+    bracket inside the old one at both ends.*
+
+    | instance, order, band | items with a route: before → now (through an inner window) / all | corrected width: before → now | bracket now |
+    |---|---|---|---|
+    | Lys₅, 4, band 2 (every state) | 14 → 18 (4) / 25 | 0.002913 → 0.002885 | `[251.3475876, 251.3504722]` |
+    | Lys₅, 4, band 3 (every state) | 10 → 10 (0) / 11 | `6.437·10⁻⁵`, unchanged | `[251.3484184, 251.3484828]` |
+    | Lys₅, 5, band 3 (every state) | 12 → 12 (0) / 15 | `7.104·10⁻⁶`, unchanged | `[251.3484424, 251.3484495]` |
+    | LKSE:5, 4, band 2 (every state) | 14 → 18 (4) / 25 | 0.001611 → 0.001558 | `[276.4669085, 276.4684663]` |
+    | Lys₁₂, 3, band 7 | 100 → 100 (0) / 100 | 0.06112, unchanged | `[517.1160739, 517.1771913]` |
+    | Lys₁₂, 4, band 7 | 380 → 415 (35) / 465 | `8.297·10⁻⁵` → `8.161·10⁻⁵` | `[517.1285108, 517.1285924]` |
+    | Lys₁₂, 5, band 7 | 818 → 996 (178) / 1 346 | `2.184·10⁻⁵` → `2.178·10⁻⁵` | `[517.1285396, 517.1285614]` |
+    | Lys₁₂, 4, band 6 | 420 → 505 (85) / 610 | `2.786·10⁻⁴` → `2.738·10⁻⁴` | `[517.1284560, 517.1287298]` |
+    | Lys₁₂, 4, band 5 | 352 → 543 (191) / 742 | `4.217·10⁻⁴` → `3.890·10⁻⁴` | `[517.1284232, 517.1288122]` |
+    | Lys₁₂, 4, band 4 | 262 → 513 (251) / 854 | `6.875·10⁻⁴` → `6.449·10⁻⁴` | `[517.1283300, 517.1289748]` |
+    | (LKSE)₃, 4, band 7 | 380 → 415 (35) / 465 | 0.001537 → 0.001414 | `[655.6120305, 655.6134443]` |
+    | (LKSE)₃, 5, band 7 | 818 → 996 (178) / 1 346 | `1.433·10⁻⁴` → `1.407·10⁻⁴` | `[655.6126392, 655.6127798]` |
+    | Ser₁₂, 5, band 7 | 818 → 996 (178) / 1 346 | 0.001791 → 0.001666 | `[227.3678932, 227.3695587]` |
+
+    Checks in every row as in item 73 (the hypotheses at 5 380 states or at every state,
+    no violation; both controls fail; the means against exact samples within 1.6 standard
+    errors), and one more in the nine sampled rows: **P9's raw tables entry by entry at
+    5 000 random states with exactly `m` side chains off the anchor** — where the
+    remainder is the exact anchored term of the changed set — no violation, with the
+    control (every table replaced by its minimum) failing at 343 to 2 733 states.
+    *What the narrow bands show.*  Item 74 had said that at bands 5 and 4 "half to two
+    thirds of the items have no route; a held-site pass with a backward message would
+    serve them".  It serves 191 and 251 of them, and the brackets tighten by 8 and 6 per
+    cent: **the items without a route were not where the loss was.**  At band 4 the
+    subsets that still have none carry `1.1·10⁻⁴` nats of first-order slack per side;
+    the rest of the `6.4·10⁻⁴` is the loss between groups (`D²/4 = 2·10⁻⁴` for
+    `D = 0.029`) and the envelope.
+
+79. **A charged chain longer than twice the band: Lys₂₀** [M; validity P;
+    `first_order_recovery_K20_m4_w7.log`; prediction written at 14:26 UTC before the run,
+    research log, cycle 60].  Ace-Lys₂₀-NMe on the helix: `5.5·10¹⁷` states (three sites
+    with 14, 14, 12 states, seventeen with 7); the ball of radius 3, 385 566 evaluations
+    (`pi_inference/ball_cache.py`, 19 minutes); workstream P9's 4 845 raw tables of order
+    4 through `p9_verification/dump_theta2.py` (26 minutes on two cores), whose call
+    reproduces P9's own stored tables bit for bit on 18 subsets of Lys₁₂ and on the four
+    small instances (`dump_theta2_check_K12_m4.log`); band 7; sub-tuples by the rule of
+    item 67.
+
+    | | predicted | found |
+    |---|---|---|
+    | sum of the table maxima, `βΓ₄` | about 35 | **45.2** (a miss: 2.5 times Lys₁₂'s for 1.67 times the length) |
+    | the floor stays at the anchor | three chances in four | yes |
+    | sandwich (allowance attached term by term) | 0.02 (0.012–0.04) | **0.01814** `[800.505214, 800.523352]` |
+    | corrected bracket | `3·10⁻⁴` (`10⁻⁴`–`10⁻³`) | **`4.05·10⁻⁴`** `[800.5150660, 800.5154710]` |
+
+    Stages: far pairs `7.6·10⁻⁴`, with the out-of-window terms `7.0·10⁻⁴`, with the
+    allocation `4.05·10⁻⁴` (`D`/width 45).  6 175 items — 156 far, 1 664 terms, 4 355
+    subsets — of which 3 823 have a route, 2 029 through a window inside the chain; of
+    the 2 352 without, 2 240 are four-site subsets (`1.2·10⁻⁵` nats of first-order slack
+    per side).  Checks: the hypotheses at 5 380 states, no violation (controls: 8 029
+    and 3 501); the means against 20 000 exact samples of the ceiling within 1.4
+    standard errors; P9's tables entry by entry at 20 000 states with exactly four side
+    chains off, no violation — smallest ratio of entry to remainder 10.9, median 240 —
+    with the control failing at 5 556.  The tables are heterogeneous over five orders
+    of magnitude: the largest entry of a subset's table is between `2·10⁻⁶` and `0.8`
+    `kT`, median `4·10⁻⁴`.  1 390 s, 5.5 GB.  **So the method of part (19) carries to
+    a chain of `5.5·10¹⁷` states with nothing new but the general windows: a
+    deterministic bracket of `4·10⁻⁴` nats from 385 566 evaluations.**  Not measured for
+    this instance: the envelope on a Gibbs sample; a sampled interval to compare with.
+
+80. **What a checker of a recovered bracket would have to hold** [a description for the
+    engineering division, promised in SCI-RES-0022 §5; not yet a specification].
+    (i) *The sandwich*, as in SCI-MSG-0025 §8: two band models as sums of tables.
+    (ii) *Each model as a sum of labelled pieces*, each either exact (a pair in the band,
+    an evaluated term in a window) or a **reduction of a named source table** (the
+    maximum or minimum over the sites given up; the split of a far pair around the
+    anchor; a subset's resolved table charged to a sub-tuple) — so that every item is
+    "reduction minus source" and its non-negativity and the hypotheses
+    `Σ items ≤ m₊ − E`, `Σ items ≤ E − m₋` follow from identities a checker can recompute
+    table by table, not from a statement over all states.  (iii) *The routes* — for
+    every item the direction, the held site and the first site of its window — and
+    *the five statistics of every group*; a checker recomputes them with its own
+    held-site passes (we know no cheaper verification).  (iv) *The four bounds* from
+    the two `ln Z` and the statistics (item 69).  What it cannot check from these
+    objects: the resolved tables themselves (workstream P9's Theorem R; request P9-E2)
+    and the evaluation tolerance (request A19-E2).
+
+81. **What part (20) changes** [summary].  (i) The recovery is no longer limited to
+    chains of at most twice the band; the limit that remains is items that need two
+    held sites.  (ii) All certified numbers of parts (19)–(20) now come from one driver
+    and one module, with every log re-produced; the brackets of part (19) are confirmed
+    as brackets — the new ones lie inside them.  (iii) Routing more items helps little
+    once the far pairs are routed: what is left is the loss between groups, which the
+    theory division's answer to our question A19-T2 (THY-RES-0016 §4) says cannot be
+    removed from the group laws alone when the groups' events overlap, and can be
+    reduced by the joint law of pairs of groups — not built.  (iv) *Not done:* pair
+    terms; two held sites; the envelope and a sampled interval for Lys₂₀; a referee.
+    (v) Under the research owner's directive of 2026-11-26 no further instance of this
+    kind is run in this phase; what the line needs now is in
+    `docs/science/ASSUMPTION_AUDIT.md` (obligations `G-1 … G-8`).
 
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 

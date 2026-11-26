@@ -11,8 +11,10 @@ Known slack, as tables ("items") on site sets that do not fit a window:
   term   an evaluated term d_U out of window:  max over the given-up sites - d_U    and    d_U - min       the sites of U
   alloc  a subset T out of window:             [max over the given-up sites of Theta_T](x_K) - Theta_T(x_T) [T off the anchor]
                                                (the same item on both sides)                               the sites of T
-Every item is given to the group of one HELD site (slack_recovery.route); where both ends of an item could be held,
-the end that the reduction keeps is taken, so that slacks that occur together are treated exactly together.
+Every item is given to the group of one HELD site and one window (held_site_laws.assign_routes: the last or first w
+sites where that serves, as in slack_recovery.route, else a window inside the chain -- needed for chains longer than
+2w); where both ends of an item could be held, the end that the reduction keeps is taken, so that slacks that occur
+together are treated exactly together.
 The floating-point allowance of the evaluated terms (EPS_G per value of g, 2^|U| values per term) is attached to each
 term's own table (floor: d_U - 2^|U| EPS_G where all sites of U are off the anchor; ceiling: +), not allocated to sites
 and in-band pairs as in workstream P6's form, which charges a pair's share of every term through it whenever the pair
@@ -28,7 +30,8 @@ Checks.  --enum: the two hypotheses at EVERY state, the exact means by enumerati
 corrected bracket; controls that must fail (every item doubled; the sign of the far items exchanged).  Without
 --enum: the hypotheses at Gibbs states, at exact samples of floor and ceiling, at uniformly random states and at
 states with exactly m and m + 1 sites off the anchor, with new evaluations of the energy; the means against exact
-samples of the ceiling; the same controls.
+samples of the ceiling; the same controls; and P9's raw tables entry by entry against the exact anchored term at random
+states with exactly m sites off (--nshell N, default 5000), with a control that must fail.
 The raw tables are workstream P9's (ws_P9/cache/theta2_*.npz; for the small instances p9_verification/cache/, written
 by p9_verification/dump_theta2.py); K(T) is P9's stored choice where there is one, else the rule below.
 
@@ -40,6 +43,7 @@ import numpy as np
 import nested_sampler as NS
 from window_model_occ import build_window_models_occ, gibbs_sample
 import slack_recovery as SR
+import held_site_laws as HS
 L, pw = NS.L, NS.pw
 BETA, RND, SAFE = L.BETA, 1.0 + 1e-9, 1e-9
 HERE = os.path.dirname(os.path.abspath(__file__)); SCI = os.path.normpath(os.path.join(HERE, ".."))
@@ -90,6 +94,10 @@ def main():
         if f.startswith(f"ball_{tag}_M") and f.endswith(".npz") and "ckpt" not in f:
             z = np.load(os.path.join(P8, "cache", f))
             if z["states"].shape[0] >= tot and np.array_equal(z["states"][:tot], allst): vals = np.array(z["vals"][:tot], dtype=float); srcb = f"ws_P8/cache/{f}"; break
+    fmy = os.path.join(NS.CACHE, f"ball_{tag}_M{M}.npz")                 # the coordinator's cache (ball_cache.py)
+    if vals is None and os.path.exists(fmy):
+        z = np.load(fmy)
+        if z["states"].shape[0] == tot and np.array_equal(z["states"], allst): vals = np.array(z["vals"], dtype=float); srcb = f"pi_inference/serine_helix_reach_cache/{os.path.basename(fmy)}"
     if vals is None: vals = np.concatenate([G.bulk_energy(allst[s:s + 256]) for s in range(0, tot, 256)])
     radix = np.array([int(np.prod(k[i + 1:])) for i in range(n)], dtype=np.int64)
     code = allst.astype(np.int64) @ radix; order = np.argsort(code); code_s = code[order]; vals_s = vals[order]
@@ -185,14 +193,23 @@ def main():
     for T, t, K in alloc:
         items.append((T, clean(t, "alloc"), pref_of(T, K))); kind.append(("alloc", 0))
     # ---------------------------------------------------------------- exact group means under the ceiling
-    def sel(cls, side): return [items[j] for j in range(len(items)) if kind[j][0] in cls and kind[j][1] in (side, 0)]
+    def idx(cls, side): return [j for j in range(len(items)) if kind[j][0] in cls and kind[j][1] in (side, 0)]
+
+    def sel(cls, side): return [items[j] for j in idx(cls, side)]
     stages = (("far pairs", ("far",)), ("far pairs and out-of-window terms", ("far", "term")), ("far pairs, terms and the allocation of the penalty", ("far", "term", "alloc")))
-    variants = {name: (sel(cls, +1), sel(cls, -1)) for name, cls in stages}
-    t1 = time.time(); GL = SR.group_stats(NS.WindowModel, up, [(sel((c,), +1), sel((c,), -1)) for c in ("far", "term", "alloc")], BETA, lnZup)
+    variants = {name: (sel(cls, +1), sel(cls, -1)) for name, cls in stages}; CL = ("far", "term", "alloc")
+    t1 = time.time(); GL, RT = HS.group_stats(NS.WindowModel, up, [(sel((c,), +1), sel((c,), -1)) for c in CL], BETA, lnZup)
     GS = {name: GL[q] for q, (name, cls) in enumerate(stages)}
-    rts = [SR.item_route(it, n, w) for it in items]; worst = max(abs(g["mass"] - 1.0) for gs in GS.values() for g in gs.values())
-    log(f"(2) exact means under the CEILING model, by the transfer matrix with one site held at each of its states in turn: {len(items)} items, {sum(r == 'fwd' for r in rts)} by the forward route, "
-        f"{sum(r == 'rev' for r in rts)} on the mirrored chain, {sum(r is None for r in rts)} without a route; groups (held sites): {', '.join(f'{d_}{i}' for d_, i in sorted(GS[stages[-1][0]]))}; "
+    rts = [None] * len(items)                                           # per item: (direction, held site, window start), in the chain's own numbering of sites
+    for c, (rp, rm_) in zip(CL, RT):
+        for js, rr in ((idx((c,), +1), rp), (idx((c,), -1), rm_)):
+            for j, r in zip(js, rr):
+                if r is not None: rts[j] = (r[0], r[1] if r[0] == "fwd" else n - 1 - r[1], r[2])
+    worst = max(abs(g["mass"] - 1.0) for gs in GS.values() for g in gs.values())
+    old = [r is not None and r[2] == n - w for r in rts]                 # the last (first) w sites: the routes of slack_recovery.py
+    log(f"(2) exact means under the CEILING model, by the transfer matrix with one site held at each of its states in turn: {len(items)} items, {sum(r is not None and r[0] == 'fwd' for r in rts)} by the forward route, "
+        f"{sum(r is not None and r[0] == 'rev' for r in rts)} on the mirrored chain ({sum(1 for r, o in zip(rts, old) if r is not None and not o)} of the two through a window inside the chain), "
+        f"{sum(r is None for r in rts)} without a route; {len(GS[stages[-1][0]])} groups (direction, held site, first site of the window): {', '.join(f'{d_}{i}@{s_}' for d_, i, s_ in sorted(GS[stages[-1][0]]))}; "
         f"largest deviation of a clamped total mass from one: {worst:.1e} [{time.time() - t1:.0f}s, peak RSS {rss():.0f} MB]")
     assert worst < 1e-8
     gmean = lambda q: BETA * sum(float(items[j][1][tuple(XGo[:, u] for u in items[j][0])].mean()) for j in q)                  # first-order estimate on the Gibbs sample of the true ensemble
@@ -225,10 +242,9 @@ def main():
         EE = energy(st); lnZ = float(-BETA * EE.min() + math.log(np.exp(-BETA * (EE - EE.min())).sum()))
         v, c1, c2, mg = hyp(st, EE)
         eu, el = up.energy(st), lo.energy(st); wu = np.exp(-BETA * (eu - eu.min())); wu /= wu.sum(); devm = 0.0
-        key = lambda it: ("fwd", it[0][0]) if SR.item_route(it, n, w) == "fwd" else ("rev", it[0][-1]) if SR.item_route(it, n, w) == "rev" else None
-        name = stages[-1][0]; pl, mi = variants[name]; spu = np.zeros(len(st)); smu = np.zeros(len(st))
+        name = stages[-1][0]; jp, jm = idx(CL, +1), idx(CL, -1); spu = np.zeros(len(st)); smu = np.zeros(len(st))
         for gk, gv in GS[name].items():
-            Sp = SR.items_value([it for it in pl if key(it) == gk], st); Sm = SR.items_value([it for it in mi if key(it) == gk], st); spu += Sp; smu += Sm
+            Sp = SR.items_value([items[j] for j in jp if rts[j] == gk], st); Sm = SR.items_value([items[j] for j in jm if rts[j] == gk], st); spu += Sp; smu += Sm
             ex = dict(a=float((wu * Sp).sum()), e=float((wu * np.expm1(BETA * Sp)).sum()), b=float((wu * Sm).sum()), c=float((wu * Sm * np.exp(BETA * Sp)).sum()),
                       cp=float((wu * np.expm1(BETA * Sm) * np.exp(BETA * Sp)).sum()))
             devm = max(devm, max(abs(ex[q] - gv[q]) / max(abs(ex[q]), 1e-300) for q in ("a", "e", "b", "c", "cp") if abs(ex[q]) > 1e-12))
@@ -257,12 +273,30 @@ def main():
             v, c1, c2, mg = hyp(X, energy(X)); V += v; C1 += c1; C2 += c2; N += len(X); cells.append(f"{nm}: {len(X)}, {v} ({mg:.1e})")
         log(f"(3) hypotheses m_+ - E >= s_+ and E - m_- >= s_- with new evaluations of the energy — states, violations (smallest margin, kcal/mol): " + "; ".join(cells)
             + f" — total {N} states, {V} violations; controls that must fail on the same states: every item doubled: {C1} violations; far items of floor and ceiling exchanged: {C2} violations [{time.time() - t1:.0f}s]")
-        t1 = time.time(); XS = up.sample(20000, np.random.default_rng(4)); name = stages[-1][0]; pl, mi = variants[name]
-        plr = [it for it in pl if SR.item_route(it, n, w) is not None]; mir = [it for it in mi if SR.item_route(it, n, w) is not None]
+        t1 = time.time(); XS = up.sample(20000, np.random.default_rng(4)); name = stages[-1][0]
+        plr = [items[j] for j in idx(CL, +1) if rts[j] is not None]; mir = [items[j] for j in idx(CL, -1) if rts[j] is not None]
         for lab, its, ex in (("sum <S+>", plr, sum(g["a"] for g in GS[name].values())), ("sum <S->", mir, sum(g["b"] for g in GS[name].values()))):
             vals_ = SR.items_value(its, XS); se = float(vals_.std() / math.sqrt(len(XS)))
             log(f"    {lab} against 20000 exact samples of the ceiling: exact {BETA * ex:.6g}, sampled {BETA * float(vals_.mean()):.6g} ± {BETA * se:.2g} nats ({(float(vals_.mean()) - ex) / max(se, 1e-300):+.1f} standard errors) [{time.time() - t1:.0f}s]")
         assert V == 0 and C1 > 0
+        # P9's raw tables, entry by entry, at random states with exactly m sites off the anchor: there g - I_{m-1} g is the anchored term of T = S(x),
+        # and I_{m-1} g is the sum of the evaluated terms on the subsets of T -- the per-entry check that exists wherever the ball of radius m - 1 does
+        t1 = time.time(); NSH = int(a[a.index("--nshell") + 1]) if "--nshell" in a else 5000
+        XM = random_states(m, NSH, np.random.default_rng(271828)); gX = np.concatenate([G.bulk_energy(XM[q:q + 256]) for q in range(0, NSH, 256)])
+        I = np.full(NSH, float(d[()]))
+        for U, arr in d.items():
+            if len(U) >= 1: I += arr[tuple(XM[:, u] for u in U)]
+        rem = np.abs(gX - I); where = {T: j for j, T in enumerate(subs)}; posn = [np.full(k[i], -1) for i in range(n)]
+        for i in range(n): posn[i][non[i]] = np.arange(len(non[i]))
+        th = np.empty(NSH); thmin = np.empty(NSH)
+        for r in range(NSH):
+            T = tuple(int(i) for i in np.nonzero(XM[r] != X0)[0]); tb = tabs[where[T]]
+            th[r] = tb[tuple(posn[i][XM[r, i]] for i in T)]; thmin[r] = tb.min()
+        nz = rem > 1e-9
+        log(f"(4) P9's raw tables entry by entry at {NSH} random states with exactly {m} sites off the anchor (new evaluations of g; the remainder there is the exact anchored term of the changed set): "
+            f"violations of abs(remainder) <= table entry: {int((rem > th * RND + 1e-10).sum())}; largest remainder {rem.max():.4g} kcal/mol; ratio entry / remainder: smallest {float((th[nz] / rem[nz]).min()):.3f}, "
+            f"median {float(np.median(th[nz] / rem[nz])):.1f}; control that must fail (every table replaced by its minimum): {int((rem > thmin * RND + 1e-10).sum())} violations [{time.time() - t1:.0f}s]")
+        assert int((rem > th * RND + 1e-10).sum()) == 0
     log(f"ALL DONE {time.time() - t0:.0f} s; peak RSS {rss():.0f} MB")
 
 
