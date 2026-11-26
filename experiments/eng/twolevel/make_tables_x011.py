@@ -99,6 +99,26 @@ def bounds_blocks() -> dict[str, str]:
         r0 = by.get((n, "theory")) or by.get((n, "wide"))
         lines.append(f"| {n} | {vbest:.4f}{'' if complete else '*'} | {r0['lower_bound']:.4f} | {ratio:.2f} | {ex:.0f} | {ex / math.sqrt(n * math.log(n)):.2f} |")
     blocks["x011_excess"] = "\n".join(lines)
+    # finite-size overhead against the asymptotic exponents of two and three levels (theory division: tau_2/a = 0.500, tau_3/a = 0.361)
+    TAU = {1: 0.500, 2: 0.361}
+    lines = ["| `n` | two levels: bound − `τ₂`, in units of `n a`; in nats | three levels: bound − `τ₃`; in nats | nats per `√n`: two levels; three levels |", "|---|---|---|---|"]
+    for n in sizes:
+        r0 = by.get((n, "theory")) or by.get((n, "wide"))
+        na = n * r0["a"]
+        cells = []
+        per = []
+        for k in (1, 2):
+            vs = [best(by[(n, fam)], k)[0] for fam in ("theory", "wide") if (n, fam) in by]
+            vs = [v for v in vs if v is not None]
+            if not vs:
+                cells.append("—")
+                per.append("—")
+                continue
+            d = min(vs) - TAU[k]
+            cells.append(f"{d:.4f}; {d * na:.0f}")
+            per.append(f"{d * na / math.sqrt(n):.2f}")
+        lines.append(f"| {n} | {cells[0]} | {cells[1]} | {per[0]}; {per[1]} |")
+    blocks["x011_overhead"] = "\n".join(lines)
     return blocks
 
 

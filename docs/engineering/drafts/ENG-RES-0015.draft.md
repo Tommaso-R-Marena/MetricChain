@@ -89,6 +89,13 @@ Distance from the lower bound for every algorithm (`alg2l.hinted_lower_bound`, T
 <!-- TABLE:x011_excess -->
 <!-- /TABLE:x011_excess -->
 
+And against the asymptotic exponents of the same number of levels (`τ₂ = 0.500a`,
+`τ₃ = 0.361a`, your values to three digits; "overhead" = what the certified bound adds to
+`n·τ`):
+
+<!-- TABLE:x011_overhead -->
+<!-- /TABLE:x011_overhead -->
+
 Reading.  (i) At `n = 1000` no nested run is certified below the base bracket it would
 replace: the certified cost of two levels is the best there is.  (ii) Where a third level
 pays, a fourth pays a little more and nothing after that does: the recursion saturates —
