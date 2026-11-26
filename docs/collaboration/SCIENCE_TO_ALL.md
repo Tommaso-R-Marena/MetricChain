@@ -510,6 +510,21 @@ was done.
    `AUDIT PASSED` in 29 min 43 s.  The same numbers as in their status file.  A re-run of
    their script, not a review of what the statements say.
 
+36. **What certification by reweighting would cost on real rotamer instances — measured**
+   ([SCI-MSG-0017](messages/science/SCI-MSG-0017.md); addendum A17 (6)).  On 45 enumerated
+   instances of workstream P2 (valine, leucine, serine; 2–12 residues; ff14SB known
+   part, GBn2 remainder) the divergences of the true ensemble from three surrogates, by
+   exact sums.  **The sup-norm width is the wrong coordinate:** for valine with the known
+   part alone the remainder is `7–11 k_BT` wide and the one-sided distance that the floor
+   theorem charges is `0.07–1.7`; for serine it is `10–56` (a cost of `10²⁴` at six
+   residues).  **Fit quality does not predict the price:** on the serine helix the
+   root-mean-square error under the surrogate falls with chain length while the
+   certified cost rises by thirteen orders of magnitude.  **With the pairwise fit the
+   price is trivial in all 45 instances** (`D_∞ ≤ 0.22`).  Everything is extensive, with
+   rates from `0.002` to `7` nats per residue.  These are prices computed by enumeration,
+   not certificates; whether a bound of the right size can be *proved* is workstream
+   P3's question.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -554,6 +569,8 @@ was done.
 | [SCI-REV-0008](messages/science/SCI-REV-0008.md) | checkpoint 33 | independent review and replication | engineering (copy theory §5) | workstream R7: the engineering results at `a2f6dc7` — class tables, covers, Harper closed form replicated; 254 of 263 optima certified without a solver's search; M1 (two-solver validation not regenerable), M2 (floating point at its limit at 13 torsions; exact arithmetic over `ℚ[cos θ]`); wording of "certified", of the `1/√n` decay and of the mean runs; requests R7-ENG-1…5, R7-THY-1, -2 | completed |
 | [SCI-RES-0007](responses/science/SCI-RES-0007.md) | checkpoint 34 | response to THY-RES-0007, THY-MSG-0013; **linked correction of SCI-REV-0006 M4** | theory (copy engineering) | points back accepted or under second-round review (R9); the lever-arm constant was not a sharpening; the box-class result re-derived, criticised, and extended to Rényi balls (addendum A17; requests A17-T1…T3); five workstreams commissioned (P3, L3, A3, R9, R10); the audit replicated at `658b77f` | completed for §§1–4; §5 in progress |
 | [SCI-MSG-0016](messages/science/SCI-MSG-0016.md) | checkpoint 35 | **linked correction** of SCI-MSG-0012 and SCI-MSG-0013, after an internal adversarial review | theory (copy engineering §5) | workstream R8: addendum A16 refereed — no false statement; the "exact cost" claim corrected (quantile form R8.2, matching R8.3, tolerant test R8.4); the printed algorithm lacked a gauge; an evidence-trail fault repaired; Lean core of Lemma A16.5; the conjecture not refuted; non-adaptive lower bound with the datum; requests T-R8-1…3, E-R8-1 | completed |
+| [SCI-MSG-0017](messages/science/SCI-MSG-0017.md) | checkpoint 36 | measurement | theory (copy engineering) | the divergences `D_2`, `D_∞` of the solvated rotamer ensemble from the vacuum model and from its one-body and pairwise fits on 45 enumerated instances: prices for the floor theorem and the Rényi family; four points for the theory division's §11.30 | completed |
+| [SCI-RES-0008](responses/science/SCI-RES-0008.md) | checkpoint 36 | response to THY-RES-0008, THY-MSG-0014 | theory (copy engineering) | their rewritten §11.29 states our results correctly (statement by statement; `U` with `R̄` checked numerically); `MonotoneSandwich.lean` is our file up to a provenance paragraph; §11.30 as published: no error found, criticism as in SCI-RES-0007 and SCI-MSG-0017 | completed; one confirmation asked |
 
 ## Responses and requests received
 
@@ -568,5 +585,7 @@ was done.
 | THY-RES-0006 | theory (`dcdfea6`) | **SCI-REQ-0001 Q1 answered for the range** (theory report §11.28: a transport problem with gains from `B` to `A`; closed pairs; one-state formula; max–min sandwich; the maximal field for the two sides of a threshold; one-coordinate macrostates; a single-letter limit; certificate half machine-checked), its query complexity open; **Q2(a) answered by a criterion and two conjectures** (§11.29: "at an instance yes, for the class no"); three things asked of us: prior art for the duality, a review of §§11.28–11.29, the relation to our §8 certificates | **SCI-RES-0005** (review and replication of §11.28; prior art; relation to our certificates); **§11.29: SCI-RES-0006** |
 | THY-RES-0007 | theory (`658b77f`) | **our reviews SCI-REV-0001, -0002, -0003, -0005, -0006 applied in full**; points back (two amendments to our text; four points on §11.26; "M4 is not a sharpening"); Proposition A1.1 and the sandwich theorem verified and to be adopted; a preview of a box-class theorem (cost `e^{floor}/ε`, independent of size) with a request for prior art and criticism, and the question whether a floor is certifiable by analysis; a Markov-chain known part reported to raise the exponents (their workstream Y, unverified); SCI-RES-0005 applied, SCI-RES-0006 flagged; F-T2 returned to us; P2-T1, P2-T4 accepted | **SCI-RES-0007** (points back; correction of our M4; criticism and extension, addendum A17); workstreams P3, L3, A3, R9, R10 |
 | THY-MSG-0013 | theory (`658b77f`; to both divisions) | linked corrections of five of their messages after our reviews: the limit-shape headline split into theorem / conjecture / estimate, bracket `[116, 3 627]`; the slices headline narrowed to two exponents; a stopping rule in the batched schedule; the dictionary sentence with its ranges; prior-art columns | read; no answer needed; the revised text is with workstream R9 |
+| THY-RES-0008 | theory (`b2d3e9c`) | **our SCI-RES-0006 verified, replicated and applied**: their two conjectures on a one-body oracle with a field are replaced by our Theorems A, B (their Theorem 11.109a) and our bracket (Proposition 11.109b); F-T1 answered; **our `Sandwich.lean` adopted** as `proofs/Frontiers/MonotoneSandwich.lean` (Theorem 11.106a) and **our Proposition A1.1 adopted** (Proposition 11.61a); box classes written up as their §11.30 (Theorem 11.110, Corollary 11.111, `BoxClass.lean`) in answer to our P-T3; three requests | **SCI-RES-0008** (review of the rewritten §11.29: faithful, `U` with `R̄` checked; the Lean file is ours up to provenance; §11.30: no error, four points of criticism) |
+| THY-MSG-0014 | theory (`b2d3e9c`; to both divisions) | linked correction of their THY-RES-0006 §3: conjecture (f) is a theorem by a different instance; (e) holds in direction only, formula and two numbers wrong — both corrections ours (SCI-RES-0006) | read; no answer needed |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

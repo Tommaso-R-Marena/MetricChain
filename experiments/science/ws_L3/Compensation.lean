@@ -792,6 +792,14 @@ theorem refW_mul_tiltW (p : ℝ) (γ : ι → ℝ) (x : ι → Bool) :
   · show p * (Real.exp (-γ i) / tiltZ p (γ i)) = p * Real.exp (-γ i) / tiltZ p (γ i)
     ring
 
+/-- The reference weight is a probability vector. -/
+theorem sum_refW {p : ℝ} : ∑ x : ι → Bool, refW p x = 1 := by
+  unfold refW
+  rw [sum_prodW]
+  refine Finset.prod_eq_one fun i _ => ?_
+  show p + (1 - p) = 1
+  ring
+
 /-- The additive weights are normalised: `A(w̃_γ) = 1`. -/
 theorem massW_tiltW {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (γ : ι → ℝ) :
     massW (refW p) (tiltW p γ) = 1 := by
@@ -1113,6 +1121,75 @@ theorem lemma3_compensation_bernoulli [Nonempty ι] {G : Set (Equiv.Perm ι)}
   rw [hd] at h
   exact h
 
+/-- **Remark (1) after Lemma 3, "only if".**  If a class member `w₀` and `w₀ + Δ` (`Δ ≥ 0`,
+`Δ ≢ 0`) have the same one-body marginal at site `i`, the marginal of the excess `Δ` at `i` is
+that number, hence lies in the window `[p₋, p₊]` (Lemma 0): compensation by class members is
+impossible when `c_Δ` is outside the window. -/
+theorem window_of_equal_marginals {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    {w₀ Δ : (ι → Bool) → ℝ} (hw₀ : InCone u w₀) (hΔ0 : ∀ x, 0 ≤ Δ x) (hΔ1 : ∃ x, Δ x ≠ 0)
+    (i : ι) (h : margW (refW p) (fun x => w₀ x + Δ x) i = margW (refW p) w₀ i) :
+    pTilt p u ≤ margW (refW p) Δ i ∧ margW (refW p) Δ i ≤ pTilt p (-u) := by
+  have hAw := massW_pos (refW_pos hp0 hp1) hw₀.1
+  have hAΔ := massW_pos_of_ne_zero (refW_pos hp0 hp1) hΔ0 hΔ1
+  rw [(margW_add_eq_iff hAw hAΔ i).mp h]
+  exact lemma0_window hp0 hp1 hw₀ i
+
+/-- **Remark (1) after Lemma 3, "if".**  When `c_Δ` is in the open window `(p₋, p₊)`,
+compensation is always possible with an extreme additive instance: there are `γ₂ ∈ {−u, +u}`
+and `b ≥ 0` such that `w + b·w̃_{γ₂}` and `w + Δ + b·w̃_{γ₂}` are class members with all one-body
+marginals equal to `c_Δ` (`b = 0` if `c_Δ = c_w`). -/
+theorem lemma3_compensation_exists [Nonempty ι] {G : Set (Equiv.Perm ι)}
+    (hG : SiteTransitive G) {p u : ℝ} (hp0 : 0 < p) (hp1 : p < 1)
+    {w Δ : (ι → Bool) → ℝ} (hw : InCone u w) (hwG : Invariant G w)
+    (hΔ0 : ∀ x, 0 ≤ Δ x) (hΔ1 : ∃ x, Δ x ≠ 0) (hwΔ : InCone u (fun x => w x + Δ x))
+    (hΔG : Invariant G Δ) (hc1 : pTilt p u < densW (refW p) Δ)
+    (hc2 : densW (refW p) Δ < pTilt p (-u)) :
+    ∃ γ₂ : ℝ, (γ₂ = -u ∨ γ₂ = u) ∧ ∃ b : ℝ, 0 ≤ b ∧
+      InCone u (fun x => w x + b * tiltW p (fun _ => γ₂) x) ∧
+      InCone u (fun x => w x + Δ x + b * tiltW p (fun _ => γ₂) x) ∧
+      (∀ i, margW (refW p) (fun x => w x + b * tiltW p (fun _ => γ₂) x) i = densW (refW p) Δ) ∧
+      (∀ i, margW (refW p) (fun x => w x + Δ x + b * tiltW p (fun _ => γ₂) x) i =
+        densW (refW p) Δ) := by
+  have hu : 0 ≤ u := by
+    by_contra hneg
+    have h1 := pTilt_anti hp0 hp1 (by linarith : u ≤ -u)
+    linarith
+  have hπ := refW_pos (ι := ι) hp0 hp1
+  have hπG := refW_invariant (ι := ι) p G
+  rcases lt_trichotomy (densW (refW p) w) (densW (refW p) Δ) with hlt | heq | hgt
+  · obtain ⟨b, _, hb, h0, h1, _, _, hm0, hm1, _, _⟩ :=
+      lemma3_compensation_bernoulli hG hp0 hp1 hw hwG hΔ0 hΔ1 hwΔ hΔG (γ₂ := -u)
+        (by rw [abs_neg, abs_of_nonneg hu]) (Or.inl ⟨hlt, hc2⟩)
+    exact ⟨-u, Or.inl rfl, b, hb.le, h0, h1, hm0, hm1⟩
+  · refine ⟨u, Or.inr rfl, 0, le_rfl, ?_, ?_, fun i => ?_, fun i => ?_⟩
+    · have e : (fun x => w x + 0 * tiltW p (fun _ => u) x) = w := by
+        funext x
+        ring
+      rw [e]
+      exact hw
+    · have e : (fun x => w x + Δ x + 0 * tiltW p (fun _ => u) x) = fun x => w x + Δ x := by
+        funext x
+        ring
+      rw [e]
+      exact hwΔ
+    · have e : (fun x => w x + 0 * tiltW p (fun _ => u) x) = w := by
+        funext x
+        ring
+      rw [e, margW_eq_densW hG hπG hwG i, heq]
+    · have e : (fun x => w x + Δ x + 0 * tiltW p (fun _ => u) x) = fun x => w x + Δ x := by
+        funext x
+        ring
+      have hAw := massW_pos hπ hw.1
+      have hAΔ := massW_pos_of_ne_zero hπ hΔ0 hΔ1
+      have hsum : massW (refW p) w + massW (refW p) Δ ≠ 0 := by positivity
+      rw [e, margW_add hAw.ne' hAΔ.ne', margW_eq_densW hG hπG hwG i,
+        margW_eq_densW hG hπG hΔG i, heq, ← add_mul, mul_div_assoc]
+      field_simp
+  · obtain ⟨b, _, hb, h0, h1, _, _, hm0, hm1, _, _⟩ :=
+      lemma3_compensation_bernoulli hG hp0 hp1 hw hwG hΔ0 hΔ1 hwΔ hΔG (γ₂ := u)
+        (by rw [abs_of_nonneg hu]) (Or.inr ⟨hc1, hgt⟩)
+    exact ⟨u, Or.inr rfl, b, hb.le, h0, h1, hm0, hm1⟩
+
 /-- The fields of the cone at `s`: `−u` where `s_i = 1`, `+u` where `s_i = 0`. -/
 def coneField (u : ℝ) (s : ι → Bool) (i : ι) : ℝ := if s i = true then -u else u
 
@@ -1368,6 +1445,8 @@ end ScienceL3
 #print axioms ScienceL3.massW_compensated
 #print axioms ScienceL3.lemma3_compensation
 #print axioms ScienceL3.lemma3_compensation_bernoulli
+#print axioms ScienceL3.window_of_equal_marginals
+#print axioms ScienceL3.lemma3_compensation_exists
 #print axioms ScienceL3.window_of_site_odds
 #print axioms ScienceL3.lemma0_window
 #print axioms ScienceL3.lemma0_window_lipH

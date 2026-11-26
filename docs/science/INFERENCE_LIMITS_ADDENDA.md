@@ -1312,6 +1312,64 @@ not a product; the same bound with a constant depending on the mixing of `π` is
 for Gibbs measures in the uniqueness regime (**[from memory — unverified]**), and is
 exactly the theory division's open request P2-T3 in another form.
 
+### (6) The prices on real instances [M, exact enumeration; added at checkpoint 36]
+
+`experiments/science/pi_inference/surrogate_divergence_real.py` (two seconds; reads the
+enumerated rotamer grids of workstream P2, nothing sampled): 45 instances — homopeptides
+of valine, leucine and serine, 2–12 residues, three fixed backbones (strand, PPII,
+helix), one rotamer variable per residue, full product domains — with the ff14SB vacuum
+energy `f` as known part and the GBn2 polarisation energy as remainder, at 300 K.  Three
+surrogates: `m0 = f`; `m1 = f +` the best one-body fit of the solvent term; `m2 = f +` its best
+pairwise fit (uniform least squares; `m2` is a pairwise model).  For each, the
+divergences of the *true* ensemble from the surrogate — what the table of (4) says
+certification costs — next to what a fit reports.  All in `k_BT`; ranges over instances:
+
+| surrogate | side chain | sup-norm width of the remainder | RMS error under the surrogate | `D_2(π_g‖π_m)` | `D_∞(π_g‖π_m)` |
+|---|---|---|---|---|---|
+| `m0` (known part alone) | Val | up to `11.3` (`0.6–1.0` per residue) | `≤ 0.57` | `≤ 0.18` (`0.002–0.013` per residue) | `≤ 1.7` (`0.005–0.14` per residue) |
+| `m0` | Leu | up to `11.9` | `≤ 1.5` | `≤ 0.70` | `≤ 4.6` |
+| `m0` | Ser | up to `74` | `1.1–2.3` | `3.1 – 45` (`1.1–7.3` per residue) | `10 – 56` (`4.3–8.9` per residue) |
+| `m1` (one-body fit) | Val, Leu | `≤ 1.3` | `≤ 0.10` | `≤ 0.012` | `≤ 0.70` |
+| `m1` | Ser | up to `15` | `0.2–0.9` | `0.04 – 1.3` | `0.9 – 8.6` |
+| `m2` (pairwise fit) | all 45 instances | `≤ 0.56` | `≤ 0.013` | `≤ 2·10⁻⁴` | `≤ 0.22` |
+
+What the numbers say.
+1. **The sup-norm width is the wrong coordinate even for a floor.**  For valine with the
+   known part alone the remainder (the whole solvent term) has a width of `7–11 k_BT` at
+   twelve residues, and `D_∞ = 0.07–1.7`: the remainder is most negative where the vacuum
+   model already has its weight, so the *one-sided* distance that the box-class theorem
+   charges for, `ρ₋ + ln(Z₀/Z)`, is a fraction of the width.  With a perfect floor the
+   theory division's cost number `Z(lo)/Z(g) − 1 = e^{D_∞} − 1` is `0.07` (Val₁₂, strand) and
+   `1.3·10²⁴` (Ser₆, helix).
+2. **Fit quality does not predict the price.**  Serine on the helix, known part alone: the
+   root-mean-square error under the surrogate goes *down* from `1.66` to `1.20 k_BT` between
+   two and six residues while `D_2` goes from `16` to `45` and `D_∞` from `20` to `56` — thirteen
+   orders of magnitude in the certified cost.  The variational gap goes from `1.7` to `4.4`.
+3. **Which row of the table is cheaper depends on the instance.**  Serine, six residues,
+   helix, one-body fit: `e^{D_2}/ε² = 370` evaluations against `e^{D_∞}/ε = 5·10⁴` at `ε = 0.1` — the
+   chi-square row beats the floor row by two orders of magnitude.
+4. **Everything is extensive, with very different rates.**  All divergences grow linearly
+   with the number of residues: `0.002` (valine, strand) to `7.3` (serine, helix) nats per
+   residue in `D_2`.  For valine on a strand a hundred residues would cost `e^{0.2}/ε²`; for
+   serine nothing beyond three or four residues is within reach without the pair terms.
+5. **With the pairwise fit the price is trivial in all 45 instances** (`D_∞ ≤ 0.22`) — the
+   reweighting-side reading of P2's finding that this solvent term is pairwise in the
+   rotamers up to small third-order constants.
+6. **The first-order bound of A17.6 is the right kind of statement and far from tight.**
+   `Σ_i c_i²/2` computed from the one-site oscillations of the remainder exceeded `D_2` in all
+   135 rows (it is not a theorem here: the reference is pairwise, not a product) by a
+   factor of at least `3.6`, typically 10–100: for Val₁₂ on the strand `2.96` against `0.024`.
+   A certificate through first-order constants would price valine at `e^{0.25n}`, the truth
+   is `e^{0.002n}`.
+
+**What this is not.**  These divergences were computed by enumerating every state: they
+are the *prices* that a certificate would have to pay, not certificates.  Whether an
+a-priori bound of the right size — on `D_∞`, i.e. a floor, or on `D_2` — can be proved for
+this energy term is exactly what is open (workstream P3 for the floor).  Exposed model
+peptides on ideal backbones, rotamer grids, no charged side chains (their domains are
+not products and were skipped), least-squares fits under the uniform measure only (the
+variational and likelihood fits of benchmark B10 were not run on these instances).
+
 ### Reading (kept apart from the statements)
 
 1. **"Independent of the size of the system" is true of a constant box and moves the

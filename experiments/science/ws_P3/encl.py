@@ -21,6 +21,7 @@ from fractions import Fraction
 import numpy as np
 import mpmath
 from mpmath import iv
+from mpmath.libmp import to_float
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, "cache")
@@ -56,27 +57,22 @@ def s_log(a, K):
 
 
 def up(x):
-    """double >= the upper end of the magnitude of the interval x."""
-    m = iv.mpf(abs(x)).b if hasattr(abs(x), "b") else abs(x)
-    f = float(m)
-    if mpmath.mpf(f) < m:
-        f = math.nextafter(f, math.inf)
-    return f
+    """double >= the largest magnitude in the interval x (directed rounding of the raw endpoint)."""
+    lo, hi = abs(x)._mpi_
+    return to_float(hi, rnd="c")
 
 
 def lo_hi(x):
-    a, b = float(x.a), float(x.b)
-    if mpmath.mpf(a) > x.a:
-        a = math.nextafter(a, -math.inf)
-    if mpmath.mpf(b) < x.b:
-        b = math.nextafter(b, math.inf)
-    return a, b
+    """doubles (a, b) with a <= x.a and b >= x.b (directed rounding)."""
+    lo, hi = x._mpi_
+    return to_float(lo, rnd="f"), to_float(hi, rnd="c")
 
 
-def atom_cell(orr, off, al, be, ga, Ia, Ib, K=KMAX):
-    """enclosures on the cell [Ia, Ib]: (sup|ib^(k)|, sup|ell^(k)|) for k = 0..K as doubles rounded up,
-    and enclosures of the values ell on the cell."""
-    X = iv.mpf([Ia, Ib])
+JT = 2          # order of the Taylor form used on a cell (see atom_cell / zeta tables)
+
+
+def _atom_series(orr, off, al, be, ga, X, K):
+    """interval Taylor coefficients (order 0..K) of ib(X + t) and ell(X + t)."""
     o = iv.mpf(orr)
     rad = o + iv.mpf(off)
     psi = [o * X, o] + [iv.mpf(0)] * (K - 1)
@@ -86,13 +82,35 @@ def atom_cell(orr, off, al, be, ga, Ia, Ib, K=KMAX):
     e2 = s_exp([2 * c for c in P], K)
     e2[0] = e2[0] + 1
     inv = s_inv(e2, K)                               # 1/(exp(2P) + 1);  tanh P = 1 - 2/(exp(2P)+1)
-    ib = [-(-2 * c) / rad * (-1) for c in inv]       # = 2*inv/rad  (so far: -tanh/rad + 1/rad)
+    ib = [2 * c / rad for c in inv]                  # -tanh/rad = (2 inv - 1)/rad
     ib[0] = ib[0] + 1 / o - 1 / rad                  # ib = 1/or - (1 - 2 inv)/rad
     ell = [-c for c in s_log(ib, K)]
-    fact = [math.factorial(k) for k in range(K + 1)]
-    supB = [up(ib[k] * fact[k]) for k in range(K + 1)]
-    supL = [up(ell[k] * fact[k]) for k in range(K + 1)]
-    return supB, supL, lo_hi(ell[0]), lo_hi(ib[0])
+    return ib, ell
+
+
+def atom_cell(orr, off, al, be, ga, Ia, Ib, K=KMAX):
+    """Upper bounds (doubles rounded up) of sup_{[Ia,Ib]} |ib^(k)| and |ell^(k)|, k = 0..K, and an
+    enclosure of the values of ell on the cell.  Taylor form of order JT about the midpoint c:
+        sup |phi^(k)| <= sum_{j<JT} sigma^j/j! |phi^(k+j)(c)| + sigma^JT/JT! * sup_cell |phi^(k+JT)|,
+    sigma >= half the cell width; the point values come from the interval series at the (thin)
+    midpoint interval, the last supremum from the interval series over the whole cell."""
+    X = iv.mpf([Ia, Ib])
+    c = (iv.mpf(Ia) + iv.mpf(Ib)) / 2
+    sigma = abs(X - c)
+    ib_c, ell_c = _atom_series(orr, off, al, be, ga, c, K + JT)
+    ib_X, ell_X = _atom_series(orr, off, al, be, ga, X, K + JT)
+    fact = [math.factorial(k) for k in range(K + JT + 1)]
+
+    def sups(sc, sX):
+        out = []
+        for k in range(K + 1):
+            acc = iv.mpf(0)
+            for j in range(JT):
+                acc += sigma ** j / fact[j] * abs(sc[k + j] * fact[k + j])
+            acc += sigma ** JT / fact[JT] * abs(sX[k + JT] * fact[k + JT])
+            out.append(up(acc))
+        return out
+    return sups(ib_c, ib_X), sups(ell_c, ell_X), lo_hi(ell_X[0]), lo_hi(ib_X[0])
 
 
 def _eta_terms(K):
@@ -103,18 +121,43 @@ def _eta_terms(K):
     return T
 
 
-def zeta_cell(terms, Da, Db):
-    """upper bound (double) of sup over [Da, Db] of |sqrt(D) * sum of monomials|."""
-    D = iv.mpf([Da, Db])
+def _zeta_iv(terms, D):
+    """interval value of sqrt(D) * sum of monomials at the interval D."""
     E = iv.exp(-D)
     u = 4 * D + E
     sq = iv.sqrt(D)
     us = iv.sqrt(u)
     acc = iv.mpf(0)
     for (a, b, c2), v in terms.items():
-        mono = sq * D ** a * E ** b / us ** c2
-        acc += iv.mpf(v.numerator) / iv.mpf(v.denominator) * mono
+        acc += iv.mpf(v.numerator) / iv.mpf(v.denominator) * (sq * D ** a * E ** b / us ** c2)
+    return acc
+
+
+def zeta_cell(T, k, Da, Db, J=3):
+    """Upper bound (double) of sup over D in [Da, Db] (Da > 0) of |zeta_k(D)|, zeta_k = sqrt(D) eta_k(D).
+    In the variable s = ln D:  d zeta_k / ds = -zeta_{k+1}   (because eta_{k+1} = -eta_k/2 - D eta_k').
+    Taylor form about the centre s_c with half-width sigma:
+        sup |zeta_k| <= sum_{j<J} sigma^j/j! |zeta_{k+j}(D_c)| + sigma^J/J! * sup_cell |zeta_{k+J}|,
+    the last supremum by plain interval evaluation of the monomials over the cell.  T: list of
+    monomial dictionaries up to order k + J."""
+    la, lb = iv.log(iv.mpf(Da)), iv.log(iv.mpf(Db))
+    sc = (la + lb) / 2
+    sigma = iv.mpf(up((lb - la) / 2))                # >= half-width of the cell in s
+    Dc = iv.exp(sc)
+    acc = iv.mpf(0)
+    fact = 1
+    for j in range(J):
+        if j:
+            fact *= j
+        acc += sigma ** j / fact * abs(_zeta_iv(T[k + j], Dc))
+    fact *= J
+    acc += sigma ** J / fact * abs(_zeta_iv(T[k + J], iv.mpf([Da, Db])))
     return up(acc)
+
+
+def zeta_cell0(terms, Db):
+    """plain interval bound of sup_{[0, Db]} |zeta_k| (first cell, D down to 0)."""
+    return up(_zeta_iv(terms, iv.mpf([0.0, Db])))
 
 
 def zeta_tail(terms, D0):
@@ -156,7 +199,7 @@ class RangeMax:
 class EnvelopeSup:
     """Rigorous derivative suprema for a GBModel (provider for termwise / gf bounds)."""
 
-    def __init__(self, G, K=KMAX, ncell_I=700, ncell_D=2400, Imax=None, verbose=False):
+    def __init__(self, G, K=KMAX, ncell_I=1200, ncell_D=2400, Imax=24.0, verbose=False):
         self.G = G
         self.K = K
         os.makedirs(CACHE, exist_ok=True)
@@ -164,8 +207,6 @@ class EnvelopeSup:
         keys = [(float(G.orr[p]), float(G.off), float(G.al[p]), float(G.be[p]), float(G.ga[p])) for p in range(G.nat)]
         self.classes = sorted(set(keys))
         self.cls = np.array([self.classes.index(k) for k in keys])
-        if Imax is None:
-            Imax = 30.0
         self.Imax = Imax
         self.edges = np.linspace(0.0, Imax, ncell_I + 1)
         self.atab = []
@@ -175,7 +216,7 @@ class EnvelopeSup:
 
     # -- atom tables
     def _atom_table(self, c, verbose):
-        tag = hashlib.sha1(json.dumps([c, self.K, list(self.edges[[0, -1]]), len(self.edges), iv.prec]).encode()).hexdigest()[:16]
+        tag = hashlib.sha1(json.dumps(["atom2", c, self.K, list(self.edges[[0, -1]]), len(self.edges), iv.prec, JT]).encode()).hexdigest()[:16]
         fn = os.path.join(CACHE, f"atom_{tag}.npz")
         if os.path.exists(fn):
             z = np.load(fn)
@@ -231,19 +272,20 @@ class EnvelopeSup:
     # -- kernel table
     def _zeta_table(self, ncell, verbose):
         self.Dmin, self.Dmax = 1e-5, 80.0
-        tag = hashlib.sha1(json.dumps(["zeta", self.K, self.Dmin, self.Dmax, ncell, iv.prec]).encode()).hexdigest()[:16]
+        tag = hashlib.sha1(json.dumps(["zeta2", self.K, self.Dmin, self.Dmax, ncell, iv.prec]).encode()).hexdigest()[:16]
         fn = os.path.join(CACHE, f"zeta_{tag}.npz")
         self.ledges = np.linspace(math.log(self.Dmin), math.log(self.Dmax), ncell + 1)
         self.Dedges = np.exp(self.ledges)
         if os.path.exists(fn):
             tab = np.load(fn)["tab"]
         else:
-            terms = _eta_terms(self.K)
+            JZ = 3
+            terms = _eta_terms(self.K + JZ)
             tab = np.zeros((self.K + 1, ncell + 2))       # cell 0: [0, Dmin]; cells 1..ncell; last: [Dmax, inf)
             for k in range(1, self.K + 1):
-                tab[k, 0] = zeta_cell(terms[k], 0.0, math.nextafter(self.Dedges[0], math.inf))
+                tab[k, 0] = zeta_cell0(terms[k], math.nextafter(self.Dedges[0], math.inf))
                 for m in range(ncell):
-                    tab[k, m + 1] = zeta_cell(terms[k], math.nextafter(self.Dedges[m], 0.0), math.nextafter(self.Dedges[m + 1], math.inf))
+                    tab[k, m + 1] = zeta_cell(terms, k, math.nextafter(self.Dedges[m], 0.0), math.nextafter(self.Dedges[m + 1], math.inf), JZ)
                 tab[k, ncell + 1] = zeta_tail(terms[k], math.nextafter(self.Dedges[-1], 0.0))
             np.savez(fn, tab=tab)
             if verbose:

@@ -279,46 +279,55 @@ def check_theoremA():
         print("    " + ", ".join(f"{v:.4g}" if isinstance(v, float) else str(v) for v in row))
 
 
-# ----------------------------------------------------------------------------- S6: A16.5 core
+# ----------------------------------------------------------------------------- S6: A16.5, the new pieces
 def check_a16(trials=20000):
-    worst_a = worst_b = worst_c = worst_d = -1.0
+    """(N2) concavity of f_eta on [0, inf); (N3) the maximiser of f_eta on [e^{-u rho}, e^{u rho}] is the clipped
+    level max(lo, min(t*, hi)) for EVERY t* > 0 (hills included), and F_0(rho) = e^{u rho};
+    (N4) rearrangement: H nondecreasing and #{rho > k} <= #{rho' > k} for all k imply sum H(rho) <= sum H(rho');
+    (a) the identity sum t = sum f_eta(t) + eta*phi(t)."""
+    worst_a = worst_conc = worst_clip = worst_rearr = -1.0
+    n_rearr = 0
     for _ in range(trials):
         N = int(rng.integers(1, 8))
         t = np.exp(rng.uniform(-3, 3, N))
         U0 = rng.uniform(-2, 2)
-        eta = rng.uniform(0, 3)
+        eta = rng.uniform(0.02, 3)
+
+        def f(s, eta=eta, U0=U0):
+            s = np.asarray(s, dtype=float)
+            return (1 - eta * U0) * s - eta * s * np.log(s)
+
         phi = (t * np.log(t)).sum() + U0 * t.sum()
-        f = lambda s: (1 - eta * U0) * s - eta * s * np.log(s)
-        # (a) identity
-        worst_a = max(worst_a, abs(t.sum() - f(t).sum() - eta * phi))
-        # (b) concavity / maximiser
-        if eta > 1e-3:
-            sstar = math.exp(1 / eta - 1 - U0)
-            s = np.exp(rng.uniform(-5, 5, 50))
-            worst_b = max(worst_b, (f(s) - f(sstar)).max())
-        # (c), (d): F(rho) = max of f over [e^{-u rho}, e^{u rho}] = f(clip(s*)); monotone in rho
+        worst_a = max(worst_a, abs(t.sum() - f(t).sum() - eta * phi) / max(1.0, t.sum()))
+        # concavity on (0, inf)
+        x, y = np.exp(rng.uniform(-4, 4, 2))
+        a = rng.uniform()
+        worst_conc = max(worst_conc, (a * f(x) + (1 - a) * f(y) - f(a * x + (1 - a) * y))
+                         / max(1.0, abs(f(x)), abs(f(y))))
+        # clipped level
         u = rng.uniform(0.1, 2)
-        rho = np.sort(rng.uniform(0, 3, 2))
-
-        def F(r):
-            lo, hi = math.exp(-u * r), math.exp(u * r)
-            if eta <= 1e-12:
-                return f(hi) if True else None
-            sstar_ = 1 / eta - 1 - U0
-            sc = math.exp(min(max(sstar_, -u * r), u * r))
-            grid = np.exp(np.linspace(-u * r, u * r, 400))
-            worst = (f(grid)).max() - f(sc)
-            return f(sc), worst
-
-        if eta > 1e-9:
-            (F0, e0), (F1, e1) = F(rho[0]), F(rho[1])
-            worst_c = max(worst_c, F0 - F1, e0, e1)
-            # (d) assembly
-            rr = rng.uniform(0, 3, N)
-            tt = np.exp(rng.uniform(-1, 1, N) * u * rr)
-            worst_d = max(worst_d, (f(tt) - np.array([F(r)[0] for r in rr])).max())
-    print(f"S6 A16.5 core [{trials} cases]: (a) identity error {worst_a:.2e}; (b) max of f - f(s*) = {worst_b:.2e}; "
-          f"(c) F monotone / clipped level is the maximiser: worst {worst_c:.2e}; (d) f(t) - F(rho): worst {worst_d:.2e}")
+        rho = rng.uniform(0, 3)
+        lo, hi = math.exp(-u * rho), math.exp(u * rho)
+        lts = 1 / eta - 1 - U0
+        if lts < 700:
+            ts = math.exp(lts)
+            clip = max(lo, min(ts, hi))
+            grid = np.exp(np.linspace(-u * rho, u * rho, 801))
+            worst_clip = max(worst_clip, (f(grid).max() - f(clip)) / max(1.0, abs(f(clip))))
+        # rearrangement
+        M = int(rng.integers(1, 9))
+        K = 6
+        rho1 = np.sort(rng.integers(0, K, M))
+        rho2 = np.sort(rho1 + rng.integers(0, 3, M))            # entrywise larger after sorting => counts dominate
+        rng.shuffle(rho1)
+        rng.shuffle(rho2)
+        assert all((rho1 > k).sum() <= (rho2 > k).sum() for k in range(K + 3))
+        H = np.cumsum(np.concatenate([[rng.uniform(-2, 2)], rng.uniform(0, 1, K + 3)]))  # nondecreasing
+        worst_rearr = max(worst_rearr, H[rho1].sum() - H[rho2].sum())
+        n_rearr += 1
+    print(f"S6 A16.5 [{trials} cases]: identity (a): rel. error {worst_a:.2e}; concavity violation {worst_conc:.2e}; "
+          f"grid max of f minus f(clipped level), all t* > 0: {worst_clip:.2e}; "
+          f"rearrangement sum H(rho) - sum H(rho') over {n_rearr} dominated pairs: max {worst_rearr:.2e}")
 
 
 if __name__ == "__main__":

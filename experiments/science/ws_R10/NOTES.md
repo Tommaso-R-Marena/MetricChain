@@ -94,3 +94,45 @@ from a scratch copy.
     p=0.4: the optimum has 4 labels (uniform fields 0.4165 each, the two-domain labels ++--
     and --++ 0.0835 each), max|gamma* - model| = 0.156.  Their I(x1;x3|x2) at p=0.4 is
     nevertheless the right number (it matches mine with the 4-label optimum).
+* [r10_lyap.py, r10_04_lower_bounds.py, 3 s] REPL of the lower ends that need no block
+  optimisation.  REVIEW: Prop. H re-derived (gauge tau = sigma*s; tilt by Z(sigma)^t cancels
+  the normalisation) -- formula of Y 5.3 is correct, incl. the every-n form.  REPL:
+  - moment Lyapunov exponents by two numerically independent methods of mine (exact
+    enumeration over 2^21 bond patterns with Aitken; Chebyshev collocation of the transfer
+    operator on z = ln(y+/y-), N = 32..96): agree to 1e-11.
+  - every-n formula vs the brute-force Renyi form (definition) at n=8, 27 cases: 3e-15.
+  - max over (t,c) of G_inf: p=0.4: 0.033503 (0.458,0.774); 0.3: 0.038695 (0.431,0.859);
+    0.2: 0.041770 (0.402,0.861); 0.1: 0.039608 (0.364,0.833)  == Y's table 6.4, all digits.
+    c=0 (i.i.d. labels): 0.028907, 0.028151, 0.026626, 0.023418 == Y.
+  - E_F: 0.169127, 0.232400, 0.310766, 0.401719 == Y; also = ln lam_max(D^1/2 P D^1/2).
+  - a from the Prop. H family at t=0.999: 0.116817 (p=0.4; == Y's lower end of a at p=0.4,
+    so that entry is "Prop. H at t=0.999", not a limit), 0.123875, 0.122445, 0.101876.
+    NOTE: at p=0.1 the Markov-label family gives a >= 0.1019 < cube 0.1109; the direction
+    of `a` at p=0.1 rests entirely on Prop. I (0.116632, only 5% above the cube).
+* [r10_06_markov_recursion.py, 29 s] REVIEW of Prop. F: proof re-derived, correct (also the
+  block version: -ln V of a block is Lipschitz with (u,..,u,u*)).  REPL: u* = 1.2183,
+  1.5261, 1.9807, 2.7497; DP bounds L=1,2,3 for h, a, E at all four p agree with Y's table
+  6.3 to every printed digit (e.g. p=0.3: h<= 0.054838, 0.051796, 0.049019; a<=0.154011;
+  E<= 0.234188, 0.233237, 0.232849).  Finite-n inequality vs exact F*_n (n<=4, 36 cases):
+  never violated (smallest margin 5.8e-4).
+* [r10_tilt.py, r10_07a, r10_07b] own implementation of the tilt-state recursion (Prop. G)
+  with a CELL-based safe discretisation (feasibility of a box of cells decided by corner
+  values, using that theta_+- are monotone in each argument; no Lipschitz slack).
+  REVIEW: (*) re-derived; solved for theta_+- explicitly.
+  - control p=1/2: safe E and a are exact (0.1201145, 0.1109441) at every G; safe Renyi value
+    from above (t=0.49: 0.0307683, 0.0295474, 0.0292413 at G=101,401,1601), restricted from
+    below (0.0286028, 0.0290037, 0.0291052).
+  - p=0.3, t=0.43, q~=0.255: safe 0.045939, 0.045168, 0.044813, 0.044622 (G=201..1601),
+    restricted 0.044054 .. 0.044357.  Y: safe(G=1601) 0.04468, restricted 0.04435.  Consistent
+    (my safe value is slightly tighter: no 1.5D slack).
+  - threshold, Q=pi, p=0.3: my SAFE value equals E_F=0.232400 at every G (201..1601): the
+    optimal relaxed policy sits in the extreme cells where the cell-max reward is exact.
+    So "E_inf = E_F up to 1.4e-4" (Y 5.4(c)) is confirmed and sharpened to the rounding of
+    the computation (to be tabulated for p=0.4,0.2 and checked at p=0.1).
+  - finite chains n=3,4,5, 144 cases incl. q~<p: safe >= exact max over ALL vertices in every
+    case (smallest margin 1.2e-3).  The relaxation is tight for q~ >= 0.85p and NOT tight for
+    q~ = 0.6p (restricted > exact by up to 0.17) -- quantifies Y's "no such test for q~<p".
+* Prop. I job (r10_05, first version) killed after 28 CPU-min: Arimoto to 1e-12 inside a
+  golden search was far too slow (my mistake); first line it printed: p=0.4, L=12, t=0.459,
+  134 labels: G_L=0.4089032, Lambda_blk=-0.0004206 (operator N=64 = N=96 = exact increments
+  k=2,3), lam_Q=1  => bound 0.034040 (Y: 0.034026).  Restructured below.

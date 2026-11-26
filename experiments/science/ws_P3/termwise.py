@@ -122,9 +122,11 @@ class TermBound:
         cmax = np.array([c.max(axis=0) for c in g.C])
         g.Ilo = g.base + cmin.sum(0) - pad_I
         g.Ihi = g.base + cmax.sum(0) + pad_I
-        g.delta_class = cmax - cmin                          # (ns, natoms)
+        pad_d = pad_I / max(ns, 1)                           # allowance for the rounding of a table difference
+        g.delta_class = np.where(cmax > cmin, cmax - cmin + pad_d, 0.0)          # (ns, natoms)
         if self.anchor is not None:
-            g.delta_anch = np.array([np.abs(g.C[i] - g.C[i][self.anchor[i]][None]).max(axis=0) for i in range(ns)])
+            da = np.array([np.abs(g.C[i] - g.C[i][self.anchor[i]][None]).max(axis=0) for i in range(ns)])
+            g.delta_anch = np.where(da > 0, da + pad_d, 0.0)
         g.supB = [None] + [self.sup.sup_ib(k, g.atoms, g.Ilo, g.Ihi) for k in range(1, self.kmax + 1)]
         g.supL = [None] + [self.sup.sup_ell(k, g.atoms, g.Ilo, g.Ihi) for k in range(1, self.kmax + 1)]
         g.elo, g.ehi = self.sup.ell_range(g.atoms, g.Ilo, g.Ihi)

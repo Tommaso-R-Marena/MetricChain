@@ -257,6 +257,22 @@ a statement about the theorem's coordinate, not about that remainder.  Whether a
 can be *proved* for the solvent term in rotamer variables, where the many-body part is
 small, is workstream P3.
 
+**The prices, measured in rotamer variables [M; checkpoint 36; addendum A17 (6)].**  On 45
+enumerated instances of P2 (valine, leucine, serine homopeptides; 2–12 residues; three
+backbones) with the vacuum force field as the model and the GBn2 term as remainder:
+for the apolar side chains the solvated ensemble is within `D_2 ≤ 0.7`, `D_∞ ≤ 4.6` nats of
+the vacuum ensemble although the solvent term varies by `11–12 k_BT` over the grid — its
+minimum sits where the vacuum model already has its weight; for serine `D_2 = 3–45` and
+`D_∞ = 10–56`, growing by several nats per residue; with the pairwise fit of the solvent
+term `D_∞ ≤ 0.22` everywhere.  Physical reading [H]: adding implicit solvent to an apolar
+side-chain ensemble on a fixed backbone is a *small* change of the ensemble in the
+sense that matters for certification, and a large one for a hydroxyl group (whose
+solvation depends on which way it points and on its neighbours); the pair terms carry
+almost all of it.  The root-mean-square error of the surrogate does not show any of
+this (it *falls* with chain length for serine on the helix while the certified cost
+rises by thirteen orders of magnitude).  **These are prices computed by enumeration,
+not certificates**; exposed model peptides, ideal backbones, no charged side chains.
+
 ## 8. Provenance, replication, limitations
 
 * **Replicated by the coordinator (same machine, the workstream's scripts):** the

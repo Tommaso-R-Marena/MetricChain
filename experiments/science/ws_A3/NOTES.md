@@ -122,3 +122,282 @@ Project Euclid (Bahadur–Savage 1956) → Incapsula page with curl (not a PDF).
   the script now refuses `K < 10⁻³` and re-evaluates the best point with 50 digits.
 * C6: T3's `(1/m − 1)/ε` is exactly `ε` × the largest variance term `(1−m)/(ε²m)` of a `[0,1]` variable of mean `m`.
 → (M1), (M2), (M6)/(M7) survive numerics.  Proof of (M7) is three lines (written in the report §2).
+
+### step 6 (23:51–23:57) — arXiv id look-ups, first batch of downloads, first readings
+arXiv API (`arxiv_batch.py`, title queries; all ids verified by the returned titles): cond-mat/0603185 (Jarzynski
+2006), 1601.02637 (Yunger Halpern–Jarzynski), 1511.01437 (Chatterjee–Diaconis), 1511.06196 (Agapiou et al.),
+1209.1727 (Bubeck–Cesa-Bianchi–Lugosi), 1509.05845 (Devroye–Lerasle–Lugosi–Oliveira), 2302.04658
+(Block–Polyanskiy), 1605.02065 (Bun–Steinke), 1909.13830 (Dong–Durfee–Rogers), 2004.07223 (Cesar–Rogers),
+1611.00328 (Dieng et al., CUBO), 1602.02311 (Li–Turner), 2208.01893 (Midgley et al., FAB), 1511.02543 (Grosse–
+Ghahramani–Adams), 1805.08637 (Kunsch–Novak–Rudolf), 0904.0625 and 0910.2858 (Hahn–Then), physics/0208015 and
+physics/0201046 (Zuckerman–Woolf), 1505.06217 (Yunger Halpern–Garner–Dahlsten–Vedral), 1508.00335 (Sason–Verdú),
+1805.05135 (Binette), 1004.0581 (Furuichi), quant-ph/0210020 (Aaronson), 2003.10374 (Naesseth–Lindsten–Blei),
+1906.04280 (Lugosi–Mendelson), quant-ph/0105114 (Heinrich–Novak), 1302.3598 (Pradhan–Dagum), 2210.12861 (Huber),
+0711.2801 (X. Chen).  No arXiv hit by title: Liu–Fisher–Ihler "Probabilistic variational bounds…", Lou–Dechter–Ihler
+"Dynamic importance sampling…", Goldwasser et al., Metelli et al. "Subgaussian and differentiable importance
+sampling…", Gajek–Niemiro–Pokarowski (to look for elsewhere).  All 29 PDFs downloaded and converted.
+Also: Mnih–Szepesvári–Audibert, ICML 2008, from icml.cc (PDF, 8 pp.).
+
+**DKLR — more access attempts, all failed:** academia.edu (403), OpenAlex (closed; lists a CiteSeerX record whose
+source was `icsi.berkeley.edu/~luby/PAPERS/optspeedup.ps`), that URL (404/403), CiteSeerX legacy link (redirects to
+archive.org → reset).  **Conclusion: the original is not accessible from this machine.**  What I could read
+*about* it in full text:
+* X. Chen, arXiv:0711.2801, pp. 2, 5 and Appendix D `[full text]` — reproduces, with page references to the SIAM
+  paper (pp. 1486, 1489, 1490–1491), the Stopping Rule Algorithm (sample until the sum reaches
+  `Υ₁ = 1 + 4(e−2)(1+ε)ln(2/δ)/ε²`, output `Υ₁/N`), the "Stopping Rule Theorem" (`Pr{|μ̂ − μ| ≤ εμ} ≥ 1 − δ`), and
+  Lemma 4.6 with `λ = e − 2`, `ρ_Z = max{σ_Z², εμ_Z}`.  **Chen states that DKLR's proof of the second tail is
+  incomplete** ("There exists a significant gap which cannot be patched by using their argument") while the
+  claim itself is true (it follows from Chen's sharper threshold).
+* Mnih, Szepesvári, Audibert, ICML 2008, §3 `[full text]` — AA is a three-step procedure; "T ≤ C·max(σ², εμ)·
+  (1/(ε²μ²))·log(2/δ)" for AA and "if T is the number of samples taken by any (ε, δ)-stopping rule, then there
+  exists a constant C′ such that with probability at least 1 − δ, T ≥ C′·max(σ², εμ)·(1/(ε²μ²))·log(2/δ)".
+  (They phrase both with probability `1 − δ`; my memory of the original is "in expectation" — cannot check.)
+* Kunsch–Novak–Rudolf, arXiv:1805.08637v2, "Historical remarks" `[full text]` — DKLR, Gajek–Niemiro–Pokarowski and
+  Huber "study the complexity of approximating the expected value E Y > 0 of a random variable 0 ≤ Y ≤ 1 to within
+  a prescribed relative error … the cost is roughly inversely proportional to the target value E Y".
+* Pradhan–Dagum, arXiv:1302.3598 `[full text, scanned/OCR]` — restates stopping rule and AA "without proof"; no
+  lower bound.
+
+**Kunsch–Novak–Rudolf (arXiv:1805.08637v2) — much closer to A17.3 than expected.** `[full text: abstract, §1,
+Thm 3.9, Thm 3.10 with proofs, Remark 3.11, §3.4 to Prop. 3.13, Cor. 3.14]`
+* classes: cones `Y_{p,q,K} = {‖Y−EY‖_q ≤ K‖Y−EY‖_p}`, intersected with balls of the *central* `L_q̃` norm,
+  `q̃ = min(q,2)`; absolute error ε, confidence 1−δ.
+* upper bound (their (5), Thm 2.17): expected cost `≤ C_q K^{pq/(q−p)} (1 + (‖Y−EY‖₁/ε)^{max{1+1/(q−1), 2}}) log δ⁻¹`.
+* lower bounds: Thm 3.9 (`q ≥ 2`): `n̄^wor ≥ (4 log 3)⁻¹ (σ/ε)² log((4/3)δ)⁻¹`; Thm 3.10 (`1 < q ≤ 2`):
+  `n̄^wor ≥ c_{q,K} (τ/ε)^{1+1/(q−1)} log((4/3)δ)⁻¹`; **Cor. 3.14: the same lower bounds for general randomised
+  algorithms using function values** (when π has no atoms; Prop. 3.13: "no general randomized algorithm is better
+  than the best possible i.i.d.-based algorithm in distinguishing F(1) from F(2)").
+* ⇒ A17.3 ("without a hint: `Θ(e^κ/ε^{max(2, p/(p−1))})`; variance term needed") is, in absolute error and with
+  central norms, **in print** (their q = our p).  Not there: the hint (verification), relative error/
+  divergence form, atoms.
+
+**Yunger Halpern–Jarzynski, arXiv:1601.02637v2 (PRE 93, 052144 per the arXiv record)** `[full text: abstract, all of
+the main text up to Theorem 2]`.  My memory was imprecise: it is the order-∞ Rényi **entropy of the work
+distribution**, `H^β_∞(P) = −log(p_max/β)`, not a divergence between ensembles.  Theorem 1: the expected number of
+reverse trials before one outputs a `w^δ`-dominant work value satisfies `N_δ ≥ exp(β(w^δ − ΔF) + H^β_∞(P_fwd))`
+(a waiting-time bound; the tolerance `w^δ` is chosen by the user).  Theorem 2 is an "approximate error bound"
+under the neglected-tail assumption.  They call Jarzynski's `N ∼ e^{β(⟨W⟩−ΔF)}` "a rough estimate" and say the
+question how large W must be to count as dominant "remained open".  No class, no certificate, no minimax.
+
+**Jarzynski, arXiv:cond-mat/0603185v1** `[full text: abstract, intro, §III, §IV, start of §V]`.  §III: "a back-of-
+the-envelope estimate": `N_c^F ∼ exp(βW̄_d^R)`, `N_c^R ∼ exp(βW̄_d^F)` (34a,b); (40): `D[P^F|P^R] = βW̄_d^F`; "Eq. 40
+suggests that there might be a natural information-theoretic interpretation of Eq. 34."  §IV (free-energy
+perturbation): "Lower bounds N_c^A and N_c^B on the required numbers of realizations are given by analogues of
+Eq. 34: ln N_c^A ∼ βW̄_d^B = D[p_B|p_A] ≥ 0; ln N_c^B ∼ βW̄_d^A = D[p_A|p_B] ≥ 0" (45a,b) — i.e. sampling the
+reference A costs `exp(KL(target‖reference))`: **the direction of A17's table, stated as an estimate ("∼"), in
+2006**; "Of the two perturbations, the one with larger W_d requires fewer samples"; insertion vs deletion
+explained by it.  Status in the paper's own words: "heuristic insights and quantitative estimates".
+
+### step 7 (23:57–00:00, into 26 Nov) — Block–Polyanskiy; Chatterjee–Diaconis; the differential-privacy sources; Specht
+**Block & Polyanskiy, arXiv:2302.04658v3** `[full text: abstract, §1 (first two pages), §2, §3 incl. Thms 3, 5, 6,
+Prop. 4 and proof sketches; App. B to Cor. 17; Lemma 27]`.
+* Problem: `n` i.i.d. samples from `μ`; output one of them so that its law is within TV `ε` of `ν`; class = all pairs
+  with `D_f(ν‖μ) ≤ D`.  Thm 3 (upper): `n ≥ (2/(1−ε)) log(2/ε)·(f′)⁻¹(4D_f/ε) ∨ 2` suffices.  Example 6: KL →
+  `Õ(exp(D_KL(ν‖μ)/ε))`.  Example 7: Rényi-λ (`f = x^λ − λx + λ − 1`, `D_f = e^{(λ−1)D_λ}`) → `Õ(e^{D_λ}ε^{−1/(λ−1)})`;
+  `λ = 2`: `Õ(χ²/ε)`; `λ → ∞` recovers plain rejection sampling.  Thm 5 (lower): for `ε ≤ 1/4`, `δ > 2f(1/2)` there is a
+  pair with `D_f ≤ δ` needing `n ≥ ½(f′)⁻¹(δ/(2ε))`; proof with `μ = Ber(ε/n)`, `ν = Ber(2ε)` and the `E_γ`
+  divergence.  Prop. 4: if `f′` is bounded (e.g. TV) no `n` works.  Lemma 27: `ν(dν/dμ > M) ≤ 2D_f/f′(M/2)`.
+* **Comparison with A17.2/A17.4 (mine):** same classes (pairs with a bounded `f`-divergence of the target from
+  the sampled measure), same extremal two-point pairs (a set of base mass `q` carrying target mass `≈ ε`), same
+  tail lemma (their Lemma 27 ↔ A17.1 by Hölder).  With `q·(ε/q)^p ≈ e^{(p−1)D_p}`: `1/q = e^{D_p}ε^{−p/(p−1)}` = A17.2's
+  cost (one must *hit* the set to detect it), and `ε/q = e^{D_p}ε^{−1/(p−1)}` = their cost (the output must land in
+  it with probability `≈ ε`).  So the two results differ by exactly the factor `1/ε` (task: detect vs select);
+  for KL both are `exp(Θ(D/ε))`.  Not a corollary either way that I can see, but the family is in print for a
+  neighbouring task.
+**Chatterjee & Diaconis, arXiv:1511.01437v3** `[full text: §1 to Thm 1.2 statement; Thm 2.1 and its discussion]`
+(A1's copy of the PDF, re-read by me).  Thm 1.1 verbatim: with `L = D(ν‖μ)`, if `n = exp(L+t)`:
+`E|I_n(f) − I(f)| ≤ ‖f‖_{L²(ν)}(e^{−t/4} + 2√(P(log ρ(Y) > L + t/2)))`; if `n = exp(L−t)`:
+`P(I_n(1) ≥ 1−δ) ≤ e^{−t/2} + P(log ρ(Y) ≤ L − t/2)/(1−δ)`.  One instance, typical case; needs concentration of
+`log ρ`.  **Thm 2.1 (new to our discussion):** for every `ε` there is `n ≤ ε⁻²2^{1+ε⁻³}` such that for *any* `μ, ν`
+and `‖f‖_{L²(ν)} ≤ 1` the empirical-variance diagnostic satisfies `P(v_n(f) < ε) ≥ 1 − 4ε` — "using v_n(f) for
+testing convergence of importance sampling is fundamentally flawed".  This is the published theorem behind
+the theory division's "documented refutation (mean plus two standard errors is not a certificate)" and
+behind T4's "validity is paid for by the floor".
+**Dong, Durfee, Rogers, arXiv:1909.13830v2** `[full text: abstract, Def. 2.2, Cor. 2.1, Thm 1, Def. 2.4, §3.4 with
+Cor. 3.1, §4 Lemma 4.1–4.2, appendix passage with "maxkl"]`.  `ε`-bounded range (BR, from Durfee–Rogers): the
+log-likelihood ratio of the two output laws lies in `[t−ε, t]` for some `t ∈ [0, ε]` — oscillation `≤ ε`.  The
+exponential mechanism (output `y` with probability `∝ exp(εu(x,y)/(2Δu))` — a Gibbs measure) is `ε`-BR.
+Lemma 4.1: every `ε`-BR pair is a post-processing of the two-point "generalized random response" `RR_{ε,t}`.
+Appendix: `KL(Bern(q_{ε,t})‖Bern(p_{ε,t})) = t − (ε/(e^ε−1))(e^t−1)`, "maximized at `t = ln((e^ε−1)/ε)`, and the
+value is `maxkl(ε) := ε/(e^ε−1) − 1 − ln(ε/(e^ε−1))`"; Cor. 3.1 writes it as `ε/(1−e^{−ε}) − 1 − ln(ε/(1−e^{−ε}))`
+(the two are equal).  **`maxkl(w) = L(w)` (T1's constant) — in print, with the two-point extremal law.**
+**Cesar & Rogers, arXiv:2004.07223v3** `[full text: Def. 2.2, Lemma 2.1, Defs 2.6–2.7, Lemma 3.2 with proof,
+sentence after Lemma 3.4]`.  Lemma 3.2: for an `α`-BR mechanism `E[exp(λX_i)|F_{i−1}] ≤ e^{λ²α²/8}` and
+`E[L_i|F_{i−1}] ≤ α/(e^α−1) − 1 − ln(α/(e^α−1))`; "α-BR implies (ξ, α²/8)-zCDP, where
+`ξ = α/(e^α−1) − 1 − ln(α/(e^α−1)) − α²/8 ≤ 0`", i.e. `D_λ(P‖Q) ≤ λα²/8 + L(α) − α²/8` for all `λ > 1`.  **This is my
+tilt lemma (M6), in a sharper form** (`D_λ ≤ (λ−1)w²/8 + L(w)`), by Hoeffding's lemma applied to the privacy loss.
+**Bun & Steinke, arXiv:1605.02065v1** `[full text: Def. 1.1, Lemma 2.2, Lemma 2.3, Prop. 3.3, Remark 3.4, start of
+the proof]`.  Lemma 2.2 "Composition": `D_α(P‖Q) ≤ D_α(P′‖Q′) + max_x D_α(P′_x‖Q′_x)` (cited from van Erven–
+Harremoës) — the chain rule I used in (M7).  Prop. 3.3: `D_∞(P‖Q), D_∞(Q‖P) ≤ ε ⇒ D_α(P‖Q) ≤ ½ε²α`.
+⇒ **(M7) `D_p(π_g‖π) ≤ (p−1)K/8 + Σ_i L(c_i) ≤ pK/8` is a two-line corollary of statements in print**
+(conditionals of `π_g` are one-site tilts of range `≤ c_i` = "c_i-BR"; adaptive composition of zCDP).
+**Specht's ratio.**  WebSearch (S) `Specht 1960 "Zur Theorie der elementaren Mittel" …` → Springer record (DOI
+10.1007/BF01180475; Math. Z. 74, 91–98 (1960) per the snippet), RIMS Kôkyûroku PDFs.  Downloaded:
+* Fujii, Lee, Seo, "An application of the Mond–Pečarić method to operator convex functions", RIMS Kôkyûroku 1259
+  (2002) 1–10 `[full text: pp. 1–2]`: "In 1960 as a converse of the arithmetic-geometric mean inequality,
+  W. Specht [11] estimated the upper bound of the arithmetic mean by the geometric one for positive numbers:
+  For x_1, …, x_n ∈ [m, M] with M ≥ m > 0, (x_1⋯x_n)^{1/n} ≤ (x_1+⋯+x_n)/n ≤ M_h(1)(x_1⋯x_n)^{1/n}, where
+  h = M/m … M_h(1) = (h−1)h^{1/(h−1)}/(e log h)"; and "J.I. Fujii, S. Izumino and Y. Seo [1] showed an operator
+  version of Specht's theorem (1): … 0 < m ≤ A ≤ M … Then (Ax, x) ≤ M_h(1) exp(log A x, x) holds for every unit
+  vector x" — for diagonal `A` this is `E a ≤ S(h)·exp(E log a)` for **every** law on `[m, M]`, i.e. T1's upper
+  half with `a = e^{−r}`, `h = e^w`, `ln S(e^w) = L(w)` (identity checked numerically, C1).
+* Furuichi, arXiv:1004.0581v3 `[full text: p. 1, Lemma 2.1, references]`: two-point weighted form
+  `S(a/b)a^{1−ν}b^ν ≥ (1−ν)a + νb` attributed to Tominaga, Sci. Math. Japon. 55 (2002) 583–588; `S(h) = S(1/h) > 1`.
+* Specht's own paper: **not accessed** (Springer; only the bibliographic record in a search snippet).
+
+### step 8 (00:00–00:03) — heavy tails; Agapiou et al.; the coordinator's three leads
+**Bubeck, Cesa-Bianchi, Lugosi, arXiv:1209.1727** `[full text: abstract, Lemma 1, Lemma 2 (statements), Thm 2 statement]`.
+Lemma 1 (truncated mean, *raw* moment `E|X|^{1+ε} ≤ u`): w.p. `≥ 1−δ`, `μ̂_T ≤ μ + 4u^{1/(1+ε)}(log(δ⁻¹)/n)^{ε/(1+ε)}`.
+Lemma 2 (median of means, *centred* moment `v`): `μ̂_M ≤ μ + (12v)^{1/(1+ε)}(16 log(e^{1/8}δ⁻¹)/n)^{ε/(1+ε)}`.  With
+`p = 1+ε`, `u = B^p`: error `≤ 4B(log(1/δ)/n)^{(p−1)/p}`, i.e. `n = log(1/δ)(4B/(εμ))^{p/(p−1)}` — A17.3(ii) with a constant.
+**Devroye, Lerasle, Lugosi, Oliveira, arXiv:1509.05845v1** `[full text: p. 3 passage, Thm 3.1 and its proof §4.3]`.
+Thm 3.1: `n > 5`, `M > 0`, `α ∈ (0,1]`, `δ ∈ (2e^{−n/4}, 1/2)`: for any mean estimator,
+`sup_{P ∈ P^M_{1+α}} P{|Ê_n − μ_P| > (M^{1/α} ln(2/δ)/n)^{α/(1+α)}} ≥ δ` (class: `(1+α)`-th *central* moment `= M`).  Proof:
+two scaled Bernoulli laws `P_±` (mass `p = (2/n)log(2/δ)` at `±c`), coupled so that the two samples coincide with
+probability `≥ 2δ` — the "rare atom not seen" argument = A17.2(ii)'s packing/detection mechanism (and it is a
+*two-point testing* bound: knowing both candidates, i.e. a hint, does not help in the sampling model).  Formula
+(10) for the central moment of `P_±` is stated "for any α > 0".
+⇒ O1 for `1 < p ≤ 2` is the minimax rate `M^{1/p}(ln(1/δ)/n)^{(p−1)/p}` read backwards (yes to the brief's question);
+for `p > 2` estimation saturates at the variance rate (KNR Thm 3.9), and the hinted exponent `p/(p−1) < 2` is the
+part I did not find in print.
+**Agapiou, Papaspiliopoulos, Sanz-Alonso, Stuart, arXiv:1511.06196v3** ("Submitted to Statistical Science" on the
+PDF) `[full text: abstract, §2.2 with Thm 2.1, §2.3.3, §2.5]`.  `ρ := π(g²)/π(g)²`; Thm 2.1: for the autonormalised
+estimator, `sup_{|φ|≤1}|E[μ^N(φ) − μ(φ)]| ≤ 12ρ/N`, `sup_{|φ|≤1}E[(μ^N(φ) − μ(φ))²] ≤ 4ρ/N`; `D_χ²(μ‖π) = ρ − 1`;
+`ρ ≥ e^{D_KL(μ‖π)}` (2.5); "the number of particles required for accurate importance sampling scales exponentially
+with the Kullback-Leibler divergence between proposal and target and linearly with the χ² divergence".  So
+`ρ = 1 + χ² = e^{D_2}`: the `p = 2` row of A17's table at one instance; no class statement, no hint.
+
+**Lead (1) — χ / Rényi upper bounds in variational inference.**
+* Dieng, Tran, Ranganath, Paisley, Blei, arXiv:1611.00328v4 (NIPS 2017 per the PDF footer) `[full text: abstract,
+  §1, §2.1–2.3, App. D]`.  Eq. (2): `CUBO_n = (1/n) log E_q[(p(x,z)/q(z))^n]`; Thm 1 ("Sandwich Theorem"):
+  `∀n ≥ 1: ELBO ≤ log p(x) ≤ CUBO_n`, `CUBO_n` non-decreasing in `n`.  App. D: `Var(Î) = (1/B)[E_q(w²) − p(x)²]`,
+  "minimizing this variance is equivalent to minimizing … the χ²-divergence".  **No certificate:** "by Jensen's
+  inequality … this is a biased estimate of CUBO_n … The objective is not guaranteed to be an upper bound if S is
+  not chosen appropriately from the beginning.  This problem does not exist for lower bounds because the Monte
+  Carlo approximation is still a lower bound".  ← the asymmetry of T4, stated in print for the ML setting.
+* Li & Turner, arXiv:1602.02311v3 `[full text: abstract, §3, §4.1, App. D first paragraphs]`.  VR bound
+  `L_α = (1/(1−α)) log E_q[(p/q)^{1−α}]`; Thm 1: `L_VI ≤ L_{α₊} ≤ L_0 ≤ L_{α₋}` for `0<α₊<1`, `α₋<0`, and `L_0 = log p(D)`
+  iff `supp p ⊆ supp q` (so `α₋ = 1 − p` gives `ln Z ≤ (1/p) ln E_q w^p`).  Thm 2/Cor. 1: the Monte-Carlo estimate is
+  biased towards `L_VI`; "negative alpha values can potentially be used to improve the accuracy of the
+  approximation, at the cost of losing the upper-bound guarantee".  Sandwiching "we leave to future work".
+  Estimator only; no finite-sample guarantee over a class.
+**Lead (2) — Midgley, Stimper, Simm, Schölkopf, Hernández-Lobato, arXiv:2208.01893v3 ("Published as a conference
+paper at ICLR 2023")** `[full text: abstract, §1, §2 "Alpha divergence", the evaluation paragraphs, discussion]`.
+Claims: "minimize the mass-covering α-divergence with α = 2, which minimizes importance weight variance"; "When
+α = 2, minimizing the α-divergence is equivalent to minimizing the variance of the importance sampling weights".
+ESS is an *empirical evaluation metric* only (from 5×10⁴ flow samples); **"the ESS for the SNF, RBD and the flow
+trained by minimizing KL(q_θ‖p) are spurious as these methods are missing modes"**.  No statement relating a
+sample size to the divergence; no certificate.
+**Lead (3) — direction of the divergence.**  Minka, MSR-TR-2005-173 (7 Dec 2005) `[full text: abstract, §2
+passages]`: `α ≤ 0` divergences "are zero-forcing because p(x) = 0 forces q(x) = 0 … This causes some parts of p to
+be excluded"; "(α ≥ 1) are inclusive (α < 1 are exclusive).  Inclusive divergences require q > 0 whenever p > 0,
+thus avoiding 'false negatives.'  If two identical Gaussians are separated enough, an exclusive divergence
+prefers to represent only one of them, while an inclusive divergence prefers to stretch across both."  Also
+Li–Turner §3: "zero-forcing (α → +∞, when using uni-modal approximations it is usually called mode-seeking) and
+mass-covering (α → −∞)"; FAB §2: "The α-divergence is mode-seeking for α ≤ 0 and mass-covering for α ≥ 1 (Minka,
+2005)"; and, in physics, Jarzynski 2006 eq. (45) (sampling A costs `exp D[p_B|p_A]`).
+
+### step 9 (00:03–00:11) — one-sidedness in statistics and ML; certificate complexity; class F_C; free-energy and K* literature through PubMed
+**Grosse, Ghahramani, Adams, arXiv:1511.02543v1** `[full text: abstract, §4 intro, §4.1, §4.2 first page]`.  Unbiased
+estimators of `Z` "are stochastic lower bounds, in two senses": Markov: `Pr(log Ẑ > log Z + b) < e^{−b}` (25); Jensen:
+`E[log Ẑ] ≤ log Z` (26).  §4.2: "we would expect good upper bounds to be harder to obtain than good lower bounds.
+For a lower bound on the log-ML, it suffices to exhibit regions of high posterior mass.  For an upper bound,
+one would have to demonstrate the absence of any additional probability mass. … But suppose we are given a
+hint in the form of an exact posterior sample."  ← T4's asymmetry, stated heuristically, and a "hint" (of a
+different kind: a sample of the target).  Remark for us: (25) is a *valid* lower confidence bound on `ln Z` with
+no assumption on `r` at all (slack `ln(1/δ)` nats) — the cheap side does not even need the oscillation `w` that
+T4's `w² ln(1/δ)/(2ε²)` uses.
+**Thomas, Theocharous, Ghavamzadeh, "High confidence off-policy evaluation" (© 2015 AAAI on the PDF)** `[full text:
+abstract, "Concentration Inequality" section, Thm 1 statement]`: importance-weighted returns "are bounded from
+below by zero … and may have a large upper bound … very long tail"; "removing the upper tail of a distribution
+can only lower its expected value" ⇒ Thm 1: a *lower* confidence bound for the mean of non-negative variables
+from `Y_i = min{X_i, c_i}`, which "removes the need to determine a tight upper bound on the largest possible
+importance weighted return".
+**Phan, Thomas, Learned-Miller, arXiv:2106.03163v5** `[full text: §2 passage, §4.2 passage]`: for an *upper* confidence
+bound on a mean "we only need to know a superset of the support with finite upper bound"; in the "1-ended
+support setting" the method "is equal to Anderson's".
+**Wang & Ramdas, arXiv:2202.01250v6, §10.1** `[full text of that subsection]`: moment assumptions "are necessitated
+by the results of Bahadur and Savage [1956], which immediately imply that if no upper bound on a moment is
+known a priori, mean estimation is provably impossible" (reference there: Ann. Math. Statist. 27(4):1115–1122,
+1956).  **Bahadur–Savage itself: not accessed** (Project Euclid: Incapsula page / empty page via WebFetch).
+⇒ T4 "the floor is the one assumption sampling cannot replace" = Bahadur–Savage (nothing without an a-priori
+bound) + Anderson-type one-sided bounds (an upper bound on the support of `Y = e^{−r}`, i.e. the floor, suffices
+for the upper confidence bound) — **and the same literature contradicts the literal "nothing else can replace
+it"**: a bound on any moment of order `p > 1` of `Y` suffices (BCL13, KNR) — which is A17's point.
+**Karp, Luby, Madras, J. Algorithms 10 (1989) 429–448** `[full text: title page, theorem statement p. 3 and
+appendix]`: "ZERO-ONE ESTIMATOR THEOREM. Let μ = |G|/|U|. Let ε ≤ 2. If N ≥ (1/μ)·(4 ln(2/δ)/ε²) then the Monte-Carlo
+algorithm described above is an (ε, δ) approximation algorithm" (OCR reads μ as p).
+**Aaronson, arXiv:quant-ph/0210020v1** `[full text: abstract, Defs 1–3, Prop. 4, Lemma 5, relations paragraph]`.
+Def. 3: "A randomized verifier for input X is a randomized algorithm that, on input Y ∈ Dom(f), (i) accepts with
+probability 1 if Y = X, and (ii) rejects with probability at least 1/2 if f(Y) ≠ f(X). … RC^X(f) is the minimum
+expected number of queries used by a randomized verifier for X"; the verifier is given X "since any additional
+information that a prover might provide, the verifier can compute for itself".  Lemma 5: non-adaptive verifiers
+that query coordinate `i` with probability `λ_i` and reject iff they find a disagreement achieve `Θ(RC^X(f))`
+with cost `Σλ_i`.  `RC(f) = Ω(bs(f))`.  ⇒ **"with a hint" = Aaronson's randomised verifier; the spot check =
+his non-adaptive verifier; T3 is the value of `RC^X` for weighted approximate summation over a box**, where the
+covering LP has the closed form `λ_x ∝` dip (bump) weight.
+**Mathé & Novak, arXiv:math/0611285v2** `[full text, re-read: abstract, p. 4, class definition, Thms 1–2]`:
+`F_C = {(f,ρ): ‖f‖_∞ ≤ 1, ρ(x)/ρ(y) ≤ C}`; Thm 1: every Monte Carlo method with `n` values has error
+`≥ (√2/6)√(C/(2n))` (`2n ≥ C−1`); Thm 2: simple Monte Carlo `≤ 2 min{1, √(2C/n)}`; "the complexity of the problem
+is linear in C".  = the class-level, no-hint, all-algorithms statement for *expectations* on the box
+(`C = e^{ρ₋+ρ₊}`), dimension-free in the same sense as T3.  For `ln Z` only the floor enters — that asymmetry is
+not in Mathé–Novak (they treat ratios of integrals).
+**Pradhan & Dagum, arXiv:1302.3598 (pp. 446–452 of the proceedings)** `[full text, OCR]`: with the "local variance
+bound" `r` of a belief network, "the Zero-One Estimator Theorem … can be rewritten N ≤ (4r^k/ε²) ln(2/δ)" — an
+a-priori bound on the ratio of weights turns likelihood weighting into a certified `(ε,δ)` estimate of a
+probability of evidence; attributed to Dagum & Luby (1993/1994/1997), which I did not open.
+**DKLR at an instance (own remark, uses only the restatement in Mnih et al.):** under the floor measure
+`X = e^{−(r−lo)} ∈ (0,1]`; at the centre of a constant box `X` is constant, `σ² = 0`, so the *unhinted* stopping
+rule already costs `O(log(1/δ)/(εμ′)) = O(e^{ρ₋} log(1/δ)/ε)`: **at the centre the hint is worth nothing**; in
+general unhinted sampling costs `max(σ_X², εμ′)/(εμ′)²` and the hint (plus the freedom to choose where to
+evaluate) removes the `σ²` term.
+**PubMed (tool `search_articles`, `get_article_metadata`, `get_full_text_article`); everything below is "according
+to PubMed", reading level `[abstract]` unless stated:**
+query `Kofke DA[Author] AND (free-energy perturbation OR phase-space overlap)` → 12 hits; kept:
+* Lu, Adhikari, Kofke, Phys Rev E 68, 026122 (2003), doi:10.1103/PhysRevE.68.026122 — "Finite sampling in
+  free-energy perturbation (FEP) calculations … leads to reproducible systematic errors, with sign shown to
+  depend (in a known way) only on which system governs sampling in the simulation.  Thus the result of a FEP
+  calculation can be used as a bound on the true free energy.  This inequality is of a wholly different nature
+  from established forms such as the Gibbs-Bogoliubov inequality".
+* Wu & Kofke, Phys Rev E 70, 066702 (2004), doi:10.1103/PhysRevE.70.066702 — asymmetric bias; neglected-tail model;
+  "the bias is significantly smaller when sampling is performed on the system having a broader work
+  distribution ('insertion')".
+* Wu & Kofke, J Chem Phys 123, 054103 (2005), doi:10.1063/1.1992483 — two relative entropies "expressed in terms
+  of the dissipated work for … FEP calculations in the A→B and B→A directions"; "The relative entropies are
+  used to scale the amount of sampling to obtain a universal bias curve … a simple heuristic … we argue that it
+  is fail-safe".
+* Wu & Kofke, J Chem Phys 123, 084109 (2005), doi:10.1063/1.2011391 — "Stages should always be constructed such
+  that work is performed only into a system that has a phase-space subset relation with the starting system."
+* Lu, Kofke, Woolf, J Comput Chem 25:28–39 (2004), doi:10.1002/jcc.10369 — overlap sampling "considers the
+  asymmetry of the FEP calculation".
+query `Bias and error in estimates of equilibrium free-energy differences from nonequilibrium measurements` → Gore,
+Ritort, Bustamante, PNAS 100:12564–9 (2003), doi:10.1073/pnas.1635159100, PMC240657 — abstract: "we derive the
+large N limit for the Jarzynski estimator bias, variance, and mean square error that is correct for arbitrary
+perturbations".  PMC returned no XML full text; `WebFetch` of the PMC page gave an automatic reading
+(`[fetch-tool]`, formulas are images): "the number of trajectories necessary to average over to obtain a given
+level of accuracy increases exponentially with W̄_dis".
+query `exponential averaging Bennett acceptance ratio … Shirts Pande` → Shirts & Pande, J Chem Phys 122, 144107
+(2005), doi:10.1063/1.1873592 — reviews "theoretical estimates of the bias and variance of exponential averaging
+(EXP), thermodynamic integration (TI), and the Bennett acceptance ratio (BAR)"; no sample-size law in the
+abstract.
+queries `Donald BR[Author] AND partition function AND (K* OR …)`, `minimized dead-end elimination criterion …`,
+`Lilien RH[Author] AND Donald BR[Author] AND ensemble-based scoring`, `Ojewole AA[Author] AND Donald BR[Author] AND K*`:
+* Georgiev, Lilien, Donald, J Comput Chem (2008), doi:10.1002/jcc.20909, PMC3263346 — **`[full text]` §4 and
+  Proposition 3**: with `q*` the partial partition function of the `m` conformations returned by A*, `n`
+  conformations not yet generated (all with lower bounds above `E_t`), `k` pruned conformations with lower bound
+  `E_0`, `ρ = ε/(1−ε)`: "If the lower bound B(c) on the minimized energy of the (m+1)st conformation returned by A*
+  satisfies B(c) ≥ −RT(ln(q*ρ − k exp(−E_0/RT)) − ln n), then the partition function computation can be halted,
+  with q* guaranteed to be an ε-approximation to the true partition function q, that is, q* ≥ (1−ε)q"; proof:
+  `q = q* + q′ + p* ≤ q* + n exp(−E_t/RT) + k exp(−E_0/RT)`.  Lower bounds are "a sum of precomputed pairwise
+  minimum energy terms".  = T2 with a function floor and no ceiling (one-sided certificate).
+* Lilien, Stevens, Anderson, Donald, J Comput Biol 12(6):740–61 (2005), doi:10.1089/cmb.2005.12.740 — "an
+  efficient deterministic approximation algorithm, capable of approximating our scoring function to arbitrary
+  precision".
+* Ojewole, Jou, Fowler, Donald, J Comput Biol 25(7):726–739 (2018), doi:10.1089/cmb.2017.0267 (BBK*); Jou, Holt,
+  Lowegard, Donald, J Comput Biol (2020), doi:10.1089/cmb.2019.0315 (MARK*; PMC sent no full text): "provable
+  ε-approximations to partition functions … by computing provable, admissible pairwise-minimized energy lower
+  bounds … and using the A* enumeration algorithm"; Lowegard et al., PLoS Comput Biol 16(6):e1007447 (2020),
+  doi:10.1371/journal.pcbi.1007447: "Often, reaching an ε-approximation … takes a prohibitive amount of time and
+  space."
+  (This literature is about sequence design, outside our scope; cited only for the certificate scheme.)
+  Not in what I read: sampling with a certificate; any lower bound on the number of evaluations.

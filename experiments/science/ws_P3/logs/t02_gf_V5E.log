@@ -1,0 +1,21 @@
+   enclosure table for atom class (0.10048589999999999, 0.0195141, 0.78844, 0.798699, 0.437334): 800 cells -> /home/user/MetricChain/experiments/science/ws_P3/cache/atom_787b47538b899259.npz
+   enclosure table for atom class (0.1104859, 0.0195141, 0.78844, 0.798699, 0.437334): 800 cells -> /home/user/MetricChain/experiments/science/ws_P3/cache/atom_91c6c16095842940.npz
+   enclosure table for atom class (0.1304859, 0.0195141, 0.867814, 0.876635, 0.387882): 800 cells -> /home/user/MetricChain/experiments/science/ws_P3/cache/atom_8d8ef3f6ad8ea24c.npz
+   enclosure table for atom class (0.1354859, 0.0195141, 0.503364, 0.316828, 0.192915): 800 cells -> /home/user/MetricChain/experiments/science/ws_P3/cache/atom_a3a273cea6d1ba04.npz
+   enclosure table for atom class (0.15048589999999998, 0.0195141, 0.733756, 0.506378, 0.205844): 800 cells -> /home/user/MetricChain/experiments/science/ws_P3/cache/atom_ec7f5de4e5776fe6.npz
+   enclosure table for zeta_k: 2400 cells -> /home/user/MetricChain/experiments/science/ws_P3/cache/zeta_8f5670e348a329e7.npz
+V5 E tau 0.7: sites 5, domain [3, 3, 3, 3, 3], anchor (1, 1, 1, 1, 1); setup 177.8s
+order 3: Gamma_m (generating function, 0.1s) self 1.656458e-01 cross 8.871887e+00 | sum over the 10 subsets (0.0s) self 1.656458e-01 cross 8.871887e+00 | rel. diff 1.7e-16, 2.0e-16
+         exact sum of anchored-pair constants 1.1386e-02; certified/exact = 793.7 (self part alone 14.55); violations of bound >= exact: 0
+         T=(1, 2, 3): exact 3.298e-03, certified self 4.885e-02 + cross 2.274e+00 = 2.323e+00 (x704)
+         T=(0, 1, 2): exact 3.113e-03, certified self 4.823e-02 + cross 2.168e+00 = 2.216e+00 (x712)
+         T=(2, 3, 4): exact 2.631e-03, certified self 4.859e-02 + cross 2.151e+00 = 2.200e+00 (x836)
+order 4: Gamma_m (generating function, 0.0s) self 2.170502e-03 cross 2.517759e-01 | sum over the 5 subsets (0.0s) self 2.170502e-03 cross 2.517759e-01 | rel. diff 2.0e-16, 2.2e-16
+         exact sum of anchored-pair constants 6.1618e-04; certified/exact = 412.1 (self part alone 3.52); violations of bound >= exact: 0
+         T=(1, 2, 3, 4): exact 2.548e-04, certified self 9.734e-04 + cross 1.012e-01 = 1.022e-01 (x401)
+         T=(0, 1, 2, 3): exact 2.474e-04, certified self 9.759e-04 + cross 1.016e-01 = 1.026e-01 (x415)
+         T=(0, 1, 2, 4): exact 5.301e-05, certified self 1.079e-04 + cross 1.975e-02 = 1.985e-02 (x375)
+order 5: Gamma_m (generating function, 0.0s) self 3.508792e-06 cross 2.325856e-03 | sum over the 1 subsets (0.0s) self 3.508792e-06 cross 2.325856e-03 | rel. diff 0.0e+00, 1.9e-16
+         exact sum of anchored-pair constants 9.5326e-06; certified/exact = 244.4 (self part alone 0.37); violations of bound >= exact: 0
+         T=(0, 1, 2, 3, 4): exact 9.533e-06, certified self 3.509e-06 + cross 2.326e-03 = 2.329e-03 (x244)
+total 178.0s

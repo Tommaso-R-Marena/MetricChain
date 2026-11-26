@@ -75,3 +75,62 @@
   I re-derived the completion (HS mixture; `A_y(ψ) = C_n·A_{y_j}(ψ − 2(y−y_j)|x|)` ✓; finite net ⇒
   uniform o(n) ✓); it rests on Thm 11.64 and Prop 11.65(b), which I did not check, and on the cost of
   Thm 11.64 being sub-exponential in ln(1/δ) (δ is divided by ~n² grid fields) — not stated there.
+
+### 00:00 (26 Nov) — item 4 computations, first results (all **re-computed with own code** `r9_semi.c`)
+* `out/semi_enum22.txt`: all bridges with 3..22 beads (first two bonds fixed; 92 121 332 at N = 22; my totals and
+  class counts = R2's `enum_bridge.log`, and `r9_semigroup_analysis.py` (1): my class tables = R2's tables
+  (profiles and gauche masks) for N = 3..22).
+  - head 5 + tail 5 (their claim (2)): every one of the 21.5 million (bridge, c₁) with N ≤ 20 becomes clean; no failure.
+  - head 2 + tail 3 already suffices (0 failures, N ≤ 20) — and is minimal: head 1 + tail 3 fails (first at N = 8),
+    head 2 + tail 2 fails (first at N = 16: 1308 cases), head 0 fails, tail 0 fails.
+  - cost of head+tail = A + B (asserted for every case with head ≥ 3, tail ≥ 3); componentwise maxima up to N = 20:
+    (1, 8, 12, 1), norm 51 (N = 18); A-part max (1,6,10,1 | 44) at N = 21, 22; B-part max (0,3,4 | 16) (= proved bound).
+  - 18.8 million from-scratch profile checks of the incremental counts; 18 364 O(n²) brute-force checks.
+* `out/semi_pairs13_part{0,1}.txt`: **all 160 326 244 ordered pairs of clean bridges with N₁, N₂ ≤ 13** (12 662 clean
+  bridges) concatenated from coordinates: every concatenation is a self-avoiding lattice walk, a bridge, has
+  (h,g) exactly additive and is clean.  0 failures of any kind.  (Claim (1) of the sketch.)
+* `out/semigroup_analysis.txt`: (2) set-level closure of the clean classes `C_{N1} + C_{N2} ⊂ C_{N1+N2+3}`: 24 913 sums,
+  0 missing; the same for ALL bridges fails (79 of 47 038 sums missing; first: rod(3) + (2,7,7;6) at N = 11) — so the
+  restriction to clean ends is needed for exact additivity of (h,g) itself.  (3) the clean bridges with N ≤ 10
+  generate Z^5 (as (h,g;N+3)) and Z^4 (as (h;N+3)): index 1.  (4) counts: #P_N/N³ = 0.152 (N = 22), 0.170 (N = 24, R2's
+  table) — against vol K ≥ 1.56; local growth exponent 4.2–4.4 at N = 21..24; holes of conv(P_N): 8–10 % of its lattice
+  points, none deeper than 0.93 (Euclidean) inside the hull for any N ≤ 24.
+* New observation (mine): the error of Lemma 11.68 is a **coboundary**: with c(x,c₁) = A(x,c₁) + B(x),
+  δ(x¹,x²) = c(x¹) + c(x²) − c(x¹∘x²), because the concatenation inherits B from x¹ and A from x².  So
+  q̂ = (h,g) + A + B is exactly additive for ALL bridges.  Wrote `r9_cobound.c`; N ≤ 9: 142 129 pairs, 0 failures;
+  N ≤ 13 launched in two parts.
+* Consequences worked out by hand (to be written in the report): (h,g)(x)+A+B)/(N+3) ∈ K^br exactly for every
+  bridge; one-sided rate 168/(N+3) → 108/(N+3) (the two error vectors are componentwise nonnegative and enter
+  with opposite signs); without coordinates every bridge has a point of K^br within 30/(N+3) of ((h,g)+m)/(N+3),
+  m = (½, 9/2, 7; ½).
+* Scratch copies of `Scattering.lean` (exit 0; 8 declarations, axioms [propext, Classical.choice, Quot.sound]) and
+  `TwoRoundsExpected.lean` checked with `lake env lean` (outputs in `lean/`).
+* Item 3(d): `diff ws_R4/lean/TwoRoundsExpected.lean EXPORT/proofs/Frontiers/TwoRoundsExpected.lean` = +6 lines of
+  provenance, −5 lines (a blank line and the four `#print axioms`); the four are in `AxiomAudit.lean` lines 507–510;
+  `TwoRounds.lean` is byte-identical to 5ed4072.  Their description is exact.
+
+### 00:20 — item 2(d) "M4 is not a sharpening": checked line by line; **they are right, we were wrong**
+* Read OURS `docs/workstreams/G_REPORT.md` (unchanged since 5ed4072) lines 53–152; `SCI-REV-0006.md` in full;
+  `A2_REPORT.md` lines 262–295, 640–665; theory report Theorem 4.6 / Corollary 4.7 (5ed4072) and Theorem 11.36
+  at 5ed4072 (line 2902) and 658b77f (export line 3119).
+* G_REPORT §2.1(c), lines 97–110: `I_A ≤ Ī(i) = Σ d̄(p)²`, `Ī(m) = ⅓ sin²(θ/2) b² m³(1+O(1/m))`, proof = "distance to
+  the axis ≤ distance to the axis atom; atoms two bonds apart at fixed distance 2b sin(θ/2); triangle inequality";
+  attained asymptotically by "one gauche next to the axis followed by all-trans (an arm almost perpendicular to
+  the axis)", `max I/m³ = 0.256 → 0.228` against `sin²(θ/2)/3 = 0.2264`.  §2.1(d), line 115:
+  `c_i^ver = 2Λ sin(δ/2)√Ī(m_i) ≤ (2/√3) sin(δ/2) sin(θ/2)·Λ b m_i^{3/2}(1+O(1/m_i)) = 0.824…` (θ = 111°, δ = 120°).
+* A2 (ours): `I_arm ≤ (b² sin²(θ/2)/3) m³(1+o(1))` by "largest end-to-end distance of j bonds"; attained by "an
+  all-trans arm joined through one gauche torsion"; `sup 2√(2I_red) = 2√2/3` at the centre, `4/3` far from it.
+  Same bound, same argument, same extremal conformation.  `2√2/3` = G's formula at (tetrahedral, δ = 180°);
+  `0.824` = G's formula at (111°, 120°); `4/3 = √2·2√2/3` is the looser form `2√(2I_red)` of Theorem 4.6(d) where the
+  verified constant uses `min(I_A, I_B)` — i.e. far from the centre our number is a *weaker* bound than theirs.
+* Own numerics (`r9_lever.py`, `out/lever.txt`): 0.824126; 0.942809; G's `Ī(m)/m³` nonincreasing for all m ≤ 2·10⁵,
+  `2 sin60°√Ī/m^{3/2} = 0.898, 0.832, 0.825` at m = 10, 100, 1000 (so "≥ 0.824 at every position" holds); kinked arm at
+  θ = 111°: 88.23° to the axis, `I/m³ → 0.22618` (0.1 % below the bound; two gauche torsions give sin² = 0.999999);
+  exhaustive over the first 7 arm torsions at m = 200: 0.22786 (G reports 0.228); tetrahedral: exactly 90°, → 2/9.
+* Also false in OUR report: A2_REPORT line 287–288 "Theorem 11.36's `c_i ≥ 0.824…` … is confirmed and is not sharp in
+  the constant" — for the report's parameters 0.824 IS the sharp limit.
+* The coordinator published the linked correction while I was working (SCI-RES-0007 §2, commit 242f771, 23:48;
+  head note on SCI-REV-0006; DEAD_ENDS SD38).  Read after my own check.  It is right.  Not covered by it:
+  (i) the `4/3` (a looser bound, not a second sharp constant); (ii) that the argument and the extremal conformation
+  were in G §2.1(c) too; (iii) `A2_REPORT.md` itself carries no note (lines 40, 286–288, 645 (W6's suggested wording
+  "sharp constant `2√2/3` at the centre of a tetrahedral chain"), 661, 739).

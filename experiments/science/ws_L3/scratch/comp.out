@@ -11,6 +11,8 @@
 'ScienceL3.massW_compensated' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lemma3_compensation' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lemma3_compensation_bernoulli' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.window_of_equal_marginals' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL3.lemma3_compensation_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.window_of_site_odds' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lemma0_window' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.lemma0_window_lipH' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -25,6 +27,6 @@
 'ScienceL3.lemma2_dens' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.densW_coneW' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-real	0m11.395s
-user	0m11.995s
-sys	0m3.077s
+real	0m19.845s
+user	0m13.305s
+sys	0m2.382s

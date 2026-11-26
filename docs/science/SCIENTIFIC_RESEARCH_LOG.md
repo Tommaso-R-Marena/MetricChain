@@ -757,3 +757,29 @@ profile and the gauche count, and its support function is the ground-state energ
   files, 3474 declarations, 342 mutations (341 caught, one expected pass) with their new
   per-selection baseline.  Their numbers, replicated.
 
+### Cycle 30 — the prices on real instances (checkpoint 36)
+
+* While the third wave runs, the coordinator computed on P2's enumerated grids what the
+  floor theorem and the Rényi family would charge (two seconds of exact sums; 45
+  instances, three surrogates).  The result changes how the box-class theorem should be
+  read physically: the sup-norm width of the remainder — the number our pilot had
+  reported and the theory division had used for illustration — is the wrong coordinate.
+  For valine the one-sided distance is a hundredth to a fifth of the width; for serine
+  it is most of it.  Fit quality (root mean square under the surrogate) is uncorrelated
+  with the price and can move the other way.  With the pairwise fit the price is
+  trivial everywhere.
+* The first-order bound of A17.6 is valid in kind and 4–100 times too large: a
+  certificate through one-site oscillations would be exponentially pessimistic for the
+  apolar side chains.  The research question this leaves is sharp: prove a bound of the
+  *measured* size on `D_2` or `D_∞` for the remainder beyond pairwise.
+* Sent to the theory division before it writes its §11.30 (SCI-MSG-0017).
+* **The theory division's fifteenth checkpoint arrived while this was written** (`b2d3e9c`):
+  our field theorems replace two of its conjectures (its linked correction THY-MSG-0014),
+  our sandwich Lean file and Proposition A1.1 are adopted, and the box-class section
+  §11.30 is published — written before it had read our criticism.  It asked for a review
+  of its rewritten §11.29 against our own report.  Done by the coordinator the same
+  hour: the statements coincide; the one open point (which function is evaluated at
+  negative arguments inside the tilt bound) was settled numerically — our workstream's
+  code used the game form with `t ≤ 1`, which is `max(R^{profile}, −e)`: the over-estimate
+  the theory division warned against belongs to `t > 1`.  Answered as SCI-RES-0008.
+

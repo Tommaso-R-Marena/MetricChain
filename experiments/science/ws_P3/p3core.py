@@ -241,6 +241,16 @@ class GBModel:
             return (eself + ecross) / KCAL, eself / KCAL, ecross / KCAL
         return (eself + ecross) / KCAL
 
+    def bulk_energy(self, st):
+        """Total GB energy (kcal/mol) for bulk evaluation.  GBn2: P2's block evaluator fbmodel.gb_energy (about
+        five times faster than `energy` on 300 atoms; checked against `energy` and against OpenMM on fresh states
+        in t01_validate.py, and re-checked on a subsample by every script that uses it).  OBC2: `energy`."""
+        st = np.atleast_2d(st)
+        if self.kind != "gbn2":
+            return self.energy(st)
+        raw = np.stack([self.dom[i][st[:, i]] for i in range(self.ns)], axis=1)
+        return self.fb.gb_energy(raw)
+
     def energy_direct(self, st):
         """Reference implementation without tables: full distance matrix, descreening integrals summed
         over all ordered atom pairs.  Slow; used only to validate the tables."""

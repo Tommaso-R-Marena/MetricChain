@@ -1,0 +1,35 @@
+import Mathlib
+import proofs.Frontiers.QueryLowerBound
+
+/-!
+# Theorem A of workstream F: the adaptive bound survives an exact one-body marginal oracle
+
+Science division, workstream L3.  Source: `docs/science/workstreams/SF_REPORT.md` §2.0–§2.2
+(setting, Lemmas 0–3, Theorem A).
+
+This file imports Mathlib and, read-only, the theory division's
+`proofs/Frontiers/QueryLowerBound.lean` (for `MetricChain.QueryAlgorithm` and the packing bound
+`MetricChain.expected_queries_ge_packing`).  Parts 1–6 are repeated verbatim from
+`Compensation.lean` (same directory; that file imports Mathlib only), because the files of this
+directory cannot import each other.  New here:
+
+* Part 7 — **Lemma 1 (a)** in the oracle-indexed model of workstream L1
+  (`lemma1a_weighted`, `lemma1a`): an oracle algorithm is a family `alg ω o` of query algorithms
+  indexed by the seed `ω` and the oracle's answer `o`; on the instance `g` it runs
+  `alg ω (O g)`.  Derived from `MetricChain.expected_queries_ge_packing` applied to the class
+  restricted to the instances with the oracle answer of `g₀`.
+* Part 8 — the same in the weights, for the one-body marginal oracle on the cube
+  (`oracle_packing_weights`); the family of alternatives of Theorem A (cyclic averages of dips,
+  `barW`) with its invariance, mass, density, membership of the class and the counting bound.
+* Part 9 — **Theorem A, the every-`n` statement** (`theoremA_group`, `theoremA_fin`,
+  `theoremA_fin_div`).
+-/
+
+set_option autoImplicit false
+
+noncomputable section
+
+namespace ScienceL3
+
+open Finset
+

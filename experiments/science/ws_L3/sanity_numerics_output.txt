@@ -12,10 +12,4 @@ S5 Theorem A, every finite ingredient, 184 parameter sets over 7 site groups (Z2
     Z2xZ2, 0.3, 1, 0.2, 1, 2.444, 0.2571, 74.89, 2.237, 4, 16, 4
     S3, 0.3, 1, 0.2, 4, 2.186, 1.39, 54.6, 1.463, 15, 90, 15
     S3, 0.7, 3, 3, 4, 1.538, 2.01, 48.3, 0.9327, 15, 90, 15
-Traceback (most recent call last):
-  File "/home/user/MetricChain/experiments/science/ws_L3/sanity_numerics.py", line 330, in <module>
-    check_a16()
-    ~~~~~~~~~^^
-  File "/home/user/MetricChain/experiments/science/ws_L3/sanity_numerics.py", line 296, in check_a16
-    sstar = math.exp(1 / eta - 1 - U0)
-OverflowError: math range error
+S6 A16.5 [20000 cases]: identity (a): rel. error 3.77e-15; concavity violation -9.23e-10; grid max of f minus f(clipped level), all t* > 0: 5.74e-16; rearrangement sum H(rho) - sum H(rho') over 20000 dominated pairs: max 3.55e-15

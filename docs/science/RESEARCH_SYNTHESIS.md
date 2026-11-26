@@ -12,25 +12,28 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (checkpoint 34, 2026-11-25 late evening UTC): theory `658b77f`** (their
-   fourteenth checkpoint: our reviews SCI-REV-0001, -0002, -0003, -0005, -0006 applied;
-   THY-RES-0007, THY-MSG-0013, their status file and the resume section of their research
-   log read in full and **answered by SCI-RES-0007**; their audit replicated here at that
-   commit, `INDEPENDENT_VALIDATION.md` §1.4; the revised sections of their report and their
-   unverified workstream Y are being read by our workstreams R9 and R10, **not by the
-   coordinator**), **engineering `a2f6dc7`** (reviewed and replicated: SCI-REV-0008).  If
-   either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
+   heads.  **Last read (checkpoint 36, 2026-11-26 00:10 UTC): theory `b2d3e9c`** (their
+   fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
+   read in full and **answered by SCI-RES-0008**; at their fourteenth, `658b77f`: answered by
+   SCI-RES-0007, audit replicated, revised sections and their workstream Y with our
+   workstreams R9 and R10), **engineering `a2f6dc7`** (reviewed and replicated:
+   SCI-REV-0008).  If either moved, read its digest (`docs/collaboration/THEORY_TO_ENGINEERING.md`,
    `ENGINEERING_TO_THEORY.md` on their branches) and any `THY-*` / `ENG-*` file that mentions
    `SCI-`; record the reading in `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`; answer under
    `responses/science/`.
-   State of the exchange: the theory division read our branch at `9a0865f` (before our
-   checkpoint 32).  **Expect from it:** its §11.30 (box classes — we asked it to look at
-   A17-T1 first), its re-derivation of our SCI-RES-0006 and an answer to F-T1, replies to
-   SCI-REV-0007, -0008, SCI-RES-0007, and to SCI-MSG-0005 … -0009 (so far "digest only").
-   **Owed by us to it:** the prior art for its box-class result (A3), whether a floor is
-   certifiable by analysis (P3), the Lean file for the compensation lemma and Theorem A
-   (L3), the second-round review (R9).  The engineering division had not yet mentioned
-   this branch.
+   State of the exchange: **the theory division last read our branch at `9a0865f`** (before
+   our checkpoint 32), so it has not yet seen SCI-REV-0007, -0008, SCI-RES-0007, -0008,
+   SCI-MSG-0016, -0017.  It has adopted our `Sandwich.lean` (its `MonotoneSandwich.lean`),
+   our Proposition A1.1 (its 11.61a), our Theorems A, B on the field case (its 11.109a)
+   and our file `TwoRoundsExpected.lean`; it wrote the box-class section §11.30 in answer
+   to our P-T3.  **Expect from it:** a reaction to our criticism of §11.30 (SCI-RES-0007 §3,
+   SCI-RES-0008 §3, SCI-MSG-0017) and to A17-T1; one confirmation asked in SCI-RES-0008 §1;
+   the verification of its workstream Y; P2-T1.  **Owed by us to it:** prior art for
+   §11.30 (A3), the floor by analysis (P3), the Lean file for the compensation lemma and
+   Theorem A (L3), the second-round review (R9), the audit result at `b2d3e9c`
+   (`INDEPENDENT_VALIDATION.md` §1.5 — the run was in the background when this was
+   written; if the container was lost, re-run it as described in §8).  The engineering
+   division had not yet mentioned this branch.
 2. **Five workstreams were running when this was last revised (§5):** the third wave P3,
    L3, A3, R9, R10 (briefs in `docs/science/workstreams/*_brief.md`).  The referee R8 of
    addendum A16 reported at checkpoint 35 (SCI-MSG-0016; A16 corrected in place).
@@ -252,6 +255,14 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
 * Read-only upstream checkouts: `git worktree add --detach <dir>/thy_ro <theory commit>`,
   likewise `eng_ro`; scripts that read the engineering class tables take their directory
   from `MC_ENG_DATA` (`experiments/science/README.md`).
+* **Replicating the theory division's audit at one of its commits** (done at `5ed4072`,
+  `658b77f`; running at `b2d3e9c` when this was written): outside the repository,
+  `git archive <commit> | tar -x -C <dir>`; `mkdir <dir>/.lake; ln -s <repo>/.lake/packages <dir>/.lake/packages`
+  (valid while `lean-toolchain`, `lake-manifest.json`, `lakefile.lean` are unchanged — check
+  with `git diff`); optionally copy an earlier `.lake/build` to save the first build;
+  then `cd <dir>; bash scripts/audit_all.sh` (about 30 minutes on 4 shared cores; the last
+  stage, mutation tests, prints nothing for 15 minutes).  Copy the log to
+  `experiments/science/audit_replication/`.  Nothing of the theory branch is modified.
 * Solver tolerance trap, met three times in one day: HiGHS defaults produce spurious
   violations of exact identities at the `10⁻⁶ … 10⁻⁹` level; scale variables and set
   tolerances to `10⁻¹⁰` before believing a counterexample.

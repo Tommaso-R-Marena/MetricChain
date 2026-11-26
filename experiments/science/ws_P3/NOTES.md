@@ -99,3 +99,76 @@ So what must be bounded are ANCHORED mixed differences (from x0_T to x_T) at con
 from the anchor only before min T.
 
 Next: prototype of the term-by-term (Faa di Bruno) bound at orders 2, 3, 4 and its ratio to exact.
+
+## 01:30-03:10  Term-by-term bound: prototype, the negative result, and the way out
+
+* `dfun.py`: closed-form derivatives (tanh rescaling, ln B, kernel h(w; r) = e^{-w/2} eta(D)); the
+  kernel derivatives are d^k h/dw^k = (2/r) zeta_k(D), zeta_k = sqrt(D) eta_k(D), with the
+  recursion eta_{k+1} = -eta_k/2 - D eta_k' and an explicit monomial representation
+  (exact rational coefficients; starting from the simplified eta_1 = -(1+D) e^{-D} u^{-3/2}/2 so
+  that every monomial carries e^{-bD}, b >= 1).  Self-test vs mpmath numerical derivatives: 6e-16.
+* `termwise.py` + `x02_termwise.py` (sampled suprema, exploration): per-subset bound, class mode.
+  RESULT [N]: the SELF part is bounded within x1.3-3.3 (order 3) and x2-7 (order 4) of its exact
+  constant; the CROSS part only within x80-270.  Total certified/measured at third order:
+  S3/E x102, S4/E x102, V6/E x469, L6/H x477.
+* `x03_breakdown.py`: for V6/E, T=(2,3,4) (exact total 5.8e-3): fixed-fixed pairs 0.67; pairs with a
+  host in T 1.8; site-site 0.4 kcal/mol; all three partition types (h' D_ijk, h'' D_ij D_k,
+  h''' D_i D_j D_k) contribute comparably.  REASON: the cross sum runs over O(N * 30) pairs with
+  |q_p q_q| and no sign; exactly it is a sum of screened interactions between near-neutral groups
+  (C=O, N-H, CH3) which cancels to ~1 % (self part alone -640 kcal/mol, cross +600, total -37 for V6).
+  A term-by-term bound cannot see that cancellation.  Each analytic refinement that keeps signed
+  sums at a reference gains one factor of the small parameter (relative change of a Born radius
+  under one rotamer flip) -- which is exactly what one more order of the anchored expansion gains.
+* DECISION: certified truncated anchored expansion.  Evaluate g exactly on the Hamming ball of
+  radius m-1 about an anchor (polynomially many evaluations: no cancellation lost), bound the
+  remainder by the term-by-term bound at order m summed over all m-subsets.  The term-by-term
+  sums decay by a factor 30-100 per order on the strand, so the x250-800 looseness is paid once,
+  at the highest order.
+* `encl.py`: rigorous enclosures (mpmath.iv, 80 bits): interval Taylor series for ib and ln B on
+  cells of I (Taylor form of order 2 about the cell midpoint), monomial interval evaluation of
+  zeta_k on cells of ln D with the Taylor form d zeta_k/d ln D = -zeta_{k+1} (order 3).
+  Enclosure/sampled-max ratios 1.00001-1.0001.  Tables cached in `cache/`.
+* `gfbound.py`: anchored-mode bound summed over ALL subsets of order m by generating functions
+  (bivariate elementary symmetric polynomials x partial Bell polynomials); instance types A/N/X.
+* `t02_gf.py` on V5/E (`logs/t02_gf_V5E.log`), anchor = argmin E:
+    order 3: Gamma_3 = 9.04 kcal/mol (self 0.166, cross 8.87); exact sum of anchored constants 0.0114 -> x794
+    order 4: Gamma_4 = 0.254 (self 0.0022);                    exact 6.2e-4  -> x412
+    order 5: Gamma_5 = 0.00233;                                exact 9.5e-6  -> x244
+  generating function == sum over subsets to 2e-16; bound >= exact in all 16 subsets.
+
+## 2026-11-26 00:00-00:20  The certified pipeline exists and passes on small instances
+
+* `pwmodel.py`: known-part tables on the domain, coordinate-descent anchor, Hamming-ball evaluation
+  -> anchored terms d_U (inclusion-exclusion on full sub-grids), banded lower/upper pairwise models
+  (far pairs: additive split with exact row minima; terms of order 3..m-1: exact two-site
+  minorants/majorants on the in-band pair with the smallest slack), transfer-matrix ln Z, max-plus DP,
+  exact backward sampling.
+* `run_floor.py`: the whole chain for one instance; if the domain is small it enumerates E and checks
+  m_- <= E <= m_+ at EVERY state.
+* `logs/floor_V6E.log` (Val6 strand, 729 states, anchor = argmin E):
+    m=3:  Gamma_3 = 12.96 kcal/mol = 21.7 kT, ball 73 evals;  cost number Z(m_-)/Z(E) - 1 = 2.8e9   (useless)
+    m=4:  Gamma_4 = 0.432 = 0.73 kT, ball 233 evals; deterministic bracket 1.45 nats; cost 1.07;
+          Hoeffding bracket (N = 20000, delta = .05) 0.031 nats
+    m=5:  Gamma_5 = 0.0066, ball 473; deterministic bracket 0.022 nats; cost 0.011
+  no violation of m_- <= E <= m_+ in any state; ln Z from the transfer matrix = enumeration to 1e-13;
+  truth inside every bracket.
+* Val8/PPII, m=4: 577 evaluations (8.8 % of 6561), Gamma_4 = 0.717 kcal/mol, cost 2.33,
+  Hoeffding 0.059 nats, sample-range bound 0.027 nats; 576 distinct sampled states.
+* `t03_fp.py` (`logs/t03_fp.log`): g in double precision vs mpmath at 40 digits from the same inputs:
+  worst 1.8e-12 kcal/mol (V6/E, 108 atoms), 5.3e-13 (S4/H); descreening integrals from the tables:
+  6e-15 nm^-1.  Allowances used in the certificates: 1e-7 kcal/mol per evaluation of g, 2e-10 nm^-1
+  per table difference.
+* Bulk evaluations use P2's block evaluator through `GBModel.bulk_energy` (1.9 ms/state for
+  Val20, mine 11.6 ms); every run re-checks 48 random states against my own evaluator (< 1e-8).
+* Site-resolved penalties (`GFBound.site_penalties`, `--siteres`): gamma_i = (1/m) sum_{T ni i} chat_T,
+  n+1 generating-function evaluations.  Val6/E, m=4: gamma = (.043 .074 .099 .099 .074 .043);
+  deterministic bracket 0.015 nats instead of 1.45, cost number 0.008 instead of 1.07 -- the floor
+  "that is a function" is far better than the constant, because pi is concentrated near the anchor.
+* Background jobs started 00:11: `batch_A.txt`, `batch_B.txt` (101 runs of run_floor over Val, Leu,
+  Ser, Phe, Lys, LKSE; constant-Gamma form, m = 3, 4, 5) -> `logs/floor_batch_{A,B}.log`, `out/floor_*.json`;
+  `run_tight.sh` (analysis-only class-mode bound per triple vs P2's enumerated c_ijk) ->
+  `logs/t04_tight_*.log`, `out/tight_*.json`.
+* First tightness numbers [M, rigorous bound vs P2 enumeration], ratio of sums over triples:
+  Val/E x423-485, Val/P2 x206-218, Leu/E x1320-1420, Leu/P2 x306-382, Leu/H x280-706;
+  the self part alone x2-30.  P2's constants are reproduced by my own enumeration
+  (x01: S3/E 4.026e-3, V6/E max 5.850e-3, sum 3.075e-2).

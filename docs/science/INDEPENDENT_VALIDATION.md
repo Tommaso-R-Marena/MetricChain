@@ -139,6 +139,17 @@ blocks XXII–XXIII, XIV.5, XX.5, XXI.6, DEAD.25–27.  *Kind of check:* a re-ru
 script on a third machine — a replication of the computation, not a review of what the
 statements say (workstream R9 reads two of the new Lean files against the prose).
 
+### 1.5 The theory division's audit at its head `b2d3e9c` (fifteenth checkpoint)
+
+Started 2026-11-26 00:01 UTC on this machine, the same way as §1.4 (their script,
+unmodified, on an export of their tree; the build directory of the run at `658b77f`
+re-used).  **Still running when checkpoint 36 was committed**; the result is added at the
+next checkpoint.  New at this commit: `proofs/Frontiers/BoxClass.lean` and
+`MonotoneSandwich.lean` — the latter is our `experiments/science/ws_L2/Sandwich.lean` as
+published at `9a0865f`: compared with `diff` by the coordinator, the only differences are
+their provenance paragraph (8 lines) and the removal of our closing `#print axioms` block
+(71 lines).
+
 ## 2. Reviews
 
 | id | object | by | state |
@@ -162,6 +173,24 @@ statements say (workstream R9 reads two of the new Lean files against the prose)
   weights) to `7·10⁻¹⁵`.  `MacroRatio.lean` compiled here from a scratch copy (exit 0;
   nine statements; standard axioms).  **Not replicated:** Theorem 11.107's numbers,
   Theorem 11.108 (limit and numbers).  §11.29: with workstream F.
+
+* **Theory report §11.29 as rewritten at `b2d3e9c` (their Theorem 11.109a, Proposition
+  11.109b — our workstream F's results in their words) — reviewed by the coordinator
+  against `SF_REPORT.md` at their request** (SCI-RES-0008 §1): the statements coincide
+  item by item (compensation lemma, the excess on the cone law, Theorems A and B with
+  their constants, the tilt inequality, the bracket).  Their `U_γ(e) = inf_λ R̄_γ(e − c_γ(λ); θ − λ)`
+  with `R̄ = max(R, −e)` is the statement our code computed: the game form with `t ≤ 1`
+  vanishes at `t = 1` for every additive base (nine cases), equals the plain-dip profile
+  form for `−a_γ ≤ e ≤ 0` (15 cases, to `10⁻¹²`), equals `−e` below, and equals the closed form
+  from balls on the uniform cube (`experiments/science/pi_inference/tilt_negative_argument_check.py`,
+  which imports the workstream's single-letter code).  *Kind of check:* a reading against
+  our own report and one numerical check; not a re-proof.  **Not verified:** that their
+  `R_λ` of Theorem 11.78(b) equals the plain-dip profile form at an additive base with a
+  field; Theorem 11.78(b) itself.
+* **Theory report §11.30 (box classes; their Theorem 11.110, Corollary 11.111) — read in
+  full by the coordinator** (SCI-RES-0008 §3), after an independent re-derivation of the
+  same statements from their preview (addendum A17 (0); three numbers re-computed): no
+  error found.  Not read: `BoxClass.lean`, harness block XXIV.
 
 ### Originality reviews (prior art; not reviews of correctness)
 

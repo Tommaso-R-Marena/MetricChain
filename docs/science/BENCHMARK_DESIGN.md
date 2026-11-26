@@ -180,7 +180,7 @@ is exhaustive only to `n ≈ 5` and by enumeration of the cube to `n ≈ 24`.
 *What success would not show:* anything about known parts, about a datum with a
 tolerance, or about an instrument (the datum is a mean *residual* energy).
 
-### B10 — which divergence does a fitted surrogate control?  (tests H11; proposed at checkpoint 34; the planted control (ii) run by the coordinator, the real instances (i) not run)
+### B10 — which divergence does a fitted surrogate control?  (tests H11; proposed at checkpoint 34; the planted control (ii) and a part of (i) — least-squares fits on 45 real instances — run by the coordinator)
 
 *Object.*  For a true energy `g` and surrogates `ĝ` whose Gibbs measure can be sampled
 exactly (exact enumeration at small size makes every quantity below computable without
@@ -264,4 +264,5 @@ definitions against the reference checker (their E-1); replication on independen
 | B9 (H9), the coordinator's own checks only | all 65 534 supports of `Q_4` and 8 000 random supports of `Q_5`, `Q_6` (clipped-level profiles); 1 398 random members; ten exact plateau twins to `n = 2000`; **no adversarial search, no second implementation yet** (workstream R8 is asked for a brute force over general members) | `experiments/science/pi_inference/energy_isoperimetry_check.py`, `plateau_twin_check.py` |
 | H10 | independent linear programmes for Theorems 11.105, 11.106 (400 + 24 instances) | `experiments/science/pi_inference/ratio_duality_replication.py`; SCI-RES-0005 |
 | B10 (H11), planted control only | additive bulk plus a narrow basin on the 12-cube; product surrogates fitted variationally, by least squares, by likelihood; exact sums: the ranking by root-mean-square error and by variational gap is the reverse of the ranking by `D_2`, `D_∞` of the truth from the surrogate (4 parameter pairs) | `experiments/science/pi_inference/surrogate_direction_check.py` (+ log, JSON); addendum A17 |
+| B10 (H11), real instances, part | 45 enumerated rotamer instances of P2 (Val, Leu, Ser; 2–12 residues): `D_1`, `D_2`, `D_∞` of the truth from the known part alone and from its one-body and pairwise least-squares fits, against RMS error, sup-norm width, variational gap and the first-order bound `Σc_i²/2` (135 rows).  **Not run:** the variational and the likelihood fits of the design; charged side chains | `experiments/science/pi_inference/surrogate_divergence_real.py` (+ log, JSON); addendum A17 (6); SCI-MSG-0017 |
 | B2, B5 | nothing yet | — |
