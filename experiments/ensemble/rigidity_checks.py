@@ -15,11 +15,17 @@ R5  The explicit dual certificate f(p) = sum_e prod_i (l_e(p)^2 - l_e(x_i)^2)^2 
     every zero found by multi-start minimisation has the edge lengths of one of the conformers.
 R6  Two toy feature maps R^2 -> R^4: connected matroid (no splice on the variety) and a direct sum
     (every splice realisable).
+R7  "No chimera" is sufficient, not necessary (internal review ER1, finding F2): K_4 plus a vertex of
+    degree two, an explicit pair of conformers and perturbations of it.  Three chimeras are realisable,
+    every other non-constant splice is not, and a linear programme over the realisable splices shows that
+    every ensemble with the eight edge-length laws puts no mass on a chimera.
+R8  Genericity is needed in Theorem E7 already on the line (review ER1, finding F14): the 4-cycle with
+    conformers (8,0,3,5) and (8,3,5,0); both complementary splices close up and form a twin ensemble.
 Exit code 0 iff every check passes.
 """
 import itertools, sys
 import numpy as np
-from scipy.optimize import least_squares
+from scipy.optimize import least_squares, linprog
 
 rng = np.random.default_rng(20261127)
 
@@ -189,8 +195,13 @@ def test_R5():
         l = sqlen(v.reshape(n, d), E)
         return (l - L[0]) * (l - L[1])
     hits = {0: 0, 1: 0}; other = 0; zeros = 0
-    for _ in range(400):
-        res = least_squares(resid, rng.normal(size=n * d) * 1.5, method="trf", xtol=1e-15, ftol=1e-15, gtol=1e-15)
+    # 100 starts near each conformer (the zeros there are degenerate: f vanishes to fourth order) and 200
+    # random starts (review ER1, finding F6: random starts alone almost never reach conformer 1)
+    starts = [x[0].ravel() + 0.2 * rng.normal(size=n * d) for _ in range(100)] \
+        + [x[1].ravel() + 0.2 * rng.normal(size=n * d) for _ in range(100)] \
+        + [rng.normal(size=n * d) * 1.5 for _ in range(200)]
+    for x0 in starts:
+        res = least_squares(resid, x0, method="trf", xtol=1e-15, ftol=1e-15, gtol=1e-15)
         if np.linalg.norm(res.fun) < 1e-10:
             zeros += 1
             l = sqlen(res.x.reshape(n, d), E)
@@ -198,9 +209,10 @@ def test_R5():
             if m0: hits[0] += 1
             elif m1: hits[1] += 1
             else: other += 1
-    return other == 0 and hits[0] > 0 and hits[1] > 0, \
-        [f"    certificate for K4, two conformers: {zeros} zeros found in 400 starts; "
-         f"{hits[0]} at conformer 1, {hits[1]} at conformer 2, {other} elsewhere"]
+    return other == 0 and hits[0] >= 20 and hits[1] >= 20, \
+        [f"    certificate for K4, two conformers: {zeros} zeros found in {len(starts)} starts "
+         f"(100 near each conformer, 200 random); {hits[0]} at conformer 1, {hits[1]} at conformer 2, "
+         f"{other} elsewhere"]
 
 
 def test_R6():
@@ -222,11 +234,102 @@ def test_R6():
                 "    direct-sum toy map (x, x^2, y, y^3): the splice of (x1,y1), (x2,y2) along {1,2}|{3,4} is G(x1,y2) (exact)"]
 
 
+def k4_pendant_pair():
+    """The review's pair: K_4 on vertices 0..3 plus vertex 4 joined to 0 and 1, in the plane."""
+    x1 = np.array([[0, 0], [2, 0], [0.6, 1.1], [1.6, -0.9], [1.0, np.sqrt(1.25)]])                 # pendants 1.5, 1.5
+    a = (25 + 9 - 6.25) / 10
+    x2 = np.array([[0, 0], [5, 0], [1.5, 1.1], [4, -0.9], [a, np.sqrt(9 - a * a)]])                # pendants 3, 2.5
+    return x1, x2
+
+
+def test_R7():
+    K4 = edges_complete(4); E = K4 + [(4, 0), (4, 1)]; n, d = 5, 2
+    out = []; ok = True
+    base1, base2 = k4_pendant_pair()
+    worst_cm = np.inf; worst_margin = np.inf; worst_mass = 0.0; worst_real = 0.0; pairs = 0; cm0 = None
+    for t in range(21):
+        x1 = base1 + (0.0 if t == 0 else 0.005) * rng.normal(size=(n, d))
+        x2 = base2 + (0.0 if t == 0 else 0.005) * rng.normal(size=(n, d))
+        L = np.array([sqlen(x1, E), sqlen(x2, E)])                     # squared lengths, 2 x 8
+        # (i) no mixed K_4 block is realisable in the plane: Cayley-Menger determinant of 4 points
+        for a in itertools.product(range(2), repeat=6):
+            if len(set(a)) == 1:
+                continue
+            worst_cm = min(worst_cm, abs(cayley_menger(L[list(a), range(6)], 4)))
+        if t == 0:
+            cm0 = worst_cm
+        # (ii) pendant lengths (r0 from conformer i, r1 from conformer j) on the block of conformer b:
+        #      realisable iff the two circles about the block's vertices 0, 1 meet
+        realisable = []
+        for b in range(2):
+            base = np.sqrt(L[b, 0])                                    # edge (0,1) is the first edge of K_4
+            for i in range(2):
+                for j in range(2):
+                    r0, r1 = np.sqrt(L[i, 6]), np.sqrt(L[j, 7])
+                    lo, hi = abs(r0 - r1), r0 + r1
+                    meets = lo < base < hi
+                    worst_margin = min(worst_margin, abs(base - lo), abs(hi - base))
+                    if meets:
+                        realisable.append((b, i, j))
+                        if (i, j) != (b, b):                           # a chimera: realise it to machine precision
+                            q = np.concatenate([L[b, :6], [L[i, 6], L[j, 7]]])
+                            worst_real = max(worst_real, realise(E, n, d, q, first=(x1, x2)[b]))
+        expect = [(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), (1, 1, 1)]
+        ok &= sorted(realisable) == expect
+        # (iii) LP: largest total chimera mass of a table v >= 0 on the realisable splices with marginal w on
+        #       every feature (the six block edges share the block colour)
+        chim = [c for c in realisable if len(set(c)) > 1]
+        for w in ((0.5, 0.5), (0.2, 0.8), (0.9, 0.1)):
+            A = []; rhs = []
+            for pos in range(3):                                       # block colour, colour of 4-0, colour of 4-1
+                for col in range(2):
+                    A.append([1.0 if c[pos] == col else 0.0 for c in realisable]); rhs.append(w[col])
+            cost = [-1.0 if c in chim else 0.0 for c in realisable]
+            res = linprog(cost, A_eq=np.array(A), b_eq=np.array(rhs), bounds=[(0, None)] * len(realisable),
+                          method="highs")
+            ok &= res.status == 0
+            worst_mass = max(worst_mass, -res.fun)
+        pairs += 1
+    ok &= worst_cm > 1.0 and worst_margin > 0.05 and worst_mass < 1e-9 and worst_real < 1e-9
+    out.append(f"    K4 + degree-2 vertex, the review's pair and 20 perturbations: realisable splices = the two "
+               f"conformers and three chimeras in {pairs}/{pairs} pairs")
+    out.append(f"    smallest |Cayley-Menger| of a mixed K4 block = {cm0:.2f} (the pair), {worst_cm:.2f} (all 21); "
+               f"smallest margin of the two-circle criterion = {worst_margin:.2f}; chimeras realised to {worst_real:.1e}")
+    out.append(f"    largest chimera mass compatible with the eight edge-length laws (LP, 3 weightings) = "
+               f"{worst_mass:.1e}: identified although chimeras exist")
+    return ok, out
+
+
+def test_R8():
+    x = np.array([8.0, 0.0, 3.0, 5.0]); y = np.array([8.0, 3.0, 5.0, 0.0])
+    E = [(0, 1), (1, 2), (2, 3), (3, 0)]
+    lx = np.array([abs(x[i] - x[j]) for i, j in E]); ly = np.array([abs(y[i] - y[j]) for i, j in E])
+    ok = list(lx) == [8, 3, 2, 3] and list(ly) == [5, 2, 5, 8]
+    twins = []
+    for a in itertools.product(range(2), repeat=4):
+        if len(set(a)) == 1:
+            continue
+        q = np.where(np.array(a) == 0, lx, ly)
+        closes = any(abs(sum(sg * l for sg, l in zip(signs, q))) < 1e-12
+                     for signs in itertools.product((-1, 1), repeat=4))
+        comp = np.where(np.array(a) == 0, ly, lx)
+        closes_c = any(abs(sum(sg * l for sg, l in zip(signs, comp))) < 1e-12
+                       for signs in itertools.product((-1, 1), repeat=4))
+        if closes and closes_c and a[0] == 0:
+            twins.append((tuple(int(v) for v in q), tuple(int(v) for v in comp)))
+    ok &= ((8, 2, 2, 8), (5, 3, 5, 3)) in twins
+    shared = any(lx[e] == ly[e] for e in range(4))
+    ok &= not shared
+    return ok, [f"    4-cycle on the line, x = (8,0,3,5), x' = (8,3,5,0): lengths {tuple(int(v) for v in lx)} and "
+                f"{tuple(int(v) for v in ly)}, no shared length; complementary splices that both close up: {twins}"]
+
+
 def main():
     allok = True
     for name, fn in (("R1 rigidity matroids", test_R1), ("R2 chimeras, complete graphs", test_R2),
                      ("R3 chimeras, wheel", test_R3), ("R4 negative controls", test_R4),
-                     ("R5 explicit certificate", test_R5), ("R6 toy feature maps", test_R6)):
+                     ("R5 explicit certificate", test_R5), ("R6 toy feature maps", test_R6),
+                     ("R7 identified with chimeras", test_R7), ("R8 non-generic twin on the line", test_R8)):
         ok, out = fn()
         print(f"{name}: {'ok' if ok else 'FAILED'}")
         for line in out:

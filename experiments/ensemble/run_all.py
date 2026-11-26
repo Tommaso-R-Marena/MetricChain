@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Run every numerical check quoted in docs/ensemble/ENSEMBLE_REPORT.md and store the output.
 
-Usage: python3 experiments/ensemble/run_all.py        (about ten minutes on four cores, single thread)
+Usage: python3 experiments/ensemble/run_all.py        (about fifteen minutes, single thread)
 Exit code 0 iff every script ends with PASS.  The output is written to experiments/ensemble/output.txt.
 """
 import pathlib, subprocess, sys, time
 
 here = pathlib.Path(__file__).resolve().parent
-scripts = ["exposedness_checks.py", "rigidity_checks.py", "pair_capacity_checks.py"]
+scripts = ["exposedness_checks.py", "rigidity_checks.py", "pair_capacity_checks.py", "finite_temperature_checks.py",
+           "platform_checks.py"]
 lines, ok = [], True
 for name in scripts:
     t0 = time.time()

@@ -1,0 +1,23 @@
+E11: n=6, K=40: lambda_min(sin(pi C/2)) = +0.185; max |corr(sign g) - C| = 1.8e-03 (MC error ~ 7e-04); distinct sign patterns observed: 64/64; LP: largest t with a representation nu >= t on all of the cube: 0.0109; same for skewed weights on the same conformers: 0.0046
+E11: n=6, K=80: lambda_min(sin(pi C/2)) = +0.276; max |corr(sign g) - C| = 1.2e-03 (MC error ~ 7e-04); distinct sign patterns observed: 64/64; LP: largest t with a representation nu >= t on all of the cube: 0.0141; same for skewed weights on the same conformers: 0.0179
+Cover/Schlaefli bound P(Bin(K-1,1/2) <= n-2) for one site: n=50,K=2.0n: ln P <= -0.9; n=50,K=2.2n: ln P <= -2.1; n=50,K=2.5n: ln P <= -4.9; n=50,K=3.0n: ln P <= -11.7; n=200,K=2.0n: ln P <= -0.8; n=200,K=2.2n: ln P <= -3.8; n=200,K=2.5n: ln P <= -13.0; n=200,K=3.0n: ln P <= -37.8; n=1000,K=2.0n: ln P <= -0.7; n=1000,K=2.2n: ln P <= -11.7; n=1000,K=2.5n: ln P <= -54.0; n=1000,K=3.0n: ln P <= -174.5
+E12(a): 56 (n, pair) cases, n = 2..7: mu_+ and mu_- differ exactly on the pair and are different modulo flip; failures: 0
+E12(b) [3 conformers]: rank 3; entries read 24 = rn - r(r+1)/2 = 24; exact reconstruction with three pivot rules: True
+E12(b) [soft: all sign vectors with x_{2k}=x_{2k+1} (rank 5, 32 states, random weights)]: rank 5; entries read 35 = rn - r(r+1)/2 = 35; exact reconstruction with three pivot rules: True
+E12(b) [soft: x_3 = x_1 x_2 on 3 blocks... full rank]: rank 10; entries read 45 = rn - r(r+1)/2 = 45; exact reconstruction with three pivot rules: True
+E12(b) [dependent conformers (K=6, rank 4)]: rank 4; entries read 30 = rn - r(r+1)/2 = 30; exact reconstruction with three pivot rules: True
+E12(c): Cover/Schlaefli bound for sign points NOT in general position: max(count - bound) = 0 (must be <= 0)
+E12(c): exponent beta ln(en/(beta K)) + H(beta) - ln 2 at gamma = 1/4: beta=0.05: -0.2255, beta=0.08: -0.0214, beta=0.083: -0.0025, beta=0.085: +0.0100, beta=0.09: +0.0409, beta=0.1: +0.1008
+   gamma = K/n = 1.0: largest admissible beta = 0.1086;  beta*ln(e/gamma) = 0.109
+   gamma = K/n = 0.5: largest admissible beta = 0.0940;  beta*ln(e/gamma) = 0.159
+   gamma = K/n = 0.25: largest admissible beta = 0.0834;  beta*ln(e/gamma) = 0.199
+   gamma = K/n = 0.1: largest admissible beta = 0.0730;  beta*ln(e/gamma) = 0.241
+   gamma = K/n = 0.01: largest admissible beta = 0.0562;  beta*ln(e/gamma) = 0.315
+   exact union bound at gamma=1/4, beta=0.08, K=100: ln(bound) = -1.9
+   exact union bound at gamma=1/4, beta=0.08, K=400: ln(bound) = -8.5
+   exact union bound at gamma=1/4, beta=0.08, K=1000: ln(bound) = -21.9
+   exact union bound at gamma=1/4, beta=0.08, K=4000: ln(bound) = -88.5
+
+real	0m11.925s
+user	0m6.959s
+sys	0m0.706s

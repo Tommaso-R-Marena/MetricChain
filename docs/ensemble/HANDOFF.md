@@ -34,7 +34,16 @@
    `lake env lean proofs/Ensemble/<File>.lean` after `lake build` of its imports; the full
    build of the branch takes tens of minutes on four cores.  (iii) Every number quoted in
    the report must come from a script under `experiments/ensemble/` that `run_all.py` runs.
-8. **Where the mathematics is most fragile.**  Part II of the report (genericity; real
-   against complex algebraic geometry; the two cited rigidity theorems), then Theorem E11
-   (asymptotic random-matrix input), then Theorem E12(c) (the union bound over
-   neighbourhoods).  An internal adversarial review was commissioned at checkpoint 1.
+8. **Where the mathematics is most fragile.**  Parts I–III have had one internal
+   adversarial review (`reviews/ER1_internal_review.md`, applied: report §7 item 6); it
+   found the theorems sound and the *sentences that summarise them* wrong in five places —
+   read `DEAD_ENDS.md` ED12 before writing any "exactly when".  Unreviewed and therefore
+   most fragile now: Part IV (the thermal union bound and its FKG extension, E15/E15T),
+   Part V (E17), Theorem E7′ (two quantifier/edge-case errors were already found in
+   passing), and §4.4 (numerics only).  Cited theorems not read in the original are listed
+   in `OPEN_OBLIGATIONS.md` OB2–OB6.
+9. **Threshold computations.**  `experiments/ensemble/capacity_cutting_plane.py n trials
+   alpha…` decides exactly whether random conformers form a face of the cut polytope; it
+   enumerates all `2^{n−1}` states after every solve (about 20 s per decision at `n = 20`,
+   memory 1 GB at `n = 22`).  Results are appended by hand to
+   `experiments/ensemble/output_threshold.txt`; they are not part of `run_all.py`.

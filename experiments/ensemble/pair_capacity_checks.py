@@ -76,8 +76,15 @@ def test_C2():
         pred = 4 * comb(K, 3) * 0.75 ** n
         out.append(f"    n = {n}, K = {K}: spurious sign vector in {hit}/{tot} = {hit / tot:.4f}; "
                    f"4*C(K,3)*(3/4)^n = {pred:.4f}")
-        # same order of magnitude (the formula is the leading term of an expectation)
-        ok &= abs(hit / tot - pred) < max(0.5 * pred, 4 * np.sqrt(pred / tot) + 2 / tot)
+        # 4*C(K,3)*(3/4)^n is the expected number of spurious vectors of the dominant kind (a union bound),
+        # so the frequency lies below it up to sampling error, and agrees with it only where it is small.
+        # Where pred < 0.1 (the two sizes quoted in the report) the test is agreement within sampling error
+        # plus the second-order term pred^2; elsewhere only "below, and of the same order" (review ER1, F18).
+        se = 4 * np.sqrt(pred / tot) + 2 / tot
+        if pred < 0.1:
+            ok &= abs(hit / tot - pred) < se + pred ** 2
+        else:
+            ok &= 0.5 * pred < hit / tot < pred + se
     return ok, out
 
 

@@ -89,6 +89,7 @@ import proofs.Frontiers.ResolvedPenalties
 import proofs.Frontiers.GibbsRecovery
 import proofs.Ensemble.Exposedness
 import proofs.Ensemble.RenyiHeppes
+import proofs.Ensemble.ThermalUnionBound
 import proofs.AuditCommand
 
 /-!
@@ -2033,6 +2034,37 @@ end MetricChain.NonVacuity
 
 #print axioms MetricChain.NonVacuity.ensemble_exposing_certificate_witness
 #print axioms MetricChain.NonVacuity.ensemble_renyi_heppes_grid
+
+/-! ### Ensemble division, second checkpoint: the core of the thermal union bound
+(`ThermalUnionBound.lean`; report Theorem E15(c)) -/
+
+#print axioms MetricChain.Ensemble.prodE_mono
+#print axioms MetricChain.Ensemble.deficit_cons
+#print axioms MetricChain.Ensemble.thermal_union_bound
+#print axioms MetricChain.Ensemble.thermal_union_bound_density
+#print axioms MetricChain.Ensemble.thermal_union_bound_sharp
+
+namespace MetricChain.NonVacuity
+
+/-- Non-vacuity of `Ensemble.thermal_union_bound`: two sites with excitation probabilities
+`1/2`, `1/3` and the function "number of excited sites", which is monotone. -/
+theorem ensemble_thermal_union_bound_witness :
+    Ensemble.prodE [1/2, 1/3] (fun x => |(x.count true : ℝ)
+        - Ensemble.prodE [1/2, 1/3] (fun x => (x.count true : ℝ))|)
+      ≤ 2 * Ensemble.deficit [1/2, 1/3] (fun x => (x.count true : ℝ)) :=
+  Ensemble.thermal_union_bound [1/2, 1/3]
+    (by
+      intro p hp
+      simp only [List.mem_cons, List.not_mem_nil, or_false] at hp
+      rcases hp with rfl | rfl <;> norm_num)
+    (fun x => (x.count true : ℝ))
+    (by
+      intro pre suf
+      simp [List.count_append])
+
+end MetricChain.NonVacuity
+
+#print axioms MetricChain.NonVacuity.ensemble_thermal_union_bound_witness
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

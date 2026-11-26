@@ -136,7 +136,9 @@ def test_T2(trials=400):
             t = 1e-4
             worst_lin = max(worst_lin, abs(omega_primal(Phi, rho, xs, t) / t - kap) / max(kap, 1e-12))
         else:
-            assert omega_primal(Phi, rho, xs, 0.0) > 1e-9 or True
+            # on a finite X, kappa = infinity forces omega(0) > 0: the polyhedral function
+            # lambda -> max_y [rho(y) - lambda.(Phi(y) - Phi(xs))] is >= 0 and attains its infimum
+            assert omega_primal(Phi, rho, xs, 0.0) > 1e-9
     return worst_gap, finite, worst_lin, trials
 
 

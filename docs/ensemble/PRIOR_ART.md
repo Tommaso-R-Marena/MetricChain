@@ -14,6 +14,7 @@ of the searches logged in §6 and is not a claim of novelty.
 | Choquet theory; Karlin–Studden, *Tchebycheff Systems* (1966); Krein–Nudelman | uniqueness of representing measures on simplicial faces; principal representations of moment sequences on an interval; index of a representation | memory |
 | Rogosinski (1958), Richter (1957), Tchakaloff (1957); Winkler (1988) | extreme points of moment sets have at most `m + 1` atoms | memory |
 | de Castro–Gamboa (2012); Candès–Fernandez-Granda (2014); Schiebinger–Robeva–Recht (2018); Eftekhari–Tanner–Thompson–Toader–Tyagi (2021) | dual certificates for sparse (non-negative) measures from generalised moments; stability in transport-type distances from a certificate, for point sources on an interval | memory |
+| Donoho–Tanner, "Sparse nonnegative solution of underdetermined linear equations by linear programming", PNAS 102 (2005) 9446–9451; Bruckstein–Elad–Zibulevsky, IEEE Trans. Inform. Theory 54 (2008) 4813–4820 | the face criterion for the unique non-negative solution of an underdetermined linear system — the finite form of E1(a); **pointed out by the science division (SCI-RES-0026 §2(a)), which found them by a search and cites them from summaries** | summary (through the science division) |
 | quantum analogue: Linden–Popescu–Wootters (2002); Chen–Dawkins–Ji–Johnston–Kribs–Shultz–Zeng (2013) | states uniquely determined by local marginals; relation to unique ground states of local Hamiltonians | memory |
 | science division, `INFERENCE_LIMITS.md` §8 | the *bounding* side: a multiplier `λ` and a certified maximum bound an average over all ensembles with given data | full (their file at `2b4ccdf`) |
 
@@ -34,13 +35,21 @@ stability) is classical convex geometry.
 **Classification.**  (a), (b): linear-programming duality — known technique, the statement
 (the identification constant as the least norm of a sharp energy in the span) is a
 formulation we did not find.  (c): the dictionary with robust optimality under a residual
-class is new as a statement (not found); its mathematics is two lines given Theorem 2.4.
+class was not found in print; its mathematics is two lines given Theorem 2.4, and the
+internal review ER1 classes it, rightly, as a formulation.
 
 ## 3. Theorem E3
 
-Not found.  Elementary given Kantorovich–Rubinstein duality.  The independence of the
-first-order constant from the weights is implicit in any local analysis of sparse recovery
-(the tangent cone depends on the support only).
+| source | what it has | level |
+|---|---|---|
+| Chandrasekaran–Recht–Parrilo–Willsky, "The convex geometry of linear inverse problems", Found. Comput. Math. 12 (2012) | recovery error at most `2δ/ε` when `‖Az‖ ≥ ε‖z‖` on the tangent cone (minimum conic gain) | memory (the review ER1's; Proposition 2.2 by its recollection) |
+| Hoffman (1952) and the literature on calmness / error bounds of polyhedral systems | the constant of a polyhedral system depends on the active set only | memory |
+
+**Classification.**  Formulation (lowered from "new (not found)" after the internal review
+ER1, F11): `1/κ_μ` is the minimum conic gain of the data map on the tangent cone of the
+simplex at `μ`, measured in the Kantorovich–Rubinstein norm; that it depends on the support
+only is standard in that literature.  What is ours is the sup–min formula over
+interpolating majorants in the transport norm.
 
 ## 4. Part II
 
@@ -58,15 +67,24 @@ first-order constant from the weights is implicit in any local analysis of spars
 | Vitushkin–Henkin, "Linear superpositions of functions", Russian Math. Surveys 22 (1967) 77–125 | sums `Σ p_i·(g_i∘q_i)` with `C¹` inner functions are nowhere dense in `C(D)` | summary (statement as quoted in arXiv 1712.08286, Theorem 3.3, and by Ismailov) |
 | Khavinson, *Best approximation by linear superpositions* (1997); Marshall–O'Farrell (1979, 1983); Sternfeld (1985) | measures orthogonal to sums of univariate functions; bolts; basic embeddings | memory |
 
-**Classification.**  E4: a generalisation of Rényi–Heppes whose proof is theirs; we have
-not found the statement for arbitrary features or the sharpness for `r > 2`; "generalisation
-of a known theorem", plus a formalisation.  E5(a), E6: not found.  E5(b) is the product
+| Boneh–Shaw, "Collusion-secure fingerprinting for digital data" (CRYPTO 1995 / IEEE Trans. Inform. Theory 44 (1998)); Staddon–Stinson–Wei (2001); Fernandez–Urroz, arXiv 2103.02341 | *frameproof codes*: a code of length `ℓ` and minimum distance `d > ℓ − ℓ/c` is `c`-frameproof — the support step of E4 with `d = m − r + 1`, `c = K` | summary (the review ER1's search; the lemma is attributed to Boneh–Shaw by the third source) |
+
+**Classification.**  E4: a generalisation of Rényi–Heppes whose proof is theirs; the
+support step is, in other words, the frameproof-code lemma (found by the internal review
+ER1: a splice is a descendant of a coalition, "no chimera" is frameproof).  We have not
+found the statement for weights and arbitrary measures over arbitrary features, or the
+sharpness for `r > 2`; "generalisation of a known theorem", plus a formalisation.  Heppes'
+theorem is for `K + 1` subspaces any two of which determine the point (Fraiman–Moreno–
+Ransford, Theorem 1.1, at the level of the review's search); version 1 misquoted it.  E5(a), E6: not found.  E5(b) is the product
 lemma of Garamvölgyi–Gortler–Jordán transferred to any polynomial map, with the local
 realisability added.  E7, E8: not found; they rest on two cited theorems.  The
 identification of a *mixture* of frameworks from per-edge distance laws was searched for
 directly (§6, search 7) without a hit; unlabeled PCA is the nearest neighbour and differs
 in that its variety (a determinantal variety with an unknown generic subspace) is not
-known in advance.  E8.1: a corollary of a known theorem.
+known in advance.  E8.1: a corollary of a known theorem.  The uniqueness of a `K`-atomic
+measure on the line among non-negative measures with its first `2K` moments (first step of
+E8) is classical (Gauss quadrature; Karlin–Studden).  The converse "identified ⇒ no
+chimera" claimed in version 1 is false (counterexamples by the review ER1; report §3.2).
 
 ## 5. Part III
 
@@ -81,6 +99,7 @@ known in advance.  E8.1: a corollary of a known theorem.
 | Bai–Yin (1993) | smallest singular value of a large random matrix with i.i.d. entries | memory |
 | Sheppard (1899); Grothendieck's identity; Goemans–Williamson (1995) | `E sign g_i sign g_j = (2/π) arcsin R_ij` | memory |
 | Cover (1965); Schläfli | number of linearly separable dichotomies | memory |
+| Gardner, "The space of interactions in neural network models", J. Phys. A 21 (1988); Personnaz–Guyon–Dreyfus (1985); Kanter–Sompolinsky (1987) | capacity `α = 2` of networks with independent couplings per site; the projection (pseudo-inverse) rule, whose energy is the certificate `‖P^⊥x‖²` of E10 | memory (named by the review ER1) |
 | Krishnamurthy–Singh (2013); Chen–Epperly–Tropp–Webber (2022/2025, randomly pivoted Cholesky) | adaptive sampling of low-rank / positive semidefinite matrices | memory |
 
 **Classification.**  E9: known.  E10: a synthesis — Odlyzko's theorem (and, for our own
@@ -88,10 +107,33 @@ range, his lemma and the Littlewood–Offord inequality) plus the exposure argum
 reading "resolved by pair-averaged data with any populations, among all ensembles" was not
 found (Kueng–Tropp prove uniqueness in the Schur-independent range `K = O(√n)`; the binary
 source-separation literature has the span condition for exact factorisations with a known
-number of sources).  E11: not found; elementary.  E12: (b) is the exactness of pivoted
+number of sources).  E11(a): a synthesis — it is the classical capacity bound `α ≤ 2` of
+pair-interaction associative memories (Cover; Gardner) read through Theorem E1 (lowered
+from "new" after the review ER1, F4).  E11(b): not found; elementary.  The 3-neighbourliness
+of E9 is stated in Ziegler's lectures for the correlation polytope ("best possible"); what
+exactly Deza–Laurent–Poljak (1992) prove was not verified (obligation OB3).  E12: (b) is the exactness of pivoted
 Cholesky for positive semidefinite matrices of finite rank — known; (a) and (c) are
 formulations (not found); (c) is Cover's theorem applied to local stability, a standard
 argument of the theory of associative memories.
+
+## 5a. Parts IV and V, Theorem E7′ (second checkpoint)
+
+| source | what it has | level |
+|---|---|---|
+| DeRobertis–Hartigan (1981); Berger, Wasserman and others on density-ratio classes | ranges of posterior expectations over classes `l ≤ dμ/dπ ≤ u` (the separable envelope); threshold rule | memory (also named by the science division for theory report §11.28) |
+| Efron–Stein / martingale-difference decompositions; `L¹` Poincaré and isoperimetric inequalities on product spaces (Talagrand 1993; Bobkov–Götze 1999); influences of monotone functions equal their covariances with the coordinates | every analytic ingredient of E15: the proof is an `L¹` martingale decomposition plus monotonicity of the density | memory |
+| Holley / FKG inequalities | the population bound of E15T(a) | memory |
+| Donoho, "Statistical estimation and optimal recovery", Ann. Statist. 22 (1994) 238–270 | modulus of continuity determines minimax risk of linear functionals over convex classes; affine estimators within about `1.25` | summary (abstract and a set of lecture notes) |
+| Stewart–Gough platforms (forward kinematics: up to 40 poses for six legs); Tay (1984), body–bar frameworks; Connelly–Jordán–Whiteley (2013), generic global rigidity of body–bar frameworks | single-pose facts used in E7′ | memory |
+
+**Classification.**  E13: polyhedral geometry; the flow format is the science division's.
+E15, E15T: not found as statements (a search for total-variation bounds by one-dimensional
+marginals under a monotone-likelihood or FKG hypothesis returned nothing relevant); the
+proofs are short and use only classical tools, so "new (not found)" here means a new
+*statement in this setting*, not a new technique.  E16: not found; elementary.  E17: a
+formulation of Donoho's theory with the dual written as a certificate.  E7′: not found;
+it combines E5 with classical facts on parallel platforms.  **No search has yet been made
+for E13, E16, E7′ beyond what is listed here** (obligation OB10).
 
 ## 6. Search log (2026-11-26)
 
@@ -111,6 +153,23 @@ argument of the theory of associative memories.
    source; nearest: arXiv 2111.10834, arXiv 2305.18990, arXiv 2407.10700.
 8. "Vitushkin Henkin linear superpositions continuously differentiable nowhere dense" —
    statement found as quoted by later papers.
+
+9. "Donoho Statistical estimation and optimal recovery modulus of continuity 1.25" —
+   confirmed at the level of the abstract and of lecture notes.
+10. "total variation bounded by sum of one-dimensional marginal deviations monotone
+    likelihood ratio FKG influences" — nothing relevant to E15 (results on total variation
+    between *two product measures* only).
+
+11–16 (by the internal review ER1, 2026-11-26; sources listed at the end of
+`reviews/ER1_internal_review.md`): Irmatov's restatement of Odlyzko's theorem (additive
+form, event without linear dependence); the published abstract of Garamvölgyi–Gortler–
+Jordán; the frameproof lemma (Fernandez–Urroz, attributing it to Boneh–Shaw); Ziegler's
+lectures on 0/1-polytopes (3-neighbourliness); arXiv 1712.08286 quoting Vitushkin–Henkin as
+its Theorem 3.3 (nowhere dense in `C(D)` for compact connected `D` with non-empty
+interior); Fraiman–Moreno–Ransford (Heppes' theorem for `k + 1` subspaces).  Not settled
+by the review: the exact hypotheses of the 1967 text of Vitushkin–Henkin; Odlyzko's
+original (the PDF was unreachable); the theorem number of Garamvölgyi–Gortler–Jordán in
+the journal version.
 
 Not searched yet (obligations): quantitative Heppes (to compare with O4); "random faces of
 the cut polytope" (O1); identifiability of secant varieties of measurement varieties (O5);

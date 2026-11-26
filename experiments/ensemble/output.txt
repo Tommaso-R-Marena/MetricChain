@@ -3,7 +3,7 @@ T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiab
 T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
 T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
 PASS
-===== rigidity_checks.py (exit 0, 102 s) =====
+===== rigidity_checks.py (exit 0, 105 s) =====
 R1 rigidity matroids: ok
     K4 in R^2: rank 5, connected = True
     K5 in R^3: rank 9, connected = True
@@ -24,10 +24,16 @@ R4 negative controls: ok
     triangle: {(3,4,5),(4,5,6)} and {(3,5,6),(4,4,5)} have equal edge-length laws: True
     K4 + degree-2 vertex: 31/40 splices along the separator realised (20 nearby pairs, 20 independent pairs); agreement with the two-circle criterion 40/40
 R5 explicit certificate: ok
-    certificate for K4, two conformers: 82 zeros found in 400 starts; 1 at conformer 1, 81 at conformer 2, 0 elsewhere
+    certificate for K4, two conformers: 203 zeros found in 400 starts (100 near each conformer, 200 random); 63 at conformer 1, 140 at conformer 2, 0 elsewhere
 R6 toy feature maps: ok
     connected toy map: smallest violation of the equations of the variety over all splices = 3.01e-04
     direct-sum toy map (x, x^2, y, y^3): the splice of (x1,y1), (x2,y2) along {1,2}|{3,4} is G(x1,y2) (exact)
+R7 identified with chimeras: ok
+    K4 + degree-2 vertex, the review's pair and 20 perturbations: realisable splices = the two conformers and three chimeras in 21/21 pairs
+    smallest |Cayley-Menger| of a mixed K4 block = 16.13 (the pair), 10.04 (all 21); smallest margin of the two-circle criterion = 0.46; chimeras realised to 3.6e-15
+    largest chimera mass compatible with the eight edge-length laws (LP, 3 weightings) = 0.0e+00: identified although chimeras exist
+R8 non-generic twin on the line: ok
+    4-cycle on the line, x = (8,0,3,5), x' = (8,3,5,0): lengths (8, 3, 2, 3) and (5, 2, 5, 8), no shared length; complementary splices that both close up: [((8, 2, 2, 8), (5, 3, 5, 3))]
 PASS
 ===== pair_capacity_checks.py (exit 0, 17 s) =====
 C1 Littlewood-Offord lemma: ok
@@ -58,5 +64,43 @@ C6 adaptivity: ok
     n = 60, 5 conformers (rank 5): 285 entries read (r n - r(r+1)/2 = 285; all pairs: 1770); reconstruction error 1.0e-15
     n = 60, 8 conformers (rank 8): 444 entries read (r n - r(r+1)/2 = 444; all pairs: 1770); reconstruction error 4.4e-16
     two two-conformer ensembles: their pair-correlation matrices differ exactly at [(0, 1)]
+PASS
+===== finite_temperature_checks.py (exit 0, 15 s) =====
+F1 one-body data, cube (Theorem E15): ok
+    n = 3, b = 0.5: max over the class of TV(mu, P_a) - sum_i tau_i = +6.66e-16 (exact, 256 LPs)
+    n = 3, b = 1.0: max over the class of TV(mu, P_a) - sum_i tau_i = +4.44e-16 (exact, 256 LPs)
+    n = 3, b = 2.0: max over the class of TV(mu, P_a) - sum_i tau_i = +1.33e-15 (exact, 256 LPs)
+    n = 4..6: 360 (member, centre) pairs: max of TV - sum_i tau_i = -1.02e-01; largest ratio TV/sum tau = 0.8572
+F2 general alphabets (Theorem E15): ok
+    three-letter heterogeneous sites: 96 cases, max of TV - sum_i (1 - mu_i(a_i)/mu*_i(a_i)) = -1.60e-02
+F3 members identified by one-body data: ok
+    n = 3, b = 1: identified by one-body data inside the class <=> at most one unsaturated marginal: 60/60
+F4 the double cone (Theorem E16): ok
+    n = 4, b = 1.0: max E[M^2] over the class = 7.605870; double cone: 7.605870; largest spread of a weight on the optimal face = 1.94e-16
+    n = 6, b = 0.7: max E[M^2] over the class = 11.060055; double cone: 11.060055; largest spread of a weight on the optimal face = 9.26e-16
+    n = 5, b = 1.0: max E[M^2] over the class = 10.233839; double cone: 10.233839; largest spread of a weight on the optimal face = 1.10e-01
+        odd n: end points D_(+-theta), theta = tanh(b/2), are members and optimal; predicted spread at the all-plus state 0.110218
+F5 modulus duality (Theorem E17): ok
+    modulus duality (200 instances x 4 tolerances): largest gap 4.88e-15
+F6 an interacting reference (Theorem E15T): ok
+    three sites, chains and triangles, every bond satisfied (6 cases, exact): max of TV - sum of deficits = +2.84e-14; max of mu(x_j = a_j) - mu*(x_j = a_j) = +1.67e-16
+    complete graphs on 4..7 sites, every bond satisfied (12 references, 1200 members): max of TV - sum of deficits = +2.28e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +4.44e-16
+    chains of three sites with one bond violated by the centre (5 cases, exact): max of TV - sum of deficits = +0.965, +0.522, +0.024, +0.062, +0.294
+PASS
+===== platform_checks.py (exit 0, 97 s) =====
+P1 matroid of the legs: ok
+    d = 2, 3 legs: rank 3, connected = False
+    d = 2, 4 legs: rank 3, connected = True
+    d = 2, 5 legs: rank 3, connected = True
+    d = 3, 6 legs: rank 6, connected = False
+    d = 3, 7 legs: rank 6, connected = True
+    d = 3, 8 legs: rank 6, connected = True
+P2 planar platform: ok
+    d = 2, 4 legs: smallest residual over 84 non-constant splices = 1.946e-03 (true pose: 3.7e-15)
+    d = 2, 5 legs: smallest residual over 180 non-constant splices = 4.428e-02 (true pose: 5.8e-15)
+    d = 2, 3 legs (free matroid): splices of nearby poses realised in 20/20 cases
+P3 spatial platform: ok
+    d = 3, 7 legs: smallest residual over 80 non-constant splices = 2.366e-03 (true pose: 5.5e-15)
+    d = 3, 6 legs (free matroid): splices of nearby poses realised in 20/20 cases
 PASS
 ALL PASS
