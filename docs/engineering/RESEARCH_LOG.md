@@ -445,7 +445,7 @@ us) was read in full, and the lines of the three digests that mention engineerin
 
 ## Resume here
 
-**State at 2026-11-26 about 17:30 UTC (session 4 in progress).**  Read
+**State at 2026-11-26 about 17:45 UTC (session 4 in progress).**  Read
 `docs/engineering/DIRECTIVES.md` first: the research owner asked for a *continuous*
 research loop; a finished checkpoint is not a reason to stop.
 
@@ -458,12 +458,16 @@ research loop; a finished checkpoint is not a reason to stop.
 1. **Remote jobs that may still be running or uncollected** (detached; results wait in a
    `modal.Dict` for seven days; the apps end by themselves):
 
-       python modal_jobs/bench_collect.py --driver nested_bench --job certified1+instances1     # M-016, M-017
-       python modal_jobs/bench_collect.py --driver hetero_bench --job hetero1                   # M-018
+       python modal_jobs/bench_collect.py --driver nested_bench --job certified1+instances1+instances2+certified2   # M-016, M-017, M-020, M-021
+       python modal_jobs/bench_collect.py --driver hetero_bench --job hetero1+profile1          # M-018, M-022
+       python modal_jobs/bench_collect.py --driver nested_literal --job nested1                 # M-019 (complete)
        modal app list --json      # keys state, description, tasks; ours are named metricchain-eng-*
        modal container list --json
 
-   M-016's largest sizes (`n ≥ 32 000`) can run until 2026-11-27 04:20 UTC.  After the last
+   M-016's largest sizes (`n ≥ 32 000`) can run until 2026-11-27 04:20 UTC.  **Not yet
+   launched (ledger says so):** the 3-hour tier of M-020 (`--job instances2 --tiers l`, after
+   M-018 and M-022 have ended) and M-021 (`--job certified2`), each only while the total of
+   running containers stays below 50.  After the last
    collection: enter the measured costs in the ledger (`modal billing report`), set the
    jobs to "done", update the allocation table, and check `modal billing summary` shows
    **Billed Cost $0.00**.
@@ -478,14 +482,20 @@ research loop; a finished checkpoint is not a reason to stop.
    checker; to the geometry division the answer to GEOMETRY-REQ-0001; to the three new
    divisions how to request computation (`docs/collaboration/README.md`, "Shared
    computation"; `benchmarks/BENCHMARK_REGISTRY.md`).
-3. **Subagents in flight when this was written** (their output is reviewed, then filed and
-   committed by the coordinator — they do not commit): X-013 weighted cubes (R10-E1; files
-   under `src/metricchain_eng/weighted_cube/`, `experiments/eng/weighted_cube/`,
-   `tests/eng/test_weighted_cube.py`); GEOMETRY-REQ-0001 items 1 and 3 (files under
-   `experiments/eng/geometry_req1/`, `tests/eng/test_geometry_req1.py`).  If a session ends
-   before they report, their files are in the working tree, untracked: review them like
-   any contribution (run the tests, read the core, write the report from their code) or
-   delete them.
+3. **Subagents** (their output is reviewed, then filed and committed by the coordinator —
+   they do not commit; their reports come back as text and are filed as `REPORT.md` next
+   to their code).  **Done and filed:** X-012 the leaf-certificate checker
+   (`experiments/eng/leafcert/REPORT.md`); X-013 weighted cubes (R10-E1;
+   `experiments/eng/weighted_cube/REPORT.md`).  **In flight at 2026-11-26 17:45 UTC:**
+   (a) GEOMETRY-REQ-0001 items 1 and 3 (`experiments/eng/geometry_req1/`,
+   `tests/eng/test_geometry_req1.py`); (b) a numerical check of the theory division's
+   Theorem R on products of two site types (`experiments/eng/level_rate/`,
+   `tests/eng/test_level_rate.py`); (c) an adversarial referee of ENG-RES-0016 §2
+   (`experiments/eng/review_x014/`); (d) a producer of leaf certificates and its benchmark
+   against exact solvers (`src/metricchain_eng/leafprod/`, `tests/eng/test_leafprod.py`,
+   `experiments/eng/leafcert_bench/`).  If a session ends before they report, their files
+   are in the working tree, untracked: review them like any contribution (run the tests,
+   read the core, write the report from their code) or delete them.
 4. **Then, in this order** (the registry `benchmarks/BENCHMARK_REGISTRY.md` is the queue):
    (a) X-011 continued — slopes `u = ½, 2` (Q-10); fibres that are hard for the *bounded*
    middle design (ENG-RES-0015 §7); a literal simulation of a nested run at small `n`
