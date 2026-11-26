@@ -1434,7 +1434,7 @@ What the numbers say.
    charges for, `ρ₋ + ln(Z₀/Z)`, is a fraction of the width.  With a perfect floor the
    theory division's cost number `Z(lo)/Z(g) − 1 = e^{D_∞} − 1` is `0.07` (Val₁₂, strand) and
    `1.3·10²⁴` (Ser₆, helix).
-2. **Fit quality does not predict the price.**  Serine on the helix, known part alone: the
+2. **Fit quality does not predict the price** *(for a model far from the truth — see part (12): between fits of one family to the solvated energy it does, for `D_2`)*.  Serine on the helix, known part alone: the
    root-mean-square error under the surrogate goes *down* from `1.66` to `1.20 k_BT` between
    two and six residues while `D_2` goes from `16` to `45` and `D_∞` from `20` to `56` — thirteen
    orders of magnitude in the certified cost.  The variational gap goes from `1.7` to `4.4`.
@@ -1912,6 +1912,92 @@ Hoeffding's Theorem 3 and the *true* floor and variance (the bracket of part (7)
 measures what the brackets deliver *if* those inputs are certified, which is part
 (10)'s subject, not this one's.  Exact sampling from enumerated laws; neutral side
 chains; least-squares surrogates only.
+
+### (12) Which divergence does a fit control — and which split?  Benchmark B10 completed [M, exact sums; added after checkpoint 43]
+
+Benchmark B10 (`BENCHMARK_DESIGN.md`) predicted that surrogates of one family fitted to
+the same energy in different ways — by least squares, by the variational principle
+(least `KL(q‖π_g)`), by maximum likelihood (least `KL(π_g‖q)`) — "are close in the
+root-mean-square error and the variational gap and can differ by orders of magnitude in
+`e^{D_2}` and `e^{D_∞}`", and named its own refutation: a family of instances on which the
+root-mean-square error predicts the certified cost within a constant factor across
+fits.  `experiments/science/pi_inference/b10_fit_directions.py` (two minutes, one core):
+on the 45 enumerated product-domain instances, **two families fitted to the solvated
+energy `g = f + g_GB` itself** — a product measure (independent residues) and a
+nearest-neighbour chain — each in five ways with exact sums: `LSu` (least squares under
+the uniform measure), `LSs` (least squares under the surrogate's own measure, iterated),
+`VAR`, `ML`, and `CHI` (least `D_2(π_g‖q)`, the divergence the cost is exponential in).
+42 of the 90 (instance, family) pairs are non-trivial (`D_2 ≥ 10⁻³` for the worst fit).
+
+20. **The prediction fails for `D_2` on these instances.**  Across `LSu`, `VAR`, `ML`, `CHI`
+    the divergence `D_2` differs by `0.007` nats in the median and `0.34` at most — a factor
+    `1.4` in `e^{D_2}`, and that is the uniform-measure least-squares fit against the other
+    three; among `VAR`, `ML`, `CHI` the largest difference is `0.008` nats.  The order is the
+    same in all 42 pairs — `CHI < ML < VAR < LSu` — so the variational fit is never the
+    one that minimises the certified cost, **and it never matters**.  The reason is that
+    everything is perturbative: fitted to the solvated energy, even independent residues
+    are within `D_2 ≤ 0.34` of the truth on every instance (root-mean-square remainder
+    `≤ 0.61 k_BT`), and there all divergences agree to second order
+    (`D_2/(2KL)` between `0.81` and `1.77`; `D_2/rms²` between `0.72` and `2.44`, median `0.91`).
+    **By the benchmark's own criterion the practical content of hypothesis H11 is refuted
+    on this family for the `D_2` cost: the root-mean-square remainder under the surrogate
+    predicts it within a factor 2.5.**  What item 2 of part (6) showed — the
+    root-mean-square remainder under the model falling with chain length while `D_2`
+    rises from 16 to 45 — was for a model that is not fitted and is far from the truth
+    (the vacuum force field; item 22), and the planted control has a narrow basin by
+    construction.  Neither is a comparison between fits.
+21. **It holds for the floor.**  `D_∞` differs across the four fits by `0.51` nats in the
+    median and up to `3.2` nats (a factor 26 in `e^{D_∞}`) within one (instance, family)
+    pair; `D_∞/rms` ranges from `0.7` to `386`; the variational fit never has the smallest
+    floor and has the largest in 17 of 42 pairs (`CHI`: smallest in 26).  So the
+    worst-case quantity, the one a certificate needs, is the one a fit does not control
+    and the root-mean-square error does not predict — part (10)'s "a sampled floor is not
+    a floor" in another guise.
+22. **The split matters more than the fit — by orders of magnitude**
+    (`b10_split_table.py`).  Part (6) took the vacuum force field `f` as the model and the
+    solvent term as the remainder.  For serine with three to six residues:
+
+    | model of the solvated ensemble | `D_2(π_g‖model)` | `D_∞` |
+    |---|---|---|
+    | `m0`: the vacuum force field alone (exactly pairwise, all pairs) | `4.0 – 45` | `14 – 56` |
+    | `m1`: `f` + one-body fit of the solvent term | `0.20 – 1.3` | `2.2 – 8.6` |
+    | **independent residues, fitted to the solvated energy** | **`0.0015 – 0.096`** | `0.25 – 3.9` |
+    | nearest-neighbour chain, fitted to the solvated energy | `1·10⁻⁵ – 6·10⁻³` | `0.01 – 1.8` |
+    | `m2`: `f` + pairwise fit of the solvent term (all pairs) | `≤ 1.5·10⁻⁴` | `≤ 0.22` |
+
+    **A model with no pair interactions at all is 10 to 130 times closer in `D_2` than the
+    complete vacuum pair interactions with a one-body solvent correction, and 280 to
+    2 600 times closer than the vacuum force field alone.**  The cause is screening,
+    visible in the uniform-measure analysis of variance by order: the pair variance of
+    the solvated energy is `2.6–3.2 %` of that of the vacuum energy for serine on strand
+    and PPII (Ser₆, strand: `1.32 k_BT²` for `f`, `1.03` for `g_GB`, `0.041` for the sum — the
+    Coulomb pair term alone `1.33`, with the solvent term `0.049`) and `23–25 %` on the
+    helix; for valine it is `83–88 %` (nothing to screen) and for leucine `160–250 %` (the
+    two reinforce).  The unscreened Coulomb pair terms of the vacuum energy are, as a
+    model of the solvated ensemble, worse than nothing.
+23. **A self-consistent least-squares fit is the variational fit.**  The normal
+    equations of a least-squares fit under the surrogate's own measure are the
+    stationarity conditions of `KL(q‖π_g)`; where the iteration converged (45 of the 70
+    pairs on which it was run) its end point is the `VAR` fit to `2·10⁻⁸` in `D_2`.  It did
+    not converge in 25 (frozen or nearly frozen ensembles); a quasi-Newton minimisation
+    of `KL(q‖π_g)` did everywhere.
+
+*Consequences.*  (i) For the design of the tractable model of parts (9)–(10): fit the
+*solvated* energy, as those parts did; never use the vacuum force field as the model
+and the solvent term as the remainder for polar side chains.  (ii) For the theory
+division's "known part plus residual": the physically given split (force field + solvent
+correction) is not the one with the small residual; the class constants measured for
+`g_GB` in workstream P2 are those of the bad split, and the constants of `g − (fitted
+low-order model)` are the ones a certificate pays for (P3 bounded exactly these, order
+by order).  (iii) For hypothesis H11: demote it — fit direction is a second-order
+matter wherever a fitted model is perturbatively close; what remains true is that the
+*floor* is not controlled by any fit, and that an unfitted model can be exponentially
+expensive while looking adequate in root mean square (part (6); the planted control).
+*Limits.*  Homopeptides of valine, leucine, serine on product domains, at most
+531 441 states; two families; `VAR` and `CHI` are non-convex and were minimised from two
+starts (one start for the ten instances above 20 000 states) — the two starts agreed to
+`10⁻⁸` in the objective wherever both were run; exact sums, nothing
+sampled; no charged side chains, where the split should matter most.
 
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 

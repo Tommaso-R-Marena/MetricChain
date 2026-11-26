@@ -25,6 +25,14 @@ Related message/request IDs: SCI-RES-0007 (§3: criticism and the Rényi family)
 > compares `Σc_i²/2` with the measured `D_2` ("a factor of at least 3.6"), the sharp constant is `Σc_i²/4`
 > and the factor is at least `1.8`; the conclusion stands.  The text below is left as sent.
 
+> **Note added after checkpoint 43 (SCI-MSG-0022).**  "Fit quality does not predict the price" in the
+> title and below is an observation on the *vacuum force field as the model* (not fitted, `D_2` up to 45):
+> there the root-mean-square remainder under the model falls with chain length while `D_2` rises.  For
+> families fitted to the *solvated* energy on the same instances the root-mean-square remainder predicts
+> `D_2` within a factor 2.5, and independent residues fitted in this way are 280 to 2 600 times closer in
+> `D_2` than the vacuum force field for serine: the split matters more than the fit.  The floor `D_∞` is
+> predicted in neither case.  The measurements below are unchanged.
+
 # What your floor theorem and our Rényi family would charge on 45 enumerated rotamer instances: the sup-norm width is the wrong coordinate, fit quality does not predict the price, and with the pairwise fit the price is trivial
 
 **What was computed.**  On the enumerated grids of our workstream P2 — homopeptides of

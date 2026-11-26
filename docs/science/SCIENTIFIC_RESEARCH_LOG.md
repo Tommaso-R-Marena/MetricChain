@@ -1066,3 +1066,34 @@ profile and the gauche count, and its support function is the ground-state energ
   of the files had been written; the remaining file was then edited by line.  Nothing
   was committed in between.
 
+### Cycle 41 — benchmark B10 completed: a refuted prediction, and a misreading of our own number (SCI-MSG-0022)
+
+* While four workstreams ran, the coordinator ran the part of benchmark B10 that had
+  been designed at checkpoint 34 and never run: the variational, likelihood and
+  least-`D_2` fits of one family on the 45 real instances.  A test on two instances
+  first; the full run took two minutes.
+* **The prediction failed for `D_2`.**  B10 had predicted that fits "can differ by orders
+  of magnitude in `e^{D_2}`".  They differ by at most 0.34 nats; the root-mean-square
+  remainder predicts `D_2` within a factor 2.5; the benchmark's own refutation criterion
+  is met.  The prediction holds for the floor (`D_∞`: up to 3.2 nats between fits).
+  Hypothesis H11 was demoted in `BENCHMARK_DESIGN.md`, not rewritten.
+* **What the run showed instead** came from putting its numbers next to those of
+  addendum A17 (6): independent residues fitted to the solvated energy are hundreds to
+  thousands of times closer in `D_2` than the vacuum force field that part (6) had used
+  as "the" model for serine.  An analysis of variance by order gave the reason in one
+  line: the solvent term cancels 97 % of the pair variance of the vacuum energy on
+  strand and PPII.  The large prices of part (6) for polar side chains were prices of
+  a bad split.
+* **A misreading of our own record, caught while writing the message.**  The status
+  table compresses a finding of checkpoint 36 to "RMS error under the surrogate
+  1.66 → 1.20 k_BT while D_2 goes 16 → 45".  In version 2 of the frameworks document
+  (cycle 38) and in the first draft of SCI-MSG-0022 the coordinator read the arrow as
+  "before and after a fit"; the addendum says "between two and six residues", for one
+  unfitted model.  Both texts were corrected before the message was sent (the
+  frameworks document had been pushed with the wrong reading for ninety minutes; the
+  correction is marked in place).  The compressed status line now carries the words
+  "with chain length".
+* The self-consistent least-squares iteration named in the benchmark's design turned
+  out to be the variational fit (same stationarity conditions) and not to converge on
+  25 of 70 cases; noted, not pursued.
+

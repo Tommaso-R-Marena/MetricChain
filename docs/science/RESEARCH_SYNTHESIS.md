@@ -137,8 +137,10 @@ published statements are linked messages, never silent rewrites.
    coordinate; first-order perturbation theory from the pairwise model is accurate to
    `10⁻³ k_BT`, and a one-sided floor of a few `k_BT` plus a variance of `(0.04 k_BT)²` would
    certify that (Bennett bracket, within a factor `1.0–5.2` of the truth on 53
-   instances).  Fit quality (root mean square under the surrogate) does not predict the
-   certified cost and can move the other way.  *Prices computed by enumeration, not
+   instances).  For a model far from the truth (the vacuum force field for serine) the
+   root-mean-square remainder under the model does not predict the certified cost and
+   can move the other way; for families *fitted to the solvated energy* it does, within
+   a factor 2.5 in `D_2`, and no fit controls the floor (finding 9f).  *Prices computed by enumeration, not
    certificates; whether the floor can be proved is workstream P3.*
 2. **The exponential price is the geometry of the first-order class, not the worst-case
    quantifier [P]** (`ALTERNATIVE_FRAMEWORKS.md`; SCI-MSG-0007).  Kernel-ball classes of
@@ -269,6 +271,17 @@ published statements are linked messages, never silent rewrites.
    at order `m` the cost number of P3's certified floor falls from 16.4 to 0.064 at
    `m = 3` (Val₆ on the strand); **the twenty-residue certificate has not been re-run
    with them** (§7 item 2).
+9f. **Benchmark B10 completed: the split matters more than the fit [M; after checkpoint
+   43]** (addendum A17 (12); SCI-MSG-0022).  Independent residues and a nearest-neighbour
+   chain fitted to the solvated energy in five ways on the 45 product-domain instances:
+   **our prediction that fits differ by orders of magnitude in the certified cost is
+   refuted for `D_2`** (at most 0.34 nats between fits; the root-mean-square remainder
+   predicts `D_2` within a factor 2.5) **and holds for the floor** (up to 3.2 nats).  What
+   does differ by orders of magnitude is the split: for serine, independent residues
+   fitted to the solvated energy have `D_2 = 0.0015–0.096` against `4–45` for the vacuum
+   force field as the model — the solvent term cancels 97 % of the vacuum pair variance
+   on strand and PPII.  Hypothesis H11 is demoted accordingly (`BENCHMARK_DESIGN.md`).
+   The coordinator's scripts; not replicated.
 
 **New directions opened by workstreams**
 
@@ -371,8 +384,10 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
    completion: read `P5_REPORT.md`, check one thing, publish to theory and engineering);
    (d) a stand-alone checker of the certificate
    (request P3-E1); (e) a buried, non-homopeptide instance (request P2-E1).
-3. **Benchmark B10 in full** (`BENCHMARK_DESIGN.md`): variational and likelihood fits on
-   the real instances; a buried environment (request P2-E1 to engineering).
+3. **Benchmark B10: done in full on neutral side chains** (after checkpoint 43; finding
+   9f; SCI-MSG-0022).  What is left of it: charged side chains, where the split should
+   matter most (non-product domains: use the largest reset-closed domain at the true
+   minimiser, finding 9e), and a buried environment (request P2-E1 to engineering).
 4. **Conjecture A16.4** where it is genuinely open: an algorithm with the mean-energy
    datum on the whole class for accuracies between `ε₁ᶜ` and `a(u)`, or a lower bound
    there; the lemma for a general reference instance; the non-adaptive upper bound

@@ -60,6 +60,7 @@ was done.
 9. **[SCI-REV-0007](messages/science/SCI-REV-0007.md)** — the cost of the nested adaptive algorithm (§§11.18–11.19) re-derived and implemented independently: it stands; a certified finite-`n` separation; a biased binomial sampler to check in two harnesses.
 10. **[SCI-MSG-0016](messages/science/SCI-MSG-0016.md)** — a linked correction of our own SCI-MSG-0012/-0013 (mean-energy datum): the lemma stands, the "exact cost" claim was corrected; three questions for you (T-R8-1…3).
 11. **[SCI-REV-0008](messages/science/SCI-REV-0008.md) §5** — two small requests arising from our review of the engineering branch (the remark after Theorem 11.56; what the "7 095 840 mean runs" are).
+12. **[SCI-MSG-0022](messages/science/SCI-MSG-0022.md)** — a benchmark of ours completed: how a tractable model is fitted hardly matters, what it is fitted to matters by orders of magnitude (the vacuum force field is a worse model of the solvated ensemble than independent residues); one suggestion for §11.30 (B10-T1).
 
 **Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
 
@@ -537,7 +538,7 @@ was done.
    `AUDIT PASSED` in 29 min 43 s.  The same numbers as in their status file.  A re-run of
    their script, not a review of what the statements say.
 
-36. **What certification by reweighting would cost on real rotamer instances — measured**
+36. *[read with item 48: the vacuum force field is the worst natural split, and "fit quality does not predict the price" is about a model far from the truth]* **What certification by reweighting would cost on real rotamer instances — measured**
    ([SCI-MSG-0017](messages/science/SCI-MSG-0017.md); addendum A17 (6)).  On 45 enumerated
    instances of workstream P2 (valine, leucine, serine; 2–12 residues; ff14SB known
    part, GBn2 remainder) the divergences of the true ensemble from three surrogates, by
@@ -756,6 +757,21 @@ was done.
    serine are unaffected.  And for item 41: the pair form at order `m` cuts the cost
    number of workstream P3's certified floor from 16.4 to 0.064 at `m = 3`.
 
+48. **Benchmark B10 completed: it hardly matters how a surrogate is fitted — it matters
+   what it is fitted to** ([SCI-MSG-0022](messages/science/SCI-MSG-0022.md); addendum A17
+   (12)).  Independent residues and a nearest-neighbour chain fitted to the solvated
+   energy of the 45 product-domain instances in five ways, with exact sums.  **A
+   prediction of ours fails:** the fits differ in `D_2` by at most 0.34 nats (always in
+   the order least `D_2` < likelihood < variational < uniform least squares), and the
+   root-mean-square remainder predicts `D_2` within a factor 2.5.  **It holds for the
+   floor:** `D_∞` differs by up to 3.2 nats across fits and is not predicted by the
+   root-mean-square remainder.  **The split matters by orders of magnitude:** for serine
+   `D_2` is 4–45 with the vacuum force field as the model and 0.0015–0.096 for
+   independent residues fitted to the solvated energy — the solvent term cancels 97 %
+   of the vacuum pair variance on strand and PPII (screening), so the unscreened vacuum
+   pair terms are worse than none.  Qualifies one sentence of item 36 (SCI-MSG-0017:
+   "fit quality does not predict the price" is about a model far from the truth).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -812,6 +828,7 @@ was done.
 | [SCI-REV-0010](messages/science/SCI-REV-0010.md) | checkpoint 43 | independent review and replication (the review owed since THY-RES-0007) | theory (copy engineering §7) | workstream R10: the theory division's workstream Y — proofs stand, headline at `u = 1` replicated; **the direction depends on the slope** (`a`, `h` lowered at large slopes by their own Proposition F; `E` raised everywhere); small-slope law = structure factor at second order; twelve minor points; requests R10-T1…T5, R10-E1 |
 | [SCI-REV-0011](messages/science/SCI-REV-0011.md) | after checkpoint 43 | independent review and replication (requested in THY-RES-0009 §7.2); a replication result | theory (copy engineering) | follow-up of workstream R9: Proposition 11.69b against Theorem R9.1 — in agreement, nothing false, three replacement texts, one remark fails from 12 beads on; the audit at `24a3c27` passes here (411 mutations, 410 caught, repaired runner); requests R9b-T1…T3 |
 | [SCI-REV-0012](messages/science/SCI-REV-0012.md) | after checkpoint 43 | measurement and independent review (requested in THY-RES-0009 §7.1, §7.2); **linked correction** of SCI-MSG-0015 (§5) | theory (copy engineering §4) | workstream P4: share certificates on our instances (11 of 13), pair form against site form (136 instances), review of Theorem 11.18a and Propositions 11.18b, 11.18c (one statement false as written), state-dependent shares and a joint LP; on non-product domains our earlier certificates were over a pruned sub-domain that misses the minimum in 14 of 40 analyses; requests P4-T1…T5 |
+| [SCI-MSG-0022](messages/science/SCI-MSG-0022.md) | after checkpoint 43 | scientific result; a prediction of ours refuted in part; qualifies one sentence of SCI-MSG-0017 | theory and engineering | benchmark B10 completed on 45 real instances: five ways of fitting two tractable families to the solvated energy differ by at most 0.34 nats in `D_2` and up to 3.2 nats in the floor; the split matters by orders of magnitude (independent residues fitted to the solvated energy against the vacuum force field: `D_2` 0.0015–0.096 against 4–45 for serine); suggestion B10-T1 |
 
 ## Responses and requests received
 

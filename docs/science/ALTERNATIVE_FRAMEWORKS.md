@@ -45,11 +45,17 @@ Hamming ball, a *proved* bound on what is left, and — for `ln Z` — either no
 evaluations) or a sampled mean on top of a certified floor and variance (within 0.005).
 Two things were not foreseen.  First, **for `ln Z` the supremum norm is the wrong
 coordinate**: a remainder `11–12 k_BT` wide in supremum norm costs almost nothing when
-the true ensemble is close to the model's in Rényi divergence (`D_2 ≤ 0.18`), a
-remainder whose root-mean-square error *improves* under a fit can become more
-expensive (serine on a helix: `1.66 → 1.20 k_BT` while the exponent `D_2` of the cost
-goes from 16 to 45), and *nothing estimated from samples certifies which case one is
-in* — the two-standard-error bar covers in 5–82 % of repetitions in the bad cases.  Second, **what fails in a compact geometry is
+the true ensemble is close to the model's in Rényi divergence (`D_2 ≤ 0.18`); for a
+model far from the truth the root-mean-square remainder seen under the model says
+nothing about the cost (serine on a helix with the vacuum force field as the model:
+from two to six residues it *falls* from `1.66` to `1.20 k_BT` while the exponent `D_2` of
+the cost rises from 16 to 45); and *nothing estimated from samples certifies which case
+one is in* — the two-standard-error bar covers in 5–82 % of repetitions in the bad
+cases.  (Corrected after benchmark B10 was completed, addendum A17 (12): the first
+text of version 2 read this pair of numbers as "improves under a fit"; it is a
+comparison along the chain length for one unfitted model.  Between *fits* of one
+family to the solvated energy the root-mean-square remainder does predict `D_2`, within
+a factor 2.5; what no fit controls is the floor.)  Second, **what fails in a compact geometry is
 not accuracy but certifiability**: on a helix a fitted chain model is as accurate as on
 a strand (`0.002–0.004 k_BT`), and every bound that treats atom pairs one at a time is
 250–800 times too large, because the solvent term's self and cross parts cancel to one
@@ -182,10 +188,16 @@ anything else** — and a certified envelope always has slack.
    while `D_2 ≤ 0.18` (valine), `0.70` (leucine); for serine `D_2 = 3–45`.  With the
    pairwise fit as the model, `D_2 ≤ 1.3·10⁻³` and `D_∞ ≤ 3.7` in all 74 instances,
    although the remainder beyond pairwise is up to `14.8 k_BT` wide for four lysines.
-   **Fit quality does not predict the price**: on the serine helix the root-mean-square
-   error falls from `1.66` to `1.20 k_BT` while `D_2` rises from 16 to 45.  This is row H's
-   warning ("a dip costs its full depth, undetected") measured on a real term, and the
-   reason row D asks for a divergence.
+   **For a model far from the truth the root-mean-square remainder does not predict
+   the price**: on the serine helix, with the vacuum force field as the model, it falls
+   from `1.66` to `1.20 k_BT` between two and six residues while `D_2` rises from 16 to 45.
+   This is row H's warning ("a dip costs its full depth, undetected") measured on a real
+   term, and the reason row D asks for a divergence.  **And the split matters more than
+   the fit** (addendum A17 (12), benchmark B10 completed): independent residues fitted
+   to the *solvated* energy have `D_2 = 0.0015–0.096` for serine — 280 to 2 600 times less
+   than the vacuum force field, whose unscreened pair terms are worse than none; within
+   a family fitted to the solvated energy the five ways of fitting differ by at most
+   `0.34` nats in `D_2`, and by up to `3.2` nats in the floor.
 3. **A floor and a variance are enough, and tight [K inequality; M sharpness; A17 (7)].**
    Hoeffding's Theorem 3 with the exact floor and variance of the remainder is within a
    median factor `1.04` of the true Jensen gap on 53 instances (true gap `≤ 6.3·10⁻⁴`
