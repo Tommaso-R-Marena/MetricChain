@@ -7,7 +7,8 @@
 > from the mathematical definitions; other divisions' files were read as text and never
 > executed.  Before filing, the coordinator re-ran the tests; counted the vertices for
 > `L = 3` with an own brute-force enumeration over all 346 104 choices of seven tight
-> constraints (96 for `u*/u = 3/2`, 72 for `u*/u = 3`: as below); and read §§0–6.  Disclosures
+> constraints (96 for `u*/u = 3/2`, 72 for `u*/u = 3`: as below); and read §0, §§1.1–1.3,
+> §4.1 and the head of §6 — not the rest.  Disclosures
 > of the subagent: three exploratory size probes for `L = 5` ran with a vertex cap above
 > the request's `10⁷` before the rule was applied in the drivers (their outcome is given as
 > information only; every stored result respects the rule); `pplpy 0.9.0` (with `gmpy2`,
