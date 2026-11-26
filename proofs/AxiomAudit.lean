@@ -73,6 +73,11 @@ import proofs.Frontiers.StateShares
 import proofs.Frontiers.SoftMinLowerBound
 import proofs.Frontiers.BennettTwoPoint
 import proofs.Frontiers.BoxBennett
+import proofs.Frontiers.ShareLevels
+import proofs.Frontiers.DownClosedRemainder
+import proofs.Frontiers.BoxAdditions
+import proofs.Frontiers.AffineHalf
+import proofs.Frontiers.BlockReductions
 import proofs.AuditCommand
 
 /-!
@@ -677,6 +682,64 @@ import proofs.AuditCommand
 #print axioms ScienceL4.Bennett.iid_certificate
 #print axioms ScienceL4.Bennett.iid_certificate_delta
 #print axioms MetricChain.BoxClass.bennett_bracket
+
+-- Shares of the anchored constants at every level, windows, arbitrary allocations (theory report Theorem
+-- 11.18d(c'); requested by the Scientific Discovery Division, SCI-MSG-0025, P6-T1)
+#print axioms MetricChain.sum_levelShare_eq
+#print axioms MetricChain.cover_of_level_shares
+#print axioms MetricChain.choose_succ_mul_choose_le
+#print axioms MetricChain.level_shares_antitone
+#print axioms MetricChain.levelShare_one_eq_sitePenalty
+#print axioms MetricChain.sum_levelShare_one
+#print axioms MetricChain.levelShare_zero_empty
+#print axioms MetricChain.levelShare_self
+#print axioms MetricChain.sum_superset_levelShare_succ
+#print axioms MetricChain.level_window_cover
+#print axioms MetricChain.level_window_le
+#print axioms MetricChain.cover_of_window_shares
+#print axioms MetricChain.anchored_remainder_level_shares
+#print axioms MetricChain.anchored_remainder_window_shares
+#print axioms MetricChain.cover_of_subset_shares
+#print axioms MetricChain.anchored_remainder_subset_shares
+#print axioms MetricChain.level_shares_witness
+#print axioms MetricChain.level_window_witness
+
+-- The remainder identity for a down-closed family of evaluated subsets, and a mixed difference in an arbitrary
+-- context (theory report Theorem 11.18d(a'), (b'); Propositions 10 and 11 of the Scientific Discovery Division's
+-- workstream P5, SCI-MSG-0024, request P5-T2)
+#print axioms MetricChain.downClosed_remainder_identity_mixConfig
+#print axioms MetricChain.downClosed_remainder_identity
+#print axioms MetricChain.downClosed_remainder_bound
+#print axioms MetricChain.isThreshold_card_lt_iff
+#print axioms MetricChain.downClosed_remainder_card_lt
+#print axioms MetricChain.downClosed_remainder_witness
+#print axioms MetricChain.downClosed_remainder_witness_family
+#print axioms MetricChain.downClosed_remainder_witness_identity
+#print axioms MetricChain.mixedDiff_context_identity
+#print axioms MetricChain.mixedDiff_context_sub_bound
+#print axioms MetricChain.mixedDiff_context_bound
+
+-- Box classes: detection at the floor and the ceiling, the weighted sampler, bumps for ratios (the Scientific
+-- Discovery Division's review SCI-REV-0013, adopted), and the lower bound for a ratio with dips and bumps (ours)
+#print axioms MetricChain.BoxClass.detect_ge_at_floor
+#print axioms MetricChain.BoxClass.detect_ge_at_ceiling
+#print axioms MetricChain.BoxClass.detect_ge_weighted
+#print axioms MetricChain.BoxClass.weighted_opt
+#print axioms MetricChain.BoxClass.logRatio_bumpAlt_lt
+#print axioms MetricChain.BoxClass.logRatio_bumpAlt_gt
+#print axioms MetricChain.BoxClass.ratio_expected_queries_ge_mixed
+
+-- An affine function on the cube is large on half of the points (the core of the Scientific Discovery Division's
+-- counter-algorithm to the first version of Proposition 11.18e(b); SCI-REV-0013, adopted)
+#print axioms ScienceR12.affine_half_large
+
+-- Two blocks with a coupling: the reductions of Theorem 11.116(a), (b) in abstract form
+#print axioms MetricChain.cut_coupling_admissible
+#print axioms MetricChain.cut_coupling_partition
+#print axioms MetricChain.cut_coupling_normalised
+#print axioms MetricChain.gap_embedding_admissible
+#print axioms MetricChain.gap_embedding_partition
+#print axioms MetricChain.cut_coupling_witness
 
 -- Residuals in a Hilbert ball: the hypercircle band as a certificate (theory report Proposition 11.50a)
 #print axioms MetricChain.Hypercircle.cauchy_schwarz

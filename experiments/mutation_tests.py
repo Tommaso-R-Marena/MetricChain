@@ -1398,6 +1398,74 @@ MUTS["XXV"] = [
        '        coup = [np.array([[0.0, k], [k, 0.0]]) for k in rng.uniform(-1.5, 0.0, n - 1)]   # a penalty on unequal neighbours')], 'XXV.3'),
 ]
 
+# XI.22, XI.23: randomised algorithms and the Hamming ball; shares of every level and the allocation for a law
+# (nineteenth checkpoint; the first is the correction of Proposition 11.18e(b) after the review SCI-REV-0013)
+MUTS["XI"] += [
+    ("M1: the half lemma with ||h||/n in place of ||h||/(n + 1) (false: 1 + s_1 + ... + s_n on an even number of sites)",
+     [('            frac = good_fraction(a, b, n + 1)\n            if frac is None:', '            frac = good_fraction(a, b, n)\n            if frac is None:')], 'XI.22'),
+    ("M2: the bound from one good point with the factor n in place of n + 1 (false at the extremal remainder)",
+     [('            B = (np.abs(g) + C) * (n + 1) + C', '            B = (np.abs(g) + C) * n + C')], 'XI.22'),
+    ("M3: the least support claimed to be |X| / (product of the m - 1 SMALLEST alphabet sizes)",
+     [('        largest = sorted(ks, reverse=True)[:m - 1]', '        largest = sorted(ks)[:m - 1]')], 'XI.22'),
+    ("M4: the bound k_max^-(m-1) claimed attained for unequal alphabets (it is not: (2, 2, 3) at order three)",
+     [('        predicted = N // math.prod(largest) if largest else N', '        predicted = N // max(ks) ** (m - 1) if largest else N')], 'XI.22'),
+    ("M5: four random evaluations claimed enough at delta = 0.05 (2^-4 > 0.05)",
+     [('    q5 = math.ceil(math.log2(1 / 0.05))', '    q5 = math.floor(math.log2(1 / 0.05))')], 'XI.22'),
+    ("M6: one site: the algorithm that skips a random state with probability r claimed to fail with probability r on a needle (it is r/k)",
+     [('        for inst, expect in ((needle, r / k), (np.zeros(k), 0.0)):', '        for inst, expect in ((needle, r), (np.zeros(k), 0.0)):')], 'XI.22'),
+    ("M7: an affine function claimed large on three quarters of the cube (1 + s_1 is large on half)",
+     [('            if frac < 0.5 - 1e-12:\n                return False, dict(reason="an affine function is below',
+       '            if frac < 0.75 - 1e-12:\n                return False, dict(reason="an affine function is below')], 'XI.22'),
+    ("M1: level shares divided by C(m, k) + 1 (they then do not cover)",
+     [('    div = math.comb(m, k) if divisor is None else divisor', '    div = math.comb(m, k) + 1 if divisor is None else divisor')], 'XI.23'),
+    ("M2: shares outside the window pushed down with the factor 1/(k + 2) (the window form then falls below level k + 1)",
+     [('and not in_win(K2)) / (k + 1) for K in shares[k]}', 'and not in_win(K2)) / (k + 2) for K in shares[k]}')], 'XI.23'),
+    ("M3: the levels claimed to increase with k (pairs above sites)",
+     [('                if k < m and pens[k + 1][S] > pens[k][S] + 1e-9:', '                if k < m and pens[k + 1][S] < pens[k][S] - 1e-9:')], 'XI.23'),
+    ("M4: the upper end claimed concave in the allocation",
+     [('        if Um > 0.5 * (U0 + U1) + 1e-12:', '        if Um < 0.5 * (U0 + U1) - 1e-12:')], 'XI.23'),
+    ("M5: the lower end claimed convex in the allocation",
+     [('        if Lm < 0.5 * (L0 + L1) - 1e-12:', '        if Lm > 0.5 * (L0 + L1) + 1e-12:')], 'XI.23'),
+    ("M6: the derivative of the upper end claimed to be the untilted probability of the charged site",
+     [('        grad = sum(law[S] * math.exp(p0[S]) for S in allS if i0 in S) / zt', '        grad = sum(law[S] for S in allS if i0 in S)')], 'XI.23'),
+    ("M7: the greedy site penalty claimed to be Gamma of the sites at least as mobile, without the difference",
+     [('            closed = gam(at_least) - gam(at_least - {i})', '            closed = gam(at_least)')], 'XI.23'),
+    ("M8: an allocation that distributes only nine tenths of every constant claimed to cover",
+     [('                for i, wi in zip(sorted(T), w):\n                    lam[(T, frozenset([i]))] = c[T] * float(wi)\n            return lam',
+       '                for i, wi in zip(sorted(T), w):\n                    lam[(T, frozenset([i]))] = 0.9 * c[T] * float(wi)\n            return lam')], 'XI.23'),
+]
+
+# XXIV.6 (the sharper upper end of the Bennett certificate), XXIV.11, XXIV.12 (nineteenth checkpoint)
+MUTS["XXIV"] += [
+    ("XXIV.6 M7: the Bennett certificate with the floor width r_bar - 2 eta - lo (false at the extremal two-point law)",
+     [('            sharp = -rbar + eta + W(rbar - eta - lo, s2)', '            sharp = -rbar + eta + W(rbar - 2 * eta - lo, s2)')], 'XXIV.6'),
+    ("XXIV.11 M1: the count without a hint with the Delta-dependence of the first version, (e^Delta - 1)^2/(2 eps^2)",
+     [('        closed = 2 * Lg * math.sinh(Delta / 2) ** 2 / eps ** 2', '        closed = Lg * math.expm1(Delta) ** 2 / (2 * eps ** 2)')], 'XXIV.11'),
+    ("XXIV.11 M2: Hoeffding's quadratic bound in place of the Kullback-Leibler one (the count then has the factor e^Delta again)",
+     [('        worst = max(worst, math.log(2 / delta) / min(bx_kl(w + tp, w), bx_kl(w - tm, w)))',
+       '        worst = max(worst, math.log(2 / delta) / (2 * min(tp, tm) ** 2))')], 'XXIV.11'),
+    ("XXIV.11 M3: the empirical Bernstein bound without its term of order 1/n (it misses a Bernoulli mean 1/n with probability 1/e)",
+     [('        bound = k / n + np.sqrt(2 * V * Lg / n) + 7 * Lg / (3 * (n - 1))', '        bound = k / n + np.sqrt(2 * V * Lg / n)')], 'XXIV.11'),
+    ("XXIV.11 M4: an error in an evaluated energy claimed to move a value of W by no more than itself (it is amplified where the sandwich is narrow)",
+     [('        amp = np.abs(Wt - W) * (-np.expm1(-gap)) / math.expm1(e_err)', '        amp = np.abs(Wt - W) / math.expm1(e_err)')], 'XXIV.11'),
+    ("XXIV.11 M5: the width in units of ln Z claimed to be the linear one, 2 a t, at the division's numbers",
+     [('    if not (abs(wid - 0.026) < 6e-4 and abs(2 * a * t0 - 0.057) < 7e-4):', '    if not (abs(wid - 0.057) < 6e-4 and abs(2 * a * t0 - 0.057) < 7e-4):')], 'XXIV.11'),
+    ("XXIV.11 M6: 'a quarter of N_KL does not suffice' tested with all of N_KL",
+     [('max(bx_plugin_failure(Delta, eps, max(N // 4, 1), w) for w in grid))', 'max(bx_plugin_failure(Delta, eps, N, w) for w in grid))')], 'XXIV.11'),
+    ("XXIV.11 M7: the two-point lower bound with the constant 8 in place of 2 (it then exceeds the exact number of evaluations at which the two members can be told apart)",
+     [('        lb = 2 * (1 - 2 * delta) ** 2 / bx_kl(w1, w2)', '        lb = 8 * (1 - 2 * delta) ** 2 / bx_kl(w1, w2)')], 'XXIV.11'),
+    ("XXIV.11 M8: the two members separated by eps/2 instead of 2 eps (such members need not be told apart, and with N_KL evaluations they cannot be)",
+     [('        w2 = w1 + math.expm1(2 * eps) * (cc + w1)', '        w2 = w1 + math.expm1(0.5 * eps) * (cc + w1)')], 'XXIV.11'),
+    ("XXIV.12 M1: the acceptance probability of the nested sampler measured up to the outer ceiling",
+     [('        rho = (np.exp(-elo) - np.exp(-ehi)) / wq', '        rho = (np.exp(-elo) - np.exp(-mhi)) / wq')], 'XXIV.12'),
+    ("XXIV.12 M2: the free-sampling term 2 t_f dropped from the bracket of the nested sampler",
+     [('            miss = np.abs(estz - ZE) > A * (2 * tf + rbar * te) * (1 + 1e-12)', '            miss = np.abs(estz - ZE) > A * (rbar * te) * (1 + 1e-12)')], 'XXIV.12'),
+    ("XXIV.12 M3: accepted draws claimed to have the law of the outer sampler",
+     [('            q_in = q * rho / rate', '            q_in = q')], 'XXIV.12'),
+    ("XXIV.12 M4: the free part of the outer variable measured from the lower model",
+     [('        beta = (np.exp(-ehi) - np.exp(-mhi)) / wq', '        beta = (np.exp(-mlo) - np.exp(-ehi)) / wq')], 'XXIV.12'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

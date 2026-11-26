@@ -466,14 +466,18 @@ both sides, given a proposed remainder r (a hint; e.g. a surrogate that is then 
     N = ⌈ ln(1/δ)/p(ε/2) ⌉,   p(η) = min{1, ½ min((e^η − 1)Z/(Z(lo) − Z), (1 − e^{−η})Z/(Z − Z(hi)))}   verified
     N = ⌈ ln(1/δ) · max(1, 2(Z(lo)/Z(r) − 1)/(e^{ε/2} − 1), 2(1 − Z(hi)/Z(r))/(1 − e^{−ε/2})) ⌉
     where dip and bump are proportional (the centre of a constant box): sampler π, and both factors 2 disappear        verified
-no algorithm of any kind does better than
-    (1 − 2δ) · max( ⌊(Z(lo)/Z(r) − 1)/(2(e^ε − 1))⌋ , ⌊(1 − Z(hi)/Z(r))/(2(1 − e^{−ε}))⌋ )   evaluations        verified
-        (floor and ceiling: near the floor of the box the second term is the whole bound)
+    better in general: weights A/(A+B), B/(A+B) on the two halves,  A = (Z(lo)/Z − 1)/(e^{ε/2} − 1),  B = (1 − Z(hi)/Z)/(1 − e^{−ε/2}):
+        N = ⌈ ln(1/δ) · max(1, A + B) ⌉     (at the floor or at the ceiling of the box: the other half alone, no factor 2)          verified
+where no single state has dip weight above (e^ε − 1)·Z or bump weight above (1 − e^{−ε})·Z, no algorithm of any kind does better than
+    (1 − 2δ) · max( ⌊(Z(lo)/Z(r) − 1)/(2(e^ε − 1))⌋ , ⌊(1 − Z(hi)/Z(r))/(2(1 − e^{−ε}))⌋ )   evaluations
+        (verified: (1 − 2δ) per set of any packing of disjoint heavy sets; the two floors are the greedy packings, on paper.
+         Near the floor of the box the second term is the whole bound.  Heavy single states: evaluate them first, spot-check the rest.)
 ```
 
 Rules that follow.  (1) What you pay for is the **floor** — how far below the known function
 the truth may lie, `Z(lo)/Z(r) = e^{F(E) − F(m)}` for the lower model `m = f̂ + lo`; at the centre
-of a constant box `(e^{ρ₋} − 1)/ε`.  The ceiling and the number of states do not enter; the
+of a constant box `(e^{ρ₋} − 1)/ε`.  The number of states does not enter, and the ceiling only
+through a term of at most `1/ε`, which is the whole cost near the floor of the box; the
 size of the system enters through the floor, which for a remainder that is a sum over the
 system grows with it — put as much as can be sampled exactly into the known part before
 quoting a floor (theory report §11.30, "measured remainders").  The sampler is rejection
@@ -488,7 +492,8 @@ check with the mixture of the two samplers costs at most twice the smaller of th
 sample sizes, and the sup-norm bound wins as soon as the system is large.  (4) Sampling
 must be exact; a Markov chain without a certified mixing time voids the guarantee.  (5) The
 result is for `ln Z` of the whole domain at positive temperature: a minimum needs every state
-within the floor of the optimum, and ratios of macrostate weights are not covered.  (6) These
+within the floor of the optimum; a ratio of two macrostate weights in a box class is
+covered by rule (11).  (6) These
 certificates are probabilistic and are **not** checked by any kernel of this repository.
 (7) **If a variance bound can be certified as well, use it** (Theorem 11.110(f); the
 Scientific Discovery Division's proposal; Bennett's inequality, paper-level, harness XXIV.6):
@@ -533,7 +538,34 @@ ENVELOPE-SAMPLER(lower model m₋, upper model m₊ with known Z(m₋), Z(m₊);
 
 No hint, no range term, nothing exponential; the bracket never leaves the deterministic
 one and its width is the deterministic width times `√(2 ln(2/δ)/N)`.  The verifier, not the
-producer, must draw the points.  (11) **A free-energy difference between two macrostates**
+producer, must draw the points.
+
+Three refinements (theory report Proposition 11.113(c′), (d), Proposition 11.113a; harness
+XXIV.11, XXIV.12).  *Variance.*  Replace `t` by `√(2V ln(4/δ)/N) + 7 ln(4/δ)/(3(N − 1))`, `V` the
+sample variance of `W` (Maurer and Pontil 2009): on the Scientific Discovery Division's
+twenty-residue sandwich, where `W` has standard deviation `0.022`, twelve times narrower.
+*How many evaluations.*  For accuracy `ε` in `ln Z` on a sandwich of width `Δ` and without a
+hint: about `2 ln(2/δ)·sinh²(Δ/2)/ε²`, and no fewer in order; a hint is worth at most the
+factor `1/ε`.  *Nested sandwiches.*  If a tighter pair `e₋ ≤ E ≤ e₊` inside the solvable pair
+can be computed state by state without an evaluation of `E` — for the anchored expansion
+of Step 3b: the exact interpolant plus and minus the envelope `Σ_{T ⊆ changed sites} c_T` —
+do not evaluate every accepted point:
+
+```
+NESTED-SAMPLER(solvable m₋ ≤ m₊ with known Z; pointwise e₋ ≤ e₊ between them; energy oracle E; N_f; δ):
+  for each of N_f accepted draws x of the ENVELOPE-SAMPLER (no evaluation yet):
+      β(x) ← (e^{−e₊(x)} − e^{−m₊(x)}) / (e^{−m₋(x)} − e^{−m₊(x)})
+      ρ(x) ← (e^{−e₋(x)} − e^{−e₊(x)}) / (e^{−m₋(x)} − e^{−m₊(x)})
+      with probability ρ(x):   evaluate E(x);   W_in(x) ← (e^{−E(x)} − e^{−e₊(x)}) / (e^{−e₋(x)} − e^{−e₊(x)})
+  β̄, ρ̄ ← means over all N_f draws;   W̄ ← mean of W_in over the N evaluated draws
+  t_f ← sqrt( ln(6/δ) / (2 N_f) );   t ← sqrt( ln(6/δ) / (2 N) )
+  return   | Z(E) − Z(m₊) − (Z(m₋) − Z(m₊))·(β̄ + ρ̄·W̄) |   ≤   (Z(m₋) − Z(m₊))·(2 t_f + ρ̄·t)          paper (Hoeffding, three times)
+```
+
+In evaluations the price is that of the inner pair — states with fewer than `m` changed
+sites are never evaluated, and **every share form of Step 3b costs the same
+evaluations**; the solvable pair buys the bracket without sampling and the acceptance
+rate.  Unrefereed, and not yet run on a real instance.  (11) **A free-energy difference between two macrostates**
 is certified by the same spot check with half of the samples from each macrostate's own
 sampler (Corollary 11.114, `proofs/Frontiers/BoxRatio.lean`): the detection level is the
 same as for one partition sum, the price is a factor two, the cost is the larger of the
@@ -754,15 +786,33 @@ reference on `T` — evaluate the residual on the Hamming ball of radius `m − 
 I_{m−1}g(x) − Σ_{i changed} γ_i   ≤   g(x)   ≤   I_{m−1}g(x) + Σ_{i changed} γ_i ,        γ_i = (1/m) Σ_{T ∋ i, |T| = m} c_T        verified
 ```
 
-Both sides use the ball values only.  For `m ≥ 4` they contain the evaluated terms of orders
+Both sides use the ball values only.  **Which shares.**  The constants may be charged to the
+`k`-subsets of each `T` instead of its sites — pairs, triples, … — with penalties that are
+smaller state by state at every level, down to the envelope itself at `k = m`; beyond a
+window, shares are pushed down one level; and the shares need not be equal (theory report
+Theorem 11.18d(c′), Proposition 11.18f; `proofs/Frontiers/ShareLevels.lean`, verified).  Use
+the highest level whose model can still be solved exactly — the Scientific Discovery
+Division finds that order 4 with triples does what order 5 with sites did.  Where the
+sites differ in mobility, charge each constant to its least probable sub-pattern (for
+sites: the most frozen site of `T`), which is optimal to first order and lowered both ends
+of the bracket about tenfold in a constructed instance; on a homogeneous instance keep
+equal shares for the upper end, and note that the lower end always prefers a one-sided
+allocation — the two ends may use different ones.  For `m ≥ 4` they contain the evaluated terms of orders
 three and above and are not pairwise: to obtain models the kernels accept, replace those
 terms (and the pairs beyond a band, for a chain) by pointwise minorants on the lower side
 and majorants on the upper side — the division's construction, a paper proof of its own,
 which then gives a sandwich for rule (10) of §6.4.  The number of evaluations,
 `Σ_{j<m} C(n,j)(k−1)^j`, cannot be reduced by any deterministic procedure unless the terms of
-order below `m` are bounded in advance (Proposition 11.18e): each order costs a factor of
+order below `m` are bounded in advance (Proposition 11.18e; a randomised procedure gets a
+finite but useless bound from `⌈k^{m−1} ln(1/δ)⌉` random evaluations — the division's
+counter-example to our first claim that it cannot — and for a bracket of prescribed
+width the count is conjectured to survive): each order costs a factor of
 about `nk/m` in evaluations and, in the division's measurements on extended backbones, buys
-a factor 20–50 in the certified remainder.  On helices it buys 5–8 and the recipe fails.
+a factor 20–50 in the certified remainder.  On helices it buys 5–8, and no bound that
+ignores the signs of the charges can do much better (the division's result); what
+certifies a helix of one side chain is the form of the certificate — a floor that is a
+function, order 6, pair shares — because that ensemble keeps fewer than one side chain
+off its anchor.
 
 **Step 4 — a probabilistic guarantee instead (free energies).**  When a statement that holds
 with probability `1 − δ` is acceptable, the free-energy difference between the target and a
@@ -1187,7 +1237,7 @@ never claim a bound above the true minimum (also with rounded-down anchor values
 interval missing the true partition sum; interval anchors around the true values must be judged
 consistent and corrupted ones inconsistent.
 
-**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 464 small
+**Is the test suite itself any good?**  `experiments/mutation_tests.py` applies 492 small
 mutations to a scratch copy of the falsification harness — each makes a tested claim false or
 breaks the test's model of it — and requires every one to be caught (output stored in
 `docs/mutation_output.txt`).  Before the first mutant of a test it runs the unmutated test in

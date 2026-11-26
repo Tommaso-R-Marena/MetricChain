@@ -3841,6 +3841,339 @@ def t_state_shares(rng, trials):
     return True, stats
 
 
+@conjecture("XI.22 Randomised algorithms and the Hamming ball (theory report Proposition 11.18e(b), (b'), (c) as corrected after the Scientific Discovery Division's review SCI-REV-0013, findings M1 and m8; the counter-algorithm and the support bound for unequal alphabets are that division's).  (a) On the cube every affine function h satisfies |h(s)| >= ||h||_inf/(n + 1) on at least half of the points, with equality for h = 1 + s_1, and n + 1 cannot be replaced by n; (b) hence for g = h + R with |R| <= C every such point x gives ||g||_inf <= (|g(x)| + C)(n + 1) + C (attained), so that ceil(log2(1/delta)) uniformly random evaluations yield a valid finite bound with probability 1 - delta whatever n - five evaluations at delta = 0.05 where the deterministic count is n + 1 - while at a point where h is small the bound fails; (c) on a grid with k_i states at site i the least support of a non-zero function of order below m is exactly |X| / (product of the m - 1 largest k_i) (exhaustive on small grids), attained by a cylinder on the largest sites, so that k_max^-(m-1) is not attained for unequal alphabets; (d) on one site with k states the count of the ball holds for randomised algorithms as well: the algorithm that skips one uniformly random state with probability r and returns a bracket of width L fails with probability exactly r/k on an instance with a needle deeper than L, so failure delta allows k delta skipped evaluations on average and no more")
+def t_random_ball(rng, trials):
+    stats = dict(affine=0, least_good=math.inf, sharp_n=0, tight=math.inf, bad_fails=0, grids=0, unequal_gap=0, one_site=0)
+    # (a), (b): affine functions on the cube
+    for n in range(2, 9):
+        S = np.array(list(itertools.product((-1.0, 1.0), repeat=n)))
+        P = len(S)
+        cands = [(1.0, np.eye(n)[0]), (1.0, np.ones(n)), (0.0, np.eye(n)[0] + np.eye(n)[1])]
+        for _ in range(max(6, trials // 20)):
+            kind = int(rng.integers(3))
+            if kind == 0:
+                cands.append((float(rng.normal()), rng.normal(0, 1, n)))
+            elif kind == 1:
+                cands.append((float(rng.integers(-2, 3)), rng.integers(-2, 3, n).astype(float)))
+            else:
+                b = np.zeros(n)
+                b[rng.choice(n, size=int(rng.integers(1, 3)), replace=False)] = rng.integers(1, 4)
+                cands.append((float(rng.integers(0, 3)), b))
+        # a hill-climbing adversary on integer coefficients, minimising the number of points where |h| is large
+        a_cur, b_cur = float(rng.integers(-3, 4)), rng.integers(-3, 4, n).astype(float)
+
+        def good_fraction(a, b, divisor):
+            h = a + S @ b
+            top = abs(a) + np.abs(b).sum()
+            if top < 1e-12:
+                return None
+            return float((np.abs(h) >= top / divisor - 1e-9).mean())
+
+        cur = good_fraction(a_cur, b_cur, n + 1)
+        for _ in range(40):
+            j = int(rng.integers(n + 1))
+            step = float(rng.choice([-1.0, 1.0]))
+            a_new, b_new = a_cur, b_cur.copy()
+            if j == n:
+                a_new += step
+            else:
+                b_new[j] += step
+            new = good_fraction(a_new, b_new, n + 1)
+            if new is not None and (cur is None or new <= cur):
+                a_cur, b_cur, cur = a_new, b_new, new
+        cands.append((a_cur, b_cur))
+        for a, b in cands:
+            frac = good_fraction(a, b, n + 1)
+            if frac is None:
+                continue
+            if frac < 0.5 - 1e-12:
+                return False, dict(reason="an affine function is below ||h||/(n + 1) in absolute value on more than half of the cube",
+                                   n=n, a=a, b=b.tolist(), frac=frac)
+            stats["least_good"] = min(stats["least_good"], frac)
+            stats["affine"] += 1
+        # n + 1 cannot be replaced by n: h = 1 + sum s_i on an even number of sites
+        if n % 2 == 0 and good_fraction(1.0, np.ones(n), n) < 0.5 - 1e-12:
+            stats["sharp_n"] += 1
+        # (b) the bound from one good point, with a remainder
+        for a, b in cands[:6]:
+            h = a + S @ b
+            top = abs(a) + np.abs(b).sum()
+            if top < 1e-12:
+                continue
+            C = float(rng.uniform(0.05, 0.7))
+            R = rng.uniform(-C, C, P)
+            if (a, tuple(b)) == (1.0, tuple(np.ones(n))):
+                # the extremal remainder: -C where h = 1 (if such a point exists), +C at the maximiser
+                R = np.where(np.abs(h - 1.0) < 1e-9, -C, R)
+                R[int(np.argmax(h))] = C
+            g = h + R
+            good = np.abs(h) >= top / (n + 1) - 1e-9
+            B = (np.abs(g) + C) * (n + 1) + C
+            if (B[good] < np.abs(g).max() - 1e-9).any():
+                return False, dict(reason="at a point where |h| >= ||h||/(n + 1) the bound (|g(x)| + C)(n + 1) + C is below ||g||_inf", n=n)
+            stats["tight"] = min(stats["tight"], float((B[good] - np.abs(g).max()).min()))
+        # at a point where h is small the bound fails: h = 100 (1 + s_1), remainder of size 0.1
+        h = 100.0 * (1.0 + S[:, 0])
+        g = h + rng.uniform(-0.1, 0.1, P)
+        B = (np.abs(g) + 0.1) * (n + 1) + 0.1
+        bad = np.abs(h) < 200.0 / (n + 1) - 1e-9
+        if bad.mean() != 0.5:
+            return False, dict(reason="1 + s_1 is not small on exactly half of the cube")
+        stats["bad_fails"] += int((B[bad] < np.abs(g).max()).all())
+    q5 = math.ceil(math.log2(1 / 0.05))
+    if not (q5 == 5 and 0.5 ** q5 <= 0.05 and all(q5 < 0.95 * (n + 1) for n in range(5, 40))):
+        return False, dict(reason="five random evaluations at delta = 0.05: the count", q=q5)
+    # (c) least support of a function of order below m, exhaustively: a vector lies in the space iff it is orthogonal
+    # to a basis of the complement, so a non-zero function supported in a set exists iff the complement's columns
+    # on that set are dependent
+    grids = [((2, 2, 3), 3), ((2, 2, 3), 2), ((2, 3, 3), 3), ((3, 3), 2), ((2, 2, 2), 2), ((2, 2, 2), 3), ((2, 3), 2), ((2, 2, 4), 3)]
+    for ks, m in grids:
+        n = len(ks)
+        confs = list(itertools.product(*[range(k) for k in ks]))
+        N = len(confs)
+        basis = []
+        for j in range(m):
+            for U in itertools.combinations(range(n), j):
+                for a in itertools.product(*[range(1, ks[i]) for i in U]):
+                    basis.append((U, a))
+        M = np.array([[1.0 if all(x[i] == s for i, s in zip(U, a)) else 0.0 for (U, a) in basis] for x in confs])
+        rank = np.linalg.matrix_rank(M)
+        n_ball = sum(math.prod(ks[i] - 1 for i in U) for j in range(m) for U in itertools.combinations(range(n), j))
+        if rank != n_ball or len(basis) != n_ball:
+            return False, dict(reason="dimension of the functions of order below m on a grid with unequal alphabets", ks=ks, m=m)
+        Uf, _, _ = np.linalg.svd(M, full_matrices=True)
+        D = Uf[:, rank:].T                                           # rows: a basis of the orthogonal complement
+        largest = sorted(ks, reverse=True)[:m - 1]
+        predicted = N // math.prod(largest) if largest else N
+        found = None
+        for s in range(1, N + 1):
+            for sub in itertools.combinations(range(N), s):
+                if D.shape[0] == 0 or np.linalg.matrix_rank(D[:, sub], tol=1e-9) < s:
+                    found = s
+                    break
+            if found is not None:
+                break
+        if found != predicted:
+            return False, dict(reason="the least support of a function of order below m is not |X| / (product of the m - 1 largest alphabet sizes)",
+                               ks=ks, m=m, found=found, predicted=predicted)
+        # the cylinder on the m - 1 largest sites attains it
+        order = sorted(range(n), key=lambda i: -ks[i])[:m - 1]
+        cyl = np.array([1.0 if all(x[i] == ks[i] - 1 for i in order) else 0.0 for x in confs])
+        coef, res, _, _ = np.linalg.lstsq(M, cyl, rcond=None)
+        if np.abs(M @ coef - cyl).max() > 1e-9 or int(cyl.sum()) != predicted:
+            return False, dict(reason="the cylinder on the largest sites is not of order below m, or has another support", ks=ks, m=m)
+        if len(set(ks)) > 1 and m > 1 and N / max(ks) ** (m - 1) < found - 1e-9:
+            stats["unequal_gap"] += 1                               # k_max^-(m-1) is valid and not attained
+        stats["grids"] += 1
+    # (d) one site with k states: the count of the ball holds for randomised algorithms
+    for k in range(2, 7):
+        Lw, depth = 3.0, 40.0
+        r = float(rng.uniform(0.05, 0.9))
+        hvals = rng.normal(0, 1, k)
+        a0 = int(rng.integers(k))
+        needle = hvals.copy()
+        needle[a0] = -depth
+        for inst, expect in ((needle, r / k), (np.zeros(k), 0.0)):
+            lnZ = math.log(float(np.exp(-inst).sum()))
+            fail = 0.0
+            for a in range(k):
+                seen = math.log(float(np.exp(-np.delete(inst, a)).sum()))
+                if not (seen - 1e-12 <= lnZ <= seen + Lw + 1e-12):
+                    fail += r / k
+            if abs(fail - expect) > 1e-12:
+                return False, dict(reason="one site: the failure probability of the algorithm that skips a random state", k=k, fail=fail, expect=expect)
+        # failure at most delta on every needle instance forces r <= k delta: the expected number of evaluations
+        # k - r is at least (1 - delta) k, the count of Proposition 11.18e(b')
+        delta = 0.05
+        if abs((k - k * delta) - (1 - delta) * k) > 1e-12:
+            return False, dict(reason="arithmetic of the one-site count")
+        stats["one_site"] += 1
+    if not (stats["affine"] >= 40 and abs(stats["least_good"] - 0.5) < 1e-12 and stats["sharp_n"] >= 3 and abs(stats["tight"]) < 1e-9
+            and stats["bad_fails"] >= 7 and stats["grids"] >= 8 and stats["unequal_gap"] >= 2 and stats["one_site"] >= 5):
+        return False, dict(reason="cases not exercised: the half is not attained, the bound not tight, or a constructed case missing", **stats)
+    return True, stats
+
+
+def sl_subsets(n):
+    return [frozenset(i for i in range(n) if (mask >> i) & 1) for mask in range(1 << n)]
+
+
+def sl_level_pen(n, m, c, k, divisor=None):
+    """the level-k share model: pen_k(S) = sum over k-subsets K of S of sum_{T contains K} c_T / C(m, k)"""
+    div = math.comb(m, k) if divisor is None else divisor
+    share = {K: sum(v for T, v in c.items() if set(K) <= T) / div for K in itertools.combinations(range(n), k)}
+    return {S: sum(v for K, v in share.items() if set(K) <= S) for S in sl_subsets(n)}, share
+
+
+def sl_alloc_pen(n, lam):
+    """penalty of an allocation lam[(T, K)] >= 0: pen(S) = sum of lam over the pairs (T, K) with K inside S"""
+    return {S: sum(v for (T, K), v in lam.items() if K <= S) for S in sl_subsets(n)}
+
+
+def sl_law(n, p):
+    """product law of the changed set: site i is off the anchor with probability p[i]"""
+    return {S: math.prod(p[i] if i in S else 1 - p[i] for i in range(n)) for S in sl_subsets(n)}
+
+
+def sl_upper(law, pen):
+    return math.log(sum(law[S] * math.exp(pen[S]) for S in law))
+
+
+def sl_lower(law, pen):
+    return -math.log(sum(law[S] * math.exp(-pen[S]) for S in law))
+
+
+@conjecture("XI.23 Shares of every level, and the allocation for a law (theory report Theorem 11.18d(c'), Proposition 11.18f; ShareLevels.lean; the pair and triple forms with a band are Lemmas A, A' of the Scientific Discovery Division's workstream P6, SCI-MSG-0025; the questions P6-T1, P5-T3 are that division's).  For constants c_T >= 0 on the m-subsets: (a) charging each constant in equal parts to the k-subsets of T gives penalties pen_k(S) = sum_T c_T C(|T and S|, k)/C(m, k) with env = pen_m <= pen_{m-1} <= ... <= pen_1 <= pen_0 = sum of all constants, pointwise in the changed set S, with equality for the set of all sites and strict inequality elsewhere; (b) shares of level k + 1 outside a window, pushed down in equal parts to their k-subsets, give a penalty between the levels k + 1 and k; (c) every allocation lam_{T,K} >= 0 with sum_K lam_{T,K} = c_T covers; (d) for a law of the changed set the upper end ln E e^{pen} is convex and the lower end -ln E e^{-pen} is concave in the allocation, with gradient the tilted probability that K is changed; so the upper end of an exchangeable instance is least at equal shares, while the lower end is least at a vertex - each constant charged to one k-subset - and the two ends want different allocations; (e) to first order both ends are sum_T sum_K lam_{T,K} P(K changed): charge every constant to its least probable sub-pattern; with independent sites that is the allocation gamma_i = Gamma(sites at least as mobile as i) - Gamma(sites more mobile than i), Gamma(R) the sum of the constants inside R, and on an instance with four nearly frozen sites among six it lowers the upper end 8 times and the lower end 13 times, while on a homogeneous instance it raises the upper end and lowers the lower one - the two ends want different allocations")
+def t_share_levels(rng, trials):
+    stats = dict(cases=0, strict_levels=0, strict_window=0, convex_strict=0, concave_strict=0, vertex_below_uniform=0,
+                 greedy_gain_upper=None, greedy_gain_lower=None, two_ends_differ=0)
+    for it in range(max(8, trials // 30)):
+        n = int(rng.choice([5, 6]))
+        m = int(rng.choice([3, 4])) if n == 6 else 3
+        subs_m = [frozenset(T) for T in itertools.combinations(range(n), m)]
+        c = {T: float(rng.exponential(0.4)) for T in subs_m}
+        gamma_all = sum(c.values())
+        allS = sl_subsets(n)
+        env = {S: sum(v for T, v in c.items() if T <= S) for S in allS}
+        pens, shares = [], []
+        for k in range(m + 1):
+            pk, sk = sl_level_pen(n, m, c, k)
+            pens.append(pk)
+            shares.append(sk)
+        full = frozenset(range(n))
+        for S in allS:
+            if abs(pens[m][S] - env[S]) > 1e-9 or abs(pens[0][S] - gamma_all) > 1e-9:
+                return False, dict(reason="level m is not the envelope, or level 0 is not the sum of all constants")
+            for k in range(m + 1):
+                count = sum(v * math.comb(len(T & S), k) / math.comb(m, k) for T, v in c.items())
+                if abs(pens[k][S] - count) > 1e-9:
+                    return False, dict(reason="the level-k penalty is not sum_T c_T C(|T and S|, k)/C(m, k)", k=k)
+                if pens[k][S] < env[S] - 1e-9:
+                    return False, dict(reason="the shares of a level do not cover the constants of the changed set", k=k, S=sorted(S))
+                if k < m and pens[k + 1][S] > pens[k][S] + 1e-9:
+                    return False, dict(reason="the penalty of level k + 1 exceeds that of level k", k=k, S=sorted(S))
+                if k < m and S != full and len(S) >= 1 and pens[k + 1][S] < pens[k][S] - 1e-9:
+                    stats["strict_levels"] += 1
+            if S == full and any(abs(pens[k][S] - gamma_all) > 1e-9 for k in range(m + 1)):
+                return False, dict(reason="at the set of all sites the levels do not coincide")
+        # (b) a window on level k + 1, pushed down to level k
+        for k in (1, 2):
+            width = int(rng.integers(1, 3))
+            in_win = lambda K: max(K) - min(K) <= width
+            pushed = {K: sum(v for K2, v in shares[k + 1].items() if set(K) <= set(K2) and not in_win(K2)) / (k + 1) for K in shares[k]}
+            for S in allS:
+                pw = sum(v for K2, v in shares[k + 1].items() if set(K2) <= S and in_win(K2)) + sum(v for K, v in pushed.items() if set(K) <= S)
+                if pw < pens[k + 1][S] - 1e-9 or pw > pens[k][S] + 1e-9:
+                    return False, dict(reason="the window form is not between the two levels", k=k, S=sorted(S))
+                if pens[k + 1][S] + 1e-9 < pw < pens[k][S] - 1e-9:
+                    stats["strict_window"] += 1
+        # (c), (d) allocations to sites (k = 1) and a product law
+        p = rng.uniform(0.02, 0.5, n)
+        law = sl_law(n, p)
+
+        def random_alloc():
+            lam = {}
+            for T in subs_m:
+                w = rng.dirichlet(np.ones(m))
+                for i, wi in zip(sorted(T), w):
+                    lam[(T, frozenset([i]))] = c[T] * float(wi)
+            return lam
+
+        lam0, lam1 = random_alloc(), random_alloc()
+        mid = {key: 0.5 * (lam0[key] + lam1[key]) for key in lam0}
+        p0, p1, pm = sl_alloc_pen(n, lam0), sl_alloc_pen(n, lam1), sl_alloc_pen(n, mid)
+        if any(p0[S] < env[S] - 1e-9 for S in allS):
+            return False, dict(reason="an allocation with sum_K lam_{T,K} = c_T does not cover")
+        U0, U1, Um = sl_upper(law, p0), sl_upper(law, p1), sl_upper(law, pm)
+        L0, L1, Lm = sl_lower(law, p0), sl_lower(law, p1), sl_lower(law, pm)
+        if Um > 0.5 * (U0 + U1) + 1e-12:
+            return False, dict(reason="the upper end is not convex in the allocation", Um=Um, U0=U0, U1=U1)
+        if Lm < 0.5 * (L0 + L1) - 1e-12:
+            return False, dict(reason="the lower end is not concave in the allocation", Lm=Lm, L0=L0, L1=L1)
+        stats["convex_strict"] += int(Um < 0.5 * (U0 + U1) - 1e-9)
+        stats["concave_strict"] += int(Lm > 0.5 * (L0 + L1) + 1e-9)
+        # the gradient: d/d lam_{T,i} of the upper end is the tilted probability that i is changed
+        zt = sum(law[S] * math.exp(p0[S]) for S in allS)
+        key = (subs_m[0], frozenset([min(subs_m[0])]))
+        i0 = min(subs_m[0])
+        grad = sum(law[S] * math.exp(p0[S]) for S in allS if i0 in S) / zt
+        hstep = 1e-6
+        lam_h = dict(lam0)
+        lam_h[key] += hstep
+        if abs((sl_upper(law, sl_alloc_pen(n, lam_h)) - U0) / hstep - grad) > 1e-4:
+            return False, dict(reason="the derivative of the upper end is not the tilted probability of the charged site")
+        stats["cases"] += 1
+    # an exchangeable instance: equal constants, equal probabilities - the upper end is least at equal shares
+    n, m = 5, 3
+    subs_m = [frozenset(T) for T in itertools.combinations(range(n), m)]
+    c = {T: 0.6 for T in subs_m}
+    law = sl_law(n, [0.2] * n)
+    uniform = {(T, frozenset([i])): c[T] / m for T in subs_m for i in T}
+    U_uni = sl_upper(law, sl_alloc_pen(n, uniform))
+    for _ in range(40):
+        lam = {}
+        for T in subs_m:
+            w = rng.dirichlet(np.ones(m) * float(rng.choice([0.2, 1.0, 5.0])))
+            for i, wi in zip(sorted(T), w):
+                lam[(T, frozenset([i]))] = c[T] * float(wi)
+        if sl_upper(law, sl_alloc_pen(n, lam)) < U_uni - 1e-12:
+            return False, dict(reason="on an exchangeable instance an allocation beats equal shares at the upper end")
+    # the lower end is least at a vertex: four sites, triples, all 81 vertices
+    n, m = 4, 3
+    subs_m = [frozenset(T) for T in itertools.combinations(range(n), m)]
+    c = {T: float(rng.uniform(0.3, 1.5)) for T in subs_m}
+    law = sl_law(n, rng.uniform(0.1, 0.5, n))
+    best_vertex = math.inf
+    for choice in itertools.product(*[sorted(T) for T in subs_m]):
+        lam = {(T, frozenset([i])): (c[T] if i == ch else 0.0) for T, ch in zip(subs_m, choice) for i in T}
+        best_vertex = min(best_vertex, sl_lower(law, sl_alloc_pen(n, lam)))
+    uniform = {(T, frozenset([i])): c[T] / m for T in subs_m for i in T}
+    L_uni = sl_lower(law, sl_alloc_pen(n, uniform))
+    if best_vertex > L_uni + 1e-12:
+        return False, dict(reason="the lower end at equal shares is below every vertex")
+    stats["vertex_below_uniform"] += int(best_vertex < L_uni - 1e-9)
+    for _ in range(40):
+        lam = {}
+        for T in subs_m:
+            w = rng.dirichlet(np.ones(m))
+            for i, wi in zip(sorted(T), w):
+                lam[(T, frozenset([i]))] = c[T] * float(wi)
+        if sl_lower(law, sl_alloc_pen(n, lam)) < best_vertex - 1e-12:
+            return False, dict(reason="an interior allocation has a lower end below every vertex")
+    # (e) four nearly frozen sites among six, and a homogeneous instance: charge every constant to its most frozen site
+    n, m = 6, 3
+    subs_m = [frozenset(T) for T in itertools.combinations(range(n), m)]
+    for p, cval, hetero in (([0.01, 0.01, 0.01, 0.01, 0.3, 0.3], 0.1, True), ([0.05] * 6, 0.5, False)):
+        c = {T: cval for T in subs_m}
+        law = sl_law(n, p)
+        rank = sorted(range(n), key=lambda i: (p[i], i))            # most frozen first
+        pos = {i: r for r, i in enumerate(rank)}
+        greedy = {(T, frozenset([i])): (c[T] if i == min(T, key=lambda j: pos[j]) else 0.0) for T in subs_m for i in T}
+        uniform = {(T, frozenset([i])): c[T] / m for T in subs_m for i in T}
+        gam = lambda R: sum(v for T, v in c.items() if T <= R)
+        for i in range(n):
+            at_least = frozenset(j for j in range(n) if pos[j] >= pos[i])
+            closed = gam(at_least) - gam(at_least - {i})
+            direct = sum(v for (T, K), v in greedy.items() if K == frozenset([i]))
+            if abs(closed - direct) > 1e-12:
+                return False, dict(reason="the site penalties of the greedy allocation are not differences of the closed form on nested sets of sites", i=i)
+        pg, pu = sl_alloc_pen(n, greedy), sl_alloc_pen(n, uniform)
+        Ug, Uu, Lg2, Lu = sl_upper(law, pg), sl_upper(law, pu), sl_lower(law, pg), sl_lower(law, pu)
+        first_g = sum(law[S] * pg[S] for S in law)
+        first_u = sum(law[S] * pu[S] for S in law)
+        if abs(first_g - sum(c[T] * min(p[j] for j in T) for T in subs_m)) > 1e-12 or first_g > first_u + 1e-12:
+            return False, dict(reason="the first-order cost of the greedy allocation is not sum_T c_T min_i p_i, or exceeds that of equal shares")
+        if hetero:
+            stats["greedy_gain_upper"], stats["greedy_gain_lower"] = Uu / Ug, Lu / Lg2
+        else:
+            stats["two_ends_differ"] = int(Ug > Uu + 1e-9 and Lg2 < Lu - 1e-9)
+    if not (stats["cases"] >= 8 and stats["strict_levels"] > 50 and stats["strict_window"] > 5 and stats["convex_strict"] >= 4
+            and stats["concave_strict"] >= 4 and stats["vertex_below_uniform"] == 1 and 7.5 < stats["greedy_gain_upper"] < 8.5
+            and 12.5 < stats["greedy_gain_lower"] < 13.5 and stats["two_ends_differ"] == 1):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
 @conjecture("XI.14 Normal form: with f^d = min_x [f(x) + d(x, .)], sigma(a,y) = d(a,y) + f^d(a) - f^d(y) >= 0 and E^d = f^d + g, min(f + g') = min(f^d + g') on the admissible class, and for every evaluated set A the certified lower bound and the value upper bound of (d, f, g) are the lower bound and the incumbent of the instance (sigma, 0, E^d) without known part; s(a,y) - gap^d(y) = sigma(a,y) - gap^d(a)")
 def t_normal_form(rng, trials):
     stats = dict(sets=0, instances=0, strict_point_gap=0)
@@ -10390,7 +10723,7 @@ def t_box_empirical_bernstein(rng, trials):
 @conjecture("XXIV.6 A one-sided floor and an a-priori variance bracket the free energy without an exponential bill (theory report Theorem 11.110(f); Bennett's inequality in its two-point form — proposed for this place by the Scientific Discovery Division, SCI-MSG-0018): if the remainder r has mean r_bar, lies above r_bar - b and has variance at most sigma^2 under the known measure, then 0 <= K = ln E exp(-(r - r_bar)) <= W(b, sigma^2) = ln[(b^2 e^{-sigma^2/b} + sigma^2 e^b)/(b^2 + sigma^2)] <= (sigma^2/b^2)(e^b - 1 - b); the first bound is attained by the law with a state at the floor of probability sigma^2/(b^2 + sigma^2); it is monotone in b and in sigma^2, so that bounds on both suffice; and it is far below the two-point Jensen gap L(w) of the two-sided width when the variance is small.  With a ceiling a above the mean as well (Hoeffding 1963, as read by the Scientific Discovery Division, SCI-RES-0009): K <= -w p + ln(1 - p + p e^w) <= L(w) for w = a + b, p = a/w, with equality for two-point laws; and ln(1 + Var (e^-a - 1 + a)/a^2) <= K <= W <= ln(1 + (sigma^2/b^2)(e^b - 1 - b)), so that a floor and a ceiling bracket the error of first-order perturbation theory on both sides")
 def t_bennett_bracket(rng, trials):
     W = lambda b, s2: math.log((b * b * math.exp(-s2 / b) + s2 * math.exp(b)) / (b * b + s2))
-    stats = dict(laws=0, worst=-math.inf, attained=0, closest=math.inf, gain=0.0, hoeffding_closest=math.inf, lower_closest=math.inf)
+    stats = dict(laws=0, worst=-math.inf, attained=0, closest=math.inf, gain=0.0, hoeffding_closest=math.inf, lower_closest=math.inf, sharp_attained=math.inf)
     for _ in range(max(400, 4 * trials)):
         k = int(rng.integers(2, 9))
         pr = rng.dirichlet(np.ones(k) * float(rng.choice([0.3, 1.0, 3.0])))
@@ -10441,10 +10774,32 @@ def t_bennett_bracket(rng, trials):
         if K > 1e-6:
             stats["lower_closest"] = min(stats["lower_closest"], (K - lower2) / K)
         stats["laws"] += 1
+    # the certificate with a sample mean: the floor width may be r_bar - eta - lo (Scientific Discovery Division,
+    # SCI-MSG-0023, machine-checked there and in BennettTwoPoint.lean: W(b, v) - b is nonincreasing in b); attained
+    # when the sample mean is too high by eta and the law is the extremal two-point law
+    for _ in range(200):
+        b0, s2 = float(rng.uniform(1.2, 6.0)), float(rng.uniform(0.01, 2.0))
+        p0 = s2 / (b0 * b0 + s2)
+        mu, eta = float(rng.normal()), float(rng.uniform(0.01, 0.3))
+        r = mu + np.array([-b0, s2 / b0])
+        ps = np.array([p0, 1 - p0])
+        lo = mu - b0
+        lnE = math.log(float(ps @ np.exp(-r)))
+        for e in (eta, -eta, float(rng.uniform(-eta, eta))):
+            rbar = mu + e
+            if not lo < rbar - eta:
+                continue
+            sharp = -rbar + eta + W(rbar - eta - lo, s2)
+            old = -rbar + eta + W(rbar + eta - lo, s2)
+            if lnE > sharp + 1e-9 or sharp > old + 1e-12:
+                return False, dict(reason="the upper end with the floor width r_bar - eta - lo fails, or exceeds the one with r_bar + eta - lo",
+                                   lnE=lnE, sharp=sharp, old=old)
+            if e == eta:
+                stats["sharp_attained"] = min(stats["sharp_attained"], sharp - lnE)
     # the regime of the measured instances: a floor of a few units and a small variance
     if not (W(3.7, 0.036 ** 2) < 3.5e-3 and W(0.08, 0.19 ** 2) < 0.0165):
         return False, dict(reason="values of W at the two quoted parameter pairs", a=W(3.7, 0.036 ** 2), b=W(0.08, 0.19 ** 2))
-    if stats["laws"] < 100 or stats["gain"] <= 0 or stats["hoeffding_closest"] > 1e-9 or stats["lower_closest"] > 0.05:
+    if stats["laws"] < 100 or stats["gain"] <= 0 or stats["hoeffding_closest"] > 1e-9 or stats["lower_closest"] > 0.05 or stats["sharp_attained"] > 1e-9:
         return False, dict(reason="cases not exercised, or a bound never close to attained", **stats)
     return True, stats
 
@@ -10663,7 +11018,7 @@ def t_renyi_family(rng, trials):
     return True, stats
 
 
-@conjecture("XXIV.8 A ratio of two macrostate weights in a box class (theory report Corollary 11.113; BoxRatio.lean).  With W_M = sum over the macrostate M of pi e^{-r} and the dip and bump weights restricted to M: (a) a member that differs from r on D raises ln(W_A/W_B) by at most ln(1 + dip_A(D)/W_A) - ln(1 - bump_B(D)/W_B) and lowers it by at most ln(1 + dip_B(D)/W_B) - ln(1 - bump_A(D)/W_A), with equality for the floor on one macrostate and the ceiling on the other; (b) if the change exceeds eta, D has probability at least (1/2) min(p_A(eta), p_B(eta)) under the mixture of the two macrostates' samplers, p_M(eta) = (1/2) min((e^eta - 1) W_M/U_M, (1 - e^-eta) W_M/V_M) — the same level eta as for one partition sum, attained when one macrostate alone changes; (c) a set inside one macrostate with dip weight above (e^eps - 1) W_M changes the ratio by more than eps, the greedy packings give at least floor((W_M(lo)/W_M - 1)/(2(e^eps - 1))) such sets in each macrostate, and the sample size of the spot check is within the factor 8 ln(1/delta)(e^(eps/2) + 1)/(1 - 2 delta) of the lower bound; (d) the cost number max_M (W_M(lo)/W_M - 1) does not depend on the weights of the macrostates and can be far above Z(lo)/Z - 1 of the whole system")
+@conjecture("XXIV.8 A ratio of two macrostate weights in a box class (theory report Corollary 11.114; BoxRatio.lean).  With W_M = sum over the macrostate M of pi e^{-r} and the dip and bump weights restricted to M: (a) a member that differs from r on D raises ln(W_A/W_B) by at most ln(1 + dip_A(D)/W_A) - ln(1 - bump_B(D)/W_B) and lowers it by at most ln(1 + dip_B(D)/W_B) - ln(1 - bump_A(D)/W_A), with equality for the floor on one macrostate and the ceiling on the other; (b) if the change exceeds eta, D has probability at least (1/2) min(p_A(eta), p_B(eta)) under the mixture of the two macrostates' samplers, p_M(eta) = (1/2) min((e^eta - 1) W_M/U_M, (1 - e^-eta) W_M/V_M) — the same level eta as for one partition sum, attained when one macrostate alone changes; (c) a set inside one macrostate with dip weight above (e^eps - 1) W_M changes the ratio by more than eps, the greedy packings give at least floor((W_M(lo)/W_M - 1)/(2(e^eps - 1))) such sets in each macrostate, and the sample size of the spot check is within the factor 8 ln(1/delta)(e^(eps/2) + 1)/(1 - 2 delta) of the lower bound; (d) the cost number max_M (W_M(lo)/W_M - 1) does not depend on the weights of the macrostates and can be far above Z(lo)/Z - 1 of the whole system")
 def t_box_ratio(rng, trials):
     stats = dict(alternatives=0, extremal=0, closest=math.inf, packings=0, widest_factor=0.0)
 
@@ -10974,6 +11329,248 @@ def t_envelope_sampler(rng, trials):
         return False, dict(reason="the quoted widths", a=width(0.0605, 50000, 0.05), b=width(0.0605, 1200, 0.05))
     if not (stats["sandwiches"] >= 30 and stats["gain"] < 0.5 and stats["best_gain"] > 1 - 1e-9 and stats["runs"] >= 1000):
         return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+def bx_binom_logpmf(N, p):
+    """log pmf of Bin(N, p) on 0..N (no scipy)"""
+    k = np.arange(N + 1)
+    lc = np.concatenate([[0.0], np.cumsum(np.log((N - k[:-1]) / (k[:-1] + 1.0)))])
+    with np.errstate(divide="ignore"):
+        return lc + k * math.log(p) + (N - k) * math.log1p(-p)
+
+
+def bx_kl(a, b):
+    """Kullback-Leibler divergence of Bernoulli(a) from Bernoulli(b), infinite outside [0, 1]"""
+    if a < 0 or a > 1:
+        return math.inf
+    out = 0.0
+    if a > 0:
+        out += a * math.log(a / b)
+    if a < 1:
+        out += (1 - a) * math.log((1 - a) / (1 - b))
+    return out
+
+
+def bx_nkl(Delta, eps, delta, ws):
+    """the least N with ln(2/delta) <= N min(KL(w + t+ || w), KL(w - t- || w)) for every mean w of the grid, where
+    t+ = (e^eps - 1)(c + w), t- = (1 - e^-eps)(c + w), c = 1/(e^Delta - 1): Hoeffding's Theorem 1 in its
+    Kullback-Leibler form then gives the plug-in estimate of ln Z within eps on every member of the sandwich"""
+    c = 1.0 / math.expm1(Delta)
+    worst = 0.0
+    for w in ws:
+        tp, tm = math.expm1(eps) * (c + w), -math.expm1(-eps) * (c + w)
+        worst = max(worst, math.log(2 / delta) / min(bx_kl(w + tp, w), bx_kl(w - tm, w)))
+    return math.ceil(worst)
+
+
+def bx_tv_binom(N, w1, w2):
+    """total variation distance between Bin(N, w1) and Bin(N, w2)"""
+    return 0.5 * float(np.abs(np.exp(bx_binom_logpmf(N, w1)) - np.exp(bx_binom_logpmf(N, w2))).sum())
+
+
+def bx_plugin_failure(Delta, eps, N, w):
+    """exact probability that the plug-in estimate ln(1 + a K/N) of a two-level member (W Bernoulli(w)) is off by
+    more than eps"""
+    c = 1.0 / math.expm1(Delta)
+    k = np.arange(N + 1)
+    pm = np.exp(bx_binom_logpmf(N, w))
+    dev = k / N - w
+    return float(pm[(dev > math.expm1(eps) * (c + w) + 1e-15) | (dev < math.expm1(-eps) * (c + w) - 1e-15)].sum())
+
+
+@conjecture("XXIV.11 The sandwich sampler after the Scientific Discovery Division's review (theory report Proposition 11.113(c), (c'), (d) as corrected; SCI-REV-0013, findings M2 and m7; SCI-MSG-0025, section 4).  (d) Without a hint ln Z of a sandwich of width Delta is estimated within eps on every member from N_KL = max_w ln(2/delta)/min(KL(w + t+ || w), KL(w - t- || w)) evaluations, which is 2 ln(2/delta) sinh^2(Delta/2)/eps^2 up to a few per cent - smaller than the count (e^Delta - 1)^2 ln(2/delta)/(2 eps^2) of the first version by the factor e^-Delta; the exact failure probability of the plug-in estimate on two-level members is at most delta with N_KL evaluations and above delta with a quarter of them; the order is necessary - two-level members with independent inclusion probabilities w and w' = w + (e^(2 eps) - 1)(c + w) must be told apart, which needs total variation 1 - 2 delta between the laws of the observed bits, so no algorithm with fewer than 2(1 - 2 delta)^2/KL(w || w') evaluations exists (Pinsker), about (1 - 2 delta)^2 sinh^2(Delta/2)/eps^2 at the worst w, and the exact number N_TV at which Bin(N, w) and Bin(N, w') are that far apart lies between this bound and N_KL, within a factor 3.5 of each; (c) the sampled bracket leaves the deterministic one unless it is intersected with it; (c') the empirical Bernstein bound mean + sqrt(2 V ln(2/delta)/n) + 7 ln(2/delta)/(3(n - 1)) (Maurer and Pontil 2009, Theorem 4) covers a Bernoulli mean with exact probability at least 1 - delta, and not without its last term; with the standard deviation 0.022 measured by the division, 50 000 evaluations give a half-width more than ten times below Hoeffding's; in units of ln Z the width is ln(1 + a(W + t)) - ln(1 + a(W - t)) < 2 a t (0.026 against 0.057 at Delta = 1.74, W = 0.25, t = 0.006); an error of at most e in every evaluated energy shifts the estimated ln Z by at most e, although a single value of W moves by up to (e^e - 1)/(1 - e^-U(x)), whose mean under the sampler is (e^e - 1) Z(m-)/(Z(m-) - Z(m+))")
+def t_sandwich_refinements(rng, trials):
+    stats = dict(cases=0, worst_fail=0.0, quarter_fail=math.inf, ratio_lo=math.inf, ratio_hi=0.0, eb_worst=0.0, eb_bad=0.0,
+                 leaves=0, shift=0.0, amplified=0.0, tv_over_bound=0.0, nkl_over_tv=0.0)
+    delta = 0.05
+    Lg = math.log(2 / delta)
+    ws = [i / 400 for i in range(1, 400)]
+    for Delta, eps in ((0.0605, 0.01), (0.5, 0.03), (1.0, 0.05), (2.0, 0.08), (3.0, 0.1)):
+        N = bx_nkl(Delta, eps, delta, ws)
+        closed = 2 * Lg * math.sinh(Delta / 2) ** 2 / eps ** 2
+        first = Lg * math.expm1(Delta) ** 2 / (2 * eps ** 2)
+        if not 0.95 <= N / closed <= 1.12:
+            return False, dict(reason="the sufficient count is not 2 ln(2/delta) sinh^2(Delta/2)/eps^2 up to a few per cent",
+                               Delta=Delta, eps=eps, N=N, closed=closed)
+        if not 0.9 * math.exp(-Delta) <= N / first <= 1.2 * math.exp(-Delta):
+            return False, dict(reason="the ratio to the count of the first version is not e^-Delta", Delta=Delta, N=N, first=first)
+        stats["ratio_lo"] = min(stats["ratio_lo"], N / first * math.exp(Delta))
+        stats["ratio_hi"] = max(stats["ratio_hi"], N / first * math.exp(Delta))
+        grid = [i / 60 for i in range(1, 60)]
+        worst = max(bx_plugin_failure(Delta, eps, N, w) for w in grid)
+        if worst > delta:
+            return False, dict(reason="with N_KL evaluations the plug-in estimate fails with probability above delta on a two-level member",
+                               Delta=Delta, eps=eps, N=N, worst=worst)
+        stats["worst_fail"] = max(stats["worst_fail"], worst)
+        stats["quarter_fail"] = min(stats["quarter_fail"], max(bx_plugin_failure(Delta, eps, max(N // 4, 1), w) for w in grid))
+        # the two-point lower bound for every algorithm, and the exact number of bits needed to tell the two members apart
+        cc = 1.0 / math.expm1(Delta)
+        w1 = cc / (1 + 2 * cc)
+        w2 = w1 + math.expm1(2 * eps) * (cc + w1)
+        lb = 2 * (1 - 2 * delta) ** 2 / bx_kl(w1, w2)
+        if bx_tv_binom(N, w1, w2) < 1 - 2 * delta:
+            return False, dict(reason="with N_KL evaluations the two members at distance 2 eps are not distinguishable, although the plug-in estimate separates them",
+                               Delta=Delta, eps=eps, N=N)
+        lo_n, hi_n = 1, N
+        while lo_n < hi_n:
+            mid_n = (lo_n + hi_n) // 2
+            if bx_tv_binom(mid_n, w1, w2) >= 1 - 2 * delta:
+                hi_n = mid_n
+            else:
+                lo_n = mid_n + 1
+        if lb > lo_n or not 0.7 <= lb / ((1 - 2 * delta) ** 2 * math.sinh(Delta / 2) ** 2 / eps ** 2) <= 1.1:
+            return False, dict(reason="the two-point lower bound exceeds the exact number of evaluations at which the two members can be told apart, or is not (1 - 2 delta)^2 sinh^2(Delta/2)/eps^2",
+                               Delta=Delta, eps=eps, bound=lb, exact=lo_n)
+        stats["tv_over_bound"] = max(stats["tv_over_bound"], lo_n / lb)
+        stats["nkl_over_tv"] = max(stats["nkl_over_tv"], N / lo_n)
+        stats["cases"] += 1
+    if stats["quarter_fail"] <= delta:
+        return False, dict(reason="a quarter of N_KL evaluations already suffices for the plug-in estimate at some width", **stats)
+    # (c) the bracket around the estimate leaves the deterministic one unless it is clipped: E = m+ everywhere
+    t = math.sqrt(math.log(2 / 0.1) / (2 * 60))
+    Zhi, dZ, est = 1.0, 0.7, 0.0
+    if Zhi + dZ * (est - t) < Zhi and Zhi + dZ * max(est - t, 0.0) >= Zhi:
+        stats["leaves"] += 1
+    # (c') Maurer-Pontil, Theorem 4, exactly for Bernoulli(p): the bound depends on the number of ones only
+    for n in (20, 100, 1000):
+        k = np.arange(n + 1)
+        V = k * (n - k) / (n * (n - 1.0))
+        bound = k / n + np.sqrt(2 * V * Lg / n) + 7 * Lg / (3 * (n - 1))
+        bare = k / n + np.sqrt(2 * V * Lg / n)
+        for p in [0.5 / n, 1.0 / n, 2.0 / n, 5.0 / n] + [i / 25 for i in range(1, 25)]:
+            pm = np.exp(bx_binom_logpmf(n, p))
+            viol = float(pm[bound < p - 1e-15].sum())
+            if viol > delta:
+                return False, dict(reason="the empirical Bernstein bound of Maurer and Pontil misses a Bernoulli mean with probability above delta",
+                                   n=n, p=p, viol=viol)
+            stats["eb_worst"] = max(stats["eb_worst"], viol)
+            stats["eb_bad"] = max(stats["eb_bad"], float(pm[bare < p - 1e-15].sum()))
+    L4 = math.log(4 / delta)
+    hw_eb = math.sqrt(2 * 0.022 ** 2 * L4 / 50000) + 7 * L4 / (3 * 49999)
+    hw_h = math.sqrt(Lg / (2 * 50000))
+    if not (4.9e-4 < hw_eb < 5.0e-4 and hw_h / hw_eb > 10):
+        return False, dict(reason="the two half-widths at the measured standard deviation", eb=hw_eb, hoeffding=hw_h)
+    # the width in units of ln Z
+    a, W0, t0 = math.expm1(1.74), 0.25, 0.006
+    wid = math.log1p(a * (W0 + t0)) - math.log1p(a * (W0 - t0))
+    if not (abs(wid - 0.026) < 6e-4 and abs(2 * a * t0 - 0.057) < 7e-4):
+        return False, dict(reason="the width in units of ln Z at the division's numbers", wid=wid, linear=2 * a * t0)
+    for _ in range(200):
+        a, W0 = float(rng.uniform(0.01, 30)), float(rng.uniform(0.02, 0.98))
+        t0 = float(rng.uniform(0.0, min(W0, 1 - W0)))
+        wid = math.log1p(a * (W0 + t0)) - math.log1p(a * (W0 - t0))
+        if wid > 2 * a * t0 / (1 + a * (W0 - t0)) + 1e-12 or wid > 2 * a * t0 + 1e-12:
+            return False, dict(reason="the width in units of ln Z exceeds 2 a t/(1 + a(W - t))", a=a, W=W0, t=t0)
+    # an error in the evaluated energies
+    for it in range(max(30, trials // 4)):
+        N = int(rng.integers(6, 40))
+        mlo = rng.normal(0, 1.5, N)
+        gap = rng.exponential(0.5, N) + 1e-3
+        if it == 0:
+            gap[0] = 0.01                                           # a state where the sandwich is narrow
+        mhi = mlo + gap
+        E = mlo + gap * rng.random(N)
+        if it == 0:
+            E[0] = mlo[0]
+        e_err = float(rng.uniform(0.001, 0.05))
+        Et = E + rng.uniform(-e_err, e_err, N)
+        if it == 0:
+            Et[0] = E[0] - e_err
+        Zlo, Zhi = float(np.exp(-mlo).sum()), float(np.exp(-mhi).sum())
+        wq = np.exp(-mlo) - np.exp(-mhi)
+        q = wq / (Zlo - Zhi)
+        W, Wt = (np.exp(-E) - np.exp(-mhi)) / wq, (np.exp(-Et) - np.exp(-mhi)) / wq
+        est = Zhi + (Zlo - Zhi) * float(q @ Wt)
+        ZE, ZEt = float(np.exp(-E).sum()), float(np.exp(-Et).sum())
+        if abs(est - ZEt) > 1e-10 * ZEt or abs(math.log(ZEt) - math.log(ZE)) > e_err + 1e-12:
+            return False, dict(reason="with perturbed energies the sampler does not estimate Z of the perturbed energy, or that is off by more than the error")
+        amp = np.abs(Wt - W) * (-np.expm1(-gap)) / math.expm1(e_err)
+        if amp.max() > 1 + 1e-9:
+            return False, dict(reason="a value of W moves by more than (e^e - 1)/(1 - e^-U)")
+        if abs(float(q @ (1 / -np.expm1(-gap))) - Zlo / (Zlo - Zhi)) > 1e-9 * Zlo / (Zlo - Zhi):
+            return False, dict(reason="the mean of 1/(1 - e^-U) under the sampler is not Z(m-)/(Z(m-) - Z(m+))")
+        stats["shift"] = max(stats["shift"], abs(math.log(ZEt) - math.log(ZE)) / e_err)
+        stats["amplified"] = max(stats["amplified"], float(np.abs(Wt - W).max()) / e_err)
+    if not (stats["cases"] == 5 and stats["leaves"] == 1 and stats["eb_bad"] > 0.3 and stats["amplified"] > 20 and stats["shift"] <= 1 + 1e-9
+            and stats["tv_over_bound"] < 3.6 and stats["nkl_over_tv"] < 3.6):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
+@conjecture("XXIV.12 Nested sandwiches: the inner bracket at the price of free rejections (theory report Proposition 11.113a; an answer to the Scientific Discovery Division's question P6-T3, SCI-MSG-0025).  Let m- <= e- <= E <= e+ <= m+ pointwise, with Z(m-), Z(m+) known, the Gibbs measure of m- sampleable and e-, e+ computable pointwise without an evaluation of E.  With q proportional to e^{-m-} - e^{-m+}, beta = (e^{-e+} - e^{-m+})/(e^{-m-} - e^{-m+}), rho = (e^{-e-} - e^{-e+})/(e^{-m-} - e^{-m+}) and W_in = (e^{-E} - e^{-e+})/(e^{-e-} - e^{-e+}): (a) beta, rho, beta + rho lie in [0, 1] and the variable of the outer sampler is W = beta + rho W_in; (b) Z(e+) = Z(m+) + (Z(m-) - Z(m+)) E_q beta, Z(e-) - Z(e+) = (Z(m-) - Z(m+)) E_q rho, and a draw of q accepted with probability rho has the law of the inner sandwich's own sampler - so E is evaluated at a fraction E_q rho of the proposals only; (c) with N_f free draws and N evaluated draws, |Z(E) - Z(m+) - A(beta_bar + rho_bar W_bar)| <= A(2 t_f + rho_bar t) with probability 1 - delta, A = Z(m-) - Z(m+), t_f = sqrt(ln(6/delta)/(2 N_f)), t = sqrt(ln(6/delta)/(2 N)) (coverage simulated), and the term 2 t_f cannot be dropped; (d) at equal numbers of evaluations the half-width is that of the outer sampler times E_q rho = (Z(e-) - Z(e+))/(Z(m-) - Z(m+)) in the limit of many free draws - 0.1 in a constructed instance where the outer model is loose on states at which the inner bracket has no width")
+def t_nested_sandwich(rng, trials):
+    stats = dict(cases=0, runs=0, misses=0, misses_without_free_term=0, runs_few_free=0, least_rho=math.inf, gain=None)
+    delta = 0.1
+    for it in range(max(40, trials // 3)):
+        N = int(rng.integers(8, 50))
+        E = rng.normal(0, 1.5, N)
+        env = rng.exponential(float(rng.choice([0.05, 0.3, 1.0])), N) * (rng.random(N) < 0.6)     # the inner half-width; zero on many states
+        slack_lo, slack_hi = rng.exponential(0.5, N), rng.exponential(0.5, N)
+        c = E + env * rng.uniform(-1, 1, N)                         # the centre of the inner bracket
+        elo, ehi = c - env, c + env
+        mlo, mhi = elo - slack_lo, ehi + slack_hi
+        if it == 0:
+            # the constructed instance: outer half-width 1 everywhere, inner half-width 1 on four states of forty
+            N = 40
+            E = np.zeros(N)
+            env = np.where(np.arange(N) < 4, 1.0, 0.0)
+            c = E.copy()
+            elo, ehi = c - env, c + env
+            mlo, mhi = c - 1.0, c + 1.0
+        wq = np.exp(-mlo) - np.exp(-mhi)
+        Zlo, Zhi = float(np.exp(-mlo).sum()), float(np.exp(-mhi).sum())
+        A = Zlo - Zhi
+        q = wq / A
+        beta = (np.exp(-ehi) - np.exp(-mhi)) / wq
+        rho = (np.exp(-elo) - np.exp(-ehi)) / wq
+        inner = np.exp(-elo) - np.exp(-ehi)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            Win = np.where(inner > 0, (np.exp(-E) - np.exp(-ehi)) / np.where(inner > 0, inner, 1.0), 0.0)
+        W = (np.exp(-E) - np.exp(-mhi)) / wq
+        if min(beta.min(), rho.min()) < -1e-12 or (beta + rho).max() > 1 + 1e-12 or Win.min() < -1e-12 or Win.max() > 1 + 1e-12:
+            return False, dict(reason="beta, rho, beta + rho or the inner variable leave [0, 1]")
+        if np.abs(W - (beta + rho * Win)).max() > 1e-10:
+            return False, dict(reason="the outer variable is not beta + rho times the inner variable")
+        Zelo, Zehi, ZE = float(np.exp(-elo).sum()), float(np.exp(-ehi).sum()), float(np.exp(-E).sum())
+        if abs(Zhi + A * float(q @ beta) - Zehi) > 1e-10 * Zehi or abs(A * float(q @ rho) - (Zelo - Zehi)) > 1e-10 * Zelo:
+            return False, dict(reason="the partition sums of the inner models are not Z(m+) + A E_q beta and A E_q rho apart")
+        rate = float(q @ rho)
+        if rate > 1e-12:
+            q_in = q * rho / rate
+            if np.abs(q_in - inner / (Zelo - Zehi)).max() > 1e-10:
+                return False, dict(reason="accepted draws do not have the law of the inner sandwich's sampler")
+            if abs(Zehi + (Zelo - Zehi) * float(q_in @ Win) - ZE) > 1e-10 * ZE:
+                return False, dict(reason="Z(E) is not Z(e+) + (Z(e-) - Z(e+)) E W_in")
+        else:
+            q_in = None
+        stats["least_rho"] = min(stats["least_rho"], rate)
+        if it == 0:
+            stats["gain"] = rate                                     # half-width ratio at equal numbers of evaluations
+            if abs(rate - 4 * math.sinh(1.0) / (40 * math.sinh(1.0))) > 1e-12:
+                return False, dict(reason="the constructed instance: E_q rho should be 0.1", rate=rate)
+        # (c) coverage with many free draws, and with few (where the free-sampling term decides)
+        if q_in is None:
+            continue
+        for Nf, Ne, key in ((4000, 60, "many"), (40, 4000, "few")):
+            tf, te = math.sqrt(math.log(6 / delta) / (2 * Nf)), math.sqrt(math.log(6 / delta) / (2 * Ne))
+            reps = 12
+            free = rng.choice(N, size=(reps, Nf), p=q)
+            ev = rng.choice(N, size=(reps, Ne), p=q_in)
+            bbar, rbar, wbar = beta[free].mean(axis=1), rho[free].mean(axis=1), Win[ev].mean(axis=1)
+            estz = Zhi + A * (bbar + rbar * wbar)
+            miss = np.abs(estz - ZE) > A * (2 * tf + rbar * te) * (1 + 1e-12)
+            stats["runs"] += reps
+            stats["misses"] += int(miss.sum())
+            if key == "few":
+                stats["runs_few_free"] += reps
+                stats["misses_without_free_term"] += int((np.abs(estz - ZE) > A * rbar * te * (1 + 1e-12)).sum())
+        stats["cases"] += 1
+    if stats["misses"] > delta * stats["runs"]:
+        return False, dict(reason="the bracket of the nested sampler misses more often than delta", **stats)
+    if not (stats["cases"] >= 30 and stats["gain"] is not None and abs(stats["gain"] - 0.1) < 1e-12
+            and stats["misses_without_free_term"] > 0.3 * stats["runs_few_free"]):
+        return False, dict(reason="cases not exercised, or the free-sampling term was never needed", **stats)
     return True, stats
 
 

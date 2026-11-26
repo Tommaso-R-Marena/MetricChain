@@ -562,6 +562,23 @@ they are its dual solution — and checking them is additions and comparisons on
 On that division's instances they certify every case in which the exact criterion holds.
 One of our statements about domains with excluded pairs of states was false and was
 corrected by its review (completeness of shares needs a product domain).
+(xx) *What the evaluations of a certificate from a Hamming ball are paid for* (theory
+report Theorem 11.18d, Propositions 11.18e, 11.18f, 11.113a; the questions, the share
+forms and a decisive correction are the Scientific Discovery Division's).  Constants of
+order `m` can be charged to the sites of each subset, to its pairs, to its triples, and
+so on down to the subset itself — each level a smaller penalty than the one before,
+state by state — and at each level they may be allocated freely: all machine-checked.
+Which level and which allocation give the narrowest bracket *without sampling* depends on
+the ensemble (charge every constant to the sub-pattern that is least often off its
+anchor).  But in *evaluations* none of this matters: proposing states from any solvable
+share model and evaluating the energy only with the ratio of the inner to the outer
+width as probability reaches the bracket of the innermost level at that level's own
+price.  The ball itself cannot be undercut by a deterministic certificate; our claim
+that it cannot be undercut by a randomised one either was **false as written** — a
+handful of random evaluations give a valid but useless bound, as that division's review
+showed with a machine-checked core — and survives only on one site and, as a
+conjecture, for a bracket of prescribed width.  Paper proofs and small synthetic tests
+for the sampler and the allocation; nothing run on a real energy term by us.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

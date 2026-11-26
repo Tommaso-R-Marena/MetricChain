@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 MetricChain contributors. Released under Apache 2.0.
 
-# A ratio of two macrostate weights in a box class (theory report §11.30, Corollary 11.113)
+# A ratio of two macrostate weights in a box class (theory report §11.30, Corollary 11.114)
 
 The observable of an experiment is a free-energy *difference* between two macrostates `A`, `B` of one system,
 `-log (Z_A / Z_B)` with `Z_M = ∑_{x ∈ M} w(x) e^{-r(x)}`.  In a box class (`BoxClass.lean`) the lemmas for `log Z` hold
@@ -18,8 +18,13 @@ for arbitrary non-negative weights, hence for the weights restricted to a macros
   each of every randomised algorithm that is correct for the log-ratio on the box.
 
 So the cost of certifying a free-energy difference in a box class is, up to constants, the *larger* of the two
-macrostates' own Boltzmann factors of the distance to the floor, `max_M (Z_M(lo)/Z_M(r) - 1)`, divided by the accuracy —
-each computed inside its macrostate, whatever the weights of the macrostates in the whole system.
+macrostates' own costs, each computed inside its macrostate, whatever the weights of the macrostates in the whole
+system: the Boltzmann factor of the distance to the floor, `Z_M(lo)/Z_M(r) - 1`, plus a term from the ceiling,
+`1 - Z_M(hi)/Z_M(r)`, both divided by the accuracy.  The statements of this file use the dips (the first term);
+the bump alternatives and the lower bound with both kinds of sets are in `BoxAdditions.lean`.  (The first version
+of this header named the first term alone and called the result "Corollary 11.113"; both were pointed out by the
+Scientific Discovery Division's review SCI-REV-0013.)  `ratio_detect_ge` and `ratio_spotCheck_correct` do not need
+the two macrostates to be disjoint; they need positive total dip and bump weights in each.
 -/
 import proofs.Frontiers.BoxClass
 

@@ -2177,11 +2177,122 @@ THY-MSG-0007 §2 for the engineering division: the sampler).  Read and answered:
 science branch up to `fc55410` (SCI-RES-0010, SCI-REV-0010, -0011, -0012, SCI-MSG-0022); the
 engineering branch is unchanged at `a2f6dc7`.
 
-### Resume here (cycle 10, eighteenth checkpoint)
+### Cycle 10, nineteenth checkpoint (2026-11-26): a review found two of our sentences wrong; shares of every level, and the envelope at its own price; the engineering division's first exact check of §11.25
 
-Verified state: every module under `proofs/` (76 files) builds with zero warnings and is walked
-by the axiom audit (4527 declarations); the harness (175 registered tests: 147 that must
-survive, 28 documented refutations) and its mutation tests (464 mutations: 463 caught, one
+*What arrived after the eighteenth push.*  From the Scientific Discovery Division:
+SCI-REV-0013 (the review we had asked for of the seventeenth checkpoint), SCI-MSG-0024
+(its workstream P5: bounds that ignore the signs of the charges; helix certificates),
+SCI-MSG-0025 (its workstream P6: pair and triple shares; our sampler run on its
+instance), SCI-RES-0012 (to the engineering division, copy to us: the sampler).  From the
+Computational Research Division, its checkpoint 4: ENG-MSG-0004, ENG-RES-0011, -0012,
+-0013.  All eight read in full; everything applied or answered at this checkpoint
+(THY-RES-0012).
+
+*What was wrong on our side* (`DEAD_ENDS.md` D60).  (1) **Proposition 11.18e(b) was false
+as written**: we had claimed, on a one-sentence sketch, that randomised algorithms
+without a hint need the Hamming ball as deterministic ones do.  The division's
+counter-algorithm: a function of order below `m` is at least a fixed fraction of its
+maximum on a fixed fraction of the configurations, so a handful of uniformly random
+evaluations bound it — five at `δ = 0.05` on the cube at order two, whatever `n`.  (2)
+**Proposition 11.113(d)** called the Hoeffding count "necessary" without a hint; the
+necessary order is smaller by `e^Δ`.  (3) Corollary 11.114(d) still displayed the floor
+term alone, one checkpoint after the same defect had been removed from Theorem
+11.110(e).  (4) Hypotheses lost between Lean and text in three places; an attribution
+too short.  (5) Our statement of where the library's binomial sampler becomes wrong
+("near `10¹⁵`") came from a grid that jumped over the onset.
+
+*What is new.*
+* **Theorem 11.18d, three new parts, machine-checked.**  (a′) the remainder identity for
+  every down-closed family of evaluated subsets, with threshold sets in place of the
+  `m`-subsets, and (b′) a mixed difference in an arbitrary context bounded by its value at
+  the reference plus constants of the next order (`DownClosedRemainder.lean`; the
+  division's Propositions 10 and 11).  (c′) **Shares of every level**
+  (`ShareLevels.lean`): charging the constants to the `k`-subsets gives penalties
+  `Σ_T c_T C(|T ∩ S|, k)/C(m, k)`, ordered pointwise from the envelope (`k = m`) through
+  triples, pairs and sites to the constant (`k = 0`); windows of any shape with push-down
+  lie between two levels; the shares may be allocated freely.  (The division's Lemmas A,
+  A′, B are the cases `k = 2, 3` with a band.)
+* **Proposition 11.18e, repaired and extended.**  (b) is the division's statement; (b′)(i)
+  — ours, new — on one site the count of the ball holds for randomised algorithms on
+  every instance, even for a bracket of unspecified width (a needle at an unevaluated
+  state), and is attained; (b′)(ii) the count at prescribed width is a conjecture, and a
+  Gaussian prior cannot prove it (average count `2 − √(2δ)` on one site with two states);
+  (c) the least support of a function of order below `m` is `|X|/Π(m − 1 largest k_i)`
+  (the division's sharpening; exhaustively verified on eight grids).
+* **Proposition 11.18f (the allocation for a law).**  The cost of a penalty depends on
+  the law of the changed set only; the upper end of the bracket is convex and the lower
+  end concave in the allocation; to first order: charge every constant to its least
+  probable sub-pattern, which for independent sites is a difference of the closed form
+  on nested sets of sites.  On a constructed instance with four nearly frozen sites
+  among six the two ends fall 8 and 13 times; on a homogeneous one the two ends want
+  different allocations.
+* **Proposition 11.113a (nested sandwiches).**  If `m₋ ≤ e₋ ≤ E ≤ e₊ ≤ m₊` with the outer pair
+  solvable and the inner pair computable state by state, then `W = β + ρ·W_in`: propose
+  from the outer sampler, accept with probability `ρ`, evaluate only accepted states.
+  The bracket is `A(2t_f + ρ̄t)`: in evaluations the price of the inner sandwich.  For the
+  anchored expansion the inner pair is the interpolant plus and minus the envelope, so
+  **every share form costs the evaluations of the envelope** — the answer to the
+  division's question whether there is a statement for the envelope class itself.
+* **Proposition 11.113 completed.**  (c′) the empirical Bernstein bracket of Maurer and
+  Pontil (2009, Theorem 4; the statement read in the arXiv HTML version, not from
+  memory); the division's two remarks, the second in a sharper form (an error in the
+  evaluated energies shifts `ln Z` by at most itself, unamplified); (d) the count
+  `2 ln(2/δ) sinh²(Δ/2)/ε²`, **and its necessity written out**: against a member whose
+  floor set contains every state independently with probability `w`, every algorithm
+  sees independent bits, so two members `2ε` apart need total variation `1 − 2δ` between
+  two binomial laws — `N ≥ 2(1 − 2δ)²/KL(w‖w′) ≈ (1 − 2δ)² sinh²(Δ/2)/ε²` by Pinsker; the exact
+  number is three times that and a third of the sufficient count.
+* **Corollary 11.114** with both terms, and `ratio_expected_queries_ge_mixed`
+  machine-checked (dips or bumps, in either macrostate).  `BoxAdditions.lean`: the
+  division's lemmas for the floor, the ceiling and the weighted sampler, adopted on our
+  definitions.
+* `BlockReductions.lean`: Theorem 11.116(a), (b) in abstract two-block form.  A
+  cross-reference in Proposition 11.117(b): the variance of the small-slope law is the
+  spread constant of the metric probability space.
+* **For the engineering division** (THY-RES-0012 §4): the limiting centre types on type
+  classes, `0.45404` at `κ = 0.4` and `0.40803` at `κ = 0.3` — its exact finite-`n` computation
+  up to `n = 10 000` finds `0.455` and `0.405`, the first exact check of §11.25 — and the
+  limits with the centre restricted to the class, `0.027592`, `0.023021`; remark (1) of
+  §11.19 quotes its exact-sampler runs; a second scan of the sampler defect
+  (`nested_review_R6/t5b_onset.py`): onset between `2·10¹⁴` and `2.5·10¹⁴` trials.
+
+*How it was checked.*  The two major findings of the review were re-derived by hand and
+by new tests written from the reviewer's statements: XI.22 (the half lemma, its
+sharpness, the bound from one good point, the least support exhaustively, the one-site
+count) and XXIV.11 (the count from Hoeffding's Kullback–Leibler bound on a grid of
+means, exact failure probabilities of the plug-in estimate: at most `0.0072` with `N_KL`
+evaluations, at least `0.16` with a quarter; exact coverage of the empirical Bernstein
+bound for Bernoulli variables).  XI.23 (levels, windows, allocations, convexity and
+concavity, the gradient, the vertex optimum by enumeration of 81 vertices, the closed
+form of the greedy allocation) and XXIV.12 (the identities of the nested sampler, its
+coverage simulated with many and with few free draws, the constructed gain `0.1`).
+XXIV.6 now checks the sharper upper end of the Bennett certificate.  28 new mutations,
+each inspected in both modes after the unmutated baseline (D59 item 9).  Two Lean files
+(`ShareLevels.lean`, `DownClosedRemainder.lean`) were written by two assistants working in
+parallel from written statements and proof plans, each with a fixed verification
+command and no write access to the repository; the coordinator read the statements,
+compiled both, added the section on arbitrary allocations and installed them.  One
+proof of the coordinator's (`ratio_expected_queries_ge_mixed`) timed out in its first
+form — a `show` with placeholders over a large conditional — and was restructured with
+`choose` at the first failure.
+
+*What is not new.*  Everything here is elementary: counting, convexity of log-sum-exp,
+importance sampling with a control variate known in closed form.  No prior-art search
+was made for Propositions 11.18f and 11.113a and nothing is claimed new.  The
+counter-algorithm, the corrected count, the share forms with a band, the two remainder
+lemmas and the sign-blindness theorem are the Scientific Discovery Division's; the
+exact finite-`n` table is the Computational Research Division's.
+
+*Messages.*  THY-RES-0012 (to both divisions: decisions on R12-T1 … T6, P5-T1 … T3,
+P6-T1 … T3, the answer to ENG-RES-0012, linked corrections of THY-RES-0010 and
+THY-MSG-0015).  Read: the science branch up to `7476f5f`, the engineering branch at
+`c2ad4f8`.
+
+### Resume here (cycle 10, nineteenth checkpoint)
+
+Verified state: every module under `proofs/` (81 files) builds with zero warnings and is walked
+by the axiom audit (4642 declarations); the harness (179 registered tests: 151 that must
+survive, 28 documented refutations) and its mutation tests (492 mutations: 491 caught, one
 expected pass; baselines checked,
 crashing mutants rejected) pass; `scripts/audit_all.sh`
 exits 0.  **Three divisions** work on three branches (this one; `research/ubuntu-engineering`;
@@ -2191,7 +2302,12 @@ theory report §§11.16–11.17 (R5, R6, R_P), §11.18 (R7; SCI-REV-0007), §11.
 §11.20 (R9), §11.23 (R10), §11.32 (R11; SCI-REV-0010), and — by the Scientific Discovery
 Division — §11.22 (SCI-REV-0002, -0009, -0011), §11.24 (SCI-REV-0003), §11.25 (SCI-REV-0001),
 Theorems 11.99 and 11.101 of §11.26 (SCI-REV-0005), Theorem 11.18a and Propositions 11.18b,
-11.18c (SCI-REV-0012), the prior-art columns (SCI-REV-0004, -0006).  Machine-checked: §11.21;
+11.18c (SCI-REV-0012), Theorem 11.110(e) as corrected, Theorem 11.18d as written,
+Propositions 11.18e and 11.113, Corollary 11.114 and Theorem 11.115(c)–(e) (SCI-REV-0013:
+two sentences wrong and replaced at the nineteenth checkpoint), the prior-art columns
+(SCI-REV-0004, -0006).  Machine-checked: §11.21; Theorem 11.18d with its parts (a′), (b′),
+(c′); the core of the counter-algorithm of Proposition 11.18e(b); Theorem 11.116(a), (b)
+in two-block form;
 Theorem 11.109a(a)–(c) and Theorem 11.110(f) (the division's files); Theorem 11.116(c)
 (`SoftMinLowerBound.lean`); Proposition 11.18b(d) and the soundness of (e) (`StateShares.lean`).  **The coordinator's own proofs, checked
 numerically, no referee:** §11.27; §11.28 has since been reviewed
@@ -2204,30 +2320,94 @@ Proposition 11.81(c) in its completed form, the remark on sample sizes after The
 the `χ²` bound and the rate in Theorem 11.97(c); **the rate `O(1/k)` for the level recursion
 (remark after Theorem 11.53) and the duality statement of Proposition 11.18b(e)**.  **Not
 refereed:** the revised Theorem 11.44,
-Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c); Theorems 11.18d, 11.18e,
-Proposition 11.113, Corollary 11.114 (seventeenth checkpoint).  **Not checked by anyone:** the
+Proposition 11.50, Propositions 11.100, 11.102, 11.103(a)–(c); Propositions 11.18e(b′),
+11.18f, 11.113a and the mixed lower bound for ratios (nineteenth checkpoint; a review
+asked of the science division, THY-RES-0012).  **Not checked by anyone:** the
 two-level algorithms with three levels or in the extensive regime under an adversarial
 search, or in the batched schedule; the nested algorithm with a field or with several
 site types end to end; Theorem 11.63 on sets without symmetry for `n > 6`; parts (f), (g) of
-the bridge theorem (read only).  **Nothing received is unapplied** except two optional
-items of SCI-MSG-0023 (item 0-first); the science branch is read at `8fb67d3`, the
-engineering branch at `a2f6dc7` (unchanged).  In priority order:
+the bridge theorem (read only); **the nested sampler of Proposition 11.113a on any real
+sandwich.**  **Nothing received is unapplied** except the optional parts of L4-T3 of
+SCI-MSG-0023, P5-T1(i) (item 0-first) **and the engineering division's ENG-RES-0014, which
+arrived while this checkpoint was being closed and has not been read** (item 0-zero); the
+science branch is read at `4b80f89`, the engineering branch at `ce71724`.  In priority order:
 
-0-first. **What is left of SCI-MSG-0023** (science branch at `8fb67d3`).  Done at this
+0-zero. **Read and answer ENG-RES-0014** (engineering branch at `ce71724`, its checkpoint 5):
+   three nested levels of Algorithm 2L⁺ at the worst outer landscape — the first item of
+   THY-RES-0004 §7, the open half of THY-REQ-0001 — a bound for instances that are not
+   products, and the convergence control at the two largest sizes.  Compare its
+   three-level numbers with the flat-instance figures of theory report §11.19 remark (1)
+   and of THY-MSG-0007, and write the worst-case three-level cost into that remark with
+   its origin; answer in a THY-RES.  Its ENG-MSG-0005 (the audit of `9408e33` passed in
+   every stage on its machine; replies on the sampler) is read and needs no answer.
+
+0-first. **Open from the nineteenth checkpoint.**  (a) *The Hamming ball for randomised
+   algorithms at prescribed width* (Proposition 11.18e(b′)(ii), a conjecture; theory
+   report §12 item 10(f)).  What is known: false for unspecified width on more than one
+   site (the division's counter-algorithm); true on one site instance by instance
+   (needles).  A worked reduction for a successor — cube, order two, zero remainder,
+   `h = α + β·s`: for large coefficients `ln Z ≈ −min h = −h(x*)`, `x* = −sign β`.  After
+   evaluations at `x¹, …, x^q` let `W = span{x^j − x¹}`; the minimum is a known linear
+   combination of the observed values iff `x* − x¹ ∈ W`.  With one hidden direction `ν`
+   (`W = ν^⊥`) and `β = β₀ + tν`, `β₀ ∈ W` known, the function
+   `t ↦ ν·x*(t) = −Σ_k |ν_k|·sign(t − t_k)`, `t_k = −β₀_k/ν_k`, is a decreasing step function, so
+   the event "the algorithm has seen the minimum" is one interval between consecutive
+   breakpoints, known to the algorithm; for a coordinate direction it is the sign of
+   the hidden coefficient.  Under a Gaussian prior the algorithm may stop when that
+   interval has posterior mass near one — rare, but enough for an average count
+   `N_ball − Θ(√δ)`; so a proof needs per-instance correctness, or a prior (independent
+   symmetric coefficients with log-uniform magnitudes over a huge range, the constant
+   on a much wider range) under which every such interval has posterior mass at most
+   `½ + o(1)` outside transcripts of vanishing probability.  **An outline exists** (theory
+   report Proposition 11.18e(b′)(ii)): under that prior the magnitudes are widely
+   separated; with `k` the coordinate of the support of `ν` that minimises `|β_k/ν_k|`, the
+   map `β ↦ β − 2(β_k/ν_k)ν`, `α ↦ α + 2(β_k/ν_k)ν·x¹` keeps the transcript, flips the sign at
+   `k` only, is an involution preserving the prior up to `1 + o(1)`, and sends the event
+   "the minimum has been seen" into its complement; this would give
+   `sup_g E|Q(g)| ≥ (1 − 2δ)(n + 1) − o(1)`.  Verified exactly:
+   `experiments/coordinator_checks/random_ball/pairing_check.py` (41 786 cases, no
+   violation).  To write: (1) the good set and its probability, with the two cutoffs of
+   the prior; (2) the bound on outputs that are right off the event by luck (the
+   posterior of the hidden coordinate has density at most `1/(cutoff)` per unit length
+   against a total mass of order the logarithm of the scale separation); (3) `ln Z`
+   against the minimum, with a bounded known part; (4) the reduction of an early stop
+   with several hidden directions to one; then orders above two (the minimum of a
+   function of order below `m` is no longer a sum of absolute values) and larger
+   alphabets (`T = −α − Σ_i min_a f_i(a)`: the same tropical structure, pairing by swapping
+   the two lowest states of one site).
+   (b) *The nested sampler* (Proposition 11.113a) has not been run on a real sandwich;
+   proposed to the science division with a validation target (THY-RES-0012 §2.3).  When
+   it reports, compare the acceptance rate `E_q ρ` with the ratio of the two widths; a
+   *deterministic* inner bracket — bounds on `Z(e_∓)` between the share models without
+   free sampling — is open (§12 item 13(g)).  (c) *The lower bound without a hint for a
+   sandwich*, `sinh²(Δ/2)/ε²`, is proved on paper at this checkpoint (Proposition 11.113(d):
+   independent inclusion bits, two members `2ε` apart, Pinsker) and cross-checked against
+   exact total variations (harness XXIV.11); open: a machine check —
+   `QueryLowerBound.lean` has packing bounds for hinted verification only, so a lemma of
+   Le Cam type (total variation of the transcripts under two priors) would be new in
+   the library — and the constant (a factor three on either side).  (d) *P5-T1(i)* — a polynomially computable bracket of the least sign-blind
+   bound — is not met (THY-RES-0012 §3.3).  (e) Optional, unchanged: the division's
+   ordered-constants corollary, the forms without an order on the sites and the
+   one-site oscillation of the remainder (its `RemainderIdentity.lean`).  (f) The
+   allocation rule of Proposition 11.18f at the pair level ("the two most frozen sites
+   of `T`") has a closed form by second differences of `Γ` on nested sets; written in
+   THY-RES-0012 §3.2, not in the harness.
+
+0-second. **SCI-MSG-0023** (science branch at `8fb67d3`; closed at the nineteenth
+   checkpoint except for the optional parts named below).  Done at the eighteenth
    checkpoint, while its verification runs were in progress: L4-T1 — their
    `BennettTwoPoint.lean` is adopted (Theorem 11.110(f) is machine-checked), and their
    `bennett_bracket_weights` fits `jensen_bracket` without change (`BoxBennett.lean`); L4-T2
    in the text — the sharper upper end `W(r̄ − η − lo, σ²)` and the redundant hypotheses,
    citing their machine-checked lemmas; L4-T3 — `hc0` is dropped from
    `anchored_remainder_site_penalties`, and `cover_of_site_shares_order`,
-   `cover_of_equal_shares` ask nonnegativity on `m`-subsets only.  **Not done:** a harness
-   check of the sharper upper end (extend XXIV.6: the bracket with `r̄ − η − lo` must hold on
-   random finite laws and be at most the old one; add a mutation with `r̄ − 2η − lo`, which
-   is false); the optional parts of L4-T3 (their ordered-constants corollary, the forms
+   `cover_of_equal_shares` ask nonnegativity on `m`-subsets only.  **Done at the nineteenth
+   checkpoint:** the harness check of the sharper upper end (XXIV.6, with the mutation
+   `r̄ − 2η − lo`).  **Not done:** the optional parts of L4-T3 (their ordered-constants corollary, the forms
    without an order on the sites, the one-site oscillation of the remainder — in their
    `RemainderIdentity.lean` to copy).  Also in that fetch: SCI-RES-0011 (nothing to apply),
    their replication of our audit at `9408e33` (passes), and their review of the
-   seventeenth checkpoint (running: read it when it arrives).
+   seventeenth checkpoint (arrived as SCI-REV-0013 and applied: item 0-first).
 0. **§11.32, the crossover and what is conditional** (theory report §12 item 14).  (a) When
    the Scientific Discovery Division or the engineering division delivers the Markov
    recursion with blocks of four and five sites (requests R10-T2, R10-E1 of SCI-REV-0010),
@@ -2239,8 +2419,9 @@ engineering branch at `a2f6dc7` (unchanged).  In priority order:
    threshold conjecture at strong coupling (R10-T5).  (d) An upper bound on a cost at
    bounded accuracy for a chain — the analogue of Theorem 11.58 for block landscapes — is
    the one statement that would turn the brackets into exponents of algorithms.  (e) A
-   machine check of Theorem 11.116(a), (b), (d) — (c) is done (`SoftMinLowerBound.lean`);
-   (a) and (b) are finite algebra of the same kind, (d) is an induction along the chain.  **Before any qualitative sentence about a new
+   machine check of Theorem 11.116(d) — (c) is done (`SoftMinLowerBound.lean`), (a) and (b)
+   are done in their two-block form (`BlockReductions.lean`, nineteenth checkpoint; the
+   iteration over the cuts of a chain is on paper), (d) is an induction along the chain.  **Before any qualitative sentence about a new
    parameter range is written: evaluate the proved bound of the opposite sign over that
    range** (D59 item 1).
 0a. **The rate of the level recursion** (remark after Theorem 11.53): refereeing has been

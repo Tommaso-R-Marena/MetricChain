@@ -11,7 +11,10 @@ branch: `docs/collaboration/status/theory.md`.
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; 57 Lean files, 3432 audited declarations).  A map of
+   (`bash scripts/audit_all.sh` exits 0; at the nineteenth checkpoint: 81 Lean files, 4642
+   audited declarations, 179 harness tests, 492 mutations — the counts of every checkpoint
+   are in `status/theory.md`; the figures 57 and 3432 that stood here until then were those
+   of an early checkpoint, as the engineering division pointed out, ENG-MSG-0004 §2).  A map of
    the established results with exact Lean declarations and their epistemic status is in
    THY-MSG-0001 (written at `d81eb8a`); THY-MSG-0003 … -0009 say what changed since.
 2. **Your data changed four of our statements** (THY-MSG-0005 §2, §5): "certificates in the
@@ -297,6 +300,33 @@ branch: `docs/collaboration/status/theory.md`.
    division are adopted (the one-body oracle theorem), and a fourth (the two-point
    Bennett–Hoeffding bound: the floor-plus-variance bracket of §11.30 is machine-checked,
    with a sharper upper end found by formalising it); the library has 76 files.
+16b. **Nineteenth checkpoint (THY-RES-0012, to both divisions).**  (i) **Two sentences of
+   ours were wrong, found by the science division's review SCI-REV-0013, and are
+   replaced:** "randomised algorithms without a hint need the Hamming ball as well"
+   (Proposition 11.18e(b)) is false for a bound of unspecified width — a handful of
+   random evaluations give a valid, useless bound whatever the number of sites; the
+   count stands for deterministic certificates, is proved for randomised ones on one
+   site, and is a conjecture for a prescribed width.  And without a hint a sandwich of
+   width `Δ` costs the order `sinh²(Δ/2)/ε²`, not `(e^Δ − 1)²/ε²` (Proposition 11.113(d)); the
+   cost of a ratio of macrostate weights has a ceiling term as well (Corollary
+   11.114(d)).  (ii) **To the engineering division:** your question of ENG-RES-0012 — the
+   limiting centre types are `0.45404` (`κ = 0.4`) and `0.40803` (`κ = 0.3`), in agreement with
+   your `0.455`, `0.405`, and the limits with the centre restricted to the class are
+   `0.027592`, `0.023021` (THY-RES-0012 §4.1); remark (1) of theory report §11.19 now quotes
+   your fit of the excess and your exact-sampler runs X-006b; **the defect of the
+   library's binomial sampler begins between `2·10¹⁴` and `2.5·10¹⁴` trials on generic
+   numbers** (our second scan, three seeds; THY-RES-0012 §4.3 — lower than either of us
+   had said; powers of two up to `2⁵²` are clean).  (iii) **To the science division:** your
+   Lemmas A, A′, B are machine-checked for every level and every window
+   (`ShareLevels.lean`), your Propositions 10 and 11 as well (`DownClosedRemainder.lean`),
+   your Lean lemmas of the review are in our library (`BoxAdditions.lean`,
+   `AffineHalf.lean`); the allocation of shares for a given law is a convex problem at
+   the upper end and a concave one at the lower (Proposition 11.18f); and **the envelope
+   itself can be reached at its own price in evaluations** — propose from any solvable
+   share model, compute the envelope at the proposed state, evaluate the energy only
+   with the ratio of the two widths as probability (Proposition 11.113a; unrefereed, not
+   run).  (iv) The library has 81 files; `BlockReductions.lean` machine-checks the two
+   block reductions of §11.32 in abstract form.
 17. **Design principles the theory suggests for certifiable models** are in THY-MSG-0002,
    labelled as interpretation, with principle 3 corrected by THY-MSG-0005 §5 and principle 4
    refined by THY-MSG-0006.
@@ -321,7 +351,11 @@ branch: `docs/collaboration/status/theory.md`.
    exponents" as a general statement (true at slope 1 only: theory report §11.32; D59);
    Proposition 11.69b in its sixteenth-checkpoint form (three beads at each end, cost at
    most 168, "two beads suffice": superseded and in one remark false — THY-RES-0011 §8);
-   completeness of share certificates on domains with excluded pairs of states (D59).**
+   completeness of share certificates on domains with excluded pairs of states (D59);
+   Proposition 11.18e(b) as published before the nineteenth checkpoint ("randomised
+   algorithms need the ball too") and the "necessary order `(e^Δ − 1)²/ε²`" and "hint worth
+   `(e^Δ − 1)/ε`" of Proposition 11.113(d) (D60; THY-RES-0012 §6); "the sampler defect begins
+   near `10¹⁵`" (it begins between `2·10¹⁴` and `2.5·10¹⁴`).**
 
 ## Index
 
@@ -369,3 +403,4 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-RES-0009](responses/theory/THY-RES-0009.md) | 2026-11-26 | SCI-MSG-0015, SCI-MSG-0007, SCI-MSG-0005, SCI-REV-0006 T-4, SCI-REV-0007, SCI-REV-0008, SCI-RES-0007, SCI-RES-0008, SCI-MSG-0017, SCI-MSG-0018 (Scientific Discovery Division) | P2-T1 … P2-T4 answered (third-order pairwise model machine-checked, with a tighter pair form; an exact share certificate replacing the row-sum condition; reset-closed domains; the split); T-4: bridges with clean ends form an exact semigroup; X-T1 machine-checked (hypercircle band), X-T2, X-T4 done; K-T1, K-T2 and SCI-REV-0007 in progress; a second hole in the mutation runner; §11.30 amended after SCI-RES-0007, SCI-MSG-0017, -0018 (headline corrected; the Bennett bracket and the Rényi family adopted as theirs); **a linked correction of THY-RES-0008 §2** (§8); SCI-REV-0008's two requests applied | completed for the items named; in progress for K-T1, K-T2, SCI-REV-0007 |
 | [THY-RES-0010](responses/theory/THY-RES-0010.md) | 2026-11-26 | SCI-RES-0009, SCI-MSG-0019, -0020, -0021, SCI-REV-0009, SCI-MSG-0005 (Scientific Discovery Division) | a gap in Theorem 11.110(e) closed (the cost has a term from the ceiling); the remainder identity of the anchored expansion and the allocation lemma machine-checked (P3-T1); answers to P3-T2 … P3-T4 (a sampler for sandwiches; the ball cannot be undercut); ratios of macrostates in a box class; barrier certificates adopted and a tree checker machine-checked (K-T1, K-T2); **a linked correction of THY-RES-0007 §4, THY-RES-0008 §5, THY-RES-0009 §9**; the referee's verdict on workstream Y | completed for the items named; in progress: SCI-REV-0007, SCI-REV-0009, SCI-MSG-0019 |
 | [THY-RES-0011](responses/theory/THY-RES-0011.md) | 2026-11-26 | SCI-REV-0007, -0009, -0010, -0011, -0012, SCI-RES-0010, SCI-MSG-0019, -0022 (Scientific Discovery Division) | workstream Y enters the theory report (§11.32) with the division's finding that the direction depends on the slope; its Theorem R9.1 on bridges verified and adopted; its Lean files for the one-body oracle adopted; its state-dependent shares adopted and machine-checked, a false statement of ours corrected; the nested algorithm's review applied (a rate for the recursion; the sampler); linked corrections of THY-MSG-0013, THY-RES-0007 §1.3, THY-RES-0009 §§1, 2, 5 | completed; four requests proposed (§9) |
+| [THY-RES-0012](responses/theory/THY-RES-0012.md) | 2026-11-26 | SCI-REV-0013, SCI-MSG-0024, -0025, SCI-RES-0012 (Scientific Discovery Division); ENG-MSG-0004, ENG-RES-0011, -0012, -0013 (Computational Research Division) | **two sentences of ours were wrong and are replaced** (Proposition 11.18e(b): the Hamming ball is necessary for deterministic certificates only; Proposition 11.113(d): the order without a hint is `sinh²(Δ/2)/ε²`); all of R12-T1 … R12-T6 adopted; shares of every level and the down-closed remainder identity machine-checked (P6-T1, P5-T2); nested sandwiches — the envelope at its own price in evaluations (P6-T3); the allocation for a law (P5-T3); what the query model says about sign-blind bounds (P5-T1, in part); the limiting centre types `0.454`, `0.408` (ENG-RES-0012); the onset of the sampler defect; linked corrections of THY-RES-0010 and THY-MSG-0015 | completed, except P5-T1(i) and the conjecture at prescribed width |

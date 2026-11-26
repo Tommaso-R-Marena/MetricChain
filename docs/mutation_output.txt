@@ -194,6 +194,36 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] M6: constant shares of the deficits claimed to exist whenever state-dependent shares do (false: the two-site witness)
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] M1: the half lemma with ||h||/n in place of ||h||/(n + 1) (false: 1 + s_1 + ... + s_n on an even number of sites)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M2: the bound from one good point with the factor n in place of n + 1 (false at the extremal remainder)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M3: the least support claimed to be |X| / (product of the m - 1 SMALLEST alphabet sizes)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M4: the bound k_max^-(m-1) claimed attained for unequal alphabets (it is not: (2, 2, 3) at order three)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M5: four random evaluations claimed enough at delta = 0.05 (2^-4 > 0.05)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M6: one site: the algorithm that skips a random state with probability r claimed to fail with probability r on a needle (it is r/k)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M7: an affine function claimed large on three quarters of the cube (1 + s_1 is large on half)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M1: level shares divided by C(m, k) + 1 (they then do not cover)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M2: shares outside the window pushed down with the factor 1/(k + 2) (the window form then falls below level k + 1)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M3: the levels claimed to increase with k (pairs above sites)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M4: the upper end claimed concave in the allocation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M5: the lower end claimed convex in the allocation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M6: the derivative of the upper end claimed to be the untilted probability of the charged site
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M7: the greedy site penalty claimed to be Gamma of the sites at least as mobile, without the difference
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] M8: an allocation that distributes only nine tenths of every constant claimed to cover
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XI.14 M2: client form compared with the transposed centre form
@@ -896,6 +926,32 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXIV.10 M4: the gain over plain sampling claimed to be the square of E d/max d
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M7: the Bennett certificate with the floor width r_bar - 2 eta - lo (false at the extremal two-point law)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M1: the count without a hint with the Delta-dependence of the first version, (e^Delta - 1)^2/(2 eps^2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M2: Hoeffding's quadratic bound in place of the Kullback-Leibler one (the count then has the factor e^Delta again)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M3: the empirical Bernstein bound without its term of order 1/n (it misses a Bernoulli mean 1/n with probability 1/e)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M4: an error in an evaluated energy claimed to move a value of W by no more than itself (it is amplified where the sandwich is narrow)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M5: the width in units of ln Z claimed to be the linear one, 2 a t, at the division's numbers
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M6: 'a quarter of N_KL does not suffice' tested with all of N_KL
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M7: the two-point lower bound with the constant 8 in place of 2 (it then exceeds the exact number of evaluations at which the two members can be told apart)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.11 M8: the two members separated by eps/2 instead of 2 eps (such members need not be told apart, and with N_KL evaluations they cannot be)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.12 M1: the acceptance probability of the nested sampler measured up to the outer ceiling
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.12 M2: the free-sampling term 2 t_f dropped from the bracket of the nested sampler
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.12 M3: accepted draws claimed to have the law of the outer sampler
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.12 M4: the free part of the outer variable measured from the lower model
+                  exit=1  1 TEST(S) MISBEHAVED
 [         caught] M1: the upper reduction with the slack at the site left of a cut only (the site right of it needs delta^+ as well)
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] M2: the upper reduction without the known constant ln A_rho(g)
@@ -927,5 +983,5 @@
 [         caught] M4: the variance bound claimed for antiferromagnetic couplings (association is needed)
                   exit=1  1 TEST(S) MISBEHAVED
 
-464 mutations: 463 caught, 1 expected pass, 0 not as expected
-141 baseline runs of the unmutated harness (one per selection): 141 behave as expected, 0 misbehave
+492 mutations: 491 caught, 1 expected pass, 0 not as expected
+145 baseline runs of the unmutated harness (one per selection): 145 behave as expected, 0 misbehave

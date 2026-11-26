@@ -2035,3 +2035,93 @@ number can still miss the sentence drawn from them (item 1 was missed by a refer
 replicated every digit).  From this checkpoint on a new section is not given a
 qualitative headline until the bound of the opposite sign has been evaluated over the
 stated range, and an extension "by inspection of the proof" lists the parts it extends.
+
+## D60. A sketch stated as a theorem for randomised algorithms, a "necessary order" inherited from a sufficient count, and a correction that stopped one corollary short (nineteenth checkpoint of cycle 10; review SCI-REV-0013 of the Scientific Discovery Division; the Computational Research Division's checkpoint 4)
+
+The review was requested by us (THY-RES-0010 §9.2) for the statements of the seventeenth
+checkpoint.  It found two sentences false or wrong, both in parts we had labelled as a
+sketch or as quoted from memory, and eleven smaller defects.  Each finding was verified
+here before it was applied — by a derivation of our own and by new harness tests
+(XI.22, XXIV.11) whose numbers agree with the reviewer's.
+
+1. **Proposition 11.18e(b): "randomised algorithms without a hint need the Hamming ball
+   as well" — false as written.**  The statement was `sup_g E|Q(g)| ≥ (1 − δ)N_ball − o(1)`
+   for the task "a finite lower bound for the minimum, or a bracket of finite width for
+   `ln Z`", justified by one sentence: under a Gaussian prior of large variance the target
+   keeps a spread that grows with the variance.  *Counter-example (the division's):* a
+   function of order below `m` is at least a fixed fraction `c` of its maximum on a fixed
+   fraction `ρ` of the configurations, so `⌈ln(1/δ)/−ln(1 − ρ)⌉` uniformly random
+   evaluations bound its maximum by `(largest observed value + C)/c + C` with probability
+   `1 − δ` on every member — five evaluations at `δ = 0.05` on the cube at order two,
+   whatever the number of sites, where the claim demanded `0.95(n + 1)`.  The core is
+   machine-checked (`affine_half_large`, the division's, adopted).  *Why the sketch
+   failed:* a spread that grows does not prevent a valid bound that scales with the
+   observed values; validity is asked with probability `1 − δ` per instance, not a width.
+   *What is true:* the count for deterministic algorithms (part (a), unchanged); for
+   randomised ones on one site, instance by instance (a needle at an unevaluated state:
+   new part (b′)(i)); for a prescribed width it is a conjecture.  *What we added while
+   checking:* a Gaussian prior cannot prove the conjecture either — on one site with two
+   states the average count under that prior is `2 − √(2δ)`, below `2(1 − δ)` — and a prior
+   with widely separated coefficient scales, with a pairing of instances that share a
+   transcript, gives an outline for `(1 − 2δ)N_ball` on the cube at order two (stated as an
+   outline, not as a proof: this entry is the reason).
+   *Lesson:* a lower bound "for randomised algorithms" is tested against the laziest
+   randomised algorithm — uniformly random evaluations and an output that scales with
+   what is seen — before it is written down; "the posterior stays spread" is not an
+   impossibility argument unless the task asks for a width; and a statement about all
+   algorithms that rests on a sketch carries **[C]**, not **[P-sketch]**.
+
+2. **Proposition 11.113(d): "this order is necessary" — wrong by `e^Δ`.**  The count
+   `ln(2/δ)(e^Δ − 1)²/(2ε²)` of part (c) is sufficient.  We called its order necessary
+   "in the worst case over the box", citing from memory the classical lower bound for
+   the mean of a bounded function.  That bound is in terms of the variance, and here
+   the target is a *relative* accuracy of `1/(e^Δ − 1) + E W`: the worst mean is
+   `1/(e^Δ + 1)`, not `½`, and there the variance is small.  The right order is
+   `sinh²(Δ/2)/ε²`, and worst case against worst case a hint is worth `(1 − e^{−Δ})/ε`,
+   not `(e^Δ − 1)/ε`.  No consequence at the width `0.06` of the instance for which the
+   proposition was written; a factor 20 at width 3.  The necessity of the corrected
+   order is now written out (a two-point argument with independent inclusion bits and
+   Pinsker's inequality) and cross-checked against the exact number of bits at which
+   the two binomial laws separate.  *Lesson:* a lower bound quoted for
+   "the mean of a `[0, 1]`-valued function" concerns an absolute error at the worst mean;
+   when the target is another function of the mean, the optimisation over the mean is
+   redone before a count is called necessary.
+
+3. **Corollary 11.114(d) kept the defect that had just been removed from its theorem.**
+   One checkpoint earlier the lower bound of Theorem 11.110(e) had been completed by
+   bumps (D58 item 1).  The corollary for ratios, derived from that theorem, still
+   displayed the dip term alone, with the bumps in a parenthesis and no bump alternative
+   in `BoxRatio.lean`; and three sentences elsewhere (report §8, §11.30, blueprint §6.4)
+   still said that ratios are not covered, or that "the ceiling does not enter".  The
+   division supplied the two missing lemmas machine-checked; the mixed lower bound is
+   now `ratio_expected_queries_ge_mixed`.  *Lesson:* a correction is propagated by
+   searching for the corrected formula and its consequences, not for the theorem's
+   number; the list of places a correction "has reached" is made by grep, not from
+   memory.
+
+4. **Hypotheses lost between the Lean statement and the text; an attribution too
+   short.**  Theorem 11.110(c) omitted `U, V > 0` — the case excluded is the floor
+   itself, the subject of the correction; Corollary 11.114 stated a disjointness that
+   two of its Lean statements do not use and omitted the positivity they do; Theorem
+   11.115(d) needs at least one site; the bracket of Proposition 11.113(c) "never
+   leaves the deterministic one" only after intersection; Theorem 11.18d credited the
+   division with parts (a), (c) where (b) and (d) are its as well; "85 sets with three
+   or four states" were all three-state sets; the `Θ` of the summary row lacked "for
+   `ε ≲ 1`, where no single state is heavy, up to an additive constant".
+
+5. **A threshold read off a grid chosen for other reasons** (the defect of the library's
+   binomial sampler; THY-MSG-0015).  We had written "the defect begins near `n = 10¹⁵`".
+   Our scan went from `10¹²` to `2⁵⁰` — a power of two, and powers of two up to `2⁵²` are
+   clean — and then to `10¹⁵`.  Both other divisions found it lower; our second scan
+   (`nested_review_R6/t5b_onset.py`, generic numbers of trials, three seeds) puts the
+   onset between `2·10¹⁴` (clean) and `2.5·10¹⁴` (variance `0.2 %` too small at mean 92, `z`
+   between `−6` and `−8`).  Our replacement sampler never hands the library more than
+   `2³¹` trials and is not affected.  *Lesson:* a threshold is located by bisection on
+   generic values; powers of two are not generic for a floating-point defect.
+
+*What worked.*  The review we had asked for found what our own harness could not: the
+tests of the seventeenth checkpoint checked the statements as written, and a false
+"necessary" has no instance to fail on.  The reviewer wrote its code from the statements
+before opening ours, and machine-checked the core of its counter-example.  From this
+checkpoint on, a sentence of the form "no algorithm does better" is stated only with a
+machine-checked or written-out proof, or with the label **[C]** or **[K]** and the source.

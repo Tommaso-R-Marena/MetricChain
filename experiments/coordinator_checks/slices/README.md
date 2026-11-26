@@ -38,3 +38,12 @@ output (timing lines apart).
 | `minor_checks.py` → `out_minor_checks.txt` | the reviewer's four-line proof (thermodynamic integration on the fibre, `S ≥ 16cosh²(ω/4)` on 20 000 random tables, the curvature form `Ψ″ = 4/S`), and the minor findings m1–m6, m11, m12: the optimal input of an asymmetric channel (field against the channel, distribution towards the more reliable symbol), the closed form over shells `ℓ ≥ 0` only, the game form at negative accuracies, the two forms of the cube's function, the centre types for `N^κ(0⁺)` and the cusp, the non-adaptive function for profiles with any number of blocks | 70 s |
 
 In the harness the negative accuracies are covered by XXI.6.
+
+**Added with the nineteenth checkpoint (the Computational Research Division's ENG-RES-0012).**
+That division computed the smallest sensitive balls on type classes exactly up to `n = 10 000` and
+asked whether the best centre types it finds (`0.455` at `κ = 0.4`, `0.405` at `κ = 0.3`) agree with the
+closed form.  `centre_type.py` → `out_centre_type.txt` (a few seconds): the limiting centre types are
+`0.45404` and `0.40803` (and `0.36190` at `κ = 0.2`); the maximum is flat — centre types within `±0.008` of
+the best one lose `10⁻⁵` in the exponent — which is why the finite-`n` maximiser wanders; with the centre
+restricted to the class the limits are `0.027592` and `0.023021`, which that division's restricted
+values (`0.027940`, `0.023398` at `n = 10 000`) approach from above.  Answered in THY-RES-0012 §4.1.
