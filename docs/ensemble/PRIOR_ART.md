@@ -17,9 +17,18 @@ of the searches logged in §6 and is not a claim of novelty.
 | Donoho–Tanner, "Sparse nonnegative solution of underdetermined linear equations by linear programming", PNAS 102 (2005) 9446–9451; Bruckstein–Elad–Zibulevsky, IEEE Trans. Inform. Theory 54 (2008) 4813–4820 | the face criterion for the unique non-negative solution of an underdetermined linear system — the finite form of E1(a); **pointed out by the science division (SCI-RES-0026 §2(a)), which found them by a search and cites them from summaries** | summary (through the science division) |
 | quantum analogue: Linden–Popescu–Wootters (2002); Chen–Dawkins–Ji–Johnston–Kribs–Shultz–Zeng (2013) | states uniquely determined by local marginals; relation to unique ground states of local Hamiltonians | memory |
 | science division, `INFERENCE_LIMITS.md` §8 | the *bounding* side: a multiplier `λ` and a certified maximum bound an average over all ensembles with given data | full (their file at `2b4ccdf`) |
+| **P. J. di Dio, K. Schmüdgen, "The multidimensional truncated moment problem: atoms, determinacy, and core variety", J. Funct. Anal. 274 (2018) 3124–3148 (arXiv 1703.01497), Theorem 18** (found 2026-11-26, after the fifth checkpoint) | for a moment functional `L` on a finite-dimensional space `E` of continuous functions: `L` is not determinate ⇔ the vectors `(f_1(x), …, f_m(x))`, `x ∈ W(L)`, are linearly dependent ⇔ `|W(L)| > dim E|_{W(L)}` ⇔ some representing measure has more than `dim E|_{W(L)}` atoms; `W(L)` is the set of atoms of representing measures.  **This is our Theorem E1(b)** (`X_G = W(L)`) | partial: abstract and the statement of Theorem 18 through a fetch of the arXiv HTML (symbols partly garbled in extraction; proof not read) |
+| L. Fialkow, "The core variety of a multisequence in the truncated moment problem", J. Math. Anal. Appl. 456 (2017); G. Blekherman, L. Fialkow, "The core variety and representing measures in the truncated moment problem", arXiv 1804.04276 | the core variety: iterate "zero set of the non-negative functions that vanish on the previous set" — the chain `X_0 ⊇ X_1 ⊇ …` of our proof of E1(b); it is non-empty iff a representing measure exists | summary (search-engine summaries; titles and references confirmed; texts not opened) |
+| Structural biology: *maximum occurrence* (MaxOcc) of a conformer — the largest weight it can have in any ensemble that reproduces the averaged data (Bertini, Luchinat, Parigi and co-workers; reviewed in Ravera, Sgheri, Parigi, Luchinat, "A critical assessment of methods to recover information from averaged data", Phys. Chem. Chem. Phys. 18 (2016) 5686); Longinetti, Sgheri, Sottile, "Convex hulls of orbits and orientations of a moving protein domain", Discrete Comput. Geom. 43 (2010) 54–77 (arXiv 0712.3777) | the upper end of our interval of Theorem E2(a) for the target "weight of one conformer", used in practice for paramagnetic data; the convex hull of an orbit of the rotation group as the set of possible mean tensors (a moment body), with a theorem on its faces | summary (search-engine summaries and the titles; the review article could not be opened — the publisher refused the fetch; the arXiv paper not opened).  **Pointed out by the Structural Biology division's intake report** (maximum occurrence, ensemble refinement) |
 
-**Classification.**  E1: known in substance; our contribution is the formulation (support =
-ground-state set of an energy in the span) and the machine-checked sufficiency.  E1.1:
+**Classification.**  E1: **known** — (a) is the face criterion of non-negative sparse
+recovery, (b) is Theorem 18 of di Dio and Schmüdgen (2018) in the language of moment
+functionals, which we did not know when we wrote it (the first-checkpoint search did
+not look in the literature on truncated moment problems under "determinacy"); our
+contribution is the formulation (support = ground-state set of an energy in the span)
+and the machine-checked sufficiency.  The partial-identification interval of E2(a) for
+the weight of a conformer is, at its upper end, the "maximum occurrence" of the
+structural-biology literature.  E1.1:
 elementary.  Example E1.2: constructed here; the phenomenon (non-exposed faces, Hölder
 stability) is classical convex geometry.
 
@@ -224,6 +233,27 @@ by the reviewer).  E20a (five generic states on `𝕋³`) and E22 (three states 
 never determined): the reviewer's, not found in print.  E21: on finite product spaces
 weaker than Kahle's theorem; on tori not found.  OB16 is closed at this level.
 
+## 5b′. The torus of three and four angles (E20b–E20d; after the fifth checkpoint)
+
+| source | what it says | how it was read |
+|---|---|---|
+| A. Laface, E. Postinghel, "Secant varieties of Segre–Veronese embeddings of `(ℙ¹)^r`", arXiv 1105.2136 (2011; published in Math. Ann. according to our memory — the arXiv page shows no journal reference), Theorems 2.1, 2.2, Proposition 5.1 | the linear system of forms of multidegree `(d_1, …, d_r)` on `(ℙ¹)^r` through `n` general double points is non-special except for `(2, 2a)` with `n = 2a + 1`, `(1, 1, 2a)` with `n = 2a + 1`, `(2, 2, 2)` with `n = 7`, `(1, 1, 1, 1)` with `n = 3`; for `r = 4` and all `d_i ≤ 4` non-special for every `n` | the statement of Theorem 2.1, the table of exceptions and Proposition 5.1 through a fetch of the arXiv HTML version by an agent (the table was partly garbled in extraction; the two cases we use — `(2,2)` with three points, `(2,2,2)` with seven — and the non-speciality of `(2,2,2,2)` were confirmed by our own exact ranks, script S5).  Proofs not read |
+| Real curves of genus one (two-torsion; number of real components) | used only in the *explanation* of where the special six-tuples of E20c lie | textbook facts, from memory; no statement of the report depends on them |
+| **L. Baldi, G. Blekherman, R. Sinn, "Nonnegative polynomials and moment problems on algebraic curves", arXiv 2407.06017 (v2, February 2026)** | for a smooth real projective curve: a duality between the faces of the cone of non-negative forms and totally real effective divisors; the face lattice in genus one; Theorem B: the extreme rays with only real zeros correspond to (a component of) the two-torsion of the Jacobian; Theorem C: for a totally real elliptic normal curve `X ⊂ ℙⁿ` the Carathéodory number of the moments of degree two is `deg X` if `X(ℝ)` is connected and `deg X + 1` if not.  **This is the literature of the mechanism of E20b and E20c on the curve `Z`** (an elliptic normal sextic): that a non-negative quadric with six real double zeros exists only for special divisors (half-periods), and that the connectedness of the real locus matters | partial: abstract, and Theorems B and C in the introduction, through a fetch of the arXiv HTML; the body (their Section 5 on elliptic normal curves) not read |
+
+One search (2026-11-26, §6): no statement about the torus `𝕋³` with multilinear data, or
+about non-negative forms of multidegree `(2,2,2)` on `(ℙ¹)³` vanishing at six real points,
+was found; what was found is the paper of Baldi, Blekherman and Sinn above, which
+treats the moment problem *on a given curve*.  Relative to it, E20b and E20c add: the
+reduction of the problem on the torus to the curve cut out by the lifted certificate
+(the curve depends on the states) and the extension of a certificate from the curve to
+the torus; the statement for six states in general position, with exact ranks; and
+the numerical instances.  Whether their description of the faces in genus one gives
+E20b(c) and the existence part of E20c directly, we have not checked (their Section 5
+was not read).  Classification: E20b "an application of a known mechanism to the torus,
+with an elementary self-contained proof; the statement for the torus not found";
+E20c "the same; existence numerical here"; E20d an application of a published theorem.
+
 ## 5c. Part VII (data that are not linear in the ensemble)
 
 No search was made.  From memory: the reduction of a linear-fractional programme to a
@@ -299,7 +329,26 @@ Boolean functions (item 16a).  Classification of E15U: new (not found); elementa
     of Chiantini–Coppens (fetched); a real version exists (Ranestad–Seigal–Wang 2024,
     not read).
 
+20 (2026-11-26, after the fifth checkpoint; prompted by the Structural Biology
+    division's intake report, which lists what our register lacks).  (a) "conformational
+    ensemble determination from ensemble-averaged data ill-posed uniqueness maximum
+    occurrence …" — found the notion of *maximum occurrence* and the review of Ravera,
+    Sgheri, Parigi and Luchinat (2016); the article itself refused the fetch.  (b)
+    "ensemble refinement averaged experimental data degeneracy infinitely many ensembles
+    identifiability theorem minimal number of conformers Carathéodory" — no theorem of
+    the form "this ensemble is the only one with these data" was returned; the reviews
+    state the degeneracy and choose the smallest number of conformers that fits.  (c)
+    "Longinetti Sgheri Sottile convex hulls of orbits …" — found (arXiv 0712.3777; not
+    opened).  (d) "nonnegative multiforms multidegree (2,2,2) on P1xP1xP1 zeros extreme
+    rays not sums of squares real points …" — nothing on multiforms; found Baldi,
+    Blekherman and Sinn (moment problems on real curves), fetched in part.  (e) "Fialkow
+    core variety truncated moment problem …" — found; and through it di Dio and
+    Schmüdgen, Theorem 18 fetched: **our Theorem E1(b) is in print.**  (f) "Laface
+    Postinghel …" — fetched (Theorem 2.1, Proposition 5.1).
+
 Not searched yet (obligations): quantitative Heppes (to compare with O4); "random faces of
 the cut polytope" (O1); identifiability of secant varieties of measurement varieties (O5);
-the literature on maximum-occurrence and ensemble refinement in structural biology for a
-uniqueness theorem of the form E7.
+in the structural-biology literature: a uniqueness theorem of the form E7 (distance
+distributions), maximum-entropy and Bayesian reweighting (their stability, not their
+uniqueness, is what would compare with E17), Kruskal- and Teicher-type identifiability
+of mixtures (the Structural Biology division's list).

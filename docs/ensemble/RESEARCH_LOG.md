@@ -5,63 +5,67 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after the Part VII commit (2026-11-26, about 23:10 UTC).**  `ENSEMBLE_REPORT.md`
-version 3 with the corrections of §7 items 8–16: Parts I–VII, Theorems E1–E26 (with E2.2,
-E7′, E15T, E15U, E17.1, E18′, E20a, E20′, E20″), Conjectures C1–C3.  Parts I–VI have each had
-one review (ER1: I–III; the Science division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all
-applied.  **Part VII (E23–E26: data that are not linear in the ensemble) has had none.**
-Lean: `proofs/Ensemble/` five modules (twenty-four headline theorems, eight witnesses);
-`scripts/audit_all.sh` passed at checkpoint 4 (`527bf02`; 5145 declarations) and the
-committed `proofs/` is unchanged since.  Numerics: `experiments/ensemble/run_all.py` (eight
-scripts, then `check_quotes.py`).  Software-facing documents: `SOFTWARE_INTERFACE.md`
-(a card per result; N1–N3 are the new ones for non-linear data), `BENCHMARK_CONTROLS.md` (families B1–B8, twenty-two instances
-in `experiments/ensemble/benchmarks/controls_v1.json`).  Sent: ENSEMBLE-MSG-0001 to -0008;
-ENSEMBLE-RES-0001 to -0006.
-
-**In the working tree when this was written, not committed:** a machine check of the
-sufficiency half of Proposition E23(b), `Ensemble.eq_of_homogeneous_certificate` (in
-`proofs/Ensemble/Exposedness.lean`, after `eq_of_exposing_certificate`), with a witness
-`NonVacuity.ensemble_homogeneous_certificate_witness` in `proofs/AxiomAudit.lean`.  Both
-type-check with the standard axioms; `scripts/audit_all.sh` was running on that tree.  If
-they are not in the branch, the statement is in the log entry "After checkpoint 5" below
-and the proof is the proof of `eq_of_exposing_certificate` without the constant.
+**State after the commit "the torus of three angles" (2026-11-26, about 23:58 UTC).**
+`ENSEMBLE_REPORT.md` version 3 with the corrections and additions of §7 items 8–17: Parts
+I–VII, Theorems E1–E26 (with E2.2, E7′, E15T, E15U, E17.1, E18′, E20a–E20d, E20′, E20″),
+Conjectures C1–C3.  Parts I–VI have each had one review (ER1: I–III; the Science
+division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all applied.  **Unreviewed: Part VII
+(E23–E26); Theorem E20b and Propositions E20c, E20d; E15U beyond its main statement;
+E17.1; E20a, E22 and two constants of E20″.**  Lean: `proofs/Ensemble/` five modules
+(twenty-five headline theorems, nine witnesses); `scripts/audit_all.sh` passed on the
+`proofs/` tree of this commit (5147 declarations).  Numerics:
+`experiments/ensemble/run_all.py` (nine scripts, then `check_quotes.py`).  Software-facing
+documents: `SOFTWARE_INTERFACE.md` (a card per result), `BENCHMARK_CONTROLS.md` (families
+B1–B8, twenty-two instances in `experiments/ensemble/benchmarks/controls_v1.json`).  Sent:
+ENSEMBLE-MSG-0001 to -0009; ENSEMBLE-RES-0001 to -0006.
 
 **Standing instructions** of the research owner's two supplementary directives are in
 `HANDOFF.md` items 3a and 3b (seventh division: Structural Biology; eighth: Frontier
-Benchmarking).  Fetch both of their branches at every synchronisation.  At 23:07 UTC all
-seven other branches had moved (`status/ensemble.md`, synchronisation record): **the
-Structural Biology division's intake report on our work** (its
-`docs/structural_biology/intake/N_ensemble.md`, written at our `8d42f60`) is read and not
-yet answered; six new messages of the older divisions are listed and not yet read.
+Benchmarking).  Fetch both of their branches at every synchronisation.
 
 **Next, in this order.**
-1. **Finish the machine check** above: audit passed → label the sufficiency of E23(b)
-   [V] in the report, the register, the status and card N1; add to
-   `nonlinear_data_checks.py` a check of the exact-cover construction of E26 (a scratch
-   run agreed with brute force on 60 of 60 instances; it is not in the repository); run
-   `run_all.py`; commit.
-2. **Synchronise** (eight branches).  Answer whatever the Structural Biology and Frontier
-   Benchmarking divisions ask; question E-S5 (which data are means, ratios, lengths,
-   none) is open with Science and Structural Biology.
-3. **Unreviewed statements** (do not present them as implementable): the whole of Part
-   VII; E15U beyond its main statement; E17.1; E20a, E22 and the new constants of E20″
-   (OB23, OB25, OB26, OB27).  An internal review by a subagent (it would be ER4) is the
-   next thing to commission.
-4. **Research under the directives** (task list item "Cycle 5"): (i) beyond functions of
-   finitely many means — the first uncovered case is a datum averaged on the time scale
-   of a measurement, and a noise theory for non-convex compatible sets; (ii) certificate
-   formats on product spaces: the Nullstellensatz certificates of
-   Johnston–Lovitz–Vijayaraghavan for lift isolation, a format that also certifies a gap
-   (E-T4); (iii) certified lower bounds on the number of conformers; (iv) the torus for
-   four angles (twelve states identified in 40 instances; thirteen configuration-dependent)
-   and a proof for six states on three angles; (v) thresholds C2, C3 — only with a proof
-   idea; more numerics at small `n` are far from the asymptotic regime (§4.2).
-5. Append the four-body rows for `n = 14` to `output_threshold.txt` and §4c.3 if the
-   background run finished (its log is in the session scratchpad, not in the repository;
-   first row: `K = 280`, face frequency `1.000` on 10 trials, 4 740 s per value of `K`).
+1. **ENSEMBLE-RES-0007 to the Structural Biology division** — owed.  Its intake report on
+   our work (`docs/structural_biology/intake/N_ensemble.md` on its branch, written at our
+   `8d42f60`) is read.  The answer should contain: (i) what has changed since `8d42f60` in
+   the statements it registered (E17's lower constant is `0.335`, not `0.199`; E15T's
+   converse was false; Part VI after its review — thresholds, Kahle's theorem, chains
+   withdrawn, E20a–E22; E17.1; Part VII; the readiness levels of
+   `SOFTWARE_INTERFACE.md`); (ii) its table of data types, checked mathematically —
+   single-angle data give no cross-angle information on a product space (chimeras, §3);
+   a variance-type datum is a function of two means, concave in the ensemble (Part VII);
+   (iii) its prior-art observation (ensemble refinement, maximum occurrence, Kruskal-type
+   identifiability are not in our register): do a bounded search and say what was found.
+2. **A proposition on one-sided convexity** for Part VII (drafted in the session, not in
+   the repository): if the datum is a convex function of the means, upper bounds are
+   convex constraints (variance: concave, so lower bounds); for a datum averaged fast
+   within basins and slowly between them, `Σ_k ν(B_k) g(E_ν[φ | B_k])` with `g` convex is
+   convex in `ν` (a perspective function) and lies between `g(E_νφ)` and `E_ν g(φ)` for every
+   partition — so `{ν : g(E_νφ) ≤ y ≤ E_ν g(φ)}` is a convex outer bound that is valid
+   whatever the separation of time scales.  Prove, check numerically, add.
+3. **Synchronise** (eight branches); question E-S5 (which data are means, ratios,
+   lengths, none) is open with Science and Structural Biology, E-T5 with Theory and
+   Complexity.
+4. **An internal review (ER4)** of the unreviewed statements listed above — commission a
+   subagent; OB28 lists what to attack in E20b–E20d, OB27 in Part VII.
+5. **Research.**  (i) Four angles, thirteen to sixteen states: the count of E20b on the
+   zero set of the lifted certificate (a curve of genus 13 for thirteen states: a
+   ten-dimensional space of candidates; is one of them non-negative on the real curve?
+   — a linear programme on the traced curve decides instance by instance); (ii) an
+   exact special six-tuple for E20c; whether seven states on `𝕋³` can ever be determined;
+   (iii) the same count for the Geometric Inference Division's chains (suggested to it
+   in ENSEMBLE-MSG-0009); (iv) certified lower bounds on the number of conformers
+   (ranks of lifted moment matrices; the largest number compatible with the data is the
+   size of the minimal face's preimage); (v) misspecified configuration space: a library
+   that misses mass `ε` is a tolerance `ε·D`, and data outside the library's moment body
+   give a certified lower bound on the missing mass; (vi) thresholds C2, C3 — only with
+   a proof idea.
 6. Machine checks: E15(c) as a statement about class members (OB13); a torus instance
    for the witness of the two-coordinate growth inequality; E12(a).
 7. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
+8. Prior art still to read in the original: di Dio–Schmüdgen (Theorem 18 is our E1(b);
+   the paper also treats the set of atoms and the Carathéodory number — compare with
+   E1, E3 and §2); Baldi–Blekherman–Sinn, Section 5 (does it give E20b(c) and the
+   existence part of E20c directly?); the maximum-occurrence literature.
 
 ---
 
@@ -511,3 +515,89 @@ such data, and for squares provably so.  The class "functions of finitely many m
 is exhausted as far as structure goes; the next uncovered ground is data that are not
 of that class at all, and noise for non-convex compatible sets.  Part VII is the only
 Part without a review: commission one before building on it.
+
+---
+
+## 2026-11-26 — The torus of three angles: a count that had been made wrongly, made where it belongs
+
+**Trigger.**  Waiting for the audit of the homogeneous certificate, we returned to the one
+statement of Part VI that was numerical on one side: "six generic states on `𝕋³` are not
+determined" (review ER3: twins in 10 of 10 instances, and the remark that on the curve
+the 27 products span 12 functions while six double zeros are 12 conditions).
+
+**Idea.**  In real coordinates `t = tan(φ/2)` everything is polynomial with rational
+coefficients.  A non-negative function of the data span that vanishes at the states has
+a vanishing derivative along the curve `Z` where the lifted certificate vanishes: twelve
+linear conditions on a 27-dimensional space that contains the 15-dimensional space of
+functions vanishing on `Z`.  If the rank is 12, nothing else satisfies them, every
+candidate certificate vanishes on the whole curve, and the chain of Theorem E1(b) never
+leaves the curve.  No algebraic geometry is needed for the proof — only a rank, which
+is exact at rational points.
+
+**Proved.**  Theorem E20b (six states in general position: never), with exact ranks at
+two rational six-tuples.  The numerical input of E20a replaced by a Gröbner-basis
+computation in the eight charts plus semicontinuity; at the instance the sixth zero is
+a rational point.
+
+**Found while testing the rank.**  Moving the sixth state along the curve through the
+other five, the determinant of the twelve conditions changes sign — at the "sixth zero"
+of the five (dependent lifts; five states and their ghost are an identified six-state
+ensemble) and at other points, where the lifts are independent and the rank is 11.
+There the extra function `q_0` is semidefinite on the curve when the curve has one real
+component, and a certificate `A(g_1² + g_2²) + q_0 + i` is non-negative on the whole torus
+with exactly six zeros: **six states are determined on a hypersurface** (Proposition
+E20c), by a certificate that cannot be a sum of squares of lifted forms.  With two real
+components the signs of `q_0` on them may differ, and then there is a twin.  Explanation
+(genus one, half-periods) recorded as an explanation.
+
+**A sentence we wrote and withdrew before committing.**  "A test that answers
+'identified' at such a configuration is right, and useless."  Wrong: the certificate
+has quadratic growth, so every measure with nearly the same data is concentrated near
+the six states, on both sides of the hypersurface.  What is discontinuous is the
+verdict, not the information.  The paragraph now says that.
+
+**The count for every `r`** (Proposition E20d).  The plain count of double points is an
+upper bound — 17 states on four angles — because the conditions are independent for
+`r ≥ 4` by a published theorem (Laface–Postinghel), whose only exceptions in these
+degrees are three points on `(ℙ¹)²` and seven on `(ℙ¹)³`: exactly the two tori on which our
+third checkpoint had read a threshold off the count (`DEAD_ENDS.md` ED24, with a sequel).
+Sixteen random states on `𝕋⁴`: the unique function with sixteen double points is a saddle
+at some state in every instance tried.
+
+**Machine check.**  `Ensemble.eq_of_homogeneous_certificate` and its witness are in
+`proofs/`; `scripts/audit_all.sh`: AUDIT PASSED (5147 declarations).
+
+**Finished in the background.**  Four-body data at `n = 14`, ten supports per `K`, about
+four hours on one core: face frequency `1.000` at `K = 320`, `0.200` at 340, `0.000` at 360.
+The Gaussian cloud of that size has its threshold at `295.8` (new script
+`gaussian_threshold.py`, the review's method): the ratio cube/Gaussian has grown at each
+of the four sizes (`0.98, 1.04, 1.09`, then between `1.08` and `1.15`).
+
+**Prior art found — and one of our theorems is in print.**  The Structural Biology
+division's intake report lists what our prior-art register lacks.  A bounded search
+(§6 item 20 of the register) found: (i) **Theorem E1(b) is Theorem 18 of di Dio and
+Schmüdgen (2018)** on the determinacy of truncated moment functionals, and the chain of
+our proof is Fialkow's core variety — we had it as "known in substance" from memory of
+older sources; the first-checkpoint search never used the word "determinacy"; (ii) the
+upper end of the interval of E2(a) for the weight of one conformer is the "maximum
+occurrence" of Bertini, Luchinat, Parigi and co-workers; (iii) the mechanism of E20b and
+E20c on the curve (faces ↔ totally real divisors, two-torsion, connectedness of the real
+locus) is in Baldi, Blekherman and Sinn (2024), found an hour after we wrote the
+explanation.  Recorded in the report and the register before the commit.  *Lesson: the
+literature of a statement lives under the name its field gives it — "determinate
+moment functional", not "identified ensemble".*
+
+**Verified.**  `torus_six_states.py` (S1, S2, S5 exact; S3, S4, S4b, S6 numerical);
+`run_all.py` (nine scripts, then `check_quotes.py`, 113 entries after the last edits of
+the text — re-run with the new option `--quotes-only`): all pass.
+
+**Communicated.**  ENSEMBLE-MSG-0009 (all; linked update of -0007 and -0008; question
+E-T5; acknowledgements of THY-MSG-0019 §5, COMPLEXITY-REV-0005, GEOMETRY-MSG-0009).
+
+**Reassessment.**  The dead end ED24 turned out to be a method applied in the wrong
+place.  Two things follow for the open problem O10: for four angles the question
+"thirteen to sixteen states" is now a finite-dimensional positivity question on a real
+curve or surface that a linear programme can decide instance by instance; and "the
+largest number of generic states" may not exist over the reals, because identification
+beyond the lifted range is a semialgebraic condition that can hold on an open set and
+fail on another.  The answer owed to the Structural Biology division comes first.

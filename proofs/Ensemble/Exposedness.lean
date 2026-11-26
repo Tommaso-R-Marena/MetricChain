@@ -12,6 +12,10 @@ vector `ν` on a finite configuration space `X`; the *data* of a family of obser
   `c + λ·Φ` in the span of the observables is zero on a set `S`, positive off `S`, and the
   features `(1, Φ)` are linearly independent on `S`, then an ensemble supported on `S` is the
   **only** ensemble with its data.
+* `eq_of_homogeneous_certificate` — the same when the data are known only up to one unknown
+  factor (report Proposition E23(b), sufficiency): if a combination `λ·Φ` *without a constant
+  term* is zero on `S` and positive off `S`, and the features are linearly independent on `S`,
+  then an ensemble whose data are any multiple of the data of `μ` equals `μ`.
 * `mass_off_support_le` — the first half of the stability estimate: an ensemble whose data are
   close to those of `μ` puts little mass outside the support of `μ`; the constant is the
   coefficient norm of the certificate divided by its gap.
@@ -108,6 +112,63 @@ theorem eq_of_exposing_certificate
       linarith)
   funext x
   have h : ν x - μ x = 0 := hdiff x
+  linarith
+
+/-- **Identification up to an unknown positive factor (sufficiency in Proposition E23(b)).**
+Let `μ` be supported on `S`.  If some combination `λ·Φ` of the observables *without a constant
+term* is zero on `S` and positive off `S`, and no non-zero vector carried by `S` has zero data
+(linear independence of the features on `S`), then every ensemble whose data are a multiple
+`t` of the data of `μ` equals `μ`. -/
+theorem eq_of_homogeneous_certificate
+    (Φ : ι → X → ℝ) (μ ν : X → ℝ) (hμ : IsEnsemble μ) (hν : IsEnsemble ν)
+    (S : Finset X) (hsupp : ∀ x, x ∉ S → μ x = 0)
+    (lam : ι → ℝ)
+    (hzero : ∀ x ∈ S, energy lam Φ x = 0)
+    (hpos : ∀ x, x ∉ S → 0 < energy lam Φ x)
+    (hindep : ∀ h : X → ℝ, (∀ x, x ∉ S → h x = 0) →
+        (∀ i, ∑ x, h x * Φ i x = 0) → ∀ x, h x = 0)
+    (t : ℝ) (hdata : ∀ i, mean ν (Φ i) = t * mean μ (Φ i)) : ν = μ := by
+  have hμ0 : mean μ (energy lam Φ) = 0 := by
+    unfold mean
+    refine Finset.sum_eq_zero fun x _ => ?_
+    by_cases hx : x ∈ S
+    · rw [hzero x hx, mul_zero]
+    · rw [hsupp x hx, zero_mul]
+  have hν0 : mean ν (energy lam Φ) = 0 := by
+    rw [mean_energy]
+    have e : ∑ i, lam i * mean ν (Φ i) = t * ∑ i, lam i * mean μ (Φ i) := by
+      rw [Finset.mul_sum]
+      exact Finset.sum_congr rfl fun i _ => by rw [hdata i]; ring
+    rw [e, ← mean_energy, hμ0, mul_zero]
+  have hterm : ∀ x ∈ (Finset.univ : Finset X), 0 ≤ ν x * energy lam Φ x := by
+    intro x _
+    by_cases hx : x ∈ S
+    · rw [hzero x hx, mul_zero]
+    · exact mul_nonneg (hν.nonneg x) (hpos x hx).le
+  have hall := (Finset.sum_eq_zero_iff_of_nonneg hterm).mp hν0
+  have hνS : ∀ x, x ∉ S → ν x = 0 := by
+    intro x hx
+    have h1 := hall x (Finset.mem_univ x)
+    rcases mul_eq_zero.mp h1 with h | h
+    · exact h
+    · exact absurd h (hpos x hx).ne'
+  have hdiff := hindep (fun x => ν x - t * μ x)
+    (fun x hx => by simp [hνS x hx, hsupp x hx])
+    (fun i => by
+      have h := hdata i
+      unfold mean at h
+      have e : ∑ x, (ν x - t * μ x) * Φ i x = ∑ x, ν x * Φ i x - t * ∑ x, μ x * Φ i x := by
+        rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+        exact Finset.sum_congr rfl fun x _ => by ring
+      rw [e, h]
+      ring)
+  have ht : t = 1 := by
+    have h1 : ∑ x, (ν x - t * μ x) = 0 := Finset.sum_eq_zero fun x _ => hdiff x
+    rw [Finset.sum_sub_distrib, ← Finset.mul_sum, hν.sum_one, hμ.sum_one] at h1
+    linarith
+  funext x
+  have h : ν x - t * μ x = 0 := hdiff x
+  rw [ht] at h
   linarith
 
 /-- **Stability, first half.**  If the certificate `c + λ·Φ` vanishes on `S ⊇ supp μ` and is at

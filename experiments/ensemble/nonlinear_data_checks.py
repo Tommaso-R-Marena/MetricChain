@@ -169,6 +169,33 @@ def partition_exists(a):
     return tot // 2 in reach
 
 
+def exact_cover_consistent(triples, U):
+    """The construction of E26(b) 'in the strong sense': X = {1..n} x {+,-}, phi_j(k, +-) = +-n [j = k] with the data
+    (E phi_j)^2 = 1, and psi_u = sum_{j : u in T_j} phi_j - (2 - deg u) with the data (E psi_u)^2 = 0.  Consistency is
+    decided by enumerating the signs of the first n means and one linear feasibility problem each."""
+    n = len(triples)
+    for s in itertools.product((1, -1), repeat=n):
+        Aeq = np.zeros((n + U + 1, 2 * n)); beq = np.zeros(n + U + 1)
+        for j in range(n):
+            Aeq[j, 2 * j] = n; Aeq[j, 2 * j + 1] = -n; beq[j] = s[j]
+        for u in range(U):
+            deg = sum(u in T for T in triples)
+            for j in range(n):
+                if u in triples[j]:
+                    Aeq[n + u, 2 * j] += n; Aeq[n + u, 2 * j + 1] -= n
+            beq[n + u] = 2 - deg                                    # E psi_u = 0, the total mass being one
+        Aeq[n + U, :] = 1.0; beq[n + U] = 1.0
+        if linprog(np.zeros(2 * n), A_eq=Aeq, b_eq=beq, bounds=[(0, None)] * (2 * n), method="highs").status == 0:
+            return True
+    return False
+
+
+def exact_cover_exists(triples, U):
+    n = len(triples)
+    return any(sorted(x for j in sub for x in triples[j]) == list(range(U))
+               for k in range(n + 1) for sub in itertools.combinations(range(n), k))
+
+
 def test_Q3():
     agree = yes = 0; cases = 60
     for _ in range(cases):
@@ -177,10 +204,23 @@ def test_Q3():
         agree += c == p; yes += p
     fixed = [([3, 1, 1, 2, 2, 1], True), ([5, 4, 2], False), ([7, 3, 2, 1, 1], True), ([8, 6, 5], False)]
     okf = all(consistent_squared_data(a) == ans == partition_exists(a) for a, ans in fixed)
-    return agree == cases and okf and 0 < yes < cases, \
+    # the reduction from exact cover by 3-sets (its own random stream, so that the checks after it are unchanged)
+    rx = np.random.default_rng(326); xc_agree = xc_yes = 0; xc_cases = 40
+    for trial in range(xc_cases):
+        U = 6; n = int(rx.integers(3, 8))
+        triples = [tuple(sorted(int(v) for v in rx.choice(U, 3, replace=False))) for _ in range(n)]
+        if trial % 3 == 0:                                          # plant a cover
+            perm = [int(v) for v in rx.permutation(U)]
+            triples[0] = tuple(sorted(perm[:3])); triples[1] = tuple(sorted(perm[3:]))
+        c, e = exact_cover_consistent(triples, U), exact_cover_exists(triples, U)
+        xc_agree += c == e; xc_yes += e
+    return agree == cases and okf and 0 < yes < cases and xc_agree == xc_cases and 0 < xc_yes < xc_cases, \
         [f"    squared means: {cases} random instances (3 to 8 integers): consistency of the data, decided by up to 2^(m-1) "
          f"linear feasibility problems, agrees with the subset-sum table in {agree}/{cases} ({yes} consistent); "
-         f"four fixed instances: {okf}"]
+         f"four fixed instances: {okf}",
+         f"    squared means with small numbers: {xc_cases} random families of 3 to 7 three-element subsets of a six-element"
+         f" set: consistency of the data agrees with the existence of an exact cover in {xc_agree}/{xc_cases}"
+         f" ({xc_yes} with a cover)"]
 
 
 # ---------------------------------------------------------------------------------------------------------- Q4

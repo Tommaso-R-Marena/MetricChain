@@ -83,7 +83,10 @@
    from the review ER3 (E20a, E22, two constants of E20″) — obligations OB23, OB25, OB26;
    **and the whole of Part VII** (E23–E26, data that are not linear in the ensemble:
    written after the fifth checkpoint, read by nobody but its author — OB27; its
-   software cards N1–N3 are at readiness R1 for that reason).
+   software cards N1–N3 are at readiness R1 for that reason); **and Theorem E20b with
+   Propositions E20c, E20d** (the torus of three angles: OB28 lists the six points a
+   reviewer should attack first).  Exact computer algebra (sympy rationals; ranks modulo
+   a prime) is not a kernel check: do not label such a step [V].
    Cited theorems not read in the original by us: `OPEN_OBLIGATIONS.md` OB2–OB6, OB10,
    OB15, OB16 (Kahle's theorem and Johnston–Lovitz–Vijayaraghavan among them).  On
    continuous spaces never test non-identification on a product grid (ED24).

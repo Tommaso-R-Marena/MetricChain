@@ -204,3 +204,19 @@ n = 12, 200 random supports per K (distinct modulo the flip); columns: K, P(face
    K =   9  K/n = 0.75   0.920   0.005   0.915   0.000   (35 s)
    K =  10  K/n = 0.83   0.905   0.000   0.905   0.000   (38 s)
    K =  11  K/n = 0.92   0.815   0.000   0.815   0.000   (27 s)
+
+===== kbody_capacity.py 14 2 10 280 300 320 340 360   (four-body data at n = 14; 10 supports per K; run of 2026-11-26, about four hours on one core) =====
+n = 14, data of even order <= 4: 8192 states modulo flip, 1093 features (constant included); lift dimension C(n-1,<=2) = 92; Cover-type bound 2*D_odd = 598
+   K =   280   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 15.8; 4740 s)
+   K =   300   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 12.8; 3263 s)
+   K =   320   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 12.5; 2595 s)
+   K =   340   face frequency = 0.200   lift-isolated = 0.000   (undecided 0; mean iterations 10.7; 1879 s)
+   K =   360   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 8.9; 1156 s)
+
+===== gaussian_threshold.py   (the Donoho-Tanner curve at the sizes of the four-body computations; method of the review ER3) =====
+check: rho_W^+(1/2) = 0.5582   (Donoho-Tanner: .5581)
+data of even order <= 4 on the cube: N = 2^(n-1) states modulo the flip, D = number of non-constant features
+   n = 8: N = 128, D = 98, D/N = 0.766: Gaussian threshold 76.4; lift dimension 29; 2 D_odd = 84
+   n = 10: N = 512, D = 255, D/N = 0.498: Gaussian threshold 142.0; lift dimension 46; 2 D_odd = 186
+   n = 12: N = 2048, D = 561, D/N = 0.274: Gaussian threshold 215.2; lift dimension 67; 2 D_odd = 352
+   n = 14: N = 8192, D = 1092, D/N = 0.133: Gaussian threshold 295.8; lift dimension 92; 2 D_odd = 598

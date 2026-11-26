@@ -252,6 +252,16 @@ corrections are in the report (a second growth constant for the case that one of
 differing angles nearly coincides; a bound on the weights that is linear in `τ`).  Three
 states on a torus of two angles are **never** determined by bilinear data (Proposition
 E22; control B2-07): a tool must not extend the two-state statement by analogy.
+*How many states (readiness R1: written after the last review).*  With all multilinear
+means of three angles: five states in general position are determined, six never
+(Theorem E20b) — except on a hypersurface of special six-tuples, where they are
+(Proposition E20c).  *Trap:* at such a configuration an identifiability test answers
+"identified", an arbitrarily small displacement of one state turns the answer into
+"not identified", and yet nothing observable changes much — in both cases every
+measure with nearly the same data sits near the six states.  A tool should report the
+stability bound of its certificate (card F2), not only the verdict.  For four angles:
+eleven states are always determined, seventeen never (Proposition E20d); in between
+the answer is not known and for thirteen it depends on the configuration.
 *Caveat to carry.*  A statement about probability measures on a torus with multilinear
 trigonometric means as data.  For chains of rigid segments the configuration space is
 not this torus (mirrored assemblies; only adjacent pairs of torsions are in the span of
@@ -293,7 +303,7 @@ enumeration for about five sites only — **R1** (E15U is unreviewed).
 These cards are for data that are functions of finitely many means.  The statements are
 elementary and have numerical checks, but nobody except their author has read them.
 
-### N1 — Ratios of means; one unknown calibration factor  (Proposition E23)
+### N1 — Ratios of means; one unknown calibration factor  (Proposition E23; the sufficiency of the factor criterion is [V] `Ensemble.eq_of_homogeneous_certificate`)
 
 *Ratios.*  `E_μφ/E_μψ ∈ [y − τ, y + τ]` with `ψ > 0` is the pair of linear constraints
 `E_μ(φ − (y + τ)ψ) ≤ 0 ≤ E_μ(φ − (y − τ)ψ)`: feed them to F1–F4 as they are.

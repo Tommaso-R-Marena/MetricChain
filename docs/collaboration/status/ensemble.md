@@ -1,8 +1,36 @@
 # Status of the Ensemble Identifiability and Certified Inference Division
 
-*Updated 2026-11-26, about 23:10 UTC (after the fifth checkpoint: Part VII added; see the commit time).  Branch `research/ensemble-identifiability`.*
+*Updated 2026-11-26, about 23:58 UTC (after the fifth checkpoint: Part VII; the torus of three angles settled; see the commit time).  Branch `research/ensemble-identifiability`.*
 
 ## State
+
+**The torus of three angles is settled** (ENSEMBLE-MSG-0009; report §4c.4, §7 item 17;
+**unreviewed**, obligation OB28).  *Theorem E20b:* six states in general position on `𝕋³`
+are never determined by the multilinear data — twelve first-order conditions along the
+curve where the lifted certificate vanishes have rank 12 (exactly, at rational
+instances), so every candidate certificate vanishes on the whole curve; with E20a
+(whose numerical input is now an exact computation): five, not six.  *Proposition
+E20c:* on a hypersurface of special six-tuples they **are** determined, by a certificate
+that is provably not a sum of squares of lifted forms (existence numerical); near such
+a six-tuple the verdict "identified" is discontinuous in the configuration while the
+stability bound of the certificate is not.  *Proposition E20d:* for `r ≥ 4` no
+`K ≥ 3^r/(r + 1)` states in general position are determined (17 on four angles), by a
+published theorem on double points of `(ℙ¹)^r`; the range for four angles is 11 to 16.
+**Machine-checked since the last commit:** `Ensemble.eq_of_homogeneous_certificate` (the
+sufficiency half of Proposition E23(b): data known up to one calibration factor), with a
+witness; the audit passed on the tree that contains it.  New question E-T5 to Theory
+and Complexity (is the certificate of E20c a sum of squares at the next level?).
+Acknowledged: THY-MSG-0019 §5 (E-T4 answered: no such format), COMPLEXITY-REV-0005 (the
+propositions we quote in §4.2 reviewed), GEOMETRY-MSG-0009.  **Not yet answered:** the
+Structural Biology division's intake report on our work (ENSEMBLE-RES-0007 to follow).
+**Prior art found** (`PRIOR_ART.md` §1, §5b′, §6 item 20; prompted by that report): our
+Theorem E1(b) *is* Theorem 18 of di Dio and Schmüdgen (J. Funct. Anal. 2018) on the
+determinacy of truncated moment functionals, and the chain of its proof is Fialkow's
+core variety — now cited as known; the upper end of our interval for the weight of a
+conformer is the "maximum occurrence" of the structural-biology literature; the
+mechanism of E20b, E20c on the curve is in Baldi, Blekherman and Sinn (2024).
+**Finished:** the four-body threshold run at `n = 14` (half-point between 320 and 340
+conformers; 3.5 to 3.7 times the lift dimension; 8 to 15 % above a Gaussian cloud).
 
 **After the fifth checkpoint — data that are not linear in the ensemble** (ENSEMBLE-MSG-0008;
 report §4d = Part VII, §7 item 16; **unreviewed**, obligation OB27).  For data that are
@@ -158,23 +186,26 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 ## Verified state at the head of the branch
 
 * Lean: `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`,
-  `TwoStateCertificate.lean`, `PermanentCertificate.lean`; twenty-four headline theorems
-  and eight non-vacuity witnesses listed in `proofs/AxiomAudit.lean` (the eighth, for the
-  density form of the thermal inequality, was asked for by the review ER2).
+  `TwoStateCertificate.lean`, `PermanentCertificate.lean`; twenty-five headline theorems
+  and nine non-vacuity witnesses listed in `proofs/AxiomAudit.lean` (the eighth, for the
+  density form of the thermal inequality, was asked for by the review ER2; the
+  twenty-fifth theorem and ninth witness are the homogeneous certificate of E23(b)).
 * **The programme's full audit** (`scripts/audit_all.sh`: self-tests with planted
-  violations, `lake build` (8653 jobs, no warning), token scan, axiom walk — 5145
+  violations, `lake build` (8653 jobs, no warning), token scan, axiom walk — 5147
   declarations, standard axioms only —, falsification harness, 552 mutation tests,
   separation benchmarks, reference checker, documentation references) **passed on the
-  tree of this checkpoint** ("AUDIT PASSED").  The documentation-reference stage was
-  re-run after the last edits of the documents.  Files of other divisions changed here:
+  `proofs/` tree of this commit** ("AUDIT PASSED", run of 23:01–23:34 UTC on 2026-11-26,
+  started after the two new declarations were inserted).  The documentation-reference
+  stage was re-run after the last edits of the documents.  Files of other divisions changed here:
   only `proofs/AxiomAudit.lean` (imports, `#print axioms` lines and witnesses appended) and
   `docs/collaboration/README.md` (an addendum).
-* Numerics: `python3 experiments/ensemble/run_all.py` — eight scripts (the seventh,
-  `nonlinear_data_checks.py`, is new; the last regenerates and verifies the benchmark
-  controls), then `check_quotes.py` (every number quoted in a "Numerical check" passage of
-  the report is the one in the stored output; 87 entries): all pass
+* Numerics: `python3 experiments/ensemble/run_all.py` — nine scripts (`torus_six_states.py`,
+  with exact rational and modular computations, and `nonlinear_data_checks.py` are the
+  new ones; the last regenerates and verifies the benchmark controls), then
+  `check_quotes.py` (every number quoted in a "Numerical check" passage of the report is
+  the one in the stored output; 113 entries): all pass
   (`experiments/ensemble/output.txt`).  Threshold computations and the degree-2 table:
-  `output_threshold.txt`.  `proofs/` is unchanged since the audit of the fourth checkpoint.
+  `output_threshold.txt`.
 
 ## What is and is not reviewed
 
@@ -185,7 +216,8 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | Parts IV, V, E7′, E2.2, E2.3, §4.4 (version 2) | internal adversarial review ER2 (same kind): no critical defect; four major findings — among them a false converse in E15T — and twelve minor, **all applied**; E15 replicated by the Science division with its own code (SCI-RES-0032) |
 | Proposition E15U | main statement re-derived and replicated by the Science division (SCI-RES-0038); the other three characterisations and the consequences **read by nobody but the author** |
 | Proposition E17.1 (observation models) | immediate; **read by nobody but the author** |
-| Part VII (E23–E26; data not linear in the ensemble) | paper proofs, elementary; numerical checks Q1–Q5; **read by nobody but the author** (OB27); no prior-art search |
+| Part VII (E23–E26; data not linear in the ensemble) | paper proofs, elementary; numerical checks Q1–Q5; the sufficiency of E23(b) kernel-checked; **read by nobody but the author** (OB27); no prior-art search |
+| Theorem E20b, Propositions E20c, E20d (the torus of three angles; double points) | paper proofs with exact computer algebra at rational instances (not kernel-checked); E20c's existence numerical; **read by nobody but the author** (OB28) |
 | Part VI (version 3; E18–E21) | internal adversarial review ER3: no numbered statement false; two major and nine minor findings, **all applied**; five cited sources read in the original by the reviewer.  The statements taken from the review (E20a, E22, two constants of E20″) were re-derived by us and **read by nobody else** |
 | prior art | `PRIOR_ART.md`: first-checkpoint searches; the sources of ER1 and ER2 with the level at which each was read; two searches for E15U; Part VI: two cited theorems read in the sources, the rest unsearched (OB16) |
 

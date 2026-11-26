@@ -1966,6 +1966,7 @@ ensemble identification and the bridge to `robust_certified_iff` (`Exposedness.l
 Rényi–Heppes theorem for arbitrary observables (`RenyiHeppes.lean`) -/
 
 #print axioms MetricChain.Ensemble.eq_of_exposing_certificate
+#print axioms MetricChain.Ensemble.eq_of_homogeneous_certificate
 #print axioms MetricChain.Ensemble.mass_off_support_le
 #print axioms MetricChain.Ensemble.transport_le_of_sharp
 #print axioms MetricChain.Ensemble.identification_of_robust_certificate
@@ -2011,6 +2012,49 @@ theorem ensemble_exposing_certificate_witness (ν : Fin 3 → ℝ) (hν : Ensemb
     rw [h0]
     simp [Ensemble.mean]
 
+/-- Non-vacuity of `Ensemble.eq_of_homogeneous_certificate`: three configurations `a, b, c`
+(`0, 1, 2`) with the two observables `(1, 0, 1)` and `(0, 1, 1)`.  An ensemble whose two data
+are a multiple — any multiple `t` — of those of the conformation `a` is that conformation. -/
+theorem ensemble_homogeneous_certificate_witness (ν : Fin 3 → ℝ) (hν : Ensemble.IsEnsemble ν)
+    (t : ℝ)
+    (h0 : Ensemble.mean ν (fun x : Fin 3 => if x = 1 then (0 : ℝ) else 1) = t)
+    (h1 : Ensemble.mean ν (fun x : Fin 3 => if x = 0 then (0 : ℝ) else 1) = 0) :
+    ν = fun x => if x = 0 then (1 : ℝ) else 0 := by
+  have hμ : Ensemble.IsEnsemble (fun x : Fin 3 => if x = 0 then (1 : ℝ) else 0) := by
+    constructor
+    · intro x
+      split_ifs <;> norm_num
+    · simp
+  refine Ensemble.eq_of_homogeneous_certificate (ι := Fin 2)
+    (fun i x => if i = 0 then (if x = 1 then (0 : ℝ) else 1) else (if x = 0 then (0 : ℝ) else 1))
+    (fun x : Fin 3 => if x = 0 then (1 : ℝ) else 0) ν hμ hν {0} ?_
+    (fun i => if i = 0 then (0 : ℝ) else 1) ?_ ?_ ?_ t ?_
+  · intro x hx
+    have hx0 : x ≠ 0 := by simpa using hx
+    simp [hx0]
+  · intro x hx
+    have hx0 : x = 0 := by simpa using hx
+    subst hx0
+    simp [Ensemble.energy]
+  · intro x hx
+    have hx0 : x ≠ 0 := by simpa using hx
+    simp [Ensemble.energy, Fin.sum_univ_two, hx0]
+  · intro h hoff hdat x
+    have h1' : h 1 = 0 := hoff 1 (by decide)
+    have h2' : h 2 = 0 := hoff 2 (by decide)
+    have e := hdat 0
+    rw [Fin.sum_univ_three, h1', h2'] at e
+    have h0' : h 0 = 0 := by simpa using e
+    fin_cases x <;> simp [h0', h1', h2']
+  · intro i
+    fin_cases i
+    · show Ensemble.mean ν (fun x : Fin 3 => if x = 1 then (0 : ℝ) else 1) = _
+      rw [h0]
+      simp [Ensemble.mean, Fin.sum_univ_three]
+    · show Ensemble.mean ν (fun x : Fin 3 => if x = 0 then (0 : ℝ) else 1) = _
+      rw [h1]
+      simp [Ensemble.mean, Fin.sum_univ_three]
+
 /-- Three features on the `3 × 3` grid: row, column and diagonal index. -/
 def gridFeature (j : Fin 3) (x : Fin 3 × Fin 3) : ℕ :=
   if j = 0 then x.1.val else if j = 1 then x.2.val else x.1.val + x.2.val
@@ -2035,6 +2079,7 @@ theorem ensemble_renyi_heppes_grid (μ ν : Fin 3 × Fin 3 → ℝ) (hν : ∀ x
 end MetricChain.NonVacuity
 
 #print axioms MetricChain.NonVacuity.ensemble_exposing_certificate_witness
+#print axioms MetricChain.NonVacuity.ensemble_homogeneous_certificate_witness
 #print axioms MetricChain.NonVacuity.ensemble_renyi_heppes_grid
 
 /-! ### Ensemble division, second checkpoint: the core of the thermal union bound

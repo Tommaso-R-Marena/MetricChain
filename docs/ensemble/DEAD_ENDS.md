@@ -252,6 +252,16 @@ points out why our numerical habit could not have caught it: a linear programme 
 the twin lives on a curve that misses the grid.  *Lessons: a parameter count is a
 computation — do it; on a continuous space, look for twins on the zero set of the
 certificate, not on a grid.*
+*Sequel (after the fifth checkpoint).*  Done as a computation, the count is worth
+keeping.  The rank defect found here is one of exactly two exceptional cases of a
+published theorem on double points of `(ℙ¹)^r` (three points in bidegree `(2,2)`; seven in
+`(2,2,2)`); for `r ≥ 4` there is none, and the count is a rigorous upper bound — seventeen
+states in general position on four angles are never determined (Proposition E20d).
+And made where it belongs — on the curve where the lifted certificate vanishes, modulo
+the functions that vanish there — the count is a proof that six states on three angles
+are never determined in general position (Theorem E20b: twelve conditions of rank 12 on
+a twelve-dimensional quotient), together with the description of the special
+six-tuples where the rank drops and they are (Proposition E20c).
 
 **ED25 ("ratios of averages are covered by nothing" — written, published, and wrong within
 two hours).**  Proposition E17.1 and the first version of `SOFTWARE_INTERFACE.md` listed "a
