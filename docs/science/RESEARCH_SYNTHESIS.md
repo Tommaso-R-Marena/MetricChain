@@ -12,10 +12,29 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 15:38 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 15:43 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
-0. **Read the research owner's two governing texts first.**  The charter (its limits are
+0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
+   (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —
+   D-2 verbatim there, D-1 verbatim in SCI-MSG-0029 §1).  **D-2 (2026-11-26, about 15:36
+   UTC): MetricChain has six divisions.**  Three new branches —
+   `research/ensemble-identifiability`, `research/geometric-inference`,
+   `research/biological-complexity` — are authorised collaborators with their own
+   mailbox directories (`messages/ensemble/`, `messages/geometry/`,
+   `messages/complexity/`) and digests (`ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`,
+   `COMPLEXITY_TO_ALL.md`), read from their branches.  **At 15:43 UTC
+   `research/biological-complexity` existed as a branch point on the theory branch
+   (`a844b5a`, no commit of its own); the two others did not exist.**  When one appears
+   or moves: read its digest and status, record the reading in the
+   sync file, check anything imported, and send one message with the results of this
+   branch that touch its mandate (the head of `SCIENCE_TO_ALL.md` already has a
+   starting guide for each) and with precise requests.  Do not turn the agenda into
+   supervision of the new divisions.  Benchmarks go to the engineering division as
+   nine-field requests (`requests/science/TEMPLATE_BENCHMARK_REQUEST.md`).  A
+   consolidation directive is expected when about $2,000 of the shared Claude credits
+   remain: then proof completion, verification, integration, documentation,
+   preservation.  *About D-1 and the charter:* the charter (its limits are
    restated under "Rules that bind the division" below) and the **supplementary directive
    "Mathematical Generality, Physical Relevance, and Foundational Breakthroughs"**, received
    2026-11-26 at about 15:11 UTC — verbatim in
@@ -28,16 +47,19 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    subagents used selectively.  **Where it lives here:** `docs/science/ASSUMPTION_AUDIT.md`
    (Part A, our certificate line, written; Part B, the theory division's theorems, not
    yet; open obligations `G-1 … G-8` in its §4) and §7, item 0, below.
-1. **Fetch and read the two upstream heads** (read-only), **in a command of its own**:
-   `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering`, then the
-   heads in `.git/FETCH_HEAD`, compared with the last row of
+1. **Fetch and read the five other branches** (read-only), **in a command of its own**:
+   `for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/ensemble-identifiability research/geometric-inference research/biological-complexity; do git fetch -q origin $b 2>/dev/null && echo "$b $(git rev-parse --short=12 FETCH_HEAD)" || echo "$b absent"; done`
+   (one fetch per branch: a branch that does not exist yet makes a joint fetch fail), then the
+   heads, compared with the last row of
    `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md` **before anything is staged**.  If either
    moved, read its digest and every `THY-*` / `ENG-*` file that mentions `SCI-`, record
    the reading in the sync file, and answer under `responses/science/` before writing a
    commit message.  (Four checkpoints of the other divisions crossed work in progress
    on 2026-11-26; once the fetch was chained with the commit and the commit message
    said "unchanged" when it was not — `DEAD_ENDS.md` SD49.)
-   * **Theory: head `a844b5a`** (15:33 UTC) — **THY-RES-0016** (commit `1d6dbfb`: their answer
+   * **Theory: head `07b1a70`** (15:40 UTC) — THY-MSG-0017, an orientation for the new
+     divisions, read in full; its §7 acknowledges SCI-RES-0021; nothing new owed.
+     **Before it, `a844b5a`** (15:33 UTC) — **THY-RES-0016** (commit `1d6dbfb`: their answer
      to SCI-MSG-0028 — our three statements machine-checked; A19-T2: the comonotone
      coupling is the exact upper bound from marginals, (LP) is optimal exactly when the
      events can be made disjoint, pair terms may be added for pairs of groups with a
@@ -429,6 +451,14 @@ is computationally empty is called so; partial results, failed approaches, count
 and open proof obligations are kept; experiments primarily serve the mathematics, and
 extensive application-specific benchmarking belongs to a later phase; subagents only
 where they bring an independent approach, special expertise or adversarial verification.
+**From the expansion directive (2026-11-26):** six divisions, each on its own branch,
+read from the originating branch; an imported result is checked and keeps its provenance
+(branch, exact commit, assumptions, proof status, Lean declarations, numerical evidence,
+limitations); a false or overstated result of another division is corrected by a
+message; referee reports of subagents are internal reviews, not peer review; no
+substantial Modal workload from here — benchmark and verification requests go to the
+engineering division; on the consolidation directive the work turns to completion and
+preservation.
 
 ## 1. What exists, and where
 

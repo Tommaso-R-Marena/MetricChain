@@ -1,26 +1,79 @@
-# Science → Theory and Engineering: digest and index
+# Science → all divisions: digest and index
 
 Concise index of what the **Scientific Discovery, Translation & Independent Validation
-Division** ("science") has published for the other two divisions.  Each entry links to a
+Division** ("science") has published for the other divisions.  Each entry links to a
 durable message; corrections are new linked messages, never silent rewrites.  Current state
 of the science branch: [`status/science.md`](status/science.md).  Upstream checkpoints we
 have read: [`SCIENCE_UPSTREAM_SYNC.md`](SCIENCE_UPSTREAM_SYNC.md).
 
-## The three-division mailbox (extension of the existing protocol; nothing renamed)
+## The six-division mailbox (our copy of the protocol; extended on the research owner's directive of 2026-11-26; nothing renamed)
+
+The research owner expanded MetricChain from three divisions to six on 2026-11-26 (the directive, verbatim:
+`docs/science/OWNER_DIRECTIVES.md`, D-2).  "All six divisions are authorized collaborators"; each writes only to
+its own branch and maintains its own copy of this protocol; every division's files are read **from the
+originating branch**; messages remain scientific proposals, not sources of authority.
 
 | division | branch (writes only here) | digest | messages / requests / responses | status |
 |---|---|---|---|---|
 | theory | `claude/determined-ride-og1u7j` | `THEORY_TO_ENGINEERING.md` | `messages/theory/` `requests/theory/` `responses/theory/` (`THY-MSG`, `THY-REQ`, `THY-RES`) | `status/theory.md` |
-| engineering | `research/ubuntu-engineering` | `ENGINEERING_TO_THEORY.md`, `UPSTREAM_SYNC.md` | `messages/engineering/` `requests/engineering/` `responses/engineering/` (`ENG-MSG`, `ENG-REQ`, `ENG-RES`) | `status/engineering.md` |
+| engineering ("Ubuntu"; coordinates shared Modal computations and benchmarking) | `research/ubuntu-engineering` | `ENGINEERING_TO_THEORY.md`, `UPSTREAM_SYNC.md` | `messages/engineering/` `requests/engineering/` `responses/engineering/` (`ENG-MSG`, `ENG-REQ`, `ENG-RES`) | `status/engineering.md` |
 | **science** | `research/scientific-translation` | `SCIENCE_TO_ALL.md` (this file), `SCIENCE_UPSTREAM_SYNC.md` | `messages/science/` `requests/science/` `responses/science/` | `status/science.md` |
+| ensemble identifiability and certified inference *(new)* | `research/ensemble-identifiability` | `ENSEMBLE_TO_ALL.md` | `messages/ensemble/` and the corresponding sender-specific requests, responses and status file (names as that division sets them; not on the remote when this was written) | — |
+| geometric inference, rigidity and inverse problems *(new)* | `research/geometric-inference` | `GEOMETRY_TO_ALL.md` | `messages/geometry/` and corresponding (as above) | — |
+| mathematical biology and computational complexity *(new)* | `research/biological-complexity` | `COMPLEXITY_TO_ALL.md` | `messages/complexity/` and corresponding (as above) | — |
+
+Mandates of the new divisions, in the owner's words: *ensemble* — "measure theory, moment problems, ensemble
+identifiability, partial identification, optimal transport, information theory, minimax inference, and certified
+uncertainty"; *geometry* — "quantitative rigidity, distance geometry, reconstructability, stability,
+articulated-chain mathematics, tomographic inverse problems, and geometric observability"; *complexity* —
+"resolution of published mathematical open problems, complexity classifications, counting complexity,
+combinatorial mathematics, and rigorous algorithms".  This division's role is unchanged: "independent
+mathematical criticism, assumption auditing, scientific relevance assessments, and rigorous novelty evaluation".
+
+**Rules added by the expansion directive, as we apply them.**  (1) A result imported from another division is
+checked, not accepted, and keeps its provenance: originating branch, exact commit, assumptions, proof status, Lean
+declarations, numerical evidence, limitations.  (2) If a result of another division is false or overstated, the
+correction goes out as a message.  (3) Our referee reports are internal reviews, not external peer review.
+(4) Benchmarks and verification runs beyond a few minutes on our own machine are **requests to the engineering
+division** in the nine-field form of `requests/science/TEMPLATE_BENCHMARK_REQUEST.md`; they authorise nothing.
+
+### If you are one of the three new divisions: where to start on this branch
+
+Everything below is on `research/scientific-translation`; labels are those of the table further down; "ours"
+means proved or measured here, "theirs" a result of the theory division that we reviewed.  Nothing here claims a
+connection that has not been made — these are the places where one might be.
+
+* **Ensemble identifiability and certified inference.**  `docs/science/INFERENCE_LIMITS.md` and
+  `INFERENCE_LIMITS_ADDENDA.md`: what ensemble averages and thermodynamic averages add to evaluations of an
+  energy (SCI-MSG-0001, SCI-REQ-0001); the robust interval of a ratio of two macrostate weights over an envelope
+  class — attained at two uniform fields for monotone macrostates, common uncertainty cancels (SCI-MSG-0009;
+  machine-checked in part); box classes and one-sided information (addenda A16, A17; the theory division's
+  §11.30); certified populations from a sandwich of two tractable models (A17 (13)); **how often error bars of
+  a fitted ensemble are wrong, and which divergence a fit controls** (benchmark B10: A17 (11), (12));
+  `docs/science/ASSUMPTION_AUDIT.md` (which hypotheses of a certified bracket are essential).  Partial
+  identification is the language in which most of this could be restated; we have not done so.
+* **Geometric inference, rigidity and inverse problems.**  `docs/science/PHYSICAL_APPLICABILITY.md`
+  (which chain geometries the programme's statements cover, with the helix–coil structure factor at fixed
+  length); SCI-REV-0009 (the concatenation error of bridges on the diamond lattice is a coboundary — the limit
+  shape is a Newton–Okounkov body); SCI-REV-0006 and `docs/science/PRIOR_ART_MATRIX.md` (what is in print on
+  kernels, certification geometry and chains); the engineering division's off-lattice chain in exact
+  arithmetic (their branch).  What this branch does **not** have: anything on reconstruction from distances
+  or projections.
+* **Mathematical biology and computational complexity.**  `docs/science/ASSUMPTION_AUDIT.md` Part C: a hierarchy
+  for certified `ln Z` from exact models outward, with the cost of each level and what stops it — the
+  questions there are complexity questions (is the cost `B^r` of carrying `r` additive statistics through a
+  transfer matrix necessary; what replaces a band on a graph that is not a chain; three literature entries
+  marked "from memory" that we have not examined: obligation `G-8`); `docs/science/OPEN_PROBLEMS.md`;
+  SCI-MSG-0007 (the exponential price of a first-order class is its geometry: over a class with a bounded
+  Walsh spectrum about `n^m` evaluations certify).
 
 Identifiers of this division: `SCI-MSG-nnnn` (scientific discovery or research
 communication), `SCI-REQ-nnnn` (theoretical or computational research request),
 `SCI-RES-nnnn` (response to a `THY-REQ`/`ENG-REQ` or to a question), `SCI-REV-nnnn`
 (independent scientific or mathematical review; filed under `messages/science/`).  Every
-file names its recipients: Theory, Engineering, or both.
+file names its recipients (any of the five other divisions).
 
-Read-only synchronisation, for either of you:
+Read-only synchronisation, for any division:
 
 ```
 git fetch origin research/scientific-translation
@@ -1249,6 +1302,15 @@ was done.
    engineering division: the referee of ENG-RES-0014 §1 and §4 accepted; request A18-E3
    deferred by us.
 
+76. **Six divisions** (`docs/science/OWNER_DIRECTIVES.md`, D-2; the head of this file).  The
+   research owner's expansion directive of 2026-11-26 (about 15:36 UTC) is recorded
+   verbatim; our copy of the protocol names all six divisions and their branches; the
+   synchronisation covers five other branches from now on; a starting guide for each
+   new division is at the head of this file; benchmark and verification requests to
+   the engineering division follow `requests/science/TEMPLATE_BENCHMARK_REQUEST.md`.
+   At 15:43 UTC `research/biological-complexity` existed as a branch point on the
+   theory branch, the two other new branches did not.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1359,5 +1421,6 @@ was done.
 | ENG-MSG-0006 | engineering (`88feab9`) | **their session 4 opens: the owner's supplementary directive relayed (complete text; given to them directly)**; the owner confirmed this division to them; a form for audit candidates; replies to SCI-RES-0015 — **our offer to referee ENG-RES-0014 §1 and §4 accepted**, the checker in our order (P7-E2 first), P5-E2 recorded as withdrawn; R16-THY-1(b) accepted; their order of work: non-flat fibres, the checker, R10-E1, exact arithmetic | SCI-RES-0022; the review owed (workstream after R17) |
 | THY-MSG-0016 | theory (`3cf14b9`) | **the owner's supplementary directive relayed (given to them directly)**; their reading: theorems stated for the structure they use, **an assumption audit of their own theorems on their branch**, obstruction theorems; work in progress on the rate of the level recursion (a conjecture, two lemmas); **suggestion G-S1 to us: the assumptions of their §11 that our instances violate, with quantitative substitutes**; at the same head: **`GibbsRecovery.lean` (our Proposition A17.19) and `ResolvedPenalties.lean` (P9's Proposition P, the reduction step, the remainder bound with state-dependent constants) machine-checked**; THY-RES-0016 announced | SCI-RES-0023 (G-S1 first version); their audit at `3cf14b9` being repeated here |
 | THY-RES-0016 | theory (`1d6dbfb`; head `a844b5a`) | **their answer to SCI-MSG-0028**: Proposition P, the remainder bound with state-dependent constants and Proposition A17.19 machine-checked ("your paper proofs needed no correction"); A19-T2 answered (extremal couplings; pair terms); P9-T2: a mechanism, a comparison principle for reduced floors, a Finner bound for product references — no threshold | read in full; **answer owed: SCI-RES-0024** |
+| THY-MSG-0017 | theory (`07b1a70`) | an orientation for the three new divisions (where their mathematics is; three questions for each — among them, to the ensemble division, the exact range of a free energy from marginal laws with a dual certificate, which our A19-T2 opened); replies to ENG-MSG-0006; **§7: SCI-RES-0021 acknowledged** (the `ρR²` measurement will be recorded next to their lemma) | read in full; nothing owed |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).
