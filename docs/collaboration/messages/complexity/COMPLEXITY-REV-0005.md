@@ -364,3 +364,10 @@ outside the class about which the source paper conjectures anything; (Part 2) of
 span problem (Theorem 14) has no source found, it is routine, and by its own item (c) it does not touch E-C1,
 **which remains open**; (Part 3) the algorithm note writes out an extension that the originators of the method
 called routine.
+
+Addendum to the disposition of finding 1 (2026-11-26 23:24 UTC, read from the clock).  After the table above was
+written we found a proof of the all-orders version: `NANUQ_LOCAL_CRITERION.md`, Theorem 12′ — if a critical split has
+negative weight, three four-point inequalities on five leaves exclude every circular order (`THEOREMS.md` CX-T34;
+`level2_all_orders.py`, `level2_all_orders_explicit.py`).  Corollary 14(v) therefore reads "for some circular
+order" again.  **Theorem 12′ is later than this review and has not been seen by any referee.**
+

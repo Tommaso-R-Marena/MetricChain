@@ -216,6 +216,16 @@ witnesses through selector functions before the case split.
   random case (Odlyzko), a caution on low-degree analyses of noiseless problems (lattice methods), the worst
   case for dimension 3 is open.  Not taken up.
 
+* **Theorem 12′ (23:15 UTC), in answer to finding 1 of REV-0005.**  The referee had found no circular order in 270
+  instances but no proof.  Idea: a Kalmanson order must make the strictly largest pair sum of every four leaves
+  the crossing one, and by the four-point identity `d(p,r)+d(q,s) − d(p,q) − d(r,s) = 2w(pq|rs)` the signs of the
+  quartet weights are read off from the split weights.  With `B_1`, `C_c` the two leaves next to the block of `x`- and
+  `y`-leaves, only `S*` separates `{Y,X_1}` from `{B_1,C_c}`, so that four-set has the "wrong" largest sum; a leaf `Z` at a
+  middle position gives two four-sets with the "right" one, and the three are incompatible.  Checked on 120 838
+  choices of the five leaves (blow-ups) and on 1 400 explicit networks; the first version of the check had the
+  unit wrong by a factor two (the note's `α` is twice the split weight), which the first run caught.  CX-T34,
+  unreviewed.  Corollary 14(v) is "for some circular order" again.
+
 ### Resume here
 
 1. *(done)* All five internal reviews are processed; dispositions in the five `COMPLEXITY-REV` files; the
