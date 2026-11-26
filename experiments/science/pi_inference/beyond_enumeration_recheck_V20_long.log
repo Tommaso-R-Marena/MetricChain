@@ -1,0 +1,16 @@
+   built V20 on P2: 332 atoms, states per site [3], window W=2; 394 GB evaluations for the model tables; 2 s
+seed 16180339: sd before each refit 0.0454, 0.0049, 0.0048;  ln Z(m) = 518.262376710   (159 s)
+    50000 samples: mean r = -0.000036161 +- 0.000021877;  ln Z(m) - mean + K = 518.262424798;  exponential average 518.262424798 +- 0.000021877;  min r -0.0426   (245 s)
+   100000 samples: mean r = -0.000028109 +- 0.000015429;  ln Z(m) - mean + K = 518.262416686;  exponential average 518.262416686 +- 0.000015429;  min r -0.0644   (329 s)
+   150000 samples: mean r = -0.000049975 +- 0.000012569;  ln Z(m) - mean + K = 518.262438497;  exponential average 518.262438497 +- 0.000012569;  min r -0.0644   (417 s)
+   200000 samples: mean r = -0.000046285 +- 0.000010837;  ln Z(m) - mean + K = 518.262434704;  exponential average 518.262434704 +- 0.000010837;  min r -0.0644   (502 s)
+   250000 samples: mean r = -0.000050650 +- 0.000009685;  ln Z(m) - mean + K = 518.262439049;  exponential average 518.262439049 +- 0.000009685;  min r -0.0644   (578 s)
+   300000 samples: mean r = -0.000042711 +- 0.000008828;  ln Z(m) - mean + K = 518.262431077;  exponential average 518.262431077 +- 0.000008828;  min r -0.0644   (657 s)
+   350000 samples: mean r = -0.000044404 +- 0.000008182;  ln Z(m) - mean + K = 518.262432795;  exponential average 518.262432795 +- 0.000008182;  min r -0.0644   (742 s)
+   400000 samples: mean r = -0.000042072 +- 0.000007639;  ln Z(m) - mean + K = 518.262430418;  exponential average 518.262430418 +- 0.000007639;  min r -0.0644   (826 s)
+   450000 samples: mean r = -0.000044188 +- 0.000007204;  ln Z(m) - mean + K = 518.262432540;  exponential average 518.262432540 +- 0.000007204;  min r -0.0644   (906 s)
+   500000 samples: mean r = -0.000041294 +- 0.000006832;  ln Z(m) - mean + K = 518.262429638;  exponential average 518.262429638 +- 0.000006832;  min r -0.0644   (988 s)
+   550000 samples: mean r = -0.000039579 +- 0.000006519;  ln Z(m) - mean + K = 518.262427940;  exponential average 518.262427940 +- 0.000006519;  min r -0.0644   (1069 s)
+   600000 samples: mean r = -0.000037796 +- 0.000006245;  ln Z(m) - mean + K = 518.262426169;  exponential average 518.262426169 +- 0.000006245;  min r -0.0644   (1146 s)
+final: ln Z(E) ~ 518.262426169 +- 0.000006245 (from the 60 block means: +- 0.000006077);  sandwich sampler (workstream P6): 518.262414 +- 0.000005 and 518.262417 +- 0.000006
+ALL DONE 1146 s

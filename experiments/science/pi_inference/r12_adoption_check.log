@@ -1,0 +1,21 @@
+=== M1 (a): at least half of the cube has |h| >= ||h||_inf / (n + 1) for affine h
+   n =  4: 619 functions, least fraction of good points 0.500000
+   n =  6: 627 functions, least fraction of good points 0.500000
+   n =  8: 635 functions, least fraction of good points 0.500000
+   n = 10: 643 functions, least fraction of good points 0.500000
+   n = 12: 651 functions, least fraction of good points 0.500000
+   n = 14: 659 functions, least fraction of good points 0.500000
+   3834 functions in all; least fraction 0.500000 (the lemma says >= 0.5; 0.5 is attained by alpha(1 + s_i))
+=== M1 (b): the counter-algorithm end to end (delta = 0.05, q = 5 random evaluations, whatever n)
+   n =  8 (N_ball = 9; claimed lower bound (1 - delta) N_ball = 8.55 evaluations): q = 5; exact failure on the extremal member 2^-5 = 0.03125 <= delta; random members with |R| <= 0.7: invalid bound in 9 of 20000 runs
+   n = 12 (N_ball = 13; claimed lower bound (1 - delta) N_ball = 12.35 evaluations): q = 5; exact failure on the extremal member 2^-5 = 0.03125 <= delta; random members with |R| <= 0.7: invalid bound in 0 of 20000 runs
+   n = 16 (N_ball = 17; claimed lower bound (1 - delta) N_ball = 16.15 evaluations): q = 5; exact failure on the extremal member 2^-5 = 0.03125 <= delta; random members with |R| <= 0.7: invalid bound in 0 of 20000 runs
+=== M2: exact failure probability of the plug-in estimate on two-level members, worst over the mean w
+   | D | eps | N_d = ln(2/delta)(e^D-1)^2/(2 eps^2) | N_KL = N_d e^-D | worst failure with N_KL | with N_KL/4 | with N_KL/16 | (delta = 0.05)
+   | 0.0605 | 0.01 | 72 | 68 (ratio 0.9413, e^-D = 0.9413) | 0.0073 (at w = 0.504; 1/(a+2) = 0.485) | 0.226 | 0.646 |
+   | 0.5 | 0.02 | 1941 | 1177 (ratio 0.6065, e^-D = 0.6065) | 0.0070 (at w = 0.346; 1/(a+2) = 0.378) | 0.191 | 0.560 |
+   | 1.0 | 0.02 | 13614 | 5008 (ratio 0.3679, e^-D = 0.3679) | 0.0069 (at w = 0.261; 1/(a+2) = 0.269) | 0.181 | 0.533 |
+   | 2.0 | 0.05 | 30116 | 4076 (ratio 0.1353, e^-D = 0.1353) | 0.0070 (at w = 0.125; 1/(a+2) = 0.119) | 0.188 | 0.557 |
+   | 3.0 | 0.1 | 67185 | 3345 (ratio 0.0498, e^-D = 0.0498) | 0.0070 (at w = 0.045; 1/(a+2) = 0.047) | 0.188 | 0.590 |
+   | 5.0 | 0.2 | 1002021 | 6752 (ratio 0.0067, e^-D = 0.0067) | 0.0065 (at w = 0.008; 1/(a+2) = 0.007) | 0.191 | 0.633 |
+ALL DONE 2 s

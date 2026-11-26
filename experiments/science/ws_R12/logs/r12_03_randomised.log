@@ -1,0 +1,37 @@
+==============================================================================================================
+PART 1 — binary cube, order below m = 2: a valid finite bound from q = ceil(log2(1/delta)) random evaluations
+==============================================================================================================
+n =  8: N_ball = 9, claimed lower bound (1 - delta) N_ball = 8.55; q = 5 random evaluations.
+        1080 test functions: largest exact fraction of bad points 0.5000 (family: multi-scale); hill-climbing adversary: 0.3555; theory: <= 0.5
+        hence exact failure probability of the q-sample bound <= 0.03125  (delta = 0.05)   OK
+n = 12: N_ball = 13, claimed lower bound (1 - delta) N_ball = 12.35; q = 5 random evaluations.
+        1168 test functions: largest exact fraction of bad points 0.5000 (family: multi-scale); hill-climbing adversary: 0.2917; theory: <= 0.5
+        hence exact failure probability of the q-sample bound <= 0.03125  (delta = 0.05)   OK
+n = 16: N_ball = 17, claimed lower bound (1 - delta) N_ball = 16.15; q = 5 random evaluations.
+        1288 test functions: largest exact fraction of bad points 0.5000 (family: multi-scale); hill-climbing adversary: 0.2568; theory: <= 0.5
+        hence exact failure probability of the q-sample bound <= 0.03125  (delta = 0.05)   OK
+end-to-end (n = 12, C = 0.7, random known part): 400 functions x 50 sample sets of q = 5 points; the output 'min E0 - B' was an invalid lower bound or 'ln Z0 +- B' an invalid bracket in 2 of 20000 runs (0.0001; allowed 0.05)
+
+==============================================================================================================
+PART 2 — binary cube, order below m = 3 and 4: fraction of points with |h(x)| >= c ||h||_inf, c = 0.6/(N_ball (3n)^d)
+==============================================================================================================
+n = 10, d = 2: N_ball = 56, (1 - delta) N_ball = 53.2; c = 1.19e-05; least fraction of good points over 400 functions: 0.2500 (cylinder); theory >= 2^-d = 0.2500; q = ceil(ln(1/delta)/-ln(1 - 2^-d)) = 11 evaluations  OK
+n = 10, d = 3: N_ball = 176, (1 - delta) N_ball = 167.2; c = 1.26e-07; least fraction of good points over 400 functions: 0.1250 (cylinder); theory >= 2^-d = 0.1250; q = ceil(ln(1/delta)/-ln(1 - 2^-d)) = 23 evaluations  OK
+n = 12, d = 2: N_ball = 79, (1 - delta) N_ball = 75.0; c = 5.86e-06; least fraction of good points over 400 functions: 0.2500 (cylinder); theory >= 2^-d = 0.2500; q = ceil(ln(1/delta)/-ln(1 - 2^-d)) = 11 evaluations  OK
+
+==============================================================================================================
+PART 3 — (c): a wrong hint of order below m is refuted by N = ceil(k^{m-1} ln(1/delta)) uniform evaluations
+==============================================================================================================
+k = 2, m = 2: N = 6 (N_ball at n = 10 sites: 11); exact miss probability for a cylinder (1 - k^-(m-1))^N = 0.01562; simulated 0.01576; <= delta: True
+k = 2, m = 3: N = 12 (N_ball at n = 10 sites: 56); exact miss probability for a cylinder (1 - k^-(m-1))^N = 0.03168; simulated 0.03139; <= delta: True
+k = 3, m = 2: N = 9 (N_ball at n = 6 sites: 13); exact miss probability for a cylinder (1 - k^-(m-1))^N = 0.02601; simulated 0.02589; <= delta: True
+k = 3, m = 3: N = 27 (N_ball at n = 6 sites: 73); exact miss probability for a cylinder (1 - k^-(m-1))^N = 0.04158; simulated 0.04195; <= delta: True
+k = 4, m = 2: N = 12 (N_ball at n = 5 sites: 16); exact miss probability for a cylinder (1 - k^-(m-1))^N = 0.03168; simulated 0.03183; <= delta: True
+k = 4, m = 3: N = 48 (N_ball at n = 5 sites: 106); exact miss probability for a cylinder (1 - k^-(m-1))^N = 0.04515; simulated 0.04574; <= delta: True
+
+total elapsed 20.4 s
+R12_03_DONE
+
+real	0m20.705s
+user	0m10.986s
+sys	0m0.191s

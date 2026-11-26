@@ -1,0 +1,63 @@
+====================================================================================================
+1. Adjacency lemma, all pairs of boxes (empty domains allowed)
+====================================================================================================
+n=1 k=1:      4 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 3 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([],) D'=([],)
+n=1 k=2:     16 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 7 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([],) D'=([],)
+n=1 k=3:     64 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 15 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([],) D'=([],)
+n=2 k=1:     16 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 6 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([], [0]) D'=([], [0])
+n=2 k=2:    256 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 98 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([], [0]) D'=([], [0])
+n=2 k=3:   4096 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 1110 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([], [0]) D'=([], [0])
+n=3 k=2:   4096 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 1029 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([], [0], [0]) D'=([], [0], [0])
+n=2 k=4:  65536 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 10850 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([], [0]) D'=([], [0])
+n=4 k=2:  65536 ordered pairs of boxes | (i) fails: 0 | (ii) 'criterion => neighbours' fails: 9604 (of these with both boxes non-empty: 0) | (iii) with the non-emptiness clause, iff fails: 0   e.g. D=([], [0], [0], [0]) D'=([], [0], [0], [0])
+their witness (Dom 2 1): D = ([], [0]), D' = ([0], [0]): separated sites = 1, D empty -> no pair of configurations
+
+====================================================================================================
+2. ferro (three binary sites; ours)
+====================================================================================================
+energies: {'000': '0', '001': '7/2', '010': '7/2', '011': '3', '100': '7/2', '101': '3', '110': '3', '111': '-3/2'}
+exact barrier 111 -> 000: 7/2 ; 000 -> 111: 7/2   (Lean: ferro_barrier_exact, 7/2)
+
+====================================================================================================
+3. maze (four binary sites)
+====================================================================================================
+energy table equals the closed form x1+x2+x3-x0x1+2x0x2-2x1x2-2x2x3: True
+E(0000) = 0, E(1111) = 0; exact barrier 0000 <-> 1111: 1   (Lean: maze_barrier_exact, 1)
+configurations reachable from 0000 below energy 1: ['0000', '1000', '1100'] (Lean comment: 0000, 1000, 1100)
+mazeCut, bound 1: wall leaves all >= 1: True; no move from an inside to an outside leaf: True; a inside and b not: True; leaves partition the grid: True   => accepted: True (Lean: maze_verified)
+   same tree with the box test 'literal': checks (1,2,3) = (True, True, True)
+   same tree with the box test 'clause': checks (1,2,3) = (True, True, True)
+   region S of mazeCut: ['0000', '1000', '1100']
+   same tree for the bound 1 + 1/1000: wall check passes: False (so 1 is the largest bound this tree certifies)
+box cuts around 0000 (not containing 1111): 15 boxes; the largest certifiable bound is 0 (Lean: maze_boxCut_start_le, L <= 0)
+box cuts around 1111 (not containing 0000): 15 boxes; the largest certifiable bound is 0 (Lean: maze_boxCut_target_le, L <= 0)
+trivial bound max(E(a), E(b)) = 0; barrier = 1
+
+====================================================================================================
+4. scan (two sites, three states; site-graph product)
+====================================================================================================
+energies: {'00': '0', '01': '1/2', '02': '2', '10': '3', '11': '5/2', '12': '3', '20': '0', '21': '1/2', '22': '2'}
+barrier (0,0) -> (2,0): nearest-state moves 5/2 (Lean: scan_barrier_exact, 5/2); unrestricted single-site moves 0 (Lean: scan_hamming_direct: neighbours, both of energy 0)
+scanCut for 5/2: on the site-graph product checks (1,2,3) = (True, True, True) (accepted: True; Lean: scan_verified); on the Hamming graph (True, False, True) (accepted: False; Lean: scan_hamming_rejected)
+
+====================================================================================================
+5. ferroResidual (bounded differences 1/4 per site, anchor g(000) = 0)
+====================================================================================================
+g(x) = -|x|/4 is in the class: True; barrier height 000 -> 111 with it: 13/4 (Lean: ferroWellR_trap, >= 13/4 for every residual)
+lower bound for every residual: min over the weight-1 wall of E - 1/4 = 13/4, minus E(000) + g(000) = 0
+
+====================================================================================================
+6. An empty leaf: ferroWellTree below split 0 [0,1] with an empty 'outside' child
+====================================================================================================
+box test 'moves': checks (1,2,3) = (True, True, True)  accepted: True
+box test 'clause': checks (1,2,3) = (True, True, True)  accepted: True
+box test 'literal': checks (1,2,3) = (True, False, True)  accepted: False
+(Lean: ferroEmptyLeaf_verified = true with the clause; ferroEmptyLeaf_literal_rejected = false with the literal test)
+ferroWellTree, bound 7/2: accepted: True (Lean: ferroWell_verified); for the bound 4: wall check False
+
+total elapsed 0.6 s
+R12_05_DONE
+
+real	0m0.629s
+user	0m0.287s
+sys	0m0.012s

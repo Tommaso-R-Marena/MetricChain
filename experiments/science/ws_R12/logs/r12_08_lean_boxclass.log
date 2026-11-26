@@ -1,0 +1,20 @@
+QueryLowerBound.lean: identical in our tree and in the export
+copy: first 513 lines identical to the export's BoxClass.lean
+'MetricChain.BoxClass.Zw_sub_le_dip' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.Zw_sub_le_bump' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.detect_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.box_spotCheck_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.logZ_dipAlt_gt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.box_expected_queries_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.logZ_bumpAlt_gt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.box_expected_queries_ge_mixed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.detect_ge_of_proportional' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.box_spotCheck_correct_of_proportional' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.jensen_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.BoxClass.centre_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m31.614s
+user	0m16.246s
+sys	0m2.172s
+lean exit status: 0
+R12_08_DONE

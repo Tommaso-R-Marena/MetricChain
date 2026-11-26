@@ -1,0 +1,25 @@
+grid (3, 4, 4)     d=1 N_ball=9   |X|=48  s*=12  least support found=12   (280242 candidates)  s* attained, nothing below
+grid (4, 4, 4)     d=1 N_ball=10  |X|=64  s*=16  least support found=16   (280288 candidates)  s* attained, nothing below
+grid (2, 2, 4, 4)  d=1 N_ball=9   |X|=64  s*=16  least support found=16   (280288 candidates)  s* attained, nothing below
+grid (2, 3, 3, 4)  d=1 N_ball=9   |X|=72  s*=18  least support found=18   (280288 candidates)  s* attained, nothing below
+grid (2, 3, 4, 4)  d=1 N_ball=10  |X|=96  s*=24  least support found=24   (280338 candidates)  s* attained, nothing below
+grid (2, 4, 4, 4)  d=1 N_ball=11  |X|=128 s*=32  least support found=32   (280392 candidates)  s* attained, nothing below
+grid (2, 4, 4, 4)  d=2 N_ball=47  |X|=128 s*=8   least support found=8    (294792 candidates)  s* attained, nothing below
+grid (3, 3, 3, 3)  d=1 N_ball=9   |X|=81  s*=27  least support found=27   (280288 candidates)  s* attained, nothing below
+grid (3, 3, 3, 3)  d=2 N_ball=33  |X|=81  s*=9   least support found=9    (288712 candidates)  s* attained, nothing below
+grid (3, 3, 3, 4)  d=1 N_ball=10  |X|=108 s*=27  least support found=27   (280338 candidates)  s* attained, nothing below
+grid (3, 3, 3, 4)  d=2 N_ball=40  |X|=108 s*=9   least support found=9    (291552 candidates)  s* attained, nothing below
+grid (3, 3, 4, 4)  d=1 N_ball=11  |X|=144 s*=36  least support found=36   (280392 candidates)  s* attained, nothing below
+grid (3, 3, 4, 4)  d=2 N_ball=48  |X|=144 s*=9   least support found=9    (295138 candidates)  s* attained, nothing below
+grid (3, 4, 4, 4)  d=1 N_ball=12  |X|=192 s*=48  least support found=48   (280450 candidates)  s* attained, nothing below
+grid (3, 4, 4, 4)  d=2 N_ball=57  |X|=192 s*=12  least support found=12   (299602 candidates)  s* attained, nothing below
+grid (4, 4, 4, 4)  d=1 N_ball=13  |X|=256 s*=64  least support found=64   (280512 candidates)  s* attained, nothing below
+grid (4, 4, 4, 4)  d=2 N_ball=67  |X|=256 s*=16  least support found=16   (305088 candidates)  s* attained, nothing below
+
+cases: 17; candidates examined: 4858700; supports below s*: 0; cases in which s* was attained by the search: 17
+total elapsed 79.6 s
+R12_02B_DONE
+
+real	1m19.759s
+user	1m18.361s
+sys	0m0.656s

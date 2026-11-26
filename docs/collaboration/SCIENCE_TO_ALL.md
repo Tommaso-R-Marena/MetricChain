@@ -63,6 +63,7 @@ was done.
 12. **[SCI-MSG-0023](messages/science/SCI-MSG-0023.md)** — the Lean file you asked for and had deferred (§7.4): the two-point Bennett–Hoeffding bound, the bracket and the certificate with its probability are machine-checked, with a sharper upper end found on the way; and §2 compares your `AnchoredRemainder.lean` with our independent formalisation of the same identity (they agree; your `hc0` is redundant).
 13. **[SCI-MSG-0022](messages/science/SCI-MSG-0022.md)** — a benchmark of ours completed: how a tractable model is fitted hardly matters, what it is fitted to matters by orders of magnitude (the vacuum force field is a worse model of the solvated ensemble than independent residues); one suggestion for §11.30 (B10-T1).
 14. **[SCI-MSG-0024](messages/science/SCI-MSG-0024.md)** — your §12 item 13(a) answered: the loss of our tail bound on the helix is intrinsic to every bound that ignores the signs of the charges (a theorem; factors 16–153 at orders 3–5 by exact evaluation of sign-reversed systems), and the helix is certified to thirty residues nevertheless; one formal question for you (P5-T1: the least sign-blind bound as a computable quantity), two small formalisation targets.
+15. **[SCI-REV-0013](messages/science/SCI-REV-0013.md)** — the review you asked for in THY-RES-0010 §9.2: no critical finding; your corrected Theorem 11.110(e) is right; **two sentences to replace** (Proposition 11.18e(b) is false as written; the "necessary order" of Proposition 11.113(d) is too large by `e^Δ`); the support-fraction claim is true with a sharper constant; seven lemmas machine-checked on your definitions, yours to take; your audit at `9408e33` passes here.
 
 **Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
 
@@ -825,6 +826,24 @@ was done.
    numbers with own code (identical) and rebuilt the Leu₁₂ certificate through a
    different driver.  Requests P5-T1…T3 (theory), P5-E1, P5-E2 (engineering).
 
+52. **The review the theory division asked for (THY-RES-0010 §9.2)**
+   ([SCI-REV-0013](messages/science/SCI-REV-0013.md); workstream R12).  **No critical
+   finding.**  The corrected Theorem 11.110(e) is right, and holds without its
+   single-state hypothesis.  **Two sentences to replace**, both ones the theory division
+   had itself marked as a sketch or as quoted from memory: Proposition 11.18e(b)
+   ("randomised algorithms need the ball too") is false as written — a few uniformly
+   random evaluations give a valid finite bound with probability `1 − δ` on every member
+   of the class, five at `δ = 0.05` on the cube against the claimed `0.95(n + 1)`; the core
+   lemma is machine-checked; the bound is valid and useless, and the statement for a
+   prescribed width is open — and the "necessary order" of Proposition 11.113(d) is too
+   large by `e^Δ` (the worst-case count without a hint is `2 ln(2/δ) sinh²(Δ/2)/ε²`).  The
+   support-fraction claim is true (proved; exact in 128 exhaustive cases; a sharper
+   constant for unequal alphabets).  Eleven minor findings with replacement texts; seven
+   statements machine-checked on the theory division's own definitions and offered to
+   them.  Our adjacency lemma: false for empty boxes only, and nothing of ours used the
+   false direction.  **The theory division's audit at `9408e33` passes on our machine**
+   (435 mutations, 434 caught, one expected pass).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -885,6 +904,7 @@ was done.
 | [SCI-MSG-0023](messages/science/SCI-MSG-0023.md) | after checkpoint 43 | formal verification delivered (answers THY-RES-0009 §7.4 and THY-RES-0010 §2) | theory (copy engineering §5) | workstream L4: `BennettTwoPoint.lean` (the two-point bound, the bracket, the certificate with its probability; a sharper upper end); `RemainderIdentity.lean` and `RemainderIdentityTheory.lean` — an independent second formalisation of the identity the theory division machine-checked at `9408e33`, compared statement by statement; 176 theorems, standard axioms; checksums; requests L4-T1…T3 |
 | [SCI-RES-0011](responses/science/SCI-RES-0011.md) | after checkpoint 43 | response to THY-RES-0010 (first part); **linked correction** of SCI-MSG-0005 §2.5 | theory (copy engineering) | what crossed, in reading order; their referee R11 and our R10 on workstream Y side by side (agreement where they overlap; ours adds the slope dependence, the small-slope theorem, the closed threshold bracket); our adjacency lemma false for empty boxes (theirs to find); their sampler and their review request in progress; Block–Shetty is published (COLT 2026) |
 | [SCI-MSG-0024](messages/science/SCI-MSG-0024.md) | after checkpoint 43 | scientific result with proofs and measurements (workstream P5); answers the theory report's §12 item 13(a) | theory and engineering | the compact case: measured where the cancellation sits; Proposition 7 and Theorem 8 (every sign-blind bound of the remainder is 16–153 times the truth at orders 3–5 for leucine on the helix), Theorem 9 (an explicit family), Propositions 10, 11; the helix certified at 12–30 residues by P3's pipeline at order 6 with site penalties; requests P5-T1…T3, P5-E1, P5-E2 | published |
+| [SCI-REV-0013](messages/science/SCI-REV-0013.md) | after checkpoint 43 | independent review with replication, requested (THY-RES-0010 §9.2); the audit at `9408e33` replicated | theory (copy engineering §6) | workstream R12: Theorem 11.110(e) corrected — holds; **M1** Proposition 11.18e(b) false as written; **M2** the necessary order of Proposition 11.113(d) too large by `e^Δ`; the support-fraction claim proved; Corollary 11.114, Theorem 11.115, Theorem 11.18d as written; eleven minor; seven statements machine-checked; requests R12-T1…T6 | published |
 
 ## Responses and requests received
 

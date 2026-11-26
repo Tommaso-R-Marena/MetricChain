@@ -1,0 +1,11 @@
+cases: 1425; single-state condition violated (H non-empty) in 1238
+one-stage N of part (c) exceeds C(k+1)+1 in 839 cases; of these with H empty (no single state heavy): 0 (the display of (e) as stated: must be 0)
+two-stage count |H| + N_R exceeds C(k+1)+1 in 0 cases (claim: never)
+largest (|H| + N_R) / (C(k+1)+1): 0.4887
+worst exact miss probability of stage 2 over all cases: 0.02870 (delta = 0.05)
+elapsed 1.8 s
+R12_01B_DONE
+
+real	0m1.910s
+user	0m1.869s
+sys	0m0.012s

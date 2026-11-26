@@ -1,0 +1,36 @@
+==============================================================================================================
+PART 1 — the arithmetic core (ratio_core) on random numbers
+==============================================================================================================
+random instances satisfying the hypothesis: 111300; violations of the conclusion: 0
+
+==============================================================================================================
+PART 2 — random boxes with a partition into two macrostates (n = 8, 10), exhaustive over subsets
+==============================================================================================================
+cases: 252; violations of any checked statement: 0
+exact detection probability / (1/2 min(p_A, p_B)): min 1.2548, median 5.68
+worst exact failure of the spot check: 0.02281 (delta = 0.05)
+cases with k_Z > k_ratio: 0; with tau*_Z > tau*_ratio: 0 (claim (3): the ratio costs at least as much as ln Z)
+cases in which the packing of all ratio-heavy sets exceeds the packing of the Lean alternatives (dips inside one macrostate): 130 of 252 (the bumps and the mixed alternatives matter there)
+cases with no single state heavy in dips inside its macrostate: 87 (greedy floor checked there)
+
+==============================================================================================================
+PART 3 — both macrostates at the floor: the dip display of (d) gives 0, the bumps carry the cost
+==============================================================================================================
+eps = 0.2   at the floor of both macrostates: max_M a_M = 0 (display of (d): 0); dip packing 0; bump packing inside the macrostates 10  =>  cost >= (1 - 2 delta) x 10 = 9.0;  spot check (with the bump half only where U_M = 0): N <= 126
+eps = 0.05  at the floor of both macrostates: max_M a_M = 0 (display of (d): 0); dip packing 0; bump packing inside the macrostates 40  =>  cost >= (1 - 2 delta) x 40 = 36.0;  spot check (with the bump half only where U_M = 0): N <= 485
+eps = 0.01  at the floor of both macrostates: max_M a_M = 0 (display of (d): 0); dip packing 0; bump packing inside the macrostates 200  =>  cost >= (1 - 2 delta) x 200 = 180.0;  spot check (with the bump half only where U_M = 0): N <= 2397
+(the alternative 'raised to the ceiling on a set inside one macrostate' lowers that macrostate's weight by its bump weight and leaves the other unchanged: the log-ratio moves by -ln(1 - bump_M(D)/W_M) > eps as soon as bump_M(D) > (1 - e^-eps) W_M — the analogue of logZ_bumpAlt_gt; it is not in BoxRatio.lean)
+
+==============================================================================================================
+PART 4 — the example of consequence (3)
+==============================================================================================================
+macrostate A: weight 1e-06, floor 8 kT deep: W_A(lo)/W_A - 1 = 2979.96 (report: 2980);  elsewhere 0.1 kT: 0.10517;
+ln Z: Z(lo)/Z - 1 = 0.10815 (report: 0.11) = weighted mean of the two (weights W_M/Z)
+eps = 0.2, delta = 0.05, ceiling far away: spot-check sizes: ratio (dip term of A) 339530;  ln Z: at most 63 (dip term 6.2, bump term at most 63.0)
+
+total elapsed 7.7 s
+R12_06_DONE
+
+real	0m8.600s
+user	0m5.271s
+sys	0m0.056s

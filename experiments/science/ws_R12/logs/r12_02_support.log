@@ -1,0 +1,176 @@
+======================================================================================================================
+PART 1 — dimension N_ball and unisolvence of the Hamming ball of radius d = m - 1 around EVERY reference
+======================================================================================================================
+grids x orders checked: 101; failures: 0  (dimension of the span = N_ball = size of the ball, and the ball around every one of the |X| references has an invertible evaluation matrix)
+  grid (2, 2, 2), d = 1: N_ball = 4; unisolvent N-subsets: 58 of 70 (the |X| = 8 Hamming balls are among them)
+  grid (2, 2, 2), d = 2: N_ball = 7; unisolvent N-subsets: 8 of 8 (the |X| = 8 Hamming balls are among them)
+  grid (3, 3), d = 1: N_ball = 5; unisolvent N-subsets: 81 of 126 (the |X| = 9 Hamming balls are among them)
+  grid (2, 2, 3), d = 1: N_ball = 5; unisolvent N-subsets: 504 of 792 (the |X| = 12 Hamming balls are among them)
+elapsed 0.8 s
+
+======================================================================================================================
+PART 2 — least support of a non-zero function of order <= d (exhaustive); conjecture s* = product of the n - d smallest k_i
+======================================================================================================================
+grid (2, 2)           d=0 (m=1) N_ball=1    |X|=4    s*=4    least support=4     fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2)           d=1 (m=2) N_ball=3    |X|=4    s*=2    least support=2     fraction=0.50000   k_max^-d=0.5       = s*     dual  (least eigenvalue 2.50e-01; D^-w = 2.5e-01), 1 subsets, 0.0 s
+grid (2, 2)           d=2 (m=3) N_ball=4    |X|=4    s*=1    least support=1     fraction=0.25000   k_max^-d=0.25      = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 3)           d=0 (m=1) N_ball=1    |X|=6    s*=6    least support=6     fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 3)           d=1 (m=2) N_ball=4    |X|=6    s*=2    least support=2     fraction=0.33333   k_max^-d=0.3333    = s*     dual  (least eigenvalue 3.33e-01; D^-w = 1.7e-01), 1 subsets, 0.0 s
+grid (2, 3)           d=2 (m=3) N_ball=6    |X|=6    s*=1    least support=1     fraction=0.16667   k_max^-d=0.1111    = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 4)           d=0 (m=1) N_ball=1    |X|=8    s*=8    least support=8     fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 4)           d=1 (m=2) N_ball=5    |X|=8    s*=2    least support=2     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 3.75e-01; D^-w = 1.2e-01), 1 subsets, 0.0 s
+grid (2, 4)           d=2 (m=3) N_ball=8    |X|=8    s*=1    least support=1     fraction=0.12500   k_max^-d=0.0625    = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 3)           d=0 (m=1) N_ball=1    |X|=9    s*=9    least support=9     fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 3)           d=1 (m=2) N_ball=5    |X|=9    s*=3    least support=3     fraction=0.33333   k_max^-d=0.3333    = s*     dual  (least eigenvalue 2.22e-01; D^-w = 1.2e-02), 8 subsets, 0.0 s
+grid (3, 3)           d=2 (m=3) N_ball=9    |X|=9    s*=1    least support=1     fraction=0.11111   k_max^-d=0.1111    = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 4)           d=0 (m=1) N_ball=1    |X|=12   s*=12   least support=12    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 4)           d=1 (m=2) N_ball=6    |X|=12   s*=3    least support=3     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 2.50e-01; D^-w = 6.9e-03), 11 subsets, 0.0 s
+grid (3, 4)           d=2 (m=3) N_ball=12   |X|=12   s*=1    least support=1     fraction=0.08333   k_max^-d=0.0625    = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (4, 4)           d=0 (m=1) N_ball=1    |X|=16   s*=16   least support=16    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (4, 4)           d=1 (m=2) N_ball=7    |X|=16   s*=4    least support=4     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 1.88e-01; D^-w = 2.4e-04), 105 subsets, 0.0 s
+grid (4, 4)           d=2 (m=3) N_ball=16   |X|=16   s*=1    least support=1     fraction=0.06250   k_max^-d=0.0625    = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 2)        d=0 (m=1) N_ball=1    |X|=8    s*=8    least support=8     fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 2)        d=1 (m=2) N_ball=4    |X|=8    s*=4    least support=4     fraction=0.50000   k_max^-d=0.5       = s*     primal (0 dependent subsets skipped), 21 subsets, 0.0 s
+grid (2, 2, 2)        d=2 (m=3) N_ball=7    |X|=8    s*=2    least support=2     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 1.25e-01; D^-w = 1.2e-01), 1 subsets, 0.0 s
+grid (2, 2, 2)        d=3 (m=4) N_ball=8    |X|=8    s*=1    least support=1     fraction=0.12500   k_max^-d=0.125     = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 3)        d=0 (m=1) N_ball=1    |X|=12   s*=12   least support=12    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 3)        d=1 (m=2) N_ball=5    |X|=12   s*=4    least support=4     fraction=0.33333   k_max^-d=0.3333    = s*     dual  (least eigenvalue 1.86e-01; D^-w = 5.8e-04), 55 subsets, 0.0 s
+grid (2, 2, 3)        d=2 (m=3) N_ball=10   |X|=12   s*=2    least support=2     fraction=0.16667   k_max^-d=0.1111    = s*     dual  (least eigenvalue 1.67e-01; D^-w = 8.3e-02), 1 subsets, 0.0 s
+grid (2, 2, 3)        d=3 (m=4) N_ball=12   |X|=12   s*=1    least support=1     fraction=0.08333   k_max^-d=0.03704   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 4)        d=0 (m=1) N_ball=1    |X|=16   s*=16   least support=16    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 4)        d=1 (m=2) N_ball=6    |X|=16   s*=4    least support=4     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 2.03e-01; D^-w = 2.4e-04), 105 subsets, 0.0 s
+grid (2, 2, 4)        d=2 (m=3) N_ball=13   |X|=16   s*=2    least support=2     fraction=0.12500   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.88e-01; D^-w = 6.2e-02), 1 subsets, 0.0 s
+grid (2, 2, 4)        d=3 (m=4) N_ball=16   |X|=16   s*=1    least support=1     fraction=0.06250   k_max^-d=0.01562   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 3, 3)        d=0 (m=1) N_ball=1    |X|=18   s*=18   least support=18    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 3, 3)        d=1 (m=2) N_ball=6    |X|=18   s*=6    least support=6     fraction=0.33333   k_max^-d=0.3333    = s*     dual  (least eigenvalue 1.27e-01; D^-w = 5.3e-07), 2380 subsets, 0.0 s
+grid (2, 3, 3)        d=2 (m=3) N_ball=14   |X|=18   s*=2    least support=2     fraction=0.11111   k_max^-d=0.1111    = s*     dual  (least eigenvalue 2.22e-01; D^-w = 5.6e-02), 1 subsets, 0.0 s
+grid (2, 3, 3)        d=3 (m=4) N_ball=18   |X|=18   s*=1    least support=1     fraction=0.05556   k_max^-d=0.03704   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 3, 4)        d=0 (m=1) N_ball=1    |X|=24   s*=24   least support=24    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 3, 4)        d=1 (m=2) N_ball=7    |X|=24   s*=6    least support=6     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 1.38e-01; D^-w = 1.3e-07), 8855 subsets, 0.0 s
+grid (2, 3, 4)        d=2 (m=3) N_ball=18   |X|=24   s*=2    least support=2     fraction=0.08333   k_max^-d=0.0625    = s*     dual  (least eigenvalue 2.50e-01; D^-w = 4.2e-02), 1 subsets, 0.0 s
+grid (2, 3, 4)        d=3 (m=4) N_ball=24   |X|=24   s*=1    least support=1     fraction=0.04167   k_max^-d=0.01562   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 4, 4)        d=0 (m=1) N_ball=1    |X|=32   s*=32   least support=32    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 4, 4)        d=1 (m=2) N_ball=8    |X|=32   s*=8    least support=8     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 1.05e-01; D^-w = 2.9e-11), 736281 subsets, 5.0 s
+grid (2, 4, 4)        d=2 (m=3) N_ball=23   |X|=32   s*=2    least support=2     fraction=0.06250   k_max^-d=0.0625    = s*     dual  (least eigenvalue 2.81e-01; D^-w = 3.1e-02), 1 subsets, 0.0 s
+grid (2, 4, 4)        d=3 (m=4) N_ball=32   |X|=32   s*=1    least support=1     fraction=0.03125   k_max^-d=0.01562   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 3, 3)        d=0 (m=1) N_ball=1    |X|=27   s*=27   least support=27    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 3, 3)        d=1 (m=2) N_ball=7    |X|=27   s*=9    least support=9     fraction=0.33333   k_max^-d=0.3333    = s*     primal (15038 dependent subsets skipped), 65780 subsets, 0.5 s
+grid (3, 3, 3)        d=2 (m=3) N_ball=19   |X|=27   s*=3    least support=3     fraction=0.11111   k_max^-d=0.1111    = s*     dual  (least eigenvalue 1.48e-01; D^-w = 1.4e-03), 26 subsets, 0.0 s
+grid (3, 3, 3)        d=3 (m=4) N_ball=27   |X|=27   s*=1    least support=1     fraction=0.03704   k_max^-d=0.03704   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 3, 4)        d=0 (m=1) N_ball=1    |X|=36   s*=36   least support=36    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 3, 4)        d=1 (m=2) N_ball=8    |X|=36   s*=9    least support=9     fraction=0.25000   k_max^-d=0.25      = s*     primal (519778 dependent subsets skipped), 1623160 subsets, 13.3 s
+grid (3, 3, 4)        d=2 (m=3) N_ball=24   |X|=36   s*=3    least support=3     fraction=0.08333   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.67e-01; D^-w = 7.7e-04), 35 subsets, 0.0 s
+grid (3, 3, 4)        d=3 (m=4) N_ball=36   |X|=36   s*=1    least support=1     fraction=0.02778   k_max^-d=0.01562   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 4, 4)        d=0 (m=1) N_ball=1    |X|=48   s*=48   least support=48    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 4, 4)        d=1 (m=2) N_ball=9    |X|=48   s*=12   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 6.3e+07, dual 5.2e+09 subsets), 0 subsets, 0.0 s
+grid (3, 4, 4)        d=2 (m=3) N_ball=30   |X|=48   s*=3    least support=3     fraction=0.06250   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.88e-01; D^-w = 4.3e-04), 47 subsets, 0.0 s
+grid (3, 4, 4)        d=3 (m=4) N_ball=48   |X|=48   s*=1    least support=1     fraction=0.02083   k_max^-d=0.01562   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (4, 4, 4)        d=0 (m=1) N_ball=1    |X|=64   s*=64   least support=64    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (4, 4, 4)        d=1 (m=2) N_ball=10   |X|=64   s*=16   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 3.9e+09, dual 3.7e+13 subsets), 0 subsets, 0.0 s
+grid (4, 4, 4)        d=2 (m=3) N_ball=37   |X|=64   s*=4    least support=4     fraction=0.06250   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.41e-01; D^-w = 3.8e-06), 1953 subsets, 0.0 s
+grid (4, 4, 4)        d=3 (m=4) N_ball=64   |X|=64   s*=1    least support=1     fraction=0.01562   k_max^-d=0.01562   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 2, 2)     d=0 (m=1) N_ball=1    |X|=16   s*=16   least support=16    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 2, 2)     d=1 (m=2) N_ball=5    |X|=16   s*=8    least support=8     fraction=0.50000   k_max^-d=0.5       = s*     primal (25 dependent subsets skipped), 455 subsets, 0.0 s
+grid (2, 2, 2, 2)     d=2 (m=3) N_ball=11   |X|=16   s*=4    least support=4     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 7.67e-02; D^-w = 2.4e-04), 105 subsets, 0.0 s
+grid (2, 2, 2, 2)     d=3 (m=4) N_ball=15   |X|=16   s*=2    least support=2     fraction=0.12500   k_max^-d=0.125     = s*     dual  (least eigenvalue 6.25e-02; D^-w = 6.2e-02), 1 subsets, 0.0 s
+grid (2, 2, 2, 2)     d=4 (m=5) N_ball=16   |X|=16   s*=1    least support=1     fraction=0.06250   k_max^-d=0.0625    = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 2, 3)     d=0 (m=1) N_ball=1    |X|=24   s*=24   least support=24    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 2, 3)     d=1 (m=2) N_ball=6    |X|=24   s*=8    least support=8     fraction=0.33333   k_max^-d=0.3333    = s*     primal (1195 dependent subsets skipped), 8855 subsets, 0.0 s
+grid (2, 2, 2, 3)     d=2 (m=3) N_ball=15   |X|=24   s*=4    least support=4     fraction=0.16667   k_max^-d=0.1111    = s*     dual  (least eigenvalue 1.00e-01; D^-w = 7.2e-05), 253 subsets, 0.0 s
+grid (2, 2, 2, 3)     d=3 (m=4) N_ball=22   |X|=24   s*=2    least support=2     fraction=0.08333   k_max^-d=0.03704   = s*     dual  (least eigenvalue 8.33e-02; D^-w = 4.2e-02), 1 subsets, 0.0 s
+grid (2, 2, 2, 3)     d=4 (m=5) N_ball=24   |X|=24   s*=1    least support=1     fraction=0.04167   k_max^-d=0.01235   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 2, 4)     d=0 (m=1) N_ball=1    |X|=32   s*=32   least support=32    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 2, 4)     d=1 (m=2) N_ball=7    |X|=32   s*=8    least support=8     fraction=0.25000   k_max^-d=0.25      = s*     primal (41631 dependent subsets skipped), 169911 subsets, 1.0 s
+grid (2, 2, 2, 4)     d=2 (m=3) N_ball=19   |X|=32   s*=4    least support=4     fraction=0.12500   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.12e-01; D^-w = 3.1e-05), 465 subsets, 0.0 s
+grid (2, 2, 2, 4)     d=3 (m=4) N_ball=29   |X|=32   s*=2    least support=2     fraction=0.06250   k_max^-d=0.01562   = s*     dual  (least eigenvalue 9.38e-02; D^-w = 3.1e-02), 1 subsets, 0.0 s
+grid (2, 2, 2, 4)     d=4 (m=5) N_ball=32   |X|=32   s*=1    least support=1     fraction=0.03125   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 3, 3)     d=0 (m=1) N_ball=1    |X|=36   s*=36   least support=36    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 3, 3)     d=1 (m=2) N_ball=7    |X|=36   s*=12   least support=12    fraction=0.33333   k_max^-d=0.3333    = s*     primal (66746 dependent subsets skipped), 324632 subsets, 1.8 s
+grid (2, 2, 3, 3)     d=2 (m=3) N_ball=20   |X|=36   s*=4    least support=4     fraction=0.11111   k_max^-d=0.1111    = s*     dual  (least eigenvalue 1.30e-01; D^-w = 2.1e-05), 595 subsets, 0.0 s
+grid (2, 2, 3, 3)     d=3 (m=4) N_ball=32   |X|=36   s*=2    least support=2     fraction=0.05556   k_max^-d=0.03704   = s*     dual  (least eigenvalue 1.11e-01; D^-w = 2.8e-02), 1 subsets, 0.0 s
+grid (2, 2, 3, 3)     d=4 (m=5) N_ball=36   |X|=36   s*=1    least support=1     fraction=0.02778   k_max^-d=0.01235   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 3, 4)     d=0 (m=1) N_ball=1    |X|=48   s*=48   least support=48    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 3, 4)     d=1 (m=2) N_ball=8    |X|=48   s*=12   least support=12    fraction=0.25000   k_max^-d=0.25      = s*     primal (3185973 dependent subsets skipped), 10737573 subsets, 127.3 s
+grid (2, 2, 3, 4)     d=2 (m=3) N_ball=25   |X|=48   s*=4    least support=4     fraction=0.08333   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.44e-01; D^-w = 9.0e-06), 1081 subsets, 0.0 s
+grid (2, 2, 3, 4)     d=3 (m=4) N_ball=42   |X|=48   s*=2    least support=2     fraction=0.04167   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.25e-01; D^-w = 2.1e-02), 1 subsets, 0.0 s
+grid (2, 2, 3, 4)     d=4 (m=5) N_ball=48   |X|=48   s*=1    least support=1     fraction=0.02083   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 4, 4)     d=0 (m=1) N_ball=1    |X|=64   s*=64   least support=64    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 4, 4)     d=1 (m=2) N_ball=9    |X|=64   s*=16   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 5.5e+08, dual 3.7e+13 subsets), 0 subsets, 0.0 s
+grid (2, 2, 4, 4)     d=2 (m=3) N_ball=31   |X|=64   s*=4    least support=4     fraction=0.06250   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.60e-01; D^-w = 3.8e-06), 1953 subsets, 0.0 s
+grid (2, 2, 4, 4)     d=3 (m=4) N_ball=55   |X|=64   s*=2    least support=2     fraction=0.03125   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.41e-01; D^-w = 1.6e-02), 1 subsets, 0.0 s
+grid (2, 2, 4, 4)     d=4 (m=5) N_ball=64   |X|=64   s*=1    least support=1     fraction=0.01562   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 3, 3, 3)     d=0 (m=1) N_ball=1    |X|=54   s*=54   least support=54    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 3, 3, 3)     d=1 (m=2) N_ball=8    |X|=54   s*=18   least support=18    fraction=0.33333   k_max^-d=0.3333    = s*     primal (5813024 dependent subsets skipped), 22957480 subsets, 270.0 s
+grid (2, 3, 3, 3)     d=2 (m=3) N_ball=26   |X|=54   s*=6    least support=6     fraction=0.11111   k_max^-d=0.1111    = s*     dual  (least eigenvalue 9.10e-02; D^-w = 2.2e-09), 292825 subsets, 1.1 s
+grid (2, 3, 3, 3)     d=3 (m=4) N_ball=46   |X|=54   s*=2    least support=2     fraction=0.03704   k_max^-d=0.03704   = s*     dual  (least eigenvalue 1.48e-01; D^-w = 1.9e-02), 1 subsets, 0.0 s
+grid (2, 3, 3, 3)     d=4 (m=5) N_ball=54   |X|=54   s*=1    least support=1     fraction=0.01852   k_max^-d=0.01235   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 3, 3, 4)     d=0 (m=1) N_ball=1    |X|=72   s*=72   least support=72    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 3, 3, 4)     d=1 (m=2) N_ball=9    |X|=72   s*=18   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 1.3e+09, dual 3.2e+15 subsets), 0 subsets, 0.0 s
+grid (2, 3, 3, 4)     d=2 (m=3) N_ball=32   |X|=72   s*=6    least support=6     fraction=0.08333   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.00e-01; D^-w = 5.2e-10), 971635 subsets, 3.1 s
+grid (2, 3, 3, 4)     d=3 (m=4) N_ball=60   |X|=72   s*=2    least support=2     fraction=0.02778   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.67e-01; D^-w = 1.4e-02), 1 subsets, 0.0 s
+grid (2, 3, 3, 4)     d=4 (m=5) N_ball=72   |X|=72   s*=1    least support=1     fraction=0.01389   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 3, 4, 4)     d=0 (m=1) N_ball=1    |X|=96   s*=96   least support=96    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 3, 4, 4)     d=1 (m=2) N_ball=10   |X|=96   s*=24   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 1.2e+11, dual 2.1e+21 subsets), 0 subsets, 0.0 s
+grid (2, 3, 4, 4)     d=2 (m=3) N_ball=39   |X|=96   s*=6    least support=6     fraction=0.06250   k_max^-d=0.0625    = s*     dual  (least eigenvalue 1.10e-01; D^-w = 1.2e-10), 3183545 subsets, 10.8 s
+grid (2, 3, 4, 4)     d=3 (m=4) N_ball=78   |X|=96   s*=2    least support=2     fraction=0.02083   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.88e-01; D^-w = 1.0e-02), 1 subsets, 0.0 s
+grid (2, 3, 4, 4)     d=4 (m=5) N_ball=96   |X|=96   s*=1    least support=1     fraction=0.01042   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 4, 4, 4)     d=0 (m=1) N_ball=1    |X|=128  s*=128  least support=128   fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 4, 4, 4)     d=1 (m=2) N_ball=11   |X|=128  s*=32   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 1.8e+13, dual 1.2e+29 subsets), 0 subsets, 0.0 s
+grid (2, 4, 4, 4)     d=2 (m=3) N_ball=47   |X|=128  s*=8    least support=None  fraction=-         k_max^-d=0.0625    skipped  NOT DONE (primal 5.3e+34, dual 5.2e+09 subsets), 0 subsets, 0.0 s
+grid (2, 4, 4, 4)     d=3 (m=4) N_ball=101  |X|=128  s*=2    least support=2     fraction=0.01562   k_max^-d=0.01562   = s*     dual  (least eigenvalue 2.11e-01; D^-w = 7.8e-03), 1 subsets, 0.0 s
+grid (2, 4, 4, 4)     d=4 (m=5) N_ball=128  |X|=128  s*=1    least support=1     fraction=0.00781   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 3, 3, 3)     d=0 (m=1) N_ball=1    |X|=81   s*=81   least support=81    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 3, 3, 3)     d=1 (m=2) N_ball=9    |X|=81   s*=27   least support=None  fraction=-         k_max^-d=0.3333    skipped  NOT DONE (primal 3.2e+09, dual 3.6e+20 subsets), 0 subsets, 0.0 s
+grid (3, 3, 3, 3)     d=2 (m=3) N_ball=33   |X|=81   s*=9    least support=None  fraction=-         k_max^-d=0.1111    skipped  NOT DONE (primal 1.4e+22, dual 3.2e+09 subsets), 0 subsets, 0.0 s
+grid (3, 3, 3, 3)     d=3 (m=4) N_ball=65   |X|=81   s*=3    least support=3     fraction=0.03704   k_max^-d=0.03704   = s*     dual  (least eigenvalue 9.88e-02; D^-w = 1.5e-04), 80 subsets, 0.0 s
+grid (3, 3, 3, 3)     d=4 (m=5) N_ball=81   |X|=81   s*=1    least support=1     fraction=0.01235   k_max^-d=0.01235   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 3, 3, 4)     d=0 (m=1) N_ball=1    |X|=108  s*=108  least support=108   fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 3, 3, 4)     d=1 (m=2) N_ball=10   |X|=108  s*=27   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 3.3e+11, dual 1.7e+24 subsets), 0 subsets, 0.0 s
+grid (3, 3, 3, 4)     d=2 (m=3) N_ball=40   |X|=108  s*=9    least support=None  fraction=-         k_max^-d=0.0625    skipped  NOT DONE (primal 1.4e+29, dual 2.6e+10 subsets), 0 subsets, 0.0 s
+grid (3, 3, 3, 4)     d=3 (m=4) N_ball=84   |X|=108  s*=3    least support=3     fraction=0.02778   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.11e-01; D^-w = 8.6e-05), 107 subsets, 0.0 s
+grid (3, 3, 3, 4)     d=4 (m=5) N_ball=108  |X|=108  s*=1    least support=1     fraction=0.00926   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 3, 4, 4)     d=0 (m=1) N_ball=1    |X|=144  s*=144  least support=144   fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 3, 4, 4)     d=1 (m=2) N_ball=11   |X|=144  s*=36   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 5.3e+13, dual 9.0e+32 subsets), 0 subsets, 0.0 s
+grid (3, 3, 4, 4)     d=2 (m=3) N_ball=48   |X|=144  s*=9    least support=None  fraction=-         k_max^-d=0.0625    skipped  NOT DONE (primal 7.3e+37, dual 2.1e+11 subsets), 0 subsets, 0.0 s
+grid (3, 3, 4, 4)     d=3 (m=4) N_ball=108  |X|=144  s*=3    least support=3     fraction=0.02083   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.25e-01; D^-w = 4.8e-05), 143 subsets, 0.0 s
+grid (3, 3, 4, 4)     d=4 (m=5) N_ball=144  |X|=144  s*=1    least support=1     fraction=0.00694   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (3, 4, 4, 4)     d=0 (m=1) N_ball=1    |X|=192  s*=192  least support=192   fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (3, 4, 4, 4)     d=1 (m=2) N_ball=12   |X|=192  s*=48   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 1.4e+16, dual 4.2e+44 subsets), 0 subsets, 0.0 s
+grid (3, 4, 4, 4)     d=2 (m=3) N_ball=57   |X|=192  s*=12   least support=None  fraction=-         k_max^-d=0.0625    skipped  NOT DONE (primal 4.0e+48, dual 1.4e+16 subsets), 0 subsets, 0.0 s
+grid (3, 4, 4, 4)     d=3 (m=4) N_ball=138  |X|=192  s*=3    least support=3     fraction=0.01562   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.41e-01; D^-w = 2.7e-05), 191 subsets, 0.0 s
+grid (3, 4, 4, 4)     d=4 (m=5) N_ball=192  |X|=192  s*=1    least support=1     fraction=0.00521   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (4, 4, 4, 4)     d=0 (m=1) N_ball=1    |X|=256  s*=256  least support=256   fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (4, 4, 4, 4)     d=1 (m=2) N_ball=13   |X|=256  s*=64   least support=None  fraction=-         k_max^-d=0.25      skipped  NOT DONE (primal 6.0e+18, dual 1.6e+60 subsets), 0 subsets, 0.0 s
+grid (4, 4, 4, 4)     d=2 (m=3) N_ball=67   |X|=256  s*=16   least support=None  fraction=-         k_max^-d=0.0625    skipped  NOT DONE (primal 4.2e+61, dual 3.9e+22 subsets), 0 subsets, 0.0 s
+grid (4, 4, 4, 4)     d=3 (m=4) N_ball=175  |X|=256  s*=4    least support=4     fraction=0.01562   k_max^-d=0.01562   = s*     dual  (least eigenvalue 1.05e-01; D^-w = 6.0e-08), 32385 subsets, 0.1 s
+grid (4, 4, 4, 4)     d=4 (m=5) N_ball=256  |X|=256  s*=1    least support=1     fraction=0.00391   k_max^-d=0.003906  = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 2, 2, 2)  d=0 (m=1) N_ball=1    |X|=32   s*=32   least support=32    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 2, 2, 2)  d=1 (m=2) N_ball=6    |X|=32   s*=16   least support=16    fraction=0.50000   k_max^-d=0.5       = s*     primal (3475 dependent subsets skipped), 31465 subsets, 0.2 s
+grid (2, 2, 2, 2, 2)  d=2 (m=3) N_ball=16   |X|=32   s*=8    least support=8     fraction=0.25000   k_max^-d=0.25      = s*     dual  (least eigenvalue 4.07e-02; D^-w = 2.9e-11), 736281 subsets, 4.4 s
+grid (2, 2, 2, 2, 2)  d=3 (m=4) N_ball=26   |X|=32   s*=4    least support=4     fraction=0.12500   k_max^-d=0.125     = s*     dual  (least eigenvalue 3.92e-02; D^-w = 3.1e-05), 465 subsets, 0.0 s
+grid (2, 2, 2, 2, 2)  d=4 (m=5) N_ball=31   |X|=32   s*=2    least support=2     fraction=0.06250   k_max^-d=0.0625    = s*     dual  (least eigenvalue 3.12e-02; D^-w = 3.1e-02), 1 subsets, 0.0 s
+grid (2, 2, 2, 2, 2)  d=5 (m=6) N_ball=32   |X|=32   s*=1    least support=1     fraction=0.03125   k_max^-d=0.03125   = s*     trivial (all functions), 0 subsets, 0.0 s
+grid (2, 2, 2, 2, 3)  d=0 (m=1) N_ball=1    |X|=48   s*=48   least support=48    fraction=1.00000   k_max^-d=1         = s*     trivial (constants), 0 subsets, 0.0 s
+grid (2, 2, 2, 2, 3)  d=1 (m=2) N_ball=7    |X|=48   s*=16   least support=16    fraction=0.33333   k_max^-d=0.3333    = s*     primal (267261 dependent subsets skipped), 1533939 subsets, 11.7 s
+grid (2, 2, 2, 2, 3)  d=2 (m=3) N_ball=21   |X|=48   s*=8    least support=8     fraction=0.16667   k_max^-d=0.1111    = s*     dual  (least eigenvalue 6.24e-02; D^-w = 1.7e-12), 10737573 subsets, 69.8 s
+grid (2, 2, 2, 2, 3)  d=3 (m=4) N_ball=37   |X|=48   s*=4    least support=4     fraction=0.08333   k_max^-d=0.03704   = s*     dual  (least eigenvalue 5.18e-02; D^-w = 9.0e-06), 1081 subsets, 0.0 s
+grid (2, 2, 2, 2, 3)  d=4 (m=5) N_ball=46   |X|=48   s*=2    least support=2     fraction=0.04167   k_max^-d=0.01235   = s*     dual  (least eigenvalue 4.17e-02; D^-w = 2.1e-02), 1 subsets, 0.0 s
+grid (2, 2, 2, 2, 3)  d=5 (m=6) N_ball=48   |X|=48   s*=1    least support=1     fraction=0.02083   k_max^-d=0.004115  = s*     trivial (all functions), 0 subsets, 0.0 s
+
+cases done exhaustively: 128; skipped (too large for the budget): 17; refutations of s*: 0
+cases in which the least support fraction is below k_max^{-(m-1)} (the report's bound read with k = largest alphabet): 0
+cases (0 < d < n) in which the least fraction is strictly ABOVE k_max^{-(m-1)} (unequal alphabets: the right constant is 1/(product of the m-1 largest k_i)): 20
+   e.g. grid (2, 2, 3) d=2: least fraction 0.16667 = 1/6  >  k_max^-d = 0.11111
+   e.g. grid (2, 2, 4) d=2: least fraction 0.12500 = 1/8  >  k_max^-d = 0.06250
+   e.g. grid (2, 3, 4) d=2: least fraction 0.08333 = 1/12  >  k_max^-d = 0.06250
+   e.g. grid (3, 3, 4) d=2: least fraction 0.08333 = 1/12  >  k_max^-d = 0.06250
+   e.g. grid (2, 2, 2, 3) d=2: least fraction 0.16667 = 1/6  >  k_max^-d = 0.11111
+   e.g. grid (2, 2, 2, 3) d=3: least fraction 0.08333 = 1/12  >  k_max^-d = 0.03704
+   e.g. grid (2, 2, 2, 4) d=2: least fraction 0.12500 = 1/8  >  k_max^-d = 0.06250
+   e.g. grid (2, 2, 2, 4) d=3: least fraction 0.06250 = 1/16  >  k_max^-d = 0.01562
+total elapsed 520.9 s
+R12_02_DONE
+
+real	8m41.236s
+user	4m38.385s
+sys	0m40.191s

@@ -1,0 +1,83 @@
+==============================================================================================================
+PART A — random boxes, exhaustive packings (n = 6, 8, 10; 4 placements of r; 6 values of eps)
+==============================================================================================================
+rand n=6 #0 interior         n= 6 eps=0.1   a=2.676     b=0.6162   single=1 k_dip=4 (floor 12) k_bump=3 (floor 3) k_mix=4 tau*=4.000 tau*(e/2)=5.000 | N=313 N_opt=195 best_spot=15 p=0.00958 p_exact=0.04343 fail=9.22e-07 | (1-2d)k=3.60 (1-2d)tau=3.60 upper(e)=123.9
+rand n=6 #0 interior         n= 6 eps=1     a=2.676     b=0.6162   single=0 k_dip=1 (floor 0) k_bump=0 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=3.000 | N=25 N_opt=18 best_spot=9 p=0.1212 p_exact=0.3064 fail=0.000107 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=6 #0 near floor       n= 6 eps=0.1   a=0.002672  b=0.8953   single=1 k_dip=0 (floor 0) k_bump=3 (floor 4) k_mix=3 tau*=3.000 tau*(e/2)=4.000 | N=110 N_opt=56 best_spot=12 p=0.02724 p_exact=0.06707 fail=0.000483 | (1-2d)k=2.70 (1-2d)tau=2.70 upper(e)=99.3
+rand n=6 #0 near floor       n= 6 eps=1     a=0.002672  b=0.8953   single=0 k_dip=0 (floor 0) k_bump=1 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=2.000 | N=14 N_opt=7 best_spot=6 p=0.2197 p_exact=0.4568 fail=0.000195 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=6 #0 near ceiling     n= 6 eps=0.1   a=8.561     b=0.001723 single=1 k_dip=5 (floor 40) k_bump=0 (floor 0) k_mix=5 tau*=5.000 tau*(e/2)=5.000 | N=1001 N_opt=501 best_spot=15 p=0.002994 p_exact=0.0446 fail=1.46e-20 | (1-2d)k=4.50 (1-2d)tau=4.50 upper(e)=148.5
+rand n=6 #0 near ceiling     n= 6 eps=1     a=8.561     b=0.001723 single=1 k_dip=3 (floor 2) k_bump=0 (floor 0) k_mix=3 tau*=3.000 tau*(e/2)=4.000 | N=80 N_opt=40 best_spot=12 p=0.03789 p_exact=0.1536 fail=1.61e-06 | (1-2d)k=2.70 (1-2d)tau=2.70 upper(e)=128.0
+rand n=6 #0 half floor/half ceil n= 6 eps=0.1   a=0.0336    b=0.8921   single=1 k_dip=0 (floor 0) k_bump=3 (floor 4) k_mix=3 tau*=3.000 tau*(e/2)=3.000 | N=110 N_opt=57 best_spot=9 p=0.02734 p_exact=0.1281 fail=2.81e-07 | (1-2d)k=2.70 (1-2d)tau=2.70 upper(e)=99.3
+rand n=6 #0 half floor/half ceil n= 6 eps=1     a=0.0336    b=0.8921   single=0 k_dip=0 (floor 0) k_bump=1 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=2.000 | N=14 N_opt=7 best_spot=6 p=0.2205 p_exact=0.239 fail=0.0219 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=8 #0 interior         n= 8 eps=0.1   a=1.733     b=0.8309   single=1 k_dip=2 (floor 8) k_bump=1 (floor 4) k_mix=2 tau*=2.000 tau*(e/2)=2.000 | N=203 N_opt=153 best_spot=6 p=0.01479 p_exact=0.03131 fail=0.00157 | (1-2d)k=1.80 (1-2d)tau=1.80 upper(e)=74.7
+rand n=8 #0 interior         n= 8 eps=1     a=1.733     b=0.8309   single=1 k_dip=1 (floor 0) k_bump=1 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=1.000 | N=17 N_opt=15 best_spot=3 p=0.1871 p_exact=0.9525 fail=3.14e-23 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=8 #0 near floor       n= 8 eps=0.1   a=0.002947  b=0.938    single=1 k_dip=0 (floor 0) k_bump=1 (floor 4) k_mix=1 tau*=1.000 tau*(e/2)=2.000 | N=116 N_opt=58 best_spot=6 p=0.026 p_exact=0.05579 fail=0.00128 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=50.2
+rand n=8 #0 near floor       n= 8 eps=1     a=0.002947  b=0.938    single=1 k_dip=0 (floor 0) k_bump=1 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=1.000 | N=15 N_opt=8 best_spot=3 p=0.2097 p_exact=0.936 fail=1.23e-18 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=8 #0 near ceiling     n= 8 eps=0.1   a=15.13     b=0.002512 single=1 k_dip=4 (floor 71) k_bump=0 (floor 0) k_mix=4 tau*=4.000 tau*(e/2)=5.000 | N=1768 N_opt=884 best_spot=15 p=0.001695 p_exact=0.002346 fail=0.0157 | (1-2d)k=3.60 (1-2d)tau=3.60 upper(e)=123.9
+rand n=8 #0 near ceiling     n= 8 eps=1     a=15.13     b=0.002512 single=1 k_dip=1 (floor 4) k_bump=0 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=2.000 | N=140 N_opt=70 best_spot=6 p=0.02145 p_exact=0.03168 fail=0.011 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=8 #0 half floor/half ceil n= 8 eps=0.1   a=0.0575    b=0.9346   single=1 k_dip=0 (floor 0) k_bump=1 (floor 4) k_mix=1 tau*=1.000 tau*(e/2)=2.000 | N=115 N_opt=61 best_spot=6 p=0.02609 p_exact=0.4633 fail=8.33e-32 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=50.2
+rand n=8 #0 half floor/half ceil n= 8 eps=1     a=0.0575    b=0.9346   single=1 k_dip=0 (floor 0) k_bump=1 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=1.000 | N=15 N_opt=8 best_spot=3 p=0.2105 p_exact=0.4993 fail=3.11e-05 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=10 #0 interior        n=10 eps=0.1   a=1.167     b=0.9123   single=1 k_dip=3 (floor 5) k_bump=1 (floor 4) k_mix=3 tau*=3.875 tau*(e/2)=5.000 | N=137 N_opt=125 best_spot=15 p=0.02196 p_exact=0.02513 fail=0.0306 | (1-2d)k=2.70 (1-2d)tau=3.49 upper(e)=99.3
+rand n=10 #0 interior        n=10 eps=1     a=1.167     b=0.9123   single=1 k_dip=0 (floor 0) k_bump=1 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=1.000 | N=14 N_opt=13 best_spot=3 p=0.2156 p_exact=0.7025 fail=4.26e-08 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=10 #0 near floor      n=10 eps=0.1   a=0.003387  b=0.9594   single=1 k_dip=0 (floor 0) k_bump=3 (floor 5) k_mix=3 tau*=3.000 tau*(e/2)=4.000 | N=118 N_opt=60 best_spot=12 p=0.02542 p_exact=0.04938 fail=0.00254 | (1-2d)k=2.70 (1-2d)tau=2.70 upper(e)=99.3
+rand n=10 #0 near floor      n=10 eps=1     a=0.003387  b=0.9594   single=1 k_dip=0 (floor 0) k_bump=1 (floor 0) k_mix=1 tau*=1.000 tau*(e/2)=1.000 | N=15 N_opt=8 best_spot=3 p=0.2051 p_exact=0.6899 fail=2.35e-08 | (1-2d)k=0.90 (1-2d)tau=0.90 upper(e)=64.5
+rand n=10 #0 near ceiling    n=10 eps=0.1   a=23.65     b=0.002899 single=1 k_dip=7 (floor 112) k_bump=0 (floor 0) k_mix=7 tau*=7.000 tau*(e/2)=8.000 | N=2764 N_opt=1382 best_spot=24 p=0.001084 p_exact=0.001921 fail=0.00492 | (1-2d)k=6.30 (1-2d)tau=6.30 upper(e)=197.6
+rand n=10 #0 near ceiling    n=10 eps=1     a=23.65     b=0.002899 single=1 k_dip=3 (floor 6) k_bump=0 (floor 0) k_mix=3 tau*=3.500 tau*(e/2)=5.000 | N=219 N_opt=110 best_spot=15 p=0.01372 p_exact=0.02226 fail=0.00723 | (1-2d)k=2.70 (1-2d)tau=3.15 upper(e)=128.0
+rand n=10 #0 half floor/half ceil n=10 eps=0.1   a=2.443     b=0.8607   single=1 k_dip=2 (floor 11) k_bump=2 (floor 4) k_mix=4 tau*=4.500 tau*(e/2)=5.000 | N=286 N_opt=196 best_spot=15 p=0.01049 p_exact=0.01312 fail=0.0229 | (1-2d)k=3.60 (1-2d)tau=4.05 upper(e)=123.9
+rand n=10 #0 half floor/half ceil n=10 eps=1     a=2.443     b=0.8607   single=1 k_dip=1 (floor 0) k_bump=1 (floor 0) k_mix=2 tau*=2.000 tau*(e/2)=2.000 | N=23 N_opt=18 best_spot=6 p=0.1328 p_exact=0.3891 fail=1.19e-05 | (1-2d)k=1.80 (1-2d)tau=1.80 upper(e)=96.2
+
+cases: 720 | with the single-state condition satisfied: 138
+violations of any checked statement: 0
+worst exact failure probability of the spot check of (c) over all cases: 0.0496 (delta = 0.05)
+exact detection probability / formula p(eta): min 1.0008, max 379.0624  (statement: >= 1; 'between p and 2p' holds for the linear relaxation only)
+cases with k_mix > max(k_dip, k_bump): 108
+cases (single-state condition holding) in which N exceeds the bound of (e) computed with k_dip alone: 0
+cases in which the single-state condition FAILS and N exceeds the bound of (e): 387 (the condition is needed for the display)
+elapsed 6.7 s
+
+==============================================================================================================
+PART B — uniform pi on n points, constant box [-rho_m, rho_p]: packings in closed form (identical points)
+==============================================================================================================
+B1. the centre (v = 0), rho_m = 3, rho_p = 3, eps = 0.2 (eta = 0.1), delta = 0.05 — the report's 544 / 1088:
+  n=    1000 a=19.0855 b=0.9502 k_dip=83 (floor 43) k_bump=5 (floor 2) k_mix=83 | N_prop=544 N_general=1088 exact failure of N_prop samples=0.03786 | (1-2d)k=74.7 <= cost <= N_prop <= upper(e)=2120.0  single-state cond. violated: False
+  n=   10000 a=19.0855 b=0.9502 k_dip=85 (floor 43) k_bump=5 (floor 2) k_mix=85 | N_prop=544 N_general=1088 exact failure of N_prop samples=0.04712 | (1-2d)k=76.5 <= cost <= N_prop <= upper(e)=2170.4  single-state cond. violated: False
+  n=  100000 a=19.0855 b=0.9502 k_dip=86 (floor 43) k_bump=5 (floor 2) k_mix=86 | N_prop=544 N_general=1088 exact failure of N_prop samples=0.04923 | (1-2d)k=77.4 <= cost <= N_prop <= upper(e)=2195.7  single-state cond. violated: False
+  n= 1000000 a=19.0855 b=0.9502 k_dip=86 (floor 43) k_bump=5 (floor 2) k_mix=86 | N_prop=544 N_general=1088 exact failure of N_prop samples=0.04948 | (1-2d)k=77.4 <= cost <= N_prop <= upper(e)=2195.7  single-state cond. violated: False
+B2. the constant box, r at the floor (v = -rho_m): no dips at all; old statement vs new
+    old upper end with k_dip:  4 ln(1/delta)(e^{eps/2}+1)(k_dip+1)+1 ;  new lower end (1-2 delta) k_bump
+  eps=0.2    a=0 b=0.99752 k_dip=0 k_bump=5 (floor 2) (1-2d)k_bump=4.5  upper(k_dip)=26.2  upper(k_mix)=152.4  
+  eps=0.05   a=0 b=0.99752 k_dip=0 k_bump=20 (floor 10) (1-2d)k_bump=18.0  upper(k_dip)=25.3  upper(k_mix)=510.7  
+  eps=0.02   a=0 b=0.99752 k_dip=0 k_bump=50 (floor 25) (1-2d)k_bump=45.0  upper(k_dip)=25.1  upper(k_mix)=1229.4  OLD TWO-SIDED CLAIM REFUTED (lower bound from bumps exceeds the upper end written with k_dip)
+  eps=0.01   a=0 b=0.99752 k_dip=0 k_bump=100 (floor 50) (1-2d)k_bump=90.0  upper(k_dip)=25.0  upper(k_mix)=2427.6  OLD TWO-SIDED CLAIM REFUTED (lower bound from bumps exceeds the upper end written with k_dip)
+  eps=0.005  a=0 b=0.99752 k_dip=0 k_bump=200 (floor 100) (1-2d)k_bump=180.0  upper(k_dip)=25.0  upper(k_mix)=4824.2  OLD TWO-SIDED CLAIM REFUTED (lower bound from bumps exceeds the upper end written with k_dip)
+B3. Theta-reading: ratio of the two ends of (e) as eps grows, centre of the constant box rho_m = 12, rho_p = 3, n = 10^7
+  eps=0.1  (a+b)/eps= 1627547.4  k=1428571  lower=(1-2d)k= 1285713.9  N_prop= 9509584  upper(e)=  35114638.0  N_prop/lower=     7.4  lower/((a+b)/eps)=0.7900  N_prop/((a+b)/eps)=5.8429
+  eps=0.5  (a+b)/eps=  325509.5  k= 250000  lower=(1-2d)k=  225000.0  N_prop= 1716631  upper(e)=   6842357.0  N_prop/lower=     7.6  lower/((a+b)/eps)=0.6912  N_prop/((a+b)/eps)=5.2737
+  eps=1    (a+b)/eps=  162754.7  k=  94339  lower=(1-2d)k=   84905.1  N_prop=  751582  upper(e)=   2994299.7  N_prop/lower=     8.9  lower/((a+b)/eps)=0.5217  N_prop/((a+b)/eps)=4.6179
+  eps=2    (a+b)/eps=   81377.4  k=  25445  lower=(1-2d)k=   22900.5  N_prop=  283753  upper(e)=   1133770.6  N_prop/lower=    12.4  lower/((a+b)/eps)=0.2814  N_prop/((a+b)/eps)=3.4869
+  eps=4    (a+b)/eps=   40688.7  k=   3035  lower=(1-2d)k=    2731.5  N_prop=   76313  upper(e)=    305196.3  N_prop/lower=    27.9  lower/((a+b)/eps)=0.0671  N_prop/((a+b)/eps)=1.8755
+  eps=6    (a+b)/eps=   27125.8  k=    404  lower=(1-2d)k=     363.6  N_prop=   25547  upper(e)=    102330.9  N_prop/lower=    70.3  lower/((a+b)/eps)=0.0134  N_prop/((a+b)/eps)=0.9418
+  eps=8    (a+b)/eps=   20344.3  k=     54  lower=(1-2d)k=      48.6  N_prop=    9097  upper(e)=     36643.6  N_prop/lower=   187.2  lower/((a+b)/eps)=0.0024  N_prop/((a+b)/eps)=0.4472
+
+==============================================================================================================
+PART C — the rule without a hint ('what the hint buys'): exact failure probability
+==============================================================================================================
+N(0) = 545 (report: 545);  hinted, proportional: 544 (report: 544);  general bound of (c): 1088 (report: 1088)
+two-level members, coarse search: worst failure 0.049967 = 0.9993 * delta at (v, u, s) = (3.0, -3.0, 0.9997386595587128)
+two-level members, second level at the floor, mass at the exact threshold, v on a grid of 6001: sup failure 0.049967 = 0.9993 * delta at v = 2.9980
+two-level members, second level at the ceiling: sup failure 0.036566 = 0.7313 * delta at v = -3.0000
+three-level members, 200000 random: worst failure 0.049433 = 0.9887 * delta
+all failures <= delta: True
+
+==============================================================================================================
+PART D — Monte Carlo of the spot check on one random instance (sanity of 'exact failure probability')
+==============================================================================================================
+MC instance                  n=10 eps=0.5   a=9.172     b=0.5752   single=1 k_dip=5 (floor 7) k_bump=1 (floor 0) k_mix=5 tau*=5.000 tau*(e/2)=7.000 | N=194 N_opt=105 best_spot=21 p=0.01548 p_exact=0.0293 fail=0.00312 | (1-2d)k=4.50 (1-2d)tau=4.50 upper(e)=165.2
+worst alternative differs from r on [5, 6] (q-mass 0.0293); N = 194; simulated miss frequency 0.00338 (exact (1-q(D))^N = 0.00312; delta = 0.05)
+
+total elapsed 14.9 s
+R12_01_DONE
+
+real	0m15.604s
+user	0m10.902s
+sys	0m0.953s

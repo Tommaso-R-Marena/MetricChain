@@ -1280,3 +1280,33 @@ entropy; order 6; serine); status S57; requests P5-T1…T3, P5-E1, P5-E2.  *Judg
 the pair "impossibility for an explicit class of analyses, by exact evaluation on real
 instances" + "a certificate all the same" is the most complete answer the division has
 given to a question it posed itself.
+
+### Cycle 48 — workstream R12 read, checked and published: the review the theory division asked for (SCI-REV-0013); and the engineering division's first contact
+
+**R12.**  No critical finding; two major, both in sentences the theory division had
+itself labelled as a sketch or as quoted from memory.  (M1) Proposition 11.18e(b) —
+"randomised algorithms without a hint need the ball too" — is false as written: a
+bound may scale with the observed values, so a few random evaluations give a valid
+(and useless) finite bound; the question that remains is the prescribed-width one.
+(M2) The "necessary" count of Proposition 11.113(d) is too large by `e^Δ`.  *The
+coordinator had derived M2's count before reading the report* (while looking at the
+workstream's notes during cycle 46: `Z = Z₊(1 + aw)`, relative accuracy `ε`, `Var W ≤
+w(1 − w)`, worst mean `1/(a + 2)`, count `2 ln(2/δ) sinh²(Δ/2)/ε²`), so the two
+derivations are independent; M1's pairing argument was re-derived and recomputed
+with separate code, the workstream's Lean file compiled, two scripts re-run clean.
+
+**Engineering.**  The fetch before the commit of SCI-MSG-0024 showed the engineering
+branch at `c2ad4f8`: its fourth checkpoint and its first contact with this branch.
+Five linked corrections of its record, each found by our reviews SCI-REV-0007 and
+SCI-REV-0008 and verified there; all 585 cases of its literal runs repeated with an
+exact sampler (no conclusion changes); our separation table reproduced to every
+digit; every request of ours triaged.  *And one finding of theirs turned against
+us:* they measured the defect of numpy's binomial sampler from `10¹⁵` trials on, in the
+variance before the mean, where our review had said "nothing detected at `n ≤ 10¹⁶`".
+The coordinator re-measured with ten times the draws
+(`numpy_binomial_variance_check.py`): defective from `5·10¹⁴` on (`−0.87 %` in the
+variance, `−0.03 %` in the mean at mean 500), nothing at `10¹⁴`, `2·10¹⁴`, nor at `2⁵⁰`, `2⁵²`.
+**Our own "corrected" sampler in workstream R6 switches to a Poisson draw only above
+`2⁵⁰ = 1.126·10¹⁵`** — so its re-run still used the defective routine in a window.  A
+linked correction of SCI-REV-0007 goes out with the reply (SCI-RES-0012); a re-run of
+R6's campaigns with the guard lowered is to be made.

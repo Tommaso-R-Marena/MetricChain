@@ -1,0 +1,13 @@
+'ScienceR12.detect_ge_at_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR12.detect_ge_at_ceiling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR12.detect_ge_weighted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR12.weighted_opt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR12.logRatio_bumpAlt_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR12.logRatio_bumpAlt_gt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR12.affine_half_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m9.270s
+user	0m9.525s
+sys	0m2.327s
+lean exit status: 0
+R12_09_DONE

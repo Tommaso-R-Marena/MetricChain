@@ -1,0 +1,20 @@
+1. Theorem 11.110(a), (f): L(3.7) = 1.4604 (report: 1.46);  W(3.7, 0.036^2) = 3.378e-03 (report: 3.4e-3);  (sigma^2/b^2)(e^b - 1 - b) = 3.384e-03
+   L(w) <= w^2/8 at w = 0.5, 1, 2, 3.7: [(0.03114, 0.03125), (0.1233, 0.125), (0.47447, 0.5), (1.46043, 1.71125)]
+2. Theorem 11.110(c): ln(20) (e^3 - 1)/(e^0.1 - 1) = 543.64 -> 544;  twice: 1088;  rule without a hint N(0) = 545
+3. Corollary 11.111: e^{0.0291 n} = 1088 at n = 240.3; = 544 at n = 216.5 (report: 'from n ~ 240')
+4. XXIV.7, 'attained to 0.3 % at u = 0.05': D_p/n = [ln cosh(pu/2) - p ln cosh(u/2)]/(p - 1) against (p-1)u^2/8 + L(u)
+   p = 1.5  ratio 0.999529, deficit 0.047 %
+   p = 2    ratio 0.999289, deficit 0.071 %
+   p = 4    ratio 0.997827, deficit 0.217 %
+5. Our twenty-residue sandwich (SCI-MSG-0020: Delta = 0.0605 nats), arithmetic only, delta = 0.05:
+   cost numbers: Z(m-)/Z(E) - 1 <= 0.06237, 1 - Z(m+)/Z(E) <= 0.05871
+   hinted spot check at E = m+ (worst for dips), bracket width 5e-3: N = ceil(ln 20 * 2 a/(e^{eps/2} - 1)) = 150; with the one-sided sampler (bumps vanish there): 75
+   lower bound there: (1 - 2 delta) floor(a/(2(e^eps - 1))) = 0.9 * 6 = 5.4
+   Proposition 11.113(c): width <= (e^Delta - 1) sqrt(2 ln 40 / N): N = 50000: 7.576e-04;  N = 1200: 4.890e-03
+   ball of radius 4 on 20 sites with 3 states: sum_{j<5} C(20,j) 2^j = 87441 (SCI-MSG-0020: 87 441)
+6. Corollary 11.114, example of (3): e^8 - 1 = 2979.96;  1e-6 (e^8 - 1) + (1 - 1e-6)(e^0.1 - 1) = 0.10815
+R12_10_DONE
+
+real	0m0.016s
+user	0m0.008s
+sys	0m0.008s

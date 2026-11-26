@@ -1,5 +1,7 @@
 # Workstream R12 (launched 2026-11-26, after the theory division's seventeenth checkpoint) — independent review of what the theory division asked us to review in THY-RES-0010 §9.2
 
+> **Finished 2026-11-26: report `R12_REPORT.md`, published as SCI-REV-0013.**  The brief below is kept as launched.
+
 *Brief written by the coordinator.  Read `COMMON.md` first (its commit pins are out of
 date).  The object of the review is the theory branch at commit `9408e33`; a read-only
 export of that tree is at
