@@ -1672,6 +1672,10 @@ MUTS["XVI"] += [
      [('                if fin[i + 1] - 2 * fin[i] + fin[i - 1] < -1e-9 * max(1.0, abs(fin[i])):', '                if fin[i + 1] - 2 * fin[i] + fin[i - 1] > 1e-9 * max(1.0, abs(fin[i])):')], 'XVI.8'),
     ("XVI.8 M12: the kinked pair with the step 2 delta/h on the flat part",
      [('            if abs(K.sigma(K.h + d, s) - s - w0) > 1e-12:', '            if abs(K.sigma(K.h + d, s) - s - 2 * w0) > 1e-12:')], 'XVI.8'),
+    ("XVI.8 M14: the Gaussian lower bound claimed as 1/(4 cos^2(pi/(2k))) (the offset 1/2 in k + 1/2 dropped)",
+     [('        Binf = 1 / (4 * math.cos(math.pi / (2 * k + 1)) ** 2)', '        Binf = 1 / (4 * math.cos(math.pi / (2 * k)) ** 2)')], 'XVI.8'),
+    ("XVI.8 M15: the closed form of the Gaussian orbit curve with sin((2j+2) alpha) in the numerator",
+     [("            cf = 1 - Bc * (1 + math.sin((2 * j + 3) * al) / math.sin((2 * j + 1) * al))", "            cf = 1 - Bc * (1 + math.sin((2 * j + 2) * al) / math.sin((2 * j + 1) * al))")], 'XVI.8'),
     ("XVI.8 M13: Proposition U claimed with strict slack (the bound never attained: R <= U - 1e-3 a)",
      [('    if worst > 1e-5:\n        return False, dict(reason="Proposition U: the level operator exceeds', '    if worst > -1e-3:\n        return False, dict(reason="Proposition U: the level operator exceeds')], 'XVI.8'),
 ]

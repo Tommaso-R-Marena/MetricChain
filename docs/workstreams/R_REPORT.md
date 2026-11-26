@@ -113,7 +113,11 @@ of `L`.
 (`RateFull.rate_top0` **[V]** for every `HintPair`, in particular for the cube at every slope and
 for the Gaussian pair; its proof, "Step I with numbers" of the remark after Theorem
 11.53, uses only that the `T_k` are nonincreasing and bounded by `a`, `θ(h) = h`, and the
-continuity of `θ` at `h`).  We use it only through `τ_k → h`.
+continuity of `θ` at `h`).  We use it only through `τ_k → h`.  *Every `θ` with (H0) is covered:* the
+shear defines its partner — for `x ≥ h` put `θ_hint(x − θ(x)) := θ(x)`; `x ↦ x − θ(x)` is continuous
+and strictly increasing from `0` at `x = h` — and `(θ, θ_hint)` is a `HintPair` with the constant `1`
+in its lower bound: (11.18.1) holds by construction, `e + θ_hint(e) = x` is nondecreasing, and
+`θ_hint(e) = x − e ≥ h − e` (referee B, who asked for this sentence).
 
 ## 2. The slope map
 
@@ -132,9 +136,11 @@ open half-plane `{B < (1 − s)a}` (intersected with `B > 0`) `Σ` is finite and
 We call `(B, s)` *regular* if `Σ(B, s) < ∞`.
 
 **(Σ3).**  `σ′ = Σ(B, s)` is the least `σ′ ≥ 0` with `(1 − s)θ(e) + σ′e ≥ B` for all `e > 0`: the line `x ↦ B − σ′x` is the
-*flattest* line through `(0, B)` that stays below `(1 − s)θ`.  If `0 < Σ(B, s) < ∞` the supremum is
-attained, at the points `e` where this line touches `(1 − s)θ`; write `𝓜(B, s)` for the (compact,
-nonempty) set of these maximisers.
+*flattest* line through `(0, B)` that stays below `(1 − s)θ`.  If `0 < Σ(B, s) < ∞` and `B < (1 − s)a`
+the supremum is attained, at the points `e` where this line touches `(1 − s)θ`; write `𝓜(B, s)` for
+the (compact, nonempty) set of these maximisers.  (On the boundary `B = (1 − s)a` — regular only
+when `θ` has a finite slope at zero — the supremum need not be attained: `θ = (1 − e)₊²`, `s = 0.3`,
+`B = 0.7`; referee B.  Every use below is at interior points.)
 
 **(Σ4) (the subgradient inequality).**  If `e₁ ∈ 𝓜(B₁, s₁)`, then for all `(B, s)`
 
@@ -146,9 +152,15 @@ nonempty) set of these maximisers.
 concave, continuous and nondecreasing in `w`.  By (Σ3), `D(B, s) := Σ(B, s) − s = min{w ≥ −s : Ψ_s(w) ≥ B}`.
 Consequences:
 
-* `D(B, s) ≤ 0` iff `J(s) ≥ B`.  The fixed points of `s ↦ Σ(B, s)` are the solutions of `J(s) = B`: two
-  for `B < h` (the lower one stable: the tangent lines of `θ_hint`), one for `B = h` (namely `L`), none
-  for `B > h`.  **The hinted exponent is the saddle-node value of the slope map.**
+* `D(B, s) ≤ 0` iff `J(s) ≥ B`.  So for `B > h` the map `s ↦ Σ(B, s)` has no fixed point; for `B = h`
+  (under (H1)) exactly one, `L`; and for `B < h` its fixed points in the interior of the regular
+  region are the solutions of `J(s) = B` there — the lower one, on the increasing branch of `J`,
+  is stable: these are the tangent lines of `θ_hint`.  **The hinted exponent is the
+  saddle-node value of the slope map.**  (The first version said "two fixed points for `B < h`".
+  That is wrong in two boundary situations found by referee B, neither of which is used:
+  if `θ(∞) > 0` and `B ≤ θ(∞)`, then `s = 0` is a fixed point with `J(0) ≠ B`; and if `θ` has a finite
+  slope at zero the upper root of `J(s) = B` can lie on the boundary of the regular region,
+  where it is not a fixed point — `θ = (1 − e)₊²`, `B = 0.8h`.)
 * Since `J ≤ h`: `Ψ_s(w) ≤ (1 + w)h`, hence
 
       D(B, s) ≥ (B − h)/h      for all s and all B ≥ h.                                   (2.1)
@@ -438,7 +450,31 @@ curve blows up, and the point where a curve `k₁ + 1` levels earlier reaches th
 the proof does not quantify.  Numerically (not certified) the chain works with a
 restart two levels back from `k = 4` on (`ub_subsolution.py`: `κ₀ = 2`) and the true sequence
 behaves like `c_*²/(k + c)²` with `c ≈ 0.15–0.25`, between `c = ½` (lower bound) and `c ≈ 0`
-(the exact dynamics of convex majorants).
+(the exact dynamics of convex majorants) — for the Gaussian pair and the cube; the offset
+is specific to the pair (for `θ = (1 − √e)₊³` referee B finds `c ≈ −0.28`: there `k²(τ_k − h)`
+approaches its limit from above).
+
+## 8b. Pairs with slope at most one at zero: the recursion is solved exactly by the orbit curves
+
+**Corollary E [P; observed numerically by referee B, proved here].**  *Let `θ` satisfy (H0) and
+`|θ′(0+)| ≤ 1`.  Then for every `k ≥ 1` and `x > 0`*
+
+    T_k(x)  =  sup{ B − p_k(B)·x  :  p_k(B) < ∞ },        in particular    τ_k = B_∞(k) = sup{B : p_k(B) < ∞}:
+
+*the lower bound of Proposition A is an equality, and the level recursion is the Legendre
+transform of the `k`-th orbit curve.*
+*Proof.*  "`≥`" is Proposition A.  "`≤`": for a regular pair `(B, s)` and every `e`,
+`[B − (1 − s)θ(e)]/e ≤ (1 − s)(a − θ(e))/e ≤ (1 − s)·|θ′(0+)| ≤ 1 − s` (convexity of `θ`), so `Σ(B, s) ≤ 1 − s ≤ 1`
+wherever it is finite: image slopes never exceed one.  `T_1 = θ` has slopes in `[−1, 0]` and is
+the envelope of its tangent lines, `θ = M_{p_1, a}`.  If `T_k ≤ M_{p_k, b_k}` with `b_k = B_∞(k)`, Corollary U′
+applies with `W′ = Σ(·, p_k(·)) = p_{k+1}` — convex, nondecreasing, with values in `[0, 1]` on the set
+where it is finite — and gives `T_{k+1} ≤ M_{p_{k+1}, b_{k+1}}`.  ∎
+For such pairs no cut, no range condition and no restart is needed, and Theorem R
+follows from Lemma PT alone.  Checked by the referee with an implementation of the
+recursion itself: for `0.3e^{−e}`, `e^{−0.8e}`, `0.5e^{−2e}`, `(1 − e)₊` the recursion and the orbit agree to
+`5·10⁻⁷`, while for `e^{−3e}` (slope `3` at zero) they differ by `22` per cent at `k = 2`.  The cube
+and the Gaussian pair have infinite slope at zero: there the lines that jump beyond
+slope one matter, and §§5–6 are needed.
 
 ## 8a. The profile at positive accuracy: a closed form for the similarity solution
 
@@ -519,10 +555,24 @@ and strict convexity of `θ_na` at its fixed point.
 `≍ ∫ dv/(δ + |v|^p) ≍ δ^{−(p−1)/p}` and one expects `τ_k − h ≍ k^{−p/(p−1)}`: `k^{−2}` for `p = 2`, tending to `k^{−1}` as
 `p → ∞` (a flat maximum, the kink of Proposition K).  For `p = 1` — a corner of `J` at its
 maximum, which happens when `θ` is affine on a neighbourhood of `h`, so that `g_L` has an
-interval of minimisers — the passage time is `≍ ln(1/δ)` and one expects geometric
-convergence.  Only the lower bounds of these statements follow from Proposition A as it
-stands; the upper bounds would need a version of Lemma RC without the multiplier one.
-Not pursued.
+interval of minimisers — the passage time is `≍ ln(1/δ)` and one expects convergence that
+is geometric or faster.  Only the lower bounds of these statements follow from
+Proposition A as it stands; the upper bounds would need a version of Lemma RC without
+the multiplier one.  Not pursued.  (Referee B iterated the recursion itself on examples:
+exponents matching `k^{−p/(p−1)}` for `p = 4/3` and `p = 3`; for a corner with one-sided multipliers
+`4/9` and `9/4`, geometric convergence with ratio `2/3` of `B_∞(k) − h`; for `θ = (1 − 2e)₊`, `τ_4 = h`
+exactly.)
+
+**One-sided curvatures [P for the lower bound; the upper bound by the same proof, not
+re-written; N].**  If `J` is differentiable at `L` with different one-sided second derivatives,
+`J(t) = h − (t − L)²/(2ϑ_±) + o((t − L)²)` for `t ≷ L`, the bottleneck estimate (Σ6) holds with `ϑ_−` on the
+left and `ϑ_+` on the right of `L`, the passage time is `(πh/2)(√(2ϑ_−) + √(2ϑ_+))/√δ·(1 + o(1))`, and
+
+    lim k²·(τ_k − h)  =  (π²h²/4)·( √(2ϑ_−) + √(2ϑ_+) )²
+
+(Lemma RC uses only the multiplier one and the unique maximiser at the fixed point,
+which differentiability of `J` at `L` gives).  The referee's example: `0.94813` computed against
+`0.94806`.  (H1) is the case `ϑ_− = ϑ_+`.
 
 ## 10. The Gaussian pair, exactly
 
@@ -530,16 +580,26 @@ Not pursued.
 `y ↦ ((1 − B)y − B)/(y − B)`, a Möbius map with matrix `[[1 − B, −B], [1, −B]]`, trace `1 − 2B` and determinant `B²`.
 Its eigenvalues are `B·e^{±iψ}` with `cos ψ = (1 − 2B)/(2B)`, `sin ψ = √(4B − 1)/(2B)`: for `B > ¼` the map is elliptic,
 and in the angular coordinate of the projective line (period `π`) it is the rotation by
-`ψ(B) = arctan(√(4B − 1)/(1 − 2B)) ≈ 4√(B − ¼)` per level.  In that coordinate the orbit of the flat
-line is at `φ₀(B) = arccot((1 − 3B)/((1 − B)√(4B − 1)))` after one level and blows up at `π`, so the lower
-bound `B_∞(k)` of Proposition A is the root of
+`ψ(B) = arctan(√(4B − 1)/(1 − 2B)) ≈ 4√(B − ¼)` per level.
 
-    (k − 1)·ψ(B) + φ₀(B) = π
+**Proposition G (the orbit curves of the Gaussian pair in closed form) [P; found by referee B
+in the form `B_∞(k) = 1/(4cos²(π/(2k+1)))`, proved here].**  *Write `B = 1/(4cos²α)`, `0 < α ≤ π/3`
+(so `¼ < B ≤ 1`).  Then*
 
-**[N: the closed form agrees with the orbit itself to rounding for every `k` tested —
-harness XVI.6; the conjugation is routine and is not written out]**: `(3 − √5)/2 = 0.381966` at
-`k = 2`, and `¼ + (π²/16)/(k + ½)²·(1 + O(k⁻²))`.  Machine-checked instances: `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10`
-(`gauss_level_two_ge`, `gauss_level_three_ge`).
+    p_j(B)  =  1 − B·[ 1 + sin((2j + 3)α)/sin((2j + 1)α) ]      as long as (2j + 1)α < π,        and   p_j(B) = ∞ beyond;
+
+*hence* **`τ_k ≥ B_∞(k) = 1/(4cos²(π/(2k + 1)))`**, *that is* `τ_k − ¼ ≥ ¼·tan²(π/(2k + 1))`.
+*Proof.*  Iterate the matrix on the vector `(1, 1)` (`y_0 = 1`): by Cayley–Hamilton both
+components satisfy `w_{j+2} = (1 − 2B)w_{j+1} − B²w_j`, whose characteristic roots are `B·e^{±2iα}`
+(`(1 − 2B)/(2B) = 2cos²α − 1`).  The second component `d_j` has `d_0 = 1`, `d_1 = 1 − B`, hence
+`d_j = B^j·sin((2j + 1)α)/sin α`; the first component is `d_{j+1} + B·d_j`, so `y_j = B + d_{j+1}/d_j`.  The
+orbit is regular at step `j` iff `y_j > B`, i.e. iff `d_{j+1}/d_j > 0`.  ∎
+So `B_∞(k) = (3 − √5)/2, 0.3080, …`, `¼ + (π²/16)/(k + ½)²·(1 + (π²/6)/(k + ½)² + …)`: the lower bound is
+`(π²/16)/(k + ½)²` up to a relative correction of order `k⁻²`.  (In the angular coordinate the
+flat line is at `3α` after one level and the pole at `π`: this is the equation
+`(k − 1)ψ(B) + φ₀(B) = π` of the first version, `ψ = 2α`, `φ₀ = 3α`; harness XVI.6 checks that form
+against the orbit, `r3_gauss_exact_lb.py` the closed form in exact arithmetic.)
+Machine-checked instances: `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10` (`gauss_level_two_ge`, `gauss_level_three_ge`).
 
 ## 11. Numerical checks (scripts in `experiments/workstreams/R/` and
 `experiments/coordinator_checks/level_rate/`)

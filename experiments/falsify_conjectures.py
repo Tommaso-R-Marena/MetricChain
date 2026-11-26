@@ -7948,7 +7948,7 @@ def rt_prop_u(P, rng, concave, nB=800):
     return (min(best, f1, f2) - U) / P.a
 
 
-@conjecture("XVI.8 The rate of the level recursion (theory report Theorem 11.53b; docs/workstreams/R_REPORT.md): lim k^2 (tau_k - h) = 2 pi^2 h^2 theta_hint''(0).  Ingredients, each tested: (a) the slope map Sigma(B, s) = sup_e [B - (1 - s) theta_na(e)]/e is jointly convex and nondecreasing in both arguments; (b) the orbit curves p_j(B) = Sigma(B, p_{j-1}(B)), p_0 = 0, are convex and nondecreasing in B; (c) the bottleneck: Sigma(h + delta, L + v) - (L + v) = [delta + v^2/(2 theta_hint''(0))]/h up to a factor 1 + 8|v| + 0.002 for |v| <= 0.02, delta = 10^{-6} h; (d) the passage time: sqrt(delta) N_t(delta) increases to pi h sqrt(2 theta_hint''(0)) as delta -> 0 (within 6 per cent at delta = 10^{-4} h and 2.5 per cent at 10^{-5} h, from below), N_t the number of steps of the orbit of the flat line with intercept h + delta to exceed the slope L + 0.05; (e) Proposition U: for T the upper envelope of the lines (B, W(B)), W convex nondecreasing with values in [0, 1], the level operator satisfies R[T](g) <= sup_B (B - Sigma(B, W(B)) g), with equality for beta -> 0 - and for a concave W the right side is exceeded (convexity cannot be dropped); (f) the chain of cut orbit curves restarted from a flat majorant b_0 = h + 0.02 at the slope level L + 0.05 (Gaussian pair; the cube at u = 1 from h + 0.003): the cut curve of level j + 1 stays below slope one on [0, b_{j+1}] at every level (the range condition), the ratio of consecutive slopes at the cut is below its bound, j^2 (b_j - h)/(2 pi^2 h^2 theta_hint''(0)) decreases towards one from above - while from the wide start b_0 = h + 0.15 the range condition fails; (g) a kink of theta_na at its fixed point (theta_na = max(1 - 3e, 1/2 - e, 0), J flat on [1/2, 3/4]): the step of the slope map is exactly delta/h on the flat part and the lower bound from lines is at least (L_2 - L_1) h/(k + 2) above h - the rate 1/k; (h) theta_hint''(0) = -1/J''(L) = theta_na''(h)/(1 + |theta_na'(h)|)^3")
+@conjecture("XVI.8 The rate of the level recursion (theory report Theorem 11.53b; docs/workstreams/R_REPORT.md): lim k^2 (tau_k - h) = 2 pi^2 h^2 theta_hint''(0).  Ingredients, each tested: (a) the slope map Sigma(B, s) = sup_e [B - (1 - s) theta_na(e)]/e is jointly convex and nondecreasing in both arguments; (b) the orbit curves p_j(B) = Sigma(B, p_{j-1}(B)), p_0 = 0, are convex and nondecreasing in B; (c) the bottleneck: Sigma(h + delta, L + v) - (L + v) = [delta + v^2/(2 theta_hint''(0))]/h up to a factor 1 + 8|v| + 0.002 for |v| <= 0.02, delta = 10^{-6} h; (d) the passage time: sqrt(delta) N_t(delta) increases to pi h sqrt(2 theta_hint''(0)) as delta -> 0 (within 6 per cent at delta = 10^{-4} h and 2.5 per cent at 10^{-5} h, from below), N_t the number of steps of the orbit of the flat line with intercept h + delta to exceed the slope L + 0.05; (e) Proposition U: for T the upper envelope of the lines (B, W(B)), W convex nondecreasing with values in [0, 1], the level operator satisfies R[T](g) <= sup_B (B - Sigma(B, W(B)) g), with equality for beta -> 0 - and for a concave W the right side is exceeded (convexity cannot be dropped); (f) the chain of cut orbit curves restarted from a flat majorant b_0 = h + 0.02 at the slope level L + 0.05 (Gaussian pair; the cube at u = 1 from h + 0.003): the cut curve of level j + 1 stays below slope one on [0, b_{j+1}] at every level (the range condition), the ratio of consecutive slopes at the cut is below its bound, j^2 (b_j - h)/(2 pi^2 h^2 theta_hint''(0)) decreases towards one from above - while from the wide start b_0 = h + 0.15 the range condition fails; (g) a kink of theta_na at its fixed point (theta_na = max(1 - 3e, 1/2 - e, 0), J flat on [1/2, 3/4]): the step of the slope map is exactly delta/h on the flat part and the lower bound from lines is at least (L_2 - L_1) h/(k + 2) above h - the rate 1/k; (h) theta_hint''(0) = -1/J''(L) = theta_na''(h)/(1 + |theta_na'(h)|)^3; (i) the orbit curves of the Gaussian pair in closed form, p_j(B) = 1 - B [1 + sin((2j+3) alpha)/sin((2j+1) alpha)] for B = 1/(4 cos^2 alpha) while (2j+1) alpha < pi, so that tau_k >= 1/(4 cos^2(pi/(2k+1)))")
 def t_rate_theorem(rng, trials):
     quick = trials < 100
     stats = dict(convex=0, curves=0, prop_u=0, chain_levels=0)
@@ -8050,6 +8050,20 @@ def t_rate_theorem(rng, trials):
             lo, hi = (mid, hi) if math.isfinite(K.orbit(mid, k)) else (lo, mid)
         if lo - K.h < (K.L2 - K.L1) * K.h / (k + 2) - 1e-12:
             return False, dict(reason="kinked pair: lower bound from lines below (L2 - L1) h/(k + 2)", k=k, value=lo - K.h)
+    # the Gaussian orbit curves in closed form: with B = 1/(4 cos^2 alpha), p_j = 1 - B [1 + sin((2j+3) alpha)/sin((2j+1) alpha)]
+    # while (2j+1) alpha < pi, hence tau_k >= 1/(4 cos^2(pi/(2k+1)))
+    for k in ((2, 3, 10) if quick else (2, 3, 5, 10, 40, 160)):
+        Binf = 1 / (4 * math.cos(math.pi / (2 * k + 1)) ** 2)
+        if not (math.isfinite(G.orbit(Binf * (1 - 1e-9), k)) and not math.isfinite(G.orbit(Binf * (1 + 1e-9), k))):
+            return False, dict(reason="Gaussian pair: the k-th orbit curve does not blow up at 1/(4 cos^2(pi/(2k+1)))", k=k, B=Binf)
+    for _ in range(20 if quick else 200):
+        Bc = rng.uniform(0.2501, 0.6)
+        al = math.acos(1 / (2 * math.sqrt(Bc)))
+        j = int(rng.integers(0, 12))
+        if (2 * j + 1) * al < math.pi - 1e-6:
+            cf = 1 - Bc * (1 + math.sin((2 * j + 3) * al) / math.sin((2 * j + 1) * al))
+            if abs(G.orbit(Bc, j) - cf) > 1e-7 * (1 + abs(cf)):
+                return False, dict(reason="Gaussian pair: closed form of the orbit curve", B=Bc, j=j, orbit=G.orbit(Bc, j), closed=cf)
     # (h) theta_hint''(0) through theta_na at its fixed point
     for P in pairs:
         e = P.h

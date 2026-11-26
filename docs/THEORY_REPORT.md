@@ -5172,10 +5172,15 @@ convex `Σ` with a convex function), and `p_j ≤ p_{j+1}`.  If `p_k(B) < ∞` t
 
     τ_k  ≥  sup{ B : p_k(B) < ∞ }.
 
-For the Gaussian pair this is the root of `(k − 1)·ψ(B) + φ₀(B) = π`, `ψ` the rotation angle of (b′)
-and `φ₀(B) = arccot((1 − 3B)/((1 − B)√(4B − 1)))` — `(3 − √5)/2 = 0.381966` at `k = 2`, and
-`¼ + (π²/16)/(k + ½)²·(1 + O(k⁻²))` (closed form checked against the orbit: harness XVI.6);
-machine-checked instances: `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10` (`gauss_level_two_ge`, `gauss_level_three_ge`).
+For the Gaussian pair the orbit curves have a closed form — with `B = 1/(4cos²α)`:
+`p_j(B) = 1 − B·[1 + sin((2j + 3)α)/sin((2j + 1)α)]` as long as `(2j + 1)α < π`, by Cayley–Hamilton for
+the matrix of (b′) — so that
+
+    τ_k  ≥  1/(4·cos²(π/(2k + 1))),        τ_k − ¼  ≥  ¼·tan²(π/(2k + 1))  =  (π²/16)/(k + ½)²·(1 + O(k⁻²))
+
+(`(3 − √5)/2 = 0.381966` at `k = 2`; the closed form is the referee's, `R_REPORT.md` §10; checked
+against the orbit in exact rational arithmetic and in harness XVI.6, XVI.8); machine-checked
+instances: `T_2(0+) ≥ 3/8`, `T_3(0+) ≥ 3/10` (`gauss_level_two_ge`, `gauss_level_three_ge`).
 
 (d) **Lemma M (a majorant with nondecreasing `x + M(x)`, one level) [V: `StepLE.monotoneS_step`,
 `StepLE.line_step`, `StepLE.line_step_rate`].**  Let `T` be nonincreasing and `T ≤ M` on `(0, R]` with `x + M(x)`
@@ -5258,8 +5263,13 @@ twice differentiable maximum of `J` enters through the passage time and the mult
 So over all convex pairs the rate `O(1/k)` of the remark above cannot be improved, and
 the `1/k²` of the cube is a consequence of the smoothness and strict convexity of `θ_na` at
 its fixed point.  Heuristically, `h − J(t) ≍ |t − L|^p` gives `τ_k − h ≍ k^{−p/(p−1)}` for `p > 1`, and
-geometric convergence for a corner of `J` (`θ` affine near `h`); only the lower halves of
-these follow from (c) as it stands.
+convergence that is geometric or faster for a corner of `J` (`θ` affine near `h`); only the
+lower halves of these follow from (c) as it stands.  If `J` is differentiable at `L` with
+one-sided second derivatives `−1/ϑ_∓`, the limit is `(π²h²/4)(√(2ϑ_−) + √(2ϑ_+))²`.  **If `|θ′(0+)| ≤ 1`
+the recursion is solved exactly by the orbit curves**: image slopes are at most `1 − σ`, no
+line ever leaves the family, (c) and (e) coincide, and `T_k(x) = sup{B − p_k(B)x : p_k(B) < ∞}` for
+every `k` and `x` (Corollary E of the report; the cube and the Gaussian pair have infinite
+slope at zero and are not of this kind).
 (3) *What it means, and what it does not.*  The theorem is about the operator `R` — the
 analysis of the nested algorithms at the level of exponents: `k` nested levels, *analysed by
 `R`*, have the exponent `h + (c_*² + o(1))/k²` at accuracy zero.  It is not a statement about
