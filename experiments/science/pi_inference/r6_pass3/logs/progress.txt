@@ -1,0 +1,9 @@
+pass3 B_reducedK 214 exit 0 (400 runs)
+pass3 A_ties 212 exit 0 (500 runs)
+pass3 B_invalid 215 exit 0 (400 runs)
+pass3 B_lazy 220 exit 0 (260 runs)
+pass3 B_lazycheap 218 exit 0 (60 runs)
+pass3 D_2L_off 217 exit 0 (300 runs)
+pass3 A_medium 213 exit 0 (500 runs)
+pass3 D_2L 216 exit 0 (240 runs)
+ALLDONE_PASS3

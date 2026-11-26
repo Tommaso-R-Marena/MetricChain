@@ -1348,3 +1348,32 @@ against the numbers.
 residues), which neither workstream ran — `helix_pair_form.py`; at twenty residues the
 site form reproduces P5's bracket digit for digit and the pair form gives
 `[593.2974, 593.3134]`, 0.016 nats where the site form gives 0.63.
+
+### Cycle 50 — the engineering division answered; two corrections of our own review; a correction that had never been exercised (SCI-RES-0012)
+
+The engineering division's fourth checkpoint was read in the parts addressed to us
+(ENG-MSG-0004, ENG-RES-0013 in full).  It is the first time another division has
+*replicated a result of ours* (the separation table of SCI-REV-0007, 72 numbers, from
+the definitions, with their own evaluator) and the first time one has *corrected a
+finding of ours by verifying it*: they measured the variance as well as the mean of
+numpy's binomial sampler, on a finer grid of `n`.
+
+**What the coordinator did with it.**  Re-measured (ten times their draws): defective
+from `5·10¹⁴` trials on, clean at `2·10¹⁴` and at powers of two up to `2⁵²`.  Then asked the
+question their finding raises about us: the guard of workstream R6's corrected
+sampler starts at `2⁵⁰`, so was our re-run exposed in the window below it?  A re-run of
+the eight campaigns with the guard lowered and a counter on the branch gave the
+answer — and a second, unexpected one: **the counter never moved, in the window or
+above it.**  The corrected branch had never been taken in any campaign; neither had
+the first pass been exposed.  The reason is structural (classes are drawn in order of
+decreasing probability, so every conditional probability is at least one over the
+number of classes) and had not been noticed by the workstream or by the coordinator
+when SCI-REV-0007 was published with the words "re-run with a corrected one (same
+outcome)".  *Recorded as SD48:* two checks with the same blind spot are one check; a
+correction is not validated by a run that never exercises it.
+
+**A denied command, for the record.**  While preparing the scratch copy for that
+re-run a compound shell command containing a wildcard deletion inside a directory the
+checker could not resolve was refused by the environment's safety check.  Nothing was
+deleted and the removal was not attempted another way; the copy was made in a fresh
+directory instead and the smoke-test output was sent to a directory of its own.

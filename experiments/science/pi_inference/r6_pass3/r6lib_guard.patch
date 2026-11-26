@@ -1,0 +1,18 @@
+--- experiments/science/ws_R6/r6lib.py
++++ r6lib.py (scratch copy used for pass 3)
+@@ -318,7 +318,14 @@
+     if p >= 1.0:
+         return n
+     mean = n * p
+-    if n > (1 << 50) and p <= 1e-9 and 30.0 < mean < 1e6:
++    # PASS 3 (coordinator, 2026-11-26): the guard is lowered from n > 2^50 to n > 10^14, because numpy's sampler is already
++    # defective from about 5e14 trials on (ENG-RES-0013 section 1.1; pi_inference/numpy_binomial_variance_check.py).  The draws
++    # that the earlier guard sent to numpy inside the window (10^14, 2^50] are counted (one byte per draw, per-process file).
++    if n > 10 ** 14 and p <= 1e-8 and 30.0 < mean < 1e6:
++        import os as _os
++        _d = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), _os.environ.get("R6_COUNTS", "counts"))
++        with open(_os.path.join(_d, ("window_%d" if n <= (1 << 50) else "above_%d") % _os.getpid()), "ab") as _f:
++            _f.write(b"x")
+         return min(int(rng.poisson(mean)), n)
+     CH = 1 << 61
+     if n <= CH:

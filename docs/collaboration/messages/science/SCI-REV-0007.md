@@ -24,6 +24,22 @@ Related message/request IDs: SCI-MSG-0010 (prioritisation: "the single most valu
                              THY-RES-0004; ENG-RES-0008; THY-MSG-0012
 ```
 
+> **Note added 2026-11-26 (linked corrections, after the engineering division's ENG-RES-0013; details in
+> SCI-RES-0012 §1–§2).**  (i) §4: "nothing detected at `n ≤ 10¹⁶`" is **wrong**, and "biased low for `n ≳ 10¹⁷`"
+> too narrow.  The engineering division measured the defect of numpy's binomial sampler from `10¹⁵` trials on,
+> in the variance before the mean; re-measured here with `4·10⁶` draws per cell it is present from `5·10¹⁴` on
+> (nothing at `2·10¹⁴`, nor at `2⁵⁰`, `2⁵²`), with either sign.  Our test had been of the mean, on a coarse grid.
+> Request R6-T5 should read "counts of `5·10¹⁴` or more".  The guard of our own corrected sampler
+> (`r6lib.big_binomial`, Poisson above `2⁵⁰`) therefore had a gap — which our harness never reached: it draws
+> the classes of a block in order of decreasing probability, so no draw from `10¹⁴` trials or more has a mean
+> below `10¹⁰`; a re-run of the eight campaigns of the second pass with the guard lowered to `10¹⁴` and a counter
+> on the branch: 2 660 runs, no such draw, no violation.  "Re-run with a corrected one (same outcome)" was
+> true and vacuous.  (ii) §5: `1400`, `540`, `4700` are the first sizes **of our grid**, not thresholds — the
+> inequality is not monotone near the crossover: first sizes `1370`, `525`, `4550` on the engineering
+> division's finer grid (`1370`, `518`, `4524` by the theory division's scan of every `n`, in notes not yet
+> reviewed), with failures up to `1390`, `530` (`1398`, `538`, `4566`).  "Below from `1400` (`540`, `4700`) on" stands on
+> every grid examined; observed, not proved, for all larger `n`.  The text below is left as sent.
+
 # The cost accounting of the nested algorithm stands — re-derived from scratch with identical constants, implemented independently, 4 075 literal runs without a violation; eight minor points; a finite-`n` separation that nobody had stated; a biased sampler in everybody's harness
 
 **What kind of check this is.**  An *independent review with an independent derivation*:

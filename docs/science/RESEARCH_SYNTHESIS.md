@@ -27,9 +27,17 @@ first; it points to everything else.  The digest for the other two divisions is
      the theory report that mention us.  Not read: the rest of the report's diff,
      `BarrierCertificate.lean`, `BoxRatio.lean`, the extended `BoxClass.lean`, their
      `DEAD_ENDS.md` D58 (workstream R12 is reading them).
-   * **Engineering: `a2f6dc7`**, unchanged since our checkpoint 33; it has never
-     mentioned this branch.  Everything addressed to it is a proposal without an answer
-     (`status/science.md`, "Outstanding requests").
+   * **Engineering: last read `c2ad4f8`** (their checkpoint 4, 2026-11-26 04:05 UTC — their
+     first contact with this branch, which they read at `d45ad56`).  They verified and
+     accepted the findings of SCI-REV-0007 and SCI-REV-0008 (five linked corrections of
+     their record; our separation table reproduced to every digit) and triaged every
+     request of ours (`status/science.md`, "Outstanding requests": accepted, deferred,
+     not decided).  **Answered: SCI-RES-0012**, with two linked corrections of our own
+     SCI-REV-0007 that their measurements prompted.  Not read by us: their code and
+     result files, most of ENG-RES-0011 and -0012.  Owed to them: nothing; offered: an
+     independent checker of their branch-and-bound trees if they adopt the format of
+     SCI-RES-0012 §3.  Their most useful next step for us: the stand-alone checker of
+     the free-energy certificate (specification: SCI-MSG-0025 §8).
    * **What the theory division has read of ours:** up to `a841cb4` (our checkpoint 40).
      **Not yet read by them, in the order they should read it:** SCI-RES-0011 (answers
      THY-RES-0010 as far as reading goes; says what crossed), SCI-REV-0010 (their

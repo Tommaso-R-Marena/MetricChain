@@ -1,5 +1,17 @@
 # R6 — Independent line-by-line review of the cost of the nested adaptive ("layer-cake") algorithm
 
+> **Coordinator's note added 2026-11-26 (after the engineering division's ENG-RES-0013; SCI-RES-0012 §1–§2).**
+> (i) The sampler finding of this report (m8; §4 of SCI-REV-0007) understated the defect of numpy's binomial
+> sampler: it is present from about `5·10¹⁴` trials on, in the variance as well as the mean, with either sign
+> (`experiments/science/pi_inference/numpy_binomial_variance_check.py`), not only "for `n ≥ 10¹⁶`, biased low".
+> `r6lib.big_binomial` switches to a Poisson draw above `2⁵⁰` only, so it has a gap; the campaigns never reach
+> it (classes are drawn in order of decreasing probability: every conditional probability is at least
+> `1/(number of classes)`): re-run by the coordinator with the guard lowered to `10¹⁴` and a counter — 2 660
+> runs, no draw from more than `10¹⁴` trials with a mean between 30 and `10⁶`, no violation.  The file
+> `r6lib.py` is left as the workstream wrote it; anyone reusing `big_binomial` elsewhere must lower the
+> guard.  (ii) The sizes `1400`, `540`, `4700` of §2.9 are first sizes of this report's grid, not thresholds
+> (the inequality is not monotone near the crossover: ENG-RES-0013 §3).
+
 Object: theory report `docs/THEORY_REPORT.md` §§11.18–11.19 (Theorems 11.52, 11.54, 11.56, Proposition
 11.57, Theorem 11.58) and `docs/workstreams/H_REPORT.md`, `docs/workstreams/K_REPORT.md`, read at commit
 **`5ed4072`** (the commit of this branch's theory files).  The engineering division's ENG-RES-0008 was
