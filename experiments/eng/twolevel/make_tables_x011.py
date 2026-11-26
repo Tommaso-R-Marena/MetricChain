@@ -157,30 +157,48 @@ def runs_blocks() -> dict[str, str]:
     def Ap(r):          # reading (A): also with base brackets placed at an end of their promise
         return max(Bp(r), r["worst_A"])
 
-    lines = ["| `n` | levels | selected design: certified bound (outer fraction) | its cost at the flat instance | its worst instance found, (B) | (A) | "
-             "least worst instance found over the ten fractions: (B) | (A) | flat-tuned design of ENG-RES-0014, least over its fractions: flat | (B) | (A) |",
-             "|---|---|---|---|---|---|---|---|---|---|---|"]
-    h4 = []
+    # cone fibres of intermediate slope, run for the selected designs only (X-011e)
+    extra = defaultdict(dict)
+    for r in jl("x011_fibre_slopes.jsonl"):
+        extra[(r["n"], r["nested_levels"], r["phi"])][r["slope"]] = r
+    lines = ["| `n` | levels | selected design: certified bound (outer fraction) | flat instance | worst outer landscape found with flat fibres | with cone fibres of slope "
+             "`¼u` / `½u` / `¾u` / `u`, base brackets' own answers | (A): base brackets at an end of their promise | largest of these |", "|---|---|---|---|---|---|---|---|"]
+    selected = {}
     for (n, k) in sorted(cells):
         if n not in (1000, 4000, 16000):
             continue
+        sel = min(cells[(n, k)], key=lambda r: r["certified"])
+        ex = extra.get((n, k, sel["phi"]), {})
+        cones = [ex[s]["worst_B"] if s in ex else None for s in (0.25, 0.5, 0.75)] + [sel["worst_B"]]
+        a_all = max([sel["worst_A"]] + [ex[s]["worst_A"] for s in ex])
+        b_all = max([sel["worst_flat_fibres"]] + [c for c in cones if c is not None])
+        selected[(n, k)] = dict(sel=sel, B=b_all, A=max(a_all, b_all), slopes=len(ex))
+        lines.append(f"| {n} | {k + 1} | {sel['certified']:.4f} ({sel['phi']:g}) | {sel['flat_instance']:.4f} | {sel['worst_flat_fibres']:.4f} | "
+                     + " / ".join("—" if c is None else f"{c:.4f}" for c in cones) + f" | {a_all:.4f} | {max(a_all, b_all):.4f} |")
+    blocks["x011_runs"] = "\n".join(lines)
+    lines = ["| `n` | levels | servers by certified cost, least over ten fractions: (B) | (A) | servers chosen at the flat fibre (ENG-RES-0014), least over its fractions: flat instance | (B) | (A) |",
+             "|---|---|---|---|---|---|---|"]
+    h4 = []
+    for (n, k) in sorted(cells):
+        if n not in (1000, 4000, 16000) or k > 2:
+            continue
         rs = cells[(n, k)]
-        sel = min(rs, key=lambda r: r["certified"])
         minB = min(rs, key=Bp)
         minA = min(rs, key=Ap)
         rf = ref.get(n, {})
-        key = {1: "2", 2: "3"}.get(k)
-        fl, fb, fa = (rf.get(f"flat{key}"), rf.get(f"B{key}"), rf.get(f"A{key}")) if key else (None, None, None)
-        lines.append(f"| {n} | {k + 1} | {sel['certified']:.4f} ({sel['phi']:g}) | {sel['flat_instance']:.4f} | {Bp(sel):.4f} | {Ap(sel):.4f} | "
-                     f"{Bp(minB):.4f} ({minB['phi']:g}) | {Ap(minA):.4f} ({minA['phi']:g}) | {f4(fl)} | {f4(fb)} | {f4(fa)} |")
+        key = {1: "2", 2: "3"}[k]
+        fl, fb, fa = rf.get(f"flat{key}"), rf.get(f"B{key}"), rf.get(f"A{key}")
+        lines.append(f"| {n} | {k + 1} | {Bp(minB):.4f} ({minB['phi']:g}) | {Ap(minA):.4f} ({minA['phi']:g}) | {f4(fl)} | {f4(fb)} | {f4(fa)} |")
         if k == 2 and n in (4000, 16000):
-            h4.append((n, Bp(minB), Ap(minA), fb, fa, sel["flat_instance"], fl, len(rs)))
-    blocks["x011_runs"] = "\n".join(lines)
+            s = selected[(n, k)]
+            h4.append((n, Bp(minB), Ap(minA), fb, fa, s["sel"]["flat_instance"], fl, s["B"], s["A"], s["slopes"]))
+    blocks["x011_runs_min"] = "\n".join(lines)
     parts = []
-    for n, b, a_, fb, fa, flat_sel, fl, cnt in h4:
-        parts.append(f"`n = {n}` ({cnt} of 10 fractions run): worst instance found `{b:.4f}` (B), `{a_:.4f}` (A) for the design chosen by certified cost, against "
-                     f"`{f4(fb)}` (B)" + (f", `{f4(fa)}` (A)" if fa is not None else " (reading (A) was not run for it)") + " for the flat-tuned design; at the flat instance "
-                     f"`{flat_sel:.4f}` against `{f4(fl)}`")
+    for n, b, a_, fb, fa, flat_sel, fl, sb, sa, ns in h4:
+        parts.append(f"`n = {n}`: least worst instance found `{b:.4f}` (B), `{a_:.4f}` (A) for servers chosen by certified cost, against `{f4(fb)}` (B)"
+                     + (f", `{f4(fa)}` (A)" if fa is not None else " (reading (A) was not run for it)") + " for servers chosen at the flat fibre"
+                     + (f"; with the {ns} further fibre slopes the selected design reaches `{sb:.4f}` (B), `{sa:.4f}` (A)" if ns else "")
+                     + f"; at the flat instance `{flat_sel:.4f}` against `{f4(fl)}`")
     blocks["x011_h4"] = "Three levels, " + "; ".join(parts) + "."
     # tightness of the certificate at the selected design
     lines = ["| `n` | levels | certified bound of the selected design | worst instance found, (A) | bound minus worst found | worst found / flat instance: (B), (A) |", "|---|---|---|---|---|---|"]
@@ -191,6 +209,8 @@ def runs_blocks() -> dict[str, str]:
         sel = min(rs, key=lambda r: r["certified"])
         worst = Ap(sel) if "worst_flat_fibres" in sel else max(sel["worst_B"], sel["worst_A"])
         wb = Bp(sel)
+        if (n, k) in selected:
+            worst, wb = selected[(n, k)]["A"], selected[(n, k)]["B"]
         lines.append(f"| {n} | {k + 1} | {sel['certified']:.4f} ({sel['phi']:g}) | {worst:.4f} | {sel['certified'] - worst:.4f} | "
                      f"{wb / sel['flat_instance']:.3f}, {worst / sel['flat_instance']:.3f} |")
     blocks["x011_tightness"] = "\n".join(lines)
