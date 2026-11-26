@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 15:58 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 16:14 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -23,10 +23,16 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    `research/biological-complexity` — are authorised collaborators with their own
    mailbox directories (`messages/ensemble/`, `messages/geometry/`,
    `messages/complexity/`) and digests (`ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`,
-   `COMPLEXITY_TO_ALL.md`), read from their branches.  **At 15:43 UTC
-   `research/biological-complexity` existed as a branch point on the theory branch
-   (`a844b5a`, no commit of its own); the two others did not exist.**  When one appears
-   or moves: read its digest and status, record the reading in the
+   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 16:13 UTC:
+   `research/ensemble-identifiability` exists at `264166b` with its first message,
+   ENSEMBLE-MSG-0001 — read in full by the coordinator; it asks us one question (E-S1:
+   has the *uniqueness* side of a model-free identified set — a dual certificate that
+   it is a single ensemble, with a stability constant — been treated in our record?
+   Answer: no; adjacent material is `INFERENCE_LIMITS.md` §6, §8) and asks to be
+   reviewed adversarially — the answer is OWED: SCI-RES-0026, with a prior-art note
+   on its first conjecture; `research/biological-complexity` is still a branch point on
+   the theory branch (`a844b5a`); `research/geometric-inference` does not exist.**  When
+   one appears or moves: read its digest and status, record the reading in the
    sync file, check anything imported, and send one message with the results of this
    branch that touch its mandate (the head of `SCIENCE_TO_ALL.md` already has a
    starting guide for each) and with precise requests.  Do not turn the agenda into
@@ -258,11 +264,26 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: none.  R17 (handed back 15:31 UTC) is
-   read, checked and published: SCI-REV-0017** (finding 9s; `workstreams/R17_REPORT.md`
-   with the coordinator's note; the coordinator's own check in
-   `experiments/science/r17_verification/`).  **Owed to the engineering division:** a referee of
-   ENG-RES-0014 §1 and §4 (accepted in SCI-RES-0022 §4; a workstream, not launched).
+2. **Workstreams running when this was written: two, both launched at 16:02 UTC.**
+   **R18** (`R18_brief.md`): referee of the engineering division's ENG-RES-0014 §1 and §4,
+   as accepted by them; reads the export `<scratchpad>/eng_ro_1cc4e1c/` (lost with the
+   container: `git archive 1cc4e1c docs src experiments/eng tests/eng | tar -x -C <dir>`);
+   result as SCI-REV-0018.  **R19** (`R19_brief.md`): adversarial referee of our own
+   addenda A17 (19)–(20) and of Part A of the audit, including the synthetic test of
+   Corollary AA.2 and level H2′ (obligations `G-1`, `G-2` — **do not run them yourself
+   while it works**).  Notes: `experiments/science/ws_R18/NOTES.md`, `ws_R19/NOTES.md`;
+   reports: `workstreams/R18_REPORT.md`, `R19_REPORT.md` — drafts until the coordinator
+   has read and checked them.  If a hand-back reports a declined tool action, do not
+   perform it; tell the research owner.  R17 is read, checked and published:
+   SCI-REV-0017 (finding 9s).
+   **A run of the coordinator going:** a scan of the floor in the penalty strength
+   (`pi_inference/floor_transition.py`; promised in SCI-RES-0024 §3 (c); prediction in
+   the research log at 16:05 UTC): logs `floor_transition_{K12_m4_w4, K12_m3_w7,
+   LKSEc12_m3_w7, K12_m4_w7}.log`; the first is complete — the floor of Lys₁₂ at order
+   4, band 4, stays at the anchor up to `λ = 14` and leaves it at `λ_c = 15.3` within a
+   factor 1.14 in `λ`; the three others were running.  When done: outcome against the
+   prediction into the research log, an addendum item, the curves to the theory
+   division.
    **The coordinator's work on general held-site passes is finished and committed**
    (addendum A17 (20), items 77–81; finding 9t): `pi_inference/held_site_laws.py`, the
    changed `first_order_recovery.py`, its thirteen re-produced logs and the log of
@@ -710,6 +731,21 @@ preservation.
    begins near `5·10¹⁴` trials, not `10¹⁷` (*and lower still — between `2·10¹⁴` and
    `2.5·10¹⁴` by the theory division's second scan; linked correction SCI-RES-0016 §4*),
    and our "corrected" re-run had never exercised its correction; the sizes of our separation statement were first sizes of a grid.
+9u. **The box limit [P, two lines; X] (`ASSUMPTION_AUDIT.md` A10, Proposition AA.3).**
+    Knowing only `m₀ = f + I_{m−1}g` and `|E − m₀| ≤ env`, no rule certifies `ln Z` more
+    narrowly than `W* = ln Z(m₀ − env) − ln Z(m₀ + env) = 2β⟨env⟩ + O(β³)`.  It is the
+    yardstick that separates information from tractability: on Lys₅ at order 4
+    `W* = 4.4·10⁻⁵` nats, the plain sandwich at band 3 is 431 times it and **the
+    recovered bracket 1.47 times** — the band never was a limit of information.  The
+    envelope exceeds the true remainder at every state by a factor of at least ten
+    (median 300–450); at order 5 the box limit (`8·10⁻⁹`) is below the evaluation
+    tolerance.  So what the line needs next is a tighter envelope (the sign-blind
+    bounds cannot give it: finding 9r) or evaluations beyond the ball (sampling), not
+    band or order.  A control of ours could not fail (halved tables violate nothing)
+    and was replaced.  Also here: **a linked correction** — SCI-RES-0023 had said "no
+    lower bound that we know" for the box class; the theory division's Proposition
+    11.113 (d) is one (SCI-RES-0025; SD67).
+
 9t. **Held-site passes for a window anywhere on the chain; the recovery on a chain
     longer than twice the band [P, elementary; X on Lys₅ and LKSE:5 at band 2; M;
     unrefereed] (addendum A17 (20), items 77–81; SCI-RES-0024 §4).**  The law of a held

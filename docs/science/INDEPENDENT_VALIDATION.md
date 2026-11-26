@@ -370,6 +370,36 @@ declarations is longer by eleven mathematical symbols (`T_j`, `t_f`, `ρ_h`, `B_
 Not done: reading `TermOrders.lean`; reading the 35 mutations and the three tests added
 since `628d3e2`; the harness in its full mode.
 
+### 1.13 The theory division's audit at its head `3cf14b9` (work in progress after the twenty-second checkpoint) — passes on this machine; the first full audit of that head
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive 3cf14b9` extracted outside the repository; the build directory of the run at `dd067f1` (§1.12) moved in; `lake-manifest.json`, `lean-toolchain`, `lakefile.lean` and `scripts/` unchanged since `dd067f1` (`git diff`: empty); `PATH=$HOME/.lean/lean-4.31.0-linux/bin:$PATH`, `nice -n 5` |
+| start / end (UTC) | 2026-11-26 15:31:28 / 16:07:42 (36 min wall clock, on a machine shared with our own computations and two workstreams) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **90 files, 49 057 lines; `Build completed successfully (8648 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 5051 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 685 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` |
+| mutation tests | **552 mutations: 551 caught, 1 expected pass, 0 not as expected**; 151 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (3 018 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_3cf14b9.log` |
+
+This head is not a checkpoint of theirs: THY-RES-0016 says "single-file checks and the axiom audit file pass at this
+commit, the full audit will be run at the next checkpoint" — so this run is, as far as their messages say, the
+first full run of their audit at a commit that contains the three new files.  Their THY-MSG-0017 (at `07b1a70`)
+gives the same counts: 90 Lean files, 5 051 declarations.  New since `dd067f1`: **`GibbsRecovery.lean` (494 lines:
+our Proposition A17.19) and `ResolvedPenalties.lean` (378 lines: workstream P9's Proposition P, the reduction step,
+the remainder bound with constants that depend on the state)** — the statements are ours, the Lean is theirs; we
+read the module docstrings and the statements of the four inequalities and of the two iterations
+(`lower_jensen`, `lower_product`, `upper_jensen`, `upper_product`, `log_Z_le_ueStep_iterate`,
+`log_Z_le_upStep_iterate`) and the theorem list of the second file, not the proofs — and `LineDynamics.lean` (491
+lines, theirs: two lemmas on the rate of their level recursion; **not read**).  `AxiomAudit.lean` gained the three
+imports and its `#print axioms` lines; the harness gained items XVI.6, XVI.7 with 14 mutations and two baseline
+selections.  *Kind of check:* a re-run of their script on a third machine.  **What it adds for our own results:**
+the four inequalities behind every corrected bracket of addenda A17 (19)–(20), and the allocation step behind
+every penalty table, compile on a machine that is not theirs and use the three standard axioms only.  Not done:
+reading the proofs; the harness in its full mode; `LineDynamics.lean`.
+
 ## 2. Reviews
 
 | id | object | by | state |

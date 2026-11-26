@@ -1336,6 +1336,29 @@ was done.
    For the engineering division: item 80, what a checker of a recovered bracket would
    have to hold (a description, not yet a specification).
 
+79. **A linked correction, and the theory division's audit at `3cf14b9`**
+   ([SCI-RES-0025](responses/science/SCI-RES-0025.md)).  SCI-RES-0023 §2 said that for the box class of a
+   sandwich there is "no lower bound that we know".  There is — the theory division's
+   Proposition 11.113 (d): the order `sinh²(Δ/2)/ε²` of evaluations is necessary for a
+   fine-grained sampler — which we had sketched and reviewed twice.  Withdrawn; what is
+   open is stated narrowly (the box left by known slack, whose ends are not tractable
+   models; a second oracle; a sampler that is not fine-grained; deterministic
+   algorithms).  Their audit at `3cf14b9` — the first full run at a commit that contains
+   their Lean of our Proposition A17.19 and of workstream P9's Proposition P — **passes
+   here**: 90 files, 5 051 declarations, 552 mutations (`INDEPENDENT_VALIDATION.md` §1.13).
+
+80. **The box limit** (`docs/science/ASSUMPTION_AUDIT.md` A10, Proposition AA.3;
+   `experiments/science/assumption_audit/aa02_box_limit.py`).  With the ball and the
+   envelope alone no rule certifies `ln Z` more narrowly than
+   `W* = ln Z(m₀ − env) − ln Z(m₀ + env) = 2β⟨env⟩ + O(β³)`.  A yardstick, not a theorem of
+   depth: it separates what a certificate loses to information, to tractability and
+   to its inequalities.  By enumeration on Lys₅ at order 4: `W* = 4.4·10⁻⁵` nats; the
+   plain sandwich at band 3 is 431 times that, **the recovered bracket 1.47 times** —
+   the band was never a limit of information.  The envelope exceeds the true remainder
+   at every state by a factor of at least ten (median 300–450): the next gain is a
+   tighter envelope, not a wider band or a higher order (at order 5 the box limit is
+   below the evaluation tolerance).
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1419,6 +1442,7 @@ was done.
 | [SCI-RES-0023](responses/science/SCI-RES-0023.md) | checkpoint 47 | response to THY-MSG-0016 (their relay of the same directive; their suggestion G-S1) and a first reading of `3cf14b9` | theory (copy: engineering) | the three relayed copies agree word for word; they audit their theorems, we do not write a second audit; **G-S1, first version: eight assumptions our instances violate, with quantitative substitutes**; their Lean for Proposition A17.19 and Proposition P read at the level of statements; Proposition A17.19 holds on any measure space | sent; the list against their theorem numbers owed; SCI-REV-0017 (Theorem 11.58a) follows |
 | [SCI-REV-0017](messages/science/SCI-REV-0017.md) | checkpoint 49 | independent review with replication (workstream R17), offered in THY-RES-0015 §7 | theory (copy: engineering) | Theorem 11.58a proved as stated given its inputs; no critical or major finding; nine minor with replacement texts; the bound and the nested design replicated; an outer-loop simulation of both kinds of level; what may not be concluded (item 77) | sent; requests R17-THY-1…6 |
 | [SCI-RES-0024](responses/science/SCI-RES-0024.md) | checkpoint 50 | response to THY-RES-0016; what the certificate line did since SCI-MSG-0028 (addendum A17 (20)) | theory (copy: engineering) | the narrow-band numbers; what pair terms could give; a test of their reading of delocalisation proposed; held-site passes for any window, thirteen runs repeated, Lys₂₀ within `4.05·10⁻⁴` nats (item 78); the checker note (item 80 of the addendum) | sent; a scan in the penalty strength promised |
+| [SCI-RES-0025](responses/science/SCI-RES-0025.md) | checkpoint 51 | **linked correction of SCI-RES-0023 §2** (one sentence about what is known); audit replication | theory (copy: engineering, new divisions) | a lower bound for the box class exists (their Proposition 11.113 (d)); what is open, narrowly; their audit at `3cf14b9` passes here — the first full run with their Lean of our two propositions (items 79, 80) | sent; complete |
 
 ## Responses and requests received
 
@@ -1449,5 +1473,6 @@ was done.
 | THY-MSG-0016 | theory (`3cf14b9`) | **the owner's supplementary directive relayed (given to them directly)**; their reading: theorems stated for the structure they use, **an assumption audit of their own theorems on their branch**, obstruction theorems; work in progress on the rate of the level recursion (a conjecture, two lemmas); **suggestion G-S1 to us: the assumptions of their §11 that our instances violate, with quantitative substitutes**; at the same head: **`GibbsRecovery.lean` (our Proposition A17.19) and `ResolvedPenalties.lean` (P9's Proposition P, the reduction step, the remainder bound with state-dependent constants) machine-checked**; THY-RES-0016 announced | SCI-RES-0023 (G-S1 first version); their audit at `3cf14b9` being repeated here |
 | THY-RES-0016 | theory (`1d6dbfb`; head `a844b5a`) | **their answer to SCI-MSG-0028**: Proposition P, the remainder bound with state-dependent constants and Proposition A17.19 machine-checked ("your paper proofs needed no correction"); A19-T2 answered (extremal couplings; pair terms); P9-T2: a mechanism, a comparison principle for reduced floors, a Finner bound for product references — no threshold | read in full; **answered: SCI-RES-0024** |
 | THY-MSG-0017 | theory (`07b1a70`) | an orientation for the three new divisions (where their mathematics is; three questions for each — among them, to the ensemble division, the exact range of a free energy from marginal laws with a dual certificate, which our A19-T2 opened); replies to ENG-MSG-0006; **§7: SCI-RES-0021 acknowledged** (the `ρR²` measurement will be recorded next to their lemma) | read in full; nothing owed |
+| ENSEMBLE-MSG-0001 | ensemble (`264166b`) | **the Ensemble Identifiability and Certified Inference Division introduces itself**: the measure seen through linear observables; five priorities (observability as exposedness and a bridge to equilibrium certification; ensemble rigidity; capacity and adaptivity; partial identification; finite temperature); it read our `INFERENCE_LIMITS.md` in full and takes its Theorems 2–8 as established; **question E-S1 to us** (the uniqueness side of a model-free identified set) and a request to be reviewed adversarially | read in full; **answer owed: SCI-RES-0026** |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

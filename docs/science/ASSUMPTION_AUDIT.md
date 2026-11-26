@@ -177,6 +177,40 @@ Every bracket of this line is valid whether or not these hold; they decide wheth
 | each value of `g` is computed within `ε_g = 10⁻⁷` kcal/mol | **E** (some bound is needed: a certificate cannot be more accurate than its evaluator) | **unproved** for the summation order of the evaluator used (workstream P3: an a-priori `3·10⁻⁸`; measured `2·10⁻¹²`); request A19-E2 to the engineering division |
 | the instance: fixed backbone, a rotamer library, an implicit solvent, one force field | modelling choices, outside the mathematics | the statements above use only: a finite product space, a pairwise part, a many-body part of the class A3′ |
 
+### A10. What the ball and the envelope allow at best: the box limit [added after the referee of Part A was launched; not in its brief]
+
+> **Proposition AA.3 (the box limit) [P, two lines; X on three enumerated instances].**  Let all that is known of
+> an energy `E` be a function `m₀` and a pointwise bound `|E − m₀| ≤ env` (in our certificates `m₀ = f + I_{m−1}g`, known
+> from the ball, and `env` the resolved envelope).  Then (i) every interval that contains `ln Z(E)` for all `E`
+> compatible with this knowledge contains `[ln Z(m₀ + env), ln Z(m₀ − env)]`; so no rule that uses this knowledge
+> alone certifies `ln Z` more narrowly than
+> `W* = ln Z(m₀ − env) − ln Z(m₀ + env) = ln⟨e^{β·env}⟩_{m₀} − ln⟨e^{−β·env}⟩_{m₀} = 2β⟨env⟩_{m₀} + O(β³)`
+> (the even cumulants of `env` cancel); (ii) the sandwich of the two extreme members attains `W*`.
+> *Proof.*  `m₀ + env` and `m₀ − env` are compatible; an interval valid for both contains both values.  ∎
+
+The statement is trivial; what it buys is a **yardstick that separates the three things a certificate can lose**:
+information (the box limit `W*`, which no computation with the same knowledge can beat), tractability (a band
+model cannot hold `m₀ ± env`, so the sandwich has `D ≥ W*`), and the inequalities of the recovery.  By enumeration
+(`experiments/science/assumption_audit/aa02_box_limit.py`; the certificate's numbers are those of the committed
+logs of `first_order_recovery.py`):
+
+| instance, order | box limit `W*` | `W*` over its first-order value `2β⟨env⟩` | sandwich `D` at band 2; 3 | `D / W*` | corrected bracket at band 2; 3 | corrected `/ W*` | envelope over remainder, pointwise: least; median |
+|---|---|---|---|---|---|---|---|
+| Lys₅, 4 | `4.389·10⁻⁵` | 1.000 | 0.0477; 0.0189 | 1 086; 431 | 0.00289; `6.44·10⁻⁵` | 65.7; **1.47** | 10.8; 373 |
+| Lys₅, 5 | `7.98·10⁻⁹` | 1.000 | —; 0.0187 | —; `2.3·10⁶` | —; `7.1·10⁻⁶` | —; 890 | 12.5; 449 |
+| LKSE:5, 4 | `8.459·10⁻⁵` | 1.000 | 0.2054; — | 2 428; — | 0.00156; — | 18.4; — | 17.0; 312 |
+
+(The exact `ln Z` is inside every box, and every corrected bracket contains its box, as it must.)  What the table
+says, classification by classification:
+
+| statement | class | evidence |
+|---|---|---|
+| "a wide band is needed for a narrow bracket" | **C** — the band is a tractability device, not a limit of information | at order 4 and band 3 the recovered bracket is within a factor 1.47 of the box limit, where the plain sandwich is 431 times it [X] |
+| "the envelope decides the width" | **E** for any rule that uses only the ball and the envelope (Proposition AA.3) | — |
+| "the width is first-order in the envelope" | **Q** | `W* = 2β⟨env⟩` to three digits in all three rows [X]; the correction is of third order |
+| "the envelope is the remainder" | **F** | the envelope exceeds the remainder at every state by a factor of at least 10.8 to 17.0 (median 312 to 449), and the exact `ln Z` sits within 1.2 per cent of the middle of the box [X].  **A control of ours could not fail for this reason**: halving every table violates nothing at any of the 115 248 states; the control now divides by 1 000 (79 657 violations).  What order 4 would gain most from is a tighter envelope, and the sign-blind bounds behind the tables cannot give it (finding S76) |
+| "more order is always better" | **Q** | at order 5 the box limit (`8·10⁻⁹`) is far below what the certificate reaches (`7·10⁻⁶`): the limit there is the evaluation allowance `ε_g` (A9) and the inequalities, not information |
+
 ## 2. Part B — the theory division's theorems: not a second audit, an input to theirs and a review of it
 
 *Changed on the day it was written.*  All three divisions received the directive directly, and the theory
@@ -200,6 +234,12 @@ doubted under H′" on finite instances (ENG-MSG-0006 §2; agreed in SCI-RES-002
 | 7 | one reference instance | one anchor; a floor that can leave it | `ln⟨e^{β·env}⟩ = O(1)`; beyond it a cover by several anchors, with no cost statement yet |
 | 8 | the algorithm only evaluates | white-box tables from the analytic form | a second oracle: a certified bound of an order-`m` mixed difference, resolved by state (class A3′) |
 
+*Linked correction (SCI-RES-0025).*  SCI-RES-0023 §2 said of the box class of row 2 "lower bound: none that we
+know".  There is one, theirs: Proposition 11.113 (d) — the order `sinh²(Δ/2)/ε²` of evaluations is necessary in the
+worst case over `{m₋ ≤ E ≤ m₊}` for a fine-grained sampler — reviewed by us in SCI-REV-0013 and SCI-REV-0015.  Open,
+as far as that proposition goes: the narrower box left by known slack whose ends are not tractable models; the
+second oracle of row 8; a sampler that is not fine-grained; deterministic algorithms.
+
 One structural remark that our review of their audit will test: functions of a Hamming weight, of a type, of a
 block profile are functions of **site-additive statistics with equal weights** — the class A3′ with exchangeable
 `a_i`.  The natural heterogeneous generalisation of results proved by the method of types is to unequal `a_i`,
@@ -217,7 +257,7 @@ Each level names what is assumed of the energy, what a certificate costs, and wh
 | H1 | pairwise on a chain or tree | exact, transfer matrix | `O(nk²)` | — |
 | H2 | all terms within a band `w` (bounded treewidth) | exact | `O(nk^{w+1})` | the width: exact partition functions on general graphs are hard [K, from memory] |
 | H2′ | H2 plus `φ(u(x))`, `u` a vector of `r` site-additive statistics, `φ` Lipschitz, otherwise arbitrary | exact up to a binning allowance: a transfer matrix that also carries the binned partial sums; floor and ceiling from the extreme values of `φ` on a cell | `O(nk^{w+1}B^r)` for `B` bins per statistic; width `≲ β·Lip(φ)·n·`(cell size) | `r`: exponential in the number of statistics — a parameter, not the size of the system [P in outline, standard dynamic programming; **not implemented, not tested: `G-2`**] |
-| H3 | H2 plus a many-body part with a pointwise envelope of its order-`m` remainder (A3; class A3′ with any `r`) | sandwich from the ball of radius `m − 1` | `Σ_{s<m} C(n,s)(k−1)^s` evaluations, `C(n,m)` tables | the envelope: no certificate without it (A3, **F**); width `≈ 2β⟨envelope⟩` |
+| H3 | H2 plus a many-body part with a pointwise envelope of its order-`m` remainder (A3; class A3′ with any `r`) | sandwich from the ball of radius `m − 1` | `Σ_{s<m} C(n,s)(k−1)^s` evaluations, `C(n,m)` tables | the envelope: no certificate without it (A3, **F**); no width below the box limit `W* = 2β⟨envelope⟩ + O(β³)` with the same knowledge (A10, Proposition AA.3) |
 | H4 | H3 with the slack of every reduction known as tables | sandwich + recovery (A6) | held-site passes: `k` transfer-matrix runs per held site | envelope; `D²/4` between groups; items that need two held sites |
 | H5 | H3, sampled | a sampler inside the sandwich (the theory division's Propositions 11.113, 11.113a) | evaluations growing with the width of the sandwich | a statistical statement, not a deterministic one |
 | H6 | no tractable floor (several modes; a floor that delocalises) | lower ends only (restriction, A1); an upper end needs a cover of the space | — | first-order information alone costs exponentially many evaluations (the theory division's lower bounds for first-order classes; our reviews SCI-REV-0001…0016) |
@@ -239,4 +279,5 @@ Each level names what is assumed of the energy, what a certificate costs, and wh
 
 | script, log | what it shows | class supported |
 |---|---|---|
+| `experiments/science/assumption_audit/aa02_box_limit.py`, `aa02_box_limit_{K5_m4,K5_m5,LKSEc5_m4}.log` | the box limit `W*` by enumeration against the certificate's sandwich and corrected bracket; the envelope against the remainder at every state, with a control that fails (÷1000) and one that cannot (÷2) | A10 |
 | `experiments/science/assumption_audit/aa01_essential.py`, `aa01_essential.log` | (1) no certificate from a ball alone; (2) (LP) fails with a negative group slack, (LJ) does not; (3) the floor must hold everywhere, the ceiling need not | A3 **F**; A6 **F** / **T**; A1 **F** / **T** |

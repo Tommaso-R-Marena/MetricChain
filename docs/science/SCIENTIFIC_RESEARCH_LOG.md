@@ -2332,3 +2332,40 @@ Part A turned up, in the order it surprised me:
 No further application-specific run is started in this phase.  Next: the synthetic test
 of the general class (`G-1`), the level H2′ (`G-2`), Part B of the audit (a workstream),
 a referee for parts (19)–(20) and for Part A.
+
+**15:36–16:05 UTC — a second directive of the owner (six divisions), four checkpoints, two
+referees launched, one more correction of my own.**  The expansion directive is recorded
+verbatim (`OWNER_DIRECTIVES.md`); our copy of the protocol names six divisions; every fetch
+now covers five branches.  Published since: the relay and the audit's Part A (`2cad679`),
+the six-division protocol (`27828f1`), the review of the theory division's Theorem 11.58a
+(`1b89f12`: proved as stated given its inputs; nine minor findings; our referee ran the
+outer loop their report said could not be run), part (20) with the general held-site
+passes and Lys₂₀ (`0930440`).  Both other divisions relayed the same directive within a
+quarter of an hour of ours; the theory division machine-checked Proposition A17.19 and
+workstream P9's Proposition P and answered both open questions of SCI-MSG-0028.
+Launched at 16:02: R18 (referee of the engineering division's ENG-RES-0014 §1 and §4, as
+accepted) and R19 (an adversarial referee of my own parts (19)–(20) and of Part A of the
+audit, including the test of Corollary AA.2 on a synthetic energy — which I therefore do
+not run myself).  **A correction:** in SCI-RES-0023 I wrote that for the box class of a
+sandwich there is "no lower bound that we know".  There is: the theory division's
+Proposition 11.113 (d), which we sketched and reviewed twice.  Found while deciding what
+to work on next; withdrawn by SCI-RES-0025; SD67 ("nothing is known" is a claim).
+
+**A scan in the penalty strength — predicted at 16:05 UTC, before the script exists.**
+The theory division reads a floor that leaves the anchor as a first-order transition in
+the size of the tables (THY-RES-0016 §5 (i)) and asks for numbers.  Test: multiply every
+penalty table of the floor by `λ` and follow `ln Z` of the floor, the mean penalty and the
+number of displaced sites under it.  If the reading is right there are two states —
+few sites off; a window (or the chain) fully off — and the occupancy jumps at a `λ_c`
+within a narrow range of `λ`, while the first-order number `β·λ·⟨pen⟩₀` stays smooth.
+*Predictions* (band 7 unless said): the cost of displacing a lysine side chain is about
+`ln(0.9/0.1) ≈ 2.2 kT`, so a chain fully off costs about 26 `kT`; the penalty of the fully
+displaced chain is a fraction of the sum of the table maxima (18 `kT` at order 4, 272 at
+order 3, raised by the reductions to windows).  **Lys₁₂, order 4: `λ_c` between 2 and 6
+(central 3.5); at band 4 lower, 1.5 to 4.  Lys₁₂, order 3: `λ_c` between 1.05 and 1.5 —
+it is certified at `λ = 1` with 0.077 nats, so it must be close.  (LKSE)₃, order 3, whose
+floor has left at `λ = 1`: `λ_c` between 0.1 and 0.4.**  Sharpness: the mean number of
+displaced sites goes from below 2 to above 8 within a factor 1.3 in `λ`.  What would
+count against the reading: a gradual rise of the occupancy over a factor 3 or more in
+`λ`.  Cost: one model build per instance (the Gibbs sample, two to eight minutes) and a
+transfer-matrix run plus a thousand exact samples per `λ` (seconds); under 4 GB.
