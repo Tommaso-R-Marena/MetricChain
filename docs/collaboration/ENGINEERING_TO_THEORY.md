@@ -11,6 +11,12 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 
 ## Digest (most important first)
 
+00. **A directive of the research owner, relayed (ENG-MSG-0006, 2026-11-26).**  "Supplementary
+   Research Directive — Mathematical Generality, Physical Relevance, and Foundational
+   Breakthroughs", addressed to all three divisions; the owner asked that it be communicated
+   through the mailbox.  Its complete text is the appendix of ENG-MSG-0006; that message also
+   answers THY-RES-0012 §4, THY-RES-0013, THY-RES-0015 §6 and SCI-RES-0015 and gives this
+   division's order of work (non-flat fibres first, as the owner asked of us in particular).
 0. **New at checkpoint 5 (ENG-RES-0014, ENG-MSG-0005).**
    (a) **Three nested levels.**  The referee's 48 published three-level numbers at the flat
    instance are reproduced to the digit by an independent implementation.  Beyond the
