@@ -15,6 +15,7 @@ The recursion: `T_1 = θ_na`, `T_{k+1} = min(T_k, R[T_k])`, `τ_k = sup T_k` (th
 | `lines_lb.py` | the lower bound `τ_k^{LB}` from minorant lines (Lemma L): tangent lines of `θ_na` iterated by the slope map `Σ_B` until they leave the regular range `s < 1 − B/a`; bisection over the intercept `B` | `out_lines_lb.txt` |
 | `ode_f0.py` | the similarity profile: `ζf′²/2 + ζf′ + (ζ−2)f = 0` through its folded saddle `(3, 3/2)`; `f(0) = 19.7392088 = 2π²` | `out_ode_f0.txt` |
 | `dual_ub_gauss.py` | the upper-bound dynamics in dual variables for the Gaussian pair (`R_brief.md` §2.5 made concrete: a convex majorant is described by `S(B)`, the least slope of a line with intercept `B` below it; one level sends `S` to the lower convex envelope of `min(1, Σ_B(S(B)))` on `[0, τ′]`, `τ′` the root of `S(B) = 1 − B/a`) — on a grid, **not one-sided** | `out_dual_ub_gauss.txt` |
+| `lines_lb_general.py` | the lower bound from lines for a pair given by its dual function `J` alone (`h = max J`, `a = lim J(t)/(1−t)`, slope map `t′ = Q^{−1}(B/(1−σ))`, `σ′ = t′(1−σ)/(1−t′)` with `Q = J/(1−t)`; the tangent line of `θ_na` with intercept `B` is the image of the flat line): Gaussian pair, cube, and four **biased cubes** (`J` = the game function `F*` of §11.20) | `out_lines_lb_general.txt` |
 | `epochs.py` | single-line epochs with optimised outer rates (the calculus of Theorem 11.58a with the rate of every slope step chosen freely): `k²(B_k − h)` grows linearly in `k` — this schedule has the rate `C/k` only | `out_epochs.txt` |
 
 Readings (2026-11-26):
@@ -34,6 +35,10 @@ Readings (2026-11-26):
   `(k−1)θ(B) + φ₀(B) = π`), `c ≈ 0.15`–`0.2` (grid recursion) and `c ≈ 0` (dual upper bound: the root
   of `kθ(B) = π` up to `O(k⁻⁴)` — the naive line formula, which is wrong at small `k`, becomes
   right to higher order).
+* Universality (lower-bound side, `lines_lb_general.py`): for the biased cubes `(p, u) = (0.3, 1), (0.1, 1),
+  (0.1, 2), (0.02, 2)` the ratio `k²(τ_k^{LB} − h)/(2π²h²θ_hint″(0))` is `0.992, 0.998, 0.993, 0.993` at `k = 160` and
+  increasing in `k`, as for the cube (`0.994`) and the Gaussian pair (`0.994`): the law depends on the pair
+  through `h` and the curvature of its dual at the maximum only.
 * An error made on the way and kept as a warning: propagating the lines of a convex
   *majorant* by the same slope map and reading off `sup min(B, (1−s)a)` is **not** an upper
   bound once a line's slope jumps beyond `1` (it gave `τ₃ ≤ ⅓` for the Gaussian pair, where
