@@ -12,71 +12,92 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 21:48 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 22:14 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
-(i) **One workstream is running; its directory is uncommitted while it runs.**
+(o) **A third directive of the research owner arrived at about 22:00 UTC on 26 November
+(D-3, verbatim in `docs/science/OWNER_DIRECTIVES.md`): a seventh division — *Structural &
+Computational Biology, Software Development and Applications*, branch
+`research/structural-biology`, digest `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md` —
+will build research software and benchmark specifications on MetricChain's mathematics;
+the engineering division tests and benchmarks it; this division evaluates it,
+independently.**  Read D-3 in full before touching anything of theirs: no advocacy; a
+guarantee about a model is not evidence about a molecule; benchmark specifications are
+reviewed here with eight questions; prior art for every capability; computations through
+the engineering division; internal AI review is not peer review; all earlier limits
+stand.  *Done:* the orientation it asks for is **SCI-MSG-0034** (six parts, a table of
+what is mature enough to translate, six requests S-1 … S-6).  *State of their branch:*
+it appeared between 22:00:26 and 22:09:54 UTC, points at the theory division's commit
+`b2caab6` and has no commit, digest or mailbox of its own.  **At every synchronisation:
+fetch it (it is the sixth branch of the fetch loop); when it has a digest, read digest
+and status first, then their first benchmark specification; answer with a review
+(SCI-REV), not with help.**  The Complexity division has also sent them an orientation
+(COMPLEXITY-MSG-0005, skimmed).
+(i) **Two workstreams are running; their directories are uncommitted while they run.**
 R25 (launched 21:03 UTC; brief `docs/science/workstreams/R25_brief.md`): the second look
 the Complexity division asked for (their Theorem 1c in one regime, their Lemma A1) —
 `workstreams/R25_REPORT.md`, `experiments/science/ws_R25/` (it writes result files of
-several megabytes there: commit scripts, logs and the report, not those).  **When it
-hands back:** read the report in full, check what decides each finding, compare with
-the Complexity division's own referee on the same two places (COMPLEXITY-REV-0003 at
-`12e6d36`, which R25 was deliberately not given), add a coordinator's note, publish as
-SCI-REV-0024 to Complexity (copy Theory), commit its directory.  If it reports a declined
-tool action, do not perform it; tell the research owner.  **Their note has changed since the
-version R25 reads** (`1ba144d`, after their own review: Lemma A1 now for clauses of between
-one and three literals; Corollary 4 (ii); a new §9a) and COMPLEXITY-MSG-0004 §4 says our
-look "is no longer the only check": compare R25's findings with the new version before
-publishing, and say in the same message that their CX-T27 (an outside check they would
-value) has not been taken up.
-**Briefed and not launched:** R26 (`workstreams/R26_brief.md`) — a referee of the theory
-division's §11.33 (nesting on general spaces: the class-relative influence, which it is
-asked to compute on a band model; the false certificate; the abstract level theorem).
-Launch it when R25 is back, if credits allow; never more than two agents at once.
-(ii) **Published at this commit (checkpoint 62).**  *SCI-REV-0023* (to Geometry; workstream
-A4, an originality review): their Theorem L — a global stability bound of order `n²` from
-distances of sequence separation at most 4 — was not found in print as stated; mechanism
-and exponent are those of the geometric rigidity estimate in thin rods, each step is
-printed for lattices; their sentence "the published bound is exponential" needs an
-amendment; four corrections to their reading of the paper they cite; and, not asked, **our
-own assessment of the threshold** (`geometry_checks/theorem_l_threshold.py`): a threshold
-is necessary, its necessary size is four times the product of two heights, theirs is
-`10⁴` to `10⁶` times smaller, and at it the bound exceeds the radius of gyration of a helix
-from sixteen residues on (`OPEN_PROBLEMS.md` C6).  Also at this commit: the assumption
-table of Proposition A17.23 (addendum item 96); `ASSUMPTION_AUDIT.md` G-4 and G-7 (c)
-updated; three request rows that had been missing from the status file since checkpoint
-59 (SCI-REV-0020, -0021, -0022); an addendum E to `PRIOR_ART_MATRIX.md`.
+several megabytes there: commit scripts, logs and the report, not those).  R26 (launched
+21:51 UTC; brief `workstreams/R26_brief.md`): a referee of the theory division's §11.33
+(nesting on general spaces; first of all the class-relative influence between blocks
+computed for band models) — `workstreams/R26_REPORT.md`, `experiments/science/ws_R26/`.
+**When one hands back:** read the report in full, check what decides each finding, add a
+coordinator's note, publish as a review (R25: SCI-REV-0024 to Complexity, copy Theory;
+R26: the next SCI-REV to Theory), commit its directory.  If it reports a declined tool
+action, do not perform it; tell the research owner.  For R25: **their note has changed
+since the version it reads** (`1ba144d`, after their own review: Lemma A1 now for clauses
+of between one and three literals; Corollary 4 (ii); a new §9a), COMPLEXITY-MSG-0004 §4
+says our look "is no longer the only check" — compare its findings with the new version
+and with COMPLEXITY-REV-0003 before publishing, and say in the same message that their
+CX-T27 (an outside check they would value) has not been taken up.  Never more than two
+agents at once.
+(ii) **Published at this commit (checkpoint 63).**  *SCI-MSG-0034* (to the Structural
+Biology division): the orientation.  *SCI-RES-0037* (to Ensemble): their fourth
+checkpoint applied our review SCI-REV-0020 and accepted SCI-RES-0032 — and quoted a
+sentence of ours that SCI-MSG-0033 had withdrawn 47 minutes earlier; the counterexample
+and the replacement text again.  **Proposition A17.24 — continuous site variables**
+(addendum A17 (25), items 97–99; `pi_inference/continuous_cells.py`; closes the audit
+obligation G-5): a cell-wise sandwich of discrete models (Jensen below, bounded
+differences or cell minima above), second order in the cell size; on a toy chain 1.3
+nats per angle at three cells per angle and `10⁻³` at about 150 — **the certificates of
+this branch are certificates of the discrete model** (`OPEN_PROBLEMS.md` D16).
 (iii) **Owed, in this order.**
-  (a) R25, as in (i).
-  (b) **Second-order recovery where it is not yet run** (`held_pair_exact.py`): at band 7 a
-  pass costs about three seconds (a trial with sixty quadruples — 420 passes — was still
-  running after twenty minutes when this was written; its log is in the scratch space
-  and is not committed), so the floor route (2 422 passes) and the ceiling route over all
-  sampled quadruples are hours on this machine for a bracket that is already `8·10⁻⁵`
-  nats: **not worth running at Lys₁₂ band 7.**  Worth running: (LKSE)₃ at order 4
-  (first-order bracket 0.0014 nats; on LKSE:5 the floor route closed 0.47) — time one pass
-  first; Lys₂₀.  Workstream R24's comonotone upper end from single-group laws under the
-  floor is valid and not implemented.
-  (c) **From THY-MSG-0018:** the class-relative influence between blocks for one of our
-  band models (their Theorem 11.119 (b); unread by the coordinator) — before any nested
-  run on a dependent known part; this is item 1 of the brief of R26.
-  (d) A formatting defect: sixteen older rows of the findings table in
+  (a) R25 and R26, as in (i).
+  (b) **The Structural Biology division, as in (o)** — nothing to review yet.
+  (c) **The Ensemble division's Proposition E15U** (the exact condition for their thermal
+  union bound: for binary sites the bound holds for every member iff conditioning on any
+  up-set raises the expected number of disagreements by at least one) is offered to us
+  and to Theory for a referee (ENSEMBLE-MSG-0005, closing section).  Not taken up;
+  SCI-RES-0037 §3 promises nothing.  A cheap first step: enumerate all up-sets on three
+  and four sites and compare with the worst member by a linear programme.
+  (d) **The engineering division's X-005c** checks our finding M1 of SCI-REV-0018 (their
+  commit `96c4fd2`; result files and a draft, no message yet): read it when their message
+  arrives.
+  (e) **Second-order recovery where it is not yet run** (`held_pair_exact.py`): at band 7 a
+  pass costs about three seconds (a trial with sixty quadruples — 420 passes — was stopped
+  unfinished after 35 minutes; its partial log is in the scratch space and is not
+  committed), so the full computation is hours on this machine for a bracket that is
+  already `8·10⁻⁵` nats: **not worth running at Lys₁₂ band 7.**  Worth running: (LKSE)₃ at
+  order 4 (first-order bracket 0.0014 nats; on LKSE:5 the floor route closed 0.47) — time
+  one pass first; Lys₂₀.  Workstream R24's comonotone upper end from single-group laws
+  under the floor is valid and not implemented.
+  (f) A formatting defect: sixteen older rows of the findings table in
   `docs/collaboration/status/science.md` (S46–S61) and six index rows of the digest have a
   cell count different from their header.
-  (e) `PUBLICATION_OPPORTUNITIES.md` (version 2, 25 November) and the body of
-  `PRIOR_ART_MATRIX.md` (version 1) predate the three new divisions: a new version of each
-  is owed.
+  (g) `PUBLICATION_OPPORTUNITIES.md` (version 2, 25 November) and the body of
+  `PRIOR_ART_MATRIX.md` (version 1) predate the new divisions: a new version of each is
+  owed — and D-3 makes the prior-art matrix a working document for the new division's
+  capabilities.
 (iv) **Next own mathematics** (`OPEN_PROBLEMS.md`): I7 (i) — is `a_cube + (K²/4)F*` the
 expansion of the chain's exponent?  D12 (a′) — a certified statement between `λ₀` and
 `0.8 λ_c`; with workstream R24's remark that `F(λ)` is exact and convex on a band model,
 (b) "a safety factor with every certificate" is one pass.  G-3 (tree decompositions),
-G-5 (continuous variables), D14 (down-closed families).  Unrefereed inside the division:
-addendum A17 (13)–(18) (the research owner's decision, as recorded), part (23) and
-part (24).
-(v) Heads read at 21:46 UTC: theory `eb88823`, engineering `2259daa`, ensemble `8d42f60`, geometry `288b2de`, complexity `1ba144d` (theory, engineering and complexity had moved; read as far as the pins in the status file say — COMPLEXITY-MSG-0004, their fourth checkpoint, in full: two sentences of their penalty note corrected at our remark; no response required).
+D14 (down-closed families), D16 (a certified discretisation term; G-5 is answered).  Unrefereed inside the division:
+addendum A17 (13)–(18) (the research owner's decision, as recorded), parts (23), (24)
+and (25).
+(v) Heads read at 22:09 UTC: theory `6ebcccd`, engineering `96c4fd2`, ensemble `7eb9cae`, geometry `288b2de`, complexity `75266b2`, structural biology `b2caab6` (all but geometry had moved; read as far as the pins in the status file say).
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

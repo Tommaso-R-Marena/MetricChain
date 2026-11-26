@@ -2920,3 +2920,78 @@ been entered in the table of outstanding requests; added now with their present 
 *The band-7 trial* of the second-order recovery is still running after twenty minutes
 for 420 passes: about three seconds a pass, hours for the full computation, for a
 bracket that is already `8·10⁻⁵` nats.  Not pursued at band 7.
+
+**21:53 UTC — R26 launched (21:51 UTC); and a prediction for continuous site variables (obligation G-5), before the script exists.**
+*R26* (brief `workstreams/R26_brief.md`): a referee of the theory division's §11.33 — first of all the
+class-relative influence between blocks, computed for band models, which decides whether nesting is
+valid on a dependent known part such as ours.  R25 is still running.
+*G-5.*  Everything certified on this branch is for discrete site variables.  For continuous ones
+(angles `x_i` with a product reference measure, cells `C_{i,s}`) the identity
+`Z = Σ_s v_s ⟨e^{−βV}⟩_s` — `⟨·⟩_s` the product of the reference measures conditioned on the cells —
+turns the continuous model into a discrete one whose energies are cell free energies.  Jensen gives
+the lower end with **cell means** of every term (same interaction graph); the bounded-difference
+bound for product measures (McDiarmid's moment-generating-function bound) gives the upper end with
+the penalty `(β²/8)Σ_i c_i(s)²`, `c_i` the oscillation in coordinate `i` inside the cell — second order in
+the cell size, where the bracket from cell minima and maxima is first order.  One-body terms can be
+put into the reference measure and cost nothing.  Where a term varies by many `kT` inside a cell (a
+steric wall) the penalty is useless and the coordinate is treated by its minimum instead; the choice
+may depend on the site and its cell, which keeps the structure.
+**Predictions** for a nearest-neighbour chain of eight angles, couplings of 2 `kT`, `k` equal cells per
+angle, exact value by quadrature: **(i)** the width of the min/max bracket falls like `k⁻¹` (fitted
+exponent within 0.1 of −1 between `k = 24` and 96), that of the Jensen/bounded-difference bracket like
+`k⁻²` (within 0.15 of −2); **(ii)** the exact value lies in the lower third of the second-order
+bracket, between 0.15 and 0.34 of the way from the Jensen end, for `k ≥ 24` (a uniform variable has
+variance range²/12, the bound uses range²/4, and oscillations of two terms add in the bound but not
+always in the truth); **(iii)** at `k = 24` (cells of 15°) the second-order width is between 0.02 and
+0.15 nats per site, and `10⁻³` nats per site needs between 100 and 300 cells per angle — one to two
+orders finer than a rotamer library; **(iv)** with a wall of 20 `kT` between neighbours the
+bounded-difference bracket alone is wider than the min/max bracket at `k ≤ 24`, and the mixed rule
+brings the width at `k = 96` to within a factor 3 of the wall-free case.  (iv) is the one I am least
+sure of.
+
+**22:02 UTC — a third directive of the research owner (22:00 UTC); and the outcome of the 21:53 predictions.**
+*The directive* ("Scientific Evaluation of Structural Biology Software"; verbatim in
+`OWNER_DIRECTIVES.md`, D-3): a seventh division, *Structural & Computational Biology, Software
+Development and Applications*, on `research/structural-biology`, will build research software and
+benchmark specifications on MetricChain's mathematics; the engineering division tests and benchmarks
+it; this division evaluates it — independently, attacking its strongest claims, keeping a guarantee
+about a model apart from evidence about a molecule — and owes it an orientation in six parts.  At
+22:00:26 UTC the branch did not exist on the remote.  The orientation is SCI-MSG-0034.
+*Continuous site variables (`pi_inference/continuous_cells.py`; exact for the grid model, every
+bracket asserted in 41 partitions).*  **(i) met:** exponents −1.005 and −2.148 between 24 and 96
+cells.  **(ii) missed, narrowly:** the exact value sits at 0.144, 0.171, 0.186, 0.193, 0.209 of the
+second-order bracket for 24 to 288 cells — I had said 0.15 to 0.34; the bound's oscillations are
+suprema over the neighbours' cells, which costs more than I allowed.  **(iii) met:** 0.047 nats per
+site at 15° cells; `10⁻³` per site at about 147 cells per angle.  **(iv) missed in its first half:**
+with a wall of 20 `kT` the bounded-difference bracket is wider than the min/max bracket at 3, 6 and
+12 cells (644, 305, 61 nats against 31, 18, 8.5) but not at 24 (0.57 against 4.2) — the wall is
+smooth on the scale of 15°; the second half holds with room (ratio 1.31 at 96 cells, where the mixed
+rule is not even needed).  Where the mixed rule earns its keep is at coarse cells: 12.8, 6.0, 2.8
+nats at 3, 6, 12 cells, better than either pure rule.  Not predicted: the width per site does not
+depend on the length (0.0103 against 0.0097 at 8 and 16 angles); it grows more slowly than the
+square of the coupling (width over `J²`: 0.027, 0.025, 0.021, 0.015 at `J` = 0.5, 1, 2, 4); putting the
+one-body terms into the reference measure is worth a factor 4.7.
+**What it says about this branch's certificates:** at the resolution of a rotamer library — three
+cells per angle — the best certified statement about the *continuous* integral of this toy chain is
+1.3 nats per angle wide, where our brackets for discrete models are `10⁻⁴` nats for a whole chain.
+The certificates are certificates of the discrete model; the discretisation is a modelling
+statement that is four orders of magnitude coarser.  That sentence goes into the orientation.
+
+**22:14 UTC — the orientation is written; what the fetch of 22:09 found.**
+*SCI-MSG-0034.*  Written from the files, not from memory: I re-read the applicability synthesis, the
+benchmark design, the handoff's "what must not be claimed" and the prior-art matrix first, and checked
+every number I quote against the message or log it comes from (four were wrong in my draft — the
+best Lys₁₂ bracket, the best (LKSE)₃ bracket, which peptide the reordering of basins was measured on,
+and what "replicated to `10⁻⁴`" referred to).  Its first limitation is the computation of this evening:
+discretisation.  The sentence I would defend in front of a structural biologist is the one in its
+title — the guarantees are four to five orders more precise than the model is known to be accurate.
+*The new branch* appeared between 22:00:26 and 22:09:54 UTC; it points at a theory commit and has
+nothing of its own yet.  The Complexity division sent its own orientation at 22:05.
+*A crossing with the Ensemble division.*  Their fourth checkpoint (22:06) applies our review and
+quotes, as "the clearest statement we have seen", the sentence I withdrew at 21:19 — they had read
+us one checkpoint back.  A wrong sentence of mine is now being praised in another division's
+mailbox; SCI-RES-0037 repeats the counterexample and the replacement text.  In drafting it I
+misdescribed the counterexample from memory (I wrote that the freedom was on the first two states;
+it is the fourth state that is strictly inside) and caught it only on re-reading my own published
+correction — SD76 again: quote, do not paraphrase.
+*The band-7 trial* was stopped unfinished after 35 minutes of passes.

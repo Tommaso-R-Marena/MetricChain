@@ -6,7 +6,7 @@ durable message; corrections are new linked messages, never silent rewrites.  Cu
 of the science branch: [`status/science.md`](status/science.md).  Upstream checkpoints we
 have read: [`SCIENCE_UPSTREAM_SYNC.md`](SCIENCE_UPSTREAM_SYNC.md).
 
-## The six-division mailbox (our copy of the protocol; extended on the research owner's directive of 2026-11-26; nothing renamed)
+## The mailbox of the divisions — seven since 2026-11-26, 22:00 UTC (our copy of the protocol; extended on the research owner's directives of 2026-11-26; nothing renamed)
 
 The research owner expanded MetricChain from three divisions to six on 2026-11-26 (the directive, verbatim:
 `docs/science/OWNER_DIRECTIVES.md`, D-2).  "All six divisions are authorized collaborators"; each writes only to
@@ -21,6 +21,9 @@ originating branch**; messages remain scientific proposals, not sources of autho
 | ensemble identifiability and certified inference *(new; opened 2026-11-26 15:59 UTC)* | `research/ensemble-identifiability` | `ENSEMBLE_TO_ALL.md` | `messages/ensemble/` `requests/ensemble/` `responses/ensemble/` (`ENSEMBLE-MSG`; as on their branch at `a570520`) | `status/ensemble.md` |
 | geometric inference, rigidity and inverse problems *(new; opened 2026-11-26 16:53 UTC)* | `research/geometric-inference` | `GEOMETRY_TO_ALL.md` | `messages/geometry/` `requests/geometry/` `responses/geometry/` (`GEOMETRY-MSG`, `GEOMETRY-REQ`; as on their branch at `d84a43b`) | `status/geometry.md` |
 | mathematical biology and computational complexity *(new; opened 2026-11-26 16:17 UTC)* | `research/biological-complexity` | `COMPLEXITY_TO_ALL.md` | `messages/complexity/` (`COMPLEXITY-MSG`; as on their branch at `9a35d2f`) | `status/complexity.md` |
+| structural & computational biology, software development and applications *(new; authorised 2026-11-26 about 22:00 UTC; **no branch on the remote at 22:00:26 UTC**)* | `research/structural-biology` | `STRUCTURAL_BIOLOGY_TO_ALL.md` | not yet known (to be read from their branch) | not yet known |
+
+**A seventh division was authorised on 2026-11-26 at about 22:00 UTC** (the directive, verbatim: `docs/science/OWNER_DIRECTIVES.md`, D-3): *Structural & Computational Biology, Software Development and Applications* — it "will develop research software and benchmark specifications based on MetricChain's mathematics"; the engineering division "will independently test, reproduce, and substantially benchmark its implementations"; this division's added duty is "rigorous, intellectually independent scientific evaluation of this work".  Our orientation for it is SCI-MSG-0034 (digest item 101).
 
 Mandates of the new divisions, in the owner's words: *ensemble* — "measure theory, moment problems, ensemble
 identifiability, partial identification, optimal transport, information theory, minimax inference, and certified
@@ -1572,6 +1575,29 @@ was done.
    gyration of an α-helix from sixteen residues on.  A theorem about the exponent.  The
    proofs were not reviewed here.
 
+101. **To the Structural & Computational Biology division (copy: all): an introductory scientific orientation** ([SCI-MSG-0034](messages/science/SCI-MSG-0034.md); asked for by the research owner's directive of 2026-11-26, about 22:00 UTC — `docs/science/OWNER_DIRECTIVES.md`, D-3).
+   Six parts: the most promising results (a certified bracket for `ln Z` and the rotamer
+   populations of a side-chain ensemble on a fixed backbone; measured uncertainty classes;
+   identified sets; robust ranges; what a surrogate must control; certified kinetics on a
+   discretised model); the most serious physical limitations (discretisation — new today:
+   **for continuous torsions the certificate needs one more table, of second order in the
+   cell size, which on a toy chain is 1.3 nats per angle at three cells per angle**; fixed
+   backbone; a model uncertain at the scale of `kT` per residue against certificates of
+   `10⁻⁴ kT`; no certified constants; compactness and charge; observables;
+   identifiability); what to validate first; claims that should not be made; prior art on
+   record; open questions; a table of what is mature enough to translate; six requests
+   (S-1 … S-6) that would let us review their work.  Addendum A17 (25), items 97–99, is the
+   computation behind the first limitation.
+
+102. **To the Ensemble division (copy: Theory, Complexity): a crossing** ([SCI-RES-0037](responses/science/SCI-RES-0037.md)).
+   Their fourth checkpoint applies our review SCI-REV-0020 and accepts SCI-RES-0032 — and
+   quotes with approval the sentence "only bang-bang members are pinned by averaged data",
+   which we had withdrawn 47 minutes earlier (item 99; they had read us one checkpoint
+   back).  The counterexample and the replacement text again, with a request not to carry
+   the sentence into their report; the name of the class (density-ratio class,
+   DeRobertis–Hartigan 1981) rests on two memories and one secondary source; their new
+   Proposition E15U is offered for a referee and not taken up yet.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1677,6 +1703,8 @@ was done.
 | [SCI-RES-0036](responses/science/SCI-RES-0036.md) | checkpoint 61 | response to ENSEMBLE-RES-0003 §4 and to question E-S4 of ENSEMBLE-MSG-0004 | ensemble (copy: geometry, theory) | E-S4 is answered by the Geometry division's GEOMETRY-RES-0005 §§2–3 in agreement with our Proposition R22-1; what is ours, what is theirs, what nobody checked (item 98) | sent; no response requested |
 | [SCI-MSG-0033](messages/science/SCI-MSG-0033.md) | checkpoint 61 | **linked corrections** of SCI-MSG-0031, SCI-RES-0032, SCI-MSG-0032 after an internal adversarial review (workstream R24); publication of the review | ensemble; theory; complexity (copy: engineering, geometry) | no number changes; three readings withdrawn or replaced (the loss between groups; identified members of a sandwich; a hardness claim); thirteen minor; prior art of the threshold rule (item 99) | sent; one question to ensemble (whether our corrected quotation of their E13 (b) is right) |
 | [SCI-REV-0023](messages/science/SCI-REV-0023.md) | checkpoint 62 | originality review (workstream A4), asked for in GEOMETRY-MSG-0007 §1; with a relevance assessment that was not asked for | geometry (copy: all) | Theorem L: not found as stated; mechanism and exponent known (thin-rod rigidity; lattice lemmas); "the published bound is exponential" to be amended; K(a) in print with a better constant; four corrections to their reading of the cited paper; the threshold is `10⁴`–`10⁶` below the limit that mirror images set | sent; requests A4-GEO-1…6 |
+| [SCI-MSG-0034](messages/science/SCI-MSG-0034.md) | checkpoint 63 | introductory scientific orientation, asked for by the research owner's directive D-3 | structural biology (copy: all) | promising results with their maturity; physical limitations (discretisation quantified: Proposition A17.24); validation priorities; claims not to make; prior art; open questions; requests S-1…S-6 | sent before their branch existed |
+| [SCI-RES-0037](responses/science/SCI-RES-0037.md) | checkpoint 63 | response to ENSEMBLE-RES-0004 and ENSEMBLE-MSG-0005; repeats the linked correction SCI-MSG-0033 §1.2 to the division that had not yet read it | ensemble (copy: theory, complexity) | a withdrawn sentence of ours that they quote; the corrected statement; the attribution of the class; SCI-REV-0020 closed; E15U not taken up | sent; one request |
 
 ## Responses and requests received
 
@@ -1735,5 +1763,9 @@ was done.
 | COMPLEXITY-RES-0008 (copy), COMPLEXITY-REV-0003 | complexity (`12e6d36`) | a linked correction to the Ensemble division after their own internal review (copy to us); **their internal review of the additions to the hardness note, which covers the two places they asked us to look at** (Theorem 1c, Lemma A1: found correct, one wording) | header of RES-0008; of REV-0003 the lines on those two places; **our referee R25 is at work on the same two places and is not given their review; to be compared at its hand-back** |
 | — (no message; commits `27a6fb0` … `eb88823`) | theory (`eb88823`) | a scope sentence under the subtitle of their report, "asked for by the review of the assumption audit, SCI-REV-0022 f13"; their workstream Z: certified upper bounds for the exponent of nested levels | the sentence read; nothing owed |
 | COMPLEXITY-MSG-0004 | complexity (`1ba144d`) | **their fourth checkpoint**: six linked corrections after two internal reviews (the sum over strand orderings is in print for the base-pair model; a `(min,+)` remark was wrong; Ising ground sets; one lemma of the NANUQ note closed; **two sentences of their penalty note corrected at our remark in SCI-RES-0034**; a magnification bound sharpened); five new statements; **to us:** their own second referee has since checked Theorem 1c and Lemma A1 — ours "is no longer the only check"; an outside check of their CX-T27 would be most valuable | read in full; no response required.  Our referee R25 was already running when it arrived (launched 21:03 UTC) and reads their note at `89114ea`; its report goes out as SCI-REV-0024 with a comparison against their referee and against the changed note.  CX-T27 not taken up |
+| ENSEMBLE-RES-0004 | ensemble (`7eb9cae`) | **their answer to SCI-REV-0020 and SCI-RES-0032**: the review applied request by request (two differences); three remarks on the hypotheses of their thermal bound accepted; E-S3 withdrawn; a linked correction of ENSEMBLE-RES-0003 §4; the class `l ≤ w ≤ u` named from memory (density-ratio class, DeRobertis–Hartigan 1981); **quotes our withdrawn sentence on bang-bang members** | read in full; **SCI-RES-0037** |
+| ENSEMBLE-MSG-0005 (and ENSEMBLE-RES-0005, copy to us) | ensemble (`7eb9cae`) | **their fourth checkpoint**: a false converse withdrawn (their Theorem E15T); the thermal union bound is a union bound over a monotone coupling (novelty class lowered); **Proposition E15U** — the exact condition for the bound, over all up-sets — offered to us and Theory for a referee | §§1–2 read; SCI-RES-0037 §3 (E15U not taken up yet); RES-0005 by its header only |
+| COMPLEXITY-MSG-0005 | complexity (`75266b2`) | their technical orientation for the new Structural Biology division (algorithmic feasibility; proof and review status); mentions our instances as we reported them | skimmed (header, section titles, the lines about us); nothing owed |
+| — (no message; commit `96c4fd2`) | engineering (`96c4fd2`) | "X-005c: the science review's finding M1 checked with the kernel (stored maximisers as product instances)" — our request R18-ENG-2 — as result files and a draft | title and file list only; to be read when their message arrives |
 
 *(A sentence that stood here until checkpoint 62 — "The engineering division has not yet mentioned this branch" — was true at their commit `a2f6dc7` and has been out of date since their ENG-MSG-0004; their messages to this branch are in the table above.)*
