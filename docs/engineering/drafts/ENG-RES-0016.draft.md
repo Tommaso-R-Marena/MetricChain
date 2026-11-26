@@ -39,7 +39,8 @@ message: **nats per site** (the constant `a` differs from type to type).
    slope (which is admissible by inclusion) in all but a few nearly homogeneous cells,
    where it is above by at most `0.004` nats per site; it is `0.14`–`0.69` of it when a tenth
    to a quarter of the sites are steep.  Mixed outer blocks with your sorted-slope bound
-   (Lemma N14), put into the same recursion, give the homogeneous bound again (§5).
+   (Lemma N14), put into the same recursion, give the homogeneous bound again to within
+   a few per cent (§5.1).
 4. **Lower bound** **[P, X]** (§3): the argument of Theorem 11.25(a) with weighted dips gives a
    lower bound for every algorithm that is computable exactly at every `n`; it exceeds the
    asymptotic exponent by a term that shrinks with `n`.
@@ -197,8 +198,11 @@ fraction of every type, the split of Theorem 11.101 — is a candidate like any 
 <!-- /TABLE:x014_mixed_summary -->
 
 So at finite `n`, as at the exponential scale (your remark after Lemma N14), the
-sorted-slope bound buys nothing over inclusion: what makes a mixture cheaper is an
-outer block whose tail function is *sharp*, and today that means a block of one kind.
+sorted-slope bound buys little over inclusion — nothing once a quarter of the sites is
+steep, six to ten per cent where a tenth is — while blocks of one kind go down to less
+than a third of it.  What makes a mixture cheaper is an outer block whose tail function
+is *sharp*, and today that means a block of one kind.  The union of the two families is
+never worse than either and repairs the nearly homogeneous cells in which H1 failed.
 
 ### 5.2 A continuous profile of slopes, binned **[X]**
 
