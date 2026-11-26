@@ -53,12 +53,14 @@ every conformation obeys the same local constraints (bond lengths, bond angles)?
    measured pairs certifies identifiability (Theorem F) — for `K = 1` this is the classical
    sufficient condition for universal rigidity.
 7. **A new rigidity notion between global and universal rigidity** (§8, Theorem E):
-   *ensemble rigidity*.  Universal rigidity ⇒ ensemble rigidity ⇒ global rigidity; the
+   *second-moment rigidity*.  Universal rigidity ⇒ second-moment rigidity ⇒ global rigidity; the
    second implication is strict (a rigid conformation whose averaged data are reproduced
    exactly by a two-state ensemble of other conformations); for chains with at most 6 atoms
    the first is an equivalence, because there every Hilbert-space chain is an ensemble
    average of chains in `ℝ³` (Theorem D); from 7 atoms on the set of realizable averaged data
-   is strictly smaller than its semidefinite relaxation [P, exact witness].
+   is strictly smaller than its semidefinite relaxation [P, exact witness], and the first
+   implication is strict as well — a 7-atom chain that is second-moment rigid although a
+   four-dimensional framework has the same measured lengths [N].
 8. **How little data suffices** (§5.3–5.5): within the family of `K`-state ensembles, complete
    averaged data are generically locally identifying exactly from the parameter count
    `n ≥ 2K + 3` on, and averaged distances of sequence separation at most `K + 3` are
@@ -483,6 +485,53 @@ more than the `⌊9K/2⌋` present), and we have only numerical evidence: for `K
 one-parameter family of further chains at `n = 13` and none at `n = 14, 15`
 (`explore_misc.py k3`).
 
+### 5.6 Laws instead of means (with the Ensemble Identifiability Division's Theorem E5)
+
+The Ensemble division proves (its report, Theorem E5 and Corollary E6; unrefereed; we
+re-derived the proof): if the algebraic matroid of a polynomial feature map is connected and
+no feature is constant, a generic finite ensemble — any number of states — is determined,
+among all Borel probability measures, by the one-dimensional **laws** of the features, up to
+the fibres of the feature map; if the matroid is not connected there are *chimeras*.  The
+proof uses only that images of irreducible varieties are irreducible and that the Jacobian
+of a splice is block diagonal, so it applies to the chain variety, which is parametrised
+rationally by the half-angle tangents of the torsions; the matroid is then that of the
+squared distances as functions of the torsions (for generic bond data: the contraction of
+the rigidity matroid by the constrained edges).
+
+**Theorem J [P, given E5/E6 of the Ensemble division].**  Chains with fixed bond lengths and
+non-degenerate bond angles, `n ≥ 5`.
+(a) The matroid of the squared distances of sequence separations 3 and 4 is connected, and
+these distances determine a generic chain up to congruence.  Hence a generic finite
+ensemble of chains, with any number of states and any weights, is determined modulo
+congruence, among all ensembles of chains, by the laws of the distances `d_{i,i+3}` and
+`d_{i,i+4}`.
+(b) For a single separation `s ≥ 3` the squared distances `d_{i,i+s}` are algebraically
+independent functions of the torsions: the matroid is free, there are chimeras, and no
+ensemble with two or more generic states is determined by the laws of these distances.
+
+*Proof.*  (a) `d²_{i,i+3} = A_i − B_i cos θ_i` with `B_i ≠ 0`: the `n − 3` features `b_i = (i, i+3)`
+form a basis.  `e_i = (i, i+4)` depends on `θ_i` and `θ_{i+1}` only, and on each of them (the
+torsion `θ_i` moves atom `i` alone relative to the others, and atom `i + 4` is off its axis
+for generic `θ_{i+1}`; symmetrically for `θ_{i+1}`); so `B − b_i + e_i` and `B − b_{i+1} + e_i` are
+bases (triangular Jacobians) and the fundamental circuit of `e_i` is `{e_i, b_i, b_{i+1}}`.  The
+fundamental graph is the path `b_1 − e_1 − b_2 − ⋯ − b_{n−3}`, connected; a matroid whose
+fundamental graph with respect to one basis is connected is connected.  Injectivity:
+`d_{i,i+3}` gives `|θ_i|` and `d_{i,i+4}` the relative sign of `θ_i` and `θ_{i+1}`.
+(b) `d²_{i,i+s}` depends on the torsions `θ_i, …, θ_{i+s−3}` and, generically, on `θ_i`; the
+Jacobian of the `n − s` features with respect to `θ_1, …, θ_{n−s}` is triangular with non-zero
+diagonal.  E5(b) gives the chimeras.  ∎
+
+`experiments/geometry/matroid_connectivity.py` decides connectivity for other patterns by an
+exact computation (the matroid of a rational witness modulo a prime is a weak image of the
+generic one, so "connected of full rank" and "free" at the witness are proofs): at `n = 12`
+every pair of separations among `3, …, 7` that we tried is connected, as are all pairs,
+`n` or more random pairs, and "separation 3 plus the end-to-end distance"; single
+separations, the distances from one end, and `n − 3` random pairs are free.
+
+**Means against laws.**  For averaged squared distances the necessary sequence separation
+grows with the number of states (`K + 3`, Theorem H); for the laws of the distances
+separation 4 suffices for every `K`.  The price of a mean is exactly the dependence on `K`.
+
 ---
 
 ## 6. A demixing algorithm with a certificate
@@ -551,7 +600,7 @@ Let `d_P(X, Y) = min_g ‖X − gY‖_F` (minimum over isometries; `√n ·` RMS
 superposition) and let `W₂` be the 2-Wasserstein distance between shape distributions with
 respect to `d_P`.
 
-**Theorem G (global quantitative ensemble rigidity) [P].**  Let `μ = Σ w_k δ_{X_k}` satisfy
+**Theorem G (global quantitative rigidity of ensembles) [P].**  Let `μ = Σ w_k δ_{X_k}` satisfy
 (CC) on a conformation space that is a smooth manifold near each `X_k` (chains with
 non-degenerate bond angles), with `n − 1 > dK`.  Let `Π^⊥` be the orthogonal projection of
 `ℝ^n` onto the orthogonal complement of `span(𝟙, columns of z)` and
@@ -607,7 +656,7 @@ over `𝒞` (not attempted; `PROOF_OBLIGATIONS.md`, O-5).
 
 ---
 
-## 8. Realizability of averaged data, and ensemble rigidity
+## 8. Realizability of averaged data, and second-moment rigidity
 
 ### 8.1 The set of realizable averaged data and its semidefinite relaxation
 
@@ -645,30 +694,37 @@ contribution.  For a general pair set `F` deciding membership in the projection 
 NP-hard already for star-shaped statewise constraints, by the theorem of E.-Nagy, Laurent and
 Varvitsiotis on the convex hull of the rank-constrained elliptope (§9).
 
-### 8.2 Ensemble rigidity
+### 8.2 Second-moment rigidity
 
-Let `F` be a set of pairs.  A conformation `X ∈ 𝒞` is **`F`-ensemble-rigid** if `δ_X` is
+*Terminology.*  The Ensemble Identifiability Division calls a graph *ensemble rigid* when
+generic finite ensembles of its frameworks are determined by the **laws** of the edge lengths,
+and proves that this is generic global rigidity (its Theorem E7).  The notion below asks for
+more — determination by the **means** of the squared lengths, on a conformation space with
+statewise constraints — and we call it *second-moment rigidity* (our first checkpoint said
+"ensemble rigidity"; renamed to avoid the clash, GEOMETRY-RES-0001).
+
+Let `F` be a set of pairs.  A conformation `X ∈ 𝒞` is **`F`-second-moment rigid** if `δ_X` is
 identifiable from the averaged squared distances on `F`: no ensemble of conformations other
 than copies of `X` reproduces `D(X)` on `F`.  Recall that the bar framework `(F ∪ E₀, X)` is
 *globally rigid* if every configuration in `ℝ^d` with the same lengths on `F ∪ E₀` is
 congruent to `X`, and *universally rigid* if this holds in every dimension.
 
 **Theorem E (a hierarchy) [P; for finite mixtures the reduction step of (a) and the first
-half of (b) are V: `MetricChain.Geometry.ensembleRigid_of_universal`,
-`MetricChain.Geometry.globallyRigid_of_ensembleRigid`].**
+half of (b) are V: `MetricChain.Geometry.secondMomentRigid_of_universal`,
+`MetricChain.Geometry.globallyRigid_of_secondMomentRigid`].**
 Let `X ∈ 𝒞` span `ℝ^d` affinely.
-(a) If `(F ∪ E₀, X)` is universally rigid and `𝒩(X) = 0`, then `X` is `F`-ensemble-rigid.
-(b) If `X` is `F`-ensemble-rigid, then `(F ∪ E₀, X)` is globally rigid and `𝒩(X) = 0`.
-(c) If `𝒦 = 𝒮` (Theorem D(a): e.g. chains with `n ≤ 6`), then `X` is `F`-ensemble-rigid iff
+(a) If `(F ∪ E₀, X)` is universally rigid and `𝒩(X) = 0`, then `X` is `F`-second-moment rigid.
+(b) If `X` is `F`-second-moment rigid, then `(F ∪ E₀, X)` is globally rigid and `𝒩(X) = 0`.
+(c) If `𝒦 = 𝒮` (Theorem D(a): e.g. chains with `n ≤ 6`), then `X` is `F`-second-moment rigid iff
 `(F ∪ E₀, X)` is universally rigid and `𝒩(X) = 0`.
 (d) The converse of (b) fails: there are globally rigid chains with `𝒩(X) = 0` that are not
-`F`-ensemble-rigid.
+`F`-second-moment rigid.
 
 *Proof.*  (a) The Hilbert configuration of a competing `ν` has the lengths of `X` on
 `F ∪ E₀`, so it is congruent to `X`, `M(ν) = D(X)`, and Theorem A applies.  (b) A configuration
 with the same lengths is a one-state ensemble; and if `0 ≠ S ∈ 𝒩(X)`, the mixture of the two
 affine images `X_±` of Theorem A has the same averaged data on all pairs.  (c) If `X` is
-`F`-ensemble-rigid and `y` is a Hilbert-space configuration with the lengths of `X` on
+`F`-second-moment rigid and `y` is a Hilbert-space configuration with the lengths of `X` on
 `F ∪ E₀`, then `D(y) ∈ 𝒮 = 𝒦` is the averaged data of an ensemble of conformations, which
 agrees with `X` on `F`; so that ensemble is `δ_{[X]}` and `D(y) = D(X)`.  (d) By (c): take
 `n = 6` and `F` such that `(F ∪ E₀, X)` is globally but not universally rigid — a generic
@@ -678,13 +734,26 @@ with `F = {14, 25, 36, 16}` and a two-state ensemble of other chains with the sa
 data, computed to 12 digits, is in `experiments/geometry/hierarchy_example.py` **[N for the
 instance]**.  ∎
 
-**Open (O-3).**  Is the first implication strict when `𝒦 ≠ 𝒮` — is there an
-`F`-ensemble-rigid conformation whose framework is not universally rigid?  A sufficient
-condition for `F`-ensemble-rigidity that does not imply universal rigidity: `X` is the unique
-maximiser over `𝒞` (conformations in `ℝ^d`) of `Σ_{ij ∈ F} c_ij |x_i − x_j|²` for some
-couplings `c` — then `D(X)|_F` is an exposed point of the realizable set.  Universal rigidity
-asks for the same in every dimension.  A numerical search over 7-atom chains is recorded in
-`RESEARCH_LOG.md`; no certified example yet.
+**Second-moment rigidity is strictly weaker than universal rigidity [N; O-3].**  A sufficient
+condition for `F`-second-moment rigidity that does not involve other dimensions: `X` is the
+unique maximiser over `𝒞` (conformations in `ℝ^d`) of `H_c = Σ_{ij ∈ F} c_ij |x_i − x_j|²` for
+some couplings `c` — then `D(X)|_F` is an exposed point of the realizable set, and any ensemble
+with the averaged data of `X` on `F` has mean `H_c` equal to the maximum.  Universal rigidity
+asks for a maximiser in every dimension (a positive semidefinite stress).  For a 7-atom chain
+with five measured pairs the stress `ω` of `(F ∪ E₀, X)` is unique up to scale, `X` is critical
+for `c = ±ω|_F`, and the constrained Hessian on the four flexes is `±2 tr(VᵀΩV)`: `X` is a
+strict local maximiser in `ℝ³` whenever this form is definite on the flexes, also when `Ω` is
+indefinite on `ℝ⁷`.  A search over 15 000 random instances
+(`experiments/geometry/explore_er3.py`) finds such strict local maximisers with indefinite
+stress in about 2 % of them, and about one in fifteen of these is a global maximiser.
+Instance A of `er_not_ur_instance.py` (torsions `1.5174, −1.0463, 2.7120, −1.6744`;
+`F = {15, 16, 25, 27, 37}`): stress eigenvalues `−1, −0.523, +0.071` (normalised), flex
+Hessian negative definite, `H_c(X) = 1.17018` against at most `1.16769` on a grid of `24⁴`
+points and `1.15499` for the best other local maximum in 2 000 searches, and a framework in
+`ℝ⁴` with the lengths of `X` on `F ∪ E₀` to `10⁻¹⁵` and singular values
+`2.89, 1.61, 0.85, 0.15`.  So, numerically, `X` is second-moment rigid on `F` and not
+universally rigid.  What is missing for a theorem is a certified global maximum on the
+4-torus (margin `0.015`, smallest curvature `0.006`): requested in GEOMETRY-REQ-0006.
 
 ---
 
@@ -720,11 +789,30 @@ asks for the same in every dimension.  A numerical search over 7-atom chains is 
   generic semi-algebraic priors) for multi-reference alignment.  Our Corollary 9.1 is an
   instance with a specific, non-generic prior and a mixture.  **[K, related]**
 
+*Relation to the Ensemble Identifiability Division's first checkpoint* (branch
+`research/ensemble-identifiability`, commit `a570520`, 2026-11-26 16:48 UTC — forty minutes
+before our first commit; read by us at 18:30 UTC, after our second).
+* Its Theorem E1 (an ensemble is determined by means of observables iff its support is the
+  ground-state set of an energy in their span, with affinely independent features) is the
+  general principle of which our Corollary 4.2 and Theorem G(a) are instances; our
+  certificate `φ(X) = ‖Π^⊥X‖²` is the chain counterpart of its `‖P^⊥x‖²` for pair
+  correlations on the cube (its Theorem E10).  The two were found independently on the same
+  afternoon; the priority of the general statement is theirs.
+* Its Corollary E1.3 — mean squared edge lengths determine no ensemble of frameworks, by a
+  random rescaling — is Proposition 3.1 with another construction, on the **unconstrained**
+  configuration space.  Theorems A, B and I are the statement that the conclusion reverses
+  as soon as every state obeys statewise constraints: on a chain variety the mean squared
+  distances do determine generic single conformations (`n ≥ 5`) and generic mixtures.
+* Its Theorem E7 (determination by the *laws* of the edge lengths = generic global rigidity)
+  and our Theorem E (determination by the *means* of the squared lengths lies between global
+  and universal rigidity) fit together: laws ⇔ global rigidity; means ⇒ global rigidity,
+  ⇐ universal rigidity, and neither converse holds on chains.
+
 *Not found in print (searches of 2026-11-26; an absence in searches is not a proof of
 novelty).*  Theorem B and B′ (identifiability of a mixture among all ensembles from averaged
 squared distances via the trivial-quadric condition); the thresholds of Theorem C; the
 algorithm DEMIX; Theorem G (global `W₂` stability with the explicit certificate); Theorem F for
-`K ≥ 2`; ensemble rigidity as a notion between global and universal rigidity, Theorem E;
+`K ≥ 2`; second-moment rigidity as a notion between global and universal rigidity, Theorem E;
 Theorem D for chains with bond angles and the exact rank-4 witness; Theorem H (range `K + 3`); Theorem I and the separation of the three thresholds for two states.
 
 **Corollary 9.1 (a consequence for reconstruction with unknown orientations) [P, given K].**
@@ -753,9 +841,9 @@ now walks 5 0xx declarations — the exact number is in `docs/collaboration/stat
 | `stress_certificate` | `Ω ⪰ 0`, zero row sums, annihilating a reference mixture; a second finite mixture with the same averaged squared distances on the support of `Ω` has every coordinate of every state of positive weight in `ker Ω` | Theorem F (first half of the proof) |
 | `block_coeff_nonneg`, `block_rigidity` | a linear map into a space of dimension `≤ d` whose squared norm is `c₁‖u‖² + c₂‖u'‖²` on two orthogonal blocks of dimension `d ≥ 1` has `c₁ = 0` or `c₂ = 0` (and `c_k ≥ 0`) | Theorems B, F, G ("one block only") |
 | `sqdist_midpoint_of_conic` | affine flexes: maps `A_±` preserving edge lengths with the midpoint identity | Theorem A (iii)⇒(ii), Theorem E(b) |
-| `globallyRigid_of_ensembleRigid` | ensemble rigidity (finite mixtures) implies global rigidity on `F ∪ E₀` | Theorem E(b) |
-| `ensembleRigid_of_universal` | universal rigidity of `(F ∪ E₀, x)` reduces `F`-ensemble rigidity to ensemble rigidity for complete averaged data | Theorem E(a) |
-| `fourAtom_not_ensembleRigid_witness`, `block_rigidity_nonvacuous` | non-vacuity | Example 3.3 |
+| `globallyRigid_of_secondMomentRigid` | second-moment rigidity (finite mixtures) implies global rigidity on `F ∪ E₀` | Theorem E(b) |
+| `secondMomentRigid_of_universal` | universal rigidity of `(F ∪ E₀, x)` reduces `F`-second-moment rigidity to second-moment rigidity for complete averaged data | Theorem E(a) |
+| `fourAtom_virtual_value_witness`, `block_rigidity_nonvacuous` | non-vacuity | Example 3.3 |
 
 Not machine-checked: Lemma 2.2 (the linear isometry from equal Gram matrices; the measurable
 version), the conclusion of Theorem A (ii)⇒(i) and of Theorem B from `block_rigidity`
@@ -777,6 +865,8 @@ python3 experiments/geometry/exact_nonlinear_threshold.py 10 0 0   # Theorem I (
 python3 experiments/geometry/explore_below.py 7 8 9  # two states below the threshold [N]
 python3 experiments/geometry/demix.py                # algorithm DEMIX on synthetic ensembles
 python3 experiments/geometry/hierarchy_example.py    # Theorem E(d), numerical instance
+python3 experiments/geometry/er_not_ur_instance.py A # second-moment rigid, not universally rigid [N; 3 minutes]
+python3 experiments/geometry/matroid_connectivity.py 12   # Theorem J and the table of patterns (exact)
 python3 experiments/geometry/mutation_checks.py      # the tests detect planted errors
 ```
 

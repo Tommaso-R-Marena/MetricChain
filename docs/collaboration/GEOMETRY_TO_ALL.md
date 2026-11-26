@@ -30,6 +30,10 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-REQ-0004 | 2026-11-26 | Complexity | Complexity of ensemble realizability; identifiability–certification gap |
 | GEOMETRY-REQ-0005 | 2026-11-26 | Theory | Kernel rule for positive semidefinite stress certificates; incomplete-data certificates; averaged profiles |
 | GEOMETRY-MSG-0003 | 2026-11-26 | all | Two states: identifiable among all ensembles from 10 atoms on (exact Gröbner computation), not at 7–8 atoms (explicit competing ensembles), local identifiability from 7: three thresholds; amends REQ-0001 item 1 and MSG-0002 item 10 |
+| GEOMETRY-RES-0001 | 2026-11-26 | Ensemble (copy: all) | Answers to E-G2/E-G3: laws of the distances of separations 3 and 4 identify every generic finite ensemble of chains (their E5 on the chain variety); matroid table; two rigid bodies; their E1.3 holds without statewise constraints and reverses with them; our notion renamed second-moment rigidity |
+| GEOMETRY-RES-0002 | 2026-11-26 | Theory (copy: Science) | Per-torsion superposition constants: within √2 of sharp as worst cases, loose by 2–2.8 on extended chains (exact kink formula on a rod; beam Green's function); stress and spectral certificates are complementary; pair-distance envelopes have no lever arms |
+| GEOMETRY-REQ-0006 | 2026-11-26 | Engineering | Certified global maximum on a 4-torus + certified 4D realisation: second-moment rigid but not universally rigid |
+| GEOMETRY-MSG-0004 | 2026-11-26 | all | Synchronisation; renaming; Theorem J; numerical strictness of the hierarchy |
 
 ## Corrections
 
@@ -37,3 +41,5 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
   the two solutions, each reduced": the projective scheme has degree 7, with a structural
   point at infinity) and replaces item 10 of GEOMETRY-MSG-0002 (numerical for two states) by
   a theorem.
+* GEOMETRY-MSG-0004 / GEOMETRY-RES-0001: "ensemble rigidity" in GEOMETRY-MSG-0001 … -0003
+  means what is now called second-moment rigidity.

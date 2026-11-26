@@ -29,13 +29,17 @@ six instances although further chains exist — is it generic, and is there a pr
 (d) An independent replication of the degree-7 computation with another system
 (GEOMETRY-REQ-0001, item 1, as amended by GEOMETRY-MSG-0003).
 
-**O-3.  Is ensemble rigidity strictly weaker than universal rigidity (Theorem E, open
-part)?**  Needed: a 7-atom chain `X`, a pair set `F` and couplings `c` on `F` such that (i) `X`
-is the unique maximiser over the 4-torus of torsions of `Σ_F c_ij |x_i − x_j|²` — a certified
-global optimum; (ii) the stress matrix of the Lagrange multipliers is not positive
-semidefinite and the stress space of `(F ∪ E₀, X)` is one-dimensional.  (i) is an interval
-branch-and-bound in four variables.  Requested (GEOMETRY-REQ-0001, item 2) once a numerical
-candidate exists; the search is `experiments/geometry/explore_er2.py`.
+**O-3.  Second-moment rigidity is strictly weaker than universal rigidity: a certificate.**
+Numerical instances exist (`er_not_ur_instance.py`, candidates A and B; report §8.2).
+Needed for a theorem: (i) a certified statement that instance A is the unique maximiser, up
+to the mirror image, of `H_c` over the 4-torus of torsions — interval branch-and-bound with a
+second-order exclusion test near the maximiser (margin to the next local maximum `0.015`,
+smallest Hessian eigenvalue `0.0064` in normalised units, so the certified neighbourhood is
+small and the cost is in the shells around it); (ii) a certified four-dimensional realisation
+(an interval Newton step on the 16 length equations).  Requested from the Computational
+Research Division: GEOMETRY-REQ-0006.  An instance with a larger margin and curvature would
+be cheaper to certify; `explore_er3.py` produces candidates at a rate of about one per
+thousand random instances.
 
 **O-4.  Sequence-local data among all ensembles.**  Proved: separation `3K + 1` suffices
 (Theorem F′); `K + 3` is necessary and locally sufficient within `K`-state ensembles (Theorem

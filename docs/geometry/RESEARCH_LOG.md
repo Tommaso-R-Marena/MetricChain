@@ -13,13 +13,13 @@ State at the end of cycle 1 (see `HANDOFF.md` for commands and environment):
    rigidity between global and universal rigidity; realizable set versus its semidefinite
    relaxation; range `K + 3`).  Register: `THEOREM_REGISTER.md`.
 2. **Open, in priority order** (`PROOF_OBLIGATIONS.md`): the findings of the internal review
-   GEOMETRY-REV-0001 when it arrives; O-3 (a certified ensemble-rigid, not universally rigid
+   GEOMETRY-REV-0001 when it arrives; O-3 (a certified second-moment rigid, not universally rigid
    example), O-1 (sharp conic threshold for every `K`), O-7 (Lean: Lemma 2.2 and Theorem B
    end to end), O-2(a)–(c) (three states; `n = 9`; a proof of non-identifiability at
    `n = 7, 8`), O-4 (range between `K + 3` and `3K + 1`).
-3. **Waiting for:** answers to GEOMETRY-REQ-0001 … -0005 (no other division had read this
-   branch when they were written; the branches of the Ensemble Identifiability and Biological
-   Complexity divisions did not exist at 2026-11-26 15:40 UTC).
+3. **Waiting for:** the internal review GEOMETRY-REV-0001; answers to GEOMETRY-REQ-0001 …
+   -0006 and to GEOMETRY-RES-0001 (a), (b).  Next synchronisation: fetch all five branches
+   and look for `GEOMETRY` in their `docs/collaboration/`.
 4. **Next cycle (planned, not started):** single-conformation quantitative rigidity for chains
    — (a) the screw/interval structure of the torsion-space rigidity matrix,
    `M_{e,k} = [k ∈ span(e)]·⟨ℓ_e, h_k⟩` (reciprocal product of the Plücker coordinates of bar
@@ -28,6 +28,35 @@ State at the end of cycle 1 (see `HANDOFF.md` for commands and environment):
    noise-versus-measurement-count trade-off for torsion-sign recovery (DMDGP with interval
    data); (d) averaged observables other than squared distances — which statements survive
    for `⟨f(d_ij)⟩` (none of the stacking survives; what does?).
+
+## 2026-11-26, cycle 1, third checkpoint (18:30–20:50 UTC)
+
+**Synchronisation.**  All five other branches fetched at 18:30 UTC (theory `f0e5a62`,
+engineering `eb6b872`, science `5c233cc`, ensemble `a570520`, complexity `4b18ebb`).  The
+Ensemble division's first checkpoint (16:48 UTC) overlaps ours in subject and not in
+content: its E1 (exposedness) is the general principle behind our certificate; its E1.3
+(mean squared lengths determine nothing) is our Proposition 3.1, on the unconstrained
+space; its E7 calls "ensemble rigidity" what is equivalent to global rigidity.  We renamed
+ours **second-moment rigidity** (Lean, report, registers; `DEAD_ENDS.md` DG-11).
+
+**Theorem J.**  Their E5/E6 applied to the chain variety: the laws of the distances of
+separations 3 and 4 determine every generic finite ensemble of chains.  Exact matroid
+computations for other patterns and for two rigid bodies (`matroid_connectivity.py`).
+
+**O-3, numerically settled.**  The direct search (random couplings) had found nothing in
+30 minutes.  The inverse construction — random chain and five random pairs, the unique
+stress, definiteness of `tr(VᵀΩV)` on the flexes, then global optimisation — finds strict
+local maximisers with indefinite stress in 2 % of random instances and global ones in
+about 0.15 % (`explore_er3.py`).  Instances A and B verified with a `24⁴` grid, 2 000 local
+searches and an explicit four-dimensional realisation (`er_not_ur_instance.py`).  Request
+for a certificate: GEOMETRY-REQ-0006.
+
+**For the theory division (GEOMETRY-RES-0002).**  Exact small-angle Kabsch cost of a kink
+on a rod, `I_red φ²(1 − 3x(1−x))`: a quarter of the coaxial cost at mid-chain (discrete
+chains: 0.2500 at `n = 600`).  Worst conformations: the verified constants are attained up
+to 1.22 at `m = 8`.  Free–free beam Green's function as the exact quadratic form.
+
+Harness: 27 tests, 15 mutations.  Lean rebuilt after the renaming: 5071 declarations.
 
 ## 2026-11-26, cycle 1, second checkpoint (after 17:30 UTC)
 
@@ -87,7 +116,7 @@ higher dimension and the chain constraints do something non-trivial there.
 5. `K = 1`: the conic criterion is the classical affine-flex lemma read for ensembles.
    The set of realizable averaged data against its semidefinite relaxation: equal up to 6
    atoms (Barvinok–Pataki), different from 7 on (exact rank-4 witness with unit quaternions).
-6. Ensemble rigidity between global and universal rigidity; a numerical 6-atom instance of
+6. Second-moment rigidity between global and universal rigidity; a numerical 6-atom instance of
    "globally rigid but averaged data reproduced by two other chains" (to `10⁻¹⁵`).
 7. Local identifiability: complete data from `n = 2K + 3`, sequence separation `K + 3`
    (exact, `K ≤ 8`), with an extension lemma in `n`.
@@ -100,7 +129,7 @@ higher dimension and the chain constraints do something non-trivial there.
     axiom audit: 5071 declarations, standard axioms only, zero warnings.
 11. Prior art (eight searches, summaries only): `PRIOR_ART.md`.
 
-**Search for an ensemble-rigid, not universally rigid chain (O-3).**  7 atoms, 5 random
+**Search for an second-moment rigid, not universally rigid chain (O-3).**  7 atoms, 5 random
 measured pairs, random couplings, global maximiser over the 4-torus by multi-start
 (`explore_er2.py`).  First pass (40 instances, BFGS only): most maximisers have a positive
 semidefinite stress (and many are planar); two apparent candidates were artefacts (DG-6).

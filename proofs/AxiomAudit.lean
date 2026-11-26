@@ -1967,9 +1967,9 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.Geometry.block_coeff_nonneg
 #print axioms MetricChain.Geometry.block_rigidity
 #print axioms MetricChain.Geometry.sqdist_midpoint_of_conic
-#print axioms MetricChain.Geometry.globallyRigid_of_ensembleRigid
-#print axioms MetricChain.Geometry.ensembleRigid_of_universal
-#print axioms MetricChain.Geometry.fourAtom_not_ensembleRigid_witness
+#print axioms MetricChain.Geometry.globallyRigid_of_secondMomentRigid
+#print axioms MetricChain.Geometry.secondMomentRigid_of_universal
+#print axioms MetricChain.Geometry.fourAtom_virtual_value_witness
 #print axioms MetricChain.Geometry.block_rigidity_nonvacuous
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions

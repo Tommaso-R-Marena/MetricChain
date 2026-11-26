@@ -29,10 +29,13 @@ ensembles, genericity, or the thresholds (which are exact computations, see `exp
   matrix `S` vanishes on a set of edge vectors and `1 ± S` are positive semidefinite, there are
   linear maps `A₊, A₋` preserving the lengths of the edge vectors with
   `‖A₊ v‖² + ‖A₋ v‖² = 2 ‖v‖²` for every `v`, and `‖A₊ v‖² - ‖v‖² = v ⬝ᵥ S *ᵥ v`.
-* **The hierarchy** (Theorem E, for finite mixtures): `ensembleRigid_of_universal` (universal
+* **The hierarchy** (Theorem E, for finite mixtures): `secondMomentRigid_of_universal` (universal
   rigidity of the measured-plus-constrained framework reduces averaged data on a set of pairs to
-  averaged data on all pairs) and `globallyRigid_of_ensembleRigid`.
-* **Non-vacuity** (`fourAtom_not_ensembleRigid_witness`): the midpoint of two distinct values of a
+  averaged data on all pairs) and `globallyRigid_of_secondMomentRigid`.  The notion is called
+  *second-moment rigidity* (rigidity under ensemble-averaged squared distances); "ensemble
+  rigidity" is the Ensemble Identifiability Division's name for determination by the *laws* of
+  the edge lengths, a different and weaker requirement on the framework (its Theorem E7).
+* **Non-vacuity** (`fourAtom_virtual_value_witness`): the midpoint of two distinct values of a
   squared distance is attained by a two-state mixture — the four-atom obstruction in its simplest
   algebraic form — and `block_rigidity_nonvacuous`.
 -/
@@ -320,10 +323,10 @@ def UniversallyRigid {E : Type u} [NormedAddCommGroup E] (G : Set (ι × ι)) (x
   ∀ (E' : Type u) [NormedAddCommGroup E'] [InnerProductSpace ℝ E'] (y : ι → E'),
     SameLengths G x y → SameShape x y
 
-/-- `F`-ensemble rigidity for finite mixtures: every finite mixture of configurations of the same
+/-- `F`-second-moment rigidity for finite mixtures: every finite mixture of configurations of the same
 ambient space that satisfy the statewise constraints `E₀` of `x` and reproduce the squared
 distances of `x` on `F` *on average* consists of copies of `x`. -/
-def EnsembleRigid {E : Type u} [NormedAddCommGroup E] (E₀ F : Set (ι × ι)) (x : ι → E) : Prop :=
+def SecondMomentRigid {E : Type u} [NormedAddCommGroup E] (E₀ F : Set (ι × ι)) (x : ι → E) : Prop :=
   ∀ (K : Type u) [Fintype K] (w : K → ℝ) (Y : K → ι → E),
     (∀ k, 0 ≤ w k) → ∑ k, w k = 1 → (∀ k, SameLengths E₀ x (Y k)) →
     (∀ p ∈ F, ∑ k, w k * ‖Y k p.1 - Y k p.2‖ ^ 2 = ‖x p.1 - x p.2‖ ^ 2) →
@@ -331,10 +334,10 @@ def EnsembleRigid {E : Type u} [NormedAddCommGroup E] (E₀ F : Set (ι × ι)) 
 
 variable {E : Type u} [NormedAddCommGroup E]
 
-/-- **Theorem E(b), first half.**  Ensemble rigidity implies global rigidity of the framework on
+/-- **Theorem E(b), first half.**  Second-moment rigidity implies global rigidity of the framework on
 the measured and the constrained pairs: a competing configuration is a one-state ensemble. -/
-theorem globallyRigid_of_ensembleRigid (E₀ F : Set (ι × ι)) (x : ι → E)
-    (h : EnsembleRigid E₀ F x) : GloballyRigid (F ∪ E₀) x := by
+theorem globallyRigid_of_secondMomentRigid (E₀ F : Set (ι × ι)) (x : ι → E)
+    (h : SecondMomentRigid E₀ F x) : GloballyRigid (F ∪ E₀) x := by
   intro y hy
   have := h PUnit (fun _ => 1) (fun _ => y) (fun _ => zero_le_one) (by simp)
     (fun _ p hp => hy p (Or.inr hp))
@@ -343,12 +346,12 @@ theorem globallyRigid_of_ensembleRigid (E₀ F : Set (ι × ι)) (x : ι → E)
 
 /-- **Theorem E(a), the reduction.**  If the framework on the measured and the constrained pairs
 is universally rigid, averaged data on the measured pairs are as good as averaged data on all
-pairs: ensemble rigidity with respect to all pairs implies ensemble rigidity with respect to `F`.
+pairs: second-moment rigidity with respect to all pairs implies second-moment rigidity with respect to `F`.
 (The stacked configuration of a competing mixture has the lengths of `x` on `F ∪ E₀`, hence all its
 distances; so the mixture reproduces all squared distances of `x` on average.) -/
-theorem ensembleRigid_of_universal [InnerProductSpace ℝ E] (E₀ F : Set (ι × ι)) (x : ι → E)
-    (hU : UniversallyRigid (F ∪ E₀) x) (hfull : EnsembleRigid E₀ Set.univ x) :
-    EnsembleRigid E₀ F x := by
+theorem secondMomentRigid_of_universal [InnerProductSpace ℝ E] (E₀ F : Set (ι × ι)) (x : ι → E)
+    (hU : UniversallyRigid (F ∪ E₀) x) (hfull : SecondMomentRigid E₀ Set.univ x) :
+    SecondMomentRigid E₀ F x := by
   intro K _ w Y hw hsum hE₀ hF k hk
   refine hfull K w Y hw hsum hE₀ ?_ k hk
   intro p _
@@ -376,7 +379,7 @@ end Hierarchy
 /-- The four-atom obstruction in its simplest form: any value strictly between two attainable
 squared distances is the average of the two with positive weights — a "virtual" value that no
 single state need have. -/
-theorem fourAtom_not_ensembleRigid_witness (a b t : ℝ) (ht : a < t ∧ t < b) :
+theorem fourAtom_virtual_value_witness (a b t : ℝ) (ht : a < t ∧ t < b) :
     ∃ w₁ w₂ : ℝ, 0 < w₁ ∧ 0 < w₂ ∧ w₁ + w₂ = 1 ∧ w₁ * a + w₂ * b = t := by
   have hne : b - a ≠ 0 := by linarith
   refine ⟨(b - t) / (b - a), (t - a) / (b - a), ?_, ?_, ?_, ?_⟩

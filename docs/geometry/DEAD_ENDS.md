@@ -47,12 +47,13 @@ upper bound (the mixed volume of the Newton boxes of the bar equations in half-a
 and it is not attained: for the 6-atom chain with bars `15, 26, 16` the framework is the
 octahedron graph with 16 realizations, the bound is 24.
 
-**DG-6 (artefact).  First numerical search for a conformation that is ensemble-rigid but not
+**DG-6 (artefact).  First numerical search for a conformation that is second-moment rigid but not
 universally rigid** (7 atoms, 5 measured pairs, maximiser of a quadratic-distance functional
 with an indefinite stress): the two "candidates" had stress matrices of rank 4 and 5, which is
 impossible for a non-planar equilibrium configuration of 7 points (rank at most 3) — the
-optimiser had not converged and the eigenvalue threshold was loose.  The refined search is
-recorded in `RESEARCH_LOG.md`; the question is open (O-3).
+optimiser had not converged and the eigenvalue threshold was loose.  The refined search (random couplings, polished maximisers) found nothing in the time it
+was given; the inverse construction — start from the stress of a random framework and ask
+whether the chain is a maximiser — finds instances at once (`explore_er3.py`; report §8.2).
 
 **DG-7 (implementation).  DEMIX with automatic detection of the number of states under
 noise** failed at noise `10⁻⁴` (the rank of the centred matrix and the nullity of the conic
@@ -85,3 +86,11 @@ within `K` states starts."**  False for two states: at `n = 7, 8` the ensemble i
 only two-state ensemble with its data (Theorem H) and is nevertheless reproduced exactly by
 mixtures of 9 to 11 other chains (`explore_below.py`).  The number of states is a prior with
 real content in that range.
+
+**DG-11 (name clash).  "Ensemble rigidity"** was our name, in the first two checkpoints, for
+"no ensemble of other conformations has the averaged squared distances of `X` on the measured
+pairs".  The Ensemble Identifiability Division had published the same words forty minutes
+earlier for determination by the *laws* of the edge lengths, which it proves equivalent to
+generic global rigidity.  Ours is renamed *second-moment rigidity* everywhere except in the
+published messages GEOMETRY-MSG-0001 … -0003 and the requests, which are records
+(GEOMETRY-RES-0001 states the renaming).

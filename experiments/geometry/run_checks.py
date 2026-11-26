@@ -1,4 +1,4 @@
-"""Test harness of the Geometric Inference division (cycle 1: ensemble rigidity).
+"""Test harness of the Geometric Inference division (cycle 1: second-moment rigidity).
 
 Every test checks a statement of docs/geometry/ENSEMBLE_RIGIDITY.md on synthetic instances, in
 exact arithmetic where the statement is an exact computation.  A test returns (ok, message).
@@ -22,6 +22,8 @@ import demix as demix_mod
 import hierarchy_example
 import exact_nonlinear_threshold
 import explore_below
+import matroid_connectivity
+import torsion_sharpness
 
 MUT = os.environ.get("GEOM_MUT", "")
 QUICK = "--quick" in sys.argv
@@ -346,6 +348,35 @@ def two_states_below_threshold():
                 f"n=9: {r9['others']} further chains, none can carry mass")
 
 
+# ------------------------------------------------------------------ section 5.6, responses
+@test
+def matroid_patterns():
+    """Theorem J: separations {3,4} give a connected matroid of full rank (exact witness), single
+    separations are free; two rigid bodies: K_{3,3} bars connected, K_{2,2} free."""
+    n = 11
+    import io, contextlib
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        seps = [3] if MUT == "single_separation_connected" else [3, 4]
+        rk34, comps34 = matroid_connectivity.report("S", n, matroid_connectivity.pattern(n, seps))
+        rk3, comps3 = matroid_connectivity.report("S", n, matroid_connectivity.pattern(n, [3]))
+        rk5, comps5 = matroid_connectivity.report("S", n, matroid_connectivity.pattern(n, [5]))
+    m33 = matroid_connectivity.two_body(3, 3)
+    m22 = matroid_connectivity.two_body(2, 2)
+    ok = (rk34 == n - 3 and len(comps34) == 1 and rk3 == n - 3 and len(comps3) == n - 3
+          and rk5 == n - 5 and len(comps5) == n - 5 and m33 == (9, 6, 1) and m22[1] == 4 and m22[2] == 4)
+    return ok, f"S={{3,4}}: rank {rk34}, {len(comps34)} component(s); S={{3}}: {len(comps3)} components; two triangles: {m33}"
+
+
+@test
+def kink_formula():
+    """GEOMETRY-RES-0002: the small-angle Kabsch cost of a kink in the middle of an all-trans
+    chain is a quarter of the coaxial cost I_red phi^2 (rod model), an eighth of min(I) phi^2."""
+    a, b = torsion_sharpness.kink_test(400)
+    target = 0.5 if MUT == "kink_half" else 0.25
+    return abs(a - target) < 2e-3 and abs(b - target / 2) < 2e-3, f"cost / (I_red phi^2) = {a:.4f}, cost / (min I phi^2) = {b:.4f}"
+
+
 # ------------------------------------------------------------------ section 7
 def certificate_setup(K, n, rng):
     w, Xs = rand_ensemble(K, n, rng)
@@ -459,7 +490,7 @@ def six_atoms_have_a_quadric_in_4d():
 
 @test
 def hierarchy_instance():
-    """Theorem E(d): globally rigid 6-atom chain, not ensemble-rigid (two-state ensemble with the
+    """Theorem E(d): globally rigid 6-atom chain, not second-moment rigid (two-state ensemble with the
     same averaged data on F)."""
     ok, checks = hierarchy_example.main(0, verbose=False)
     return ok, f"mixture deviation on F {checks['max_dev_mixture_vs_X_on_F']:.1e}; states differ from X on F by {checks['Xp_differs_from_X_on_F']:.2f}, {checks['Xm_differs_from_X_on_F']:.2f}"

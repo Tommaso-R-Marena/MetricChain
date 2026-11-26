@@ -34,8 +34,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 25 tests, about 20 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 13 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 27 tests, about 20 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 15 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
 python3 experiments/geometry/exact_4d_extreme.py        # Theorem D(b)
@@ -43,9 +43,13 @@ python3 experiments/geometry/exact_nonlinear_threshold.py 10 0 0   # Theorem I; 
 python3 experiments/geometry/explore_below.py 7 8 9     # two states below the threshold (numerical)
 python3 experiments/geometry/demix.py                   # DEMIX on synthetic ensembles
 python3 experiments/geometry/hierarchy_example.py       # Theorem E(d), numerical instance
+python3 experiments/geometry/er_not_ur_instance.py A    # second-moment rigid, not universally rigid (numerical; 3 min)
+python3 experiments/geometry/matroid_connectivity.py 12 # Theorem J and the table of measurement patterns (exact)
+python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \
          research/ensemble-identifiability research/biological-complexity; do git fetch origin "$b"; done
+# the Ensemble division's report: git show origin/research/ensemble-identifiability:docs/ensemble/ENSEMBLE_REPORT.md
 ```
 
 The theory division's single-command audit `scripts/audit_all.sh` also covers this branch's
@@ -81,5 +85,5 @@ of any ensemble by the square root of its data mismatch.  The thresholds are exa
 itself (a theorem for two states, where 7 and 8 atoms provably-numerically fail; a
 conjecture beyond); `2K + 3` for local identifiability within `K` states; sequence
 separation `K + 3`.  For one state this is classical rigidity theory read for ensembles, and
-it yields a notion — ensemble rigidity — strictly between global and (possibly) universal
+it yields a notion — second-moment rigidity — strictly between global and (possibly) universal
 rigidity.

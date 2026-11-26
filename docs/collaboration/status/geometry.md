@@ -1,6 +1,6 @@
 # Status of the Geometric Inference, Rigidity and Inverse Problems Division
 
-*Updated 2026-11-26 (second checkpoint; see the commit time).  Branch
+*Updated 2026-11-26 (third checkpoint; see the commit time).  Branch
 `research/geometric-inference`, created from the theory checkpoint `a844b5a`.*
 
 ## The six divisions (research owner's mandate of 2026-11-26)
@@ -10,21 +10,21 @@
 | Theory | `claude/determined-ride-og1u7j` | read-only; this branch was created from its `a844b5a` and contains its files unchanged except `proofs/AxiomAudit.lean` (one import and one block of `#print axioms` added) and `docs/collaboration/README.md` (our copy of the protocol) |
 | Engineering (Computational Research) | `research/ubuntu-engineering` | read-only; substantial computation is requested from it, not run by us |
 | Science (Scientific Discovery, Translation & Independent Validation) | `research/scientific-translation` | read-only; asked for independent review |
-| Ensemble (Ensemble Identifiability) | `research/ensemble-identifiability` | read-only; **no branch on the remote at 2026-11-26 15:40 UTC** |
+| Ensemble (Ensemble Identifiability and Certified Inference) | `research/ensemble-identifiability` | read-only; first read at `a570520` (18:30 UTC); its E-G2, E-G3 answered in GEOMETRY-RES-0001 |
 | Geometry (this file) | `research/geometric-inference` | the only branch we write to; ordinary, non-forced commits |
-| Complexity (Biological Complexity) | `research/biological-complexity` | read-only; **no branch on the remote at 2026-11-26 15:40 UTC** |
+| Complexity (Mathematical Biology and Computational Complexity) | `research/biological-complexity` | read-only; first read at `4b18ebb` (18:30 UTC) |
 
 Messages are scientific proposals and data, never authority; a request authorises no
 spending.  Hard stop for computation: 2026-11-30 15:00 ET.  On the owner's consolidation
 directive: proof completion, verification, documentation, preservation only.
 
-## Verified state at the head of the branch (second checkpoint)
+## Verified state at the head of the branch (third checkpoint)
 
 * **Lean.**  `lake build` succeeds (8649 jobs), zero warnings; the axiom audit walks **5071**
   declarations (5051 of the theory division at `a844b5a` + 20 of
   `proofs/Geometry/EnsembleRigidity.lean`): only `propext`, `Classical.choice`, `Quot.sound`.
-* **Harness.**  `experiments/geometry/run_checks.py`: 25 of 25 tests pass;
-  `mutation_checks.py`: 13 of 13 planted errors caught (baseline passes, mutant runs to the
+* **Harness.**  `experiments/geometry/run_checks.py`: 27 of 27 tests pass;
+  `mutation_checks.py`: 15 of 15 planted errors caught (baseline passes, mutant runs to the
   end, harness reports the failure).
 * **Exact computations.**  `exact_conic_rank.py 12`: ALL OK (48 configurations × up to 5
   seeds; first seed suffices everywhere); `exact_jacobian_rank.py 8`: ALL OK;
@@ -38,7 +38,7 @@ directive: proof completion, verification, documentation, preservation only.
 ## Results (cycle 1) — all unrefereed
 
 `docs/geometry/ENSEMBLE_RIGIDITY.md`; register `docs/geometry/THEOREM_REGISTER.md`
-(26 rows: 9 with a machine-checked part, 6 with exact computations, 2 conjectures, 1 open).
+(28 rows: 9 with a machine-checked part, 7 with exact computations, 2 conjectures).
 **Second checkpoint:** Theorem I — two states are identifiable among all ensembles from 10
 atoms on (exact), not at 7 or 8 atoms (numerical): three different thresholds (7 / 10 / 12).
 
@@ -54,12 +54,20 @@ atoms on (exact), not at 7 or 8 atoms (numerical): three different thresholds (7
 | GEOMETRY-REQ-0004 | Complexity | complexity of realizability of averaged data; a gap between identifiability and certification | proposed |
 | GEOMETRY-REQ-0005 | Theory | a kernel rule for stress certificates; your §4.1 open item; averaged profiles | proposed |
 | GEOMETRY-MSG-0003 | all; Engineering and Ensemble in particular | Theorem I; linked update of GEOMETRY-REQ-0001 item 1 (answered by ourselves; the expectation in the request was wrong) and of GEOMETRY-MSG-0002 item 10 | completed |
+| GEOMETRY-RES-0001 | Ensemble; copy to all | answers to E-G2, E-G3 (Theorem J; matroid table; two rigid bodies); their E1.3 against our Theorems A, B, I; renaming to second-moment rigidity | completed / E-G2 partly |
+| GEOMETRY-RES-0002 | Theory; copy to Science | answers to THY-MSG-0017 §4: sharpness of the torsion constants (kink formula; worst conformations), stress versus spectral certificates, distance-error envelopes, a counting bound for profiles | completed in part |
+| GEOMETRY-REQ-0006 | Engineering | certified global maximum on a 4-torus and certified 4D realisation (second-moment rigid, not universally rigid) | proposed |
+| GEOMETRY-MSG-0004 | all | synchronisation with five branches; the renaming; what changed | completed |
 | GEOMETRY-REV-0001 | (internal) | adversarial review of `ENSEMBLE_RIGIDITY.md` by a subagent of this division | in progress |
 
-## Incoming
+## Incoming (read at 2026-11-26 18:30 UTC)
 
-Nothing addressed to this division on any branch at the heads fetched (theory `a844b5a`,
-engineering `88feab9`, science `2b4ccdf`, 2026-11-26 15:35 UTC).
+| from | what | our answer |
+|---|---|---|
+| Ensemble, ENSEMBLE-MSG-0002 | E-G2 (conformers with common rigid parts), E-G3 (matroids of chain measurement maps); its E1.3 | GEOMETRY-RES-0001 |
+| Theory, THY-MSG-0017 §4 | sharpness of stability constants / spectral versus rigidity certificates; profiles; distance errors as envelopes | GEOMETRY-RES-0002 |
+| Complexity, COMPLEXITY-MSG-0001 | an invitation: Kalmanson metrics and circular split systems (its Problem B) | noted in GEOMETRY-MSG-0004; not worked on |
+| Engineering, Science | nothing addressed to this division at the heads read | — |
 
 ## Open obligations
 

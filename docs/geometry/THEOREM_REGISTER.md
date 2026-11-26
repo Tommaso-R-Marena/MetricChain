@@ -26,7 +26,7 @@ see `PRIOR_ART.md`; "not found" is an absence in summary-level searches.
 | G1.15 | global `W₂² ≤ C‖ΔM‖` with explicit certificate `φ`; optimal exponent; (CC) ⇒ infinitesimal identifiability | Theorem G | P | `dual_certificate`, `quadratic_growth_local`, `infinitesimal_identifiability_under_CC`, `w2_exponent_is_sharp` | REV-0001 | not found |
 | G1.16 | `𝒦 = 𝒮` when `|E₀| ≤ 9` (chains: `n ≤ 6`; freely jointed: `n ≤ 10`) | Theorem D(a) | P from K | `six_atoms_have_a_quadric_in_4d` | REV-0001 | freely jointed known; chain reading not found |
 | G1.17 | `𝒦 ⊊ 𝒮` for chains with `n ≥ 7` | Theorem D(b) | P-exact | `exact_4d_extreme.py` | REV-0001 | not found |
-| G1.18 | universal ⇒ ensemble ⇒ global rigidity; equivalence when `𝒦 = 𝒮`; strictness of the second | Theorem E | P; two steps V `ensembleRigid_of_universal`, `globallyRigid_of_ensembleRigid`; instance N | `hierarchy_example.py` | REV-0001 | not found |
+| G1.18 | universal ⇒ ensemble ⇒ global rigidity; equivalence when `𝒦 = 𝒮`; strictness of the second | Theorem E | P; two steps V `secondMomentRigid_of_universal`, `globallyRigid_of_secondMomentRigid`; instance N | `hierarchy_example.py` | REV-0001 | not found |
 | G1.19 | complete data: local identifiability within `K` states iff `n ≥ 2K + 3`, `2 ≤ K ≤ 8` | Theorem H(a) | P-exact | `exact_jacobian_rank.py 8` | REV-0001 | not found |
 | G1.20 | separation `K + 3` locally identifies `K` states (`n ≥ (K²+3K+4)/2`), `K + 2` never; `K ≤ 8` | Theorem H(b) | P-exact | `exact_jacobian_rank.py 8`, `band_K_plus_2_never` | REV-0001 | not found |
 | G1.21 | identifiable among all ensembles from `n = ⌊9K/2⌋ + 1` for `K ≥ 3` | §5.2, §5.5 | N (`K = 3`: `n = 14, 15`), C | `explore_misc.py k3` | — | — |
@@ -34,12 +34,14 @@ see `PRIOR_ART.md`; "not found" is an absence in summary-level searches.
 | G1.26 | two states: not identifiable among all ensembles at `n = 7, 8` (mixtures of 9–11 other chains with the same data); identifiable at `n = 9` in the instances computed | §5.5 | N (six instances each) | `explore_below.py 7 8 9`; test `two_states_below_threshold` | — | not found |
 | G1.22 | second moment of randomly rotated labelled data determines exactly `M(μ)`; bond constraints lower the moment order | Cor. 9.1 | P given K (sample-complexity theorem not re-derived) | `second_moment_of_rotated_data` | REV-0001 | instance of a known principle |
 | G1.23 | membership in the realizable set is NP-hard for general pair sets (star constraints) | §8.1 | K | — | — | known (E.-Nagy–Laurent–Varvitsiotis) |
-| G1.24 | `F`-ensemble-rigid conformations that are not universally rigid exist for `n ≥ 7` | §8.2, O-3 | open | search in `explore_er2.py` | — | — |
+| G1.24 | second-moment rigid conformations that are not universally rigid exist (`n = 7`) | §8.2 | N (two instances: unique 3D maximiser by grid `24⁴` + 2 000 local searches, indefinite stress, explicit 4D realisation); a certified optimum is requested (GEOMETRY-REQ-0006) | `explore_er3.py`, `er_not_ur_instance.py A B` | — | not found |
+| G1.27 | laws of the distances of separations 3 and 4 determine every generic finite ensemble of chains (any `K`); a single separation never does | Theorem J | P, given the Ensemble division's E5/E6 (unrefereed) | `matroid_connectivity.py` (exact), test `matroid_patterns` | — | E5/E6 are the Ensemble division's; the chain statement is an application |
+| G1.28 | exact small-angle Kabsch cost of one kink on a straight rod: `I_red φ² (1 − 3x(1−x))`; the coaxial cost of theory report Theorem 4.6 overestimates it by up to 4, the min-inertia bound by up to 8 (in cost); at the worst conformation (arms perpendicular to the axis, parallel) the verified constant is within `√2` | GEOMETRY-RES-0002 | P (rod model, small angle), N (discrete chains; worst conformations by optimisation) | `torsion_sharpness.py`, test `kink_formula` | — | free–free beam; elementary |
 
 ## Counts
 
 Lean: 1 file, 11 declarations cited above (plus 6 definitions), zero warnings.
-Harness: 25 tests (`run_checks.py`), 13 mutations (`mutation_checks.py`), all caught.
+Harness: 27 tests (`run_checks.py`), 15 mutations (`mutation_checks.py`), all caught.
 Exact computations: `exact_conic_rank.py` (96 witnesses for `K ≤ 12`), `exact_jacobian_rank.py`
 (30 witnesses for `K ≤ 8`), `exact_4d_extreme.py` (1 witness), `exact_nonlinear_threshold.py`
 (1 witness over ℚ, 4 modulo a prime; needs Singular).
