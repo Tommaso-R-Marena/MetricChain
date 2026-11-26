@@ -1409,3 +1409,32 @@ bracket in every digit and the pair form gives 0.033 nats where the site form gi
 0.730 — without a random number and without a new evaluation.  The sampler's point
 estimate agrees with the uncertified chain estimate of cycle 40 to `4·10⁻⁶`.  A request
 to the engineering division (order 7) could be withdrawn the same hour.
+
+### Cycle 52 — the case nobody had run: a compact ensemble that is not frozen; a law in one line; a novelty claim checked against our own workstream first
+
+The re-ranked handoff of cycle 51 named one place "where the certificate can still
+fail, and nobody has run it".  It took eight seconds on workstream P6's caches
+(addendum A17 (15)).  **Result:** for serine on the helix — 55 % of the side chains
+off the anchor — the envelope `Σ_{T ⊆ S(x)} ĉ_T`, which bounds every share allocation
+from below, gives 0.013, 0.063, 0.27 nats at four, five, six residues at order 4.
+Nothing in the allocation rescues it; the question "better shares?" (open problem
+D9(a)) is answered where it decides.
+
+**The law.**  Looking at the table, each level of shares gained the same factor 1.8,
+which is `1/p`.  The identity behind it is one line (the `k`-th factorial moment of a
+binomial): the mean `k`-share penalty is `p^k Γ_m`, so the bracket is `2 p^k Γ_m`; a
+second script checks it on all 52 enumerated brackets — within 0.97–1.09 wherever
+the bracket is narrow, wrong by up to 2.6 where it is 5–16 nats.
+
+**A claim of novelty checked before it was written down.**  The first draft of the
+addendum presented the law as new.  A search of our own workstream report before
+committing showed that P6 had stated it for sites and pairs ("the gain is the
+reciprocal of the fraction of sites off the anchor … `Γ_m p` against `Γ_m p²`"), had
+measured `p = 0.55` for Ser₅ on the helix, and had concluded that the polar helices
+are "helped by a factor below two or left useless".  The addendum now says so: what
+this part adds is the envelope (every allocation), the general `k`, the quantitative
+check, and the growth with length.  *Second correction of the same draft:* "every
+sign-blind bound is only 3.4–19 times the truth" misread P5 — that is the proven
+*floor* of the sign-blind class for serine, not a bound anyone has; rewritten.  *Third:*
+the size of the order-5 ball at twelve residues was guessed as `3·10⁶`; computed, it is
+`4.8·10⁵` (if interior sites keep six states) — i.e. the open run is affordable here.

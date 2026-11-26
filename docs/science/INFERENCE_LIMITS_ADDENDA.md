@@ -2239,6 +2239,86 @@ driver, the comparison and the sampled checks are the coordinator's.
     certificate beyond P3's constants and two floating-point allowances.
 
 
+### (15) Where the certificate stops: a compact ensemble that is not frozen [M, exact enumeration; added 2026-11-26]
+
+*Scripts:* `experiments/science/pi_inference/serine_helix_shares.py` (+ log, JSON; ten
+seconds on workstream P6's caches) and `serine_helix_shares_law.py` (+ log).  Parts
+(13)–(14) and workstreams P5, P6 certify ensembles that stay near their anchor.
+Workstream P6 had already said that this is the mechanism — the pair form gains the
+reciprocal of the fraction `p` of sites off the anchor, mean penalty about `Γ_m p²`
+against `Γ_m p` — had measured `p = 0.55` for Ser₅ on the helix and concluded that the
+polar helix ensembles "are helped by a factor below two or left useless"
+(`workstreams/P6_REPORT.md` §3(i), §6(ii)–(iii)).  What was left open is whether a
+*better allocation of shares* could do what pairs and triples do not.  This part closes
+that: serine on the helix (2.2, 2.7, 3.3 of 4, 5, 6 side chains off the anchor under the
+true ensemble; nine or six rotamer states per site), every enumerated instance and
+order for which P6 left pair sums on disk.  Computed: (1) the widths of the banded
+sandwiches a certificate can use (site, pair, triple form; all pairs and triples in
+band); (2) with the evaluated terms kept *exact* — possible only by enumeration — the
+brackets for the three share forms **and for the envelope `Σ_{T ⊆ S(x)} ĉ_T` itself, the
+pointwise smallest penalty the certified constants allow and therefore a lower limit
+for every share allocation**.
+
+34. **Serine on the helix: no allocation rescues it, and it gets worse with length.**
+    Widths in nats (the exact `ln Z` lies in every bracket; the sandwich holds at every
+    state).
+
+    | instance | order; ball (share of the domain) | `Γ_m` (`k_BT`) | true remainder, sup (kcal/mol) | banded models: site, pair, triple | exact evaluated terms: site, pair, triple | **envelope** |
+    |---|---|---|---|---|---|---|
+    | Ser₄, helix | 4; 1 316 (45 %) | 0.066 | `1.3·10⁻⁴` | 0.079, 0.047, 0.030 | 0.073, 0.041, 0.023 | **0.013** |
+    | Ser₅, helix | 4; 2 696 (15 %) | 0.356 | `1.1·10⁻³` | 0.39, 0.22, 0.12 | 0.38, 0.21, 0.11 | **0.063** |
+    | **Ser₆, helix** | 4; 4 751 (4.5 %) | 1.42 | `1.6·10⁻³` | 1.54, 0.85, 0.48 | 1.52, 0.83, 0.47 | **0.27** |
+    | Ser₅, helix | 5; 9 496 (54 %) | 0.004 | `3.0·10⁻⁵` | 0.0150, 0.0130, 0.0119 | 0.0044, 0.0024, 0.0013 | 0.0004 |
+    | Ser₆, strand (for comparison: 1.5 of 6 off the anchor) | 4; 11 249 (2.1 %) | 0.070 | `1.8·10⁻⁴` | 0.035, 0.0087, 0.0023 | 0.034, 0.0084, 0.0021 | 0.0005 |
+
+    At order 3 on the helix every form is useless (5–16 nats).  At order 4 the best
+    possible bracket is 0.013, 0.063, **0.27** nats at four, five, six residues —
+    fourfold per residue, with `Γ₄` (0.07 → 0.36 → 1.42 `k_BT`: `0.07–0.1 k_BT` for each of
+    the `C(n, 4)` subsets, none of them far apart yet) — while the true remainder is
+    `0.003 k_BT`; the forms a certificate can actually solve give 0.48 (triples), 0.85
+    (pairs), 1.54 (sites) at six residues.  Order 5 is narrow and needs more than half
+    of the domain; there the banded models (0.012–0.015) are limited not by the
+    allocation but by P3's reduction of the evaluated three-site terms to pair tables
+    (exact terms: 0.0004–0.0044).  **For a compact ensemble with real side-chain
+    entropy the certificate, with these constants, does not reach beyond enumeration
+    at order 4, and at order 5 it needs the reduction replaced before the shares
+    matter.**
+35. **The law behind it: the bracket of the `k`-share form is `2 p^k Γ_m`** [M; the
+    identity is elementary, the law is an observation].  The `k`-share penalty at a
+    state is `Σ_T ĉ_T·C(|T ∩ S(x)|, k)/C(m, k)` (`k = m`: the envelope).  If sites left
+    the anchor independently with probability `p`, `|T ∩ S|` would be binomial and its
+    `k`-th factorial moment gives a mean penalty of exactly `p^k Γ_m`; a narrow bracket is
+    twice the mean penalty.  Measured on the 13 enumerated rows (52 brackets, exact
+    evaluated terms): **where the site bracket is below 0.5 nats the ratio
+    `width/(2 p^k Γ_m)` lies within 0.97–1.09 for `k = 1, 2, 3` and for the envelope**
+    (Ser₆ on the helix at order 4, with a site bracket of 1.5 nats: 0.99–1.08); at order
+    3, where brackets are 0.6–16 nats, the first-order law fails by up to a factor 2.6.
+    P6's statement is the cases `k = 1, 2`.  Consequences: each level of shares gains
+    `1/p` and the envelope gains `p^{−(m−1)}` over sites — 20–40 for the frozen leucine
+    helix with pairs alone (part (14)), a factor **6 in total** for serine on the helix
+    at order 4 (`p = 0.54`), 60 on the strand (`p = 0.25`).  **A design rule that needs no
+    run: a `k`-share certificate of order `m` reaches precision `ε` when `2 p^k Γ_m ≲ ε`,**
+    with `p` from any cheap uncertified sample.
+36. **What would move it** [M for the numbers; H for the reading].  Not the allocation
+    (item 34).  The certified constants: here `Γ₄` is 520 times the largest true
+    remainder (0.85 kcal/mol against `1.6·10⁻³` at six residues).  For serine — unlike
+    leucine — workstream P5 found that the proven price of ignoring signs is small (a
+    bound that does not look at signs must be 3.4–19 times the truth; for leucine
+    16–153 at orders 3–5) and that slack of the inequalities is the larger part: on
+    its serine instances P3's bound is 58–297 times the truth, 15–136 times that
+    sign-blind floor, and 3–16 times the best bound that treats atom pairs one at a
+    time.  A sharper sign-blind bound could therefore gain an order of magnitude and,
+    by item 35, bring the envelope bracket at six residues to a few hundredths of a
+    nat; nobody has written it.  And the decay with distance: at six residues every
+    subset is local; on a longer helix the far subsets carry less, but the many-body
+    terms decay like `r⁻⁴` (P5), slowly.  Whether order 5 certifies serine on a helix
+    too long to enumerate has not been run: at twelve residues its ball would be
+    about `4.8·10⁵` evaluations for a domain of `4.9·10⁹` (if interior sites keep six
+    states, as at six residues) — the size of the runs of part (14).
+37. *For the record of parts (13)–(14):* "the helix is certified" there means leucine,
+    two rotamers per site, 95 % of the weight within one flip of the anchor.  This part
+    is the counter-example to any wider reading.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

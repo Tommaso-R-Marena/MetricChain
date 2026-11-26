@@ -465,12 +465,17 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
    (order 4 suffices at twenty residues; thirty residues certified), the compact case
    settled in the negative for bounds and in the positive for the frozen leucine helix
    (thirty residues, 0.033 nats), certified populations.  Left:
-   (a) **a compact ensemble that is not frozen** — serine, lysine or the patterned
-   sequence on the helix, a buried side chain: the cost number is about
-   `∏_i (1 + p_i(e^{βγ_i} − 1)) − 1`; the levers are the order, exact in-window evaluated
-   terms (they cost 0.005 of the 0.009–0.016 nats at order 5 already), shares to
-   `(m − 1)`-subsets, and the slack inside the sign-blind class at order 6 (up to a
-   factor 9); **this is where the certificate can still fail, and nobody has run it**;
+   (a) **a compact ensemble that is not frozen — now measured (addendum A17 (15)), and
+   it is where the certificate stops:** for serine on the helix (55 % of the side
+   chains off the anchor) no share allocation rescues order 4 — the envelope itself
+   gives 0.27 nats at six residues, fourfold per residue — because the bracket of the
+   `k`-share form is `2 p^k Γ_m` (checked within 9 %): shares decide only when the
+   fraction `p` of sites off the anchor is small.  Left, in order: order 5 on a serine
+   helix too long to enumerate (about `4.8·10⁵` evaluations at twelve residues — the
+   size of the leucine runs; with exact in-window evaluated terms, which are the limit
+   there); a sharper sign-blind bound for serine-like side chains (P3's is 15–136 times
+   the sign-blind floor; nobody has written it); lysine, the patterned sequence, a
+   buried side chain;
    (b) **turn "certified" into checked**: the stand-alone checker (engineering, P6-E1 =
    P3-E1, accepted in principle; specification SCI-MSG-0025 §8) and the share lemmas in
    Lean (theory, P6-T1) — without them every bracket rests on unreviewed arithmetic;
