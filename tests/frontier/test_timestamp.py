@@ -89,3 +89,16 @@ def test_live_stamp_and_verify(tmp_path):
     data = path.read_bytes().replace(b"synthetic control", b"synthetic CONTROL")
     path.write_bytes(data)
     assert timestamp.verify_evidence(path)["verified"] == []
+
+
+@pytest.mark.skipif(os.environ.get("FB_LIVE_TSA") != "1", reason="live TSA test: set FB_LIVE_TSA=1")
+def test_live_stamp_of_an_arbitrary_file(tmp_path):
+    """Another division's manifest (any file) can be time-stamped without being touched."""
+    target = tmp_path / "MANIFEST.sha256"
+    target.write_text("0" * 64 + "  12  predictions/model_1.pdb\n")
+    before = target.read_bytes()
+    timestamp.stamp_file(target)
+    assert target.read_bytes() == before
+    assert len(timestamp.verify_file_evidence(target)["verified"]) >= 2
+    target.write_text("1" * 64 + "  12  predictions/model_1.pdb\n")
+    assert timestamp.verify_file_evidence(target)["verified"] == []

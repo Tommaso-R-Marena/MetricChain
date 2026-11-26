@@ -103,8 +103,13 @@ def _toulbar2_worker(wcsp_plain: str, budget: float, queue):
         res = cfn.Solve(showSolutions=0, timeLimit=int(budget))
         elapsed = time.perf_counter() - t0
         if res and res[0]:
-            queue.put({"status": "optimum_claimed", "cost": int(round(res[1])), "seconds": elapsed,
-                       "solution": [int(v) for v in res[0]]})
+            cost = int(round(res[1]))
+            dual = float(cfn.GetDDualBound())
+            # the solver's own global lower bound equals the cost only when it has finished its proof
+            proved = dual >= cost - 1e-6 and elapsed < budget
+            queue.put({"status": "optimum_claimed_by_solver" if proved else "best_found_at_time_limit_not_proved",
+                       "cost": cost, "solver_dual_bound": dual, "seconds": elapsed,
+                       "nodes": int(cfn.GetNbNodes()), "backtracks": int(cfn.GetNbBacktracks())})
         else:
             queue.put({"status": "no_solution_within_budget", "seconds": elapsed})
     except Exception as exc:  # noqa: BLE001
@@ -140,6 +145,7 @@ def _sb_worker(inst_path: str, sb_src: str, budget: float, queue):
         result = mincheck.check_min_certificate(cert)
         t_b = time.perf_counter()
         info = {"accepted": bool(result.accepted), "reason": result.reason, "check_seconds": t_b - t_a,
+                "full_box": getattr(result, "full_box", None),
                 "witness_energy": None if result.witness_energy is None else int(result.witness_energy) + inst["constant"],
                 "lower_bound": None if result.lower_bound is None else str(result.lower_bound + inst["constant"]),
                 "certified_gap": None if result.certified_gap is None else str(result.certified_gap)}
@@ -148,6 +154,10 @@ def _sb_worker(inst_path: str, sb_src: str, budget: float, queue):
             text = mincert.dumps(cert)
             info["certificate_bytes"] = len(text.encode())
             info["certificate_sha256"] = hashlib.sha256(text.encode()).hexdigest()
+            t_c = time.perf_counter()
+            again = mincheck.check_min_certificate(mincert.loads(text))
+            info["reloaded_from_text_accepted"] = bool(again.accepted)
+            info["reload_and_check_seconds"] = time.perf_counter() - t_c
         except RecursionError:
             info["serialise_error"] = "RecursionError"
         except Exception as exc:  # noqa: BLE001
@@ -211,6 +221,7 @@ def main() -> int:
     ap.add_argument("out_jsonl")
     ap.add_argument("--budget", type=float, default=300.0)
     ap.add_argument("--only", nargs="*")
+    ap.add_argument("--sb-commit", default="unrecorded", help="commit of the evaluated software (recorded in every row)")
     args = ap.parse_args()
     paths = sorted(Path(args.instance_dir).glob("pdb*.wcsp.xz"))
     if args.only:
@@ -226,14 +237,13 @@ def main() -> int:
                 "instance": p.name.split(".")[0], "file_sha256": hashlib.sha256(p.read_bytes()).hexdigest(),
                 "n": inst["n"], "max_domain": max(inst["sizes"]), "pairs": len(inst["pair"]),
                 "log10_configurations": round(sum(math.log10(k) for k in inst["sizes"]), 1),
-                "budget_seconds": args.budget,
+                "budget_seconds": args.budget, "sb_commit": args.sb_commit,
             }
             row["toulbar2"] = run_with_wall_limit(_toulbar2_worker, (str(plain), args.budget), args.budget + 60)
-            row["toulbar2"].pop("solution", None)
             row["sb_certified"] = run_with_wall_limit(_sb_worker, (str(p), args.sb_src, args.budget), args.budget * 1.5 + 60)
             tb, sb = row["toulbar2"], row["sb_certified"]
-            if tb.get("status") == "optimum_claimed" and sb.get("witness_energy") is not None:
-                row["optima_agree"] = (tb["cost"] == sb["witness_energy"])
+            if tb.get("cost") is not None and sb.get("witness_energy") is not None:
+                row["values_agree"] = (tb["cost"] == sb["witness_energy"])
             out.write(json.dumps(row, sort_keys=True) + "\n")
             out.flush()
             print(json.dumps(row, sort_keys=True)[:600], flush=True)

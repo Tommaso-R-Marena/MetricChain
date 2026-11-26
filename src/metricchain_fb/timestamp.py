@@ -33,7 +33,8 @@ from typing import Sequence
 from .freeze import EVIDENCE_NAME, MANIFEST_NAME, TIMESTAMP_DIR, normal_form, sha256_file
 
 __all__ = ["DEFAULT_TSAS", "DEFAULT_CAFILE", "make_query", "post_query", "read_token",
-           "verify_token", "stamp_manifest", "verify_evidence", "TimestampError"]
+           "verify_token", "stamp_manifest", "stamp_file", "verify_file_evidence", "verify_evidence",
+           "TimestampError"]
 
 #: Public time-stamping authorities reachable from the session machine on 2026-11-26 whose
 #: tokens verified against the machine's ordinary trust store.  Operators are unrelated.
@@ -228,15 +229,77 @@ def verify_evidence(manifest_path, cafile: str = DEFAULT_CAFILE) -> dict:
     return result
 
 
+def stamp_file(path, tsas: dict | None = None, cafile: str = DEFAULT_CAFILE) -> dict:
+    """Time-stamp ANY file (for instance another division's ``MANIFEST.sha256``) without touching it.
+
+    Tokens go to ``<file>.timestamps/<name>.tsr`` and the record to ``<file>.evidence.json``, both
+    next to the file.  Only the file's SHA-256 digest is sent out.
+    """
+    path = Path(path)
+    digest = sha256_file(path)
+    tsdir = path.with_name(path.name + ".timestamps")
+    tsdir.mkdir(exist_ok=True)
+    evidence = {"schema": "metricchain-fb-evidence/1", "file": path.name, "file_sha256": digest, "evidence": []}
+    query = make_query(digest)
+    for name, url in (tsas or DEFAULT_TSAS).items():
+        entry = {"type": "rfc3161", "name": name, "tsa_url": url}
+        try:
+            token_file = tsdir / f"{name}.tsr"
+            token_file.write_bytes(post_query(url, query))
+            info = read_token(token_file)
+            ok, detail = verify_token(token_file, digest, cafile)
+            entry.update({"token_file": f"{tsdir.name}/{name}.tsr", "token_sha256": sha256_file(token_file),
+                          "gen_time_utc": info["gen_time_utc"], "tsa_name": info["tsa_name"],
+                          "verified_on_this_machine": ok, "verification_detail": detail, "trust_store": cafile})
+        except TimestampError as exc:
+            entry.update({"error": str(exc)[:300], "verified_on_this_machine": False})
+        evidence["evidence"].append(entry)
+    path.with_name(path.name + ".evidence.json").write_bytes(normal_form(evidence))
+    return evidence
+
+
+def verify_file_evidence(path, cafile: str = DEFAULT_CAFILE) -> dict:
+    """Re-verify the tokens written by :func:`stamp_file` against the file as it is now."""
+    path = Path(path)
+    digest = sha256_file(path)
+    result = {"file_sha256": digest, "verified": [], "unverified": [], "earliest_utc": ""}
+    record = path.with_name(path.name + ".evidence.json")
+    if not record.is_file():
+        return result
+    evidence = json.loads(record.read_text(encoding="ascii"))
+    for entry in evidence.get("evidence", []):
+        if "token_file" not in entry:
+            continue
+        token = path.parent / entry["token_file"]
+        ok, detail = (verify_token(token, digest, cafile) if token.is_file() else (False, "token file missing"))
+        if ok:
+            result["verified"].append({"name": entry.get("name"), "gen_time_utc": read_token(token)["gen_time_utc"]})
+        else:
+            result["unverified"].append({"name": entry.get("name"), "reason": detail})
+    times = sorted(v["gen_time_utc"] for v in result["verified"])
+    result["earliest_utc"] = times[0] if times else ""
+    return result
+
+
 def _main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m metricchain_fb.timestamp", description=__doc__.split("\n\n")[0])
     sub = parser.add_subparsers(dest="cmd", required=True)
     for name, helptext in (("stamp", "request tokens for a MANIFEST.json (sends only its digest)"),
-                           ("verify", "re-verify the stored tokens of a MANIFEST.json")):
+                           ("verify", "re-verify the stored tokens of a MANIFEST.json"),
+                           ("stamp-file", "request tokens for any file, e.g. another division's manifest"),
+                           ("verify-file", "re-verify the tokens of a file stamped with stamp-file")):
         p = sub.add_parser(name, help=helptext)
         p.add_argument("manifest")
         p.add_argument("--cafile", default=DEFAULT_CAFILE)
     args = parser.parse_args(argv)
+    if args.cmd == "stamp-file":
+        for e in stamp_file(args.manifest, cafile=args.cafile)["evidence"]:
+            print(f"{e.get('name'):12s} {e.get('gen_time_utc', '-'):22s} verified={e.get('verified_on_this_machine')} {e.get('error', '')}")
+        return 0
+    if args.cmd == "verify-file":
+        result = verify_file_evidence(args.manifest, cafile=args.cafile)
+        print(json.dumps(result, indent=1, sort_keys=True))
+        return 0 if result["verified"] else 1
     if args.cmd == "stamp":
         evidence = stamp_manifest(args.manifest, cafile=args.cafile)
         for e in evidence["evidence"]:

@@ -1,0 +1,87 @@
+{
+ "artifacts": [
+  {
+   "bytes": 4574,
+   "path": "SELECTION_RULE.md",
+   "sha256": "e387f6bb843e8b725bd153c00cd61bc155a06a89e50269b389ee05aeb815c64f"
+  },
+  {
+   "bytes": 1139,
+   "path": "commitment.json",
+   "sha256": "dce203ae7a1cbf5f48e19d21303733030df82edadfb6e56d5a03aa0294c417f3"
+  },
+  {
+   "bytes": 1462,
+   "path": "query.json",
+   "sha256": "42e5b07ab75e49e7a45a9f97defadf3e6e420a7ea52437f28c14f26ab775f3b4"
+  },
+  {
+   "bytes": 2736,
+   "path": "sealed_list_v1.enc",
+   "sha256": "23879326f6c845889b0d8732d80b0cfebe329b2b5ea6ede76cca4fa26c09e552"
+  }
+ ],
+ "assessment_class": "n/a",
+ "config_files": [],
+ "contamination_assessment": "Controlled: membership and order cannot have been known to the software division (secret salt; list sealed) and are fixed before its code is pinned. Controlled with respect to declared training cut-offs of learned packers (latest found 2023-07-28) and to the knowledge cut-off of the model that wrote the software (June 2026): all members were released later. Not controlled: the candidate pool is public (150 entries by a public query); a developer could in principle tune on the whole pool. Unknown: homology of members to structures older than the cut-offs beyond the 30 percent clustering against the development set; no filtering against the training sets of learned packers has been done and must be done before FB-P-02 compares against them.",
+ "created_utc": "2026-11-26T23:42:32Z",
+ "evidence_stage": "held-out",
+ "exclusions": [
+  {
+   "item": "4 pool entries with a non-standard residue in the chain",
+   "reason": "the software's preparation rejects them by design; excluded by metadata before ordering"
+  },
+  {
+   "item": "2 pool entries in a 30 percent cluster of a development structure",
+   "reason": "development structures and their homologues cannot be held out"
+  },
+  {
+   "item": "the three 1.1-1.3 A CASP17 amidase references (T2409-T2411)",
+   "reason": "472 residues and two chains in the asymmetric unit: outside the rule; they were also named in our public documents before this list was made and so could only be a declared, not a sealed, held-out set"
+  }
+ ],
+ "freeze_id": "FRONTIER-FRZ-0002",
+ "inputs": [
+  {
+   "description": "RCSB PDB search service, query.json (150 entries returned)",
+   "licence": "PDB data are CC0 1.0",
+   "retrieved_utc": "2026-11-26T23:40:28Z",
+   "url": "https://search.rcsb.org/rcsbsearch/v2/query"
+  },
+  {
+   "description": "RCSB PDB GraphQL data service: release dates, resolution, sequence length, non-standard residue counts, 30 percent sequence-identity group of each entry and of the seven development structures",
+   "licence": "CC0 1.0",
+   "retrieved_utc": "2026-11-26T23:41:00Z (approximately)",
+   "url": "https://data.rcsb.org/graphql"
+  }
+ ],
+ "kind": "held-out-commitment",
+ "method": {
+  "declared_training_cutoff": "n/a",
+  "dependencies": {
+   "openssl": "3.0.13 (aes-256-cbc, pbkdf2, 600000 iterations)",
+   "python": "3.13.18"
+  },
+  "name": "selection by RCSB search query, archive metadata exclusions, and a salted hash order (script run once in the founding session; rule in SELECTION_RULE.md)",
+  "version": "1"
+ },
+ "notes": "The passphrase of sealed_list_v1.enc and the commitment salt were delivered to the research owner in the session that founded this division and are not in the repository.",
+ "protocol": {
+  "id": "FB-P-02 / FB-P-01 held-out stage; ASSESSMENT_PROTOCOLS section 3 construction (b)",
+  "version": "1"
+ },
+ "random_seeds": [
+  "ordering salt: 256 random bits from the operating system, sealed inside the list",
+  "commitment salt: 256 random bits, held by the research owner"
+ ],
+ "reference_status": {
+  "reference_public_at_freeze": "yes",
+  "statement": "Every member is a released PDB entry (first release 2026-07-01 to 2026-11-25): the coordinates are public. 'Held out' means not available to the software's development, not blind. The software division's development structures are 1CRN, 5PTI, 1BPI, 1PGA, 2IGD, 1UBQ (and 1L2Y for unit tests); their 30 percent clusters are excluded."
+ },
+ "schema": "metricchain-fb-freeze/1",
+ "source_commits": {
+  "frontier-benchmarks": "60a71d1faa325afe33b4a944caadc5cd3941e45b",
+  "structural-biology (the rule proposed in SB-BM-3, read at)": "175652994a3d34419963f5f2a01c180a822e1bc3"
+ },
+ "title": "Held-out list v1 of 47 recent high-resolution single-chain crystal structures, fixed by a public rule and sealed: salted commitment and encrypted list; for FB-P-01 (held-out stage), FB-P-02, SB-BM-3 and SB-BM-6"
+}
