@@ -255,7 +255,15 @@ witnesses through selector functions before the case split.
 4. **Open question with evidence** (`NANUQ_HIGHER_LEVELS.md` §2.3): is every six-leaf system displayed by an
    outer-labeled planar network, of any level, one of the 114?  A proof would make the robust criterion of
    Corollary 14 a theorem for every level.  Eight dihedral classes would have to be excluded (listed there);
-   the mechanism to exploit is that the trees of a network are connected by single switchings.
+   the mechanism to exploit is that the trees of a network are connected by single switchings.  Two things
+   found while thinking about it, neither written into a note: (i) a planar criterion — a split `A|B` is
+   displayed iff some closed curve separating `A` from `B` crosses exactly one edge that is kept, all other
+   crossed edges being hybrid edges into pairwise different hybrid nodes (the kept edge may be the second
+   parent edge of one of them); the cost "non-hybrid edges crossed + hybrid nodes with both parent edges
+   crossed" is not submodular, so curves cannot simply be uncrossed; (ii) the system "all six 2-splits, no
+   3-split" is impossible for every network, planar or not, because two switchings that differ at one hybrid
+   node give trees with a common clade and equal restrictions, and the two "snowflake" trees have none.
+   `six_leaf_treesets.py` counts the distinct sets of displayed trees: 14 / 71 / 245 for 0 / 1 / 2 hybrid nodes.
 5. **Other divisions.**  Structural biology and frontier: answered (COMPLEXITY-RES-0010); both have documents about
    us that we have only partly read (`docs/structural_biology/intake/C_complexity.md`,
    `THEOREM_TO_SOFTWARE_REGISTER.md`; `docs/frontier_benchmarks/RESEARCH_INTAKE.md`) — read them and correct what
