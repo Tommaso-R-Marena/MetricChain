@@ -1190,3 +1190,18 @@ profile and the gauche count, and its support function is the ground-state energ
 * The lesson is the one of `DEAD_ENDS.md` SD43 in small: "no X does Y" was written after
   trying four X.
 
+### Cycle 45 — the pruned-domain finding traced into our other results
+
+* After workstream P4's finding (the pruned product can miss the minimum of the
+  clash-free domain), the coordinator checked where else the pruned products were used.
+  Workstream P3 says "everything is on P2's pruned product": its valine, leucine and
+  serine instances are full products — the twenty-residue certificate among them — but
+  its rows for phenylalanine, lysine and the heteropolymer are certified statements
+  about a sub-domain.  SCI-MSG-0020 quotes three such numbers.  Head notes added to the
+  message and to the report; `DEAD_ENDS.md` SD45 extended.  Benchmark B10 and addendum
+  A17 (6), (9)–(12) use product-domain instances only, except the second batch of
+  A17 (6) (29 instances on clash-free non-product domains, by masks, not pruned
+  products) — not affected.
+* The handoff's "Resume here" section was rewritten as a current-state block; the open
+  problems and the frontier map were brought up to date.
+

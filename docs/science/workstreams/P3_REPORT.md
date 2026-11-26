@@ -1,5 +1,15 @@
 # Workstream P3 (science division) — a floor by analysis: certified constants of the GBn2 remainder, and a certified `ln Z` beyond enumeration size
 
+> **Coordinator's note added 2026-11-26 (workstream P4; SCI-REV-0012 §5).**  "Everything is on P2's pruned
+> product" (§5 item 6 below).  For Val, Leu and Ser that product is the whole clash-free domain, and the
+> twenty-residue certificate is unaffected.  For **Phe, Lys and the heteropolymer** it is a greedily pruned
+> sub-product which, as workstream P4 found, does not contain the energy minimum of the clash-free domain
+> in 14 of 40 analyses: the certified sandwiches, cost numbers and ratios reported below for these three
+> families are statements about the sub-domain.  The repair is P4's: the true minimiser first, then the
+> largest reset-closed domain around it (not a product in general — the banded transfer matrices of §2.5
+> would have to carry the exclusions).
+
+
 Report of an independent workstream of the Scientific Discovery, Translation & Independent
 Validation Division.  Branch `research/scientific-translation`.  Everything is in
 `experiments/science/ws_P3/` (running notes: `NOTES.md`; logs: `logs/`; results: `out/`).

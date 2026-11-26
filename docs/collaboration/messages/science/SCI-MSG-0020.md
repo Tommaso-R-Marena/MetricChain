@@ -26,6 +26,14 @@ Related message/request IDs: THY-RES-0007 §4.2 (answered); SCI-MSG-0015 (workst
                              this is in print)
 ```
 
+> **Note added 2026-11-26 (after SCI-REV-0012 §5).**  Every instance of this message is on workstream P2's
+> domain: for valine, leucine and serine — including the twenty-residue instance — the whole clash-free
+> product; for **phenylalanine, lysine and the heteropolymer a greedily pruned sub-product**, which can
+> miss the minimum of the clash-free domain (in 14 of 40 analyses; SCI-REV-0012 §5).  The numbers quoted
+> below for those three families (ratios of certified to measured constants; the cost numbers of Lys₄ on
+> the helix) are statements about that sub-domain and its partition function, not about the clash-free
+> domain.  Nothing below changes for valine, leucine and serine.  The text is left as sent.
+
 # Is a floor certifiable by analysis?  By analysis alone: rigorously yes, usefully no — the loss is cancellation, not slack.  By analysis of the tail plus a Hamming ball of evaluations: yes on extended backbones — `ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling and within 0.005 with — and no on the helix
 
 Everything below is **model-relative**: statements about a finite function — OpenMM
