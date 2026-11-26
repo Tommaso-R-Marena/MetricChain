@@ -407,12 +407,30 @@ def three_level_row(u: float, n: int, phi: float) -> dict:
                 served=sum(1 for s in stats if s[1] == "2L+"), width=r3["width"], xout=r3["xout"], valid=bool(r3["lL"] <= 1e-12 and r3["lU"] >= -1e-12))
 
 
+def k0_answer_table(u: float = 1.0, n: int = 4000, phi: float = 0.3, slopes=(0.0, 0.25, 0.5, 0.75, 1.0), rungs=(4, 10, 16, 22, 28, 34, 40)) -> dict:
+    """How much of the promised ratio the base bracket uses, and where it puts the value: (alpha + beta)/x and alpha, beta
+    for a few rungs of the outer ladder at (u, n, phi), on the flat fibre and on cones."""
+    T = rung_table(u, n, phi)
+    C, P = T["C"], T["P"]
+    out = dict(u=u, n=n, phi=phi, n_i=P.n_i, rows=[])
+    for l in rungs:
+        x = P.xs[l]
+        for sl in slopes:
+            c, a_, b_, kind = k0_cone(P.n_i, u, x, C.l_inv_delta_p, sl)
+            out["rows"].append(dict(l=l, x=x, slope=sl, lcost=c, alpha=a_, beta=b_, used=(a_ + b_) / x, kind=kind))
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--k0-table", type=str, default="", help="write the table of the base bracket's answers to this file")
     ap.add_argument("--nmax", type=int, default=16000)
     ap.add_argument("--out", type=str, default="")
     args = ap.parse_args()
+    if args.k0_table:
+        Path(args.k0_table).write_text(json.dumps(k0_answer_table(), indent=1) + "\n")
+        return 0
     rows, worst = [], 0.0
     for (u, n, phi), ref in REFEREE.items():
         if n > args.nmax:
