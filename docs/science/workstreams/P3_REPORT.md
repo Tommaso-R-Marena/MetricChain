@@ -660,3 +660,191 @@ matrix against enumeration; transfer-matrix moments against direct sums; Bennett
 (see Totals).  9. Two independent certificates of the same number: for Val₂₀/PPII the `m = 5`
 brackets lie inside the `m = 4` brackets (§3.5).
 *Not a control:* nothing here was checked by a second person or by a proof assistant.
+
+---
+
+## 4. Prior art, with a search log
+
+I extended P2's search (its §4: Simonson/Archontis/Gaillard on pairwise GB, Marshall–Mayo on
+pairwise PB, LUTE, exact solvers, provable partition functions — all of which I take from P2's
+report and did **not** re-read) only where the new statements need it.  Reading level of every
+item below: **[abstract]** (the record returned by the literature tool); nothing was read in full.
+
+| # | tool, query | hits | read |
+|---|---|---|---|
+| 1 | PubMed: `generalized Born many-body error bound pairwise` | 0 | — |
+| 2 | PubMed: `Born radii rigorous bounds` | 1 (PMID 18821791) | not opened |
+| 3 | PubMed: `interval arithmetic protein energy bounds rotamer` | 0 | — |
+| 4 | Consensus: "rigorous upper and lower bounds on generalized Born effective radii or many-body error of pairwise decomposition of generalized Born solvation energy" | 3 shown | 3 abstracts |
+| 5 | Consensus: "provable bounds partition function protein design non-pairwise energy function sparse tuple expansion residual guarantee" | 3 shown | 3 abstracts |
+| 6 | Consensus: "anchored decomposition cut-HDMR truncation error bound mixed differences" | 3 shown | 3 abstracts |
+
+**What these say [K, abstract].**
+* On the accuracy of GB as a model: Onufriev, Case & Bashford, *J. Comput. Chem.* (2002),
+  "Effective Born radii in the generalized Born approximation: the importance of being
+  perfect" (with exact radii the standard `f_GB` reproduces Poisson-equation pair terms well);
+  Mongan et al., *J. Chem. Phys.* (2007), "Analysis of integral expressions for effective Born
+  radii"; Onufriev et al., *J. Chem. Phys.* (2011), "A strategy for reducing gross errors in the
+  generalized Born models of implicit solvation" (errors above `2 k_BT` in individual pair terms
+  relative to the Poisson equation even with perfect radii).  These concern the distance of GB
+  from the Poisson equation — a *physical* error that no statement of this report touches.
+* On sparse or banded pairwise models and guarantees: Jain et al., *PLoS Comput. Biol.* (2017),
+  "A critical analysis of computational protein design with sparse residue interaction graphs"
+  (distance and energy cutoffs change the optimum; comparison on 136 problems); Jou et al.,
+  *J. Comput. Biol.* (2016), "BWM*" (dynamic programming over a branch decomposition of a sparse
+  residue interaction graph); Hallen et al., *Commun. ACM* (2019), "Protein design by provable
+  algorithms" (review).  These guarantees are relative to a *given* pairwise energy; the step
+  from a many-body energy to a pairwise one is where they apply a fit or a cutoff.
+* On truncated anchored decompositions: Rahman, *Math. Comp.* (2014), "Approximation errors in
+  truncated dimensional decompositions" (expected-error bounds for referential = anchored
+  decompositions, and their comparison with ANOVA decompositions).
+
+**From memory, unverified** (no source opened in this workstream): the multivariate Faà di Bruno
+formula (proved inline for the case used); Hoeffding's and Bennett's inequalities (textbook
+forms); the GBn2 model of Nguyen, Roe and Simmerling and the OBC model of Onufriev, Bashford
+and Case (what I used is OpenMM's source, read in full for the two classes concerned).
+
+**How this report relates to it.**  I did not find, in these 9 abstracts and in the literature
+quoted by P2, (a) a rigorous sup-norm bound on the part of a generalized-Born energy that lies
+beyond a pairwise function of rotamers, (b) interval enclosures of the derivatives of the GB
+rescaling and kernel used for such a bound, or (c) a certified two-sided bracket of a partition
+function whose energy contains a GB term.  **This is not a claim of novelty**: six queries, read
+at abstract level, in a literature (protein design) that is outside the programme's scope and
+that I did not survey.  The mathematical ingredients are standard: anchored (cut-HDMR)
+expansions, the Faà di Bruno formula, elementary symmetric and Bell polynomials, interval
+automatic differentiation, transfer matrices, Hoeffding and Bennett.  What may be worth a
+proper search by the division is the combination "exact low orders by evaluation + term-by-term
+tail in closed form over all subsets" as a *certificate*, and the remainder identity of
+Proposition 1 with anchored constants.
+
+---
+
+## 5. What I did not settle
+
+1. **Compact geometries.**  On the helix the certified constants decay by 4–8 per order and
+   the recipe fails (N2).  A buried side chain has even more neighbours.  Nothing here says
+   that a certificate exists there at polynomial cost.
+2. **Whether the looseness is intrinsic.**  I have no theorem saying that every bound that
+   treats atom pairs separately must lose the factor measured in §3.2; I have a mechanism and
+   a sharpness test (§3.2).
+3. **A better analytic tail.**  Signed sums over rigid neutral groups at reference radii
+   (first-order response exact, second order term by term) should gain one power of the small
+   parameter (§6).  Not attempted.
+4. **Certified class constants `c_ijk` (all pairs of states, all contexts) within a small
+   factor of P2's.**  I certify sums of *anchored* constants through the expansion; per-triple
+   class constants I certify only by analysis alone (§3.2, loose).
+5. **A proof of the floating-point allowance for evaluated values of `g`** (§2.6): it is an
+   allowance with a measured margin of five orders of magnitude.
+6. **Continuous χ, finer grids, relaxed geometry, non-product domains.**  Everything is on P2's
+   pruned product of a three-state grid.
+7. **Polar and charged chains beyond 6 residues** (Ser to 6, Lys to 4, heteropolymer to 6).
+8. **Optimal models.**  The minorants of the evaluated terms of order 3 and 4 are row minima,
+   not optimal pairwise minorants; the anchor is a local minimum from coordinate descent, with
+   no optimisation of the anchor or use of several anchors; the allocation of `ĉ_T` to sites is
+   uniform (`1/m` each).
+9. **Machine checking.**
+
+---
+
+## 6. The three most promising next steps
+
+1. **Group-wise signed tails.**  Replace the term-by-term bound at the truncation order by one
+   in which, for each atom `p` and each rigid group `Q` (a backbone peptide unit; a side chain
+   in a given rotamer), the kernel sums `Σ_{q∈Q} q_q ∂_w^k h(ℓ̄_p + ℓ̄_q; r_pq)` are evaluated
+   *with signs* at reference Born radii and only the deviations from the reference are bounded
+   term by term.  The sharpness test of §3.2 says the single-term inequalities are within 1.1–6
+   of exact, so the whole factor 250–800 is available in principle; each exact order in the
+   deviation gains one power of the small parameter.  This is what decides the helix and the
+   buried case.
+2. **A checkable certificate.**  The certificate of Theorem 5 is a finite object: tables,
+   `γ_i`, ball values, two banded models.  A stand-alone checker in exact or interval arithmetic
+   (inputs as rationals; the enclosures recomputed; the sandwich verified term by term) would
+   remove "correctness of my code" from the assumptions, and Proposition 1 with Lemma 2 is a
+   small formalisation target next to the existing `higherOrder_remainder`.
+3. **The same pipeline on an ensemble that is not rigid**: continuous χ within rotamer wells
+   (the tables become interval-valued; the neck cutoff must be handled by splitting cells at
+   the jump), or a public folded backbone with a rotamer library.  The exposed-peptide numbers
+   here are the easy end.
+
+---
+
+## 7. Requests
+
+### To the theory division
+
+**P3-T1 (state the remainder as an identity, with anchored constants).**  Proposition 1:
+`g − I_{m−1}g = Σ_{T ⊆ S(x), |T| = m} Δ_T g(z^{T,x}; x_T)` with `z^{T,x}` = `x` before `min T`, the
+anchor elsewhere.  It strengthens `higherOrder_remainder` in two ways that matter numerically:
+only pairs `(x⁰_i, x_i)` occur (anchored constants; a factor up to `2^m` in the `δ`'s), and only
+contexts that differ from the anchor before `min T`.  Together with the allocation lemma at
+order `m` (`γ_i = (1/m) Σ_{T∋i} c_T` gives `Σ_{T ⊆ S} c_T ≤ Σ_{i∈S} γ_i` — your P2-T1 at general
+order) it is the whole combinatorial content of Theorem 5.
+
+**P3-T2 (the cost formula for a floor that is a function).**  Your §11.30 preview states the cost
+at the centre of a *constant* box as `Θ((e^{ρ₋} − 1)/ε)`.  On real numbers the difference
+between a constant floor and a site-wise one is the whole story: Val₆ on the strand at `m = 4`
+has cost number 1.07 with the constant `Γ₄` and 0.008 with site penalties; Val₁₀ on PPII 4.98
+against 0.42 (§3.4).  Please state (e) for a floor `lo(x)` — the instance cost is
+`𝔼_{π_g} e^{g − lo} − 1` in every case — and say whether the lower bound survives for the
+structured class that a certificate of this kind actually defines:
+`{g : |g − Σ_{|U|<m} d_U| ≤ Σ_{T ⊆ S(x), |T| = m} ĉ_T}` with the `d_U` *known* on the ball.
+
+**P3-T3 (a sandwich gives Bennett's inputs for free).**  Proposition 6: from `m₋ ≤ E ≤ m₊` with
+`u = β(m₊ − m₋)` tractable, `b ≤ 𝔼_{π_{m₋}}u` and `Var ≤ 𝔼_{π_{m₋}}u²`, both exactly computable.
+Two questions: (i) which of the three brackets — `[ln Z(m₊), ln Z(m₋)]` (deterministic),
+Hoeffding with range `1 − e^{−βρ}`, Bennett with `(𝔼u, 𝔼u²)` plus a Chebyshev mean — is optimal
+for which regime of `(𝔼u, 𝔼u², max u, N)`; in my runs each of them wins somewhere (§3.5–3.6);
+(ii) is there a version of the Bennett bracket that uses the pointwise bound `0 ≤ r ≤ u(x)`
+directly (an extremal problem with a state-dependent ceiling) rather than only two moments of `u`?
+
+**P3-T4 (query complexity with a ball).**  The certificate uses `N_ball = Σ_{j<m} C(n,j)(k−1)^j`
+deterministic evaluations and then `N` random ones.  Is `N_ball` necessary for the class of
+functions whose order-`m` anchored constants are bounded by given `ĉ_T`?  (For `m = 2` this is
+your star; for `m = 3` P2's ball.)
+
+### To the engineering division
+
+**P3-E1 (specification: a certificate checker for Theorem 5).**
+*Motivation.*  Remove "the workstream's code is right" from the assumptions of §2.10.
+*Inputs.*  For one instance: the coordinates per (site, state) and fixed atoms; the GB
+parameters and neck tables; the anchor; the ball values of `g`; `γ_i`; the two banded models
+(`out/floor_*.json` holds the summary; `run_floor.py` can dump the rest).
+*Formulation.*  (1) Recompute the descreening tables in interval arithmetic; (2) recompute the
+enclosure tables of `encl.py` or verify them cell by cell; (3) recompute `γ_i` by Proposition 4
+with outward rounding; (4) re-evaluate `g` on the ball in interval arithmetic; (5) verify
+`red⁻_U ≤ d_U ≤ red⁺_U` entry-wise and the additive splits of the far pairs; (6) recompute
+`ln Z(m_∓)` with rational or interval transfer matrices.
+*Validation.*  Val₆/E, `m = 4`, site penalties: `γ = (0.0431, 0.0739, 0.0989, 0.0992, 0.0743,
+0.0430)` kcal/mol, ball of 233 states, `ln Z(m₋) = 198.0762`, `ln Z(m₊) = 198.0608`, exact
+`ln Z(E) = 198.068008`.
+*Stopping condition.*  The checker accepts the instance of §3.5.
+*Resources.*  Interval evaluation of `g` costs about 10 s per state with `mpmath` at 332 atoms;
+87 441 states need a compiled interval library — hence the request.
+
+**P3-E2 (a faster evaluator with a proven rounding bound).**  The ball of radius 4 for 50
+residues is `3.7·10⁶` evaluations of an 800-atom energy.  A compiled evaluator with pairwise or
+compensated summation would make `m = 5` routine at 50–100 residues and turn the allowance
+`ε_g` into a theorem.
+
+---
+
+## What I did not check
+
+* **No proof was machine-checked.**  Propositions 1, 4, 6, Lemma 2, Theorems 3, 5 are paper
+  proofs, checked numerically as stated at each of them.
+* **The floating-point allowance for evaluated values of `g`** (`10⁻⁷` kcal/mol each) is not
+  proved for the summation order of the evaluator used; measured errors are `≤ 2·10⁻¹²`.  The
+  transfer-matrix arithmetic is not budgeted formally.  The enclosures rely on `mpmath.iv`.
+* **My code was not reviewed by anyone.**  Its checks are those of §3.9; in the largest instance
+  (§3.5) the sandwich cannot be checked by enumeration — there the evidence is the agreement of
+  two certificates of different order and the 99 902 sampled states at which `E ≥ m₋` held.
+* **P2's tables of `f` and its geometry builder** were used as they are (P2 validated them
+  against OpenMM; I re-validated only `g`, the domains, and — through the totals — nothing of
+  `f` separately).
+* **The independence of the sampler.**  The brackets with a `δ` assume i.i.d. exact samples;
+  numpy's generator and double-precision conditional tables were used and not tested beyond
+  the 79 enumerated instances in which the truth fell inside every bracket.
+* **Only one large instance**, one anchor, one seed; **only three backbones**, ideal and rigid;
+  **only exposed peptides**; charged systems only up to 4–6 residues.
+* **Prior art** at abstract level only; one PubMed hit not opened.
+* **Physical meaning.**  Nothing here bears on whether GBn2 describes water.

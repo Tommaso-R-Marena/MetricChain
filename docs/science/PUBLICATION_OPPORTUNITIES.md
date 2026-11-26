@@ -230,4 +230,23 @@ exponent irrelevant; constants in the limit shape.
   is open on a named interval.  This is a section of a paper on what data are worth
   (P7), not a paper.  What would lift it: the lemma for a general reference instance,
   or an algorithm with the datum below `a(u)` on the whole class.
+* *Checkpoint 38:* **P6 (the limit shape) has become a better paper.**  The second-round
+  review proved that the concatenation error of bridges is a coboundary (Theorem R9.1,
+  SCI-REV-0009): the limit shape is the Newton–Okounkov convex set of an *exact* graded
+  semigroup, every explicit bridge gives an exact point of it, the number of attained
+  profiles is asymptotically its volume, and interior lattice points are eventually
+  all attained.  That replaces "Fekete's lemma for sets with a bounded error" — a
+  special case of known theory, as our first round said — by a statement with content
+  specific to the object, and it improves two numbers with data already in the
+  repository (`vol 𝒦 ≥ 1.63`; packings with zero radii).  Still missing for a
+  publication: the routing lemma behind the larger inner volume; whether `ε₁ = ½` is an
+  exceptional accuracy; an effective saturation constant; the theory division's
+  verification of the theorem.  **P10 (which class real residuals live in) has also
+  moved:** with addendum A17 (6)–(10) it now has a quantitative conclusion — in rotamer
+  variables the solvent term is a small perturbation of a chain model in the sense that
+  matters for certification, and a free energy at fifty residues follows from about a
+  thousand to a hundred thousand evaluations with a bracket that needs two proved
+  numbers.  As a methods note with the P/P2 measurements this is the most physical
+  thing the programme has; what it lacks is the proof of those two numbers (P3) and a
+  buried, non-homopeptide instance.
 

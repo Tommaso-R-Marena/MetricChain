@@ -20,3 +20,16 @@
     ball of radius 4: 87441 evaluations of g (0.00251 % of the domain) [3.2s]; sum_T max|d_T| (order 3) = 2.114e-01; sum_T max|d_T| (order 4) = 1.199e-02
     models: ln Z(m_-) = 518.369863, ln Z(m_+) = 517.879222: deterministic certified bracket of ln Z(E), width 0.49064 nats; rho_cert = max(m_+ - m_-) = 0.72815 kcal/mol = 1.2214 kT (min 2.30e-01); min m_- = -306.5976, min m_+ = -306.3678 kcal/mol [0.1s]
     BENNETT inputs, certified (kT units): model m_-: floor lo = 0 of r = beta(E - m_-), b_cert = E u = 4.9221e-01, s2_cert = E u^2 = 2.4546e-01, W(b, s2) = 1.1777e-01 nats | midpoint model m_0: b_cert = 8.5602e-01, s2_cert = 6.0963e-02, W = 3.9717e-02 nats (ln Z(m_0) = 518.124152) [0.0s]
+    sampled remainder r = beta(E - m_-) under pi_(m_-): mean 1.0837e-01, variance 1.5104e-03, min 4.8432e-02, max 3.6694e-01 kT (certified: 0 <= r <= u, E u = 4.9221e-01, E u^2 = 2.4546e-01)
+    SAMPLING: N = 50000 exact samples of pi_(m_-) (23138 distinct; mean number of sites off the anchor 3.60), E evaluated at each [169.4s]; W in [0.2948, 1], mean 0.897961, std 3.42e-02; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [518.257453, 518.266993] (width 0.00954 nats); point estimate 518.262234; Gibbs-Bogoliubov lower bound (same confidence) 518.254072; mean gap 6.4608e-02, max sampled gap 2.1876e-01 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [518.002878, 518.321435] (width 0.31856 nats); W sampled in [0.692850, 0.952722]
+    Bennett bracket (certified b, s2; mean by Chebyshev, delta = 0.05): ln Z(E) in [518.251581, 518.389171] (width 0.13759 nats = W_cert 1.18e-01 + 2 x 9.91e-03)
+    [224s] -> out/floor_V20_P2_t0.70_gbn2_m5_siteres_w1.json
+=== V20 on P2, tau 0.7, gbn2, truncation order m = 5: atoms 332, sites 20, states/site 3..3, |X| = 3.49e+09; anchor E = -306.5687 kcal/mol; band w = 8
+    site penalties gamma_i (kcal/mol) = [0.0011 0.002  0.0029 0.0038 0.0047 0.0052 0.0054 0.0055 0.0055 0.0055
+ 0.0055 0.0055 0.0055 0.0054 0.0051 0.0046 0.0037 0.0028 0.0019 0.001 ]; sum = 8.22273e-02 (= Gamma_5 up to rounding); floating-point allowance per site <= 4.37e-04
+    Gamma_5 = 8.22273e-02 kcal/mol (self 9.749e-05, cross 8.213e-02) + floating-point allowance 1.00e-07 = 1.00000e-07 = 0.0000 kT   [72.0s]
+      ball values read from ball_V20_P2_t0.70_gbn2_M4_78d2725e4b.npz
+    ball of radius 4: 87441 evaluations of g (0.00251 % of the domain) [4.1s]; sum_T max|d_T| (order 3) = 2.114e-01; sum_T max|d_T| (order 4) = 1.199e-02
+    models: ln Z(m_-) = 518.293650, ln Z(m_+) = 518.233156: deterministic certified bracket of ln Z(E), width 0.06049 nats; rho_cert = max(m_+ - m_-) = 0.30405 kcal/mol = 0.5100 kT (min 1.59e-05); min m_- = -306.5687, min m_+ = -306.5687 kcal/mol [0.8s]
+    BENNETT inputs, certified (kT units): model m_-: floor lo = 0 of r = beta(E - m_-), b_cert = E u = 6.1017e-02, s2_cert = E u^2 = 4.7767e-03, W(b, s2) = 2.3728e-03 nats | midpoint model m_0: b_cert = 2.8525e-01, s2_cert = 1.1755e-03, W = 6.4681e-04 nats (ln Z(m_0) = 518.263273) [0.1s]

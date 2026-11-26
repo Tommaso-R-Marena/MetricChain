@@ -1,0 +1,4 @@
+p=0.2 u=1 G=801 u*=1.9807  (build 0s)
+E <= 0.310766  (safe, reference Q = pi)   E_F = 0.310766   excess 5.00e-11   (1s)
+E <= 0.310766 with reference Markov(q~=0.2000)   (8s)
+a <= 0.161310  (safe, q~=0.2000)   cube a = 0.110944   (30s)

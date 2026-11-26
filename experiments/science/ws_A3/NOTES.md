@@ -742,3 +742,25 @@ paper (Decoster 2004) that may contain rigorous higher-order bounds — which I 
 stays "(4) not found", with that paper named as unread.  (2) My own count "Marton's papers of the 1990s" was a
 memory; the reference lists of the two papers read give the actual years.
 appended at 01:01 UTC
+
+## Resume here (final state, 01:02 UTC; supersedes the block before step 13)
+Final counts: 15 `WebSearch` queries (W1–W15); 76 arXiv-API queries; PubMed: 13 searches (9 + 4 for the second
+addition) plus metadata/full-text calls; 1 Consensus query; 7 Crossref DOI look-ups + 11 bibliographic queries;
+`WebFetch`: 7 targets; 80 download targets, 65 PDFs (63 distinct papers); 47 sources read at full-text level in the
+passages named.
+Final classifications: T1 (1); T2 (2) [necessity (3)]; T3 (2) [+ (4) for the hinted-query theorem]; T4 (2) [bracket
+(1), slogan (3) and too strong]; O1: A17.3/A17.4 (1), A17.2 (2), A17.5(ii) (3); O2/A17.6 (2), improvable; A17.7: the
+inequality (1), its use as a certificate in free-energy perturbation (4) with Decoster 2004 unread; non-product
+reference: (2) via Chazottes–Collet–Külske–Redig, Theorem 1.
+If the workstream is continued:
+1. Obtain through a library: Dagum–Karp–Luby–Ross (SIAM J. Comput. 29(5), 2000); Decoster (J. Phys. A 37(39),
+   9051–9070, 2004); Bennett (JASA 57, 1962); Külske (CMP 239, 2003).  Check §4.3(a), A3.3(b) and §4.11 against them.
+2. Read Block–Shetty's appendices (Theorems 6 and 8 as proved) and the body of arXiv:2404.08158.
+3. Numerics for the ranges `c̃_i` on chain models (report §6, item 2).
+appended at 01:02 UTC
+
+### step 15, addendum — last routes tried for Decoster 2004
+Semantic Scholar API (DOI look-up): abstract "elided by the publisher", open copy = the publisher's PDF (bronze);
+Crossref work record: no abstract, link stacks.iop.org/0305-4470/37/i=39/a=001/pdf → `getpdf.sh decoster2004b` →
+the same challenge page.  Not opened.  Downloads now 80 targets, 65 PDFs.
+appended at 01:02 UTC

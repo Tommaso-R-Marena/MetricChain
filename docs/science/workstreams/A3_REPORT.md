@@ -47,7 +47,8 @@ Bahadur–Savage (1956), Lu–Kofke I (2001), Dagum–Luby (1997), Lilien et al.
 papers were not read beyond abstracts or records.  The property-testing / interactive-proof
 literature on "verification is cheaper than estimation" was searched once, not read.  The proofs
 of the theory division's §11.30 do not exist in the export, so T3's lower bound was compared as a
-statement, not as a proof.  The complete list is at the end ("What I could not access").
+statement, not as a proof.  For the second addition, Bennett (1962), Decoster (2004), Külske (2003) and
+Marton's papers were not opened.  The complete list is at the end ("What I could not access").
 
 ---
 
@@ -802,6 +803,12 @@ source for the slogan is Minka (2005).
    reported incomplete (Chen, arXiv:0711.2801, App. D); the statement is reported true.  Cite the theorem,
    not the proof.
 10. **Nothing found contradicts** T2, the lower bound of T3, A17.1–A17.5 or the direction statement.
+11. **A17.7 (second addition, §4.11) is sharpened in two small ways and contradicted in none.**  Between its
+    two forms sits `ln(1 + (σ²/b²)(e^b − 1 − b))` (Liao–Berg, Theorem 1, applied to the exponential); the same theorem
+    improves the *cheap* side to second order when the remainder has a ceiling `a` above its mean:
+    `K ≥ ln(1 + Var_π(r)(e^{−a} − 1 + a)/a²)`.  And the one molecular-simulation paper read on bounds (Delle Site–
+    Hartmann 2024) states that the second-order truncation is in general neither an upper nor a lower
+    bound — the gap that A17.7 closes under a floor.
 
 ### 4.9 Search log
 
@@ -880,8 +887,9 @@ another paper and was discarded.
 (automatic reading; the tool would not reproduce the abstract verbatim); the IOP page of Decoster's paper
 (automatic reading of the abstract, summarised by the tool; the PDF address returned an error page).
 
-**Direct downloads** (`getpdf.sh`): 79 targets, 65 PDFs (63 distinct papers).  Refused or failed: SIAM (challenge page),
-IOP (challenge page; Unpaywall lists that PDF as the open copy of Decoster's paper),
+**Direct downloads** (`getpdf.sh`): 80 targets, 65 PDFs (63 distinct papers).  Refused or failed: SIAM (challenge page),
+IOP (challenge page at both addresses of Decoster's paper; Unpaywall and Semantic Scholar list that PDF as the
+only open copy, and neither they nor Crossref carry the abstract),
 CiteSeerX (redirect to archive.org, connection reset), ResearchGate, the former ICSI address of the
 report version of Dagum–Karp–Luby–Ross (404/403), Project Euclid (bot wall), Europe PMC, PMC and PNAS PDFs
 of Gore et al. (challenge pages), one Kyoto repository address (HTML).
@@ -1319,8 +1327,9 @@ there to Külske (2003), which I did not open; for Markov chains Kontorovich–R
   **Külske** (Comm. Math. Phys. 239 (2003) 29–51, as cited by Chazottes et al.), **Marton**'s papers (1995/1996,
   1998, 2003, 2004, as cited by Kontorovich–Ramanan and by Chazottes et al.; the last is arXiv:math/0410168,
   located, not opened), **Pinelis–Utev**: not opened.  **Decoster**, J. Phys. A: Math. Gen. 37(39), 9051–9070
-  (2004): IOP returns a challenge page to a direct download and an error page to the fetch tool (Unpaywall
-  lists the publisher's PDF as open); abstract through an automatic reading only.  **Reible–Hartmann–Delle
+  (2004): IOP returns a challenge page to a direct download (two addresses) and an error page to the fetch
+  tool; Unpaywall and Semantic Scholar list only the publisher's PDF, Crossref and Semantic Scholar carry no
+  abstract, and three arXiv queries found no preprint; abstract through an automatic reading only.  **Reible–Hartmann–Delle
   Site** (arXiv:2111.10282) and the other "two-sided Bogoliubov inequality" preprints: located, not opened.
 * **archive.org** is unreachable from this machine (connection reset by the proxy), which closed the
   usual route to old technical reports.

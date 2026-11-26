@@ -1,4 +1,4 @@
-check_all.sh  2026-11-26 00:53:24 UTC
+check_all.sh  2026-11-26 01:02:57 UTC
 lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
 TheoremA.lean identical to the output of assemble.py: True
 
@@ -43,71 +43,5 @@ errors: 0   warnings: 0
 'ScienceL3.lemma2_dens' depends on axioms: [propext, Classical.choice, Quot.sound]
 'ScienceL3.densW_coneW' depends on axioms: [propext, Classical.choice, Quot.sound]
 
-=== TheoremA.lean  (3362 lines, 166 theorems)
+=== TheoremA.lean  (3386 lines, 167 theorems)
 forbidden tokens (sorry/admit/native_decide/axiom declarations): 0
-exit code: 0   (119 s)
-errors: 0   warnings: 0
-#print axioms lines: 32;  not equal to [propext, Classical.choice, Quot.sound]: 0
-'ScienceL3.lemma3_i' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma3_compensation' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma3_compensation_bernoulli' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma0_window_lipH' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma2_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma2_dens' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma1a_weighted' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma1a' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma1a_div' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma1b_weighted' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.lemma1b' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.oracle_packing_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.massW_densW_dipW_of_wt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.dipW_pos_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.barW_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.massW_barW' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.densW_barW' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.baseW_add_barW_inCone' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.card_barW_ne_zero_le' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.exists_compensator' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_group_sharp' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_group' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Hkr_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_group_div' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_fin' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.binomial_mode_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.card_wt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Hkr_le_chernoff' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_group_chernoff' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_fin_chernoff' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_group_Cm' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.theoremA_fin_Cm' depends on axioms: [propext, Classical.choice, Quot.sound]
-
-=== A16Rearrangement.lean  (344 lines, 22 theorems)
-forbidden tokens (sorry/admit/native_decide/axiom declarations): 0
-exit code: 0   (27 s)
-errors: 0   warnings: 0
-#print axioms lines: 8;  not equal to [propext, Classical.choice, Quot.sound]: 0
-'ScienceL3.A16.sum_eq_sum_f_add' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.A16.f_concaveOn' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.A16.F_eq_clip' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.A16.F_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.A16.sum_comp_le_of_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.A16.lemmaA16_5_of_harper' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.A16.tail_of_harper' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.A16.lemmaA16_5_of_harper_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
-
-=== ChainRuleCube.lean  (655 lines, 34 theorems)
-forbidden tokens (sorry/admit/native_decide/axiom declarations): 0
-exit code: 0   (35 s)
-errors: 0   warnings: 0
-#print axioms lines: 11;  not equal to [propext, Classical.choice, Quot.sound]: 0
-'ScienceL3.Chain.klBound_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.kl_additive_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.klB_le_max' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.klDivFin_bern' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.klBound_bool' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.a1_item2' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.a1_item2_lip' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.a1_item2_additive' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.a1_item2_cone0' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.a1_item2_cone1' depends on axioms: [propext, Classical.choice, Quot.sound]
-'ScienceL3.Chain.a1_item2_isGreatest' depends on axioms: [propext, Classical.choice, Quot.sound]
