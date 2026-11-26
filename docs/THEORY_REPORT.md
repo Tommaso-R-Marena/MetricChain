@@ -5945,7 +5945,8 @@ for which no such schedule is known.  The `C₁√n` of *this schedule* comes fr
 which work at a bounded threshold on an outer block of positive fraction (Lemma
 11.55(c)); the workstream's report takes a `√n` to be unavoidable for the family, because
 the finest rung of the top level calls a bounded-accuracy procedure.  We do not think it
-is, and state the reason as a sketch only (**the coordinator's; not written out, not
+is (**since proved: Proposition 11.58c and Theorem 11.58d below — workstream Q2, refereed
+internally; the sketch is kept as it was written**), and state the reason as a sketch only (**the coordinator's; not written out, not
 refereed, nothing in the theorem depends on it**): a drop run at the accuracy `C·ln n`
 with a polynomially large threshold closes above `p_u·n_o` and loses a polynomial factor
 (Lemma 11.55(d) with `e·n_o = O(ln n)`); and from the accuracy `C·ln n` a bounded accuracy is
@@ -5976,6 +5977,133 @@ composition at depth is not evaluated:** exact evaluation reaches seven levels a
 `n ≤ 6.4·10⁴`, where the design is not yet better than the base family; where the theorem
 says something new (`M = 5 … 32` epochs for `n = 6.4·10⁴ … 10^{12}`) it rests on the paper
 induction and on one-level checks.
+
+**Lemma 11.58b (one level over a family whose certified cost is a maximum of lines) [P: workstream
+Q2, `docs/workstreams/Q2_REPORT.md`, Lemma U; refereed internally (`docs/workstreams/Q2_REVIEW.md`:
+correct as stated; with an evaluator of the referee's own, 973 668 levels with inner families
+that saturate their type, least slack `2.0` nats; part (ii) is the referee's answer to a question
+of the coordinator, on 353 184 levels); rests on Theorem 11.56 and Lemma 11.55(d); harness XVI.9;
+not machine-checked].**
+Let a family of bracket procedures for the dimensions `d ≤ N` have certified costs
+
+    b(d, x, δ)  ≤  max_i [ d·B_i − σ_i·min(x, R·d) ]  +  E(d, x; Λ)        (x ≥ x_min,  Λ ≥ ln(1/δ) + d·ln 2)
+
+for finitely many lines `(B_i, σ_i)`, `B_i ≥ 0`, `0 ≤ σ_i ≤ 1`, a common range `R`, and an error function as in
+the proof of Theorem 11.58a.  Let `n ≤ N`, a tolerance `b ≥ max(1, x_min)`, an outer block `1 ≤ n_o ≤ n − 1`
+with `2u·n_i > b`, an outer accuracy rate `e ≥ 0`, a threshold `θ ≥ 3(n_o + 1)·e^{2u + e^u + n_o·e}`, and a cap `Ξ` with
+`n_o·θ_na(e) ≤ Ξ ≤ min(n, R·n_i)`.  Algorithm 2L⁺ in dimension `n` with `λ = 1`, `η = ½`, `η′ = 1`, `ν₁ = 1`, this `n_o`, `θ`
+and `b`, and the ladder of step one from `b + min{⌈Ξ − b⌉₊, ⌈2un_i − b⌉ − 1}` down to `b`, served by the family,
+has accuracy `ln[(2p_u)^n + e^b(3·exp(1) + 1 + θ)]`, closes with `ln(1/π†) ≤ n_o·θ_na(e) + ln(n_o + 1)`, and
+
+    ln C_max  ≤  max_i [ n_i·B_i + (1 − σ_i)·n_o·θ_na(e) ]  +  ℓ₀^b(n, Λ)  +  E(n, b; Λ + q^b(n, Λ)),
+
+with `ℓ₀^b(n, Λ) = 3 ln n + ln(Λ + ln n) + O(1)` (`≈ 4 ln n` for `Λ = O(n)`) and `q^b = O(ln n + ln ln Λ)`, both explicit;
+the failure probability handed to the family satisfies `ln(1/δ′) + n_i ln 2 ≤ Λ + q^b(n, Λ)`.
+(ii) *Lines valid at all accuracies.*  The same holds with `R = ∞` and positive slopes, with the cap
+`Ξ = n_o·θ_na(e)`, provided one of the lines is nonnegative at the accuracy `max(n_o·θ_na(e), b)` in the
+dimension `n_i` — for instance the zero line `(0, 0)` is among them.  Without such a line the
+inequality is false.  What the proof uses of the majorant of the family is only that it is
+nonincreasing in the accuracy with slope at least `−1`.
+
+*Reading.*  This is the finite-`n` form of the line `γ + (1 − φ)·T(γ/(1 − φ))` at `γ = φ·θ_na(e)` of the
+exponent-level recursion (`StepLE.of_limit` **[V]**), with an explicit error of `≈ 4 ln n`: the outer
+sample costs `e^{n_oθ_na(e)}`; rungs finer than `n_oθ_na(e)` are needed by `e^{x_l + O(ln n)}` points only and cost
+`(1 − σ)x_l` more than `n_i·B`; coarser rungs are needed by all sampled points and their terms decrease
+with slope `σ`; the maximum sits at the rung `≈ n_oθ_na(e)`.  The proof gives the sharper
+`ln C_max ≤ ln(L + 2) + 1 + P_cnt + E + max_i[n_iB_i + (1 − σ_i)G]` with the level's own constants and
+`G = (ln 2M̄ − 1 − P_cnt)₊ ≤ n_oθ_na(e)`, which is attained up to a fraction of a nat (harness XVI.9: least
+slack `0.26`–`0.37`); at the sizes of exact tables `G` is far below `n_oθ_na(e)` — the closing radius is well
+above its guaranteed value (`ln(1/π†) = 11` against `n_o·a = 33` at `n_o = 100`, `u = 2`) — so the displayed
+form alone would not detect a wrong coefficient there.  *Two uses.*  At `e = h` it is the slope step
+of Theorem 11.58a with the error `σ′·(1 + c_log(n) + h) + ℓ₀`, `σ′` the *new* slope, in place of
+`(B/h)(1 + c_log(n) + h) + ℓ₀`: on average over an epoch `(9/2)·ln n` instead of `(a/h + 4)·ln n`.  At `e = 0` it is
+part (a) of the next proposition.
+
+**Proposition 11.58c (the drop without its `√`; a chain back to a bounded accuracy) [P: workstream Q2,
+Propositions D′ and T; refereed internally as above (the chain by exact recursion: 3.5 million
+levels of 10 962 chains away from the design, least slack `3.4` nats); harness XVI.9(d), (e)].**
+(a) *The drop at a logarithmic accuracy.*  Let a family be as in Lemma 11.58b with a range `0 < R ≤ 1`,
+let `0 < φ ≤ R/(a + R)` and `𝒳 ≥ b + ln(3·exp(1) + 2 + 3(φN + 1)·e^{2u + e^u})` (`= b + ln(φN + 1) + O(1)`).  The level of the
+lemma with `n_o = ⌊φn⌋`, the rate `e = 0`, the cap `R·n_i` and `θ = e^{𝒳−b} − (3·exp(1) + 1) − (2p_u)^n e^{−b}` has accuracy
+exactly `𝒳` and closes with `ln(1/π†) ≤ n_o·a + ln(n_o + 1)` — **no `√n_o`** —, and the family it defines (the
+accuracy is passed through where the level is not defined) is of the flat type
+
+    ( B′, 0, ∞;  E + B̃ + ℓ₀^b ),        B′ = max_i [ (1 − φ)·B_i + (1 − σ_i)·φ·a ],     B̃ = max{1, bφ/(2u(1 − φ))}·max_i (B_i − (1 − σ_i)a)₊ .
+
+For one line of slope one and `φ = R/(a + R)`: `B′ = B·a/(a + R)` — the drop of Theorem 11.58a without its
+`u√(φnℓ_c/2)`.  The price is the accuracy: the family delivers `𝒳 ≈ ln n`, not a bounded accuracy.
+(A drop at a bounded threshold stops closing at `p_un_o − Θ(√n_o)` and pays `e^{n_oa + Θ(√n_o)}` for its
+block — more than `n_o·a + 1.4·u√n_o` on the exact tables of the harness; a polynomial threshold
+closes above `p_un_o`.)
+(b) *The chain.*  Let a family be of the flat type `(B′, 0, ∞; E)` with `0 < B′ ≤ ln 2` and least accuracy
+`𝒳 > 1`, and let `0 < α ≤ 1`.  In dimension `d` take Algorithm 2L⁺ with a **short** outer block of `m` sites,
+`λ = η = η′ = θ = c = α/(13⌈N/m⌉)`, `ν₁ = 2e^um/c`, and a ladder of two rungs `2u(d − m) > 𝒳 > b_d`: the coarse rung
+is served by the family in dimension `d − m`, the fine rung by *the same construction* in dimension
+`d − m` (and below a dimension `d₀ = O(m + 𝒳 + ln(N/α))` by the base bracket).  The procedure has
+accuracy at most `α` in every dimension `d ≤ N`, and its certified cost satisfies
+
+    b(d, ·, δ)  ≤  d·B′  +  E(d, 𝒳; Λ*)  +  A_T(d, Λ*)  +  j(d)·[ 𝒳 + P̄_cnt + ln 4 − m·B′ ]₊ ,
+
+`j(d) ≈ d/m` the number of levels of the chain, `Λ*` the value of `Λ` at its bottom.  If the block is long
+enough, `m·B′ ≥ 𝒳 + P̄_cnt + ln 4` — that is `m = Θ((ln N + ln(1/α))/B′)` — the last term vanishes and
+`Λ* < Λ + d·B′`: **a chain of any length costs its additive term once**,
+
+    A_T  ≤  (ln 2/B′ − 1)·(𝒳 + P̄_cnt) + O(ln N)  =  O(ln N + ln(1/α))
+
+(`(a/B′ − 1)` in place of `(ln 2/B′ − 1)`, up to `O(√(m ln(1/c)))`, when Lemma 11.55(c) applies to the block).
+*Why once.*  At every level the coarse rung is needed by all `≈ e^{ϖ + P_M}` outer points
+(`ϖ ≥ ln(1/π†)` of the block) at `e^{(d−m)B′}` each: `ϖ − mB′ + P_M` nats more than `e^{dB′}`.  The fine rung is needed
+by `e^{𝒳 + P_cnt}` points only, and the procedure that serves it lives in dimension `d − m`: its cost
+`e^{(d−m)B′ + A}` is `e^{dB′ + A}·e^{−mB′}`, which pays for the `e^{𝒳 + P_cnt + ln 4}` as soon as the block is long enough.
+So the maximum over the chain is the first term of its *first* level; with a shorter block every
+level adds the deficit (harness XVI.9(e): with half the block the excess grows by `57`–`73` nats
+over four to six levels).
+
+**Theorem 11.58d (the bounded levels need no `√n`) [P: workstream Q2, Theorems A and B, Proposition
+A′; refereed internally: correct as stated given Theorem 11.56 with the abort rule before every
+query, Lemma 11.55(c), (d), Proposition 11.57(a) and the epoch arithmetic; the nested design
+evaluated exactly by the workstream and reproduced to the last digit by the referee for one to
+three epochs up to `n = 8·10³` (`729 000` nodes of the induction, no violation); not
+machine-checked].**
+In the schedule of Theorem 11.58a replace every drop by the drop of Proposition 11.58c(a) followed
+by a chain (b), and the base bracket at a bounded accuracy by the base bracket at the accuracy
+`ln 12 + 2 ln(n+1) + 2u + e^u` followed by a chain.  Then for all `n ≥ 1`, `ε > 0`, `0 < δ < 1` and every number of
+epochs `M ≥ 0`
+
+    ln N(n; ε, δ)  ≤  n·B_M + 𝓔′_M(n, ε, δ),
+
+where `𝓔′_M` is an explicit sum of `k_M − 1 − M` slope-step terms, `M` drop terms, `M + 1` chain terms and the
+base term, each `O(ln n + ln ln(1/δ))` — the top chain `O(ln n + ln ln(1/δ) + ln(1/min(ε, 1)))` — as long as
+`(k_M − 1)·O(ln n) ≤ n`: **no term of the order `√n`.**  Consequently, for fixed `u` and `δ`, there are `n₀` and `C′`
+with
+
+    ln N(n; ε, δ)  ≤  n·h + 2·√( (1 + r̄)·c₁·n·ℓ̄_S ) + C′·( (ln n)² + ln(1/ε) )        (n ≥ n₀,  0 < ε ≤ 1),      ℓ̄_S = (9/2)·ln n + O(ln ln n),
+
+    limsup_{n→∞} ( ln N(n; ε_n, δ) − n·h ) / √(n ln n)   ≤   C_*′(u) = 3·√( 2(1 + r̄)·c₁ )
+
+for every sequence `ε_n ∈ (0, 1]` with `ln(1/ε_n) = o(√(n ln n))`; `C_*′ = 3.50, 6.56, 10.57` at `u = ½, 1, 2`
+(`C_* = 4.65, 8.64, 13.5`).  Against Theorem 11.58a: (i) the `C₁(u, ε)·√n` is gone — behind the level term
+stands `O((ln n)²)` (`M + 1` chains and `M` drops at `O(ln n)` each, `M = O(ln n)`); (ii) the accuracy enters
+additively, `O(ln(1/ε))`, through one chain, where Theorem 11.58a has `√(n·ln(1/ε))` inside `C₁√n`; (iii) the
+constant of the limsup is smaller by the factor `√(4.5/(a/h + 4))` (`0.76` at `u = 1`), because Lemma
+11.58b charges a slope step by its new slope.  With `M = 0` the design is a chain over the base
+bracket: `ln N ≤ n·a + O(ln n + ln(1/min(ε, 1)))` — the non-adaptive exponent by nested levels with short outer
+blocks, where the plain two-sample bracket at a bounded accuracy costs `n·a + Θ(√n)` (the referee,
+with its own code: the certified cost of that design is `110` nats *below* `n·a` at `n = 1.6·10⁴` and `574`
+below at `6.4·10⁴`, the plain bracket `118` and `223` above).
+*Numbers* (the workstream's formula (A.1), reproduced by the referee; `u = 1`, `ε = 1`, `δ = 0.05`, best `M`;
+`h/a = 0.2626`): the bound is `0.619·na` at `n = 10⁵`, `0.358·na` at `10⁶` (9 epochs, 34 levels), `0.2690·na` at `10⁸` and
+`0.2632·na` at `10^{10}` — against `0.37`, `0.273`, `0.2637` for Theorem 11.58a at `10⁶, 10⁸, 10^{10}`; in nats above `n·h`:
+`1.06·10⁴`, `7.0·10⁴`, `6.5·10⁵` against `1.21·10⁴`, `1.16·10⁵`, `1.22·10⁶`.  A chain costs `231`–`510` nats at `n = 10⁶` (for
+`B′` between `a` and `0.30a`); below `n ≈ 10⁶` the schedule without chains — or the variant of the
+report's §5.4, which carries the logarithmic accuracy through the epochs as a tolerance and
+uses one chain at the top — is cheaper.
+*What it is not.*  Everything said of Theorem 11.58a under (i), (iii)–(vi) applies, with one more
+kind of level in a regime that no simulation covers (chains of about `n/ln n` levels, inner
+failure probabilities `e^{−Θ(n)}`).  The order `√(n ln n)` is that of the rate `c₁/k` of the epochs and
+is not improved here.  (An improvement of the order — `n^{1/3}(ln n)^{2/3}`, by carrying a convex family
+of lines through the levels — is the subject of `docs/workstreams/Z_REPORT.md`, under internal
+review when this was written.)
 
 *The picture for the cube class, complete at the exponential scale down to accuracies
 `e^{-o(n)}`:*

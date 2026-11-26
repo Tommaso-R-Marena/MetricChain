@@ -1680,6 +1680,42 @@ MUTS["XVI"] += [
      [('    if worst > 1e-5:\n        return False, dict(reason="Proposition U: the level operator exceeds', '    if worst > -1e-3:\n        return False, dict(reason="Proposition U: the level operator exceeds')], 'XVI.8'),
 ]
 
+# One level over a maximum of lines, the drop without its square root, the chain (theory report Lemma 11.58b, Proposition 11.58c)
+MUTS["XVI"] += [
+    ("XVI.9 M1: (U) claimed without the polynomial term ell_0",
+     [("        bound = max(n_i * B + (1 - s) * n_o * th for (B, s) in lines) + lu_ell0(u, n, Lam, b)\n",
+       "        bound = max(n_i * B + (1 - s) * n_o * th for (B, s) in lines)\n")], 'XVI.9'),
+    ("XVI.9 M2: the sharp form with a third of the outer sample (the dominant rung charged at G/3)",
+     [("        sharp = math.log(len(lnC) + 2) + 1 + pcnt + max(n_i * B + (1 - s) * G for (B, s) in lines)\n",
+       "        sharp = math.log(len(lnC) + 2) + 1 + pcnt + max(n_i * B + (1 - s) * G / 3 for (B, s) in lines)\n")], 'XVI.9'),
+    ("XVI.9 M11: the sharp form without the gap of one rung (the '+ 1')",
+     [("        sharp = math.log(len(lnC) + 2) + 1 + pcnt + max(n_i * B + (1 - s) * G for (B, s) in lines)\n",
+       "        sharp = math.log(len(lnC) + 2) + pcnt + max(n_i * B + (1 - s) * G for (B, s) in lines)\n")], 'XVI.9'),
+    ("XVI.9 M12: every rung charged the full outer sample whatever its slope (the factor 1 - sigma dropped is a weaker, true bound; with 1 + sigma claimed as gain it is false)",
+     [("        sharp = math.log(len(lnC) + 2) + 1 + pcnt + max(n_i * B + (1 - s) * G for (B, s) in lines)\n",
+       "        sharp = math.log(len(lnC) + 2) + 1 + pcnt + max(n_i * B + (1 - 1.5 * s) * G for (B, s) in lines)\n")], 'XVI.9'),
+    ("XVI.9 M3: the closing ball claimed without the factor n_o + 1",
+     [("        if linvpi > n_o * th + math.log(n_o + 1) + 1e-9:\n            return False, dict(reason=\"ln(1/pi_dagger) exceeds n_o theta_na(e) + ln(n_o + 1)\"",
+       "        if linvpi > n_o * th + 1e-9:\n            return False, dict(reason=\"ln(1/pi_dagger) exceeds n_o theta_na(e) + ln(n_o + 1)\"")], 'XVI.9'),
+    ("XVI.9 M4: lines valid at all accuracies WITHOUT the zero line claimed to obey (U)",
+     [("            lines = lines + [(0.0, 0.0)]\n            Xi = n_o * th\n", "            Xi = n_o * th\n")], 'XVI.9'),
+    ("XVI.9 M5: the control granted the outer sample (then it does not fail, and nothing shows that a nonnegative line is needed)",
+     [("        if lC2 > n_i * 0.05 + lu_ell0(u, n, math.log(20) + n * math.log(2)) + 1e-9:",
+       "        if lC2 > n_i * 0.05 + n_o * a + lu_ell0(u, n, math.log(20) + n * math.log(2)) + 1e-9:")], 'XVI.9'),
+    ("XVI.9 M6: the threshold of the drop without the constant 3e + 1 (the accuracy is then not X)",
+     [("        theta = math.exp(X - 1) - c3 - (2 * pu) ** n / math.e\n        xout = math.log((2 * pu) ** n + math.e * (c3 + theta))",
+       "        theta = math.exp(X - 1) - (2 * pu) ** n / math.e\n        xout = math.log((2 * pu) ** n + math.e * (c3 + theta))")], 'XVI.9'),
+    ("XVI.9 M7: the contrast evaluated at the polynomial threshold on both sides (no square root to exhibit)",
+     [("        Cb = ba_constants(n_o, n, u, parb, 3)", "        Cb = ba_constants(n_o, n, u, par, 3)")], 'XVI.9'),
+    ("XVI.9 M8: the chain with a block half as long, the bound claimed all the same",
+     [("            m = m // shorten\n", "            m = m // 2\n")], 'XVI.9'),
+    ("XVI.9 M9: the fine rung of the chain served in the same dimension (no sites removed: nothing pays for it)",
+     [("                inner_fine = (dd - m) * math.log(2) if dd - m < d0 else t_inner\n",
+       "                inner_fine = (dd - m) * math.log(2) if dd - m < d0 else t_inner + m * Bp\n")], 'XVI.9'),
+    ("XVI.9 M10: the chain claimed without its first-term excess (cost at most d B' + the bottom)",
+     [("                    if cst > max(excess, bottom) + 1e-9:", "                    if cst > bottom + 1e-9:")], 'XVI.9'),
+]
+
 # The nested algorithm on a general probability space (theory report 11.33)
 MUTS["XXVI"] = [
     ("XXVI.1 M1: the Gaussian upper tail function with Phi(t - L) in place of Phi(L - t)",

@@ -8082,6 +8082,198 @@ def t_rate_theorem(rng, trials):
     return True, stats
 
 
+def lu_ell0(u, n, Lam, b=1.0):
+    """ell_0^b(n, Lambda) of Lemma 11.58b (workstream Q2, section 2): the polynomial factors of one level, bounded uniformly."""
+    An = (2 * u + math.log(2)) * n + 2 + b
+    mbar = n + 2 + math.log2(12 * math.e * (math.e - 1) * An)
+    Kbar = 18 * (Lam + math.log(2 * An * mbar * (n + 3))) + 1
+    return 1 + 2 * math.log(An) + math.log(18 * math.e * (math.e - 1)) + math.log(Kbar) + math.log(n + 3)
+
+
+def lu_level(n, n_o, u, par, xs, lnC):
+    """ln C_max of Algorithm 2L+ (theory report Theorem 11.56), from exact tables of the outer cube.
+    xs = [x_0, ..., x_L] (the ladder, x_0 = 2 u n_i), lnC = [ln C_1, ..., ln C_L] (certified inner costs)."""
+    L = len(lnC)
+    C = ba_constants(n_o, n, u, par, L)
+    lam, eta = par["lam"], par["eta"]
+    l2M = math.log(2) + math.log(C["Mbar"])
+    lJ, lK = math.log(C["J"] + 1), math.log(C["K"])
+    lpre = math.log(2 * (1 + eta) ** 2 / (1 - eta)) + lam + math.log(C["nu"])
+    terms = [l2M] + [min(l2M, lJ + max(lK, lpre + xs[l - 1])) + lnC[l - 1] for l in range(1, L + 1)]
+    top = max(terms)
+    lC = top + math.log(math.exp(-top) + math.fsum(math.exp(t - top) for t in terms))
+    linvpi = n_o * math.log(2) - math.log(C["ball"][C["rdag"] + 1]) if C["rdag"] >= 0 else (n_o + 1) * math.log(2)
+    return lC, C, linvpi, l2M, lJ + lpre
+
+
+def lu_ladder(u, n_i, b, Xi):
+    """the ladder of Lemma 11.58b: 2 u n_i > b + k_1 > ... > b + 1 > b, k_1 = min(max(ceil(Xi - b), 0), ceil(2 u n_i - b) - 1)"""
+    k1 = min(max(math.ceil(Xi - b), 0), math.ceil(2 * u * n_i - b) - 1)
+    return [2 * u * n_i] + [b + k for k in range(k1, -1, -1)]
+
+
+@conjecture("XVI.9 One level over a family whose certified cost is a maximum of lines, the drop without its square root, and the chain (theory report Lemma 11.58b, Proposition 11.58c; workstream Q2, Lemma U, Propositions D', T; refereed internally).  On exact tables of the outer cube, with the constants of Theorem 11.56 and inner families that SATURATE their type (certified cost exactly max(0, max_i [d B_i - sigma_i min(x, R d)])): (a) for lines with a common range R and the level with lambda = 1, eta = 1/2, eta' = 1, nu_1 = 1, tolerance b, outer rate e, threshold theta >= 3 (n_o + 1) e^{2u + e^u + n_o e} and a ladder of step one below a cap n_o theta_na(e) <= Xi <= min(n, R n_i):  ln C_max <= max_i [n_i B_i + (1 - sigma_i) n_o theta_na(e)] + ell_0^b(n, ln(1/delta) + n ln 2), and ln(1/pi_dagger) <= n_o theta_na(e) + ln(n_o + 1) - through the form the proof gives with the level's own constants, ln C_max <= ln(L + 2) + 1 + P_cnt + max_i [n_i B_i + (1 - sigma_i) G], G = (ln 2 Mbar - 1 - P_cnt)_+ <= n_o theta_na(e), ln(L + 2) + 1 + P_cnt <= ell_0^b, which is sharp to a few nats at every size (at the sizes of exact tables the outer sample is far below e^{n_o theta_na(e)}, so the displayed bound alone would not see a wrong coefficient); (b) the same for lines valid at ALL accuracies (R = infinity, positive slopes) when the zero line is among them, with the cap n_o theta_na(e); (c) control: without a nonnegative line (b) fails; (d) the drop at a logarithmic accuracy: with theta = e^{X - b} - (3e + 1) - (2 p_u)^n e^{-b} the accuracy of the level is exactly X, and at the rate 0 the closing ball has ln(1/pi_dagger) <= n_o a + ln(n_o + 1), while a bounded threshold on the same block costs more than n_o a + 0.2 u sqrt(n_o); (e) the chain: levels with a short outer block of m sites and a two-rung ladder, the coarse rung served by a flat family of exponent B' at the accuracy X, the fine rung by the next level of the chain in dimension d - m: with the exact constants of every level, if m B' >= X + P_cnt + ln 4 at every level then ln cost(d) <= d B' + max(first-term excess of a level, the bottom) for a chain of any length - the chain costs its additive term ONCE -, and with a block half as long the excess grows with every level")
+def t_lines_level_chain(rng, trials):
+    quick = trials < 100
+    stats = dict(levels_a=0, levels_b=0, least_slack_a=math.inf, least_slack_b=math.inf, least_slack_sharp=math.inf, largest_G=0.0,
+                 least_slack_pi=math.inf, control_fails=0,
+                 drops=0, sqrt_excess=math.inf, chain_levels=0, chain_slack=math.inf, short_block_growth=0.0)
+    c3 = 3 * math.e + 1
+    # (a), (b), (c): Lemma 11.58b
+    for case in range(60 if quick else 400):
+        u = float(rng.choice([0.5, 1.0, 2.0]))
+        pu, lam1, epsstar, a, h = lv_consts(u)
+        b = float(rng.choice([1.0, 2.5]))
+        n = int(rng.integers(8, 90 if quick else 200))
+        nomax = n - 1 - int(math.floor(b / (2 * u)))
+        if nomax < 1:
+            continue
+        n_o = int(rng.integers(1, nomax + 1))
+        n_i = n - n_o
+        e = float(rng.choice([0.0, 0.3 * epsstar, h, 0.8 * epsstar, epsstar, 1.4 * epsstar]))
+        if n_o * e > 250:
+            e = 0.0
+        th = na_theta_na(u, e)
+        mode = "inf" if case % 2 else "range"
+        lines = [(float(rng.uniform(0.02, math.log(2))), float(rng.choice([0.0, 0.3, 0.7, 1.0, float(rng.uniform(0, 1))])))
+                 for _ in range(int(rng.integers(1, 5)))]
+        if case % 6 == 1:                                    # steep lines only, a long outer block at the rate 0: here the zero line carries the bound
+            u, e = 2.0, 0.0
+            pu, lam1, epsstar, a, h = lv_consts(u)
+            n = int(rng.integers(150, 200))
+            n_o, b = n - int(rng.integers(6, 15)), 1.0
+            n_i, th = n - n_o, a
+            lines = [(0.03, 1.0), (0.05, 0.9)]
+        if case % 6 == 3:                                    # a line of slope 1/2 that is the maximiser: here the factor 1 - sigma is what is tested
+            u, e = 2.0, 0.0
+            pu, lam1, epsstar, a, h = lv_consts(u)
+            n = int(rng.integers(170, 215))
+            n_o, b = n - int(rng.integers(20, 40)), 1.0
+            n_i, th = n - n_o, a
+            lines = [(0.6, 0.5), (0.03, 1.0)]
+        if mode == "range":
+            Rr = max(n_o * th / n_i, 0.02) * float(rng.uniform(1.0, 3.0))
+            if n_o * th > min(n, Rr * n_i):
+                continue
+            lines = [(max(B, s * Rr), s) for (B, s) in lines]                  # nonnegative on the range: a type some family has
+            Xi = float(rng.uniform(n_o * th, min(n, Rr * n_i)))
+        else:
+            Rr = math.inf
+            lines = lines + [(0.0, 0.0)]
+            Xi = n_o * th
+        ltheta = math.log(3 * (n_o + 1)) + 2 * u + math.exp(u) + n_o * e + float(rng.choice([0.0, 1.0]))
+        par = dict(lam=1.0, eta=0.5, etap=1.0, theta=math.exp(ltheta), nu1=1.0, b=b, delta=float(rng.choice([0.2, 0.01, 1e-6])))
+        xs = lu_ladder(u, n_i, b, Xi)
+        lnC = [max(0.0, max(n_i * B - s * min(x, Rr * n_i) for (B, s) in lines)) for x in xs[1:]]
+        lC, C, linvpi, l2M, pcnt = lu_level(n, n_o, u, par, xs, lnC)
+        Lam = math.log(1 / par["delta"]) + n * math.log(2)
+        # the form the proof gives, with the level's own constants: G = (Lambda_lev - 1 - P_cnt)_+ in place of n_o theta_na(e)
+        G = max(l2M - 1 - pcnt, 0.0)
+        sharp = math.log(len(lnC) + 2) + 1 + pcnt + max(n_i * B + (1 - s) * G for (B, s) in lines)
+        if lC > sharp + 1e-9:
+            return False, dict(reason="(U), sharp form: ln C_max exceeds ln(L + 2) + 1 + P_cnt + max_i [n_i B_i + (1 - sigma_i) G]", mode=mode,
+                               u=u, n=n, n_o=n_o, e=e, b=b, lines=lines, lC=lC, sharp=sharp, G=G)
+        stats["least_slack_sharp"] = min(stats["least_slack_sharp"], sharp - lC)
+        stats["largest_G"] = max(stats["largest_G"], G)
+        if G > n_o * th + 1e-9 or math.log(len(lnC) + 2) + 1 + pcnt > lu_ell0(u, n, Lam, b) + 1e-9:
+            return False, dict(reason="G exceeds n_o theta_na(e), or ln(L + 2) + 1 + P_cnt exceeds ell_0^b(n, Lambda)", u=u, n=n, n_o=n_o, e=e, G=G)
+        bound = max(n_i * B + (1 - s) * n_o * th for (B, s) in lines) + lu_ell0(u, n, Lam, b)
+        if lC > bound + 1e-9:
+            return False, dict(reason="(U): ln C_max exceeds max_i [n_i B_i + (1 - sigma_i) n_o theta_na(e)] + ell_0", mode=mode, u=u, n=n,
+                               n_o=n_o, e=e, b=b, lines=lines, lC=lC, bound=bound)
+        if linvpi > n_o * th + math.log(n_o + 1) + 1e-9:
+            return False, dict(reason="ln(1/pi_dagger) exceeds n_o theta_na(e) + ln(n_o + 1)", u=u, n=n, n_o=n_o, e=e)
+        stats["least_slack_pi"] = min(stats["least_slack_pi"], n_o * th + math.log(n_o + 1) - linvpi)
+        key = "a" if mode == "range" else "b"
+        stats["levels_" + key] += 1
+        stats["least_slack_" + key] = min(stats["least_slack_" + key], bound - lC)
+    # (c) control: one steep line valid at all accuracies and no zero line - the majorant is negative at the dominant rung
+    for u, n, n_o in ((2.0, 200, 180), (2.0, 230, 205), (2.0, 170, 150)):
+        pu, lam1, epsstar, a, h = lv_consts(u)
+        n_i = n - n_o
+        par = dict(lam=1.0, eta=0.5, etap=1.0, theta=3 * (n_o + 1) * math.exp(2 * u + math.exp(u)), nu1=1.0, b=1.0, delta=0.05)
+        xs = lu_ladder(u, n_i, 1.0, n_o * a)
+        lC2 = lu_level(n, n_o, u, par, xs, [max(0.0, n_i * 0.05 - x) for x in xs[1:]])[0]
+        if lC2 > n_i * 0.05 + lu_ell0(u, n, math.log(20) + n * math.log(2)) + 1e-9:
+            stats["control_fails"] += 1
+    # (d) the drop at a logarithmic accuracy, against a bounded threshold
+    for u, n, phi in ((1.0, 400, 0.3), (2.0, 300, 0.4), (0.5, 600, 0.25)) + (() if quick else ((1.0, 700, 0.3), (2.0, 420, 0.45))):
+        pu, lam1, epsstar, a, h = lv_consts(u)
+        n_o = int(math.floor(phi * n))
+        X = 1 + math.log(c3 + 1 + 3 * (phi * n + 1) * math.exp(2 * u + math.exp(u)))
+        theta = math.exp(X - 1) - c3 - (2 * pu) ** n / math.e
+        xout = math.log((2 * pu) ** n + math.e * (c3 + theta))
+        if abs(xout - X) > 1e-9 or theta < 3 * (n_o + 1) * math.exp(2 * u + math.exp(u)):
+            return False, dict(reason="drop: the accuracy is not X, or theta is below the threshold of the lemma at the rate 0", u=u, n=n)
+        par = dict(lam=1.0, eta=0.5, etap=1.0, theta=theta, nu1=1.0, b=1.0, delta=0.05)
+        C = ba_constants(n_o, n, u, par, 3)
+        linvpi = n_o * math.log(2) - math.log(C["ball"][C["rdag"] + 1])
+        if linvpi > n_o * a + math.log(n_o + 1) + 1e-9:
+            return False, dict(reason="drop: ln(1/pi_dagger) exceeds n_o a + ln(n_o + 1) at a logarithmic accuracy", u=u, n=n, n_o=n_o)
+        c = 0.05
+        parb = dict(lam=c, eta=c, etap=c, theta=c, nu1=2 * math.exp(u) * n_o / c, b=0.5, delta=0.05)
+        Cb = ba_constants(n_o, n, u, parb, 3)
+        linvpib = n_o * math.log(2) - math.log(Cb["ball"][Cb["rdag"] + 1])
+        stats["sqrt_excess"] = min(stats["sqrt_excess"], (linvpib - n_o * a) / (u * math.sqrt(n_o)))
+        stats["drops"] += 1
+    if stats["sqrt_excess"] < 0.2:
+        return False, dict(reason="a bounded threshold costs less than n_o a + 0.2 u sqrt(n_o): the contrast with the drop is not exhibited", **stats)
+    # (e) the chain, by exact recursion with the constants of every level
+    for u, Bp, X, alpha, nlev in ((2.0, lv_consts(2.0)[3], 6.0, 1.0, 4), (1.0, 0.45, 5.0, 0.5, 4)) + (() if quick else ((0.5, 0.6, 7.0, 1.0, 6),)):
+        for shorten in (1, 2):
+            m = 8
+            for _ in range(60):                                         # the least block with m B' >= X + P_cnt + ln 4 at every level
+                NT = nlev + 2
+                c = alpha / (13.0 * NT)
+                w = math.log(math.exp(c) * (1 + c) / (1 - c) + 2 * c) + c
+                alow = alpha - NT * w
+                d0 = max(m + int(math.floor(X / (2 * u))) + 1, math.ceil(math.log(6 / (5 * c)) / math.log((1 + math.exp(u)) / 2)))
+                dtop = d0 + (nlev - 1) * m
+                par = dict(lam=c, eta=c, etap=c, theta=c, nu1=2 * math.exp(u) * m / c, b=alow, delta=1e-3 * math.exp(-0.7 * dtop))
+                pc = lu_level(dtop, m, u, par, [2 * u * (dtop - m), X, alow], [0.0, 0.0])[4]
+                if m * Bp >= X + pc + math.log(4) + 1.0:
+                    break
+                m = int(math.ceil((X + pc + math.log(4) + 1.0) / Bp))
+            m = m // shorten
+            d0 = max(m + int(math.floor(X / (2 * u))) + 1, math.ceil(math.log(6 / (5 * c)) / math.log((1 + math.exp(u)) / 2)))
+            bottom = (d0 - 1) * (math.log(2) - Bp)                      # below d_0: enumeration, d ln 2
+            # the chain is entered at the top with delta = 10^-3; going down, delta' = delta/(4 L Mbar): top-down for delta, bottom-up for costs
+            dims = [d0 + j * m for j in range(nlev)]
+            ldel, consts = math.log(1e-3), {}
+            for dd in reversed(dims):
+                j = (dd - d0) // m + 1
+                par = dict(lam=c, eta=c, etap=c, theta=c, nu1=2 * math.exp(u) * m / c, b=alow + (j - 1) * w, delta=math.exp(ldel))
+                consts[dd] = par
+                Cc = ba_constants(m, dd, u, par, 2)
+                ldel = ldel - math.log(8) - math.log(Cc["Mbar"])
+            cond, excess, costs = True, -math.inf, []
+            t_inner = None
+            for dd in dims:
+                par = consts[dd]
+                inner_fine = (dd - m) * math.log(2) if dd - m < d0 else t_inner
+                lC, Cc, linvpi, l2M, pcnt = lu_level(dd, m, u, par, [2 * u * (dd - m), X, par["b"]], [(dd - m) * Bp, inner_fine])
+                cond = cond and (m * Bp >= X + pcnt + math.log(4))
+                excess = max(excess, l2M - m * Bp + math.log(4))
+                costs.append(lC - dd * Bp)
+                t_inner = lC
+                stats["chain_levels"] += 1
+            if shorten == 1:
+                if not cond:
+                    return False, dict(reason="harness: the block of the design does not satisfy m B' >= X + P_cnt + ln 4", u=u, m=m)
+                for cst in costs:
+                    if cst > max(excess, bottom) + 1e-9:
+                        return False, dict(reason="chain: ln cost(d) exceeds d B' + max(first-term excess, bottom)", u=u, Bp=Bp, m=m, costs=costs,
+                                           excess=excess, bottom=bottom)
+                    stats["chain_slack"] = min(stats["chain_slack"], max(excess, bottom) - cst)
+            else:
+                stats["short_block_growth"] = max(stats["short_block_growth"], costs[-1] - costs[0])
+    if not (stats["levels_a"] >= 15 and stats["levels_b"] >= 15 and stats["drops"] >= 3
+            and stats["chain_levels"] >= 16 and stats["short_block_growth"] > 5.0 and stats["least_slack_b"] < 40.0
+            and stats["control_fails"] == 3 and stats["least_slack_sharp"] < 6.0 and stats["largest_G"] > 15.0):
+        return False, dict(reason="cases not exercised", **stats)
+    return True, stats
+
+
 # ----------------------------------------------------------------------------------------------
 # XVII. With a known part (a field): the p-biased cube (theory report 11.20)
 # ----------------------------------------------------------------------------------------------

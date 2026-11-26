@@ -1,5 +1,36 @@
 # Workstream Q2 — the bounded levels without their `√n`; the slope step at a general outer rate
 
+> **Coordinator's note (2026-11-26, after the internal review `Q2_REVIEW.md`).**  The referee
+> (brief `Q2_review_brief.md`; own evaluator; code under `experiments/workstreams/Q2/review/`)
+> re-derived every statement and found **no substantive error or gap**: Lemma U, Corollary
+> U1, Propositions D′, T, A′, N, Q6(e) with its corollary, and Theorems A, B are correct as
+> stated.  The text below is the workstream's as delivered.  **Errata — its six findings of
+> wording, none of which changes a statement:**
+> 1. *(C3) and Lemma U.*  The exclusion "all `σ_i = 0` if `R = ∞`" is not needed: Lemma U holds
+>    with the same proof and constants for lines valid at all accuracies, provided the
+>    maximum is nonnegative at the one accuracy `max(G, b)` in dimension `n_i` (a flat line,
+>    or (C2)); the cap may be any `Ξ` with `n_o·θ_na(e) ≤ Ξ ≤ n`.  Without the range condition
+>    `Ξ ≤ R·n_i` the proof gives `ln C_max ≤ max_i[n_iB_i + n_oϑ − σ_i·min(n_oϑ, R_in_i)] + ℓ₀^b + E`.  What the
+>    proof uses of the inner majorant `T` is only that it is nonincreasing with `x + T(x)`
+>    nondecreasing: `ln C_max ≤ ℓ₀^b + E₁ + Y + T(Y)`, `Y = max(n_oϑ, b)`.  (Used in `Z_REPORT.md`.)
+> 2. *Proposition A′, the parenthesis after the display of `ℓ̄_T`:* the condition should read
+>    `9(ln 2/a − 1) + (ln 2 − a)/u ≤ 8(ln 2/h − 1) + ln 2/(2u)` (the base chain has `𝒳_B/(2u) ≈ 2 ln n/(2u)`); it
+>    holds with a factor `3.5`–`5` at `u = ½, 1, 2`.
+> 3. *Proposition D′, remark (2) (`R > 1`):* `q^b` changes as well (`ln 4L ≤ ln 4A_n^b`), and the
+>    hypothesis "`Ξ ≤ n`" of Lemma U has to be dropped with it.  The remark is not used.
+> 4. *§4.3, remark 2:* the least block of (4.1) always exists, but for small `N` it is `≥ N`;
+>    the chain then has no level and the family is the base bracket at `α̲` (covered by
+>    the proposition with `j ≡ 0`, error `e₀`).
+> 5. *§6.2, remark 2:* "`σ_i′ < 0` … (possible for `e < h`)" presupposes `B_i ≥ h`; "a type with
+>    range `R′` is also a type with any smaller range" needs `σ ≥ 0`.
+> 6. *Wording:* Lemma U needs "`Ξ ≤ n`" only for `L ≤ n` in the constants; (C2) is used in two
+>    proofs (Lemma U: the outer sample; Proposition T: `ln C₁ ≥ 0`), at one point each.
+>
+> The referee also confirms the report's criticism of `Q_REPORT.md` §6.2 ("a `√n` remains in
+> any case" is wrong: the design with `M = 0` delivers a bounded accuracy at a certified
+> cost *below* `e^{n·a}`).  Not checked by the referee: Theorem 11.56 itself; the nest beyond
+> three epochs and `n = 8·10³`; simulated runs.
+
 Independent report on the brief `docs/workstreams/Q2_brief.md` (after the twenty-second checkpoint of cycle 10,
 2026-11-26) and on the coordinator's addition to it of the same day (the drop for an inner family of any slope
 `0 ≤ σ ≤ 1` and for maxima of lines).  Paper proofs with exact numerical checks; no Lean.  Nothing in the
