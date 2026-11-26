@@ -19,6 +19,19 @@ L4  Torus: (a) the explicit two-state certificate sum_{k != l} |z_k - p_k|^2 |z_
 L5  Cube n = 6, all 4960 triples of states: the sign vectors in the span of three conformers are the three
     conformers and at most one more, with affinely independent pair features: an explicit certificate for
     "three conformers are always identified" (Proposition E9(a)).
+L6  Proposition E20'': (a) the growth inequality f >= c* min(d_p^2, d_q^2) of the two-state certificate with
+    the explicit constant c* = min(1, c_D), c_D = beta_min/4 if at least three angles differ and
+    beta_1 beta_2 / (4 (beta_1 + beta_2)) if two do, on random and on adversarially minimised points of tori
+    with r = 2..5 angles; (b) on a grid of the 2-torus, the largest value of
+    int min(d_p^2, d_q^2) dnu over all measures whose eight product means are within tau of those of a
+    two-state ensemble (a linear programme) against the bound Lambda tau / c*.
+L7  Proposition E21 (the permanent certificate): (a) K = 3, 4 states on tori with r >= K angles that differ
+    pairwise in every angle: every zero of the permanent found by multi-start minimisation is a state;
+    (b) three states that coincide in all but two angles (the Hall condition fails): zeros away from the
+    states exist; (c) the cube with n = 6: for all triples of conformers, the zero set of the energy
+    perm(1 - x_k s^i_k) over the 64 states is the triple when the Hall condition holds; when it fails for a
+    set I of states, the energy vanishes on every state that agrees with I where the states of I coincide
+    (on binary sites that sub-cube may contain nothing but the states themselves).
 Exit code 0 iff every check passes.
 """
 import itertools, sys
@@ -291,11 +304,166 @@ def test_L5():
          f"(present in {with_extra} triples); zero sets with affinely dependent pair features: {dependent}"]
 
 
+# ---------------------------------------------------------------- L6
+def two_state_setup(r, shared):
+    """Random states p, q on the r-torus agreeing on `shared` angles; returns p, q, E (bool), constants."""
+    p = rng.uniform(0, 2 * np.pi, size=r); q = rng.uniform(0, 2 * np.pi, size=r)
+    E = np.zeros(r, dtype=bool); E[rng.choice(r, size=shared, replace=False)] = True
+    q[E] = p[E]
+    D = np.nonzero(~E)[0]
+    beta = 2 - 2 * np.cos(p[D] - q[D])                      # squared chordal distances of the two states
+    cD = beta.min() / 4 if len(D) >= 3 else beta[0] * beta[1] / (4 * (beta[0] + beta[1]))
+    cstar = min(1.0, cD)
+    return p, q, E, D, beta, cstar
+
+
+def two_state_f(phi, p, q, E, D):
+    a = 2 - 2 * np.cos(phi - p); b = 2 - 2 * np.cos(phi - q)
+    F = a[D].sum() * b[D].sum() - (a[D] * b[D]).sum()        # sum over k != l in D of a_k b_l
+    return a[E].sum() + F, a.sum(), b.sum()
+
+
+def test_L6():
+    out = []; ok = True
+    worst = np.inf; cases = 0
+    for r in (2, 3, 4, 5):
+        for shared in range(0, r - 1):
+            for _ in range(6):
+                p, q, E, D, beta, cstar = two_state_setup(r, shared)
+                if beta.min() < 0.05:
+                    continue                                 # nearly coincident angles: constant tiny, skip
+
+                def ratio(phi):
+                    f, dp, dq = two_state_f(phi, p, q, E, D)
+                    return f / max(min(dp, dq), 1e-300)
+                best = min(ratio(x) for x in rng.uniform(0, 2 * np.pi, size=(3000, r)))
+                for _ in range(12):                          # adversarial: minimise the ratio from random starts
+                    res = minimize(ratio, rng.uniform(0, 2 * np.pi, size=r), method="Nelder-Mead",
+                                   options={"xatol": 1e-9, "fatol": 1e-12, "maxiter": 4000})
+                    f, dp, dq = two_state_f(res.x, p, q, E, D)
+                    if min(dp, dq) > 1e-8:                   # away from the two states (there the ratio is a limit)
+                        best = min(best, res.fun)
+                worst = min(worst, best / cstar); cases += 1
+                ok &= best >= cstar * (1 - 1e-9)
+    out.append(f"    growth inequality, r = 2..5, {cases} random pairs of states: smallest observed "
+               f"f / (c* min(d_p^2, d_q^2)) = {worst:.2f} (must be >= 1)")
+    # (b) stability on a grid of the 2-torus
+    Gd = 30; ang = 2 * np.pi * np.arange(Gd) / Gd
+    grid = np.array([(x, y) for x in ang for y in ang])
+    fs = (np.cos, np.sin)
+    feats = [f1(grid[:, 0]) for f1 in fs] + [f1(grid[:, 1]) for f1 in fs] + \
+            [f1(grid[:, 0]) * f2(grid[:, 1]) for f1 in fs for f2 in fs]
+    Fm = np.array(feats)                                     # 8 x N
+    ratios = []
+    for _ in range(4):
+        i = rng.integers(len(grid))
+        j = rng.choice([t for t in range(len(grid))
+                        if min(abs(grid[t][0] - grid[i][0]), 2 * np.pi - abs(grid[t][0] - grid[i][0])) > 0.6
+                        and min(abs(grid[t][1] - grid[i][1]), 2 * np.pi - abs(grid[t][1] - grid[i][1])) > 0.6])
+        p, q = grid[i], grid[j]
+        beta = 2 - 2 * np.cos(p - q); cstar = min(1.0, beta[0] * beta[1] / (4 * (beta[0] + beta[1])))
+        # coefficient norm of f = a_1 b_2 + a_2 b_1 in the eight product observables
+        cp, sp, cq, sq = np.cos(p), np.sin(p), np.cos(q), np.sin(q)
+        lam = np.zeros(8)
+        lam[0:2] += -4 * np.array([cp[0], sp[0]]) - 4 * np.array([cq[0], sq[0]])      # cos phi_1, sin phi_1
+        lam[2:4] += -4 * np.array([cq[1], sq[1]]) - 4 * np.array([cp[1], sp[1]])      # cos phi_2, sin phi_2
+        prod = 4 * (np.outer([cp[0], sp[0]], [cq[1], sq[1]]) + np.outer([cq[0], sq[0]], [cp[1], sp[1]]))
+        lam[4:8] += prod.ravel()
+        Lam = np.abs(lam).sum()
+        a = 2 - 2 * np.cos(grid - p); b = 2 - 2 * np.cos(grid - q)
+        fvals = a[:, 0] * b[:, 1] + a[:, 1] * b[:, 0]
+        ok &= np.allclose(fvals, 8 + Fm.T @ lam, atol=1e-9)                           # the expansion is right
+        target = np.minimum(a.sum(axis=1), b.sum(axis=1))
+        mu = np.zeros(len(grid)); mu[i], mu[j] = 0.35, 0.65
+        y = Fm @ mu
+        for tau in (1e-3, 1e-2):
+            A_ub = np.vstack([Fm, -Fm]); b_ub = np.concatenate([y + tau, -(y - tau)])
+            res = linprog(-target, A_ub=A_ub, b_ub=b_ub, A_eq=np.ones((1, len(grid))), b_eq=[1.0],
+                          bounds=[(0, None)] * len(grid), method="highs")
+            val = -res.fun; bound = Lam * tau / cstar
+            ok &= res.status == 0 and val <= bound * (1 + 1e-6)
+            ratios.append(val / bound)
+    out.append(f"    2-torus, 30 x 30 grid, four pairs of states, tau = 1e-3 and 1e-2: largest int min(d_p^2, d_q^2) dnu "
+               f"over data-compatible measures is between {min(ratios):.3f} and {max(ratios):.3f} of the bound "
+               f"Lambda tau / c* (must be <= 1)")
+    return ok, out
+
+
+# ---------------------------------------------------------------- L7
+def permanent_rect(M):
+    """Permanent of a K x r matrix (K <= r): sum over injective maps of the products."""
+    K, r = M.shape
+    return sum(np.prod([M[i, kap[i]] for i in range(K)]) for kap in itertools.permutations(range(r), K))
+
+
+def test_L7():
+    out = []; ok = True
+    # (a) torus, states differing pairwise in every angle
+    cases = 0; bad = 0
+    for K, r in ((3, 3), (3, 4), (3, 5), (4, 4), (4, 5)):
+        for _ in range(3):
+            S = rng.uniform(0, 2 * np.pi, size=(K, r))
+
+            def f(phi):
+                return permanent_rect(2 - 2 * np.cos(phi[None, :] - S))
+            zs = zeros_on_torus(f, r, 60)
+            for z in zs:
+                dist = min(np.max(np.abs(np.angle(np.exp(1j * (z - S[i]))))) for i in range(K))
+                bad += dist > 1e-3
+            ok &= all(f(S[i]) < 1e-12 for i in range(K))
+            cases += 1
+    ok &= bad == 0
+    out.append(f"    torus, K = 3, 4 states differing pairwise in every angle ({cases} random cases, r = K..5): "
+               f"zeros of the permanent that are not states: {bad}")
+    # (b) Hall condition fails: three states that coincide in all but two of four angles
+    S = rng.uniform(0, 2 * np.pi, size=(3, 4)); S[1, 2:] = S[0, 2:]; S[2, 2:] = S[0, 2:]
+
+    def g(phi):
+        return permanent_rect(2 - 2 * np.cos(phi[None, :] - S))
+    probe = np.concatenate([rng.uniform(0, 2 * np.pi, size=2), S[0, 2:]])       # free in the two differing angles
+    far = min(np.max(np.abs(np.angle(np.exp(1j * (probe - S[i]))))) for i in range(3))
+    ok &= g(probe) < 1e-12 and far > 0.05
+    out.append(f"    three states coinciding in two of four angles (Hall condition fails): the permanent vanishes at a "
+               f"configuration at distance {far:.2f} from every state (value {g(probe):.1e})")
+    # (c) cube, n = 6: all triples
+    n = 6; X = np.array(list(itertools.product((-1, 1), repeat=n)))
+    perms = list(itertools.permutations(range(n), 3))
+    exact_when_hall = True; subcube_in_zero = True; n_hall = 0; n_fail = 0; n_fail_larger = 0; triples = 0
+    for tri in itertools.combinations(range(len(X)), 3):
+        St = X[list(tri)]; triples += 1
+        A = 1 - X[:, None, :] * St[None, :, :]                                   # states x 3 x n, entries 0 or 2
+        vals = np.zeros(len(X))
+        for kap in perms:
+            vals += A[:, 0, kap[0]] * A[:, 1, kap[1]] * A[:, 2, kap[2]]
+        zero = set(np.nonzero(vals < 1e-12)[0].tolist())
+        # the sets I of at least two states that violate the Hall condition
+        violating = []
+        for I in ((0, 1), (0, 2), (1, 2), (0, 1, 2)):
+            coincide = np.all(St[list(I)] == St[I[0]], axis=0)                   # sites where the states of I agree
+            if np.sum(~coincide) < len(I):
+                violating.append((I, coincide))
+        if not violating:
+            n_hall += 1
+            exact_when_hall &= zero == set(tri)
+        else:
+            n_fail += 1; n_fail_larger += len(zero) > 3
+            for I, coincide in violating:
+                sub = np.nonzero(np.all(X[:, coincide] == St[I[0]][coincide], axis=1))[0]
+                subcube_in_zero &= set(sub.tolist()) <= zero
+    ok &= exact_when_hall and subcube_in_zero and n_hall > 0 and n_fail > 0
+    out.append(f"    cube n = 6, all {triples} triples: Hall condition holds in {n_hall}, zero set of the permanent "
+               f"energy = the triple in all of them: {exact_when_hall}; fails in {n_fail}, the predicted sub-cube is "
+               f"in the zero set in all of them: {subcube_in_zero} (zero set strictly larger than the triple in "
+               f"{n_fail_larger})")
+    return ok, out
+
+
 def main():
     allok = True
     for name, fn in (("L1 lift isolation on the cube", test_L1), ("L2 four-body data", test_L2),
                      ("L3 a prior on the number of conformers", test_L3), ("L4 torus", test_L4),
-                     ("L5 three conformers", test_L5)):
+                     ("L5 three conformers", test_L5), ("L6 certified stability on the torus", test_L6),
+                     ("L7 the permanent certificate", test_L7)):
         ok, out = fn()
         print(f"{name}: {'ok' if ok else 'FAILED'}")
         for line in out:

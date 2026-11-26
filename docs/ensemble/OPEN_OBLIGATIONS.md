@@ -12,7 +12,7 @@
 | OB6 | Bai–Yin: exact hypotheses (i.i.d. entries with finite fourth moment; almost-sure convergence) | E11 | low |
 | OB7 | Machine-check candidates: E1(a) "only if" (needs a theorem of the alternative), E2(a) weak duality in the dual form, the Littlewood–Offord lemma of E10, E12(a) | — | medium |
 | OB8 | The sources marked "memory" in `PRIOR_ART.md` | novelty classes | medium |
-| OB9 | Run the programme's full audit (`scripts/audit_all.sh`) on this branch | verified state | high |
+| OB9 | ~~Run the programme's full audit (`scripts/audit_all.sh`) on this branch~~ **Done** at the third checkpoint ("AUDIT PASSED"; `status/ensemble.md` says on which tree each stage ran).  Re-run it before every checkpoint that changes `proofs/` | verified state | — |
 | OB10 | Prior-art search for Parts IV and V and for E7′: first-order (density-ratio / Lipschitz-ratio) classes and identification by marginals; L¹ Poincaré inequalities for monotone functions (E15 is one line from them); body–bar frameworks and Stewart–Gough platforms with redundant legs; Donoho's modulus theory for moment problems | novelty classes of E13–E17, E7′ | high |
 | OB11 | Read the Geometric Inference Division's `ENSEMBLE_RIGIDITY.md` in full (only its messages and theorem headings were read) and check our cross-references to its Theorems B, C, G and Proposition 3.1 | §§2.1, 4.2 of the report | medium |
 | OB12 | Apply the science division's review SCI-REV-0020 (workstream R21) when it is published | E5, E7, E8, E1.3, §5 | high |
@@ -20,7 +20,8 @@
 | OB14 | Store the threshold computations of §4.4 with their seeds in `experiments/ensemble/output_threshold.txt` (done at checkpoint 2 for the sizes quoted); larger sizes if the shared budget allows — a request to the engineering division would need the owner's authorisation for significant workloads | Conjecture C2 | low |
 | OB15 | Baldi–Vershynin Theorem 4.2 is used as a black box: statement read verbatim, proof (their Sections 5–6) not read; journal reference not found.  Abbe–Shpilka–Wigderson Theorem 4.5 read only as quoted | E19 | medium |
 | OB16 | Prior-art search for E20′ and the torus corollary of E20 (truncated trigonometric moment problems on tori; positive decompositions of tensors of format `2 × ⋯ × 2`); for E18′ (generic uniqueness of sparse non-negative representations); for C3 (ground-state capacity of higher-order interactions) | novelty classes of Part VI | medium |
-| OB17 | Internal review of Part VI (written at the third checkpoint; read by nobody but its author) | E18–E20 | high |
+| OB17 | Internal review of Part VI (written at the third checkpoint and after; read by nobody but its author) | E18–E21, E20″ | high |
+| OB19 | For E20″ the triangle step (squared chordal distances satisfy `a_k ≥ β_k/4` or `b_k ≥ β_k/4`), the shared angles, and parts (b), (c) are on paper; a Lean statement on the circle would close (a) completely | E20″ | low |
 | OB18 | The transfer of E20′ to chains rests on two statements of other divisions that we have not checked (competitors keep shared segments rigid; mean squared distances span the pairwise products of the differing torsions) | the remark after E20′ | medium |
 
 ## Open problems

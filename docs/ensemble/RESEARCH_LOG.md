@@ -270,3 +270,35 @@ a question about certificates — what a kernel must check beyond a square — a
 to the theory and complexity divisions.  The weakest points: Part VI is unreviewed; E19
 depends on a theorem whose proof we have not read; C3 rests on three sizes.
 
+---
+
+## 2026-11-26 — Cycle 4 (begun): a certified modulus on the torus; the audit; a Gaussian control
+
+**Proved.**  Proposition E20″: the two-state certificate on a torus grows at least like
+`c*·min(d_p², d_q²)` with `c* = min(1, β_min/4)` (three or more differing angles) or
+`min(1, β_kβ_l/(4(β_k + β_l)))` (two); hence `∫ min(d_p², d_q²) dν ≤ Λτ/c*` for every measure
+whose pairwise product means are within `τ`, and the weights are recovered within
+`O(√τ)`.  The growth inequality is machine-checked (`twoStateCert_growth_three`,
+`twoStateCert_growth_two`); the kernel rejected the first statement of the two-angle case
+(`DEAD_ENDS.md` ED17).  This is the first statement of the report on a continuous
+configuration space whose constants are all computable — the science division's
+criterion for a non-vacuous guarantee.
+
+**Computed.**  The Gaussian control of E19(f): replacing the lifted vertices of the cube
+by a Gaussian cloud of the same size gives face thresholds 78, 142, 214 against the
+cube's 76, 152, 233 (four-body data, `n = 8, 10, 12`), and 11, 11.5 against 13, 16 for pair
+data (`n = 12, 14`).  So the cube is at least as neighbourly as a generic cloud, with a
+ratio that grows with `n`; the asymptotic Gaussian value `D/(2 ln(N/D))` is of order
+`n^{2d−1}`, which is the content of Conjecture C3.
+
+**Verified.**  `scripts/audit_all.sh`: AUDIT PASSED (OB9 closed).  Lean: 5125 declarations.
+
+**Proved (continued).**  Proposition E21: for `K` states of a product space, the permanent
+of the matrix of coordinate-wise distances to the states is non-negative and, by Hall's
+marriage theorem, vanishes exactly at the states when every set `I` of at least two states
+has at least `|I|` coordinates at which its members do not all coincide.  On a torus this
+identifies the ensemble from multilinear data of order `K`; for `K = 2` it is E20′.  The
+zero set is machine-checked (`permCert_eq_zero_iff`, `permCert_zero_set`) with Mathlib's
+Hall theorem.  A check that expected the converse on binary sites failed and was
+corrected (`DEAD_ENDS.md` ED18).  Lean: 5142 declarations, no warning.
+

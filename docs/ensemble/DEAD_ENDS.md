@@ -144,3 +144,27 @@ before touching the mathematics.  A grid linear programme on the torus proves
 non-identification when it finds a twin and proves nothing when it does not; the
 exploratory grid runs for larger `K` are therefore not quoted in the report.
 
+**ED17 (a hypothesis the kernel found missing, and a constant that was sixteen times too
+small).**  The growth inequality behind Proposition E20″ was first proved with the
+constant `min(β_−/4, β_min²/(64r))` — correct, machine-checked, and in the numerical search
+never within a factor fifteen of the truth.  Looking at which case of the proof produced
+the square showed that it was needed only for two angles; for three or more a pigeonhole
+argument gives `β_min/4`, and for two the harmonic form `β_kβ_l/(4(β_k + β_l))`.  The first
+Lean statement of the two-angle case had `θ ≥ 0` where the proof needs `θ > 0`: with
+`θ = 0` the hypothesis `c(θ_0 + θ_1) ≤ θ_0θ_1` is empty and the conclusion is false; `linarith`
+failed exactly there.  The crude version was removed from the proof tree.  *Lesson: when
+a constant is far from what the numerics show, the proof has a case that deserves a
+second look; and a formal statement is the cheapest referee for a missing positivity.*
+
+**ED18 (a check that asserted more than the proposition).**  The first version of check
+L7(c) required that on the cube, whenever the Hall condition of Proposition E21 fails,
+the zero set of the permanent energy be strictly larger than the set of states.  It
+failed — rightly: the proposition only says that the energy vanishes on the sub-cube of
+states that agree with a violating set `I` where its members coincide, and on binary
+sites that sub-cube can consist of the members of `I` alone (two conformers at Hamming
+distance one: a sub-cube of two points).  Of the 10 944 triples on six sites that violate
+the condition, only 960 have extra zeros.  The check now tests the containment that is
+claimed; the proposition's wording says "on a torus a subtorus of positive dimension; on
+binary coordinates possibly nothing but the states themselves".  So on finite alphabets
+the Hall condition is sufficient and not necessary for this certificate.
+

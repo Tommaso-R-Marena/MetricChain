@@ -175,3 +175,12 @@ n = 12, data of even order <= 4: 2048 states modulo flip, 562 features (constant
    K =   240   face frequency = 0.300   lift-isolated = 0.000   (undecided 0; mean iterations 4.2; 182 s)
    K =   260   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.1; 144 s)
    K =   280   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 2.8; 127 s)
+
+===== kbody_capacity.py 12 2g 12 190 205 220 235 250   (Gaussian control at the size of n = 12, four-body) =====
+n = 12, data of even order <= 4: 2048 states modulo flip, 562 features (constant included); lift dimension C(n-1,<=2) = 67; Cover-type bound 2*D_odd = 352
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =   190   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 5.8; 150 s)
+   K =   205   face frequency = 0.750   lift-isolated = 0.000   (undecided 0; mean iterations 5.6; 176 s)
+   K =   220   face frequency = 0.333   lift-isolated = 0.000   (undecided 0; mean iterations 4.3; 139 s)
+   K =   235   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.3; 122 s)
+   K =   250   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.0; 124 s)

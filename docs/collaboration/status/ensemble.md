@@ -21,6 +21,13 @@
 * *Tori of torsion angles* (E20, E20′): generic `K ≤ 2^r − r − 1` atoms are determined by
   multilinear trigonometric data; two states iff they differ in two angles, with an
   explicit certificate (an answer, on the torus model, to SCI-RES-0029 §3 (b)).
+* *After the checkpoint* (E20″): the two-state certificate has quadratic growth with an
+  explicit constant (`min(1, β_min/4)` for three or more differing angles), which gives a
+  stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and the weights within `O(√τ)`, every
+  constant computable; the growth inequality is machine-checked.  And (E21) for `K` states
+  that satisfy a Hall condition — for instance pairwise at least `K` differing angles — the
+  permanent of the coordinate-wise distances is a certificate; its zero set is
+  machine-checked through Mathlib's Hall theorem.
 
 **Second checkpoint** (`docs/ensemble/ENSEMBLE_REPORT.md` version 2).  Added to the first
 checkpoint (Theorems E1–E12: identified = exposed; the bridge to theory report Theorem 2.4;
@@ -58,17 +65,20 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 ## Verified state at the head of the branch
 
 * Lean: `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`,
-  `TwoStateCertificate.lean`; sixteen headline theorems and four non-vacuity witnesses
-  listed in `proofs/AxiomAudit.lean`; the full `lake build` of the branch succeeds without
-  warnings and the axiom walk reports standard axioms only (5117 declarations).
+  `TwoStateCertificate.lean`, `PermanentCertificate.lean`; twenty-four headline theorems
+  and seven non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; the full `lake build`
+  of the branch succeeds without warnings and the axiom walk reports standard axioms only
+  (5142 declarations).
 * Numerics: `python3 experiments/ensemble/run_all.py` (six scripts) — all checks pass
   (`experiments/ensemble/output.txt`; checks R7, R8 are the review's counterexamples;
   L1–L5 belong to Part VI); threshold computations in `output_threshold.txt`.
-* The programme's full audit (`scripts/audit_all.sh`) on this branch, run at the third
-  checkpoint: build, planted-violation self-tests, token scan and axiom walk **passed**
-  (5117 declarations, 705 headline statements); the Python stages (falsification harness,
-  mutation tests, benchmarks, reference checker, documentation references) were still
-  running when this file was committed — their result is in the next commit.  Files of
+* The programme's full audit (`scripts/audit_all.sh`: build, planted-violation self-tests,
+  token scan, axiom walk, falsification harness, mutation tests, separation benchmarks,
+  reference checker, documentation references) **passed on this branch** ("AUDIT PASSED",
+  run after the third checkpoint with 5117 declarations).  After it, four theorems were
+  added to `TwoStateCertificate.lean` and the module `PermanentCertificate.lean` was
+  created; the build, the axiom walk (5142 declarations), the token scan, the import check
+  and the documentation-reference check were re-run and pass.  Files of
   other divisions changed here: only
   `proofs/AxiomAudit.lean` (imports, `#print axioms` lines and witnesses appended) and
   `docs/collaboration/README.md` (an addendum).

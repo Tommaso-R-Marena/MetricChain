@@ -45,7 +45,8 @@ how stably, and with what certificate.**
 | E17 | **Noise.**  For a convex class and Gaussian noise `σ` the minimax root-mean-square error of a mean `E_μψ` is between `0.199·ω(2σ)` and `0.5·ω(2σ)`, with `ω(ε) = min_λ{ε‖λ‖₂ + range over the class of ψ − λ·Φ}`: the dual certificate of the identified interval is the near-minimax linear estimator | P (elementary); K (Donoho 1994: factor 1.25) | formulation of a known theory |
 | E18 | **Lifted certificates.**  For a lift `v` with the entries of `vv^*` in the span of the data, `‖P^⊥v(x)‖²` is a non-negative function in the span; if its zero set is finite with linearly independent `v(x)v(x)^*`, every ensemble on the conformers is determined among all ensembles — also when the zero set is larger than the support.  Three conformers on the cube: a self-contained proof of E9(a).  **With a prior on the number of atoms** (finite `X`): flat-isolated supports are determined among ensembles with at most `K` atoms for all weights outside a null set (E18′) | P | elementary; formulation (flat extensions, E10 and the geometry division's certificate are instances) |
 | E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, about that of a Gaussian cloud of the same size | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e) N | synthesis; the probabilistic core is a published theorem (rediscovery on our side) |
-| E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`.  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′) | P given K (generalised trisecant lemma); E20′ P, its combinatorial core V (`twoStateCert_eq_zero_iff`) | synthesis; E20′ elementary (not searched) |
+| E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`.  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights, all constants explicit (E20″) | P given K (generalised trisecant lemma); E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary (not searched) |
+| E21 | **`K` states on a product space: the permanent certificate.**  If every set `I` of at least two states has at least `|I|` coordinates at which its states do not all coincide (for instance: pairwise at least `K` differing coordinates), the permanent of the matrix of coordinate-wise distances to the states vanishes exactly at the states; on a torus the ensemble is then determined by multilinear data of order `K`.  For `K = 2`: E20′ | P; the zero set V (`permCert_eq_zero_iff`, `permCert_zero_set`, via Hall's theorem) | elementary (Hall / Frobenius–König); not searched |
 
 The thread through the report is one sentence, stated with its two conditions: **on a
 finite configuration space an ensemble is determined by a family of observables exactly
@@ -1392,9 +1393,10 @@ dimensions `29, 46, 67`, beyond which no certificate of the form (b) exists, and
 `84, 186, 352` of (d).
 (f) **[N]**  (*A Gaussian control.*)  If the feature vectors of the `2^{n−1}` states are
 replaced by independent Gaussian vectors of the same dimension, the same computation
-gives thresholds of about `78` and `142` for the sizes of `n = 8, 10`: for four-body data the
-cube behaves like a generic cloud of as many points in as many dimensions (and is slightly
-more neighbourly).  For pair data it does not: at `n = 12` the Gaussian cloud stops near
+gives thresholds of about `78`, `142`, `214` for the sizes of `n = 8, 10, 12` (the cube: `76`,
+`152`, `233`): for four-body data the cube behaves like a generic cloud of as many points in
+as many dimensions, and is slightly but increasingly more neighbourly (ratios `0.97`,
+`1.07`, `1.09`).  For pair data it does not: at `n = 12` the Gaussian cloud stops near
 `K = 11` and the cube near `13`, at `n = 14` near `11.5` against `16`, and asymptotically the
 Gaussian value is `n/(4 ln 2) ≈ 0.36n`
 (the weak-neighbourliness threshold of Donoho and Tanner, `K ≈ D/(2 ln(N/D))` for `N` points
@@ -1506,6 +1508,124 @@ other angles are fixed every multilinear observable is affine in `(cos φ_k, sin
 the first Fourier coefficient of `(1−w)δ_{p_k} + wδ_{q_k}`, a point of the open disc, is that of
 infinitely many other measures on the circle.  ∎
 
+**Proposition E20″ (two states on a torus: a certified modulus, with explicit constants).**
+In the situation of E20′ with `|D| ≥ 2`, let `β_k = 2 − 2cos(p_k − q_k) ∈ (0, 4]` for `k ∈ D`, let
+`d²(φ, p) = Σ_k |e^{iφ_k} − e^{ip_k}|²` be the squared chordal distance on the torus, and
+
+    c_D = min_{k∈D} β_k / 4   if |D| ≥ 3 ,      c_D = β_kβ_l / (4(β_k + β_l))   if D = {k, l} ,      c* = min(1, c_D) .
+
+(a) (*Quadratic growth.*)  `f(φ) ≥ c*·min(d²(φ, p), d²(φ, q))` for every `φ ∈ 𝕋^r`.
+(b) (*Stability.*)  Let `Φ` be the observables `cos φ_k, sin φ_k` (all `k`) and the products
+`u(φ_k)v(φ_l)`, `u, v ∈ {cos, sin}`, `k ≠ l` in `D`, and `μ = w_pδ_p + w_qδ_q`.  For every
+probability measure `ν` on the torus with `‖E_νΦ − E_μΦ‖_∞ ≤ τ`,
+
+    ∫ min(d²(φ, p), d²(φ, q)) dν(φ)  ≤  Λτ / c* ,        Λ ≤ 2√2·|E| + (8 + 8√2)·|D|(|D| − 1) ,
+
+`Λ` being the `ℓ¹` norm of the coefficients of `f`.
+(c) (*Weights.*)  With `ε = Λτ/c*`, `N_q = {φ : d(φ, q) < d(φ, p)}` and `β_max = max_{k∈D} β_k`:
+`|ν(N_q) − w_q| ≤ (4√ε + ε + 2√2·τ)/β_max`.
+
+**[P]**; the inequality of (a) on the differing angles is **[V]**:
+`Ensemble.twoStateCert_growth_three` (three or more coordinates, `c ≤ min θ`) and
+`Ensemble.twoStateCert_growth_two` (two coordinates, `c(θ_0 + θ_1) ≤ θ_0θ_1`, `θ > 0`), for
+non-negative `a_k`, `b_k` with `θ_k ≤ a_k` or `θ_k ≤ b_k` at every coordinate; that squared
+chordal distances satisfy this with `θ_k = β_k/4`, the angles of `E`, and (b), (c) are on
+paper.  (The first draft of the two-coordinate statement allowed `θ = 0`; the kernel
+rejected it, rightly: the hypothesis on `c` is then empty.)
+
+*Proof.*  (a) Write `a_k, b_k` for the squared chordal distances of `e^{iφ_k}` from `e^{ip_k}`,
+`e^{iq_k}` and `θ_k = β_k/4`.  By the triangle inequality `√a_k + √b_k ≥ √β_k`, so `a_k ≥ θ_k` or
+`b_k ≥ θ_k`.  Let `A = Σ_D a_k`, `B = Σ_D b_k` and
+`F = Σ_{k≠l} a_kb_l = Σ_k a_k Σ_{l≠k} b_l = Σ_l b_l Σ_{k≠l} a_k`.  If two different coordinates
+have `b ≥ θ`, every inner sum `Σ_{l≠k} b_l` is at least `min θ`, so `F ≥ (min θ)·A`; if two have
+`a ≥ θ`, `F ≥ (min θ)·B`; with three coordinates one of the two happens.  With `D = {k, l}` the
+remaining case is `a_k < θ_k` (so `b_k ≥ θ_k`) and `a_l ≥ θ_l`: then `F ≥ a_lb_k ≥ a_lθ_k` and
+`A < θ_k + a_l ≤ a_l(θ_k + θ_l)/θ_l`, so `F ≥ θ_kθ_l/(θ_k + θ_l)·A`.  On `E`, `a_k = b_k`, and
+`f = Σ_E a_k + F ≥ min(1, c_D)·(Σ_E a_k + min(A, B))`.
+(b) `∫ f dμ = 0` and `f = c_0 + λ·Φ`, so `∫ f dν = λ·(E_νΦ − E_μΦ) ≤ ‖λ‖₁τ`; then (a).  Expanding
+`a_k = 2 − 2cos p_k cos φ_k − 2 sin p_k sin φ_k` and the products gives the bound on `Λ`.
+(c) Take `k` with `β_k = β_max` and `g = a_k/β_k`: `g(p) = 0`, `g(q) = 1`, `E_μ g = w_q`, and
+`|E_νg − w_q| ≤ 2√2τ/β_k`.  On `N_q`, `|g − 1| = |a_k − β_k|/β_k ≤ 4d(φ, q)/β_k`; elsewhere
+`g ≤ d²(φ, p)/β_k`.  So `|E_νg − ν(N_q)| ≤ (4√ε + ε)/β_k` by the Cauchy–Schwarz inequality.  ∎
+
+*What this adds.*  On a continuous configuration space no sharp certificate exists
+(Proposition E2.2) and the modulus is a square root; the science division has insisted,
+rightly, that a quadratic-growth certificate with an uncomputed constant is a qualitative
+statement.  Here every constant is explicit.  The order is optimal: splitting the atom at
+`q` into two atoms at angles `q_k ± δ` changes every datum by `O(δ²)` and
+`∫ min(d_p², d_q²) dν` by about `w_qδ²`.  *Numerical check* **[N]** (L6): over 46 random pairs of
+states on tori with two to five angles, the smallest value found for
+`f/(c*·min(d_p², d_q²))`, by sampling and by adversarial minimisation, is `1.25` — the
+constant of (a) is within a quarter of the best possible in the worst case found; on a
+`30 × 30` grid of the 2-torus the largest `∫ min(d_p², d_q²) dν` compatible with the data
+(a linear programme) is between `0.15` and `0.30` of the bound of (b).
+
+**Proposition E21 (`K` states on a product space: the permanent certificate).**  Let
+`X = Π_{k≤r} X_k`, let `s¹, …, s^K ∈ X` be distinct, and for every state `i` and coordinate `k`
+let `a^i_k : X_k → [0, ∞)` vanish exactly at `s^i_k`.  Put
+
+    f(x) = Σ_{κ : [K] ↪ [r]} Π_{i≤K} a^i_{κ(i)}(x_{κ(i)}) ,
+
+the permanent of the `K × r` matrix `(a^i_k(x_k))` (the sum over injective assignments of
+coordinates to states).
+(a) `f ≥ 0`, and `f(x) = 0` iff some set `I` of states has fewer than `|I|` coordinates `k` at which
+`x_k ≠ s^i_k` for some `i ∈ I`.
+(b) Say that the states satisfy the *Hall condition* if for every set `I` of at least two
+states the number of coordinates at which the states of `I` do not all coincide is at least
+`|I|` — for instance if any two states differ in at least `K` coordinates.  Then the zero set
+of `f` is `{s¹, …, s^K}`.  If the condition fails for some `I`, `f` vanishes on the whole set of
+configurations that agree with the states of `I` where they coincide — on a torus a
+subtorus of positive dimension; on binary coordinates possibly nothing but the states of
+`I` themselves.
+(c) On the torus with `a^i_k = 2 − 2cos(φ_k − s^i_k)`: under the Hall condition every ensemble
+supported on the `K` states is determined, among all probability measures on `𝕋^r`, by the
+means of the products of `1, cos, sin` over at most `K` angles.  For `K = 2` the Hall condition
+is "the two states differ in at least two angles": Proposition E20′.
+
+**[P]**; elementary, by Hall's marriage theorem (equivalently the Frobenius–König theorem
+on vanishing permanents) **[K]**.  (a) and (b) are **[V]**:
+`Ensemble.permCert_eq_zero_iff` (for non-negative entries the permanent vanishes iff some
+set of states sees fewer coordinates than it has members; Mathlib's Hall theorem) and
+`Ensemble.permCert_zero_set` (for states and a configuration in a product space with one
+coordinate type, entries vanishing exactly at coincidence, and the Hall condition on the
+states: the permanent vanishes iff the configuration is one of the states).  (c) — that
+`f` and the `g_i` lie in the span, and Theorem E1 — is on paper.
+
+*Proof.*  (a) A product of non-negative numbers; `f(x) = 0` iff no injective `κ` has
+`x_{κ(i)} ≠ s^i_{κ(i)}` for all `i`, i.e. iff the bipartite graph "state `i` — coordinate `k` when
+`x_k ≠ s^i_k`" has no matching that covers the states; Hall's theorem.  (b) For `|I| = 1` the
+condition of (a) says `x = s^i`.  For `|I| ≥ 2` the neighbourhood of `I` contains every
+coordinate at which the states of `I` do not all coincide (at such a coordinate `x_k` differs
+from one of them), so it has at least `|I|` elements.  If the Hall condition fails for `I`
+and `x` agrees with the states of `I` where they coincide, the neighbourhood of `I` is
+inside the set of the other coordinates, which has fewer than `|I|` elements.  (c) `f` and
+the functions `g_i = Π_{j≠i} a^j_{k_j}` are in the span of the data; here `(k_j)_{j≠i}` are
+distinct coordinates with `s^i_{k_j} ≠ s^j_{k_j}`, which exist by Hall's theorem again (the
+coordinates at which some state of `J` differs from `s^i` number at least `|J| + 1`).  Since
+`g_i(s^i) > 0` and `g_i(s^j) = 0`, the features are affinely independent on the states;
+Theorem E1.  ∎
+
+*Numerical check* **[N]** (L7).  Torus: 15 random families of three or four states that
+differ pairwise in every angle, `r` up to five — every zero of the permanent found is a
+state; three states that coincide in two of four angles — the permanent vanishes at a
+configuration at distance `1.32` from all of them.  Cube with six sites, all 41 664 triples
+of states: the Hall condition holds for 30 720 and the zero set of the permanent energy is
+the triple for every one of them; it fails for 10 944, the predicted sub-cube is in the
+zero set for every one, and the zero set is strictly larger than the triple for 960.
+
+*Remarks.*  1. The certificate uses data of order `K` in at least `K` angles; Theorem E20
+uses all multilinear data and reaches `2^r − r − 1` *generic* states.  E21 trades number for
+explicitness and for a condition that can be read off the states.  2. On the cube
+(`a^i_k = 1 − x_ks^i_k`) the same permanent is an explicit energy of order `K`, with fields,
+whose ground states are exactly `K` given conformers satisfying the Hall condition — a
+deterministic statement; for random conformers Theorem E19 does far better.  3. The Hall
+condition is sufficient for this certificate, not necessary for identification: four
+generic states on `𝕋³` violate it (three coordinates, four states) and are identified by
+Theorem E20, with data of order three.  When it fails for a pair, identification itself
+fails on the torus (E20′, `|D| = 1`); for three states that differ in two angles only, the
+count of conditions (three double points impose nine conditions on the nine-dimensional
+span) indicates that it fails generically.
+
 *Relation to the science division's SCI-RES-0029 §3.*  Its (a) — two states that differ in
 one torsion are never identified from mean squared distances — is the case `|D| = 1`; its
 (c) — mean squared distances of a chain are a linear image of the Fourier coefficients
@@ -1584,7 +1704,7 @@ a finite space — is the question we put to the theory and complexity divisions
 
 | item | status |
 |---|---|
-| Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`: sixteen headline theorems and four non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning; the Lean stages of the programme's `scripts/audit_all.sh` pass on this branch (the status file records the Python stages).  What is machine-checked is named at each theorem; everything else is a paper proof.  Of Part VI only the combinatorial core of E20′ is machine-checked; for finite `X` the last step of E18 is `eq_of_exposing_certificate` applied to the zero set |
+| Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`, `PermanentCertificate.lean`: twenty-four headline theorems and seven non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning; the programme's `scripts/audit_all.sh` passes on this branch (the status file records exactly which tree each stage was run on).  What is machine-checked is named at each theorem; everything else is a paper proof.  Of Part VI only the combinatorial cores of E20′, E20″ and E21 are machine-checked; for finite `X` the last step of E18 is `eq_of_exposing_certificate` applied to the zero set |
 | numerics | `experiments/ensemble/run_all.py` runs the six scripts whose numbers are quoted (output in `experiments/ensemble/output.txt`); the threshold computations of §4.4 and §4c.3 are separate (`capacity_threshold.py`, `capacity_cutting_plane.py`, `symmetric_stability.py`, `kbody_capacity.py`; output in `output_threshold.txt`) |
 | review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  The science division has accepted a review of E5, E7, E8, E1.3 and §5 (its workstream R21; SCI-RES-0028) and has already contributed Proposition E2.2.  Parts IV and V, Theorem E7′ and §4.4 (version 2) are under a second internal review, commissioned at the third checkpoint and not yet reported; Part VI (version 3) has been read by nobody but its author.  No external peer review |
 | prior art | `PRIOR_ART.md`: the searches of the first checkpoint and those of the internal review; for Parts IV and V and E7′ two searches (obligation OB10); for Part VI the two cited theorems were read in the sources (§5b), E18′, E20′ and C3 were not searched (OB16) |
@@ -1650,6 +1770,11 @@ a finite space — is the question we put to the theory and complexity divisions
    E1.3(b) carries the qualifier "no statewise constraint" asked for by the Geometric
    Inference Division.  The probabilistic core of E19 is a published theorem that we
    re-derived before finding it; it is cited, not claimed (`DEAD_ENDS.md` ED15).
+8. **After the third checkpoint:** Proposition E20″ (explicit growth constant, stability and
+   weights for two states on a torus), with its inequality machine-checked; Proposition
+   E21 (the permanent certificate for `K` states under a Hall condition), with its zero set
+   machine-checked through Mathlib's Hall theorem; the Gaussian control of E19(f) at the
+   size of `n = 12`.
 
 ## 8. Limitations
 

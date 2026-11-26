@@ -91,6 +91,7 @@ import proofs.Ensemble.Exposedness
 import proofs.Ensemble.RenyiHeppes
 import proofs.Ensemble.ThermalUnionBound
 import proofs.Ensemble.TwoStateCertificate
+import proofs.Ensemble.PermanentCertificate
 import proofs.AuditCommand
 
 /-!
@@ -2074,6 +2075,10 @@ end MetricChain.NonVacuity
 #print axioms MetricChain.Ensemble.twoStateCert_eq_zero_iff
 #print axioms MetricChain.Ensemble.twoStateCert_nonneg
 #print axioms MetricChain.Ensemble.twoStateCert_unique_eq_zero
+#print axioms MetricChain.Ensemble.twoStateCert_comm
+#print axioms MetricChain.Ensemble.twoStateCert_growth_three
+#print axioms MetricChain.Ensemble.twoStateCert_fin_two
+#print axioms MetricChain.Ensemble.twoStateCert_growth_two
 
 namespace MetricChain.NonVacuity
 
@@ -2100,9 +2105,74 @@ theorem ensemble_two_state_certificate_witness :
     · intro k; fin_cases k <;> simp
     · intro k; fin_cases k <;> simp
 
+/-- Non-vacuity of `Ensemble.twoStateCert_growth_two`: `a = (1, 0)`, `b = (0, 1)`, `θ = (1, 1)`,
+`c = 1/2`: the hypotheses hold and the conclusion reads `1/2 ≤ 1`. -/
+theorem ensemble_two_state_growth_two_witness :
+    (1 / 2 : ℝ) * min ((![1, 0] : Fin 2 → ℝ) 0 + (![1, 0] : Fin 2 → ℝ) 1)
+        ((![0, 1] : Fin 2 → ℝ) 0 + (![0, 1] : Fin 2 → ℝ) 1)
+      ≤ Ensemble.twoStateCert (ι := Fin 2) ![1, 0] ![0, 1] := by
+  refine Ensemble.twoStateCert_growth_two ![1, 0] ![0, 1] ![1, 1] (1 / 2) ?_ ?_ ?_ ?_
+    (by norm_num) (by norm_num)
+  · intro k; fin_cases k <;> simp
+  · intro k; fin_cases k <;> simp
+  · intro k; fin_cases k <;> simp
+  · intro k; fin_cases k <;> simp
+
+/-- Non-vacuity of `Ensemble.twoStateCert_growth_three`: three coordinates, `a = (1, 0, 0)`,
+`b = (0, 1, 1)`, `θ = (1, 1, 1)`, `c = 1`. -/
+theorem ensemble_two_state_growth_three_witness :
+    (1 : ℝ) * min (∑ k : Fin 3, (![1, 0, 0] : Fin 3 → ℝ) k) (∑ k : Fin 3, (![0, 1, 1] : Fin 3 → ℝ) k)
+      ≤ Ensemble.twoStateCert (ι := Fin 3) ![1, 0, 0] ![0, 1, 1] := by
+  refine Ensemble.twoStateCert_growth_three (ι := Fin 3) ![1, 0, 0] ![0, 1, 1] ![1, 1, 1] 1
+    ?_ ?_ ?_ (by norm_num) ?_ (i := 0) (j := 1) (m := 2) (by decide) (by decide) (by decide)
+  · intro k; fin_cases k <;> simp
+  · intro k; fin_cases k <;> simp
+  · intro k; fin_cases k <;> simp
+  · intro k; fin_cases k <;> simp
+
 end MetricChain.NonVacuity
 
 #print axioms MetricChain.NonVacuity.ensemble_two_state_certificate_witness
+#print axioms MetricChain.NonVacuity.ensemble_two_state_growth_two_witness
+#print axioms MetricChain.NonVacuity.ensemble_two_state_growth_three_witness
+
+/-! ### Ensemble division: the permanent certificate for `K` states (Proposition E21) -/
+
+#print axioms MetricChain.Ensemble.permCert_nonneg
+#print axioms MetricChain.Ensemble.permCert_eq_zero_iff
+#print axioms MetricChain.Ensemble.permCert_eq_zero_iff_of_hall
+#print axioms MetricChain.Ensemble.permCert_zero_set
+
+namespace MetricChain.NonVacuity
+
+/-- Non-vacuity of `Ensemble.permCert_zero_set`: two states `(0, 0)` and `(1, 1)` on two
+coordinates with values in `Fin 2` (they differ in both coordinates, so the Hall condition holds),
+the configuration `(0, 1)` — a chimera, which agrees with state `i` exactly at coordinate `i` — and
+`a i k = 0` if `i = k`, `1` otherwise: the certificate does not vanish. -/
+theorem ensemble_perm_certificate_witness :
+    Ensemble.permCert (ι := Fin 2) (α := Fin 2) (fun i k => if i = k then (0 : ℝ) else 1) ≠ 0 := by
+  intro h
+  have key := (Ensemble.permCert_zero_set (ι := Fin 2) (α := Fin 2) (β := Fin 2)
+    ![![0, 0], ![1, 1]] ![0, 1] (fun i k => if i = k then (0 : ℝ) else 1)
+    (by intro i k; split_ifs <;> norm_num)
+    (by intro i k; fin_cases i <;> fin_cases k <;> simp)
+    (by
+      intro I hI
+      have hIuniv : I = Finset.univ := by
+        apply Finset.eq_univ_of_card
+        have := Finset.card_le_univ I
+        simp only [Fintype.card_fin] at this ⊢
+        omega
+      subst hIuniv
+      decide)).mp h
+  obtain ⟨i, hi⟩ := key
+  fin_cases i
+  · have := congrFun hi 1; simp at this
+  · have := congrFun hi 0; simp at this
+
+end MetricChain.NonVacuity
+
+#print axioms MetricChain.NonVacuity.ensemble_perm_certificate_witness
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

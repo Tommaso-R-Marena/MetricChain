@@ -1,9 +1,9 @@
-===== exposedness_checks.py (exit 0, 37 s) =====
+===== exposedness_checks.py (exit 0, 41 s) =====
 T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiable instances)
 T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
 T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
 PASS
-===== rigidity_checks.py (exit 0, 105 s) =====
+===== rigidity_checks.py (exit 0, 106 s) =====
 R1 rigidity matroids: ok
     K4 in R^2: rank 5, connected = True
     K5 in R^3: rank 9, connected = True
@@ -35,7 +35,7 @@ R7 identified with chimeras: ok
 R8 non-generic twin on the line: ok
     4-cycle on the line, x = (8,0,3,5), x' = (8,3,5,0): lengths (8, 3, 2, 3) and (5, 2, 5, 8), no shared length; complementary splices that both close up: [((8, 2, 2, 8), (5, 3, 5, 3))]
 PASS
-===== pair_capacity_checks.py (exit 0, 26 s) =====
+===== pair_capacity_checks.py (exit 0, 22 s) =====
 C1 Littlewood-Offord lemma: ok
     7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4 at c = ('-1', '-1', '-1')
 C2 sign vectors in random spans: ok
@@ -65,7 +65,7 @@ C6 adaptivity: ok
     n = 60, 8 conformers (rank 8): 444 entries read (r n - r(r+1)/2 = 444; all pairs: 1770); reconstruction error 4.4e-16
     two two-conformer ensembles: their pair-correlation matrices differ exactly at [(0, 1)]
 PASS
-===== finite_temperature_checks.py (exit 0, 15 s) =====
+===== finite_temperature_checks.py (exit 0, 16 s) =====
 F1 one-body data, cube (Theorem E15): ok
     n = 3, b = 0.5: max over the class of TV(mu, P_a) - sum_i tau_i = +6.66e-16 (exact, 256 LPs)
     n = 3, b = 1.0: max over the class of TV(mu, P_a) - sum_i tau_i = +4.44e-16 (exact, 256 LPs)
@@ -87,7 +87,7 @@ F6 an interacting reference (Theorem E15T): ok
     complete graphs on 4..7 sites, every bond satisfied (12 references, 1200 members): max of TV - sum of deficits = +2.28e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +4.44e-16
     chains of three sites with one bond violated by the centre (5 cases, exact): max of TV - sum of deficits = +0.965, +0.522, +0.024, +0.062, +0.294
 PASS
-===== platform_checks.py (exit 0, 111 s) =====
+===== platform_checks.py (exit 0, 97 s) =====
 P1 matroid of the legs: ok
     d = 2, 3 legs: rank 3, connected = False
     d = 2, 4 legs: rank 3, connected = True
@@ -103,7 +103,7 @@ P3 spatial platform: ok
     d = 3, 7 legs: smallest residual over 80 non-constant splices = 2.366e-03 (true pose: 5.5e-15)
     d = 3, 6 legs (free matroid): splices of nearby poses realised in 20/20 cases
 PASS
-===== lifted_checks.py (exit 0, 158 s) =====
+===== lifted_checks.py (exit 0, 171 s) =====
 L1 lift isolation on the cube: ok
     n = 10 (45 pair observables): lift-isolated frequency K = 20: 1.000, K = 22: 1.000, K = 33: 0.925, K = 35: 0.950, K = 45: 0.520
     n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955
@@ -119,5 +119,12 @@ L4 torus: ok
     r = 4, K = 11 generic points: 11 zeros of the projector certificate found (expected 11); rank-one matrices on the zero set linearly independent: True
 L5 three conformers: ok
     n = 6: 4960 triples of conformers; sign vectors in the span beyond the three: at most 1 (present in 2880 triples); zero sets with affinely dependent pair features: 0
+L6 certified stability on the torus: ok
+    growth inequality, r = 2..5, 46 random pairs of states: smallest observed f / (c* min(d_p^2, d_q^2)) = 1.25 (must be >= 1)
+    2-torus, 30 x 30 grid, four pairs of states, tau = 1e-3 and 1e-2: largest int min(d_p^2, d_q^2) dnu over data-compatible measures is between 0.147 and 0.297 of the bound Lambda tau / c* (must be <= 1)
+L7 the permanent certificate: ok
+    torus, K = 3, 4 states differing pairwise in every angle (15 random cases, r = K..5): zeros of the permanent that are not states: 0
+    three states coinciding in two of four angles (Hall condition fails): the permanent vanishes at a configuration at distance 1.32 from every state (value 0.0e+00)
+    cube n = 6, all 41664 triples: Hall condition holds in 30720, zero set of the permanent energy = the triple in all of them: True; fails in 10944, the predicted sub-cube is in the zero set in all of them: True (zero set strictly larger than the triple in 960)
 PASS
 ALL PASS
