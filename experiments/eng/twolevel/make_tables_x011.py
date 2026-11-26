@@ -529,6 +529,9 @@ def stage2_blocks() -> dict[str, str]:
                      f"{Bq(b):.4f} ({b['phi']:g}; {fib}) | {Aq(a_):.4f} ({a_['phi']:g}) |")
         summary[(u, n)][(rule, k)] = dict(B=Bq(b), A=Aq(a_), flat=f["flat_instance"], cert=c["certified"], fib=worst_slope(b), count=len(rs))
     blocks = {"x011_stage2": "\n".join(lines)}
+    sizes_ = sorted({(r["u"], r["n"], r["a"]) for r in rows})
+    blocks["x011_stage2_caption"] = ("Units `n a` with `a = a(u)`; the size in nats: " + ", ".join(f"`u = {u:g}`, `n = {n}`: `n a = {n * a_:.0f}`" for u, n, a_ in sizes_)
+                                     + ".  For comparison, `u = 1`: `n a = 111` at `n = 1000`, `444` at `4000`, `1775` at `16 000`.")
     # H9: three levels, certified against flat-tuned, reading (B)
     parts, h9_fail = [], []
     for (u, n) in sorted(summary):

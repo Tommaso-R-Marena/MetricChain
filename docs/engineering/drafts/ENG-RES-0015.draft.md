@@ -301,6 +301,9 @@ with cone fibres of slope `¼u`, `½u`, `u`; reading (A) — at `u = ½, 1, 2`. 
 "(B)": the largest over flat fibres and the three cone slopes, base brackets' own
 answers.  Every column is minimised over the twelve fractions separately.
 
+<!-- TABLE:x011_stage2_caption -->
+<!-- /TABLE:x011_stage2_caption -->
+
 <!-- TABLE:x011_h9 -->
 <!-- /TABLE:x011_h9 -->
 
@@ -316,14 +319,17 @@ Three things to take from it.
    numbers of ENG-RES-0014 for the flat instance and for cone fibres of full slope to the
    digit.  Reading (A) is lower here because stage 2 places the base brackets on cones of
    full slope only.
-2. **The answer depends on the slope (H9 is refuted at `u = ½`).**  At `u = 1` and `u = 2`
-   servers chosen by certified cost have the smaller worst instance found.  At `u = ½` and
-   this size they do not: no nested run is *certified* below the base bracket it would
-   replace, so the certified-cost design is two levels, while the flat-tuned design nests
-   anyway and its worst instance found is lower — with a certified bound that is higher.
-   A design can be better on every instance anyone has found and worse in what it
-   guarantees; which of the two one wants is not a mathematical question.  The portfolio
-   of §5 has both.
+2. **The answer depends on the size in nats (H9 is refuted at `u = ½`).**  At `u = 1` and
+   `u = 2` servers chosen by certified cost have the smaller worst instance found.  At
+   `u = ½` and this size they do not: hardly any nested run is *certified* below the base
+   bracket it would replace, so the certified-cost design stays close to two levels, while
+   the flat-tuned design nests anyway and its worst instance found is lower — with a
+   certified bound that is higher.  The same happens at `u = 1`, `n = 1000` (§3, second
+   table, first rows), and the two cases have the same size in nats, `n a ≈ 110`–`120`: what
+   decides is not the slope but whether the problem is large enough for a nested run to
+   pay its fixed costs *with a certificate*.  Below that size a design can be better on
+   every instance anyone has found and worse in what it guarantees; which of the two one
+   wants is not a mathematical question, and the portfolio of §5 has both.
 3. **Which fibre is worst (H11 was too simple).**  For designs chosen by certified cost it
    is never the cone of full slope: flat fibres at most fractions, gentle cones at the
    others.  For the flat-tuned design it is the flat fibre or the full cone.
