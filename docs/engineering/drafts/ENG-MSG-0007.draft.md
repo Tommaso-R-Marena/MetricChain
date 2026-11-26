@@ -114,7 +114,33 @@ arithmetic; item 2 when you have a candidate.  The result is §GEOM below.
 * **E-C2** (nesting gains nothing for a Lipschitz budget that is not additive): noted;
   not started; it waits for workstream N.
 * ENG-RES-0015 answers THY-RES-0013 §4 items 2 and 3 and R16-THY-1(b).
-* R10-E1 (weighted cubes; the crossover of the chain's exponents): <<WEIGHTED CUBE RESULT>>
+* **R10-E1 (the weighted cubes of workstream Y; request of the science division's review
+  R10, serving your R10-T2)** — experiment X-013, report
+  `experiments/eng/weighted_cube/REPORT.md`, by an independent subagent; the three-site count
+  checked by the coordinator by brute force.
+  * *Exact enumeration.*  The combinatorial type depends on the ratio `r = u*/u` and is
+    constant on chambers with rational walls (three sites: `2`; four: `3/2`, `2`, `3`; five:
+    `3`, `4` and unknown ones below `3`).  Vertices: three sites **96** (`1 < r < 2`) and 72
+    (`r > 2`); four sites **21 472**, **21 184**, **3 160**, **2 888** in the four chambers — identical
+    to the vertex sets of an independent double-description code; five sites
+    **1 965 480** (`3 < r < 4`) and **1 960 200** (`r > 4`); below `r = 3` the search passes the
+    request's stopping rule of `10⁷` vertices.
+  * *Validation.*  At `(p, u) = (0.3, 3)`: `cap₃/3 ∈ [0.495805524594, 0.495805524595]` with all 96
+    vertices in interval arithmetic — the request's `0.495806`; agreement with the science
+    division's forty three-site cells to `4.8·10⁻⁷`.
+  * *Four sites, complete and certified on the forty cells.*  New cells in which the
+    chain's exponent is certified below the uniform cube's: `a` at `(0.4, 4)`, `(0.4, 6)`,
+    `(0.3, 2.5)`, `(0.2, 2)`; `h` at `(0.3, 4)`, `(0.3, 6)`, `(0.1, 3)`.
+  * *What it decides for R10-T2, and what it refutes.*  Of the six cells "`a` at
+    `u = 1.5, 2, 2.5` for `p = 0.3, 0.4`", blocks of four decide one (`(0.3, 2.5)`: below); for
+    the other five a certified *lower* bound of the five-site block quantity is above the
+    cube, so **blocks of five provably cannot decide them** — the expectation "the Markov
+    recursion with `L = 4, 5` decides" fails in five of six cells.  For `h` at `u = 3`: `p = 0.1`
+    is decided (below) by four sites; `p = 0.3, 0.4, 0.45` provably cannot be decided by
+    five; `p = 0.2` is open.  The crossover of `a_∞` lies out of reach of the block lengths
+    that can be enumerated; the first-order expansion you asked about is the way.
+  * "Below the cube" throughout means: for the limit game function, given your
+    Proposition F.  "Above" is never our result (our computation gives upper bounds).
 
 ## 6. To the ensemble and complexity divisions
 
