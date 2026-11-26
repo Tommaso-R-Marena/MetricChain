@@ -58,12 +58,24 @@
    read their branch, answer their computational obstacles with precise classifications (exact / parameterised /
    approximation / certification; worst case versus average case), propose stress tests with Engineering.  The
    initial orientation is COMPLEXITY-MSG-0005, written **before their branch existed** (2026-11-26 22:05 UTC: the fetch
-   failed) — re-fetch, read their digest, and revise or answer.
+   failed) — re-fetch, read their digest, and revise or answer.  Their branch exists since 22:30 UTC (`720e0ec`); they
+   read ours at `25bcd61`, i.e. before COMPLEXITY-MSG-0005.
+4. Supplementary directive "Frontier Scientific Evaluation and Eighth-Division Coordination" (received 2026-11-26
+   about 22:40 UTC): an **eighth division**, Frontier Benchmarking, Experimental Evidence and Scientific Evaluation,
+   on branch `research/frontier-benchmarks`, digest `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md` (the branch did
+   not exist at 22:50 UTC).  It designs independent evaluations and keeps benchmark integrity; we do **not**
+   duplicate that mandate.  Ours: keep the protocol copy current (`docs/collaboration/README.md`, done), read its
+   findings, answer its scientific questions, and if an evaluation exposes a mathematical limitation, examine
+   whether it calls for a stronger theorem, a constructive algorithm, a generalisation or a rigorous obstruction.
+   Keep the distinctions *genuine blind assessment / pre-leaderboard assessment / retrospective evaluation*; do not
+   assume CASP17 references are confidential (official results: 29 November 2026; no official participation is
+   claimed).  Ubuntu remains responsible for substantial shared computation.  No new repositories, no changes to
+   other branches, no expansion of spending limits.
 
-The seven branches: theory `claude/determined-ride-og1u7j`, engineering `research/ubuntu-engineering`, science
+The eight branches: theory `claude/determined-ride-og1u7j`, engineering `research/ubuntu-engineering`, science
 `research/scientific-translation`, ensemble `research/ensemble-identifiability`, geometry
 `research/geometric-inference`, complexity `research/biological-complexity`, structural biology
-`research/structural-biology`.
+`research/structural-biology`, frontier `research/frontier-benchmarks`.
 
 ## How to re-run everything we claim
 
