@@ -1,0 +1,21 @@
+=== reach: V20 on E, tau 0.7, order m = 4: atoms 332, sites 20, states/site 3..3, |X| = 10^9.54; anchor 11111111111111111111 E = -307.529287 kcal/mol; bands [12, 8, 4, 2] [3.0s]
+      GFBatch: host site 1/20 done, 4s
+      GFBatch: host site 5/20 done, 17s
+      GFBatch: host site 9/20 done, 25s
+      GFBatch: host site 13/20 done, 32s
+      GFBatch: host site 17/20 done, 37s
+      GFBatch: host site 20/20 done, 41s
+    Gamma_4 = 3.078811e+00 kcal/mol = 5.1644 kT; pair sums: computed, 211 exclusion sets, 52.5s; pair sums available for 190 pairs; max S_i/m = 1.8919e-01, max G_ij/C(m,2) = 7.7819e-02 [52.7s]
+      ball evaluations 4096/9921  10s
+    ball of radius 3: 9921 values of g (evaluated now) [21.8s]
+    w = 12 form S: CERTIFIED ln Z(E) in [516.002646, 516.101278], width 0.098632 nats; rho_cert = 10.4216 kT; E_(pi-) u = 1.2889e-01; min m_- = -307.529287, min m_+ = -307.529286 [2.9s]
+    w = 12 form B: CERTIFIED ln Z(E) in [516.044645, 516.045634], width 0.000989 nats; rho_cert = 10.4216 kT; E_(pi-) u = 1.0930e-03; min m_- = -307.529287, min m_+ = -307.529286 [3.1s]
+    w =  8 form S: CERTIFIED ln Z(E) in [516.002635, 516.101286], width 0.098651 nats; rho_cert = 10.4217 kT; E_(pi-) u = 1.2891e-01; min m_- = -307.529292, min m_+ = -307.529279 [0.1s]
+    w =  8 form B: CERTIFIED ln Z(E) in [516.044622, 516.045654], width 0.001033 nats; rho_cert = 10.4217 kT; E_(pi-) u = 1.1372e-03; min m_- = -307.529292, min m_+ = -307.529279 [0.1s]
+    w =  4 form S: CERTIFIED ln Z(E) in [516.002536, 516.101484], width 0.098948 nats; rho_cert = 10.4244 kT; E_(pi-) u = 1.2922e-01; min m_- = -307.529402, min m_+ = -307.529224 [0.0s]
+    w =  4 form B: CERTIFIED ln Z(E) in [516.043304, 516.047088], width 0.003784 nats; rho_cert = 10.4244 kT; E_(pi-) u = 3.9342e-03; min m_- = -307.529402, min m_+ = -307.529224 [0.0s]
+    w =  2 form S: CERTIFIED ln Z(E) in [516.001212, 516.102289], width 0.101076 nats; rho_cert = 10.4670 kT; E_(pi-) u = 1.3161e-01; min m_- = -307.529668, min m_+ = -307.528493 [0.0s]
+    w =  2 form B: CERTIFIED ln Z(E) in [516.030740, 516.060094], width 0.029354 nats; rho_cert = 10.4670 kT; E_(pi-) u = 3.1738e-02; min m_- = -307.529668, min m_+ = -307.528493 [0.0s]
+    SAMPLED CHECK (band 12, form B): 1000 exact samples of pi_(m_-) (seed 20261126; 45 distinct; mean number of sites off the anchor 0.18), E evaluated at each [0.5s]: m_- > E: 0, m_+ < E: 0; beta(E - m_-): mean 4.030e-04, max 9.872e-02; mean beta(m_+ - m_-) = 8.102e-04
+    -> out/reach_V20_E_t0.70_gbn2_m4.json
+DONE p6_03_reach V20 E 0.7 m=4 [84s]

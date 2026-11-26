@@ -1,0 +1,24 @@
+=== triple shares: V20 on P2, tau 0.7: atoms 332, sites 20, |X| = 3.48678e+09; anchor E = -306.568715; orders [4, 5, 3]; bands [8, 4]; enumeration False [1.2s]
+  -- m = 4: Gamma_4 = 2.821341e+00 kcal/mol; 392 in-window triple sums (window 8) by the closed form with three excluded sites [50.9s]; max H_ijk/C(m,3) = 5.6243e-02; sum over in-window triples / C(m,3) = 2.818318e+00 (99.89 % of Gamma)
+     w =  8 form S: ln Z(m_-) = 519.219855, ln Z(m_+) = 517.484288, width 1.735567 nats; min m_- = -306.568720 [0.0s]
+     w =  8 form B: ln Z(m_-) = 518.431429, ln Z(m_+) = 518.125785, width 0.305644 nats; min m_- = -306.568720 [0.0s]
+     w =  8 form T: ln Z(m_-) = 518.292897, ln Z(m_+) = 518.238327, width 0.054570 nats; min m_- = -306.568720 [0.1s]
+     w =  4 form S: ln Z(m_-) = 519.220537, ln Z(m_+) = 517.483536, width 1.737001 nats; min m_- = -306.569135 [0.0s]
+     w =  4 form B: ln Z(m_-) = 518.455825, ln Z(m_+) = 518.103809, width 0.352017 nats; min m_- = -306.569135 [0.0s]
+     w =  4 form T: ln Z(m_-) = 518.327365, ln Z(m_+) = 518.205522, width 0.121843 nats; min m_- = -306.569135 [0.0s]
+  -- m = 5: Gamma_5 = 8.222732e-02 kcal/mol; 392 in-window triple sums (window 8) by the closed form with three excluded sites [80.8s]; max H_ijk/C(m,3) = 1.1082e-03; sum over in-window triples / C(m,3) = 8.198763e-02 (99.71 % of Gamma)
+     w =  8 form S: ln Z(m_-) = 518.293650, ln Z(m_+) = 518.233156, width 0.060494 nats; min m_- = -306.568720 [0.4s]
+     w =  8 form B: ln Z(m_-) = 518.271430, ln Z(m_+) = 518.255189, width 0.016241 nats; min m_- = -306.568720 [0.3s]
+     w =  8 form T: ln Z(m_-) = 518.267767, ln Z(m_+) = 518.258807, width 0.008960 nats; min m_- = -306.568720 [0.4s]
+     w =  4 form S: ln Z(m_-) = 518.294332, ln Z(m_+) = 518.232260, width 0.062072 nats; min m_- = -306.569135 [0.2s]
+     w =  4 form B: ln Z(m_-) = 518.274433, ln Z(m_+) = 518.251982, width 0.022451 nats; min m_- = -306.569135 [0.2s]
+     w =  4 form T: ln Z(m_-) = 518.271555, ln Z(m_+) = 518.254817, width 0.016737 nats; min m_- = -306.569135 [0.2s]
+  -- m = 3: Gamma_3 = 6.191545e+01 kcal/mol; 392 in-window triple sums (window 8) by the closed form with three excluded sites [26.0s]; max H_ijk/C(m,3) = 1.9837e+00; sum over in-window triples / C(m,3) = 6.188891e+01 (99.96 % of Gamma)
+     w =  8 form S: ln Z(m_-) = 587.101402, ln Z(m_+) = 514.311004, width 72.790399 nats; min m_- = -347.908433 [0.0s]
+     w =  8 form B: ln Z(m_-) = 585.045234, ln Z(m_+) = 517.254514, width 67.790720 nats; min m_- = -347.206790 [0.0s]
+     w =  8 form T: ln Z(m_-) = 584.642256, ln Z(m_+) = 518.084534, width 66.557722 nats; min m_- = -347.207275 [0.1s]
+     w =  4 form S: ln Z(m_-) = 587.102209, ln Z(m_+) = 514.310892, width 72.791317 nats; min m_- = -347.908477 [0.0s]
+     w =  4 form B: ln Z(m_-) = 585.060171, ln Z(m_+) = 517.157578, width 67.902593 nats; min m_- = -347.206790 [0.0s]
+     w =  4 form T: ln Z(m_-) = 584.650403, ln Z(m_+) = 517.896517, width 66.753886 nats; min m_- = -347.206913 [0.0s]
+    checks with the real energy and of |remainder| <= penalty: 0, violations 0; checks of the extreme members: 0, violations 0
+DONE p6_09_triple V20 P2 0.7 [163s]

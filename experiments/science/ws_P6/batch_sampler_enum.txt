@@ -1,0 +1,4 @@
+V8 P2 0.70 4 S 7 --enumcheck --reps 400 --N 1200
+V8 P2 0.70 4 B 7 --enumcheck --reps 400 --N 1200
+V10 P2 0.70 5 S 9 --enumcheck --reps 400 --N 1200
+V10 P2 0.70 5 B 9 --enumcheck --reps 60 --N 1200

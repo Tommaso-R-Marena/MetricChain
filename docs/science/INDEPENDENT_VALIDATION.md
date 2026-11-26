@@ -549,6 +549,38 @@ mutations added since `24a3c27`; running the harness in its full (non-quick) mod
   sign searches for Leu₈, Leu₁₂, serine; the family script; the locality and
   reference-term scripts; the certificates at 16, 20, 30 residues (the last two contain
   the coordinator's earlier fitted-chain values — a check of the value only).
+* **P6 (pair and triple shares; before SCI-MSG-0025) — recomputations with independent
+  lines, a re-run from a copy, and tests of the samplers.**  (1) `p6_adoption_check.py`
+  (4 s): the chain `envelope ≤ triples ≤ triples in a window ≤ pairs ≤ banded pairs ≤ sites`
+  on random non-negative constants, exhaustively over `{0,1}^n` (`n = 6 … 10`, orders 3–5):
+  86 400 inequalities, no violation; the inclusion–exclusion formula and both
+  double-counting identities.  The triple form on Ace-Val₈-NMe/PPII at order 4 with the
+  coordinator's own inclusion–exclusion and brute-force models (inputs: P3's 70 constants,
+  the enumerated energy): no state with `|remainder| > penalty`; widths 0.4235, 0.0704,
+  0.0110 nats (site, pair, triple) against the workstream's 0.425, 0.0717, 0.0123 — a
+  common difference of 0.0013–0.0015, the slack of P3's reduction of the evaluated
+  three-site terms, which the coordinator's models do not have; the envelope alone
+  0.0016.  (2) `certified_populations.py` (3 min; it rebuilds the workstream's models by
+  calling its functions): **1 542 exact single-site populations inside their intervals**
+  on ten enumerated instances (site, pair and triple sandwiches), the sandwich re-checked
+  at every state, and the brackets `[518.255189, 518.271430]`, `[518.238327, 518.292897]`,
+  `[518.258807, 518.267767]`, `[743.165709, 743.167411]` reproduced.  (3) **Re-run from a
+  copy of the workstream's directory** (its own files untouched):
+  `p6_09_triple.py V20 P2 0.70 --m 4 --bands 8 --noenum` and
+  `p6_02_sandwich.py V20 P2 0.70 --m 4,5 --bands 8 --noenum` — identical digits (widths
+  1.735567, 0.305644, 0.054570; 0.060494, 0.016241).  (4) The sampler: the 50 000 stored
+  points against models rebuilt here (identical energies), `W` and the bracket
+  `[518.262315, 518.262513]` recomputed, the site-state frequencies against the exact
+  marginals of `q` (largest `|z| = 2.5`, rms 1.15); `sampler_precision_check.py` (25 s): at
+  twelve residues against exact enumeration, the coordinator's chain sampler (four
+  million samples: estimate off by `(+1.5 ± 1.8)·10⁻⁶`) and P3's band sampler with the
+  rejection step on a banded model (six million proposals: acceptance rate `z = +0.5`,
+  mean `W` `z = +0.3`, estimate off by `(+0.9 ± 3.4)·10⁻⁶`).  **Not checked by the
+  coordinator:** thirty residues on PPII (triple form) and its sampled bracket; the
+  extreme-member checks; the helix control; the sampler's coverage runs; the closed-form
+  sums against explicit enumeration.  **Open at the level of two standard errors:** the
+  coordinator's pooled chain estimate at twenty residues (`518.262430 ± 0.000006`, 684 000
+  samples) against the sandwich sampler's point estimates (`518.262415 ± 0.000004`).
 
 ## 3. Not validated by us
 

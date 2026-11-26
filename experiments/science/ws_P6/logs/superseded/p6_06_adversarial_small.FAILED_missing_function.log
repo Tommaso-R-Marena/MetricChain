@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_P6/p6_06_adversarial.py", line 112, in <module>
+    main()
+    ~~~~^^
+  File "/home/user/MetricChain/experiments/science/ws_P6/p6_06_adversarial.py", line 94, in main
+    r = run(seq, bb, tau, orders, kind)
+  File "/home/user/MetricChain/experiments/science/ws_P6/p6_06_adversarial.py", line 49, in run
+    Gam, S, Gp, srcp = L.load_or_compute_pair_sums(G, GF, x0, seq, bb, tau, kind, m)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'p6lib' has no attribute 'load_or_compute_pair_sums'

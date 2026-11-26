@@ -1,0 +1,248 @@
+{
+ "seq": "K4",
+ "bb": "H",
+ "tau": 0.7,
+ "n": 4,
+ "size": 16464.0,
+ "anchor": [
+  10,
+  10,
+  8,
+  3
+ ],
+ "bands": [
+  3,
+  2
+ ],
+ "enum": true,
+ "orders": {
+  "3": {
+   "m": 3,
+   "Gamma": 33.58390468679888,
+   "n_triples": 4,
+   "in_window_share": 1.000000000000002,
+   "bands": {
+    "3": {
+     "triple_le_pair": true,
+     "env_le_triple": true,
+     "remainder": {
+      "viol": 0,
+      "ratio_min": 103.66133254921435,
+      "ratio_max": 1459647696.6608176
+     },
+     "S": {
+      "lnZ_lo": 261.60640405359993,
+      "lnZ_up": 210.58459764352392,
+      "width": 51.02180641007601,
+      "min_lo": -155.23372645708474,
+      "rho_cert": 67.16781604076564,
+      "viol": 0,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": -1.4210854715202004e-14
+     },
+     "B": {
+      "lnZ_lo": 261.60594731484684,
+      "lnZ_up": 211.4674797906324,
+      "width": 50.138467524214434,
+      "min_lo": -155.2337267929238,
+      "rho_cert": 67.1678167124438,
+      "viol": 0,
+      "dp_vs_enum": 1.1368683772161603e-13,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": -1.5631940186722204e-13
+     },
+     "T": {
+      "lnZ_lo": 261.6059518089936,
+      "lnZ_up": 211.70601294707274,
+      "width": 49.89993886192087,
+      "min_lo": -155.23372947963628,
+      "rho_cert": 67.16782208586864,
+      "viol": 0,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": -1.5631940186722204e-13
+     }
+    },
+    "2": {
+     "triple_le_pair": true,
+     "env_le_triple": true,
+     "remainder": {
+      "viol": 0,
+      "ratio_min": 158.79144768889458,
+      "ratio_max": 2162373826.4832644
+     },
+     "S": {
+      "lnZ_lo": 263.0088536202504,
+      "lnZ_up": 210.5418457619744,
+      "width": 52.46700785827602,
+      "min_lo": -156.13584353440876,
+      "rho_cert": 70.71745034973583,
+      "viol": 0,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": 3.358357503202569e-08
+     },
+     "B": {
+      "lnZ_lo": 263.0083923830306,
+      "lnZ_up": 211.14260620685002,
+      "width": 51.86578617618056,
+      "min_lo": -156.1358438702478,
+      "rho_cert": 70.71745102141398,
+      "viol": 0,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": 3.6942263648143125e-07
+     },
+     "T": {
+      "lnZ_lo": 263.0083938188633,
+      "lnZ_up": 211.2228674634913,
+      "width": 51.785526355371985,
+      "min_lo": -156.135845213604,
+      "rho_cert": 70.71745370812634,
+      "viol": 0,
+      "dp_vs_enum": 0.0,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": 1.71277881122478e-06
+     }
+    }
+   },
+   "nball": 721,
+   "triple_check": {
+    "n_subsets": 4,
+    "n_triples": 4,
+    "dH_max": 2.042810365310288e-14,
+    "rel": 6.08270653564972e-16
+   }
+  },
+  "4": {
+   "m": 4,
+   "Gamma": 0.8537732248481616,
+   "n_triples": 4,
+   "in_window_share": 1.0,
+   "bands": {
+    "3": {
+     "triple_le_pair": true,
+     "env_le_triple": true,
+     "remainder": {
+      "viol": 0,
+      "ratio_min": 290.23502558639694,
+      "ratio_max": 839983078.4793698
+     },
+     "S": {
+      "lnZ_lo": 212.13344807814804,
+      "lnZ_up": 211.4379533500536,
+      "width": 0.6954947280944452,
+      "min_lo": -125.54236890953638,
+      "rho_cert": 1.9126296065411879,
+      "viol": 0,
+      "dp_vs_enum": 2.842170943040401e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": -1.4210854715202004e-14
+     },
+     "B": {
+      "lnZ_lo": 211.8350416036002,
+      "lnZ_up": 211.67816323987256,
+      "width": 0.1568783637276283,
+      "min_lo": -125.54236890953638,
+      "rho_cert": 1.9126296150789273,
+      "viol": 0,
+      "dp_vs_enum": 2.842170943040401e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": -1.5631940186722204e-13
+     },
+     "T": {
+      "lnZ_lo": 211.76261749604225,
+      "lnZ_up": 211.73087413789472,
+      "width": 0.03174335814753704,
+      "min_lo": -125.54236890953638,
+      "rho_cert": 1.9126296492298547,
+      "viol": 0,
+      "dp_vs_enum": 2.842170943040401e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": -1.5631940186722204e-13
+     }
+    },
+    "2": {
+     "triple_le_pair": true,
+     "env_le_triple": true,
+     "remainder": {
+      "viol": 0,
+      "ratio_min": 290.23502558639694,
+      "ratio_max": 839983078.4793698
+     },
+     "S": {
+      "lnZ_lo": 213.36495280824738,
+      "lnZ_up": 211.38425096744686,
+      "width": 1.9807018408005206,
+      "min_lo": -126.17936265175285,
+      "rho_cert": 5.324128235915232,
+      "viol": 0,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": 8.537170970157604e-10
+     },
+     "B": {
+      "lnZ_lo": 213.10782751430872,
+      "lnZ_up": 211.58476131455325,
+      "width": 1.5230661997554762,
+      "min_lo": -126.17936265175285,
+      "rho_cert": 5.324128244452957,
+      "viol": 0,
+      "dp_vs_enum": 8.526512829121202e-14,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": 5.122586799188866e-09
+     },
+     "T": {
+      "lnZ_lo": 213.06253629852745,
+      "lnZ_up": 211.61243489907565,
+      "width": 1.4501013994517962,
+      "min_lo": -126.17936265175285,
+      "rho_cert": 5.324128261528401,
+      "viol": 0,
+      "dp_vs_enum": 0.0,
+      "truth_inside": true,
+      "states": 16464,
+      "adv_viol": 0,
+      "adv_slack": 1.3660326203535078e-08
+     }
+    }
+   },
+   "nball": 5310,
+   "triple_check": {
+    "n_subsets": 1,
+    "n_triples": 4,
+    "dH_max": 0.0,
+    "rel": 0.0
+   }
+  }
+ },
+ "lnZ_E": 211.7426950896258,
+ "checks": 460992,
+ "violations": 0,
+ "adv_checks": 395136,
+ "adv_violations": 0,
+ "seconds": 2.1738009452819824
+}

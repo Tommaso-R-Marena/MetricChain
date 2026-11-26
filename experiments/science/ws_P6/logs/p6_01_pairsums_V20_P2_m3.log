@@ -1,0 +1,14 @@
+=== pair sums: V20 on P2, tau 0.7, gbn2, order m = 3: atoms 332, sites 20, states/site 3..3; anchor 11111111111111111111, E = -306.568715 kcal/mol [1.3s]
+    enclosures and instances [0.1s]
+      GFBatch: host site 1/20 done, 1s
+      GFBatch: host site 5/20 done, 4s
+      GFBatch: host site 9/20 done, 7s
+      GFBatch: host site 13/20 done, 9s
+      GFBatch: host site 17/20 done, 11s
+      GFBatch: host site 20/20 done, 12s
+    211 exclusion sets (1 + 20 + 190 pairs) by the batched closed form [14.5s]: Gamma_3 = 6.191545e+01 kcal/mol (self 6.471e-01, cross 6.127e+01)
+    S_i = sum_(T ni i): min 3.2447e+00, max 1.0842e+01; sum_i S_i / m = 6.191545e+01 (must equal Gamma: rel. dev. 1.4e-15)
+    G_ij: min 1.5239e-05, max 5.4629e+00; sum_(i<j) G_ij / C(m,2) = 6.191545e+01 (must equal Gamma: rel. dev. 3.0e-14); row identity sum_j G_ij = (m-1) S_i: max abs dev 1.98e-12
+    mean G_ij by separation |i-j| = 1..19: 5.00e+00 3.24e+00 1.45e+00 3.73e-01 8.87e-02 2.66e-02 8.02e-03 3.26e-03 1.61e-03 8.38e-04 5.00e-04 3.11e-04 1.94e-04 1.31e-04 8.90e-05 5.95e-05 4.10e-05 2.69e-05 1.52e-05
+    -> out/pairsums_V20_P2_t0.70_gbn2_m3.npz
+DONE p6_01_pairsums V20 P2 0.7 3 [16s]

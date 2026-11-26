@@ -1,0 +1,12 @@
+=== sandwich sampler (theory division, Prop. 11.113): V20 on P2, tau 0.7, m = 4, form B, band 8; ball 9921 values; ln Z(m_-) = 518.431429, ln Z(m_+) = 518.125785, deterministic width D = 0.305644 nats; exact acceptance rate 1 - e^-D = 0.26335; seed 2026112641; delta 0.05 [2.7s]
+    50000 accepted of 189024 proposals (empirical acceptance 0.26452; exact 0.26335) [1.8s]; 36613 distinct states to evaluate; mean number of sites off the anchor among accepted points 5.14
+      14178 of the 36613 distinct states already have a value of g on disk (ball caches, earlier runs); 22435 new evaluations
+      evaluations 4096/22435  13s
+      evaluations 16384/22435  39s
+    E evaluated at the accepted points [51.1s]; m_- <= E <= m_+ at all 50000 accepted points: violations below 0, above 0; W in [0.097468, 0.527263] (outside [0,1]: 0); mean rounding half-width of W 6.3e-07
+    N =   1200 (the first 1200 accepted points): mean W = 0.410264 (std 0.0568); Hoeffding half-width t = 0.039205; CERTIFIED (prob. >= 0.95): ln Z(E) in [518.250348, 518.274796], width 2.445e-02 nats (bound (e^D - 1) 2t = 2.803e-02); point estimate 518.262646
+               [not certified here -- empirical Bernstein half-width (formula quoted from memory) t_EB = 0.013380: ln Z(E) in [518.258466, 518.266810], width 8.344e-03]
+    N =  50000 (the first 50000 accepted points): mean W = 0.409818 (std 0.0565); Hoeffding half-width t = 0.006074; CERTIFIED (prob. >= 0.95): ln Z(E) in [518.260611, 518.264399], width 3.788e-03 nats (bound (e^D - 1) 2t = 4.343e-03); point estimate 518.262507
+               [not certified here -- empirical Bernstein half-width (formula quoted from memory) t_EB = 0.000953: ln Z(E) in [518.262210, 518.262804], width 5.944e-04]
+    -> out/sampler_V20_P2_t0.70_gbn2_m4_B_w8.json
+DONE p6_04_sampler V20 P2 0.7 m=4 B w=8 [56s]

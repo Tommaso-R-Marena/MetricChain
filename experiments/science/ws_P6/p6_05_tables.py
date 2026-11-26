@@ -160,12 +160,12 @@ P("<!--T:sampler-->")
 P("| instance | m | form | band | deterministic bracket; width D | acceptance rate (exact; observed) | proposals | N accepted | distinct states evaluated | mean W | certified bracket (δ = 0.05) | width | `(e^D − 1)·2t` |")
 P("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
 for fn in sorted(glob.glob(os.path.join(OUT, "sampler_*.json"))):
-    if "sampler_enum_" in fn:
+    if "sampler_enum_" in fn or "sampler_triple_enum_" in fn:
         continue
     r = json.load(open(fn))
     for NN, b in sorted(r["brackets"].items(), key=lambda kv: int(kv[0])):
         frac = int(NN) / r["N"]
-        P(f"| {r['seq']}/{r['bb']} | {r['m']} | {'site (P3)' if r['form'] == 'S' else 'banded pair'} | {r['w']} | {br(r['lnZ_up'], r['lnZ_lo'])}; {r['D']:.4f} | "
+        P(f"| {r['seq']}/{r['bb']} | {r['m']} | {dict(S='site (P3)', B='banded pair', T='triple')[r['form']]} | {r['w']} | {br(r['lnZ_up'], r['lnZ_lo'])}; {r['D']:.4f} | "
           f"{r['acc_rate_exact']:.4f}; {r['emp_acc']:.4f} | {r['proposals'] if int(NN) == r['N'] else '(prefix)'} | {NN} | {r['distinct'] if int(NN) == r['N'] else '—'} | {b['Wmean']:.4f} | "
           f"{br(b['lo'], b['hi'], 5)} | {fmt(b['width'], 3)} | {fmt(b['predicted_width_bound'], 3)} |")
 P("")

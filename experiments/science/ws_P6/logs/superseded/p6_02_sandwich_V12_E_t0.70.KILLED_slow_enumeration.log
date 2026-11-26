@@ -1,0 +1,4 @@
+=== sandwich: V12 on E, tau 0.7, gbn2: atoms 204, sites 12, states/site 3..3, |X| = 531441; anchor 111111111111 E = -199.251961 kcal/mol; orders [4, 5]; bands [11, 2, 1] (P3's default band: 11); enumeration: True [1.2s]
+      enumeration 16384/531441  26s
+      enumeration 147456/531441  201s
+      enumeration 278528/531441  420s

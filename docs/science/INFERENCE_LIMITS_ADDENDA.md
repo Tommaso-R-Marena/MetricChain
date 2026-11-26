@@ -1827,6 +1827,25 @@ whole domain; then `ln Z(m₊) ≤ ln Z(E) ≤ ln Z(m₋)`, and for `r = β(E �
     `W_cert = 2.4·10⁻³`, is two hundred times the gap estimated for the fitted chain
     (`10⁻⁵`; on enumerated instances P3's `W_cert` is 4–26 times the true gap of its own
     model) — and still a few thousandths of a nat.
+    *Added 2026-11-26, after workstream P6 ran the theory division's sandwich sampler on
+    this instance (SCI-MSG-0025).*  That sampler gives `518.262414 ± 0.000005` and
+    `518.262417 ± 0.000006` from two sandwiches and two seeds (point estimates with one
+    standard error, recomputed by the coordinator from the stored points; its certified
+    bracket is `[518.262315, 518.262513]`).  The value `518.2626 ± 0.0001` above (seed
+    20261127, 4 000 samples: `518.262573 ± 0.000075`) was high by 1.6 of its standard
+    errors: two new seeds with 40 000 samples give `518.262443 ± 0.000024` and
+    `518.262457 ± 0.000025`, a long run with 600 000 samples `518.262426 ± 0.000006`
+    (`beyond_enumeration_recheck_V20.py`, `…_long.py`); pooled, `518.262430 ± 0.000006`.  All
+    but the first lie inside the certified bracket.  The pooled value is `1.5·10⁻⁵` nats
+    above the sandwich sampler's, 2.1 standard errors of the difference.  Both samplers
+    were then tested against exact enumeration at twelve residues with four and six
+    million samples (`sampler_precision_check.py`): errors `(+1.5 ± 1.8)·10⁻⁶` and
+    `(+0.9 ± 3.4)·10⁻⁶`, site and neighbour-pair frequencies at `rms z = 0.8–1.0`; the two
+    energy functions agree to `4·10⁻¹²` on 400 states.  **Not resolved further:** a
+    fluctuation of that size has probability about 0.04, and `1.5·10⁻⁵ k_BT` bears on no
+    statement made here.  The table row "fitted tables" should read `518.26243 ± 0.00001`
+    (pooled, 684 000 samples); the "agreement to `10⁻⁴` nats" of this item stands and is
+    now an agreement to `2·10⁻⁵`.
 15. **Certifiability, not accuracy, is what the helix breaks.**  For leucine on the
     helix the *price* is as small as anywhere — a fitted window-four chain leaves a
     remainder of `0.002–0.004 k_BT` at twenty and thirty residues — while P3's certified
@@ -2084,6 +2103,88 @@ were minimised from two starts (one start for the ten instances above 20 000 sta
 the two starts agreed to `10⁻⁸` in the objective wherever both were run; exact sums, nothing
 sampled.  Charged and aromatic side chains: item 25 (maximum-likelihood and floor fits
 only, on masked domains).
+
+### (13) What a certified sandwich gives beyond `ln Z`: certified populations [P, elementary; M for the numbers; the sandwiches are workstream P3's and P6's; added 2026-11-26]
+
+*Script:* `experiments/science/pi_inference/certified_populations.py` (+ log, JSON; three
+minutes).  Model-relative as everywhere in this addendum: populations of the rotamer
+model (fixed backbone, ff14SB known part, GBn2 solvent term, P2's grid), not of a
+molecule.
+
+**Statement.**  Let `m₋ ≤ E ≤ m₊` at every state, and for an event `A` write
+`Z_∓(A) := Σ_{x∈A} e^{−m_∓(x)}`.  Then `Z₊(A) ≤ Z_E(A) ≤ Z₋(A)`, and since the odds
+`Z_E(A)/Z_E(Aᶜ)` increase in the first and decrease in the second,
+
+    P_E(A)  ∈  [ Z₊(A) / (Z₊(A) + Z₋(Aᶜ)),   Z₋(A) / (Z₋(A) + Z₊(Aᶜ)) ],
+
+an interval of width `D_A + D_{Aᶜ}` in log-odds, `D_S := ln Z₋(S) − ln Z₊(S)`.  It cannot be
+improved from the sandwich alone: `A` and `Aᶜ` are disjoint, so the energy function equal
+to `m₋` on `A` and `m₊` on `Aᶜ` lies in the sandwich.  For `A = {x_i = a}` the restricted
+sums are transfer-matrix sums of the same banded models with the other states of site
+`i` removed: **no sampling and no further evaluation of the solvent term** — everything
+is read off the certificate.  (For ratios of two macrostates the theory division's
+Corollary 11.114 gives the *cost* of certifying in a box class; this is the range the
+box allows, which is what a sandwich already in hand delivers.)
+
+**With the sandwich sampler** (the theory division's Proposition 11.113): with
+`q ∝ e^{−m₋} − e^{−m₊}` and `W` as there,
+`P_E(A) = [Z₊(A) + (Z₋ − Z₊)·E_q(1_A W)] / [Z₊ + (Z₋ − Z₊)·E_q W]`; both means are of
+`[0, 1]`-valued variables, so Hoeffding's inequality with a union bound gives all
+populations simultaneously from the points already evaluated for `ln Z`.
+
+26. **Validation** [M].  On ten enumerated instances (Val₈, Val₁₀, Val₁₂ on strand and
+    PPII; Leu₈ on strand and helix; Ser₆ and Phe₆ on the strand), orders 3–6, site form,
+    banded pair form and (three cases) triple form: **1 542 exact single-site populations
+    against their intervals, no violation**; the sandwich itself re-checked at every
+    state of every case, and the exact `ln Z` inside every bracket.
+27. **Twenty residues on PPII (`3.5·10⁹` assignments)** [M; certified in the sense of the
+    sandwich used].  Every one of the 60 single-site rotamer populations, the
+    probability of the anchor assignment and the mean number of side chains off the
+    anchor:
+
+    | sandwich (band 8) | evaluations | width of `ln Z` | log-odds width of a population, largest | relative half-width of the minor populations, largest | `P`(anchor assignment) | mean number of sites off the anchor |
+    |---|---|---|---|---|---|---|
+    | order 4, site form (P3) | 9 921 | 1.74 | 3.95 | 0.96 | `[0.0069, 0.0389]` | `[0.64, 11.6]` |
+    | order 4, pair form (P6) | 9 921 | 0.306 | 0.79 | 0.37 | `[0.0151, 0.0205]` | `[2.64, 4.73]` |
+    | **order 4, triple form (P6)** | 9 921 | 0.0546 | 0.160 | 0.079 | `[0.01734, 0.01831]` | `[3.35, 3.75]` |
+    | order 5, site form (P3) | 87 441 | 0.0605 | 0.141 | 0.069 | `[0.01732, 0.01840]` | `[3.35, 3.74]` |
+    | order 5, pair form (P6) | 87 441 | 0.0162 | 0.042 | 0.021 | `[0.01771, 0.01800]` | `[3.49, 3.60]` |
+    | **order 5, triple form (P6)** | 87 441 | 0.0090 | 0.024 | **0.012** | `[0.01778, 0.01794]` | `[3.51, 3.57]` |
+    | order 5, pair form + its 50 000 sampled points (prob. ≥ 0.95, all 60 simultaneously) | 137 441 | `2·10⁻⁴` | — | **0.011** (the major populations to `3·10⁻⁴`) | — | — |
+
+    From the narrowest deterministic sandwich an interior residue has populations
+    `[0.1693, 0.1723]`, `[0.8144, 0.8176]`, `[0.01305, 0.01336]` for its three rotamers; with
+    the sampled points (of the pair-form sandwich) `[0.17053, 0.17086]`, `[0.81582, 0.81634]`,
+    `[0.01308, 0.01337]` — the first two inside the former, the third overlapping it (its
+    upper end is `6·10⁻⁶` above; both intervals are valid, so is their intersection).
+    **Without the pair or triple form the minor populations are not
+    certified at order 4 at all** (relative half-width 0.96): the site form charges every
+    assignment that leaves the anchor at one site the full site penalty, and the minor
+    population of a site *is* such assignments; the pair form charges them nothing.
+28. **Thirty residues on the strand (`2·10¹⁴` assignments), order 4, pair form, 34 281
+    evaluations** [M]: every population within `0.8 %` of itself — anchor rotamer
+    `[0.99070, 0.99085]`, the others `[0.00876, 0.00890]` and `[0.000396, 0.000402]` for an
+    interior residue; `P`(anchor assignment) `∈ [0.7487, 0.7500]`.
+29. *Two things the numbers show without being asked* [M; H for the reading].  The
+    interior residues are equivalent to five digits (a check of the whole pipeline that
+    was not built in), and the chain ends are not: on PPII the last residue has
+    `[0.0568, 0.0579]` where the interior has `0.17`, the first `[0.1521, 0.1546]`.  A
+    certified end effect, of the model.
+30. *Checks of the sampled points used* (they are workstream P6's, stored): the stored
+    model energies equal those of the models rebuilt here; `W` and the bracket
+    `[518.262315, 518.262513]` recomputed; the frequencies of the 60 site states in the
+    sample against the *exact* marginals of `q` (restricted transfer-matrix sums): largest
+    `|z| = 2.5`, root mean square 1.15; the energy re-evaluated at 300 of the points
+    (the same evaluator: identical).
+
+*What this is not.*  A statement about a molecule; a certificate beyond the sandwich
+it rests on (P3's constants and proofs, not machine-checked; P6's share lemmas, paper
+proofs checked here on random data); populations of events other than single-site
+states (pairs and blocks of neighbouring sites work the same way and were not run).
+*Why it matters for the programme:* a free energy is rarely the observable; a
+population is, and the same certificate bounds it — sharply, in the sense above — at no
+further cost.
+
 
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 

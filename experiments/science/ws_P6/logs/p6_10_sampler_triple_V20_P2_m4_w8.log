@@ -1,0 +1,7 @@
+=== sandwich sampler on the TRIPLE-share sandwich: V20 on P2, tau 0.7, m = 4, window 8; ball 9921 values; ln Z(m_-) = 518.292897, ln Z(m_+) = 518.238327, D = 0.054570 nats; exact acceptance rate 0.05311; seed 2026112642; delta 0.05 [53.3s]
+    50000 accepted of 940831 proposals (observed acceptance 0.05314) [11.7s]; 39525 distinct states; mean number of sites off the anchor among accepted points 5.82
+      13437 of the 39525 distinct states already have a value of g on disk; 26088 new evaluations
+    E evaluated at the accepted points [41.4s]; m_- <= E <= m_+ at all 50000 accepted points: violations below 0, above 0; W in [0.069771, 0.954400] (outside [0,1]: 0); mean rounding half-width of W 3.2e-06
+    N =   1200 (the first 1200 accepted points): mean W = 0.437801 (std 0.0590); t = 0.039205; CERTIFIED (prob. >= 0.95): ln Z(E) in [518.260436, 518.264729], width 4.293e-03 nats (bound (e^D - 1) 2t = 4.398e-03); point estimate 518.262585
+    N =  50000 (the first 50000 accepted points): mean W = 0.434794 (std 0.0607); t = 0.006074; CERTIFIED (prob. >= 0.95): ln Z(E) in [518.262087, 518.262753], width 6.654e-04 nats (bound (e^D - 1) 2t = 6.813e-04); point estimate 518.262420
+DONE p6_10_sampler_triple V20 P2 0.7 m=4 w=8 [106s]

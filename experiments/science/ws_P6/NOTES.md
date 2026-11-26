@@ -163,3 +163,106 @@ m_- <= E <= m_+ held at all 202 400 accepted points (W never outside [0,1]).  Al
 estimates: 518.2618 +- 0.0007 contains the point estimate 518.26241; 518.2626 +- 0.0001 overlaps the m=5 B bracket
 only at its edge (518.2625..518.262513).
 New evaluations of g: 20 227 (m5 S), 27 430 (m5 B), ~32 k and ~37 k distinct states at m = 4 (some already on disk).
+
+### 03:32-03:37 adversarial (big list), V30 on the strand; V50 launched
+* p6_06_adversarial.py batch_val_big.txt: 7 instances, 12 cases, 74 sandwiches, 34 494 840 checks, 0 violations,
+  smallest slack -3.1e-13.  Together with the small list: 40 instances, 93 cases, 560 sandwiches, 40 004 196 checks, 0.
+* V30/E, m = 4 (log logs/p6_03_reach_V30_E_m4.log, 352 s: pair sums 235 exclusion sets 156 s; ball 34 281
+  evaluations 190 s, 5.5 ms each): Gamma_4 = 4.9717 kcal/mol (P3's table: 4.97).
+      site form (P3), band 8:  [743.098881, 743.257189]  width 0.1583
+      banded pair,   band 8:  [743.165709, 743.167411]  width 0.0017     (band 4: 0.0063; band 2: 0.0472)
+  independent estimate 743.1665 inside all.  1000 samples of pi_(m_-): 73 distinct, 0.28 sites off the anchor on
+  average, m_- <= E <= m_+ at all of them.
+* 03:36 V50/E m = 4 launched: slot A = in-band pair sums (415 exclusion sets) then ball parts 3,4,5 of 6;
+  slot B = L16/H control, decomposition diagnostics, last sampler check, then ball parts 0,1,2 of 6.
+  Estimated 45 CPU-min for the ball (161 801 evaluations at ~17 ms) and ~20 min for the pair sums.
+  HARD STOP: whatever is not finished at 04:40 is killed and reported as not run.
+
+### 03:37-03:44 short runs; V50 STOPPED
+* L16/H control (logs/p6_02_sandwich_L16_H_t0.60.log, complete, 338 s; 65 536 states from P2's grid; 2 359 296 checks,
+  0 violations):  m=4: 439.9 -> 439.4 nats;  m=5 (ball 2517): 6.05 -> 0.0678;  m=6 (ball 6885): 0.523 -> 0.0150.
+  => on the helix: m <= 4 nothing; at m = 5 the pair form rescues poly-Leu (frozen ensemble) -- NOT what the brief
+  expected; reported as found.
+* Decomposition diagnostic V20 band 8 (not a certificate): m=5: reductions only 0.00507; site tail only 0.0553,
+  certified 0.0605; pair tail only 0.01388, certified 0.01624 (with P3's site allocation of the fp allowance it
+  would be 0.01907).  m=4: reductions only 0.00456; pair tail only 0.30537, certified 0.30564.
+* V50/E m=4: STOPPED at 03:44 after 7 minutes.  Reason: the machine now runs ~10 processes on 4 cores (load 8.2);
+  my processes get ~45 % of a core.  The job needs ~21 CPU-min of closed-form sums (415 exclusion sets; estimated
+  from 156 s for 235 sets at n = 30, scaling nb * n^3) plus ~41-45 CPU-min for the ball (161 801 evaluations at
+  15-17 ms, scaled from 5.5 ms at 492 atoms) = more than an hour of CPU -> two hours of wall time here.  No ball
+  part was started.  Killed log kept in logs/superseded/.  Reported as NOT RUN with this cost.
+
+### 03:44-03:50 after stopping V50: occupancy, V20 on the strand, extension to TRIPLE shares
+* p6_08_occupancy (log logs/p6_08_occupancy.log): fraction of sites off the anchor under the exact pi_E:
+  V12/E 0.010 (anchor 0.885, <=1 changed 0.994); V12/P2 0.17; L12/P2 0.027; L16/P2 0.026; S6/E 0.25;
+  L8/H 0.053, L12/H 0.038, L16/H 0.029 (<=1 changed: 0.95-0.96); S5/H 0.55; K4/H 0.24; LKSE:5/H 0.29.
+  -> the gain of the pair form follows 1/p; poly-Leu helices are frozen (95 % of the weight within one flip).
+* V10/P2 m=5 form B sampler check: coverage 60 of 60, identity 1.7e-13 (log complete).
+* V20/E (strand) m=4, 9921 evaluations, 84 s: site 0.0987; banded pair band 8 [516.044622, 516.045654] 0.00103.
+  Strand growth of the pair-form width at m=4: n=12 5.2e-4 (all pairs), n=20 1.03e-3, n=30 1.70e-3 (band 8)
+  -> +6.7e-5 per residue -> about 3.0e-3 at 50 residues [H, extrapolation; NOT run].
+* WHY THE EXTENSION (decided 03:47, time-boxed to 04:25): the headline question "does a lower order suffice at
+  twenty residues?" is answered NO by the pair form (0.31 nats at m=4 on PPII).  The next allocation -- shares to the
+  triples of T, charge C(t,3)/C(m,3) -- predicts Gamma_4 p^3 ~ 0.05-0.06 nats.  Needs: triple sums (closed form with
+  three excluded sites, same batch code), a band model with in-window three-site terms (subclass of P3's BandModel;
+  its transfer matrix already works on an array over sites i..i+w), and a banded covering (out-of-window triples ->
+  thirds to their pairs -> pair machinery).  Lemma A' and the code: p6_09_triple.py.
+* First test V8/P2 (7 s): triple sums = explicit enumeration to 8e-16; m=4, all pairs in band: site 0.4249 -> pair
+  0.0717 -> triple 0.0123; m=5: 0.0110 -> 0.0030 -> 0.0017; 275 562 checks with the real energy / remainder, 236 196
+  checks of the extreme members of the class: 0 violations.  Worked on the first run.
+* 03:50 launched: V20/P2 triple (m = 4, 5, 3; bands 8, 4) and a validation list of 13 enumerated instances.
+
+### 03:50-03:58 triple shares: results; sampler on the triple sandwich; log audit
+* Validation of the triple form (batch_triple_val.txt + V8/P2): 14 enumerated instances, 34 cases, 282 sandwiches;
+  triple sums vs explicit enumeration: 3860 subsets, 2404 triples, max 3.6e-15 relative; 33 982 242 checks with the
+  real energy / remainder, 0 violations; 29 127 636 checks of the extreme members of the class, 0 violations;
+  |DP - enum| <= 4.5e-13; truth inside 282 of 282.
+* V20/P2 triple (logs/p6_09_triple_V20_P2.log, 163 s):
+      m=4 band 8: [518.238327, 518.292897] width 0.054570   (site 1.7356, pair 0.3056)     <- m = 4 SUFFICES
+      m=4 band 4: 0.1218;   m=5 band 8: [518.258807, 518.267767] 0.008960;  m=5 band 4: 0.0167;  m=3 band 8: 66.56
+* Sampler on the triple sandwich, m=4 band 8 (logs/p6_10_sampler_triple_V20_P2_m4_w8.log, seed 2026112642):
+  50 000 of 940 831 proposals; N=50000: [518.262087, 518.262753] 6.65e-4; N=1200: [518.260436, 518.264729] 4.29e-3.
+* Log audit 03:58: 82 logs in logs/, every one ends with DONE/TOTAL, none contains Traceback/FAILED; 4 superseded
+  logs + 2 misnamed markers in logs/superseded/.  V8/P2 triple and the two p6_01 --check runs re-run into log files.
+* 03:58 launched (last runs): V30/P2 m=4 -- p6_03_reach (site + pair, ball cached) and p6_09_triple (all 466 pair
+  sums + 672 in-window triple sums + triple model).  Expected width with triples ~0.08-0.09 nats [H, written before].
+  If not finished by 04:25 they are killed and reported as not run.
+
+### 03:58-04:10 last runs
+* V30/P2 m=4 (logs/p6_03_reach_V30_P2_m4.log 255 s; logs/p6_09_triple_V30_P2.log 521 s), Gamma_4 = 4.5782:
+      site  band 8: [743.921909, 746.753175] 2.8313
+      pair  band 8: [744.961423, 745.463573] 0.5022      (band 4: 0.5822)
+      TRIPLE band 8: [745.144786, 745.235797] 0.0910     <- thirty residues on PPII below 0.1 nats at m = 4
+  The site and pair values come out identical (all printed digits) from the two scripts (in-band sums + identity
+  vs all pair sums).  1000 samples of the pair-form floor: 995 distinct, 5.86 sites off the anchor, 0 violations.
+* Sampler on the triple sandwich, enumerated check V8/P2 m=4 (logs/p6_11_sampler_triple_enum_V8_P2_m4_w7.log):
+  W in [0.0010, 0.9995], identity 1.7e-13, coverage 200 of 200.
+* p6_05_tables.py crashed once on the new JSON of p6_11 (KeyError 'brackets'): fixed (skip that file; label T).
+* 04:10 launched the very last run: p6_10_sampler_triple.py V30 P2 0.70 4 8 --N 1200 (sampled check of the TRIPLE
+  sandwich at thirty residues + a sampled bracket; ~5.5 min, mostly the 672 triple sums again).
+
+### 04:10-04:16 final
+* Sampler on the TRIPLE sandwich at thirty residues (logs/p6_10_sampler_triple_V30_P2_m4_w8.log, 294 s, seed
+  2026112642): 1200 accepted of 13 055 proposals, all distinct, m_- <= E <= m_+ at each; bracket (prob >= 0.95)
+  [745.181248, 745.188426], width 7.18e-3; point estimate 745.184843.
+* Report read through once in full (04:00-04:08) and corrected against the logs; three early corrections of the
+  report had been applied by a Python string replacement instead of the editing tool (disclosed in the report,
+  own error 8); from 03:38 on only the editing tool.
+* Final audit: every log in logs/ ends with DONE/TOTAL, none contains Traceback/FAILED; superseded logs in
+  logs/superseded/.  No background job left running.  Nothing written outside ws_P6 and P6_REPORT.md
+  (find -newermt on ws_P, ws_P2, ws_P3, ws_P4: no file changed since 02:52; no __pycache__ in ws_P3).
+
+## 2. Summary of results (for whoever picks this up)
+
+Certified brackets of ln Z(E), Val20/PPII, band 8 (unrounded ln Z(m_+), ln Z(m_-)):
+  m=4: site 517.484288, 519.219855 (1.7356) | pair 518.125785, 518.431429 (0.3056) | triple 518.238327, 518.292897 (0.0546)
+  m=5: site 518.233156, 518.293650 (0.0605) | pair 518.255189, 518.271430 (0.0162) | triple 518.258807, 518.267767 (0.0090)
+  m=3: 72.79 | 67.79 | 66.56 (useless)
+Sandwich sampler (prob >= 0.95), N = 50000 / 1200:
+  m=5 site 7.36e-4 / 4.75e-3;  m=5 pair 1.98e-4 / 1.28e-3;  m=4 site 2.61e-2 / 1.69e-1;  m=4 pair 3.79e-3 / 2.44e-2;
+  m=4 triple 6.65e-4 / 4.29e-3.   Intersection of all: [518.262315, 518.262513].
+Reach, m=4, band 8: Val20/E pair 0.00103; Val30/E pair [743.165709, 743.167411] 0.0017 (site 0.1583);
+  Val30/P2 site 2.831, pair 0.502, triple [745.144786, 745.235797] 0.0910, + 1200 sampled 0.0072;  Val50: NOT RUN.
+Validation: pair/site: 43 instances, 106 (instance, order), 638 sandwiches, 58 460 412 checks, 0 violations;
+  extreme members: 40 004 196 checks, 0 violations; triple: 14 instances, 33 982 242 + 29 127 636 checks, 0 violations.
+Open: Val50 (cost > 60 CPU-min here), sparse ball (P6-E2), quadruple shares, exact in-window evaluated terms.

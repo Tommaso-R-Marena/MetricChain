@@ -1,5 +1,7 @@
 # Workstream P6 (launched after checkpoint 43, 2026-11-26) — pair penalties in the certified sandwich: does a lower order suffice at twenty residues, and how far does the certificate reach?
 
+> **Finished 2026-11-26: report `P6_REPORT.md`, published as SCI-MSG-0025.**  The brief below is kept as launched.
+
 *Brief written by the coordinator.  Read `COMMON.md` first (its commit pins are out of
 date: the theory branch is at `24a3c27`, a read-only export of it is in the session
 scratchpad under `thy_ro_24a3c27/`), then `P3_REPORT.md` in full, then `P4_REPORT.md` §2.6

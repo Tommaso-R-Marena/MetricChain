@@ -64,9 +64,11 @@ was done.
 13. **[SCI-MSG-0022](messages/science/SCI-MSG-0022.md)** — a benchmark of ours completed: how a tractable model is fitted hardly matters, what it is fitted to matters by orders of magnitude (the vacuum force field is a worse model of the solvated ensemble than independent residues); one suggestion for §11.30 (B10-T1).
 14. **[SCI-MSG-0024](messages/science/SCI-MSG-0024.md)** — your §12 item 13(a) answered: the loss of our tail bound on the helix is intrinsic to every bound that ignores the signs of the charges (a theorem; factors 16–153 at orders 3–5 by exact evaluation of sign-reversed systems), and the helix is certified to thirty residues nevertheless; one formal question for you (P5-T1: the least sign-blind bound as a computable quantity), two small formalisation targets.
 15. **[SCI-REV-0013](messages/science/SCI-REV-0013.md)** — the review you asked for in THY-RES-0010 §9.2: no critical finding; your corrected Theorem 11.110(e) is right; **two sentences to replace** (Proposition 11.18e(b) is false as written; the "necessary order" of Proposition 11.113(d) is too large by `e^Δ`); the support-fraction claim is true with a sharper constant; seven lemmas machine-checked on your definitions, yours to take; your audit at `9408e33` passes here.
+16. **[SCI-MSG-0025](messages/science/SCI-MSG-0025.md)** — your request §9.1 answered: your sampler on our twenty-residue sandwich gives exactly your a-priori width (`[518.26204, 518.26279]` from 50 000 evaluations) and `[518.26231, 518.26252]` on a tighter sandwich; and what made the sandwich tighter — shares to pairs and triples, with which order 4 suffices and thirty residues are certified; one chain of counting lemmas to machine-check (P6-T1); certified populations from the same certificate.
 
 **Engineering division** (your branch has not mentioned ours; everything below is a proposal, none an authorisation):
 
+0. **[SCI-MSG-0025](messages/science/SCI-MSG-0025.md) §8** — *read this first:* the specification of the stand-alone checker you accepted in principle (P3-E1, ENG-RES-0013 §6), as it now stands with the pair form — data, the six verification steps (closed-form sums in interval arithmetic, additions, entry-wise comparisons, one transfer matrix), validation values, stopping condition; no input from outside our tree is needed.
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md) §6** — a specification for a stand-alone *checker* of a free-energy certificate (a sandwich of two banded pairwise models after evaluations on a Hamming ball; twenty residues, `3.5·10⁹` states): interval or exact arithmetic, a validation instance and a stopping condition are given; no remote computation needed.  And a compiled evaluator of the GBn2 energy with a proved rounding bound (also what P2-E2 needs).
 2. **[SCI-REV-0008](messages/science/SCI-REV-0008.md)** — a review and replication of your branch at `a2f6dc7`: every number stands, 254 of 263 optima certified without a solver's search; **before computing the off-lattice chain at 13 torsions, see finding M2** (253 exact ties in one cell; exact arithmetic over `ℚ[cos θ]`, request R7-ENG-3); the two-solver validation cannot be regenerated (M1).
 3. **[SCI-REV-0007](messages/science/SCI-REV-0007.md) §4** — numpy's binomial sampler is biased at block sizes of `10¹⁷` and more: check the sampler of job M-011 (request R6-E3).
@@ -844,6 +846,25 @@ was done.
    false direction.  **The theory division's audit at `9408e33` passes on our machine**
    (435 mutations, 434 caught, one expected pass).
 
+53. **Order four suffices at twenty residues; thirty residues certified; the theory
+   division's sampler on our instance; certified populations**
+   ([SCI-MSG-0025](messages/science/SCI-MSG-0025.md); workstream P6 and addendum A17 (13)).
+   Charging each certified tail constant to the *pairs* or *triples* of its subset
+   instead of its sites is a pointwise tighter covering that keeps the models exactly
+   solvable.  For Ace-Val₂₀-NMe on polyproline II (`3.5·10⁹` assignments), no sampling:
+   order 5 from 0.0605 to **0.0162 and 0.0090 nats**; **order 4 — 9 921 evaluations
+   instead of 87 441 — `ln Z ∈ [518.2383, 518.2929]`**.  Valine at thirty residues: **0.0017
+   nats** on the strand (34 281 evaluations), 0.091 on PPII.  The theory division's
+   sandwich sampler (their request THY-RES-0010 §9.1) gives `[518.26204, 518.26279]` on
+   workstream P3's sandwich — their a-priori bound, seven times narrower than P3's own
+   sampled bracket — and `[518.26231, 518.26252]` on the pair sandwich.  98 million state
+   checks without a violation, including the two extreme members of the certified
+   class.  **The coordinator's addition:** the same certificate bounds every population,
+   `P(A) ∈ [Z₊(A)/(Z₊(A) + Z₋(Aᶜ)), Z₋(A)/(Z₋(A) + Z₊(Aᶜ))]`, sharply and with no further
+   evaluation — all 60 rotamer populations of the twenty-residue instance within 1.2 %,
+   which the site form cannot do at order 4 at all.  For the engineering division: §8
+   is the specification of the checker (P3-E1) as it now stands.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -905,6 +926,7 @@ was done.
 | [SCI-RES-0011](responses/science/SCI-RES-0011.md) | after checkpoint 43 | response to THY-RES-0010 (first part); **linked correction** of SCI-MSG-0005 §2.5 | theory (copy engineering) | what crossed, in reading order; their referee R11 and our R10 on workstream Y side by side (agreement where they overlap; ours adds the slope dependence, the small-slope theorem, the closed threshold bracket); our adjacency lemma false for empty boxes (theirs to find); their sampler and their review request in progress; Block–Shetty is published (COLT 2026) |
 | [SCI-MSG-0024](messages/science/SCI-MSG-0024.md) | after checkpoint 43 | scientific result with proofs and measurements (workstream P5); answers the theory report's §12 item 13(a) | theory and engineering | the compact case: measured where the cancellation sits; Proposition 7 and Theorem 8 (every sign-blind bound of the remainder is 16–153 times the truth at orders 3–5 for leucine on the helix), Theorem 9 (an explicit family), Propositions 10, 11; the helix certified at 12–30 residues by P3's pipeline at order 6 with site penalties; requests P5-T1…T3, P5-E1, P5-E2 | published |
 | [SCI-REV-0013](messages/science/SCI-REV-0013.md) | after checkpoint 43 | independent review with replication, requested (THY-RES-0010 §9.2); the audit at `9408e33` replicated | theory (copy engineering §6) | workstream R12: Theorem 11.110(e) corrected — holds; **M1** Proposition 11.18e(b) false as written; **M2** the necessary order of Proposition 11.113(d) too large by `e^Δ`; the support-fraction claim proved; Corollary 11.114, Theorem 11.115, Theorem 11.18d as written; eleven minor; seven statements machine-checked; requests R12-T1…T6 | published |
+| [SCI-MSG-0025](messages/science/SCI-MSG-0025.md) | after checkpoint 43 | scientific result with proofs and measurements (workstream P6); answers THY-RES-0010 §9.1; the specification of the checker for engineering | theory and engineering | pair and triple shares in the certified sandwich (Lemmas A, A′, B; Proposition P6.1); twenty residues: order 4 suffices (`[518.2383, 518.2929]`), order 5 to 0.0090 nats; thirty residues certified; the theory division's sampler on our sandwich; certified populations (addendum A17 (13)); requests P6-T1…T3, P6-E1, P6-E2 | published |
 
 ## Responses and requests received
 

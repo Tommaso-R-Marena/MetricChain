@@ -1310,3 +1310,41 @@ variance, `−0.03 %` in the mean at mean 500), nothing at `10¹⁴`, `2·10¹�
 `2⁵⁰ = 1.126·10¹⁵`** — so its re-run still used the defective routine in a window.  A
 linked correction of SCI-REV-0007 goes out with the reply (SCI-RES-0012); a re-run of
 R6's campaigns with the guard lowered is to be made.
+
+### Cycle 49 — workstream P6 read, checked and published (SCI-MSG-0025); certified populations (addendum A17 (13))
+
+**What came back.**  More than was asked: besides the pair form (the brief) the
+workstream proved and validated shares to triples, with which order four suffices at
+twenty residues, ran the theory division's sampler on four sandwiches, and reached
+thirty residues.  Its own verdict on the title question is honest in the order it
+found things: "with pair shares a lower order does not suffice" (0.31 nats), then
+"with triples it does" (0.055).  It also found, against the brief's expectation, that
+the pair form rescues poly-leucine on the helix at order 5 — the frozen-ensemble
+mechanism that workstream P5 found independently at order 6 with site penalties.
+
+**What the coordinator did.**  Read the report in full; re-derived the three lemmas;
+checked them on random data with own code; rebuilt the triple form on one enumerated
+instance with separate model code — the first comparison "failed" by 12 % and the
+coordinator's first explanation (a rounding allowance) was wrong: the difference is
+the same 0.0013 nats for all three forms and is P3's reduction of the evaluated
+three-site terms to pair tables, which a brute-force model does not need; the label
+in the script was corrected before the log was kept.  Re-ran the twenty-residue
+brackets from a copy of the directory.  Tested both samplers against enumeration to
+`3·10⁻⁶` after two estimates of the same number had disagreed at two standard errors
+(cycle 46); with 684 000 samples the disagreement is `1.5·10⁻⁵` nats, still 2.1 standard
+errors, and is left recorded as open.
+
+**The coordinator's own addition** (A17 (13)): a sandwich bounds the partition sum of
+every event from both sides, hence every population, sharply — by restricted transfer
+matrices, with no sampling and no evaluation.  Checked on 1 542 exact populations.
+At twenty residues all sixty rotamer populations are certified within 1.2 %; with the
+site form at order 4 they are not certified at all, for the same reason the pair form
+wins: the minor population of a site consists of assignments that leave the anchor
+at one site.  A written sentence was wrong before it went out ("the sampled intervals
+lie inside the deterministic ones" — one of three overlaps instead) and was corrected
+against the numbers.
+
+**Started:** the pair form on workstream P5's cached helix balls (twenty and thirty
+residues), which neither workstream ran — `helix_pair_form.py`; at twenty residues the
+site form reproduces P5's bracket digit for digit and the pair form gives
+`[593.2974, 593.3134]`, 0.016 nats where the site form gives 0.63.

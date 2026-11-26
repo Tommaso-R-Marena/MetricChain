@@ -6,3 +6,5 @@ ws_*/bin/
 ws_*/**/*.o
 ws_*/**/*.so
 ws_*/scratch/*.bak
+# the coordinator's regenerable caches
+pi_inference/helix_pair_form_cache/

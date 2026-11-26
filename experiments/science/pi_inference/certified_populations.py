@@ -18,7 +18,8 @@ restricted sums, the validation against enumeration below.
 
 Part 1 (validation): on enumerated instances the exact populations must lie inside (*) at every site and state.
 Part 2: Ace-Val20-NMe on PPII (3.5e9 assignments), orders 3, 4, 5, and Ace-Val30-NMe on the strand (2.1e14), order 4;
-site form (P3) and banded pair form (P6), band 8.
+site form (P3), banded pair form (P6) and, at twenty residues, P6's triple form, band 8.
+Part 3: the same populations from the points of the theory division's sandwich sampler stored by workstream P6.
 
 Model-relative throughout: populations of the rotamer model (ff14SB known part + GBn2 solvent term, fixed backbone,
 P2's rotamer grid) -- not of a molecule.
@@ -66,6 +67,30 @@ def brackets(lo, up):
             pl[a] = 1.0 / (1.0 + math.exp(-lo_odds)); ph[a] = 1.0 / (1.0 + math.exp(-hi_odds)); wd[a] = hi_odds - lo_odds
         res.append((pl, ph, wd))
     return res, lzl, lzu, defect
+
+
+def triple_models(seq, bb, tau, m, w, sd):
+    """workstream P6's triple-share sandwich (p6_09_triple.py: its own functions, called in the order of its main());
+    needs all pair sums on disk (P6's) and computes the in-window triple sums by P6's closed form (not cached)."""
+    import importlib
+    T9 = importlib.import_module("p6_09_triple")
+    G, c0, h, J, x0, E0 = sd; n, k = G.ns, G.k
+    GF = L.GFBound2(G, x0, L.EnvelopeSup(G), K=m)
+    fn = os.path.join(P6, "out", f"pairsums_{L.tagname(seq, bb, tau)}_m{m}.npz")
+    if not os.path.exists(fn): return None
+    z = np.load(fn)
+    if list(z["anchor"]) != list(x0) or not np.isfinite(z["G"][~np.eye(n, dtype=bool)]).all(): return None
+    Gam, S, Gp = float(z["Gamma"]), z["S"], z["G"]
+    val = {tuple(int(v) for v in e if v >= 0): float(t) for e, t in zip(z["excl"], z["tot"])}
+    tris = T9.window_triples(n, w)
+    se, cr = L.GFBatch(GF).totals(m, tris)
+    H = {tr: (val[()] - val[(tr[0],)] - val[(tr[1],)] - val[(tr[2],)] + val[(tr[0], tr[1])] + val[(tr[0], tr[2])] + val[(tr[1], tr[2])]) - float(t3)
+         for tr, t3 in zip(tris, se + cr)}
+    d, nball, srcb = L.ball_terms(G, x0, m - 1, seq, bb, tau, verbose=False)
+    phi1, psi1, psi2 = L.fp_tables(n, k, x0, m - 1)
+    gsT, g2T, eta = T9.triple_form(n, m, w, Gp, H, psi1, psi2, 5e-9 * Gam, 1e-8 * Gam)
+    lo, up = T9.build_triple_models(k, x0, c0, h, J, d, w, m - 1, gsT, g2T, eta)
+    return lo, up, dict(nball=int(nball), n_triples=len(tris))
 
 
 def have(seq, bb, tau, m, w):
@@ -146,6 +171,17 @@ for seq, bb, tau, ms in (("V8", "E", 0.70, (3, 4, 5)), ("V8", "P2", 0.70, (3, 4,
             assert nbad == 0 and row["inside"], "sandwich violated"
             tot_chk += row["checks"]; tot_viol += row["violations"]
             out["validation"].append(row)
+        if seq in ("V8", "V10", "V12") and bb == "P2" and m == 4:              # the triple form (P6), where affordable
+            tm = triple_models(seq, bb, tau, m, w, sd)
+            if tm is not None:
+                lo, up, info = tm
+                ml, mu = lo.energy(st), up.energy(st)
+                nbad = int((ml > E + 1e-9).sum() + (mu < E - 1e-9).sum())
+                row = summary(f"{seq}/{bb}", m, "T", w, lo, up, x0, exact=pops)
+                row.update(states=int(len(st)), sandwich_violations=nbad, lnZ_E=lnZE, inside=bool(row["lnZ_lo"] <= lnZE <= row["lnZ_hi"]))
+                assert nbad == 0 and row["inside"], "sandwich violated"
+                tot_chk += row["checks"]; tot_viol += row["violations"]
+                out["validation"].append(row)
 log(f"  TOTAL: {tot_chk} population checks, {tot_viol} violations")
 assert tot_viol == 0
 
@@ -160,8 +196,14 @@ for seq, bb, tau, ms in (("V20", "P2", 0.70, (3, 4, 5)), ("V30", "E", 0.70, (4,)
             lo, up, info = L.make_models(seq, bb, tau, m, 8, form, setup_data=sd)
             row = summary(f"{seq}/{bb}", m, form, 8, lo, up, x0)
             row.update(nball=info["nball"]); out["large"].append(row)
-    best = [r for r in out["large"] if r["tag"] == f"{seq}/{bb}" and r["form"] == "B"][-1]
-    log(f"    per-site certified populations at the highest order (banded pair form, m = {best['m']}), state by state [low, high]:")
+        if seq == "V20" and m in (4, 5):
+            tm = triple_models(seq, bb, tau, m, 8, sd)
+            if tm is not None:
+                lo, up, info = tm
+                row = summary(f"{seq}/{bb}", m, "T", 8, lo, up, x0)
+                row.update(nball=info["nball"]); out["large"].append(row)
+    best = min((r for r in out["large"] if r["tag"] == f"{seq}/{bb}"), key=lambda r: r["D"])
+    log(f"    per-site certified populations from the narrowest sandwich (form {best['form']}, m = {best['m']}, {best['nball']} evaluations), state by state [low, high]:")
     for i, srow in enumerate(best["sites"]):
         log(f"      site {i:2d} (anchor state {x0[i]}): " + "  ".join(f"{a}: [{l:.6f}, {h:.6f}]" for a, (l, h) in enumerate(zip(srow["p_low"], srow["p_high"]))))
 
