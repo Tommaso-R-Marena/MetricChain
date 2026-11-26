@@ -750,3 +750,35 @@ this report, none of the workstream's code imported):
    P7.1(c), P7.4, P7.6 beyond a reading; the prior-art snippets of §4.4 (the three
    references there were seen by the workstream as search snippets only and must not
    be cited as read).
+
+## Coordinator's note (2026-11-26, 17:30 UTC): a correction of the reference checker of §5.2, after the engineering division's checker X-012
+
+The engineering division built the compiled exact checker asked for in request P7-E2
+(`src/metricchain_eng/leafcert/` and `experiments/eng/leafcert/REPORT.md` on `research/ubuntu-engineering`,
+commit `0e5103b`), from the text of §§5.1–5.4 and the nine files, without opening our code first.  Its §9, written
+after reading `p7_06_check.py` as text, reports a defect of **our** reference checker, which is confirmed here:
+
+* **The version of this workstream did not validate its input, and it could accept a false bound on a malformed
+  file.**  Its total was `sum(U) + sum(P2.values())` over everything in `U` and `P2`, while the inequalities (S)
+  and (P) looked only at `U[0..n−1]` and the pairs `i < j`.  An extra entry of `U`, or an extra key such as `"1,0"`
+  in `P2`, entered the total without being bounded by anything.  Their example: one site, `H = [[5, 7]]`,
+  `U = [5, 100]`, `L = 100` — accepted, while the minimum is 5.
+* **None of the nine files is malformed; no verdict, no count and no number of this report changes.**  The
+  sentence of §5.2 "Reference implementation: `p7_06_check.py` …" described a checker that was a reference only
+  for well-formed files; §5.4 ("what an accepted certificate proves") silently assumed well-formedness.
+* **Corrected** (`p7_06_check.py`, docstring): strict loading (no duplicate keys, integers only); a function
+  `well_formed` that rejects, before any arithmetic, everything that is not exactly the format of §5.1 (lengths,
+  key sets in canonical spelling, branches on unfixed sites with exactly one child per state, leaf indices in
+  range, no unused leaf); the total over the sites and the pairs `i < j` only.  Two new controls, which must be
+  rejected: (c4) their example; (c5) each of the nine files with an extra key `"1,0"` in the `P2` of every leaf,
+  against the bound `L + 1`.  Log of the corrected version: `logs/p7_06_check_v2.log` — (c4) rejected; (c5) 9 of 9
+  rejected, **and the rule of the version before the change, reproduced inside the script, accepts all 9** (a
+  false bound each time: the minimum is `L`); the nine verdicts, the 27 earlier controls, every count of the
+  table of §5.2 and `out/p7_06_check.json` are identical to those of the version before the change (the old log,
+  `logs/p7_06_check.log`, is kept; it differs from the new one, apart from the new controls and timings, by one
+  line of the memory-cap wrapper).
+* Their checker was also run here, from a scratch copy, on the nine files read from commit `2b4ccdf`: both
+  engines accept all nine, reject all 27 controls, reproduce the table, and their 182 tests pass with a
+  different compiler (gcc 13.3) — SCI-RES-0030.
+* What remains as §5.6 says: nothing here, and nothing in their checker, concerns the step from the real-valued
+  model to the published integer tables.

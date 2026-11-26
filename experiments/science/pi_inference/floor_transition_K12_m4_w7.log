@@ -1,0 +1,27 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 7; 495 raw stage-2 tables of workstream P9 (sum of their maxima 18.17 kT)
+(0) ball of radius 3: 96366 values; guiding Gibbs sample (seed 4242): 1.23 sites off the anchor on average [188s]
+(1) floor without penalty built (140 evaluated terms exact in a window, 80 reduced, 10 pairs beyond the band); K(T): workstream P9's stored choice; penalty tables in the window form: 0 on one site, 21 on pairs, 312 on larger sub-tuples; sum of their maxima 17.86 kT [188s, peak RSS 1031 MB]
+(2) ln Z(m_0) = 517.1328893 (no penalty); slope at 0: beta <pen>_0 = 9.74842e-05 nats per unit of lambda; 1000 exact samples per lambda
+| lambda | ln Z(m_lambda) | ln Z(m_lambda) - ln Z(m_0) | first order lambda beta <pen>_0 | slope beta <pen>_lambda (exact, by differences) | sampled beta <pen>_lambda | mean number of sites off the anchor | largest | share of samples with at least m sites off | share with at least half the chain off |
+|---|---|---|---|---|---|---|---|---|---|
+| 0 | 517.1328893 | 0 | 0 | 9.74842e-05 | 9.12078e-05 | 1.140 | 5 | 0.0120 | 0.0000 |
+| 0.5 | 517.1329382 | 4.89037e-05 | 4.87421e-05 | 9.81352e-05 | 8.04275e-05 | 1.117 | 5 | 0.0130 | 0.0000 |
+| 1 | 517.1329875 | 9.81378e-05 | 9.74842e-05 | 9.88052e-05 | 8.21478e-05 | 1.177 | 5 | 0.0170 | 0.0000 |
+| 1.5 | 517.1330371 | 0.000147712 | 0.000146226 | 9.94955e-05 | 8.03675e-05 | 1.131 | 4 | 0.0070 | 0.0000 |
+| 2 | 517.1330870 | 0.000197637 | 0.000194968 | 0.000100206 | 9.16458e-05 | 1.152 | 5 | 0.0130 | 0.0000 |
+| 3 | 517.1331879 | 0.000298579 | 0.000292453 | 0.000101695 | 7.53117e-05 | 1.182 | 5 | 0.0140 | 0.0000 |
+| 4 | 517.1332904 | 0.000401061 | 0.000389937 | 0.000103285 | 6.47804e-05 | 1.119 | 5 | 0.0100 | 0.0000 |
+| 6 | 517.1335004 | 0.000611085 | 0.000584905 | 0.000106828 | 6.23091e-05 | 1.145 | 5 | 0.0140 | 0.0000 |
+| 8 | 517.1337181 | 0.000828799 | 0.000779874 | 0.000111015 | 0.000151007 | 1.193 | 5 | 0.0170 | 0.0000 |
+| 12 | 517.1341840 | 0.00129463 | 0.00116981 | 0.000123056 | 0.000504641 | 1.104 | 6 | 0.0140 | 0.0010 |
+| 16 | 517.1347277 | 0.00183839 | 0.00155975 | 0.000161943 | 0.000240556 | 1.153 | 6 | 0.0110 | 0.0010 |
+| 24 | 545.3767905 | 28.2439 | 0.00233962 | 5.76291 | 5.75944 | 11.759 | 12 | 1.0000 | 1.0000 |
+| 32 | 594.0914487 | 76.9586 | 0.00311949 | 6.26694 | 6.26419 | 11.998 | 12 | 1.0000 | 1.0000 |
+| 48 | 696.8445792 | 179.712 | 0.00467924 | 6.52612 | 6.52773 | 12.000 | 12 | 1.0000 | 1.0000 |
+| 64 | 801.9101129 | 284.777 | 0.00623899 | 6.59412 | 6.59505 | 12.000 | 12 | 1.0000 | 1.0000 |
+(3) ln Z(m_lambda) convex on the grid (slopes of successive chords nondecreasing): True; control, the same test on -ln Z (must fail unless the curve is a line): False
+    bisection: lambda 20.0000: 11.27 off, slope 5.295; lambda 18.0000: 1.28 off, slope 0.074; lambda 19.0000: 8.23 off, slope 3.646; lambda 18.5000: 2.86 off, slope 0.796; lambda 18.7500: 5.00 off, slope 2.045; lambda 18.8750: 6.42 off, slope 2.869; lambda 18.8125: 6.09 off, slope 2.453; lambda 18.7812: 5.61 off, slope 2.247; lambda 18.7969: 5.82 off, slope 2.35
+(4) lambda_c in [18.7969, 18.8125] (ratio 1.0008): mean number of sites off the anchor 5.89 -> 5.98, slope 2.3497 -> 2.4533, ln Z - ln Z(m_0) there 0.61482 against the first-order number 0.0018324; at lambda = 1: ln Z(m_1) - ln Z(m_0) = 9.81378e-05, first order 9.74842e-05
+    sharpness: the mean number of sites off the anchor is below 2 up to lambda = 18.0000 and above 8 from lambda = 19.0000: a factor 1.056 in lambda
+(5) at lambda = 1: ln Z(m_1) = 517.1329875 -- to be compared with the upper end of the sandwich in the committed log of the same case (first_order_recovery_K12_m4_w7.log)
+ALL DONE 2792 s; peak RSS 1955 MB

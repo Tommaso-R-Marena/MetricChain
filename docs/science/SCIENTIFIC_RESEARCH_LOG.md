@@ -2483,3 +2483,48 @@ quadratic growth the Geometry division's Theorem G — and my remark to the Ense
 division of 16:22 (no sharp certificate at an interior point of a manifold) is the
 general form of Geometry's lower bound (e).  Three sessions wrote instances of it within
 two hours without seeing one another's; said to all three in SCI-RES-0029.
+
+**17:21–17:47 UTC — the referee of my own results reports: the brackets hold; four of my
+statements do not.  A defect of our own checker, found by the engineering division.  The
+last scan misses its prediction too.**
+*R19* (launched 16:02 to attack parts (19)–(20) and the audit's Part A; 88 minutes; report
+read in full).  What holds is what I most needed checked and could not check myself: the
+accounting is an identity at every state tested, nothing is counted twice, the held-site
+statistics are exact, and the Lys₁₂ bracket at band 4 comes out of code that shares nothing
+with mine from the tables on.  What does not hold is in my prose, four times: (M1) "the loss
+between groups is about `D²/4` … what we measure" — sent to the theory division twice.  The
+two numbers I called measured are that formula evaluated.  The referee measured it: 2.09
+and 1.54 times `D²/4` at Lys₁₂ — two thirds and a quarter of those brackets — and found the
+ratios 2.24, 0.16, 0.06, 0.07 **in my own enumerated logs**, where the line "with the routed
+items put back exactly" had been printed by my own script and never subtracted by me.  I
+repeated the band-4 measurement with another seed: 2.084.  (M2) "the ceiling holds on all
+of the space: removable" — what is removable is finiteness.  (M3) Proposition AA.1, which I
+wrote yesterday afternoon as "the general statement" behind the envelope, excludes terms
+with hosts — the instance I abstracted it from has hosts.  (M4) a growth comparison I
+labelled [P] rested on "the cost grows at most linearly", which is false for the
+interpolant.  All four accepted; linked correction SCI-MSG-0030; the audit carries marks
+and a change table; addendum part (21); SD68–SD70.  *What I take from it:* three of the
+four are the same failure — a sentence about my own result written from the picture in my
+head instead of from the log or the proof — and the audit, which I wrote to find exactly
+this in others' work, contained two of them.  The rule that would have caught M1 is one I
+already had (SD63: compute the size of every candidate cause before naming one); I had
+computed a formula and written "measure".
+*The engineering division* built the compiled checker we asked for (P7-E2) from our text
+alone, and then read our reference checker: it summed every entry of two lists while
+bounding only the entries the format defines, and validated nothing — a malformed file
+could be accepted with a false bound.  Confirmed with their example; none of our nine files
+is malformed.  Corrected (`p7_06_check.py`; a control that reproduces the defect: the old
+rule accepts 9 of 9 poisoned files, the new one none); their checker and its 182 tests run
+here with another compiler; SCI-RES-0030.  The certificate line now has two outside
+findings in one hour, both about things I had called checked.
+*The fourth scan* (Lys₁₂, order 4, band 7): `λ_c = 18.8`; predicted 2 to 6 — missed, like the
+band-4 case, and for the same reason.  A wider band moves the transition up (15.3 → 18.8).
+Two-state test on the four logs (`floor_two_state.py`; my first version compared at points
+where the sampled occupancy is within its own noise of the reference and took mixed grid
+points for pure states — both repaired before anything was written down): the slope
+predicted from the occupancy is within 0.99–1.33 of the exact one, systematically above one
+because the displaced state is not one state; the control is weak for the order-3 case and
+I say so.  Sent to the theory division with a first response to their audit (SCI-RES-0031):
+their synthesis says corrections are applied that are not in their tree at `fc3f5d9`.
+*Launched:* R23, the sampled check of the theory division's audit promised in SCI-RES-0023
+(17:23).  Five referees are running; R19 is the first of this wave to return.

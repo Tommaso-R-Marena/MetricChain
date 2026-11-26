@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 17:21 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 17:47 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -23,7 +23,7 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    `research/biological-complexity` — are authorised collaborators with their own
    mailbox directories (`messages/ensemble/`, `messages/geometry/`,
    `messages/complexity/`) and digests (`ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`,
-   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 17:21 UTC: all three
+   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 17:47 UTC: all three
    have opened, and each has asked this division for a review.**  *Ensemble*
    (`a570520`, its first checkpoint): ENSEMBLE-MSG-0001 answered in SCI-RES-0026 (E-S1:
    the uniqueness side of a model-free identified set is not in our record — it is
@@ -45,11 +45,12 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    launched 17:16 UTC, result as SCI-REV-0021.**  Their second checkpoint (`7c2a3d1`,
    GEOMETRY-MSG-0003: a generic two-state ensemble is identifiable from 10 atoms on) was
    read at 17:19; the sections R22 reviews are unchanged.  **The theory division's
-   `docs/ASSUMPTION_AUDIT.md` exists since `ff4ad64` (head `fc3f5d9`): our review of it,
-   promised in SCI-RES-0023, is owed** (read it in full, compare with Part B of ours,
-   sample its classifications against the proofs we reviewed).  Found at 17:05 and still owed a reading: the
-   engineering division's checker for our request P7-E2 (`0e5103b`, X-012; run it on our
-   certificate files).  When
+   `docs/ASSUMPTION_AUDIT.md` exists since `ff4ad64` (head `fc3f5d9`): read in full; a first
+   response is SCI-RES-0031 §2 (at that commit the corrections it describes are not in
+   their tree); the sampled review is workstream R23.**  Read and answered since 17:05: the
+   engineering division's checker for our request P7-E2 (`0e5103b`, X-012) — re-run here,
+   all as they report; **the defect it found in our own reference checker is corrected
+   (SCI-RES-0030; `ws_P7/p7_06_check.py`, `logs/p7_06_check_v2.log`)**.  When
    one moves: read its digest and status, record the reading in the
    sync file, check anything imported, and send one message with the results of this
    branch that touch its mandate (the head of `SCIENCE_TO_ALL.md` already has a
@@ -282,8 +283,15 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: five — R18 and R19 launched at 16:02
-   UTC, R20 at 16:20 UTC, R21 at 16:53 UTC, R22 at 17:16 UTC.**  **R22** (`R22_brief.md`):
+2. **Workstreams running when this was written: five — R18 (launched 16:02 UTC), R20
+   (16:20), R21 (16:53), R22 (17:16), R23 (17:23).  R19 has handed back and is
+   published (SCI-MSG-0030; see the end of this item).**  **R23** (`R23_brief.md`): the
+   review promised to the theory division — a sampled check of its assumption audit
+   (`docs/ASSUMPTION_AUDIT.md`, `docs/audit/AA{1,2}_REPORT.md` at `fc3f5d9`): whether its
+   tags can be trusted, three of its counterexamples rebuilt, the synthesis against
+   the tree; reads the export `<scratchpad>/thy_ro_fc3f5d9/` (lost with the container:
+   `git archive fc3f5d9 README.md docs/ASSUMPTION_AUDIT.md docs/audit docs/THEORY_REPORT.md docs/DEAD_ENDS.md docs/workstreams/N_REPORT.md docs/workstreams/R_REPORT.md docs/workstreams/AA_brief.md docs/falsification_output.txt experiments/audit experiments/falsify_conjectures.py proofs | tar -x -C <dir>`);
+   result as SCI-REV-0022.  **R22** (`R22_brief.md`):
    review of the Geometry division's Lemma 2.2 and Theorems B, B′, G
    (`docs/geometry/ENSEMBLE_RIGIDITY.md` at `d84a43b`), asked for by them, including the
    question the coordinator's own check left open (are two states that differ in two or
@@ -304,23 +312,22 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    **R18** (`R18_brief.md`): referee of the engineering division's ENG-RES-0014 §1 and §4,
    as accepted by them; reads the export `<scratchpad>/eng_ro_1cc4e1c/` (lost with the
    container: `git archive 1cc4e1c docs src experiments/eng tests/eng | tar -x -C <dir>`);
-   result as SCI-REV-0018.  **R19** (`R19_brief.md`): adversarial referee of our own
-   addenda A17 (19)–(20) and of Part A of the audit, including the synthetic test of
-   Corollary AA.2 and level H2′ (obligations `G-1`, `G-2` — **do not run them yourself
-   while it works**).  Notes: `experiments/science/ws_R18/NOTES.md`, `ws_R19/NOTES.md`,
-   `ws_R20/NOTES.md`, `ws_R21/NOTES.md`, `ws_R22/NOTES.md`; reports: `workstreams/R18_REPORT.md` … `R22_REPORT.md` — drafts until the coordinator
+   result as SCI-REV-0018.  **R19 — done** (handed back 17:30 UTC; `R19_REPORT.md` with a
+   coordinator's note; `ws_R19/`): our parts (19)–(20) and the audit's Part A refereed —
+   no bracket in doubt, four major findings against our texts, all accepted and
+   corrected by SCI-MSG-0030 (addendum part (21), items 82–83; the audit's marks
+   "[R19 …]" and its §6; `DEAD_ENDS.md` SD68–SD70).  **Left open by it:** the loss
+   between groups for Lys₁₂ at order 5 and for Lys₂₀ (`ws_R19/r19_loss_between_groups.py`
+   after `r19_dump_case.py`; needs the memory of those runs); AA.1′ machine-checked;
+   the guards in `slack_recovery.bounds` (finding m11 — to be changed only together
+   with a re-run of the fourteen logs).  Notes: `experiments/science/ws_R18/NOTES.md`, `ws_R19/NOTES.md`,
+   `ws_R20/NOTES.md`, `ws_R21/NOTES.md`, `ws_R22/NOTES.md`, `ws_R23/NOTES.md`; reports: `workstreams/R18_REPORT.md` … `R23_REPORT.md` — drafts until the coordinator
    has read and checked them.  If a hand-back reports a declined tool action, do not
    perform it; tell the research owner.  R17 is read, checked and published:
    SCI-REV-0017 (finding 9s).
-   **A run of the coordinator going:** a scan of the floor in the penalty strength
-   (`pi_inference/floor_transition.py`; promised in SCI-RES-0024 §3 (c); prediction in
-   the research log at 16:05 UTC): logs `floor_transition_{K12_m4_w4, K12_m3_w7,
-   LKSEc12_m3_w7, K12_m4_w7}.log`; three are complete — the floor leaves the anchor at
-   `λ_c = 15.3` (Lys₁₂, order 4, band 4; within a factor 1.14 in `λ`), `1.32` (Lys₁₂,
-   order 3, band 7; factor 1.22) and `0.198` ((LKSE)₃, order 3, band 7) — and the
-   fourth (Lys₁₂, order 4, band 7) was running.  When done: outcome against the
-   prediction into the research log, an addendum item, the curves to the theory
-   division.
+   **No run of the coordinator is going.**  The scan of the floor in the penalty
+   strength is complete (four cases: `λ_c = 15.3`, `18.8`, `1.32`, `0.198`; a two-state
+   test; addendum part (21), item 84; sent to the theory division as SCI-RES-0031 §1).
    **The coordinator's work on general held-site passes is finished and committed**
    (addendum A17 (20), items 77–81; finding 9t): `pi_inference/held_site_laws.py`, the
    changed `first_order_recovery.py`, its thirteen re-produced logs and the log of
@@ -866,7 +873,8 @@ preservation.
     unproved for the evaluator's summation order) to sites and pairs, which costs
     `10⁻⁴`–`10⁻³` nats at order 5; attached to each term's own table it is charged only
     when the term is.  *What is left:* the envelope — the resolved bound itself; the
-    losses between groups (of the order of `D²/4`); items without a route (chains
+    losses between groups (of order `D²` — measured by the referee R19 at 0.06 to 2.2
+    times `D²/4`; "of the order of `D²/4`" was wrong: SCI-MSG-0030); items without a route (chains
     longer than twice the band need a backward message: not built); `ε_g`.  *Prior
     art:* not found in our reports and three web queries; nothing more is claimed.
     Four versions of the code in three hours; only the last has logs in the tree.

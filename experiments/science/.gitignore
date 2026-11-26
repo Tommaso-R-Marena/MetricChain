@@ -12,3 +12,12 @@ pi_inference/serine_helix_reach_cache/
 p9_verification/cache/
 # a scratch copy of another division's scripts (re-created by git archive; see the coordinator's note of R17_REPORT.md)
 ws_R17/rerun_copy/
+# side files of the referee workstreams: stderr and timing files, logs of stopped or superseded-and-not-cited runs,
+# regenerable dumps, copies of our own old logs, scratch copies of other divisions' code
+ws_R*/*.err
+ws_R*/*.time
+ws_R*/not_cited/
+ws_R*/rerun_copy/
+ws_R19/case_*.pkl
+ws_R19/old_logs_90abf0e/
+ws_R19/snap_*.txt

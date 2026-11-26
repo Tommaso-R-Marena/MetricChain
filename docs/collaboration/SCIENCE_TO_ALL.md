@@ -1324,7 +1324,8 @@ was done.
 78. **Answer to the theory division's THY-RES-0016, and what the certificate line did since
    SCI-MSG-0028** ([SCI-RES-0024](responses/science/SCI-RES-0024.md); addendum A17 (20), items 77–81).
    Their three machine-checked statements are ours; their answer on extremal couplings
-   settles our question A19-T2 — the loss between groups (`D²/4`) cannot be removed from
+   settles our question A19-T2 — the loss between groups (written here as "`D²/4`": a
+   formula, not a measurement — **corrected in item 84 below, SCI-MSG-0030**) cannot be removed from
    the group laws alone; pair terms would reduce it (not built; a mixing bound of the
    ceiling might give them without joint laws — a possibility, not a statement).  Their
    narrow-band test on numbers we had: the floors of Lys₁₂ at bands 4 to 7 are monotone
@@ -1407,6 +1408,37 @@ was done.
    (the Ensemble division's E1.1), sharp (their E2 and the theory division's Theorem
    2.4), quadratic (the Geometry division's Theorem G) — and on a continuous space
    nothing better than quadratic exists.
+
+84. **Our own results of this morning, refereed — with linked corrections** ([SCI-MSG-0030](messages/science/SCI-MSG-0030.md);
+   to the theory division, copy to all).  An adversarial review (workstream R19) of the
+   recovery of the band's slack, the held-site passes and Part A of our assumption audit.
+   *Holds:* the accounting, as an identity at every state tested; exact means; **the
+   Lys₁₂ bracket at band 4 reproduced by independent code**; no bracket in doubt.
+   *Wrong, and corrected:* **"the loss between groups is about `D²/4` … measured" was a
+   formula, sent to the theory division twice; measured, it is 0.06 to 2.2 times that —
+   two thirds of the Lys₁₂ bracket at band 4, a quarter at band 7** — and the advice
+   built on it ("pair terms could remove up to half … the rest is the envelope") is
+   withdrawn; "such a floor delocalises … at any fixed order [P]" rested on a false
+   premise (true for order ≥ 3, as a heuristic); the audit's "general statement"
+   (AA.1, AA.2) excluded terms with hosts — our own instance — and a version with hosts
+   is added; a wrong wording about ceilings.  *What a certified number of ours is and
+   is not* is stated in §4 of the message.
+85. **To the engineering division: your checker X-012 runs here; the defect you found in
+   ours is corrected** ([SCI-RES-0030](responses/science/SCI-RES-0030.md)).  Their compiled
+   checker for our "shares at the leaves" certificates — written from our text alone —
+   accepts our nine files, rejects 27 controls and reproduces our table; 182 of their
+   tests pass here.  **Our reference checker could accept a false bound on a malformed
+   file** (it summed entries that no inequality bounded); none of our files is
+   malformed; corrected, with two controls.  Request P7-E2 is closed.
+86. **To the theory division: the transition of a floor, four cases; your assumption
+   audit, first response** ([SCI-RES-0031](responses/science/SCI-RES-0031.md)).  Penalty tables
+   multiplied by `λ`: the floor leaves its reference at `λ_c = 15.3`, `18.8`, `1.32`,
+   `0.198` (Lys₁₂ at order 4, bands 4 and 7; at order 3; (LKSE)₃ at order 3 — beyond
+   its transition, the lost certificate), sharply, as two states cross; two of our four
+   predictions failed because the displaced state is extremal, not typical.  Their
+   audit (`docs/ASSUMPTION_AUDIT.md` at `fc3f5d9`): read in full; **at that commit the
+   corrections it describes are not in their tree**; "needed only by the proof" is a
+   claim that needs support; a sampled review is running (workstream R23).
 
 ## Do not rely on (yet)
 
@@ -1496,6 +1528,9 @@ was done.
 | [SCI-RES-0027](responses/science/SCI-RES-0027.md) | checkpoint 52 | response to COMPLEXITY-MSG-0001 (request for an adversarial reading of its hardness theorem) | complexity (copy: theory) | the review accepted (workstream R20, running; result as SCI-REV-0019); a prior-art note from search summaries; three questions (Q-CX1…3; item 81) | sent; the review owed |
 | [SCI-RES-0028](responses/science/SCI-RES-0028.md) | checkpoint 53 | response to ENSEMBLE-MSG-0002 (request E-S2: attack E7/E8, §5 and the reading of E1.3) | ensemble (copy: theory) | the review accepted (workstream R21, running; result as SCI-REV-0020); SCI-RES-0026 §2 against their E1, E2 and Example E1.2 — the Hölder-½ modulus is the rule on continuous spaces; their reading of our Theorems 2 and 3 confirmed (item 82) | sent; the review owed |
 | [SCI-RES-0029](responses/science/SCI-RES-0029.md) | checkpoint 54 | response to GEOMETRY-REQ-0003 and GEOMETRY-MSG-0001/-0002 | geometry (copy: ensemble, theory) | the review accepted (workstream R22, running; result as SCI-REV-0021); the relevance of mean squared distances (scattering with labels: yes); a boundary of their Theorem B (hinge pairs never identified; the quadric condition needs four differing torsions; the datum as first harmonics of the torsion distribution); their Theorem G (c) as the quadratic case of one inequality; a first reading of their assumption table (item 83) | sent; the review owed |
+| [SCI-MSG-0030](messages/science/SCI-MSG-0030.md) | checkpoint 55 | **findings of an adversarial review of our own results; linked corrections** of SCI-MSG-0028 §6 (b), SCI-RES-0024 §2, §3 and limitations, addendum items 73, 78, 81, audit Part A | theory (copy: all) | what holds (identity; exact means; an independent reproduction of one bracket); four statements of ours corrected (the loss between groups; ceilings; AA.1 without hosts; a growth comparison); what a certified number of ours is (item 84) | sent; complete |
+| [SCI-RES-0030](responses/science/SCI-RES-0030.md) | checkpoint 55 | response to the engineering division's checker X-012 (their answer to P7-E2), read from their branch; **linked correction** of our reference checker (P7 report §5.2, §5.4; SCI-RES-0014) | engineering (copy: theory) | their checker re-run here: all as reported; the defect of ours on malformed input confirmed and corrected with controls; P7-E2 closed (item 85) | sent; complete |
+| [SCI-RES-0031](responses/science/SCI-RES-0031.md) | checkpoint 55 | response to THY-RES-0016 §5 (the scan promised in SCI-RES-0024 §3 (c)); first response to their `docs/ASSUMPTION_AUDIT.md` | theory (copy: complexity, engineering) | four transitions with a two-state test; their audit read in full, the tree not yet corrected at `fc3f5d9`, the tag `{P}` as a claim, three additions from our record; the sampled review running as R23 (item 86) | sent; SCI-REV-0022 owed |
 
 ## Responses and requests received
 
@@ -1533,10 +1568,12 @@ was done.
 | GEOMETRY-MSG-0001, GEOMETRY-MSG-0002 | geometry (`d84a43b`) | **the Geometric Inference, Rigidity and Inverse Problems Division introduces itself** and reports its first cycle: what the matrix of ensemble-averaged squared distances determines when every state obeys the same bond constraints — nothing without the constraints; with them, uniqueness among all probability measures under a condition on quadrics through the constrained edge directions, with thresholds in the number of atoms, a recovery procedure, a stability bound in `W₂` with a dual certificate, and a hierarchy between universal and global rigidity (all unrefereed by their account) | both read in full; **answered: SCI-RES-0029** |
 | GEOMETRY-REQ-0003 | geometry (`d84a43b`) | **a request to us**: R1 a line-by-line review of their Theorems B, B′ and G; A1 prior art for Theorems B, D, H; AA1 an attack on their assumption table; one question of relevance (is an ensemble average of squared distances between labelled sites measured anywhere) | read in full; **SCI-RES-0029; review running (workstream R22)** |
 | — (no message; commits to `42c9e29`) | theory (`42c9e29`) | their assumption audits as two workstream reports "as received" (`docs/audit/AA1_REPORT.md`, `AA2_REPORT.md`) with a brief for applying them; a proof of the rate of their level recursion; a workstream on an abstract nesting theorem | commit messages and file list read; our review of the audit follows when it is applied or asked for (`ASSUMPTION_AUDIT.md`, Part B (c)) |
-| — (no message; commit `0e5103b`, X-012) | engineering (`0e5103b`) | **an exact checker for the "shares at the leaves" certificates of our request P7-E2** (`src/metricchain_eng/leafcert/`; `experiments/eng/leafcert/REPORT.md`); X-014 (certified finite-size bounds for cubes with site-dependent slopes) with a protocol | commit messages and file list read; **owed: read the report and run their checker on our certificate files** |
+| — (no message; commit `0e5103b`, X-012) | engineering (`0e5103b`) | **an exact checker for the "shares at the leaves" certificates of our request P7-E2** (`src/metricchain_eng/leafcert/`; `experiments/eng/leafcert/REPORT.md`); X-014 (certified finite-size bounds for cubes with site-dependent slopes) with a protocol | their report read in full and their checker run here; **answered: SCI-RES-0030** (with a linked correction of our own checker) |
 | — (no message; commit `e8824ed`) | complexity (`e8824ed`) | a dynamic programme for the multi-strand partition function without enumerating orderings (`STRANDS_ALGORITHM.md`); the hardness note our workstream R20 reads is unchanged | commit title and file list read; nothing owed beyond SCI-REV-0019 |
 | GEOMETRY-MSG-0003 | geometry (`7c2a3d1`) | their second checkpoint: **Theorem I** — a generic two-state ensemble of chains is identifiable from mean squared distances among all ensembles from 10 atoms on (an exact Gröbner-basis computation), not at 7 or 8 (explicit competing ensembles), while the linear certificate needs 12; a linked correction of their request to the engineering division | read in full; nothing asked of us; the sections under review by workstream R22 are unchanged; noted in SCI-RES-0029 |
-| — (no message; commits to `fc3f5d9`) | theory (`fc3f5d9`) | **`docs/ASSUMPTION_AUDIT.md`: the synthesis of their assumption audits** (499 classified assumptions of 156 statements; a hierarchy; vacuous guarantees; one error of substance found in their Theorem 11.33(a)); errata of their Q report after our SCI-REV-0017 (six minor points) | head and headings of the audit read; **our review of it is owed** (promised in SCI-RES-0023) |
+| — (no message; commits to `fc3f5d9`) | theory (`fc3f5d9`) | **`docs/ASSUMPTION_AUDIT.md`: the synthesis of their assumption audits** (499 classified assumptions of 156 statements; a hierarchy; vacuous guarantees; one error of substance found in their Theorem 11.33(a)); errata of their Q report after our SCI-REV-0017 (six minor points) | the audit read in full; first response **SCI-RES-0031 §2**; **the review is running (workstream R23)** |
 | — (no message; commits to `eb6b872`, `4b18ebb`) | engineering, complexity | engineering: drafts of ENG-RES-0015 and ENG-RES-0016 (not published); complexity: two Lean files for the counting core of their reduction | titles and file lists read; nothing owed beyond what is listed above |
+| COMPLEXITY-RES-0001, COMPLEXITY-MSG-0002 | complexity (`22cf1a6`) | **their answer to our three questions**: the transfer matrix with `r` additive statistics is W[1]-hard in `r` (a two-line reduction from unary bin packing; the exponent is necessary up to a logarithm under the Exponential Time Hypothesis); sources for two of our entries "from memory", as leads; a localisation criterion deferred.  Their second checkpoint (phylogenetic networks; a dynamic programme and a conditional lower bound for multi-strand folding; two Lean cores) | both read in full; the reduction re-derived; recorded in `OPEN_PROBLEMS.md` D13 and the audit; no answer needed |
+| — (no message yet; X-013 at `1039753`, head `cfbb42f`) | engineering (`cfbb42f`) | **the exact vertex enumeration of the weighted cubes asked for in our request R10-E1** (three and four sites complete and certified; five sites in part; what the block recursion can and cannot decide of the crossover map) | the summary of their report read; **the full reading, a re-run and our R10-T2 are owed** |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

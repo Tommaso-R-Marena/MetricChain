@@ -3334,7 +3334,8 @@ this part has been read by a referee; the part continues (18), whose items are n
     `10⁻⁶` for the three other rows) — and otherwise what the inequalities lose between
     groups (the factor `e^{ln Z(m₊) − u}` of (UE), (UP) costs about `D/2` times the amount
     recovered above: `1.3·10⁻⁵` for Lys₁₂, `7·10⁻⁵` for (LKSE)₃) and the items without
-    a route.
+    a route.  **[Corrected in part (21), item 83 (a): the two numbers are `D²/4` evaluated,
+    not measurements; the loss between groups, measured, is 0.06 to 2.2 times `D²/4`.]**
 
 74. **A narrower band** [M; Lys₁₂, order 4; `first_order_recovery_K12_m4_w{4,5,6}.log`;
     sub-tuples chosen by the rule of item 67 with my own code, since P9 stored choices
@@ -3477,7 +3478,8 @@ this part has been read by a referee; the part continues (18), whose items are n
     commit `90abf0e`].  Before the runs I wrote that the band-7 cases "must reproduce the
     committed brackets digit for digit".  They do in every row that uses only the old
     routes — far pairs; far pairs and terms; all three stages where no item goes through
-    an inner window (Lys₅ at band 3, twice; Lys₁₂ at order 3) — and not in the last row
+    an inner window (Lys₅ at band 3, twice; Lys₁₂ at order 3) **[item 83 (b): the
+    far-pairs-and-terms row is unchanged in six of the thirteen runs only]** — and not in the last row
     of the others, **because four-site subsets that had no route now have one**.  The
     statement that holds, in all thirteen: *same items, same digits; more items, a
     bracket inside the old one at both ends.*
@@ -3510,7 +3512,11 @@ this part has been read by a referee; the part continues (18), whose items are n
     cent: **the items without a route were not where the loss was.**  At band 4 the
     subsets that still have none carry `1.1·10⁻⁴` nats of first-order slack per side;
     the rest of the `6.4·10⁻⁴` is the loss between groups (`D²/4 = 2·10⁻⁴` for
-    `D = 0.029`) and the envelope.
+    `D = 0.029`) and the envelope.  **[Corrected in part (21), item 83 (a): measured,
+    the loss between groups at band 4 is `4.31·10⁻⁴` — twice `D²/4`, two thirds of the
+    bracket; the subsets without a route, the envelope and the allowances are the other
+    `2.13·10⁻⁴` together.  So the sentence "the items without a route were not where
+    the loss was" stands, and the split given here was wrong in its main term.]**
 
 79. **A charged chain longer than twice the band: Lys₂₀** [M; validity P;
     `first_order_recovery_K20_m4_w7.log`; prediction written at 14:26 UTC before the run,
@@ -3565,7 +3571,8 @@ this part has been read by a referee; the part continues (18), whose items are n
     chains of at most twice the band; the limit that remains is items that need two
     held sites.  (ii) All certified numbers of parts (19)–(20) now come from one driver
     and one module, with every log re-produced; the brackets of part (19) are confirmed
-    as brackets — the new ones lie inside them.  (iii) Routing more items helps little
+    as brackets — the new ones lie inside them **[item 83 (c): nesting shows consistency
+    of two versions of one code, not validity]**.  (iii) Routing more items helps little
     once the far pairs are routed: what is left is the loss between groups, which the
     theory division's answer to our question A19-T2 (THY-RES-0016 §4) says cannot be
     removed from the group laws alone when the groups' events overlap, and can be
@@ -3574,6 +3581,157 @@ this part has been read by a referee; the part continues (18), whose items are n
     (v) Under the research owner's directive of 2026-11-26 no further instance of this
     kind is run in this phase; what the line needs now is in
     `docs/science/ASSUMPTION_AUDIT.md` (obligations `G-1 … G-8`).
+
+### (21) Parts (19)–(20) refereed (workstream R19): what holds, what was wrong in our texts, what a certified number here means — and two things measured since: the transition of a floor, and where the evaluations of a shell go [review and replication by R19, checked by the coordinator; M for items 84–85; added 2026-11-26]
+
+*The referee:* workstream R19, an adversarial review of items 69–75 and 77–81 and of Part A of
+`ASSUMPTION_AUDIT.md`, asked for by the coordinator of his own results
+(`workstreams/R19_REPORT.md`, 639 lines; code and logs `experiments/science/ws_R19/`; an
+internal review by an AI session, not external peer review).  *What the coordinator
+checked:* the report read in full; the measurement behind its first major finding repeated
+with another seed (below); its audit tests re-run, output identical; its numbers for the
+enumerated instances compared with our own logs.  All of its findings are accepted.
+
+82. **What holds** [review + replication, R19 §§2.1, 3, 4].  (i) The accounting behind the
+    recovery is right term by term, and it is more than an inequality:
+    `m₊ − E − s₊ = (env − r) + allowances` holds as an **identity to `10⁻⁹` kcal/mol at
+    every state** of the four enumerated instances and at the driver's 5 380 states of
+    Lys₁₂ at bands 4 and 7.  No slack is counted twice: the allocation item is valid on
+    both sides because the ceiling needs `r ≤ env` and the floor `−r ≤ env`.  Controls
+    the coordinator had not run: every single item doubled is seen by the driver's
+    check (25 of 25, 11 of 11, 15 of 15, 25 of 25 on the enumerated instances; all far
+    and term items and 458 of 462, 277 of 285 allocation items at twelve residues); the
+    allocation slack moved to one side fails at 1 931 to 86 594 states; the whole penalty
+    claimed fails everywhere.  (ii) **The held-site passes compute exact means:** 3 000
+    random band models, 65 670 group statistics against the referee's enumeration,
+    largest relative deviation `6.4·10⁻¹³`; all 56 groups of Lys₁₂ at band 4 and five at
+    band 7 by a variable elimination that knows nothing of windows, `5.8·10⁻¹²` — **the
+    published bracket of Lys₁₂ at band 4 is reproduced by an independent computation of
+    everything between the tables and the number**; no illegal route in 238 267 fuzzed
+    items; input that violates the precondition of the routing stops at an assertion.
+    (iii) The regression claim of item 78 is true in all thirteen runs; 104 of 104
+    numbers of its table agree with the logs; six logs re-run, identical.  (iv) **No
+    published bracket is put in doubt.**  Critical findings: none; major: four (one
+    here, three in the audit); minor: fifteen.
+
+83. **What was wrong in our texts — linked corrections** [SCI-MSG-0030].
+    (a) **"The loss between groups is about `D²/4`" was a formula that we called a
+    measurement** (items 73, 78, 81 (iii); SCI-MSG-0028 §6 (b); SCI-RES-0024 §2 and its
+    limitations; the audit, A6 and H4).  The numbers `1.3·10⁻⁵` and `8·10⁻⁵` are
+    `D²/4` evaluated; no log beyond five residues contained a measurement.  Measured
+    (loss := corrected width − width with the same routed items put back exactly):
+
+    | instance | `D` | corrected width | same items put back exactly | loss | loss / (`D²/4`) | loss / corrected width | source |
+    |---|---|---|---|---|---|---|---|
+    | Lys₅, order 4, band 2 | 0.04765 | 0.002885 | 0.001614 | 0.001271 | 2.24 | 0.44 | our own log (enumeration) |
+    | Lys₅, order 4, band 3 | 0.01891 | `6.437·10⁻⁵` | `4.996·10⁻⁵` | `1.44·10⁻⁵` | 0.16 | 0.22 | the same |
+    | Lys₅, order 5, band 3 | 0.01870 | `7.104·10⁻⁶` | `1.573·10⁻⁶` | `5.5·10⁻⁶` | 0.06 | 0.78 | the same |
+    | LKSE:5, order 4, band 2 | 0.2054 | 0.001558 | `8.185·10⁻⁴` | `7.4·10⁻⁴` | 0.07 | 0.47 | the same |
+    | **Lys₁₂, order 4, band 4** | 0.02877 | `6.449·10⁻⁴` | `2.135·10⁻⁴ ± 6·10⁻⁷` | **`4.314·10⁻⁴ ± 6·10⁻⁷`** | **2.085 ± 0.003** | **0.67** | R19 §3.4: first order exact, second order from `10⁶` exact samples of the floor; **repeated by the coordinator with another seed: `4.312·10⁻⁴ ± 5.6·10⁻⁷`, 2.084** |
+    | **Lys₁₂, order 4, band 7** | 0.007329 | `8.161·10⁻⁵` | `6.099·10⁻⁵ ± 1.9·10⁻⁷` | **`2.061·10⁻⁵ ± 1.9·10⁻⁷`** | **1.535 ± 0.014** | **0.25** | R19 §3.4 (`4·10⁵` samples) |
+    | 810 random sandwiches with `D < 0.3` | | | | | quartiles 0.002, 0.25, 0.57; largest 13.3 | | R19 §3.2 (enumeration) |
+
+    So `D²/4` is neither a bound nor a typical value; the first four rows were in our own
+    logs when we wrote "about `D²/4`".  *What changes:* at band 4 two thirds of the
+    bracket is loss between groups, and what an exact treatment of the routed items
+    would leave is `2.1·10⁻⁴` for the items without a route, the envelope and the
+    allowances together; at band 7 the loss is a quarter of the bracket and the envelope
+    about `5.4·10⁻⁵` (R19's first-order accounting).  The sentence of SCI-RES-0024 §2,
+    "pair terms could remove up to about half of what is left [Lys₁₂ at order 5] and a
+    fifth [Lys₂₀]; the rest is the envelope", is **withdrawn**: for order 5 the logs leave
+    no room for an envelope (`10⁻⁹`), so most of that bracket would be loss between
+    groups [H, R19's inference, not a measurement]; for Lys₂₀ nothing is measured.
+    *What does not change:* every bracket; and the direction of the advice — what is
+    left to gain at these widths is between groups (pair terms, the joint law of two
+    groups), more than we said.
+    (b) Item 78: the far-pairs-and-terms row is unchanged in six of the thirteen runs,
+    not in all; in seven, term items are newly routed and that row moves.  "Same items,
+    same digits" is unaffected.
+    (c) Items 81 (ii) and SCI-RES-0024 ("the published brackets stand"): that the new
+    brackets lie inside the old ones shows that two versions of one code are consistent;
+    that either is a bracket rests on items 71 and 73 and now on item 82.
+    (d) What our checks can and cannot see: the hypothesis check tests the accounting of
+    the reductions item by item, and **sees nothing when every resolved table is halved
+    or divided by ten** (the envelope is at least 10.75 times the remainder at every
+    state tested), so it does not test the size of workstream P9's tables; the
+    comparison of the means with exact samples "within 1.6 standard errors" has no
+    power (rare states dominate; with 400 000 samples 15 of 280 statistics are more
+    than three standard errors off while the exact replication agrees to `6·10⁻¹²`).
+    (e) Code, recorded and **not changed in this commit** (the logs must be those of the
+    code; to be changed together with the next re-run of the fourteen logs):
+    `slack_recovery.bounds` returns the 60th iterate of (UE), (UP), not the limit — valid,
+    and converged to machine precision for `D ≤ 0.2`, but short by `2.3·10⁻³` at
+    `D = 2.4`; it tests neither finiteness nor lower ≤ upper; a comment in
+    `window_model_occ.py` (l. 52) says "common to floor and ceiling" of choices that are
+    made once per side.
+    (f) **What a certified number of parts (16)–(20) is** (R19 §2.4, adopted as our own
+    statement): an interval for `ln Z` of one *model* energy — a vacuum force field plus
+    an implicit-solvent term, side chains from a finite rotamer library on a fixed
+    backbone, one temperature — **given** that workstream P9's tables satisfy its Theorem
+    R at every state (a paper proof by one workstream, machine-checked in its abstract
+    skeleton only, tested where the tables exceed the remainder at least 8.9-fold, so
+    that a table too small by less than that would pass every test); **given** the
+    evaluation tolerance `ε_g = 10⁻⁷` kcal/mol (assumed); with one implementation of the
+    evaluator and of the tables; in double precision with margins of `10⁻⁹` and no
+    interval control.  It is not a statement about a peptide in water, not a
+    machine-checked certificate, and its width does not measure what the evaluations
+    know.  For Lys₂₀ the number has been compared with nothing (no sampled interval;
+    38 % of its items without a route; above the referee's limits).
+
+84. **A floor leaves its reference by a sharp transition in the size of its penalty
+    tables: four cases, and a two-state test** [M, exact transfer-matrix values; the
+    occupancy from 1 000 exact samples per `λ`; `pi_inference/floor_transition.py`,
+    `floor_transition_*.log`, `floor_two_state.py`, `floor_two_state.log`; prediction
+    written at 16:05 UTC before the script existed].  The theory division reads a floor
+    that delocalises as a first-order transition (THY-RES-0016 §5 (i)) and asked for
+    numbers.  With every penalty table multiplied by `λ` (the certificate is `λ = 1`):
+
+    | case | sum of the table maxima (`kT`) | `λ_c` | predicted | displaced sites go from below 2 to above 8 within a factor | slope `β⟨pen⟩` in the reference state, in the displaced state | `ln Z` of the floor at `λ = 1` minus at `λ = 0`; first order |
+    |---|---|---|---|---|---|---|
+    | Lys₁₂, order 4, band 4 | 16.6 | **15.32** | 1.5 – 4 (**missed**) | 1.14 | `8.6·10⁻⁴`, 5.9 | `5.349·10⁻⁴`; `5.270·10⁻⁴` |
+    | Lys₁₂, order 4, band 7 | 17.9 | **18.80** | 2 – 6 (**missed**) | 1.06 | `1.6·10⁻⁴`, 5.8 | `9.814·10⁻⁵`; `9.748·10⁻⁵` |
+    | Lys₁₂, order 3, band 7 | 271.6 | **1.318** | 1.05 – 1.5 (met) | 1.22 | 0.27, 71 | 0.0528; 0.0249 |
+    | (LKSE)₃, order 3, band 7 | 1 233.9 | **0.198** | 0.1 – 0.4 (met) | — (2.8 sites off already at `λ = 0`) | 0.18, 723 | 658.8; 0.18 |
+
+    `ln Z(λ)` is convex on every grid (it must be; the control, the same test on `−ln Z`,
+    fails); at `λ = 1` the script reproduces the upper end of the committed sandwich of
+    each case.  **The certificate of Lys₁₂ at order 4 stands a factor 15 to 19 below its
+    own transition, the one at order 3 a factor 1.32, and (LKSE)₃ at order 3 is beyond
+    it** — which is the bracket of 658.9 nats that workstream P9 reported as lost.
+    *Two states* (`floor_two_state.py`): if the floor's ensemble near the transition is
+    a mixture of the reference state and one displaced state, every mean is linear in
+    the weight; the exact slope predicted from the sampled occupancy by the line through
+    the two states, at the points where the weight is between 0.1 and 0.9, is within
+    0.99–1.18, 1.00–1.17, 1.11–1.22, 1.11–1.33 of the exact slope in the four cases
+    (medians 1.04, 1.08, 1.20, 1.23), and the lever rule gives 0.82, 0.60, 0.64, 0.41
+    for the excess of `ln Z` at `λ_c` against 0.76, 0.61, 0.77, 0.40 observed.  The
+    systematic excess above one has a reason: the displaced state is not one state —
+    its slope still grows with `λ`.  The control (the same points with `λ` as the
+    abscissa, a smooth response between the same two grid points) is off by factors
+    1.2–5, 0.59–2.3 and 1.5–4.6 in three cases and only by 0.87–1.6 for Lys₁₂ at order
+    3: **there the test discriminates weakly**.
+    *Why the two predictions at order 4 failed:* a displaced lysine was priced at the
+    cost of a typical state off the anchor (`2.2 kT`); the state the penalty selects is
+    where the tables are large, which is where charged groups come close, and it costs
+    about 90 to 110 `kT` in the model without penalty (the displaced slope times `λ_c`)
+    — eight to nine `kT` per residue.  A prediction of `λ_c` needs the least ratio (cost without
+    penalty)/(penalty) over states, not a typical cost.  *What follows for a
+    certificate:* `λ_c` is a safety factor that can be reported with every bracket, at
+    the cost of a few more transfer-matrix runs (`OPEN_PROBLEMS.md` D12).
+
+85. **Where the evaluations of a shell go** [M on a model of the occupation, with its
+    control; no certificate; `pi_inference/subset_concentration.py`,
+    `subset_concentration_K12_m{3,4}.log`].  With the occupation taken from the product
+    of the one-site marginals of a Gibbs sample of Lys₁₂: nine tenths of the first-order
+    envelope of order 3 lie in 3.2 % of the triples, which cost 7.9 % of the evaluations
+    of the shell of radius 3 (99 %: 20 % of the triples, 34 % of the evaluations); at
+    order 4, nine tenths in 2.0 % of the subsets (6.2 % of the shell).  **The control —
+    the same tables shuffled among the subsets — gives almost the same shares:** the
+    concentration is that of the occupation, and the rule "rank a subset by the product
+    of its sites' probabilities of being off the anchor" is available before any
+    evaluation.  The estimate on the 960 sampled states themselves is inconclusive (its
+    control shows the concentration of the sample).  Not done: the remainder bound of a
+    down-closed family that is not a ball, and a run (`OPEN_PROBLEMS.md` D14).
 
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
