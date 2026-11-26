@@ -37,7 +37,8 @@ TIERS = {"s": (1200, 1024), "m": (3600, 2048), "l": (10800, 2048), "xl": (21600,
 # driver name -> (directory under experiments/eng, module, result prefix, packages of src/metricchain_eng it imports)
 DRIVERS = {"nested_bench": ("twolevel", "nested_bench", "x011", ("twolevel",)),
            "hetero_bench": ("twolevel", "hetero_bench", "x014", ("twolevel",)),
-           "nested_literal": ("twolevel", "nested_literal", "x011f", ("twolevel",))}
+           "nested_literal": ("twolevel", "nested_literal", "x011f", ("twolevel",)),
+           "r18_products": ("twolevel", "r18_products", "x005c", ("twolevel",))}
 PACKAGES = sorted({p for d in DRIVERS.values() for p in d[3]})
 EXPERIMENT_DIRS = sorted({d[0] for d in DRIVERS.values()})
 

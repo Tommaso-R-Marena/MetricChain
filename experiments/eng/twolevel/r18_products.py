@@ -16,10 +16,13 @@ shell of negligible probability at the end of a ramp.  This script does the thre
                    three times the earlier budgets.  The bound search is repeated with the same starting points,
                    so that the two are compared like for like.
     seeds     (iii) the same with seeds 2 and 3 at phi in {0.50, 0.85}
+    large     a control beyond the request: the added starting points at n = 1000 and 4000 (phi = 0.35, 0.5; the
+              earlier budgets), where the review found no visible shortfall
 
     python experiments/eng/twolevel/r18_products.py stored
     python experiments/eng/twolevel/r18_products.py search --workers 7
     python experiments/eng/twolevel/r18_products.py seeds --workers 7
+    python experiments/eng/twolevel/r18_products.py large --workers 6
     python experiments/eng/twolevel/r18_products.py science --dir DIR   # DIR holds the review's data_cell_*.json
 """
 from __future__ import annotations
@@ -184,15 +187,15 @@ def search_cell(task: dict) -> dict:
     u, n, phi, seed, mult = task["u"], task["n"], task["phi"], task["seed"], task["mult"]
     key = (u, n, phi)
     t_start = time.time()
-    cost, anyp = load("x005_cost.jsonl")[key], load("x005_anyplacement.jsonl")[key]
+    cell = task.get("cell") or cell_data(key)          # a remote task carries it: the result files are not in the image
     P, _ = run_search.design_params(n, u, phi)
     ev = Evaluator(P)
-    out = dict(u=u, n=n, phi=phi, seed=seed, mult=mult, na=n * cost["a"], lCmax=cost["constants"]["lCmax"], searches=[])
+    out = dict(u=u, n=n, phi=phi, seed=seed, mult=mult, na=n * cell["a"], lCmax=cell["lCmax"], searches=[])
     for objective in ("cost", "cost_any_placement"):
-        for monotone, bud in ((True, mult * cost["budget"]), (False, mult * cost["budget_general"])):
-            fam = Family(ev, k=cost["k"], monotone=monotone)
+        for monotone, bud in ((True, mult * cell["budget"]), (False, mult * cell["budget_general"])):
+            fam = Family(ev, k=cell["k"], monotone=monotone)
             name = "monotone" if monotone else "general"
-            stored = [np.array(s["best_x"]) for r in (cost, anyp) for s in r["searches"] if s["family"] == name]
+            stored = [np.array(x) for x in cell["stored"][name]]
             for orc in ORACLES:
                 S = SeededSearch(fam, orc, objective)
                 S.extra = ramp_seeds(fam) + stored
@@ -212,6 +215,38 @@ def search_cell(task: dict) -> dict:
     return out
 
 
+def cell_data(key: tuple) -> dict:
+    """What a search of one cell takes from the two earlier jobs: budgets, the number of knots, the constants used
+    for reporting, and the stored maximisers of both (starting points)."""
+    cost, anyp = load("x005_cost.jsonl")[key], load("x005_anyplacement.jsonl")[key]
+    return dict(a=cost["a"], lCmax=cost["constants"]["lCmax"], budget=cost["budget"], budget_general=cost["budget_general"], k=cost["k"],
+                stored={name: [s["best_x"] for r in (cost, anyp) for s in r["searches"] if s["family"] == name]
+                        for name in ("monotone", "general")})
+
+
+def task_list(job: str) -> list[dict]:
+    if job == "search":
+        return [dict(u=u, n=n, phi=phi, seed=1, mult=3) for u in run_search.US for n in SMALL for phi in run_search.PHIS]
+    if job == "large":
+        return [dict(u=u, n=n, phi=phi, seed=1, mult=1) for u in run_search.US for n in (1000, 4000) for phi in (0.35, 0.5)]
+    if job == "seeds":
+        return [dict(u=u, n=n, phi=phi, seed=seed, mult=3) for u in run_search.US for n in SMALL for phi in (0.5, 0.85) for seed in (2, 3)]
+    raise ValueError(job)
+
+
+def task_id(job: str, t: dict) -> str:
+    return f"{job}:u={t['u']:g},n={t['n']},phi={t['phi']:g},seed={t['seed']}"
+
+
+def tasks(job: str) -> list[dict]:
+    """Driver interface of modal_jobs/bench_app.py: one task per cell, with what it needs from the stored files."""
+    return [dict(t, id=task_id(job, t), tier="m", cell=cell_data((t["u"], t["n"], t["phi"]))) for t in task_list(job)]
+
+
+def run_task(task: dict) -> dict:
+    return search_cell({k: v for k, v in task.items() if k not in ("id", "tier")})
+
+
 def run_searches(job: str, workers: int) -> None:
     out_path = RES / f"x005c_{job}.jsonl"
     done = set()
@@ -219,23 +254,18 @@ def run_searches(job: str, workers: int) -> None:
         for line in out_path.read_text().splitlines():
             r = json.loads(line)
             done.add((r["u"], r["n"], r["phi"], r["seed"]))
-    if job == "search":
-        tasks = [dict(u=u, n=n, phi=phi, seed=1, mult=3) for u in run_search.US for n in SMALL for phi in run_search.PHIS]
-    else:
-        tasks = [dict(u=u, n=n, phi=phi, seed=seed, mult=3) for u in run_search.US for n in SMALL for phi in (0.5, 0.85)
-                 for seed in (2, 3)]
-    tasks = [t for t in tasks if (t["u"], t["n"], t["phi"], t["seed"]) not in done]
-    tasks.sort(key=lambda t: -t["n"])
+    todo = [t for t in task_list(job) if (t["u"], t["n"], t["phi"], t["seed"]) not in done]
+    todo.sort(key=lambda t: -t["n"])
     commit = _commit()
-    print(f"{len(tasks)} cells to do ({len(done)} stored), commit {commit[:7]}", flush=True)
+    print(f"{len(todo)} cells to do ({len(done)} stored), commit {commit[:7]}", flush=True)
     t0 = time.time()
     with mp.Pool(workers) as pool, out_path.open("a") as fh:
-        for k, r in enumerate(pool.imap_unordered(search_cell, tasks), 1):
-            r.update(commit=commit, job=job)
+        for k, r in enumerate(pool.imap_unordered(search_cell, todo), 1):
+            r.update(commit=commit, job=job, ran="local", task_id=task_id(job, r))
             fh.write(json.dumps(r) + "\n")
             fh.flush()
-            if k % 12 == 0 or k == len(tasks):
-                print(f"[{k}/{len(tasks)}] {time.time() - t0:.0f} s", flush=True)
+            if k % 12 == 0 or k == len(todo):
+                print(f"[{k}/{len(todo)}] {time.time() - t0:.0f} s", flush=True)
 
 
 # ------------------------------------------------------------------ the review's stored product instances
@@ -277,7 +307,7 @@ def _commit() -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("job", choices=("stored", "search", "seeds", "science"))
+    ap.add_argument("job", choices=("stored", "search", "seeds", "large", "science"))
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--dir", type=Path)
     args = ap.parse_args()
