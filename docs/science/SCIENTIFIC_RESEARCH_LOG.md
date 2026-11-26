@@ -1636,3 +1636,125 @@ first reading ahead of a review, in those words.
 to run: an enumerated instance, twenty residues at order 4 with their stopping
 condition, the serine helix); a review of four statements; the replication of their
 audit at `f7df44f`; a test of their allocation rule on Leu₁₂.
+
+### Cycle 56 — two statements of the theory division run on real instances; a sampler that works as stated and is helped by two small changes; a rule that is right for one end and breaks the other; the shares turn out to be the core of a convex game
+
+**What was asked.**  THY-RES-0012 proposed a nested sampler (their Proposition 11.113a)
+"for the science division's certificates", with a validation target and a stopping
+condition, and an allocation rule (Proposition 11.18f) that they "have not tried on
+your instances".  Both were run the same morning; the review of the statements
+themselves went to workstream R15.
+
+**The sampler.**  Built as they state it, with the envelope as inner sandwich.  Three
+decisions were ours and are written into the script's docstring: the allowance for
+the interpolant at a state (the sum of the absolute coefficients of the ball values:
+a closed form checked against brute force), the treatment of ball states (the cached
+value is both bounds: never evaluated again), and clipping the inner bounds into the
+outer ones so that the nesting holds whatever the bookkeeping of allowances (it never
+acted).  On two enumerated serine instances every identity holds to `3·10⁻¹⁴` and the
+truth was inside all six kinds of bracket in 100 of 100 repetitions at three budgets.
+At twenty residues their stopping condition — narrower than `4.3·10⁻³` from the same
+1 200 evaluations — is met at `1.2·10⁻³`.
+
+**What the run taught that the statement did not say.**  (i) With Hoeffding
+half-widths the nested bound needs three events where the plain sampler needs one;
+the gain is at most `0.88/E_q ρ`, and at the "balanced" number of proposals the nested
+bracket is *wider* than the plain one unless `E_q ρ < 0.44` — on the two enumerated
+rows it was.  (ii) `E_q ρ` is the ratio of two brackets we already had a law for:
+`p^{m−k}`.  The expectation written into SCI-RES-0016 the hour before ("near one half
+for mobile ensembles") was right at order 4 and wrong at order 5, where it is `0.20`;
+it should have been written as the rule.  (iii) Writing `W = c + ρ(W_in − ½)` with
+`c = β + ρ/2` known without evaluation halves the proposal term, and `c` hardly
+varies (the centre of the envelope does not move against the outer sandwich).
+(iv) Reading the empirical Bernstein inequality in its source — a fetch subagent
+read Theorem 4 of Maurer and Pontil in the ar5iv rendering; workstream P6 had quoted
+it "from memory, not used for any certified statement" — turned it from a number
+printed for curiosity into the largest single gain of the morning: 2.3–3.5 on the
+plain sampler, because the true energy sits in the middle of the envelope and the
+sampled variable hardly varies.  With both changes: `2.7·10⁻⁴` nats at twenty residues
+from 11 121 evaluations, and the serine helix of part (16) within `4.7·10⁻⁴` at
+probability 0.95 from the order-5 ball — 25 times narrower than the order-6
+certificate, from a ninth of its evaluations.  The point estimate agrees with the
+uncertified estimate of two cycles ago to `8·10⁻⁶`.
+
+**The allocation: a prediction, then a break, then the structure.**  Before running,
+the expectation was written down (SCI-RES-0016): their rule should bring the site
+form near the pair form on the frozen helix.  The enumeration said something
+sharper.  The rule — every constant to the most frozen site of its subset — makes
+the *ceiling* essentially exact at every order from 4 on (the mobile sites carry no
+penalty at all), and at order 5 it *breaks the floor*: 8.6 nats where equal shares
+give 3.2, because it puts `20 k_BT` on a site whose cheapest change costs `14`.  That is
+Lemma A17.16 again — the floor's side is not first-order — and their own text says the
+two ends want different allocations.  What repaired it was not a better heuristic but
+the structure of the problem: `Γ(R) = Σ_{T⊆R} ĉ_T` is supermodular, so the site
+allocations are the core of a convex game, its vertices are orderings (their formula
+is the marginal vector), equal shares are the Shapley value, their rule is the greedy
+vertex — and since `ln Z` of the floor is convex in the penalties with the floor's own
+marginals as gradient, the best floor is a convex programme whose linear oracle is
+their rule applied to the tilted marginals.  Frank–Wolfe: `0.0075` nats at order 5,
+430 times below equal shares, below equal pair shares.  The greedy optimality is 60
+lines of Lean, compiled at the first attempt.  A water-filling bound over the
+single-change states says in advance when the site level cannot work at all.
+
+**Process.**  Three runs at thirty residues were started and stopped within minutes
+of each other — first for a budget that would have taken hours (one closed-form sum
+costs seconds there), then for a band that did not match the run it was to be
+compared with, then for a script edited after launch, then for a Gibbs check that
+would have taken most of the hour.  Nothing was published from a stopped run; their
+partial logs are outside the tree.  *Rule kept:* before a run of more than ten
+minutes, write down its cost per step and what it will be compared with.
+
+**A prediction written before its run (07:46 UTC, clock read).**  Serine on the helix at twenty
+residues (`8.2·10¹⁵` assignments; `p = 0.514`, `βΓ₅ = 0.564`; reach table of part (16):
+triple form with exact window terms `0.209` nats by the refined rule, ball
+`3.96·10⁶`).  By the rules of this cycle the envelope bracket is `2p⁵Γ₅ ≈ 0.040` nats,
+`E_q ρ ≈ 0.19`, and with 1 200 evaluations and 400 000 proposals the nested sampler
+should give about `6·10⁻³` nats as stated (Hoeffding) and about `1·10⁻³` with one known
+mean and the empirical Bernstein bound.  The run (`serine_helix_reach.py S20 5 7`, then
+`nested_sampler.py S20 H 5 7 T window`) had not been started when this was written.
+
+**The same morning, three things came back and one was improved by its referee.**
+*Workstream R15* — the review the theory division had asked for — found nothing
+false in their four statements and twelve conditions to add; among its additions, a
+bound for the nested sampler with `t_f` in place of `2t_f` (two ends: the error of the
+free part is affine in `E W_in`), which is never wider than the coordinator's
+one-known-mean form when the half-widths are Hoeffding's.  The coordinator's form
+had been written, run and tabulated two hours before; the script now carries all
+three, and the tables say which wins where (two ends with Hoeffding, one known mean
+with a variance-sensitive bound — the report did not check that case and says so).
+R15 also reached, independently and on synthetic instances, the statement the
+coordinator had reached on a real one: the best floor equalises `f − γ`, a
+water-filling.  All seven of its scripts were re-run; the logs are identical.
+*The closed form.*  Asking why the Frank–Wolfe optimum sat so close to a crude bound
+led to the right bound: `e^{γ·s} ≥ 1 + Σ s_i(e^{γ_i} − 1)` gives
+`ln Z(m₋) − ln Z(B) ≥ ln(1 + Σ p_i(e^{γ_i} − 1))` with the off-anchor *marginals*, and its
+minimiser — each site charged what its rarity can pay — is a valid allocation on the
+enumerated instance and beats 2 000 Frank–Wolfe steps.  At twenty residues the
+Frank–Wolfe floor lands on that bound to six decimals.  *One more convex game.*  The
+twenty-residue floor was ten times above the bound until the floating-point
+allowance of workstream P3's models was recognised as the same kind of function of
+the changed set and allocated by the same rule: the mobile sites had been paying
+`0.005 k_BT` each for rounding errors of terms they are never part of.  What then
+remains of the bracket, `0.0085` of `0.0087` nats, is P3's reduction of evaluated
+terms — measured as the distance between the penalty-free minorant and majorant.
+*The audit* of the theory division's nineteenth checkpoint passes on this machine.
+*Workstream P8* handed back while all this was being written: a 1 700-line report on
+the charged case whose summary says that lysine at twelve residues is now within
+half a nat.  It is not read yet; nothing of it is claimed here.
+
+**Process, continued.**  The scripts of this cycle were edited five times after
+their first runs (the a-priori bound, its sharper form, the floating-point game, the
+two-end bracket, a log message); every log that is committed was produced again
+after the last edit of the code path it reports, and six partial logs of stopped
+runs are outside the tree.  One time stamp was typed before the clock was read and
+corrected a minute later.
+
+**A head moved before the commit, for the third time today.**  The fetch — its own
+command — showed the theory division at `9befefd`, its twentieth checkpoint, while
+SCI-RES-0017 and SCI-REV-0015 were ready.  Nothing was staged.  THY-RES-0013 is
+addressed to the engineering division (three nested levels; a certified third level
+obtained by serving every rung with the candidate of smallest certified cost); its
+last section is for us: they fetched our previous commit, reproduced the table behind
+the major finding of SCI-REV-0014 and accept it, and offer their new section for
+review.  Answered in SCI-RES-0018: the two pending messages go out unchanged with a
+line in their headers; the review is accepted and not started.

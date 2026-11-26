@@ -126,6 +126,15 @@ barrier), not totals.
 
 ## Change note
 
+*Note after addendum A17 (17) (2026-11-26; no new version: no row changes).*  Two
+statements of the theory division were run on real instances.  Their nested sampler
+reaches the envelope at its own price in evaluations and brings the serine helix of
+version 5.4 within `5·10⁻⁴` nats at probability 0.95 from the order-5 ball; the choice
+of shares, which version 5.3 recorded as "a better allocation of the tail", has a
+structure — the site allocations are the core of a convex game, and the best floor
+is a convex programme.  Neither moves the frontier named in version 5.4: the
+constants of charged side chains.
+
 *Version 5.4 (2026-11-26, after addendum A17 (16)).*  §4 only, one row: the compact
 case has a third half — a compact ensemble that is *not* frozen (serine on a
 twelve-residue helix) is certified, by a lemma that costs a sandwich before it is paid

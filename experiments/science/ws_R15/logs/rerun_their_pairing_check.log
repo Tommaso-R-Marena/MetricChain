@@ -1,0 +1,27 @@
+=== re-run of their pairing_check.py at f7df44f (read-only: python3 -I -B, no output-file argument, so it writes nothing) ===
+pairing check for the randomised count of the Hamming ball (cube, order two); exact arithmetic
+ n  sets Q   draws  separated  (1) transcript  (2) involution  (3) max rel. change (4) S and S′  (5) same min on S   freq S: least, largest
+ 2      30   12000      0.847               0               0             1.98e-04            0                  0       0.453, 0.540
+ 3      30   12000      0.724               0               0             1.97e-04            0                  0       0.343, 0.542
+ 4      30   12000      0.610               0               0             1.93e-04            0                  0       0.217, 0.547
+ 5      30   12000      0.514               0               0             1.99e-04            0                  0       0.190, 0.537
+ 6      30   12000      0.428               0               0             1.94e-04            0                  0       0.117, 0.530
+ 7      30   12000      0.359               0               0             1.92e-04            0                  0       0.102, 0.525
+draws 72000, of which with separated magnitudes 41786; violations of (1), (2), (4), (5): 0, 0, 0, 0; largest frequency of S for one set Q: 0.547 (400 draws per set: one standard error is 0.025)
+ALL CLAIMS HELD
+exit code 0
+=== their stored output (out_pairing_check.txt) ===
+pairing check for the randomised count of the Hamming ball (cube, order two); exact arithmetic
+ n  sets Q   draws  separated  (1) transcript  (2) involution  (3) max rel. change (4) S and S′  (5) same min on S   freq S: least, largest
+ 2      30   12000      0.847               0               0             1.98e-04            0                  0       0.453, 0.540
+ 3      30   12000      0.724               0               0             1.97e-04            0                  0       0.343, 0.542
+ 4      30   12000      0.610               0               0             1.93e-04            0                  0       0.217, 0.547
+ 5      30   12000      0.514               0               0             1.99e-04            0                  0       0.190, 0.537
+ 6      30   12000      0.428               0               0             1.94e-04            0                  0       0.117, 0.530
+ 7      30   12000      0.359               0               0             1.92e-04            0                  0       0.102, 0.525
+draws 72000, of which with separated magnitudes 41786; violations of (1), (2), (4), (5): 0, 0, 0, 0; largest frequency of S for one set Q: 0.547 (400 draws per set: one standard error is 0.025)
+ALL CLAIMS HELD
+identical to the stored output: True
+RERUN COMPLETE
+seconds 13.2
+peak RSS MB of the child 13.078125

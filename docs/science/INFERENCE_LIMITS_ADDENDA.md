@@ -2554,6 +2554,285 @@ sampling; twelve residues; nothing in this table is a certificate).
     estimates inside the brackets.
 
 
+### (17) Two statements of the theory division run on real instances — a sampler that pays for the envelope, and which shares — and what each needed [P for validity: their Propositions 11.113a and 11.18f, read in their report at `f7df44f`, and the elementary statements of items 52–54 (one of them **V**); M for the numbers; added 2026-11-26]
+
+*What is whose.*  The nested sampler and its error bound, the allocation problem, its
+convexity and the first-order rule are the theory division's (THY-RES-0012 §2.3, §3.2;
+their Propositions 11.113a, 11.18f, unrefereed by their own account; our review of them
+is workstream R15).  They asked us to run the first and said of the second "we have not
+tried this on your instances".  The certified constants and band models are workstream
+P3's, the closed-form sums and share forms workstream P6's.  Ours here: the inner
+sandwich as built (item 48), the variant with one known mean (item 51), the reading of
+site shares as the core of a convex game with its consequences (items 52–54), the runs.
+*Nothing in this part has been refereed inside our division.*
+
+**A. The nested sampler.**
+
+48. **The inner sandwich, as built** [P, immediate].  Proposition 11.113a needs
+    `m₋ ≤ e₋ ≤ E ≤ e₊ ≤ m₊` with `e_∓` computable at a state without an evaluation.  We take
+    the envelope of the anchored expansion, the pointwise smallest penalty the
+    certified constants allow (part (15)):
+    `e_∓(x) = f(x) + Ĩ_{m−1}g(x) ∓ [env(x) + a(t) + ε_g]`, clipped into `[m₋(x), m₊(x)]`, with
+    `env(x) = Σ_{T ⊆ S(x)} ĉ_T` (workstream P6's closed form with the complement of the
+    changed set excluded — no subset is enumerated; or, when `C(n, m) ≤ 6000`, a table of
+    all `ĉ_T` and subset sums; the two agree to `3·10⁻¹⁶` kcal/mol), `ε_g = 10⁻⁷` kcal/mol
+    workstream P3's allowance for one evaluated value, and
+    `a(t) = ε_g·Σ_{v=0}^{m−1} C(t, v)·C(t−v−1, m−1−v)` for a state with `t ≥ m` changed sites —
+    the sum of the absolute coefficients with which evaluated ball values enter the
+    interpolant there (the coefficient of `g(x_V)` in `I_{m−1}g(x)` is
+    `Σ_{j ≤ m−1−|V|} (−1)^j C(t−|V|, j) = (−1)^{m−1−|V|} C(t−|V|−1, m−1−|V|)`; checked against brute
+    force for `t ≤ 13`, `m ≤ 7`).  **At a state inside the ball `e₋ = e₊` = the cached value:
+    `ρ = 0`, never evaluated again.**  Clipping makes the nesting hold whatever the
+    bookkeeping of allowances in the outer models; it was never active.  The estimator
+    targets `Z(Ê)`, `Ê` the evaluated energy clipped into `[m₋, m₊]`; `|Ê − E| ≤ ε_g`, so
+    `β ε_g` is added to both ends once (the theory division's sharper form of our rounding
+    remark, THY-RES-0012 §2.2).
+
+49. **Validation by enumeration** [M; `nested_sampler.py --enum`].  Serine on the helix
+    at order 4, triple shares, exact window terms: five residues (17 496 states) and six
+    (104 976).  Both sandwiches hold at every state; `Z(e₊) = Z(m₊) + A·E_q β`,
+    `Z(e₋) − Z(e₊) = A·E_q ρ` and `Z(Ê) = Z(m₊) + A·E_q W` hold to `3·10⁻¹⁴`; `ρ = 0` at every ball
+    state; `W_in ∈ [0.41, 0.50]` and `[0.19, 0.50]`.  In 100 repetitions each of three
+    proposal budgets, with 1 200 evaluations, the truth is inside every one of the eight
+    kinds of bracket of items 50–51 (plain and nested; Hoeffding and empirical
+    Bernstein; as stated, two ends, one known mean) in 100 of 100.
+
+50. **What it gives at 1 200 evaluations** [M].  Widths in nats, `δ = 0.05`.  "Plain" is
+    the sandwich sampler of Proposition 11.113 on the outer sandwich with the same
+    number of evaluations.  "H": Hoeffding half-widths, as both propositions are stated.
+    "EB": the empirical Bernstein bound of Maurer and Pontil (2009, Theorem 4:
+    `E Z − Z̄ ≤ √(2V_n ln(2/δ)/n) + 7 ln(2/δ)/(3(n−1))` for i.i.d. variables in `[0, 1]`, `V_n` the
+    sample variance — read in the ar5iv rendering of arXiv:0907.3740 by a fetch
+    subagent, and in the same form by the theory division; applied two-sided).
+    "two ends": the sharper bound found by our review workstream R15 (item 51 (iii));
+    "one mean": item 51 (iii).
+
+    | instance (order; outer form) | outer `D` | envelope bracket | `E_q ρ` | proposals | plain H | plain EB | **nested, as stated (H)** | nested, two ends (H) | nested, two ends (EB) | **nested, one mean (EB)** |
+    |---|---|---|---|---|---|---|---|---|---|---|
+    | Ser₅, helix (4; triples, window) — enumerated | 0.1139 | 0.0628 (exact) | 0.551 | 253 200 | 0.00897 | 0.00254 | 0.00704 | 0.00633 | 0.00205 | 0.00182 |
+    | Ser₆, helix (4; triples, window) — enumerated | 0.4666 | 0.2678 (exact) | 0.566 | 239 776 | 0.0390 | 0.0166 | 0.0314 | 0.0283 | 0.0127 | 0.0122 |
+    | **Val₂₀, PPII** (4; triples, workstream P6's models; `3.5·10⁹` assignments) | 0.0546 | ≈ 0.0075 | 0.137 | 400 000 | 0.00429 | 0.00147 | **0.00121** | 0.00094 | 0.00030 | **0.00027** |
+    | **Ser₁₂, helix** (5; triples, window, band 7; `4.9·10⁹` assignments) | 0.0942 | ≈ 0.0185 | 0.196 | 400 000 | 0.00739 | 0.00216 | **0.00257** | 0.00211 | 0.00055 | **0.00047** |
+
+    (Enumerated rows: means over 100 repetitions.)  **The theory division's stopping
+    condition — at twenty residues and order 4, narrower than `4.3·10⁻³` from the same
+    1 200 evaluations — is met: `[518.261814, 518.263022]`, `1.2·10⁻³` nats, as stated
+    (`[518.261948, 518.262888]` with two ends);
+    `[518.262283, 518.262553]`, `2.7·10⁻⁴`, with one mean and empirical Bernstein** — from
+    11 121 evaluations in all, where 137 441 (order 5 and 50 000 sampled) gave `2.0·10⁻⁴`
+    on the pair sandwich and `7.4·10⁻⁴` on the site sandwich (SCI-MSG-0025 §3).  For the serine helix: `[227.367412, 227.369984]` as stated,
+    `[227.368462, 227.368935]` with one mean and empirical Bernstein — 25 times narrower
+    than the order-6 certificate of part (16) (`0.0116` nats from 4.3 million
+    evaluations), from 482 706 evaluations, with probability 0.95 instead of
+    certainty.  The point estimate `227.368699` agrees with the uncertified estimate of
+    part (16) (`227.368707 ± 0.000037`) to `8·10⁻⁶`.  No evaluated energy lay outside the
+    inner sandwich (2 400 evaluations); the true remainder is on average `0.0024` and
+    `0.0003` of the envelope at the evaluated states.  The envelope bracket of the serine
+    helix estimated from the proposals alone, `0.01847`, is the rule `2p^mΓ_m` of part (16)
+    (`0.0184`).
+
+51. **What decides the gain** [P, arithmetic; M].
+    (i) *With Hoeffding half-widths the nested bound is `2t_f + ρ̄·t₆` against the plain
+    sampler's `t₂`* (`t_j = √(ln(j/δ)/(2N))`): the gain at equal evaluations is at most
+    `√(ln(2/δ)/ln(6/δ))/E_q ρ = 0.878/E_q ρ` (at `δ = 0.05`), reached only as the proposals
+    grow; at the "balanced" number `4N/(E_q ρ)²` of the proposition the nested bracket
+    is *wider* than the plain one unless `E_q ρ < 0.44` (rows 1, 2: `0.0113` and `0.0502`
+    against `0.0090` and `0.0390` at that number).  Workstream R15 gives the exact
+    criterion: narrower iff `2√(N/N_f) + ρ̄ < 0.878`.  (ii) *`E_q ρ ≈ p^{m−k}`* for an outer form
+    of level `k` in an ensemble with a fraction `p` of changed sites — the ratio of the
+    two rules of part (16): `0.55`, `0.57` (order 4, triples, `p = 0.54`), `0.20` (order 5,
+    triples: `p² = 0.28`), `0.14` (valine, `p = 0.18`).  So the nested sampler helps most
+    where the outer form is far below the order — and for frozen ensembles.
+    (iii) *The proposal term can be halved, in two ways* [P].  **Two ends** (workstream
+    R15, SCI-REV-0015; found in review, added to the script afterwards): the error of
+    the free part, `(E_qβ − β̄) + (E_qρ − ρ̄)μ`, is affine in `μ = E W_in ∈ [0, 1]`, so it is at
+    most the larger of the errors of the means of `β` and of `β + ρ` — the two ends
+    `Z(e₊)`, `Z(e₋)`: `|E_q W − (β̄ + ρ̄W̄_in)| ≤ max(h_β, h_{β+ρ}) + ρ̄·h_w`, i.e. `t_f + ρ̄t` in place of
+    `2t_f + ρ̄t`, at the same `ln(6/δ)`.  **One known mean** (ours, written before the
+    review): `c = β + ρ/2` is computable without an evaluation and
+    `E_q W = E_q c + E_q ρ·(E_in W_in − ½)`, so
+    `|E_q W − (c̄ + ρ̄(W̄_in − ½))| ≤ h_c + h_ρ(|W̄_in − ½| + h_w) + ρ̄·h_w`.  With Hoeffding
+    half-widths the two-end form is never wider than this (R15); with a
+    variance-sensitive bound the order reverses on every row of item 50, because the
+    centre of the inner sandwich hardly moves relative to the outer one and `c`
+    varies far less than either end (standard deviations under `q` on Ser₅: `β` 0.18,
+    `β + ρ` 0.19, `ρ` 0.37, `c` 0.012).  (iv) *The variance-sensitive bound
+    matters more than the nesting* on these instances: it narrows the plain sampler
+    by 2.3–3.5, because `W` and `W_in` vary little (the energy sits in the middle of
+    the envelope: `W_in ≈ 1/(1 + e^{β·env})`), and what remains is mostly its term
+    `7 ln(·)/(3(N−1))`, two to five times the variance term at 1 200 evaluations — **the
+    certified width still falls nearly as `1/N`, not `1/√N`**, until the two terms cross
+    (at about `49 ln(12/δ)/(18·Var W_in)` evaluations: 7 000 for the valine instance,
+    120 000 for the serine helix).  With it the nested sampler *as stated* is no
+    better than the plain one on the two enumerated rows even with 16 times the
+    balanced number of proposals (`0.0026` against `0.0025`; `0.0149` against `0.0166`) —
+    the two proposal means `β̄`, `ρ̄` have large variances — while with two ends or with
+    one known mean it is better in every row.
+
+**B. Which shares.**
+
+52. **Site shares are the core of a convex game** [P; classical facts, see the
+    reading levels below; one consequence **V**].  Let `Γ(R) = Σ_{T ⊆ R} ĉ_T`.  Site
+    penalties `γ ≥ 0` cover iff `Σ_{i∈R} γ_i ≥ Γ(R)` for every `R`.  `Γ` is supermodular
+    (`Γ(R ∪ {i, j}) − Γ(R ∪ {i}) − Γ(R ∪ {j}) + Γ(R) = Σ_{T ∋ i, j, T ⊆ R ∪ {i,j}} ĉ_T ≥ 0`; checked on all
+    4 096 sets of item 55), i.e. a convex game, a non-negative combination of
+    unanimity games.  Hence (a) the minimal covering vectors are its *core* (cover,
+    with equality on the full set); (b) the allocations of Proposition 11.18f at level
+    one parametrise exactly the core (the core of a sum of convex games is the sum of
+    their cores; the core of a unanimity game is the simplex on its set); (c) its
+    vertices are the *marginal vectors* of the orderings of the sites,
+    `γ_i = Γ(R_i) − Γ(R_i ∖ {i})`, `R_i` = `i` and the sites after it — `n + 1` closed-form sums
+    on nested sets, no subset enumerated (equal to the direct assignment of every `ĉ_T`
+    to the first site of `T` to `3·10⁻¹³` kcal/mol); (d) equal shares, workstream P3's
+    site form, are the Shapley value, the barycentre of the `n!` marginal vectors;
+    (e) **for a first-order cost `Σ p_i γ_i` the marginal vector of the ordering by
+    increasing `p` — most frozen first — is optimal among all covering vectors**
+    (Abel summation: `Σ p_iγ_i = Σ_j (p_(j) − p_(j−1))·γ(R_(j)) ≥ Σ_j (p_(j) − p_(j−1))·Γ(R_(j))`, with
+    equality for the marginal vector) — **[V]** `ScienceA17.greedy_optimal` in
+    `experiments/science/pi_inference/lean/CoreGreedy.lean` (Mathlib only; exit 0;
+    standard axioms).  This is the formula of Proposition 11.18f(c).  *Reading levels:*
+    Shapley, "Cores of convex games", Int. J. Game Theory 1 (1971) 11–26 — statement
+    and bibliographic data confirmed by a web search (publisher's page and secondary
+    sources), the paper not opened; the converse (Ichiishi 1981) and the greedy rule
+    on base polyhedra (Edmonds 1970) from memory, attribution confirmed by secondary
+    sources only.  Nothing here is claimed new as mathematics.
+
+53. **The two ends are two different problems** [P].  With `m_∓ = B ∓ Σ_i γ_i[x_i ≠ x⁰_i]`
+    (`B` the evaluated model or its solvable minorant / majorant): `ln Z(m₋)` is convex in
+    `γ` (a log-sum-exp of affine functions) with gradient `β ×` the off-anchor marginals
+    of the floor model itself — exact by transfer matrix.  So **the best floor over
+    the core is a convex programme whose linear oracle is item 52(e) applied to the
+    tilted marginals**: Frank–Wolfe, with a duality gap that certifies how far the
+    iterate is from the best floor any site allocation can give.  `ln Z(m₊)` is convex
+    too, and is to be *maximised*: its maximum over the core is at a vertex — an
+    ordering; "most frozen first" by item 52(e) to first order, improved by adjacent
+    swaps.  Floor and ceiling use different penalties (each covers).  The theory
+    division states the convexity and "the two ends want different allocations"
+    (Proposition 11.18f(b)); what the core adds is that the vertices are orderings,
+    that the oracle is a sort, and that everything is computable beyond enumeration.
+
+54. **A floor no site allocation can beat** [P, elementary].  For 0/1 indicators
+    `e^{βγ·s} = Π_i (1 + s_i(e^{βγ_i} − 1)) ≥ 1 + Σ_i s_i(e^{βγ_i} − 1)`, so for the floor
+    `m₋(γ) = B − Σ_i γ_i s_i` over a base model `B`,
+    `ln Z(m₋(γ)) − ln Z(B) ≥ ln(1 + Σ_i p_i(e^{βγ_i} − 1))`, `p_i` the off-anchor marginal of
+    site `i` under `B` (exact by transfer matrix); and every covering `γ` has
+    `Σ_i βγ_i ≥ βΓ_m`.  The minimum of the right-hand side under that constraint is
+    water-filling: `βγ_i = ln(λ/p_i)⁺` with `Σ_i ln(λ/p_i)⁺ = βΓ_m`, value
+    `ln(1 + Σ_{active}(λ − p_i))` — **each site is charged what its rarity can pay**, and the
+    site level cannot work **when `βΓ_m` does not fit under the depths `−ln p_i`**.  The
+    bound is exact to first order in the boosts.  **On Leu₁₂ (item 55) the closed-form
+    water-filling vector is itself a valid allocation — it covers all 4 096 sets — and
+    attains the bound:** order 5: bound `0.00742`, the vector `0.00744`, Frank–Wolfe after
+    2 000 steps `0.00752`; order 6: `2.64594·10⁻⁵`, `2.64597·10⁻⁵`, `2.64613·10⁻⁵`.  So where it
+    covers, *the optimal site shares are known in closed form*; that it covers is not
+    a theorem (a subset made of uncharged sites only would defeat it) and beyond
+    enumeration it is Frank–Wolfe that guarantees the covering.  At order 4 the bound
+    is 19.3 and the truth 186.7: the all-changed state is not a first-order effect.
+    (A weaker form, with the probability of the cheapest single-change state of each
+    site in place of its marginal, needs only `Γ_m` and the ball of radius one: `0.0045`
+    and `1.6·10⁻⁵` at orders 5 and 6.  The water-filling routine was checked against a
+    numerical optimiser on random instances.)
+
+54a. **The floating-point allowance is a convex game too** [P, immediate].  Workstream
+    P3 bounds the rounding of the evaluated terms at a state with changed set `S` by
+    `Φ(S) = ε_g Σ_{s=1}^{m−1} C(|S|, s)·2^s` — a sum over the subsets of `S` of non-negative
+    weights, the same structure as `Γ`.  Its site allocation in P3's models
+    (`ε_g Σ_s C(n−1, s−1)2^s/s` per site) is the Shapley value of that game and charges a
+    mobile site as if every other site had changed: `0.0049 k_BT` per site at twenty
+    residues and order 6, which on three mobile sites costs `0.0023` nats — ten times
+    the optimal remainder penalty there.  Allocated by the same rule (the marginal
+    vector of `Γ + Φ`: the head of a suffix of `r` sites gets `ε_g Σ_s C(r−1, s−1)2^s`), the
+    mobile sites pay next to nothing.  `site_allocation_fw.py` does this from here on.
+
+55. **Leucine on the helix, twelve residues, enumerated** [M, exact;
+    `allocation_core_test.py`].  Off-anchor frequencies `0.074, 0.106, 0.280` at three
+    sites and below `10⁻³` at nine; the cheapest single change costs `0.9–2.5 k_BT` at the
+    three and `11.4–14.1 k_BT` at the nine.  Exact evaluated terms, no allowances;
+    `U` = `ln Z(m₋) − ln Z(E)` (upper end), `L` = `ln Z(E) − ln Z(m₊)` (lower end), nats.
+
+    | order (`βΓ_m`; ball) | equal shares: `U`, `L` | most frozen first (Proposition 11.18f(c)): `U`, `L` | **Frank–Wolfe floor, best-ordering ceiling**: `U`, `L` | equal pair shares: `U + L` | equal triple shares: `U + L` |
+    |---|---|---|---|---|---|
+    | 3 (1 734; 79) | 1 606, 0.53 | 1 621, 0.076 | 1 606, 0.076 | 1 606 | 1 606 |
+    | 4 (316; 299) | 186.9, 0.53 | 243.3, `4.8·10⁻⁵` | 186.7, `3.8·10⁻⁵` | 186.8 | 186.7 |
+    | **5 (45.1; 794)** | 3.21, 0.50 | **8.59**, `2.3·10⁻⁵` | **0.0075**, `2.1·10⁻⁵` | 0.047 | 0.00035 |
+    | 6 (5.0; 1 586) | 0.173, 0.135 | `3.1·10⁻⁵`, `7·10⁻⁶` | `2.6·10⁻⁵`, `7·10⁻⁶` | 0.0049 | `3.6·10⁻⁵` |
+
+    Three things.  **(i) The first-order rule makes the ceiling exact and can break
+    the floor.**  At every order from 4 on, "most frozen first" brings the lower end
+    from 0.5 nats to a few `10⁻⁵` — the mobile sites carry no penalty at all, because
+    every subset of four or more sites contains a frozen one.  But at order 5 it puts
+    `20.2 k_BT` on a site whose cheapest change costs `14.1`, and the floor moves there:
+    `U = 8.6` nats, worse than equal shares.  The rule is first-order, the floor is
+    not (Lemma A17.16: the floor's side carries `e^A`); the theory division's own
+    homogeneous example shows the same direction.  **(ii) The convex optimum repairs
+    it:** Frank–Wolfe over the core gives `U = 0.0075` at order 5 — 430 times below equal
+    shares and 4 times below equal *pair* shares — with penalties of `4.3–7.0 k_BT` on the
+    frozen sites, all under their costs, and none on the mobile ones.  **(iii) Where
+    the constants are small the rule alone suffices:** at order 6 it turns the site
+    form's 0.31 nats into `3.9·10⁻⁵`, what equal triple shares give.  At order 4 nothing
+    helps the floor, as part (16) said: the envelope's own floor is 186.7 nats.
+    **(iv) The lower end alone is a one-sided certificate at order 4:** `ln Z ≥ 374.345305`
+    (exact `374.345343`) from the 299 evaluations of the order-4 ball — but for a frozen
+    ensemble a lower bound of `Z` is cheap anyway (the eight states of the three mobile
+    sites alone give it to `10⁻⁵`); the upper end is what an order is paid for.
+
+56. **Beyond enumeration** [M; `site_allocation_fw.py`: transfer matrices, closed-form
+    sums on nested sets, the floating-point game allocated as in item 54a;
+    `site_level_bound.py` for the bound of item 54].  The instance of item 55 through
+    that code path, with exact window terms: equal shares `[373.850181, 377.559803]`
+    (the site form of part (16), digit for digit); most frozen first at both ends
+    `[374.345320, 382.933716]`; Frank–Wolfe floor (200 steps, duality gap `1.8·10⁻³`) and
+    best-ordering ceiling **`[374.345322, 374.353599]`, 0.0083 nats** (exact `374.345343`).
+    Longer helices, with workstream P3's reduced (pairwise, banded) models; widths in
+    nats:
+
+    | instance | `βΓ_m` | bound of item 54: floor above the penalty-free minorant | equal site shares (P3) | most frozen first, both ends | **Frank–Wolfe floor, best-ordering ceiling** | equal pair shares (part (14)) |
+    |---|---|---|---|---|---|---|
+    | **Leu₂₀, order 6** (band 19; ball 21 700) | 24.3 | `2.4·10⁻⁴` | 0.634 | 0.0170 | **0.0087**, `[593.300656, 593.309394]` (31 steps, duality gap `10⁻⁶`) | 0.0160 |
+    | Leu₂₀, order 5 (band 19; ball 6 196) | 166.6 | 0.89 | 10.5 | 73.6 | 2.02 after 40 steps (duality gap 1.95) | not run |
+    | Leu₃₀, order 5 (band 20; ball 31 931) | 340.6 | 3.46 | 41.8 | 130 | 24.5 after the two steps allowed (the bound already says no) | 0.1015 |
+
+    Three things.  **(i) Where `βΓ_m` fits under the depths** — order 6 at twenty
+    residues — the Frank–Wolfe floor reaches the bound of item 54 to six decimals
+    (`593.309394`) in 31 steps and 414 closed-form sums, and the site form — one-body
+    penalties on P3's pairwise models, the simplest class of the certificate — is
+    narrower than equal pair shares and 73 times narrower than equal site shares.
+    What is left of the bracket there, `0.0085` of `0.0087` nats, is P3's reduction of
+    the evaluated terms to pair tables (the penalty-free minorant and majorant,
+    `593.309150` and `593.300678`, are that far apart; `0.0067` to `0.0086` on all four
+    instances of this item), not the penalties: with optimal shares **the remainder is no
+    longer the bottleneck of a frozen helix at order 6**; open problem D9(b), (c) is.
+    **(ii) Where it does not fit** — order 5 at twenty and thirty residues — the bound
+    says so before anything is built (0.89 and 3.46 nats), and there the level of the
+    shares is the lever, as the theory division says.  **(iii) Even there the site
+    level gives the best ceiling:** at thirty residues and order 5 the vertex "most
+    frozen first" gives `ln Z ≥ 866.911009` where the pair form has `866.879220`; every
+    certified bracket is valid, so their intersection is: `[866.911009, 866.980721]`,
+    0.070 nats where the pair form alone had 0.10.  Sandwiches checked at 400 Gibbs
+    states of the true ensemble and 2 000 exact samples of each floor: no violation.
+    *Not done:* thirty residues at order 6 (the run had not finished when this was
+    written; `βΓ₆ = 54.8` should fit under the depths); exact window terms at twenty
+    and thirty residues (each transfer-matrix pass adds thousands of tables in the
+    present code — too slow for an optimiser).
+
+57. **What this part changes** [summary].  (i) The theory division's nested sampler
+    works on real sandwiches as stated, and their stopping condition is met; its gain
+    is `0.88/E_q ρ` at best with Hoeffding half-widths, `E_q ρ ≈ p^{m−k}`, and two small
+    changes — one known mean, a variance-sensitive bound — are worth more than the
+    nesting itself on these instances.  (ii) With sampling the order-5 ball certifies
+    the serine helix within `5·10⁻⁴` nats at probability 0.95: the statement of part
+    (16) with 25 times less width and 9 times fewer evaluations than order 6.
+    (iii) Open problem D9(a), "optimal shares", which part (15) closed for mobile
+    ensembles ("no allocation helps"), is **solved at the site level for frozen ones**:
+    the valid site penalties are the core of a convex game, the best floor is a convex
+    programme with a sort as oracle, the best ceiling an ordering — and the simplest
+    model class of the certificate (one-body penalties) then matches or beats equal
+    pair shares.  (iv) The first-order rule of Proposition 11.18f(c) needs a caveat for
+    the floor: it is optimal for the lower end, and for the upper end only while each
+    site's penalty stays below the cost of changing it.  (v) Not done: optimal shares
+    at the pair level (the oracle is no longer a sort); the nested sampler with an
+    optimally allocated outer sandwich; a referee.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

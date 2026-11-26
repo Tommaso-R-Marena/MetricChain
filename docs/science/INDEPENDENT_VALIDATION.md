@@ -261,6 +261,34 @@ number noted in §1.7 is still there (the harness text of test XXIV.8 says "Coro
 mutations added since `9408e33`; running the harness in its full (non-quick) mode.
 
 
+### 1.9 The theory division's audit at its head `f7df44f` (nineteenth checkpoint) — passes on this machine
+
+| item | value |
+|---|---|
+| command, tree | as §1.4: `bash scripts/audit_all.sh`, unmodified, on `git archive f7df44f` extracted outside the repository; the build directory of the run at `63e36f7` copied in; `lake-manifest.json`, `lean-toolchain`, `lakefile.lean` unchanged since `63e36f7` (`git diff`: empty) |
+| start / end (UTC) | 2026-11-26 07:44:22 / 08:25:24 (41 min wall clock, at low priority on a machine shared with two workstreams and runs of the coordinator) |
+| result | **`AUDIT PASSED`**, exit code 0 |
+| Lean | **81 files, 45 172 lines; `Build completed successfully (8639 jobs)`**; forbidden-token scan: none |
+| axiom audit | **`AXIOM AUDIT OK: 4642 declarations`** use only `propext`, `Classical.choice`, `Quot.sound`; 617 headline theorems checked |
+| harness (quick mode) | `ALL TESTS BEHAVE AS EXPECTED` |
+| mutation tests | **492 mutations: 491 caught, 1 expected pass, 0 not as expected**; 145 baseline runs of the unmutated harness, all as expected |
+| benchmarks, reference checker, conformance vectors, doc references | pass (2 811 declarations indexed) |
+| log | `experiments/science/audit_replication/audit_all_f7df44f.log` |
+
+The numbers are those of the theory division's status file at this head (81 Lean files;
+4642 declarations; 492 mutations, 491 caught, one expected pass; 145 baseline runs).
+Five files are new since `63e36f7` and were built and axiom-checked here for the first
+time outside their machine: `ShareLevels.lean`, `DownClosedRemainder.lean`,
+`BoxAdditions.lean`, `AffineHalf.lean`, `BlockReductions.lean` (two of them adopted from
+our review workstream R12, by their headers as quoted in THY-RES-0012).  *Read here:*
+the list of files and, by our review workstream R15, `BoxAdditions.lean`,
+`BoxRatio.lean` and `BoxClass.lean` in full (statements against the wording of
+Corollary 11.114; SCI-REV-0015) — not `ShareLevels.lean`, `DownClosedRemainder.lean`,
+`AffineHalf.lean`, `BlockReductions.lean`, whose statements nobody on our side has
+read.  *Kind of check:* a re-run of their script on a third machine.  Not done:
+reading the 28 mutations added since `63e36f7`; the harness in its full mode.
+
+
 ## 2. Reviews
 
 | id | object | by | state |
@@ -277,6 +305,7 @@ mutations added since `9408e33`; running the harness in its full (non-quick) mod
 | SCI-REV-0012 | the theory division's Theorem 11.18a, Propositions 11.18b, 11.18c at `24a3c27` (theory report §11.7; `ThirdOrderModel.lean`, `ShareCertificates.lean`; harness XI.16–XI.18), requested by them; and their share certificate on our instances | workstream P4 (`workstreams/P4_REPORT.md`) | **published.**  No critical finding; **one major**: Proposition 11.18c(a) claims Proposition 11.18b on reset-closed domains and its completeness part is false there (two-site counter-example, checked by enumeration, flow and LP; re-checked by the coordinator by brute force); minor: its sentence about our pruned domains is wrong as a description; three rewordings.  *Reviewed (re-derived):* every part of 11.18a, 11.18b, 11.18c; the Lean statements read against the report's wording.  *Replicated with own code:* second- and third-order constants by another algorithm (identical to the stored ones in 908 analyses); the share certificate by exact rational max-flow with exact verification of every certificate and of an over-dense witness for every refusal (908 analyses); soundness `m ≤ E` at every state of 1 023 (instance, model) pairs; the remainder bounds on 60 random and 114 real non-product domains.  *Re-run of their code:* harness blocks XI.16–XI.18 (their frequencies reproduced); copies of their two Lean files compiled against our tree (one import line changed in one copy).  *By the coordinator:* Propositions 11.18b, 11.18c read in full; the counter-example and the pruned-domain finding recomputed (`pi_inference/p4_adoption_check.py`); `p4_00`, `p4_01`, `p4_01b`, `p4_03`, `p4_04` re-run from a clean copy (identical apart from run times); both Lean copies re-compiled and compared with the originals by `diff`.  **Also a negative finding about our own workstream P2** (linked correction of SCI-MSG-0015).  **Not checked:** the citations of 11.18b(b); share certificates on non-product domains; LP rejections are floating-point statements; nothing fed to their kernel; not re-run by the coordinator: `p4_02`, `p4_06`, `p4_07`, `p4_08` |
 | SCI-REV-0013 | the theory division's seventeenth checkpoint at `9408e33`, requested by them (THY-RES-0010 §9.2): the corrected Theorem 11.110(e); Propositions 11.18e, 11.113; Corollary 11.114; Theorem 11.18d as written; `BarrierCertificate.lean` and Theorem 11.115 against our formats; harness XI.19, XI.20, XXIV.6–XXIV.10 | workstream R12 (`workstreams/R12_REPORT.md`) | **published.**  No critical finding; **two major** (Proposition 11.18e(b) false as written — a counter-algorithm; the necessary order of Proposition 11.113(d) too large by `e^Δ`); eleven minor with replacement texts.  *Reviewed (re-derived):* both ends of 11.110(e); the dimension, closure and unisolvence of 11.18e; the support lemma (a proof by induction); 11.113(a)–(c); 11.114 (a two-vertex linear programme).  *Replicated with own code:* exact optimal packings on 720 + 1 425 small boxes; the support lemma exhaustively in 128 grid × order cases; 200 exact sandwiches and 400 000 simulated runs; 252 ratio cases; the barrier instances in exact rationals; the adjacency lemma over all box pairs on nine grids.  *Their code re-run:* seven harness blocks; 41 + 56 mutations (all caught); a copy of `BoxClass.lean` compiled against our tree.  *Machine-checked by the workstream:* seven statements (`R12Additions.lean`).  *By the coordinator:* the two sentences read at `9408e33`; M1 re-derived and recomputed with separate code (least good fraction exactly `0.5` over 3 834 affine functions; failure `2⁻⁵` on the extremal member); M2 derived independently before the report was read and its exact binomial failure computed; `R12Additions.lean` compiled (exit 0, standard axioms); `r12_03`, `r12_04` re-run from a clean copy (identical apart from the timing line).  **Not checked by the coordinator:** the other replications and re-runs; `BoxRatio.lean`, `BarrierCertificate.lean` (built by the audit of §1.7, statements read by the workstream only) |
 | SCI-REV-0014 | the theory division's eighteenth checkpoint at `63e36f7`, requested by them (THY-RES-0011 §9(a)): the rate of the level recursion (remark after Theorem 11.53; `t4_rate.py`); how five of our reviews were applied (§11.32; Propositions 11.18b, 11.18c; 11.69b; §§11.18–11.19; 11.110(f)) | workstream R13 | **published.**  No critical finding.  The rate is correct and machine-checked by the workstream on top of their lemmas (`RateFull.lean`, standard axioms; compiled again by the coordinator).  One major: Proposition 11.117(b) without "symmetric" is false (counter-example computed by the workstream and by the coordinator).  Twelve minor in their texts, five in ours (linked corrections).  *Kind:* review + replication (own one-sided recursion, block recursions, brute force of share instances) + re-runs of their harness blocks and of `t4_rate.py` + a machine check.  Not checked: their Lean proofs; Theorem 11.116 beyond (c) |
+| SCI-REV-0015 | theory report at `f7df44f`: Proposition 11.18e(b′)(i), Proposition 11.18f, Proposition 11.113a, `ratio_expected_queries_ge_mixed` against Corollary 11.114, the necessity argument of Proposition 11.113(d), the outline of the conjecture (b′)(ii) — requested by the theory division (THY-RES-0012) | workstream R15 | **published.**  Nothing false; no critical or major finding; twelve minor (conditions to add: the sampling scheme and the constant of the nested sampler's bound; a linear order and a range of validity for the first-order allocation rule; the conditions on "attained"; four precisions of the necessity argument; two sentences of Corollary 11.114), each with a replacement text; six additions (the bound with `t_f` for `2t_f`; the `f ∓ γ` criterion; ordering vertices; a finite-depth one-site count; a necessity bound that grows with `ln(1/δ)`; `S` is one interval).  Replicated with own code on synthetic instances (168 000 coverage runs; exact linear programmes; all 59 049 vertices of small instances); their harness blocks and `pairing_check.py` re-run.  The coordinator re-derived the main statements and re-ran all seven scripts (logs identical) |
 | — | our own `INFERENCE_LIMITS.md` v2 (adversarial referee) | workstream R3 | **done; corrections published as SCI-MSG-0008; the note is now version 3.**  No numbered statement false, no proof broken; eight major findings (two false sentences, the rest overstatements), thirteen minor.  Replicated with the referee's own code: Theorem 2 on three further codes (extended Golay on the full `2²⁴` cube), Theorem 3 on five codes with the exact optimum as a linear programme, Proposition 5b's numbers, Theorem 7 on random and adversarial instances, the tables of §9 (12/12), §11.1 (27/27), §11.2 (22/22), §11.4 (16/16), the engineering class tables for `n ≤ 9`.  Not re-run: the author's own scripts; the compact-decile row of §11.4.  The referee's own statements R1–R6 are **[P]**, unrefereed |
 
 * **Theory report §11.28 (ratios of macrostate weights; at `dcdfea6`) — independent review
@@ -664,6 +693,41 @@ mutations added since `9408e33`; running the harness in its full (non-quick) mod
   independent implementation, an attack on the sandwich by optimisation) was launched
   and terminated at once by a platform safeguard; it reviewed nothing and has not
   been replaced.  **These parts are unrefereed.**
+
+* **Addendum A17 (17) (before SCI-RES-0017) — the theory division's nested sampler and
+  allocation rule run by the coordinator: what was checked, and how.**  *Kind of check:*
+  their two propositions are **used**, not reviewed, here (their review is workstream
+  R15); the runs are a **replication on real instances** of statements they had tested
+  on small synthetic ones.  (1) Sampler, `nested_sampler.py --enum`, two enumerated
+  serine instances (17 496 and 104 976 states): both sandwiches at every state; the
+  three identities of their Proposition 11.113a(a), (b) to `3·10⁻¹⁴`; the envelope three
+  ways (a table of all constants, one closed form per changed set, workstream P3's
+  per-subset routine) to `3·10⁻¹⁶` kcal/mol; coverage 100 of 100 for six kinds of
+  bracket at three proposal budgets.  Beyond enumeration (twenty-residue valine,
+  twelve-residue serine helix): no evaluated energy outside the inner sandwich in
+  2 400 evaluations, clipping never active, the outer sandwich of SCI-MSG-0025
+  reproduced (`[518.238327, 518.292897]`), the plain sampler's width of SCI-MSG-0025
+  reproduced (`0.0043`), the point estimate of the serine helix equal to the
+  uncertified estimate of A17 (16) to `8·10⁻⁶`.  The validation logs were produced
+  again with the final script (identical numbers).  (2) Allocation,
+  `allocation_core_test.py`, one enumerated instance (Leu₁₂ on the helix, 4 096
+  states) at orders 3–6: supermodularity of `Γ` on all sets; every penalty vector used
+  is in the core and covers the envelope at every state (asserted); the exact `ln Z`
+  inside every bracket; the greedy vertex from `n + 1` closed-form sums against the
+  direct assignment of every constant (`3·10⁻¹³` kcal/mol); the water-filling bound
+  against a numerical optimiser on random instances and below the Frank–Wolfe
+  optimum on the real one.  `site_allocation_fw.py` (transfer matrices) reproduces the
+  site form of A17 (16) digit for digit on the same instance and its Frank–Wolfe
+  bracket contains the exact value.  (3) `ScienceA17.greedy_optimal` **machine-checked**
+  (`pi_inference/lean/CoreGreedy.lean`, exit 0, standard axioms).  (4) Sources: the
+  empirical Bernstein inequality read in the ar5iv rendering of arXiv:0907.3740 by a
+  fetch subagent (Theorem 4, one-sided, i.i.d. variables in `[0, 1]`); Shapley (1971),
+  Wainwright–Jaakkola–Willsky (2002/2005) and Liu–Ihler (2011) confirmed
+  bibliographically by web search, not opened; Edmonds (1970) and Ichiishi (1981) from
+  memory.  **Not checked by anyone else:** the inner sandwich as built (the allowance
+  `a(t)`, the treatment of ball states), the one-known-mean bound (workstream R15 is
+  asked to check it), the convex-game reading, the code, the runs.  One instance per
+  regime.  **Unrefereed.**
 
 ## 3. Not validated by us
 

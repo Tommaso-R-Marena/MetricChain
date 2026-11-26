@@ -354,6 +354,26 @@ our review R12 found two sentences to replace and no theorem false (SCI-REV-0013
 The charter's rule stands: no manuscript or external representation without the
 owner's authorisation.
 
+*Note after addendum A17 (17) (2026-11-26; SCI-RES-0017).*  **The arc gained a
+second mode — a probabilistic certificate — and an optimisation with a clean
+structure; neither is externally defensible yet.**  (1) With the theory division's
+nested sampler the order-5 ball of the serine helix gives `ln Z` within `5·10⁻⁴` nats
+at probability 0.95: the headline instance of the last note with 25 times less
+width and a ninth of the evaluations.  For a paper this is the natural "practical"
+half of the method, and it is a joint result: the sampler and its bound are theirs,
+the instance, the inner sandwich and two refinements ours.  (2) "Which shares" has
+an answer that reads well outside the programme: the valid site penalties are the
+core of a convex game, equal shares are its Shapley value, and the best bound is a
+convex programme with a sort as oracle.  *Prior art to check before any claim:*
+optimising a split to tighten a bound on `ln Z` is standard in variational inference
+(tree-reweighted bounds, Wainwright–Jaakkola–Willsky; weighted mini-bucket,
+Liu–Ihler — both confirmed bibliographically, neither opened); whether a core /
+greedy structure for a *remainder* allocation appears there or in the dead-end
+elimination and K\* literature has not been searched.  (3) *What is still missing* is
+what the last note listed, unchanged: a referee (addenda A17 (13)–(17) are
+unrefereed inside the division), a checker, a second force field, and an instance
+that is not a homopolymer on an ideal backbone.
+
 *Note after addendum A17 (16) and workstreams R13, P7 (2026-11-26; SCI-MSG-0026,
 SCI-REV-0014, SCI-RES-0014).*  **The certified-free-energy arc gained its hard
 instance and lost its excuse; it is still not externally defensible, and one item of

@@ -1,0 +1,18 @@
+=== L12/H: 12 sites, states per site [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], 4096 assignments enumerated; exact ln Z(E) = 374.345343432; off-anchor frequencies under the true ensemble: 0.074 0.106 0.280 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+--- order 3: Gamma_3 = 1733.6175 kT from 220 constants; ball 79; supermodularity of Gamma over all sets: least second difference 0.00e+00; ln Z(A) = 374.345336671 (ln Z(E) - ln Z(A) = +6.76e-06); off-anchor frequencies under A: 0.074 0.106 0.280 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000; cheapest single change, kT: 2.5 2.0 0.9 14.1 11.5 11.7 12.1 12.2 11.9 11.4 11.9 11.9 [6s]
+    ordering 'most frozen first': [3, 6, 7, 8, 11, 10, 5, 4, 9, 0, 1, 2]; the same vertex from 13 closed-form sums on nested sets, without enumerating subsets: max deviation 3.41e-13 kcal/mol; Frank-Wolfe: 1 steps, duality gap -7.2e-14 nats; ordering search: 3 improving swaps, final [3, 6, 7, 8, 11, 5, 4, 9, 10, 0, 1, 2]
+    site penalties, kT:  equal 77.91 103.53 119.42 151.74 192.18 196.11 198.43 198.19 161.47 130.87 116.19 87.57 | frozen first 4.82 0.00 0.00 455.23 54.43 146.71 457.61 304.64 230.80 5.10 37.48 36.80 | Frank-Wolfe 77.91 103.53 119.42 151.74 192.18 196.11 198.43 198.19 161.47 130.87 116.19 87.57
+    allocation | U (upper end, floor model) | L (lower end, ceiling model) | U + L (bracket, nats) | first order 2 beta <pen>_A | largest site penalty, kT
+    equal shares (P3's site form; the Shapley value)     |       1605.5 |     0.530443 |      1606.03 |      100.3 |  198.426
+    vertex, most frozen first (Proposition 11.18f(c))    |      1620.63 |    0.0759529 |      1620.71 |     0.7249 |  457.609
+    vertex, most mobile first                            |      1636.84 |     0.530437 |      1637.37 |      272.4 |  358.254
+    Frank-Wolfe optimum of U over the core               |       1605.5 |     0.530443 |      1606.03 |      100.3 |  198.426
+    best ordering found for L                            |      1627.02 |    0.0759515 |      1627.09 |     0.7251 |  457.609
+    equal pair shares, all pairs                         |       1605.5 |    0.0479474 |      1605.55 |      1.824 |      nan
+    equal triple shares, all triples                     |       1605.5 |   0.00126579 |       1605.5 |    0.01228 |      nan
+    the envelope itself                                  |       1605.5 |   0.00126579 |       1605.5 |    0.01228 |      nan
+    COMBINATION floor = Frank-Wolfe optimum, ceiling = best ordering: bracket 1605.57 nats: ln Z(E) in [374.269385, 1979.842506] (exact 374.345343)
+    A-PRIORI BOUND for the site level (water-filling over the cheapest single-change states): U >= 136.913 for every covering vector of site penalties (Frank-Wolfe optimum: 1605.5); water-filling penalties, kT: 137.44 136.98 135.86 149.09 146.41 146.64 147.07 147.18 146.91 146.34 146.81 146.89
+    SHARPER, with the off-anchor marginals under A in place of the single-change states: U >= 137.365 for every covering vector; water-filling penalties, kT: 137.49 137.12 136.15 149.01 146.35 146.60 147.26 147.09 146.80 146.23 146.71 146.79
+    that water-filling vector as a penalty vector: least slack of the covering constraints over all 4096 sets 0 kT (it covers: a valid allocation); its U = 1605.5, L = 0.530443 (meaningful only if it covers)
+ALL DONE 6 s; peak RSS 281 MB

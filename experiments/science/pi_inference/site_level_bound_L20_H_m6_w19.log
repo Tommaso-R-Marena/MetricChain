@@ -1,0 +1,6 @@
+=== a-priori bound for the site level: L20/H, order 6, band 19: 20 sites, ball 21700; Gamma_6 = 24.2869 kT; floating-point allowance on the full set 0.0979 kT; penalty-free minorant ln Z(B) = 593.309150 [21s]
+    off-anchor marginals under B, -ln p_i: 2.6 2.2 1.2 14.0 11.4 11.6 12.3 12.2 12.3 12.4 12.4 12.4 12.5 12.5 12.5 12.5 12.1 11.5 11.9 12.0
+    WITH THE MARGINALS: every covering vector of site penalties has ln Z(m_-) >= 593.309394, at least 0.000244158 nats above ln Z(B); water-filling penalties, kT: 0.00 0.00 0.00 3.20 0.55 0.79 1.48 1.35 1.44 1.52 1.56 1.61 1.66 1.67 1.70 1.66 1.30 0.66 1.10 1.14
+    with the single-change states only (the weaker form printed by site_allocation_fw.py): at least 0.000141188 nats above ln Z(B)
+    for comparison, the penalty-free MAJORANT has ln Z = 593.300678: minorant and majorant are 0.00847172 nats apart -- the part of every bracket of this model class that no allocation can remove (workstream P3's reduction of evaluated terms to pair tables)
+ALL DONE 21 s; peak RSS 241 MB

@@ -1,0 +1,3 @@
+'ScienceA17.greedy_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceA17.marginal_tight' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0

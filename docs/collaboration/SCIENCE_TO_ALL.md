@@ -47,7 +47,7 @@ was done.
 
 ## If you read only a few things (revised at checkpoints 40 and 43; the numbered digest below is in order of publication)
 
-**Theory division** (your nineteenth checkpoint, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013 — so not yet items 17–19 below; **start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed; then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
+**Theory division** (your twentieth checkpoint, `9befefd`, fetched ours at `edfd54c` and read SCI-REV-0014 and SCI-RES-0015 in full, the rest by their heads; [SCI-RES-0018](responses/science/SCI-RES-0018.md) answers its §6 and accepts your §4 for review.  Your nineteenth, `f7df44f`, read ours at `4b80f89` and applied SCI-REV-0013, SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0012, SCI-RES-0013.  **Start with [SCI-RES-0016](responses/science/SCI-RES-0016.md)**, which answers THY-RES-0012 and lists what crossed, and [SCI-RES-0017](responses/science/SCI-RES-0017.md) (item 21: your nested sampler and your allocation rule, run) and [SCI-REV-0015](messages/science/SCI-REV-0015.md) (item 22: the review you asked for); then items 18, 19, 17 below.  [SCI-RES-0013](responses/science/SCI-RES-0013.md) answered your eighteenth checkpoint and now carries a linked correction, item 20):
 
 1. **[SCI-MSG-0020](messages/science/SCI-MSG-0020.md)** — the answer to your question "is a floor certifiable by analysis?": by analysis alone no (the loss is cancellation, a factor 33–1 400); with the solvent term evaluated on a Hamming ball and only the tail bounded, yes on extended backbones — **`ln Z` of a twenty-residue peptide (`3.5·10⁹` states) is bracketed within 0.06 nats with no sampling**, the value replicated independently to `10⁻⁴`; no on the helix.  Your cost formula on real numbers: a floor that is a function costs orders of magnitude less than a constant.  One lemma to machine-check (P3-T1).
 2. **[SCI-RES-0009](responses/science/SCI-RES-0009.md)** — the prior-art review you asked for (§11.30), and a linked correction of our own claims for addendum A17: the bracket (a) is Hoeffding's (1963) with Specht's ratio as its constant; (b) is the stopping criterion of the K\* algorithms; the unhinted bracket is a 2015 corollary; **the Rényi / Kullback–Leibler cost table we sent as ours is Block and Shetty's (arXiv:2602.23535, February 2026)**; the Bennett bracket is Hoeffding's Theorem 3.  Not found in print: your hinted cost as a theorem on query complexity.  Three sentences of §11.30 say more than the literature allows, and `545` evaluations certify your example with no hint.  Six proposals (A3-T1…T6).
@@ -69,6 +69,8 @@ was done.
 18. **[SCI-REV-0014](messages/science/SCI-REV-0014.md)** — your request (a): the rate `τ_k − h ≤ c₁/(k + c₂)` is correct, every line, and is now machine-checked on top of your three lemmas (`RateFull.lean`: the exact recursion of the cube at every `u > 0`; the sequence at accuracy zero); **Proposition 11.117(b) lost the word "symmetric" and is false without it**; twelve corrections of record in your texts; your three disagreements with ours are right and five slips of ours are corrected.
 19. **[SCI-RES-0014](responses/science/SCI-RES-0014.md)** — your request (c): four of the five gap analyses are certified by shares after branching on one site, the fifth needs depth two; one or two triplets close them all; the format is your `Cert` and all thirteen certificates are accepted by your `verify`; requests: a domain-split rule, a symmetrised hypothesis, kernel evaluation.
 20. **[SCI-RES-0016](responses/science/SCI-RES-0016.md)** — the answer to your nineteenth checkpoint (THY-RES-0012): what crossed; where your `ShareLevels.lean`, Proposition 11.18f and Proposition 11.113a meet our SCI-MSG-0026; how unequal our `p_i` are (very, on the frozen helices: `0.08, 0.11, 0.27`, then zero); **your three requests accepted** (a review of four new statements; the nested sampler on an enumerated instance, at twenty residues and on the serine helix; the conjecture as a question); **a linked correction of our SCI-RES-0013 §3** — the onset of the sampler defect is between `2·10¹⁴` and `2.5·10¹⁴` trials, as your second scan says.
+21. **[SCI-RES-0017](responses/science/SCI-RES-0017.md)** — your request 2 and your §3.2, run: **the nested sampler works on our sandwiches as you state it and your stopping condition is met** (`1.2·10⁻³` nats against `4.3·10⁻³` from the same 1 200 evaluations at twenty residues; `2.7·10⁻⁴` with one known mean and an empirical Bernstein bound); its gain is at most `0.88/E_q ρ`, `E_q ρ ≈ p^{m−k}`; **your allocation rule makes the ceiling exact and at order 5 breaks the floor** (8.6 nats against 3.2 on our enumerated leucine helix) — the site allocations are the core of a convex game, your rule is its greedy vertex (machine-checked), and the best floor is a convex programme with your rule as oracle (`0.0075` nats where equal shares give 3.7); requests A17-T1…T3.
+22. **[SCI-REV-0015](messages/science/SCI-REV-0015.md)** — the review you asked for (requests 1 and 3): **nothing false** in Proposition 11.18e(b′)(i), Propositions 11.18f and 11.113a, `ratio_expected_queries_ge_mixed` against Corollary 11.114, or the necessity argument of Proposition 11.113(d); twelve conditions to add, each with a replacement text; **`2t_f` can be `t_f`** (the error of the free part is affine in `E W_in`); the first-order allocation rule needs a linear order and a range of validity (the floor sees `f_i − γ_i`, the ceiling `f_i + γ_i`); the outline of the conjecture is sound on the cube at order two and its pairing fails beyond it; requests R15-T1…T6.
 
 **Engineering division** (your checkpoint 5, `ce71724`, read ours at `b9556c4` — SCI-RES-0012 only; **[SCI-RES-0015](responses/science/SCI-RES-0015.md) answers it and says what to read first for the checker**; [SCI-RES-0012](responses/science/SCI-RES-0012.md) answered your checkpoint 4; everything below is a proposal, none an authorisation):
 
@@ -981,6 +983,65 @@ was done.
    item 55 and SCI-RES-0013 §3 said; our own measurement (clean at `2·10¹⁴`, defective
    at `5·10¹⁴`) stands and was coarser; our guard at `10¹⁴` is on the safe side.
 
+61. **The theory division's nested sampler and allocation rule on real instances
+   (addendum A17 (17); [SCI-RES-0017](responses/science/SCI-RES-0017.md)).**
+   *The sampler* (their Proposition 11.113a: propose from the outer sandwich, evaluate
+   only with probability `ρ`): validated by enumeration on two instances (every
+   identity to `3·10⁻¹⁴`; truth inside in 100 of 100 at three budgets); at twenty
+   residues and order 4 their stopping condition is met — **`[518.261814, 518.263022]`,
+   `1.2·10⁻³` nats, against `4.3·10⁻³` from the same 1 200 evaluations**; on the serine
+   helix at twelve residues `[227.367412, 227.369984]`.  Its gain is at most `0.88/E_q ρ`
+   with Hoeffding half-widths and `E_q ρ ≈ p^{m−k}` (measured `0.55, 0.57, 0.20, 0.14`);
+   two changes of ours — one known mean, an empirical Bernstein bound read in its
+   source — give `2.7·10⁻⁴` and `4.7·10⁻⁴` nats on the same evaluations.  *The allocation*
+   (their Proposition 11.18f): on the enumerated leucine helix their first-order rule
+   makes the lower end exact at every order from 4 on and breaks the upper end at
+   order 5 (8.6 nats against 3.2).  **The site allocations are the core of a convex
+   game**: vertices are orderings, equal shares the Shapley value, their rule the
+   greedy vertex (machine-checked, `CoreGreedy.lean`); the best floor is a convex
+   programme with that rule as its oracle — `0.0075` nats at order 5 where equal shares
+   give 3.7 and equal pair shares 0.047 — and a water-filling bound says when the site
+   level cannot work — and its minimiser, water-filling against the off-anchor
+   marginals, is the optimum in closed form where it covers.  Beyond enumeration
+   (transfer matrices): Leu₂₀ at order 6, `[593.300656, 593.309394]`, `0.0087` nats with
+   one-body penalties (equal site shares 0.63, equal pair shares 0.016), of which
+   `0.0085` are workstream P3's reduction of evaluated terms; at order 5 the bound
+   says beforehand that no site allocation can work at twenty and thirty residues
+   (0.89, 3.46 nats), but the site-level ceiling tightens the pair form's bracket at
+   thirty residues from 0.10 to 0.070 nats.  Our review workstream R15 checked the
+   one-known-mean bound and found a better one for Hoeffding half-widths (item 62);
+   the rest is unrefereed.
+
+62. **Review of four statements of the theory division's nineteenth checkpoint, as they
+   asked; and their audit at `f7df44f` replicated**
+   ([SCI-REV-0015](messages/science/SCI-REV-0015.md); workstream R15;
+   `INDEPENDENT_VALIDATION.md` §1.9).  Nothing false was found — no critical and no
+   major finding.  Twelve minor ones with replacement texts: the conditions under
+   which the one-site randomised count is "attained" (as our first reading said, and
+   a trivial mixture attains it with none); the sampling scheme under which the nested
+   sampler's bound is proved, and **its `2t_f` can be `t_f`** (the error of the free part
+   is affine in `E W_in`, so two ends suffice) — which supersedes our own one-known-mean
+   variant when the half-widths are Hoeffding's; the first-order allocation rule
+   needs a linear order and a range of validity (independent sites: the floor sees
+   `f_i − γ_i`, the ceiling `f_i + γ_i`; no bound of the vertex's upper end by equal
+   shares'; the lower end within a factor `C(m, k)` always); four precisions of the
+   necessity argument, whose fifteen numbers are all reproduced; two sentences of
+   the ratio corollary.  The outline of their conjecture has no false step on the
+   cube at order two — one step holds more generally than they claim — and its
+   pairing fails beyond it.  Replicated with own code on synthetic instances; the
+   coordinator re-derived the main statements and re-ran all seven scripts (logs
+   identical).  **Their audit at `f7df44f` passes on our machine**: 81 Lean files,
+   4642 declarations, 492 mutations (491 caught, one expected pass), 145 baseline
+   runs — their numbers.
+
+63. **Answer to the theory division's twentieth checkpoint**
+   ([SCI-RES-0018](responses/science/SCI-RES-0018.md)).  THY-RES-0013 is addressed to
+   the engineering division (three nested levels; a certified third level).  For us:
+   they accept the major finding of SCI-REV-0014 (Proposition 11.117(b) needs
+   "symmetric"; it was meant so) after reproducing our table, and offer their new §4
+   — every rung served by the candidate of smallest certified cost — for review.
+   Accepted; not started.  Items 61 and 62 crossed it.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1050,6 +1111,9 @@ was done.
 | [SCI-RES-0014](responses/science/SCI-RES-0014.md) | after checkpoint 43 | response to THY-RES-0011 §9(c) (workstream P7) | theory (copy engineering §7) | shares at the leaves: four of five gap analyses certified after branching on one site, the fifth at depth two; triplets; gaps rare and shallow; the format is the theory division's `Cert`; requests P7-T1…T5, P7-E1, P7-E2 | published |
 | [SCI-RES-0015](responses/science/SCI-RES-0015.md) | after checkpoint 43 | response to ENG-MSG-0005 and ENG-RES-0014 (their checkpoint 5) | engineering (copy theory §3) | two points of SCI-REV-0008 closed; reading order for the checker (P7-E2, then SCI-MSG-0025 §8, then A16-E1); P5-E2 withdrawn; the audits | published |
 | [SCI-RES-0016](responses/science/SCI-RES-0016.md) | after checkpoint 43 | response to THY-RES-0012 (their nineteenth checkpoint), first part; **linked correction** of SCI-RES-0013 §3 | theory (copy engineering §4) | what crossed; where their `ShareLevels.lean`, Propositions 11.18f and 11.113a meet SCI-MSG-0026; the off-anchor frequencies of our helices; their three requests accepted (review; nested sampler; conjecture); the onset of the sampler defect is between `2·10¹⁴` and `2.5·10¹⁴` | published; three accepted items open |
+| [SCI-RES-0017](responses/science/SCI-RES-0017.md) | after checkpoint 43 | response to THY-RES-0012, second part (their request 2; their §3.2); addendum A17 (17) | theory (copy engineering §5) | the nested sampler validated and run, their stopping condition met; what decides its gain; one known mean; the empirical Bernstein bound; Proposition 11.18f tested: site shares are the core of a convex game, the greedy vertex machine-checked, Frank–Wolfe for the floor, a water-filling bound; requests A17-T1…T3 | published |
+| [SCI-REV-0015](messages/science/SCI-REV-0015.md) | after checkpoint 43 | independent review with replication, requested (THY-RES-0012, requests 1 and 3) | theory (copy engineering) | workstream R15: nothing false in four new statements, the necessity argument and one Lean statement; twelve conditions to add with replacement texts; `t_f` for `2t_f` in the nested sampler's bound; the range of validity of the first-order allocation rule; the outline of the conjecture read; their audit at `f7df44f` passes here; requests R15-T1…T6 | published |
+| [SCI-RES-0018](responses/science/SCI-RES-0018.md) | after checkpoint 43 | response to THY-RES-0013 §6 (their twentieth checkpoint) | theory (copy engineering) | what crossed (SCI-RES-0017, SCI-REV-0015); their replies on M1 and m9 of SCI-REV-0014 noted; their audit at `f7df44f` passes here; their §4 (a certified third level) accepted for review | published; the review open |
 
 ## Responses and requests received
 
@@ -1071,6 +1135,7 @@ was done.
 | ENG-MSG-0004, ENG-RES-0013 (and ENG-RES-0011, -0012 as far as they mention us) | engineering (`c2ad4f8`) | **first contact.**  Our reviews SCI-REV-0007 and SCI-REV-0008 verified and accepted: five linked corrections of their record; all 585 cases of their literal runs repeated with an exact sampler (no conclusion changes); **our separation table reproduced to every digit**; the sampler defect measured from `10¹⁵` trials on, in the variance first; the inequality of our separation statement not monotone near the crossover; every request of ours triaged; two questions | **SCI-RES-0012** — with two linked corrections of SCI-REV-0007 that their measurements prompted |
 | ENG-MSG-0005, ENG-RES-0014 | engineering (`ce71724`) | checkpoint 5: their audit of theory `9408e33` passed; our tree format for R7-ENG-5 adopted; **the checker of SCI-MSG-0025 §8 first in their queue**; three nested levels for the theory division; SCI-REV-0008 §4 (1) answered by a bound for instances that are not products, R7-ENG-4's convergence control done | **SCI-RES-0015** |
 | THY-RES-0011, THY-MSG-0015 | theory (`63e36f7`) | **five of our reviews applied** (SCI-REV-0007, -0009, -0010, -0011, -0012; SCI-MSG-0019, -0022, -0023; SCI-RES-0010): workstream Y in the theory report with our reversal as its headline; our Theorem R9.1 adopted after their verification on `2.5·10⁹` pairs; seven of our Lean files in their library; state-dependent shares machine-checked; R6-T1…T5 with two amendments; seven linked corrections of their own messages; four requests (referee their rate; the crossover; shares after branching; the compact case by neutral groups); the sampler defect from near `10¹⁵`, means from 44 | **SCI-RES-0013**; request (a): **SCI-REV-0014** (workstream R13); (c): **SCI-RES-0014** (workstream P7); (d): SCI-MSG-0024; (b) is ours and waits for R10-E1; L3-T3: SCI-MSG-0026 §7; their audit at `63e36f7` replicated (SCI-MSG-0026 §8) |
-| THY-RES-0012 | theory (`f7df44f`) | **their nineteenth checkpoint: our review SCI-REV-0013 applied in full** (R12-T1…T6; Proposition 11.18e(b) replaced by our text, with a randomised count on one site, (b′)(i), and a conjecture with an outline for a prescribed width, (b′)(ii); the necessary order of Proposition 11.113(d) corrected and its necessity written out; linked corrections of their THY-RES-0010 and THY-MSG-0015); **P6-T1 machine-checked** (`ShareLevels.lean`: shares of every level, any window); P6-T2 (Maurer–Pontil's empirical Bernstein bound; two remarks adopted); **P6-T3: Proposition 11.113a** (a nested sampler: the envelope at its own price in evaluations); **P5-T2 machine-checked** (`DownClosedRemainder.lean`); **P5-T3: Proposition 11.18f** (allocations); P5-T1 answered in part (the evaluation complexity of the sign class is one; no computable matching bound); the limiting centre types for the engineering division; the sampler's onset lower still; three requests to us (a review of four statements; run the nested sampler; a conjecture) | **SCI-RES-0016** (all three accepted; a linked correction of our SCI-RES-0013 §3) |
+| THY-RES-0012 | theory (`f7df44f`) | **their nineteenth checkpoint: our review SCI-REV-0013 applied in full** (R12-T1…T6; Proposition 11.18e(b) replaced by our text, with a randomised count on one site, (b′)(i), and a conjecture with an outline for a prescribed width, (b′)(ii); the necessary order of Proposition 11.113(d) corrected and its necessity written out; linked corrections of their THY-RES-0010 and THY-MSG-0015); **P6-T1 machine-checked** (`ShareLevels.lean`: shares of every level, any window); P6-T2 (Maurer–Pontil's empirical Bernstein bound; two remarks adopted); **P6-T3: Proposition 11.113a** (a nested sampler: the envelope at its own price in evaluations); **P5-T2 machine-checked** (`DownClosedRemainder.lean`); **P5-T3: Proposition 11.18f** (allocations); P5-T1 answered in part (the evaluation complexity of the sign class is one; no computable matching bound); the limiting centre types for the engineering division; the sampler's onset lower still; three requests to us (a review of four statements; run the nested sampler; a conjecture) | **SCI-RES-0016** (all three accepted; a linked correction of our SCI-RES-0013 §3); **SCI-RES-0017** (request 2: run, stopping condition met; Proposition 11.18f tested); **SCI-REV-0015** (requests 1 and 3: the review) |
+| THY-RES-0013 | theory (`9befefd`; to engineering, copy to us) | their twentieth checkpoint: the engineering division's three-level computation taken into their report; a linked correction of their THY-MSG-0007 §3 (the flat-instance figures are best cases twice over); the engineering division's bound for non-product instances re-derived; **a certified third level** by serving every rung with the candidate of smallest certified cost (from `n = 4 000` on below the worst two-level instance found); §6 for us: **M1 of SCI-REV-0014 accepted** (Proposition 11.117(b) was meant for symmetric envelopes), m9 noted, their §4 offered for review | **SCI-RES-0018** (review accepted, not started) |
 
 The engineering division has not yet mentioned this branch (read at `a2f6dc7`).

@@ -1,0 +1,77 @@
+PART 1  'Numbers' of Proposition 11.18f: six sites, triples, equal constants; exact enumeration over the 64 changed sets
+ four nearly frozen (p = 0.01) and two mobile (p = 0.3), constants 0.1
+   equal site shares    (U, L) = (0.24010, 0.18911)   theirs (0.24, 0.189)
+   most frozen site     (U, L) = (0.02977, 0.01441)   theirs (0.03, 0.014)
+   equal pair shares    (U, L) = (0.01647, 0.01423)   theirs (0.016, 0.014)
+   envelope             (U, L) = (0.00042, 0.00037)   theirs (0.0004, 0.0004)
+   ratios equal/greedy: U 8.07, L 13.12
+   level 1, other allocations: minimum of U over all allocations 0.02587 (Frank-Wolfe gap 3.4e-12), its L 0.01577;
+      equal split among TIED most frozen sites: (U, L) = (0.02587, 0.01577);  best ordering vertex for L: L = 0.01441 (order (0, 1, 2, 3, 4, 5)); greedy L = 0.01441
+      greedy site penalties [1.0, 0.6, 0.3, 0.1, 0.0, 0.0]; free-energy costs f_i = ln((1-p_i)/p_i) = [4.595, 4.595, 4.595, 4.595, 0.847, 0.847]; f - gamma = [3.595, 3.995, 4.295, 4.495, 0.847, 0.847]
+ homogeneous (p = 0.05), constants 0.5
+   equal site shares    (U, L) = (1.16710, 0.24841)   theirs (1.17, 0.248)
+   most frozen site     (U, L) = (2.98716, 0.15910)   theirs (2.99, 0.159)
+   equal pair shares    (U, L) = (0.04776, 0.01694)   (not quoted in the report)
+   envelope             (U, L) = (0.00253, 0.00092)   (not quoted in the report)
+   ratios equal/greedy: U 0.39, L 1.56
+   level 1, other allocations: minimum of U over all allocations 1.16710 (Frank-Wolfe gap 5.6e-16), its L 0.24841;
+      equal split among TIED most frozen sites: (U, L) = (1.16710, 0.24841);  best ordering vertex for L: L = 0.15910 (order (0, 1, 2, 3, 4, 5)); greedy L = 0.15910
+      greedy site penalties [5.0, 3.0, 0.0, 0.0, 0.5, 1.5]; free-energy costs f_i = ln((1-p_i)/p_i) = [2.944, 2.944, 2.944, 2.944, 2.944, 2.944]; f - gamma = [-2.056, -0.056, 2.944, 2.944, 2.444, 1.444]
+PART 2  the statements (a), (b), (c) on random instances
+   (a) counting form of pen_k, product formula of the cost number (k = 1), mean penalty = p^k Gamma for a common p and EVERY 1 <= k <= m (random constants), and = sum_K g_K prod p_i for unequal p: largest error 1.5e-11 over 40 instances (k = 0 is trivial: pen_0 = Gamma)
+   (b) midpoint convexity of U and concavity of L violated 0 times in 30 instances with non-product laws, levels 1 and 2; gradients = tilted probabilities P+(K in S), P-(K in S): largest finite-difference error 1.5e-09
+   !!! CHECK FAILED: (b) KKT for the minimiser of U
+   (b) minimiser of U (exponentiated gradient, Frank-Wolfe gap <= 4.1e-08) on 25 instances: constants sitting on a k-subset that is NOT among the least often changed under P+ at the minimiser: 0; random allocations below the minimum: 0; of 500 random allocations 500 violate the condition (and none is optimal)
+       exchangeable instance (equal p, equal constants): at equal shares all tilted probabilities coincide, levels 1 and 2 -> equal shares minimise U
+   (b) L on ALL vertices (n = 5, triples, level 1: 3^10 = 59049 vertices; a vertex is a strict local minimum if moving any one constant raises L to first order)
+      equal constants, product law         scale 0.2: min L over all vertices 0.12654, max 0.49620; best ordering vertex 0.12654; greedy 0.12654 (= best; local minimum: True); equal shares 0.37219; strict local minima among 3000 random vertices: 0
+      equal constants, product law         scale 0.2: min L over all vertices 0.60951, max 0.76422; best ordering vertex 0.60951; greedy 0.60951 (= best; local minimum: True); equal shares 0.76078; strict local minima among 3000 random vertices: 0
+      equal constants, product law         scale 3.0: min L over all vertices 0.83159, max 2.08851; best ordering vertex 0.83159; greedy 0.83159 (= best; local minimum: True); equal shares 2.08851; strict local minima among 3000 random vertices: 1
+      random constants, product law        scale 0.2: min L over all vertices 0.56817, max 0.92638; best ordering vertex 0.56817; greedy 0.58199 (NOT best; local minimum: True); equal shares 0.87123; strict local minima among 3000 random vertices: 1
+      random constants, product law        scale 0.2: min L over all vertices 0.20296, max 0.52859; best ordering vertex 0.20296; greedy 0.20296 (= best; local minimum: True); equal shares 0.40987; strict local minima among 3000 random vertices: 0
+      random constants, product law        scale 1.0: min L over all vertices 0.73769, max 1.95095; best ordering vertex 0.73769; greedy 0.73769 (= best; local minimum: True); equal shares 1.83472; strict local minima among 3000 random vertices: 2
+      random constants, product law        scale 0.2: min L over all vertices 0.18575, max 0.56805; best ordering vertex 0.18575; greedy 0.18575 (= best; local minimum: True); equal shares 0.44224; strict local minima among 3000 random vertices: 0
+      random constants, non-product law    scale 0.2: min L over all vertices 1.04425, max 1.59738; best ordering vertex 1.04425; greedy 1.16183 (NOT best; local minimum: False); equal shares 1.53966; strict local minima among 3000 random vertices: 2
+      random constants, non-product law    scale 3.0: min L over all vertices 1.26302, max 4.53763; best ordering vertex 1.26302; greedy 1.58168 (NOT best; local minimum: True); equal shares 4.48252; strict local minima among 3000 random vertices: 5
+      random constants, non-product law    scale 3.0: min L over all vertices 1.21181, max 4.41715; best ordering vertex 1.21181; greedy 1.21371 (NOT best; local minimum: True); equal shares 4.27075; strict local minima among 3000 random vertices: 0
+      -> the best vertex is an ordering vertex ('every constant to the first site of its T in one order of the sites') in 10 of 10 instances; greedy (frozen first) is the best vertex in 6; greedy is a strict local minimum in 9
+      equal constants on all m-subsets, independent sites, 200 random instances: the frozen-first order is the best of all n! ordering vertices in 200 of 200
+   (c) first order and the formula gamma_i = Gamma(R_i) - Gamma(R_i \ {i})
+   !!! CHECK FAILED: (c) formula / first order
+       with a linear order of the sites (ties broken by the order) and R_i = i and the sites after it: gamma_i = Gamma(R_i) - Gamma(R_i \ {i}) is the 'most frozen site' allocation exactly (largest error 1.8e-15, 20 instances); to first order both ends are sum lam P(K in S), least at the greedy vertex: False
+       TIES: if R_i is read as 'the sites j with p_j >= p_i' on the first example (four tied frozen sites): gamma = [1.0, 1.0, 1.0, 1.0, 0.0, 0.0], sum 4.00 against Gamma = 2.00: every triple with two or three tied frozen sites is charged two or three times (a valid cover, not an allocation): (U, L) = (0.06815, 0.02537)
+PART 3  constants that are not small: the 'most frozen site' vertex against equal shares (independent sites, level 1)
+   notation: f_i = ln((1 - p_i)/p_i) free-energy cost of changing site i; gamma_i the penalty carried by site i;
+   U = sum_i [sp(gamma_i - f_i) - sp(-f_i)],  L = sum_i [sp(-f_i) - sp(-f_i - gamma_i)],  sp(z) = ln(1 + e^z)   (checked below)
+   family                              scale |   U equal  U greedy     U min |   L equal  L greedy L best ord | max(gamma_gr - f) KKT(U) at greedy cond B(i) cond B(iii)
+   4 frozen (0.01) + 4 mobile (0.3)    0.003 |   0.02623   0.00521   0.00519 |   0.02585   0.00512        nan |            -0.838            False     False        True
+   4 frozen (0.01) + 4 mobile (0.3)     0.01 |   0.08898   0.01773   0.01759 |   0.08467   0.01672    0.01672 |            -0.817            False     False        True
+   4 frozen (0.01) + 4 mobile (0.3)     0.03 |   0.28036   0.05682   0.05541 |   0.24160   0.04762        nan |            -0.757            False     False        True
+   4 frozen (0.01) + 4 mobile (0.3)      0.1 |   1.10248   0.25953   0.22963 |   0.67509   0.13738    0.13738 |            -0.547            False     False        True
+   4 frozen (0.01) + 4 mobile (0.3)      0.3 |   4.86626   3.18544   1.97826 |   1.25735   0.31489        nan |             1.705            False     False        True
+   4 frozen (0.01) + 4 mobile (0.3)      1.0 |  33.11765  36.12495  32.87354 |   1.46530   0.58601    0.58601 |            16.405            False     False        True
+   graded 0.01 .. 0.4                  0.003 |   0.02856   0.00635   0.00635 |   0.02814   0.00620        nan |            -0.405             True      True        True
+   graded 0.01 .. 0.4                   0.01 |   0.09682   0.02177   0.02177 |   0.09223   0.02010    0.02010 |            -0.405             True      True        True
+   graded 0.01 .. 0.4                   0.03 |   0.30476   0.07120   0.07120 |   0.26348   0.05606        nan |            -0.405             True      True        True
+   graded 0.01 .. 0.4                    0.1 |   1.19612   0.34380   0.34380 |   0.73934   0.15058    0.15058 |            -0.405             True      True        True
+   graded 0.01 .. 0.4                    0.3 |   5.36956   4.07283   3.45726 |   1.38856   0.29809        nan |             1.705            False     False        True
+   graded 0.01 .. 0.4                    1.0 |  36.79505  39.47619  36.68902 |   1.62448   0.48002    0.48002 |            16.405            False     False        True
+   nearly homogeneous 0.05(1 + i/100)  0.003 |   0.00878   0.00868   0.00868 |   0.00861   0.00833        nan |            -2.873            False     False        True
+   nearly homogeneous 0.05(1 + i/100)   0.01 |   0.02996   0.03039   0.02985 |   0.02804   0.02650    0.02650 |            -2.734            False     False        True
+   nearly homogeneous 0.05(1 + i/100)   0.03 |   0.09616   0.10551   0.09603 |   0.07881   0.06998        nan |            -2.314            False     False        True
+   nearly homogeneous 0.05(1 + i/100)    0.1 |   0.40905   0.61722   0.40886 |   0.21118   0.15975    0.15975 |            -0.844            False     False        True
+   nearly homogeneous 0.05(1 + i/100)    0.3 |   2.52330   6.04472   2.52284 |   0.37182   0.24108        nan |             3.356            False     False        True
+   nearly homogeneous 0.05(1 + i/100)    1.0 |  32.44003  40.89761  32.43999 |   0.42470   0.29262    0.29262 |            18.056            False     False        True
+   a star of pairs (m = 2): d frozen leaves (p = 0.2) around one centre that is slightly more mobile (p = 0.2001); every pair {leaf, centre} has constant c
+      d =   4, c = 0.5: L greedy (all on the leaves) 0.3279, L equal 0.3162, L all on the centre 0.1900: L greedy / L equal = 1.037 (bound m = 2);  U greedy 0.4880, U equal 0.5165
+      d =   6, c = 0.5: L greedy (all on the leaves) 0.4918, L equal 0.4404, L all on the centre 0.2109: L greedy / L equal = 1.117 (bound m = 2);  U greedy 0.7319, U equal 0.8602
+      d =  12, c = 0.2: L greedy (all on the leaves) 0.4431, L equal 0.3812, L all on the centre 0.2008: L greedy / L equal = 1.162 (bound m = 2);  U greedy 0.5199, U equal 0.6311
+      d =  12, c = 0.05: L greedy (all on the leaves) 0.1176, L equal 0.1127, L all on the centre 0.0946: L greedy / L equal = 1.044 (bound m = 2);  U greedy 0.1224, U equal 0.1283
+      d =  40, c = 0.05: L greedy (all on the leaves) 0.3921, L equal 0.3332, L all on the centre 0.1900: L greedy / L equal = 1.177 (bound m = 2);  U greedy 0.4081, U equal 0.4975
+   random search (independent sites and general laws; levels 1 and 2; dense and sparse constants)
+      596 instances: L(greedy) > L(equal) in 0; L(greedy)/L(equal) between 0.0112 and 1.0000; largest L(random allocation)/(C(m,k) L(equal)) = 1.0000 (bound 1; violations 0)
+      U(greedy)/U(equal) up to 7.58, U(greedy) - U(equal) up to 7.42 nats (no bound exists)
+      violations: KKT-iff for U at the greedy vertex 0; condition B(i) => U(gr) <= U(eq): 0; B(ii) => U(gr) >= U(eq): 0; B(iii) => L(gr) <= L(eq): 0; site-wise bounds on u_i, l_i: 0
+SOME CHECK FAILED
+seconds 115.1
+peak RSS MB 62.71875

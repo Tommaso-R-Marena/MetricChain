@@ -1,0 +1,31 @@
+=== optimal site shares: L12/H, order 5, band 11, models 'window' (715 evaluated terms exact in the window): 12 sites, 4096 assignments, ball 794 evaluations; Gamma_5 = 45.1214 kT [8s]
+(0) Gibbs sampling of the true ensemble (16 chains, 250 sweeps, 50 discarded; 3200 states kept; uncertified, used only to check the sandwich): off-anchor frequencies 0.08 0.11 0.28 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 [128s]
+    equal shares (P3's site form): CERTIFIED ln Z(E) in [373.850181, 377.559803], width 3.70962 nats; sandwich violated at 0 of 3200 Gibbs states and at 0 of 2000 exact samples of the floor (1.82 sites off the anchor there); largest floor penalty 5.13 kT, largest ceiling penalty 5.13 kT
+    A-PRIORI BOUND for the site level (water-filling over the cheapest single-change states; needs Gamma_5 and the ball of radius one): every vector of site penalties that covers the constants and the floating-point allowance (together 45.1231 kT on the full set) has ln Z(m_-) >= 374.349825, i.e. at least 0.004482 nats above the penalty-free minorant 374.345344; probabilities of the single-change states, -ln a_i: 3.0 2.6 1.4 14.7 12.0 12.2 12.6 12.8 12.5 11.9 12.4 12.5; water-filling penalties, kT: 0.00 0.00 0.00 7.06 4.39 4.62 5.05 5.16 4.88 4.31 4.79 4.86
+(1) off-anchor marginals of the penalty-free majorant: 0.074 0.106 0.280 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000; ordering most frozen first: [3, 6, 7, 8, 11, 10, 5, 4, 9, 0, 1, 2] [133s]
+    vertex 'most frozen first' at both ends (Proposition 11.18f(c)): CERTIFIED ln Z(E) in [374.345320, 382.933716], width 8.5884 nats; sandwich violated at 0 of 3200 Gibbs states and at 0 of 2000 exact samples of the floor (2.18 sites off the anchor there); largest floor penalty 20.18 kT, largest ceiling penalty 20.18 kT
+(2) ceiling: ordering search, 7 improving swaps in 4 sweeps: ln Z(m_+) = 374.345322 (most frozen first: 374.345320; equal shares: 373.850181) [146s; 32 closed-form sums so far, 13s]
+      Frank-Wolfe step 1: ln Z(m_-) = 377.559803, duality gap 5.151e+00 nats [147s; 38 sums]
+      Frank-Wolfe step 11: ln Z(m_-) = 374.392260, duality gap 7.248e-02 nats [170s; 93 sums]
+      Frank-Wolfe step 21: ln Z(m_-) = 374.365624, duality gap 2.498e-02 nats [193s; 136 sums]
+      Frank-Wolfe step 31: ln Z(m_-) = 374.359706, duality gap 1.527e-02 nats [214s; 168 sums]
+      Frank-Wolfe step 41: ln Z(m_-) = 374.357529, duality gap 9.129e-03 nats [234s; 190 sums]
+      Frank-Wolfe step 51: ln Z(m_-) = 374.356486, duality gap 7.346e-03 nats [249s; 218 sums]
+      Frank-Wolfe step 61: ln Z(m_-) = 374.355789, duality gap 5.844e-03 nats [259s; 235 sums]
+      Frank-Wolfe step 71: ln Z(m_-) = 374.355315, duality gap 5.545e-03 nats [271s; 255 sums]
+      Frank-Wolfe step 81: ln Z(m_-) = 374.354939, duality gap 4.090e-03 nats [284s; 279 sums]
+      Frank-Wolfe step 91: ln Z(m_-) = 374.354669, duality gap 3.422e-03 nats [298s; 301 sums]
+      Frank-Wolfe step 101: ln Z(m_-) = 374.354488, duality gap 3.318e-03 nats [311s; 322 sums]
+      Frank-Wolfe step 111: ln Z(m_-) = 374.354320, duality gap 3.447e-03 nats [323s; 338 sums]
+      Frank-Wolfe step 121: ln Z(m_-) = 374.354177, duality gap 3.641e-03 nats [332s; 348 sums]
+      Frank-Wolfe step 131: ln Z(m_-) = 374.354068, duality gap 2.377e-03 nats [342s; 360 sums]
+      Frank-Wolfe step 141: ln Z(m_-) = 374.353967, duality gap 2.760e-03 nats [352s; 376 sums]
+      Frank-Wolfe step 151: ln Z(m_-) = 374.353888, duality gap 2.258e-03 nats [360s; 382 sums]
+      Frank-Wolfe step 161: ln Z(m_-) = 374.353816, duality gap 2.106e-03 nats [368s; 390 sums]
+      Frank-Wolfe step 171: ln Z(m_-) = 374.353752, duality gap 1.995e-03 nats [376s; 397 sums]
+      Frank-Wolfe step 181: ln Z(m_-) = 374.353694, duality gap 1.832e-03 nats [385s; 408 sums]
+      Frank-Wolfe step 191: ln Z(m_-) = 374.353645, duality gap 1.832e-03 nats [393s; 414 sums]
+(3) floor: Frank-Wolfe, 200 steps: ln Z(m_-) = 374.353599, duality gap 1.762e-03 nats (so no core allocation gives a floor below 374.351836); equal shares 377.559803, most frozen first 382.933716 [401s; 419 closed-form sums, 106s]
+    site penalties, kT: equal 2.03 2.76 3.21 4.04 4.90 5.08 5.13 5.06 4.29 3.47 2.98 2.17 | frozen first 0.00 0.00 0.00 20.18 0.02 0.60 14.63 6.58 2.62 0.00 0.25 0.25 | Frank-Wolfe (floor) 0.00 0.00 0.00 7.06 4.42 4.62 5.30 5.12 4.81 4.27 4.72 4.79 | ceiling 0.00 0.00 0.00 3.74 0.02 3.20 25.66 11.98 0.44 0.00 0.04 0.04
+    floor = Frank-Wolfe optimum, ceiling = best ordering: CERTIFIED ln Z(E) in [374.345322, 374.353599], width 0.00827664 nats; sandwich violated at 0 of 3200 Gibbs states and at 0 of 2000 exact samples of the floor (0.46 sites off the anchor there); largest floor penalty 7.06 kT, largest ceiling penalty 25.66 kT
+ALL DONE 402 s; peak RSS 261 MB

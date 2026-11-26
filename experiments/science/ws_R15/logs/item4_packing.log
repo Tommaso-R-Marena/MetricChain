@@ -1,0 +1,7 @@
+400 random boxes (200 to 1200 states; macrostates A, B and a rest; instances generic, at the floor of A, at the ceiling of B, at r = 0):
+   (1) 3790 heavy sets (dips and bumps, in either macrostate, each with three points outside both macrostates added): the log-ratio always changes by more than eps; 610 sets with OVERLAPPING macrostates (set avoiding B, weight restricted to A): the same
+   (2) 800 greedy packings: never below floor(a_M/(2(e^eps - 1))), floor(b_M/(2(1 - e^-eps))) where no single state is heavy
+   (3) two-sided bound for eps <= 1: closed-form lower bound <= (1 - 2 delta)(k_A + k_B) <= N <= closed-form upper bound in every box without a heavy single state; least slack of the lower bound 0.44; largest N/upper 0.736; boxes in which BOTH macrostates contribute sets (the sum exceeds the max): 186
+ALL CHECKS PASSED
+seconds 0.5
+peak RSS MB 35.4296875
