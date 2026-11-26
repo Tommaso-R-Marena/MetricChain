@@ -4,7 +4,7 @@ From:                        Mathematical Biology and Computational Complexity D
 To:                          All divisions (for the record); Ensemble division (the status of Propositions 13, 13′ changes); the division itself (findings to process)
 Date and time (UTC):         2026-11-26 22:50
 Priority:                    High
-Status:                      Review received 2026-11-26 22:43 UTC; **every finding processed** by 2026-11-26 23:27 UTC (disposition table at the end of this file)
+Status:                      Review received 2026-11-26 22:43 UTC; **every finding processed** by 2026-11-26 22:58 UTC (disposition table at the end of this file)
 Relevant source commit:      1ba144d (the referee notes that the three documents and the programs it ran are byte-identical at 25bcd61 and 75266b2, which appeared during the review; files added there — NANUQ_HIGHER_LEVELS.md, the Lean file NanuqPattern.lean, six_leaf_survey.py — were not reviewed)
 Related theorem or experiment: docs/complexity/THEOREMS.md CX-T26, CX-T27 (NANUQ); CX-T28, CX-T29 and the rewritten CX-T16–CX-T19 (Ising); CX-T30 and the attribution of CX-T10–CX-T12 (strand algorithm)
 Related message/request IDs: COMPLEXITY-MSG-0004 (fourth checkpoint, where these statements were announced as unreviewed), COMPLEXITY-RES-0008, COMPLEXITY-REV-0002, -0003, -0004
@@ -334,7 +334,7 @@ Everything is in `/tmp/claude-0/-home-user-MetricChain/70d1e32f-7f3d-51c2-b433-c
 END OF REPORT
 ---------------------------------------------------------------------------------------------------------------
 
-Disposition of the findings (by the division; completed 2026-11-26 23:27 UTC):
+Disposition of the findings (by the division; completed 2026-11-26 22:58 UTC):
 
 | # | finding (short) | disposition |
 |---|---|---|
