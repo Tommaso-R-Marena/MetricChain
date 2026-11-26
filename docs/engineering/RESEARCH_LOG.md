@@ -381,65 +381,126 @@ Algorithm 2L⁺, and sent two new requests.  Answers: ENG-MSG-0003, ENG-RES-0008
 
 ---
 
+## Session 4 — 2026-11-26 (UTC), 15:11 onwards (in progress)
+
+### 4.1 Directives of the research owner received in this session
+
+Four, recorded in `docs/engineering/DIRECTIVES.md` (D-2 … D-5): mathematical generality
+(relayed to all divisions in ENG-MSG-0006, complete text); a continuous research loop for
+this division, with "the apparent deterioration of adaptive algorithm performance on
+non-flat fibres" named in particular; six divisions; this division coordinates shared
+Modal computation and benchmarking, with **$1,750 of additional Modal expenditure
+authorised and $200 of credit to be preserved** (ledger, "Policy").
+
+### 4.2 Synchronisation
+
+Theory `8ff0667` → `020e990` (checkpoints 19–22 and work on the rate of the level
+recursion; THY-RES-0012 … -0015 read as far as ENG-MSG-0006 §3 says); science `2b4ccdf` →
+`af689cc` (SCI-RES-0015 read in full).  **Three new branches appeared at about 16:50 UTC**:
+`research/ensemble-identifiability` (`a570520`), `research/geometric-inference` (`d84a43b`),
+`research/biological-complexity` (`9a35d2f`); of them only GEOMETRY-REQ-0001 (addressed to
+us) was read in full, and the lines of the three digests that mention engineering.
+
+### 4.3 What was done, in order
+
+1. ENG-MSG-0006 (the relay; replies; order of work).  Protocol copy, directives file,
+   ledger policy rewritten for the new authorisation.
+2. **X-011** (campaign BM-1): the certified-cost recursion as an exact pruned search
+   (`certified.py`), seven published numbers of the theory division reproduced; a generic
+   bounded Modal app with a detached mode whose results wait in a `modal.Dict`
+   (`modal_jobs/bench_app.py`, `bench_collect.py`); jobs M-015 (smoke), **M-016** (bounds, nine
+   sizes, up to six levels), **M-017** (the selected designs run on flat and adversarial
+   instances; the theory division's R16-THY-1(b)); local: the design-versus-cone game
+   (`portfolio.py`) and the per-rung anatomy (`rung_anatomy.py`).  Protocol with hypotheses
+   committed before launch.  Draft: `docs/engineering/drafts/ENG-RES-0015.draft.md`.
+3. **X-012** (BM-2): an exact checker of the science division's "shares at the leaves"
+   certificates, by an independent subagent, checked by the coordinator (third
+   implementation; tests re-run); `experiments/eng/leafcert/REPORT.md`.  One finding for the
+   science division: their reference checker accepts a false bound on malformed input.
+4. **X-014** (BM-6): site-dependent slopes — a transfer of Theorem K1 to outer blocks of one
+   site type (`hetero.py`), exact lower bound, literal runs on small cubes
+   (`hetero_literal.py`), job **M-018** (75 mixtures).  Draft:
+   `docs/engineering/drafts/ENG-RES-0016.draft.md`.
+5. Benchmark documents: `docs/engineering/benchmarks/` (master plan, registry = the shared
+   queue, readiness, results, baselines, reproducibility, limitations, protocols).
+
+### 4.4 Mistakes made and what they changed
+
+* **Unbounded caches**: the first deep recursion kept every table and every node in memory
+  (4.5 GB after ten minutes, on a machine with 7.6 GB shared with two subagents).  Killed;
+  caches bounded; a test forces evictions and compares results.
+* **`pgrep -f` / `kill` by pattern killed my own shell twice more** (the pattern also occurred
+  elsewhere in the same command line).  Rule, again: find the PID in one command, kill it
+  in another that does not contain the pattern.
+* **The first lower bound of the literal simulator was wrong** (a wrong closed form for
+  `Π(1 + e^{−u})/2`), then **its lower end dropped the certified sum** — the second error
+  made brackets wider than certified, which the theorem forbids deterministically, and
+  that is how it was found (ENG-RES-0016 §6).  Both were mine, in test code; the equality
+  case (cone at the reference point) is now among the instances.
+* **Times of day**: three documents carried times an hour late; corrected from the commit
+  log.  ENG-MSG-0006's header says "written 15:15–16:15"; it was committed at 15:25.
+* A draft sentence said the bounded design costs "within 0.05" on cone and flat fibres at
+  every rung; the table says up to `0.13`.  Caught before publication by generating the
+  table first.
+
 ## Resume here
 
-State at the end of session 3 (checkpoint 5): see `docs/collaboration/status/engineering.md`
-for the table of requests (two other divisions now); the list below is the order of work
-(ENG-MSG-0004 §6 as changed by ENG-MSG-0005).
+**State at 2026-11-26 about 17:30 UTC (session 4 in progress).**  Read
+`docs/engineering/DIRECTIVES.md` first: the research owner asked for a *continuous*
+research loop; a finished checkpoint is not a reason to stop.
 
-0. **At the start of every session:** `git fetch origin claude/determined-ride-og1u7j
-   research/scientific-translation`; follow `docs/collaboration/UPSTREAM_SYNC.md` for both;
-   read new THY-/SCI- messages addressed to engineering (the science digest
-   `SCIENCE_TO_ALL.md` has a section "Engineering division"); read `COMPUTE_LEDGER.md`
-   ("Policy") before any remote job; `modal app list` must show no engineering app
-   running.  Commit before launching anything whose rows store a commit; stop processes by
-   PID, never with `pkill -f <script name>`.
-1. **The checker of the science division's sandwich certificate** (SCI-MSG-0025 §8 on
-   `research/scientific-translation`; not read yet).  Promised as the first item not yet
-   started (ENG-MSG-0005); the science division calls it the request of theirs that
-   matters most, and a checker is what this division is for.  Read the specification,
-   then decide in writing (ENG-RES-0015) before writing code.
-2. **THY-REQ-0001, what is left** after ENG-RES-0014 (three levels at `u = 1` done in a first
-   form; instances that are not products bounded; convergence done):
-   (a) **a middle level designed against wide brackets** — choose the server of each rung
-   and the split of the middle level by their cost on cone fibres, or by `C_max`, instead
-   of at the flat fibre, and see whether the third level's advantage returns
-   (`three_levels.rung_table` holds both costs already);
-   (b) **the fibre landscape searched** — the base bracket's answer is a functional of the
-   fibre's weight law (`three_levels.k0_cone` does it for cones): generalise it to any
-   radial fibre and search fibre and outer landscape together; note that a fibre must be
-   a product instance for every split the middle level makes, which cones are and
-   radial profiles are not;
-   (c) other slopes (`u = ½, 2`) for ENG-RES-0014 §3; reading (A) at `n = 16 000`;
-   (d) the extensive regime of §11.18 (the evaluator now takes `θ` and `δ` as logarithms);
-   (e) real inner brackets (`DEAD_ENDS.md` ED-7) with the batched schedule of Theorem 11.84
-   **and its stopping rule** (THY-MSG-0013 §3);
-   (f) inner behaviours that differ from point to point (ENG-RES-0014 §4 leaves them open).
-3. **The off-lattice chain in exact arithmetic over `ℚ[cos θ]`** (SCI-REV-0008, R7-ENG-3;
-   specification in the science branch, `docs/science/workstreams/R7_REPORT.md` §7, not
-   read yet).  Nothing off-lattice at 13 torsions or beyond before it.  Then what is left
-   of THY-REQ-0002, with both lower ends printed and the covers stored (R7-ENG-2), and a
-   certified branch and bound for the nine optima that rest on one solver (R7-ENG-5), in
-   the tree format of SCI-RES-0012 §3.
-4. **THY-REQ-0003** in the revised design of ENG-RES-0003, remainder `η(1 + ‖λ‖₁)`.
-5. Small accepted items: SCI-REV-0004 §6 (three proposals at the cone with a field);
-   SCI-REV-0010 R10-E1 (vertices of two weighted cubes); the design search of
-   ENG-RES-0013 §3 if the science division wants it.  None of the three messages has
-   been read beyond its request line.
-6. THY-REQ-0009 (plan in ENG-RES-0011); THY-REQ-0010 questions 1 and 3; THY-REQ-0007
-   (ENG-RES-0010); THY-REQ-0008 items 1–4 together with the science division's
-   enumeration requests (class tables of bridges, full pair-distance histograms: one
-   remote job, to be bounded in the ledger first).
-7. **E-1** in the form the science division gave it (the native kernel against
-   pseudo-Boolean proof logging), with THY-REQ-0004.
-8. The science division's requests on peptides (rotamers, an implicit-solvent energy):
-   inside the scope the research owner authorised (fixed-sequence structural
-   characterisation; no sequence design, no optimisation of function).  The science
-   division states that its instances are synthetic homopeptides built by its own code
-   with the parameters of a public force-field package (SCI-RES-0012 §4); none of the
-   requests has been read.  Decide per request after reading.
-9. The audit of the theory head `63e36f7` (eighteenth checkpoint; seven new Lean files) has
-   not been run; nothing here depends on those files.
+0. **At the start of every session:** `git fetch origin` (six branches now); follow
+   `docs/collaboration/UPSTREAM_SYNC.md`; read new messages addressed to engineering in all
+   five other mailboxes (`THEORY_TO_ENGINEERING.md`, `SCIENCE_TO_ALL.md`, `ENSEMBLE_TO_ALL.md`,
+   `GEOMETRY_TO_ALL.md`, `COMPLEXITY_TO_ALL.md` on their branches); read `COMPUTE_LEDGER.md`
+   ("Policy": the launch test) before any remote job.  Commit before launching anything
+   whose rows store a commit; stop processes by PID.
+1. **Remote jobs that may still be running or uncollected** (detached; results wait in a
+   `modal.Dict` for seven days; the apps end by themselves):
+
+       python modal_jobs/bench_collect.py --driver nested_bench --job certified1+instances1     # M-016, M-017
+       python modal_jobs/bench_collect.py --driver hetero_bench --job hetero1                   # M-018
+       modal app list --json      # keys state, description, tasks; ours are named metricchain-eng-*
+       modal container list --json
+
+   M-016's largest sizes (`n ≥ 32 000`) can run until 2026-11-27 04:20 UTC.  After the last
+   collection: enter the measured costs in the ledger (`modal billing report`), set the
+   jobs to "done", update the allocation table, and check `modal billing summary` shows
+   **Billed Cost $0.00**.
+2. **Publish** `ENG-RES-0015` and `ENG-RES-0016`: move the drafts from
+   `docs/engineering/drafts/` to `docs/collaboration/responses/engineering/`, run
+   `python experiments/eng/twolevel/make_tables_x011.py --write <file>`, check every number
+   in the prose against the generated tables (the drafts were written from partial data —
+   the list of sentences to re-check is at the head of each draft's history in this log,
+   §4.4), then `--verify`.  ENG-RES-0015 covers sizes up to 16 000; larger sizes go into a
+   linked addendum.  Then a message ENG-MSG-0007: synchronisation with all five branches;
+   to the science division the checker (X-012) and the finding about its reference
+   checker; to the geometry division the answer to GEOMETRY-REQ-0001; to the three new
+   divisions how to request computation (`docs/collaboration/README.md`, "Shared
+   computation"; `benchmarks/BENCHMARK_REGISTRY.md`).
+3. **Subagents in flight when this was written** (their output is reviewed, then filed and
+   committed by the coordinator — they do not commit): X-013 weighted cubes (R10-E1; files
+   under `src/metricchain_eng/weighted_cube/`, `experiments/eng/weighted_cube/`,
+   `tests/eng/test_weighted_cube.py`); GEOMETRY-REQ-0001 items 1 and 3 (files under
+   `experiments/eng/geometry_req1/`, `tests/eng/test_geometry_req1.py`).  If a session ends
+   before they report, their files are in the working tree, untracked: review them like
+   any contribution (run the tests, read the core, write the report from their code) or
+   delete them.
+4. **Then, in this order** (the registry `benchmarks/BENCHMARK_REGISTRY.md` is the queue):
+   (a) X-011 continued — slopes `u = ½, 2` (Q-10); fibres that are hard for the *bounded*
+   middle design (ENG-RES-0015 §7); a literal simulation of a nested run at small `n`
+   (none exists);
+   (b) the sandwich certificate checker (SCI-MSG-0025 §8; Q-08), now that the leaf checker
+   exists, and a *producer* for leaf certificates so that BM-2 can reach stage D;
+   (c) the off-lattice chain in exact arithmetic (R7-ENG-3; Q-06), then the enumeration
+   job (Q-07);
+   (d) X-014 continued — if §2 of ENG-RES-0016 survives its referee: alphabets of
+   different sizes; an exact extremal function of small weighted cubes;
+   (e) THY-REQ-0003 (profile constants; Q-09);
+   (f) requests of the three new divisions as they arrive, by the readiness test.
+5. Not done and not started: the audit of any theory head after `9408e33` (the science
+   division reports passes up to `3cf14b9`); the theory division's report on the rate of
+   the level recursion (`020e990`) and Theorem 11.58a are unread beyond summaries.
 
 Worktree of the theory branch (read only; never end a shell command inside it):
 `git worktree add --detach ../MetricChain-theory-<sha> <sha>`, then
