@@ -41,6 +41,30 @@
   claimed elsewhere.  See `OPEN_PROBLEMS.md`.
 * Next steps: `RESEARCH_LOG.md`, "Resume here".
 
+## Directives in force (from the research owner)
+
+1. The founding mandate (re-sent 2026-11-26 about 20:45 UTC, unchanged): open problems in mathematical biology /
+   complexity; write only to `research/biological-complexity`; no merges, force pushes, pull requests or changes
+   to other divisions' branches; abstract models and synthetic instances only (no sequence engineering,
+   target-specific optimisation or experiments); labels [V]/[P]/[K]/[N]/[C]; no `sorry`, no new axioms;
+   consolidation when about $2,000 of credits remain (directive not yet received); **hard stop 30 November
+   2026, 3:00 PM Eastern Time**.
+2. Supplementary directive "Mathematical Generality, Physical Relevance, and Foundational Breakthroughs" (known to
+   us through the theory division's relay THY-MSG-0016): the assumption audit `ASSUMPTION_AUDIT.md`.
+3. Supplementary directive "Computational Complexity, Algorithmic Feasibility and Structural Biology Software"
+   (received 2026-11-26 about 22:02 UTC): a **seventh division**, Structural & Computational Biology, Software
+   Development and Applications, on branch `research/structural-biology`, digest
+   `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md`.  Our primary task stays mathematical discovery; in addition:
+   read their branch, answer their computational obstacles with precise classifications (exact / parameterised /
+   approximation / certification; worst case versus average case), propose stress tests with Engineering.  The
+   initial orientation is COMPLEXITY-MSG-0005, written **before their branch existed** (2026-11-26 22:05 UTC: the fetch
+   failed) — re-fetch, read their digest, and revise or answer.
+
+The seven branches: theory `claude/determined-ride-og1u7j`, engineering `research/ubuntu-engineering`, science
+`research/scientific-translation`, ensemble `research/ensemble-identifiability`, geometry
+`research/geometric-inference`, complexity `research/biological-complexity`, structural biology
+`research/structural-biology`.
+
 ## How to re-run everything we claim
 
 ```

@@ -1,6 +1,6 @@
 # Status — Mathematical Biology and Computational Complexity Division
 
-Branch `research/biological-complexity`.  Updated 2026-11-26 21:26 UTC (read from the clock; session 1, fourth checkpoint).
+Branch `research/biological-complexity`.  Updated 2026-11-26 22:05 UTC (read from the clock; session 1, after the fourth checkpoint).
 
 | item | state |
 |---|---|
@@ -8,9 +8,9 @@ Branch `research/biological-complexity`.  Updated 2026-11-26 21:26 UTC (read fro
 | registers | `docs/complexity/OPEN_PROBLEMS.md`, `THEOREMS.md`, `PRIOR_ART.md`, `DEAD_ENDS.md`, `RESEARCH_LOG.md`, `HANDOFF.md` |
 | results | **Hardness** (CX-T1–T4, T14, T15, T20, T24; `STRANDS_NN_HARDNESS.md`): multi-strand MFE strongly NP-hard, #SSEL #P-hard in the nearest-neighbour model with exterior loops 0; flush coaxial stacking, dangles, both together, several complexes; ETH bound with a self-contained chain — reviewed three times (REV-0001, SCI-REV-0019, REV-0003): correct.  **Algorithm** (CX-T10–T12, T30; `STRANDS_ALGORITHM.md`): magnified partition function, MFE and level counts over all strand orderings with symmetry, `O(N⁴3^c)`, polynomial for bounded species — reviewed (REV-0003): correct; **for the base-pair model this is Boehmer et al. 2025, ours is the nearest-neighbour version**.  **NANUQ** (CX-T5–T9, T13, T26, T27; `NANUQ_LOCAL_CRITERION.md`): local criterion; all galled outer-labeled planar networks (probable rediscovery); the parametric family — reviewed (REV-0002, REV-0004); **new, unreviewed:** the sharp class for "Kalmanson" alone (forbidden six-leaf pattern) and **level 2 completely** (one critical split per nested blob, `α = β_1G + ξ_1R − Σβ_jβ_l`).  **Ising ground sets** (CX-T16–T19, T25, T28, T29; `ISING_GROUND_SETS.md`): fixed `K` linear time, `2^K·poly(n)` in general, structure — reviewed (REV-0004), largely known (Laurent–Poljak); **new, unreviewed:** degree-2 certificates ⇔ no other sign vector in the span, co-NP-complete.  **Penalised models** (CX-T21–T23): unreviewed.  Lean: CX-V1–V4 |
 | corrections of record | COMPLEXITY-MSG-0003 §1 (seven items); **COMPLEXITY-MSG-0004 §1 (six items, after REV-0003 and REV-0004)**; COMPLEXITY-RES-0008 (to Ensemble) |
-| active | reviews REV-0003 and REV-0004 fully processed (dispositions in the two files).  Next: independent review of the unreviewed items (CX-T26–T30); E-C1 for `K ≫ log n`; A3′; NANUQ level 3 |
+| active | a fifth internal review (CX-T26–T30) is running; NANUQ beyond level 2 (blob-locality at every level, `NANUQ_HIGHER_LEVELS.md`; survey of six-leaf networks with three and four hybrid nodes); collaboration with the new Structural & Computational Biology division (`research/structural-biology`, not yet on the remote at 22:05 UTC) |
 | queued | A4, A5, C1–C3; theory's §5 item 1 (item 3 answered for product references) |
-| messages sent | COMPLEXITY-MSG-0001 to -0004; COMPLEXITY-RES-0001 (science), -0002 (geometry), -0003 (ensemble), -0004 (science), -0005 (theory, science), -0006 (science), -0007 (ensemble), -0008 (ensemble); reviews received and recorded: COMPLEXITY-REV-0001 to -0004 (internal), SCI-REV-0019 (science) |
+| messages sent | COMPLEXITY-MSG-0001 to -0005 (-0005: orientation for the new Structural Biology division, whose branch did not yet exist when it was written); COMPLEXITY-RES-0001 (science), -0002 (geometry), -0003 (ensemble), -0004 (science), -0005 (theory, science), -0006 (science), -0007 (ensemble), -0008 (ensemble); reviews received and recorded: COMPLEXITY-REV-0001 to -0004 (internal), SCI-REV-0019 (science) |
 | requests open | none of ours |
 | last synchronisation | theory `6646a2a`, science `88c9a90`, engineering `c81166b`, ensemble `8d42f60`, geometry `288b2de` (fetched 20:47 UTC by the clock); read since the third checkpoint: SCI-RES-0034 in full, THY-MSG-0018 §5, GEOMETRY-MSG-0007 §4 |
 | resources | local CPU only; no Modal request; four internal subagent reviews commissioned by us (REV-0001 to -0004) |
