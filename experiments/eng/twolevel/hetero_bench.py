@@ -90,8 +90,28 @@ def cell(uH: float, uL: float, frac: float, n: int, max_levels: int = 3, time_li
     return out
 
 
-def tasks() -> list[dict]:
-    return [dict(uH=uH, uL=uL, frac=f, n=n) for n in SIZES for (uH, uL) in SLOPES for f in FRACTIONS]
+def tasks(job: str = "hetero1") -> list[dict]:
+    """Task list for ``modal_jobs/bench_app.py`` (ids, tiers) and for the local driver."""
+    out = []
+    if job == "smoke":
+        out.append(dict(func="cell", tier="s", kwargs=dict(uH=2.0, uL=0.5, frac=0.25, n=1000, max_levels=2, time_limit=600.0)))
+    elif job == "hetero1":
+        for n in SIZES:
+            for (uH, uL) in SLOPES:
+                for f in FRACTIONS:
+                    tier = "m" if n <= 4000 else "l"
+                    out.append(dict(func="cell", tier=tier, kwargs=dict(uH=uH, uL=uL, frac=f, n=n, max_levels=3,
+                                                                       time_limit={"m": 3000.0, "l": 9900.0}[tier])))
+    else:
+        raise ValueError(job)
+    for t_ in out:
+        kw = t_["kwargs"]
+        t_["id"] = "cell:" + ",".join(f"{k}={kw[k]}" for k in sorted(kw) if k != "time_limit")
+    return out
+
+
+def run_task(task: dict) -> dict:
+    return cell(**task["kwargs"])
 
 
 def _run(kw):
@@ -111,7 +131,7 @@ def main() -> int:
         for line in out.read_text().splitlines():
             r = json.loads(line)
             done.add((r["uH"], r["uL"], r["frac"], r["n"]))
-    todo = [t for t in tasks() if (t["uH"], t["uL"], t["frac"], t["n"]) not in done]
+    todo = [t["kwargs"] for t in tasks("hetero1") if (t["kwargs"]["uH"], t["kwargs"]["uL"], t["kwargs"]["frac"], t["kwargs"]["n"]) not in done]
     commit = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
     print(f"{len(todo)} cells to run ({len(done)} stored) at {commit[:7]}", flush=True)
     with Pool(args.procs) as pool, out.open("a") as fh:

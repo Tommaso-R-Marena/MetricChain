@@ -35,7 +35,8 @@ GIB_USD_PER_HOUR = 0.0080
 TIERS = {"s": (1200, 1024), "m": (3600, 2048), "l": (10800, 2048), "xl": (21600, 4096), "xxl": (43200, 4096)}      # (timeout s, memory MiB)
 
 # driver name -> (directory under experiments/eng, module, result prefix, packages of src/metricchain_eng it imports)
-DRIVERS = {"nested_bench": ("twolevel", "nested_bench", "x011", ("twolevel",))}
+DRIVERS = {"nested_bench": ("twolevel", "nested_bench", "x011", ("twolevel",)),
+           "hetero_bench": ("twolevel", "hetero_bench", "x014", ("twolevel",))}
 PACKAGES = sorted({p for d in DRIVERS.values() for p in d[3]})
 EXPERIMENT_DIRS = sorted({d[0] for d in DRIVERS.values()})
 
