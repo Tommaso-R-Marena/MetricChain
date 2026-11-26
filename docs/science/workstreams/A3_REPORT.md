@@ -157,6 +157,16 @@ in the true ensemble, given the earlier sites, is a `c_i`-bounded-range "mechani
 model*.  (The Kullback–Leibler chain rule with conditionals of bounded range is also the first step of
 our Proposition A1.1, workstream A1.)
 
+*Remark (general reference measure) [P; checked numerically, C5, last block].*  Only step (ii) uses the
+product structure.  For an arbitrary model `π` on a product space, with sites taken in any fixed order,
+the same proof gives
+
+    D_p(π_g ‖ π)  ≤  Σ_i [ (p − 1) c̃_i²/8 + L(c̃_i) ],      c̃_i := sup_{x_<i} osc_{x_i} F_i(x_≤i),   F_i := −ln E_π[ e^{−r} | x_≤i ],
+
+where `F_i` is the conditional free energy of the remainder given the first `i` sites.  For a product `π`,
+`c̃_i ≤ c_i`; for a model with interactions `c̃_i` also contains the influence of site `i` on the later sites and
+is not bounded by `c_i` (§5, item 6).
+
 *Consequence for A17.6's reading.*  The certified-reweighting cost becomes `e^{K/4}/(δ s_ε²)` instead of
 `e^{K/2}/(δ s_ε²)`: "`c_i ≈ 1 k_BT` is not within reach beyond about 30 sites (`e^{15}`)" becomes about 60
 sites for the same budget.  The qualitative conclusion (polynomial iff `K` bounded) is unchanged.
@@ -235,9 +245,10 @@ it is not evidence about the literature.
 | C3 | both Kullback–Leibler divergences between a law and its tilt `≤ L(w)` | 40 000 random pairs | largest ratios 1.000000 and 1.000000 |
 | C4 | tilt lemma `D_α ≤ αw²/8` | 60 000 random tilts, `α ∈ {1, 1.01, 1.5, 2, 3, 5, 10}` | largest ratio 0.9994; numerical two-point suprema tabulated (e.g. `α = 2`, `w = 3`: 0.76 of the bound) |
 | C5 | A3.2 on product measures: `D_p ≤ (p−1)K/8 + Σ L(c_i) ≤ pK/8`, against A17.6's `p²K/(8(p−1))` | 1 200 members (additive, inf-convolution, hockey-stick, distance functions) on `{0,1}^n`, `n ≤ 8`, and `{0,1,2}^n`, `n ≤ 5`, random product measures, exact enumeration; 7 hill-climbs | largest `D_p/(pK/8)`: 0.989 (`p = 1`), 0.976 (`p = 2`), 0.947 (`p = 6`); refined bound: 0.993, 0.977, 0.948; A17.6's bound: 0.0098 (`p = 1.01`), 0.488 (`p = 2`), 0.789 (`p = 6`); hill-climbs approach 1 from below (0.99995), confirmed with 50 digits |
+| C5, last block | the remark after A3.2: `D_p ≤ Σ_i[(p−1)c̃_i²/8 + L(c̃_i)]` for a **non-product** reference | 240 random pairs (`π`, `r`) on `{0,1}^n`, `n = 3…6`, exact enumeration | largest ratio 0.74 (never violated) |
 | C6 | T3's count is `ε` × the largest variance term of a `[0,1]` variable with the same mean | 4 parameter pairs | exact |
 | C7 | A3.3(a): exact worst-case failure probability of the no-hint rule over two- and three-level alternatives; the theory division's example | 3 parameter triples; `2001 × 41` alternatives each | failure probabilities 0.048, 0.029, 0.006 (`≤ δ`); **545** evaluations without a hint against **1088** quoted for the hinted spot check |
-| C8 | Hoeffding's mean-dependent bound | 19 466 random laws | never violated; median 0.77 of `L(w)` |
+| C8 | Hoeffding's mean-dependent bound | 19 467 random laws (533 nearly degenerate ones skipped) | never violated; median 0.77 of `L(w)` |
 
 *Two lessons recorded.*  The first version of the hill-climb in C5 "found" ratios up to 1.16 and the
 first version of C8 a ratio 1.001: both were rounding noise at scales where `D_p` (a difference of
@@ -925,14 +936,12 @@ Woolf (arXiv:physics/0208015), Waudby-Smith–Ramdas (arXiv:2010.09686), Naesset
 5. **First sources.**  I did not open Specht (1960), Fujii–Izumino–Seo (1998), Tominaga (2002), Durfee–
    Rogers (the paper that introduces bounded range), McDiarmid, Anderson (1969) or a primary source for
    the name "Gibbs–Bogoliubov".
-6. **A17.6 beyond product measures.**  The composition argument of A3.2 needs only that every
-   conditional `π_g(x_i | x_{<i})` is a bounded-range tilt of the model's conditional `π(x_i | x_{<i})`; the range is
-   the oscillation in `x_i` of the conditional free energy of the remainder,
-   `F_i(x_{≤i}) = −ln E_π[e^{−r} | x_{≤i}]`.  For a product `π` this is at most the one-site oscillation `c_i` of `r`
-   (step (ii) of the proof).  For a model with interactions it is **not** bounded by `c_i` — the law of the
-   later sites moves with `x_i` — and bounding it is a question about the influence of one site on the
-   rest (the mixing condition A17.6 alludes to, and the theory division's P2-T3 in another form).  I
-   did not attempt it; §6, item 2 proposes numerics.
+6. **A17.6 beyond product measures.**  The bound holds for any model with the ranges `c̃_i` of the
+   conditional free energy of the remainder (remark after A3.2).  What I did not settle is how large
+   the `c̃_i` are for a model with interactions: they are not bounded by the one-site oscillations of `r`,
+   because the law of the later sites moves with `x_i`; bounding them is a question about the influence
+   of one site on the rest (the mixing condition A17.6 alludes to, and the theory division's P2-T3 in
+   another form).
 
 ## 6. The three most promising next steps
 
@@ -941,11 +950,12 @@ Woolf (arXiv:physics/0208015), Waudby-Smith–Ramdas (arXiv:2010.09686), Naesset
    reading (a hint removes the variance term — and nothing at instances that are flat on the bulk),
    the negative statement on polynomial moments of the remainder, and A17.6 in the sharp form of A3.2.
    This is an afternoon, and it changes what we may claim.
-2. **Check item 6 of §5** (A17.6 for a non-product model by composition along a filtration, with
-   one-site oscillations of the remainder *given the past*).  If it holds it gives, for a chain model
-   sampled site by site, `D_p(π_g‖π) ≤ (p/8)Σ_i c_i²` with `c_i` the oscillation of the conditional free energy
-   of the remainder — a statement about sequential (autoregressive) samplers that the product-measure
-   version cannot reach.  Numerics first on chains of 6–10 sites by enumeration.
+2. **Measure the ranges `c̃_i` for chain models** (§5, item 6).  For a model sampled site by site (a
+   chain, or any model of small tree-width) the remark after A3.2 gives
+   `D_p(π_g‖π) ≤ Σ_i[(p − 1)c̃_i²/8 + L(c̃_i)]`, a statement about sequential samplers that the product-measure
+   version cannot reach; whether it is useful depends on whether the `c̃_i` stay bounded along the chain.
+   Numerics first: chains of 6–12 sites by transfer matrix, remainders of the kinds measured in
+   workstreams P and P2.
 3. **Measure which row a real remainder is in, with the estimator that matches the row.**  The
    literature gives the estimators: empirical-Bernstein bracket under a floor (Liu–Fisher–Ihler),
    median-of-means under a moment bound (Bubeck et al.; Block–Shetty), the one-sided quantile estimator

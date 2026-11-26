@@ -26,6 +26,8 @@ report (COMMON rule 3: numerics before theory).
   C8  Hoeffding's (4.12)-(4.13): ln E e^{Y-EY} <= -w p + ln(1 - p + p e^w), p = (EY - min Y)/w, on random laws;
       it is never larger than L(w) and equals it only at the extremal p.
   C5 also checks the refined bound D_p <= (p-1)K/8 + sum_i L(c_i)   (bounded range => zCDP, composed).
+  C5 (last block) checks the same bound for NON-product reference measures with the ranges c~_i of the
+      conditional free energy F_i = -ln E_pi[e^{-r} | x_<=i]  (remark after A3.2 in the report).
 
 Run:  python3 check_math.py            (about 40 s; writes check_math.out next to this file when redirected)
 """

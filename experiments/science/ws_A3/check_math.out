@@ -39,3 +39,22 @@ C5  product reference: D_p(pi_g||pi) against p K/8 and against p^2 K/(8(p-1))  [
       n=4, p=2.0, P(x_i=1)=0.2: best ratio found 0.938330  (50-digit re-evaluation: 0.938330, K = 4.22)
       n=5, p=2.0, P(x_i=1)=0.5: best ratio found 0.999936  (50-digit re-evaluation: 0.999936, K = 0.001)
       n=4, p=1.0, P(x_i=1)=0.5: best ratio found 0.999966  (50-digit re-evaluation: 0.999966, K = 0.00101)
+      n=4, p=5.0, P(x_i=1)=0.3: best ratio found 0.961467  (50-digit re-evaluation: 0.961467, K = 0.324)
+      n=6, p=2.0, P(x_i=1)=0.5: best ratio found 0.999947  (50-digit re-evaluation: 0.999947, K = 0.001)
+    non-product reference pi (random), ranges c~_i of the conditional free energy of the remainder:
+      240 instances; largest D_p/((p-1)K~/8 + sum_i L(c~_i)): p=1.0: 0.6980  p=1.01: 0.6977  p=1.5: 0.6828  p=2.0: 0.6809  p=3.0: 0.7088  p=6.0: 0.7396
+    additive cube instance r = u|x|, u=0.3, n=4: D_2 = n ln(1+tanh^2(u/2)) = 0.087699;  K/4 = 0.090000;  K/2 = 0.180000
+    additive cube instance r = u|x|, u=0.3, n=12: D_2 = n ln(1+tanh^2(u/2)) = 0.263096;  K/4 = 0.270000;  K/2 = 0.540000
+C6  T3 against the [0,1]-valued mean-estimation problem (X = e^{-(r-lo)} under the floor measure, mean m = Z(g)/Z(lo))
+    m=5.000e-01, eps=0.1: (1/m-1)/eps = 10;  1/(eps m) = 20;  max-variance term (1-m)/(eps^2 m) = 100;  ratio var/hinted = 10 = 1/eps
+    m=4.979e-02, eps=0.2: (1/m-1)/eps = 95.43;  1/(eps m) = 100.4;  max-variance term (1-m)/(eps^2 m) = 477.1;  ratio var/hinted = 5 = 1/eps
+    m=2.472e-02, eps=0.1: (1/m-1)/eps = 394.5;  1/(eps m) = 404.5;  max-variance term (1-m)/(eps^2 m) = 3945;  ratio var/hinted = 10 = 1/eps
+    m=1.679e-07, eps=0.1: (1/m-1)/eps = 5.957e+07;  1/(eps m) = 5.957e+07;  max-variance term (1-m)/(eps^2 m) = 5.957e+08;  ratio var/hinted = 10 = 1/eps
+C7  no-hint stopping rule at the centre of a constant box (exact failure probabilities)
+    m=0.0498, eps=0.2, delta=0.05: N = 287; worst failure probability over alternatives = 0.0483 (<= delta: True);  N / (hinted count (1/m-1)/eps) = 3.01  [ln(1/delta) = 3.00]
+    m=0.0247, eps=0.1, delta=0.05: N = 1183; worst failure probability over alternatives = 0.0286 (<= delta: True);  N / (hinted count (1/m-1)/eps) = 3.00  [ln(1/delta) = 3.00]
+    m=0.5000, eps=0.1, delta=0.01: N = 48; worst failure probability over alternatives = 0.0062 (<= delta: True);  N / (hinted count (1/m-1)/eps) = 4.80  [ln(1/delta) = 4.61]
+    theory division's example: hinted spot check with the half-half sampler: N = 1088 (they state 1088); no-hint rule 'all N samples of pi agree': N = 545  [least detectable masses: dip 0.005511, bump 0.095163]
+C8  Hoeffding (4.12)-(4.13) with the mean position p: gap <= -w p + ln(1-p+p e^w) <= L(w)
+    19467 laws (533 nearly degenerate ones skipped): largest gap/Hoeffding bound = 1.000000 (<= 1); Hoeffding bound / L(w): median 0.772, max 1.000000 (<= 1)
+done

@@ -374,6 +374,42 @@ def check_a1(trials=300):
           f"{worst_cond:.2e}; item 2: max of KL - n*R(r) = {worst_kl:.2e}; equality at the two cones to {worst_cone:.2e}")
 
 
+# ----------------------------------------------------------------------------- S8: Chernoff form of Theorem A
+def check_chernoff():
+    """H_{k,r} <= (n+1) e^{tr} rho_t(k/n; gamma)^n for t >= 0, and the binomial mode bound."""
+    worst = -float("inf")
+    cases = 0
+    for n in range(2, 9):
+        X = cube(n)
+        for (p, u, gam) in ((0.3, 1.0, 0.2), (0.1, 2.0, -0.7), (0.5, 1.5, 0.0), (0.7, 3.0, 3.0)):
+            pi = bern_ref(n, p)
+
+            def site(g, a):
+                z = 1 - p + p * math.exp(-g)
+                return (p * math.exp(-g) if a else 1 - p) / z
+
+            for k in range(1, n):
+                m = k / n
+                assert (n + 1) * math.comb(n, k) * m ** k * (1 - m) ** (n - k) >= 1 - 1e-12
+                Tk = [s for s in X if sum(s) == k]
+                base = {x: tilt_w(p, [gam] * n, x) for x in X}
+                for r in (0.3, 1.0, 2.5):
+                    cnt = {x: 0 for x in X}
+                    for s in Tk:
+                        gf = [(-u if s[i] else u) for i in range(n)]
+                        for x in X:
+                            if math.exp(r) * tilt_w(p, gf, x) > base[x]:
+                                cnt[x] += 1
+                    H = max(cnt.values()) / len(Tk)
+                    for t in (0.0, 0.25, 0.5, 1.0, 2.0):
+                        rho = max((1 - m) * (site(u, a) / site(gam, a)) ** t + m * (site(-u, a) / site(gam, a)) ** t
+                                  for a in (1, 0))
+                        worst = max(worst, H - (n + 1) * math.exp(t * r) * rho ** n)
+                        cases += 1
+    print(f"S8 Chernoff form [{cases} cases, n = 2..8]: max of H_(k,r) - (n+1) e^(tr) rho_t^n = {worst:.3e} (never positive)")
+    assert worst <= 1e-12
+
+
 if __name__ == "__main__":
     check_lemma3()
     check_transitive_set_not_group()
@@ -382,3 +418,4 @@ if __name__ == "__main__":
     check_theoremA()
     check_a16()
     check_a1()
+    check_chernoff()

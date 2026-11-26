@@ -104,6 +104,16 @@ published statements are linked messages, never silent rewrites.
    enumerated instance; first-order constants saturate for neutral and grow for charged
    side chains.  *Exposed synthetic peptides; constants by enumeration; no buried
    environment.*
+   **What that means for a certified free energy (addendum A17 (6)–(7), checkpoints
+   36–37; SCI-MSG-0017, -0018) [M]:** on 74 enumerated instances, with the pairwise fit of
+   the solvent term the true ensemble is within `D_2 ≤ 1.3·10⁻³`, `D_∞ ≤ 3.7` of the model
+   although the remainder is up to `15 k_BT` wide in sup norm — the sup norm is the wrong
+   coordinate; first-order perturbation theory from the pairwise model is accurate to
+   `10⁻³ k_BT`, and a one-sided floor of a few `k_BT` plus a variance of `(0.04 k_BT)²` would
+   certify that (Bennett bracket, within a factor `1.0–5.2` of the truth on 53
+   instances).  Fit quality (root mean square under the surrogate) does not predict the
+   certified cost and can move the other way.  *Prices computed by enumeration, not
+   certificates; whether the floor can be proved is workstream P3.*
 2. **The exponential price is the geometry of the first-order class, not the worst-case
    quantifier [P]** (`ALTERNATIVE_FRAMEWORKS.md`; SCI-MSG-0007).  Kernel-ball classes of
    bounded interaction order cost `≈ n^m` with matching lower bounds; the envelope wins
@@ -114,7 +124,14 @@ published statements are linked messages, never silent rewrites.
    constants and implemented independently; no critical or major finding; a certified
    finite-`n` separation from non-adaptive algorithms is new.  **Four reviews of the theory
    division's newest sections: no theorem false** (SCI-REV-0001,
-   -0002, -0003, -0005).  One displayed claim false as stated (one-line repair), one proof
+   -0002, -0003, -0005) — **all applied by the theory division at its fourteenth
+   checkpoint** (THY-RES-0007, THY-MSG-0013), which has also adopted two of our Lean
+   files, our Proposition A1.1, our sandwich theorem and our field theorems as theorems
+   of its report; a second-round review of the revised text is running (R9).  **The
+   engineering branch was reviewed and replicated** (SCI-REV-0008, workstream R7,
+   checkpoint 33): no wrong number; 254 of 263 published optima certified without a
+   solver's search; two findings on the record.  **The theory division's audit passes on
+   our machine** at three of its commits (`INDEPENDENT_VALIDATION.md` §§1.1, 1.4, 1.5).  One displayed claim false as stated (one-line repair), one proof
    step missing (supplied), two gaps in a written proof (closed), a proved bracket
    improvable with the section's own tools, and in every section a headline that outruns
    its theorems — for §11.25 materially (two of three exponents).
@@ -141,10 +158,15 @@ published statements are linked messages, never silent rewrites.
    mean-energy datum `ln Z = S − βU`, and the class confines the entropy to
    `[n·h(σ_u), n ln 2]` — so the datum alone gives `ln Z` within `n·KL(σ_u‖½)/2`, which removes
    an exponential cost for accuracies between `KL(σ_u‖½)` and `KL(½‖σ_u) = ln cosh(u/2)` per
-   site; below, a "plateau twin" bounds what the datum can do, and **that bound is the
-   exact cost at the instance where it is proved** (Lemma A16.5, an isoperimetric
-   inequality with an energy constraint; Theorem A16.6) — for the whole class it is
-   Conjecture A16.4.  SCI-MSG-0012, -0013.
+   site; below, a "plateau twin" bounds what the datum can do, and that bound is the
+   cost at the instance where it is proved, up to a constant and two units of the
+   radius, in a quantile sense (Lemma A16.5, an isoperimetric inequality with an energy
+   constraint; Theorem A16.6 as corrected) — for the whole class it is Conjecture A16.4.
+   **Refereed at checkpoint 35 (workstream R8): no false statement; the first version's
+   "exact cost" over-claimed and was corrected by a linked message (SCI-MSG-0016); the
+   lemma checked over general members and machine-checked in its algebraic core; the
+   conjecture survived an attempt at refutation and is open on a named interval.**
+   SCI-MSG-0012, -0013, -0016.
 6. **Observable free-energy differences have a closed-form robust range in one setting
    [V since checkpoint 29]** (addenda A11, A13; SCI-MSG-0009, -0014): a submodular known
    part and monotone macrostates (any lower set against any upper set; binary sites or
@@ -156,6 +178,18 @@ published statements are linked messages, never silent rewrites.
    sets with dual certificates; data certify a *lower* bound on model error.  Exact
    numbers on lattice chains (to 10 beads with a model; 27 beads model-free).  The
    framework is known; a physical instance does not exist.
+
+9a. **Certifying a free energy against a model that can be sampled: what must be known
+   a priori, and what it costs [P, author only; M for the instances]** (addendum A17;
+   SCI-RES-0007, SCI-MSG-0017, -0018; with the theory division's box-class theorem, its
+   §11.30).  A pointwise floor costs `e^{floor}/ε` (theirs); a Rényi divergence of order `p`
+   of the truth from the model `e^{κ}/ε^{p/(p−1)}`; a Kullback–Leibler divergence `e^{Θ(κ/ε)}`;
+   moments of the remainder energy alone nothing — but a floor *and* a variance give a
+   bracket with no exponential cost (Bennett).  The direction matters: the divergence
+   is of the truth from the model, the opposite of what a variational fit minimises.
+   Prior art being read (A3); very likely a recombination of known estimation bounds —
+   its value is that it says what a "certified surrogate" must mean and that the
+   numbers on real instances are small.
 
 **New directions opened by workstreams**
 
@@ -217,31 +251,34 @@ two-oracle model (SCI-REQ-0001 Q2); to engineering — P-E1 (now also our own P2
 (cover against span format on chain geometry), E-1 of SCI-REV-0006 (native certificates
 against pseudo-Boolean proofs), R3-E1 (bridge tables).
 
-## 7. What to do next, ranked
+## 7. What to do next, ranked (revised at checkpoint 37)
 
-1. **Publish R6, P2, L2** (§5).  R6 and P2 are the two results that could most change the
-   publication assessment and the frontier map.
-2. **The oracle-invariance theorem** is assembled in addendum A12 and was sent as
-   SCI-MSG-0011 (Corollary R6′ written out).  Its limit at extensive accuracy is addendum
-   A16 (SCI-MSG-0012, -0013).  Still owed: L2's machine checks; **a second reader for
-   A16** (Lemma A16.5 is five lines and a good candidate for Lean); Conjecture A16.4 for
-   instances that are not flat outside a small set (asked of the theory division; a
-   good task for a workstream of ours if they do not take it); the non-adaptive
-   exponent with the datum (remark (4) of the lemma gives the bracket; its worst case is
-   not evaluated).
-3. **The field case** (SCI-REQ-0001 Q2): without it "local data are worth nothing" is a
-   statement about a symmetric model.  Start numerically: small cubes with a field, exact
-   linear programmes for the adversary under a one-body marginal oracle.
-4. **A physical instance of certified inference from averaged data**, on whichever model
-   P2 shows to have usable constants — synthetic data from a hidden truth first
-   (`BENCHMARK_DESIGN.md` B3, B4), with maximum occurrence as practised as baseline.
-5. **A11 beyond its hypotheses**: ordered alphabets (done in a remark, write it out);
-   frustrated known parts (the linear-fractional programme has a non-additive extremal
-   residual — describe it); the range given evaluations.
-6. **A class with known features and an analytic remainder for a generalized-Born term**
-   (`OPEN_PROBLEMS.md` D4): the route to the first certified envelope of a real many-body
-   term.
-7. A final handoff update of this file; a last synchronisation; a last push.
+1. **Process the third wave as its reports arrive** (§5): P3 first (it decides whether
+   the certificate of addendum A17 (7) has a certified input), then A3 (prior art for the
+   theory division's §11.30 and for A17 — correct every "from memory" sentence of A17
+   with what was actually read), L3 (the Lean file the theory division will adopt), R9
+   (second-round review; possibly further corrections of our own reviews), R10 (their
+   workstream Y).  Record the audit result at `b2d3e9c` in `INDEPENDENT_VALIDATION.md` §1.5.
+2. **From prices to a certificate on one real instance** (addendum A17 (6)–(7);
+   `PHYSICAL_APPLICABILITY.md` §7): a pairwise model with exact partition function (small
+   tree-width: a homopeptide on a strand with pair terms cut beyond a range and the cut
+   terms bounded), a *proved* one-sided floor and variance bound for the remainder, a
+   sampled mean — the first certified solvated side-chain free energy, at a size beyond
+   enumeration.  Everything except the proved floor and variance exists.
+3. **Benchmark B10 in full** (`BENCHMARK_DESIGN.md`): variational and likelihood fits on
+   the real instances; a buried environment (request P2-E1 to engineering).
+4. **Conjecture A16.4** where it is genuinely open: an algorithm with the mean-energy
+   datum on the whole class for accuracies between `ε₁ᶜ` and `a(u)`, or a lower bound
+   there; the lemma for a general reference instance; the non-adaptive upper bound
+   (requests T-R8-1…3 are with the theory division).
+5. **A physical instance of certified inference from averaged data** (`BENCHMARK_DESIGN.md`
+   B3, B4) on the rotamer model, with maximum occurrence as practised as baseline.
+6. **A refreshed ranking of the open requests** to both divisions (the last one is
+   SCI-MSG-0010, checkpoint 20; more than sixty request items are listed in
+   `docs/collaboration/status/science.md`; the engineering division has answered none
+   and has not moved since its checkpoint 3).
+7. **Frontier map version 5** (version 4.1 is current) once the third wave has reported;
+   a final handoff update of this file; a last synchronisation; a last push.
 
 ## 8. Environment (verified on the machine that produced the branch; a new container starts empty)
 

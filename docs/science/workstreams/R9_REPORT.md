@@ -76,8 +76,8 @@ re-derived]**
 
 *The one thing I looked for as a possible new gap.*  The batched schedule calls `I_1` on
 all `M_max` fibres, more calls than the sequential algorithm makes; does the good event
-cover them, so that the rule cannot fire on it?  Yes: Theorem 11.56 (lines 4294–4296,
-4322) takes `δ′ = δ/(4LM̄)` and its good event is "every *potential* inner call valid";
+cover them, so that the rule cannot fire on it?  Yes: Theorem 11.56 (lines 4294,
+4320–4321) takes `δ′ = δ/(4LM̄)` and its good event is "every *potential* inner call valid";
 the batched calls are potential calls (`M_max ≤ M̄`).  **[read]**
 
 *The workstream's variant* ("a stored bracket of rung `l − 1` has ratio above `e^{x_{l−1}}`")
@@ -603,7 +603,7 @@ a formula) and cross-checked against an `O(n²)` double loop.
 
 | check | size | result |
 |---|---|---|
-| my enumeration against R2's | bridges with 3–22 beads (92 121 332 at `N = 22`) | totals, classes and sets of gauche counts identical to R2's tables |
+| my enumeration against R2's | bridges with 3–22 beads (92 121 332 at `N = 22`) | numbers of bridges, profile classes and sets of gauche counts identical to R2's tables for every `N` |
 | clean bridges per `N` against the theory division's script | `N ≤ 10` | `1, 2, 4, 10, 24, 64, 159, 420` = theirs divided by 4 (they do not fix the first two bonds) |
 | (c): head 5 + tail 5 (their claim) | all 21 220 319 pairs `(x, c₁)` with `N ≤ 20`, built from coordinates | always a clean bridge; cost `= A + B`; componentwise maxima `(1, 8, 12; 1)`, norm 51 |
 | (c): head 2 + tail 3 | the same | always clean; `(h, g) = q̂` exactly (asserted for `N ≤ 13`, 18 709 cases) |
@@ -661,8 +661,8 @@ the surface law (`N^{−1/3}`) predicts.  A2's own plausibility estimate said as
 (ii) What the theorem predicts *and the tables can show*: no arithmetic obstruction (the
 generated lattice has index 1 already with bridges of at most 10 beads), and
 saturation — at every `N ≤ 24` every lattice point of the convex hull of the attained
-profiles that lies deeper than `0.93` (Euclidean) inside it is attained; the holes, 8–10 %
-of the lattice points of the hull, all sit in the boundary layer.  **[N]**  (iii) A
+profiles that lies deeper than `0.93` (Euclidean) inside it is attained; the holes — 8–10 %
+of the lattice points of the hull for `N ≥ 17`, up to 15 % below — all sit in the boundary layer.  **[N]**  (iii) A
 homothetic-shrinkage reading `|P_N| ≈ vol(𝒦)N³(1 − kN^{−1/3})³` with R2's `k ∈ [1.71, 1.86]` would
 give `vol 𝒦 ≈ 2.5–3.8` at `N = 24`; it is a heuristic **[H]**, its upper end exceeds the proved
 `3.125`, and I do not offer it as an estimate.
