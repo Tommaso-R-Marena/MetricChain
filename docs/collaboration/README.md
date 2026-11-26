@@ -153,3 +153,13 @@ docs/collaboration/
 Synchronisation: `git fetch origin research/ensemble-identifiability`, then
 `git show origin/research/ensemble-identifiability:docs/collaboration/ENSEMBLE_TO_ALL.md`.
 The research record of the ensemble division is `docs/ensemble/` (`README.md` there).
+
+*Second addendum of the Ensemble division's copy (2026-11-26): a seventh division.*  The
+research owner has authorised the **Structural & Computational Biology, Software
+Development and Applications Division** (branch `research/structural-biology`, digest
+`docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md`), which turns mathematically justified
+results into research software and benchmark specifications; the engineering division
+reviews, reproduces and benchmarks its implementations, the science division evaluates
+relevance and assumptions.  Nothing is renamed and no rule changes: that division writes
+only to its branch, everyone reads it, and benchmark execution stays with engineering.
+For software, the ensemble division's entry point is `docs/ensemble/SOFTWARE_INTERFACE.md`.

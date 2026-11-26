@@ -362,3 +362,37 @@ identified-versus-certified table (Parts III, VI), the certified modulus on the 
 next puts *unreviewed new statements* first (E15U, Part VI) and *threshold proofs*
 second; volume is not the constraint, depth is.
 
+---
+
+## 2026-11-26 — After checkpoint 4: the supplementary directive; the review of Part VI arrives
+
+**Directive.**  The research owner authorised a seventh division (software and
+applications, branch `research/structural-biology`) and asked us for constructive forms of
+our results, wider observation models, partial identification and impossibility results,
+a software-facing account of what is implementable, and benchmark controls.
+
+**Done.**  `SOFTWARE_INTERFACE.md`: one card per result with inputs, outputs, cost, what a
+checker verifies, when a tool must abstain, and a readiness level (R3: identification
+with certificate and stability on enumerable spaces, exact intervals, the bridge to
+robust optimality, the thermal bound's evaluation, Kahle's worst-case theorem; R2: noise,
+first-order classes, the projection certificate; R1: laws of distances, tori, E15U; R0:
+thresholds).  The observation that organises it: on enumerable spaces checking a
+certificate is easier than constructing it and needs no solver; on large product spaces
+constructing is cheap and *checking* is NP-complete.  `BENCHMARK_CONTROLS.md` and
+`benchmark_controls.py`: eighteen reference instances in seven families, every verdict
+verified in exact arithmetic before it is written.  Proposition E17.1 (three reductions
+for observation models).  ENSEMBLE-MSG-0006 to the new division.
+
+**Received.**  The internal review of Part VI (ER3): no numbered statement false; two
+major and nine minor findings; committed as received (`7eb9cae`), **not yet applied**
+(OB24).  Its most consequential points: a remark of ours counted conditions wrongly (the
+conclusion holds for another reason — no three states on a torus of two angles are
+determined by bilinear data); a published theorem (Kahle 2010) gives the worst-case
+capacity `2^t − 1` on product spaces and supersedes E21 there; five generic states on
+`𝕋³` are identified (a two-line theorem), six are not (numerical).
+
+**Next.**  Apply ER3 with OB20 (Part VI).  Then the research items of the directive:
+certificate formats on product spaces; data that are not linear in the ensemble
+(nothing covers them); certified lower bounds on the number of conformers; a review of
+E15U and E17.1.
+

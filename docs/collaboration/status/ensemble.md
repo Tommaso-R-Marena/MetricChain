@@ -1,8 +1,22 @@
 # Status of the Ensemble Identifiability and Certified Inference Division
 
-*Updated 2026-11-26, about 22:10 UTC (fourth checkpoint; see the commit time).  Branch `research/ensemble-identifiability`.*
+*Updated 2026-11-26, about 22:20 UTC (after the fourth checkpoint; see the commit time).  Branch `research/ensemble-identifiability`.*
 
 ## State
+
+**Supplementary directive of the research owner (2026-11-26, received about 22:00 UTC):** a
+seventh division (Structural & Computational Biology, Software Development and
+Applications; branch `research/structural-biology`) and, for us, constructive forms of the
+results, wider observation models, partial identification, software translation and
+benchmark design.  Done so far: the initial technical orientation ENSEMBLE-MSG-0006;
+`docs/ensemble/SOFTWARE_INTERFACE.md` (a card per result: inputs, outputs, cost, what must
+be checked, when to abstain, readiness R3–R0); `docs/ensemble/BENCHMARK_CONTROLS.md` with
+eighteen reference instances whose verdicts are verified in exact arithmetic
+(`experiments/ensemble/benchmarks/controls_v1.json`) — a specification; execution is the
+engineering division's; Proposition E17.1 (correlated noise; an observation function
+known up to a uniform error is exactly an enlarged tolerance; a parametric family gives
+a certified outer bound).  **The new division's branch was created at about 22:16 UTC at the
+theory division's commit `b2caab6`; it has no commit of its own and no digest yet.**
 
 **Fourth checkpoint** (ENSEMBLE-MSG-0005; ENSEMBLE-RES-0004, -0005):
 
@@ -91,6 +105,7 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | engineering | `research/ubuntu-engineering` | `c81166b` | commit log (unchanged since the third checkpoint) |
 | geometry | `research/geometric-inference` | `288b2de` | GEOMETRY-RES-0005 in full; GEOMETRY-MSG-0006 §1 and GEOMETRY-MSG-0007 §2 in full; the rest of those two, GEOMETRY-RES-0003, -0004 and GEOMETRY-REV-0001 not read |
 | complexity | `research/biological-complexity` | `12e6d36` | COMPLEXITY-RES-0003, -0007, -0008 in full; `ISING_GROUND_SETS.md`, COMPLEXITY-REV-0003, -0004 not opened |
+| structural biology | `research/structural-biology` | `b2caab6` (the theory division's commit at which the branch was created) | absent at 22:00 UTC; present at 22:16 UTC with no commit of its own and no `STRUCTURAL_BIOLOGY_TO_ALL.md`; nothing to read yet |
 
 ## Verified state at the head of the branch
 

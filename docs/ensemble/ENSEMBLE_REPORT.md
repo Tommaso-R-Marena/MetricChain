@@ -15,8 +15,10 @@ internal adversarial review by a subagent of this division
 (`reviews/ER1_internal_review.md`, `reviews/ER2_internal_review.md`; AI reviews, not academic
 peer review), whose findings are applied here (§7); the science division has reviewed
 Part II independently (its SCI-REV-0020; applied) and checked Theorem E15 with its own
-code (SCI-RES-0032); Part VI is under a third internal review that has not yet reported.
-No external peer review of anything.
+code (SCI-RES-0032); Part VI has had a third internal review
+(`reviews/ER3_internal_review.md`: no numbered statement false, two major and nine minor
+findings) **whose corrections are not yet in the text below** — until they are, that
+review is the authority on the defects of §4c.  No external peer review of anything.
 "New" below always means "not found in the search documented in `PRIOR_ART.md`".
 
 ---
@@ -1721,6 +1723,53 @@ checked in the scripts of the review ER2 only (`ER2_scripts/e17_noise.py`: 148 i
 of the duality; the supremum of the risk of `T̂` on 12 instances, exactly and by
 simulation).
 
+**Proposition E17.1 (observation models: three reductions) [P, immediate; unreviewed].**
+Added at the request of the research owner's supplementary directive, for the division
+that writes software; each part says what a departure from "exact means of exactly known
+functions with independent noise" costs.
+(a) *Correlated noise.*  If `y = Aμ + ξ` with `ξ` Gaussian of known non-singular covariance
+`Σ`, Theorem E17 holds with `σ = 1` and the modulus
+
+    ω_Σ(ε) = sup{ T(μ₁) − T(μ₀) : ‖Σ^{−1/2}A(μ₁ − μ₀)‖₂ ≤ ε } = min_λ { ε‖Σ^{1/2}λ‖₂ + R_𝒫(ψ − λ·Φ) } :
+
+the estimator `λ·y + c` with `λ` the minimiser at `ε = 2` has root-mean-square error at most
+`0.5·ω_Σ(2)`, and no estimator has less than `0.335·ω_Σ(2)`.  A direction of the data space in
+which `Σ` vanishes is an exact linear constraint on `μ` and is put into the class `𝒫`.
+(b) *An observation function known up to a uniform error.*  Let `|φ_i − φ̃_i| ≤ δ_i` on `X`,
+`φ̃` the nominal functions.  Then
+
+    { ν : |E_ν φ_i − y_i| ≤ τ_i for some admissible φ }  =  { ν : |E_ν φ̃_i − y_i| ≤ τ_i + δ_i } .
+
+So a uniform error of an observation function is **exactly** an enlargement of the
+tolerance of that datum: every interval, mass bound or infeasibility certificate computed
+with the nominal functions and the tolerances `τ + δ` is valid for the truth, and nothing
+smaller is.
+(c) *An observation function with unknown parameters.*  For a family `φ_θ`, `θ ∈ Θ`, the
+ensembles compatible with the data form the union `∪_θ {ν : |E_ν φ_θ − y| ≤ τ}` — a union of
+convex sets, in general not convex — and the range of a target over it is the supremum
+over `θ` of the values of the linear programmes of E2(a).  If `sup_X |φ_θ − φ_{θ'}| ≤ L|θ − θ'|`
+for a compact `Θ`, and `θ_1, …, θ_G ∈ Θ` is a grid such that every `θ ∈ Θ` is within `h` of some
+`θ_k`, then
+
+    ∪_{θ∈Θ} { ν : |E_ν φ_θ − y| ≤ τ }  ⊆  ∪_{k≤G} { ν : |E_ν φ_{θ_k} − y| ≤ τ + Lh } ,
+
+so `G` linear programmes with the enlarged tolerance give a certified outer bound for the
+range of any target, which converges to the exact range as `h → 0`.
+
+*Proof.*  (a) Apply E17 to `Ã = Σ^{−1/2}A`, `ỹ = Σ^{−1/2}y`: an estimator `λ̃·ỹ + c` is `λ·y + c`
+with `λ = Σ^{−1/2}λ̃`, and `‖λ̃‖₂ = ‖Σ^{1/2}λ‖₂`, `λ̃·Φ̃ = λ·Φ`.  (b) "⊆": `|E_ν φ_i − E_ν φ̃_i| ≤ δ_i` for
+every ensemble.  "⊇": for `ν` in the right-hand set take `φ_i = φ̃_i + c_i` with the constant
+`c_i ∈ [−δ_i, δ_i]` that brings `E_ν φ̃_i + c_i` within `τ_i` of `y_i`.  (c) By (b) with `δ = Lh`,
+applied at the grid point nearest to `θ`.  Convergence: the right-hand set is contained in
+the union over `θ ∈ Θ` with tolerance `τ + Lh`, and the range of a continuous target over
+that union decreases to its value at tolerance `τ` as `h → 0` (the sets are compact and
+decrease to their intersection; `Θ` and the set of ensembles on a compact `X` are compact).  ∎
+
+What is **not** covered by any statement of this report: data that are not linear in the
+ensemble (a ratio or a square of averages; an average taken on the time scale of the
+measurement).  Then the set of compatible ensembles is not convex even for exactly known
+functions, and neither the duality nor the certificates above apply as stated.
+
 ## 4c. Part VI — Lifted supports: what sum-of-squares certificates reach, and what knowing the number of conformers buys
 
 The certificate of Theorem E10 is a positive semidefinite form in the configuration.  The
@@ -2167,13 +2216,13 @@ a finite space — is the question we put to the theory and complexity divisions
 |---|---|
 | Lean | `proofs/Ensemble/Exposedness.lean`, `RenyiHeppes.lean`, `ThermalUnionBound.lean`, `TwoStateCertificate.lean`, `PermanentCertificate.lean`: twenty-four headline theorems and eight non-vacuity witnesses listed in `proofs/AxiomAudit.lean`; standard axioms only; no warning; the programme's `scripts/audit_all.sh` passes on this branch (the status file records exactly which tree each stage was run on).  What is machine-checked is named at each theorem; everything else is a paper proof.  Of Part VI only the combinatorial cores of E20′, E20″ and E21 are machine-checked; for finite `X` the last step of E18 is `eq_of_exposing_certificate` applied to the zero set |
 | numerics | `experiments/ensemble/run_all.py` runs the six scripts whose numbers are quoted (output in `experiments/ensemble/output.txt`) and then `check_quotes.py`, which fails the run if a number quoted in a "Numerical check" passage is no longer the one in the stored output (about eighty sentences are tied to output lines; three review findings had been numbers that no script printed); the threshold computations of §4.2, §4.4 and §4c.3 are separate (`capacity_threshold.py`, `capacity_cutting_plane.py`, `symmetric_stability.py`, `kbody_capacity.py`, `degree2_vs_face.py`; output in `output_threshold.txt`) |
-| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  A second internal review (`reviews/ER2_internal_review.md`, with its own scripts in `reviews/ER2_scripts/`; again an AI review) of Parts IV and V, Theorem E7′, Proposition E2.2, Remark E2.3 and §4.4 found no critical defect, four major ones — a false converse in the title and summary of E15T, numbers quoted for check F6 that the script did not print, an overstatement in E2.2, a false sentence and a factor two in E2.3 — and twelve minor ones; all are applied and listed in §7 (item 10).  The science division reviewed Part II independently (SCI-REV-0020, its workstream R21: applied, item 9), contributed Proposition E2.2 and Proposition B, and replicated Theorem E15 with its own code (SCI-RES-0032: applied, item 11).  Part VI (version 3) is under a third internal review, not yet reported.  No external peer review |
+| review | an internal adversarial review of version 1 (Parts I–III; `reviews/ER1_internal_review.md`, by a subagent of this division — an AI review, not peer review) found no false numbered statement, five major and thirteen minor defects of wording, citation and scope; all are applied and listed in §7.  A second internal review (`reviews/ER2_internal_review.md`, with its own scripts in `reviews/ER2_scripts/`; again an AI review) of Parts IV and V, Theorem E7′, Proposition E2.2, Remark E2.3 and §4.4 found no critical defect, four major ones — a false converse in the title and summary of E15T, numbers quoted for check F6 that the script did not print, an overstatement in E2.2, a false sentence and a factor two in E2.3 — and twelve minor ones; all are applied and listed in §7 (item 10).  The science division reviewed Part II independently (SCI-REV-0020, its workstream R21: applied, item 9), contributed Proposition E2.2 and Proposition B, and replicated Theorem E15 with its own code (SCI-RES-0032: applied, item 11).  Part VI (version 3) has had a third internal review (`reviews/ER3_internal_review.md`: no numbered statement false; two major and nine minor findings), **not yet applied** (obligation OB24).  Propositions E15U and E17.1 are unreviewed.  No external peer review |
 | prior art | `PRIOR_ART.md`: the searches of the first checkpoint and those of the internal reviews ER1 and ER2 (with the level at which each source was read); two searches for E15U; for Part VI the two cited theorems were read in the sources (§5b), E18′, E20′ and C3 were not searched (OB16) |
 
 ## 7. Corrections and changes since version 1 (commit `a570520`)
 
 *(Items 1–6: version 2, commit `1a067b5`.  Item 7: version 3, commit `32f547a`.  Item 8: commit
-`8d42f60`.  Items 9–12: the fourth checkpoint.)*
+`8d42f60`.  Items 9–12: the fourth checkpoint, commit `527bf02`.  Item 13: after it.)*
 
 1. **Theorem E11 strengthened and restated** (linked correction of ENSEMBLE-MSG-0002 §1,
    in ENSEMBLE-MSG-0003).  Version 1: "beyond `6.34n` random conformers (equal populations)
@@ -2309,6 +2358,15 @@ a finite space — is the question we put to the theory and complexity divisions
    deciding exposedness and on the degree of certificates (COMPLEXITY-RES-0003, -0007,
    -0008), with a table of our own (identified against certified at degree 2 on small
    cubes); `check_quotes.py`.
+13. **After the research owner's supplementary directive** (a seventh division for
+   software; constructive forms of the results): Proposition E17.1 — correlated noise,
+   an observation function known up to a uniform error (exactly an enlarged tolerance),
+   a parametric family of observation functions (a certified outer bound by a grid) —
+   immediate and unreviewed.  Companion documents: `SOFTWARE_INTERFACE.md` (what each
+   result means as a computation, with readiness levels) and `BENCHMARK_CONTROLS.md`
+   (synthetic controls with verified ground truth).  **Part VI is still the text of
+   commit `8d42f60`: the internal review ER3 has reported and is not yet applied** (see
+   `reviews/ER3_internal_review.md` and obligation OB24 before relying on §4c).
 
 ## 8. Limitations
 

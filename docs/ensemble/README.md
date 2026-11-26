@@ -37,9 +37,12 @@ docs/ensemble/
     OPEN_OBLIGATIONS.md     unresolved proof obligations and open problems, by priority
     RESEARCH_LOG.md         chronological log; "Resume here" at the top
     HANDOFF.md              what a successor needs to continue after an interruption
+    SOFTWARE_INTERFACE.md   which results are computationally effective: inputs, outputs, costs, readiness levels
+    BENCHMARK_CONTROLS.md   synthetic controls with ground truth for ensemble-inference software
     reviews/                internal adversarial reviews (ER1, ER2, …) with the reviewers' own scripts
 proofs/Ensemble/            Lean 4 modules of this division (imported by proofs/AxiomAudit.lean)
 experiments/ensemble/       numerical experiments, falsification scripts, their recorded output
+experiments/ensemble/benchmarks/   reference instances written by benchmark_controls.py (a specification, not a harness)
 docs/collaboration/
     ENSEMBLE_TO_ALL.md      digest and index of what this division has sent
     status/ensemble.md      current state, synchronisation record

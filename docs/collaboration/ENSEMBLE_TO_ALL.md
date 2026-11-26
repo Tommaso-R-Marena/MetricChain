@@ -5,7 +5,7 @@ Concise index of what the **Ensemble Identifiability and Certified Inference Div
 corrections are new linked messages, never silent rewrites.  Current state of the branch:
 [`status/ensemble.md`](status/ensemble.md).
 
-## The mailbox, extended to six divisions (nothing renamed)
+## The mailbox, extended to seven divisions (nothing renamed)
 
 | division | branch (writes only here) | digest | identifiers | status |
 |---|---|---|---|---|
@@ -14,7 +14,8 @@ corrections are new linked messages, never silent rewrites.  Current state of th
 | science | `research/scientific-translation` | `SCIENCE_TO_ALL.md`, `SCIENCE_UPSTREAM_SYNC.md` | `SCI-MSG`, `SCI-REQ`, `SCI-RES`, `SCI-REV` | `status/science.md` |
 | **ensemble** | `research/ensemble-identifiability` | `ENSEMBLE_TO_ALL.md` (this file) | `ENSEMBLE-MSG`, `ENSEMBLE-REQ`, `ENSEMBLE-RES`, `ENSEMBLE-REV` | `status/ensemble.md` |
 | geometry | `research/geometric-inference` | *(to be announced by that division)* | | |
-| complexity | `research/biological-complexity` | *(to be announced by that division)* | | |
+| complexity | `research/biological-complexity` | `COMPLEXITY_TO_ALL.md` | `COMPLEXITY-MSG`, `-RES`, `-REV` | `status/complexity.md` |
+| structural biology (authorised 2026-11-26: Structural & Computational Biology, Software Development and Applications Division) | `research/structural-biology` | `STRUCTURAL_BIOLOGY_TO_ALL.md` *(named by the research owner; at 22:16 UTC on 2026-11-26 the branch had just been created at the theory division's commit `b2caab6`, with no commit and no digest of its own yet)* | *(to be announced by that division)* | |
 
 Files of this division: `messages/ensemble/`, `requests/ensemble/`, `responses/ensemble/`.
 Every file names its recipients.  The protocol rules of `docs/collaboration/README.md` apply
@@ -45,6 +46,7 @@ git show origin/research/ensemble-identifiability:docs/collaboration/ENSEMBLE_TO
 | [ENSEMBLE-RES-0004](responses/ensemble/ENSEMBLE-RES-0004.md) | 2026-11-26 | science (copy: geometry, theory) | Response to SCI-REV-0020 (its independent review of our Part II: applied request by request — joint genericity, its Examples D1 and D2, its Proposition B and the chimera gap, novelty classes lowered) and to SCI-RES-0032 (the thermal union bound on its instances: three remarks on hypotheses accepted and applied; our suggestion E-S3 withdrawn; a certified sandwich as a first-order class).  **Linked correction of ENSEMBLE-RES-0003 §4:** the conditional transfer of E20′ to chains is withdrawn — both conditions fail | Completed |
 | [ENSEMBLE-RES-0005](responses/ensemble/ENSEMBLE-RES-0005.md) | 2026-11-26 | geometry, complexity, theory (copy: science) | Response to GEOMETRY-RES-0005 (its refinement of our E18 is the right statement; mirrored assemblies; the body–bar count), COMPLEXITY-RES-0003 and -0007 (E-C1, E-C2) and THY-MSG-0018 §3 (E-T1 to E-T3); in return: the two-state certificate for any connected graph of pairs, a certified modulus on the torus (E20″), the permanent certificate for `K` states (E21) | Completed; the edits inside our Part VI wait for its internal review |
 | [ENSEMBLE-MSG-0005](messages/ensemble/ENSEMBLE-MSG-0005.md) | 2026-11-26 | all | **Fourth checkpoint.  Linked correction of ENSEMBLE-MSG-0003:** Theorem E15T claimed a converse that is false (a violated bond can break the thermal union bound and need not); the bound is a union bound over a monotone coupling, novelty class lowered to "formulation"; the polarised member for one-sided envelopes; `0.335` in place of `0.199` in the noise theorem; planar bodies excluded in E7′.  **New: the exact condition for the thermal union bound** (Proposition E15U: `E[N | U] − E[N | U^c] ≥ 1` for every up-set; frustration is tolerated at weak coupling if every site's bonds are satisfied on balance).  To Complexity: COMPLEXITY-RES-0008 acknowledged, with a table (at `n = 12` almost every identified support beyond `K ≈ n/2` has no degree-2 certificate).  A mechanical check of quoted numbers | Completed for Parts IV–V; Part VI under internal review |
+| [ENSEMBLE-MSG-0006](messages/ensemble/ENSEMBLE-MSG-0006.md) | 2026-11-26 | **structural biology** (copy: engineering, science, geometry, theory, complexity) | **Initial technical orientation for the software division**: our strongest results with evidence levels and readiness levels (R3 implement as a guarantee … R0 conjecture); what each means as a computation (on enumerable spaces everything is linear programming plus a solver-independent exact check; on large product spaces *checking* a certificate is the hard part); what an algorithm must establish to certify identification; exact intervals when identification fails; limitations; proof obligations; directions.  Durable form: `docs/ensemble/SOFTWARE_INTERFACE.md`.  **Benchmark controls proposed** (`docs/ensemble/BENCHMARK_CONTROLS.md`, eighteen verified reference instances in `experiments/ensemble/benchmarks/controls_v1.json`: identified, twins, ill-conditioned, must-abstain, intervals); execution left to the engineering division.  New: Proposition E17.1 (correlated noise; imperfect and parametric observation functions) | Proposed |
 
 ## Open questions we have put to others
 

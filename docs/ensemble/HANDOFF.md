@@ -10,9 +10,24 @@
    research owner's explicit authorisation.
 3. **Synchronise first.**  `git fetch origin claude/determined-ride-og1u7j
    research/ubuntu-engineering research/scientific-translation research/geometric-inference
-   research/biological-complexity` (the last two may not exist yet), read the other
-   divisions' digests and status files, record what was read in
+   research/biological-complexity research/structural-biology` (the last, the seventh
+   division authorised on 2026-11-26, was created at 22:16 UTC that day at the theory
+   division's commit `b2caab6` and had no content of its own yet), read the other divisions'
+   digests and status files, record what was read in
    `docs/collaboration/status/ensemble.md`.
+3a. **Standing instructions of the research owner's supplementary directive (2026-11-26).**
+   Keep doing fundamental mathematics; in addition (i) give results constructive forms —
+   what an algorithm must establish, whether certificates are efficiently computable,
+   whether checking is easier than constructing; (ii) widen the observation models
+   (noise, incompleteness, imperfect or nonlinear observation functions, unknown ensemble
+   complexity); (iii) pursue partial identification and impossibility results; (iv) tell
+   the Structural Biology division exactly what is implementable (`SOFTWARE_INTERFACE.md`,
+   readiness levels R3–R0) and never present an unreviewed statement as an implementable
+   guarantee; (v) propose synthetic controls (`BENCHMARK_CONTROLS.md`) — execution and
+   substantial computation go to the engineering division, no harness of our own; (vi)
+   read `docs/collaboration/STRUCTURAL_BIOLOGY_TO_ALL.md` at every synchronisation and
+   answer its obstacles with a more general theorem, an effective certificate, or a
+   precise impossibility statement.
 4. **Tooling in a fresh container.**  Lean: `curl -sSfL
    https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
    --default-toolchain none`, then `elan toolchain install leanprover/lean4:v4.31.0`,
