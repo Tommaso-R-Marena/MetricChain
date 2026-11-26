@@ -1,0 +1,22 @@
+tree-generated systems on 3,4,5,6 points: [1, 3, 16, 150]  planar trees: [2, 5, 14]
+globally good (Kalmanson, exact support): 141  6-locally good: 127  Kalmanson for the given order: 147
+Corollary 5': labellings checked 1800  with Phi6<0: 60  mismatches: 0  values of Phi6: {Fraction(0, 1): 1488, Fraction(-1, 2): 60, Fraction(1, 2): 240, Fraction(1, 1): 12}
+systems with the three 3-splits and a missing 2-split: 17  -> |K'_6| = 133
+  by type: {'one 2-split': 6, 'two at distance two': 6, 'two antipodal': 3, 'three alternate': 2}
+  in K'_6 but not 6-locally good: 6
+  all of these are 'nine minus a 2-split and the 3-split incompatible with it': True
+  of the 17: Kalmanson (given order) on six points: 14  globally good: 14
+  the 133 of K'_6 all Kalmanson for the given order: True ; with alpha>0 on every split of the system: True
+global failures: 9
+   missing: ((3, 4), '456 2345')  negative: 0  positive on undisplayed: 1
+   missing: ((2, 3), '56 345')  negative: 0  positive on undisplayed: 1
+   missing: ((2, 4), '45 3456')  negative: 2  positive on undisplayed: 0
+   missing: ((3, 4), '234 3456')  negative: 0  positive on undisplayed: 1
+   missing: ((2, 3), '45 234')  negative: 0  positive on undisplayed: 1
+   missing: ((2, 3), '34 456')  negative: 0  positive on undisplayed: 1
+   missing: ((2, 4), '34 2345')  negative: 2  positive on undisplayed: 0
+   missing: ((2, 2), '23 56')  negative: 2  positive on undisplayed: 0
+   missing: ((2, 3), '23 345')  negative: 0  positive on undisplayed: 1
+substitutions (S1,S2,p,r) with 3+5,4+4,5+3 leaves: 624  distinct systems: 74  not 6-locally good: 0
+  (alternative count: |TG_n1|*|TG_n2|*6 rotations summed = 246)
+all subs tree-generated: True

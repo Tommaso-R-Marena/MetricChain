@@ -1,0 +1,7 @@
+pairs (system, missing 2-split): 30  formula of (c) holds for m=1..6 (all four clade orientations): True  time 13s
+least m with negative weight, histogram over pairs: {2: 6, 3: 18, 1: 6}
+least m per system (min over its missing 2-splits): {2: 6, 3: 8, 1: 3}
+(Phi4, Phi5(z), Phi5(w)) values: {('1', '0', '0'): 6, ('1', '1/2', '0'): 6, ('1', '0', '1/2'): 6, ('0', '0', '0'): 6, ('1', '1/2', '1/2'): 6}
+blow-ups at the least m (per system; 4 clade orientations when m>1): no Kalmanson order in 59 cases; an order exists in 0 cases  time 11s
+control: order found for 133 of 133 scrambled metrics of K'_6
+of the 17 six-point systems, Kalmanson for some circular order: 14

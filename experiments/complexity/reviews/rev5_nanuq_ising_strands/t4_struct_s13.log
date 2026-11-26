@@ -1,0 +1,17 @@
+seed 13 max leaves 11 time 58s
+  built                                                        7000
+  checked                                                      6000
+  critical splits                                              2170
+  critical splits with weight < 0                              274
+  critical splits with weight <= 0                             344
+  hybrid nodes max                                             9
+  invalid (not a network of Def. 2.1 / root not LSA)           638
+  other splits checked                                         175170
+  skipped (more than 9 hybrid nodes)                           362
+  with >=2 nested blobs                                        3065
+  with a nested blob                                           5278
+  with a nested blob entered through a cut edge                4397
+  with a nested blob having a non-leaf pendant subnetwork      4893
+  with several non-trivial blobs                               4901
+  critical weights: {-17: 1, -16: 2, -13: 3, -12: 7, -11: 6, -10: 2, -9: 10, -8: 15, -7: 15, -6: 31, -5: 21, -4: 35, -3: 30, -2: 44, -1: 52, 0: 70, 1: 80, 2: 198, 3: 292, 4: 252, 5: 261, 6: 196, 7: 161, 8: 133, 9: 95, 10: 47, 11: 37, 12: 18, 13: 22, 14: 11, 15: 10, 16: 5, 17: 5, 18: 1, 19: 1, 21: 1}
+  distinct (kB,k1,k2) of nested blobs: 173

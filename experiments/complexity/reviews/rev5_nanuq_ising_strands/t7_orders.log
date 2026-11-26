@@ -1,0 +1,17 @@
+bloblets N[kB,k1,k2] with 4..9 leaves: 155  violations of Theorem 12 / Corollary 13: 0
+negative critical weight: [(4, 1, 1, -1), (5, 1, 0, -1), (5, 1, 1, -4), (6, 1, 0, -4), (5, 1, 2, -3), (5, 2, 1, -3), (6, 1, 1, -8), (6, 2, 0, -3), (7, 1, 0, -8)]
+zero critical weight: [(4, 1, 2), (4, 2, 1), (5, 2, 0)]
+   N[4,1,1] (7 leaves, weight -1): Kalmanson order: None
+   N[5,1,0] (7 leaves, weight -1): Kalmanson order: None
+   N[5,1,1] (8 leaves, weight -4): Kalmanson order: None
+   N[6,1,0] (8 leaves, weight -4): Kalmanson order: None
+   N[5,1,2] (9 leaves, weight -3): Kalmanson order: None
+   N[5,2,1] (9 leaves, weight -3): Kalmanson order: None
+   N[6,1,1] (9 leaves, weight -8): Kalmanson order: None
+   N[6,2,0] (9 leaves, weight -3): Kalmanson order: None
+   N[7,1,0] (9 leaves, weight -8): Kalmanson order: None
+failing bloblets Kalmanson for no circular order: 9 of 9  time 1s
+   zero weight N[4,1,2]: all alpha >= 0 for the planar order: True
+   zero weight N[4,2,1]: all alpha >= 0 for the planar order: True
+   zero weight N[5,2,0]: all alpha >= 0 for the planar order: True
+non-bloblet networks (7-10 leaves) with a negative critical weight: 150 ; Kalmanson for some OTHER circular order: 0  time 62s

@@ -63,7 +63,7 @@
 4. Supplementary directive "Frontier Scientific Evaluation and Eighth-Division Coordination" (received 2026-11-26
    about 22:40 UTC): an **eighth division**, Frontier Benchmarking, Experimental Evidence and Scientific Evaluation,
    on branch `research/frontier-benchmarks`, digest `docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md` (the branch did
-   not exist at 22:50 UTC).  It designs independent evaluations and keeps benchmark integrity; we do **not**
+   not exist at the fetch of 22:46 UTC).  It designs independent evaluations and keeps benchmark integrity; we do **not**
    duplicate that mandate.  Ours: keep the protocol copy current (`docs/collaboration/README.md`, done), read its
    findings, answer its scientific questions, and if an evaluation exposes a mathematical limitation, examine
    whether it calls for a stronger theorem, a constructive algorithm, a generalisation or a rigorous obstruction.

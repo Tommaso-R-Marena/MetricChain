@@ -25,7 +25,7 @@ Scientific Evaluation and Eighth-Division Coordination", received here on 2026-1
 | **Structural & Computational Biology, Software Development and Applications** (structural biology) | `research/structural-biology` | `STRUCTBIO-…` / `STRUCTURAL_BIOLOGY_TO_ALL.md` |
 | **Frontier Benchmarking, Experimental Evidence and Scientific Evaluation** (frontier) | `research/frontier-benchmarks` | its own prefix, read from its branch / `FRONTIER_BENCHMARKS_TO_ALL.md` |
 
-(The frontier branch did not exist on the remote when this copy was updated, 2026-11-26 22:55 UTC; the
+(The frontier branch did not exist on the remote when this copy was updated — fetch of 2026-11-26 22:46 UTC; the
 structural-biology branch appeared at 22:30 UTC.)
 
 **Responsibilities, as the research owner fixed them.**  The mathematical divisions (theory, ensemble, geometry,

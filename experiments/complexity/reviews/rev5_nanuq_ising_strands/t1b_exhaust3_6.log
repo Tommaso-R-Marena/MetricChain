@@ -1,0 +1,16 @@
+/usr/local/lib/python3.13/site-packages/networkx/utils/backends.py:551: UserWarning: The hashes produced for directed graphs changed in version v3.5 due to a bugfix to track in and out edges separately (see documentation).
+  return self.orig_func(*args, **kwargs)
+after 1 insertion(s): 568 acyclic candidates, 180 up to isomorphism  (1s)
+after 2 insertion(s): 27083 acyclic candidates, 6030 up to isomorphism  (31s)
+n = 6 three insertions; time 842s
+  candidates                               1640160
+  level>2                                  970760
+  nonplanar                                67642
+  planar                                   289830
+  planar galled                            111298
+  planar nongalled                         178532
+  planar with 2 non-trivial blobs          235793
+  planar with 3 non-trivial blobs          54037
+  valid                                    1328232
+  valid level<=2                           357472
+  critical splits by value of 12(b): {1: 1086, 2: 1321, 3: 5871, 4: 7529, 5: 1513}

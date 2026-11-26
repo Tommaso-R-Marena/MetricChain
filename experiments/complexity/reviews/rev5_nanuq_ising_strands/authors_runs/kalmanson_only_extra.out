@@ -1,0 +1,21 @@
+(5) Phi6 < 0 at (u1; z, w; up; v1, vq)  <=>  all three 3-splits present and the 2-split {z, w} absent: True
+    six-point tree-generated systems with the three 3-splits and a missing 2-split: 17
+    sanity: the order search finds a Kalmanson order for all 133 scrambled metrics of K'_6: True
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 1 (6 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 1 (6 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 1 (6 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 3 (10 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 2 (8 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 2 (8 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 2 (8 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 2 (8 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 2 (8 leaves): Kalmanson for some other circular order: None
+     least failing blow-up m = 2 (8 leaves): Kalmanson for some other circular order: None
+(6) none of the 17 least failing blow-ups is Kalmanson for any circular order: True

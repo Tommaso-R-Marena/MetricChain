@@ -1,0 +1,11 @@
+tree-generated systems on 7 points: 2682  (planar trees: 42) time 0s
+   ("K'\\K", 'Kalmanson', 'wrong support/sign') 273
+   ("outside K'", 'Kalmanson', 'exact support') 553
+   ("outside K'", 'Kalmanson', 'wrong support/sign') 252
+   ("outside K'", 'not Kalmanson', 'wrong support/sign') 350
+   ('K', 'Kalmanson', 'exact support') 1254
+   K 1254
+   K'\K 273
+   outside K' 1155
+examples of systems in K'\K with Kalmanson metric and EXACT support (contradicting Remark 1 read literally):
+time 3s

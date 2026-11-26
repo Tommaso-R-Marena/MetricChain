@@ -1,0 +1,10 @@
+n = 4 insertions = 2 tree shapes 2 time 4s
+  candidates                                    7560
+  nonplanar                                     810
+  nonplanar nested with positions on A and B    458
+  planar                                        4714
+  planar galled                                 2076
+  planar nongalled                              2638
+  valid                                         5524
+  nested blobs by (kB,k1,k2): {(0, 0, 1): 84, (0, 0, 2): 138, (0, 0, 3): 72, (0, 1, 0): 36, (0, 1, 1): 128, (0, 1, 2): 104, (0, 2, 0): 54, (0, 2, 1): 76, (0, 3, 0): 18, (1, 0, 0): 168, (1, 0, 1): 276, (1, 0, 2): 168, (1, 1, 0): 256, (1, 1, 1): 184, (1, 2, 0): 104, (2, 0, 0): 276, (2, 0, 1): 168, (2, 1, 0): 184, (3, 0, 0): 144}
+  critical splits (k1>=1,kB>=2) by value of formula 12(b): {2: 184}

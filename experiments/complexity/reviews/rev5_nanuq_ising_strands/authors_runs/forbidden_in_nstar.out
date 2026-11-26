@@ -1,0 +1,6 @@
+N*: six-leaf restrictions containing the three 3-splits and missing a 2-split: 5
+    leaves ('a1', 'a2', 'b', 'x', 'y', 'c')  missing 2-splits: [['a1', 'a2']]
+    leaves ('a1', 'a2', 'b', 'x', 'y', 'd')  missing 2-splits: [['a1', 'a2']]
+    leaves ('a1', 'a2', 'x', 'y', 'c', 'd')  missing 2-splits: [['a1', 'd']]
+    leaves ('a1', 'b', 'x', 'y', 'c', 'd')  missing 2-splits: [['a1', 'd']]
+    leaves ('a2', 'b', 'x', 'y', 'c', 'd')  missing 2-splits: [['a2', 'd']]

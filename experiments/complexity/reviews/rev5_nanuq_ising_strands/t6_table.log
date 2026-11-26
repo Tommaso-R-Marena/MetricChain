@@ -1,0 +1,35 @@
+networks: 20 (nested blob, clade of 3 leaves at every position, up to 7 positions)
+Proposition 2 for the critical split: mismatches 0
+Phi4 values: {Fraction(1, 1): 20}
+Phi5 by type:
+   b1             {'1/2': 40}
+   b_M            {'0': 75}
+   b_kB(k2=0)     {'1/2': 20}
+   c1             {'1/2': 20}
+   c_e>=2         {'1/2': 15}
+   x1             {'1/2': 40}
+   x_a>=2         {'1/2': 45}
+   y              {'1/2': 40}
+Phi6 by pair of types:
+   b1 + b1 + same position                       {'0': 20}
+   b1 + b_M                                      {'0': 150}
+   b1 + b_kB(k2=0)                               {'1/2': 40}
+   b1 + c1                                       {'1/2': 40}
+   b1 + c_e>=2                                   {'1/2': 30}
+   b_M + b_M                                     {'-1/2': 99}
+   b_M + b_M + same position                     {'0': 75}
+   b_M + b_kB(k2=0)                              {'0': 60}
+   b_M + c1                                      {'0': 90}
+   b_M + c_e>=2                                  {'0': 54}
+   b_kB(k2=0) + b_kB(k2=0) + same position       {'0': 10}
+   c1 + c1 + same position                       {'0': 10}
+   c1 + c_e>=2                                   {'0': 30}
+   c_e>=2 + c_e>=2                               {'0': 9}
+   c_e>=2 + c_e>=2 + same position               {'0': 15}
+   x1 + x1 + same position                       {'0': 20}
+   x1 + x_a>=2                                   {'1/2': 90}
+   x1 + y                                        {'1/2': 80}
+   x_a>=2 + x_a>=2                               {'0': 54}
+   x_a>=2 + x_a>=2 + same position               {'0': 45}
+   x_a>=2 + y                                    {'0': 90}
+   y + y + same position                         {'0': 20}
