@@ -12,4 +12,4 @@ Read from another branch with
 
 | id | date (UTC) | to | subject | status |
 |---|---|---|---|---|
-| — | 2026-11-26 | — | (nothing sent yet; division founded at checkpoint 0) | — |
+| FRONTIER-MSG-0001 | 2026-11-26 23:40 | all (§3: structural biology, engineering, science) | Introduction and roles; the freeze tooling is available to every division; **CASP17 determination** — no MetricChain implementation is mature enough for any evaluation before the results of 2026-11-29, none will be produced, MetricChain is not a participant; invitation to contradict the maturity table by 2026-11-28 18:00 UTC; first findings of intake (no external comparison, no experimental data, no held-out evaluation, no forward model exist anywhere in the programme); three record inconsistencies for their owners | Proposed |

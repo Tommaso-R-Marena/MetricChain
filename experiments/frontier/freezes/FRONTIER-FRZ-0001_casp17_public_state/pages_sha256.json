@@ -1,0 +1,146 @@
+[
+ {
+  "bytes": 51025,
+  "sha256": "78672c3ad86c9e9295ed5945e8a1fce65bbc3348f6bc7a4e9f2a745ec1069e82",
+  "url": "https://predictioncenter.org/casp17/"
+ },
+ {
+  "bytes": 31697,
+  "sha256": "c7dc431ff788285192ba2f6400677f0acbdfe6caa2fa4739b885efddaf779971",
+  "url": "https://predictioncenter.org/casp17/domains_summary.cgi"
+ },
+ {
+  "bytes": 30626,
+  "sha256": "283f629a03b0d1e2cf72e13b43febf7c3aecce226539e9f6d3fb032dd02d333f",
+  "url": "https://predictioncenter.org/casp17/index.cgi?page=QandA"
+ },
+ {
+  "bytes": 106680,
+  "sha256": "290b07f7933f1282896abf3ddd0f6ee2e6f48de841109e947253f7b7eb0266c4",
+  "url": "https://predictioncenter.org/casp17/index.cgi?page=format"
+ },
+ {
+  "bytes": 21582,
+  "sha256": "10881d51a430f817ebda024aae7ecbfd0187e0ba7bda409409689140a67c7e96",
+  "url": "https://predictioncenter.org/casp17/results.cgi"
+ },
+ {
+  "bytes": 391649,
+  "sha256": "72ec8f06e0e9cfa3626be342c80e59eeb5ca1e4ffa8384184b54a25aa6a9df66",
+  "url": "https://predictioncenter.org/casp17/targetlist.cgi"
+ },
+ {
+  "bytes": 21504,
+  "sha256": "a91eff7c7bd4fc88c7a6045bff3983eec8de477f00aaa09a7603798e3f29b42b",
+  "url": "https://predictioncenter.org/casp17/targetlist.cgi?type=csv"
+ },
+ {
+  "bytes": 1722,
+  "sha256": "67e004bc00c7efcab7b54d6db9abb8d167c5eced9ec86d66146b7639a501afc3",
+  "url": "https://predictioncenter.org/download_area/CASP17/"
+ },
+ {
+  "bytes": 949,
+  "sha256": "210da6001c2ac8ecfba250807cfd14e4054c6889720d7c6096eb753477b2e0be",
+  "url": "https://predictioncenter.org/download_area/CASP17/extra_experiments/"
+ },
+ {
+  "bytes": 7623,
+  "sha256": "578ea0ff15eb66f8f617cd6f313a079350124a7e7e60f4437f7b78883f47dae0",
+  "url": "https://predictioncenter.org/download_area/CASP17/extra_experiments/ligands/"
+ },
+ {
+  "bytes": 2493,
+  "sha256": "75a775ab3b25b7047f7d4d2dbd3d4d55d244d06e9446fd4c318af74f3e67310c",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/"
+ },
+ {
+  "bytes": 6895,
+  "sha256": "eaa239cca42c9bf289a657dcd5a377130b4c06737aab8e9c2fcec7dca0f6597f",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/E-targets/"
+ },
+ {
+  "bytes": 1195,
+  "sha256": "6a63951a5366ce600402884d3edec3820750daa8a093040910fe15cc4e94b882",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/QA/"
+ },
+ {
+  "bytes": 12025,
+  "sha256": "6942b28d7113ce23647a8843a60e7a05b1cc727dc7f88bce00657dd42fbae280",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/RNA/"
+ },
+ {
+  "bytes": 2665,
+  "sha256": "9dd73861d380489654056d104c4ab1c5bad42ca3f4ba55164fb55d0b5cc64eee",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/RNA_oligo/"
+ },
+ {
+  "bytes": 1177,
+  "sha256": "a73040c616a78f4359c1dd349e5c05088c20d57bf75803260a7cc7263bf9f948",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/W-targets/"
+ },
+ {
+  "bytes": 2855,
+  "sha256": "54324b2a4cf89202e48910e2122a6c6545ab44fa311e4cc0ad21f55dff293ff6",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/hybrid/"
+ },
+ {
+  "bytes": 5957,
+  "sha256": "941ee871641ca6f397cbb30a8eab91ebdd18a5abb9c6b673dda57205faffb5e3",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/ligands/"
+ },
+ {
+  "bytes": 26411,
+  "sha256": "48cf18d70b52db4e78525d50c47661634fcf38bb45e7a1b265470676f3ab44a2",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/oligo/"
+ },
+ {
+  "bytes": 6421,
+  "sha256": "9b630e41ef551776e7462a920188060d264cd61d91275e00b1f78f61ac3ffdf6",
+  "url": "https://predictioncenter.org/download_area/CASP17/predictions/regular/"
+ },
+ {
+  "bytes": 733,
+  "sha256": "c53dd806c55d5b2371ea10dd91d7cda3eaf32b2bc6647809f1bd01304b372e3a",
+  "url": "https://predictioncenter.org/download_area/CASP17/results/"
+ },
+ {
+  "bytes": 1593,
+  "sha256": "57cee9ebdb61073b5ccd734b52ca4f36c7c99d2905ea6a4b13567a6395526216",
+  "url": "https://predictioncenter.org/download_area/CASP17/sequences/"
+ },
+ {
+  "bytes": 61057,
+  "fasta_records": 184,
+  "sha256": "843d07985b7a26e73fd7a56c628bd2567ef54030496ca8b2f2347b6fbccaa8e2",
+  "url": "https://predictioncenter.org/download_area/CASP17/sequences/casp17.HT1.seq.txt"
+ },
+ {
+  "bytes": 70962,
+  "fasta_records": 219,
+  "sha256": "e93d33e2c7f6ae55d7be7a07a647ca402d266362556b650bf0029ea2cbd5116a",
+  "url": "https://predictioncenter.org/download_area/CASP17/sequences/casp17.HT2.seq.txt"
+ },
+ {
+  "bytes": 4017,
+  "fasta_records": 16,
+  "sha256": "a2ec745fca6721db2cb7b0565b35f9c9995e3aa24308bf8a804a898c479859e4",
+  "url": "https://predictioncenter.org/download_area/CASP17/sequences/casp17.RM1.seq.txt"
+ },
+ {
+  "bytes": 28819,
+  "fasta_records": 101,
+  "sha256": "3b64b32117ee16f85a74121f8e7ec14a10022e1a7045f1059a4968ae60e67447",
+  "url": "https://predictioncenter.org/download_area/CASP17/sequences/casp17.RM2.seq.txt"
+ },
+ {
+  "bytes": 733,
+  "sha256": "bed1e33811cb15dd24a049faef6355069b4f4de08a49966f814124ac8850f162",
+  "url": "https://predictioncenter.org/download_area/CASP17/targets/"
+ },
+ {
+  "bytes": 976962,
+  "sha256": "5980613eaae03757905483707c941ee2a07f9dcebc4cf6781dbf487fa1ec2b16",
+  "url": "https://predictioncenter.org/news.cgi"
+ }
+]

@@ -1,0 +1,238 @@
+{
+ "entries": {
+  "10zt": {
+   "deposit": "2026-02-13",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-05-27",
+   "res": 2.9,
+   "title": "gRNAde designed RNA molecule"
+  },
+  "10zu": {
+   "deposit": "2026-02-13",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-05-27",
+   "res": 4.0,
+   "title": "MPNN-fixbb designed RNA molecule"
+  },
+  "11ag": {
+   "deposit": "2026-02-13",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-05-27",
+   "res": 4.8,
+   "title": "MPNN-RFdiff designed RNA molecule"
+  },
+  "11eh": {
+   "deposit": "2026-02-18",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-05-27",
+   "res": 4.7,
+   "title": "Struct2SeQ designed RNA molecule"
+  },
+  "12er": {
+   "deposit": "2026-03-31",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-08-12",
+   "res": 2.99,
+   "title": "Cryo-EM structure of BCMA in complex with the BCMA-targeted Fab arm of"
+  },
+  "12es": {
+   "deposit": "2026-03-31",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-08-12",
+   "res": 3.43,
+   "title": "Cryo-EM structure of BCMA in complex with the BCMA-targeted Fab arm of"
+  },
+  "30zq": {
+   "deposit": "2026-05-19",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-09-16",
+   "res": 1.3,
+   "title": "Prescottella amidase S181A mutant, ethyl N-phenylcarbamate soak."
+  },
+  "30zr": {
+   "deposit": "2026-05-19",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-09-16",
+   "res": 1.1,
+   "title": "Prescottella amidase, S181A mutant, acetanilide soak"
+  },
+  "31gl": {
+   "deposit": "2026-06-03",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-09-16",
+   "res": 1.2,
+   "title": "Prescottella amidase, S181A mutant, diethyl toluene-2,4-dicarbamate so"
+  },
+  "31jq": {
+   "http": "404"
+  },
+  "37mf": {
+   "deposit": "2026-07-27",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-09-30",
+   "res": 2.1,
+   "title": "Crystal structure of DDB1 in complex with XS445479"
+  },
+  "9oef": {
+   "deposit": "2025-04-28",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-07-08",
+   "res": 2.69,
+   "title": "Structure of the human astrovirus VA1 capsid spike bound to antibody 7"
+  },
+  "9oeg": {
+   "deposit": "2025-04-28",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-07-08",
+   "res": 3.05,
+   "title": "Structure of the human astrovirus VA1 capsid spike bound to antibody 2"
+  },
+  "9sql": {
+   "deposit": "2025-09-22",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-09-30",
+   "res": 1.8,
+   "title": "helical Aurein 3.3, hP form"
+  },
+  "9sr1": {
+   "deposit": "2025-09-23",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-10-07",
+   "res": 1.45,
+   "title": "helical Aurein 3.3, mP form"
+  },
+  "9yrb": {
+   "deposit": "2025-10-16",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-06-24",
+   "res": 3.06,
+   "title": "Factor XIa in complex with Fab fragment of REGN7508-Cat"
+  },
+  "9yrq": {
+   "deposit": "2025-10-17",
+   "http": "200",
+   "method": "ELECTRON MICROSCOPY",
+   "release": "2026-06-24",
+   "res": 3.2,
+   "title": "Factor XIa in complex with Fab fragment of REGN9933-A2"
+  },
+  "9yw4": {
+   "deposit": "2025-10-23",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-06-17",
+   "res": 3.1,
+   "title": "T cell receptor N17.2 complexed w/ HLA.A1 and NRAS peptide"
+  },
+  "9zcl": {
+   "deposit": "2025-11-23",
+   "http": "200",
+   "method": "X-RAY DIFFRACTION",
+   "release": "2026-06-17",
+   "res": 2.3,
+   "title": "N17.3.2 NRASQ61K HLA A1 complex"
+  }
+ },
+ "pairs": [
+  [
+   "H1311",
+   "9zcl"
+  ],
+  [
+   "R2304",
+   "11eh"
+  ],
+  [
+   "R2305",
+   "11ag"
+  ],
+  [
+   "R2306",
+   "10zu"
+  ],
+  [
+   "R2307",
+   "10zt"
+  ],
+  [
+   "H1319",
+   "9oef"
+  ],
+  [
+   "H1321",
+   "9oeg"
+  ],
+  [
+   "H2324",
+   "9yw4"
+  ],
+  [
+   "H2338",
+   "9yrq"
+  ],
+  [
+   "H2339",
+   "9yrb"
+  ],
+  [
+   "H2319",
+   "9oef"
+  ],
+  [
+   "H2321",
+   "9oeg"
+  ],
+  [
+   "H1346",
+   "12es"
+  ],
+  [
+   "H1347",
+   "12er"
+  ],
+  [
+   "T2383",
+   "37mf"
+  ],
+  [
+   "T2409",
+   "30zq"
+  ],
+  [
+   "T2410",
+   "31gl"
+  ],
+  [
+   "T2411",
+   "30zr"
+  ],
+  [
+   "T2414v1",
+   "31jq"
+  ],
+  [
+   "T2464",
+   "9sql"
+  ],
+  [
+   "T2464",
+   "9sr1"
+  ]
+ ],
+ "retrieved_utc": "2026-11-26T23:01:06Z"
+}

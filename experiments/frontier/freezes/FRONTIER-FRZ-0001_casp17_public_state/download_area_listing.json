@@ -1,0 +1,1677 @@
+{
+ "/download_area/CASP17/": [
+  {
+   "last_modified": "2026-04-24 10:03",
+   "name": "extra_experiments/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-10-29 13:56",
+   "name": "predictions/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-04-14 18:05",
+   "name": "results/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-09-06 14:22",
+   "name": "sequences/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-11-18 20:58",
+   "name": "targets/",
+   "size": "-"
+  }
+ ],
+ "/download_area/CASP17/extra_experiments/": [
+  {
+   "last_modified": "2026-08-28 07:30",
+   "name": "ligands/",
+   "size": "-"
+  }
+ ],
+ "/download_area/CASP17/extra_experiments/ligands/": [
+  {
+   "last_modified": "2026-07-07 09:29",
+   "name": "L01.smiles.stage1.txt",
+   "size": "39K"
+  },
+  {
+   "last_modified": "2026-08-07 11:37",
+   "name": "L01.smiles.stage2.csv",
+   "size": "4.9K"
+  },
+  {
+   "last_modified": "2026-07-30 07:21",
+   "name": "L01.smiles.stage2.incomplete.csv",
+   "size": "3.2K"
+  },
+  {
+   "last_modified": "2026-08-07 12:24",
+   "name": "L01.smiles.tgz",
+   "size": "3.0K"
+  },
+  {
+   "last_modified": "2026-07-07 09:29",
+   "name": "L02.smiles.stage1.txt",
+   "size": "21K"
+  },
+  {
+   "last_modified": "2026-08-07 11:34",
+   "name": "L02.smiles.stage2.csv",
+   "size": "3.9K"
+  },
+  {
+   "last_modified": "2026-07-30 07:21",
+   "name": "L02.smiles.stage2.incomplete.csv",
+   "size": "1.2K"
+  },
+  {
+   "last_modified": "2026-08-07 12:24",
+   "name": "L02.smiles.tgz",
+   "size": "1.2K"
+  },
+  {
+   "last_modified": "2026-07-03 09:29",
+   "name": "M2415.smiles.txt",
+   "size": "86"
+  },
+  {
+   "last_modified": "2026-04-24 12:13",
+   "name": "R1201.smiles.txt",
+   "size": "3"
+  },
+  {
+   "last_modified": "2026-05-04 09:29",
+   "name": "R2314.smiles.txt",
+   "size": "68"
+  },
+  {
+   "last_modified": "2026-05-05 09:29",
+   "name": "R2317.smiles.txt",
+   "size": "42"
+  },
+  {
+   "last_modified": "2026-05-05 09:29",
+   "name": "R2318.smiles.txt",
+   "size": "42"
+  },
+  {
+   "last_modified": "2026-05-11 09:29",
+   "name": "R2326.smiles.txt",
+   "size": "64"
+  },
+  {
+   "last_modified": "2026-05-11 09:29",
+   "name": "R2327.smiles.txt",
+   "size": "64"
+  },
+  {
+   "last_modified": "2026-05-11 09:29",
+   "name": "R2328.smiles.txt",
+   "size": "57"
+  },
+  {
+   "last_modified": "2026-05-12 09:29",
+   "name": "R2329.smiles.txt",
+   "size": "109"
+  },
+  {
+   "last_modified": "2026-05-12 09:29",
+   "name": "R2330.smiles.txt",
+   "size": "75"
+  },
+  {
+   "last_modified": "2026-06-01 09:29",
+   "name": "R2365.smiles.txt",
+   "size": "76"
+  },
+  {
+   "last_modified": "2026-06-15 09:29",
+   "name": "R2387.smiles.txt",
+   "size": "157"
+  },
+  {
+   "last_modified": "2026-06-17 09:29",
+   "name": "R2390.smiles.txt",
+   "size": "95"
+  },
+  {
+   "last_modified": "2026-06-12 09:29",
+   "name": "T2383.smiles.txt",
+   "size": "82"
+  },
+  {
+   "last_modified": "2026-06-30 09:29",
+   "name": "T2409.smiles.txt",
+   "size": "49"
+  },
+  {
+   "last_modified": "2026-06-30 09:29",
+   "name": "T2410.smiles.txt",
+   "size": "63"
+  },
+  {
+   "last_modified": "2026-07-01 09:29",
+   "name": "T2411.smiles.txt",
+   "size": "47"
+  },
+  {
+   "last_modified": "2026-07-01 09:29",
+   "name": "T2412.smiles.txt",
+   "size": "81"
+  },
+  {
+   "last_modified": "2026-07-29 09:29",
+   "name": "T2413.smiles.txt",
+   "size": "132"
+  },
+  {
+   "last_modified": "2026-07-30 07:21",
+   "name": "T2413v1.smiles.txt",
+   "size": "113"
+  },
+  {
+   "last_modified": "2026-07-29 09:29",
+   "name": "T2414.smiles.txt",
+   "size": "112"
+  },
+  {
+   "last_modified": "2026-07-30 07:21",
+   "name": "T2414v1.smiles.txt",
+   "size": "87"
+  },
+  {
+   "last_modified": "2026-07-27 09:29",
+   "name": "T2451.smiles.txt",
+   "size": "105"
+  },
+  {
+   "last_modified": "2026-07-28 09:29",
+   "name": "T2455.smiles.txt",
+   "size": "73"
+  }
+ ],
+ "/download_area/CASP17/predictions/": [
+  {
+   "last_modified": "2026-10-08 13:41",
+   "name": "E-targets/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-08-27 23:06",
+   "name": "QA/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-10-24 00:29",
+   "name": "RNA/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-10-24 05:12",
+   "name": "RNA_oligo/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-08-21 10:53",
+   "name": "W-targets/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-10-24 00:53",
+   "name": "hybrid/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-09-14 22:40",
+   "name": "ligands/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-08-27 18:31",
+   "name": "oligo/",
+   "size": "-"
+  },
+  {
+   "last_modified": "2026-10-31 17:41",
+   "name": "regular/",
+   "size": "-"
+  }
+ ],
+ "/download_area/CASP17/predictions/E-targets/": [
+  {
+   "last_modified": "2026-08-24 11:30",
+   "name": "A2445.tar.gz",
+   "size": "648M"
+  },
+  {
+   "last_modified": "2026-08-21 10:57",
+   "name": "E2375.tar.gz",
+   "size": "1.1G"
+  },
+  {
+   "last_modified": "2026-08-21 11:00",
+   "name": "E2376.tar.gz",
+   "size": "1.1G"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2446_models.tar.gz",
+   "size": "100M"
+  },
+  {
+   "last_modified": "2026-08-23 08:39",
+   "name": "E2446_models_protonated.tar.gz",
+   "size": "149M"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2446_populations_no_comment.tar.gz",
+   "size": "1.5K"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2447_models.tar.gz",
+   "size": "72M"
+  },
+  {
+   "last_modified": "2026-08-23 08:40",
+   "name": "E2447_models_protonated.tar.gz",
+   "size": "111M"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2447_populations_no_comment.tar.gz",
+   "size": "1.4K"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2448_models.tar.gz",
+   "size": "118M"
+  },
+  {
+   "last_modified": "2026-08-23 08:43",
+   "name": "E2448_models_protonated.tar.gz",
+   "size": "187M"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2448_populations_no_comment.tar.gz",
+   "size": "1.4K"
+  },
+  {
+   "last_modified": "2026-10-08 13:41",
+   "name": "E2449TS646.protonated.tgz",
+   "size": "2.0M"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2449_models.tar.gz",
+   "size": "66M"
+  },
+  {
+   "last_modified": "2026-08-23 08:44",
+   "name": "E2449_models_protonated.tar.gz",
+   "size": "103M"
+  },
+  {
+   "last_modified": "2026-08-21 10:34",
+   "name": "E2449_populations_no_comment.tar.gz",
+   "size": "1.4K"
+  },
+  {
+   "last_modified": "2026-08-24 09:57",
+   "name": "E2450_models.tar.gz",
+   "size": "112M"
+  },
+  {
+   "last_modified": "2026-08-24 09:58",
+   "name": "E2450_populations_no_comment.tar.gz",
+   "size": "8.2K"
+  },
+  {
+   "last_modified": "2026-08-25 12:55",
+   "name": "E2458_models.tar.gz",
+   "size": "101M"
+  },
+  {
+   "last_modified": "2026-08-25 21:12",
+   "name": "E2458_models_protonated.tar.gz",
+   "size": "154M"
+  },
+  {
+   "last_modified": "2026-08-25 12:55",
+   "name": "E2458_populations_no_comment.tar.gz",
+   "size": "2.9K"
+  },
+  {
+   "last_modified": "2026-09-01 11:58",
+   "name": "E2459_models.tar.gz",
+   "size": "305M"
+  },
+  {
+   "last_modified": "2026-09-01 11:59",
+   "name": "E2459_populations_no_comment.tar.gz",
+   "size": "3.4K"
+  },
+  {
+   "last_modified": "2026-09-01 12:01",
+   "name": "E2460_models.tar.gz",
+   "size": "1.0G"
+  },
+  {
+   "last_modified": "2026-09-01 11:59",
+   "name": "E2460_populations_no_comment.tar.gz",
+   "size": "95K"
+  },
+  {
+   "last_modified": "2026-09-10 10:35",
+   "name": "TS566_fixed.protonated.tgz",
+   "size": "8.0M"
+  }
+ ],
+ "/download_area/CASP17/predictions/QA/": [
+  {
+   "last_modified": "2026-08-27 23:05",
+   "name": "RNA_hybrid.QA.tar.gz",
+   "size": "42M"
+  },
+  {
+   "last_modified": "2026-08-27 23:03",
+   "name": "prot.QA.tar.gz",
+   "size": "772M"
+  }
+ ],
+ "/download_area/CASP17/predictions/RNA/": [
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2301.tar.gz",
+   "size": "6.9M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2302.tar.gz",
+   "size": "6.5M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2303.tar.gz",
+   "size": "6.1M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2304.tar.gz",
+   "size": "7.6M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2305.tar.gz",
+   "size": "7.8M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2306.tar.gz",
+   "size": "7.7M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2307.tar.gz",
+   "size": "7.7M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2308.tar.gz",
+   "size": "7.2M"
+  },
+  {
+   "last_modified": "2026-08-25 11:33",
+   "name": "R2309.tar.gz",
+   "size": "62M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2310.tar.gz",
+   "size": "60M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2314.tar.gz",
+   "size": "2.2M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2315.tar.gz",
+   "size": "2.0M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2316.tar.gz",
+   "size": "7.4M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2317.tar.gz",
+   "size": "11M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2318.tar.gz",
+   "size": "12M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2320s0.tar.gz",
+   "size": "53M"
+  },
+  {
+   "last_modified": "2026-08-25 11:32",
+   "name": "R2322.tar.gz",
+   "size": "6.4M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2323.tar.gz",
+   "size": "6.5M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2325.tar.gz",
+   "size": "37M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2326.tar.gz",
+   "size": "3.1M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2327.tar.gz",
+   "size": "3.5M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2328.tar.gz",
+   "size": "2.7M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2329.tar.gz",
+   "size": "5.0M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2330.tar.gz",
+   "size": "6.1M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2333s0.tar.gz",
+   "size": "48M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2334.tar.gz",
+   "size": "46M"
+  },
+  {
+   "last_modified": "2026-08-25 11:31",
+   "name": "R2336.tar.gz",
+   "size": "47M"
+  },
+  {
+   "last_modified": "2026-08-25 11:30",
+   "name": "R2337s0.tar.gz",
+   "size": "48M"
+  },
+  {
+   "last_modified": "2026-08-25 11:30",
+   "name": "R2341.tar.gz",
+   "size": "28M"
+  },
+  {
+   "last_modified": "2026-08-25 11:30",
+   "name": "R2345.tar.gz",
+   "size": "4.8M"
+  },
+  {
+   "last_modified": "2026-08-11 12:04",
+   "name": "R2350.tar.gz",
+   "size": "59M"
+  },
+  {
+   "last_modified": "2026-08-11 12:03",
+   "name": "R2351.tar.gz",
+   "size": "61M"
+  },
+  {
+   "last_modified": "2026-08-11 12:02",
+   "name": "R2352.tar.gz",
+   "size": "61M"
+  },
+  {
+   "last_modified": "2026-08-11 12:01",
+   "name": "R2353.tar.gz",
+   "size": "60M"
+  },
+  {
+   "last_modified": "2026-08-11 12:00",
+   "name": "R2365.tar.gz",
+   "size": "10M"
+  },
+  {
+   "last_modified": "2026-08-11 11:47",
+   "name": "R2377v1.tar.gz",
+   "size": "46M"
+  },
+  {
+   "last_modified": "2026-08-11 11:47",
+   "name": "R2377v2.tar.gz",
+   "size": "46M"
+  },
+  {
+   "last_modified": "2026-08-26 10:49",
+   "name": "R2386.tar.gz",
+   "size": "63M"
+  },
+  {
+   "last_modified": "2026-08-11 11:52",
+   "name": "R2387.tar.gz",
+   "size": "7.3M"
+  },
+  {
+   "last_modified": "2026-08-11 11:50",
+   "name": "R2390.tar.gz",
+   "size": "5.8M"
+  },
+  {
+   "last_modified": "2026-08-11 11:40",
+   "name": "R2415s0.tar.gz",
+   "size": "36M"
+  },
+  {
+   "last_modified": "2026-08-25 11:30",
+   "name": "R2425.tar.gz",
+   "size": "58M"
+  },
+  {
+   "last_modified": "2026-08-25 11:30",
+   "name": "R2426.tar.gz",
+   "size": "58M"
+  },
+  {
+   "last_modified": "2026-08-25 11:29",
+   "name": "R2427.tar.gz",
+   "size": "42M"
+  },
+  {
+   "last_modified": "2026-08-25 11:29",
+   "name": "R2428.tar.gz",
+   "size": "5.8M"
+  },
+  {
+   "last_modified": "2026-08-11 11:33",
+   "name": "R2429.tar.gz",
+   "size": "53M"
+  },
+  {
+   "last_modified": "2026-10-24 00:29",
+   "name": "R2435s0.tar.gz",
+   "size": "2.5M"
+  },
+  {
+   "last_modified": "2026-10-24 02:00",
+   "name": "R2435s1.tar.gz",
+   "size": "6.4M"
+  },
+  {
+   "last_modified": "2026-08-11 11:29",
+   "name": "R2439.tar.gz",
+   "size": "61M"
+  },
+  {
+   "last_modified": "2026-08-13 09:53",
+   "name": "R2452.tar.gz",
+   "size": "7.9M"
+  },
+  {
+   "last_modified": "2026-08-21 12:29",
+   "name": "R2453.tar.gz",
+   "size": "3.4M"
+  },
+  {
+   "last_modified": "2026-08-21 12:29",
+   "name": "R2454.tar.gz",
+   "size": "3.5M"
+  },
+  {
+   "last_modified": "2026-08-26 09:24",
+   "name": "R2456.tar.gz",
+   "size": "14M"
+  },
+  {
+   "last_modified": "2026-08-26 09:24",
+   "name": "R2457.tar.gz",
+   "size": "1.8M"
+  }
+ ],
+ "/download_area/CASP17/predictions/RNA_oligo/": [
+  {
+   "last_modified": "2026-08-26 09:50",
+   "name": "M2310.tar.gz",
+   "size": "55M"
+  },
+  {
+   "last_modified": "2026-08-26 09:50",
+   "name": "M2320.tar.gz",
+   "size": "53M"
+  },
+  {
+   "last_modified": "2026-08-26 09:51",
+   "name": "M2337.tar.gz",
+   "size": "44M"
+  },
+  {
+   "last_modified": "2026-10-24 05:12",
+   "name": "M2415s01.tar.gz",
+   "size": "3.2M"
+  },
+  {
+   "last_modified": "2026-10-24 01:57",
+   "name": "M2435s01.tar.gz",
+   "size": "9.0M"
+  },
+  {
+   "last_modified": "2026-10-24 00:55",
+   "name": "R2305o.tar.gz",
+   "size": "16M"
+  },
+  {
+   "last_modified": "2026-10-24 00:55",
+   "name": "R2323o.tar.gz",
+   "size": "13M"
+  },
+  {
+   "last_modified": "2026-10-24 00:56",
+   "name": "R2325o.tar.gz",
+   "size": "75M"
+  },
+  {
+   "last_modified": "2026-10-24 00:56",
+   "name": "R2457o.tar.gz",
+   "size": "3.6M"
+  }
+ ],
+ "/download_area/CASP17/predictions/W-targets/": [
+  {
+   "last_modified": "2026-08-06 17:50",
+   "name": "W2385.tgz",
+   "size": "1.9G"
+  },
+  {
+   "last_modified": "2026-08-06 18:08",
+   "name": "W2386.tgz",
+   "size": "1.9G"
+  }
+ ],
+ "/download_area/CASP17/predictions/hybrid/": [
+  {
+   "last_modified": "2026-08-26 09:49",
+   "name": "M1377.tar.gz",
+   "size": "50M"
+  },
+  {
+   "last_modified": "2026-08-26 09:49",
+   "name": "M1435.tar.gz",
+   "size": "36M"
+  },
+  {
+   "last_modified": "2026-08-26 09:50",
+   "name": "M1439.tar.gz",
+   "size": "65M"
+  },
+  {
+   "last_modified": "2026-08-26 09:50",
+   "name": "M2333.tar.gz",
+   "size": "43M"
+  },
+  {
+   "last_modified": "2026-08-26 09:50",
+   "name": "M2334.tar.gz",
+   "size": "52M"
+  },
+  {
+   "last_modified": "2026-08-26 09:51",
+   "name": "M2377v1.tar.gz",
+   "size": "61M"
+  },
+  {
+   "last_modified": "2026-08-26 09:51",
+   "name": "M2377v2.tar.gz",
+   "size": "62M"
+  },
+  {
+   "last_modified": "2026-08-26 09:52",
+   "name": "M2415.tar.gz",
+   "size": "93M"
+  },
+  {
+   "last_modified": "2026-08-26 09:52",
+   "name": "M2435.tar.gz",
+   "size": "41M"
+  },
+  {
+   "last_modified": "2026-08-26 09:52",
+   "name": "M2439.tar.gz",
+   "size": "69M"
+  }
+ ],
+ "/download_area/CASP17/predictions/ligands/": [
+  {
+   "last_modified": "2026-09-14 22:40",
+   "name": "L01.tgz",
+   "size": "359M"
+  },
+  {
+   "last_modified": "2026-09-14 22:40",
+   "name": "L02.tgz",
+   "size": "102M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "M2415.tar.gz",
+   "size": "39M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2314.tar.gz",
+   "size": "956K"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2317.tar.gz",
+   "size": "3.9M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2318.tar.gz",
+   "size": "4.2M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2326.tar.gz",
+   "size": "1.2M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2327.tar.gz",
+   "size": "1.3M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2328.tar.gz",
+   "size": "1.0M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2329.tar.gz",
+   "size": "1.9M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2330.tar.gz",
+   "size": "2.4M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2365.tar.gz",
+   "size": "3.6M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2387.tar.gz",
+   "size": "2.9M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "R2390.tar.gz",
+   "size": "2.2M"
+  },
+  {
+   "last_modified": "2026-08-14 09:54",
+   "name": "T2383.tar.gz",
+   "size": "24M"
+  },
+  {
+   "last_modified": "2026-08-14 09:54",
+   "name": "T2409.tar.gz",
+   "size": "13M"
+  },
+  {
+   "last_modified": "2026-08-14 09:53",
+   "name": "T2410.tar.gz",
+   "size": "13M"
+  },
+  {
+   "last_modified": "2026-08-14 09:53",
+   "name": "T2411.tar.gz",
+   "size": "13M"
+  },
+  {
+   "last_modified": "2026-08-14 09:53",
+   "name": "T2412.tar.gz",
+   "size": "7.3M"
+  },
+  {
+   "last_modified": "2026-08-14 09:53",
+   "name": "T2413.tar.gz",
+   "size": "8.6M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "T2413v1.tar.gz",
+   "size": "8.3M"
+  },
+  {
+   "last_modified": "2026-08-14 09:53",
+   "name": "T2414.tar.gz",
+   "size": "10M"
+  },
+  {
+   "last_modified": "2026-08-21 12:30",
+   "name": "T2414v1.tar.gz",
+   "size": "10M"
+  },
+  {
+   "last_modified": "2026-08-14 09:53",
+   "name": "T2451.tar.gz",
+   "size": "28M"
+  },
+  {
+   "last_modified": "2026-08-14 09:53",
+   "name": "T2455.tar.gz",
+   "size": "8.7M"
+  }
+ ],
+ "/download_area/CASP17/predictions/oligo/": [
+  {
+   "last_modified": "2026-08-27 17:41",
+   "name": "H1311.tar.gz",
+   "size": "50M"
+  },
+  {
+   "last_modified": "2026-08-27 17:42",
+   "name": "H1312.tar.gz",
+   "size": "79M"
+  },
+  {
+   "last_modified": "2026-08-27 17:42",
+   "name": "H1319.tar.gz",
+   "size": "42M"
+  },
+  {
+   "last_modified": "2026-08-27 17:42",
+   "name": "H1321.tar.gz",
+   "size": "44M"
+  },
+  {
+   "last_modified": "2026-08-27 17:43",
+   "name": "H1335.tar.gz",
+   "size": "97M"
+  },
+  {
+   "last_modified": "2026-08-27 17:43",
+   "name": "H1340.tar.gz",
+   "size": "88M"
+  },
+  {
+   "last_modified": "2026-08-27 17:43",
+   "name": "H1343.tar.gz",
+   "size": "45M"
+  },
+  {
+   "last_modified": "2026-08-27 17:44",
+   "name": "H1344.tar.gz",
+   "size": "40M"
+  },
+  {
+   "last_modified": "2026-08-27 17:44",
+   "name": "H1346.tar.gz",
+   "size": "49M"
+  },
+  {
+   "last_modified": "2026-08-27 17:44",
+   "name": "H1347.tar.gz",
+   "size": "48M"
+  },
+  {
+   "last_modified": "2026-08-27 17:44",
+   "name": "H1348.tar.gz",
+   "size": "57M"
+  },
+  {
+   "last_modified": "2026-08-27 17:45",
+   "name": "H1349.tar.gz",
+   "size": "58M"
+  },
+  {
+   "last_modified": "2026-08-27 17:45",
+   "name": "H1354.tar.gz",
+   "size": "95M"
+  },
+  {
+   "last_modified": "2026-08-27 17:46",
+   "name": "H1355.tar.gz",
+   "size": "93M"
+  },
+  {
+   "last_modified": "2026-08-27 17:46",
+   "name": "H1356.tar.gz",
+   "size": "90M"
+  },
+  {
+   "last_modified": "2026-08-27 17:47",
+   "name": "H1359.tar.gz",
+   "size": "114M"
+  },
+  {
+   "last_modified": "2026-08-27 17:47",
+   "name": "H1360.tar.gz",
+   "size": "88M"
+  },
+  {
+   "last_modified": "2026-08-27 17:48",
+   "name": "H1362.tar.gz",
+   "size": "98M"
+  },
+  {
+   "last_modified": "2026-08-27 17:48",
+   "name": "H1373.tar.gz",
+   "size": "36M"
+  },
+  {
+   "last_modified": "2026-08-27 17:48",
+   "name": "H1374.tar.gz",
+   "size": "38M"
+  },
+  {
+   "last_modified": "2026-08-27 17:48",
+   "name": "H1379.tar.gz",
+   "size": "83M"
+  },
+  {
+   "last_modified": "2026-08-27 17:49",
+   "name": "H1380.tar.gz",
+   "size": "66M"
+  },
+  {
+   "last_modified": "2026-08-27 17:49",
+   "name": "H1381.tar.gz",
+   "size": "86M"
+  },
+  {
+   "last_modified": "2026-08-27 17:49",
+   "name": "H1382.tar.gz",
+   "size": "64M"
+  },
+  {
+   "last_modified": "2026-08-27 17:49",
+   "name": "H1388.tar.gz",
+   "size": "22M"
+  },
+  {
+   "last_modified": "2026-08-27 17:50",
+   "name": "H1389.tar.gz",
+   "size": "84M"
+  },
+  {
+   "last_modified": "2026-08-27 17:50",
+   "name": "H1391.tar.gz",
+   "size": "85M"
+  },
+  {
+   "last_modified": "2026-08-27 17:51",
+   "name": "H1392.tar.gz",
+   "size": "61M"
+  },
+  {
+   "last_modified": "2026-08-27 17:51",
+   "name": "H1394.tar.gz",
+   "size": "59M"
+  },
+  {
+   "last_modified": "2026-08-27 17:51",
+   "name": "H1398.tar.gz",
+   "size": "63M"
+  },
+  {
+   "last_modified": "2026-08-27 17:51",
+   "name": "H1399.tar.gz",
+   "size": "62M"
+  },
+  {
+   "last_modified": "2026-08-27 17:52",
+   "name": "H1400.tar.gz",
+   "size": "56M"
+  },
+  {
+   "last_modified": "2026-08-27 17:52",
+   "name": "H1401.tar.gz",
+   "size": "55M"
+  },
+  {
+   "last_modified": "2026-08-27 17:52",
+   "name": "H1402.tar.gz",
+   "size": "58M"
+  },
+  {
+   "last_modified": "2026-08-27 17:53",
+   "name": "H1403.tar.gz",
+   "size": "57M"
+  },
+  {
+   "last_modified": "2026-08-27 17:53",
+   "name": "H1419.tar.gz",
+   "size": "37M"
+  },
+  {
+   "last_modified": "2026-08-27 17:53",
+   "name": "H1422.tar.gz",
+   "size": "13M"
+  },
+  {
+   "last_modified": "2026-08-27 17:53",
+   "name": "H1423.tar.gz",
+   "size": "13M"
+  },
+  {
+   "last_modified": "2026-08-27 17:55",
+   "name": "H1424.tar.gz",
+   "size": "410M"
+  },
+  {
+   "last_modified": "2026-08-27 17:55",
+   "name": "H1438.tar.gz",
+   "size": "66M"
+  },
+  {
+   "last_modified": "2026-08-27 17:55",
+   "name": "H1441.tar.gz",
+   "size": "22M"
+  },
+  {
+   "last_modified": "2026-08-27 17:55",
+   "name": "H1442.tar.gz",
+   "size": "31M"
+  },
+  {
+   "last_modified": "2026-08-27 17:56",
+   "name": "H1443.tar.gz",
+   "size": "32M"
+  },
+  {
+   "last_modified": "2026-08-27 17:56",
+   "name": "H1444.tar.gz",
+   "size": "31M"
+  },
+  {
+   "last_modified": "2026-08-27 17:41",
+   "name": "H2311.tar.gz",
+   "size": "50M"
+  },
+  {
+   "last_modified": "2026-08-27 17:56",
+   "name": "H2312.tar.gz",
+   "size": "83M"
+  },
+  {
+   "last_modified": "2026-08-27 17:57",
+   "name": "H2319.tar.gz",
+   "size": "57M"
+  },
+  {
+   "last_modified": "2026-08-27 17:57",
+   "name": "H2321.tar.gz",
+   "size": "57M"
+  },
+  {
+   "last_modified": "2026-08-27 17:57",
+   "name": "H2324.tar.gz",
+   "size": "51M"
+  },
+  {
+   "last_modified": "2026-08-27 17:58",
+   "name": "H2335.tar.gz",
+   "size": "102M"
+  },
+  {
+   "last_modified": "2026-08-27 17:58",
+   "name": "H2338.tar.gz",
+   "size": "62M"
+  },
+  {
+   "last_modified": "2026-08-27 17:58",
+   "name": "H2339.tar.gz",
+   "size": "60M"
+  },
+  {
+   "last_modified": "2026-08-27 17:59",
+   "name": "H2340.tar.gz",
+   "size": "116M"
+  },
+  {
+   "last_modified": "2026-08-27 17:59",
+   "name": "H2343.tar.gz",
+   "size": "44M"
+  },
+  {
+   "last_modified": "2026-08-27 17:59",
+   "name": "H2344.tar.gz",
+   "size": "42M"
+  },
+  {
+   "last_modified": "2026-08-27 18:00",
+   "name": "H2346.tar.gz",
+   "size": "49M"
+  },
+  {
+   "last_modified": "2026-08-27 18:00",
+   "name": "H2347.tar.gz",
+   "size": "48M"
+  },
+  {
+   "last_modified": "2026-08-27 18:01",
+   "name": "H2348.tar.gz",
+   "size": "59M"
+  },
+  {
+   "last_modified": "2026-08-27 18:01",
+   "name": "H2349.tar.gz",
+   "size": "58M"
+  },
+  {
+   "last_modified": "2026-08-27 18:02",
+   "name": "H2354.tar.gz",
+   "size": "121M"
+  },
+  {
+   "last_modified": "2026-08-27 18:03",
+   "name": "H2355.tar.gz",
+   "size": "116M"
+  },
+  {
+   "last_modified": "2026-08-27 18:04",
+   "name": "H2356.tar.gz",
+   "size": "190M"
+  },
+  {
+   "last_modified": "2026-08-27 18:05",
+   "name": "H2359.tar.gz",
+   "size": "126M"
+  },
+  {
+   "last_modified": "2026-08-27 18:06",
+   "name": "H2360.tar.gz",
+   "size": "84M"
+  },
+  {
+   "last_modified": "2026-08-27 18:06",
+   "name": "H2362.tar.gz",
+   "size": "100M"
+  },
+  {
+   "last_modified": "2026-08-27 18:07",
+   "name": "H2373.tar.gz",
+   "size": "40M"
+  },
+  {
+   "last_modified": "2026-08-27 18:07",
+   "name": "H2374.tar.gz",
+   "size": "42M"
+  },
+  {
+   "last_modified": "2026-08-27 18:08",
+   "name": "H2379.tar.gz",
+   "size": "117M"
+  },
+  {
+   "last_modified": "2026-08-27 18:09",
+   "name": "H2380.tar.gz",
+   "size": "78M"
+  },
+  {
+   "last_modified": "2026-08-27 18:10",
+   "name": "H2381.tar.gz",
+   "size": "115M"
+  },
+  {
+   "last_modified": "2026-08-27 18:10",
+   "name": "H2382.tar.gz",
+   "size": "76M"
+  },
+  {
+   "last_modified": "2026-08-27 18:11",
+   "name": "H2388.tar.gz",
+   "size": "14M"
+  },
+  {
+   "last_modified": "2026-08-27 18:11",
+   "name": "H2389.tar.gz",
+   "size": "91M"
+  },
+  {
+   "last_modified": "2026-08-27 18:12",
+   "name": "H2391.tar.gz",
+   "size": "115M"
+  },
+  {
+   "last_modified": "2026-08-27 18:12",
+   "name": "H2392.tar.gz",
+   "size": "64M"
+  },
+  {
+   "last_modified": "2026-08-27 18:13",
+   "name": "H2394.tar.gz",
+   "size": "91M"
+  },
+  {
+   "last_modified": "2026-08-27 18:13",
+   "name": "H2398.tar.gz",
+   "size": "34M"
+  },
+  {
+   "last_modified": "2026-08-27 18:14",
+   "name": "H2399.tar.gz",
+   "size": "33M"
+  },
+  {
+   "last_modified": "2026-08-27 18:14",
+   "name": "H2400.tar.gz",
+   "size": "33M"
+  },
+  {
+   "last_modified": "2026-08-27 18:14",
+   "name": "H2401.tar.gz",
+   "size": "35M"
+  },
+  {
+   "last_modified": "2026-08-27 18:15",
+   "name": "H2402.tar.gz",
+   "size": "35M"
+  },
+  {
+   "last_modified": "2026-08-27 18:15",
+   "name": "H2403.tar.gz",
+   "size": "33M"
+  },
+  {
+   "last_modified": "2026-08-27 18:15",
+   "name": "H2408.tar.gz",
+   "size": "61M"
+  },
+  {
+   "last_modified": "2026-08-27 18:16",
+   "name": "H2419.tar.gz",
+   "size": "37M"
+  },
+  {
+   "last_modified": "2026-08-27 18:16",
+   "name": "H2422.tar.gz",
+   "size": "21M"
+  },
+  {
+   "last_modified": "2026-08-27 18:16",
+   "name": "H2423.tar.gz",
+   "size": "21M"
+  },
+  {
+   "last_modified": "2026-08-27 18:20",
+   "name": "H2424.tar.gz",
+   "size": "736M"
+  },
+  {
+   "last_modified": "2026-08-27 18:20",
+   "name": "H2438.tar.gz",
+   "size": "79M"
+  },
+  {
+   "last_modified": "2026-08-27 18:20",
+   "name": "H2441.tar.gz",
+   "size": "21M"
+  },
+  {
+   "last_modified": "2026-08-27 18:21",
+   "name": "H2442.tar.gz",
+   "size": "34M"
+  },
+  {
+   "last_modified": "2026-08-27 18:21",
+   "name": "H2443.tar.gz",
+   "size": "33M"
+  },
+  {
+   "last_modified": "2026-08-27 18:21",
+   "name": "H2444.tar.gz",
+   "size": "33M"
+  },
+  {
+   "last_modified": "2026-08-27 17:32",
+   "name": "T1313o.tar.gz",
+   "size": "95M"
+  },
+  {
+   "last_modified": "2026-08-27 17:33",
+   "name": "T1342o.tar.gz",
+   "size": "170M"
+  },
+  {
+   "last_modified": "2026-08-27 17:33",
+   "name": "T1358o.tar.gz",
+   "size": "33M"
+  },
+  {
+   "last_modified": "2026-08-27 17:33",
+   "name": "T1364o.tar.gz",
+   "size": "13M"
+  },
+  {
+   "last_modified": "2026-08-27 17:33",
+   "name": "T1371o.tar.gz",
+   "size": "17M"
+  },
+  {
+   "last_modified": "2026-08-27 17:33",
+   "name": "T1393o.tar.gz",
+   "size": "32M"
+  },
+  {
+   "last_modified": "2026-08-27 17:34",
+   "name": "T1404o.tar.gz",
+   "size": "67M"
+  },
+  {
+   "last_modified": "2026-08-27 17:34",
+   "name": "T1406o.tar.gz",
+   "size": "38M"
+  },
+  {
+   "last_modified": "2026-08-27 17:34",
+   "name": "T1416o.tar.gz",
+   "size": "33M"
+  },
+  {
+   "last_modified": "2026-08-27 17:34",
+   "name": "T1417o.tar.gz",
+   "size": "31M"
+  },
+  {
+   "last_modified": "2026-08-27 17:34",
+   "name": "T1421o.tar.gz",
+   "size": "26M"
+  },
+  {
+   "last_modified": "2026-08-27 17:34",
+   "name": "T1430o.tar.gz",
+   "size": "15M"
+  },
+  {
+   "last_modified": "2026-08-27 17:35",
+   "name": "T1440o.tar.gz",
+   "size": "25M"
+  },
+  {
+   "last_modified": "2026-08-27 17:35",
+   "name": "T2313o.tar.gz",
+   "size": "98M"
+  },
+  {
+   "last_modified": "2026-08-27 17:36",
+   "name": "T2342o.tar.gz",
+   "size": "214M"
+  },
+  {
+   "last_modified": "2026-08-27 17:36",
+   "name": "T2358o.tar.gz",
+   "size": "5.3M"
+  },
+  {
+   "last_modified": "2026-08-27 17:36",
+   "name": "T2364o.tar.gz",
+   "size": "14M"
+  },
+  {
+   "last_modified": "2026-08-27 17:36",
+   "name": "T2371o.tar.gz",
+   "size": "17M"
+  },
+  {
+   "last_modified": "2026-08-27 17:37",
+   "name": "T2393o.tar.gz",
+   "size": "61M"
+  },
+  {
+   "last_modified": "2026-08-27 17:37",
+   "name": "T2395o.tar.gz",
+   "size": "40M"
+  },
+  {
+   "last_modified": "2026-08-27 17:38",
+   "name": "T2404o.tar.gz",
+   "size": "215M"
+  },
+  {
+   "last_modified": "2026-08-27 17:38",
+   "name": "T2406o.tar.gz",
+   "size": "51M"
+  },
+  {
+   "last_modified": "2026-08-27 17:38",
+   "name": "T2416o.tar.gz",
+   "size": "68M"
+  },
+  {
+   "last_modified": "2026-08-27 17:39",
+   "name": "T2417o.tar.gz",
+   "size": "39M"
+  },
+  {
+   "last_modified": "2026-08-27 17:39",
+   "name": "T2421o.tar.gz",
+   "size": "25M"
+  },
+  {
+   "last_modified": "2026-08-27 17:39",
+   "name": "T2430o.tar.gz",
+   "size": "16M"
+  },
+  {
+   "last_modified": "2026-08-27 17:39",
+   "name": "T2440o.tar.gz",
+   "size": "32M"
+  },
+  {
+   "last_modified": "2026-08-27 17:40",
+   "name": "T2451o.tar.gz",
+   "size": "53M"
+  },
+  {
+   "last_modified": "2026-08-27 17:40",
+   "name": "T2461o.tar.gz",
+   "size": "210M"
+  },
+  {
+   "last_modified": "2026-08-27 17:41",
+   "name": "T2463o.tar.gz",
+   "size": "32M"
+  },
+  {
+   "last_modified": "2026-08-27 17:41",
+   "name": "T2464o.tar.gz",
+   "size": "21M"
+  }
+ ],
+ "/download_area/CASP17/predictions/regular/": [
+  {
+   "last_modified": "2026-08-27 17:19",
+   "name": "T1331.tar.gz",
+   "size": "15M"
+  },
+  {
+   "last_modified": "2026-08-27 17:19",
+   "name": "T1357.tar.gz",
+   "size": "10M"
+  },
+  {
+   "last_modified": "2026-08-27 17:19",
+   "name": "T1361.tar.gz",
+   "size": "6.6M"
+  },
+  {
+   "last_modified": "2026-08-27 17:19",
+   "name": "T1363.tar.gz",
+   "size": "8.3M"
+  },
+  {
+   "last_modified": "2026-08-27 17:19",
+   "name": "T1372.tar.gz",
+   "size": "10M"
+  },
+  {
+   "last_modified": "2026-08-27 17:19",
+   "name": "T1378.tar.gz",
+   "size": "36M"
+  },
+  {
+   "last_modified": "2026-08-27 17:20",
+   "name": "T1405.tar.gz",
+   "size": "25M"
+  },
+  {
+   "last_modified": "2026-08-27 17:20",
+   "name": "T1407.tar.gz",
+   "size": "23M"
+  },
+  {
+   "last_modified": "2026-09-18 16:36",
+   "name": "T1418.tar.gz",
+   "size": "12M"
+  },
+  {
+   "last_modified": "2026-09-18 16:36",
+   "name": "T1420.tar.gz",
+   "size": "4.5M"
+  },
+  {
+   "last_modified": "2026-10-31 17:42",
+   "name": "T1420_models_protonated.tar.gz",
+   "size": "8.8M"
+  },
+  {
+   "last_modified": "2026-09-18 16:36",
+   "name": "T1431.tar.gz",
+   "size": "9.1M"
+  },
+  {
+   "last_modified": "2026-09-18 16:36",
+   "name": "T1432.tar.gz",
+   "size": "9.1M"
+  },
+  {
+   "last_modified": "2026-09-18 16:36",
+   "name": "T1433.tar.gz",
+   "size": "7.7M"
+  },
+  {
+   "last_modified": "2026-09-18 16:36",
+   "name": "T1434.tar.gz",
+   "size": "12M"
+  },
+  {
+   "last_modified": "2026-09-18 16:36",
+   "name": "T1436.tar.gz",
+   "size": "8.4M"
+  },
+  {
+   "last_modified": "2026-09-18 16:37",
+   "name": "T1437.tar.gz",
+   "size": "6.2M"
+  },
+  {
+   "last_modified": "2026-08-27 17:21",
+   "name": "T1462.tar.gz",
+   "size": "4.6M"
+  },
+  {
+   "last_modified": "2026-08-27 17:21",
+   "name": "T2313.tar.gz",
+   "size": "35M"
+  },
+  {
+   "last_modified": "2026-08-27 17:21",
+   "name": "T2342.tar.gz",
+   "size": "76M"
+  },
+  {
+   "last_modified": "2026-08-27 17:21",
+   "name": "T2358.tar.gz",
+   "size": "2.9M"
+  },
+  {
+   "last_modified": "2026-08-27 17:21",
+   "name": "T2371.tar.gz",
+   "size": "9.1M"
+  },
+  {
+   "last_modified": "2026-08-27 17:22",
+   "name": "T2406.tar.gz",
+   "size": "27M"
+  },
+  {
+   "last_modified": "2026-08-27 17:22",
+   "name": "T2409.tar.gz",
+   "size": "24M"
+  },
+  {
+   "last_modified": "2026-08-27 17:22",
+   "name": "T2410.tar.gz",
+   "size": "24M"
+  },
+  {
+   "last_modified": "2026-08-27 17:22",
+   "name": "T2411.tar.gz",
+   "size": "25M"
+  },
+  {
+   "last_modified": "2026-08-27 17:22",
+   "name": "T2421.tar.gz",
+   "size": "8.9M"
+  }
+ ],
+ "/download_area/CASP17/results/": [],
+ "/download_area/CASP17/sequences/": [
+  {
+   "last_modified": "2026-09-06 14:21",
+   "name": "casp17.HT1.seq.txt",
+   "size": "60K"
+  },
+  {
+   "last_modified": "2026-09-06 14:21",
+   "name": "casp17.HT2.seq.txt",
+   "size": "69K"
+  },
+  {
+   "last_modified": "2026-09-06 14:21",
+   "name": "casp17.RM1.seq.txt",
+   "size": "3.9K"
+  },
+  {
+   "last_modified": "2026-09-06 14:22",
+   "name": "casp17.RM2.seq.txt",
+   "size": "28K"
+  }
+ ],
+ "/download_area/CASP17/targets/": []
+}
