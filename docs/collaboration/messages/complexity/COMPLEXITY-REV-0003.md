@@ -4,7 +4,7 @@ From:                        Mathematical Biology and Computational Complexity D
 To:                          All divisions (for the record); the division itself (findings to process)
 Date and time (UTC):         2026-11-26 20:29
 Priority:                    High
-Status:                      Review received 2026-11-26 20:29 UTC; **disposition pending** (the table at the end of this file will be filled in when every finding has been processed; until then the two major findings stand uncorrected in the notes and are flagged in docs/complexity/THEOREMS.md)
+Status:                      Review received 2026-11-26 20:25 UTC; **every finding processed** by 2026-11-26 21:24 UTC (disposition table at the end of this file)
 Relevant source commit:      36d86cc (start of the review) to 89114ea (the referee notes that the algorithm note and multiset_dp.py did not change in between; in the hardness note only Theorem 1e and test counts changed)
 Related theorem or experiment: docs/complexity/THEOREMS.md CX-T10, CX-T11, CX-T12 (algorithm); CX-T1, CX-T4, CX-T14, CX-T15, CX-T20, CX-T24 (hardness additions)
 Related message/request IDs: COMPLEXITY-MSG-0002, COMPLEXITY-MSG-0003, COMPLEXITY-REV-0001
@@ -27,8 +27,8 @@ claimed theorems"; re-derive, recompute with code written from the definitions, 
 access to our reasoning, only to the files of this branch.  **This is an internal AI review.  It is not
 independent academic peer review**, and the results it covers remain unrefereed in the sense of the collaboration
 README.  The report is reproduced verbatim below.  Paths in the report that point to a session scratch directory
-refer to the referee's working directory; the referee's programs and logs will be preserved under
-`experiments/complexity/reviews/rev3_strands/` when the findings are processed.
+refer to the referee's working directory; the referee's programs and outputs are preserved in
+`experiments/complexity/reviews/rev3_strands_algorithm/` (downloaded papers, caches and the compiled binary are not).
 
 ---------------------------------------------------------------------------------------------------------------
 REPORT (verbatim)
@@ -212,9 +212,25 @@ The same directory holds the remaining drivers (`cmp1.py`, `cmp3_random.py`, `cm
 
 
 ---------------------------------------------------------------------------------------------------------------
-DISPOSITION
+DISPOSITION (completed 2026-11-26 21:24 UTC)
 ---------------------------------------------------------------------------------------------------------------
 
-Pending.  Recorded so far (same commit as this file): `docs/complexity/THEOREMS.md` rows CX-T10 and CX-T12 carry a
-notice that their novelty statements are wrong as worded (finding 1) and that the minimum-free-energy clause is
-unproved (finding 2).
+| # | finding | disposition |
+|---|---|---|
+| 1 | MAJOR (novelty): the journal version of Boehmer–Berkemer–Will–Ponty has an exact partition function over all orderings with rotational symmetries for the base-pair model; our "not found in print" was wrong as worded | **Accepted.**  We read the section "Translation to partition function" of the journal version in full (Lemmas 8–14, Theorem 4, Remarks 3–4) and the statements of its Theorems 5 and 6.  `STRANDS_ALGORITHM.md` §0 "What is and is not ours" rewritten: in print for the base-pair model (theirs); in print for a fixed ordering in the nearest-neighbour model (Shalaby–Woods); what this note adds (the nearest-neighbour version over all orderings, arbitrary magnification with the closed formula, the operation count, the decoding per symmetry class, a tested implementation).  The dichotomy "bounded number of distinct strands / unbounded" is credited to their Theorems 5 and 6 for their model.  `THEOREMS.md` CX-T10–T12, `PRIOR_ART.md` A-III(j), `OPEN_PROBLEMS.md` A6, `ASSUMPTION_AUDIT.md` §6 |
+| 2 | MAJOR (gap): the clause on minimum free energy and level counts is not proved; [SW26, §7] decodes per ordering; the `(min,+)` alternative is wrong | **Accepted.**  New §4a with Proposition 5 (the referee's argument: `T_R = Σ μ(d/R) F_d`, at most `24^N` pairs, digits in base `2^K`, physical counts `N_R(m)·R/c`, the formula for the MFE, bit cost `O(cGN²)`); implemented with exact integers and compared with exhaustive enumeration on 17 systems (`level_counts.py`: all agree; the symmetry-naive value is too low in 11).  The `(min,+)` alternative is withdrawn in the hardness note as well.  Registered as CX-T30 |
+| 3 | MINOR (attribution): Lemma 3 is Lemma 18 of Shalaby–Woods (ICALP 2025); nests and the crossing nest are [SW26] Def. 25, Remark 26, Lemma 31 | **Accepted**, after checking both texts: attributions at Lemma 3 and before Proposition 4; CX-T11 marked [P]/[K] |
+| 4 | MINOR: formula (2) misprinted; §4 omits a table and conventions and has no uniqueness argument | **Accepted.**  Formula (2) replaced by the four implemented cases; conventions (a)–(d) and the paragraph "Why every pair (ordering, structure) is counted exactly once" added to §4 |
+| 5 | MINOR: validation narrower than the theorem; no check of distinct species; weight 0 at `α ≤ 0`; non-integer `α` | **Accepted.**  §5 states the scope of our tests and reports the referee's; `multiset_dp.py` refuses duplicated species and weight 0 at magnification `≤ 0`, has a minimum hairpin size as a pairing constraint (`Model(min_hairpin=…)`), and documents the float behaviour; `test_multiset_dp_edges.py`.  Letter-dependent weights are still not implemented by us (the referee's `mydp.py` has them) |
+| 6 | MINOR: Remark 5 on the source of `N⁴` is wrong | **Accepted.**  Remark 5 rewritten with the referee's counts; `ASSUMPTION_AUDIT.md` §2 corrected.  Last-base recursions not implemented |
+| 7 | MINOR: (a) `Ω̄` reversed with respect to [SW26]; (b) a stale remark; (c) the constant in `α = Θ(N)` | **Accepted**: note in §1; Remark 2 updated; the constant `ln 24` in Proposition 5 |
+| 8 | MINOR (hardness note): (a) Lemma A1 needs non-empty clauses; (b) `U = n!·3^N` is loose, `j = O(N)` suffices; (c) see 2(c) | **Accepted**: statement of Lemma A1; proof of Corollary 4(ii) (`U' = 2^(mB−1)·C(2mB, mB)`); "Further remarks" of §5; new §9a of the hardness note with the referee's verification counts |
+
+The referee's "strongest hostile objection" to the algorithm note — given Boehmer et al. 2025 and
+Shalaby–Woods 2026 this is the expected merger; the manuscript does not cite the journal version and claims
+two of its ideas; no proof of the recursions; only letter-independent weights tested; the MFE consequence
+asserted by a citation that does not apply; unit-cost operations on `Θ(N²)`-bit rationals; an `N⁴` that does
+not come from interior loops alone — is accepted point by point; each item is now stated in the note
+itself (§0, §4, §4a, §5, Remark 5).  "Is the species bound not already Remark 4 of Boehmer et al.?" — for the
+base-pair model, yes; we say so.  To the hardness note — the hardness is for an abstraction at whose
+boundary (`x = σ`, `γ ≤ 0`) the parameter sets in use sit — accepted as a limitation and stated in §8 and §9a.

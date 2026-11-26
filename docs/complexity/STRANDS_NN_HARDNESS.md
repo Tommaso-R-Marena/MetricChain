@@ -2,8 +2,9 @@
 
 Working paper of the complexity division.  Status of every statement is given by its label; the
 register is `THEOREMS.md`.  First version 2026-11-26; **revised 2026-11-26 after the internal adversarial
-review `COMPLEXITY-REV-0001` and the science division's independent review `SCI-REV-0019`** (what changed:
-§9).  The two reviews did not know of each other and agree on the main points.
+review `COMPLEXITY-REV-0001`, the science division's independent review `SCI-REV-0019` and a second internal
+review `COMPLEXITY-REV-0003` of the later additions** (what changed:
+§9, §9a).  The first two reviews did not know of each other and agree on the main points.
 
 **Question addressed** (`OPEN_PROBLEMS.md` A1; Ducloz–Shalaby–Woods, DNA 31, "Future work" 1; cited as
 [DSW]): "Is MFE NP-hard for […] NN O(n)-strands unpseudoknotted? If so, can the reduction map be
@@ -492,7 +493,11 @@ can be written out in unary in polynomial time.
 the number of non-crossing sets of chords on `N` points; an upper bound for the number of structures).
 By Theorem 1 (1c), `e^{β E_0}·Z_j = N* + ρ` with `0 ≤ ρ ≤ U·e^{−βε}`, where `E_0 = E* − nΔG_assoc` and `ε`
 is the gap of the theorem.  For `j ≥ k_BT·ln(2U)/ε = O(N log N)` we get `ρ < 1/2` and
-`N* = ⌊e^{βE_0} Z_j⌋`.  ∎
+`N* = ⌊e^{βE_0} Z_j⌋`.  The bound `U` is loose (REV-0003, finding 8b): in the physical ensemble of `I` the
+sequence of item strands is a string of `mB` letters `C` with nicks — at most `2^{mB−1}` possibilities — and
+the chords, which all join a `G` of the template to a `C` of an item and are nested, are determined by the
+two sets of matched bases — at most `C(2mB, mB)` possibilities.  So `U' = 2^{mB−1}·C(2mB, mB) ≤ 8^{mB}` also
+bounds the number of structures, and **`j = O(N)` suffices** (`j ≥ k_BT·(3mB + 1) ln 2/ε`).  ∎
 
 (The first version obtained (ii) only for the stack-only model, by polynomial interpolation over `M + 1`
 temperatures; the one-call argument was pointed out by the referee, REV-0001 finding 6.)
@@ -523,8 +528,9 @@ system with `c = 4|T| + 1 ≤ 84m + 1` strands and `N = poly(m)` bases.  An algo
 
 With `STRANDS_ALGORITHM.md` (`O(N⁴·3^c)` arithmetic operations for the partition function): the
 single-exponential dependence on the number of strands is optimal up to the constant in the exponent,
-under ETH and in the unit-cost model of that algorithm — provided the decision version of MFE is obtained
-from the partition function as in Shalaby–Woods 2026, §7, a step we have not re-derived.
+under ETH and in the unit-cost model of that algorithm; the minimum free energy is obtained within the
+same operation count by Proposition 5 of that note (per symmetry class; the first version referred here
+to Shalaby–Woods 2026, §7, whose decoding is per ordering and does not apply — REV-0003, finding 2).
 
 (In the first version step one was a citation of a `2^{Ω(q)}` bound for 3DM that the cited source states
 without the linear bound on the number of triples it needs — REV-0001, finding 4.  Appendix A removes the
@@ -532,9 +538,12 @@ dependence on that source.)
 
 Further remarks.
 * For a bounded number of strand *species* the partition function over all orderings is computable in
-  polynomial time (`STRANDS_ALGORITHM.md`, Theorem 1; [P], unreviewed).  The corresponding statement for
-  the MFE — the same recursion over `(min,+)`, or [SW26, §7] applied to the partition function — is not
-  written out by us; for a base-pair model it is Theorem 16 of Boehmer et al. (WABI 2024).  The hardness
+  polynomial time (`STRANDS_ALGORITHM.md`, Theorem 1; [P], reviewed by REV-0003), and so is the minimum
+  free energy (its Proposition 5).  A symmetry-naive recursion over `(min,+)`, which the first version
+  offered as an alternative, is **wrong**: it returns `min_d (m_d + k_BT ln d)` with `m_d` the least energy of
+  a structure whose symmetry is a multiple of `d`, below the true value whenever the minimiser of the loop
+  energy is symmetric (REV-0003, finding 2c).  For the base-pair model both statements are in Boehmer et
+  al. (journal version 2025: Theorems 3–5 and the section on the partition function).  The hardness
   above therefore needs unboundedly many species; whether MFE is W[1]-hard in the number of species is
   open (`OPEN_PROBLEMS.md` C2).
 * The single-strand pseudoknotted half of A1 is not addressed: the nearest-neighbour model of the
@@ -644,13 +653,37 @@ findings 3, 1, 2, 6, 5, 6 and 9 above).  What it added:
 
 ---
 
+## 9a. Changes after the review COMPLEXITY-REV-0003
+
+The second internal review (2026-11-26) covered what was written after the first: Theorem 1 with (H2′),
+Theorems 1c, 1d and 1e, Remark 5, Corollaries 4(ii) and 5, and Appendix A.  Verdict: correct line by line
+and in the referee's enumerations (54 instances, 2 380 760 connected structures; models at and beyond the
+hypotheses: Theorem 1 on 14 models, with failures as soon as `δ ≤ 0`; Theorem 1c on 63 points `(x,γ)`, the
+hypothesis exact on that grid; Theorem 1d on 140 models, exact; Theorem 1e in both forms on 12 329
+instance–model pairs, with the stated failures at `B = 2` confirmed; Remark 5; Corollary 4(ii) on 154
+pairs; Lemma A1 on all 7 140 formulas with one or two clauses on two variables and 2 250 others; Lemma A2
+on 1 160 instances with a generic packing search).  Three minor findings:
+
+| finding | change |
+|---|---|
+| 8a: Lemma A1 needs clauses with at least one literal | statement of Lemma A1 |
+| 8b: the bound `U = n!·3^N` of Corollary 4(ii) is loose; `j = O(N)` suffices | proof of Corollary 4(ii) |
+| 8c (with finding 2 on the algorithm note): the `(min,+)` alternative for the minimum free energy is wrong; the cited decoding is per ordering | §5, "Further remarks", and the paragraph after Corollary 5 |
+
+The referee's strongest objection stands as a limitation and is already in §8: the hardness is for an
+abstraction in which a nicked flush stack is worth less than the hypotheses of Theorems 1c/1e allow; in the
+parameter sets in use coaxial stacking is about as strong as a stack and one-nucleotide bulges can be
+favourable — exactly the boundary `x = σ`, `γ ≤ 0` at which the reduction fails; and the instances need one
+strand of length `Θ(N)` and unary sizes.
+
 ## Appendix A.  A linear-size chain from 3-SAT to exact bin packing
 
 Both reductions are textbook reductions of Garey and Johnson (1979, Theorems 3.2 and 4.3), which we did
 not have at hand; the constructions below are written out and proved here, the first with the garbage
 collection made local so that its size is linear.
 
-**Lemma A1 [P; X].**  From a CNF formula `φ` with `m` clauses of at most three literals each one can
+**Lemma A1 [P; X].**  From a CNF formula `φ` with `m` clauses of between one and three literals each (an
+empty clause would give `ℓ_C − 1 = −1` garbage pairs below; REV-0003, finding 8a) one can
 compute in polynomial time a 3DM instance `(W, X, Y, T)` with `|W| = |X| = |Y| ≤ 6m` and `|T| ≤ 21m` that
 has a perfect matching iff `φ` is satisfiable.
 

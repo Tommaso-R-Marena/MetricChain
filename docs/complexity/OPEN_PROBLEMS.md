@@ -137,13 +137,23 @@ Algorithms for Structure Prediction and Interactions*, WABI 2024, LIPIcs 312, 18
   the number of non-identical strands"; Theorem 19: NP-completeness for triplet repeats of one pattern
   in a model with disconnected complexes.
 * **Status: OPEN** as posed (preprint of 23 Nov 2026).  Verified on 2026-11-26.
-* Our position: **OURS-[P], validated [X], unreviewed (2026-11-26)** — `STRANDS_ALGORITHM.md`, CX-T10–T12:
-  the magnified partition function of the full NN model (connectedness, rotational symmetry, all
-  orderings) in `O(N^4 · Π_i C(n_i+2,2))` arithmetic operations: `3^c` instead of `(c−1)!` for distinct
-  strands (question 3), and polynomial time for unboundedly many strands of a bounded number of species
-  (a partial answer to question 4; with CX-T2 the picture is "bounded species: polynomial; unbounded
-  species: NP-hard").  MFE and #SSEL follow by A-II's decoding, which we cite and have not re-derived.
-  Open: `2^c` by fast subset convolution (remark only); FPT in the number of species.  ETH-tightness: conditional statement CX-T14.
+* **Correction (COMPLEXITY-REV-0003, 2026-11-26).**  The "Known" item above describes the conference
+  version of A-III.  The **journal version** (Algorithms Mol. Biol. 21:4, December 2025 — the version A-II
+  cites) goes further, *for the base-pair model*: an exact partition function over all orderings with the
+  rotational symmetries handled (its Lemmas 8–14 and **Theorem 4, `O(3^m n³ m²)`**), with the symmetry
+  correction (Remark 3) and for the count-indexed setting (Remark 4, Theorem 5).  We read that section
+  after the review.  Question 3 of A-II asks for the nearest-neighbour model, and that is what remains open
+  in print as far as the referee and we found.
+* Our position: **OURS-[P], validated [X], reviewed internally (COMPLEXITY-REV-0003: correct)** —
+  `STRANDS_ALGORITHM.md`, CX-T10–T12, CX-T30: the magnified partition function of the full NN model
+  (connectedness, rotational symmetry, all orderings) in `O(N^4 · Π_i C(n_i+2,2))` arithmetic operations:
+  `3^c` instead of `(c−1)!` for distinct strands (question 3), and polynomial time for unboundedly many
+  strands of a bounded number of species (a partial answer to question 4; with CX-T2 the picture is
+  "bounded species: polynomial; unbounded species: NP-hard" — for the base-pair model that dichotomy is
+  A-III's).  MFE and level counts per symmetry class: CX-T30 (the first version cited A-II's decoding, which
+  is per ordering and does not apply).  What is ours is the extension of the scheme of A-III (journal) and
+  of A-II's slices to loop energies, all orderings and arbitrary magnification — not the scheme.
+  Open: `2^c` by fast subset convolution (remark only); FPT in the number of species.  ETH-tightness: CX-T14.
 
 ### A7 — Pathways through the landscape (A-II, "Future work" 2)
 

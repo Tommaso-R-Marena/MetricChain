@@ -18,6 +18,17 @@ Formula implemented (docs/complexity/STRANDS_ALGORITHM.md):
     G_d  = sum over linear sequences y of one period, of the d-fold symmetric structures on y^d
            = sum over (designated nest, marked nick inside it, top segment)    (tables at magnification d*alpha)
     J_k(d) = sum_{e | d} mu(d/e) e^k      (Jordan totient, here with exponent k = 1 - alpha)
+
+Scope and conventions (added after COMPLEXITY-REV-0003, finding 5):
+  * the species must be pairwise different sequences (identical strands are one species with a multiplicity);
+    magnified_pf checks this;
+  * loop weights depend on loop sizes only (hp(u), il(l1, l2)); letter-dependent weights are allowed by the
+    theorem but not by this implementation (the referee's own implementation, reviews/rev3_strands_algorithm/mydp.py,
+    has them and agrees with brute force);
+  * a forbidden loop must NOT be encoded by weight 0 when the magnification is <= 0 (0**0 = 1 would count it and a
+    negative power divides by zero): the tables raise ValueError in that case.  A minimum hairpin size is a
+    pairing constraint: Model(..., min_hairpin=m) forbids hairpins with fewer than m unpaired bases;
+  * alpha must be an integer for exact arithmetic; a non-integer alpha silently gives floating-point numbers.
 """
 from fractions import Fraction
 from functools import lru_cache
@@ -52,8 +63,18 @@ def jordan(k, d):
 
 
 class Model:
-    def __init__(self, hp, il, ma, mb, mc):
+    def __init__(self, hp, il, ma, mb, mc, min_hairpin=0):
         self.hp, self.il, self.ma, self.mb, self.mc = hp, il, Fraction(ma), Fraction(mb), Fraction(mc)
+        self.min_hairpin = min_hairpin
+
+
+def _pw(x, g):
+    """x**g for a loop weight x; refuses weight 0 at magnification <= 0 (see the module docstring)."""
+    x = Fraction(x)
+    if x == 0 and g <= 0:
+        raise ValueError("loop weight 0 at magnification <= 0: encode forbidden loops as pairing constraints "
+                         "(Model(min_hairpin=...)), not as zero weights")
+    return x ** g
 
 
 class Tables:
@@ -127,11 +148,12 @@ class Tables:
         tot = Fraction(0)
         if self.can(s, i, s, j):
             g = self.g
-            tot += Fraction(self.m.hp(j - i - 1)) ** g
+            if j - i - 1 >= self.m.min_hairpin:
+                tot += _pw(self.m.hp(j - i - 1), g)
             for d in range(i + 1, j - 1):
                 for e in range(d + 1, j):
                     if self.can(s, d, s, e):
-                        tot += Fraction(self.m.il(d - i - 1, j - e - 1)) ** g * self.QBs(s, d, e)
+                        tot += _pw(self.m.il(d - i - 1, j - e - 1), g) * self.QBs(s, d, e)
             # multiloop: closing pair + >= 2 inner branches
             pre = self.m.ma ** g * self.B()
             for e in range(i + 2, j):
@@ -254,7 +276,7 @@ class Tables:
                     if self.can(s, d, t, e):
                         b = self.QB(s, d, t, e, A)
                         if b:
-                            tot += Fraction(self.m.il(d - i - 1, j - e - 1)) ** g * b
+                            tot += _pw(self.m.il(d - i - 1, j - e - 1), g) * b
             # multiloop: top level of the inside is nick-free with >= 2 branches
             pre = self.m.ma ** g * self.B()
             tot += pre * self._QM2_inside(s, i, t, j, A)
@@ -357,7 +379,7 @@ def Gd(species, counts, model, alpha, d):
                 u = i - 1 - j
                 # k = 1 nest per period
                 if d == 2:
-                    central = Fraction(model.il(u, u)) ** alpha
+                    central = _pw(model.il(u, u), alpha)
                 else:
                     central = ma_a * T.B() * T.C(u)
                 tot += nicks * nest * central
@@ -384,6 +406,11 @@ def Gd(species, counts, model, alpha, d):
 
 def magnified_pf(species, counts, model, alpha):
     """Q_alpha over the physical ensemble (association factor omitted)."""
+    if len(set(species)) != len(species):
+        raise ValueError("species must be pairwise different sequences; give identical strands as one species "
+                         "with a multiplicity")
+    if len(species) != len(counts) or any(n < 0 for n in counts) or sum(counts) == 0:
+        raise ValueError("counts must be non-negative, one per species, not all zero")
     c = sum(counts)
     gg = 0
     for n in counts:

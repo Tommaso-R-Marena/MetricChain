@@ -54,6 +54,7 @@ python3 characterize6.py                              # CX-T8 (about 2 min)
 python3 counterexample7.py                            # CX-T7: the 7-leaf non-galled network
 python3 verify_nongalled.py; python3 verify_nongalled2.py
 python3 nongalled_formula.py                          # CX-T7: exact weights in the family
+python3 modified_nanuq_witness7.py                    # Theorem 11(c): the seven-leaf witness (after REV-0004)
 python3 export_lean_lists.py                          # the list C6 in the Lean file is the computed closure
 python3 kalmanson_only.py; python3 kalmanson_only.py extra   # CX-T26 (seconds)
 python3 forbidden_in_nstar.py                         # the forbidden pattern inside the 7-leaf counterexample
@@ -71,8 +72,12 @@ python3 test_eth_chain.py                             # Appendix A of the hardne
 python3 test_multiset_dp.py                           # CX-T10..T12 on 20 systems (seconds)
 python3 test_multiset_dp_random.py 1 200 13           # 200 random systems (seconds)
 python3 test_multiset_dp_random.py 2 60 16            # 60 larger random systems (about a minute)
+python3 test_multiset_dp_edges.py                     # input checks, minimum hairpin size (after REV-0003)
+python3 level_counts.py                               # CX-T30: MFE and level counts per symmetry class (seconds)
 cd ../ising_faces
 python3 table_k4.py; python3 table_k5.py; python3 span_rule.py; python3 test_theory.py   # CX-T16..T19
+python3 span_algorithm.py                             # the 2^K algorithm, singletons, conditions, the reduction of CX-T29 (2 min)
+python3 degree2_certificates.py                       # CX-T28 (minutes)
 cd ../penalty_threshold
 python3 price_bound.py 3; python3 hardness_maxcut.py      # CX-T21..T23 (toy models, exact enumeration)
 cd ../../..
