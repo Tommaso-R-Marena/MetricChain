@@ -34,6 +34,11 @@ than the one its consequence needs (§8.3; repaired here with an explicit exampl
 ## 1. Verdict table
 
 Columns: Y's label → my verdict; how it was checked; where.  "digits" = agreement to every digit Y prints.
+Vocabulary of the verdict column: **proved** = re-derived by me (REVIEW); **replicated** = re-computed with my own
+code (REPL), with the agreement stated; **confirmed** = valid, and my independent values are compatible;
+**conditional** = follows from inputs I did not check; **wrong** = with the counter-example; **not checked**.
+Nothing in this table was "checked only by re-running their code": the one RERUN (row 38) accompanies an own
+computation.
 
 | # | statement of Y | Y's label | verdict | checked by | script / log |
 |---|---|---|---|---|---|
@@ -275,7 +280,8 @@ at `u = 0.4, 0.2, 0.1, 0.05` against `V_4 = 1.7920`; three-letter Potts chain, `
 `0.5970, 0.5791, 0.5684, 0.5627 → 0.5567`.
 
 **Proposition R10.2 [P].**  Binary alphabet, Hamming envelope, `π` associated (in particular: a
-nearest-neighbour chain with ferromagnetic couplings and arbitrary fields).  Then
+nearest-neighbour chain with ferromagnetic couplings and arbitrary fields — the FKG lattice condition holds
+because the pair weights have a non-negative determinant; [K], FKG inequality, from memory).  Then
 `V = ¼·Var_π(Σ_i s_i)`, attained by the uniform field.
 *Proof.*  Let `f ∈ Lip(d₀)` and `g = ½Σ_i s_i`.  Both `g + f` and `g − f` are coordinatewise nondecreasing, so
 `Cov(g + f, g − f) ≥ 0`, i.e. `Var f ≤ Var g`.  ∎  (The trick of Newman's inequality; no citation is needed.)
@@ -305,6 +311,19 @@ the modulated site-wise label `−−+++` with `V_5 = 1.9620` against `¼Var(m) 
 (`n = 2` exact; `n = 3, 4` by LP ascent, a lower estimate: `1.3793, 1.9086` and `1.4507, 2.1718` for
 `J = 0.7, 1.5`, equal to the finite-`n` sums); for `J = −1` the best label found has variance `1.3166` at `n = 4`
 against `0.5878` for the letter count.
+*Status and support, statement by statement.*
+
+| statement | label | supported by |
+|---|---|---|
+| `F*_X(t) = (t(1−t)/2)u²V + O(u³)` for every finite `(X, π)`, symmetric envelope (R10.1) | **[P]**, checked [N] | proof above; `r10_11_small_slope` part 1 (binary chain, `n = 4`, 990 vertices, four slopes) and part 3 (Potts, `n = 2`, 534 vertices) |
+| `V = ¼Var(Σs_i)` for a binary associated reference (R10.2) | **[P]**, checked [N] over all vertices, `n ≤ 5` | proof above; `r10_11_small_slope` parts 1 and 4 |
+| small-slope factor `= S(0)` for ferromagnetic two-state chains, at fixed `n` | **[P]** | R10.1 + R10.2 |
+| the same for `F_∞` (first `n → ∞`): upper side | **[P]** (given Proposition F) | expansion of the `L = 1` recursion; `r10_10_map`: upper/cube `2.331` at `u = 0.05`, `p = 0.3` (`S(0) = 2.333`) |
+| the same for `F_∞`: lower side for `h`, `a` | **[P-sketch]**, [N]: lower/cube `2.260` at `u = 0.05` | `r10_10_map`; for `E`: exact, `E_F`/cube `= 2.332` |
+| "scales with the `k = 0` susceptibility" for a general one-dimensional known part | **false** — counter-examples [N, exact enumeration] | `r10_11_small_slope` parts 1 (antiferromagnet), 2 (frustrated chain, all 395 094 vertices), 3 and 3b (antiferromagnetic Potts; `n = 3, 4` by LP ascent, a lower estimate) |
+| the general quantity is `v* = lim V_n/n` (R10.3) | **[C]** | — |
+| helix–coil chain at its midpoint: factor `σ^{−1/2}` | **[P]** at second order and fixed `n`; bulk value by the two-state formula | `r10_11_small_slope` part 4 (`n = 5`, all vertices, four parameter sets) |
+
 **Conjecture R10.3 [C].**  For a homogeneous finite-range one-dimensional known part and a symmetric site
 envelope, `lim_{u→0} F_∞(t; u)/u² = (t(1−t)/2)·v*` for every `t ∈ (0,1)`; `v*` is attained by labels that are
 additive over sites and periodic.  (In every binary case computed the maximiser is site-wise.)
@@ -316,11 +335,12 @@ Chazottes–Collet–Külske–Redig, arXiv:math/0503483; Kontorovich–Ramanan 
 with a *non-linear* slack: `u* = u + 2 artanh(λ tanh(u*/2)) ≤ u/(1−λ) = C`, with equality only as `u → 0`
 (`u* = 1.526` against `C = 1.667` at `u = 1`, `p = 0.3`).  At second order the two differ in the conditional
 variance: A17.8 uses "range `C` ⇒ variance `≤ C²/4`", Proposition F the variance of a two-letter law
-`(1−p, p)`, i.e. `p(1−p)C²`; the latter is attained (Proposition R10.2), so **for a two-state chain the sharp
-constant in A17.8 is `p(1−p)` in place of `¼`**, and `¼ΣC_i²` overshoots by `1/(4p(1−p))` (`1.19` at `p = 0.3`,
-`2.78` at `p = 0.1`).  For the product measure the per-site constants `F_cube(t) = t ln cosh(u/2) − ln cosh(tu/2)`
-are the exact order-`t` counterparts of the sharp bound A17.6, `D_p ≤ Σ[(p−1)c_i²/8 + L(c_i)]` (there `p > 1` is
-the Rényi order): both are `t c²/8` per site and unit order at second order.
+`(1−p, p)`, i.e. `p(1−p)C²`; the latter is attained (Proposition R10.2), so **for Y's chain the sharp
+constant in the variance bound of A17.8 is `p(1−p)` in place of `¼`**, and `¼ΣC_i²` overshoots by `1/(4p(1−p))`
+(`1.19` at `p = 0.3`, `2.78` at `p = 0.1`).  For the product measure, `F_cube(t)/(1−t) = [t ln cosh(u/2) −
+ln cosh(tu/2)]/(1−t)` is the exact per-site Rényi divergence of order `t < 1` between the worst Gibbs law and the
+reference; the sharp bound A17.6, `D_p ≤ Σ[(p−1)c_i²/8 + L(c_i)]` (there `p > 1` is the Rényi order), is its
+counterpart for orders above one: at second order both read (order)`·c²/8` per site.
 
 ### 3.5 The reversal at large slopes  (new here)
 
@@ -400,7 +420,8 @@ product measure with the same **entropy rate** — the site `(1−p, p)`, e.g. `
 
 **Map** (`r10_13_reversal`: lower bounds from Propositions H and block fields, upper bounds from Proposition F
 with `L = 3`; entries are `[lower, upper]/cube`; **R** = raised proved, **L** = lowered proved, `·` = undecided;
-`R*` = raised by Proposition I with `≤ 2` walls, `r10_05`, `r10_05b`).
+`R*` = raised only by Proposition I with `≤ 2` walls; at `u = 1, 1.5, 2` the lower ends shown include
+Proposition I where it is larger, `r10_05`, `r10_05b`).
 
 `h`:
 
@@ -502,9 +523,10 @@ two-state nearest-neighbour chain, one slope, no field; nothing here is fitted t
 | Chazottes, Collet, Külske, Redig, arXiv:math/0503483; Kontorovich, Ramanan, Ann. Probab. 36 (2008) | the martingale bound of which Proposition F is the non-linear Rényi version (§3.4) | via our addendum A17.8 only; not opened by me |
 | Csiszár (1995), Rényi capacity = Rényi radius; Arimoto (1976), the iteration | used throughout | [from memory — unverified]; cited in the theory report |
 
-Search log: six web searches (Lipschitz covariance inequality for associated variables; Rényi divergence rate
+Search log: seven web searches (Lipschitz covariance inequality for associated variables; Rényi divergence rate
 of Markov sources; generalised Lyapunov exponents; Bulinski–Shabanovich bibliographic data; Newman 1980;
-Holliday–Goldsmith–Glynn; Galvin).  No full text was read.  I found no statement of the reversal of §3.5 or of
+Holliday–Goldsmith–Glynn; Galvin) and two page fetches that yielded nothing usable (a PDF in which the
+reference sought does not occur; a redirect).  No full text was read.  I found no statement of the reversal of §3.5 or of
 the regularised formula; I did not search for them systematically and claim no novelty.
 
 ## 8. Requests to the theory division  (can be sent as they stand)
@@ -527,7 +549,8 @@ the regularised formula; I did not search for them systematically and claim no n
    (status of 11.99, 11.101), m4 (the restricted value is an open bracket end), m7 (`E_∞ ∈ [0.401719, 0.403619]`
    at `p = 0.1` with a reference `q̃ ≠ p`), m8 (cells inside `[−u*, u*]`: `E_∞ = E_F` to rounding at
    `p = 0.4, 0.3, 0.2`), m9 (true `F*_5`).
-5. **The threshold conjecture.**  For `Q = π` and `p = 0.1` the relaxed value stays near `0.4245 > E_F`.  Is the
+5. **The threshold conjecture.**  For `Q = π` and `p = 0.1` the relaxed value lies between Y's restricted value `0.42389` and my safe value
+   `0.426387` (`G = 1601`), well above `E_F = 0.401719`.  Is the
    maximiser of the relaxation realisable by a member of the class?  If yes, `E_n = ln Z_n(u/2)/Z_n(0)` fails for
    long chains; if no, an added constraint (two-step consistency) should close the bracket.
 
@@ -558,7 +581,7 @@ cited in this report is from a run that reached its last line.
 | `python3 r10_02_reductions.py` | `r10_02_reductions.log` | 8 s |
 | `python3 r10_03_small_n.py A` ; `python3 r10_03_small_n.py D` | `r10_03_small_n_A.log`, `_D.log` | 31 s ; 40 s |
 | `python3 r10_04_lower_bounds.py` | `r10_04_lower_bounds.log` | 3 s |
-| `python3 -u r10_05_block_labels.py h` ; `… a` (`check` for the identity) | `r10_05_block_labels_h.log`, `_a.log` | 8 min ; 7 min |
+| `python3 -u r10_05_block_labels.py check` ; `… h` ; `… a` | `r10_05_block_labels_check.log`, `_h.log`, `_a.log` | 1 s ; 8 min ; 7 min |
 | `python3 -u r10_05b_propI_other_slopes.py` | `r10_05b_propI_other_slopes.log` | 5 s |
 | `python3 r10_06_markov_recursion.py 1.0` ; `… 3.0 4.0 6.0 8.0` | `r10_06_markov_recursion.log` ; `…_large_u.log` | 29 s ; 13 min |
 | `python3 -u r10_07a_tilt_quick.py` | `r10_07a_tilt_quick.log` | 2.5 min |

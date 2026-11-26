@@ -311,11 +311,13 @@ against pseudo-Boolean proofs), R3-E1 (bridge tables).
    residues on an extended backbone (P3; SCI-MSG-0020), replicated independently
    (addendum A17 (10)).  Not done: the helix, where a fitted chain model is measurably
    accurate (`0.002–0.004 k_BT`) and P3's bound cannot see the cancellation that makes it
-   so.  Candidates, in order of cost: (a) run P3's sandwich on the *fitted* chain models
-   of A17 (10) — a certified floor and variance for a better model (`β(m₋ − m) ≤ r ≤ β(m₊ − m)`;
-   an afternoon); (b) group-wise signed tails (P3's next step 1); (c) a stand-alone
-   checker of the certificate (request P3-E1); (d) a buried, non-homopeptide instance
-   (request P2-E1).
+   so.  Candidates: (a) ~~run P3's sandwich on the fitted chain models~~ — *would gain
+   nothing* (the certificate sees any model only through the band `m₊ − m₋`; the
+   midpoint model, which P3 ran, is optimal; addendum A17 (10), "Limits"); (b) the pair
+   form of the penalties at order `m` (the theory division's Theorem 11.18a at `m = 3`;
+   workstream P4 item 4); (c) **group-wise signed tails** — a brief is written and not
+   launched: `workstreams/P5_brief.md`; (d) a stand-alone checker of the certificate
+   (request P3-E1); (e) a buried, non-homopeptide instance (request P2-E1).
 3. **Benchmark B10 in full** (`BENCHMARK_DESIGN.md`): variational and likelihood fits on
    the real instances; a buried environment (request P2-E1 to engineering).
 4. **Conjecture A16.4** where it is genuinely open: an algorithm with the mean-energy

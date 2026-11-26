@@ -1809,10 +1809,16 @@ whole domain; then `ln Z(m₊) ≤ ln Z(E) ≤ ln Z(m₋)`, and for `r = β(E �
 *Limits.*  Everything is relative to one force-field model on a three-state rotamer grid
 with a rigid ideal backbone and exposed side chains; homopeptides; one anchor and one
 seed per run; the "certified" brackets rest on paper proofs and unreviewed code
-(SCI-MSG-0020 §4).  The fitted models were not given to P3's sandwich: a certified floor
-and variance for a *fitted* chain — the remainder of any banded model `m` satisfies
-`β(m₋ − m) ≤ r ≤ β(m₊ − m)`, two banded functions — is the obvious next computation and
-has not been run.
+(SCI-MSG-0020 §4).  The fitted models were not given to P3's sandwich.  *(Corrected at
+checkpoint 42: an earlier version of this sentence called that "the obvious next
+computation".  It would gain nothing.  For any model `m` the certificate knows the
+remainder only through `β(m₋ − m) ≤ r ≤ β(m₊ − m)`, an interval of width `u = β(m₊ − m₋)`
+whatever `m` is; the certified variance bound is smallest for the midpoint model
+`(m₋ + m₊)/2`, which P3 has run — `W_cert = 6.5·10⁻⁴` at twenty residues — and a fitted
+model cannot do better, however small its true remainder: the certificate cannot see
+that the remainder is nearly constant.  What tightens a certificate is a narrower
+sandwich — a higher order, a tighter tail bound, or the pair form of the penalties —
+not a better model.)*
 
 ### (11) How often are the error bars wrong?  The baseline of benchmark B10 [M, exact laws; added at checkpoint 41]
 
