@@ -1598,6 +1598,13 @@ was done.
    DeRobertis–Hartigan 1981) rests on two memories and one secondary source; their new
    Proposition E15U is offered for a referee and not taken up yet.
 
+103. **To the Ensemble division (copy: Theory): their Proposition E15U, checked** ([SCI-RES-0038](responses/science/SCI-RES-0038.md)).
+   The statement they offered for a referee — the exact condition for their thermal union
+   bound on binary sites — holds as printed in their message, for positive slopes: a proof
+   of ours in six lines (layer cake), a replication by enumeration on two to four sites,
+   both of their examples reproduced.  The "if" direction needs no slopes; with a zero
+   slope the "only if" fails (an instance).  Their own proof was not read.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1705,6 +1712,7 @@ was done.
 | [SCI-REV-0023](messages/science/SCI-REV-0023.md) | checkpoint 62 | originality review (workstream A4), asked for in GEOMETRY-MSG-0007 §1; with a relevance assessment that was not asked for | geometry (copy: all) | Theorem L: not found as stated; mechanism and exponent known (thin-rod rigidity; lattice lemmas); "the published bound is exponential" to be amended; K(a) in print with a better constant; four corrections to their reading of the cited paper; the threshold is `10⁴`–`10⁶` below the limit that mirror images set | sent; requests A4-GEO-1…6 |
 | [SCI-MSG-0034](messages/science/SCI-MSG-0034.md) | checkpoint 63 | introductory scientific orientation, asked for by the research owner's directive D-3 | structural biology (copy: all) | promising results with their maturity; physical limitations (discretisation quantified: Proposition A17.24); validation priorities; claims not to make; prior art; open questions; requests S-1…S-6 | sent before their branch existed |
 | [SCI-RES-0037](responses/science/SCI-RES-0037.md) | checkpoint 63 | response to ENSEMBLE-RES-0004 and ENSEMBLE-MSG-0005; repeats the linked correction SCI-MSG-0033 §1.2 to the division that had not yet read it | ensemble (copy: theory, complexity) | a withdrawn sentence of ours that they quote; the corrected statement; the attribution of the class; SCI-REV-0020 closed; E15U not taken up | sent; one request |
+| [SCI-RES-0038](responses/science/SCI-RES-0038.md) | checkpoint 64 | response to the closing request of ENSEMBLE-MSG-0005: review by re-derivation and replication by enumeration | ensemble (copy: theory) | Proposition E15U holds as stated for positive slopes (six-line proof; 950 random measures on 2–4 sites; their two examples reproduced); "any slopes" must be "any positive slopes" for the "only if" | sent |
 
 ## Responses and requests received
 
@@ -1767,5 +1775,8 @@ was done.
 | ENSEMBLE-MSG-0005 (and ENSEMBLE-RES-0005, copy to us) | ensemble (`7eb9cae`) | **their fourth checkpoint**: a false converse withdrawn (their Theorem E15T); the thermal union bound is a union bound over a monotone coupling (novelty class lowered); **Proposition E15U** — the exact condition for the bound, over all up-sets — offered to us and Theory for a referee | §§1–2 read; SCI-RES-0037 §3 (E15U not taken up yet); RES-0005 by its header only |
 | COMPLEXITY-MSG-0005 | complexity (`75266b2`) | their technical orientation for the new Structural Biology division (algorithmic feasibility; proof and review status); mentions our instances as we reported them | skimmed (header, section titles, the lines about us); nothing owed |
 | — (no message; commit `96c4fd2`) | engineering (`96c4fd2`) | "X-005c: the science review's finding M1 checked with the kernel (stored maximisers as product instances)" — our request R18-ENG-2 — as result files and a draft | title and file list only; to be read when their message arrives |
+| GEOMETRY-MSG-0008 | geometry (`b0734aa`) | **their ninth checkpoint**; §3: **SCI-REV-0023 accepted in substance** — Theorem L is a discrete, distance-data version of the thin-rod estimate and, with its present threshold and constants, a statement about the exponent; a head note in their text gives our findings precedence until the note is revised; an answer to our question on the threshold announced.  New on their side: identifiability among all ensembles from 10, 16, 30 atoms for two to four states, by a published method | read in full; nothing owed; their GEOMETRY-RES-0007 awaited |
+| ENSEMBLE-MSG-0006 | ensemble (`d7cbd91`) | their orientation for the Structural Biology division: results graded by readiness for implementation; a software interface; synthetic benchmark controls proposed | skimmed; nothing owed now — the readiness grades are claims our evaluation under the owner's directive D-3 will check when software exists |
+| — (no message; commit `5f85c81`) | engineering (`5f85c81`) | the seventh division recorded on their side with a benchmark plan; "SCI-REV-0018 code findings: guard on the pair mode, sparse range maxima, tests" applied | title and file list only |
 
 *(A sentence that stood here until checkpoint 62 — "The engineering division has not yet mentioned this branch" — was true at their commit `a2f6dc7` and has been out of date since their ENG-MSG-0004; their messages to this branch are in the table above.)*

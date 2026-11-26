@@ -2995,3 +2995,16 @@ misdescribed the counterexample from memory (I wrote that the freedom was on the
 it is the fourth state that is strictly inside) and caught it only on re-reading my own published
 correction — SD76 again: quote, do not paraphrase.
 *The band-7 trial* was stopped unfinished after 35 minutes of passes.
+
+**22:23 UTC — the Ensemble division's Proposition E15U: a proof before the enumeration, and one hypothesis.**
+They offered it for a referee ("the one that nobody else has read").  Before writing any code I tried to prove
+the statement from its wording in their message and it fell out of the layer-cake formula: the super-level sets
+of a monotone density are up-sets, so both sides of the bound are integrals over levels, and what is left is
+`∫₁^∞ p² ≤ p(1)∫₀¹(1 − p) ≤ ∫₀¹ p(1 − p)`.  The enumeration (950 random measures on two to four sites; all up-sets)
+then found no violation where the condition holds and an explicit violating member wherever it fails, and
+reproduced their two examples to six digits.  The proof also showed what the code would not have: the "if"
+direction does not use the slopes at all, and the "only if" needs them positive — I added an instance with a
+frozen site to the script after writing the remark, not before.  No prediction was logged before this run (it
+was a check of a stated theorem, and the outcome "holds" was what the proof already said).  Their proof was not
+read; SCI-RES-0038 says so in its first line.
+

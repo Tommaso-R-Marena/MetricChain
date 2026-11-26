@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 22:14 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 22:23 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
@@ -53,7 +53,8 @@ says our look "is no longer the only check" — compare its findings with the ne
 and with COMPLEXITY-REV-0003 before publishing, and say in the same message that their
 CX-T27 (an outside check they would value) has not been taken up.  Never more than two
 agents at once.
-(ii) **Published at this commit (checkpoint 63).**  *SCI-MSG-0034* (to the Structural
+(ii) **Published at checkpoint 64:** *SCI-RES-0038* — the Ensemble division's Proposition E15U re-derived and
+replicated (item (iii)(c)).  **Published at checkpoint 63.**  *SCI-MSG-0034* (to the Structural
 Biology division): the orientation.  *SCI-RES-0037* (to Ensemble): their fourth
 checkpoint applied our review SCI-REV-0020 and accepted SCI-RES-0032 — and quoted a
 sentence of ours that SCI-MSG-0033 had withdrawn 47 minutes earlier; the counterexample
@@ -66,12 +67,9 @@ this branch are certificates of the discrete model** (`OPEN_PROBLEMS.md` D16).
 (iii) **Owed, in this order.**
   (a) R25 and R26, as in (i).
   (b) **The Structural Biology division, as in (o)** — nothing to review yet.
-  (c) **The Ensemble division's Proposition E15U** (the exact condition for their thermal
-  union bound: for binary sites the bound holds for every member iff conditioning on any
-  up-set raises the expected number of disagreements by at least one) is offered to us
-  and to Theory for a referee (ENSEMBLE-MSG-0005, closing section).  Not taken up;
-  SCI-RES-0037 §3 promises nothing.  A cheap first step: enumerate all up-sets on three
-  and four sites and compare with the worst member by a linear programme.
+  (c) *Done at checkpoint 64:* the Ensemble division's Proposition E15U — re-derived (six lines) and
+  replicated by enumeration on two to four sites (SCI-RES-0038; `ensemble_checks/e15u_check.py`); holds as
+  stated for positive slopes; their own proof and the consequences they draw from it were not read.
   (d) **The engineering division's X-005c** checks our finding M1 of SCI-REV-0018 (their
   commit `96c4fd2`; result files and a draft, no message yet): read it when their message
   arrives.
@@ -97,7 +95,7 @@ expansion of the chain's exponent?  D12 (a′) — a certified statement between
 D14 (down-closed families), D16 (a certified discretisation term; G-5 is answered).  Unrefereed inside the division:
 addendum A17 (13)–(18) (the research owner's decision, as recorded), parts (23), (24)
 and (25).
-(v) Heads read at 22:09 UTC: theory `6ebcccd`, engineering `96c4fd2`, ensemble `7eb9cae`, geometry `288b2de`, complexity `75266b2`, structural biology `b2caab6` (all but geometry had moved; read as far as the pins in the status file say).
+(v) Heads read at 22:21 UTC: theory `6ebcccd`, engineering `5f85c81`, ensemble `d7cbd91`, geometry `b0734aa`, complexity `75266b2`, structural biology `b2caab6` (engineering, ensemble and geometry had moved; read as far as the pins in the status file say).  **The Geometry division accepted SCI-REV-0023 in substance within 23 minutes (GEOMETRY-MSG-0008 §3) and announces an answer to our question on the threshold as GEOMETRY-RES-0007: read it when it comes — `OPEN_PROBLEMS.md` C6.**
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —
