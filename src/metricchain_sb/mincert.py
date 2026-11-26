@@ -209,6 +209,18 @@ def to_metricchain_cert1(cert: MinCertificate) -> dict:
         return int(model.pair_table(i, j)[a, b]) * mb
 
     def convert(node, D):
+        # Chains of prune nodes are followed iteratively (they can be thousands long); recursion
+        # happens only through branch nodes, whose nesting depth is at most the number of sites.
+        chain = []
+        while node["node"] == "prune":
+            i, r, t = node["site"], node["remove"], node["dominator"]
+            ell = {}
+            for j in model.neighbors(i):
+                ell[str(j)] = _rat(Fraction(_min0(jval(i, j, r, s) - jval(i, j, t, s) for s in D[j]), unit))
+            chain.append({"node": "prune", "site": int(i), "remove": int(r), "dominator": int(t), "ell": ell})
+            D = list(D)
+            D[i] = [s for s in D[i] if s != r]
+            node = node["rest"]
         kind = node["node"]
         if kind == "leaf":
             m = node.get("m", {})
@@ -226,25 +238,21 @@ def to_metricchain_cert1(cert: MinCertificate) -> dict:
                 p[f"{j},{i}"] = half
             for (i, j), vec in m.items():
                 mjson[f"{i},{j}"] = [_rat(Fraction(int(vec[a]), unit)) if a < sizes[i] else 0 for a in range(k)]
-            return {"node": "leaf", "u": [_rat(Fraction(v, unit)) for v in u], "p": p, "m": mjson}
-        if kind == "branch":
+            out = {"node": "leaf", "u": [_rat(Fraction(v, unit)) for v in u], "p": p, "m": mjson}
+        elif kind == "branch":
             i = node["site"]
             children = {}
             for a, sub in node["children"].items():
                 D2 = list(D)
                 D2[i] = [a]
                 children[str(int(a))] = convert(sub, D2)
-            return {"node": "branch", "site": int(i), "children": children}
-        if kind == "prune":
-            i, r, t = node["site"], node["remove"], node["dominator"]
-            ell = {}
-            for j in model.neighbors(i):
-                ell[str(j)] = _rat(Fraction(_min0(jval(i, j, r, s) - jval(i, j, t, s) for s in D[j]), unit))
-            D2 = list(D)
-            D2[i] = [s for s in D[i] if s != r]
-            return {"node": "prune", "site": int(i), "remove": int(r), "dominator": int(t), "ell": ell,
-                    "rest": convert(node["rest"], D2)}
-        raise MalformedCertificate(f"unknown node kind {kind!r}")
+            out = {"node": "branch", "site": int(i), "children": children}
+        else:
+            raise MalformedCertificate(f"unknown node kind {kind!r}")
+        for step in reversed(chain):
+            step["rest"] = out
+            out = step
+        return out
 
     claim = {"lower_bound": _rat(Fraction(cert.lower_bound, unit))}
     if cert.witness is not None:
@@ -284,14 +292,19 @@ def _model_from_json(doc: dict) -> PairModel:
 
 
 def _node_to_json(node: dict) -> dict:
-    kind = node["node"]
-    if kind == "leaf":
-        return {"node": "leaf", "m": {f"{i},{j}": [int(v) for v in vec] for (i, j), vec in node.get("m", {}).items()}}
-    if kind == "branch":
-        return {"node": "branch", "site": int(node["site"]),
-                "children": {str(int(a)): _node_to_json(c) for a, c in node["children"].items()}}
-    return {"node": "prune", "site": int(node["site"]), "remove": int(node["remove"]),
-            "dominator": int(node["dominator"]), "rest": _node_to_json(node["rest"])}
+    """Compact JSON of a certificate tree.  A chain of prune nodes is written as one flat node
+    ``{"node": "prunes", "steps": [[site, remove, dominator], ...], "rest": ...}`` so that the
+    nesting depth of the file is bounded by the number of nested branch nodes."""
+    steps = []
+    while node["node"] == "prune":
+        steps.append([int(node["site"]), int(node["remove"]), int(node["dominator"])])
+        node = node["rest"]
+    if node["node"] == "leaf":
+        out = {"node": "leaf", "m": {f"{i},{j}": [int(v) for v in vec] for (i, j), vec in node.get("m", {}).items()}}
+    else:
+        out = {"node": "branch", "site": int(node["site"]),
+               "children": {str(int(a)): _node_to_json(c) for a, c in node["children"].items()}}
+    return {"node": "prunes", "steps": steps, "rest": out} if steps else out
 
 
 def _node_from_json(doc: dict) -> dict:
@@ -305,9 +318,14 @@ def _node_from_json(doc: dict) -> dict:
     if kind == "branch":
         return {"node": "branch", "site": int(doc["site"]),
                 "children": {int(a): _node_from_json(c) for a, c in doc["children"].items()}}
-    if kind == "prune":
-        return {"node": "prune", "site": int(doc["site"]), "remove": int(doc["remove"]),
-                "dominator": int(doc["dominator"]), "rest": _node_from_json(doc["rest"])}
+    if kind == "prunes":
+        node = _node_from_json(doc["rest"])
+        if node["node"] == "prune":
+            raise MalformedCertificate("a 'prunes' node must not be followed directly by another one")
+        for site, remove, dominator in reversed(doc["steps"]):
+            node = {"node": "prune", "site": int(site), "remove": int(remove), "dominator": int(dominator),
+                    "rest": node}
+        return node
     raise MalformedCertificate(f"unknown node kind {kind!r}")
 
 
@@ -318,10 +336,13 @@ def model_sha256(model: PairModel) -> str:
     return hashlib.sha256(json.dumps(doc, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-def dumps(cert: MinCertificate) -> str:
-    return json.dumps({
-        "format": "structbio-mincert/1",
-        "model": _model_to_json(cert.model),
+def dumps(cert: MinCertificate, include_model: bool = True) -> str:
+    """Serialise a certificate.  With ``include_model=False`` the file is *detached*: it names the
+    instance by `model_sha256` only, and `loads` needs the instance (e.g. from `modelio.load_model`)."""
+    doc = {"format": "structbio-mincert/1"}
+    if include_model:
+        doc["model"] = _model_to_json(cert.model)
+    doc.update({
         "model_sha256": model_sha256(cert.model),
         "message_bits": int(cert.message_bits),
         "domains": [[int(a) for a in d] for d in cert.domains],
@@ -329,15 +350,24 @@ def dumps(cert: MinCertificate) -> str:
                   "witness": None if cert.witness is None else [int(a) for a in cert.witness]},
         "certificate": _node_to_json(cert.root),
         "meta": cert.meta,
-    }, separators=(",", ":"))
+    })
+    return json.dumps(doc, separators=(",", ":"))
 
 
-def loads(text: str) -> MinCertificate:
+def loads(text: str, model: PairModel | None = None) -> MinCertificate:
+    """Parse a certificate file.  For a detached file the instance must be supplied and must have
+    the checksum recorded in the file; an embedded instance must have its recorded checksum too."""
     doc = json.loads(text)
     if doc.get("format") != "structbio-mincert/1":
         raise MalformedCertificate("unknown format")
+    if "model" in doc:
+        model = _model_from_json(doc["model"])
+    elif model is None:
+        raise MalformedCertificate("detached certificate: the instance must be supplied")
+    if model_sha256(model) != doc.get("model_sha256"):
+        raise MalformedCertificate("the instance does not have the checksum recorded in the certificate")
     witness = doc["claim"].get("witness")
-    return MinCertificate(model=_model_from_json(doc["model"]), message_bits=int(doc["message_bits"]),
+    return MinCertificate(model=model, message_bits=int(doc["message_bits"]),
                           domains=[[int(a) for a in d] for d in doc["domains"]],
                           lower_bound=int(doc["claim"]["lower_bound"]),
                           witness=None if witness is None else tuple(int(a) for a in witness),

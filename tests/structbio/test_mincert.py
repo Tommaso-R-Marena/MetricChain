@@ -172,3 +172,46 @@ def test_checksum_changes_when_one_table_entry_changes():
     assert mincert.model_sha256(other) == mincert.model_sha256(model)
     other.unary[0][0] += 1
     assert mincert.model_sha256(other) != mincert.model_sha256(model)
+
+
+def test_long_elimination_chains_serialise_convert_and_check_without_recursion():
+    """Regression (found on BPTI and ubiquitin, 2026-11-26): more than a thousand consecutive prune
+    nodes made the serialiser and the converter exceed Python's recursion limit.  The limit is
+    lowered here because the reference checker, when loaded by other tests, raises it globally."""
+    import sys
+    from metricchain_sb import mincert
+    k = 700                                     # one site with 700 states, each dominated by state 0
+    model = PairModel(unary=[np.arange(k, dtype=np.int64), np.array([0, 3])],
+                      pair={(0, 1): np.zeros((k, 2), dtype=np.int64)}, scale_bits=0)
+    old = sys.getrecursionlimit()
+    sys.setrecursionlimit(250)
+    try:
+        cert = certify_gmec(model, eps=Fraction(0))
+        assert mincert.count_nodes(cert.root)["prune"] >= k - 1
+        text = mincert.dumps(cert)
+        back = mincert.loads(text)
+        assert check_min_certificate(back).accepted
+        doc = to_metricchain_cert1(back)
+        mincert.validate_structure(back)
+    finally:
+        sys.setrecursionlimit(old)
+    assert doc["certificate"]["node"] == "prune" and json.dumps(doc)[:1] == "{"
+
+
+def test_detached_certificate_needs_the_instance_with_the_recorded_checksum(tmp_path):
+    from metricchain_sb import mincert, modelio
+    model = small_models()[5]
+    cert = certify_gmec(model, eps=Fraction(0))
+    text = mincert.dumps(cert, include_model=False)
+    assert '"model":' not in text and mincert.model_sha256(model) in text
+    path = tmp_path / "instance.npz"
+    modelio.save_model(model, path)
+    again = modelio.load_model(path)
+    assert mincert.model_sha256(again) == mincert.model_sha256(model) and again.meta == model.meta
+    back = mincert.loads(text, model=again)
+    assert check_min_certificate(back).accepted
+    with pytest.raises(mincert.MalformedCertificate):
+        mincert.loads(text)                                  # no instance supplied
+    other = small_models()[6]
+    with pytest.raises(mincert.MalformedCertificate):
+        mincert.loads(text, model=other)                     # wrong instance: checksum mismatch
