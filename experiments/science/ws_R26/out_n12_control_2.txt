@@ -1,0 +1,44 @@
+r26_n12.py block control runs 10; started 2026-11-26T22:55:39Z
+control: product known part (uniform outer cube), integrands with -ln V u-Lipschitz, the SAME algorithm and the SAME tail functions (Harper, slope 1) as in the 'assumed' block
+seeds: instances from default_rng(4242); run r of cell c uses default_rng(500000 + 1000*c + r), r = 0..9
+ instance 'majorant of the N12 landscape': largest edge ratio 1.0000 (<= u = 1.0); largest (TU) ratio 1.0000; A = 1.022e-02
+   6 cells x 10 runs: done
+ instance 'flat (product N12: J = 0, psi = u|b|)': largest edge ratio 0.0000 (<= u = 1.0); largest (TU) ratio 0.0000; A = 2.292e-03
+   6 cells x 10 runs: done
+ instance 'cone e^{-u d(a,1)} x 1e-3': largest edge ratio 1.0000 (<= u = 1.0); largest (TU) ratio 1.0000; A = 1.048e-05
+   6 cells x 10 runs: done
+ instance 'Harper-extremal dip, radius 1': largest edge ratio 1.0000 (<= u = 1.0); largest (TU) ratio 1.0000; A = 1.007e+00
+   6 cells x 10 runs: done
+ instance 'Harper-extremal dip, radius 2': largest edge ratio 1.0000 (<= u = 1.0); largest (TU) ratio 1.0000; A = 1.051e+00
+   6 cells x 10 runs: done
+ instance 'Harper-extremal dip, radius 4': largest edge ratio 1.0000 (<= u = 1.0); largest (TU) ratio 1.0000; A = 2.051e+00
+   6 cells x 10 runs: done
+ instance 'mixture of 5 cones': largest edge ratio 1.0000 (<= u = 1.0); largest (TU) ratio 0.9945; A = 1.583e+00
+   6 cells x 10 runs: done
+ instance 'random field e^{-c.a}, |c_i| <= u': largest edge ratio 0.8935 (<= u = 1.0); largest (TU) ratio 0.1755; A = 1.862e-01
+   6 cells x 10 runs: done
+ instance 'majorant of lognormal noise (sd 6)': largest edge ratio 1.0000 (<= u = 1.0); largest (TU) ratio 0.4055; A = 5.063e+07
+   6 cells x 10 runs: done
+control: 540 runs; violations (invalid bracket or any other claim of Theorem N1): 0
+mutations on the instance 'Harper-extremal dip, radius 2' and 'cone', theta = 20 and 1:
+   'Harper-extremal dip, radius 2', theta=20.0, Xi/50: invalid 0 of 10
+   'Harper-extremal dip, radius 2', theta=20.0, Xi/1000: invalid 0 of 10
+   'Harper-extremal dip, radius 2', theta=20.0, K = 3 instead of 191: invalid 0, false sampling certificates in 0 of 10 runs
+   'Harper-extremal dip, radius 2', theta=1.0, Xi/50: invalid 0 of 10
+   'Harper-extremal dip, radius 2', theta=1.0, Xi/1000: invalid 0 of 10
+   'Harper-extremal dip, radius 2', theta=1.0, K = 3 instead of 198: invalid 0, false sampling certificates in 0 of 10 runs
+   'cone e^{-u d(a,1)} x 1e-3', theta=20.0, Xi/50: invalid 10 of 10
+   'cone e^{-u d(a,1)} x 1e-3', theta=20.0, Xi/1000: invalid 10 of 10
+   'cone e^{-u d(a,1)} x 1e-3', theta=20.0, K = 3 instead of 191: invalid 0, false sampling certificates in 1 of 10 runs
+   'cone e^{-u d(a,1)} x 1e-3', theta=1.0, Xi/50: invalid 0 of 10
+   'cone e^{-u d(a,1)} x 1e-3', theta=1.0, Xi/1000: invalid 10 of 10
+   'cone e^{-u d(a,1)} x 1e-3', theta=1.0, K = 3 instead of 198: invalid 0, false sampling certificates in 1 of 10 runs
+   'majorant of the N12 landscape', theta=20.0, Xi/50: invalid 10 of 10
+   'majorant of the N12 landscape', theta=20.0, Xi/1000: invalid 10 of 10
+   'majorant of the N12 landscape', theta=20.0, K = 3 instead of 191: invalid 0, false sampling certificates in 1 of 10 runs
+   'majorant of the N12 landscape', theta=1.0, Xi/50: invalid 0 of 10
+   'majorant of the N12 landscape', theta=1.0, Xi/1000: invalid 10 of 10
+   'majorant of the N12 landscape', theta=1.0, K = 3 instead of 198: invalid 0, false sampling certificates in 2 of 10 runs
+mutations: failures detected 65 (the control can fail iff this is > 0)
+exit violations: 0
+finished 2026-11-26T22:55:59Z; elapsed 19.7 s; peak memory 180 MB

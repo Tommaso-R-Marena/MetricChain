@@ -1,0 +1,10 @@
+r26_n12.py block true runs 20; started 2026-11-26T22:23:58Z
+true class: Harper's tail functions for the slope 11.7652 (largest edge ratio of -ln V)
+seeds: default_rng(300000 + 1000*cell + r), r = 0..19
+  theta=20.0 K=218 pi*=2.44e-04 Mbar=2.20e+09: runs 20; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+      outer points: median 3.57e+06, min 3571712, max 3571712  (= 872 x the 4096 points of the outer cube);  U/L median 13.44
+  theta=1.0 K=218 pi*=2.44e-04 Mbar=2.20e+09: runs 20; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+      outer points: median 3.57e+06, min 3571712, max 3571712  (= 872 x the 4096 points of the outer cube);  U/L median 13.44
+true-class invalid runs: 0
+exit violations: 0
+finished 2026-11-26T22:24:23Z; elapsed 24.4 s; peak memory 328 MB

@@ -1,0 +1,35 @@
+r26_n12.py block scan runs 12; started 2026-11-26T22:53:56Z
+scan over theta, parameter set P0, assumed class: Harper's UPPER tail function of slope 1, with
+ (i) Harper's LOWER tail function of slope 1 (the 'Harper term' of Theorem 11.56 / Algorithm A)
+ seeds: default_rng(700000 + 1000*i + r), i = index of theta, r = 0..11
+  theta=100.00 K=206 x_out=5.20 pi*=8.06e-01: runs 12; INVALID 12; aborts 0; median outer points 824; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 277 (min 277, max 277)
+  theta= 50.00 K=207 x_out=4.59 pi*=3.87e-01: runs 12; INVALID 12; aborts 0; median outer points 1656; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+  theta= 20.00 K=209 x_out=3.89 pi*=1.94e-01: runs 12; INVALID 12; aborts 0; median outer points 1672; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+  theta= 10.00 K=211 x_out=3.48 pi*=7.30e-02: runs 12; INVALID 12; aborts 0; median outer points 3376; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 1570 (min 1570, max 1570)
+  theta=  5.00 K=212 x_out=3.19 pi*=1.93e-02: runs 12; INVALID 12; aborts 0; median outer points 6784; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 2547 (min 2547, max 2547)
+  theta=  2.00 K=215 x_out=2.96 pi*=3.17e-03: runs 12; INVALID 12; aborts 0; median outer points 6880; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 2547 (min 2547, max 2547)
+  theta=  1.50 K=215 x_out=2.92 pi*=3.17e-03: runs 12; INVALID 12; aborts 0; median outer points 6880; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 2547 (min 2547, max 2547)
+  theta=  1.00 K=215 x_out=2.88 pi*=3.17e-03: runs 12; INVALID 12; aborts 0; median outer points 220160; false certificates: q 0, plow 0, ell 12, TAIL 0; Chernoff events failed 0; width violated 0; L/A among the 12 runs with L > A: median 2.37 (min 2.37, max 2.37)
+  theta=  0.50 K=218 x_out=2.83 pi*=2.44e-04: runs 12; INVALID 0; aborts 12; median outer points 1785856; false certificates: q 0, plow 0, ell 12, TAIL 0; Chernoff events failed 0; width violated 0; abort reasons {'L>U': 12}
+  theta=  0.20 K=218 x_out=2.80 pi*=2.44e-04: runs 12; INVALID 0; aborts 12; median outer points 1785856; false certificates: q 0, plow 0, ell 12, TAIL 0; Chernoff events failed 0; width violated 0; abort reasons {'L>U': 12}
+  theta=  0.10 K=218 x_out=2.79 pi*=2.44e-04: runs 12; INVALID 0; aborts 12; median outer points 3571712; false certificates: q 0, plow 0, ell 12, TAIL 0; Chernoff events failed 0; width violated 0; abort reasons {'L>U': 12}
+  theta=  0.05 K=218 x_out=2.78 pi*=2.44e-04: runs 12; INVALID 0; aborts 12; median outer points 3571712; false certificates: q 0, plow 0, ell 12, TAIL 0; Chernoff events failed 0; width violated 0; abort reasons {'L>U': 12}
+  theta=  0.02 K=218 x_out=2.78 pi*=2.44e-04: runs 12; INVALID 0; aborts 12; median outer points 3571712; false certificates: q 0, plow 0, ell 12, TAIL 0; Chernoff events failed 0; width violated 0; abort reasons {'L>U': 12}
+ (ii) the Markov lower tail function Theta = id (always valid; the lower end of Theorem 11.52)
+ seeds: default_rng(800000 + 1000*i + r)
+  theta=100.00 K=206 x_out=5.20 pi*=6.13e-01: runs 12; INVALID 12; aborts 0; median outer points 824; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 277 (min 277, max 277)
+  theta= 50.00 K=218 x_out=4.59 pi*=2.44e-04: runs 12; INVALID 12; aborts 0; median outer points 1744; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 277, max 712)
+  theta= 20.00 K=218 x_out=3.89 pi*=2.44e-04: runs 12; INVALID 12; aborts 0; median outer points 1744; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+  theta= 10.00 K=218 x_out=3.48 pi*=2.44e-04: runs 12; INVALID 12; aborts 0; median outer points 3488; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 1570 (min 1570, max 1570)
+  theta=  5.00 K=218 x_out=3.19 pi*=2.44e-04: runs 12; INVALID 12; aborts 0; median outer points 6976; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 2547 (min 2547, max 2547)
+  theta=  2.00 K=218 x_out=2.96 pi*=2.44e-04: runs 12; INVALID 12; aborts 0; median outer points 6976; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 2547 (min 2547, max 2547)
+  theta=  1.50 K=218 x_out=2.92 pi*=2.44e-04: runs 12; INVALID 12; aborts 0; median outer points 6976; false certificates: q 0, plow 0, ell 0, TAIL 12; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 2547 (min 2547, max 2547)
+  theta=  1.00 K=218 x_out=2.88 pi*=2.44e-04: runs 12; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+  theta=  0.50 K=218 x_out=2.83 pi*=2.44e-04: runs 12; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+  theta=  0.20 K=218 x_out=2.80 pi*=2.44e-04: runs 12; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+  theta=  0.10 K=218 x_out=2.79 pi*=2.44e-04: runs 12; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+  theta=  0.05 K=218 x_out=2.78 pi*=2.44e-04: runs 12; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+  theta=  0.02 K=218 x_out=2.78 pi*=2.44e-04: runs 12; INVALID 0; aborts 0; median outer points 3571712; false certificates: q 0, plow 0, ell 0, TAIL 0; Chernoff events failed 0; width violated 0
+scan: valid runs with Theta = id: 72
+exit violations: 0
+finished 2026-11-26T22:55:13Z; elapsed 77.3 s; peak memory 326 MB

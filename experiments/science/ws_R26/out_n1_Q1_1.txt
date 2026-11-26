@@ -1,0 +1,6 @@
+r26_n1.py block Q1 runs 10; started 2026-11-26T22:34:52Z
+Q_4, u = 1, V(a) = e^(u d(a,0)) (a member of the class), A = 11.9467, ell0 = A/10, kappa0 = 0.3 (s0 = 0.3584 < min V = 1), theta = 2.5
+  Xi(1) = the finite value of the formula with D != X (10.947): invalid brackets 10 of 10; U/A median 0.358
+  Xi(1) = +infinity: invalid brackets 0 of 10; U/A median 4.341
+exit violations: 0
+finished 2026-11-26T22:34:53Z; elapsed 0.6 s; peak memory 100 MB

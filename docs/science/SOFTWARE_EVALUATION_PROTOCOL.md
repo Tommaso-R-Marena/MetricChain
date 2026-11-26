@@ -15,7 +15,7 @@ machine-checked theorem can produce a scientifically empty number; the review sa
 develop their software, do not tune it, and do not argue for it.  We do not run experiments.  Computations of any
 size go to the engineering division as nine-field requests (`docs/collaboration/requests/science/TEMPLATE_BENCHMARK_REQUEST.md`).
 
-## 1. The claim sheet (asked of them once per capability; requests S-1 … S-5 of SCI-MSG-0034)
+## 1. The claim sheet (asked of them once per capability; requests S-1 … S-5 of SCI-MSG-0034 — its sixth request, S-6, "tell us which of our stated limitations are wrong", is standing and not part of the sheet)
 
 | field | what we need | why |
 |---|---|---|
@@ -31,7 +31,7 @@ size go to the engineering division as nine-field requests (`docs/collaboration/
 
 | the method depends on … | what we ask | what this branch has measured or proved (pointers; all model-relative) |
 |---|---|---|
-| fixed structural assumptions | which degrees of freedom are frozen; what the conclusion becomes if they move by their thermal amplitude | with backbone torsions free nothing is pairwise: vacuum ff14SB mixed differences up to 28 kcal/mol, 12 at separation seven (`PHYSICAL_APPLICABILITY.md` §1) |
+| fixed structural assumptions | which degrees of freedom are frozen; what the conclusion becomes if they move by their thermal amplitude | with backbone torsions free nothing is pairwise: vacuum ff14SB mixed differences up to 28 kcal/mol, 12 at separation seven (`PHYSICAL_APPLICABILITY.md` §1).  *Since the Structural Biology division's commit `c128625` (26 November, 22:50 UTC) the programme has certified minima of a pairwise vacuum model on six deposited backbones, buried positions included: our sentence "no protein interior" (SCI-MSG-0034 §2, limitation 2) holds only for free-energy certificates and for everything with a solvent term — their remark, accepted in SCI-REV-0026 §10* |
 | simplified molecular representations | what was coarse-grained; whether the observable is defined on the fine model | lattice chains, bead chains and rotamer models are all on this branch; none is a molecule |
 | discretised conformational spaces | the discretisation term, as a number in the units of the result | Proposition A17.24: second order in the cell size; on a toy chain 1.3 nats per angle at three cells per angle (addendum A17 (25)).  **On a real force field (addendum A17 (26)):** the rigid-rotamer table's free energy is off the continuous one by `−3.2` to `+2.0` nats per torsion; for leucine its minimum-energy state is not the well of the continuous minimum; with one-residue cell free energies the coupling between valines is discretised to `4·10⁻⁴`–`4·10⁻²` nats per torsion at three cells |
 | inaccessible physical constants | which constants the guarantee needs and how each was obtained: proved, evaluated, measured on a grid, fitted | class constants measured on grids are lower bounds, not bounds; held-out maxima up to ten times fitted ones; by analysis alone a loss of 33 to 1 400 (`PHYSICAL_APPLICABILITY.md` §§0, 2) |
@@ -113,7 +113,10 @@ sentence "a limited search that finds nothing certifies nothing".  A claim to ha
 problem or to have made an important scientific advance gets both a literature workstream and a referee
 workstream, and the two do not see each other's reports.  The record on this branch: `PRIOR_ART_MATRIX.md`;
 `workstreams/A1`–`A4_REPORT.md`; `SM_REPORT.md`.  Our own first claims were wrong about novelty more than once
-(SCI-RES-0009; SCI-MSG-0033): assume the same of any first claim.
+(SCI-RES-0009; SCI-MSG-0033): assume the same of any first claim.  **A measurement of ours that goes to another
+division carries its own prior-art class in the same message — "not searched" if that is the truth**
+(`DEAD_ENDS.md` SD78: addendum A17 (26) and SCI-REV-0025 §3 went out without one; the phenomenon had been in
+print since 2008).
 
 ## 7. The form of a review
 
@@ -135,6 +138,13 @@ and, when they concern a published statement of another division, sent to that d
 | divergence criteria for surrogates (A17, B10) | [P] in print; [M] ours | literature workstream A3 | n/a | as a diagnostic, yes |
 | certified kinetics on voxel graphs | [V] + [P] | workstream K; Lean re-compiled | the prefactor is outside the programme | not as physical rates |
 | cell-wise sandwich for continuous variables (A17.24), with one-residue cell free energies (item 101 (b)) | [P] + [N] on a toy; [M] on valine, serine, leucine blocks of one force field | none | it *is* line 2 | as the definition of line 2 and as a construction to test; needs residues with several torsions as sites, certified oscillations, and cases with walls between residues |
+
+**Reviews made with this protocol so far.**  SCI-REV-0025 (the Structural Biology division's founding commit:
+supported as a statement about the model; not interpretable as a statement about a molecule).  SCI-REV-0026
+(their first checkpoint — the model, the claims, the baselines, the held-out rule: one major finding on the
+model definition, a random seed with an effect of up to 70 kcal/mol on its own tables; replacement texts for
+four sentences; the prior art of the discretisation supplied, ours included; a construction offered —
+necessary optimality under interval tables, `experiments/science/software_evaluation/`).
 
 *What would change this register:* an independent implementation of the constants; a proved evaluator
 tolerance; A17.24 run on a real torsional energy; one physical system taken through §4.

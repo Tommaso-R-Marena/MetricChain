@@ -1,0 +1,19 @@
+model: T2, seed 2000, q = 3, n = 10, cut after site 5, J = 1, clash 20; clash entries on the cross-cut pair:
+[[0 0 0]
+ [0 1 0]
+ [1 1 0]]
+pointwise influence iota_pt[a, a'] (rows a, columns a'):
+[[ 0.    19.554 17.182]
+ [ 0.617  0.    17.8  ]
+ [ 1.585  4.316  0.   ]]
+Lipschitz influence, u = 1:
+[[0.    0.751 1.101]
+ [0.426 0.    1.338]
+ [0.813 1.235 0.   ]]
+box influence, D = 5:
+[[0.    3.683 4.772]
+ [0.612 0.    4.987]
+ [1.559 3.912 0.   ]]
+largest |iota(a,a') - iota(a',a)|: pointwise 18.937, Lipschitz 0.325, box 3.213
+triangle inequality iota(a,a'') <= iota(a,a') + iota(a',a''): violations 0
+peak memory 80 MB

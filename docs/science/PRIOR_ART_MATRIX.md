@@ -96,3 +96,32 @@ below point to the reviews; reading levels are there.*
 | Theorem L — global stability of order `n²` from distances of sequence separation at most 4 (Geometry, `288b2de`) | **(3)/(5)**: known in a different setting, the transfer not found in print; not a new mechanism | geometric rigidity in thin rods (Mora–Müller 2003; Blanchard–Griso); lattice lemmas (Alicandro–Lazzaroni–Palombaro; Schmidt–Zeman); the one published *global* bound for this graph is exponential (Arias-Castro–Vishwanath); first-order polynomial bounds in print (Daitch–Spielman; Kyng et al.; Lew et al.) | SCI-REV-0023; `workstreams/A4_REPORT.md` |
 | Theorem K(a) — every configuration has a first-order constant of order at least `n/K^{3/2}` (Geometry) | **(1)**: a corollary of printed statements (no novelty claimed by them) | Lew–Nevo–Peled–Raz 2023, Theorem 1.6 and Proposition 7.7; Presenza et al. 2022; Jordán–Tanigawa for the plane | the same |
 | other statements of the new divisions reviewed for correctness, with prior-art findings inside the reviews | see the reviews | — | SCI-REV-0019 (Complexity: the hardness note), SCI-REV-0021 (Geometry: Theorems B, B′, G — one of them known in dimension one, as they record), SCI-REV-0020 (Ensemble), SCI-MSG-0033 (a threshold rule of ours and theirs is in print) |
+
+## F. Addendum, 26 November 2026 (checkpoint 68): rotamer discretisation, exact side-chain optima, certified optimisation — what this division verified today, and its search log
+
+*Written with SCI-REV-0026 (our review of the Structural Biology division's first checkpoint).  Reading level
+of every row: **abstract, through the PubMed record**, unless stated; no paper was opened.  The search was
+bounded and is logged below; a limited search that finds nothing certifies nothing.*
+
+| statement | source (reading level) | what it bears on |
+|---|---|---|
+| the minimum over rigid rotamers and the minimum over energy-minimised conformations "are likely to be different" | Georgiev, Lilien, Donald, *J. Comput. Chem.* 29 (2008) 1527, doi:10.1002/jcc.20909 | our addendum A17 (26), item 100 — **established before us**; line 2 of every budget of a rigid-rotamer result |
+| in 69 core redesigns a continuous-rotamer model finds, in nearly all, a different and lower-energy answer than rigid rotamers; more rigid rotamers were never better; a dead-end elimination with a guarantee for continuous rotamers | Gainza, Roberts, Donald, *PLoS Comput. Biol.* 8 (2012) e1002335, doi:10.1371/journal.pcbi.1002335 (a design study; cited for the discretisation only) | the same; the incumbent for a provable minimum that is not a table artefact |
+| energetics of off-rotamer conformations; discrepancies between predicted and observed fractions largest for leucine | Petrella, Karplus, *J. Mol. Biol.* 312 (2001) 1161, doi:10.1006/jmbi.2001.4965 | strain of library rotamers |
+| the global optimum of a standard energy function improves side-chain accuracy by less than 0.1 % over simulated annealing; learned weights 72 % → 78 %; an extended library with learned weights 82.6 %; the global optimum found for about 85 % of a benchmark set by a relaxation | Yanover, Schueler-Furman, Weiss, *J. Comput. Biol.* 15 (2008) 899, doi:10.1089/cmb.2007.0158 | whether a certified optimum changes a conclusion (it changes none about accuracy); found first by the Frontier Benchmarking division at snippet level |
+| side-chain conformational entropy of whole proteins on fixed backbones by Monte Carlo | Zhang, Liu, *PLoS Comput. Biol.* 2 (2006) e168, doi:10.1371/journal.pcbi.0020168; DuBay, Geissler, *J. Mol. Biol.* 391 (2009) 484, doi:10.1016/j.jmb.2009.05.068 | uncertified precedents for free energies of side-chain ensembles |
+| learned side-chain packers reported better than SCWRL4, FASPR and the Rosetta packer | Misiura et al., *Proteins* 90 (2022) 1278, doi:10.1002/prot.26311; McPartlon, Xu, *PNAS* 120 (2023) e2216438120, doi:10.1073/pnas.2216438120 | the context of any side-chain placement comparison |
+| no proof logging for cost-function-network solvers | **not found** in: the developers' four-page description of toulbar2 for the 2025 pseudo-Boolean competition (full text searched for "proof", "certif", "VeriPB": no occurrence); M. J. McIlree, *Pseudo-Boolean proof logging for constraint propagation algorithms*, PhD thesis, Glasgow 2026 (258 pages; extracted text searched for "cost function", "weighted CSP", "WCSP", "soft arc", "toulbar", "weighted constraint", "soft constraint": no occurrence; the thesis was not read); two web queries | agrees with the bounded searches of the Structural Biology, Theory and Frontier Benchmarking divisions; **four bounded searches are not an absence** |
+| necessary optimality under interval data: a solution is optimal in every scenario iff it is optimal when its own elements are at their upper ends and all others at their lower ends | **from memory** (interval-data combinatorial optimisation); nothing opened | the construction of SCI-REV-0026 §4; no novelty claimed; tested by brute force (`experiments/science/software_evaluation/necessary_optimality_check.py`) |
+| weighted model counting of factor graphs with one variable per table entry | **from memory** (Chavira and Darwiche, *Artif. Intell.* 172 (2008)); not opened | "checkable enclosures of Boltzmann-weighted sums" are reachable by composing published tools |
+
+**Search log (2026-11-26, about 23:15–23:30 UTC).**  PubMed queries (author and title words): "Gainza Donald
+continuous rotamers"; "Georgiev Donald minimized dead-end elimination"; "Petrella Karplus off-rotamer"; "DuBay
+Geissler side-chain torsional entropy"; "side-chain conformational entropy of proteins, Liu JS"; "McPartlon
+Xu side-chain packing"; "DLPacker"; "Yanover Weiss minimizing and learning energy functions side-chain
+prediction" — eight queries, eight records read.  Web queries: "proof logging cost function networks weighted
+CSP soft arc consistency certified optimality VeriPB"; "toulbar2 proof logging certificate of optimality
+branch and bound cost function network 2026".  Two documents downloaded and searched by term (above).
+**Not reached:** the papers themselves; the OSPREY literature after 2012; any search for the construction of
+addendum item 101 (b) (cell free energies with a certified upper end); any search for certified robustness of
+side-chain optima.

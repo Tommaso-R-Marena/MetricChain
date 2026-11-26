@@ -1,0 +1,28 @@
+r26_n1.py block S runs 5; started 2026-11-26T22:35:35Z
+instances from default_rng(777); run r of cell c uses default_rng(1000000 + 1000*c + r), r < 5
+  atom at the maximum, mass 0.3033                 A = 1.940e+02: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  atom at the maximum, mass 0.0203                 A = 1.462e+01: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  atom at the maximum, mass 0.0021                 A = 3.056e+00: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  gap: a cluster of mass 0.0115 higher by 1000     A = 1.159e+01: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  gap: a cluster of mass 0.0010 higher by 100000   A = 9.500e+01: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  gap: a cluster of mass 0.2037 higher by 30       A = 7.145e+00: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  heavy lower tail: V = exp(-Pareto(0.6))          A = 2.594e-01: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  heavy lower tail: V = exp(-Exp^3)                A = 5.807e-01: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  two values {1, 500}                              A = 4.015e+00: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  flat                                             A = 3.000e+00: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+  lognormal, sd 3                                  A = 1.454e+02: runs 90; violations by claim 0; Chernoff events failed in 0 runs
+block S: 990 runs checked (0 more stopped by the harness limit of 3e6 points and not counted); levels left as populated 8804, as negligible 5332; stops by rule (c0): 339
+block S violations of any claim of Theorem N1: 0
+mutations (each must produce failures):
+   'gap: a cluster of mass 0.0115 higher by 1000', Xi/20: runs with a false certificate or an invalid bracket: 20 of 20
+   'gap: a cluster of mass 0.0115 higher by 1000', K = 2: runs with a false certificate or an invalid bracket: 9 of 20
+   'gap: a cluster of mass 0.0115 higher by 1000', Theta x 5: runs with a false certificate or an invalid bracket: 20 of 20
+   'two values {1, 500}', Xi/20: runs with a false certificate or an invalid bracket: 20 of 20
+   'two values {1, 500}', K = 2: runs with a false certificate or an invalid bracket: 10 of 20
+   'two values {1, 500}', Theta x 5: runs with a false certificate or an invalid bracket: 20 of 20
+   'lognormal, sd 3', Xi/20: runs with a false certificate or an invalid bracket: 20 of 20
+   'lognormal, sd 3', K = 2: runs with a false certificate or an invalid bracket: 17 of 20
+   'lognormal, sd 3', Theta x 5: runs with a false certificate or an invalid bracket: 20 of 20
+mutations: failures detected 156
+exit violations: 0
+finished 2026-11-26T22:36:07Z; elapsed 31.6 s; peak memory 256 MB

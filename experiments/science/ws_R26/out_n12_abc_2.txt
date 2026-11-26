@@ -1,0 +1,12 @@
+r26_n12.py block abc runs 20; started 2026-11-26T22:53:38Z
+(b) V(a) = (1 - p + p e^-u)^k against enumeration of Q_16: largest relative difference 1.54e-15
+    c(J,u) = 0.735326;  k c = 11.7652;  largest edge ratio ln = 11.7652 (between |a| = 10 and 11);  text: e^11.77
+    V by weight |a| = 8..12: 1.1268e-07  1.2043e-07  2.2185e-06  2.8552e-01  9.7528e-01
+    A = 1.074731e-03 (text 1.0747e-3);  share of the 13 points with |a| >= 11: 99.9864 %;  bulk max (|a| <= 9) = 1.204e-07 (text 1.2e-7)
+    pointwise influence per outer flip: at the threshold 32.000 (= kJ/2 = 32.0); between |a| = 11 and 12: 62.009 (kJ = 64.0);  class-relative (u-Lipschitz): k c = 11.765
+(c) (TU) for the slope u: largest E(V-s)_+ / (s Xi_u(p(s))) = 1.7474e+05 at s = 1.204e-07, p(s) = 79/4096   (text: 1.7e5)
+    sufficient condition k c > u (m - tau + 1/2): 11.765 > 2.000: True
+    with Harper's function of the slope 11.765: largest ratio 0.0001 (must be <= 1)
+abc violations: 0
+exit violations: 0
+finished 2026-11-26T22:53:38Z; elapsed 0.1 s; peak memory 36 MB

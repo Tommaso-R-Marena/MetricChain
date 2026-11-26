@@ -1,0 +1,10 @@
+r26_gauss.py runs 6; started 2026-11-26T22:40:50Z
+G1/G2: closed forms of Xi_L, Theta_L against quadrature and attainment by the half-line dip, 24 pairs: largest relative difference 3.2e-14
+G3: the two inequalities of Proposition N10(b) on grids (2400 + 400 points): violations 0
+G4: runs (seeds default_rng(6000000 + 1000*cell + r), r < 6)
+   L = 3.0, theta = 1.0: x_out = 2.642, L^2/2 = 4.500 (x_out < L^2/2); K = 217; runs closed 6, invalid 0; smallest M_max / N10(b) bound: 2402.16; smallest M_max / (R7) bound: 815.80
+   L = 3.5, theta = 1.0: x_out = 2.642, L^2/2 = 6.125 (x_out < L^2/2); K = 226; runs closed 0, invalid 0; smallest M_max / N10(b) bound: nan; smallest M_max / (R7) bound: nan
+   L = 3.5, theta = 0.3: x_out = 2.576, L^2/2 = 6.125 (x_out < L^2/2); K = 273; runs closed 0, invalid 0; smallest M_max / N10(b) bound: nan; smallest M_max / (R7) bound: nan
+   L = 4.0, theta = 1.0: x_out = 2.642, L^2/2 = 8.000 (x_out < L^2/2); K = 234; runs closed 0, invalid 0; smallest M_max / N10(b) bound: nan; smallest M_max / (R7) bound: nan
+total violations: 0
+finished 2026-11-26T22:40:57Z; elapsed 7.1 s; peak memory 409 MB

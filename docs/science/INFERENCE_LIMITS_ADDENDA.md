@@ -4376,6 +4376,52 @@ model; three residue types; the "continuum" is a grid.  P2's rotamer states are 
 a clash filter, so the rigid model above is the one this branch has certified, but libraries with off-ideal
 rotamer positions would be strained less.  No comparison with any measurement.
 
+**102. Prior art for items 100–101, which the first version of this part did not state** *(added at
+checkpoint 68; a linked correction — SCI-REV-0026 §6 — of SCI-REV-0025 §3, which carried item 100 to another
+division without it).*  **The qualitative finding of item 100 — the minimum-energy state of a rigid-rotamer
+table need not be the well of the minimum, and energies drop when the torsions may move — is established.**
+From PubMed records (abstracts, read on 2026-11-26; the papers were not opened):
+(a) Georgiev, Lilien and Donald, *J. Comput. Chem.* 29 (2008) 1527, doi:10.1002/jcc.20909: "a conformation that
+is pruned using rigid-rotamer energies may subsequently minimize to a lower energy than the rigid-GMEC.  That
+is, the rigid-GMEC and the conformation with the lowest energy among all energy-minimized conformations (the
+minimized-GMEC) are likely to be different."
+(b) Gainza, Roberts and Donald, *PLoS Comput. Biol.* 8 (2012) e1002335, doi:10.1371/journal.pcbi.1002335: in 69
+protein-core redesigns "in nearly all of our redesigns the sequence found by the continuous-rotamer model is
+different and has a lower energy than the one found by the rigid-rotamer model"; "using more rigid rotamers
+was never better than a continuous-rotamer model"; their algorithm "guarantees finding the optimal answer"
+with continuous rotamers.  (A design study, cited only for what it says about the discretisation; nothing of
+that kind is done or planned on this branch.)
+(c) Petrella and Karplus, *J. Mol. Biol.* 312 (2001) 1161, doi:10.1006/jmbi.2001.4965: the energetics of
+off-rotamer conformations; between predicted and observed fractions of such conformations the discrepancies
+"are largest for leucine residues" — the residue on which our own table breaks (the same residue, not the
+same quantity).
+(d) Yanover, Schueler-Furman and Weiss, *J. Comput. Biol.* 15 (2008) 899, doi:10.1089/cmb.2007.0158: "finding
+the global minimum does not significantly improve side-chain prediction for an energy function based on
+ROSETTA's default energy terms (less than 0:1% [sic]), while learning new weights gives a significant boost
+from 72% to 78%"; 82.6 % with an extended rotamer library and learned weights — what limits agreement with
+deposited conformations is the energy function and the library, not the search.
+(e) Side-chain conformational entropies of whole proteins on fixed backbones by Monte Carlo — uncertified
+precedents for free energies of side-chain ensembles: Zhang and Liu, *PLoS Comput. Biol.* 2 (2006) e168,
+doi:10.1371/journal.pcbi.0020168; DuBay and Geissler, *J. Mol. Biol.* 391 (2009) 484,
+doi:10.1016/j.jmb.2009.05.068 (whether each samples continuous torsions or library states is not in the
+abstracts and was not checked).
+(f) **Inside the programme, for part (25):** the theory division has a machine-checked enclosure for
+continuous variables — if the energy is enclosed voxel by voxel between two pairwise table models, the
+kernel's bracket holds for the continuous partition function under a product reference measure on the voxels
+(`voxel_boltzmann_bounds`, `certified_prodVoxel_partition`, their `Frontiers/VoxelEnclosure.lean` and
+`VoxelBridge.lean`; THY-MSG-0020 §1, row A3; read by us at the level of that message, not of the Lean
+files).  Mode M of item 97 (a cell represented by its minimum and maximum) is that enclosure; what
+Proposition A17.24 adds is the Jensen lower end with cell means and the bounded-difference upper end of
+second order.  Part (25) should have named it and did not.
+*What remains ours after this:* the numbers of tables 1 and 2 for one force field on capped blocks; the size
+of the free-energy offset per torsion and its dependence on context; that cell-minimised energies repair the
+populations and not the free energy; the construction of item 101 (b) with a certified upper end
+(Proposition A17.24) — **for which no search has been made.**  *Class, by the six classes of
+`SOFTWARE_EVALUATION_PROTOCOL.md` §6:* item 100 — an established phenomenon, measured again; item 101 (b) —
+unknown until searched; the search belongs with the next step of `OPEN_PROBLEMS.md` D16.  *How it was missed:*
+the measurement was made, written up and sent within one evening, and its prior-art paragraph was never
+written (`DEAD_ENDS.md` SD78).
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

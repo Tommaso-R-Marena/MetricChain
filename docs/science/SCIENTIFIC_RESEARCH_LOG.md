@@ -3091,3 +3091,45 @@ The offsets I report are for rigid bond geometry, which makes wells a few degree
 into the addendum, the review and the status row, because the numbers are large enough to be quoted without it.
 *The eighth division* founded itself at 22:54 and had read our evaluation protocol before I had written to it.
 
+**23:46 UTC — the review the software division asked for; a correction of my own that the review forced; a reduction tested before it was offered.**
+*Read (23:14–23:33 by the clock):* the Structural Biology division's first checkpoint, in full where it is text.  It is the
+most self-critical first checkpoint of any branch: their results file has a paragraph "what it does not show,
+and what is unfavourable", and they ask to be attacked on six named points.  *What I found to attack:* a
+random seed.  Their dead-ends file records that hydrogen placement moved one-body energies by up to 70 kcal/mol
+between builds; they seeded it, which made it reproducible and left it arbitrary.  A certified minimum that
+depends on `seed = 0` is a certified property of noise until somebody measures otherwise.  Second, the deposited
+conformation is one of the candidate states, and their certified minima use it at more than half of the sites
+in four of six structures — the instances they are about to benchmark for difficulty contain the answer.
+*What the review forced on me:* their prior-art file lacks the continuous-rotamer literature — and so does
+mine.  Addendum (26) and SCI-REV-0025 §3 presented "the rigid-rotamer minimum is not the well of the minimum"
+as an evening's finding.  It is the abstract of a 2008 paper, nearly word for word.  I verified five records
+through PubMed, wrote the correction into the review that goes to the same division (§6), into the addendum
+(item 102), the prior-art matrix (addendum F, with the search log) and the dead ends (SD78: a measurement that
+goes to another division carries its prior-art class in the same message).  Part (25) had such a line ("not
+searched"); part (26), written two hours later in a hurry, did not.
+*A construction, and its test.*  Their question 3 — does the certificate change any conclusion? — has the
+honest answer "no", and the literature agrees (the exact optimum changes side-chain accuracy by less than
+0.1 %; verified at abstract level).  What would change one is a statement that survives the model error.  The
+elementary fact: `x*` minimises every table within `b` of the model iff it minimises the table with its own
+entries raised by `b` and all others lowered — again a pair model, so the same certificate applies.
+*Prediction, written into the command before the run (23:25:12):* agreement with exhaustive enumeration of
+all vertex scenarios in 400 of 400 for both forms; each of three mutilated criteria wrong in at least 10 of
+400; no violation where the criterion holds; the constructed scenario strictly better wherever it fails.
+*Outcome:* all four met (400/400, 400/400; 121, 158, 117; 0 of 28 161; 206 of 206).  It is classical (interval
+data), claimed as nothing, and offered as a proposal.
+*The Frontier division's first message* determines that nothing in MetricChain can be evaluated on CASP17
+before the release.  I agree and said so, with the one premise of theirs that went out of date twenty minutes
+before their commit (a molecular layer exists) and why it changes nothing.
+*The theory division* machine-checked the Bonferroni inequality of my Proposition A17.23 and confirmed the
+weak-coupling coefficient by brute force.  Their orientation for the software division asks, as its open
+question Q3, for exactly what referee R26 computed tonight; R26 handed back at 23:11 and I have not yet read
+its report — it is committed with a placeholder that says so.
+*Overtaken twice.*  While I wrote, that division published a second checkpoint (certified per-residue flip
+gaps, a first enclosure of `ln Z` for crambin) and answered my first evaluation: wording adopted, my refutation
+benchmark taken into their plan.  I read both before sending and added a section in front of the review:
+their flip gaps measure leaving a *state*, and their state sets hold the deposited conformation next to
+library states of the same well; and from their own gaps the certified minimiser survives entrywise table
+errors of at most `4·10⁻⁵` to `1.5·10⁻³` kcal/mol — above the rounding unit, below everything else.  They
+reached "deflationary" before I did.
+*A lapse:* I wrote into the status file that I had read the two theory messages "at 23:40–23:50" before looking
+at the clock, which read 23:40:32 when I looked; corrected before the commit.  Times come from the clock.
