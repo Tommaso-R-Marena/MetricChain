@@ -328,6 +328,47 @@ published statements are linked messages, never silent rewrites.
 
 **New directions opened by workstreams**
 
+9h. **The certificate after the fifth wave: order four, thirty residues, the frozen
+   helix, populations — and a theorem about what analysis cannot do [P + M; after
+   checkpoint 43]** (workstreams P5, P6; SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0013 §4;
+   addenda A17 (13), (14); this supersedes the last two sentences of 9b).
+   (i) *Shares.*  Charging each certified tail constant to the pairs or triples of its
+   subset instead of its sites is a pointwise tighter covering that keeps the models
+   exactly solvable (counting lemmas; 98 million state checks, including the two
+   extreme members of the certified class).  Twenty residues of valine on PPII, no
+   sampling: order 5 from 0.0605 to 0.0162 (pairs) and 0.0090 (triples) nats; **order 4
+   — 9 921 evaluations — `[518.2383, 518.2929]`**.  Thirty residues: strand 0.0017 nats,
+   PPII 0.091.  (ii) *The theory division's sandwich sampler on our instance:*
+   `[518.26231, 518.26252]`.  (iii) *The compact case.*  **No bound that uses the charges
+   only through their magnitudes can see the cancellation**: Born radii do not depend on
+   the charges, so such a bound must hold for every sign pattern, and sign-reversed
+   versions of the real instances have remainders 16–153 times the true one at orders
+   3–5 (exact evaluation; an explicit family with unbounded loss); one-sided signed
+   sums stay 6–53 times above the truth; a signed reference term is the next order in
+   disguise.  **Yet leucine on the helix is certified** — at thirty residues
+   (`1.07·10⁹` assignments) within 0.033 nats without sampling (order 6, pair form, on
+   cached evaluations) — because that ensemble keeps fewer than one side chain off
+   its anchor and the pair form does not charge such assignments.  For serine, lysine
+   and a patterned sequence on the helix nothing comparable holds.  (iv) *Populations.*
+   A sandwich bounds the partition sum of every event from both sides, hence every
+   population, sharply and with no further evaluation: all 60 rotamer populations of
+   the twenty-residue instance within 1.2 %; thirty residues within 0.8 %; with the
+   site form at order 4 the minor populations are not certified at all.  All of it
+   model-relative, on P3's paper-proved constants; nothing machine-checked beyond the
+   skeleton (9g).
+9i. **The other two divisions on our reviews, and two reviews of this stretch [after
+   checkpoint 43]** (SCI-REV-0013, SCI-RES-0012, SCI-RES-0013).  The theory division
+   applied five of our reviews at its eighteenth checkpoint — workstream Y in its report
+   with our reversal as headline, our Theorem R9.1 in place of its proposition after a
+   verification beyond ours, seven Lean files of ours in its audited library — and the
+   engineering division, in its first contact, verified and accepted the findings of
+   our two reviews of its work and reproduced our separation table to every digit.
+   Our review of the theory division's seventeenth checkpoint (workstream R12) found no
+   critical error and two sentences to replace (Proposition 11.18e(b) false as written;
+   the necessary order of Proposition 11.113(d) too large by `e^Δ`).  **Two corrections
+   of our own came out of their checks** (SD48): the defect of numpy's binomial sampler
+   begins near `5·10¹⁴` trials, not `10¹⁷`, and our "corrected" re-run had never exercised
+   its correction; the sizes of our separation statement were first sizes of a grid.
 8. **Certified kinetics [cores V]** (SCI-MSG-0005): barrier lower bounds and escape-rate
    upper bounds are cut certificates on the existing kernels; PSPACE obstruction on
    chains; no physical instance.
@@ -402,7 +443,7 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
 (R3-E1, R9-E1), the vertex enumeration that decides the crossover of workstream Y
 (R10-E1).
 
-## 7. What to do next, ranked (revised after checkpoint 43; items 1–3 changed)
+## 7. What to do next, ranked (revised 2026-11-26 after the fifth wave; items 2 and 3 rewritten)
 
 1. **Done at checkpoint 43: R10** (the theory division's workstream Y; SCI-REV-0010;
    finding 9d).  Done by the coordinator right after it: the law at *fixed length* for the
@@ -419,29 +460,32 @@ buried environment (P2-E1), exact arithmetic for the off-lattice chain at 13 tor
    double-description code of our own); (iii) a hidden-Markov reference for the
    tilt-state recursion, which by the period-four argument is necessary for any upper
    bound below the cube.  None of the three was started.
-2. **Certify the compact case** (`OPEN_PROBLEMS.md` D6) — the problem the programme's most
-   physical line now ends on.  Done at checkpoint 40: a certified `ln Z` at twenty
-   residues on an extended backbone (P3; SCI-MSG-0020), replicated independently
-   (addendum A17 (10)).  Not done: the helix, where a fitted chain model is measurably
-   accurate (`0.002–0.004 k_BT`) and P3's bound cannot see the cancellation that makes it
-   so.  Candidates: (a) ~~run P3's sandwich on the fitted chain models~~ — *would gain
-   nothing* (the certificate sees any model only through the band `m₊ − m₋`; the
-   midpoint model, which P3 ran, is optimal; addendum A17 (10), "Limits"); (b) the pair
-   form of the penalties at order `m` (the theory division's Theorem 11.18a at `m = 3`;
-   workstream P4 item 4) — **done on enumerated grids (P4, Proposition P4.6:
-   pair and banded pair penalties; cost number 16.4 → 0.064 at `m = 3`), not yet applied to
-   the twenty-residue instance: that needs the pair sums `Σ_{T⊇{i,j}} ĉ_T` from P3's
-   generating functions with two sites excluded, `O(n²)` evaluations of code that has
-   the one-site exclusion** — a bounded, well-defined next computation that would show
-   whether order three suffices at twenty residues; (c) **group-wise signed tails** — **workstream P5, launched at
-   checkpoint 43 and running when this was written** (`workstreams/P5_brief.md`; on
-   completion: read `P5_REPORT.md`, check one thing, publish to theory and engineering);
-   (d) a stand-alone checker of the certificate
-   (request P3-E1); (e) a buried, non-homopeptide instance (request P2-E1).
-3. **Benchmark B10: done in full on neutral side chains** (after checkpoint 43; finding
-   9f; SCI-MSG-0022).  What is left of it: charged side chains, where the split should
-   matter most (non-product domains: use the largest reset-closed domain at the true
-   minimiser, finding 9e), and a buried environment (request P2-E1 to engineering).
+2. **The certificate line (`OPEN_PROBLEMS.md` D6, D9) — where it stands, and what is left
+   in order of value** (finding 9h).  Done since checkpoint 43: pair and triple shares
+   (order 4 suffices at twenty residues; thirty residues certified), the compact case
+   settled in the negative for bounds and in the positive for the frozen leucine helix
+   (thirty residues, 0.033 nats), certified populations.  Left:
+   (a) **a compact ensemble that is not frozen** — serine, lysine or the patterned
+   sequence on the helix, a buried side chain: the cost number is about
+   `∏_i (1 + p_i(e^{βγ_i} − 1)) − 1`; the levers are the order, exact in-window evaluated
+   terms (they cost 0.005 of the 0.009–0.016 nats at order 5 already), shares to
+   `(m − 1)`-subsets, and the slack inside the sign-blind class at order 6 (up to a
+   factor 9); **this is where the certificate can still fail, and nobody has run it**;
+   (b) **turn "certified" into checked**: the stand-alone checker (engineering, P6-E1 =
+   P3-E1, accepted in principle; specification SCI-MSG-0025 §8) and the share lemmas in
+   Lean (theory, P6-T1) — without them every bracket rests on unreviewed arithmetic;
+   (c) reach: the sparse ball (P6-E2: three lines of proof, not implemented) for fifty
+   residues and more; (d) observables beyond single-site populations (pair and block
+   events, order parameters) and, with them, benchmark B3/B4: what averaged data add to
+   a certified population; (e) the loose end of two standard errors between two
+   samplers (A17 (10), note).
+3. **When workstreams R13 and P7 report** (the theory division's requests (a), (c)):
+   read, check, publish (SCI-REV-0014; a message to both divisions).  The crossover map
+   of workstream Y (their request (b), our R10-T2) when the engineering division's
+   enumeration R10-E1 exists — or with a double-description code of our own.
+   **Benchmark B10 is done**, charged and aromatic side chains included (A17 (12) item
+   25); left of it: a banded family of width 3 as a sampleable model on PPII, and a
+   buried environment (request P2-E1).
 4. **Conjecture A16.4** where it is genuinely open: an algorithm with the mean-energy
    datum on the whole class for accuracies between `ε₁ᶜ` and `a(u)`, or a lower bound
    there; the lemma for a general reference instance; the non-adaptive upper bound

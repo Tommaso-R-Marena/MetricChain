@@ -2206,7 +2206,7 @@ driver, the comparison and the sampled checks are the coordinator's.
     |---|---|---|---|---|---|---|
     | `n = 20` | `1.05·10⁶` | 6; 19; 21 700 | `[593.065327, 593.699191]`; 0.634 | **`[593.297430, 593.313404]`; 0.0160** | `[593.302430, 593.303686]`; point estimate `593.303058` | `593.3030 ± 0.0001` |
     | **`n = 30`** | **`1.07·10⁹`** | 6; 20; 174 437 | `[866.650699, 867.380406]`; 0.730 | **`[866.899704, 866.932637]`; 0.0329** | `[866.912609, 866.915197]`; point estimate `866.913904` | `866.9139 ± 0.00003` |
-    | `n = 30` | `1.07·10⁹` | 5; 20; 31 931 | *(running when this part was first committed; the row is completed below when the run has reached its last line)* | | | |
+    | `n = 30` | `1.07·10⁹` | 5; 20; 31 931 (a prefix of the cached ball) | `[866.377251, 908.218712]`; 41.8 — useless: the site-form floor has a minimum 21.8 kcal/mol below the anchor | **`[866.879220, 866.980721]`; 0.1015** | `[866.910159, 866.918248]`; point estimate `866.914212` | `866.9139 ± 0.00003` |
 
     The site-form brackets are those of workstream P5's run of P3's pipeline **in every
     digit** — two drivers of the same core.  60 of the cached ball values re-evaluated
@@ -2214,6 +2214,12 @@ driver, the comparison and the sampled checks are the coordinator's.
     distinct assignments; 0.47–0.48 sites off the anchor on average): `m₋ ≤ E ≤ m₊` at all.
     The sandwich sampler (the theory division's Proposition 11.113) evaluates five and
     eight distinct assignments for its 1 200 accepted points; `W` never outside `[0, 1]`.
+    *Order 5 (row added when its run had finished):* with the pair form thirty
+    residues are certified within **0.10 nats from 31 931 evaluations** — a fifth of the
+    ball of order 6 — where the site form certifies nothing at that order: the same
+    constants, charged to sites, pull the floor's own minimum 21.8 kcal/mol below the
+    anchor.  With 1 200 sampled points (eleven distinct assignments) the bracket is
+    0.008 nats.
 32. **Reading.**  For this ensemble — leucine, two rotamers per site, 95 % of the weight
     on assignments with at most one side chain off the anchor — the compact case is now
     at the precision of the extended backbones: **0.033 nats at thirty residues without

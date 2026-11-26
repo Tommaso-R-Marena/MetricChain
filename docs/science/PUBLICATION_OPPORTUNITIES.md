@@ -299,3 +299,57 @@ field; and the prior art, which neither division has searched beyond snippets
 the cube to `ℤ`).  The small-slope law and the reversal are R10's; the charter's rule
 stands: no manuscript or external representation without the owner's authorisation.
 
+
+*Note after the fifth wave (2026-11-26; SCI-MSG-0024, SCI-MSG-0025, SCI-REV-0013,
+SCI-RES-0012, SCI-RES-0013; addenda A17 (13), (14)).*  **The certified-free-energy arc
+(P10 with workstreams P2–P6) is now the division's most complete piece of work, and
+still not externally defensible; what separates the two is a short, known list.**
+
+*What it gained in this stretch.*  (1) Scale and economy in the regime it is for:
+order 4 suffices at twenty residues (9 921 evaluations among `3.5·10⁹` assignments, no
+sampling, 0.055 nats), thirty residues are certified (0.0017 nats on the strand).
+(2) A negative theorem with numbers on real instances: no bound that uses the charges
+only through their magnitudes can come within a factor 16–153 of the true remainder on
+the leucine helix at orders 3–5 — "our tail bound is loose in compact geometries" is a
+result, not an apology.  (3) The frozen helix certified at thirty residues (0.033
+nats) by the *form* of the certificate.  (4) Observables: a sandwich bounds every
+population sharply and at no further cost — the usual objection "nobody measures
+`ln Z`" no longer applies.  (5) The theory division's sandwich sampler turns the
+deterministic certificate into a statistical one with an a-priori width, which it
+attains on our instance.  (6) The logical skeleton is machine-checked twice.
+
+*What a hostile referee would ask, in the order we would fix it.*
+(i) **No independent program has checked the arithmetic chain** — the closed-form sums,
+the covering inequalities, the transfer matrices.  The stand-alone checker (request
+P6-E1; the engineering division has accepted it in principle) and the share lemmas in
+Lean (P6-T1) come before any external use.
+(ii) **Every certified instance is an exposed or a frozen homopeptide** on an ideal
+backbone with a three-state grid per dihedral.  A compact ensemble with real
+side-chain entropy is where the certificate may fail, and it has not been run
+(`OPEN_PROBLEMS.md` D6, D9).  One such instance, certified or shown out of reach with
+the reason, is worth more than another ten residues of valine.
+(iii) **The certified constants are one workstream's paper proofs** (P3's Theorem 3 with
+interval enclosures), never reviewed outside it; two floating-point allowances are
+allowances.
+(iv) **Prior art has been searched at abstract level only.**  The nearest neighbours
+recorded by workstreams P2 and P5 are: provable ε-approximations of partition
+functions for pairwise energy bounds in computational protein design (Jou, Holt,
+Lowegard & Donald, *J. Comput. Biol.* 27:550 (2020), doi:10.1089/cmb.2019.0315),
+tuple expansions for non-pairwise energies fitted, not bounded (Hallen, Jou & Donald,
+*J. Comput. Biol.* 24:536 (2017), doi:10.1089/cmb.2016.0136), and pairwise
+decompositions of generalized-Born energies whose error is assessed numerically
+(Gaillard & Simonson, *J. Comput. Chem.* 35:1371 (2014), doi:10.1002/jcc.23637;
+*J. Chem. Theory Comput.* 13:4932 (2017), doi:10.1021/acs.jctc.7b00202) — all at the
+level of abstracts.  What we did not find there is a *certified* bound on the many-body
+remainder of a GB term; that is a statement about five to ten queries, not about a
+literature.  A proper comparison with the provable-partition-function line is the
+second thing to do.
+(v) **Model-relative.**  Nothing says GBn2 describes water; the populations are those
+of a rotamer model.  A methods note can say so in its title.
+
+*Verdict.*  Mature as measurement and construction inside the programme; one checker,
+one hard instance and one literature comparison away from something a careful outsider
+could try to break.  For the theory division's side of the same arc (§11.7, §11.30):
+our review R12 found two sentences to replace and no theorem false (SCI-REV-0013).
+The charter's rule stands: no manuscript or external representation without the
+owner's authorisation.

@@ -1,6 +1,6 @@
 # Scientific frontier map
 
-*Science division.  **Version 5.2** (2026-11-26, after checkpoint 43 and the theory division's seventeenth checkpoint: §4 updated — two rows added, two extended; version 5.1 answered the row on an interacting known part, workstream R10; version 5 was of checkpoint 40: after the second and third waves of workstreams — F, P2, L2, R6, R7, R8, R9, P3, L3, A3 —
+*Science division.  **Version 5.3** (2026-11-26, after the fifth wave and the other divisions' checkpoints of that day: §4 updated — the compact-case row answered, three rows added; version 5.2 was after checkpoint 43 and the theory division's seventeenth checkpoint: §4 updated — two rows added, two extended; version 5.1 answered the row on an interacting known part, workstream R10; version 5 was of checkpoint 40: after the second and third waves of workstreams — F, P2, L2, R6, R7, R8, R9, P3, L3, A3 —
 the theory division's fourteenth and fifteenth checkpoints, and addenda A16–A17; rows F1, F3, F5, F6, F8, F12 and §§3–4 rewritten; change notes at the end.
 Version 4.1 was of 2026-11-25).  A map of what the science of molecular
 conformations cannot reliably establish today, why, and what precise problem each
@@ -8,7 +8,7 @@ limitation turns into.  It starts from the science, not from what MetricChain ca
 Labels as in `docs/collaboration/SCIENCE_TO_ALL.md`; **[H]** marks our reading of a field's
 practice; **[M]** a measurement on a named model.*
 
-Theory commit referred to: `b2d3e9c` (our tree is built on `5ed4072`).  Engineering: `a2f6dc7`.
+Theory commit referred to: `63e36f7` for §4 (rows F1–F12: `b2d3e9c`; our tree is built on `5ed4072`).  Engineering: `c2ad4f8`.
 
 ---
 
@@ -114,14 +114,27 @@ barrier), not totals.
 | native certificates against pseudo-Boolean proofs | SCI-REV-0006 (E-1) | open |
 | an independent derivation of the cost of the nested adaptive algorithm | `PUBLICATION_OPPORTUNITIES.md` §1 | **done (workstream R6, SCI-REV-0007): it stands** |
 | what must be bounded a priori for a surrogate to certify a free energy; can a floor be proved for a real energy term | SCI-RES-0007, SCI-RES-0009, SCI-MSG-0020; workstreams P3, A3 | **answered**: a divergence of the truth from the model (in print); a floor can be proved with evaluations on a Hamming ball on extended backbones (P3); **the skeleton of that certificate is machine-checked twice** (remainder identity, allocation, sandwich: the theory division's `AnchoredRemainder.lean` and our workstream L4; the bracket and its probability: L4, SCI-MSG-0023), its constants are paper proofs with enclosures; the theory division's sandwich sampler (Proposition 11.113) needs no variance input — running on our instance |
-| **the compact case**: a certified bound that sees the cancellation between self and cross terms (helix, buried side chains, charges) | `OPEN_PROBLEMS.md` D6; SCI-MSG-0020 (P3-T1…T4, P3-E1, P3-E2); the theory division's §12 item 13(a) | **open — the problem the physical line ends on; shared by the theory division in our formulation; workstream P5 running (measurement of the cancellation by neutral groups; a lower bound for pair-by-pair bounds)** |
+| **the compact case**: a certified bound that sees the cancellation between self and cross terms (helix, buried side chains, charges) | `OPEN_PROBLEMS.md` D6; workstreams P5, P6; SCI-MSG-0024, SCI-MSG-0025, SCI-RES-0013 §4; the theory division's §12 item 13(a) | **answered in two halves.**  *For bounds: no.*  A bound that uses the charges only through their magnitudes must hold for every sign pattern (Born radii do not depend on the charges), and sign-reversed versions of the real helix instances have remainders 16–153 times the true one at orders 3–5; one-sided signed sums stay 6–53 times above the truth; a signed reference term is the next order in disguise.  *For certificates: yes, where the ensemble is nearly frozen* — leucine on the helix at thirty residues (`1.07·10⁹` assignments) within 0.033 nats without sampling, by the pair form at order 6 on cached evaluations.  **Open: a compact ensemble with real side-chain entropy** (serine, lysine, a patterned sequence on the helix; a buried side chain), where nothing is certified at an affordable order |
 | the hinted query complexity on a finite space with heavy states (the covering programme of randomised certificate complexity) | SCI-RES-0009 §4 (A3-T6) | open |
 | is Hoeffding's Theorem 3 used as a certified second-order bound in free-energy perturbation | SCI-RES-0009 §3 | not found; Decoster (2004) unread — needs a library |
 | does an interaction along the chain raise the exponents (the theory division's workstream Y) | workstream R10; SCI-REV-0010 | **answered for one model, and not by "yes"**: for a two-state nearest-neighbour chain all three exponents rise at `u = 1` (theirs; replicated), by the structure factor at small slopes (proved at second order); at `u ≥ 2–3` the two cost exponents fall below the independent-site values (proved from their own recursion); the threshold rises at every slope.  Open: the crossover slope (R10-T2, R10-E1); the small-slope law for the infinite chain (Conjecture R10.3); more than two states, a field |
 | which split of the energy into tractable model and remainder (the "known part" as a modelling decision) | addendum A17 (12); SCI-MSG-0022; `OPEN_PROBLEMS.md` D7 | **answered by measurement for neutral side chains**: the way of fitting hardly matters (`D_2` within 0.34 nats; the floor has its own convex fit), the split matters by orders of magnitude — the vacuum force field is a worse model of the solvated ensemble than independent residues fitted to it (screening).  Open: charged side chains; a certified floor after a floor-optimal fit |
 | on which domain is a minimum certified when the clash-free domain is not a product | SCI-REV-0012 §5 (linked correction of SCI-MSG-0015); the theory division's Proposition 11.18c | **answered, with a correction of our own result**: on a greedily pruned product the certified minimum missed the true one in 14 of 40 analyses; the right domain is the largest reset-closed part at the true minimiser (star: 13 of 40; third-order pair model: 30 of 34); configurations outside it need merged sites or further references |
+| does a lower order of the expansion suffice if the certified tail is allocated better (sites → pairs → triples of each subset) | workstream P6; SCI-MSG-0025; `OPEN_PROBLEMS.md` D9 | **yes**: at twenty residues on PPII order 4 with triple shares gives 0.055 nats from 9 921 evaluations (site form 1.74; order 5 needed 87 441 evaluations for 0.06); thirty residues: strand 0.0017 nats, PPII 0.091; the gain is the reciprocal of the fraction of sites off the anchor to the power of the share order; open: the cost of the envelope class itself, exact in-window terms, a sparse ball |
+| what a certificate of `ln Z` gives for observables | addendum A17 (13); SCI-MSG-0025 §7 | **every population, sharply, at no further cost**: `P(A) ∈ [Z₊(A)/(Z₊(A) + Z₋(Aᶜ)), Z₋(A)/(Z₋(A) + Z₊(Aᶜ))]` by restricted transfer matrices; all 60 rotamer populations of the twenty-residue instance within 1.2 %, thirty residues within 0.8 %; the site form cannot certify the minor populations at order 4 at all; not run: pair and block events, order parameters |
+| is the Hamming ball necessary also for randomised algorithms without a hint (the theory division's Proposition 11.18e(b)); the worst-case cost of a sandwich without a hint | workstream R12; SCI-REV-0013 | **not as stated**: a valid finite bound costs `O(ln(1/δ))` random evaluations whatever the number of sites (it is useless); for a bracket of prescribed width the question is open.  The worst-case count for a sandwich of width `Δ` without a hint is `2 ln(2/δ) sinh²(Δ/2)/ε²` |
 
 ## Change note
+
+*Version 5.3 (2026-11-26, after the fifth wave).*  §4 only: the compact-case row is
+answered — in the negative for bounds that ignore the signs of the charges (a theorem
+with numbers on real instances) and in the positive for certificates on a nearly
+frozen helix ensemble (thirty residues) — and three questions are added with their
+answers: a lower order suffices with a better allocation of the tail (workstream P6);
+a certificate of `ln Z` certifies populations (addendum A17 (13)); the necessity of the
+Hamming ball for randomised algorithms is not as the theory division stated it
+(workstream R12).  Rows F1–F12 are unchanged; F1's remedy column would now cite the
+order-4 certificate and the certified populations.
 
 *Version 5.2 (after checkpoint 43).*  §4 only: two questions added (which split of the
 energy into model and remainder — benchmark B10 completed, addendum A17 (12); on which

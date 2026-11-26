@@ -1,0 +1,14 @@
+=== L30 on the helix, tau 0.6: 582 atoms, 30 sites, states per site [2], 1.07374e+09 assignments; anchor E = -516.495775 kcal/mol; order m = 5, band 20 [3s]
+    ball of radius 4: 31931 values read from workstream P5's cache (ball_L30_H_t0.60_gbn2_M5_20f5b82d67.npz, 174437 stored); 60 of them re-evaluated here: largest difference 0.0e+00 kcal/mol [5s]
+      GFBatch: host site 1/30 done, 18s
+      GFBatch: host site 7/30 done, 126s
+      GFBatch: host site 13/30 done, 213s
+      GFBatch: host site 19/30 done, 285s
+      GFBatch: host site 25/30 done, 341s
+      GFBatch: host site 30/30 done, 374s
+    Gamma_5 = 203.02396 kcal/mol = 340.552 kT from 421 closed-form sums (computed, 417s); largest site share S_i/m = 9.5949, largest in-band pair share = 1.66750 kcal/mol [428s]
+    form S (site penalties, P3/P5): CERTIFIED ln Z(E) in [866.377251, 908.218712], width 41.841461 nats; min m_- = -538.308189 (anchor E = -516.495775) [434s]
+    form B (banded pair penalties, P6): CERTIFIED ln Z(E) in [866.879220, 866.980721], width 0.101501 nats; min m_- = -516.495775 (anchor E = -516.495775) [439s]
+    1000 exact samples of the pair-form floor (8 distinct; 0.54 sites off the anchor on average): m_- > E at 0, m_+ < E at 0 [447s]
+    sandwich sampler (theory division, Proposition 11.113) on the pair-form sandwich: 1200 accepted of about 20000 proposals (rate 1 - e^-D = 0.0965), 11 distinct states evaluated; W in [0.000, 1.000], mean 0.3333; W outside [0, 1]: 0;  with probability >= 0.95: ln Z(E) in [866.910159, 866.918248], width 0.008089; point estimate 866.914212 [455s]
+ALL DONE 455 s
