@@ -20,6 +20,13 @@ Labels as in `README.md`.  "Review" names the COMPLEXITY-REV file of the indepen
 | CX-T11 | **Fixed structures.** A structure fixed by a rotation of order `d ≥ 2` has a unique fixed face, without nick, with `kd` pairs; bijection (designated nest, marked nick, top segment) | [P] | ibid. Lemma 3, Prop. 4 | as CX-T10 | unreviewed | "central loop"/slices in [SW26] for a fixed ordering |
 | CX-T12 | **Algorithm.** Magnified partition function of the multi-strand NN model over all orderings, with symmetry, in `O(L_0^4 Σ_{d} Π_i C(n_i/d+2,2))` arithmetic operations: `O(N^4 3^c)` for distinct strands, polynomial for a bounded number of species; MFE and #SSEL within the same bounds via [SW26, §7] [K] | [P] | ibid. Thm 1 | [X] exact agreement with exhaustive enumeration on 280 systems | unreviewed | answers "Future work" 3 of [SW26] (posed 23 Nov 2026) and part of 4; subset DP for a base-pair model without symmetry is Boehmer et al. (WABI 2024) |
 
+## Machine-checked (Lean 4.31.0 + Mathlib v4.31.0; files under `experiments/complexity/lean/`, see its README)
+
+| id | declaration | statement | covers |
+|---|---|---|---|
+| CX-V1 | `Complexity.StackPacking.packing_of_all_stacked`, `Complexity.StackPacking.exact_packing_of_all_stacked` | **[V]** If every base of every item is paired with a `G` of the template `G^B(AG^B)^{m−1}`, injectively, and consecutive bases of an item with adjacent positions, the items can be assigned to the `m` blocks with total length `≤ B` per block; `= B` if the lengths sum to `mB` | the counting step (d) of CX-T1 — **not** the model of structures and loops around it |
+| CX-V2 | `Complexity.JordanOrbit.weighted_fixed_point_formula` (with `sum_jordan`, `fix_iff_dvd_stab`, `stab_eq`) | **[V]** For a permutation `ρ` of a finite set with `ρ^c = 1`, `g : X → ℚ`, `k ∈ ℤ`: `Σ_x R(x)^k g(x) = Σ_{d∣c} J_k(d) Σ_{x : ρ^{c/d}x=x} g(x)` | the second equality of formula (1) in CX-T10 — **not** the identification of physical structures with orbits |
+
 ## Statements established by exact computation only
 
 | id | statement | label | program |
