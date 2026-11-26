@@ -1,0 +1,24 @@
+# cube u = 2: h = 0.097281, a = 0.327813; chain s_t = L + 0.05, b_0 = h + 0.02; horizon N = 3000, k = 3 levels; range condition: True
+# (b_j - h)/h, j = 0..3: 0.2056 0.2056 0.2056 0.2056;   X = X_0(N) + 1 = 23.49
+# blocks of the chains (top first): [629, 630, 631];  levels of a chain started at N: [4, 4, 4]
+#      d      x     ln cost     type(W_k)   cost - type   error bound E_k   cost - d h    d (a - h)
+    3000     1.0     1131.97      351.05      780.92        1482.11        840.13      691.60
+    3000    23.5      892.03      333.13      558.89        1482.11        600.19      691.60
+    3000    83.5      794.72      285.35      509.36        1482.11        502.87      691.60
+    1500     1.0      668.11      175.13      492.99        1467.67        522.19      345.80
+# levels of section 4 evaluated: [10090, 308, 8] (per family, base first);  chain levels: [437, 14, 6];  checks: 48948;  evaluators differ by at most 5.7e-14
+#   level family 1: measured loss (ln C_max - type of W_1) between 18.6 and 31.6 nats over 10090 evaluations
+#   level family 2: measured loss (ln C_max - type of W_2) between 25.2 and 303.2 nats over 308 evaluations
+#   level family 3: measured loss (ln C_max - type of W_3) between 114.2 and 565.7 nats over 8 evaluations
+least slack per inequality:
+   T: accuracy                                        0.015   (457 checks)
+   T: ln(1/pi_dagger) <= varpi                      157.456   (457 checks)
+   Z3: (U-infinity)                                   6.403   (10406 checks)
+   Z3: accuracy                                       1.033   (10406 checks)
+   Z3: the type                                      26.462   (10406 checks)
+   Z4: the type of the combined family              221.350   (16041 checks)
+   induction T                                      205.923   (775 checks)
+violations: 0   [must be 0]
+time 33 s
+ALL CHECKS PASS
+rc=0

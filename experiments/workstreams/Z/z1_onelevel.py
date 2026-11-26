@@ -18,7 +18,9 @@ Controls (each must FAIL somewhere): (D) without ell_0 and X_0; (C) with the cur
 convex family -- instead the family {W_j above its chord}, see below, is not needed: the control used is the
 line-by-line value, max over lines of [B - Sigma(B, s) g], which is BELOW the minimax value for a single
 non-convex family and is what dead end D64 records).
-Usage: python3 z1_onelevel.py [u] [eps1]        (default 1.0 0.003)
+Two sequences of curves (argument `mode`): 'cut' - the cut orbit curves restarted at b_0 = h + eps1 (R_REPORT section 6);
+'env' - the envelope sequence from b_0 = a (zetalib.EnvZ; floating point on a grid).
+Usage: python3 z1_onelevel.py [u] [eps1] [mode]        (default 1.0 0.003 cut)
 """
 import math
 import sys
@@ -28,14 +30,16 @@ import zetalib as Z
 Q2 = Z.Q2
 u = float(sys.argv[1]) if len(sys.argv) > 1 else 1.0
 eps1 = float(sys.argv[2]) if len(sys.argv) > 2 else 0.003
+mode = sys.argv[3] if len(sys.argv) > 3 else "cut"
 JMAX = 12
-C = Z.ChainZ(u, 0.05, eps1, JMAX + 2)
+C = Z.make_chain(mode, u, JMAX + 2, eps1)
 h, a = C.h, C.a
 ev = Q2.Ev(u, both=True)
 ld = math.log(0.05)
 dm = Z.dmin(u)
-print("# cube u = %g: h = %.6f a = %.6f; s_t = L + 0.05, b_0 = h + %g; range condition to level %d: %s (largest W %.3f)"
-      % (u, h, a, eps1, JMAX + 2, C.range_ok, C.worstW))
+print("# cube u = %g: h = %.6f a = %.6f; %s; curves with values in [0, 1] to level %d: %s (largest W %.3f)"
+      % (u, h, a, ("cut orbit curves, s_t = L + 0.05, b_0 = h + %g" % eps1) if mode == "cut" else "envelope sequence from b_0 = a",
+         JMAX + 2, C.range_ok, C.worstW))
 print("# (b_j - h)/h, j = 0..%d: %s" % (JMAX, " ".join("%.4f" % ((b - h) / h) for b in C.b[:JMAX + 1])))
 viol = {k: 0 for k in "ABCD"}
 ctrl = {"D_no_losses": 0, "C_two_levels": 0}
@@ -48,7 +52,7 @@ for d in (300, 1000, 3000, 10000):
     X0 = Z.X0(u, d)
     Lam = -ld + d * math.log(2)
     ell0 = Q2.ell0(ev.cu, d, Lam)
-    for j in (0, 3, 5, 6, 8, 11):
+    for j in ((0, 3, 5, 6, 8, 11) if mode == "cut" else (0, 1, 2, 3, 5, 8, 11)):
         lines = C.grid(j, N)
         nxt = C.grid(j + 1, N)
         nxt2 = C.grid(j + 2, N)
@@ -95,7 +99,7 @@ for d in (300, 1000, 3000, 10000):
 print("# %d levels evaluated exactly; largest disagreement of the two evaluators %.2e" % (nlev, ev.maxdiff))
 print("#      d   j      xhat   n_o*   ln C_max   type(j+1)   excess   X_0+ell_0   d*(min Psi - M_{j+1})")
 for r in rows:
-    if r[1] in (0, 6, 11) and r[0] in (1000, 10000):
+    if r[1] in ((0, 6, 11) if mode == "cut" else (1, 3, 8)) and r[0] in (1000, 10000):
         print("  %6d  %2d  %8.1f  %5d  %9.2f  %9.2f  %7.2f   %7.2f     %9.3f" % r)
 print("violations: (A) accuracy %d, (B) (U-infinity) %d, (C) exponent %d, (D) the type %d   [each must be 0]"
       % (viol["A"], viol["B"], viol["C"], viol["D"]))

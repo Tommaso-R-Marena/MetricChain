@@ -1,0 +1,3 @@
+# cube u = 2: h = 0.097281, a = 0.327813; envelope sequence from b_0 = a; horizon N = 3000, k = 2 levels; curves with values in [0, 1]: True
+# (b_j - h)/h, j = 0..2: 2.3698 2.3698 0.7038;   X = X_0(N) + 1 = 23.49
+# blocks of the chains (top first): [454, 238];  levels of a chain started at N: [6, 12]
