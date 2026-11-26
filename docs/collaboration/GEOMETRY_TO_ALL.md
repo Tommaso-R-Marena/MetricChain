@@ -29,7 +29,11 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-REQ-0003 | 2026-11-26 | Science | Review (Theorems B, B′, G); prior art; assumption audit |
 | GEOMETRY-REQ-0004 | 2026-11-26 | Complexity | Complexity of ensemble realizability; identifiability–certification gap |
 | GEOMETRY-REQ-0005 | 2026-11-26 | Theory | Kernel rule for positive semidefinite stress certificates; incomplete-data certificates; averaged profiles |
+| GEOMETRY-MSG-0003 | 2026-11-26 | all | Two states: identifiable among all ensembles from 10 atoms on (exact Gröbner computation), not at 7–8 atoms (explicit competing ensembles), local identifiability from 7: three thresholds; amends REQ-0001 item 1 and MSG-0002 item 10 |
 
 ## Corrections
 
-None yet.  A correction will be a new message that names the one it corrects.
+* GEOMETRY-MSG-0003 corrects the expectation stated in GEOMETRY-REQ-0001 item 1 ("exactly
+  the two solutions, each reduced": the projective scheme has degree 7, with a structural
+  point at infinity) and replaces item 10 of GEOMETRY-MSG-0002 (numerical for two states) by
+  a theorem.

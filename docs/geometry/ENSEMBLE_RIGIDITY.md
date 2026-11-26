@@ -59,13 +59,21 @@ every conformation obeys the same local constraints (bond lengths, bond angles)?
    the first is an equivalence, because there every Hilbert-space chain is an ensemble
    average of chains in `ℝ³` (Theorem D); from 7 atoms on the set of realizable averaged data
    is strictly smaller than its semidefinite relaxation [P, exact witness].
-8. **How little data suffices** (§5.3–5.4): within the family of `K`-state ensembles, complete
+8. **How little data suffices** (§5.3–5.5): within the family of `K`-state ensembles, complete
    averaged data are generically locally identifying exactly from the parameter count
    `n ≥ 2K + 3` on, and averaged distances of sequence separation at most `K + 3` are
    locally identifying, while separation `K + 2` never is [P, exact for `K ≤ 8`]; among all
-   ensembles a separation of `3K + 1` suffices [P]; numerically, identifiability among all
-   ensembles starts at `n = ⌊9K/2⌋ + 1`, far below the threshold of the linear certificate
-   [N for `K = 2, 3`; C in general].
+   ensembles a separation of `3K + 1` suffices [P].
+9. **Two states, completely** (§5.5, Theorem I).  A generic two-state ensemble is identifiable
+   among all ensembles from `n = 10` atoms on [P, exact: a Gröbner-basis computation shows
+   that the only chains that are linear images of the stacked configuration are the two
+   states]; at `n = 7, 8` it is **not** — explicit ensembles of 9 to 11 *other* chains have
+   the same averaged data to `10⁻¹⁴` [N] — although it is locally identifiable among
+   two-state ensembles there; `n = 9` is identifiable in every instance computed [N]; the
+   linear certificate needs `n ≥ 12`.  So "identifiable", "identifiable if the number of
+   states is known" and "certifiable by linear algebra" are three different thresholds
+   (10, 7, 12).  For `K = 3` the first is numerically 14; in general `⌊9K/2⌋ + 1` is a
+   conjecture.
 
 Machine-checked core: `proofs/Geometry/EnsembleRigidity.lean` (§10).  Scripts:
 `experiments/geometry/` (§11).
@@ -345,22 +353,17 @@ Evidence for (d): the exact computation of (b); numerically the same threshold a
 
 | | 1 state | 2 states | 3 states | `K` states |
 |---|---|---|---|---|
-| parameter count allows local identifiability within `K`-state ensembles (complete data) | `n ≥ 4` | `n ≥ 7` | `n ≥ 9` | `n ≥ 2K + 3` (`K ≥ 2`) |
-| identifiable among all ensembles, observed **[N]** / conjectured **[C]** | `n ≥ 5` | `n ≥ 10` | `n ≥ 14` | `n ≥ ⌊9K/2⌋ + 1` |
+| parameter count allows local identifiability within `K`-state ensembles (complete data; Theorem H) | `n ≥ 4` | `n ≥ 7` | `n ≥ 9` | `n ≥ 2K + 3` (`K ≥ 2`) |
+| identifiable among all ensembles | `n ≥ 5` **[P]** | `n ≥ 10` **[P, exact]** (Theorem I); `n = 9` **[N]**; fails for `n ≤ 8` **[N]** | `n ≥ 14` **[N]** | `n ≥ ⌊9K/2⌋ + 1` **[C]** |
 | conic condition (CC): linear certificate, polynomial-time demixing **[P, exact]** | `n ≥ 5` | `n ≥ 12` | `n ≥ 23` | `n ≥ ⌈(9K²+K+8)/4⌉` |
 
-The middle row is where `𝒫(z)`, cut out of an affine space of dimension `dim 𝒩(z)` by the
-rank condition (codimension 6 for `K = 2`), is expected to contain nothing but the forced
-points: counting the unknowns of `A` modulo `O(3)` against the equations,
-`9K − 3 < 2n − 3`.  Observed (`experiments/geometry/explore_spurious.py`, multi-start
-Levenberg–Marquardt over `A`): for `K = 2`, `n = 9` there are 4–6 further real chains that are
-linear images of `z`, none of which can carry mass in a representation of `I` (linear program,
-`explore_misc.py lp`); for `n ≥ 10` only the two states are found; for `K = 3` a
-one-parameter family at `n = 13` and only the three states for `n ≥ 14`.  We have no proof;
-an exact elimination for `K = 2`, `n = 10` would give one (`PROOF_OBLIGATIONS.md`, O-2).
-Between the second and the third row identifiability (conjecturally) holds but our only
-certificate is non-linear — a gap between what the data determine and what the linear
-algorithm of §6 extracts.
+The middle row is where the set `𝒫(z)` of chains that are linear images of the stacked
+configuration is expected to contain nothing but the `K` states: counting the unknowns of
+`A` modulo `O(3)` against the equations, `9K − 3 < 2n − 3`.  This count is a heuristic — the
+affine space `I + 𝒩(z)` is not generic, and the complex solution set is larger than the real
+one (§5.5) — but it gives the right numbers where we can check them.  Between the second
+and the third row identifiability holds but the certificate is not linear: a gap between
+what the data determine and what the algorithm of §6 extracts.
 
 ### 5.3 Local identifiability within `K`-state ensembles
 
@@ -415,6 +418,70 @@ applies.  ∎
 
 Between `K + 3` (local, within `K`-state ensembles) and `3K + 1` (global, among all
 ensembles) we know nothing; see `PROOF_OBLIGATIONS.md`, O-4.
+
+### 5.5 Two states: the complete picture
+
+For `K = 2` it is convenient to use the unweighted stack `z̃ = (X_1 | X_2) ∈ (ℝ⁶)^n` (weights
+rescale the blocks): a chain that is a linear image of the stacked configuration corresponds
+to a symmetric `6 × 6` matrix `P` of rank at most 3 with `ẽᵀPẽ = ℓ_e²` on the `2n − 3`
+constrained edge vectors, and the two states are the block projectors `E_1, E_2`.  Let
+`L = {P : ẽᵀPẽ = c·ℓ_e² for some scalar c}`, a linear space of dimension `25 − 2n`
+generically, and `V = {[P] ∈ ℙ(L) : rank P ≤ 3}`, a projective scheme cut out by the
+`4 × 4` minors.
+
+**Theorem I (two states, identifiability among all ensembles) [P, exact].**  Unit bonds,
+bond-angle cosine `−5/13` (and bond geometries outside a proper algebraic subset).  For
+generic pairs of chains with `n ≥ 10` atoms and all weights, `𝒫(z) = {E_1/w_1, E_2/w_2}` —
+even among complex symmetric matrices — and therefore the two-state ensemble is identifiable
+from averaged squared distances among all ensembles.
+
+*Proof.*  It suffices to treat `n = 10`: for a longer chain the conditions of its first ten
+atoms are among its conditions.  For `n = 10`, `ℙ(L) ≅ ℙ⁴`.
+*A structural point at infinity.*  Let `u_1, …, u_9 ∈ ℝ⁶` be the stacked bond vectors,
+`a ⊥ u_1, …, u_5` and `b ⊥ u_5, …, u_9`.  Every constrained edge vector lies in `a^⊥ ∪ b^⊥`
+(the 1–3 vectors `u_i + u_{i+1}` with `i ≤ 4` in the first hyperplane, those with `i ≥ 5` in
+the second), so `S = abᵀ + baᵀ ∈ L` with `c = 0`, and `rank S = 2`.  At a matrix of rank at
+most 2 every `4 × 4` minor vanishes to second order (the adjugate of a `4 × 4` matrix of
+rank at most 2 is zero), so the ideal of `V` lies in the square of the maximal ideal of
+`[S]` in `ℙ⁴`: the local length of `V` at `[S]` is at least `1 + 4 = 5`.  Hence, whenever
+`V` is finite, `length V ≥ 1 + 1 + 5 = 7`, with equality iff `V = {[E_1], [E_2], [S]}`,
+`E_1, E_2` reduced.
+*The witness.*  `experiments/geometry/exact_nonlinear_threshold.py 10 0 0`: for one pair of
+chains with rational torsion half-angle tangents, a Gröbner basis over `ℚ` (Singular) gives
+`dim V = 0` and `deg V = 7` (the same over `𝔽_32003` for four pairs).
+*Genericity.*  Over the Zariski-open set of parameters where `dim L = 5` and `a, b` are
+defined, the schemes `V` form a closed subscheme of a `ℙ⁴`-bundle, proper over the base.
+Fibre dimension is upper semicontinuous, so the fibres are finite near the witness; there
+the projection is finite and the fibre length is upper semicontinuous, so it is at most 7
+near the witness, and at least 7 by the structural point.  Hence on a non-empty Zariski-open
+set `V = {[E_1], [E_2], [S]}`, and the only points with `c ≠ 0` are the block projectors.
+Theorem B′ (⇐) concludes.  ∎
+
+For `n = 11, 12` two hyperplanes cannot contain the ten or eleven stacked bond vectors, and
+the same script finds `deg V = 2`: the two block projectors, reduced, and nothing else.
+
+**What happens below [N].**
+* `n = 9`: `V` is finite in the affine chart; 4 to 6 further real, positive semidefinite
+  points exist (further chains that are linear images of `z`), but in all six instances
+  computed no mixture representing the identity puts mass on them (linear program,
+  `explore_below.py 9`): the ensemble is still identifiable.
+* `n = 7, 8`: `𝒫(z)` is a surface (dimension `18 − 2n`), its convex hull has the identity in
+  its interior, and **the ensemble is not identifiable**: in all six instances computed a
+  mixture of 9 (`n = 8`) or 11 (`n = 7`) chains, none of them one of the two states,
+  reproduces every averaged squared distance to `10⁻¹⁴` with bond lengths correct to
+  `10⁻¹⁵` (`explore_below.py 7 8`).  By Theorem H the same ensemble is locally the only
+  *two-state* ensemble with its data: here the number of states is exactly the prior that
+  restores identifiability.
+
+So for two states the three notions separate: identifiable when the number of states is
+known (`n ≥ 7`), identifiable outright (`n ≥ 10`, and 9 in the instances computed),
+certifiable by the linear system of §6 (`n ≥ 12`).
+
+For `K ≥ 3` the scheme at infinity is positive-dimensional at the conjectured threshold
+(two hyperplanes spanned by `3K − 1` consecutive stacked bonds cover up to `6K − 3` bonds,
+more than the `⌊9K/2⌋` present), and we have only numerical evidence: for `K = 3` a
+one-parameter family of further chains at `n = 13` and none at `n = 14, 15`
+(`explore_misc.py k3`).
 
 ---
 
@@ -658,7 +725,7 @@ novelty).*  Theorem B and B′ (identifiability of a mixture among all ensembles
 squared distances via the trivial-quadric condition); the thresholds of Theorem C; the
 algorithm DEMIX; Theorem G (global `W₂` stability with the explicit certificate); Theorem F for
 `K ≥ 2`; ensemble rigidity as a notion between global and universal rigidity, Theorem E;
-Theorem D for chains with bond angles and the exact rank-4 witness; Theorem H (range `K + 3`).
+Theorem D for chains with bond angles and the exact rank-4 witness; Theorem H (range `K + 3`); Theorem I and the separation of the three thresholds for two states.
 
 **Corollary 9.1 (a consequence for reconstruction with unknown orientations) [P, given K].**
 Observe `y = g·X_κ + σξ`: a conformation drawn from `μ`, rotated by a Haar-random `g ∈ O(3)`
@@ -706,6 +773,8 @@ python3 experiments/geometry/run_checks.py           # all tests below (about on
 python3 experiments/geometry/exact_conic_rank.py 12  # Theorem C(b)
 python3 experiments/geometry/exact_jacobian_rank.py 8# Theorem H
 python3 experiments/geometry/exact_4d_extreme.py     # Theorem D(b)
+python3 experiments/geometry/exact_nonlinear_threshold.py 10 0 0   # Theorem I (needs Singular; 80 s over Q)
+python3 experiments/geometry/explore_below.py 7 8 9  # two states below the threshold [N]
 python3 experiments/geometry/demix.py                # algorithm DEMIX on synthetic ensembles
 python3 experiments/geometry/hierarchy_example.py    # Theorem E(d), numerical instance
 python3 experiments/geometry/mutation_checks.py      # the tests detect planted errors
@@ -722,8 +791,11 @@ python3 experiments/geometry/mutation_checks.py      # the tests detect planted 
 * Generic statements exclude a proper analytic subset of conformations that we do not
   describe.  Planar and other symmetric conformations can violate (CC) at any length.
 * The sharp threshold of Theorem C(b) is proved for twelve values of `K` at two bond
-  geometries by exact computation; for all `K` it is a conjecture.  The threshold for
-  identifiability among all ensembles below the conic threshold is numerical.
+  geometries by exact computation; for all `K` it is a conjecture.  Identifiability among all
+  ensembles below the conic threshold is proved for two states only (Theorem I, one bond
+  geometry and generic ones); for three states it is numerical, beyond that a conjecture.
+  The non-identifiability at `n = 7, 8` and the identifiability at `n = 9` are numerical
+  (six instances each).
 * Theorem H is local and within the `K`-state family; it says nothing about ensembles with a
   different number of states or far away.
 * No noise model, no statistics, no algorithmic guarantee for DEMIX under perturbation.

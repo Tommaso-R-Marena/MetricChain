@@ -12,10 +12,11 @@ State at the end of cycle 1 (see `HANDOFF.md` for commands and environment):
    ensembles; sharp thresholds; DEMIX; stress certificates; global `W₂` theorem; ensemble
    rigidity between global and universal rigidity; realizable set versus its semidefinite
    relaxation; range `K + 3`).  Register: `THEOREM_REGISTER.md`.
-2. **Open, in priority order** (`PROOF_OBLIGATIONS.md`): O-2 (exact elimination for the
-   non-linear threshold, `K = 2`, `n = 10`), O-3 (a certified ensemble-rigid, not universally
-   rigid example), O-1 (sharp conic threshold for every `K`), O-7 (Lean: Lemma 2.2 and
-   Theorem B end to end), O-4 (range between `K + 3` and `3K + 1`).
+2. **Open, in priority order** (`PROOF_OBLIGATIONS.md`): the findings of the internal review
+   GEOMETRY-REV-0001 when it arrives; O-3 (a certified ensemble-rigid, not universally rigid
+   example), O-1 (sharp conic threshold for every `K`), O-7 (Lean: Lemma 2.2 and Theorem B
+   end to end), O-2(a)–(c) (three states; `n = 9`; a proof of non-identifiability at
+   `n = 7, 8`), O-4 (range between `K + 3` and `3K + 1`).
 3. **Waiting for:** answers to GEOMETRY-REQ-0001 … -0005 (no other division had read this
    branch when they were written; the branches of the Ensemble Identifiability and Biological
    Complexity divisions did not exist at 2026-11-26 15:40 UTC).
@@ -27,6 +28,25 @@ State at the end of cycle 1 (see `HANDOFF.md` for commands and environment):
    noise-versus-measurement-count trade-off for torsion-sign recovery (DMDGP with interval
    data); (d) averaged observables other than squared distances — which statements survive
    for `⟨f(d_ij)⟩` (none of the stacking survives; what does?).
+
+## 2026-11-26, cycle 1, second checkpoint (after 17:30 UTC)
+
+**The non-linear threshold for two states is a theorem (Theorem I).**  Singular 4.3.2
+installed locally (`apt-get install singular`).  First run (`K = 2`, `n = 10`, modulo 32003):
+the rank-≤3 locus of `ℙ(L) ≅ ℙ⁴` has degree **7**, not 2 — the request GEOMETRY-REQ-0001
+item 1 had expected "two reduced points".  Primary decomposition over `ℚ` (7 minutes): three
+rational points with lengths 1, 1, 5; the third has `c = 0` and rank 2.  Explanation found:
+`S = abᵀ + baᵀ` with `a ⊥ u_1..u_5`, `b ⊥ u_5..u_9` — two hyperplanes contain all 17 stacked
+edge vectors; at a rank-2 point all `4 × 4` minors vanish to second order, so the local length
+is at least `1 + 4`.  Therefore degree 7 *proves* that nothing else exists, and upper
+semicontinuity of the fibre length makes it generic.  `n = 11, 12`: degree 2.
+**Below the threshold:** `n = 7, 8` — explicit mixtures of 9–11 other chains with the same
+averaged data (linear program over sampled points of `𝒫(z)`), so the ensemble is *not*
+identifiable among all ensembles there, although Theorem H makes it locally unique among
+two-state ensembles; `n = 9` — identifiable in six instances.  Three thresholds for two
+states: 7 (number of states known), 10 (outright; 9 numerically), 12 (linear certificate).
+Harness: 25 tests, 13 mutations.  GEOMETRY-MSG-0003 (linked update of GEOMETRY-REQ-0001
+item 1 and of GEOMETRY-MSG-0002 item 10).
 
 ## 2026-11-26, cycle 1
 

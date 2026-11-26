@@ -66,3 +66,22 @@ identifiability among all ensembles is where a generic affine space of dimension
 The count gives the right numbers (`n = 10` for `K = 2`, `14` for `K = 3`) but the space
 `I + 𝒩(z)` is not generic — it contains the `K` forced points — so the count is a heuristic,
 confirmed numerically for `K = 2, 3` and not a proof.  Stated as a conjecture (G1.21).
+
+**DG-9 (wrong expectation, published in GEOMETRY-REQ-0001 item 1 and corrected in
+GEOMETRY-MSG-0003).  "For two states and ten atoms the chains that are linear images of the
+stacked configuration form a projective scheme of two reduced points."**  The exact
+computation (Singular, over `ℚ` and over `𝔽_32003`) gives degree 7.  The five extra units are
+one point at infinity of length 5: the rank-2 quadric `abᵀ + baᵀ`, a pair of hyperplanes that
+contains all seventeen stacked edge vectors (five consecutive bonds span each).  It is not a
+chain (`c = 0`), and the statement that matters — no solution with `c ≠ 0` other than the two
+states — is true and is now Theorem I; but the request as worded ("exactly the two solutions,
+each reduced") described the affine chart only and would have been reported false by anyone
+computing in projective space.  Lesson: the heuristic count of DG-8 ignores structural
+low-rank quadrics, which exist whenever the stacked bonds can be covered by two hyperplanes
+(`n ≤ 6K − 2`).
+
+**DG-10 (narrowed).  "Identifiability among all ensembles starts where local identifiability
+within `K` states starts."**  False for two states: at `n = 7, 8` the ensemble is locally the
+only two-state ensemble with its data (Theorem H) and is nevertheless reproduced exactly by
+mixtures of 9 to 11 other chains (`explore_below.py`).  The number of states is a prior with
+real content in that range.

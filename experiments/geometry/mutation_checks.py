@@ -21,6 +21,8 @@ MUTATIONS = [
     ("lemma_R_minus_one", "lemma_R_reachability"),
     ("certificate_wrong_projector", "dual_certificate"),
     ("six_atoms_is_seven", "six_atoms_have_a_quadric_in_4d"),
+    ("threshold_I_at_eleven", "nonlinear_threshold_exact"),
+    ("below_claims_identifiable", "two_states_below_threshold"),
 ]
 
 

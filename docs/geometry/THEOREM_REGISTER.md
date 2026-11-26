@@ -29,7 +29,9 @@ see `PRIOR_ART.md`; "not found" is an absence in summary-level searches.
 | G1.18 | universal ⇒ ensemble ⇒ global rigidity; equivalence when `𝒦 = 𝒮`; strictness of the second | Theorem E | P; two steps V `ensembleRigid_of_universal`, `globallyRigid_of_ensembleRigid`; instance N | `hierarchy_example.py` | REV-0001 | not found |
 | G1.19 | complete data: local identifiability within `K` states iff `n ≥ 2K + 3`, `2 ≤ K ≤ 8` | Theorem H(a) | P-exact | `exact_jacobian_rank.py 8` | REV-0001 | not found |
 | G1.20 | separation `K + 3` locally identifies `K` states (`n ≥ (K²+3K+4)/2`), `K + 2` never; `K ≤ 8` | Theorem H(b) | P-exact | `exact_jacobian_rank.py 8`, `band_K_plus_2_never` | REV-0001 | not found |
-| G1.21 | identifiable among all ensembles from `n = ⌊9K/2⌋ + 1` | §5.2 | N (`K = 2, 3`), C | `explore_spurious.py`, `explore_misc.py` | — | — |
+| G1.21 | identifiable among all ensembles from `n = ⌊9K/2⌋ + 1` for `K ≥ 3` | §5.2, §5.5 | N (`K = 3`: `n = 14, 15`), C | `explore_misc.py k3` | — | — |
+| G1.25 | two states: generic ensembles with `n ≥ 10` atoms are identifiable among all ensembles (only the two states are linear images of the stack, also over ℂ) | Theorem I | P-exact | `exact_nonlinear_threshold.py 10 0 0` (Gröbner basis over ℚ, Singular: degree `7 = 1 + 1 + 5`), four witnesses mod 32003; test `nonlinear_threshold_exact` | — (after REV-0001 was commissioned) | not found |
+| G1.26 | two states: not identifiable among all ensembles at `n = 7, 8` (mixtures of 9–11 other chains with the same data); identifiable at `n = 9` in the instances computed | §5.5 | N (six instances each) | `explore_below.py 7 8 9`; test `two_states_below_threshold` | — | not found |
 | G1.22 | second moment of randomly rotated labelled data determines exactly `M(μ)`; bond constraints lower the moment order | Cor. 9.1 | P given K (sample-complexity theorem not re-derived) | `second_moment_of_rotated_data` | REV-0001 | instance of a known principle |
 | G1.23 | membership in the realizable set is NP-hard for general pair sets (star constraints) | §8.1 | K | — | — | known (E.-Nagy–Laurent–Varvitsiotis) |
 | G1.24 | `F`-ensemble-rigid conformations that are not universally rigid exist for `n ≥ 7` | §8.2, O-3 | open | search in `explore_er2.py` | — | — |
@@ -37,6 +39,7 @@ see `PRIOR_ART.md`; "not found" is an absence in summary-level searches.
 ## Counts
 
 Lean: 1 file, 11 declarations cited above (plus 6 definitions), zero warnings.
-Harness: 23 tests (`run_checks.py`), 11 mutations (`mutation_checks.py`), all caught.
+Harness: 25 tests (`run_checks.py`), 13 mutations (`mutation_checks.py`), all caught.
 Exact computations: `exact_conic_rank.py` (96 witnesses for `K ≤ 12`), `exact_jacobian_rank.py`
-(30 witnesses for `K ≤ 8`), `exact_4d_extreme.py` (1 witness).
+(30 witnesses for `K ≤ 8`), `exact_4d_extreme.py` (1 witness), `exact_nonlinear_threshold.py`
+(1 witness over ℚ, 4 modulo a prime; needs Singular).

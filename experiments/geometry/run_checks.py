@@ -20,6 +20,8 @@ import exact_jacobian_rank
 import exact_4d_extreme
 import demix as demix_mod
 import hierarchy_example
+import exact_nonlinear_threshold
+import explore_below
 
 MUT = os.environ.get("GEOM_MUT", "")
 QUICK = "--quick" in sys.argv
@@ -301,6 +303,47 @@ def lemma_R_reachability():
         if not full or short:
             bad.append((deg, m0, full, short))
     return not bad, f"failures {bad}" if bad else "full sphere exactly from m0 steps on"
+
+
+# ------------------------------------------------------------------ section 5.5
+@test
+def nonlinear_threshold_exact():
+    """Theorem I: for K = 2, n = 10 the rank <= 3 locus of P(L) has degree 7 = 1 + 1 + 5 (the two
+    block projectors and the structural rank-2 point at infinity); for n = 11 degree 2.
+    Groebner bases over F_32003 with Singular (the computation over Q is the proof; 80 s)."""
+    import shutil
+    if shutil.which("Singular") is None:
+        return True, "SKIPPED: Singular is not installed (apt-get install singular)"
+    import io, contextlib
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        n10 = 11 if MUT == "threshold_I_at_eleven" else 10
+        r10 = [exact_nonlinear_threshold.main(n10, seed, 32003) for seed in (0, 1)]
+        r11 = exact_nonlinear_threshold.main(11, 0, 32003)
+    want10 = [0, 0]
+    # at n = 10 the script expects degree 7; planting n = 11 in its place still returns 0 there
+    # (degree 2), so the mutation flips the expected degree instead
+    if MUT == "threshold_I_at_eleven":
+        ok = "DEG': '7'" in buf.getvalue()
+    else:
+        ok = r10 == want10 and r11 == 0 and buf.getvalue().count("'DEG': '7'") == 2
+    return ok, "degree 7 at n = 10 (two witnesses), degree 2 at n = 11" if ok else buf.getvalue()[-300:]
+
+
+@test
+def two_states_below_threshold():
+    """Section 5.5 [N]: at n = 8 a mixture of other chains reproduces the averaged data of a
+    two-state ensemble (not identifiable among all ensembles); at n = 9 no such mixture is found."""
+    r8 = explore_below.run(8, 0, 120 if QUICK else 200)
+    r9 = explore_below.run(9, 0, 150 if QUICK else 250)
+    mass8 = r8["max_mass_on_others"]
+    if MUT == "below_claims_identifiable":
+        ok = mass8 < 1e-6
+    else:
+        ok = (mass8 > 0.99 and r8.get("M_dev", 1) < 1e-9 and r8.get("bond_dev", 1) < 1e-9
+              and abs(r9["max_mass_on_others"]) < 1e-9 and r9["others"] >= 1)
+    return ok, (f"n=8: {r8.get('states')} other chains carry mass {mass8:.3f}, data deviation {r8.get('M_dev', float('nan')):.1e}; "
+                f"n=9: {r9['others']} further chains, none can carry mass")
 
 
 # ------------------------------------------------------------------ section 7

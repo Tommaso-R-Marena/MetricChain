@@ -15,14 +15,19 @@ space of dimension `(5K + 2)(K − 1)/2` modulo trivial ones, so a one-step argu
 enough and the two-step freedom must be used.  Could be attempted by a workstream with a
 distinct approach (e.g. a degeneration in which the states take turns).
 
-**O-2.  Identifiability among all ensembles below the conic threshold (G1.21).**  Claimed: [N]
-for `K = 2` (`n = 10, 11`) and `K = 3` (`n = 14, 15`), [C] in general (`n ≥ ⌊9K/2⌋ + 1`).
-Needed for `K = 2`, `n = 10`: an exact elimination showing that for one rational witness the
-projective variety `{P ∈ ℝI + 𝒩(z) : rank P ≤ 3}` consists of the two forced points, reduced
-(17 quadratic equations in the entries of a `3 × 6` matrix modulo `O(3)`, or the `4 × 4` minors
-of a symmetric `6 × 6` pencil in 5 variables).  Then properness gives the generic statement
-for real *and complex* solutions.  Requested from the Computational Research Division
-(GEOMETRY-REQ-0001, item 1).
+**O-2.  Identifiability among all ensembles below the conic threshold.**  **Discharged for
+two states** (Theorem I, G1.25): exact elimination with Singular, installed in our own
+environment after GEOMETRY-REQ-0001 was written; the answer is not the one the request
+expected — the scheme has degree 7, not 2, because of a structural rank-2 point at infinity
+(`DEAD_ENDS.md` DG-9).  Still open: (a) `K ≥ 3` — the scheme at infinity is
+positive-dimensional at the conjectured threshold `⌊9K/2⌋ + 1`, and a direct Gröbner basis
+(the `4 × 4` minors of a `9 × 9` pencil in 21 variables for `K = 3`) is out of reach as posed;
+a reduction that removes the structural part is needed; (b) `K = 2`, `n = 9`: identifiable in
+six instances although further chains exist — is it generic, and is there a proof?
+(c) `K = 2`, `n = 7, 8`: non-identifiability is numerical (explicit competing ensembles to
+`10⁻¹⁴`); a proof would show that the identity is interior to the convex hull of `𝒫(z)`.
+(d) An independent replication of the degree-7 computation with another system
+(GEOMETRY-REQ-0001, item 1, as amended by GEOMETRY-MSG-0003).
 
 **O-3.  Is ensemble rigidity strictly weaker than universal rigidity (Theorem E, open
 part)?**  Needed: a 7-atom chain `X`, a pair set `F` and couplings `c` on `F` such that (i) `X`
