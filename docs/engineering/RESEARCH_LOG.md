@@ -445,7 +445,7 @@ us) was read in full, and the lines of the three digests that mention engineerin
 
 ## Resume here
 
-**State at 2026-11-26 about 17:45 UTC (session 4 in progress).**  Read
+**State at 2026-11-26 about 21:45 UTC (session 4 in progress; the machine restarted at about 18:03 UTC — local runs and four subagents were cut off and have been resumed; the detached Modal jobs were not affected).**  Read
 `docs/engineering/DIRECTIVES.md` first: the research owner asked for a *continuous*
 research loop; a finished checkpoint is not a reason to stop.
 
@@ -464,10 +464,10 @@ research loop; a finished checkpoint is not a reason to stop.
        modal app list --json      # keys state, description, tasks; ours are named metricchain-eng-*
        modal container list --json
 
-   M-016's largest sizes (`n ≥ 32 000`) can run until 2026-11-27 04:20 UTC.  **Not yet
-   launched (ledger says so):** the 3-hour tier of M-020 (`--job instances2 --tiers l`, after
-   M-018 and M-022 have ended) and M-021 (`--job certified2`), each only while the total of
-   running containers stays below 50.  After the last
+   M-016's largest sizes (`n ≥ 32 000`) can run until about 2026-11-27 07:30 UTC (three of
+   its long tasks were restarted by the platform: ledger, policy rule 6).  The second tier
+   of M-020 (`n = 16 000`) and M-021 were launched at 21:35 UTC; M-021's longest tasks can
+   run until 2026-11-27 09:35 UTC.  After the last
    collection: enter the measured costs in the ledger (`modal billing report`), set the
    jobs to "done", update the allocation table, and check `modal billing summary` shows
    **Billed Cost $0.00**.
@@ -486,7 +486,9 @@ research loop; a finished checkpoint is not a reason to stop.
    they do not commit; their reports come back as text and are filed as `REPORT.md` next
    to their code).  **Done and filed:** X-012 the leaf-certificate checker
    (`experiments/eng/leafcert/REPORT.md`); X-013 weighted cubes (R10-E1;
-   `experiments/eng/weighted_cube/REPORT.md`).  **In flight at 2026-11-26 17:45 UTC:**
+   `experiments/eng/weighted_cube/REPORT.md`).  **In flight (cut off by the restart at 18:03 UTC,
+resumed at 21:37 UTC with their transcripts intact — after another interruption resume
+them the same way, by a message to their ids, or review their files as they stand):**
    (a) GEOMETRY-REQ-0001 items 1 and 3 (`experiments/eng/geometry_req1/`,
    `tests/eng/test_geometry_req1.py`); (b) a numerical check of the theory division's
    Theorem R on products of two site types (`experiments/eng/level_rate/`,
