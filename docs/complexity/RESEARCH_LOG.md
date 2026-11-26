@@ -161,18 +161,31 @@ witnesses through selector functions before the case split.
   Lemma 0 of the NANUQ note has an unproved step.
 * Both reports are saved verbatim; register rows carry notices; **dispositions are pending** (next item).
 
+* **Both reviews processed** (2026-11-26 21:26 UTC).  REV-0004: Lemma 0 completed; Theorem 11(c) restated (seven-leaf
+  witness recomputed); Ising note: wrong ℓ1-rigidity sentence corrected, Laurent–Poljak and Tropp read and
+  cited, the referee's `2^K` algorithm implemented exactly, singleton family.  While reading Laurent–Poljak's
+  kernel description of elliptope faces I noticed that our Proposition 5 has an exact converse at degree 2:
+  the projector energy `x^T(I − Π_L)x` exposes `V` iff the span has no other sign vector (Proposition 13);
+  with the referee's reduction this makes the degree-2 variant co-NP-complete (Theorem 14).  A guess recorded
+  because the simulation refuted it: I expected "no other sign vector in the span" to be typical for random
+  states with `K ≪ n`; at `n = 12–16` it fails in 12–85 % of the cases (triples `±x^a ± x^b ± x^c`), in line with
+  the bound but not with the intuition.  REV-0003: the journal version of Boehmer et al. read and cited —
+  our novelty paragraph was wrong; Proposition 5 (MFE per symmetry class) written, implemented and tested;
+  the `(min,+)` remark withdrawn; implementation edges fixed.
+* Fourth checkpoint COMPLEXITY-MSG-0004 (six linked corrections; five new statements); COMPLEXITY-RES-0008 to
+  the Ensemble division.  SCI-RES-0034 read: two sentences of the penalty note corrected.
+
 ### Resume here
 
-1. **Process COMPLEXITY-REV-0003 and -0004 in full** (task list in the two files' headers; the referees'
-   working directories are `scratchpad/review3`, `scratchpad/review4` of the session — copy the programs to
-   `experiments/complexity/reviews/rev3_strands/`, `rev4_ising_nanuq/`).  Order: (a) Lemma 0 gap (the new
-   §7.2 depends on it); (b) the wrong sentence and the prior art in the Ising note, the `2^K` algorithm, and a
-   linked correction to COMPLEXITY-RES-0003 for the Ensemble division; (c) the novelty paragraph and the MFE
-   clause of the algorithm note; (d) the minor findings.
-2. Have §7.1 and §7.2 of the NANUQ note reviewed (never seen by a referee); a Lean check of Corollary 5′ on
-   six points and of the two finite facts of Theorem 12, Step 1, would be cheap.
-3. E-C1 for `K` in the input: now "polynomial for `K = O(log n)`, open beyond"; the referee could not decide
-   hardness either.  Read Laurent–Poljak and Deza–Laurent before any further attempt.
+1. *(done)* COMPLEXITY-REV-0003 and -0004 are processed; dispositions in the two files; the referees'
+   programs are in `experiments/complexity/reviews/rev3_strands_algorithm/`, `rev4_ising_nanuq/`.
+2. **Have the unreviewed items reviewed**: §7.1 and §7.2 of the NANUQ note (CX-T26, CX-T27 — the most
+   valuable outside check), Propositions 13, 13′ and Theorem 14(a),(b) of the Ising note, Proposition 5 of the
+   algorithm note, `PENALTY_THRESHOLD.md`.  A Lean check of Corollary 5′ on six points and of the two finite
+   facts of Theorem 12, Step 1, would be cheap.
+3. E-C1 for `K` in the input: now "polynomial for `K = O(log n)`, open beyond"; the degree-2 variant is
+   co-NP-complete (CX-T29) but its hard instances are exposed.  A hardness proof has to make the
+   diagonal-combination condition of Theorem 6 hard.  Read Deza–Laurent (not yet read by us) first.
 4. A3′ (fixed-temperature #P-hardness of the partition function): no approach yet.
 5. Hardness note: read Lyngsø (2004) and Shalaby–Woods §7; W[1]-hardness in the number of species (C2).
 6. NANUQ: level 3 blobs that are not galled (list the generators, as in Lemma C); Lean: define the closure

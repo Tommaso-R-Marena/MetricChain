@@ -1,6 +1,6 @@
 # Handoff (complexity division)
 
-*Updated 2026-11-26 20:38 UTC, session 1 (two further reviews received, dispositions pending; NANUQ level 2).*
+*Updated 2026-11-26 21:26 UTC, session 1 (fourth checkpoint; all four internal reviews processed).*
 
 ## State in a few lines
 
@@ -26,11 +26,14 @@
   cluster bracket and an explicit criterion for product references, the threshold as a max-flow, NP-hardness
   of "has the floor left its reference?" for general tables and polynomial cases.  **Unreviewed**; no new
   mathematics claimed.
-* **Two further internal reviews arrived at about 20:25 UTC** and are saved verbatim as COMPLEXITY-REV-0003
-  (algorithm note, hardness additions) and COMPLEXITY-REV-0004 (Ising note, NANUQ additions).  No theorem
-  broken, but: a wrong novelty paragraph (algorithm note), an unproved clause (MFE), a wrong reformulation
-  and missing prior art (Ising note), a proof gap (NANUQ Lemma 0).  **The notes are not yet corrected**; the
-  affected rows of `THEOREMS.md` carry notices.  First item of "Resume here".
+* **All four internal reviews are processed** (COMPLEXITY-REV-0001 to -0004, verbatim with dispositions in
+  `docs/collaboration/messages/complexity/`).  The last two corrected: the novelty paragraph of the algorithm
+  note (for the base-pair model the result is Boehmer et al., journal version 2025), an unproved MFE clause
+  (now Proposition 5, CX-T30), a wrong reformulation and missing prior art in the Ising note
+  (Laurent–Poljak), a proof gap in NANUQ Lemma 0.  `ASSUMPTION_AUDIT.md` §6 lists every overstatement found.
+* **Ising, new and unreviewed** (CX-T28, CX-T29): a pair energy with a degree-2 sum-of-squares certificate
+  and ground set exactly `V` exists iff the span of `V` has no other sign vector; deciding that is
+  co-NP-complete.  E-C1 itself is polynomial for `K = O(log n)` and open beyond.
 * **NANUQ, new and unreviewed** (CX-T26, CX-T27): the sharp class for "Kalmanson" alone as a forbidden
   six-leaf pattern (§7.1), and the complete classification of the outer-labeled planar networks of level at
   most 2 — one critical split per nested blob, with an explicit weight (§7.2).
@@ -96,6 +99,13 @@ lake env lean experiments/complexity/lean/NanuqFinite.lean   # 3.5 min, needs ab
 * Do not edit files inherited from the theory branch.
 * Do not attach or read third-party repositories without the research owner's authorisation (one such
   request was denied in session 1).
+* Do not call the partition function over all strand orderings new without the qualifier "in the
+  nearest-neighbour model": for the base-pair model it is Theorem 4 of Boehmer et al. (journal version 2025).
+  Do not offer a `(min,+)` recursion for the minimum free energy with symmetry: it is wrong (CX-T30).
+* Do not state "exposed iff the Hamming metric decomposes uniquely" (false beyond simplicial faces), and
+  attribute Corollary 7 / Proposition 5 of the Ising note to Laurent–Poljak.
+* Read the actual journal version of a paper before a novelty statement, not only the conference version
+  (this cost us one wrong paragraph: REV-0003, finding 1).
 * Do not write files with an unquoted shell here-document: backticks in the text are executed (it happened
   once, commit 21161f4, repaired in 2c0cf1a).
 * Read the clock (`date -u`) for message headers.

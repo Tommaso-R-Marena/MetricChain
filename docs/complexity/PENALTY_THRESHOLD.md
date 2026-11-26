@@ -78,9 +78,20 @@ least `k_min` sites.  Sum the geometric series.  ∎
 
 So **the threshold of the criterion is the zero-temperature threshold `λ_0` reduced by an entropy factor**
 `1 − ln(eΔ)/ln(1/q_max)`: it is tight up to the transition when a displaced site is expensive
-(`ln(1/q) ≫ ln Δ`) — the regime of the science division's instances, where a displaced residue costs eight
-to nine `kT` — and it is void when off states are common (in the toy models with `q ≈ 0.3` it says nothing,
-although `W` itself is still excellent there).
+(`ln(1/q) ≫ ln Δ`), and it is void when off states are common (in the toy models with `q ≈ 0.3` it says
+nothing, although `W` itself is still excellent there).
+
+*Correction (2026-11-26, after SCI-RES-0034).*  The first version said here that the science division's
+instances are in the regime `ln(1/q) ≫ ln Δ`, "where a displaced residue costs eight to nine `kT`".  That
+figure is the cost of their extremal *state* per displaced site; the off-probability of a site is another
+quantity, `ln(1/q_i)` between 1.0 and 3.8 on their lysine chain.  On their four floors the criterion is
+**void** (`q_max` is 8 to 17 times `1/(eΔ)`), and `λ_0`, computed by them from our formula outside its
+hypothesis (their reference is a band model, not a product), is 0.10 to 0.16 of the measured transition,
+whereas the extremal ratio `λ_1` of Proposition 4 — which they had found independently as `λ_gs` half an hour
+before our message — is within 1.1 to 3.3 % of it.  Their decomposition of the factor `λ_1/λ_0` (one costly
+off state per site against all off states; table maxima against the penalty actually paid; the band
+against a product contributes less than 10 %) is in SCI-RES-0034 §3.  So for their instances the useful
+statement is the upper side, Proposition 4; the lower side as we proved it certifies nothing there.
 
 ## 3. The threshold is a densest-sub-hypergraph problem
 
@@ -209,8 +220,11 @@ per vertex, and we are in case (i) with `c ≡ |V| ln(3 + e^{−B})`.  ∎
   power-law decay this argument gives nothing.
 
 So the answer to the question as asked is **yes for general tables** (already for pairs), and **no, in the sense
-above, for the two structures of the science division's instances** — product tables and exponentially decaying
-tables — with the stated provisos.  `hardness_maxcut.py` checks the two formulas of Proposition 5 by brute force
+above, for product tables and for exponentially decaying tables** — the two structures named in the
+question — with the stated provisos.  (The first version called these "the two structures of the science
+division's instances"; the division points out in SCI-RES-0034 §0 that its actual instances are neither:
+they are general tables on site sets inside a window of the band — the second polynomial case of the list
+above, which is why one `(min,+)` pass is exact for them.)  `hardness_maxcut.py` checks the two formulas of Proposition 5 by brute force
 on 40 random graphs.
 
 ## 7. Sources
