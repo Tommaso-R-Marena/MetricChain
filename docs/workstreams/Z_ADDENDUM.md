@@ -247,8 +247,9 @@ sequence of A3, `η ∈ (0, h)` and every `k ≥ 1` with `b_k − h < η(1 − L
 Hence, if `k(η)` is the first such `k`, `W_{k(η)+i} ≥ p_{i+1}` on `[0, h − η]` for all `i ≥ 0`.*
 *Proof.*  `H := Σ(·, W_{k−1}(·))` is convex and nondecreasing on `[0, b_k)` (a jointly convex function,
 nondecreasing in its second argument, of a convex function), `H(0) = 0`, and
-`H(h) ≤ Σ(h, p_{k−1}(h)) = p_k(h) ≤ L` ((P2)).  The function enveloped is `f = min(1, H)`: equal to `H` up to
-the point `β` where `H` reaches one, and to one beyond.  Its lower convex envelope is `H` on
+`H(h) ≤ Σ(h, p_{k−1}(h)) = p_k(h) ≤ L` ((P2)).  The function enveloped is `f = min(1, H)`.  If `H ≤ 1` on the
+whole of `[0, b_k]`, then `f = H` is convex and `W_k = H`: nothing to prove.  Otherwise `f` is equal to `H` up to
+the point `β < b_k` where `H` reaches one, and to one beyond.  Its lower convex envelope is `H` on
 `[0, B_t]` and, on `[B_t, b_k]`, the line through `(b_k, 1)` that supports `H` at `B_t`, where `B_t` is the
 last point whose tangent line has a value at most one at `b_k` (that function is convex,
 below `f`, and every convex minorant of `f` is below it: on `[B_t, b_k]` by the chord).  For
