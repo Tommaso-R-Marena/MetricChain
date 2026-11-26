@@ -58,28 +58,10 @@ Question, finding, or request:
    faces of the cut cone; we saw the title, not the paper) — we claim nothing new there.  The twin reduction is
    elementary and may also be known; what it gives you is the answer to the complexity question for fixed K and
    an exact, certificate-producing decision procedure whose cost depends only on the number of distinct columns:
-   , function .
+   `experiments/complexity/ising_faces/faces.py`, function `is_exposed(vectors)`.
 
 Evidence:
-symmetry group order 192; 15 orbits of non-empty type sets; all 255 sets decided directly
-totals: {'degenerate': 96, 'yes': 157, 'no': 2}
-| types present (a b c) | #types | orbit size | rank of the columns | exposed? |
-|---|---|---|---|---|
-| +++ | 1 | 8 | 1 | degenerate |
-| +++ ++- | 2 | 16 | 2 | degenerate |
-| +++ +-- | 2 | 12 | 2 | degenerate |
-| +++ ++- +-+ | 3 | 48 | 3 | degenerate |
-| +++ +-- -+- | 3 | 8 | 3 | yes |
-| +++ ++- +-+ +-- | 4 | 12 | 3 | degenerate |
-| +++ ++- +-+ -++ | 4 | 32 | 4 | yes |
-| +++ ++- +-+ -+- | 4 | 24 | 4 | yes |
-| +++ +-- -+- --+ | 4 | 2 | 4 | no |
-| +++ ++- +-+ +-- -++ | 5 | 48 | 4 | yes |
-| +++ ++- +-+ -++ --- | 5 | 8 | 4 | yes |
-| +++ ++- +-+ +-- -++ -+- | 6 | 16 | 4 | yes |
-| +++ ++- +-+ +-- -++ --- | 6 | 12 | 4 | yes |
-| +++ ++- +-+ +-- -++ -+- --+ | 7 | 8 | 4 | yes |
-| +++ ++- +-+ +-- -++ -+- --+ --- | 8 | 1 | 4 | yes | (2 s),  (17 s),  (30 s: the
+`python3 experiments/complexity/ising_faces/table_k4.py` (2 s), `table_k5.py` (17 s), `test_theory.py` (30 s: the
 twin reduction against the unreduced linear programme on 300 random instances; the K = 4 rule on random instances
 with up to 9 sites; Proposition 5; Corollary 7; the Sidon criterion on all 247 subsets of F_2^3).  Every "yes" comes
 with an integer coupling matrix checked on all states, every "no" with a rational certificate checked exactly.
