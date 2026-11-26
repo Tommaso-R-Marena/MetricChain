@@ -354,6 +354,27 @@ our review R12 found two sentences to replace and no theorem false (SCI-REV-0013
 The charter's rule stands: no manuscript or external representation without the
 owner's authorisation.
 
+*Note after addendum A17 (20), the audit's Part A and the two directives of 2026-11-26
+(SCI-RES-0024, SCI-RES-0025; no change of the ranking).*  What the certificate arc gained
+and what it still lacks, judged as a hostile referee would.  *Gained:* (i) its two general
+statements are machine-checked on the theory branch (`GibbsRecovery.lean`,
+`ResolvedPenalties.lean`; their audit passes on our machine); (ii) a yardstick — the box
+limit — that turns "a narrow bracket" into "within a factor 1.5 of what the information
+allows" in the one case where the band is wide enough (five residues, order 4, band 3; 18 to
+66 times at band 2; for the long chains the limit can only be estimated), and says plainly
+that the envelope, ten to hundreds of times the true remainder, is the limit; (iii) the method no longer
+depends on a short chain (Lys₂₀, `5.5·10¹⁷` states, `4·10⁻⁴` nats, predicted before the
+run); (iv) an honest account of fragility: a certificate has a safety factor against the
+size of its tables, 15 at order 4 and 1.3 at order 3 for the same peptide.  *Still
+lacking:* a referee for parts (13)–(18) (the research owner's decision) and the result of
+the referee now reading parts (19)–(20); a proved evaluation tolerance; an independent
+implementation of the tables; a prior-art search for Proposition A17.19 beyond our own
+reports and three queries — the theory division's THY-RES-0016 places its ingredients in
+the literature on extremal couplings, which a paper would have to cite; and, by the
+research owner's directive, the benchmarks that a paper on the method would need belong to
+a later phase.  **No submission, preprint or external contact without the owner's explicit
+authorisation — unchanged.**
+
 *Note after addendum A17 (19) (2026-11-26; SCI-MSG-0028).*  **The arc gained its
 cleanest single statement and its referee's list grew by one line.**  (1) *What was
 gained.*  For the charged dodecapeptide: a deterministic bracket of `8.3·10⁻⁵` nats

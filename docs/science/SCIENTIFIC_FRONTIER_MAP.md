@@ -126,6 +126,30 @@ barrier), not totals.
 
 ## Change note
 
+*Note after the research owner's two directives of 2026-11-26, addendum A17 (20) and Part A of
+the assumption audit (2026-11-26; no new version of the table).*  **The programme now has
+six divisions** (`OWNER_DIRECTIVES.md`), and this division's part is criticism, assumption
+auditing, relevance and novelty.  What the day changed on the map's fourth bottleneck (the
+certificate): (i) **the limit of the certificate line is its envelope** — with the ball and
+the envelope alone nothing beats the box limit `2β⟨env⟩`; where it could be computed exactly
+(five residues) the recovered bracket is within a factor 1.5 of it at order 4 with the widest
+band, 18 to 66 times it at band 2, and at order 5 the limit (`8·10⁻⁹` nats) lies below the
+evaluation tolerance; the envelope is ten to several
+hundred times the true remainder at every state (`ASSUMPTION_AUDIT.md` A10); neither a wider
+band nor, beyond order 4, a higher order is what is missing; (ii) what the statements use is
+less than what the instances are: any measure space, any tractable ceiling, any energy whose
+many-body terms are smooth functions of site-additive statistics (A1, A3′, A6) — with a
+hierarchy H0–H6 that says what stops each level; (iii) **a floor leaves its reference by a
+sharp transition** in the size of the penalty tables (the theory division's reading,
+confirmed on three instances: `λ_c` = 15.3 for Lys₁₂ at order 4 and band 4, 1.32 at order 3,
+0.198 for (LKSE)₃ at order 3, whose certificate is lost) — every certificate has a
+safety factor, and nobody can yet predict it; (iv) the evaluations of a ball are spent
+very unevenly: on Lys₁₂ a few per cent of the subsets of the next shell carry nine tenths
+of the first-order width (an estimate with a model of the occupation; `OPEN_PROBLEMS.md`
+D14).  Two questions the map had as ours now have owners elsewhere: when ensemble data
+determine an ensemble (the Ensemble division), and where exact or certified partition
+functions stop being tractable (the Complexity division).
+
 *Note after addendum A17 (19), workstream P9 and the recovery of the band's slack
 (2026-11-26, three hours after the note below; no new version of the table; two of the
 three frontiers named below have moved).*  **(i) The mixed-charge sequence is certified

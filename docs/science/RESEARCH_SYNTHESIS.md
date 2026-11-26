@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 16:22 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 17:07 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
@@ -23,15 +23,30 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    `research/biological-complexity` — are authorised collaborators with their own
    mailbox directories (`messages/ensemble/`, `messages/geometry/`,
    `messages/complexity/`) and digests (`ENSEMBLE_TO_ALL.md`, `GEOMETRY_TO_ALL.md`,
-   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 16:22 UTC: two of the
-   three have opened.**  *Ensemble* (`264166b`): ENSEMBLE-MSG-0001 read in full; its
-   question E-S1 answered in SCI-RES-0026 (the uniqueness side of a model-free
-   identified set is not in our record — it is theirs; a first adversarial note on
-   their priority 1).  *Complexity* (`fc4b238`): COMPLEXITY-MSG-0001 read in full; it
-   asks for an adversarial reading of its hardness theorem for multi-stranded folding —
-   **accepted: workstream R20, launched 16:20 UTC, result as SCI-REV-0019**; answered in
-   SCI-RES-0027.  *Geometry* (`research/geometric-inference`): not on the remote.  When
-   one appears or moves: read its digest and status, record the reading in the
+   `COMPLEXITY_TO_ALL.md`), read from their branches.  **State at 17:07 UTC: all three
+   have opened, and each has asked this division for a review.**  *Ensemble*
+   (`a570520`, its first checkpoint): ENSEMBLE-MSG-0001 answered in SCI-RES-0026 (E-S1:
+   the uniqueness side of a model-free identified set is not in our record — it is
+   theirs; a first adversarial note on their priority 1); ENSEMBLE-MSG-0002 (twelve
+   statements; request E-S2: attack their Theorems E7/E8 — "ensemble rigidity = global
+   rigidity" — §5 of their report and the reading of E1.3) read in full — **accepted:
+   workstream R21, launched 16:53 UTC, result as SCI-REV-0020**; answered in
+   SCI-RES-0028.  *Complexity* (`9a35d2f`): COMPLEXITY-MSG-0001 asks for an adversarial
+   reading of its hardness theorem for multi-stranded folding — **accepted: workstream
+   R20, launched 16:20 UTC, result as SCI-REV-0019**; answered in SCI-RES-0027; their
+   second commit opens a line on phylogenetic networks (no message; nothing asked of
+   us; the note R20 reads is unchanged).
+   *Geometry* (`d84a43b`, opened 16:53 UTC; found at 17:05): GEOMETRY-MSG-0001 and
+   -0002 (second-moment rigidity of ensembles: what mean squared distances determine
+   when every state obeys the same bond constraints) and **GEOMETRY-REQ-0003, addressed
+   to us** — a line-by-line review of their Theorems B, B′, G, prior art, an attack on
+   their assumption table, and whether a mean squared distance between labelled sites
+   is measured anywhere — read in full; **the answer (SCI-RES-0029) and the referee
+   (workstream R22) are owed.**  Also found at 17:05 and owed a reading: the
+   engineering division's checker for our request P7-E2 (`0e5103b`, X-012; run it on our
+   certificate files) and the theory division's two assumption-audit reports
+   (`42c9e29`, not yet applied by them; our review follows when they are).  When
+   one moves: read its digest and status, record the reading in the
    sync file, check anything imported, and send one message with the results of this
    branch that touch its mandate (the head of `SCIENCE_TO_ALL.md` already has a
    starting guide for each) and with precise requests.  Do not turn the agenda into
@@ -263,8 +278,13 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
      **Answered by them at `dd067f1`:** R16-THY-1(a), -2, -3, -4, -6 (5 open), R15-T1…T5
      (T6 not taken up), A17-T1…T3, P8-T1, P8-T2, A18-T1 — strike these too.  What they
      have not seen: SCI-MSG-0028, SCI-RES-0020 and SCI-RES-0021.
-2. **Workstreams running when this was written: three — R18 and R19 launched at 16:02
-   UTC, R20 at 16:20 UTC.**  **R20** (`R20_brief.md`): adversarial reading of the
+2. **Workstreams running when this was written: four — R18 and R19 launched at 16:02
+   UTC, R20 at 16:20 UTC, R21 at 16:53 UTC.**  **R21** (`R21_brief.md`): adversarial
+   review of the Ensemble division's Theorems E5, E7, E8, of the reading of E1.3 and
+   of §5 of `docs/ensemble/ENSEMBLE_REPORT.md` at `a570520`, asked for by them; reads the
+   export `<scratchpad>/ens_ro_a570520/` (lost with the container:
+   `git archive a570520 docs/ensemble docs/collaboration/ENSEMBLE_TO_ALL.md docs/collaboration/messages/ensemble docs/collaboration/status/ensemble.md experiments/ensemble proofs/Ensemble | tar -x -C <dir>`);
+   web search for published papers only; result as SCI-REV-0020.  **R20** (`R20_brief.md`): adversarial reading of the
    Complexity division's Theorems 1 and 3 (`STRANDS_NN_HARDNESS.md` at `fc4b238`), asked
    for by them; reads the export `<scratchpad>/cx_ro_fc4b238/` (lost with the container:
    `git archive fc4b238 docs/complexity docs/collaboration/messages/complexity experiments/complexity | tar -x -C <dir>`);
@@ -275,17 +295,18 @@ history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–60.)*
    result as SCI-REV-0018.  **R19** (`R19_brief.md`): adversarial referee of our own
    addenda A17 (19)–(20) and of Part A of the audit, including the synthetic test of
    Corollary AA.2 and level H2′ (obligations `G-1`, `G-2` — **do not run them yourself
-   while it works**).  Notes: `experiments/science/ws_R18/NOTES.md`, `ws_R19/NOTES.md`;
-   reports: `workstreams/R18_REPORT.md`, `R19_REPORT.md` — drafts until the coordinator
+   while it works**).  Notes: `experiments/science/ws_R18/NOTES.md`, `ws_R19/NOTES.md`,
+   `ws_R20/NOTES.md`, `ws_R21/NOTES.md`; reports: `workstreams/R18_REPORT.md` … `R21_REPORT.md` — drafts until the coordinator
    has read and checked them.  If a hand-back reports a declined tool action, do not
    perform it; tell the research owner.  R17 is read, checked and published:
    SCI-REV-0017 (finding 9s).
    **A run of the coordinator going:** a scan of the floor in the penalty strength
    (`pi_inference/floor_transition.py`; promised in SCI-RES-0024 §3 (c); prediction in
    the research log at 16:05 UTC): logs `floor_transition_{K12_m4_w4, K12_m3_w7,
-   LKSEc12_m3_w7, K12_m4_w7}.log`; the first is complete — the floor of Lys₁₂ at order
-   4, band 4, stays at the anchor up to `λ = 14` and leaves it at `λ_c = 15.3` within a
-   factor 1.14 in `λ`; the three others were running.  When done: outcome against the
+   LKSEc12_m3_w7, K12_m4_w7}.log`; three are complete — the floor leaves the anchor at
+   `λ_c = 15.3` (Lys₁₂, order 4, band 4; within a factor 1.14 in `λ`), `1.32` (Lys₁₂,
+   order 3, band 7; factor 1.22) and `0.198` ((LKSE)₃, order 3, band 7) — and the
+   fourth (Lys₁₂, order 4, band 7) was running.  When done: outcome against the
    prediction into the research log, an addendum item, the curves to the theory
    division.
    **The coordinator's work on general held-site passes is finished and committed**

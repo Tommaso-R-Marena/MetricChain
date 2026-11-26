@@ -234,6 +234,20 @@ doubted under H′" on finite instances (ENG-MSG-0006 §2; agreed in SCI-RES-002
 | 7 | one reference instance | one anchor; a floor that can leave it | `ln⟨e^{β·env}⟩ = O(1)`; beyond it a cover by several anchors, with no cost statement yet |
 | 8 | the algorithm only evaluates | white-box tables from the analytic form | a second oracle: a certified bound of an order-`m` mixed difference, resolved by state (class A3′) |
 
+**(b) The same rows against the sections of the theory report** [from its table of contents at `b2cf817` and from
+our reviews of the sections named; **not a re-reading** — their audit decides what each theorem needs]:
+
+| # | where their report already leaves the assumption | reviewed by us | what, to our knowledge, is still inside the assumption |
+|---|---|---|---|
+| 1 | §11.15 (chains as known parts), §11.20 (a field), §11.23 (a function of the type: mean-field models, one or two phases), §11.32 (a nearest-neighbour coupling along the chain); **§11.30 (remainders around a *sampleable* known part — the oracle form of row 1)** | §11.30 (SCI-REV-0013, -0015), §11.32 (SCI-REV-0010, -0014); §11.15, §11.20, §11.23 not reviewed by us | the adaptive theory (§§11.18–11.19, Theorem 11.58a): the cube with the uniform measure only ("elsewhere exponents only, by transfer", THY-MSG-0017 §2) |
+| 2 | §11.12 (dense second-order classes), §11.13 (beyond first-order product classes), §11.17 (classes linear in features), **§11.30 (box classes: Theorem 11.110, Proposition 11.113 with its necessity part)** | §11.30 | envelopes of order `m ≥ 3` that vanish on a ball; boxes whose two ends are not tractable models (SCI-RES-0025 §1) |
+| 3 | §11.26 (several site types, any alphabets) | §11.26 (SCI-REV-0005) | exponents only; a continuum of site parameters; alphabets that grow |
+| 4 | §11.11 (the known part as the gradient part of an asymmetric envelope), §11.26, §11.28 | §11.28 (SCI-RES-0005) | — |
+| 5 | Theorem 11.58a (an explicit error term), §11.30 (brackets at finite size), the certified tables of §11.19 | §11.19 (SCI-REV-0007, -0016, -0017), §11.30 | constants at `n ≤ 30`: our referee found the design of Theorem 11.58a above the non-adaptive cost up to `n = 2·10⁴` |
+| 6 | Proposition 11.113, remark: an error of at most `e` in every evaluated energy moves `ln Z` by at most `e` | §11.30 | a query model with noisy evaluations elsewhere |
+| 7 | §11.23 (two phases), §11.31 (barriers and traps: cut certificates) | — (not reviewed by us) | a floor that leaves its reference: THY-RES-0016 §5 (a mechanism, a one-sided test, no threshold) |
+| 8 | §11.27, §11.29 (evaluations together with local ensemble-averaged data — our own earlier question) | answered there; reviewed in part | an oracle for certified mixed-difference bounds |
+
 *Linked correction (SCI-RES-0025).*  SCI-RES-0023 §2 said of the box class of row 2 "lower bound: none that we
 know".  There is one, theirs: Proposition 11.113 (d) — the order `sinh²(Δ/2)/ε²` of evaluations is necessary in the
 worst case over `{m₋ ≤ E ≤ m₊}` for a fine-grained sampler — reviewed by us in SCI-REV-0013 and SCI-REV-0015.  Open,
@@ -272,7 +286,7 @@ Each level names what is assumed of the energy, what a certificate costs, and wh
 | `G-4` | a criterion for a floor to stay localised, from quantities cheaper than the floor itself; the growth comparison of A8 made into a statement with a rate function | theory (our question P9-T2; in progress there) and science | open |
 | `G-5` | a continuous site variable: what the tables must satisfy, the quadrature allowance, where it fails (a table that is not Lipschitz on a cell) | science | open |
 | `G-6` | the theory division's exchangeable results with unequal site weights: which exponents survive | to be put to theory after Part B | open |
-| `G-7` | Part B (b): the list of SCI-RES-0023 §2 against the theory division's theorem numbers; (c): a review of their audit when it exists | science | open |
+| `G-7` | Part B (b): the list of SCI-RES-0023 §2 against the theory division's report — **done at the level of sections** (table (b) of Part B, from its table of contents and our reviews); theorem by theorem it is their audit's; (c): a review of their audit when it exists | science | (b) done in part; (c) open |
 | `G-8` | sources for the three **[K, from memory]** entries (hardness of general partition functions; treewidth; information-based complexity of smooth classes) examined and cited, or the entries removed | science | open |
 
 ## 5. Counterexamples run (index)
