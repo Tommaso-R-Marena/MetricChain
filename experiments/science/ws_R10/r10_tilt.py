@@ -37,9 +37,12 @@ class Tilt:
         us = self.us
         self.edges = np.linspace(-us, us, G + 1)
         self.mid = 0.5 * (self.edges[1:] + self.edges[:-1])
+        # modes:  "safe"            cells, enlarged feasibility (upper bounds for the relaxed value);
+        #         "restricted"      adversary restricted to G equidistant NODES including the end
+        #                           points +-u* (the uniform field lives exactly at the ends);
+        #         "restricted_mid"  adversary restricted to the G cell MIDPOINTS (end points excluded).
+        # Both restricted modes give lower bounds for the relaxed value (not for the class).
         if mode == "restricted":
-            # nodes of the restricted adversary: G equidistant points INCLUDING the end points +-u*
-            # (the extremal policies, e.g. the uniform field, live exactly at the ends)
             self.mid = np.linspace(-us, us, G)
         self.tolr = 1e-11 if mode == "restricted" else 0.0
         if mode == "safe":

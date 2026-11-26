@@ -66,7 +66,7 @@ for n in (3, 4, 5):
         pi = binary_chain_law(n, p)
         W, _ = gibbs(pi, V)
         lw = np.log(W)
-        Ts = Tilt(p, u, 401, "safe"); Tr = Tilt(p, u, 401, "restricted")
+        Ts = Tilt(p, u, 401, "safe"); Tr = Tilt(p, u, 401, "restricted_mid")
         for qt in (p, 0.85 * p, 0.6 * p, min(0.5, 1.3 * p)):
             Q = binary_chain_law(n, qt)
             for t in (0.25, 0.45, 0.7):
@@ -81,7 +81,7 @@ for n in (3, 4, 5):
             worst_safe = min(worst_safe, sE - exactE); worst_restr = max(worst_restr, rE - exactE)
             cnt += 1
             rows.append((n, p, qt, 0.0, exactE, rE, sE))
-print("n   p    q~     t     exact max over all vertices   restricted(G=401)   safe(G=401)")
+print("n   p    q~     t     exact max over all vertices   restricted_mid(G=401)   safe(G=401)")
 for r in rows:
     if r[0] == 4 or (r[0] == 5 and r[1] == 0.1):
         print("%d  %.1f  %.3f  %.2f   %.7f   %.7f   %.7f   %s" % (r + (("<-- relaxation not tight (restricted > exact)" if r[5] > r[4] + 1e-6 else ""),)))

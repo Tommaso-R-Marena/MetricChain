@@ -1,4 +1,4 @@
-n   p    q~     t     exact max over all vertices   restricted(G=401)   safe(G=401)
+n   p    q~     t     exact max over all vertices   restricted_mid(G=401)   safe(G=401)
 4  0.4  0.400  0.25   0.1130215   0.1122630   0.1144185   
 4  0.4  0.400  0.45   0.1449767   0.1440340   0.1472795   
 4  0.4  0.400  0.70   0.1177963   0.1170658   0.1209960   
@@ -64,8 +64,4 @@ n   p    q~     t     exact max over all vertices   restricted(G=401)   safe(G=4
 5  0.1  0.130  0.70   0.2149393   0.2133944   0.2181985   
 5  0.1  0.130  0.00   1.5487431   1.5298083   1.5679601   
 144 cases: smallest (safe - exact) = 1.16e-03 (must be >= 0);  largest (restricted - exact) = 1.69e-01 (>0 means: the relaxation is strictly weaker than the class);  largest relative excess of safe 0.371
-time 20.2s
-
-real	0m20.648s
-user	0m12.469s
-sys	0m1.892s
+time 10.2s

@@ -1,0 +1,2 @@
+n=4  y0=0100  q=0.50:  a=1101 (class ['1101', '1011'], psi=2, level 4, truncated 4)   b=0101 (class ['0101'], psi=1, level 1, truncated 1)   d(a,b)=1,  psi^tr(a)-psi^tr(b) = 3 > 1
+        psi on class(a): [2.0, 4.0] ; psi on class(b): [1.0]

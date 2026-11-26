@@ -277,3 +277,36 @@ from a scratch copy.
   ferro J=0.7, 1.5: best = Var(N_a) = product value x finite-n structure-factor sum
   (1.3793, 1.9086 at n=3; 1.4507, 2.1718 at n=4; bulk 1.676, 3.321);
   antiferro J=-1: best 0.9356 (n=3), 1.3166 (n=4) against Var(N_a) = 0.461, 0.588.
+* [coordinator, mid-run] "converge now": finalise the report; no new explorations; verdict
+  table per statement; the wrong sentence of 7.2; small-slope law with labels and scripts;
+  list of what was not checked; one re-run command per script; every cited log from a run
+  that reached its last line.  May connect (without re-deriving) to addendum A17.8 (C_i,
+  Var <= 1/4 sum C_i^2; CCKR math/0503483 ineq. (10); Kontorovich-Ramanan 2008 Thm 1.2) and
+  A17.6 sharp form.  Read A17.6 and A17.8 statements (our own division's file) for the wording.
+* Housekeeping for "complete logs": set aside r10_13_reversal.log (timed out at p=0.05),
+  r10_10_map.log (crashed on a format), r10_07c log (timed out at G=3201) under
+  *_superseded.log names; reruns launched: r10_13 in two chunks (a: p=0.45,0.4,0.3;
+  b: p=0.2,0.1), r10_07a (now prints all three modes with brackets), r10_07b (restricted_mid,
+  as in the first run), r10_09b (to a log), r10_10_map (grid reduced to what is cited:
+  p in {0.3,0.05,0.02,0.01}, u in Y's slope list), r10_07c (G <= 1601).  r10_tilt.py now has
+  three modes: safe, restricted (nodes incl. end points), restricted_mid (cell midpoints).
+* [r10_15_large_slope_checks.py, 103 s] finite chains, all vertices: (1) block form of
+  Prop. F (two blocks of 2) against exact a_4 and F*_4(0.3), F*_4(0.5) at u=1,3,4,6, p=0.3,0.1:
+  24 comparisons, bound >= exact always (smallest margin 0.027).  (2) exact increments
+  a_n - a_{n-1} (n=2,3,4): u=3,p=0.3: 0.4582 0.4623 0.4623 (cube 0.5023); u=4,p=0.3: 0.5704
+  0.5709 0.5709 (cube 0.6031); F*_n(t_cube) increments at u=4,p=0.3: 0.2226 0.2244 0.2244
+  (cube h 0.2392).  Indicative [N]: h is probably lowered at (0.3, 4) as well (proved only
+  for p<=0.2).
+* [r10_07e p=0.1 u=1; r10_07f] wider reference range at p=0.1: h <= 0.062762 (Y 0.066765),
+  a <= 0.172043 at q~=0.16 (Y 0.192774 at the edge 1.1p of their scan), E <= 0.403619
+  (G=1601, q~=0.115) (Y 0.417991).  For q~ >= 0.12 the safe threshold bound equals
+  E_F + KL-rate(q~||p) to 7e-11 (relaxation tight, optimum = uniform field); for q~ < 0.117
+  another relaxed policy wins.  p=0.2: a <= 0.160048 (q~=0.21) (Y 0.160745).
+* [r10_07g_capacity_slopes.py 0.3, 239 s] safe tilt capacity bound, p=0.3, u=1..3: ratios to
+  the cube 1.26, 1.17, 1.10, 1.04, 1.011, 1.004 -- never below 1 (as it must be: with ANY
+  Markov reference the period-4 label ++-- gives at least the cube's value at large u).
+* [r10_05b_propI_other_slopes.py, 5 s] Prop. I (<=2 walls) at u=1.5, 2: h >= 0.064578 /
+  0.069632 / 0.070865 (u=1.5; p=0.4,0.3,0.2; x1.067, 1.151, 1.171) and 0.098573 / 0.099943 /
+  0.097726 (u=2; x1.013, 1.027, 1.005): h RAISED at u=2 for p=0.4,0.3,0.2.
+  a >= 0.2147/0.2148/0.2022 (u=1.5; cube 0.2181) and 0.3069/0.2978/0.2712 (u=2; cube 0.3278):
+  below the cube -> a undecided at u=1.5, 2 for these p.

@@ -1814,6 +1814,68 @@ and variance for a *fitted* chain — the remainder of any banded model `m` sati
 `β(m₋ − m) ≤ r ≤ β(m₊ − m)`, two banded functions — is the obvious next computation and
 has not been run.
 
+### (11) How often are the error bars wrong?  The baseline of benchmark B10 [M, exact laws; added at checkpoint 41]
+
+The theory says that the usual error bar of a reweighting estimate — two standard
+errors — is trustworthy when `e^{D_2}/N` is small and not otherwise, and that a bracket
+with a guarantee needs an a-priori input.  On the 45 enumerated product-domain
+instances of part (6), with the three surrogates `m0`, `m1`, `m2` (135 rows), the law of
+the remainder under each surrogate is known exactly, so the coverage of any bracket can
+be measured without evaluating an energy
+(`experiments/science/pi_inference/bracket_coverage_real.py`, 80 s; 400 repetitions per
+row; `N = 200, 2 000, 20 000` exact samples; `δ = 0.05`; a miss is counted when the exact
+`ln μ` lies outside the bracket by more than `10⁻⁶` nats).  Four brackets: **naive** (`μ̂ ± 2`
+standard errors); **EB**, the empirical-Bernstein bracket for `e^{−(r − lo)} ∈ [0, 1]` with
+the *true* floor `lo` (the bracket of Liu–Fisher–Ihler's Corollary 3.2 and of the theory
+division's Theorem 11.110 without a hint); **H3**, first-order perturbation theory with
+Hoeffding's Theorem 3 and the *true* floor and variance (the bracket of part (7));
+**H3-sampled**, the same formula with the sampled minimum and the sampled variance.
+
+| class of `D_2(π_g‖π_m)` (rows) | naive: smallest coverage at `N = 200 / 2 000 / 20 000` | naive: largest miss (nats) | EB | H3 | H3-sampled: smallest coverage |
+|---|---|---|---|---|---|
+| `< 10⁻³` (69) | `0.91 / 0.92 / 0.93` | `0.004 / 0.0008 / 0.0003` | `1.000` | `≥ 0.978` | `0.99 / 1 / 1` |
+| `10⁻³ … 0.1` (19) | `0.93 / 0.93 / 0.94` | `0.03 / 0.006 / 0.004` | `≥ 0.995` | `1.000` | `≥ 0.998` |
+| `0.1 … 1` (23) | `0.92 / 0.93 / 0.94` | `0.16 / 0.05 / 0.02` | `≥ 0.995` | `1.000` | `≥ 0.998` |
+| `1 … 5` (5: two of serine with the known part alone, three with the one-body fit) | `0.82 / 0.81 / 0.89` | `0.23 / 0.11 / 0.04` | `1.000` | `1.000` | `1.000` |
+| **`≥ 5` (13: serine, known part alone)** | **`0.05 / 0.07 / 0.13`** | **`6.3 / 4.5 / 3.2`** | `1.000` | `1.000` | **`0.22 / 0.67 / 1.00`** (miss up to `4.6`) |
+
+16. **`D_2` is what decides whether the usual error bar can be believed — on a real
+    energy function, as the theory says.**  For the 117 rows with `D_2 < 1` the two-sigma
+    bar covers the truth in 92–100 % of the repetitions (it is a 95 % bar).  In the 15
+    rows with `D_2` between `3.1` and `45` — serine with the vacuum force field as the model —
+    it covers in 7–82 % at 2 000 samples, and in the two worst rows (six serines on the
+    helix and on PPII) **in 5–17 % of the repetitions at every sample size tried, missing
+    by 3–6 nats**: the estimate is reproducible, its error bar is small, and it is wrong.
+    Twenty thousand samples do not repair it (`e^{27}` or `e^{45}` would).  The root-mean-square
+    error that a fit reports does not order the rows: six serines on the helix and four
+    on the strand have remainders of `1.2` and `1.4 k_BT` under the model, and the bar
+    covers in 13 % and in 75 % of the repetitions (`D_2 = 45` and `5.3`).
+17. **The certified brackets never failed** (smallest coverage `0.995` and `0.978` over all
+    rows and sample sizes, for a nominal `0.95`) — and where the divergence is large they
+    are honest by being useless: the empirical-Bernstein bracket has no lower end, the
+    Hoeffding bracket is 12–53 nats wide.  A certificate does not make a bad model good;
+    it says so.
+18. **With the floor and the variance known, Hoeffding's Theorem 3 beats the
+    empirical-Bernstein bracket by one to two orders of magnitude for a good model** —
+    with the pairwise fit (`m2`, floors `≤ 0.22 k_BT`) its width at 2 000 samples is at least
+    5 times and in the median 134 times smaller (Val₁₂ on the strand: `4·10⁻⁵` against
+    `0.010` nats) — **and loses for a poor one**: with the known part alone (floors of
+    several `k_BT`) it is in the median `1.4` times *wider* at 2 000 samples, and it stops
+    improving (Leu₈ on the helix, floor `4.7 k_BT`: Hoeffding `0.77` against `1.22` at 2 000
+    samples, but `0.70` against `0.13` at 20 000 — its width cannot fall below `W`).  The
+    Hoeffding width is `2σ/√(Nδ) + W(b, σ²)` and `W` grows like `e^{b}`; the empirical-Bernstein
+    width is range-limited at small `N` and variance-limited at large `N`.  Which of the
+    two is better is decided by the floor `b`: below about one `k_BT`, Hoeffding.  (This is
+    workstream P3's question P3-T3 with numbers.)
+19. **A sampled floor and variance fail exactly where they are needed** (last column):
+    in the seven worst rows the "bracket" built from the sample's own minimum and
+    variance covers the truth in 22–79 % of the repetitions at 200 samples.
+
+*Limits.*  The floor and the variance given to EB and H3 are the exact ones — this
+measures what the brackets deliver *if* those inputs are certified, which is part
+(10)'s subject, not this one's.  Exact sampling from enumerated laws; neutral side
+chains; least-squares surrogates only.
+
 ### What is in print, and what remains ours (workstream A3; added at checkpoint 39)
 
 `workstreams/A3_REPORT.md` has the statements side by side, the reading level of every

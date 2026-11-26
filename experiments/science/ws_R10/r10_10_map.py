@@ -20,8 +20,8 @@ from r10_blockfield import joint_first_last_m, blockfield_bound
 from r10_06_markov_recursion import ustar
 
 t0 = time.time()
-ps = [0.45, 0.4, 0.3, 0.2, 0.1, 0.05, 0.02, 0.01]
-us = [0.05, 0.25, 0.5, 1.0, 2.0, 3.0, 4.0, 6.0]
+ps = [0.3, 0.05, 0.02, 0.01]
+us = [0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 3.0, 4.0]
 
 
 def G_checked(t, c, p, u):

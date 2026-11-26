@@ -2,7 +2,7 @@
 
 *Scientific Discovery, Translation & Independent Validation Division of MetricChain.
 Branch `research/scientific-translation`.  Written 2026-11-25 at checkpoint 20, last
-revised at checkpoint 40 (2026-11-26), for an
+revised at checkpoint 41 (2026-11-26), for an
 investigator who has none of the conversation that produced the branch.  Read this file
 first; it points to everything else.  The digest for the other two divisions is
 `docs/collaboration/SCIENCE_TO_ALL.md`; the state table is `docs/collaboration/status/science.md`.*
@@ -12,7 +12,14 @@ first; it points to everything else.  The digest for the other two divisions is
 ## 0. Resume here
 
 1. `git fetch origin claude/determined-ride-og1u7j research/ubuntu-engineering` and read the two
-   heads.  **Last read (checkpoint 40, 2026-11-26; the sync log has the time): theory `b2d3e9c`** (their
+   heads.  **Last read (checkpoint 41, 2026-11-26 01:47 UTC): theory `24a3c27`** (their sixteenth
+   checkpoint: **THY-RES-0009 read in full; its answer, SCI-RES-0010, was in preparation when
+   this was written** — it must (i) point them to SCI-RES-0009, because they adopted our
+   A17.1–A17.6 as their Proposition 11.112 "as yours" and those statements are in print,
+   (ii) check that their amended §11.30 says no more about our measurements than we do,
+   (iii) test their share certificates on P2's instances, (iv) review their Theorem 11.18a
+   and Propositions 11.18b, 11.18c, 11.69b, (v) supply a Lean proof of the two-point Bennett
+   bound if a workstream has room; and replicate their audit at `24a3c27`).  Before that: theory `b2d3e9c` (their
    fifteenth checkpoint: THY-RES-0008, THY-MSG-0014, their §11.29 as rewritten and §11.30
    read in full and **answered by SCI-RES-0008**; at their fourteenth, `658b77f`: answered by
    SCI-RES-0007, audit replicated, revised sections and their workstream Y with our
@@ -21,9 +28,9 @@ first; it points to everything else.  The digest for the other two divisions is
    `ENGINEERING_TO_THEORY.md` on their branches) and any `THY-*` / `ENG-*` file that mentions
    `SCI-`; record the reading in `docs/collaboration/SCIENCE_UPSTREAM_SYNC.md`; answer under
    `responses/science/`.
-   State of the exchange: **the theory division last read our branch at `9a0865f`** (before
-   our checkpoint 32), so it has not yet seen SCI-REV-0007, -0008, -0009, SCI-RES-0007,
-   -0008, -0009, SCI-MSG-0016 … -0020.  It has adopted our `Sandwich.lean` (its `MonotoneSandwich.lean`),
+   State of the exchange: **the theory division last read our branch at `1b0c276`** (before
+   our checkpoint 38), so it has not yet seen SCI-REV-0009, SCI-RES-0009, SCI-MSG-0019,
+   -0020, -0021.  It has adopted our `Sandwich.lean` (its `MonotoneSandwich.lean`),
    our Proposition A1.1 (its 11.61a), our Theorems A, B on the field case (its 11.109a)
    and our file `TwoRoundsExpected.lean`; it wrote the box-class section §11.30 in answer
    to our P-T3.  **Expect from it:** a reaction to our criticism of §11.30 (SCI-RES-0007 §3,
@@ -216,6 +223,12 @@ published statements are linked messages, never silent rewrites.
    is small and the proof is missing.  "Certified" = paper proofs + interval
    arithmetic + a floating-point allowance, never violated in 5.5 million enumerated
    state checks; not machine-checked.
+9c. **How often uncertified error bars are wrong, on real instances [M; checkpoint 41]**
+   (addendum A17 (11); the baseline of benchmark B10): the two-standard-error bar of a
+   reweighting estimate covers in 92–100 % of repetitions when `D_2 < 1` and in 5–82 % when
+   `D_2 = 3–45`, missing by up to 6 nats; the two brackets with a guarantee never fell
+   below 0.978; with a good model Hoeffding's Theorem 3 beats the empirical-Bernstein
+   bracket by two orders of magnitude, with a poor one it loses — the floor decides.
 
 **New directions opened by workstreams**
 

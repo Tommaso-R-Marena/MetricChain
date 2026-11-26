@@ -910,3 +910,21 @@ profile and the gauche count, and its support function is the ground-state energ
   OpenMM and one enumerated end-to-end run re-run; the headline number replicated.
   Published as SCI-MSG-0020 with one request the theory division can machine-check
   (the remainder identity) and a checker specification for the engineering division.
+
+### Cycle 35 — the baseline nobody had run (checkpoint 41)
+
+* Benchmark B10 asked, as its baseline, how often uncertified error bars are wrong when
+  the divergence is large.  With the exact laws of the 45 enumerated instances this is
+  an 80-second computation, and it had not been done.  Result (addendum A17 (11)): the
+  two-standard-error bar is a 92–100 % bar when `D_2 < 1` and a 5–82 % bar when
+  `D_2 = 3–45`, missing by up to 6 nats; the certified brackets never failed; the
+  Hoeffding bracket of part (7) is two orders of magnitude narrower than the
+  empirical-Bernstein bracket for a good model and wider for a poor one, the floor
+  deciding at about one `k_BT`; a bracket built from the sample's own minimum and
+  variance fails where it is needed.  The refutation criterion of the benchmark (a
+  family on which the root-mean-square error predicts the certified cost) was not met.
+* A first version of the script found no instance (wrong file tags) and wrote an empty
+  table; it was caught because the summary printed "0 rows" — the script now asserts
+  that it has the 45 instances.  A second version left a warning on standard error;
+  the committed log is from a third run that reached its last line with an empty error
+  stream.

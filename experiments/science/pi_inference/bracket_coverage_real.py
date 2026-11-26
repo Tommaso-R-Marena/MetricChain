@@ -18,6 +18,10 @@ the exact law of the remainder r = beta (g - m) under pi_m is known.  Target: ln
 
 Reported per row: coverage (fraction of repetitions in which the bracket contains the exact ln mu) and the median
 width, with D_2(pi_g || pi_m) -- the quantity that, according to the theory, decides whether the naive bar fails.
+A repetition counts as a miss only if the exact value lies outside the bracket by more than MISS = 1e-6 nats: on
+nearly frozen ensembles a sample of identical values gives a bracket of zero width that misses by 1e-9 nats or
+less, which is a failure of principle and of no numerical consequence; such misses are counted separately
+("strict").  The largest miss of each kind of bracket is reported.
 
 Run:  python3 bracket_coverage_real.py > bracket_coverage_real.log      (about ten minutes)
 """
@@ -31,6 +35,7 @@ BETA = anlib.BETA
 DELTA = 0.05
 NS = (200, 2000, 20000)
 REPS = 400
+MISS = 1e-6
 rng = np.random.default_rng(20261126)
 
 
@@ -70,6 +75,7 @@ def analyse(tag):
         res = dict(tag=tag, seq=d["seq"], bb=d["bb"], n=d["n"], surrogate=name, D2=D2, floor_b=Er - lo, sd=math.sqrt(s2), K=lnmu + Er)
         for N in NS:
             cov = dict(naive=0, EB=0, H3=0, H3s=0); wid = dict(naive=[], EB=[], H3=[], H3s=[])
+            strict = dict(naive=0, EB=0, H3=0, H3s=0); worst = dict(naive=0.0, EB=0.0, H3=0.0, H3s=0.0)
             for start in range(0, REPS, 50):
                 R = min(50, REPS - start)
                 idx = np.searchsorted(cdf, rng.random((R, N)), side="right")
@@ -95,12 +101,16 @@ def analyse(tag):
                 etas = np.sqrt(s2s / (N * DELTA))
                 lo_s = -rbar - etas
                 hi_s = -rbar + etas + W_sharp(np.maximum(rbar + etas - los, 0.0), s2s)
-                tol = 1e-12
                 for key, a, b in (("naive", lo_n, hi_n), ("EB", lo_e, hi_e), ("H3", lo_h, hi_h), ("H3s", lo_s, hi_s)):
-                    cov[key] += int(np.sum((a <= lnmu + tol) & (lnmu <= b + tol)))
+                    miss = np.maximum(np.maximum(a - lnmu, lnmu - b), 0.0)       # distance of the truth from the bracket
+                    cov[key] += int(np.sum(miss <= MISS))
+                    strict[key] += int(np.sum(miss <= 1e-12))
+                    worst[key] = max(worst[key], float(miss.max()))
                     wid[key].extend(np.where(np.isfinite(b - a), b - a, np.inf).tolist())
             for key in cov:
                 res[f"cov_{key}_{N}"] = cov[key] / REPS
+                res[f"strict_{key}_{N}"] = strict[key] / REPS
+                res[f"miss_{key}_{N}"] = worst[key]
                 res[f"wid_{key}_{N}"] = float(np.median(wid[key]))
         rows.append(res)
     return rows
@@ -123,7 +133,8 @@ if __name__ == "__main__":
             q["tag"] = q["seq"][:1] + str(q["n"]) + "_" + q["bb"]
         allrows.extend(rows)
     print(f"# {len(allrows)} rows ({len(allrows)//3} instances x 3 surrogates); delta = {DELTA}; {REPS} repetitions per row and sample size; exact sampling from the enumerated law; {time.time()-t0:.0f} s")
-    print("# coverage must be >= 0.95 for EB and H3 (certified, given the true floor / the true floor and variance), up to the simulation error "
+    print(f"# a miss is counted when the exact value is outside the bracket by more than {MISS:g} nats; "
+          "coverage must be >= 0.95 for EB and H3 (certified, given the true floor / the true floor and variance), up to the simulation error "
           f"{3*math.sqrt(DELTA*(1-DELTA)/REPS):.3f}; naive and H3-sampled carry no guarantee")
     hdr = f"{'instance':10s} {'surr':4s} {'D2':>9s} {'floor b':>8s} {'sd r':>8s} {'gap K':>9s} | " + " | ".join(
         f"N={N}: cov naive / EB / H3 / H3-sampled; width EB / H3" for N in NS)
@@ -146,9 +157,20 @@ if __name__ == "__main__":
             parts.append(f"N={N}: naive {min(q[f'cov_naive_{N}'] for q in sel):.3f}, EB {min(q[f'cov_EB_{N}'] for q in sel):.3f}, "
                          f"H3 {min(q[f'cov_H3_{N}'] for q in sel):.3f}, H3-sampled {min(q[f'cov_H3s_{N}'] for q in sel):.3f}")
         print(f"   D2 in [{lo_:g}, {hi_:g}): {len(sel):3d} rows | " + " | ".join(parts))
+        print("        largest miss (nats): " + " | ".join(
+            f"N={N}: naive {max(q[f'miss_naive_{N}'] for q in sel):.2g}, EB {max(q[f'miss_EB_{N}'] for q in sel):.2g}, "
+            f"H3 {max(q[f'miss_H3_{N}'] for q in sel):.2g}, H3-sampled {max(q[f'miss_H3s_{N}'] for q in sel):.2g}" for N in NS))
+        print("        strict coverage (zero tolerance), smallest: " + " | ".join(
+            f"N={N}: naive {min(q[f'strict_naive_{N}'] for q in sel):.3f}, H3-sampled {min(q[f'strict_H3s_{N}'] for q in sel):.3f}" for N in NS))
+        fin = [q for q in sel if np.isfinite(q[f'wid_EB_{NS[-1]}'])]
+        if fin:
+            print("        median width at the largest N: EB "
+                  f"{np.median([q[f'wid_EB_{NS[-1]}'] for q in fin]):.3g} ({len(fin)} rows with a finite bracket), "
+                  f"H3 {np.median([q[f'wid_H3_{NS[-1]}'] for q in sel]):.3g}, naive {np.median([q[f'wid_naive_{NS[-1]}'] for q in sel]):.3g}")
     worst_cert = min(min(q[f"cov_EB_{N}"] for N in NS) for q in allrows), min(min(q[f"cov_H3_{N}"] for N in NS) for q in allrows)
     print(f"# smallest coverage of the certified brackets over all rows and sample sizes: EB {worst_cert[0]:.3f}, H3 {worst_cert[1]:.3f}")
-    json.dump(allrows, open(os.path.join(HERE, "bracket_coverage_real.json"), "w"), indent=1)
+    with open(os.path.join(HERE, "bracket_coverage_real.json"), "w") as fh:
+        json.dump(allrows, fh, indent=1)
     assert worst_cert[0] >= 1 - DELTA - 3 * math.sqrt(DELTA * (1 - DELTA) / REPS)
     assert worst_cert[1] >= 1 - DELTA - 3 * math.sqrt(DELTA * (1 - DELTA) / REPS)
     print(f"ALL OK ({time.time()-t0:.0f} s)")
