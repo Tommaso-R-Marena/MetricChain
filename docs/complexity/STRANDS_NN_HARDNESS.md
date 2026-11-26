@@ -394,16 +394,16 @@ is not a tiling has `j ≥ 1` (step (d)).  ∎
 at least `γ ≥ 0` (C2), and assume (H1), `B ≥ 2`,
 
 ```
-D_G + D_C  <  |σ| − |x|/B        and        |σ| − |x| + γ + |e_A|  >  0 .
+D_C + max( D_G , |x|/B )  <  |σ|        and        |σ| − |x| + γ + |e_A|  >  0 .
 ```
 
 Then every connected unpseudoknotted structure of `I(a,m,B)` has energy
 `E** = σM + x(n−m) + (m−1)e_A + nΔG_assoc` if it is a tiling structure, and at least
-`min( |σ| − |x|/B − D_G − D_C ,  |σ| − |x| + γ + |e_A| )` more otherwise.
+`min( |σ| − D_C − max(D_G, |x|/B) ,  |σ| − |x| + γ + |e_A| )` more otherwise.
 
 In particular this covers a flush stack as strong as a stack (`x = σ`) together with dangles, as soon as the
 bulge over a separator costs something or a dangling separator is favourable.  For a fixed model with
-`D_G + D_C < |σ|` the first condition holds for all instances with `B > |x|/(|σ| − D_G − D_C)`, and multiplying
+`D_G + D_C < |σ|` the first condition holds for all instances with `B > |x|/(|σ| − D_C)`, and multiplying
 all sizes of a bin-packing instance by a constant preserves solvability; so Corollary 2 extends to every such
 model.
 
@@ -420,14 +420,16 @@ E − E** = (|σ| − |x|)·j + |x|·L + P + Dng − (m−1)e_A .
 `j ≥ u` (proof of Theorem 1d).  `L ≥ u − β`, where `β` is the number of blocks all of whose `G`'s are
 unpaired: a maximal run of `ℓ` unpaired `G`'s in a block touches `ℓ − 1` bonds inside it and, unless it is the
 whole block, at least one bond to a paired `G`; all these bonds are loose and different runs touch different
-bonds.  `β ≤ u/B`.  `Dng ≥ −(D_G + D_C)u + e_A·a`, with `a ≤ m − 1` the number of separators that get a dangle
-term.  Hence
+bonds.  `β ≤ u/B`.  The `G`'s of an entirely unpaired block have no paired neighbour and get no dangle term,
+so `Dng ≥ −D_G(u − Bβ) − D_C u + e_A·a`, with `a ≤ m − 1` the number of separators that get a dangle term.
+Hence
 
 ```
-E − E**  ≥  u·( |σ| − |x|/B − D_G − D_C )  +  P  +  |e_A|·(m − 1 − a) .
+E − E**  ≥  u(|σ| − D_G − D_C) + β(B·D_G − |x|) + P + |e_A|(m − 1 − a)
+         ≥  u·( |σ| − D_C − max(D_G, |x|/B) )  +  P  +  |e_A|·(m − 1 − a)
 ```
 
-If `u ≥ 1` this is at least `|σ| − |x|/B − D_G − D_C`.  If `u = 0`, every base is paired; then every template
+(if `B·D_G < |x|` use `β ≤ u/B`).  If `u ≥ 1` this is at least `|σ| − D_C − max(D_G, |x|/B)`.  If `u = 0`, every base is paired; then every template
 `GG` bond lies between two chords whose item ends are consecutive positions, so it is on a stack or a flush
 face and `L = 0`; an item bond is on a stack or on a bulge whose template side is one separator (a
 *straddle*); with `r` straddles, `j = r`, the `r` straddled separators get no dangle term and the others get
@@ -435,8 +437,11 @@ face and `L = 0`; an item bond is on a stack or on a bulge whose template side i
 `r = 0` has every item bond on a stack and is a tiling structure (step (d)); a tiling structure has
 `u = j = L = 0`, `a = m − 1`, `P = 0`.  ∎
 
-In our exhaustive tests the conclusion also held for `|σ| − |x|/B ≤ D_G + D_C < |σ|` and failed at
-`D_G + D_C = |σ|`; so the term `|x|/B` may be an artefact of the proof.  What remains uncovered: dangle rules
+The dependence on `B` is real: with `x = σ`, `D_G = 0` and `D_C = ⅔|σ|` or `⅚|σ|` the conclusion fails on
+instances with `B = 2` (an entirely unpaired block costs `|σ|B − |x|` and its `B` dangling item bases gain
+`B·D_C`), and it fails at `D_G + D_C = |σ|` for every `B` (controls in `test_generalised_hypotheses.py`).  A
+first version of this theorem had the stronger hypothesis `D_G + D_C < |σ| − |x|/B` and the guess that the
+term `|x|/B` was an artefact; the guess was wrong.  What remains uncovered: dangle rules
 in which an unpaired base between two helices is counted for both, terminal mismatches, and coaxial stacking
 across an intervening unpaired base.
 
@@ -548,7 +553,7 @@ Further remarks.
   structure occurs under exactly one circular ordering.
 * **[X], ours, added in the revision.**  `test_generalised_hypotheses.py` (logs `generalised_run.log`,
   `generalised_run_big.log`): 36 instances with `1 ≤ m ≤ 3`, `1 ≤ B ≤ 5`, including `m = 1`, `B ≤ 2` and
-  items longer than a block (up to 762 294 structures); 26 models satisfying the hypotheses of Theorem 1
+  items longer than a block (up to 762 294 structures); 28 models satisfying the hypotheses of Theorem 1
   with (H2′) (bulge and interior loops as favourable as `σ·ι + δ`), of Theorem 1c (both cases), of
   Theorem 1d or of Theorem 1e (for the latter, on the instances whose `B` satisfies its hypothesis), and nine
   control models violating them.  For every model satisfying the hypotheses: tiling structures have
