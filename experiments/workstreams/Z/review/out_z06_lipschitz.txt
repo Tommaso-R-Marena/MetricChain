@@ -1,0 +1,6 @@
+u = 0.25: 365170 random (g, phi, phi', B, s): max |Psi - Psi'|/|phi - phi'| = 1.000000 a  (a = 0.007752; Lipschitz constant a: True);  max midpoint excess 2.2e-14 (convex: True)
+u = 0.5: 365135 random (g, phi, phi', B, s): max |Psi - Psi'|/|phi - phi'| = 1.000000 a  (a = 0.030300; Lipschitz constant a: True);  max midpoint excess 6.0e-14 (convex: True)
+u = 1: 364875 random (g, phi, phi', B, s): max |Psi - Psi'|/|phi - phi'| = 1.000000 a  (a = 0.110944; Lipschitz constant a: True);  max midpoint excess 9.5e-14 (convex: True)
+u = 2: 365081 random (g, phi, phi', B, s): max |Psi - Psi'|/|phi - phi'| = 1.000000 a  (a = 0.327813; Lipschitz constant a: True);  max midpoint excess 1.9e-13 (convex: True)
+u = 4: 365040 random (g, phi, phi', B, s): max |Psi - Psi'|/|phi - phi'| = 1.000000 a  (a = 0.603052; Lipschitz constant a: True);  max midpoint excess 1.7e-13 (convex: True)
+rounding: max over (u, d, phi*) of [distance to the nearest admissible fraction] / [max(1, d_min - 1)/d] = 1.000000  (must be <= 1)

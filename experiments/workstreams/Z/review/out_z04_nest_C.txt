@@ -1,0 +1,36 @@
+# u = 2 (h = 0.09728, a = 0.32781, d_min = 2), n = N = 12000, k = 3 levels above the base, eps^ = 1, ln delta = -2.996, base error E_0 = Lam/7, blocks = design/1
+# chain: s_t = L + 0.05, b_0 = h + 0.01; base level J0 = 6; (b_j - h)/h, j = 6..9: 0.0746 0.0580 0.0465 0.0382;  W_j(b_j): 0.776 0.767 0.761 0.757;  X = X_0(N) + 1 = 24.880
+#   level 9: block m = 829 (design 829), chain levels at d = n: 14, d_0 = 836; unrolled terms: chain 560.39, level 75.96
+#   level 8: block m = 823 (design 823), chain levels at d = n: 14, d_0 = 830; unrolled terms: chain 556.24, level 76.03
+#   level 7: block m = 815 (design 815), chain levels at d = n: 14, d_0 = 822; unrolled terms: chain 550.66, level 76.10
+NOT FINISHED within 270 s (the node checks below are those made so far)
+nodes evaluated exactly: F_9: 11 Z-levels, 10 chain levels; F_8: 376 Z-levels, 55 chain levels; F_7: 23061 Z-levels, 2290 chain levels   [270 s]
+check                                               number  least slack  viol.   at
+F7 type (Prop. Z4)                                    4580      307.537      0   (1603, 24.880413645230202)
+F8 type (Prop. Z4)                                     110      646.390      0   (1912, 24.880413645230202)
+F9 type (Prop. Z4)                                      20     1004.049      0   (2881, 24.880413645230202)
+T7 accuracy                                           2290        0.005      0   (1027,)
+T7 claim (Prop. T(iii))                               2290      298.329      0   (903,)
+T7 claim (bottom)                                      376     1115.105      0   (819,)
+T7 delta' (Prop. T(ii))                               2290      214.244      0   (824,)
+T8 accuracy                                             55        0.005      0   (1142,)
+T8 claim (Prop. T(iii))                                 55      638.596      0   (1814,)
+T8 claim (bottom)                                       11     1898.647      0   (342,)
+T8 delta' (Prop. T(ii))                                 55      214.965      0   (921,)
+T9 accuracy                                             14        0.005      0   (12000,)
+T9 claim (Prop. T(iii))                                 10      997.004      0   (2881,)
+T9 claim (bottom)                                        1     2509.841      0   (394,)
+T9 delta' (Prop. T(ii))                                 14      218.266      0   (1223,)
+Z6 (U-inf)                                           23061        8.363      0   (9, 24.880413646230203, 8)
+Z6 accuracy                                          23061        1.039      0   (25, 24.880413646230203)
+Z6 delta' (Lemma Z2)                                 23061        8.566      0   (9, 24.880413646230203, 8)
+Z6 type (Prop. Z3)                                   23061       28.435      0   (9, 24.880413646230203, 8)
+Z7 (U-inf)                                             375      343.802      0   (991, 24.880413646230203, 81)
+Z7 accuracy                                            375        1.766      0   (98, 24.880413646230203)
+Z7 delta' (Lemma Z2)                                   375       34.230      0   (98, 24.880413646230203, 45)
+Z7 type (Prop. Z3)                                     375      357.530      0   (991, 24.880413646230203, 81)
+Z8 (U-inf)                                              10      685.376      0   (2052, 24.880413646230203, 114)
+Z8 accuracy                                             10        3.009      0   (394, 24.880413646230203)
+Z8 delta' (Lemma Z2)                                    10       39.313      0   (394, 24.880413646230203, 52)
+Z8 type (Prop. Z3)                                      10      697.843      0   (2052, 24.880413646230203, 114)
+TOTAL: 105955 checks, 0 violations   (unfinished)

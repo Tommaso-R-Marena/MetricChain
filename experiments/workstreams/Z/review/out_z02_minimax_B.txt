@@ -1,0 +1,10 @@
+== Part B: other convex nondecreasing W (adversarial) ==
+u = 0.5: 210 families x 18 values of g done   [32 s]
+u = 1: 210 families x 18 values of g done   [63 s]
+u = 2: 210 families x 18 values of g done   [96 s]
+Part B: 11340 cases (RHS here is M_{W',b'} with W' = min(1, Sigma(., W(.))))
+    (T1) Z1(2):  max of LHS_up - RHS_lo = 3.595e-08  [<= tol proves LHS <= RHS];   max of LHS_lo - RHS_up = 6.925e-13  [> 0 would be a proven violation];  largest slack RHS - LHS = 1.341e-01
+    (T2) minimax identity:  max of LHS_lo - MID_up = 6.925e-13,  max of MID_lo - LHS_up = 9.381e-15,  max |LHS - MID| (midpoints) = 8.220e-08
+    (T3) max of MID_lo - RHS_up = 0.000e+00;   widths of the brackets: LHS 6.18e-08, MID 6.24e-07, RHS 7.07e-08
+    worst cases: T1 at u=2 top*(B/b)^10, b=0.0983, top=1; T1v at u=2 top*(B/b)^1, b=0.6925, top=1; T2abs at u=2 top*(B/b)^10, b=0.3278, top=1; widest bracket at u=2 exp k=12, b=0.2918
+total time 96 s

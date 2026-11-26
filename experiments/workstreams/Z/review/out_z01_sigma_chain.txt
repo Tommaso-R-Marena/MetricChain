@@ -1,0 +1,29 @@
+== A. the slope map ==
+u = 0.5: theta_na nonincreasing: True (max increment 0.0e+00); convex: True (min 2nd difference 0.0e+00); theta(h) - h = 0.0e+00; theta(0+) - a = -3.4e-08; |h - coord| = 5.6e-17, |L - coord| = 1.2e-15, |c*^2 - coord| = 2.4e-09
+   300 random (B, s): direct vs first-order (vector and scalar solvers): rel. diff <= 4.86e-11; brute-force grid exceeds direct by <= 0.00e+00 (rel.); direct vs coordinator's rlib: <= 7.13e-11
+   gradient at (0.4a, 0.3): analytic (174.544401, 1.723598), numerical from the direct maximisation (174.544403, 1.723598)
+   Sigma(h, L) - L = 1.04e-14 (direct);  boundary: Sigma((1-s)a, s) = inf: True
+u = 1: theta_na nonincreasing: True (max increment 0.0e+00); convex: True (min 2nd difference 0.0e+00); theta(h) - h = -5.6e-17; theta(0+) - a = -6.3e-08; |h - coord| = 1.4e-17, |L - coord| = 0.0e+00, |c*^2 - coord| = 1.9e-09
+   300 random (B, s): direct vs first-order (vector and scalar solvers): rel. diff <= 4.86e-11; brute-force grid exceeds direct by <= 0.00e+00 (rel.); direct vs coordinator's rlib: <= 7.13e-11
+   gradient at (0.4a, 0.3): analytic (43.846974, 1.576126), numerical from the direct maximisation (43.846974, 1.576126)
+   Sigma(h, L) - L = 3.16e-15 (direct);  boundary: Sigma((1-s)a, s) = inf: True
+u = 2: theta_na nonincreasing: True (max increment 0.0e+00); convex: True (min 2nd difference 0.0e+00); theta(h) - h = 0.0e+00; theta(0+) - a = -9.1e-08; |h - coord| = 2.8e-17, |L - coord| = 0.0e+00, |c*^2 - coord| = 3.8e-09
+   300 random (B, s): direct vs first-order (vector and scalar solvers): rel. diff <= 5.40e-11; brute-force grid exceeds direct by <= 0.00e+00 (rel.); direct vs coordinator's rlib: <= 7.13e-11
+   gradient at (0.4a, 0.3): analytic (11.089916, 1.149565), numerical from the direct maximisation (11.089916, 1.149565)
+   Sigma(h, L) - L = 5.55e-16 (direct);  boundary: Sigma((1-s)a, s) = inf: True
+== B. the chain for u = 1, s_t = L + 0.05, b_0 = h + 0.003 ==
+range condition W_j(b_j) <= 1 for j <= 62: True (largest 0.817712 at j = 5)
+#  j   B_t(j)-h      m_j          E_j-h        b_j-h      | coordinator (out_r2_chain_cube1.txt): the same four
+   3  2.277101e-03  7.40326e+01  4.405963e-03  3.000000e-03 | 2.277101e-03  7.40326e+01  4.405963e-03  3.000000e-03
+   6  7.819829e-04  1.81876e+02  1.778737e-03  2.286144e-03 | 7.819829e-04  1.81876e+02  1.778737e-03  2.286144e-03
+  10  3.522094e-04  3.98543e+02  8.285700e-04  9.779032e-04 | 3.522094e-04  3.98543e+02  8.285700e-04  9.779032e-04
+  20  1.147689e-04  1.46877e+03  2.475919e-04  2.726405e-04 | 1.147689e-04  1.46877e+03  2.475919e-04  2.726405e-04
+  50  2.325359e-05  1.29101e+04  3.851078e-05  4.020023e-05 | 2.325359e-05  1.29101e+04  3.851078e-05  4.020023e-05
+(b_j - h)/h, j = 0..12: 0.1030 0.1030 0.1030 0.1030 0.1030 0.1030 0.0785 0.0610 0.0490 0.0402 0.0336 0.0284 0.0244
+   coordinator:         0.1030 0.1030 0.1030 0.1030 0.1030 0.1030 0.0785 0.0610 0.0490 0.0402 0.0336 0.0284 0.0244
+j^2 (b_j - h)/c_*^2 at j = 10, 20, 40, 60: 1.3745 1.5328 1.4629 1.3689   (coordinator: 1.3745 1.5328 1.4629 at 10, 20, 40)
+Lemma T(b): max of W_{j+1} - Sigma(., W_j(.)) over [0, b_0], j < 40: 0.00e+00 (must be <= 0 up to rounding);  W_j convex: True, nondecreasing with W_j(0) = 0: True
+
+real	0m23.891s
+user	0m23.643s
+sys	0m0.335s

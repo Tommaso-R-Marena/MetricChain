@@ -1,0 +1,3 @@
+horizons N = 100 d ... 3000 d, d = d_min + 1 ... d_min + 120, u in {1/2, 1, 2}, levels j <= 12: 1672 cases, 103211 levels (every admissible n_o)  [150 s]
+largest excess (negative = slack): (A) accuracy -1.0082, (B) (U-infinity) -3.956, (C) exponent step -1.0743, (D) type -15.782;  violations: 0
+the proxy choice of n_o costs at most 0.774 nats more than the n_o with the least certified bound

@@ -1,9 +1,35 @@
 # Workstream Z — the `1/k²` law at finite `n`: the adaptive cost without a hint is `exp(n·h + O(n^{1/3}(ln n)^{2/3}))`
 
-*Coordinator, 2026-11-26 (written while the twenty-third checkpoint was being closed; work
-in progress, not part of that checkpoint).  A paper proof, assembled from statements of
-three workstream reports; **not refereed** — see "Status" below for what it rests on.  Labels: **[V]** machine-checked, **[P]** paper proof,
-**[N]** numerical.  Nothing here is machine-checked.*
+*Coordinator, 2026-11-26 (written while the twenty-third checkpoint was being closed).  A
+paper proof, assembled from statements of three workstream reports.  **Refereed
+internally** (an AI referee; not external peer review): `docs/workstreams/Z_REVIEW.md`, with
+its own code and outputs in `experiments/workstreams/Z/review/` — "no error of substance";
+its seven findings are corrected below and listed in the note that follows.  See "Status"
+for what the proof rests on.  Labels: **[V]** machine-checked, **[P]** paper proof,
+**[N]** numerical.  Nothing here is machine-checked.  The sequel
+`docs/workstreams/Z_ADDENDUM.md` replaces the schedule of this report by a better one
+(the envelope sequence) with the same propositions.*
+
+> **Coordinator's note after the review (2026-11-26).**  The referee re-derived every step
+> of Propositions Z1, Z3, Z4, Lemmas Z1a, Z2 and §6 and attacked them with independent
+> code (Z1(2) with two-sided brackets on 16 280 cases; Lemma Z2 and Proposition Z3 on
+> about 200 000 exactly evaluated levels at slopes `¼ … 4`; nests of two to seven levels
+> with chains: 5.26 million node checks) — no violation.  Its findings, all applied in
+> place: **F1** the constants "`c_Z ≈ 50`, limsup `≈ 10.6`" were values in the range of the
+> table, not limits — in the limit the per-level loss is `52.0·ln n` for `k ≍ n^{1/3}` (`52.9`
+> for `k = n^{1/2}`), and the limsup constant that the proof gives is `10.9` (§0, §7);
+> **F2** `q(n, Λ)` is `O(ln n + ln Λ)`, not `O(ln n + ln ln Λ)` — the proof uses only
+> `q(n, Λ̂) = O(ln n)` for `Λ̂ ≤ n²` (§1, §6); **F3** the constants of Theorem Z are now
+> quantified, and §9 says that `n₀`, `C′`, `C″` are not effective; **F4** the "barrier" of
+> §0 is a heuristic, and its supporting sentence in §8.1 had a gap (a chain of `n/m` levels
+> costs its additive term once) — reworded; **F5** the finiteness of `Σ` (§1); **F6** "the
+> zero line has `0 ≤ E₁`" (§3); **F7** the level term is `5.7`–`6.3` times `ln n` (§7).  Its
+> remarks: Proposition Z3 has a nat to spare in its accuracy (the `2` in `X₀` could be
+> `1.23`); the crossovers of the table are properties of the illustrative parameters
+> `(s_t, ε₁)` — with `(L + 0.10, h + 0.012)` the base needs six epochs and the bound is below
+> Theorem A of Q2 a decade earlier (§7).  Not checked by the referee: the level theorem
+> itself, the full design over Theorem A's base, the rows `10^{12}`, `10^{15}` of the table,
+> and the addendum.
 
 ## 0. The result
 
@@ -16,8 +42,8 @@ exponent at bounded accuracy), `c_*² = 2π²h²·θ_hint″(0)` the constant of
 (theory report Theorem 11.53b).
 
 **Theorem Z [P, conditional on the statements listed under "Status"].**  *Fix `u` and `δ`.
-There are `n₀` and a constant `c_Z = c_Z(u)` such that for all `n ≥ n₀`, all `0 < ε ≤ 1` and all
-integers `1 ≤ k ≤ n^{1/2}`*
+There are `n₀ = n₀(u, δ)` and constants `c_Z`, `C′`, `C″` depending on `u` only such that for all
+`n ≥ n₀`, all `0 < ε ≤ 1` and all integers `1 ≤ k ≤ n^{1/2}`*
 
     ln N(n; ε, δ)  ≤  n·h  +  n·β_k  +  k·c_Z·ln n  +  C′·((ln n)² + ln(1/ε)),            β_k ≤ C″/k²,   k²β_k → c_*²,
 
@@ -33,7 +59,9 @@ is known between `n·h` and this bound); a statement at extensive accuracies; co
 at small sizes (§7: the loss per level is about `50·ln n` at `u = 1`; there the bound, as a
 formula, is above the non-adaptive `n·a` for `n` below about `10⁵` and above the bound of
 Theorem A of workstream Q2 for `n` below about `10⁷`); a statement about algorithms
-outside this nested family — for which `n·h + Ω(n^{1/3})` is a barrier of the analysis (§8).
+outside this nested family — for which, heuristically, `n·h + Ω(n^{1/3})` is a barrier of the
+analysis (§8, remark 1: not a theorem); effective (`n₀`, `C′`, `C″` are not produced by the
+proofs — §9).
 
 **Status — what it rests on.**
 
@@ -52,8 +80,10 @@ Exponent level (from `R_REPORT.md`; `θ := θ_na`):
 
 * `Φ_g(e; B, s) := B − (g/e)·[B − (1 − s)·θ(e)]` for `0 < g < e`, `0 ≤ s ≤ 1`, `B ≥ 0`.  With `φ = g/e ∈ (0, 1)`:
   `Φ = (1 − φ)·B + (1 − s)·φ·θ(g/φ) =: Ψ_g(φ; B, s)`.
-* `Σ(B, s) := sup_{e>0} [B − (1 − s)θ(e)]/e` (the slope map), finite iff `B < (1 − s)a` or the supremum is
-  attained on the boundary.
+* `Σ(B, s) := sup_{e>0} [B − (1 − s)θ(e)]/e` (the slope map); finite if `B < (1 − s)a`, infinite if
+  `B > (1 − s)a`; at `B = (1 − s)a` it is `(1 − s)·|θ′(0+)|` — infinite for the cube, whose `θ_na` has
+  infinite slope at zero, so that there `Σ(B, s) < ∞` iff `B < (1 − s)a` or `B = 0` ((Σ2), (Σ3) of
+  `R_REPORT.md`).
 * For `b > 0` and `W : [0, b] → [0, 1]`: `M_{W,b}(x) := max_{0≤B≤b} (B − W(B)·x)` and
   `𝓔(W, b) := {(B, s) : 0 ≤ B ≤ b, W(B) ≤ s ≤ 1}`.
 
@@ -72,7 +102,7 @@ Finite `n` (from `Q2_REPORT.md` §§1–2, with its conventions (C1), (C2)):
   (This is Q2's `𝓗_N(𝔏, R; E)` with `R = ∞` and positive slopes — excluded by its convention
   (C3) — plus the zero line, which keeps the majorant nonnegative.)
 * The functions `ℓ₀(n, Λ) = ℓ₀¹(n, Λ)`, `q(n, Λ) = q¹(n, Λ)` of `Q2_REPORT.md` §2 (`= 3 ln n + ln(Λ + ln n) + O(1)`
-  and `O(ln n + ln ln Λ)`), the constant `c₃ = 3·exp(1) + 1`, and the functions `A_T`, `q_T`, `Λ*`,
+  and `2 ln n + ln(Λ + ln n) + O(1)`, i.e. `O(ln n + ln Λ)`), the constant `c₃ = 3·exp(1) + 1`, and the functions `A_T`, `q_T`, `Λ*`,
   `P̄_cnt`, `P̄_M` of its §4.
 
 ## 2. The exponent-level input
@@ -141,7 +171,7 @@ range only through `min(x_l, R·n_i)`:
 for every `y ≥ 0`, applied at `y = x_l = min(x_l, ∞)`;
 (ii) *the first rung otherwise*: `x₁ ≥ max(Ξ, 1) ≥ G`, so `−σ·x₁ ≤ −σ·G`;
 (iii) *the outer sample*: a line with `σ_i·G ≤ n_i·B_i + E₁` is needed — **the zero line** has
-`0 ≤ 0`.  (In Q2 this is where (C2) and a finite range are used: a type without a zero line
+`0 ≤ E₁`.  (In Q2 this is where (C2) and a finite range are used: a type without a zero line
 whose majorant is negative at `G` is the type of no family.)
 The rest of the proof is unchanged, and so is the bookkeeping of `δ′` (part (b)).  ∎
 
@@ -269,7 +299,7 @@ then `Ê_k(n, ε̂; Λ̄₀) ≤ 𝓔 + 𝓔′_{M₁}(n; Λ̄)`, the error of T
 proposition's error function is nondecreasing in `Λ` and in `d`; the chain replaces `Λ` by
 `Λ*(n, Λ) ≤ Λ + j(n)q_T(n, Λ + n·b_j) < Λ + n·b_j` by Proposition T(iv), the level by `Λ + q(n, Λ)`.)
 
-*The growth of `Λ̄`.*  As in Proposition A′ of Q2: a level adds `q(n, Λ̄) = O(ln n + ln ln Λ̄)`, a chain
+*The growth of `Λ̄`.*  As in Proposition A′ of Q2: a level adds `q(n, Λ̄) = O(ln n + ln Λ̄)` — `O(ln n)` for `Λ̄ ≤ n²`, which is all that is used —, a chain
 less than `n·a`.  With `Λ̂ := (k + M₁ + 4)·Λ̄₀`: as long as `(k + k_{M₁})·q(n, Λ̂) ≤ Λ̄₀` — true for `k ≤ n^{1/2}` and
 `n ≥ n₀(u, δ)` — every `Λ̄` of the unrolling is at most `Λ̄₀ + (k + k_{M₁})q(n, Λ̂) + (k + M₁ + 1)·n·a ≤ Λ̂`
 (`a < ln 2`, `Λ̄₀ ≥ n ln 2`).
@@ -294,11 +324,16 @@ such that `k²β_k ≤ (1 + η)c_*²` for `k ≥ k₀`, and take `k = ⌈(2(1 + 
 
 **The loss per level.**  In the unrolling of §6 a level costs `ℓ₀ + X₀ + d_min·ln 2 + 2` and a chain
 `A_T + 𝒳 + 1`.  Evaluated with the formulas of `Q2_REPORT.md` (`experiments/workstreams/Z/z2_formula.py`,
-which calls the workstream's `q2lib`): at `u = 1` the level term is about `6.5·ln n`, the chain
-term about `43·ln n` — the chain is seven eighths of the loss — so `c_Z ≈ 50` at `u = 1`, and the
-constant of the limsup is `(3/2)(2c_*²)^{1/3}c_Z^{2/3} ≈ 10.6`: the bound reads
-`n·h + 10.6·n^{1/3}(ln n)^{2/3}` against `n·h + 6.56·√(n ln n)` (Theorem B of Q2) and `8.64·√(n ln n)` (Theorem
-11.58a).  The referee of Q2 notes that almost all of `A_T` is slack of one inequality (its
+which calls the workstream's `q2lib`): at `u = 1` the level term is `5.7` to `6.3` times `ln n` over
+the table, the chain term `41.6` to `44.3` times `ln n` — the chain is seven eighths of the loss —
+so the loss per level is `47` to `50` times `ln n` in the range of the table.  *In the limit*
+(the referee's evaluation of these formulas, `Z_REVIEW.md` F1: with a block `m·h ≈ (8 + γ)ln n`,
+`γ = ln k/ln n`) it is `[(8+γ)(a/h − 1) + u√((8+γ)/(2h)) + 4/(3p_u) + (5+γ) + 1 + (4+γ) + 1]·ln n`: **`52.0·ln n`**
+for `k ≍ n^{1/3}` and `52.9·ln n` for `k = n^{1/2}` (numerically `51.0`–`51.4` at `n = 10^{10} … 10^{50}`); so
+`c_Z = 52.9` serves in the theorem at `u = 1`, and the constant of the limsup is
+`(3/2)(2c_*²)^{1/3}·52.0^{2/3} ≈ 10.9`: the bound reads
+`n·h + 10.9·n^{1/3}(ln n)^{2/3}` against `n·h + 6.56·√(n ln n)` (Theorem B of Q2) and `8.64·√(n ln n)` (Theorem
+11.58a).  (An earlier version said `c_Z ≈ 50` and `10.6`: the values at `n = 10^{15}`.)  The referee of Q2 notes that almost all of `A_T` is slack of one inequality (its
 §4: `289` nats bounded against `200` attained at `u = 1`, `m = 1099`), and remark 3 of §8 would
 divide the number of chains; neither is used.
 
@@ -322,7 +357,13 @@ So, as formulas: the bound of this report is below the non-adaptive cost from `n
 below that of Theorem A of Q2 from `n ≈ 10⁷` on, and its excess over `n·h` is smaller by the
 factors `3`, `6.5`, `20` at `n = 10^{10}, 10^{12}, 10^{15}`.  At `n ≤ 10⁶` the fixed base (ten epochs to
 reach `h + ε₁`) costs more than the whole bound of Theorem A with its best number of epochs:
-there a design takes the cheaper schedule, and nothing is gained.
+there a design takes the cheaper schedule, and nothing is gained.  These crossovers are
+properties of the illustrative parameters, not of the method (the referee's remark R2):
+with `(s_t, ε₁) = (L + 0.10, 0.012)` the range condition holds at the 70 levels the referee
+computed, the base needs six epochs, and the same formula gives `9.4·10³, 1.87·10⁴, 3.93·10⁴,
+8.58·10⁴` at `n = 10⁶ … 10⁹` — below Theorem A of Q2 from `10⁶` on; with `(L + 0.05, 0.02)` or
+`(L + 0.20, 0.003)` the range condition fails at an early level.  The envelope sequence of
+`Z_ADDENDUM.md` removes the parameters.
 
 *Caveats.*  (i) The chain `(b_j)` is computed in floating point for `(s_t, ε₁) = (L + 0.05, 0.003)`
 and `j ≤ 160`; the range condition holds at every level computed (and at the 600 levels of
@@ -352,15 +393,25 @@ chain levels `j ∈ {0, 3, 5, 6, 8, 11}` and nine target accuracies from `𝒳` 
 | control: (D) without `X₀ + ℓ₀ + …` | fails in 216 cases |
 | control: (C) with `W_{j+2}` in place of `W_{j+1}` (two levels' gain claimed for one) | fails in 5 cases |
 
-The measured loss of a level — certified cost minus the type of the next curve — is `23`–`35`
-nats at `d = 10³ … 10⁴`, about half of the `52`–`64` that `X₀ + ℓ₀` allows there.
+The measured loss of a level — certified cost minus the type of the next curve — is `19`–`39`
+nats at `d = 10³ … 10⁴`, about half of the `52`–`64` that `X₀ + ℓ₀` allows there.  (The referee's
+independent test — its own chain, another evaluator, slopes `¼ … 4`, `d` up to `20 000`,
+horizons up to `3000·d`, failure probabilities down to `e^{−30d}`: about 200 000 levels — has
+no violation either, with least slacks `3.8` for (U∞), `1.1` for the exponent-level step and
+`15.6` for the type; and it finds that every level is at least one nat more accurate than
+its target, so that the `2` in `X₀(d)` could be `1.23`.)
 
 ## 8. Remarks
 
 1. **Why `n^{1/3}`, and why not less by this method [a heuristic remark].**  The bound is `min_k [n·β_k + k·ℓ]` with a loss
    `ℓ = Θ(ln n)` per level.  `β_k ≥ τ_{k₁+k} − h ≥ c/(k + k₁)²` for *every* chain of families of this kind
-   (the lower bound of the rate theorem is for the exact recursion), and a level of
-   Algorithm 2L⁺ multiplies the certified cost by at least a constant.  So no schedule
+   (the lower bound of the rate theorem is for the exact recursion; this half is a theorem —
+   Corollary U′ for every chain of convex sub-solutions).  The other half is not an
+   argument as it stands (the referee's finding F4): "a level multiplies the certified
+   cost by at least a constant" does not give an additive loss per level in the type
+   bookkeeping — a chain of `≈ n/m` levels costs its additive term once.  What the
+   inference needs is "every level that lowers the exponent loses an additive constant
+   against its type", which is plausible and unproved.  If it holds, no schedule
    analysed level by level through types gives `n·h + o(n^{1/3})`; with a loss `O(1)` per level
    the method would give `n^{1/3}` without the logarithm.  Whether the true cost is
    `n·h + O(1)` (the hinted lower bound) is the open problem of the theory report §12.
@@ -378,9 +429,15 @@ nats at `d = 10³ … 10⁴`, about half of the `52`–`64` that `X₀ + ℓ₀`
 
 ## 9. What is not proved; the weakest links
 
-1. Everything of `Q2_REPORT.md` that is used (Lemma U, Proposition T, Theorem A) was under
-   internal review when this was written; Lemma Z2 extends Lemma U beyond its stated
-   conventions by reading its proof.
+0. **Nothing in Theorem Z is effective** (the referee's finding F3): `n₀`, `C″` and the number
+   `M₁` of base epochs (hence `C′`) come from the `ε₁` of Lemma RC, the restart level `k₁` and
+   the unquantified `o(1)` of the rate theorem.  For a given `k` the range condition is a
+   finite check (`j ≤ k`), so a certified `β_k` for a given chain is within reach of interval
+   arithmetic; it has not been done.  (The envelope sequence of the addendum has no range
+   condition; its tops are floating-point numbers all the same.)
+1. Everything of `Q2_REPORT.md` that is used (Lemma U, Proposition T, Theorem A) has been
+   refereed internally (`Q2_REVIEW.md`); Lemma Z2 extends Lemma U beyond its stated
+   conventions by reading its proof — both referees (of Q2 and of this report) confirm it.
 2. (T), the level theorem, is a paper proof (refereed, simulated at small sizes), used
    here — as in Theorem 11.58a — in a regime no simulation covers: `k ≈ n^{1/3}` nested
    levels and `k` chains of `≈ n/ln n` levels each.

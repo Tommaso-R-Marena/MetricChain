@@ -1,0 +1,14 @@
+# u = 1, delta = 0.05, eps = 1; entries: ln(evaluations) - n h, minimised over 1 <= k <= 70
+#  s_t - L   b_0 - h   range condition (j <= 70), largest W_j(b_j)   M_1  k_{M_1} |  n = 10^6: total (k)    n = 10^7: total (k)    n = 10^8: total (k)    n = 10^9: total (k)
+   0.05     0.003    True   0.8177                                   10    43   |    1.146e+04 ( 1)        2.521e+04 (13)        4.909e+04 (29)        9.961e+04 (59)    
+   0.15     0.003    True   0.9391                                   10    43   |    1.146e+04 ( 1)        2.308e+04 (12)          4.4e+04 (26)         9.07e+04 (53)    
+   0.05     0.012    True   0.8994                                    6    17   |         9742 ( 6)        2.027e+04 (13)        4.348e+04 (29)        9.332e+04 (59)    
+   0.15     0.012    not admissible (b_0 >= (1 - s_t) a or s_t >= 1 - h/a)
+   0.10     0.012    True   0.9644                                    6    17   |         9423 ( 6)        1.868e+04 (12)        3.933e+04 (26)         8.58e+04 (53)    
+   0.15     0.006    True   0.9731                                    8    27   |    1.116e+04 ( 6)        2.033e+04 (12)        4.088e+04 (26)        8.719e+04 (53)    
+   0.10     0.020    not admissible (b_0 >= (1 - s_t) a or s_t >= 1 - h/a)
+# for comparison (report, section 7): Theorem A of Q2: 1.059e4, 2.613e4, 7.02e4, 2.06e5;  non-adaptive n(a - h): 8.18e4, 8.18e5, ...
+
+real	0m17.869s
+user	0m18.033s
+sys	0m0.012s

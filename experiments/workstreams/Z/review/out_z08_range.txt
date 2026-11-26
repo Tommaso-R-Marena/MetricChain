@@ -1,0 +1,4 @@
+u = 1, s_t = L + 0.05, b_0 = h + 0.003: range condition for all j <= 320: True (largest W_j(b_j) = 0.8177 at j = 5; W_j(b_j) at the last level 0.7493)
+    j^2 (b_j - h)/c_*^2 at j = [10, 20, 40, 80, 160, 240, 320]: 1.3745 1.5328 1.4629 1.3012 1.1697 1.1174 1.0896   [70 s]
+u = 1, s_t = L + 0.15, b_0 = h + 0.003: range condition for all j <= 200: True (largest W_j(b_j) = 0.9391 at j = 5; W_j(b_j) at the last level 0.8305)
+    j^2 (b_j - h)/c_*^2 at j = [10, 20, 40, 80, 160]: 0.9566 0.9848 0.9943 0.9976 0.9989   [27 s]
