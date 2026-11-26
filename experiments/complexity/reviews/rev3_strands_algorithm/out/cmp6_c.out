@@ -1,0 +1,7 @@
+[('GAC', 6), ('GTC', 6)] sizes: words 80 structs 39320896 pairs-by-R {1: 446728884, 2: 9906, 3: 268, 6: 10}: OK [bf 39.3s dp 0.9s]
+[('GAC', 6), ('GTC', 6)] primes: words 80 structs 39320896 pairs-by-R {1: 446728884, 2: 9906, 3: 268, 6: 10}: OK [bf 40.4s dp 1.0s]
+[('G', 4), ('C', 4), ('GCGC', 4)] sizes: words 2896 structs 6313 pairs-by-R {1: 63996, 2: 78, 4: 9}: OK [bf 2.4s dp 2.6s]
+[('G', 4), ('C', 4), ('GCGC', 4)] primes: words 2896 structs 6313 pairs-by-R {1: 63996, 2: 78, 4: 9}: OK [bf 2.2s dp 2.7s]
+[('GA', 4), ('TC', 4), ('GC', 4), ('AT', 4)] sizes: words 3941598 structs 4900 pairs-by-R {1: 78400}: OK [bf 558.2s dp 52.9s]
+[('GA', 4), ('TC', 4), ('GC', 4), ('AT', 4)] primes: words 3941598 structs 4900 pairs-by-R {1: 78400}: OK [bf 537.5s dp 31.0s]
+ALL OK

@@ -48,12 +48,16 @@ def pair_vector(x):
     return [x[i] * x[j] for i in range(m) for j in range(i + 1, m)]
 
 
-def decide(types, max_den=10 ** 6):
+def decide(types, max_den=10 ** 6, candidates=None):
     """types: list of distinct columns (tuples of length K, first entry +1).  The K states on the reduced
     system are the rows of the matrix whose columns are the types.
     Returns ('degenerate', None) if two of the K states coincide up to sign on these sites,
             ('yes', J) with J an integer dict {(i,j): J_ij},
-            ('no', (mu, alpha)) with exact rational certificates."""
+            ('no', (mu, alpha)) with exact rational certificates.
+    candidates: if given, an iterable of states (first entry +1) to which the competitors of V are restricted.
+    With candidates = the sign vectors in the span of the K states this is still an exact decision, because every
+    state of a certificate of non-exposedness lies in that span (Proposition 5 of the note); the matrix J
+    returned for 'yes' then separates V from the other sign vectors of the span only (see span_algorithm.py)."""
     m, K = len(types), len(types[0])
     V = []
     for k in range(K):
@@ -65,7 +69,7 @@ def decide(types, max_den=10 ** 6):
         return "degenerate", None
     if m == 1:
         return "degenerate", None
-    others = [y for y in states(m) if y not in set(V)]
+    others = [y for y in (states(m) if candidates is None else candidates) if y not in set(V)]
     if not others:
         return "yes", {}
     P = m * (m - 1) // 2

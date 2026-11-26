@@ -1,0 +1,6 @@
+[5] characters on F_2^3: 247 subsets with >=2 elements (127 contain 0), mismatches with Sidon: 0
+    F_2^4: 60 random subsets (sizes 2..9, 30 Sidon), full LP; mismatches: 0
+    F_2^5: 200 random subsets (sizes 2..12, 76 Sidon), span-reduced LP; mismatches: 0
+[6] Proposition 10 on twisted character instances (sites F_2^r x [q]): 300 instances, 112 not exposed, mismatches 0
+    product symmetrisation x^k (x) chi_{h_k}: 96 instances, 12 not exposed, mismatches with 'C empty': 0
+time 786 s

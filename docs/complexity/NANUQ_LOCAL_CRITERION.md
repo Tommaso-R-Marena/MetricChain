@@ -1,7 +1,8 @@
 # The NANUQ metric: a local criterion, all galled planar networks, and why "galled" cannot be dropped
 
 Working paper of the complexity division, first version 2026-11-26; **revised 2026-11-26 after the internal
-adversarial review `COMPLEXITY-REV-0002`** (what changed: §11).  Register: `THEOREMS.md` CX-T5–CX-T9, CX-T13,
+adversarial reviews `COMPLEXITY-REV-0002` and `COMPLEXITY-REV-0004`** (what changed: §11); §7.1 and §7.2 are
+later additions that no referee has seen.  Register: `THEOREMS.md` CX-T5–CX-T9, CX-T13,
 CX-V3.  Problem: `OPEN_PROBLEMS.md` B (Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke,
 *Distinguishing Phylogenetic Level-2 Networks with Quartets and Inter-Taxon Quartet Distances*, Bull. Math.
 Biol. 2025; cited as [HABIMRW] by the numbering of arXiv:2507.17308v2).  References are listed in §12.
@@ -115,8 +116,33 @@ This is used, with multiplicities and without separate proof, in the proof of [H
 *Proof.*  Work in a rooted partner.  In a switching every node other than the root has exactly one parent,
 so a switching is a spanning tree, and its path between two leaves goes up to their last common ancestor
 and down again: it is an up-down path.  Let `U` be the union of the up-down paths of `N` between leaves of
-`Y`; `N|_Y` is `U` with degree-2 nodes suppressed, a semi-directed network, so its switchings are trees
-containing `Y`.  (⊇) Let `S` be a switching of `N` and `S_Y` the union of its paths between leaves of `Y`.
+`Y`, with the orientation of the rooted partner; `N|_Y` is `U` with degree-2 nodes suppressed.
+
+*`U` has exactly one node without an entering edge, the least stable ancestor `ℓ` of `Y`* (the lowest node
+through which every path from the root to a leaf of `Y` passes).  This step was missing in the previous
+version (REV-0004, finding 9; the argument is the referee's).  (1) *Every node of `U` is a descendant of
+`ℓ`.*  Let `a` be the apex of an up-down path between `y, y' ∈ Y`.  A path from the root to `a` followed by
+the down part to `y` passes through `ℓ`, and so does the one continued to `y'`.  If `ℓ` were not on the part
+from the root to `a`, it would lie strictly below `a` on both down parts, which have only `a` in common.
+(2) *`ℓ` is an apex.*  `ℓ` is not a hybrid node (its child would be a lower stable ancestor) and not a
+leaf.  If there were no two paths from `ℓ` to two different leaves of `Y` with only `ℓ` in common, then by
+Menger's theorem (join all leaves of `Y` to a new sink) one node other than `ℓ` would lie on all paths from
+`ℓ` to `Y`; it is not a leaf since `|Y| ≥ 2`, and it would be a lower stable ancestor.  So `ℓ ∈ U`, and by (1)
+no edge of `U` enters `ℓ`.  (3) *Every other node `b` of `U` has an entering edge in `U`.*  This is clear
+if `b` lies on an up-down path of which it is not the apex.  Let `b ≠ ℓ` be the apex of an up-down path with down
+parts `D_1` to `y_1` and `D_2` to `y_2`.  As `b` is below `ℓ` it is not a stable ancestor, so there is a path
+`P` from `ℓ` to some `y ∈ Y` avoiding `b`; let `R` be a path from `ℓ` to `b`, `c` the last node of `R` on `P`
+(`c ≠ b`), `R'` the part of `R` from `c` to `b`, which meets `P` only in `c` and ends with an edge `e` entering
+`b`, and `P'` the part of `P` from `c` to `y`.  The nodes of `R'` other than `b` are proper ancestors of `b`,
+those of `D_1`, `D_2` other than `b` proper descendants.  If some `D_i` is disjoint from `P'`, then `R'D_i` and
+`P'` are two paths from `c`, to `y_i ≠ y`, with only `c` in common.  Otherwise let `p` be the first node of
+`P'` on `D_1 ∪ D_2`, say on `D_1` (`p ≠ b`, `p ≠ c`); then `P'` up to `p` followed by `D_1` from `p`, and `R'D_2`, are
+two paths from `c`, to `y_1 ≠ y_2`, with only `c` in common.  In both cases we have an up-down path with apex
+`c` between leaves of `Y` that contains `e`.
+
+Consequently every node of `U` is reached from `ℓ`, a switching of `U` (one entering edge kept at every node
+with two entering edges in `U`) is a tree rooted at `ℓ` that contains `Y`, and `N|_Y` is a semi-directed
+network with rooted partner `U`.  (⊇) Let `S` be a switching of `N` and `S_Y` the union of its paths between leaves of `Y`.
 Then `S_Y ⊆ U`, and `S_Y` contains at most one hybrid edge at each node; a switching of `U` that keeps, at
 each of its hybrid nodes, the edge lying in `S_Y` if there is one contains `S_Y`, and being a tree it
 displays the same tree on `Y` as `S`.  (⊆) Let `S'` be a switching of `U`.  Choose a switching `S` of `N`
@@ -399,7 +425,10 @@ and one of `N_2` at `p`, `r`, and the splits of a joined tree are those describe
 
 (The first version called the pieces "marked networks" and said that `N_2` might have no rooted partner;
 that was wrong and unnecessary — REV-0002, finding 4.  The referee cut 4000 explicit networks: both pieces
-were always valid networks of the class; the piece `N_1` had two leaves in 159 cases and three in 304.)
+were always valid networks of the class; the piece `N_1` had two leaves in 159 cases and three in 304.
+The referee of REV-0004 cut 1 902 times in 2 795 explicit networks: `N_1` had two leaves in 221 cuts, `N_2`
+always at least three; no failure of Lemma B0, Lemma B or Theorem 7, and none of Lemma B0 on 1 417 networks
+that are not planar.)
 
 **Theorem 7 (all levels, any number of blobs) [P + X].**  Let `N` be a binary semi-directed network on
 `n ≥ 4` leaves that is outer-labeled planar and galled (no bound on the level, any number of blobs).
@@ -465,7 +494,11 @@ all `s,t ≥ 0` the weight of the displayed split `{x,y} | rest` of `N(s,t)`, fo
 Programs: `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py` (built on `netcalc.py`, which
 works from the explicit rooted network and shares no code with the split-system programs),
 `nongalled_family.py`, `nongalled_formula.py`.  The referee recomputed (a), (b) and 11 values of each
-formula in (c) with independent code.
+formula in (c) with independent code.  `nongalled_formula.py` takes the four displayed trees of the family
+by formula, not from networks (REV-0004, finding 11); the second referee built the explicit rooted networks
+and found the same split systems for `0 ≤ s,t ≤ 6` in both versions and the same 192 values of the two
+formulas for `0 ≤ s,t ≤ 7`; and `level2_fourtrees_check.py`, `level2_explicit.py` (§7.2) do the same for the
+larger family that contains this one.
 
 *Proof of (c).*  Here `U = (x,y)` and `V = (c, d_1,…,d_s, a_1,…,a_t, b)`, so by Proposition 2
 `α/2 = Φ4 + Σ_z Φ5'(z) + Σ_{z,w} Φ6'(z,w)` with `z, w` running over the `d_j` and the `a_i`.  Each term
@@ -937,11 +970,19 @@ about this extension.
 (b) The same holds for every such network **whose hybrid nodes all have a leaf child** (class 𝒜; it
 contains all bloblets) if and only if  `ρ_o = ρ_s`,  `ρ_c ≤ ρ_a`  and  `ρ_s ≤ 2ρ_a < 2ρ_s`.
 
-(c) NANUQ satisfies (a), on its boundary (`ρ_c + ρ_s = 2ρ_a`).  Modified NANUQ satisfies (b) (on its
-boundary, `ρ_c = ρ_a`) but **not** (a): for the level-1 network on eight leaves consisting of a 5-cycle whose
-hybrid node has a cherry below it and which carries cherries at two of its other four positions, the
-Modified NANUQ distance gives the displayed split "hybrid cherry | rest" the weight `−2`, and is Kalmanson
-for none of the 2520 circular orders (`modified_nanuq_witness.py`, from the explicit rooted network).
+(c) NANUQ satisfies (a), on its boundary (`ρ_c + ρ_s = 2ρ_a`).  Modified NANUQ satisfies (b), on two of
+its boundary faces (`ρ_c = ρ_a` and `ρ_s = 2ρ_a`), but **not** (a).  Smallest witness we know (found by the
+referee of REV-0004, recomputed in `modified_nanuq_witness7.py` from the explicit rooted network): the
+level-1 network on **seven** leaves consisting of a 6-cycle — the hybrid node and five tree nodes with one
+leaf each — and a cherry below the hybrid node; the Modified NANUQ distance gives the displayed split
+"hybrid cherry | rest" the weight `−1` and is Kalmanson for none of the 360 circular orders.  Our first
+witness (`modified_nanuq_witness.py`) has eight leaves: a 5-cycle whose hybrid node has a cherry below it,
+with cherries at **the two cycle positions that are not adjacent to the hybrid node**; weight `−2`, Kalmanson
+for none of the 2520 circular orders.  (The previous version said "at two of its other four positions",
+which was ambiguous: for the other five placements of two cherries the Modified NANUQ distance satisfies
+the full conclusion.)  This contradicts nothing published: the authors of NANUQ⁺ state that they make no
+claim on whether distances other than NANUQ fit a combinatorial structure in a precise sense
+(`PRIOR_ART.md` B-VI).
 
 *Proof.*  The decomposition of Proposition 2 holds verbatim with `ρ_xy` in place of the NANUQ values
 (`α/2 = T4 + ΣT5 + ΣT6 + ΣTM`, where `TM` is the term of a mixed pair `z ∈ U`, `w ∈ V`, which no longer
@@ -989,8 +1030,7 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
 * The non-galled planar networks for which the conclusion survives are classified for level 2 only
   (Theorem 12); for level 3 and above the blobs that are not galled have not been listed.  Theorem 12 says
   nothing about circular orders other than the planar one when a critical weight is negative (checked only
-  for the bloblets with at most nine leaves), and it rests on Lemma 0, whose proof has a gap found by
-  REV-0004 (the statement is true; the repair is pending in this file).
+  for the bloblets with at most nine leaves).
 * For "Kalmanson" without exact support the sharp class is `𝒦′` (Theorem 10′, §7.1) — for classes closed
   under restriction and cherry replacement; nothing is shown about a single system outside `𝒦′` (§7.1,
   Remark 3), and the six-leaf outer-labeled planar networks that display the forbidden pattern are not
@@ -999,10 +1039,11 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
   is sufficient; our necessity witnesses use pendant clades).
 * Theorem 7 was reached independently, but after a third-party claim of the same statement whose method
   probably coincides with ours (§0).
-* The proofs are paper proofs by this division with one internal adversarial review (REV-0002), which is
-  not academic peer review.  Theorem 11 was outside the referee's brief and received spot checks only.
-  Lemma 0, Lemma B0, the rewritten Lemma B and the proof of Theorem 9(c) were written or rewritten after
-  the review.
+* The proofs are paper proofs by this division with two internal adversarial reviews (REV-0002; REV-0004 for
+  Lemma 0, Lemma B0, Lemma B, Theorem 9(c) and Theorem 11), which are not academic peer review.  Theorem 11
+  rests on a computed table of local forms that no kernel checks (the second referee reproduced the table
+  and checked 2 971 networks on the extreme rays of both parameter domains).  Corollary 5′, §7.1 and §7.2
+  were written after both reviews.
 
 ## 10. Reproduction
 
@@ -1025,7 +1066,7 @@ Our programs: `experiments/complexity/nanuq/` (Python 3 + `networkx`).
 | `exhaust_all_systems.py`, `exhaust_tree_generated.py` | CX-D2 | seconds |
 | `parametric_theorem.py` | Theorem 11(a): parametric decomposition identity, local forms on `𝒞_{≤6}`, witnesses | ≈ 2 min |
 | `parametric_classA.py`, `parametric_witnesses_A.py`, `parametric_o_gt_s_witness.py` | Theorem 11(b): local forms on `𝒜_{≤6}`, witnesses with non-hybrid `z,w` | minutes |
-| `modified_nanuq_witness.py` | Theorem 11(c), from the explicit rooted network | seconds |
+| `modified_nanuq_witness.py`, `modified_nanuq_witness7.py` | Theorem 11(c), from explicit rooted networks: the eight-leaf and the seven-leaf witness; the six placements of two cherries | seconds |
 | `export_lean_lists.py` | the list `C6` in the Lean file is the computed closure | ≈ 30 s |
 
 **Which tests are independent of the structure lemmas** (REV-0002, finding 1).  `test_bloblets.py` and
@@ -1070,6 +1111,15 @@ all 108 systems of the list `C6` are 6-locally good.  Axioms: `propext`, `Quot.s
 | 12: print the classes of `𝒞_6` | Appendix B (`class_table6.py`); kernel check of the same fact in Lean |
 | 13: undefined labels, numbering, no bibliography | labels and numbering note in §0; "Theorem 6′" renamed; §12 |
 | 14: the reading of "4-cycle" above level 1 is ours | stated in §8 |
+
+**Changes after the review COMPLEXITY-REV-0004** (Lemma 0, Lemma B0, Lemma B, Theorem 9(c), Theorem 11):
+
+| finding | change |
+|---|---|
+| 9 (major by the referee's rubric; the statement is true): the proof of Lemma 0 assumed that the union of up-down paths has a single source | proof completed with the referee's argument (the paragraph "`U` has exactly one node without an entering edge") |
+| 10: the witness of Theorem 11(c) was described ambiguously; a smaller one exists | Theorem 11(c) rewritten: seven-leaf witness (`modified_nanuq_witness7.py`), the placement of the cherries stated, the disclaimer of NANUQ⁺ quoted |
+| 11: `nongalled_formula.py` takes the trees of the family by formula | said so in §6; explicit-network checks listed |
+| 12: sizes of the pieces in Lemma B | numbers added to the remark after Lemma B |
 
 Added later on 2026-11-26 and not seen by the referee of REV-0002: Corollary 5′ (§3) and §7.1 (Theorem 10′),
 which settle the question left open in finding 10 ("for Kalmanson alone the criterion is not known to be

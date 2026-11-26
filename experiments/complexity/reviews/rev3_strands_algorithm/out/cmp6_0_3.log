@@ -1,0 +1,6 @@
+[('GCC', 6), ('GG', 6)] sizes: words 80 structs 2776573 pairs-by-R {1: 30692160, 2: 1344, 3: 76, 6: 6}: OK [bf 31.4s dp 0.7s]
+[('GCC', 6), ('GG', 6)] primes: words 80 structs 2776573 pairs-by-R {1: 30692160, 2: 1344, 3: 76, 6: 6}: OK [bf 30.6s dp 0.7s]
+[('GGC', 6), ('CC', 6)] sizes: words 80 structs 2776573 pairs-by-R {1: 30692160, 2: 1344, 3: 76, 6: 6}: OK [bf 47.2s dp 0.6s]
+[('GGC', 6), ('CC', 6)] primes: words 80 structs 2776573 pairs-by-R {1: 30692160, 2: 1344, 3: 76, 6: 6}: OK [bf 48.0s dp 0.6s]
+[('GCG', 6), ('C', 6)] sizes: words 80 structs 3168 pairs-by-R {1: 12888, 2: 36, 3: 8, 6: 4}: OK [bf 1.8s dp 0.3s]
+[('GCG', 6), ('C', 6)] primes: words 80 structs 3168 pairs-by-R {1: 12888, 2: 36, 3: 8, 6: 4}: OK [bf 1.7s dp 0.3s]

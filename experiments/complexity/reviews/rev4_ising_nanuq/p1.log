@@ -1,0 +1,29 @@
+[1] sufficiency on 2971 distinct galled outer-labeled planar networks (4..10 leaves):
+    Modified NANUQ: displayed split with alpha <= 0 (outside class A)      144
+    Modified NANUQ: negative weight                                        117
+    class A (all hybrids with leaf child)                                  2021
+    level-1                                                                871
+    networks                                                               2971
+    smallest network with a negative Modified-NANUQ weight found: ((7, 1), {'t0': ['x2', 'h0'], 't1': ['h1', 'a1'], 't2': ['t3', 'x5'], 't3': ['t0', 'x0'], 't4': ['t2', 'x6'], 'r': ['t4', 'a0'], 'x2': [], 'x4': [], 'x1': [], 'x5': [], 'x0': [], 'x6': [], 'x3': [], 'a0': ['x3', 'h0'], 'h0': ['t1'], 'a1': ['x1', 'h1'], 'h1': ['x4']}, 'r', ['x2', 'x4', 'x1', 'x3', 'x6', 'x5', 'x0'], frozenset({frozenset({'x0', 'x3', 'x6', 'x5', 'x2'}), frozenset({'x1', 'x4'})}), Fraction(-1, 1))
+    local forms that occur (kind, split displayed, class A):
+      ('T4', False, False) ['0']
+      ('T4', False, True) ['0']
+      ('T4', True, False) ['-2*a +2*o', '-2*c +2*s']
+      ('T4', True, True) ['-2*a +2*o', '-2*c +2*s']
+      ('T5', False, False) ['0']
+      ('T5', False, True) ['0']
+      ('T5', True, False) ['-1*a +1*o', '-1*c +1*s', '-1*c +1*s +1*a -1*o', '-2*c +2*s +2*a -2*o', '0']
+      ('T5', True, True) ['-1*a +1*o', '-1*c +1*s', '-1*c +1*s +1*a -1*o', '-2*c +2*s +2*a -2*o', '0']
+      ('T6', False, False) ['0']
+      ('T6', False, True) ['0']
+      ('T6', True, False) ['+1*s -1*a', '-1*c +1*a', '-1*c +1*s', '-1*c -1*s +2*a', '0']
+      ('T6', True, True) ['+1*s -1*a', '-1*c +1*a', '-1*c +1*s', '0']
+      ('TM', False, False) ['0']
+      ('TM', False, True) ['0']
+      ('TM', True, False) ['+1*s -1*o', '+2*s -2*o', '-1*s +1*o', '0']
+      ('TM', True, True) ['+1*s -1*o', '+2*s -2*o', '-1*s +1*o', '0']
+      ('TP', True, False) ['+1*a', '+1*c', '+1*s', '-1*s +2*a']
+      ('TP', True, True) ['+1*a', '+1*c', '+1*s', '-1*s +2*a']
+      ('TQ', True, False) ['+1*c', '+2*a -1*o']
+      ('TQ', True, True) ['+1*c', '+2*a -1*o']
+    time 45 s

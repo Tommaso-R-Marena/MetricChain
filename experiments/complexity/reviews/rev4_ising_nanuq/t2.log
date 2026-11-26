@@ -1,0 +1,2 @@
+[2] random instances K=4..7, m<=12: {'total': 1301, 'nexp': 569, 'prop5_viol': 0, 'thm6_viol': 0, 'cor7_viol': 0, 'cor7_applies': 120, 'indep': 1096, 'full_vs_span': 0, 'converse5_fails': 516}
+time 63 s

@@ -268,8 +268,17 @@ exact statement and status have been verified.
 > answer is always yes.)"
 
 * Reformulation: do `K` given vertices of the cut polytope form a face?
-* **Status:** for fixed `K`: **OURS-[P], unreviewed** — linear time, because the answer depends only on the set
-  of column types (`ISING_GROUND_SETS.md` Theorem 2, CX-T16); the `K = 4` rule is very probably classical.
-  For `K` part of the input: in co-NP (Theorem 1); **hardness OPEN** (we found neither a reduction nor an
-  algorithm; structure in CX-T18, CX-T19).  No systematic prior-art search.  Verified on 2026-11-26.
+* **Status** (after the internal review COMPLEXITY-REV-0004, 2026-11-26):
+  - fixed `K`: linear time, because the answer depends only on the set of column types
+    (`ISING_GROUND_SETS.md` Theorem 2, CX-T16) — **[P], reviewed**; the `K = 4` rule and the tables up to five
+    types are **KNOWN** (literature on small cut polytopes);
+  - `K = O(log n)`: polynomial, by an algorithm of time `2^K·poly(n)` (Corollary 5a, the referee's
+    observation);
+  - `K` part of the input: in co-NP; **hardness OPEN** — neither we nor the referee found a reduction or an
+    algorithm; the sufficient condition CX-T18/Cor. 7 is **KNOWN** (Laurent–Poljak 1995/96);
+  - the variant "exposed by an energy with a sum-of-squares certificate of degree 2" is **classified**:
+    equivalent to "no other sign vector in the span" (CX-T28) and **co-NP-complete**, with a `2^K` algorithm
+    that is optimal under ETH up to the constant in the exponent (CX-T29) — **OURS-[P] with the referee's
+    reduction, unreviewed**.
+  Prior art: `PRIOR_ART.md` §C.  Verified on 2026-11-26.
 

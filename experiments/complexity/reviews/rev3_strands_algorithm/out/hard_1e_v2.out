@@ -1,0 +1,9 @@
+Theorem 1e (second form): (instance, model) pairs inside the hypotheses: 12329 ; violations: 0
+  x = sigma, D_G = 0, D_C = 2/3, B = 2: (instance, model) pairs outside the hypotheses 255, conclusion fails in 135
+  x = sigma, D_G = 0, D_C = 2/3, B = 3: (instance, model) pairs outside the hypotheses 240, conclusion fails in 35
+  x = sigma, D_G = 0, D_C = 2/3, B = 4: (instance, model) pairs outside the hypotheses 9, conclusion fails in 4
+  x = sigma, D_G = 0, D_C = 2/3, B = 5: (instance, model) pairs outside the hypotheses 4, conclusion fails in 3
+  x = sigma, D_G = 0, D_C = 5/6, B = 2: (instance, model) pairs outside the hypotheses 255, conclusion fails in 135
+  x = sigma, D_G = 0, D_C = 5/6, B = 3: (instance, model) pairs outside the hypotheses 240, conclusion fails in 44
+  x = sigma, D_G = 0, D_C = 5/6, B = 4: (instance, model) pairs outside the hypotheses 135, conclusion fails in 4
+  x = sigma, D_G = 0, D_C = 5/6, B = 5: (instance, model) pairs outside the hypotheses 60, conclusion fails in 3

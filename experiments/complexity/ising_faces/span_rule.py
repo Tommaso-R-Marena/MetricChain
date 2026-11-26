@@ -8,25 +8,18 @@ from faces import decide, states
 
 
 def other_sign_vectors_in_span(types):
-    """sign vectors y (first entry +) in the row space of the K x m matrix of states, not equal to +-a state."""
+    """sign vectors y (first entry +) in the row space of the K x m matrix of states, not equal to +-a state.
+    Exact rational arithmetic (span_algorithm.sign_vectors_in_span); the first version used a floating-point rank
+    although its comment promised an exact confirmation (COMPLEXITY-REV-0004, finding 7)."""
+    from span_algorithm import sign_vectors_in_span
     m, K = len(types), len(types[0])
-    M = np.array(types, dtype=float).T            # K x m ; rows = states
-    V = set()
+    V = []
     for k in range(K):
-        row = tuple(int(v) for v in M[k])
+        row = tuple(t[k] for t in types)
         if row[0] < 0:
             row = tuple(-r for r in row)
-        V.add(row)
-    # exact membership test by integer rank (small sizes): use fraction-free rank via numpy with tolerance,
-    # then confirm exactly with a rational solve
-    r = np.linalg.matrix_rank(M)
-    out = []
-    for y in states(m):
-        if y in V:
-            continue
-        if np.linalg.matrix_rank(np.vstack([M, np.array(y, dtype=float)])) == r:
-            out.append(y)
-    return out
+        V.append(row)
+    return [y for y in sign_vectors_in_span(V) if y not in set(V)]
 
 
 def quad_independent(types):

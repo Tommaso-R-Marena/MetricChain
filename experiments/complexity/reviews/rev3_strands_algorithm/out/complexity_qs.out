@@ -1,0 +1,3 @@
+single strand of length 16 : pair tests inside Qs = 3060 (l^4/24 = 2730) 
+single strand of length 32 : pair tests inside Qs = 46376 (l^4/24 = 43690) ratio to previous length: 15.2
+single strand of length 64 : pair tests inside Qs = 720720 (l^4/24 = 699050) ratio to previous length: 15.5

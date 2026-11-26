@@ -1,0 +1,57 @@
+[('GC', 2), ('CG', 2)] sizes: words 2 structs 6 pairs-by-R {1: 24}: OK [bf 0.2s dp 0.0s]
+[('GC', 2), ('CG', 2)] primes: words 2 structs 6 pairs-by-R {1: 24}: OK [bf 0.2s dp 0.0s]
+[('GC', 2), ('CG', 2)] letters5: structs 6 pairs-by-R {1: 24}: OK
+[('GC', 3), ('CG', 3)] sizes: words 4 structs 20 pairs-by-R {1: 120}: OK [bf 0.4s dp 0.0s]
+[('GC', 3), ('CG', 3)] primes: words 4 structs 20 pairs-by-R {1: 120}: OK [bf 0.3s dp 0.0s]
+[('GC', 3), ('CG', 3)] letters5: structs 20 pairs-by-R {1: 120}: OK
+[('GC', 4), ('CG', 4)] sizes: words 10 structs 70 pairs-by-R {1: 560}: OK [bf 0.7s dp 0.0s]
+[('GC', 4), ('CG', 4)] primes: words 10 structs 70 pairs-by-R {1: 560}: OK [bf 0.6s dp 0.0s]
+[('GC', 4), ('CG', 4)] letters5: structs 70 pairs-by-R {1: 560}: OK
+[('GC', 4), ('CG', 2)] sizes: words 3 structs 15 pairs-by-R {1: 90}: OK [bf 0.0s dp 0.0s]
+[('GC', 4), ('CG', 2)] primes: words 3 structs 15 pairs-by-R {1: 90}: OK [bf 0.0s dp 0.0s]
+[('GC', 4), ('CG', 2)] letters5: structs 15 pairs-by-R {1: 90}: OK
+[('GCG', 2), ('CGC', 2)] sizes: words 2 structs 1293 pairs-by-R {1: 3336, 2: 42}: OK [bf 0.0s dp 0.0s]
+[('GCG', 2), ('CGC', 2)] primes: words 2 structs 1293 pairs-by-R {1: 3336, 2: 42}: OK [bf 0.0s dp 0.0s]
+[('GCG', 2), ('CGC', 2)] letters5: structs 1293 pairs-by-R {1: 3336, 2: 42}: OK
+[('GCG', 3), ('CGC', 3)] sizes: words 4 structs 95373 pairs-by-R {1: 379620, 3: 42}: OK [bf 0.7s dp 0.1s]
+[('GCG', 3), ('CGC', 3)] primes: words 4 structs 95373 pairs-by-R {1: 379620, 3: 42}: OK [bf 0.8s dp 0.1s]
+[('GCG', 3), ('CGC', 3)] letters5: structs 95373 pairs-by-R {1: 379620, 3: 42}: OK
+[('GCG', 4), ('CGC', 4)] sizes: words 10 structs 8613521 pairs-by-R {1: 49804320, 2: 4032, 4: 42}: OK [bf 5.4s dp 0.4s]
+[('GCG', 4), ('CGC', 4)] primes: words 10 structs 8613521 pairs-by-R {1: 49804320, 2: 4032, 4: 42}: OK [bf 5.3s dp 0.5s]
+[('GCG', 4), ('CGC', 4)] letters5: structs 8613521 pairs-by-R {1: 49804320, 2: 4032, 4: 42}: OK
+[('AT', 2), ('TA', 2), ('GC', 2)] sizes: words 16 structs 0 pairs-by-R {}: OK [bf 0.0s dp 0.0s]
+[('AT', 2), ('TA', 2), ('GC', 2)] primes: words 16 structs 0 pairs-by-R {}: OK [bf 0.0s dp 0.0s]
+[('AT', 2), ('TA', 2), ('GC', 2)] letters5: structs 0 pairs-by-R {}: OK
+[('GGC', 2), ('GCC', 2), ('CGC', 2)] sizes: words 16 structs 168173 pairs-by-R {1: 940698, 2: 360}: OK [bf 0.1s dp 0.5s]
+[('GGC', 2), ('GCC', 2), ('CGC', 2)] primes: words 16 structs 168173 pairs-by-R {1: 940698, 2: 360}: OK [bf 0.1s dp 0.5s]
+[('GGC', 2), ('GCC', 2), ('CGC', 2)] letters5: structs 168173 pairs-by-R {1: 940698, 2: 360}: OK
+[('GC', 2), ('CG', 2), ('GGCC', 2)] sizes: words 16 structs 10284 pairs-by-R {1: 59532, 2: 42}: OK [bf 0.0s dp 0.3s]
+[('GC', 2), ('CG', 2), ('GGCC', 2)] primes: words 16 structs 10284 pairs-by-R {1: 59532, 2: 42}: OK [bf 0.0s dp 0.3s]
+[('GC', 2), ('CG', 2), ('GGCC', 2)] letters5: structs 10284 pairs-by-R {1: 59532, 2: 42}: OK
+[('G', 2), ('C', 2), ('GC', 2), ('CG', 2)] sizes: words 318 structs 0 pairs-by-R {}: OK [bf 0.0s dp 0.2s]
+[('G', 2), ('C', 2), ('GC', 2), ('CG', 2)] primes: words 318 structs 0 pairs-by-R {}: OK [bf 0.0s dp 0.2s]
+[('G', 2), ('C', 2), ('GC', 2), ('CG', 2)] letters5: structs 0 pairs-by-R {}: OK
+[('GCGC', 2), ('CGCG', 2)] sizes: words 2 structs 35800 pairs-by-R {1: 117984, 2: 168}: OK [bf 0.1s dp 0.1s]
+[('GCGC', 2), ('CGCG', 2)] primes: words 2 structs 35800 pairs-by-R {1: 117984, 2: 168}: OK [bf 0.0s dp 0.1s]
+[('GCGC', 2), ('CGCG', 2)] letters5: structs 35800 pairs-by-R {1: 117984, 2: 168}: OK
+[('GCGC', 3), ('CGCG', 3)] sizes: words 4 structs 26298284 pairs-by-R {1: 145431336, 3: 168}: OK [bf 9.4s dp 0.5s]
+[('GCGC', 3), ('CGCG', 3)] primes: words 4 structs 26298284 pairs-by-R {1: 145431336, 3: 168}: OK [bf 9.2s dp 0.5s]
+[('GCGC', 3), ('CGCG', 3)] letters5: structs 26298284 pairs-by-R {1: 145431336, 3: 168}: OK
+[('ACGTACGT', 2)] sizes: words 1 structs 6224 pairs-by-R {1: 6136, 2: 88}: OK [bf 0.0s dp 0.0s]
+[('ACGTACGT', 2)] primes: words 1 structs 6224 pairs-by-R {1: 6136, 2: 88}: OK [bf 0.0s dp 0.0s]
+[('ACGTACGT', 2)] letters5: structs 6224 pairs-by-R {1: 6136, 2: 88}: OK
+[('ACGTACGT', 3)] sizes: words 1 structs 1332664 pairs-by-R {1: 1332576, 3: 88}: OK [bf 0.5s dp 0.1s]
+[('ACGTACGT', 3)] primes: words 1 structs 1332664 pairs-by-R {1: 1332576, 3: 88}: OK [bf 0.5s dp 0.1s]
+[('ACGTACGT', 3)] letters5: structs 1332664 pairs-by-R {1: 1332576, 3: 88}: OK
+[('GCGCAAGCGC', 2)] sizes: words 1 structs 99726 pairs-by-R {1: 99374, 2: 352}: OK [bf 0.9s dp 0.1s]
+[('GCGCAAGCGC', 2)] primes: words 1 structs 99726 pairs-by-R {1: 99374, 2: 352}: OK [bf 1.0s dp 0.1s]
+[('GCGCAAGCGC', 2)] letters5: structs 99726 pairs-by-R {1: 99374, 2: 352}: OK
+[('GGGCCC', 2), ('GC', 4)] sizes: words 3 structs 106828 pairs-by-R {1: 533754, 2: 321}: OK [bf 0.1s dp 0.2s]
+[('GGGCCC', 2), ('GC', 4)] primes: words 3 structs 106828 pairs-by-R {1: 533754, 2: 321}: OK [bf 0.1s dp 0.3s]
+[('GGGCCC', 2), ('GC', 4)] letters5: structs 106828 pairs-by-R {1: 533754, 2: 321}: OK
+[('GGGCCC', 2), ('GC', 2)] sizes: words 2 structs 16007 pairs-by-R {1: 47788, 2: 120}: OK [bf 0.0s dp 0.1s]
+[('GGGCCC', 2), ('GC', 2)] primes: words 2 structs 16007 pairs-by-R {1: 47788, 2: 120}: OK [bf 0.0s dp 0.1s]
+[('GGGCCC', 2), ('GC', 2)] letters5: structs 16007 pairs-by-R {1: 47788, 2: 120}: OK
+[('GCATGC', 2), ('ATGCAT', 2)] sizes: words 2 structs 1422928 pairs-by-R {1: 4624704, 2: 1632}: OK [bf 0.6s dp 0.2s]
+[('GCATGC', 2), ('ATGCAT', 2)] primes: words 2 structs 1422928 pairs-by-R {1: 4624704, 2: 1632}: OK [bf 0.5s dp 0.3s]
+[('GCATGC', 2), ('ATGCAT', 2)] letters5: structs 1422928 pairs-by-R {1: 4624704, 2: 1632}: OK

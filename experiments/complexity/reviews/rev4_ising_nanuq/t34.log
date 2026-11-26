@@ -1,0 +1,4 @@
+[3] Lemma 8: violations 0 ; cases with some y^k outside V: 225 (all not exposed) ; cases with all y^k in V: 189, of which exposed 188
+    Householder generalisation (K'=6,8 balanced-or-constant columns): 142 cases, violations 0
+[4] Lemma 9: (V,S,p) with decoupling and flip(V) != V: 148, violations 0 ; flip-closed cases 132
+time 35 s

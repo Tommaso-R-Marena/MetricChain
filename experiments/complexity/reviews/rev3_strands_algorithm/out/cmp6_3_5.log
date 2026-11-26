@@ -1,0 +1,3 @@
+[('GA', 6), ('TC', 6), ('GC', 6)] sizes: words 953056 structs 1520 pairs-by-R {1: 26298, 2: 27, 3: 6, 6: 3}: OK [bf 254.7s dp 7.6s]
+[('GA', 6), ('TC', 6), ('GC', 6)] primes: words 953056 structs 1520 pairs-by-R {1: 26298, 2: 27, 3: 6, 6: 3}: OK [bf 246.8s dp 7.0s]
+[('GC', 6), ('GGCC', 6)] sizes: SKIPPED (brute force exceeded 1100s)

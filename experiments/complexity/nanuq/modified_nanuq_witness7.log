@@ -1,0 +1,10 @@
+6-cycle with a cherry below the hybrid node (7 leaves): hybrids per blob [1], galled True, planar True
+   NANUQ: negative weights (planar order) {}; support mismatches 0; Kalmanson orders: 2
+   Modified NANUQ: negative weights (planar order) {('x1', 'x2'): '-1'}; support mismatches 1; Kalmanson orders: 0
+5-cycle with a cherry below the hybrid node and cherries at two of the other four positions (8 leaves):
+   cherries at ('c1', 'c0') (1 adjacent to the hybrid node): negative weights {}; support mismatches 0; Kalmanson orders (of 2520): 8
+   cherries at ('c1', 'c3') (1 adjacent to the hybrid node): negative weights {}; support mismatches 0; Kalmanson orders (of 2520): 8
+   cherries at ('c1', 'c2') (0 adjacent to the hybrid node): negative weights {('x1', 'x2'): '-2'}; support mismatches 1; Kalmanson orders (of 2520): 0
+   cherries at ('c0', 'c3') (2 adjacent to the hybrid node): negative weights {}; support mismatches 0; Kalmanson orders (of 2520): 8
+   cherries at ('c0', 'c2') (1 adjacent to the hybrid node): negative weights {}; support mismatches 0; Kalmanson orders (of 2520): 8
+   cherries at ('c3', 'c2') (1 adjacent to the hybrid node): negative weights {}; support mismatches 0; Kalmanson orders (of 2520): 8
