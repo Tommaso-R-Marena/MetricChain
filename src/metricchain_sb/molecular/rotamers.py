@@ -39,3 +39,55 @@ def library_values(resname: str, chi_index: int) -> tuple[float, ...]:
 def library_table() -> dict[str, list[list[float]]]:
     """The whole library, for the metadata."""
     return {r: [list(library_values(r, k)) for k in range(len(q))] for r, q in CHI_ATOMS.items() if q}
+
+
+# ----------------------------------------------------------------------------- wells and cells
+# chis under whose half-turn the ff14SB energy is invariant (see the module docstring)
+_PERIOD_180 = frozenset({("PHE", 1), ("TYR", 1), ("ASP", 1), ("GLU", 2)})
+
+
+def chi_period(resname: str, chi_index: int) -> float:
+    """Period (degrees) of chi number `chi_index` (0-based): 180 for the symmetric groups, else 360."""
+    if chi_index >= len(CHI_ATOMS[resname]):
+        raise KeyError(f"{resname} has no chi{chi_index + 1}")
+    return 180.0 if (resname, chi_index) in _PERIOD_180 else 360.0
+
+
+def _circular(a: float, b: float, period: float) -> float:
+    d = abs(a - b) % period
+    return min(d, period - d)
+
+
+def well_of(resname: str, chis) -> tuple[int, ...]:
+    """The rotamer well of a conformation: per chi, the index of the nearest library value
+    (distance on the circle of that chi's period; a tie goes to the value listed first)."""
+    well = []
+    for k, angle in enumerate(chis):
+        values, period = library_values(resname, k), chi_period(resname, k)
+        well.append(min(range(len(values)), key=lambda i: (_circular(angle, values[i], period), i)))
+    return tuple(well)
+
+
+def cell_widths(resname: str, chi_index: int) -> tuple[float, ...]:
+    """Width (degrees) of the cell of each library value of one chi: the points of the circle
+    nearer to it than to any other library value.  The widths add up to the period."""
+    values, period = library_values(resname, chi_index), chi_period(resname, chi_index)
+    reduced = [v % period for v in values]
+    widths = []
+    for i, v in enumerate(reduced):
+        others = [(w - v) % period for j, w in enumerate(reduced) if j != i]
+        if not others:
+            widths.append(period)
+            continue
+        ahead, behind = min(others), period - max(others)
+        widths.append((ahead + behind) / 2.0)
+    return tuple(widths)
+
+
+def state_share(resname: str, well) -> float:
+    """Share of the residue's torsion space that the library state `well` stands for: the product
+    over chis of (cell width / period).  The shares of all library states add up to 1."""
+    share = 1.0
+    for k, i in enumerate(well):
+        share *= cell_widths(resname, k)[i] / chi_period(resname, k)
+    return share

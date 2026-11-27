@@ -9,10 +9,15 @@ missing residues (SEQRES length differs from the observed residue count, or a C(
 distance > 2.0 A), a missing or unexpected heavy atom (backbone N CA C O, the standard side
 chain, and OXT on the C-terminal residue), a heavy-atom coordinate changed by preparation.
 Hydrogens (and deuteriums) present in the input are deleted before `addHydrogens` so that all
-structures, X-ray, neutron and NMR, receive the same hydrogen placement protocol.  Note that
-addHydrogens itself starts the new H from random positions and minimises them (heavy atoms
-immobile); we seed Python's `random` with `seed` and use the Reference platform so that the
-prepared structure is reproducible.
+structures, X-ray, neutron and NMR, receive the same hydrogen placement protocol.
+`addHydrogens` decides which hydrogens exist (names, bonds, histidine tautomers, charged
+termini) from the heavy atoms; where they are is decided by `hydrogens`:
+  "ideal" (default; model v2)  the deterministic geometric rule of `hydrogens.py`;
+  "openmm-seeded" (model v1)   the positions `addHydrogens` leaves: random starts (Python's
+      `random`, seeded with `seed`) and at most 50 minimiser iterations with heavy atoms
+      immobile.  Reproducible for a given seed, and arbitrary: between seeds the certified
+      minimum of crambin's table moves by 15.7 kcal/mol (experiment SB-X-005).  Kept only so
+      that results recorded on model v1 can be reproduced.
 `repair_with_pdbfixer=True` (off by default) lets PDBFixer add missing heavy atoms (never
 residues, never replacements); the added atoms are listed in the metadata.
 """
@@ -27,6 +32,8 @@ import random
 import numpy as np
 import openmm
 from openmm import app
+
+from .hydrogens import UnsupportedHydrogenEnvironment, ideal_hydrogen_positions
 
 FORCEFIELD_FILES = ("amber14-all.xml",)
 
@@ -87,8 +94,17 @@ def _source_meta(path) -> dict:
     return meta
 
 
+HYDROGEN_PLACEMENTS = ("ideal", "openmm-seeded")
+
+
 def prepare_structure(pdb_path: str, chain_id: str | None = None, ph: float = 7.0,
-                      repair_with_pdbfixer: bool = False, seed: int = 0) -> PreparedStructure:
+                      repair_with_pdbfixer: bool = False, seed: int = 0,
+                      hydrogens: str = "ideal") -> PreparedStructure:
+    """`hydrogens="ideal"` (model v2): positions by the deterministic rule of `hydrogens.py`; `seed`
+    then has no effect.  `hydrogens="openmm-seeded"` (model v1, kept so that its results can be
+    reproduced): positions as left by `addHydrogens` from random starts seeded with `seed`."""
+    if hydrogens not in HYDROGEN_PLACEMENTS:
+        raise ValueError(f"hydrogens must be one of {HYDROGEN_PLACEMENTS}")
     pdb = app.PDBFile(str(pdb_path))          # first model, first alternate location
     topology, positions = pdb.topology, pdb.getPositions(asNumpy=True, frame=0)
     chains = [c for c in topology.chains() if any(r.name in STANDARD for r in c.residues())]
@@ -133,20 +149,33 @@ def prepare_structure(pdb_path: str, chain_id: str | None = None, ph: float = 7.
     finally:
         random.setstate(state)
     pos = np.array(modeller.getPositions().value_in_unit(openmm.unit.angstrom), dtype=np.float64)
+    system = forcefield.createSystem(modeller.topology, nonbondedMethod=app.NoCutoff,
+                                     constraints=None, rigidWater=False, removeCMMotion=False)
+    hydrogen_rules = None
+    if hydrogens == "ideal":
+        try:
+            pos, hydrogen_rules = ideal_hydrogen_positions(modeller.topology, pos, system, return_rules=True)
+        except UnsupportedHydrogenEnvironment as exc:
+            raise StructureRejected(f"{pdb_path}: {exc}") from None
     for a in modeller.topology.atoms():
         if a.element.symbol != "H" and np.any(pos[a.index] != heavy_before[(a.residue.index, a.name)]):
             raise StructureRejected(f"{pdb_path}: heavy atom {a} moved during preparation")
-    system = forcefield.createSystem(modeller.topology, nonbondedMethod=app.NoCutoff,
-                                     constraints=None, rigidWater=False, removeCMMotion=False)
     meta = {
         "source": dict(_source_meta(pdb_path), chain=chain_id),
         "preparation": {
             "reader": "openmm.app.PDBFile (first model, first alternate location)",
             "dropped": "all residues outside the chain or not standard amino acids (waters, ligands, ions)",
             "input_hydrogens": "deleted, then re-added by openmm.app.Modeller.addHydrogens",
-            "hydrogen_placement": ("openmm Modeller.addHydrogens: random initial H positions (Python random "
-                                   "seeded with `seed`), then LocalEnergyMinimizer(tol 1.0 kJ/mol/nm, 50 iter) of "
-                                   "the added H only (heavy atoms immobile; ff14SB, CutoffNonPeriodic), Reference platform"),
+            "hydrogens": hydrogens,
+            "hydrogen_placement": (
+                "ideal geometry: the deterministic rule of metricchain_sb/molecular/hydrogens.py applied to the "
+                "hydrogens that openmm Modeller.addHydrogens declares (names, bonds, histidine tautomers, termini); "
+                "force-field equilibrium bond lengths and angles; no minimisation; independent of `seed`"
+                if hydrogens == "ideal" else
+                "openmm Modeller.addHydrogens: random initial H positions (Python random "
+                "seeded with `seed`), then LocalEnergyMinimizer(tol 1.0 kJ/mol/nm, 50 iter) of "
+                "the added H only (heavy atoms immobile; ff14SB, CutoffNonPeriodic), Reference platform"),
+            "hydrogen_rules": hydrogen_rules,
             "seed": seed,
             "ph": ph, "forcefield": list(FORCEFIELD_FILES), "minimisation": "none",
             "repaired_with_pdbfixer": bool(repair_with_pdbfixer), "pdbfixer_added_atoms": added,

@@ -4,9 +4,15 @@ THE MODEL.  Every downstream claim is conditional on exactly this definition.
 
 1. Structure.  One protein chain of a PDB entry, first model, first alternate location, waters
    and heterogens dropped, input hydrogens deleted and re-added by OpenMM 8.6
-   `Modeller.addHydrogens(ForceField('amber14-all.xml'), pH=7.0)` (this also fixes histidine
-   tautomers and termini: NH3+ / COO-; the new H are minimised by addHydrogens itself with heavy
-   atoms immobile, from random starts seeded by `seed`).  Heavy atoms are the deposited coordinates, unchanged;
+   `Modeller.addHydrogens(ForceField('amber14-all.xml'), pH=7.0)`, which fixes which hydrogens
+   exist (histidine tautomers; termini NH3+ / COO-).  Their positions:
+     model v2 (`hydrogens="ideal"`, default): the deterministic geometric rule of hydrogens.py —
+       force-field equilibrium bond lengths and angles, staggered methyl and ammonium groups,
+       hydroxyl hydrogens anti; no minimisation, nothing random;
+     model v1 (`hydrogens="openmm-seeded"`): as left by addHydrogens from random starts seeded by
+       `seed` (at most 50 minimiser iterations, heavy atoms immobile).  The tables of v1 depend
+       on the seed by tens of kcal/mol (experiment SB-X-005); v1 is kept for reproduction only.
+   Heavy atoms are the deposited coordinates, unchanged;
    no minimisation.  Missing residues/heavy atoms or non-standard residues -> `StructureRejected`
    (see prepare.py).  Fixed sequence: no residue is ever mutated.
 
@@ -60,7 +66,7 @@ import openmm
 
 from .chi import CHI_ATOMS, dihedral_deg, rotate_about_axis
 from .prepare import PreparedStructure, prepare_structure
-from .rotamers import library_table, library_values
+from .rotamers import library_table, library_values, state_share, well_of
 
 FORMAT = "structbio-energy-tables/1"
 KJ_PER_KCAL = 4.184
@@ -94,6 +100,7 @@ class Site:
     state_coords: np.ndarray        # (k, m, 3) Angstrom
     chis: list                      # per state: list of chi angles (degrees, measured)
     origins: list                   # per state: 'native' | 'library'
+    native_chis: list = None        # chi angles of the deposited conformation (whether or not it is a state)
 
     @property
     def n_states(self) -> int:
@@ -200,7 +207,7 @@ def _make_site(index, res, positions, nbr, include_native):
         coords.append(pos[moving])
         chis.append([float(dihedral_deg(*pos[list(q)])) for q in quads])
         origins.append("library")
-    return Site(index, res, res.name, np.array(moving), np.array(coords), chis, origins)
+    return Site(index, res, res.name, np.array(moving), np.array(coords), chis, origins, native)
 
 
 # --------------------------------------------------------------------------- energies
@@ -293,9 +300,17 @@ def _pair(si, sj, params, c):
     return out
 
 
+MODEL_VARIANTS = {
+    "ideal": "hydrogens at ideal geometry by a deterministic rule (model v2)",
+    "openmm-seeded": "hydrogens as left by OpenMM addHydrogens from seeded random starts (model v1)",
+}
+
+
 # --------------------------------------------------------------------------- build
-def build_model(pdb_path, chain_id=None, eps0=4.0, include_native=True, repair_with_pdbfixer=False, seed=0):
-    prepared = prepare_structure(pdb_path, chain_id, repair_with_pdbfixer=repair_with_pdbfixer, seed=seed)
+def build_model(pdb_path, chain_id=None, eps0=4.0, include_native=True, repair_with_pdbfixer=False, seed=0,
+                hydrogens="ideal"):
+    prepared = prepare_structure(pdb_path, chain_id, repair_with_pdbfixer=repair_with_pdbfixer, seed=seed,
+                                 hydrogens=hydrogens)
     nbr = _neighbours(prepared.topology)
     atoms = list(prepared.topology.atoms())
     sites, fixed = [], []
@@ -316,9 +331,9 @@ def build_model(pdb_path, chain_id=None, eps0=4.0, include_native=True, repair_w
 def build_energy_tables(pdb_path: str, chain_id: str | None = None, eps0: float = 4.0,
                         e_clip: float | None = 1000.0, max_states_per_site: int | None = None,
                         include_native: bool = True, seed: int = 0,
-                        repair_with_pdbfixer: bool = False) -> EnergyTables:
+                        repair_with_pdbfixer: bool = False, hydrogens: str = "ideal") -> EnergyTables:
     t0 = time.perf_counter()
-    model, fixed = build_model(pdb_path, chain_id, eps0, include_native, repair_with_pdbfixer, seed)
+    model, fixed = build_model(pdb_path, chain_id, eps0, include_native, repair_with_pdbfixer, seed, hydrogens)
     t1 = time.perf_counter()
     params = _Params(model.prepared.system)
     site_of = np.full(len(model.positions), -1)
@@ -360,7 +375,9 @@ def build_energy_tables(pdb_path: str, chain_id: str | None = None, eps0: float 
     meta = dict(model.prepared.meta)
     meta.update({
         "format": FORMAT,
-        "model": "ff14SB vdW + torsions + distance-dependent-dielectric Coulomb, in vacuo (see tables.py docstring)",
+        "model": ("ff14SB vdW + torsions + distance-dependent-dielectric Coulomb, in vacuo; "
+                  + MODEL_VARIANTS[hydrogens] + " (see tables.py docstring)"),
+        "model_version": "v2" if hydrogens == "ideal" else "v1",
         "energy_function": {
             "units": "kcal/mol", "forcefield": "Amber ff14SB (openmm amber14-all.xml)",
             "terms": ["PeriodicTorsionForce terms with >=1 moving atom", "LJ 12-6 Lorentz-Berthelot",
@@ -376,7 +393,9 @@ def build_energy_tables(pdb_path: str, chain_id: str | None = None, eps0: float 
         "clipping": {"e_clip": e_clip, "n_clipped_entries": n_clip_u + n_clip_p,
                      "n_clipped_unary": n_clip_u, "n_clipped_pair": n_clip_p},
         "max_states_per_site": max_states_per_site, "include_native": include_native,
-        "seed": seed, "seed_note": "seeds the random initial H positions of addHydrogens (prepare.py); nothing else is random",
+        "seed": seed,
+        "seed_note": ("no effect: hydrogens are placed by a deterministic rule (hydrogens.py)" if hydrogens == "ideal" else
+                      "seeds the random initial H positions of addHydrogens (prepare.py); nothing else is random"),
         "terminal_residues": "included as sites when they have a chi (termini are backbone atoms)",
         "library": library_table(),
         "sites": [{
@@ -386,7 +405,15 @@ def build_energy_tables(pdb_path: str, chain_id: str | None = None, eps0: float 
             "chi_atoms": [list(q) for q in CHI_ATOMS[s.resname]],
             "n_moving_atoms": len(s.moving), "n_torsions": len(site_torsions[s.index]),
             "n_states": s.n_states, "chi_angles": s.chis, "origin": s.origins,
+            "deposited_chi_angles": s.native_chis,
+            "deposited_well": list(well_of(s.resname, s.native_chis)),
+            "wells": [list(well_of(s.resname, q)) for q in s.chis],
+            "state_shares": [state_share(s.resname, well_of(s.resname, q)) if o == "library" else None
+                             for q, o in zip(s.chis, s.origins)],
         } for s in model.sites],
+        "wells_note": ("well = per chi the index of the nearest library value (rotamers.well_of); state_shares = share "
+                       "of the residue's torsion space a library state stands for (rotamers.state_share; None for "
+                       "the deposited state, which stands for no cell)"),
         "fixed_residues": fixed,
         "n_sites": len(model.sites), "n_pairs": len(pair), "n_background_atoms": int(len(background)),
         "software": {"openmm": openmm.__version__, "numpy": np.__version__, "python": platform.python_version()},
