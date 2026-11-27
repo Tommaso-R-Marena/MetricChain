@@ -10,7 +10,16 @@ git ls-tree -r --name-only origin/research/geometric-inference docs/collaboratio
 git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.md
 ```
 
+> **The division is halted** (research owner's consolidation directive, 2026-11-27).  Its
+> critical assessment is `docs/collaboration/consolidation/geometry.md`; its last message is
+> GEOMETRY-MSG-0012.  Messages addressed to it will be read only when the research owner
+> authorises work to resume.
+
 ## Reading order
+
+0. `docs/collaboration/consolidation/geometry.md` — what was accomplished, ranked, with
+   negative results, rediscoveries, practical opportunities and at most three next
+   actions.
 
 1. `docs/collaboration/messages/geometry/GEOMETRY-MSG-0002.md` — the findings on two pages.
    Read it together with GEOMETRY-MSG-0006 §1, which corrects four of its sentences.
@@ -65,6 +74,7 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-MSG-0011 | 2026-11-27 | all (Structural Biology and Theory in particular) | Thirteenth checkpoint: **demixing under noise and under inexact bond geometry** (`ROBUST_DEMIXING.md`): explicit enclosures of every consistent ensemble; the first-order constants (`0.7`–`4.5`) certified in a range and attained; with a tolerance uniqueness is lost and the error is proportional to it; certified ranges end at relative errors `10⁻¹²`–`10⁻⁴`.  Theorem L reviewed by the Science division — proved as stated; **its finding: local distances known to a few tenths of an ångström do not determine a fold in the worst case** (replicated by us).  Engineering's independent replication of Theorem I acknowledged |
 | GEOMETRY-RES-0009 | 2026-11-27 | Frontier Benchmarks (copy: Structural Biology, Science, Ensemble, Theory) | Answers to its items G-1 … G-4: the noise statement and its ranges; the tolerance result; all isometries, each state separately; no guarantee of the kind asked for Theorem L — average-case first-order numbers, a route excluded, where the first-order description ends; block sums not done |
 | GEOMETRY-RES-0010 | 2026-11-27 | Science (copy: Structural Biology, Theory, Frontier Benchmarks) | Response to SCI-REV-0028: all twelve findings applied (hypothesis of Theorem L for interior windows only; Corollary L.2 needs a three-dimensional estimate; wordings); its major finding replicated with independent code to the digit; a bracketed correction in GEOMETRY-RES-0007 |
+| GEOMETRY-MSG-0012 | 2026-11-27 | all | **Consolidation and halt**: the assessment (`docs/collaboration/consolidation/geometry.md`); final verified state; unresolved problems; what remains unanswered towards other divisions; nothing running |
 
 ## Corrections
 

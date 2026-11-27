@@ -1,7 +1,16 @@
 # Status of the Geometric Inference, Rigidity and Inverse Problems Division
 
-*Updated 2026-11-27 (thirteenth checkpoint; last fetch of the other seven branches 01:04 UTC; see the commit time).  Branch
+*Updated 2026-11-27 (consolidation; last fetch of the other seven branches 01:04 UTC; see the commit time).  Branch
 `research/geometric-inference`, created from the theory checkpoint `a844b5a`.*
+
+> **HALTED — research owner's directive "Controlled Consolidation and Temporary Research
+> Halt" (received 2026-11-27 about 01:00 UTC).**  The division finished the checkpoint that
+> was already verified when the directive arrived (the thirteenth, commit `a1622d7`), wrote
+> its critical assessment — **`docs/collaboration/consolidation/geometry.md`** — and stopped.
+> No research cycle, no subagent, no background process, no scheduled session, no Modal
+> job is active; no shared compute was ever used by this division.  Incoming messages do
+> not restart the work: **only the research owner's explicit authorisation does.**
+> Final message: GEOMETRY-MSG-0012.
 
 ## The eight divisions (research owner's mandate of 2026-11-26 and two supplementary directives of the same day)
 
@@ -48,6 +57,17 @@ quotation marks are the owner's, the rest is our condensation):
    retrospective evaluation."  The official CASP17 results are due on 2026-11-29; "We are not
    claiming official participation."  Nothing of ours is, or is presented as, an entry or an
    assessment of that kind.
+
+4. *Directive "Controlled Consolidation and Temporary Research Halt"* (2026-11-27, about
+   01:00 UTC), with its clarification "Graceful Research Wind-Down": it "supersedes all
+   previous instructions to operate in continuous research, discovery, improvement, or
+   evaluation loops until I explicitly authorize their resumption"; finish what is close
+   to completion, verify and preserve, write `docs/collaboration/consolidation/<division>.md`
+   (executive assessment; five strongest contributions; negative results; practical
+   opportunities; at most three next actions; publication readiness), commit, push, send
+   a final message, report, and stop.  "Do not start another research cycle.  Do not
+   automatically resume when another division sends a message.  Do not schedule
+   additional reasoning sessions."  Done as described at the top of this file.
 
 ## Verified state at the head of the branch (thirteenth checkpoint; Lean unchanged since the sixth)
 
@@ -206,6 +226,7 @@ below the conic threshold).
 | GEOMETRY-RES-0009 | Frontier Benchmarks; copy to Structural Biology, Science, Ensemble, Theory | answers to its items G-1 … G-4: a noise statement for demixing with computable constants and its certified ranges; the tolerance result; the symmetry group; for G-2 no guarantee of the kind asked — first-order average-case numbers, a route excluded, and where the first-order description ends (the Science division's finding); block sums not done | completed in part |
 | GEOMETRY-RES-0010 | Science; copy to Structural Biology, Theory, Frontier Benchmarks | response to SCI-REV-0028: all twelve findings applied; its major finding replicated with independent code; its stored configuration is not on its branch | completed |
 | GEOMETRY-MSG-0011 | all; Structural Biology and Theory in particular | thirteenth checkpoint: robust demixing; tolerance; Theorem L reviewed; Engineering's replication acknowledged; the symmetry convention | completed |
+| GEOMETRY-MSG-0012 | all | consolidation: the assessment, the state of the branch, what is unresolved, what other divisions asked that remains unanswered; the division is halted | completed |
 | GEOMETRY-REV-0001 | (internal; copy to all) | adversarial review of `ENSEMBLE_RIGIDITY.md` at `e8e2582` by a referee session of this division, verbatim, with our response | completed |
 
 ## Incoming
@@ -250,4 +271,4 @@ below the conic threshold).
 
 ## Open obligations
 
-`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-18).  In priority order: an independent reading of `ROBUST_DEMIXING.md` and of `LABEL_PATTERNS.md` and of §6.2 of the report (Theorem L has had one); identifiability from block sums under a stated labelling scheme (the Frontier division's G-3, first half); O-18 (i) and O-16 (i) — the two places where a certified range ends orders of magnitude before the first-order description does; a certificate *producer* for incomplete and linear-functional data (Theorems F, F″); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms), O-17, O-2, O-3, O-1, O-4.
+`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-19).  **None is being worked on: the division is halted (see the top of this file).**  In the order of priority they had: an independent reading of `ROBUST_DEMIXING.md` and of `LABEL_PATTERNS.md` and of §6.2 of the report (Theorem L has had one); identifiability from block sums under a stated labelling scheme (the Frontier division's G-3, first half); O-18 (i) and O-16 (i) — the two places where a certified range ends orders of magnitude before the first-order description does; a certificate *producer* for incomplete and linear-functional data (Theorems F, F″); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms), O-17, O-2, O-3, O-1, O-4.

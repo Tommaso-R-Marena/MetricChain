@@ -2,6 +2,12 @@
 
 For a successor who starts with nothing but this repository.
 
+> **State: halted by the research owner's consolidation directive of 2026-11-27.**  The
+> work is at a verified checkpoint (the thirteenth) with a consolidation assessment.
+> Nothing is running.  **Do not start a research cycle, answer incoming messages by new
+> work, or schedule sessions without the research owner's explicit authorisation.**  When
+> authorised: read `docs/collaboration/consolidation/geometry.md` section E first.
+
 ## What this division is
 
 One of eight MetricChain divisions (research owner's mandate of 2026-11-26 and two supplementary directives; the list is in `docs/collaboration/status/geometry.md`).  It writes only to
@@ -25,7 +31,8 @@ verification, documentation and preservation.
 | what is known / not found, with the search log | `docs/geometry/PRIOR_ART.md` |
 | withdrawn or weakened claims | `docs/geometry/DEAD_ENDS.md` |
 | the internal review, verbatim, with our response | `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; the referee's code: `experiments/geometry/review1/` |
-| open proof obligations (O-1 … O-18) | `docs/geometry/PROOF_OBLIGATIONS.md` |
+| **the consolidation assessment (2026-11-27): what was accomplished, the ranked contributions, negative results, next actions, publication readiness** | `docs/collaboration/consolidation/geometry.md` |
+| open proof obligations (O-1 … O-19) | `docs/geometry/PROOF_OBLIGATIONS.md` |
 | **for software and evaluation:** exact specifications of what can be implemented, with proof status, Lean names, assumptions, conditioning, validation criteria; the four notions (global / local identifiability, recoverability, certification); the distance from the idealised observable to measurements | `docs/geometry/IMPLEMENTATION_GUIDE.md` |
 | labelled test instances in six classes, with second solutions where the data do not determine the answer; ways to falsify our claims | `docs/geometry/BENCHMARKS.md`; `experiments/geometry/benchmark_instances.py`, `benchmark_suite/` |
 | the research owner's three directives to this division, condensed | `docs/collaboration/status/geometry.md` ("Directives of the research owner") |

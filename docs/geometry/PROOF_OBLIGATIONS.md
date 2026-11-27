@@ -223,3 +223,24 @@ that are not a box common to all states; (vi) hypothesis (J) as a consequence of
 a constant, instead of a numerical check per instance; (vii) the sharp first-order
 tolerance constant `c_tol` in a certified range (the certified one, `T_k`, is 4 to 6 times
 larger because it allows violation patterns that exact data exclude).
+
+**O-19.  A producer and existence thresholds for ensemble stress certificates (Theorems F,
+F″) — planned, not started** (it was the next item on our list when the research owner's
+consolidation directive arrived).  *What exists:* the statement and its machine-checked
+core (`stress_certificate`); the checker (one `LDLᵀ` factorisation and two ranks); instances
+found by the internal referee's semidefinite programme
+(`experiments/geometry/review1/k_stress.py`): for two generic states with 14 and 16 atoms a
+stress exists for the bands `3 ≤ |i − j| ≤ 7` and `≤ 8` and for 45 or 55 random pairs of 66,
+and does not exist for bands `≤ 5`, `≤ 6` (no stress is supported within separation `3K`).
+Theorem F″ (data that are linear functionals `⟨C_a, M⟩`, such as block sums) has no
+instance.  *What is missing:* (i) a producer — find `Ω ⪰ 0` supported on the measured pairs
+and `E₀` with `Ω𝟙 = 0`, `Ωz = 0` and kernel exactly `span(𝟙, z)`: a semidefinite feasibility
+problem in the stress space of the stacked framework, of dimension
+`|F ∪ E₀| − rank` of its rigidity matrix in `ℝ^{3K}`, followed by rational rounding; (ii) a
+count: the stress must have rank `n − 1 − 3K`, so at least that many independent stresses
+are needed — which gives a lower bound on the number of measured pairs, not yet written
+down; (iii) for block sums: `Ω = Σ_a λ_a C_a` restricted to the equilibrium conditions — the
+natural first computation for the Frontier division's item G-3; (iv) existence for generic
+states above the count (a conjecture to formulate from experiments).  *How to resume:*
+start from `k_stress.py`, sweep the number of random measured pairs at fixed `(K, n)` to
+find the empirical threshold, then block patterns.  Local computation only.

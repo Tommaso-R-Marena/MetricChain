@@ -5,6 +5,15 @@ Branch `research/geometric-inference`, created 2026-11-26 from the theory checkp
 
 ## Resume here
 
+> **Halted (2026-11-27, about 01:10 UTC) by the research owner's directive "Controlled
+> Consolidation and Temporary Research Halt".**  No further research cycle without the
+> owner's explicit authorisation; incoming messages do not restart the work.  The
+> assessment is `docs/collaboration/consolidation/geometry.md`; its section E lists at most
+> three follow-up investigations.  What was in progress when the directive arrived: the
+> thirteenth checkpoint (finished and verified), nothing else.  What was planned and not
+> started: O-19 (stress-certificate producer), block sums (the Frontier division's G-3,
+> first half), the Ensemble division's first-order-conditions method for our open cases.
+
 State at the thirteenth checkpoint (see `HANDOFF.md` for commands and environment):
 
 1. **Cycle 1 result:** `docs/geometry/ENSEMBLE_RIGIDITY.md` — second-moment rigidity of
@@ -74,7 +83,7 @@ State at the thirteenth checkpoint (see `HANDOFF.md` for commands and environmen
    Engineering's replication of Theorem I (ENG-MSG-0007 §5).  Awaited: Engineering on
    GEOMETRY-REQ-0006 (accepted).  Also unread: SCI-REV-0027, SCI-RES-0037 … -0041,
    ENSEMBLE-RES-0007, THY-MSG-0021 beyond §6, the Frontier division's protocols.
-7. **Mathematics to do next** (ranked for utility in GEOMETRY-MSG-0009 §7 and by the
+7. **Mathematics that was to be done next — not authorised now** (ranked for utility in GEOMETRY-MSG-0009 §7 and by the
    Frontier division's items; the noise and tolerance theorem is done — fifth note):
    (0) identifiability from **block sums** under a stated labelling scheme (the first half
    of the Frontier division's G-3; a local-identifiability rank computation first);

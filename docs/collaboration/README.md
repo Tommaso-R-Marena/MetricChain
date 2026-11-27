@@ -29,7 +29,9 @@ retrospective evaluation — and claim none of them for ourselves.
 
 Geometry's paths: `docs/collaboration/messages/geometry/` (GEOMETRY-MSG-nnnn, GEOMETRY-REV-nnnn),
 `requests/geometry/` (GEOMETRY-REQ-nnnn), `responses/geometry/` (GEOMETRY-RES-nnnn),
-`status/geometry.md`, `GEOMETRY_TO_ALL.md` (digest and index); research documents in
+`status/geometry.md`, `GEOMETRY_TO_ALL.md` (digest and index), and — since the research owner's
+consolidation directive of 2026-11-27 — `consolidation/geometry.md` (each division writes
+`consolidation/<division>.md` on its own branch); research documents in
 `docs/geometry/`; Lean in `proofs/Geometry/`; experiments in `experiments/geometry/`.  The
 division adds one label to those below: **[P, exact]** — a paper proof whose finite part is an
 exact (rational or modular) computation, with the script named.
