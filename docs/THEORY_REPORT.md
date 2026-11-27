@@ -79,7 +79,7 @@ models and non-decomposable residuals; (ii) temperature-aware dominance and voxe
 *certificate rules* (D1, D3, D4); (iii) finite-angle torsion-to-RMSD certificates and the
 resulting envelope for SE(3)-invariant residuals (C4); and (iv) a machine-checked certificate
 algebra and library covering all of it, including formalizations (to our knowledge new in Lean)
-of several known results.  The results of the later research phases (§§10–12; rows G1–G43 of §10), which
+of several known results.  The results of the later research phases (§§10–12; rows G1–G44 of §10), which
 were developed in response to that assessment and were reviewed by further independent
 referees (`reviews/R2` – `R12`), are classified separately there; §0.3 is a map of them.
 
@@ -1555,6 +1555,7 @@ algorithmic statement, and a probabilistic notion of certificate — are the sub
 | G41 | **The rate of the level recursion.**  The exponent of `k` nested levels at accuracy zero is `h + (2π²h²θ_hint″(0) + o(1))/k²` (Theorem 11.53b; `0.641·a/k²` on the cube at `u = 1`, `(π²/16)/k²` for the Gaussian pair), for every convex non-adaptive exponent function whose dual has a twice differentiable maximum; with a kink at the fixed point the rate is `1/k`, so the general `O(1/k)` bound cannot be improved over the class of all convex pairs.  The recursion acts on lines through a one-dimensional map with a saddle-node at the hinted exponent (Theorem 11.53a); the lower bound is the passage time of the orbit of a minorant line; the upper bound needs that a *convex* family of lines moves line by line (a minimax theorem) and a convex sub-solution cut from the orbit curves.  A statement about the analysis of nested algorithms at the level of exponents: no cost at finite `n` follows, and no constant at finite `k` is certified from above | Lemmas L and M, the iteration of the lower bound, the Gaussian slope map and three instances **[V]** (`LineDynamics.lean`); the slope map, the passage time, one level for convex families, the sub-solution and the range condition **[P]**; harness XVI.6, XVI.8 (13 mutations) and exact rational lower bounds for the Gaussian pair **[N]** | cycle 10, after the twenty-second checkpoint: the coordinator's proof (`docs/workstreams/R_REPORT.md`), written after the workstream commissioned for it ended without output; **refereed internally by two independent referees with their own code: no error of substance in either half, minor findings applied**; the law was first seen numerically ("`0.65/k²`", workstream H); the mathematics is a classical slow passage through a saddle-node combined with a minimax argument — no novelty claimed for either; **prior art for the recursion itself not searched** (it is internal to this report's algorithm family) |
 | G42 | **The nested algorithm in the structure it uses** (§11.33).  The level theorem holds for an outer integrand on any probability space with an upper and a lower *tail function* (Theorem 11.118; the cube with identical constants); for two blocks, and for a dependent known part with a certified *class-relative influence* between the blocks — dependence costs slope (Theorem 11.119).  **Obstructions:** on Gauss space with Euclidean-Lipschitz functions the tail functions are exact and dimension-free and nesting over a fixed split of the coordinates gains nothing, while the hinted lower bound holds in high dimension (Theorem 11.120) — the dividing line is additivity of the envelope over independent parts, not discreteness; with unbounded influence the algorithm returns a **false certificate** (Proposition 11.121); an exponential moment is necessary and sufficient for any certified upper bound (Proposition 11.122).  A tail profile whose relative exponent does not increase gives a pair of exponent functions (Proposition 11.123); the assembly of the levels into an adaptive bound in the abstract setting is a plan, not a proof; 25 assumptions of the level theorems classified | nothing machine-checked (the machine-checked `HintPair` theorem is quoted for Proposition 11.123(a)); paper proofs **[P]**; 2 624 simulated runs of the outer loop in valid settings, the invalid brackets of Proposition 11.121 in 80 of 80 runs **[N]** | cycle 10, after the twenty-second checkpoint, under the research owner's directive on generality: workstream N (`docs/workstreams/N_REPORT.md`); **refereed internally (`docs/workstreams/N_REVIEW.md`): the level theorem and its variants correct as stated, the false certificate reproduced with independent code (120 of 120 runs), one proposition a plan, one claim on a non-sharp tail function wrong — corrected in §11.33**; Gaussian isoperimetry and a spherical cap bound quoted from memory; prior art not searched |
 | G43 | **The `1/k²` law at finite `n`, certified exponents of `k` levels, extensive accuracies** (Lemma 11.58b – Theorem 11.58e; it improves row G40).  One nested level over a family whose certified cost is a *maximum of lines* maps the family line by line with an error of five logarithms (Lemma 11.58b), a drop loses no `√n` at a logarithmic accuracy and a chain of levels with short outer blocks returns to a bounded accuracy for an additive term paid once (Proposition 11.58c): `n·h + 6.56·√(n ln n)` at `u = 1` with no term of order `√n` (Theorem 11.58d).  Carrying a **convex family of lines** through the levels — the minimax step of the rate theorem — gives `ln N ≤ n·b_k + k·c_Z·ln n + O(ln n)` for every admissible sequence of families; the *envelope sequence* (cap at slope one, lower convex envelope of the image under the slope map) is admissible from the non-adaptive exponent with no restart, has the smallest tops, `k²(b_k − h) → 2π²h²θ_hint″(0)`, and bounds the exponent of `k` nested levels at every `k`, with equality at `k = 2` and strictly from `k = 3` on: **`ln N(n; ε, δ) ≤ n·h + O(n^{1/3}(ln n)^{2/3})`**; certified tops by interval and exact rational arithmetic; at an accuracy `g·n` the exponent of the schedule converges geometrically in the number of levels: **`ln N(n; g·n, δ) ≤ n·θ_hint(g) + O((ln n)²)`** | all **[P]**: workstream Q2 (refereed internally: correct as stated) and the coordinator's `Z_REPORT.md`, `Z_ADDENDUM.md` (two internal referees with independent code: no error of substance; the certified tops and the equality at two levels added afterwards, unrefereed); harness XVI.9, XVI.10, XVI.11 **[N]**; exact evaluations of the certified cost: about 380 000 single levels, nests of two to seven levels (about six million node checks, no violation), two envelope levels over the real base at `n = 50 000` (`e^{2818}` against `e^{5547}` non-adaptive); nothing machine-checked | cycle 10, after the twenty-third checkpoint; the rate `1/k²` of the recursion (row G41) was the missing input; prior art: none searched beyond that of rows G39–G41 (the question is internal to this model) |
+| G44 | **Tail functions beyond the uniform cube: isoperimetry on a product of sites by induction over the sites** (Proposition 11.124; workstream I).  The two-point recursion over the sites is a valid lower bound for the measure of neighbourhoods on any finite product with a product measure and an additive cost; with exact step functions it reproduces Harper's theorem at ball sizes and, on a biased cube, the balls around the rare vertex; both tail functions of the level theorem follow from it; the lower one has a closed form by an exact tensorisation; for a fixed number of slopes on the uniform cube products of balls are extremal up to polynomial factors | **[P]** for validity, the coordinator's, unrefereed; **[N]** for sharpness (exhaustive on products of four sites; against Harper); harness XXVII.1 | the induction and the tensorisation are classical methods (Harper; Bollobás–Leader 1991; Marton; Ahlswede–Zhang; Yu 2022 for the exponents); ours: the use as a computation of valid tail functions for the level theorem on heterogeneous products, the negative results (no Harper theorem for the biased cube in the concentration regime; the lossy one-variable recursion), and a conjecture with numerical support (the Chernoff potential is inductive up to `c/n`) |
 
 Honest reading.  G2 and the identifications of §11.1 are known mathematics.  G1, G3, G5 are
 clean reformulations and routine consequences.  The content that was not found in print is
@@ -12493,7 +12494,76 @@ problem is not known); **the tail function of the true class of fibre averages**
 a dependent known part breaks, at the price of validity; **the isoperimetric input** —
 exact isoperimetry is not needed, concentration is not enough (the method needs the
 tail of *small* sets relative to their measure, uniformly), and a bounded accuracy
-needs a two-sided estimate that exists for the uniform cube and Gauss space only.
+needs a two-sided estimate that exists for the uniform cube and Gauss space only
+(since the twenty-fourth checkpoint also for products of sites with different slopes or
+biases, as a computation and — up to polynomial factors, for a fixed number of slopes —
+in closed form: Proposition 11.124).
+
+**Proposition 11.124 (tail functions on a product of sites, by induction over the sites)
+[(a)–(d) P: the coordinator's `docs/workstreams/I_REPORT.md`, unrefereed, nothing
+machine-checked; sharpness N; (e) negative results and a conjecture].**  Let the sites be
+finite sets with laws of full support and costs `ρ_i ≥ 0` vanishing on the diagonal, `μ` the
+product measure, `ρ` the sum of the costs, and for a set `E` and a budget `t` let `E(t)` be the
+set of points within cost `t` of `E`.  A *growth bound* is a function `g(m, t)`, nondecreasing
+in both arguments, with `μ(E(t)) ≥ g(μ(E), t)` for every nonempty `E`.
+(a) *Induction over the sites.*  If `g′` is a growth bound for a product, then for one more
+site with law `π` and cost `c`
+
+    g(m, t) := inf{ Σ_y π(y)·max_x g′(m(x), t − c(x, y)) : Σ_x π(x)·m(x) ≥ m }        (g′ := 0 at negative budgets)
+
+is a growth bound for the larger product: the fibre of `E(t)` over a letter `y` is the union
+over the letters `x` of the neighbourhoods of the fibres of `E`, and a union is at least its
+largest member.  Starting from a point (`g = 1`), this is a computation that returns a valid
+bound for any product; on a grid of `−ln m` the rounding can be arranged so that the grid
+costs sharpness only.
+(b) *Both tail functions from a growth bound.*  With `M(q, t) := sup{m : g(m, t) ≤ q}`,
+`Ξ(q) := ∫₀^∞ e^t M(q, t) dt` and `Θ(q) := ∫₀^∞ e^{−t} g(q, t) dt` satisfy (TU) and (TL) for the class of
+`ρ` (the points of a set `D` at exit cost above `t` have their `t`-neighbourhood inside `D`).
+(c) *The lower tail in closed form.*  For every set `E` and every `λ ≥ 0`,
+`∫ e^{−λρ(E → y)} dμ(y) ≥ exp(−Φ^λ(ln 1/μ(E)))`, where `Φ^λ` is the max-plus convolution over the
+sites of the least concave majorants of `d ↦ sup{ min_Q [D(Q‖μ_i) + λ·T(P, Q)] : D(P‖μ_i) ≤ d }`
+(`T` the optimal transport cost of the site) — a tensorisation by the chain rule with no
+error term.  So `Θ(q) = exp(−Φ¹(ln 1/q))` is a lower tail function at every size.  For uniform
+bits with several slopes (so many sites of each) the maximiser has one slope common to all types — the
+structure of the exponents of §11.26, as an inequality at every `n`.
+(d) *Blocks.*  Growth bounds `g₁`, `g₂` of two factors give
+`μ(E(t)) ≥ min{ max over splits of the budget of g₁(a, t₁)·g₂(s, t₂) : a·s ≥ μ(E)/(2K) }`,
+`K = ⌈log₂(2/μ(E))⌉` (layer cake over the fibre measures and a pigeonhole).  With Harper's
+theorem in each block, a uniform cube with a fixed number of slopes has growth bounds and
+tail functions in closed form that are sharp up to polynomial factors: products of balls are
+extremal up to such factors.
+*Numbers.*  The recursion (a) reproduces Harper's theorem at ball sizes within the slack of
+the grid (`n = 12`: `0.04` nats); on a biased cube (`n = 14`, `p = 0.2`) it gives the values of the
+balls around the **rare** vertex within `0.11` nats; on three products of four sites
+(uniform; two costs; biased with asymmetric costs) all 65 534 sets satisfy the growth
+bound, which is attained, and the tail functions of (b) (within `2.2` per cent above, attained
+below) and of (c) (within `0.15` per cent).  On the uniform cube the closed form of (c) is
+`≈ 2/√n` times the exact lower tail function for `n = 32 … 2048`.  Harness XXVII.1 (products of
+three sites, exhaustive, without a grid; nine mutations, all caught).
+(e) *What is not true, and what is conjectured.*  A Harper theorem for the biased cube is
+false in the concentration regime: exhaustively for `n ≤ 4` and five biases, the ball around
+the rare vertex is an exact minimiser in all 78 cases in which its neighbourhood is not the
+whole cube, and is not in the 17 cases in which it is (harness DEAD.29; D69).  The
+piecewise-linear interpolation of ball values is not preserved by the induction on a biased
+cube.  The one-variable recursion for `Ξ` (a minimum of integrals for an integral of minima)
+is valid, exact in dimension one and two, and exponentially lossy — it credits a set
+confined to a subcube with its depth inside the subcube.  *Conjecture:* the single-letter
+(Chernoff) potential fails the induction step of (a) by at most a constant over `n` —
+numerically `n·defect ≤ 0.632 = 1 − 1/e` on the uniform cube for `n ≤ 1000`, the mean of a Bregman
+gap of size half the variance of one site over the total variance — which would give a
+closed-form growth bound on every finite product, sharp up to a polynomial factor.
+*What it changes.*  Theorem 11.118 can be run on an outer block that mixes slopes (the case
+the Computational Research Division's type-aligned design avoids) or biases, with tail
+functions that are valid at the block's size.  *What it does not:* for a field the reference
+of the algorithm is the flat-histogram instance, whose budget depends on the type of the
+exit point and is not an additive cost (Theorem 11.63); no closed form with polynomial
+precision beyond a fixed number of slopes on the uniform cube; no run of the algorithm
+with these functions; no referee.  *Prior art:* the induction is classical (the fractional
+form of Harper's theorem of Bollobás and Leader, 1991, which treats the weighted cube for
+down-sets; Talagrand's inductions); the exponents of isoperimetry in product spaces are
+known asymptotically (Ahlswede–Zhang; L. Yu, arXiv 2205.07596, with a dimension-free bound
+in the concentration regime); (c) is Marton's coupling with the exact single-letter
+trade-off, and no novelty is claimed for it beyond its use as a tail function.
 
 ## 12. Strongest unresolved questions, and what a publication would need
 

@@ -14613,6 +14613,22 @@ def t_dead_naive_interval(rng, trials):
     return True, {}
 
 
+@conjecture("DEAD.29 (documented refutation, D69) 'On the p-biased cube (ones rare) the balls around the rare vertex, U_r = {|x| >= n - r}, minimise mu(E_t) among all sets with mu(E) >= mu(U_r), for every r and every t' — a Harper theorem for the biased cube; false: for n = 3, p = 1/5 there are sets with the measure of a ball whose t-neighbourhood is smaller than the ball's (the ball has swallowed the cube, a set near the likely vertex has not); exhaustive over all 255 subsets.  (In the cases with mu((U_r)_t) < 1 the balls are minimisers in this instance — the statement fails in the concentration regime only)", expect_fail=True)
+def t_dead_biased_harper(rng, trials):
+    sites = [(0.2, 1, 1)] * 3
+    T, table = pt_exact_growth(sites)
+    N, w, C = pt_space(sites)
+    n = 3
+    for r in range(n):
+        mb = sum(w[x] for x in range(N) if bin(x).count("1") >= n - r)
+        for t in range(1, T + 1):
+            ball_t = sum(w[x] for x in range(N) if bin(x).count("1") >= n - r - t)
+            best = min(v for (m, v) in table[t] if m >= mb - 1e-12)
+            if best < ball_t - 1e-12:
+                return False, dict(reason="a set with the measure of a ball around the rare vertex has a smaller neighbourhood", r=r, t=t, ball=round(ball_t, 6), minimum=round(best, 6))
+    return True, {}
+
+
 # ----------------------------------------------------------------------------------------------
 # XXVI. The nested algorithm on a general probability space (theory report 11.33; workstream N)
 # ----------------------------------------------------------------------------------------------
@@ -14759,6 +14775,185 @@ def t_level_general(rng, trials):
         if dq <= -1:
             return True, dict(reason="harness: below p_u the quotient should exceed -1", u=uu, quotient=dq)
     stats.update(A=A, violation=round(worst), edge=round(edge, 3))
+    return True, stats
+
+
+# ----------------------------------------------------------------------------------------------
+# XXVII. Tail functions on product spaces by induction over the sites (workstream I)
+# ----------------------------------------------------------------------------------------------
+def pt_space(sites):
+    """Points, weights and cost matrix of a product of binary sites (p1, c01, c10): P(x_i = 1) = p1,
+    c01 the cost of moving letter 0 to letter 1, c10 the reverse; the cost is additive."""
+    n = len(sites)
+    N = 1 << n
+    w = [1.0] * N
+    for x in range(N):
+        for i, (p1, _, _) in enumerate(sites):
+            w[x] *= p1 if (x >> i) & 1 else 1 - p1
+    def cost(x, y):
+        c = 0
+        for i, (_, c01, c10) in enumerate(sites):
+            xi, yi = (x >> i) & 1, (y >> i) & 1
+            if xi != yi:
+                c += c01 if xi == 0 else c10
+        return c
+    C = [[cost(x, y) for y in range(N)] for x in range(N)]
+    return N, w, C
+
+
+def pt_exact_growth(sites):
+    """Brute force: for every budget t the list of (mu(E), mu(E_t)) over all nonempty subsets E,
+    E_t = {y : cost(x, y) <= t for some x in E}."""
+    N, w, C = pt_space(sites)
+    T = max(max(r) for r in C)
+    M = 1 << N
+    meas = [0.0] * M
+    low = [0] * M
+    for mask in range(1, M):
+        low[mask] = (mask & -mask).bit_length() - 1
+        meas[mask] = meas[mask & (mask - 1)] + w[low[mask]]
+    out = {}
+    for t in range(T + 1):
+        nb = [sum(1 << y for y in range(N) if C[x][y] <= t) for x in range(N)]
+        g = [0] * M
+        for mask in range(1, M):
+            g[mask] = g[mask & (mask - 1)] | nb[low[mask]]
+        out[t] = [(meas[mask], meas[g[mask]]) for mask in range(1, M)]
+    return T, out
+
+
+def pt_recursion(sites, T):
+    """The growth bound of Lemma I1 by induction over the sites, on the achievable measures (no grid):
+    returns (A, G) with A the sorted achievable measures of nonempty sets of the product and
+    G[t][i] <= inf{mu(E_t) : mu(E) >= A[i]}."""
+    A = [1.0]                                    # the empty product: one point
+    G = [[1.0] for _ in range(T + 1)]
+    for (p1, c01, c10) in sites:
+        q0, q1 = 1 - p1, p1
+        vals = [0.0] + A                         # fibre measures: empty or achievable
+        def g(i, t):                             # i indexes vals; the empty fibre and negative budgets give 0
+            if i == 0 or t < 0:
+                return 0.0
+            return G[t][i - 1]
+        newA = sorted(set(round(q0 * a + q1 * b, 15) for a in vals for b in vals) - {0.0})
+        newG = [[1.0] * len(newA) for _ in range(T + 1)]
+        pairs = [(q0 * vals[i] + q1 * vals[j], i, j) for i in range(len(vals)) for j in range(len(vals))]
+        for t in range(T + 1):
+            cand = sorted((m, q0 * max(g(i, t), g(j, t - c10)) + q1 * max(g(j, t), g(i, t - c01))) for (m, i, j) in pairs if m > 0)
+            best = float("inf")                  # running minimum over pairs with measure >= the target
+            k = len(cand) - 1
+            for idx in range(len(newA) - 1, -1, -1):
+                while k >= 0 and cand[k][0] >= newA[idx] - 1e-12:
+                    best = min(best, cand[k][1])
+                    k -= 1
+                newG[t][idx] = best
+        A, G = newA, newG
+    return A, G
+
+
+def pt_phi_site(p1, c01, c10, unit, lam, dgrid):
+    """The single-site function of Theorem I3 on dgrid: sup{ min_Q [KL(Q || mu_i) + lam unit transport(P, Q)]
+    : KL(P || mu_i) <= d }, and its least concave majorant."""
+    xs = np.linspace(1e-9, 1 - 1e-9, 1201)
+    def kl(a, b):
+        return a * np.log(a / b) + (1 - a) * np.log((1 - a) / (1 - b))
+    X, Y = xs[:, None], xs[None, :]
+    cost = lam * unit * (c01 * np.maximum(Y - X, 0) + c10 * np.maximum(X - Y, 0))
+    r = (kl(Y, p1) + cost).min(axis=1)
+    D = kl(xs, p1)
+    order = np.argsort(D)
+    Ds, rs = D[order], np.maximum.accumulate(r[order])
+    idx = np.searchsorted(Ds, dgrid, side="right") - 1
+    phi = np.where(idx >= 0, rs[np.maximum(idx, 0)], 0.0)
+    hull = []
+    for d, v in zip(dgrid, phi):
+        while len(hull) >= 2 and (hull[-1][1] - hull[-2][1]) * (d - hull[-2][0]) <= (v - hull[-2][1]) * (hull[-1][0] - hull[-2][0]):
+            hull.pop()
+        hull.append((d, v))
+    return np.interp(dgrid, [h[0] for h in hull], [h[1] for h in hull])
+
+
+def pt_laplace_exponent(sites, unit, lam, dgrid):
+    """Phi^lam on dgrid, rounded upwards: the max-plus convolution of the site functions, read n grid
+    steps to the right, plus the discretisation error of the letter probabilities."""
+    Phi = None
+    for (p1, c01, c10) in sites:
+        f = pt_phi_site(p1, c01, c10, unit, lam, dgrid)
+        if Phi is None:
+            Phi = f.copy()
+        else:
+            Phi = np.array([(Phi[:i + 1] + f[i::-1]).max() for i in range(len(dgrid))])
+    n = len(sites)
+    h = dgrid[1] - dgrid[0]
+    shifted = np.concatenate([Phi[n:], np.full(n, Phi[-1] + n * h)])
+    cmax = max(max(c01, c10) for (_, c01, c10) in sites)
+    return shifted + n * lam * unit * cmax * (1.0 / 1200)
+
+
+@conjecture("XXVII.1 Isoperimetry on a product of sites by induction over the sites (workstream I).  For binary sites with laws (1 - p_i, p_i), additive costs (c01_i, c10_i) and the product measure: (a) Lemma I1 — the bound g_{k+1}(m, t) = min over fibre measures q0 m_0 + q1 m_1 >= m of q0 max(g_k(m_0, t), g_k(m_1, t - c10)) + q1 max(g_k(m_1, t), g_k(m_0, t - c01)) is below the true minimum of mu(E_t) over sets with mu(E) >= m, for every achievable m and every budget t (exhaustive over all subsets of products of three sites: uniform, two costs, biased with asymmetric costs), with equality at budget zero and at some positive budget; (b) the tail functions derived from the bound, Xi(q) = sum_j (e^{uj} - e^{u(j-1)}) max{m : g(m, j - 1) <= q} and Theta(q) = sum_j (e^{-uj} - e^{-u(j+1)}) g(q, j), satisfy (TU) and (TL) of theory report 11.33 for every set; (c) Theorem I3 — for every set E and lam in {1/2, 1, 2}: sum_y mu(y) e^{-lam u c(E, y)} >= exp(-Phi^lam(ln 1/mu(E))), Phi^lam the max-plus convolution of the concave majorants of the single-site functions")
+def t_product_tails(rng, trials):
+    quick = trials < 100
+    unit = 0.7
+    instances = [[(0.5, 1, 1)] * 3,
+                 [(0.5, 1, 1), (0.5, 2, 2), (0.5, 1, 1)],
+                 [(0.3, 2, 1), (0.2, 1, 1), (0.6, 1, 3)]]
+    if not quick:
+        instances.append([(float(rng.uniform(0.15, 0.85)), int(rng.integers(1, 4)), int(rng.integers(1, 4))) for _ in range(3)])
+    stats = dict(sets=0, equalities=0)
+    for sites in instances:
+        N, w, C = pt_space(sites)
+        T, table = pt_exact_growth(sites)
+        A, G = pt_recursion(sites, T)
+        def gb(m, t):                            # the bound at a real measure m > 0: the largest achievable value <= m
+            if t < 0:
+                return 0.0
+            i = int(np.searchsorted(A, m + 1e-12, side="right")) - 1
+            return G[t][i] if i >= 0 else 0.0
+        eq_pos = False
+        for t in range(T + 1):
+            for (m, v) in table[t]:
+                b = gb(m, t)
+                if b > v + 1e-12:
+                    return False, dict(reason="the inductive growth bound exceeds mu(E_t) for a set", sites=str(sites), t=t, measure=m, bound=b, value=v)
+                if abs(b - v) < 1e-12:
+                    stats["equalities"] += 1
+                    eq_pos |= (t >= 1 and v < 1 - 1e-9)
+            if t == 0 and any(abs(gb(m, 0) - m) > 1e-12 for (m, _) in table[0]):
+                return False, dict(reason="at budget zero the bound is not the measure", sites=str(sites))
+        if not eq_pos:
+            return False, dict(reason="the inductive growth bound is nowhere attained at a positive budget", sites=str(sites))
+        # (b) tail functions from the bound, against every proper nonempty subset
+        M = 1 << N
+        for mask in range(1, M - 1):
+            pts = [x for x in range(N) if mask >> x & 1]
+            out = [x for x in range(N) if not (mask >> x & 1)]
+            mu = sum(w[x] for x in pts)
+            val = sum(w[x] * (math.exp(unit * min(C[x][z] for z in out)) - 1.0) for x in pts)
+            xi = 0.0
+            for j in range(1, T + 2):
+                feas = [a for i, a in enumerate(A) if G[min(j - 1, T)][i] <= mu + 1e-12]
+                if not feas:
+                    break
+                xi += (math.exp(unit * j) - math.exp(unit * (j - 1))) * max(feas)
+            if val > xi * (1 + 1e-9):
+                return False, dict(reason="(TU) fails for the tail function derived from the growth bound", sites=str(sites), mask=mask, value=val, bound=xi)
+            low = sum(w[z] * math.exp(-unit * min(C[x][z] for x in pts)) for z in range(N))
+            th = sum((math.exp(-unit * j) - math.exp(-unit * (j + 1))) * gb(mu, j) for j in range(T)) + math.exp(-unit * T) * gb(mu, T)
+            if low < th * (1 - 1e-9):
+                return False, dict(reason="(TL) fails for the tail function derived from the growth bound", sites=str(sites), mask=mask, value=low, bound=th)
+            stats["sets"] += 1
+        # (c) the Laplace functional
+        dmax = sum(math.log(1 / min(p1, 1 - p1)) for (p1, _, _) in sites) + 0.5
+        dgrid = np.linspace(0.0, dmax, 401)
+        for lam in (0.5, 1.0, 2.0):
+            Phi = pt_laplace_exponent(sites, unit, lam, dgrid)
+            for mask in range(1, M):
+                pts = [x for x in range(N) if mask >> x & 1]
+                mu = sum(w[x] for x in pts)
+                lap = sum(w[z] * math.exp(-lam * unit * min(C[x][z] for x in pts)) for z in range(N))
+                k = min(int(math.ceil(-math.log(mu) / (dgrid[1] - dgrid[0]) - 1e-9)), len(dgrid) - 1)
+                if lap < math.exp(-Phi[k]) * (1 - 1e-9):
+                    return False, dict(reason="the Laplace functional is below exp(-Phi)", sites=str(sites), lam=lam, mask=mask, value=lap, bound=math.exp(-Phi[k]))
     return True, stats
 
 

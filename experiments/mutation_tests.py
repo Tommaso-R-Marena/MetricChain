@@ -1792,6 +1792,36 @@ MUTS["XXVI"] = [
      [('        for rho in np.linspace(pu + 1e-4, 0.5 - 1e-4, 60):', '        for rho in np.linspace(0.6 * pu, 0.5 - 1e-4, 60):')], 'XXVI.1'),
 ]
 
+# Tail functions on product spaces by induction over the sites (workstream I)
+MUTS["XXVII"] = [
+    ("XXVII.1 M1: the fibre that serves across the last site keeps the whole budget",
+     [("q0 * max(g(i, t), g(j, t - c10)) + q1 * max(g(j, t), g(i, t - c01))",
+       "q0 * max(g(i, t), g(j, t)) + q1 * max(g(j, t), g(i, t))")], 'XXVII.1'),
+    ("XXVII.1 M2: the two fibres' contributions added instead of the larger one taken",
+     [("q0 * max(g(i, t), g(j, t - c10)) + q1 * max(g(j, t), g(i, t - c01))",
+       "q0 * (g(i, t) + g(j, t - c10)) + q1 * (g(j, t) + g(i, t - c01))")], 'XXVII.1'),
+    ("XXVII.1 M3: the weights of the two letters exchanged in the recursion",
+     [("        q0, q1 = 1 - p1, p1\n        vals = [0.0] + A", "        q0, q1 = p1, 1 - p1\n        vals = [0.0] + A")], 'XXVII.1'),
+    ("XXVII.1 M4: the costs of the two directions exchanged in the recursion",
+     [("q0 * max(g(i, t), g(j, t - c10)) + q1 * max(g(j, t), g(i, t - c01))",
+       "q0 * max(g(i, t), g(j, t - c01)) + q1 * max(g(j, t), g(i, t - c10))")], 'XXVII.1'),
+    ("XXVII.1 M5: the upper tail function with the weights of the layer below",
+     [("                xi += (math.exp(unit * j) - math.exp(unit * (j - 1))) * max(feas)",
+       "                xi += (math.exp(unit * (j - 1)) - math.exp(unit * (j - 2))) * max(feas)")], 'XXVII.1'),
+    ("XXVII.1 M6: the upper tail function with the interior of depth j bounded through the budget j",
+     [("                feas = [a for i, a in enumerate(A) if G[min(j - 1, T)][i] <= mu + 1e-12]",
+       "                feas = [a for i, a in enumerate(A) if G[min(j, T)][i] <= mu + 1e-12]")], 'XXVII.1'),
+    ("XXVII.1 M7: the lower tail function with the growth at one more unit of budget",
+     [("            th = sum((math.exp(-unit * j) - math.exp(-unit * (j + 1))) * gb(mu, j) for j in range(T)) + math.exp(-unit * T) * gb(mu, T)",
+       "            th = sum((math.exp(-unit * j) - math.exp(-unit * (j + 1))) * gb(mu, j + 1) for j in range(T)) + math.exp(-unit * T) * gb(mu, T)")], 'XXVII.1'),
+    ("XXVII.1 M8: the Laplace exponent without the cost of transport",
+     [("    cost = lam * unit * (c01 * np.maximum(Y - X, 0) + c10 * np.maximum(X - Y, 0))\n    r = (kl(Y, p1) + cost).min(axis=1)\n    D = kl(xs, p1)\n    order = np.argsort(D)\n    Ds, rs = D[order], np.maximum.accumulate(r[order])\n    idx = np.searchsorted(Ds, dgrid, side=\"right\") - 1\n    phi = np.where(idx >= 0, rs[np.maximum(idx, 0)], 0.0)\n    hull = []",
+       "    cost = 0.0 * (c01 * np.maximum(Y - X, 0) + c10 * np.maximum(X - Y, 0))\n    r = (kl(Y, p1) + cost).min(axis=1)\n    D = kl(xs, p1)\n    order = np.argsort(D)\n    Ds, rs = D[order], np.maximum.accumulate(r[order])\n    idx = np.searchsorted(Ds, dgrid, side=\"right\") - 1\n    phi = np.where(idx >= 0, rs[np.maximum(idx, 0)], 0.0)\n    hull = []")], 'XXVII.1'),
+    ("XXVII.1 M9: the Laplace exponent with the equal split of the divergence in place of the max-plus convolution over the sites",
+     [("            Phi = np.array([(Phi[:i + 1] + f[i::-1]).max() for i in range(len(dgrid))])",
+       "            Phi = np.array([(Phi[i // 2] + f[i // 2]) for i in range(len(dgrid))])")], 'XXVII.1'),
+]
+
 which = sys.argv[1:] or list(MUTS)
 for key in which:
     for item in MUTS[key]:

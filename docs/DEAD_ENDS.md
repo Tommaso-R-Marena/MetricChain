@@ -2534,3 +2534,56 @@ What was wrong, and is kept here:
    audit forbids because the axiom walk does not see unnamed declarations.  It is now the
    named theorem `prod_one_sub_le_witness`.  (The standalone compilation had passed; the
    audit is the gate.)
+
+## D69. Isoperimetry on product spaces (workstream I): a Harper theorem for the biased cube that is false, an interpolation that the induction does not preserve, a one-variable recursion that is valid and useless, and four slips of the coordinator's (after the twenty-fourth checkpoint of cycle 10)  **[`experiments/workstreams/I/i6_bruteforce_biased.py`, `i3_tail_dp.py`; harness DEAD.29; `docs/workstreams/I_REPORT.md` I5]**
+
+Looking for tail functions of the level theorem beyond the uniform cube (theory report,
+Proposition 11.124), the following were believed for some minutes or hours and are wrong.
+
+1. **"On the biased cube the balls around the rare vertex minimise the measure of the
+   neighbourhood at every radius"** — a Harper theorem with the rare vertex as centre,
+   suggested by the site-by-site recursion, which returns their values on a cube of
+   fourteen sites.  *False in the concentration regime:* exhaustively over all subsets for
+   `n ≤ 4` and five biases, the ball is an exact minimiser in all 78 cases in which its
+   neighbourhood is not the whole cube, and in the 17 cases in which it is the whole cube a
+   set of at least its measure near the likely vertex has a smaller neighbourhood (`n = 3`,
+   `p = 1/5`: `0.968` against `1`).  What survives is a question, not a theorem: are they
+   minimisers whenever their neighbourhood is not everything?
+2. **"The induction closes on the piecewise-linear interpolation of the ball values"** — it
+   does on the uniform cube (the fractional form of Harper's theorem).  On a biased cube the
+   interpolated ball around a vertex with one likely letter, at the measure of a ball
+   around the rare vertex, has a smaller interpolated neighbourhood, by
+   `q₁(q₀ − q₁)(w_j² − w_{j−1}w_{j+1})/(q₀w_j + q₁w_{j−1})` (log-concavity of the binomial weights).  No
+   set has those two measures; the interpolation, not the cube, is at fault.  The recursion
+   with exact step functions does not have the defect.
+3. **"A recursion in one variable is enough for the upper tail function"** — the integral of
+   a minimum is at most the minimum of the integrals, so
+   `1 + Ξ(q) ≤ sup Σ_x π(x)·min_y e^{c(x,y)}(1 + Ξ′(s_y))` is valid, and it is exact in dimension one
+   and two.  It is exponentially lossy: a set confined to one fibre is credited with the
+   integral of its depth inside the fibre although each of its points leaves at the cost of
+   one flip; iterated, a ball of the critical radius in a subcube.  On the uniform cube the
+   recursion's value at measure `e^{−nα}` is at least `exp(−n·ln 2·(α − h)/(ln 2 − h))`.  At sixteen
+   and thirty-two sites the factor is `2.9` and `6.9` — small enough to look like a polynomial.
+4. **"The Laplace inequality at every scale gives growth at every radius"** — Theorem I3 of
+   the workstream holds with no error term, for every set and every `λ`, and applied to all
+   neighbourhoods of a set it still admits the profile that does not grow at all until it
+   jumps to one.  Likewise Hölder's inequality from the half-space loses `u(σ − ½)n` in the
+   exponent of the upper tail function.  Growth at a radius needs the induction in two
+   variables (measure and budget).
+5. **The coordinator's slips.**  (i) The exhaustive check of the new library enumerated the
+   masks `1 … 14` — the *points* of the product — instead of its `65 534` subsets, and passed;
+   the line "14 sets" in its own output gave it away.  (ii) The numerical closed form of
+   the Laplace exponent was first rounded in the unsafe direction (a max-plus convolution
+   on a grid underestimates): four "violations" of a tenth of a per cent on the first real
+   run; it now reads the grid one step per site to the right.  (iii) The workstream was
+   first called T, which is the mean-field workstream; its files sat in that directory for
+   an hour and were moved before any commit.  (iv) A scan at `n = 5000` underflowed and
+   printed infinities; the stored output stops at `1000`.
+6. **A question of ours to the Ensemble division, answered in the negative** ("does the
+   thermal union bound hold for a frustrated known part with a constant `e^{O(ι)}`?",
+   THY-MSG-0018 §3).  By that division's Proposition E15U and its proof, the best constant is
+   exactly the reciprocal of the least value, over up-sets, of the difference of the
+   conditional means of the number of disagreements; for a hub with `k` antiferromagnetic
+   bonds of strength `J` that value is `1 + k[1/(1 + e^{2J+λ}) − 1/(1 + e^{−2J+λ})]`, negative from a
+   total coupling `k·J ≈ 1.3` on: then a member has positive distance and a *negative* sum of
+   one-body deficits, and no constant exists (`experiments/coordinator_checks/ens_e15u/`).

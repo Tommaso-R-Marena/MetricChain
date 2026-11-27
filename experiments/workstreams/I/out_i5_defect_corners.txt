@@ -1,0 +1,21 @@
+n=  20: sup defect = +0.02325  (n*defect = +0.465)  at t=6, d0=3.752, d1=5.281, d=4.249, lhs=0.0420, rhs=0.0187
+n=  50: sup defect = +0.00952  (n*defect = +0.476)  at t=16, d0=11.726, d1=13.377, d=12.244, lhs=0.0427, rhs=0.0332
+n= 100: sup defect = +0.00484  (n*defect = +0.484)  at t=20, d0=8.165, d1=9.033, d=8.508, lhs=0.0085, rhs=0.0037
+n= 200: sup defect = +0.00236  (n*defect = +0.471)  at t=66, d0=53.159, d1=54.896, d=53.690, lhs=0.1587, rhs=0.1563
+n= 400: sup defect = +0.00108  (n*defect = +0.432)  at t=133, d0=136.892, d1=138.977, d=137.468, lhs=2.5663, rhs=2.5652
+n= 800: sup defect = +0.00052  (n*defect = +0.419)  at t=266, d0=530.892, d1=536.451, d=531.581, lhs=43.5073, rhs=43.5067
+  n=   50 interior, mid radii         : n*sup defect =   +0.491   at t=22, d0=23.614, d1=26.614
+  n=   50 interior, small radii       : n*sup defect =   +0.425   at t=8, d0=3.312, d1=4.112
+  n=   50 tiny sets (last 30 nats)    : n*sup defect =   +0.630   at t=1, d0=34.657, d1=inf
+  n=   50 tiny sets (last 5 nats)     : n*sup defect =   +0.630   at t=1, d0=34.657, d1=inf
+  n=   50 large sets (d <= 3)         : n*sup defect =   +0.451   at t=5, d0=1.017, d1=1.467
+  n=  200 interior, mid radii         : n*sup defect =   +0.498   at t=90, d0=98.954, d1=101.954
+  n=  200 interior, small radii       : n*sup defect =   +0.164   at t=8, d0=129.098, d1=134.298
+  n=  200 tiny sets (last 30 nats)    : n*sup defect =   +0.632   at t=1, d0=138.629, d1=inf
+  n=  200 tiny sets (last 5 nats)     : n*sup defect =   +0.632   at t=1, d0=138.629, d1=inf
+  n=  200 large sets (d <= 3)         : n*sup defect =   +0.445   at t=10, d0=1.150, d1=1.375
+  n= 1000 interior, mid radii         : n*sup defect =   +0.498   at t=450, d0=500.771, d1=503.771
+  n= 1000 interior, small radii       : n*sup defect =   +0.028   at t=8, d0=643.592, d1=648.392
+  n= 1000 tiny sets (last 30 nats)    : n*sup defect =   +0.632   at t=1, d0=693.147, d1=inf
+  n= 1000 tiny sets (last 5 nats)     : n*sup defect =   +0.632   at t=1, d0=693.147, d1=inf
+  n= 1000 large sets (d <= 3)         : n*sup defect =   +0.408   at t=20, d0=0.799, d1=0.874
