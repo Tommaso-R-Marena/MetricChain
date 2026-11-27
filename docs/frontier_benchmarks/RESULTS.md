@@ -8,7 +8,8 @@ that the tables in this document are the generated ones).*
 **Nothing in this file is validation.**  §§1–2 are exploratory pilots (assessment class
 A-EXP, evidence stage *development*) run by this division on its own machine to find out
 which evaluations are worth requesting; they informed the protocols and therefore cannot test
-them.  §3 is about our own instruments.  §4 is a freeze whose outcome is not yet known.
+them.  §3 is about our own instruments.  §4 is a freeze whose outcome is not yet known.  §6 is a diagnostic study
+(class A-EXP, the same development instances) added at the consolidation of 2026-11-27.
 
 ## 1. Pilot of FB-P-01 — a certified optimum against toulbar2 on public fixed-sequence instances
 
@@ -162,3 +163,143 @@ possible outcomes are fixed in the freeze's `COMPARISON_PLAN.md`.  **No outcome 
 All three verify (`python -m metricchain_fb.freeze verify experiments/frontier/freezes`); each
 carries tokens from four time-stamping authorities that verify against the system trust
 store.
+
+## 6. Diagnosis: why the certified route abstains, and where its time goes
+
+*Class A-EXP, development instances; run 2026-11-27 00:45–01:20 UTC on the same shared
+four-core machine, several runs at once: **seconds are indicative, node counts and bounds do
+not depend on load**.  Evaluated software: the structural-biology division's head `d61fc53`,
+whose solver files are byte-identical to the pilot's release `1756529` (compared before the
+run); toulbar2 through `pytoulbar2` 1.4.0.3.  Scripts `experiments/frontier/diagnostics/`,
+stored rows `experiments/frontier/diagnostics/results/`, commands in its `README.md`.  The
+producer's internal functions were called to measure intermediate quantities; nothing was
+modified.  Nothing here touched the sealed list.*
+
+Owner directive FB-D-3 asked why the certified route performs poorly, not only that it does.
+We had three hypotheses: a weak bound, a missing integrality argument, slow search.  The
+first two are wrong.
+
+### 6.1 The bound is not the cause: the producer's root bound is the tighter one
+
+<!-- table: diag_root -->
+| instance | residues | sites still free after elimination | log10 configurations before → after elimination | best known value | proved by toulbar2 | producer: gap of root bound after 300 sweeps | after 3000 sweeps | as % of best known | toulbar2: gap of root bound | toulbar2 gap ÷ producer gap | pilot at 300 s: certified route |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| pdb1i24 | 337 | 124 | 335 → 61 | 22554 | yes | 0.0 | 0.0 | 0.00 | 380 | — | accepted |
+| pdb1kwh | 424 | 209 | 451 → 114 | 34168 | yes | 689.5 | 684.5 | 2.00 | 3495 | 5.1 | abstained |
+| pdb1fmj | 614 | 273 | 645 → 141 | 50662 | yes | 1184.8 | 1181.0 | 2.33 | 3388 | 2.9 | abstained |
+| pdb1m3y | 1364 | 482 | 1304 → 255 | 131515 | no | 567.6 | 567.0 | 0.43 | 8473 | 14.9 | abstained |
+| pdb1jmx | 739 | 260 | 740 → 134 | 58671 | yes | 1025.2 | 1024.0 | 1.75 | 2715 | 2.7 | abstained |
+| pdb1qks | 926 | 300 | 905 → 144 | 78894 | yes | 77.5 | 77.5 | 0.10 | 1011 | 13.0 | accepted |
+| pdb1iqc | 1040 | 270 | 1056 → 130 | 49470 | yes | 650.0 | 650.0 | 1.31 | 948 | 1.5 | accepted |
+| pdb1kgn | 1060 | 489 | 1072 → 251 | 111467 | no | 729.3 | 720.7 | 0.65 | 10158 | 14.1 | abstained |
+| pdb1d2e | 1328 | 258 | 1355 → 116 | 87369 | yes | 468.6 | 465.4 | 0.53 | 1673 | 3.6 | accepted |
+| pdb1b25 | 1972 | 843 | 2065 → 477 | 195874 | no | 2093.2 | 2085.5 | 1.06 | 14628 | 7.0 | abstained |
+
+"Gap" is the best known value minus the lower bound at the root, in units of the instance's
+integer costs, after each solver's own preprocessing (the producer: its dead-end eliminations,
+then message passing; toulbar2: its default preprocessing).  The producer's root bound is
+within 0.0 to 2.3 % of the best known value on all ten instances, and
+on every instance it is **tighter than toulbar2's** — by a factor 1.5 to
+13 on the 6 instances toulbar2 closes where the producer's gap is
+positive; on pdb1i24 the producer's bound is exact.  Three hundred sweeps reach
+the plateau; three thousand add nothing.  The gap does not predict the outcome: pdb1iqc
+(650) was certified in the pilot and pdb1kwh (685) was not.  For the three instances that
+nobody closed the "best known value" is an upper bound (one ablation run found
+131,510 for pdb1m3y, below the pilot's 131,515), so their gaps are upper estimates.
+
+### 6.2 A missing integrality step is not the cause
+
+<!-- table: diag_eps -->
+| instance | gap asked for | budget s | outcome | seconds |
+|---|---|---|---|---|
+| pdb1kwh | 4095/4096 of one cost unit | 200 | abstained | 201 |
+| pdb1fmj | 4095/4096 of one cost unit | 200 | abstained | 204 |
+| pdb1jmx | 4095/4096 of one cost unit | 200 | abstained | 203 |
+
+The public tables are integers, so a lower bound above U − 1 proves that U is optimal — an
+argument the certificate kernel does not have.  If that were the obstacle, asking the
+producer for a gap just under one cost unit would make it finish.  It abstained on all three
+instances tried.  Consistent with §6.1: the gaps to close are hundreds of units.
+
+### 6.3 The cause is the node rate
+
+<!-- table: diag_profile -->
+| instance | budget s | outcome | search nodes entered | sweeps | time in message passing (sweeps + bound evaluation) | share | time in dead-end elimination | share |
+|---|---|---|---|---|---|---|---|---|
+| pdb1kwh | 150 | abstained | 128 | 6,921 | 134 s | 89 % | 6.3 s | 4 % |
+
+<!-- table: diag_nodes -->
+| instance | toulbar2 (default): nodes | seconds | nodes per second | certified producer: budget s | outcome | search nodes entered | message-passing sweeps | sweeps per node | nodes per second | ratio of node rates |
+|---|---|---|---|---|---|---|---|---|---|---|
+| pdb1kwh | 821 | 0.51 | 1,607 | 900 | abstained | 2,306 | 49,660 | 22 | 2.56 | 627 |
+| pdb1fmj | 4,678 | 1.44 | 3,258 | 900 | abstained | 1,308 | 34,756 | 27 | 1.44 | 2,259 |
+| pdb1jmx | 640 | 0.52 | 1,236 | 900 | abstained | 620 | 38,399 | 62 | 0.69 | 1,797 |
+
+On the three instances where the producer abstained in the pilot although toulbar2 closed
+them in under two seconds, the producer enters 0.69 to 2.56
+search nodes per second; toulbar2 enters 1,236 to 3,258 — a
+ratio of 627 to 2,259.  With 900 s instead of 300 s the producer still abstains on all three, after entering 2,306, 1,308, 620 nodes: how large a tree it would need is **not known**; it is larger than these counts.
+At each node the producer repeats its eliminations and runs message passing over **every**
+edge of the instance until its stopping rule fires (tens of sweeps), in interpreted per-edge
+loops: about nine tenths of the time (profile row).  toulbar2 propagates only what a decision
+changed.  ("Node" is each solver's own unit; the comparison is of orders of magnitude.)
+
+### 6.4 Which of toulbar2's ingredients matter (60 s per run; search nodes, seconds in brackets)
+
+<!-- table: diag_ablation -->
+| instance | default | no on-the-fly variable elimination | no dead-end elimination | no last-conflict rule | no weighted-degree ordering | depth-first, binary | depth-first, one child per state | all of the producer's omissions, binary | all of the producer's omissions, one child per state |
+|---|---|---|---|---|---|---|---|---|---|
+| pdb1i24 | 121 (0.08 s) | 283 (0.10 s) | 227 (0.16 s) | 121 (0.07 s) | 126 (0.07 s) | 88 (0.07 s) | 408 (0.12 s) | 242 (0.05 s) | 1,492 (0.12 s) |
+| pdb1kwh | 821 (0.51 s) | 1,732 (0.88 s) | 4,778 (1.70 s) | 974 (0.62 s) | 1,034 (0.61 s) | 222 (0.44 s) | 1,138 (0.82 s) | 1,773 (0.98 s) | 18,738 (7.01 s) |
+| pdb1fmj | 4,678 (1.44 s) | 8,206 (1.55 s) | 14,482 (7.24 s) | 4,952 (1.48 s) | 26,679 (4.47 s) | 680 (0.50 s) | 2,712 (1.40 s) | **not closed** in 60 s (1,050,665 nodes) | **not closed** in 60 s (670,629 nodes) |
+| pdb1jmx | 640 (0.52 s) | 2,217 (1.14 s) | 31,223 (10 s) | 665 (0.59 s) | 877 (0.71 s) | 233 (0.30 s) | 1,240 (0.85 s) | 1,627 (0.83 s) | 27,132 (4.31 s) |
+| pdb1qks | 232 (0.22 s) | 4,303 (0.31 s) | 35,548 (5.44 s) | 232 (0.23 s) | 232 (0.22 s) | 232 (0.21 s) | 1,230 (0.88 s) | 598 (0.22 s) | 22,881 (2.15 s) |
+| pdb1iqc | 101 (0.18 s) | 1,728 (0.59 s) | 20,612 (4.22 s) | 101 (0.15 s) | 101 (0.15 s) | 63 (0.13 s) | 188 (0.19 s) | 1,088 (0.21 s) | 17,296 (1.07 s) |
+| pdb1d2e | 881 (0.23 s) | 11,621 (0.98 s) | 8,159 (6.72 s) | 929 (0.20 s) | 1,042 (0.27 s) | 318 (0.24 s) | 1,205 (0.31 s) | 21,077 (5.25 s) | 28,139 (4.01 s) |
+
+Measured on the seven instances toulbar2 closes, as ratios of node counts:
+
+* **one child per state instead of a binary split** (the producer's scheme): 3.0 to
+  5.3 times more nodes (the two depth-first columns);
+* **no elimination of low-degree variables during search** (the producer has none):
+  1.8 to 18.5 times more;
+* **no dead-end elimination** (the producer *has* it): 1.9 to 204 times
+  more — the largest single effect, and one the producer already pays for;
+* **no weighted-degree variable ordering** (the producer orders by ambiguity of the bound):
+  1.0 to 5.7 times; **no last-conflict rule**: 1.00 to 1.19 times;
+* **everything the producer lacks, switched off together**: toulbar2 still closes 6 of 7
+  within 60 s, in 0.12 to 7.01 s, with 12 to 171
+  times more nodes than by default, at 2,673 to 16,089 nodes per
+  second; with a binary split kept it also closes 6 of 7.  pdb1fmj is closed by
+  neither stripped configuration: on it the variable ordering is what matters.
+
+Where both exist, the producer's tree (branch plus leaf nodes of its accepted certificate)
+against toulbar2's in the stripped configuration: pdb1i24: 1 against 1,492; pdb1qks: 7 against 22,881; pdb1iqc: 95 against 17,296; pdb1d2e: 19 against 28,139 — a factor
+182 to 3,269 smaller, the dividend of the tighter bound.
+
+### 6.5 What the diagnosis says, and what it does not
+
+**Says.**  The certified route's deficit is computational, not mathematical, at the level of
+the bound: it holds the stronger bound and loses about three orders of magnitude in node rate
+(627 to 2,259 times on the three instances measured), of
+which its smaller tree — where it finishes — recovers two to three and a half.  What remains
+is what the pilot measured: 17 to 326 times where it completes, and abstention where its tree
+is larger than one to three nodes per second can cover in the budget.  Stripped of every search refinement the producer lacks, the uncertified
+solver still closes six of seven instances in seconds — so a producer with toulbar2's
+propagation cost per node and the producer's own strategy would plausibly close them too.
+The largest levers, in the order the measurements suggest: the cost of a node (incremental
+propagation instead of full sweeps; compiled inner loops); binary splits; elimination of
+low-degree variables; a conflict-driven ordering.  A different route altogether is to let the
+uncertified solver search and have the kernel check what it found
+(`MATHEMATICAL_FEEDBACK.md` D-1).
+
+**Does not say.**  That a repaired producer *would* be competitive: nothing of the kind was
+built or measured.  That certification is cheap on the three instances nobody closes: there
+is no tree to copy.  Anything about virtual arc consistency: with it switched on, the run did
+not return through this binding even on the smallest instance, and the rows were dropped.
+Anything about proteins: these are 2011 energy tables.
+
+**A fact about development sets.**  By the software division's own null method (its commit
+`627a860`; we read the commit subject, not the rows) the dual bound alone certifies all
+twelve of its development instances.  Here the root bound closes 1 of ten.  Its
+hypotheses about search were formed on instances without search.

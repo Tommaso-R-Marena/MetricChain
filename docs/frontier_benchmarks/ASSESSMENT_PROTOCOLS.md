@@ -212,6 +212,13 @@ the change is visible.
    certified route either proved the optimum or abstained.  In the pilot A = 3 of 10 for
    toulbar2's default interface (time-limited values returned without a flag), with the
    certified route abstaining in all three; A is reported whether or not it is favourable.
+   *Correction, 2026-11-27 (consolidation).*  "Without a flag" was wrong: the solver reports
+   an interrupted search through a status flag (`limited`) that our pilot did not read; the
+   return value of its Python call does not carry it.  With the flag read, **A = 0** in the
+   pilot.  The variable is redefined: A counts pairs in which the uncertified method's
+   *self-reported* status was wrong or absent — which needs an independent proof to detect —
+   and the contrast the protocol reports is "a status the solver asserts" against "a proof a
+   separate checker accepted".  (`NEGATIVE_RESULTS.md` N-19.)
 
 **FB-P-06**
 

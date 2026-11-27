@@ -73,6 +73,22 @@ differs from the deposited conformation at 37 of 65 sites; adaptive algorithms a
 plain Monte Carlo at every simulable size; the local-distance stability theorem certifies at
 most 10⁻⁵ Å.  References: `RESEARCH_INTAKE.md` §§3 and 6.
 
+**N-17  The certified route's deficit is its node rate; three times the budget does not remove
+the abstentions.**  On the three public instances where it abstained at 300 s although
+toulbar2 needs under two seconds, the producer enters 0.7 to 2.6 search nodes per second
+against toulbar2's 1,200 to 3,300, spends about nine tenths of its time in message passing
+over every edge at every node, and **still abstains at 900 s** after 620 to 2,306 nodes
+(`RESULTS.md` §6.3).  How large a tree it would need is not known.  Its root bound is not
+the problem — it is tighter than toulbar2's on all ten instances (§6.1).  Stripped of every
+search refinement the producer lacks, toulbar2 still closes six of seven instances within
+seven seconds (§6.4).
+
+**N-18  The software division's development set contains no search.**  By its own null method
+(its commit `627a860`; read at the level of the commit subject) the dual bound alone certifies
+all twelve of its development instances; on the ten public instances the root bound closes
+one.  Its hypothesis that the certified route stays within 1–100 times toulbar2 held on its
+set and fails on the public one (N-1, N-2).
+
 ## About our own work
 
 **N-9  Our first intake was stale when it was pushed.**  FRONTIER-MSG-0001 and the first
@@ -121,9 +137,51 @@ package, no partition-function method was run by us; the baselines of the identi
 pilot are our own few-line implementations.  No experimental observable was compared with
 anything.  No protocol has been frozen and executed as a held-out evaluation.
 
+**N-19  Our auditability count was overstated.**  We reported "A = 3 of 10": toulbar2
+returned, at the time limit, values that were not proved optima "without a flag".  The solver
+does report an interrupted search — through a status flag (`limited`) that our pilot did not
+read; only the return value of its Python call lacks it.  With the flag read, A = 0.  We
+learnt this while writing the ablation (in depth-first mode the reported dual bound stays at
+the root value even after a completed search, so the flag is the only correct test).  The
+protocol's variable is redefined (`ASSESSMENT_PROTOCOLS.md` §6, item 6, correction).
+
+**N-20  Header times of ours were later than the commits that contain them.**  Found by the
+software division's intake: FRONTIER-REQ-0001 carries "00:30" and was committed at 00:26:18;
+our status file said "about 00:40" in the same commit.  The times were estimates written
+before committing.  The commit times and the time-stamp tokens are the record; from
+FRONTIER-MSG-0004 on, header times are read from the clock when the file is written.
+
+**N-21  A cross-reference of ours did not resolve.**  `MATHEMATICAL_FEEDBACK.md` sent the
+software division to "FRONTIER-MSG-0002 §3" for a list of requirements that existed nowhere
+else; that section is about something different.  Found by the same intake; the list is now
+stated in the feedback file.
+
+**N-22  Three of our own conjectures were wrong.**  (a) That the abstentions come from a weak
+bound: the certified route's root bound is the tighter one (`RESULTS.md` §6.1).  (b) That they
+come from the missing integrality step (integer tables, so a bound above U − 1 suffices):
+asked for a gap just under one unit the producer abstained on all three instances tried
+(§6.2).  (c) That the largest total-variation distance between two fitting ensembles is "a
+linear programme with a dual certificate" (our feedback item E-3): it is the maximum of a
+convex function over a polytope, and deciding whether it equals one is NP-complete
+(ENSEMBLE-RES-0008, Proposition E31; a paper proof read by its author only, not checked by
+us).
+
+**N-23  What the consolidation left undone.**  Ordered or planned under directives FB-D-3 and
+FB-D-4 and **not done** when FB-D-5 halted the work: any evaluation on validation data (the
+side-chain comparison against an established packer and deposited structures; certified
+ensemble intervals on public experimental data against maximum-entropy reweighting — both
+repositories were fetched and neither was used); any evaluation on the benchmarks beyond
+CASP17; the verification of benchmark facts at their sources; the prior-art investigation;
+separate request messages to each division.  Within the diagnosis: the oracle run was not
+made; the rows with virtual arc consistency were dropped; nothing was replicated by another
+party.  The comparison of FRONTIER-FRZ-0003 with the official CASP17 numbers has not been
+made and now needs the owner's authorisation.
+
 ## Inconclusive
 
-* Whether the certified route's abstentions in N-2 disappear with a longer budget.
+* ~~Whether the certified route's abstentions in N-2 disappear with a longer budget.~~  Answered for
+  three of the six at 900 s: they do not (N-17).  For the three instances nobody closes: unknown.
+* How many search nodes the certified route would need on the instances where it abstains.
 * Whether a native certificate is cheaper than the certified incumbents (not run by anyone).
 * Whether our scoring code reproduces the official CASP17 numbers (to be decided after
   2026-11-29 by a plan fixed in advance).

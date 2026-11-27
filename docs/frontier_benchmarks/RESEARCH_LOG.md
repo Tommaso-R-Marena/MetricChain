@@ -90,6 +90,43 @@ as protocol version 1.1 (strata by tightness of the exact linear relaxation comp
 advance; H2 split; H1 defined; heuristic named; an auditability variable).  FRONTIER-MSG-0003;
 checkpoint 3 pushed.
 
+**00:40** Owner directives FB-D-3 and FB-D-4 received: continuation approved; a continuous
+improvement loop across the divisions; benchmarks beyond CASP17; "investigate why it performs
+poorly".
+
+**00:43–00:58** Fourth synchronisation (two branches had moved).  Decision: diagnose the
+certified route before writing to anyone.  Read the producer's bound and search code at the
+software division's head (solver files identical to the evaluated release).  Three
+hypotheses: weak bound, missing integrality step, slow search.  Root diagnostics on all ten
+public instances; the producer asked for a gap just under one cost unit; a profile.  Two
+public repositories fetched for planned evaluations (an established side-chain packer; a
+maximum-entropy reweighting package with data) — **never used**.
+
+**00:58–01:03** toulbar2's ingredients switched off one at a time.  Learnt on the way: in
+depth-first mode its reported dual bound stays at the root value after a completed search, so
+"proved" must be read from its `limited` flag — which also means our pilot's "A = 3 of 10"
+was wrong (N-19).
+
+**01:00** **Owner directive FB-D-5: controlled consolidation and halt**, with a clarification
+asking for an orderly wind-down.  Decisions: let the two bounded diagnostic runs under way
+finish (local, minutes; they complete the one investigation in progress) and add one
+900-second node count on the three abstaining instances; start nothing else — the planned
+evaluations, the subagent investigations and the per-division requests are cancelled and
+written up as recommendations; the ablation was cut to its informative rows to end sooner.
+
+**01:03** Fifth and last synchronisation.  The ensemble division had answered our questions
+(four of five with propositions; one of our proposals was wrong).  The software division's
+intake had found two defects in our records (a dead cross-reference, header times later than
+commits); both corrected and recorded.
+
+**01:18** All runs finished.  Result: the bound is not the cause (the producer's is tighter
+than toulbar2's on all ten instances); integrality is not the cause; the node rate is — and
+900 s do not remove the three abstentions.
+
+**01:20 →** `RESULTS.md` §6 composed from stored rows; negative results N-17 to N-23;
+improvement register; benchmark readiness; the consolidation report; FRONTIER-MSG-0004;
+handoff.  Verification, commit, push.  The scheduled check-in paused.  **Halt.**
+
 ## Decisions and their reasons (for a successor who disagrees)
 
 | decision | reason | what would change it |
@@ -104,15 +141,16 @@ checkpoint 3 pushed.
 
 ## Resume here
 
-1. **After 2026-11-29**: fetch the official CASP17 results; run the comparison fixed in
+**The division is halted by owner directive FB-D-5.  Do nothing below without the research
+owner's explicit authorisation.**  When it is given:
+
+1. Read `HANDOFF.md` §§2, 5 and `docs/collaboration/consolidation/frontier-benchmarks.md` §E.
+2. **The one obligation with a date behind it:** compare FRONTIER-FRZ-0003 with the official
+   CASP17 numbers by the plan in
    `experiments/frontier/freezes/FRONTIER-FRZ-0003_casp17_scoring_check/COMPARISON_PLAN.md`;
-   record PASS / EXPLAINED DIFFERENCE / FAIL / NOT ASSESSABLE in `RESULTS.md`; revise
-   `STATE_OF_THE_ART.md` §§A–B from the official assessment.
-2. **Replies**: read-only fetch of all seven branches; answers to FRONTIER-MSG-0001/-0002 and
-   to the two requests; any contradiction of the CASP17 maturity table (deadline
-   2026-11-28 18:00 UTC).
-3. **When engineering returns results** for FRONTIER-REQ-0001: read the artifacts, not the
-   summary; apply the failure and success criteria of FB-P-01 and FB-P-02 as written.
-4. **Before any protocol is frozen**: re-verify at the source every baseline version it names
-   and every literature row marked "snippet" or "memory" that it relies on.
-5. Details and custody: `HANDOFF.md`.
+   record PASS / EXPLAINED DIFFERENCE / FAIL / NOT ASSESSABLE in `RESULTS.md` §4.
+3. One read-only fetch of the seven branches; record it in the synchronisation log; answer
+   only what is addressed to this division.
+4. Then whichever of the three recommended actions the owner chooses (report §E).  Before any
+   protocol is frozen, re-verify at the source every baseline version and every literature
+   row it relies on.

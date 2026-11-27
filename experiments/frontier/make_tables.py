@@ -19,6 +19,13 @@ GMEC = ROOT / "exploratory_gmec" / "results" / "scp10_at_1756529.jsonl"
 GMEC_OLD = ROOT / "exploratory_gmec" / "results" / "scp10_at_720e0ec_partial.jsonl"
 IDENT = ROOT / "exploratory_identification" / "results" / "controls_pilot.json"
 SCORES = ROOT / "freezes" / "FRONTIER-FRZ-0003_casp17_scoring_check"
+DIAG = ROOT / "diagnostics" / "results"
+ABLATION_COLUMNS = [("default", "default"), ("no_onthefly_variable_elimination", "no on-the-fly variable elimination"),
+                    ("no_dead_end_elimination", "no dead-end elimination"), ("no_last_conflict", "no last-conflict rule"),
+                    ("no_weighted_degree", "no weighted-degree ordering"), ("depth_first_search", "depth-first, binary"),
+                    ("depth_first_nary_branching", "depth-first, one child per state"),
+                    ("producer_like_but_binary", "all of the producer's omissions, binary"),
+                    ("producer_like", "all of the producer's omissions, one child per state")]
 
 
 def fmt_s(x):
@@ -103,6 +110,97 @@ def scores_table(folder: Path) -> str:
     return "\n".join(out)
 
 
+def _pilot() -> dict:
+    return {r["instance"]: r for r in (json.loads(l) for l in GMEC.read_text().splitlines() if l.strip())}
+
+
+def _ablation() -> dict:
+    rows = [json.loads(l) for l in (DIAG / "toulbar2_ablation.jsonl").read_text().splitlines() if l.strip()]
+    return {(r["instance"], r["config"]): r for r in rows}
+
+
+def diag_root_table() -> str:
+    """Root bound of the certified producer against toulbar2's, per instance."""
+    pilot, abl = _pilot(), _ablation()
+    out = ["| instance | residues | sites still free after elimination | log10 configurations before → after elimination | best known value | proved by toulbar2 | producer: gap of root bound after 300 sweeps | after 3000 sweeps | as % of best known | toulbar2: gap of root bound | toulbar2 gap ÷ producer gap | pilot at 300 s: certified route |",
+           "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for r in json.loads((DIAG / "root_all.json").read_text()):
+        traj = {x["sweeps"]: x for x in r["trajectory"]}
+        g300, g3000 = traj[300]["gap_exact_to_best"], traj[max(traj)]["gap_exact_to_best"]
+        tb = abl[(r["instance"], "root_default")]["root_lower_bound"]
+        gtb = r["best_known"] - tb
+        ratio = "—" if g3000 <= 0 else f"{gtb / g3000:.1f}"
+        status = pilot[r["instance"]]["sb_certified"]["status"].replace("certificate_accepted", "accepted").replace("abstained_budget", "abstained")
+        out.append(f"| {r['instance']} | {r['n']} | {r['sites_still_free']} | {r['log10_space_before']:.0f} → {r['log10_space_after_dee']:.0f} | "
+                   f"{r['best_known']} | {'yes' if r['toulbar2_proved'] else 'no'} | {g300:.1f} | {g3000:.1f} | "
+                   f"{100 * g3000 / r['best_known']:.2f} | {gtb:.0f} | {ratio} | {status} |")
+    return "\n".join(out)
+
+
+def diag_ablation_table() -> str:
+    """Search nodes (seconds) of toulbar2 with ingredients switched off; 60 s per run."""
+    abl = _ablation()
+    insts = []
+    for (inst, cfg) in abl:
+        if cfg == "default" and abl[(inst, cfg)].get("status") == "optimum_claimed_by_solver" and inst not in insts:
+            insts.append(inst)
+    out = ["| instance | " + " | ".join(label for _, label in ABLATION_COLUMNS) + " |", "|---|" + "---|" * len(ABLATION_COLUMNS)]
+    for inst in insts:
+        cells = []
+        for cfg, _ in ABLATION_COLUMNS:
+            r = abl.get((inst, cfg))
+            if r is None:
+                cells.append("not run")
+            elif r.get("status") == "optimum_claimed_by_solver":
+                cells.append(f"{r['nodes']:,} ({fmt_s(r['seconds'])} s)")
+            elif r.get("status") == "time_limit":
+                cells.append(f"**not closed** in 60 s ({r['nodes']:,} nodes)")
+            else:
+                cells.append(r.get("error", r.get("status", "?"))[:40])
+        out.append(f"| {inst} | " + " | ".join(cells) + " |")
+    return "\n".join(out)
+
+
+def diag_nodes_table() -> str:
+    """Node throughput of the certified producer on instances where it abstained in the pilot."""
+    abl = _ablation()
+    out = ["| instance | toulbar2 (default): nodes | seconds | nodes per second | certified producer: budget s | outcome | search nodes entered | message-passing sweeps | sweeps per node | nodes per second | ratio of node rates |",
+           "|---|---|---|---|---|---|---|---|---|---|---|"]
+    for r in json.loads((DIAG / "nodes_abst.json").read_text()):
+        tb = abl[(r["instance"], "default")]
+        tb_rate = tb["nodes"] / tb["seconds"]
+        rate = r["nodes_entered"] / r["seconds"]
+        out.append(f"| {r['instance']} | {tb['nodes']:,} | {fmt_s(tb['seconds'])} | {tb_rate:,.0f} | {r['budget']:.0f} | "
+                   f"{r['status'].replace('abstained_budget', 'abstained').replace('certificate_accepted', 'certificate accepted')} | "
+                   f"{r['nodes_entered']:,} | {r['sweeps']:,} | {r['sweeps'] / max(1, r['nodes_entered']):.0f} | {rate:.2f} | {tb_rate / rate:,.0f} |")
+    return "\n".join(out)
+
+
+def diag_eps_table() -> str:
+    """The integrality test: the producer asked for a gap just under one cost unit."""
+    out = ["| instance | gap asked for | budget s | outcome | seconds |", "|---|---|---|---|---|"]
+    for r in json.loads((DIAG / "eps_abst.json").read_text()):
+        out.append(f"| {r['instance']} | {r['eps']} of one cost unit | {r['budget']:.0f} | "
+                   f"{r['status'].replace('abstained_budget', 'abstained')} | {r['seconds']:.0f} |")
+    return "\n".join(out)
+
+
+def diag_profile_table() -> str:
+    """Where the time of the as-shipped producer goes (one instance, cProfile)."""
+    r = json.loads((DIAG / "profile_kwh.json").read_text())[0]
+    calls = {x["function"]: x for x in r["top_by_own_time"]}
+    cum = r["cumulative"]
+    total = cum["gmec.py:certify_gmec"]
+    out = [f"| instance | budget s | outcome | search nodes entered | sweeps | time in message passing (sweeps + bound evaluation) | share | time in dead-end elimination | share |",
+           "|---|---|---|---|---|---|---|---|---|"]
+    mp_time = cum["gmec.py:sweep"] + cum["gmec.py:bound"]
+    dee = cum["gmec.py:dead_end_elimination"]
+    out.append(f"| {r['instance']} | {r['budget']:.0f} | {r['status'].replace('abstained_budget', 'abstained')} | "
+               f"{calls['gmec.py:dead_end_elimination']['calls']} | {calls['gmec.py:sweep']['calls']:,} | {mp_time:.0f} s | "
+               f"{100 * mp_time / total:.0f} % | {dee:.1f} s | {100 * dee / total:.0f} % |")
+    return "\n".join(out)
+
+
 def tables() -> dict:
     t = {}
     if GMEC.is_file():
@@ -112,6 +210,15 @@ def tables() -> dict:
         t["ident"] = ident_table(IDENT)
     if any(SCORES.glob("scores_*.csv")):
         t["scores"] = scores_table(SCORES)
+    if (DIAG / "root_all.json").is_file() and (DIAG / "toulbar2_ablation.jsonl").is_file():
+        t["diag_root"] = diag_root_table()
+        t["diag_ablation"] = diag_ablation_table()
+    if (DIAG / "nodes_abst.json").is_file():
+        t["diag_nodes"] = diag_nodes_table()
+    if (DIAG / "eps_abst.json").is_file():
+        t["diag_eps"] = diag_eps_table()
+    if (DIAG / "profile_kwh.json").is_file():
+        t["diag_profile"] = diag_profile_table()
     return t
 
 

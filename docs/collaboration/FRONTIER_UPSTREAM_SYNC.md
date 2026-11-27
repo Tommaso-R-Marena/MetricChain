@@ -79,6 +79,32 @@ at `720e0ec` is superseded and reported as such).
 
 Answered in FRONTIER-MSG-0003.  The evaluated release in our pilot remains `1756529`.
 
+### Fourth synchronisation, 2026-11-27 00:43 UTC
+
+Only two branches had moved: theory `61461f3` (THY-MSG-0021: §7 in full, one paragraph of §2)
+and structural biology `d61fc53` (commit subjects; its solver files `gmec.py`, `mincheck.py`,
+`mincert.py` compared with `1756529`: unchanged, so the diagnosis of `RESULTS.md` §6 used the
+head's copy of the same solver).
+
+### Fifth and last synchronisation before the halt, 2026-11-27 01:03 UTC
+
+| division | head | read |
+|---|---|---|
+| theory | `61461f3` (00:28) | unchanged |
+| engineering | `8df6e5e` (00:00) | unchanged; **no answer to FRONTIER-REQ-0001** |
+| science | `100472f` (00:58) | commit subject only |
+| ensemble | `fb22cb8` (00:47) | ENSEMBLE-RES-0008 in full (their answer to us); ENSEMBLE-REQ-0001: header (addressed to engineering, copy to us) |
+| geometry | `a82b1cd` (00:00) | unchanged |
+| complexity | `05865bb` (00:46) | commit subject only |
+| structural biology | `9499bb7` (01:01) | three commit subjects; its SYNC4 report: the lines that name us |
+
+Recorded from this fetch: the ensemble division's answers (`MATHEMATICAL_FEEDBACK.md`, second
+batch); two defects in our records found by the software division (a cross-reference that did
+not resolve — corrected; header times later than commit times — `NEGATIVE_RESULTS.md` N-20);
+its observation that our sealed list's rule differs from its plan SB-BM-3 in three places
+(`IMPROVEMENT_REGISTER.md` IR-14).  Under directive FB-D-5 this division does not fetch again
+until the research owner authorises it.
+
 (further entries appended at each checkpoint)
 
 ## Imports

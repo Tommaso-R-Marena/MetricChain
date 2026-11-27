@@ -101,6 +101,18 @@ relaxation, computed in advance).  None of this changes the answer of §1; the f
 it holds up under engineering's verification, would move row D5 from "informativeness open"
 towards "informative for the model", and no further.
 
+## 5b. Dated note, 2026-11-27 01:25 UTC (consolidation)
+
+Nothing in the table of dimensions moves; one row gains an explanation.  **D3 (cost) is
+negative for a computational reason, not a mathematical one**: the certified route holds a
+tighter bound than the uncertified solver and loses about three orders of magnitude in the
+rate at which it processes search nodes (`RESULTS.md` §6).  That makes the negative result
+more useful — there is something specific to repair — and no less negative: nothing faster
+has been built or measured, and three times the budget did not remove the abstentions.  On
+the dimensions that involve experiment the position is unchanged: not established, in either
+direction.  The critical assessment of this division's own work is
+`docs/collaboration/consolidation/frontier-benchmarks.md`.
+
 ## 6. Standing caveats
 
 Every review in this programme, including this synthesis, is an internal reading by an AI

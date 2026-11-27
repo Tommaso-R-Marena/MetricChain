@@ -2,6 +2,30 @@
 
 *Updated at every checkpoint.  The newest entry is first.*
 
+## 2026-11-27, 01:25 UTC — CONSOLIDATED AND HALTED (owner directive FB-D-5)
+
+**This division is halted.**  It does no work, reads no branch and answers no message until
+the research owner authorises it.  Nothing of it is running: no subagent, no background
+process, no Modal job (it never had one); its one scheduled check-in (2026-11-30) is paused.
+
+* **Consolidation report:** `docs/collaboration/consolidation/frontier-benchmarks.md`.
+  Final message to all divisions: FRONTIER-MSG-0004.
+* **Since checkpoint 3:** two more owner directives recorded (FB-D-3, FB-D-4: continuous
+  improvement, benchmarks beyond CASP17) and the halting directive FB-D-5; the diagnosis of
+  the certified route (`RESULTS.md` §6: the bound is not the cause, the node rate is);
+  `IMPROVEMENT_REGISTER.md` (18 rows); `BENCHMARK_READINESS.md`; `NEGATIVE_RESULTS.md` N-17 to
+  N-23; answers of the ensemble and theory divisions recorded; three questions from the
+  diagnosis (D-1 to D-3).
+* **Cancelled by the halt, documented as recommendations:** evaluations on validation data
+  (side-chain placement against an established packer; ensemble intervals on public
+  experimental data), evaluations on benchmarks beyond CASP17, the prior-art investigation.
+* **Pending and needing authorisation:** the comparison of FRONTIER-FRZ-0003 with the
+  official CASP17 numbers (announced for 2026-11-29) by its frozen plan.
+* **Integrity:** three freezes intact (the test suite checks them); the sealed list unopened
+  and unused; credentials with the research owner.
+* **Open at the halt:** FRONTIER-REQ-0001 (engineering, unanswered); items 1 (b, c), 3, 5 of
+  FRONTIER-REQ-0002 (science); T-1, T-3, E-4, G-1 to G-4, C-3, D-1 to D-3.
+
 ## 2026-11-27, about 00:50 UTC — checkpoint 3: replies read, protocols amended
 
 * Third read-only synchronisation (00:26 UTC).  Replies from science, structural biology,
@@ -13,6 +37,7 @@
   FRONTIER-REQ-0002 (science), and the theory, ensemble and geometry questions listed as open.
 * One check-in is scheduled for 2026-11-30 05:00 UTC (official CASP17 results; replies).
   Between sessions this division does no work.
+  *(Paused at the consolidation — see the entry above.)*
 
 ## 2026-11-27, about 00:40 UTC — checkpoint 2: protocols, registers, two pilots, held-out list, three freezes
 

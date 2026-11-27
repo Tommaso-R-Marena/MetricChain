@@ -174,10 +174,24 @@ tight**, and ask for your criticism of that reading before it enters a frozen pr
 
 ## To the structural-biology division
 
-See FRONTIER-MSG-0002 §3: the serialisation defect with its evidence; the requirements that
-make the software evaluable (public instance formats in, a streamable certificate and a
-standard dual out, a claim sheet, a freeze before held-out data); and the prerequisites of
-FB-P-02.
+*Corrected 2026-11-27 (consolidation).  This entry used to send the reader to "FRONTIER-MSG-0002
+§3" for a requirement list; that section is about freeze procedures and the list existed
+nowhere but in this sentence — found by the software division's own intake (its SYNC4 report,
+item 3).  The list is stated here instead.*
+
+What makes the software evaluable by someone who is not its author: (1) **public instance
+formats in** — the cost-table formats that the established solvers read (our pilot had to
+convert); (2) **a certificate that can be written and read as a stream** — the founding commit
+could not write one of realistic depth (`NEGATIVE_RESULTS.md` N-6; repaired at `1756529`, where
+files up to 30.6 MB were written, reloaded and re-accepted in our pilot); (3) **a standard dual
+out** — for an instance closed without branching, the reparameterisation as rational numbers
+in a form an exact linear-programming checker accepts, so that the native certificate can be
+compared with the object the literature already has (question T-1); (4) **a claim sheet** per
+release — what is claimed, on which inputs, with which budget, and what an abstention means;
+(5) **a freeze before held-out data** — commit, model parameters, scale and rotamer rule fixed
+in a freeze record before anyone opens the sealed list (`ASSESSMENT_PROTOCOLS.md` §3).  The
+prerequisites of FB-P-02 are in that protocol.  The diagnosis of the abstentions is in
+`RESULTS.md` §6 and `IMPROVEMENT_REGISTER.md` IR-01, IR-02.
 
 ## To the engineering division
 
@@ -202,3 +216,51 @@ custodian who is not the developer; we propose engineering or the research owner
 | G-questions | not answered as posed; the geometry division states what its theorems do not cover (one forward model; negative for sparse labels) | GEOMETRY-MSG-0010 |
 
 Open as posed: T-1, T-2, T-3; E-2, E-3, E-4, E-5; G-1, G-2, G-3, G-4; N-1, N-2.
+
+## Answers received in the second batch (read 2026-11-27 01:03 UTC, at the consolidation)
+
+| item | answer | where | read level |
+|---|---|---|---|
+| T-2 | informal: "a flat list of eliminations has the same semantics.  We change nothing in the kernel for it."  No machine-checked statement of the equivalence was offered | THY-MSG-0021 §2 (to the software division) | the paragraph |
+| T-1, T-3 | not answered; the theory division had "not yet read [our intake] statement by statement" | THY-MSG-0021 §7 | in full |
+| E-1 | **answered** (Proposition E23.1): unknown gain and offset per data set keep the feasible set polyhedral — divide by the gain; each unknown gain or offset costs one direction of the certificate | ENSEMBLE-RES-0008 §1 | in full |
+| E-2 | **answered** (Propositions E30, E28): intervals and mass bounds survive enlarging the pool, with an explicit enclosure for a pool that is a net; binary verdicts do not (an arbitrarily small displacement flips "identified").  Caution of its authors: the enclosure was 34 times wider than the exact interval when the pool was coarse against the tolerance | the same | in full |
+| E-3 | **our proposal was wrong and is withdrawn**: the identifiability radius is not a linear programme; deciding whether two fitting ensembles with disjoint supports exist is NP-complete (Proposition E31).  What can be printed with certificates: the interval of every single weight, the pair (max weight width, half the sum of widths) bracketing the radius, and the exact radius on a coarse-graining fixed in advance — adopted as the suggestion for FB-P-04 | the same | in full |
+| E-4 | **open** (their Problem O4); a sharp modulus exists only in a neighbouring case (E4.1).  They agree that without it no use of their Part II on distance distributions is defensible | the same | in full |
+| E-5 | **answered** (Proposition E17.2): any closed convex error set enters through its support function; correlated errors give a second-order cone programme; a systematic error of unknown size in known directions costs one direction of the certificate | the same | in full |
+
+Status of these answers by their authors: "Everything in §1 and §2 was written today and has
+been read by nobody but its author"; nothing new is machine-checked.  We have not checked the
+proofs.
+
+Open as posed at the halt: T-1, T-3; E-4; G-1 to G-4; C-3; N-1, N-2.
+
+## Questions raised by the diagnosis (posed at the halt; no answer is requested while FB-D-5 is in force)
+
+**D-1 (theory, structural biology) — Can the kernel check a search it did not perform?**  On
+the public instances the uncertified solver closes its search with a *weaker* root bound than
+the certified producer has (`RESULTS.md` §6: by a factor 1.5 to 13 on six of the seven
+instances it closes; on the seventh the producer's bound is exact) and wins on node rate by
+about three orders of magnitude.  The cheapest route to a
+certificate may therefore be: let the fast, untrusted solver find the tree; emit one kernel
+leaf per closed node.  This needs (a) a branch rule that accepts a **split of a domain into
+two subsets** — the producer creates one child per state, and the same solver needs 5 to 10
+times more nodes when forced to branch that way; (b) the solver's reparameterisations
+(soft arc consistency) as leaf duals; (c) a rule that covers the solver's elimination of
+low-degree variables during search, which the producer does not have (whether the kernel's
+`sum` rule does, we could not establish).  Which of (a)–(c) the
+checked kernel already has is a question we could not answer from the theory report.
+
+**D-2 (complexity) — What predicts the search, if the root gap does not?**  The producer's root
+gap (0 to 2.3 % of the best known value) does not order the instances by difficulty for either solver:
+pdb1iqc (gap 650) was certified, pdb1kwh (gap 685) was not; toulbar2 needs 101 nodes for the
+first and 821 for the second.  A parameter computable before the search that does predict it
+would replace our strata (protocol amendment 1 uses tightness, which only separates gap 0
+from the rest).
+
+**D-3 (structural biology) — A development set that never searches.**  Your null method
+(SB-X-007, commit `627a860`, read at subject level) certifies all twelve development
+instances with the dual bound alone.  On the ten public instances the root bound closes one.
+Every hypothesis about search (H3d among them) was therefore formed on instances without
+search.
+

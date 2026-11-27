@@ -1,0 +1,94 @@
+[
+ {
+  "budget": 150.0,
+  "cumulative": {
+   "_index_tricks_impl.py:ix_": 4.8,
+   "_methods.py:_amin": 36.7,
+   "gmec.py:bound": 39.5,
+   "gmec.py:certify_gmec": 150.8,
+   "gmec.py:dead_end_elimination": 6.3,
+   "gmec.py:run": 134.0,
+   "gmec.py:solve": 148.7,
+   "gmec.py:sweep": 94.4,
+   "~:<method 'min' of 'numpy.ndarray' objects>": 47.1,
+   "~:<method 'reduce' of 'numpy.ufunc' objects>": 29.3
+  },
+  "instance": "pdb1kwh",
+  "status": "abstained_budget",
+  "top_by_own_time": [
+   {
+    "calls": 6921,
+    "function": "gmec.py:sweep",
+    "own_seconds": 62.3,
+    "share": 0.413
+   },
+   {
+    "calls": 34230193,
+    "function": "~:<method 'reduce' of 'numpy.ufunc' objects>",
+    "own_seconds": 29.3,
+    "share": 0.194
+   },
+   {
+    "calls": 7050,
+    "function": "gmec.py:bound",
+    "own_seconds": 24.4,
+    "share": 0.162
+   },
+   {
+    "calls": 33944085,
+    "function": "~:<method 'min' of 'numpy.ndarray' objects>",
+    "own_seconds": 10.4,
+    "share": 0.069
+   },
+   {
+    "calls": 33944085,
+    "function": "_methods.py:_amin",
+    "own_seconds": 7.6,
+    "share": 0.05
+   },
+   {
+    "calls": 128,
+    "function": "gmec.py:dead_end_elimination",
+    "own_seconds": 2.5,
+    "share": 0.017
+   },
+   {
+    "calls": 1,
+    "function": "gmec.py:solve",
+    "own_seconds": 1.8,
+    "share": 0.012
+   },
+   {
+    "calls": 669685,
+    "function": "_index_tricks_impl.py:ix_",
+    "own_seconds": 1.8,
+    "share": 0.012
+   },
+   {
+    "calls": 128,
+    "function": "gmec.py:_exact_bound",
+    "own_seconds": 1.4,
+    "share": 0.009
+   },
+   {
+    "calls": 129,
+    "function": "gmec.py:__init__",
+    "own_seconds": 0.9,
+    "share": 0.006
+   },
+   {
+    "calls": 2996250,
+    "function": "gmec.py:<genexpr>",
+    "own_seconds": 0.9,
+    "share": 0.006
+   },
+   {
+    "calls": 1339370,
+    "function": "numerictypes.py:issubdtype",
+    "own_seconds": 0.9,
+    "share": 0.006
+   }
+  ],
+  "toulbar2_proved": true
+ }
+]

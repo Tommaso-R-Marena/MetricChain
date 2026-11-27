@@ -198,6 +198,125 @@ scope, verification standards, and consolidation requirements."
 
 ---
 
+## FB-D-3 — Continuous cross-divisional improvement and independent evaluation
+
+*Received 2026-11-27, about 00:40 UTC, in the founding session, with "I approve the continuation
+of the Frontier Benchmarking division".  **Superseded in its instruction to operate
+continuously by FB-D-5** (below) "until I explicitly authorize their resumption"; its
+integrity rules remain binding.  Summary by this division; quoted sentences are verbatim.*
+
+1. Communicate deficiencies to every relevant division with research questions and success
+   criteria: the 17–326× disadvantage against toulbar2, the abstention rate, scaling limits,
+   model versus reality, no CASP17-mature capability, the ensemble findings and the need to
+   show an advantage over existing methods.  "Do not merely report that something performs
+   poorly.  Investigate why it performs poorly and communicate the underlying mathematical or
+   computational obstacles wherever possible."
+2. A continuous improvement loop with "a persistent register of all identified deficiencies,
+   requested improvements, responsible divisions, proposed success criteria, relevant commits,
+   responses, benchmark outcomes, and outstanding issues" (statuses: resolved, partially
+   resolved, disproved, deferred, open) — `IMPROVEMENT_REGISTER.md`.
+3. Independence (non-negotiable): "Do not disclose sealed held-out datasets, their selection
+   details beyond the preregistered public protocol, their credentials, or target-specific
+   results that could facilitate tuning to the held-out set."  "Use development benchmarks,
+   independent diagnostic instances, and separate validation datasets to drive the improvement
+   loop."  "The sealed 47-structure benchmark must remain sealed until the relevant software
+   release and evaluation protocol are frozen.  I will retain custody of the credentials and
+   authorize their release to Engineering separately."  "If the sealed held-out benchmark is
+   subsequently used to guide improvements, explicitly retire it as a final independent test
+   set and establish a fresh held-out evaluation."  "Do not repeatedly tune against a held-out
+   benchmark while continuing to describe it as independent validation."  "Negative results
+   must remain permanently documented."
+4. Beyond minimum energy: structure prediction, ensembles, protein–ligand binding,
+   thermodynamics, partition functions, pockets, disordered proteins, kinetics, electrostatics,
+   identifiability, robustness to energy-model uncertainty, certification; distinguish
+   synthetic validation, realistic computational validation, independent experimental
+   validation and demonstrated superiority.  "Maintain the existing CASP17 determination and do
+   not manufacture a claim of participation or predictive performance."
+5. Novelty: classify results (established / reformulation / straightforward extension /
+   nontrivial original / novel capability / meaningful improvement); report suspected
+   rediscoveries.  Success is "at least one compelling, independently defensible
+   demonstration".
+6. Operational: "I authorize continued use of independent cryptographic timestamp authorities
+   for non-sensitive cryptographic digests only.  Extend this authorization to Engineering and
+   communicate it through the established collaboration infrastructure."  "Do not transmit
+   underlying confidential information, unpublished biological data, credentials, or sealed
+   evaluation materials to external timestamp authorities."  "Maintain the scheduled November
+   30 CASP17 check-in."  "This directive does not independently authorize additional
+   expenditure or changes to the shared compute budget."
+
+*Executed before FB-D-5 arrived:* a read-only synchronisation; the diagnosis of the certified
+route (`RESULTS.md` §6).  *Not executed and cancelled by FB-D-5:* the subagent investigations,
+the new evaluations on validation data, the per-division request messages (replaced by the
+single consolidation message FRONTIER-MSG-0004).  The timestamp authorisation is communicated
+to Engineering in FRONTIER-MSG-0004 §4.
+
+## FB-D-4 — Established and frontier benchmarks beyond CASP17
+
+*Received with FB-D-3.  Superseded in the same way by FB-D-5.*
+
+Investigate "and where appropriate execute" evaluations on other established benchmarks — a
+"starting list, not exhaustive": CAMEO, CASP13–16, ProteinNet, ProteinBench; Top2018,
+historical CASP packing sets, contemporary packing benchmarks; ATLAS, mdCATH, apo–holo sets;
+PDBbind, CASF; LIGYSIS, HOLO4K; ThermoMutDB 2.0, FireProtDB, ProThermDB, SKEMPI 2.0; CAID,
+DisProt; SABIO-RK, BRENDA-derived sets; electrostatics, partition-function, free-energy,
+kinetics and uncertainty benchmarks.  Evaluate MetricChain in six roles (standalone method;
+certification layer over an established model's predictions; uncertainty and identifiability
+framework; scoring, ranking and validation framework; thermodynamic framework; complementary
+pipeline component), with and without it, upstream model, inputs and budgets controlled.  "Do
+not misattribute the predictive performance of an upstream model to MetricChain."  "Never use
+the sealed held-out benchmark to guide development.  Preserve the existing custody and
+evaluation-integrity procedures."
+
+*State at the halt:* no evaluation on these benchmarks was executed.  What can be said from
+what was already known is in `BENCHMARK_READINESS.md`; it is an assessment of readiness, not
+a literature review, and says where a fact was not verified.
+
+## FB-D-5 — Controlled consolidation and temporary research halt (in force)
+
+*Received 2026-11-27, about 01:00 UTC, in the founding session, with a clarification
+("Graceful Research Wind-Down") in the same message.  Quoted sentences are verbatim.*
+
+"This directive supersedes all previous instructions to operate in continuous research,
+discovery, improvement, or evaluation loops until I explicitly authorize their resumption."
+
+1. "Do not initiate new speculative research directions, mathematical workstreams, large
+   literature investigations, software projects, extensive benchmarking campaigns, or subagent
+   investigations."  Identify active subagents and tasks; let finish only what is "genuinely
+   near completion and materially contributes to an important result".
+2. Bring the work "to a clean, reproducible, durable checkpoint"; identify accurately what is
+   "incomplete, conjectural, unreviewed, or potentially incorrect".
+3. Write `docs/collaboration/consolidation/<division>.md` with: executive assessment; the five
+   strongest contributions (fewer if fewer deserve it) with prior art and evidence for and
+   against originality; negative results and rediscoveries; practical opportunities; at most
+   three next actions; publication readiness.  "Do not equate formal verification with
+   novelty."  "Do not invent cost estimates when the necessary information is unavailable."
+4. For this division: "consolidate the independent evaluation evidence, negative results,
+   benchmark readiness assessments, contamination controls, sealed evaluation procedures, and
+   prioritized recommendations for subsequent benchmarking."
+5. "Do not launch new substantial Modal jobs under this directive."  "All existing budget
+   limits remain binding."
+6. "Do not open sealed held-out datasets, disclose credentials, tune against held-out results,
+   or compromise previously frozen evaluation protocols.  Preserve all evaluation commitments
+   and their associated provenance."
+7. Commit and push; update status and digest; one concise consolidation message; report to the
+   owner the final commit, the strongest contributions, the most consequential unresolved
+   problems, a recommendation, and what remains active.  "Do not start another research
+   cycle.  Do not automatically resume when another division sends a message.  Do not schedule
+   additional reasoning sessions.  Once consolidation is complete, terminate active reasoning
+   and wait for my explicit authorization before undertaking further work."
+
+Clarification: "an orderly scientific wind-down, not an emergency shutdown"; finish what is
+"reasonably close to completion"; "leave every research direction in a state that another
+capable model or human researcher could resume without repeating substantial work."
+
+*How this division applied it* is recorded in `docs/collaboration/consolidation/frontier-benchmarks.md`
+§G and in `HANDOFF.md`: two bounded diagnostic runs already under way were allowed to finish;
+nothing new was started; the scheduled check-in of 2026-11-30 was **paused, not deleted**,
+because it would have started work without the explicit authorisation this directive requires
+(the owner can re-authorise it in one sentence).
+
+---
+
 ## What this division cannot see, and one environment fact
 
 * The balance of aggregate Claude credits and the Modal workspace balance are not visible
