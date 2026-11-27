@@ -1,5 +1,5 @@
 {
- "pinned_at_utc": "2026-11-27T18:47:45Z",
+ "pinned_at_utc": "2026-11-27T18:56:34Z",
  "status": "FINAL (built 2026-11-27 under the research owner's directive for the final collection and handoff): every Modal job of the programme is closed and nothing is running.  The engineering section is pinned at the commit that holds the collected results of jobs M-016 and M-021, the tables made from them and the closed compute ledger; one cell of job M-016 has no result, and most of the larger searches ran into their time limits (see the record of incomplete items).  The other seven divisions pushed nothing after the interim version and are pinned at the same commits as there.  The interim version remains in the history of this branch as commit 5c2bcec.",
  "sealed_paths": {
   "frontier": [
@@ -21,7 +21,7 @@
   },
   "engineering": {
    "branch": "research/ubuntu-engineering",
-   "commit": "dcb49f3e0372b0383bf816ef4050716b5d8da5e6",
+   "commit": "67b6bc225ecae43053173efef3068f783db51e46",
    "consolidation_report": "docs/collaboration/consolidation/engineering.md",
    "registers": [
     "docs/collaboration/status/engineering.md",

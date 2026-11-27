@@ -625,4 +625,10 @@ computational-results collection task."  Operative content:
   interim `5c2bcec`, which stays in the history).  The other seven divisions had pushed
   nothing since the interim snapshot (fetched at 18:44 UTC).
 
+* *A second commit, ten minutes after the first*, corrected the times given in the
+  notes of the first (the addendum, the consolidation report, the research log and the status
+  file said "about 19:00 UTC" and "18:20–20:00 UTC"; they had been written ahead of the clock
+  — the first commit was made at 18:46 UTC) and changed nothing else.  The archive was
+  re-pinned to it.
+
 D-8 remains the operative directive: the division is halted.

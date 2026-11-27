@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | branch | `research/ubuntu-engineering` |
-| pinned commit | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` (2026-11-27T18:46:01Z) |
+| pinned commit | `67b6bc225ecae43053173efef3068f783db51e46` (2026-11-27T18:55:55Z) |
 | what was imported | files added or modified relative to the merge-base with the pinned theory commit `d81eb8aba138` (2026-11-25T03:39:29Z) |
 | files | 722 imported (36.84 MiB); 0 left out by reference (0.00 MiB); the branch tree has 840 files |
 | formal verification, as the division documents it | one Lean file of its own (`experiments/eng/sb_review/lean_kernel/RunKernel.lean`): "`verifyM_eq`: checked by Lean (a four-case induction). The runs: executions by Lean's interpreter, not proof terms"; everything else is tested software and stored computations  *(source: `docs/collaboration/consolidation/engineering.md`)* |
@@ -59,7 +59,7 @@
 | handoff-or-log | [`docs/engineering/README.md`](docs/engineering/README.md) | Engineering documents | 2 |
 | handoff-or-log | [`docs/engineering/RESEARCH_LOG.md`](docs/engineering/RESEARCH_LOG.md) | Engineering research log (Computational Research Division) | 41 |
 | handoff-or-log | [`docs/engineering/drafts/README.md`](docs/engineering/drafts/README.md) | Drafts | 0 |
-| owner-directives | [`docs/engineering/DIRECTIVES.md`](docs/engineering/DIRECTIVES.md) | Directives of the research owner to the Computational Research Division | 46 |
+| owner-directives | [`docs/engineering/DIRECTIVES.md`](docs/engineering/DIRECTIVES.md) | Directives of the research owner to the Computational Research Division | 47 |
 | benchmark-or-evaluation-record | [`docs/engineering/COMPUTE_LEDGER.md`](docs/engineering/COMPUTE_LEDGER.md) | Compute ledger (Computational Research Division) | 48 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BASELINE_SPECIFICATIONS.md`](docs/engineering/benchmarks/BASELINE_SPECIFICATIONS.md) | Baseline specifications | 4 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_LIMITATIONS.md`](docs/engineering/benchmarks/BENCHMARK_LIMITATIONS.md) | Benchmark limitations | 5 |

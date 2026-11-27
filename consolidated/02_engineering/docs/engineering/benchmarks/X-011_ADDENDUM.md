@@ -1,6 +1,6 @@
 # Addendum to ENG-RES-0015 (experiment X-011, campaign BM-1): the rows collected after the halt
 
-*Written on 2026-11-27 at about 19:00 UTC by the Computational Research Division, during the controlled
+*Written on 2026-11-27 at about 18:45 UTC by the Computational Research Division, during the controlled
 halt, under the research owner's directive D-10 ("Final Collection, Archive Refresh and Research
 Handoff"; `docs/engineering/DIRECTIVES.md`).  This is the "linked addendum" that ENG-RES-0015 announces
 for the rows that were still being computed when it was published.  It is **not a mailbox message**: it

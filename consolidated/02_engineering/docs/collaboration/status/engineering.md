@@ -23,7 +23,7 @@ neither copied nor read.  What this division still owes under D-9, and nothing e
 Modal runs once they have ended, close them in the ledger, regenerate the tables, commit, and refresh
 the archive once.  *(Done under D-10, next paragraph.)*
 
-**Administrative task D-10 (2026-11-27, about 18:20–20:00 UTC): final collection and handoff.**  On
+**Administrative task D-10 (2026-11-27, from 18:19 UTC): final collection and handoff.**  On
 the research owner's order the two Modal runs were collected and closed: job M-021 complete (16 of
 16 cells), job M-016 with 17 of 18 — the cell `u = 1`, `n = 32 000`, family "wide" has no row: its
 task had been restarted by the platform and could not return before the existing cutoff, so its

@@ -84,7 +84,7 @@ engineering used Modal (each report's "state at the halt" says so).
 
 These are left exactly as the records have them.
 
-*Checked again at the final refresh (branches fetched 2026-11-27 18:47 UTC).*  None of the seven other
+*Checked again at the final refresh (branches fetched 2026-11-27 18:47 and 18:56 UTC).*  None of the seven other
 divisions pushed anything after the interim version of this archive, so **every item of §§3.1–3.8 stands
 exactly as written there: nothing was answered, read or reconciled in between.**  Engineering's one
 later commit adds its own collected results and dated notes; it answers none of these items and no

@@ -5,7 +5,7 @@ task of the research owner.  This index and the files under `09_…`, `10_…`, 
 archive; **everything under `01_…` – `08_…` (except each `00_DIVISION_INDEX.md`) is a byte-for-byte copy
 of a division's own files at a pinned commit.**  Nothing was edited, redacted, merged or re-derived.*
 
-*This is the final version, refreshed the same day at about 19:30 UTC after the last two computations had
+*This is the final version, refreshed the same day at about 19:00 UTC after the last two computations had
 been collected and closed.  What changed against the interim version: §0.5.*
 
 **Status of this version.**
@@ -37,7 +37,7 @@ the commit below is the head of that branch when the archive was built.
 | # | division | branch | pinned commit | commit date (UTC) | merge-base with theory | files | MiB |
 |---|---|---|---|---|---|---:|---:|
 | 01 | Theoretical Research Division | `claude/determined-ride-og1u7j` | `b3c5d6115df06bb160d6490a95d9ec6e1a108d02` | 2026-11-27 01:26:54 | — | 1864 | 18.46 |
-| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` | 2026-11-27 18:46:01 | `d81eb8aba138` | 722 | 36.84 |
+| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `67b6bc225ecae43053173efef3068f783db51e46` | 2026-11-27 18:55:55 | `d81eb8aba138` | 722 | 36.84 |
 | 03 | Scientific Discovery, Translation & Independent Validation Division | `research/scientific-translation` | `340081afba8841a4093b3df9b18387e8a36f20b1` | 2026-11-27 01:17:37 | `5ed407282d89` | 4281 | 60.43 |
 | 04 | Ensemble Identifiability and Certified Inference Division | `research/ensemble-identifiability` | `a089a0ce2427c7f3797b838837d16659c8b0a1e4` | 2026-11-27 01:24:04 | `a844b5a8f374` | 181 | 2.20 |
 | 05 | Geometric Inference, Rigidity and Inverse Problems Division | `research/geometric-inference` | `229527e37bbd53428f31718339b7ceb61bc1e942` | 2026-11-27 01:08:57 | `a844b5a8f374` | 189 | 1.88 |
@@ -48,7 +48,7 @@ the commit below is the head of that branch when the archive was built.
 <!-- /GEN:pins -->
 
 <!-- GEN:totals -->
-7899 files (133.48 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T18:47:45Z.
+7899 files (133.48 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T18:56:34Z.
 <!-- /GEN:totals -->
 All divisions share one history (root `897242c`, 2026-11-24); every branch other than theory forked from
 the theory branch at the merge-base shown, so its tree also contains an older copy of the theory files.
@@ -114,13 +114,15 @@ A text scan of every Lean file in the archive (not a build): [`11_reproducibilit
 | version | commit of the branch `research/consolidated-archive` | built (UTC) | state |
 |---|---|---|---|
 | interim | `2035fe86ff74d62391f83aee35cba70cec4a6f9d`, then `5c2bcec920e8023a9db37df31249013af4da72ea` (engineering re-pinned at `af74a0e` for a record of the owner's directive and a scope note) | 2026-11-27, about 05:30 | two Modal jobs of engineering still running; 7896 files, 133.33 MiB |
-| **final** | the commit that contains this file (`git log -1`; it is the head of the branch) | 2026-11-27, about 19:30 | nothing running; 7899 files, 133.48 MiB |
+| final, first build | `55f5a45d84441a32e8f52387bf0a6b0f4a447166` (engineering at `dcb49f3`) | 2026-11-27, 18:54 | superseded within the hour by the next row.  The only differences: four time stamps in engineering's notes, and two in this index, had been written ahead of the clock and were corrected |
+| **final** | the commit that contains this file (`git log -1`; it is the head of the branch) | 2026-11-27, about 19:00 | nothing running; 7899 files, 133.48 MiB |
 
-Both interim commits stay in the history of the branch and can be downloaded by their hashes (§13).
+All earlier commits stay in the history of the branch and can be downloaded by their hashes (§13).
 Changes of the final version against `5c2bcec`:
 
-* **Engineering is pinned at `dcb49f3e0372b0383bf816ef4050716b5d8da5e6`** instead of `af74a0e`: 19 files
-  of that branch differ (16 changed, 3 new; 991 lines added, 30 removed).  New:
+* **Engineering is pinned at `67b6bc225ecae43053173efef3068f783db51e46`** instead of `af74a0e`: 19 files
+  of that branch differ (16 changed, 3 new; 997 lines added, 30 removed), in two commits of that branch
+  (`dcb49f3`, the collection; `67b6bc2`, a correction of time stamps in its notes).  New:
   [`X-011_ADDENDUM.md`](02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md) (the rows collected
   after the halt, their tables, the outcomes of the hypotheses fixed in advance — **unrefereed**),
   `02_engineering/experiments/eng/twolevel/check_late_rows.py` and its stored output
@@ -131,7 +133,7 @@ Changes of the final version against `5c2bcec`:
   results summary, protocol ("Deviations"), research log, experiment register, reproducibility note and
   synchronisation log; dated notes in the consolidation report, ENG-RES-0015 and ENG-MSG-0008.
 * **The other seven divisions are pinned at the same commits as in the interim version**: none of them
-  pushed anything between the two builds (fetched 2026-11-27 18:47 UTC), and no new branch or tag
+  pushed anything between the builds (fetched 2026-11-27 18:44, 18:47 and 18:56 UTC), and no new branch or tag
   appeared.  Consequently **every verification gap, unread message and unresolved dependency recorded in
   `09_cross_divisional_dependencies/README.md` §3 stands unchanged**; one item was added there (§3.9).
 * **One result that was expected is missing**: the cell `u = 1`, `n = 32 000`, family "wide" of job M-016

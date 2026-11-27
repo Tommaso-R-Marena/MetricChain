@@ -20,7 +20,7 @@ refresh is).  Paths are relative to `consolidated/`.*
 | # | division | branch | pinned commit | commit date (UTC) | merge-base with theory | files | MiB |
 |---|---|---|---|---|---|---:|---:|
 | 01 | Theoretical Research Division | `claude/determined-ride-og1u7j` | `b3c5d6115df06bb160d6490a95d9ec6e1a108d02` | 2026-11-27 01:26:54 | — | 1864 | 18.46 |
-| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` | 2026-11-27 18:46:01 | `d81eb8aba138` | 722 | 36.84 |
+| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `67b6bc225ecae43053173efef3068f783db51e46` | 2026-11-27 18:55:55 | `d81eb8aba138` | 722 | 36.84 |
 | 03 | Scientific Discovery, Translation & Independent Validation Division | `research/scientific-translation` | `340081afba8841a4093b3df9b18387e8a36f20b1` | 2026-11-27 01:17:37 | `5ed407282d89` | 4281 | 60.43 |
 | 04 | Ensemble Identifiability and Certified Inference Division | `research/ensemble-identifiability` | `a089a0ce2427c7f3797b838837d16659c8b0a1e4` | 2026-11-27 01:24:04 | `a844b5a8f374` | 181 | 2.20 |
 | 05 | Geometric Inference, Rigidity and Inverse Problems Division | `research/geometric-inference` | `229527e37bbd53428f31718339b7ceb61bc1e942` | 2026-11-27 01:08:57 | `a844b5a8f374` | 189 | 1.88 |
@@ -31,7 +31,7 @@ refresh is).  Paths are relative to `consolidated/`.*
 <!-- /GEN:pins -->
 
 <!-- GEN:totals -->
-7899 files (133.48 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T18:47:45Z.
+7899 files (133.48 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T18:56:34Z.
 <!-- /GEN:totals -->
 
 ## 2. What was copied, and by which rule
@@ -149,7 +149,8 @@ For a fixed version, replace `refs/heads/research/consolidated-archive` by the c
 |---|---|---|---|
 | interim, first | `2035fe86ff74d62391f83aee35cba70cec4a6f9d` | `846e58c` | as in §1 |
 | interim, second | `5c2bcec920e8023a9db37df31249013af4da72ea` | `af74a0e66534294bad1dcbc3d5a9d85433cb72a4` | as in §1 |
-| final | the head of the branch (the commit that contains this file) | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` | as in §1 — unchanged since the first version |
+| final, first build | `55f5a45d84441a32e8f52387bf0a6b0f4a447166` | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` | as in §1 |
+| final | the head of the branch (the commit that contains this file) | `67b6bc225ecae43053173efef3068f783db51e46` (as `dcb49f3` with time stamps in its notes corrected) | as in §1 — unchanged since the first version |
 
 A refresh changes nothing by hand under `01_…` – `08_…`: the new commit of a division is written into
 `pins.json`, `build_archive.py` is run (it copies the files of the pinned commits, removes what is no
@@ -158,5 +159,5 @@ longer in them, and regenerates the indexes and the manifest), then `verify_mani
 which ones were, for the final version, is listed in `00_MASTER_INDEX.md` §0.5.  Earlier versions are
 never rewritten: every version is a commit of this branch, and the branch has never been force-pushed.
 
-For the final version all eight branches were fetched again (2026-11-27 18:47 UTC): only engineering had
-a new commit.  Result of the checks on the final version: see the last lines of §4 and §5.
+For the final version all eight branches were fetched again (2026-11-27 18:47 UTC, and 18:56 UTC for its
+second build): only engineering had new commits.  Result of the checks on the final version: see the last lines of §4 and §5.
