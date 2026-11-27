@@ -88,7 +88,10 @@
    reviewer should attack first); **and Proposition E23.1 with Part VIII** (E27–E29:
    OB29).  An internal review ER4 of everything up to `b654396` was commissioned on
    2026-11-27 (a subagent; its report goes to `reviews/ER4_internal_review.md`): if that
-   file is missing or not applied, that is the first thing to do.  Exact computer
+   file is missing or not applied, that is the first thing to do.  Not covered by ER4
+   and unreviewed: E23.1, E27–E31, E17.2, E4.1, E20e (OB29, OB30).  An independent
+   re-implementation of the control instances and of the torus instances has been asked
+   of the engineering division (ENSEMBLE-REQ-0001): look for its answer.  Exact computer
    algebra (sympy rationals; ranks modulo a prime) is not a kernel check: do not label
    such a step [V].
    Cited theorems not read in the original by us: `OPEN_OBLIGATIONS.md` OB2–OB6, OB10,

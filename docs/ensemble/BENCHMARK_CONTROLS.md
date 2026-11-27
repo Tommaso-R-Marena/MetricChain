@@ -75,6 +75,14 @@ equalities; intervals against closed forms).  Numbers in quotes are exact ration
 | B9-02 | a library with `φ ∈ {0, 1}`; unlisted configurations known only to satisfy `0 ≤ φ ≤ 2`; datum: mean `3/2` | `LIBRARY_FALSIFIED` (certificate `λ = 1`); missing weight at least `1/2`, attained; no upper bound | a failed test of a library bounds the weight it misses from below (E28) |
 | B9-03 | configurations `0, 1, 2, 3`; data: mean and mean square of the uniform ensemble | `K_min = 3`, `K_max = 4`; control on the boundary (data `3/2, 5/2`): `K_min = K_max = 2`, `IDENTIFIED` | the fewest conformers that fit are not the conformers (E29) |
 
+*Instances on tori* (`experiments/ensemble/benchmarks/torus_instances_v1.json`, written by
+`export_torus_instances.py`): two rational six-tuples on three angles with the exact
+ranks behind Theorem E20b (verdict `NOT IDENTIFIED`), and ten 13-tuples on four angles
+with the verdicts of Proposition E20e (some `IDENTIFIED`, some `NOT IDENTIFIED`) — a pair
+of families in which the number of states and of data is the same and the verdict
+differs.  These verdicts are numerical, and an independent re-implementation has been
+asked of the engineering division (ENSEMBLE-REQ-0001).
+
 ## 3. Families at scale (generators with ground truth)
 
 The reference instances are small on purpose.  The same constructions give families of
@@ -95,7 +103,11 @@ engineering division can reproduce with our scripts.
 3. **A ladder of conditioning.**  The vertex of a regular `N`-gon (B3-01): identified for
    every `N`, with stability constant `1/(1 − cos(2π/N)) ≈ N²/(2π²)`.  A tool's reported
    uncertainty at fixed data error should grow along the ladder; one that reports the
-   same confidence at `N = 12` and `N = 3600` is not tracking conditioning.
+   same confidence at `N = 12` and `N = 3600` is not tracking conditioning.  Explicitly (asked
+   by the Frontier Benchmarking division): with each of the two means known within `τ`,
+   the largest weight that can be elsewhere is exactly `min(1, τ/(1 − cos(2π/N)))`, attained
+   by the two neighbouring vertices; the interval of the weight of the vertex is
+   uninformative from `τ ≈ 2π²/N²` on; on the continuum the mass moves by `arccos(1 − τ) ≈ √(2τ)`.
 4. **Splices for laws of distances.**  Any two conformers sharing a rigid part, with two
    further points placed independently (B2-06), give a twin by exchange; any two-body
    platform with at most three legs in the plane or six in space has twins on an open set

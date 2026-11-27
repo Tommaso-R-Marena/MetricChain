@@ -22,8 +22,8 @@ findings), applied here (§7 item 14).  The main statement of Proposition E15U w
 re-derived and replicated by the science division (SCI-RES-0038).  Unreviewed: the rest
 of E15U, Proposition E17.1, the statements added to Part VI from the review itself
 (E20a, E22, two constants of E20″), which we re-derived but nobody else has read, the
-statements E20b–E20d added after it, the whole of Part VII (E23–E26, E23.1) and Part VIII (E27–E29).  No external peer review
-of anything.
+statements E20b–E20d added after it, the whole of Part VII (E23–E26, E23.1) and Part VIII (E27–E31), E20e, E4.1 and E17.2.  No
+external peer review of anything.
 "New" below always means "not found in the search documented in `PRIOR_ART.md`".
 
 ---
@@ -41,6 +41,7 @@ how stably, and with what certificate.**
 | E2 | **One conformation.**  `ω(τ) = sup{E_ν ρ : ‖E_νΦ − Φ(x⋆)‖ ≤ τ}` equals `min_λ {τ‖λ‖_* + max_y[ρ(y) − λ·(Φ(y) − Φ(x⋆))]}`; the best linear modulus is `κ = min{‖λ‖_* : λ·(Φ(y) − Φ(x⋆)) ≥ ρ(y) ∀y}`.  For `ρ = d(x⋆,·)` the constraint is the **sharp-minimum condition of theory report Theorem 2.4**: *a certificate that `x⋆` minimises `λ·Φ + g` for every admissible residual is a certificate that the data of `Φ` identify the conformation `x⋆`, with transport modulus `‖λ‖_*·τ`* | P (duality, exactness of `κ`); the inequality and the bridge V for finite `X`, in the form `Σ_i |λ_i|·|Δdata_i|` (`transport_le_of_sharp`, `identification_of_robust_certificate`, `residual_advantage_le`) | formulation (linear-programming duality; the dictionary with robust optimality, two lines given Theorem 2.4, was not found in print) |
 | E3 | **Finite ensembles, first order.**  For an identified `μ` on a finite metric space, `sup{W₁(ν, μ) : ‖E_νΦ − E_μΦ‖ ≤ τ} = κ_μ·τ` exactly for small `τ`, with `κ_μ = max_{g 1-Lipschitz} min{‖λ‖_* : c + λ·Φ ≥ g on X, = g on supp μ}`; `κ_μ` depends on the support only, not on the weights | P | formulation (`1/κ_μ` is a minimum conic gain on a tangent cone / a Hoffman constant; ER1 F11) |
 | E4 | **Rényi–Heppes for arbitrary observables.**  If two configurations agree on fewer than `r` of `m` features and `m ≥ K(r−1) + 1`, every ensemble with at most `K` conformers is determined by the `m` *laws* of the features among all ensembles; the bound is sharp for every `K ≥ 2`, `r ≥ 2` | V for finite `X` (`renyi_heppes`), P in general | generalisation of a known theorem (Rényi 1952, Heppes 1956); the support step is the frameproof-code lemma of Boneh–Shaw 1998 |
+| E4.1 | **A modulus for E4.**  If every law is known within `ε` in total variation, the mass off the `K` conformers is at most `mε/(m − K(r−1))` (attained) and every weight is within `ε` plus that.  Not a modulus for distance distributions (Problem O4) | P | elementary; in reply to the Frontier Benchmarking division; unreviewed |
 | E5 | **Splices on a variety.**  For a polynomial feature map `F : ℝ^D → ℝ^m` without constant coordinates: for generic `K`-tuples no vector assembled coordinate-wise from the feature vectors of *different* points lies on the feature variety — for every `K` — **iff the algebraic matroid of the coordinates of `F` is connected**; if it is not, splices are realisable on an open set of pairs | P | new (not found); closest: unlabeled PCA (linear, unknown subspace) and the product lemma of Garamvölgyi–Gortler–Jordán |
 | E6–E8 | **Global rigidity implies distributional ensemble rigidity.**  If a graph on at least `d+2` vertices is generically globally rigid in `ℝ^d`, every finite ensemble of frameworks whose conformers are **jointly** generic, *with any number of conformers*, is determined — each conformer up to congruence — among all ensembles, by the laws of its edge lengths; the converse is the case of one conformer, and if the graph is not generically globally rigid no generic ensemble is determined.  Then `2K` moments of each squared edge length suffice for `K` conformers, with the explicit certificate `Σ_e Π_i (ℓ_e² − ℓ_e(x_i)²)²`.  For conformers that are only individually generic, or that share a rigid part, the conclusion can fail (Examples D1, D2 of the science division).  On the unconstrained configuration space mean squared distances alone determine no ensemble | P, given two cited theorems (global rigidity is generic; globally rigid ⇒ connected rigidity matroid, 2022) | E7: corollary of the cited 2022 theorem through E5/E6; E8: the classical `2K`-moment certificate edge by edge.  Not found in print: the reading — a finite mixture of frameworks identified from one law per edge (searches of this division and eighteen of the science division's referee) |
 | E7′ | **Conformers that share rigid parts, smallest case.**  Two rigid bodies joined by `m` generic legs: for generic attachment points and poses the leg-length laws determine every finite ensemble of relative poses when `m ≥ dim SE(d) + 1` (seven in space, four in the plane), and fail to on an open set when `2 ≤ m ≤ dim SE(d)` — one leg more than rigidity | P, given a K fact on generic lines | new (not found) |
@@ -54,9 +55,10 @@ how stably, and with what certificate.**
 | E15U | **The exact condition for the thermal union bound.**  For binary sites and any reference: the bound holds for every member of the class iff `E[N | U] − E[N | U^c] ≥ 1` under the polarised member for every up-set `U` of the disagreement order (`N` the number of disagreements) — conditioning on an increasing event raises the mean number of disagreements by at least one; likewise the population bound iff every site is non-negatively correlated with every up-set, and stochastic domination iff positive association.  Necessary: each site's disagreement is non-negatively correlated with the number of the others; at weak coupling this is also sufficient (frustration is tolerated if every site's bonds are satisfied on balance); in general it is not (a three-body example in closed form; a four-site pair model) | P | new (not found); elementary |
 | E16 | **A bimodal ensemble identified by one pair observable.**  For even `n` the double cone `∝ exp((b/2)|M_a|)` is the unique maximiser of `E[M_a²]` over the cube class; for odd `n` the maximisers are a segment parametrised by the population difference of the two basins | P | new (not found); elementary |
 | E17 | **Noise.**  For a convex class and Gaussian noise `σ` the minimax root-mean-square error of a mean `E_μψ` is between `0.335·ω(2σ)` and `0.5·ω(2σ)`, with `ω(ε) = min_λ{ε‖λ‖₂ + range over the class of ψ − λ·Φ}`: the dual certificate of the identified interval is the near-minimax linear estimator | P (elementary: the exact Bayes risk of two points); K (Donoho 1994: factor 1.25) | formulation of a known theory |
+| E17.2 | **Error sets that are not boxes.**  For any closed convex error set the tolerance term of a bound is the support function of the set, and that of a certificate its width in the direction of the certificate: ellipsoids give a norm; a systematic error direction forces the certificate to be orthogonal to it | P (immediate) | Lagrangian duality; in reply to the Frontier Benchmarking division; unreviewed |
 | E18 | **Lifted certificates.**  For a lift `v` with the entries of `vv^*` in the span of the data, `‖P^⊥v(x)‖²` is a non-negative function in the span; if its zero set is finite, the ensemble is determined among all ensembles iff it is determined among ensembles on that finite set (in particular if the `v(x)v(x)^*` are affinely independent there) — also when the zero set is larger than the support.  Three conformers on the cube: a self-contained proof of E9(a).  **With a prior on the number of atoms** (finite `X`): flat-isolated supports are determined among ensembles with at most `K` atoms for all weights outside a null set (E18′) | P | elementary; formulation (flat extensions, E10 and the geometry division's certificate are instances) |
 | E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, within a few per cent of the known threshold of a Gaussian cloud of the same size.  Worst case (known: Kahle 2010): any `2^{2d} − 1` conformers are determined | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e), (f) N; (g) K | synthesis; the probabilistic core is a published theorem (rediscovery on our side); (d) is Cover's capacity bound read through E1 |
-| E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`, and five generic states on `𝕋³` (E20a).  **Six states in general position on `𝕋³` are never determined** (E20b: twelve first-order conditions along the curve where the lifted certificate vanishes have rank 12), **but six-tuples on a hypersurface are, by a certificate that is not a sum of squares** (E20c); for `r ≥ 4` no `K ≥ 3^r/(r+1)` states in general position are determined (E20d: 17 for four angles).  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights to order `τ`, all constants explicit (E20″).  **Three states on a torus of two angles are never determined by bilinear data** (E22) | P given K (generalised trisecant lemma; Carathéodory–Toeplitz for E22; Laface–Postinghel for E20d); E20a, E20b P with exact computations at rational instances; E20c P, existence N; E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary, new (not found); E20a, E22 and two of the constants of E20″ are the internal review's (ER3); E20b–E20d not searched beyond the cited theorem, unreviewed |
+| E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`, and five generic states on `𝕋³` (E20a).  **Six states in general position on `𝕋³` are never determined** (E20b: twelve first-order conditions along the curve where the lifted certificate vanishes have rank 12), **but six-tuples on a hypersurface are, by a certificate that is not a sum of squares** (E20c); for `r ≥ 4` no `K ≥ 3^r/(r+1)` states in general position are determined (E20d: 17 for four angles); **thirteen states on four angles are determined on an open set of configurations and not determined on another** (E20e, numerical: 26 and 10 of 40 random tuples) — over the reals there is no generic answer.  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights to order `τ`, all constants explicit (E20″).  **Three states on a torus of two angles are never determined by bilinear data** (E22) | P given K (generalised trisecant lemma; Carathéodory–Toeplitz for E22; Laface–Postinghel for E20d); E20a, E20b P with exact computations at rational instances; E20c P, existence N; E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary, new (not found); E20a, E22 and two of the constants of E20″ are the internal review's (ER3); E20b–E20d not searched beyond the cited theorem, unreviewed |
 | E21 | **`K` states on a product space: the permanent certificate.**  If every set `I` of at least two states has at least `|I|` coordinates at which its states do not all coincide (for instance: pairwise at least `K` differing coordinates), the permanent of the matrix of coordinate-wise distances to the states vanishes exactly at the states; on a torus the ensemble is then determined by multilinear data of order `K`.  For `K = 2`: E20′.  On finite product spaces this is weaker than a published theorem (Kahle 2010: `2^K − 1` states, no condition) | P; the zero set V (`permCert_eq_zero_iff`, `permCert_zero_set`, via Hall's theorem) | elementary (Hall / Frobenius–König); on tori not found; on finite product spaces superseded, except for the explicit formula |
 | E23 | **Ratios and an unknown scale are linear.**  A ratio of two means with a positive denominator, exact or within a tolerance, is a pair of linear constraints.  Data known up to one unknown positive factor: the ensemble is determined up to the factor iff its features are *linearly* independent on the support and a combination of the observables *without a constant term* is non-negative with the support as zero set — the factor costs exactly the constant function.  Several groups of data with separate unknown gains and offsets: each gain and each offset direction removes one dimension of the certificate space (E23.1) | P (immediate) | elementary; written for the software division; unreviewed |
 | E24 | **Functions of finitely many means: the loss is a fibre.**  For data `y = G(E_μΦ)` the compatible ensembles are a union of convex sets over the fibre of `G` in the moment body; such data never determine more than the means would; a cover of the fibre gives a certified outer bound for the range of any target, at one linear programme per ball | P (immediate) | elementary; unreviewed |
@@ -65,6 +67,8 @@ how stably, and with what certificate.**
 | E27 | **Convex data; two time scales.**  An upper bound on a convex function of the means is a convex constraint (variances: concave, so lower bounds).  A datum averaged before a convex `g` within blocks and after it between them is convex in the ensemble and lies between `g(E_μφ)` and `E_μ g(φ)` for every partition: these two constraints are a convex outer bound that needs no knowledge of the time scales | P | textbook convexity; formulation; unreviewed |
 | E28 | **An incomplete library.**  A true ensemble with weight `ε` outside the list of configurations gives a conditional ensemble on the list with data within `τ + εD`; data outside the list's moment body falsify the list with a certificate and give a certified lower bound on the missing weight from bounds on the observables alone, tight by duality; the data never bound the missing weight from above | P | elementary; unreviewed |
 | E29 | **The number of conformers is partially identified.**  The largest number compatible with the data is the size of the zero set of a certificate (finite information only on the boundary of the moment body); the smallest is at most `dim + 1`, at least the rank of any lifted moment matrix in the data (with a noisy version), and NP-complete to decide; the ensemble is identified iff the two agree | P | elementary; (c) known in substance; unreviewed |
+| E30 | **A pool that is a net.**  For an `L`-Lipschitz forward map and an `h`-net of the configuration space, the pool's interval at tolerance `τ + Lh`, widened by `L_ψ h`, encloses the exact interval, which contains the pool's interval at `τ`; a certificate on the pool bounds the mass outside the cells of the conformers by `‖λ‖_*(τ + Lh)/γ`.  The verdict "identified" has no such stability | P | elementary; in reply to the Frontier Benchmarking division; unreviewed |
+| E31 | **The identifiability radius.**  The largest total-variation distance between two compatible ensembles is the largest width of the interval of a population over all sets of configurations; it is not a linear programme — deciding whether it equals one is NP-complete — but lies between `max_x w_x` and `½Σ_x w_x` (single-weight widths), and is exact for few data or few clusters | P; hardness K in substance, with a direct reduction | elementary; in reply to the Frontier Benchmarking division; unreviewed |
 
 The thread through the report is one sentence, stated with its two conditions: **on a
 finite configuration space an ensemble is determined by a family of observables exactly
@@ -489,6 +493,28 @@ coordinate from its own symbols, another codeword (Boneh–Shaw 1998; Staddon–
 `m > K(r − 1)`.  A splice is a *descendant* of a coalition, and "no chimera" is
 *frameproof*.  The statement about weights and arbitrary measures is, as far as the review
 and we know, not in that literature.
+
+**Proposition E4.1 (a modulus for Theorem E4: laws known within `ε`).**  In the setting of
+Theorem E4 let `μ` have exactly `K` atoms, forming the set `S`, let `m ≥ K(r − 1) + 1`, and let
+`ν` be any probability measure with `TV((T_j)_#ν, (T_j)_#μ) ≤ ε` for every `j`
+(`TV(P, Q) = sup_B |P(B) − Q(B)|`).  Then
+
+    ν(X ∖ S)  ≤  m ε / (m − K(r − 1)) ,        |ν({s}) − μ({s})|  ≤  ε + ν(X ∖ S)   for every s ∈ S .
+
+The first bound is attained (check R5).  **[P]**, elementary; written in reply to the
+Frontier Benchmarking division's item E-4.
+*Proof.*  A point `x ∉ S` agrees with each atom on at most `r − 1` features, so `T_j(x) ∈ T_j(S)` for
+at most `K(r − 1)` of the features: for at least `m − K(r − 1)` features the value `T_j(x)` is not
+one that an atom takes.  As `(T_j)_#μ` is carried by `T_j(S)`, `ν(T_j ∉ T_j(S)) ≤ ε` for every `j`;
+summing over `j`, `(m − K(r − 1))·ν(X ∖ S) ≤ mε`.  For `s ∈ S` some feature `j` separates `s` from all
+other atoms (proof of E4); then `μ(T_j = T_j(s)) = μ({s})` and
+`ν(T_j = T_j(s)) = ν({s}) + ν({x ∉ S : T_j(x) = T_j(s)})`, and the two differ by at most `ε`.  ∎
+
+*What this is not.*  It is a modulus for laws of features that separate configurations
+(coordinates, projections).  It is not a modulus for Theorems E7 and E8 below: edge
+lengths are not `r`-determining, and the analogue there — a lower bound on how far a
+spliced vector of edge lengths is from being realisable, in terms of the separation of
+the conformers and of `K` — is Problem O4, open.
 
 For frameworks the theorem gives nothing: modulo congruence there are always (non-generic)
 pairs of non-congruent configurations that agree on *every* edge, so the edge lengths are
@@ -1016,7 +1042,9 @@ Theorem 14 have since had an internal review of that division, COMPLEXITY-REV-00
 correct; Proposition 13 follows in two lines from Laurent and Poljak's description of
 the faces and normal cones of the elliptope and is relabelled "known in substance";
 Proposition 13′ is a weak form of Odlyzko's theorem, which we use in E10(c)).*  Whether `K` given sign vectors are
-exactly the ground states of some pair energy can be decided in time `2^K·poly(n)`: every
+exactly the ground states of some pair energy can be decided in time `2^{O(K)}·poly(n)` (a
+linear programme with `2^{K−1} + K` variables: the Complexity division's correction of its
+own "`2^K·poly(n)`", COMPLEXITY-MSG-0006 §1(c)): every
 competing state of a certificate of non-exposedness lies in the span of the `K` vectors
 (the mechanism of E10(a): a competing measure has a pair-moment matrix that is an affine
 combination of the `x^a x^{aT}`, and the range of a positive semidefinite moment matrix
@@ -1812,6 +1840,32 @@ the union over `θ ∈ Θ` with tolerance `τ + Lh`, and the range of a continuo
 that union decreases to its value at tolerance `τ` as `h → 0` (the sets are compact and
 decrease to their intersection; `Θ` and the set of ensembles on a compact `X` are compact).  ∎
 
+**Proposition E17.2 (error sets that are not boxes: the tolerance term of a certificate
+is a support function) [P, immediate; unreviewed].**  Let the data satisfy `y − E_μΦ ∈ 𝓔` for a
+closed convex set `𝓔 ⊂ ℝ^m`, the error set, with support function `σ_𝓔(λ) = sup_{e∈𝓔} λ·e`.
+(a) *Bounds.*  If `a + λ·Φ ≥ ψ` on `X`, then `E_νψ ≤ a + λ·y + σ_𝓔(−λ)` for every ensemble `ν`
+compatible with the data; for finite `X` the best such bound is the exact upper end of
+the range of `E_νψ` (and likewise below).
+(b) *Certificates.*  If `f = c + λ·Φ ≥ 0` has zero set `S ⊇ supp μ` and `f ≥ γ` off `S`, every
+ensemble `ν` compatible with the same data has `ν(X ∖ S) ≤ w_𝓔(λ)/γ`, where
+`w_𝓔(λ) = σ_𝓔(λ) + σ_𝓔(−λ)` is the width of the error set in the direction of the certificate.
+(c) *Cases.*  A box `|e_i| ≤ τ_i`: `σ(λ) = Σ_i τ_i|λ_i|` (Theorems E2(a), E17(a)).  An ellipsoid
+`eᵀΣ⁻¹e ≤ ρ²` (correlated errors): `σ(λ) = ρ‖Σ^{1/2}λ‖₂`, and the bounds are second-order cone
+programmes.  A systematic error of unknown size in known directions,
+`𝓔 = {Uc + e : c ∈ ℝ^k, |e_i| ≤ τ_i}`: `σ(λ) = Σ_i τ_i|λ_i|` if `Uᵀλ = 0` and `+∞` otherwise — **the
+certificate must be orthogonal to every systematic direction** (an unknown offset is
+`U = (1, …, 1)ᵀ`: Proposition E23.1); with bounds `|c_j| ≤ κ_j` on the systematic components,
+`σ(λ) = Σ_i τ_i|λ_i| + Σ_j κ_j|(Uᵀλ)_j|`.
+
+*Proof.*  (a) `E_νψ ≤ E_ν(a + λ·Φ) = a + λ·(y − e) ≤ a + λ·y + σ_𝓔(−λ)` with `e = y − E_νΦ ∈ 𝓔`.
+Tightness: `inf_λ [λ·(y − E_νΦ) + σ_𝓔(−λ)]` is `0` if `y − E_νΦ ∈ 𝓔` and `−∞` otherwise, so the exact
+value is `sup_ν inf_λ` of a function that is linear in `ν` on a simplex and convex in `λ`; the
+minimax theorem exchanges the two.  (b) `E_ν f − E_μ f = λ·(E_νΦ − E_μΦ) = λ·(e_μ − e_ν) ≤ w_𝓔(λ)`, `E_μ f = 0`
+and `E_ν f ≥ γν(X ∖ S)`.  (c) The support function of a sum of sets is the sum.  ∎
+
+(Written in reply to the Frontier Benchmarking division's item E-5: forward-model
+errors that are correlated across observables and partly systematic.  Check R2.)
+
 Data that are not linear in the ensemble are the subject of Part VII (§4d): ratios of
 means and an unknown overall factor turn out to be linear after rewriting; lengths and
 squares of means are not, and there the set of compatible ensembles is not convex.
@@ -2281,7 +2335,7 @@ check S5), `41` for five, `105` for six.
 |---|---|---|---|
 | 2 | 2 (E20′) | 3 (E22: every triple) | — |
 | 3 | 5 (E20a) | 6 (E20b) | — |
-| 4 | 11 (E20; 12 in 40 computed instances) | 17 | 13 to 16: open; 13 depends on the configuration **[N]**; 16 never observed **[N]** (S6) |
+| 4 | 11 (E20; 12 in 40 computed instances) | 17 | 13: determined on an open set and not determined on another (E20e **[N]**: 26 and 10 of 40 random tuples); 14, 15: open; 16 never observed **[N]** (S6) |
 | `r ≥ 5` | `2^r − r − 1` (E20) | `⌈3^r/(r + 1)⌉` | open |
 
 **[P]** given **[K]**; (a) is the first step of the chain in Theorem E1(b), and a minimum
@@ -2293,6 +2347,49 @@ on it, as in E20b.  (Version 3 of this report had made the plain count, without 
 exceptions, and had read a threshold off it: `DEAD_ENDS.md` ED24.  The two exceptional
 cases of the published theorem are exactly the two tori on which that reading was
 wrong.)
+
+**Proposition E20e (the curve case for any number of angles; thirteen states on four
+angles).**  Let `S ⊂ 𝕋^r` consist of `K = 2^r − r + 1` states with independent lifts, let
+`g_1, …, g_{r−1}` span the multilinear forms that vanish on `S`, and suppose that
+`Z = {g_1 = … = g_{r−1} = 0}` is a smooth curve.  Let `I_Z ⊂ V` be the functions that vanish on `Z`, and
+`W ⊂ V` those with `f(p) = 0` and `∂_τ f(p) = 0` at every state `p` (`τ` the tangent of `Z`).
+(a) If some `q ∈ W` is positive on `Z ∖ S` and has a positive second derivative along `Z` at
+every state, then every ensemble on `S` is determined by the multilinear data among all
+probability measures on the torus; a certificate is `A Σ_j g_j² + q + i` for `A` large and a
+suitable `i ∈ I_Z`, and it is not a sum of squares of lifted forms.
+(b) If every `f ∈ W` that is non-negative on `Z` belongs to `I_Z`, no ensemble whose support
+contains `S` is determined.
+(c) `dim(W/I_Z) ≥ dim(V/I_Z) − 2K`.  For `r = 3` the right-hand side is `12 − 12 = 0`: Theorem E20b and
+Proposition E20c are the cases `dim(W/I_Z) = 0` and `= 1`.  For `r = 4` — thirteen states, a curve
+of genus 13 — it is `36 − 26 = 10`, and whether the ten-dimensional space of candidates
+contains a function as in (a) is a linear programme over a sample of the curve.
+(d) **[N]**  For `r = 4` both cases occur, each with a margin.  Of 40 random 13-tuples, 26 are
+determined: the programme finds a candidate, and the certificate of (a) is non-negative
+on a grid of `24⁴` points with local refinements, with non-degenerate zeros at the
+thirteen states and no other zero.  10 are not determined: the zero functional is a
+strictly positive combination of the evaluation functionals of the candidates on the
+sampled curve, so that no candidate is non-negative there, and a second measure on the
+curve has the same 81 data and no mass on the states.  4 are left undecided by the
+programme.  Both conditions are stable under small displacements of the states.
+
+So **on four angles there is no "generic" answer for thirteen states**: the 13-tuples
+that are determined and those that are not both fill sets with non-empty interior.
+The largest number of states that is determined for *all* tuples in general position is
+11 (E20; 12 in the instances computed); the largest that is determined on *an open set*
+of tuples is at least 13 and at most 16 (E20d).  Over the complex numbers "general
+position" has one answer; over the reals, where non-negativity decides, it has not —
+as for typical ranks of real tensors.
+
+**[P]** for (a)–(c) — the proofs of E20c(a) and E20b(b), with `r − 1` forms in place of two —
+and numerical for (d) (`experiments/ensemble/torus_four_angles.py`; the survey is stored in
+`output_threshold.txt`).  In (d) the dimensions `36`, `26` and `10` were found in all 40
+instances; `36` is also the dimension of the sections of a line bundle of degree 48 on a
+curve of genus 13.  *Checks T1, T2* (two instances of the survey, part of `run_all.py`): a
+13-tuple that is not determined (36 functions on the curve, rank of the 26 conditions
+26, 10 candidates; dual margin 0.0800; a twin on the curve with least mass 0.000000 on
+the states), and one that is (a candidate with minimum 0.0030 on the curve at distance
+> 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the
+states 0.2455, smallest local minimum away from the states 0.0027).
 
 *Checks* (`experiments/ensemble/torus_six_states.py`; S1, S2 and S5 are exact).  S1: for five
 rational states the zero set of the lifted certificate is finite in all eight charts
@@ -2321,11 +2418,12 @@ instances — it is not semidefinite, and the sixteen states are not determined.
 *Four angles* **[N]** (review ER3; its scripts are in `reviews/ER3_scripts/`).  Twelve generic
 states are determined in all 40 instances computed — in 35 by E18(ii), in 5, where all
 24 zeros of the certificate are real and the 24 matrices satisfy one linear relation,
-by the finite problem on `Z_S`; with thirteen the answer depends on the configuration (an
-explicit twin in 2 of 4 instances, undecided in the other 2).  So the largest number of
+by the finite problem on `Z_S`; with thirteen the review found that the answer depends on
+the configuration (an explicit twin in 2 of 4 instances, undecided in the other 2) —
+Proposition E20e says why, and decides 36 of 40 instances.  So the largest number of
 states in general position that multilinear data determine is `2^r − r` for `r = 2` (E20′,
-E22) and for `r = 3` (E20a, E20b), both proved; for `r = 4` it is at least 11, at most 16,
-and beyond 12 it may depend on the configuration (Problem O10).
+E22) and for `r = 3` (E20a, E20b), both proved; for `r = 4` it is at least 11 and at most 16,
+and from thirteen on it depends on the configuration (Problem O10).
 
 **Proposition E20′ (two states on a torus; an explicit certificate).**  Let `p, q ∈ 𝕋^r`
 differ in the angles `k ∈ D` and agree in the others (`k ∈ E`).  With
@@ -2686,6 +2784,16 @@ set `S`.
 from the space in which the certificate must be found: `m − G − Σ_g dim L_g` of the `m`
 observables remain.  With a separate gain for every single datum nothing remains but
 the signs of the means.
+(d) *With tolerances.*  Let the data of group `g` be within `τ_g` (componentwise) of
+`c_g E_νΦ_g + ℓ_g`.  In the variables `(ν, t_g, ℓ′_g)` with `t_g = 1/c_g` and `ℓ′_g = ℓ_g/c_g ∈ L_g` this reads
+
+    t_g (y_g − τ_g)  ≤  E_νΦ_g + ℓ′_g  ≤  t_g (y_g + τ_g) ,        t_g > 0 :
+
+linear.  So with tolerances, too, the compatible set is the projection of a polyhedron,
+and the interval of any target is two linear programmes with their dual certificates,
+for any number of groups; a bound on a gain is a bound on `t_g`.  (For data `y = s·Aμ + b·1`
+with unknown `s > 0` and `b` — the Frontier Benchmarking division's item E-1 — this is the
+answer: divide by the gain instead of multiplying the ensemble by it.  Check R1.)
 
 **[P]**; for one group without offset it is E23(b) in another form; the sufficiency in (b)
 is the machine-checked `Ensemble.eq_of_exposing_certificate` applied to the projected
@@ -2870,13 +2978,17 @@ ensembles is not convex.
 ## 4e. Part VIII — When the model is incomplete: time scales, missing configurations, the number of conformers
 
 Beside non-linear observation models the research owner's directive names "model
-misspecification" and "unknown ensemble complexity".  This Part contains three
-statements, each of which turns one way in which the model of Parts I–VII can be wrong
-into a constraint with a certificate: the datum averages on a time scale that is not
-known (E27); the list of configurations is incomplete (E28); the number of conformers is
-not known (E29).  *Status:* paper proofs, elementary, **read by nobody but their author**;
-checks in `experiments/ensemble/misspecification_checks.py` (M1–M4).  Nothing here says how
-a real measurement averages; that is for the Science and Structural Biology divisions.
+misspecification" and "unknown ensemble complexity".  This Part contains five
+statements, each of which turns one way in which the model of Parts I–VII can be wrong,
+or its answer too coarse, into a constraint with a certificate: the datum averages on a
+time scale that is not known (E27); the list of configurations is incomplete (E28); the
+number of conformers is not known (E29); the pool is a net of a continuum (E30); a
+graded answer is wanted where the verdict is "not identified" (E31).  The last two, with
+E23.1(d), E17.2 and E4.1 elsewhere in the report, answer the Frontier Benchmarking
+division's mathematical feedback.  *Status:* paper proofs, elementary, **read by nobody
+but their author**; checks in `experiments/ensemble/misspecification_checks.py` (M1–M4) and
+`robustness_checks.py` (R1–R5).  Nothing here says how a real measurement averages; that
+is for the Science and Structural Biology divisions.
 
 ### 4e.1 Data that are convex in the ensemble; averaging on two time scales
 
@@ -3010,6 +3122,105 @@ fewest conformers returns — is NP-hard to find, has cheap certified lower boun
 (ranks), and by itself says nothing about the truth, which can have any number of
 conformers up to `K_max`: the uniform ensemble on `{0, 1, 2, 3}`, observed through its mean and
 mean square, has four conformers, `K_min = 3` and `K_max = 4` (control B9-03).
+
+### 4e.4 Graded answers: a pool that is a net; the identifiability radius
+
+*(In reply to the Frontier Benchmarking division's mathematical feedback, items E-2 and
+E-3 of its `MATHEMATICAL_FEEDBACK.md`: "a verdict about a pool is not a verdict about a
+molecule", and "a graded answer instead of a binary verdict".  Its items E-1 and E-5 are
+Propositions E23.1(d) and E17.2; its item E-4 is our Problem O4, to which Proposition
+E4.1 is a partial answer.)*
+
+**Proposition E30 (verdicts do not survive a refinement of the pool; intervals and mass
+bounds do, at an enlarged tolerance).**  Let `X` be a compact metric space, `Φ` an
+`L`-Lipschitz map into `(ℝ^m, ‖·‖)`, `ψ` an `L_ψ`-Lipschitz target and `X_h ⊂ X` an `h`-net: every
+point of `X` is within `h` of `X_h`.  Let `I_A(τ)` be the set of values of `E_νψ` over the ensembles
+`ν` on `A` with `‖E_νΦ − y‖ ≤ τ`.
+(a) `I_{X_h}(τ) ⊆ I_X(τ) ⊆ I_{X_h}(τ + Lh) + [−L_ψ h, L_ψ h]`.  The interval computed on the pool at
+tolerance `τ + Lh`, widened by `L_ψ h`, is a certified enclosure of the interval on the whole
+space, and the interval computed on the pool at tolerance `τ` lies inside the latter —
+two linear programmes each, with their dual certificates.
+(b) If `f = c + λ·Φ` is non-negative on the pool with zero set `S` and `f ≥ γ` on `X_h ∖ S`, then
+every ensemble `ν` on `X` whose data are within `τ` of those of an ensemble on `S` has
+
+    ν( { x ∈ X : the point of X_h nearest to x is not in S } )  ≤  ‖λ‖_* (τ + Lh) / γ .
+
+(c) The verdict "identified" has no such stability: an ensemble identified among the
+ensembles on a pool need not be identified among those on a finer pool (Proposition
+E20c: the verdict can change under an arbitrarily small displacement; `DEAD_ENDS.md`
+ED24: a product grid reports identification where there is none).
+
+**[P]**, elementary.  *Proof.*  (a) The first inclusion holds because `X_h ⊆ X`.  For the second,
+let `π : X → X_h` be a measurable nearest-point map and `ν_h = π_#ν`: then
+`‖E_{ν_h}Φ − E_νΦ‖ ≤ ∫ ‖Φ(π(x)) − Φ(x)‖ dν ≤ Lh` and `|E_{ν_h}ψ − E_νψ| ≤ L_ψ h`.  (b) `f(x) ≥ f(π(x)) − ‖λ‖_* Lh` on
+`X`; with `N = π^{-1}(S)`, `‖λ‖_* τ ≥ E_ν f ≥ γ ν(X ∖ N) − ‖λ‖_* Lh`.  ∎
+
+*Reading.*  The enclosure is as good as `Lh` is small against `τ`: in check R3, where `Lh` is
+between 5 and 40 times `τ`, it is 34 times as wide as the exact interval (median).  A
+pool has to be as fine as the data are accurate, measured through the forward map — and
+it has to be a net of the *whole* configuration space, which is the completeness
+assumption of Proposition E28 in another form.
+
+**Proposition E31 (the identifiability radius).**  Let `X` be finite, `M_τ` the set of ensembles
+compatible with the data within `τ`, and
+
+    R_TV(τ) = max { TV(ν, ν′) :  ν, ν′ ∈ M_τ }
+
+(the name is the Frontier Benchmarking division's; it is the diameter of `M_τ` in total
+variation).
+(a) `R_TV(τ) = max_{A ⊆ X} [hi_A(τ) − lo_A(τ)]`, the largest width, over all sets of configurations,
+of the interval of the population `ν(A)` (Theorem E2(a)).  It is attained at a pair of
+vertices of `M_τ`, and `R_TV(0) = 0` iff the ensemble is identified.
+(b) *Certified bounds from `2|X|` linear programmes.*  With `w_x` the width of the interval of
+the weight of the configuration `x`,
+
+    max_x w_x  ≤  R_TV  ≤  min( 1, ½ Σ_x w_x ) ;
+
+every family of sets gives a lower bound, and for a partition of `X` into `k` blocks the
+radius of the coarse-grained ensembles is computed exactly by `2^k` pairs of linear
+programmes.
+(c) *It is not a linear programme.*  `R_TV` is the maximum of a convex function over a
+polytope.  Deciding whether `R_TV(0) = 1` — whether two compatible ensembles with disjoint
+supports exist — is NP-complete.  For a fixed number `m` of data `R_TV(0)` is computed in
+polynomial time by enumerating the vertices of `M_0`, which have at most `m + 1` atoms.
+(d) Around a single conformation the corresponding radius is a linear programme
+(Theorem E2: `max{E_ν d(x, x*) : ν ∈ M_τ}`).
+
+**[P]**; (c) is in substance the NP-hardness of maximising a norm over a polytope (**[K]**,
+from memory), with a direct reduction.  *Proof.*  (a) `TV(ν, ν′) = max_A [ν(A) − ν′(A)]`, and the
+maxima over `ν` and over `ν′` are taken independently; a convex function on the polytope
+`M_τ × M_τ` is maximal at a vertex.  (b) `|ν_x − ν′_x| ≤ w_x`, and a singleton is a set.  (c)
+Membership: two ensembles.  Hardness: for positive integers `a_1, …, a_n` with sum `2b` take
+`X = {1, …, n} × {+, −}` and the data `ν(i, +) + ν(i, −) = 1/n` for every `i` and `Σ_i a_i ν(i, +) = b/n`.  The
+compatible ensembles are `ν(i, +) = t_i/n`, `ν(i, −) = (1 − t_i)/n` with `t ∈ [0, 1]^n` and `a·t = b`, and
+`TV(ν, ν′) = (1/n) Σ_i |t_i − t′_i|`, which equals 1 iff `t ∈ {0, 1}^n` and `t′ = 1 − t`: a split of the
+integers into two parts of equal sum.  ∎
+
+*Reading.*  The radius is the graded answer to "how different can two ensembles be that
+fit equally well?", and the quantity to set against the uncertainty that a method
+returning one ensemble reports.  It cannot be had from one linear programme, and
+exactly only for few data or few configurations.  What can always be had, with
+certificates: the interval of every single weight, the sum of their widths as an upper
+bound, and exact radii for a description by a handful of clusters.  In check R4 the
+upper bound was at most `1.42` times the radius (median `1.00`).
+
+*Checks for §4d.1, §4b, §3.1 and this section* **[N]** (`experiments/ensemble/robustness_checks.py`).
+R1 (E23.1(d)): on 60 random instances with a gain in `[1/3, 4]`, a free offset and
+tolerance `0.02`, a scan over 221 values of the gain never leaves the interval of the
+single linear programme and comes within `0.0048` of its ends; the truth is inside in
+every case.  R2 (E17.2): for low-rank-plus-box error sets the dual bound with the
+certificate orthogonal to the systematic directions equals the primal value on 80
+random instances; for ellipsoids the primal value never exceeds the dual bound and the
+two agree within `1.0e-04` on 25 random instances.  R3 (E30): on 40 random instances on a
+circle (720 points; pools of 60, 36 or 24 points) the two pool intervals bracket the
+exact one.  R4 (E31): on 30 random instances with 5 to 8 configurations the largest
+width over all subsets equals the largest distance between two vertices of the
+compatible polytope, and the bounds of (b) hold in 30/30; on 40 instances built from
+the partition problem, "two compatible ensembles with disjoint supports exist" agrees
+with the subset-sum table in 40/40 (10 with a split).  R5 (E4.1): on 40 random instances
+on the `5 × 5` grid with 3 to 6 directions of lines and every law within `0.01` in total
+variation, the largest mass off the conformers never exceeds `mε/(m − K)` and reaches
+1.000 of it.
 
 *Numerical checks* **[N]** (`experiments/ensemble/misspecification_checks.py`).  M1: on 300
 random instances with one to three groups of integer observables, an unknown gain in
@@ -3306,7 +3517,11 @@ Items 14–15: the fifth checkpoint, commit `2d2054d`.  Item 16: after it.)*
    computation.  New check script `torus_six_states.py` (ninth script of `run_all.py`).
    (ii) *Machine check:* the "if" of Proposition E23(b),
    `Ensemble.eq_of_homogeneous_certificate`, with a witness; the programme's audit passed
-   on the tree that contains it (5147 declarations).  (iii) *Theorem E26:* the reduction
+   on the tree that contains it (5147 declarations).  (i′) *Four angles, thirteen states*
+   (added with item 19): Proposition E20e — the same count on the curve leaves ten
+   candidates, a linear programme on the curve decides, and both outcomes occur with a
+   margin (26 and 10 of 40 random tuples): there is no generic answer over the reals.
+   Check script `torus_four_angles.py`.  (iii) *Theorem E26:* the reduction
    from exact cover by 3-sets has a check (Q3).  (iv) The Complexity division's review
    of the propositions we quote in §4.2 is recorded there.  (v) *Four-body data at
    `n = 14`* (§4c.3 (e), (f)): the run that had been in progress since the third checkpoint
@@ -3331,6 +3546,18 @@ Items 14–15: the fifth checkpoint, commit `2d2054d`.  Item 16: after it.)*
    is the size of the zero set of a certificate, the smallest is NP-hard and bounded
    below by ranks.  Paper proofs, elementary, unreviewed; check script
    `misspecification_checks.py` (tenth script of `run_all.py`); controls B9-01 to B9-03.
+19. **In reply to the Frontier Benchmarking division's mathematical feedback** (its items
+   E-1 to E-5, read on 2026-11-27): Proposition E23.1(d) — gains and offsets with
+   tolerances are linear in `(ν, 1/gain, offset/gain)`; Proposition E17.2 — for any convex
+   error set the tolerance term of a certificate is the support function of the set,
+   and a certificate must be orthogonal to systematic error directions; Proposition E30
+   — intervals and mass bounds survive the refinement of a pool that is a net, at the
+   tolerance `τ + Lh`, verdicts do not; Proposition E31 — the identifiability radius is
+   the largest width of a population interval over all subsets, is not a linear
+   programme (deciding whether it equals one is NP-complete), and has certified bounds
+   from the single-weight intervals; Proposition E4.1 — a sharp modulus for Theorem E4
+   when the laws are known within `ε`, which is a partial answer only: for distance
+   distributions Problem O4 stays open.  Check script `robustness_checks.py`.
 
 ## 8. Limitations
 
@@ -3457,11 +3684,12 @@ Items 14–15: the fifth checkpoint, commit `2d2054d`.  Item 16: after it.)*
   Theorem E20b).  For `r = 4`: between 11 and 16 (E20, E20d); twelve in all 40 computed
   instances; thirteen: a twin in 2 of 4 instances, the other 2 undecided — the answer
   may depend on the configuration and not only on the number, so that "the" number may
-  not exist over the reals (as for typical ranks).  Open: (i) `r = 4`, thirteen to sixteen
-  states: the count of E20b on the zero set of the lifted certificate leaves a
-  ten-dimensional space of candidates for thirteen states (a curve of genus 13), and
-  the question is whether it contains a function that is non-negative on the real
-  curve; (ii) whether the special six-tuples of E20c are all the identified six-state
+  not exist over the reals (as for typical ranks) — **and for thirteen states on four
+  angles it does not** (Proposition E20e, numerical: 26 of 40 random tuples determined,
+  10 not, each with a margin).  Open: (i) `r = 4`, fourteen to sixteen states (the zero set
+  of the lifted certificate is a surface, a threefold, the torus; the same count leaves
+  8, 5 and 1 candidates), and a proof of either half of E20e(d) — an exact 13-tuple with
+  a verified certificate, or one with an exact twin; (ii) whether the special six-tuples of E20c are all the identified six-state
   ensembles on `𝕋³` besides "five states and their sixth zero", and whether seven states
   can ever be determined there; (iii) the order of growth between `2^r` and `3^r/(r + 1)`.
   (Version 3 asked whether the answer is "the count `⌊(3^r − 1)/(r+1)⌋`": as an answer that

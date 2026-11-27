@@ -194,6 +194,29 @@ TABLE = [
     ("lit", O, "rank of the correlation matrix <= K_min <= number of conformers in 40/40 (rank = K_min in 39)",
      "most `K_min` in 40/40 (equal in 39)"),
     ("lit", O, "agrees with the existence of an exact cover in 40/40 (25 with a cover)", "on 40/40 random families (25 with a cover)"),
+    # ---- torus_four_angles.py (report section 4c.4, Proposition E20e)
+    ("lit", O, "seed 0: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; "
+               "NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.0800); a twin on the curve with least mass "
+               "0.000000 on the states", "dual margin 0.0800; a twin on the curve with least mass 0.000000 on"),
+    ("lit", O, "IDENTIFIED: a candidate with minimum 0.0030 on the curve at distance > 0.15 from the states; certificate with "
+               "A = 1e+05: smallest Hessian eigenvalue at the states 0.2455, smallest local minimum away from the states 0.0027",
+     "a candidate with minimum 0.0030 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest "
+     "Hessian eigenvalue at the states 0.2455, smallest local minimum away from the states 0.0027"),
+    ("lit", TH, "thirteen random states on T^4, seeds 0..19: IDENTIFIED: 13; NOT IDENTIFIED: 7", "Of 40 random 13-tuples, 26 are"),
+    ("lit", TH, "thirteen random states on T^4, seeds 20..39: IDENTIFIED: 13; NOT IDENTIFIED: 3; UNDECIDED (a candidate on the "
+                "curve; torus check failed): 1; UNDECIDED (no candidate; no twin found): 3", "4 are left undecided by the"),
+    # ---- robustness_checks.py (Propositions E23.1(d), E17.2, E30, E31, E4.1)
+    ("lit", O, "comes within 0.0048 of its ends; the truth is inside in every case", "comes within `0.0048` of its ends"),
+    ("lit", O, "low-rank-plus-box error sets, 80 random instances", "equals the primal value on 80"),
+    ("lit", O, "ellipsoidal error sets, 25 random instances: the primal value never exceeds the dual bound", "two agree within `1.0e-04` on 25 random instances"),
+    ("lit", O, "and the two agree within 1.0e-04", "two agree within `1.0e-04` on 25 random instances"),
+    ("lit", O, "40 random instances on a circle (720 points; pools of 60, 36 or 24 points)", "on 40 random instances on a"),
+    ("lit", O, "the outer interval is 34.2 times as wide as the exact one (median)", "it is 34 times as wide as the exact interval (median)"),
+    ("lit", O, "max_x w_x <= R_TV <= min(1, (1/2) sum_x w_x) in 30/30; the upper bound is 1.00 times R_TV (median), at most 1.42",
+     "upper bound was at most `1.42` times the radius (median `1.00`)"),
+    ("lit", O, "agrees with the subset-sum table in 40/40 (10 with a split)", "with the subset-sum table in 40/40 (10 with a split)"),
+    ("lit", O, "never exceeds m eps/(m - K) (largest excess", "the largest mass off the conformers never exceeds `mε/(m − K)` and reaches"),
+    ("lit", O, "and reaches 1.000 of it", "1.000 of it"),
     # ---- threshold computations (output_threshold.txt)
     ("lit", TH, "K = 24 K/n = 1.09 face frequency = 0.583", "| 22 (24) | — | 1.00 | 0.58 | 0.08 | 0.00 | 0.00 |"),
     ("lit", TH, "K = 22 K/n = 1.10 face frequency = 0.625", "| 20 (40) | — | 1.00 | 0.63 | 0.10 | 0.00 | 0.00 |"),

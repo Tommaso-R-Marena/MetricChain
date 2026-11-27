@@ -110,6 +110,19 @@ the existence of indistinguishable alternatives (an interval of positive length 
 with two explicit ensembles that attain its ends).  It needs no identifiability.
 *Trap.*  The interval is for the stated `X`.  It is a worst case over all ensembles, not a
 confidence interval; for Gaussian noise see F5.
+*Error sets other than a norm ball (Proposition E17.2; R1).*  Replace `τ‖λ‖_*` by the support
+function of the error set at `−λ`: `ρ‖Σ^{1/2}λ‖₂` for an ellipsoid (correlated errors); for a
+systematic error of unknown size in known directions `U`, add the constraint `Uᵀλ = 0`.
+*A pool that discretises a continuous space (Proposition E30; R1).*  If the pool is an
+`h`-net of the whole space and the forward map is `L`-Lipschitz, print two intervals: the
+pool's interval at `τ` (inner) and at `τ + Lh`, widened by `L_ψ h` (outer); the exact interval
+lies between.  Useful only when `Lh` is not much larger than `τ`.
+*A graded answer (Proposition E31; R1).*  The largest total-variation distance between
+two ensembles that fit is the largest width of a population interval over all sets of
+configurations — not one linear programme, NP-hard in general.  Print the interval of
+every single weight (`2|X|` programmes), `max_x w_x` and `½Σ_x w_x` as certified lower and
+upper bounds, and the exact radius for a description by few clusters (`2^k` pairs of
+programmes for `k` clusters).
 
 ### F4 — One conformation: the identification constant, and the bridge to robust optimality  (Theorem E2(b), (c), §2.2) — **R3**
 
@@ -215,7 +228,9 @@ determined, among **all** probability measures, by the laws of the `T_j` as soon
 intersection of the preimages of the atoms of the laws, and a point of that intersection
 that agrees with one atom on `r` observables is that atom.  The intersection has up to
 `K^m` candidate combinations; for small `K` and `m` this is a finite search, in general it
-is exponential.  Exact laws only.
+is exponential.  Exact laws — or laws known within `ε` in total variation (Proposition
+E4.1, R1): then the mass off the conformers is at most `mε/(m − K(r − 1))`, a bound that
+is attained.  This does not extend to distance distributions.
 
 ### L2 — Edge-length laws of point configurations  (Theorems E5–E8, E7′, §3) — **R1**
 
@@ -260,8 +275,12 @@ means of three angles: five states in general position are determined, six never
 "not identified", and yet nothing observable changes much — in both cases every
 measure with nearly the same data sits near the six states.  A tool should report the
 stability bound of its certificate (card F2), not only the verdict.  For four angles:
-eleven states are always determined, seventeen never (Proposition E20d); in between
-the answer is not known and for thirteen it depends on the configuration.
+eleven states are always determined, seventeen never (Proposition E20d); thirteen are
+determined for some configurations and not for others, each on an open set
+(Proposition E20e, numerical: 26 and 10 of 40 random 13-tuples; instances in
+`experiments/ensemble/benchmarks/torus_instances_v1.json`) — the number of states and of
+data does not predict the verdict; a linear programme on the curve where the lifted
+certificate vanishes does.
 *Caveat to carry.*  A statement about probability measures on a torus with multilinear
 trigonometric means as data.  For chains of rigid segments the configuration space is
 not this torus (mirrored assemblies; only adjacent pairs of torsions are in the span of
@@ -307,6 +326,9 @@ elementary and have numerical checks, but nobody except their author has read th
 
 *Ratios.*  `E_μφ/E_μψ ∈ [y − τ, y + τ]` with `ψ > 0` is the pair of linear constraints
 `E_μ(φ − (y + τ)ψ) ≤ 0 ≤ E_μ(φ − (y − τ)ψ)`: feed them to F1–F4 as they are.
+*With tolerances and any number of gains and offsets (Proposition E23.1(d), R1):* use
+the variables `(ν, t_g = 1/gain_g, offset_g/gain_g)`; the constraints
+`t_g(y_g − τ_g) ≤ E_νΦ_g + offset′_g ≤ t_g(y_g + τ_g)` are linear, and F3 applies unchanged.
 *A common unknown positive factor on all data.*  Drop the normalisation: the data
 constrain the unnormalised measure.  The ensemble is determined up to the factor iff its
 features are **linearly** independent on the support and some combination of the

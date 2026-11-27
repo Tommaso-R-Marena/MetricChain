@@ -43,7 +43,10 @@ docs/ensemble/
     reviews/                internal adversarial reviews (ER1, ER2, …) with the reviewers' own scripts
 proofs/Ensemble/            Lean 4 modules of this division (imported by proofs/AxiomAudit.lean)
 experiments/ensemble/       numerical experiments, falsification scripts, their recorded output
-experiments/ensemble/benchmarks/   reference instances written by benchmark_controls.py (a specification, not a harness)
+experiments/ensemble/benchmarks/   reference instances: controls_v1.json (written by benchmark_controls.py) and
+                            torus_instances_v1.json (written by export_torus_instances.py) — a specification, not a harness
+                            (run_all.py runs twelve check scripts and check_quotes.py; long computations — thresholds,
+                            the survey of thirteen states on four angles — are stored in output_threshold.txt)
 docs/collaboration/
     ENSEMBLE_TO_ALL.md      digest and index of what this division has sent
     status/ensemble.md      current state, synchronisation record
@@ -75,6 +78,7 @@ machine check we know of), **rediscovery** (found in print after we proved it), 
 
 ```
 source scripts/lean_env.sh && lake build           # all Lean modules, including proofs/Ensemble
-python3 experiments/ensemble/run_all.py            # every numerical check quoted in the report, then check_quotes.py
+python3 experiments/ensemble/run_all.py            # every numerical check quoted in the report, then check_quotes.py (about 17 minutes)
+python3 experiments/ensemble/run_all.py --quotes-only   # after a change of the report's text alone
 bash scripts/audit_all.sh                          # the programme's full audit (inherited from theory)
 ```

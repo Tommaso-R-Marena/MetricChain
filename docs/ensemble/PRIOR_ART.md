@@ -282,6 +282,19 @@ unknown gains in the ensemble-refinement literature; convexity of two-time-scale
 averages.  Classification of E23.1, E27–E29: elementary; formulation for ensembles;
 obligation OB29.
 
+## 5e. Replies to the Frontier Benchmarking division (E23.1(d), E17.2, E30, E31, E4.1) and E20e
+
+No search was made.  From memory: support functions of error sets are textbook robust
+optimisation (Ben-Tal–El Ghaoui–Nemirovski); maximising a norm over a polytope is
+NP-hard for the `ℓ¹` norm among others (Mangasarian–Shiau 1986; Bodlaender, Gritzmann,
+Klee, van Leeuwen 1990 — citations **not verified**; our E31(c) has its own reduction and
+does not depend on them); discretisation bounds of the kind of E30 are standard in
+semi-infinite programming; the counting argument of E4.1 is the quantitative form of
+the frameproof-code lemma of §3.1.  E20e: the neighbouring literature is that of §5b′
+(moment problems on real curves; typical ranks of real tensors) — whether "no generic
+answer over the reals" for this moment problem is in print was not looked for.
+Classification: all elementary except E20e, which is numerical; obligation OB30.
+
 ## 6. Search log (2026-11-26)
 
 1. "globally rigid graphs M-connected rigidity matroid higher dimensions" — found

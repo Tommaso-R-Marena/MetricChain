@@ -5,27 +5,32 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after the commit "Part VIII" (2026-11-27, about 00:25 UTC).**  `ENSEMBLE_REPORT.md`
-version 3 with the corrections and additions of §7 items 8–18: Parts I–VIII, Theorems
-E1–E29 (with E2.2, E7′, E15T, E15U, E17.1, E18′, E20a–E20d, E20′, E20″, E23.1), Conjectures
-C1–C3.  Parts I–VI have each had one review (ER1: I–III; the Science division's
-SCI-REV-0020: II; ER2: IV–V; ER3: VI), all applied.  **Unreviewed: Part VII (E23–E26,
-E23.1); Part VIII (E27–E29); Theorem E20b and Propositions E20c, E20d; E15U beyond its
-main statement; E17.1; E20a, E22 and two constants of E20″.**  Lean: `proofs/Ensemble/` five
-modules (twenty-five headline theorems, nine witnesses); `scripts/audit_all.sh` passed on
-the `proofs/` tree of `b654396` (5147 declarations), unchanged since.  Numerics:
-`experiments/ensemble/run_all.py` (ten scripts, then `check_quotes.py`; `--quotes-only` after
-a change of text alone).  Software-facing documents: `SOFTWARE_INTERFACE.md` (a card per
-result; N4–N6 are the newest), `BENCHMARK_CONTROLS.md` (families B1–B9, twenty-five
-instances in `experiments/ensemble/benchmarks/controls_v1.json`).  Sent: ENSEMBLE-MSG-0001
-to -0009; ENSEMBLE-RES-0001 to -0007.
+**State after the commit "answers to the Frontier Benchmarking division" (2026-11-27,
+about 00:47 UTC).**  `ENSEMBLE_REPORT.md` version 3 with the corrections and additions of
+§7 items 8–19: Parts I–VIII, Theorems E1–E31 (with E2.2, E4.1, E7′, E15T, E15U, E17.1, E17.2,
+E18′, E20a–E20e, E20′, E20″, E23.1), Conjectures C1–C3.  Parts I–VI have each had one
+review (ER1: I–III; the Science division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all
+applied.  **Unreviewed: Part VII (E23–E26, E23.1); Part VIII (E27–E31); E20b–E20e; E4.1;
+E17.2; E15U beyond its main statement; E17.1; E20a, E22 and two constants of E20″.**
+Lean: `proofs/Ensemble/` five modules (twenty-five headline theorems, nine witnesses);
+`scripts/audit_all.sh` passed on the `proofs/` tree of `b654396` (5147 declarations),
+unchanged since.  Numerics: `experiments/ensemble/run_all.py` (twelve scripts, then
+`check_quotes.py`; `--quotes-only` after a change of text alone); long computations are
+stored in `output_threshold.txt`.  Software-facing documents: `SOFTWARE_INTERFACE.md`,
+`BENCHMARK_CONTROLS.md` (families B1–B9, twenty-five instances in
+`experiments/ensemble/benchmarks/controls_v1.json`; torus instances in
+`torus_instances_v1.json`).  Sent: ENSEMBLE-MSG-0001 to -0009; ENSEMBLE-RES-0001 to -0008;
+ENSEMBLE-REQ-0001 (to engineering: independent re-implementation of three finite
+checks; no shared budget).
 
 **An internal review, ER4, was commissioned at about 23:59 UTC on 2026-11-26** (a subagent
 of this division, as for ER1–ER3; object: commit `b654396` — Part VII, E20a–E20d, the rest
 of E15U, E17.1, E22; it writes `docs/ensemble/reviews/ER4_internal_review.md` and
-`ER4_scripts/`).  If the session ended before its report arrived, the file may be absent
-or incomplete: in that case commission the review again.  If the file is there and not
-recorded in §7 of the report as applied: commit it as received, then apply it.
+`ER4_scripts/`).  At 00:55 UTC on 2026-11-27 it had created its script directory and had
+not reported; its files are **not** in the commits made meanwhile.  If the session ended
+before its report arrived, the file may be absent or incomplete: in that case commission
+the review again.  If the file is there and not recorded in §7 of the report as applied:
+commit it as received, then apply it.
 
 **Standing instructions** of the research owner's two supplementary directives are in
 `HANDOFF.md` items 3a and 3b (seventh division: Structural Biology; eighth: Frontier
@@ -33,64 +38,50 @@ Benchmarking).  Fetch both of their branches at every synchronisation.
 
 **Next, in this order.**
 1. **ER4**: receive, commit as received, apply (OB27, OB28 list the points of attack);
-   then a review of Part VIII and E23.1 (OB29), which ER4 does not cover.
-2. **Answer the Frontier Benchmarking division** (ENSEMBLE-RES-0008, owed).  Its
-   FRONTIER-MSG-0001 asks every division whether its description of the roles and its
-   intake statements about our work are right (row C5 of its `RESEARCH_INTAKE.md`, at our
-   `2d2054d`: "18 control instances … verified by their generator only; harness not
-   built; no request to engineering" — true then; now 25 instances, ten scripts).  Its
-   `MATHEMATICAL_FEEDBACK.md` has five items for us: **E-1** data `y = s·Aμ + b·1` with
-   unknown `s > 0`, `b` — this is Proposition E23.1 (add the version with tolerances: the
-   constraints are linear in `w = sμ` and `b`, the target is linear-fractional); **E-2** a
-   "pool-robust" interval when the pool is an `h`-net and the forward map is Lipschitz —
-   the pool's interval at tolerance `τ + Lh`, widened by `L_ψ h`, contains the exact one
-   (prove, check, add); **E-3** an "identifiability radius" (largest total-variation
-   distance between two compatible ensembles) "as a linear programme" — it is **not** a
-   linear programme: it is the largest width of the interval of a population over all
-   subsets, a convex maximisation; deciding whether it equals one is NP-complete
-   (partition: a hyperplane section of a cube), polynomial for a fixed number of data;
-   certified bounds `max_x w_x ≤ R ≤ ½ Σ_x w_x` from the single-configuration intervals;
-   **E-4** a modulus for distance distributions — our open Problem O4; a partial answer
-   for features that are `r`-determining: if every law is known within `ε` in total
-   variation, the mass off the `K` conformers is at most `mε/(m − K(r − 1))` (a
-   quantitative Rényi–Heppes: prove, check, add); **E-5** error sets that are not boxes —
-   for any convex error set the tolerance term of a certificate is the support function
-   of the set (ellipsoid: a norm; a systematic direction: the certificate must be
-   orthogonal to it, as in E23.1).  All five drafted in the session notes of 2026-11-27,
-   00:20 UTC; none is in the report yet.
-   Also unread at the commit "Part VIII": GEOMETRY-MSG-0010, COMPLEXITY-MSG-0006 §1,
-   ENG-MSG-0007, STRUCTBIO-MSG-0003 (all name us).  Open questions of ours: E-S5 with
-   Science and Structural Biology; E-T5 with Theory and Complexity.
-2a. **Four angles, thirteen states** (in progress when this was written; scripts
-   `experiments/ensemble/torus_four_angles.py`, committed with "Part VIII" but not yet
-   described in the report): on the curve where the lifted certificate vanishes the
-   data span has dimension 36, the 26 first-order conditions are independent, and a
-   ten-dimensional space of candidates remains; a linear programme on the traced curve
-   decides.  In a scratch survey of 40 random instances (the prototype of the script)
-   26 are determined (certificate verified on the torus), 10 are not (twin on the curve,
-   positive dual margin) and 4 are undecided: **both outcomes occur on open sets — there
-   is no generic answer for thirteen states.**  To do: re-run the survey with the
-   repository script (`--survey 0 40`) and store its output in `output_threshold.txt`,
-   write Proposition E20e (the curve case for any number of angles: the proofs of E20b
-   and E20c carry over with `r − 1` forms), add the script to `run_all.py`.
-3. **Research.**  (i) Four angles, thirteen to sixteen states: the count of E20b on the
-   zero set of the lifted certificate (a curve of genus 13 for thirteen states: a
-   ten-dimensional space of candidates; is one of them non-negative on the real curve?
-   — a linear programme on the traced curve decides instance by instance); (ii) an
-   exact special six-tuple for E20c; whether seven states on `𝕋³` can ever be determined;
-   (iii) the same count for the Geometric Inference Division's chains (suggested to it
-   in ENSEMBLE-MSG-0009); (iv) a noise theory for the non-convex compatible sets of
-   Part VII; the exact (not outer) description of two-time-scale data when the
-   partition is known; (v) E15U for pair models (three sites: no counterexample, no
-   proof); (vi) thresholds C2, C3 — only with a proof idea.
-4. Machine checks: E15(c) as a statement about class members (OB13); a torus instance
-   for the witness of the two-coordinate growth inequality; E12(a); E28(b) and E29(b)
-   are one-line inequalities that a kernel could check.
+   then a review of what it does not cover (OB29, OB30).
+2. **Answer SCI-RES-0040** (ENSEMBLE-RES-0009, owed): the Science division answered our
+   question E-S5 with a table of how the ensemble enters fourteen standard observables
+   (from memory).  To do: a table "form of the datum → statement of ours" in the report
+   and in `SOFTWARE_INTERFACE.md` — means in one regime (Parts I, V); a factor and an
+   offset (E23.1: scattering, DEER traces); a monotone function of one mean is a mean
+   with a transformed tolerance (FRET in the fast regime, protection factors, intensity
+   ratios — say so explicitly, it is not yet in the report); squared lengths of mean
+   vectors (E25: order parameters; the fast-regime Overhauser rate) with the two-regime
+   bracket of E27 — **extend E27(c) to vector-valued `φ` and `g = ‖·‖²`**, which is the
+   Overhauser case; squared means (E26: Bragg intensities; the sign choice is the phase
+   problem); variances (E27(b): diffuse scattering); **bilinear data** (dipolar couplings
+   with one fitted alignment tensor: `y_i = aᵀE_μψ_i` with unknown `a ∈ ℝ⁵`) — covered only by
+   the outer bound of E17.1(c) on a five-dimensional grid; locally the unknown tensor
+   costs five directions; no certificate of identification is known — a new problem;
+   images and kinetics: outside.
+   Then **synchronise** (eight branches).  Look for: the engineering division's answer to
+   ENSEMBLE-REQ-0001; answers to E-T5 (Theory, Complexity).  Unread and possibly
+   relevant: SCI-MSG-0035, GEOMETRY-RES-0008, COMPLEXITY-RES-0009, -0010, THY-MSG-0021
+   (headers only).
+3. **Research.**  (i) Four angles: fourteen, fifteen, sixteen states (the zero set of
+   the lifted certificate is a surface, a threefold, the torus; the count leaves 8, 5
+   and 1 candidates; sixteen: the unique candidate was a saddle in 12 of 12 instances;
+   fourteen: in a scratch survey of 16 random instances — the prototype `kgen.py` of the
+   session, not in the repository — 15 are not determined (explicit twins) and one is
+   undecided, so thirteen may be the largest number determined on an open set: put the
+   surface case into `torus_four_angles.py`, store a survey, and say so in E20e);
+   an exact instance of either kind for thirteen; (ii) an exact special six-tuple for
+   E20c; whether seven states on `𝕋³` can ever be determined; (iii) the chimera gap
+   (Problem O4) — asked for by the Frontier Benchmarking division as the prerequisite
+   of any use of Part II; E4.1 is the model of what the answer should look like; (iv)
+   exact identifiability radii for the control instances (E31) as reference values for
+   the Frontier division's protocol; (v) a noise theory for the non-convex compatible
+   sets of Part VII; (vi) E15U for pair models; (vii) thresholds C2, C3 — only with a
+   proof idea.
+4. Machine checks: E28(b), E29(b), E30(b), E31(b), E4.1 and E17.2(b) are inequalities of
+   a few lines on finite types — good candidates for the kernel; E15(c) as a statement
+   about class members (OB13); E12(a).
 5. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
 6. Prior art still to read in the original: di Dio–Schmüdgen (Theorem 18 is our E1(b);
    the paper also treats the set of atoms and the Carathéodory number — compare with
    E1, E3, E29 and §2); Baldi–Blekherman–Sinn, Section 5 (does it give E20b(c) and the
-   existence part of E20c directly?); the maximum-occurrence literature.
+   existence part of E20c directly?); the maximum-occurrence literature; the two
+   citations on norm maximisation (E31).
 
 ---
 
@@ -667,3 +658,64 @@ were: the capacity thresholds (C2, C3), the torus of four angles, a modulus for
 distance distributions (O4).  The next mathematics should go to the torus of four
 angles, where the method of E20b reduces an open question to a positivity problem on a
 real curve.
+
+---
+
+## 2026-11-27 — The eighth division's feedback: five items, four answers, one correction of the question
+
+**Synchronised (00:18 UTC).**  All seven other branches had moved.  The Frontier
+Benchmarking division exists, has determined that nothing of MetricChain takes part in
+CASP17, and has published `MATHEMATICAL_FEEDBACK.md`: for each division, the conclusions
+an evaluation could not draw and the statement that would allow them.  Five items for
+us.  The research owner's directive for this case: "investigate whether it motivates a
+stronger theorem, a constructive algorithm, a generalization, or a rigorous
+obstruction".
+
+**E-1 (scale and offset).**  Already Proposition E23.1 of the previous commit; added the
+version with tolerances.  The trick that makes it linear for any number of gains is to
+divide the data by the gain (`t = 1/s`) instead of multiplying the ensemble by it.
+
+**E-2 (pool refinement).**  Proposition E30: push an ensemble on the continuum forward
+to the net; intervals and mass bounds survive with `τ → τ + Lh`.  Honest number: with
+`Lh` 5 to 40 times `τ` the certified enclosure is 34 times too wide.
+
+**E-3 (identifiability radius).**  The item proposed "a linear programme with a dual
+certificate".  It is not one: the radius is the largest width of a population interval
+over all subsets, a convex maximisation, and deciding whether it equals one is
+NP-complete (a hyperplane section of a cube encodes the partition problem).  What can
+be certified: `max_x w_x ≤ R ≤ ½Σ_x w_x`.  A rigorous obstruction and a constructive
+substitute — the outcome the directive lists.
+
+**E-4 (modulus for distance distributions).**  Our Problem O4; nothing.  But the
+counting proof of Theorem E4 is quantitative as it stands: `mε/(m − K(r−1))`, and the
+linear programme attains it.  Recorded as E4.1 with its limits.
+
+**E-5 (error sets).**  Proposition E17.2: the support function.  A systematic direction
+forces the certificate to be orthogonal to it — the same phenomenon as an offset in
+E-1, which unifies the two.
+
+**Thirteen states on four angles** (Proposition E20e).  The count of E20b on the curve
+leaves ten candidates; a linear programme on the traced curve decides.  40 random
+instances: 26 determined (certificates checked on the whole torus), 10 not (twins,
+positive dual margins), 4 undecided.  Two bugs of the *verification* on the way, both
+of the kind "threshold not scaled with the certificate's scale factor": the first
+version rejected valid certificates; the dimensions 36, 26, 10 agreed with the count in
+every instance.  Conclusion: no generic answer over the reals.
+
+**Geometry (GEOMETRY-MSG-0010).**  It proved that averaged squared distances among
+sparse labels determine nothing and left "distributions instead of means" to us: our
+E7/E8 give identification from exact laws (or `2K` moments) of the distances among five
+or more labelled sites, with no stability.
+
+**Requested.**  ENSEMBLE-REQ-0001 to engineering: independent re-implementation of the
+control instances, of the ranks behind E20b and of ten verdicts of E20e.
+
+**Verified.**  `robustness_checks.py` (R1–R5), `torus_four_angles.py` (T1, T2; survey
+stored); `run_all.py` (twelve scripts, then `check_quotes.py`): all pass.
+
+**Reassessment.**  The Frontier division's feedback is the most useful input this
+division has had from outside: each item named an assumption, and each answer is a
+short proof — except the one it called a linear programme, which is a hardness result,
+and the one that is our oldest open problem.  Today's statements are the least
+reviewed part of the report (OB29, OB30); ER4 covers none of them.  Before more is
+added, the review should catch up.

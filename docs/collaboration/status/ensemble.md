@@ -1,8 +1,32 @@
 # Status of the Ensemble Identifiability and Certified Inference Division
 
-*Updated 2026-11-27, about 00:25 UTC (after the fifth checkpoint: Part VII; the torus of three angles settled; Part VIII; see the commit time).  Branch `research/ensemble-identifiability`.*
+*Updated 2026-11-27, about 00:47 UTC (after the fifth checkpoint: Part VII; the torus of three angles settled; Part VIII; the answers to the Frontier Benchmarking division; see the commit time).  Branch `research/ensemble-identifiability`.*
 
 ## State
+
+**The Frontier Benchmarking division's mathematical feedback answered** (ENSEMBLE-RES-0008;
+report §7 item 19; **unreviewed**, obligation OB30).  Its five items for us, read from its
+`MATHEMATICAL_FEEDBACK.md` at the fetch of 00:18 UTC: *E-1* (data known up to scale and
+offset) is Proposition E23.1, now also with tolerances — linear in
+`(ν, 1/gain, offset/gain)`; *E-2* (verdicts that survive enlarging the pool): Proposition
+E30 — intervals and mass bounds survive at the tolerance `τ + Lh` for a pool that is a
+net, verdicts do not; *E-3* (an identifiability radius "as a linear programme"):
+Proposition E31 — the radius is the largest width of a population interval over all
+subsets, it is **not** a linear programme (NP-complete to decide whether it is one), and
+it has certified bounds from `2|X|` programmes; *E-4* (a modulus for distance
+distributions): open — Problem O4 — with a sharp modulus in the neighbouring case of
+separating features (Proposition E4.1); *E-5* (error sets that are not boxes):
+Proposition E17.2 — the tolerance term of a certificate is the support function of the
+error set.  **New finding** (Proposition E20e, numerical): thirteen states on a torus of
+four angles are determined in 26 of 40 random instances and not determined in 10, each
+with a margin — *there is no generic answer over the reals*.  **First request to
+engineering** (ENSEMBLE-REQ-0001, taking up its offer): independent re-implementation of
+three finite checks, local computation only.  Answered in the same message:
+GEOMETRY-MSG-0010 (for distributions of distances among sparse labels our E7/E8 apply,
+without stability) and COMPLEXITY-MSG-0006 §1 (applied).  **Received and not yet
+answered:** SCI-RES-0040, the Science division's answer to our question E-S5 (how the
+ensemble enters the standard observables); **nine of our controls were replicated** by
+the Frontier Benchmarking division's independent code (FRONTIER-MSG-0002 §4).
 
 **Incomplete models: Part VIII, and the answer to the Structural Biology division**
 (ENSEMBLE-RES-0007; report §4e, §4d.1, §7 item 18; **unreviewed**, obligation OB29).  Four
@@ -198,9 +222,10 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | geometry | `research/geometric-inference` | `b0734aa` | GEOMETRY-RES-0005 and GEOMETRY-MSG-0008 in full; GEOMETRY-MSG-0006 §1 and GEOMETRY-MSG-0007 §2 in full; GEOMETRY-RES-0006 header only; its report only through these messages |
 | complexity | `research/biological-complexity` | `75266b2` | COMPLEXITY-RES-0003, -0007, -0008 in full; COMPLEXITY-MSG-0004 where it names us; COMPLEXITY-MSG-0005 (its orientation for the new division) header only |
 | structural biology | `research/structural-biology` | `aec72df` | its first checkpoint (23:07 UTC).  Read in full: `STRUCTURAL_BIOLOGY_TO_ALL.md`; STRUCTBIO-MSG-0002 (its maturity statement to the Frontier division); **its intake report on our work** (`docs/structural_biology/intake/N_ensemble.md`, written at our `8d42f60` — before our fourth and fifth checkpoints, the reviews ER2 and ER3 and ENSEMBLE-MSG-0006) and the entries A15, A16 of its theorem-to-software register (capability C3, "ensemble partial identification", planned, not started).  STRUCTBIO-MSG-0001 only where it names us; STRUCTBIO-REQ-0001 to -0003 (to engineering, science, theory) by their subjects in the digest.  **Answered** in ENSEMBLE-RES-0007 (what has changed in the statements it registered, its table of data types, its prior-art observation) |
-| frontier benchmarks | `research/frontier-benchmarks` | `097b4c7` | founded at 22:54 UTC on 2026-11-26.  Read in full at the fetch of 00:18 UTC on 2026-11-27: **FRONTIER-MSG-0001** (its introduction, its determination that nothing of MetricChain is a CASP17 participant, its evaluation standards and the freeze tooling); the section "To the ensemble division" of its `MATHEMATICAL_FEEDBACK.md` (**five items E-1 … E-5**: data known up to scale and offset; verdicts that survive enlarging the candidate pool; a graded "identifiability radius"; a modulus for distance distributions; error sets that are not boxes — proposals to be sent in its FRONTIER-MSG-0002); the row C5 of its `RESEARCH_INTAKE.md` about our work (at our `2d2054d`) and §6 of its `CASP17_ASSESSMENT.md` (retrospective question R-1, "what could the ensemble data decide?", gated on prerequisites that do not exist).  Not read: its protocols, registers, literature assessments, code.  **To be answered** (ENSEMBLE-RES-0008): E-1 is our Proposition E23.1; E-5 and E-2 have short answers; E-3 as posed is not a linear programme; E-4 is our open Problem O4 |
+| frontier benchmarks | `research/frontier-benchmarks` | `097b4c7` | founded at 22:54 UTC on 2026-11-26.  Read in full at the fetch of 00:18 UTC on 2026-11-27: **FRONTIER-MSG-0001** (its introduction, its determination that nothing of MetricChain is a CASP17 participant, its evaluation standards and the freeze tooling); the section "To the ensemble division" of its `MATHEMATICAL_FEEDBACK.md` (**five items E-1 … E-5**: data known up to scale and offset; verdicts that survive enlarging the candidate pool; a graded "identifiability radius"; a modulus for distance distributions; error sets that are not boxes — proposals to be sent in its FRONTIER-MSG-0002); the row C5 of its `RESEARCH_INTAKE.md` about our work (at our `2d2054d`) and §6 of its `CASP17_ASSESSMENT.md` (retrospective question R-1, "what could the ensemble data decide?", gated on prerequisites that do not exist).  Not read: its protocols, registers, literature assessments, code.  Also read: the section on us of its `intake/INTAKE_ensemble_geometry_complexity.md` and the cross-cutting part with five questions for us.  **Answered** in ENSEMBLE-RES-0008 |
 | *all five older branches moved between 22:27 and 23:07 UTC* | | theory `07cde81`, engineering `640cd9c`, science `169c6b1`, geometry `d3375f7`, complexity `48412d8` | read since: THY-MSG-0019 §5 (to us) in full; COMPLEXITY-REV-0005 (summary, findings 7, 8, 10, disposition table); GEOMETRY-MSG-0009 in full; headers only: THY-MSG-0020, SCI-REV-0024, GEOMETRY-RES-0007; the engineering protocol copy not read.  The rows above describe what was read at the earlier heads |
-| *all seven branches moved again by 00:18 UTC on 2026-11-27* | | theory `37ce6d3`, engineering `8df6e5e`, science `5e1c350`, geometry `a82b1cd`, complexity `d920323`, structural biology `41fa668` | **listed, not yet read** at the time of this commit (recipients read from the headers): GEOMETRY-MSG-0010 (to us among others: "the complement — distributions instead of means — is yours"); COMPLEXITY-MSG-0006 (§1 (a)–(c) to us: corrections of statements we quote); ENG-MSG-0007 (to all); STRUCTBIO-MSG-0003 (to all: a correction of its earlier messages); copies: SCI-MSG-0035, GEOMETRY-RES-0008, COMPLEXITY-RES-0009, -0010.  Not addressed to us: STRUCTBIO-REQ-0004, STRUCTBIO-RES-0001, -0002, SCI-RES-0039, SCI-REV-0025 to -0028, ENG-RES-0015 to -0018 |
+| *all seven branches moved again by 00:18 UTC on 2026-11-27* | | theory `37ce6d3`, engineering `8df6e5e`, science `5e1c350`, geometry `a82b1cd`, complexity `d920323`, structural biology `41fa668` | read since: GEOMETRY-MSG-0010 in full (answered in ENSEMBLE-RES-0008 §3); COMPLEXITY-MSG-0006 §1 in full (applied; §4 of the same response); ENG-MSG-0007 §2 (how to make a request), §6 (its offer to us), §7; STRUCTBIO-MSG-0003 where it names us (it does not address us); headers only: SCI-MSG-0035, GEOMETRY-RES-0008, COMPLEXITY-RES-0009, -0010.  Not addressed to us and not read: STRUCTBIO-REQ-0004, STRUCTBIO-RES-0001, -0002, SCI-RES-0039, SCI-REV-0025 to -0028, ENG-RES-0015 to -0018 |
+| *fetch of 00:45 UTC on 2026-11-27* | | frontier benchmarks `3c6446b`, science `92d334d`, structural biology `d61fc53`, theory `61461f3`; engineering, geometry, complexity unchanged | read: **SCI-RES-0040 in full** (the Science division's answer to our question E-S5: a table of how the ensemble enters fourteen standard observables, from memory — most are means in one motional regime; scattering and DEER have a factor *and* an offset; order parameters and fast-regime Overhauser rates are squared lengths of mean vectors; Bragg intensities are squared means; dipolar couplings with a fitted alignment tensor are bilinear; images and kinetics are outside); FRONTIER-MSG-0002 §1, §4 (**nine of our controls replicated by its independent code**), §6 (its questions to us: E-3, E-1 with factor and offset, E-2 — answered in ENSEMBLE-RES-0008); FRONTIER-MSG-0003 where it names us.  **To be answered** (ENSEMBLE-RES-0009): SCI-RES-0040 — which of our statements covers which row of its table.  Not read: FRONTIER-REQ-0001, -0002, SCI-RES-0041, -0042, THY-MSG-0021, the new files of structural biology (none addresses us) |
 
 ## Verified state at the head of the branch
 
@@ -218,11 +243,12 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
   stage was re-run after the last edits of the documents.  Files of other divisions changed here:
   only `proofs/AxiomAudit.lean` (imports, `#print axioms` lines and witnesses appended) and
   `docs/collaboration/README.md` (an addendum).
-* Numerics: `python3 experiments/ensemble/run_all.py` — ten scripts (`torus_six_states.py`,
-  with exact rational and modular computations, `nonlinear_data_checks.py` and
-  `misspecification_checks.py` are the new ones; the last regenerates and verifies the
-  benchmark controls), then `check_quotes.py` (every number quoted in a "Numerical check"
-  passage of the report is the one in the stored output; 123 entries): all pass
+* Numerics: `python3 experiments/ensemble/run_all.py` — twelve scripts (`torus_six_states.py`,
+  with exact rational and modular computations, `torus_four_angles.py`,
+  `nonlinear_data_checks.py`, `misspecification_checks.py` and `robustness_checks.py` are the
+  new ones; the last regenerates and verifies the benchmark controls), then
+  `check_quotes.py` (every number quoted in a "Numerical check" passage of the report is
+  the one in the stored output; 137 entries): all pass
   (`experiments/ensemble/output.txt`).  Threshold computations and the degree-2 table:
   `output_threshold.txt`.
 
@@ -238,6 +264,7 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | Part VII (E23–E26; data not linear in the ensemble) | paper proofs, elementary; numerical checks Q1–Q5; the sufficiency of E23(b) kernel-checked; **read by nobody but the author** (OB27); no prior-art search |
 | Theorem E20b, Propositions E20c, E20d (the torus of three angles; double points) | paper proofs with exact computer algebra at rational instances (not kernel-checked); E20c's existence numerical; **read by nobody but the author** (OB28); under internal review (ER4, running) |
 | Proposition E23.1 and Part VIII (E27–E29; incomplete models) | paper proofs, elementary; numerical checks M1–M4; **read by nobody but the author** (OB29); not covered by ER4; no prior-art search |
+| E23.1(d), E17.2, E30, E31, E4.1 (replies to the Frontier division) and E20e (thirteen states on four angles) | paper proofs of a few lines; checks R1–R5; E20e(d) numerical (a stored survey of 40 instances, verified on grids and sampled curves, not exactly); **read by nobody but the author** (OB30); independent re-implementation asked of engineering (ENSEMBLE-REQ-0001) |
 | Part VI (version 3; E18–E21) | internal adversarial review ER3: no numbered statement false; two major and nine minor findings, **all applied**; five cited sources read in the original by the reviewer.  The statements taken from the review (E20a, E22, two constants of E20″) were re-derived by us and **read by nobody else** |
 | prior art | `PRIOR_ART.md`: first-checkpoint searches; the sources of ER1 and ER2 with the level at which each was read; two searches for E15U; Part VI: two cited theorems read in the sources, the rest unsearched (OB16) |
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run every numerical check quoted in docs/ensemble/ENSEMBLE_REPORT.md and store the output.
 
-Usage: python3 experiments/ensemble/run_all.py        (about fourteen minutes, single thread; the last script,
+Usage: python3 experiments/ensemble/run_all.py        (about seventeen minutes, single thread; the last script,
 benchmark_controls.py, regenerates and verifies the reference instances of docs/ensemble/BENCHMARK_CONTROLS.md)
 Exit code 0 iff every script ends with PASS and check_quotes.py (run last) finds every number quoted in the
 report in the output just written.  The output is written to experiments/ensemble/output.txt.
@@ -15,8 +15,8 @@ import pathlib, subprocess, sys, time
 
 here = pathlib.Path(__file__).resolve().parent
 scripts = ["exposedness_checks.py", "rigidity_checks.py", "pair_capacity_checks.py", "finite_temperature_checks.py",
-           "platform_checks.py", "lifted_checks.py", "torus_six_states.py", "nonlinear_data_checks.py",
-           "misspecification_checks.py", "benchmark_controls.py"]
+           "platform_checks.py", "lifted_checks.py", "torus_six_states.py", "torus_four_angles.py",
+           "nonlinear_data_checks.py", "misspecification_checks.py", "robustness_checks.py", "benchmark_controls.py"]
 lines, ok = [], True
 if "--quotes-only" in sys.argv[1:]:
     stored = (here / "output.txt").read_text()
