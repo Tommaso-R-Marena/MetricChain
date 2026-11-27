@@ -1,0 +1,402 @@
+[
+ {
+  "n_o": 6,
+  "u_o": 0.5,
+  "inner": [
+   [
+    2.0,
+    3
+   ]
+  ],
+  "design": {
+   "lam": 0.2,
+   "eta": 0.3333333333333333,
+   "etap": 1.0,
+   "b": 1.3,
+   "Lr": 1,
+   "theta": 0.1,
+   "bounded": false
+  },
+  "omega_over_lambda": 45.0,
+  "K": 442,
+  "J": 118,
+  "instances": [
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   }
+  ]
+ },
+ {
+  "n_o": 6,
+  "u_o": 0.5,
+  "inner": [
+   [
+    2.0,
+    3
+   ]
+  ],
+  "design": {
+   "lam": 0.5,
+   "eta": 0.25,
+   "etap": 0.25,
+   "b": 0.5,
+   "Lr": 4,
+   "theta": 0.25,
+   "bounded": true
+  },
+  "omega_over_lambda": 18.0,
+  "K": 730,
+  "J": 46,
+  "instances": [
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   }
+  ]
+ },
+ {
+  "n_o": 8,
+  "u_o": 0.5,
+  "inner": [
+   [
+    2.0,
+    4
+   ]
+  ],
+  "design": {
+   "lam": 0.5,
+   "eta": 0.25,
+   "etap": 0.25,
+   "b": 0.5,
+   "Lr": 4,
+   "theta": 0.25,
+   "bounded": true
+  },
+  "omega_over_lambda": 24.0,
+  "K": 747,
+  "J": 61,
+  "instances": [
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   }
+  ]
+ },
+ {
+  "n_o": 8,
+  "u_o": 0.5,
+  "inner": [
+   [
+    2.0,
+    4
+   ]
+  ],
+  "design": {
+   "lam": 1.0,
+   "eta": 0.5,
+   "etap": 1.0,
+   "b": 1.0,
+   "Lr": 4,
+   "theta": 1.0,
+   "bounded": false
+  },
+  "omega_over_lambda": 12.0,
+  "K": 210,
+  "J": 31,
+  "instances": [
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   }
+  ]
+ },
+ {
+  "n_o": 8,
+  "u_o": 2.0,
+  "inner": [
+   [
+    0.5,
+    4
+   ]
+  ],
+  "design": {
+   "lam": 1.0,
+   "eta": 0.5,
+   "etap": 1.0,
+   "b": 1.0,
+   "Lr": 4,
+   "theta": 1.0,
+   "bounded": false
+  },
+  "omega_over_lambda": 18.0,
+  "K": 223,
+  "J": 43,
+  "instances": [
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   }
+  ]
+ },
+ {
+  "n_o": 5,
+  "u_o": 1.0,
+  "inner": [
+   [
+    1.0,
+    2
+   ],
+   [
+    2.0,
+    1
+   ]
+  ],
+  "design": {
+   "lam": 1.0,
+   "eta": 0.5,
+   "etap": 1.0,
+   "b": 1.0,
+   "Lr": 4,
+   "theta": 1.0,
+   "bounded": false
+  },
+  "omega_over_lambda": 9.0,
+  "K": 207,
+  "J": 23,
+  "instances": [
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "cone on the outer block, apex at the reference point, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "inverted cone on the outer block, flat fibres",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "top",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   },
+   {
+    "instance": "flat",
+    "oracle": "bottom",
+    "runs": 40,
+    "aborted": 0,
+    "first": null
+   }
+  ]
+ }
+]

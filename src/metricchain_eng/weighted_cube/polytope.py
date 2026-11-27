@@ -546,9 +546,42 @@ def _inverse(M):
 # ----------------------------------------------------------------------------- enumerator 4: Parma Polyhedra Library
 
 
+# The Parma library switches the floating-point unit of the *whole process* to upward rounding when it is loaded,
+# and leaves it there (its checked floating-point number types need that; the integer polyhedra used here do not).
+# Everything else in the process -- numpy, the C kernels of this repository, even Python's own parsing and printing
+# of floats -- assumes round-to-nearest.  Found on 2026-11-26 when an unrelated test (tie counting on the off-lattice
+# chain) failed as soon as this module's tests were collected in the same session.  So: the mode is put back to
+# round-to-nearest immediately after the import and after every call into the library, and the library's own mode
+# is restored only for the duration of a call.
+_FE_TONEAREST = 0                       # the value of FE_TONEAREST on x86-64 and aarch64 (glibc)
+_ppl_mode = None                        # the rounding mode the library selected when it was loaded
+
+
+def _libm():
+    import ctypes
+    import ctypes.util
+    return ctypes.CDLL(ctypes.util.find_library("m") or "libm.so.6")
+
+
+def rounding_is_to_nearest() -> bool:
+    """True iff double arithmetic currently rounds to nearest (1 + 2^-53 == 1 and 1 - 2^-54 == 1)."""
+    one, tiny = 1.0, 2.0 ** -53
+    return one + tiny == one and one - tiny / 2 == one
+
+
+def _import_ppl():
+    global _ppl_mode
+    import ppl
+    lib = _libm()
+    if _ppl_mode is None:
+        _ppl_mode = lib.fegetround()
+    lib.fesetround(_FE_TONEAREST)
+    return ppl
+
+
 def ppl_available() -> bool:
     try:
-        import ppl  # noqa: F401
+        _import_ppl()
         return True
     except Exception:
         return False
@@ -556,9 +589,20 @@ def ppl_available() -> bool:
 
 def enumerate_ppl(wts):
     """All vertices with the double-description code of the Parma Polyhedra Library (exact integer
-    arithmetic).  Requires the optional package ``pplpy``."""
-    from ppl import C_Polyhedron, Constraint_System, Linear_Expression, Variable
+    arithmetic).  Requires the optional package ``pplpy``.  The process's rounding mode is round-to-nearest
+    again when this function returns (see the comment above)."""
+    ppl = _import_ppl()
+    lib = _libm()
+    lib.fesetround(_ppl_mode)
+    try:
+        return _enumerate_ppl(ppl, wts)
+    finally:
+        lib.fesetround(_FE_TONEAREST)
 
+
+def _enumerate_ppl(ppl, wts):
+    C_Polyhedron, Constraint_System, Linear_Expression, Variable = (ppl.C_Polyhedron, ppl.Constraint_System,
+                                                                    ppl.Linear_Expression, ppl.Variable)
     L = len(wts)
     n = 1 << L
 

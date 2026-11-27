@@ -540,3 +540,16 @@ def test_stored_chambers(chambers3, chambers4):
             assert (int(z["r0"][0]), int(z["r0"][1])) == (c.P, c.Q)
             assert np.array_equal(z["A"], c.A) and np.array_equal(z["B"], c.B) and np.array_equal(z["stab"], c.stab)
             assert CH.multiset_checksum(z["A"], z["B"], table) == (e["sha256_multiset"], c.n_vertices)
+
+
+def test_the_parma_library_does_not_leave_the_process_in_another_rounding_mode():
+    """pplpy switches the process to upward rounding when it is imported; ``polytope`` must put it back after the
+    import and after every call (the library is optional: without it there is nothing to restore)."""
+    assert P.rounding_is_to_nearest()
+    if not P.ppl_available():
+        pytest.skip("pplpy not installed")
+    assert P.rounding_is_to_nearest()
+    wts = [2, 2, 3]                                   # the library takes integral coefficients
+    assert P.enumerate_ppl(wts) == P.enumerate_bfs(wts)
+    assert P.rounding_is_to_nearest()
+    assert np.float64(1.0) + np.float64(2.0 ** -53) == 1.0

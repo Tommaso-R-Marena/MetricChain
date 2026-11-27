@@ -111,9 +111,13 @@ def task_xxl(driver: str, task: dict) -> dict:
 
 
 def tier_cost(tier: str) -> float:
-    """Worst-case cost of one task of a tier in dollars (it runs to its timeout)."""
+    """Planning figure for the cost of one task of a tier in dollars: it runs to its timeout, and for the tiers of an
+    hour or more it does so twice -- the platform pre-empts and restarts long tasks, and a job has cost more than
+    one attempt per task (job M-022: $2.48 against $2.28; COMPUTE_LEDGER.md, policy rule 6).  Not a proof of a bound:
+    a task can be restarted more than once."""
     timeout, mem = TIERS[tier]
-    return timeout / 3600.0 * (CPU_USD_PER_HOUR + mem / 1024.0 * GIB_USD_PER_HOUR)
+    attempts = 2 if timeout >= 3600 else 1
+    return attempts * timeout / 3600.0 * (CPU_USD_PER_HOUR + mem / 1024.0 * GIB_USD_PER_HOUR)
 
 
 def _plan(driver: str, job: str, ledger: str):
@@ -145,7 +149,7 @@ def _plan(driver: str, job: str, ledger: str):
         total_worst += worst
         by_tier = {name: sum(1 for t in rest if t.get("tier", "m") == name) for name in TIERS}
         print(f"job {driver}/{jb} at {commit[:7]}{' (TREE DIFFERS FROM THE COMMIT)' if dirty else ''}: {len(rest)} tasks to run "
-              f"({len(done)} already stored), by tier {by_tier}; worst case (every task to its timeout) ${worst:.2f}", flush=True)
+              f"({len(done)} already stored), by tier {by_tier}; worst case (every task to its timeout, twice for tiers of an hour or more) ${worst:.2f}", flush=True)
         todo += [(t, jb, out, ledgers[k] if k < len(ledgers) else "") for t in rest]
     print(f"total worst case ${total_worst:.2f}; container caps by tier {CAPS} (sum {sum(CAPS.values())})", flush=True)
     return todo, total_worst, commit, dirty, jobs, ledgers

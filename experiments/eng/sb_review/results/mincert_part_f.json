@@ -1,0 +1,65 @@
+{
+ "seconds": 1.6,
+ "seed": 20261126,
+ "result": {
+  "recursion_limit": 1000,
+  "produced": [
+   {
+    "sites": 20,
+    "states": 20,
+    "accepted_in_memory": true,
+    "prune": 380,
+    "depth": 381,
+    "dumps": "ok",
+    "to_metricchain_cert1": "ok"
+   },
+   {
+    "sites": 30,
+    "states": 30,
+    "accepted_in_memory": true,
+    "prune": 870,
+    "depth": 871,
+    "dumps": "ok",
+    "to_metricchain_cert1": "ok"
+   },
+   {
+    "sites": 40,
+    "states": 30,
+    "accepted_in_memory": true,
+    "prune": 1160,
+    "depth": 1161,
+    "dumps": "RecursionError",
+    "to_metricchain_cert1": "RecursionError"
+   },
+   {
+    "sites": 60,
+    "states": 30,
+    "accepted_in_memory": true,
+    "prune": 1740,
+    "depth": 1741,
+    "dumps": "RecursionError",
+    "to_metricchain_cert1": "RecursionError"
+   }
+  ],
+  "loaded": [
+   {
+    "depth": 400,
+    "loads": "ok",
+    "accepted": true
+   },
+   {
+    "depth": 900,
+    "loads": "ok",
+    "accepted": true
+   },
+   {
+    "depth": 1200,
+    "loads": "RecursionError"
+   },
+   {
+    "depth": 5000,
+    "loads": "RecursionError"
+   }
+  ]
+ }
+}

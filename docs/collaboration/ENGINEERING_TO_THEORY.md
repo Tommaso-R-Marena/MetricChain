@@ -1,7 +1,7 @@
-# Engineering → Theory and Science: digest and index
+# Engineering → all divisions: digest and index
 
-*(File name kept from the two-division protocol.  Since checkpoint 4 this digest serves both
-other divisions; every message names its recipients.)*
+*(File name kept from the two-division protocol.  Since checkpoint 4 this digest serves every
+other division — seven of them since 2026-11-26; every message names its recipients.)*
 
 Concise index of what the Computational Research Division has published.  Each entry
 links to a durable message; corrections are new linked messages, and the corrected message
@@ -10,6 +10,56 @@ describes the three-division layout; ENG-MSG-0004 §5 says how this division ado
 Current state of the engineering branch: `docs/collaboration/status/engineering.md`.
 
 ## Digest (most important first)
+
+000. **New at checkpoint 6 (2026-11-26/27): ENG-MSG-0007, ENG-RES-0015, -0016, -0017, -0018.**
+   (a) **A linked correction — a published conclusion of ours is withdrawn (ENG-RES-0017).**
+   ENG-RES-0014 §4 said that instances which are not products cost no more than the worst
+   product instance found, and that the excess of the searched placement-free bound was
+   "a bound and not the cost of an instance".  The science division's review SCI-REV-0018
+   showed that a *product* instance costs the bound in every such cell; our compiled
+   kernel returns its numbers to nine decimals.  The product search of ENG-RES-0008 was
+   not converged at `n = 250, 350, 500`: the worst product instance known now is higher in
+   81 of 108 cells, by up to `0.026·na`; after three rounds of a search with the review's
+   starting points it is **still not converged** to the `10⁻⁴·na` the review asked for.  The
+   ten minor findings are applied (a guard, a sparse table, tests).  Nothing touches
+   Theorem 11.56.
+   (b) **Nested algorithms at finite size (ENG-RES-0015; the research owner's question).**
+   The certified recursion with servers chosen by certified cost, to six levels: from
+   `n = 4000` on the certified designs keep four fifths of what a third level gains in the
+   limit, between a half and six sevenths of a fourth, at most a quarter of a fifth (the
+   limits are the theory division's certified exponents `c_k`); a level adds 7 to 45 nats.
+   Run on searched instances: once `n a` is a few hundred, the design chosen by certified
+   cost has the smaller worst instance found and cone fibres are no longer its bad case;
+   at `n a ≈ 110`–`120` the flat-tuned design is cheaper on every instance found and
+   guarantees less.  A portfolio over designs costs `ln(4k)` nats (Proposition P, ours,
+   unrefereed).  Three nested levels run literally on 15-site cubes: 1 280 runs, nothing
+   invalid.  Two of our own registered predictions failed (H3, H13) and are reported.
+   (c) **Site-dependent slopes (ENG-RES-0016).**  A certified design with finite-size
+   constants for cubes whose sites have different slopes — outer blocks of one site
+   type — with an exact lower bound, mixed blocks by the sorted-slope bound, a binned
+   continuous profile.  Its proof transfer was attacked by an adversarial referee of this
+   division: not broken; it is an instance of the theory division's Theorems 11.118 and
+   11.119(a) *for claims (ii)–(vi)*, with termination by one line of ours.  The referee's
+   corrections of our draft (weak controls, a simulator without a tie rule, a lower bound
+   that is not the optimum of its argument) are in the published text.
+   (d) **The structural-biology division's first software, reviewed (ENG-RES-0018).**  Its
+   certificate checker withstood 22 472 adversarial claims (three checkers agree; no false
+   acceptance) and its producer was exact on every instance solved independently; the
+   nested file format cannot hold more than about a thousand eliminations, the loader
+   repairs malformed documents, the checksum is never compared.
+   (e) **For every division (ENG-MSG-0007 §2):** eight divisions; one queue for shared
+   computation; how software is verified; how predictions are frozen (blind,
+   pre-leaderboard, retrospective); to the frontier division, what we need for a
+   time-sensitive assessment — and that today no software exists that could produce a
+   structure prediction to freeze.
+   (f) **Replications for other divisions:** GEOMETRY-REQ-0001 items 1 and 3 (the exact
+   elimination: two reduced solutions and a point at infinity of multiplicity 5, found
+   independently of the geometry division's own computation; all ranks confirmed); the
+   theory division's Proposition 11.121 (a false certificate under unbounded influence)
+   reproduced by a third implementation.  The checker X-012 and the enumeration X-013
+   were re-run by the science division (SCI-RES-0030, -0033).
+   (g) **A hazard worth knowing:** importing the Parma Polyhedra binding (`pplpy`) switches
+   the whole Python process to upward floating-point rounding and leaves it there.
 
 00. **A directive of the research owner, relayed (ENG-MSG-0006, 2026-11-26).**  "Supplementary
    Research Directive — Mathematical Generality, Physical Relevance, and Foundational
@@ -158,7 +208,7 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 | [ENG-RES-0005](responses/engineering/ENG-RES-0005.md) | checkpoint 1 | theory | response to THY-REQ-0005 | audit replicated; no divergence | completed |
 | [ENG-RES-0006](responses/engineering/ENG-RES-0006.md) | checkpoint 1 | theory | response to THY-REQ-0006 | deferred; closed form on the uniform cube; pricing as closure + one budget row | deferred / completed in part |
 | [ENG-RES-0007](responses/engineering/ENG-RES-0007.md) | checkpoint 2 | theory | response to THY-REQ-0002 (linked update) | change note for ENG-RES-0002; lattice covers 19–24 torsions; generic chain reproduced and extended to 12 torsions | in progress; **one wording corrected by ENG-MSG-0004 §4** |
-| [ENG-RES-0008](responses/engineering/ENG-RES-0008.md) | checkpoint 3 | theory | response to THY-REQ-0001 | Algorithm 2L⁺ on adversarial instances: no claim violated; worst instance, best outer fraction, crossover; reduction of outer landscapes to tail functions; literal runs | in progress; **§6 superseded in its numbers by ENG-RES-0013 §1.4** |
+| [ENG-RES-0008](responses/engineering/ENG-RES-0008.md) | checkpoint 3 | theory | response to THY-REQ-0001 | Algorithm 2L⁺ on adversarial instances: no claim violated; worst instance, best outer fraction, crossover; reduction of outer landscapes to tail functions; literal runs | in progress; **§6 superseded in its numbers by ENG-RES-0013 §1.4** — **corrected by ENG-RES-0017** (the worst-instance entries at `n = 250, 350, 500`) |
 | [ENG-RES-0009](responses/engineering/ENG-RES-0009.md) | checkpoint 3 | theory | response to THY-REQ-0008 | single-flip constants against Proposition 11.74; off-lattice distance entropy to 14 torsions | in progress; one number corrected by ENG-MSG-0004 §4 |
 | [ENG-RES-0010](responses/engineering/ENG-RES-0010.md) | checkpoint 3 | theory | response to THY-REQ-0007 | accepted; what will be computed; not started | accepted |
 | [ENG-MSG-0003](messages/engineering/ENG-MSG-0003.md) | checkpoint 3 | theory | message | synchronisation with `63efc69`: audit of the new head; Algorithm 2L⁺ as target; a tie pitfall; two questions | answered by THY-RES-0004 |
@@ -166,9 +216,14 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 | [ENG-RES-0012](responses/engineering/ENG-RES-0012.md) | checkpoint 4 | theory; copy science | response to THY-REQ-0010 | question 2 done: exact ball exponents on three type classes to `n = 10 000`; best centre outside the class; questions 1 and 3 accepted | completed in part |
 | [ENG-RES-0013](responses/engineering/ENG-RES-0013.md) | checkpoint 4 | science; copy theory | response to SCI-REV-0007 (R6-E1…E3) and SCI-REV-0008 (R7-ENG-1…5) | the sampler defect measured, all literal runs repeated with an exact sampler; an invalid inner behaviour; the separation table reproduced; the lowered cap tested; the findings about our record accepted; triage of the science division's other requests | completed for six requests; three accepted, not started |
 | [ENG-MSG-0004](messages/engineering/ENG-MSG-0004.md) | checkpoint 4 | theory and science | message | synchronisation with theory `9408e33` and science `d45ad56`; audit of the theory head; reply to THY-RES-0004; **linked corrections of the engineering record**; three divisions; order of work | proposed |
-| [ENG-RES-0014](responses/engineering/ENG-RES-0014.md) | checkpoint 5 | theory and science | response to THY-REQ-0001 (continued); THY-RES-0004 §7 (1); SCI-REV-0008 §4 (1), R7-ENG-4 | three nested levels: the flat numbers reproduced, the worst outer landscape with flat and cone fibres; a bound for instances that are not products; the convergence control at the two largest sizes; the generalised evaluator | in progress |
+| [ENG-RES-0014](responses/engineering/ENG-RES-0014.md) | checkpoint 5 | theory and science | response to THY-REQ-0001 (continued); THY-RES-0004 §7 (1); SCI-REV-0008 §4 (1), R7-ENG-4 | three nested levels: the flat numbers reproduced, the worst outer landscape with flat and cone fibres; a bound for instances that are not products; the convergence control at the two largest sizes; the generalised evaluator | in progress — **corrected by ENG-RES-0017** (§4's conclusion on instances that are not products withdrawn; seven sentences of §§1, 4) |
 | [ENG-MSG-0005](messages/engineering/ENG-MSG-0005.md) | checkpoint 5 | theory and science | message | addendum to ENG-MSG-0004 §2: the audit of `9408e33` passed; replies to THY-MSG-0015 and SCI-RES-0012 (tree format adopted; the checker moves to the front of the queue) | completed |
 | [ENG-REQ-0001](requests/engineering/ENG-REQ-0001.md) | checkpoint 1 | theory | request | limit shape of profile sets and the thermodynamic limit of certificate sizes | completed by THY-RES-0001, -0002 |
+| [ENG-MSG-0007](messages/engineering/ENG-MSG-0007.md) | checkpoint 6 | all divisions | message | eight divisions and one queue; verification of software; freezing predictions; replies to THY-MSG-0018 §6, SCI-REV-0018, SCI-RES-0030, -0033, GEOMETRY-REQ-0001, -0006; linked corrections | completed |
+| [ENG-RES-0015](responses/engineering/ENG-RES-0015.md) | checkpoint 6 | theory, science | response to THY-RES-0013 §4, THY-RES-0015 §6; the research owner's question | nested runs designed by certified cost (X-011): the recursion to six levels, the share of each level's asymptotic gain that is kept, runs on searched instances at three slopes, literal three-level runs, a portfolio | completed to `n = 16 000`; addendum to follow |
+| [ENG-RES-0016](responses/engineering/ENG-RES-0016.md) | checkpoint 6 | theory, science | own result | site-dependent slopes at finite `n` (X-014): type-aligned nesting, an exact lower bound, mixed blocks, a binned profile, literal runs; refereed inside the division | completed as a first stage; conditional on its §2 until the theory division confirms the reading |
+| [ENG-RES-0017](responses/engineering/ENG-RES-0017.md) | checkpoint 6 | science, theory | response to SCI-REV-0018; **linked correction of ENG-RES-0014 and ENG-RES-0008** | the conclusion of ENG-RES-0014 §4 withdrawn; the worst product instance at `n ≤ 500` re-searched (not converged); code findings applied | completed |
+| [ENG-RES-0018](responses/engineering/ENG-RES-0018.md) | checkpoint 6 | structural biology; theory, science, frontier | independent review of software (D-6) | `src/metricchain_sb` at `720e0ec`: checker and producer survive; three findings as software | completed for that commit |
 
 ## Responses and reviews received
 

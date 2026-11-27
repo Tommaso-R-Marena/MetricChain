@@ -443,94 +443,125 @@ us) was read in full, and the lines of the three digests that mention engineerin
   every rung; the table says up to `0.13`.  Caught before publication by generating the
   table first.
 
+### 4.5 After the restart (21:32 UTC) to checkpoint 6
+
+In order.  (1) Jobs collected, the second tier of M-020 and M-021 launched (21:35), four
+subagents resumed.  (2) Synchronisation with the five other branches: the science
+division's review **SCI-REV-0018** of ENG-RES-0014 (one conclusion false as worded),
+SCI-RES-0030 and -0033 (our X-012 and X-013 re-run and closed), THY-MSG-0018 (the rate
+theorem; the abstract level theorem with obstructions; candidates E-C1 … E-C5; workstream
+Z with certified exponents of `k` levels), GEOMETRY-REQ-0006.  (3) **X-005c**: the review's
+finding confirmed with the compiled kernel; its code findings applied (guard, sparse
+table, tests); the product search repeated on Modal in three rounds (M-023, M-024, M-025)
+— not converged, and reported so; ENG-RES-0017.  (4) **Directive D-6** (22:00): a seventh
+division, structural biology, whose software this division verifies; recorded; procedure
+written (master plan §3a).  (5) X-011: the share of each level's asymptotic gain that the
+certified designs keep, against the theory division's certified exponents; predictions
+H13, H14 written at 21:57 before the rows of `n = 16 000` were collected; H13 failed in
+part and H3 failed when they arrived (the two design families differ more at 16 000
+than predicted).  (6) **X-015**: the theory division's Proposition 11.121 reproduced by a
+third implementation.  (7) **Directive D-7** (22:40): an eighth division, frontier
+benchmarking; CASP17 feasibility; recorded; the freeze procedure written.  (8) **X-016**:
+the structural-biology division's first commit read in full and tested from a pinned
+worktree; ENG-RES-0018.  (9) The geometry subagent reported (GEOMETRY-REQ-0001 done; the
+coordinator checked the point at infinity independently).  (10) The adversarial referee
+of ENG-RES-0016 reported: not broken; six findings applied to the text before
+publication; a tie rule added to the literal simulator; a guard on the shell
+enumeration.  (11) The rate-check subagent reported; its report is filed with the
+coordinator's review marked incomplete.  (12) Checkpoint 6 published.
+
+### 4.6 Incidents and mistakes of this stretch, and what they changed
+
+* **The restart at 18:03 UTC was caused by a subagent of ours** (the referee): a stress
+  test enumerated `8·10⁹` weighted shells and took 6.4 GiB of a 7.6 GiB machine.  Changes:
+  `hetero.weighted_shells` refuses more than `3·10⁷` shells; **every exploratory script of
+  a subagent runs under a hard address-space limit** (`ulimit -v`, or `RLIMIT_AS` in the
+  script) — to be written into every brief.
+* **A published conclusion was false as worded** (ENG-RES-0014 §4): two searches compared,
+  their difference read as a property of the instances.  Rule: cross-evaluate the
+  maximiser of each search under the other objective first (`BENCHMARK_LIMITATIONS.md`).
+* **A "worst case" in the ledger was not a bound** (M-022: $2.48 against $2.28; restarted
+  tasks).  Long tasks are now entered with two attempts.
+* **Importing `pplpy` switches the process to upward rounding.**  Found because a chain
+  test failed only when the whole suite ran in one session — which had not been done
+  since the weighted-cube tests were added.  Changes: the module restores the mode; a
+  guard in `tests/eng/conftest.py`; **the committed suite is run in one session before
+  every checkpoint**.
+* **A table column was wrong for a day** ("levels after which nothing improves": the
+  comparison had the wrong direction) — caught when the prose was checked against the
+  table, before publication.
+* **Draft sentences written from partial data** again needed correction when the data
+  completed (the profile binning; the stage-2 comparison): tables are now frozen by a
+  manifest of the rows published, and prose is written after it.
+* Our own literal simulator had no tie rule and our negative controls were weak — found
+  by the referee, not by us.  A referee with its own simulator is worth its cost.
+
 ## Resume here
 
-**State at 2026-11-26 about 21:45 UTC (session 4 in progress; the machine restarted at about 18:03 UTC — local runs and four subagents were cut off and have been resumed; the detached Modal jobs were not affected).**  Read
-`docs/engineering/DIRECTIVES.md` first: the research owner asked for a *continuous*
-research loop; a finished checkpoint is not a reason to stop.
+**State at 2026-11-27 about 00:05 UTC: checkpoint 6 is published** (ENG-MSG-0007,
+ENG-RES-0015, -0016, -0017, -0018; reports of X-012, X-013, GEOMETRY-REQ-0001, the referee
+of X-014, the rate check).  Read `docs/engineering/DIRECTIVES.md` first (D-1 … D-7): the
+research owner asked for a *continuous* loop; a finished checkpoint is not a reason to
+stop; a consolidation directive will come when about $2,000 of Claude credits remain.
+**Hard stop for computation: 2026-11-30 15:00 US Eastern (20:00 UTC).**
 
-0. **At the start of every session:** `git fetch origin` (six branches now); follow
-   `docs/collaboration/UPSTREAM_SYNC.md`; read new messages addressed to engineering in all
-   five other mailboxes (`THEORY_TO_ENGINEERING.md`, `SCIENCE_TO_ALL.md`, `ENSEMBLE_TO_ALL.md`,
-   `GEOMETRY_TO_ALL.md`, `COMPLEXITY_TO_ALL.md` on their branches); read `COMPUTE_LEDGER.md`
-   ("Policy": the launch test) before any remote job.  Commit before launching anything
-   whose rows store a commit; stop processes by PID.
-1. **Remote jobs that may still be running or uncollected** (detached; results wait in a
-   `modal.Dict` for seven days; the apps end by themselves):
+0. **At the start of every session:** `git fetch origin` — **eight** branches now: theory
+   `claude/determined-ride-og1u7j`, science `research/scientific-translation`,
+   `research/ensemble-identifiability`, `research/geometric-inference`,
+   `research/biological-complexity`, `research/structural-biology` (its software is ours
+   to verify: D-6), `research/frontier-benchmarks` (did not exist at 22:41 UTC on
+   2026-11-26; CASP17 feasibility is time-sensitive: official results on 29 November).
+   Follow `docs/collaboration/UPSTREAM_SYNC.md`; read what is addressed to engineering in
+   every digest; read `COMPUTE_LEDGER.md` ("Policy") before any remote job.  Commit before
+   launching anything whose rows store a commit; stop processes by PID; give every
+   subagent a hard memory limit.
+1. **Remote jobs still open** (detached; results wait in a `modal.Dict` for seven days;
+   the apps end by themselves):
 
-       python modal_jobs/bench_collect.py --driver nested_bench --job certified1+instances1+instances2+certified2   # M-016, M-017, M-020, M-021
-       python modal_jobs/bench_collect.py --driver hetero_bench --job hetero1+profile1          # M-018, M-022
-       python modal_jobs/bench_collect.py --driver nested_literal --job nested1                 # M-019 (complete)
-       modal app list --json      # keys state, description, tasks; ours are named metricchain-eng-*
-       modal container list --json
+       python modal_jobs/bench_collect.py --driver nested_bench --job certified1+instances2+certified2   # M-016, M-020, M-021
+       modal app list --json ; modal container list --json ; modal billing summary
 
-   M-016's largest sizes (`n ≥ 32 000`) can run until about 2026-11-27 07:30 UTC (three of
-   its long tasks were restarted by the platform: ledger, policy rule 6).  The second tier
-   of M-020 (`n = 16 000`) and M-021 were launched at 21:35 UTC; M-021's longest tasks can
-   run until 2026-11-27 09:35 UTC.  After the last
-   collection: enter the measured costs in the ledger (`modal billing report`), set the
-   jobs to "done", update the allocation table, and check `modal billing summary` shows
-   **Billed Cost $0.00**.
-2. **Publish** `ENG-RES-0015` and `ENG-RES-0016`: move the drafts from
-   `docs/engineering/drafts/` to `docs/collaboration/responses/engineering/`, run
-   `python experiments/eng/twolevel/make_tables_x011.py --write <file>`, check every number
-   in the prose against the generated tables (the drafts were written from partial data —
-   the list of sentences to re-check is at the head of each draft's history in this log,
-   §4.4), then `--verify`.  ENG-RES-0015 covers sizes up to 16 000; larger sizes go into a
-   linked addendum.  Then a message ENG-MSG-0007: synchronisation with all five branches;
-   to the science division the checker (X-012) and the finding about its reference
-   checker; to the geometry division the answer to GEOMETRY-REQ-0001; to the three new
-   divisions how to request computation (`docs/collaboration/README.md`, "Shared
-   computation"; `benchmarks/BENCHMARK_REGISTRY.md`).
-3. **Subagents** (their output is reviewed, then filed and committed by the coordinator —
-   they do not commit; their reports come back as text and are filed as `REPORT.md` next
-   to their code).  **Done and filed:** X-012 the leaf-certificate checker
-   (`experiments/eng/leafcert/REPORT.md`); X-013 weighted cubes (R10-E1;
-   `experiments/eng/weighted_cube/REPORT.md`).  **In flight (cut off by the restart at 18:03 UTC,
-resumed at 21:37 UTC with their transcripts intact — after another interruption resume
-them the same way, by a message to their ids, or review their files as they stand):**
-   (a) GEOMETRY-REQ-0001 items 1 and 3 (`experiments/eng/geometry_req1/`,
-   `tests/eng/test_geometry_req1.py`); (b) a numerical check of the theory division's
-   Theorem R on products of two site types (`experiments/eng/level_rate/`,
-   `tests/eng/test_level_rate.py`); (c) an adversarial referee of ENG-RES-0016 §2
-   (`experiments/eng/review_x014/`); (d) a producer of leaf certificates and its benchmark
-   against exact solvers (`src/metricchain_eng/leafprod/`, `tests/eng/test_leafprod.py`,
-   `experiments/eng/leafcert_bench/`).  If a session ends before they report, their files
-   are in the working tree, untracked: review them like any contribution (run the tests,
-   read the core, write the report from their code) or delete them.
-4. **Then, in this order** (the registry `benchmarks/BENCHMARK_REGISTRY.md` is the queue):
-   (a) X-011 continued — slopes `u = ½, 2` (Q-10); fibres that are hard for the *bounded*
-   middle design (ENG-RES-0015 §7); a literal simulation of a nested run at small `n`
-   (none exists);
-   (b) the sandwich certificate checker (SCI-MSG-0025 §8; Q-08), now that the leaf checker
-   exists, and a *producer* for leaf certificates so that BM-2 can reach stage D;
-   (c) the off-lattice chain in exact arithmetic (R7-ENG-3; Q-06), then the enumeration
-   job (Q-07);
-   (d) X-014 continued — if §2 of ENG-RES-0016 survives its referee: alphabets of
-   different sizes; an exact extremal function of small weighted cubes;
-   (e) THY-REQ-0003 (profile constants; Q-09);
-   (f) requests of the three new divisions as they arrive, by the readiness test.
-5. Not done and not started: the audit of any theory head after `9408e33` (the science
-   division reports passes up to `3cf14b9`); the theory division's report on the rate of
-   the level recursion (`020e990`) and Theorem 11.58a are unread beyond summaries.
-
-Worktree of the theory branch (read only; never end a shell command inside it):
-`git worktree add --detach ../MetricChain-theory-<sha> <sha>`, then
-`mkdir ../MetricChain-theory-<sha>/.lake && ln -s ../../MetricChain/.lake/packages ../MetricChain-theory-<sha>/.lake/packages && cp -a .lake/build ../MetricChain-theory-<sha>/.lake/build`,
-and inside it `LEAN_NUM_THREADS=4 lake build` and `bash scripts/audit_all.sh --full`.
-
-Build and test from a clean clone:
-
-```
-source "$HOME/.venvs/metricchain/bin/activate"; export PATH="$HOME/.elan/bin:$PATH"
-lake exe cache get && lake build                     # theory proofs (about 50 min on 8 threads / 7.6 GiB)
-mkdir -p build && cc -O3 -o build/dia_enum src/metricchain_eng/chains/dia_enum.c \
-                && cc -O3 -o build/dia_flip src/metricchain_eng/chains/dia_flip.c
-python -m pytest tests/eng -q
-python experiments/eng/chain_cover/run_lattice.py --check
-python experiments/eng/chain_cover/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0002.md
-python experiments/eng/twolevel/controls.py --theory ../MetricChain-theory-63efc69      # needs a checkout of the theory branch
-python experiments/eng/twolevel/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0008.md    # likewise -0013, -0014
-python experiments/eng/slices/make_tables.py --verify docs/collaboration/responses/engineering/ENG-RES-0012.md
-python experiments/eng/twolevel/three_levels.py --check                                 # the referee's three-level numbers
-```
+   M-016: `n = 32 000, 64 000, 128 000` (six tasks of the twelve-hour tier, launched 16:20
+   UTC on the 26th).  M-020: stage 2 at `u = 2`, `n = 16 000` (19 rows missing).  M-021: the
+   recursion at `u = ½, 2` (16 rows).  When they are in: `python
+   experiments/eng/twolevel/make_tables_x011.py` prints the addendum blocks (suffixes
+   `_large`, `_late`); evaluate **H12, H13 (sizes ≥ 32 000), H14 (`u = 2`)** as written in
+   `benchmarks/protocols/BM-1_X-011.md`; publish the addendum as ENG-RES-0019; enter the
+   measured costs (`modal billing report --for today --json`, by app run) and close the
+   jobs; check **Billed Cost $0.00**.
+2. **Local runs in flight when this was written**: the literal experiment of X-014 with
+   the tie rule (`python experiments/eng/twolevel/hetero_literal.py` →
+   `results/x014_literal_v2.json`, about an hour) — its table goes into the addendum of
+   ENG-RES-0016 (compare with the first version; the tie case "outer_cone0" must show no
+   abort).
+3. **Subagents**: (a) geometry REQ-0001 — done, filed, published.  (b) the referee of
+   X-014 — done, filed, applied.  (c) the rate check — **report filed, the coordinator's
+   review incomplete** (`experiments/eng/level_rate/REPORT.md`, last section): read Claims
+   A–C of its §3, compare with the theory division's workstream Z (certified `c_k`), then
+   send its findings to the theory division (four discrepancies in their material; the
+   four-letter Hamming site at `u = ln 3` where (H1) fails and the rate is `1/k`).
+   (d) the producer of leaf certificates and its benchmark (`src/metricchain_eng/leafprod/`,
+   `tests/eng/test_leafprod.py`, `experiments/eng/leafcert_bench/`) — **still running when
+   this was written; untracked**; review it like any contribution when it reports, and
+   add the structural-biology division's producer to the comparison.
+4. **Next, in this order** (queue: `benchmarks/BENCHMARK_REGISTRY.md`, status table at its
+   head):
+   (a) **the frontier-benchmarking and structural-biology branches** — check for a
+   release, a benchmark specification or a request at every synchronisation; apply
+   `BENCHMARK_MASTER_PLAN.md` §3a (read before running; pinned worktree; our own tests)
+   and `PREDICTION_FREEZE.md`; do not run an immature implementation to meet a date;
+   (b) ENG-MSG-0008: the reviewed rate check; the producer benchmark; the addendum;
+   (c) **GEOMETRY-REQ-0006** (accepted): a certified global maximum on a 4-torus by
+   interval branch and bound, and a Krawczyk certificate of a four-dimensional
+   realisation; local; the request has the data, the controls and a stopping rule;
+   (d) the directed-rounding reference (Q-19) once the science division names the energy
+   terms; a prototype on a model energy can start before;
+   (e) X-011 continued: fibres that are hard for the bounded design; the searches of
+   X-010/X-011 with the review's starting points; the wider design family run on
+   instances; certified designs at `n = 10⁶` against the theory division's Theorem Z table
+   if they want it;
+   (f) the sandwich checker when its file format exists (Q-08); the off-lattice chain in
+   exact arithmetic (Q-06), then the enumeration job (Q-07); THY-REQ-0003 (Q-09).
+5. Not done: the audit of any theory head after `9408e33`; the proofs of workstreams N,
+   R, Z, Q2 are unread; of the science division's twenty new messages only three were
+   read in full.

@@ -232,3 +232,52 @@ commit that adds or last changes the files named).  Costs are in
 | Code | `src/metricchain_eng/twolevel/hetero.py`; `experiments/eng/twolevel/hetero_bench.py`, `hetero_literal.py` |
 | Limitation stated up front | the certified status of (a) is conditional on a proof transfer by one author; two site types, binary sites; no mixed outer blocks; bounds, not runs |
 | Result, interpretation, limitations | ENG-RES-0016 |
+
+## X-013  Exact vertex enumeration of the weighted cubes of workstream Y (R10-E1)
+
+| field | value |
+|---|---|
+| Scientific purpose | The science division's request R10-E1 (SCI-REV-0010 §7), serving the theory division's question R10-T2: at which slope does a two-state chain as known part stop being harder than independent sites?  Block bounds from the vertices of the Lipschitz polytope of the weighted cubes `(u, …, u, u*)` |
+| Source commit | science `2b4ccdf` (the request; R10 §5, the map); theory `8ff0667` (workstream Y, Proposition F) |
+| Mathematical dependencies | Proposition F of workstream Y **[P; theory]** for "below the cube"; everything else is exact enumeration and interval arithmetic |
+| Outputs | `experiments/eng/weighted_cube/results/`, report `experiments/eng/weighted_cube/REPORT.md` |
+| Validation | four enumeration methods and, for `L ≤ 4`, the Parma Polyhedra Library; the request's validation value `0.495806` enclosed by `[0.495805524594, 0.495805524595]`; the three-site count by the coordinator by brute force; **re-run and replicated by the science division on a machine without the Parma library (SCI-RES-0033)** |
+| Code | `src/metricchain_eng/weighted_cube/` (independent subagent), `tests/eng/test_weighted_cube.py` |
+| Result | vertices: three sites 96 / 72; four sites 21 472, 21 184, 3 160, 2 888 in four chambers; five sites 1 965 480 and 1 960 200 above `r = 3`.  Blocks of four decide one of the six cells named in R10-T2; blocks of five provably cannot decide the other five.  Closed on both sides (SCI-RES-0033; theory report Proposition 11.117(d)) |
+| Found later | **importing the Parma binding (`pplpy`) switches the whole process to upward floating-point rounding** (checkpoint 6).  The certified values use software interval arithmetic and exact rationals and are not affected; the module now restores round-to-nearest after the import and after every call, and the test suite guards the rounding mode before and after every test |
+
+## X-005c  The worst product instance re-examined after the science division's review (R18)
+
+| field | value |
+|---|---|
+| Scientific purpose | SCI-REV-0018, finding M1: where the searched placement-free bound of X-005b lay above the product search, a product instance costs the bound — the excess was the shortfall of the product search, and a conclusion of ENG-RES-0014 §4 is false as worded.  Requests R18-ENG-1 … -5 |
+| Source commit | science `59e88bc`; ours `1cc4e1c` as reviewed |
+| Protocol | the request's own correctness criteria (SCI-REV-0018 §5); no hypothesis of ours |
+| Parts | (i) all 1 440 stored maximisers of the bound as the product instances they are — local; the review's stored product instances with the compiled kernel; (ii), (iii) the product search and the bound search at `n ≤ 500` with the review's starting points, three rounds — jobs M-023, M-024, M-025; cross-evaluation of every maximiser under both objectives; a control at `n = 1000, 4000` — local |
+| Outputs | `experiments/eng/twolevel/results/x005c_*.json|jsonl` |
+| Code | `experiments/eng/twolevel/r18_products.py`, `make_tables_x005c.py`; the guard and the sparse table in `src/metricchain_eng/twolevel/meanrun.py`; tests in `tests/eng/test_twolevel.py` |
+| Result | M1 confirmed with the compiled kernel to nine decimals.  The worst product instance known at `n ≤ 500` exceeds that of job M-008 in 81 of 108 cells, by up to `0.026·na`; bound and product instance coincide in 107 cells after cross-evaluation.  **The search is not converged to the review's `10⁻⁴·na`** after three rounds (each still moves 20 to 37 cells by more than `10⁻⁴`).  ENG-RES-0017 (a linked correction of ENG-RES-0014 and of ENG-RES-0008 at three sizes) |
+| Rule adopted | when two searches over equal or nested families are compared, the maximiser of each is evaluated under the other objective before the difference is read (`benchmarks/BENCHMARK_LIMITATIONS.md`) |
+
+## X-015  The theory division's false certificate under unbounded influence, by a third implementation
+
+| field | value |
+|---|---|
+| Scientific purpose | Stage A/C for the theory division's Proposition 11.121 (workstream N, N12; candidate E-C3 of THY-MSG-0018 §6): with a dependent known part of unbounded influence, Algorithm 2L⁺ run with the tail function of the assumed class certifies a false bracket |
+| Source commit | theory `eb88823` (theory report §11.33; the instance from the statement alone; the workstream's scripts were not read) |
+| Outputs | `experiments/eng/twolevel/results/x015_false_certificate.json` |
+| Code | `experiments/eng/twolevel/false_certificate.py`; `hetero_literal.run_2l_fibres` (our literal simulator of X-014, with the tie rule) |
+| Result | instance facts reproduced (`A = 1.0747·10⁻³`; 99.986 % of it on 13 outer points; jump `e^{11.765}`; (TU) violated by `1.747·10⁵`); assumed class: an invalid bracket in 360 of 360 runs (three parameter sets, three inner behaviours), upper end below `A` by factors 111 to 185, every sampling certificate true; true class: valid in 72 of 72 runs at 1 056 to 1 882 times the outer cube.  ENG-MSG-0007 §4 |
+| Limitation | the algorithm's parameters are ours, so the factors differ from the workstream's (294; 3 680); one instance |
+
+## X-016  First independent review of the structural-biology division's software (BM-7)
+
+| field | value |
+|---|---|
+| Scientific purpose | The research owner's directive D-6: independent verification of that division's research software.  Its first commit: an exact pairwise model, a "min" certificate format with a checker, a GMEC producer |
+| Source commit | structural biology `720e0ec` (read in full; run from a pinned, read-only worktree; nothing copied) |
+| Parts | re-run of its nine tests; an independent checker with a strict loader written from the format description; A random certificate trees (22 472 claims, three checkers, enumeration); B traps; C limits of the fixed-width arithmetic; D malformed documents; E the producer against enumeration and dynamic programming; F nesting depth in a fresh interpreter |
+| Outputs | `experiments/eng/sb_review/results/mincert_part_{a..f}.json` |
+| Code | `experiments/eng/sb_review/indep_mincheck.py`, `attack_mincert.py`, `make_tables.py` |
+| Result | the checker and the producer survive every test (no false acceptance; no wrong optimum).  Three findings as software: the nested format cannot hold more than about a thousand eliminations (`dumps`, `loads`, the conversion: `RecursionError`); the loader repairs malformed documents instead of rejecting them; the model checksum is never compared.  ENG-RES-0018 |
+| Limitation | no molecular layer, no benchmark and no file-format note existed at that commit; nothing about physics; the checker was compared with the theory division's Python reference checker, not with the Lean kernel |

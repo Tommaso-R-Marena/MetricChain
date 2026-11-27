@@ -116,3 +116,55 @@ that still calls numpy at large `n` (means above `10⁹`) is named in the code.
 largest `n`, the means that matter — against exact moments with enough draws to see an
 error of the size that would matter, before a frequency computed with it is published.
 A test that passes at a resolution of 3 % says nothing about a 1 % defect.
+
+## ED-9  Reading the difference of two searches as a property of the problem — a published conclusion withdrawn
+
+ENG-RES-0014 §4 compared the largest cost found by a search over product instances
+(job M-008) with the largest value found by a search of a placement-free bound over the
+same family (job M-014) and read the excess of the second — up to `0.02·na` at
+`n = 250, 350, 500` — as "a bound and not the cost of an instance".  The science division's
+review SCI-REV-0018 showed that the maximiser of the second search is itself a product
+instance (or one shell away from one) whose cost is the bound: the first search had
+simply stopped lower.  Three further rounds with better starting points raised the worst
+product instance in 81 of 108 cells and still did not converge to `10⁻⁴·na`
+(ENG-RES-0017).  **Lesson:** before a difference between two searches is interpreted,
+evaluate the maximiser of each under the other objective; and a differential-evolution
+search with a fixed budget is not converged because a second seed agrees at *other*
+sizes.  The convergence controls we had run were at the sizes where the effect is small.
+
+## ED-10  A literal simulator without a tie rule, a second time; negative controls that do not discriminate
+
+`experiments/eng/twolevel/hetero_literal.py` (X-014) compared bracket ends with levels in
+plain floating point — the mistake of ED-5, repeated in a new simulator.  On a cone on
+the outer block with its apex at the reference point, flat fibres and inner answers at
+the top, every fibre average lies exactly on the level grid and the run aborted, with
+the theorem's constants, in up to 40 of 40 runs; none of our eight instance kinds
+contained that case, so the published draft said "no abort".  Our two negative controls
+(tables for a quarter of the slope; `K/64`) failed in at most 4.1 % of runs, below the
+5 % the theorem allows.  Both were found by an adversarial referee of this division with
+a simulator of its own, before publication.  **Lessons:** a tie rule belongs in every
+simulator that compares floating-point weights with a geometric grid, and an instance
+*on* the grid belongs in every test set; a negative control is a control only if it
+fails far more often than the claim allows — measure that before calling it one.
+
+## ED-11  A library that changes the floating-point rounding mode of the process
+
+Importing `pplpy` (the Parma Polyhedra Library, used for one cross-check of X-013)
+switches the whole interpreter to upward rounding and leaves it there.  Nothing certified
+was affected (the certified values of X-013 use software interval arithmetic and exact
+rationals, and the science division reproduced them on a machine without the library),
+but a test of the off-lattice chain that counts exact ties failed whenever the
+weighted-cube tests were collected in the same session — and the full suite had not been
+run in one session since those tests were added.  **Lessons:** restore the rounding mode
+after importing or calling such a library (done in `weighted_cube/polytope.py`); guard the
+mode in the test suite (`tests/eng/conftest.py`); run the whole suite in one session
+before every checkpoint; and treat "it passes when run alone" as a symptom.
+
+## ED-12  A stress test without a memory limit took the machine down
+
+A referee's first stress test called `hetero.hinted_lower_bound` on four site types of 300
+sites: `8·10⁹` weighted shells, 6.4 GiB on a 7.6 GiB machine, and a restart that cut off
+every local run and four subagents (2026-11-26 18:03 UTC).  The detached Modal jobs were
+unaffected, and nothing committed was lost.  **Lessons:** `weighted_shells` now refuses
+more than `3·10⁷` shells; every exploratory script of a subagent runs under a hard
+address-space limit, and the brief says so.

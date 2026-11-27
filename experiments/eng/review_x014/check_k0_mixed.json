@@ -1,0 +1,7621 @@
+{
+ "delta_prime": 0.05,
+ "summary": {
+  "largest slope (the claim)": {
+   "configurations": 25,
+   "runs": 6496,
+   "invalid": 0,
+   "too_wide": 0,
+   "largest_invalid_fraction_in_a_configuration": 0.0,
+   "largest_too_wide_fraction_in_a_configuration": 0.0
+  },
+  "sorted slopes": {
+   "configurations": 27,
+   "runs": 6728,
+   "invalid": 0,
+   "too_wide": 0,
+   "largest_invalid_fraction_in_a_configuration": 0.0,
+   "largest_too_wide_fraction_in_a_configuration": 0.0
+  },
+  "CONTROL: smallest slope": {
+   "configurations": 35,
+   "runs": 20416,
+   "invalid": 6550,
+   "too_wide": 0,
+   "largest_invalid_fraction_in_a_configuration": 0.7024793388429752,
+   "largest_too_wide_fraction_in_a_configuration": 0.0
+  }
+ },
+ "rows": [
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 1.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 2.0,
+   "tables": "largest slope (the claim)",
+   "K": 91,
+   "M": 2771875,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0000000000000004,
+   "class_violation": 0.0,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 4.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.1152836187958224,
+   "class_violation": 0.0,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 8.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 1760,
+   "r_star": 4,
+   "runs": 764,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 4.847824844391073,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 44,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 14.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 201,
+   "r_star": 8,
+   "runs": 892,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 11.33569187618632,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 52,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 1.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 2.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 4.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 12,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.105206908984444,
+   "class_violation": 1.3322676295501878e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 8.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 172579,
+   "r_star": 1,
+   "runs": 84,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.2735931196917418,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 14.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 746,
+   "r_star": 5,
+   "runs": 604,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 11.042452309021666,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 36,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 1.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 2.0,
+   "tables": "largest slope (the claim)",
+   "K": 91,
+   "M": 2771875,
+   "r_star": 0,
+   "runs": 4,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0,
+   "class_violation": -0.3,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 4.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 172579,
+   "r_star": 1,
+   "runs": 92,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.2088542075777209,
+   "class_violation": 2.4980018054066022e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 8.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 400,
+   "r_star": 6,
+   "runs": 872,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 5.328271424114564,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 52,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 14.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 160,
+   "r_star": 11,
+   "runs": 624,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 12.135492602088538,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 36,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 1.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 2.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 4.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 8.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.124047353038491,
+   "class_violation": 0.0,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 14.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 24422,
+   "r_star": 2,
+   "runs": 532,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 5.257708428392842,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 32,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 1.0,
+   "tables": "largest slope (the claim)",
+   "K": 273,
+   "M": 740456,
+   "r_star": 1,
+   "runs": 36,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 0.5096558920461236,
+   "class_violation": 1.5543122344752192e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 2.0,
+   "tables": "largest slope (the claim)",
+   "K": 91,
+   "M": 45817,
+   "r_star": 2,
+   "runs": 220,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0502642956688484,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 12,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 4.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 1048,
+   "r_star": 5,
+   "runs": 380,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.9458208716534244,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 20,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 8.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 161,
+   "r_star": 11,
+   "runs": 340,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 6.378601498869336,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 20,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 14.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 159,
+   "r_star": 14,
+   "runs": 460,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 7.290503068193449,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 28,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 1.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 2.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 4.0,
+   "tables": "largest slope (the claim)",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 8.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.1318332405748113,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 14.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 172579,
+   "r_star": 1,
+   "runs": 92,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 3.7754885367119355,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 1.0,
+   "tables": "largest slope (the claim)",
+   "K": 273,
+   "M": 1393799,
+   "r_star": 1,
+   "runs": 16,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 0.5493025614858436,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 2.0,
+   "tables": "largest slope (the claim)",
+   "K": 91,
+   "M": 652206,
+   "r_star": 1,
+   "runs": 32,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0392549283343886,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 4.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 1504,
+   "r_star": 5,
+   "runs": 140,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 2.3566915768271794,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 8.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 177,
+   "r_star": 10,
+   "runs": 128,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 6.04861440467509,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 14.0,
+   "tables": "largest slope (the claim)",
+   "K": 79,
+   "M": 159,
+   "r_star": 15,
+   "runs": 140,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 8.830641967179101,
+   "class_violation": 3.885780586188048e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 1.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 2.0,
+   "tables": "sorted slopes",
+   "K": 91,
+   "M": 2771875,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0000000000000004,
+   "class_violation": 0.0,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 4.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.1152809525921286,
+   "class_violation": 0.0,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 8.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 746,
+   "r_star": 5,
+   "runs": 692,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 5.716198944603701,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 40,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 14.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 984,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 10.559744279852925,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 60,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 1.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 2.0,
+   "tables": "sorted slopes",
+   "K": 91,
+   "M": 2771875,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0,
+   "class_violation": 1.3322676295501878e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 4.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.1052036229755566,
+   "class_violation": 1.3322676295501878e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 8.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 24422,
+   "r_star": 2,
+   "runs": 108,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 2.1542065930177214,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 14.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 360,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 7.920308059082549,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 20,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 1.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 2.0,
+   "tables": "sorted slopes",
+   "K": 91,
+   "M": 2771875,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0000000000000004,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 4.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 172579,
+   "r_star": 1,
+   "runs": 60,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.2092760652046706,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 8.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 262,
+   "r_star": 7,
+   "runs": 344,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 5.940692100348415,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 20,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 14.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 392,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 10.01201559895242,
+   "class_violation": 2.4980018054066022e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 24,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 1.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 2.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 4.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 8.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.1240611810328454,
+   "class_violation": 0.0,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 14.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 844,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 10.350961628261501,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 52,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 1.0,
+   "tables": "sorted slopes",
+   "K": 273,
+   "M": 740456,
+   "r_star": 1,
+   "runs": 32,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 0.5106498564176896,
+   "class_violation": 1.5543122344752192e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 2.0,
+   "tables": "sorted slopes",
+   "K": 91,
+   "M": 45817,
+   "r_star": 2,
+   "runs": 220,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0460458173368061,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 12,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 4.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 1048,
+   "r_star": 5,
+   "runs": 436,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.9184755300909808,
+   "class_violation": 2.3037127760972e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 24,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 8.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 14,
+   "runs": 388,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 5.790471357615923,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 24,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 14.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 14,
+   "runs": 268,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 5.781222011155852,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 16,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 1.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 2.0,
+   "tables": "sorted slopes",
+   "skipped": "no radius qualifies, or the samples are too large"
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 4.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 2588672,
+   "r_star": 0,
+   "runs": 8,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.1318458158570683,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 8.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 172579,
+   "r_star": 1,
+   "runs": 132,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.4951895560868822,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 14.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 880,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 7.522149761385228,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 52,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 1.0,
+   "tables": "sorted slopes",
+   "K": 273,
+   "M": 1393799,
+   "r_star": 1,
+   "runs": 12,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 0.5492919630540776,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 2.0,
+   "tables": "sorted slopes",
+   "K": 91,
+   "M": 652206,
+   "r_star": 1,
+   "runs": 28,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.0392590273385238,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 4.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 1504,
+   "r_star": 5,
+   "runs": 156,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 2.1139988617631493,
+   "class_violation": 5.662137425588298e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 8.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 177,
+   "r_star": 10,
+   "runs": 180,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 6.013938452916728,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 14.0,
+   "tables": "sorted slopes",
+   "K": 79,
+   "M": 159,
+   "r_star": 15,
+   "runs": 156,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 8.786002900706444,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 1.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 273,
+   "M": 12604,
+   "r_star": 3,
+   "runs": 340,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 0.7632569273996745,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 20,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 2.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 91,
+   "M": 799,
+   "r_star": 5,
+   "runs": 508,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.655743522536695,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 28,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 4.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 174,
+   "r_star": 9,
+   "runs": 572,
+   "invalid": 135,
+   "too_wide": 0,
+   "max_width": 3.050357299760404,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 36,
+     "invalid": 20
+    },
+    "anticone0": {
+     "runs": 36,
+     "invalid": 24
+    },
+    "cone": {
+     "runs": 36,
+     "invalid": 24
+    },
+    "anticone": {
+     "runs": 36,
+     "invalid": 17
+    },
+    "dip": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 36,
+     "invalid": 14
+    },
+    "outer_plateau": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 36,
+     "invalid": 17
+    },
+    "wells": {
+     "runs": 36,
+     "invalid": 8
+    },
+    "ridges": {
+     "runs": 36,
+     "invalid": 3
+    },
+    "rough": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 32,
+     "invalid": 8
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 8.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 576,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 4.52215741462451,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 36,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "x": 14.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 676,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 4.487509633038414,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 40,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 1.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 273,
+   "M": 598,
+   "r_star": 7,
+   "runs": 648,
+   "invalid": 372,
+   "too_wide": 0,
+   "max_width": 0.9415296947306993,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 44,
+     "invalid": 44
+    },
+    "anticone0": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "cone": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "anticone": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "dip": {
+     "runs": 40,
+     "invalid": 24
+    },
+    "outer_dip": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "outer_plateau": {
+     "runs": 40,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "wells": {
+     "runs": 40,
+     "invalid": 30
+    },
+    "ridges": {
+     "runs": 40,
+     "invalid": 38
+    },
+    "rough": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 40,
+     "invalid": 32
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 2.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 91,
+   "M": 186,
+   "r_star": 9,
+   "runs": 792,
+   "invalid": 415,
+   "too_wide": 0,
+   "max_width": 1.7464872397035174,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "anticone0": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "cone": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "anticone": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "dip": {
+     "runs": 52,
+     "invalid": 8
+    },
+    "outer_dip": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 48,
+     "invalid": 48
+    },
+    "outer_plateau": {
+     "runs": 48,
+     "invalid": 8
+    },
+    "linear": {
+     "runs": 48,
+     "invalid": 48
+    },
+    "wells": {
+     "runs": 48,
+     "invalid": 38
+    },
+    "ridges": {
+     "runs": 48,
+     "invalid": 16
+    },
+    "rough": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 48,
+     "invalid": 41
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 4.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 592,
+   "invalid": 297,
+   "too_wide": 0,
+   "max_width": 2.3812341103623074,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "anticone0": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "cone": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "anticone": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "dip": {
+     "runs": 36,
+     "invalid": 4
+    },
+    "outer_dip": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "outer_plateau": {
+     "runs": 36,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "wells": {
+     "runs": 36,
+     "invalid": 13
+    },
+    "ridges": {
+     "runs": 36,
+     "invalid": 14
+    },
+    "rough": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 36,
+     "invalid": 34
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 8.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 504,
+   "invalid": 246,
+   "too_wide": 0,
+   "max_width": 2.4095684969560818,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "anticone0": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "cone": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "anticone": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "dip": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "outer_plateau": {
+     "runs": 32,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "wells": {
+     "runs": 32,
+     "invalid": 18
+    },
+    "ridges": {
+     "runs": 32,
+     "invalid": 13
+    },
+    "rough": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 28,
+     "invalid": 19
+    }
+   }
+  },
+  {
+   "slopes": [
+    3.0,
+    3.0,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "x": 14.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 564,
+   "invalid": 289,
+   "too_wide": 0,
+   "max_width": 2.3436107368082153,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "anticone0": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "cone": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "anticone": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "dip": {
+     "runs": 36,
+     "invalid": 4
+    },
+    "outer_dip": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "outer_plateau": {
+     "runs": 36,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 36,
+     "invalid": 36
+    },
+    "wells": {
+     "runs": 36,
+     "invalid": 25
+    },
+    "ridges": {
+     "runs": 36,
+     "invalid": 18
+    },
+    "rough": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 32,
+     "invalid": 22
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 1.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 273,
+   "M": 1706,
+   "r_star": 5,
+   "runs": 444,
+   "invalid": 252,
+   "too_wide": 0,
+   "max_width": 0.8148980773700831,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "anticone0": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "cone": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "anticone": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "dip": {
+     "runs": 28,
+     "invalid": 4
+    },
+    "outer_dip": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 28,
+     "invalid": 7
+    },
+    "outer_cone": {
+     "runs": 28,
+     "invalid": 26
+    },
+    "outer_plateau": {
+     "runs": 28,
+     "invalid": 7
+    },
+    "linear": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "wells": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "ridges": {
+     "runs": 28,
+     "invalid": 17
+    },
+    "rough": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 24,
+     "invalid": 23
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 2.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 91,
+   "M": 280,
+   "r_star": 7,
+   "runs": 772,
+   "invalid": 340,
+   "too_wide": 0,
+   "max_width": 1.6508507567972144,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 48,
+     "invalid": 44
+    },
+    "anticone0": {
+     "runs": 48,
+     "invalid": 45
+    },
+    "cone": {
+     "runs": 48,
+     "invalid": 47
+    },
+    "anticone": {
+     "runs": 48,
+     "invalid": 47
+    },
+    "dip": {
+     "runs": 48,
+     "invalid": 10
+    },
+    "outer_dip": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 48,
+     "invalid": 40
+    },
+    "outer_plateau": {
+     "runs": 48,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 48,
+     "invalid": 45
+    },
+    "wells": {
+     "runs": 48,
+     "invalid": 26
+    },
+    "ridges": {
+     "runs": 48,
+     "invalid": 12
+    },
+    "rough": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 48,
+     "invalid": 20
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 4.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 952,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 3.0291774171656547,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 56,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 8.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 920,
+   "invalid": 2,
+   "too_wide": 0,
+   "max_width": 3.026255562766427,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 60,
+     "invalid": 1
+    },
+    "dip": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 56,
+     "invalid": 1
+    },
+    "wells": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 56,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.5,
+    1.5,
+    1.5,
+    1.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+   ],
+   "x": 14.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 1000,
+   "invalid": 4,
+   "too_wide": 0,
+   "max_width": 3.022764814161343,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 64,
+     "invalid": 1
+    },
+    "anticone0": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 64,
+     "invalid": 1
+    },
+    "anticone": {
+     "runs": 64,
+     "invalid": 1
+    },
+    "dip": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 60,
+     "invalid": 1
+    },
+    "wells": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 60,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 1.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 273,
+   "M": 915,
+   "r_star": 6,
+   "runs": 1132,
+   "invalid": 641,
+   "too_wide": 0,
+   "max_width": 0.8965610912064994,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 72,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 72,
+     "invalid": 72
+    },
+    "anticone0": {
+     "runs": 72,
+     "invalid": 72
+    },
+    "cone": {
+     "runs": 72,
+     "invalid": 72
+    },
+    "anticone": {
+     "runs": 72,
+     "invalid": 72
+    },
+    "dip": {
+     "runs": 72,
+     "invalid": 36
+    },
+    "outer_dip": {
+     "runs": 72,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 72,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 72,
+     "invalid": 72
+    },
+    "outer_plateau": {
+     "runs": 72,
+     "invalid": 8
+    },
+    "linear": {
+     "runs": 72,
+     "invalid": 72
+    },
+    "wells": {
+     "runs": 68,
+     "invalid": 53
+    },
+    "ridges": {
+     "runs": 68,
+     "invalid": 48
+    },
+    "rough": {
+     "runs": 68,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 68,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 68,
+     "invalid": 64
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 2.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 91,
+   "M": 215,
+   "r_star": 8,
+   "runs": 788,
+   "invalid": 419,
+   "too_wide": 0,
+   "max_width": 1.7176920016883992,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 52,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "anticone0": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "cone": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "anticone": {
+     "runs": 52,
+     "invalid": 52
+    },
+    "dip": {
+     "runs": 48,
+     "invalid": 12
+    },
+    "outer_dip": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 48,
+     "invalid": 48
+    },
+    "outer_plateau": {
+     "runs": 48,
+     "invalid": 12
+    },
+    "linear": {
+     "runs": 48,
+     "invalid": 48
+    },
+    "wells": {
+     "runs": 48,
+     "invalid": 29
+    },
+    "ridges": {
+     "runs": 48,
+     "invalid": 28
+    },
+    "rough": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 48,
+     "invalid": 34
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 4.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 928,
+   "invalid": 506,
+   "too_wide": 0,
+   "max_width": 2.805813188058523,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 60,
+     "invalid": 60
+    },
+    "anticone0": {
+     "runs": 60,
+     "invalid": 60
+    },
+    "cone": {
+     "runs": 60,
+     "invalid": 60
+    },
+    "anticone": {
+     "runs": 60,
+     "invalid": 60
+    },
+    "dip": {
+     "runs": 60,
+     "invalid": 24
+    },
+    "outer_dip": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 56,
+     "invalid": 56
+    },
+    "outer_plateau": {
+     "runs": 56,
+     "invalid": 8
+    },
+    "linear": {
+     "runs": 56,
+     "invalid": 56
+    },
+    "wells": {
+     "runs": 56,
+     "invalid": 49
+    },
+    "ridges": {
+     "runs": 56,
+     "invalid": 32
+    },
+    "rough": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 56,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 56,
+     "invalid": 41
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 8.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 984,
+   "invalid": 524,
+   "too_wide": 0,
+   "max_width": 2.793554112468602,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 64,
+     "invalid": 64
+    },
+    "anticone0": {
+     "runs": 64,
+     "invalid": 64
+    },
+    "cone": {
+     "runs": 64,
+     "invalid": 64
+    },
+    "anticone": {
+     "runs": 64,
+     "invalid": 64
+    },
+    "dip": {
+     "runs": 64,
+     "invalid": 8
+    },
+    "outer_dip": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 60,
+     "invalid": 60
+    },
+    "outer_plateau": {
+     "runs": 60,
+     "invalid": 8
+    },
+    "linear": {
+     "runs": 60,
+     "invalid": 60
+    },
+    "wells": {
+     "runs": 60,
+     "invalid": 45
+    },
+    "ridges": {
+     "runs": 60,
+     "invalid": 34
+    },
+    "rough": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 60,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 60,
+     "invalid": 53
+    }
+   }
+  },
+  {
+   "slopes": [
+    4.0,
+    4.0,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25,
+    0.25
+   ],
+   "x": 14.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 1064,
+   "invalid": 550,
+   "too_wide": 0,
+   "max_width": 2.7554037933066065,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 68,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 68,
+     "invalid": 68
+    },
+    "anticone0": {
+     "runs": 68,
+     "invalid": 68
+    },
+    "cone": {
+     "runs": 68,
+     "invalid": 68
+    },
+    "anticone": {
+     "runs": 68,
+     "invalid": 68
+    },
+    "dip": {
+     "runs": 68,
+     "invalid": 12
+    },
+    "outer_dip": {
+     "runs": 68,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 68,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 68,
+     "invalid": 68
+    },
+    "outer_plateau": {
+     "runs": 68,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 64,
+     "invalid": 64
+    },
+    "wells": {
+     "runs": 64,
+     "invalid": 39
+    },
+    "ridges": {
+     "runs": 64,
+     "invalid": 42
+    },
+    "rough": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 64,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 64,
+     "invalid": 49
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 1.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 273,
+   "M": 385,
+   "r_star": 10,
+   "runs": 484,
+   "invalid": 340,
+   "too_wide": 0,
+   "max_width": 0.8449101762770961,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 32,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "anticone0": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "cone": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "anticone": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "dip": {
+     "runs": 32,
+     "invalid": 8
+    },
+    "outer_dip": {
+     "runs": 32,
+     "invalid": 16
+    },
+    "outer_set": {
+     "runs": 32,
+     "invalid": 16
+    },
+    "outer_cone": {
+     "runs": 32,
+     "invalid": 32
+    },
+    "outer_plateau": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "linear": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "wells": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "ridges": {
+     "runs": 28,
+     "invalid": 28
+    },
+    "rough": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 28,
+     "invalid": 28
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 2.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 91,
+   "M": 170,
+   "r_star": 14,
+   "runs": 428,
+   "invalid": 33,
+   "too_wide": 0,
+   "max_width": 1.480646607243047,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 28,
+     "invalid": 5
+    },
+    "anticone0": {
+     "runs": 28,
+     "invalid": 6
+    },
+    "cone": {
+     "runs": 28,
+     "invalid": 1
+    },
+    "anticone": {
+     "runs": 28,
+     "invalid": 4
+    },
+    "dip": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 28,
+     "invalid": 5
+    },
+    "outer_plateau": {
+     "runs": 28,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 28,
+     "invalid": 6
+    },
+    "wells": {
+     "runs": 24,
+     "invalid": 2
+    },
+    "ridges": {
+     "runs": 24,
+     "invalid": 2
+    },
+    "rough": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 24,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 24,
+     "invalid": 2
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 4.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 14,
+   "runs": 288,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.5656794584011053,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 20,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 16,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 8.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 14,
+   "runs": 256,
+   "invalid": 1,
+   "too_wide": 0,
+   "max_width": 1.5684216180442148,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 16,
+     "invalid": 1
+    },
+    "outer_plateau": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 16,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1,
+    0.9,
+    0.7,
+    0.5,
+    0.3,
+    0.1
+   ],
+   "x": 14.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 14,
+   "runs": 228,
+   "invalid": 2,
+   "too_wide": 0,
+   "max_width": 1.5721036023226636,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 16,
+     "invalid": 1
+    },
+    "anticone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 12,
+     "invalid": 1
+    },
+    "wells": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 12,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 1.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 273,
+   "M": 362,
+   "r_star": 13,
+   "runs": 660,
+   "invalid": 368,
+   "too_wide": 0,
+   "max_width": 0.7443226687125588,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 44,
+     "invalid": 44
+    },
+    "anticone0": {
+     "runs": 44,
+     "invalid": 44
+    },
+    "cone": {
+     "runs": 44,
+     "invalid": 44
+    },
+    "anticone": {
+     "runs": 44,
+     "invalid": 44
+    },
+    "dip": {
+     "runs": 40,
+     "invalid": 20
+    },
+    "outer_dip": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "outer_plateau": {
+     "runs": 40,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 40,
+     "invalid": 40
+    },
+    "wells": {
+     "runs": 40,
+     "invalid": 20
+    },
+    "ridges": {
+     "runs": 40,
+     "invalid": 36
+    },
+    "rough": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 40,
+     "invalid": 32
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 2.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 91,
+   "M": 170,
+   "r_star": 13,
+   "runs": 692,
+   "invalid": 323,
+   "too_wide": 0,
+   "max_width": 1.3810882242228786,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 44,
+     "invalid": 37
+    },
+    "anticone0": {
+     "runs": 44,
+     "invalid": 32
+    },
+    "cone": {
+     "runs": 44,
+     "invalid": 36
+    },
+    "anticone": {
+     "runs": 44,
+     "invalid": 35
+    },
+    "dip": {
+     "runs": 44,
+     "invalid": 24
+    },
+    "outer_dip": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 44,
+     "invalid": 36
+    },
+    "outer_plateau": {
+     "runs": 44,
+     "invalid": 6
+    },
+    "linear": {
+     "runs": 44,
+     "invalid": 30
+    },
+    "wells": {
+     "runs": 44,
+     "invalid": 25
+    },
+    "ridges": {
+     "runs": 44,
+     "invalid": 37
+    },
+    "rough": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 40,
+     "invalid": 25
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 4.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 728,
+   "invalid": 190,
+   "too_wide": 0,
+   "max_width": 1.5119390743687404,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 48,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 48,
+     "invalid": 27
+    },
+    "anticone0": {
+     "runs": 48,
+     "invalid": 17
+    },
+    "cone": {
+     "runs": 48,
+     "invalid": 23
+    },
+    "anticone": {
+     "runs": 48,
+     "invalid": 22
+    },
+    "dip": {
+     "runs": 48,
+     "invalid": 16
+    },
+    "outer_dip": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 44,
+     "invalid": 15
+    },
+    "outer_plateau": {
+     "runs": 44,
+     "invalid": 4
+    },
+    "linear": {
+     "runs": 44,
+     "invalid": 22
+    },
+    "wells": {
+     "runs": 44,
+     "invalid": 9
+    },
+    "ridges": {
+     "runs": 44,
+     "invalid": 15
+    },
+    "rough": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 44,
+     "invalid": 20
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 8.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 676,
+   "invalid": 165,
+   "too_wide": 0,
+   "max_width": 1.4886711228735452,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 44,
+     "invalid": 22
+    },
+    "anticone0": {
+     "runs": 44,
+     "invalid": 21
+    },
+    "cone": {
+     "runs": 44,
+     "invalid": 19
+    },
+    "anticone": {
+     "runs": 44,
+     "invalid": 21
+    },
+    "dip": {
+     "runs": 44,
+     "invalid": 6
+    },
+    "outer_dip": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 44,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 44,
+     "invalid": 23
+    },
+    "outer_plateau": {
+     "runs": 40,
+     "invalid": 2
+    },
+    "linear": {
+     "runs": 40,
+     "invalid": 15
+    },
+    "wells": {
+     "runs": 40,
+     "invalid": 4
+    },
+    "ridges": {
+     "runs": 40,
+     "invalid": 16
+    },
+    "rough": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 40,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 40,
+     "invalid": 16
+    }
+   }
+  },
+  {
+   "slopes": [
+    6.0,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "x": 14.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 13,
+   "runs": 572,
+   "invalid": 136,
+   "too_wide": 0,
+   "max_width": 1.4801475703190292,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "flat": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 36,
+     "invalid": 19
+    },
+    "anticone0": {
+     "runs": 36,
+     "invalid": 18
+    },
+    "cone": {
+     "runs": 36,
+     "invalid": 18
+    },
+    "anticone": {
+     "runs": 36,
+     "invalid": 19
+    },
+    "dip": {
+     "runs": 36,
+     "invalid": 1
+    },
+    "outer_dip": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 36,
+     "invalid": 13
+    },
+    "outer_plateau": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 36,
+     "invalid": 16
+    },
+    "wells": {
+     "runs": 36,
+     "invalid": 7
+    },
+    "ridges": {
+     "runs": 36,
+     "invalid": 13
+    },
+    "rough": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 36,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 32,
+     "invalid": 12
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 1.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 273,
+   "M": 1393799,
+   "r_star": 1,
+   "runs": 12,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 0.5414537968023687,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 2.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 91,
+   "M": 80931,
+   "r_star": 2,
+   "runs": 100,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 1.1149619933707289,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 4,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 4,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 4.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 1504,
+   "r_star": 5,
+   "runs": 208,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 2.173557381951783,
+   "class_violation": 5.662137425588298e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 16,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 12,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 8.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 165,
+   "r_star": 11,
+   "runs": 172,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 6.324393047533247,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  },
+  {
+   "slopes": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9,
+    0.9
+   ],
+   "x": 14.0,
+   "tables": "CONTROL: smallest slope",
+   "K": 79,
+   "M": 159,
+   "r_star": 15,
+   "runs": 156,
+   "invalid": 0,
+   "too_wide": 0,
+   "max_width": 8.08275621973762,
+   "class_violation": 5.662137425588298e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone0": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "cone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "anticone": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_dip": {
+     "runs": 12,
+     "invalid": 0
+    },
+    "outer_set": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_cone": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "outer_plateau": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "linear": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "wells": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "ridges": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "rough_up": {
+     "runs": 8,
+     "invalid": 0
+    },
+    "twofibre": {
+     "runs": 8,
+     "invalid": 0
+    }
+   }
+  }
+ ],
+ "seconds": 268.17393231391907
+}

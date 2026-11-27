@@ -29,3 +29,25 @@ X-001 (audit replication of the theory branch at four heads: `AUDIT PASSED` each
 X-003 (uniform-cube hitting numbers), ED-8 (the defect of NumPy's binomial
 sampler, measured inside X-006b), X-008 (type-class ball exponents to `n = 10 000`): see
 `../EXPERIMENT_REGISTER.md`.
+
+
+## Results of checkpoint 6 (2026-11-26/27)
+
+| campaign, stage | what was measured | where |
+|---|---|---|
+| BM-1, stages B–E (X-011) | the certified recursion to six levels at `n ≤ 16 000`; the share of each level's asymptotic gain that the certified designs keep (`0.81 / 0.86 / 0.23` for levels 3 / 4 / 5 at `n = 16 000`); designs chosen by certified cost against flat-tuned designs on searched instances at three slopes; literal three-level runs; a portfolio.  Fourteen hypotheses fixed in advance; H3 and part of H13 failed, H9 was refuted at one slope and size, H5 in its lower half | ENG-RES-0015; `benchmarks/protocols/BM-1_X-011.md` |
+| BM-1, a correction (X-005c) | the worst product instance at `n ≤ 500` after the science division's review: 81 of 108 cells higher, up to `0.026·na`; three rounds, not converged to `10⁻⁴·na`; bound and product instance coincide in 107 cells after cross-evaluation | ENG-RES-0017 |
+| BM-2, stages A–B (X-012) | an independent exact checker of "shares at the leaves": nine files, 27 controls, no unsound acceptance; a defect found in another division's reference checker | `experiments/eng/leafcert/REPORT.md`; SCI-RES-0030 |
+| BM-6, stage A–B (X-013) | exact vertex enumeration of weighted cubes; what blocks of four and five decide | `experiments/eng/weighted_cube/REPORT.md`; SCI-RES-0033 |
+| BM-6, stages A–C (X-014) | site-dependent slopes: certified bounds on 75 mixtures, mixed blocks, a binned profile; literal runs; an adversarial review inside the division (224 577 runs of the referee's simulator, no violation) | ENG-RES-0016; `experiments/eng/review_x014/REPORT.md` |
+| BM-7, first review (X-016) | the structural-biology division's certificate core at its first commit: 22 472 adversarial claims, three checkers in agreement, no false acceptance; the producer exact on every instance solved independently; three findings as software | ENG-RES-0018 |
+| replication for the theory division (X-015) | Proposition 11.121 (a false certificate under unbounded influence) by a third implementation: invalid in 360 of 360 runs with the assumed class, valid in 72 of 72 with the true class | ENG-MSG-0007 §4 |
+| replication for the geometry division | GEOMETRY-REQ-0001 items 1, 3: the exact elimination and the exact ranks | `experiments/eng/geometry_req1/REPORT.md` |
+| in review | the rate of the level recursion on new instances (Q-13) | `experiments/eng/level_rate/REPORT.md` |
+
+Failed or negative outcomes of this checkpoint, in one place: a published conclusion
+withdrawn (ENG-RES-0014 §4); a search that did not converge (X-005c); two of our own
+predictions wrong (H3, H13) and one refuted at one slope (H9); weak negative controls
+and a simulator without a tie rule (found by our referee before publication); a job that
+cost more than its stated worst case (M-022); a library that changes the rounding mode
+of the process (found by a failing test).

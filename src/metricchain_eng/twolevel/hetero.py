@@ -511,11 +511,21 @@ class HSearch:
 # ---------------------------------------------------------------------------------------------
 # Lower bound (3) and asymptotic exponents (4)
 # ---------------------------------------------------------------------------------------------
+MAX_SHELLS = 30_000_000        # two float arrays of this length plus the sort: about 1 GiB
+
+
 def weighted_shells(B: Block):
     """(distances, ln counts) of the weighted Hamming distance from a point, sorted by distance: for every vector of
     flips per type (j_1, ..., j_m) the distance sum u_t j_t and the number prod C(n_t, j_t) of points."""
     from scipy.special import gammaln
 
+    n_shells = 1
+    for _, n in B:
+        n_shells *= n + 1
+    if n_shells > MAX_SHELLS:
+        # the number of shells is the product of (n_t + 1) over the site types: four types of 300 sites are 8e9 shells
+        # and took the machine down on 2026-11-26 (a referee's stress test); bin the slopes first
+        raise ValueError(f"{n_shells:.3g} weighted shells exceed the limit of {MAX_SHELLS:.3g}: too many site types of this size")
     dist = np.zeros(1)
     lcnt = np.zeros(1)
     for u, n in B:

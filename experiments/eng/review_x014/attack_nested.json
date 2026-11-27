@@ -1,0 +1,1417 @@
+{
+ "summary": {
+  "configurations": 10,
+  "skipped": 0,
+  "runs": 3744,
+  "closed": 3744,
+  "invalid": 0,
+  "too_wide": 0,
+  "aborted": 0,
+  "over_budget": 0,
+  "mid_runs": 109104,
+  "mid_aborts": 0,
+  "mid_invalid": 0,
+  "mid_too_wide": 0,
+  "mid_over_budget": 0,
+  "mid_inverted": 0,
+  "max_lq_thm_minus_lCmax": -14.880771861337294,
+  "min_slack_width": 0.23083864264933318
+ },
+ "rows": [
+  {
+   "config": 0,
+   "sizes": [
+    5,
+    4,
+    3
+   ],
+   "slopes": [
+    0.1,
+    3.0,
+    1.0
+   ],
+   "b_top": 2.5,
+   "seed": 4242,
+   "x_out": 4.817951058100373,
+   "lCmax": 37.19991758396713,
+   "K_top": 211,
+   "J_top": 37,
+   "top_ladder": [
+    30.0,
+    16.11854897735313,
+    8.660254037844386,
+    4.653024295510498,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 5.4,
+     "x_out": 7.717950984898904,
+     "K": 499,
+     "J": 39,
+     "l_inv_delta": 18.815745491711724
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 5.4,
+     "x_out": 7.717950984898904,
+     "K": 499,
+     "J": 39,
+     "l_inv_delta": 18.815745491711724
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 2.335073195136579,
+     "x_out": 4.653024294510498,
+     "K": 498,
+     "J": 36,
+     "l_inv_delta": 18.815745491711724
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.529204002110638,
+     "x_out": 2.4999999990000012,
+     "K": 1737,
+     "J": 138,
+     "l_inv_delta": 18.815745491711724
+    }
+   ],
+   "runs": 23,
+   "closed": 23,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 2816,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 3.723026651094388,
+   "max_lq_thm": 20.58806810474893,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 2,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 2,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 2,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 2,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 2,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 2,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 2,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 1,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 1,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 1,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 1,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 1,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 1,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 1,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 1,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 1,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 148.96869230270386
+  },
+  {
+   "config": 1,
+   "sizes": [
+    4,
+    4,
+    4
+   ],
+   "slopes": [
+    3.0,
+    0.2,
+    1.0
+   ],
+   "b_top": 2.5,
+   "seed": 4273,
+   "x_out": 4.817951015282395,
+   "lCmax": 36.990803302926295,
+   "K_top": 218,
+   "J_top": 39,
+   "top_ladder": [
+    9.6,
+    6.857857031277119,
+    4.898979485566357,
+    3.4996355115805833,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 4.539848235437608,
+     "x_out": 6.857857030277176,
+     "K": 541,
+     "J": 17,
+     "l_inv_delta": 22.333662919897442
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 2.5806184420618563,
+     "x_out": 4.898979484566767,
+     "K": 537,
+     "J": 15,
+     "l_inv_delta": 22.333662919897442
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.1800216924405436,
+     "x_out": 3.4996355105822445,
+     "K": 536,
+     "J": 14,
+     "l_inv_delta": 22.333662919897442
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.5246801514319386,
+     "x_out": 2.4999999990045145,
+     "K": 1870,
+     "J": 56,
+     "l_inv_delta": 22.333662919897442
+    }
+   ],
+   "runs": 398,
+   "closed": 398,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 14294,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 4.587112372633062,
+   "max_lq_thm": 21.300277765633293,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 25,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 25,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 25,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 25,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 25,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 25,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 25,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 25,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 25,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 25,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 25,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 25,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 25,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 25,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 24,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 24,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 144.24318957328796
+  },
+  {
+   "config": 2,
+   "sizes": [
+    6,
+    3,
+    2
+   ],
+   "slopes": [
+    0.5,
+    0.05,
+    4.0
+   ],
+   "b_top": 2.5,
+   "seed": 4304,
+   "x_out": 4.817952776149704,
+   "lCmax": 34.01066654641881,
+   "K_top": 209,
+   "J_top": 29,
+   "top_ladder": [
+    16.3,
+    10.200599711715494,
+    6.383572667401852,
+    3.994863160172653,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 7.882648686864129,
+     "x_out": 10.200599710715494,
+     "K": 520,
+     "J": 27,
+     "l_inv_delta": 20.751057068126016
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 4.065619661241983,
+     "x_out": 6.383572666401854,
+     "K": 517,
+     "J": 23,
+     "l_inv_delta": 20.751057068126016
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.6768900989197162,
+     "x_out": 3.994863159172675,
+     "K": 516,
+     "J": 21,
+     "l_inv_delta": 20.751057068126016
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.52910657937871,
+     "x_out": 2.499999999000099,
+     "K": 1791,
+     "J": 80,
+     "l_inv_delta": 20.751057068126016
+    }
+   ],
+   "runs": 100,
+   "closed": 100,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 17296,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 4.369384516370204,
+   "max_lq_thm": 19.129894685081517,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 7,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 7,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 7,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 7,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 6,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 6,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 6,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 6,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 6,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 6,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 6,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 6,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 6,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 6,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 6,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 6,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 145.63701057434082
+  },
+  {
+   "config": 3,
+   "sizes": [
+    3,
+    5,
+    3
+   ],
+   "slopes": [
+    2.0,
+    1.0,
+    0.1
+   ],
+   "b_top": 2.5,
+   "seed": 4335,
+   "x_out": 4.817955207993804,
+   "lCmax": 38.574179728518295,
+   "K_top": 210,
+   "J_top": 28,
+   "top_ladder": [
+    10.6,
+    7.386937101886756,
+    5.1478150704935,
+    3.587413786592474,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 0.5399999999999997,
+     "x_out": 2.8601640402228106,
+     "K": 525,
+     "J": 15,
+     "l_inv_delta": 21.281544583138412
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 0.5399999999999997,
+     "x_out": 2.8601640402228106,
+     "K": 525,
+     "J": 15,
+     "l_inv_delta": 21.281544583138412
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 0.5399999999999997,
+     "x_out": 2.8601640402228106,
+     "K": 525,
+     "J": 15,
+     "l_inv_delta": 21.281544583138412
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 0.5399999999999997,
+     "x_out": 1.5192807566998916,
+     "K": 1831,
+     "J": 59,
+     "l_inv_delta": 21.281544583138412
+    }
+   ],
+   "runs": 1700,
+   "closed": 1700,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 13620,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 4.528768935931701,
+   "max_lq_thm": 20.090661119533852,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 107,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 107,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 107,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 107,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 106,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 106,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 106,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 106,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 106,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 106,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 106,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 106,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 106,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 106,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 106,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 106,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 144.03241086006165
+  },
+  {
+   "config": 4,
+   "sizes": [
+    7,
+    2,
+    2
+   ],
+   "slopes": [
+    1.0,
+    5.0,
+    0.3
+   ],
+   "b_top": 2.5,
+   "seed": 4366,
+   "x_out": 4.817950992963097,
+   "lCmax": 41.299616097265414,
+   "K_top": 221,
+   "J_top": 43,
+   "top_ladder": [
+    21.2,
+    12.423297857362472,
+    7.280109889280518,
+    4.266177999474623,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.0799999999999994,
+     "x_out": 3.3979553198632417,
+     "K": 578,
+     "J": 24,
+     "l_inv_delta": 23.82893509955032
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.0799999999999994,
+     "x_out": 3.3979553198632417,
+     "K": 578,
+     "J": 24,
+     "l_inv_delta": 23.82893509955032
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.0799999999999994,
+     "x_out": 3.3979553198632417,
+     "K": 578,
+     "J": 24,
+     "l_inv_delta": 23.82893509955032
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.0799999999999994,
+     "x_out": 2.050811658678024,
+     "K": 2016,
+     "J": 95,
+     "l_inv_delta": 23.82893509955032
+    }
+   ],
+   "runs": 172,
+   "closed": 172,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 25367,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 4.531612221951363,
+   "max_lq_thm": 20.933074350544384,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 11,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 11,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 11,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 11,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 11,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 11,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 11,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 11,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 11,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 11,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 11,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 11,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 10,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 10,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 10,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 10,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 144.66731667518616
+  },
+  {
+   "config": 5,
+   "sizes": [
+    2,
+    6,
+    3
+   ],
+   "slopes": [
+    1.5,
+    0.4,
+    2.2
+   ],
+   "b_top": 2.5,
+   "seed": 4397,
+   "x_out": 4.817953263481659,
+   "lCmax": 36.09718027825111,
+   "K_top": 209,
+   "J_top": 28,
+   "top_ladder": [
+    18.0,
+    10.98852450445412,
+    6.708203932499369,
+    4.0951812940636,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 8.670573488294044,
+     "x_out": 10.98852450345412,
+     "K": 522,
+     "J": 31,
+     "l_inv_delta": 20.58362412382581
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 4.3902503605624545,
+     "x_out": 6.708203931499373,
+     "K": 520,
+     "J": 27,
+     "l_inv_delta": 20.58362412382581
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.7771949626466286,
+     "x_out": 4.095181293063636,
+     "K": 517,
+     "J": 24,
+     "l_inv_delta": 20.58362412382581
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.5290307704349617,
+     "x_out": 2.4999999990001744,
+     "K": 1806,
+     "J": 95,
+     "l_inv_delta": 20.58362412382581
+    }
+   ],
+   "runs": 227,
+   "closed": 227,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 3053,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 4.454080124118313,
+   "max_lq_thm": 21.0929078656678,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 15,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 15,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 15,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 14,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 14,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 14,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 14,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 14,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 14,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 14,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 14,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 14,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 14,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 14,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 14,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 14,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 144.32723188400269
+  },
+  {
+   "config": 6,
+   "sizes": [
+    5,
+    5,
+    2
+   ],
+   "slopes": [
+    0.3,
+    1.0,
+    6.0
+   ],
+   "b_top": 1.0,
+   "seed": 4428,
+   "x_out": 3.3179509971114904,
+   "lCmax": 37.36466080670025,
+   "K_top": 214,
+   "J_top": 42,
+   "top_ladder": [
+    34.0,
+    14.080211803262769,
+    5.830951894845301,
+    2.414736402766418,
+    1.0
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 11.762260822965509,
+     "x_out": 14.08021180226277,
+     "K": 518,
+     "J": 50,
+     "l_inv_delta": 19.61487581147005
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 3.513000911316939,
+     "x_out": 5.830951893845301,
+     "K": 514,
+     "J": 41,
+     "l_inv_delta": 19.61487581147005
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.4439413404226995,
+     "x_out": 2.414736401766419,
+     "K": 1789,
+     "J": 156,
+     "l_inv_delta": 19.61487581147005
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 0.029204631021260447,
+     "x_out": 0.9999999990000006,
+     "K": 1787,
+     "J": 150,
+     "l_inv_delta": 19.61487581147005
+    }
+   ],
+   "runs": 7,
+   "closed": 7,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 844,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 2.487595780556047,
+   "max_lq_thm": 21.30370115736359,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 1,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 1,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 1,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 1,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 1,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 1,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 1,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 155.39184379577637
+  },
+  {
+   "config": 7,
+   "sizes": [
+    4,
+    3,
+    5
+   ],
+   "slopes": [
+    1.0,
+    0.1,
+    0.5
+   ],
+   "b_top": 4.0,
+   "seed": 4459,
+   "x_out": 6.317982754562991,
+   "lCmax": 35.38984955260826,
+   "K_top": 205,
+   "J_top": 21,
+   "top_ladder": [
+    5.6,
+    5.148207205259543,
+    4.732863826479693,
+    4.351029223749109,
+    4.0
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 2.8290326677883844,
+     "x_out": 5.148207204260767,
+     "K": 507,
+     "J": 11,
+     "l_inv_delta": 20.981193654931197
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 2.4130587062836435,
+     "x_out": 4.7328638254815445,
+     "K": 507,
+     "J": 11,
+     "l_inv_delta": 20.981193654931197
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 2.0303608122956835,
+     "x_out": 4.351029222751823,
+     "K": 506,
+     "J": 10,
+     "l_inv_delta": 20.981193654931197
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.6781866210625638,
+     "x_out": 3.999999999003855,
+     "K": 506,
+     "J": 10,
+     "l_inv_delta": 20.981193654931197
+    }
+   ],
+   "runs": 900,
+   "closed": 900,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 14392,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 5.914562541069677,
+   "max_lq_thm": 19.900088694592146,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 57,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 57,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 57,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 57,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 56,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 56,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 56,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 56,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 56,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 56,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 56,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 56,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 56,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 56,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 56,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 56,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 144.0780074596405
+  },
+  {
+   "config": 8,
+   "sizes": [
+    1,
+    6,
+    4
+   ],
+   "slopes": [
+    2.5,
+    0.7,
+    1.3
+   ],
+   "b_top": 2.5,
+   "seed": 4490,
+   "x_out": 4.817954505200775,
+   "lCmax": 37.73431368791751,
+   "K_top": 207,
+   "J_top": 27,
+   "top_ladder": [
+    18.799999999999997,
+    11.352810510509704,
+    6.855654600401044,
+    4.1399440214817655,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 9.034859496470151,
+     "x_out": 11.352810509509704,
+     "K": 512,
+     "J": 32,
+     "l_inv_delta": 19.845770164755155
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 4.537700591266261,
+     "x_out": 6.8556545994010465,
+     "K": 509,
+     "J": 28,
+     "l_inv_delta": 19.845770164755155
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.8219472582640217,
+     "x_out": 4.139944020481812,
+     "K": 507,
+     "J": 25,
+     "l_inv_delta": 19.845770164755155
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.5289690081232012,
+     "x_out": 2.4999999990002357,
+     "K": 1775,
+     "J": 98,
+     "l_inv_delta": 19.845770164755155
+    }
+   ],
+   "runs": 105,
+   "closed": 105,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 797,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 4.114257446267397,
+   "max_lq_thm": 22.79357896300195,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 7,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 7,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 7,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 7,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 7,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 6,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 6,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 6,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 6,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 6,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 6,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 6,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 144.18287229537964
+  },
+  {
+   "config": 9,
+   "sizes": [
+    6,
+    1,
+    4
+   ],
+   "slopes": [
+    0.8,
+    2.0,
+    0.6
+   ],
+   "b_top": 2.5,
+   "seed": 4521,
+   "x_out": 4.817978603185481,
+   "lCmax": 37.92625650211255,
+   "K_top": 211,
+   "J_top": 26,
+   "top_ladder": [
+    8.8,
+    6.424613504830169,
+    4.69041575982343,
+    3.4243305038443026,
+    2.5
+   ],
+   "mid": [
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 4.106565029456201,
+     "x_out": 6.424613503830267,
+     "K": 544,
+     "J": 14,
+     "l_inv_delta": 22.60113058303476
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 2.3719124045826594,
+     "x_out": 4.690415758823982,
+     "K": 541,
+     "J": 12,
+     "l_inv_delta": 22.60113058303476
+    },
+    {
+     "design": "lam=1, eta=1/2",
+     "b": 1.1044189030277527,
+     "x_out": 3.4243305028462614,
+     "K": 540,
+     "J": 11,
+     "l_inv_delta": 22.60113058303476
+    },
+    {
+     "design": "lam=eta=1/4",
+     "b": 1.5242565355950228,
+     "x_out": 2.4999999990049364,
+     "K": 1874,
+     "J": 45,
+     "l_inv_delta": 22.60113058303476
+    }
+   ],
+   "runs": 112,
+   "closed": 112,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "mid_runs": 16625,
+   "mid_aborts": 0,
+   "mid_invalid": 0,
+   "mid_too_wide": 0,
+   "mid_over_budget": 0,
+   "mid_inverted": 0,
+   "max_width": 4.4984251047047215,
+   "max_lq_thm": 21.747256714648007,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 7,
+     "bad": 0
+    },
+    "cone0": {
+     "runs": 7,
+     "bad": 0
+    },
+    "anticone0": {
+     "runs": 7,
+     "bad": 0
+    },
+    "cone": {
+     "runs": 7,
+     "bad": 0
+    },
+    "anticone": {
+     "runs": 7,
+     "bad": 0
+    },
+    "dip": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_dip": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_set": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_cone": {
+     "runs": 7,
+     "bad": 0
+    },
+    "outer_plateau": {
+     "runs": 7,
+     "bad": 0
+    },
+    "linear": {
+     "runs": 7,
+     "bad": 0
+    },
+    "wells": {
+     "runs": 7,
+     "bad": 0
+    },
+    "ridges": {
+     "runs": 7,
+     "bad": 0
+    },
+    "rough": {
+     "runs": 7,
+     "bad": 0
+    },
+    "rough_up": {
+     "runs": 7,
+     "bad": 0
+    },
+    "twofibre": {
+     "runs": 7,
+     "bad": 0
+    }
+   },
+   "examples": [],
+   "seconds": 144.8539490699768
+  }
+ ],
+ "seconds": 734.9244320392609
+}

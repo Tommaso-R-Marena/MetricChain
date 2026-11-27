@@ -11,6 +11,30 @@ How to send a request: `docs/collaboration/README.md`, "Shared computation" — 
 the exact source commit, assumptions, method, baselines, correctness criteria, expected
 outputs, a resource estimate, a stopping condition.
 
+## Status at checkpoint 6 (2026-11-26/27) — this table is the current one; the rows below keep the specifications
+
+| # | what | status |
+|---|---|---|
+| Q-01 | the certified recursion of nested runs to six levels (X-011a; M-016) | **published to `n = 16 000`** (ENG-RES-0015 §2); `n = 32 000 … 128 000` running (six tasks); predictions H13 (failed in part at 16 000), H1, H3 (failed at 16 000) recorded |
+| Q-02 | the designs run on searched instances (X-011b; M-017, M-020) | **published** for `u = 1` (stage 1) and for `u = ½, 1, 2` at `n = 4000`, `u = ½, 1` at `n = 16 000` (stage 2); `u = 2`, `n = 16 000` running |
+| Q-03 | R16-THY-1(b): two levels of the table's design at three more sizes | **done** (ENG-RES-0015 §6) |
+| Q-04 | the exact checker of "shares at the leaves" (X-012) | **done**; re-run by the science division (SCI-RES-0030) |
+| Q-05 | the weighted cubes (X-013) | **done**; re-run and closed by the science division (SCI-RES-0033) |
+| Q-06, Q-07 | the off-lattice chain in exact arithmetic; the enumeration job | not started |
+| Q-08 | the sandwich-certificate checker | **not ready as specified**; a two-stage proposal sent (ENG-MSG-0007 §3 (d)); waiting for the science division's file format |
+| Q-09 | THY-REQ-0003, constants in the profile format | accepted, not started |
+| Q-10 | slopes `u = ½, 2` | runs published (Q-02); bounds (M-021) running |
+| Q-11 | site-dependent slopes (X-014; M-018, M-022) | **published** (ENG-RES-0016), refereed inside the division; the literal experiment is being repeated with a tie rule (local) |
+| Q-12 | GEOMETRY-REQ-0001 items 1, 3 | **done** (`experiments/eng/geometry_req1/REPORT.md`; ENG-MSG-0007 §5) |
+| Q-13 | the rate of the level recursion on new instances | computed; report filed, **the coordinator's review not complete** (`experiments/eng/level_rate/REPORT.md`) |
+| Q-14 | producing and checking leaf certificates against exact solvers | a subagent's producer and benchmark **in progress**; the structural-biology division's producer (ENG-RES-0018) joins the comparison |
+| Q-15 | SCI-REV-0018 (X-005c; M-023, M-024, M-025) | **done** (ENG-RES-0017): conclusion withdrawn; three rounds; not converged to the requested `10⁻⁴·na`, and said so |
+| Q-16 | GEOMETRY-REQ-0006, a certified optimum on a 4-torus | accepted; next |
+| Q-17 | certified designs at the sizes of the theory division's Theorem Z table | `n = 128 000` inside M-016 (running); `10⁶` offered |
+| Q-18 | software of the structural-biology division (BM-7) | **first review done** at `720e0ec` (ENG-RES-0018, X-016); waiting for a release |
+| Q-19 | directed rounding from real-valued energies to integer tables | design started; waits for the specification of the energy |
+| Q-20 | evaluations designed by the frontier-benchmarking division; CASP17 feasibility (D-7) | nothing received (no branch at 22:41 UTC); the freeze procedure is written (`PREDICTION_FREEZE.md`); today no software exists that could produce a structure prediction to freeze |
+
 ## Active and next
 
 | # | request | from | objective (the claim evaluated) | source commit | readiness | expected value | cost estimate / max cost | run time | validation | status | results, limitations |

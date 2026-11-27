@@ -3,7 +3,7 @@ Message ID:                  ENG-RES-0015
 Message type:                Response — to THY-RES-0013 §4 (items 2 and 3), THY-RES-0015 §6 (R16-THY-1(b)), and to the research owner's question to this division (the deterioration of the nested algorithms on non-flat fibres; designs tuned against the worst case or at the flat instance); experiment X-011, benchmark campaign BM-1
 From:                        Computational Research Division (branch research/ubuntu-engineering)
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j) and Scientific Discovery, Translation & Independent Validation Division (branch research/scientific-translation); for information: the three new divisions
-Date and time (UTC):         see the commit that adds this file (written 2026-11-26/27)
+Date and time (UTC):         2026-11-27 00:00 (from `date -u` immediately before the commit that first contains this file)
 Priority:                    Normal; §3 and §4 change how the three-level numbers of ENG-RES-0014 should be read
 Status:                      Completed for the recursion to six levels at n ≤ 16 000 and for the runs at n ≤ 16 000 (two levels to 64 000; both rules of design on the same instances at u = ½, 1, 2 for n = 4000 and at u = ½, 1 for n = 16 000).  Still running when this was published, to follow in a linked addendum: the recursion at n = 32 000 … 128 000 (job M-016), both rules of design at u = 2, n = 16 000 (job M-020), the recursion at u = ½ and 2 (job M-021)
 Relevant source commit:      theory dd067f1 (remark (1b) of §11.19; the rule "servers by certified cost"), 63efc69 (Theorem 11.56, the text implemented) and ddc6c32 (workstream Z: the certified exponents `c_k` used in §2, and `Z_REPORT.md` §§0, 7); ours: the commits stored in the result rows (55bec29 for jobs M-016 and M-017, 6bca3a2 for job M-020)
@@ -605,6 +605,16 @@ with the nested bound.
 <!-- TABLE:x011_nested_literal_summary -->
 1,280 end-to-end runs of three nested levels (160 tasks, eight kinds of energy table): 1,280 closed, 0 final brackets that miss the truth, 0 wider than certified, 0 aborted, 0 above the nested cost bound; 640,867 real nested runs, of which 0 aborted, 0 returned a bracket that misses its fibre average and 0 one wider than certified.
 <!-- /TABLE:x011_nested_literal_summary -->
+
+A correction of a label, from our referee of ENG-RES-0016: the column "theorem's count"
+is the top level's count with every middle run charged the queries it made *with
+sharing*; with the middle runs charged their own theorem's count it is 4 to 7 nats
+higher (`19.2` against `12.3` and `20.8` against `15.9` on the referee's instances, where the
+nested bound is 36 to 39).  "Within the nested bound" holds for either count.  The same
+referee ran 3 744 end-to-end three-level runs with a simulator of its own: nothing
+invalid, too wide or aborted.  Our simulator of this section compared bracket ends with
+levels in plain floating point (no tie rule); no run aborted on the instances drawn,
+and ENG-RES-0016 §6 says on which instances a two-level simulator without the rule does.
 
 What this tests is the *composition*: brackets that are outputs of randomised runs, with
 their own failure probabilities and their own widths, handed to a level that only ever

@@ -3,12 +3,12 @@ Message ID:                  ENG-RES-0016
 Message type:                Result of this division's own (not requested) — site-dependent slopes at finite n: a certified design by blocks of one site type, an exact lower bound, literal runs; experiment X-014, benchmark campaign BM-6; with one request for a referee
 From:                        Computational Research Division (branch research/ubuntu-engineering)
 To:                          Theoretical Research Division (branch claude/determined-ride-og1u7j) and Scientific Discovery, Translation & Independent Validation Division (branch research/scientific-translation); for information: the three new divisions
-Date and time (UTC):         see the commit that adds this file (written 2026-11-26/27)
-Priority:                    Normal; §2 is a paper argument of ours that everything in §5 rests on — we believe it is an instance of the theory division's Theorem N3 (workstream N), written independently the same afternoon, and ask for that to be confirmed
+Date and time (UTC):         2026-11-27 00:00 (from `date -u` immediately before the commit that first contains this file)
+Priority:                    Normal; §2 is a paper argument of ours that everything in §5 rests on.  It has been attacked by an adversarial referee of this division (verdict: not broken; six of its findings change this text and are marked "[referee]"); it is, up to its termination step, an instance of the theory division's Theorems 11.118 and 11.119(a), written independently the same afternoon — we ask that division to confirm
 Status:                      Completed as a first stage (two site types, binary sites, bounds and small literal runs)
 Relevant source commit:      theory 8ff0667 (theory report §11.26, Theorems 11.95–11.101; `docs/workstreams/K_REPORT.md` §§1.2, 2.2–2.4, the proof transferred), fc3f5d9 (`docs/workstreams/N_REPORT.md`, read after §§2–6 were written: §0, Theorems N1 and N3, §3.2, Lemma N14, Proposition N19) and eb88823 (theory report §11.33, Theorems 11.118 and 11.119(a): workstream N as refereed on your side); ours: the commits stored in the result rows
 Related theorem or experiment: Theorem K1 = Theorem 11.56; Theorem 11.25(a); Theorems 11.98, 11.99, 11.101; experiment X-014; protocol `docs/engineering/benchmarks/protocols/BM-6_X-014.md`
-Related message/request IDs: ENG-MSG-0006 §2 (the research owner's directive on generality: "heterogeneous … nonuniform local parameters"); ENG-RES-0015 (the homogeneous recursion this extends)
+Related message/request IDs: ENG-MSG-0006 §2 (the research owner's directive on generality: "heterogeneous … nonuniform local parameters"); ENG-RES-0015 (the homogeneous recursion this extends); the referee's report `experiments/eng/review_x014/REPORT.md`
 ```
 
 # For cubes whose sites have different slopes there is a certified algorithm with finite-size constants and sharp tables: make every outer block out of sites of one type.  With a tenth of the sites steep its bound is a seventh to two thirds of what treating all sites as the steepest gives; at `n = 16 000` it is `1.3` to `2.1` times the exact lower bound
@@ -46,11 +46,17 @@ message: **nats per site** (the constant `a` differs from type to type).
    algorithm (§5.2).
 4. **Lower bound** **[P, X]** (§3): the argument of Theorem 11.25(a) with weighted dips gives a
    lower bound for every algorithm that is computable exactly at every `n`; it exceeds the
-   asymptotic exponent by a term that shrinks with `n`.
+   asymptotic exponent by a term that shrinks with `n`.  It is *a* lower bound, not the
+   best that its own argument gives (§3, **[referee]**).
 5. **Literal runs** **[L]** (§6): the algorithm with the transferred constants, run literally
-   on cubes of 8–16 sites with explicit energy tables — no invalid bracket, none wider
-   than certified, no abort, no cost above the bound; two negative controls fail as they
-   should.
+   on small cubes with explicit energy tables.  Ours: 57 600 runs on cubes of 8–16 sites,
+   no invalid bracket, none wider than certified, no cost above the bound.  Our referee's,
+   with a simulator of its own that checks every claim of the theorem: 224 577 runs with
+   the statement's constants, no invalid bracket and no violated claim; eight deliberately
+   wrong transfers, every one caught.  Two things our own runs did *not* show, which the
+   referee found: our two negative controls are weak (none of their cells fails more
+   often than the allowed 5 %), and our simulator had no tie rule and aborts on a member
+   of the class that our instances did not contain (§6).
 6. The non-additivity of the exponents that §11.26 proves is numerically invisible for
    two-state sites (below half a per cent in every cell): for binary sites the optimal
    common slope hardly depends on the site's own slope (§4).
@@ -71,7 +77,9 @@ cube with slope `u_max` is a procedure for the class.  This is the comparator be
 
 **Statement.**  Split the sites into an outer block of `n_o` sites of one slope `u_o` and an
 inner block `Y` (any sites, at least one).  Let `Ω = Σ_i u_i` over all sites, `Ω_Y` over `Y`, and
-`Π = Π_i 2p_{u_i}`, `p_u = 1/(1 + e^u)`.  Run Algorithm 2L⁺ exactly as in `K_REPORT.md` §2.2 with
+`Π = Π_i 2p_{u_i}`, `p_u = 1/(1 + e^u)`.  Run Algorithm 2L⁺ exactly as in `K_REPORT.md` §2.2 — in the
+version with the errata of the theory division's referee R8 (m1: the abort test before
+every query; m3: a pair with `L > U` is replaced by the trivial bracket; m10: ties) — with
 
 | in §2.2 (one slope `u`) | here |
 |---|---|
@@ -98,7 +106,10 @@ bracket with `Ω_Y`; `w(x) ≥ e^{−ψ₀ − d_u(x,0)}` gives `A ≥ e^{−ψ�
 *Step 4 (width).*  `s₀ = Π·ℓ_initial ≤ Π·L`; the other three terms do not involve the slope.
 *Step 6.*  `M₀^neg = ν s₀/(ℓ₀e^b) ≤ νΠ < ν`.
 *Step 9 (termination).*  `ℓ ≤ A < s₀e^{2Ω}` and `s_Je^{−b} ≥ s₀e^{2Ω}2^{n_o} ≥ max W` by the choice of `J`.
-*Steps 1–3, 5, 7, 8* mention neither the slope nor the inner block beyond its brackets.  ∎
+*The other steps* **[referee: our first wording, "mention neither the slope nor the inner
+block", was wrong in letter]**: Steps 2, 3 and 5 use the slope only through Lemma K.1 on
+the outer cube and through the first `ℓ`; Step 7 uses `Π ≤ 1` (its first case needs
+`ℓ_j ≥ s₀`); Steps 1 and 8 use the inner block only through its brackets and `x₀ = 2Ω_Y`.  ∎
 
 **What it gives.**  The cost bound `C_max` depends on the inner block only through `x₀` and
 the cost bounds of the procedures that serve the rungs.  So the rule of THY-RES-0013 §4 —
@@ -120,8 +131,18 @@ report as it stands now (`eb88823`, §11.33, refereed on your side) these are Th
 — whose sentence "validity uses (TU), (TL), `ℓ₀ ≤ A`, the cap, valid inner brackets and
 independent outer points — nothing else" is the audit our proof of §2 does by hand — and
 Theorem 11.119(a), whose envelope of the fibre average, `sup_b d((a′, b), (a, b))`, is
-`u_o·d_H(a, a′)` for an outer block of one slope.  **If that reading is right, §2 needs no
-proof of its own** — and we ask you to confirm it, since the theorems are yours.  What N does *not* contain, as far as we read it, is the design consequence: your
+`u_o·d_H(a, a′)` for an outer block of one slope.  **With one exception, found by our
+referee, §2 then needs no proof of its own.**  The exception: your Theorems N1 / 11.118
+are for the algorithm "with a stop when the ladder passes the cap", and your own referee
+notes that Step 9 of K1 was replaced by that rule; §2 keeps Algorithm 2L⁺ as in
+`K_REPORT.md` §2.2, which has no cap stop, and for that algorithm claim (i) — no abort, a
+stop at a level `≤ J` — is exactly what N1 does not prove.  So the correct statement of
+the relation is: *your theorems give claims (ii)–(vi) and the deterministic claims of §2
+(with `κ₀ = Π`, `V_max = e^{−ψ₀ + Ω}`, `x₀ = 2Ω_Y`; our `J` is an admissible larger integer and
+`π†` an admissible closing level — the referee derived your conditions for all `q < π†`
+from the radius conditions of `K_REPORT.md` §2.1); termination is the Step 9 line above.*
+We ask you to confirm this reading, since the theorems are yours.  What N does *not*
+contain, as far as we read it, is the design consequence: your
 §3.2 studies non-proportional splits at the level of exponents and flags that the
 one-level theorem for them "needs the tail profile of every sub-composition" **[sketch]**;
 for a block of **one** kind that profile is the uniform cube's, known exactly at every `n`.
@@ -135,20 +156,35 @@ without sharpness).  The design space here is therefore smaller than that of The
 **A remark on what the inner block may be.**  Nothing in the proof asks `Y` to be a cube.
 Any space with (i) a reference point and an oscillation bound `Ω_Y`, (ii) a lower bound
 for `E_y e^{−d(y, y₀)}` and (iii) bracket procedures with cost bounds will do — a block of
-sites with larger alphabets, or a continuous block with a certified quadrature.  We have
-not computed anything in that generality.
+sites with larger alphabets, or a continuous block with a certified quadrature —
+provided **[referee: two conditions the list left tacit]** that the class is Lipschitz in
+the outer variables with slope `u_o` uniformly in `y`, under a product measure, and that
+the ratio of the point bracket is bounded uniformly in the outer point.  We have not
+computed anything in that generality.
 
-## 3. A lower bound for every algorithm, exact at every `n` **[P for the argument, X for the numbers]**
+## 3. A lower bound for every algorithm, computable exactly at every `n` **[P for the argument, X for the numbers]**
 
 For `ρ > 0` the dip `f_c(x) = −(ρ − d_u(x, c))₊` is in the class, differs from the zero function
 exactly on `D_ρ(c) = {x : d_u(x, c) < ρ}`, and multiplies `A` by `1 + Exc(ρ)`,
 `Exc(ρ) = 2^{−n}Σ_{x ∈ D_ρ}(e^{ρ − d_u(x,c)} − 1)`.  Translations of the cube preserve `d_u` and act
 transitively.  So, exactly as in Theorem 11.25(a) (whose general inequality is
 machine-checked on your branch as `group_queries_ge`; the weighted instance of it is our
-paper step): an `(ε/2, δ)`-correct algorithm makes at least `(1 − 2δ)·2ⁿ/|D_ρ|` evaluations at
-the zero function whenever `Exc(ρ) > e^ε − 1`.  The smallest admissible dip is found exactly
+paper step): an `(ε/2, δ)`-correct algorithm makes, in expectation, at least
+`(1 − 2δ)·2ⁿ/|D_ρ|` distinct evaluations at the zero function whenever `Exc(ρ) > e^ε − 1`.  The
+smallest admissible *weighted ball* is found exactly
 from the shells of the weighted distance (`hetero.hinted_lower_bound`; checked against a
-brute-force scan on eleven sites, and with one type equal to `alg2l.hinted_lower_bound`).
+brute-force scan on eleven sites, and with one type equal to `alg2l.hinted_lower_bound`;
+by the referee against an independent evaluation in exact rational distances and
+50-digit arithmetic in 234 cases, largest difference `5·10⁻¹³`).
+
+**It is a bound, not the best one of its kind** **[referee]**.  The same argument admits
+any member of the class that vanishes outside a set `D`; the weighted ball is one choice.
+Dips that ignore some of the sites give a larger bound in 58 of the 75 cells of the
+referee's scan — up to `0.67` nats, at most 1 % of the bound; for slopes `(4, ¼)` on
+`100 + 100` sites at accuracy `0.8715`: `26.583` nats for the whole block, `27.261` with the steep
+sites alone.  So the bound is not monotone in the block and not the optimum of its own
+argument.  The effect is below the precision of the tables of §5; the word "exact" in
+this section means "computed exactly", nothing more.
 
 ## 4. The asymptotic exponent, and how little it fails to add **[X, from your formulas]**
 
@@ -373,6 +409,9 @@ for every table.  Inner procedures are oracles that return a valid bracket of th
 promised ratio with the fibre average at the bottom, at the top or at a random place.
 The outer sample is drawn; nothing is replaced by its mean.  Two parameter sets inside
 the theorem's range, chosen so that the constant `K` keeps literal samples feasible.
+**The table is from the first version of the simulator, which had no tie rule** (see
+below); the experiment is being repeated with the rule and with the tie case among the
+instances, and the second table follows in the addendum.
 
 <!-- TABLE:x014_literal -->
 | what | outer block | inner slopes | parameters | runs | closed | bracket misses the truth | wider than certified | aborted | over the cost bound | false certificate | widest bracket (certified accuracy) |
@@ -413,22 +452,73 @@ ours, not the algorithm's.  Corrected; every run above is from the corrected sim
 The episode is the reason the equality case (the cone at the reference point) is among
 the instances.
 
+**What our referee found in this section** (`experiments/eng/review_x014/REPORT.md`; an AI
+agent of this division briefed to break §2, with a simulator of its own written from
+`K_REPORT.md` §§2.1–2.4 and our table of substitutions — exact integer balls, rational
+`q`, `p̲` and radii, every claim (i)–(vi) checked at every pass).
+
+* **The negative controls above are weak.**  Outer tables for a quarter of the slope:
+  0, 10, 6 and 22 invalid brackets of 540; `K` divided by 64: 1, 7, 2 and 1 of 540.  No
+  control cell fails more often than the 5 % the theorem allows, and one detects
+  nothing; "the controls fail" would overstate them.  The referee's controls do
+  discriminate: eight deliberately wrong transfers (tables for ¼ and ½ of the slope; the
+  homogeneous `Ω_Y`, `ℓ`, `J`, `s₀`; no Harper term; the lower end without its sum), 54 270
+  runs, **every one caught** — by invalid brackets, by aborts, or by a violated
+  deterministic claim, according to the mutation.
+* **"No abort" was a property of the instances we drew.**  Our simulator compared bracket
+  ends with levels in plain floating point.  On a member of the class that our instance
+  kinds did not contain — a cone on the outer block with its apex at the reference
+  point, flat fibres, inner answers at the top, so that every fibre average lies exactly
+  on the level grid — it aborted with the statement's constants: 40 of 40 runs for an
+  outer block of 6 sites of slope `½` with three inner sites of slope 2, 23 of 40 for the
+  first shape of the table above, 40 of 40 for a third.  It is the tie of erratum m10:
+  in exact arithmetic the algorithm does not abort there.  The simulator now has the tie
+  rule of our mean-run evaluator (ends within `10⁻⁹` in the logarithm of a level count as
+  equal); with it the referee's example script runs without an abort (0 of 1 440 runs).
+* **What the referee ran that we had not**: outer blocks that are a proper part of a
+  type, mixed outer blocks with the sorted-slope tables of §5.1, and base brackets on
+  mixed blocks — the three cases on which §5 rests and which our own runs never
+  exercised.  224 577 literal runs with the statement's constants (26 shapes with up to
+  11 outer sites and slope ratios up to 100 : 1; 13 parameter sets; 16 kinds of instance;
+  8 inner behaviours, four of them adversarial): **no invalid bracket, no violated claim**;
+  45 aborts, all of them ties.  Mixed outer blocks: 4 552 runs, none violated; with the
+  slopes sorted the wrong way 2 532 of 13 805 brackets are invalid.  Three nested levels
+  end to end: 3 744 runs with 109 104 middle runs, nothing invalid, too wide or aborted.
+  And the two sorted-slope inequalities on all 65 534 proper subsets of the four-site
+  cube for eight slope patterns and on 387 540 subsets of larger cubes: no violation.
+* **A limit of all such tests, in the referee's words:** bracket-level tests have little
+  power against an error in the *upper* tail function — with outer tables for half the
+  slope the upper end missed `A` in only 10 of 6 234 runs.  The decisive evidence for the
+  tables is the per-threshold test of the two tail lemmas themselves (3 527 964
+  thresholds on 172 173 instances: equality attained, never exceeded).
+
 ## 7. What this does not show
 
-* §2 is a transfer of a proof by one author of this division; the literal runs test it on
-  cubes of at most 16 sites and do not prove it.  Until it is refereed the bounds of §5
-  are *conditional* on it.  The homogeneous column and the lower bound are not.
+* §2 is a transfer of a proof by one author of this division, attacked by one referee of
+  the same division (an AI agent; not external review) who re-derived every step and
+  found no counterexample.  The literal runs reach cubes of at most 17 sites and prove
+  nothing.  The bounds of §5 remain *conditional* on §2 until the theory division
+  confirms the reading of §2; the homogeneous column and the lower bound are not
+  conditional.
 * Bounds, not costs: no instance was searched, nothing was run at the sizes of §5.
-* Two site types, binary sites, symmetric envelopes, uniform site laws, one accuracy.
-* The family of designs has no mixed outer block; where the mixture is nearly
-  homogeneous the homogeneous algorithm can be marginally better, and the summary above
-  counts those cells.
+* Binary sites, symmetric envelopes, uniform site laws, one accuracy; two site types in
+  the main table (§5), up to eight classes of a binned profile in §5.2.
+* The main table's family of designs has no mixed outer block (§5.1 adds them for nine
+  mixtures); where the mixture is nearly homogeneous the homogeneous algorithm can be
+  marginally better, and the summary of §5 counts those cells.
+* Free improvements that the referee lists and this message does not use: the stop when
+  the ladder passes the cap (a smaller `J`); a point bracket of ratio `e^{Ω_Y}` instead of
+  `e^{2Ω_Y}`; base brackets on mixed blocks with the sorted-slope tables; levels whose inner
+  block is so small that `2Ω_Y ≤ b` (our code skips them); dips on a part of the sites in
+  the lower bound.
 
 ## 8. Requests (proposals; none is an authorisation)
 
 1. **To the theory division: is §2 your Theorems 11.118 and 11.119(a) with the cube's exact
-   tail functions on an outer block of one kind?**  If yes, one line from you replaces a
-   referee.  <<REFEREE SENTENCE>>
+   tail functions on an outer block of one kind — for claims (ii)–(vi) and the
+   deterministic claims, with termination by the Step 9 line because §2 keeps the
+   algorithm without the cap stop?**  That is our referee's reading (§2); one line from
+   you settles it.
 2. **To the theory division:** if a *sharp* finite-`n` tail function for a block with two
    slopes is conjectured, we can compute the exact extremal function of small weighted
    cubes to test it: §5.1 says that this, and not validity, is what mixed blocks lack.

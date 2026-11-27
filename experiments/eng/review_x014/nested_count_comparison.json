@@ -1,0 +1,77 @@
+[
+ {
+  "sizes": [
+   4,
+   4,
+   4
+  ],
+  "slopes": [
+   3.0,
+   0.2,
+   1.0
+  ],
+  "ln_count_as_the_division_reports_it": [
+   15.85,
+   14.16,
+   15.58,
+   14.45
+  ],
+  "ln_count_with_middle_runs_charged_their_own_count": [
+   20.75,
+   19.05,
+   20.48,
+   19.35
+  ],
+  "ln_nested_bound": 36.99
+ },
+ {
+  "sizes": [
+   3,
+   5,
+   3
+  ],
+  "slopes": [
+   2.0,
+   1.0,
+   0.1
+  ],
+  "ln_count_as_the_division_reports_it": [
+   12.34,
+   11.86,
+   12.34,
+   12.34
+  ],
+  "ln_count_with_middle_runs_charged_their_own_count": [
+   19.24,
+   18.74,
+   19.24,
+   19.24
+  ],
+  "ln_nested_bound": 38.57
+ },
+ {
+  "sizes": [
+   2,
+   6,
+   3
+  ],
+  "slopes": [
+   1.5,
+   0.4,
+   2.2
+  ],
+  "ln_count_as_the_division_reports_it": [
+   15.23,
+   15.07,
+   15.41,
+   15.05
+  ],
+  "ln_count_with_middle_runs_charged_their_own_count": [
+   19.05,
+   20.12,
+   20.02,
+   20.45
+  ],
+  "ln_nested_bound": 36.1
+ }
+]

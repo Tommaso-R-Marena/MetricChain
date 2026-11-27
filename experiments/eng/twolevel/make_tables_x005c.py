@@ -82,92 +82,97 @@ def build() -> dict[str, str]:
                          f"{r['worst_product_found']:.6f} | Lipschitz violation `{r['lipschitz_violation']:.0e}`, slopes {'in `[0, u]`' if r['monotone'] else 'in `[−u, u]`'}, reference in shell {r['d_ref']} | {len(r['violations'])} |")
         blocks["x005c_science"] = "\n".join(lines)
 
-    # ---- (ii) the searches with added starting points ---------------------------------------------------------------
+    # ---- (ii) the searches with added starting points, in rounds, and the cross-evaluation --------------------------
     srch = {key(r): r for r in jl("x005c_search.jsonl")}
-    if srch:
+    cp = RES / "x005c_cross.json"
+    if srch and cp.exists():
+        cross = {key(r): r for r in json.loads(cp.read_text())["rows"]}
         na = lambda k: stored[k]["na"]  # noqa: E731
-        lines = ["| `(u, n, φ)` | worst product instance, job M-008 | bound, job M-014 | stored maximiser of the bound as a product instance (i) | product search with the added starting points (ii) | bound search with the same starting points (ii) | (ii) product − M-008, in `na` | (ii) bound − (ii) product, in `na` |",
+        ROUNDS = (("1 (seed 1 in all 108 cells; seeds 2, 3 in 18)", ("x005c_search.jsonl", "x005c_seeds.jsonl")),
+                  ("2 (seeds 4, 5)", ("x005c_round2.jsonl",)), ("3 (seeds 6, 7)", ("x005c_round3.jsonl",)))
+        known = {k: max(w(stored[k]["old"]), w(stored[k]["new"])) for k in srch}          # before round 1: M-008 and step (i)
+        knownb = {k: w(stored[k]["bound"]) for k in srch}
+        lines = ["| round | searches of each objective | mean runs | cells whose best known product instance rose by more than `10⁻⁴·na` | by more than `10⁻³·na` | largest rise | cells whose best known bound rose by more than `10⁻⁴·na` | cells in which the round's two seeds differ by more than `10⁻⁴·na` (product search); largest difference |",
+                 "|---|---|---|---|---|---|---|---|"]
+        total_runs = total_searches = nviol = 0
+        over_cap, lip = -1e300, 0.0
+        for name, files in ROUNDS:
+            rows = [r for f in files for r in jl(f)]
+            if not rows:
+                continue
+            after, afterb, per = dict(known), dict(knownb), defaultdict(list)
+            for r in rows:
+                k = key(r)
+                after[k] = max(after[k], best(r, "cost"))
+                afterb[k] = max(afterb[k], best(r, "cost_any_placement"))
+                per[k].append(best(r, "cost"))
+                for x in r["searches"]:
+                    total_runs += x["n_eval"]
+                    nviol += x["n_violations"] or 0
+                    lip = max(lip, x["lipschitz_violation"])
+                    if x["objective"] == "cost":
+                        over_cap = max(over_cap, x["cost_over_cap"])
+                total_searches += len(r["searches"])
+            rise = {k: (after[k] - known[k]) / na(k) for k in known}
+            riseb = {k: (afterb[k] - knownb[k]) / na(k) for k in known}
+            two = {k: (max(v) - min(v)) / na(k) for k, v in per.items() if len(v) >= 2}
+            lines.append(f"| {name} | {len(rows)} × 4 | {sum(x['n_eval'] for r in rows for x in r['searches']):,} | {sum(v > 1e-4 for v in rise.values())} | "
+                         f"{sum(v > 1e-3 for v in rise.values())} | `{max(rise.values()):+.5f}` | {sum(v > 1e-4 for v in riseb.values())} | "
+                         + (f"{sum(v > 1e-4 for v in two.values())} of {len(two)}; `{max(two.values()):.5f}`" if two else "—") + " |")
+            known, knownb = after, afterb
+        blocks["x005c_rounds"] = "\n".join(lines)
+
+        # the six cells of the review's table, with the best known values after all rounds and the cross-evaluation
+        lines = ["| `(u, n, φ)` | worst product instance, job M-008 | bound, job M-014 | stored maximiser of the bound as a product instance (i) | worst product instance known now | bound known now | product now − M-008, in `na` | bound − product now, in `na` |",
                  "|---|---|---|---|---|---|---|---|"]
         for k in SIX:
-            if k not in srch:
-                continue
-            r, s = stored[k], srch[k]
-            p2, b2 = best(s, "cost"), best(s, "cost_any_placement")
-            lines.append(f"| ({k[0]:g}, {k[1]}, {k[2]:g}) | {w(r['old']):.6f} | {w(r['bound']):.6f} | {w(r['new']):.6f} | **{p2:.6f}** | {b2:.6f} | `{(p2 - w(r['old'])) / na(k):+.5f}` | `{(b2 - p2) / na(k):+.5f}` |")
+            r, c = stored[k], cross[k]
+            lines.append(f"| ({k[0]:g}, {k[1]}, {k[2]:g}) | {w(r['old']):.6f} | {w(r['bound']):.6f} | {w(r['new']):.6f} | **{c['product']:.6f}** | {c['bound']:.6f} | "
+                         f"`{(c['product'] - w(r['old'])) / na(k):+.5f}` | `{(c['bound'] - c['product']) / na(k):+.5f}` |")
         blocks["x005c_six"] = "\n".join(lines)
 
-        # per cell: the new worst product instance = max(old, (i), (ii))
-        new_worst, new_bound = {}, {}
-        for k, s in srch.items():
-            new_worst[k] = max(w(stored[k]["old"]), w(stored[k]["new"]), best(s, "cost"))
-            new_bound[k] = max(w(stored[k]["bound"]), best(s, "cost_any_placement"))
-        inc = {k: (new_worst[k] - w(stored[k]["old"])) / na(k) for k in srch}
-        gap = {k: (new_bound[k] - new_worst[k]) / na(k) for k in srch}
-        nviol = sum(x["n_violations"] or 0 for s in srch.values() for x in s["searches"])
-        over_cap = max(x["cost_over_cap"] for s in srch.values() for x in s["searches"] if x["objective"] == "cost")
-        lip = max(x["lipschitz_violation"] for s in srch.values() for x in s["searches"])
+        inc = {k: (cross[k]["product"] - cross[k]["old_product"]) / na(k) for k in cross}
+        gap = {k: (cross[k]["bound"] - cross[k]["product"]) / na(k) for k in cross}
         kmax = max(inc, key=inc.get)
-        gpos = [k for k in gap if gap[k] > 1e-4]
-        gneg = [k for k in gap if gap[k] < -1e-4]
-        kg = max(gap, key=gap.get)
-        kl = min(gap, key=gap.get)
-        n_runs = sum(x["n_eval"] for s in srch.values() for x in s["searches"])
+        wide = sorted((k for k in gap if gap[k] > 1e-4), key=lambda k: -gap[k])
         blocks["x005c_search_summary"] = (
-            f"{len(srch)} of 108 cells (`n = 250, 350, 500`), {sum(len(s['searches']) for s in srch.values())} searches, {n_runs:,} mean runs; three times the budgets of job M-008; "
+            f"{len(cross)} cells (`n = 250, 350, 500`), {total_searches:,} searches in three rounds, {total_runs:,} mean runs, three times the budgets of job M-008 in each; "
             f"{nviol} runs of a product instance with a violated claim; the largest `ln(cost/C_max)` is `{over_cap:.2f}`; every maximiser is in the class "
-            f"(largest Lipschitz violation `{lip:.1e}`).  The worst product instance found rises in {sum(v > 1e-9 for v in inc.values())} cells — in {sum(v > 1e-4 for v in inc.values())} by more "
-            f"than `10⁻⁴·na`, in {sum(v > 1e-3 for v in inc.values())} by more than `10⁻³·na`, in {sum(v > 1e-2 for v in inc.values())} by more than `10⁻²·na`; the largest rise is "
-            f"`{inc[kmax]:+.5f}·na` at `u = {kmax[0]:g}`, `n = {kmax[1]}`, `φ = {kmax[2]:g}`.  After it the bound search (repeated with the same starting points) and the product search "
-            f"differ by more than `10⁻⁴·na` in {len(gpos) + len(gneg)} cells: the bound is higher in {len(gpos)} (at most `{gap[kg]:+.5f}·na`, `({kg[0]:g}, {kg[1]}, {kg[2]:g})`) "
-            f"and *lower* in {len(gneg)} (down to `{gap[kl]:+.5f}·na`, `({kl[0]:g}, {kl[1]}, {kl[2]:g})`).")
-
-        # where does the new maximiser sit?
-        ref_far, c_low, tot = 0, 0, 0
-        for k, s in srch.items():
-            x = max((x for x in s["searches"] if x["objective"] == "cost"), key=lambda x: x["best_value"])
-            if inc[k] > 1e-4:
-                tot += 1
-                n_o = cost[k]["n_o"]
-                ref_far += x["d0"] in (0, n_o)
-                c_low += x["c_in_frac"] < 0.02 or x["c_in_frac"] > 0.98
-        blocks["x005c_where"] = (f"In the {tot} cells where the worst product instance rises by more than `10⁻⁴·na`, the new maximiser has its reference point in the first or the last "
-                                 f"shell in {ref_far} and its fibres at an end of the range of places in {c_low}.")
+            f"(largest Lipschitz violation `{lip:.1e}`).  Then every maximiser found by any search of either objective — {sum(c['points'] for c in cross.values()):,} points — "
+            f"was evaluated under both objectives and both inner behaviours ({sum(c['n_violations'] for c in cross.values())} violated claims).  "
+            f"**The worst product instance known now exceeds the one of job M-008 in {sum(v > 1e-9 for v in inc.values())} cells — in {sum(v > 1e-4 for v in inc.values())} by more than "
+            f"`10⁻⁴·na`, in {sum(v > 1e-3 for v in inc.values())} by more than `10⁻³·na`, in {sum(v > 1e-2 for v in inc.values())} by more than `10⁻²·na`; the largest rise is "
+            f"`{inc[kmax]:+.5f}·na` at `u = {kmax[0]:g}`, `n = {kmax[1]}`, `φ = {kmax[2]:g}`.**  The bound known now is never below the product instance (it is evaluated at the same laws) "
+            f"and exceeds it by more than `10⁻⁴·na` in {len(wide)} cell{'s' if len(wide) != 1 else ''}"
+            + (": " + "; ".join(f"`({k[0]:g}, {k[1]}, {k[2]:g})`, bound `{cross[k]['bound']:.6f}` against `{cross[k]['product']:.6f}` (`{gap[k]:+.5f}·na`)" for k in wide) if wide else "")
+            + f"; the largest difference in any other cell is `{max([v for k, v in gap.items() if k not in wide], default=0.0):.6f}·na`.")
+        blocks["x005c_maxrise"] = f"{inc[kmax]:.4f}"
 
         # the headline of ENG-RES-0008 at the three small sizes: worst instance at the flat-best fraction; the minimax fraction
         lines = ["| `u` | `n` | best `φ` for the flat instance: worst instance found there, ENG-RES-0008 → now | best `φ` against the worst instance, and that worst case: ENG-RES-0008 → now | certified cap `C_max` at the new fraction |",
                  "|---|---|---|---|---|"]
         changes = []
-        for u in sorted({k[0] for k in srch}):
+        for u in sorted({k[0] for k in cross}):
             for n in SMALL:
                 ks = [(u, n, phi) for phi in PHIS]
-                if not all(k in srch for k in ks):
+                if not all(k in cross for k in ks):
                     continue
                 nn = na(ks[0])
-
-                def flat(k):
-                    return cost[k]["flat"]["bottom"]["lcost"]
-
-                def old_w(k):
-                    return max(w(stored[k]["old"]), max(cost[k]["flat"][o]["lcost"] for o in ORACLES))
-
-                def new_w(k):
-                    return max(old_w(k), new_worst[k])
-
-                kf = min(ks, key=flat)
+                old_w = lambda k: max(cross[k]["old_product"], cross[k]["flat"])  # noqa: E731
+                new_w = lambda k: max(cross[k]["product"], cross[k]["flat"])  # noqa: E731
+                kf = min(ks, key=lambda k: cross[k]["flat_bottom"])
                 ko, kn = min(ks, key=old_w), min(ks, key=new_w)
                 changes.append((new_w(kn) - old_w(ko)) / nn)
                 lines.append(f"| {u:g} | {n} | `φ = {kf[2]:.2f}`: {old_w(kf) / nn:.3f} → {new_w(kf) / nn:.3f} | **{old_w(ko) / nn:.3f}** (`φ = {ko[2]:.2f}`) → **{new_w(kn) / nn:.3f}** (`φ = {kn[2]:.2f}`) | "
-                             f"{cost[kn]['constants']['lCmax'] / nn:.3f} |")
-        if changes:
-            blocks["x005c_main"] = "\n".join(lines)
-            blocks["x005c_main_summary"] = (f"The number ENG-RES-0008 reports — the worst case found at the best outer fraction — rises in {sum(c > 5e-4 for c in changes)} of {len(changes)} "
-                                            f"pairs `(u, n)` at these three sizes, by at most `{max(changes):.4f}` in units of `n a`.")
+                             f"{cross[kn]['lCmax'] / nn:.3f} |")
+        blocks["x005c_main"] = "\n".join(lines)
+        blocks["x005c_main_summary"] = (f"The number ENG-RES-0008 reports — the worst case found at the best outer fraction — rises in {sum(c > 5e-4 for c in changes)} of {len(changes)} "
+                                        f"pairs `(u, n)` at these three sizes, by at most `{max(changes):.4f}` in units of `n a`; in the others by less than `0.0005`.")
 
         # every cell whose worst product instance moved by more than 0.001 na
-        lines = ["| `(u, n, φ)` | ENG-RES-0008 | now | rise, in `na` | found by |", "|---|---|---|---|---|"]
+        lines = ["| `(u, n, φ)` | ENG-RES-0008 | now | rise, in `na` |", "|---|---|---|---|"]
         for k in sorted((k for k in inc if inc[k] > 1e-3), key=lambda k: -inc[k]):
-            src = "the search with added starting points" if best(srch[k], "cost") >= w(stored[k]["new"]) - 1e-9 and best(srch[k], "cost") > w(stored[k]["old"]) + 1e-9 else "a stored maximiser of the bound"
-            lines.append(f"| ({k[0]:g}, {k[1]}, {k[2]:g}) | {w(stored[k]['old']) / na(k):.4f} | {new_worst[k] / na(k):.4f} | `{inc[k]:+.4f}` | {src} |")
+            lines.append(f"| ({k[0]:g}, {k[1]}, {k[2]:g}) | {cross[k]['old_product'] / na(k):.4f} | {cross[k]['product'] / na(k):.4f} | `{inc[k]:+.4f}` |")
         blocks["x005c_cells"] = "\n".join(lines)
 
     # ---- (iii) other seeds ----------------------------------------------------------------------------------------------

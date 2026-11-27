@@ -30,7 +30,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from metricchain_eng.twolevel import hetero as H  # noqa: E402
 from metricchain_eng.twolevel.certified import tables  # noqa: E402
-from metricchain_eng.twolevel.tables import LN2  # noqa: E402
+from metricchain_eng.twolevel.tables import LN2, TIE  # noqa: E402
 
 
 # ---------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ def wdist(X: np.ndarray, c: np.ndarray, us: np.ndarray) -> np.ndarray:
     return np.abs(X - c[None, :]) @ us
 
 
-def make_instance(kind: str, us: np.ndarray, rng) -> np.ndarray:
+def make_instance(kind: str, us: np.ndarray, rng, n_outer: int = 0) -> np.ndarray:
     """A member of the class {|psi(x) - psi(x + e_i)| <= u_i}: psi on all 2^n points."""
     n = len(us)
     X = all_points(n)
@@ -54,6 +54,9 @@ def make_instance(kind: str, us: np.ndarray, rng) -> np.ndarray:
         return wdist(X, X[rng.integers(2 ** n)], us)
     if kind == "cone0":                     # the cone with its apex at the reference point: the first lower bound is an equality
         return wdist(X, X[0], us)
+    if kind == "outer_cone0":               # a cone on the leading sites only (the outer block of the experiments), apex at the
+        k = max(1, n_outer if n_outer else n // 2)      # reference point, flat fibres: every fibre average sits exactly on the
+        return wdist(X[:, :k], X[0, :k], us[:k])        # level grid when u_o / lambda is an integer (the tie case: the referee's example)
     if kind == "dip":                       # a single dip of random depth in a flat landscape (the hard instance of the lower bound)
         rho = rng.uniform(0.2, 1.0) * us.sum() * 0.5
         return -np.maximum(rho - wdist(X, X[rng.integers(2 ** n)], us), 0.0)
@@ -143,10 +146,18 @@ def run_2l_fibres(lW: np.ndarray, psi_ref: np.ndarray, psi0: float, n_o: int, C:
             queries += len(new)
 
     def classify(M, lsj):
-        """Refine the first M points until each is low (U <= s_j) or high (L > s_j e^-b).  Returns False on abort."""
+        """Refine the first M points until each is low (U <= s_j) or high (L > s_j e^-b).  Returns False on abort.
+
+        Ties.  A bracket end can lie exactly on a level (a fibre average on the level grid with the inner answer at
+        the top: U = W = s_j), and then "U > s_j" is decided by the last bit of two different floating-point sums.
+        Without a rule the point stays unclassified to the last rung and the run aborts -- on a member of the class,
+        with the theorem's constants (found by our referee, experiments/eng/review_x014/tie_abort_example.py; the same
+        phenomenon as erratum m10 of the theory division's referee R8 and as the tie rule of the mean-run evaluator).
+        Comparisons of a bracket end with a level therefore treat values within TIE in the logarithm as equal, which
+        is what exact arithmetic gives on such instances."""
         nonlocal queries
         while True:
-            todo = np.flatnonzero((lU[:M] > lsj) & (lL[:M] <= lsj - b))
+            todo = np.flatnonzero((lU[:M] > lsj + TIE) & (lL[:M] <= lsj - b + TIE))
             if todo.size == 0:
                 return True
             if np.any(rung[todo] >= L):
@@ -178,7 +189,7 @@ def run_2l_fibres(lW: np.ndarray, psi_ref: np.ndarray, psi0: float, n_o: int, C:
             if not classify(M, lsj):
                 status = "abort: unclassified at the last rung"
                 break
-            high = lU[:M] > lsj
+            high = lU[:M] > lsj + TIE
             N = int(high.sum())
             lq = min(0.0, math.log(max(N, K)) - math.log((1 - eta) * M))
             lplow = None
@@ -249,7 +260,7 @@ def experiment(n_o: int, u_o: float, inner_slopes, design_kw: dict, kinds, oracl
     for kind in kinds:
         stats = dict(runs=0, invalid=0, aborted=0, too_wide=0)
         for _ in range(runs):
-            psi = make_instance(kind, us, rng)
+            psi = make_instance(kind, us, rng, n_outer=n_o)
             out["class_violation"] = max(out["class_violation"], check_class(psi, us))
             for orc in oracles:
                 r = run_2l(psi, n_o, C, T, orc, rng, K_scale)
@@ -278,6 +289,7 @@ def experiment(n_o: int, u_o: float, inner_slopes, design_kw: dict, kinds, oracl
 
 
 KINDS = ("flat", "cone", "cone0", "dip", "wells", "ridges", "linear", "mixed")
+KINDS_V2 = KINDS + ("outer_cone0",)        # with the tie case of the referee (second version of the experiment)
 ORACLES = ("bottom", "top", "random")
 # two parameter sets inside the range of the theorem; eta = 1/2 keeps K (hence the samples) small enough for a literal run
 EXT = dict(lam=1.0, eta=0.5, etap=1.0, b=1.0, Lr=4, theta=1.0, bounded=False, name="lam=1, eta=1/2, eta'=1, theta=1, b=1")
@@ -285,6 +297,9 @@ BND = dict(lam=0.5, eta=0.25, etap=0.25, b=0.5, Lr=4, theta=0.25, bounded=True, 
 
 
 def main() -> int:
+    """The second version of the experiment (after the referee's report): the simulator has the tie rule and the
+    instance kinds include the tie case.  Writes x014_literal_v2.json; x014_literal.json is the first version, kept as
+    published in ENG-RES-0016."""
     t0 = time.time()
     results = []
     cases = [  # (n_o, u_o, inner slopes)
@@ -292,7 +307,7 @@ def main() -> int:
         (10, 1.5, (0.2, 0.2, 0.2, 0.2, 0.2, 0.2)), (7, 1.0, (1.7,))]
     for ci, (n_o, u_o, inner) in enumerate(cases):
         for design in (EXT, BND):
-            r = experiment(n_o, u_o, inner, design, KINDS, ORACLES, runs=200, seed=1000 + ci)
+            r = experiment(n_o, u_o, inner, design, KINDS_V2, ORACLES, runs=200, seed=1000 + ci)
             r["what"] = "theorem's constants"
             results.append(r)
             print(f"n_o={n_o} u_o={u_o} inner={inner} [{design['name']}]: {r['runs']} runs, closed {r['closed']}, invalid {r['invalid']}, "
@@ -308,7 +323,7 @@ def main() -> int:
         r["what"] = "negative control: K divided by 64"
         results.append(r)
         print(f"CONTROL K/64: n_o={n_o} u_o={u_o}: {r['runs']} runs, invalid {r['invalid']}, aborted {r['aborted']}, bad certificates {r['bad_certificates']}", flush=True)
-    path = ROOT / "experiments" / "eng" / "twolevel" / "results" / "x014_literal.json"
+    path = ROOT / "experiments" / "eng" / "twolevel" / "results" / "x014_literal_v2.json"
     path.write_text(json.dumps(dict(seconds=time.time() - t0, results=results), indent=1, default=float))
     return 0
 

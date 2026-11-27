@@ -611,3 +611,20 @@ into a temporary directory.  If this text is saved as `REPORT.md` next to the dr
 * Site-wise sequences and increments (§6) are floating-point numbers and, as estimates of `a_∞`, conditional on an
   unproved optimality: indications.
 * No statement is made between grid slopes except at the slopes listed in §6.
+
+---
+
+## Note added at checkpoint 6 (2026-11-27): the Parma library and the rounding mode
+
+Importing `pplpy` — used here for one cross-check of the vertex sets (§7) — switches the
+floating-point unit of the whole Python process to upward rounding and leaves it there.
+We found this on 2026-11-26, when an unrelated test failed only in sessions that had
+collected this module's tests.  **No result of this report is affected**: the vertex
+sets are exact integers and rationals; the certified capacities and exponents use
+software interval arithmetic (`mpmath.iv`) on exact rational inputs, which does not
+depend on the hardware rounding mode; the uncertified floating-point values can differ
+by a unit in the last place, far below the digits reported; and the science division
+re-ran the tests and reproduced the capacities on a machine without the library
+(SCI-RES-0033).  `polytope.py` now restores round-to-nearest after the import and after
+every call into the library, a test checks it, and the suite guards the rounding mode
+before and after every test.

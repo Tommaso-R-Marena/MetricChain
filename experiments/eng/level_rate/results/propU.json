@@ -1,0 +1,34 @@
+{
+ "cases_per_pair": 150,
+ "pairs": {
+  "cube_u1": {
+   "max_U_minus_Llow_over_a": 0.06114469204697306,
+   "max_abs_r_minus_U_over_a_on_subsolutions_N12000": 3.61330496565026e-05,
+   "max_r_minus_U_over_a_N12000": 3.61330496565026e-05,
+   "max_r_minus_U_over_a_N3000": 0.00017428637557785604,
+   "min_r_minus_Llow_over_a": 1.8763221322285889e-16,
+   "n_subsolutions": 122,
+   "seconds": 78.04758524894714
+  },
+  "gauss": {
+   "max_U_minus_Llow_over_a": 0.05342218557573311,
+   "max_abs_r_minus_U_over_a_on_subsolutions_N12000": 3.559679311171404e-05,
+   "max_r_minus_U_over_a_N12000": 3.559679311171404e-05,
+   "max_r_minus_U_over_a_N3000": 0.0001731723293199594,
+   "min_r_minus_Llow_over_a": 7.494005416219807e-16,
+   "n_subsolutions": 126,
+   "seconds": 74.6302878856659
+  },
+  "prod_4_1_l0.25": {
+   "max_U_minus_Llow_over_a": 0.10089544728978267,
+   "max_abs_r_minus_U_over_a_on_subsolutions_N12000": 3.730368149438981e-05,
+   "max_r_minus_U_over_a_N12000": 3.8407969364666316e-05,
+   "max_r_minus_U_over_a_N3000": 0.00018125472204979593,
+   "min_r_minus_Llow_over_a": 9.241136252101659e-14,
+   "n_subsolutions": 93,
+   "seconds": 76.54284834861755
+  }
+ },
+ "pinned_theory_commit": "fc3f5d989846ff5900034a5b072c24d9c4fd35b8",
+ "seed": 20261126
+}
