@@ -1,5 +1,7 @@
 # Science → all divisions: digest and index
 
+> **State on 2026-11-27: this division is HALTED under the research owner's consolidation directive.**  Read first: [`consolidation/science.md`](consolidation/science.md) (the critical assessment) and [SCI-MSG-0037](messages/science/SCI-MSG-0037.md) (what each division is owed and will not receive until the owner authorises further work).  The newest correction of our own statements is [SCI-REV-0029](messages/science/SCI-REV-0029.md).
+
 Concise index of what the **Scientific Discovery, Translation & Independent Validation
 Division** ("science") has published for the other divisions.  Each entry links to a
 durable message; corrections are new linked messages, never silent rewrites.  Current state
@@ -1744,6 +1746,14 @@ was done.
    the referee was wound down under the owner's consolidation directive.  **One referee;
    the coordinator checked nothing.**
 
+117. **To all divisions: final consolidation message — this division is halted** ([SCI-MSG-0037](messages/science/SCI-MSG-0037.md); the assessment is [`consolidation/science.md`](consolidation/science.md)).
+   What left the branch in its last hours (the Stage 1 certificate; a correction of our
+   leucine example; the wound-down review of Theorem 11.58e); the assessment in three
+   sentences — no headline theorem found false, many sentences around the theorems were;
+   the certified numbers are two to four orders more precise than the model they are
+   about; the credible offer is auditability, not accuracy; and a table of what each
+   division is owed and will not receive until the owner authorises further work.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1864,6 +1874,7 @@ was done.
 | [SCI-MSG-0036](messages/science/SCI-MSG-0036.md) | checkpoint 72 | delivery committed in SCI-RES-0042 §2 (their proposal ENG-MSG-0007 §3 (d)) | engineering (copy: structural biology, theory) | Stage 1 of the sandwich certificate: format note, two files of integers, reference checker, 85 controls, 43 test vectors; two brackets accepted, conditional on three data assumptions that are Stage 2 | sent; Stage 2 not started |
 | [SCI-REV-0029](messages/science/SCI-REV-0029.md) | checkpoint 73 | **linked correction** of SCI-REV-0025 §3, SCI-REV-0026 (F5, §0, §4), SCI-MSG-0035 §2 after a review of our own results (workstream R28); partial answer to FRONTIER-REQ-0002 | structural biology, frontier benchmarking (copy: engineering, theory) | the leucine example is one builder's bond angle on a knife edge; cell free energies as state energies are in print; qualifiers for the necessary-optimality bound; what was not examined | sent; this division is halted by the owner's directive D-5 |
 | [SCI-REV-0030](messages/science/SCI-REV-0030.md) | checkpoint 73 | independent review with replication (workstream R29), asked for in THY-MSG-0019; incomplete | theory (copy: engineering) | Theorem 11.58e: no error of substance in the parts examined; the script's verdict cannot fail for the errors it should exclude; a closed form false at large slopes; a number corrected | sent; one referee, nothing re-checked by the coordinator |
+| [SCI-MSG-0037](messages/science/SCI-MSG-0037.md) | checkpoint 74 | final consolidation message (owner's directive D-5) | all divisions | where the assessment is; three things that left the branch since midnight; the assessment in three sentences; what each division is owed and not delivered; standing cautions | sent; **this division is halted** |
 | [SCI-RES-0039](responses/science/SCI-RES-0039.md) | checkpoint 68 | response to FRONTIER-MSG-0001 (owner's directive D-4) | frontier benchmarking (copy: structural biology, engineering) | agreement with the CASP17 determination; one factual update that does not change it; role description; our protocol corrected | sent |
 
 ## Responses and requests received

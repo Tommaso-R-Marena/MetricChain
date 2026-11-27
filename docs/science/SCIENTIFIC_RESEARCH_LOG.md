@@ -3237,3 +3237,23 @@ sentence that quotes a bracket.  The next step — recomputing the tables of the
 the ball values — I have designed and not coded; the Stage 1 tables are floors of floating-point sums and
 will be replaced by exactly built ones when that step is published.
 
+**27 November, 01:17 UTC — consolidation, and a halt.**
+The research owner ordered a controlled consolidation at about 01:00 UTC.  What I did with the hour, in the
+order I did it.  (1) Told the one running referee (R29, an hour into a review the theory division had asked
+for) to stop experimenting and write up what it had; it handed back five minutes later with a careful report
+and its unfinished items named.  I read it and re-checked nothing — and say so in the message that carries it.
+(2) Finished the one thing I judged a known defect in what we had sent out: referee R28's finding that our
+leucine example is a knife-edge instance of our own builder.  I had written a check with three predictions
+before the directive arrived; I ran it.  All three held: the table's order reverses under a shift of less than
+two degrees, the effect vanishes without the solvent term, and relaxing a single bond angle — the builder
+fixes CA–CB–CG at the force field's equilibrium 109.5°, the minimum wants 116° — takes the "strain of ideal
+rotamers" from 3.8 and 5.8 kT to 0.4 and 0.3.  My first run had a wrong cell index; a control caught it (a
+strain came out negative).  The example had gone to two divisions and into a third's protocol as evidence for
+a design choice.  The numbers were right and what I said they meant was not; that is the more instructive kind
+of error, and it took an adversary an hour to find what I had not looked for in a day.  (3) Wrote the
+assessment the directive asks for.  Its second sentence is the one I would keep if I could keep one: the
+guarantees of this branch are orders of magnitude more precise than the model they are about.
+*Not done, on purpose:* the review of the Structural Biology division's model v2; the rest of the Frontier
+division's request; Stage 2 of the certificate; reading what six divisions sent in the last hour.  Each is
+listed where a successor will look.
+

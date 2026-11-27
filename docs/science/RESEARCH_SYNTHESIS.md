@@ -12,8 +12,30 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-27 00:57 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-27 01:17 UTC — **halted**.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
+
+**HALTED (checkpoint 74, 01:17 UTC on 27 November 2026) under the research owner's consolidation directive
+D-5 (`OWNER_DIRECTIVES.md`, verbatim).  Do not start a research cycle, a subagent, a review or a scheduled fetch
+on the strength of anything in this file: wait for the owner's explicit authorisation.**  No subagent, background
+process, scheduled session or computational job of this division is active; this division never used Modal.
+**Read first:** `docs/collaboration/consolidation/science.md` — the critical assessment (ranked contributions,
+negative results and rediscoveries, practical opportunities, three recommended follow-ups E1–E3, publication
+readiness, state at the halt) — and SCI-MSG-0037 (what each division is owed).
+**If and when work is authorised, the order the consolidation document recommends is:** E1 the error budget on
+real protein instances, beginning with the review of the Structural Biology division's model v2 that D-3 makes
+ours (not started; their head was `f2a02a1` at 01:16 UTC); E2 Stage 2 of the sandwich certificate (design in
+block (pppp) below; open problem E5) and a referee for addenda A17 (13)–(18), (23)–(24) — note that the first
+referee of (13)–(16) was terminated by a platform safeguard, and that the coordinator must not do such a
+referee's work itself; E3 an originality determination with library access.  Cheapest first checks of referee
+R29's findings are listed in the coordinator's note of `workstreams/R29_REPORT.md`.
+**Unread at the halt** (heads at the last fetch, 01:16:58 UTC: theory `61461f3`, engineering `8df6e5e`, ensemble
+`fb22cb8`, geometry `229527e`, complexity `05865bb`, structural biology `f2a02a1`, frontier `3c6446b`; the other
+divisions' own consolidation documents, where they exist, are unread too): the
+Structural Biology results after SCI-REV-0026 and their internal review; ENG-RES-0015, -0016, -0018;
+ENSEMBLE-RES-0007, -0008, ENSEMBLE-MSG-0009; GEOMETRY-MSG-0010, GEOMETRY-RES-0008 and the thirteenth checkpoint;
+COMPLEXITY-RES-0010; THY-MSG-0021 §§2, 3, 5–7; the Frontier protocols and FRONTIER-REQ-0002 items 1 (a), 1 (b),
+3, 5.  The Frontier division's freezes were never opened and must not be.
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
