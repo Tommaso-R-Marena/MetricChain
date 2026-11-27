@@ -2,22 +2,31 @@
  "pinned_at_utc": "2026-11-27T04:58:54Z",
  "status": "INTERIM (built 2026-11-27): two bounded Modal runs of the engineering division (compute-ledger jobs M-016 and M-021) were still running when this version was built, and their results are not in it.  The engineering section is refreshed once after they have been collected; the other seven divisions are pinned at the heads they pushed under the consolidation directive.",
  "sealed_paths": {
-  "frontier": ["experiments/frontier/freezes/FRONTIER-FRZ-0002_heldout_commitment_v1/sealed_list_v1.enc"]
+  "frontier": [
+   "experiments/frontier/freezes/FRONTIER-FRZ-0002_heldout_commitment_v1/sealed_list_v1.enc"
+  ]
  },
  "divisions": {
   "theory": {
    "branch": "claude/determined-ride-og1u7j",
    "commit": "b3c5d6115df06bb160d6490a95d9ec6e1a108d02",
    "consolidation_report": "docs/collaboration/consolidation/theory.md",
-   "registers": ["docs/collaboration/status/theory.md", "docs/ASSUMPTION_AUDIT.md", "docs/BLUEPRINT.md"],
+   "registers": [
+    "docs/collaboration/status/theory.md",
+    "docs/ASSUMPTION_AUDIT.md",
+    "docs/BLUEPRINT.md"
+   ],
    "documented_verification": "\"the tree whose audit passed on 2026-11-27 01:00 UTC (`bash scripts/audit_all.sh`: 'AUDIT PASSED'; 92 Lean files, 49 334 lines, 5068 declarations and 696 headline theorems on the three standard axioms; 192 harness tests; 618 mutations, 617 caught and one expected pass)\"; the lower bounds, the recursions and the certificate kernels are machine-checked, the algorithms and upper bounds are paper proofs",
    "documented_verification_source": "docs/collaboration/consolidation/theory.md"
   },
   "engineering": {
    "branch": "research/ubuntu-engineering",
-   "commit": "846e58caab20daac26c4da9b02c3093916d5adfc",
+   "commit": "af74a0e66534294bad1dcbc3d5a9d85433cb72a4",
    "consolidation_report": "docs/collaboration/consolidation/engineering.md",
-   "registers": ["docs/collaboration/status/engineering.md", "docs/engineering/EXPERIMENT_REGISTER.md"],
+   "registers": [
+    "docs/collaboration/status/engineering.md",
+    "docs/engineering/EXPERIMENT_REGISTER.md"
+   ],
    "documented_verification": "one Lean file of its own (`experiments/eng/sb_review/lean_kernel/RunKernel.lean`): \"`verifyM_eq`: checked by Lean (a four-case induction).  The runs: executions by Lean's interpreter, not proof terms\"; everything else is tested software and stored computations",
    "documented_verification_source": "docs/collaboration/consolidation/engineering.md"
   },
@@ -25,7 +34,10 @@
    "branch": "research/scientific-translation",
    "commit": "340081afba8841a4093b3df9b18387e8a36f20b1",
    "consolidation_report": "docs/collaboration/consolidation/science.md",
-   "registers": ["docs/collaboration/status/science.md", "docs/science/INDEPENDENT_VALIDATION.md"],
+   "registers": [
+    "docs/collaboration/status/science.md",
+    "docs/science/INDEPENDENT_VALIDATION.md"
+   ],
    "documented_verification": "\"Short cores machine-checked (Lemma 1; Theorem 3 in Markov form; Theorems 4, 4′, 5, 7 in Pinsker form; Propositions 6, 9; the algebraic core of Lemma A16.5)\"; the monotone-macrostate sandwich \"machine-checked since checkpoint 29\"; for the certified brackets with a solvent term \"nothing else is machine-checked\" beyond one inequality checked by the theory division; Lean sources are under `experiments/science/ws_L1` … `ws_L4`",
    "documented_verification_source": "docs/collaboration/consolidation/science.md"
   },
@@ -33,7 +45,10 @@
    "branch": "research/ensemble-identifiability",
    "commit": "a089a0ce2427c7f3797b838837d16659c8b0a1e4",
    "consolidation_report": "docs/collaboration/consolidation/ensemble.md",
-   "registers": ["docs/ensemble/THEOREM_REGISTER.md", "docs/ensemble/OPEN_OBLIGATIONS.md"],
+   "registers": [
+    "docs/ensemble/THEOREM_REGISTER.md",
+    "docs/ensemble/OPEN_OBLIGATIONS.md"
+   ],
    "documented_verification": "\"`scripts/audit_all.sh` passed on the final `proofs/` tree (2026-11-27, 01:20 UTC): build without warning, 5151 declarations on the three standard axioms, falsification harness\"; \"five Lean modules (1 093 lines; 26 headline statements and 10 non-vacuity witnesses in the programme's axiom audit)\"",
    "documented_verification_source": "docs/collaboration/consolidation/ensemble.md"
   },
@@ -41,7 +56,10 @@
    "branch": "research/geometric-inference",
    "commit": "229527e37bbd53428f31718339b7ceb61bc1e942",
    "consolidation_report": "docs/collaboration/consolidation/geometry.md",
-   "registers": ["docs/geometry/THEOREM_REGISTER.md", "docs/geometry/PROOF_OBLIGATIONS.md"],
+   "registers": [
+    "docs/geometry/THEOREM_REGISTER.md",
+    "docs/geometry/PROOF_OBLIGATIONS.md"
+   ],
    "documented_verification": "\"1 Lean file (59 declarations of ours in an audit of 5110, standard axioms only; unchanged since the sixth checkpoint)\"; \"machine-checking covers the linear-algebra core only\"; thresholds are exact computer-assisted computations",
    "documented_verification_source": "docs/collaboration/consolidation/geometry.md"
   },
@@ -49,7 +67,9 @@
    "branch": "research/biological-complexity",
    "commit": "4a09627d3560dc86cf162bce6c93f030ae84efb9",
    "consolidation_report": "docs/collaboration/consolidation/complexity.md",
-   "registers": ["docs/complexity/THEOREMS.md"],
+   "registers": [
+    "docs/complexity/THEOREMS.md"
+   ],
    "documented_verification": "\"Lean | CX-V1–V6: finite or arithmetic cores only; no model of structures or of networks is formalised\" (sources under `experiments/complexity/lean/`); the theorems are paper proofs with exact finite computations",
    "documented_verification_source": "docs/collaboration/consolidation/complexity.md"
   },
@@ -57,7 +77,11 @@
    "branch": "research/structural-biology",
    "commit": "a5cc106dd59d984237dff483716360cae5306538",
    "consolidation_report": "docs/collaboration/consolidation/structural-biology.md",
-   "registers": ["docs/structural_biology/RESULTS.md", "docs/structural_biology/VERIFICATION_REPORT.md", "docs/structural_biology/THEOREM_TO_SOFTWARE_REGISTER.md"],
+   "registers": [
+    "docs/structural_biology/RESULTS.md",
+    "docs/structural_biology/VERIFICATION_REPORT.md",
+    "docs/structural_biology/THEOREM_TO_SOFTWARE_REGISTER.md"
+   ],
    "documented_verification": "\"19 Lean 4 theorems … `proofs/StructBio/FactorElimination.lean`, audit `AxiomAudit.lean` (standard axioms only) … Checked by Lean; not reviewed by the theory division; not in its audited tree\"; the software is \"tested, not verified\"",
    "documented_verification_source": "docs/collaboration/consolidation/structural-biology.md"
   },
@@ -65,7 +89,11 @@
    "branch": "research/frontier-benchmarks",
    "commit": "14254f33bee9cc33f7e015f5ec5c58976f7efcb5",
    "consolidation_report": "docs/collaboration/consolidation/frontier-benchmarks.md",
-   "registers": ["docs/frontier_benchmarks/RESULTS.md", "docs/frontier_benchmarks/BENCHMARK_REGISTRY.md", "docs/frontier_benchmarks/NEGATIVE_RESULTS.md"],
+   "registers": [
+    "docs/frontier_benchmarks/RESULTS.md",
+    "docs/frontier_benchmarks/BENCHMARK_REGISTRY.md",
+    "docs/frontier_benchmarks/NEGATIVE_RESULTS.md"
+   ],
    "documented_verification": "none claimed: \"This division proves nothing and builds no method\"; \"Not formal.  Every table is regenerated from stored rows\"; 64 tests, most of them planted violations",
    "documented_verification_source": "docs/collaboration/consolidation/frontier-benchmarks.md"
   }

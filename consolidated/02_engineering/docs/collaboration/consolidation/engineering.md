@@ -7,6 +7,21 @@ result was produced by a subagent and only spot-checked by the coordinator, the 
 division made **no literature search** of its own: statements about prior art are the coordinator's
 general knowledge or cite another division's notes, and are weaker evidence than a search.*
 
+**Scope note added 2026-11-27 about 05:40 UTC, while assembling the unified archive (directive D-9);
+no new work, only what the other branches' final commits make necessary to say.**  (1) Wherever
+this report and ENG-RES-0019 say "the six stored certificates" of the structural-biology division,
+they mean the six files at the top level of `experiments/structbio/gmec_dev/certs/` on its branch —
+its first energy model, which that division has since retired because of the random seed in it.
+Those six files are unchanged at its final head `a5cc106` (the same git objects).  **The twelve
+certificates of its later models (`certs/v2/`, `certs/v2-lib/`) were not checked by us**, neither
+by our independent checker nor by the kernel.  (2) After our review that division repaired both
+checkers (its commit `0e934eb`, 02:42 UTC); **nothing after `41fa668` has been tested by us**.  Its
+own adversarial review records the float-tier defect at large `exp_bits` independently of our
+finding F1, and its repair range-checks that parameter; whether our reproduction still succeeds on
+the repaired code is not known.  (3) No other division had read ENG-RES-0019 or ENG-MSG-0008 when it
+halted: the structural-biology report still lists its two requests as unanswered, and the theory
+branch does not mention the run-time defect of the kernel.
+
 ## A. Executive assessment
 
 This division proves nothing.  It computes, replicates and attacks: it re-ran the theory division's

@@ -5,9 +5,9 @@
 | | |
 |---|---|
 | branch | `research/ubuntu-engineering` |
-| pinned commit | `846e58caab20daac26c4da9b02c3093916d5adfc` (2026-11-27T01:27:57Z) |
+| pinned commit | `af74a0e66534294bad1dcbc3d5a9d85433cb72a4` (2026-11-27T05:30:47Z) |
 | what was imported | files added or modified relative to the merge-base with the pinned theory commit `d81eb8aba138` (2026-11-25T03:39:29Z) |
-| files | 719 imported (36.68 MiB); 0 left out by reference (0.00 MiB); the branch tree has 837 files |
+| files | 719 imported (36.69 MiB); 0 left out by reference (0.00 MiB); the branch tree has 837 files |
 | formal verification, as the division documents it | one Lean file of its own (`experiments/eng/sb_review/lean_kernel/RunKernel.lean`): "`verifyM_eq`: checked by Lean (a four-case induction). The runs: executions by Lean's interpreter, not proof terms"; everything else is tested software and stored computations  *(source: `docs/collaboration/consolidation/engineering.md`)* |
 
 ## Start here
@@ -45,19 +45,19 @@
 
 | class | file | title | kB |
 |---|---|---|---:|
-| consolidation-report | [`docs/collaboration/consolidation/engineering.md`](docs/collaboration/consolidation/engineering.md) | Consolidation assessment — Computational Research Division ("engineering", "Ubuntu") | 27 |
+| consolidation-report | [`docs/collaboration/consolidation/engineering.md`](docs/collaboration/consolidation/engineering.md) | Consolidation assessment — Computational Research Division ("engineering", "Ubuntu") | 28 |
 | theorem-register | [`docs/engineering/EXPERIMENT_REGISTER.md`](docs/engineering/EXPERIMENT_REGISTER.md) | Experiment register (Computational Research Division) | 42 |
 | status-or-digest | [`docs/collaboration/ENGINEERING_TO_THEORY.md`](docs/collaboration/ENGINEERING_TO_THEORY.md) | Engineering → all divisions: digest and index | 27 |
 | status-or-digest | [`docs/collaboration/README.md`](docs/collaboration/README.md) | MetricChain collaboration hub | 16 |
-| status-or-digest | [`docs/collaboration/UPSTREAM_SYNC.md`](docs/collaboration/UPSTREAM_SYNC.md) | Upstream synchronisation log (engineering) | 16 |
-| status-or-digest | [`docs/collaboration/status/engineering.md`](docs/collaboration/status/engineering.md) | Status of the Computational Research Division | 21 |
+| status-or-digest | [`docs/collaboration/UPSTREAM_SYNC.md`](docs/collaboration/UPSTREAM_SYNC.md) | Upstream synchronisation log (engineering) | 17 |
+| status-or-digest | [`docs/collaboration/status/engineering.md`](docs/collaboration/status/engineering.md) | Status of the Computational Research Division | 22 |
 | negative-results | [`docs/engineering/DEAD_ENDS.md`](docs/engineering/DEAD_ENDS.md) | Engineering dead ends and negative findings | 13 |
 | handoff-or-log | [`ENGINEERING.md`](ENGINEERING.md) | MetricChain — engineering branch (`research/ubuntu-engineering`) | 2 |
 | handoff-or-log | [`docs/engineering/DEPENDENCY_MAP.md`](docs/engineering/DEPENDENCY_MAP.md) | Dependency map: what each engineering result rests on | 11 |
 | handoff-or-log | [`docs/engineering/README.md`](docs/engineering/README.md) | Engineering documents | 2 |
 | handoff-or-log | [`docs/engineering/RESEARCH_LOG.md`](docs/engineering/RESEARCH_LOG.md) | Engineering research log (Computational Research Division) | 40 |
 | handoff-or-log | [`docs/engineering/drafts/README.md`](docs/engineering/drafts/README.md) | Drafts | 0 |
-| owner-directives | [`docs/engineering/DIRECTIVES.md`](docs/engineering/DIRECTIVES.md) | Directives of the research owner to the Computational Research Division | 36 |
+| owner-directives | [`docs/engineering/DIRECTIVES.md`](docs/engineering/DIRECTIVES.md) | Directives of the research owner to the Computational Research Division | 41 |
 | benchmark-or-evaluation-record | [`docs/engineering/COMPUTE_LEDGER.md`](docs/engineering/COMPUTE_LEDGER.md) | Compute ledger (Computational Research Division) | 44 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BASELINE_SPECIFICATIONS.md`](docs/engineering/benchmarks/BASELINE_SPECIFICATIONS.md) | Baseline specifications | 4 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_LIMITATIONS.md`](docs/engineering/benchmarks/BENCHMARK_LIMITATIONS.md) | Benchmark limitations | 5 |

@@ -17,6 +17,11 @@ Related message/request IDs: ENG-RES-0019 (published with this message); ENG-MSG
 coordinator only spot-checked are marked.  The division's critical assessment of its own
 work is `docs/collaboration/consolidation/engineering.md`.*
 
+*Scope note added 2026-11-27 (see the note at the head of `docs/collaboration/consolidation/engineering.md`):
+in §1 and §2, "the six stored certificates" of the structural-biology division are the six of its first model, at the top level of
+`experiments/structbio/gmec_dev/certs/` (unchanged at its final head `a5cc106`); the certificates under
+`certs/v2/` and `certs/v2-lib/` were not checked by us, and nothing after `41fa668` was tested.*
+
 ## 0. What is published with this message
 
 | | |

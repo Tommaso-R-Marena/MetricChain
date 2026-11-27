@@ -493,3 +493,66 @@ division's two requests (ENG-RES-0019).  Left running without supervision: the d
 Modal runs of jobs M-016 and M-021, bounded by their timeouts (ledger).  **This directive
 is the operative one for any successor: do not resume the loop of D-3, D-6 or D-7 without
 the research owner's explicit authorisation.**
+
+## D-9 — Final administrative task: a unified research archive (2026-11-27, received about 04:55 UTC)
+
+Addressed to this division.  "I authorize one bounded administrative task to assemble a
+unified, durable research snapshot for independent external assessment, cross-divisional
+mathematical synthesis, publication planning, and subsequent research development."  "Do
+not resume mathematical research, software development, speculative investigations, or new
+benchmarking campaigns."  Operative content:
+
+1. **The Modal jobs and the watcher**: "Preserve your existing shell watcher and allow the
+   currently authorized, bounded Modal jobs to finish under their existing resource and
+   deadline constraints.  Do not launch additional computational jobs or restart any
+   completed investigations."  "Once the outstanding runs finish, collect their results,
+   reconcile the compute ledger, regenerate the relevant tables, and commit and push the
+   completed engineering artifacts as already planned."  "Where practical, create the
+   final consolidated archive after these results have been collected."  "If any
+   computation fails, exceeds its existing deadline, or otherwise remains incomplete,
+   preserve the available results and explicitly document its status rather than
+   extending the investigation."  "Do not consume model reasoning capacity through
+   repeated polling or unnecessary monitoring."
+2. **The archive**: "Create a separate branch named `research/consolidated-archive`
+   containing a unified directory: `consolidated/`", with `00_MASTER_INDEX.md`, one
+   directory per division (`01_theory/` … `08_frontier_benchmarking/`),
+   `09_cross_divisional_dependencies/`, `10_benchmark_status/`, `11_reproducibility/` and
+   `MANIFEST.json`.  "Preserve exact branch and commit provenance for every imported
+   artifact."
+3. **Substance, not only administration**: "This archive is intended for a comprehensive
+   external assessment and mathematical synthesis, not merely an administrative review."
+   "Do not restrict the archive to results already judged publishable by their
+   originating divisions."  "Avoid unnecessary duplication of large datasets, generated
+   build artifacts, caches, and entire research branches."
+4. **The publication candidate**: "Give particular attention to the theoretical
+   division's identified mathematics-paper candidate: Adaptive query complexity of a
+   certified free energy on the cube class."  "This does not authorize further
+   investigation or proof development.  It is a preservation and indexing requirement
+   only."
+5. **No synthesis**: "Preserve existing documented relationships …  Do not initiate a new
+   mathematical synthesis yourself.  That will be a separate, explicitly authorized
+   research phase."
+6. **Provenance**: a manifest with original paths, branches, pinned commits, SHA-256
+   checksums, classifications and "verification status where already documented";
+   "Clearly distinguish between machine-checked mathematics, paper proofs, conjectures,
+   numerical evidence, internal AI reviews, and externally established results."  "Do not
+   silently resolve disagreements between divisions or discard unfavorable findings."
+7. **Security and integrity**: "Do not include API keys, credentials, sealed held-out
+   dataset contents, passphrases, commitment salts, confidential information, or other
+   sensitive material."  "Do not merge or modify the original research branches."  "Do
+   not restart other divisions to obtain missing material.  Mark incomplete items
+   explicitly."
+8. **Deliverable and stop**: "Keep this task computationally inexpensive and
+   administrative."  "Once complete, stop and await explicit authorization.  Do not
+   resume autonomous research.  All previous consolidation, budget, authorization,
+   deadline, and scientific-integrity restrictions remain in effect."
+
+**What was done under it.**  The archive is the branch `research/consolidated-archive`
+(an orphan branch; no branch of a division was touched): each division's own files at
+the head it pushed under D-8, copied as the identical git objects; the sealed held-out
+list of the frontier division left out and not read; two files above 5 MiB referenced;
+a scan for credentials and private names before publication.  No mathematics was
+re-derived, no code of another division was run, no subagent was used, no Modal job was
+launched.  The archive's own record of how it was built is
+`consolidated/11_reproducibility/` on that branch.  D-8 remains the operative directive
+for everything else.

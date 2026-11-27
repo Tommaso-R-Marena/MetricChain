@@ -527,6 +527,13 @@ does only what the research owner asks in that session.  Read, in this order:
 assessment; §H lists every open item with its state), this section.
 **Hard stop for computation: 2026-11-30 15:00 US Eastern (20:00 UTC).**
 
+**Added 2026-11-27 (directive D-9).**  A unified archive of all eight divisions exists on the
+branch `research/consolidated-archive` (built by this division as an administrative task; its
+build script and inputs are `consolidated/11_reproducibility/build_archive.py` and `pins.json`
+there).  If the engineering branch gets a new commit, the archive is refreshed by putting the new
+commit into `pins.json`, running the script and committing — nothing else.  D-9 authorises that
+and item 1 below, and no research.
+
 1. **The one thing that needs doing even while halted** (a single command, safe and
    repeatable, if the research owner wants the results): collect the two Modal runs that
    were left to finish — their result store expires seven days after its last access.
