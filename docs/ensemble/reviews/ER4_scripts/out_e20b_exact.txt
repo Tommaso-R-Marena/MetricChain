@@ -1,0 +1,25 @@
+A. the two rational six-tuples of the report (check S2)
+    instance 1: lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+    instance 2: lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+    remark: instance 2 has two states with the same first angle (t_1 = 0) -- it is not 'pairwise distinct coordinates', and the hypotheses hold all the same
+B. 30 random rational six-tuples of my own (numerators -12..12, denominators 1..6, pairwise distinct angles)
+    (lifts, smooth, rank R (t), rank R (phi), dim I_0, I_0 in kernel) = (6, True, 12, 12, 15, True): 30 instances
+C. a six-tuple with a reducible member of the pencil: G = (t_1 - 1) * H(t_2, t_3)
+    lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+    the reducible form (t_1 - 1)*H vanishes at the six states: True; it is in the pencil: True
+    -> all hypotheses of E20b hold although a combination of g_1, g_2 has a factor depending on one angle; in the chart in which that factor is at infinity the combination is 'independent of an angle'
+    (smooth, rank R, dim I_0) = (True, 12, 15)
+D. six-tuples with a common factor of G_1, G_2 (the theorem's hypotheses must fail)
+    six states on the surface H(t_2,t_3) = 0: lifts rank 6; curve smooth at the states: False; rank of (R): 6 (numerators) / 6 (trigonometric basis); dim I_0 = 12; I_0 in the kernel: True; dim W = 21
+E. degenerate six-tuples: which hypothesis fails
+    two states sharing two angles: lifts rank 6; curve smooth at the states: True; rank of (R): 11 (numerators) / 11 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 16
+    three states sharing one angle: lifts rank 6; curve smooth at the states: True; rank of (R): 11 (numerators) / 11 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 16
+    two states sharing one angle: lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+    two pairs sharing one angle each: lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+F. homogeneous coordinates (cos(phi/2) : sin(phi/2)) -- no chart, states with phi = pi allowed
+    report's instance 1, homogeneous computation: lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+    two states at phi_1 = pi, four on H(t_2,t_3) = 0: lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+    x_1*H vanishes at the six states: True; it is a combination of g_1, g_2: True; in the t-chart its numerator H(t_2,t_3) does not depend on t_1
+    => the hypotheses of E20b (independent lifts, smooth at the states, (R)) do NOT imply that 'no combination of g_1, g_2 is independent of an angle'; dim I_0 = 15 holds all the same
+    one state at (pi, pi, pi), five others: lifts rank 6; curve smooth at the states: True; rank of (R): 12 (numerators) / 12 (trigonometric basis); dim I_0 = 15; I_0 in the kernel: True; dim W = 15
+PASS

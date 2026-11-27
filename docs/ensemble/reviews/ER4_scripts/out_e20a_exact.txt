@@ -1,0 +1,13 @@
+A. the author's rational five-tuple (report check S1)
+    lifts rank 5; sextic squarefree in P^1: True; distinct roots 6; all rational: True; intersection finite: True; points: 6
+    the sixth zero (t-coordinates): [(18235067499/12017196881, 167269954148/19784421235, 458968156077/323733747838)]
+    equal to the sixth zero in the author's stored output: True
+    rank of the six lifted outer products: 6 ; non-zero coefficients of the sixth lift on the five: 5
+B. 120 random rational five-tuples of my own (numerators -9..9, denominators 1..5)
+    total: 120; finite: 109; infinite: 11; undecided: 0; six_distinct: 109; outer6: 109; coeff>=2: 109; infinite_degenerate: 11; infinite_other: 0; finite_fewer_than_6: 0; all_real: 109
+    ('degenerate' = two states share two angles, or three states share one angle)
+C. degenerate five-tuples (the exceptional set of 'general' is not empty)
+    two states sharing two angles: finite = False -- sextic identically zero
+    four states sharing one angle: lifts rank 5 finite = False -- sextic identically zero
+    three states sharing one angle: lifts rank 5 finite = False -- sextic identically zero ; points: 0 ; distinct: 0
+PASS

@@ -1,0 +1,27 @@
+[S4b start (seed 0)] starting six-tuple: smallest singular value of (R) 0.0141; real components of the curve: 2 (4000, 4000 points); states per component: [3, 3]; the sixth state is on component 0
+  positions of the sixth state at which the determinant of the twelve conditions changes sign: 4
+  [S4b start (seed 0)/0] singular values 11, 12 of (R): 0.6051, 5.9e-16; smallest singular value of the lifts 0.2123
+      sixth state: 0.263650, 2.558297, -1.543785
+      real components: 2; states per component: [3, 3]; range of q_0 on each: [1.39e-07, 1.5097], [-6.51e-01, -0.0000]
+      q_0 on the curve: min -6.51e-01, min at distance > 0.1 from the states -0.6511, max 1.5097; second derivatives along the curve at the states: 0.4053, -0.0334, -0.7189, -0.0269, 1.2777, 0.5647
+      case (b); least mass on the six states (LP over the sampled curve, 3953 points): 0.000000
+  [S4b start (seed 0)/1] singular values 11, 12 of (R): 0.0212, 1.0e-15; smallest singular value of the lifts 0.0056
+      sixth state: 2.231103, -2.903063, 1.449410
+      real components: 2; states per component: [3, 3]; range of q_0 on each: [1.78e-11, 2.3856], [2.25e-15, 0.3644]
+      q_0 on the curve: min 2.25e-15, min at distance > 0.1 from the states 0.0000, max 2.3856; second derivatives along the curve at the states: 0.8507, 0.0256, 0.5796, 0.0264, 0.0000, 0.0000
+      case (a); least mass on the six states (LP over the sampled curve, 3960 points): 1.000000
+      certificate f = 100 (g_1^2 + g_2^2) + h: |grad h| at the states 1.7e-15; smallest Hessian eigenvalue of f at the states 0.0000
+      Hessians positive definite from A = 29.714 on; first-order requirement along the curve (away from the states): A > 31.496 (largest at distance 1.891 from the nearest state)
+      grid 96^3: minimum 5.813e-04; 6700 local minimisations: lowest value -1.359e-14; local minima at distance > 1e-3 from the states: 3, lowest 1.1314e-09 at (2.2390, -2.9181, 1.4459)
+      smallest A for which the normal-plane minimisation along the curve finds no negative value: 29.781
+  [S4b start (seed 0)/2] singular values 11, 12 of (R): 0.1404, 5.9e-16; smallest singular value of the lifts 0.0805
+      sixth state: 1.405065, 1.846982, -1.554113
+      real components: 2; states per component: [2, 4]; range of q_0 on each: [4.48e-07, 1.7075], [-3.69e-01, -0.0000]
+      q_0 on the curve: min -3.69e-01, min at distance > 0.1 from the states -0.3695, max 1.7075; second derivatives along the curve at the states: 0.7703, -0.0133, -0.2725, -0.0077, 1.0240, -0.0725
+      case (b); least mass on the six states (LP over the sampled curve, 3951 points): 0.000000
+  [S4b start (seed 0)/3] on component 1: the six lifts are dependent (smallest singular value 1.9e-16): the sixth zero of the lifted certificate of the five states, (-0.847374, 1.674845, 1.443905)
+  (207 s)
+
+real	3m27.920s
+user	3m27.626s
+sys	0m0.099s
