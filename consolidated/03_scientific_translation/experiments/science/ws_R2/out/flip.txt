@@ -1,0 +1,7 @@
+torsion word of my lamella(3,1,12): ttttttttttttttttttttttt+-+ttttttttttttttttttt-+-ttttttttttttttttttttttt
+fold word (first fold): [1, -1, 1]  (S_REPORT: g+ g- g+ up to the sign convention)
+hairpins 3 <= a,b <= 40: 1444 pairs, not self-avoiding: 0;  D - 14 d in [-15, -5]   (claim: >= -15; S_REPORT: [-15,-5])
+periodicity D(a+2,b+2)=D(a,b)+28 for a,b>=5: True;  D(a,b+2)=D(a,b) for b>=a+6: True
+example a=b=10: hairpin (h,g)=(6, 22, 18, 3), opened (h,g)=(0, 0, 2, 2), D=158, 14d-15=153
+
+engineering exact single-flip constants (keys): ['model', 's_cut', 'rows']

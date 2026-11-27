@@ -1,0 +1,40 @@
+n=12 true K=2 (w=[0.2804, 0.7196]), fit K'=2, kind=homog, angle=97.0, seed=0: 1200 starts, jac err 3.1e-09, 55s
+   converged to max|dM| < 1e-10: 116   of which the true ensemble: 116   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 1.73e-14, max weight deviation 2.22e-16
+   smallest max|dM| among non-converged local minima: 3.693e-01 (median 7.18e-01)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 4.226
+n=12 true K=2 (w=[0.2804, 0.7196]), fit K'=3, kind=homog, angle=97.0, seed=0: 800 starts, jac err 5.2e-09, 106s
+   converged to max|dM| < 1e-10: 296   of which the true ensemble: 296   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 4.15e-13, max weight deviation 2.43e-14
+   smallest max|dM| among non-converged local minima: 6.562e-02 (median 1.43e-01)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 14.646
+n=12 true K=2 (w=[0.7479, 0.2521]), fit K'=2, kind=homog, angle=97.0, seed=1: 1200 starts, jac err 3.6e-09, 53s
+   converged to max|dM| < 1e-10: 188   of which the true ensemble: 188   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 2.13e-14, max weight deviation 8.88e-16
+   smallest max|dM| among non-converged local minima: 2.275e-01 (median 4.65e-01)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 3.033
+n=12 true K=2 (w=[0.7479, 0.2521]), fit K'=3, kind=homog, angle=97.0, seed=1: 800 starts, jac err 3.3e-09, 162s
+   converged to max|dM| < 1e-10: 415   of which the true ensemble: 415   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 1.02e-12, max weight deviation 8.77e-14
+   smallest max|dM| among non-converged local minima: 8.227e-06 (median 1.05e-01)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 8.749
+n=12 true K=2 (w=[0.3622, 0.6378]), fit K'=2, kind=homog, angle=97.0, seed=2: 1200 starts, jac err 7.1e-09, 62s
+   converged to max|dM| < 1e-10: 181   of which the true ensemble: 181   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 2.98e-14, max weight deviation 7.22e-16
+   smallest max|dM| among non-converged local minima: 2.624e-01 (median 4.82e-01)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 4.090
+n=12 true K=2 (w=[0.3622, 0.6378]), fit K'=3, kind=homog, angle=97.0, seed=2: 800 starts, jac err 3.7e-09, 139s
+   converged to max|dM| < 1e-10: 497   of which the true ensemble: 497   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 1.72e-12, max weight deviation 1.66e-13
+   smallest max|dM| among non-converged local minima: 9.402e-02 (median 1.56e-01)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 14.282
+n=12 true K=2 (w=[0.2804, 0.7196]), fit K'=4, kind=homog, angle=97.0, seed=0: 400 starts, jac err 3.6e-09, 1048s
+   converged to max|dM| < 1e-10: 184   of which the true ensemble: 184   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 3.20e-09, max weight deviation 1.51e-10
+   smallest max|dM| among non-converged local minima: 1.035e-10 (median 3.16e-02)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 30.082
+n=12 true K=2 (w=[0.5202, 0.4798]), fit K'=2, kind=hetero, angle=97.0, seed=7: 800 starts, jac err 8.4e-09, 44s
+   converged to max|dM| < 1e-10: 86   of which the true ensemble: 86   ALTERNATIVES (not the true ensemble): 0
+   among converged runs: max Q = sum_a v_a min_k d_P^2 = 5.57e-14, max weight deviation 1.89e-15
+   smallest max|dM| among non-converged local minima: 1.676e-01 (median 4.84e-01)
+   largest Q/||M(nu)-M(mu)||_F over the non-converged end points: 9.819

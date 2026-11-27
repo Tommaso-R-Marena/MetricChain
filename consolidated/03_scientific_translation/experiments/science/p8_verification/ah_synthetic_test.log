@@ -1,0 +1,114 @@
+Theorem AH with exact restricted constants; anchor = state 0 of every site
+| family | grid | m | hosts | constants | functions | (function, state) checks | violations (functions with one) | smallest bound / |remainder|, states with more than m sites off the anchor | expected | as expected |
+|---|---|---|---|---|---|---|---|---|---|---|
+| structured | 3x2x3x2x3 | 2 | 0 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 2 | 1 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 2 | 2 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 2 | 0 | all-contexts | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 2 | 2 | all-contexts | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 2 | 1 | anchor-context | 400 | 43200 | 6576 (305) | 0.0000 | FAILS (control A) | yes |
+| structured | 3x2x3x2x3 | 2 | 3 | AH | 400 | 43200 | 4344 (326) | 0.0000 | FAILS (control B) | yes |
+| structured | 3x2x3x2x3 | 2 | 1 | roles-exchanged | 400 | 43200 | 2484 (169) | 0.0000 | FAILS (control C) | yes |
+| structured | 3x2x3x2x3 | 3 | 0 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 3 | 1 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 3 | 2 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 3 | 3 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 3 | 0 | all-contexts | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 3 | 2 | all-contexts | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 3 | 1 | anchor-context | 400 | 43200 | 2064 (166) | 0.0000 | FAILS (control A) | yes |
+| structured | 3x2x3x2x3 | 3 | 4 | AH | 400 | 43200 | 3760 (352) | 0.0000 | FAILS (control B) | yes |
+| structured | 3x2x3x2x3 | 3 | 1 | roles-exchanged | 400 | 43200 | 356 (40) | 0.0000 | FAILS (control C) | yes |
+| structured | 3x2x3x2x3 | 4 | 0 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 4 | 1 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 4 | 2 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 4 | 3 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 4 | 4 | AH | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 4 | 0 | all-contexts | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 4 | 2 | all-contexts | 400 | 43200 | 0 (0) | 1.0000 | holds | yes |
+| structured | 3x2x3x2x3 | 4 | 1 | anchor-context | 400 | 43200 | 224 (28) | 0.0000 | FAILS (control A) | yes |
+| structured | 3x2x3x2x3 | 4 | 5 | AH | 400 | 43200 | 3096 (387) | 0.0000 | FAILS (control B) | yes |
+| structured | 2x3x2x2x3x2 | 2 | 0 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 2 | 1 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 2 | 2 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 2 | 0 | all-contexts | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 2 | 2 | all-contexts | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 2 | 1 | anchor-context | 150 | 21600 | 2501 (127) | 0.0000 | FAILS (control A) | yes |
+| structured | 2x3x2x2x3x2 | 2 | 3 | AH | 150 | 21600 | 1486 (121) | 0.0000 | FAILS (control B) | yes |
+| structured | 2x3x2x2x3x2 | 2 | 1 | roles-exchanged | 150 | 21600 | 1477 (102) | 0.0000 | FAILS (control C) | yes |
+| structured | 2x3x2x2x3x2 | 3 | 0 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 3 | 1 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 3 | 2 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 3 | 3 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 3 | 0 | all-contexts | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 3 | 2 | all-contexts | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 3 | 1 | anchor-context | 150 | 21600 | 964 (83) | 0.0000 | FAILS (control A) | yes |
+| structured | 2x3x2x2x3x2 | 3 | 4 | AH | 150 | 21600 | 958 (131) | 0.0000 | FAILS (control B) | yes |
+| structured | 2x3x2x2x3x2 | 3 | 1 | roles-exchanged | 150 | 21600 | 320 (42) | 0.0000 | FAILS (control C) | yes |
+| structured | 2x3x2x2x3x2 | 4 | 0 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 4 | 1 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 4 | 2 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 4 | 3 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 4 | 4 | AH | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 4 | 0 | all-contexts | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 4 | 2 | all-contexts | 150 | 21600 | 0 (0) | 1.0000 | holds | yes |
+| structured | 2x3x2x2x3x2 | 4 | 1 | anchor-context | 150 | 21600 | 304 (43) | 0.0000 | FAILS (control A) | yes |
+| structured | 2x3x2x2x3x2 | 4 | 5 | AH | 150 | 21600 | 778 (138) | 0.0000 | FAILS (control B) | yes |
+| structured | 2x3x2x2x3x2 | 4 | 1 | roles-exchanged | 150 | 21600 | 54 (10) | 0.0000 | FAILS (control C) | yes |
+| gauss | 3x2x3x2x3 | 2 | 0 | AH | 400 | 43200 | 0 (0) | 1.4410 | holds | yes |
+| gauss | 3x2x3x2x3 | 2 | 1 | AH | 400 | 43200 | 0 (0) | 1.3762 | holds | yes |
+| gauss | 3x2x3x2x3 | 2 | 2 | AH | 400 | 43200 | 0 (0) | 1.1435 | holds | yes |
+| gauss | 3x2x3x2x3 | 2 | 0 | all-contexts | 400 | 43200 | 0 (0) | 1.4652 | holds | yes |
+| gauss | 3x2x3x2x3 | 2 | 2 | all-contexts | 400 | 43200 | 0 (0) | 1.2866 | holds | yes |
+| gauss | 3x2x3x2x3 | 2 | 1 | anchor-context | 400 | 43200 | 98 (74) | 0.4571 | FAILS (control A) | yes |
+| gauss | 3x2x3x2x3 | 2 | 3 | AH | 400 | 43200 | 0 (0) | 1.0184 | FAILS (control B) | NO |
+| gauss | 3x2x3x2x3 | 2 | 1 | roles-exchanged | 400 | 43200 | 0 (0) | 1.0000 | FAILS (control C) | NO |
+| gauss | 3x2x3x2x3 | 3 | 0 | AH | 400 | 43200 | 0 (0) | 1.4683 | holds | yes |
+| gauss | 3x2x3x2x3 | 3 | 1 | AH | 400 | 43200 | 0 (0) | 1.2779 | holds | yes |
+| gauss | 3x2x3x2x3 | 3 | 2 | AH | 400 | 43200 | 0 (0) | 1.1342 | holds | yes |
+| gauss | 3x2x3x2x3 | 3 | 3 | AH | 400 | 43200 | 0 (0) | 1.1613 | holds | yes |
+| gauss | 3x2x3x2x3 | 3 | 0 | all-contexts | 400 | 43200 | 0 (0) | 1.4460 | holds | yes |
+| gauss | 3x2x3x2x3 | 3 | 2 | all-contexts | 400 | 43200 | 0 (0) | 1.4226 | holds | yes |
+| gauss | 3x2x3x2x3 | 3 | 1 | anchor-context | 400 | 43200 | 2 (2) | 0.9233 | FAILS (control A) | yes |
+| gauss | 3x2x3x2x3 | 3 | 4 | AH | 400 | 43200 | 0 (0) | 1.0680 | FAILS (control B) | NO |
+| gauss | 3x2x3x2x3 | 3 | 1 | roles-exchanged | 400 | 43200 | 0 (0) | 1.0803 | FAILS (control C) | NO |
+| gauss | 3x2x3x2x3 | 4 | 0 | AH | 400 | 43200 | 0 (0) | 1.4558 | holds | yes |
+| gauss | 3x2x3x2x3 | 4 | 1 | AH | 400 | 43200 | 0 (0) | 1.2855 | holds | yes |
+| gauss | 3x2x3x2x3 | 4 | 2 | AH | 400 | 43200 | 0 (0) | 1.3277 | holds | yes |
+| gauss | 3x2x3x2x3 | 4 | 3 | AH | 400 | 43200 | 0 (0) | 1.2460 | holds | yes |
+| gauss | 3x2x3x2x3 | 4 | 4 | AH | 400 | 43200 | 0 (0) | 1.2959 | holds | yes |
+| gauss | 3x2x3x2x3 | 4 | 0 | all-contexts | 400 | 43200 | 0 (0) | 1.3672 | holds | yes |
+| gauss | 3x2x3x2x3 | 4 | 2 | all-contexts | 400 | 43200 | 0 (0) | 1.1341 | holds | yes |
+| gauss | 3x2x3x2x3 | 4 | 1 | anchor-context | 400 | 43200 | 0 (0) | 1.2289 | FAILS (control A) | NO |
+| gauss | 3x2x3x2x3 | 4 | 5 | AH | 400 | 43200 | 0 (0) | 1.3134 | FAILS (control B) | NO |
+| gauss | 2x3x2x2x3x2 | 2 | 0 | AH | 150 | 21600 | 0 (0) | 1.5635 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 2 | 1 | AH | 150 | 21600 | 0 (0) | 1.3592 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 2 | 2 | AH | 150 | 21600 | 0 (0) | 1.2115 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 2 | 0 | all-contexts | 150 | 21600 | 0 (0) | 1.4968 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 2 | 2 | all-contexts | 150 | 21600 | 0 (0) | 1.3800 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 2 | 1 | anchor-context | 150 | 21600 | 139 (76) | 0.1824 | FAILS (control A) | yes |
+| gauss | 2x3x2x2x3x2 | 2 | 3 | AH | 150 | 21600 | 0 (0) | 1.0430 | FAILS (control B) | NO |
+| gauss | 2x3x2x2x3x2 | 2 | 1 | roles-exchanged | 150 | 21600 | 7 (6) | 0.8495 | FAILS (control C) | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 0 | AH | 150 | 21600 | 0 (0) | 1.2364 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 1 | AH | 150 | 21600 | 0 (0) | 1.2435 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 2 | AH | 150 | 21600 | 0 (0) | 1.0316 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 3 | AH | 150 | 21600 | 0 (0) | 1.0881 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 0 | all-contexts | 150 | 21600 | 0 (0) | 1.4333 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 2 | all-contexts | 150 | 21600 | 0 (0) | 1.3757 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 1 | anchor-context | 150 | 21600 | 26 (22) | 0.5072 | FAILS (control A) | yes |
+| gauss | 2x3x2x2x3x2 | 3 | 4 | AH | 150 | 21600 | 0 (0) | 1.0655 | FAILS (control B) | NO |
+| gauss | 2x3x2x2x3x2 | 3 | 1 | roles-exchanged | 150 | 21600 | 0 (0) | 1.0000 | FAILS (control C) | NO |
+| gauss | 2x3x2x2x3x2 | 4 | 0 | AH | 150 | 21600 | 0 (0) | 1.2273 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 1 | AH | 150 | 21600 | 0 (0) | 1.2836 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 2 | AH | 150 | 21600 | 0 (0) | 1.1489 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 3 | AH | 150 | 21600 | 0 (0) | 1.0819 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 4 | AH | 150 | 21600 | 0 (0) | 1.1365 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 0 | all-contexts | 150 | 21600 | 0 (0) | 1.2843 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 2 | all-contexts | 150 | 21600 | 0 (0) | 1.3076 | holds | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 1 | anchor-context | 150 | 21600 | 1 (1) | 0.9622 | FAILS (control A) | yes |
+| gauss | 2x3x2x2x3x2 | 4 | 5 | AH | 150 | 21600 | 0 (0) | 1.0436 | FAILS (control B) | NO |
+| gauss | 2x3x2x2x3x2 | 4 | 1 | roles-exchanged | 150 | 21600 | 0 (0) | 1.0000 | FAILS (control C) | NO |
+
+claims expected to hold: 2332800 (function, state) checks, violations: 0
+unexpected outcomes on the structured family: none
+controls that did not fail on the Gaussian family (the weakness of that family, see the docstring): 11
+ALL DONE 26 s; peak RSS 34 MB

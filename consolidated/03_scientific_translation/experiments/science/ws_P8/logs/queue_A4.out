@@ -1,0 +1,8 @@
+[06:44:10] START python3 -B p8_03b_statecheck.py K5 H 0.70 --budget 1000
+[06:44:10] END   (exit 0) p8_03b_statecheck.py K5 H 0.70 --budget 1000
+[06:44:10] START python3 -B p8_04b_gamma12_blocks.py K12 H 0.70 4 --budget 1000
+[06:44:45] END   (exit 0) p8_04b_gamma12_blocks.py K12 H 0.70 4 --budget 1000
+[06:44:45] START python3 -B p8_04b_gamma12_blocks.py K12 H 0.70 5 --budget 1000
+[06:45:51] END   (exit 0) p8_04b_gamma12_blocks.py K12 H 0.70 5 --budget 1000
+[06:45:51] START python3 -B p8_04b_gamma12_blocks.py K12 H 0.70 6 --budget 1000
+Terminated

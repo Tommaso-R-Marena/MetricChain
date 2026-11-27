@@ -1,0 +1,26 @@
+(i) inner problem by brute force
+  2 blocks (m,a,b)=(0.500,0.298,0.298) B=0.1992: clipping 0.025101 | grid, v: 0.025172 | grid, I: 0.025172
+  2 blocks (m,a,b)=(0.783,0.284,0.264) B=0.1753: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.533,0.221,0.282) B=0.2695: clipping 0.000781 | grid, v: 0.000795 | grid, I: 0.000795
+  2 blocks (m,a,b)=(0.348,0.153,0.188) B=0.3243: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.410,0.423,0.182) B=0.1971: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.224,0.148,0.322) B=0.2243: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.734,0.207,0.288) B=0.2122: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.559,0.302,0.240) B=0.2207: clipping 0.018690 | grid, v: 0.018787 | grid, I: 0.018787
+  2 blocks (m,a,b)=(0.241,0.128,0.061) B=0.3585: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.368,0.275,0.168) B=0.2790: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.779,0.163,0.122) B=0.3016: clipping 0.000000 | grid, v: 0.000000 | grid, I: 0.000000
+  2 blocks (m,a,b)=(0.544,0.351,0.285) B=0.1835: clipping 0.021759 | grid, v: 0.021830 | grid, I: 0.021830
+  3 blocks lams=[0.526 0.246 0.228] mus=[0.486 0.856 0.18 ] B=0.2494: clipping 0.002955 | grid (181^3) 0.003286
+  3 blocks lams=[0.313 0.163 0.524] mus=[0.4   0.279 0.407] B=0.1199: clipping 0.000365 | grid (181^3) 0.000530
+  3 blocks lams=[0.213 0.127 0.661] mus=[0.546 0.408 0.66 ] B=0.1364: clipping 0.000887 | grid (181^3) 0.001059
+  3 blocks lams=[0.468 0.187 0.345] mus=[0.872 0.501 0.802] B=0.1016: clipping 0.000053 | grid (181^3) 0.000107
+  3 blocks lams=[0.291 0.232 0.476] mus=[0.565 0.169 0.389] B=0.1508: clipping 0.012317 | grid (181^3) 0.012410
+  3 blocks lams=[0.233 0.492 0.276] mus=[0.361 0.739 0.283] B=0.2209: clipping 0.015537 | grid (181^3) 0.015771
+  largest |grid - clipping|: 2 blocks 9.7e-05 (grid step 5e-4), 3 blocks 3.3e-04 (grid step 5.6e-3; the grid value is an upper bound)   [14s]
+(ii) the brief's definition of the dip exponent of H (P_theta = {MI >= theta}), centre type m, grid 1001^2
+  m = 0.5: definition on the grid 0.02527 | sup-min over (a,b) at this m 0.0251012   [31s]
+  m = 0.45: definition on the grid 0.02443 | sup-min over (a,b) at this m 0.0243744   [39s]
+(iii) n_mu: robust solver against the direct 2-d search
+  10 random profiles: largest difference 3.2e-09
+time 43s

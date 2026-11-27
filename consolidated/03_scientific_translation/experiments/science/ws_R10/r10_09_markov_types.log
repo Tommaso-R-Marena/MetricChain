@@ -1,0 +1,16 @@
+1. explicit example of Y 8.3:  psi = u*d_H(., 0...010),  x = 110...0,  y = 010...0,  q < 1/(n-2)
+   n=5: |class(x)|=1, |class(y)|=3 (y0 in class(y): True); psi(x)=3, t(x)=3 (weight level e^-3); psi over class(y): [0.0, 2.0], t(y)=0; d(x,y)=1;  t(x)-t(y) = 3 > d(x,y) = 1 : level function NOT admissible; psi^tr(x)-psi^tr(y) = 1
+   n=6: |class(x)|=1, |class(y)|=4 (y0 in class(y): True); psi(x)=3, t(x)=3 (weight level e^-3); psi over class(y): [0.0, 2.0], t(y)=0; d(x,y)=1;  t(x)-t(y) = 3 > d(x,y) = 1 : level function NOT admissible; psi^tr(x)-psi^tr(y) = 1
+   n=7: |class(x)|=1, |class(y)|=5 (y0 in class(y): True); psi(x)=3, t(x)=3 (weight level e^-3); psi over class(y): [0.0, 2.0], t(y)=0; d(x,y)=1;  t(x)-t(y) = 3 > d(x,y) = 1 : level function NOT admissible; psi^tr(x)-psi^tr(y) = 1
+   n=8: |class(x)|=1, |class(y)|=6 (y0 in class(y): True); psi(x)=3, t(x)=3 (weight level e^-3); psi over class(y): [0.0, 2.0], t(y)=0; d(x,y)=1;  t(x)-t(y) = 3 > d(x,y) = 1 : level function NOT admissible; psi^tr(x)-psi^tr(y) = 1
+   n=9: |class(x)|=1, |class(y)|=7 (y0 in class(y): True); psi(x)=3, t(x)=3 (weight level e^-3); psi over class(y): [0.0, 2.0], t(y)=0; d(x,y)=1;  t(x)-t(y) = 3 > d(x,y) = 1 : level function NOT admissible; psi^tr(x)-psi^tr(y) = 1
+
+2. brute force n=9: 74 Markov-type classes (sizes 1..20), 10 type classes
+   600 cases (200 residuals x 3 quantiles)
+   Markov types               level function t inadmissible in 599 cases (largest excess 6.00 flips);  truncated residual max(psi,t) inadmissible in 464 cases (largest excess 4.00 flips)
+   type classes of the cube   level function t inadmissible in 0 cases (largest excess 0.00 flips);  truncated residual max(psi,t) inadmissible in 0 cases (largest excess 0.00 flips)
+time 0.8s
+
+real	0m1.120s
+user	0m0.499s
+sys	0m0.028s

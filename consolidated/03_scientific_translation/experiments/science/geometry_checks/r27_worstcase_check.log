@@ -1,0 +1,21 @@
+r27_worstcase_check.py   started 2026-11-27 00:05:33 UTC
+(A) stored configurations of the referee, re-evaluated here
+    case | rms distance error | largest | RMSD (reflections allowed) | radius of gyration of the trace | farther than it?
+    helix-like n=20|0.3        | 0.3000 | 1.116 |   9.950 |   8.95 | yes   [referee's log: 0.3000, 1.116, 9.950; agrees: True]
+    helix-like n=12|0.5        | 0.5000 | 1.172 |   6.354 |   5.66 | yes   [referee's log: 0.5000, 1.172, 6.354; agrees: True]
+    strand-like 160 n=20|0.1   | 0.1000 | 0.338 |  12.002 |  19.05 | no   [referee's log: 0.1000, 0.338, 12.002; agrees: True]
+    strand-like 160 n=20|0.2   | 0.2000 | 0.488 |  18.620 |  19.05 | no   [referee's log: 0.2000, 0.488, 18.620; agrees: True]
+    helix-like n=20|0.1        | 0.1000 | 0.279 |   0.907 |   8.95 | no   [referee's log: 0.1000, 0.279, 0.907; agrees: True]
+    controls: trace against itself 0.0e+00; against its mirror image with reflections 0.0e+00, without 3.211 (must be > 0)
+(B) one nearly coplanar interior window: the reflected tail
+    h =  0.1000: squared distances changed 1 (of 38); ||eta||_2 = 4.458e-02, 4|h- h+| = 4.458e-02; d_P = 1.770; d_P/||eta||_2 =      39.70; 1/(2 mu) = 15.860
+    h =  0.0100: squared distances changed 1 (of 38); ||eta||_2 = 4.458e-03, 4|h- h+| = 4.458e-03; d_P = 1.809; d_P/||eta||_2 =     405.78; 1/(2 mu) = 18.347
+    h =  0.0010: squared distances changed 1 (of 38); ||eta||_2 = 4.458e-04, 4|h- h+| = 4.458e-04; d_P = 1.813; d_P/||eta||_2 =    4066.98; 1/(2 mu) = 18.313
+    h =  0.0001: squared distances changed 1 (of 38); ||eta||_2 = 4.458e-05, 4|h- h+| = 4.458e-05; d_P = 1.813; d_P/||eta||_2 =   40679.05; 1/(2 mu) = 18.306
+    growth of the ratio per decade of h: 10.22, 10.02, 10.00 (1/h law: 10);  1/(2 mu) between 15.860 and 18.347
+(C) five points of the helix-like trace lifted to four dimensions along their affine dependency
+    eps = 0.1: ||eta||_2 = 2.044e-02 = 2.044 eps^2; d_P = 1.000e-01 = 1.0000 eps; d_P/||eta||_2 = 0.489/eps
+    eps = 0.01: ||eta||_2 = 2.044e-04 = 2.044 eps^2; d_P = 1.000e-02 = 1.0000 eps; d_P/||eta||_2 = 0.489/eps
+    eps = 0.001: ||eta||_2 = 2.044e-06 = 2.044 eps^2; d_P = 1.000e-03 = 1.0000 eps; d_P/||eta||_2 = 0.489/eps
+statements that must hold and did not: 0
+ALL DONE   computed in 0.0 s   peak memory 36 MB

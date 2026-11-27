@@ -1,0 +1,3 @@
+u = 1.0 n = 8000 M = 2 proof: ln cost/(n a) = 1.1025   bound of Theorem A = 1.5615   blocks (top first): [(990, 8), (788, 10), (727, 10)]
+      node checks 315321 (levels built: {'D1': 8, 'S1': 551, 'D0': 1735, 'S0': 38228}); violations 0; least slack of the induction by family: {'D0': 154.2, 'D1': 304.3, 'S0': 100.1, 'S1': 259.2, 'base': 5.3, 'chain0': 86.0, 'chain1': 234.5, 'chain2': 386.9}   [72 s]
+(run stopped by its 285 s limit before the 'min' variant finished)

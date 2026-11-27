@@ -1,0 +1,29 @@
+u = 1, t = 0.45;  cube per site F_c(t) = 0.028950
+n = 8:   [4 s]
+   cube                  : G/n = 0.028950 (dual over site-wise labels 0.028950);  ratio to the cube 1.000;  Var(m)/n = 1.000;  spread of ln Q* within type classes 7.7e-08
+   chain p=0.4           : G/n = 0.033939 (dual over site-wise labels 0.033939);  ratio to the cube 1.172;  Var(m)/n = 1.422;  spread of ln Q* within type classes 3.4e+00
+   chain p=0.3           : G/n = 0.040142 (dual over site-wise labels 0.040142);  ratio to the cube 1.387;  Var(m)/n = 2.056;  spread of ln Q* within type classes 6.2e+00
+   Curie-Weiss bJ=0.5    : G/n = 0.032775 (dual over site-wise labels 0.032775);  ratio to the cube 1.132;  Var(m)/n = 1.665;  spread of ln Q* within type classes 6.7e-06
+   Curie-Weiss bJ=0.9    : G/n = 0.037792 (dual over site-wise labels 0.037792);  ratio to the cube 1.305;  Var(m)/n = 2.722;  spread of ln Q* within type classes 1.6e-13
+   Curie-Weiss bJ=1.5    : G/n = 0.042396 (dual over site-wise labels 0.042396);  ratio to the cube 1.464;  Var(m)/n = 5.199;  spread of ln Q* within type classes 0.0e+00
+   Curie-Weiss bJ=-1.0   : G/n = 0.030701 (dual over site-wise labels 0.030701);  ratio to the cube 1.061;  Var(m)/n = 0.516;  spread of ln Q* within type classes 3.1e-08
+   Curie-Weiss bJ=-4.0   : G/n = 0.032191 (dual over site-wise labels 0.032191);  ratio to the cube 1.112;  Var(m)/n = 0.202;  spread of ln Q* within type classes 5.1e-08
+n = 10:   [13 s]
+   cube                  : G/n = 0.028950 (dual over site-wise labels 0.028950);  ratio to the cube 1.000;  Var(m)/n = 1.000;  spread of ln Q* within type classes 5.3e-08
+   chain p=0.4           : G/n = 0.034022 (dual over site-wise labels 0.034022);  ratio to the cube 1.175;  Var(m)/n = 1.438;  spread of ln Q* within type classes 4.6e+00
+   chain p=0.3           : G/n = 0.040207 (dual over site-wise labels 0.040207);  ratio to the cube 1.389;  Var(m)/n = 2.111;  spread of ln Q* within type classes 8.3e+00
+   Curie-Weiss bJ=0.5    : G/n = 0.031992 (dual over site-wise labels 0.032020);  ratio to the cube 1.105;  Var(m)/n = 1.715;  spread of ln Q* within type classes 2.0e-14
+   Curie-Weiss bJ=0.9    : G/n = 0.035417 (dual over site-wise labels 0.035417);  ratio to the cube 1.223;  Var(m)/n = 2.996;  spread of ln Q* within type classes 5.4e-07
+   Curie-Weiss bJ=1.5    : G/n = 0.036811 (dual over site-wise labels 0.036811);  ratio to the cube 1.272;  Var(m)/n = 6.448;  spread of ln Q* within type classes 2.1e-12
+   Curie-Weiss bJ=-1.0   : G/n = 0.030325 (dual over site-wise labels 0.030325);  ratio to the cube 1.048;  Var(m)/n = 0.513;  spread of ln Q* within type classes 2.0e-07
+   Curie-Weiss bJ=-4.0   : G/n = 0.031440 (dual over site-wise labels 0.031440);  ratio to the cube 1.086;  Var(m)/n = 0.203;  spread of ln Q* within type classes 4.6e-08
+n = 12:   [113 s]
+   cube                  : G/n = 0.028950 (dual over site-wise labels 0.028950);  ratio to the cube 1.000;  Var(m)/n = 1.000;  spread of ln Q* within type classes 4.7e-08
+   chain p=0.4           : G/n = 0.034074 (dual over site-wise labels 0.034074);  ratio to the cube 1.177;  Var(m)/n = 1.448;  spread of ln Q* within type classes 5.7e+00
+   chain p=0.3           : G/n = 0.040288 (dual over site-wise labels 0.040288);  ratio to the cube 1.392;  Var(m)/n = 2.148;  spread of ln Q* within type classes 1.0e+01
+   Curie-Weiss bJ=0.5    : G/n = 0.031471 (dual over site-wise labels 0.031513);  ratio to the cube 1.087;  Var(m)/n = 1.751;  spread of ln Q* within type classes 1.5e-13
+   Curie-Weiss bJ=0.9    : G/n = 0.033811 (dual over site-wise labels 0.033811);  ratio to the cube 1.168;  Var(m)/n = 3.233;  spread of ln Q* within type classes 6.2e-07
+   Curie-Weiss bJ=1.5    : G/n = 0.032941 (dual over site-wise labels 0.032941);  ratio to the cube 1.138;  Var(m)/n = 7.736;  spread of ln Q* within type classes 2.6e-08
+   Curie-Weiss bJ=-1.0   : G/n = 0.030082 (dual over site-wise labels 0.030082);  ratio to the cube 1.039;  Var(m)/n = 0.511;  spread of ln Q* within type classes 9.7e-08
+   Curie-Weiss bJ=-4.0   : G/n = 0.030978 (dual over site-wise labels 0.030978);  ratio to the cube 1.070;  Var(m)/n = 0.203;  spread of ln Q* within type classes 1.9e-10
+113.0 s

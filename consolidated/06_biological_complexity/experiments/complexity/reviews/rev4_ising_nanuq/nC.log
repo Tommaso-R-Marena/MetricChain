@@ -1,0 +1,14 @@
+[C/D/E] galled outer-labeled planar networks (explicit DAGs):
+    2-blob at the root (parallel edges)                     224
+    N1 with 2 leaves                                        221
+    N1 with 3 leaves                                        213
+    N2 with 2 leaves                                        0
+    N2 with 3 leaves                                        1012
+    Theorem 7 checked                                       2667
+    cuts                                                    1902
+    hybrid nodes                                            9402
+    level>=3                                                1407
+    multi-blob                                              1227
+    networks                                                2795
+    time 40 s
+[C'] Lemma B0 on galled networks without planarity filter: {'networks': 1417, 'non-planar': 809, 'hybrid nodes': 4782} ; non-galled controls with a non-cut edge below a hybrid: 208

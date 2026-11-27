@@ -1,0 +1,23 @@
+r20_count.py set medium cap 45.0 s per instance
+a=[3, 3, 2, 2] m=2 B=5  N=21 orders=24 : 1887888 structures in 12.3 s (24 orders done)
+a=[4, 4, 2] m=2 B=5  N=21 orders=6 : 762294 structures in 4.1 s (6 orders done)
+a=[4, 3, 3] m=2 B=5  N=21 orders=6 : 836544 structures in 4.7 s (6 orders done)
+a=[4, 4, 1, 1] m=2 B=5  N=21 orders=24 : 907128 structures in 9.2 s (24 orders done)
+a=[5, 3, 2] m=2 B=5  N=21 orders=6 : 731406 structures in 3.8 s (6 orders done)
+a=[3, 3, 3, 1] m=2 B=5  N=21 orders=24 : 1444632 structures in 9.7 s (24 orders done)
+a=[4, 2, 2, 2] m=2 B=5  N=21 orders=24 : 1711272 structures in 10.4 s (24 orders done)
+a=[2, 2, 2, 2, 2] m=2 B=5  N=21 orders=120 : 4363800 structures in 29.7 s (120 orders done)
+a=[3, 2, 2, 2, 1] m=2 B=5  N=21 orders=120 : 3319680 structures in 24.4 s (120 orders done)
+a=[2, 2, 2, 1, 1, 1] m=3 B=3  N=20 orders=720 : 834480 structures in 20.0 s (720 orders done)
+a=[3, 3, 1, 1, 1] m=3 B=3  N=20 orders=120 : 388920 structures in 5.1 s (120 orders done)
+a=[2, 2, 2, 2, 2, 2] m=3 B=4  N=26 orders=720 : >= 6460000 structures in 45.0 s (17 orders done)  extrapolated total ~ 2.74e+08
+a=[3, 3, 3, 3] m=3 B=4  N=26 orders=24 : >= 12240000 structures in 45.0 s (7 orders done)  extrapolated total ~ 4.20e+07
+a=[4, 4, 2, 2] m=3 B=4  N=26 orders=24 : >= 9920000 structures in 45.1 s (7 orders done)  extrapolated total ~ 3.40e+07
+a=[3, 3, 2, 2, 2] m=3 B=4  N=26 orders=120 : >= 9040000 structures in 45.0 s (11 orders done)  extrapolated total ~ 9.86e+07
+a=[3, 3, 3, 2, 1] m=3 B=4  N=26 orders=120 : >= 6780000 structures in 45.1 s (10 orders done)  extrapolated total ~ 8.14e+07
+a=[2, 2, 2, 2, 2, 2] m=2 B=6  N=25 orders=720 : >= 5540000 structures in 45.1 s (15 orders done)  extrapolated total ~ 2.66e+08
+a=[3, 3, 3, 3] m=2 B=6  N=25 orders=24 : >= 7480000 structures in 45.0 s (4 orders done)  extrapolated total ~ 4.49e+07
+a=[4, 4, 4] m=2 B=6  N=25 orders=6 : >= 7800000 structures in 45.0 s (3 orders done)  extrapolated total ~ 1.56e+07
+a=[5, 5, 2] m=2 B=6  N=25 orders=6 : >= 7980000 structures in 45.1 s (4 orders done)  extrapolated total ~ 1.20e+07
+a=[4, 3, 3, 2] m=2 B=6  N=25 orders=24 : >= 8300000 structures in 45.0 s (5 orders done)  extrapolated total ~ 3.98e+07
+END r20_count.py

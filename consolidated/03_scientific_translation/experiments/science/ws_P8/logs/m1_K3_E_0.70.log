@@ -1,0 +1,52 @@
+=== p8_01_measure: K3 (KKK) on E, tau 0.7: atoms 78, sites 3, domain [13, 21, 21] = 5733 states; anchor x0 = argmin E = (3, 10, 10); 1 subsets of order 3..3
+    class bb   :  33 atoms, net charge -0.1059 e, sum |q| 10.0119 e
+    class nsc  :   0 atoms, net charge +0.0000 e, sum |q| 0.0000 e
+    class chain:  33 atoms, net charge +1.2021 e, sum |q| 1.5753 e
+    class head :  12 atoms, net charge +1.9038 e, sum |q| 4.2162 e
+    fine groups (net charge): -0:bb +0.000, K1:bb -0.035, K1:chain +0.401, K1:head +0.635, K2:bb -0.035, K2:chain +0.401, K2:head +0.635, K3:bb -0.035, K3:chain +0.401, K3:head +0.635, -4:bb -0.000
+    row 78/78 done, checkpoint written, 13 s, RSS 134 MB
+    check: sum of the pair terms equals P3's evaluator G.energy at all 5733 states to 1.08e-12 kcal/mol
+    exact constants done, 13 s
+    GFDecomp against P3's GFBound (4 totals): largest relative deviation 1.5e-16; summands add up to the totals to 1.7e-16
+    P3 bounds done, 2 s
+    CHECK P3 summand >= exact constant for every (T, atom) and (T, atom pair): 3081 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0168, pair 1.0335; medians 1.62, 3.29
+    chains truth <= fine groups <= PP <= P3; self <= P3_self; cross <= P3_cross; all-plus <= PP <= P3; truth <= sum of class-pair constants: 8 checks, 0 violations
+    per-pair remainders against the sums of their own anchored constants (Proposition 1 for each pair term): 3081 checks, 0 violations
+--- order 3: 1 subsets; sums over the subsets (kcal/mol) and ratio to the truth
+    total      1.4075e-01   /truth      1.00
+    self       5.5848e-02   /truth      0.40
+    cross      1.1669e-01   /truth      0.83
+    fine       4.7525e-01   /truth      3.38
+    allplus    1.1455e+00   /truth      8.14
+    PP_self    1.0817e-01   /truth      0.77
+    PP_cross   3.5489e+00   /truth     25.21
+    PP         3.6571e+00   /truth     25.98
+    P3_self    1.8527e-01   /truth      1.32
+    P3_cross   1.0233e+01   /truth     72.70
+    P3         1.0418e+01   /truth     74.02
+    Gamma_3 (closed form over all subsets): self 1.8527e-01 + cross 1.0233e+01 = 1.0418e+01  (sum of the per-subset bounds: 1.0418e+01)
+    true remainder g - I_2 g over all states: [-3.4517e-02, 1.4075e-01];  Gamma_3 / sup|remainder| = 74
+    by atom class (sums over the 1 subsets):   signed share of the truth | exact constant of the class-pair function | best pair-by-pair | P3 | P3 / pair-by-pair
+      bb-bb        -4.4673e-03 (   -3.2 %) | 4.0875e-02 | 4.0109e-01 | 1.1493e+00 |    2.87
+      bb-chain     +3.6593e-03 (   +2.6 %) | 1.5029e-02 | 6.8091e-01 | 1.7636e+00 |    2.59
+      bb-head      +2.0014e-02 (  +14.2 %) | 3.8104e-02 | 1.8356e+00 | 5.0688e+00 |    2.76
+      chain-chain  +5.5303e-03 (   +3.9 %) | 7.8742e-03 | 4.2801e-02 | 1.8761e-01 |    4.38
+      chain-head   +4.8149e-02 (  +34.2 %) | 4.8149e-02 | 2.8180e-01 | 1.0562e+00 |    3.75
+      head-head    +4.3808e-02 (  +31.1 %) | 4.3808e-02 | 3.0673e-01 | 1.0075e+00 |    3.28
+      self:bb      +3.6747e-03 (   +2.6 %) | 5.1828e-02 | 8.1798e-02 | 1.1981e-01 |    1.46
+      self:chain   -1.2817e-04 (   -0.1 %) | 4.4645e-04 | 1.7031e-03 | 4.2405e-03 |    2.49
+      self:head    +2.0514e-02 (  +14.6 %) | 2.1146e-02 | 2.4671e-02 | 6.1222e-02 |    2.48
+    cross part by host pattern (moving atoms of the pair; of which with their site in T):   best pair-by-pair | P3 | ratio
+      0 moving, 0 host(s) in T: 4.0109e-01 | 1.1493e+00 |    2.87
+      1 moving, 1 host(s) in T: 2.5165e+00 | 6.8324e+00 |    2.72
+      2 moving, 2 host(s) in T: 6.3134e-01 | 2.2513e+00 |    3.57
+    cross part by Dmin = min over all states of r^2/(4 B_p B_q):   pairs | best pair-by-pair | P3 | ratio
+      Dmin in [ 0.0,  0.1):    76 | 1.4265e-01 | 5.3041e-01 |    3.72
+      Dmin in [ 0.1,  0.3):   286 | 2.6005e-01 | 7.0693e-01 |    2.72
+      Dmin in [ 0.3,  1.0):   751 | 1.9097e+00 | 5.1185e+00 |    2.68
+      Dmin in [ 1.0,  2.0):   790 | 8.9046e-01 | 2.5810e+00 |    2.90
+      Dmin in [ 2.0,  4.0):   659 | 3.3432e-01 | 1.2556e+00 |    3.76
+      Dmin in [ 4.0,  8.0):   320 | 1.1687e-02 | 4.0571e-02 |    3.47
+      Dmin in [ 8.0, 16.0):   102 | 1.8830e-05 | 6.5263e-05 |    3.47
+      Dmin in [16.0,  inf):    19 | 8.7839e-12 | 5.7787e-11 |    6.58
+DONE in 16.0 s; peak RSS 598 MB

@@ -1,0 +1,28 @@
+p7_08_synth  started 2026-11-26 05:21:49 UTC
+
+A. the ring with repulsive chords (exact integer arithmetic; R = 10)
+  n = 4, w = 0.75: share LP t = +0.2500, relaxation value -0.0000 (minimum 0); least number of branching sites on the reference path 0 (predicted 0; 1 such sets, e.g. []); caterpillar tree with 1 leaves certified: True; exhaustive tree search (depth <= 3): least depth 0, least leaves 1
+  n = 4, w = 1.25: share LP t = -0.2500, relaxation value -0.5000 (minimum 0); least number of branching sites on the reference path 1 (predicted 1; 4 such sets, e.g. [0]); caterpillar tree with 2 leaves certified: True; exhaustive tree search (depth <= 3): least depth 1, least leaves 2
+  n = 4, w = 1.75: share LP t = -0.7500, relaxation value -1.5000 (minimum 0); least number of branching sites on the reference path 2 (predicted 2; 6 such sets, e.g. [0, 1]); caterpillar tree with 3 leaves certified: True; exhaustive tree search (depth <= 3): least depth 2, least leaves 3
+  n = 5, w = 1.75: share LP t = -0.7500, relaxation value -1.8750 (minimum 0); least number of branching sites on the reference path 2 (predicted 2; 5 such sets, e.g. [0, 2]); caterpillar tree with 3 leaves certified: True; exhaustive tree search (depth <= 3): least depth 2, least leaves 3
+  n = 6, w = 1.75: share LP t = -0.7500, relaxation value -2.2500 (minimum 0); least number of branching sites on the reference path 2 (predicted 2; 3 such sets, e.g. [0, 3]); caterpillar tree with 3 leaves certified: True; exhaustive tree search (depth <= 3): least depth 2, least leaves 3
+  n = 7, w = 1.75: share LP t = -0.7500, relaxation value -2.6250 (minimum 0); least number of branching sites on the reference path 3 (predicted 3; 14 such sets, e.g. [0, 1, 4]); caterpillar tree with 4 leaves certified: True
+  n = 8, w = 1.75: share LP t = -0.7500, relaxation value -3.0000 (minimum 0); least number of branching sites on the reference path 3 (predicted 3; 8 such sets, e.g. [0, 2, 5]); caterpillar tree with 4 leaves certified: True
+  n = 9, w = 1.75: share LP t = -0.7500, relaxation value -3.3750 (minimum 0); least number of branching sites on the reference path 3 (predicted 3; 3 such sets, e.g. [0, 3, 6]); caterpillar tree with 4 leaves certified: True
+  n = 4, sweep of w in steps of 0.05: depth needed changes between [(1.0, 1.05), (1.5, 1.55)] (depths [(0, 1), (1, 2)]); predicted thresholds 1 and 3/2
+  n = 4, w = 7/4: sets of triplet constraints that close the gap (exact), by number of triples: {1: (0, 4), 2: (0, 6), 3: (0, 4), 4: (1, 1)};  slack t with all four triples: 0.1250; best t with one / two / three triples: -0.4000 / -0.1667 / -0.1667
+
+B, C. random models (uniform tables; reference = the minimiser; exact integer acceptance of every certificate)
+sites states coupling models | shares   gap | depth 1 depth 2 deeper | gap certified by EVERY site by one triple
+    3   (2,)      2.0   1500 |   1443    57 |      57       0      0 |                          57            57
+    3   (3,)      2.0   1500 |   1359   141 |     141       0      0 |                         141           141
+    3 (2, 3, 4)      2.0   1500 |   1370   130 |     130       0      0 |                         130           130
+    4   (2,)      2.0   1500 |   1335   165 |     165       0      0 |                          88           144
+    4   (3,)      2.0   1000 |    723   277 |     277       0      0 |                         174           216
+    4   (2,)      0.5   1000 |    980    20 |      20       0      0 |                           5            19
+    5   (2,)      2.0    600 |    485   115 |     115       0      0 |                          39            88
+
+BRUTE FORCE: 18176 leaves enumerated; 16567 leaf certificates compared with the exact leaf minimum: violations 0; leaves with a negative minimum 0
+[98s] wrote out/p7_08_synth.json   finished 2026-11-26 05:23:28 UTC
+DONE p7_08_synth
+exit 0

@@ -1,0 +1,5 @@
+u=1.0 n=1000: R=273  ln LB_na = 110.9   |  hinted: k=380  ln LB_hint = 31.7
+u=1.0 n=1350: R=368  ln LB_na = 149.0   |  hinted: k=513  ln LB_hint = 42.0
+u=1.0 n=1400: R=381  ln LB_na = 155.0   |  hinted: k=532  ln LB_hint = 43.5
+u=2.0 n=540: R=67  ln LB_na = 176.5   |  hinted: k=153  ln LB_hint = 55.1
+u=0.5 n=4700: R=1784  ln LB_na = 141.5   |  hinted: k=2059  ln LB_hint = 39.0

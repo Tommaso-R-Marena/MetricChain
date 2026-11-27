@@ -1,0 +1,144 @@
+# R16 replication (own code r16lib.py). u = 1, a = 0.110944, n = 16000, n a = 1775.1051
+# started 2026-11-26T08:59:36Z
+n=16000 phi_1=0.300 mode two: ln(C_max)/(na) = 0.7904; cap 2 Mbar 0.3673; fibre dimension 11200; n_o = 4800; J = 176639; K = 33188; r-dagger = 1205; ln(delta') = -659.428; x_out = 0.871544; rungs served by a two-level run: 0 of 40 (rungs -)
+    term 0.7904: rung 40, server K0  , accuracy x_l = 0.5 (x_{l-1} = 0.6535), multiplier: count 0.0213, cost charged 0.7691
+    term 0.7867: rung 39, server K0  , accuracy x_l = 0.6535 (x_{l-1} = 0.8541), multiplier: count 0.0214, cost charged 0.7653
+    term 0.7831: rung 38, server K0  , accuracy x_l = 0.8541 (x_{l-1} = 1.116), multiplier: count 0.0216, cost charged 0.7615
+    term 0.7795: rung 37, server K0  , accuracy x_l = 1.116 (x_{l-1} = 1.459), multiplier: count 0.0218, cost charged 0.7578
+    rung   accuracy   multiplier   base bracket   best two-level candidate: certified bound, certified accuracy, design   -> server, term
+       1  1.714e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       2  1.311e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       3  1.003e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       4       7676   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       5       5873   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       6       4493   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       7       3438   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       8       2630   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       9       2012   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+      10       1540   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+      11       1178   cap   0.3673         0.0105   (none tried)   -> K0, 0.3778
+      12      901.3   cap   0.3673         0.0325   (none tried)   -> K0, 0.3998
+      13      689.6   cap   0.3673         0.0677   (none tried)   -> K0, 0.4350
+      14      527.6   cap   0.3673         0.1109   (none tried)   -> K0, 0.4782
+      15      403.7   count 0.3182         0.1579   (none tried)   -> K0, 0.4761
+      16      308.8   count 0.2483         0.2064   (none tried)   -> K0, 0.4547
+      17      236.3   count 0.1949         0.2542   (none tried)   -> K0, 0.4491
+      18      180.8   count 0.1540         0.3002   (none tried)   -> K0, 0.4543
+      19      138.3   count 0.1228         0.3443   (none tried)   -> K0, 0.4671
+      20      105.8   count 0.0989         0.3853   (none tried)   -> K0, 0.4841
+      21      80.97   count 0.0806         0.4236   (none tried)   -> K0, 0.5042
+      22      61.95   count 0.0665         0.4591   (none tried)   -> K0, 0.5257
+      23       47.4   count 0.0558         0.4916   (none tried)   -> K0, 0.5474
+      24      36.26   count 0.0476         0.5219   (none tried)   -> K0, 0.5695
+      25      27.75   count 0.0414         0.5498   (none tried)   -> K0, 0.5912
+      26      21.23   count 0.0366         0.5756   (none tried)   -> K0, 0.6121
+      27      16.24   count 0.0329         0.6004   (none tried)   -> K0, 0.6333
+      28      12.43   count 0.0301         0.6243   (none tried)   -> K0, 0.6544
+      29      9.508   count 0.0279         0.6481   (none tried)   -> K0, 0.6761
+      30      7.274   count 0.0263         0.6736   (none tried)   -> K0, 0.6999
+      31      5.566   count 0.0250         0.7002   (none tried)   -> K0, 0.7252
+      32      4.258   count 0.0241         0.7227   (none tried)   -> K0, 0.7468
+      33      3.258   count 0.0233         0.7394   (none tried)   -> K0, 0.7627
+      34      2.493   count 0.0228         0.7521   (none tried)   -> K0, 0.7749
+      35      1.907   count 0.0223         0.7475   (none tried)   -> K0, 0.7699
+      36      1.459   count 0.0220         0.7529   (none tried)   -> K0, 0.7749
+      37      1.116   count 0.0218         0.7578   (none tried)   -> K0, 0.7795
+      38     0.8541   count 0.0216         0.7615   (none tried)   -> K0, 0.7831
+      39     0.6535   count 0.0214         0.7653   (none tried)   -> K0, 0.7867
+      40        0.5   count 0.0213         0.7691   (none tried)   -> K0, 0.7904
+n=16000 phi_1=0.300 mode tuned: ln(C_max)/(na) = 0.6761; cap 2 Mbar 0.3673; fibre dimension 11200; n_o = 4800; J = 176639; K = 33188; r-dagger = 1205; ln(delta') = -659.428; x_out = 0.871544; rungs served by a two-level run: 18 of 40 (rungs 15-21, 30-40)
+    term 0.6761: rung 29, server K0  , accuracy x_l = 9.508 (x_{l-1} = 12.43), multiplier: count 0.0279, cost charged 0.6481
+    term 0.6544: rung 28, server K0  , accuracy x_l = 12.43 (x_{l-1} = 16.24), multiplier: count 0.0301, cost charged 0.6243
+    term 0.6333: rung 27, server K0  , accuracy x_l = 16.24 (x_{l-1} = 21.23), multiplier: count 0.0329, cost charged 0.6004
+    term 0.6121: rung 26, server K0  , accuracy x_l = 21.23 (x_{l-1} = 27.75), multiplier: count 0.0366, cost charged 0.5756
+    rung   accuracy   multiplier   base bracket   best two-level candidate: certified bound, certified accuracy, design   -> server, term
+       1  1.714e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       2  1.311e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       3  1.003e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       4       7676   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       5       5873   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       6       4493   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       7       3438   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       8       2630   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       9       2012   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+      10       1540   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+      11       1178   cap   0.3673         0.0105   0.0278, 1178, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.700   -> K0, 0.3778
+      12      901.3   cap   0.3673         0.0325   0.0500, 901.29, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> K0, 0.3998
+      13      689.6   cap   0.3673         0.0677   0.0855, 689.577, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> K0, 0.4350
+      14      527.6   cap   0.3673         0.1109   0.1256, 527.595, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> K0, 0.4782
+      15      403.7   count 0.3182         0.1579   0.1544, 403.663, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> 2L+, 0.4726
+      16      308.8   count 0.2483         0.2064   0.1878, 308.842, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.615   -> 2L+, 0.4361
+      17      236.3   count 0.1949         0.2542   0.2190, 236.295, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.775   -> 2L+, 0.4139
+      18      180.8   count 0.1540         0.3002   0.2151, 180.789, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.639   -> 2L+, 0.3691
+      19      138.3   count 0.1228         0.3443   0.2660, 138.322, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.518   -> 2L+, 0.3887
+      20      105.8   count 0.0989         0.3853   0.3396, 105.83, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.415   -> 2L+, 0.4385
+      21      80.97   count 0.0806         0.4236   0.4071, 80.9705, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.329   -> 2L+, 0.4876
+      22      61.95   count 0.0665         0.4591   0.4680, 61.9505, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.259   -> K0, 0.5257
+      23       47.4   count 0.0558         0.4916   0.5230, 47.3983, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.203   -> K0, 0.5474
+      24      36.26   count 0.0476         0.5219   0.5726, 36.2645, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.158   -> K0, 0.5695
+      25      27.75   count 0.0414         0.5498   0.6190, 27.7459, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.122   -> K0, 0.5912
+      26      21.23   count 0.0366         0.5756   0.6615, 21.2284, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.094   -> K0, 0.6121
+      27      16.24   count 0.0329         0.6004   0.6948, 16.2418, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.075   -> K0, 0.6333
+      28      12.43   count 0.0301         0.6243   0.7096, 12.4266, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.075   -> K0, 0.6544
+      29      9.508   count 0.0279         0.6481   0.7207, 9.50761, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.075   -> K0, 0.6761
+      30      7.274   count 0.0263         0.6736   0.4522, 4.87779, bounded (c=0.333, b=x/2), phi_2=0.55   -> 2L+, 0.4785
+      31      5.566   count 0.0250         0.7002   0.4522, 4.02343, bounded (c=0.333, b=x/2), phi_2=0.55   -> 2L+, 0.4773
+      32      4.258   count 0.0241         0.7227   0.4523, 3.36976, bounded (c=0.333, b=x/2), phi_2=0.55   -> 2L+, 0.4764
+      33      3.258   count 0.0233         0.7394   0.4541, 2.67022, bounded (c=0.271, b=x/2), phi_2=0.55   -> 2L+, 0.4775
+      34      2.493   count 0.0228         0.7521   0.4562, 2.07564, bounded (c=0.208, b=x/2), phi_2=0.55   -> 2L+, 0.4790
+      35      1.907   count 0.0223         0.7475   0.4583, 1.6127, bounded (c=0.159, b=x/2), phi_2=0.55   -> 2L+, 0.4807
+      36      1.459   count 0.0220         0.7529   0.4613, 1.25142, bounded (c=0.122, b=x/2), phi_2=0.55   -> 2L+, 0.4833
+      37      1.116   count 0.0218         0.7578   0.4632, 0.969453, bounded (c=0.093, b=x/2), phi_2=0.55   -> 2L+, 0.4850
+      38     0.8541   count 0.0216         0.7615   0.4654, 0.74967, bounded (c=0.071, b=x/2), phi_2=0.55   -> 2L+, 0.4870
+      39     0.6535   count 0.0214         0.7653   0.4677, 0.578701, bounded (c=0.054, b=x/2), phi_2=0.55   -> 2L+, 0.4891
+      40        0.5   count 0.0213         0.7691   0.4700, 0.446008, bounded (c=0.042, b=x/2), phi_2=0.55   -> 2L+, 0.4913
+n=16000 phi_1=0.300 mode searched: ln(C_max)/(na) = 0.4782; cap 2 Mbar 0.3673; fibre dimension 11200; n_o = 4800; J = 176639; K = 33188; r-dagger = 1205; ln(delta') = -659.428; x_out = 0.871544; rungs served by a two-level run: 26 of 40 (rungs 15-40)
+    term 0.4782: rung 14, server K0  , accuracy x_l = 527.6 (x_{l-1} = 689.6), multiplier: cap 0.3673, cost charged 0.1109
+    term 0.4726: rung 15, server 2L+ , accuracy x_l = 403.7 (x_{l-1} = 527.6), multiplier: count 0.3182, cost charged 0.1544
+    term 0.4536: rung 40, server 2L+ , accuracy x_l = 0.5 (x_{l-1} = 0.6535), multiplier: count 0.0213, cost charged 0.4323
+    term 0.4521: rung 38, server 2L+ , accuracy x_l = 0.8541 (x_{l-1} = 1.116), multiplier: count 0.0216, cost charged 0.4305
+    rung   accuracy   multiplier   base bracket   best two-level candidate: certified bound, certified accuracy, design   -> server, term
+       1  1.714e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       2  1.311e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       3  1.003e+04   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       4       7676   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       5       5873   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       6       4493   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       7       3438   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       8       2630   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+       9       2012   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+      10       1540   cap   0.3673         0.0061   (none tried)   -> K0, 0.3734
+      11       1178   cap   0.3673         0.0105   0.0278, 1178, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.700   -> K0, 0.3778
+      12      901.3   cap   0.3673         0.0325   0.0500, 901.29, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> K0, 0.3998
+      13      689.6   cap   0.3673         0.0677   0.0855, 689.577, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> K0, 0.4350
+      14      527.6   cap   0.3673         0.1109   0.1256, 527.595, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> K0, 0.4782
+      15      403.7   count 0.3182         0.1579   0.1544, 403.663, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.800   -> 2L+, 0.4726
+      16      308.8   count 0.2483         0.2064   0.1878, 308.842, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.615   -> 2L+, 0.4361
+      17      236.3   count 0.1949         0.2542   0.2190, 236.295, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.775   -> 2L+, 0.4139
+      18      180.8   count 0.1540         0.3002   0.2151, 180.789, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.639   -> 2L+, 0.3691
+      19      138.3   count 0.1228         0.3443   0.2660, 138.322, extensive (lam=1, eta=1/2, b=x/4), phi_2=0.518   -> 2L+, 0.3887
+      20      105.8   count 0.0989         0.3853   0.3360, 105.83, bounded (c=0.333, b=max), phi_2=0.30   -> 2L+, 0.4349
+      21      80.97   count 0.0806         0.4236   0.3409, 80.9705, bounded (c=0.333, b=max), phi_2=0.30   -> 2L+, 0.4214
+      22      61.95   count 0.0665         0.4591   0.3418, 61.9505, bounded (c=0.333, b=max), phi_2=0.35   -> 2L+, 0.4084
+      23       47.4   count 0.0558         0.4916   0.3460, 47.3983, bounded (c=0.333, b=max), phi_2=0.35   -> 2L+, 0.4018
+      24      36.26   count 0.0476         0.5219   0.3622, 36.2645, bounded (c=0.333, b=max), phi_2=0.35   -> 2L+, 0.4099
+      25      27.75   count 0.0414         0.5498   0.3643, 27.7459, bounded (c=0.333, b=max), phi_2=0.40   -> 2L+, 0.4057
+      26      21.23   count 0.0366         0.5756   0.3651, 21.2284, bounded (c=0.333, b=max), phi_2=0.40   -> 2L+, 0.4016
+      27      16.24   count 0.0329         0.6004   0.3815, 16.2418, bounded (c=0.333, b=max), phi_2=0.40   -> 2L+, 0.4144
+      28      12.43   count 0.0301         0.6243   0.3828, 12.4266, bounded (c=0.333, b=max), phi_2=0.45   -> 2L+, 0.4129
+      29      9.508   count 0.0279         0.6481   0.3894, 9.50761, bounded (c=0.333, b=max), phi_2=0.45   -> 2L+, 0.4173
+      30      7.274   count 0.0263         0.6736   0.4055, 7.27427, bounded (c=0.333, b=max), phi_2=0.45   -> 2L+, 0.4318
+      31      5.566   count 0.0250         0.7002   0.4155, 5.56554, bounded (c=0.333, b=max), phi_2=0.50   -> 2L+, 0.4406
+      32      4.258   count 0.0241         0.7227   0.4158, 3.36976, bounded (c=0.333, b=x/2), phi_2=0.50   -> 2L+, 0.4399
+      33      3.258   count 0.0233         0.7394   0.4172, 3.25794, bounded (c=0.271, b=max), phi_2=0.50   -> 2L+, 0.4405
+      34      2.493   count 0.0228         0.7521   0.4205, 2.49265, bounded (c=0.208, b=max), phi_2=0.50   -> 2L+, 0.4433
+      35      1.907   count 0.0223         0.7475   0.4213, 1.6127, bounded (c=0.159, b=x/2), phi_2=0.50   -> 2L+, 0.4436
+      36      1.459   count 0.0220         0.7529   0.4234, 1.45914, bounded (c=0.122, b=max), phi_2=0.50   -> 2L+, 0.4454
+      37      1.116   count 0.0218         0.7578   0.4262, 1.11639, bounded (c=0.093, b=max), phi_2=0.50   -> 2L+, 0.4480
+      38     0.8541   count 0.0216         0.7615   0.4305, 0.854149, bounded (c=0.071, b=max), phi_2=0.50   -> 2L+, 0.4521
+      39     0.6535   count 0.0214         0.7653   0.4303, 0.578701, bounded (c=0.054, b=x/2), phi_2=0.50   -> 2L+, 0.4517
+      40        0.5   count 0.0213         0.7691   0.4323, 0.499999, bounded (c=0.042, b=max), phi_2=0.50   -> 2L+, 0.4536
+n=16000 phi_1=0.300: two 0.7904 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6761 [2L+ rungs: 18 of 40 (15-21, 30-40); max(xout - x_l) over them 0] | searched 0.4782 [2L+ rungs: 26 of 40 (15-40); max(xout - x_l) over them 0] |   [2 s]
+n=16000 best over these outer fractions: two 0.7904 (phi_1 = 0.3); tuned 0.6761 (phi_1 = 0.3); searched 0.4782 (phi_1 = 0.3)
+# finished 2026-11-26T08:59:38Z; elapsed 2 s
+peak RSS MB 56.1953125

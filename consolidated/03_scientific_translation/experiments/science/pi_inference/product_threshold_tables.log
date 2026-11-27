@@ -1,0 +1,30 @@
+(1) the Complexity division's zero-temperature threshold on four floors
+| case | tables (site sets of sizes) | sum of their maxima, kT | `Δ` | `1/(eΔ)` | sites with `q_i ≥ 1/(eΔ)` | `q_max` | **`λ₀`** | measured `λ_c` | **`λ₀/λ_c`** | `λ_gs/λ₀` | minimising set | explicit criterion |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Lys₁₂, order 4, band 4 | 114 (1, 2, 3, 4) | 16.637 | 8 | 0.0460 | 6 of 12 | 0.372 | **2.047** | 15.324 | **0.134** | 7.57 | 12 of 12 sites | void |
+| Lys₁₂, order 4, band 7 | 333 (2, 3, 4) | 17.86 | 11 | 0.0334 | 7 of 12 | 0.372 | **1.922** | 18.805 | **0.102** | 9.94 | 12 of 12 sites | void |
+| Lys₁₂, order 3, band 7 | 175 (1, 2, 3) | 271.58 | 11 | 0.0334 | 7 of 12 | 0.372 | **0.1264** | 1.3176 | **0.096** | 10.73 | 12 of 12 sites | void |
+| (LKSE)₃, order 3, band 7 | 180 (1, 2, 3) | 1233.9 | 11 | 0.0334 | 10 of 12 | 0.565 | **0.03106** | 0.19835 | **0.157** | 6.60 | 12 of 12 sites | void |
+
+(2) the exact split of lambda_gs / lambda_0 at the extremal state (A x B1 x B2a x B2b x C; asserted to 1e-9)
+| case | `λ_gs/λ₀` | `A`: `S*` is not the binary minimiser | `B1`: the band against a product, at `S*` | `B2`: one state against all states with that displaced set | of it `B2a`: the number of off states | `B2b`: the state's off states are rarer than average | `C`: table maxima against the penalty paid | sites displaced in `x*` | per displaced site, kT: being off / + the count of off states / the state | at the full set: `ln(1/P₀(all off))` against `Σ ln(1/q_i)` |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Lys₁₂, order 4, band 4 | 7.57 | 1.117 | 0.993 | 3.39 | 1.71 | 1.99 | 2.01 | 10 of 12 | 2.8 / 4.8 / 9.6 | 33.89 against 34.06 |
+| Lys₁₂, order 4, band 7 | 9.94 | 1.088 | 0.995 | 3.25 | 1.69 | 1.92 | 2.82 | 11 of 12 | 2.9 / 4.8 / 9.3 | 34.19 against 34.32 |
+| Lys₁₂, order 3, band 7 | 10.73 | 1.127 | 0.996 | 3.03 | 1.70 | 1.78 | 3.16 | 10 of 12 | 2.9 / 4.9 / 8.7 | 34.20 against 34.32 |
+| (LKSE)₃, order 3, band 7 | 6.60 | 1.000 | 1.097 | 3.16 | 1.53 | 2.07 | 1.91 | 12 of 12 | 3.5 / 5.3 / 11.1 | 42.03 against 38.33 |
+
+(3) the exact gain against its first-order term, from the committed scans
+| case | `λ₀` | grid value nearest to `λ₀` | exact gain there | first order | ratio | largest grid value below `0.9 λ_c` (as a fraction of `λ_c`) | exact gain there | first order | ratio |
+|---|---|---|---|---|---|---|---|---|---|
+| Lys₁₂, order 4, band 4 | 2.047 | 2 | 0.001086 | 0.001054 | 1.030 | 12 (0.78) | 0.007828 | 0.006324 | 1.24 |
+| Lys₁₂, order 4, band 7 | 1.922 | 2 | 0.0001976 | 0.000195 | 1.014 | 16 (0.85) | 0.001838 | 0.00156 | 1.18 |
+| Lys₁₂, order 3, band 7 | 0.1264 | 0.25 | 0.007084 | 0.006236 | 1.136 | 1.1 (0.83) | 0.07208 | 0.02744 | 2.63 |
+| (LKSE)₃, order 3, band 7 | 0.03106 | 0.02 | 0.00361 | 0.00357 | 1.011 | 0.15 (0.76) | 0.02945 | 0.02678 | 1.10 |
+
+Lys₁₂, order 4, band 4: off states per site [13, 13, 11, 6, 6, 6, 6, 6, 6, 6, 6, 6]; q: 0.372, 0.222, 0.214, 0.0266, 0.0233, 0.0237, 0.0253, 0.0273, 0.0416, 0.0536, 0.06, 0.0673; extremal state [3, 3, 1, 6, 6, 6, 0, 5, 5, 5, 3, 3], displaced sites [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Lys₁₂, order 4, band 7: off states per site [13, 13, 11, 6, 6, 6, 6, 6, 6, 6, 6, 6]; q: 0.372, 0.221, 0.214, 0.0264, 0.0223, 0.0232, 0.0246, 0.0258, 0.0399, 0.0516, 0.0587, 0.0673; extremal state [3, 3, 1, 6, 6, 6, 0, 5, 5, 5, 1, 3], displaced sites [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Lys₁₂, order 3, band 7: off states per site [13, 13, 11, 6, 6, 6, 6, 6, 6, 6, 6, 6]; q: 0.372, 0.221, 0.214, 0.0264, 0.0223, 0.0232, 0.0246, 0.0258, 0.0399, 0.0516, 0.0587, 0.0673; extremal state [3, 3, 1, 6, 6, 6, 5, 5, 5, 1, 3, 3], displaced sites [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+(LKSE)₃, order 3, band 7: off states per site [1, 28, 8, 11, 1, 13, 8, 11, 1, 15, 8, 12]; q: 0.105, 0.336, 0.565, 0.34, 1.15e-05, 0.0362, 0.255, 0.345, 1.1e-05, 0.0601, 0.325, 0.424; extremal state [0, 19, 3, 4, 0, 2, 3, 5, 0, 2, 4, 5], displaced sites [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+checks passed: the exported lambda_0 equals the ratio at the exported minimising set recomputed from the exported q and maxima; the five factors multiply to lambda_gs / lambda_0
+ALL DONE

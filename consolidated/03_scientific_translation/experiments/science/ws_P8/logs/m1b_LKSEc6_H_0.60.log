@@ -1,0 +1,20 @@
+=== p8_01b_restricted: LKSE:6 on H, tau 0.6: atoms 120, sites 6, 217152 states, anchor (1, 14, 1, 7, 1, 7); 42 subsets
+    row 5/120 done, checkpoint written, 69 s, RSS 329 MB
+    row 10/120 done, checkpoint written, 132 s, RSS 320 MB
+    row 15/120 done, checkpoint written, 194 s, RSS 367 MB
+    row 21/120 done, checkpoint written, 261 s, RSS 305 MB
+    row 27/120 done, checkpoint written, 323 s, RSS 350 MB
+    row 34/120 done, checkpoint written, 385 s, RSS 338 MB
+    row 42/120 done, checkpoint written, 451 s, RSS 324 MB
+    row 50/120 done, checkpoint written, 519 s, RSS 336 MB
+    row 59/120 done, checkpoint written, 581 s, RSS 353 MB
+    row 70/120 done, checkpoint written, 643 s, RSS 334 MB
+    row 83/120 done, checkpoint written, 706 s, RSS 367 MB
+    row 105/120 done, checkpoint written, 767 s, RSS 332 MB
+    row 120/120 done, checkpoint written, 786 s, RSS 369 MB
+    checks: PPA <= PP for every (T, pair): 304920 comparisons, 0 violations; equal where no host of the pair is outside T: 193061 of 193061
+    order 3: sum over subsets and pairs of the exact constants: all contexts 8.892325e+01, hosts outside T at the anchor 8.477240e+01 (ratio 1.049)
+    order 4: sum over subsets and pairs of the exact constants: all contexts 6.087646e+00, hosts outside T at the anchor 5.883214e+00 (ratio 1.035)
+    order 5: sum over subsets and pairs of the exact constants: all contexts 2.980648e-01, hosts outside T at the anchor 2.934871e-01 (ratio 1.016)
+    order 6: sum over subsets and pairs of the exact constants: all contexts 6.871290e-03, hosts outside T at the anchor 6.871290e-03 (ratio 1.000)
+DONE in 786.7 s; peak RSS 1086 MB

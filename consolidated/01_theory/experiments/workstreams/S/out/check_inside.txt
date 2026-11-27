@@ -1,0 +1,3 @@
+(1) 20075 periodic site-set keys (index <= 12): all eleven inequalities hold exactly; largest value of c.p - b: 0
+(2) 5680 chain-system densities: largest violation of a facet of the path-cluster LP polytope: 4.44e-16
+    on 400 random chain systems: min (gauche density - gamma_LP) = 0.00e+00  (must be >= 0 up to rounding)

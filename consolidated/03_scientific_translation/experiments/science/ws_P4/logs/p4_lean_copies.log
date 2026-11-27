@@ -1,0 +1,19 @@
+Thu Nov 26 02:07:38 UTC 2026
+cmd: lake env lean /home/user/MetricChain/experiments/science/ws_P4/lean/P4_ThirdOrderModel_copy.lean
+'MetricChain.anchoredInterp_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.thirdOrder_pairwise_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.cover_of_site_shares' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.thirdOrder_pairwise_lower_thirds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.cover_of_pair_thirds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.thirdOrder_pairwise_lower_pair_thirds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.verify_sound_thirdOrder' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.thirdOrder_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+Thu Nov 26 02:07:46 UTC 2026
+cmd: lake env lean /home/user/MetricChain/experiments/science/ws_P4/lean/P4_ShareCertificates_copy.lean
+'MetricChain.pairSum_le_of_shares' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.secondOrder_certified_of_shares' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.secondOrder_certified_of_rowSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
+Thu Nov 26 02:07:52 UTC 2026
+DONE lean copies

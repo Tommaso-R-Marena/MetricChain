@@ -1,0 +1,74 @@
+## drop level u=1 n=40 n_o=8 n_i=32 c=1/26 beta=0.7798 x_out=0.9615 (<= alpha = 1) L=2 K=33544 J=2245 m_max=22 r_dag=-1 (p_u n_o=2.15) ln(1/pi)=6.238 Lemma Q3 slack 117.15 ln 2Mbar=25.94 ln C_max=30.19 design ok: True
+1 40 8 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8560 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=1052 0.6s
+1 40 8 | flat           d0=0   s_in=0.333 some_trivial | abort      G=0 det=0 good=-1 | width nan maxM/Mbar 3.654e-07 maxM/Mdag 1.878e-03 lev=230 0.1s  ABORT: unclassified at the last rung
+1 40 8 | cone           d0=4   s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.8928 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=1146 0.8s
+1 40 8 | dip_rho_h      d0=0   s_in=0.5   adv_lo       | closed     G=1 det=0 good=0 | width 0.8818 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=859 0.6s
+1 40 8 | dip_small      d0=4   s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.8563 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=895 0.6s
+1 40 8 | dip_small      d0=0   s_in=0.333 inv_above    | closed     G=0 det=0 good=-1 | width 0.8637 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=929 0.3s
+1 40 8 | dip_large      d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.8927 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=1042 0.7s
+1 40 8 | plateau_cone   d0=4   s_in=0     adv_lo       | closed     G=1 det=0 good=0 | width 0.8938 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=1067 0.7s
+1 40 8 | flattened_cone d0=0   s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.8937 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=869 0.7s
+1 40 8 | flattened_cone d0=0   s_in=0.333 some_trivial | abort      G=0 det=0 good=-1 | width nan maxM/Mbar 3.654e-07 maxM/Mdag 1.878e-03 lev=100 0.0s  ABORT: unclassified at the last rung
+1 40 8 | equal_mass     d0=4   s_in=0.5   mix          | closed     G=1 det=0 good=0 | width 0.8844 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=950 0.6s
+1 40 8 | rw_uniform     d0=0   s_in=0     adv_lo       | closed     G=1 det=0 good=0 | width 0.8738 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=1083 0.6s
+1 40 8 | rw_pm          d0=4   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8934 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=1104 0.7s
+1 40 8 | rw_pm          d0=0   s_in=0.333 inv_above    | closed     G=0 det=0 good=-1 | width 0.8935 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=1085 0.3s
+1 40 8 | rw_down        d0=0   s_in=0.5   mix          | closed     G=1 det=0 good=0 | width 0.8885 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=860 0.6s
+1 40 8 | half_cone      d0=4   s_in=0.5   adv_lo       | closed     G=1 det=0 good=0 | width 0.8884 maxM/Mbar 1.871e-04 maxM/Mdag 9.615e-01 lev=911 0.6s
+## drop level u=1 n=100 n_o=20 n_i=80 c=1/26 beta=0.7798 x_out=0.9615 (<= alpha = 1) L=4 K=37199 J=5581 m_max=34 r_dag=0 (p_u n_o=5.38) ln(1/pi)=13.863 Lemma Q3 slack 110.85 ln 2Mbar=34.57 ln C_max=43.53 design ok: True
+1 100 20 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8753 maxM/Mbar 1.838e-08 maxM/Mdag 2.348e-04 lev=2612 2.2s
+1 100 20 | cone           d0=10  s_in=0.5   bottom       | closed     G=1 det=0 good=0 | width 0.8542 maxM/Mbar 1.505e-04 maxM/Mdag 1.923e+00 lev=2426 2.5s
+1 100 20 | dip_rho_h      d0=10  s_in=0.5   top          | closed     G=1 det=0 good=0 | width 0.8867 maxM/Mbar 1.505e-04 maxM/Mdag 1.923e+00 lev=2380 2.3s
+1 100 20 | dip_small      d0=10  s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.8753 maxM/Mbar 1.838e-08 maxM/Mdag 2.348e-04 lev=2156 1.7s
+1 100 20 | dip_large      d0=0   s_in=0.5   bottom       | closed     G=1 det=0 good=0 | width 0.8606 maxM/Mbar 1.505e-04 maxM/Mdag 1.923e+00 lev=2166 2.2s
+1 100 20 | plateau_cone   d0=0   s_in=0.5   top          | closed     G=1 det=0 good=0 | width 0.9046 maxM/Mbar 7.351e-08 maxM/Mdag 9.390e-04 lev=2146 1.8s
+1 100 20 | flattened_cone d0=0   s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.9046 maxM/Mbar 7.351e-08 maxM/Mdag 9.390e-04 lev=2156 1.7s
+1 100 20 | equal_mass     d0=10  s_in=0     bottom       | closed     G=1 det=0 good=0 | width 0.8870 maxM/Mbar 1.505e-04 maxM/Mdag 1.923e+00 lev=2838 2.8s
+1 100 20 | rw_uniform     d0=10  s_in=0     top          | closed     G=1 det=0 good=0 | width 0.8894 maxM/Mbar 7.351e-08 maxM/Mdag 9.390e-04 lev=2619 2.3s
+1 100 20 | rw_pm          d0=10  s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8967 maxM/Mbar 5.881e-07 maxM/Mdag 7.512e-03 lev=2690 2.1s
+1 100 20 | rw_down        d0=0   s_in=0     bottom       | closed     G=1 det=0 good=0 | width 0.8924 maxM/Mbar 4.705e-06 maxM/Mdag 6.010e-02 lev=2596 2.3s
+1 100 20 | half_cone      d0=0   s_in=0     top          | closed     G=1 det=0 good=0 | width 0.8950 maxM/Mbar 4.705e-06 maxM/Mdag 6.010e-02 lev=2588 2.1s
+## drop level u=2 n=30 n_o=6 n_i=24 c=1/26 beta=0.7798 x_out=0.9615 (<= alpha = 1) L=4 K=34984 J=3249 m_max=20 r_dag=-1 (p_u n_o=0.72) ln(1/pi)=4.852 Lemma Q3 slack 526.16 ln 2Mbar=24.96 ln C_max=34.22 design ok: True
+2 30 6 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8560 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1572 1.3s
+2 30 6 | flat           d0=0   s_in=0.667 some_trivial | abort      G=0 det=0 good=-1 | width nan maxM/Mbar 1.010e-06 maxM/Mdag 7.512e-03 lev=334 0.1s  ABORT: unclassified at the last rung
+2 30 6 | cone           d0=3   s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.8827 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1718 1.4s
+2 30 6 | dip_rho_h      d0=0   s_in=1     adv_lo       | closed     G=1 det=0 good=0 | width 0.8818 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1324 1.1s
+2 30 6 | dip_small      d0=3   s_in=1     center       | closed     G=1 det=0 good=0 | width 0.8597 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1387 1.2s
+2 30 6 | dip_small      d0=0   s_in=0.667 inv_above    | closed     G=0 det=0 good=-1 | width 0.8746 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1403 0.5s
+2 30 6 | dip_large      d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.8842 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1562 1.4s
+2 30 6 | plateau_cone   d0=3   s_in=0     adv_lo       | closed     G=1 det=0 good=0 | width 0.8951 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1613 1.3s
+2 30 6 | flattened_cone d0=0   s_in=1     center       | closed     G=1 det=0 good=0 | width 0.8951 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1335 1.1s
+2 30 6 | flattened_cone d0=0   s_in=0.667 some_trivial | abort      G=0 det=0 good=-1 | width nan maxM/Mbar 1.010e-06 maxM/Mdag 7.512e-03 lev=126 0.0s  ABORT: unclassified at the last rung
+2 30 6 | equal_mass     d0=3   s_in=1     mix          | closed     G=1 det=0 good=0 | width 0.8779 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1423 1.3s
+2 30 6 | rw_uniform     d0=0   s_in=0     adv_lo       | closed     G=1 det=0 good=0 | width 0.8774 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1562 1.3s
+2 30 6 | rw_pm          d0=3   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8952 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1676 1.4s
+2 30 6 | rw_pm          d0=0   s_in=0.667 inv_above    | closed     G=0 det=0 good=-1 | width 0.8926 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1559 0.5s
+2 30 6 | rw_down        d0=0   s_in=1     mix          | closed     G=1 det=0 good=0 | width 0.8909 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1330 1.1s
+2 30 6 | half_cone      d0=3   s_in=1     adv_lo       | closed     G=1 det=0 good=0 | width 0.8934 maxM/Mbar 1.293e-04 maxM/Mdag 9.615e-01 lev=1402 1.2s
+## drop level u=1 n=250 n_o=52 n_i=198 c=1/26 beta=0.7798 x_out=0.9615 (<= alpha = 1) L=7 K=40604 J=13958 m_max=46 r_dag=5 (p_u n_o=13.98) ln(1/pi)=21.166 Lemma Q3 slack 107.10 ln 2Mbar=42.88 ln C_max=64.85 design ok: True
+1 250 52 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8705 maxM/Mbar 1.980e-11 maxM/Mdag 6.325e-07 lev=6512 7.5s
+1 250 52 | cone           d0=26  s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.9022 maxM/Mbar 5.191e-06 maxM/Mdag 1.658e-01 lev=7022 10.1s
+1 250 52 | dip_small      d0=26  s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.8705 maxM/Mbar 1.980e-11 maxM/Mdag 6.325e-07 lev=5384 6.1s
+1 250 52 | dip_large      d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.9021 maxM/Mbar 5.191e-06 maxM/Mdag 1.658e-01 lev=6346 9.4s
+1 250 52 | flattened_cone d0=0   s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.9077 maxM/Mbar 1.584e-10 maxM/Mdag 5.060e-06 lev=5384 6.5s
+1 250 52 | equal_mass     d0=26  s_in=0.5   mix          | closed     G=1 det=0 good=0 | width 0.8961 maxM/Mbar 5.191e-06 maxM/Mdag 1.658e-01 lev=5760 8.4s
+1 250 52 | rw_pm          d0=26  s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8996 maxM/Mbar 1.584e-10 maxM/Mdag 5.060e-06 lev=6538 8.0s
+1 250 52 | rw_down        d0=0   s_in=0.5   mix          | closed     G=1 det=0 good=0 | width 0.9019 maxM/Mbar 5.069e-09 maxM/Mdag 1.619e-04 lev=5258 7.2s
+## drop level u=2 n=80 n_o=18 n_i=62 c=1/26 beta=0.7798 x_out=0.9615 (<= alpha = 1) L=8 K=39202 J=8665 m_max=34 r_dag=-1 (p_u n_o=2.15) ln(1/pi)=13.170 Lemma Q3 slack 521.77 ln 2Mbar=34.37 ln C_max=56.25 design ok: True
+2 80 18 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8649 maxM/Mbar 1.894e-07 maxM/Mdag 3.756e-03 lev=4172 5.4s
+2 80 18 | cone           d0=9   s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.8933 maxM/Mbar 4.849e-05 maxM/Mdag 9.615e-01 lev=4630 7.2s
+2 80 18 | dip_small      d0=9   s_in=1     center       | closed     G=1 det=0 good=0 | width 0.8649 maxM/Mbar 1.894e-07 maxM/Mdag 3.756e-03 lev=3559 4.4s
+2 80 18 | dip_large      d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | width 0.8930 maxM/Mbar 4.849e-05 maxM/Mdag 9.615e-01 lev=4162 6.4s
+2 80 18 | flattened_cone d0=0   s_in=1     center       | closed     G=1 det=0 good=0 | width 0.9054 maxM/Mbar 1.515e-06 maxM/Mdag 3.005e-02 lev=3559 4.8s
+2 80 18 | equal_mass     d0=9   s_in=1     mix          | closed     G=1 det=0 good=0 | width 0.8894 maxM/Mbar 4.849e-05 maxM/Mdag 9.615e-01 lev=3830 6.1s
+2 80 18 | rw_pm          d0=9   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8951 maxM/Mbar 1.515e-06 maxM/Mdag 3.005e-02 lev=4224 5.8s
+2 80 18 | rw_down        d0=0   s_in=1     mix          | closed     G=1 det=0 good=0 | width 0.8951 maxM/Mbar 4.849e-05 maxM/Mdag 9.615e-01 lev=3566 5.5s
+## drop level u=1 n=600 n_o=124 n_i=476 c=1/26 beta=0.7798 x_out=0.9615 (<= alpha = 1) L=15 K=44563 J=33455 m_max=67 r_dag=19 (p_u n_o=33.35) ln(1/pi)=34.963 Lemma Q3 slack 101.29 ln 2Mbar=57.65 ln C_max=110.46 design ok: True
+1 600 124 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | width 0.8712 maxM/Mbar 6.729e-17 maxM/Mdag 5.152e-12 lev=15612 32.9s
+1 600 124 | dip_small      d0=62  s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.8712 maxM/Mbar 6.729e-17 maxM/Mdag 5.152e-12 lev=12900 25.7s
+1 600 124 | flattened_cone d0=0   s_in=0.5   center       | closed     G=1 det=0 good=0 | width 0.9070 maxM/Mbar 2.153e-15 maxM/Mdag 1.649e-10 lev=12900 28.2s
+1 600 124 | rw_pm          d0=62  s_in=0     center       | closed     G=1 det=0 good=0 | width 0.9048 maxM/Mbar 1.077e-15 maxM/Mdag 8.243e-11 lev=15846 33.4s
+
+SUMMARY (drop levels): runs 64 (valid oracle 56); closed 60, aborted 4; (V1)-(V3) held in 56; runs violating an every-run claim: 0; a good-event claim: 0; design-level violations: 0
+WORST: M_over_Mbar=0.0001871, M_over_Mdag=1.923, calls_over_bound=0.06687, used_over_cnt=0.0669, count_ineq=0.9509, width=0.9077  (width is in nats; alpha = 1)
+LAST LINE r17_sim_drop.py seed 21: completed; wall 279.8 s; peak RSS 107.7 MB

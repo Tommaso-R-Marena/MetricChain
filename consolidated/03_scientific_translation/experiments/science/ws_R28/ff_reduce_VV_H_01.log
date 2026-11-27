@@ -1,0 +1,46 @@
+R28 ff_reduce.py  start 2026-11-27T00:10:56Z {'grid': '/home/user/MetricChain/experiments/science/ws_R28/grid_VV_H_144.npz', 'log': '/home/user/MetricChain/experiments/science/ws_R28/rerun_VV_H_144_01.log', 'part': 'total'}
+
+grid (144, 144), part = total; energy range 87.93 kT
+(a) ln Z = -6.21922694; every second point -6.21917339
+(b) rigid rotamers: ln Z = -2.218076, minus grid per torsion +2.000575; cell-minimised: -2.197115, per torsion +2.011056
+    total variation grid/rigid 0.000084 (largest 0.000084); grid/minimised 0.000025 (largest 0.000025)
+    rigid minimum-energy state in cell (1, 1), gap 15.08914 kT; continuous minimum at (np.float64(177.5), np.float64(177.5)) deg in cell (1, 1); same cell: True; cell minimum of the rigid model's cell above the global minimum: 0.00000 kT
+    cell: population grid / rigid / minimised;  E_rot - E_cellmin [kT];  width term
+      (0, 0): 0.00000 / 0.00000 / 0.00000;        4.8214;  4.6616
+      (0, 1): 0.00000 / 0.00000 / 0.00000;        2.5491;  4.2801
+      (0, 2): 0.00000 / 0.00000 / 0.00000;       10.0141;  4.6177
+      (1, 0): 0.00000 / 0.00000 / 0.00000;        2.4168;  4.3463
+      (1, 1): 0.99992 / 1.00000 / 0.99989;        0.0209;  4.0221
+      (1, 2): 0.00007 / 0.00000 / 0.00009;        6.3067;  4.2817
+      (2, 0): 0.00000 / 0.00000 / 0.00000;        8.6253;  4.5970
+      (2, 1): 0.00001 / 0.00000 / 0.00002;        6.8004;  4.2574
+      (2, 2): 0.00000 / 0.00000 / 0.00000;       13.9308;  4.5932
+(c) uniform reference, whole energy one term: k: [maxima, minima] Jensen | all-H | best (thr) | per torsion: first-order, best
+      3  [-61.9529, -2.1971]  -23.0993 | 259.933 | -2.1971 (12) | 29.88  10.45
+      6  [-36.0428, -2.2075]  -22.3404 | 200.997 | -2.2075 (6) | 16.92  10.07
+     12  [-22.7039, -3.5937]  -10.3908 | 64.462 | -3.5937 (6) | 9.555  3.399
+     18  [-13.5157, -4.3838]  -7.6025 | 9.87999 | -4.3838 (4) | 4.566  1.609
+     24  [-10.2667, -4.8426]  -6.8140 | -2.88831 | -4.9027 (3) | 2.712  0.9556
+     36  [-8.1309, -5.2503]  -6.4517 | -5.59004 | -5.6242 (4) | 1.44  0.4138
+     48  [-7.4596, -5.4529]  -6.3604 | -5.9483 | -5.9484 (4) | 1.003  0.206
+     72  [-6.9557, -5.6771]  -6.2963 | -6.13037 | -6.1304 (4) | 0.6393  0.08296
+    144  [-6.5576, -5.9299]  -6.2578 | -6.21852 | -6.2185 (all H) | 0.3139  0.01964
+(d) tilted reference: sum ln z_i = -6.219194; remainder -2.0064 .. 0.91926 kT
+   k: Jensen gap per torsion | upper gap per torsion (threshold rule, thr) | exhaustive over all 4^k mode assignments (k = 3) | local search
+      3  7.1788e-07 | 1.8418e-02 (2) | 1.8418e-02 | 1.8418e-02
+      6  3.2517e-07 | 8.1597e-03 (1) | nan | 8.1496e-03
+     12  3.1736e-07 | 1.6602e-05 (all H) | nan | 1.4731e-05
+     18  3.0055e-07 | 3.1745e-06 (all H) | nan | 3.1740e-06
+     24  2.6475e-07 | 1.8738e-06 (all H) | nan | 1.8738e-06
+     36  1.6535e-07 | 6.6876e-07 (all H) | nan | 6.6876e-07
+     48  1.1151e-07 | 3.3435e-07 (all H) | nan | 3.3435e-07
+     72  6.5593e-08 | 1.1703e-07 (all H) | nan | 1.1703e-07
+    144  3.4481e-08 | 6.7372e-09 (all H) | nan | 6.7372e-09
+
+COMPARISON with rerun_VV_H_144_01.log: 164 items; disagreements: 0 []
+brackets checked: 216; violated: 0 (must be 0)
+C3 controls over 18 partitions (uniform and tilted): all-H with oscillations x 0.3 excludes the grid value in 13; Jensen as an upper end violated in 18; cell minima as a lower end violated in 18
+C1 separable energy (sum of the two slices): remainder range -7.1e-15 .. 7.1e-15; largest |Jensen gap|, |upper gap| over k: 0.0e+00; cell populations minus product of marginals: 1.1e-16   -> zero coupling error: True
+   (the real energy: remainder -2.006 .. 0.9193 kT; cell populations minus product of marginals 1.67e-09 — so C1 can fail)
+C2 shuffled grid: 164 items compared with the same log; disagreements: 155 (must be many); brackets violated on the shuffled grid: 0 (the inequalities hold for ANY table: must be 0)
+END 2026-11-27T00:10:57Z  wall 0.6 s  peak memory 67 MB (ru_maxrss; address space capped at 3 GB)

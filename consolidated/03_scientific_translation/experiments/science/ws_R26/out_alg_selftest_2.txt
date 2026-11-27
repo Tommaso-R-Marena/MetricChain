@@ -1,0 +1,6 @@
+selftest Harper vs all 65534 subsets of Q_4, u=0.5: rel. diff at ball sizes up 2.1e-16 lo 1.7e-16; Harper step functions dominate elsewhere: True
+selftest Harper vs all 65534 subsets of Q_4, u=1.0: rel. diff at ball sizes up 1.6e-16 lo 1.3e-16; Harper step functions dominate elsewhere: True
+selftest Harper vs all 65534 subsets of Q_4, u=2.0: rel. diff at ball sizes up 1.8e-16 lo 1.5e-16; Harper step functions dominate elsewhere: True
+selftest sharpest tail functions, 20 random integrands: violations so far 0
+selftest total violations: 0
+elapsed 0.8 s; peak memory 70 MB

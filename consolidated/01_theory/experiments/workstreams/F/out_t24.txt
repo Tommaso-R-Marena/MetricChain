@@ -1,0 +1,5 @@
+p=0.1 u=2.0 e0=0.05306: R^max(e0)=0.026764, m*=0.5322, exit profile a=0.4031 b=0.0355; normal (alpha,beta)=(0.4862,0.8765), c=0.2270
+  n=500: density ball: theta=0.02831 e=0.05972 chi(theta)=0.04859 diff=+0.01113 = +0.90 ln(n)/n;  anisotropic ball: theta=0.03450 e=0.04878 chi(theta)=0.03185 diff=+0.01693 = +1.36 ln(n)/n
+  n=1000: density ball: theta=0.02753 e=0.05716 chi(theta)=0.05082 diff=+0.00634 = +0.92 ln(n)/n;  anisotropic ball: theta=0.03126 e=0.05059 chi(theta)=0.04040 diff=+0.01020 = +1.48 ln(n)/n
+  n=2000: density ball: theta=0.02715 e=0.05543 chi(theta)=0.05194 diff=+0.00349 = +0.92 ln(n)/n;  anisotropic ball: theta=0.02931 e=0.05183 chi(theta)=0.04577 diff=+0.00606 = +1.59 ln(n)/n
+  n=4000: density ball: theta=0.02696 e=0.05439 chi(theta)=0.05249 diff=+0.00190 = +0.92 ln(n)/n;  anisotropic ball: theta=0.02824 e=0.05222 chi(theta)=0.04878 diff=+0.00345 = +1.66 ln(n)/n

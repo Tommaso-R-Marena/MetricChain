@@ -1,0 +1,1 @@
+p=0.3 u=1 e=0: 400 laws in a neighbourhood of the generalised dip, V by 36-start SLSQP: max(V - R^max) = -1.35e-11   [157s]

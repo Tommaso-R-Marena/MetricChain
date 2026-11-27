@@ -1,0 +1,291 @@
+{
+ "alive_after": {
+  "cpsat": false,
+  "milp": false,
+  "plain": true,
+  "producer": false
+ },
+ "cpu": 5,
+ "error": null,
+ "family": "band3",
+ "instances": [
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {
+     "dp": -143968,
+     "plain": -143968
+    },
+    "optimum": -143968,
+    "upper_bounds": {
+     "plain": -143968
+    }
+   },
+   "alphabets": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "brute": {
+    "seconds": 8.71599968377268e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 117839,
+   "dense_ints_per_leaf": 53362,
+   "digest": "216831aefc0b4e2d0078e65612494224d364bc858b0e4434b3f6d96c36a67a96",
+   "dp": {
+    "largest_table": 5000,
+    "seconds": 0.011581816999751027,
+    "status": "optimal",
+    "table_entries": 74722,
+    "value": -143968
+   },
+   "edges": 294,
+   "index": 0,
+   "log10_states": 59.69875380805458,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 18208,
+    "best_bound": -143968,
+    "branch_nodes": 1692,
+    "cert_integers": 182818212,
+    "check_ops": 1425209429,
+    "depth": 35,
+    "initial_ub": -142152,
+    "leaf_boxes": 3875,
+    "leaf_certificates": 3426,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 4747,
+    "root_lp_value": null,
+    "root_value": -151566,
+    "seconds": 9.36424879399965,
+    "shared_by_parent": 820,
+    "shared_by_sibling": 0,
+    "status": "optimal",
+    "stop": null,
+    "sweeps": 64420,
+    "ub_updates": 6,
+    "upper_bound": -143968,
+    "value": -143968
+   },
+   "root_lp": {
+    "seconds": 0.23207575600008568,
+    "value": -150758.94444444444
+   },
+   "seconds_instance": 9.607977884999855,
+   "seed": 8351799198287011752,
+   "site_states": 488,
+   "sites": 100,
+   "sparse_instance_integers": 7708,
+   "sparse_ints_per_leaf": 3275
+  },
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {
+     "dp": -146382,
+     "plain": -146382
+    },
+    "optimum": -146382,
+    "upper_bounds": {
+     "plain": -146382
+    }
+   },
+   "alphabets": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "brute": {
+    "seconds": 5.365000106394291e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 142248,
+   "dense_ints_per_leaf": 58114,
+   "digest": "22c17511cb3a333d8188d2bdefc0fcb0048a33235266e95cbb598743e9b3e614",
+   "dp": {
+    "largest_table": 3000,
+    "seconds": 0.008119043000078818,
+    "status": "optimal",
+    "table_entries": 59984,
+    "value": -146382
+   },
+   "edges": 294,
+   "index": 1,
+   "log10_states": 65.03727511607335,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 65971,
+    "best_bound": -146382,
+    "branch_nodes": 6585,
+    "cert_integers": 758852612,
+    "check_ops": 6479334746,
+    "depth": 35,
+    "initial_ub": -143396,
+    "leaf_boxes": 14444,
+    "leaf_certificates": 13058,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 18637,
+    "root_lp_value": null,
+    "root_value": -160608,
+    "seconds": 50.84546501500063,
+    "shared_by_parent": 2392,
+    "shared_by_sibling": 0,
+    "status": "optimal",
+    "stop": null,
+    "sweeps": 396667,
+    "ub_updates": 6,
+    "upper_bound": -146382,
+    "value": -146382
+   },
+   "root_lp": {
+    "seconds": 0.2949220479995347,
+    "value": -158443.49444444428
+   },
+   "seconds_instance": 51.148564366000755,
+   "seed": 1029614725717407734,
+   "site_states": 536,
+   "sites": 100,
+   "sparse_instance_integers": 8703,
+   "sparse_ints_per_leaf": 3546
+  },
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {
+     "dp": -149927,
+     "plain": -149927
+    },
+    "optimum": -149927,
+    "upper_bounds": {
+     "plain": -149927
+    }
+   },
+   "alphabets": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "brute": {
+    "seconds": 6.2159997469279915e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 129266,
+   "dense_ints_per_leaf": 55639,
+   "digest": "1b6cae0e0b952bb04e3a95c335baf11fdd93e1ed9c611be9d4e6eac37880e1dd",
+   "dp": {
+    "largest_table": 10000,
+    "seconds": 0.00933833199997025,
+    "status": "optimal",
+    "table_entries": 75574,
+    "value": -149927
+   },
+   "edges": 294,
+   "index": 2,
+   "log10_states": 62.5758488498802,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 30048,
+    "best_bound": -149927,
+    "branch_nodes": 3282,
+    "cert_integers": 294719783,
+    "check_ops": 2411689019,
+    "depth": 25,
+    "initial_ub": -147583,
+    "leaf_boxes": 5870,
+    "leaf_certificates": 5297,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 8140,
+    "root_lp_value": null,
+    "root_value": -160527,
+    "seconds": 23.576273011000012,
+    "shared_by_parent": 1012,
+    "shared_by_sibling": 0,
+    "status": "optimal",
+    "stop": null,
+    "sweeps": 185451,
+    "ub_updates": 10,
+    "upper_bound": -149927,
+    "value": -149927
+   },
+   "root_lp": {
+    "seconds": 0.2468454780000684,
+    "value": -158392.60691491762
+   },
+   "seconds_instance": 23.83251737899991,
+   "seed": 16859632666375592113,
+   "site_states": 511,
+   "sites": 100,
+   "sparse_instance_integers": 7855,
+   "sparse_ints_per_leaf": 3371
+  }
+ ],
+ "k": "mixed",
+ "limit_hits": {
+  "cpsat": 0,
+  "milp": 0,
+  "plain": 0
+ },
+ "master": "leafcert-bench-v1",
+ "n": 100,
+ "phase": "main",
+ "protocol_version": 1,
+ "seconds": 84.64675489700039,
+ "started_utc": "2026-11-26T23:31:30Z",
+ "summary": {
+  "cpsat_attempted": 0,
+  "cpsat_solved": 0,
+  "inconsistent": 0,
+  "instances": 3,
+  "milp_attempted": 0,
+  "milp_solved": 0,
+  "plain_attempted": 3,
+  "plain_solved": 3,
+  "producer_attempted": 0,
+  "producer_certified": 0
+ },
+ "task": {
+  "caps": {
+   "max_cert_integers": 2000000,
+   "max_check_ops": 20000000,
+   "max_leaves": 1000000
+  },
+  "extension": true,
+  "family": "band3",
+  "file": "band3__kmixed__n100",
+  "id": 192,
+  "instances": [
+   0,
+   1,
+   2
+  ],
+  "k": "mixed",
+  "master": "leafcert-bench-v1",
+  "n": 100,
+  "phase": "main",
+  "run": {
+   "cpsat": false,
+   "milp": false,
+   "plain": true,
+   "producer": false
+  },
+  "time_limit": 60.0
+ },
+ "worker_rss_peak_mb": 523.40234375,
+ "worker_vm_peak_mb": 1414.87109375
+}

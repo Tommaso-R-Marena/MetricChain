@@ -1,0 +1,111 @@
+{
+ "budget_minutes": 16.0,
+ "cells": [
+  {
+   "error": false,
+   "file": "complete__k2__n32__producer__r2",
+   "finished_after_seconds": 22.08718967437744,
+   "seconds": 22.079290665998997
+  },
+  {
+   "error": false,
+   "file": "band3__k3__n50__producer__r0",
+   "finished_after_seconds": 35.63436436653137,
+   "seconds": 13.545603919999849
+  },
+  {
+   "error": false,
+   "file": "complete__k2__n32__producer__r0",
+   "finished_after_seconds": 39.79050278663635,
+   "seconds": 39.78748291000011
+  },
+  {
+   "error": false,
+   "file": "band3__k3__n50__producer__r2",
+   "finished_after_seconds": 49.842339515686035,
+   "seconds": 14.206173595999644
+  },
+  {
+   "error": false,
+   "file": "complete__k5__n16__producer__r0",
+   "finished_after_seconds": 61.52072763442993,
+   "seconds": 11.677103321000686
+  },
+  {
+   "error": false,
+   "file": "complete__k5__n16__producer__r1",
+   "finished_after_seconds": 68.69685339927673,
+   "seconds": 7.1745431710005505
+  },
+  {
+   "error": false,
+   "file": "complete__k2__n36__cpsat__r0",
+   "finished_after_seconds": 165.7777283191681,
+   "seconds": 125.98540261000016
+  },
+  {
+   "error": false,
+   "file": "grid__k5__n100__producer__r0",
+   "finished_after_seconds": 166.02818417549133,
+   "seconds": 0.24918895799964957
+  },
+  {
+   "error": false,
+   "file": "grid__k5__n100__producer__r1",
+   "finished_after_seconds": 173.8653199672699,
+   "seconds": 7.8358455969992065
+  },
+  {
+   "error": false,
+   "file": "complete__k5__n20__plain__r2",
+   "finished_after_seconds": 174.55731391906738,
+   "seconds": 105.85918339700038
+  }
+ ],
+ "cpus": [
+  5,
+  7
+ ],
+ "levels": 0,
+ "load_average_end": [
+  2.9814453125,
+  2.70654296875,
+  3.80859375
+ ],
+ "master": "leafcert-bench-v1",
+ "not_started_budget": [],
+ "only": [],
+ "phase": "long",
+ "planned": [
+  "complete__k2__n32__producer__r0",
+  "complete__k2__n32__producer__r2",
+  "band3__k3__n50__producer__r0",
+  "band3__k3__n50__producer__r2",
+  "complete__k2__n36__cpsat__r0",
+  "complete__k5__n16__producer__r0",
+  "complete__k5__n16__producer__r1",
+  "complete__k5__n20__plain__r2",
+  "grid__k5__n100__producer__r0",
+  "grid__k5__n100__producer__r1"
+ ],
+ "protocol_version": 1,
+ "started_utc": "2026-11-27T00:00:10Z",
+ "stopped_by_rule": [],
+ "time_limit_override": null,
+ "versions": {
+  "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+  "load_average": [
+   2.04248046875,
+   2.4189453125,
+   3.9736328125
+  ],
+  "logical_cpus": 8,
+  "machine": "x86_64",
+  "numpy": "2.5.5",
+  "ortools": "9.15.6755",
+  "python": "3.12.16",
+  "scipy": "1.18.1",
+  "system": "Linux"
+ },
+ "wall_seconds": 174.62349009513855
+}

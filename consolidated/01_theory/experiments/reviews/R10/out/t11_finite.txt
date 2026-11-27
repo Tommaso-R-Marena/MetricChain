@@ -1,0 +1,44 @@
+# A. Theorem T3(a): D = union of the classes c' with u*l1(c',c)/n + v(type/n) < B around the class c of a lattice profile
+#    n  blocks  profile  B   ln(1+Phi)  bound n(B-alpha_n)-ln2-lnZ   ok   -ln(maxdens)/n   V(mu,B;v) - k ln(n+1)/n   ok
+     60 (30, 30) (np.float64(0.7), np.float64(0.3)) B=0.3273  4.5655 >= 1.2000 True   theta=0.00108 >= -0.13703 (V=0.00000) True
+     60 (30, 30) (np.float64(0.7), np.float64(0.3)) B=0.3473  5.6949 >= 2.4000 True   theta=0.00018 >= -0.13703 (V=0.00000) True
+     60 (30, 30) (np.float64(0.7), np.float64(0.3)) B=0.2973  2.7701 >= -0.6000 True   theta=0.00556 >= -0.13703 (V=0.00000) True
+     60 (30, 30) (np.float64(0.733), np.float64(0.267)) B=0.3571  5.0779 >= 1.2000 True   theta=0.00035 >= -0.13703 (V=0.00000) True
+     60 (30, 30) (np.float64(0.733), np.float64(0.267)) B=0.3771  6.2532 >= 2.4000 True   theta=0.00002 >= -0.13703 (V=0.00000) True
+     60 (30, 30) (np.float64(0.733), np.float64(0.267)) B=0.3271  3.3397 >= -0.6000 True   theta=0.00331 >= -0.13703 (V=0.00000) True
+     60 (20, 20, 20) (np.float64(0.7), np.float64(0.5), np.float64(0.3)) B=0.3222  5.0257 >= 1.2000 True   theta=0.00211 >= -0.20554 (V=-0.00000) True
+     60 (20, 20, 20) (np.float64(0.7), np.float64(0.5), np.float64(0.3)) B=0.3422  6.1303 >= 2.4000 True   theta=0.00078 >= -0.20554 (V=-0.00000) True
+     60 (20, 20, 20) (np.float64(0.7), np.float64(0.5), np.float64(0.3)) B=0.2922  3.3099 >= -0.6000 True   theta=0.00543 >= -0.20554 (V=-0.00000) True
+     60 (15, 30, 15) (np.float64(0.8), np.float64(0.467), np.float64(0.2)) B=0.3584  5.8324 >= 1.2000 True   theta=0.00114 >= -0.20554 (V=0.00000) True
+     60 (15, 30, 15) (np.float64(0.8), np.float64(0.467), np.float64(0.2)) B=0.3784  7.0709 >= 2.4000 True   theta=0.00044 >= -0.20554 (V=0.00000) True
+     60 (15, 30, 15) (np.float64(0.8), np.float64(0.467), np.float64(0.2)) B=0.3284  4.1574 >= -0.6000 True   theta=0.00247 >= -0.20554 (V=0.00000) True
+    120 (60, 60) (np.float64(0.7), np.float64(0.3)) B=0.2807  6.0247 >= 2.4000 True   theta=0.00456 >= -0.07993 (V=-0.00000) True
+    120 (60, 60) (np.float64(0.7), np.float64(0.3)) B=0.3007  8.4876 >= 4.8000 True   theta=0.00136 >= -0.07993 (V=0.00000) True
+    120 (60, 60) (np.float64(0.7), np.float64(0.3)) B=0.2507  2.5915 >= -1.2000 True   theta=0.01259 >= -0.07640 (V=0.00353) True
+    120 (60, 60) (np.float64(0.733), np.float64(0.267)) B=0.3110  6.8952 >= 2.4000 True   theta=0.00255 >= -0.07993 (V=0.00000) True
+    120 (60, 60) (np.float64(0.733), np.float64(0.267)) B=0.3310  9.2023 >= 4.8000 True   theta=0.00052 >= -0.07993 (V=0.00000) True
+    120 (60, 60) (np.float64(0.733), np.float64(0.267)) B=0.2810  3.2405 >= -1.2000 True   theta=0.01075 >= -0.07807 (V=0.00186) True
+    120 (40, 40, 40) (np.float64(0.725), np.float64(0.5), np.float64(0.275)) B=0.2819  6.9295 >= 2.4000 True   theta=0.00452 >= -0.11989 (V=-0.00000) True
+    120 (40, 40, 40) (np.float64(0.725), np.float64(0.5), np.float64(0.275)) B=0.3019  9.3960 >= 4.8000 True   theta=0.00257 >= -0.11989 (V=-0.00000) True
+    120 (40, 40, 40) (np.float64(0.725), np.float64(0.5), np.float64(0.275)) B=0.2519  3.4341 >= -1.2000 True   theta=0.01119 >= -0.11937 (V=0.00053) True
+    120 (30, 60, 30) (np.float64(0.8), np.float64(0.45), np.float64(0.2)) B=0.3064  8.2749 >= 2.4000 True   theta=0.00165 >= -0.11989 (V=-0.00000) True
+    120 (30, 60, 30) (np.float64(0.8), np.float64(0.45), np.float64(0.2)) B=0.3264  10.6973 >= 4.8000 True   theta=0.00055 >= -0.11989 (V=0.00000) True
+    120 (30, 60, 30) (np.float64(0.8), np.float64(0.45), np.float64(0.2)) B=0.2764  4.7238 >= -1.2000 True   theta=0.00491 >= -0.11989 (V=-0.00000) True
+    240 (120, 120) (np.float64(0.7), np.float64(0.3)) B=0.2533  8.7546 >= 4.8000 True   theta=0.00827 >= -0.04279 (V=0.00291) True
+    240 (120, 120) (np.float64(0.7), np.float64(0.3)) B=0.2733  13.5462 >= 9.6000 True   theta=0.00338 >= -0.04561 (V=0.00010) True
+    240 (120, 120) (np.float64(0.7), np.float64(0.3)) B=0.2233  1.7422 >= -2.4000 True   theta=0.02001 >= -0.03298 (V=0.01273) True
+    240 (120, 120) (np.float64(0.733), np.float64(0.267)) B=0.2839  9.8766 >= 4.8000 True   theta=0.00597 >= -0.04439 (V=0.00132) True
+    240 (120, 120) (np.float64(0.733), np.float64(0.267)) B=0.3039  14.6260 >= 9.6000 True   theta=0.00166 >= -0.04571 (V=0.00000) True
+    240 (120, 120) (np.float64(0.733), np.float64(0.267)) B=0.2539  2.7024 >= -2.4000 True   theta=0.01769 >= -0.03514 (V=0.01056) True
+    240 (80, 80, 80) (np.float64(0.725), np.float64(0.5), np.float64(0.275)) B=0.2492  9.8488 >= 4.8000 True   theta=0.00694 >= -0.06779 (V=0.00077) True
+    240 (80, 80, 80) (np.float64(0.725), np.float64(0.5), np.float64(0.275)) B=0.2692  14.5473 >= 9.6000 True   theta=0.00350 >= -0.06856 (V=-0.00000) True
+    240 (80, 80, 80) (np.float64(0.725), np.float64(0.5), np.float64(0.275)) B=0.2192  2.6399 >= -2.4000 True   theta=0.01551 >= -0.06219 (V=0.00637) True
+    240 (60, 120, 60) (np.float64(0.8), np.float64(0.45), np.float64(0.2)) B=0.2749  12.4671 >= 4.8000 True   theta=0.00238 >= -0.06856 (V=-0.00000) True
+    240 (60, 120, 60) (np.float64(0.8), np.float64(0.45), np.float64(0.2)) B=0.2949  17.2986 >= 9.6000 True   theta=0.00081 >= -0.06856 (V=-0.00000) True
+    240 (60, 120, 60) (np.float64(0.8), np.float64(0.45), np.float64(0.2)) B=0.2449  5.3085 >= -2.4000 True   theta=0.00818 >= -0.06730 (V=0.00126) True
+# B. Section 6.3, exact sums around a centre of type n/2
+   dips of H, eps = 1, n = 250: theta_n = -ln(maxdens)/n = 0.025153   (report 0.025153);  ln(1/q)/n = 0.025153, ln(1+Phi) = 1.0307   t=3
+   dips of H, eps = 1, n = 1000: theta_n = -ln(maxdens)/n = 0.025092   (report 0.025092);  ln(1/q)/n = 0.025092, ln(1+Phi) = 1.0224   t=6
+   truncated shell-cone x = 0.298, eps = 0.0251012 n, n = 250: theta_n = ln(1/q)/n = 0.031466   (report 0.031466)   t=6
+   truncated shell-cone x = 0.298, eps = 0.0251012 n, n = 1000: theta_n = ln(1/q)/n = 0.027977   (report 0.027977)   t=8
+time 7.526813507080078

@@ -1,0 +1,11 @@
+gamma : largest |x| for which the reduction is valid on all 112 instances (scan x = -1..-260)
+all bulge/int = 0                        predicted valid iff x > -100 | 0:ok  -50:ok  -99:ok  -100:FAIL  -101:FAIL  -150:FAIL  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL
+all bulge/int = 10                       predicted valid iff x > -110 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -109:ok  -110:FAIL  -111:FAIL  -150:FAIL  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL
+all bulge/int = 30                       predicted valid iff x > -130 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -129:ok  -130:FAIL  -131:FAIL  -150:FAIL  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL
+all bulge/int = 60                       predicted valid iff x > -160 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -150:ok  -159:ok  -160:FAIL  -161:FAIL  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL
+all bulge/int = 99                       predicted valid iff x > -199 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -150:ok  -198:ok  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL
+all bulge/int = 100                      predicted valid iff x > -200 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -150:ok  -199:ok  -200:FAIL  -201:FAIL  -250:FAIL
+all bulge/int = 150                      predicted valid iff x > -200 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -150:ok  -199:ok  -200:FAIL  -201:FAIL  -250:FAIL
+only the pure A-bulge = 30, others 0     predicted valid iff x > -130 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -129:ok  -130:FAIL  -131:FAIL  -150:FAIL  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL
+only the pure A-bulge = 60, others 0     predicted valid iff x > -160 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -150:FAIL  -159:FAIL  -160:FAIL  -161:FAIL  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL
+only the pure A-bulge = 150, others 0    predicted valid iff x > -200 | 0:ok  -50:ok  -99:ok  -100:ok  -101:ok  -150:FAIL  -199:FAIL  -200:FAIL  -201:FAIL  -250:FAIL

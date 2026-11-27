@@ -1,0 +1,6 @@
+=== p9_02_gibbs LKSE:5 on H, tau 0.6; started 2026-11-26 11:23:51 UTC
+    98 atoms, 5 sites, states per site [2, 31, 9, 13, 2], anchor [1, 15, 1, 7, 1]
+    seed 4242: 960 states (8 chains, 120 sweeps each after 30) [7s]; sites off the anchor: mean 1.45, largest 4; frequencies by site: 0.10 0.35 0.61 0.39 0.00; distribution of the number of sites off the anchor: 0:134 1:383 2:333 3:101 4:9
+    seed 777: 960 states (8 chains, 120 sweeps each after 30) [7s]; sites off the anchor: mean 1.46, largest 4; frequencies by site: 0.08 0.37 0.62 0.38 0.00; distribution of the number of sites off the anchor: 0:127 1:404 2:301 3:121 4:7
+foreign writes attempted during import (refused): 0
+ALL DONE 15 s; peak RSS 91 MB

@@ -1,0 +1,95 @@
+R28 toy_stageB.py  start 2026-11-27T00:01:17Z
+cases parsed from their log: 8  partitions: 41
+
+=== A  smooth, tilted: n = 8, J = 2.0, W = 0.0, reference tilted:  my ln Z = -2.2721311886   theirs -2.2721311886   difference +1.8e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+   3  [-20.948442, 5.300474] | [-5.143674, 32.422831] | 0.076 | 5.155748 (6, 18/24) | 3.281e+00 4.696e+00 1.287e+00   || 3.2e-07;  True;  1.286
+   6  [-12.768932, 2.811498] | [-2.806662, 7.376821] | 0.052 | 2.397375 (3, 36/48) | 1.948e+00 1.273e+00 6.505e-01   || 4.3e-07;  True;  0.6198
+  12  [-7.021421, 0.732948] | [-2.464265, -0.555664] | 0.101 | -0.555664 (all H, 0/96) | 9.693e-01 2.386e-01 2.386e-01   || 2.3e-07;  True;  0.2382
+  24  [-4.426790, -0.598899] | [-2.326529, -1.947479] | 0.144 | -1.947479 (all H, 0/192) | 4.785e-01 4.738e-02 4.738e-02   || 3.9e-07;  True;  nan
+  48  [-3.284911, -1.382927] | [-2.286246, -2.203513] | 0.171 | -2.203513 (all H, 0/384) | 2.377e-01 1.034e-02 1.034e-02   || 2.9e-07;  True;  nan
+  96  [-2.762947, -1.812989] | [-2.275716, -2.256423] | 0.186 | -2.256423 (all H, 0/768) | 1.187e-01 2.412e-03 2.412e-03   || 3.4e-07;  True;  nan
+ 144  [-2.595738, -1.962660] | [-2.273745, -2.265372] | 0.193 | -2.265372 (all H, 0/1152) | 7.913e-02 1.047e-03 1.047e-03   || 3.1e-07;  True;  nan
+ 288  [-2.432144, -2.115668] | [-2.272559, -2.270515] | 0.209 | -2.270515 (all H, 0/2304) | 3.956e-02 2.554e-04 2.554e-04   || 2.9e-07;  True;  nan
+
+=== Au smooth, uniform: n = 8, J = 2.0, W = 0.0, reference uniform:  my ln Z = -2.2721311886   theirs -2.2721311886   difference +1.8e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+   3  [-36.938668, 13.310102] | [-9.053577, 73.226436] | 0.082 | 13.310102 (6, 24/24) | 6.281e+00 1.029e+01 2.795e+00   || 4.7e-07;  True;  2.795
+   6  [-27.272060, 9.844142] | [-6.135252, 28.873939] | 0.110 | 9.844142 (4, 48/48) | 4.640e+00 4.376e+00 1.997e+00   || 1.8e-07;  True;  1.966
+  12  [-13.501359, 4.680740] | [-3.175737, 4.678691] | 0.115 | 4.051401 (4, 18/96) | 2.273e+00 9.818e-01 9.034e-01   || 3.4e-07;  True;  0.834
+  24  [-7.429928, 1.640104] | [-2.507162, -0.803465] | 0.138 | -0.803465 (all H, 0/192) | 1.134e+00 2.130e-01 2.130e-01   || 4.4e-07;  True;  nan
+  48  [-4.686653, -0.182763] | [-2.331558, -1.939384] | 0.152 | -1.939384 (all H, 0/384) | 5.630e-01 4.902e-02 4.902e-02   || 4.8e-07;  True;  nan
+  96  [-3.437970, -1.190006] | [-2.287123, -2.192712] | 0.159 | -2.192712 (all H, 0/768) | 2.810e-01 1.180e-02 1.180e-02   || 3.0e-07;  True;  nan
+ 144  [-3.039518, -1.541953] | [-2.278870, -2.237432] | 0.163 | -2.237432 (all H, 0/1152) | 1.872e-01 5.180e-03 5.180e-03   || 4.7e-07;  True;  nan
+
+=== B  wall 20, tilted: n = 8, J = 2.0, W = 20.0, reference tilted:  my ln Z = -4.6508308887   theirs -4.6508308887   difference +1.6e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+   3  [-26.819503, 4.062543] | [-8.791215, 634.818042] | 0.006 | 3.998949 (6, 21/24) | 3.860e+00 8.045e+01 1.599e+00   || 4.3e-07;  True;  1.565
+   6  [-17.121877, 0.957969] | [-5.394576, 299.892673] | 0.002 | 0.638530 (4, 41/48) | 2.260e+00 3.816e+01 7.541e-01   || 3.4e-07;  True;  0.7242
+  12  [-9.827032, -1.358337] | [-4.912549, 56.310254] | 0.004 | -2.118921 (6, 49/96) | 1.059e+00 7.653e+00 3.492e-01   || 4.7e-07;  True;  0.3157
+  24  [-7.003547, -2.817324] | [-4.724828, -4.153836] | 0.130 | -4.153836 (all H, 0/192) | 5.233e-01 7.137e-02 7.137e-02   || 3.2e-07;  True;  nan
+  48  [-5.756107, -3.677451] | [-4.670003, -4.559096] | 0.173 | -4.559096 (all H, 0/384) | 2.598e-01 1.386e-02 1.386e-02   || 3.8e-07;  True;  nan
+  96  [-5.186618, -4.148661] | [-4.655698, -4.630411] | 0.192 | -4.630411 (all H, 0/768) | 1.297e-01 3.161e-03 3.161e-03   || 4.7e-07;  True;  nan
+ 144  [-5.004191, -4.312469] | [-4.653022, -4.642104] | 0.201 | -4.642104 (all H, 0/1152) | 8.647e-02 1.365e-03 1.365e-03   || 3.5e-07;  True;  nan
+
+=== B5 wall 5, tilted: n = 8, J = 2.0, W = 5.0, reference tilted:  my ln Z = -3.5511347841   theirs -3.5511347841   difference -1.6e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+   3  [-23.270579, 4.785683] | [-7.012648, 49.638651] | 0.061 | 4.453739 (6, 18/24) | 3.507e+00 7.081e+00 1.433e+00   || 3.1e-07;  True;  1.431
+   6  [-14.683090, 1.871428] | [-4.153834, 15.724412] | 0.030 | 1.416411 (4, 36/48) | 2.069e+00 2.485e+00 6.963e-01   || 3.6e-07;  True;  0.6666
+  12  [-8.484661, -0.405205] | [-3.765353, -1.439691] | 0.092 | -1.619846 (4, 8/96) | 1.010e+00 2.907e-01 2.682e-01   || 4.8e-07;  True;  0.2589
+  24  [-5.788181, -1.805954] | [-3.611643, -3.185626] | 0.142 | -3.185626 (all H, 0/192) | 4.978e-01 5.325e-02 5.325e-02   || 4.9e-07;  True;  nan
+  48  [-4.603232, -2.625150] | [-3.566830, -3.474972] | 0.171 | -3.474972 (all H, 0/384) | 2.473e-01 1.148e-02 1.148e-02   || 4.5e-07;  True;  nan
+  96  [-4.061046, -3.073410] | [-3.555121, -3.533766] | 0.187 | -3.533766 (all H, 0/768) | 1.235e-01 2.669e-03 2.669e-03   || 4.2e-07;  True;  nan
+ 144  [-3.887396, -3.229230] | [-3.552929, -3.543667] | 0.194 | -3.543667 (all H, 0/1152) | 8.227e-02 1.158e-03 1.158e-03   || 4.8e-07;  True;  nan
+
+=== J = 0.5: n = 8, J = 0.5, W = 0.0, reference tilted:  my ln Z = -7.5791483481   theirs -7.5791483481   difference +3.6e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+  24  [-8.171385, -7.031028] | [-7.583775, -7.553889] | 0.155 | -7.553889 (all H, 0/192) | 1.425e-01 3.736e-03 3.736e-03   || 3.5e-07;  True;  nan
+  48  [-7.870532, -7.299058] | [-7.580350, -7.573512] | 0.176 | -7.573512 (all H, 0/384) | 7.143e-02 8.548e-04 8.548e-04   || 4.7e-07;  True;  nan
+  96  [-7.723580, -7.437604] | [-7.579454, -7.577824] | 0.187 | -7.577824 (all H, 0/768) | 3.575e-02 2.037e-04 2.037e-04   || 3.1e-07;  True;  nan
+
+=== J = 1.0: n = 8, J = 1.0, W = 0.0, reference tilted:  my ln Z = -6.3609920874   theirs -6.3609920874   difference +4.0e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+  24  [-7.528732, -5.353004] | [-6.378089, -6.265735] | 0.152 | -6.265735 (all H, 0/192) | 2.720e-01 1.404e-02 1.404e-02   || 2.6e-07;  True;  nan
+  48  [-6.925091, -5.837941] | [-6.365432, -6.340023] | 0.175 | -6.340023 (all H, 0/384) | 1.359e-01 3.176e-03 3.176e-03   || 4.2e-07;  True;  nan
+  96  [-6.638075, -6.094416] | [-6.362120, -6.356097] | 0.187 | -6.356097 (all H, 0/768) | 6.796e-02 7.528e-04 7.528e-04   || 4.0e-07;  True;  nan
+
+=== J = 4.0: n = 8, J = 4.0, W = 0.0, reference tilted:  my ln Z = 8.7443195129   theirs 8.7443195129   difference -4.9e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+  24  [5.132022, 11.284667] | [8.601424, 9.755606] | 0.124 | 9.755606 (all H, 0/192) | 7.691e-01 1.443e-01 1.443e-01   || 4.0e-07;  True;  nan
+  48  [7.088193, 10.127501] | [8.707293, 8.940269] | 0.159 | 8.940269 (all H, 0/384) | 3.799e-01 2.912e-02 2.912e-02   || 4.1e-07;  True;  nan
+  96  [7.951068, 9.467395] | [8.734919, 8.787401] | 0.179 | 8.787401 (all H, 0/768) | 1.895e-01 6.560e-03 6.560e-03   || 2.4e-07;  True;  nan
+
+=== n = 16: n = 16, J = 2.0, W = 0.0, reference tilted:  my ln Z = -3.2915986736   theirs -3.2915986736   difference +4.2e-11
+   k   mine: lo1, hi1 | Jensen, all-H | pos | best (thr, M-cells) | widths per site first, second, mixed   || max |mine - theirs| over the 5 ends;  thr/M-cells equal;  local search (mixed width per site)
+  24  [-7.507983, -0.105829] | [-3.392950, -2.669040] | 0.140 | -2.669040 (all H, 0/384) | 4.626e-01 4.524e-02 4.524e-02   || 4.5e-07;  True;  nan
+  48  [-5.253203, -1.600961] | [-3.317904, -3.163030] | 0.170 | -3.163030 (all H, 0/768) | 2.283e-01 9.680e-03 9.680e-03   || 4.7e-07;  True;  nan
+  96  [-4.236135, -2.416685] | [-3.298280, -3.262527] | 0.187 | -3.262527 (all H, 0/1536) | 1.137e-01 2.235e-03 2.235e-03   || 4.3e-07;  True;  nan
+
+ENTRY-BY-ENTRY: 49 items compared (8 exact values + 41 rows); disagreements: 0; largest |mine - theirs| over the 205 bracket ends: 4.9e-07 (their print has 6 decimals)
+brackets checked 2409; excluding the exact value: 0 (must be 0)
+CONTROL Jensen value as an upper end: violated in 41 of 41
+CONTROL cell minima as a lower end: violated (above exact) in 41 of 41
+CONTROL all-H with oscillations x 0.5: exact value excluded in 0 of 41 partitions
+CONTROL all-H with oscillations x 0.3: exact value excluded in 34 of 41 partitions
+CONTROL all-H with oscillations x 0.1: exact value excluded in 41 of 41 partitions
+
+derived numbers of item 98 from MY values:
+  exponents 24..96: -1.0053 and -2.1481   (text: -1.005 and -2.148)
+  position of the exact value, k = 24..288: 24: 0.1435, 48: 0.1706, 96: 0.1858, 144: 0.1927, 288: 0.2092   (text: 0.14 to 0.21)
+  cells for 1e-3 nats per angle: 147.3 by log-log interpolation between 144 and 288 (what their script does); 147.2 by the power law through 96 and 144 (an extrapolation beyond 144); width at 144 = 1.0466e-03 > 1e-3
+  length: width per angle at 48 cells: n = 8: 1.0342e-02; n = 16: 9.6796e-03  (text: 0.0103, 0.0097)
+  J = 0.5: all-H width PER ANGLE at 48 cells 8.5477e-04; per angle / J^2 = 3.4191e-03; TOTAL (8 angles) / J^2 = 2.7352e-02
+  J = 1.0: all-H width PER ANGLE at 48 cells 3.1760e-03; per angle / J^2 = 3.1760e-03; TOTAL (8 angles) / J^2 = 2.5408e-02
+  J = 2.0: all-H width PER ANGLE at 48 cells 1.0342e-02; per angle / J^2 = 2.5854e-03; TOTAL (8 angles) / J^2 = 2.0683e-02
+  J = 4.0: all-H width PER ANGLE at 48 cells 2.9122e-02; per angle / J^2 = 1.8201e-03; TOTAL (8 angles) / J^2 = 1.4561e-02
+  (text: 'width over J^2: 0.027, 0.025, 0.021, 0.015' in a sentence whose subject is the width per angle)
+  uniform / tilted reference at 48 cells: 4.740  (text: 4.7); at other k: 3: 2.19, 6: 3.44, 12: 4.12, 24: 4.49, 96: 4.89, 144: 4.95
+  wall 20 kT, all-H width per angle at 3, 6, 12, 24: 80.5, 38.2, 7.65, 0.0714;  first-order: 3.86, 2.26, 1.06, 0.523  (text: 80, 38, 7.7 useless; false at 24)
+  wall / no wall, mixed width at 96 cells: 1.311  (text: 1.31)
+  local search over modes against the threshold rule (mixed width per angle):
+    case A: k = 3: threshold 1.287 -> local search 1.286, k = 6: threshold 0.6505 -> local search 0.6198, k = 12: threshold 0.2386 -> local search 0.2382
+    case Au: k = 3: threshold 2.795 -> local search 2.795, k = 6: threshold 1.997 -> local search 1.966, k = 12: threshold 0.9034 -> local search 0.834
+    case B: k = 3: threshold 1.599 -> local search 1.565, k = 6: threshold 0.7541 -> local search 0.7242, k = 12: threshold 0.3492 -> local search 0.3157
+    case B5: k = 3: threshold 1.433 -> local search 1.431, k = 6: threshold 0.6963 -> local search 0.6666, k = 12: threshold 0.2682 -> local search 0.2589
+END 2026-11-27T00:02:35Z  wall 78.0 s  peak memory 514 MB (ru_maxrss; address space capped at 3 GB)

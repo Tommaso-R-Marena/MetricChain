@@ -1,0 +1,39 @@
+# u = 4 (h = 0.23925, a = 0.60305, d_min = 2), n = N = 2500, k = 3 levels above the base, eps^ = 0.3, ln delta = -20.000, base error E_0 = 0, blocks = design/1
+# chain: s_t = L + 0.04, b_0 = h + 0.02; base level J0 = 5; (b_j - h)/h, j = 5..8: 0.0836 0.0645 0.0506 0.0408;  W_j(b_j): 0.655 0.656 0.650 0.646;  X = X_0(N) + 1 = 74.521
+#   level 8: block m = 529 (design 529), chain levels at d = n: 4, d_0 = 539; unrolled terms: chain 353.07, level 120.60
+#   level 7: block m = 505 (design 505), chain levels at d = n: 4, d_0 = 515; unrolled terms: chain 337.72, level 120.70
+#   level 6: block m = 500 (design 500), chain levels at d = n: 4, d_0 = 510; unrolled terms: chain 333.93, level 120.78
+exact ln cost of F_8(n, eps^, delta): 1444.627 = n b_k + 822.073   (n b_k = 622.554, n b_base = 648.124, n h = 598.124, n a = 1507.631)
+bound by the composed error functions: n b_k + 1386.792;   unrolled bound of section 6: n b_k + 1386.797
+nodes evaluated exactly: F_8: 4 Z-levels, 4 chain levels; F_7: 6 Z-levels, 6 chain levels; F_6: 4 Z-levels, 4 chain levels   [0 s]
+check                                               number  least slack  viol.   at
+F6 type (Prop. Z4)                                       8      142.099      0   (726, 74.52120825168997)
+F7 type (Prop. Z4)                                      12      325.143      0   (1344, 74.52120825168997)
+F8 type (Prop. Z4)                                       8      513.218      0   (1971, 74.52120825168997)
+T6 accuracy                                              4        0.015      0   (765,)
+T6 claim (Prop. T(iii))                                  4      105.004      0   (726,)
+T6 claim (bottom)                                        6      234.966      0   (304,)
+T6 delta' (Prop. T(ii))                                  4        3.132      0   (726,)
+T7 accuracy                                              6        0.015      0   (846,)
+T7 claim (Prop. T(iii))                                  6      292.436      0   (1344,)
+T7 claim (bottom)                                        4      662.766      0   (350,)
+T7 delta' (Prop. T(ii))                                  6        3.308      0   (832,)
+T8 accuracy                                              4        0.005      0   (2500,)
+T8 claim (Prop. T(iii))                                  4      482.705      0   (1971,)
+T8 claim (bottom)                                        1     1112.120      0   (384,)
+T8 delta' (Prop. T(ii))                                  4        3.439      0   (913,)
+TOP: Ehat_k <= unrolled error of section 6               1        0.006      0   None
+TOP: exact <= n b_k + Ehat_k(n, eps^; Lam_0)             1      564.719      0   None
+Z5 (U-inf)                                               4       17.918      0   (226, 74.52120825268997, 33)
+Z5 accuracy                                              4        2.899      0   (226, 74.52120825268997)
+Z5 delta' (Lemma Z2)                                     4       26.630      0   (226, 74.52120825268997, 33)
+Z5 type (Prop. Z3)                                       4       65.723      0   (726, 74.52120825268997, 80)
+Z6 (U-inf)                                               6      202.715      0   (839, 74.52120825268997, 74)
+Z6 accuracy                                              6        3.182      0   (327, 74.52120825268997)
+Z6 delta' (Lemma Z2)                                     6       28.939      0   (327, 74.52120825268997, 36)
+Z6 type (Prop. Z3)                                       6      244.826      0   (839, 74.52120825268997, 74)
+Z7 (U-inf)                                               4      391.056      0   (1442, 74.52120825268997, 98)
+Z7 accuracy                                              4        3.398      0   (384, 74.52120825268997)
+Z7 delta' (Lemma Z2)                                     4       27.814      0   (384, 74.52120825268997, 34)
+Z7 type (Prop. Z3)                                       4      430.135      0   (1442, 74.52120825268997, 98)
+TOTAL: 139 checks, 0 violations   ALL CHECKS PASS

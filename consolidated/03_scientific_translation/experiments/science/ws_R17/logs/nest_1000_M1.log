@@ -1,0 +1,25 @@
+r17_nest: u=1 n=1000 M=1 eps=0.8715 delta=0.05   (a=0.110944 h=0.029139)
+cross-check of the cached base bracket against r16lib.k0 (210 cases): max |difference| = 0.00e+00
+
+variant 'min': family D[S[G_0]], 3 nested levels (k_M), alpha_0 = 0.678541
+  exact certified ln cost = 149.70  = 1.3493 n a      Theorem Q8 bound n B_M + E_M = 433.80 = 3.9101 n a      n B_M = 87.87 (B_M/a = 0.7920)
+  top-level check  cost <= n B_M + E_M: True (slack 284.10)
+  top drop: chosen 'passthrough'; candidates {'noshift': np.float64(164.32), 'passthrough': np.float64(149.7)}
+  nodes: 248 (base 221); levels built: slope 10, drop with shift 0, drop without shift 1
+  violations: 0;  least slack: induction 40.69, Lemma Q4 4.119, Lemma Q3 98.43, (4.1) 14.00, (4.2) inf, Prop Q6 91.05, Prop Q7 295.38;  max |x_out - xhat| of slope levels 0.0e+00
+  base family (Proposition Q5(a)): 221 calls (0 by enumeration), dimensions >= 487, ln(1/delta) from 3.0 to 108.4 (largest ln(1/delta)/d = 0.22); least slack of  cost <= d a + E_base(d, x; ln(1/delta) + d ln 2): 40.69
+  least slack of the induction inequality over the nodes that are not base brackets (slope and drop families): 146.88
+  emulation of the sampling of their qscheme.py (base bracket checked at the two ends and the middle of every ladder; only where a slope family sits directly on the base family): 33 base nodes sampled, least slack 43.52; with the slope and drop nodes: 43.52
+  [0 s; tables cached now: 23]
+
+variant 'proof': family D[S[G_0]], 3 nested levels (k_M), alpha_0 = 0.678541
+  exact certified ln cost = 149.70  = 1.3493 n a      Theorem Q8 bound n B_M + E_M = 433.80 = 3.9101 n a      n B_M = 87.87 (B_M/a = 0.7920)
+  top-level check  cost <= n B_M + E_M: True (slack 284.10)
+  top drop: chosen 'passthrough'; candidates {'passthrough': np.float64(149.7)}
+  nodes: 3 (base 1); levels built: slope 0, drop with shift 0, drop without shift 0
+  violations: 0;  least slack: induction 64.18, Lemma Q4 inf, Lemma Q3 inf, (4.1) inf, (4.2) inf, Prop Q6 inf, Prop Q7 inf;  max |x_out - xhat| of slope levels 0.0e+00
+  base family (Proposition Q5(a)): 1 calls (0 by enumeration), dimensions >= 1000, ln(1/delta) from 3.0 to 3.0 (largest ln(1/delta)/d = 0.00); least slack of  cost <= d a + E_base(d, x; ln(1/delta) + d ln 2): 64.18
+  least slack of the induction inequality over the nodes that are not base brackets (slope and drop families): 154.40
+  emulation of the sampling of their qscheme.py (base bracket checked at the two ends and the middle of every ladder; only where a slope family sits directly on the base family): 0 base nodes sampled, least slack inf; with the slope and drop nodes: 154.40
+  [0 s; tables cached now: 1]
+LAST LINE r17_nest.py n=1000 M=1: completed; min 149.70 proof 149.70; wall 0.0 s; peak RSS 32.6 MB

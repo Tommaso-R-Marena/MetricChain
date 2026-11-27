@@ -1,0 +1,19 @@
+=== S12 on H, tau 0.7: 144 atoms, 12 sites, states per site [9, 9, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], 4.89776e+09 assignments; anchor 774222222222, E = -130.095497 kcal/mol; order m = 4, band 6 [1s]
+(0) Gibbs sampling of the true ensemble (16 chains, 200 sweeps each after 50): 6.324 +- 0.033 of 12 side chains off the anchor, p = 0.5270; by site: 0.64 0.40 0.70 0.60 0.51 0.52 0.50 0.50 0.50 0.51 0.52 0.42 [79s]
+(1) Gamma_4 = 3.24601e+00 kcal/mol = 5.4449 kT (79 closed-form sums, computed, 2s).  PREDICTION by the rule 2 p^k Gamma_m, written before any bracket is computed: site 5.739, pair 3.024, triple 1.594, envelope 0.84 nats (the rule knows nothing of the band, of P3's reductions of the evaluated terms, or of the two allowances: the brackets can only be wider) [81s]
+(1b) 110 in-window triple sums [2s]; mean pair sum G_ij by separation 1..11: 4.86e-01 3.27e-01 4.09e-01 4.56e-01 2.53e-01 1.09e-01 1.11e-01 9.55e-02 3.38e-02 1.86e-02 1.38e-02
+     REFINED RULE, also before any bracket: 2 beta x mean over the 3200 Gibbs states of the penalty each form charges (band 6): site 5.8, pair 3.243, triple 2.008 nats; largest penalty on the sample: 5.27, 5.13, 5.02 kT
+(2) ball of radius 3: 38256 evaluations of the solvent term (0.00078 % of the domain; read from ball_S12_H_t0.70_gbn2_M4_64e3d07719.npz) [84s]
+(4) form S, site penalties (P3); crude rule 5.739, refined rule 5.8:
+      with P3's reductions (the workstreams' models): CERTIFIED ln Z(E) in [224.777744, 230.653948], width 5.8762 nats (beta x mean of m_+ - m_- over the Gibbs states: 5.92; sandwich violated at 0 of the 3200 Gibbs states)
+      with EXACT window terms (110 terms of order >= 3 exact, 110 reduced, 15 pairs beyond the band): CERTIFIED ln Z(E) in [224.800465, 230.603979], width 5.80351 nats (beta x mean of m_+ - m_-: 5.848; sandwich violated at 0 of the Gibbs states) [0s]
+(4) form B, banded pair penalties (P6); crude rule 3.024, refined rule 3.243:
+      with P3's reductions (the workstreams' models): CERTIFIED ln Z(E) in [226.046961, 229.540056], width 3.4931 nats (beta x mean of m_+ - m_- over the Gibbs states: 3.363; sandwich violated at 0 of the 3200 Gibbs states)
+      with EXACT window terms (110 terms of order >= 3 exact, 110 reduced, 15 pairs beyond the band): CERTIFIED ln Z(E) in [226.070961, 229.483106], width 3.41215 nats (beta x mean of m_+ - m_-: 3.292; sandwich violated at 0 of the Gibbs states) [0s]
+(4) form T, banded triple penalties (P6); crude rule 1.594, refined rule 2.008:
+      with P3's reductions (the workstreams' models): CERTIFIED ln Z(E) in [226.560416, 228.914761], width 2.35434 nats (beta x mean of m_+ - m_- over the Gibbs states: 2.128; sandwich violated at 0 of the 3200 Gibbs states)
+      with EXACT window terms (110 terms of order >= 3 exact, 110 reduced, 15 pairs beyond the band): CERTIFIED ln Z(E) in [226.587496, 228.855702], width 2.26821 nats (beta x mean of m_+ - m_-: 2.056; sandwich violated at 0 of the Gibbs states) [0s]
+(5) 4000 exact samples of the floor of the triple form with exact window terms (3997 distinct; 7.98 sites off the anchor on average): m_- > E at 0, m_+ < E at 0; largest E - m_- = 3.2766, largest m_+ - E = 3.2807 kcal/mol
+    uncertified estimate by reweighting the floor's samples: ln Z(E) = 227.379969 +- 0.015677 (inside the certified bracket: True); p re-estimated from the reweighted samples: 0.5255 (Gibbs: 0.5270) [86s]
+    sandwich sampler (theory division, Proposition 11.113) on that sandwich: 2000 accepted of about 20000 proposals, 2000 distinct states evaluated; W in [0.004, 0.474], mean 0.1409; W outside [0, 1]: 0;  with probability >= 0.95: ln Z(E) in [227.259170, 227.497209], width 0.238040; point estimate 227.385256 [87s]
+ALL DONE 87 s

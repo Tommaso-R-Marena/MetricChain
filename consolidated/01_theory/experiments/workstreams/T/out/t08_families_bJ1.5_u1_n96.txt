@@ -1,0 +1,18 @@
+Part 0: KFin against brute force on full cubes: 45 checks passed   [0s]
+
+Curie-Weiss bJ=1.5 bB=0.0 u=1.0, n = 96; ln n/n = 0.04755; R from table 'bJ1.5_u1'
+  (a),(e) done [8s]
+  (b) done [9s]
+  (c) done [9s]
+  (d) done [9s]
+
+family                                           sets   max omega   (in ln n/n)   max[theta_D - R(e_D)]   at (e_D, theta_D, R(e_D))
+(e) binary optimum of the table                     45   0.00066      0.014      +0.00083             (+0.0497, 0.0055, 0.0047)  e=+0.060
+(a) neighbourhoods of a 3-block class              752   0.00113      0.024      +0.00157             (+0.0320, 0.0120, 0.0104)  sizes=(30, 26, 40) mus=[0.071 0.755 0.459] e=+0.000
+(a) neighbourhoods of a 4-block class              267   0.00251      0.053      +0.00201             (+0.0821, 0.0025, 0.0000)  sizes=(29, 14, 26, 27) mus=[0.278 0.17  0.582 0.937] e=+0.036
+(b) cylinders (radius, all types)                  108   0.00069      0.015      +0.00102             (+0.0141, 0.0190, 0.0180)  lam=0.85 x=0.27 r=0.15
+(b) cylinders (budget around one class)             81   0.00000      0.000      -0.00066             
+(c) unions of two shell-neighbourhoods              18   0.00000      0.000      -0.00108             
+(c') one of the two (control)                       18   0.00028      0.006      +0.00044             (-0.0108, 0.0316, 0.0312)  overlap=0.25 x=0.28 e=0.02
+(d) slabs and half-spaces in a 3-block grid        199   0.00355      0.044      +0.00617             (-0.0445, 0.0597, 0.0535)  n=48
+time 9s

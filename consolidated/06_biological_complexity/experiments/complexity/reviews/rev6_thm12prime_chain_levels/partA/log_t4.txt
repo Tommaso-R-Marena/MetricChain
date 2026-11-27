@@ -1,0 +1,2 @@
+four trees of the note = displayed splits of the explicit bloblet for 30 triples (kB,k1,k2)
+named splits of the proof: displayed and of positive weight in all 5134 cases

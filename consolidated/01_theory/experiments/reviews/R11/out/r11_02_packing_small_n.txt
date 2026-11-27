@@ -1,0 +1,21 @@
+== validation of the code path on the uniform cube (n = 10, all 1024 centres, g = 0) ==
+eps=0.25: closed form k* = 3, 2^n/|B(k*)| = 5.8182;  enumeration + LP: V = 5.8182  (|D| = (np.int64(176), np.int64(176)), members ok: True, min gain 0.2500)
+eps=0.5: closed form k* = 3, 2^n/|B(k*)| = 5.8182;  enumeration + LP: V = 5.8182  (|D| = (np.int64(176), np.int64(176)), members ok: True, min gain 0.5000)
+eps=1.0: closed form k* = 4, 2^n/|B(k*)| = 2.6528;  enumeration + LP: V = 2.6528  (|D| = (np.int64(386), np.int64(386)), members ok: True, min gain 1.0000)
+
+== Markov reference against the uniform cube, same n, u = 1, same eps ==
+columns: V = fractional packing number (E|Q| >= (1-2 delta) V);  cube: closed form with ALL centres (its optimum);
+         Markov: soft-min instance, domain-like centres only (a restriction, so V is a valid but not optimal bound)
+n=10 eps=0.25: cube V =   5.8182 (k*=3) | p=0.4: V =   5.8711 (min gain 0.250, members ok: True), zero residual: V =  6.7564 | p=0.3: V =   6.1188 (min gain 0.250, members ok: True), zero residual: V =  8.7443   [113 s]
+n=10 eps=0.50: cube V =   5.8182 (k*=3) | p=0.4: V =   3.4413 (min gain 0.500, members ok: True), zero residual: V =  5.4251 | p=0.3: V =   3.7679 (min gain 0.500, members ok: True), zero residual: V =  5.0775   [119 s]
+n=10 eps=1.00: cube V =   2.6528 (k*=4) | p=0.4: V =   2.4401 (min gain 1.000, members ok: True), zero residual: V =  2.6515 | p=0.3: V =   2.3679 (min gain 1.000, members ok: True), zero residual: V =  2.9313   [166 s]
+n=12 eps=0.25: cube V =   5.1587 (k*=4) | p=0.4: V =   5.4174 (min gain 0.250, members ok: True), zero residual: V =  4.9557 | p=0.3: V =   6.0458 (min gain 0.250, members ok: True), zero residual: V =  5.3483   [168 s]
+n=12 eps=0.50: cube V =   5.1587 (k*=4) | p=0.4: V =   3.5952 (min gain 0.500, members ok: True), zero residual: V =  3.2167 | p=0.3: V =   4.0770 (min gain 0.500, members ok: True), zero residual: V =  4.8545   [170 s]
+n=12 eps=1.00: cube V =   2.5826 (k*=5) | p=0.4: V =   2.3881 (min gain 1.000, members ok: True), zero residual: V =  2.6667 | p=0.3: V =   2.5498 (min gain 1.000, members ok: True), zero residual: V =  3.2167   [173 s]
+n=14 eps=0.25: cube V =  11.1380 (k*=4) | p=0.4: V =   5.4011 (min gain 0.250, members ok: True) | p=0.3: V =   6.8582 (min gain 0.250, members ok: True)   [180 s]
+n=14 eps=0.50: cube V =   4.7175 (k*=5) | p=0.4: V =   3.7296 (min gain 0.500, members ok: True) | p=0.3: V =   4.6475 (min gain 0.500, members ok: True)   [187 s]
+n=14 eps=1.00: cube V =   2.5300 (k*=6) | p=0.4: V =   2.4310 (min gain 1.000, members ok: True) | p=0.3: V =   2.8547 (min gain 1.000, members ok: True)   [197 s]
+n=16 eps=0.25: cube V =   9.5187 (k*=5) | p=0.4: V =   5.9271 (min gain 0.250) | p=0.3: V =   7.3756 (min gain 0.250)   [230 s]
+n=16 eps=0.50: cube V =   4.4005 (k*=6) | p=0.4: V =   4.1547 (min gain 0.500) | p=0.3: V =   4.9644 (min gain 0.500)   [274 s]
+n=16 eps=1.00: cube V =   4.4005 (k*=6) | p=0.4: V =   2.7057 (min gain 1.000) | p=0.3: V =   3.2027 (min gain 1.000)   [329 s]
+329.0 s

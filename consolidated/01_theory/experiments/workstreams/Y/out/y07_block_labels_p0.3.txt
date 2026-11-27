@@ -1,0 +1,17 @@
+(1) validation
+  L=3, k=2 (n=6, 64 labels): brute-force Renyi form 0.235488306543; formula k G_L + ln E[c^t] - t ln E_Q[R] = 0.235488306543
+  L=3, k=3 (n=9, 512 labels): brute-force Renyi form 0.351673185411; formula k G_L + ln E[c^t] - t ln E_Q[R] = 0.351673185411
+  moment Lyapunov, 4 matrices, order 0.43: operator 0.0646590827; exact increment k=9->10: 0.0646590827
+
+(2) bounds per site (cube h = 0.029139, a = 0.110944)
+p=0.3, t=0.431: tilted Markov (Lyapunov) 0.038693
+   <=0 walls per block: L=2: 0.035683  L=3: 0.038734  L=4: 0.039419  L=5: 0.038920  L=6: 0.037811  L=7: 0.036385  L=8: 0.034806  L=9: 0.033168  L=10: 0.031533  L=11: 0.029939  L=12: 0.028407  L=13: 0.026953  L=14: 0.025584  L=15: 0.024300  L=16: 0.023103  L=17: 0.021990  L=18: 0.020955
+   <=1 walls per block: L=4: 0.039419  L=6: 0.039319  L=8: 0.039776  L=10: 0.039786  L=12: 0.039418  L=14: 0.038800  L=16: 0.038023
+   <=2 walls per block: L=6: 0.039319  L=8: 0.039776  L=10: 0.039919  L=12: 0.040051  L=14: 0.040114
+   best: <=2 walls, L=14: 0.040114 at t=0.431;  after refining t: h >= 0.040115 at t=0.434   (x1.377 of the cube)  [131 s]
+   a >= t=0.90: 0.118882 (<=2 walls, L=10);  t=0.97: 0.124766 (<=2 walls, L=8);  t=0.99: 0.126444 (<=2 walls, L=8)   [134 s]
+134.3 s
+
+real	2m14.757s
+user	5m35.769s
+sys	0m0.847s

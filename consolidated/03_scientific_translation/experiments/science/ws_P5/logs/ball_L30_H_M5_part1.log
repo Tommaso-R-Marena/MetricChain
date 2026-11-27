@@ -1,0 +1,7 @@
+=== ball_precompute L30/H tau 0.6: 582 atoms, anchor E = -516.4958, ball of radius 5: 174437 states; cache file ball_L30_H_t0.60_gbn2_M5_20f5b82d67.npz
+    4096/87219 evaluations, 38 s
+    24576/87219 evaluations, 218 s
+    45056/87219 evaluations, 385 s
+    65536/87219 evaluations, 551 s
+    86016/87219 evaluations, 696 s
+DONE in 716.2 s

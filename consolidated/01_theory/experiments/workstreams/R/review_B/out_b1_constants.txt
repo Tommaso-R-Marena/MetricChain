@@ -1,0 +1,36 @@
+u = 1.0
+  p_u = 0.26894142137   Lambda_1 = 0.379885493042   eps* = 0.120114506958
+  a  = KL(p_u||1/2)                 = 0.110944071672
+  h  (root of theta_na(h) = h)      = 0.0291391385016
+  h  (KL(Lambda_1/u||1/2))          = 0.0291391385016    difference 5.02e-42
+  rho_h = 0.379885493042  vs  Lambda_1/u = 0.379885493042
+  theta_na'(h) = -0.960916104279 (implicit)  -0.960916104279 (numerical)
+  theta_na''(h) = 32.0075504871 (implicit)  32.0075505336 (numerical)
+  L = r/(1+r)                       = 0.490034276419    (-theta_hint'(0) = 0.490034276419)
+  vartheta = theta_na''(h)/(1+r)^3  = 4.24497756677
+  theta_hint''(0) (numerical)       = 4.24497756677
+  1/(u^2 rho_h (1 - rho_h))         = 4.24497756677
+  -1/J''(L), J minimised numerically= 4.24497757   (closed form of J: 4.24497756677)
+  max |J_numerical - (Lambda(tu) - t Lambda(u))| at 5 points = 4.48e-40
+  L < 1 - h/a ?   L = 0.49003428,  1 - h/a = 0.7373529
+  2 pi^2 h^2 vartheta               = 0.0711473217006   = 0.64128998 * a
+  c_* = pi h sqrt(2 vartheta)       = 0.266734552881
+u = 2.0
+  p_u = 0.119202922022   Lambda_1 = 0.566219169517   eps* = 0.433780830483
+  a  = KL(p_u||1/2)                 = 0.327813325473
+  h  (root of theta_na(h) = h)      = 0.0972809077466
+  h  (KL(Lambda_1/u||1/2))          = 0.0972809077466    difference 1.15e-41
+  rho_h = 0.283109584758  vs  Lambda_1/u = 0.283109584758
+  theta_na'(h) = -0.867568727608 (implicit)  -0.867568727608 (numerical)
+  theta_na''(h) = 8.02347384342 (implicit)  8.02347384444 (numerical)
+  L = r/(1+r)                       = 0.464544471527    (-theta_hint'(0) = 0.464544471527)
+  vartheta = theta_na''(h)/(1+r)^3  = 1.23177862051
+  theta_hint''(0) (numerical)       = 1.23177862051
+  1/(u^2 rho_h (1 - rho_h))         = 1.23177862051
+  -1/J''(L), J minimised numerically= 1.23177862   (closed form of J: 1.23177862051)
+  max |J_numerical - (Lambda(tu) - t Lambda(u))| at 5 points = 7.46e-41
+  L < 1 - h/a ?   L = 0.46454447,  1 - h/a = 0.70324297
+  2 pi^2 h^2 vartheta               = 0.230100536814   = 0.70192551 * a
+  c_* = pi h sqrt(2 vartheta)       = 0.479687957753
+report (section 0/1), u = 1:  h = 0.02913914  L = 0.490034  vartheta = 4.244977  a = 0.11094407  2pi^2h^2vartheta = 0.0711473 = 0.64129 a
+Gaussian pair: r = 1.0, theta''(h) = 4.0, vartheta = 0.5, 2 pi^2 h^2 vartheta = 0.616850275068  (pi^2/16 = 0.616850275068)

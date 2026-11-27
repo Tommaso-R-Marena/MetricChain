@@ -1,0 +1,294 @@
+FOUND   l.  46  [yale_main2.txt]  that edge-length errors accumulate at most polynomially across the graph
+FOUND   l.  51  [ind_1805.09442.txt]  due to the accumulation of rotational operators
+MISSING l.  63  Propagation of errors in schematic chains of triangles in space with measured distances
+          pieces: [('Propagation of errors in schematic chain', [])]
+MISSING l.  67  a discrete, distance-data version of the thin-rod geometric rigidity estimate, which we did not find stated; i
+          pieces: [('a discrete, distance-data version of the', [])]
+FOUND   l. 115  [acv_2310.10900v3.txt]  Stability of Sequential Lateration and of Stress Minimization in the Presence of Noise
+FOUND   l. 123  [acv_2310.10900v3.txt]  in general position if any (p + 1)-tuple from the configuration spans the entire space
+MISSING l. 125  there are σ > 0 and A > 0, continuous in (‖x_i − x_j‖ : (i, j) ∈ E), such that, if Σ ε²_ij ≤ σ², sequential la
+          pieces: [('there are σ > 0 and A > 0, continuous in', []), (', y_n satisfying min_g Σ_i ‖y_i − g(x_i)', [])]
+MISSING l. 136  The bound in Theorem 2.1 takes into account the worst case scenario where, for every k > p+1, each node v_k is
+          pieces: [('The bound in Theorem 2.1 takes into acco', [])]
+MISSING l. 137  This is the most restrictive scenario, which necessitates performing n − p − 1 rounds of classical lateration 
+          pieces: [('This is the most restrictive scenario, w', [])]
+FOUND   l. 140  [acv_2310.10900v3.txt]  the proof below shows that we can use the same σ and a small multiple of the constant A of
+FOUND   l. 142  [acv_2310.10900v3.txt]  While the constant was obtained in a worst-case scenario and is unlikely to be tight in mo
+FOUND   l. 144  [acv_2310.10900v3.txt]  our analysis can only be accurate, if at all, in the very worst case, and is not represent
+FOUND   l. 146  [acv_2310.10900v3.txt]  a > 0 is a constant depending only on the graph (V, E)
+FOUND   l. 148  [acv_2310.10900v3.txt]  Only a few perturbation bounds exists in the MDS literature.
+FOUND   l. 148  [acv_2310.10900v3.txt]  Moore et al. [58] … carry out a very limited mathematical analysis, restricting themselves
+FOUND   l. 151  [acv_2310.10900v3.txt]  The accumulation of error can be avoided in some situations by minimizing the number of ro
+FOUND   l. 159  [(their file) LOCAL_DATA_STABILITY.md]  They state that the bound is unlikely to be tight
+FOUND   l. 159  [acv_2310.10900v3.txt]  in more friendly (and less contrived) settings
+FOUND   l. 160  [acv_2310.10900v3.txt]  can only be accurate, if at all, in the very worst case
+FOUND   l. 162  [(their file) LOCAL_DATA_STABILITY.md]  their general-position hypothesis is not uniform, ours is quantitative
+FOUND   l. 179  [ajp_1810.09569.txt]  Perturbation Bounds for Procrustes, Classical Scaling, and Trilateration, with Application
+MISSING l. 183  Consider two tall matrices X and Y of same size, with X having full rank, and set ε² = ‖YYᵀ − XXᵀ‖_p
+          pieces: [('Consider two tall matrices X and Y of sa', [])]
+MISSING l. 184  Consequently, if ‖X‡‖ε ≤ 1/√2, then min_{Q∈O} ‖Y − XQ‖_p ≤ (1 + √2)‖X‡‖ε²
+          pieces: [('Consequently, if ‖X‡‖ε ≤ 1/√2, then min_', [])]
+FOUND   l. 188  [(their file) LOCAL_DATA_STABILITY.md]  is that of a single window and is attained there
+FOUND   l. 193  [jm_1103.1417.txt]  Localization from Incomplete Noisy Distance Measurements
+FOUND   l. 199  [jm_1103.1417.txt]  Conversely, w.h.p., there exist adversarial measurement errors
+MISSING l. 200  under the worst case model for the measurement errors, no algorithm can perform better than CΔ/r²
+          pieces: [('under the worst case model for the measu', [])]
+MISSING l. 202  Consider the ‘bending’ map T : [−0.5, 0.5]^d → ℝ^{d+1}
+          pieces: [('Consider the ‘bending’ map T : [−0.5, 0.', [])]
+FOUND   l. 203  [jm_1103.1417.txt]  The crucial point is that the SDP in the first step of the algorithm is oblivious of dimen
+MISSING l. 205  Let G_ij be the chain between nodes i and j as described above. There exists a constant C = C(d), such that |⟨
+          pieces: [('Let G_ij be the chain between nodes i an', [])]
+FOUND   l. 216  [acv_2310.10900v3.txt]  Robust distributed network localization with noisy range measurements
+MISSING l. 219  Error propagation during trilateration is derived in [13], but the potential for significant error due to flip
+          pieces: [('Error propagation during trilateration i', [])]
+MISSING l. 220  Error characteristics of ad hoc positioning systems
+          pieces: [('Error characteristics of ad hoc position', [])]
+MISSING l. 221  Cluster-based localization algorithms generally suffer from poor error propagation characteristics because the
+          pieces: [('Cluster-based localization algorithms ge', [])]
+FOUND   l. 228  [yale_main2.txt]  A Theory of Network Localization
+FOUND   l. 228  [yale_main2.txt]  TRANSACTIONS ON MOBILE COMPUTING, DECEMBER 2005
+FOUND   l. 232  [yale_main2.txt]  Theorem 8: Trilateration graphs in dimension d are generically globally rigid in dimension
+FOUND   l. 232  [yale_main2.txt]  Theorem 10: A trilateration graph G = (V, E) with realizable edge weights is realizable in
+FOUND   l. 235  [yale_main2.txt]  What we do not know at present is whether these results continue to hold for solutions tha
+FOUND   l. 244  [acv_2310.10900v3.txt]  Formal theory of noisy sensor network localization
+FOUND   l. 246  [acv_2310.10900v3.txt]  the distance between the minimizer of the stress (1.1) constrained by the anchors and the 
+MISSING l. 248  We would expect, although we have no formal proof, that such geometries will also be important in ensuring tha
+          pieces: [('We would expect, although we have no for', [])]
+FOUND   l. 253  [stzy_1010.2262.txt]  similar extensions of our model (established in earlier SDP work) would be applicable to n
+FOUND   l. 254  [comp_1807.00108.txt]  Robust Component-based Network Localization with Noisy Range Measurements
+FOUND   l. 256  [nsr_1907.06441v4.txt]  if every point is only connected to nearby points, accumulated errors may make the global 
+MISSING l. 264  Global registration of multiple point clouds using semidefinite programming
+          pieces: [('Global registration of multiple point cl', [])]
+FOUND   l. 270  [cks_1306.5226.txt]  Theorem 7 ([68]). If Γ is laterated and the local coordinates are non-degenerate then the 
+FOUND   l. 274  [cks_1306.5226.txt]  The bounds are again quite loose. The main point here is that the reconstruction error for
+FOUND   l. 281  [sel_2604.21094.txt]  Spectral Embeddings Leak Graph Topology: Theory, Benchmark, and Adaptive Reconstruction
+FOUND   l. 283  [sel_2604.21094.txt]  by propagating pairwise Procrustes rotations from a root vertex
+FOUND   l. 284  [sel_2604.21094.txt]  This result reveals a fundamental limitation of sequential stitching: alignment errors acc
+FOUND   l. 285  [sel_2604.21094.txt]  Using the triangle inequality and norm preservation by orthogonal matrices
+FOUND   l. 286  [sel_2604.21094.txt]  we dropped the second-order term
+FOUND   l. 292  [asap3d_1111.3304.txt]  In general, there exist very few theoretical guaranties for graph localization algorithms,
+FOUND   l. 303  [dkvw_1410.6852.txt]  Euclidean distance geometry and applications
+FOUND   l. 303  [edg_1205.0349.txt]  The GB is very sensitive to numerical errors [64]. In [226], Wu and Wu propose an updated 
+FOUND   l. 306  [dmdgp_survey.txt]  Recent advances on the discretizable molecular distance geometry problem
+FOUND   l. 307  [dmdgp_survey.txt]  it is well known that floating point errors often accumulate, which in the long run may in
+FOUND   l. 308  [dmdgp_survey.txt]  our implementation employs several devices in order to limit the propagation of floating p
+FOUND   l. 311  [ibp.txt]  avoiding the numerical instabilities due to solving linear systems
+FOUND   l. 312  [swy_ima.txt]  the potential instability of the algorithms due to error accumulation. Investigation along
+MISSING l. 314  We estimate its numerical errors and prove some of its key mathematical properties.
+          pieces: [('We estimate its numerical errors and pro', [])]
+FOUND   l. 317  [acv_2310.10900v3.txt]  Noisy Euclidean distance realization: robust facial reduction and the Pareto frontier
+FOUND   l. 318  [dkvw_1410.6852.txt]  even if pairs of cliques can robustly yield some facial information, the accumulated error
+FOUND   l. 334  [gac_2505.16015.txt]  d-dimensional algebraic connectivity
+MISSING l. 335  Let d ≥ 2, and let G be a graph. Then, a_d(G) ≤ a(G).
+          pieces: [('Let d ≥ 2, and let G be a graph. Then, a', [])]
+FOUND   l. 335  [lnpr_2304.01306.txt]  generalizing the case d = 2 proved by Jordán and Tanigawa in [14, Theorem 4.2]
+FOUND   l. 336  [lnpr_2304.01306.txt]  Theorem 1.6 was proved recently and independently in [22]
+MISSING l. 338  Let P_{n,d} be the graph on vertex set [n] with edges {{i, j} : 1 ≤ i < j ≤ n, j − i ≤ d}.
+          pieces: [('Let P_{n,d} be the graph on vertex set [', [])]
+MISSING l. 339  It is not hard to check that, for n ≥ d + 1, P_{n,d} is minimally rigid in ℝ^d.
+          pieces: [('It is not hard to check that, for n ≥ d ', [])]
+MISSING l. 340  Therefore, a_d(P_{n,d}) = Θ_d(1/n²).
+          pieces: [('Therefore, a_d(P_{n,d}) = Θ_d(1/n²).', [])]
+FOUND   l. 358  [gac_2505.16015.txt]  Extremal properties and bounds for the generalized algebraic connectivity of graphs in Euc
+FOUND   l. 361  [gac_2505.16015.txt]  The special case d = 2 was previously proved by Jordán and Tanigawa [15, Th. 4.2]. The gen
+MISSING l. 364  it is of interest to derive precise expressions for a_d(P_{n,d})
+          pieces: [('it is of interest to derive precise expr', [])]
+FOUND   l. 366  [(their file) LOCAL_DATA_STABILITY.md]  Jordán–Tanigawa; Lew–Nevo–Peled–Raz
+FOUND   l. 370  [ds_0703119.txt]  Support-Graph Preconditioners for 2-Dimensional Trusses
+MISSING l. 374  Let T … be a k-face simply-connected truss, and let e_0 be a truss element with weight γ(e_0) between any pair
+          pieces: [('be a k-face simply-connected truss, and ', [])]
+MISSING l. 376  all angles of truss faces are in the range [θ_min, π − θ_min]
+          pieces: [('all angles of truss faces are in the ran', [])]
+MISSING l. 377  Then: λ_max(A_{e_0}, A_T) = O(k³)
+          pieces: [('Then: λ_max(A_{e_0}, A_T) = O(k³)', [])]
+FOUND   l. 377  [ds_0703119.txt]  a simply-connected set of faces that connects two vertices supports the matrix of an eleme
+FOUND   l. 386  [ind_1805.09442.txt]  Incomplete Nested Dissection
+MISSING l. 393  Let T be an edge-simple and stiffly-connected 3D truss. Let n be the number of vertices of T and Δ be the diam
+          pieces: [('Let T be an edge-simple and stiffly-conn', [])]
+FOUND   l. 395  [ind_1805.09442.txt]  Such a bound is analogous to the bound on minimum eigenvalues of a path in a graph.
+FOUND   l. 397  [ind_1805.09442.txt]  our calculations result in an exponential factor loss depending on the “hop distance” betw
+FOUND   l. 405  [ind_1805.09442.txt]  the accumulation of rotational operators
+FOUND   l. 409  [almost_1908.03802.txt]  Almost-rigidity of frameworks
+MISSING l. 412  either |q − p| < η_max(ε), or |q − p| > η_3
+          pieces: [('either |q − p| < η_max(ε), or |q − p| > ', [])]
+MISSING l. 419  we show that the d-dimensional algebraic connectivity of an arbitrary graph G is bounded above by its 1-dimens
+          pieces: [('we show that the d-dimensional algebraic', [])]
+MISSING l. 425  an equivalent one-dimensional Timoshenko beam model
+          pieces: [('an equivalent one-dimensional Timoshenko', [])]
+FOUND   l. 430  [fjm_hierarchy_2005.txt]  A hierarchy of plate models derived from nonlinear elasticity by Gamma-convergence
+FOUND   l. 435  [fjm_hierarchy_2005.txt]  The constant C(U) can be chosen uniformly for a family of domains which are Bilipschitz eq
+FOUND   l. 437  [fjm_hierarchy_2005.txt]  The estimate (63) was established by John [41, 42] under the stronger hypothesis that v is
+MISSING l. 439  In a thin domain Ω_h = S × (−h/2, h/2) the constant in the rigidity estimate degenerates as h → 0. We show tha
+          pieces: [('In a thin domain Ω_h = S × (−h/2, h/2) t', [])]
+MISSING l. 442  Moreover there exists a constant rotation Q̄ ∈ SO(3) such that ‖∇_h y − Q̄‖²_{L²(Ω)} ≤ (C/h²) E
+          pieces: [('Moreover there exists a constant rotatio', [])]
+FOUND   l. 443  [fjm_hierarchy_2005.txt]  The result is implicit in [31]
+FOUND   l. 447  [fjm_hierarchy_2005.txt]  Derivation of the nonlinear bending-torsion theory for inextensible rods by Γ-convergence
+MISSING l. 451  a piecewise constant map R^{(h)} : [0, L] → SO(3)
+          pieces: [('a piecewise constant map R^{(h)} : [0, L', [])]
+MISSING l. 452  iterative applications of the estimates (2.8) and (2.9) yield `∫_{I′} |R^{(h)}(x_1+ξ) − R^{(h)}(x_1)|² dx_1 ≤ 
+          pieces: [('iterative applications of the estimates ', [])]
+FOUND   l. 455  [mm_rods_2002.txt]  The argument follows closely the proof of Theorem 4.1 in [6]
+MISSING l. 468  Asymptotic behavior of structures made of straight rods
+          pieces: [('Asymptotic behavior of structures made o', [])]
+MISSING l. 471  any deformation v ∈ H¹(P_{i,δ}; ℝ³) can be decomposed as
+          pieces: [('any deformation v ∈ H¹(P_{i,δ}; ℝ³) can ', [])]
+FOUND   l. 472  [bg_1010.3614.txt]  The following theorem is proved in [6]
+MISSING l. 474  where the constant C does not depend on δ and L_i.
+          pieces: [('where the constant C does not depend on ', [])]
+FOUND   l. 479  [(their file) GEOMETRY-MSG-0007.md]  the frame error accumulated over `i` windows is at most `√i` times that norm
+FOUND   l. 485  [scardia_0803.0923.txt]  apply the rigidity theorem to each small curved cylinder with the same constant. In this w
+FOUND   l. 486  [scardia_0803.0923.txt]  applying iteratively estimate (3.12) in neighbouring cubes, one can prove the following di
+FOUND   l. 489  [hr_2608.00863.txt]  On weighted rigidity estimates for bulk and thin domains
+FOUND   l. 490  [hr_2608.00863.txt]  In [9], employing an well-established covering technique (e.g. [2]), Conti and Zwicknagl p
+MISSING l. 497  through the construction of the Ansätze
+          pieces: [('through the construction of the Ansätze', [])]
+MISSING l. 498  linear geometric rigidity
+          pieces: [('linear geometric rigidity', [])]
+MISSING l. 501  The constants in the estimate are sharp in terms of the domain thickness scaling
+          pieces: [('The constants in the estimate are sharp ', [])]
+MISSING l. 508  Interactions beyond nearest neighbours and rigidity of discrete energies: a compactness result and an applicat
+          pieces: [('Interactions beyond nearest neighbours a', [])]
+MISSING l. 512  next-to-nearest neighbour interactions: the latter have the role of penalising changes of orientation
+          pieces: [('next-to-nearest neighbour interactions: ', [])]
+MISSING l. 519  There exists a positive constant C_0 (depending on H) with the following property: if two neighbouring N-simpl
+          pieces: [('There exists a positive constant C_0 (de', [])]
+MISSING l. 522  the reflection across the facet shared by S and T
+          pieces: [('the reflection across the facet shared b', [])]
+FOUND   l. 524  [alp_1601.05968.txt]  interactions beyond nearest neighbours have the role of penalising changes of orientation 
+FOUND   l. 526  [(their file) GEOMETRY-MSG-0007.md]  the separation-4 distance excludes a reflection between consecutive windows
+FOUND   l. 530  [sz_2208.04199.txt]  A bending-torsion theory for thin and ultrathin rods as a Γ-limit of atomistic models
+FOUND   l. 533  [sz_2208.04199.txt]  a suitable penalty term positive in a neighbourhood of
+MISSING l. 535  a sequence of piecewise constant mappings R^{(k)} : ℝ → SO(3)
+          pieces: [('a sequence of piecewise constant mapping', [])]
+FOUND   l. 538  [sz_2208.04199.txt]  It is based on a now well-known result about geometric rigidity from [FJM02] and is essent
+FOUND   l. 542  [alp_1601.05968.txt]  Rigidity of three-dimensional lattices and dimension reduction in heterogeneous nanowires
+MISSING l. 544  There exists C > 0 such that dist²(F, SO(3)) ≤ C Σ_{i=1}^6 (|F w_i| − 1)² for every F ∈ GL⁺(3)
+          pieces: [('There exists C > 0 such that dist²(F, SO', [])]
+FOUND   l. 545  [lps_1501.07505.txt]  we always impose a non-interpenetration condition, which ensures that the deformations of 
+FOUND   l. 547  [lps_1501.07505.txt]  The non-interpenetration assumption can be dropped if one takes into account interactions 
+FOUND   l. 553  [vaisala_0201098.txt]  A survey of nearisometries
+MISSING l. 555  The thickness of a bounded set A ⊂ ℝⁿ is the number θ(A) = inf_{|u|=1} d(π_u A).
+          pieces: [('The thickness of a bounded set A ⊂ ℝⁿ is', [])]
+FOUND   l. 556  [vaisala_0201098.txt]  (1) A has the c-IAP, (2) θ(A) ≥ d(A)/c′
+FOUND   l. 557  [vaisala_0201098.txt]  Part (2) ⇒ (1) was proved in [ATV1, 3.3], and it is true for all bounded sets.
+FOUND   l. 559  [vaisala_0201098.txt]  F. John [Jo] considered in 1961 isometric approximation of locally (1 + ε)-bilipschitz map
+FOUND   l. 574  [(their file) LOCAL_DATA_STABILITY.md]  the proof is the standard test field of rod theory
+MISSING l. 577  Propagation of errors in schematic chains of triangles in space with measured distances
+          pieces: [('Propagation of errors in schematic chain', [])]
+FOUND   l. 623  [acv_2310.10900v3.txt]  Stability of Sequential Lateration and of Stress Minimization in the Presence of Noise
+MISSING l. 632  takes into account the worst case scenario where … each node `v_k` is connected to precisely the preceding `p 
+          pieces: [('takes into account the worst case scenar', ['acv_2310.10900v3.txt']), ('each node `v_k` is connected to precisel', [])]
+FOUND   l. 633  [acv_2310.10900v3.txt]  is unlikely to be tight in more friendly (and less contrived) settings
+FOUND   l. 634  [acv_2310.10900v3.txt]  can only be accurate, if at all, in the very worst case
+FOUND   l. 636  [acv_2310.10900v3.txt]  We are not aware of any other results.
+FOUND   l. 638  [yale_main2.txt]  suspicion … that edge-length errors accumulate at most polynomially across the graph
+FOUND   l. 666  [sel_2604.21094.txt]  norm preservation by orthogonal matrices
+FOUND   l. 673  [ind_1805.09442.txt]  due to the accumulation of rotational operators
+MISSING l. 690  Propagation of errors in schematic chains of triangles in space with measured distances
+          pieces: [('Propagation of errors in schematic chain', [])]
+FOUND   l. 698  [(their file) LOCAL_DATA_STABILITY.md]  The published perturbation bound for this situation … is exponential in `n` (§5)
+MISSING l. 699  The published *global* perturbation bound for this situation in the localisation literature (Arias-Castro– Vis
+          pieces: [('The published *global* perturbation boun', [])]
+FOUND   l. 702  [(their file) LOCAL_DATA_STABILITY.md]  (Jordán–Tanigawa; Lew–Nevo–Peled–Raz) … [From memory of the literature; no full text read.
+MISSING l. 703  the inequality `a_d(G) ≤ a(G)` between the `d`-dimensional and the ordinary algebraic connectivity — Jordán an
+          pieces: [('the inequality `a_d(G) ≤ a(G)` between t', [])]
+MISSING l. 711  a proof with explicit constants is attributed to Conti and Zwicknagl (Arch. Ration. Mech. Anal. 247 (2023)) by
+          pieces: [('a proof with explicit constants is attri', [])]
+MISSING l. 714  not found as stated; mechanism and scaling known** (thin-rod geometric rigidity: Mora–Müller 2003; Blanchard–G
+          pieces: [('not found as stated; mechanism and scali', [])]
+MISSING l. 744  substantial text overlap with arXiv:2207.07218
+          pieces: [('substantial text overlap with arXiv:2207', [])]
+FOUND   l. 745  [acv_2310.10900v3.txt]  Stability of Sequential Lateration and of Stress Minimization in the Presence of Noise
+MISSING l. 749  On the Selection of Tuning Parameters for Patch-Stitching Embedding Methods
+          pieces: [('On the Selection of Tuning Parameters fo', [])]
+MISSING l. 755  Stochastic non-metric MDS for noisy high-dimensional data
+          pieces: [('Stochastic non-metric MDS for noisy high', [])]
+FOUND   l. 760  [comp_1807.00108.txt]  Robust Component-based Network Localization with Noisy Range Measurements
+FOUND   l. 761  [acv_2310.10900v3.txt]  Formal theory of noisy sensor network localization
+FOUND   l. 762  [acv_2310.10900v3.txt]  sensor network localization
+MISSING l. 763  Global registration of multiple point clouds using semidefinite programming
+          pieces: [('Global registration of multiple point cl', [])]
+FOUND   l. 765  [stzy_1010.2262.txt]  similar extensions ... would be applicable to noisy distance data
+MISSING l. 768  Error characteristics of ad hoc positioning systems
+          pieces: [('Error characteristics of ad hoc position', [])]
+FOUND   l. 769  [changsahai_2006.txt]  error characteristics of multihop node localization
+MISSING l. 770  Propagation of errors in schematic chains of triangles in space with measured distances
+          pieces: [('Propagation of errors in schematic chain', [])]
+FOUND   l. 771  [acv_2310.10900v3.txt]  Theoretical comparison of triangulation, trilateration and traversing
+MISSING l. 772  Analyzing localization errors in one-dimensional sensor networks
+          pieces: [('Analyzing localization errors in one-dim', [])]
+FOUND   l. 782  [mm_rods_2002.txt]  Derivation of the nonlinear bending-torsion theory for inextensible rods by Gamma-converge
+FOUND   l. 789  [fjm_hierarchy_2005.txt]  A hierarchy of plate models derived from nonlinear elasticity by Gamma-convergence
+FOUND   l. 789  [fjm_hierarchy_2005.txt]  Approximation by rotations
+FOUND   l. 792  [fjm_hierarchy_2005.txt]  A nonlinear model for inextensible rods as a low energy Γ-limit of three-dimensional nonli
+FOUND   l. 797  [alp_1601.05968.txt]  Rigidity of three-dimensional lattices
+FOUND   l. 801  [lps_1501.07505.txt]  Derivation of a rod theory from lattice systems with interactions beyond nearest neighbour
+MISSING l. 805  Cramer-Rao bounds for synchronization of rotations
+          pieces: [('Cramer-Rao bounds for synchronization of', [])]
+MISSING l. 810  Rigid vs. unique determination of protein structures with geometric buildup
+          pieces: [('Rigid vs. unique determination of protei', [])]
+FOUND   l. 811  [dmdgp_survey.txt]  Recent advances on the discretizable molecular distance geometry problem
+MISSING l. 813  accumulation of local errors along the polypeptide chain
+          pieces: [('accumulation of local errors along the p', [])]
+MISSING l. 814  no source that defines a condition number for the chain-molecule distance map
+          pieces: [('no source that defines a condition numbe', [])]
+FOUND   l. 817  [gac_2505.16015.txt]  Rigidity of random subgraphs and eigenvalues of stiffness matrices
+MISSING l. 820  Paper 1907.06441 withdrawn
+          pieces: [('Paper 1907.06441 withdrawn', [])]
+FOUND   l. 822  [ind_1805.09442.txt]  Incomplete Nested Dissection
+MISSING l. 823  Noise-Stable Rigid Graphs for Euclidean Embedding
+          pieces: [('Noise-Stable Rigid Graphs for Euclidean ', [])]
+MISSING l. 823  low quality as is my undergraduate work
+          pieces: [('low quality as is my undergraduate work', [])]
+FOUND   l. 825  [ds_0703119.txt]  Support-Graph Preconditioners
+FOUND   l. 827  [acv_2310.10900v3.txt]  Euclidean distance matrix completion
+MISSING l. 827  no perturbation bound for band / k-tree
+          pieces: [('no perturbation bound for band / k-tree', [])]
+MISSING l. 829  Eigenvalue bounds for an alignment matrix in manifold learning
+          pieces: [('Eigenvalue bounds for an alignment matri', [])]
+FOUND   l. 832  [vaisala_0201098.txt]  A survey of nearisometries
+MISSING l. 833  Modes of interconnected lattice trusses using continuum models, Part I
+          pieces: [('Modes of interconnected lattice trusses ', [])]
+MISSING l. 834  worst-case rigidity index
+          pieces: [('worst-case rigidity index', [])]
+FOUND   l. 841  [bg_1010.3614.txt]  Decomposition of deformations of thin rods
+MISSING l. 843  Asymptotic behavior of structures made of straight rods
+          pieces: [('Asymptotic behavior of structures made o', [])]
+MISSING l. 853  nearly isometric on each simplex
+          pieces: [('nearly isometric on each simplex', [])]
+MISSING l. 853  the discrete statement unconfirmed
+          pieces: [('the discrete statement unconfirmed', [])]
+FOUND   l. 856  [alp_1601.05968.txt]  interactions beyond nearest neighbours
+FOUND   l. 861  [acv_2310.10900v3.txt]  eigenvector synchronization
+FOUND   l. 861  [acv_2310.10900v3.txt]  sensor network localization
+FOUND   l. 861  [acv_2310.10900v3.txt]  remark on global positioning from local distances
+FOUND   l. 863  [acv_2310.10900v3.txt]  Noisy Euclidean distance realization: robust facial reduction and the Pareto frontier
+FOUND   l. 864  [yale_main2.txt]  A Theory of Network Localization
+FOUND   l. 864  [yale_main2.txt]  TRANSACTIONS ON MOBILE COMPUTING, DECEMBER 2005
+MISSING l. 865  Cramer-Rao bounds for synchronization
+          pieces: [('Cramer-Rao bounds for synchronization', [])]
+MISSING l. 880  Propagation of errors in schematic chains of triangles in space with measured distances
+          pieces: [('Propagation of errors in schematic chain', [])]
+MISSING l. 904  should be credited to Presenza et al.
+          pieces: [('should be credited to Presenza et al.', [])]
+MISSING l. 907  about forty-five opened texts
+          pieces: [('about forty-five opened texts', [])]
+
+122 quotations found verbatim in a source; 77 not found mechanically (to be inspected by eye).
+
+Inspection by eye of the quotations not matched mechanically (26 Nov 2026):
+ (a) displayed formulas and quotations containing sub/superscripts or symbols that the PDF text layer flattens
+     (v_k, A_n, a_d, P_{n,d}, Omega_h, R^{(h)}, C_0, Delta vs the increment sign, ...): compared with the extraction
+     line by line; the words agree; formulas are marked "transcribed" in the report;
+ (b) Moore et al. (two-column layout; two quotations) and the Anderson et al. passage quoted by Arias-Castro &
+     Vishwanath (interrupted by a footnote and a page break): read in the extraction, words agree;
+ (c) titles of papers and reports (case or accents differ from the extraction, or the item was not downloaded);
+ (d) abstracts obtained through the arXiv index (Presenza et al.; Yao; Harutyunyan; Avetisyan et al.), through the
+     fetch tool (Luo-Wu; the Netw. Heterog. Media abstract) or from a scanned page viewed as an image (NASA CR 189568);
+ (e) wording of my own (proposed replacement texts, phrases of my earlier notes) and entries of the search log.
+
+Note (21:25 UTC): this run is of 21:22 UTC.  The report was edited afterwards only in passages that contain no
+quotation from a downloaded source (the prism paragraph of §2.6, three sentences of §§2.6, 2.9, 4, 6 and item 9 of
+§5.3); line numbers may have shifted by a few lines.  The extractions were then removed one by one; they can be
+regenerated with regen_sources.sh (addresses and checksums in sources_manifest.tsv).

@@ -1,0 +1,2 @@
+R27 item2_adv_joint.py started 2026-11-26T23:09:40Z  budget 500 s
+n = 5  objective U : sup found 0.00767168   (starts done 24 of 60; at the maximiser: uniform ratio 0.007672, d_P/||local||_2 0.3692, per-point 0.4541, d_P/diam 1.3, tau*/b 0.703, s*/b 0.707)   [43 s]

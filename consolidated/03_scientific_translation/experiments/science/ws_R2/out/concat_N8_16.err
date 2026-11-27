@@ -1,0 +1,14 @@
+bridges N=3: 1
+bridges N=4: 2
+bridges N=5: 5
+bridges N=6: 12
+bridges N=7: 29
+bridges N=8: 78
+bridges N=9: 201
+bridges N=10: 536
+bridges N=11: 1433
+bridges N=12: 3824
+bridges N=13: 10341
+bridges N=14: 28042
+bridges N=15: 76359
+bridges N=16: 208832

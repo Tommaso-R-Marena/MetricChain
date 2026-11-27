@@ -1,0 +1,8 @@
+$ python3 t15_tail_lemma_ref.py
+{'checks': 11166, 'viol': 0, 'lip_viol': 0, 'tight': 182, 'm2': 1703, 'm4': 1951, 'm5': 1319, 'worst': np.float64(1.0000000000000389)}
+tail lemma relative to the reference holds in all checks: True ; extremal instances attain equality: True ; mutations detected (violations): wrong orientation 1703 , Harper function 1951 , zero-reference function for H 1319
+time 13s
+
+real	0m13.327s
+user	0m47.758s
+sys	0m0.132s

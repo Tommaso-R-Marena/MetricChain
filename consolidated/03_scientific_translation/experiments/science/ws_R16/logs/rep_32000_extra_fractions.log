@@ -1,0 +1,7 @@
+# R16 replication (own code r16lib.py). u = 1, a = 0.110944, n = 32000, n a = 3550.2103
+# started 2026-11-26T09:23:21Z
+n=32000 phi_1=0.225: two 0.8350 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.7536 [2L+ rungs: 17 of 40 (14-20, 31-40); max(xout - x_l) over them 0] | searched 0.4575 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [9 s]
+n=32000 phi_1=0.275: two 0.7836 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.7060 [2L+ rungs: 17 of 40 (14-20, 31-40); max(xout - x_l) over them 0] | searched 0.4629 [2L+ rungs: 27 of 40 (14-40); max(xout - x_l) over them 0] |   [18 s]
+n=32000 best over these outer fractions: two 0.7836 (phi_1 = 0.275); tuned 0.7060 (phi_1 = 0.275); searched 0.4575 (phi_1 = 0.225)
+# finished 2026-11-26T09:23:39Z; elapsed 18 s
+peak RSS MB 84.70703125

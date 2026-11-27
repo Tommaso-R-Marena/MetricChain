@@ -1,0 +1,292 @@
+{
+ "ppl_available": true,
+ "small": [
+  {
+   "weights": [
+    1
+   ],
+   "n_vertices": 2,
+   "n_orbits": 1,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 0.0
+  },
+  {
+   "weights": [
+    4,
+    5
+   ],
+   "n_vertices": 8,
+   "n_orbits": 2,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 0.0
+  },
+  {
+   "weights": [
+    1,
+    1
+   ],
+   "n_vertices": 6,
+   "n_orbits": 2,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 0.0
+  },
+  {
+   "weights": [
+    4,
+    4,
+    5
+   ],
+   "n_vertices": 96,
+   "n_orbits": 8,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 5.94
+  },
+  {
+   "weights": [
+    2,
+    2,
+    3
+   ],
+   "n_vertices": 96,
+   "n_orbits": 8,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 5.99
+  },
+  {
+   "weights": [
+    7,
+    7,
+    13
+   ],
+   "n_vertices": 96,
+   "n_orbits": 8,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 6.25
+  },
+  {
+   "weights": [
+    4,
+    4,
+    9
+   ],
+   "n_vertices": 72,
+   "n_orbits": 7,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 5.94
+  },
+  {
+   "weights": [
+    1,
+    1,
+    2
+   ],
+   "n_vertices": 68,
+   "n_orbits": 7,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 5.920000000000001
+  },
+  {
+   "weights": [
+    1,
+    1,
+    1
+   ],
+   "n_vertices": 38,
+   "n_orbits": 4,
+   "all_equal": true,
+   "methods": [
+    "bfs",
+    "bfs_orbits",
+    "bases",
+    "dfs",
+    "kernel",
+    "ppl"
+   ],
+   "every_vertex_passes_rank_test": true,
+   "seconds": 5.95
+  }
+ ],
+ "four": [
+  {
+   "chamber": [
+    "1",
+    "3/2"
+   ],
+   "weights": [
+    101,
+    101,
+    101,
+    102
+   ],
+   "n_vertices": 21472,
+   "ppl_n_vertices": 21472,
+   "ppl_same_set": true,
+   "reference_orbits_same": true,
+   "seconds": 33.1
+  },
+  {
+   "chamber": [
+    "3/2",
+    "2"
+   ],
+   "weights": [
+    101,
+    101,
+    101,
+    152
+   ],
+   "n_vertices": 21184,
+   "ppl_n_vertices": 21184,
+   "ppl_same_set": true,
+   "reference_orbits_same": true,
+   "seconds": 35.800000000000004
+  },
+  {
+   "chamber": [
+    "2",
+    "3"
+   ],
+   "weights": [
+    101,
+    101,
+    101,
+    203
+   ],
+   "n_vertices": 3160,
+   "ppl_n_vertices": 3160,
+   "ppl_same_set": true,
+   "reference_orbits_same": true,
+   "seconds": 1.4000000000000001
+  },
+  {
+   "chamber": [
+    "3",
+    "inf"
+   ],
+   "weights": [
+    101,
+    101,
+    101,
+    304
+   ],
+   "n_vertices": 2888,
+   "ppl_n_vertices": 2888,
+   "ppl_same_set": true,
+   "reference_orbits_same": true,
+   "seconds": 1.3
+  }
+ ],
+ "five": {
+  "uniform_cube": {
+   "n_vertices": 395094,
+   "n_orbits": 237,
+   "expected": 395094,
+   "ok": true,
+   "seconds": 79.4
+  },
+  "chambers": [
+   {
+    "chamber": [
+     "3",
+     "4"
+    ],
+    "n_vertices": 1965480,
+    "n_orbits": 2719,
+    "closure_sample_orbits": 43,
+    "closure_neighbours_checked": 522744,
+    "closure_ok": true,
+    "rank_test_sample": 25,
+    "rank_test_ok": true,
+    "seconds": 325.20000000000005
+   },
+   {
+    "chamber": [
+     "4",
+     "inf"
+    ],
+    "n_vertices": 1960200,
+    "n_orbits": 2704,
+    "closure_sample_orbits": 43,
+    "closure_neighbours_checked": 555917,
+    "closure_ok": true,
+    "rank_test_sample": 25,
+    "rank_test_ok": true,
+    "seconds": 408.5,
+    "equals_2_times_990_squared": true
+   }
+  ]
+ },
+ "seconds_total": 920.6
+}

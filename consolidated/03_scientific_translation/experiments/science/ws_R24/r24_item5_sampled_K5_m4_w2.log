@@ -1,0 +1,33 @@
+[theirs] === K5 on H, tau 0.7: 5 sites, states per site [14, 14, 12, 7, 7], 115248 states, anchor [10, 10, 8, 3, 3]; order m = 4, band 2; 5 raw stage-2 tables of workstream P9 from p9_verification/cache (sum of their maxima 1.0472 kT)
+[theirs] | nothing (the sandwich) | — | — | — | — | [251.3324869, 251.3801382] | **0.04765** | 1.0 |
+[theirs] | far pairs, terms and the allocation of the penalty | 251.3423069 | 251.3475876 | 251.3547790 | 251.3504722 | [251.3475876, 251.3504722] | **0.002885** | 16.5 |
+(0) 6 groups, 9 plus-items and 9 minus-items with a route; ln Z(m_+): my elimination 251.3324869 (driver 251.3324869); ln Z(m_-): 251.3801382 (driver 251.3801382); corrected bracket [251.3475876, 251.3504722], width 0.00288466; exact first-order means of the driver: A = 1.521522e-02, C' = 3.065687e-02 [26s, peak RSS 273 MB]
+(1) CEILING: 20 batches of 100000 exact samples of my own sampler (seed 2401) = 2000000 samples [30s, peak RSS 273 MB]; pointwise C_2-part <= C''-part violated at 0 samples (must be 0)
+    checks against the driver's exact means: A = 1.376045e-02 +- 1.9e-03 (-0.78 s.e. from 1.521522e-02); C' = 2.761666e-02 +- 2.6e-04 (-11.55 s.e. from 3.065687e-02); sum_g P(S+_g > 0) = 0.1933 +- 0.0005; P(two or more) = 3.1141e-02
+| second-order quantity under the ceiling | mean | s.e. from the scatter of batches | s.e. from the within-sample variance | share of the total carried by the 10 / 100 largest samples | largest single sample / total |
+|---|---|---|---|---|---|
+| <q> = sum_(g<h) <y_g y_h> | 1.808921e-04 | 1.25e-04 (68.9 %) | 1.26e-04 | 0.836 / 0.865 | 0.6819 |
+| <d> = <prod(1 + y_g)> - 1 - A | 1.810039e-04 | 1.25e-04 (68.9 %) | 1.26e-04 | 0.836 / 0.865 | 0.6815 |
+| C_2 - C' | 3.329286e-04 | 7.64e-05 (22.9 %) | 7.47e-05 | 0.228 / 0.264 | 0.2241 |
+| C'' - C' | 4.277245e-04 | 1.27e-04 (29.7 %) | 1.25e-04 | 0.320 / 0.353 | 0.2922 |
+(2) FLOOR: 20 batches of 100000 = 2000000 exact samples [33s, peak RSS 273 MB]; pointwise Bonferroni violated at 0 samples (must be 0); <e^(-beta s_-)> = 0.96960905 +- 6.5e-05; S1 = 3.057743e-02 +- 6.5e-05; S2 = 1.867881e-04 +- 2.4e-06; Bonferroni remainder <(1 - S1 + S2) - prod> = 3.070e-07 +- 4.2e-08; sum_g P_floor(S-_g > 0) = 0.2563; P(two or more) = 4.7626e-02
+(3) (UP) from the driver's exact C' in closed form: 251.3504722 (the driver's upper end 251.3504722); the put-back ln Z(m_- + s_-) from my floor samples: 251.3492759 +- 6.7e-05; reference value given on the command line: 251.349275600 +- 0.0e+00 (mine is +0.00 s.e. from it)
+| column of the table (fraction of the corrected width) | this measurement | its s.e. (batches) |
+|---|---|---|
+| lower end: joint law | 0.0618 | 0.0426 |
+| lower end: pair terms | 0.0618 | 0.0426 |
+| upper end: joint law under the ceiling | 0.1457 | 0.0432 |
+| upper end: pair terms under the ceiling | 0.1134 | 0.0260 |
+| recoverable by the joint law under the ceiling | 0.2075 | 0.0607 |
+| **by pair terms alone (under the ceiling)** | **0.1751** | **0.0499** |
+| with my plain floor estimate of the put-back: the loss | 0.4765 | 0.0485 |
+|   … the rest (after the joint law under the ceiling) | 0.2691 | 0.0490 |
+|   … **upper end recovered by pair laws under the FLOOR (Bonferroni)** | **0.4146** | 0.0232 |
+|   … total recovered with pair laws on both sides (ceiling pair terms below, Bonferroni-floor above) | 0.4764 | 0.0485 |
+| with the reference value of the put-back: the loss | 0.4766 | 0.0426 |
+|   … the rest (after the joint law under the ceiling) | 0.2692 | 0.0432 |
+|   … **upper end recovered by pair laws under the FLOOR (Bonferroni)** | **0.4147** | 0.0000 |
+|   … total recovered with pair laws on both sides (ceiling pair terms below, Bonferroni-floor above) | 0.4765 | 0.0426 |
+| Bonferroni-floor upper end minus the put-back (third order; measured directly) | 0.00011 | 0.00002 |
+| upper end from single-group laws under the floor (comonotone of the empirical laws, batch by batch; biased by the batch size): below (UP) by | -0.3871 | 0.0222 |
+ALL DONE 33 s; peak RSS 273 MB

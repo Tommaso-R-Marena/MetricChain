@@ -1,0 +1,76 @@
+p=0.1 u=2.0: E=0.212295 E0=0.201797 a=0.163738
+  e=0.0E: R0: game 0.0426920 maxmin 0.0427084 closed 0.0426920 (m*=0.3471) | Rmax: F* 0.0481300 maxmin 0.0481302 (m*=0.5065, gamma*=-0.6210, t*=0.4666) | R_g(g=-1.00): 0.0453024 / 0.0453033
+          theta_na at x=e+Rmax(e)=0.048130: R^max o S^-1 0.0481300, tau-form 0.0481300, maxmin(I^cone) 0.0481302 (m*=0.5066), maxmin(I+c_H) 0.0481302; identity: theta_na(e+Rmax(e)) - Rmax(e) = -1.39e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.010452; Rmax-R0 = +0.005438
+  e=0.1E: R0: game 0.0338464 maxmin 0.0338468 closed 0.0338464 (m*=0.3656) | Rmax: F* 0.0387773 maxmin 0.0387785 (m*=0.5153, gamma*=-0.6015, t*=0.4148) | R_g(g=-1.00): 0.0357450 / 0.0357450
+          theta_na at x=e+Rmax(e)=0.060007: R^max o S^-1 0.0387773, tau-form 0.0387773, maxmin(I^cone) 0.0387785 (m*=0.5169), maxmin(I+c_H) 0.0387785; identity: theta_na(e+Rmax(e)) - Rmax(e) = -3.47e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.008578; Rmax-R0 = +0.004931
+  e=0.3E: R0: game 0.0194967 maxmin 0.0195021 closed 0.0194967 (m*=0.3990) | Rmax: F* 0.0232703 maxmin 0.0232714 (m*=0.5368, gamma*=-0.5634, t*=0.3166) | R_g(g=-1.00): 0.0200800 / 0.0200872
+          theta_na at x=e+Rmax(e)=0.086959: R^max o S^-1 0.0232703, tau-form 0.0232703, maxmin(I^cone) 0.0232703 (m*=0.5373), maxmin(I+c_H) 0.0232703; identity: theta_na(e+Rmax(e)) - Rmax(e) = +1.02e-15; with R0: theta_na(e+R0(e)) - R0(e) = +0.005573; Rmax-R0 = +0.003774
+  e=0.6E: R0: game 0.0055801 maxmin 0.0055801 closed 0.0055801 (m*=0.4468) | Rmax: F* 0.0075540 maxmin 0.0075543 (m*=0.5673, gamma*=-0.5073, t*=0.1782) | R_g(g=-1.00): 0.0049731 / 0.0049731
+          theta_na at x=e+Rmax(e)=0.134931: R^max o S^-1 0.0075540, tau-form 0.0075540, maxmin(I^cone) 0.0075541 (m*=0.5675), maxmin(I+c_H) 0.0075541; identity: theta_na(e+Rmax(e)) - Rmax(e) = -1.28e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.002409; Rmax-R0 = +0.001974
+  e=0.9E: R0: game 0.0001154 maxmin 0.0001175 closed 0.0001154 (m*=0.4935) | Rmax: F* 0.0004727 maxmin 0.0004727 (m*=0.5977, gamma*=-0.4510, t*=0.0445) | R_g(g=-1.00): 0.0000000 / -0.0000000
+          theta_na at x=e+Rmax(e)=0.191538: R^max o S^-1 0.0004727, tau-form 0.0004727, maxmin(I^cone) 0.0004727 (m*=0.5978), maxmin(I+c_H) 0.0004727; identity: theta_na(e+Rmax(e)) - Rmax(e) = -4.04e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.000374; Rmax-R0 = +0.000357
+p=0.3 u=1.0: E=0.103131 E0=0.102732 a=0.095301
+  e=0.0E: R0: game 0.0248137 maxmin 0.0248139 closed 0.0248137 (m*=0.4543) | Rmax: F* 0.0250335 maxmin 0.0250339 (m*=0.5028, gamma*=-0.0908, t*=0.4901) | R_g(g=-0.50): 0.0201913 / 0.0201916
+          theta_na at x=e+Rmax(e)=0.025034: R^max o S^-1 0.0250335, tau-form 0.0250335, maxmin(I^cone) 0.0250338 (m*=0.5008), maxmin(I+c_H) 0.0250338; identity: theta_na(e+Rmax(e)) - Rmax(e) = +1.60e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.000432; Rmax-R0 = +0.000220
+  e=0.1E: R0: game 0.0200385 maxmin 0.0200387 closed 0.0200385 (m*=0.4593) | Rmax: F* 0.0202409 maxmin 0.0202409 (m*=0.5036, gamma*=-0.0878, t*=0.4394) | R_g(g=-0.50): 0.0154111 / 0.0154128
+          theta_na at x=e+Rmax(e)=0.030554: R^max o S^-1 0.0202409, tau-form 0.0202409, maxmin(I^cone) 0.0202409 (m*=0.5036), maxmin(I+c_H) 0.0202409; identity: theta_na(e+Rmax(e)) - Rmax(e) = +1.87e-15; with R0: theta_na(e+R0(e)) - R0(e) = +0.000362; Rmax-R0 = +0.000202
+  e=0.3E: R0: game 0.0120489 maxmin 0.0120510 closed 0.0120489 (m*=0.4675) | Rmax: F* 0.0122087 maxmin 0.0122088 (m*=0.5098, gamma*=-0.0818, t*=0.3397) | R_g(g=-0.50): 0.0077874 / 0.0077878
+          theta_na at x=e+Rmax(e)=0.043148: R^max o S^-1 0.0122087, tau-form 0.0122087, maxmin(I^cone) 0.0122088 (m*=0.5096), maxmin(I+c_H) 0.0122088; identity: theta_na(e+Rmax(e)) - Rmax(e) = -5.55e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.000242; Rmax-R0 = +0.000160
+  e=0.6E: R0: game 0.0038874 maxmin 0.0038881 closed 0.0038874 (m*=0.4820) | Rmax: F* 0.0039753 maxmin 0.0039753 (m*=0.5186, gamma*=-0.0729, t*=0.1930) | R_g(g=-0.50): 0.0011746 / 0.0011776
+          theta_na at x=e+Rmax(e)=0.065854: R^max o S^-1 0.0039753, tau-form 0.0039753, maxmin(I^cone) 0.0039754 (m*=0.5185), maxmin(I+c_H) 0.0039754; identity: theta_na(e+Rmax(e)) - Rmax(e) = +4.16e-15; with R0: theta_na(e+R0(e)) - R0(e) = +0.000109; Rmax-R0 = +0.000088
+  e=0.9E: R0: game 0.0002286 maxmin 0.0002286 closed 0.0002286 (m*=0.4956) | Rmax: F* 0.0002482 maxmin 0.0002493 (m*=0.5203, gamma*=-0.0641, t*=0.0481) | R_g(g=-0.50): 0.0000000 / -0.0000000
+          theta_na at x=e+Rmax(e)=0.093066: R^max o S^-1 0.0002482, tau-form 0.0002482, maxmin(I^cone) 0.0002493 (m*=0.5210), maxmin(I+c_H) 0.0002493; identity: theta_na(e+Rmax(e)) - Rmax(e) = -1.08e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.000021; Rmax-R0 = +0.000020
+p=0.05 u=2.0: E=0.124768 E0=0.116511 a=0.096958
+  e=0.0E: R0: game 0.0241281 maxmin 0.0241290 closed 0.0241281 (m*=0.3239) | Rmax: F* 0.0284045 maxmin 0.0284060 (m*=0.5070, gamma*=-0.7276, t*=0.4674) | R_g(g=-1.00): 0.0275076 / 0.0275310
+          theta_na at x=e+Rmax(e)=0.028405: R^max o S^-1 0.0284045, tau-form 0.0284045, maxmin(I^cone) 0.0284058 (m*=0.5070), maxmin(I+c_H) 0.0284058; identity: theta_na(e+Rmax(e)) - Rmax(e) = +1.21e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.008305; Rmax-R0 = +0.004276
+  e=0.1E: R0: game 0.0190257 maxmin 0.0190440 closed 0.0190257 (m*=0.3459) | Rmax: F* 0.0228968 maxmin 0.0228990 (m*=0.5204, gamma*=-0.7052, t*=0.4158) | R_g(g=-1.00): 0.0218794 / 0.0218821
+          theta_na at x=e+Rmax(e)=0.035374: R^max o S^-1 0.0228968, tau-form 0.0228968, maxmin(I^cone) 0.0228971 (m*=0.5200), maxmin(I+c_H) 0.0228971; identity: theta_na(e+Rmax(e)) - Rmax(e) = +3.47e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.006787; Rmax-R0 = +0.003871
+  e=0.3E: R0: game 0.0108068 maxmin 0.0108069 closed 0.0108068 (m*=0.3848) | Rmax: F* 0.0137556 maxmin 0.0137557 (m*=0.5436, gamma*=-0.6611, t*=0.3178) | R_g(g=-1.00): 0.0125782 / 0.0125803
+          theta_na at x=e+Rmax(e)=0.051186: R^max o S^-1 0.0137556, tau-form 0.0137556, maxmin(I^cone) 0.0137557 (m*=0.5433), maxmin(I+c_H) 0.0137557; identity: theta_na(e+Rmax(e)) - Rmax(e) = +2.38e-15; with R0: theta_na(e+R0(e)) - R0(e) = +0.004376; Rmax-R0 = +0.002949
+  e=0.6E: R0: game 0.0029512 maxmin 0.0029512 closed 0.0029512 (m*=0.4404) | Rmax: F* 0.0044738 maxmin 0.0044746 (m*=0.5785, gamma*=-0.5958, t*=0.1793) | R_g(g=-1.00): 0.0033964 / 0.0033966
+          theta_na at x=e+Rmax(e)=0.079335: R^max o S^-1 0.0044738, tau-form 0.0044738, maxmin(I^cone) 0.0044747 (m*=0.5801), maxmin(I+c_H) 0.0044747; identity: theta_na(e+Rmax(e)) - Rmax(e) = -1.25e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.001863; Rmax-R0 = +0.001523
+  e=0.9E: R0: game 0.0000301 maxmin 0.0000348 closed 0.0000301 (m*=0.4943) | Rmax: F* 0.0002806 maxmin 0.0002806 (m*=0.6147, gamma*=-0.5295, t*=0.0449) | R_g(g=-1.00): 0.0000104 / 0.0000107
+          theta_na at x=e+Rmax(e)=0.112572: R^max o S^-1 0.0002806, tau-form 0.0002806, maxmin(I^cone) 0.0002806 (m*=0.6140), maxmin(I+c_H) 0.0002806; identity: theta_na(e+Rmax(e)) - Rmax(e) = -7.70e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.000262; Rmax-R0 = +0.000250
+p=0.2 u=4.0: E=1.171220 E0=1.121345 a=0.553492
+  e=0.0E: R0: game 0.1925978 maxmin 0.1926008 closed 0.1925978 (m*=0.3768) | Rmax: F* 0.2142446 maxmin 0.2142447 (m*=0.5120, gamma*=-0.9444, t*=0.4023) | R_g(g=-2.00): 0.1811629 / 0.1811635
+          theta_na at x=e+Rmax(e)=0.214245: R^max o S^-1 0.2142446, tau-form 0.2142446, maxmin(I^cone) 0.2142462 (m*=0.5122), maxmin(I+c_H) 0.2142462; identity: theta_na(e+Rmax(e)) - Rmax(e) = -2.78e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.036799; Rmax-R0 = +0.021647
+  e=0.1E: R0: game 0.1513476 maxmin 0.1513476 closed 0.1513476 (m*=0.3943) | Rmax: F* 0.1704189 maxmin 0.1704208 (m*=0.5198, gamma*=-0.9161, t*=0.3473) | R_g(g=-2.00): 0.1375877 / 0.1375889
+          theta_na at x=e+Rmax(e)=0.287541: R^max o S^-1 0.1704189, tau-form 0.1704189, maxmin(I^cone) 0.1704190 (m*=0.5200), maxmin(I+c_H) 0.1704190; identity: theta_na(e+Rmax(e)) - Rmax(e) = +5.55e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.029515; Rmax-R0 = +0.019071
+  e=0.3E: R0: game 0.0863241 maxmin 0.0863250 closed 0.0863241 (m*=0.4235) | Rmax: F* 0.1003207 maxmin 0.1003219 (m*=0.5346, gamma*=-0.8645, t*=0.2542) | R_g(g=-2.00): 0.0707150 / 0.0707156
+          theta_na at x=e+Rmax(e)=0.451687: R^max o S^-1 0.1003207, tau-form 0.1003207, maxmin(I^cone) 0.1003222 (m*=0.5353), maxmin(I+c_H) 0.1003222; identity: theta_na(e+Rmax(e)) - Rmax(e) = -1.39e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.018855; Rmax-R0 = +0.013997
+  e=0.6E: R0: game 0.0248397 maxmin 0.0248402 closed 0.0248397 (m*=0.4608) | Rmax: F* 0.0319849 maxmin 0.0319850 (m*=0.5573, gamma*=-0.7933, t*=0.1379) | R_g(g=-2.00): 0.0129974 / 0.0129985
+          theta_na at x=e+Rmax(e)=0.734717: R^max o S^-1 0.0319849, tau-form 0.0319849, maxmin(I^cone) 0.0319849 (m*=0.5572), maxmin(I+c_H) 0.0319849; identity: theta_na(e+Rmax(e)) - Rmax(e) = -1.39e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.008301; Rmax-R0 = +0.007145
+  e=0.9E: R0: game 0.0006345 maxmin 0.0006512 closed 0.0006345 (m*=0.4983) | Rmax: F* 0.0019838 maxmin 0.0020007 (m*=0.5812, gamma*=-0.7241, t*=0.0339) | R_g(g=-2.00): 0.0000000 / -0.0000000
+          theta_na at x=e+Rmax(e)=1.056082: R^max o S^-1 0.0019838, tau-form 0.0019838, maxmin(I^cone) 0.0020058 (m*=0.5810), maxmin(I+c_H) 0.0020058; identity: theta_na(e+Rmax(e)) - Rmax(e) = +4.86e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.001397; Rmax-R0 = +0.001349
+p=0.7 u=1.5: E=0.226591 E0=0.224904 a=0.191696
+  e=0.0E: R0: game 0.0522633 maxmin 0.0522636 closed 0.0522633 (m*=0.5613) | Rmax: F* 0.0531681 maxmin 0.0531681 (m*=0.4983, gamma*=+0.1828, t*=0.4789) | R_g(g=+0.60): 0.0480265 / 0.0480268
+          theta_na at x=e+Rmax(e)=0.053168: R^max o S^-1 0.0531681, tau-form 0.0531681, maxmin(I^cone) 0.0531681 (m*=0.4985), maxmin(I+c_H) 0.0531681; identity: theta_na(e+Rmax(e)) - Rmax(e) = +2.98e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.001743; Rmax-R0 = +0.000905
+  e=0.1E: R0: game 0.0420723 maxmin 0.0420734 closed 0.0420723 (m*=0.5547) | Rmax: F* 0.0429012 maxmin 0.0429015 (m*=0.4945, gamma*=+0.1768, t*=0.4275) | R_g(g=+0.60): 0.0377207 / 0.0377220
+          theta_na at x=e+Rmax(e)=0.065560: R^max o S^-1 0.0429012, tau-form 0.0429012, maxmin(I^cone) 0.0429012 (m*=0.4943), maxmin(I+c_H) 0.0429012; identity: theta_na(e+Rmax(e)) - Rmax(e) = -2.43e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.001452; Rmax-R0 = +0.000829
+  e=0.3E: R0: game 0.0251430 maxmin 0.0251431 closed 0.0251430 (m*=0.5420) | Rmax: F* 0.0257914 maxmin 0.0257922 (m*=0.4856, gamma*=+0.1650, t*=0.3282) | R_g(g=+0.60): 0.0209173 / 0.0209174
+          theta_na at x=e+Rmax(e)=0.093769: R^max o S^-1 0.0257914, tau-form 0.0257914, maxmin(I^cone) 0.0257917 (m*=0.4865), maxmin(I+c_H) 0.0257917; identity: theta_na(e+Rmax(e)) - Rmax(e) = -9.37e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.000967; Rmax-R0 = +0.000648
+  e=0.6E: R0: game 0.0080188 maxmin 0.0080191 closed 0.0080188 (m*=0.5235) | Rmax: F* 0.0083717 maxmin 0.0083718 (m*=0.4745, gamma*=+0.1477, t*=0.1852) | R_g(g=+0.60): 0.0049787 / 0.0049789
+          theta_na at x=e+Rmax(e)=0.144326: R^max o S^-1 0.0083717, tau-form 0.0083717, maxmin(I^cone) 0.0083717 (m*=0.4743), maxmin(I+c_H) 0.0083717; identity: theta_na(e+Rmax(e)) - Rmax(e) = +5.90e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.000433; Rmax-R0 = +0.000353
+  e=0.9E: R0: game 0.0004443 maxmin 0.0004550 closed 0.0004443 (m*=0.5050) | Rmax: F* 0.0005221 maxmin 0.0005305 (m*=0.4712, gamma*=+0.1305, t*=0.0461) | R_g(g=+0.60): 0.0000000 / -0.0000000
+          theta_na at x=e+Rmax(e)=0.204454: R^max o S^-1 0.0005221, tau-form 0.0005221, maxmin(I^cone) 0.0005282 (m*=0.4632), maxmin(I+c_H) 0.0005282; identity: theta_na(e+Rmax(e)) - Rmax(e) = -3.30e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.000082; Rmax-R0 = +0.000078
+p=0.5 u=1.0: E=0.120115 E0=0.120115 a=0.110944
+  e=0.0E: R0: game 0.0291391 maxmin 0.0291391 closed 0.0291391 (m*=0.5000) | Rmax: F* 0.0291391 maxmin 0.0291391 (m*=0.5000, gamma*=-0.0000, t*=0.4900) | R_g(g=+0.40): 0.0241984 / 0.0242000
+          theta_na at x=e+Rmax(e)=0.029139: R^max o S^-1 0.0291391, tau-form 0.0291391, maxmin(I^cone) 0.0291391 (m*=0.5000), maxmin(I+c_H) 0.0291391; identity: theta_na(e+Rmax(e)) - Rmax(e) = -1.08e-16; with R0: theta_na(e+R0(e)) - R0(e) = +0.000000; Rmax-R0 = +0.000000
+  e=0.1E: R0: game 0.0235581 maxmin 0.0235581 closed 0.0235581 (m*=0.5000) | Rmax: F* 0.0235581 maxmin 0.0235581 (m*=0.5000, gamma*=-0.0000, t*=0.4393) | R_g(g=+0.40): 0.0186985 / 0.0189889
+          theta_na at x=e+Rmax(e)=0.035570: R^max o S^-1 0.0235581, tau-form 0.0235581, maxmin(I^cone) 0.0235581 (m*=0.5000), maxmin(I+c_H) 0.0235581; identity: theta_na(e+Rmax(e)) - Rmax(e) = +1.85e-15; with R0: theta_na(e+R0(e)) - R0(e) = +0.000000; Rmax-R0 = +0.000000
+  e=0.3E: R0: game 0.0142063 maxmin 0.0143643 closed 0.0142063 (m*=0.5039) | Rmax: F* 0.0142063 maxmin 0.0142063 (m*=0.5000, gamma*=-0.0000, t*=0.3395) | R_g(g=+0.40): 0.0098620 / 0.0098699
+          theta_na at x=e+Rmax(e)=0.050241: R^max o S^-1 0.0142063, tau-form 0.0142063, maxmin(I^cone) 0.0142063 (m*=0.5000), maxmin(I+c_H) 0.0142063; identity: theta_na(e+Rmax(e)) - Rmax(e) = +2.95e-17; with R0: theta_na(e+R0(e)) - R0(e) = +0.000000; Rmax-R0 = +0.000000
+  e=0.6E: R0: game 0.0046239 maxmin 0.0046239 closed 0.0046239 (m*=0.5000) | Rmax: F* 0.0046239 maxmin 0.0046239 (m*=0.5000, gamma*=-0.0000, t*=0.1928) | R_g(g=+0.40): 0.0018921 / 0.0020065
+          theta_na at x=e+Rmax(e)=0.076693: R^max o S^-1 0.0046239, tau-form 0.0046239, maxmin(I^cone) 0.0046239 (m*=0.5000), maxmin(I+c_H) 0.0046239; identity: theta_na(e+Rmax(e)) - Rmax(e) = +3.89e-15; with R0: theta_na(e+R0(e)) - R0(e) = +0.000000; Rmax-R0 = +0.000000
+  e=0.9E: R0: game 0.0002886 maxmin 0.0002886 closed 0.0002886 (m*=0.5000) | Rmax: F* 0.0002886 maxmin 0.0002886 (m*=0.5000, gamma*=+0.0000, t*=0.0481) | R_g(g=+0.40): 0.0000000 / -0.0000000
+          theta_na at x=e+Rmax(e)=0.108392: R^max o S^-1 0.0002886, tau-form 0.0002886, maxmin(I^cone) 0.0002886 (m*=0.5000), maxmin(I+c_H) 0.0002886; identity: theta_na(e+Rmax(e)) - Rmax(e) = -5.20e-18; with R0: theta_na(e+R0(e)) - R0(e) = +0.000000; Rmax-R0 = +0.000000
+largest deviations: {'R0': '1.58e-04', 'R0closed': '3.87e-16', 'Rg': '2.90e-04', 'Rmax': '1.70e-05', 'na': '2.20e-05', 'na2': '2.20e-05', 'natau': '4.18e-15', 'ident': '4.16e-15'}
+p=1/2 u=0.5: E - ln cosh(u/2) = +1.39e-17; max deviation of (R0, Rmax, theta_na) from the Section 11.16 formulas at 3 accuracies: 5.51e-14
+p=1/2 u=1.0: E - ln cosh(u/2) = +6.94e-17; max deviation of (R0, Rmax, theta_na) from the Section 11.16 formulas at 3 accuracies: 1.88e-13
+p=1/2 u=2.0: E - ln cosh(u/2) = +2.78e-16; max deviation of (R0, Rmax, theta_na) from the Section 11.16 formulas at 3 accuracies: 7.41e-15
+p=1/2 u=4.0: E - ln cosh(u/2) = +0.00e+00; max deviation of (R0, Rmax, theta_na) from the Section 11.16 formulas at 3 accuracies: 5.21e-13
+[242.6s]
+
+real	4m3.249s
+user	3m59.616s
+sys	0m0.497s

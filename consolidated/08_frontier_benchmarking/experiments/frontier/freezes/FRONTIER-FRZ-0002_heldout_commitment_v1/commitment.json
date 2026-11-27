@@ -1,0 +1,21 @@
+{
+ "candidate_pool_digest_definition": "SHA-256 of the entry ids returned by query.json, sorted ascending, joined by newline",
+ "candidate_pool_sha256": "155725656cb8b9a4cf3d1222b4e1cdb0beef4b69d9083aec5c783018ed9740da",
+ "candidate_pool_size": 150,
+ "commitment": "7f5f62e20d433572d416e46f51f1e8a506fe64e986c2f2552e3401c7fd7ab53c",
+ "custody": "the passphrase of the sealed file and the commitment salt are held by the research owner (delivered in the founding session of this division); neither is in the repository",
+ "distinct_30pct_clusters_in_pool": 50,
+ "eligible_after_exclusions": 144,
+ "excluded_development_clusters": 2,
+ "excluded_non_standard_residues": 4,
+ "payload_bytes": 2714,
+ "payload_description": "ASCII text: header, the ordering salt, and the ordered list of representatives with their fallbacks",
+ "release_date_range": [
+  "2026-07-01",
+  "2026-11-25"
+ ],
+ "representatives": 47,
+ "scheme": "metricchain-fb-commitment/1: SHA-256(domain || salt || newline || payload)",
+ "sealed_file": "sealed_list_v1.enc",
+ "sealed_file_cipher": "openssl enc -aes-256-cbc -pbkdf2 -iter 600000 -salt (passphrase: 64 hex digits)"
+}

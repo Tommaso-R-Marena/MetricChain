@@ -1,0 +1,83 @@
+r18_corner.py part1 cases/runs=30 seed=18 start 2026-11-26T16:52:38Z
+PART 1: the old convention (c = b for 'bottom', c = 0 for 'top') outside its range, i.e. t0 < b ('top') or x0 - t0 < b ('bottom')
+  (A) their kind of test input: flat law ln W = 0, psi0 = 0, and a place t0 given independently (mean runs only: such a triple is
+      not an instance -- a flat psi has psi(a, 0) = psi0 for every fibre, hence ln W = t0 - u n_i - psi0)
+  (B) consistent instances with every fibre at the place t0: flat, and an outer cone of slope u/2; literal runs of r6lib against
+      the two mean runs AT THE SAME instance
+  u=0.5 n_o=300 lambda=1/2 top    t0= 0.125 (exact c=0.375, old c=0.0)
+     (A) ln cost exact 17.9924 (level 307, m 10) / old 13.8180 (level 306, m 10): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 17.9924 (level 301, m 10) / old 17.9924 (level 301, m 10) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 30; stopping level as exact in 30, as old in 30; mean ln(queries) 17.9924
+     (B) cone u/2: mean runs exact 22.1593 (level 322, m 21) / old 21.8384 (level 321, m 20) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 22.1741
+  u=0.5 n_o=300 lambda=1/2 top    t0= 0.250 (exact c=0.250, old c=0.0)
+     (A) ln cost exact 17.9924 (level 307, m 10) / old 13.8180 (level 306, m 10): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 17.9924 (level 301, m 10) / old 17.9924 (level 301, m 10) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 30; stopping level as exact in 30, as old in 30; mean ln(queries) 17.9924
+     (B) cone u/2: mean runs exact 22.1593 (level 322, m 21) / old 21.8384 (level 321, m 20) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 22.1648
+  u=0.5 n_o=300 lambda=1/2 bottom t0= 5.750 (exact c=0.250, old c=0.5)
+     (A) ln cost exact 13.8786 (level 307, m 10) / old 13.8786 (level 307, m 10): difference +0.0000; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 13.8786 (level 312, m 10) / old 13.8786 (level 313, m 10) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 13.8786
+     (B) cone u/2: mean runs exact 21.4431 (level 333, m 21) / old 20.7502 (level 333, m 20) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 30; mean ln(queries) 21.4431
+  u=0.5 n_o=300 lambda=1/5 top    t0= 0.125 (exact c=0.375, old c=0.0)
+     (A) ln cost exact 18.0461 (level 767, m 10) / old 13.8717 (level 765, m 10): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 18.0461 (level 753, m 10) / old 13.8717 (level 751, m 10) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 18.0461
+     (B) cone u/2: mean runs exact 21.8059 (level 804, m 20) / old 22.0934 (level 802, m 20) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 21.8162
+  u=0.5 n_o=300 lambda=1/5 top    t0= 0.250 (exact c=0.250, old c=0.0)
+     (A) ln cost exact 18.0461 (level 767, m 10) / old 13.8717 (level 765, m 10): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 18.0461 (level 753, m 10) / old 13.8717 (level 752, m 10) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 18.0461
+     (B) cone u/2: mean runs exact 21.8059 (level 804, m 20) / old 21.9711 (level 803, m 20) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 21.8118
+  u=0.5 n_o=300 lambda=1/5 bottom t0= 5.750 (exact c=0.250, old c=0.5)
+     (A) ln cost exact 13.9323 (level 767, m 10) / old 13.9323 (level 768, m 10): difference +0.0000; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 13.9323 (level 780, m 10) / old 13.9323 (level 782, m 10) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 13.9323
+     (B) cone u/2: mean runs exact 20.8042 (level 832, m 20) / old 20.8039 (level 833, m 20) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 20.8042
+  u=1 n_o=120 lambda=1/2 top    t0= 0.125 (exact c=0.375, old c=0.0)
+     (A) ln cost exact 19.3674 (level 253, m 12) / old 15.1930 (level 252, m 12): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 19.3674 (level 241, m 12) / old 19.3674 (level 241, m 12) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 30; stopping level as exact in 30, as old in 30; mean ln(queries) 19.3674
+     (B) cone u/2: mean runs exact 28.2956 (level 272, m 28) / old 28.2956 (level 272, m 28) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 30; mean ln(queries) 28.2956
+  u=1 n_o=120 lambda=1/2 top    t0= 0.250 (exact c=0.250, old c=0.0)
+     (A) ln cost exact 19.3674 (level 253, m 12) / old 15.1930 (level 252, m 12): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 19.3674 (level 241, m 12) / old 19.3674 (level 241, m 12) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 30; stopping level as exact in 30, as old in 30; mean ln(queries) 19.3674
+     (B) cone u/2: mean runs exact 28.2956 (level 272, m 28) / old 28.2956 (level 272, m 28) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 30; mean ln(queries) 28.2949
+  u=1 n_o=120 lambda=1/2 bottom t0=11.750 (exact c=0.250, old c=0.5)
+     (A) ln cost exact 15.2085 (level 253, m 12) / old 15.2085 (level 253, m 12): difference +0.0000; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 15.2085 (level 264, m 12) / old 15.2085 (level 265, m 12) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 15.2085
+     (B) cone u/2: mean runs exact 26.2834 (level 295, m 28) / old 26.2834 (level 296, m 28) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 26.2834
+  u=1 n_o=120 lambda=1/5 top    t0= 0.125 (exact c=0.375, old c=0.0)
+     (A) ln cost exact 19.4226 (level 632, m 12) / old 15.2483 (level 630, m 12): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 19.4226 (level 603, m 12) / old 15.2483 (level 601, m 12) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 19.4226
+     (B) cone u/2: mean runs exact 27.7855 (level 678, m 27) / old 28.0425 (level 676, m 27) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 27.7855
+  u=1 n_o=120 lambda=1/5 top    t0= 0.250 (exact c=0.250, old c=0.0)
+     (A) ln cost exact 19.4226 (level 632, m 12) / old 15.2483 (level 630, m 12): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 19.4226 (level 603, m 12) / old 15.2483 (level 602, m 12) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 19.4226
+     (B) cone u/2: mean runs exact 27.7855 (level 678, m 27) / old 28.0425 (level 677, m 27) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 27.7855
+  u=1 n_o=120 lambda=1/5 bottom t0=11.750 (exact c=0.250, old c=0.5)
+     (A) ln cost exact 15.2638 (level 632, m 12) / old 15.2638 (level 633, m 12): difference +0.0000; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 15.2638 (level 660, m 12) / old 15.2638 (level 662, m 12) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 15.2638
+     (B) cone u/2: mean runs exact 25.6455 (level 735, m 27) / old 25.6455 (level 737, m 27) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 25.6455
+  u=2 n_o=48 lambda=1/2 top    t0= 0.125 (exact c=0.375, old c=0.0)
+     (A) ln cost exact 20.7381 (level 217, m 14) / old 16.5637 (level 216, m 14): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 20.7381 (level 193, m 14) / old 20.7381 (level 193, m 14) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 30; stopping level as exact in 30, as old in 30; mean ln(queries) 20.7381
+     (B) cone u/2: mean runs exact 35.0849 (level 235, m 35) / old 35.0849 (level 235, m 35) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 30; mean ln(queries) 35.0849
+  u=2 n_o=48 lambda=1/2 top    t0= 0.250 (exact c=0.250, old c=0.0)
+     (A) ln cost exact 20.7381 (level 217, m 14) / old 16.5637 (level 216, m 14): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 20.7381 (level 193, m 14) / old 20.7381 (level 193, m 14) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 30; stopping level as exact in 30, as old in 30; mean ln(queries) 20.7381
+     (B) cone u/2: mean runs exact 35.0849 (level 235, m 35) / old 35.0849 (level 235, m 35) -- the same run; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 30; mean ln(queries) 35.0849
+  u=2 n_o=48 lambda=1/2 bottom t0=23.750 (exact c=0.250, old c=0.5)
+     (A) ln cost exact 16.5676 (level 217, m 14) / old 16.5676 (level 217, m 14): difference +0.0000; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 16.5676 (level 240, m 14) / old 16.5676 (level 241, m 14) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 16.5676
+     (B) cone u/2: mean runs exact 31.1198 (level 282, m 35) / old 31.1198 (level 283, m 35) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 31.1198
+  u=2 n_o=48 lambda=1/5 top    t0= 0.125 (exact c=0.375, old c=0.0)
+     (A) ln cost exact 20.7942 (level 542, m 14) / old 16.6198 (level 540, m 14): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 20.7942 (level 483, m 14) / old 16.6198 (level 481, m 14) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 20.7942
+     (B) cone u/2: mean runs exact 35.1410 (level 588, m 35) / old 35.1410 (level 586, m 35) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 35.1410
+  u=2 n_o=48 lambda=1/5 top    t0= 0.250 (exact c=0.250, old c=0.0)
+     (A) ln cost exact 20.7942 (level 542, m 14) / old 16.6198 (level 540, m 14): difference +4.1744; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 20.7942 (level 483, m 14) / old 16.6198 (level 482, m 14) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 20.7942
+     (B) cone u/2: mean runs exact 35.1410 (level 588, m 35) / old 35.1410 (level 587, m 35) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 35.1410
+  u=2 n_o=48 lambda=1/5 bottom t0=23.750 (exact c=0.250, old c=0.5)
+     (A) ln cost exact 16.6237 (level 542, m 14) / old 16.6237 (level 543, m 14): difference +0.0000; my two runs = their reference's two runs: True
+     (B) flat    : mean runs exact 16.6237 (level 600, m 14) / old 16.6237 (level 602, m 14) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 30, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 16.6237
+     (B) cone u/2: mean runs exact 31.1759 (level 705, m 35) / old 31.1759 (level 707, m 35) -- DIFFERENT sample sizes; literal: 30 of 30 closed, every level's sample size as exact in 0, as old in 0; stopping level as exact in 30, as old in 0; mean ln(queries) 31.1759
+  (A) largest |ln cost(exact) - ln cost(old convention)|: 4.174   (the message: 'ratio of costs up to e^{4.2} at a flat landscape')
+  (B) consistent instances: 36; on 26 of them the two mean runs differ; there, of 780 literal runs: every level as the EXACT rule's mean run in 360, as the OLD convention's in 0, as neither in 420
+      where the two mean runs stop at different levels (25 instances, 750 literal runs): the literal run stops at the EXACT rule's level in 750, at the OLD convention's in 0
+      where the two mean-run costs differ by more than 0.05 in ln (13 instances): the mean literal ln(queries) is closer to the EXACT rule's in 13
+end 2026-11-26T16:56:10Z  wall 211.7 s  peak RSS MB: 71.4

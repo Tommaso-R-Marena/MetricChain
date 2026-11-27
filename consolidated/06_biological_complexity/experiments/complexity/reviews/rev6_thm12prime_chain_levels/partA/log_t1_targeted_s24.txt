@@ -1,0 +1,16 @@
+seed 24, max leaves 14, all-order search up to 14 leaves; 42s
+   networks : 3000
+   with_negative : 2675
+   negative_splits : 2675
+   searched : 2675
+   quintuples : 45005
+   kalm_for_C : 325
+   zero_crit : 54
+   entry_neg : {'c2/kB6k22': 130, 'b5/kB5k20': 20, 'c1/kB5k21': 100, 'c1/kB6k21': 86, 'b1/kB6k21': 63, 'c2/kB7k22': 53, 'b1/kB4k21': 40, 'b1/kB5k20': 33, 'b4/kB4k21': 46, 'b6/kB6k21': 58, 'b5/kB5k21': 80, 'b3/kB4k21': 27, 'A/kB4k22': 26, 'b2/kB5k20': 16, 'c1/kB6k22': 53, 'c1/kB5k22': 55, 'A/kB5k21': 56, 'A/kB7k20': 38, 'b5/kB5k22': 62, 'b4/kB5k21': 24, 'b2/kB4k21': 30, 'b5/kB7k20': 7, 'b7/kB7k21': 27, 'c1/kB4k21': 48, 'b3/kB5k20': 16, 'c2/kB5k22': 167, 'c2/kB4k22': 95, 'b1/kB7k20': 48, 'b3/kB6k21': 13, 'A/kB5k22': 47, 'A/kB6k20': 58, 'b1/kB6k22': 37, 'b4/kB6k20': 15, 'b4/kB4k22': 43, 'c1/kB7k21': 42, 'b3/kB4k22': 19, 'b6/kB6k20': 39, 'c1/kB4k22': 29, 'b4/kB7k22': 5, 'b1/kB4k22': 18, 'A/kB6k22': 47, 'b6/kB6k22': 30, 'b2/kB5k22': 14, 'A/kB6k21': 53, 'b1/kB7k22': 12, 'c1/kB7k22': 13, 'A/kB7k21': 40, 'b1/kB6k20': 57, 'b4/kB5k20': 13, 'A/kB4k21': 36, 'b3/kB5k21': 13, 'A/kB4k20': 10, 'b5/kB6k22': 10, 'b4/kB6k22': 8, 'b1/kB7k21': 30, 'b1/kB5k21': 63, 'b7/kB7k20': 45, 'b4/kB7k20': 8, 'b2/kB4k22': 15, 'b3/kB5k22': 18, 'A/kB5k20': 25, 'b2/kB6k21': 12, 'b4/kB5k22': 13, 'A/kB7k22': 17, 'b4/kB6k21': 12, 'b3/kB7k20': 7, 'b5/kB6k21': 12, 'b5/kB6k20': 13, 'b1/kB5k22': 38, 'b3/kB4k20': 6, 'b2/kB5k21': 23, 'b3/kB6k20': 20, 'b1/kB4k20': 4, 'b3/kB7k22': 2, 'b3/kB7k21': 6, 'b7/kB7k22': 9, 'b6/kB7k20': 5, 'b2/kB7k20': 7, 'b2/kB4k20': 7, 'b4/kB7k21': 3, 'b3/kB6k22': 4, 'b2/kB6k20': 8, 'b2/kB7k22': 3, 'b2/kB6k22': 2, 'b5/kB7k21': 3, 'b5/kB7k22': 2, 'b4/kB4k20': 1, 'b6/kB7k21': 4, 'b2/kB7k21': 2, 'b6/kB7k22': 1}
+   nonleaf_pos_neg : 2651
+   nested_blobs : 3719
+   max_n : 14
+   several_neg : 0
+   other_sep_splits_checked : 8275
+   modes : {'T:ce': 521, 'T:bkB': 506, 'T:c1': 476, 'T:b1': 524, 'T:bmid': 468, 'T:A': 505}
+ALL CHECKS PASSED

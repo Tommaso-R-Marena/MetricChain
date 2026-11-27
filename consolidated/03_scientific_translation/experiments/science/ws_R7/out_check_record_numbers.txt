@@ -1,0 +1,11 @@
+M-008 cost: tasks 468, instances evaluated 5144256, task time 34.8 core-hours, longest task 2241 s, searches 1872, violations recorded 0
+M-009 claims: tasks 180, instances evaluated 1568160, task time 20.7 core-hours, longest task 2147 s, searches 720, violations recorded 0
+M-010 converge: tasks 8, instances evaluated 383424, task time 1.1 core-hours, longest task 971 s, searches 32, violations recorded 0
+u=0.5: cost_over_cap=-10.4, lM_max=3.49e+03, lcost=3.5e+03, margin_iii=0.00769, not_closed=0, slack_iv_M=0, slack_iv_Mbar=-9.38, slack_iv_Mneg=-4.01, slack_v=-0.052, slack_valid_lower=2.71e-11, slack_valid_upper=-0.00908, slack_vi=-0.106, slack_width=-0.0349
+u=1.0: cost_over_cap=-9.43, lM_max=1.25e+04, lcost=1.25e+04, margin_iii=1.46, not_closed=0, slack_iv_M=0, slack_iv_Mbar=-11.7, slack_iv_Mneg=-6.38, slack_v=-0.0513, slack_valid_lower=6.18e-11, slack_valid_upper=-0.0116, slack_vi=-0.103, slack_width=-0.0347
+u=2.0: cost_over_cap=-9.4, lM_max=3.64e+04, lcost=3.64e+04, margin_iii=0.038, not_closed=0, slack_iv_M=0, slack_iv_Mbar=-10.9, slack_iv_Mneg=-5.42, slack_v=-0.0514, slack_valid_lower=1.6e-10, slack_valid_upper=-0.014, slack_vi=-0.102, slack_width=-0.0345
+generic cover rows, seconds: {'5': 0.7, '6': 0.8, '7': 1.1, '8': 0.9, '9': 13.4, '10': 388.6, '11': 565.4, '12': 700.6}
+entropy seconds (total): {'5': 0.0, '6': 0.0, '7': 0.0, '8': 0.1, '9': 1.0, '10': 1.5, '11': 4.1, '12': 18.5, '13': 72.9, '14': 333.5}  sum n=5..12: 25.2
+largest |median - mean| or |weighted - mean| of sigma per n: {'5': 0.045, '6': 0.049, '7': 0.04, '8': 0.041, '9': 0.04, '10': 0.041, '11': 0.039, '12': 0.034, '13': 0.031, '14': 0.031}
+increment of sigma from 13 to 14 torsions: {'0.25': 0.0134, '0.5': 0.0132, '1': 0.0107, '1.25': 0.0088, '2.5': 0.0039, '5': 0.0013}
+pairs per bead at 17 beads: {'mean_over_classes': 3.101364990764914, 'mean_over_conformations': 2.8005439429218946, 'max': 6.176470588235294}  increase per bead from 16 to 17: 0.122

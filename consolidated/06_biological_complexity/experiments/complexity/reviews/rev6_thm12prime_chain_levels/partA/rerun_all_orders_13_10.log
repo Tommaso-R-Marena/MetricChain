@@ -1,0 +1,9 @@
+blow-ups of N[kB,k1,k2] with position sizes <= 3 and at most 13 leaves: critical weight positive 38569, zero 1162, negative 11603
+   formula of Theorem 12(b) for the critical weight in all of them; Kalmanson for the given order whenever the weight is >= 0: True
+   negative weight: the three four-point facts hold for all 120838 admissible choices of five leaves, and the first difference equals -alpha(S*): True
+   independent search over all circular orders on the 423 negative instances with at most 10 leaves: no order found: True
+ALL OK
+
+real	2m34.389s
+user	2m33.940s
+sys	0m0.030s

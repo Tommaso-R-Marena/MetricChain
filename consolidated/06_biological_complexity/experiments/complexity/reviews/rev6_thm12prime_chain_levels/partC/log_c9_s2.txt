@@ -1,0 +1,1 @@
+seed 2: 73s {'networks': 6000, 'six_subsets': 448490, 'not_good': 8253, 'not_good_explained': 8253, 'good_but_six_positions': 111112, 'level_hist': {2: 3625, 4: 561, 3: 1505, 5: 222, 6: 63, 7: 23, 8: 1}, 'VIOLATIONS': 0}

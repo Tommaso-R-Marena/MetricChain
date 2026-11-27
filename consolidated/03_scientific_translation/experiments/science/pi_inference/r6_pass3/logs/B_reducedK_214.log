@@ -1,0 +1,27 @@
+B_reducedK seed 214 time 145s
+{
+ "runs": 400,
+ "harness_limit": 4,
+ "closed": 396,
+ "abort": 0,
+ "Gfail": 101,
+ "det_viol": 0,
+ "good_viol": 0,
+ "pop": 281688,
+ "neg": 1929,
+ "runs_with_neg": 131,
+ "close_pop": 33,
+ "close_unpop": 363,
+ "close_tail0": 10,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 6.862844712616688e-05,
+  "M_over_Mdag": 2.072147143611625,
+  "M_over_capnew": 0.3811501666084225,
+  "lnq_over_lnCmax": 0.8221000936522241,
+  "q_over_Cvi": 2.0970405094486358e-05,
+  "calls_over_bound": 0.14429127853677015,
+  "used_over_cnt": 0.2741082853111108,
+  "count_ineq": 0.6989128216062969
+ }
+}

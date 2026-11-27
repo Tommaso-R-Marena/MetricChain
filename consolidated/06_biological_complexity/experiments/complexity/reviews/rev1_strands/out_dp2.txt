@@ -1,0 +1,84 @@
+== (1) DP vs brute-force enumerator (connected count, stack-only MFE, #min labelled)
+instances compared: 0, mismatches: 0
+== (2) DP on larger / random instances: 71 structured, 796 random
+(2, 2, 3, 2, 2, 3)                           m=2 B= 7 n= 6 YES M=  8 Til=432       conn=6130548720                   MFE(stack-only)=  -8 #min=432       ok
+(3, 3, 4, 3, 3, 4)                           m=2 B=10 n= 6 YES M= 14 Til=432       conn=51872086000800               MFE(stack-only)= -14 #min=432       ok
+(3, 3, 5, 3, 4, 4)                           m=2 B=11 n= 6 YES M= 16 Til=216       conn=883520273740320              MFE(stack-only)= -16 #min=216       ok
+(4, 4, 5, 4, 4, 5)                           m=2 B=13 n= 6 YES M= 20 Til=432       conn=266965381835393040           MFE(stack-only)= -20 #min=432       ok
+(4, 4, 4, 4, 4, 6)                           m=2 B=13 n= 6 NO  M= 20 Til=0         conn=262261567089786240           MFE(stack-only)= -19 #min=18000     ok
+(5, 5, 6, 5, 5, 6)                           m=2 B=16 n= 6 YES M= 26 Til=432       conn=1153447075349958561840       MFE(stack-only)= -26 #min=432       ok
+(5, 5, 5, 5, 5, 7)                           m=2 B=16 n= 6 NO  M= 26 Til=0         conn=1144111801398681262320       MFE(stack-only)= -25 #min=18000     ok
+(6, 6, 7, 5, 7, 7)                           m=2 B=19 n= 6 YES M= 32 Til=216       conn=4621643107348285180237680    MFE(stack-only)= -32 #min=216       ok
+(5, 5, 9, 6, 6, 7)                           m=2 B=19 n= 6 YES M= 32 Til=72        conn=4541807666903112896667840    MFE(stack-only)= -32 #min=72        ok
+(5, 6, 8, 5, 6, 8)                           m=2 B=19 n= 6 YES M= 32 Til=288       conn=4549967608294235137537440    MFE(stack-only)= -32 #min=288       ok
+(6, 6, 6, 6, 6, 8)                           m=2 B=19 n= 6 NO  M= 32 Til=0         conn=4641141827211637827949200    MFE(stack-only)= -31 #min=18000     ok
+(2, 2, 3, 2, 2, 3, 2, 2, 3)                  m=3 B= 7 n= 9 YES M= 12 Til=116640    conn=17633342036661120            MFE(stack-only)= -12 #min=116640    ok
+(4, 4, 5, 4, 4, 5, 4, 4, 5)                  m=3 B=13 n= 9 YES M= 30 Til=116640    conn=6225803064938855332285747200 MFE(stack-only)= -30 #min=116640    ok
+(4, 4, 4, 4, 4, 4, 4, 5, 6)                  m=3 B=13 n= 9 NO  M= 30 Til=0         conn=6115728690186112508398433280 MFE(stack-only)= -29 #min=6713280   ok
+(3, 3, 4, 3, 3, 4, 3, 3, 4)                  m=3 B=10 n= 9 YES M= 21 Til=116640    conn=15518340599939819591040      MFE(stack-only)= -21 #min=116640    ok
+(3, 3, 3, 3, 3, 3, 4, 4, 4)                  m=3 B=10 n= 9 YES M= 21 Til=116640    conn=15518340599939819591040      MFE(stack-only)= -21 #min=116640    ok
+(3, 3, 5, 3, 4, 4, 3, 4, 4)                  m=3 B=11 n= 9 YES M= 24 Til=46656     conn=1147623094556428783668480    MFE(stack-only)= -24 #min=46656     ok
+(3, 3, 3, 3, 3, 3, 5, 5, 5)                  m=3 B=11 n= 9 YES M= 24 Til=116640    conn=1060748291210872918913280    MFE(stack-only)= -24 #min=116640    ok
+(3, 3, 3, 3, 3, 4, 4, 4, 5)                  m=3 B=11 n= 9 NO  M= 24 Til=0         conn=559586142569692846742400     MFE(stack-only)= -23 #min=466560    ok
+(2, 2, 3, 2, 2, 3, 2, 2, 3, 2, 2, 3)         m=4 B= 7 n=12 YES M= 16 Til=78382080  conn=140608120324638247142400     MFE(stack-only)= -16 #min=78382080  ok
+(3, 3, 4, 3, 3, 4, 3, 3, 4, 3, 3, 4)         m=4 B=10 n=12 YES M= 28 Til=78382080  conn=12879903960445160870479100160000 MFE(stack-only)= -28 #min=78382080  ok
+(3, 3, 3, 4, 3, 3, 3, 4)                     m=2 B=13 n= 8 YES M= 18 Til=23040     conn=7757594589337568640          MFE(stack-only)= -18 #min=23040     ok
+(4, 4, 4, 5, 4, 4, 4, 5)                     m=2 B=17 n= 8 YES M= 26 Til=23040     conn=748665438396933253190400     MFE(stack-only)= -26 #min=23040     ok
+(4, 5, 5, 5, 4, 5, 5, 5)                     m=2 B=19 n= 8 YES M= 30 Til=23040     conn=207025252365179662340048640  MFE(stack-only)= -30 #min=23040     ok
+(4, 4, 4, 4, 4, 6, 6, 6)                     m=2 B=19 n= 8 NO  M= 30 Til=0         conn=196417276419752365454225280  MFE(stack-only)= -29 #min=1480320   ok
+(4, 4, 4, 5, 5, 5, 5, 6)                     m=2 B=19 n= 8 YES M= 30 Til=13824     conn=203432051542112738934744960  MFE(stack-only)= -30 #min=13824     ok
+(4, 4, 4, 4, 5, 5, 6, 6)                     m=2 B=19 n= 8 YES M= 30 Til=13824     conn=199896336523630964591297280  MFE(stack-only)= -30 #min=13824     ok
+(3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 4)         m=3 B=13 n=12 YES M= 27 Til=139345920 conn=3007460714785464727231405286400 MFE(stack-only)= -27 #min=139345920 ok
+(3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4)         m=3 B=14 n=12 YES M= 30 Til=111974400 conn=235674829150062626258607231820800 MFE(stack-only)= -30 #min=111974400 ok
+(3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4)         m=3 B=14 n=12 NO  M= 30 Til=0         conn=56075263715622664407181919385600 MFE(stack-only)= -28 #min=8534937600 ok
+(3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5)         m=3 B=13 n=12 NO  M= 27 Til=0         conn=2888388104735405266440419635200 MFE(stack-only)= -26 #min=14166835200 ok
+(3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4)         m=3 B=13 n=12 YES M= 27 Til=139345920 conn=3007460714785464727231405286400 MFE(stack-only)= -27 #min=139345920 ok
+(3, 3, 3, 3, 2)                              m=2 B= 7 n= 5 NO  M=  9 Til=0         conn=2104853640                   MFE(stack-only)=  -8 #min=2712      ok
+(5, 5, 5, 5)                                 m=2 B=10 n= 4 YES M= 16 Til=24        conn=3000835530024                MFE(stack-only)= -16 #min=24        ok
+(5, 5, 4, 3, 3)                              m=2 B=10 n= 5 YES M= 15 Til=24        conn=11497021102440               MFE(stack-only)= -15 #min=24        ok
+(6, 6, 4, 4)                                 m=2 B=10 n= 4 YES M= 16 Til=16        conn=2899090382736                MFE(stack-only)= -16 #min=16        ok
+(7, 7, 3, 3)                                 m=2 B=10 n= 4 YES M= 16 Til=16        conn=2553601556376                MFE(stack-only)= -16 #min=16        ok
+(6, 5, 5, 4)                                 m=2 B=10 n= 4 YES M= 16 Til=8         conn=2949597895320                MFE(stack-only)= -16 #min=8         ok
+(9, 1, 5, 5)                                 m=2 B=10 n= 4 YES M= 16 Til=8         conn=1564250070240                MFE(stack-only)= -16 #min=8         ok
+(9, 9, 1, 1)                                 m=2 B=10 n= 4 YES M= 16 Til=16        conn=804211349280                 MFE(stack-only)= -16 #min=16        ok
+(8, 8, 2, 1, 1)                              m=2 B=10 n= 5 YES M= 15 Til=48        conn=2922735864600                MFE(stack-only)= -15 #min=48        ok
+(11, 9)                                      m=2 B=10 n= 2 NO  M= 18 Til=0         conn=275503683002                 MFE(stack-only)= -17 #min=10        ok
+(10, 10)                                     m=2 B=10 n= 2 YES M= 18 Til=2         conn=275572877582                 MFE(stack-only)= -18 #min=2         ok
+(19, 1)                                      m=2 B=10 n= 2 NO  M= 18 Til=0         conn=137846528780                 MFE(stack-only)= -17 #min=2         ok
+(20,)                                        m=2 B=10 n= 1 NO  M= 19 Til=0         conn=137846528819                 MFE(stack-only)= -18 #min=1         ok
+(1, 1, 1, 1, 1, 1, 1, 1, 1, 11)              m=2 B=10 n=10 NO  M= 10 Til=0         conn=306649403424000              MFE(stack-only)=  -9 #min=18144000  ok
+(2, 2, 2, 2, 2, 2, 2, 2, 2, 2)               m=2 B=10 n=10 YES M= 10 Til=3628800   conn=15801224225068800            MFE(stack-only)= -10 #min=3628800   ok
+(2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1)            m=2 B=10 n=11 YES M=  9 Til=21772800  conn=40511151931219200            MFE(stack-only)=  -9 #min=21772800  ok
+(3, 3, 3, 3, 3, 3, 3)                        m=3 B= 7 n= 7 NO  M= 14 Til=0         conn=1041998641876080             MFE(stack-only)= -12 #min=3195360   ok
+(7, 7, 7)                                    m=3 B= 7 n= 3 YES M= 18 Til=6         conn=3187809290154                MFE(stack-only)= -18 #min=6         ok
+(6, 1, 6, 1, 6, 1)                           m=3 B= 7 n= 6 YES M= 15 Til=288       conn=42668444286000               MFE(stack-only)= -15 #min=288       ok
+(6, 6, 6, 1, 1, 1)                           m=3 B= 7 n= 6 YES M= 15 Til=288       conn=42668444286000               MFE(stack-only)= -15 #min=288       ok
+(6, 6, 5, 2, 1, 1)                           m=3 B= 7 n= 6 YES M= 15 Til=96        conn=64598902081200               MFE(stack-only)= -15 #min=96        ok
+(5, 5, 5, 2, 2, 2)                           m=3 B= 7 n= 6 YES M= 15 Til=288       conn=147345622068240              MFE(stack-only)= -15 #min=288       ok
+(5, 5, 5, 3, 3)                              m=3 B= 7 n= 5 NO  M= 16 Til=0         conn=46353148442640               MFE(stack-only)= -14 #min=10992     ok
+(4, 4, 4, 3, 3, 3)                           m=3 B= 7 n= 6 YES M= 15 Til=288       conn=218375401261680              MFE(stack-only)= -15 #min=288       ok
+(4, 4, 4, 4, 3, 2)                           m=3 B= 7 n= 6 NO  M= 15 Til=0         conn=199441297313280              MFE(stack-only)= -14 #min=7296      ok
+(1, 1, 1, 1, 1, 1, 1, 1)                     m=8 B= 1 n= 8 YES M=  0 Til=40320     conn=40320                        MFE(stack-only)=   0 #min=40320     ok
+(2, 1, 1, 1, 1, 1, 1)                        m=8 B= 1 n= 7 NO  M=  1 Til=0         conn=85680                        MFE(stack-only)=   0 #min=85680     ok
+(2, 2, 2, 2, 2, 2)                           m=12 B= 1 n= 6 NO  M=  6 Til=0         conn=265899600                    MFE(stack-only)=   0 #min=265899600 ok
+(2, 2, 2, 2, 2, 2)                           m=6 B= 2 n= 6 YES M=  6 Til=720       conn=265899600                    MFE(stack-only)=  -6 #min=720       ok
+(2, 2, 2, 2, 2, 2)                           m=4 B= 3 n= 6 NO  M=  6 Til=0         conn=265899600                    MFE(stack-only)=  -4 #min=311760    ok
+(2, 2, 2, 2, 2, 2)                           m=3 B= 4 n= 6 YES M=  6 Til=720       conn=265899600                    MFE(stack-only)=  -6 #min=720       ok
+(2, 2, 2, 2, 2, 2)                           m=2 B= 6 n= 6 YES M=  6 Til=720       conn=265899600                    MFE(stack-only)=  -6 #min=720       ok
+(2, 2, 2, 2, 2, 2)                           m=1 B=12 n= 6 YES M=  6 Til=720       conn=265899600                    MFE(stack-only)=  -6 #min=720       ok
+(12,)                                        m=1 B=12 n= 1 YES M= 11 Til=1         conn=2704155                      MFE(stack-only)= -11 #min=1         ok
+(12,)                                        m=12 B= 1 n= 1 NO  M= 11 Til=0         conn=2704155                      MFE(stack-only)=   0 #min=2704155   ok
+(12,)                                        m=2 B= 6 n= 1 NO  M= 11 Til=0         conn=2704155                      MFE(stack-only)= -10 #min=1         ok
+(12,)                                        m=3 B= 4 n= 1 NO  M= 11 Til=0         conn=2704155                      MFE(stack-only)=  -9 #min=1         ok
+(12,)                                        m=4 B= 3 n= 1 NO  M= 11 Til=0         conn=2704155                      MFE(stack-only)=  -8 #min=1         ok
+(12,)                                        m=6 B= 2 n= 1 NO  M= 11 Til=0         conn=2704155                      MFE(stack-only)=  -6 #min=1         ok
+total instances 867 (YES 703, NO 164); failures for (H0)-(H2) models: 0
+random instances: YES 656, NO 140
+== (3) models violating (H2): does 'MFE == sigma*M  <=>  packable' still hold? are the minima still exactly the tilings (YES instances)?
+VIOL s=-10 bulge=-1 interior=0       decision ok 867 / wrong   0 | minima = tilings: 703 yes /   0 no | MFE < sigma*M in   0 instances; e.g. None
+VIOL s=-10 bulge=-9 interior=0       decision ok 867 / wrong   0 | minima = tilings: 703 yes /   0 no | MFE < sigma*M in   0 instances; e.g. None
+VIOL s=-10 bulge=-10 interior=0      decision ok 705 / wrong 162 | minima = tilings: 343 yes / 360 no | MFE < sigma*M in   0 instances; e.g. None
+VIOL s=-10 bulge=-11 interior=0      decision ok 507 / wrong 360 | minima = tilings: 372 yes / 331 no | MFE < sigma*M in 522 instances; e.g. ((2, 2, 3, 2, 2, 3), 2, 7, -81, -80)
+VIOL s=-10 bulge=0 interior=-9       decision ok 867 / wrong   0 | minima = tilings: 703 yes /   0 no | MFE < sigma*M in   0 instances; e.g. None
+VIOL s=-10 bulge=0 interior=-19      decision ok 867 / wrong   0 | minima = tilings: 703 yes /   0 no | MFE < sigma*M in   0 instances; e.g. None
+VIOL s=-10 bulge=0 interior=-21      decision ok 432 / wrong 435 | minima = tilings: 337 yes / 366 no | MFE < sigma*M in 592 instances; e.g. ((2, 2, 3, 2, 2, 3), 2, 7, -82, -80)

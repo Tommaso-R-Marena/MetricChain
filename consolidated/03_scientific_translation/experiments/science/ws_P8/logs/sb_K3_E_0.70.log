@@ -1,0 +1,12 @@
+=== p8_02_signblind: K3 on E, tau 0.7: atoms 78, sites 3, 5733 states, anchor (3, 10, 10); 1 subsets; NRAND 24, NCAND 4, NRS 4
+    (A) per-subset searches done, 1 s; chain truth <= LS_T <= PP_T <= P3: 3 checks, 0 violations
+    (C) order 3: remainder search at 11 states done, 2 s; largest |remainder| found at a single state: 1.6885e+00
+    patterns evaluated at all 5733 states, 5 s
+--- order 3: 1 subsets (kcal/mol)
+    sums over subsets: truth 1.4075e-01 | all-plus 1.1455e+00 | remainder pattern 1.6885e+00 | (A) best pattern per subset 1.6885e+00 | best pair-by-pair 3.6571e+00 | P3 1.0418e+01
+    (A)/truth >= 12.00 [per subset min/median/max 12.00/12.00/12.00];  (B)/truth >= 12.00;  pair-by-pair/(A) <= 2.17;  P3/(A) <= 6.17;  P3/pair-by-pair = 2.85
+    remainder sup_x|g - I_2g|: truth 1.4075e-01 | all-plus 1.1455e+00 | pattern found 1.6885e+00 (15 % of the charges negative; 60 % as the true signs) | Gamma_3 1.0418e+01
+    (C) every sign-blind bound of the remainder / truth >= 12.00;  Gamma_3 / (C) = 6.2;  Gamma_3 / truth = 74
+    chain checks in all: 5, violations 0
+    P3's Gamma_m against the remainders of the sign-flipped systems (true signs, all-plus, pattern found) at every state: 17199 state checks, 0 violations; smallest Gamma_m / sup|remainder| = 6.17
+DONE in 4.7 s; peak RSS 119 MB

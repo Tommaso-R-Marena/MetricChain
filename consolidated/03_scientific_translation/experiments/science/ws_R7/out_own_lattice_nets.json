@@ -1,0 +1,752 @@
+[
+ {
+  "n": 8,
+  "key": "delta=4",
+  "own_greedy": 1,
+  "own_certified_lb": 1,
+  "own_lp": 1.0,
+  "published": {
+   "lower": 1,
+   "upper": 1,
+   "exact": true
+  },
+  "m_fpt": 2,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 8,
+  "key": "delta=2",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 8,
+  "key": "delta=1",
+  "own_greedy": 4,
+  "own_certified_lb": 4,
+  "own_lp": 4.0,
+  "published": {
+   "lower": 4,
+   "upper": 4,
+   "exact": true
+  },
+  "m_fpt": 8,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 8,
+  "key": "delta=1/2",
+  "own_greedy": 11,
+  "own_certified_lb": 10,
+  "own_lp": 10.0,
+  "published": {
+   "lower": 10,
+   "upper": 10,
+   "exact": true
+  },
+  "m_fpt": 13,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 8,
+  "key": "delta=1/4",
+  "own_greedy": 31,
+  "own_certified_lb": 27,
+  "own_lp": 27.0,
+  "published": {
+   "lower": 27,
+   "upper": 27,
+   "exact": true
+  },
+  "m_fpt": 32,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 10,
+  "key": "delta=4",
+  "own_greedy": 2,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 10,
+  "key": "delta=2",
+  "own_greedy": 3,
+  "own_certified_lb": 3,
+  "own_lp": 3.0,
+  "published": {
+   "lower": 3,
+   "upper": 3,
+   "exact": true
+  },
+  "m_fpt": 5,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 10,
+  "key": "delta=1",
+  "own_greedy": 8,
+  "own_certified_lb": 5,
+  "own_lp": 5.0,
+  "published": {
+   "lower": 5,
+   "upper": 5,
+   "exact": true
+  },
+  "m_fpt": 13,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 10,
+  "key": "delta=1/2",
+  "own_greedy": 20,
+  "own_certified_lb": 16,
+  "own_lp": 15.345679012345677,
+  "published": {
+   "lower": 16,
+   "upper": 16,
+   "exact": true
+  },
+  "m_fpt": 26,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 10,
+  "key": "delta=1/4",
+  "own_greedy": 47,
+  "own_certified_lb": 40,
+  "own_lp": 39.91983491465357,
+  "published": {
+   "lower": 43,
+   "upper": 43,
+   "exact": true
+  },
+  "m_fpt": 56,
+  "consistent": true,
+  "published_lower_is_certified_here": false
+ },
+ {
+  "n": 12,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 12,
+  "key": "delta=2",
+  "own_greedy": 3,
+  "own_certified_lb": 3,
+  "own_lp": 3.0,
+  "published": {
+   "lower": 3,
+   "upper": 3,
+   "exact": true
+  },
+  "m_fpt": 5,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 12,
+  "key": "delta=1",
+  "own_greedy": 8,
+  "own_certified_lb": 6,
+  "own_lp": 6.0,
+  "published": {
+   "lower": 6,
+   "upper": 6,
+   "exact": true
+  },
+  "m_fpt": 12,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 12,
+  "key": "delta=1/2",
+  "own_greedy": 24,
+  "own_certified_lb": 19,
+  "own_lp": 18.352201257861637,
+  "published": {
+   "lower": 19,
+   "upper": 19,
+   "exact": true
+  },
+  "m_fpt": 31,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 12,
+  "key": "delta=1/4",
+  "own_greedy": 72,
+  "own_certified_lb": 60,
+  "own_lp": 59.368368828685576,
+  "published": {
+   "lower": 65,
+   "upper": 65,
+   "exact": true
+  },
+  "m_fpt": 93,
+  "consistent": true,
+  "published_lower_is_certified_here": false
+ },
+ {
+  "n": 13,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 13,
+  "key": "delta=2",
+  "own_greedy": 3,
+  "own_certified_lb": 3,
+  "own_lp": 3.0,
+  "published": {
+   "lower": 3,
+   "upper": 3,
+   "exact": true
+  },
+  "m_fpt": 5,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 13,
+  "key": "delta=1",
+  "own_greedy": 9,
+  "own_certified_lb": 7,
+  "own_lp": 6.5,
+  "published": {
+   "lower": 7,
+   "upper": 7,
+   "exact": true
+  },
+  "m_fpt": 13,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 13,
+  "key": "delta=1/2",
+  "own_greedy": 23,
+  "own_certified_lb": 19,
+  "own_lp": 18.392284329429387,
+  "published": {
+   "lower": 20,
+   "upper": 20,
+   "exact": true
+  },
+  "m_fpt": 42,
+  "consistent": true,
+  "published_lower_is_certified_here": false
+ },
+ {
+  "n": 13,
+  "key": "delta=1/4",
+  "own_greedy": 66,
+  "own_certified_lb": 52,
+  "own_lp": 51.76666666666667,
+  "published": {
+   "lower": 55,
+   "upper": 55,
+   "exact": true
+  },
+  "m_fpt": 125,
+  "consistent": true,
+  "published_lower_is_certified_here": false
+ },
+ {
+  "n": 14,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 14,
+  "key": "delta=2",
+  "own_greedy": 4,
+  "own_certified_lb": 3,
+  "own_lp": 3.0,
+  "published": {
+   "lower": 3,
+   "upper": 3,
+   "exact": true
+  },
+  "m_fpt": 6,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 14,
+  "key": "delta=1",
+  "own_greedy": 10,
+  "own_certified_lb": 8,
+  "own_lp": 7.5,
+  "published": {
+   "lower": 8,
+   "upper": 8,
+   "exact": true
+  },
+  "m_fpt": 17,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 14,
+  "key": "delta=1/2",
+  "own_greedy": 31,
+  "own_certified_lb": 24,
+  "own_lp": 23.324249635684318,
+  "published": {
+   "lower": 25,
+   "upper": 25,
+   "exact": true
+  },
+  "m_fpt": 45,
+  "consistent": true,
+  "published_lower_is_certified_here": false
+ },
+ {
+  "n": 14,
+  "key": "delta=1/4",
+  "own_greedy": 88,
+  "own_certified_lb": 66,
+  "own_lp": 65.86973995271869,
+  "published": {
+   "lower": 72,
+   "upper": 72,
+   "exact": true
+  },
+  "m_fpt": 117,
+  "consistent": true,
+  "published_lower_is_certified_here": false
+ },
+ {
+  "n": 16,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 16,
+  "key": "delta=2",
+  "own_greedy": 4,
+  "own_certified_lb": 3,
+  "own_lp": 3.0,
+  "published": {
+   "lower": 3,
+   "upper": 3,
+   "exact": true
+  },
+  "m_fpt": 6,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 16,
+  "key": "delta=1",
+  "own_greedy": 11,
+  "own_certified_lb": 8,
+  "own_lp": 8.0,
+  "published": {
+   "lower": 8,
+   "upper": 8,
+   "exact": true
+  },
+  "m_fpt": 17,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 16,
+  "key": "delta=1/2",
+  "own_greedy": 35,
+  "own_certified_lb": 25,
+  "own_lp": 24.898047013638987,
+  "published": {
+   "lower": 25,
+   "upper": 28,
+   "exact": false
+  },
+  "m_fpt": 60,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 16,
+  "key": "delta=1/4",
+  "own_greedy": 137,
+  "own_certified_lb": 98,
+  "own_lp": 97.73800881953866,
+  "published": {
+   "lower": 98,
+   "upper": 107,
+   "exact": false
+  },
+  "m_fpt": 179,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 18,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 18,
+  "key": "delta=2",
+  "own_greedy": 4,
+  "own_certified_lb": 3,
+  "own_lp": 3.0,
+  "published": {
+   "lower": 3,
+   "upper": 3,
+   "exact": true
+  },
+  "m_fpt": 6,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 18,
+  "key": "delta=1",
+  "own_greedy": 15,
+  "own_certified_lb": 9,
+  "own_lp": 8.714285714285712,
+  "published": {
+   "lower": 9,
+   "upper": 9,
+   "exact": true
+  },
+  "m_fpt": 19,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 18,
+  "key": "delta=1/2",
+  "own_greedy": 47,
+  "own_certified_lb": 29,
+  "own_lp": 28.556113091703818,
+  "published": {
+   "lower": 29,
+   "upper": 33,
+   "exact": false
+  },
+  "m_fpt": 72,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 18,
+  "key": "delta=1/4",
+  "own_greedy": 148,
+  "own_certified_lb": 104,
+  "own_lp": 103.4189377290201,
+  "published": {
+   "lower": 104,
+   "upper": 111,
+   "exact": false
+  },
+  "m_fpt": 195,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 20,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 20,
+  "key": "delta=2",
+  "own_greedy": 5,
+  "own_certified_lb": 4,
+  "own_lp": 4.0,
+  "published": {
+   "lower": 4,
+   "upper": 4,
+   "exact": true
+  },
+  "m_fpt": 6,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 20,
+  "key": "delta=1",
+  "own_greedy": 17,
+  "own_certified_lb": 10,
+  "own_lp": 9.333333333333332,
+  "published": {
+   "lower": 10,
+   "upper": 10,
+   "exact": true
+  },
+  "m_fpt": 20,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 20,
+  "key": "delta=1/2",
+  "own_greedy": 51,
+  "own_certified_lb": 33,
+  "own_lp": 32.76112892266018,
+  "published": {
+   "lower": 33,
+   "upper": 37,
+   "exact": false
+  },
+  "m_fpt": 70,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 20,
+  "key": "delta=1/4",
+  "own_greedy": 209,
+  "own_certified_lb": 146,
+  "own_lp": 145.0289574827018,
+  "published": {
+   "lower": 146,
+   "upper": 155,
+   "exact": false
+  },
+  "m_fpt": 267,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 22,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 22,
+  "key": "delta=2",
+  "own_greedy": 5,
+  "own_certified_lb": 4,
+  "own_lp": 4.0,
+  "published": {
+   "lower": 4,
+   "upper": 4,
+   "exact": true
+  },
+  "m_fpt": 7,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 22,
+  "key": "delta=1",
+  "own_greedy": 17,
+  "own_certified_lb": 11,
+  "own_lp": 10.600000000000001,
+  "published": {
+   "lower": 11,
+   "upper": 11,
+   "exact": true
+  },
+  "m_fpt": 22,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 22,
+  "key": "delta=1/2",
+  "own_greedy": 60,
+  "own_certified_lb": 38,
+  "own_lp": 37.31498343966803,
+  "published": {
+   "lower": 38,
+   "upper": 48,
+   "exact": false
+  },
+  "m_fpt": 78,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 22,
+  "key": "delta=1/4",
+  "own_greedy": 210,
+  "own_certified_lb": 141,
+  "own_lp": 140.3996862465985,
+  "published": {
+   "lower": 141,
+   "upper": 175,
+   "exact": false
+  },
+  "m_fpt": 274,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 24,
+  "key": "delta=4",
+  "own_greedy": 3,
+  "own_certified_lb": 2,
+  "own_lp": 2.0,
+  "published": {
+   "lower": 2,
+   "upper": 2,
+   "exact": true
+  },
+  "m_fpt": 3,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 24,
+  "key": "delta=2",
+  "own_greedy": 5,
+  "own_certified_lb": 4,
+  "own_lp": 4.0,
+  "published": {
+   "lower": 4,
+   "upper": 4,
+   "exact": true
+  },
+  "m_fpt": 9,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 24,
+  "key": "delta=1",
+  "own_greedy": 19,
+  "own_certified_lb": 11,
+  "own_lp": 11.000000000000096,
+  "published": {
+   "lower": 11,
+   "upper": 11,
+   "exact": true
+  },
+  "m_fpt": 27,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 24,
+  "key": "delta=1/2",
+  "own_greedy": 66,
+  "own_certified_lb": 41,
+  "own_lp": 40.82037359652921,
+  "published": {
+   "lower": 41,
+   "upper": 56,
+   "exact": false
+  },
+  "m_fpt": 99,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ },
+ {
+  "n": 24,
+  "key": "delta=1/4",
+  "own_greedy": 282,
+  "own_certified_lb": 186,
+  "own_lp": 185.60404571080485,
+  "published": {
+   "lower": 186,
+   "upper": 286,
+   "exact": false
+  },
+  "m_fpt": 378,
+  "consistent": true,
+  "published_lower_is_certified_here": true
+ }
+]

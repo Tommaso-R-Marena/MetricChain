@@ -1,0 +1,5 @@
+K=12 part 0 # pchain index=12 sublattices=455 leaves=374920459 chain_systems=329889275 ; col time 179s
+K=12 part 1 # pchain index=12 sublattices=455 leaves=327067760 chain_systems=279503850 ; col time 164s
+K=12 part 2 # pchain index=12 sublattices=455 leaves=341660171 chain_systems=295820081 ; col time 172s
+K=12 part 3 # pchain index=12 sublattices=455 leaves=374640462 chain_systems=328415503 ; col time 182s
+done

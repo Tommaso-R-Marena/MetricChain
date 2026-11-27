@@ -1,0 +1,25 @@
+(i) 8960 real concatenations with delta_3 = 1 (every (x1, c1) with N1 = 12, 13 and A-part delta_3 = 1, against all 80 bridges x2 with 3..6 beads):
+    each a self-avoiding bridge, error vector from coordinates = A + B, delta_3 = 1 in all; maxima (1, 4, 5, 1), largest norm 30   [3 s]
+    N <=  3: A max (0, 0, 0, 0) norm 0;  B max (0, 0, 0, 0) norm 0   [0 s]
+    N <=  4: A max (0, 0, 0, 0) norm 0;  B max (0, 0, 0, 0) norm 0   [0 s]
+    N <=  5: A max (0, 0, 1, 1) norm 2;  B max (0, 0, 0, 0) norm 0   [0 s]
+    N <=  6: A max (0, 0, 1, 1) norm 2;  B max (0, 0, 0, 0) norm 0   [0 s]
+    N <=  7: A max (0, 0, 1, 1) norm 2;  B max (0, 0, 0, 0) norm 0   [0 s]
+    N <=  8: A max (0, 0, 1, 1) norm 2;  B max (0, 1, 2, 0) norm 6   [0 s]
+    N <=  9: A max (0, 1, 2, 1) norm 6;  B max (0, 1, 2, 0) norm 6   [0 s]
+    N <= 10: A max (0, 1, 3, 1) norm 8;  B max (0, 2, 3, 0) norm 11   [0 s]
+    N <= 11: A max (0, 2, 3, 1) norm 11;  B max (0, 2, 3, 0) norm 11   [0 s]
+    N <= 12: A max (1, 3, 5, 1) norm 27;  B max (0, 2, 3, 0) norm 11   [1 s]
+    N <= 13: A max (1, 4, 5, 1) norm 30;  B max (0, 2, 3, 0) norm 11   [3 s]
+    N <= 14: A max (1, 4, 6, 1) norm 32;  B max (0, 3, 4, 0) norm 16   [7 s]
+    N <= 15: A max (1, 4, 6, 1) norm 32;  B max (0, 3, 4, 0) norm 16   [20 s]
+    N <= 16: A max (1, 5, 7, 1) norm 37;  B max (0, 3, 4, 0) norm 16   [56 s]
+(ii) N1 <= 13, N2 <= 13: componentwise maxima (1, 6, 8, 1), largest norm 41
+(ii) N1 <= 16, N2 <= 8: componentwise maxima (1, 6, 9, 1), largest norm 43
+(ii) N1 <= 8, N2 <= 16: componentwise maxima (0, 3, 5, 1), largest norm 18
+(ii) N1 <= 16, N2 <= 16: componentwise maxima (1, 8, 11, 1), largest norm 53
+     reviewer: (13,13): (1,6,8,1) norm 41;  (16,8): (1,6,9,1) norm 43;  (8,16): (0,3,5,1) norm 18
+
+real	0m58.899s
+user	0m58.036s
+sys	0m0.040s

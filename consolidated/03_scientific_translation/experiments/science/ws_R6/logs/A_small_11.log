@@ -1,0 +1,27 @@
+A_small seed 11 time 469s
+{
+ "runs": 1600,
+ "harness_limit": 0,
+ "closed": 1600,
+ "abort": 0,
+ "Gfail": 0,
+ "det_viol": 0,
+ "good_viol": 0,
+ "pop": 327926,
+ "neg": 180,
+ "runs_with_neg": 14,
+ "close_pop": 232,
+ "close_unpop": 1368,
+ "close_tail0": 343,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 0.0014517335563567994,
+  "M_over_Mdag": 1.983875198289752,
+  "M_over_capnew": 0.8433740467435463,
+  "lnq_over_lnCmax": 0.796458533002048,
+  "q_over_Cvi": 0.0014517335563668911,
+  "calls_over_bound": 0.12534168569224496,
+  "used_over_cnt": 0.17724952966802832,
+  "count_ineq": 0.8690337323776656
+ }
+}

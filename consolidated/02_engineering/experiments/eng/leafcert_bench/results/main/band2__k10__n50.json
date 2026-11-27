@@ -1,0 +1,249 @@
+{
+ "alive_after": {
+  "cpsat": false,
+  "milp": false,
+  "plain": false,
+  "producer": false
+ },
+ "cpu": 7,
+ "error": null,
+ "family": "band2",
+ "instances": [
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {
+     "dp": -84650
+    },
+    "optimum": -84650,
+    "upper_bounds": {
+     "plain": -84451
+    }
+   },
+   "alphabets": [
+    10
+   ],
+   "brute": {
+    "seconds": 6.213999768078793e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 123000,
+   "dense_ints_per_leaf": 25775,
+   "digest": "943f8b46d10f03199472c3f9f5e11dc5831746e91f0fc4829dafda9de265af17",
+   "dp": {
+    "largest_table": 1000,
+    "seconds": 0.002421325999421242,
+    "status": "optimal",
+    "table_entries": 48110,
+    "value": -84650
+   },
+   "edges": 97,
+   "index": 0,
+   "log10_states": 50.0,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 193432,
+    "best_bound": -85711,
+    "branch_nodes": 7341,
+    "cert_integers": 216303800,
+    "check_ops": 4983062373,
+    "depth": 9,
+    "initial_ub": -83421,
+    "leaf_boxes": 15921,
+    "leaf_certificates": 8392,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 11088,
+    "root_lp_value": null,
+    "root_value": -89811,
+    "seconds": 60.2351658460002,
+    "shared_by_parent": 12174,
+    "shared_by_sibling": 0,
+    "status": "limit",
+    "stop": "time",
+    "sweeps": 584652,
+    "ub_updates": 4,
+    "upper_bound": -84451,
+    "value": null
+   },
+   "root_lp": {
+    "seconds": 0.3474970529996426,
+    "value": -88863.44047619055
+   },
+   "seconds_instance": 60.585170198000014,
+   "seed": 9337822730753367486,
+   "site_states": 500,
+   "sites": 50,
+   "sparse_instance_integers": 10200,
+   "sparse_ints_per_leaf": 2087
+  },
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {
+     "dp": -87849
+    },
+    "optimum": -87849,
+    "upper_bounds": {
+     "plain": -87849
+    }
+   },
+   "alphabets": [
+    10
+   ],
+   "brute": {
+    "seconds": 4.305000402382575e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 123000,
+   "dense_ints_per_leaf": 25775,
+   "digest": "7567a3e3f2df096534bd600ebee4f1fab0e387de41391ccd0f0e296470b3f297",
+   "dp": {
+    "largest_table": 1000,
+    "seconds": 0.0034839049994843663,
+    "status": "optimal",
+    "table_entries": 48110,
+    "value": -87849
+   },
+   "edges": 97,
+   "index": 1,
+   "log10_states": 50.0,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 191245,
+    "best_bound": -88562,
+    "branch_nodes": 7313,
+    "cert_integers": 416137375,
+    "check_ops": 8109995172,
+    "depth": 11,
+    "initial_ub": -85655,
+    "leaf_boxes": 26412,
+    "leaf_certificates": 16145,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 17949,
+    "root_lp_value": null,
+    "root_value": -92466,
+    "seconds": 60.1995696569993,
+    "shared_by_parent": 15776,
+    "shared_by_sibling": 0,
+    "status": "limit",
+    "stop": "time",
+    "sweeps": 556726,
+    "ub_updates": 6,
+    "upper_bound": -87849,
+    "value": null
+   },
+   "root_lp": {
+    "seconds": 0.26995878199977597,
+    "value": -91815.16666666658
+   },
+   "seconds_instance": 60.47307897100018,
+   "seed": 17780612803847334,
+   "site_states": 500,
+   "sites": 50,
+   "sparse_instance_integers": 10200,
+   "sparse_ints_per_leaf": 2087
+  },
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {
+     "dp": -87933
+    },
+    "optimum": -87933,
+    "upper_bounds": {}
+   },
+   "alphabets": [
+    10
+   ],
+   "brute": {
+    "seconds": 4.791999344888609e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 123000,
+   "dense_ints_per_leaf": 25775,
+   "digest": "aa5b50430edb6e569a5d5dcd9dbc8b8c8da8666600bbbf31f575be3cf100c3f3",
+   "dp": {
+    "largest_table": 1000,
+    "seconds": 0.0031341860003522015,
+    "status": "optimal",
+    "table_entries": 48110,
+    "value": -87933
+   },
+   "edges": 97,
+   "index": 2,
+   "log10_states": 50.0,
+   "root_lp": {
+    "seconds": 0.2962537089997568,
+    "value": -90288.04014041518
+   },
+   "seconds_instance": 0.2994212929997957,
+   "seed": 11618887971348239516,
+   "site_states": 500,
+   "sites": 50,
+   "sparse_instance_integers": 10200,
+   "sparse_ints_per_leaf": 2087
+  }
+ ],
+ "k": 10,
+ "limit_hits": {
+  "cpsat": 0,
+  "milp": 0,
+  "plain": 2
+ },
+ "master": "leafcert-bench-v1",
+ "n": 50,
+ "phase": "main",
+ "protocol_version": 1,
+ "seconds": 121.41658059499969,
+ "started_utc": "2026-11-26T23:20:11Z",
+ "summary": {
+  "cpsat_attempted": 0,
+  "cpsat_solved": 0,
+  "inconsistent": 0,
+  "instances": 3,
+  "milp_attempted": 0,
+  "milp_solved": 0,
+  "plain_attempted": 2,
+  "plain_solved": 0,
+  "producer_attempted": 0,
+  "producer_certified": 0
+ },
+ "task": {
+  "caps": {
+   "max_cert_integers": 2000000,
+   "max_check_ops": 20000000,
+   "max_leaves": 1000000
+  },
+  "extension": true,
+  "family": "band2",
+  "file": "band2__k10__n50",
+  "id": 148,
+  "instances": [
+   0,
+   1,
+   2
+  ],
+  "k": 10,
+  "master": "leafcert-bench-v1",
+  "n": 50,
+  "phase": "main",
+  "run": {
+   "cpsat": false,
+   "milp": false,
+   "plain": true,
+   "producer": false
+  },
+  "time_limit": 60.0
+ },
+ "worker_rss_peak_mb": 334.09765625,
+ "worker_vm_peak_mb": 1217.84375
+}

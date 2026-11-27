@@ -1,0 +1,38 @@
+effective group order: 1920
+orbits of non-empty type sets: 150
+non-degenerate orbits: 130   non-degenerate type sets: 61719
+non-exposed orbits: 6   non-exposed type sets: 746
+disagreements full LP vs span-reduced LP: 0
+exposed orbits containing 4 states with constant product: 3
+non-exposed orbits WITHOUT 4 states of constant product: 1
+exposed orbits whose span contains another sign vector: 65
+non-exposed orbits whose span contains NO other sign vector (would contradict Prop. 5): 0
+--- non-exposed orbit: rep mask 278 types 4 orbit size 80 const-product quads [(1, 2, 3, 4)]
+    states: ['++++', '+++-', '++-+', '+-++', '-+++']
+    mu: [('+-+-', '1/3'), ('+--+', '1/3'), ('++--', '1/3')]
+    alpha: ['-1/3', '1/3', '1/3', '1/3', '1/3']
+--- non-exposed orbit: rep mask 361 types 5 orbit size 320 const-product quads [(0, 2, 3, 4)]
+    states: ['+++++', '++++-', '++--+', '+-+-+', '+--++']
+    mu: [('+++-+', '1/4'), ('++-++', '1/4'), ('+-+++', '1/4'), ('+---+', '1/4')]
+    alpha: ['1/4', '0', '1/4', '1/4', '1/4']
+--- non-exposed orbit: rep mask 1641 types 6 orbit size 240 const-product quads [(1, 2, 3, 4)]
+    states: ['++++++', '++++--', '++--++', '+-+-+-', '+--+-+']
+    mu: [('+++-+-', '1/4'), ('++-+-+', '1/4'), ('+---++', '1/4'), ('+-++--', '1/4')]
+    alpha: ['0', '1/4', '1/4', '1/4', '1/4']
+--- non-exposed orbit: rep mask 5737 types 7 orbit size 80 const-product quads [(1, 2, 3, 4)]
+    states: ['+++++++', '++++---', '++--++-', '+-+-+-+', '+--+-++']
+    mu: [('+++-+--', '1/4'), ('++-+-+-', '1/4'), ('+-++--+', '1/4'), ('+---+++', '1/4')]
+    alpha: ['0', '1/4', '1/4', '1/4', '1/4']
+--- non-exposed orbit: rep mask 5761 types 5 orbit size 16 const-product quads []
+    states: ['+++++', '++---', '+-++-', '+-+-+', '+--++']
+    mu: [('+-+++', '1/3'), ('+++--', '1/6'), ('++-+-', '1/6'), ('++--+', '1/6'), ('+----', '1/6')]
+    alpha: ['1/6', '1/3', '1/6', '1/6', '1/6']
+--- non-exposed orbit: rep mask 15555 types 8 orbit size 10 const-product quads [(0, 1, 2, 3)]
+    states: ['++++++++', '++++----', '++--++--', '++----++', '+-+-+-+-']
+    mu: [('++++++--', '1/4'), ('++++--++', '1/4'), ('++------', '1/4'), ('++--++++', '1/4')]
+    alpha: ['1/4', '1/4', '1/4', '1/4', '0']
+max time per orbit: 4.6 s
+
+real	0m8.843s
+user	0m12.429s
+sys	0m1.116s

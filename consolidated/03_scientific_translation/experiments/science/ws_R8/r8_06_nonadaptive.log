@@ -1,0 +1,71 @@
+== 1: the cone with two fillings of its apex ball, exact sums ==
+  n=600 u=1.0 eps1=0.3a=0.0333 (eps=19.97): smallest R3 = 242 (guess: rho3 n = 236.2), R1 = 186 (sigma2 n = 183.3), c2 = 24.4903 (u(sigma2-sigma_u)n = 22.0)
+       U_A = 188.9723787099  U_B = 188.9723787099  (difference -5.7e-14);  S_A - S_B = 20.3206;  ln Z_A - ln Z_B = 20.3206 > eps
+       same values outside the open ball of radius R3: True;  Lipschitz: A True, B True
+       exponent n^-1 ln(2^n/|B(n,R3-1)|) = 0.02334  [asymptotic guess theta_na(u(sigma2-sigma_u)) = 0.02276];  without the datum: R = 229, 0.03319  [theta_na(eps1) = 0.02541];  adaptive plateau bound theta_pl = 0.01402
+  n=1000 u=1.0 eps1=0.3a=0.0333 (eps=33.28): smallest R3 = 400 (guess: rho3 n = 393.7), R1 = 308 (sigma2 n = 305.5), c2 = 39.1811 (u(sigma2-sigma_u)n = 36.6)
+       U_A = 311.4002525090  U_B = 311.4002525090  (difference +0.0e+00);  S_A - S_B = 33.5716;  ln Z_A - ln Z_B = 33.5716 > eps
+       same values outside the open ball of radius R3: True;  Lipschitz: A True, B True
+       exponent n^-1 ln(2^n/|B(n,R3-1)|) = 0.02313  [asymptotic guess theta_na(u(sigma2-sigma_u)) = 0.02276];  without the datum: R = 384, 0.03033  [theta_na(eps1) = 0.02541];  adaptive plateau bound theta_pl = 0.01402
+  n=1000 u=1.0 eps1=0.6a=0.0666 (eps=66.57): smallest R3 = 468 (guess: rho3 n = 459.9), R1 = 356 (sigma2 n = 352.2), c2 = 87.2268 (u(sigma2-sigma_u)n = 83.2)
+       U_A = 357.3298216801  U_B = 357.3298216801  (difference -5.7e-14);  S_A - S_B = 66.8216;  ln Z_A - ln Z_B = 66.8216 > eps
+       same values outside the open ball of radius R3: True;  Lipschitz: A True, B True
+       exponent n^-1 ln(2^n/|B(n,R3-1)|) = 0.00392  [asymptotic guess theta_na(u(sigma2-sigma_u)) = 0.00322];  without the datum: R = 437, 0.01045  [theta_na(eps1) = 0.00746];  adaptive plateau bound theta_pl = 0.00273
+  n=800 u=2.0 eps1=0.3a=0.0983 (eps=78.68): smallest R3 = 241 (guess: rho3 n = 236.8), R1 = 142 (sigma2 n = 140.0), c2 = 92.6524 (u(sigma2-sigma_u)n = 89.2)
+       U_A = 286.7984921124  U_B = 286.7984921124  (difference +2.8e-13);  S_A - S_B = 78.9122;  ln Z_A - ln Z_B = 78.9122 > eps
+       same values outside the open ball of radius R3: True;  Lipschitz: A True, B True
+       exponent n^-1 ln(2^n/|B(n,R3-1)|) = 0.08594  [asymptotic guess theta_na(u(sigma2-sigma_u)) = 0.08568];  without the datum: R = 225, 0.10391  [theta_na(eps1) = 0.09636];  adaptive plateau bound theta_pl = 0.05286
+  n=800 u=2.0 eps1=0.6a=0.1967 (eps=157.35): smallest R3 = 329 (guess: rho3 n = 323.5), R1 = 203 (sigma2 n = 199.8), c2 = 214.8355 (u(sigma2-sigma_u)n = 208.8)
+       U_A = 406.9877034627  U_B = 406.9877034627  (difference -2.8e-13);  S_A - S_B = 157.7631;  ln Z_A - ln Z_B = 157.7631 > eps
+       same values outside the open ball of radius R3: True;  Lipschitz: A True, B True
+       exponent n^-1 ln(2^n/|B(n,R3-1)|) = 0.01928  [asymptotic guess theta_na(u(sigma2-sigma_u)) = 0.01838];  without the datum: R = 288, 0.04385  [theta_na(eps1) = 0.03846];  adaptive plateau bound theta_pl = 0.01500
+  n=600 u=4.0 eps1=0.4a=0.2412 (eps=144.73): smallest R3 = 128 (guess: rho3 n = 124.9), R1 = 63 (sigma2 n = 61.7), c2 = 208.8017 (u(sigma2-sigma_u)n = 203.7)
+       U_A = 252.6484461031  U_B = 252.6484461031  (difference -8.5e-14);  S_A - S_B = 144.8045;  ln Z_A - ln Z_B = 144.8045 > eps
+       same values outside the open ball of radius R3: True;  Lipschitz: A True, B True
+       exponent n^-1 ln(2^n/|B(n,R3-1)|) = 0.18184  [asymptotic guess theta_na(u(sigma2-sigma_u)) = 0.18154];  without the datum: R = 101, 0.24743  [theta_na(eps1) = 0.23795];  adaptive plateau bound theta_pl = 0.12687
+  n=1200 u=0.5 eps1=0.4a=0.0121 (eps=14.54): smallest R3 = 560 (guess: rho3 n = 550.5), R1 = 490 (sigma2 n = 485.9), c2 = 18.5483 (u(sigma2-sigma_u)n = 16.4)
+       U_A = 247.1299019941  U_B = 247.1299019941  (difference +8.2e-13);  S_A - S_B = 14.5720;  ln Z_A - ln Z_B = 14.5720 > eps
+       same values outside the open ball of radius R3: True;  Lipschitz: A True, B True
+       exponent n^-1 ln(2^n/|B(n,R3-1)|) = 0.00387  [asymptotic guess theta_na(u(sigma2-sigma_u)) = 0.00341];  without the datum: R = 540, 0.00696  [theta_na(eps1) = 0.00427];  adaptive plateau bound theta_pl = 0.00238
+== 1b: a displaced inner cone (enumeration, n = 14) ==
+  c2 = 2.0 (u d(s,s') = 3.0): Lipschitz constant of the glued function = 2.00  -> member: False
+  c2 = 3.0 (u d(s,s') = 3.0): Lipschitz constant of the glued function = 1.00  -> member: True
+  c2 = 4.0 (u d(s,s') = 3.0): Lipschitz constant of the glued function = 1.00  -> member: True
+== 2: the datum-assisted bracket on radial instances (exact) ==
+  n=400 u=1.0 eps1=0.3a=0.0333: guess: unexplored radius rho3 n = 157.5 (exponent 0.0228); no datum: 155.1 (0.0254)
+     cone                    :   1 instances, smallest needed unexplored radius  199  (exponent 0.0018)
+     truncated cones (A)     :  24 instances, smallest needed unexplored radius  156  (exponent 0.0299)
+     raised cones (B)        :  45 instances, smallest needed unexplored radius  155  (exponent 0.0311)
+     flat + plateau basin    :  40 instances, smallest needed unexplored radius  165  (exponent 0.0205)
+     soft cones v<u          :   3 instances, smallest needed unexplored radius  162  (exponent 0.0234)
+     two-slope cones         :   5 instances, smallest needed unexplored radius  162  (exponent 0.0234)
+     worst family: raised cones (B) at r = 155;  guess rho3 n = 157.5
+  n=400 u=1.0 eps1=0.6a=0.0666: guess: unexplored radius rho3 n = 183.9 (exponent 0.0032); no datum: 175.6 (0.0075)
+     cone                    :   1 instances, smallest needed unexplored radius  199  (exponent 0.0018)
+     truncated cones (A)     :  24 instances, smallest needed unexplored radius  184  (exponent 0.0070)
+     raised cones (B)        :  45 instances, smallest needed unexplored radius  183  (exponent 0.0075)
+     flat + plateau basin    :  40 instances, smallest needed unexplored radius  192  (exponent 0.0037)
+     soft cones v<u          :   3 instances, smallest needed unexplored radius  185  (exponent 0.0065)
+     two-slope cones         :   5 instances, smallest needed unexplored radius  194  (exponent 0.0031)
+     worst family: raised cones (B) at r = 183;  guess rho3 n = 183.9
+  n=400 u=2.0 eps1=0.4a=0.1311: guess: unexplored radius rho3 n = 133.0 (exponent 0.0572); no datum: 125.1 (0.0719)
+     cone                    :   1 instances, smallest needed unexplored radius  199  (exponent 0.0018)
+     truncated cones (A)     :  39 instances, smallest needed unexplored radius  131  (exponent 0.0670)
+     raised cones (B)        :  75 instances, smallest needed unexplored radius  133  (exponent 0.0634)
+     flat + plateau basin    :  40 instances, smallest needed unexplored radius  141  (exponent 0.0502)
+     soft cones v<u          :   3 instances, smallest needed unexplored radius  136  (exponent 0.0583)
+     two-slope cones         :   5 instances, smallest needed unexplored radius  145  (exponent 0.0442)
+     worst family: truncated cones (A) at r = 131;  guess rho3 n = 133.0
+  n=300 u=4.0 eps1=0.4a=0.2412: guess: unexplored radius rho3 n = 62.5 (exponent 0.1815); no datum: 50.9 (0.2379)
+     cone                    :   1 instances, smallest needed unexplored radius  149  (exponent 0.0025)
+     truncated cones (A)     :  49 instances, smallest needed unexplored radius   62  (exponent 0.1922)
+     raised cones (B)        : 100 instances, smallest needed unexplored radius   66  (exponent 0.1748)
+     flat + plateau basin    :  40 instances, smallest needed unexplored radius   63  (exponent 0.1878)
+     soft cones v<u          :   3 instances, smallest needed unexplored radius   83  (exponent 0.1117)
+     two-slope cones         :   5 instances, smallest needed unexplored radius   72  (exponent 0.1506)
+     worst family: truncated cones (A) at r = 62;  guess rho3 n = 62.5
+SUMMARY pair exists with equal energies and gap > eps: True   time 1730s
+
+real	28m50.540s
+user	28m36.712s
+sys	0m0.292s

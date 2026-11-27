@@ -1,0 +1,8 @@
+700 random (chain, remainder) pairs by exact enumeration: no violation
+largest ratios: Var/(sum C^2/4) = 0.9836;  ln MGF/(lam^2 sum C^2/8) = 0.9805;  D_2/(sum C^2/2) = 0.3976
+product measure: theta = [0.0, 0.0, 0.0, 0.0, 0.0] -> C_i = c_i (McDiarmid / Efron-Stein)
+frozen chain:    theta = [np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0)] -> C_i = sum_{j>=i} c_j (all sites move together)
+
+real	4m36.200s
+user	2m19.528s
+sys	0m0.407s

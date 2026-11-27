@@ -1,0 +1,4 @@
+R28 toy_phi0.py  start 2026-11-27T00:51:18Z
+phi_i random (as run):  k=3: first-order 3.281, all-H 4.696, mixed 1.287;  k=6: first-order 1.948, all-H 1.273, mixed 0.6505;  k=12: first-order 0.9693, all-H 0.2386, mixed 0.2386;  k=24: first-order 0.4785, all-H 0.04738, mixed 0.04738;  k=48: first-order 0.2377, all-H 0.01034, mixed 0.01034
+phi_i = 0 (as the text reads):  k=3: first-order 3.281, all-H 4.668, mixed 1.073;  k=6: first-order 1.912, all-H 1.265, mixed 0.6429;  k=12: first-order 0.9634, all-H 0.2369, mixed 0.2369;  k=24: first-order 0.4748, all-H 0.04675, mixed 0.04675;  k=48: first-order 0.2357, all-H 0.01019, mixed 0.01019
+END 2026-11-27T00:51:22Z  wall 4.4 s  peak memory 391 MB (ru_maxrss; address space capped at 3 GB)

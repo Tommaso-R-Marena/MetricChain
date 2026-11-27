@@ -1,0 +1,116 @@
+file chain03.tokens
+n 3 k 4 den 8192 tokens 151 certificate_tokens 77 size 10
+claimed_bound -5/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 9 ms_verifyM_plus_one 2
+verify_claimed_bound true
+ms_verify 30
+witness_in_box true
+witness_energy -5/1
+digest_h 82819
+digest_J 7094211
+non_integer_entries 0
+ms_rest 4
+file chain04.tokens
+n 4 k 4 den 8192 tokens 221 certificate_tokens 118 size 13
+claimed_bound 2/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 2 ms_verifyM_plus_one 3
+verify_claimed_bound true
+ms_verify 179
+witness_in_box true
+witness_energy 2/1
+digest_h 182470
+digest_J 2305843009179470530
+non_integer_entries 0
+ms_rest 2
+file chain05.tokens
+n 5 k 4 den 8192 tokens 299 certificate_tokens 167 size 16
+claimed_bound -9/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 5 ms_verifyM_plus_one 4
+verify_claimed_bound true
+ms_verify 1436
+witness_in_box true
+witness_energy -9/1
+digest_h 268456
+digest_J 2305843009184197715
+non_integer_entries 0
+ms_rest 3
+file chain06.tokens
+n 6 k 4 den 8192 tokens 385 certificate_tokens 224 size 19
+claimed_bound 0/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 6 ms_verifyM_plus_one 8
+verify_claimed_bound true
+ms_verify 6167
+witness_in_box true
+witness_energy 0/1
+digest_h 448440
+digest_J 38354643
+non_integer_entries 0
+ms_rest 3
+file dense0.tokens
+n 5 k 3 den 8192 tokens 1211 certificate_tokens 1051 size 21
+claimed_bound 25/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 18 ms_verifyM_plus_one 5
+verify_claimed_bound true
+ms_verify 48
+witness_in_box true
+witness_energy 25/1
+digest_h 2249
+digest_J 813563226
+non_integer_entries 0
+ms_rest 1
+file dense1.tokens
+n 6 k 3 den 8192 tokens 3545 certificate_tokens 3321 size 42
+claimed_bound 33/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 55 ms_verifyM_plus_one 48
+verify_claimed_bound true
+ms_verify 123
+witness_in_box true
+witness_energy 33/1
+digest_h 5399
+digest_J 1452790799
+non_integer_entries 0
+ms_rest 2
+file dense2.tokens
+n 6 k 4 den 8192 tokens 4040 certificate_tokens 3699 size 29
+claimed_bound 32/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 107 ms_verifyM_plus_one 89
+verify_claimed_bound true
+ms_verify 117
+witness_in_box true
+witness_energy 32/1
+digest_h 6609
+digest_J 2451588713
+non_integer_entries 0
+ms_rest 2
+file chain07.tokens
+n 7 k 4 den 8192 tokens 479 certificate_tokens 289 size 22
+claimed_bound -9/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 7 ms_verifyM_plus_one 5
+verify_claimed_bound true
+ms_verify 34461
+witness_in_box true
+witness_energy -9/1
+digest_h 573290
+digest_J 2305843009023118917
+non_integer_entries 0
+ms_rest 2
+
+real	5m28.937s
+user	1m26.026s
+sys	2m46.483s

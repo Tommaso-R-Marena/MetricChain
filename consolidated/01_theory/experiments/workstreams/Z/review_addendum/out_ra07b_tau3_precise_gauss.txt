@@ -1,0 +1,10 @@
+# Gaussian pair: a = 1.0000000000, h = 0.2500000000, tau_2 = b_2 = 0.5000000000 a
+# how T_2 moves with the effort of the minimisation (three efforts) at a few rates:
+   x = 0.30 h:  T_2/a = 0.285858884  0.285835055  0.285831971   (phi = 0.59925, beta/x = 1.608e-01 at the highest effort);  (x + T_2(x))/a = 0.360831971
+   x = 1.40 h:  T_2/a = 0.113365832  0.113364459  0.113364453   (phi = 0.83924, beta/x = 1.483e-02 at the highest effort);  (x + T_2(x))/a = 0.463364453
+   x = 1.50 h:  T_2/a = 0.103923706  0.103921541  0.103921471   (phi = 0.85337, beta/x = 1.224e-02 at the highest effort);  (x + T_2(x))/a = 0.478921471
+# y + T_2(y) - tau_2 on 75 rates in [0.02h, 3h]: negative on [0.020 h, 1.591 h], first sign change to >= 0 at 1.631 h; max of (y + T_2(y) - tau_2)/a before it: -6.502e-03
+x* = 1.63011049 h = 0.40752762 a;   a tau_2/(a + x*) = 0.35523282 a;   residual of x + T_2(x) - tau_2 at x* with the highest effort: -9.08e-08 a;   T_2'(x*) = -0.3381
+minimum of a S(x)/(a + x) over 40 rates in [x*, 4h]: 0.35523282 a   (so the infimum is at x*: True)
+tau_3 = 0.355233 a;   b_3 = 0.357143 a;   b_3 - tau_3 = 1.910e-03 a;   the optimal outer fraction phi = x*/(a + x*) = 0.2895
+   (ra07_tau3.py, with T_2 interpolated from 1200 rates: 0.361184 a (cube), 0.355233 (Gaussian);  the author's z7_exactness.py: 0.361296 a (cube))

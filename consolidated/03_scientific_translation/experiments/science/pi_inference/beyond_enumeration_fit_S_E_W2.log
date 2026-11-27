@@ -1,0 +1,20 @@
+# S homopeptide on backbone E, chain model with window W = 2, tables refitted on samples (3 rounds of 30000); k_BT at 300 K
+   built S5 on E: 67 atoms, states per site [9], window W=2; 613 GB evaluations for the model tables; 0 s
+      standard deviation of the remainder under the model before each refit: 0.4746, 0.0013, 0.0007
+   S5_E fitted (validation): ln Z(m) = 118.9779;  remainder over 4000 samples of pi_m: mean +0.00001, sd 0.00071, min -0.0058, max +0.0032 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 118.9779 +- 0.00001 (standard error);  exponential-average estimate of K = 2.50e-07;  Bennett W at the sampled floor b = 0.006 and variance: 2.51e-07
+      EXACT (enumeration): ln Z(g) = 118.9779;  E r = -0.00000, sd 0.00069, floor b = 0.016, K = 2.36e-07, Bennett W = 2.37e-07;  first-order error = K;  sampled first-order - exact = -0.00001
+   built S20 on E: 232 atoms, states per site [9], window W=2; 3178 GB evaluations for the model tables; 6 s
+      standard deviation of the remainder under the model before each refit: 1.7622, 0.0183, 0.0038
+   S20_E fitted: ln Z(m) = 287.3297;  remainder over 4000 samples of pi_m: mean +0.00000, sd 0.00220, min -0.0150, max +0.0244 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 287.3297 +- 0.00003 (standard error);  exponential-average estimate of K = 2.42e-06;  Bennett W at the sampled floor b = 0.015 and variance: 2.43e-06
+      (number of rotamer assignments: about 10^19.1; evaluations used for the fit: 90000)
+   built S30 on E: 342 atoms, states per site [9], window W=2; 4888 GB evaluations for the model tables; 12 s
+      standard deviation of the remainder under the model before each refit: 2.0206, 0.0272, 0.0056
+   S30_E fitted: ln Z(m) = 399.5579;  remainder over 4000 samples of pi_m: mean +0.00001, sd 0.00286, min -0.0159, max +0.0246 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 399.5579 +- 0.00005 (standard error);  exponential-average estimate of K = 4.09e-06;  Bennett W at the sampled floor b = 0.016 and variance: 4.11e-06
+      (number of rotamer assignments: about 10^28.6; evaluations used for the fit: 90000)
+
+real	20m23.878s
+user	13m24.553s
+sys	1m9.809s

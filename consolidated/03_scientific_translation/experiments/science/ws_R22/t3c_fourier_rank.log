@@ -1,0 +1,11 @@
+| h | n | hinge torsions | samples | 3^h | residual of the fit on all product functions | control: residual without the degree-h products | rank of the map coefficients -> M | predicted 2h^2+1 |
+|---|---|---|---|---|---|---|---|---|
+| 1 | 16 | [6] | 18 | 3 | 3.6e-14 | 6.3e+00 | 3 | 3 |
+| 2 | 20 | [5, 12] | 54 | 9 | 3.6e-14 | 1.3e+01 | 9 | 9 |
+| 2 | 26 | [7, 16] | 54 | 9 | 8.5e-14 | 8.1e+00 | 9 | 9 |
+| 3 | 26 | [5, 12, 19] | 162 | 27 | 5.5e-13 | 1.5e+01 | 19 | 19 |
+| 3 | 34 | [7, 15, 23] | 162 | 27 | 2.4e-13 | 2.1e+01 | 19 | 19 |
+| 4 | 34 | [5, 12, 19, 26] | 486 | 81 | 2.5e-12 | 1.6e+01 | 33 | 33 |
+| 4 | 44 | [8, 16, 24, 32] | 486 | 81 | 1.1e-12 | 3.2e+01 | 33 | 33 |
+violations of the prediction: 0
+ALL DONE 1.2 s

@@ -1,0 +1,249 @@
+{
+ "alive_after": {
+  "cpsat": false,
+  "milp": false,
+  "plain": false,
+  "producer": false
+ },
+ "cpu": 5,
+ "error": null,
+ "family": "complete",
+ "instances": [
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {},
+    "optimum": null,
+    "upper_bounds": {
+     "plain": -75009
+    }
+   },
+   "alphabets": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "brute": {
+    "seconds": 3.5900002330890857e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 8279,
+   "dense_ints_per_leaf": 3943,
+   "digest": "804fe992281ea772768e8473eda44c6b44d0316712d999910860d63ca73122bd",
+   "dp": {
+    "largest_table": 29160000000000000,
+    "seconds": 0.0011507130002428312,
+    "status": "skipped",
+    "value": null
+   },
+   "edges": 378,
+   "index": 0,
+   "log10_states": 16.464787519645938,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 61813,
+    "best_bound": -84600,
+    "branch_nodes": 7462,
+    "cert_integers": 122233,
+    "check_ops": 696250,
+    "depth": 14,
+    "initial_ub": -75009,
+    "leaf_boxes": 31,
+    "leaf_certificates": 31,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 7492,
+    "root_lp_value": null,
+    "root_value": -151726,
+    "seconds": 60.06299843599936,
+    "shared_by_parent": 1,
+    "shared_by_sibling": 0,
+    "status": "limit",
+    "stop": "time",
+    "sweeps": 1049959,
+    "ub_updates": 0,
+    "upper_bound": -75009,
+    "value": null
+   },
+   "root_lp": {
+    "seconds": 1.3095084340002359,
+    "value": -142153.94373256472
+   },
+   "seconds_instance": 61.37370328099951,
+   "seed": 11407255358202858591,
+   "site_states": 131,
+   "sites": 28,
+   "sparse_instance_integers": 8279,
+   "sparse_ints_per_leaf": 3943
+  },
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {},
+    "optimum": null,
+    "upper_bounds": {
+     "plain": -87155
+    }
+   },
+   "alphabets": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "brute": {
+    "seconds": 8.133999472192954e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 11903,
+   "dense_ints_per_leaf": 4645,
+   "digest": "05ec79436f8524a6dca44ead4109543d9f0eeeb78cc1a13a6f361c5d9112fb0b",
+   "dp": {
+    "largest_table": 11071687500000000000,
+    "seconds": 0.0015445320004801033,
+    "status": "skipped",
+    "value": null
+   },
+   "edges": 378,
+   "index": 1,
+   "log10_states": 19.044213819260364,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 39847,
+    "best_bound": -121077,
+    "branch_nodes": 4452,
+    "cert_integers": 0,
+    "check_ops": 0,
+    "depth": 0,
+    "initial_ub": -87132,
+    "leaf_boxes": 0,
+    "leaf_certificates": 0,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 4452,
+    "root_lp_value": null,
+    "root_value": -191476,
+    "seconds": 60.06716303400026,
+    "shared_by_parent": 0,
+    "shared_by_sibling": 0,
+    "status": "limit",
+    "stop": "time",
+    "sweeps": 730744,
+    "ub_updates": 1,
+    "upper_bound": -87155,
+    "value": null
+   },
+   "root_lp": {
+    "seconds": 3.269179470000381,
+    "value": -179197.62407605417
+   },
+   "seconds_instance": 63.337957398999606,
+   "seed": 4384593075063946352,
+   "site_states": 157,
+   "sites": 28,
+   "sparse_instance_integers": 11903,
+   "sparse_ints_per_leaf": 4645
+  },
+  {
+   "agreement": {
+    "consistent": true,
+    "exact_values": {},
+    "optimum": null,
+    "upper_bounds": {}
+   },
+   "alphabets": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "brute": {
+    "seconds": 4.528000317804981e-06,
+    "status": "skipped",
+    "value": null
+   },
+   "dense_instance_integers": 6761,
+   "dense_ints_per_leaf": 3592,
+   "digest": "dc263ce68ce517f7fa656b75b2ca2879345873696e3fbedb1dfcd66645494253",
+   "dp": {
+    "largest_table": 14946778125000000,
+    "seconds": 0.0012821880000046804,
+    "status": "skipped",
+    "value": null
+   },
+   "edges": 378,
+   "index": 2,
+   "log10_states": 16.17454758775537,
+   "root_lp": {
+    "seconds": 1.0259454240003834,
+    "value": -157188.90079365092
+   },
+   "seconds_instance": 1.027255380000497,
+   "seed": 10350518593684130967,
+   "site_states": 118,
+   "sites": 28,
+   "sparse_instance_integers": 6761,
+   "sparse_ints_per_leaf": 3592
+  }
+ ],
+ "k": "mixed",
+ "limit_hits": {
+  "cpsat": 0,
+  "milp": 0,
+  "plain": 2
+ },
+ "master": "leafcert-bench-v1",
+ "n": 28,
+ "phase": "main",
+ "protocol_version": 1,
+ "seconds": 125.79374384200037,
+ "started_utc": "2026-11-26T23:44:46Z",
+ "summary": {
+  "cpsat_attempted": 0,
+  "cpsat_solved": 0,
+  "inconsistent": 0,
+  "instances": 3,
+  "milp_attempted": 0,
+  "milp_solved": 0,
+  "plain_attempted": 2,
+  "plain_solved": 0,
+  "producer_attempted": 0,
+  "producer_certified": 0
+ },
+ "task": {
+  "caps": {
+   "max_cert_integers": 2000000,
+   "max_check_ops": 20000000,
+   "max_leaves": 1000000
+  },
+  "extension": true,
+  "family": "complete",
+  "file": "complete__kmixed__n28",
+  "id": 208,
+  "instances": [
+   0,
+   1,
+   2
+  ],
+  "k": "mixed",
+  "master": "leafcert-bench-v1",
+  "n": 28,
+  "phase": "main",
+  "run": {
+   "cpsat": false,
+   "milp": false,
+   "plain": true,
+   "producer": false
+  },
+  "time_limit": 60.0
+ },
+ "worker_rss_peak_mb": 488.41796875,
+ "worker_vm_peak_mb": 1414.87109375
+}

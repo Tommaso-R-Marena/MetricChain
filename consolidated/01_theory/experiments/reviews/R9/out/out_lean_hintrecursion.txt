@@ -1,0 +1,17 @@
+'MetricChain.HintRecursion.iterates_lt_hint_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.HintRecursion.superSolution_le_hint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.HintRecursion.step_from_hint_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+@MetricChain.HintRecursion.iterates_lt_hint_add : ∀ {θna θh : ℝ → ℝ} {a h E : ℝ},
+  MetricChain.HintRecursion.HintPair θna θh a h E →
+    ∀ (T : ℕ → ℝ → ℝ),
+      (∀ (k : ℕ), MetricChain.HintRecursion.StepLE θna (T k) (T (k + 1))) →
+        (∀ (k : ℕ) (x : ℝ), 0 < x → T (k + 1) x ≤ T k x) →
+          (∀ (k : ℕ) (x y : ℝ), 0 < x → x ≤ y → T k y ≤ T k x) →
+            (∃ C, ∀ (x : ℝ), 0 < x → T 0 x ≤ C) →
+              (∀ (k : ℕ) (x : ℝ), 0 < x → 0 ≤ T k x) →
+                ∀ {g : ℝ}, 0 < g → g < E → ∀ {η : ℝ}, 0 < η → ∃ k, T k g < θh g + η
+MetricChain.HintRecursion.HintPair : (ℝ → ℝ) → (ℝ → ℝ) → ℝ → ℝ → ℝ → Prop
+
+real	0m18.907s
+user	0m34.520s
+sys	0m1.782s

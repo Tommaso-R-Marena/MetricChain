@@ -1,0 +1,18 @@
+36 random chains (27 binary with 8, 9, 10 sites, 9 ternary with 6 sites)
+(U)  pi = rho e^-g / Z and rho = product over blocks:  max abs deviation 7.77e-16
+(U)  identity ln A_pi(psi) = ln A_rho(psi+g) - ln A_rho(g):  432 residuals, max deviation 2.66e-15
+(U)  psi + g in C_(d+):  largest violation 1.42e-14  (<= 1e-12 means admissible)
+(U)  control: psi + g violates the original envelope d in 429 of 432 cases
+(U)  tightness: smallest slack of d+ left by psi = d(., y0):  -7.11e-15  (0 = attained)
+(L)  marginal on blocks = prod of block marginals * prod rho_j:  max deviation 8.88e-16
+(L)  psi' o proj in C_d: largest violation 2.66e-15;  two-sided bound: 432 residuals, largest violation -1.73e-04 (<= 0 means none)
+(L') 216 residuals on chains with a nonnegative reduced envelope (18 chains skipped):
+     psi = psi' o proj + sum ln rho_j in C_d: largest violation 3.77e-15;  |ln A_pi(psi) - ln A_prod(psi')| <= 1.33e-15
+     control (psi' in C_d instead of C_(d-)): psi violates d in 201 of 216 cases
+
+binary symmetric chain: delta^+-, rho_m, kappa_m
+p=0.4: K=0.4055  delta(0,1)=0.4055  max|rho_m - (1 +- lam^(m+1))| = 1.1e-16  kappa_m (m=0..5) = 0.4055 0.0800 0.0160 0.0032 0.0006 0.0001
+p=0.3: K=0.8473  delta(0,1)=0.8473  max|rho_m - (1 +- lam^(m+1))| = 2.2e-16  kappa_m (m=0..5) = 0.8473 0.3228 0.1282 0.0512 0.0205 0.0082
+p=0.2: K=1.3863  delta(0,1)=1.3863  max|rho_m - (1 +- lam^(m+1))| = 6.7e-16  kappa_m (m=0..5) = 1.3863 0.7538 0.4389 0.2607 0.1558 0.0934
+p=0.1: K=2.1972  delta(0,1)=2.1972  max|rho_m - (1 +- lam^(m+1))| = 3.3e-16  kappa_m (m=0..5) = 2.1972 1.5163 1.1309 0.8703 0.6805 0.5368
+4.8 s

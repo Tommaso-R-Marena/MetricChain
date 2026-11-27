@@ -1,0 +1,8 @@
+R28 ff_flex_width.py  start 2026-11-27T00:45:08Z
+variant A: 905 relaxed points
+   mt cell (240-360, 120-240): effective area relaxed   765.8 deg^2 (sqrt 27.7 deg), rigid on the same points   424.3 (sqrt 20.6); ratio relaxed/rigid 1.80   [control: rigid on the full 2.5-deg grid   394.8; 5-deg/2.5-deg 1.075]   cell minimum above the map minimum: relaxed 0.279, rigid 0.069 kT
+   tp cell (120-240, 0-120): effective area relaxed   596.3 deg^2 (sqrt 24.4 deg), rigid on the same points   430.8 (sqrt 20.8); ratio relaxed/rigid 1.38   [control: rigid on the full 2.5-deg grid   432.7; 5-deg/2.5-deg 0.995]   cell minimum above the map minimum: relaxed 0.000, rigid 0.562 kT
+variant B: 905 relaxed points
+   mt cell (240-360, 120-240): effective area relaxed   758.2 deg^2 (sqrt 27.5 deg), rigid on the same points   424.3 (sqrt 20.6); ratio relaxed/rigid 1.79   [control: rigid on the full 2.5-deg grid   394.8; 5-deg/2.5-deg 1.075]   cell minimum above the map minimum: relaxed 0.256, rigid 0.069 kT
+   tp cell (120-240, 0-120): effective area relaxed   586.8 deg^2 (sqrt 24.2 deg), rigid on the same points   430.8 (sqrt 20.8); ratio relaxed/rigid 1.36   [control: rigid on the full 2.5-deg grid   432.7; 5-deg/2.5-deg 0.995]   cell minimum above the map minimum: relaxed 0.000, rigid 0.562 kT
+END 2026-11-27T00:45:09Z  wall 0.0 s  peak memory 31 MB (ru_maxrss; address space capped at 3 GB)

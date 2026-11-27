@@ -1,0 +1,4 @@
+'MetricChain.TwoRounds.R4.card_distinguished_le_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.TwoRounds.R4.two_round_expected_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.TwoRounds.R4.two_round_expected_cost' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.TwoRounds.R4.two_round_bound_of_class' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,132 @@
+=== fb_S5_E_R3_t0.60 tau=0.7: SSSSS on E, states/site [9, 9, 9, 9, 9]; reference x0 = argmin f = [4, 4, 4, 4, 4]
+    Born radii over the domain: reference values 1.31-2.36 A; relative range (max-min)/ref per atom: max 0.141, mean 0.042   [19s]
+    GB             range   18.399  c_i max   4.927   c_ij max   2.423  half row sum max   3.730   c_ijk max 4.30e-03 sum 1.56e-02
+    GBself         range   22.382  c_i max   5.454   c_ij max   1.204  half row sum max   1.323   c_ijk max 5.86e-03 sum 2.23e-02
+    GBcross        range   25.660  c_i max   7.109   c_ij max   2.887  half row sum max   4.196   c_ijk max 4.89e-03 sum 1.92e-02
+    GBfrozen       range   15.856  c_i max   4.595   c_ij max   2.742  half row sum max   4.031   c_ijk max 1.71e-13 sum 1.55e-12
+    GBfluct        range    4.912  c_i max   1.329   c_ij max   0.351  half row sum max   0.416   c_ijk max 4.30e-03 sum 1.56e-02
+    coul           range   18.146  c_i max   5.255   c_ij max   3.097  half row sum max   4.435   c_ijk max 1.28e-13 sum 1.07e-12
+    coul+GB        range   13.214  c_i max   3.252   c_ij max   0.686  half row sum max   0.775   c_ijk max 4.30e-03 sum 1.56e-02
+    coul+GBfrozen  range   11.095  c_i max   2.441   c_ij max   0.359  half row sum max   0.426   c_ijk max 2.13e-13 sum 1.95e-12
+    coul+GBcross   range   21.043  c_i max   5.231   c_ij max   0.743  half row sum max   0.862   c_ijk max 4.89e-03 sum 1.92e-02
+=== fb_S5_H_R3_t0.60 tau=0.7: SSSSS on H, states/site [9, 9, 6, 6, 6]; reference x0 = argmin f = [7, 7, 0, 2, 2]
+    Born radii over the domain: reference values 1.34-3.78 A; relative range (max-min)/ref per atom: max 0.441, mean 0.103   [6s]
+    GB             range   32.264  c_i max   9.038   c_ij max   2.806  half row sum max   3.706   c_ijk max 5.33e-02 sum 1.47e-01
+    GBself         range   48.606  c_i max  12.860   c_ij max   2.843  half row sum max   2.789   c_ijk max 2.21e-02 sum 4.49e-02
+    GBcross        range   43.701  c_i max  14.102   c_ij max   3.422  half row sum max   4.321   c_ijk max 4.70e-02 sum 1.33e-01
+    GBfrozen       range   28.025  c_i max   9.414   c_ij max   3.663  half row sum max   4.653   c_ijk max 1.42e-13 sum 1.24e-12
+    GBfluct        range   10.460  c_i max   3.698   c_ij max   1.759  half row sum max   1.685   c_ijk max 5.33e-02 sum 1.47e-01
+    coul           range   42.818  c_i max  12.667   c_ij max   5.077  half row sum max   6.126   c_ijk max 1.07e-13 sum 9.17e-13
+    coul+GB        range   19.321  c_i max   6.514   c_ij max   3.217  half row sum max   3.131   c_ijk max 5.33e-02 sum 1.47e-01
+    coul+GBfrozen  range   20.998  c_i max   5.490   c_ij max   1.457  half row sum max   1.479   c_ijk max 1.71e-13 sum 1.62e-12
+    coul+GBcross   range   47.606  c_i max  14.709   c_ij max   2.173  half row sum max   2.105   c_ijk max 4.70e-02 sum 1.33e-01
+=== fb_S5_H_R3_t0.60 tau=0.6: SSSSS on H, states/site [9, 9, 9, 9, 9]; reference x0 = argmin f = [7, 7, 0, 2, 2]
+    Born radii over the domain: reference values 1.34-3.78 A; relative range (max-min)/ref per atom: max 1.453, mean 0.184   [18s]
+    GB             range   38.008  c_i max  11.420   c_ij max   3.042  half row sum max   4.637   c_ijk max 1.94e-01 sum 9.46e-01
+    GBself         range   97.544  c_i max  31.683   c_ij max   3.912  half row sum max   4.584   c_ijk max 1.01e-01 sum 2.31e-01
+    GBcross        range   94.684  c_i max  30.537   c_ij max   3.540  half row sum max   5.317   c_ijk max 2.10e-01 sum 1.00e+00
+    GBfrozen       range   29.485  c_i max  10.021   c_ij max   3.663  half row sum max   5.377   c_ijk max 1.49e-13 sum 1.40e-12
+    GBfluct        range   13.400  c_i max   4.524   c_ij max   2.413  half row sum max   3.151   c_ijk max 1.94e-01 sum 9.46e-01
+    coul           range   49.449  c_i max  15.687   c_ij max   5.077  half row sum max   7.049   c_ijk max 1.14e-13 sum 1.02e-12
+    coul+GB        range   32.374  c_i max  11.190   c_ij max   3.544  half row sum max   4.301   c_ijk max 1.94e-01 sum 9.46e-01
+    coul+GBfrozen  range   28.256  c_i max   7.777   c_ij max   2.414  half row sum max   2.403   c_ijk max 1.99e-13 sum 1.79e-12
+    coul+GBcross   range   99.753  c_i max  34.860   c_ij max   3.267  half row sum max   3.936   c_ijk max 2.10e-01 sum 1.00e+00
+=== fb_L12_H_R3_t0.60 tau=0.6: LLLLLLLLLLLL on H, states/site [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; reference x0 = argmin f = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    Born radii over the domain: reference values 1.39-4.56 A; relative range (max-min)/ref per atom: max 1.347, mean 0.301   [17s]
+    GB             range    3.950  c_i max   1.122   c_ij max   0.515  half row sum max   0.890   c_ijk max 8.47e-02 sum 3.92e+00
+    GBself         range   90.956  c_i max  14.896   c_ij max   2.621  half row sum max   4.023   c_ijk max 1.52e-01 sum 2.67e+00
+    GBcross        range   88.829  c_i max  14.429   c_ij max   3.105  half row sum max   4.540   c_ijk max 1.88e-01 sum 4.80e+00
+    GBfrozen       range    2.359  c_i max   0.447   c_ij max   0.024  half row sum max   0.030   c_ijk max 2.42e-13 sum 2.75e-11
+    GBfluct        range    3.266  c_i max   0.884   c_ij max   0.534  half row sum max   0.910   c_ijk max 8.47e-02 sum 3.92e+00
+    coul           range   17.258  c_i max   1.752   c_ij max   0.016  half row sum max   0.044   c_ijk max 3.41e-13 sum 4.10e-11
+    coul+GB        range   16.092  c_i max   2.118   c_ij max   0.499  half row sum max   0.862   c_ijk max 8.47e-02 sum 3.92e+00
+    coul+GBfrozen  range   14.899  c_i max   1.327   c_ij max   0.040  half row sum max   0.064   c_ijk max 4.55e-13 sum 6.64e-11
+    coul+GBcross   range   81.318  c_i max  13.032   c_ij max   3.088  half row sum max   4.499   c_ijk max 1.88e-01 sum 4.80e+00
+=== fb_F8_H_R3_t0.60 tau=0.6: FFFFFFFF on H, states/site [5, 5, 4, 3, 2, 2, 2, 2]; reference x0 = argmin f = [4, 0, 3, 2, 1, 1, 1, 1]
+    Born radii over the domain: reference values 1.35-4.22 A; relative range (max-min)/ref per atom: max 1.223, mean 0.180   [8s]
+    GB             range    8.341  c_i max   1.577   c_ij max   0.521  half row sum max   0.786   c_ijk max 9.55e-02 sum 3.78e-01
+    GBself         range   39.476  c_i max  11.012   c_ij max   1.077  half row sum max   1.386   c_ijk max 5.40e-02 sum 1.65e-01
+    GBcross        range   34.466  c_i max   9.583   c_ij max   0.920  half row sum max   1.378   c_ijk max 1.39e-01 sum 4.15e-01
+    GBfrozen       range    7.058  c_i max   1.340   c_ij max   0.354  half row sum max   0.568   c_ijk max 7.11e-14 sum 2.85e-12
+    GBfluct        range    4.940  c_i max   1.419   c_ij max   0.496  half row sum max   0.650   c_ijk max 9.55e-02 sum 3.78e-01
+    coul           range   11.903  c_i max   3.165   c_ij max   0.405  half row sum max   0.627   c_ijk max 7.82e-14 sum 2.49e-12
+    coul+GB        range   10.780  c_i max   3.077   c_ij max   0.625  half row sum max   0.795   c_ijk max 9.55e-02 sum 3.78e-01
+    coul+GBfrozen  range    6.507  c_i max   1.902   c_ij max   0.179  half row sum max   0.226   c_ijk max 1.14e-13 sum 4.96e-12
+    coul+GBcross   range   33.791  c_i max   9.244   c_ij max   0.968  half row sum max   1.182   c_ijk max 1.39e-01 sum 4.15e-01
+=== fb_K3_H_R3_t0.60 tau=0.7: KKK on H, states/site [14, 14, 12]; reference x0 = argmin f = [10, 10, 7]
+    Born radii over the domain: reference values 1.39-3.01 A; relative range (max-min)/ref per atom: max 1.265, mean 0.266   [1s]
+    GB             range  100.531  c_i max  51.498   c_ij max  17.669  half row sum max  16.876
+    GBself         range   33.438  c_i max  16.413   c_ij max   5.530  half row sum max   5.490
+    GBcross        range  120.839  c_i max  60.884   c_ij max  21.574  half row sum max  21.222
+    GBfrozen       range  118.780  c_i max  62.480   c_ij max  21.596  half row sum max  21.313
+    GBfluct        range   22.274  c_i max  13.109   c_ij max   6.094  half row sum max   5.923
+    coul           range  122.700  c_i max  64.695   c_ij max  22.656  half row sum max  22.466
+    coul+GB        range   25.819  c_i max  15.128   c_ij max   6.883  half row sum max   6.817
+    coul+GBfrozen  range    4.016  c_i max   2.215   c_ij max   1.246  half row sum max   1.163
+    coul+GBcross   range   15.529  c_i max   6.115   c_ij max   1.767  half row sum max   1.566
+=== fb_K3_H_R3_t0.60 tau=0.6: KKK on H, states/site [30, 29, 21]; reference x0 = argmin f = [15, 14, 11]
+    Born radii over the domain: reference values 1.39-3.01 A; relative range (max-min)/ref per atom: max 2.266, mean 0.672   [8s]
+    GB             range  114.605  c_i max  62.838   c_ij max  29.686  half row sum max  28.274
+    GBself         range   61.069  c_i max  40.702   c_ij max  37.073  half row sum max  36.598
+    GBcross        range  145.669  c_i max  82.253   c_ij max  43.513  half row sum max  40.666
+    GBfrozen       range  160.359  c_i max 100.165   c_ij max  58.501  half row sum max  58.285
+    GBfluct        range   67.785  c_i max  58.903   c_ij max  61.375  half row sum max  58.241
+    coul           range  172.322  c_i max 110.379   c_ij max  66.292  half row sum max  66.292
+    coul+GB        range   79.081  c_i max  68.408   c_ij max  72.653  half row sum max  69.149
+    coul+GBfrozen  range   13.011  c_i max  10.214   c_ij max  11.278  half row sum max  10.907
+    coul+GBcross   range   43.960  c_i max  34.560   c_ij max  35.711  half row sum max  32.866
+=== fb_K4_H_R3_t0.60 tau=0.7: KKKK on H, states/site [14, 14, 12, 7]; reference x0 = argmin f = [3, 10, 8, 2]
+    Born radii over the domain: reference values 1.39-3.56 A; relative range (max-min)/ref per atom: max 1.353, mean 0.279   [12s]
+    GB             range  119.688  c_i max  55.665   c_ij max  19.103  half row sum max  21.990
+    GBself         range   50.639  c_i max  19.432   c_ij max   5.523  half row sum max   5.511
+    GBcross        range  146.835  c_i max  64.592   c_ij max  23.473  half row sum max  26.199
+    GBfrozen       range  140.696  c_i max  66.752   c_ij max  22.628  half row sum max  25.846
+    GBfluct        range   28.251  c_i max  13.312   c_ij max   6.204  half row sum max   6.102
+    coul           range  145.304  c_i max  69.028   c_ij max  23.754  half row sum max  26.990
+    coul+GB        range   32.319  c_i max  15.414   c_ij max   6.962  half row sum max   6.989
+    coul+GBfrozen  range    4.683  c_i max   2.276   c_ij max   1.125  half row sum max   1.149
+    coul+GBcross   range   25.761  c_i max   7.790   c_ij max   1.852  half row sum max   1.729
+=== fb_LKSEc4_H_R3_t0.60 tau=0.6: LKSE on H, states/site [2, 31, 9, 13]; reference x0 = argmin f = [1, 21, 1, 9]
+    Born radii over the domain: reference values 1.34-3.34 A; relative range (max-min)/ref per atom: max 1.615, mean 0.286   [3s]
+    GB             range   62.690  c_i max  32.239   c_ij max  11.144  half row sum max  11.463
+    GBself         range   62.067  c_i max  27.916   c_ij max  12.549  half row sum max   9.584
+    GBcross        range   90.541  c_i max  43.311   c_ij max  10.849  half row sum max  11.667
+    GBfrozen       range   66.134  c_i max  35.955   c_ij max  10.670  half row sum max   9.876
+    GBfluct        range   21.060  c_i max  14.509   c_ij max   8.657  half row sum max   5.384
+    coul           range   77.534  c_i max  38.447   c_ij max  11.637  half row sum max  11.651
+    coul+GB        range   29.537  c_i max  16.540   c_ij max  12.496  half row sum max   7.657
+    coul+GBfrozen  range   16.641  c_i max   8.995   c_ij max   4.427  half row sum max   2.780
+    coul+GBcross   range   54.926  c_i max  27.753   c_ij max   8.960  half row sum max   8.229
+=== fb_LKSEc5_H_R3_t0.60 tau=0.6: LKSEL on H, states/site [2, 31, 9, 13, 2]; reference x0 = argmin f = [1, 21, 1, 3, 1]
+    Born radii over the domain: reference values 1.35-4.54 A; relative range (max-min)/ref per atom: max 1.644, mean 0.329   [10s]
+    GB             range   62.550  c_i max  32.934   c_ij max  11.160  half row sum max  12.324
+    GBself         range   85.534  c_i max  28.235   c_ij max  12.602  half row sum max   9.707
+    GBcross        range  106.943  c_i max  44.190   c_ij max  10.794  half row sum max  13.515
+    GBfrozen       range   65.180  c_i max  35.122   c_ij max  10.668  half row sum max  10.340
+    GBfluct        range   24.780  c_i max  14.606   c_ij max   8.820  half row sum max   6.176
+    coul           range   77.202  c_i max  39.803   c_ij max  11.637  half row sum max  12.138
+    coul+GB        range   34.132  c_i max  16.673   c_ij max  12.584  half row sum max   8.178
+    coul+GBfrozen  range   17.965  c_i max   9.655   c_ij max   4.591  half row sum max   2.851
+    coul+GBcross   range   74.389  c_i max  28.086   c_ij max   9.038  half row sum max   8.708
+=== fb_V8_E_R3_t0.60 tau=0.7: VVVVVVVV on E, states/site [3, 3, 3, 3, 3, 3, 3, 3]; reference x0 = argmin f = [1, 1, 1, 1, 1, 1, 1, 1]
+    Born radii over the domain: reference values 1.35-2.88 A; relative range (max-min)/ref per atom: max 0.320, mean 0.104   [9s]
+    GB             range    2.883  c_i max   0.439   c_ij max   0.115  half row sum max   0.163   c_ijk max 5.85e-03 sum 4.80e-02
+    GBself         range    7.526  c_i max   2.796   c_ij max   0.554  half row sum max   0.939   c_ijk max 1.96e-02 sum 1.31e-01
+    GBcross        range    6.419  c_i max   2.425   c_ij max   0.506  half row sum max   0.791   c_ijk max 1.69e-02 sum 1.13e-01
+    GBfrozen       range    0.552  c_i max   0.121   c_ij max   0.036  half row sum max   0.045   c_ijk max 1.07e-13 sum 4.75e-12
+    GBfluct        range    2.515  c_i max   0.371   c_ij max   0.109  half row sum max   0.138   c_ijk max 5.85e-03 sum 4.80e-02
+    coul           range    5.310  c_i max   0.678   c_ij max   0.008  half row sum max   0.010   c_ijk max 1.99e-13 sum 5.71e-12
+    coul+GB        range    3.908  c_i max   0.656   c_ij max   0.116  half row sum max   0.171   c_ijk max 5.85e-03 sum 4.80e-02
+    coul+GBfrozen  range    5.183  c_i max   0.727   c_ij max   0.042  half row sum max   0.052   c_ijk max 2.84e-13 sum 1.17e-11
+    coul+GBcross   range    8.373  c_i max   3.080   c_ij max   0.500  half row sum max   0.784   c_ijk max 1.69e-02 sum 1.13e-01
+=== fb_K3_E_R3_t0.60 tau=0.7: KKK on E, states/site [13, 21, 21]; reference x0 = argmin f = [4, 10, 10]
+    Born radii over the domain: reference values 1.35-2.64 A; relative range (max-min)/ref per atom: max 1.256, mean 0.254   [3s]
+    GB             range   54.619  c_i max  39.292   c_ij max  41.427  half row sum max  26.790
+    GBself         range   39.909  c_i max  27.174   c_ij max  16.286  half row sum max   8.655
+    GBcross        range   86.980  c_i max  60.420   c_ij max  48.340  half row sum max  30.619
+    GBfrozen       range   79.553  c_i max  59.928   c_ij max  46.977  half row sum max  29.696
+    GBfluct        range   31.439  c_i max  24.832   c_ij max  19.542  half row sum max  10.027
+    coul           range   85.441  c_i max  64.979   c_ij max  51.480  half row sum max  32.029
+    coul+GB        range   36.857  c_i max  29.442   c_ij max  23.973  half row sum max  12.306
+    coul+GBfrozen  range    6.232  c_i max   5.050   c_ij max   4.503  half row sum max   2.333
+    coul+GBcross   range   15.456  c_i max  10.763   c_ij max   8.277  half row sum max   4.504

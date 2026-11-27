@@ -1,0 +1,42 @@
+R27 item4_worstcase.py started 2026-11-26T23:35:12Z  budget 480 s
+
+columns: sigma (rms distance error, A) | worst RMSD found (A) [which start] | first-order worst case sigma sqrt(N/n)/s_7 | ratio found/first-order | bound of Theorem L as an RMSD (uniform constant, ||eta|| computed from the Y found) | radius of gyration | max |distance error| of the Y found
+
+helix-like n=12: N = 38 pairs, s_7 = 0.4229, first-order RMSD per unit rms distance error = 4.208, C_L = 184.5, R_g = 5.66 A
+    0.01 |    0.042 [soft mode 1] |    0.042 |   1.00 |      34.86 |   5.66 | 0.020   (rms achieved 0.0100; d_P/||eta|| = 0.223)
+    0.03 |    0.127 [soft mode 1] |    0.126 |   1.01 |      104.3 |   5.66 | 0.060   (rms achieved 0.0300; d_P/||eta|| = 0.225)
+    0.10 |    0.434 [continuation from the previous sigma] |    0.421 |   1.03 |        345 |   5.66 | 0.191   (rms achieved 0.1000; d_P/||eta|| = 0.232)
+    0.20 |    0.902 [continuation from the previous sigma] |    0.842 |   1.07 |      683.9 |   5.66 | 0.364   (rms achieved 0.2000; d_P/||eta|| = 0.243)
+    0.30 |    1.418 [continuation from the previous sigma] |    1.262 |   1.12 |       1018 |   5.66 | 0.533   (rms achieved 0.3000; d_P/||eta|| = 0.257)
+    0.50 |    6.354 [reflected tail, pulled back] |    2.104 |   3.02 |       1763 |   5.66 | 1.172   (rms achieved 0.5000; d_P/||eta|| = 0.665)
+    1.00 |    6.867 [random cloud, pulled back] |    4.208 |   1.63 |       4012 |   5.66 | 1.808   (rms achieved 1.0000; d_P/||eta|| = 0.316)
+
+helix-like n=20: N = 70 pairs, s_7 = 0.2088, first-order RMSD per unit rms distance error = 8.960, C_L = 455.7, R_g = 8.95 A
+    0.01 |    0.090 [mixture of soft modes] |    0.090 |   1.00 |      96.48 |   8.95 | 0.026   (rms achieved 0.0100; d_P/||eta|| = 0.423)
+    0.03 |    0.269 [continuation from the previous sigma] |    0.269 |   1.00 |      289.3 |   8.95 | 0.081   (rms achieved 0.0300; d_P/||eta|| = 0.424)
+    0.10 |    0.907 [continuation from the previous sigma] |    0.896 |   1.01 |      959.3 |   8.95 | 0.279   (rms achieved 0.1000; d_P/||eta|| = 0.431)
+   sigma = 0.2: no feasible end point
+    0.30 |    9.950 [mixture of soft modes] |    2.688 |   3.70 |       2696 |   8.95 | 1.116   (rms achieved 0.3000; d_P/||eta|| = 1.682)
+    0.50 |   10.259 [soft mode 3] |    4.480 |   2.29 |       4970 |   8.95 | 1.245   (rms achieved 0.5000; d_P/||eta|| = 0.941)
+    1.00 |   10.646 [mixture of soft modes] |    8.960 |   1.19 |  1.103e+04 |   8.95 | 2.211   (rms achieved 1.0000; d_P/||eta|| = 0.440)
+
+strand-like 160 n=12: N = 38 pairs, s_7 = 0.0308, first-order RMSD per unit rms distance error = 57.816, C_L = 1784, R_g = 11.43 A
+    0.01 |    0.579 [soft mode 2] |    0.578 |   1.00 |      524.9 |  11.43 | 0.027   (rms achieved 0.0100; d_P/||eta|| = 1.968)
+    0.03 |    1.750 [soft mode 3] |    1.734 |   1.01 |       1970 |  11.43 | 0.075   (rms achieved 0.0300; d_P/||eta|| = 1.585)
+    0.10 |    4.330 [mixture of soft modes] |    5.782 |   0.75 |       6626 |  11.43 | 0.168   (rms achieved 0.1000; d_P/||eta|| = 1.166)
+    0.20 |    6.481 [continuation from the previous sigma] |   11.563 |   0.56 |  1.226e+04 |  11.43 | 0.453   (rms achieved 0.2000; d_P/||eta|| = 0.943)
+    0.30 |    7.973 [soft mode 2] |   17.345 |   0.46 |  1.929e+04 |  11.43 | 0.587   (rms achieved 0.3000; d_P/||eta|| = 0.737)
+    0.50 |   10.066 [reflected tail, pulled back] |   28.908 |   0.35 |  3.283e+04 |  11.43 | 1.036   (rms achieved 0.5000; d_P/||eta|| = 0.547)
+    1.00 |   12.916 [reflected tail, pulled back] |   57.816 |   0.22 |  6.305e+04 |  11.43 | 2.238   (rms achieved 1.0000; d_P/||eta|| = 0.366)
+
+strand-like 160 n=20: N = 70 pairs, s_7 = 0.0134, first-order RMSD per unit rms distance error = 140.061, C_L = 4406, R_g = 19.05 A
+    0.01 |    1.371 [random direction] |    1.401 |   0.98 |       1406 |  19.05 | 0.035   (rms achieved 0.0100; d_P/||eta|| = 4.297)
+    0.03 |    3.195 [soft mode 1] |    4.202 |   0.76 |       4480 |  19.05 | 0.082   (rms achieved 0.0300; d_P/||eta|| = 3.142)
+    0.10 |   12.002 [random direction] |   14.006 |   0.86 |  1.446e+04 |  19.05 | 0.338   (rms achieved 0.1000; d_P/||eta|| = 3.656)
+    0.20 |   18.620 [mixture of soft modes] |   28.012 |   0.66 |  3.282e+04 |  19.05 | 0.488   (rms achieved 0.2000; d_P/||eta|| = 2.500)
+    0.30 |   21.159 [random direction] |   42.018 |   0.50 |   4.97e+04 |  19.05 | 0.745   (rms achieved 0.3000; d_P/||eta|| = 1.876)
+    0.50 |   21.437 [reflected tail, pulled back] |   70.030 |   0.31 |  8.669e+04 |  19.05 | 1.212   (rms achieved 0.5000; d_P/||eta|| = 1.090)
+    1.00 |   21.809 [mixture of soft modes] |  140.061 |   0.16 |  1.882e+05 |  19.05 | 1.783   (rms achieved 1.0000; d_P/||eta|| = 0.511)
+
+control: every reported Y satisfies the constraint (rms distance misfit <= sigma) by construction; the first-order prediction must be recovered at the smallest sigma (ratio ~ 1): see the first row of each case.
+ALL DONE 2026-11-26T23:36:33Z  81.7 s  peak memory 77 MB

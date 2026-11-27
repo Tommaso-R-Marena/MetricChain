@@ -1,0 +1,28 @@
+p=0.1 u=2.0 eps1=0.063688 (= 0.3 x class threshold 0.212294)
+  formulas: R_0=0.019497 (m*=0.399)  max_gamma R_gamma=0.023270 (gamma*=-0.5634, m*=0.537)  theta_na=0.036246 (m*=0.520)
+  n=1000: g=0: 0.021964 (m=0.399)  additive gamma*: 0.025517 (m=0.537)  H: 0.024696 (m=0.537)  cone flattened: 0.040825 (m=0.520)   [9s]
+  n=2000: g=0: 0.020949 (m=0.400)  additive gamma*: 0.024553 (m=0.537)  H: 0.024068 (m=0.537)  cone flattened: 0.038801 (m=0.520)   [47s]
+  n=4000: g=0: 0.020254 (m=0.400)  additive gamma*: 0.023996 (m=0.537)  H: 0.023718 (m=0.537)  cone flattened: 0.037666 (m=0.520)   [211s]
+  extrapolated a of a + b ln(n)/n + c/n (last three sizes): g=0: 0.019185   additive: 0.023286   H: 0.023297   non-adaptive: 0.036281
+  formulas:                                                 g=0: 0.019497   additive: 0.023270   H: 0.023270   non-adaptive: 0.036246
+p=0.3 u=1.0 eps1=0.030939 (= 0.3 x class threshold 0.103131)
+  formulas: R_0=0.012049 (m*=0.468)  max_gamma R_gamma=0.012209 (gamma*=-0.0818, m*=0.510)  theta_na=0.019941 (m*=0.504)
+  n=1000: g=0: 0.014329 (m=0.468)  additive gamma*: 0.014413 (m=0.510)  H: 0.013607 (m=0.510)  cone flattened: 0.024633 (m=0.504)   [7s]
+  n=2000: g=0: 0.013460 (m=0.469)  additive gamma*: 0.013481 (m=0.509)  H: 0.013016 (m=0.509)  cone flattened: 0.022577 (m=0.504)   [41s]
+  n=4000: g=0: 0.012827 (m=0.469)  additive gamma*: 0.012931 (m=0.509)  H: 0.012664 (m=0.509)  cone flattened: 0.021404 (m=0.504)   [211s]
+  extrapolated a of a + b ln(n)/n + c/n (last three sizes): g=0: 0.011793   additive: 0.012216   H: 0.012199   non-adaptive: 0.019938
+  formulas:                                                 g=0: 0.012049   additive: 0.012209   H: 0.012209   non-adaptive: 0.019941
+p=0.05 u=2.0 eps1=0.012477 (= 0.1 x class threshold 0.124767)
+  formulas: R_0=0.019026 (m*=0.345)  max_gamma R_gamma=0.022897 (gamma*=-0.7052, m*=0.520)  theta_na=0.047452 (m*=0.472)
+  n=1000: g=0: 0.021735 (m=0.345)  additive gamma*: 0.024876 (m=0.520)  H: 0.024215 (m=0.520)  cone flattened: 0.053815 (m=0.472)   [9s]
+  n=2000: g=0: 0.020443 (m=0.345)  additive gamma*: 0.024048 (m=0.519)  H: 0.023473 (m=0.519)  cone flattened: 0.051117 (m=0.472)   [46s]
+  n=4000: g=0: 0.019779 (m=0.345)  additive gamma*: 0.023574 (m=0.520)  H: 0.023233 (m=0.520)  cone flattened: 0.049500 (m=0.472)   [208s]
+  extrapolated a of a + b ln(n)/n + c/n (last three sizes): g=0: 0.019080   additive: 0.022980   H: 0.023253   non-adaptive: 0.047348
+  formulas:                                                 g=0: 0.019026   additive: 0.022897   H: 0.022897   non-adaptive: 0.047452
+p=0.2 u=4.0 eps1=0.351365 (= 0.3 x class threshold 1.171218)
+  formulas: R_0=0.086324 (m*=0.424)  max_gamma R_gamma=0.100321 (gamma*=-0.8645, m*=0.535)  theta_na=0.139401 (m*=0.526)
+  n=1000: g=0: 0.089276 (m=0.424)  additive gamma*: 0.102954 (m=0.535)  H: 0.101968 (m=0.535)  cone flattened: 0.143927 (m=0.526)   [8s]
+  n=2000: g=0: 0.088015 (m=0.423)  additive gamma*: 0.101807 (m=0.535)  H: 0.101313 (m=0.535)  cone flattened: 0.141920 (m=0.526)   [46s]
+  n=4000: g=0: 0.087142 (m=0.423)  additive gamma*: 0.101132 (m=0.535)  H: 0.100881 (m=0.535)  cone flattened: 0.140785 (m=0.526)   [210s]
+  extrapolated a of a + b ln(n)/n + c/n (last three sizes): g=0: 0.085784   additive: 0.100253   H: 0.100238   non-adaptive: 0.139386
+  formulas:                                                 g=0: 0.086324   additive: 0.100321   H: 0.100321   non-adaptive: 0.139401

@@ -1,0 +1,211 @@
+S1 = S on P2 (-75.0, 145.0), grid R3: atoms 23, sites 1, states/site [9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [9]; product 9
+   GB 9/9  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.5e-13, tors 5.3e-15, lj_rel 2.9e-15, coul 3.6e-14, clash 0.0e+00, ff03_rel 3.9e-15, ff15ipq_rel 6.0e-15, ff99SB_rel 2.6e-15, gb_vs_OpenMM_CPU 2.6e-05
+   done: 9 assignments; setup+tables 0.3s, GB 0.0s (198 us/conf); pair-clash-free at 0.70: 9, at 0.6: 9; -> data/fb_S1_P2_R3_t0.60.npz
+S2 = SS on P2 (-75.0, 145.0), grid R3: atoms 34, sites 2, states/site [9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [9, 9]; product 81
+   GB 81/81  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 3.1e-13, tors 1.4e-14, lj_rel 1.1e-14, coul 6.4e-14, clash 0.0e+00, ff03_rel 3.0e-14, ff15ipq_rel 6.5e-15, ff99SB_rel 2.7e-15, gb_vs_OpenMM_CPU 8.5e-06
+   done: 81 assignments; setup+tables 0.2s, GB 0.0s (50 us/conf); pair-clash-free at 0.70: 81, at 0.6: 81; -> data/fb_S2_P2_R3_t0.60.npz
+S3 = SSS on P2 (-75.0, 145.0), grid R3: atoms 45, sites 3, states/site [9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [9, 9, 9]; product 729
+   GB 729/729  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 6.1e-13, tors 1.4e-14, lj_rel 1.1e-14, coul 1.4e-13, clash 0.0e+00, ff03_rel 7.2e-14, ff15ipq_rel 1.2e-14, ff99SB_rel 8.9e-15, gb_vs_OpenMM_CPU 8.1e-06
+   done: 729 assignments; setup+tables 0.3s, GB 0.0s (50 us/conf); pair-clash-free at 0.70: 729, at 0.6: 729; -> data/fb_S3_P2_R3_t0.60.npz
+S4 = SSSS on P2 (-75.0, 145.0), grid R3: atoms 56, sites 4, states/site [9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [9, 9, 9, 9]; product 6561
+   GB 6561/6561  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.5e-12, tors 2.1e-14, lj_rel 1.8e-14, coul 1.8e-13, clash 0.0e+00, ff03_rel 1.0e-14, ff15ipq_rel 4.0e-14, ff99SB_rel 5.4e-14, gb_vs_OpenMM_CPU 2.9e-05
+   done: 6561 assignments; setup+tables 0.3s, GB 0.3s (38 us/conf); pair-clash-free at 0.70: 6561, at 0.6: 6561; -> data/fb_S4_P2_R3_t0.60.npz
+S5 = SSSSS on P2 (-75.0, 145.0), grid R3: atoms 67, sites 5, states/site [9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [9, 9, 9, 9, 9]; product 59049
+   GB 16384/59049  1s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.9e-12, tors 3.6e-14, lj_rel 2.9e-14, coul 2.6e-13, clash 0.0e+00, ff03_rel 1.0e-14, ff15ipq_rel 5.8e-14, ff99SB_rel 1.5e-13, gb_vs_OpenMM_CPU 1.5e-05
+   done: 59049 assignments; setup+tables 0.4s, GB 3.0s (51 us/conf); pair-clash-free at 0.70: 59049, at 0.6: 59049; -> data/fb_S5_P2_R3_t0.60.npz
+S6 = SSSSSS on P2 (-75.0, 145.0), grid R3: atoms 78, sites 6, states/site [9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [9, 9, 9, 9, 9, 9]; product 531441
+   GB 16384/531441  1s
+   GB 147456/531441  11s
+   GB 278528/531441  21s
+   GB 409600/531441  30s
+   GB 531441/531441  39s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.5e-12, tors 5.7e-14, lj_rel 2.1e-14, coul 2.9e-13, clash 0.0e+00, ff03_rel 5.4e-15, ff15ipq_rel 6.0e-14, ff99SB_rel 2.0e-13, gb_vs_OpenMM_CPU 1.3e-05
+   done: 531441 assignments; setup+tables 1.0s, GB 39.3s (74 us/conf); pair-clash-free at 0.70: 531441, at 0.6: 531441; -> data/fb_S6_P2_R3_t0.60.npz
+S7 = SSSSSSS on P2 (-75.0, 145.0), grid R3: atoms 89, sites 7, states/site [9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [9, 9, 9, 9, 9, 9, 9]; product 4782969
+too large (> 1100000); not enumerated
+V1 = V on P2 (-75.0, 145.0), grid R3: atoms 28, sites 1, states/site [3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3]; product 3
+   GB 3/3  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 8.2e-14, tors 3.6e-15, lj_rel 1.3e-15, coul 5.7e-14, clash 1.1e-16, ff03_rel 6.8e-16, ff15ipq_rel 1.4e-15, ff99SB_rel 1.3e-15, gb_vs_OpenMM_CPU 2.3e-05
+   done: 3 assignments; setup+tables 0.2s, GB 0.0s (832 us/conf); pair-clash-free at 0.70: 3, at 0.6: 3; -> data/fb_V1_P2_R3_t0.60.npz
+V2 = VV on P2 (-75.0, 145.0), grid R3: atoms 44, sites 2, states/site [3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3]; product 9
+   GB 9/9  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 3.6e-13, tors 1.1e-14, lj_rel 2.6e-15, coul 1.3e-13, clash 2.2e-16, ff03_rel 1.0e-14, ff15ipq_rel 2.6e-15, ff99SB_rel 2.2e-15, gb_vs_OpenMM_CPU 2.3e-05
+   done: 9 assignments; setup+tables 0.3s, GB 0.0s (425 us/conf); pair-clash-free at 0.70: 9, at 0.6: 9; -> data/fb_V2_P2_R3_t0.60.npz
+V3 = VVV on P2 (-75.0, 145.0), grid R3: atoms 60, sites 3, states/site [3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3]; product 27
+   GB 27/27  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 6.6e-13, tors 1.8e-14, lj_rel 5.7e-15, coul 1.1e-13, clash 3.3e-16, ff03_rel 5.1e-14, ff15ipq_rel 1.5e-15, ff99SB_rel 3.5e-15, gb_vs_OpenMM_CPU 1.1e-05
+   done: 27 assignments; setup+tables 0.3s, GB 0.0s (176 us/conf); pair-clash-free at 0.70: 27, at 0.6: 27; -> data/fb_V3_P2_R3_t0.60.npz
+V4 = VVVV on P2 (-75.0, 145.0), grid R3: atoms 76, sites 4, states/site [3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3]; product 81
+   GB 81/81  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.1e-12, tors 1.4e-14, lj_rel 5.6e-15, coul 1.7e-13, clash 5.6e-16, ff03_rel 1.1e-14, ff15ipq_rel 2.2e-15, ff99SB_rel 3.0e-15, gb_vs_OpenMM_CPU 7.3e-06
+   done: 81 assignments; setup+tables 0.6s, GB 0.0s (200 us/conf); pair-clash-free at 0.70: 81, at 0.6: 81; -> data/fb_V4_P2_R3_t0.60.npz
+V5 = VVVVV on P2 (-75.0, 145.0), grid R3: atoms 92, sites 5, states/site [3, 3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3, 3]; product 243
+   GB 243/243  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.4e-12, tors 2.1e-14, lj_rel 8.3e-15, coul 1.4e-13, clash 5.6e-16, ff03_rel 8.0e-15, ff15ipq_rel 2.8e-15, ff99SB_rel 3.7e-15, gb_vs_OpenMM_CPU 3.6e-05
+   done: 243 assignments; setup+tables 0.3s, GB 0.0s (114 us/conf); pair-clash-free at 0.70: 243, at 0.6: 243; -> data/fb_V5_P2_R3_t0.60.npz
+V6 = VVVVVV on P2 (-75.0, 145.0), grid R3: atoms 108, sites 6, states/site [3, 3, 3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3, 3, 3]; product 729
+   GB 729/729  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.8e-12, tors 5.0e-14, lj_rel 1.0e-14, coul 3.4e-13, clash 5.6e-16, ff03_rel 5.2e-15, ff15ipq_rel 3.9e-15, ff99SB_rel 4.3e-15, gb_vs_OpenMM_CPU 1.6e-05
+   done: 729 assignments; setup+tables 0.4s, GB 0.1s (131 us/conf); pair-clash-free at 0.70: 729, at 0.6: 729; -> data/fb_V6_P2_R3_t0.60.npz
+V7 = VVVVVVV on P2 (-75.0, 145.0), grid R3: atoms 124, sites 7, states/site [3, 3, 3, 3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3, 3, 3, 3]; product 2187
+   GB 2187/2187  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 3.3e-12, tors 5.7e-14, lj_rel 7.9e-15, coul 5.7e-13, clash 5.6e-16, ff03_rel 6.4e-15, ff15ipq_rel 3.9e-15, ff99SB_rel 4.6e-15, gb_vs_OpenMM_CPU 1.7e-05
+   done: 2187 assignments; setup+tables 0.4s, GB 0.4s (184 us/conf); pair-clash-free at 0.70: 2187, at 0.6: 2187; -> data/fb_V7_P2_R3_t0.60.npz
+V8 = VVVVVVVV on P2 (-75.0, 145.0), grid R3: atoms 140, sites 8, states/site [3, 3, 3, 3, 3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3, 3, 3, 3, 3]; product 6561
+   GB 6561/6561  2s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 4.6e-12, tors 7.1e-14, lj_rel 7.8e-15, coul 6.0e-13, clash 5.6e-16, ff03_rel 9.0e-15, ff15ipq_rel 4.7e-15, ff99SB_rel 8.2e-15, gb_vs_OpenMM_CPU 3.5e-05
+   done: 6561 assignments; setup+tables 0.4s, GB 1.6s (245 us/conf); pair-clash-free at 0.70: 6561, at 0.6: 6561; -> data/fb_V8_P2_R3_t0.60.npz
+V10 = VVVVVVVVVV on P2 (-75.0, 145.0), grid R3: atoms 172, sites 10, states/site [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; product 59049
+   GB 16384/59049  6s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 6.4e-12, tors 1.1e-13, lj_rel 1.2e-14, coul 7.4e-13, clash 5.6e-16, ff03_rel 7.5e-15, ff15ipq_rel 5.6e-15, ff99SB_rel 7.5e-15, gb_vs_OpenMM_CPU 3.3e-05
+   done: 59049 assignments; setup+tables 0.8s, GB 23.1s (390 us/conf); pair-clash-free at 0.70: 59049, at 0.6: 59049; -> data/fb_V10_P2_R3_t0.60.npz
+V12 = VVVVVVVVVVVV on P2 (-75.0, 145.0), grid R3: atoms 204, sites 12, states/site [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; product 531441
+   GB 16384/531441  10s
+   GB 147456/531441  106s
+   GB 278528/531441  341s
+   GB 409600/531441  603s
+   GB 531441/531441  904s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 7.0e-12, tors 1.3e-13, lj_rel 1.1e-14, coul 1.3e-12, clash 5.6e-16, ff03_rel 6.1e-15, ff15ipq_rel 5.3e-15, ff99SB_rel 9.6e-15, gb_vs_OpenMM_CPU 4.2e-05
+   done: 531441 assignments; setup+tables 4.6s, GB 903.7s (1700 us/conf); pair-clash-free at 0.70: 531441, at 0.6: 531441; -> data/fb_V12_P2_R3_t0.60.npz
+V14 = VVVVVVVVVVVVVV on P2 (-75.0, 145.0), grid R3: atoms 236, sites 14, states/site [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; product 4782969
+too large (> 1100000); not enumerated
+F1 = F on P2 (-75.0, 145.0), grid R3: atoms 32, sites 1, states/site [9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [7]; product 7
+   GB 7/7  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.4e-13, tors 5.3e-15, lj_rel 1.2e-14, coul 7.8e-14, clash 1.1e-16, ff03_rel 9.4e-15, ff15ipq_rel 5.4e-14, ff99SB_rel 1.7e-14, gb_vs_OpenMM_CPU 1.5e-05
+   done: 7 assignments; setup+tables 0.8s, GB 0.0s (1619 us/conf); pair-clash-free at 0.70: 7, at 0.6: 7; -> data/fb_F1_P2_R3_t0.60.npz
+F2 = FF on P2 (-75.0, 145.0), grid R3: atoms 52, sites 2, states/site [9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [6, 7]; product 42
+   GB 42/42  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 5.4e-13, tors 1.1e-14, lj_rel 4.5e-15, coul 6.4e-14, clash 1.1e-16, ff03_rel 3.6e-14, ff15ipq_rel 2.1e-14, ff99SB_rel 4.2e-14, gb_vs_OpenMM_CPU 1.4e-05
+   done: 42 assignments; setup+tables 0.7s, GB 0.0s (507 us/conf); pair-clash-free at 0.70: 41, at 0.6: 41; -> data/fb_F2_P2_R3_t0.60.npz
+F3 = FFF on P2 (-75.0, 145.0), grid R3: atoms 72, sites 3, states/site [9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [6, 6, 7]; product 252
+   GB 252/252  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 8.7e-13, tors 7.1e-15, lj_rel 4.7e-15, coul 1.2e-13, clash 1.1e-16, ff03_rel 1.1e-14, ff15ipq_rel 4.7e-14, ff99SB_rel 1.7e-14, gb_vs_OpenMM_CPU 1.4e-05
+   done: 252 assignments; setup+tables 1.1s, GB 0.1s (364 us/conf); pair-clash-free at 0.70: 239, at 0.6: 239; -> data/fb_F3_P2_R3_t0.60.npz
+F4 = FFFF on P2 (-75.0, 145.0), grid R3: atoms 92, sites 4, states/site [9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [6, 6, 6, 7]; product 1512
+   GB 1512/1512  1s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.4e-12, tors 2.1e-14, lj_rel 8.2e-15, coul 1.3e-13, clash 2.2e-16, ff03_rel 6.6e-15, ff15ipq_rel 2.5e-13, ff99SB_rel 8.8e-15, gb_vs_OpenMM_CPU 1.5e-05
+   done: 1512 assignments; setup+tables 1.3s, GB 0.8s (515 us/conf); pair-clash-free at 0.70: 1306, at 0.6: 1335; -> data/fb_F4_P2_R3_t0.60.npz
+F5 = FFFFF on P2 (-75.0, 145.0), grid R3: atoms 112, sites 5, states/site [9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [6, 6, 6, 6, 7]; product 9072
+   GB 9072/9072  5s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.7e-12, tors 4.3e-14, lj_rel 8.1e-15, coul 1.6e-13, clash 3.3e-16, ff03_rel 4.8e-15, ff15ipq_rel 6.8e-14, ff99SB_rel 6.3e-15, gb_vs_OpenMM_CPU 9.6e-06
+   done: 9072 assignments; setup+tables 1.4s, GB 5.3s (582 us/conf); pair-clash-free at 0.70: 7033, at 0.6: 7385; -> data/fb_F5_P2_R3_t0.60.npz
+F6 = FFFFFF on P2 (-75.0, 145.0), grid R3: atoms 132, sites 6, states/site [9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [6, 6, 6, 6, 6, 7]; product 54432
+   GB 16384/54432  14s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.9e-12, tors 4.3e-14, lj_rel 1.0e-14, coul 2.1e-13, clash 5.6e-16, ff03_rel 7.5e-15, ff15ipq_rel 5.3e-14, ff99SB_rel 7.5e-15, gb_vs_OpenMM_CPU 7.5e-06
+   done: 54432 assignments; setup+tables 2.3s, GB 41.6s (764 us/conf); pair-clash-free at 0.70: 37883, at 0.6: 40849; -> data/fb_F6_P2_R3_t0.60.npz
+F7 = FFFFFFF on P2 (-75.0, 145.0), grid R3: atoms 152, sites 7, states/site [9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [6, 6, 6, 6, 6, 6, 7]; product 326592
+   GB 16384/326592  16s
+   GB 147456/326592  178s
+   GB 278528/326592  443s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 2.3e-12, tors 6.4e-14, lj_rel 8.1e-15, coul 2.2e-13, clash 5.6e-16, ff03_rel 5.6e-15, ff15ipq_rel 7.8e-14, ff99SB_rel 6.6e-15, gb_vs_OpenMM_CPU 2.7e-05
+   done: 326592 assignments; setup+tables 3.7s, GB 536.1s (1642 us/conf); pair-clash-free at 0.70: 203018, at 0.6: 225451; -> data/fb_F7_P2_R3_t0.60.npz
+F8 = FFFFFFFF on P2 (-75.0, 145.0), grid R3: atoms 172, sites 8, states/site [9, 9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [6, 6, 6, 6, 6, 6, 6, 7]; product 1959552
+too large (> 1100000); not enumerated
+L1 = L on P2 (-75.0, 145.0), grid R3: atoms 31, sites 1, states/site [9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2]; product 2
+   GB 2/2  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.8e-13, tors 0.0e+00, lj_rel 2.7e-15, coul 8.5e-14, clash 2.2e-16, ff03_rel 6.0e-15, ff15ipq_rel 1.9e-15, ff99SB_rel 3.3e-15, gb_vs_OpenMM_CPU 1.5e-05
+   done: 2 assignments; setup+tables 1.5s, GB 0.0s (11327 us/conf); pair-clash-free at 0.70: 2, at 0.6: 2; -> data/fb_L1_P2_R3_t0.60.npz
+L2 = LL on P2 (-75.0, 145.0), grid R3: atoms 50, sites 2, states/site [9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2]; product 4
+   GB 4/4  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 4.2e-13, tors 1.4e-14, lj_rel 4.3e-15, coul 1.1e-13, clash 2.2e-16, ff03_rel 1.2e-13, ff15ipq_rel 2.4e-15, ff99SB_rel 2.5e-15, gb_vs_OpenMM_CPU 1.1e-05
+   done: 4 assignments; setup+tables 1.6s, GB 0.0s (10750 us/conf); pair-clash-free at 0.70: 4, at 0.6: 4; -> data/fb_L2_P2_R3_t0.60.npz
+L3 = LLL on P2 (-75.0, 145.0), grid R3: atoms 69, sites 3, states/site [9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2]; product 8
+   GB 8/8  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 5.1e-13, tors 2.1e-14, lj_rel 1.3e-15, coul 2.1e-13, clash 1.1e-16, ff03_rel 5.1e-15, ff15ipq_rel 1.1e-15, ff99SB_rel 4.6e-15, gb_vs_OpenMM_CPU 1.4e-05
+   done: 8 assignments; setup+tables 2.1s, GB 0.1s (10529 us/conf); pair-clash-free at 0.70: 8, at 0.6: 8; -> data/fb_L3_P2_R3_t0.60.npz
+L4 = LLLL on P2 (-75.0, 145.0), grid R3: atoms 88, sites 4, states/site [9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2]; product 16
+   GB 16/16  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.5e-12, tors 2.1e-14, lj_rel 3.2e-15, coul 8.5e-14, clash 1.1e-16, ff03_rel 4.9e-15, ff15ipq_rel 7.1e-15, ff99SB_rel 2.2e-15, gb_vs_OpenMM_CPU 1.8e-05
+   done: 16 assignments; setup+tables 2.7s, GB 0.1s (9017 us/conf); pair-clash-free at 0.70: 16, at 0.6: 16; -> data/fb_L4_P2_R3_t0.60.npz
+L5 = LLLLL on P2 (-75.0, 145.0), grid R3: atoms 107, sites 5, states/site [9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2]; product 32
+   GB 32/32  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 2.9e-12, tors 3.6e-14, lj_rel 4.0e-15, coul 2.0e-13, clash 2.2e-16, ff03_rel 4.7e-15, ff15ipq_rel 7.4e-15, ff99SB_rel 5.4e-15, gb_vs_OpenMM_CPU 1.9e-05
+   done: 32 assignments; setup+tables 3.2s, GB 0.4s (11406 us/conf); pair-clash-free at 0.70: 32, at 0.6: 32; -> data/fb_L5_P2_R3_t0.60.npz
+L6 = LLLLLL on P2 (-75.0, 145.0), grid R3: atoms 126, sites 6, states/site [9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2, 2]; product 64
+   GB 64/64  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 2.9e-12, tors 9.2e-14, lj_rel 4.5e-15, coul 4.5e-13, clash 2.2e-16, ff03_rel 8.1e-15, ff15ipq_rel 9.2e-15, ff99SB_rel 7.6e-15, gb_vs_OpenMM_CPU 6.6e-06
+   done: 64 assignments; setup+tables 3.5s, GB 0.5s (7051 us/conf); pair-clash-free at 0.70: 64, at 0.6: 64; -> data/fb_L6_P2_R3_t0.60.npz
+L7 = LLLLLLL on P2 (-75.0, 145.0), grid R3: atoms 145, sites 7, states/site [9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2, 2, 2]; product 128
+   GB 128/128  1s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 5.7e-12, tors 5.7e-14, lj_rel 4.4e-15, coul 5.1e-13, clash 2.2e-16, ff03_rel 7.1e-15, ff15ipq_rel 8.6e-15, ff99SB_rel 4.2e-15, gb_vs_OpenMM_CPU 2.1e-05
+   done: 128 assignments; setup+tables 3.7s, GB 0.7s (5396 us/conf); pair-clash-free at 0.70: 128, at 0.6: 128; -> data/fb_L7_P2_R3_t0.60.npz
+L8 = LLLLLLLL on P2 (-75.0, 145.0), grid R3: atoms 164, sites 8, states/site [9, 9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2, 2, 2, 2]; product 256
+   GB 256/256  1s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 5.5e-12, tors 1.1e-13, lj_rel 1.4e-14, coul 7.4e-13, clash 2.2e-16, ff03_rel 1.3e-14, ff15ipq_rel 1.1e-14, ff99SB_rel 1.5e-14, gb_vs_OpenMM_CPU 2.7e-05
+   done: 256 assignments; setup+tables 4.1s, GB 1.3s (4987 us/conf); pair-clash-free at 0.70: 256, at 0.6: 256; -> data/fb_L8_P2_R3_t0.60.npz
+L10 = LLLLLLLLLL on P2 (-75.0, 145.0), grid R3: atoms 202, sites 10, states/site [9, 9, 9, 9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; product 1024
+   GB 1024/1024  5s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 4.2e-12, tors 1.1e-13, lj_rel 7.9e-15, coul 1.2e-12, clash 3.3e-16, ff03_rel 8.6e-15, ff15ipq_rel 1.2e-14, ff99SB_rel 1.4e-14, gb_vs_OpenMM_CPU 2.5e-05
+   done: 1024 assignments; setup+tables 4.8s, GB 4.6s (4541 us/conf); pair-clash-free at 0.70: 1024, at 0.6: 1024; -> data/fb_L10_P2_R3_t0.60.npz
+L12 = LLLLLLLLLLLL on P2 (-75.0, 145.0), grid R3: atoms 240, sites 12, states/site [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; product 4096
+   GB 4096/4096  22s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.0e-11, tors 1.8e-13, lj_rel 1.0e-14, coul 1.5e-12, clash 3.3e-16, ff03_rel 6.0e-15, ff15ipq_rel 9.8e-15, ff99SB_rel 1.2e-14, gb_vs_OpenMM_CPU 6.5e-05
+   done: 4096 assignments; setup+tables 5.7s, GB 22.4s (5460 us/conf); pair-clash-free at 0.70: 4096, at 0.6: 4096; -> data/fb_L12_P2_R3_t0.60.npz
+L14 = LLLLLLLLLLLLLL on P2 (-75.0, 145.0), grid R3: atoms 278, sites 14, states/site [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; product 16384
+   GB 16384/16384  104s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.1e-11, tors 1.1e-13, lj_rel 1.4e-14, coul 2.2e-12, clash 5.6e-16, ff03_rel 1.1e-14, ff15ipq_rel 1.2e-14, ff99SB_rel 1.7e-14, gb_vs_OpenMM_CPU 7.2e-05
+   done: 16384 assignments; setup+tables 5.0s, GB 104.3s (6367 us/conf); pair-clash-free at 0.70: 16384, at 0.6: 16384; -> data/fb_L14_P2_R3_t0.60.npz
+L16 = LLLLLLLLLLLLLLLL on P2 (-75.0, 145.0), grid R3: atoms 316, sites 16, states/site [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; product 65536
+   GB 16384/65536  103s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.5e-11, tors 1.7e-13, lj_rel 1.9e-14, coul 2.0e-12, clash 1.0e-15, ff03_rel 1.5e-14, ff15ipq_rel 1.2e-14, ff99SB_rel 1.5e-14, gb_vs_OpenMM_CPU 6.9e-05
+   done: 65536 assignments; setup+tables 8.0s, GB 423.7s (6465 us/conf); pair-clash-free at 0.70: 65536, at 0.6: 65536; -> data/fb_L16_P2_R3_t0.60.npz
+K1 = K on P2 (-75.0, 145.0), grid R3: atoms 34, sites 1, states/site [81]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [31]; product 31
+   GB 31/31  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.7e-13, tors 7.1e-15, lj_rel 2.4e-15, coul 5.0e-14, clash 2.2e-16, ff03_rel 1.0e-15, ff15ipq_rel 1.8e-15, ff99SB_rel 1.7e-15, gb_vs_OpenMM_CPU 2.9e-05
+   done: 31 assignments; setup+tables 1.5s, GB 0.0s (1488 us/conf); pair-clash-free at 0.70: 31, at 0.6: 31; -> data/fb_K1_P2_R3_t0.60.npz
+K2 = KK on P2 (-75.0, 145.0), grid R3: atoms 56, sites 2, states/site [81, 81]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [31, 31]; product 961
+   GB 961/961  2s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 4.3e-13, tors 7.1e-15, lj_rel 5.9e-15, coul 1.1e-13, clash 2.2e-16, ff03_rel 9.6e-16, ff15ipq_rel 1.4e-15, ff99SB_rel 1.6e-15, gb_vs_OpenMM_CPU 2.8e-05
+   done: 961 assignments; setup+tables 3.0s, GB 2.0s (2102 us/conf); pair-clash-free at 0.70: 953, at 0.6: 954; -> data/fb_K2_P2_R3_t0.60.npz
+K3 = KKK on P2 (-75.0, 145.0), grid R3: atoms 78, sites 3, states/site [81, 81, 81]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [31, 31, 31]; product 29791
+   GB 16384/29791  12s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 4.0e-13, tors 1.4e-14, lj_rel 1.2e-14, coul 2.6e-13, clash 2.2e-16, ff03_rel 1.3e-15, ff15ipq_rel 2.1e-15, ff99SB_rel 1.3e-15, gb_vs_OpenMM_CPU 1.8e-05
+   done: 29791 assignments; setup+tables 6.7s, GB 17.3s (580 us/conf); pair-clash-free at 0.70: 29295, at 0.6: 29357; -> data/fb_K3_P2_R3_t0.60.npz
+K4 = KKKK on P2 (-75.0, 145.0), grid R3: atoms 100, sites 4, states/site [81, 81, 81, 81]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [31, 31, 31, 31]; product 923521
+   GB 16384/923521  25s
+   GB 147456/923521  107s
+   GB 278528/923521  198s
+   GB 409600/923521  290s
+   GB 540672/923521  381s
+   GB 671744/923521  478s
+   GB 802816/923521  572s
+   GB 923521/923521  665s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.0e-12, tors 2.1e-14, lj_rel 7.0e-15, coul 6.8e-13, clash 4.4e-16, ff03_rel 1.8e-15, ff15ipq_rel 1.9e-15, ff99SB_rel 2.4e-15, gb_vs_OpenMM_CPU 2.7e-05
+   done: 923521 assignments; setup+tables 20.9s, GB 665.4s (720 us/conf); pair-clash-free at 0.70: 895756, at 0.6: 898619; -> data/fb_K4_P2_R3_t0.60.npz
+K5 = KKKKK on P2 (-75.0, 145.0), grid R3: atoms 122, sites 5, states/site [81, 81, 81, 81, 81]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [31, 31, 31, 31, 31]; product 28629151
+too large (> 1100000); not enumerated
+LKSE:1 = L on P2 (-75.0, 145.0), grid R3: atoms 31, sites 1, states/site [9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2]; product 2
+   GB 2/2  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 1.8e-13, tors 0.0e+00, lj_rel 2.7e-15, coul 8.5e-14, clash 2.2e-16, ff03_rel 6.0e-15, ff15ipq_rel 1.9e-15, ff99SB_rel 3.3e-15, gb_vs_OpenMM_CPU 1.5e-05
+   done: 2 assignments; setup+tables 1.3s, GB 0.0s (6527 us/conf); pair-clash-free at 0.70: 2, at 0.6: 2; -> data/fb_LKSEc1_P2_R3_t0.60.npz
+LKSE:2 = LK on P2 (-75.0, 145.0), grid R3: atoms 53, sites 2, states/site [9, 81]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 31]; product 62
+   GB 62/62  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 5.4e-13, tors 7.1e-15, lj_rel 4.7e-15, coul 1.4e-13, clash 2.2e-16, ff03_rel 1.5e-15, ff15ipq_rel 3.1e-15, ff99SB_rel 7.4e-15, gb_vs_OpenMM_CPU 1.2e-05
+   done: 62 assignments; setup+tables 2.3s, GB 0.3s (4668 us/conf); pair-clash-free at 0.70: 62, at 0.6: 62; -> data/fb_LKSEc2_P2_R3_t0.60.npz
+LKSE:3 = LKS on P2 (-75.0, 145.0), grid R3: atoms 64, sites 3, states/site [9, 81, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 31, 9]; product 558
+   GB 558/558  0s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 8.7e-13, tors 1.4e-14, lj_rel 5.0e-15, coul 2.0e-13, clash 2.2e-16, ff03_rel 3.6e-15, ff15ipq_rel 9.6e-15, ff99SB_rel 4.0e-14, gb_vs_OpenMM_CPU 1.4e-05
+   done: 558 assignments; setup+tables 2.0s, GB 0.4s (755 us/conf); pair-clash-free at 0.70: 558, at 0.6: 558; -> data/fb_LKSEc3_P2_R3_t0.60.npz
+LKSE:4 = LKSE on P2 (-75.0, 145.0), grid R3: atoms 79, sites 4, states/site [9, 81, 9, 27]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 31, 9, 18]; product 10044
+   GB 10044/10044  5s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 9.9e-13, tors 3.6e-14, lj_rel 1.1e-14, coul 1.8e-13, clash 2.2e-16, ff03_rel 1.4e-13, ff15ipq_rel 1.4e-13, ff99SB_rel 7.3e-14, gb_vs_OpenMM_CPU 1.7e-05
+   done: 10044 assignments; setup+tables 2.4s, GB 4.7s (465 us/conf); pair-clash-free at 0.70: 10044, at 0.6: 10044; -> data/fb_LKSEc4_P2_R3_t0.60.npz
+LKSE:5 = LKSEL on P2 (-75.0, 145.0), grid R3: atoms 98, sites 5, states/site [9, 81, 9, 27, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 31, 9, 18, 2]; product 20088
+   GB 16384/20088  11s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 2.0e-12, tors 4.3e-14, lj_rel 7.5e-15, coul 2.8e-13, clash 2.2e-16, ff03_rel 3.1e-14, ff15ipq_rel 1.2e-13, ff99SB_rel 2.9e-13, gb_vs_OpenMM_CPU 1.9e-05
+   done: 20088 assignments; setup+tables 2.8s, GB 13.4s (669 us/conf); pair-clash-free at 0.70: 20088, at 0.6: 20088; -> data/fb_LKSEc5_P2_R3_t0.60.npz
+LKSE:6 = LKSELK on P2 (-75.0, 145.0), grid R3: atoms 120, sites 6, states/site [9, 81, 9, 27, 9, 81]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 31, 9, 18, 2, 31]; product 622728
+   GB 16384/622728  21s
+   GB 147456/622728  142s
+   GB 278528/622728  290s
+   GB 409600/622728  459s
+   GB 540672/622728  607s
+   spot checks (max abs deviation, kcal/mol; _rel = relative): gb 2.7e-12, tors 5.7e-14, lj_rel 9.2e-15, coul 2.8e-13, clash 2.2e-16, ff03_rel 8.8e-15, ff15ipq_rel 3.7e-14, ff99SB_rel 4.6e-14, gb_vs_OpenMM_CPU 3.7e-05
+   done: 622728 assignments; setup+tables 16.1s, GB 694.7s (1116 us/conf); pair-clash-free at 0.70: 622728, at 0.6: 622728; -> data/fb_LKSEc6_P2_R3_t0.60.npz
+LKSE:7 = LKSELKS on P2 (-75.0, 145.0), grid R3: atoms 131, sites 7, states/site [9, 81, 9, 27, 9, 81, 9]; fixed-atom clash score 0.858; one-site domain sizes at tau=0.6: [2, 31, 9, 18, 2, 31, 9]; product 5604552
+too large (> 1100000); not enumerated

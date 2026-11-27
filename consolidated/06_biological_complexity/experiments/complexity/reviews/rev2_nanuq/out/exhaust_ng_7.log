@@ -1,0 +1,12 @@
+n=7: one-hybrid OLP networks (with repetitions): 1206
+n=7: two-hybrid networks examined (with repetitions) [317s]
+    non-planar 71888
+    ('VIOLATION', 'non-galled', 'bloblet', 'neg') 664
+    ('VIOLATION', 'non-galled', 'not bloblet', 'support') 1252
+    ('galled', 'level 1', 'ok') 31760
+    ('galled', 'level 2', 'ok') 42554
+    ('non-galled', 'level 2', 'neg') 664
+    ('non-galled', 'level 2', 'ok') 58280
+    ('non-galled', 'level 2', 'support') 1252
+example ('not bloblet', 'support') ['L1', 'L0', 'L2', 'L6', 'L5', 'L4', 'L3'] {(2, 4): '0'} {'L0': [], 'L1': [], 'L2': [], 'L3': [], 'L4': [], 'L5': [], 'L6': [], 't5': ['H1', 'H2'], 't4': ['L4', 't5'], 't3': ['L3', 't4'], 't2': ['s2', 't3'], 't1': ['L1', 't2'], 't0': ['L0', 't1'], 'H1': ['L5'], 's1': ['L6', 'H1'], 'H2': ['s1'], 's2': ['L2', 'H2']}
+example ('bloblet', 'neg') ['L2', 'L0', 'L1', 'L6', 'L5', 'L4', 'L3'] {(2, 4): '-1'} {'L0': [], 'L1': [], 'L2': [], 'L3': [], 'L4': [], 'L5': [], 'L6': [], 't5': ['H1', 'H2'], 't4': ['L4', 't5'], 't3': ['L3', 't4'], 't2': ['L2', 't3'], 't1': ['s2', 't2'], 't0': ['L0', 't1'], 'H1': ['L5'], 's1': ['L6', 'H1'], 'H2': ['s1'], 's2': ['L1', 'H2']}

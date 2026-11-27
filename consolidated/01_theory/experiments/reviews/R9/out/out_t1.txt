@@ -1,0 +1,15 @@
+4000 random (p,u,gamma,t): max|closed - LP game| = 5.05e-11; max|closed - cosh| = 5.00e-15; max|F(g,1)| = 1.26e-15; cases t>=1 with F>1e-9: 0
+max F(g,t) over t in [1,12], 5 parameter pairs: 7.105e-15  (claim: <= 0)
+dF/dgamma(0,t): max|finite difference - formula| = 3.37e-11; sign != sign(p-1/2) in 0 of 3000
+v(kappa): max|closed form - max over gamma grid| = 2.10e-09
+p=0.1 u=2.0: E=0.212295 (gamma=-0.4318), E0=0.201797, sup_t F*(t)/t on grid=0.212235; a=-e_c=0.163738, max_m I(z_c(m))=0.163738 (m=0.4191); min_t [F*-F(0,.)] on (0,1) = 1.31e-05; h=R^max(0)=0.048130, R0(0)=0.042692
+p=0.3 u=1.0: E=0.103131 (gamma=-0.0612), E0=0.102732, sup_t F*(t)/t on grid=0.103104; a=-e_c=0.095301, max_m I(z_c(m))=0.095301 (m=0.4718); min_t [F*-F(0,.)] on (0,1) = 5.00e-07; h=R^max(0)=0.025034, R0(0)=0.024814
+p=0.5 u=1.0: E=0.120115 (gamma=-0.0000), E0=0.120115, sup_t F*(t)/t on grid=0.120083; a=-e_c=0.110944, max_m I(z_c(m))=0.110944 (m=0.5000); min_t [F*-F(0,.)] on (0,1) = 0.00e+00; h=R^max(0)=0.029139, R0(0)=0.029139
+p=0.05 u=2.0: E=0.124768 (gamma=-0.5069), E0=0.116511, sup_t F*(t)/t on grid=0.124733; a=-e_c=0.096958, max_m I(z_c(m))=0.096958 (m=0.4038); min_t [F*-F(0,.)] on (0,1) = 1.03e-05; h=R^max(0)=0.028405, R0(0)=0.024128
+p=0.2 u=4.0: E=1.171220 (gamma=-0.7005), E0=1.121345, sup_t F*(t)/t on grid=1.170788; a=-e_c=0.553492, max_m I(z_c(m))=0.553492 (m=0.4707); min_t [F*-F(0,.)] on (0,1) = 6.24e-05; h=R^max(0)=0.214245, R0(0)=0.192598
+p=0.5 u=2.0: E=0.433781 (gamma=+0.0000), E0=0.433781, sup_t F*(t)/t on grid=0.433656; a=-e_c=0.327813, max_m I(z_c(m))=0.327813 (m=0.5000); min_t [F*-F(0,.)] on (0,1) = 0.00e+00; h=R^max(0)=0.097281, R0(0)=0.097281
+[9.0s]
+
+real	0m9.552s
+user	0m9.255s
+sys	0m0.447s

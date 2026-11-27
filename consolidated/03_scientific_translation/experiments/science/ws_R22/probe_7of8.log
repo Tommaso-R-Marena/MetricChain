@@ -1,0 +1,7 @@
+n=16 hinges=[3, 8] thetas=(+1.786,-0.533) seg sizes [6, 7, 7]: min separation of predicted D's 3.016; converged 1500/1500; hits per predicted point [367, 880, 0, 0, 73, 178, 1, 1]; images outside the predicted list: 0
+n=16 hinges=[3, 8] thetas=(+1.300,+1.250) seg sizes [6, 7, 7]: min separation of predicted D's 6.703; converged 1500/1500; hits per predicted point [330, 594, 101, 93, 123, 93, 107, 59]; images outside the predicted list: 0
+n=16 hinges=[3, 8] thetas=(-0.894,-1.039) seg sizes [6, 7, 7]: min separation of predicted D's 7.843; converged 1500/1500; hits per predicted point [344, 717, 124, 147, 79, 71, 2, 16]; images outside the predicted list: 0
+n=16 hinges=[1, 8] thetas=(-0.502,-0.773) seg sizes [4, 9, 7]: min separation of predicted D's 4.981; converged 1500/1500; hits per predicted point [445, 903, 29, 16, 2, 0, 53, 52]; images outside the predicted list: 0
+n=16 hinges=[1, 8] thetas=(+0.673,-2.454) seg sizes [4, 9, 7]: min separation of predicted D's 6.882; converged 1500/1500; hits per predicted point [220, 574, 335, 293, 26, 23, 15, 14]; images outside the predicted list: 0
+n=18 hinges=[4, 10] thetas=(+1.208,-1.762) seg sizes [7, 8, 7]: min separation of predicted D's 6.912; converged 1500/1500; hits per predicted point [250, 600, 188, 105, 87, 41, 111, 118]; images outside the predicted list: 0
+ALL DONE 26.2 s

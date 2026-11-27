@@ -1,0 +1,22 @@
+u=0.5 n=2000 r1=916 D=900: ln(W/2^n)=  19.86 (dominance True); ln(omega/W_twin) at s=-1,+1:     -5.9,     -5.9 <= Hoeffding     -0.1: True; needed <=   -8.7; U'(+1)-U0=-3.112e-01, U'(-1)-U0=+1.888e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.4741)
+u=0.5 n=2000 r1=916 D=1000: ln(W/2^n)=  19.86 (dominance True); ln(omega/W_twin) at s=-1,+1:     -9.9,     -9.9 <= Hoeffding     -3.9: True; needed <=   -8.7; U'(+1)-U0=-3.112e-01, U'(-1)-U0=+1.888e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.4741)
+u=0.5 n=2000 r1=916 D=1100: ln(W/2^n)=  19.86 (dominance True); ln(omega/W_twin) at s=-1,+1:    -15.2,    -15.2 <= Hoeffding     -4.7: True; needed <=   -8.7; U'(+1)-U0=-3.112e-01, U'(-1)-U0=+1.888e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.4741)
+u=0.5 n=4000 r1=1793 D=1800: ln(W/2^n)=  20.22 (dominance True); ln(omega/W_twin) at s=-1,+1:    -16.0,    -16.0 <= Hoeffding     -0.0: True; needed <=   -9.4; U'(+1)-U0=-3.112e-01, U'(-1)-U0=+1.888e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.4741)
+u=0.5 n=4000 r1=1793 D=2000: ln(W/2^n)=  20.22 (dominance True); ln(omega/W_twin) at s=-1,+1:    -25.8,    -25.8 <= Hoeffding    -11.9: True; needed <=   -9.4; U'(+1)-U0=-3.112e-01, U'(-1)-U0=+1.888e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.4741)
+u=0.5 n=4000 r1=1793 D=2200: ln(W/2^n)=  20.22 (dominance True); ln(omega/W_twin) at s=-1,+1:    -38.1,    -38.1 <= Hoeffding    -14.5: True; needed <=   -9.4; U'(+1)-U0=-3.112e-01, U'(-1)-U0=+1.888e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.4741)
+u=1.0 n=2000 r1=800 D=900: ln(W/2^n)=  40.23 (dominance True); ln(omega/W_twin) at s=-1,+1:    -33.5,    -33.5 <= Hoeffding     -6.2: True; needed <=   -9.1; U'(+1)-U0=-7.311e-01, U'(-1)-U0=+2.689e-01; root 0.0; lnZ'-lnZ0=0.6931 (>= 0.3133)
+u=1.0 n=2000 r1=800 D=1000: ln(W/2^n)=  40.23 (dominance True); ln(omega/W_twin) at s=-1,+1:    -54.6,    -54.6 <= Hoeffding    -25.0: True; needed <=   -9.1; U'(+1)-U0=-7.311e-01, U'(-1)-U0=+2.689e-01; root 0.0; lnZ'-lnZ0=0.6931 (>= 0.3133)
+u=1.0 n=2000 r1=800 D=1100: ln(W/2^n)=  40.23 (dominance True); ln(omega/W_twin) at s=-1,+1:    -80.6,    -80.6 <= Hoeffding    -30.2: True; needed <=   -9.1; U'(+1)-U0=-7.311e-01, U'(-1)-U0=+2.689e-01; root 0.0; lnZ'-lnZ0=0.6931 (>= 0.3133)
+u=1.0 n=4000 r1=1560 D=1800: ln(W/2^n)=  40.46 (dominance True); ln(omega/W_twin) at s=-1,+1:    -81.2,    -81.2 <= Hoeffding    -18.5: True; needed <=   -9.7; U'(+1)-U0=-7.311e-01, U'(-1)-U0=+2.689e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.3133)
+u=1.0 n=4000 r1=1560 D=2000: ln(W/2^n)=  40.46 (dominance True); ln(omega/W_twin) at s=-1,+1:   -127.6,   -127.6 <= Hoeffding    -62.1: True; needed <=   -9.7; U'(+1)-U0=-7.311e-01, U'(-1)-U0=+2.689e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.3133)
+u=1.0 n=4000 r1=1560 D=2200: ln(W/2^n)=  40.46 (dominance True); ln(omega/W_twin) at s=-1,+1:   -183.9,   -183.9 <= Hoeffding    -75.1: True; needed <=   -9.7; U'(+1)-U0=-7.311e-01, U'(-1)-U0=+2.689e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.3133)
+u=2.0 n=2000 r1=606 D=900: ln(W/2^n)=  79.56 (dominance True); ln(omega/W_twin) at s=-1,+1:   -240.7,   -240.7 <= Hoeffding    -71.3: True; needed <=   -9.8; U'(+1)-U0=-1.762e+00, U'(-1)-U0=+2.384e-01; root 0.0; lnZ'-lnZ0=0.6931 (>= 0.1269)
+u=2.0 n=2000 r1=606 D=1000: ln(W/2^n)=  79.56 (dominance True); ln(omega/W_twin) at s=-1,+1:   -350.2,   -350.2 <= Hoeffding   -128.1: True; needed <=   -9.8; U'(+1)-U0=-1.762e+00, U'(-1)-U0=+2.384e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.1269)
+u=2.0 n=2000 r1=606 D=1100: ln(W/2^n)=  79.56 (dominance True); ln(omega/W_twin) at s=-1,+1:   -471.2,   -471.2 <= Hoeffding   -155.0: True; needed <=   -9.8; U'(+1)-U0=-1.762e+00, U'(-1)-U0=+2.384e-01; root 0.0; lnZ'-lnZ0=0.6931 (>= 0.1269)
+u=2.0 n=4000 r1=1172 D=1800: ln(W/2^n)=  79.12 (dominance True); ln(omega/W_twin) at s=-1,+1:   -536.4,   -536.4 <= Hoeffding   -168.3: True; needed <=  -10.5; U'(+1)-U0=-1.762e+00, U'(-1)-U0=+2.384e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.1269)
+u=2.0 n=4000 r1=1172 D=2000: ln(W/2^n)=  79.12 (dominance True); ln(omega/W_twin) at s=-1,+1:   -764.0,   -764.0 <= Hoeffding   -292.5: True; needed <=  -10.5; U'(+1)-U0=-1.762e+00, U'(-1)-U0=+2.384e-01; root 0.0; lnZ'-lnZ0=0.6931 (>= 0.1269)
+u=2.0 n=4000 r1=1172 D=2200: ln(W/2^n)=  79.12 (dominance True); ln(omega/W_twin) at s=-1,+1:  -1013.3,  -1013.3 <= Hoeffding   -353.9: True; needed <=  -10.5; U'(+1)-U0=-1.762e+00, U'(-1)-U0=+2.384e-01; root -0.0; lnZ'-lnZ0=0.6931 (>= 0.1269)
+
+real	0m42.973s
+user	0m30.709s
+sys	0m3.324s

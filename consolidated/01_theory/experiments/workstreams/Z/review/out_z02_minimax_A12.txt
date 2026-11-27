@@ -1,0 +1,11 @@
+== Part A: the chain of cut orbit curves ==
+u = 0.5, s_t = L + 0.05, b_0 = h + 0.0008 (range condition to level 21: True, largest W_j(b_j) = 0.8285): levels j = 0..20, 52 values of g each (1092 cases)   [75 s]
+    (T1) Z1(2):  max of LHS_up - RHS_lo = 1.888e-08  [<= tol proves LHS <= RHS];   max of LHS_lo - RHS_up = 8.474e-15  [> 0 would be a proven violation];  largest slack RHS - LHS = 2.631e-04
+    (T2) minimax identity:  max of LHS_lo - MID_up = 8.474e-15,  max of MID_lo - LHS_up = 6.635e-17,  max |LHS - MID| (midpoints) = 4.630e-09
+    (T3) max of MID_lo - RHS_up = 0.000e+00;   widths of the brackets: LHS 2.88e-08, MID 3.75e-08, RHS 2.18e-08
+u = 2, s_t = L + 0.05, b_0 = h + 0.01 (range condition to level 21: True, largest W_j(b_j) = 0.7882): levels j = 0..20, 52 values of g each (1092 cases)   [148 s]
+    (T1) Z1(2):  max of LHS_up - RHS_lo = 9.720e-08  [<= tol proves LHS <= RHS];   max of LHS_lo - RHS_up = 1.073e-13  [> 0 would be a proven violation];  largest slack RHS - LHS = 2.212e-03
+    (T2) minimax identity:  max of LHS_lo - MID_up = 1.073e-13,  max of MID_lo - LHS_up = 6.939e-17,  max |LHS - MID| (midpoints) = 2.705e-08
+    (T3) max of MID_lo - RHS_up = 0.000e+00;   widths of the brackets: LHS 1.27e-07, MID 1.90e-07, RHS 1.13e-07
+Part A: 2184 cases
+total time 148 s

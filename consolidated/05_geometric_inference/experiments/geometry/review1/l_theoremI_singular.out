@@ -1,0 +1,10 @@
+n=9 seed=0: 15 conditions of rank 15 on (P, c); dim L = 7 (expected 25 - 2n = 7); P(L) = P^6
+   Singular over F_2147483647 (basis of L computed mod p here): dim=2 mult=12  [affine cone: dim 1 <=> finite scheme; mult = degree]
+   Singular, chart c = 1: affine: dim=0 vdim=48  [vdim = number of (complex) rank<=3 points with c != 0, with multiplicity]
+n=10 seed=0: 17 conditions of rank 17 on (P, c); dim L = 5 (expected 25 - 2n = 5); P(L) = P^4
+   Singular over F_2147483647 (basis of L computed mod p here): dim=1 mult=7  [affine cone: dim 1 <=> finite scheme; mult = degree]
+   Singular, chart c = 1: affine: dim=0 vdim=2  [vdim = number of (complex) rank<=3 points with c != 0, with multiplicity]
+n=11 seed=0: 19 conditions of rank 19 on (P, c); dim L = 3 (expected 25 - 2n = 3); P(L) = P^2
+   Singular over F_2147483647 (basis of L computed mod p here): dim=1 mult=2  [affine cone: dim 1 <=> finite scheme; mult = degree]
+   Singular, chart c = 1: affine: dim=0 vdim=2  [vdim = number of (complex) rank<=3 points with c != 0, with multiplicity]
+n=8 seed=0: 13 conditions of rank 13 on (P, c); dim L = 9 (expected 25 - 2n = 9); P(L) = P^8

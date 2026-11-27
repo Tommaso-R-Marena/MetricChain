@@ -1,0 +1,7 @@
+=== p8_01b_restricted: K4 on E, tau 0.7: atoms 100, sites 4, 74529 states, anchor (3, 3, 10, 10); 5 subsets
+    row 40/100 done, checkpoint written, 62 s, RSS 139 MB
+    row 100/100 done, checkpoint written, 103 s, RSS 181 MB
+    checks: PPA <= PP for every (T, pair): 25250 comparisons, 0 violations; equal where no host of the pair is outside T: 19670 of 19670
+    order 3: sum over subsets and pairs of the exact constants: all contexts 1.020134e+01, hosts outside T at the anchor 9.470199e+00 (ratio 1.077)
+    order 4: sum over subsets and pairs of the exact constants: all contexts 4.539210e-01, hosts outside T at the anchor 4.539210e-01 (ratio 1.000)
+DONE in 103.3 s; peak RSS 462 MB

@@ -1,0 +1,5 @@
+=== sandwich sampler (theory division, Prop. 11.113): V8 on P2, tau 0.7, m = 4, form S, band 7; ball 577 values; ln Z(m_-) = 246.174593, ln Z(m_+) = 245.749662, deterministic width D = 0.424931 nats; exact acceptance rate 1 - e^-D = 0.34618; seed 2026112640; delta 0.05 [0.8s]
+    ENUMERATION (6561 states): W in [0.221888, 0.500001], states with W outside [0, 1]: 0 (states with m_+ = m_-: 0); exact E_q W = 0.41204823; identity: ln[Z(m_+) + (Z(m_-) - Z(m_+)) E_q W] = 245.9470141531, ln Z(E) = 245.9470141531, difference 1.4e-13; acceptance rate: enumerated 0.346185, 1 - e^-D = 0.346185
+    COVERAGE: 400 repetitions with N = 1200 accepted evaluations each [16.0s]: truth inside the bracket in 400 of 400; mean bracket width 3.408e-02 nats (deterministic 4.249e-01); point estimate: rms error 5.02e-04, max |error| 1.71e-03; mean proposals 3475 (empirical acceptance 0.34530); sampled W outside [0,1]: 0
+    -> out/sampler_enum_V8_P2_t0.70_gbn2_m4_S_w7.json
+DONE p6_04_sampler V8 P2 0.7 m=4 S w=7 [17s]

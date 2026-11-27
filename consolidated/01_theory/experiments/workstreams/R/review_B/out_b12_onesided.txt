@@ -1,0 +1,3 @@
+h = 0.250000000000; one-sided vartheta = q^2/(2 (h - J(L + q))) at q = +1e-3: 0.5000, at q = -1e-3: 1.0020
+sqrt(delta) N_t(delta), s_t = 0.6:  1e-04: 0.95000  1e-06: 0.95100  1e-08: 0.94850  1e-10: 0.94813
+prediction (pi/8)(1 + sqrt 2) = 0.94806;   pi h sqrt(2 vartheta) with vartheta = 1/2: 0.78540, with vartheta = 1: 1.11072

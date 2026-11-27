@@ -1,0 +1,5 @@
+Part A: packings in T0 (pairwise ||p_i-p_j||_c > 2 eps1/L), exact verification
+  (1,1/2): 51 points (grid G=96); pairwise > 1 verified exactly: True
+  (1,1/4): 152 points (grid G=120); pairwise > 1/2 verified exactly: True
+  (1/5,1/2): 7 points (grid G=24); pairwise > 5 verified exactly: True
+  (1/5,1/4): 15 points (grid G=120); pairwise > 5/2 verified exactly: True

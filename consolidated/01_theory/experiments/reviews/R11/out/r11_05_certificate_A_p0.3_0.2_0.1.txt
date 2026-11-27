@@ -1,0 +1,19 @@
+== Part A: per-site rate G_t^(L)(M_L)/(L+m) of the reduced-end block family (exact for every k) ==
+cube: h = 0.029139 (exact exponent of the uniform cube at bounded accuracy, u = 1)
+p=0.3 m=0 (end slope u-kappa_m = 0.153) t=0.433: L=4: 0.020693  L=6: 0.028073  L=8: 0.030872  L=10: 0.032923  L=12: 0.034186  L=14: 0.035124
+      best L=14 (<= 2 walls), t refined to 0.433: rate = 0.035124 (dual over the label set 0.035124);  ratio to the cube 1.205;  labels with weight > 1e-5: 32   [5 s]
+p=0.2 m=1 (end slope u-kappa_m = 0.246) t=0.409: L=4: 0.020739  L=6: 0.029579  L=8: 0.032213  L=10: 0.034813  L=12: 0.036502  L=14: 0.037680
+      best L=14 (<= 2 walls), t refined to 0.409: rate = 0.037680 (dual over the label set 0.037680);  ratio to the cube 1.293;  labels with weight > 1e-5: 22   [9 s]
+p=0.2 m=2 (end slope u-kappa_m = 0.561) t=0.409: L=4: 0.022924  L=6: 0.029129  L=8: 0.031759  L=10: 0.034276  L=12: 0.035828  L=14: 0.037062
+      best L=14 (<= 2 walls), t refined to 0.409: rate = 0.037062 (dual over the label set 0.037062);  ratio to the cube 1.272;  labels with weight > 1e-5: 22   [13 s]
+p=0.1 m=3 (end slope u-kappa_m = 0.130) t=0.38: L=4: 0.014659  L=6: 0.025221  L=8: 0.028569  L=10: 0.030287  L=12: 0.032929  L=14: 0.034700
+      best L=14 (<= 2 walls), t refined to 0.380: rate = 0.034700 (dual over the label set 0.034700);  ratio to the cube 1.191;  labels with weight > 1e-5: 12   [17 s]
+p=0.1 m=4 (end slope u-kappa_m = 0.320) t=0.38: L=4: 0.015816  L=6: 0.024552  L=8: 0.027159  L=10: 0.029374  L=12: 0.031978  L=14: 0.033676
+      best L=14 (<= 2 walls), t refined to 0.380: rate = 0.033676 (dual over the label set 0.033676);  ratio to the cube 1.156;  labels with weight > 1e-5: 12   [21 s]
+p=0.1 m=5 (end slope u-kappa_m = 0.463) t=0.38: L=4: 0.016136  L=6: 0.023568  L=8: 0.025768  L=10: 0.028352  L=12: 0.030907  L=14: 0.032567
+      best L=14 (<= 2 walls), t refined to 0.380: rate = 0.032567 (dual over the label set 0.032567);  ratio to the cube 1.118;  labels with weight > 1e-5: 12   [25 s]
+summary (valid for every number of blocks k, exact, no limit taken):
+   p=0.3: exponent per site >= 0.035124  (L=14, m=0, t=0.433)   cube 0.029139   ABOVE the cube
+   p=0.2: exponent per site >= 0.037680  (L=14, m=1, t=0.409)   cube 0.029139   ABOVE the cube
+   p=0.1: exponent per site >= 0.034700  (L=14, m=3, t=0.380)   cube 0.029139   ABOVE the cube
+25.0 s

@@ -1,0 +1,2 @@
+  8192/16384  12s  worst spot-check dev 5.40e-05
+n=7 A2: 16384 conformations in 23.3s; worst spot-check deviation fast vs OpenMM CPU platform: 7.64e-05 kcal/mol

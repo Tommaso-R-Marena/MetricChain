@@ -1,0 +1,38 @@
+A_small 11 exit 0
+A_ties 12 exit 0
+A_medium 13 stopped by me after 276 runs (machine load)
+B_invalid 15 exit 0 (400 runs)
+D_2L 16 exit 143 (2 runs)
+B_reducedK 14 exit 124 (202 runs)
+D_2L_off 17 exit 124 (210 runs)
+e2e 21 K1 exit 124
+e2e 22 K16 exit 0
+ALLDONE
+D_2L 16 (rerun) exit 124 (137 runs)
+B_lazy 20 exit 0 (200 runs)
+ALLDONE3
+pass2 B_reducedK 214 exit 0 (400 runs)
+pass2 A_ties 212 exit 0 (500 runs)
+pass2 B_invalid 215 exit 0 (400 runs)
+pass2 B_lazy 220 exit 0 (260 runs)
+pass2 B_lazycheap 218 exit 0 (60 runs)
+pass2 D_2L_off 217 exit 0 (300 runs)
+pass2 A_medium 213 exit 124 (313 runs)
+adv2 0 ineq exit 0
+adv2 2 calls exit 0
+sepcap u1 exit 0
+sepcap u2 exit 0
+sepcap u05 exit 0
+ALLDONE_SEPCAP
+adv2 0 cap exit 0
+ALLDONE_ADV2
+pass2 D_2L 216 exit 124 (239 runs)
+ALLDONE_PASS2
+test_K_sampler exit 0
+test_K_sampler (with census) exit 0
+mut2 close_at_no exit 0 (48 runs)
+mut2 q_no_eta exit 0 (48 runs)
+mut2 neg_tol exit 0 (48 runs)
+mut2 noharper exit 0 (48 runs)
+mut2 maxform exit 0 (48 runs)
+ALLDONE_MUT2

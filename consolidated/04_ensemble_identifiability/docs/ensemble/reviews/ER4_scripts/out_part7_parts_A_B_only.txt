@@ -1,0 +1,16 @@
+A. E23(b), exact: 'determined up to a positive factor' against the criterion (i) + (ii)
+    1908 random integer instances with non-zero data (2 to 6 configurations, 1 to 3 observables with values in -2..2): agreement in 1908/1908; determined up to the factor: 479; instances containing a configuration with zero feature vector: 413
+    92 instances with zero data set aside; in 28 of them the ensemble is the only one with E Phi = 0 although the criterion fails (so the hypothesis y != 0 is needed, as stated)
+    example of the text: (1/2, 1/2, 0) determined up to the factor: False (text: no); delta_a: True (text: yes)
+  -> ok
+B. E23(b) with a tolerance
+    convexity: 1482876 convex combinations of pairs of compatible ensembles (300 random instances): not compatible: 0
+    data within the tolerance of zero (|y_i| < tau_i): all of 2 000 sampled ensembles compatible: True (the datum then says nothing; the set is still convex)
+    Charnes-Cooper with s = 1/c >= 0 on a two-point example: least nu_a = 0.500 with s = 0.000 -- the infimum 1/2 is not attained by a compatible ensemble (c = infinity): the programme gives the closure of the range
+  -> ok
+C. E25(d): true maxima over {|E Phi| <= r_min + tau}, by type of the face nearest to the origin
+Terminated
+
+real	20m41.794s
+user	20m19.654s
+sys	0m13.716s

@@ -1,0 +1,21 @@
+transport tail function on Q_m, u = 1:  u^2/8 = 0.125,  0.589 u = 0.589,  eps* = ln cosh(u/2) = 0.1201
+  m = 16: Harper's exact function / Xi_T at ball sizes: largest ratio 0.0663 (must be <= 1)
+  m = 30: Harper's exact function / Xi_T at ball sizes: largest ratio 0.0303 (must be <= 1)
+  m = 60: Harper's exact function / Xi_T at ball sizes: largest ratio 0.0107 (must be <= 1)
+  m   X      instance | pi_* of Theorem N1 (atom)        Mbar      | {q: [N],[P] hold} (min, max) | run: largest sample   stop                                  level  valid  width
+  30  0.50   flat     | 9.313e-10 (9.313e-10)        5.745e+14 | (1.02e-05, 9.79e-01)         | 888                   closed (unpopulated pass, q = 0.5)    12     True   True
+  30  0.50   dip8     | 9.313e-10 (9.313e-10)        5.745e+14 | (1.02e-05, 9.79e-01)         | 888                   closed (unpopulated pass, q = 0.5)    4      True   True
+  60  0.50   cone     | 8.674e-19 (8.674e-19)        1.324e+24 | (3.26e-12, 9.79e-01)         | 976                   closed (unpopulated pass, q = 0.5)    0      True   True
+  60  0.50   dip15    | 8.674e-19 (8.674e-19)        1.324e+24 | (3.26e-12, 9.79e-01)         | 976                   closed (unpopulated pass, q = 0.5)    8      True   True
+  30  0.30   flat     | 9.313e-10 (9.313e-10)        5.745e+14 | none above the atom          | 3552                  closed (unpopulated pass, q = 0.125)  12     True   True
+  30  0.30   cone     | 9.313e-10 (9.313e-10)        5.745e+14 | none above the atom          | 888                   closed (unpopulated pass, q = 0.5)    0      True   True
+  30  0.30   dip8     | 9.313e-10 (9.313e-10)        5.745e+14 | none above the atom          | 3552                  closed (unpopulated pass, q = 0.125)  4      True   True
+  30  0.20   flat     | 9.313e-10 (9.313e-10)        5.745e+14 | none above the atom          | 29097984              not closed up to M = 2.91e+07         18     None   None
+  30  0.20   dip8     | 9.313e-10 (9.313e-10)        5.745e+14 | none above the atom          | 29097984              not closed up to M = 2.91e+07         10     None   None
+  60  0.30   flat     | 8.674e-19 (8.674e-19)        1.324e+24 | (5.49e-04, 7.79e-01)         | 976                   closed (unpopulated pass, q = 0.5)    23     True   True
+  60  0.30   dip15    | 8.674e-19 (8.674e-19)        1.324e+24 | (5.49e-04, 7.79e-01)         | 976                   closed (unpopulated pass, q = 0.5)    8      True   True
+  60  0.14   dip15    | 8.674e-19 (8.674e-19)        1.324e+24 | none above the atom          | 15990784              not closed up to M = 1.6e+07          13     None   None
+  16  0.05   flat     | 1.526e-05 (1.526e-05)        1.798e+10 | none above the atom          | 26738688              not closed up to M = 2.67e+07         13     None   None
+  16  0.05   dip4     | 1.526e-05 (1.526e-05)        1.798e+10 | none above the atom          | 26738688              not closed up to M = 2.67e+07         9      None   None
+  16  0.10   dip4     | 1.526e-05 (1.526e-05)        1.798e+10 | none above the atom          | 26738688              not closed up to M = 2.67e+07         9      None   None
+violations: 0  (17.9 s)

@@ -1,0 +1,5 @@
+n=3: 254 subsets; with Phi+ > 1 (e_D > 0): 191; with e_D > 0 and maxdens < 1: 0; largest omega w.r.t. the binary curve: 0.0000 None; w.r.t. R_unif: 0.0000; range of e_D [-0.795, 0.753]; among sets with e_D > 0: max theta_D = -0.0000 (ln n/n = 0.366);  t=7
+      sets with e_D < 0: 63; among them max of theta_D + e_D (must be <= omega-ish): -0.1982
+n=4: 65534 subsets; with Phi+ > 1 (e_D > 0): 49151; with e_D > 0 and maxdens < 1: 0; largest omega w.r.t. the binary curve: 0.0000 None; w.r.t. R_unif: 0.0000; range of e_D [-0.715, 0.738]; among sets with e_D > 0: max theta_D = -0.0000 (ln n/n = 0.347);  t=9
+      sets with e_D < 0: 16383; among them max of theta_D + e_D (must be <= omega-ish): -0.0264
+time 9.447388648986816

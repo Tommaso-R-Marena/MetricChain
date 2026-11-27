@@ -1,0 +1,19 @@
+T5b(A) n=6 binary complete, beta=8.0: pi(a) = 2.4498e-17, E_a[tau_b] = 61657.075, cap = 4.4679188e-22
+        identity E_a[tau_b]*cap / sum pi h - 1 = 4.67e-61   (60-digit arithmetic)
+        float64: identity defect = 2.89e-08
+T5b(B) Curie–Weiss lumped chain, J=1, h=0: A = {m < m*}, m* = top of the free-energy barrier
+   n     beta  m*   pi(A)     lambda_A     lam/k_1cut  lam/k_mcut  (best m0)  F-barrier/kT
+   10    1.30  5    4.749e-01 1.4940e-01   0.2828      0.7343      m0=1      0.97
+   20    1.30  10   4.900e-01 7.0514e-02   0.1726      0.7398      m0=4      1.44
+   40    1.30  20   4.974e-01 2.3018e-02   0.1093      0.7962      m0=9      2.41
+   80    1.30  40   4.997e-01 3.2977e-03   0.0764      0.9068      m0=21     4.37
+   160   1.30  80   5.000e-01 7.1228e-05   0.0580      0.9872      m0=43     8.30
+   320   1.30  160  5.000e-01 2.8960e-08   0.0435      0.9998      m0=89     16.18
+   640   1.30  320  5.000e-01 [lambda_A < 1e-10: below float64 resolution, row not reported]   F-barrier/kT = 31.94
+   10    1.60  5    4.900e-01 5.7718e-02   0.2829      0.8205      m0=1      2.47
+   20    1.60  10   4.984e-01 1.2210e-02   0.1933      0.8741      m0=3      3.87
+   40    1.60  20   4.999e-01 6.3543e-04   0.1476      0.9699      m0=8      6.93
+   80    1.60  40   5.000e-01 1.5229e-06   0.1141      0.9988      m0=17     13.08
+   160   1.60  80   5.000e-01 [lambda_A < 1e-10: below float64 resolution, row not reported]   F-barrier/kT = 25.36
+   320   1.60  160  5.000e-01 [lambda_A < 1e-10: below float64 resolution, row not reported]   F-barrier/kT = 49.92
+   640   1.60  320  5.000e-01 [lambda_A < 1e-10: below float64 resolution, row not reported]   F-barrier/kT = 99.04

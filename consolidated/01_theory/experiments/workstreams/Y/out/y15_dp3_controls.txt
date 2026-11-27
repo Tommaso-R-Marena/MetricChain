@@ -1,0 +1,18 @@
+(1) p = 0.5: cube F(0.49) = 0.0291391, E = 0.1201145, a = 0.1109441
+   G= 201: Renyi t=0.49: safe 0.0302292, grid-restricted 0.0291391 | E: safe 0.1212723, restricted 0.1201145 | a (Shannon): safe 0.1121284, restricted 0.1109441
+   G= 801: Renyi t=0.49: safe 0.0294115, grid-restricted 0.0291391 | E: safe 0.1204035, restricted 0.1201145 | a (Shannon): safe 0.1112024, restricted 0.1109441
+   G=3201: Renyi t=0.49: safe 0.0292072, grid-restricted 0.0291391 | E: safe 0.1201867, restricted 0.1201145 | a (Shannon): safe 0.1110063, restricted 0.1109441
+(2) n = 4, all 990 vertices: exact max_phi (1-t)D_t(pi_phi||Q_qt) against n * (safe stationary rate, G=801)
+   p=0.4: t=0.30 qt=0.40: exact 0.12575 <= 4*rate 0.13694 ok | t=0.30 qt=0.32: exact 0.12401 <= 4*rate 0.13592 ok | t=0.45 qt=0.40: exact 0.14498 <= 4*rate 0.15716 ok | t=0.45 qt=0.32: exact 0.13764 <= 4*rate 0.15273 ok | t=0.70 qt=0.40: exact 0.11780 <= 4*rate 0.12696 ok | t=0.70 qt=0.32: exact 0.10970 <= 4*rate 0.12100 ok
+   p=0.3: t=0.30 qt=0.30: exact 0.15376 <= 4*rate 0.17753 ok | t=0.30 qt=0.24: exact 0.14965 <= 4*rate 0.17150 ok | t=0.45 qt=0.30: exact 0.17431 <= 4*rate 0.19669 ok | t=0.45 qt=0.24: exact 0.16470 <= 4*rate 0.18742 ok | t=0.70 qt=0.30: exact 0.13734 <= 4*rate 0.14954 ok | t=0.70 qt=0.24: exact 0.12419 <= 4*rate 0.14331 ok
+   p=0.1: t=0.30 qt=0.10: exact 0.20655 <= 4*rate 0.27387 ok | t=0.30 qt=0.08: exact 0.20324 <= 4*rate 0.30902 ok | t=0.45 qt=0.10: exact 0.22241 <= 4*rate 0.28490 ok | t=0.45 qt=0.08: exact 0.21651 <= 4*rate 0.32272 ok | t=0.70 qt=0.10: exact 0.16066 <= 4*rate 0.20384 ok | t=0.70 qt=0.08: exact 0.15405 <= 4*rate 0.23086 ok
+(3) p = 0.3, t = 0.43, qt = 0.255: safe and grid-restricted rates
+   G= 201: safe [0.0463913, 0.0463913]   grid-restricted [0.0439975, 0.0439975]   [34 s]
+   G= 401: safe [0.0454733, 0.0454733]   grid-restricted [0.0439975, 0.0441732]   [42 s]
+   G= 801: safe [0.0449379, 0.0449379]   grid-restricted [0.0439975, 0.0442914]   [77 s]
+   G=1601: safe [0.0446805, 0.0446805]   grid-restricted [0.0439975, 0.0443495]   [256 s]
+256.0 s
+
+real	4m16.400s
+user	4m10.636s
+sys	0m3.202s

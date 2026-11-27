@@ -1,0 +1,2 @@
+walks checked: 9194 (all bridges with N <= 11, six lamellae); local identities and all inequalities hold
+smallest slack of each facet inequality (finite form): {'(-4, 2, -1)': 30, '(-3, 0, 2)': 36, '(-2, 1, 0)': 17, '(-1, 0, 0)': 1.0, '(-1, 1, -1)': 13, '(-1, 2, -1)': 28, '(0, -1, 2)': 23, '(3, 4, -3)': 50, '(4, -1, 0)': 21, '(6, -2, 1)': 32, '(6, -1, 0)': 31}

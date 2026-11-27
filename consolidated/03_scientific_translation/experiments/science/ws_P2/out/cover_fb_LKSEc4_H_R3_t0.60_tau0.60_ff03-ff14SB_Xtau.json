@@ -1,0 +1,41 @@
+{
+"tag": "fb_LKSEc4_H_R3_t0.60",
+"tau": 0.6,
+"residual": "ff03-ff14SB",
+"domain": "Xtau",
+"M": 7254,
+"c": [
+1.3196094268503558,
+5.772215134549548,
+5.229075870306339,
+9.604132801606873
+],
+"shape": [
+2,
+31,
+9,
+13
+],
+"kappa_max": 1.0,
+"cover_eps0.000": {
+"forced": 1,
+"volume": NaN,
+"partition": NaN,
+"lower": 2,
+"greedy": 8
+},
+"cover_eps0.596": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 2,
+"greedy": 5
+},
+"cover_eps2.000": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 1,
+"greedy": 1
+}
+}

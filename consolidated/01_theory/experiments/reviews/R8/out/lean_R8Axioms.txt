@@ -1,0 +1,34 @@
+'MetricChain.cube_exact_dip_randomized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.HintRecursion.cube_iterates_lt_hint_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.HintRecursion.cube_hint_superSolution' depends on axioms: [propext, Classical.choice, Quot.sound]
+@MetricChain.cube_exact_dip_randomized : ∀ {Ω : Type u_1} [inst : Fintype Ω] (n : ℕ)
+  (alg : Ω → MetricChain.QueryAlgorithm (Fin n → Bool)) (P : Ω → ℝ),
+  (∀ (ω : Ω), 0 ≤ P ω) →
+    ∑ ω, P ω = 1 →
+      ∀ {β c ε δ r : ℝ},
+        0 ≤ c →
+          (∀ (y : Fin n → Bool),
+              ε < Real.log (∑ x, Real.exp (β * max 0 (r - MetricChain.hamEnv (fun x => c) x y))) - Real.log (2 ^ n)) →
+            ∀ {B : ℝ},
+              (∀ (a : Fin n → Bool), ↑{y | MetricChain.hamEnv (fun x => c) a y < r}.card ≤ B) →
+                (∀ (g : (Fin n → Bool) → ℝ),
+                    MetricChain.Admissible (MetricChain.hamEnv fun x => c) g →
+                      1 - δ ≤ ∑ ω with |(alg ω).output g - Real.log (∑ x, Real.exp (-β * (0 + g x)))| ≤ ε / 2, P ω) →
+                  (1 - 2 * δ) * 2 ^ n ≤ (∑ ω, P ω * ↑((alg ω).queries fun x => 0).card) * B
+@MetricChain.HintRecursion.cube_iterates_lt_hint_add : ∀ {u : ℝ},
+  0 < u →
+    ∀ (T : ℕ → ℝ → ℝ),
+      (∀ (k : ℕ), MetricChain.HintRecursion.StepLE (MetricChain.HintRecursion.cubeNa u) (T k) (T (k + 1))) →
+        (∀ (k : ℕ) (x : ℝ), 0 < x → T (k + 1) x ≤ T k x) →
+          (∀ (k : ℕ) (x y : ℝ), 0 < x → x ≤ y → T k y ≤ T k x) →
+            (∃ C, ∀ (x : ℝ), 0 < x → T 0 x ≤ C) →
+              (∀ (k : ℕ) (x : ℝ), 0 < x → 0 ≤ T k x) →
+                ∀ {g : ℝ},
+                  0 < g →
+                    g < MetricChain.HintRecursion.cubeEstar u →
+                      ∀ {η : ℝ}, 0 < η → ∃ k, T k g < MetricChain.HintRecursion.cubeHint u g + η
+
+real	0m5.235s
+user	0m3.698s
+sys	0m1.454s
+exit=0

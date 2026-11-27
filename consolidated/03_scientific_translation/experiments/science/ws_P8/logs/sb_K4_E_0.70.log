@@ -1,0 +1,18 @@
+=== p8_02_signblind: K4 on E, tau 0.7: atoms 100, sites 4, 74529 states, anchor (3, 3, 10, 10); 5 subsets; NRAND 24, NCAND 4, NRS 4
+    (A) per-subset searches done, 1 s; chain truth <= LS_T <= PP_T <= P3: 15 checks, 0 violations
+    (C) order 3: remainder search at 9 states done, 2 s; largest |remainder| found at a single state: 2.9887e+00
+    (C) order 4: remainder search at 9 states done, 2 s; largest |remainder| found at a single state: 1.8065e-01
+    patterns evaluated at all 74529 states, 69 s
+--- order 3: 4 subsets (kcal/mol)
+    sums over subsets: truth 5.1799e-01 | all-plus 3.6694e+00 | remainder pattern 3.9474e+00 | (A) best pattern per subset 4.4529e+00 | best pair-by-pair 1.0201e+01 | P3 3.4922e+01
+    (A)/truth >= 8.60 [per subset min/median/max 6.63/8.09/10.07];  (B)/truth >= 7.62;  pair-by-pair/(A) <= 2.29;  P3/(A) <= 7.84;  P3/pair-by-pair = 3.42
+    remainder sup_x|g - I_2g|: truth 3.3488e-01 | all-plus 2.6822e+00 | pattern found 2.9887e+00 (22 % of the charges negative; 58 % as the true signs) | Gamma_3 3.4922e+01
+    (C) every sign-blind bound of the remainder / truth >= 8.92;  Gamma_3 / (C) = 11.7;  Gamma_3 / truth = 104
+--- order 4: 1 subsets (kcal/mol)
+    sums over subsets: truth 5.0201e-02 | all-plus 1.4746e-01 | remainder pattern 1.8065e-01 | (A) best pattern per subset 1.8065e-01 | best pair-by-pair 4.5392e-01 | P3 2.9815e+00
+    (A)/truth >= 3.60 [per subset min/median/max 3.60/3.60/3.60];  (B)/truth >= 3.60;  pair-by-pair/(A) <= 2.51;  P3/(A) <= 16.50;  P3/pair-by-pair = 6.57
+    remainder sup_x|g - I_3g|: truth 5.0201e-02 | all-plus 1.4746e-01 | pattern found 1.8065e-01 (22 % of the charges negative; 56 % as the true signs) | Gamma_4 2.9815e+00
+    (C) every sign-blind bound of the remainder / truth >= 3.60;  Gamma_4 / (C) = 16.5;  Gamma_4 / truth = 59
+    chain checks in all: 25, violations 0
+    P3's Gamma_m against the remainders of the sign-flipped systems (true signs, all-plus, pattern found) at every state: 447174 state checks, 0 violations; smallest Gamma_m / sup|remainder| = 11.68
+DONE in 69.5 s; peak RSS 415 MB

@@ -1,0 +1,30 @@
+{
+ "constants": {
+  "cases": 600,
+  "mismatches": [],
+  "max_abs_diff": {
+   "lM_bar": 1.2789769243681803e-13,
+   "x_out": 3.552713678800501e-15,
+   "l_inv_delta_p": 1.2789769243681803e-13,
+   "lCmax_unit": 1.2789769243681803e-13,
+   "lnu": 3.552713678800501e-15,
+   "xs": 1.4210854715202004e-14,
+   "lmult": 1.2789769243681803e-13
+  }
+ },
+ "runs": {
+  "runs": 11680,
+  "agree": 11680,
+  "disagreements": [],
+  "max_abs_diff_L": 1.7763568394002505e-15,
+  "max_abs_diff_U": 3.552713678800501e-15,
+  "statuses": {
+   "closed": 11671,
+   "abort: unclassified at the last rung": 9
+  },
+  "class_violation": 4.218847493575595e-15,
+  "tie_aborts_m10": 9,
+  "seconds": 422.8013949394226
+ },
+ "seconds": 424.996862411499
+}

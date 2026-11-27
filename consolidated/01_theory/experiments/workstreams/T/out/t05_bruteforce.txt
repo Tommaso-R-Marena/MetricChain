@@ -1,0 +1,7 @@
+n=8 k=4 u=1.0: ok so far (121 checks, 0 failures)  [0s]
+n=9 k=3 u=0.7: ok so far (242 checks, 0 failures)  [0s]
+n=10 k=5 u=0.4: ok so far (359 checks, 0 failures)  [1s]
+n=10 k=4 u=2.0: ok so far (480 checks, 0 failures)  [1s]
+n=11 k=5 u=1.0: ok so far (601 checks, 0 failures)  [3s]
+n=12 k=6 u=1.0: ok so far (722 checks, 0 failures)  [15s]
+TOTAL 722 checks, 0 failures, worst relative error 2.7e-15

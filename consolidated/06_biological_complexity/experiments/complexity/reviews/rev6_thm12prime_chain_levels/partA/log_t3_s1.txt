@@ -1,0 +1,12 @@
+seed 1, max leaves 12, 41s
+   kept : 8000
+   negative : 2443
+   searched : 2443
+   kalm_C : 5557
+   hyb_hist : {2: 7349, 3: 576, 4: 75}
+   n_hist : {6: 778, 7: 1065, 8: 1263, 9: 1431, 10: 1432, 11: 1167, 12: 864}
+   neg_n_hist : {7: 148, 8: 201, 9: 488, 10: 706, 11: 563, 12: 337}
+   neg_hyb_hist : {2: 2424, 3: 16, 4: 3}
+   neg_count_hist : {1: 2443}
+   nonplanar_or_invalid : 23198
+no circular order found for any network with a negative weight: True

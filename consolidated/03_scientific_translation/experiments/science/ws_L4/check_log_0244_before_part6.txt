@@ -1,0 +1,115 @@
+check_all.sh  start 2026-11-26 02:44:29 UTC
+lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+mathlib: "inputRev":"v4.31.0",  fabf563a7c95a166b8d7b6efca11c8b4dc9d911f
+RemainderIdentityTheory.lean identical to the output of assemble.py: True
+
+=== RemainderIdentity.lean  (913 lines, 58 theorems, 10 definitions; sha256 417a6849410f3706)
+imports: import Mathlib 
+forbidden tokens (sorry/admit/native_decide/unsafe/implemented_by/axiom declarations): 0
+exit code: 0   (10 s)
+errors: 0   warnings: 0   output lines that are not '#print axioms' lines: 0
+#print axioms lines: 24 (commands in the file: 24);  with an axiom outside {propext, Classical.choice, Quot.sound}: 0;  exactly the three: 23
+'ScienceL4.anchored_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.remainder_identity_mixConfig' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.switchedBase_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.switchedBase_of_mem' depends on axioms: [propext, Quot.sound]
+'ScienceL4.remainder_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_decomposition_of_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.mixedDiff_mixConfig_eq_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.mixedDiff_switchedBase_eq_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.sum_mixedDiff_card_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.exists_higherDiffBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_ordered' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_anchored' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_class' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.cover_of_site_shares_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.allocation_lemma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.sitePenalty_eq_total_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_sandwich_shares' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_sandwich' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_sandwich_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.sum_supp_eq_sum_ite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_insert_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_sub_reset_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.remainder_oscillation_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+=== RemainderIdentityTheory.lean  (758 lines, 47 theorems, 5 definitions; sha256 fc9f71c60d0eeab1)
+imports: import Mathlib import proofs.Frontiers.HigherOrderEnvelope 
+forbidden tokens (sorry/admit/native_decide/unsafe/implemented_by/axiom declarations): 0
+exit code: 0   (9 s)
+errors: 0   warnings: 0   output lines that are not '#print axioms' lines: 0
+#print axioms lines: 27 (commands in the file: 27);  with an axiom outside {propext, Classical.choice, Quot.sound}: 0;  exactly the three: 26
+'MetricChain.anchored_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.remainder_identity_mixConfig' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.switchedBase_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.switchedBase_of_mem' depends on axioms: [propext, Quot.sound]
+'ScienceL4.remainder_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_decomposition_of_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.mixedDiff_mixConfig_eq_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.mixedDiff_switchedBase_eq_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.sum_mixedDiff_card_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.exists_higherDiffBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_ordered' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_anchored' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_le_of_class' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.cover_of_site_shares_order' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.allocation_lemma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.sitePenalty_eq_total_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_sandwich_shares' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_sandwich' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_sandwich_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.sum_supp_eq_sum_ite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_insert_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.abs_remainder_sub_reset_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.remainder_oscillation_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.remainder_identity_theory' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.higherOrder_remainder_of_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.anchored_sandwich_theory' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+=== BennettTwoPoint.lean  (1186 lines, 63 theorems, 6 definitions; sha256 3688efb683694da7)
+imports: import Mathlib 
+forbidden tokens (sorry/admit/native_decide/unsafe/implemented_by/axiom declarations): 0
+exit code: 0   (11 s)
+errors: 0   warnings: 0   output lines that are not '#print axioms' lines: 0
+#print axioms lines: 37 (commands in the file: 37);  with an axiom outside {propext, Classical.choice, Quot.sound}: 0;  exactly the three: 37
+'ScienceL4.Bennett.key_exp_ineq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.exp_le_parabola' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.parabola_le_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.mgf_le_one_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.mgf_le_bennettB' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.integral_exp_le_bennettB' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.twoPoint_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.twoPoint_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.twoPoint_mgf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettB_isGreatest' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettB_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.one_le_bennettB' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettB_le_one_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettB_le_exp_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettW_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettW_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettW_le_log_one_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettW_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettW_sub_antitone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.remainder_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.remainder_bracket_attained' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.deterministic_bracket_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.log_mean_exp_neg_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennettW_zero_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.deterministic_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.deterministic_bracket_sharp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.deterministic_bracket_sharp_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bracket_of_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bracket_of_pointwise_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bracket_of_midpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.ceiling_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.bennett_bracket_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.chebyshev_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.certificate_of_mse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.iid_sample_mean_mse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.iid_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceL4.Bennett.iid_certificate_delta' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+check_all.sh  end 2026-11-26 02:44:59 UTC

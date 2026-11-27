@@ -1,0 +1,62 @@
+R15 item 5; delta = 0.05
+PART 1  the table of THY-RES-0012 section 1.2, recomputed
+    Delta   eps |      w* w_prime  KL(w||w_)  KL(w_||w) |  Pinsker  theirs |  N_TV theirs | N_KL grid400 theirs N_KL fine | N_TV/Pin N_KL/N_TV | approx (1-2d)^2 sinh^2/eps^2 Pin/approx
+   0.0605  0.01 |  0.4849  0.8186   0.283661   0.239343 |     5.71     5.7 |    20     20 |           68     68        68 |     3.50      3.40 |                         7.41      0.770
+      0.5  0.03 |  0.3775  0.4962   0.028471   0.029062 |    56.90      57 |   189    189 |          528    528       528 |     3.32      2.79 |                        57.43      0.991
+      1.0  0.05 |  0.2689  0.3584   0.018209   0.019184 |    88.97      89 |   289    289 |          815    815       815 |     3.25      2.82 |                        87.98      1.011
+      2.0  0.08 |  0.1192  0.1670   0.008967   0.009848 |   180.67     181 |   575    575 |         1634   1634      1634 |     3.18      2.84 |                       174.80      1.034
+      3.0   0.1 |  0.0474  0.0695   0.004219   0.004754 |   384.00     384 |  1209   1209 |         3455   3455      3455 |     3.15      2.86 |                       367.24      1.046
+  ratios quoted by the theory division:
+   Delta = 0.0605, eps = 0.01: N_KL / [2 ln(2/delta) sinh^2(Delta/2)/eps^2] = 1.0069 (they assert 0.95..1.12); N_KL e^Delta / first-version count = 1.0069 (they: 1.007..1.033); count of (c) x e^-Delta: factor e^-Delta = 0.941
+   Delta = 0.5, eps = 0.03: N_KL / [2 ln(2/delta) sinh^2(Delta/2)/eps^2] = 1.0094 (they assert 0.95..1.12); N_KL e^Delta / first-version count = 1.0094 (they: 1.007..1.033); count of (c) x e^-Delta: factor e^-Delta = 0.607
+   Delta = 1.0, eps = 0.05: N_KL / [2 ln(2/delta) sinh^2(Delta/2)/eps^2] = 1.0170 (they assert 0.95..1.12); N_KL e^Delta / first-version count = 1.0170 (they: 1.007..1.033); count of (c) x e^-Delta: factor e^-Delta = 0.368
+   Delta = 2.0, eps = 0.08: N_KL / [2 ln(2/delta) sinh^2(Delta/2)/eps^2] = 1.0263 (they assert 0.95..1.12); N_KL e^Delta / first-version count = 1.0263 (they: 1.007..1.033); count of (c) x e^-Delta: factor e^-Delta = 0.135
+   Delta = 3.0, eps = 0.1: N_KL / [2 ln(2/delta) sinh^2(Delta/2)/eps^2] = 1.0329 (they assert 0.95..1.12); N_KL e^Delta / first-version count = 1.0329 (they: 1.007..1.033); count of (c) x e^-Delta: factor e^-Delta = 0.050
+   range of N_KL e^Delta / first-version count over the five pairs: 1.0069 .. 1.0329
+   largest N_TV / Pinsker: 3.502; largest N_KL / N_TV: 3.400 (they: 'within a factor 3.5')
+PART 2  constants
+   w(1 - w)/(c + w)^2 is largest at w = c/(1 + 2c), where it equals 1/(4c(1 + c)) = sinh^2(Delta/2): confirmed numerically at six widths
+   Delta = 0.0605: w' <= 1 at w* needs eps <= (1/2) ln((e^Delta + 1)/2) = 0.01535; table eps = 0.01 (ok); 'small eps' for the approximation means eps << (1 - e^-Delta)/4 = 0.0147
+   Delta = 0.5: w' <= 1 at w* needs eps <= (1/2) ln((e^Delta + 1)/2) = 0.14046; table eps = 0.03 (ok); 'small eps' for the approximation means eps << (1 - e^-Delta)/4 = 0.0984
+   Delta = 1.0: w' <= 1 at w* needs eps <= (1/2) ln((e^Delta + 1)/2) = 0.31006; table eps = 0.05 (ok); 'small eps' for the approximation means eps << (1 - e^-Delta)/4 = 0.1580
+   Delta = 2.0: w' <= 1 at w* needs eps <= (1/2) ln((e^Delta + 1)/2) = 0.71689; table eps = 0.08 (ok); 'small eps' for the approximation means eps << (1 - e^-Delta)/4 = 0.2162
+   Delta = 3.0: w' <= 1 at w* needs eps <= (1/2) ln((e^Delta + 1)/2) = 1.17772; table eps = 0.1 (ok); 'small eps' for the approximation means eps << (1 - e^-Delta)/4 = 0.2376
+   best two-point bound over w at finite eps (Pinsker with the smaller of the two divergences; Bretagnolle-Huber: N >= ln(1/(4 delta))/KL):
+   Delta = 0.0605, eps = 0.01: at w*: Pinsker with KL(w||w') 5.71, with KL(w'||w) 6.77; best over w: 7.28 at w = 0.2690 (w* = 0.4849); N_TV at that w: 24; Bretagnolle-Huber at w*: 6.72
+   Delta = 0.5, eps = 0.03: at w*: Pinsker with KL(w||w') 56.90, with KL(w'||w) 55.74; best over w: 58.39 at w = 0.3030 (w* = 0.3775); N_TV at that w: 191; Bretagnolle-Huber at w*: 56.53
+   Delta = 1.0, eps = 0.05: at w*: Pinsker with KL(w||w') 88.97, with KL(w'||w) 84.45; best over w: 90.69 at w = 0.2150 (w* = 0.2689); N_TV at that w: 292; Bretagnolle-Huber at w*: 88.39
+   Delta = 2.0, eps = 0.08: at w*: Pinsker with KL(w||w') 180.67, with KL(w'||w) 164.50; best over w: 183.77 at w = 0.0920 (w* = 0.1192); N_TV at that w: 581; Bretagnolle-Huber at w*: 179.49
+   Delta = 3.0, eps = 0.1: at w*: Pinsker with KL(w||w') 384.00, with KL(w'||w) 340.73; best over w: 391.02 at w = 0.0355 (w* = 0.0474); N_TV at that w: 1218; Bretagnolle-Huber at w*: 381.49
+   Pinsker (TV <= sqrt(KL/2)) and Bretagnolle-Huber (TV <= sqrt(1 - exp(-KL)), hence 1 - TV >= exp(-KL)/2) hold on all binomial pairs tried (violations: 0)
+   Bretagnolle-Huber with TV >= 1 - 2 delta:  N >= ln(1/(4 delta (1 - delta)))/KL  (>= ln(1/(4 delta))/KL, the form printed as 'Bretagnolle-Huber' in this log)
+      Delta = 0.0605, eps = 0.01: ln(1/(4 delta (1 - delta)))/min KL = 6.94  (Pinsker with the same divergence 6.77)
+      Delta = 0.5, eps = 0.03: ln(1/(4 delta (1 - delta)))/min KL = 58.33  (Pinsker with the same divergence 56.90)
+      Delta = 1.0, eps = 0.05: ln(1/(4 delta (1 - delta)))/min KL = 91.20  (Pinsker with the same divergence 88.97)
+      Delta = 2.0, eps = 0.08: ln(1/(4 delta (1 - delta)))/min KL = 185.21  (Pinsker with the same divergence 180.67)
+      Delta = 3.0, eps = 0.1: ln(1/(4 delta (1 - delta)))/min KL = 393.65  (Pinsker with the same divergence 384.00)
+   delta = 0.05: (Delta, eps) = (1, 0.05): Pinsker 89.0, Bretagnolle-Huber 88.4, N_TV 289, N_KL 815  -- Pinsker saturates at 2/KL = 109.8 as delta -> 0, the other two grow like ln(1/delta)
+   delta = 0.01: (Delta, eps) = (1, 0.05): Pinsker 105.5, Bretagnolle-Huber 176.8, N_TV 578, N_KL 1170  -- Pinsker saturates at 2/KL = 109.8 as delta -> 0, the other two grow like ln(1/delta)
+   delta = 0.001: (Delta, eps) = (1, 0.05): Pinsker 109.4, Bretagnolle-Huber 303.2, N_TV 1021, N_KL 1678  -- Pinsker saturates at 2/KL = 109.8 as delta -> 0, the other two grow like ln(1/delta)
+   delta = 1e-06: (Delta, eps) = (1, 0.05): Pinsker 109.8, Bretagnolle-Huber 682.6, N_TV None, N_KL 3203  -- Pinsker saturates at 2/KL = 109.8 as delta -> 0, the other two grow like ln(1/delta)
+   expected number: truncating at K times the expectation gives N_exp >= 2 (1 - 2 delta - 2/K)^2 / (K KL); K = 4/(1 - 2 delta): (1 - 2 delta)^3/(8 KL) [confirmed]; the best K is 6/(1 - 2 delta): 4 (1 - 2 delta)^3/(27 KL), larger by the factor 1.1852
+PART 3  the transcript of an adaptive algorithm under the prior is a string of independent Bernoulli(w) bits (exact enumeration)
+   80 random adaptive rules on 5 to 8 states, 3 to 5 evaluations: largest deviation of the transcript law from Bernoulli(w)^N: 1.1e-16
+PART 4  fluctuation of q(D)
+   M = 10: E q(D) = 0.300000 (w = 0.3); Var q(D) = 0.081306 = w(1-w) sum q^2 = 0.081306 <= w(1-w) max q = 0.125457
+   M = 14: E q(D) = 0.300000 (w = 0.3); Var q(D) = 0.032300 = w(1-w) sum q^2 = 0.032300 <= w(1-w) max q = 0.047629
+   the fluctuation of ln Z is sd(q(D))/(c + w); against eps it needs  sum_x q(x)^2  <<  eps^2 (c + w)^2 / (w(1 - w))  =  eps^2 / sinh^2(Delta/2) at w*:
+      Delta = 0.0605, eps = 0.01: sum q^2 << 1.092e-01, i.e. many more than 9 effective states (the count itself is of that order: 7 .. 68)
+      Delta = 0.5, eps = 0.03: sum q^2 << 1.410e-02, i.e. many more than 71 effective states (the count itself is of that order: 57 .. 523)
+      Delta = 1.0, eps = 0.05: sum q^2 << 9.207e-03, i.e. many more than 109 effective states (the count itself is of that order: 88 .. 801)
+      Delta = 2.0, eps = 0.08: sum q^2 << 4.634e-03, i.e. many more than 216 effective states (the count itself is of that order: 175 .. 1592)
+      Delta = 3.0, eps = 0.1: sum q^2 << 2.206e-03, i.e. many more than 453 effective states (the count itself is of that order: 367 .. 3345)
+PART 5  exact failure probability of the plug-in estimate on two-level members
+   Delta = 0.0605, eps = 0.01: N_KL = 68: worst failure on the grid i/60: 0.00718 (grid i/600: 0.00731); with N_KL // 4 = 17: 0.2236
+   Delta = 0.5, eps = 0.03: N_KL = 528: worst failure on the grid i/60: 0.00631 (grid i/600: 0.00696); with N_KL // 4 = 132: 0.1852
+   Delta = 1.0, eps = 0.05: N_KL = 815: worst failure on the grid i/60: 0.00625 (grid i/600: 0.00685); with N_KL // 4 = 203: 0.1842
+   Delta = 2.0, eps = 0.08: N_KL = 1634: worst failure on the grid i/60: 0.00627 (grid i/600: 0.00634); with N_KL // 4 = 408: 0.1909
+   Delta = 3.0, eps = 0.1: N_KL = 3455: worst failure on the grid i/60: 0.00642 (grid i/600: 0.00642); with N_KL // 4 = 863: 0.1602
+   largest over the five pairs with N_KL: 0.0072 (they: at most 0.0072); least over the five pairs with a quarter: 0.160 (they: at least 0.16)
+ALL CHECKS PASSED
+seconds 1.7
+peak RSS MB 97.3828125

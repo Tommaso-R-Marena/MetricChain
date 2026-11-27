@@ -1,0 +1,8 @@
+=== p8_08_ideal: L12 on H, tau 0.6: 3200 Gibbs states, 8 distinct; changed sites per state: mean 0.469, max 3; corner evaluations needed: 27
+    exact remainders at 8 distinct states from 8 evaluations of g, 1 s; states with more than 13 changed sites skipped: 0 of 3200
+    order m | mean |R_m| (kcal/mol) | max |R_m| in the sample | FLOOR of any order-m certificate, 2 beta <|R_m|> (nats) | exact-term envelope 2 beta <A_m> (nats) | fraction of states with >= m changed sites
+      3 | 9.877e-07 | 3.161e-03 | 3.314e-06 (+- 3.3e-06) | 3.314e-06 (+- 3.3e-06) | 0.0003
+      4 | 0.000e+00 | 0.000e+00 | 0.000e+00 (+- 0.0e+00) | 0.000e+00 (+- 0.0e+00) | 0.0000
+      5 | 0.000e+00 | 0.000e+00 | 0.000e+00 (+- 0.0e+00) | 0.000e+00 (+- 0.0e+00) | 0.0000
+      6 | 0.000e+00 | 0.000e+00 | 0.000e+00 (+- 0.0e+00) | 0.000e+00 (+- 0.0e+00) | 0.0000
+DONE in 0.7 s; peak RSS 84 MB

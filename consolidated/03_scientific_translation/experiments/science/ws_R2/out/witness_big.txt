@@ -1,0 +1,9 @@
+bridge from the system (0,12/5,22/5;4/5), box 128: N = 166199; verified by my code: self-avoiding lattice walk, bridge; (h3,h8,h11,g) = (1717,376013,687789,131710)
+   report: N = 166199, (1717, 376013, 687789, 131710): match = True
+   2h11-5h3-8N = 37401 = 0.22504 N   (report: 37401 = 0.225N);  168/(N+3) = 0.001011
+   => a point (p*,g*) of K^br with 2p11*-5p3*-8 >= 0.22504 - 2*0.00101 = 0.22302; by the gauche bound of Prop 11.72(c), gamma(p*) >= that  (report: >= 0.22)
+   g/N = 0.79248
+
+real	2m1.324s
+user	0m33.300s
+sys	0m0.169s

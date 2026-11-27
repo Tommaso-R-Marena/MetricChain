@@ -1,0 +1,19 @@
+R28 ff_relaxgeom.py  start 2026-11-27T00:41:33Z backbone E
+control g0: Z-matrix extracted from the builder's own structure reproduces its coordinates at 20 random (chi_1, chi_2): largest difference 4.0e-15 A -> ok
+control g0: its energy grid against my original grid: largest relative difference 9.6e-14 -> ok
+[g0 = builder geometry (CA-CB-CG 109.50)] rigid table: minimum state (180, 60), gap 32.950 kT; continuous minimum at (195, 82.5) in cell (1, 0); same cell: True
+      TV(grid cells, rigid) = 0.2746; TV(grid cells, cell-minimised) = 0.0442; ln Z offsets per torsion: rigid -0.6161, minimised +1.7633
+      cells (2,1) / (1,0): population grid 0.1520 / 0.7254; rigid table 0.0000 / 1.0000; strain of the ideal rotamer above the cell minimum 35.752 / 4.390 kT; cell minima 1.588 / 0.000 kT
+
+g_mt: geometry relaxed from (267.5, 160.0): chi = (291.54, 171.69), CA-CB-CG = 116.27 deg, N-CA-CB = 110.52, CB-CG-CD1 = 109.59, CB-CG-CD2 = 112.12; rebuild error 2.5e-15 A
+      bond + angle energy constant over the grid: ranges 2.9e-14, 3.0e-14 kcal/mol
+[g_mt: rigid rotation of the geometry relaxed in the mt well (CA-CB-CG 116.27)] rigid table: minimum state (180, 60), gap 4.659 kT; continuous minimum at (292.5, 172.5) in cell (2, 1); same cell: False
+      TV(grid cells, rigid) = 0.7250; TV(grid cells, cell-minimised) = 0.0330; ln Z offsets per torsion: rigid +0.8712, minimised +1.8114
+      cells (2,1) / (1,0): population grid 0.7006 / 0.2657; rigid table 0.0094 / 0.9906; strain of the ideal rotamer above the cell minimum 6.239 / 0.461 kT; cell minima 0.000 / 1.119 kT
+
+g_tp: geometry relaxed from (195.0, 82.5): chi = (179.29, 64.77), CA-CB-CG = 115.43 deg, N-CA-CB = 108.83, CB-CG-CD1 = 112.36, CB-CG-CD2 = 109.64; rebuild error 2.7e-15 A
+      bond + angle energy constant over the grid: ranges 2.7e-14, 2.6e-14 kcal/mol
+[g_tp: rigid rotation of the geometry relaxed in the tp well (CA-CB-CG 115.43)] rigid table: minimum state (180, 60), gap 15.098 kT; continuous minimum at (180, 65) in cell (1, 0); same cell: True
+      TV(grid cells, rigid) = 0.1167; TV(grid cells, cell-minimised) = 0.0145; ln Z offsets per torsion: rigid +1.6040, minimised +1.7695
+      cells (2,1) / (1,0): population grid 0.0916 / 0.8833; rigid table 0.0000 / 1.0000; strain of the ideal rotamer above the cell minimum 13.175 / 0.193 kT; cell minima 2.116 / 0.000 kT
+END 2026-11-27T00:42:56Z  wall 82.2 s  peak memory 98 MB (ru_maxrss; address space capped at 3 GB)

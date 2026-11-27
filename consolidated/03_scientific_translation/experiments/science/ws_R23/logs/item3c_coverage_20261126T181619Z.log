@@ -1,0 +1,17 @@
+numbered statements with a bold header in the theory report: 150
+by top-level section (all / not named in either audit):
+   section 2: 7 / 0
+   section 3: 1 / 0
+   section 4: 7 / 0
+   section 6: 1 / 0
+   section 11: 134 / 0
+
+NOT NAMED in AA1_REPORT.md or AA2_REPORT.md:
+
+statements per top-level section, first and last line:
+   2. Direction A — dominance, gauges and r: 7 statements, l.141–l.356 (2.1 … 2.7)
+   3. Direction D — partition functions and: 1 statements, l.432–l.432 (3.1 … 3.1)
+   4. Direction C — realizability and geome: 7 statements, l.663–l.828 (4.1 … 4.7)
+   6. Direction E — certificate algebra: 1 statements, l.988–l.988 (6.1 … 6.1)
+   11. Certification geometry: 134 statements, l.1768–l.11391 (11.1 … 11.117)
+END item3c_coverage

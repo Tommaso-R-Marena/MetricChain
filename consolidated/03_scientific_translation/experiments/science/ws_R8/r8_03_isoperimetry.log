@@ -1,0 +1,39 @@
+== A: Harper's theorem in the form used (erosion numbers) ==
+  Q_3: all 254 proper non-empty subsets, all k: violations 0;  final segment ~ initial segment: True
+  Q_4: all 65534 proper non-empty subsets, all k: violations 0;  final segment ~ initial segment: True
+  Q_5: 20000 random subsets (uniform, ball-like, grown): violations 0
+  Q_6: 20000 random subsets (uniform, ball-like, grown): violations 0
+   [5s]
+== B: the lemma as a convex programme over all members with a given support ==
+  Q_3: 20 orbits of supports (254 supports)
+     u=1.0: cases 80 (orbit x U0), LP solves 184, violations 0, not certified to 1e-6: 0
+     u=1.0: on D* (every size) the optimum over all members equals the plateau value to 9.9e-10
+     u=2.0: cases 80 (orbit x U0), LP solves 190, violations 0, not certified to 1e-6: 0
+     u=2.0: on D* (every size) the optimum over all members equals the plateau value to 9.4e-10
+  Q_4: 400 orbits of supports (65534 supports)
+     u=1.0: cases 1600 (orbit x U0), LP solves 3307, violations 0, not certified to 1e-6: 0
+     u=1.0: on D* (every size) the optimum over all members equals the plateau value to 1.0e-09
+     u=2.0: cases 1600 (orbit x U0), LP solves 3887, violations 0, not certified to 1e-6: 0
+     u=2.0: on D* (every size) the optimum over all members equals the plateau value to 1.7e-08
+  Q_5: 500 random supports (uniform, ball-like, grown): violations 0, not certified to 1e-6: 0
+  Q_6: 150 random supports (uniform, ball-like, grown): violations 0, not certified to 1e-6: 0
+  largest (feasible value - Zpl)/Zpl over all cases: +6.01e-16;  largest (LP upper bound - Zpl)/Zpl: +1.17e-07
+   [69s]
+== C: exhaustive grid of general members (dips and hills), vanishing at vertex 0 ==
+  Q_3, values in (u/6)Z: 11491441 functions
+     u=0.6: tested 11491440; violations 0; passed the screen 11490534, resolved exactly 906: largest (Z_g - Zpl)/Zpl = +4.36e-16; members attaining the bound: 906; with U_g > 0: 4817808
+     u=1.0: tested 11491440; violations 0; passed the screen 11490534, resolved exactly 906: largest (Z_g - Zpl)/Zpl = +4.68e-16; members attaining the bound: 906; with U_g > 0: 4265639
+     u=2.5: tested 11491440; violations 0; passed the screen 11490534, resolved exactly 906: largest (Z_g - Zpl)/Zpl = +1.59e-15; members attaining the bound: 906; with U_g > 0: 2791665
+  Q_4, values in (u/2)Z: 277313645 functions
+     u=1.0: tested 277313644; violations 0; passed the screen 277245852, resolved exactly 67792: largest (Z_g - Zpl)/Zpl = +8.29e-16; members attaining the bound: 67792; with U_g > 0: 95596087
+     u=2.5: tested 277313644; violations 0; passed the screen 277245852, resolved exactly 67792: largest (Z_g - Zpl)/Zpl = +3.48e-15; members attaining the bound: 67792; with U_g > 0: 46503132
+   [282s]
+== D: random general members with dips and hills on random supports ==
+  members 900 (296 with hills): violations 0; largest (Z_g - Zpl)/Zpl = +1.45e-15
+   [284s]
+== E: mutations ==
+  (1) bound taken from a subcube of 8 points: 29.746255; best member on D*: 38.338359 -> violation detected: True
+  (2) without the energy constraint: full cone 39.087803 > Zpl 26.530785: True
+  (3) comparison value at the wrong energy: 21.925196 < best member 26.530785: True
+   [284s]
+SUMMARY {'A': True, 'B': True, 'C': True, 'D': True, 'E': True}  time 284s

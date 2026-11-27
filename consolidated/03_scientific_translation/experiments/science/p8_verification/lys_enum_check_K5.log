@@ -1,0 +1,13 @@
+=== K5 on H, tau 0.7: 122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], 115248 states; anchor [10, 10, 8, 3, 3]
+(0) g evaluated at every state with P3's bulk evaluator [25s]
+    P8's stored enumeration of g (ws_P8/out/m1_K5_H_0.70.npz) against mine: largest deviation 2.27e-12 kcal/mol; its anchor equals mine: True
+    exact ln Z = 251.348445; mean number of sites off the anchor in the true ensemble: 0.923
+| m | variant | subsets | sum of constants (kT) | states with >= m sites off the anchor | violations R > B | largest R (kcal/mol) | smallest B/R (R > 1e-9) | Boltzmann mean of beta R | Boltzmann mean of beta B | ratio |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 3 | Sb | 10 | 51.71 | 114263 | 0 | 0.943 | 12.275 | 2.797e-05 | 2.577e-01 | 9213.0 |
+| 3 | SAb | 10 | 50.23 | 114263 | 0 | 0.943 | 12.105 | 2.797e-05 | 2.517e-01 | 8998.1 |
+| 4 | Sb | 5 | 2.11 | 105612 | 0 | 0.02496 | 26.489 | 3.317e-08 | 1.274e-03 | 38418.4 |
+| 4 | SAb | 5 | 2.086 | 105612 | 0 | 0.02496 | 26.402 | 3.317e-08 | 1.263e-03 | 38078.8 |
+| 5 | Sb | 1 | 0.04017 | 66924 | 0 | 0.0003621 | 66.133 | 6.230e-12 | 2.354e-06 | 377909.1 |
+| 5 | SAb | 1 | 0.04017 | 66924 | 0 | 0.0003621 | 66.133 | 6.230e-12 | 2.354e-06 | 377909.1 |
+ALL DONE 26 s; peak RSS 252 MB

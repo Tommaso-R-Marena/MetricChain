@@ -1,0 +1,19 @@
+{
+ "jobs": {
+  "claims": {
+   "searches": 80,
+   "in_corner": 0,
+   "legacy_reproduces_stored": 80,
+   "max_abs_legacy_minus_stored": 8.526512829121202e-14,
+   "changed": 0,
+   "max_increase": 0.0,
+   "max_decrease": 0.0,
+   "max_increase_over_na": 0.0,
+   "max_decrease_over_na": 0.0,
+   "violations_exact": 0,
+   "violation_examples": []
+  }
+ },
+ "cells": [],
+ "seconds": 276.085839509964
+}

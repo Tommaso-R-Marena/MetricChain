@@ -1,0 +1,240 @@
+target,type,residues,stoichiometry,entry_date,human_expiration,pdb_codes_on_target_list_found_released_at_rcsb,earliest_pdb_release,reference_status_2026-11-26
+R2301,NucA,96,A1,2026-04-27,2026-04-29,,,no PDB code on the target list
+R2302,NucA,90,A1,2026-04-27,2026-04-29,,,no PDB code on the target list
+H1311,Prot,822,A1B1C1D1E1,2026-04-28,2026-05-13,9zcl,2026-06-17,reference public in the PDB
+R2303,NucA,84,A2,2026-04-28,2026-04-30,,,no PDB code on the target list
+R2304,NucA,100,A1,2026-04-28,2026-04-30,11eh,2026-05-27,reference public in the PDB
+H1312,Prot,1409,UNK,2026-04-29,2026-05-13,,,no PDB code on the target list
+R2305,NucA,105,A2,2026-04-29,2026-05-01,11ag,2026-05-27,reference public in the PDB
+R2306,NucA,100,A1,2026-04-29,2026-05-01,10zu,2026-05-27,reference public in the PDB
+R2307,NucA,100,A1,2026-04-30,2026-05-02,10zt,2026-05-27,reference public in the PDB
+R2308,NucA,93,A1,2026-04-30,2026-05-02,,,no PDB code on the target list
+T1313,Prot,618,UNK,2026-04-30,2026-05-14,,,no PDB code on the target list
+M2310,Hybrid,810,A1B1,2026-05-01,2026-05-05,,,no PDB code on the target list
+R2309,NucA,810,A1,2026-05-01,2026-05-05,,,no PDB code on the target list
+R2310,NucA,788,A1,2026-05-01,2026-05-05,,,no PDB code on the target list
+R2314,NucA/Ligand,25,A1,2026-05-04,2026-05-06,,,no PDB code on the target list
+R2315,NucA,25,A1,2026-05-04,2026-05-06,,,no PDB code on the target list
+R2316,NucA,97,A1,2026-05-04,2026-05-06,,,no PDB code on the target list
+H1319,Prot,497,UNK,2026-05-05,2026-05-19,9oef,2026-07-08,reference public in the PDB
+R2317,NucA/Ligand,129,A1,2026-05-05,2026-05-07,,,no PDB code on the target list
+R2318,NucA/Ligand,140,A1,2026-05-05,2026-05-07,,,no PDB code on the target list
+H1321,Prot,502,UNK,2026-05-06,2026-05-20,9oeg,2026-07-08,reference public in the PDB
+M2320,Hybrid,731,A1B1,2026-05-06,2026-05-10,,,no PDB code on the target list
+R2320s0,NucA,731,A1,2026-05-06,2026-05-10,,,no PDB code on the target list
+H2324,Prot,856,A1B1C1D1E1,2026-05-07,2026-05-21,9yw4,2026-06-17,reference public in the PDB
+R2322,NucA,83,A1,2026-05-07,2026-05-14,,,no PDB code on the target list
+R2323,NucA,83,A2,2026-05-07,2026-05-14,,,no PDB code on the target list
+R2325,NucA,499,A2,2026-05-08,2026-05-11,,,no PDB code on the target list
+H1332,Prot,704,UNK,2026-05-11,2026-05-25,,,cancelled
+R2326,NucA/Ligand,37,A1,2026-05-11,2026-05-13,,,no PDB code on the target list
+R2327,NucA/Ligand,40,A1,2026-05-11,2026-05-13,,,no PDB code on the target list
+R2328,NucA/Ligand,32,A1,2026-05-11,2026-05-13,,,no PDB code on the target list
+R2329,NucA/Ligand,60,A1,2026-05-12,2026-05-14,,,no PDB code on the target list
+R2330,NucA/Ligand,75,A1,2026-05-12,2026-05-14,,,no PDB code on the target list
+T1331,Prot,281,UNK,2026-05-12,2026-05-26,,,no PDB code on the target list
+H1335,Prot,1820,UNK,2026-05-13,2026-05-27,,,no PDB code on the target list
+H2312,Prot,1409,A1B1C1,2026-05-13,2026-05-27,,,no PDB code on the target list
+M2333,Hybrid,614,A1B1,2026-05-13,2026-05-15,,,no PDB code on the target list
+R2333s0,NucA,614,A1,2026-05-13,2026-05-15,,,no PDB code on the target list
+H2338,Prot,1050,A1B1C1D1,2026-05-14,2026-05-29,9yrq,2026-06-24,reference public in the PDB
+M2334,Hybrid,1204,A1B1,2026-05-14,2026-05-16,,,no PDB code on the target list
+R2334,NucA,609,A1B1,2026-05-14,2026-05-16,,,no PDB code on the target list
+T2313,Prot,618,A3,2026-05-14,2026-05-28,,,no PDB code on the target list
+H2339,Prot,1044,A1B1C1D1,2026-05-15,2026-05-30,9yrb,2026-06-24,reference public in the PDB
+M2337,Hybrid,644,A1B1,2026-05-15,2026-05-22,,,no PDB code on the target list
+R2336,NucA,644,A1,2026-05-15,2026-05-22,,,no PDB code on the target list
+R2337s0,NucA,644,A1,2026-05-15,2026-05-22,,,no PDB code on the target list
+H1340,Prot,686,UNK,2026-05-18,2026-06-01,,,no PDB code on the target list
+H1343,Prot,773,UNK,2026-05-18,2026-06-01,,,no PDB code on the target list
+R2341,NucA,186,A1,2026-05-18,2026-06-01,,,no PDB code on the target list
+H2319,Prot,497,A2B2C2,2026-05-19,2026-06-02,9oef,2026-07-08,reference public in the PDB
+T1342,Prot,1455,UNK,2026-05-19,2026-06-02,,,no PDB code on the target list
+H1344,Prot,734,UNK,2026-05-20,2026-06-03,,,no PDB code on the target list
+H2321,Prot,502,A2B2C2,2026-05-20,2026-06-03,9oeg,2026-07-08,reference public in the PDB
+H1346,Prot,885,UNK,2026-05-21,2026-06-04,12es,2026-08-12,reference public in the PDB
+H1347,Prot,876,UNK,2026-05-21,2026-06-04,12er,2026-08-12,reference public in the PDB
+R2345,NucA,64,A1,2026-05-21,2026-06-04,,,no PDB code on the target list
+H1348,Prot,1034,UNK,2026-05-22,2026-06-05,,,no PDB code on the target list
+H1349,Prot,1030,UNK,2026-05-22,2026-06-05,,,no PDB code on the target list
+H1354,Prot,726,UNK,2026-05-25,2026-06-08,,,no PDB code on the target list
+H1355,Prot,708,UNK,2026-05-25,2026-06-08,,,no PDB code on the target list
+R2350,NucA,389,A1,2026-05-25,2026-06-08,,,no PDB code on the target list
+H1356,Prot,590,UNK,2026-05-26,2026-06-09,,,no PDB code on the target list
+R2351,NucA,389,A1,2026-05-26,2026-06-09,,,no PDB code on the target list
+T1357,Prot,196,UNK,2026-05-26,2026-06-09,,,no PDB code on the target list
+H1359,Prot,2336,UNK,2026-05-27,2026-06-10,,,no PDB code on the target list
+H2335,Prot,1820,A1B1C1D1E1,2026-05-27,2026-06-10,,,no PDB code on the target list
+R2352,NucA,389,A1,2026-05-27,2026-06-10,,,no PDB code on the target list
+T1358,Prot,151,UNK,2026-05-27,2026-06-10,,,no PDB code on the target list
+H1360,Prot,1558,UNK,2026-05-28,2026-06-11,,,no PDB code on the target list
+R2353,NucA,394,A1,2026-05-28,2026-06-11,,,no PDB code on the target list
+T1361,Prot,123,UNK,2026-05-28,2026-06-11,,,no PDB code on the target list
+H1362,Prot,1836,UNK,2026-05-29,2026-06-12,,,no PDB code on the target list
+T1363,Prot,170,UNK,2026-05-29,2026-06-12,,,no PDB code on the target list
+H2340,Prot,686,A3B3C3,2026-06-01,2026-06-15,,,no PDB code on the target list
+H2343,Prot,773,A1B1C1,2026-06-01,2026-06-15,,,no PDB code on the target list
+R2365,NucA/Ligand,60,A1,2026-06-01,2026-06-15,,,no PDB code on the target list
+T1364,Prot,86,UNK,2026-06-01,2026-06-15,,,no PDB code on the target list
+E2366,Prot,1269,A3,2026-06-02,2026-07-16,,,no PDB code on the target list
+E2367,Prot,1269,A3,2026-06-02,2026-07-16,,,no PDB code on the target list
+T2342,Prot,1455,A3,2026-06-02,2026-06-16,,,no PDB code on the target list
+E2368,Prot,1269,A3,2026-06-03,2026-07-17,,,no PDB code on the target list
+E2369,Prot,1269,A3,2026-06-03,2026-07-17,,,no PDB code on the target list
+H2344,Prot,734,A1B1C1,2026-06-03,2026-06-17,,,no PDB code on the target list
+H2346,Prot,885,A1B1C1D1,2026-06-04,2026-06-18,,,no PDB code on the target list
+H2347,Prot,876,A1B1C1D1,2026-06-04,2026-06-18,,,no PDB code on the target list
+M1370,Hybrid,274,UNK,2026-06-04,2026-06-18,,,cancelled
+H2348,Prot,1034,A1B1C1,2026-06-05,2026-06-19,,,no PDB code on the target list
+H2349,Prot,1030,A1B1C1,2026-06-05,2026-06-19,,,no PDB code on the target list
+T1371,Prot,151,UNK,2026-06-05,2026-06-19,,,no PDB code on the target list
+T1372,Prot,202,UNK,2026-06-05,2026-06-19,,,no PDB code on the target list
+H1373,Prot,725,UNK,2026-06-08,2026-06-22,,,no PDB code on the target list
+H1374,Prot,739,UNK,2026-06-08,2026-06-22,,,no PDB code on the target list
+H2354,Prot,726,A3B3C3,2026-06-08,2026-06-22,,,no PDB code on the target list
+H2355,Prot,708,A3B3C3,2026-06-08,2026-06-22,,,no PDB code on the target list
+E2375,Prot,668,A3B3,2026-06-09,2026-07-23,,,no PDB code on the target list
+E2376,Prot,662,A3B3,2026-06-09,2026-07-23,,,no PDB code on the target list
+H2356,Prot,590,A8B4,2026-06-09,2026-06-23,,,no PDB code on the target list
+H2359,Prot,2336,A1B1C1D1E1F1,2026-06-10,2026-06-24,,,no PDB code on the target list
+M1377,Hybrid,462,UNK,2026-06-10,2026-06-24,,,no PDB code on the target list
+T1378,Prot,745,UNK,2026-06-10,2026-06-24,,,no PDB code on the target list
+T2358,Server only,151,A2,2026-06-10,2026-06-13,,,no PDB code on the target list
+H1379,Prot,697,UNK,2026-06-11,2026-06-25,,,no PDB code on the target list
+H1380,Prot,693,UNK,2026-06-11,2026-06-25,,,no PDB code on the target list
+H2360,Prot,1558,A1B1C1D1E1,2026-06-11,2026-06-25,,,no PDB code on the target list
+H1381,Prot,704,UNK,2026-06-12,2026-06-26,,,no PDB code on the target list
+H1382,Prot,700,UNK,2026-06-12,2026-06-26,,,no PDB code on the target list
+H2362,Prot,1836,A1B1C1D1E1F1G1,2026-06-12,2026-06-26,,,no PDB code on the target list
+T2383,Server /Ligand,1142,A1,2026-06-12,2026-06-26,37mf,2026-09-30,reference public in the PDB
+W2385,,417,A1,2026-06-12,2026-07-26,,,no PDB code on the target list
+W2386,,417,A1,2026-06-12,2026-07-26,,,no PDB code on the target list
+H1388,Prot,244,UNK,2026-06-15,2026-06-29,,,no PDB code on the target list
+R2387,NucA/Ligand,43,A1,2026-06-15,2026-06-29,,,no PDB code on the target list
+T2364,Prot,86,A3,2026-06-15,2026-06-29,,,no PDB code on the target list
+H1389,Prot,702,UNK,2026-06-16,2026-06-30,,,no PDB code on the target list
+H1391,Prot,702,UNK,2026-06-16,2026-06-30,,,no PDB code on the target list
+H1392,Prot,707,UNK,2026-06-17,2026-07-01,,,no PDB code on the target list
+R2390,NucA/Ligand,34,A1,2026-06-17,2026-07-01,,,no PDB code on the target list
+T1393,Prot,576,UNK,2026-06-17,2026-07-01,,,no PDB code on the target list
+H1394,Prot,566,UNK,2026-06-18,2026-07-02,,,no PDB code on the target list
+T2395,Prot,176,A5,2026-06-18,2026-07-02,,,no PDB code on the target list
+T1396,Server only,239,UNK,2026-06-19,2026-07-03,,,cancelled
+T1397,Server only,244,UNK,2026-06-19,2026-07-03,,,cancelled
+T2371,Prot,151,A2,2026-06-19,2026-07-03,,,no PDB code on the target list
+H1398,Prot,570,UNK,2026-06-22,2026-07-06,,,no PDB code on the target list
+H1399,Prot,568,UNK,2026-06-22,2026-07-06,,,no PDB code on the target list
+H2373,Prot,725,A1B1C1,2026-06-22,2026-07-06,,,no PDB code on the target list
+H2374,Prot,739,A1B1C1,2026-06-22,2026-07-06,,,no PDB code on the target list
+H1400,Prot,572,UNK,2026-06-23,2026-07-07,,,no PDB code on the target list
+H1401,Prot,572,UNK,2026-06-23,2026-07-07,,,no PDB code on the target list
+H1402,Prot,579,UNK,2026-06-24,2026-07-08,,,no PDB code on the target list
+H1403,Prot,568,UNK,2026-06-24,2026-07-08,,,no PDB code on the target list
+M2377v1,Hybrid,462,A2B1,2026-06-24,2026-07-08,,,no PDB code on the target list
+M2377v2,Hybrid,462,A2B1,2026-06-24,2026-07-08,,,no PDB code on the target list
+R2377v1,NucA,276,A1,2026-06-24,2026-07-08,,,no PDB code on the target list
+R2377v2,NucA,276,A1,2026-06-24,2026-07-08,,,no PDB code on the target list
+H2379,Prot,697,A3B3C3,2026-06-25,2026-07-09,,,no PDB code on the target list
+H2380,Prot,693,A2B2C2,2026-06-25,2026-07-09,,,no PDB code on the target list
+T1404,Prot,263,UNK,2026-06-25,2026-07-09,,,no PDB code on the target list
+T1405,Prot,482,UNK,2026-06-25,2026-07-09,,,cancelled
+H2381,Prot,704,A3B3C3,2026-06-26,2026-07-10,,,no PDB code on the target list
+H2382,Prot,700,A2B2C2,2026-06-26,2026-07-10,,,no PDB code on the target list
+T1406,Prot,479,UNK,2026-06-26,2026-07-10,,,no PDB code on the target list
+T1407,Prot,473,UNK,2026-06-26,2026-07-10,,,no PDB code on the target list
+T2396,Server only,239,A5,2026-06-27,2026-06-30,,,cancelled
+T2397,Server only,244,A5,2026-06-27,2026-06-30,,,cancelled
+H2388,Prot,244,A1B1,2026-06-29,2026-07-13,,,no PDB code on the target list
+H2408,Prot,1138,A1B1C1,2026-06-29,2026-07-13,,,no PDB code on the target list
+H2389,Prot,702,A3B1C1,2026-06-30,2026-07-14,,,no PDB code on the target list
+H2391,Prot,702,A3B3C3,2026-06-30,2026-07-14,,,no PDB code on the target list
+T2409,Prot /Ligand,472,A1,2026-06-30,2026-07-18,30zq,2026-09-16,reference public in the PDB
+T2410,Prot /Ligand,472,A1,2026-06-30,2026-07-18,31gl,2026-09-16,reference public in the PDB
+H2392,Prot,707,A2B1C1,2026-07-01,2026-07-15,,,no PDB code on the target list
+T2393,Prot,576,A2,2026-07-01,2026-07-15,,,no PDB code on the target list
+T2411,Prot /Ligand,472,A1,2026-07-01,2026-07-19,30zr,2026-09-16,reference public in the PDB
+T2412,Prot /Ligand,225,A1,2026-07-01,2026-07-19,,,no PDB code on the target list
+H2394,Prot,566,A3B3C3,2026-07-02,2026-07-16,,,no PDB code on the target list
+T2413,Prot /Ligand,274,A1,2026-07-02,2026-07-20,,,no PDB code on the target list
+T2414,Prot /Ligand,324,A1,2026-07-02,2026-07-20,,,no PDB code on the target list
+M2415,Prot-NucA/Ligand,1231,A1B1C1D1E1F1G1H1I1J1K1L1,2026-07-03,2026-07-25,,,no PDB code on the target list
+R2415s0,NucA,1231,A1,2026-07-03,2026-07-25,,,no PDB code on the target list
+H2398,Prot,570,A1B1C1,2026-07-06,2026-07-20,,,no PDB code on the target list
+H2399,Prot,568,A1B1C1,2026-07-06,2026-07-20,,,no PDB code on the target list
+R2425,NucA,851,A1,2026-07-06,2026-07-08,,,no PDB code on the target list
+T1416,Prot,414,UNK,2026-07-06,2026-07-20,,,no PDB code on the target list
+T1417,Prot,249,UNK,2026-07-06,2026-07-20,,,no PDB code on the target list
+H1419,Prot,654,UNK,2026-07-07,2026-07-21,,,no PDB code on the target list
+H2400,Prot,572,A1B1C1,2026-07-07,2026-07-21,,,no PDB code on the target list
+H2401,Prot,572,A1B1C1,2026-07-07,2026-07-21,,,no PDB code on the target list
+L01,Ligand,364,A1,2026-07-07,2026-09-11,,,no PDB code on the target list
+L02,Ligand,271,A1,2026-07-07,2026-09-10,,,no PDB code on the target list
+R2426,NucA,851,A1B1,2026-07-07,2026-07-09,,,no PDB code on the target list
+T1418,Prot,249,UNK,2026-07-07,2026-07-21,,,no PDB code on the target list
+H2402,Prot,579,A1B1C1,2026-07-08,2026-07-22,,,no PDB code on the target list
+H2403,Prot,568,A1B1C1,2026-07-08,2026-07-22,,,no PDB code on the target list
+R2427,NucA,604,A1,2026-07-08,2026-07-10,,,no PDB code on the target list
+T1420,Prot,92,UNK,2026-07-08,2026-07-22,,,no PDB code on the target list
+T1421,Prot,178,UNK,2026-07-08,2026-07-22,,,no PDB code on the target list
+H1422,Server only,586,UNK,2026-07-09,2026-07-13,,,no PDB code on the target list
+H1423,Server only,591,UNK,2026-07-09,2026-07-13,,,no PDB code on the target list
+R2428,NucA,87,A1,2026-07-09,2026-07-11,,,no PDB code on the target list
+T2404,Prot,263,A17,2026-07-09,2026-07-23,,,no PDB code on the target list
+H1424,Prot,2364,UNK,2026-07-10,2026-07-24,,,no PDB code on the target list
+T2406,Prot,479,A2,2026-07-10,2026-07-24,,,no PDB code on the target list
+H2422,Server only,586,A2B2,2026-07-13,2026-07-16,,,no PDB code on the target list
+H2423,Server only,591,A2B2,2026-07-13,2026-07-16,,,no PDB code on the target list
+M1439,Hybrid,649,UNK,2026-07-13,2026-07-27,,,no PDB code on the target list
+T1430,Prot,36,UNK,2026-07-13,2026-07-27,,,no PDB code on the target list
+H1438,Prot,755,UNK,2026-07-14,2026-07-28,,,no PDB code on the target list
+H1442,Prot,589,UNK,2026-07-14,2026-07-28,,,no PDB code on the target list
+H1443,Prot,586,UNK,2026-07-15,2026-07-29,,,no PDB code on the target list
+T1440,Prot,281,UNK,2026-07-15,2026-07-29,,,no PDB code on the target list
+M1435,Hybrid,622,UNK,2026-07-16,2026-07-30,,,no PDB code on the target list
+H1441,Prot,377,UNK,2026-07-17,2026-07-31,,,no PDB code on the target list
+H1444,Prot,588,UNK,2026-07-17,2026-07-31,,,no PDB code on the target list
+R2429,NucA,345,A1,2026-07-20,2026-08-03,,,no PDB code on the target list
+T1431,Prot,173,UNK,2026-07-20,2026-08-03,,,no PDB code on the target list
+T1432,Prot,173,UNK,2026-07-20,2026-08-03,,,no PDB code on the target list
+T2416,Prot,414,A3,2026-07-20,2026-08-03,,,no PDB code on the target list
+T2417,Prot,249,A3,2026-07-20,2026-08-03,,,no PDB code on the target list
+E2446,Prot,107,A1,2026-07-21,2026-08-18,,,no PDB code on the target list
+H2419,Prot,654,A1B1C1,2026-07-21,2026-08-04,,,no PDB code on the target list
+T1433,Prot,150,UNK,2026-07-21,2026-08-04,,,no PDB code on the target list
+E2447,Prot,97,A1,2026-07-22,2026-08-19,,,no PDB code on the target list
+T1434,Prot,232,UNK,2026-07-22,2026-08-05,,,no PDB code on the target list
+T2421,Prot,178,A3,2026-07-22,2026-08-05,,,no PDB code on the target list
+A2445,,456,A1,2026-07-23,2026-08-22,,,no PDB code on the target list
+E2448,Prot,139,A1,2026-07-23,2026-08-20,,,no PDB code on the target list
+T1436,Prot,177,UNK,2026-07-23,2026-08-06,,,no PDB code on the target list
+E2449,Prot,92,A1,2026-07-24,2026-08-21,,,no PDB code on the target list
+H2424,Prot,2364,A3B3C6D18E3F3,2026-07-24,2026-08-07,,,no PDB code on the target list
+T1437,Prot,122,UNK,2026-07-24,2026-08-07,,,no PDB code on the target list
+E2450,Prot,396,A1B1,2026-07-27,2026-08-24,,,no PDB code on the target list
+M2439,Hybrid,649,A1B1,2026-07-27,2026-08-10,,,no PDB code on the target list
+R2439,NucA,372,A1,2026-07-27,2026-08-10,,,no PDB code on the target list
+R2456,NucA,198,A1,2026-07-27,2026-07-29,,,no PDB code on the target list
+R2457,NucA,25,A2,2026-07-27,2026-07-30,,,no PDB code on the target list
+T2430,Prot,36,A9,2026-07-27,2026-08-13,,,no PDB code on the target list
+T2451,Prot /Ligand,255,A2,2026-07-27,2026-08-10,,,no PDB code on the target list
+E2458,Prot,131,A1,2026-07-28,2026-08-25,,,no PDB code on the target list
+H2438,Prot,755,A1B3,2026-07-28,2026-08-11,,,no PDB code on the target list
+H2442,Prot,589,A1B1C1,2026-07-28,2026-08-11,,,no PDB code on the target list
+T2455,Prot /Ligand,299,A1,2026-07-28,2026-08-11,,,no PDB code on the target list
+H2443,Prot,586,A1B1C1,2026-07-29,2026-08-12,,,no PDB code on the target list
+R2386,NucA/Ligand,417,A1,2026-07-29,2026-08-26,,,no PDB code on the target list
+R2452,NucA,51,A1,2026-07-29,2026-08-12,,,no PDB code on the target list
+T2413v1,Prot /Ligand,274,A1,2026-07-29,2026-08-16,,,no PDB code on the target list
+T2414v1,Prot /Ligand,324,A1,2026-07-29,2026-08-16,,,no PDB code on the target list
+T2440,Prot,281,A2,2026-07-29,2026-08-12,,,no PDB code on the target list
+E2459,Prot,117,UNK,2026-07-30,2026-08-30,,,no PDB code on the target list
+E2460,Prot,205,UNK,2026-07-30,2026-08-31,,,no PDB code on the target list
+M2435,Hybrid,622,A1B1C1,2026-07-30,2026-08-13,,,no PDB code on the target list
+T1462,Prot,92,A1,2026-07-30,2026-08-16,,,cancelled
+T2461,Prot,191,A24,2026-07-30,2026-08-20,,,no PDB code on the target list
+H2441,Prot,377,A1B1,2026-07-31,2026-08-14,,,no PDB code on the target list
+H2444,Prot,588,A1B1C1,2026-07-31,2026-08-14,,,no PDB code on the target list
+R2453,NucA,22,A1,2026-07-31,2026-08-15,,,cancelled
+R2454,NucA,22,A1,2026-07-31,2026-08-15,,,no PDB code on the target list
+T2463,Prot,16,An,2026-07-31,2026-08-17,,,no PDB code on the target list
+T2464,Prot,17,An,2026-07-31,2026-08-17,9sr1 9sql,2026-09-30,reference public in the PDB

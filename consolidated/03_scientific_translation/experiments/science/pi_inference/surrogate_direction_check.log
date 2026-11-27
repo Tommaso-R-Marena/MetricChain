@@ -1,0 +1,15 @@
+n = 12; accuracy eps = 0.1; costs as log10 of the number of evaluations
+   h    d  basin wt  fit                RMS(pi)  D1(pi||pi_g)  D1(pi_g||pi)      D2    Dinf  lg cost e^D2/eps^2  lg cost e^Dinf/eps  pi(basin)
+ 2.2   20     0.049  V variational     2.06e-04         0.050         0.929   16.93   19.95                 9.4                 9.7   1.06e-10
+ 2.2   20     0.049  S least squares   1.16e-01         0.057         0.884   15.89   18.90                 8.9                 9.2   3.02e-10
+ 2.2   20     0.049  L likelihood      4.60e-01         0.147         0.832   13.26   16.28                 7.8                 8.1   4.16e-09
+ 2.2   24     0.738  V variational     2.47e-04         1.338        16.363   22.36   22.66                11.7                10.8   1.06e-10
+ 2.2   24     0.738  S least squares   1.41e-01         1.347        15.439   21.10   21.41                11.2                10.3   3.72e-10
+ 2.2   24     0.738  L likelihood      5.87e+00        11.734         3.850    9.43   11.96                 6.1                 6.2   8.82e-02
+ 1.5   14     0.082  V variational     3.82e-03         0.086         1.064   11.41   13.91                 7.0                 7.0   7.44e-08
+ 1.5   14     0.082  S least squares   1.03e-01         0.091         1.015   10.76   13.26                 6.7                 6.8   1.44e-07
+ 1.5   14     0.082  L likelihood      5.39e-01         0.222         0.928    8.34   10.84                 5.6                 5.7   1.62e-06
+ 3.0   30     0.251  V variational     5.31e-06         0.289         7.237   28.33   29.71                14.3                13.9   3.13e-14
+ 3.0   30     0.251  S least squares   1.28e-01         0.297         6.823   26.65   28.04                13.6                13.2   1.67e-13
+ 3.0   30     0.251  L likelihood      3.03e+00         3.487         4.039    9.64   11.02                 6.2                 5.8   4.21e-06
+for comparison: enumeration costs log10(2^n) = 3.6

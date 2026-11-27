@@ -1,0 +1,58 @@
+{
+ "evidence": [
+  {
+   "gen_time_utc": "2026-11-26T23:58:17Z",
+   "name": "digicert",
+   "status": "Granted",
+   "token_file": "timestamps/digicert.tsr",
+   "token_sha256": "083bb6d4011b9ee525b0cf84bf4318486bd074ec31344913e54f53cc9d432b10",
+   "trust_store": "/etc/ssl/certs/ca-certificates.crt",
+   "tsa_name": "unspecified",
+   "tsa_url": "http://timestamp.digicert.com",
+   "type": "rfc3161",
+   "verification_detail": "Verification: OK",
+   "verified_on_this_machine": true
+  },
+  {
+   "gen_time_utc": "2026-11-26T23:58:18Z",
+   "name": "sectigo",
+   "status": "Granted",
+   "token_file": "timestamps/sectigo.tsr",
+   "token_sha256": "2f1fa1c988b7e54c99373ab53738740dbb287fad9a358eb09d42008d9d7200ff",
+   "trust_store": "/etc/ssl/certs/ca-certificates.crt",
+   "tsa_name": "DirName:/C=GB/ST=Greater London/O=Sectigo Limited/CN=Sectigo Public Time Stamping Signer R37",
+   "tsa_url": "https://timestamp.sectigo.com",
+   "type": "rfc3161",
+   "verification_detail": "Verification: OK",
+   "verified_on_this_machine": true
+  },
+  {
+   "gen_time_utc": "2026-11-26T23:58:18Z",
+   "name": "globalsign",
+   "status": "Granted",
+   "token_file": "timestamps/globalsign.tsr",
+   "token_sha256": "55d0c3d7b6f513fc6f3d3ed4fa9220d841cdcb8cdd2be6d49346bb0e89fd9d41",
+   "trust_store": "/etc/ssl/certs/ca-certificates.crt",
+   "tsa_name": "DirName:/C=BE/O=GlobalSign nv-sa/CN=Globalsign R45 TSA for CodeSign 202610",
+   "tsa_url": "http://timestamp.globalsign.com/tsa/r6advanced1",
+   "type": "rfc3161",
+   "verification_detail": "Verification: OK",
+   "verified_on_this_machine": true
+  },
+  {
+   "gen_time_utc": "2026-11-26T23:58:19Z",
+   "name": "certum",
+   "status": "Granted",
+   "token_file": "timestamps/certum.tsr",
+   "token_sha256": "97d7689e8a70e2b43f19cbe9d57355fc95e6339b5c8a5f24b98b9cdb36b3dc47",
+   "trust_store": "/etc/ssl/certs/ca-certificates.crt",
+   "tsa_name": "DirName:/C=PL/O=Asseco Data Systems S.A./CN=Certum Timestamp 2026",
+   "tsa_url": "http://time.certum.pl",
+   "type": "rfc3161",
+   "verification_detail": "Verification: OK",
+   "verified_on_this_machine": true
+  }
+ ],
+ "manifest_sha256": "2a65d774cfb244c1413ef10bba1c6a2fc9341011627ce112fbcd74e4a46cb334",
+ "schema": "metricchain-fb-evidence/1"
+}

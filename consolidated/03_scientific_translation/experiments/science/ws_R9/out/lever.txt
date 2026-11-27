@@ -1,0 +1,40 @@
+theta = 111.0000, delta = 120.0: (2/sqrt3) sin(delta/2) sin(theta/2) = 0.824126;  sin^2(theta/2)/3 = 0.226395
+theta = 109.4712, delta = 180.0: (2/sqrt3) sin(delta/2) sin(theta/2) = 0.942809;  sin^2(theta/2)/3 = 0.222222
+theta = 109.4712, delta = 120.0: (2/sqrt3) sin(delta/2) sin(theta/2) = 0.816497;  sin^2(theta/2)/3 = 0.222222
+2 sqrt2/3 = 0.9428090415820635 ; sqrt2 * 2sqrt2/3 = 1.3333333333333333
+
+theta = 111.0000:  G's bound Ibar(m)/m^3 (limit 0.226395):
+    [(1, 1.0), (2, 0.46459), (3, 0.39741), (5, 0.32045), (10, 0.26889), (20, 0.24732), (40, 0.23678)]  m=200: 0.22846  m=2e5: 0.226397 ; nonincreasing for all m <= 2e5: True ; 2 sin(60) sqrt(Ibar(m))/m^1.5 at m = 10, 100, 1000: [0.8981, 0.8316, 0.8249]
+    torsion about the first arm bond =  180.0, rest all-trans: angle(zigzag, axis) =  34.500 deg;  I/m^3 at m = 200, 2000: 0.07372, 0.07274;  sin^2(theta/2) sin^2(angle)/3 = 0.07263
+    torsion about the first arm bond =   60.0, rest all-trans: angle(zigzag, axis) =  88.227 deg;  I/m^3 at m = 200, 2000: 0.22786, 0.22635;  sin^2(theta/2) sin^2(angle)/3 = 0.22618
+    torsion about the first arm bond =  -60.0, rest all-trans: angle(zigzag, axis) =  88.227 deg;  I/m^3 at m = 200, 2000: 0.22786, 0.22635;  sin^2(theta/2) sin^2(angle)/3 = 0.22618
+    prefix of 1 torsions then all-trans: max sin^2(angle to the axis) = 0.999042 at (60.0,)
+    prefix of 2 torsions then all-trans: max sin^2(angle to the axis) = 0.999999 at (60.0, 60.0)
+    prefix of 3 torsions then all-trans: max sin^2(angle to the axis) = 0.999999 at (60.0, 60.0, 180.0)
+    prefix of 4 torsions then all-trans: max sin^2(angle to the axis) = 0.999999 at (60.0, -60.0, -60.0, -60.0)
+    prefix of 5 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (60.0, 60.0, 60.0, -60.0, -60.0)
+    prefix of 6 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (60.0, 60.0, 60.0, -60.0, -60.0, 180.0)
+    prefix of 7 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 60.0, 60.0, 60.0, -60.0, -60.0)
+    prefix of 8 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 60.0, 60.0, 60.0, -60.0, -60.0, 180.0)
+    prefix of 9 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 180.0, 180.0, 60.0, 60.0, 60.0, -60.0, -60.0)
+    exhaustive over the first 5 arm torsions (rest all-trans), m = 40: max I/m^3 = 0.23469 at (-60.0, 180.0, 180.0, 180.0, 180.0);  bound Ibar(m)/m^3 = 0.23678;  ratio = 0.99119
+    exhaustive over the first 6 arm torsions (rest all-trans), m = 100: max I/m^3 = 0.22955 at (-60.0, 180.0, 180.0, 180.0, 180.0, 180.0);  bound Ibar(m)/m^3 = 0.23053;  ratio = 0.99576
+    exhaustive over the first 7 arm torsions (rest all-trans), m = 200: max I/m^3 = 0.22786 at (-60.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0);  bound Ibar(m)/m^3 = 0.22846;  ratio = 0.99737
+
+theta = 109.4712:  G's bound Ibar(m)/m^3 (limit 0.222222):
+    [(1, 1.0), (2, 0.45833), (3, 0.39257), (5, 0.31572), (10, 0.26433), (20, 0.24295), (40, 0.23251)]  m=200: 0.22427  m=2e5: 0.222224 ; nonincreasing for all m <= 2e5: True ; 2 sin(60) sqrt(Ibar(m))/m^1.5 at m = 10, 100, 1000: [0.8905, 0.824, 0.8172]
+    torsion about the first arm bond =  180.0, rest all-trans: angle(zigzag, axis) =  35.264 deg;  I/m^3 at m = 200, 2000: 0.07519, 0.07419;  sin^2(theta/2) sin^2(angle)/3 = 0.07407
+    torsion about the first arm bond =   60.0, rest all-trans: angle(zigzag, axis) =  90.000 deg;  I/m^3 at m = 200, 2000: 0.22389, 0.22239;  sin^2(theta/2) sin^2(angle)/3 = 0.22222
+    torsion about the first arm bond =  -60.0, rest all-trans: angle(zigzag, axis) =  90.000 deg;  I/m^3 at m = 200, 2000: 0.22389, 0.22239;  sin^2(theta/2) sin^2(angle)/3 = 0.22222
+    prefix of 1 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (60.0,)
+    prefix of 2 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (60.0, 180.0)
+    prefix of 3 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 60.0)
+    prefix of 4 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 60.0, 180.0)
+    prefix of 5 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 180.0, 180.0, 60.0)
+    prefix of 6 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 180.0, 180.0, 60.0, 180.0)
+    prefix of 7 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 60.0)
+    prefix of 8 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 60.0, 180.0)
+    prefix of 9 torsions then all-trans: max sin^2(angle to the axis) = 1.000000 at (180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 60.0)
+    exhaustive over the first 5 arm torsions (rest all-trans), m = 40: max I/m^3 = 0.23069 at (60.0, 180.0, 180.0, 180.0, 180.0);  bound Ibar(m)/m^3 = 0.23251;  ratio = 0.99220
+    exhaustive over the first 6 arm torsions (rest all-trans), m = 100: max I/m^3 = 0.22558 at (-60.0, 180.0, 180.0, 180.0, 180.0, 180.0);  bound Ibar(m)/m^3 = 0.22632;  ratio = 0.99673
+    exhaustive over the first 7 arm torsions (rest all-trans), m = 200: max I/m^3 = 0.22389 at (60.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0);  bound Ibar(m)/m^3 = 0.22427;  ratio = 0.99834

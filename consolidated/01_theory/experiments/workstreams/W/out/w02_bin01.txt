@@ -1,0 +1,35 @@
+=== w02 single-letter tests: chain bin01; fractions [1.]; E = 0.212295; a = 0.163738 ===
+  site bin(p=0.1,u=2.0): pi = [0.9 0.1], vertices of L (rows; * = distance function):
+     * [ 0. -2.]
+     * [0. 2.]
+
+--- e = 0.0 E = 0.000000:  R = 0.048130014 (upper certificate at t*: 0.048130014)  t* = 0.46662
+    type 0 (bin(p=0.1,u=2.0)): gamma* = [ 0.      -0.62103],  M* = [0.50652 0.49348],  Gibbs law of gamma* = [0.82866 0.17134]
+    T2 primal at mu*: H 0.048130014   I 0.048130014   additive gamma* 0.048130014   (differences to R: -4.5e-14, -5.4e-15, -2.2e-16)
+    T4 largest r_mu(e;H) over 30 random profiles: 0.042246749; over 30 perturbations of mu*: 0.048129068; R = 0.048130014; excess -9.46e-07; solver failures 0
+    T5 pair identity: x = e + R = 0.048130: cone formula at M*: 0.048130014; max_tau (F*-tau x)/(1-tau) = 0.048130014; R = 0.048130014; largest cone value over 30 random label laws on all vertices: 0.048126911
+
+--- e = 0.3 E = 0.063688:  R = 0.023270334 (upper certificate at t*: 0.023270334)  t* = 0.31665
+    type 0 (bin(p=0.1,u=2.0)): gamma* = [ 0.      -0.56338],  M* = [0.53731 0.46269],  Gibbs law of gamma* = [0.8367 0.1633]
+    T2 primal at mu*: H 0.023270334   I 0.023270334   additive gamma* 0.023270334   (differences to R: -2.0e-14, -2.4e-14, -7.6e-17)
+    T4 largest r_mu(e;H) over 30 random profiles: 0.006686371; over 30 perturbations of mu*: 0.023267664; R = 0.023270334; excess -2.67e-06; solver failures 0
+    T5 pair identity: x = e + R = 0.086959: cone formula at M*: 0.023270334; max_tau (F*-tau x)/(1-tau) = 0.023270334; R = 0.023270334; largest cone value over 30 random label laws on all vertices: 0.023214661
+
+--- e = 0.6 E = 0.127377:  R = 0.007554047 (upper certificate at t*: 0.007554047)  t* = 0.17819
+    type 0 (bin(p=0.1,u=2.0)): gamma* = [ 0.      -0.50729],  M* = [0.56752 0.43248],  Gibbs law of gamma* = [0.84422 0.15578]
+    T2 primal at mu*: H 0.007554047   I 0.007554047   additive gamma* 0.007554047   (differences to R: -3.9e-15, -1.4e-16, -2.8e-17)
+    T4 largest r_mu(e;H) over 30 random profiles: 0.001266876; over 30 perturbations of mu*: 0.007552614; R = 0.007554047; excess -1.43e-06; solver failures 0
+    T5 pair identity: x = e + R = 0.134931: cone formula at M*: 0.007554047; max_tau (F*-tau x)/(1-tau) = 0.007554047; R = 0.007554047; largest cone value over 30 random label laws on all vertices: 0.006866610
+
+--- e = -0.25 a = -0.04093 (negative): R^ = 0.069382029 (>= -e = 0.04093); largest r_mu over 61 admissible random profiles: 0.046941758
+
+--- T3: V(mu, B; v) against max_gamma V(mu, B; gamma)  (B = e + alpha(mu)).  'V(v) >= V(gamma)' is trivial (v >= v_gamma);
+    equality is the collapse (Sion).  gamma0 is read off the exit type of the H-problem; the blind search can miss a small positive region.
+    profile 1: e = 0.0212, labels [2]: V(mu,B;v) = 0.028271376; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.028271376 (difference -1.7e-16); blind search over gamma (grid of 9, then Nelder-Mead): 0.028271376
+    profile 2: e = 0.0637, labels [2]: V(mu,B;v) = 0.021855376; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.021855376 (difference +3.8e-17); blind search over gamma (grid of 9, then Nelder-Mead): 0.021855376
+    profile 3: e = 0.0000, labels [2]: V(mu,B;v) = 0.022301094; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.022301094 (difference -6.0e-15); blind search over gamma (grid of 9, then Nelder-Mead): 0.022301094
+    profile 4: e = 0.0212, labels [2]: V(mu,B;v) = 0.014266233; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.014266233 (difference +1.4e-17); blind search over gamma (grid of 9, then Nelder-Mead): 0.014266233
+    profile 5: e = 0.0000, labels [2]: V(mu,B;v) = 0.034638660; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.034638660 (difference +8.3e-17); blind search over gamma (grid of 9, then Nelder-Mead): 0.034638660
+    profile 6: e = 0.0000, labels [2]: V(mu,B;v) = 0.036891253; V(mu,B;gamma0) at gamma0 = argmax v_gamma(exit type) = 0.036891253 (difference -3.2e-14); blind search over gamma (grid of 9, then Nelder-Mead): 0.036891253
+
+summary bin01: worst |primal - R| at mu* (T2): 4.5e-14; worst |collapse| (T3): 3.2e-14; time 3 s

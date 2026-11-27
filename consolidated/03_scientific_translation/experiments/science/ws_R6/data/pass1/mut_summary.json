@@ -1,0 +1,61 @@
+{
+ "neg_tol": {
+  "runs": 47,
+  "requested": 48,
+  "detected": 24,
+  "any_violation": 24,
+  "every_run_claim_violated": 8,
+  "good_event_claim_violated": 24,
+  "iv": 8,
+  "cap": 0,
+  "big": 6,
+  "invalid_final": 0
+ },
+ "noharper": {
+  "runs": 47,
+  "requested": 48,
+  "detected": 1,
+  "any_violation": 1,
+  "every_run_claim_violated": 1,
+  "good_event_claim_violated": 0,
+  "iv": 0,
+  "cap": 1,
+  "big": 7,
+  "invalid_final": 0
+ },
+ "maxform": {
+  "runs": 47,
+  "requested": 48,
+  "detected": 26,
+  "any_violation": 26,
+  "every_run_claim_violated": 26,
+  "good_event_claim_violated": 0,
+  "iv": 0,
+  "cap": 0,
+  "big": 6,
+  "invalid_final": 0
+ },
+ "close_at_no": {
+  "runs": 48,
+  "requested": 48,
+  "detected": 48,
+  "any_violation": 48,
+  "every_run_claim_violated": 0,
+  "good_event_claim_violated": 48,
+  "iv": 0,
+  "cap": 0,
+  "big": 0
+ },
+ "q_no_eta": {
+  "runs": 48,
+  "requested": 48,
+  "detected": 26,
+  "any_violation": 26,
+  "every_run_claim_violated": 0,
+  "good_event_claim_violated": 26,
+  "iv": 0,
+  "cap": 0,
+  "big": 7,
+  "invalid_final": 1
+ }
+}

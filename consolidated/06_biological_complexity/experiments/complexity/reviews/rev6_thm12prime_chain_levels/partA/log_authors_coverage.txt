@@ -1,0 +1,13 @@
+(500, 6, 12) negative critical weights: 100
+   entry kinds: {'root on A': 94, 'b_kB': 4, 'b_1': 1, 'c_1': 1}
+   size of position y: {1: 99, 2: 1}  size of x_1: {1: 97, 2: 3}
+   size of b_1: {1: 93, 2: 5, 3: 2}  size of c_1 (b_kB if k2=0): {1: 99, 2: 1}
+(500, 7, 13) negative critical weights: 111
+   entry kinds: {'middle b': 10, 'root on A': 98, 'b_kB': 2, 'b_1': 1}
+   size of position y: {1: 109, 2: 2}  size of x_1: {1: 107, 2: 4}
+   size of b_1: {1: 107, 2: 3, 4: 1}  size of c_1 (b_kB if k2=0): {1: 110, 3: 1}
+(400, 8, 14) negative critical weights: 76
+   entry kinds: {'root on A': 70, 'middle b': 5, 'b_kB': 1}
+   size of position y: {1: 73, 2: 2, 3: 1}  size of x_1: {1: 72, 2: 2, 3: 2}
+   size of b_1: {1: 70, 2: 4, 4: 1, 5: 1}  size of c_1 (b_kB if k2=0): {1: 73, 2: 2, 3: 1}
+total by entry kind: {'root on A': 262, 'b_kB': 7, 'b_1': 2, 'c_1': 1, 'middle b': 15}

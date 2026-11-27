@@ -1,0 +1,6 @@
+=== K4 on H, tau 0.7: 4 sites, states per site [14, 14, 12, 7], 16464 states; anchor [10, 10, 8, 3]; beta = 1.677399; g evaluated at every state [6s]
+| m | subsets | states with >= m sites off | violations R > B2 | violations B2 > B1 | violations B1 > B_SAb | smallest B2/R | largest R (kcal/mol) | Boltzmann means of beta R; beta B2; beta B1; beta B_SAb | B2/R in Boltzmann mean | control C1 (minimum): violations | control C2 (reversed): violations |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 3 | 4 | 15743 | 0 | 0 | 0 | 12.662 | 0.1889 | 2.051e-05; 1.728e-02; 1.065e-01; 1.977e-01 | 842 | 7213 | 184 |
+| 4 | 1 | 11154 | 0 | 0 | 0 | 11.192 | 0.002942 | 1.333e-08; 1.173e-05; 3.025e-04; 5.210e-04 | 880 | 8084 | 381 |
+ALL DONE 7 s; peak RSS 194 MB

@@ -1,0 +1,13 @@
+$ python3 t14_two_level_H.py 14 96
+correct algorithm, K of the proof, references H / zero / additive: {'runs': 96, 'invalid': 0, 'too_wide': 0, 'bad_q': 0, 'bad_M': 0, 'bad_count': 0, 'errors': 0, 'populated': 1128, 'negligible': 0, 'closed_q_lt_1': 96, 'widest': -2.9514855673819893, 'largest_M': 0.0011186588953521826, 'tightest_count': 0.1947891212483541}
+correct algorithm, K = 60 (events of the proof only with overwhelming probability), extremal instances: {'runs': 96, 'invalid': 0, 'too_wide': 0, 'bad_q': 0, 'bad_M': 0, 'bad_count': 0, 'errors': 0, 'populated': 1142, 'negligible': 0, 'closed_q_lt_1': 96, 'widest': -2.7621504562925763, 'largest_M': 0.001386390563272502, 'tightest_count': 0.05857302160925168}
+  -> all statements hold: True   (power: populated levels 2270 , negligible levels 0 , closures with q < 1: 192 )
+engineered case with negligible levels (reference = zero residual, K = 60): {'runs': 6, 'invalid': 0, 'too_wide': 0, 'bad_q': 0, 'bad_M': 0, 'bad_count': 0, 'errors': 0, 'populated': 348, 'negligible': 4}
+  -> valid and within the bounds: True ; negligible levels: 4
+mutation M1: runs 96, invalid brackets 33, too wide 0, errors 0
+mutation M3: runs 96, invalid brackets 6, too wide 0, errors 0
+time 28s
+
+real	0m28.111s
+user	1m6.548s
+sys	0m1.063s

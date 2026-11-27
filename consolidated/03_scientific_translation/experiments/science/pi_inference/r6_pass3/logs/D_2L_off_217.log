@@ -1,0 +1,26 @@
+D_2L_off seed 217 time 143s
+{
+ "runs": 300,
+ "harness_limit": 0,
+ "closed": 256,
+ "abort": 44,
+ "Gfail": 144,
+ "det_viol": 0,
+ "good_viol": 0,
+ "pop": 308890,
+ "neg": 458,
+ "runs_with_neg": 46,
+ "close_pop": 83,
+ "close_unpop": 173,
+ "close_tail0": 0,
+ "invalid_bracket_any": 44,
+ "maxratio": {
+  "M_over_Mbar": 0.00021500141434798115,
+  "M_over_Mdag": 2.5688801769888125,
+  "lnq_over_lnCmax": 0.7238972950588073,
+  "M_over_capnew": 0.47251910197352015,
+  "calls_over_bound": 0.0004643562128016763,
+  "used_over_cnt": 0.08487140439520223,
+  "count_ineq": 0.1901706474153889
+ }
+}

@@ -1,0 +1,5 @@
+n=10 bJ=1.5 bB=0.0: max relative error of  pi(x) = int nu(dy) Ber(p_y)^n(x)  over the types: 1.44e-15
+n=10 bJ=0.7 bB=0.3: max relative error of  pi(x) = int nu(dy) Ber(p_y)^n(x)  over the types: 1.44e-15
+n=40 bJ=1.5 bB=0.05: max relative error of  pi(x) = int nu(dy) Ber(p_y)^n(x)  over the types: 5.77e-15
+tilt identity: A_y(psi) / [C A_y0(psi - 2(y-y0)|x|)] - 1 = 0.00e+00;  Lipschitz constant of the tilted residual 1.0800 <= u + 2|y-y0| = 1.0800
+max |d/dy ln A_y(psi)| on [-2,2] = 0.264 <= 2n = 20

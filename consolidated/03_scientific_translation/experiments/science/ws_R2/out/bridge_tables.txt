@@ -1,0 +1,40 @@
+(1) own bridge tables vs the authors' stored tables
+  N= 3: classes mine 1, |P_N|=1 (no stored table of the authors)
+  N= 4: classes mine 2 theirs 2 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N= 5: classes mine 3 theirs 3 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N= 6: classes mine 5 theirs 5 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N= 7: classes mine 8 theirs 8 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N= 8: classes mine 16 theirs 16 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N= 9: classes mine 28 theirs 28 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=10: classes mine 43 theirs 43 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=11: classes mine 64 theirs 64 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=12: classes mine 101 theirs 101 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=13: classes mine 138 theirs 138 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=14: classes mine 198 theirs 198 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=15: classes mine 280 theirs 280 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=16: classes mine 379 theirs 379 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=17: classes mine 498 theirs 498 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=18: classes mine 656 theirs 656 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=19: classes mine 836 theirs 836 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=20: classes mine 1070 theirs 1070 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=21: classes mine 1328 theirs 1328 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=22: classes mine 1617 theirs 1617 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=23: classes mine 1950 theirs 1950 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+  N=24: classes mine 2350 theirs 2350 same classes=True; gmin,gmax,gmask identical=True; (h,g) sets identical=True; count ratio theirs/mine=[2.0]
+
+(2) set-level (C): for all N1<=N2 with N1+N2+3 available
+   pairs of points tested: 81519; failures: 0
+(2') set-level (E):
+   points tested: 49204; failures: 0
+
+(3) approximate nestedness on data: sup over q in Q_m/m of dist(q, Q_M/M) vs beta/m + m(beta'+R)/M  (norm ||.||_c+|g|; Q_M=P_{M-3})
+   m=6 (N=3) M=12 (N=9): sup dist = 0.0000   bound = 42.000
+   m=6 (N=3) M=18 (N=15): sup dist = 0.0000   bound = 31.333
+   m=6 (N=3) M=27 (N=24): sup dist = 0.0000   bound = 24.222
+   m=8 (N=5) M=16 (N=13): sup dist = 0.0000   bound = 39.500
+   m=8 (N=5) M=24 (N=21): sup dist = 0.0000   bound = 28.833
+   m=8 (N=5) M=27 (N=24): sup dist = 0.0278   bound = 26.463
+   m=10 (N=7) M=20 (N=17): sup dist = 0.0000   bound = 38.000
+   m=10 (N=7) M=27 (N=24): sup dist = 0.0889   bound = 29.704
+
+(4) max over bridges of (9h3+4h8+h11+g)/N (R=36): {3: 0.0, 4: 0.5, 5: 0.8, 6: 1.333, 7: 1.571, 8: 5.25, 9: 6.889, 10: 6.9, 11: 7.364, 12: 8.417, 13: 9.462, 14: 10.429, 15: 10.2, 16: 10.438, 17: 10.882, 18: 11.0, 19: 11.211, 20: 11.8, 21: 12.333, 22: 12.864, 23: 13.13, 24: 13.542}

@@ -1,0 +1,11 @@
+p=0.2 u=4.0 n=100 centre type 0.500: best density ball: omega = 0.02063 = 0.448 ln n/n (theta=0.237, e=+0.015)
+  start 'ball': best omega found = 0.02063 = 0.448 ln n/n (theta=0.237, e=+0.015)   [4s]
+  start 'ball2': best omega found = 0.01804 = 0.392 ln n/n (theta=0.301, e=-0.137)   [8s]
+  start 'random': best omega found = 0.00000 = 0.000 ln n/n (theta=0.011, e=+0.020)   [11s]
+  start 'hamming': best omega found = 0.00269 = 0.058 ln n/n (theta=0.232, e=-0.035)   [15s]
+  start 'empty': best omega found = 0.01317 = 0.286 ln n/n (theta=0.717, e=-0.691)   [19s]
+  overall: 0.02063 = 0.448 ln n/n  (density ball);   best density ball: 0.448 ln n/n
+
+real	0m18.993s
+user	0m19.229s
+sys	0m0.114s

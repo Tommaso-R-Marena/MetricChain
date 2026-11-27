@@ -1,0 +1,2 @@
+{'n': 13, 'N': 16, 'conf': 113587, 'classes': 13012, 'P': 91, 'mean_conf': np.float64(2.730343811351651), 'mean_cls': np.float64(2.9795429219182292), 'max': np.float64(5.6875), 'argmax_word': 'tpptpptpptppt', 'P_over_N': 5.6875, 'min_gap_to_cutoff': 0.01142230511000264} t=3.8s
+{'n': 14, 'N': 17, 'conf': 273623, 'classes': 27421, 'P': 105, 'mean_conf': np.float64(2.8005439429218946), 'mean_cls': np.float64(3.101364990764914), 'max': np.float64(6.176470588235294), 'argmax_word': 'ptpptpptpptppp', 'P_over_N': 6.176470588235294, 'min_gap_to_cutoff': 0.011422305109999087} t=12.0s

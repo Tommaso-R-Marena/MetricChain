@@ -1,0 +1,99 @@
+{
+ "L": 5,
+ "dimension": 31,
+ "inequalities": 160,
+ "group_order": 1536,
+ "max_vertices": 10000000,
+ "chambers": [
+  {
+   "lo": "3",
+   "hi": "4",
+   "r0": "304/101",
+   "n_vertices": 1965480,
+   "n_orbits": 2719,
+   "sum_degree_over_orbits": 22953904,
+   "degree_min": 135,
+   "degree_max": 51972,
+   "degree_mean_over_vertices": 8665.685861977736,
+   "A_range": [
+    -3,
+    7
+   ],
+   "B_range": [
+    -1,
+    1
+   ],
+   "vertices_ending_at_lo": 48736,
+   "vertices_ending_at_hi": 5312,
+   "orbits_ending_at_lo": 95,
+   "orbits_ending_at_hi": 16,
+   "seconds": 80.58,
+   "sha256_multiset": "9f151500357aec5c2da71e733c2fb08ed968f31ebd528520824936834818e6c1",
+   "file": "orbits_L5_0.npz"
+  },
+  {
+   "lo": "4",
+   "hi": "inf",
+   "r0": "405/101",
+   "n_vertices": 1960200,
+   "n_orbits": 2704,
+   "sum_degree_over_orbits": 22950874,
+   "degree_min": 135,
+   "degree_max": 51972,
+   "degree_mean_over_vertices": 8688.47441281502,
+   "A_range": [
+    -4,
+    4
+   ],
+   "B_range": [
+    0,
+    1
+   ],
+   "vertices_ending_at_lo": 32,
+   "vertices_ending_at_hi": 0,
+   "orbits_ending_at_lo": 1,
+   "orbits_ending_at_hi": 0,
+   "seconds": 74.91,
+   "sha256_multiset": "7adfed569d8dae27826bb93d8e7eb9789ac25aab5cd292d2e79cd76431b6e56c",
+   "file": "orbits_L5_1.npz"
+  }
+ ],
+ "stopped": [
+  {
+   "r0": "102/101",
+   "status": "stopped: vertex limit",
+   "orbits_found": 8426,
+   "orbits_processed": 23,
+   "vertices_found": 10420620,
+   "seconds": 0.8,
+   "just_above_wall": "1"
+  },
+  {
+   "r0": "152/101",
+   "status": "stopped: vertex limit",
+   "orbits_found": 8426,
+   "orbits_processed": 23,
+   "vertices_found": 10420620,
+   "seconds": 0.8,
+   "just_above_wall": "3/2"
+  },
+  {
+   "r0": "203/101",
+   "status": "stopped: vertex limit",
+   "orbits_found": 9409,
+   "orbits_processed": 1646,
+   "vertices_found": 10084552,
+   "seconds": 70.6,
+   "just_above_wall": "2"
+  }
+ ],
+ "wall_checks": [
+  {
+   "wall": "4",
+   "orbits_surviving": 2703,
+   "same_set": true,
+   "vertices_surviving": 1960168
+  }
+ ],
+ "seconds_total": 348.5
+}

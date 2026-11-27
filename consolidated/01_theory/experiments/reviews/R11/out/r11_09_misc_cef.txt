@@ -1,0 +1,24 @@
+
+== (c) all site-wise labels on the plain chain, p = 0.3, t = 0.431 (report: 0.039856, 0.040183, 0.040243 per site for n = 6, 8, 10) ==
+n=6: F = [0.2391333, 0.2391333]  per site 0.039856;  labels with weight > 1e-6: 4;  cube 0.028727   [0 s]
+n=8: F = [0.3214667, 0.3214667]  per site 0.040183;  increment (F_n - F_(n-2))/2 = 0.04117;  labels with weight > 1e-6: 8;  cube 0.028727   [0 s]
+n=10: F = [0.4024336, 0.4024336]  per site 0.040243;  increment (F_n - F_(n-2))/2 = 0.04048;  labels with weight > 1e-6: 18;  cube 0.028727   [1 s]
+
+== (e) section 8.3: quantile levels and truncated residuals for Markov-type classes, n = 8, u = 1 ==
+type classes (9 classes): 300 (residual, q) cases;  levels not admissible in 0;  truncated residual psi^tr not admissible in 0 (largest excess 0.000)
+Markov-type classes (58 classes): 300 (residual, q) cases;  levels not admissible in 299;  truncated residual psi^tr not admissible in 188 (largest excess 4.000)
+
+== (f) Proposition J ==
+exact E_n over ALL vertices (n = 2, 3) against ln Z_n(h)/Z_n(0):
+   p=0.4 n=2: E_n = [0.282052542, 0.282052542] (6 vertices);  ln Z_n(h)/Z_n(0) = 0.282052542
+   p=0.4 n=3: E_n = [0.450150401, 0.450150401] (38 vertices);  ln Z_n(h)/Z_n(0) = 0.450150401
+   p=0.3 n=2: E_n = [0.322196858, 0.322196858] (6 vertices);  ln Z_n(h)/Z_n(0) = 0.322196858
+   p=0.3 n=3: E_n = [0.546831533, 0.546831533] (38 vertices);  ln Z_n(h)/Z_n(0) = 0.546831533
+   p=0.1 n=2: E_n = [0.397952003, 0.397952003] (6 vertices);  ln Z_n(h)/Z_n(0) = 0.397952003
+   p=0.1 n=3: E_n = [0.751274910, 0.751274910] (38 vertices);  ln Z_n(h)/Z_n(0) = 0.751274910
+ascent search for a member with KL(pi || pi_phi) = E_pi phi + ln E_pi e^-phi above the uniform field (successive LPs):
+   n=8 p=0.3: best KL found 1.706216432;  uniform field ln Z_n(h)/Z_n(0) = 1.706216432;  above the uniform field: False   [7 s]
+   n=8 p=0.1: best KL found 2.731970807;  uniform field ln Z_n(h)/Z_n(0) = 2.731970807;  above the uniform field: False   [8 s]
+   n=10 p=0.3: best KL found 1.693437069;  uniform field ln Z_n(h)/Z_n(0) = 2.171014965;  above the uniform field: False   [8 s]
+   n=10 p=0.1: best KL found 3.535263235;  uniform field ln Z_n(h)/Z_n(0) = 3.535263235;  above the uniform field: False   [9 s]
+8.6 s

@@ -1,0 +1,7 @@
+R27 item2_corollaries.py started 2026-11-26T23:38:07Z
+
+L.1: 330 estimates with stress <= sum eps^2 (noise levels 1e-6 ... 10 times the mean squared distance): violations 0;  max d_P/(2.4 C ||eps||) = 1.216e-03;  CONTROL (constant / 1000): violated by 1
+L.2: 864 pairs (estimate = minimiser / truth + noise / unrelated chain; bound computed from the estimate, the data and nu = ||eps|| only): violations 0;  max d_P/bound = 1.633e-03;  CONTROL (nu left out, data realised exactly by another configuration): violated in 30 of 30 cases
+side claim (i): sigma_min(edge matrix)/sigma_3(centred window) over 20000 four-point windows: min 1.0000, max 1.9997   (claimed: between 1 and 2)
+side claim (ii): sigma_3 does not decrease when a point is added: 20000 of 20000
+ALL DONE 2026-11-26T23:38:12Z  5.2 s  peak memory 76 MB

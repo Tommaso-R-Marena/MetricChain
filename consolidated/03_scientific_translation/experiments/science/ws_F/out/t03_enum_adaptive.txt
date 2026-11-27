@@ -1,0 +1,82 @@
+--- n=8 p=0.3 u=1.0 gamma1=-0.0908 k=4 eps=0.5 [gamma*,m* of e=0.0E: gamma*=-0.0908, m*=0.5006, R^max=0.02503]
+    depth r=0.327037  excess E=0.790651  excess density c_E=0.358658  (cone density c_0=0.337146; base comp. density p_g1=0.319398)
+    compensator gamma2=-1.00 (p_2=0.538102), b=0.218784  => base density (p_g1+b p_2)/(1+b)=0.358658
+    (i)  in class: base True (max |ln ratio|=0.906935), alternative True (0.899572); u=1.0
+    (ii) one-body marginals: base all = 0.358657797804 (spread 0.0e+00); alt all = 0.358657797804 (spread 1.7e-16); max |alt - base| = 5.00e-16
+    (iii) ln A(alt) - ln A(base) = 0.500000001  (formula ln(1+E/(1+b)) = 0.500000001; required > eps = 0.5)
+    (iv) |difference set| = 240 of 256 ; pi-mass of it under base Gibbs = 9.048e-01
+         packing: |T_k|=70, max_x #{s: x in D_s} = 35, union bound LB = |T_k|/(n*max) = 0.250, exact max_x #{s: x in orbit-union} = 70 -> exact LB = 1.000
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.319398448, alt 0.336733172: gap +1.733e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.247031 to 0.470285 (reveals the centre)
+--- n=12 p=0.3 u=1.0 gamma1=-0.0908 k=6 eps=0.5 [gamma*,m* of e=0.0E: gamma*=-0.0908, m*=0.5006, R^max=0.02503]
+    depth r=0.233306  excess E=0.770342  excess density c_E=0.353927  (cone density c_0=0.337146; base comp. density p_g1=0.319398)
+    compensator gamma2=-1.00 (p_2=0.538102), b=0.187477  => base density (p_g1+b p_2)/(1+b)=0.353927
+    (i)  in class: base True (max |ln ratio|=0.985140), alternative True (0.985140); u=1.0
+    (ii) one-body marginals: base all = 0.353926972589 (spread 0.0e+00); alt all = 0.353926972589 (spread 1.8e-15); max |alt - base| = 5.27e-15
+    (iii) ln A(alt) - ln A(base) = 0.500000001  (formula ln(1+E/(1+b)) = 0.500000001; required > eps = 0.5)
+    (iv) |difference set| = 3416 of 4096 ; pi-mass of it under base Gibbs = 8.850e-01
+         packing: |T_k|=924, max_x #{s: x in D_s} = 462, union bound LB = |T_k|/(n*max) = 0.167, exact max_x #{s: x in orbit-union} = 924 -> exact LB = 1.000
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.319398448, alt 0.334423097: gap +1.502e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.248708 to 0.459145 (reveals the centre)
+--- n=12 p=0.1 u=2.0 gamma1=-0.6210 k=6 eps=0.5 [gamma*,m* of e=0.0E: gamma*=-0.6210, m*=0.5065, R^max=0.04813]
+    depth r=0.253815  excess E=0.960077  excess density c_E=0.261984  (cone density c_0=0.232834; base comp. density p_g1=0.171335)
+    compensator gamma2=-2.00 (p_2=0.450853), b=0.479953  => base density (p_g1+b p_2)/(1+b)=0.261984
+    (i)  in class: base True (max |ln ratio|=1.999944), alternative True (1.999944); u=2.0
+    (ii) one-body marginals: base all = 0.261983513162 (spread 0.0e+00); alt all = 0.261983513162 (spread 1.1e-15); max |alt - base| = 6.77e-15
+    (iii) ln A(alt) - ln A(base) = 0.500000001  (formula ln(1+E/(1+b)) = 0.500000001; required > eps = 0.5)
+    (iv) |difference set| = 2160 of 4096 ; pi-mass of it under base Gibbs = 7.029e-01
+         packing: |T_k|=924, max_x #{s: x in D_s} = 462, union bound LB = |T_k|/(n*max) = 0.167, exact max_x #{s: x in orbit-union} = 924 -> exact LB = 1.000
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.171335078, alt 0.215736123: gap +4.440e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.161151 to 0.362816 (reveals the centre)
+--- n=12 p=0.1 u=2.0 gamma1=-0.5634 k=6 eps=0.7642597521874733 [gamma*,m* of e=0.3E: gamma*=-0.5634, m*=0.5373, R^max=0.02327]
+    depth r=0.718582  excess E=1.670366  excess density c_E=0.253331  (cone density c_0=0.232834; base comp. density p_g1=0.163304)
+    compensator gamma2=-2.00 (p_2=0.450853), b=0.455778  => base density (p_g1+b p_2)/(1+b)=0.253331
+    (i)  in class: base True (max |ln ratio|=1.999964), alternative True (1.999964); u=2.0
+    (ii) one-body marginals: base all = 0.253330619761 (spread 0.0e+00); alt all = 0.253330619761 (spread 5.0e-16); max |alt - base| = 1.44e-15
+    (iii) ln A(alt) - ln A(base) = 0.764259753  (formula ln(1+E/(1+b)) = 0.764259753; required > eps = 0.7642597521874733)
+    (iv) |difference set| = 2280 of 4096 ; pi-mass of it under base Gibbs = 7.064e-01
+         packing: |T_k|=924, max_x #{s: x in D_s} = 462, union bound LB = |T_k|/(n*max) = 0.167, exact max_x #{s: x in orbit-union} = 924 -> exact LB = 1.000
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.163304218, alt 0.219617486: gap +5.631e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.121794 to 0.384867 (reveals the centre)
+--- n=14 p=0.2 u=1.5 gamma1=-0.2624 k=7 eps=0.5123210004948326 [gamma*,m* of e=0.2E: gamma*=-0.2624, m*=0.5149, R^max=0.02734]
+    depth r=0.141169  excess E=0.863545  excess density c_E=0.309023  (cone density c_0=0.290616; base comp. density p_g1=0.245297)
+    compensator gamma2=-1.50 (p_2=0.528396), b=0.290489  => base density (p_g1+b p_2)/(1+b)=0.309023
+    (i)  in class: base True (max |ln ratio|=1.499818), alternative True (1.499818); u=1.5
+    (ii) one-body marginals: base all = 0.309022662303 (spread 0.0e+00); alt all = 0.309022662303 (spread 4.8e-15); max |alt - base| = 6.94e-15
+    (iii) ln A(alt) - ln A(base) = 0.512321001  (formula ln(1+E/(1+b)) = 0.512321001; required > eps = 0.5123210004948326)
+    (iv) |difference set| = 9702 of 16384 ; pi-mass of it under base Gibbs = 6.563e-01
+         packing: |T_k|=3432, max_x #{s: x in D_s} = 960, union bound LB = |T_k|/(n*max) = 0.255
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.245297160, alt 0.274826809: gap +2.953e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.198321 to 0.419724 (reveals the centre)
+--- n=16 p=0.3 u=1.0 gamma1=-0.0818 k=8 eps=0.5 [gamma*,m* of e=0.3E: gamma*=-0.0818, m*=0.5096, R^max=0.01221]
+    depth r=0.140375  excess E=0.760797  excess density c_E=0.349956  (cone density c_0=0.337146; base comp. density p_g1=0.317452)
+    compensator gamma2=-1.00 (p_2=0.538102), b=0.172763  => base density (p_g1+b p_2)/(1+b)=0.349956
+    (i)  in class: base True (max |ln ratio|=0.998129), alternative True (0.998129); u=1.0
+    (ii) one-body marginals: base all = 0.349956468250 (spread 0.0e+00); alt all = 0.349956468250 (spread 1.8e-14); max |alt - base| = 1.30e-14
+    (iii) ln A(alt) - ln A(base) = 0.500000001  (formula ln(1+E/(1+b)) = 0.500000001; required > eps = 0.5)
+    (iv) |difference set| = 57376 of 65536 ; pi-mass of it under base Gibbs = 8.490e-01
+         packing: |T_k|=12870, max_x #{s: x in D_s} = 3985, union bound LB = |T_k|/(n*max) = 0.202
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.317451889, alt 0.331496312: gap +1.404e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.250758 to 0.449155 (reveals the centre)
+--- n=16 p=0.1 u=2.0 gamma1=-0.5634 k=9 eps=1.019013002916631 [gamma*,m* of e=0.3E: gamma*=-0.5634, m*=0.5373, R^max=0.02327]
+    depth r=1.173371  excess E=2.870791  excess density c_E=0.273517  (cone density c_0=0.260086; base comp. density p_g1=0.163304)
+    compensator gamma2=-2.00 (p_2=0.450853), b=0.621495  => base density (p_g1+b p_2)/(1+b)=0.273517
+    (i)  in class: base True (max |ln ratio|=2.000000), alternative True (2.000000); u=2.0
+    (ii) one-body marginals: base all = 0.273517481119 (spread 0.0e+00); alt all = 0.273517481119 (spread 1.2e-14); max |alt - base| = 1.35e-13
+    (iii) ln A(alt) - ln A(base) = 1.019013004  (formula ln(1+E/(1+b)) = 1.019013004; required > eps = 1.019013002916631)
+    (iv) |difference set| = 50516 of 65536 ; pi-mass of it under base Gibbs = 7.472e-01
+         packing: |T_k|=11440, max_x #{s: x in D_s} = 4488, union bound LB = |T_k|/(n*max) = 0.159
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.163304218, alt 0.245044423: gap +8.174e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.105119 to 0.404494 (reveals the centre)
+--- n=12 p=0.2 u=1.0 gamma1=+0.0000 k=6 eps=0.5 [base component = zero residual]
+    depth r=0.463000  excess E=0.999002  excess density c_E=0.271742  (cone density c_0=0.244417; base comp. density p_g1=0.200000)
+    compensator gamma2=-1.00 (p_2=0.404610), b=0.539956  => base density (p_g1+b p_2)/(1+b)=0.271742
+    (i)  in class: base True (max |ln ratio|=0.999323), alternative True (0.998975); u=1.0
+    (ii) one-body marginals: base all = 0.271742421172 (spread 0.0e+00); alt all = 0.271742421172 (spread 2.3e-15); max |alt - base| = 9.21e-15
+    (iii) ln A(alt) - ln A(base) = 0.500000001  (formula ln(1+E/(1+b)) = 0.500000001; required > eps = 0.5)
+    (iv) |difference set| = 4032 of 4096 ; pi-mass of it under base Gibbs = 9.290e-01
+         packing: |T_k|=924, max_x #{s: x in D_s} = 462, union bound LB = |T_k|/(n*max) = 0.167, exact max_x #{s: x in orbit-union} = 924 -> exact LB = 1.000
+    (v)  WITHOUT compensation (base = additive gamma1): marginals base 0.200000000, alt 0.235853301: gap +3.585e-02  (the oracle separates them)
+         single (unsymmetrised) dip: marginals range from 0.186530 to 0.356955 (reveals the centre)
+
+SUMMARY: all in class: True ; max |marginal(alt) - marginal(base)| over all runs: 1.34781075189494e-13

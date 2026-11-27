@@ -1,0 +1,12 @@
+  small case: z-scores of the cell means [-0.12  0.6  -0.73  0.29  0.43 -0.23], variance ratios [1.006 1.002 0.999 0.996 1.012 0.994]: True
+  tail mass 6.67e-18 (expected count       3.8): stable sampler mean/expected 0.9830, var/expected 0.981  [True];   numpy multinomial mean/expected 0.0000
+  tail mass 9.48e-17 (expected count      54.6): stable sampler mean/expected 1.0002, var/expected 1.169  [True];   numpy multinomial mean/expected 0.0000
+  tail mass 3.42e-16 (expected count     197.1): stable sampler mean/expected 1.0057, var/expected 0.859  [True];   numpy multinomial mean/expected 0.5144
+  tail mass 4.09e-15 (expected count    2355.0): stable sampler mean/expected 1.0005, var/expected 1.083  [True];   numpy multinomial mean/expected 0.9580
+  tail mass 4.37e-14 (expected count   25186.8): stable sampler mean/expected 0.9997, var/expected 1.023  [True];   numpy multinomial mean/expected 0.9970
+  tail mass 4.20e-13 (expected count  241912.4): stable sampler mean/expected 0.9999, var/expected 0.996  [True];   numpy multinomial mean/expected 0.9996
+stable multinomial self-test passed: True
+
+real	0m3.245s
+user	0m3.578s
+sys	0m0.020s

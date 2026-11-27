@@ -1,0 +1,11 @@
+(1) 6 sites, 3 states per site, anchor (0,...,0), order m = 3: the ball of radius 2 has 73 of 729 states; g_a = 0, g_b = lambda at one state with exactly 3 sites off
+    lambda =   -2.0: equal on the ball: True; ln Z(g_b) - ln Z(g_a) = 0.0087 nats; control, the sandwich with the pointwise remainder bound 2 at that state: [6.5905, 6.6004] contains both: True
+    lambda =   -5.0: equal on the ball: True; ln Z(g_b) - ln Z(g_a) = 0.1842 nats; control, the sandwich with the pointwise remainder bound 5 at that state: [6.5903, 6.7758] contains both: True
+    lambda =  -10.0: equal on the ball: True; ln Z(g_b) - ln Z(g_a) = 3.4408 nats; control, the sandwich with the pointwise remainder bound 10 at that state: [6.5903, 10.0325] contains both: True
+    lambda =  -20.0: equal on the ball: True; ln Z(g_b) - ln Z(g_a) = 13.4083 nats; control, the sandwich with the pointwise remainder bound 20 at that state: [6.5903, 20.0000] contains both: True
+    => from the ball alone no finite bracket is valid on the class of all functions with those evaluations: the difference is unbounded in lambda
+(2) two states, E = m_+ = 0, groups S_1 = (0, ln 2), S_2 = -S_1: hypothesis sum_g S_g <= m_+ - E holds: True; exact ln Z(E) = 0.693147; (LP) as a formula = 0.916291 (VIOLATED: a group slack is negative); (LJ) = 0.693147 (holds)
+    control, one non-negative group S_1 and E = m_+ - S_1: exact ln Z(E) = 1.098612, (LP) = 1.098612 (attained: True)
+(3) two modes (states 0 and 9), models built around the first: exact ln Z = 0.882527; ceiling restricted to the first mode: ln Z(m_+) = 0.451914 <= ln Z: True; a floor valid on that mode only: ln Z(m_-) = 0.473128 >= ln Z: False (the upper end is FALSE: the second mode is missing from the floor); control, the floor repaired at the second mode: ln Z(m_-) = 0.882527 >= ln Z: True
+(4) not re-run: the hypothesis 'at most m hosts' of the remainder identity with one order per term is sharp -- machine-checked by the theory division (term_orders_sharp)
+ALL DONE; examples that did not behave as stated: 0

@@ -1,0 +1,71 @@
+{
+ "L": 3,
+ "dimension": 7,
+ "inequalities": 24,
+ "group_order": 32,
+ "max_vertices": 10000000,
+ "chambers": [
+  {
+   "lo": "1",
+   "hi": "2",
+   "r0": "102/101",
+   "n_vertices": 96,
+   "n_orbits": 8,
+   "sum_degree_over_orbits": 98,
+   "degree_min": 8,
+   "degree_max": 18,
+   "degree_mean_over_vertices": 11.333333333333334,
+   "A_range": [
+    -1,
+    3
+   ],
+   "B_range": [
+    -1,
+    1
+   ],
+   "vertices_ending_at_lo": 84,
+   "vertices_ending_at_hi": 32,
+   "orbits_ending_at_lo": 6,
+   "orbits_ending_at_hi": 2,
+   "seconds": 0.0,
+   "sha256_multiset": "b484b2c523861eb9132557bf019260bd89125cc1686ace4433bc010335868e42",
+   "file": "orbits_L3_0.npz"
+  },
+  {
+   "lo": "2",
+   "hi": "inf",
+   "r0": "203/101",
+   "n_vertices": 72,
+   "n_orbits": 7,
+   "sum_degree_over_orbits": 91,
+   "degree_min": 9,
+   "degree_max": 18,
+   "degree_mean_over_vertices": 12.555555555555555,
+   "A_range": [
+    -2,
+    2
+   ],
+   "B_range": [
+    0,
+    1
+   ],
+   "vertices_ending_at_lo": 8,
+   "vertices_ending_at_hi": 0,
+   "orbits_ending_at_lo": 1,
+   "orbits_ending_at_hi": 0,
+   "seconds": 0.0,
+   "sha256_multiset": "95e48ec0f221afc68662bd28f8d5e2b1e004056d1212a647afa47dc49cc15ff2",
+   "file": "orbits_L3_1.npz"
+  }
+ ],
+ "stopped": [],
+ "wall_checks": [
+  {
+   "wall": "2",
+   "orbits_surviving": 6,
+   "same_set": true,
+   "vertices_surviving": 64
+  }
+ ],
+ "seconds_total": 0.0
+}

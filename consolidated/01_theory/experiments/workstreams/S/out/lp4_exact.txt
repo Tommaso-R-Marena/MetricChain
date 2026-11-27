@@ -1,0 +1,29 @@
+# path-cluster LP: 340 configurations in 48 orbits; 7 independent star relations
+# gauche inequalities  c3 p3 + c8 p8 + c11 p11 + cq q <= b  (exact certificates):
+        (0, 0, 0, 1) . (p,q) <= 1    (multipliers with denominators <= 1)
+       (0, 0, 0, -1) . (p,q) <= 0    (multipliers with denominators <= 1)
+      (-4, 0, 2, -1) . (p,q) <= 17/2    (multipliers with denominators <= 2)
+      (-3, 0, 2, -1) . (p,q) <= 9    (multipliers with denominators <= 1)
+      (-2, 0, 2, -1) . (p,q) <= 10    (multipliers with denominators <= 1)
+       (0, 0, 2, -1) . (p,q) <= 12    (multipliers with denominators <= 1)
+      (0, -1, 2, -1) . (p,q) <= 7    (multipliers with denominators <= 1)
+      (-4, 1, 1, -1) . (p,q) <= 7    (multipliers with denominators <= 1)
+       (0, 0, 1, -1) . (p,q) <= 6    (multipliers with denominators <= 1)
+        (0, 0, 1, 0) . (p,q) <= 6    (multipliers with denominators <= 1)
+       (-2, 1, 0, 0) . (p,q) <= 3    (multipliers with denominators <= 1)
+       (6, -1, 0, 0) . (p,q) <= 1    (multipliers with denominators <= 1)
+       (4, -1, 0, 0) . (p,q) <= 0    (multipliers with denominators <= 1)
+# facets of the profile polytope of the path-cluster LP (12 vertices, volume 3.125000): exact certificates
+        (-3, 0, 2) . p <=     9    certified: 9   EXACT
+       (-3, 2, -1) . p <=     2    certified: 2   EXACT
+       (-3, 4, -3) . p <=     2    certified: 2   EXACT
+        (-2, 1, 0) . p <=     3    certified: 3   EXACT
+        (-1, 0, 0) . p <=     0    certified: 0   EXACT
+       (-1, 1, -1) . p <=     0    certified: 0   EXACT
+       (-1, 2, -1) . p <=     3    certified: 3   EXACT
+        (0, -1, 2) . p <=     7    certified: 7   EXACT
+        (3, 4, -3) . p <=     5    certified: 5   EXACT
+        (4, -1, 0) . p <=     0    certified: 0   EXACT
+        (6, -2, 1) . p <=     2    certified: 2   EXACT
+        (6, -1, 0) . p <=     1    certified: 1   EXACT
+# all facets certified exactly: True

@@ -1,0 +1,91 @@
+
+centre tt+tt-tt--- (pairs inside cutoff 34, gauche 5)   point +t+ttt++t-- (inside 33, gauche 6)
+  positions that differ: 12 of 66;  sum of positive differences 9.663050135923998448050994  sum of negative 3.336949864076001551949006  total |.| 13.0
+  sum over ALL truncated distances: centre 815.637085751631708009212842863  point 809.31098547978371111311085532  difference 6.32610027184799689610198754284
+  centre: sum of the squared distances inside the cutoff = 303.6370857516317080092128; integer relation with (1, c, c^2, c^3), c = cos 69deg: None
+  point: sum of the squared distances inside the cutoff = 281.3109854797837111131109; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -173, -247, -138, -45]
+
+centre tt++t-tt+t- (pairs inside cutoff 34, gauche 5)   point +t+ttt++t-- (inside 33, gauche 6)
+  positions that differ: 11 of 66;  sum of positive differences 9.863112599330223969990178  sum of negative 3.136887400669776030009822  total |.| 13.0
+  sum over ALL truncated distances: centre 816.037210678444159053091210928  point 809.31098547978371111311085532  difference 6.72622519866044793998035560828
+  centre: sum of the squared distances inside the cutoff = 304.0372106784441590530912; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -189, -268, -135, -36]
+  point: sum of the squared distances inside the cutoff = 281.3109854797837111131109; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -173, -247, -138, -45]
+
+centre tt+tt-t++t- (pairs inside cutoff 34, gauche 5)   point +t+t--ttt++ (inside 33, gauche 6)
+  positions that differ: 11 of 66;  sum of positive differences 9.961300263172554946553483  sum of negative 3.038699736827445053446517  total |.| 13.0
+  sum over ALL truncated distances: centre 816.135398342286490029654516423  point 809.212797815941380136547549826  difference 6.92260052634510989310696659668
+  centre: sum of the squared distances inside the cutoff = 304.1353983422864900296545; integer relation with (1, c, c^2, c^3), c = cos 69deg: [-2, 375, 545, 273, 63]
+  point: sum of the squared distances inside the cutoff = 281.2127978159413801365475; integer relation with (1, c, c^2, c^3), c = cos 69deg: [-2, 349, 485, 273, 99]
+
+centre tt+tt-t-t++ (pairs inside cutoff 32, gauche 5)   point +t+t+ttt+++ (inside 31, gauche 6)
+  positions that differ: 13 of 66;  sum of positive differences 10.06317506273644949192936  sum of negative 2.936824937263550508070638  total |.| 13.0
+  sum over ALL truncated distances: centre 823.061170294127495286613882648  point 815.934820168654596302755158974  difference 7.12635012547289898385872367372
+  centre: sum of the squared distances inside the cutoff = 279.0611702941274952866139; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -174, -250, -114, -18]
+  point: sum of the squared distances inside the cutoff = 255.9348201686545963027552; integer relation with (1, c, c^2, c^3), c = cos 69deg: None
+
+centre tt+tt-t+t-- (pairs inside cutoff 32, gauche 5)   point +t+t-ttt+++ (inside 31, gauche 6)
+  positions that differ: 12 of 66;  sum of positive differences 10.06317506273644949192936  sum of negative 2.936824937263550508070638  total |.| 13.0
+  sum over ALL truncated distances: centre 825.675887532343586639135928221  point 818.549537406870687655277204547  difference 7.12635012547289898385872367372
+  centre: sum of the squared distances inside the cutoff = 281.6758875323435866391359; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -177, -250, -111, -18]
+  point: sum of the squared distances inside the cutoff = 258.5495374068706876552772; integer relation with (1, c, c^2, c^3), c = cos 69deg: None
+
+=== centre tt++t-tt+t-  point +t+ttt++t--  bond angle 111 deg ===
+  rank  5: centre pair ( 2, 6) s~= 5.53932145609 = (-7/-2) + (-7/-2)c^1 + (-9/-2)c^2 + (-9/-2)c^3 | point pair ( 6, 9) s~= 3.81875455997 = (2/1) + (4/1)c^1 + (3/1)c^2 | diff 1.72056689612
+  rank  6: centre pair ( 9,12) s~= 6.43347179818 = (5/1) + (4/1)c^1 | point pair ( 9,13) s~= 5.53932145609 = (-7/-2) + (-7/-2)c^1 + (-9/-2)c^2 + (-9/-2)c^3 | diff 0.894150342093
+  rank  7: centre pair ( 0, 3) s~= 6.43347179818 = (5/1) + (4/1)c^1 | point pair ( 6,10) s~= 5.53932145609 = (-7/-2) + (-7/-2)c^1 + (-9/-2)c^2 + (-9/-2)c^3 | diff 0.894150342093
+  rank 12: centre pair ( 8,12) s~= 8.25222635815 = (5/1) + (8/1)c^1 + (3/1)c^2 | point pair ( 5, 8) s~= 6.43347179818 = (5/1) + (4/1)c^1 | diff 1.81875455997
+  rank 21: centre pair ( 0, 4) s~= 10.8669435964 = (8/1) + (8/1)c^1 | point pair ( 5,10) s~= 9.35807601605 = (-11/-2) + (-15/-2)c^1 + (-15/-2)c^2 + (-9/-2)c^3 | diff 1.50886758031
+  rank 22: centre pair ( 6,10) s~= 10.8669435964 = (8/1) + (8/1)c^1 | point pair ( 0, 5) s~=  9.4562636799 = (4/1) + (12/1)c^1 + (9/1)c^2 | diff 1.41067991647
+  rank 23: centre pair ( 5,11) s~= 11.2788492369 = (-9/-2) + (-27/-2)c^1 + (-27/-2)c^2 + (-9/-2)c^3 | point pair ( 3, 7) s~= 10.8669435964 = (8/1) + (8/1)c^1 | diff 0.41190564053
+  rank 24: centre pair ( 8,13) s~= 12.0709809181 = (7/1) + (12/1)c^1 + (6/1)c^2 | point pair ( 4, 8) s~= 10.8669435964 = (8/1) + (8/1)c^1 | diff 1.20403732175
+  rank 28: centre pair ( 0, 5) s~= 12.0709809181 = (7/1) + (12/1)c^1 + (6/1)c^2 | point pair ( 4,10) s~= 13.7953788113 = (9/1) + (9/1)c^1 + (9/1)c^2 + (9/1)c^3 | diff -1.72439789315
+  rank 29: centre pair ( 0, 6) s~= 13.7953788113 = (9/1) + (9/1)c^1 + (9/1)c^2 + (9/1)c^3 | point pair ( 6,12) s~= 13.8935664751 = (15/2) + (27/2)c^1 + (21/2)c^2 + (9/2)c^3 | diff -0.0981876638423
+  rank 33: centre pair ( 4, 9) s~= 14.6856981563 = (10/1) + (12/1)c^1 + (3/1)c^2 | point pair ( 0, 6) s~=          16.0 = (16/1) | diff -1.31430184367
+  profile distance: 13.0
+
+Dependence on the bond angle (same two torsion words):
+  theta= 109.00  tt+tt-tt--- / +t+ttt++t--: D = 12.9384086580323283448203576034
+  theta= 109.00  tt++t-tt+t- / +t+ttt++t--: D = 12.814178388998571231729260799
+  theta= 109.00  tt+tt-t++t- / +t+t--ttt++: D = 12.8766573940028475954791277562
+  theta= 109.00  tt+tt-t-t++ / +t+t+ttt+++: D = 12.8766573940028475954791277562
+  theta= 109.00  tt+tt-t+t-- / +t+t-ttt+++: D = 12.8766573940028475954791277562
+  theta= 109.47  tt+tt-tt--- / +t+ttt++t--: D = 12.9998393175099552024317221693
+  theta= 109.47  tt++t-tt+t- / +t+ttt++t--: D = 12.9995179452686387020518740024
+  theta= 109.47  tt+tt-t++t- / +t+t--ttt++: D = 12.9996786338099611732029754669
+  theta= 109.47  tt+tt-t-t++ / +t+t+ttt+++: D = 12.9996786338099611732029754669
+  theta= 109.47  tt+tt-t+t-- / +t+t-ttt+++: D = 12.9996786338099611732029754669
+  theta= 110.00  tt+tt-tt--- / +t+ttt++t--: D = 13.0
+  theta= 110.00  tt++t-tt+t- / +t+ttt++t--: D = 13.0
+  theta= 110.00  tt+tt-t++t- / +t+t--ttt++: D = 13.0
+  theta= 110.00  tt+tt-t-t++ / +t+t+ttt+++: D = 13.0
+  theta= 110.00  tt+tt-t+t-- / +t+t-ttt+++: D = 13.0
+  theta= 110.50  tt+tt-tt--- / +t+ttt++t--: D = 13.0
+  theta= 110.50  tt++t-tt+t- / +t+ttt++t--: D = 13.0
+  theta= 110.50  tt+tt-t++t- / +t+t--ttt++: D = 13.0
+  theta= 110.50  tt+tt-t-t++ / +t+t+ttt+++: D = 13.0
+  theta= 110.50  tt+tt-t+t-- / +t+t-ttt+++: D = 13.0
+  theta= 111.00  tt+tt-tt--- / +t+ttt++t--: D = 13.0
+  theta= 111.00  tt++t-tt+t- / +t+ttt++t--: D = 13.0
+  theta= 111.00  tt+tt-t++t- / +t+t--ttt++: D = 13.0
+  theta= 111.00  tt+tt-t-t++ / +t+t+ttt+++: D = 13.0
+  theta= 111.00  tt+tt-t+t-- / +t+t-ttt+++: D = 13.0
+  theta= 111.50  tt+tt-tt--- / +t+ttt++t--: D = 13.0
+  theta= 111.50  tt++t-tt+t- / +t+ttt++t--: D = 13.0
+  theta= 111.50  tt+tt-t++t- / +t+t--ttt++: D = 13.0
+  theta= 111.50  tt+tt-t-t++ / +t+t+ttt+++: D = 13.0
+  theta= 111.50  tt+tt-t+t-- / +t+t-ttt+++: D = 13.0
+  theta= 112.00  tt+tt-tt--- / +t+ttt++t--: D = 13.0
+  theta= 112.00  tt++t-tt+t- / +t+ttt++t--: D = 13.0
+  theta= 112.00  tt+tt-t++t- / +t+t--ttt++: D = 13.0
+  theta= 112.00  tt+tt-t-t++ / +t+t+ttt+++: D = 13.0
+  theta= 112.00  tt+tt-t+t-- / +t+t-ttt+++: D = 13.0
+  theta= 113.00  tt+tt-tt--- / +t+ttt++t--: D = 13.0
+  theta= 113.00  tt++t-tt+t- / +t+ttt++t--: D = 13.0
+  theta= 113.00  tt+tt-t++t- / +t+t--ttt++: D = 13.0
+  theta= 113.00  tt+tt-t-t++ / +t+t+ttt+++: D = 13.0
+  theta= 113.00  tt+tt-t+t-- / +t+t-ttt+++: D = 13.0
+  theta= 115.00  tt+tt-tt--- / +t+ttt++t--: D = 13.0
+  theta= 115.00  tt++t-tt+t- / +t+ttt++t--: D = 13.0
+  theta= 115.00  tt+tt-t++t- / +t+t--ttt++: D = 13.0
+  theta= 115.00  tt+tt-t-t++ / +t+t+ttt+++: D = 13.0
+  theta= 115.00  tt+tt-t+t-- / +t+t-ttt+++: D = 13.0

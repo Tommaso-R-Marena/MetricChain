@@ -1,0 +1,3 @@
+n=12 p=0.3 u=1.0 tau=0.1 N=400: in class True,True; separation ln A(alt)/A(base) = 1.0987; max deviation of marginals: order 1: 0.0186, order 2: 0.0182, order 3: 0.0158  (tolerance tau = 0.1)
+n=12 p=0.1 u=2.0 tau=0.1 N=400: in class True,True; separation ln A(alt)/A(base) = 1.1001; max deviation of marginals: order 1: 0.0142, order 2: 0.0201, order 3: 0.0202  (tolerance tau = 0.1)
+n=12 p=0.3 u=1.0 tau=0.03 N=2000: in class True,True; separation ln A(alt)/A(base) = 1.0986; max deviation of marginals: order 1: 0.0070, order 2: 0.0070, order 3: 0.0056  (tolerance tau = 0.03)

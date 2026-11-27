@@ -1,0 +1,15 @@
+Finding 1: one kink; ratio of N * (Kabsch squared distance) / (phi^2 s^3 (1-s)^3 / 3)
+  (a rod of N + 1 points: the discretisation error is of order 1/N; the criterion is
+   that N * (ratio - 1) is the same at N = 1000 and N = 4000 to 10 per cent, i.e. limit 1)
+  N =   200: 1.06931  1.02520  1.01512  1.03214    N*(ratio-1):  13.86    5.04    3.02    6.43
+  N =  1000: 1.01367  1.00501  1.00300  1.00638    N*(ratio-1):  13.67    5.01    3.00    6.38
+  N =  4000: 1.00357  1.00126  1.00076  1.00160    N*(ratio-1):  14.27    5.05    3.03    6.39
+  consistency with G: G(s,s) / (s^3 (1-s)^3 / 3) = [1.0, 1.0, 1.0, 1.0]
+Finding 3: several kinks; ratio of N * (Kabsch squared distance) / sum phi_k phi_l G(s_k, s_l)
+  kinks at [0.55, 0.6, 0.85, 0.95]: ratio 1.00044
+  kinks at [0.15, 0.75]: ratio 1.00162
+  kinks at [0.25, 0.45, 0.5, 0.85]: ratio 1.00125
+  kinks at [0.2, 0.8, 0.95]: ratio 1.00171
+  largest |ratio - 1| over 12 random sets of 2-4 kinks: 2.28e-03
+at the middle: (s^3 (1-s)^3 / 3) / I_red = 0.2500   (their statement: a quarter)
+ALL CHECKS PASS

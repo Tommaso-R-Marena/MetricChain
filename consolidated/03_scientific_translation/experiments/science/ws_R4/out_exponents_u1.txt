@@ -1,0 +1,16 @@
+# R4 own computation; exponents of section 11.24
+# small-slope limit (units a = 1; h = 1/4)
+gauss: theta2*/a = 0.346035  theta2*/h = 1.38414  best phi1 = 0.6540   T2(0)/a = 0.618034 (golden ratio (sqrt5-1)/2 = 0.618034) at xi/a = 0.38197 (sqrt(xi/a) = 0.61803)
+   gauss Xi(h, phi1=0.1) = +0.01707
+   gauss Xi(h, phi1=0.3) = +0.05400
+   gauss Xi(h, phi1=0.5) = +0.09583
+   gauss Xi(h, phi1=0.65) = +0.13183
+
+#   u      a          h          h/a      theta2*    theta2*/a  theta2*/h  phi1*    T2(0)dir  T2/a(dir) T2/a(bal) phi_ub  xi_ub     (a+h)/2a
+ 1.000 0.11094407 0.02913914 0.26265  0.03987221 0.35939   1.36834   0.6406  0.06926491 0.62432   0.62432   0.5555  0.04488   0.63132
+
+# identities used in the proofs:  D(h)=0,  theta_na(h)=h,  a + u p_u = Lambda1
+u=1.0: D(h)=-1.11e-16  theta_na(h)-h=+1.19e-08  a+u*pu-Lam=+0.00e+00
+
+# is theta -> Xi(theta,phi1) decreasing on (0, phi2 a)?  and Xi(h, phi1) > 0 ?
+u=1.0: phi1=0.1: decreasing=True, Xi(h)=+0.00202; phi1=0.3: decreasing=True, Xi(h)=+0.00638; phi1=0.5: decreasing=True, Xi(h)=+0.01131; phi1=0.64: decreasing=True, Xi(h)=+0.01524; phi1=0.8: decreasing=True, Xi(h)=+nan

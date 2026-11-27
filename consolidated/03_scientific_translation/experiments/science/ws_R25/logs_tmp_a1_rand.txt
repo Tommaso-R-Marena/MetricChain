@@ -1,0 +1,5 @@
+/bin/bash: line 1: 28802 Killed                  timeout 300 python3 -B a1_3dm.py rand 7 150
+
+real	1m55.650s
+user	1m32.799s
+sys	0m21.617s

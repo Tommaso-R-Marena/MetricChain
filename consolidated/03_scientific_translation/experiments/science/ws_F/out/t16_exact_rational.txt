@@ -1,0 +1,13 @@
+n=8 p=1/4 e^-u=1/3 e^-gamma=6/5 e^r=2 k=4: b = 24607020265/142714081349 (= 0.172422); c_E = 0.317228; p_gamma = 0.285714
+   base in class: True; alternative in class: True
+   one-body marginals identical as fractions at all 8 sites: True; all equal to c_E: True
+   A(alt)/A(base) = 2.134655 = 1 + E/(1+b): True
+n=8 p=3/10 e^-u=2/5 e^-gamma=1 e^r=5/2 k=3: b = 4593699048894396869/50419779639430509055 (= 0.091109); c_E = 0.287169; p_gamma = 0.300000
+   base in class: True; alternative in class: True
+   one-body marginals identical as fractions at all 8 sites: True; all equal to c_E: True
+   A(alt)/A(base) = 2.561334 = 1 + E/(1+b): True
+n=10 p=1/10 e^-u=1/7 e^-gamma=3/2 e^r=3 k=5: b = 94201278288326477669752/167612171432225117903459 (= 0.562019); c_E = 0.248871; p_gamma = 0.142857
+   base in class: True; alternative in class: True
+   one-body marginals identical as fractions at all 10 sites: True; all equal to c_E: True
+   A(alt)/A(base) = 2.581054 = 1 + E/(1+b): True
+ALL EXACT: True

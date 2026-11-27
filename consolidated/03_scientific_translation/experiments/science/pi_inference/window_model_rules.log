@@ -1,0 +1,5 @@
+# S12 on the helix, triple form, exact window terms: bracket width in nats by rule for the terms that do not fit a window (in brackets: the sum of the sup-norm slacks of the reduced terms of the floor, kcal/mol)
+order 5, band 6: pair 0.137279 [0.04518; 470 terms];  ext 0.136499 [0.04504; 470 terms];  best 0.136696 [0.04468; 470 terms]   [2s]
+order 5, band 7: pair 0.0941896 [0.01515; 365 terms];  ext 0.0939291 [0.01512; 365 terms];  best 0.093955 [0.01505; 365 terms]   [8s]
+order 6, band 6: pair 0.0565484 [0.04587; 1166 terms];  ext 0.0557125 [0.04572; 1166 terms];  best 0.0559108 [0.04536; 1166 terms]   [16s]
+ALL DONE

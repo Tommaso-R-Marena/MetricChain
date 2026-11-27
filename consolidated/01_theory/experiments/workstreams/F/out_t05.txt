@@ -1,0 +1,6 @@
+$ python3 t05_birad_bruteforce.py
+checks: 146, failures: 0
+
+real	0m0.357s
+user	0m0.892s
+sys	0m0.028s

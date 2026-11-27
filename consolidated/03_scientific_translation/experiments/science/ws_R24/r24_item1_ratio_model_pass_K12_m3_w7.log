@@ -1,0 +1,13 @@
+[theirs] === K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 3, band 7; 220 raw stage-2 tables of workstream P9 (sum of their maxima 272.11 kT)
+[theirs] (2) ln Z(m_0) = 517.1328808 (no penalty); slope at 0: beta <pen>_0 = 0.0249449 nats per unit of lambda; 4 exact samples per lambda
+(0) ln Z(m_0) (theirs) = 517.1328808; my evaluation of their tables against their evaluators at 2000 random states: 2.3e-12, 0.0e+00 kcal/mol; least entry of any penalty table 0; penalty at the anchor 0 [424s, peak RSS 1918 MB]
+    iterate 1.54942938 (12 sites off, b = 93.7753, c = 145.298) [456s]
+    iterate 1.37250517 (11 sites off, b = 74.2749, c = 101.943) [475s]
+    iterate 1.35557498 (10 sites off, b = 64.0024, c = 86.7601) [492s]
+(1) DINKELBACH for lambda_gs from 4 x (their value): 3 iterates; **lambda_gs = 1.35557498**; closing pass max_x [lambda b - c] = 2.05e-12 (must be 0 to rounding); minimiser 10 of 12 sites off, b* = 64.0024, c* = 86.7601; their committed c*/b* = 1.355575: difference -1.5e-08
+    iterate 1.53535152 (12 sites off, b = 93.7753, c = 145.298) [509s]
+    iterate 1.35473126 (11 sites off, b = 74.2749, c = 101.943) [517s]
+    iterate 1.33494834 (10 sites off, b = 64.0024, c = 86.7601) [526s]
+(2) lambda_kink by the same iteration on (c - c_a)/b: **1.33494834** (closing value 1.48e-12); their bracket [1.3349, 1.335]; same minimiser: True; lambda_gs - lambda_kink = 0.0206266 against c_a / b* = 0.0206266 (c_a = 1.3202)
+(3) every single-site change of the minimiser has a larger ratio: 91 of 91 (must be all); control: at lambda = 0.999 lambda_gs the same pass gives max_x [lambda b - c] = -0.0868 (must be negative) and at 1.001 lambda_gs 0.0868 (must be positive)
+ALL DONE 551 s; 11 (min,+) passes; peak RSS 1918 MB

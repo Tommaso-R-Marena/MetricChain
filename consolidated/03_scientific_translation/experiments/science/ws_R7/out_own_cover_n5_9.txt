@@ -1,0 +1,15 @@
+n=5 L=1.0 eps=0.0: classes=30 greedy=27 LP=27.000000 certLB=27 MILP primal=27 dual=27.0 feas=True margin=1.064e-01 status=0 t=0.0s
+n=5 L=1.0 eps=4.0: classes=30 greedy=10 LP=9.000000 certLB=9 MILP primal=9 dual=9.0 feas=True margin=3.545e-02 status=0 t=0.0s
+n=5 L=0.2 eps=0.0: classes=30 greedy=5 LP=5.000000 certLB=5 MILP primal=5 dual=5.0 feas=True margin=6.740e-03 status=0 t=0.0s
+n=6 L=1.0 eps=0.0: classes=60 greedy=49 LP=48.000000 certLB=48 MILP primal=48 dual=48.0 feas=True margin=1.064e-01 status=0 t=0.0s
+n=6 L=1.0 eps=4.5: classes=60 greedy=16 LP=15.000000 certLB=15 MILP primal=15 dual=15.0 feas=True margin=4.374e-02 status=0 t=0.0s
+n=6 L=0.2 eps=0.0: classes=60 greedy=6 LP=5.000000 certLB=5 MILP primal=5 dual=5.0 feas=True margin=4.250e-03 status=0 t=0.0s
+n=7 L=1.0 eps=0.0: classes=136 greedy=93 LP=92.000000 certLB=92 MILP primal=92 dual=92.0 feas=True margin=1.940e-02 status=0 t=0.0s
+n=7 L=1.0 eps=5.0: classes=136 greedy=22 LP=21.000000 certLB=21 MILP primal=21 dual=21.000000000000004 feas=True margin=8.509e-03 status=0 t=0.0s
+n=7 L=0.2 eps=0.0: classes=136 greedy=8 LP=6.000000 certLB=6 MILP primal=6 dual=6.0 feas=True margin=1.284e-04 status=0 t=0.0s
+n=8 L=1.0 eps=0.0: classes=291 greedy=141 LP=137.000000 certLB=137 MILP primal=137 dual=137.0 feas=True margin=7.864e-03 status=0 t=0.0s
+n=8 L=1.0 eps=5.5: classes=291 greedy=38 LP=32.797834 certLB=33 MILP primal=34 dual=33.99999999999999 feas=True margin=8.574e-03 status=0 t=0.9s
+n=8 L=0.2 eps=0.0: classes=291 greedy=12 LP=8.500000 certLB=9 MILP primal=9 dual=8.999999999999993 feas=True margin=3.714e-05 status=0 t=0.3s
+n=9 L=1.0 eps=0.0: classes=639 greedy=226 LP=214.000000 certLB=214 MILP primal=215 dual=215.0 feas=True margin=3.349e-04 status=0 t=0.1s
+n=9 L=1.0 eps=6.0: classes=639 greedy=51 LP=41.153465 certLB=42 MILP primal=43 dual=43.00000000000105 feas=True margin=1.683e-03 status=0 t=10.0s
+n=9 L=0.2 eps=0.0: classes=639 greedy=13 LP=10.250000 certLB=11 MILP primal=11 dual=10.999999999999996 feas=True margin=2.877e-05 status=0 t=1.2s

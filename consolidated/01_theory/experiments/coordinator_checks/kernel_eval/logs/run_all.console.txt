@@ -1,0 +1,187 @@
+baseline_empty                     status 0   wall_seconds: 0.31 max_rss_kb: 451344 polled_peak_rss_kb: 451048 
+E1_n16_k2_negL                     status 0   wall_seconds: 1.41 max_rss_kb: 535040 polled_peak_rss_kb: 537344 
+E1_n16_k2_negU                     status 0   wall_seconds: 1.14 max_rss_kb: 521532 polled_peak_rss_kb: 523788 
+E1_n16_k2_negP                     status 0   wall_seconds: 1.01 max_rss_kb: 488532 polled_peak_rss_kb: 484044 
+E1_n16_k2_negJ                     status 0   wall_seconds: 1.56 max_rss_kb: 529300 polled_peak_rss_kb: 531344 
+E1_n16_k2_negJ0                    status 0   wall_seconds: 1.09 max_rss_kb: 485116 polled_peak_rss_kb: 486960 
+E1_n16_k2_negL_claimtrue           status 1   wall_seconds: 1.82 max_rss_kb: 547860 polled_peak_rss_kb: 548704 
+E1_n16_k2_tac_decide               status 0   wall_seconds: 1.76 max_rss_kb: 549116 polled_peak_rss_kb: 551372 
+E1_n16_k2_tac_rfl                  status 0   wall_seconds: 1.92 max_rss_kb: 547128 polled_peak_rss_kb: 549444 
+E4_n16_k2_negL                     status 0   wall_seconds: 1.20 max_rss_kb: 516436 polled_peak_rss_kb: 518288 
+E4_n16_k2_negU                     status 0   wall_seconds: 0.94 max_rss_kb: 506044 polled_peak_rss_kb: 508308 
+E4_n16_k2_negP                     status 0   wall_seconds: 0.94 max_rss_kb: 481756 polled_peak_rss_kb: 479496 
+E4_n16_k2_negJ                     status 0   wall_seconds: 1.20 max_rss_kb: 515932 polled_peak_rss_kb: 518140 
+E4_n16_k2_negJ0                    status 0   wall_seconds: 1.09 max_rss_kb: 477268 polled_peak_rss_kb: 479508 
+E4_n16_k2_negL_claimtrue           status 1   wall_seconds: 1.77 max_rss_kb: 526992 polled_peak_rss_kb: 529168 
+E4_n16_k2_tac_decide               status 0   wall_seconds: 1.45 max_rss_kb: 529332 polled_peak_rss_kb: 531560 
+E4_n16_k2_tac_rfl                  status 0   wall_seconds: 1.61 max_rss_kb: 523520 polled_peak_rss_kb: 525600 
+E2_n16_k2_negL                     status 0   wall_seconds: 0.52 max_rss_kb: 482868 polled_peak_rss_kb: 485144 
+E2_n16_k2_negU                     status 0   wall_seconds: 0.41 max_rss_kb: 469684 polled_peak_rss_kb: 465052 
+E2_n16_k2_negP                     status 0   wall_seconds: 0.47 max_rss_kb: 470868 polled_peak_rss_kb: 465088 
+E2_n16_k2_negJ                     status 0   wall_seconds: 0.47 max_rss_kb: 468712 polled_peak_rss_kb: 470832 
+E2_n16_k2_negJ0                    status 0   wall_seconds: 0.63 max_rss_kb: 480820 polled_peak_rss_kb: 478760 
+E2_n16_k2_negL_claimtrue           status 1   wall_seconds: 0.78 max_rss_kb: 496604 polled_peak_rss_kb: 496768 
+E2_n16_k2_tac_decide               status 0   wall_seconds: 0.73 max_rss_kb: 494416 polled_peak_rss_kb: 494448 
+E2_n16_k2_tac_rfl                  status 0   wall_seconds: 0.73 max_rss_kb: 496528 polled_peak_rss_kb: 498864 
+E2h_n16_k2_negL                    status 0   wall_seconds: 0.58 max_rss_kb: 480436 polled_peak_rss_kb: 480496 
+E2h_n16_k2_negU                    status 0   wall_seconds: 0.42 max_rss_kb: 469456 polled_peak_rss_kb: 471688 
+E2h_n16_k2_negP                    status 0   wall_seconds: 0.47 max_rss_kb: 471848 polled_peak_rss_kb: 471696 
+E2h_n16_k2_negJ                    status 0   wall_seconds: 0.47 max_rss_kb: 471848 polled_peak_rss_kb: 467460 
+E2h_n16_k2_negJ0                   status 0   wall_seconds: 0.52 max_rss_kb: 480444 polled_peak_rss_kb: 478348 
+E2h_n16_k2_negL_claimtrue          status 1   wall_seconds: 0.58 max_rss_kb: 480892 polled_peak_rss_kb: 483200 
+E2h_n16_k2_tac_decide              status 1   wall_seconds: 0.47 max_rss_kb: 467512 polled_peak_rss_kb: 469668 
+E2h_n16_k2_tac_rfl                 status 1   wall_seconds: 0.53 max_rss_kb: 465556 polled_peak_rss_kb: 467136 
+E3_n8_k2_negL                      status 0   wall_seconds: 4.17 max_rss_kb: 1106360 polled_peak_rss_kb: 1108648 
+E3_n8_k2_negU                      status 0   wall_seconds: 0.94 max_rss_kb: 565672 polled_peak_rss_kb: 567916 
+E3_n8_k2_negP                      status 0   wall_seconds: 2.45 max_rss_kb: 768480 polled_peak_rss_kb: 770464 
+E3_n8_k2_negJ                      status 0   wall_seconds: 1.51 max_rss_kb: 608328 polled_peak_rss_kb: 610604 
+E3_n8_k2_negJ0                     status 0   wall_seconds: 4.21 max_rss_kb: 1101172 polled_peak_rss_kb: 1102948 
+E3_n8_k2_negL_claimtrue            status 1   wall_seconds: 4.51 max_rss_kb: 1106916 polled_peak_rss_kb: 1108764 
+E3_n8_k2_tac_decide                status 1   wall_seconds: 0.68 max_rss_kb: 475616 polled_peak_rss_kb: 471324 
+E3_n8_k2_tac_rfl                   status 1   wall_seconds: 0.53 max_rss_kb: 473460 polled_peak_rss_kb: 469252 
+E1_n8_k2                           status 0   wall_seconds: 0.78 max_rss_kb: 486844 polled_peak_rss_kb: 488048 
+E1_n16_k2                          status 0   wall_seconds: 1.61 max_rss_kb: 535064 polled_peak_rss_kb: 537308 
+E1_n16_k4                          status 0   wall_seconds: 3.02 max_rss_kb: 641100 polled_peak_rss_kb: 642988 
+E1_n32_k4                          status 0   wall_seconds: 12.51 max_rss_kb: 1177964 polled_peak_rss_kb: 1178164 
+E1_n32_k8                          status 0   wall_seconds: 42.41 max_rss_kb: 2734732 polled_peak_rss_kb: 2737008 
+E1_n48_k8                          status 137 wall_seconds: 78.82 max_rss_kb: 9052 polled_peak_rss_kb: 5005616 
+E1: stopped after n=48 k=8 (failed, timed out or over the memory limit)
+E4_n8_k2                           status 0   wall_seconds: 0.68 max_rss_kb: 480668 polled_peak_rss_kb: 476904 
+E4_n16_k2                          status 0   wall_seconds: 1.26 max_rss_kb: 521768 polled_peak_rss_kb: 521960 
+E4_n16_k4                          status 0   wall_seconds: 2.24 max_rss_kb: 590964 polled_peak_rss_kb: 593452 
+E4_n32_k4                          status 0   wall_seconds: 8.90 max_rss_kb: 964232 polled_peak_rss_kb: 964532 
+E4_n32_k8                          status 0   wall_seconds: 28.03 max_rss_kb: 1956336 polled_peak_rss_kb: 1958684 
+E4_n48_k8                          status 0   wall_seconds: 77.21 max_rss_kb: 3847504 polled_peak_rss_kb: 3849860 
+E2_n8_k2                           status 0   wall_seconds: 0.54 max_rss_kb: 467480 polled_peak_rss_kb: 469668 
+E2_n16_k2                          status 0   wall_seconds: 0.91 max_rss_kb: 484240 polled_peak_rss_kb: 482680 
+E2_n16_k4                          status 0   wall_seconds: 1.36 max_rss_kb: 575868 polled_peak_rss_kb: 578020 
+E2_n32_k4                          status 0   wall_seconds: 6.07 max_rss_kb: 1778988 polled_peak_rss_kb: 1781216 
+E2_n32_k8                          status 134 wall_seconds: 17.48 max_rss_kb: 3322064 polled_peak_rss_kb: 3317820 
+E2: stopped after n=32 k=8 (failed, timed out or over the memory limit)
+E2h_n8_k2                          status 0   wall_seconds: 0.42 max_rss_kb: 469636 polled_peak_rss_kb: 467436 
+E2h_n16_k2                         status 0   wall_seconds: 0.57 max_rss_kb: 480556 polled_peak_rss_kb: 482636 
+E2h_n16_k4                         status 0   wall_seconds: 1.10 max_rss_kb: 503008 polled_peak_rss_kb: 505328 
+E2h_n32_k4                         status 0   wall_seconds: 3.04 max_rss_kb: 629276 polled_peak_rss_kb: 631536 
+E2h_n32_k8                         status 0   wall_seconds: 10.72 max_rss_kb: 981588 polled_peak_rss_kb: 983920 
+E2h_n48_k8                         status 0   wall_seconds: 24.98 max_rss_kb: 1677424 polled_peak_rss_kb: 1679604 
+E3_n8_k2                           status 0   wall_seconds: 4.55 max_rss_kb: 1108428 polled_peak_rss_kb: 1110240 
+E3_n16_k2                          status 137 wall_seconds: 22.49 max_rss_kb: 8948 polled_peak_rss_kb: 5003192 
+E3: stopped after n=16 k=2 (failed, timed out or over the memory limit)
+E2h_n16_k2_oneliteral              status 0   wall_seconds: 0.73 max_rss_kb: 478868 polled_peak_rss_kb: 477040 
+E2h_n16_k4_oneliteral              status 0   wall_seconds: 3.51 max_rss_kb: 503136 polled_peak_rss_kb: 504856 
+E2h_n32_k4_oneliteral              status 0   wall_seconds: 46.34 max_rss_kb: 628464 polled_peak_rss_kb: 630816 
+E4_n32_k4_oneliteral               status 0   wall_seconds: 19.60 max_rss_kb: 1276644 polled_peak_rss_kb: 1278748 
+E4_n32_k8_oneliteral               status 1   wall_seconds: 35.12 max_rss_kb: 1730472 polled_peak_rss_kb: 1732428 
+E1_n16_k4_plaindef                 status 1   wall_seconds: 4.54 max_rss_kb: 711800 polled_peak_rss_kb: 713636 
+E1_n32_k4_randmsg                  status 0   wall_seconds: 17.60 max_rss_kb: 1227584 polled_peak_rss_kb: 1229864 
+E4_n32_k4_randmsg                  status 0   wall_seconds: 10.80 max_rss_kb: 983000 polled_peak_rss_kb: 985256 
+E2h_n32_k4_randmsg                 status 0   wall_seconds: 3.07 max_rss_kb: 628960 polled_peak_rss_kb: 631256 
+E4_n32_k4_tac_decide               status 0   wall_seconds: 11.86 max_rss_kb: 1008936 polled_peak_rss_kb: 1009128 
+E4_n32_k4_tac_rfl                  status 0   wall_seconds: 13.76 max_rss_kb: 1009948 polled_peak_rss_kb: 1010092 
+E2_n32_k4_tac_decide               status 0   wall_seconds: 9.41 max_rss_kb: 2963740 polled_peak_rss_kb: 2965960 
+E2_n32_k4_tac_rfl                  status 0   wall_seconds: 9.89 max_rss_kb: 3008400 polled_peak_rss_kb: 3010648 
+E1_n32_k8_dataonly                 status 0   wall_seconds: 28.70 max_rss_kb: 1047352 polled_peak_rss_kb: 1049364 
+E4_n48_k8_dataonly                 status 0   wall_seconds: 48.31 max_rss_kb: 1502872 polled_peak_rss_kb: 1503252 
+E2h_n48_k8_dataonly                status 0   wall_seconds: 11.58 max_rss_kb: 531460 polled_peak_rss_kb: 533544 
+pitfall_thunk_chain                status 0   wall_seconds: 21.00 max_rss_kb: 1288544 polled_peak_rss_kb: 1290820 
+pitfall_thunk_forced               status 134 wall_seconds: 21.96 max_rss_kb: 1646464 polled_peak_rss_kb: 1648140 
+<!-- written by collect.py from logs/*.log -->
+
+### Main table: `leafCheck … = true := by decide +kernel`
+
+| encoding | n | k | n²k² | cells n(n-1)/2·k² | result | wall s | kernel s | elaboration s | peak RSS MB | axioms |
+|---|---|---|---|---|---|---|---|---|---|---|
+| E1 | 8 | 2 | 256 | 112 | ok | 0.78 | 0.12 | 0.28 | 477 | none |
+| E1 | 16 | 2 | 1024 | 480 | ok | 1.61 | 0.40 | 0.66 | 525 | none |
+| E1 | 16 | 4 | 4096 | 1920 | ok | 3.02 | 0.96 | 1.30 | 628 | none |
+| E1 | 32 | 4 | 16384 | 7936 | ok | 12.51 | 4.48 | 5.67 | 1151 | none |
+| E1 | 32 | 8 | 65536 | 31744 | ok | 42.41 | 17.50 | 17.70 | 2673 | none |
+| E1 | 48 | 8 | 147456 | 72192 | FAIL: resident memory above 5 GB, killed | 78.82 | - | - | 4888 | - |
+| E4 | 8 | 2 | 256 | 112 | ok | 0.68 | 0.07 | 0.21 | 469 | none |
+| E4 | 16 | 2 | 1024 | 480 | ok | 1.26 | 0.26 | 0.52 | 510 | none |
+| E4 | 16 | 4 | 4096 | 1920 | ok | 2.24 | 0.66 | 0.98 | 580 | none |
+| E4 | 32 | 4 | 16384 | 7936 | ok | 8.90 | 2.97 | 4.00 | 942 | none |
+| E4 | 32 | 8 | 65536 | 31744 | ok | 28.03 | 8.56 | 13.50 | 1913 | none |
+| E4 | 48 | 8 | 147456 | 72192 | ok | 77.21 | 23.00 | 37.70 | 3760 | none |
+| E2 | 8 | 2 | 256 | 112 | ok | 0.54 | 0.03 | 0.08 | 459 | none |
+| E2 | 16 | 2 | 1024 | 480 | ok | 0.91 | 0.24 | 0.22 | 473 | none |
+| E2 | 16 | 4 | 4096 | 1920 | ok | 1.36 | 0.51 | 0.47 | 564 | none |
+| E2 | 32 | 4 | 16384 | 7936 | ok | 6.07 | 4.12 | 1.43 | 1739 | none |
+| E2 | 32 | 8 | 65536 | 31744 | FAIL: out of memory under `ulimit -v` (GNU MP: Cannot allocate memory (size=198688)) | 17.48 | - | - | 3244 | - |
+| E2h | 8 | 2 | 256 | 112 | ok | 0.42 | 0.03 | 0.06 | 459 | none |
+| E2h | 16 | 2 | 1024 | 480 | ok | 0.57 | 0.10 | 0.15 | 471 | none |
+| E2h | 16 | 4 | 4096 | 1920 | ok | 1.10 | 0.29 | 0.42 | 493 | none |
+| E2h | 32 | 4 | 16384 | 7936 | ok | 3.04 | 1.34 | 1.31 | 617 | none |
+| E2h | 32 | 8 | 65536 | 31744 | ok | 10.72 | 5.08 | 4.89 | 961 | none |
+| E2h | 48 | 8 | 147456 | 72192 | ok | 24.98 | 13.50 | 10.40 | 1640 | none |
+| E3 | 8 | 2 | 256 | 112 | ok | 4.55 | 4.02 | 0.18 | 1084 | none |
+| E3 | 16 | 2 | 1024 | 480 | FAIL: resident memory above 5 GB, killed | 22.49 | - | - | 4886 | - |
+
+### Negative controls and tactic variants
+
+| encoding | n | k | file variant | claim / tactic | result | wall s | kernel s | peak RSS MB |
+|---|---|---|---|---|---|---|---|---|
+| E1 | 16 | 2 | negJ | `= false`, one J entry lowered (B fails in the last cell) | ok | 1.56 | 0.32 | 519 |
+| E1 | 16 | 2 | negJ0 | `= false`, one J entry lowered (B fails in the first cell) | ok | 1.09 | 0.02 | 476 |
+| E1 | 16 | 2 | negL | `= false`, L+1 (C fails) | ok | 1.41 | 0.43 | 525 |
+| E1 | 16 | 2 | negL_claimtrue | `= true` on the L+1 data (wrong claim) | rejected, as it must be | 1.82 | 0.42 | 536 |
+| E1 | 16 | 2 | negP | `= false`, one p+1 (B fails) | ok | 1.01 | 0.05 | 477 |
+| E1 | 16 | 2 | negU | `= false`, one u+1 (A fails) | ok | 1.14 | 0.28 | 512 |
+| E1 | 16 | 2 | tac_decide | `= true := by decide` (no `+kernel`) | ok | 1.76 | 0.37 | 538 |
+| E1 | 16 | 2 | tac_rfl | `= true := by rfl` | ok | 1.92 | 0.39 | 537 |
+| E4 | 16 | 2 | negJ | `= false`, one J entry lowered (B fails in the last cell) | ok | 1.20 | 0.28 | 506 |
+| E4 | 16 | 2 | negJ0 | `= false`, one J entry lowered (B fails in the first cell) | ok | 1.09 | 0.02 | 468 |
+| E4 | 16 | 2 | negL | `= false`, L+1 (C fails) | ok | 1.20 | 0.23 | 506 |
+| E4 | 16 | 2 | negL_claimtrue | `= true` on the L+1 data (wrong claim) | rejected, as it must be | 1.77 | 0.34 | 517 |
+| E4 | 16 | 2 | negP | `= false`, one p+1 (B fails) | ok | 0.94 | 0.04 | 470 |
+| E4 | 16 | 2 | negU | `= false`, one u+1 (A fails) | ok | 0.94 | 0.18 | 496 |
+| E4 | 16 | 2 | tac_decide | `= true := by decide` (no `+kernel`) | ok | 1.45 | 0.28 | 519 |
+| E4 | 16 | 2 | tac_rfl | `= true := by rfl` | ok | 1.61 | 0.29 | 513 |
+| E4 | 32 | 4 | tac_decide | `= true := by decide` (no `+kernel`) | ok | 11.86 | 2.72 | 985 |
+| E4 | 32 | 4 | tac_rfl | `= true := by rfl` | ok | 13.76 | 3.91 | 986 |
+| E2 | 16 | 2 | negJ | `= false`, one J entry lowered (B fails in the last cell) | ok | 0.47 | 0.04 | 460 |
+| E2 | 16 | 2 | negJ0 | `= false`, one J entry lowered (B fails in the first cell) | ok | 0.63 | 0.12 | 470 |
+| E2 | 16 | 2 | negL | `= false`, L+1 (C fails) | ok | 0.52 | 0.10 | 474 |
+| E2 | 16 | 2 | negL_claimtrue | `= true` on the L+1 data (wrong claim) | rejected, as it must be | 0.78 | 0.14 | 485 |
+| E2 | 16 | 2 | negP | `= false`, one p+1 (B fails) | ok | 0.47 | 0.03 | 460 |
+| E2 | 16 | 2 | negU | `= false`, one u+1 (A fails) | ok | 0.41 | 0.02 | 459 |
+| E2 | 16 | 2 | tac_decide | `= true := by decide` (no `+kernel`) | ok | 0.73 | 0.12 | 483 |
+| E2 | 16 | 2 | tac_rfl | `= true := by rfl` | ok | 0.73 | 0.14 | 487 |
+| E2 | 32 | 4 | tac_decide | `= true := by decide` (no `+kernel`) | ok | 9.41 | 3.46 | 2896 |
+| E2 | 32 | 4 | tac_rfl | `= true := by rfl` | ok | 9.89 | 3.74 | 2940 |
+| E2h | 16 | 2 | negJ | `= false`, one J entry lowered (B fails in the last cell) | ok | 0.47 | 0.03 | 461 |
+| E2h | 16 | 2 | negJ0 | `= false`, one J entry lowered (B fails in the first cell) | ok | 0.52 | 0.09 | 469 |
+| E2h | 16 | 2 | negL | `= false`, L+1 (C fails) | ok | 0.58 | 0.09 | 469 |
+| E2h | 16 | 2 | negL_claimtrue | `= true` on the L+1 data (wrong claim) | rejected, as it must be | 0.58 | 0.10 | 472 |
+| E2h | 16 | 2 | negP | `= false`, one p+1 (B fails) | ok | 0.47 | 0.04 | 461 |
+| E2h | 16 | 2 | negU | `= false`, one u+1 (A fails) | ok | 0.42 | 0.01 | 461 |
+| E2h | 16 | 2 | tac_decide | `= true := by decide` (no `+kernel`) | FAIL: maximum recursion depth has been reached | 0.47 | 0.01 | 459 |
+| E2h | 16 | 2 | tac_rfl | `= true := by rfl` | FAIL: maximum recursion depth has been reached | 0.53 | 0.00 | 456 |
+| E3 | 8 | 2 | negJ | `= false`, one J entry lowered (B fails in the last cell) | ok | 1.51 | 0.90 | 596 |
+| E3 | 8 | 2 | negJ0 | `= false`, one J entry lowered (B fails in the first cell) | ok | 4.21 | 3.69 | 1077 |
+| E3 | 8 | 2 | negL | `= false`, L+1 (C fails) | ok | 4.17 | 3.61 | 1083 |
+| E3 | 8 | 2 | negL_claimtrue | `= true` on the L+1 data (wrong claim) | rejected, as it must be | 4.51 | 3.87 | 1083 |
+| E3 | 8 | 2 | negP | `= false`, one p+1 (B fails) | ok | 2.45 | 1.95 | 752 |
+| E3 | 8 | 2 | negU | `= false`, one u+1 (A fails) | ok | 0.94 | 0.50 | 555 |
+| E3 | 8 | 2 | tac_decide | `= true := by decide` (no `+kernel`) | FAIL: maximum recursion depth has been reached | 0.68 | 0.01 | 464 |
+| E3 | 8 | 2 | tac_rfl | `= true := by rfl` | FAIL: maximum recursion depth has been reached | 0.53 | 0.01 | 462 |
+
+### Side experiments
+
+| log | result | wall s | kernel s | elaboration s | peak RSS MB | note |
+|---|---|---|---|---|---|---|
+| E1_n16_k4_plaindef | FAIL: maximum recursion depth has been reached | 4.54 | 1.22 | 1.79 | 697 | per theorem: 1.18s |
+| E1_n32_k4_randmsg | ok | 17.60 | 6.16 | 7.90 | 1201 | per theorem: 5.97s |
+| E1_n32_k8_dataonly | ok | 28.70 | 0.53 | 20.20 | 1025 |  |
+| E4_n32_k4_oneliteral | ok | 19.60 | 3.84 | 10.20 | 1249 | per theorem: 3.71s |
+| E4_n32_k4_randmsg | ok | 10.80 | 3.28 | 4.94 | 962 | per theorem: 3.12s |
+| E4_n32_k8_oneliteral | FAIL: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached | 35.12 | 0.03 | 24.90 | 1692 |  |
+| E4_n48_k8_dataonly | ok | 48.31 | 0.99 | 33.30 | 1468 |  |
+| E2h_n16_k2_oneliteral | ok | 0.73 | 0.10 | 0.33 | 468 | per theorem: 101ms |
+| E2h_n16_k4_oneliteral | ok | 3.51 | 0.38 | 2.80 | 493 | per theorem: 381ms |
+| E2h_n32_k4_oneliteral | ok | 46.34 | 1.52 | 44.50 | 616 | per theorem: 1.52s |
+| E2h_n32_k4_randmsg | ok | 3.07 | 1.40 | 1.28 | 616 | per theorem: 1.38s |
+| E2h_n48_k8_dataonly | ok | 11.58 | 0.06 | 10.50 | 521 |  |
+| baseline_empty | ok | 0.31 | - | 0.00 | 441 |  |
+| pitfall_thunk_chain | ok | 21.00 | 20.70 | 0.01 | 1261 | per theorem: 2.01s, 4.44s, 14.3s |
+| pitfall_thunk_forced | FAIL: libc++abi: terminating due to uncaught exception of type std::bad_alloc: std::bad_alloc | 21.96 | - | - | 1610 |  |

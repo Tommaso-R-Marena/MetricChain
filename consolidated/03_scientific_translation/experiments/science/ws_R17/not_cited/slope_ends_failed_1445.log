@@ -1,0 +1,11 @@
+# u n delta | xhat  n_o n_i  x_1  capped?  L  r_dag  ln(1/pi)  n_o h + ln(n_o+1) | ln C_max  Q6 bound  slack | (4.1) slack
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_capped.py", line 31, in <module>
+    lcm, lev = S.level(n, xhat, ld, 'proof')
+               ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/r17_nest.py", line 137, in level
+    lev = R.Level(u, d, n_o, 1.0, 0.5, 1.0, ltheta, 1.0, 1.0, ld, xs)
+  File "/home/user/MetricChain/experiments/science/ws_R17/scripts/../../ws_R16/r16lib.py", line 116, in __init__
+    assert n >= 2 and 1 <= n_o <= n - 1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

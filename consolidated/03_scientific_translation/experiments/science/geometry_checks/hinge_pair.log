@@ -1,0 +1,37 @@
+=== hinge pairs: two states that differ in one torsion (unit bonds, cos(bond angle) = -1/3); seed 20261126
+(1) every squared distance of X(phi) is a + b cos(phi) + c sin(phi): largest residual of a least-squares fit on 64 angles
+    n = 8, torsion 2: residual 1.42e-14; control, the same fit with cos(2 phi), sin(2 phi) instead: 6.09e+00 (must be large)
+    n = 14, torsion 5: residual 2.84e-14; control, the same fit with cos(2 phi), sin(2 phi) instead: 1.25e+01 (must be large)
+    n = 20, torsion 8: residual 3.55e-14; control, the same fit with cos(2 phi), sin(2 phi) instead: 2.10e+01 (must be large)
+(2) competitors on other chords through m = (1 - w) + w exp(i theta)
+    n = 8: states at 0 and 4.0354 with weights 0.2743, 0.7257; competitor at -1.2265 and 3.1131 with weights 0.6127, 0.3873: largest difference of the two matrices M 5.33e-15; its states differ from the true ones by at least 3.879 in a squared distance
+    n = 14: states at 0 and 4.0941 with weights 0.4018, 0.5982; competitor at 2.8942 and -0.9937 with weights 0.3238, 0.6762: largest difference of the two matrices M 5.33e-15; its states differ from the true ones by at least 8.902 in a squared distance
+    n = 20: states at 0 and 0.7548 with weights 0.6866, 0.3134; competitor at 0.2144 and 2.8630 with weights 0.9679, 0.0321: largest difference of the two matrices M 2.84e-14; its states differ from the true ones by at least 3.191 in a squared distance
+    60 competitors on 15 chains: 0 violations of 'same M, other shapes, weights in (0,1)'; control (the chord shifted off m by 0.1, where the shifted chord still meets the circle: 59 cases): 59 give a different M (must be all)
+(3) dimension of the space of quadrics through the constrained edge directions of the stacked pair (K = 2; the trivial ones: 1; (CC) holds iff the entry is 1)
+    three random pairs per cell (weights 0.37, 0.63); 'all' = every torsion different (their generic case)
+| n | 1 torsion differs | 2 torsions differ | 3 torsions differ | 4 torsions differ | 5 torsions differ | 6 torsions differ | 8 torsions differ | all |
+|---|---|---|---|---|---|---|---|---|
+| 8 | 10/13/11 | 9/11/9 | 8/8/9 | 8/8/8 | 8/8/8 | - | - | 8/8/8 |
+| 10 | 11/11/10 | 6/9/7 | 9/9/5 | 5/5/4 | 4/4/5 | 4/4/4 | - | 4/4/4 |
+| 11 | 10/13/10 | 9/8/8 | 7/9/7 | 2/3/5 | 3/3/2 | 2/2/2 | 2/2/2 | 2/2/2 |
+| 12 | 10/11/11 | 6/6/7 | 9/4/7 | 3/2/3 | 1/1/1 | 1/1/1 | 1/1/1 | 1/1/1 |
+| 14 | 10/10/10 | 9/6/6 | 7/5/5 | 3/3/3 | 3/1/2 | 1/1/1 | 1/1/1 | 1/1/1 |
+| 20 | 11/10/10 | 6/6/6 | 5/5/3 | 3/1/3 | 1/1/1 | 1/1/1 | 1/1/1 | 1/1/1 |
+| 40 | 10/10/11 | 6/6/6 | 3/3/4 | 1/1/2 | 1/2/1 | 1/1/1 | 1/1/1 | 1/1/1 |
+| 80 | 10/10/10 | 6/9/8 | 3/3/3 | 1/5/1 | 1/1/1 | 1/1/1 | 1/1/1 | 1/1/1 |
+(4) the same at n = 80 with the differing torsions spread evenly along the chain (segments of equal length), 5 random pairs per row: smallest and largest dimension
+    1 torsion different (2 rigid segments): dimension 10 to 10
+    2 torsions different (3 rigid segments): dimension 6 to 6
+    3 torsions different (4 rigid segments): dimension 3 to 3
+    4 torsions different (5 rigid segments): dimension 1 to 1
+    5 torsions different (6 rigid segments): dimension 1 to 1
+    6 torsions different (7 rigid segments): dimension 1 to 1
+    7 torsions different (8 rigid segments): dimension 1 to 1
+    8 torsions different (9 rigid segments): dimension 1 to 1
+    10 torsions different (11 rigid segments): dimension 1 to 1
+    12 torsions different (13 rigid segments): dimension 1 to 1
+(5) two torsions varied on a 12 x 12 grid, all others fixed: every squared distance lies in the span of {1, cos, sin} x {1, cos, sin} (nine functions)
+    n = 10, torsions 1 and 5: residual 3.55e-14; control without the four product functions: 2.27e+00 (must be large); rank of the map from the nine coefficients to M: 9 (9 = M sees every Fourier coefficient of the pair with both indices in -1, 0, 1)
+    n = 16, torsions 1 and 11: residual 8.97e-14; control without the four product functions: 4.03e+00 (must be large); rank of the map from the nine coefficients to M: 9 (9 = M sees every Fourier coefficient of the pair with both indices in -1, 0, 1)
+ALL DONE 3.7 s

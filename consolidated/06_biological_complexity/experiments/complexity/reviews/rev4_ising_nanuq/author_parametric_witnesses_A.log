@@ -1,0 +1,4 @@
+('TM', (0, 1, 0, -1)) -> level 1, tree (1, (2, (3, ((4, 5), 6)))), twin pairs at positions (3,), hybrid leaves [3], placement [0, 1, 2, 3, 4, 5]
+('TM', (0, -1, 0, 1)) -> level 1, tree (1, (2, (3, ((4, 5), 6)))), twin pairs at positions (6,), hybrid leaves [0], placement [0, 5, 4, 3, 2, 1]
+('T6', (-1, 0, 1, 0)) -> level 1, tree (1, (2, ((3, 4), (5, 6)))), twin pairs at positions (2,), hybrid leaves [2], placement [2, 3, 4, 5, 0, 1]
+('TP', (0, -1, 2, 0)) -> level 1, tree (1, (2, (3, (4, 5)))), twin pairs at positions (5,), hybrid leaves [0], placement [1, 0, 4, 3, 2]

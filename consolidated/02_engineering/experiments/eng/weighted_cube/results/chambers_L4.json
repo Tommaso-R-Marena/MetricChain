@@ -1,0 +1,135 @@
+{
+ "L": 4,
+ "dimension": 15,
+ "inequalities": 64,
+ "group_order": 192,
+ "max_vertices": 10000000,
+ "chambers": [
+  {
+   "lo": "1",
+   "hi": "3/2",
+   "r0": "102/101",
+   "n_vertices": 21472,
+   "n_orbits": 191,
+   "sum_degree_over_orbits": 8680,
+   "degree_min": 16,
+   "degree_max": 205,
+   "degree_mean_over_vertices": 36.16579731743666,
+   "A_range": [
+    -2,
+    6
+   ],
+   "B_range": [
+    -3,
+    2
+   ],
+   "vertices_ending_at_lo": 21396,
+   "vertices_ending_at_hi": 576,
+   "orbits_ending_at_lo": 187,
+   "orbits_ending_at_hi": 4,
+   "seconds": 0.01,
+   "sha256_multiset": "9a9b63c4227a6ba40deb0332acb953692a5b59fca6778c816f2351916cc27b33",
+   "file": "orbits_L4_0.npz"
+  },
+  {
+   "lo": "3/2",
+   "hi": "2",
+   "r0": "152/101",
+   "n_vertices": 21184,
+   "n_orbits": 189,
+   "sum_degree_over_orbits": 8649,
+   "degree_min": 16,
+   "degree_max": 205,
+   "degree_mean_over_vertices": 36.44448640483384,
+   "A_range": [
+    -4,
+    5
+   ],
+   "B_range": [
+    -2,
+    3
+   ],
+   "vertices_ending_at_lo": 288,
+   "vertices_ending_at_hi": 19280,
+   "orbits_ending_at_lo": 2,
+   "orbits_ending_at_hi": 153,
+   "seconds": 0.01,
+   "sha256_multiset": "f90a186c2a424e3b9849c8937793b62df565d474b5204a6e6183601d4eee1d22",
+   "file": "orbits_L4_1.npz"
+  },
+  {
+   "lo": "2",
+   "hi": "3",
+   "r0": "203/101",
+   "n_vertices": 3160,
+   "n_orbits": 56,
+   "sum_degree_over_orbits": 4711,
+   "degree_min": 26,
+   "degree_max": 205,
+   "degree_mean_over_vertices": 80.30126582278481,
+   "A_range": [
+    -2,
+    5
+   ],
+   "B_range": [
+    -1,
+    1
+   ],
+   "vertices_ending_at_lo": 1256,
+   "vertices_ending_at_hi": 288,
+   "orbits_ending_at_lo": 20,
+   "orbits_ending_at_hi": 5,
+   "seconds": 0.01,
+   "sha256_multiset": "93ba0c63861b11da156df14d269f29d705c178c6348fa6c8cb24b4ca6959d9f6",
+   "file": "orbits_L4_2.npz"
+  },
+  {
+   "lo": "3",
+   "hi": "inf",
+   "r0": "304/101",
+   "n_vertices": 2888,
+   "n_orbits": 52,
+   "sum_degree_over_orbits": 4608,
+   "degree_min": 28,
+   "degree_max": 205,
+   "degree_mean_over_vertices": 85.26592797783934,
+   "A_range": [
+    -3,
+    3
+   ],
+   "B_range": [
+    0,
+    1
+   ],
+   "vertices_ending_at_lo": 16,
+   "vertices_ending_at_hi": 0,
+   "orbits_ending_at_lo": 1,
+   "orbits_ending_at_hi": 0,
+   "seconds": 0.0,
+   "sha256_multiset": "6ee00ad8521fd9dd58d04d951792d7c53c135b0ba8131df99e2adf0e90e5a067",
+   "file": "orbits_L4_3.npz"
+  }
+ ],
+ "stopped": [],
+ "wall_checks": [
+  {
+   "wall": "3/2",
+   "orbits_surviving": 187,
+   "same_set": true,
+   "vertices_surviving": 20896
+  },
+  {
+   "wall": "2",
+   "orbits_surviving": 36,
+   "same_set": true,
+   "vertices_surviving": 1904
+  },
+  {
+   "wall": "3",
+   "orbits_surviving": 51,
+   "same_set": true,
+   "vertices_surviving": 2872
+  }
+ ],
+ "seconds_total": 0.3
+}

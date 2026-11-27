@@ -1,0 +1,238 @@
+{
+ "seconds": 0.0,
+ "seed": 20261126,
+ "result": [
+  {
+   "name": "a state removed with itself as dominator, then a bound that needs it gone",
+   "accepted": false,
+   "reason": "a dead-end elimination step fails its dominance inequality",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": 7,
+   "true_minimum": 5,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "the low state removed by the high one (dominance false)",
+   "accepted": false,
+   "reason": "a dead-end elimination step fails its dominance inequality",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": 7,
+   "true_minimum": 5,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "the high state removed by the low one, bound 5",
+   "accepted": true,
+   "reason": "accepted",
+   "reference": true,
+   "ours": true,
+   "expected": true,
+   "claim": 5,
+   "true_minimum": 5,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "dominator outside the root box",
+   "accepted": false,
+   "reason": "a dead-end elimination step fails its dominance inequality",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": 9,
+   "true_minimum": 7,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "the box {1, 2}: bound 7 with a legitimate prune of 2 by 1",
+   "accepted": true,
+   "reason": "accepted",
+   "reference": true,
+   "ours": true,
+   "expected": true,
+   "claim": 7,
+   "true_minimum": 7,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "a dominator that an earlier prune removed",
+   "accepted": false,
+   "reason": "a dead-end elimination step fails its dominance inequality",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": 9,
+   "true_minimum": 5,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "prune of a state that is not in the box (a no-op), then the true bound",
+   "accepted": false,
+   "reason": "a dead-end elimination step fails its dominance inequality",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": 7,
+   "true_minimum": 7,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "a branch without the child that holds the minimum",
+   "accepted": false,
+   "reason": "branch on site 0 has no child for state 1",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": 1,
+   "true_minimum": -4,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "a complete branch, bound -4",
+   "accepted": true,
+   "reason": "accepted",
+   "reference": true,
+   "ours": true,
+   "expected": true,
+   "claim": -4,
+   "true_minimum": -4,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "a branch with a surplus child for a state outside the box",
+   "accepted": true,
+   "reason": "accepted",
+   "reference": true,
+   "ours": true,
+   "expected": true,
+   "claim": 1,
+   "true_minimum": 1,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "a second branch on a site already fixed",
+   "accepted": true,
+   "reason": "accepted",
+   "reference": true,
+   "ours": true,
+   "expected": true,
+   "claim": -4,
+   "true_minimum": -4,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "one leaf with messages, bound -4",
+   "accepted": true,
+   "reason": "accepted",
+   "reference": true,
+   "ours": true,
+   "expected": true,
+   "claim": -4,
+   "true_minimum": -4,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "the same leaf, claim -3",
+   "accepted": false,
+   "reason": "a leaf bound is below the claimed lower bound",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": -3,
+   "true_minimum": -4,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "a message for a pair that the model does not list",
+   "accepted": false,
+   "reason": "malformed certificate: leaf: message key (0, 2) is not a listed pair of the model",
+   "reference": "conversion raised MalformedCertificate",
+   "ours": false,
+   "expected": false,
+   "claim": -4,
+   "true_minimum": -4,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "message_bits 3: the claim in finer units, exact",
+   "accepted": true,
+   "reason": "accepted",
+   "reference": true,
+   "ours": true,
+   "expected": true,
+   "claim": -32,
+   "true_minimum": -32,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "message_bits 3: one fine unit above",
+   "accepted": false,
+   "reason": "a leaf bound is below the claimed lower bound",
+   "reference": false,
+   "ours": false,
+   "expected": false,
+   "claim": -31,
+   "true_minimum": -32,
+   "unsound": false,
+   "as_expected": true
+  },
+  {
+   "name": "lower_bound a float",
+   "accepted": false,
+   "reason": "malformed certificate: lower_bound must be an integer (units of 2**-(scale_bits+message_bits))",
+   "expected": false,
+   "as_expected": true,
+   "unsound": false
+  },
+  {
+   "name": "lower_bound True",
+   "accepted": false,
+   "reason": "malformed certificate: lower_bound must be an integer (units of 2**-(scale_bits+message_bits))",
+   "expected": false,
+   "as_expected": true,
+   "unsound": false
+  },
+  {
+   "name": "domains with a repeated state",
+   "accepted": false,
+   "reason": "malformed certificate: domain of site 0 has a repeated or out-of-range state",
+   "expected": false,
+   "as_expected": true,
+   "unsound": false
+  },
+  {
+   "name": "an empty domain",
+   "accepted": false,
+   "reason": "malformed certificate: domain of site 0 must be a non-empty list (an empty box certifies nothing)",
+   "expected": false,
+   "as_expected": true,
+   "unsound": false
+  },
+  {
+   "name": "message_bits -1",
+   "accepted": false,
+   "reason": "malformed certificate: message_bits must be a natural number",
+   "expected": false,
+   "as_expected": true,
+   "unsound": false
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+(T0) bridges and clean bridges per N (first two bonds fixed): {3: (1, 1), 4: (2, 2), 5: (5, 4), 6: (12, 10), 7: (29, 24), 8: (78, 64), 9: (201, 159), 10: (536, 420), 11: (1433, 1115)}
+     r9_semi.c: 3:(1,1) 4:(2,2) 5:(5,4) 6:(12,10) 7:(29,24) 8:(78,64) 9:(201,159) 10:(536,420) 11:(1433,1115)
+(T1) 787 random bridges cut out of random compact walks; sizes: min 8, median 33, max 3970; 103 with >= 300 beads, 79 with >= 1000
+     clean as they stand: 360 (top-clean 414, bottom-clean 674, b' down 127);  maxima: A = (1, 6, 9, 1), B = (0, 2, 3)
+     every (bridge, c1) becomes clean with head 2 + tail 3 and with head 5 + tail 5; cost = A + B (head >= 3) / <= A + B (head 2)   [15 s]
+(T2) 1500 random ordered pairs of these bridges (longest concatenation 7873 beads): error = A(x1,c1) + B(x2), ends inherited, qhat additive, in all; 250 pairs of clean bridges: exactly additive and clean.  largest error vector (1, 4, 8, 1)   [36 s]
+(T3) 25 bridges concatenated with themselves 6 times: (h,g) = 6 (h,g) + 5 (A + B) exactly   [0 s]
+(T4) helix with 8 beads: bridge, (h,g) = (0, 0, 5, 5); b' up: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0); clean: True;  exact point of K^br: ((h,g)+A+B)/(N+3) = (0.0, 0.0, 0.45455, 0.45455)
+(T4) helix with 200 beads: bridge, (h,g) = (0, 0, 197, 197); b' up: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0); clean: True;  exact point of K^br: ((h,g)+A+B)/(N+3) = (0.0, 0.0, 0.97044, 0.97044)
+(T4) helix with 1001 beads: bridge, (h,g) = (0, 0, 998, 998); b' up: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0); clean: True;  exact point of K^br: ((h,g)+A+B)/(N+3) = (0.0, 0.0, 0.99402, 0.99402)
+     rods with 4..1001 beads: bridges, (h,g) = 0, clean
+(T5) five clean bridges whose (h3,h8,h11,g; N+3) have determinant +-1 (exact, sympy), smallest total size found:
+     (0, 2, 6, 5, 12):  [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-3, 3, -1), (-4, 4, 0), (-3, 5, 1), (-2, 6, 0)]
+     (0, 0, 1, 1, 7):  [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1)]
+     (1, 6, 11, 7, 14):  [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 1, 3), (4, 2, 2), (3, 3, 1), (2, 4, 2), (3, 5, 3), (4, 6, 2)]
+     (0, 0, 1, 1, 8):  [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 4, 2)]
+     (0, 3, 6, 4, 12):  [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (0, 4, 4), (-1, 3, 5), (-2, 2, 4), (-3, 3, 3), (-2, 4, 2)]
+     four of them whose (h3,h8,h11; N+3) have determinant +-1: [(0, 1, 6, 5, 12), (0, 2, 7, 5, 13), (0, 0, 6, 6, 13), (1, 6, 10, 5, 15)]
+total time 63 s

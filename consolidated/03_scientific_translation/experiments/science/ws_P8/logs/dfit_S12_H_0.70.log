@@ -1,0 +1,16 @@
+=== p8_11_distance_fit: S12 on H, tau 0.7: 12 sites (SSSSSSSSSSSS)
+(1) 220 triples: M_T from 2.41e-06 to 4.84e-02 kcal/mol; smallest group distance in the maximising states from 0.48 to 1.06 nm
+    all triples: ln M_T = -5.55 ln P + c, rms residual 0.99 (a factor 2.7);  P = min over the groups of the product of its two distances
+    triples with all three distances > 0.6 nm (114): ln M_T = -6.25 ln P + c, rms residual 0.85 (a factor 2.3)
+    by the smallest of the three group distances: triples | median M_T | max M_T | share of the sum
+      0.4-0.6 nm: 106 | 8.374e-04 | 4.843e-02 | 73.8 %
+      0.6-0.8 nm:  98 | 9.866e-04 | 5.764e-03 | 25.9 %
+      0.8-1.0 nm:  15 | 6.502e-05 | 2.672e-04 | 0.3 %
+      1.0-1.3 nm:   1 | 2.411e-06 | 2.411e-06 | 0.0 %
+(2) first-order response R1 of a group's own solvation energy to another site, by class: fit ln R1 = a ln d + c, and medians at 0.6-0.8, 0.9-1.2, 1.4-1.8 nm (kcal/mol)
+    bb    (14 groups, mean |net charge| 0.134 e, mean sum|q| 2.077 e; 168 (group, site) pairs): a = -4.19 (rms residual 1.32); beyond 0.8 nm a = -6.30 (0.83); medians 8.08e-03, 1.15e-03, 1.57e-04
+    nsc   (12 groups, mean |net charge| 0.157 e, mean sum|q| 1.152 e; 132 (group, site) pairs): a = -4.68 (rms residual 0.97); beyond 0.8 nm a = -3.79 (0.50); medians 2.50e-03, 3.57e-04, 5.52e-05
+(3) second-order response R2[A; j, k] (group fixed, two other sites change): ln R2 = a ln(d_Aj d_Ak) + c
+    bb   : a = -4.47 (rms residual 1.63; 924 cases); median R2 1.22e-05; sum over (j, k) per group 4.611e-02 kcal/mol
+    nsc  : a = -5.56 (rms residual 1.44; 660 cases); median R2 5.98e-07; sum over (j, k) per group 2.115e-03 kcal/mol
+DONE in 0.5 s; peak RSS 72 MB

@@ -1,0 +1,27 @@
+n=10 seed=0: 17 conditions of rank 17 on (P, c); dim L = 5 (expected 25 - 2n = 5); P(L) = P^4
+   120 minors (up to symmetry), 120 non-zero, spanning a space of dimension 63 of quartic forms (70 monomials)
+   degree 4: 70 monomials, Hilbert function of R/I = 7
+   degree 5: 126 monomials, Hilbert function of R/I = 7
+   degree 6: 210 monomials, Hilbert function of R/I = 7
+   degree 7: 330 monomials, Hilbert function of R/I = 7
+   degree 8: 495 monomials, Hilbert function of R/I = 7
+   degree 9: 715 monomials, Hilbert function of R/I = 7
+   Hilbert function: [1, 5, 15, 35, 7, 7, 7, 7, 7, 7]
+   E_1 in L: True; rank of the Jacobian of the minors there = 4 (reduced point iff = 4)
+   E_2 in L: True; rank of the Jacobian of the minors there = 4 (reduced point iff = 4)
+   S = ab^T + ba^T in L: True; Jacobian rank there = 0 (0 => local length >= 5)
+   Singular over F_2147483647 (basis of L computed mod p here): dim=1 mult=7  [affine cone: dim 1 <=> finite scheme; mult = degree]
+   Singular, chart c = 1: affine: dim=0 vdim=2  [vdim = number of (complex) rank<=3 points with c != 0, with multiplicity]
+n=11 seed=0: 19 conditions of rank 19 on (P, c); dim L = 3 (expected 25 - 2n = 3); P(L) = P^2
+   120 minors (up to symmetry), 120 non-zero, spanning a space of dimension 13 of quartic forms (15 monomials)
+   degree 4: 15 monomials, Hilbert function of R/I = 2
+   degree 5: 21 monomials, Hilbert function of R/I = 2
+   degree 6: 28 monomials, Hilbert function of R/I = 2
+   degree 7: 36 monomials, Hilbert function of R/I = 2
+   degree 8: 45 monomials, Hilbert function of R/I = 2
+   degree 9: 55 monomials, Hilbert function of R/I = 2
+   Hilbert function: [1, 3, 6, 10, 2, 2, 2, 2, 2, 2]
+   E_1 in L: True; rank of the Jacobian of the minors there = 2 (reduced point iff = 2)
+   E_2 in L: True; rank of the Jacobian of the minors there = 2 (reduced point iff = 2)
+   Singular over F_2147483647 (basis of L computed mod p here): dim=1 mult=2  [affine cone: dim 1 <=> finite scheme; mult = degree]
+   Singular, chart c = 1: affine: dim=0 vdim=2  [vdim = number of (complex) rank<=3 points with c != 0, with multiplicity]

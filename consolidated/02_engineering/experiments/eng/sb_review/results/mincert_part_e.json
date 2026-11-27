@@ -1,0 +1,866 @@
+{
+ "seconds": 487.2,
+ "seed": 20261126,
+ "result": {
+  "random": {
+   "instances": 1500,
+   "wrong_optimum": 0,
+   "rejected": 0,
+   "gap_nonzero": 0,
+   "raised": {},
+   "ours_disagrees": 0,
+   "reference_disagrees": 0
+  },
+  "tolerance": {
+   "instances": 300,
+   "bad": 0
+  },
+  "degenerate": [
+   {
+    "name": "one site, one state",
+    "truth": 4,
+    "accepted": true,
+    "lower_bound": "4",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0001,
+    "correct": true
+   },
+   {
+    "name": "one site, three equal states",
+    "truth": 2,
+    "accepted": true,
+    "lower_bound": "2",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0019,
+    "correct": true
+   },
+   {
+    "name": "five sites, no pair",
+    "truth": -20,
+    "accepted": true,
+    "lower_bound": "-20",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0018,
+    "correct": true
+   },
+   {
+    "name": "all tables zero",
+    "truth": 0,
+    "accepted": true,
+    "lower_bound": "0",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.009,
+    "correct": true
+   },
+   {
+    "name": "every site has one state",
+    "truth": 1,
+    "accepted": true,
+    "lower_bound": "1",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.001,
+    "correct": true
+   },
+   {
+    "name": "two components",
+    "truth": 2,
+    "accepted": true,
+    "lower_bound": "2",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0017,
+    "correct": true
+   },
+   {
+    "name": "entries in {0, 1}, many ties",
+    "truth": 8,
+    "accepted": true,
+    "lower_bound": "8",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.4392,
+    "correct": true
+   },
+   {
+    "name": "antiferromagnetic triangle (frustrated)",
+    "truth": 1,
+    "accepted": true,
+    "lower_bound": "1",
+    "gap": "0",
+    "nodes": 3,
+    "seconds": 0.0036,
+    "correct": true
+   }
+  ],
+  "trees": [
+   {
+    "sites": 50,
+    "states": 6,
+    "truth": -2884,
+    "accepted": true,
+    "correct": true,
+    "seconds": 0.16,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 98
+    },
+    "bytes": 19450,
+    "check_seconds": 0.0177,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.007
+   },
+   {
+    "sites": 100,
+    "states": 6,
+    "truth": -5409,
+    "accepted": true,
+    "correct": true,
+    "seconds": 0.195,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 151
+    },
+    "bytes": 36367,
+    "check_seconds": 0.0168,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.0185
+   },
+   {
+    "sites": 200,
+    "states": 6,
+    "truth": -11579,
+    "accepted": true,
+    "correct": true,
+    "seconds": 0.315,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 277
+    },
+    "bytes": 72187,
+    "check_seconds": 0.0331,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.0245
+   },
+   {
+    "sites": 400,
+    "states": 6,
+    "truth": -23538,
+    "accepted": true,
+    "correct": true,
+    "seconds": 2.143,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 656
+    },
+    "bytes": 150351,
+    "check_seconds": 0.1151,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.1136
+   },
+   {
+    "sites": 200,
+    "states": 20,
+    "truth": -15583,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.724,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 659
+    },
+    "bytes": 397015,
+    "check_seconds": 0.1149,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.1476
+   },
+   {
+    "sites": 100,
+    "states": 40,
+    "truth": -8506,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.616,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 532
+    },
+    "bytes": 647427,
+    "check_seconds": 0.1358,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.4877
+   }
+  ],
+  "dense": [
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1425,
+    "accepted": true,
+    "correct": true,
+    "seconds": 7.809,
+    "nodes": 28,
+    "stats": {
+     "leaf": 19,
+     "branch": 9,
+     "prune": 13
+    },
+    "bytes": 48941
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1618,
+    "accepted": true,
+    "correct": true,
+    "seconds": 11.472,
+    "nodes": 30,
+    "stats": {
+     "leaf": 20,
+     "branch": 10,
+     "prune": 15
+    },
+    "bytes": 51250
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1805,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.478,
+    "nodes": 4,
+    "stats": {
+     "leaf": 3,
+     "branch": 1,
+     "prune": 0
+    },
+    "bytes": 10514
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1180,
+    "accepted": true,
+    "correct": true,
+    "seconds": 10.941,
+    "nodes": 31,
+    "stats": {
+     "leaf": 21,
+     "branch": 10,
+     "prune": 26
+    },
+    "bytes": 53775
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1598,
+    "accepted": true,
+    "correct": true,
+    "seconds": 2.434,
+    "nodes": 7,
+    "stats": {
+     "leaf": 5,
+     "branch": 2,
+     "prune": 0
+    },
+    "bytes": 15482
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -2036,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.523,
+    "nodes": 4,
+    "stats": {
+     "leaf": 3,
+     "branch": 1,
+     "prune": 0
+    },
+    "bytes": 10536
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1275,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.735,
+    "nodes": 4,
+    "stats": {
+     "leaf": 3,
+     "branch": 1,
+     "prune": 0
+    },
+    "bytes": 10482
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1674,
+    "accepted": true,
+    "correct": true,
+    "seconds": 2.772,
+    "nodes": 7,
+    "stats": {
+     "leaf": 5,
+     "branch": 2,
+     "prune": 1
+    },
+    "bytes": 15474
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1517,
+    "accepted": true,
+    "correct": true,
+    "seconds": 3.268,
+    "nodes": 10,
+    "stats": {
+     "leaf": 7,
+     "branch": 3,
+     "prune": 0
+    },
+    "bytes": 20406
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1663,
+    "accepted": true,
+    "correct": true,
+    "seconds": 3.744,
+    "nodes": 16,
+    "stats": {
+     "leaf": 11,
+     "branch": 5,
+     "prune": 0
+    },
+    "bytes": 30260
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1692,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.32,
+    "nodes": 4,
+    "stats": {
+     "leaf": 3,
+     "branch": 1,
+     "prune": 0
+    },
+    "bytes": 10491
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1891,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.959,
+    "nodes": 7,
+    "stats": {
+     "leaf": 5,
+     "branch": 2,
+     "prune": 2
+    },
+    "bytes": 15440
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -2234,
+    "accepted": true,
+    "correct": true,
+    "seconds": 7.766,
+    "nodes": 25,
+    "stats": {
+     "leaf": 17,
+     "branch": 8,
+     "prune": 3
+    },
+    "bytes": 66804
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1710,
+    "accepted": true,
+    "correct": true,
+    "seconds": 9.602,
+    "nodes": 28,
+    "stats": {
+     "leaf": 19,
+     "branch": 9,
+     "prune": 6
+    },
+    "bytes": 72896
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -2511,
+    "accepted": true,
+    "correct": true,
+    "seconds": 18.247,
+    "nodes": 37,
+    "stats": {
+     "leaf": 25,
+     "branch": 12,
+     "prune": 44
+    },
+    "bytes": 93603
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -2276,
+    "accepted": true,
+    "correct": true,
+    "seconds": 13.303,
+    "nodes": 46,
+    "stats": {
+     "leaf": 31,
+     "branch": 15,
+     "prune": 7
+    },
+    "bytes": 114247
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1627,
+    "accepted": true,
+    "correct": true,
+    "seconds": 10.146,
+    "nodes": 34,
+    "stats": {
+     "leaf": 23,
+     "branch": 11,
+     "prune": 13
+    },
+    "bytes": 87875
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1797,
+    "accepted": true,
+    "correct": true,
+    "seconds": 15.72,
+    "nodes": 54,
+    "stats": {
+     "leaf": 36,
+     "branch": 18,
+     "prune": 43
+    },
+    "bytes": 132066
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1985,
+    "accepted": true,
+    "correct": true,
+    "seconds": 22.434,
+    "nodes": 58,
+    "stats": {
+     "leaf": 39,
+     "branch": 19,
+     "prune": 10
+    },
+    "bytes": 144574
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -2135,
+    "accepted": true,
+    "correct": true,
+    "seconds": 10.013,
+    "nodes": 40,
+    "stats": {
+     "leaf": 27,
+     "branch": 13,
+     "prune": 25
+    },
+    "bytes": 100483
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1490,
+    "accepted": true,
+    "correct": true,
+    "seconds": 19.069,
+    "nodes": 61,
+    "stats": {
+     "leaf": 41,
+     "branch": 20,
+     "prune": 9
+    },
+    "bytes": 150963
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1956,
+    "accepted": true,
+    "correct": true,
+    "seconds": 8.404,
+    "nodes": 28,
+    "stats": {
+     "leaf": 19,
+     "branch": 9,
+     "prune": 8
+    },
+    "bytes": 73659
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1484,
+    "accepted": true,
+    "correct": true,
+    "seconds": 9.415,
+    "nodes": 28,
+    "stats": {
+     "leaf": 19,
+     "branch": 9,
+     "prune": 2
+    },
+    "bytes": 72655
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -2007,
+    "accepted": true,
+    "correct": true,
+    "seconds": 4.471,
+    "nodes": 13,
+    "stats": {
+     "leaf": 9,
+     "branch": 4,
+     "prune": 2
+    },
+    "bytes": 37454
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2384,
+    "accepted": true,
+    "correct": true,
+    "seconds": 13.281,
+    "nodes": 34,
+    "stats": {
+     "leaf": 23,
+     "branch": 11,
+     "prune": 1
+    },
+    "bytes": 123198
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2642,
+    "accepted": true,
+    "correct": true,
+    "seconds": 19.021,
+    "nodes": 64,
+    "stats": {
+     "leaf": 43,
+     "branch": 21,
+     "prune": 2
+    },
+    "bytes": 222710
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2447,
+    "accepted": true,
+    "correct": true,
+    "seconds": 13.24,
+    "nodes": 52,
+    "stats": {
+     "leaf": 35,
+     "branch": 17,
+     "prune": 10
+    },
+    "bytes": 183401
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2564,
+    "accepted": true,
+    "correct": true,
+    "seconds": 13.743,
+    "nodes": 58,
+    "stats": {
+     "leaf": 39,
+     "branch": 19,
+     "prune": 17
+    },
+    "bytes": 200321
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2864,
+    "accepted": true,
+    "correct": true,
+    "seconds": 15.97,
+    "nodes": 49,
+    "stats": {
+     "leaf": 33,
+     "branch": 16,
+     "prune": 6
+    },
+    "bytes": 172336
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2939,
+    "accepted": true,
+    "correct": true,
+    "seconds": 5.801,
+    "nodes": 16,
+    "stats": {
+     "leaf": 11,
+     "branch": 5,
+     "prune": 0
+    },
+    "bytes": 62303
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2234,
+    "accepted": true,
+    "correct": true,
+    "seconds": 16.57,
+    "nodes": 52,
+    "stats": {
+     "leaf": 35,
+     "branch": 17,
+     "prune": 51
+    },
+    "bytes": 176793
+   },
+   {
+    "sites": 14,
+    "states": 3,
+    "truth": -2619,
+    "accepted": true,
+    "correct": true,
+    "seconds": 40.79,
+    "nodes": 145,
+    "stats": {
+     "leaf": 97,
+     "branch": 48,
+     "prune": 32
+    },
+    "bytes": 485997
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -2077,
+    "accepted": true,
+    "correct": true,
+    "seconds": 7.176,
+    "nodes": 53,
+    "stats": {
+     "leaf": 40,
+     "branch": 13,
+     "prune": 5
+    },
+    "bytes": 152237
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -2017,
+    "accepted": true,
+    "correct": true,
+    "seconds": 5.863,
+    "nodes": 37,
+    "stats": {
+     "leaf": 28,
+     "branch": 9,
+     "prune": 9
+    },
+    "bytes": 109643
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -1948,
+    "accepted": true,
+    "correct": true,
+    "seconds": 5.158,
+    "nodes": 41,
+    "stats": {
+     "leaf": 31,
+     "branch": 10,
+     "prune": 6
+    },
+    "bytes": 119821
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -2179,
+    "accepted": true,
+    "correct": true,
+    "seconds": 2.879,
+    "nodes": 25,
+    "stats": {
+     "leaf": 19,
+     "branch": 6,
+     "prune": 2
+    },
+    "bytes": 76641
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -2333,
+    "accepted": true,
+    "correct": true,
+    "seconds": 10.144,
+    "nodes": 69,
+    "stats": {
+     "leaf": 52,
+     "branch": 17,
+     "prune": 24
+    },
+    "bytes": 194967
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -2014,
+    "accepted": true,
+    "correct": true,
+    "seconds": 4.659,
+    "nodes": 29,
+    "stats": {
+     "leaf": 22,
+     "branch": 7,
+     "prune": 1
+    },
+    "bytes": 87535
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -1731,
+    "accepted": true,
+    "correct": true,
+    "seconds": 11.099,
+    "nodes": 89,
+    "stats": {
+     "leaf": 67,
+     "branch": 22,
+     "prune": 12
+    },
+    "bytes": 248032
+   },
+   {
+    "sites": 11,
+    "states": 4,
+    "truth": -2143,
+    "accepted": true,
+    "correct": true,
+    "seconds": 7.246,
+    "nodes": 61,
+    "stats": {
+     "leaf": 46,
+     "branch": 15,
+     "prune": 2
+    },
+    "bytes": 174538
+   }
+  ],
+  "magnitude": [
+   {
+    "entry_bits": 48,
+    "message_bits": 0,
+    "exact_and_accepted": 40,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 49,
+    "message_bits": 0,
+    "exact_and_accepted": 40,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 37,
+    "message_bits": 12,
+    "exact_and_accepted": 40,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 30,
+    "message_bits": 12,
+    "exact_and_accepted": 40,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 20,
+    "message_bits": 12,
+    "exact_and_accepted": 40,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   }
+  ],
+  "abstention": [
+   {
+    "kw": "{'max_nodes': 1}",
+    "outcome": "abstained: more than 1 branch-and-bound nodes"
+   },
+   {
+    "kw": "{'time_limit': 0.0}",
+    "outcome": "abstained: time limit of 0.0 s reached"
+   }
+  ],
+  "examples": []
+ }
+}

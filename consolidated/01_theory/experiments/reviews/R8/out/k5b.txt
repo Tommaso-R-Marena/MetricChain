@@ -1,0 +1,8 @@
+u= 0.1  h=0.000312 a=0.001248 | min two-rung bound - h = +7.894e-13 (at phi=1.47e-09, xi=1.25e-12) | min_phi R_phi[theta_hint](0) - h = +3.438e-13 (phi=1.1e-09) | min over 60000 random ladders of (3.1) - h = +4.929e-10
+u= 0.3  h=0.002794 a=0.011125 | min two-rung bound - h = +7.051e-12 (at phi=1.52e-09, xi=1.13e-11) | min_phi R_phi[theta_hint](0) - h = +3.061e-12 (phi=1.1e-09) | min over 60000 random ladders of (3.1) - h = +3.844e-09
+u= 0.5  h=0.007673 a=0.030300 | min two-rung bound - h = +1.925e-11 (at phi=1.52e-09, xi=3.09e-11) | min_phi R_phi[theta_hint](0) - h = +8.324e-12 (phi=1.1e-09) | min over 60000 random ladders of (3.1) - h = +1.184e-08
+u= 1.0  h=0.029139 a=0.110944 | min two-rung bound - h = +7.378e-11 (at phi=1.62e-09, xi=1.21e-10) | min_phi R_phi[theta_hint](0) - h = +3.023e-11 (phi=1.1e-09) | min over 60000 random ladders of (3.1) - h = +4.020e-08
+u= 2.0  h=0.097281 a=0.327813 | min two-rung bound - h = +2.482e-10 (at phi=1.91e-09, xi=4.34e-10) | min_phi R_phi[theta_hint](0) - h = +8.621e-11 (phi=1.1e-09) | min over 60000 random ladders of (3.1) - h = +1.259e-07
+u= 4.0  h=0.239250 a=0.603052 | min two-rung bound - h = +5.945e-10 (at phi=3.1e-09, xi=1.34e-09) | min_phi R_phi[theta_hint](0) - h = +1.360e-10 (phi=1.1e-09) | min over 60000 random ladders of (3.1) - h = +1.918e-07
+u= 8.0  h=0.398544 a=0.690129 | min two-rung bound - h = +8.491e-10 (at phi=6.3e-09, xi=3.36e-09) | min_phi R_phi[theta_hint](0) - h = +9.735e-11 (phi=1.1e-09) | min over 60000 random ladders of (3.1) - h = +1.306e-07
+smallest (bound - h)/h over all searches: +2.443e-10   (negative would contradict Proposition K5(b))  [47 s]

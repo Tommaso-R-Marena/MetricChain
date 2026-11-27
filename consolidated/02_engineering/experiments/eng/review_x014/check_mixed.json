@@ -1,0 +1,9567 @@
+{
+ "brute_force": {
+  "exhaustive": [
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.5651450315461215,
+    "min_upper_ratio": 0.015831159311051706,
+    "max_lower_ratio": 0.9688815212101383,
+    "min_lower_ratio": 0.1823902289976252,
+    "slopes": [
+     1.7,
+     1.7,
+     0.4,
+     0.4
+    ]
+   },
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.6956001306532245,
+    "min_upper_ratio": 0.03531540019477345,
+    "max_lower_ratio": 0.9698078075934977,
+    "min_lower_ratio": 0.2006670467153547,
+    "slopes": [
+     2.0,
+     0.5,
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.685270259616109,
+    "min_upper_ratio": 0.0024372558457993986,
+    "max_lower_ratio": 0.9541000619114136,
+    "min_lower_ratio": 0.0932773275167303,
+    "slopes": [
+     0.3,
+     0.3,
+     0.3,
+     4.0
+    ]
+   },
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.4834272842340526,
+    "min_upper_ratio": 0.001571256686414806,
+    "max_lower_ratio": 0.9462396045181527,
+    "min_lower_ratio": 0.10370957250083596,
+    "slopes": [
+     3.0,
+     1.0,
+     0.3,
+     0.1
+    ]
+   },
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.7143635219652893,
+    "min_upper_ratio": 0.0002794592136920739,
+    "max_lower_ratio": 0.9435329360853172,
+    "min_lower_ratio": 0.07340062734840257,
+    "slopes": [
+     5.0,
+     0.1,
+     0.1,
+     0.1
+    ]
+   },
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 1.0000000000000002,
+    "min_upper_ratio": 0.11772563776565281,
+    "max_lower_ratio": 1.0,
+    "min_lower_ratio": 0.4160640801857154,
+    "slopes": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.41768378400297934,
+    "min_upper_ratio": 0.00037895777591237046,
+    "max_lower_ratio": 0.9455123863655406,
+    "min_lower_ratio": 0.09196170054888037,
+    "slopes": [
+     0.05,
+     2.5,
+     0.05,
+     2.5
+    ]
+   },
+   {
+    "sets": 65534,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.5703094071607294,
+    "min_upper_ratio": 5.5087902211592825e-06,
+    "max_lower_ratio": 0.9760836242924402,
+    "min_lower_ratio": 0.16120109333760044,
+    "slopes": [
+     8.0,
+     4.0,
+     2.0,
+     1.0
+    ]
+   }
+  ],
+  "sampled": [
+   {
+    "sets": 52963,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.5231063033696248,
+    "min_upper_ratio": 0.009249019592238174,
+    "max_lower_ratio": 0.9850918349264879,
+    "min_lower_ratio": 0.11111128409539893,
+    "slopes": [
+     2.0,
+     2.0,
+     0.5,
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "sets": 52826,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.557381044232998,
+    "min_upper_ratio": 0.0013437594611272583,
+    "max_lower_ratio": 0.9883288701387528,
+    "min_lower_ratio": 0.06759112818383495,
+    "slopes": [
+     3.0,
+     1.0,
+     0.5,
+     0.2,
+     0.1
+    ]
+   },
+   {
+    "sets": 54977,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.41043871562229334,
+    "min_upper_ratio": 0.002706031108039979,
+    "max_lower_ratio": 0.9925920283406612,
+    "min_lower_ratio": 0.08166026527595974,
+    "slopes": [
+     2.0,
+     2.0,
+     2.0,
+     0.5,
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "sets": 55004,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.6637691114269955,
+    "min_upper_ratio": 0.00145395214400325,
+    "max_lower_ratio": 0.988076208162501,
+    "min_lower_ratio": 0.037359850973340096,
+    "slopes": [
+     4.0,
+     0.25,
+     0.25,
+     0.25,
+     0.25,
+     0.25
+    ]
+   },
+   {
+    "sets": 56633,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.4331490143743243,
+    "min_upper_ratio": 0.007227010692633304,
+    "max_lower_ratio": 0.9959473559998736,
+    "min_lower_ratio": 0.08288445012927306,
+    "slopes": [
+     1.5,
+     1.5,
+     1.0,
+     1.0,
+     0.3,
+     0.3,
+     0.3
+    ]
+   },
+   {
+    "sets": 57515,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.2819834736504099,
+    "min_upper_ratio": 0.0007117177984640413,
+    "max_lower_ratio": 0.9981565597120704,
+    "min_lower_ratio": 0.04380709816581438,
+    "slopes": [
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     0.5,
+     0.5,
+     0.5,
+     0.5
+    ]
+   },
+   {
+    "sets": 57622,
+    "upper_violations": 0,
+    "lower_violations": 0,
+    "max_upper_ratio": 0.7405579147956668,
+    "min_upper_ratio": 5.7403192482773744e-05,
+    "max_lower_ratio": 0.9964738506901094,
+    "min_lower_ratio": 0.007011256036849202,
+    "slopes": [
+     6.0,
+     0.1,
+     0.1,
+     0.1,
+     0.1,
+     0.1,
+     0.1,
+     0.1
+    ]
+   }
+  ]
+ },
+ "module": {
+  "table_cases": 207,
+  "max_abs_diff_lE": 3.694822225952521e-13,
+  "max_abs_diff_lT": 1.9895196601282805e-13,
+  "max_abs_diff_lGt": 3.410605131648481e-13,
+  "r_dagger_cases": 621,
+  "r_dagger_mismatches": [],
+  "constants_cases": 207,
+  "constants_mismatches": [],
+  "worst_table_case": {
+   "comp": [
+    [
+     3.0,
+     27
+    ],
+    [
+     2.0,
+     28
+    ],
+    [
+     1.3,
+     39
+    ],
+    [
+     0.5,
+     7
+    ]
+   ],
+   "dE": 3.694822225952521e-13,
+   "dT": 1.1368683772161603e-13,
+   "dG": 2.8421709430404007e-13
+  }
+ },
+ "large_tables": {
+  "cases": [
+   {
+    "comp": [
+     [
+      2.0,
+      250
+     ],
+     [
+      0.5,
+      350
+     ]
+    ],
+    "m": 600,
+    "max_abs_diff_lE": 5.968558980384842e-13,
+    "max_abs_diff_lT": 5.684341886080801e-13,
+    "max_abs_diff_lG2": 4.547473508864641e-13,
+    "kappa_equal": true,
+    "seconds": 1.943161964416504
+   },
+   {
+    "comp": [
+     [
+      4.0,
+      60
+     ],
+     [
+      1.0,
+      500
+     ]
+    ],
+    "m": 560,
+    "max_abs_diff_lE": 4.547473508864641e-13,
+    "max_abs_diff_lT": 5.684341886080801e-13,
+    "max_abs_diff_lG2": 7.958078640513122e-13,
+    "kappa_equal": true,
+    "seconds": 1.911031723022461
+   },
+   {
+    "comp": [
+     [
+      3.0,
+      200
+     ],
+     [
+      1.0,
+      200
+     ],
+     [
+      0.2,
+      200
+     ]
+    ],
+    "m": 600,
+    "max_abs_diff_lE": 6.821210263296962e-13,
+    "max_abs_diff_lT": 6.252776074688882e-13,
+    "max_abs_diff_lG2": 5.684341886080801e-13,
+    "kappa_equal": true,
+    "seconds": 2.757072687149048
+   },
+   {
+    "comp": [
+     [
+      8.0,
+      20
+     ],
+     [
+      0.05,
+      300
+     ]
+    ],
+    "m": 320,
+    "max_abs_diff_lE": 1.8189894035458565e-12,
+    "max_abs_diff_lT": 1.3855583347321954e-12,
+    "max_abs_diff_lG2": 1.7337242752546445e-12,
+    "kappa_equal": true,
+    "seconds": 1.065453290939331
+   },
+   {
+    "comp": [
+     [
+      1.0,
+      300
+     ],
+     [
+      0.99,
+      300
+     ]
+    ],
+    "m": 600,
+    "max_abs_diff_lE": 1.5916157281026244e-12,
+    "max_abs_diff_lT": 3.979039320256561e-13,
+    "max_abs_diff_lG2": 1.3073986337985843e-12,
+    "kappa_equal": true,
+    "seconds": 2.164361000061035
+   },
+   {
+    "comp": [
+     [
+      2.0,
+      1
+     ],
+     [
+      0.5,
+      400
+     ]
+    ],
+    "m": 401,
+    "max_abs_diff_lE": 4.689582056016661e-13,
+    "max_abs_diff_lT": 2.2737367544323206e-13,
+    "max_abs_diff_lG2": 0.08026407954616843,
+    "kappa_equal": false,
+    "seconds": 0.6931712627410889
+   },
+   {
+    "comp": [
+     [
+      6.0,
+      100
+     ],
+     [
+      0.01,
+      540
+     ]
+    ],
+    "m": 640,
+    "max_abs_diff_lE": 2.0463630789890885e-12,
+    "max_abs_diff_lT": 6.536993168992922e-13,
+    "max_abs_diff_lG2": 2.0463630789890885e-12,
+    "kappa_equal": true,
+    "seconds": 2.355348587036133
+   }
+  ],
+  "max_abs_diff": 2.0463630789890885e-12
+ },
+ "literal": {
+  "summary": {
+   "sorted (the claim)": {
+    "configurations": 40,
+    "runs": 4552,
+    "closed": 4550,
+    "aborted": 0,
+    "tie_aborts": 2,
+    "good": 4552,
+    "invalid_on_good_event": 0,
+    "invalid_off_good_event": 0,
+    "violations_on_good_event": {},
+    "deterministic_violations": {},
+    "configurations_with_a_violation": 0,
+    "division_runs": 4524,
+    "division_invalid": 0,
+    "division_too_wide": 0,
+    "division_aborted": 2,
+    "division_bad_certificates": 0,
+    "division_over_budget": 0,
+    "division_constants_disagree": 0
+   },
+   "CONTROL: slopes sorted smallest first": {
+    "configurations": 40,
+    "runs": 13805,
+    "closed": 13803,
+    "aborted": 0,
+    "tie_aborts": 2,
+    "good": 13805,
+    "invalid_on_good_event": 2532,
+    "invalid_off_good_event": 0,
+    "violations_on_good_event": {
+     "(ii) l <= A": 969,
+     "(ii) L <= A": 969,
+     "(ii) A <= U": 1563
+    },
+    "deterministic_violations": {},
+    "configurations_with_a_violation": 37,
+    "division_runs": 0,
+    "division_invalid": 0,
+    "division_too_wide": 0,
+    "division_aborted": 0,
+    "division_bad_certificates": 0,
+    "division_over_budget": 0,
+    "division_constants_disagree": 0
+   },
+   "CONTROL: uniform tables for the smallest slope": {
+    "configurations": 40,
+    "runs": 12380,
+    "closed": 12379,
+    "aborted": 0,
+    "tie_aborts": 1,
+    "good": 12380,
+    "invalid_on_good_event": 2396,
+    "invalid_off_good_event": 0,
+    "violations_on_good_event": {
+     "(ii) l <= A": 908,
+     "(ii) L <= A": 908,
+     "(ii) A <= U": 1488
+    },
+    "deterministic_violations": {},
+    "configurations_with_a_violation": 36,
+    "division_runs": 0,
+    "division_invalid": 0,
+    "division_too_wide": 0,
+    "division_aborted": 0,
+    "division_bad_certificates": 0,
+    "division_over_budget": 0,
+    "division_constants_disagree": 0
+   }
+  },
+  "rows": [
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 208,
+    "J": 22,
+    "r_dag": -1,
+    "x_out": 3.3180889161526257,
+    "seed": 5000,
+    "division_constants_agree": true,
+    "runs": 138,
+    "closed": 138,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 138,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.039660950579956,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 138,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 1,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 732,
+    "J": 42,
+    "r_dag": -1,
+    "x_out": 1.6787098726648872,
+    "seed": 5017,
+    "division_constants_agree": true,
+    "runs": 65,
+    "closed": 65,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 65,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4979005968212078,
+    "class_violation": 4.440892098500626e-16,
+    "div_runs": 63,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 212,
+    "J": 35,
+    "r_dag": -1,
+    "x_out": 2.7549430071182335,
+    "seed": 5034,
+    "division_constants_agree": true,
+    "runs": 94,
+    "closed": 94,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 94,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.384181449370984,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 93,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 197,
+    "J": 22,
+    "r_dag": 4,
+    "x_out": 7.022442341623486,
+    "seed": 5051,
+    "division_constants_agree": true,
+    "runs": 334,
+    "closed": 332,
+    "aborted": 0,
+    "tie_aborts": 2,
+    "good": 334,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 6.371270333840048,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 333,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 1,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 462,
+    "J": 69,
+    "r_dag": -1,
+    "x_out": 1.2377417722425355,
+    "seed": 5068,
+    "division_constants_agree": true,
+    "runs": 43,
+    "closed": 43,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 43,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.1658328096424073,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 42,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 206,
+    "J": 19,
+    "r_dag": -1,
+    "x_out": 3.318272538116151,
+    "seed": 5085,
+    "division_constants_agree": true,
+    "runs": 96,
+    "closed": 96,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 96,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.0534253558340065,
+    "class_violation": 2.831068712794149e-15,
+    "div_runs": 96,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 730,
+    "J": 37,
+    "r_dag": -1,
+    "x_out": 1.6796555269844335,
+    "seed": 5102,
+    "division_constants_agree": true,
+    "runs": 49,
+    "closed": 49,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 49,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4957736435606055,
+    "class_violation": 1.1102230246251565e-15,
+    "div_runs": 48,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 212,
+    "J": 30,
+    "r_dag": -1,
+    "x_out": 2.755265459537746,
+    "seed": 5119,
+    "division_constants_agree": true,
+    "runs": 100,
+    "closed": 100,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 100,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.405208771857146,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 99,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 195,
+    "J": 19,
+    "r_dag": 5,
+    "x_out": 7.022446862090114,
+    "seed": 5136,
+    "division_constants_agree": true,
+    "runs": 312,
+    "closed": 312,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 312,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 5.81686983773416,
+    "class_violation": 2.831068712794149e-15,
+    "div_runs": 312,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 462,
+    "J": 60,
+    "r_dag": -1,
+    "x_out": 1.239211133818874,
+    "seed": 5153,
+    "division_constants_agree": true,
+    "runs": 63,
+    "closed": 63,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 63,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.168988220791503,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 63,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 211,
+    "J": 26,
+    "r_dag": 0,
+    "x_out": 3.3180069229847278,
+    "seed": 5170,
+    "division_constants_agree": true,
+    "runs": 98,
+    "closed": 98,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 98,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.0783529912163115,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 96,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 745,
+    "J": 50,
+    "r_dag": -1,
+    "x_out": 1.6782873744531033,
+    "seed": 5187,
+    "division_constants_agree": true,
+    "runs": 44,
+    "closed": 44,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 44,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4975828331360983,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 42,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 216,
+    "J": 41,
+    "r_dag": 0,
+    "x_out": 2.7547990071848005,
+    "seed": 5204,
+    "division_constants_agree": true,
+    "runs": 77,
+    "closed": 77,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 77,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.4935392936353553,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 75,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 200,
+    "J": 26,
+    "r_dag": 5,
+    "x_out": 7.022440323349845,
+    "seed": 5221,
+    "division_constants_agree": true,
+    "runs": 298,
+    "closed": 298,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 298,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 6.8389616357617555,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 297,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 471,
+    "J": 81,
+    "r_dag": -1,
+    "x_out": 1.237085043921033,
+    "seed": 5238,
+    "division_constants_agree": true,
+    "runs": 27,
+    "closed": 27,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 27,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.166816327779439,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 27,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 212,
+    "J": 27,
+    "r_dag": -1,
+    "x_out": 3.3179628442595566,
+    "seed": 5255,
+    "division_constants_agree": true,
+    "runs": 120,
+    "closed": 120,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 120,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.090522141578491,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 120,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 756,
+    "J": 52,
+    "r_dag": -1,
+    "x_out": 1.678060184072758,
+    "seed": 5272,
+    "division_constants_agree": true,
+    "runs": 44,
+    "closed": 44,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 44,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.5105502592880846,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 42,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 219,
+    "J": 42,
+    "r_dag": -1,
+    "x_out": 2.7547215905383244,
+    "seed": 5289,
+    "division_constants_agree": true,
+    "runs": 76,
+    "closed": 76,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 76,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.435904213762165,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 75,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 208,
+    "J": 27,
+    "r_dag": 0,
+    "x_out": 7.0224392384123835,
+    "seed": 5306,
+    "division_constants_agree": true,
+    "runs": 165,
+    "closed": 165,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 165,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 6.930972156255202,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 165,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 477,
+    "J": 85,
+    "r_dag": -1,
+    "x_out": 1.2367318371349796,
+    "seed": 5323,
+    "division_constants_agree": true,
+    "runs": 36,
+    "closed": 36,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 36,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.1900069079649873,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 36,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 201,
+    "J": 20,
+    "r_dag": 1,
+    "x_out": 3.3181044635349677,
+    "seed": 5340,
+    "division_constants_agree": true,
+    "runs": 150,
+    "closed": 150,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 150,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.7560387947759293,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 150,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 716,
+    "J": 38,
+    "r_dag": 0,
+    "x_out": 1.6787899697173143,
+    "seed": 5357,
+    "division_constants_agree": true,
+    "runs": 47,
+    "closed": 47,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 47,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.3880974438296818,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 45,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 204,
+    "J": 31,
+    "r_dag": 1,
+    "x_out": 2.7549703110938086,
+    "seed": 5374,
+    "division_constants_agree": true,
+    "runs": 129,
+    "closed": 129,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 129,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.2007564922459473,
+    "class_violation": 1.4155343563970746e-15,
+    "div_runs": 129,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 195,
+    "J": 20,
+    "r_dag": 4,
+    "x_out": 7.022442724342748,
+    "seed": 5391,
+    "division_constants_agree": true,
+    "runs": 328,
+    "closed": 328,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 328,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.2921071051018225,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 327,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 456,
+    "J": 61,
+    "r_dag": -1,
+    "x_out": 1.2378662572094352,
+    "seed": 5408,
+    "division_constants_agree": true,
+    "runs": 85,
+    "closed": 85,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 85,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.005196428311728,
+    "class_violation": 1.4155343563970746e-15,
+    "div_runs": 84,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 216,
+    "J": 30,
+    "r_dag": -1,
+    "x_out": 3.3179640579467833,
+    "seed": 5425,
+    "division_constants_agree": true,
+    "runs": 66,
+    "closed": 66,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 66,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.1173464395987303,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 66,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 760,
+    "J": 59,
+    "r_dag": -1,
+    "x_out": 1.6780664402113723,
+    "seed": 5442,
+    "division_constants_agree": true,
+    "runs": 27,
+    "closed": 27,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 27,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.50799059514444,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 27,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 222,
+    "J": 49,
+    "r_dag": -1,
+    "x_out": 2.7547237222042864,
+    "seed": 5459,
+    "division_constants_agree": true,
+    "runs": 50,
+    "closed": 50,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 50,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.447072581810362,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 48,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 206,
+    "J": 30,
+    "r_dag": 2,
+    "x_out": 7.022439268285008,
+    "seed": 5476,
+    "division_constants_agree": true,
+    "runs": 123,
+    "closed": 123,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 123,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 6.582300519143625,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 123,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 481,
+    "J": 98,
+    "r_dag": -1,
+    "x_out": 1.2367415639817583,
+    "seed": 5493,
+    "division_constants_agree": true,
+    "runs": 20,
+    "closed": 20,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 20,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.1871635273612609,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 18,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 209,
+    "J": 21,
+    "r_dag": -1,
+    "x_out": 3.318025510122142,
+    "seed": 5510,
+    "division_constants_agree": true,
+    "runs": 84,
+    "closed": 84,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 84,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.096180449724718,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 84,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 751,
+    "J": 41,
+    "r_dag": -1,
+    "x_out": 1.6783831637304978,
+    "seed": 5527,
+    "division_constants_agree": true,
+    "runs": 30,
+    "closed": 30,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 30,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.5099048187365183,
+    "class_violation": 1.0547118733938987e-15,
+    "div_runs": 30,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 219,
+    "J": 34,
+    "r_dag": -1,
+    "x_out": 2.754831651498844,
+    "seed": 5544,
+    "division_constants_agree": true,
+    "runs": 51,
+    "closed": 51,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 51,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.445539420495943,
+    "class_violation": 1.0547118733938987e-15,
+    "div_runs": 51,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 205,
+    "J": 21,
+    "r_dag": 0,
+    "x_out": 7.022440780860763,
+    "seed": 5561,
+    "division_constants_agree": true,
+    "runs": 279,
+    "closed": 279,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 279,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 6.9779407092399275,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 279,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 473,
+    "J": 67,
+    "r_dag": -1,
+    "x_out": 1.2372339516019135,
+    "seed": 5578,
+    "division_constants_agree": true,
+    "runs": 25,
+    "closed": 25,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 25,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.1923471885439714,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 24,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "EXT",
+    "tables": "sorted (the claim)",
+    "K": 207,
+    "J": 21,
+    "r_dag": 0,
+    "x_out": 3.3181957544729377,
+    "seed": 5595,
+    "division_constants_agree": true,
+    "runs": 113,
+    "closed": 113,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 113,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.038534271839084,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 111,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "BND",
+    "tables": "sorted (the claim)",
+    "K": 730,
+    "J": 41,
+    "r_dag": -1,
+    "x_out": 1.6792601783771286,
+    "seed": 5612,
+    "division_constants_agree": true,
+    "runs": 51,
+    "closed": 51,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 51,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4807980763910078,
+    "class_violation": 1.3322676295501878e-15,
+    "div_runs": 51,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "generic",
+    "tables": "sorted (the claim)",
+    "K": 211,
+    "J": 33,
+    "r_dag": 0,
+    "x_out": 2.7551306277829286,
+    "seed": 5629,
+    "division_constants_agree": true,
+    "runs": 129,
+    "closed": 129,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 129,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.4400140019654533,
+    "class_violation": 1.887379141862766e-15,
+    "div_runs": 129,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "theta=e^6",
+    "tables": "sorted (the claim)",
+    "K": 196,
+    "J": 21,
+    "r_dag": 5,
+    "x_out": 7.0224449717063315,
+    "seed": 5646,
+    "division_constants_agree": true,
+    "runs": 429,
+    "closed": 429,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 429,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 5.8010553066022865,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 429,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "theta=0.02",
+    "tables": "sorted (the claim)",
+    "K": 462,
+    "J": 66,
+    "r_dag": -1,
+    "x_out": 1.2385969331261686,
+    "seed": 5663,
+    "division_constants_agree": true,
+    "runs": 57,
+    "closed": 57,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 57,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.142122342296978,
+    "class_violation": 1.2212453270876722e-15,
+    "div_runs": 57,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 203,
+    "J": 22,
+    "r_dag": 1,
+    "x_out": 3.3180889161526257,
+    "seed": 5680,
+    "runs": 304,
+    "closed": 303,
+    "aborted": 0,
+    "tie_aborts": 1,
+    "good": 304,
+    "invalid_good": 24,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 24,
+     "(ii) L <= A": 24
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.7831686099386275,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "twofibre",
+      "oracle": "bottom",
+      "run_seed": 1672100183,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.929305407298629,
+      "lL": -2.6534160467091423,
+      "lU": -0.814700385161896
+     },
+     {
+      "kind": "outer_plateau",
+      "oracle": "bottom",
+      "run_seed": 2102026121,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.7896489281734613,
+      "lL": -1.6534160467091419,
+      "lU": 0.3300056316558475
+     },
+     {
+      "kind": "ridges",
+      "oracle": "sticky_high",
+      "run_seed": 1776010794,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.6935434337763895,
+      "lL": -1.4176540731869012,
+      "lU": 0.3490544834865372
+     },
+     {
+      "kind": "ridges",
+      "oracle": "bottom",
+      "run_seed": 610902666,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.163893227675029,
+      "lL": -3.08758451400102,
+      "lU": -1.1764493058540864
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 728,
+    "J": 42,
+    "r_dag": 0,
+    "x_out": 1.6787098726648872,
+    "seed": 5697,
+    "runs": 125,
+    "closed": 125,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 125,
+    "invalid_good": 42,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 4,
+     "(ii) l <= A": 38,
+     "(ii) L <= A": 38
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4673856673588404,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "sticky_high",
+      "run_seed": 1428503755,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.9293054072986284,
+      "lL": -2.929305407298628,
+      "lU": -3.106361084104519
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "high",
+      "run_seed": 294579362,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 2.26068724847945,
+      "lL": 2.5360140400136575,
+      "lU": 3.1860830708733374
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "random",
+      "run_seed": 1389168821,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 2.5400620433787755,
+      "lL": 2.9350010331630574,
+      "lU": 3.289507898974088
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_high",
+      "run_seed": 1633209176,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.5706945927013685,
+      "lL": 5.846583953290859,
+      "lU": 6.265891767155696
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 209,
+    "J": 35,
+    "r_dag": 1,
+    "x_out": 2.7549430071182335,
+    "seed": 5714,
+    "runs": 240,
+    "closed": 240,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 240,
+    "invalid_good": 8,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 8,
+     "(ii) L <= A": 8
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.4340135580458195,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 1977021629,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.57069459270137,
+      "lL": 5.684409080890859,
+      "lU": 7.5281113506321615
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "bottom",
+      "run_seed": 1398260824,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.57069459270137,
+      "lL": 5.684409080890859,
+      "lU": 7.656746073727666
+     },
+     {
+      "kind": "cone",
+      "oracle": "high",
+      "run_seed": 912575350,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.929305407298629,
+      "lL": -2.87789681740914,
+      "lU": -0.9181749091483844
+     },
+     {
+      "kind": "linear",
+      "oracle": "high",
+      "run_seed": 761301982,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.07069459270137202,
+      "lL": 0.1221031825908594,
+      "lU": 2.036162621504054
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 197,
+    "J": 22,
+    "r_dag": 4,
+    "x_out": 7.022442341623486,
+    "seed": 5731,
+    "runs": 474,
+    "closed": 473,
+    "aborted": 0,
+    "tie_aborts": 1,
+    "good": 474,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 4.370768663963436,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 462,
+    "J": 69,
+    "r_dag": -1,
+    "x_out": 1.2377417722425355,
+    "seed": 5748,
+    "runs": 123,
+    "closed": 123,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 123,
+    "invalid_good": 69,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 69,
+     "(ii) L <= A": 69
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.110121741755442,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "ridges",
+      "oracle": "mid",
+      "run_seed": 775916131,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.732872674284739,
+      "lL": -2.6224157808545963,
+      "lU": -2.1408882011826784
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "sticky_high",
+      "run_seed": 1382237755,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.43361124408332,
+      "lL": 4.746583953290857,
+      "lU": 4.9989459072684
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "mid",
+      "run_seed": 1595395713,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.929305407298629,
+      "lL": -2.4534160467091413,
+      "lU": -2.2840354518380512
+     },
+     {
+      "kind": "dip",
+      "oracle": "high",
+      "run_seed": 710160132,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.9915811266640913,
+      "lL": 1.2465839532908576,
+      "lU": 1.6582203064578942
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 198,
+    "J": 19,
+    "r_dag": 4,
+    "x_out": 3.318272538116151,
+    "seed": 5765,
+    "runs": 457,
+    "closed": 457,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 457,
+    "invalid_good": 43,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 35,
+     "(ii) L <= A": 35,
+     "(ii) A <= U": 8
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.480192406934395,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 634789100,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.2642285100655597,
+      "lL": -2.0746112887908774,
+      "lU": -0.4521471365889034
+     },
+     {
+      "kind": "linear",
+      "oracle": "sticky_low",
+      "run_seed": 1360040652,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.075781686069432,
+      "lL": -1.975781686069431,
+      "lU": -1.7146548771406476
+     },
+     {
+      "kind": "anticone",
+      "oracle": "bottom",
+      "run_seed": 1466492324,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.724218313930568,
+      "lL": 5.024928978927567,
+      "lU": 6.64739313112954
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "bottom",
+      "run_seed": 302086783,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.724218313930568,
+      "lL": 4.924928978927566,
+      "lU": 6.54739313112954
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 714,
+    "J": 37,
+    "r_dag": 2,
+    "x_out": 1.6796555269844335,
+    "seed": 5782,
+    "runs": 229,
+    "closed": 229,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 229,
+    "invalid_good": 68,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 26,
+     "(ii) L <= A": 26,
+     "(ii) A <= U": 42
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.3094659051335977,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "random",
+      "run_seed": 1381538553,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.9757816860694306,
+      "lL": -1.8778966635078813,
+      "lU": -1.224609259060567
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "sticky_high",
+      "run_seed": 4540105,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.214482151891029,
+      "lL": -3.0288644016208597,
+      "lU": -3.321291728439208
+     },
+     {
+      "kind": "anticone",
+      "oracle": "low",
+      "run_seed": 28294312,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 4.72421831393057,
+      "lL": 3.9242183139305693,
+      "lU": 3.1317909871122214
+     },
+     {
+      "kind": "anticone",
+      "oracle": "bottom",
+      "run_seed": 1921975982,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 4.724218313930572,
+      "lL": 3.4242183139305693,
+      "lU": 3.841743829967086
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 205,
+    "J": 30,
+    "r_dag": 4,
+    "x_out": 2.755265459537746,
+    "seed": 5799,
+    "runs": 390,
+    "closed": 390,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 390,
+    "invalid_good": 33,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 15,
+     "(ii) l <= A": 18,
+     "(ii) L <= A": 18
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.9715567195019745,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "high",
+      "run_seed": 1894795376,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694297,
+      "lL": -1.975781686069431,
+      "lU": -2.0064509449406476
+     },
+     {
+      "kind": "cone0",
+      "oracle": "low",
+      "run_seed": 9542022,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694297,
+      "lL": -1.975781686069431,
+      "lU": -2.6244849336406473
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "sticky_low",
+      "run_seed": 1435102387,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.02421831393057,
+      "lL": 1.2242183139305691,
+      "lU": 1.8115830437593532
+     },
+     {
+      "kind": "anticone",
+      "oracle": "high",
+      "run_seed": 1653219306,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.724218313930572,
+      "lL": 4.846346242127567,
+      "lU": 6.384266828912222
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 195,
+    "J": 19,
+    "r_dag": 5,
+    "x_out": 7.022446862090114,
+    "seed": 5816,
+    "runs": 507,
+    "closed": 507,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 507,
+    "invalid_good": 50,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 39,
+     "(ii) l <= A": 11,
+     "(ii) L <= A": 11
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.622464152201975,
+    "class_violation": 1.942890293094024e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "mid",
+      "run_seed": 473758583,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.1906539552860091,
+      "lL": -2.551406451007707,
+      "lU": -1.2902796420789233
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_low",
+      "run_seed": 1880618903,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 4.72421831393057,
+      "lL": 1.924928978927566,
+      "lU": 4.285345122859352
+     },
+     {
+      "kind": "cone",
+      "oracle": "high",
+      "run_seed": 731642454,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.9757816860694315,
+      "lL": -1.9750710210724334,
+      "lU": -0.16820901288777845
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "sticky_low",
+      "run_seed": 1398859424,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.005952384771712,
+      "lL": -0.8750710210724337,
+      "lU": 1.4853451228593526
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 460,
+    "J": 60,
+    "r_dag": 0,
+    "x_out": 1.239211133818874,
+    "seed": 5833,
+    "runs": 94,
+    "closed": 94,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 94,
+    "invalid_good": 54,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 54,
+     "(ii) L <= A": 54
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.7703248479485574,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "top",
+      "run_seed": 34102974,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.975781686069431,
+      "lL": -1.7778966635078808,
+      "lU": -1.4503377147900083
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 370122753,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 2.72421831393057,
+      "lL": 3.0221033364921186,
+      "lU": 3.501498921773817
+     },
+     {
+      "kind": "wells",
+      "oracle": "sticky_high",
+      "run_seed": 1048480529,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.1229932185848783,
+      "lL": -1.726269818830116,
+      "lU": -1.4409543170294046
+     },
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 2026750465,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.963613238514156,
+      "lL": -2.690464922052514,
+      "lU": -2.1973354120114785
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 206,
+    "J": 26,
+    "r_dag": 2,
+    "x_out": 3.3180069229847278,
+    "seed": 5850,
+    "runs": 275,
+    "closed": 275,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 275,
+    "invalid_good": 1,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 1,
+     "(ii) L <= A": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.830150496924372,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 1073417459,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -4.007498343404185,
+      "lL": -3.8738980937355465,
+      "lU": -2.165565876757104
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 732,
+    "J": 50,
+    "r_dag": 1,
+    "x_out": 1.6782873744531033,
+    "seed": 5867,
+    "runs": 154,
+    "closed": 154,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 154,
+    "invalid_good": 24,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 4,
+     "(ii) l <= A": 20,
+     "(ii) L <= A": 20
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4505031262582948,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "top",
+      "run_seed": 1519512272,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.126814012265255,
+      "lL": -3.126814012265255,
+      "lU": -3.308069016753499
+     },
+     {
+      "kind": "wells",
+      "oracle": "sticky_high",
+      "run_seed": 1650179041,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -6.003174902846185,
+      "lL": -5.98821338168344,
+      "lU": -5.210170873950785
+     },
+     {
+      "kind": "anticone",
+      "oracle": "bottom",
+      "run_seed": 1347962926,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.4731859877347455,
+      "lL": 6.6712582453159435,
+      "lU": 7.347449574815028
+     },
+     {
+      "kind": "anticone",
+      "oracle": "high",
+      "run_seed": 633916443,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.4731859877347455,
+      "lL": 6.6712582453159435,
+      "lU": 7.3373280896717334
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 211,
+    "J": 41,
+    "r_dag": 2,
+    "x_out": 2.7547990071848005,
+    "seed": 5884,
+    "runs": 285,
+    "closed": 285,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 285,
+    "invalid_good": 2,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 2,
+     "(ii) L <= A": 2
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.2031159976659236,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 1096471412,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.587443434002142,
+      "lL": 4.6013604688095135,
+      "lU": 5.944778428623421
+     },
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 545495335,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.204950977963472,
+      "lL": -3.1407085194887023,
+      "lU": -1.8264535424200679
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 200,
+    "J": 26,
+    "r_dag": 6,
+    "x_out": 7.022440323349845,
+    "seed": 5901,
+    "runs": 612,
+    "closed": 612,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 612,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 5.161837542095687,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 469,
+    "J": 81,
+    "r_dag": 0,
+    "x_out": 1.237085043921033,
+    "seed": 5918,
+    "runs": 72,
+    "closed": 72,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 72,
+    "invalid_good": 44,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 44,
+     "(ii) L <= A": 44
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.0079292036306615,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "sticky_low",
+      "run_seed": 1066760034,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.126814012265256,
+      "lL": -2.6287417546840564,
+      "lU": -2.663765553517836
+     },
+     {
+      "kind": "dip",
+      "oracle": "bottom",
+      "run_seed": 810900185,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.918898675660234,
+      "lL": 1.592184730879155,
+      "lU": 1.5448631258623657
+     },
+     {
+      "kind": "anticone",
+      "oracle": "top",
+      "run_seed": 1239573319,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.47318598773474,
+      "lL": 6.971258245315946,
+      "lU": 6.935716538366579
+     },
+     {
+      "kind": "ridges",
+      "oracle": "random",
+      "run_seed": 1496152540,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.268489343143015,
+      "lL": 1.2864704662628226,
+      "lU": 1.8468447104514394
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 205,
+    "J": 27,
+    "r_dag": 3,
+    "x_out": 3.3179628442595566,
+    "seed": 5935,
+    "runs": 401,
+    "closed": 401,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 401,
+    "invalid_good": 199,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 197,
+     "(ii) l <= A": 2,
+     "(ii) L <= A": 2
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.602468297640395,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "random",
+      "run_seed": 204190660,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.4760361371481934,
+      "lL": -3.717204105933814,
+      "lU": -2.0900244463794206
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "low",
+      "run_seed": 191569168,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851804,
+      "lL": 5.0327958940661865,
+      "lU": 6.730969330700722
+     },
+     {
+      "kind": "linear",
+      "oracle": "top",
+      "run_seed": 2006560458,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.523963862851808,
+      "lL": -0.9672041059338139,
+      "lU": 0.8165383675529372
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "mid",
+      "run_seed": 1416103586,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9666686614532587,
+      "lL": -4.744637304795168,
+      "lU": -2.960894831308415
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 744,
+    "J": 52,
+    "r_dag": 1,
+    "x_out": 1.678060184072758,
+    "seed": 5952,
+    "runs": 232,
+    "closed": 232,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 232,
+    "invalid_good": 138,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 116,
+     "(ii) l <= A": 22,
+     "(ii) L <= A": 22
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.3664439355665965,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "sticky_high",
+      "run_seed": 1968898620,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -2.476036137148194,
+      "lU": -3.6218991364019235
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "sticky_high",
+      "run_seed": 627200288,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.818825548008678,
+      "lL": -4.2172041059338135,
+      "lU": -3.418179483953452
+     },
+     {
+      "kind": "anticone",
+      "oracle": "mid",
+      "run_seed": 1268463712,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 8.532795894066187,
+      "lU": 8.827936384692983
+     },
+     {
+      "kind": "cone0",
+      "oracle": "random",
+      "run_seed": 25522892,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -2.476036137148194,
+      "lU": -3.618023708461717
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 213,
+    "J": 42,
+    "r_dag": 3,
+    "x_out": 2.7547215905383244,
+    "seed": 5969,
+    "runs": 413,
+    "closed": 413,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 413,
+    "invalid_good": 215,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 214,
+     "(ii) l <= A": 1,
+     "(ii) L <= A": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.9515608649403957,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone",
+      "oracle": "random",
+      "run_seed": 1685702255,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 5.162417089466187,
+      "lU": 6.674059041678107
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "sticky_low",
+      "run_seed": 606389617,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -5.983480944433813,
+      "lU": -4.468679892347062
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "mid",
+      "run_seed": 281814961,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 4.988655010366186,
+      "lU": 6.503456062452938
+     },
+     {
+      "kind": "outer_set",
+      "oracle": "sticky_high",
+      "run_seed": 625585800,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.679883442019589,
+      "lL": 1.1529841161093515,
+      "lU": 1.4800004739104828
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 201,
+    "J": 27,
+    "r_dag": 5,
+    "x_out": 7.0224392384123835,
+    "seed": 5986,
+    "runs": 606,
+    "closed": 606,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 606,
+    "invalid_good": 301,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 301
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 6.42546131588206,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_low",
+      "run_seed": 7108367,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 4.0327958940661865,
+      "lU": 6.885171297074323
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "high",
+      "run_seed": 1776879169,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.5239638628518035,
+      "lL": 3.532795894066186,
+      "lU": 6.385171297074324
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_high",
+      "run_seed": 957122658,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 5.0327958940661865,
+      "lU": 6.816538367552937
+     },
+     {
+      "kind": "linear",
+      "oracle": "high",
+      "run_seed": 2006778629,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 3.273963862851808,
+      "lL": 0.2506579307694863,
+      "lU": 2.8165383675529374
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 475,
+    "J": 85,
+    "r_dag": 0,
+    "x_out": 1.2367318371349796,
+    "seed": 6003,
+    "runs": 83,
+    "closed": 83,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 83,
+    "invalid_good": 48,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 48,
+     "(ii) L <= A": 48
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.8979054959234845,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "dip",
+      "oracle": "low",
+      "run_seed": 668175218,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.6473095517838567,
+      "lL": 0.995943446731915,
+      "lU": 1.0305368824158458
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 1060050567,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 5,
+       "(ii) L <= A": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 8.934847771648581,
+      "lU": 8.743713986459433
+     },
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 1723726681,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 5,
+       "(ii) L <= A": 1
+      },
+      "lA": -4.2533189414282155,
+      "lL": -3.243192644984352,
+      "lU": -3.463570849857681
+     },
+     {
+      "kind": "dip",
+      "oracle": "random",
+      "run_seed": 344647134,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 4,
+       "(ii) L <= A": 1
+      },
+      "lA": 2.630840999040628,
+      "lL": 3.465828311352433,
+      "lU": 3.2507021562073395
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 199,
+    "J": 20,
+    "r_dag": 4,
+    "x_out": 3.3181044635349677,
+    "seed": 6020,
+    "runs": 567,
+    "closed": 567,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 567,
+    "invalid_good": 38,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 38,
+     "(ii) L <= A": 38
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.223026651094388,
+    "class_violation": 1.4155343563970746e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "linear",
+      "oracle": "bottom",
+      "run_seed": 406439250,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.363884954254237,
+      "lL": 5.552445486431995,
+      "lU": 6.858787826745112
+     },
+     {
+      "kind": "linear",
+      "oracle": "high",
+      "run_seed": 794176802,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.463884954254239,
+      "lL": 1.5524454864319948,
+      "lU": 3.003960353227911
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "bottom",
+      "run_seed": 644082412,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.46388495425424,
+      "lL": 5.552445486431995,
+      "lU": 7.762128428984902
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 1335063778,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.46388495425424,
+      "lL": 5.552445486431995,
+      "lU": 7.003960353227911
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 693,
+    "J": 38,
+    "r_dag": 3,
+    "x_out": 1.6787899697173143,
+    "seed": 6037,
+    "runs": 427,
+    "closed": 427,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 427,
+    "invalid_good": 66,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 64,
+     "(ii) l <= A": 2,
+     "(ii) L <= A": 2
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.1590726979577068,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone",
+      "oracle": "sticky_high",
+      "run_seed": 759301910,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 5.463884954254237,
+      "lL": 5.263884954254237,
+      "lU": 5.458787826745112
+     },
+     {
+      "kind": "ridges",
+      "oracle": "top",
+      "run_seed": 323312535,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -0.06911862374319577,
+      "lL": -0.9805580915654395,
+      "lU": -0.17421575125232103
+     },
+     {
+      "kind": "cone0",
+      "oracle": "low",
+      "run_seed": 1140505284,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.8361150457457618,
+      "lL": -1.8361150457457622,
+      "lU": -1.9960396467720887
+     },
+     {
+      "kind": "linear",
+      "oracle": "top",
+      "run_seed": 2114631074,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 1.3638849542542366,
+      "lL": 0.5524454864319948,
+      "lU": 1.3587878267451126
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 201,
+    "J": 31,
+    "r_dag": 4,
+    "x_out": 2.7549703110938086,
+    "seed": 6054,
+    "runs": 546,
+    "closed": 546,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 546,
+    "invalid_good": 14,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 14,
+     "(ii) L <= A": 14
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.5721192183943895,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "twofibre",
+      "oracle": "bottom",
+      "run_seed": 114127697,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.074041598804962,
+      "lL": 6.12829130378272,
+      "lU": 7.310864749178636
+     },
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 772792844,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.6040532724545375,
+      "lL": -2.4798568029919728,
+      "lU": -1.4424558840788557
+     },
+     {
+      "kind": "ridges",
+      "oracle": "bottom",
+      "run_seed": 454603985,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.9249758078809558,
+      "lL": -0.794267967691328,
+      "lU": 0.24313295122179057
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 1167090212,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.5469953877733551,
+      "lL": -0.4441712390680044,
+      "lU": 0.5932296798451132
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 195,
+    "J": 20,
+    "r_dag": 4,
+    "x_out": 7.022442724342748,
+    "seed": 6071,
+    "runs": 759,
+    "closed": 759,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 759,
+    "invalid_good": 34,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 34,
+     "(ii) L <= A": 34
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.223026651094388,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 764563047,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.2659528343143909,
+      "lL": -1.2612861471603378,
+      "lU": 0.15466227209667927
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 1116397224,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.4638849542542385,
+      "lL": 5.552445486431995,
+      "lU": 6.858787826745112
+     },
+     {
+      "kind": "anticone",
+      "oracle": "high",
+      "run_seed": 64299631,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.463884954254237,
+      "lL": 5.542839407488096,
+      "lU": 6.9587878267451115
+     },
+     {
+      "kind": "outer_plateau",
+      "oracle": "high",
+      "run_seed": 368284996,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.8361150457457613,
+      "lL": -1.647554513568005,
+      "lU": -0.3412121732548876
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 454,
+    "J": 61,
+    "r_dag": 0,
+    "x_out": 1.2378662572094352,
+    "seed": 6088,
+    "runs": 174,
+    "closed": 174,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 174,
+    "invalid_good": 69,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 69,
+     "(ii) L <= A": 69
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.6196228307312018,
+    "class_violation": 1.4155343563970746e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "wells",
+      "oracle": "random",
+      "run_seed": 546589061,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.9258180414936055,
+      "lL": -3.7468635882597483,
+      "lU": -3.4580937800210245
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 992393029,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.4638849542542385,
+      "lL": 5.742839407488096,
+      "lU": 6.028806836295652
+     },
+     {
+      "kind": "dip",
+      "oracle": "mid",
+      "run_seed": 1358792416,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.5183146652364488,
+      "lL": 1.542839407488095,
+      "lU": 1.9632833417508038
+     },
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 1469422106,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.5051658158152774,
+      "lL": -2.4129733156554676,
+      "lU": -2.078248902195213
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 210,
+    "J": 30,
+    "r_dag": 2,
+    "x_out": 3.3179640579467833,
+    "seed": 6105,
+    "runs": 316,
+    "closed": 316,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 316,
+    "invalid_good": 18,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 17,
+     "(ii) L <= A": 17,
+     "(ii) A <= U": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.9126461472691063,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 1120134742,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -8.617362982817731,
+      "lL": -8.467676117952571,
+      "lU": -6.384572591359987
+     },
+     {
+      "kind": "cone0",
+      "oracle": "low",
+      "run_seed": 881046317,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.773428118474192,
+      "lL": -3.7734281184741914,
+      "lU": -3.84852755483287
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_high",
+      "run_seed": 1447167344,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.773428118474192,
+      "lL": -3.576004943930032,
+      "lU": -1.480631843324191
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 1264332504,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.7734281184741914,
+      "lL": -3.4921923310317666,
+      "lU": -1.7417326716955532
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 748,
+    "J": 59,
+    "r_dag": 1,
+    "x_out": 1.6780664402113723,
+    "seed": 6122,
+    "runs": 126,
+    "closed": 126,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 126,
+    "invalid_good": 59,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 55,
+     "(ii) L <= A": 55,
+     "(ii) A <= U": 4
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4595935431652347,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "top",
+      "run_seed": 540129078,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.141157463587244,
+      "lL": -3.076004943930032,
+      "lU": -2.5518334007879355
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "sticky_high",
+      "run_seed": 477104206,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.226571881525804,
+      "lL": 6.923995056069968,
+      "lU": 7.291817122681573
+     },
+     {
+      "kind": "wells",
+      "oracle": "random",
+      "run_seed": 192982046,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -6.041929439718057,
+      "lL": -5.859059656649571,
+      "lU": -5.20847231085227
+     },
+     {
+      "kind": "dip",
+      "oracle": "random",
+      "run_seed": 1097037429,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 2.0517497293847926,
+      "lL": 2.3018427246630324,
+      "lU": 2.8370547389017076
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 216,
+    "J": 49,
+    "r_dag": 2,
+    "x_out": 2.7547237222042864,
+    "seed": 6139,
+    "runs": 225,
+    "closed": 225,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 225,
+    "invalid_good": 2,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 2,
+     "(ii) L <= A": 2
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.370860079844518,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "ridges",
+      "oracle": "bottom",
+      "run_seed": 1652805760,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.6507808735068288,
+      "lL": 1.7851157819570522,
+      "lU": 3.3970891300603627
+     },
+     {
+      "kind": "linear",
+      "oracle": "bottom",
+      "run_seed": 254078761,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.626571881525806,
+      "lL": 4.817768751368235,
+      "lU": 6.13775982689272
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 202,
+    "J": 30,
+    "r_dag": 6,
+    "x_out": 7.022439268285008,
+    "seed": 6156,
+    "runs": 444,
+    "closed": 444,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 444,
+    "invalid_good": 6,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 6
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 5.54829099289141,
+    "class_violation": 4.218847493575595e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "low",
+      "run_seed": 105569264,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.7734281184741914,
+      "lL": -6.716454600600887,
+      "lU": -4.048527554832872
+     },
+     {
+      "kind": "cone0",
+      "oracle": "low",
+      "run_seed": 1130894451,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.7734281184741922,
+      "lL": -3.7734281184741914,
+      "lU": -3.84852755483287
+     },
+     {
+      "kind": "linear",
+      "oracle": "low",
+      "run_seed": 1988351114,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 5.62657188152581,
+      "lL": 2.483545399399115,
+      "lU": 5.15147244516713
+     },
+     {
+      "kind": "wells",
+      "oracle": "sticky_low",
+      "run_seed": 1004473424,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -4.853884913249645,
+      "lL": -7.996911395376337,
+      "lU": -5.328984349608322
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 479,
+    "J": 98,
+    "r_dag": 0,
+    "x_out": 1.2367415639817583,
+    "seed": 6173,
+    "runs": 38,
+    "closed": 38,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 38,
+    "invalid_good": 22,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 22,
+     "(ii) L <= A": 22
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.0383117244467461,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "linear",
+      "oracle": "mid",
+      "run_seed": 572211127,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.9265718815258079,
+      "lL": 1.8239950560699674,
+      "lU": 1.538630087276663
+     },
+     {
+      "kind": "ridges",
+      "oracle": "random",
+      "run_seed": 1840509116,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.7714339811960422,
+      "lL": -2.7557544641316847,
+      "lU": -2.132569668424766
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_low",
+      "run_seed": 267956180,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.7734281184741914,
+      "lL": -2.9760049439300333,
+      "lU": -3.235839105383721
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 262017536,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 6,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.7734281184741927,
+      "lL": -2.5760049439300348,
+      "lU": -3.0164369493771903
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 200,
+    "J": 21,
+    "r_dag": 5,
+    "x_out": 3.318025510122142,
+    "seed": 6190,
+    "runs": 643,
+    "closed": 643,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 643,
+    "invalid_good": 88,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 57,
+     "(ii) l <= A": 31,
+     "(ii) L <= A": 31
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.117721598701369,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "twofibre",
+      "oracle": "bottom",
+      "run_seed": 803687509,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 5.335713211612419,
+      "lL": -0.27731601300160147,
+      "lU": 0.9269264368478625
+     },
+     {
+      "kind": "cone0",
+      "oracle": "high",
+      "run_seed": 172382534,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.313690494922246,
+      "lL": -1.3136904949222448,
+      "lU": -1.8067291140797426
+     },
+     {
+      "kind": "linear",
+      "oracle": "high",
+      "run_seed": 1439561248,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.886309505077754,
+      "lL": 5.4232802804637315,
+      "lU": 6.627522730313195
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 744503532,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.313690494922246,
+      "lL": -0.7732657274998269,
+      "lU": 0.42352210046574335
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 730,
+    "J": 41,
+    "r_dag": 5,
+    "x_out": 1.6783831637304978,
+    "seed": 6207,
+    "runs": 513,
+    "closed": 513,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 513,
+    "invalid_good": 295,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 295
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.1190616776708415,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "twofibre",
+      "oracle": "low",
+      "run_seed": 2031534156,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 5.974803141772376,
+      "lL": 0.024096650477002157,
+      "lU": 1.1188331824725926
+     },
+     {
+      "kind": "anticone",
+      "oracle": "sticky_high",
+      "run_seed": 763548312,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.186309505077753,
+      "lL": 4.836309505077755,
+      "lU": 1.7303395457779724
+     },
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 1944092095,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -0.4397794772063017,
+      "lL": -0.544356454923741,
+      "lU": -1.650326414223523
+     },
+     {
+      "kind": "wells",
+      "oracle": "sticky_low",
+      "run_seed": 19401716,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -4.108485059506234,
+      "lL": -6.89980844256218,
+      "lU": -5.80507191056659
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 213,
+    "J": 34,
+    "r_dag": 5,
+    "x_out": 2.754831651498844,
+    "seed": 6224,
+    "runs": 401,
+    "closed": 401,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 401,
+    "invalid_good": 102,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 60,
+     "(ii) L <= A": 60,
+     "(ii) A <= U": 42
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4668141660013685,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone0",
+      "oracle": "bottom",
+      "run_seed": 1379543130,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.186309505077756,
+      "lL": 6.4784914227001735,
+      "lU": 7.413155274577973
+     },
+     {
+      "kind": "cone0",
+      "oracle": "mid",
+      "run_seed": 89870339,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.313690494922243,
+      "lL": -1.3136904949222448,
+      "lU": -3.952627147979743
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "mid",
+      "run_seed": 390371844,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.186309505077756,
+      "lL": 0.9627315323637315,
+      "lU": 1.8980325608131963
+     },
+     {
+      "kind": "linear",
+      "oracle": "high",
+      "run_seed": 1183754446,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.886309505077757,
+      "lL": 5.288969453263732,
+      "lU": 6.7557836192651
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 196,
+    "J": 21,
+    "r_dag": 6,
+    "x_out": 7.022440780860763,
+    "seed": 6241,
+    "runs": 654,
+    "closed": 654,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 654,
+    "invalid_good": 138,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 100,
+     "(ii) l <= A": 38,
+     "(ii) L <= A": 38
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.7699906054565258,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "low",
+      "run_seed": 1047242001,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.3136904949222465,
+      "lL": -6.826719719536268,
+      "lU": -4.056729114079743
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 1630240785,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.3136904949222443,
+      "lL": -6.026719719536267,
+      "lU": -3.256729114079742
+     },
+     {
+      "kind": "cone0",
+      "oracle": "top",
+      "run_seed": 449040779,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.313690494922243,
+      "lL": -1.3136904949222448,
+      "lU": -1.8067291140797426
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_high",
+      "run_seed": 1240255106,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.313690494922243,
+      "lL": -1.3136904949222448,
+      "lU": -1.8067291140797426
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 466,
+    "J": 67,
+    "r_dag": 2,
+    "x_out": 1.2372339516019135,
+    "seed": 6258,
+    "runs": 207,
+    "closed": 207,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 207,
+    "invalid_good": 127,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 73,
+     "(ii) L <= A": 73,
+     "(ii) A <= U": 54
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.5504560868152826,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_high",
+      "run_seed": 482536192,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.186309505077756,
+      "lL": 6.62328028046373,
+      "lU": 6.968201057482137
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 817109183,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.46120330929783,
+      "lL": 5.873280280463732,
+      "lU": 6.197333843652913
+     },
+     {
+      "kind": "dip",
+      "oracle": "sticky_low",
+      "run_seed": 880238702,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.5777812833181848,
+      "lL": 0.6379303056104204,
+      "lU": 0.9310717594132077
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 219204105,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.3136904949222443,
+      "lL": -0.7267197195362698,
+      "lU": -0.5049616945850488
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 201,
+    "J": 21,
+    "r_dag": 2,
+    "x_out": 3.3181957544729377,
+    "seed": 6275,
+    "runs": 383,
+    "closed": 383,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 383,
+    "invalid_good": 20,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 20,
+     "(ii) L <= A": 20
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.682795337402471,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 756482024,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.99709704618247,
+      "lL": 5.163344337070802,
+      "lU": 6.831739712649348
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 1278698902,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.702902953817529,
+      "lL": -2.606655662929199,
+      "lU": -0.6632008301550831
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "bottom",
+      "run_seed": 1736848428,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.99709704618247,
+      "lL": 5.163344337070802,
+      "lU": 6.795061527424713
+     },
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 880268521,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.7555234257759214,
+      "lL": -2.66768824233935,
+      "lU": -0.6613926143857531
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "BND",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 716,
+    "J": 41,
+    "r_dag": 1,
+    "x_out": 1.6792601783771286,
+    "seed": 6292,
+    "runs": 250,
+    "closed": 250,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 250,
+    "invalid_good": 4,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 4,
+     "(ii) L <= A": 4
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.5061981579378774,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 1076694005,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -6.247332948412502,
+      "lL": -6.228437871504512,
+      "lU": -5.310403888067056
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 1447443355,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.7029029538175284,
+      "lL": -2.5866556629291977,
+      "lU": -1.791480895054116
+     },
+     {
+      "kind": "ridges",
+      "oracle": "bottom",
+      "run_seed": 78603916,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.6485520556407405,
+      "lL": 1.6604315904007447,
+      "lU": 2.652235716498806
+     },
+     {
+      "kind": "anticone",
+      "oracle": "high",
+      "run_seed": 409954448,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.997097046182472,
+      "lL": 5.080093569964522,
+      "lU": 5.959978696093016
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "generic",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 206,
+    "J": 33,
+    "r_dag": 2,
+    "x_out": 2.7551306277829286,
+    "seed": 6309,
+    "runs": 340,
+    "closed": 340,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 340,
+    "invalid_good": 1,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 1,
+     "(ii) L <= A": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.172083262008318,
+    "class_violation": 3.1086244689504383e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 1290989598,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.5286750528610145,
+      "lL": -1.4959397045915308,
+      "lU": 0.2407173415179269
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 196,
+    "J": 21,
+    "r_dag": 5,
+    "x_out": 7.0224449717063315,
+    "seed": 6326,
+    "runs": 599,
+    "closed": 599,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 599,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.9202122308158853,
+    "class_violation": 3.1086244689504383e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: slopes sorted smallest first",
+    "K": 460,
+    "J": 66,
+    "r_dag": 0,
+    "x_out": 1.2385969331261686,
+    "seed": 6343,
+    "runs": 117,
+    "closed": 117,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 117,
+    "invalid_good": 66,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 66,
+     "(ii) L <= A": 66
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.9325701430741664,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "linear",
+      "oracle": "top",
+      "run_seed": 1027095017,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.21290295381752777,
+      "lL": 0.2633443370708002,
+      "lU": 0.2967836815319629
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_low",
+      "run_seed": 85247503,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.702902953817528,
+      "lL": -2.436655662929199,
+      "lU": -2.1826982192419537
+     },
+     {
+      "kind": "wells",
+      "oracle": "sticky_low",
+      "run_seed": 1838151722,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -7.417806117768144,
+      "lL": -7.058516993192741,
+      "lU": -6.95028367152234
+     },
+     {
+      "kind": "wells",
+      "oracle": "low",
+      "run_seed": 1673733837,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.7440312315720083,
+      "lL": -2.472142509226622,
+      "lU": -2.250943109800831
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 203,
+    "J": 22,
+    "r_dag": 1,
+    "x_out": 3.3180889161526257,
+    "seed": 6360,
+    "runs": 355,
+    "closed": 355,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 355,
+    "invalid_good": 29,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 29,
+     "(ii) L <= A": 29
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.776963024893594,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "dip",
+      "oracle": "bottom",
+      "run_seed": 671782485,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.3788349042530097,
+      "lL": 0.40464901810080667,
+      "lU": 2.2740269817134564
+     },
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 1899916871,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -4.74438875861161,
+      "lL": -4.373668740635092,
+      "lU": -2.534607937686686
+     },
+     {
+      "kind": "anticone",
+      "oracle": "sticky_high",
+      "run_seed": 1036716385,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.57069459270137,
+      "lL": 5.904649018100807,
+      "lU": 7.500455093069051
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 1390699961,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.929305407298629,
+      "lL": -2.5953509818991938,
+      "lU": -0.8247293573889293
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 728,
+    "J": 42,
+    "r_dag": 0,
+    "x_out": 1.6787098726648872,
+    "seed": 6377,
+    "runs": 143,
+    "closed": 143,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 143,
+    "invalid_good": 52,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 49,
+     "(ii) L <= A": 49,
+     "(ii) A <= U": 3
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4744563403376543,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_plateau",
+      "oracle": "mid",
+      "run_seed": 2034663969,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.9293054072986289,
+      "lL": -1.5953509818991933,
+      "lU": -0.9873775302963026
+     },
+     {
+      "kind": "cone0",
+      "oracle": "bottom",
+      "run_seed": 1919990759,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.9293054072986284,
+      "lL": -2.5953509818991938,
+      "lU": -1.987554638871774
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_high",
+      "run_seed": 1585197240,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.9293054072986284,
+      "lL": -2.5953509818991938,
+      "lU": -2.239797582751032
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "random",
+      "run_seed": 1454562551,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.8440632521607738,
+      "lL": 2.177426309366177,
+      "lU": 2.6098139636527478
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 209,
+    "J": 35,
+    "r_dag": 1,
+    "x_out": 2.7549430071182335,
+    "seed": 6394,
+    "runs": 286,
+    "closed": 286,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 286,
+    "invalid_good": 12,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 12,
+     "(ii) L <= A": 12
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.3690526037809088,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "high",
+      "run_seed": 1256160840,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.929305407298629,
+      "lL": -2.847695797799193,
+      "lU": -0.9463764108842234
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 837994849,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.57069459270137,
+      "lL": 5.7424741457008075,
+      "lU": 7.564178681851853
+     },
+     {
+      "kind": "linear",
+      "oracle": "sticky_high",
+      "run_seed": 1706789899,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.07069459270137113,
+      "lL": 0.18016824740080795,
+      "lU": 1.5937242832499923
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "bottom",
+      "run_seed": 493124902,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.57069459270137,
+      "lL": 5.7424741457008075,
+      "lU": 7.612095049477374
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 197,
+    "J": 22,
+    "r_dag": 4,
+    "x_out": 7.022442341623486,
+    "seed": 6411,
+    "runs": 393,
+    "closed": 392,
+    "aborted": 0,
+    "tie_aborts": 1,
+    "good": 393,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 3.0902425915885647,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      2
+     ],
+     [
+      0.5,
+      3
+     ]
+    ],
+    "inner": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 462,
+    "J": 69,
+    "r_dag": -1,
+    "x_out": 1.2377417722425355,
+    "seed": 6428,
+    "runs": 94,
+    "closed": 94,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 94,
+    "invalid_good": 45,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 45,
+     "(ii) L <= A": 45
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.0794189406210866,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "dip",
+      "oracle": "sticky_low",
+      "run_seed": 1596440863,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.9846267241014561,
+      "lL": 1.149540784620711,
+      "lU": 1.4068585210894287
+     },
+     {
+      "kind": "cone0",
+      "oracle": "low",
+      "run_seed": 663442447,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.929305407298629,
+      "lL": -2.5953509818991938,
+      "lU": -2.404858846010085
+     },
+     {
+      "kind": "anticone",
+      "oracle": "low",
+      "run_seed": 475295741,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.570694592701372,
+      "lL": 6.004649018100805,
+      "lU": 6.0994416795278195
+     },
+     {
+      "kind": "cone",
+      "oracle": "top",
+      "run_seed": 1188949663,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.929305407298629,
+      "lL": -2.495350981899194,
+      "lU": -2.4376272925204843
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 198,
+    "J": 19,
+    "r_dag": 4,
+    "x_out": 3.318272538116151,
+    "seed": 6445,
+    "runs": 514,
+    "closed": 514,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 514,
+    "invalid_good": 50,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 16,
+     "(ii) l <= A": 34,
+     "(ii) L <= A": 34
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.480192406934395,
+    "class_violation": 2.831068712794149e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "sticky_high",
+      "run_seed": 1764573768,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.975781686069432,
+      "lL": -2.1757816860694312,
+      "lU": -2.2700498670701212
+     },
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 1812814855,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.3669533774651086,
+      "lL": -2.1091328782825434,
+      "lU": -0.4339616253504627
+     },
+     {
+      "kind": "ridges",
+      "oracle": "sticky_high",
+      "run_seed": 941256576,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.4275344384724322,
+      "lL": 0.7003489716745319,
+      "lU": 2.322813123876506
+     },
+     {
+      "kind": "cone0",
+      "oracle": "random",
+      "run_seed": 953510441,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694306,
+      "lL": -1.975781686069431,
+      "lU": -2.070049867070121
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 714,
+    "J": 37,
+    "r_dag": 2,
+    "x_out": 1.6796555269844335,
+    "seed": 6462,
+    "runs": 305,
+    "closed": 305,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 305,
+    "invalid_good": 81,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 42,
+     "(ii) l <= A": 39,
+     "(ii) L <= A": 39
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.3094659051335977,
+    "class_violation": 1.9984014443252818e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "bottom",
+      "run_seed": 1477163405,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694306,
+      "lL": -1.975781686069431,
+      "lU": -3.2682090128877794
+     },
+     {
+      "kind": "anticone",
+      "oracle": "sticky_high",
+      "run_seed": 85103089,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.72421831393057,
+      "lL": 4.929950132929879,
+      "lU": 5.553289352039495
+     },
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 1362240382,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -4.893463304296275,
+      "lL": -4.617122759737436,
+      "lU": -3.7693284302716585
+     },
+     {
+      "kind": "cone0",
+      "oracle": "random",
+      "run_seed": 897830773,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694306,
+      "lL": -1.975781686069431,
+      "lU": -3.2682090128877794
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 205,
+    "J": 30,
+    "r_dag": 4,
+    "x_out": 2.755265459537746,
+    "seed": 6479,
+    "runs": 369,
+    "closed": 369,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 369,
+    "invalid_good": 31,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 15,
+     "(ii) l <= A": 16,
+     "(ii) L <= A": 16
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.9715567195019745,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "sticky_high",
+      "run_seed": 2104823994,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694306,
+      "lL": -1.975781686069431,
+      "lU": -2.3618459348701206
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "high",
+      "run_seed": 1788316695,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.9757816860694306,
+      "lL": -1.935619769172435,
+      "lU": -0.3976991823877798
+     },
+     {
+      "kind": "anticone",
+      "oracle": "bottom",
+      "run_seed": 1041510924,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.72421831393057,
+      "lL": 5.036516185627566,
+      "lU": 6.386545368015892
+     },
+     {
+      "kind": "cone",
+      "oracle": "top",
+      "run_seed": 390661236,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694306,
+      "lL": -3.275781686069431,
+      "lU": -3.0438119461701203
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 195,
+    "J": 19,
+    "r_dag": 5,
+    "x_out": 7.022446862090114,
+    "seed": 6496,
+    "runs": 763,
+    "closed": 763,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 763,
+    "invalid_good": 88,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 67,
+     "(ii) l <= A": 21,
+     "(ii) L <= A": 21
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.622464152201975,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "mid",
+      "run_seed": 1484346752,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9757816860694297,
+      "lL": -1.975781686069431,
+      "lU": -2.070049867070121
+     },
+     {
+      "kind": "wells",
+      "oracle": "high",
+      "run_seed": 279029330,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.235839094188024,
+      "lL": -2.0668216726025337,
+      "lU": -0.44435752040055965
+     },
+     {
+      "kind": "cone",
+      "oracle": "low",
+      "run_seed": 684919390,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.975781686069431,
+      "lL": -4.975071021072436,
+      "lU": -2.9700498670701223
+     },
+     {
+      "kind": "anticone",
+      "oracle": "bottom",
+      "run_seed": 99397593,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 4.7242183139305665,
+      "lL": 3.6242183139305695,
+      "lU": 4.52995013292988
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      3.0,
+      1
+     ],
+     [
+      0.2,
+      5
+     ]
+    ],
+    "inner": [
+     0.7,
+     2.0
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 460,
+    "J": 60,
+    "r_dag": 0,
+    "x_out": 1.239211133818874,
+    "seed": 6513,
+    "runs": 117,
+    "closed": 117,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 117,
+    "invalid_good": 61,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 61,
+     "(ii) L <= A": 61
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.7623118710768257,
+    "class_violation": 1.1102230246251565e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "random",
+      "run_seed": 553835485,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.9757816860694302,
+      "lL": -1.7700498670701208,
+      "lU": -1.3023519398777788
+     },
+     {
+      "kind": "anticone",
+      "oracle": "random",
+      "run_seed": 123443455,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.724218313930568,
+      "lL": 5.129950132929878,
+      "lU": 5.39568612675032
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "mid",
+      "run_seed": 1075032339,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.72421831393057,
+      "lL": 5.129950132929879,
+      "lU": 5.335606744111397
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "high",
+      "run_seed": 1126803084,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.6252677151110406,
+      "lL": 2.029950132929879,
+      "lU": 2.3778704613631962
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 205,
+    "J": 26,
+    "r_dag": 3,
+    "x_out": 3.3180069229847278,
+    "seed": 6530,
+    "runs": 405,
+    "closed": 405,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 405,
+    "invalid_good": 9,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 9,
+     "(ii) L <= A": 9
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.5709438123202055,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 916351009,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.1268140122652546,
+      "lL": -3.076907626812048,
+      "lU": -1.3591225308691597
+     },
+     {
+      "kind": "outer_plateau",
+      "oracle": "sticky_high",
+      "run_seed": 2142040486,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.5125565659978597,
+      "lL": -2.376907626812047,
+      "lU": -0.9202396781534805
+     },
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 1628486675,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.6839431506254083,
+      "lL": 0.7338495360786172,
+      "lU": 2.4352206002039365
+     },
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 1726691422,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.2446760883094776,
+      "lL": -3.217508203300092,
+      "lU": -1.6832242784431328
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 732,
+    "J": 50,
+    "r_dag": 1,
+    "x_out": 1.6782873744531033,
+    "seed": 6547,
+    "runs": 229,
+    "closed": 229,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 229,
+    "invalid_good": 44,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 14,
+     "(ii) l <= A": 30,
+     "(ii) L <= A": 30
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.363448890274833,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "top",
+      "run_seed": 2126588292,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.1268140122652555,
+      "lL": -3.126814012265255,
+      "lU": -3.9715435526399276
+     },
+     {
+      "kind": "anticone",
+      "oracle": "high",
+      "run_seed": 1596562799,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.473185987734747,
+      "lL": 6.523092373187953,
+      "lU": 7.137332434686757
+     },
+     {
+      "kind": "ridges",
+      "oracle": "high",
+      "run_seed": 1014969305,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.2766938095860034,
+      "lL": -3.1808061613867906,
+      "lU": -2.264252897184657
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "random",
+      "run_seed": 964401864,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.6268140122652541,
+      "lL": -0.5769076268120461,
+      "lU": -0.014846969448888414
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 209,
+    "J": 41,
+    "r_dag": 3,
+    "x_out": 2.7547990071848005,
+    "seed": 6564,
+    "runs": 312,
+    "closed": 312,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 312,
+    "invalid_good": 2,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 2
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.0424391057092803,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "low",
+      "run_seed": 1747728365,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.126814012265256,
+      "lL": -3.7268140122652547,
+      "lU": -3.190319754757453
+     },
+     {
+      "kind": "cone0",
+      "oracle": "low",
+      "run_seed": 1996459022,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.126814012265256,
+      "lL": -3.126814012265255,
+      "lU": -3.2083537434574536
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 200,
+    "J": 26,
+    "r_dag": 6,
+    "x_out": 7.022440323349845,
+    "seed": 6581,
+    "runs": 502,
+    "closed": 502,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 502,
+    "invalid_good": 5,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 5
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.69334653840928,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "sticky_low",
+      "run_seed": 131200113,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 4.490416091938001,
+      "lL": 2.2009322193946916,
+      "lU": 4.4395751469852085
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_low",
+      "run_seed": 1715310665,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.47318598773474,
+      "lL": 3.9906974306520295,
+      "lU": 6.229340358242546
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "low",
+      "run_seed": 694390023,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 3.6532595317184766,
+      "lL": 1.4707709746357613,
+      "lU": 3.4189096959226477
+     },
+     {
+      "kind": "anticone",
+      "oracle": "sticky_low",
+      "run_seed": 1003043446,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.4731859877347455,
+      "lL": 5.873185987734745,
+      "lU": 6.229340358242546
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.5,
+      3
+     ],
+     [
+      1.0,
+      2
+     ],
+     [
+      0.3,
+      2
+     ]
+    ],
+    "inner": [
+     2.5
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 469,
+    "J": 81,
+    "r_dag": 0,
+    "x_out": 1.237085043921033,
+    "seed": 6598,
+    "runs": 64,
+    "closed": 64,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 64,
+    "invalid_good": 38,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 38,
+     "(ii) L <= A": 38
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.9373383715445381,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 147138422,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.720445009443341,
+      "lL": -1.873905011561626,
+      "lU": -2.072176067669883
+     },
+     {
+      "kind": "cone0",
+      "oracle": "mid",
+      "run_seed": 211606599,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 6,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.1268140122652555,
+      "lL": -1.771543552639927,
+      "lU": -2.5233079605641255
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 864380846,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 6,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.1268140122652555,
+      "lL": -1.6715435526399256,
+      "lU": -2.4043595915909677
+     },
+     {
+      "kind": "outer_dip",
+      "oracle": "high",
+      "run_seed": 75949971,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.18223699845545127,
+      "lL": 0.5548206123336099,
+      "lU": 0.37812320793393006
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 205,
+    "J": 27,
+    "r_dag": 3,
+    "x_out": 3.3179628442595566,
+    "seed": 6615,
+    "runs": 459,
+    "closed": 459,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 459,
+    "invalid_good": 252,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 247,
+     "(ii) l <= A": 5,
+     "(ii) L <= A": 5
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.595517889501337,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "sticky_low",
+      "run_seed": 1565492921,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -2.476036137148194,
+      "lU": -4.183461632447063
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 1905855404,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 5.039746302205245,
+      "lU": 6.816538367552937
+     },
+     {
+      "kind": "anticone",
+      "oracle": "mid",
+      "run_seed": 1546266816,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851804,
+      "lL": 7.773963862851806,
+      "lU": 7.066538367552937
+     },
+     {
+      "kind": "cone0",
+      "oracle": "high",
+      "run_seed": 2071056432,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -2.476036137148194,
+      "lU": -3.1834616324470626
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 744,
+    "J": 52,
+    "r_dag": 1,
+    "x_out": 1.678060184072758,
+    "seed": 6632,
+    "runs": 231,
+    "closed": 231,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 231,
+    "invalid_good": 124,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 104,
+     "(ii) l <= A": 20,
+     "(ii) L <= A": 20
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.3035979769751584,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "mid",
+      "run_seed": 562995272,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -2.476036137148194,
+      "lU": -4.451248002404303
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "mid",
+      "run_seed": 1773142015,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.476036137148192,
+      "lL": -3.226036137148194,
+      "lU": -3.4459723833852456
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_high",
+      "run_seed": 413057516,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 8.539746302205245,
+      "lU": 8.833155514068812
+     },
+     {
+      "kind": "cone",
+      "oracle": "top",
+      "run_seed": 1766276366,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.4760361371481934,
+      "lL": -5.210253697794757,
+      "lU": -4.415454566770864
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 213,
+    "J": 42,
+    "r_dag": 3,
+    "x_out": 2.7547215905383244,
+    "seed": 6649,
+    "runs": 268,
+    "closed": 268,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 268,
+    "invalid_good": 150,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 149,
+     "(ii) l <= A": 1,
+     "(ii) L <= A": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.9446104568013374,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "top",
+      "run_seed": 77092303,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.023963862851808,
+      "lL": 4.551333508905245,
+      "lU": 6.0591841528529375
+     },
+     {
+      "kind": "linear",
+      "oracle": "bottom",
+      "run_seed": 1939518606,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.5239638628518053,
+      "lL": 0.05133350890524513,
+      "lU": 1.495706140323253
+     },
+     {
+      "kind": "outer_plateau",
+      "oracle": "random",
+      "run_seed": 636651576,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -0.9760361371481934,
+      "lL": -2.476036137148194,
+      "lU": -2.5348401380043026
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_low",
+      "run_seed": 1278834083,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.4760361371481934,
+      "lL": -2.476036137148194,
+      "lU": -4.388942104104303
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 201,
+    "J": 27,
+    "r_dag": 5,
+    "x_out": 7.0224392384123835,
+    "seed": 6666,
+    "runs": 474,
+    "closed": 474,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 474,
+    "invalid_good": 260,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 259,
+     "(ii) l <= A": 1,
+     "(ii) L <= A": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.7767920653476943,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone",
+      "oracle": "random",
+      "run_seed": 1718189222,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -5.710253697794757,
+      "lU": -3.7012480024043035
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 1212039512,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.476036137148194,
+      "lL": -3.976036137148194,
+      "lU": -3.4512480024043035
+     },
+     {
+      "kind": "wells",
+      "oracle": "sticky_low",
+      "run_seed": 921918347,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.265732115068127,
+      "lL": -6.473718793402769,
+      "lU": -4.696926728055075
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "top",
+      "run_seed": 431337766,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.524203273453879,
+      "lL": 3.2897463022052444,
+      "lU": 5.066538367552937
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      4.0,
+      2
+     ],
+     [
+      0.25,
+      4
+     ]
+    ],
+    "inner": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 475,
+    "J": 85,
+    "r_dag": 0,
+    "x_out": 1.2367318371349796,
+    "seed": 6683,
+    "runs": 84,
+    "closed": 84,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 84,
+    "invalid_good": 55,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 55,
+     "(ii) L <= A": 55
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.8031148352253501,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 460520523,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 4,
+       "(ii) L <= A": 1
+      },
+      "lA": 8.023963862851804,
+      "lL": 8.84675343591339,
+      "lU": 8.784532223573379
+     },
+     {
+      "kind": "linear",
+      "oracle": "random",
+      "run_seed": 224204681,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 4,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.7260361371481943,
+      "lL": -0.003246564086610171,
+      "lU": -0.06439806690677563
+     },
+     {
+      "kind": "dip",
+      "oracle": "sticky_low",
+      "run_seed": 1042539779,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 4,
+       "(ii) L <= A": 1
+      },
+      "lA": 2.5334178686322906,
+      "lL": 3.2259598948070627,
+      "lU": 2.9811060479402136
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_high",
+      "run_seed": 2066647877,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 5,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.476036137148193,
+      "lL": -1.5032465640866102,
+      "lU": -1.7528797054384948
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 199,
+    "J": 20,
+    "r_dag": 4,
+    "x_out": 3.3181044635349677,
+    "seed": 6700,
+    "runs": 453,
+    "closed": 453,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 453,
+    "invalid_good": 26,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 26,
+     "(ii) L <= A": 26
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.223026651094388,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone0",
+      "oracle": "high",
+      "run_seed": 242482537,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.463884954254237,
+      "lL": 5.552445486431995,
+      "lU": 6.956247397568127
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 1727822374,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.5469953877733542,
+      "lL": -0.44755451356800524,
+      "lU": 0.8587878267451126
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "bottom",
+      "run_seed": 1362798406,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.197520995108173,
+      "lL": 5.38608152728593,
+      "lU": 6.6924238675990475
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "high",
+      "run_seed": 1795214206,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.5897888326202962,
+      "lL": 0.7524454864319949,
+      "lU": 2.058787826745113
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 693,
+    "J": 38,
+    "r_dag": 3,
+    "x_out": 1.6787899697173143,
+    "seed": 6717,
+    "runs": 325,
+    "closed": 325,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 325,
+    "invalid_good": 44,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 43,
+     "(ii) l <= A": 1,
+     "(ii) L <= A": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.1545723900534584,
+    "class_violation": 1.4155343563970746e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "wells",
+      "oracle": "sticky_low",
+      "run_seed": 1427986731,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.9471418941421335,
+      "lL": -2.987248541176809,
+      "lU": -2.1809062008636904
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "low",
+      "run_seed": 898206054,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 5.46388495425424,
+      "lL": 4.552445486431995,
+      "lU": 5.358787826745113
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "top",
+      "run_seed": 229541904,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 5.4638849542542385,
+      "lL": 4.652445486431994,
+      "lU": 5.458787826745112
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "mid",
+      "run_seed": 2014825698,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 8.3052804314542,
+      "lL": 7.493840963631955,
+      "lU": 8.300183303945074
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 201,
+    "J": 31,
+    "r_dag": 4,
+    "x_out": 2.7549703110938086,
+    "seed": 6734,
+    "runs": 350,
+    "closed": 350,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 350,
+    "invalid_good": 7,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 6,
+     "(ii) L <= A": 6,
+     "(ii) A <= U": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.5721192183943882,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "linear",
+      "oracle": "bottom",
+      "run_seed": 312621321,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.8361150457457613,
+      "lL": -0.7622052277680056,
+      "lU": 0.3726552619681277
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "bottom",
+      "run_seed": 408138654,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.8361150457457616,
+      "lL": -1.7622052277680047,
+      "lU": -0.6273447380318724
+     },
+     {
+      "kind": "ridges",
+      "oracle": "low",
+      "run_seed": 1290237532,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -0.31915076373686846,
+      "lL": -1.5009690361591104,
+      "lU": -0.36610854642297896
+     },
+     {
+      "kind": "linear",
+      "oracle": "bottom",
+      "run_seed": 791944663,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 2.2638849542542387,
+      "lL": 2.327964715731996,
+      "lU": 3.4628252054681283
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 195,
+    "J": 20,
+    "r_dag": 4,
+    "x_out": 7.022442724342748,
+    "seed": 6751,
+    "runs": 482,
+    "closed": 482,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 482,
+    "invalid_good": 33,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 32,
+     "(ii) L <= A": 32,
+     "(ii) A <= U": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.223026651094388,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "twofibre",
+      "oracle": "bottom",
+      "run_seed": 756994146,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 3.7475320433049952,
+      "lL": 3.752445486431995,
+      "lU": 5.156247397568127
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 316179958,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.463884954254237,
+      "lL": 5.552445486431995,
+      "lU": 7.758800973339962
+     },
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 1240172139,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.8475423209508215,
+      "lL": -1.7589817887730645,
+      "lU": -0.3551798776369324
+     },
+     {
+      "kind": "twofibre",
+      "oracle": "high",
+      "run_seed": 1993004503,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.953382365072452,
+      "lL": 5.045744808386344,
+      "lU": 6.448285237563329
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      0.9,
+      1
+     ],
+     [
+      0.1,
+      4
+     ]
+    ],
+    "inner": [
+     3.0,
+     3.0
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 454,
+    "J": 61,
+    "r_dag": 0,
+    "x_out": 1.2378662572094352,
+    "seed": 6768,
+    "runs": 114,
+    "closed": 114,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 114,
+    "invalid_good": 48,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 48,
+     "(ii) L <= A": 48
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.6349155072870694,
+    "class_violation": 1.4155343563970746e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "linear",
+      "oracle": "sticky_high",
+      "run_seed": 165296999,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.363884954254237,
+      "lL": 4.556247397568126,
+      "lU": 4.870912607091658
+     },
+     {
+      "kind": "anticone",
+      "oracle": "mid",
+      "run_seed": 2033235434,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.463884954254235,
+      "lL": 5.6562473975681264,
+      "lU": 5.979877901234117
+     },
+     {
+      "kind": "cone0",
+      "oracle": "low",
+      "run_seed": 1386110812,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.8361150457457618,
+      "lL": -1.7437526024318726,
+      "lU": -1.4607264804988151
+     },
+     {
+      "kind": "cone",
+      "oracle": "random",
+      "run_seed": 828828781,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.8361150457457616,
+      "lL": -1.7475545135680046,
+      "lU": -1.3783851651687098
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 210,
+    "J": 30,
+    "r_dag": 2,
+    "x_out": 3.3179640579467833,
+    "seed": 6785,
+    "runs": 205,
+    "closed": 205,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 205,
+    "invalid_good": 18,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 18,
+     "(ii) L <= A": 18
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.9126461472691063,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone",
+      "oracle": "bottom",
+      "run_seed": 1351601255,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 7.926571881525807,
+      "lL": 7.9474384289612905,
+      "lU": 9.963257692988169
+     },
+     {
+      "kind": "cone",
+      "oracle": "high",
+      "run_seed": 714714908,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.7734281184741922,
+      "lL": -3.752561571038709,
+      "lU": -1.755935639590504
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "sticky_high",
+      "run_seed": 1987738894,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.7734281184741914,
+      "lL": -3.4614685709127064,
+      "lU": -1.7274747170776172
+     },
+     {
+      "kind": "outer_set",
+      "oracle": "high",
+      "run_seed": 677033697,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 1.5457586807097758,
+      "lL": 1.5474384289612901,
+      "lU": 3.7384345135871255
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 748,
+    "J": 59,
+    "r_dag": 1,
+    "x_out": 1.6780664402113723,
+    "seed": 6802,
+    "runs": 63,
+    "closed": 63,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 63,
+    "invalid_good": 33,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 30,
+     "(ii) L <= A": 30,
+     "(ii) A <= U": 3
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.538527429130277,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "twofibre",
+      "oracle": "random",
+      "run_seed": 48766567,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.773428118474192,
+      "lL": -3.4525615710387116,
+      "lU": -2.9914490867832084
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_low",
+      "run_seed": 2125498563,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.7734281184741896,
+      "lL": -3.7734281184741914,
+      "lU": -4.952293833094238
+     },
+     {
+      "kind": "anticone",
+      "oracle": "bottom",
+      "run_seed": 1750292382,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 3,
+       "(ii) L <= A": 1
+      },
+      "lA": 7.926571881525821,
+      "lL": 8.747438428961289,
+      "lU": 9.175442311036278
+     },
+     {
+      "kind": "linear",
+      "oracle": "top",
+      "run_seed": 567017735,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.426571881525811,
+      "lL": 5.54743842896129,
+      "lU": 5.9673748385464265
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 216,
+    "J": 49,
+    "r_dag": 2,
+    "x_out": 2.7547237222042864,
+    "seed": 6819,
+    "runs": 143,
+    "closed": 143,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 143,
+    "invalid_good": 5,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 4,
+     "(ii) L <= A": 4,
+     "(ii) A <= U": 1
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.3669980776003303,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone",
+      "oracle": "high",
+      "run_seed": 1854275406,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 7.926571881525811,
+      "lL": 8.248492511487296,
+      "lU": 9.484540370784192
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 1577343404,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.226571881525815,
+      "lL": 6.522254590587297,
+      "lU": 7.826027296508554
+     },
+     {
+      "kind": "cone",
+      "oracle": "bottom",
+      "run_seed": 919806216,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.773428118474192,
+      "lL": -3.7056094546127056,
+      "lU": -2.420635780840958
+     },
+     {
+      "kind": "cone0",
+      "oracle": "sticky_low",
+      "run_seed": 1123231337,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -3.7734281184741914,
+      "lL": -3.7734281184741914,
+      "lU": -4.267989519423178
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 202,
+    "J": 30,
+    "r_dag": 7,
+    "x_out": 7.022439268285008,
+    "seed": 6836,
+    "runs": 244,
+    "closed": 244,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 244,
+    "invalid_good": 14,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 14
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 4.039679143483942,
+    "class_violation": 2.1094237467877974e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "dip",
+      "oracle": "top",
+      "run_seed": 755992078,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.0683279530346503,
+      "lL": -1.115929053468058,
+      "lU": 1.9472815163708117
+     },
+     {
+      "kind": "linear",
+      "oracle": "sticky_low",
+      "run_seed": 523806263,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.426571881525808,
+      "lL": -0.5115399762620481,
+      "lU": 2.078135286319777
+     },
+     {
+      "kind": "ridges",
+      "oracle": "low",
+      "run_seed": 894500360,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -2.2939356893360427,
+      "lL": -5.184108735770395,
+      "lU": -2.5944334731885696
+     },
+     {
+      "kind": "anticone",
+      "oracle": "top",
+      "run_seed": 614550987,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 7.926571881525805,
+      "lL": 4.288460023737952,
+      "lU": 7.847706166905761
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      2.0,
+      4
+     ],
+     [
+      0.5,
+      4
+     ]
+    ],
+    "inner": [
+     1.3,
+     0.4
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 479,
+    "J": 98,
+    "r_dag": 0,
+    "x_out": 1.2367415639817583,
+    "seed": 6853,
+    "runs": 33,
+    "closed": 33,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 33,
+    "invalid_good": 19,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 19,
+     "(ii) L <= A": 19
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.0784692828928781,
+    "class_violation": 8.881784197001252e-16,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone0",
+      "oracle": "top",
+      "run_seed": 1059632016,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 4,
+       "(ii) L <= A": 1
+      },
+      "lA": 7.9265718815258035,
+      "lL": 8.84743842896129,
+      "lU": 8.493440040061149
+     },
+     {
+      "kind": "ridges",
+      "oracle": "mid",
+      "run_seed": 572597829,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 6,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.8352905395982901,
+      "lL": -0.8144239921628103,
+      "lU": -1.2059179904123014
+     },
+     {
+      "kind": "outer_plateau",
+      "oracle": "mid",
+      "run_seed": 259853043,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 6,
+       "(ii) L <= A": 1
+      },
+      "lA": -3.1411574635872466,
+      "lL": -1.9525615710387125,
+      "lU": -2.4262799634407144
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "bottom",
+      "run_seed": 927584813,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 6,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.626571881525812,
+      "lL": 7.847438428961291,
+      "lU": 7.342201237429069
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 200,
+    "J": 21,
+    "r_dag": 6,
+    "x_out": 3.318025510122142,
+    "seed": 6870,
+    "runs": 377,
+    "closed": 377,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 377,
+    "invalid_good": 90,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 68,
+     "(ii) l <= A": 22,
+     "(ii) L <= A": 22
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.117721598701368,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "dip",
+      "oracle": "low",
+      "run_seed": 843817410,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 1.2195126460561116,
+      "lL": -0.5767197195362685,
+      "lU": 0.6771872721733867
+     },
+     {
+      "kind": "linear",
+      "oracle": "sticky_high",
+      "run_seed": 1403580221,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -0.9636904949222456,
+      "lL": -0.5767197195362685,
+      "lU": 1.5410018791650992
+     },
+     {
+      "kind": "anticone",
+      "oracle": "random",
+      "run_seed": 2050124022,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.186309505077756,
+      "lL": 1.4732802804637313,
+      "lU": 2.7271872721733867
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "low",
+      "run_seed": 2097833035,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -0.1136904949222437,
+      "lL": -1.513690494922245,
+      "lU": -3.5228127278266137
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 730,
+    "J": 41,
+    "r_dag": 6,
+    "x_out": 1.6783831637304978,
+    "seed": 6887,
+    "runs": 406,
+    "closed": 406,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 406,
+    "invalid_good": 234,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 234
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.119061677670841,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "dip",
+      "oracle": "low",
+      "run_seed": 933542475,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 2.2630859609183016,
+      "lL": -0.5143969862176174,
+      "lU": 0.580339545777973
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "low",
+      "run_seed": 572697134,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.3136904949222452,
+      "lL": -1.513690494922245,
+      "lU": -6.119660454222027
+     },
+     {
+      "kind": "ridges",
+      "oracle": "sticky_low",
+      "run_seed": 603665832,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.1365630263893038,
+      "lL": -7.237269517684678,
+      "lU": -6.142532985689086
+     },
+     {
+      "kind": "cone",
+      "oracle": "random",
+      "run_seed": 1882668748,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.3136904949222448,
+      "lL": -1.4136904949222444,
+      "lU": -6.019660454222027
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 212,
+    "J": 34,
+    "r_dag": 6,
+    "x_out": 2.754831651498844,
+    "seed": 6904,
+    "runs": 434,
+    "closed": 434,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 434,
+    "invalid_good": 131,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 77,
+     "(ii) l <= A": 54,
+     "(ii) L <= A": 54
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.4668141660013683,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "linear",
+      "oracle": "high",
+      "run_seed": 1012977044,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -0.11369049492224637,
+      "lL": -1.3136904949222448,
+      "lU": -4.232642784326613
+     },
+     {
+      "kind": "wells",
+      "oracle": "mid",
+      "run_seed": 695999377,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -4.2410152059842785,
+      "lL": -4.185206908263234,
+      "lU": -2.718392742261867
+     },
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 799343011,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.6705362132798314,
+      "lL": -2.599842276393856,
+      "lU": -1.1330281103924886
+     },
+     {
+      "kind": "cone",
+      "oracle": "random",
+      "run_seed": 1900682066,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.3136904949222443,
+      "lL": -1.7136904949222451,
+      "lU": -5.250676773026614
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 196,
+    "J": 21,
+    "r_dag": 6,
+    "x_out": 7.022440780860763,
+    "seed": 6921,
+    "runs": 618,
+    "closed": 618,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 618,
+    "invalid_good": 127,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 81,
+     "(ii) l <= A": 46,
+     "(ii) L <= A": 46
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.117721598701369,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 352114176,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": 6.186309505077753,
+      "lL": 0.6232802804637316,
+      "lU": 1.877187272173387
+     },
+     {
+      "kind": "anticone",
+      "oracle": "sticky_high",
+      "run_seed": 2075726044,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": 6.186309505077753,
+      "lL": 6.723280280463731,
+      "lU": 7.9275227303131945
+     },
+     {
+      "kind": "ridges",
+      "oracle": "bottom",
+      "run_seed": 839365214,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.8596167340711025,
+      "lL": -2.501900327039462,
+      "lU": -0.3841787283380946
+     },
+     {
+      "kind": "wells",
+      "oracle": "sticky_low",
+      "run_seed": 1113415069,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -4.4977795600068475,
+      "lL": -9.970231178876237,
+      "lU": -8.716324187166581
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      6.0,
+      1
+     ],
+     [
+      0.05,
+      6
+     ]
+    ],
+    "inner": [
+     1.0,
+     0.2
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 466,
+    "J": 67,
+    "r_dag": 2,
+    "x_out": 1.2372339516019135,
+    "seed": 6938,
+    "runs": 157,
+    "closed": 157,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 157,
+    "invalid_good": 92,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) A <= U": 36,
+     "(ii) l <= A": 56,
+     "(ii) L <= A": 56
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.5684925936249587,
+    "class_violation": 1.7763568394002505e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "cone0",
+      "oracle": "mid",
+      "run_seed": 1483795343,
+      "good": true,
+      "viol": {
+       "(ii) A <= U": 1
+      },
+      "lA": -1.313690494922243,
+      "lL": -1.3136904949222448,
+      "lU": -6.219660454222027
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 852971550,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 5.46120330929783,
+      "lL": 5.873280280463732,
+      "lU": 6.1764551252807065
+     },
+     {
+      "kind": "cone",
+      "oracle": "mid",
+      "run_seed": 1654664683,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.3136904949222439,
+      "lL": -0.9267197195362691,
+      "lU": -0.612683507710668
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "top",
+      "run_seed": 1280848513,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.3136904949222448,
+      "lL": -0.976719719536268,
+      "lU": -0.675820217428311
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "EXT",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 200,
+    "J": 21,
+    "r_dag": 3,
+    "x_out": 3.3181957544729377,
+    "seed": 6955,
+    "runs": 473,
+    "closed": 473,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 473,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.6865976564591643,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "BND",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 716,
+    "J": 41,
+    "r_dag": 1,
+    "x_out": 1.6792601783771286,
+    "seed": 6972,
+    "runs": 191,
+    "closed": 191,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 191,
+    "invalid_good": 32,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 26,
+     "(ii) L <= A": 26,
+     "(ii) A <= U": 6
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 1.3749505503927284,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "linear",
+      "oracle": "high",
+      "run_seed": 1319006295,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -1.5829029538175297,
+      "lL": -1.5071447939531195,
+      "lU": -0.5940438385756266
+     },
+     {
+      "kind": "linear",
+      "oracle": "bottom",
+      "run_seed": 31002271,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 0.6170970461824705,
+      "lL": 0.9928552060468805,
+      "lU": 1.5869399240521807
+     },
+     {
+      "kind": "outer_cone",
+      "oracle": "high",
+      "run_seed": 744003734,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -2.702902953817527,
+      "lL": -2.6760005616493685,
+      "lU": -1.817179745640046
+     },
+     {
+      "kind": "wells",
+      "oracle": "bottom",
+      "run_seed": 457005509,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 1,
+       "(ii) L <= A": 1
+      },
+      "lA": -6.84253666317788,
+      "lL": -6.727758967523389,
+      "lU": -5.905806524446079
+     }
+    ]
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "generic",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 204,
+    "J": 33,
+    "r_dag": 3,
+    "x_out": 2.7551306277829286,
+    "seed": 6989,
+    "runs": 385,
+    "closed": 385,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 385,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.035690223759164,
+    "class_violation": 2.7200464103316335e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "theta=e^6",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 196,
+    "J": 21,
+    "r_dag": 5,
+    "x_out": 7.0224449717063315,
+    "seed": 7006,
+    "runs": 473,
+    "closed": 473,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 473,
+    "invalid_good": 0,
+    "invalid_bad": 0,
+    "viol_good": {},
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 2.9000451392999085,
+    "class_violation": 3.1086244689504383e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": []
+   },
+   {
+    "outer": [
+     [
+      1.37,
+      2
+     ],
+     [
+      0.83,
+      2
+     ],
+     [
+      0.29,
+      2
+     ]
+    ],
+    "inner": [
+     2.11,
+     0.61
+    ],
+    "design": "theta=0.02",
+    "tables": "CONTROL: uniform tables for the smallest slope",
+    "K": 460,
+    "J": 66,
+    "r_dag": 0,
+    "x_out": 1.2385969331261686,
+    "seed": 7023,
+    "runs": 87,
+    "closed": 87,
+    "aborted": 0,
+    "tie_aborts": 0,
+    "good": 87,
+    "invalid_good": 55,
+    "invalid_bad": 0,
+    "viol_good": {
+     "(ii) l <= A": 55,
+     "(ii) L <= A": 55
+    },
+    "viol_bad": {},
+    "det_viol": {},
+    "max_width": 0.9072165959586402,
+    "class_violation": 1.887379141862766e-15,
+    "div_runs": 0,
+    "div_invalid": 0,
+    "div_too_wide": 0,
+    "div_aborted": 0,
+    "div_bad_certificates": 0,
+    "div_over_budget": 0,
+    "examples": [
+     {
+      "kind": "anticone",
+      "oracle": "sticky_high",
+      "run_seed": 604703325,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 5,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.997097046182469,
+      "lL": 5.97285520604688,
+      "lU": 5.619428471669274
+     },
+     {
+      "kind": "anticone",
+      "oracle": "low",
+      "run_seed": 1312245105,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 2,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.997097046182469,
+      "lL": 5.58285520604688,
+      "lU": 5.507659258530543
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "mid",
+      "run_seed": 1952489014,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 4,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.99709704618247,
+      "lL": 5.692855206046879,
+      "lU": 5.600860812462082
+     },
+     {
+      "kind": "anticone0",
+      "oracle": "sticky_high",
+      "run_seed": 789863150,
+      "good": true,
+      "viol": {
+       "(ii) l <= A": 4,
+       "(ii) L <= A": 1
+      },
+      "lA": 4.99709704618247,
+      "lL": 5.99285520604688,
+      "lU": 5.627252076749708
+     }
+    ]
+   }
+  ]
+ },
+ "seconds": 572.237158536911
+}

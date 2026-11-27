@@ -1,0 +1,53 @@
+rational    bond+angle K= 1 n=   5 dimSym=   6 rank_p=   6 target=   6 seed=0 OK
+rational    bond+angle K= 2 n=  12 dimSym=  21 rank_p=  20 target=  20 seed=0 OK
+rational    bond+angle K= 3 n=  23 dimSym=  45 rank_p=  43 target=  43 seed=0 OK
+rational    bond+angle K= 4 n=  39 dimSym=  78 rank_p=  75 target=  75 seed=0 OK
+rational    bond+angle K= 5 n=  60 dimSym= 120 rank_p= 116 target= 116 seed=0 OK
+rational    bond+angle K= 6 n=  85 dimSym= 171 rank_p= 166 target= 166 seed=0 OK
+rational    bond+angle K= 7 n= 114 dimSym= 231 rank_p= 225 target= 225 seed=0 OK
+rational    bond+angle K= 8 n= 148 dimSym= 300 rank_p= 293 target= 293 seed=0 OK
+rational    bond+angle K= 9 n= 187 dimSym= 378 rank_p= 370 target= 370 seed=0 OK
+rational    bond+angle K=10 n= 230 dimSym= 465 rank_p= 456 target= 456 seed=0 OK
+rational    bond+angle K=11 n= 277 dimSym= 561 rank_p= 551 target= 551 seed=0 OK
+rational    bond+angle K=12 n= 329 dimSym= 666 rank_p= 655 target= 655 seed=0 OK
+rational    bonds only K= 1 n=   7 dimSym=   6 rank_p=   6 target=   6 seed=0 OK
+rational    bonds only K= 2 n=  21 dimSym=  21 rank_p=  20 target=  20 seed=0 OK
+rational    bonds only K= 3 n=  44 dimSym=  45 rank_p=  43 target=  43 seed=0 OK
+rational    bonds only K= 4 n=  76 dimSym=  78 rank_p=  75 target=  75 seed=0 OK
+rational    bonds only K= 5 n= 117 dimSym= 120 rank_p= 116 target= 116 seed=0 OK
+rational    bonds only K= 6 n= 167 dimSym= 171 rank_p= 166 target= 166 seed=0 OK
+rational    bonds only K= 7 n= 226 dimSym= 231 rank_p= 225 target= 225 seed=0 OK
+rational    bonds only K= 8 n= 294 dimSym= 300 rank_p= 293 target= 293 seed=0 OK
+rational    bonds only K= 9 n= 371 dimSym= 378 rank_p= 370 target= 370 seed=0 OK
+rational    bonds only K=10 n= 457 dimSym= 465 rank_p= 456 target= 456 seed=0 OK
+rational    bonds only K=11 n= 552 dimSym= 561 rank_p= 551 target= 551 seed=0 OK
+rational    bonds only K=12 n= 656 dimSym= 666 rank_p= 655 target= 655 seed=0 OK
+tetrahedral bond+angle K= 1 n=   5 dimSym=   6 rank_p=   6 target=   6 seed=0 OK
+tetrahedral bond+angle K= 2 n=  12 dimSym=  21 rank_p=  20 target=  20 seed=0 OK
+tetrahedral bond+angle K= 3 n=  23 dimSym=  45 rank_p=  43 target=  43 seed=0 OK
+tetrahedral bond+angle K= 4 n=  39 dimSym=  78 rank_p=  75 target=  75 seed=0 OK
+tetrahedral bond+angle K= 5 n=  60 dimSym= 120 rank_p= 116 target= 116 seed=0 OK
+tetrahedral bond+angle K= 6 n=  85 dimSym= 171 rank_p= 166 target= 166 seed=0 OK
+tetrahedral bond+angle K= 7 n= 114 dimSym= 231 rank_p= 225 target= 225 seed=0 OK
+tetrahedral bond+angle K= 8 n= 148 dimSym= 300 rank_p= 293 target= 293 seed=0 OK
+tetrahedral bond+angle K= 9 n= 187 dimSym= 378 rank_p= 370 target= 370 seed=0 OK
+tetrahedral bond+angle K=10 n= 230 dimSym= 465 rank_p= 456 target= 456 seed=0 OK
+tetrahedral bond+angle K=11 n= 277 dimSym= 561 rank_p= 551 target= 551 seed=0 OK
+tetrahedral bond+angle K=12 n= 329 dimSym= 666 rank_p= 655 target= 655 seed=0 OK
+tetrahedral bonds only K= 1 n=   7 dimSym=   6 rank_p=   6 target=   6 seed=0 OK
+tetrahedral bonds only K= 2 n=  21 dimSym=  21 rank_p=  20 target=  20 seed=0 OK
+tetrahedral bonds only K= 3 n=  44 dimSym=  45 rank_p=  43 target=  43 seed=0 OK
+tetrahedral bonds only K= 4 n=  76 dimSym=  78 rank_p=  75 target=  75 seed=0 OK
+tetrahedral bonds only K= 5 n= 117 dimSym= 120 rank_p= 116 target= 116 seed=0 OK
+tetrahedral bonds only K= 6 n= 167 dimSym= 171 rank_p= 166 target= 166 seed=0 OK
+tetrahedral bonds only K= 7 n= 226 dimSym= 231 rank_p= 225 target= 225 seed=0 OK
+tetrahedral bonds only K= 8 n= 294 dimSym= 300 rank_p= 293 target= 293 seed=0 OK
+tetrahedral bonds only K= 9 n= 371 dimSym= 378 rank_p= 370 target= 370 seed=0 OK
+tetrahedral bonds only K=10 n= 457 dimSym= 465 rank_p= 456 target= 456 seed=0 OK
+tetrahedral bonds only K=11 n= 552 dimSym= 561 rank_p= 551 target= 551 seed=0 OK
+tetrahedral bonds only K=12 n= 656 dimSym= 666 rank_p= 655 target= 655 seed=0 OK
+ALL OK
+
+real	0m36.706s
+user	0m35.383s
+sys	0m0.207s

@@ -1,0 +1,20 @@
+numpy 2.5.3
+binomial(2^59, p): expected mean | Generator.binomial | legacy RandomState.binomial   (4000 draws each)
+  p = 1e-15         576.5 |      576.3 |      576.7
+  p = 1e-16         57.65 |      57.32 |      57.53
+  p = 9e-17         51.88 |      51.91 |      51.95
+  p = 3e-17         17.29 |      17.31 |          0
+  p = 1e-17         5.765 |      5.811 |          0
+  p = 1e-18        0.5765 |     0.5757 |          0
+  p = 1e-19       0.05765 |    0.05875 |          0
+  p = 1e-20      0.005765 |     0.0055 |          0
+Generator.multinomial(2^59, shells of Q_300), 300 draws: shell, expected count, observed mean
+   75      0.2772      0.2533
+   78       6.826       6.997
+   81       143.9       142.3
+   84        2608        2606
+  216        2608        2611
+  219       143.9        80.2
+  222       6.826           0
+  225      0.2772           0
+  sum over shells >= 216: expected 4228.4, observed 4086.7

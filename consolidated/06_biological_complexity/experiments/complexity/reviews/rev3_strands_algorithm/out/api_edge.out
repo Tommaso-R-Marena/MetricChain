@@ -1,0 +1,6 @@
+GCx2 as one species            : [Fraction(2, 1), Fraction(3, 2), Fraction(5, 4)] (correct: 2, 3/2, 5/4)
+GCx2 passed as two "species"   : [Fraction(3, 1), Fraction(3, 1), Fraction(3, 1)] (no check that species are distinct)
+zero-count species             : [Fraction(2, 1), Fraction(3, 2), Fraction(5, 4)]
+zero count with gcd  (GC x2, GGC x0, CC x4): 0 0
+hairpins < 3 forbidden by weight 0, single strand GGGAAACCC: alpha=1 -> 20 ; alpha=0 -> 20 (alpha = 0 counts the forbidden structures too: 0**0 == 1)
+20

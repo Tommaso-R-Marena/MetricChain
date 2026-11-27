@@ -1,0 +1,64 @@
+regression poly-Ala n=1: atom names identical True; max |coordinate difference| = 0.0e+00 A
+regression poly-Ala n=3: atom names identical True; max |coordinate difference| = 0.0e+00 A
+
+VVV: atoms=60 nchi=3 net charge -0.0000; setup 0.3s; OpenMM Reference 9.57 ms/conf; FastFF 0.826 ms/conf; 71 of 120 conformations with clash score > 0.5
+   max bond dev 2.22e-15 A (all 59 force-field bonds); angle dev from equilibrium (deg): max 2.623, angles with |dev| > 0.01: 76 of 216; spread over conformations 2.54e-13
+   max dihedral error (phi, psi, chi) 1.11e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 1.713e-27..8.254e-27; angle energy 0.317727..0.317727 kcal/mol (spread 2.0e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 1.4e-14; lj 7.7e-13; coul 1.1e-12; gbn2 1.9e-12; sa 6.6e-13; obc2 1.4e-12; ff99SB_tors 1.1e-14; ff99SB_nb 6.8e-13; ff99SB_bonded_const 5.7e-14; ff03_tors 7.1e-15; ff03_nb 6.8e-13; ff03_bonded_const 5.7e-14; ff15ipq_tors 7.1e-15; ff15ipq_nb 1.5e-12; ff15ipq_bonded_const 7.8e-14; 
+   ranges on clash-free conformations: GBn2 -37.5..-23.0; coul -102.1..-81.0; lj 14.9..624.1 kcal/mol
+
+LLL: atoms=69 nchi=6 net charge +0.0000; setup 0.3s; OpenMM Reference 9.82 ms/conf; FastFF 0.873 ms/conf; 6 of 120 conformations with clash score > 0.5
+   max bond dev 1.78e-15 A (all 68 force-field bonds); angle dev from equilibrium (deg): max 2.623, angles with |dev| > 0.01: 82 of 252; spread over conformations 2.29e-13
+   max dihedral error (phi, psi, chi) 1.33e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 2.047e-27..9.148e-27; angle energy 0.318681..0.318681 kcal/mol (spread 1.7e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 7.1e-15; lj 1.1e-12; coul 5.1e-13; gbn2 8.2e-13; sa 8.3e-13; obc2 9.8e-13; ff99SB_tors 7.1e-15; ff99SB_nb 3.0e-13; ff99SB_bonded_const 3.0e-14; ff03_tors 7.1e-15; ff03_nb 5.1e-13; ff03_bonded_const 4.3e-14; ff15ipq_tors 3.6e-15; ff15ipq_nb 5.7e-13; ff15ipq_bonded_const 3.6e-14; 
+   ranges on clash-free conformations: GBn2 -33.9..-24.7; coul -104.1..-92.2; lj 95.0..277.6 kcal/mol
+
+SSS: atoms=45 nchi=6 net charge +0.0000; setup 0.2s; OpenMM Reference 7.13 ms/conf; FastFF 0.529 ms/conf; 104 of 120 conformations with clash score > 0.5
+   max bond dev 1.78e-15 A (all 44 force-field bonds); angle dev from equilibrium (deg): max 2.623, angles with |dev| > 0.01: 40 of 150; spread over conformations 2.29e-13
+   max dihedral error (phi, psi, chi) 1.78e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 1.314e-27..6.478e-27; angle energy 0.316681..0.316681 kcal/mol (spread 1.3e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 1.4e-14; lj 2.5e-12; coul 2.9e-12; gbn2 1.7e-12; sa 9.8e-13; obc2 2.0e-12; ff99SB_tors 1.4e-14; ff99SB_nb 5.7e-13; ff99SB_bonded_const 8.5e-14; ff03_tors 1.4e-14; ff03_nb 6.3e-13; ff03_bonded_const 2.6e-13; ff15ipq_tors 5.3e-15; ff15ipq_nb 1.4e-12; ff15ipq_bonded_const 1.4e-13; 
+   ranges on clash-free conformations: GBn2 -68.8..-32.9; coul -64.8..-12.6; lj 2.2..1508.3 kcal/mol
+
+FFF: atoms=72 nchi=6 net charge +0.0000; setup 0.2s; OpenMM Reference 9.97 ms/conf; FastFF 1.357 ms/conf; 45 of 120 conformations with clash score > 0.5
+   max bond dev 6.88e-15 A (all 74 force-field bonds); angle dev from equilibrium (deg): max 5.098, angles with |dev| > 0.01: 40 of 252; spread over conformations 4.07e-13
+   max dihedral error (phi, psi, chi) 1.33e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 2.955e-27..3.981e-26; angle energy 1.147109..1.147109 kcal/mol (spread 3.8e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 7.1e-15; lj 3.3e-12; coul 2.0e-12; gbn2 1.7e-12; sa 1.1e-12; obc2 1.2e-12; ff99SB_tors 1.1e-14; ff99SB_nb 1.3e-12; ff99SB_bonded_const 1.7e-13; ff03_tors 1.4e-14; ff03_nb 1.3e-12; ff03_bonded_const 1.4e-13; ff15ipq_tors 7.1e-15; ff15ipq_nb 1.8e-12; ff15ipq_bonded_const 2.8e-14; 
+   ranges on clash-free conformations: GBn2 -39.7..-29.2; coul -41.2..-24.8; lj 7.5..792.5 kcal/mol
+
+KKK: atoms=78 nchi=12 net charge +3.0000; setup 0.3s; OpenMM Reference 11.40 ms/conf; FastFF 1.145 ms/conf; 12 of 120 conformations with clash score > 0.5
+   max bond dev 2.00e-15 A (all 77 force-field bonds); angle dev from equilibrium (deg): max 2.623, angles with |dev| > 0.01: 76 of 288; spread over conformations 2.29e-13
+   max dihedral error (phi, psi, chi) 1.33e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 2.584e-27..1.414e-26; angle energy 0.438509..0.438509 kcal/mol (spread 2.2e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 1.4e-14; lj 9.1e-13; coul 6.0e-13; gbn2 2.4e-12; sa 7.8e-13; obc2 1.3e-12; ff99SB_tors 1.4e-14; ff99SB_nb 8.0e-13; ff99SB_bonded_const 1.1e-13; ff03_tors 1.4e-14; ff03_nb 9.1e-13; ff03_bonded_const 1.1e-13; ff15ipq_tors 4.4e-15; ff15ipq_nb 9.1e-13; ff15ipq_bonded_const 1.1e-13; 
+   ranges on clash-free conformations: GBn2 -350.2..-300.8; coul 169.0..223.0; lj 18.7..616.5 kcal/mol
+
+EEE: atoms=57 nchi=9 net charge -3.0000; setup 0.2s; OpenMM Reference 7.50 ms/conf; FastFF 0.500 ms/conf; 38 of 120 conformations with clash score > 0.5
+   max bond dev 2.22e-15 A (all 56 force-field bonds); angle dev from equilibrium (deg): max 2.623, angles with |dev| > 0.01: 46 of 198; spread over conformations 2.04e-13
+   max dihedral error (phi, psi, chi) 1.78e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 1.778e-27..9.112e-27; angle energy 0.423441..0.423441 kcal/mol (spread 2.8e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 2.1e-14; lj 3.4e-12; coul 5.9e-12; gbn2 3.2e-12; sa 5.9e-13; obc2 2.5e-12; ff99SB_tors 7.1e-15; ff99SB_nb 4.3e-12; ff99SB_bonded_const 2.3e-13; ff03_tors 1.4e-14; ff03_nb 5.0e-12; ff03_bonded_const 2.3e-13; ff15ipq_tors 1.4e-14; ff15ipq_nb 1.8e-12; ff15ipq_bonded_const 2.3e-13; 
+   ranges on clash-free conformations: GBn2 -461.0..-362.6; coul 82.7..203.6; lj 10.8..1632.4 kcal/mol
+
+LKSE: atoms=79 nchi=11 net charge +0.0000; setup 0.3s; OpenMM Reference 11.55 ms/conf; FastFF 1.270 ms/conf; 11 of 120 conformations with clash score > 0.5
+   max bond dev 2.22e-15 A (all 78 force-field bonds); angle dev from equilibrium (deg): max 2.623, angles with |dev| > 0.01: 76 of 284; spread over conformations 3.06e-13
+   max dihedral error (phi, psi, chi) 1.78e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 2.903e-27..1.439e-26; angle energy 0.498934..0.498934 kcal/mol (spread 2.5e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 1.4e-14; lj 6.0e-13; coul 6.7e-13; gbn2 2.6e-12; sa 1.1e-12; obc2 3.4e-12; ff99SB_tors 2.1e-14; ff99SB_nb 1.2e-12; ff99SB_bonded_const 5.7e-14; ff03_tors 1.4e-14; ff03_nb 6.6e-13; ff03_bonded_const 5.7e-14; ff15ipq_tors 4.2e-15; ff15ipq_nb 5.5e-13; ff15ipq_bonded_const 5.7e-14; 
+   ranges on clash-free conformations: GBn2 -171.4..-98.7; coul -73.6..-13.7; lj 13.6..382.2 kcal/mol
+
+LKSELKSE: atoms=146 nchi=22 net charge +0.0000; setup 0.4s; OpenMM Reference 29.07 ms/conf; FastFF 4.209 ms/conf; 5 of 120 conformations with clash score > 0.5
+   max bond dev 4.88e-15 A (all 145 force-field bonds); angle dev from equilibrium (deg): max 2.623, angles with |dev| > 0.01: 136 of 532; spread over conformations 4.33e-13
+   max dihedral error (phi, psi, chi) 4.44e-15 rad; chiral volume at CA 2.508..2.508 A^3 (L: > 0)
+   bond energy 7.523e-27..9.801e-26; angle energy 0.997357..0.997357 kcal/mol (spread 4.9e-14)
+   max |FastFF - OpenMM Reference| (kcal/mol, clash-free conformations): tors 2.8e-14; lj 3.2e-12; coul 4.8e-12; gbn2 1.2e-11; sa 1.8e-12; obc2 1.1e-11; ff99SB_tors 1.4e-14; ff99SB_nb 1.8e-12; ff99SB_bonded_const 5.7e-14; ff03_tors 1.4e-14; ff03_nb 1.6e-12; ff03_bonded_const 5.7e-14; ff15ipq_tors 7.5e-15; ff15ipq_nb 2.8e-12; ff15ipq_bonded_const 2.3e-13; 
+   ranges on clash-free conformations: GBn2 -376.3..-244.7; coul -104.1..62.1; lj 193.8..851.9 kcal/mol
+
+worst over all systems: {'tors': '2.8e-14', 'lj': '3.4e-12', 'coul': '5.9e-12', 'gbn2': '1.2e-11', 'sa': '1.8e-12', 'obc2': '1.1e-11', 'ff99SB_tors': '2.1e-14', 'ff99SB_nb': '4.3e-12', 'ff99SB_bonded_const': '2.3e-13', 'ff03_tors': '1.4e-14', 'ff03_nb': '5.0e-12', 'ff03_bonded_const': '2.6e-13', 'ff15ipq_tors': '1.4e-14', 'ff15ipq_nb': '2.8e-12', 'ff15ipq_bonded_const': '2.3e-13'}
+
+real	0m15.449s
+user	0m14.225s
+sys	0m1.047s

@@ -1,0 +1,19 @@
+labelled keys carrying >= 2 planar networks with different INV (first 302 parents): 26
+
+KEY: ((((((((0,5),1),2),3),[[4]]),[[4]]),[[4]]),[[4]])
+  N1: root 6; 6->[15, 14]; 7->[8, 3]; 8->[9, 2]; 9->[10, 1]; 10->[0, 5]; 11->[7, 16]; 12->[4]; 13->[11, 14]; 14->[12]; 15->[13, 16]; 16->[12]
+      planar (wheel test): True; authors' unfolding_key: ((((((((L0,L5),L1),L2),L3),[[L4]]),[[L4]]),[[L4]]),[[L4]])
+  N2: root 6; 6->[13, 14]; 7->[8, 3]; 8->[9, 2]; 9->[10, 1]; 10->[0, 5]; 11->[15, 16]; 12->[4]; 13->[11, 14]; 14->[12]; 15->[7, 16]; 16->[12]
+      planar (wheel test): True; authors' unfolding_key: ((((((((L0,L5),L1),L2),L3),[[L4]]),[[L4]]),[[L4]]),[[L4]])
+  isomorphic (leaf labels fixed, networkx): False
+  same authors' key: True  same split system: True  same set of displayed trees: True
+
+KEY: ((((((((5,[[4]]),0),1),2),3),[[4]]),[[4]]),[[4]])
+  N1: root 6; 6->[13, 14]; 7->[8, 3]; 8->[9, 2]; 9->[10, 1]; 10->[0, 15]; 11->[7, 16]; 12->[4]; 13->[11, 14]; 14->[12]; 15->[5, 16]; 16->[12]
+      planar (wheel test): True; authors' unfolding_key: ((((((((L5,[[L4]]),L0),L1),L2),L3),[[L4]]),[[L4]]),[[L4]])
+  N2: root 6; 6->[13, 12]; 7->[8, 3]; 8->[9, 2]; 9->[10, 1]; 10->[0, 15]; 11->[7, 12]; 12->[14]; 13->[11, 16]; 14->[4]; 15->[5, 16]; 16->[14]
+      planar (wheel test): True; authors' unfolding_key: ((((((((L5,[[L4]]),L0),L1),L2),L3),[[L4]]),[[L4]]),[[L4]])
+  isomorphic (leaf labels fixed, networkx): False
+  same authors' key: True  same split system: True  same set of displayed trees: True
+
+among 26 colliding keys examined: all pairs non-isomorphic; same split system 26, different 0; same set of displayed trees 26, different 0

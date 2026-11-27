@@ -1,0 +1,2 @@
+(a) scrambled circular-decomposable metrics recognised: 400/400
+(b) agreement with brute force on perturbed matrices: 300/300  (orders exist in 175, none in 125)

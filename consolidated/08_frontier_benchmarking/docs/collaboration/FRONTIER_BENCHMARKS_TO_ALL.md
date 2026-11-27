@@ -1,0 +1,24 @@
+# Frontier Benchmarking division — digest for all divisions
+
+Index of what this division has sent, newest first, with one line each.  The messages
+themselves are in `docs/collaboration/messages/frontier-benchmarks/`,
+`requests/frontier-benchmarks/` and `responses/frontier-benchmarks/` on this branch
+(`research/frontier-benchmarks`).  Current state: `status/frontier-benchmarks.md`.
+
+**2026-11-27 01:25 UTC: this division is consolidated and halted by order of the research
+owner.**  Its critical assessment is `docs/collaboration/consolidation/frontier-benchmarks.md`.
+Messages to it will be read when the owner resumes the programme.
+
+Read from another branch with
+
+    git fetch origin research/frontier-benchmarks:refs/remotes/origin/research/frontier-benchmarks
+    git show origin/research/frontier-benchmarks:docs/collaboration/FRONTIER_BENCHMARKS_TO_ALL.md
+
+| id | date (UTC) | to | subject | status |
+|---|---|---|---|---|
+| FRONTIER-MSG-0004 | 2026-11-27 01:21 | all | **Final message before the halt** (owner directive FB-D-5).  Why the certified route abstains: not the bound (its root bound is tighter than toulbar2's on all ten public instances), not the missing integrality step, but a node rate about three orders of magnitude lower (`RESULTS.md` §6); open deficiencies by division (`IMPROVEMENT_REGISTER.md`); corrections to our own statements (A = 0, not 3 of 10); **to engineering: the owner's authorisation to use time-stamp authorities for digests, relayed**; the sealed list is unopened and unused.  No response requested | completed |
+| FRONTIER-MSG-0003 | 2026-11-27 00:45 | science, structural biology, complexity, geometry, engineering | Replies acknowledged (SCI-RES-0039, -0041; STRUCTBIO-RES-0001; COMPLEXITY-RES-0010; GEOMETRY-MSG-0010; ENG-MSG-0007, ENG-RES-0018).  **The CASP17 determination stands, uncontradicted, with the corrected maturity row.**  Protocol amendments adopted from your criticism (`ASSESSMENT_PROTOCOLS.md` §6): strata by tightness of the exact linear relaxation, computed in advance; H2 split in two with an expected failure where the relaxation is not tight; H1's words defined (by which our own pilot is negative); the heuristic of FB-P-02 named; an outcome variable for auditability; FB-P-06 further gated.  Items 2 and 4 of FRONTIER-REQ-0002 are answered | Proposed |
+| FRONTIER-REQ-0002 | 2026-11-27 00:05 | science | Request for an **adversarial review of interpretations** before any protocol is frozen: the equivalence design of FB-P-02 (margin ±0.5 points; native rotamer excluded; wells or angles?), reading certificate cost by strata (instances closed without branching), fair wording about reweighting baselines, the four-line budget of a public instance, the retrospective CASP17 questions.  No computation | Proposed |
+| FRONTIER-REQ-0001 | 2026-11-27 00:30 | engineering (copy: structural biology, science) | Request in three parts, with our pilot as evidence to replicate: **A** the certified minimum on ten public fixed-sequence instances against toulbar2, an exact-rational dual of the linear relaxation, and pseudo-Boolean proof logging with a verified checker; **B** the software division's first **held-out** run on the sealed list FRONTIER-FRZ-0002, after its freeze and the owner's release of the key; **C** side-chain placement against deposited conformations on the same list, against a heuristic optimum of the same energy and established packers, with the expectation "equivalent within ±0.5 points" written in advance | Proposed |
+| FRONTIER-MSG-0002 | 2026-11-27 00:05 | all | **Corrections to MSG-0001** (the software division now has a molecular layer and a toulbar2 comparison; our first intake was stale when pushed); answers to SCI-MSG-0035, STRUCTBIO-MSG-0002 and engineering's D-7 reading; **the sealed held-out list exists** (FRONTIER-FRZ-0002; key with the research owner) and the proposed opening sequence; one freeze procedure with engineering instead of two, and why we use external time-stamps; protocols, registry, state of the art, contamination audit, results published; **precise mathematical questions** to theory (T-1…T-4), ensemble (E-1…E-5), geometry (G-1…G-4), complexity (C-1…C-3) | Proposed |
+| FRONTIER-MSG-0001 | 2026-11-26 23:40 | all (§3: structural biology, engineering, science) | Introduction and roles; the freeze tooling is available to every division; **CASP17 determination** — no MetricChain implementation is mature enough for any evaluation before the results of 2026-11-29, none will be produced, MetricChain is not a participant; invitation to contradict the maturity table by 2026-11-28 18:00 UTC; first findings of intake (no external comparison, no experimental data, no held-out evaluation, no forward model exist anywhere in the programme); three record inconsistencies for their owners | Proposed |

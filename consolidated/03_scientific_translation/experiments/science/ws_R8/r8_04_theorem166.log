@@ -1,0 +1,62 @@
+== 1: exponents of the table in A16 (b) ==
+   u    eps1      equal twins  plateau twin  theta_hint   | addendum: equal, plateau, hint
+   1  0.10a=0.0111     0.0180     0.0238       0.0240      | (0.018, 0.0238, 0.024)
+   1  0.50a=0.0555        nan     0.0059       0.0084      | (None, 0.0059, 0.0084)
+   2  0.25a=0.0820     0.0153     0.0600       0.0632      | (0.0153, 0.06, 0.0632)
+   2  0.50a=0.1639        nan     0.0263       0.0369      | (None, 0.0263, 0.0369)
+   4  0.25a=0.1508     0.0885     0.1715       0.1839      | (0.0885, 0.1715, 0.184)
+   4  0.50a=0.3015        nan     0.0969       0.1374      | (None, 0.0969, 0.1374)
+   4  0.75a=0.4523        nan     0.0275       0.0985      | (None, 0.0275, 0.0985)
+   u=1: eps1^c = 0.0861 (addendum 0.086),  a(u) = 0.1109 (addendum 0.111)
+   u=2: eps1^c = 0.2731 (addendum 0.273),  a(u) = 0.3278 (addendum 0.328)
+   u=4: eps1^c = 0.5569 (addendum 0.557),  a(u) = 0.6031 (addendum 0.603)
+   all quoted values reproduced: True
+== 2: twins against G(R) = ln Zpl(R,U0) - ln Z0 ==
+    n    u   r1   r2   gap(twin)   G(r2-2)    G(r2-1)    G(r2)     gap-G(r2-1)   R with |D|+|V|<=|B(n,R)|   gap<=G(R)
+    800  1.0  320  348     24.6636    23.8565    24.6636    25.4655   +1.97e-11        R = 348 (= r2: True)            True
+   1500  1.0  585  675     75.2640    74.5585    75.2640    75.9666   -5.68e-12        R = 674 (= r2: False)            True
+   1000  2.0  294  352    100.1348    98.6102   100.1348   101.6528   -1.14e-12        R = 351 (= r2: False)            True
+   1000  2.0  294  430    200.3293   199.2600   200.3293   201.3934   -6.14e-12        R = 429 (= r2: False)            True
+    700  4.0  126  208    211.4398   209.5839   211.4398   213.2836   +8.53e-12        R = 207 (= r2: False)            True
+    700  4.0  126  278    315.8097   314.6262   315.8097   316.9853   +5.12e-12        R = 277 (= r2: False)            True
+    900  3.0  207  311    225.8314   224.1975   225.8314   227.4572   +5.68e-13        R = 310 (= r2: False)            True
+   2400  1.0  924  976     48.2127    47.3331    48.2127    49.0905   +3.41e-12        R = 976 (= r2: True)            True
+    400  1.0  164  173      8.0274     7.1808     8.0271     8.8634   +3.26e-04        R = 173 (= r2: True)            True
+   1200  0.5  538  555      7.5116     7.0946     7.5110     7.9243   +5.37e-04        R = 555 (= r2: True)            True
+== 3: lower and upper bound on the cost at g0 (delta = 0.05) ==
+    n    u   eps      R(eps) [alg]  r2(eps) [twin]  radius diff   ln(M_alg/LB)   P(samples meet V)   ln E[cost]/M if fallback = 2^n     exponent of ratio if fallback = e^{n theta_hint}
+    800  1.0   23.856     345           348 (ball r2-1)   +2            1.77        2.96e-04               535.5                          -0.0037
+   1500  1.0   74.559     672           675 (ball r2-1)   +2            1.64        4.54e-13               999.8                          -0.0145
+   1000  2.0   98.610     350           352 (ball r2-1)   +1            1.82        7.60e-19               601.8                          -0.0302
+   1000  2.0  199.260     428           430 (ball r2-1)   +1            1.50        2.08e-34               601.8                          -0.0597
+    700  4.0  209.584     206           208 (ball r2-1)   +1            2.08        7.25e-42               325.5                          -0.0838
+    700  4.0  314.626     276           278 (ball r2-1)   +1            1.64        1.03e-61               325.5                          -0.1226
+    900  3.0  224.198     309           311 (ball r2-1)   +1            1.85        1.62e-41               481.0                          -0.0698
+   2400  1.0   47.333     973           976 (ball r2-1)   +2            1.97        1.42e-09              1595.9                          -0.0064
+    400  1.0    7.182     171           173 (ball r2-1)   +1            1.51        1.76e-01               268.3                          +0.0047
+   1200  0.5    7.095     552           555 (ball r2-1)   +2            1.55        1.50e-01               823.0                          -0.0003
+== 4: (iv) the bracket of (ii) as a function of the datum ==
+  n=2000 u=1.0 R=880: e = |U|/(un);  width/n exact, formula min(h(R/n-e)-h(sig), ue+h(R/n-e)-ln2)_+
+     max |exact - formula| over the datum: 0.0009 (o(1) expected: O(ln n / n) = 0.0038)
+     maximum of the exact width at e = 0.1092;  rho0 - sigma_u = 0.1109 (= a/u = 0.1109)
+  n=2000 u=2.0 R=800: e = |U|/(un);  width/n exact, formula min(h(R/n-e)-h(sig), ue+h(R/n-e)-ln2)_+
+     max |exact - formula| over the datum: 0.0011 (o(1) expected: O(ln n / n) = 0.0038)
+     maximum of the exact width at e = 0.1652;  rho0 - sigma_u = 0.1639 (= a/u = 0.1639)
+  n=1500 u=4.0 R=450: e = |U|/(un);  width/n exact, formula min(h(R/n-e)-h(sig), ue+h(R/n-e)-ln2)_+
+     max |exact - formula| over the datum: 0.0016 (o(1) expected: O(ln n / n) = 0.0049)
+     maximum of the exact width at e = 0.1521;  rho0 - sigma_u = 0.1508 (= a/u = 0.1508)
+== 5: the bracket of (ii) on random members constant outside few points (general members, random gauge) ==
+  members 300: bracket fails to contain ln Z + v in 0 cases; least slack below 1.28e-03, above -1.78e-15
+== 6: at bounded accuracy 'gap = G(r2-1)' fails (it is an extensive-accuracy statement) ==
+  r2 = r1+ 1: gap of the twin   1.2872   G(r2-1)   0.9642   G(r2)   1.9174   gap - G(r2-1) = +0.3230
+  r2 = r1+ 2: gap of the twin   2.0545   G(r2-1)   1.9174   G(r2)   2.8629   gap - G(r2-1) = +0.1371
+  r2 = r1+ 3: gap of the twin   2.9184   G(r2-1)   2.8629   G(r2)   3.8017   gap - G(r2-1) = +0.0555
+  r2 = r1+ 5: gap of the twin   4.7431   G(r2-1)   4.7343   G(r2)   5.6609   gap - G(r2-1) = +0.0088
+  r2 = r1+ 8: gap of the twin   7.4976   G(r2-1)   7.4970   G(r2)   8.4066   gap - G(r2-1) = +0.0006
+  r2 = r1+12: gap of the twin  11.1026   G(r2-1)  11.1026   G(r2)  11.9904   gap - G(r2-1) = +0.0000
+  r2 = r1+20: gap of the twin  18.0548   G(r2-1)  18.0548   G(r2)  18.8997   gap - G(r2-1) = +0.0000
+SUMMARY table: True  twins <= G(R) of the lemma: True  (iv): True  bracket valid: True  time 88s
+
+real	1m28.467s
+user	1m17.361s
+sys	0m10.675s

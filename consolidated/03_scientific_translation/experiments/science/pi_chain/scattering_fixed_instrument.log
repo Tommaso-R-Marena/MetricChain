@@ -1,0 +1,19 @@
+# N = 11 beads, 5849 conformations; D_max = 14.14, Rg = 3.09; 11 points, q_max = 1.745 (q_max Rg = 5.39; Shannon channels in range: 7.9)
+N=11 tol=0.00:  Rg2 [1.000,1.000] (0.000)  end-to-end [0.480,1.490] (0.318)  gauche [0.361,0.830] (0.468)  P(compact [0.000,0.482] (0.482)
+N=11 tol=0.01:  Rg2 [0.951,1.082] (0.079)  end-to-end [0.315,1.673] (0.427)  gauche [0.316,0.897] (0.582)  P(compact [0.000,0.515] (0.515)
+N=11 tol=0.05:  Rg2 [0.853,1.324] (0.285)  end-to-end [0.228,2.031] (0.567)  gauche [0.240,0.943] (0.703)  P(compact [0.000,0.611] (0.611)
+# n=8: 1 s
+# N = 13 beads, 49833 conformations; D_max = 16.97, Rg = 3.44; 11 points, q_max = 1.745 (q_max Rg = 6.01; Shannon channels in range: 9.4)
+N=13 tol=0.00:  Rg2 [1.000,1.000] (0.000)  end-to-end [0.364,1.616] (0.337)  gauche [0.306,0.877] (0.571)  P(compact [0.000,0.533] (0.533)
+N=13 tol=0.01:  Rg2 [0.952,1.111] (0.080)  end-to-end [0.247,1.842] (0.429)  gauche [0.272,0.910] (0.638)  P(compact [0.000,0.559] (0.559)
+N=13 tol=0.05:  Rg2 [0.841,1.367] (0.266)  end-to-end [0.106,2.225] (0.570)  gauche [0.214,0.949] (0.736)  P(compact [0.000,0.651] (0.651)
+# n=10: 7 s
+# N = 15 beads, 422825 conformations; D_max = 19.80, Rg = 3.77; 11 points, q_max = 1.745 (q_max Rg = 6.59; Shannon channels in range: 11.0)
+N=15 tol=0.00:  Rg2 [1.000,1.000] (0.000)  end-to-end [0.274,1.693] (0.336)  gauche [0.277,0.896] (0.619)  P(compact [0.000,0.554] (0.554)
+N=15 tol=0.01:  Rg2 [0.951,1.121] (0.076)  end-to-end [0.183,1.962] (0.421)  gauche [0.247,0.916] (0.668)  P(compact [0.000,0.578] (0.578)
+N=15 tol=0.05:  Rg2 [0.838,1.448] (0.272)  end-to-end [0.088,2.374] (0.541)  gauche [0.198,0.947] (0.749)  P(compact [0.000,0.660] (0.660)
+# n=12: 146 s
+
+real	2m34.531s
+user	2m4.803s
+sys	0m2.262s

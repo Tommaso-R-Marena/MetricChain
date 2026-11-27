@@ -1,0 +1,42 @@
+finite-size table (section 3): n | N | max pairs in cutoff / N | max ||N||_1 / N | gmin of that class
+   8 | 11 | 2.45 | 6.64 | 7/8
+  12 | 15 | 3.13 | 9.60 | 8/12
+  16 | 19 | 3.68 | 10.58 | 11/16
+  18 | 21 | 4.00 | 11.62 | 12/18
+  20 | 23 | 4.17 | 12.39 | 14/20
+  22 | 25 | 4.32 | 13.24 | 14/22
+  24 | 27 | 4.56 | 13.56 | 14/24
+n=24: largest ||N||_1 among classes with gmin <= 3: 164 (6.07 per bead)
+n=24: largest ||N||_1 among classes with gmin <= 4: 166 (6.15 per bead)
+n=24: largest ||N||_1 among classes with gmin <= 5: 169 (6.26 per bead)
+sequence (section 2): n: conformations / classes
+  13: 1231221 / 479
+  14: 3576871 / 641
+  15: 10401207 / 818
+  16: 30188971 / 1037
+  17: 87689311 / 1281
+  18: 254325043 / 1594
+  19: 738087517 / 1911
+  20: 2139332335 / 2328
+  21: 6204141457 / 2753
+  22: 17973153955 / 3319
+  23: 52091349617 / 3857
+  24: 150838528401 / 4532
+N^P_cov(eps=0)/N^2 at N = 10, 15, 21, 27 (text: 0.100, 0.093, 0.109, 0.110-0.126):
+  N=10: [0.100, 0.100]
+  N=15: [0.093, 0.093]
+  N=21: [0.109, 0.109]
+  N=27: [0.110, 0.126]
+effective exponent of the number of classes between N=15 and N=27 (text: 4.3): 4.33
+eps=N/2 sequence n=5..24: [3, 5, 5, 5, 5, 7, 7, 8, 8, 9, 9, 10, 10, 11, 12, 13, 13, 13, 14, 15]
+largest entry at L=1/5 over all n and eps (text: 'at most 8'): 8
+  flip bounds n=9: 1 torsions with d_j>=5, least c_j-(14d_j-15) = 21, largest c_j/(70(d_j+3)) = 0.136, violated 0
+  flip bounds n=10: 2 torsions with d_j>=5, least c_j-(14d_j-15) = 43, largest c_j/(70(d_j+3)) = 0.175, violated 0
+  flip bounds n=11: 3 torsions with d_j>=5, least c_j-(14d_j-15) = 35, largest c_j/(70(d_j+3)) = 0.186, violated 0
+  flip bounds n=12: 4 torsions with d_j>=5, least c_j-(14d_j-15) = 45, largest c_j/(70(d_j+3)) = 0.204, violated 0
+  flip bounds n=13: 5 torsions with d_j>=5, least c_j-(14d_j-15) = 47, largest c_j/(70(d_j+3)) = 0.236, violated 0
+  flip bounds n=14: 6 torsions with d_j>=5, least c_j-(14d_j-15) = 64, largest c_j/(70(d_j+3)) = 0.245, violated 0
+  flip bounds n=15: 7 torsions with d_j>=5, least c_j-(14d_j-15) = 63, largest c_j/(70(d_j+3)) = 0.255, violated 0
+  flip bounds n=16: 8 torsions with d_j>=5, least c_j-(14d_j-15) = 73, largest c_j/(70(d_j+3)) = 0.286, violated 0
+  all: 36 violated: 0
+min_j c_j/d_j per n (text: between 14 and 22 from n=8): {8: 14.5, 9: 15.2, 10: 19.6, 11: 17.3, 12: 19.0, 13: 18.6, 14: 21.0, 15: 20.0, 16: 21.2}

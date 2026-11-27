@@ -1,0 +1,8 @@
+case ['K12', '4', '7']: ln Z of the models rebuilt from the stored tables against the driver's: +0.0e+00, +0.0e+00; D = 0.0073294639; 415 routed items, 20 groups [51s, peak RSS 1039 MB]
+exact means under the FLOOR by held-site passes on the stored routes: beta <s_-> = 0.0044574555, beta <s_+> = 0.0029279167; largest |mass - 1| = 1.4e-12 [230s, peak RSS 1890 MB]
+floor, 400000 exact samples [44s, peak RSS 1890 MB]: smallest W = m+ - s+ - m- at a sample 2.00e-07 (must be >= 0); beta <W> exact 0.0045206482, sampled 0.0045296886 +- 1.5e-05 (+0.59 standard errors); second order <e^(-beta W) - 1 + beta W> = 5.701e-05 +- 3.1e-07
+    beta <s_-> exact 0.0044574555, sampled 0.0044659032 +- 1.5e-05 (+0.56 standard errors); second order <e^(-beta s-) - 1 + beta s-> = 5.454e-05 +- 2.4e-07
+corrected bracket (the driver's statistics, no safety factor): [517.128510825, 517.128592431], width 8.16064e-05   (LJ 517.128489775, LP 517.128510825, UE 517.128629636, UP 517.128592431)
+the same routed items put back exactly:                        [517.128513845 +- 3.1e-07, 517.128574839 +- 2.4e-07], width 6.09946e-05 +- 1.9e-07
+LOSS BETWEEN GROUPS, measured: lower end 3.02e-06 +- 3.1e-07, upper end 1.759e-05 +- 2.4e-07, total 2.061e-05 +- 1.9e-07 nats;  D^2/4 = 1.343e-05;  loss / (D^2/4) = 1.535 +- 0.014;  loss / corrected width = 0.253;  what the exact treatment of the routed items leaves (envelope, items without a route, allowances): 6.099e-05
+ALL DONE 386 s; peak RSS 1890 MB

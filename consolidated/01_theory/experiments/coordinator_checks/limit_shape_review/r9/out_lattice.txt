@@ -1,0 +1,55 @@
+clean bridges re-verified from coordinates (Python): distinct vectors (h3,h8,h11,g; N+3) per N: {3: 1, 4: 2, 5: 3, 6: 4, 7: 6, 8: 12, 9: 17, 10: 37, 11: 64}
+
+1. Z-span of the vectors of the clean bridges with at most Nmax beads
+   Nmax =  3:   1 distinct vectors; rank 1; index in Z^5: (rank < 5); echelon basis [[0, 0, 0, 0, 6]]
+              profiles (h3,h8,h11; N+3): rank 1; index in Z^4: (rank < 4)
+   Nmax =  4:   3 distinct vectors; rank 2; index in Z^5: (rank < 5); echelon basis [[0, 0, 1, 1, 7], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 2; index in Z^4: (rank < 4)
+   Nmax =  5:   6 distinct vectors; rank 2; index in Z^5: (rank < 5); echelon basis [[0, 0, 1, 1, 7], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 2; index in Z^4: (rank < 4)
+   Nmax =  6:  10 distinct vectors; rank 2; index in Z^5: (rank < 5); echelon basis [[0, 0, 1, 1, 7], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 2; index in Z^4: (rank < 4)
+   Nmax =  7:  16 distinct vectors; rank 3; index in Z^5: (rank < 5); echelon basis [[0, 1, 3, 3, 10], [0, 0, 1, 1, 7], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 3; index in Z^4: (rank < 4)
+   Nmax =  8:  28 distinct vectors; rank 4; index in Z^5: (rank < 5); echelon basis [[0, 1, 3, 3, 10], [0, 0, 1, 1, 7], [0, 0, 0, -1, -13], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 3; index in Z^4: (rank < 4)
+   Nmax =  9:  45 distinct vectors; rank 4; index in Z^5: (rank < 5); echelon basis [[0, 1, 3, 3, 10], [0, 0, 1, 1, 7], [0, 0, 0, -1, -8], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 3; index in Z^4: (rank < 4)
+   Nmax = 10:  82 distinct vectors; rank 5; index in Z^5: 1; echelon basis [[1, 4, 6, 5, 13], [0, 1, 3, 3, 10], [0, 0, 1, 1, 7], [0, 0, 0, -1, -8], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 4; index in Z^4: 1
+   Nmax = 11: 146 distinct vectors; rank 5; index in Z^5: 1; echelon basis [[1, 4, 6, 5, 13], [0, 1, 3, 3, 10], [0, 0, 1, 1, 7], [0, 0, 0, -1, -8], [0, 0, 0, 0, 1]]
+              profiles (h3,h8,h11; N+3): rank 4; index in Z^4: 1
+
+2. the five vectors of R9_REPORT 4.3(e)
+   (0, 0, 1, 1, 7): N = 4; a clean bridge with this vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1)]
+   (0, 0, 1, 1, 8): N = 5; a clean bridge with this vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 4, 2)]
+   (0, 2, 6, 5, 12): N = 9; a clean bridge with this vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-3, 3, -1), (-4, 4, 0), (-3, 5, 1), (-2, 6, 0)]
+   (0, 3, 6, 4, 12): N = 9; a clean bridge with this vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (0, 4, 4), (-1, 3, 5), (-2, 2, 4), (-3, 3, 3), (-2, 4, 2)]
+   (1, 6, 11, 7, 14): N = 11; a clean bridge with this vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 1, 3), (4, 2, 2), (3, 3, 1), (2, 4, 2), (3, 5, 3), (4, 6, 2)]
+   determinant: 1 (Bareiss), 1 (Leibniz)
+
+3. the four profile vectors of R9_REPORT 4.3(e)  (h3,h8,h11; N+3)
+   (0, 0, 1, 7): a clean bridge with this profile vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1)]
+   (0, 0, 1, 8): a clean bridge with this profile vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 4, 2)]
+   (0, 1, 3, 10): a clean bridge with this profile vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-3, 3, -1), (-4, 4, 0)]
+   (1, 6, 10, 13): a clean bridge with this profile vector exists: True; e.g. [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (0, 4, 4), (-1, 5, 3), (-2, 4, 2), (-1, 3, 1), (0, 4, 0), (1, 5, 1)]
+   determinant: -1 (Bareiss), -1 (Leibniz)
+
+4. own unimodular choices (smallest total number of beads)
+   N <= 9: no five vectors with determinant +-1 among the 45 distinct vectors (C(45,5) subsets)
+   N <= 10: 79540 unimodular 5-subsets of the 82 distinct vectors; one with the fewest beads (34 in all), determinant 1 (exact):
+      (0, 0, 1, 1, 7)  N = 4: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1)]
+      (0, 0, 1, 1, 8)  N = 5: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 4, 2)]
+      (0, 1, 3, 3, 10)  N = 7: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-3, 3, -1), (-4, 4, 0)]
+      (0, 1, 5, 4, 11)  N = 8: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 1, 3), (4, 2, 2), (5, 3, 3)]
+      (1, 4, 6, 5, 13)  N = 10: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 1, 3), (-2, 2, 4), (-1, 3, 5), (0, 4, 4), (1, 3, 3), (2, 4, 2), (3, 5, 3)]
+   N <= 11: 2526499 unimodular 5-subsets of the 146 distinct vectors; one with the fewest beads (34 in all), determinant 1 (exact):
+      (0, 0, 1, 1, 7)  N = 4: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1)]
+      (0, 0, 1, 1, 8)  N = 5: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 4, 2)]
+      (0, 1, 3, 3, 10)  N = 7: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (-2, 2, 0), (-3, 3, -1), (-4, 4, 0)]
+      (0, 1, 5, 4, 11)  N = 8: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (1, 3, 3), (2, 2, 4), (3, 1, 3), (4, 2, 2), (5, 3, 3)]
+      (1, 4, 6, 5, 13)  N = 10: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 1, 3), (-2, 2, 4), (-1, 3, 5), (0, 4, 4), (1, 3, 3), (2, 4, 2), (3, 5, 3)]
+
+real	1m31.660s
+user	1m10.360s
+sys	0m15.174s

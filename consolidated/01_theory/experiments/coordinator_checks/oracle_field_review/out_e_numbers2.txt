@@ -1,0 +1,2 @@
+window-restricted, one block at p-: (np.float64(0.012634775651814128), (np.float64(0.55172), np.float64(0.4232503043544317)))
+inner minimum by brute force: 0.012634775720343654  f_profile: 0.012634775651814128

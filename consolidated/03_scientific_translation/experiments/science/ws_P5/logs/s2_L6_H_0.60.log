@@ -1,0 +1,24 @@
+=== s2_signblind: L6 on H, tau 0.6: atoms 126, sites 6, domain [2, 2, 2, 2, 2, 2] = 64 states; anchor (1, 1, 1, 1, 1, 1)
+    check: quadratic form with the real charges = P3's evaluator at all 64 states to 4.62e-12 kcal/mol
+    per-subset searches done, 5 s; chain checks (truth <= LS <= pair optimum <= P3; all-plus <= P3): 164 checks, 0 violations
+    remainder searches done, 5 s
+--- order 3: 20 subsets (kcal/mol)
+    sum over subsets:  truth 2.6782e-01 | all-plus charges 8.4214e+00 | one pattern for all T 1.1348e+01 | best pattern per T (local search), a lower bound of the sign-blind optimum 2.1187e+01 | pair-level optimum 3.7287e+01 | P3 1.3167e+02
+    every sign-blind per-subset bound / truth >= 79.1 (sums); per subset min/median/max 22.9 / 86.0 / 571.3;  P3 / lower bound of the sign-blind optimum <= 6.2
+    remainder sup_x |g - I_2 g|:  truth 5.6866e-02 | all-plus 3.6007e+00 | pattern found 8.6845e+00 (40% of the charges negative) | P3's Gamma_3 1.3167e+02
+    every sign-blind bound of the remainder / truth >= 152.7;  Gamma_3 / that lower bound = 15.2
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 40 checks, 0 violations
+--- order 4: 15 subsets (kcal/mol)
+    sum over subsets:  truth 6.0705e-02 | all-plus charges 7.3284e-01 | one pattern for all T 7.7961e-01 | best pattern per T (local search), a lower bound of the sign-blind optimum 1.4091e+00 | pair-level optimum 2.3371e+00 | P3 1.2881e+01
+    every sign-blind per-subset bound / truth >= 23.2 (sums); per subset min/median/max 10.6 / 24.5 / 151.3;  P3 / lower bound of the sign-blind optimum <= 9.1
+    remainder sup_x |g - I_3 g|:  truth 3.0119e-02 | all-plus 5.7393e-01 | pattern found 6.8476e-01 (24% of the charges negative) | P3's Gamma_4 1.2881e+01
+    every sign-blind bound of the remainder / truth >= 22.7;  Gamma_4 / that lower bound = 18.8
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 30 checks, 0 violations
+--- order 5: 6 subsets (kcal/mol)
+    sum over subsets:  truth 4.1843e-03 | all-plus charges 1.6399e-02 | one pattern for all T 4.6825e-02 | best pattern per T (local search), a lower bound of the sign-blind optimum 7.0127e-02 | pair-level optimum 9.7945e-02 | P3 7.7634e-01
+    every sign-blind per-subset bound / truth >= 16.8 (sums); per subset min/median/max 8.9 / 21.1 / 54.4;  P3 / lower bound of the sign-blind optimum <= 11.1
+    remainder sup_x |g - I_4 g|:  truth 2.2207e-03 | all-plus 4.5785e-03 | pattern found 3.6652e-02 (28% of the charges negative) | P3's Gamma_5 7.7634e-01
+    every sign-blind bound of the remainder / truth >= 16.5;  Gamma_5 / that lower bound = 21.2
+    checks c_T(g_s) <= chat_T for the remainder pattern, and lower bound <= pair-level optimum: 12 checks, 0 violations
+    P3's Gamma_m against the remainders of sign-flipped systems (true signs, all-plus, pattern found) at every state: 576 state checks, 0 violations; smallest ratio Gamma_m / sup|remainder| = 15.16
+DONE in 5.3 s

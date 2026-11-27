@@ -1,0 +1,11 @@
+E9(b): C of the Hadamard ensemble = I: True; simplicial face: False; identified (fibre LP): False
+E9(a): n=4: triples through a fixed vertex that are simplicial faces: 21/21
+E9(a): n=5: triples through a fixed vertex that are simplicial faces: 105/105
+E9(a): n=6: triples through a fixed vertex that are simplicial faces: 465/465
+E9(a): n=7: triples through a fixed vertex that are simplicial faces: 1953/1953
+Sec.5(3) counterexample: n=3: identified ensemble with K=4 conformers and correlation rank 3 < K (fibre LP confirms identification: True); conformers: ['+--', '+-+', '++-', '+++']
+Sec.5(3) counterexample: n=4: identified ensemble with K=6 conformers and correlation rank 4 < K (fibre LP confirms identification: True); conformers: ['+---', '+--+', '+-+-', '+-++', '++--', '++-+']
+Sec.5(3) counterexample: n=5: identified ensemble with K=8 conformers and correlation rank 5 < K (fibre LP confirms identification: True); conformers: ['+----', '+---+', '+--++', '+-+--', '+-+++', '++-++', '++++-', '+++++']
+E10(a): n=8: on the event E: identified (two weightings incl. a sub-support) in 48, failures 0; off E: 90 supports
+E10 Lemma 1: largest P(|<c,s>| = 1) over 200000 random rational c (not +-e_a): 0.7500 (claim <= 0.75)
+E10 Lemma 2: K=3,t=0: P(rank<K)=0.6249 <= 2^-t=1.0000; K=3,t=2: P(rank<K)=0.1787 <= 2^-t=0.2500; K=5,t=1: P(rank<K)=0.3622 <= 2^-t=0.5000; K=6,t=3: P(rank<K)=0.0758 <= 2^-t=0.1250; K=8,t=2: P(rank<K)=0.0982 <= 2^-t=0.2500

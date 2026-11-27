@@ -1,0 +1,17 @@
+n=10 p=0.183 u=1.92 gamma=+0.32 k=2 r=2.19: b=0.0208  class slopes/u: 0.9999, 0.9999  all one-body marginals of base and alternative = c_D = 0.14978 (max dev 1.1e-15)  ln A gap 2.194 (formula error 1.3e-15)  without compensator the marginals differ by 0.008
+n=8 p=0.156 u=1.83 gamma=-1.41 k=4 r=3.03: b=0.6023  class slopes/u: 0.7727, 0.9722  all one-body marginals of base and alternative = c_D = 0.28006 (max dev 2.8e-16)  ln A gap 2.613 (formula error 0.0e+00)  without compensator the marginals differ by 0.144
+n=9 p=0.199 u=1.71 gamma=+0.67 k=7 r=2.59: b=3.3425  class slopes/u: 1.0000, 0.9907  all one-body marginals of base and alternative = c_D = 0.47164 (max dev 5.6e-16)  ln A gap 1.371 (formula error 2.2e-16)  without compensator the marginals differ by 0.333
+n=8 p=0.371 u=0.84 gamma=+0.35 k=4 r=2.18: b=0.6160  class slopes/u: 0.9807, 0.6963  all one-body marginals of base and alternative = c_D = 0.40184 (max dev 2.8e-16)  ln A gap 1.772 (formula error 0.0e+00)  without compensator the marginals differ by 0.096
+n=9 p=0.204 u=1.84 gamma=+0.82 k=5 r=2.44: b=1.0851  class slopes/u: 1.0000, 0.9984  all one-body marginals of base and alternative = c_D = 0.37025 (max dev 1.0e-15)  ln A gap 1.833 (formula error 2.2e-16)  without compensator the marginals differ by 0.246
+n=8 p=0.366 u=2.03 gamma=-1.61 k=4 r=2.79: b=0.8241  class slopes/u: 0.9992, 0.9834  all one-body marginals of base and alternative = c_D = 0.43927 (max dev 1.7e-16)  ln A gap 2.277 (formula error 0.0e+00)  without compensator the marginals differ by 0.286
+n=9 p=0.405 u=1.19 gamma=+0.15 k=3 r=2.80: b=0.1527  class slopes/u: 0.5750, 0.9850  all one-body marginals of base and alternative = c_D = 0.34390 (max dev 3.9e-16)  ln A gap 2.672 (formula error 0.0e+00)  without compensator the marginals differ by 0.025
+n=6 p=0.361 u=1.85 gamma=+0.25 k=4 r=2.41: b=1.1487  class slopes/u: 0.9881, 0.9732  all one-body marginals of base and alternative = c_D = 0.56119 (max dev 2.2e-16)  ln A gap 1.775 (formula error 0.0e+00)  without compensator the marginals differ by 0.233
+n=10 p=0.312 u=2.16 gamma=+1.24 k=6 r=3.58: b=1.2903  class slopes/u: 1.0000, 0.9968  all one-body marginals of base and alternative = c_D = 0.49998 (max dev 2.1e-15)  ln A gap 2.808 (formula error 0.0e+00)  without compensator the marginals differ by 0.373
+n=10 p=0.144 u=1.22 gamma=-0.02 k=4 r=3.93: b=0.1469  class slopes/u: 0.9985, 0.9907  all one-body marginals of base and alternative = c_D = 0.17421 (max dev 6.4e-16)  ln A gap 3.796 (formula error 4.4e-16)  without compensator the marginals differ by 0.027
+n=10 p=0.118 u=1.75 gamma=-0.46 k=6 r=3.18: b=0.6132  class slopes/u: 0.9997, 0.9979  all one-body marginals of base and alternative = c_D = 0.27433 (max dev 2.7e-15)  ln A gap 2.733 (formula error 8.9e-16)  without compensator the marginals differ by 0.095
+n=8 p=0.144 u=1.47 gamma=+0.11 k=5 r=2.79: b=1.1532  class slopes/u: 0.9998, 0.9776  all one-body marginals of base and alternative = c_D = 0.28752 (max dev 5.6e-17)  ln A gap 2.092 (formula error 4.4e-16)  without compensator the marginals differ by 0.147
+largest deviation of any marginal from the common value: 2.7e-15
+
+real	0m1.462s
+user	0m0.818s
+sys	0m0.004s

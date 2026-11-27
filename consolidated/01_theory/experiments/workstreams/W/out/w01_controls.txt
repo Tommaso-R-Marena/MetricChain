@@ -1,0 +1,48 @@
+=== w01 controls ===
+game value, enumeration against LP (2000 random matrices): max abs difference 1.07e-14
+binary site: general game against the cosh form of Theorem 11.59(b) (575 points): max abs difference 1.01e-15
+p=0.1,u=2: E = 0.212295 (brief 0.212295); R^max(0) = 0.048130 (0.048130) at t=0.4666, gamma*=-0.6210;
+           R^max(0.3E) = 0.023270 (0.023270) at t=0.3166, gamma*=-0.5634; theta_na(0.3E) = 0.036246 = 0.036246 (0.036246)
+           pair identity at e=+0.00000: R = 0.04813001, theta_na(e + R) via max_tau = 0.04813001
+           pair identity at e=+0.06369: R = 0.02327033, theta_na(e + R) via max_tau = 0.02327033
+           pair identity at e=+0.12738: R = 0.00755405, theta_na(e + R) via max_tau = 0.00755405
+           pair identity at e=-0.05000: R = 0.07469445, theta_na(e + R) via max_tau = 0.07469445
+           a = theta_na(0+) = 0.163738 (theory report table: 0.1841 at theta=2; p=0.1 is theta=2.197)
+p=1/2,u=1: R^max(0) = 0.029139 (0.029139); E = 0.120115 (ln cosh(1/2) = 0.120115); a = 0.110944 (0.110944)
+two binary types (fields 0, 3; u=1), E = limit: E = 0.072290; R^max(0.3E) = 0.008557 (0.008559) at t = 0.3397; average of the two exponents at the same e = 0.009790 (0.009791)
+two binary types (fields 0, 3; u=1), E = F*(t)/t at t = 1/4000, as in the workstream-F control: E = 0.072271; R^max(0.3E) = 0.008559 (0.008559) at t = 0.3397; average of the two exponents at the same e = 0.009791 (0.009791)
+           thresholds: 0.120115, 0.024465; average 0.072290 = E of the mixture 0.072290
+           e = 0: mixture 0.017547, average 0.017547
+flat 4-state Hamming site: 14 vertices (expected 2^4 - 2 = 14), of which distance functions: 4
+   zero residual, u=1, e=0: all vertices 0.02914 (0.02914), dips only 0.02841 (0.02841)
+   closed form max_m D(rho_m || 1 - m/k): 0.02914
+three-state site (0,0,2), Hamming, beta=c=1: 6 vertices; zero residual, e=0: all 0.02903 (0.02903), dips 0.02467 (0.02467)
+   thr(0) = 0.11969 (0.11969); dips only 0.09472 (0.0947); class threshold max_gamma thr = 0.11988 (0.11988)
+   F(0,t)/t at t=1e-4: 0.11967
+F*(t) = max_gamma F(gamma,t): closed variational form [lower, upper certificate] against the zoom search and the LP at gamma*
+   bin(p=0.1,u=2.0) t=0.20: [0.0329174778, 0.0329174778]  zoom 0.0329174778  LP at gamma* 0.0329174778
+   bin(p=0.1,u=2.0) t=0.50: [0.0479083745, 0.0479083745]  zoom 0.0479083745  LP at gamma* 0.0479083745
+   bin(p=0.1,u=2.0) t=0.80: [0.0279973903, 0.0279973904]  zoom 0.0279973903  LP at gamma* 0.0279973903
+   bin(p=0.1,u=2.0) E = [0.21229461, 0.21229461] (zoom over gamma: 0.21229461; F*(t)/t at 1e-5: 0.21229223); a = [0.16373834, 0.16373834] (F*(t)/(1-t) at 1-1e-5: 0.16373725)
+   bin(p=0.3,u=1.0) t=0.20: [0.0163458182, 0.0163458182]  zoom 0.0163458182  LP at gamma* 0.0163458182
+   bin(p=0.3,u=1.0) t=0.50: [0.0250235863, 0.0250235863]  zoom 0.0250235863  LP at gamma* 0.0250235863
+   bin(p=0.3,u=1.0) t=0.80: [0.0155823688, 0.0155823688]  zoom 0.0155823688  LP at gamma* 0.0155823688
+   bin(p=0.3,u=1.0) E = [0.10313100, 0.10313100] (zoom over gamma: 0.10313100; F*(t)/t at 1e-5: 0.10312993); a = [0.09530050, 0.09530050] (F*(t)/(1-t) at 1-1e-5: 0.09529966)
+   (0,0,2)        t=0.20: [0.0190077097, 0.0190077097]  zoom 0.0190077097  LP at gamma* 0.0190077097
+   (0,0,2)        t=0.50: [0.0291277556, 0.0291277556]  zoom 0.0291277556  LP at gamma* 0.0291277556
+   (0,0,2)        t=0.80: [0.0181649000, 0.0181649003]  zoom 0.0181649000  LP at gamma* 0.0181649000
+   (0,0,2)        E = [0.11988299, 0.11988299] (zoom over gamma: 0.11988299; F*(t)/t at 1e-5: 0.11988174); a = [0.11122787, 0.11122787] (F*(t)/(1-t) at 1-1e-5: 0.11122688)
+   path(0.8,1.6)  t=0.20: [0.0619460699, 0.0619460699]  zoom 0.0619452372  LP at gamma* 0.0619460699
+   path(0.8,1.6)  t=0.50: [0.0889935251, 0.0889935251]  zoom 0.0889922530  LP at gamma* 0.0889935251
+   path(0.8,1.6)  t=0.80: [0.0509829086, 0.0509829086]  zoom 0.0509828914  LP at gamma* 0.0509829086
+   path(0.8,1.6)  E = [0.40062203, 0.40062204] (zoom over gamma: 0.40062203; F*(t)/t at 1e-5: 0.40061754); a = [0.29479121, 0.29479121] (F*(t)/(1-t) at 1-1e-5: 0.29478936)
+   tri(1,1.5,2)   t=0.20: [0.0445340694, 0.0445340694]  zoom 0.0445340694  LP at gamma* 0.0445340694
+   tri(1,1.5,2)   t=0.50: [0.0666725949, 0.0666725949]  zoom 0.0666725949  LP at gamma* 0.0666725949
+   tri(1,1.5,2)   t=0.80: [0.0409493027, 0.0409493031]  zoom 0.0409493027  LP at gamma* 0.0409493027
+   tri(1,1.5,2)   E = [0.28490685, 0.28490685] (zoom over gamma: 0.28490685; F*(t)/t at 1e-5: 0.28490375); a = [0.24754085, 0.24754085] (F*(t)/(1-t) at 1-1e-5: 0.24753881)
+   asym           t=0.20: [0.0301022241, 0.0301022244]  zoom 0.0301022229  LP at gamma* 0.0301022241
+   asym           t=0.50: [0.0453477094, 0.0453477094]  zoom 0.0453477032  LP at gamma* 0.0453477094
+   asym           t=0.80: [0.0275946167, 0.0275946167]  zoom 0.0275946167  LP at gamma* 0.0275946167
+   asym           E = [0.19105887, 0.19105887] (zoom over gamma: 0.19105887; F*(t)/t at 1e-5: 0.19105685); a = [0.16604588, 0.16604588] (F*(t)/(1-t) at 1-1e-5: 0.16604453)
+   42 points: largest certificate gap 5.8e-10; largest excess of the zoom value over the certificate 0.0e+00; largest |LP at gamma* - value| 2.7e-16
+time 7.2 s

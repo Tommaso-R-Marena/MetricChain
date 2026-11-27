@@ -1,0 +1,5 @@
+== Part C: controls (the identity must FAIL: LHS > MID) ==
+   concave W = sqrt(B/b)          max of LHS - MID over 13 values of g: 0.0122 (relative to a: 0.110)   -> identity fails: True
+   step W = 1{B > b/2}            max of LHS - MID over 13 values of g: 0.0189 (relative to a: 0.170)   -> identity fails: True
+   decreasing W = 0.5 (1 - B/b)   max of LHS - MID over 13 values of g: 0.0089 (relative to a: 0.080)   -> identity fails: True
+total time 4 s

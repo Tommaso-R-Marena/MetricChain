@@ -1,0 +1,7 @@
+K = 2, n = 10, seed = 0: dim L = 5 (expected 1 + 21 - (2n - 3) = 5), char = 32003; structural rank-2 point at infinity: yes
+   Singular: {'DIM': '1', 'DEG': '7', 'CONTAINS0': '0', 'POINTDIM0': '1', 'CONTAINS1': '0', 'POINTDIM1': '1', 'CONTAINS2': '0', 'POINTDIM2': '1', 'SAMEPOINT': '2'}
+   OK: zero-dimensional of degree 7 = 1 + 1 + 5; contains [E_1] != [E_2] and the rank-2 point at infinity (local length >= 5): no other point, and E_1, E_2 are reduced
+
+real	0m0.302s
+user	0m0.273s
+sys	0m0.025s

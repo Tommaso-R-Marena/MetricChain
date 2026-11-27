@@ -1,0 +1,6 @@
+R28 no_midpoint.py  start 2026-11-27T00:46:53Z
+3000 random pair models (2-4 sites, 2-3 states, random graphs); a necessarily optimal configuration exists in 2060
+  'exists necessarily optimal' but some nominal minimiser is not: 0 (must be 0)
+  max regret of a nominal minimiser above twice the smallest max regret: 0 (must be 0)
+  control (another candidate): the implication fails in 751 models (must be > 0)
+END 2026-11-27T00:46:53Z  wall 0.7 s  peak memory 33 MB (ru_maxrss; address space capped at 3 GB)

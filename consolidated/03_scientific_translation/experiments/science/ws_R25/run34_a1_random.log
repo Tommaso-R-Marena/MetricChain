@@ -1,0 +1,18 @@
+start 2026-11-26T22:02:55Z
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] formulas 3000 (satisfiable 2361, unsatisfiable 639); largest instance: q = |W| = 114, |T| = 379; perfect matchings counted 8337082939
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] coverage: unit_clause 1802, two_clause 2402, repeated_literal 2227, complementary_pair 2202, var_once 1090, var_only_positive 1220, var_only_negative 1231, duplicate_clause 536
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] violations: S sizes 0; E satisfiable-but-no-matching 0, unsatisfiable-but-matching 0; N counting identity 0; F recipe of the proof 0 of 13321; B decoding 0 of 92193
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] control K4 (identity without (l-1)!): fails on 2187 formulas
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] control drop:true: satisfiable-but-no-matching 542, unsatisfiable-but-matching 0; first disagreement [(3,), (3, 4), (5, 5), (-4, -3, 4), (5, 1, -5), (-5, -3, 4), (2, -3), (2, 5)]
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] control drop:false: satisfiable-but-no-matching 554, unsatisfiable-but-matching 0; first disagreement [(-2, -2, 1), (-1, 4, 1), (3, -4, -2), (1, 2, -2), (-1,), (-4, 4, -4)]
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] control drop:clause: satisfiable-but-no-matching 417, unsatisfiable-but-matching 0; first disagreement [(3,), (3, 4), (5, 5), (-4, -3, 4), (5, 1, -5), (-5, -3, 4), (2, -3), (2, 5)]
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] control drop:garbage_p: satisfiable-but-no-matching 39, unsatisfiable-but-matching 0; first disagreement [(-3, 2), (3,), (1, 3, 2)]
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] control drop:garbage_n: satisfiable-but-no-matching 46, unsatisfiable-but-matching 0; first disagreement [(1, -2), (-1, -1, -3), (-2, -3, -3), (3, -1), (-2, 3), (1, 3, 2)]
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] control add_wrong_clause: satisfiable-but-no-matching 0, unsatisfiable-but-matching 123; first disagreement [(3, 3), (-1,), (-1, 2), (2, 2, -3), (-3, -2, -2), (-3, -1, 1), (2, -2, -1), (-2, 2)]
+[random seed=20261126 n=3000 (2..7 variables, 1..3nv clauses)] time 18.2 s
+[random 3-CNF seed=20261126 n=3000 (3..7 variables, 3nv..6nv clauses)] formulas 3000 (satisfiable 2287, unsatisfiable 713); largest instance: q = |W| = 252, |T| = 882; perfect matchings counted 102738986403905105794048
+[random 3-CNF seed=20261126 n=3000 (3..7 variables, 3nv..6nv clauses)] coverage: unit_clause 0, two_clause 0, repeated_literal 0, complementary_pair 0, var_once 0, var_only_positive 20, var_only_negative 16, duplicate_clause 2729
+[random 3-CNF seed=20261126 n=3000 (3..7 variables, 3nv..6nv clauses)] violations: S sizes 0; E satisfiable-but-no-matching 0, unsatisfiable-but-matching 0; N counting identity 0; F recipe of the proof 0 of 6174; B decoding 0 of 114350
+[random 3-CNF seed=20261126 n=3000 (3..7 variables, 3nv..6nv clauses)] control K4 (identity without (l-1)!): fails on 2287 formulas
+[random 3-CNF seed=20261126 n=3000 (3..7 variables, 3nv..6nv clauses)] time 31.1 s
+peak memory 43.8 MB

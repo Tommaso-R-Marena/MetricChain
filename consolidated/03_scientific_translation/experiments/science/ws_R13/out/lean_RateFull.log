@@ -1,0 +1,84 @@
+'ScienceR13.lemma1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.lemma2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.epoch_of_stepLE' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.rate_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.rate_top0' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.rate_all0' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.cube_exactRec_rate_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.cube_exactRec_rate_all' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.slope_of_stepLE' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.rate_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+@ScienceR13.rate_zero : ∀ {θna θh : ℝ → ℝ} {a h E : ℝ},
+  MetricChain.HintRecursion.HintPair θna θh a h E →
+    h < a →
+      ∀ (T : ℕ → ℝ → ℝ) (τ : ℕ → ℝ),
+        (∀ (k : ℕ), MetricChain.HintRecursion.StepLE θna (T k) (T (k + 1))) →
+          (∀ (k : ℕ) (x : ℝ), 0 < x → T (k + 1) x ≤ T k x) →
+            (∀ (k : ℕ) (x y : ℝ), 0 < x → x ≤ y → T k y ≤ T k x) →
+              (∀ (x : ℝ), 0 < x → T 0 x ≤ a) →
+                τ 0 ≤ a →
+                  (∀ (k : ℕ) (φ B : ℝ),
+                      0 < φ →
+                        φ < 1 →
+                          (1 - φ) * τ k ≤ B →
+                            (∀ (γ : ℝ), 0 < γ → γ ≤ φ * a → γ + (1 - φ) * T k (γ / (1 - φ)) ≤ B) → τ (k + 1) ≤ B) →
+                    ∀ (n : ℕ), τ n ≤ h + ScienceR13.c1 a h / (↑(n + 1) + ScienceR13.c2 a h)
+'ScienceR13.epoch_gain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.closed_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceR13.rate_of_epochs' depends on axioms: [propext, Classical.choice, Quot.sound]
+@ScienceR13.rate_top0 : ∀ {θna θh : ℝ → ℝ} {a h E : ℝ},
+  MetricChain.HintRecursion.HintPair θna θh a h E →
+    h < a →
+      ∀ (T : ℕ → ℝ → ℝ),
+        (∀ (k : ℕ), MetricChain.HintRecursion.StepLE θna (T k) (T (k + 1))) →
+          (∀ (k : ℕ) (x : ℝ), 0 < x → T (k + 1) x ≤ T k x) →
+            (∀ (k : ℕ) (x y : ℝ), 0 < x → x ≤ y → T k y ≤ T k x) →
+              (∀ (x : ℝ), 0 < x → T 0 x ≤ a) →
+                ∀ (n : ℕ) (x : ℝ), 0 < x → T n x ≤ h + ScienceR13.c1 a h / (↑(n + 1) + ScienceR13.c2 a h)
+@ScienceR13.rate_all0 : ∀ {θna θh : ℝ → ℝ} {a h E : ℝ},
+  MetricChain.HintRecursion.HintPair θna θh a h E →
+    h < a →
+      ∀ {L : ℝ},
+        0 ≤ L →
+          (∀ (e : ℝ), 0 < e → e < E → h - L * e ≤ θh e) →
+            ∀ (T : ℕ → ℝ → ℝ),
+              (∀ (k : ℕ), MetricChain.HintRecursion.StepLE θna (T k) (T (k + 1))) →
+                (∀ (k : ℕ) (x : ℝ), 0 < x → T (k + 1) x ≤ T k x) →
+                  (∀ (k : ℕ) (x y : ℝ), 0 < x → x ≤ y → T k y ≤ T k x) →
+                    (∀ (x : ℝ), 0 < x → T 0 x ≤ a) →
+                      ∀ {g : ℝ},
+                        0 < g →
+                          g < E →
+                            ∀ (n : ℕ) (y : ℝ),
+                              0 < y →
+                                y ≤ g →
+                                  T n y - θh y ≤
+                                    max (ScienceR13.c1 a h + L * (g + θh g))
+                                        ((1 + ScienceR13.c2 a h) * (a - h + L * g)) /
+                                      (↑(n + 1) + ScienceR13.c2 a h)
+@ScienceR13.cube_exactRec_rate_top : ∀ {u : ℝ},
+  0 < u →
+    ∀ (k : ℕ) {x : ℝ},
+      0 < x →
+        MetricChain.BoundedAccuracy.exactRec (MetricChain.HintRecursion.cubeNa u) k x ≤
+          MetricChain.HintRecursion.cubeH u +
+            ScienceR13.c1 (MetricChain.HintRecursion.cubeA u) (MetricChain.HintRecursion.cubeH u) /
+              (↑(k + 1) + ScienceR13.c2 (MetricChain.HintRecursion.cubeA u) (MetricChain.HintRecursion.cubeH u))
+@ScienceR13.cube_exactRec_rate_all : ∀ {u : ℝ},
+  0 < u →
+    ∀ (k : ℕ) {g : ℝ},
+      0 < g →
+        g < MetricChain.HintRecursion.cubeEstar u →
+          MetricChain.BoundedAccuracy.exactRec (MetricChain.HintRecursion.cubeNa u) k g -
+              MetricChain.HintRecursion.cubeHint u g ≤
+            max
+                (ScienceR13.c1 (MetricChain.HintRecursion.cubeA u) (MetricChain.HintRecursion.cubeH u) +
+                  (g + MetricChain.HintRecursion.cubeHint u g))
+                ((1 + ScienceR13.c2 (MetricChain.HintRecursion.cubeA u) (MetricChain.HintRecursion.cubeH u)) *
+                  (MetricChain.HintRecursion.cubeA u - MetricChain.HintRecursion.cubeH u + g)) /
+              (↑(k + 1) + ScienceR13.c2 (MetricChain.HintRecursion.cubeA u) (MetricChain.HintRecursion.cubeH u))
+
+real	0m36.590s
+user	0m40.888s
+sys	0m2.235s
+exit=0

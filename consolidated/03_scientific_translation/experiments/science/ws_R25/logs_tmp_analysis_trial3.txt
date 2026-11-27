@@ -1,0 +1,109 @@
+loaded 1349 ordered instances (m, B, order of item sizes) from 2 file(s)
+families (m,B): 18; instances (multisets a): 198; connected structures (equal items not distinguished): 24259823, of which B >= 2: 24204113; with all strands labelled: 194543536; tiling structures: 449
+instances (multisets) per family: (1,1):1, (1,2):2, (2,1):2, (1,3):3, (3,1):3, (1,4):5, (2,2):5, (4,1):5, (1,5):7, (5,1):7, (1,6):11, (2,3):11, (3,2):11, (6,1):11, (1,7):15, (7,1):15, (2,5):42, (5,2):42
+family: ordered instances, structures, tilings, Pareto front of non-tiling (A, Fd, nb)
+  m=1 B=1: 1, 1, 1, []
+  m=1 B=2: 2, 6, 2, [(1, 0, 0)]
+  m=2 B=1: 2, 6, 1, [(1, 1, 0)]
+  m=1 B=3: 4, 34, 4, [(1, 0, 0)]
+  m=3 B=1: 4, 34, 1, [(1, 1, 0), (2, 2, 0)]
+  m=1 B=4: 8, 200, 8, [(1, 0, 0)]
+  m=2 B=2: 8, 200, 4, [(1, 0, 0), (1, 1, 1), (2, 1, 0)]
+  m=4 B=1: 8, 200, 1, [(1, 1, 0), (2, 2, 0), (3, 3, 0)]
+  m=1 B=5: 16, 1211, 16, [(1, 0, 0)]
+  m=5 B=1: 16, 1211, 1, [(1, 1, 0), (2, 2, 0), (3, 3, 0), (4, 4, 0)]
+  m=1 B=6: 32, 7476, 32, [(1, 0, 0)]
+  m=2 B=3: 32, 7476, 16, [(1, 0, 0), (1, 1, 1), (3, 1, 0)]
+  m=3 B=2: 32, 7476, 8, [(1, 0, 0), (1, 1, 1), (2, 1, 0), (2, 2, 2), (3, 2, 1), (4, 2, 0)]
+  m=6 B=1: 32, 7476, 1, [(1, 1, 0), (2, 2, 0), (3, 3, 0), (4, 4, 0), (5, 5, 0)]
+  m=1 B=7: 64, 46782, 64, [(1, 0, 0)]
+  m=7 B=1: 64, 46782, 1, [(1, 1, 0), (2, 2, 0), (3, 3, 0), (4, 4, 0), (5, 5, 0), (6, 6, 0)]
+  m=2 B=5: 512, 12066626, 256, [(1, 0, 0), (1, 1, 1), (5, 1, 0)]
+  m=5 B=2: 512, 12066626, 32, [(1, 0, 0), (1, 1, 1), (2, 1, 0), (2, 2, 2), (3, 2, 1), (3, 3, 3), (4, 2, 0), (4, 3, 2), (4, 4, 4), (5, 3, 1), (5, 4, 3), (6, 3, 0), (6, 4, 2), (7, 4, 1), (8, 4, 0)]
+C1 tiling structures with (A,Fd,nb) != (0,0,0): 0 violations of 449
+C2 Theorem 1c as stated (X>=1, B>=2, X<1+min(1,g)); grid X,g in (1/20)Z, g also 5 and 50: 1050 parameter points, 37800 (front triple, point) pairs, violations 0, least value of gap - eps_x: 0; eps_x attained in families [(1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (2, 2), (2, 3), (2, 5), (3, 2), (5, 2)]
+C2 Theorem 1c as stated (X>=1, B>=2, X<1+min(1,g)); boundary points X = 1+min(1,g)-1e-6 and X = 1: 10 parameter points, 360 (front triple, point) pairs, violations 0, least value of gap - eps_x: 0; eps_x attained in families [(1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (2, 2), (2, 3), (2, 5), (3, 2), (5, 2)]
+C2c control (claimed gap eps_x + 1/20): fails at 3912 (family, grid point) pairs
+C2d regime X < 1 (not the object of this review), all B >= 1, gap 1 - X: 71820 pairs, violations 0
+C3 control B=1, m=1: grid points in the regime 1010; conclusion 'gap >= eps_x' fails at 0; 'non-tiling above E_0' fails at 0; front []
+C3 control B=1, m=2: grid points in the regime 1010; conclusion 'gap >= eps_x' fails at 1010; 'non-tiling above E_0' fails at 1010; front [(1, 1, 0)]
+C3 control B=1, m=3: grid points in the regime 1010; conclusion 'gap >= eps_x' fails at 1010; 'non-tiling above E_0' fails at 1010; front [(1, 1, 0), (2, 2, 0)]
+C3 control B=1, m=4: grid points in the regime 1010; conclusion 'gap >= eps_x' fails at 1010; 'non-tiling above E_0' fails at 1010; front [(1, 1, 0), (2, 2, 0), (3, 3, 0)]
+C3 control B=1, m=5: grid points in the regime 1010; conclusion 'gap >= eps_x' fails at 1010; 'non-tiling above E_0' fails at 1010; front [(1, 1, 0), (2, 2, 0), (3, 3, 0), (4, 4, 0)]
+C3 control B=1, m=6: grid points in the regime 1010; conclusion 'gap >= eps_x' fails at 1010; 'non-tiling above E_0' fails at 1010; front [(1, 1, 0), (2, 2, 0), (3, 3, 0), (4, 4, 0), (5, 5, 0)]
+C3 control B=1, m=7: grid points in the regime 1010; conclusion 'gap >= eps_x' fails at 1010; 'non-tiling above E_0' fails at 1010; front [(1, 1, 0), (2, 2, 0), (3, 3, 0), (4, 4, 0), (5, 5, 0), (6, 6, 0)]
+C4 control B=2, m=2: grid points with X >= 1+min(1,g): 435; a non-tiling structure at or below E_0 exists at 435 of them
+C4 control B=2, m=3: grid points with X >= 1+min(1,g): 435; a non-tiling structure at or below E_0 exists at 435 of them
+C4 control B=2, m=5: grid points with X >= 1+min(1,g): 435; a non-tiling structure at or below E_0 exists at 435 of them
+C5 control model (x,gamma)=(sigma,0): instances with B >= 2 having a non-tiling structure at or below E_0: 101 of 154
+C5 control model |x|=|sigma|+gamma<2|sigma|: instances with B >= 2 having a non-tiling structure at or below E_0: 101 of 154
+C5 control model |x|=2|sigma|<|sigma|+gamma: instances with B >= 2 having a non-tiling structure at or below E_0: 52 of 154
+C6 exact region: for each family, (i) every non-tiling triple is > 0 on {0<=X<min(B,1+g), g>=0} [A>0, A-Fd>=0, A-B*Fd+(B-1)*nb>=0];  (ii) triples (1,1,1) [straddle] and (B,1,0) [unpaired block] present
+  m=1 B=1: (i) violations 0 ; (ii) straddle False, unpaired block False; triple (1,0,0) present False
+  m=1 B=2: (i) violations 0 ; (ii) straddle False, unpaired block False; triple (1,0,0) present True
+  m=2 B=1: (i) violations 0 ; (ii) straddle False, unpaired block True; triple (1,0,0) present False
+  m=1 B=3: (i) violations 0 ; (ii) straddle False, unpaired block False; triple (1,0,0) present True
+  m=3 B=1: (i) violations 0 ; (ii) straddle False, unpaired block True; triple (1,0,0) present False
+  m=1 B=4: (i) violations 0 ; (ii) straddle False, unpaired block False; triple (1,0,0) present True
+  m=2 B=2: (i) violations 0 ; (ii) straddle True, unpaired block True; triple (1,0,0) present True
+  m=4 B=1: (i) violations 0 ; (ii) straddle False, unpaired block True; triple (1,0,0) present False
+  m=1 B=5: (i) violations 0 ; (ii) straddle False, unpaired block False; triple (1,0,0) present True
+  m=5 B=1: (i) violations 0 ; (ii) straddle False, unpaired block True; triple (1,0,0) present False
+  m=1 B=6: (i) violations 0 ; (ii) straddle False, unpaired block False; triple (1,0,0) present True
+  m=2 B=3: (i) violations 0 ; (ii) straddle True, unpaired block True; triple (1,0,0) present True
+  m=3 B=2: (i) violations 0 ; (ii) straddle True, unpaired block True; triple (1,0,0) present True
+  m=6 B=1: (i) violations 0 ; (ii) straddle False, unpaired block True; triple (1,0,0) present False
+  m=1 B=7: (i) violations 0 ; (ii) straddle False, unpaired block False; triple (1,0,0) present True
+  m=7 B=1: (i) violations 0 ; (ii) straddle False, unpaired block True; triple (1,0,0) present False
+  m=2 B=5: (i) violations 0 ; (ii) straddle True, unpaired block True; triple (1,0,0) present True
+  m=5 B=2: (i) violations 0 ; (ii) straddle True, unpaired block True; triple (1,0,0) present True
+C6 total violations of (i): 0
+C6b m=2 B=3: grid points outside the stated hypothesis but with X < min(B,1+g): 74; conclusion still holds at 74
+C6b m=2 B=5: grid points outside the stated hypothesis but with X < min(B,1+g): 174; conclusion still holds at 174
+C7 m=1 B=1: no non-tiling structure at all
+C7 m=1 B=2: grid points 190; least gap below min(1,1+g-X,B-X): 0; equal: 115
+C7 m=2 B=1: grid points 100; least gap below min(1,1+g-X,B-X): 0; equal: 100
+C7 m=1 B=3: grid points 264; least gap below min(1,1+g-X,B-X): 0; equal: 189
+C7 m=3 B=1: grid points 100; least gap below min(1,1+g-X,B-X): 0; equal: 100
+C7 m=1 B=4: grid points 322; least gap below min(1,1+g-X,B-X): 0; equal: 247
+C7 m=2 B=2: grid points 190; least gap below min(1,1+g-X,B-X): 0; equal: 190
+C7 m=4 B=1: grid points 100; least gap below min(1,1+g-X,B-X): 0; equal: 100
+C7 m=1 B=5: grid points 364; least gap below min(1,1+g-X,B-X): 0; equal: 289
+C7 m=5 B=1: grid points 100; least gap below min(1,1+g-X,B-X): 0; equal: 100
+C7 m=1 B=6: grid points 390; least gap below min(1,1+g-X,B-X): 0; equal: 315
+C7 m=2 B=3: grid points 264; least gap below min(1,1+g-X,B-X): 0; equal: 264
+C7 m=3 B=2: grid points 190; least gap below min(1,1+g-X,B-X): 0; equal: 190
+C7 m=6 B=1: grid points 100; least gap below min(1,1+g-X,B-X): 0; equal: 100
+C7 m=1 B=7: grid points 394; least gap below min(1,1+g-X,B-X): 0; equal: 325
+C7 m=7 B=1: grid points 100; least gap below min(1,1+g-X,B-X): 0; equal: 100
+C7 m=2 B=5: grid points 364; least gap below min(1,1+g-X,B-X): 0; equal: 364
+C7 m=5 B=2: grid points 190; least gap below min(1,1+g-X,B-X): 0; equal: 190
+C7 total grid points with a gap below the conjectured formula: 0
+C8 B=1, x=sigma (X=1), gamma=1; no-instance : smallest a=(2,), m=2, B=1 (N=5, c=2); (A,Fd,nb)=(1, 1, 0), E-E_0=0; circular order of item sizes (2,); pairs: G3-item1.1
+C8 B=1, x=sigma (X=1), gamma=1; yes-instance: none found
+C8 B=1, X=3/2, gamma=1; no-instance : smallest a=(2,), m=2, B=1 (N=5, c=2); (A,Fd,nb)=(1, 1, 0), E-E_0=-1/2; circular order of item sizes (2,); pairs: G3-item1.1
+C8 B=1, X=3/2, gamma=1; yes-instance: none found
+C8 B>=2, (X,gamma)=(1,0); no-instance : smallest a=(4,), m=2, B=2 (N=9, c=2); (A,Fd,nb)=(1, 1, 1), E-E_0=0; circular order of item sizes (4,); pairs: G1-item1.4 G2-item1.3 G4-item1.2 G5-item1.1
+C8 B>=2, (X,gamma)=(1,0); yes-instance: smallest a=(1, 1, 2), m=2, B=2 (N=9, c=4); (A,Fd,nb)=(1, 1, 1), E-E_0=0; circular order of item sizes (1, 2, 1); pairs: G1-item3.1 G2-item2.2 G4-item2.1 G5-item1.1
+C8 B>=2, X=1+gamma=3/2 (gamma=1/2); no-instance : smallest a=(4,), m=2, B=2 (N=9, c=2); (A,Fd,nb)=(1, 1, 1), E-E_0=0; circular order of item sizes (4,); pairs: G1-item1.4 G2-item1.3 G4-item1.2 G5-item1.1
+C8 B>=2, X=1+gamma=3/2 (gamma=1/2); yes-instance: smallest a=(1, 1, 2), m=2, B=2 (N=9, c=4); (A,Fd,nb)=(1, 1, 1), E-E_0=0; circular order of item sizes (1, 2, 1); pairs: G1-item3.1 G2-item2.2 G4-item2.1 G5-item1.1
+C8 B>=2, X=2, gamma=2; no-instance : smallest a=(4,), m=2, B=2 (N=9, c=2); (A,Fd,nb)=(2, 1, 0), E-E_0=0; circular order of item sizes (4,); pairs: G4-item1.2 G5-item1.1
+C8 B>=2, X=2, gamma=2; yes-instance: smallest a=(2, 2), m=2, B=2 (N=9, c=3); (A,Fd,nb)=(2, 1, 0), E-E_0=0; circular order of item sizes (2, 2); pairs: G4-item2.1 G5-item1.2
+C8 B>=3, X=2, gamma=2 (outside the stated range, inside X<min(B,1+g)); no-instance : none found
+C8 B>=3, X=2, gamma=2 (outside the stated range, inside X<min(B,1+g)); yes-instance: none found
+C8 B>=3, X=3, gamma=3; no-instance : smallest a=(6,), m=2, B=3 (N=13, c=2); (A,Fd,nb)=(3, 1, 0), E-E_0=0; circular order of item sizes (6,); pairs: G5-item1.3 G6-item1.2 G7-item1.1
+C8 B>=3, X=3, gamma=3; yes-instance: smallest a=(3, 3), m=2, B=3 (N=13, c=3); (A,Fd,nb)=(3, 1, 0), E-E_0=0; circular order of item sizes (3, 3); pairs: G5-item2.1 G6-item1.3 G7-item1.2
+C9 a=(2,) m=2 B=1 order (2,) (M=1, n-m=-1): [- st=0 fl=0 nb=0 x4 -> (A,Fd,nb)=(1,1,0)] [- st=0 fl=0 nb=1 x1 -> (A,Fd,nb)=(1,1,1)]
+C9 a=(4,) m=2 B=2 order (4,) (M=3, n-m=-1): [- st=0 fl=0 nb=0 x16 -> (A,Fd,nb)=(3,1,0)] [- st=0 fl=0 nb=1 x30 -> (A,Fd,nb)=(3,1,1)] [- st=0 fl=0 nb=2 x4 -> (A,Fd,nb)=(3,1,2)] [- st=1 fl=0 nb=0 x6 -> (A,Fd,nb)=(2,1,0)] [- st=1 fl=0 nb=1 x12 -> (A,Fd,nb)=(2,1,1)] [- st=2 fl=0 nb=1 x1 -> (A,Fd,nb)=(1,1,1)]
+C9 a=(3, 1) m=2 B=2 order (1, 3) (M=2, n-m=0): [- st=0 fl=0 nb=0 x16 -> (A,Fd,nb)=(2,0,0)] [- st=0 fl=0 nb=1 x4 -> (A,Fd,nb)=(2,0,1)] [- st=0 fl=1 nb=0 x2 -> (A,Fd,nb)=(2,1,0)] [- st=0 fl=1 nb=1 x4 -> (A,Fd,nb)=(2,1,1)] [- st=1 fl=0 nb=0 x4 -> (A,Fd,nb)=(1,0,0)] [- st=1 fl=1 nb=1 x1 -> (A,Fd,nb)=(1,1,1)]
+C9 a=(3, 1) m=2 B=2 order (3, 1) (M=2, n-m=0): [- st=0 fl=0 nb=0 x16 -> (A,Fd,nb)=(2,0,0)] [- st=0 fl=0 nb=1 x4 -> (A,Fd,nb)=(2,0,1)] [- st=0 fl=1 nb=0 x2 -> (A,Fd,nb)=(2,1,0)] [- st=0 fl=1 nb=1 x4 -> (A,Fd,nb)=(2,1,1)] [- st=1 fl=0 nb=0 x4 -> (A,Fd,nb)=(1,0,0)] [- st=1 fl=1 nb=1 x1 -> (A,Fd,nb)=(1,1,1)]
+C9 a=(2, 2) m=2 B=2 order (2, 2) (M=2, n-m=0): [- st=0 fl=0 nb=0 x22 -> (A,Fd,nb)=(2,0,0)] [- st=0 fl=0 nb=1 x4 -> (A,Fd,nb)=(2,0,1)] [- st=0 fl=1 nb=0 x2 -> (A,Fd,nb)=(2,1,0)] [- st=0 fl=1 nb=1 x4 -> (A,Fd,nb)=(2,1,1)] [- st=1 fl=0 nb=0 x8 -> (A,Fd,nb)=(1,0,0)] [T st=2 fl=0 nb=0 x1 -> (A,Fd,nb)=(0,0,0)]
+C9 a=(1, 1, 2) m=2 B=2 order (1, 1, 2) (M=1, n-m=1): [- st=0 fl=0 nb=0 x2 -> (A,Fd,nb)=(1,-1,0)] [- st=0 fl=1 nb=0 x6 -> (A,Fd,nb)=(1,0,0)] [T st=1 fl=1 nb=0 x1 -> (A,Fd,nb)=(0,0,0)]
+C9 a=(1, 1, 2) m=2 B=2 order (1, 2, 1) (M=1, n-m=1): [- st=0 fl=0 nb=0 x4 -> (A,Fd,nb)=(1,-1,0)] [- st=0 fl=1 nb=0 x4 -> (A,Fd,nb)=(1,0,0)] [- st=0 fl=2 nb=1 x1 -> (A,Fd,nb)=(1,1,1)]
+C9 a=(1, 1, 2) m=2 B=2 order (2, 1, 1) (M=1, n-m=1): [- st=0 fl=0 nb=0 x2 -> (A,Fd,nb)=(1,-1,0)] [- st=0 fl=1 nb=0 x6 -> (A,Fd,nb)=(1,0,0)] [T st=1 fl=1 nb=0 x1 -> (A,Fd,nb)=(0,0,0)]
+analysis time 1.1 s
+peak memory 24.8 MB
+
+real	0m1.200s
+user	0m1.163s
+sys	0m0.017s

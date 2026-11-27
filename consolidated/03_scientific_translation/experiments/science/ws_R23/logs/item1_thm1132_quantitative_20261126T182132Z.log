@@ -1,0 +1,10 @@
+kappa   instances   violations of K_-[(1-kappa)c] <= N2   violations of K_-[c] <= N2 (the theorem's display with the full constant)   min(N2 - K_-[(1-kappa)c])
+ 0.00          12                                      0                                        0                             0
+ 0.50          12                                      0                                        3                             0
+ 0.90          12                                      0                                       10                             2
+ 1.00          12                                      0                                        8                             3
+statement S violated: 0 times (kappa = 0, 0.5, 0.9; includes the theorem as stated at kappa = 0)
+control kappa = 1 (boundary members allowed): the theorem's display K_-[c] <= N2 fails in 8 of 12 instances (violation of the control if 0)
+TOTAL violations: 0
+elapsed 88.7 s
+END item1_thm1132_quantitative

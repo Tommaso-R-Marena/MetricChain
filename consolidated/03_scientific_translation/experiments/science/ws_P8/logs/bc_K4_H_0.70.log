@@ -1,0 +1,11 @@
+=== p8_03c_blockcheck: K4 on H, tau 0.7: atoms 100, sites 4, 16464 states, anchor (10, 10, 8, 3); 5 subsets, 16 blocks; accumulators at most 0.01 GB
+    row 100/100 done, checkpoint written, 40 s, RSS 188 MB
+    B1 'Sb' block bound >= exact block constant (all contexts; absolute values term by term): 80 comparisons, 0 violations; ratio bound/exact (exact > 1e-10): min 1.0520, median 2.34, max 9.1
+    B2 'SAb' block bound >= exact block constant with the hosts outside T at the anchor: 80 comparisons, 0 violations; ratio bound/exact (exact > 1e-10): min 1.0419, median 2.32, max 9.1
+    (for information: 'SAb' < exact ALL-context block constant in 19 of 80 cases)
+    B3 every state, block and order: sum over the terms of the block of |tau - I_(m-1) tau|(x) <= block envelope: 526848 comparisons per variant; violations Sb: 0, SAb: 0; smallest ratio envelope/exact: Sb 1.0530, SAb 1.0419
+    B4 every state, 4 charge systems (true charges, all charges positive, sign pattern of order 3, sign pattern of order 4): |g_s - I_(m-1) g_s| <= envelope: 131712 state checks per variant; violations Sb: 0, SAb: 0; smallest ratio envelope/|remainder|: Sb 4.39, SAb 4.36
+    B5 'Sb' against P3's termwise.TermBound in anchored mode (5 subsets): largest relative deviation 4.2e-16;  Sb <= S, SAb <= SA, SAb <= Sb: 15 comparisons, 0 violations
+--- order 3: sums over 4 subsets (kcal/mol): truth 2.3244e-01 | exact block constants 2.4869e+00 (restricted 2.4594e+00) | pair-by-pair 4.3891e+00 | SAb 8.3045e+00 | Sb 8.3995e+00 | SA 1.0051e+01 | S 1.0200e+01 | P3 3.3584e+01;  P3/SAb = 4.04, S/Sb = 1.214, SAb/truth = 35.7
+--- order 4: sums over 1 subsets (kcal/mol): truth 2.9417e-03 | exact block constants 3.6681e-02 (restricted 3.6681e-02) | pair-by-pair 7.7455e-02 | SAb 2.0072e-01 | Sb 2.0072e-01 | SA 2.4590e-01 | S 2.4590e-01 | P3 8.5377e-01;  P3/SAb = 4.25, S/Sb = 1.225, SAb/truth = 68.2
+DONE in 42.1 s; peak RSS 277 MB

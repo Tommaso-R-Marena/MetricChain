@@ -1,0 +1,1 @@
+Lys₁₂: sampled interval `[517.128526, 517.128559]` (width 3.3e-05); of my 32 certified brackets (all orders, all rows) 32 contain it and 32 overlap it.  (LKSE)₃: sampled interval `[655.592089, 655.632643]` (width 0.041); of my 16 certified brackets (all orders, all rows) 12 contain it and 16 overlap it; the narrowest, `[655.604050, 655.621038]` (order 5, s2:W), is inside it.

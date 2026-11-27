@@ -1,0 +1,7 @@
+# Part B: Algorithm 2L+ with real inner brackets (Proposition K0 on each fibre), constants of the theorem
+# time limit after 475 runs
+runs completed 475 (skipped 0); real inner brackets: 36402447; rungs served by enumeration: 194 of 965
+final brackets invalid: 0; wider than x_out: 0; aborts: 0
+inner brackets invalid or wider than requested: 0 (in 0 runs); runs with the good event (V1)-(V3) failing: 0
+runs with a violated claim of Theorem K1 on the good event: 0 
+widest final bracket ln(U/L) = 4.066; smallest distance to x_out = 0.1206; largest (number of evaluations)/C_max = 0.00566  [522 s]

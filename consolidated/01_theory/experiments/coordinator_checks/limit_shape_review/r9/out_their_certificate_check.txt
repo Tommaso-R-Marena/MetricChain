@@ -1,0 +1,7 @@
+their bridge with 9 beads: walk, bridge: ok; (h,g; N+3) = (0, 2, 6, 5, 12) (claimed (0, 2, 6, 5, 12)); clean: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0)
+their bridge with 4 beads: walk, bridge: ok; (h,g; N+3) = (0, 0, 1, 1, 7) (claimed (0, 0, 1, 1, 7)); clean: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0)
+their bridge with 11 beads: walk, bridge: ok; (h,g; N+3) = (1, 6, 11, 7, 14) (claimed (1, 6, 11, 7, 14)); clean: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0)
+their bridge with 5 beads: walk, bridge: ok; (h,g; N+3) = (0, 0, 1, 1, 8) (claimed (0, 0, 1, 1, 8)); clean: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0)
+their bridge with 9 beads: walk, bridge: ok; (h,g; N+3) = (0, 3, 6, 4, 12) (claimed (0, 3, 6, 4, 12)); clean: True; A = (0, 0, 0, 0), B = (0, 0, 0, 0)
+determinant of their five vectors (exact integers): 1
+their five coordinate lists are the same walks as the examples found by my own enumeration (out_lattice.txt): True

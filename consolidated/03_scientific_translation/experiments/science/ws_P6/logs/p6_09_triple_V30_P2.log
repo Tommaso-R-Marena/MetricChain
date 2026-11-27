@@ -1,0 +1,13 @@
+=== triple shares: V30 on P2, tau 0.7: atoms 492, sites 30, |X| = 2.05891e+14; anchor E = -440.600038; orders [4]; bands [8]; enumeration False [2.9s]
+      GFBatch: host site 1/30 done, 9s
+      GFBatch: host site 7/30 done, 57s
+      GFBatch: host site 13/30 done, 99s
+      GFBatch: host site 19/30 done, 137s
+      GFBatch: host site 25/30 done, 166s
+      GFBatch: host site 30/30 done, 184s
+  -- m = 4: Gamma_4 = 4.578162e+00 kcal/mol; 672 in-window triple sums (window 8) by the closed form with three excluded sites [299.9s]; max H_ijk/C(m,3) = 5.6254e-02; sum over in-window triples / C(m,3) = 4.571834e+00 (99.86 % of Gamma)
+     w =  8 form S: ln Z(m_-) = 746.753175, ln Z(m_+) = 743.921909, width 2.831266 nats; min m_- = -440.600048 [0.1s]
+     w =  8 form B: ln Z(m_-) = 745.463573, ln Z(m_+) = 744.961423, width 0.502150 nats; min m_- = -440.600048 [0.1s]
+     w =  8 form T: ln Z(m_-) = 745.235797, ln Z(m_+) = 745.144786, width 0.091011 nats; min m_- = -440.600048 [0.2s]
+    checks with the real energy and of |remainder| <= penalty: 0, violations 0; checks of the extreme members: 0, violations 0
+DONE p6_09_triple V30 P2 0.7 [521s]

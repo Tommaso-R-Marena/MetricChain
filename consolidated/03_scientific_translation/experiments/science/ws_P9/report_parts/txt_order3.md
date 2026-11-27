@@ -1,0 +1,1 @@
+Lys₁₂ is still certified from its order-3 ball (3 841 evaluations) within {K12_3_s2_W} nats, `[{K12_3_s2_W_lo}, {K12_3_s2_W_hi}]`; (LKSE)₃ is not ({LKSE_3_s2_W} nats: its floor delocalises completely).

@@ -1,0 +1,159 @@
+{
+ "cells": [
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.4,
+   "na": 221.8881433434547,
+   "worst_product": 206.9274579325496,
+   "worst_bound": 206.9274579325496,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.35,
+   "na": 221.8881433434547,
+   "worst_product": 219.9460875358434,
+   "worst_bound": 219.9460875358434,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.55,
+   "na": 221.8881433434547,
+   "worst_product": 187.869962139322,
+   "worst_bound": 187.869962139322,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.5,
+   "na": 221.8881433434547,
+   "worst_product": 182.3765342234452,
+   "worst_bound": 182.3765342234452,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.45,
+   "na": 221.8881433434547,
+   "worst_product": 195.12172923937635,
+   "worst_bound": 195.12172923937635,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.65,
+   "na": 221.8881433434547,
+   "worst_product": 212.99039105029314,
+   "worst_bound": 212.99039105029314,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.6,
+   "na": 221.8881433434547,
+   "worst_product": 199.73695883172064,
+   "worst_bound": 199.73695883172064,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.7,
+   "na": 221.8881433434547,
+   "worst_product": 226.24617142449318,
+   "worst_bound": 226.24617142449318,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.75,
+   "na": 221.8881433434547,
+   "worst_product": 238.12136620057595,
+   "worst_bound": 238.12136620057595,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.8,
+   "na": 221.8881433434547,
+   "worst_product": 251.38998382721402,
+   "worst_bound": 251.38998382721402,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.85,
+   "na": 221.8881433434547,
+   "worst_product": 263.29992304794195,
+   "worst_bound": 263.29992304794195,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 2000,
+   "phi": 0.3,
+   "na": 221.8881433434547,
+   "worst_product": 231.76847671615184,
+   "worst_bound": 231.76847671615184,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  }
+ ],
+ "by_u": {
+  "1": {
+   "cells": 12,
+   "max_gap": 0.0,
+   "max_gap_over_na": 0.0,
+   "max_worst_increase_over_na": 0.0,
+   "worst_increase_at": null
+  }
+ },
+ "above_Cmax": 0,
+ "seconds": 29.489346504211426
+}

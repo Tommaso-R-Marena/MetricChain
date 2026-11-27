@@ -1,0 +1,16 @@
+[06:37:07] START python3 -B x04_block_probe.py K12 H 0.70 4 40
+[06:37:25] END   (exit 0) x04_block_probe.py K12 H 0.70 4 40
+[06:37:25] START python3 -B x04_block_probe.py K12 H 0.70 6 40
+[06:37:49] END   (exit 0) x04_block_probe.py K12 H 0.70 6 40
+[06:37:49] START python3 -B x04_block_probe.py LKSE:12 H 0.60 5 40
+[06:37:59] END   (exit 0) x04_block_probe.py LKSE:12 H 0.60 5 40
+[06:37:59] START python3 -B x04_block_probe.py S12 H 0.70 5 40
+[06:38:02] END   (exit 0) x04_block_probe.py S12 H 0.70 5 40
+[06:38:02] START python3 -B p8_05_gibbs.py K12 H 0.70 --budget 1000
+[06:38:02] END   (exit 0) p8_05_gibbs.py K12 H 0.70 --budget 1000
+[06:38:02] START python3 -B p8_07_estimate.py K12 H 0.70 6
+[06:38:04] END   (exit 0) p8_07_estimate.py K12 H 0.70 6
+[06:38:04] START python3 -B p8_08_ideal.py K12 H 0.70
+[06:38:36] END   (exit 0) p8_08_ideal.py K12 H 0.70
+[06:38:36] START python3 -B p8_03b_statecheck.py K5 H 0.70 --budget 1000
+Terminated

@@ -1,0 +1,95 @@
+# engine=enum nruns=600 seed=41 mutation=maxform Kdiv=1
+runs completed 600, skipped (sample too large for the simulation) 0   [14 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 240 on the good event, 0 off it
+  violated claims on the good event: {'width': 111, 'width-pop': 240}
+  violated claims off the good event: none
+# engine=radial nruns=150 seed=41 mutation=maxform Kdiv=1
+runs completed 119, skipped (sample too large for the simulation) 31   [58 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 49 on the good event, 0 off it
+  violated claims on the good event: {'width-pop': 49, 'width': 22}
+  violated claims off the good event: none
+# engine=grouped nruns=600 seed=41 mutation=maxform Kdiv=1
+runs completed 574, skipped (sample too large for the simulation) 26   [33 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 338 on the good event, 0 off it
+  violated claims on the good event: {'width': 262, 'width-pop': 338}
+  violated claims off the good event: none
+
+# engine=enum nruns=600 seed=41 mutation=noharper Kdiv=1
+runs completed 600, skipped (sample too large for the simulation) 0   [16 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 12 on the good event, 0 off it
+  violated claims on the good event: {'iii': 12, 'iii-r': 12, 'iv-Mneg': 4}
+  violated claims off the good event: none
+# engine=radial nruns=150 seed=41 mutation=noharper Kdiv=1
+runs completed 116, skipped (sample too large for the simulation) 34   [58 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 2 on the good event, 0 off it
+  violated claims on the good event: {'iii': 2, 'iii-r': 2}
+  violated claims off the good event: none
+# engine=grouped nruns=600 seed=41 mutation=noharper Kdiv=1
+runs completed 538, skipped (sample too large for the simulation) 62   [34 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 88 on the good event, 0 off it
+  violated claims on the good event: {'iii': 88, 'iii-r': 88, 'iv-Mneg': 39}
+  violated claims off the good event: none
+
+# engine=enum nruns=600 seed=41 mutation=close_at_no Kdiv=1
+runs completed 600, skipped (sample too large for the simulation) 0   [3 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 536 on the good event, 0 off it
+  violated claims on the good event: {'ii-U': 536}
+  violated claims off the good event: none
+# engine=radial nruns=150 seed=41 mutation=close_at_no Kdiv=1
+runs completed 142, skipped (sample too large for the simulation) 8   [12 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 127 on the good event, 0 off it
+  violated claims on the good event: {'ii-U': 127}
+  violated claims off the good event: none
+# engine=grouped nruns=600 seed=41 mutation=close_at_no Kdiv=1
+runs completed 587, skipped (sample too large for the simulation) 13   [11 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 418 on the good event, 0 off it
+  violated claims on the good event: {'ii-U': 418}
+  violated claims off the good event: none
+
+# engine=enum nruns=600 seed=41 mutation=neg_tol Kdiv=1
+runs completed 600, skipped (sample too large for the simulation) 0   [13 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 395 on the good event, 0 off it
+  violated claims on the good event: {'v-count': 386, 'iv-Mneg': 90}
+  violated claims off the good event: none
+# engine=radial nruns=150 seed=41 mutation=neg_tol Kdiv=1
+runs completed 119, skipped (sample too large for the simulation) 31   [58 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 74 on the good event, 0 off it
+  violated claims on the good event: {'v-count': 71, 'iv-Mneg': 16}
+  violated claims off the good event: none
+# engine=grouped nruns=600 seed=41 mutation=neg_tol Kdiv=1
+runs completed 569, skipped (sample too large for the simulation) 31   [29 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 316 on the good event, 0 off it
+  violated claims on the good event: {'v-count': 316}
+  violated claims off the good event: none
+
+# engine=enum nruns=600 seed=41 mutation=q_plain Kdiv=1
+runs completed 600, skipped (sample too large for the simulation) 0   [10 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 262 on the good event, 0 off it
+  violated claims on the good event: {'ii-q': 262, 'ii-U': 7}
+  violated claims off the good event: none
+# engine=radial nruns=150 seed=41 mutation=q_plain Kdiv=1
+runs completed 127, skipped (sample too large for the simulation) 23   [42 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 41 on the good event, 0 off it
+  violated claims on the good event: {'ii-q': 41}
+  violated claims off the good event: none
+# engine=grouped nruns=600 seed=41 mutation=q_plain Kdiv=1
+runs completed 580, skipped (sample too large for the simulation) 20   [31 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 350 on the good event, 0 off it
+  violated claims on the good event: {'ii-q': 350}
+  violated claims off the good event: none
+

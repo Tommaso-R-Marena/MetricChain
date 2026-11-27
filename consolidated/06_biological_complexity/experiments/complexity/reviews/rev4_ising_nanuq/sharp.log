@@ -1,0 +1,30 @@
+circular binary trees on 6 points: 14
+tree-generated systems on 6 points: 150
+Kalmanson with exact support: 141 ; failing: 9 (negative weight 3, Kalmanson with wrong support 6)
+6-locally good: 127 ; excluded: 23 (of which globally fine on six points: 14)
+excluded systems by (missing 2-splits, missing 3-splits, fine on 6 points, Kalmanson on 6 points): {(3, 0, True, True): 2, (2, 0, True, True): 6, (1, 1, False, True): 6, (2, 0, False, False): 3, (1, 0, True, True): 6}
+  excluded system  0  missing(2-splits,3-splits)=(3, 0) fine_on_6=True : minimal failing blow-up (10, (1, 1, 1, 3, 3, 1), 'negative') ; first negative weight (10, (1, 1, 1, 3, 3, 1))  [0s]
+  excluded system  1  missing(2-splits,3-splits)=(3, 0) fine_on_6=True : minimal failing blow-up (10, (1, 1, 1, 1, 3, 3), 'negative') ; first negative weight (10, (1, 1, 1, 1, 3, 3))  [0s]
+  excluded system  2  missing(2-splits,3-splits)=(2, 0) fine_on_6=True : minimal failing blow-up (8, (1, 1, 1, 1, 1, 3), 'kalmanson') ; first negative weight (9, (1, 2, 3, 1, 1, 1))  [0s]
+  excluded system  3  missing(2-splits,3-splits)=(1, 1) fine_on_6=False : minimal failing blow-up (6, None, 'kalmanson') ; first negative weight None  [3s]
+  excluded system  4  missing(2-splits,3-splits)=(2, 0) fine_on_6=False : minimal failing blow-up (6, None, 'negative') ; first negative weight (6, None)  [3s]
+  excluded system  5  missing(2-splits,3-splits)=(2, 0) fine_on_6=True : minimal failing blow-up (8, (1, 1, 1, 2, 2, 1), 'kalmanson') ; first negative weight (9, (1, 1, 1, 2, 3, 1))  [3s]
+  excluded system  6  missing(2-splits,3-splits)=(1, 1) fine_on_6=False : minimal failing blow-up (6, None, 'kalmanson') ; first negative weight None  [5s]
+  excluded system  7  missing(2-splits,3-splits)=(2, 0) fine_on_6=True : minimal failing blow-up (8, (1, 1, 1, 1, 3, 1), 'kalmanson') ; first negative weight (9, (1, 1, 1, 2, 3, 1))  [5s]
+  excluded system  8  missing(2-splits,3-splits)=(2, 0) fine_on_6=False : minimal failing blow-up (6, None, 'negative') ; first negative weight (6, None)  [5s]
+  excluded system  9  missing(2-splits,3-splits)=(1, 1) fine_on_6=False : minimal failing blow-up (6, None, 'kalmanson') ; first negative weight None  [8s]
+  excluded system 10  missing(2-splits,3-splits)=(2, 0) fine_on_6=True : minimal failing blow-up (8, (1, 1, 1, 1, 1, 3), 'kalmanson') ; first negative weight (9, (1, 1, 1, 1, 2, 3))  [8s]
+  excluded system 11  missing(2-splits,3-splits)=(1, 1) fine_on_6=False : minimal failing blow-up (6, None, 'kalmanson') ; first negative weight None  [10s]
+  excluded system 12  missing(2-splits,3-splits)=(1, 1) fine_on_6=False : minimal failing blow-up (6, None, 'kalmanson') ; first negative weight None  [12s]
+  excluded system 13  missing(2-splits,3-splits)=(1, 1) fine_on_6=False : minimal failing blow-up (6, None, 'kalmanson') ; first negative weight None  [14s]
+  excluded system 14  missing(2-splits,3-splits)=(2, 0) fine_on_6=True : minimal failing blow-up (8, (1, 1, 1, 3, 1, 1), 'kalmanson') ; first negative weight (9, (1, 1, 2, 3, 1, 1))  [15s]
+  excluded system 15  missing(2-splits,3-splits)=(2, 0) fine_on_6=False : minimal failing blow-up (6, None, 'negative') ; first negative weight (6, None)  [15s]
+  excluded system 16  missing(2-splits,3-splits)=(2, 0) fine_on_6=True : minimal failing blow-up (8, (1, 1, 1, 1, 2, 2), 'kalmanson') ; first negative weight (9, (1, 1, 1, 1, 2, 3))  [15s]
+  excluded system 17  missing(2-splits,3-splits)=(1, 0) fine_on_6=True : minimal failing blow-up (7, (1, 1, 1, 1, 1, 2), 'kalmanson') ; first negative weight (8, (1, 1, 1, 1, 1, 3))  [15s]
+  excluded system 18  missing(2-splits,3-splits)=(1, 0) fine_on_6=True : minimal failing blow-up (7, (1, 1, 2, 1, 1, 1), 'kalmanson') ; first negative weight (8, (1, 1, 3, 1, 1, 1))  [15s]
+  excluded system 19  missing(2-splits,3-splits)=(1, 0) fine_on_6=True : minimal failing blow-up (7, (1, 1, 1, 2, 1, 1), 'kalmanson') ; first negative weight (8, (1, 1, 1, 3, 1, 1))  [15s]
+  excluded system 20  missing(2-splits,3-splits)=(1, 0) fine_on_6=True : minimal failing blow-up (7, (1, 1, 1, 1, 2, 1), 'kalmanson') ; first negative weight (8, (1, 1, 1, 1, 3, 1))  [15s]
+  excluded system 21  missing(2-splits,3-splits)=(1, 0) fine_on_6=True : minimal failing blow-up (7, (1, 1, 1, 1, 1, 2), 'kalmanson') ; first negative weight (8, (1, 1, 1, 1, 1, 3))  [15s]
+  excluded system 22  missing(2-splits,3-splits)=(1, 0) fine_on_6=True : minimal failing blow-up (7, (1, 2, 1, 1, 1, 1), 'kalmanson') ; first negative weight (8, (1, 3, 1, 1, 1, 1))  [15s]
+summary: {('minimal failing blow-up remains Kalmanson', False): 5, ('negative weight reached with <= 11 leaves', True): 17, ('minimal failing blow-up remains Kalmanson', True): 18, ('negative weight reached with <= 11 leaves', False): 6}
+by type (missing 2-splits, missing 3-splits): [systems, negative weight reached, some failure reached]: {(3, 0): [2, 2, 2], (2, 0): [9, 9, 9], (1, 1): [6, 0, 6], (1, 0): [6, 6, 6]}

@@ -1,0 +1,4 @@
+(a) random functions on a 3x2x4x3x2 grid, 3 functions x 20 random orders, m = 1..5, every state: 43200 (state, order, m) checks, largest |lhs - rhs| = 7.1e-15
+(b) GBn2 energy of Lys4 on the helix, all 24 orders of the four sites, m = 3, 4, 400 random states: 19200 checks, largest |lhs - rhs| = 4.5e-13 kcal/mol
+(c) hosts ordered last, 7 sites, 5 host sets, all T with |T| = 3, 4, 5: 328 (T, host outside T) cases, host NOT at its anchor in 0
+DONE in 0.7 s; peak RSS 59 MB

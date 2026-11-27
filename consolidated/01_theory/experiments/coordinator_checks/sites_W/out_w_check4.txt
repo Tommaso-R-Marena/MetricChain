@@ -1,0 +1,14 @@
+(a) zero residual R_0(0)   [report: path 0.080032, tri 0.065233, asym 0.033856, mix 0.052360, mix2 0.049065]
+    path  0.080032
+    tri   0.065233
+    asym  0.033856
+    mix   0.052360
+    mix2  0.049065
+(b) binary reductions at e = 0   [report: path 0.048586 / 0.115369, tri 0.053168 / 0.094950, asym 0.024685 / 0.058646]
+    path  coarse-graining 0.048586, deletion 0.115369
+    tri   coarse-graining 0.053168, deletion 0.094950
+    asym  coarse-graining 0.024685, deletion 0.058646
+(c) uniform four-letter Hamming site, u = 1: F*(t) with all 14 vertices against the groupings k = 2 and k = 4
+    largest F* - max(F*_2, F*_4): 5.10e-16;  smallest: -4.30e-16
+    the two groupings cross near t = 0.650 (F*_2 = 0.026166, F*_4 = 0.026186, F* = 0.026186)
+    second differences of F*: largest +0.0320 at t = 0.650; typical -0.2441  (positive = not concave)

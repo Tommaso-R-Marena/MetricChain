@@ -1,0 +1,7 @@
+# (1) Proposition A': cases with the hypothesis; (A.1) <= first closed form <= second closed form
+cases 902, with the hypothesis 732, violations 0; largest (closed form)/(A.1) = 17.3
+# (2) section 5.4: drops without chains (formula E^N_M), u = 1, eps = 1, delta = 0.05, minimised over M
+n = 1e+05: no chain: M = 5, bound/(na) = 0.5758 [3.24], top tolerance b_M = 107.9;  with chains (A.1): 0.6186   (report: 5, 0.576 [3.24])
+n = 1e+06: no chain: M = 9, bound/(na) = 0.3559 [2.78], top tolerance b_M = 191.3;  with chains (A.1): 0.3581   (report: 9, 0.3559 [2.78])
+n = 1e+07: no chain: M = 12, bound/(na) = 0.2900 [2.39], top tolerance b_M = 271.3;  with chains (A.1): 0.2862   (report: 12, 0.2900 [2.39])
+n = 1e+08: no chain: M = 16, bound/(na) = 0.2714 [2.27], top tolerance b_M = 381.5;  with chains (A.1): 0.2690   (report: 16, 0.2714 [2.27])

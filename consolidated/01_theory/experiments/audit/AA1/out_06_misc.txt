@@ -1,0 +1,36 @@
+(a) normal form and free energies: X = {0,1}, d = 1 * [x != y], f = (0, 5), g = 0
+    f^d = [0.0, 1.0]
+    min(f+g) = min(f^d+g) for all admissible g: True;  max |ln Z(f+g) - ln Z(f^d+g)| = 0.6750
+PASS  (a) minima agree for every admissible residual, free energies do not
+(b) exact robust interval of ln Z with one anchor on the uniform cube (f = 0, d = c * Hamming, anchor 0...0, value 0)
+PASS      n = 10: closed form 10.000000 = brute force 10.000000 = n*u
+    n = 10, u = beta c = 1.0: ln Z(f+L) - ln Z(f+U) = 10.000  (a-priori width beta * sum c_i = 10.000)
+    n = 100, u = beta c = 1.0: ln Z(f+L) - ln Z(f+U) = 100.000  (a-priori width beta * sum c_i = 100.000)
+    n = 100, u = beta c = 0.5: ln Z(f+L) - ln Z(f+U) = 50.000  (a-priori width beta * sum c_i = 50.000)
+(c) inertia of an arm about an arbitrary line: lower bound (m/3) (w/2)^2 with w = b cos(theta/2)
+    w = 0.5664 b, bound per atom = 0.02673 b^2   (constants: c_i^ver >= 2 Lambda sin(delta/2) sqrt(0.02673 m) b = 0.327 Lambda b sin(delta/2) m^(1/2))
+    least (inertia about the best line)/(m b^2) over all conformations tried: 0.07921   (bound 0.02673)
+PASS  (c) every arm tried has inertia >= (m/3)(w/2)^2 about every line, hence about its torsion axis
+    all-trans arm, m = 30: inertia about the best line = 0.0799 m b^2;  about the first bond line = 1769.3 b^2
+    all-trans arm, m = 300: inertia about the best line = 0.0802 m b^2;  about the first bond line = 1941471.1 b^2
+(d) Theorem 11.25(a) at finite size: the machine-checked lower bound (1 - 2 delta) 2^n / |B(k*(eps))| at the zero residual
+    (k*(eps) = least k with Delta_k > eps, Delta_k = ln(1 + 2^-n sum_{j<=k} C(n,j)(e^{u(k+1-j)} - 1)); exact integer binomials)
+      n      u    eps    k*    ln(2^n/|B(k*)|)    asymptotic n(ln2 - h(Lambda1/u))
+       50    0.5   1.0     23          1.09                0.38
+      100    0.5   1.0     45          1.69                0.77
+      200    0.5   1.0     88          2.96                1.53
+      500    0.5   1.0    220          5.49                3.84
+     1000    0.5   1.0    439          9.66                7.67
+       50    1.0   1.0     19          2.82                1.46
+      100    1.0   1.0     38          4.56                2.91
+      200    1.0   1.0     76          7.77                5.83
+      500    1.0   1.0    190         16.92               14.57
+     1000    1.0   1.0    380         31.80               29.14
+       50    2.0   1.0     14          6.64                4.86
+      100    2.0   1.0     28         11.98                9.73
+      200    2.0   1.0     56         22.33               19.46
+      500    2.0   1.0    141         51.89               48.64
+     1000    2.0   1.0    283        100.46               97.28
+PASS  (d) at n = 100, u = 1, eps = 1 the bound is below e^7 (about a thousand evaluations): exponential only asymptotically
+
+ALL CHECKS PASSED

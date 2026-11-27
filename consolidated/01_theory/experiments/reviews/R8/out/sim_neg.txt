@@ -1,0 +1,9 @@
+# engine=neg nruns=2000 seed=104 mutation=None Kdiv=1
+runs completed 2000, skipped (sample too large for the simulation) 0   [54 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 0 on the good event, 0 off it
+  violated claims on the good event: none
+  violated claims off the good event: none
+levels left as populated 319362, as negligible 1545 (in 230 runs)
+closures: empty tail 45, at a populated pass 39, at an unpopulated pass 1916; by the tail lemma at r <= n_o-2: 1955, at r <= r_dagger: 97
+widest bracket ln(U/L) = 4.936; smallest distance to the width bound = 0.0515; count/bound max = 0.773; negligible part / budget max = 0.0223; max M/M_dagger = 61.50; largest sample = 1.29e+17 points

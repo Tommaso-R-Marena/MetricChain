@@ -1,0 +1,113 @@
+kappa=1.0 e=0.0 n= 6 |X|=   64 c~1.07 sharp=0 | W: expw>=    1.0 frac=   10.4 greedy=    12 bestfirst=    19 | H: kbf=  15 | B: kbf=  20 | M=21 valid H/B=5/5 of 5  [0s]
+kappa=1.0 e=0.0 n= 7 |X|=  128 c~1.08 sharp=0 | W: expw>=    1.1 frac=   13.1 greedy=    16 bestfirst=    30 | H: kbf=  18 | B: kbf=  26 | M=28 valid H/B=5/5 of 5  [0s]
+kappa=1.0 e=0.0 n= 8 |X|=  256 c~1.09 sharp=0 | W: expw>=    1.6 frac=   16.8 greedy=    22 bestfirst=    35 | H: kbf=  21 | B: kbf=  35 | M=36 valid H/B=5/5 of 5  [1s]
+kappa=1.0 e=0.0 n= 9 |X|=  512 c~1.17 sharp=0 | W: expw>=    1.7 frac=   27.8 greedy=    38 bestfirst=    65 | H: kbf=  32 | B: kbf=  39 | M=45 valid H/B=5/5 of 5  [2s]
+kappa=1.0 e=0.0 n=10 |X|= 1024 c~1.23 sharp=0 | W: expw>=    2.9 frac=    nan greedy=    77 bestfirst=   136 | H: kbf=  40 | B: kbf=  53 | M=55 valid H/B=5/5 of 5  [27s]
+kappa=1.0 e=0.0 n=11 |X|= 2048 c~1.35 sharp=0 | W: expw>=    3.2 frac=    nan greedy=   107 bestfirst=   174 | H: kbf=  47 | B: kbf=  57 | M=66 valid H/B=5/5 of 5  [61s]
+kappa=1.0 e=0.0 n=12 |X|= 4096 c~1.37 sharp=0 | W: expw>=    3.7 frac=    nan greedy=   nan bestfirst=   336 | H: kbf=  57 | B: kbf=  70 | M=78 valid H/B=5/5 of 5  [62s]
+kappa=1.0 e=0.5 n= 6 |X|=   64 c~1.07 sharp=0 | W: expw>=    1.0 frac=    4.0 greedy=     5 bestfirst=    14 | H: kbf=   9 | B: kbf=  12 | M=21 valid H/B=5/5 of 5  [62s]
+kappa=1.0 e=0.5 n= 7 |X|=  128 c~1.08 sharp=0 | W: expw>=    1.1 frac=    8.5 greedy=    11 bestfirst=    19 | H: kbf=  15 | B: kbf=  23 | M=28 valid H/B=5/5 of 5  [63s]
+kappa=1.0 e=0.5 n= 8 |X|=  256 c~1.09 sharp=0 | W: expw>=    1.2 frac=   12.2 greedy=    16 bestfirst=    30 | H: kbf=  21 | B: kbf=  30 | M=36 valid H/B=5/5 of 5  [63s]
+kappa=1.0 e=0.5 n= 9 |X|=  512 c~1.17 sharp=0 | W: expw>=    1.1 frac=   13.2 greedy=    19 bestfirst=    34 | H: kbf=  23 | B: kbf=  31 | M=45 valid H/B=5/5 of 5  [64s]
+kappa=1.0 e=0.5 n=10 |X|= 1024 c~1.23 sharp=0 | W: expw>=    1.3 frac=    nan greedy=    34 bestfirst=    58 | H: kbf=  34 | B: kbf=  45 | M=55 valid H/B=5/5 of 5  [77s]
+kappa=1.0 e=0.5 n=11 |X|= 2048 c~1.35 sharp=0 | W: expw>=    1.4 frac=    nan greedy=    44 bestfirst=    71 | H: kbf=  35 | B: kbf=  45 | M=66 valid H/B=5/5 of 5  [98s]
+kappa=1.0 e=0.5 n=12 |X|= 4096 c~1.37 sharp=0 | W: expw>=    1.8 frac=    nan greedy=   nan bestfirst=   156 | H: kbf=  48 | B: kbf=  57 | M=78 valid H/B=5/5 of 5  [99s]
+kappa=1.0 e=1.0 n= 6 |X|=   64 c~1.07 sharp=3 | W: expw>=    1.0 frac=    2.0 greedy=     3 bestfirst=     4 | H: kbf=   7 | B: kbf=   8 | M=21 valid H/B=5/5 of 5  [100s]
+kappa=1.0 e=1.0 n= 7 |X|=  128 c~1.08 sharp=3 | W: expw>=    1.0 frac=    3.0 greedy=     3 bestfirst=     6 | H: kbf=   8 | B: kbf=  11 | M=28 valid H/B=5/5 of 5  [100s]
+kappa=1.0 e=1.0 n= 8 |X|=  256 c~1.09 sharp=4 | W: expw>=    1.0 frac=    5.0 greedy=     6 bestfirst=    12 | H: kbf=  10 | B: kbf=  11 | M=36 valid H/B=5/5 of 5  [101s]
+kappa=1.0 e=1.0 n= 9 |X|=  512 c~1.17 sharp=2 | W: expw>=    1.0 frac=    4.0 greedy=     6 bestfirst=    13 | H: kbf=  12 | B: kbf=  11 | M=45 valid H/B=5/5 of 5  [103s]
+kappa=1.0 e=1.0 n=10 |X|= 1024 c~1.23 sharp=1 | W: expw>=    1.0 frac=    nan greedy=    10 bestfirst=    16 | H: kbf=  16 | B: kbf=  19 | M=55 valid H/B=5/5 of 5  [107s]
+kappa=1.0 e=1.0 n=11 |X|= 2048 c~1.35 sharp=1 | W: expw>=    1.0 frac=    nan greedy=    15 bestfirst=    30 | H: kbf=  23 | B: kbf=  18 | M=66 valid H/B=5/5 of 5  [115s]
+kappa=1.0 e=1.0 n=12 |X|= 4096 c~1.37 sharp=1 | W: expw>=    1.0 frac=    nan greedy=   nan bestfirst=    58 | H: kbf=  33 | B: kbf=  31 | M=78 valid H/B=5/5 of 5  [116s]
+kappa=1.0 e=2.0 n= 6 |X|=   64 c~1.07 sharp=6 | W: expw>=    1.0 frac=    1.0 greedy=     1 bestfirst=     1 | H: kbf=   1 | B: kbf=   1 | M=21 valid H/B=5/5 of 5  [116s]
+kappa=1.0 e=2.0 n= 7 |X|=  128 c~1.08 sharp=7 | W: expw>=    1.0 frac=    1.0 greedy=     1 bestfirst=     1 | H: kbf=   6 | B: kbf=   8 | M=28 valid H/B=5/5 of 5  [117s]
+kappa=1.0 e=2.0 n= 8 |X|=  256 c~1.09 sharp=8 | W: expw>=    1.0 frac=    1.0 greedy=     1 bestfirst=     1 | H: kbf=   9 | B: kbf=   9 | M=36 valid H/B=5/5 of 5  [117s]
+kappa=1.0 e=2.0 n= 9 |X|=  512 c~1.17 sharp=9 | W: expw>=    1.0 frac=    1.0 greedy=     1 bestfirst=     1 | H: kbf=  10 | B: kbf=   9 | M=45 valid H/B=5/5 of 5  [120s]
+kappa=1.0 e=2.0 n=10 |X|= 1024 c~1.23 sharp=10 | W: expw>=    1.0 frac=    nan greedy=     1 bestfirst=     1 | H: kbf=  11 | B: kbf=  11 | M=55 valid H/B=5/5 of 5  [121s]
+kappa=1.0 e=2.0 n=11 |X|= 2048 c~1.35 sharp=10 | W: expw>=    1.0 frac=    nan greedy=     1 bestfirst=     1 | H: kbf=  12 | B: kbf=  12 | M=66 valid H/B=5/5 of 5  [124s]
+kappa=1.0 e=2.0 n=12 |X|= 4096 c~1.37 sharp=11 | W: expw>=    1.0 frac=    nan greedy=   nan bestfirst=     1 | H: kbf=  13 | B: kbf=  13 | M=78 valid H/B=5/5 of 5  [125s]
+kappa=0.5 e=0.0 n= 6 |X|=   64 c~2.15 sharp=0 | W: expw>=    5.0 frac=   38.5 greedy=    40 bestfirst=    45 | H: kbf=  21 | B: kbf=  20 | M=21 valid H/B=5/5 of 5  [125s]
+kappa=0.5 e=0.0 n= 7 |X|=  128 c~2.15 sharp=0 | W: expw>=    7.0 frac=   51.0 greedy=    57 bestfirst=    68 | H: kbf=  28 | B: kbf=  26 | M=28 valid H/B=5/5 of 5  [126s]
+kappa=0.5 e=0.0 n= 8 |X|=  256 c~2.18 sharp=0 | W: expw>=   10.5 frac=   83.7 greedy=    96 bestfirst=   118 | H: kbf=  36 | B: kbf=  35 | M=36 valid H/B=5/5 of 5  [126s]
+kappa=0.5 e=0.0 n= 9 |X|=  512 c~2.33 sharp=0 | W: expw>=   17.7 frac=  157.2 greedy=   183 bestfirst=   223 | H: kbf=  45 | B: kbf=  39 | M=45 valid H/B=5/5 of 5  [128s]
+kappa=0.5 e=0.0 n=10 |X|= 1024 c~2.45 sharp=0 | W: expw>=   29.6 frac=    nan greedy=   357 bestfirst=   428 | H: kbf=  55 | B: kbf=  53 | M=55 valid H/B=5/5 of 5  [250s]
+kappa=0.5 e=0.0 n=11 |X|= 2048 c~2.71 sharp=0 | W: expw>=   43.4 frac=    nan greedy=   567 bestfirst=   763 | H: kbf=  66 | B: kbf=  57 | M=66 valid H/B=5/5 of 5  [433s]
+kappa=0.5 e=0.0 n=12 |X|= 4096 c~2.75 sharp=0 | W: expw>=   73.8 frac=    nan greedy=   nan bestfirst=  1423 | H: kbf=  79 | B: kbf=  70 | M=78 valid H/B=5/5 of 5  [435s]
+kappa=0.5 e=0.5 n= 6 |X|=   64 c~2.15 sharp=0 | W: expw>=    2.4 frac=   20.2 greedy=    22 bestfirst=    30 | H: kbf=  21 | B: kbf=  12 | M=21 valid H/B=5/5 of 5  [435s]
+kappa=0.5 e=0.5 n= 7 |X|=  128 c~2.15 sharp=0 | W: expw>=    5.0 frac=   35.9 greedy=    42 bestfirst=    53 | H: kbf=  28 | B: kbf=  23 | M=28 valid H/B=5/5 of 5  [435s]
+kappa=0.5 e=0.5 n= 8 |X|=  256 c~2.18 sharp=0 | W: expw>=    8.2 frac=   67.0 greedy=    79 bestfirst=    98 | H: kbf=  36 | B: kbf=  30 | M=36 valid H/B=5/5 of 5  [436s]
+kappa=0.5 e=0.5 n= 9 |X|=  512 c~2.33 sharp=0 | W: expw>=    9.1 frac=   86.2 greedy=   103 bestfirst=   144 | H: kbf=  45 | B: kbf=  31 | M=45 valid H/B=5/5 of 5  [437s]
+kappa=0.5 e=0.5 n=10 |X|= 1024 c~2.45 sharp=0 | W: expw>=   14.3 frac=    nan greedy=   184 bestfirst=   246 | H: kbf=  55 | B: kbf=  45 | M=55 valid H/B=5/5 of 5  [498s]
+kappa=0.5 e=0.5 n=11 |X|= 2048 c~2.71 sharp=0 | W: expw>=   17.7 frac=    nan greedy=   281 bestfirst=   393 | H: kbf=  66 | B: kbf=  45 | M=66 valid H/B=5/5 of 5  [591s]
+kappa=0.5 e=0.5 n=12 |X|= 4096 c~2.75 sharp=0 | W: expw>=   37.5 frac=    nan greedy=   nan bestfirst=   848 | H: kbf=  79 | B: kbf=  57 | M=78 valid H/B=5/5 of 5  [592s]
+kappa=0.5 e=1.0 n= 6 |X|=   64 c~2.15 sharp=0 | W: expw>=    1.5 frac=    9.4 greedy=    13 bestfirst=    17 | H: kbf=  14 | B: kbf=   8 | M=21 valid H/B=5/5 of 5  [592s]
+kappa=0.5 e=1.0 n= 7 |X|=  128 c~2.15 sharp=0 | W: expw>=    2.3 frac=   17.5 greedy=    21 bestfirst=    33 | H: kbf=  24 | B: kbf=  11 | M=28 valid H/B=5/5 of 5  [592s]
+kappa=0.5 e=1.0 n= 8 |X|=  256 c~2.18 sharp=0 | W: expw>=    3.5 frac=   27.0 greedy=    38 bestfirst=    45 | H: kbf=  29 | B: kbf=  11 | M=36 valid H/B=5/5 of 5  [592s]
+kappa=0.5 e=1.0 n= 9 |X|=  512 c~2.33 sharp=0 | W: expw>=    2.9 frac=   30.9 greedy=    45 bestfirst=    58 | H: kbf=  39 | B: kbf=  11 | M=45 valid H/B=5/5 of 5  [594s]
+kappa=0.5 e=1.0 n=10 |X|= 1024 c~2.45 sharp=0 | W: expw>=    3.7 frac=    nan greedy=    70 bestfirst=    87 | H: kbf=  49 | B: kbf=  19 | M=55 valid H/B=5/5 of 5  [616s]
+kappa=0.5 e=1.0 n=11 |X|= 2048 c~2.71 sharp=0 | W: expw>=    6.2 frac=    nan greedy=   126 bestfirst=   157 | H: kbf=  61 | B: kbf=  18 | M=66 valid H/B=5/5 of 5  [653s]
+kappa=0.5 e=1.0 n=12 |X|= 4096 c~2.75 sharp=0 | W: expw>=   16.0 frac=    nan greedy=   nan bestfirst=   381 | H: kbf=  75 | B: kbf=  31 | M=78 valid H/B=5/5 of 5  [654s]
+kappa=0.5 e=2.0 n= 6 |X|=   64 c~2.15 sharp=3 | W: expw>=    1.0 frac=    3.0 greedy=     4 bestfirst=     5 | H: kbf=   7 | B: kbf=   1 | M=21 valid H/B=5/5 of 5  [654s]
+kappa=0.5 e=2.0 n= 7 |X|=  128 c~2.15 sharp=3 | W: expw>=    1.0 frac=    4.0 greedy=     4 bestfirst=     8 | H: kbf=   8 | B: kbf=   8 | M=28 valid H/B=5/5 of 5  [654s]
+kappa=0.5 e=2.0 n= 8 |X|=  256 c~2.18 sharp=4 | W: expw>=    1.0 frac=    5.0 greedy=     8 bestfirst=    11 | H: kbf=   9 | B: kbf=   9 | M=36 valid H/B=5/5 of 5  [655s]
+kappa=0.5 e=2.0 n= 9 |X|=  512 c~2.33 sharp=2 | W: expw>=    1.0 frac=    6.0 greedy=     9 bestfirst=    13 | H: kbf=  12 | B: kbf=   9 | M=45 valid H/B=5/5 of 5  [656s]
+kappa=0.5 e=2.0 n=10 |X|= 1024 c~2.45 sharp=1 | W: expw>=    1.0 frac=    nan greedy=    10 bestfirst=    22 | H: kbf=  13 | B: kbf=  11 | M=55 valid H/B=5/5 of 5  [661s]
+kappa=0.5 e=2.0 n=11 |X|= 2048 c~2.71 sharp=1 | W: expw>=    1.1 frac=    nan greedy=    14 bestfirst=    31 | H: kbf=  29 | B: kbf=  12 | M=66 valid H/B=5/5 of 5  [668s]
+kappa=0.5 e=2.0 n=12 |X|= 4096 c~2.75 sharp=1 | W: expw>=    1.7 frac=    nan greedy=   nan bestfirst=    51 | H: kbf=  46 | B: kbf=  13 | M=78 valid H/B=5/5 of 5  [668s]
+product lower bound <= ln N_frac on 12 small additive instances; max(lb - ln N_frac) = 0.0
+additive toy kappa=1.0 e=0.00 n=  10: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 11
+additive toy kappa=1.0 e=0.00 n=  20: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 21
+additive toy kappa=1.0 e=0.00 n=  50: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 51
+additive toy kappa=1.0 e=0.00 n= 100: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 101
+additive toy kappa=1.0 e=0.00 n= 200: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 201
+additive toy kappa=1.0 e=0.00 n= 500: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 501
+additive toy kappa=1.0 e=0.00 n=1000: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 1001
+additive toy kappa=1.0 e=0.10 n=  10: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 11
+additive toy kappa=1.0 e=0.10 n=  20: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 21
+additive toy kappa=1.0 e=0.10 n=  50: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 51
+additive toy kappa=1.0 e=0.10 n= 100: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 101
+additive toy kappa=1.0 e=0.10 n= 200: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 201
+additive toy kappa=1.0 e=0.10 n= 500: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 501
+additive toy kappa=1.0 e=0.10 n=1000: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 1001
+additive toy kappa=1.0 e=0.20 n=  10: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 11
+additive toy kappa=1.0 e=0.20 n=  20: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 21
+additive toy kappa=1.0 e=0.20 n=  50: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 51
+additive toy kappa=1.0 e=0.20 n= 100: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 101
+additive toy kappa=1.0 e=0.20 n= 200: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 201
+additive toy kappa=1.0 e=0.20 n= 500: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 501
+additive toy kappa=1.0 e=0.20 n=1000: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 1001
+additive toy kappa=1.0 e=0.40 n=  10: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 11
+additive toy kappa=1.0 e=0.40 n=  20: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 21
+additive toy kappa=1.0 e=0.40 n=  50: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 51
+additive toy kappa=1.0 e=0.40 n= 100: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 101
+additive toy kappa=1.0 e=0.40 n= 200: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 201
+additive toy kappa=1.0 e=0.40 n= 500: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 501
+additive toy kappa=1.0 e=0.40 n=1000: ln N_W >=     0.00 (min    0.00; log10 N >=    0.0)   N_H = N_B = 1001
+additive toy kappa=0.5 e=0.00 n=  10: ln N_W >=     1.06 (min    0.43; log10 N >=    0.5)   N_H = N_B = 11
+additive toy kappa=0.5 e=0.00 n=  20: ln N_W >=     2.25 (min    1.99; log10 N >=    1.0)   N_H = N_B = 21
+additive toy kappa=0.5 e=0.00 n=  50: ln N_W >=     6.31 (min    6.06; log10 N >=    2.7)   N_H = N_B = 51
+additive toy kappa=0.5 e=0.00 n= 100: ln N_W >=    12.73 (min   12.21; log10 N >=    5.5)   N_H = N_B = 101
+additive toy kappa=0.5 e=0.00 n= 200: ln N_W >=    26.42 (min   25.37; log10 N >=   11.5)   N_H = N_B = 201
+additive toy kappa=0.5 e=0.00 n= 500: ln N_W >=    66.73 (min   65.64; log10 N >=   29.0)   N_H = N_B = 501
+additive toy kappa=0.5 e=0.00 n=1000: ln N_W >=   134.79 (min  133.11; log10 N >=   58.5)   N_H = N_B = 1001
+additive toy kappa=0.5 e=0.10 n=  10: ln N_W >=     0.88 (min    0.34; log10 N >=    0.4)   N_H = N_B = 11
+additive toy kappa=0.5 e=0.10 n=  20: ln N_W >=     2.12 (min    1.91; log10 N >=    0.9)   N_H = N_B = 21
+additive toy kappa=0.5 e=0.10 n=  50: ln N_W >=     5.97 (min    5.80; log10 N >=    2.6)   N_H = N_B = 51
+additive toy kappa=0.5 e=0.10 n= 100: ln N_W >=    12.33 (min   11.32; log10 N >=    5.4)   N_H = N_B = 101
+additive toy kappa=0.5 e=0.10 n= 200: ln N_W >=    26.35 (min   23.95; log10 N >=   11.4)   N_H = N_B = 201
+additive toy kappa=0.5 e=0.10 n= 500: ln N_W >=    64.75 (min   63.29; log10 N >=   28.1)   N_H = N_B = 501
+additive toy kappa=0.5 e=0.10 n=1000: ln N_W >=   133.52 (min  131.83; log10 N >=   58.0)   N_H = N_B = 1001
+additive toy kappa=0.5 e=0.20 n=  10: ln N_W >=     0.73 (min    0.26; log10 N >=    0.3)   N_H = N_B = 11
+additive toy kappa=0.5 e=0.20 n=  20: ln N_W >=     1.99 (min    1.60; log10 N >=    0.9)   N_H = N_B = 21
+additive toy kappa=0.5 e=0.20 n=  50: ln N_W >=     5.89 (min    5.49; log10 N >=    2.6)   N_H = N_B = 51
+additive toy kappa=0.5 e=0.20 n= 100: ln N_W >=    11.85 (min    9.94; log10 N >=    5.1)   N_H = N_B = 101
+additive toy kappa=0.5 e=0.20 n= 200: ln N_W >=    25.04 (min   21.27; log10 N >=   10.9)   N_H = N_B = 201
+additive toy kappa=0.5 e=0.20 n= 500: ln N_W >=    62.17 (min   59.20; log10 N >=   27.0)   N_H = N_B = 501
+additive toy kappa=0.5 e=0.20 n=1000: ln N_W >=   130.47 (min  124.59; log10 N >=   56.7)   N_H = N_B = 1001
+additive toy kappa=0.5 e=0.40 n=  10: ln N_W >=     0.24 (min    0.01; log10 N >=    0.1)   N_H = N_B = 11
+additive toy kappa=0.5 e=0.40 n=  20: ln N_W >=     1.67 (min    1.30; log10 N >=    0.7)   N_H = N_B = 21
+additive toy kappa=0.5 e=0.40 n=  50: ln N_W >=     5.02 (min    4.43; log10 N >=    2.2)   N_H = N_B = 51
+additive toy kappa=0.5 e=0.40 n= 100: ln N_W >=    10.25 (min    8.10; log10 N >=    4.5)   N_H = N_B = 101
+additive toy kappa=0.5 e=0.40 n= 200: ln N_W >=    20.31 (min   15.88; log10 N >=    8.8)   N_H = N_B = 201
+additive toy kappa=0.5 e=0.40 n= 500: ln N_W >=    48.92 (min   45.74; log10 N >=   21.2)   N_H = N_B = 501
+additive toy kappa=0.5 e=0.40 n=1000: ln N_W >=   108.41 (min   98.34; log10 N >=   47.1)   N_H = N_B = 1001

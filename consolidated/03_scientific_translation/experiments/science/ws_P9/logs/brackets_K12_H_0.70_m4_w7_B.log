@@ -1,0 +1,16 @@
+=== p9_05_brackets K12 on H, tau 0.7: order m = 4, band 7; sources ['ref', 's1', 's2'], forms ['S', 'B', 'T', 'W']; started 2026-11-26 11:10:06 UTC
+    12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 assignments, anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; P8's 'SAb' constants from ws_P8/out/g12b_K12_H_0.70_m4.npz: Gamma_4 = 33.98 kT; my recorded ones differ by at most 0.0e+00 (relative)
+    ball of radius 3: 96366 values, ws_P8/cache/ball_K12_H_0.70_M3_ebe4086eaa.npz (states equal pwmodel.ball_states row by row; 1000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol) [38s]
+    Gibbs samples of ws_P9/cache (coordinator's sampler): seed 4242 guides the reductions, seed 777 is the check sample (960 states, 1.18 sites off the anchor on average)
+(0) the models with ALL penalties zero (not a sandwich: what the reductions of the evaluated terms cost): width 0.00713205 nats; 140 evaluated terms exact in the window, 80 reduced, 10 pairs beyond the band (1 anchored, kept site i, 9 anchored, kept site j, 0 P3) [21s, peak RSS 1934 MB]
+| source | form | certified bracket of ln Z | width (nats) | beta x mean of m_+ - m_- on the check sample | sandwich violated at Gibbs states | exact samples of the floor: sites off the anchor (mean); violations | seconds |
+|---|---|---|---|---|---|---|---|
+| s2 | S | [516.511117, 518.385324] | **1.874** | 1.82 | 0 | — | 21 (peak RSS 1934 MB) |
+| s2 | B | [517.045207, 517.230503] | **0.1853** | 0.1994 | 0 | — | 19 (peak RSS 1934 MB) |
+| s2 | T | [517.075039, 517.186576] | **0.1115** | 0.1187 | 0 | 2000 samples: 1.20; 0 | 34 (peak RSS 1934 MB) |
+| s2 | W | [517.125649, 517.132996] | **0.007347** | 0.0075 | 0 | 2000 samples: 1.15; 0 | 58 (peak RSS 1934 MB) |
+| sab | W | [517.123316, 517.844029] | **0.7207** | 0.0115 | 0 | 2000 samples: 6.58; 0 | 62 (peak RSS 1939 MB) |
+| cJ2 | T | [517.008878, 517.270943] | **0.2621** | 0.2747 | 0 | — | 21 (peak RSS 1939 MB) |
+| cJ2 | W | [517.124375, 517.134614] | **0.01024** | 0.009624 | 0 | — | 43 (peak RSS 1939 MB) |
+foreign writes attempted during import (refused): 0
+ALL DONE 316 s; peak RSS 1939 MB

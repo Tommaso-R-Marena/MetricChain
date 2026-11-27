@@ -1,0 +1,5 @@
+T1(a-c) exhaustive cut duality: {'cases': 126, 'formula_out_ok': 126, 'formula_in_ok': 126, 'naive_out_fail': 43, 'naive_in_fail': 54, 'canon_ok': 61, 'canon_cases': 61}
+counterexample (outer convention): E=(5,0), a=0,b=1: B = 5.0  only S={a}: min outer boundary = 0.0
+counterexample (inner convention): E=(0,5), a=0,b=1: B = 5.0  only S={a}: min inner boundary = 0.0
+T1(d) coordinate cuts, complete site graph: boundary = complement in all 800 cases; certified value <= E(b) in 800/800
+T1(e) box cuts: outer boundary == union of n one-defect boxes in 186/186 random boxes

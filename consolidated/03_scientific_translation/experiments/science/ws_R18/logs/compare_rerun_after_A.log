@@ -1,0 +1,30 @@
+stored searches per job and size: {'cost': {250: 144, 350: 144, 500: 144, 700: 144, 1000: 144, 1400: 144, 2000: 144, 4000: 144, 8000: 144, 16000: 144, 32000: 144, 64000: 144, 128000: 144}, 'claims': {1000: 240, 8000: 240, 64000: 240}, 'converge': {1000: 16, 16000: 16}, 'converge2': {64000: 24, 128000: 24}}
+total in the four result files: 2672 ; in cost + claims + converge: 2624
+
+=== recheck_classification ===
+their stored json: jobs {'cost': {'searches': 1872, 'in_corner': 0, 'legacy_reproduces_stored': 1863, 'changed': 0, 'violations_exact': 0}, 'claims': {'searches': 720, 'in_corner': 0, 'legacy_reproduces_stored': 720, 'changed': 0, 'violations_exact': 0}, 'converge': {'searches': 32, 'in_corner': 0, 'legacy_reproduces_stored': 32, 'changed': 0, 'violations_exact': 0}} ; 161 s with the C kernel
+  re-run, job claims: searches 240 (pieces: 1); in a corner 0; cost changed by the exact rule 0 (largest increase 0, decrease 0); claims violated under the exact rule 0; old convention reproduces the stored value in 240; largest |difference| 4.26326e-14
+  re-run, job converge: searches 16 (pieces: 1); in a corner 0; cost changed by the exact rule 0 (largest increase 0, decrease 0); claims violated under the exact rule 0; old convention reproduces the stored value in 16; largest |difference| 1.42109e-14
+  re-run, job cost: searches 1152 (pieces: 12); in a corner 0; cost changed by the exact rule 0 (largest increase 0, decrease 0); claims violated under the exact rule 0; old convention reproduces the stored value in 1151; largest |difference| 1.53872e-05
+  RE-RUN TOTAL: 1408 of the 2,624 searches of the table; in a corner 0; changed 0; violated 0; reproduced 1407 of 1408
+  pieces with stored values not reproduced by the old convention (piece, how many, largest |difference| in ln): [('cost_n1400', 1, 1.5387167906055765e-05)]
+  cells compared with their stored per-cell values: 292 (not in their file: 0); largest |stored_worst - theirs| 0; largest |exact_worst - theirs| 4.26e-14
+  table of the message: 2,624 searches; in a corner 0; changed 0; violated 0; reproduced 2,615 of 2,624; others changed by at most 0.69
+
+=== nonproduct_bound ===
+  cells re-run: 288 of 468; largest |worst_product - theirs| 4.26e-14; |worst_bound - theirs| 4.26e-14; |max_gap - theirs| 2.84e-14; cells with a different count of bounds above C_max: 0
+  sizes re-run: [250, 350, 500, 700, 1000, 1400, 2000, 4000] ; sizes not re-run: [8000, 16000, 32000, 64000, 128000]
+  re-run (cells re-run only):
+    u = 0.5: cells 96; largest increase of a cell's worst cost 2.6e-12 (ln), 2.4e-13 (n a) at (n, phi) = (350, 0.75); largest gap at a single stored instance 1.2e-10 (ln) at (250, 0.8), 1.6e-11 (n a); bounds above C_max 0
+    u = 1: cells 96; largest increase of a cell's worst cost 6.2e-07 (ln), 1.6e-08 (n a) at (n, phi) = (350, 0.65); largest gap at a single stored instance 6.2e-07 (ln) at (350, 0.65), 1.6e-08 (n a); bounds above C_max 0
+    u = 2: cells 96; largest increase of a cell's worst cost 2.3e-13 (ln), 1.7e-16 (n a) at (n, phi) = (4000, 0.75); largest gap at a single stored instance 2.9 (ln) at (350, 0.85), 0.026 (n a); bounds above C_max 0
+  their stored json, the same cells:
+    u = 0.5: cells 96; largest increase of a cell's worst cost 2.6e-12 (ln), 2.4e-13 (n a) at (n, phi) = (350, 0.75); largest gap at a single stored instance 1.2e-10 (ln) at (250, 0.8), 1.6e-11 (n a); bounds above C_max 0
+    u = 1: cells 96; largest increase of a cell's worst cost 6.2e-07 (ln), 1.6e-08 (n a) at (n, phi) = (350, 0.65); largest gap at a single stored instance 6.2e-07 (ln) at (350, 0.65), 1.6e-08 (n a); bounds above C_max 0
+    u = 2: cells 96; largest increase of a cell's worst cost 2.3e-13 (ln), 1.7e-16 (n a) at (n, phi) = (4000, 0.75); largest gap at a single stored instance 2.9 (ln) at (350, 0.85), 0.026 (n a); bounds above C_max 0
+  their stored json, all 468 cells:
+    u = 0.5: cells 156; largest increase of a cell's worst cost 2.6e-12 (ln), 2.4e-13 (n a) at (n, phi) = (350, 0.75); largest gap at a single stored instance 1.2e-10 (ln) at (250, 0.8), 1.6e-11 (n a); bounds above C_max 0
+    u = 1: cells 156; largest increase of a cell's worst cost 6.2e-07 (ln), 1.6e-08 (n a) at (n, phi) = (350, 0.65); largest gap at a single stored instance 6.2e-07 (ln) at (350, 0.65), 1.6e-08 (n a); bounds above C_max 0
+    u = 2: cells 156; largest increase of a cell's worst cost 2.3e-13 (ln), 1.7e-16 (n a) at (n, phi) = (4000, 0.75); largest gap at a single stored instance 13 (ln) at (8000, 0.85), 0.026 (n a); bounds above C_max 0
+  table of the message:  u = 0.5: 2.6e-12; 2.4e-13 | 1.2e-10; 1.6e-11     u = 1: 6.2e-07; 1.6e-08 | 6.2e-07; 1.6e-08     u = 2: 2.3e-13; 1.7e-16 | 13; 0.026
+peak RSS MB: 21.2

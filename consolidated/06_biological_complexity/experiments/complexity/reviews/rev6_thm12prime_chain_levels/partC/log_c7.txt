@@ -1,0 +1,2 @@
+six points: 14 planar trees, 150 tree-generated systems, 127 six-locally good, 17 with the pattern (three 3-splits, a 2-split missing); pattern systems that are locally good: 0
+substitutions of two tree-generated systems with >= 3 leaves each: 246 placements (factor pairs x positions), 74 distinct six-point systems; all tree-generated: True; all six-locally good: True

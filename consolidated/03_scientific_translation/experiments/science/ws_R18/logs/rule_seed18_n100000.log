@@ -1,0 +1,37 @@
+r18_rule.py  points per (regime, mode) = 100000  seed = 18  start 2026-11-26T16:22:15Z
+
+A. THE RULE AND THE WINDOW AGAINST THE LITERAL LOOP (every number in the columns 'bad' must be 0)
+regime             positions       points    decisions        calls    ties_rule       ties_U       ties_L corner_cases   rule_bad  unclassified  c_outside_[0,b]  window_bad (of checks)
+coarse (unit 1/4)  bottom         100000      2017517       159503        37818        39942        77921        73881          0             0                0       0 (300408)
+coarse (unit 1/4)  top            100000      2029197       152879        37511        25924        74061        73819          0             0                0       0 (300194)
+coarse (unit 1/4)  centre         100000      2023323       186431        35927        36460        90222            0          0             0                0       0 (300086)
+coarse (unit 1/4)  general        100000      2029205       125750        36803        28110        60910            0          0             0                0       0 (300045)
+fine (unit 1/64)   bottom         100000      1773229       135312         2200         2346         4410        91766          0             0                0       0 (299518)
+fine (unit 1/64)   top            100000      1773587       131995         2166         1331         4142        91890          0             0                0       0 (300297)
+fine (unit 1/64)   centre         100000      1768551       157254         2261         2460         5610            0          0             0                0       0 (299885)
+fine (unit 1/64)   general        100000      1776554       106774         2103         1755         3654            0          0             0                0       0 (299941)
+TOTAL decisions 15191163  (of them exactly on the threshold W = s e^-c: 156789)  rule violations 0  unclassified 0  c outside [0,b] 0  window checks 2400374  window violations 0
+
+B. CONTROLS (each must be > 0)
+regime             positions       swap  nonstrict no-intersect  window-strictness  legacy outside range (of decisions)   legacy INSIDE range (must be 0 if x_L = b ...)
+coarse (unit 1/4)  bottom         1448      37818        45093              85303                      49768 (1484972)                                      35 (532545)
+coarse (unit 1/4)  top            1394      37511            0              82074                      48340 (1490655)                                       0 (538542)
+coarse (unit 1/4)  centre         5205      35927        14843             101602                                    -                                                -
+coarse (unit 1/4)  general       10216      36803        29345              69158                                    -                                                -
+fine (unit 1/64)   bottom         4787       2200        48317               5285                      58538 (1620934)                                      42 (152295)
+fine (unit 1/64)   top            4853       2166            0               4945                      53531 (1624094)                                       0 (149493)
+fine (unit 1/64)   centre        10130       2261        13387               7036                                    -                                                -
+fine (unit 1/64)   general       12072       2103        23462               4632                                    -                                                -
+control 'ladder' (x_L > b, general positions, coarse): points 100000  decisions 2428542  UNCLASSIFIED at the last rung 21951
+
+C. THE TWO UNIFORM BEHAVIOURS: my closed forms  c_bottom = max(min(b-t0, x0-t0), min(b, x0-t0, x_1)),  c_top = max(0, min(b-t0, x0-t0))
+coarse (unit 1/4)  bottom: closed form wrong in 0 of 100000;  cases with t0 >= b and x0-t0 >= b: 26119, of them with c != b: 51 (all have x_1 < b; with x_L = b: 0)
+coarse (unit 1/4)  top:    closed form wrong in 0 of 100000;  cases with t0 >= b and x0-t0 >= b: 26181, of them with c != 0: 0
+fine (unit 1/64)   bottom: closed form wrong in 0 of 100000;  cases with t0 >= b and x0-t0 >= b: 8234, of them with c != b: 148 (all have x_1 < b; with x_L = b: 0)
+fine (unit 1/64)   top:    closed form wrong in 0 of 100000;  cases with t0 >= b and x0-t0 >= b: 8110, of them with c != 0: 0
+
+D. "BOTTOM GIVES c = b AS LONG AS t0 >= b AND x0 - t0 >= b": ladders with every inner accuracy below the tolerance (x_1 < b), place inside the range
+points 100000:  c = b in 0;  c = x_1 (< b) in 100000;  literal decisions 3396825: against the exact rule 0, against the convention c = b: 139144
+
+VERDICT: rule and window HOLD on every decision;  every control FAILED as it must
+end 2026-11-26T16:22:55Z  wall 39.5 s  peak RSS MB: 12.3

@@ -1,0 +1,4 @@
+Gaussian pair          max relative |Sigma_rlib - Sigma_definition| over 400 points: 5.74e-15;   max |theta_rlib - theta_mine| at 6 points: 0.0e+00
+cube u = 1             max relative |Sigma_rlib - Sigma_definition| over 400 points: 7.19e-13;   max |theta_rlib - theta_mine| at 6 points: 0.0e+00
+cube u = 2             max relative |Sigma_rlib - Sigma_definition| over 400 points: 3.36e-13;   max |theta_rlib - theta_mine| at 6 points: 0.0e+00
+kinked pair            max relative |Sigma_rlib - Sigma_definition| over 400 points: 2.85e-16;   max |theta_rlib - theta_mine| at 6 points: 0.0e+00

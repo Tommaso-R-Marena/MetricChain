@@ -1,0 +1,31 @@
+=== profile class fitted on ensemble C, n=5: 8000 training conformations; knots: 44 bins up to 40.0 A; kT=0.5962 kcal/mol
+--- typing 'one': 1 pair types, 37 parameters
+GB              std   5.47 | train RMS  5.260 max  24.58 | held-out RMS  5.112 max  24.98 | L_s  0.122 L_r   0.62 | C n=3: 4.11/19.79 C n=4: 4.66/25.83 C n=6: 5.88/26.49 C n=8: 12.47/49.75 A3 n=4: 6.28/22.37 A3 n=5: 6.94/25.37 A2 n=8: 12.29/39.80
+coul            std   7.06 | train RMS  6.656 max  34.01 | held-out RMS  6.475 max  31.73 | L_s  0.213 L_r   1.01 | C n=3: 5.13/27.19 C n=4: 5.85/33.13 C n=6: 7.51/42.01 C n=8: 17.11/67.03 A3 n=4: 9.44/35.76 A3 n=5: 10.55/36.08 A2 n=8: 16.89/56.02
+coul+GB         std   2.57 | train RMS  2.112 max  13.24 | held-out RMS  2.071 max  10.06 | L_s  0.131 L_r   0.62 | C n=3: 1.56/9.73 C n=4: 1.85/10.01 C n=6: 2.40/15.56 C n=8: 5.18/21.81 A3 n=4: 3.47/15.00 A3 n=5: 3.95/15.34 A2 n=8: 5.04/18.84
+ff03-ff14SB     std   2.79 | train RMS  1.986 max   7.98 | held-out RMS  1.987 max   8.75 | L_s  0.250 L_r   1.31 | C n=3: 1.58/6.90 C n=4: 1.78/8.21 C n=6: 2.23/9.05 C n=8: 4.27/14.16 A3 n=4: 1.80/7.47 A3 n=5: 1.99/8.21 A2 n=8: 4.63/13.68
+ff15ipq-ff14SB  std   2.15 | train RMS  1.853 max   8.76 | held-out RMS  1.806 max   7.71 | L_s  0.123 L_r   0.65 | C n=3: 1.44/5.71 C n=4: 1.65/8.59 C n=6: 2.01/8.35 C n=8: 3.31/16.48 A3 n=4: 1.58/5.78 A3 n=5: 1.73/7.67 A2 n=8: 3.53/16.32
+OBC2-GBn2       std   0.82 | train RMS  0.671 max   4.02 | held-out RMS  0.671 max   4.36 | L_s  0.069 L_r   0.33 | C n=3: 0.51/3.88 C n=4: 0.59/3.13 C n=6: 0.72/4.90 C n=8: 0.87/5.15 A3 n=4: 0.91/5.22 A3 n=5: 1.01/5.01 A2 n=8: 0.67/3.39
+lj              std   7.52 | train RMS  5.694 max  34.66 | held-out RMS  5.652 max  33.58 | L_s  0.511 L_r   2.43 | C n=3: 4.39/29.68 C n=4: 5.02/30.80 C n=6: 6.19/31.49 C n=8: 10.29/53.71 A3 n=4: 7.92/37.65 A3 n=5: 8.79/42.60 A2 n=8: 9.65/39.98
+--- typing 'elem': 10 pair types, 321 parameters
+GB              std   5.47 | train RMS  0.559 max   3.14 | held-out RMS  0.564 max   3.45 | L_s  0.722 L_r   3.79 | C n=3: 0.43/2.95 C n=4: 0.51/3.47 C n=6: 0.65/4.44 C n=8: 3.29/27.08 A3 n=4: 0.75/5.52 A3 n=5: 0.81/4.69 A2 n=8: 4.64/28.58
+      sup-norm LP (2500 training conf.), slope bound L_s=None: eta_train = 1.060 kcal/mol; held-out max 10.15, RMS 0.720  [39s]
+      sup-norm LP (2500 training conf.), slope bound L_s=1.0: eta_train = 1.063 kcal/mol; held-out max 6.54, RMS 0.703  [58s]
+      sup-norm LP (2500 training conf.), slope bound L_s=0.3: eta_train = 1.478 kcal/mol; held-out max 6.15, RMS 0.930  [64s]
+      sup-norm LP (2500 training conf.), slope bound L_s=0.1: eta_train = 4.018 kcal/mol; held-out max 11.23, RMS 2.350  [58s]
+      sup-norm LP (2500 training conf.), slope bound L_s=0.03: eta_train = 8.702 kcal/mol; held-out max 21.32, RMS 4.489  [39s]
+coul            std   7.06 | train RMS  0.855 max   6.01 | held-out RMS  0.883 max   6.48 | L_s  1.379 L_r   7.24 | C n=3: 0.66/5.18 C n=4: 0.80/7.14 C n=6: 1.00/7.05 C n=8: 3.21/27.56 A3 n=4: 1.50/9.96 A3 n=5: 1.72/6.74 A2 n=8: 4.06/26.68
+coul+GB         std   2.57 | train RMS  0.639 max   4.71 | held-out RMS  0.650 max   4.59 | L_s  0.672 L_r   3.45 | C n=3: 0.46/3.87 C n=4: 0.57/4.88 C n=6: 0.75/7.05 C n=8: 1.36/9.63 A3 n=4: 0.97/4.44 A3 n=5: 1.13/4.91 A2 n=8: 1.64/10.97
+      sup-norm LP (2500 training conf.), slope bound L_s=None: eta_train = 1.071 kcal/mol; held-out max 5.12, RMS 0.721  [36s]
+      sup-norm LP (2500 training conf.), slope bound L_s=1.0: eta_train = 1.209 kcal/mol; held-out max 11.32, RMS 0.815  [58s]
+      sup-norm LP (2500 training conf.), slope bound L_s=0.3: eta_train = 1.570 kcal/mol; held-out max 7.03, RMS 1.027  [95s]
+      sup-norm LP (2500 training conf.), slope bound L_s=0.1: eta_train = 2.027 kcal/mol; held-out max 6.39, RMS 1.256  [80s]
+      sup-norm LP (2500 training conf.), slope bound L_s=0.03: eta_train = 3.323 kcal/mol; held-out max 8.29, RMS 1.766  [49s]
+ff03-ff14SB     std   2.79 | train RMS  0.381 max   2.68 | held-out RMS  0.405 max   2.66 | L_s  0.425 L_r   3.08 | C n=3: 0.30/1.92 C n=4: 0.36/2.76 C n=6: 0.46/3.10 C n=8: 1.13/6.40 A3 n=4: 0.34/2.22 A3 n=5: 0.38/2.50 A2 n=8: 1.26/6.41
+ff15ipq-ff14SB  std   2.15 | train RMS  0.400 max   2.93 | held-out RMS  0.414 max   2.44 | L_s  0.341 L_r   1.62 | C n=3: 0.31/1.90 C n=4: 0.36/2.34 C n=6: 0.47/3.14 C n=8: 2.11/15.60 A3 n=4: 0.62/2.58 A3 n=5: 0.71/3.13 A2 n=8: 2.89/16.20
+OBC2-GBn2       std   0.82 | train RMS  0.177 max   1.33 | held-out RMS  0.188 max   1.57 | L_s  0.304 L_r   1.60 | C n=3: 0.13/1.29 C n=4: 0.16/1.28 C n=6: 0.22/2.91 C n=8: 0.67/4.26 A3 n=4: 0.21/1.36 A3 n=5: 0.24/1.81 A2 n=8: 0.90/4.52
+lj              std   7.52 | train RMS  1.274 max   8.25 | held-out RMS  1.338 max   9.47 | L_s  2.816 L_r  14.79 | C n=3: 1.03/9.14 C n=4: 1.19/8.76 C n=6: 1.61/9.07 C n=8: 9.08/51.51 A3 n=4: 1.48/6.60 A3 n=5: 1.63/6.28 A2 n=8: 12.07/49.44
+--- typing 'amber': 36 pair types, 1101 parameters
+GB              std   5.47 | train RMS  0.227 max   1.95 | held-out RMS  0.256 max   2.19 | L_s  0.893 L_r   4.42 | C n=3: 0.19/1.18 C n=4: 0.22/3.40 C n=6: 0.63/10.21 C n=8: 4.80/44.35 A3 n=4: 0.29/1.90 A3 n=5: 0.32/3.54 A2 n=8: 5.54/41.86
+      LP L=None: no solution in time
+      LP L=1.0: no solution in time

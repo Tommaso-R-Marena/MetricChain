@@ -1,0 +1,11 @@
+(1) quantitative form: TV <= (E_mu N - E_nu N)/c*,  c* = min_U m_U
+  n=2: up-sets 4, measures 300: c*>0 in 300 (violations of the bound with 1/c*: 0; largest TV c*/(E_mu N - E_nu N) = 1.000000000003, over two-level members 1.000000000003); c*<=0 in 0, of which the two-level member has TV>0 and no excess in 0
+  n=3: up-sets 18, measures 200: c*>0 in 128 (violations of the bound with 1/c*: 0; largest TV c*/(E_mu N - E_nu N) = 1.000000000000, over two-level members 1.000000000000); c*<=0 in 72, of which the two-level member has TV>0 and no excess in 72
+  n=4: up-sets 166, measures 40: c*>0 in 11 (violations of the bound with 1/c*: 0; largest TV c*/(E_mu N - E_nu N) = 1.000000000000, over two-level members 1.000000000000); c*<=0 in 29, of which the two-level member has TV>0 and no excess in 29
+(2) the star: hub with k leaves, pi ~ exp(-J sum_j x_hub x_j), centre all-plus, slope lam at every site
+  J=0.5, lam=1.0: m_U(k=1..8) = +0.6192 +0.2384 -0.1424 -0.5232 -0.9040 -1.2848 -1.6656 -2.0464   (zero at k = 2.626; total coupling at the hub k*J = 1.313)
+  J=0.25, lam=1.0: m_U(k=1..8) = +0.8049 +0.6098 +0.4147 +0.2195 +0.0244 -0.1707 -0.3658 -0.5609   (zero at k = 5.125; total coupling at the hub k*J = 1.281)
+  J=0.1, lam=1.0: m_U(k=1..8) = +0.9214 +0.8429 +0.7643 +0.6858 +0.6072 +0.5287 +0.4501 +0.3716   (zero at k = 12.731; total coupling at the hub k*J = 1.273)
+  J=0.5, lam=0.2: m_U(k=1..8) = +0.5415 +0.0830 -0.3755 -0.8340 -1.2925 -1.7510 -2.2095 -2.6680   (zero at k = 2.181; total coupling at the hub k*J = 1.091)
+  member h = exp(e_hub), J=0.5, lam=1.0, k=3: TV = 0.211290, sum of one-body deficits E_mu N - E_nu N = -0.030086
+ALL CHECKS PASSED

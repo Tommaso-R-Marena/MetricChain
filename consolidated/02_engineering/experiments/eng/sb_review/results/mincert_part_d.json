@@ -1,0 +1,386 @@
+{
+ "seconds": 0.0,
+ "seed": 20261126,
+ "result": [
+  {
+   "name": "the unchanged document",
+   "literal_claim_is_true": true,
+   "silent": null,
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "accepted"
+  },
+  {
+   "name": "two `lower_bound` keys: 6 (false), then 5 (true)",
+   "literal_claim_is_true": null,
+   "silent": "the first value is dropped",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: duplicate key 'lower_bound'"
+  },
+  {
+   "name": "two `lower_bound` keys: 5 (true), then 6 (false)",
+   "literal_claim_is_true": null,
+   "silent": "the first value is dropped",
+   "their_loader": "loaded",
+   "their_verdict": false,
+   "checked_claim": null,
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 6,
+   "ours": "malformed: duplicate key 'lower_bound'"
+  },
+  {
+   "name": "two `unary` keys: other tables first, the original last",
+   "literal_claim_is_true": null,
+   "silent": "the first tables are dropped",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: duplicate key 'unary'"
+  },
+  {
+   "name": "two `unary` keys: the original first, `[[9,9],[9,9]]` last",
+   "literal_claim_is_true": null,
+   "silent": "the first tables are dropped; the model checked is the second",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     9,
+     9
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: duplicate key 'unary'"
+  },
+  {
+   "name": "`lower_bound` 5.9 (the minimum is 5)",
+   "literal_claim_is_true": false,
+   "silent": "5.9 read as 5",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "rejected"
+  },
+  {
+   "name": "`lower_bound` 5.0",
+   "literal_claim_is_true": null,
+   "silent": "5.0 read as 5",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "rejected"
+  },
+  {
+   "name": "a table entry 5.9 in place of 5",
+   "literal_claim_is_true": null,
+   "silent": "5.9 read as 5",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: model_sha256 does not match the model in the document"
+  },
+  {
+   "name": "a table entry given as the string \"5\"",
+   "literal_claim_is_true": null,
+   "silent": "the string read as 5",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: model_sha256 does not match the model in the document"
+  },
+  {
+   "name": "a table entry `true` in place of 5",
+   "literal_claim_is_true": null,
+   "silent": "`true` read as 1",
+   "their_loader": "loaded",
+   "their_verdict": false,
+   "checked_claim": null,
+   "checked_model_unary": [
+    [
+     1,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: model_sha256 does not match the model in the document"
+  },
+  {
+   "name": "`lower_bound` given as the string \"5\"",
+   "literal_claim_is_true": null,
+   "silent": "the string read as 5",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "rejected"
+  },
+  {
+   "name": "`lower_bound` NaN",
+   "literal_claim_is_true": null,
+   "silent": null,
+   "their_loader": "raises ValueError",
+   "their_verdict": null,
+   "ours": "malformed: non-finite number NaN"
+  },
+  {
+   "name": "`lower_bound` -Infinity",
+   "literal_claim_is_true": null,
+   "silent": null,
+   "their_loader": "raises OverflowError",
+   "their_verdict": null,
+   "ours": "malformed: non-finite number -Infinity"
+  },
+  {
+   "name": "pair key \"0, 1\" (with a space)",
+   "literal_claim_is_true": null,
+   "silent": "read as the pair (0, 1)",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: non-canonical key '0, 1'"
+  },
+  {
+   "name": "two tables for one pair, keys \"0,1\" and \"0, 1\" (the second all zeros)",
+   "literal_claim_is_true": null,
+   "silent": "the second table replaces the first",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: non-canonical key '0, 1'"
+  },
+  {
+   "name": "child keys \"00\" and \"0\" for one state",
+   "literal_claim_is_true": null,
+   "silent": "the later key replaces the earlier",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: non-canonical state key '00'"
+  },
+  {
+   "name": "`model_sha256` replaced by zeros",
+   "literal_claim_is_true": null,
+   "silent": "the checksum is not compared",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: model_sha256 does not match the model in the document"
+  },
+  {
+   "name": "a table entry changed (5 to 4) without changing `model_sha256`; the claim 5 is then false",
+   "literal_claim_is_true": false,
+   "silent": "the checksum is not compared",
+   "their_loader": "loaded",
+   "their_verdict": false,
+   "checked_claim": null,
+   "checked_model_unary": [
+    [
+     4,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: model_sha256 does not match the model in the document"
+  },
+  {
+   "name": "an unknown top-level field",
+   "literal_claim_is_true": null,
+   "silent": "ignored",
+   "their_loader": "loaded",
+   "their_verdict": true,
+   "checked_claim": "5",
+   "checked_model_unary": [
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "checked_lower_bound": 5,
+   "ours": "malformed: top-level fields"
+  },
+  {
+   "name": "format `structbio-mincert/2`",
+   "literal_claim_is_true": null,
+   "silent": null,
+   "their_loader": "raises MalformedCertificate",
+   "their_verdict": null,
+   "ours": "malformed: format"
+  },
+  {
+   "name": "a truncated document",
+   "literal_claim_is_true": null,
+   "silent": null,
+   "their_loader": "raises JSONDecodeError",
+   "their_verdict": null,
+   "ours": "malformed: not JSON: Expecting property name enclosed in double quotes: line 1 column 201 (char 200)"
+  },
+  {
+   "name": "the certificate replaced by a list",
+   "literal_claim_is_true": null,
+   "silent": null,
+   "their_loader": "raises AttributeError",
+   "their_verdict": null,
+   "ours": "malformed: node"
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+p=0.2 u=4.0: h=0.2142 a=0.5535 E=1.1712
+  target theta = 0.1071: n=250: raw=+0.03907 = +1.77 ln n/n (m=0.55, omega = 0.37 ln n/n); n=500: raw=+0.02120 = +1.71 ln n/n (m=0.55, omega = 0.36 ln n/n); n=1000: raw=+0.01133 = +1.64 ln n/n (m=0.55, omega = 0.34 ln n/n); n=2000: raw=+0.00579 = +1.52 ln n/n (m=0.55, omega = 0.32 ln n/n); n=4000: raw=+0.00266 = +1.28 ln n/n (m=0.55, omega = 0.27 ln n/n)   [7s]
+  target theta = 0.2142: n=250: raw=+0.02982 = +1.35 ln n/n (m=0.5, omega = 0.39 ln n/n); n=500: raw=+0.01420 = +1.14 ln n/n (m=0.5, omega = 0.33 ln n/n); n=1000: raw=+0.00769 = +1.11 ln n/n (m=0.5, omega = 0.32 ln n/n); n=2000: raw=+0.00395 = +1.04 ln n/n (m=0.5, omega = 0.30 ln n/n); n=4000: raw=+0.00196 = +0.95 ln n/n (m=0.5, omega = 0.27 ln n/n)   [14s]
+  target theta = 0.3839: n=250: raw=+0.02014 = +0.91 ln n/n (m=0.55, omega = 0.36 ln n/n); n=500: raw=+0.00814 = +0.65 ln n/n (m=0.5, omega = 0.26 ln n/n); n=1000: raw=+0.00458 = +0.66 ln n/n (m=0.5, omega = 0.26 ln n/n); n=2000: raw=+0.00242 = +0.64 ln n/n (m=0.5, omega = 0.25 ln n/n); n=4000: raw=+0.00110 = +0.53 ln n/n (m=0.5, omega = 0.20 ln n/n)   [20s]
+  target theta = 0.4981: n=250: raw=+0.01659 = +0.75 ln n/n (m=0.5, omega = 0.35 ln n/n); n=500: raw=+0.00767 = +0.62 ln n/n (m=0.5, omega = 0.29 ln n/n); n=1000: raw=+0.00341 = +0.49 ln n/n (m=0.5, omega = 0.23 ln n/n); n=2000: raw=+0.00133 = +0.35 ln n/n (m=0.5, omega = 0.16 ln n/n); n=4000: raw=+0.00063 = +0.30 ln n/n (m=0.5, omega = 0.14 ln n/n)   [27s]
+
+real	0m27.175s
+user	0m25.691s
+sys	0m1.661s

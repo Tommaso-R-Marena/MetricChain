@@ -1,0 +1,9 @@
+finite-k identity against the definition: 36 cases, largest deviation 7.77e-16
+p=0.05 L=6 t=0.307: Lambda_blk operator N=48 -0.094292057, N=96 -0.094292057; exact increment k=11->12 -0.094292057;  bound per site 0.037540
+p=0.02 L=7 t=0.256: Lambda_blk operator N=48 -0.146386519, N=96 -0.146386500; exact increment k=11->12 -0.146386500;  bound per site 0.029973
+p=0.30 L=4 t=0.428: Lambda_blk operator N=48 -0.003315773, N=96 -0.003315773; exact increment k=11->12 -0.003315773;  bound per site 0.039421
+time 0s
+
+real	0m0.402s
+user	0m0.376s
+sys	0m0.020s

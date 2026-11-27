@@ -1,0 +1,24 @@
+=== PART A: Theorem E15 of the Ensemble division on synthetic classes, by exact maximisation over the class polytope
+  alphabets (2, 2, 2), scale 0.5: 8 states, 56 constraints, 8 centres: max [TV - sum tau] = +2.22e-15; max [TV - sum (sigma - p)] = +0.0000; sup TV / sum tau = 0.7231 [15s]
+  alphabets (2, 2, 2), scale 1.0: 8 states, 56 constraints, 8 centres: max [TV - sum tau] = +2.22e-15; max [TV - sum (sigma - p)] = +0.0000; sup TV / sum tau = 0.8399 [30s]
+  alphabets (2, 2, 2), scale 2.0: 8 states, 56 constraints, 8 centres: max [TV - sum tau] = +8.88e-16; max [TV - sum (sigma - p)] = +0.0000; sup TV / sum tau = 0.8957 [46s]
+  alphabets (2, 2), scale 1.0: 4 states, 12 constraints, 4 centres: max [TV - sum tau] = +8.88e-16; max [TV - sum (sigma - p)] = +0.0000; sup TV / sum tau = 0.9022 [46s]
+  alphabets (3, 2), scale 1.0: 6 states, 30 constraints, 6 centres: max [TV - sum tau] = +8.88e-16; max [TV - sum (sigma - p)] = +0.0815; sup TV / sum tau = 0.8705 [48s]
+  alphabets (3, 3), scale 1.0: 9 states, 72 constraints, 9 centres: max [TV - sum tau] = +2.66e-15; max [TV - sum (sigma - p)] = +0.0711; sup TV / sum tau = 0.8426 [74s]
+  alphabets (3, 3), scale 2.0: 9 states, 72 constraints, 9 centres: max [TV - sum tau] = +1.33e-15; max [TV - sum (sigma - p)] = +0.1382; sup TV / sum tau = 0.9206 [101s]
+  alphabets (4, 2), scale 1.5: 8 states, 56 constraints, 8 centres: max [TV - sum tau] = +2.22e-15; max [TV - sum (sigma - p)] = +0.2537; sup TV / sum tau = 0.9408 [112s]
+  alphabets (3, 2, 2), scale 1.0: 12 states, 132 constraints, 3 centres: max [TV - sum tau] = +2.66e-15; max [TV - sum (sigma - p)] = +0.1409; sup TV / sum tau = 0.8507 [193s]
+A1  (b): largest value of TV - sum tau over 9 classes, every subset, every centre tried: +2.66e-15 (must be <= 1e-9; 0 is attained at mu = mu*)
+A2  (c), binary sites (4 classes): largest TV - sum (sigma - p) = +1.78e-15 (must be <= 1e-9)
+A3  the binary form on sites with three or four states: largest TV - sum (sigma - p) = +0.2537 (expected > 0: (c) does not extend; (b) is the form that does)
+A4  the best constant in (b): sup TV / sum tau per class: 0.7231, 0.8399, 0.8957, 0.9022, 0.8705, 0.8426, 0.9206, 0.9408, 0.8507 (the theorem: <= 1)
+A5  control, constant 1/2 in (c): fails in 4 of 4 binary classes (must be all)
+  one-sided, alphabets (2, 2, 2), scale 1.0 (largest |delta(s,t) - delta(t,s)| = 0.50): max [TV - sum tau] = +1.78e-15; with the member defined by d(a, x): not a member for 7 of 8 centres, max [TV - sum tau] = +0.7381 [200s]
+  one-sided, alphabets (3, 2), scale 1.0 (largest |delta(s,t) - delta(t,s)| = 0.71): max [TV - sum tau] = +1.33e-15; with the member defined by d(a, x): not a member for 6 of 6 centres, max [TV - sum tau] = +1.0772 [201s]
+  one-sided, alphabets (3, 3), scale 1.5 (largest |delta(s,t) - delta(t,s)| = 1.02): max [TV - sum tau] = +1.78e-15; with the member defined by d(a, x): not a member for 9 of 9 centres, max [TV - sum tau] = +1.3613 [219s]
+  one-sided, alphabets (3, 3), scale 0.7 (largest |delta(s,t) - delta(t,s)| = 0.41): max [TV - sum tau] = +3.11e-15; with the member defined by d(a, x): not a member for 9 of 9 centres, max [TV - sum tau] = +0.1835 [236s]
+  one-sided, alphabets (4, 2), scale 1.0 (largest |delta(s,t) - delta(t,s)| = 0.57): max [TV - sum tau] = +4.44e-15; with the member defined by d(a, x): not a member for 8 of 8 centres, max [TV - sum tau] = +0.2103 [244s]
+A6  one-sided envelopes (5 classes): (b) with w* ~ e^(-d(x, a)): largest TV - sum tau = +4.44e-15; (a): largest p_i - sigma_i = +1.67e-16 (both must be <= 1e-9); control, the member defined by d(a, x): wrong in 5 of 5 classes (must be positive)
+A7  control, members of the class of envelope 2d against the bound for d: violated in 3 of 3 classes (must be all)
+A8  one-body data alone: products of one-site members are members: 60 of 60; one one-site constraint violated by 0.01 in the log-ratio: no member has those marginals in 60 of 60 (must be all); the same programme with the unmodified marginals is feasible in 60 of 60 (must be all) -- so for one-body data the exact falsification test is the one-site ratio test
+PART A DONE: 95160 linear programmes, 247 s

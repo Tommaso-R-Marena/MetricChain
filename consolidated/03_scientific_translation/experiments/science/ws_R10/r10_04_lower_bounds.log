@@ -1,0 +1,51 @@
+cube: h=0.0291391 a=0.1109441 E=0.1201145
+
+1. threshold: E_F(p,u=1) and ln Z_n(h)/Z_n(0) / n
+p=0.4  E_F=0.169127 (ln lam_max=0.169127; Y: 0.169127)  ratio to cube 1.4081   ln E e^{hm}/n at n=4,16,64,256: 0.154783 0.165540 0.168230 0.168903
+p=0.3  E_F=0.232400 (ln lam_max=0.232400; Y: 0.232400)  ratio to cube 1.9348   ln E e^{hm}/n at n=4,16,64,256: 0.194318 0.222839 0.230010 0.231803
+p=0.2  E_F=0.310766 (ln lam_max=0.310766; Y: 0.310766)  ratio to cube 2.5873   ln E e^{hm}/n at n=4,16,64,256: 0.237724 0.292274 0.306143 0.309611
+p=0.1  E_F=0.401719 (ln lam_max=0.401719; Y: 0.401719)  ratio to cube 3.3445   ln E e^{hm}/n at n=4,16,64,256: 0.283768 0.371597 0.394189 0.399837
+
+2a. Prop. H formula against the definition, n = 8 (256 labels x 256 configurations)
+   27 cases, largest |definition - formula| = 2.78e-15
+
+2b. Prop. H: max over (t,c) of G_inf(t;c)   [operator N=48; checked with N=80 and exact increments]
+p=0.4  h >= 0.033503 at (t*=0.458, c*=0.774)  [N=80: 0.033503; exact increments: 0.033503]   Y: 0.033503 (0.458, 0.774); my code at Y's (t*,c*): 0.033503   ratio to cube 1.1498
+        c=0 (i.i.d. labels; instance = zero residual): max_t = 0.028907 at t=0.490  (Y: 0.028907)   ratio to cube 0.9920
+p=0.3  h >= 0.038695 at (t*=0.431, c*=0.859)  [N=80: 0.038695; exact increments: 0.038695]   Y: 0.038695 (0.431, 0.859); my code at Y's (t*,c*): 0.038695   ratio to cube 1.3279
+        c=0 (i.i.d. labels; instance = zero residual): max_t = 0.028151 at t=0.489  (Y: 0.028151)   ratio to cube 0.9661
+p=0.2  h >= 0.041770 at (t*=0.402, c*=0.861)  [N=80: 0.041770; exact increments: 0.041770]   Y: 0.041770 (0.402, 0.861); my code at Y's (t*,c*): 0.041770   ratio to cube 1.4335
+        c=0 (i.i.d. labels; instance = zero residual): max_t = 0.026626 at t=0.488  (Y: 0.026626)   ratio to cube 0.9138
+p=0.1  h >= 0.039608 at (t*=0.364, c*=0.833)  [N=80: 0.039608; exact increments: 0.039608]   Y: 0.039608 (0.364, 0.833); my code at Y's (t*,c*): 0.039608   ratio to cube 1.3593
+        c=0 (i.i.d. labels; instance = zero residual): max_t = 0.023418 at t=0.480  (Y: 0.023418)   ratio to cube 0.8037
+
+2c. a >= sup_{t,c} G_inf(t;c)/(1-t)   and   E >= sup G_inf(t;c)/t  (family of Prop. H only)
+   p=0.4 t=0.900: sup_c G/(1-t) = 0.107583 at c=0.467
+   p=0.4 t=0.970: sup_c G/(1-t) = 0.114145 at c=0.434
+   p=0.4 t=0.990: sup_c G/(1-t) = 0.115991 at c=0.425
+   p=0.4 t=0.997: sup_c G/(1-t) = 0.116634 at c=0.421
+   p=0.4 t=0.999: sup_c G/(1-t) = 0.116817 at c=0.421
+p=0.4  a >= 0.116817 (t=0.999,c=0.421; ratio to cube 1.0529)    E >= 0.137954 (t=0.10, c=1.0) vs E_F=0.169127
+   p=0.3 t=0.900: sup_c G/(1-t) = 0.115437 at c=0.564
+   p=0.3 t=0.970: sup_c G/(1-t) = 0.121447 at c=0.533
+   p=0.3 t=0.990: sup_c G/(1-t) = 0.123125 at c=0.525
+   p=0.3 t=0.997: sup_c G/(1-t) = 0.123709 at c=0.522
+   p=0.3 t=0.999: sup_c G/(1-t) = 0.123875 at c=0.521
+p=0.3  a >= 0.123875 (t=0.999,c=0.521; ratio to cube 1.1166)    E >= 0.172029 (t=0.10, c=1.0) vs E_F=0.232400
+   p=0.2 t=0.900: sup_c G/(1-t) = 0.115401 at c=0.554
+   p=0.2 t=0.970: sup_c G/(1-t) = 0.120430 at c=0.524
+   p=0.2 t=0.990: sup_c G/(1-t) = 0.121824 at c=0.516
+   p=0.2 t=0.997: sup_c G/(1-t) = 0.122307 at c=0.513
+   p=0.2 t=0.999: sup_c G/(1-t) = 0.122445 at c=0.512
+p=0.2  a >= 0.122445 (t=0.999,c=0.512; ratio to cube 1.1037)    E >= 0.204600 (t=0.10, c=1.0) vs E_F=0.310766
+   p=0.1 t=0.900: sup_c G/(1-t) = 0.097622 at c=0.472
+   p=0.1 t=0.970: sup_c G/(1-t) = 0.100677 at c=0.438
+   p=0.1 t=0.990: sup_c G/(1-t) = 0.101508 at c=0.429
+   p=0.1 t=0.997: sup_c G/(1-t) = 0.101794 at c=0.426
+   p=0.1 t=0.999: sup_c G/(1-t) = 0.101876 at c=0.425
+p=0.1  a >= 0.101876 (t=0.999,c=0.425; ratio to cube 0.9183)    E >= 0.222487 (t=0.10, c=1.0) vs E_F=0.401719
+time 3.0s
+
+real	0m3.543s
+user	0m3.799s
+sys	0m0.758s

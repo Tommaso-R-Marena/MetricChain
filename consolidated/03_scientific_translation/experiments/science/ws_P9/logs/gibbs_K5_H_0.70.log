@@ -1,0 +1,6 @@
+=== p9_02_gibbs K5 on H, tau 0.7; started 2026-11-26 11:06:19 UTC
+    122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]
+    seed 4242: 960 states (8 chains, 120 sweeps each after 30) [14s]; sites off the anchor: mean 0.94, largest 4; frequencies by site: 0.30 0.22 0.29 0.06 0.06; distribution of the number of sites off the anchor: 0:315 1:421 2:191 3:30 4:3
+    seed 777: 960 states (8 chains, 120 sweeps each after 30) [11s]; sites off the anchor: mean 0.91, largest 4; frequencies by site: 0.27 0.23 0.29 0.05 0.07; distribution of the number of sites off the anchor: 0:336 1:406 2:187 3:28 4:3
+foreign writes attempted during import (refused): 0
+ALL DONE 26 s; peak RSS 249 MB

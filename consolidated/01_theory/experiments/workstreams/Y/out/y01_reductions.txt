@@ -1,0 +1,12 @@
+(U): 432 residuals on 36 chains;  max |ln A_pi(psi) - ln A_rho(psi+g) + ln A_rho(g)| = 1.33e-15;  max violation of d+ by psi+g = 7.11e-15 (<= 0 means admissible)
+     control: psi+g violates the ORIGINAL envelope d in 432 of 432 cases;  smallest slack left in d+ by cones psi = d(., y0): -4.00e-15 (d+ is attained)
+(L): max |marginal on blocks - prod of block marginals * prod rho_j| = 6.11e-16;  432 residuals: max violation of the two-sided bound = -1.40e-03
+(L'): 252 residuals (cases with nonnegative reduced envelope): max violation of d by psi'+sum ln rho = 2.44e-15;  max |ln A_pi - ln A_prod| = 2.89e-15
+     control: with psi' in C_d instead of C_{d-}, psi'+sum ln rho violates d in 225 of 252 cases
+
+binary symmetric chain: constants of the reductions
+p=0.4: K=0.4055  delta^-(0,1)=delta^+(0,1)=0.4055 (=K)  max|rho_m - (1 +- lam^(m+1))| = 4.0e-15   kappa_m (m=0..5) = 0.4055 0.0800 0.0160 0.0032 0.0006 0.0001
+p=0.3: K=0.8473  delta^-(0,1)=delta^+(0,1)=0.8473 (=K)  max|rho_m - (1 +- lam^(m+1))| = 1.3e-15   kappa_m (m=0..5) = 0.8473 0.3228 0.1282 0.0512 0.0205 0.0082
+p=0.2: K=1.3863  delta^-(0,1)=delta^+(0,1)=1.3863 (=K)  max|rho_m - (1 +- lam^(m+1))| = 1.8e-15   kappa_m (m=0..5) = 1.3863 0.7538 0.4389 0.2607 0.1558 0.0934
+p=0.1: K=2.1972  delta^-(0,1)=delta^+(0,1)=2.1972 (=K)  max|rho_m - (1 +- lam^(m+1))| = 4.7e-15   kappa_m (m=0..5) = 2.1972 1.5163 1.1309 0.8703 0.6805 0.5368
+6.5 s

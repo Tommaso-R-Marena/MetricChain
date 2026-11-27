@@ -1,0 +1,59 @@
+R27 item3_Lplus.py started 2026-11-26T23:19:07Z
+
+(1) symbol 8 - 2 sum_(s<=4) cos(s theta): maximum 11.039115763 at theta = 57.4533 deg  (claimed: at most 11.04 -> True)
+    Lambda_n: 5: 5.000000, 6: 6.000000, 7: 7.000000, 8: 8.000000, 9: 9.000000, 10: 9.242422, 12: 9.643397, 20: 10.505437, 50: 10.956903, 100: 11.018761, 200: 11.034055, 400: 11.037854, 1000: 11.038914
+    Lambda_n < 11.04 for all n computed: True;  increasing in n: True;  Lambda_n <= sup of the symbol: True
+    for n = 5 the graph is complete (K_5): Lambda_5 = 5.000000 (= 5)
+
+(2) inside the certified range ||eta|| <= mu/(Lambda_n C_L)  [C_L = uniform constant 1.2 b (n+2)^2/(s* tau*); Lambda_n the exact eigenvalue]
+
+  helix-like n=12: mu = 2.16176 (next singular value 5.1e-14; the six after it must vanish), Lambda_n = 9.64340, C_L = 184.54, C_loc = 28.756, 1/(2mu) = 0.23129
+     certified range mu/(Lambda C_L) = 1.215e-03   [with C_loc: 7.796e-03];  mu^2/Lambda = 4.846e-01;  1/mu <= C_L needed for the root formula: True;  Cor. L.3(b): mu >= 1/(2 C_L): True (mu C_L = 398.9)
+     pairs inside the range: 236   violations of either bound: 0   max d_P/bound = 1.000000038 at ('adversarial (max d_P at given ||eta||, SLSQP)', 0.0001)
+     CONTROLS: 'd_P <= ||eta||/(2 mu)' (first-order constant alone) violated by 18 pairs;  the bound with 1.01 mu in place of mu violated by 47 pairs
+     along the softest mode (better sign), 1 - d_P/bound at ||eta|| = f * mu^2/Lambda (NOT necessarily inside the certified range), f: 1: 4.83e-01, 0.1: 2.54e-02, 0.01: 2.48e-03, 0.001: 2.47e-04, 0.0001: 2.47e-05
+
+  helix-like n=20: mu = 1.11822 (next singular value 5.4e-14; the six after it must vanish), Lambda_n = 10.50544, C_L = 455.69, C_loc = 88.65, 1/(2mu) = 0.44714
+     certified range mu/(Lambda C_L) = 2.336e-04   [with C_loc: 1.201e-03];  mu^2/Lambda = 1.190e-01;  1/mu <= C_L needed for the root formula: True;  Cor. L.3(b): mu >= 1/(2 C_L): True (mu C_L = 509.6)
+     pairs inside the range: 216   violations of either bound: 0   max d_P/bound = 1.000000041 at ('adversarial (max d_P at given ||eta||, SLSQP)', 0.0001)
+     CONTROLS: 'd_P <= ||eta||/(2 mu)' (first-order constant alone) violated by 3 pairs;  the bound with 1.01 mu in place of mu violated by 44 pairs
+     along the softest mode (better sign), 1 - d_P/bound at ||eta|| = f * mu^2/Lambda (NOT necessarily inside the certified range), f: 1: 4.84e-01, 0.1: 2.56e-02, 0.01: 2.50e-03, 0.001: 2.50e-04, 0.0001: 2.50e-05
+
+  strand-like 160 n=12: mu = 0.154033 (next singular value 7.5e-14; the six after it must vanish), Lambda_n = 9.64340, C_L = 1784.3, C_loc = 516.67, 1/(2mu) = 3.2461
+     certified range mu/(Lambda C_L) = 8.952e-06   [with C_loc: 3.092e-05];  mu^2/Lambda = 2.460e-03;  1/mu <= C_L needed for the root formula: True;  Cor. L.3(b): mu >= 1/(2 C_L): True (mu C_L = 274.8)
+     pairs inside the range: 219   violations of either bound: 3   max d_P/bound = 1.000005467 at ('adversarial (max d_P at given ||eta||, SLSQP)', 0.0001)
+     CONTROLS: 'd_P <= ||eta||/(2 mu)' (first-order constant alone) violated by 10 pairs;  the bound with 1.01 mu in place of mu violated by 20 pairs
+     along the softest mode (better sign), 1 - d_P/bound at ||eta|| = f * mu^2/Lambda (NOT necessarily inside the certified range), f: 1: 4.84e-01, 0.1: 2.56e-02, 0.01: 2.50e-03, 0.001: 2.50e-04, 0.0001: 2.50e-05
+
+  angle-constrained random chain n=10: mu = 0.179524 (next singular value 4.0e-16; the six after it must vanish), Lambda_n = 9.24242, C_L = 2176.5, C_loc = 197.25, 1/(2mu) = 2.7851
+     certified range mu/(Lambda C_L) = 8.924e-06   [with C_loc: 9.847e-05];  mu^2/Lambda = 3.487e-03;  1/mu <= C_L needed for the root formula: True;  Cor. L.3(b): mu >= 1/(2 C_L): True (mu C_L = 390.7)
+     pairs inside the range: 220   violations of either bound: 2   max d_P/bound = 1.000000157 at ('softest mode', 0.0001)
+     CONTROLS: 'd_P <= ||eta||/(2 mu)' (first-order constant alone) violated by 11 pairs;  the bound with 1.01 mu in place of mu violated by 22 pairs
+     along the softest mode (better sign), 1 - d_P/bound at ||eta|| = f * mu^2/Lambda (NOT necessarily inside the certified range), f: 1: 4.84e-01, 0.1: 2.56e-02, 0.01: 2.50e-03, 0.001: 2.50e-04, 0.0001: 2.50e-05
+
+  angle-constrained random chain n=16: mu = 0.109357 (next singular value 1.2e-14; the six after it must vanish), Lambda_n = 10.21126, C_L = 3086.3, C_loc = 436.58, 1/(2mu) = 4.5722
+     certified range mu/(Lambda C_L) = 3.470e-06   [with C_loc: 2.453e-05];  mu^2/Lambda = 1.171e-03;  1/mu <= C_L needed for the root formula: True;  Cor. L.3(b): mu >= 1/(2 C_L): True (mu C_L = 337.5)
+     pairs inside the range: 216   violations of either bound: 1   max d_P/bound = 1.000002214 at ('adversarial (max d_P at given ||eta||, SLSQP)', 0.0001)
+     CONTROLS: 'd_P <= ||eta||/(2 mu)' (first-order constant alone) violated by 10 pairs;  the bound with 1.01 mu in place of mu violated by 19 pairs
+     along the softest mode (better sign), 1 - d_P/bound at ||eta|| = f * mu^2/Lambda (NOT necessarily inside the certified range), f: 1: 4.84e-01, 0.1: 2.56e-02, 0.01: 2.50e-03, 0.001: 2.50e-04, 0.0001: 2.50e-05
+
+  double regular tetrahedron n=5: mu = 2.20336 (next singular value 2.7e-16; the six after it must vanish), Lambda_n = 5.00000, C_L = 41.578, C_loc = 1.7372, 1/(2mu) = 0.22693
+     certified range mu/(Lambda C_L) = 1.060e-02   [with C_loc: 2.537e-01];  mu^2/Lambda = 9.710e-01;  1/mu <= C_L needed for the root formula: True;  Cor. L.3(b): mu >= 1/(2 C_L): True (mu C_L = 91.6)
+     pairs inside the range: 239   violations of either bound: 0   max d_P/bound = 0.999999737 at ('adversarial (max d_P at given ||eta||, SLSQP)', 0.0001)
+     CONTROLS: 'd_P <= ||eta||/(2 mu)' (first-order constant alone) violated by 26 pairs;  the bound with 1.01 mu in place of mu violated by 64 pairs
+     along the softest mode (better sign), 1 - d_P/bound at ||eta|| = f * mu^2/Lambda (NOT necessarily inside the certified range), f: 1: 4.87e-01, 0.1: 2.57e-02, 0.01: 2.50e-03, 0.001: 2.50e-04, 0.0001: 2.50e-05
+
+  TOTAL inside the certified ranges: pairs 1346, violations 6, max d_P/bound 1.000005467;  controls: first-order constant alone violated 78 times, 1.01 mu violated 216 times
+
+(3) just outside the hypotheses: a chain with ONE thin interior four-point window (x_{p+4} at height h over the plane of the three points before it);
+    Y = the tail reflected in that plane.  The conclusions of Theorem L+ are evaluated although ||eta|| > mu/(Lambda C_L):
+    columns: h | tau*  mu  1/(2mu)  C_L | ||eta|| = 4|h- h+| | mu/(Lambda C_L)  mu^2/Lambda | d_P | ||eta||/mu | smaller-root bound | conclusion violated? | Theorem L (uniform) holds?
+      3e-01 | 1.325e-01 0.2118 2.3603 4.260e+03 | 9.9251e-01 (4|h-h+| = 9.9251e-01) | 5.38e-06 4.855e-03 | 1.8933 | 4.685e+00 | inf | no (||eta|| > mu^2/Lambda) | True  (d_P/(C_L ||eta||) = 4.48e-04; d_P/||eta|| = 1.91)
+      1e-01 | 4.526e-02 0.1844 2.7112 1.607e+04 | 3.3084e-01 (4|h-h+| = 3.3084e-01) | 1.24e-06 3.680e-03 | 1.6296 | 1.794e+00 | inf | no (||eta|| > mu^2/Lambda) | True  (d_P/(C_L ||eta||) = 3.06e-04; d_P/||eta|| = 4.93)
+      3e-02 | 1.362e-02 0.1709 2.9262 6.057e+04 | 9.9251e-02 (4|h-h+| = 9.9251e-02) | 3.05e-07 3.159e-03 | 1.5438 | 5.809e-01 | inf | YES (||eta|| > mu^2/Lambda) | True  (d_P/(C_L ||eta||) = 2.57e-04; d_P/||eta|| = 15.6)
+      1e-02 | 4.540e-03 0.1665 3.0036 1.892e+05 | 3.3084e-02 (4|h-h+| = 3.3084e-02) | 9.52e-08 2.998e-03 | 1.5202 | 1.987e-01 | inf | YES (||eta|| > mu^2/Lambda) | True  (d_P/(C_L ||eta||) = 2.43e-04; d_P/||eta|| = 46)
+      1e-03 | 4.540e-04 0.1644 3.0413 1.929e+06 | 3.3084e-03 (4|h-h+| = 3.3084e-03) | 9.22e-09 2.924e-03 | 1.5097 | 2.012e-02 | inf | YES (||eta|| > mu^2/Lambda) | True  (d_P/(C_L ||eta||) = 2.37e-04; d_P/||eta|| = 456)
+      1e-04 | 4.540e-05 0.1642 3.0452 1.933e+07 | 3.3084e-04 (4|h-h+| = 3.3084e-04) | 9.19e-10 2.917e-03 | 1.5087 | 2.015e-03 | 1.038e-03 | YES (and ||eta|| <= mu^2/Lambda) | True  (d_P/(C_L ||eta||) = 2.36e-04; d_P/||eta|| = 4.56e+03)
+    -> the control fails as it should in 1 cases with ||eta|| <= mu^2/Lambda: there the hypothesis ||eta|| <= mu/(Lambda C_L) cannot be replaced by ||eta|| <= mu^2/Lambda,
+       and 1/(2 mu) stays bounded while sup_Y d_P/||eta|| grows like 1/h: the factor 1/tau of Theorem L is necessary in kind.
+ALL DONE 2026-11-26T23:19:23Z  15.7 s  peak memory 136 MB

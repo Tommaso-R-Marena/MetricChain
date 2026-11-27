@@ -1,0 +1,7 @@
+(1) iota - [J b x - delta(h2) b - delta(h1) x] is constant: largest oscillation 2.4e-15
+(2) dI/dh1 against the formula: largest difference 3.8e-11 (central differences, step 1e-5)
+(3) largest T(h) over 2e5 pairs (h, J > 0): -5.59e-14  (< 0)
+(4) largest (lhs - rhs)/rhs of the kernel inequality: -9.09e-05  (< 0);   (*) = identity/prefactor: largest relative mismatch 1.5e-14
+    g_W'(t) = ln(t/(t+W)) + W/(t+W): largest value -4.58e-10  (< 0)
+(5) capacity decreasing in the field and 0 < k < h2 at the optimal input (4 couplings, 25 fields): True;  stationarity residual 4.4e-07
+(6) largest I(h1, h2) - I(0, 0) over 2e5 tables: -5.96e-08  (<= 0)

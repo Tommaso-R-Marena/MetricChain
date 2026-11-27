@@ -1,0 +1,10 @@
+'R8.constraint_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'R8.sum_le_sum_f' depends on axioms: [propext, Classical.choice, Quot.sound]
+'R8.F_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'R8.F_eq_plateau' depends on axioms: [propext, Classical.choice, Quot.sound]
+'R8.sum_le_sum_F' depends on axioms: [propext, Classical.choice, Quot.sound]
+'R8.plateau_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m8.098s
+user	0m6.440s
+sys	0m2.931s

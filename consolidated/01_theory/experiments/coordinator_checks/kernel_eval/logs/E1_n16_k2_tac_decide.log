@@ -1,0 +1,39 @@
+import took 188ms
+tactic execution of Lean.Parser.Tactic.decide took 430ms
+type checking took 350ms
+'check_ok' does not depend on any axioms
+cumulative profiling times:
+	attribute application 0.355ms
+	blocked (unaccounted) 797ms
+	compilation (IR) 1.1ms
+	compilation (LCNF base) 9.88ms
+	compilation (LCNF impure) 5.24ms
+	compilation (LCNF mono) 6.23ms
+	elaboration 479ms
+	fix level params 0.558ms
+	import 188ms
+	initialization 43.2ms
+	instantiate metavars 2.05ms
+	interpretation 4.51ms
+	let-to-have transformation 1.99ms
+	linting 32.3ms
+	parsing 33.8ms
+	process pre-definitions 56.2ms
+	share common exprs 8.65ms
+	tactic execution 430ms
+	type checking 373ms
+	typeclass inference 86.6ms
+MEASURE command: timeout 120 lean --profile experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_tac_decide.lean
+MEASURE wall_seconds: 1.76
+MEASURE user_seconds: 1.68
+MEASURE sys_seconds: 0.13
+MEASURE max_rss_kb: 549116
+MEASURE polled_peak_rss_kb: 551372
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 0
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_tac_decide.lean
+RUN bytes: 47717
+RUN sha256: 72dc5051f25b3b15576f39e9b167be4a3c28f8f6d7ce07852991dde03c94a486
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 120 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 0

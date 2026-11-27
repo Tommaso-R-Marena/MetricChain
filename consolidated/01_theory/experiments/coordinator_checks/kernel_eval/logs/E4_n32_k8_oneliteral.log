@@ -1,0 +1,52 @@
+import took 189ms
+parsing took 386ms
+elaboration took 355ms
+process pre-definitions took 163ms
+elaboration took 3.39s
+experiments/coordinator_checks/kernel_eval/generated/E4_n32_k8_oneliteral.lean:1675:35: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+elaboration took 20.9s
+linting took 432ms
+experiments/coordinator_checks/kernel_eval/generated/E4_n32_k8_oneliteral.lean:12263:72: error: Expected type must not contain free variables
+  E4.leafCheck 32 8 off Lo hL uL pL mL jL = true
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+'check_ok' depends on axioms: [sorryAx]
+cumulative profiling times:
+	attribute application 0.3ms
+	compilation (IR) 7.03ms
+	compilation (LCNF base) 16.4ms
+	compilation (LCNF impure) 5.96ms
+	compilation (LCNF mono) 10.8ms
+	elaboration 24.9s
+	fix level params 0.889ms
+	import 189ms
+	initialization 45.2ms
+	instantiate metavars 15.2ms
+	interpretation 3.94ms
+	let-to-have transformation 42.5ms
+	linting 533ms
+	parsing 439ms
+	process pre-definitions 220ms
+	share common exprs 166ms
+	tactic execution 0.151ms
+	type checking 31.4ms
+	typeclass inference 6.56s
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E4_n32_k8_oneliteral.lean
+MEASURE wall_seconds: 35.12
+MEASURE user_seconds: 34.47
+MEASURE sys_seconds: 0.65
+MEASURE max_rss_kb: 1730472
+MEASURE polled_peak_rss_kb: 1732428
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 1
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E4_n32_k8_oneliteral.lean
+RUN bytes: 1556808
+RUN sha256: 7b67458abc27927207ad19f3b37cc05df892acc4681c956cf7e257a28765d853
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 1
+RUN note: generated file deleted after the run (regenerable with gen.py)

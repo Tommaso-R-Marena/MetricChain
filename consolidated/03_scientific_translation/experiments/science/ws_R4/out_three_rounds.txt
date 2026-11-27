@@ -1,0 +1,4 @@
+u=1.0: a=0.110944 h/a=0.2626 T2(0)/a=0.62432
+  ladder (1,1,1): 0.5403 a  at phi=0.512, xi1/a=0.631, xi2/a=0.107
+  ladder (1,2)  : 0.5454 a  at phi=0.416, xi1/a=0.309
+  => T3(0) <= 0.5403 a   (grid values: upper bounds)

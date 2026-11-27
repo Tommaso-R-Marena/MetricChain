@@ -1,0 +1,9 @@
+SB-X-009, run of 2026-11-27 (between 02:43 and 02:49 UTC: after a clock reading of 02:42:56 and before the commit that first contains this file), session machine, one core, about 42 s.
+Command: ~/.venvs/structbio/bin/python experiments/structbio/checker_probe/run.py
+
+commit of the code in memory: 0e934eb8aa83915995caec335996782985344ce0; seed 20261127; 42 s
+{'min_checks': 4900, 'min_accepted': 2456, 'min_unsound': 0, 'min_memory_vs_text_disagree': 0, 'z_checks': 3072, 'z_accepted': 1917, 'z_unsound': 0, 'populations_checked': 1892, 'populations_unsound': 0}
+
+The same counts were obtained from the scratch copy of the script on the uncommitted working
+tree that became commit 0e934eb.  Development evidence about the checker implementation on
+small random instances; not a proof.

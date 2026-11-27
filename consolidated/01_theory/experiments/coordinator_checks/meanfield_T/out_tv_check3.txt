@@ -1,0 +1,21 @@
+== F. junction with the uniform cube (B = 0, u = 1, e = 0): symmetric shells and general binary centres
+   R_unif(0) = 0.0291391;  bJ* = 1 + u c2/(2L) with rho = Lambda_1/u:
+   rho = 0.379885, c2 = 0.122489, L = 0.490034, bJ* = 1.12498
+   bJ = 0.90: max over symmetric shells 0.0291391 at x = 0.2689   (report 0.0291391);  ratio to R_unif 1.00000   [2s]
+   bJ = 1.10: max over symmetric shells 0.0291391 at x = 0.2689   (report 0.0291391);  ratio to R_unif 1.00000   [5s]
+   bJ = 1.12: max over symmetric shells 0.0291391 at x = 0.2689   (report 0.0291391);  ratio to R_unif 1.00000   [8s]
+   bJ = 1.14: max over symmetric shells 0.0290694 at x = 0.2689   (report 0.0290694);  ratio to R_unif 0.99761   [12s]
+   bJ = 1.20: max over symmetric shells 0.0283097 at x = 0.2742   (report 0.0283097);  ratio to R_unif 0.97154   [15s]
+   bJ = 1.75: max over symmetric shells 0.0230260 at x = 0.3129   (report 0.0230260);  ratio to R_unif 0.79021   [21s]
+== G. one phase with a field (bJ = 0.5, bB = 0.3, u = 1), e = 0.029737: report R_H = 0.011685 (centre type 0.4282)
+   best binary: 0.0116853 at (m, a, b) = [0.4282 0.1323 0.4703]   [139s]
+   cone formula (grid 700): 0.011706 at m = 0.420   [143s]
+== H. pair identity at the two-phase binary optimum (bJ = 1.5, B = 0, u = 1): n_mu(X) at X = S(e) = e + R(e)
+   e = +0.000: R = 0.0251012, X = 0.0251012:  n_mu direct = 0.0251011,  through r_mu = 0.0251012   [174s]
+   e = +0.020: R = 0.0152765, X = 0.0352765:  n_mu direct = 0.0152765,  through r_mu = 0.0152765   [205s]
+   e = -0.050: R = 0.0575961, X = 0.0075961:  n_mu direct = 0.0575959,  through r_mu = 0.0575961   [231s]
+== I. shell-cone directly: theta_shell(X; mu0) = min{MI : G_mu0(nu) - min G_mu0 <= X}, mu0 = optimal shell, X = S(0); and the cone around a point
+   shell-cone around (1/2; 0.29803, 0.29803) at X = 0.0251012: 0.025127   (report 0.0251012)
+   cone around a point of type 1/2 at the same X: 0.002038   (report 0.0020379)
+== J. ferromagnets are never harder than the uniform cube (T9(e)): random profiles, r_mu(e) <= R_unif(e)
+   largest r_mu(e) - R_unif(e) over 180 profiles, three ferromagnets: -4.32e-03   [305s]

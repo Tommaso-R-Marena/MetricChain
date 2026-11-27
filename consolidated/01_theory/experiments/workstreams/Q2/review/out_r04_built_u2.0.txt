@@ -1,0 +1,11 @@
+u = 2.0 done, 47 s
+Proposition D' (levels as built and pass-through):
+    cases 5052 (of which pass-through only 1520), violations 0, least slack 4.097 at ('level', 2.0, 10000, 2288, 0.2288, 17.3, -10000.0, '[(0.1949437803305249, 1.0)]', 1.0);
+    checklist items 21192, violations 0
+Proposition Q6(e) / Corollary Q6(e)-max (finite R, or R = inf with sigma = 0):
+    cases 34052 (of which pass-through only 17052), violations 0, least slack 4.095 at ('level', 2.0, 10000, 2765, 93.5, 0.2, 17.3, -10000.0, '[(0.32781332547273767, 1.0), (0.11673708929593352, 0.6), (0.09728090774661127, 0.3), (0.08755281697195015, 0.0)]', 2.0);
+    checklist items 116000, violations 0
+Q6(e)-max with R = inf, POSITIVE slopes, a flat line, R' = e (referee's extension):
+    cases 4200 (of which pass-through only 1332), violations 0, least slack 4.636 at ('level', 2.0, 10000, 2183, 145.92, 0.5, 17.3, -10000.0, '[(0.09728090774661127, 0.0), (0.32781332547273767, 1.0)]', 'inf');
+    checklist items 17208, violations 0
+time 47 s

@@ -1,0 +1,4 @@
+u=1.0 n=1000 phi=0.50: flat 1.0405  worst found 1.0466  C_max 1.1380  claimed limit 0.5049  violations 0  (25 s)
+u=1.0 n=1000 phi=0.80: flat 0.7013  worst found 1.3382  C_max 1.4879  claimed limit 0.8000  violations 0  (28 s)
+u=1.0 n=1000 phi=0.5: flat bottom regenerated 1.0405 stored 1.0405; worst found regenerated 1.0466 stored 1.0466; per search regenerated - stored (ln cost): [0.0, 0.0, 0.0, 0.0]; evaluations [4002, 4002, 1950, 1950]
+u=1.0 n=1000 phi=0.8: flat bottom regenerated 0.7013 stored 0.7013; worst found regenerated 1.3382 stored 1.3382; per search regenerated - stored (ln cost): [0.0, 0.0, 0.0, 0.0]; evaluations [4002, 4002, 1950, 1950]

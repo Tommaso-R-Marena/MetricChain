@@ -1,0 +1,11 @@
+=== K20 on H, tau 0.7: 452 atoms, 20 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; ball of radius 3: 385566 states
+    0 of 385566 [120s]
+    51200 of 385566 [285s]
+    102400 of 385566 [429s]
+    153600 of 385566 [551s]
+    204800 of 385566 [678s]
+    256000 of 385566 [820s]
+    307200 of 385566 [942s]
+    358400 of 385566 [1074s]
+written serine_helix_reach_cache/ball_K20_H_0.70_M3.npz: 385566 values, range [-5993.8553, -5745.9174] kcal/mol; 300 re-evaluated: largest deviation 0.0e+00
+ALL DONE 1137 s; peak RSS 2811 MB

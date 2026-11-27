@@ -1,0 +1,70 @@
+=== u = 0.5: a = 0.030300, h = 0.007673 (h/a = 0.2532), eps* = 0.030930
+  HintPair on a grid of 4001 accuracies: |theta_na(e + theta_h(e)) - theta_h(e)| <= 2.7e-16; e + theta_h(e) increasing (smallest step 3.89e-06); theta_h(e) - (h - e) >= 5.03e-07 (L = 1); |theta_na(h) - h| = 1.0e-16: True
+  constants of the closed form: kappa = 0.03923, c1 = 0.20328 (c1/a = 6.709), c2 = 6.645;  asymptotically k (B_k - h) <= a
+  check of the implementation: closed form tau_2/a = 0.5001; one-sided value B_2/a = 0.5003 (an upper bound of it)
+  (a) top:  k | B_k/a (one-sided upper bound of sup T_k) | epoch bound/a | closed form (h + c1/(k+c2))/a | (B_k - h) k^2/a
+        1 |   1.0000 |   1.0000 |   1.0000 |  0.747   ok
+        2 |   0.5003 |   1.0000 |   1.0293 |  0.988   ok
+        3 |   0.3601 |   0.7979 |   0.9488 |  0.962   ok
+        4 |   0.3066 |   0.7979 |   0.8835 |  0.855   ok
+        5 |   0.2846 |   0.6367 |   0.8294 |  0.784   ok
+        6 |   0.2748 |   0.6367 |   0.7838 |  0.778   ok
+        7 |   0.2703 |   0.5081 |   0.7449 |  0.836   ok
+        8 |   0.2677 |   0.5081 |   0.7113 |  0.925   ok
+       16 |   0.2629 |   0.3318 |   0.5495 |  2.478   ok
+       24 |   0.2626 |   0.3121 |   0.4722 |  5.425   ok
+       32 |   0.2625 |   0.2970 |   0.4268 |  9.508   ok
+       40 |   0.2625 |   0.2850 |   0.3971 | 14.851   ok
+      largest (B_k - h)/(epoch bound - h) over the levels: 1.000
+  (b) all 160 grid accuracies, all levels: largest (T_k(g) - theta_h(g))/(A(g)/(k + c2)) = 0.772; smallest T_k(g) - theta_h(g) = -5.27e-17 (never below the hinted exponent): True
+      the scalar recursion on the computed values: largest m_(k+1) - max(eps_(k+1), m_k (eps_(k+1) + s)/(m_k + s)) = -3.50e-09   (<= 0 up to the one-sided discretisation: True)
+      g = 0.10 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0586 <= 0.812, k=4: 0.0078 <= 0.659, k=8: 0.0026 <= 0.479, k=16: 0.0023 <= 0.310, k=40: 0.0023 <= 0.150
+      g = 0.30 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0121 <= 0.933, k=4: 0.0012 <= 0.758, k=8: 0.0005 <= 0.551, k=16: 0.0005 <= 0.356, k=40: 0.0005 <= 0.173
+      g = 0.60 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0007 <= 1.203, k=4: 0.0001 <= 0.977, k=8: 0.0001 <= 0.710, k=16: 0.0001 <= 0.459, k=40: 0.0001 <= 0.223
+=== u = 1.0: a = 0.110944, h = 0.029139 (h/a = 0.2626), eps* = 0.120115
+  HintPair on a grid of 4001 accuracies: |theta_na(e + theta_h(e)) - theta_h(e)| <= 2.8e-16; e + theta_h(e) increasing (smallest step 1.53e-05); theta_h(e) - (h - e) >= 5.10e-07 (L = 1); |theta_na(h) - h| = 1.1e-16: True
+  constants of the closed form: kappa = 0.04265, c1 = 0.71238 (c1/a = 6.421), c2 = 6.352;  asymptotically k (B_k - h) <= a
+  check of the implementation: closed form tau_2/a = 0.5004; one-sided value B_2/a = 0.5009 (an upper bound of it)
+  (a) top:  k | B_k/a (one-sided upper bound of sup T_k) | epoch bound/a | closed form (h + c1/(k+c2))/a | (B_k - h) k^2/a
+        1 |   1.0000 |   1.0000 |   1.0000 |  0.737   ok
+        2 |   0.5009 |   1.0000 |   1.0314 |  0.953   ok
+        3 |   0.3640 |   0.7920 |   0.9492 |  0.912   ok
+        4 |   0.3136 |   0.7920 |   0.8829 |  0.815   ok
+        5 |   0.2936 |   0.6272 |   0.8283 |  0.774   ok
+        6 |   0.2847 |   0.6272 |   0.7825 |  0.795   ok
+        7 |   0.2800 |   0.4968 |   0.7436 |  0.850   ok
+        8 |   0.2774 |   0.4968 |   0.7100 |  0.943   ok
+       16 |   0.2725 |   0.3881 |   0.5499 |  2.518   ok
+       24 |   0.2723 |   0.3282 |   0.4742 |  5.571   ok
+       32 |   0.2723 |   0.3118 |   0.4301 |  9.901   ok
+       40 |   0.2723 |   0.2987 |   0.4012 | 15.470   ok
+      largest (B_k - h)/(epoch bound - h) over the levels: 1.000
+  (b) all 160 grid accuracies, all levels: largest (T_k(g) - theta_h(g))/(A(g)/(k + c2)) = 0.764; smallest T_k(g) - theta_h(g) = 5.55e-17 (never below the hinted exponent): True
+      the scalar recursion on the computed values: largest m_(k+1) - max(eps_(k+1), m_k (eps_(k+1) + s)/(m_k + s)) = -7.73e-10   (<= 0 up to the one-sided discretisation: True)
+      g = 0.10 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0551 <= 0.807, k=4: 0.0077 <= 0.651, k=8: 0.0027 <= 0.470, k=16: 0.0023 <= 0.302, k=40: 0.0023 <= 0.145
+      g = 0.30 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0111 <= 0.937, k=4: 0.0011 <= 0.756, k=8: 0.0006 <= 0.545, k=16: 0.0006 <= 0.350, k=40: 0.0006 <= 0.169
+      g = 0.60 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0006 <= 1.222, k=4: 0.0001 <= 0.986, k=8: 0.0001 <= 0.711, k=16: 0.0001 <= 0.457, k=40: 0.0001 <= 0.220
+=== u = 2.0: a = 0.327813, h = 0.097281 (h/a = 0.2968), eps* = 0.433781
+  HintPair on a grid of 4001 accuracies: |theta_na(e + theta_h(e)) - theta_h(e)| <= 3.1e-16; e + theta_h(e) increasing (smallest step 5.81e-05); theta_h(e) - (h - e) >= 5.35e-07 (L = 1); |theta_na(h) - h| = 0.0e+00: True
+  constants of the closed form: kappa = 0.05670, c1 = 1.81308 (c1/a = 5.531), c2 = 5.443;  asymptotically k (B_k - h) <= a
+  check of the implementation: closed form tau_2/a = 0.5056; one-sided value B_2/a = 0.5102 (an upper bound of it)
+  (a) top:  k | B_k/a (one-sided upper bound of sup T_k) | epoch bound/a | closed form (h + c1/(k+c2))/a | (B_k - h) k^2/a
+        1 |   1.0000 |   1.0000 |   1.0000 |  0.703   ok
+        2 |   0.5102 |   1.0000 |   1.0399 |  0.854   ok
+        3 |   0.3851 |   0.7712 |   0.9519 |  0.795   ok
+        4 |   0.3425 |   0.7712 |   0.8825 |  0.732   ok
+        5 |   0.3264 |   0.5947 |   0.8264 |  0.742   ok
+        6 |   0.3190 |   0.5947 |   0.7801 |  0.799   ok
+        7 |   0.3147 |   0.4586 |   0.7413 |  0.879   ok
+        8 |   0.3121 |   0.4586 |   0.7082 |  0.984   ok
+       16 |   0.3071 |   0.3634 |   0.5547 |  2.638   ok
+       24 |   0.3069 |   0.3430 |   0.4846 |  5.867   ok
+       32 |   0.3069 |   0.3291 |   0.4445 | 10.428   ok
+       40 |   0.3069 |   0.3196 |   0.4185 | 16.294   ok
+      largest (B_k - h)/(epoch bound - h) over the levels: 1.000
+  (b) all 160 grid accuracies, all levels: largest (T_k(g) - theta_h(g))/(A(g)/(k + c2)) = 0.733; smallest T_k(g) - theta_h(g) = -2.47e-32 (never below the hinted exponent): True
+      the scalar recursion on the computed values: largest m_(k+1) - max(eps_(k+1), m_k (eps_(k+1) + s)/(m_k + s)) = -2.38e-10   (<= 0 up to the one-sided discretisation: True)
+      g = 0.10 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0485 <= 0.793, k=4: 0.0073 <= 0.625, k=8: 0.0024 <= 0.439, k=16: 0.0021 <= 0.275, k=40: 0.0021 <= 0.130
+      g = 0.30 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0093 <= 0.955, k=4: 0.0009 <= 0.752, k=8: 0.0004 <= 0.528, k=16: 0.0004 <= 0.331, k=40: 0.0004 <= 0.156
+      g = 0.60 eps*:  (T_k - theta_h)/a against the bound/a:  k=2: 0.0006 <= 1.298, k=4: 0.0001 <= 1.023, k=8: 0.0001 <= 0.718, k=16: 0.0001 <= 0.450, k=40: 0.0001 <= 0.213
+all checks passed: True   (119 s)

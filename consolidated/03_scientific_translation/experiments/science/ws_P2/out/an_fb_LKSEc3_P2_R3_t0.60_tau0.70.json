@@ -1,0 +1,14 @@
+{
+"tag": "fb_LKSEc3_P2_R3_t0.60",
+"tau": 0.7,
+"seq": "LKS",
+"bb": "P2",
+"grid": "R3",
+"shape": [
+0,
+21,
+9
+],
+"natoms": 64,
+"empty": true
+}

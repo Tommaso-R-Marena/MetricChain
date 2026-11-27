@@ -1,0 +1,25 @@
+== control (field), closed forms (A) against the single-letter solver (B)
+
+p = 0.1, u = 2.0:  E (closed form) = 0.212295;  contact set of v: [(0.014815000000000002, 0.45085250000000004)]
+  e = 0.0E = 0.000000
+    R^max: closed 0.0481300 | sup-min (binary) 0.0481300 at (m,a,b)=(0.5065,0.5491,0.0148) | cone formula 0.0481300 (m=0.5065)   diffs +1.4e-12 +4.1e-13
+    R_0  : closed 0.0426920 | sup-min (binary) 0.0426920 | cone formula 0.0426920 (m=0.3477)   diffs +6.1e-14 +5.7e-14
+    theta_na(e+R^max(e) = 0.048130): closed 0.0481300 | n_mu at dip optimum 0.0481300 | truncated cone (m=0.507) 0.0481301   [pair identity: R^max(e) = 0.0481300]
+  e = 0.3E = 0.063688
+    R^max: closed 0.0232703 | sup-min (binary) 0.0232703 at (m,a,b)=(0.5373,0.5491,0.0148) | cone formula 0.0232703 (m=0.5373)   diffs +1.7e-12 +1.7e-12
+    R_0  : closed 0.0194967 | sup-min (binary) 0.0194967 | cone formula 0.0194967 (m=0.3994)   diffs +4.4e-14 +2.5e-14
+    theta_na(e+R^max(e) = 0.086959): closed 0.0232703 | n_mu at dip optimum 0.0232703 | truncated cone (m=0.537) 0.0232707   [pair identity: R^max(e) = 0.0232703]
+    theta_na(e = 0.063688): closed 0.0362459 | n_mu at dip optimum 0.0361563 | truncated cone (m=0.517) 0.0362447
+
+p = 0.5, u = 1.0:  E (closed form) = 0.120115;  contact set of v: [(0.26894250000000003, 0.7310575)]
+  e = 0.0E = 0.000000
+    R^max: closed 0.0291391 | sup-min (binary) 0.0291391 at (m,a,b)=(0.5000,0.2689,0.2689) | cone formula 0.0291391 (m=0.5000)   diffs +8.0e-13 +6.2e-13
+    R_0  : closed 0.0291391 | sup-min (binary) 0.0291391 | cone formula 0.0291391 (m=0.5000)   diffs +6.1e-14 +3.1e-14
+    theta_na(e+R^max(e) = 0.029139): closed 0.0291391 | n_mu at dip optimum 0.0291391 | truncated cone (m=0.500) 0.0291391   [pair identity: R^max(e) = 0.0291391]
+  e = 0.3E = 0.036034
+    R^max: closed 0.0142063 | sup-min (binary) 0.0142063 at (m,a,b)=(0.5000,0.2689,0.2689) | cone formula 0.0142063 (m=0.5000)   diffs +3.9e-13 +3.0e-13
+    R_0  : closed 0.0142063 | sup-min (binary) 0.0142063 | cone formula 0.0142063 (m=0.5000)   diffs +2.8e-14 +7.8e-15
+    theta_na(e+R^max(e) = 0.050241): closed 0.0142063 | n_mu at dip optimum 0.0142063 | truncated cone (m=0.500) 0.0142063   [pair identity: R^max(e) = 0.0142063]
+    theta_na(e = 0.036034): closed 0.0231965 | n_mu at dip optimum 0.0231965 | truncated cone (m=0.500) 0.0231965
+
+time 124.9s

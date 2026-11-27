@@ -1,0 +1,8 @@
+n=11 N=14 conf=   19559 classes=   2908 hc_margin=2.001e-02 clusters=277 raw_unique=2576 max_in=1.95e-14 min_between=1.385e-04 t=0.6s
+n=12 N=15 conf=   47141 classes=   6137 hc_margin=2.001e-02 clusters=519 raw_unique=5202 max_in=2.49e-14 min_between=5.395e-06 t=1.2s
+n=13 N=16 conf=  113587 classes=  13012 hc_margin=2.001e-02 clusters=1000 raw_unique=10810 max_in=3.02e-14 min_between=2.782e-06 t=4.4s
+n=14 N=17 conf=  273623 classes=  27421 hc_margin=6.309e-03 clusters=1941 raw_unique=22937 max_in=3.55e-14 min_between=8.583e-07 t=11.3s
+
+real	0m17.839s
+user	0m13.660s
+sys	0m3.634s

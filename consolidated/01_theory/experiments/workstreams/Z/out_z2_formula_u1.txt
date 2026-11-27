@@ -1,0 +1,14 @@
+# cube u = 1: h = 0.029139, a = 0.110944, c_*^2 = 0.071147;  chain: s_t = L + 0.05, b_0 = h + 0.003 = h (1 + 0.103); range condition to level 160: True
+# j^2 (b_j - h)/c_*^2 at j = 10, 20, 40, 80, 160: 1.3745 1.5328 1.4629 1.3012 1.1697   (extrapolation beyond 160 with rho = 1.1697)
+# base: Theorem A of Q2 with M_1 = 10 epochs (B_{M_1} = h (1 + 0.1011) <= b_0), k_{M_1} = 43 levels
+# delta = 0.05, eps = 1.  All entries are ln(evaluations) minus n h, in nats; 'n(a-h)' is where the non-adaptive bound stands.
+#        n    n(a-h)   | Thm 11.58a (Q)        | Theorem A of Q2       | Theorem Z: total      k   n beta_k    chains    levels     base  per level/ln n
+  10^5     8.18e+03   |       3936  (M =  5)  |       3949  (M =  5)  |       7466       1        300     468.9     78.73     6618    47.57
+  10^6     8.18e+04   |  1.206e+04  (M = 10)  |  1.059e+04  (M =  9)  |  1.146e+04       1       3000     560.1     90.24     7805    47.07
+  10^7     8.18e+05   |   3.67e+04  (M = 14)  |  2.613e+04  (M = 14)  |  2.521e+04      13       6152      8712      1325     9018    47.90
+  10^8     8.18e+06   |  1.162e+05  (M = 17)  |   7.02e+04  (M = 17)  |  4.913e+04      30  1.197e+04  2.352e+04      3407  1.024e+04    48.73
+  10^9     8.18e+07   |  3.738e+05  (M = 21)  |   2.06e+05  (M = 21)  |  9.971e+04      61   2.61e+04  5.45e+04      7643  1.147e+04    49.16
+  10^10    8.18e+08   |  1.215e+06  (M = 25)  |  6.466e+05  (M = 25)  |  2.095e+05     121   5.91e+04  1.211e+05  1.659e+04  1.271e+04    49.41
+  10^12    8.18e+10   |  1.266e+07  (M = 32)  |  6.764e+06  (M = 32)  |  1.035e+06     484  3.553e+05  5.867e+05  7.797e+04  1.521e+04    49.70
+  10^15    8.18e+13   |  4.245e+08  (M = 43)  |  2.354e+08  (M = 43)  |  1.189e+07    4510  4.091e+06  6.893e+06  8.913e+05  1.901e+04    49.97
+# limsup constant (3/2)(2 c_*^2)^{1/3} c_Z^{2/3} with c_Z = the last column at the largest n: 10.62   (Theorem B of Q2: C_*' sqrt(n ln n))

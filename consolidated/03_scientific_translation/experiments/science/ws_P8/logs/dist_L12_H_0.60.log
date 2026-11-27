@@ -1,0 +1,43 @@
+=== p8_06_distance: L12 on H, tau 0.6: 240 atoms, 12 sites (LLLLLLLLLLLL), states per site [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; anchor (ICM) (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+(C) group responses done: 26 groups, 0 s
+    group | net charge | sum|q| | first-order response R1 to the nearest other site and to the farthest (kcal/mol; centroid distance nm)
+    -0:bb      +0.000 1.868 | nearest: site 2 at 0.46 nm, R1 = 2.244e-01 | farthest: site 11 at 1.72 nm, R1 = 7.801e-04
+    L1:bb      -0.184 2.107 | nearest: site 0 at 0.30 nm, R1 = 6.238e-01 | farthest: site 11 at 1.52 nm, R1 = 1.423e-03
+    L1:nsc     +0.184 1.905 | nearest: site 4 at 0.49 nm, R1 = 4.329e-02 | farthest: site 10 at 1.52 nm, R1 = 1.161e-04
+    L2:bb      -0.184 2.107 | nearest: site 1 at 0.30 nm, R1 = 7.584e-01 | farthest: site 11 at 1.42 nm, R1 = 1.576e-03
+    L2:nsc     +0.184 1.905 | nearest: site 5 at 0.49 nm, R1 = 4.441e-02 | farthest: site 11 at 1.52 nm, R1 = 1.184e-04
+    L3:bb      -0.184 2.107 | nearest: site 2 at 0.30 nm, R1 = 8.320e-01 | farthest: site 11 at 1.36 nm, R1 = 2.031e-03
+    L3:nsc     +0.184 1.905 | nearest: site 6 at 0.49 nm, R1 = 4.672e-02 | farthest: site 11 at 1.52 nm, R1 = 1.531e-04
+    L4:bb      -0.184 2.107 | nearest: site 3 at 0.30 nm, R1 = 8.546e-01 | farthest: site 11 at 1.14 nm, R1 = 7.052e-03
+    L4:nsc     +0.184 1.905 | nearest: site 7 at 0.49 nm, R1 = 4.859e-02 | farthest: site 11 at 1.17 nm, R1 = 5.482e-04
+    L5:bb      -0.184 2.107 | nearest: site 4 at 0.30 nm, R1 = 8.443e-01 | farthest: site 10 at 0.94 nm, R1 = 1.010e-02
+    L5:nsc     +0.184 1.905 | nearest: site 8 at 0.49 nm, R1 = 4.925e-02 | farthest: site 10 at 1.14 nm, R1 = 4.910e-04
+    L6:bb      -0.184 2.107 | nearest: site 5 at 0.30 nm, R1 = 8.463e-01 | farthest: site 0 at 1.12 nm, R1 = 1.894e-03
+    L6:nsc     +0.184 1.905 | nearest: site 9 at 0.49 nm, R1 = 4.923e-02 | farthest: site 0 at 1.30 nm, R1 = 6.042e-04
+    L7:bb      -0.184 2.107 | nearest: site 6 at 0.30 nm, R1 = 8.503e-01 | farthest: site 0 at 1.23 nm, R1 = 8.813e-04
+    L7:nsc     +0.184 1.905 | nearest: site 10 at 0.49 nm, R1 = 4.918e-02 | farthest: site 0 at 1.31 nm, R1 = 4.003e-04
+    L8:bb      -0.184 2.107 | nearest: site 7 at 0.30 nm, R1 = 8.578e-01 | farthest: site 0 at 1.27 nm, R1 = 1.005e-03
+    L8:nsc     +0.184 1.905 | nearest: site 11 at 0.49 nm, R1 = 4.913e-02 | farthest: site 1 at 1.31 nm, R1 = 4.000e-04
+    L9:bb      -0.184 2.107 | nearest: site 8 at 0.30 nm, R1 = 9.216e-01 | farthest: site 0 at 1.46 nm, R1 = 6.423e-04
+    L9:nsc     +0.184 1.905 | nearest: site 9 at 0.63 nm, R1 = 3.888e-02 | farthest: site 0 at 1.54 nm, R1 = 3.637e-04
+    L10:bb     -0.184 2.107 | nearest: site 9 at 0.30 nm, R1 = 7.123e-01 | farthest: site 0 at 1.67 nm, R1 = 2.445e-04
+    L10:nsc    +0.184 1.905 | nearest: site 10 at 0.63 nm, R1 = 3.824e-02 | farthest: site 0 at 1.79 nm, R1 = 1.017e-04
+    L11:bb     -0.184 2.107 | nearest: site 10 at 0.30 nm, R1 = 5.111e-01 | farthest: site 0 at 1.76 nm, R1 = 1.442e-04
+    L11:nsc    +0.184 1.905 | nearest: site 11 at 0.63 nm, R1 = 3.839e-02 | farthest: site 1 at 1.79 nm, R1 = 1.016e-04
+    L12:bb     -0.184 2.107 | nearest: site 11 at 0.30 nm, R1 = 4.764e-01 | farthest: site 0 at 1.86 nm, R1 = 1.350e-04
+    L12:nsc    +0.184 1.905 | nearest: site 8 at 0.72 nm, R1 = 5.011e-02 | farthest: site 0 at 1.86 nm, R1 = 1.207e-04
+    -13:bb     -0.000 1.129 | nearest: site 11 at 0.58 nm, R1 = 1.877e-01 | farthest: site 0 at 2.04 nm, R1 = 1.098e-04
+    triple 220/220 done (1760 evaluations in this run), checkpoint written, 3 s
+(B) 220 triples done; sum of M_T = 2.5750 kcal/mol; largest 0.0755 at T = (3, 7, 8)
+    by sequence span (last - first site): number | sum of M_T | mean | max   (kcal/mol)
+      span  2:  10 | 7.0700e-02 | 7.0700e-03 | 1.1774e-02
+      span  3:  18 | 2.7636e-01 | 1.5353e-02 | 2.6680e-02
+      span  4:  24 | 6.0603e-01 | 2.5251e-02 | 4.3723e-02
+      span  5:  28 | 7.3388e-01 | 2.6210e-02 | 7.5470e-02
+      span  6:  30 | 2.8814e-01 | 9.6047e-03 | 3.1305e-02
+      span  7:  30 | 3.6378e-01 | 1.2126e-02 | 5.2212e-02
+      span  8:  28 | 7.6972e-02 | 2.7490e-03 | 9.2256e-03
+      span  9:  24 | 8.3241e-02 | 3.4684e-03 | 1.4406e-02
+      span 10:  18 | 5.2531e-02 | 2.9184e-03 | 1.4792e-02
+      span 11:  10 | 2.3309e-02 | 2.3309e-03 | 1.3259e-02
+DONE in 2.7 s; peak RSS 86 MB

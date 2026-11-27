@@ -1,0 +1,16 @@
+P1 matroid of the legs: ok
+    d = 2, 3 legs: rank 3, connected = False
+    d = 2, 4 legs: rank 3, connected = True
+    d = 2, 5 legs: rank 3, connected = True
+    d = 3, 6 legs: rank 6, connected = False
+    d = 3, 7 legs: rank 6, connected = True
+    d = 3, 8 legs: rank 6, connected = True
+P2 planar platform: ok
+    d = 2, 4 legs: smallest residual over 84 non-constant splices = 1.946e-03 (true pose: 3.7e-15)
+    d = 2, 5 legs: smallest residual over 180 non-constant splices = 4.428e-02 (true pose: 5.8e-15)
+    d = 2, 3 legs (free matroid): splices of nearby poses realised in 20/20 cases
+P3 spatial platform: ok
+    d = 3, 7 legs: smallest residual over 80 non-constant splices = 2.366e-03 (true pose: 5.5e-15)
+    d = 3, 6 legs (free matroid): splices of nearby poses realised in 20/20 cases
+PASS
+exit 0

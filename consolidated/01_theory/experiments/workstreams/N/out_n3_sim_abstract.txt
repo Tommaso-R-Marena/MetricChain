@@ -1,0 +1,95 @@
+==============================================================================================================
+S1. the cube Q_{n_o} x Q_{n_i}: Harper's tail functions, V = exact fibre averages of random members of L_u
+==============================================================================================================
+  u=1.0 n_o=8 bounded  th=.3 abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 2811 populated, 0 negligible; stops by the cap rule 0; largest sample 119808; widest U/L 7.632 
+  u=1.0 n_o=8 bounded  th=.3 cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 2811 populated, 0 negligible; stops by the cap rule 0; largest sample 121856; widest U/L 7.609 
+  u=1.0 n_o=8 bounded  th=.1 abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 5539 populated, 0 negligible; stops by the cap rule 0; largest sample 420352; widest U/L 2.690 
+  u=1.0 n_o=8 bounded  th=.1 cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 5539 populated, 0 negligible; stops by the cap rule 0; largest sample 425472; widest U/L 2.690 
+  u=1.0 n_o=8 11.52 regime   abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 1272 populated, 0 negligible; stops by the cap rule 0; largest sample 3440; widest U/L 68.502 
+  u=1.0 n_o=8 11.52 regime   cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 1274 populated, 0 negligible; stops by the cap rule 0; largest sample 3488; widest U/L 68.580 
+  u=0.5 n_o=10 bounded  th=.3 abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 1535 populated, 0 negligible; stops by the cap rule 0; largest sample 56832; widest U/L 6.728 
+  u=0.5 n_o=10 bounded  th=.3 cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 1536 populated, 0 negligible; stops by the cap rule 0; largest sample 58368; widest U/L 6.631 
+  u=0.5 n_o=10 bounded  th=.1 abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 3015 populated, 0 negligible; stops by the cap rule 0; largest sample 99968; widest U/L 2.648 
+  u=0.5 n_o=10 bounded  th=.1 cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 3015 populated, 0 negligible; stops by the cap rule 0; largest sample 102528; widest U/L 2.637 
+  u=0.5 n_o=10 11.52 regime   abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 735 populated, 0 negligible; stops by the cap rule 0; largest sample 808; widest U/L 38.022 
+  u=0.5 n_o=10 11.52 regime   cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 735 populated, 0 negligible; stops by the cap rule 0; largest sample 832; widest U/L 38.022 
+  u=2.0 n_o=9 bounded  th=.3 abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 5557 populated, 0 negligible; stops by the cap rule 0; largest sample 509952; widest U/L 8.112 
+  u=2.0 n_o=9 bounded  th=.3 cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 5557 populated, 0 negligible; stops by the cap rule 0; largest sample 514048; widest U/L 8.110 
+  u=2.0 n_o=9 bounded  th=.1 abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 11734 populated, 0 negligible; stops by the cap rule 0; largest sample 888832; widest U/L 2.746 
+  u=2.0 n_o=9 bounded  th=.1 cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 11734 populated, 0 negligible; stops by the cap rule 0; largest sample 893952; widest U/L 2.747 
+  u=2.0 n_o=9 11.52 regime   abstract runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 2904 populated, 0 negligible; stops by the cap rule 0; largest sample 240640; widest U/L 53.178 
+  u=2.0 n_o=9 11.52 regime   cube J, no cap runs   72  stopped   72  good event   72  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 2905 populated, 0 negligible; stops by the cap rule 0; largest sample 242688; widest U/L 52.751 
+
+==============================================================================================================
+S1b. the negligible branch: radial outer landscapes on Q_{n_o} (sampled by shells), nu_1 = 1 and a small theta, so that
+     levels above the bulk are left as negligible ([N] fails at small radii); psi(a,b) = g(|a|) + u|b|
+==============================================================================================================
+  n_o=12 u=0.5 theta=0.05 nu0=58     runs   32  stopped   32  good event   32  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 242 populated, 14 negligible; stops by the cap rule 0; largest sample 203776; widest U/L 9.494 
+  n_o=13 u=0.5 theta=0.05 nu0=62     runs   32  stopped   32  good event   32  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 262 populated, 64 negligible; stops by the cap rule 0; largest sample 3293184; widest U/L 9.996 
+  n_o=16 u=0.4 theta=0.05 nu0=58     runs   32  stopped   32  good event   32  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 239 populated, 17 negligible; stops by the cap rule 0; largest sample 206848; widest U/L 9.482 
+  n_o=12 u=0.7 theta=0.05 nu0=82     runs   32  stopped   32  good event   32  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 334 populated, 30 negligible; stops by the cap rule 0; largest sample 1687552; widest U/L 12.117 
+  n_o=11 u=0.6 theta=0.03 nu0=72     runs   32  stopped   32  good event   32  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 282 populated, 38 negligible; stops by the cap rule 0; largest sample 831488; widest U/L 11.581 
+  n_o=12 u=0.5 theta=2.00 nu0=58     runs   32  stopped   32  good event   32  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 199 populated, 0 negligible; stops by the cap rule 0; largest sample 3040; widest U/L 11.415 
+  the lowered cap of N_REPORT 2.5 (R6) in the runs of S1 and S1b: 1488 runs, largest sample / cap = 0.607 [<= 1], violations 0
+
+==============================================================================================================
+S2. an abstract outer space: Q_4, biased product measure, weighted Hamming envelope, exact tail functions (65534 subsets)
+==============================================================================================================
+  kappa0=1.00 th=.5                  runs  144  stopped  144  good event  144  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 942 populated, 0 negligible; stops by the cap rule 7; largest sample 24576; widest U/L 7.303 
+  kappa0=1.00 th=5                   runs  144  stopped  144  good event  144  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 406 populated, 0 negligible; stops by the cap rule 1; largest sample 2784; widest U/L 25.622 
+  kappa0=0.02 th=.5                  runs  144  stopped  144  good event  144  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 2118 populated, 0 negligible; stops by the cap rule 8; largest sample 25600; widest U/L 7.303 
+  kappa0=0.02 th=5                   runs  144  stopped  144  good event  144  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 975 populated, 0 negligible; stops by the cap rule 8; largest sample 2944; widest U/L 25.672 
+
+==============================================================================================================
+S3. dependence, bounded influence: outer Q_m uniform, mu(b|a) = Bernoulli(p(a))^k, p(a) = sigma(h + J(2|a|/m - 1))
+    psi(a,b) = g(a) + sum_i gamma_i b_i with g in L_u(Q_m), |gamma_i| <= u:  V(a) = e^{-g(a)} prod_i (1 - p(a) + p(a) e^{-gamma_i})
+==============================================================================================================
+  m=10 k=16 u=1.0 h=0.0 J=0.40:  slope of -ln V on the outer cube: observed max 1.3120  <=  u + k*iota_1 = 1.3120  (pointwise influence bound u + L = 1.7540)
+  m=10 k=12 u=0.5 h=-0.5 J=1.00:  slope of -ln V on the outer cube: observed max 0.7980  <=  u + k*iota_1 = 0.7980  (pointwise influence bound u + L = 2.4249)
+  m=9 k=20 u=1.0 h=0.3 J=0.25:  slope of -ln V on the outer cube: observed max 1.2721  <=  u + k*iota_1 = 1.2721  (pointwise influence bound u + L = 1.6974)
+  m=10 k=16 u=1.0 J=0.40 th=.3       runs   20  stopped   20  good event   20  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 436 populated, 0 negligible; stops by the cap rule 0; largest sample 905216; widest U/L 7.709 
+  m=10 k=16 u=1.0 J=0.40 th=20       runs   20  stopped   20  good event   20  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 218 populated, 0 negligible; stops by the cap rule 0; largest sample 52224; widest U/L 52.695 
+  m=10 k=12 u=0.5 J=1.00 th=.3       runs   20  stopped   20  good event   20  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 361 populated, 0 negligible; stops by the cap rule 0; largest sample 438272; widest U/L 7.104 
+  m=10 k=12 u=0.5 J=1.00 th=20       runs   20  stopped   20  good event   20  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 151 populated, 0 negligible; stops by the cap rule 0; largest sample 3072; widest U/L 67.267 
+  m=9 k=20 u=1.0 J=0.25 th=.3        runs   20  stopped   20  good event   20  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 428 populated, 0 negligible; stops by the cap rule 0; largest sample 446464; widest U/L 7.657 
+  m=9 k=20 u=1.0 J=0.25 th=20        runs   20  stopped   20  good event   20  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 198 populated, 0 negligible; stops by the cap rule 0; largest sample 25728; widest U/L 62.237 
+
+==============================================================================================================
+S4. dependence, UNBOUNDED influence (Proposition N12): outer Q_12 uniform, mu(b|a) = Bernoulli(p(a))^16,
+    p(a) = sigma(J_c (10.5 - |a|)), J_c = 4;  psi(a,b) = u|b|, u = 1 (additive, u-Lipschitz, does not depend on a)
+==============================================================================================================
+  V by outer weight |a| = 0..12: 1.13e-07 1.13e-07 1.13e-07 1.13e-07 1.13e-07 1.13e-07 1.13e-07 1.13e-07 1.13e-07 1.2e-07 2.22e-06 0.286 0.975
+  A = 0.00107473;  bulk value V(|a| <= 9) <= 1.2e-07;  mu_o(|a| >= 11) = 0.00317 carries 100.0% of A
+  largest edge ratio of V: e^{11.765}  (u = 1.0;  pointwise influence bound L = 64.0, i.e. slope <= 65.0)
+  (TU) for the slope u fails by the factor 1.747e+05  (max over levels of E(V-s)_+ / (s Xi_u(q)))
+  (i)  tail function of the assumed class, slope u  th=20      runs 40  stopped 40  INVALID 40 (good event held in 40 of the runs)  A/U: median 294, max 302   points: median 1164 (pi_* = 0.194, Mbar = 9.54e+05; 2^12 = 4096)
+  (i)  tail function of the assumed class, slope u  th=1       runs 40  stopped 40  INVALID 40 (good event held in 40 of the runs)  A/U: median 3.68e+03, max 4.58e+03   points: median 6816 (pi_* = 0.00317, Mbar = 8.66e+07; 2^12 = 4096)
+  (ii) tail function of the true class, slope 11.77  th=20     runs 40  stopped 40  INVALID 0 (good event held in 40 of the runs)  A/U: median 0.197, max 0.444   points: median 103936 (pi_* = 0.000244, Mbar = 7.92e+08; 2^12 = 4096)
+  (ii) tail function of the true class, slope 11.77  th=1      runs 40  stopped 40  INVALID 0 (good event held in 40 of the runs)  A/U: median 0.312, max 0.428   points: median 921600 (pi_* = 0.000244, Mbar = 5.63e+13; 2^12 = 4096)
+
+==============================================================================================================
+S6. a nearest-neighbour chain as known part: outer segment 4 sites, inner 6 sites, symmetric binary chain, flip p
+    V(a) = E[e^{-psi(a, .)} | a] under the chain;  envelope on the outer segment: slopes (u, u, u, v), v = u + g(v_k)
+==============================================================================================================
+  p=0.3 u=1.0:  slope of -ln V in a non-boundary letter: max 1.0000 <= u = 1.00;   in the boundary letter: max 1.525944, bound v = u + g(v_k) = 1.525944 (attained by the uniform field), u* = 1.5261, u + K = 1.8473
+              with the envelope WITHOUT the slack (slopes u,u,u,u): (TU) violated at 19 levels, worst factor 1.6051
+  p=0.1 u=1.0:  slope of -ln V in a non-boundary letter: max 1.0000 <= u = 1.00;   in the boundary letter: max 2.740225, bound v = u + g(v_k) = 2.740225 (attained by the uniform field), u* = 2.7497, u + K = 3.1972
+              with the envelope WITHOUT the slack (slopes u,u,u,u): (TU) violated at 53 levels, worst factor 5.7463
+  p=0.2 u=0.5:  slope of -ln V in a non-boundary letter: max 0.5000 <= u = 0.50;   in the boundary letter: max 1.128162, bound v = u + g(v_k) = 1.128162 (attained by the uniform field), u* = 1.1387, u + K = 1.8863
+              with the envelope WITHOUT the slack (slopes u,u,u,u): (TU) violated at 37 levels, worst factor 2.0378
+  p=0.3 u=1.0 th=.5                  runs   60  stopped   60  good event   60  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 684 populated, 0 negligible; stops by the cap rule 0; largest sample 50432; widest U/L 7.477 
+  p=0.3 u=1.0 th=5                   runs   60  stopped   60  good event   60  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 339 populated, 0 negligible; stops by the cap rule 0; largest sample 2912; widest U/L 29.372 
+  p=0.1 u=1.0 th=.5                  runs   60  stopped   60  good event   60  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 737 populated, 0 negligible; stops by the cap rule 0; largest sample 25728; widest U/L 7.984 
+  p=0.1 u=1.0 th=5                   runs   60  stopped   60  good event   60  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 386 populated, 0 negligible; stops by the cap rule 1; largest sample 6016; widest U/L 28.336 
+  p=0.2 u=0.5 th=.5                  runs   60  stopped   60  good event   60  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 518 populated, 0 negligible; stops by the cap rule 1; largest sample 6080; widest U/L 6.028 
+  p=0.2 u=0.5 th=5                   runs   60  stopped   60  good event   60  | violations: every-run claims 0, on the good event 0 | invalid brackets 0 (on the good event 0) | levels left: 283 populated, 0 negligible; stops by the cap rule 2; largest sample 1408; widest U/L 25.271 
+
+==============================================================================================================
+M. mutations on the cube instances of S1 (u = 1, n_o = 8): the checks must detect them
+==============================================================================================================
+  mutation q without 1/(1-eta)          runs 48: certificate failures 20, invalid brackets 0, any check failed 20
+  mutation tail function divided by 50  runs 48: certificate failures 0, invalid brackets 4, any check failed 4
+  mutation none (control)               runs 48: certificate failures 0, invalid brackets 0, any check failed 0
+
+the lower bound of N_REPORT 2.5 (R7) on the outer sample, M_max >= K/((1+eta) p(t_x - 0)): 1458 runs of S1, S1b, S2, S3, S6 with ell_0 < e^{-x_out} A: smallest M_max/bound = 3.516 [>= 1], violations 0
+violations of Theorem N1 in the valid settings (S1, S1b, S2, S3, S4(ii), S6): 0    time 123.8 s

@@ -1,0 +1,8 @@
+tabulated F*_j on 4001 slopes: 25.8 s
+(b) theta <= Rhat(x - theta - w) + w  =>  theta <= theta_na(x - 2w) + w   (three chains, 3000 random (x, w))
+   largest [theta_max - (theta_na(x - 2w) + w)] = 8.05e-16  (0 up to the grid error: the two sides are equal)
+(a') Lipschitz bound again, on the tabulated functions, 20000 random pairs of compositions of the four site types, x in (0, 0.5)
+   largest |theta_na^lam' - theta_na^lam| / (||lam' - lam||_1 max_j a_j) = 0.3019  (must be <= 1; 1/2 is the best constant when sum = 0 is used)
+(c) compositions of the blocks: inner block n_j - floor(phi n_j), outer block floor(phi n_j)
+   max ||lam_inner - lam||_1 (1-phi) n / (2m) = 0.8152 (<= 1: my bound holds);   the same with m in place of 2m: 1.6305 (> 1: the reviewer's constant m is too small);   max ||lam_outer - lam||_1 (phi n - m)/(2m) = 0.8185
+time 37.0 s

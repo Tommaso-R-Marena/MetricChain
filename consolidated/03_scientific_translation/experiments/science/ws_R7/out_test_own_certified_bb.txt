@@ -1,0 +1,1 @@
+certified branch and bound: self-test passed on 300 random instances (both the reduced and the unreduced form)

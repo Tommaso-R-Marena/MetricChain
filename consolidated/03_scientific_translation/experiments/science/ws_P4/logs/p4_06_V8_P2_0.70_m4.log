@@ -1,0 +1,10 @@
+V8/P2 tau 0.7: X' [3, 3, 3, 3, 3, 3, 3, 3]; anchor x0 = argmin E = (1, 1, 1, 1, 1, 1, 1, 1); |g_GB(P3 tables) - g_GB(P2 grid)| at 50 states: 4.8e-12 kcal/mol
+   certified constants chat_T, |T| = 4: 70 subsets, sum 0.717116 (P3's Gamma_4 = 0.717116), max 0.088072 kcal/mol  [2s]
+   max |g - I_3 g| = 0.00240; max gamma_i = 0.13647, max gamma_ij = 0.06393 kcal/mol
+   envelope (m-body)           : min(E - m) = 0.00e+00; ln Z(m) - ln Z(E) = 0.000884 nats (cost number 0.000884); max(E - m) = 0.7195; margin at x0 = 0.8866
+   site form (P3)              : min(E - m) = 0.00e+00; ln Z(m) - ln Z(E) = 0.226375 nats (cost number 0.254046); max(E - m) = 0.7195; margin at x0 = 0.7541
+   pair form                   : min(E - m) = 0.00e+00; ln Z(m) - ln Z(E) = 0.037597 nats (cost number 0.038313); max(E - m) = 0.7195; margin at x0 = 0.8866
+   banded pair form (w = 2)    : min(E - m) = 0.00e+00; ln Z(m) - ln Z(E) = 0.085939 nats (cost number 0.089739); max(E - m) = 0.7195; margin at x0 = 0.8590
+   pointwise: envelope <= pair <= banded pair <= site penalties at every state: True
+[2s] DONE p4_06_p3pair V8 P2 0.7 4
+exit 0

@@ -1,0 +1,11 @@
+interacting offsets (m,q): pairs per period at squared distances (3, 8, 11) [each pair counted once per period of rod (0,0)]
+   (-1, -1) (0, 0, 2)
+   (-1, 0) (1, 4, 3)
+   (-1, 1) (0, 2, 4)
+   (0, -1) (1, 4, 3)
+   (0, 1) (1, 4, 3)
+   (1, -1) (0, 2, 4)
+   (1, 0) (1, 4, 3)
+   (1, 1) (0, 0, 2)
+smallest squared distance to a non-interacting rod with |m|,|q| <= 6: 19
+inside a rod: squared distance between positions t and t+k, k = 1..6: [3, 8, 19, 32, 51, 72]

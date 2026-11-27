@@ -1,0 +1,7 @@
+bridges with end corrections: [12041, 12767, 16238, 17245, 17796, 21235, 22351, 27144, 33988, 166199]
+vertices without end corrections (kept with radius 108/(N+3)): []
+(L, eps1) = (1, 1/2): R2's 116 weight vectors on the exact vertices: smallest margin +0.002172; all pairs strict: True
+(L, eps1) = (1, 1/4): R2's 451 weight vectors on the exact vertices: smallest margin +0.001263; all pairs strict: True
+(L, eps1) = (1/5, 1/2): R2's 8 weight vectors on the exact vertices: smallest margin +0.024910; all pairs strict: True
+(L, eps1) = (1/5, 1/4): R2's 19 weight vectors on the exact vertices: smallest margin +0.005590; all pairs strict: True
+hull of the 14 exact profile points: Qhull volume 1.631346; exact rational sum over the cones of its 18 facets from an interior point: 1.631346  (a lower bound for vol K provided the facet list is that of the hull; the two agree)

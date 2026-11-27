@@ -1,0 +1,24 @@
+=== K5 on H, tau 0.7: 5 sites, states per site [14, 14, 12, 7, 7], 115248 states, anchor [10, 10, 8, 3, 3]; order m = 5, band 3; 1 raw stage-2 tables of workstream P9 from p9_verification/cache (sum of their maxima 0.012995 kT)
+| nothing (the sandwich) | — | — | — | — | [251.3418653, 251.3605669] | **0.0187** | 1.0 |
+| far pairs, terms and the allocation of the penalty | 251.3454375 | 251.3484424 | 251.3505310 | 251.3484495 | [251.3484424, 251.3484495] | **7.104e-06** | 2632.7 |
+(0) 2 groups with plus-items (6 items with a route); from the driver's exact means: LJ = 3.572129e-03, A = sum <y_g> = 6.598744e-03, LP = ln(1 + A) = 6.577068e-03 nats above ln Z(m_+); the driver's corrected bracket [251.3484424, 251.3484495], width 7.104e-06; its lower end minus ln Z(m_+) = 6.577068e-03 [34s]
+(1) from every state (115248), ceiling weights: A = 6.598744e-03 (the driver's exact value 6.598744e-03: relative deviation 1.2e-13)
+(2) **sum_g P(S+_g > 0) = 0.0569** (largest single group 0.0539; groups that ever have slack: 2 of 2); P(two or more groups have slack at once) = 2.9476e-03  ->  the events CAN be made disjoint: (LP) is the exact optimum from the group laws; no certificate from the laws alone improves it
+| bound on ln Z(E) - ln Z(m_+) from the routed plus-items | nats | as a fraction of the corrected bracket's width |
+|---|---|---|
+| (LJ): first order | 3.572129e-03 | |
+| (LP): the product inequality, group laws only | 6.577068e-03 | |
+| + pair terms sum_(g<h) <y_g y_h> (joint laws of pairs of groups) | 6.578780e-03 | **+0.241** |
+| the exact joint law of the groups: ln <prod (1 + y_g)> | 6.578780e-03 | **+0.241** |
+| for comparison, the comonotone coupling of the same laws (the largest value the laws allow) | 6.671515e-03 | +13.296 |
+(3) the pair terms recover <q> / <d> = **1.0000** of what the exact joint law adds to (LP); where the exact joint value sits between the two extremes the laws allow: (joint - LP) / (comonotone - LP) = 0.018
+(4) checks: 1 + A + <d> against the direct mean of exp(beta sum_g S+_g): relative deviation 0.0e+00 (must be < 1e-9); (LP) <= exact joint <= comonotone: True; the product coupling of the same laws (independent groups), exactly from the group means: <d> = 2.8304e-09, <q> = 2.8304e-09; **the true <d> is 608.75 times the product coupling's** (1 would mean independent groups); the 100 largest of the 115248 contributions carry 0.944 of <d>
+(5) UPPER side.  C' = sum_g <z_g (1 + y_g)>: 1.227166e-02 from the states (the driver's exact value 1.227166e-02); (UP) with it: 251.3484495 (the driver's upper end 251.3484495)
+| upper end from the routed items | value | below (UP), as a fraction of the corrected bracket's width |
+|---|---|---|
+| (UP): group laws only (the driver) | 251.3484495 | 0 |
+| + pair terms (joint laws of pairs of groups under the ceiling) | 251.3484485 | **0.148** |
+| the exact joint law of all groups under the ceiling, same route | 251.3484458 | **0.525** |
+| the same items put back exactly: ln Z(m_- + s_-), from every state | 251.3484457 | **0.538** |
+(6) the loss between groups in the sense of workstream R19 (corrected width minus the width with the same routed items put back exactly), as a fraction of the corrected width: lower side 0.241 + upper side 0.538 = **0.779**; of it, what the joint law of the groups UNDER THE CEILING would recover by the same inequalities: 0.241 + 0.525 = **0.766** (**pair terms alone: 0.241 + 0.148 = 0.389**); the rest, 0.013, is the price of bounding a mean under the true ensemble by one under the ceiling and is not a matter of joint laws
+ALL DONE 34 s; peak RSS 275 MB

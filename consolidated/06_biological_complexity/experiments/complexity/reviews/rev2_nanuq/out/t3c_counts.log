@@ -1,0 +1,57 @@
+n=4: binary circular trees 2; tree-generated systems 3 (second characterisation: 3)
+n=5: binary circular trees 5; tree-generated systems 16 (second characterisation: 16)
+n=6: binary circular trees 14; tree-generated systems 150 (second characterisation: 150)
+n=7: binary circular trees 42; tree-generated systems 2682 (second characterisation: 2682)
+Lemma 4: 5-point systems: 16 | values of Phi5: {Fraction(0, 1): 70, Fraction(1, 1): 30, Fraction(1, 2): 60} | values of Psi: {Fraction(0, 1): 100, Fraction(1, 1): 10, Fraction(1, 2): 50} | all 5-point facts hold: True
+   (Phi5 > 0 whenever u1up|v1vq is displayed: False)
+A-structures (N<=9 positions) on which the fast routine equals the brute-force definition: 40347
+n=3: |A_n|=1 |C_n|=1  A subset C: True  dihedrally closed: A True, C True  [6s]
+n=4: |A_n|=3 |C_n|=3  A subset C: True  dihedrally closed: A True, C True  C subset of tree-generated: True  [6s]
+n=5: |A_n|=16 |C_n|=16  A subset C: True  dihedrally closed: A True, C True  C subset of tree-generated: True  [6s]
+n=6: |A_n|=102 |C_n|=108  A subset C: True  dihedrally closed: A True, C True  C subset of tree-generated: True  [12s]
+six points: tree-generated 150 | Kalmanson with exact support 141 (status counts {'ok': 141, 'support': 6, 'neg': 3}) | 6-locally good 127 | in C_6 108 | in A_6 102
+   6-locally good subset of globally good: True | C_6 subset of 6-locally good: True | A_6 subset of 6-locally good: True
+   Theorem-4 hypothesis (locally NANUQ-positive, literal) holds for: 127 systems; coincides with 6-locally good: True
+   by number of non-trivial splits (tree-generated / good / 6-loc. good / C_6 / A_6):
+       3 14 14 14 14 14
+       4 21 21 21 21 21
+       5 33 33 33 33 27
+       6 42 42 40 24 24
+       7 30 21 15 12 12
+       8 9 9 3 3 3
+       9 1 1 1 1 1
+   globally bad systems (missing non-trivial splits):
+       support [(1, 2), (2, 3, 4)] {(0, 2): Fraction(1, 1)}
+       neg [(2, 3, 4, 5), (3, 4)] {(1, 5): Fraction(-1, 1), (2, 4): Fraction(-1, 1)}
+       support [(2, 3), (3, 4, 5)] {(1, 3): Fraction(1, 1)}
+       support [(2, 3, 4), (4, 5)] {(3, 5): Fraction(1, 1)}
+       support [(1, 2, 3), (3, 4)] {(2, 4): Fraction(1, 1)}
+       support [(1, 2, 3, 4), (3, 4, 5)] {(0, 4): Fraction(1, 1)}
+       neg [(1, 2, 3, 4), (2, 3)] {(0, 4): Fraction(-1, 1), (1, 3): Fraction(-1, 1)}
+       neg [(1, 2), (4, 5)] {(0, 2): Fraction(-1, 1), (3, 5): Fraction(-1, 1)}
+       support [(1, 2, 3), (2, 3, 4, 5)] {(1, 5): Fraction(1, 1)}
+   6-locally bad but globally good (missing non-trivial splits):
+       [(3, 4)]
+       [(4, 5)]
+       [(2, 3), (4, 5)]
+       [(2, 3), (2, 3, 4, 5)]
+       [(1, 2), (1, 2, 3, 4), (3, 4)]
+       [(1, 2), (3, 4)]
+       [(2, 3, 4, 5)]
+       [(1, 2, 3, 4)]
+       [(2, 3)]
+       [(2, 3, 4, 5), (4, 5)]
+       [(1, 2), (1, 2, 3, 4)]
+       [(1, 2, 3, 4), (3, 4)]
+       [(2, 3), (2, 3, 4, 5), (4, 5)]
+       [(1, 2)]
+   systems that are 6-locally good but not in C_6: 19 | dihedral classes: 4
+   dihedral classes: tree-generated 26 good 24 loc 21 C_6 17
+   every 5-point tree-generated system with one leaf doubled is 6-locally good: True
+Proposition 2 identity verified on all tree-generated systems, n<=7: 2851
+Proposition 2 identity verified on random arbitrary circular split systems (n=5..9) with all 4-sets resolved: 1092
+[total 26s]
+
+real	0m26.175s
+user	0m25.642s
+sys	0m0.021s

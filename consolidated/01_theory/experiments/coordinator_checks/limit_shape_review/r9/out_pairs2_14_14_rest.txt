@@ -1,0 +1,9 @@
+# mode pairs: reduced set (start at the origin, first two bonds a0, -a1); N1 <= 14, N2 <= 14, N1 >= 13, N2 >= 13 (pairs with N1 <= 13 and N2 <= 13 skipped); 3 threads
+# bridges per N (clean; (bridge,c1)): 3: 1 (1; 1) 4: 2 (2; 2) 5: 5 (4; 6) 6: 12 (10; 14) 7: 29 (24; 34) 8: 78 (64; 90) 9: 201 (159; 230) 10: 536 (420; 614) 11: 1433 (1115; 1630) 12: 3824 (2938; 4350) 13: 10341 (7925; 11738) 14: 28042 (21382; 31778)
+# total: 44504 bridges, 50487 pairs (bridge, c1); enumeration errors (must be 0): 0; [0.0 s]
+concatenations built from coordinates (x1, c1, x2): 1548891970
+ordered pairs ((x1,c1), (x2,c1'')) with all identities of (a) checked: 1755861612
+ordered pairs of clean bridges (exact additivity of (h,g), concatenation clean): 796094624
+failures: 0
+error vector (h,g)(x1 o x2) - (h,g)(x1) - (h,g)(x2): componentwise maxima (1,7,10;1), largest norm 48
+# time 689.5 s

@@ -1,0 +1,159 @@
+{
+ "cells": [
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.3,
+   "na": 443.7762866869094,
+   "worst_product": 404.6029729060429,
+   "worst_bound": 404.6029729060429,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.4,
+   "na": 443.7762866869094,
+   "worst_product": 356.0293729674638,
+   "worst_bound": 356.0293729674638,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.35,
+   "na": 443.7762866869094,
+   "worst_product": 380.62837072763864,
+   "worst_bound": 380.62837072763864,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.45,
+   "na": 443.7762866869094,
+   "worst_product": 331.93591293390386,
+   "worst_bound": 331.93591293390386,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.5,
+   "na": 443.7762866869094,
+   "worst_product": 308.0316242776976,
+   "worst_bound": 308.0316242776976,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.55,
+   "na": 443.7762866869094,
+   "worst_product": 325.61505572442843,
+   "worst_bound": 325.61505572442843,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.7,
+   "na": 443.7762866869094,
+   "worst_product": 399.3367816204842,
+   "worst_bound": 399.3367816204842,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.8,
+   "na": 443.7762866869094,
+   "worst_product": 448.0295833637569,
+   "worst_bound": 448.0295833637569,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.6,
+   "na": 443.7762866869094,
+   "worst_product": 350.65044302035085,
+   "worst_bound": 350.65044302035085,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.65,
+   "na": 443.7762866869094,
+   "worst_product": 374.30068867064915,
+   "worst_bound": 374.30068867064915,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.75,
+   "na": 443.7762866869094,
+   "worst_product": 423.67874441180066,
+   "worst_bound": 423.67874441180066,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  },
+  {
+   "job": "cost",
+   "u": 1.0,
+   "n": 4000,
+   "phi": 0.85,
+   "na": 443.7762866869094,
+   "worst_product": 471.6976382428434,
+   "worst_bound": 471.6976382428434,
+   "max_gap": 0.0,
+   "violations": 0,
+   "calls_gap": []
+  }
+ ],
+ "by_u": {
+  "1": {
+   "cells": 12,
+   "max_gap": 0.0,
+   "max_gap_over_na": 0.0,
+   "max_worst_increase_over_na": 0.0,
+   "worst_increase_at": null
+  }
+ },
+ "above_Cmax": 0,
+ "seconds": 154.23660349845886
+}

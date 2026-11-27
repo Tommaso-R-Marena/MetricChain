@@ -1,0 +1,4 @@
+R18-RUNNER start 2026-11-26T16:23:42Z script=/home/user/MetricChain/experiments/science/ws_R18/rerun_copy/chunks/cost_n1400/experiments/eng/twolevel/recheck_classification.py job=cost chunk=cost_n1400 address-space limit 2.0 GB; python -I -B; kernel: R18 adapter over their meanrun.mean_run
+cost {"searches": 144, "in_corner": 0, "legacy_reproduces_stored": 143, "max_abs_legacy_minus_stored": 1.5387167906055765e-05, "changed": 0, "max_increase": 0.0, "max_decrease": 0.0, "max_increase_over_na": 0.0, "max_decrease_over_na": 0.0, "violations_exact": 0, "violation_examples": []}
+cells of the cost job: the worst stored instance under the exact rule: {"cells": 36, "changed": 0, "max_increase_over_na": 6.700103464036957e-16, "max_decrease_over_na": -1.0050155196055436e-15}
+R18-RUNNER done 2026-11-26T16:24:52Z exit=0 wall=69.9s mean_runs=288 peak RSS MB=261.6

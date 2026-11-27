@@ -1,0 +1,30 @@
+K=2 n=9 seed=0 angle=97.0: dim N(z)=6, weights [0.6393, 0.3607]; 1500 starts, 950 converged (|res|<1e-12), 4s
+   distinct points of P(z) found: 6  (forced points found: 2/2; other points: 4)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=0 angle=111.0: dim N(z)=6, weights [0.6393, 0.3607]; 2500 starts, 2284 converged (|res|<1e-12), 11s
+   distinct points of P(z) found: 6  (forced points found: 2/2; other points: 4)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=1 angle=111.0: dim N(z)=6, weights [0.7658, 0.2342]; 2500 starts, 2177 converged (|res|<1e-12), 9s
+   distinct points of P(z) found: 8  (forced points found: 2/2; other points: 6)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=2 angle=111.0: dim N(z)=6, weights [0.2702, 0.7298]; 2500 starts, 2500 converged (|res|<1e-12), 4s
+   distinct points of P(z) found: 8  (forced points found: 2/2; other points: 6)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=3 angle=111.0: dim N(z)=6, weights [0.4627, 0.5373]; 2500 starts, 2500 converged (|res|<1e-12), 10s
+   distinct points of P(z) found: 8  (forced points found: 2/2; other points: 6)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=4 angle=111.0: dim N(z)=6, weights [0.6345, 0.3655]; 2500 starts, 2175 converged (|res|<1e-12), 5s
+   distinct points of P(z) found: 6  (forced points found: 2/2; other points: 4)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=5 angle=111.0: dim N(z)=6, weights [0.6803, 0.3197]; 2500 starts, 2442 converged (|res|<1e-12), 5s
+   distinct points of P(z) found: 8  (forced points found: 2/2; other points: 6)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=6 angle=111.0: dim N(z)=6, weights [0.4062, 0.5938]; 2500 starts, 1921 converged (|res|<1e-12), 5s
+   distinct points of P(z) found: 5  (forced points found: 2/2; other points: 3)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=7 angle=111.0: dim N(z)=6, weights [0.8092, 0.1908]; 2500 starts, 1795 converged (|res|<1e-12), 9s
+   distinct points of P(z) found: 6  (forced points found: 2/2; other points: 4)
+   LP: max mass outside the forced points in a representation of I = -0.000000
+K=2 n=9 seed=8 angle=111.0: dim N(z)=6, weights [0.4218, 0.5782]; 2500 starts, 1748 converged (|res|<1e-12), 4s
+   distinct points of P(z) found: 6  (forced points found: 2/2; other points: 4)
+   LP: max mass outside the forced points in a representation of I = -0.000000

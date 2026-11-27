@@ -1,0 +1,11 @@
+seed 0 (angle 97.0): 6000 starts, 3981 converged; distinct points 6 = 2 forced + 4 others; min pairwise distance 1.561; min hits 283; max residual 8.9e-16; max |3rd smallest eig| 8.7e-16; min 4th eig 1.024; min Jacobian sv15/sv1 1.1e-02
+seed 1 (angle 97.0): 6000 starts, 5927 converged; distinct points 10 = 2 forced + 8 others; min pairwise distance 1.901; min hits 29; max residual 1.3e-15; max |3rd smallest eig| 2.7e-15; min 4th eig 0.840; min Jacobian sv15/sv1 1.4e-04
+seed 2 (angle 97.0): 6000 starts, 5257 converged; distinct points 4 = 2 forced + 2 others; min pairwise distance 3.266; min hits 200; max residual 1.3e-15; max |3rd smallest eig| 4.6e-16; min 4th eig 0.880; min Jacobian sv15/sv1 5.3e-03
+seed 3 (angle 97.0): 6000 starts, 5987 converged; distinct points 8 = 2 forced + 6 others; min pairwise distance 2.161; min hits 45; max residual 1.3e-15; max |3rd smallest eig| 5.3e-15; min 4th eig 1.009; min Jacobian sv15/sv1 9.3e-04
+seed 4 (angle 97.0): 6000 starts, 6000 converged; distinct points 6 = 2 forced + 4 others; min pairwise distance 0.883; min hits 127; max residual 1.0e-15; max |3rd smallest eig| 1.3e-15; min 4th eig 0.990; min Jacobian sv15/sv1 8.9e-04
+seed 5 (angle 97.0): 6000 starts, 6000 converged; distinct points 12 = 2 forced + 10 others; min pairwise distance 1.289; min hits 90; max residual 8.9e-16; max |3rd smallest eig| 1.1e-15; min 4th eig 0.876; min Jacobian sv15/sv1 5.3e-03
+seed 6 (angle 97.0): 6000 starts, 6000 converged; distinct points 8 = 2 forced + 6 others; min pairwise distance 0.753; min hits 23; max residual 8.9e-16; max |3rd smallest eig| 1.1e-15; min 4th eig 0.978; min Jacobian sv15/sv1 3.5e-03
+seed 7 (angle 97.0): 6000 starts, 5828 converged; distinct points 8 = 2 forced + 6 others; min pairwise distance 0.810; min hits 21; max residual 1.3e-15; max |3rd smallest eig| 4.9e-16; min 4th eig 1.000; min Jacobian sv15/sv1 4.2e-03
+seed 8 (angle 97.0): 6000 starts, 3983 converged; distinct points 6 = 2 forced + 4 others; min pairwise distance 0.047; min hits 42; max residual 4.4e-16; max |3rd smallest eig| 5.0e-16; min 4th eig 1.093; min Jacobian sv15/sv1 2.2e-04
+numbers of further real PSD rank-3 points: [4, 8, 2, 6, 4, 10, 6, 6, 4]
+numbers of further real PSD rank-3 points: [4, 6, 6, 6, 4, 6, 4, 4, 4]

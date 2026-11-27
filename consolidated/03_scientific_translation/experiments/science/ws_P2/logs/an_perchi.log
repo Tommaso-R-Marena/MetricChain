@@ -1,0 +1,10 @@
+Ser3 on E: residue sites (9 states each): max |third-order mixed difference| of f = 4.26e-14 kcal/mol (range of f 15.5)
+   chi sites (3 states each), order 2: max |mixed difference| by pattern (number of chi's taken from each residue involved): (1, 1): 3.097e+00; (2,): 7.733e+00
+   chi sites (3 states each), order 3: max |mixed difference| by pattern (number of chi's taken from each residue involved): (1, 1, 1): 3.553e-14; (2, 1): 4.388e+00
+   chi sites (3 states each), order 4: max |mixed difference| by pattern (number of chi's taken from each residue involved): (2, 1, 1): 3.553e-14; (2, 2): 6.456e+00
+   chi sites (3 states each), order 5: max |mixed difference| by pattern (number of chi's taken from each residue involved): (2, 2, 1): 3.553e-14
+Ser3 on H: residue sites (9 states each): max |third-order mixed difference| of f = 6.39e-14 kcal/mol (range of f 50.1)
+   chi sites (3 states each), order 2: max |mixed difference| by pattern (number of chi's taken from each residue involved): (1, 1): 5.077e+00; (2,): 1.551e+01
+   chi sites (3 states each), order 3: max |mixed difference| by pattern (number of chi's taken from each residue involved): (1, 1, 1): 6.395e-14; (2, 1): 5.469e+00
+   chi sites (3 states each), order 4: max |mixed difference| by pattern (number of chi's taken from each residue involved): (2, 1, 1): 1.137e-13; (2, 2): 5.596e+00
+   chi sites (3 states each), order 5: max |mixed difference| by pattern (number of chi's taken from each residue involved): (2, 2, 1): 1.350e-13

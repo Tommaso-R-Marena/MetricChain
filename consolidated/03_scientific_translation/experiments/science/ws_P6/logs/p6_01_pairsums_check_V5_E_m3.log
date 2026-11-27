@@ -1,0 +1,16 @@
+=== pair sums: V5 on E, tau 0.7, gbn2, order m = 3: atoms 92, sites 5, states/site 3..3; anchor 11111, E = -104.504701 kcal/mol [0.2s]
+    enclosures and instances [0.0s]
+      GFBatch: host site 1/5 done, 0s
+      GFBatch: host site 2/5 done, 0s
+      GFBatch: host site 3/5 done, 0s
+      GFBatch: host site 4/5 done, 0s
+      GFBatch: host site 5/5 done, 0s
+    16 exclusion sets (1 + 5 + 10 pairs) by the batched closed form [0.1s]: Gamma_3 = 9.037533e+00 kcal/mol (self 1.656e-01, cross 8.872e+00)
+    S_i = sum_(T ni i): min 3.5741e+00, max 7.9773e+00; sum_i S_i / m = 9.037533e+00 (must equal Gamma: rel. dev. 2.0e-16)
+    G_ij: min 4.5428e-01, max 5.0076e+00; sum_(i<j) G_ij / C(m,2) = 9.037533e+00 (must equal Gamma: rel. dev. 2.0e-16); row identity sum_j G_ij = (m-1) S_i: max abs dev 2.66e-15
+    mean G_ij by separation |i-j| = 1..4: 3.87e+00 3.06e+00 1.00e+00 4.54e-01
+    CHECK (a) batched closed form vs P3's total(m) and total(m, exclude=i), 6 values: max rel. dev. 6.50e-16 [0.1s]
+    CHECK (b) batched closed form vs P3's loop with a set of excluded sites (GFBound2.total_ex), 16 values: max rel. dev. 6.50e-16 [0.2s]
+    CHECK (c) EXPLICIT ENUMERATION of the 10 subsets of order 3 (P3's total(m, T)) [0.0s]: Gamma: gf 9.037532557345e+00 enum 9.037532557345e+00 (rel. dev. 2.0e-16); S_i: max abs dev 2.66e-15 (rel. to Gamma 2.9e-16); G_ij (10 pairs): max abs dev 3.11e-15 kcal/mol (rel. to Gamma 3.4e-16; largest dev. relative to G_ij itself 3.1e-15; smallest G_ij 4.543e-01)
+    -> out/pairsums_V5_E_t0.70_gbn2_m3.npz
+DONE p6_01_pairsums V5 E 0.7 3 [1s]

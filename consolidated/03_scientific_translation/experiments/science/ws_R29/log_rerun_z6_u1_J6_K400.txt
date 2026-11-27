@@ -1,0 +1,17 @@
+# CERTIFIED upper bounds c_j >= tau_j for the exponent of j nested levels; cube pair, u = 1
+# a in [0.110944071671727, 0.110944071671727] (interval arithmetic); sample points per level K = 400; levels up to 6
+# for comparison only (floating point, not certified): h = 0.029139139, c_*^2 = 0.0711473; envelope tops b_j by zetalib.EnvZ (grid 8000)
+# columns: j | c_j (certified: tau_j <= c_j) | c_j/a (upper bound) | lines | float envelope top b_j | (c_j - b_j)/(b_j - h) | j^2 (c_j - h)/c_*^2 | certified M_j(g) >= T_j(g) at g = 0.1h, 0.5h, h
+   1 | 0.110944071672 | 1.000000000 |    17 | 0.110944072 | -1.70e-16 | 1.149796 | 0.108030158  0.096374502  0.081804933
+   2 | 0.055517570354 | 0.500410428 |   220 | 0.055517525 |  1.73e-06 | 1.483032 | 0.052603657  0.040948001  0.026378432
+   3 | 0.040306117964 | 0.363301232 |   317 | 0.040306053 |  5.82e-06 | 1.412602 | 0.037392204  0.025736549  0.017199400
+   4 | 0.034702413316 | 0.312791957 |   366 | 0.034702356 |  1.02e-05 | 1.251100 | 0.031788499  0.023101127  0.016797702
+   5 | 0.032326909297 | 0.291380232 |   391 | 0.032326518 |  1.23e-04 | 1.120130 | 0.029412995  0.022740489  0.016693762
+   6 | 0.031211938094 | 0.281330382 |   404 | 0.031211123 |  3.93e-04 | 1.048821 | 0.028566097  0.022592803  0.016661957
+# tops nonincreasing: True;  all above h (as they must be: tau_j > h): True;  time 1 s
+ALL CHECKS PASS
+R29-WRAP: target z6_certified_tops.py  exit status 0  wall 0.9 s  address-space cap 3 GB  peak RSS 40.5 MB
+
+real	0m0.896s
+user	0m0.853s
+sys	0m0.028s

@@ -1,0 +1,25 @@
+== (ii) two letters: asymmetric envelope (u1,u2) = symmetric u=(u1+u2)/2 with the site law tilted by kappa=(u2-u1)/2 ==
+   6 random sites (one with u2 = 0): max |F*, E, a (asymmetric) - (symmetric, tilted)| = 3.2e-16
+
+== (iii) asymmetric three-state site: zero residual against the hardest instance ==
+   e = 0.0E: R^ = 0.045407, R_0 = 0.033856, ratio 0.746
+   e = 0.3E: R^ = 0.022108, R_0 = 0.012814, ratio 0.580
+   e = 0.7E: R^ = 0.004051, R_0 = 0.000591, ratio 0.146
+   e = 0.9E: R^ = 0.000451, R_0 = 0.000000, ratio 0.000
+   threshold of the zero residual: F(0,t)/t at t = 1e-4: 0.155501   [theirs 0.155521; E = 0.191059]
+
+== (iv) Theorem 11.101(a) at n = 480 on 'mix', accuracy eps = 0.3 E n + 1 ==
+   eps = 37.27; max_t [n F*(t) - t eps] = 13.0091 at t = 0.3134: every algorithm needs >= (1-2delta) * 4.465e+05 evaluations at the hardest additive instance  [theirs, from exact joint-type sums, NOT replicated: (1-2delta) * 1.9e6]
+
+== (i) three letters, Hamming: grid of 171 site laws (multiples of 1/20) ==
+   u = 1.0: 171 laws.  uniform: h = 0.030654, a = 0.123284, E = 0.119499;  two-letter cube: h_2 = 0.029139, a_2 = 0.110944, E_2 = 0.120115
+        grid maximum of h: 0.030572 at pi = [0.35 0.35 0.3 ]  ->  uniform law is harder
+        grid maximum of a: 0.122951 at pi = [0.35 0.3  0.35]  ->  uniform law is harder
+        grid maximum of E: 0.120196 at pi = [0.05 0.5  0.45]  ->  a grid law is HARDER than the uniform law
+   [412 s]
+   u = 0.5: 171 laws.  uniform: h = 0.007425, a = 0.030167, E = 0.029098;  two-letter cube: h_2 = 0.007673, a_2 = 0.030300, E_2 = 0.030930
+        grid maximum of h: 0.007675 at pi = [0.05 0.5  0.45]  ->  a grid law is HARDER than the uniform law
+        grid maximum of a: 0.030322 at pi = [0.5  0.45 0.05]  ->  a grid law is HARDER than the uniform law
+        grid maximum of E: 0.030932 at pi = [0.05 0.45 0.5 ]  ->  a grid law is HARDER than the uniform law
+   [741 s]
+exit=0

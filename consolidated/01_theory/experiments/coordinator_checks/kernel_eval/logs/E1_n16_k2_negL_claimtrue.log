@@ -1,0 +1,41 @@
+import took 150ms
+experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_negL_claimtrue.lean:475:67: error: Tactic `decide` proved that the proposition
+  E1.leafCheck 16 2 L hL uL pL mL jL = true
+is false
+type checking took 394ms
+'check_ok' depends on axioms: [sorryAx]
+cumulative profiling times:
+	attribute application 0.316ms
+	blocked (unaccounted) 401ms
+	compilation (IR) 1.02ms
+	compilation (LCNF base) 9.73ms
+	compilation (LCNF impure) 5.09ms
+	compilation (LCNF mono) 6.24ms
+	elaboration 459ms
+	fix level params 0.646ms
+	import 150ms
+	initialization 39.6ms
+	instantiate metavars 2.1ms
+	interpretation 3.18ms
+	let-to-have transformation 2.01ms
+	linting 29.9ms
+	parsing 32.5ms
+	process pre-definitions 52.4ms
+	share common exprs 9.32ms
+	tactic execution 0.654ms
+	type checking 417ms
+	typeclass inference 86.1ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_negL_claimtrue.lean
+MEASURE wall_seconds: 1.82
+MEASURE user_seconds: 1.80
+MEASURE sys_seconds: 0.10
+MEASURE max_rss_kb: 547860
+MEASURE polled_peak_rss_kb: 548704
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 1
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_negL_claimtrue.lean
+RUN bytes: 47750
+RUN sha256: b211c61b892243731250ddc5fd3ec3dbd7418212af5c6e55147937b120677178
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 1

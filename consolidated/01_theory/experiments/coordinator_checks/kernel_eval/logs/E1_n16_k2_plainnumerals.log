@@ -1,0 +1,50 @@
+import took 141ms
+elaboration took 311ms
+elaboration took 183ms
+experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_plainnumerals.lean:357:3: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+elaboration took 1.95s
+experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_plainnumerals.lean:445:67: error: Expected type must not contain free variables
+  E1.leafCheck 16 2 L hL uL pL mL jL = true
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+'check_ok' depends on axioms: [sorryAx]
+cumulative profiling times:
+	attribute application 0.315ms
+	blocked (unaccounted) 2.64ms
+	compilation (IR) 1.07ms
+	compilation (LCNF base) 10.2ms
+	compilation (LCNF impure) 5.52ms
+	compilation (LCNF mono) 8ms
+	elaboration 2.57s
+	fix level params 0.387ms
+	import 141ms
+	initialization 44ms
+	instantiate metavars 0.984ms
+	interpretation 3.08ms
+	let-to-have transformation 4.05ms
+	linting 19.6ms
+	parsing 23.6ms
+	process pre-definitions 47.6ms
+	share common exprs 5.79ms
+	tactic execution 0.2ms
+	type checking 15.8ms
+	typeclass inference 15s
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_plainnumerals.lean
+MEASURE wall_seconds: 18.02
+MEASURE user_seconds: 17.73
+MEASURE sys_seconds: 0.11
+MEASURE max_rss_kb: 501332
+MEASURE polled_peak_rss_kb: 501840
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 1
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E1_n16_k2_plainnumerals.lean
+RUN bytes: 26338
+RUN sha256: b0d2bb7354b7ccdcc1835adc445d6755c661d5b237b07498017b7174cba78474
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 1
+RUN note: generated file deleted after the run (regenerable with gen.py)

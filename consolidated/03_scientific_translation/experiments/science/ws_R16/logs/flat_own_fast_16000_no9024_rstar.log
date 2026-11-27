@@ -1,0 +1,5 @@
+# r16_flat_own_fast.py started 2026-11-26T09:41:23Z; n = 16000, n_o = 9024, variant rstar
+# tables and constants ready after 10 s
+variant rstar (engine with the exact shortcut): n = 16000 n_o = 9024 (phi = 0.5640): status closed; ln(evaluations)/(n a) = 0.4991; ln C_max/(n a) = 0.6574; levels 84237 (populated 80002, negligible 4234); passes run 84258 (levels ended by the shortcut: 4234); last sample K 2^1243; closing radius 2577 (r-dagger 2309); returned width 0.7860 <= x_out 0.8715: True   [79 s]
+# finished 2026-11-26T09:42:43Z
+peak RSS MB 186.6484375

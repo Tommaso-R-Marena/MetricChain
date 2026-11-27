@@ -1,0 +1,96 @@
+{
+ "artifacts": [
+  {
+   "bytes": 1813,
+   "path": "announcements_extract.txt",
+   "sha256": "93c42017d3f6eb0f1fafcead17f229c4df1968b50b6cc3f862ccba7d356f2307"
+  },
+  {
+   "bytes": 32017,
+   "path": "download_area_listing.json",
+   "sha256": "a2ce356a83713a69adbf8b13a5246de266e16cc9e7e635ab91f5a263aa96df89"
+  },
+  {
+   "bytes": 5124,
+   "path": "pages_sha256.json",
+   "sha256": "cca216cf38766dc6d59099e16f4febaddfb035892058bbe53f889a45f893ca44"
+  },
+  {
+   "bytes": 4473,
+   "path": "rcsb_release_status.json",
+   "sha256": "fa2ecb0e2934d744fcdfa10298749b33268ec0a2889552298f47fef2f3f13085"
+  },
+  {
+   "bytes": 21504,
+   "path": "targetlist.csv",
+   "sha256": "a91eff7c7bd4fc88c7a6045bff3983eec8de477f00aaa09a7603798e3f29b42b"
+  },
+  {
+   "bytes": 18271,
+   "path": "targets_classified.csv",
+   "sha256": "9e87e6ede1e6717a1b640d3fb08899234779287df5d2b4c997116f817636b9e7"
+  }
+ ],
+ "assessment_class": "n/a",
+ "config_files": [],
+ "contamination_assessment": "This freeze contains no prediction. It exists so that later statements of the form 'the reference of target X was (not) public when Y was computed' can be checked against a time-stamped record instead of memory. Its limit is stated in reference_status: absence of a PDB code is not absence of public information.",
+ "created_utc": "2026-11-26T23:03:21Z",
+ "evidence_stage": "n/a",
+ "exclusions": [
+  {
+   "item": "raw HTML pages and the four sequence files",
+   "reason": "size and redundancy; their SHA-256 values are recorded in pages_sha256.json and they can be re-fetched from the official site"
+  },
+  {
+   "item": "prediction archives (several GB)",
+   "reason": "not needed for a record of state; listed by name, size and modification time in download_area_listing.json"
+  }
+ ],
+ "freeze_id": "FRONTIER-FRZ-0001",
+ "inputs": [
+  {
+   "description": "CASP17 target list (CSV export), copied verbatim into the freeze",
+   "licence": "CC BY 4.0 (Protein Structure Prediction Center terms of use)",
+   "retrieved_utc": "2026-11-26T22:38:55Z",
+   "sha256": "a91eff7c7bd4fc88c7a6045bff3983eec8de477f00aaa09a7603798e3f29b42b",
+   "url": "https://predictioncenter.org/casp17/targetlist.cgi?type=csv"
+  },
+  {
+   "description": "CASP17 web pages and download-area directory listings; not copied, checksums in pages_sha256.json",
+   "licence": "CC BY 4.0",
+   "retrieved_utc": "2026-11-26T22:37:35Z to 2026-11-26T23:02:12Z",
+   "url": "https://predictioncenter.org/casp17/ and https://predictioncenter.org/download_area/CASP17/"
+  },
+  {
+   "description": "RCSB PDB Data API, one entry record per PDB code named on the target list",
+   "licence": "CC0 1.0 (RCSB PDB data)",
+   "retrieved_utc": "2026-11-26T22:58:00Z (approximately)",
+   "url": "https://data.rcsb.org/rest/v1/core/entry/<ID>"
+  }
+ ],
+ "kind": "data-snapshot",
+ "method": {
+  "declared_training_cutoff": "n/a",
+  "dependencies": {
+   "curl": "used for retrieval",
+   "python": "3.13.18 (standard library only)"
+  },
+  "name": "experiments/frontier/build_casp17_snapshot.py",
+  "version": "sha256 d028d7341ba58a578fba31922f9cac2f0c33c1d5ee86d629f4168f8b53894a8c"
+ },
+ "notes": "targets_classified.csv is derived by this division (target list joined with RCSB release status); the string '31JQ' on the target list is a ligand identifier, not a PDB entry (RCSB: 404), and is not counted.",
+ "protocol": {
+  "id": "FB-P-00 (provenance snapshot)",
+  "version": "1"
+ },
+ "random_seeds": [],
+ "reference_status": {
+  "reference_public_at_freeze": "partly",
+  "statement": "As retrieved on 2026-11-26: the official results page said 'No results available yet'; the download-area directories targets/ and results/ were empty; 19 of 239 targets named a PDB code whose entry RCSB reported as released (release dates 2026-05-27 to 2026-10-07); 9 targets were cancelled; 211 named no PDB code. 'No PDB code on the target list' is NOT evidence that a structure is unreleased: a depositor may have released an entry without the list being updated, and structures may be public through preprints. The predictions of all participating groups were already public in the download area."
+ },
+ "schema": "metricchain-fb-freeze/1",
+ "source_commits": {
+  "frontier-benchmarks": "fd08430596ffbde2511cc94cca8d6bf516567899"
+ },
+ "title": "Public state of CASP17 on 2026-11-26, three days before the announced release of official results: target list, download-area listings, announcements, and PDB release status of the reference structures named on the target list"
+}

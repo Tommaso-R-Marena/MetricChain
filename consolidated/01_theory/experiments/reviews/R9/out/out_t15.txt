@@ -1,0 +1,1 @@
+n=8, 12 random (p, u, gamma, t), 3 radii: 216 dips: min(ln A(dip) - ln A - r) = +0.00e+00 (>= 0: every radius r > eps is sensitive); max Lipschitz violation 5.3e-15; max over points of [M^n-weight of the supports containing it]/(e^(tr) val^n) = 0.7909 (<= 1)   [0s]

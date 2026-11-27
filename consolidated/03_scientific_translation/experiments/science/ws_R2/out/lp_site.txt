@@ -1,0 +1,40 @@
+45 orbits of non-empty patterns under the 12 cluster symmetries, 31 allowed, 14 forbidden; 8 star relations (transposition w<->u1)
+Part 1: identities mu(v)=1, e3=2mu(vw)N, e8=mu(C(d_v,2))N, e11=mu(sum u_j z_k)N, symmetry (S12), star invariance (STAR, all 24 permutations) and mu(forbidden)<=2n_E/N hold exactly on 60 random finite site sets
+
+Part 2: support function of the site-cluster relaxation (HiGHS) vs the table (b + c3 + c8)
+  c=  (-1, 0, 0): LP max of c.e/N = -1.000000000   table: -1   -> c.p <= 0.000000000 (claimed 0)
+  c=  (4, -1, 0): LP max of c.e/N = 3.000000000   table: 3   -> c.p <= 0.000000000 (claimed 0)
+  c=  (6, -1, 0): LP max of c.e/N = 6.000000000   table: 6   -> c.p <= 1.000000000 (claimed 1)
+  c=  (-2, 1, 0): LP max of c.e/N = 2.000000000   table: 2   -> c.p <= 3.000000000 (claimed 3)
+  c= (-1, 1, -1): LP max of c.e/N = -0.000000000   table: 0   -> c.p <= 0.000000000 (claimed 0)
+  c= (-1, 2, -1): LP max of c.e/N = 4.000000000   table: 4   -> c.p <= 3.000000000 (claimed 3)
+  c= (-4, 2, -1): LP max of c.e/N = -0.000000000   table: 0   -> c.p <= 2.000000000 (claimed 2)
+  c=  (3, 4, -3): LP max of c.e/N = 12.000000000   table: 12   -> c.p <= 5.000000000 (claimed 5)
+  c=  (6, -2, 1): LP max of c.e/N = 6.000000000   table: 6   -> c.p <= 2.000000000 (claimed 2)
+  c=  (0, -1, 2): LP max of c.e/N = 6.000000000   table: 6   -> c.p <= 7.000000000 (claimed 7)
+  c=  (-3, 0, 2): LP max of c.e/N = 6.000000000   table: 6   -> c.p <= 9.000000000 (claimed 9)
+
+Part 3: own dual certificates, verified in exact rational arithmetic on all 46 orbits
+  c=  (-1, 0, 0) b=0: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 1/2; LP-minimal M = 0.5000; table M = 1/2; row certified with M <= table M: True
+       y (nonzero) = {((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): 3, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): 1}
+  c=  (4, -1, 0) b=0: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 0; LP-minimal M = 0.0000; table M = 5; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): -3, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): -3, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): -9, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): -12, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): -6}
+  c=  (6, -1, 0) b=1: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 0; LP-minimal M = 0.0000; table M = 6; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): -3, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): -3, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): -18, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): -21, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): -9}
+  c=  (-2, 1, 0) b=3: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 2; LP-minimal M = 2.0000; table M = 2; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 3, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): 3, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): 15, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): 7}
+  c= (-1, 1, -1) b=0: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 3; LP-minimal M = 3.0000; table M = 3; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 3, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): 3, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): -12, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): 3, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): 3}
+  c= (-1, 2, -1) b=3: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 4; LP-minimal M = 4.0000; table M = 4; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 6, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): 6, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): -12, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): 6, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): 2}
+  c= (-4, 2, -1) b=2: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 6; LP-minimal M = 6.0000; table M = 6; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 6, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): 6, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): -12, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): 18, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): 6}
+  c=  (3, 4, -3) b=5: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 6; LP-minimal M = 6.0000; table M = 6; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 12, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): 12, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): -36, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): -12}
+  c=  (6, -2, 1) b=2: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 0; LP-minimal M = 0.0000; table M = 6; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 0, 0), (0, 1, 0, 0, 0)): 3, ((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 3, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): -9, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): -15, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): -9}
+  c=  (0, -1, 2) b=7: exact certificate with denominators 1: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 0; LP-minimal M = 0.0000; table M = 1; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 0, 0), (0, 1, 0, 0, 0)): 6, ((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 15, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): 9, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): 6, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): 15, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): 9}
+  c=  (-3, 0, 2) b=9: exact certificate with denominators 48: max over allowed orbits = 0 (<= 0), max over forbidden orbits = 247/288; LP-minimal M = 0.8571; table M = 3; row certified with M <= table M: True
+       y (nonzero) = {((0, 0, 1, 0, 0), (0, 1, 0, 0, 0)): 6, ((0, 0, 1, 1, 0), (0, 1, 0, 1, 0)): 18, ((0, 0, 1, 1, 1), (0, 1, 0, 1, 1)): 12, ((1, 0, 1, 0, 0), (1, 1, 0, 0, 0)): 617/48, ((1, 0, 1, 1, 0), (1, 1, 0, 1, 0)): 30, ((1, 0, 1, 1, 1), (1, 1, 0, 1, 1)): 18}
+  all eleven rows certified exactly with the table's M: True

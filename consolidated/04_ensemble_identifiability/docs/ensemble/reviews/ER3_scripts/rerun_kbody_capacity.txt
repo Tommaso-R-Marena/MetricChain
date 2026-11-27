@@ -1,0 +1,49 @@
+===== kbody_capacity.py 8 2 40 16 22 29 45 65 75 85 95 =====
+n = 8, data of even order <= 4: 128 states modulo flip, 99 features (constant included); lift dimension C(n-1,<=2) = 29; Cover-type bound 2*D_odd = 84
+   K =    16   face frequency = 1.000   lift-isolated = 0.950   (undecided 0; mean iterations 1.0; 0 s)
+   K =    22   face frequency = 1.000   lift-isolated = 0.700   (undecided 0; mean iterations 1.0; 0 s)
+   K =    29   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    45   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    65   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    75   face frequency = 0.575   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    85   face frequency = 0.025   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    95   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+===== kbody_capacity.py 10 2 20 46 90 120 140 150 160 170 180 =====
+n = 10, data of even order <= 4: 512 states modulo flip, 256 features (constant included); lift dimension C(n-1,<=2) = 46; Cover-type bound 2*D_odd = 186
+   K =    46   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 3 s)
+   K =    90   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 2 s)
+   K =   120   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 2 s)
+   K =   140   face frequency = 0.900   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   150   face frequency = 0.700   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   160   face frequency = 0.200   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   170   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   180   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+===== kbody_capacity.py 8 2g 40 55 65 70 75 80 85 95 =====
+n = 8, data of even order <= 4: 128 states modulo flip, 99 features (constant included); lift dimension C(n-1,<=2) = 29; Cover-type bound 2*D_odd = 84
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =    55   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    65   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    70   face frequency = 0.975   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    75   face frequency = 0.650   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    80   face frequency = 0.450   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    85   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    95   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+===== kbody_capacity.py 12 1 40 11 12 13 14 15 16 =====
+n = 12, data of even order <= 2: 2048 states modulo flip, 67 features (constant included); lift dimension C(n-1,<=1) = 12; Cover-type bound 2*D_odd = 22
+   K =    11   face frequency = 0.775   lift-isolated = 0.000   (undecided 0; mean iterations 3.3; 6 s)
+   K =    12   face frequency = 0.775   lift-isolated = 0.000   (undecided 0; mean iterations 3.4; 6 s)
+   K =    13   face frequency = 0.400   lift-isolated = 0.000   (undecided 0; mean iterations 2.7; 5 s)
+   K =    14   face frequency = 0.225   lift-isolated = 0.000   (undecided 0; mean iterations 2.6; 4 s)
+   K =    15   face frequency = 0.150   lift-isolated = 0.000   (undecided 0; mean iterations 2.5; 4 s)
+   K =    16   face frequency = 0.025   lift-isolated = 0.000   (undecided 0; mean iterations 2.2; 3 s)
+===== kbody_capacity.py 12 1g 40 5 6 7 8 9 10 11 12 =====
+n = 12, data of even order <= 2: 2048 states modulo flip, 67 features (constant included); lift dimension C(n-1,<=1) = 12; Cover-type bound 2*D_odd = 22
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =     5   face frequency = 1.000   lift-isolated = 0.325   (undecided 0; mean iterations 3.1; 7 s)
+   K =     6   face frequency = 1.000   lift-isolated = 0.175   (undecided 0; mean iterations 3.0; 6 s)
+   K =     7   face frequency = 1.000   lift-isolated = 0.100   (undecided 0; mean iterations 3.3; 7 s)
+   K =     8   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.5; 8 s)
+   K =     9   face frequency = 0.850   lift-isolated = 0.000   (undecided 0; mean iterations 3.4; 7 s)
+   K =    10   face frequency = 0.725   lift-isolated = 0.000   (undecided 0; mean iterations 3.3; 6 s)
+   K =    11   face frequency = 0.450   lift-isolated = 0.000   (undecided 0; mean iterations 3.1; 6 s)
+   K =    12   face frequency = 0.275   lift-isolated = 0.000   (undecided 0; mean iterations 2.6; 5 s)

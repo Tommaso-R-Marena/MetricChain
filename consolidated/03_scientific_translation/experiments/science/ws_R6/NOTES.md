@@ -1,0 +1,412 @@
+# R6 working notes (independent review of theory report §§11.18–11.19)
+
+Reviewer: independent referee, workstream R6, science division.
+Repository: /home/user/MetricChain at branch research/scientific-translation (theory files at 5ed4072).
+Rules: write only here and in docs/science/workstreams/R6_REPORT.md; no state-changing git; no lake build.
+
+## Log
+
+### Step 0 (start)
+- Read COMMON.md and R6_brief.md in full.
+- Created this directory. Machine: 4 cores, 15 GB, Python 3.13.18.
+- Plan: (1) read §11.18–11.19 for the *specification* only (algorithm + statements), not the cost proof;
+  (2) write my own accounting; (3) implement myself; (4) then read their proof, H/K reports, referees,
+  D45, ENG-RES-0008 and compare.
+
+### Step 1 (reading for the specification only)
+Read in THEORY_REPORT.md: lines 3015-3203 (§11.16: Lemma 11.43, Thm 11.44, 11.45, Prop 11.46), 2283-2372 (Thm 11.25),
+3528-3653 (§11.18 up to and including the algorithm text of Thm 11.52; NOT the proof at 3654-3724 yet),
+3725-3905 (Thm 11.53, 11.54 with proof of 11.54, remarks), 3905-4003 (§11.19 up to statement of Thm 11.56),
+4024-4196 (Prop 11.57, Thm 11.58, remarks). NOT yet read: proof of 11.52 (3654-3724), proof of 11.56 (4004-4023),
+K_REPORT, H_REPORT, R7, R8, D45, ENG-RES-0008, any implementation.
+
+### Step 2 (my own accounting for Algorithm 2L, written BEFORE reading the proof at 3654-3724)
+Setting: Q_n = Q_o x Q_i, m := n_o = floor(phi n), n_i = n - n_o, W(a) fibre average, p(s) = P(W > s),
+levels s_j = s_0 e^j, tolerance b = x_last, G = g n, K, J as in the text.
+
+Deterministic facts (hold in EVERY run, no probability):
+ (D1) M <= max(K, 2 M_j^neg) at level j [M is doubled only when M < M_j^neg; ell is constant while a level is unpopulated].
+ (D2) a level left as populated has s_{i+1} q_i <= 4 e^{b+1} ell (ell after the update); a level left as negligible has
+      s_{i+1} q_i <= e^b ell / J.
+ (D3) "closing radius": let r* := largest r <= m-1 with Gamma~(r') <= e^{G-b}/4 for all r' <= r*  (Gamma~(r)=E_r(m)/|B(m,r-1)|,
+      Gamma~(0)=e^u-1), pi* := 2^{-m}|B(m,r*)|.  If a level is left without closure then q > pi* at that moment.
+      Proof: populated: ell >= s_i e^{-b} q/4, tail = s_i 2^{-m} E_r <= s_i q Gamma~(r) (r=r(q); |B(r-1)| < 2^m q), no closure
+      => Gamma~(r) > e^{G-b}/4 => r > r* => q > pi*.  negligible: q <= 2K/M <= ell e^b/(J e s_i), tail <= s_i q Gamma~(r)
+      <= ell e^b Gamma~(r)/(Je), no closure => Gamma~(r) > Je e^{G-b} => r > r*.  (r = n_o case: q > 1-2^{-m} >= pi*.)
+ (D4) hence after leaving level i: ell >= s_i e^{-b} pi*/4 (populated) or ell > J e pi* s_i e^{-b} (negligible, from
+      M_i^neg <= M < 2K/pi*).  So at level j=i+1: M_j^neg <= 8 e^2 K J/pi*, and M <= Mbar := 16 e^2 K J / pi* at every level
+      (level 0: M <= max(K, 4KJe^{1-b}) <= Mbar).
+ Width: U/ell <= 1 + (J+1) 4e^{b+1} + e^G  (populated levels dominate) => accuracy G + ln(4eJ+3)-ish provided b <= G.
+
+Good event: (V1) all inner brackets valid (incl. width); (V2) for all j and M in {K 2^t}: M p(s_j) >= 2K => at least M p(s_j)/2
+ of a_1..a_M have W > s_j; (V3) for all j, M, x in b+N: #{i<=M: W(a_i) > s_j e^{-x}} <= max(2 M p(s_j e^{-x}), K/2).
+ Chernoff: each (V2) event fails w.p. <= e^{-K/4}; each (V3) event w.p. <= e^{-K/12}.
+ Validity lower end: high => W >= L > s_j e^{-b}; N >= K & V3(x=b) => N <= 2 M p(s_j e^{-b}) => s_j e^{-b} N/(2M) <= A (Markov).
+ Validity upper end: V1 => (W > s_j => high); V2 => q >= p(s_j) at every (j,M); layer cake + tail lemma (r <= m-1).
+ Count: for x in b+N, level j, M <= max(K,2M_j^neg): let i be the level with s_i <= s_j e^{-x} < s_{i+1} (i<j).
+   p(s_j e^{-x}) <= p(s_i) <= q_i <= 4e^{b+1} ell_j / s_{i+1};   M <= 4KJe s_j/(ell_j e^b)
+   => M p(s_j e^{-x}) <= 16 e^2 K J e^{j-i-1} <= 16 e^2 K J e^x.   (if s_j e^{-x} < s_0: M <= 4KJe e^{x-b} directly.)
+   => #{i<=M: W(a_i) > s_j e^{-x}} <= 32 e^2 K J e^x.
+ A point is refined to rung l at level j only if W in (s_j e^{-x_{l-1}}, s_j e^{x_{l-1}-b}] (V1).
+ => calls at rung l <= min(Mbar, (J+1) 32 e^2 K J e^{x_{l-1}+1}).
+ COST (my bound): 1 + Mbar + sum_{l>=1} min(Mbar, (J+1) 32 e^3 K J e^{x_{l-1}}) C_l.
+ Exponents: Mbar -> phi theta_na((g-beta)/phi) (Stirling for Gamma~), count -> (1-phi) xi_{l-1}, C_l -> (1-phi) T(xi_l). OK = (11.18.2)+eta_0.
+ Termination on the good event: at level J, N=0 and M_J^neg >= 2KJ e^{11} 2^{m} so M reaches K 2^{m+2}, 2^m q < 1, tail=0.
+ Things to compare against their text: the constant in the count; delta' and the union bound over inner calls
+ (needs #calls <= something like 2^{n+5} n^3 / L !); the abort rule (must be checked BEFORE an inner call);
+ b <= G only for n >= beta/((1-phi)(g-beta)); r* = -1 when e^{G-b}/4 < e^u - 1 (bound void for small n).
+
+### Step 3 (read the proof of Thm 11.52, lines 3654-3724, and compared with my Step-2 accounting)
+Term by term: their M-dagger = 2K/pi* (mine), their "every M <= 8Je^2 M-dagger" = my Mbar = 16e^2KJ/pi* (identical);
+their count 2M_j^neg p(s_j e^-x) <= 16KJe^2 e^x = mine; with V3: 32KJe^2 e^x + 4K (mine: 32e^2KJe^x, the +4K covers M=K);
+rounding x_{l-1} into b+N costs a factor e (same as mine); their cost sum_j sum_l min(8Je^2 M-dagger, 32KJe^3 e^{x_{l-1}}+4K)(l+1)C_l
+is an over-count of mine (they charge (l+1)C_l per point and sum over levels; I charge each rung once per point).  AGREE.
+Small things found while comparing (all minor, to be listed in the report):
+ m-a: the case s_j e^{-x} < s_0 (no level below) is not treated in the count of 11.52 (it is in K_REPORT Step 7); trivial fix.
+ m-b: the abort test "if the number of queries exceeds the bound" must be made before an inner call (R8 m1 says so for 11.56;
+      the text of 11.52 was not changed).
+ m-c: failure budget only "for n >= n_0(eta_0)" -> the assembly "first d tuples whose accuracy is at most x" must also require
+      d >= n_0(tuple), or the tuple's procedure is not a bracket procedure with failure probability delta' at small d.
+ m-d: accuracy bound gn + ln(4eJ+3) needs b <= G, true only for n >= beta/((1-phi)(g-beta)).
+ m-e: l = 0 term / reference query missing in the displayed cost sum (x_{-1} undefined).
+
+### Step 4 (derived the 2L+ analysis from the statement of Thm 11.56 before reading K_REPORT 2.4; then read K_REPORT 1-4)
+Derived on my own from the four changes: width (2p_u)^n + e^b(e^lam(1+eta)/(1-eta) + eta' + theta); closing radius conditions
+[N] Gamma~ <= theta(1-eta)nu0 and [P] min(Gamma~/c_eta, Gamma'') <= theta; Mbar = 2(1+eta)e^lam nu0 K/((1-eta)pi-dagger);
+count M_j^neg p(s_j e^-x) <= c_eta^-1 e^lam nu e^x.  All four agree with K_REPORT Steps 4-7.
+Read K_REPORT lines 1-650 (sections 0-5 start).  Checked line by line: good event and K (V2,V3 Chernoff constants OK;
+number of events (J+1)(m_max+1)(L+2) OK; no circularity J->nu0->r-dagger->pi-dagger->m_max->K->nu,Mbar->delta');
+Steps 1-9; Lemma K.4 (a)-(d); Prop K0; Cor K1.b; Prop E (a),(b); Thm K2 (accuracy arithmetic 5.25 c0 <= x/2 - eps OK); Thm K3 iteration.
+No error found so far.  D45 read (five accountings: single threshold; v1; v2; v4; CLOSE).  H_REPORT read (2.6 = original 2L, 2.8 = the wrong ones).
+NEXT: implement from the spec (K_REPORT 2.2 + theory report 3616-3652) BEFORE reading any implementation; then R7/R8, Lean, ENG-RES-0008.
+
+### Step 5 (coordinator note received mid-work; new theory checkpoint 40c5bd7)
+The coordinator informed me that the theory division published checkpoint 40c5bd7 while I work at 5ed4072.  Read (read-only):
+`git diff 5ed4072 origin/claude/determined-ride-og1u7j -- docs/workstreams/K_REPORT.md` (errata e1-e4 added) and the two new
+remarks after Thm 11.56 in the 40c5bd7 theory report (extracted to scratchpad, lines 4117-4160 of that version).
+ (1) New remark "sample-size cap": in every run every sample is K or has fewer than 2 max{e^lam M-dagger, M-ddagger} points,
+     M-ddagger = K/((1-eta) pi-ddagger), pi-ddagger = 2^-n_o |B(n_o, r-dagger - Delta)|, Delta = ceil(lam/u)
+     (M-ddagger := K 2^n_o/(1-eta) if r-dagger < Delta).  [P], unrefereed.
+     MY RE-DERIVATION (done on paper now): correct for r-dagger >= Delta.  Steps checked: level 0 is populated at M=K in every run
+     (rung-0 bracket has L > s_0 e^-b because psi(a,0) <= psi_0 + u n_o: no inner call involved) ; case "after negligible": OK;
+     case "after populated": p_low > c_eta pi-dagger, Harper radius >= kappa(r-dagger+1), E_{r-1} <= e^-u E_r (term by term, OK),
+     tail <= s_{j-1} e^{lam - u Delta} 2^-n_o E_{r-dagger}; [P] at r-dagger gives tail <= theta e^b ell in both sub-cases
+     (also for r-dagger = 0 with the convention Gamma~(0) = e^u - 1).  OK.
+     EDGE (to test numerically): if r-dagger < Delta and M = M-ddagger = K 2^n_o/(1-eta) exactly lies in the doubling sequence
+     (eta = 1/2), then q = 2^-n_o, 2^n_o q = 1 is NOT < 1, the tail is s_j 2^-n_o (e^u - 1) and closure is not forced; the sample
+     may then be doubled to exactly 2 M-ddagger: "fewer than" could fail by equality in the corner 1 <= r-dagger < Delta (needs lam > u).
+     Also re-derived the 2L version: an unpopulated pass with M >= max{M-dagger, M_j^neg/(4Je)} closes; hence M < 2e M-dagger.  OK.
+ (2) New remark "radial landscapes are almost the whole class for the outer loop" (Harper: tail functions of all u-Lipschitz outer
+     landscapes = those of landscapes whose level sets are initial segments of the simplicial order).  Consequence for my harness:
+     with a simulated inner oracle only the LAW of W(a) matters; I represent an outer landscape by classes (value, probability).
+ (3) Flat-instance cost numbers are best-case numbers (K_REPORT erratum e1).
+All findings in my report will be tagged with the commit they refer to (5ed4072 unless stated; the cap remark is 40c5bd7).
+
+### Step 6 (own implementation; written before reading any implementation)
+Files: r6lib.py (tables, Params2LP, Params2L, ClassInstance, SimOracle, Run engine for 2L+ and 2L), checks.py (run-by-run checks of
+every claim of K1 and of 11.52; deterministic claims vs claims on the good event), instances.py (radial profiles), campaign.py
+(cells, campaigns), smoke.py, smoke2.py, explore_params.py.  Engine: units = (block, class) with exact counts (Python ints,
+chunked binomials beyond 2^61); q, p_low and all radii exact (Fractions/integers); levels/ell/tails in mpmath (40 digits);
+brackets float64 logs.  The sample law is represented by classes (value, probability): by the remark of 40c5bd7 (ENG-RES-0008 sec. 5)
+only the law of W matters for the outer loop with a simulated oracle.
+Checker validated by five mutations (data/MUT_*_7.jsonl, 48 runs each):
+  neg_tol -> count inequality (v) violated in 24 runs (+ M_j^neg bound);   noharper -> level left with q <= pi-dagger (1 run) and
+  the 40c5bd7 cap violated;   maxform -> width violated in 26 runs;   close_at_no -> every run returns L > U (48/48);
+  q_no_eta -> certificate p(s_j) <= q false in 21 runs, 1 invalid bracket.
+First results (before the big campaigns): A_small seed 1: 64 runs, 0 violations; A_medium seed 2: 44 runs, 175 negligible levels,
+0 violations, max M/M-dagger = 1.91.
+
+### Step 7 (read R7, R8, ENG-RES-0008 after my own derivation and implementation)
+R7 (theory division's referee of 11.18): same line-by-line content as my Step 2/3; found the r = n_o closure gap, the abort rule (M1),
+the induction (M2).  R8 (referee of K): "proved", ten minor points; own 2L+ implementation, 15 000 simulated runs, three nested levels on Q_9, Q_10.
+ENG-RES-0008 (engineering): 7 095 840 mean runs (expectation level, bounded regime, one set of design parameters b=0.5, lam=0.2,
+eta=eta'=theta=0.05) + 585 000 literal runs (b=0.5, lam=0.5, eta=1/4, eta'=theta=0.1; (u,n_o) in {(1/2,300),(1,120),(2,48)}) + reduced K.
+None of the three tested: invalid inner answers ((V1) is true by construction everywhere), the extensive regime / Algorithm 2L with
+the constants of 11.52 at sizes with negligible levels (R7 did 2L; ENG: "not started"), the new cap of 40c5bd7 (theory's harness XVI.4 only).
+My campaigns cover exactly these (B_invalid, D_2L, D_2L_off, cap check in every run).
+
+### Step 8 (Lean: statements read, compiled, axioms printed)
+lean/R6Axioms.lean (imports BoundedAccuracy, QueryRefinements; `lake env lean`, exit 0, 8 s; output lean/R6Axioms.out).
+- `admissible`, `Rstep`, `exactRec` are exactly R[T] of (11.18.2) and T_1 = theta_na, T_{k+1} = min(T_k, R[T_k]) (index shifted by one).
+- `exactRec_reaches_hint : 0<u -> 0<g -> g<cubeEstar u -> 0<eta -> exists k, exactRec (cubeNa u) k g < cubeHint u g + eta`  = statement (R).
+- cubeNa = klBin(cubeRadius, 1/2), cubeRadius = sSup{rho in [p_u,1/2] : KL(rho||p_u) <= x}; `cubeNa_isLeast_allRadii` identifies it with
+  min{KL(rho||1/2): KL(rho||p_u) <= x} for x >= 0.  cubeHint u e = klBin((Lambda_1+e)/u, 1/2).  OK = paper.
+- `two_rung_bound` = the iteration of Thm 11.58;  `close_points_bound'`, `width_le`, `populated_part_le`, `certified_lower_sum_le_mean`
+  = algebra only (no algorithm, no probability).
+- `cube_exact_dip_randomized` = (LB): finite mixture of consistent deterministic query algorithms, counts DISTINCT queried points at g = 0.
+- all ten depend on [propext, Classical.choice, Quot.sound] only.
+NOT machine-checked (confirmed by reading): the algorithm, the good event, Harper/tail lemmas, closing radius, sample sizes, the count as a
+statement about the algorithm, termination, cost sum, Lemma K.4, Prop K0, Cor K1.b, Prop E, Thm K2, the assembly.
+
+### Step 9 (every-n computations: everyn.py, separation.py)  [refers to Thm 11.56/K1, Prop 11.57(a)/K0, Thm 11.45(b), Thm 11.25(a) at 5ed4072]
+everyn.py computes, from exact binomial tables for the given n (no asymptotics): C_max of K1 with K0 inner brackets, the plain K0 bracket,
+the hinted lower bound and the NON-ADAPTIVE lower bound of Thm 11.45(b), all at the certified accuracy x_out and delta = 0.05.
+Design "K64" = the design of K_REPORT 6.4 / ENG-RES-0008 (b=0.5, lam=0.2, eta=eta'=theta=0.05, nu1=2e^u n_o/theta, inner rates eps* 0.85^i, i<40).
+CROSS-CHECK of my constants against ENG-RES-0008 (their table "cap C_max at that phi", ln/(n a)), all digits agree:
+  u=1: n=1000 phi=.55: 1.1720 (ENG 1.172); n=2000 phi=.5: 0.8700 (0.870); n=4000: 0.7228 (0.723); n=16000: 0.5887 (0.589);
+       plain 1.9254/1.3493/1.2303/1.1516/1.0689 (ENG 1.925/1.349/1.230/1.152/1.069); hinted LB 0.3324/0.2857/0.2754/0.2707/0.2649 (0.332/0.286/0.275/0.271/0.265).
+  u=2: n=1000: 0.8056 (0.806); 2000: 0.6899 (0.690); 4000: 0.6210 (0.621).   u=0.5: n=4000: 1.0482 (1.048); 8000: 0.8142 (0.814).
+  => three independent implementations (K, ENG, mine) agree on every constant of Theorem K1 and of Prop K0.
+NEW (not in any report I read): comparison with the non-adaptive LOWER bound (not with the plain bracket, which is an upper bound):
+  certified finite-n separation  C_max(two levels, every run, every instance) < LB_na (expected, every non-adaptive algorithm):
+  u=1:   n=1380: tie (ln ratio 0.0); n=1400: +1.1; 1700: +14.5; 2000: +28.1; 4000: +120.5; 8000: +316.2; 16000: +722.5   (n<=1350: negative)
+  u=2:   n=520: -1.0; n=540: +2.5; 700: +23.1; 1000: +63.2; 4000: +492.3
+  u=0.5: n=4500: -0.6; n=4700: +1.9; 5600: +13.3; 8000: +43.4; 11000: +81.8
+  (best phi on the grid = 0.50 at the crossover in all three cases; LB_na/(n a) is 0.99-1.02 already at n = 250.)
+  The lowered cap of 40c5bd7 changes ln C_max by at most 0.6 at the crossover sizes (it matters where the first term 2Mbar dominates: n=1000, phi=.55: 130.0 -> 120.7).
+Outputs: logs/separation_u1.log, _u2.log, _u05.log, data/separation_K64_u*.jsonl.
+
+### Step 10 (brute-force checks of the inputs: check_tail_lemmas.py, logs/check_tail_lemmas.log)
+Harper in the form used (|S| >= |B(m,k)| => |N(S)| >= |B(m,k+1)|): all nonempty subsets of Q_1..Q_4 (65 808 sets), 60 000 random/structured
+subsets of Q_5..Q_7: 0 violations.  Lemma K.1(a),(b) at every threshold of 960 random u-Lipschitz functions on Q_4..Q_10 (34 873 + 35 833
+thresholds): 0 violations, equality attained (ratio 1.000000).  Lemma K.4(a),(b) and (3.0) on exact tables, m <= 2000, u in {.5,1,2}, 4 values
+of eta: 22 583 cases, 0 violations (largest ratios 0.886, 0.854, 0.264).
+
+### Step 11 (the cap remark of 40c5bd7, edge case analysed on paper)
+Degenerate branch r-dagger < Delta: the published sentence covers passes with 2^{n_o} q < 1 only; at M = M-ddagger exactly, 2^{n_o} q = 1,
+r = 0, tail = s_j 2^{-n_o} E_0.  I close it: for r-dagger >= 1, E_0 <= E_1/(m+2) <= E_{r-dagger}/3, so with lam <= 1:
+tail <= s_{j-1} e^lam 2^{-n_o} E_0 < s_{j-1} 2^{-n_o} E_{r-dagger} <= theta e^b ell by [P] at r-dagger and the bound on ell after a populated
+level; for r-dagger in {0, -1}: M-dagger >= M-ddagger and the cap is 2 e^lam M-dagger > 2 M-ddagger >= every sample.  So the remark is true
+as stated (given lam <= 1, which is a hypothesis of Thm 11.56); the proof has one uncovered pass, closed here.  MINOR.
+
+### Step 12 (end-to-end replication of published trajectories with my literal engine: flat_exact.py)
+Flat instance, design K64, inner behaviour "bottom", K0 costs; my engine unchanged (one class, exact block sizes).
+  u=1 n=1000 phi=0.55: ln(cost)/(n a) = 0.9788           (ENG-RES-0008 table "flat instance at that phi": 0.979)
+  u=1 n=1000 phi=0.80: 0.7013, ln M/(n_o a) = 0.756, closing radius 255, r-dagger 180, 5003 populated / 223 negligible levels
+                       (ENG-RES-0008 mechanism table: 0.701, 0.756, 255 (180, 215), 5003 / 223 -- identical in every number)
+  u=1 n=4000 phi=0.50: 0.6872                             (ENG: 0.687)
+(I have not read their code; K_REPORT's own table has 0.701 at n=1000 as well.)  Remaining cells stopped to free CPU (machine load 10+).
+
+### Step 13 (campaign results so far; machine heavily loaded by other workstreams, my campaigns use 2 processes)
+A_small seed 11: 1600 runs (8 cells, n_o 10..40, theorem constants, 17 profile families x 10 valid inner behaviours): 1600 closed,
+  0 deterministic violations, 0 violations on the good event, good event never failed; 327 926 populated and 180 negligible levels;
+  closures: 232 at a populated pass, 1368 at an unpopulated one, 343 with empty tail; max M/M-dagger 1.98, max M/cap(40c5bd7) 0.84,
+  max count ratio (v) 0.869, max calls/bound 0.125.
+A_ties seed 12: 500 runs (dyadic lam, u n/lam integer, flat fibres, grid profiles): 451 closed, 49 discarded (a block would exceed the
+  sampler limit 2^83), 0 violations, 1819 negligible levels in 134 runs.
+
+### Step 14 (prior-art searches, 25 Nov 2026, generic queries only)
+(1) Harper's theorem, statement: search summary + the abstract-level statements quoted by the search tool from arXiv:1806.11061 (Raty),
+    arXiv:1808.02572 (Przykucki-Roberts): "|N(A)| >= |N(B)| for B the initial segment of the simplicial order with |B| = |A|"; closed-neighbourhood
+    version as well.  [search snippet]  Harper 1966 itself not retrieved.
+(2) Kaas-Buhrman 1980 (Statistica Neerlandica 34(1) 13-18): bibliographic data confirmed [search snippet]; the floor/ceil statement of the
+    median is attributed to it by secondary sources only (not confirmed from the paper).
+(3) Mathe-Novak, "Simple Monte Carlo and the Metropolis Algorithm", arXiv math/0611285: abstract read through a fetch tool: "adaptive methods are
+    much better than nonadaptive ones ... the curse of dimension (for nonadaptive methods) can be broken by adaption" [abstract].
+(4) query "adaptive versus non-adaptive query complexity estimating partition function Lipschitz function Hamming cube exponential separation
+    isoperimetric layer cake algorithm": nothing on this problem [search snippets only]; "not found", not "new".
+
+### Step 15 (cap remark of 40c5bd7, degenerate branch: capcorner.py, seeds 41-43, 4500 runs; data/capcorner_4*.json)
+Small outer cubes n_o in 3..12, lam = 1 > u in {0.15,0.2,0.3,0.45}, eta = 1/2 (M-ddagger = K 2^{n_o+1} is in the doubling sequence),
+theta in {0.003..1}, nu1 in {1, 30, 2e^u n_o/theta, 1e4}, K partly reduced, valid and invalid inner behaviours.
+ - degenerate branch (r-dagger < Delta) in 4151 of 4500 runs; r-dagger >= 1 in 1801 of them.
+ - cap 2 max{e^lam M-dagger, M-ddagger} never reached (largest M/cap = 0.5); no deterministic claim violated.
+ - r-dagger >= 1: 193 unpopulated passes with M = M-ddagger exactly; all 193 closed (as proved in my Step 11).
+ - r-dagger in {0,-1}: the unpopulated pass at M = M-ddagger did NOT close 1255 times and the sample was then doubled to exactly
+   2 M-ddagger in 1133 runs: the sentence of the published proof "at level j the size is doubled only below M-ddagger" is false there
+   (2^{n_o} q = 1 is not < 1); the STATEMENT is unaffected because then the cap is 2 e^lam M-dagger >= 2e M-ddagger (observed ratio 1/e).
+
+### Step 16 (off the good event: invalid inner answers; the abort rule exercised for the first time)
+B_invalid seed 15 (400 runs; 7 cells incl. n_o = 100, 80, 400; invalid inner behaviours: bracket above W, below W, 2.5x too wide, the trivial
+  bracket again, mixtures): 195 closed (159 of them with an invalid final bracket, as allowed off the good event), 21 closed with L > U,
+  179 aborted ("unclassified at the last rung"), 5 discarded (sampler limit).  Deterministic claims of K1 -- (iii) closing radius > r-dagger at
+  every level left, (iv) M <= max(K, 2M^neg), M^neg <= (1+eta)e^lam nu0 M-dagger, M <= Mbar, the cap of 40c5bd7, the width of every bracket
+  returned through the closure test, queries <= C_max -- held in ALL 395 runs.
+B_lazy (new behaviour LAZY: returns the rung-0 bracket at every rung but the last, a valid one at the last rung; so every point that needs any
+  refinement is driven to the most expensive rung):
+  seed 18, rung costs 10^l: 59 runs, none aborted, queries <= 0.021 C_vi  (the bound is dominated by Mbar*C_{L-1}; the abort is not needed).
+  seed 19, STEEP rung costs C_l = e^{80 l} (the regime of the theorems: the last rung dominates): 60 runs, 33 ABORTED ON THE QUERY BUDGET
+  (sample sizes e^24.5 .. e^28.6 > (J+1) cnt(x_{L-1})), 27 closed; queries <= C_max in all 60 (largest ln q - ln C_max = -0.006);
+  0 deterministic violations.  => off the good event the cost WOULD exceed C_max without the abort rule (R7's M1 is not a formality),
+  and the rule "test before the call" keeps it below.  Nobody had exercised this branch (R8: "no abort"; ENG: "aborted: 0").
+
+### Step 17 (report drafted while the queue runs; fixes to my own tooling)
+- R6_REPORT.md: sections 0, 1, 2.1-2.9, 4-8 written; section 3 (numerics) to be filled when the queue (run_rest2.sh, run_rest3.sh) ends.
+  WARNING to myself: the run counts in section 1 of the report were provisional when first written; they must be replaced by the
+  final numbers of summarise_all.py before the report is declared finished.
+- checks.check_2L originally looped over all x in b + N for every pass (O(J^2) thresholds): replaced by the thresholds the proof uses
+  (x = b and x_{l-1} rounded up into b + N); the first D_2L campaign (2 runs in 7 minutes) was discarded and is re-run by run_rest3.sh.
+- a patch of mine broke the import lines of everyn.py/adversarial.py/separation.py/flat_exact.py for about one minute (HERE became a tuple);
+  repaired and re-tested (everyn.py reproduces 1.6306 at u=1, n=500, phi=.5); no campaign imported these files in that minute.
+- partial B_reducedK (118 runs): events of the proof fail in 22/40 runs at K=8, 5/40 at K=20, 0/38 at K=50; no claim violated on runs where they hold.
+
+### Step 18 (independent numerics of the exponents: tau2.py; three levels: three.py)
+tau2.py: tau_2/a = 0.5001 (u=1/2, phi=.500), 0.5004 (u=1, phi=.500), 0.5056 (u=2, phi=.494)  [reports: 0.5001, 0.5004-0.5006, 0.5056-0.5057];
+  identity theta_na(e + theta_hint(e)) = theta_hint(e): max error 4e-12 on 2001 accuracies; Prop 11.57(c) (no level below h, T = theta_hint):
+  min over 999 values of phi of [sup_gamma bracket - h] = +7.6e-6, +2.8e-5, +7.8e-5 > 0.
+three.py (three nested levels, real randomness at every level, constants of the theorems, pool of middle runs per fibre): first test,
+  2 outer runs, 48 middle runs, 4 073 472 real bottom brackets: all valid, all within certified width, no claim violated.
+
+### Step 19 (reading completed; report generator)
+- Read the rest of K_REPORT.md (lines 648-998: section 5 remainder, 6.1-6.8, 7, 8, 9, summary) -- after my own implementation and
+  numerics; nothing there changes a verdict.  K's own runs report samples up to 4.5 M-dagger (6.2) and 3.9 M-dagger (6.8).
+- Proofread R6_REPORT.md sections 0-2.9; fixed the width sentence in (D2) and the cap sentence in Theorem R6.1.
+- make_section3.py computes every run count of section 3 from the data files; fill_report.py writes sections 3.2, 3.4, 3.6-3.8 into
+  the report from data/summary_all.json (it asserts the sentences that are claims about the data: every valid run closed, good event
+  never failed with theorem constants, no violation).  Preview written to the scratchpad; the report itself is filled when the queue ends.
+- D_2L_off finished: 210 runs (2L, reduced K and/or invalid answers).
+
+### Step 20 (cross-check of the lower bounds of the separation table: crosscheck_lb.py)
+The hinted and the non-adaptive lower bounds recomputed directly from the definitions of Delta_k and D_R with float64 logarithms
+(scipy gammaln / logsumexp), sharing nothing with r6lib.Tables: 184 rows of data/separation_K64_u*.jsonl, k* and R identical in every row,
+largest difference of ln(lower bound) 1.2e-11.  (My first version of the cross-check overflowed in expm1 for u(k+1-j) > 709 and reported
+false mismatches of k*; fixed with ln(e^y - 1) = y + log1p(-e^-y).)
+Crossover cells: u=1 n=1400: R = 381 (R/n = .2721, p_u = .2689), ln LB_na = 155.023; u=2 n=540: R = 67, 176.477; u=1/2 n=4700: R = 1784, 141.539.
+
+### Step 21 (queue status; real inner brackets; three levels)
+- e2e.py seed 21, theorem constants (cut by its 420 s limit): 129 runs on explicit cubes of 12-13 coordinates, 9 786 461 real two-sample
+  inner brackets (224 of 270 rungs real, the others enumerated): no inner bracket invalid or too wide, every final bracket valid and within
+  x_out, no abort, queries <= 0.6% of C_max, no claim violated.
+- three.py seed 61 (running, low priority) + seed 5 (test): so far 5 outer runs, 192 middle runs, 14 251 858 bottom brackets, all valid.
+- lean/R6Axioms2.lean: `cube_nonadaptive_bound` (statement = Thm 11.45(b), non-adaptive mixtures, E|Q| >= (1-2 delta) 2^n/B); standard axioms.
+- finalize_report.py / fill_report.py / make_section3.py: all run counts of the report are generated from the data files.
+
+### Step 22 (adversarial search, cap sweep, three levels: final)
+- adversarial.py (hill climbing, literal runs, ~210 s each): cell 0 (n_o=100,u=2) objective ineq: 74 runs, best 0.461; cell 0 cap: 67 runs,
+  best 0.0 (uninformative: samples near M-dagger exceed the sampler limit in that cell); cell 2 (n_o=80) calls: 58 runs, best 0.144;
+  cell 4 (n_o=24,u=lam=1/2) cap: 594 runs, best 0.181; plus the 23-run test on cell 5.  No violation.  WEAK search: does not improve on
+  the structured campaign instances (0.869 count, 0.843 cap).
+- capsearch.py seed 71 (structured sweep, 200 s): 1609 literal runs, 0 violations; largest sample 2.46 M-dagger where cap = 4.056 M-dagger
+  (r-dagger = 9, n_o = 24, u = lam = 1/2, theta = 3, nu1 = 1; a plain cone, inner behaviour ADV_LO): 0.61 of the cap.
+- three.py seed 61: 17 outer runs, 1104 middle runs, 76 289 716 real bottom brackets (two-sample brackets at the bottom in 10 of 17 runs),
+  everything valid, no claim violated at the middle or outer level.  With the test run (seed 5): 19 outer, 1152 middle, 80.4M bottom brackets.
+- e2e.py seed 22, K divided by 16: 400 runs, 1 844 727 real brackets, none invalid; events of the proof failed in 31 runs; no invalid final bracket.
+
+### Step 23 (final data, report filled)
+Queue finished (ALLDONE3).  Final counts (make_section3.py -> logs/summary_final.txt, data/summary_all.json, data/headline_counts.json):
+ simulated-oracle campaigns: 3686 literal runs = 2618 with theorem constants and valid answers (2L+ 2424, 2L 137+57) + 264 with K reduced
+ + 804 with invalid answers; 0 violations of an every-run claim; 0 violations of a good-event claim on a run where the events hold;
+ good event never failed with theorem constants; 67 runs discarded (sampler limit 2^83).
+ B_lazy with steep rung costs: 260 runs, 149 stopped by the query budget, 0 above C_max (max ln q - ln C_max = -0.0003).
+ D_2L (rerun with fixed checker, 137 runs): n up to 3000, 143 031 populated / 298 negligible levels, largest sample e^50.9 = 3.03 M-dagger.
+ e2e: 129 + 400 runs; three levels: 19 outer / 1152 middle / 80 363 188 bottom brackets; capcorner 4500; adversarial 816; capsearch 1609.
+fill_report.py and finalize_report.py applied to the report (backup of the pre-fill text: logs/R6_REPORT_before_fill.md); the headline
+categories in section 1 were then corrected by hand from data/headline_counts.json (D_2L_off contains 57 runs with theorem constants and
+valid answers, 63 with reduced K, 90 with invalid answers).
+Corrected a wrong sentence of my draft: a two-sample bracket is cheaper than enumeration from ~30-40 fibre coordinates (u=1) / 80-150 (u=2)
+(computed with everyn.k0_cost), not "several hundred"; one bracket then costs e^17..e^26 evaluations or more.
+
+### Step 24 (A NUMERICAL TRAP FOUND LATE: numpy's binomial sampler is biased at n >= 1e16; second pass launched)
+While writing test_binomial.py (the test my engine's docstring referred to but which I had only run inline), I computed z-scores:
+numpy 2.5.3 `Generator.binomial(n, p)` returns samples whose MEAN IS TOO SMALL when n >= 1e16..1e17 and the mean n p is between about
+60 and 1e4 (BTPE branch): e.g. n = 2^61, n p = 92.23: -0.84 % (z = -50 in 4e5 draws); n = 1e18, n p = 500: -0.21 % (z = -30);
+n = 1e17, n p = 500: -0.08 % (z = -11).  No bias for n <= 1e15, for n p <= 31, for n p >= 5e4; the Poisson sampler and sums of 1024
+binomials with 2^51 trials (same law) are unbiased.  Reproducible with two seeds: numpy_binomial_bias.py, logs/numpy_binomial_bias.log.
+(R8's erratum m6 "Generator.binomial is correct down to p = 1e-20 (n = 2^59)" is about the inversion branch; in the BTPE branch at
+n >= 1e16 there is this small bias.  K's, R8's and the engineering division's "exact" samplers at n up to 2^61-2^62 may be affected for
+shells with expected counts 60..1e4 -- I have not read their code and cannot tell.)
+CONSEQUENCE FOR MY RUNS (first pass): the sampler was used for blocks of more than 1e16 points in 173 of the 3686 campaign runs
+(A_ties 11, A_medium 49, D_2L 29, B_reducedK 28, B_invalid 27, B_lazy 13, D_2L_off 16; A_small 0).  The logical content of the tests is
+unaffected: "every-run claims hold" and "good-event claims hold whenever (V2),(V3) hold on the realised sample" are statements about every
+sample sequence, whatever its law.  What a biased sampler could distort is only the FREQUENCY with which the events hold.
+FIX: r6lib.big_binomial now uses the Poisson sampler when n > 2^50, p <= 1e-9 and 30 < n p < 1e6 (total-variation error <= p <= 1e-9
+per draw); test_binomial.py: z within +-1 in the formerly biased regime (100 000 draws each).
+SECOND PASS: all campaigns that can contain such blocks are re-run with the corrected sampler (run_pass2.sh; new seeds 212-220);
+first-pass files moved to data/pass1/ (with its summary).  The report tables will be regenerated from the second pass (A_small, which
+has no block above 2^43 points, is kept).  e2e / three / capcorner / capsearch (small samples) and flat_exact (no sampling) are unaffected.
+
+### Step 25 (m8 written into the report; mechanism of the numpy bias read in the source)
+- Report: m8 inserted in section 2.7 (after m7), sampler note in 3.1, caveat in 5 item 6, requests R6-T5 (theory division, referee of
+  erratum m6) and R6-E3 (engineering division).  (My first attempt at this edit aborted on a line-broken search string; nothing had
+  been written; redone.)
+- Mechanism, read through a fetch tool in numpy's source (branch main, numpy/random/src/distributions/distributions.c; quoted lines only,
+  not compared with the 2.5.3 tag): `random_binomial` uses inversion when p*n <= 30.0 and BTPE otherwise; in `random_binomial_btpe`
+  x1 = (double)y + 1; f1 = (double)m + 1; z = (double)n + 1 - (double)m; w = (double)n - (double)y + 1; and the final acceptance test
+  starts `if (A > (xm * log(f1 / x1) + (n - m + 0.5) * log(z / w) ...`.  z/w = 1 + (y-m)/(n-y+1) is not resolved in float64 for n of
+  order 1e16 and larger (exactly 1 once n > 2^53 and y, m are below half an ulp of n), so a term ~ (y - m) is lost from the log acceptance
+  ratio: candidates above the mode are rejected too often, candidates below it too rarely => mean too small (the sign I measured).
+  The test is reached only if |y-m| > 20 and the squeeze is undecided => no bias at small means (inversion; explicit product) and little
+  at very large means (tight squeeze).  This is [H] supported by the quoted lines; the measurement is [N].
+- Which of my other runs used numpy's binomial above 1e16?  e2e / three / capcorner / capsearch: samples far below 1e15 (n_o <= 24 or
+  explicit cubes) -- unaffected.  adversarial.py: cells 4 (n_o = 24) and 5 (n_o = 40, Mbar = 3.5e13) unaffected; cells 0 (n_o = 100) and
+  2 (n_o = 80), 199 runs, can contain such blocks -> to be re-run with the corrected sampler after the second pass.
+- Second pass so far (22:07): B_reducedK 400 runs, A_ties 500 runs, B_invalid 400 runs completed (machine load now ~6, was 10-15).
+
+### Step 26 (SECOND PASS finished; report regenerated from it)  [22:00 - 22:21 machine time]
+run_pass2.sh (corrected sampler; seeds 212-220; machine load ~6): A_ties 500 runs requested (465 completed, 35 beyond the 2^83 limit),
+A_medium 313 before its time limit (302 + 11 discarded), D_2L 239 (time limit; all 8 cells, 29-30 runs each), B_reducedK 400 (396 + 4),
+B_invalid 400 (390 + 10), B_lazy 260 (steep costs) + B_lazycheap 60 (59 + 1), D_2L_off 300.  With A_small (1664, unchanged):
+  4075 literal runs = 2735 with theorem constants and valid answers (2L+ 2431; 2L 239 + 65 of D_2L_off)
+                    + 493 with K reduced and valid answers (396 + 97) + 847 with invalid answers (390 + 319 + 138);
+  0 violations of an every-run claim, 0 violations of a good-event claim on a run where the events hold;
+  the events of the proof failed in NO run with theorem constants and valid answers (as in pass 1);
+  reduced K: events failed in 65/135 (K=8), 33/133 (K=20), 3/128 (K=50) runs; 2L: 6/69 (K=10), 0/28 (K=30);
+  B_lazy steep: 142 of 260 runs stopped by the query budget, none above C_max (max ln q - ln C_max = -0.0060); cheap: 0 of 59;
+  223 runs of the second pass drew more than 1e16 outer points (pass 1: 173).
+  maxima (valid, 2L+): count inequality 0.869, sampled count 0.344 of cnt, calls 0.206, largest sample 2.07 M-dagger = 0.843 of the cap;
+  2L: largest sample 3.03 M-dagger = 0.556 of 2e M-dagger.
+The outcome of the two passes is the same; the report's tables are pass 2 (pass 1: data/pass1/, summary_all_pass1.json).
+Census of cells per campaign (make_section3.py now prints it) compared with the table descriptions; three descriptions corrected
+(A_ties: 6 behaviours incl. the two adversaries; B_reducedK: 5 cells x 3 values of K; A_medium: the pass-1 remark on 12 extra runs removed).
+
+Adversarial search, second pass (run_adv2.sh, corrected sampler, 210 s each): cell 0 (n_o=100) ineq: 176 completed of 178, best 0.448;
+cell 2 (n_o=80) calls: 122 of 122, best 0.203; cell 0 cap: 61 of 66, best 0.000 (uninformative: M-dagger = 4.7e27 > 2^83).  No violation.
+adversarial.py now records completed/discarded runs (before, the "evaluations" of cells 0 and 2 included discarded attempts; the first-pass
+records of these cells are archived in data/pass1/adversarial_pass1.jsonl and not counted).  Total now 976 completed runs (983 attempted).
+
+### Step 27 (the finite-n separation WITH the lowered cap of 40c5bd7: separation_cap.py)
+The tables of Step 17 already contained ln C_max with M-bar replaced by 2 max{e^lam M-dagger, M-ddagger} (column lnCmax_cap), but only
+for phi <= 0.60 (0.45-0.55 at the refinement sizes), and I had not looked at where the crossover moves.  New scan, phi in {0.50,...,0.70}:
+  u=1:   n=1275: ln C_max^cap 140.56 (phi .55) vs ln LB_na 140.50 (above);  n=1300: 142.95 vs 144.00 (BELOW)
+  u=2:   n= 475: 156.38 vs 155.60 (above);                                   n= 500: 162.53 vs 163.78 (BELOW)
+  u=1/2: n=4000: 121.16 vs 120.61 (above);                                   n=4150: 124.08 vs 124.99 (BELOW)
+and below at every larger size of both grids.  Best phi with the cap: 0.55 (0.60 is worse); without the cap 0.50 stays best on the wider grid.
+In this design Delta = ceil(lam/u) = 1 <= r-dagger in every cell (flag rdag_ge_Delta in the data), so only the main branch of the cap proof is used.
+Budget used: C_max^cap = 1 + 2 Mcap + sum_l min{2 Mcap, (J+1) cnt(x_{l-1})} C_l, Mcap = 2 max{e^lam M-dagger, M-ddagger}, K, m_max, delta' unchanged
+(valid: every sample is K or < Mcap, so the good-event cost is below it; the abort rule enforces it otherwise).
+So: crossover 1400 / 540 / 4700 for Theorem 11.56 as at 5ed4072; 1300 / 500 / 4150 with the cap remark of 40c5bd7 (first grid size at which the
+inequality holds; upper bounds for the least n).  Also corrected in the report: "at 1380 the two agree to the first decimal" -> above by 0.05;
+the drop of ln C_max with the cap is 0..12.6 at fixed phi (not "0.1..11"); "calls per level up to 0.38" (flat instance) -> 0.40 (three runs).
+
+### Step 28 (report regenerated)
+make_section3.py -> logs/summary_final_pass2.txt, data/summary_all.json; fill_report.py (in place: 3.2, 3.4, 3.6-3.8); finalize2.py (new,
+re-runnable: section 1, verdict table, m6, 2.5, R6-E2, section 8 from data/summary_all.json -> data/headline_counts.json).
+Backup of the report before this regeneration: logs/R6_REPORT_before_pass2_fill.md.
+
+### Step 29 (after all runs: whom does the sampler bias concern?  three sampling routines read; one tested)
+Until now I had read no code of the authors, their referees or the engineering division.  With all my runs finished, I read ONLY the
+sampling routines, to make finding m8 definite:
+- engineering division, src/metricchain_eng/twolevel/simulate.py (git show origin/research/ubuntu-engineering:..., commit a2f6dc7), lines 22-131:
+  `stable_multinomial(rng, size, lpmf)` = sequential `rng.binomial(left, pc)` over the shells d = 0, 1, ... (lpmf = shell law in the order of d),
+  so the first shells are drawn with left ~ block size: same construction as my first-pass sampler => same defect whenever a block has >= 1e16
+  points.  Their job M-011: design b=.5, lam=.5, eta=1/4, eta'=theta=.1, n_i=6, (u,n_o) in {(1/2,300),(1,120),(2,48)}; my Params2LP (one-rung ladder
+  assumed) gives M-dagger = 2.8e12, 4.5e16, 3.4e17 (K = 910..937; they report 953..979, so their ladder or constants differ slightly).
+  So blocks >= 1e16 can occur in two of their three cells.  [H: inspection; NOT run.]
+- workstream K, experiments/workstreams/K/stable_multinomial.py (whole file): binary splitting over cells sorted by probability; nodes with
+  n p <= 30 and p < 1e-6 by own inversion, every other node by rng.binomial.  A node is in the biased regime iff its count >= 1e16 and its
+  expected left count is in ~[60, 1e4].  test_K_sampler.py (read-only import with python3 -B; no bytecode written; `git status` shows no change
+  outside my directory and my report): on the law of that file's self-test (shells of Q_200) NO node is in the window at block sizes
+  2^50, 2^59, 2^61, 2^62 (right-spine expected left counts at 2^61: 0.014, 1.2e13, 5.5e16, ...), and tail counts with means 8..4000 show no
+  bias (4000 repetitions, 2 seeds, all |z| <= 1.9).  For the laws of K_REPORT 6.8: not checked.
+  => my first guess ("K's sampler is probably affected") was WRONG for its self-test law; the report says only what was measured.
+- referee R8, experiments/reviews/R8/r8_pops.py lines 280-330: binom_safe: inversion for mean < 40, numpy for p >= 1e-7, Poisson for p < 1e-7:
+  outside the biased regime by construction.
+Report: m8 rewritten with these three findings; R6-T5 and R6-E3 rewritten; section 0 / 3 / 3.7 now say exactly what was read and when.
+
+### Step 30 (negative controls re-run with the corrected sampler; R4 acknowledged; small corrections)
+- run_mut2.sh: the five mutation campaigns again (seed 7, corrected sampler): detection counts identical to the first pass
+  (mut_summary.py, new: 24/47 with (iv) in 8; 1/47; 26/47; 48/48; 26/48 with one invalid final bracket).  New observation recorded in the
+  report: in the single run that detects "no Harper term", the cap of 40c5bd7 is violated as well (its proof uses the Harper term).
+  First-pass files: data/pass1/MUT_*_7.jsonl, data/pass1/mut_summary.json.
+- Read (in part: summary and finding M1) docs/science/workstreams/R4_REPORT.md, which the brief names: R4 found the cost bound of the BATCHED
+  variant (Thm 11.84(ii)) false off the good event (no stopping rule) and exhibited a violating run.  My sentence "nobody had tested invalid
+  inner answers" was therefore too broad; now: "for Algorithms 2L/2L+ this had not been tested ... R4 exhibited the analogous failure for the
+  batched variant".  m1 now cites R7 M1 / R4 M1 as the same family.  A1_REPORT section 8 read (asks for an every-n statement: section 2.9).
+- Labels: [C] added to the legend (two conjectures marked: persistence of the separation for all larger n; the 1/k^2 rate, theirs).
+- Report header: engineering branch read at a2f6dc7; scope sentence (model-relative mathematics, no physical claim).
+- Corollary R6.2: the lower bound is on the expected size of the query set of a non-adaptive algorithm that is correct on the class
+  (not "on some instance"); bracket ratio e^x <-> accuracy x/2 stated.
+
+### Step 31 (final state)  [about 22:45 machine time]
+- Verdict table aligned with the brief's categories: 11.52 "proved with gaps that I close (m1-m3)", 11.54 "proved with a gap that I close (m4)",
+  11.53 machine-checked (statement compared, proof not read), 11.55 / 11.56 / 11.57 / 11.58 proved, cap remark (40c5bd7) proved with a gap
+  that I close (m7), 11.51 not examined.  No critical, no major finding.
+- One more search (for m8): no existing report of the numpy behaviour found in one query (not a claim that it is unreported); logged in section 4.
+- test_binomial sentence in section 3.1 made exact (nine cases, |z| <= 1.2; 46 shells, largest |z| 2.45).
+- All numbers of the report regenerated a last time (make_section3.py, fill_report.py, finalize2.py, mut_summary.py); data/headline_counts.json:
+  4075 literal simulated-oracle runs (2735 theorem constants + valid; 493 reduced K; 847 invalid answers), 142 of 260 lazy runs stopped by the
+  budget, 529 two-level and 19 three-level runs with real brackets, 4500 capcorner runs, 976 + 1609 search runs, 5 x 48 negative controls.
+- git status: nothing changed outside experiments/science/ws_R6/ and docs/science/workstreams/R6_REPORT.md by me (the other entries belong to
+  the workstreams R7 and R8 running in parallel).  No state-changing git command, no lake build, nothing delegated.
+What is NOT done (see report sections 0 and 5): Lean proofs line by line; Theorem 11.51; three levels beyond toy size; a rate / explicit o(n);
+whether the numpy bias touched K's section-6.8 runs or the engineering division's M-011 (inspection only).

@@ -1,0 +1,15 @@
+# volumes in u-coordinates (= 15 x volume in p):  bulk box 450.0,  site-cluster LP 48.40,  path-cluster LP 46.88,  rod hull (K<=12) 27.50
+
+# UPPER bounds for N^P_cov(eps1 N) (limit N -> infinity of the outer sets; gauche credit ignored)
+#  L    eps1 |  r=eps1/L | bulk box: volumetric   bcc cover | site-cluster LP [proved]: volumetric   bcc cover | path-cluster LP [numerical]: volumetric  bcc cover
+  1.00  0.50 |    0.500 |          26437      29425    |           3719       4086    |           3627       3984    |
+  1.00  0.25 |    0.250 |         191833     214621    |          23936      26558    |          23272      25792    |
+  0.20  0.50 |    2.500 |            392        425    |             94         98    |             93         96    |
+  0.20  0.25 |    1.250 |           2195       2440    |            401        432    |            393        424    |
+
+# LOWER bounds for lim inf N^P_cov(eps1 N): packings of zero-gauche clients
+#  L    eps1 | separation 2 eps1/L | segment rod-crystal | triangle T0 [proved] | rod hull, 9 vertices [sketch]
+  1.00  0.50 |    1.000            |       35            |       50             |      130
+  1.00  0.25 |    0.500            |       70            |      157             |      749
+  0.20  0.50 |    5.000            |        7            |        7             |        8
+  0.20  0.25 |    2.500            |       14            |       14             |       18

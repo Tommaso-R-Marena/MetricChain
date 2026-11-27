@@ -1,0 +1,30 @@
+p7_10_sumcert  started 2026-11-26 05:37:52 UTC
+
+S6/E tau 0.60 split ff03-ff14SB: triples [(2, 3, 4)]; LP slack t = 0.011052; integer certificate: all U, R, Q are 0; 9 dynamic-programming leaves + 1 remainder leaf re-checked in integers (10 leaves)
+   wrote lean/P7S_S6_E_tau0_60_ff03.lean (41998 bytes): 1 `sum` node(s), 9 leaves under `branch`, 1 remainder leaf
+   lake env lean (MemAvailable before 13843 MB): exit 0, 27.3s, output ['true', 'false', 'false', '12'] -> AS EXPECTED (true, false, false)
+   [run_capped] peak anonymous resident memory 590 MB (cap 1500 MB); peak file-backed resident memory 6604 MB; largest VmPeak 14998 MB (ulimit -v 16000 MB); 27.3 s; exit 0
+
+S6/E tau 0.70 split ff03-ff14SB: triples [(2, 3, 4)]; LP slack t = 0.011052; integer certificate: all U, R, Q are 0; 9 dynamic-programming leaves + 1 remainder leaf re-checked in integers (10 leaves)
+   wrote lean/P7S_S6_E_tau0_70_ff03.lean (41998 bytes): 1 `sum` node(s), 9 leaves under `branch`, 1 remainder leaf
+   Lean run not repeated: the published instance is identical to that of S6/E tau 0.60
+
+K3/H tau 0.60 split ff99SB-ff14SB: triples [(0, 1, 2)]; LP slack t = 0.282824; integer certificate: all U, R, Q are 0; 21 dynamic-programming leaves + 1 remainder leaf re-checked in integers (22 leaves)
+   wrote lean/P7S_K3_H_tau0_60_ff99SB.lean (107577 bytes): 1 `sum` node(s), 21 leaves under `branch`, 1 remainder leaf
+   lake env lean (MemAvailable before 13868 MB): exit 0, 54.9s, output ['true', 'false', 'false', '33'] -> AS EXPECTED (true, false, false)
+   [run_capped] peak anonymous resident memory 656 MB (cap 1500 MB); peak file-backed resident memory 6605 MB; largest VmPeak 15062 MB (ulimit -v 16000 MB); 54.9 s; exit 0
+
+L16/P2 tau 0.60 split ff99SB-ff14SB: triples [(1, 2, 4), (6, 7, 8)]; LP slack t = 0.000017; integer certificate: all U, R, Q are 0; 4 dynamic-programming leaves + 1 remainder leaf re-checked in integers (5 leaves)
+   wrote lean/P7S_L16_P2_tau0_60_ff99SB.lean (25142 bytes): 2 `sum` node(s), 4 leaves under `branch`, 1 remainder leaf
+   lake env lean (MemAvailable before 13370 MB): exit 0, 13.4s, output ['true', 'false', 'false', '9'] -> AS EXPECTED (true, false, false)
+   [run_capped] peak anonymous resident memory 570 MB (cap 1500 MB); peak file-backed resident memory 6605 MB; largest VmPeak 14998 MB (ulimit -v 16000 MB); 13.4 s; exit 0
+
+LKSE6/E tau 0.60 split ff99SB-ff14SB: triples [(1, 2, 3), (1, 3, 5)]; LP slack t = 0.014442; integer certificate: all U, R, Q are 0; 22 dynamic-programming leaves + 1 remainder leaf re-checked in integers (23 leaves)
+   wrote lean/P7S_LKSE6_E_tau0_60_ff99SB.lean (138724 bytes): 2 `sum` node(s), 22 leaves under `branch`, 1 remainder leaf
+   lake env lean (MemAvailable before 12902 MB): exit 0, 49.5s, output ['true', 'false', 'false', '59'] -> AS EXPECTED (true, false, false)
+   [run_capped] peak anonymous resident memory 775 MB (cap 1500 MB); peak file-backed resident memory 6605 MB; largest VmPeak 15062 MB (ulimit -v 16000 MB); 49.5 s; exit 0
+
+4 of 4 Lean runs: the triplet certificate in the form sum/branch/leaf is accepted by the theory division's `verify` (#eval); 1 not run (see above)
+[184s] wrote out/p7_10_sumcert.json   finished 2026-11-26 05:40:56 UTC
+DONE p7_10_sumcert
+exit 0

@@ -1,0 +1,14 @@
+T2 chimera search  graph=K33+e N=6 m=10 K=3 ensembles=2 LM starts=10 seed=2102  start 2026-11-26T17:42:28Z
+   thresholds: LM residual < 1e-6 or exact defect < 1e-9 counts as a chimera found
+ens 0: 59046 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.033
+    EXACT: min defect = 1.825e-05; infeasible (no realisation of the spanning subgraph) 42234; found (<1e-9): 0.   C-const max 1.1e-15, C-plant max 6.0e-12; control violations 0/203
+    LM   : LM on all colourings examined; min residual = 1.021e-05, q01 = 4.276e-03, median = 4.872e-01; found (<1e-6): 0
+           C-const max 1.0e-15 (violations 0/3); C-plant: violations 12/200, per-start success 0.479, least successful target 0/10
+    agreement: LM residual at the EXACT minimiser = 1.242e-05; exact defect at the LM minimiser = 6.009e-05
+ens 1: 59046 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.048
+    EXACT: min defect = 1.770e-05; infeasible (no realisation of the spanning subgraph) 33264; found (<1e-9): 0.   C-const max 3.6e-15, C-plant max 8.5e-13; control violations 0/203
+    LM   : LM on all colourings examined; min residual = 5.280e-06, q01 = 6.436e-03, median = 6.377e-01; found (<1e-6): 0
+           C-const max 2.0e-15 (violations 0/3); C-plant: violations 6/200, per-start success 0.477, least successful target 0/10
+    agreement: LM residual at the EXACT minimiser = 5.280e-06; exact defect at the LM minimiser = 1.770e-05
+SUMMARY graph=K33+e K=3: ensembles=2; non-constant colourings examined=118092; chimeras found=0; control violations=18; smallest LM residual=5.280e-06 (median over ensembles 7.745e-06); smallest exact defect=1.770e-05 (median over ensembles 1.797e-05)
+DONE t2_chimera_search K33+e 3 2026-11-26T17:54:20Z

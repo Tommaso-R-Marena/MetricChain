@@ -1,0 +1,36 @@
+r26_influence.py block T4; started 2026-11-26T22:23:00Z
+T4: bandwidth r (pair interactions up to sequence separation r, each J*N(0,1)); q = 3, n = 10, cut after site 5; seeds [0, 1, 2, 3]
+    rows: single-site changes at distance s from the cut (s = 0: the last outer site), and arbitrary pairs of boundary states
+  J = 1.0, clash none
+     r  pairs                    osc              pt         box D=1         box D=5        box D=20         Lip u=1
+     max  median     max  median     max  median     max  median     max  median     max  median
+     1  s = 0         7.021   2.546   3.823   0.986   0.772   0.311   3.142   0.947   3.823   0.986   1.082   0.428
+     1  arbitrary     7.021   2.546   3.823   0.986   0.772   0.311   3.142   0.947   3.823   0.986   1.082   0.428
+     2  s = 0         7.378   3.111   6.741   1.250   0.643   0.251   3.640   0.984   6.741   1.250   1.444   0.419
+     2  s = 1         4.442   2.181   3.186   1.105   0.771   0.340   2.947   1.041   3.186   1.105   2.039   0.543
+     2  arbitrary     8.975   3.694   8.054   1.468   0.898   0.345   4.085   1.170   8.054   1.468   2.452   0.603
+     3  s = 0        11.761   5.978  10.559   2.544   0.949   0.414   4.611   1.634  10.558   2.544   2.559   0.817
+     3  s = 1        11.098   6.003  10.600   2.917   0.913   0.435   4.161   1.786  10.597   2.917   2.594   0.826
+     3  s = 2         4.776   1.936   4.702   0.688   0.588   0.117   3.493   0.458   4.702   0.688   0.923   0.185
+     3  arbitrary    22.138   7.791  13.845   3.585   0.977   0.526   4.954   2.180  13.748   3.585   3.328   1.072
+  J = 1.0, clash 20.0
+     r  pairs                    osc              pt         box D=1         box D=5        box D=20         Lip u=1
+     max  median     max  median     max  median     max  median     max  median     max  median
+     1  s = 0        40.019  21.077  20.918  18.177   1.000   0.641   5.000   3.001  19.664  16.846   1.854   0.949
+     1  arbitrary    40.019  21.077  20.918  18.177   1.000   0.641   5.000   3.001  19.664  16.846   1.854   0.949
+     2  s = 0        58.881  21.854  38.373   4.087   1.000   0.246   5.000   1.940  19.552   3.543   3.252   0.503
+     2  s = 1        40.030  19.827  23.685   4.037   0.999   0.348   4.999   1.697  19.826   2.569   3.352   0.589
+     2  arbitrary    76.192  24.138  43.035  17.489   1.000   0.449   5.000   2.938  20.000  16.198   3.352   0.802
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_influence.py", line 300, in <module>
+    v = T4()
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_influence.py", line 205, in T4
+    res = analyse(model, c, us, Ds, Acache)
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_influence.py", line 66, in analyse
+    lp = B.iota_lipschitz_lp(logmu, Acache[key], pairs=pairs_sel)
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_band.py", line 217, in iota_lipschitz_lp
+    out[a, a2] = np.log(lp_ratio(mu[a], mu[a2], A_ub))
+                        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_band.py", line 204, in lp_ratio
+    raise RuntimeError("LP failed: " + res.message)
+RuntimeError: LP failed: (HiGHS Status 0: Not Set)

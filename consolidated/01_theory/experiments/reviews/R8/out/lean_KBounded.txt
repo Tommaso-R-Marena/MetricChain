@@ -1,0 +1,11 @@
+'WorkstreamK.bounded_iterates_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WorkstreamK.two_rung_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WorkstreamK.certified_lower_sum_le_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WorkstreamK.populated_part_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WorkstreamK.close_points_bound'' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WorkstreamK.width_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	0m12.005s
+user	0m12.280s
+sys	0m1.608s
+exit=0

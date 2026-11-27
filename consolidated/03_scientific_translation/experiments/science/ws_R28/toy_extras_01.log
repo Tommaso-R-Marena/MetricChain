@@ -1,0 +1,26 @@
+R28 toy_extras.py  start 2026-11-27T00:38:58Z
+
+X1 closed trapezoid cells vs half-open cells, case A (N = 1440): width per angle, first-order | all-H ; violations
+   k =   3: closed 3.2811e+00 | 4.6958e+00;   half-open 3.2786e+00 | 4.6819e+00;   ratio half-open/closed 0.9992 | 0.9970
+   k =   6: closed 1.9476e+00 | 1.2729e+00;   half-open 1.9402e+00 | 1.2611e+00;   ratio half-open/closed 0.9962 | 0.9907
+   k =  12: closed 9.6930e-01 | 2.3858e-01;   half-open 9.6096e-01 | 2.3384e-01;   ratio half-open/closed 0.9914 | 0.9802
+   k =  24: closed 4.7849e-01 | 4.7381e-02;   half-open 4.7040e-01 | 4.5624e-02;   ratio half-open/closed 0.9831 | 0.9629
+   k =  48: closed 2.3775e-01 | 1.0342e-02;   half-open 2.2980e-01 | 9.6198e-03;   ratio half-open/closed 0.9665 | 0.9302
+   k =  96: closed 1.1874e-01 | 2.4117e-03;   half-open 1.1082e-01 | 2.0910e-03;   ratio half-open/closed 0.9333 | 0.8670
+   k = 144: closed 7.9135e-02 | 1.0466e-03;   half-open 7.1218e-02 | 8.4370e-04;   ratio half-open/closed 0.9000 | 0.8062
+   k = 288: closed 3.9559e-02 | 2.5543e-04;   half-open 3.1647e-02 | 1.6269e-04;   ratio half-open/closed 0.8000 | 0.6369
+   brackets excluding the exact value: 0 of 16 (must be 0)
+
+X2 stated against tight bounded-difference constant, case A on a 360-point grid (exact ln<e^-V> = 5.73756987)
+   k =  3: all-H width per angle, stated constant 4.6957e+00; tight constant 4.2788e+00; ratio 0.911; position of the exact value 0.076 -> 0.084; bracket holds: True; control (tight x 0.5) excludes the exact value: False
+   k =  6: all-H width per angle, stated constant 1.2729e+00; tight constant 1.0084e+00; ratio 0.792; position of the exact value 0.053 -> 0.066; bracket holds: True; control (tight x 0.5) excludes the exact value: False
+   k = 12: all-H width per angle, stated constant 2.3858e-01; tight constant 1.5963e-01; ratio 0.669; position of the exact value 0.101 -> 0.151; bracket holds: True; control (tight x 0.5) excludes the exact value: False
+   k = 24: all-H width per angle, stated constant 4.7382e-02; tight constant 2.9638e-02; ratio 0.626; position of the exact value 0.145 -> 0.231; bracket holds: True; control (tight x 0.5) excludes the exact value: False
+   tight constant larger than the stated one in 0 of 94770 (site, state-triple) entries (must be 0)
+
+X3 walls: a bump of height W in every neighbour term; per angle: Jensen end below exact | best upper end (9 thresholds) above exact | cell-minima end above exact
+   W =      0:  k=3: 0.359 | 0.928 | 0.947;   k=12: 0.024 | 0.215 | 0.376;   k=48: 0.00176 | 0.00858 | 0.111;   k=144: 0.000202 | 0.000845 | 0.0387
+   W =     20:  k=3: 0.518 | 1.08 | 1.09;   k=12: 0.0327 | 0.316 | 0.412;   k=48: 0.0024 | 0.0115 | 0.122;   k=144: 0.000274 | 0.00109 | 0.0423
+   W =    200:  k=3: 1.11 | 1.35 | 1.35;   k=12: 0.0437 | 0.451 | 0.5;   k=48: 0.00313 | 0.0714 | 0.142;   k=144: 0.000358 | 0.00165 | 0.0488
+   W =   2000:  k=3: 7.71 | 2.3 | 2.3;   k=12: 0.0923 | 0.793 | 0.802;   k=48: 0.00666 | 0.206 | 0.239;   k=144: 0.00076 | 0.0634 | 0.0841
+END 2026-11-27T00:39:27Z  wall 28.4 s  peak memory 532 MB (ru_maxrss; address space capped at 3 GB)

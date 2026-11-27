@@ -1,0 +1,2 @@
+# periodic index=1 mindeg=2 sublattices=1 ; columns: n E3 E8 E11 (per cell, doubled pair counts)
+2 8 24 24

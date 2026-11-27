@@ -1,0 +1,83 @@
+
+=== A  smooth, tilted reference: n = 8, J = 2.0, wall W = 0.0 (sigma 0.6), reference tilted, seed 20261126; grid of 1440 points per angle: ln Z = -2.2721311886; grid of 2880: -2.2721311886 (difference -8.9e-16)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+   3 120.0  [  -20.948442,     5.300474]  2.62e+01   [   -5.143674,    32.422831]  3.76e+01    0.076        5.155748  1.03e+01        6     18/24       3.28e+00  4.70e+00  1.29e+00
+   6  60.0  [  -12.768932,     2.811498]  1.56e+01   [   -2.806662,     7.376821]  1.02e+01    0.052        2.397375  5.20e+00        3     36/48       1.95e+00  1.27e+00  6.51e-01
+  12  30.0  [   -7.021421,     0.732948]  7.75e+00   [   -2.464265,    -0.555664]  1.91e+00    0.101       -0.555664  1.91e+00    all H      0/96       9.69e-01  2.39e-01  2.39e-01
+  24  15.0  [   -4.426790,    -0.598899]  3.83e+00   [   -2.326529,    -1.947479]  3.79e-01    0.144       -1.947479  3.79e-01    all H      0/192      4.78e-01  4.74e-02  4.74e-02
+  48   7.5  [   -3.284911,    -1.382927]  1.90e+00   [   -2.286246,    -2.203513]  8.27e-02    0.171       -2.203513  8.27e-02    all H      0/384      2.38e-01  1.03e-02  1.03e-02
+  96   3.8  [   -2.762947,    -1.812989]  9.50e-01   [   -2.275716,    -2.256423]  1.93e-02    0.186       -2.256423  1.93e-02    all H      0/768      1.19e-01  2.41e-03  2.41e-03
+ 144   2.5  [   -2.595738,    -1.962660]  6.33e-01   [   -2.273745,    -2.265372]  8.37e-03    0.193       -2.265372  8.37e-03    all H      0/1152     7.91e-02  1.05e-03  1.05e-03
+ 288   1.2  [   -2.432144,    -2.115668]  3.16e-01   [   -2.272559,    -2.270515]  2.04e-03    0.209       -2.270515  2.04e-03    all H      0/2304     3.96e-02  2.55e-04  2.55e-04
+
+=== Au smooth, uniform reference (one-body terms inside V): n = 8, J = 2.0, wall W = 0.0 (sigma 0.6), reference uniform, seed 20261126; grid of 1440 points per angle: ln Z = -2.2721311886; grid of 2880: -2.2721311886 (difference -8.9e-16)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+   3 120.0  [  -36.938668,    13.310102]  5.02e+01   [   -9.053577,    73.226436]  8.23e+01    0.082       13.310102  2.24e+01        6     24/24       6.28e+00  1.03e+01  2.80e+00
+   6  60.0  [  -27.272060,     9.844142]  3.71e+01   [   -6.135252,    28.873939]  3.50e+01    0.110        9.844142  1.60e+01        4     48/48       4.64e+00  4.38e+00  2.00e+00
+  12  30.0  [  -13.501359,     4.680740]  1.82e+01   [   -3.175737,     4.678691]  7.85e+00    0.115        4.051401  7.23e+00        4     18/96       2.27e+00  9.82e-01  9.03e-01
+  24  15.0  [   -7.429928,     1.640104]  9.07e+00   [   -2.507162,    -0.803465]  1.70e+00    0.138       -0.803465  1.70e+00    all H      0/192      1.13e+00  2.13e-01  2.13e-01
+  48   7.5  [   -4.686653,    -0.182763]  4.50e+00   [   -2.331558,    -1.939384]  3.92e-01    0.152       -1.939384  3.92e-01    all H      0/384      5.63e-01  4.90e-02  4.90e-02
+  96   3.8  [   -3.437970,    -1.190006]  2.25e+00   [   -2.287123,    -2.192712]  9.44e-02    0.159       -2.192712  9.44e-02    all H      0/768      2.81e-01  1.18e-02  1.18e-02
+ 144   2.5  [   -3.039518,    -1.541953]  1.50e+00   [   -2.278870,    -2.237432]  4.14e-02    0.163       -2.237432  4.14e-02    all H      0/1152     1.87e-01  5.18e-03  5.18e-03
+
+=== B  wall of 20 kT between neighbours, tilted reference: n = 8, J = 2.0, wall W = 20.0 (sigma 0.6), reference tilted, seed 20261126; grid of 1440 points per angle: ln Z = -4.6508308887; grid of 2880: -4.6508308887 (difference +0.0e+00)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+   3 120.0  [  -26.819503,     4.062543]  3.09e+01   [   -8.791215,   634.818042]  6.44e+02    0.006        3.998949  1.28e+01        6     21/24       3.86e+00  8.05e+01  1.60e+00
+   6  60.0  [  -17.121877,     0.957969]  1.81e+01   [   -5.394576,   299.892673]  3.05e+02    0.002        0.638530  6.03e+00        4     41/48       2.26e+00  3.82e+01  7.54e-01
+  12  30.0  [   -9.827032,    -1.358337]  8.47e+00   [   -4.912549,    56.310254]  6.12e+01    0.004       -2.118921  2.79e+00        6     49/96       1.06e+00  7.65e+00  3.49e-01
+  24  15.0  [   -7.003547,    -2.817324]  4.19e+00   [   -4.724828,    -4.153836]  5.71e-01    0.130       -4.153836  5.71e-01    all H      0/192      5.23e-01  7.14e-02  7.14e-02
+  48   7.5  [   -5.756107,    -3.677451]  2.08e+00   [   -4.670003,    -4.559096]  1.11e-01    0.173       -4.559096  1.11e-01    all H      0/384      2.60e-01  1.39e-02  1.39e-02
+  96   3.8  [   -5.186618,    -4.148661]  1.04e+00   [   -4.655698,    -4.630411]  2.53e-02    0.192       -4.630411  2.53e-02    all H      0/768      1.30e-01  3.16e-03  3.16e-03
+ 144   2.5  [   -5.004191,    -4.312469]  6.92e-01   [   -4.653022,    -4.642104]  1.09e-02    0.201       -4.642104  1.09e-02    all H      0/1152     8.65e-02  1.36e-03  1.36e-03
+
+=== B5 wall of 5 kT, tilted reference: n = 8, J = 2.0, wall W = 5.0 (sigma 0.6), reference tilted, seed 20261126; grid of 1440 points per angle: ln Z = -3.5511347841; grid of 2880: -3.5511347841 (difference -8.9e-16)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+   3 120.0  [  -23.270579,     4.785683]  2.81e+01   [   -7.012648,    49.638651]  5.67e+01    0.061        4.453739  1.15e+01        6     18/24       3.51e+00  7.08e+00  1.43e+00
+   6  60.0  [  -14.683090,     1.871428]  1.66e+01   [   -4.153834,    15.724412]  1.99e+01    0.030        1.416411  5.57e+00        4     36/48       2.07e+00  2.48e+00  6.96e-01
+  12  30.0  [   -8.484661,    -0.405205]  8.08e+00   [   -3.765353,    -1.439691]  2.33e+00    0.092       -1.619846  2.15e+00        4      8/96       1.01e+00  2.91e-01  2.68e-01
+  24  15.0  [   -5.788181,    -1.805954]  3.98e+00   [   -3.611643,    -3.185626]  4.26e-01    0.142       -3.185626  4.26e-01    all H      0/192      4.98e-01  5.33e-02  5.33e-02
+  48   7.5  [   -4.603232,    -2.625150]  1.98e+00   [   -3.566830,    -3.474972]  9.19e-02    0.171       -3.474972  9.19e-02    all H      0/384      2.47e-01  1.15e-02  1.15e-02
+  96   3.8  [   -4.061046,    -3.073410]  9.88e-01   [   -3.555121,    -3.533766]  2.14e-02    0.187       -3.533766  2.14e-02    all H      0/768      1.23e-01  2.67e-03  2.67e-03
+ 144   2.5  [   -3.887396,    -3.229230]  6.58e-01   [   -3.552929,    -3.543667]  9.26e-03    0.194       -3.543667  9.26e-03    all H      0/1152     8.23e-02  1.16e-03  1.16e-03
+
+=== coupling scan J = 0.5, smooth, tilted reference: n = 8, J = 0.5, wall W = 0.0 (sigma 0.6), reference tilted, seed 20261126; grid of 1440 points per angle: ln Z = -7.5791483481; grid of 2880: -7.5791483481 (difference -8.9e-16)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+  24  15.0  [   -8.171385,    -7.031028]  1.14e+00   [   -7.583775,    -7.553889]  2.99e-02    0.155       -7.553889  2.99e-02    all H      0/192      1.43e-01  3.74e-03  3.74e-03
+  48   7.5  [   -7.870532,    -7.299058]  5.71e-01   [   -7.580350,    -7.573512]  6.84e-03    0.176       -7.573512  6.84e-03    all H      0/384      7.14e-02  8.55e-04  8.55e-04
+  96   3.8  [   -7.723580,    -7.437604]  2.86e-01   [   -7.579454,    -7.577824]  1.63e-03    0.187       -7.577824  1.63e-03    all H      0/768      3.57e-02  2.04e-04  2.04e-04
+
+=== coupling scan J = 1.0, smooth, tilted reference: n = 8, J = 1.0, wall W = 0.0 (sigma 0.6), reference tilted, seed 20261126; grid of 1440 points per angle: ln Z = -6.3609920874; grid of 2880: -6.3609920874 (difference -8.9e-16)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+  24  15.0  [   -7.528732,    -5.353004]  2.18e+00   [   -6.378089,    -6.265735]  1.12e-01    0.152       -6.265735  1.12e-01    all H      0/192      2.72e-01  1.40e-02  1.40e-02
+  48   7.5  [   -6.925091,    -5.837941]  1.09e+00   [   -6.365432,    -6.340023]  2.54e-02    0.175       -6.340023  2.54e-02    all H      0/384      1.36e-01  3.18e-03  3.18e-03
+  96   3.8  [   -6.638075,    -6.094416]  5.44e-01   [   -6.362120,    -6.356097]  6.02e-03    0.187       -6.356097  6.02e-03    all H      0/768      6.80e-02  7.53e-04  7.53e-04
+
+=== coupling scan J = 4.0, smooth, tilted reference: n = 8, J = 4.0, wall W = 0.0 (sigma 0.6), reference tilted, seed 20261126; grid of 1440 points per angle: ln Z = 8.7443195129; grid of 2880: 8.7443195129 (difference +0.0e+00)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+  24  15.0  [    5.132022,    11.284667]  6.15e+00   [    8.601424,     9.755606]  1.15e+00    0.124        9.755606  1.15e+00    all H      0/192      7.69e-01  1.44e-01  1.44e-01
+  48   7.5  [    7.088193,    10.127501]  3.04e+00   [    8.707293,     8.940269]  2.33e-01    0.159        8.940269  2.33e-01    all H      0/384      3.80e-01  2.91e-02  2.91e-02
+  96   3.8  [    7.951068,     9.467395]  1.52e+00   [    8.734919,     8.787401]  5.25e-02    0.179        8.787401  5.25e-02    all H      0/768      1.90e-01  6.56e-03  6.56e-03
+
+=== length scan n = 16, smooth, tilted reference: n = 16, J = 2.0, wall W = 0.0 (sigma 0.6), reference tilted, seed 20261126; grid of 1440 points per angle: ln Z = -3.2915986736; grid of 2880: -3.2915986736 (difference -8.9e-16)
+   k  cell   first-order bracket (minima/maxima)   second-order bracket (Jensen / bounded differences)    exact at   mixed rule: best upper end   threshold  M-cells   widths per site: first   second   mixed
+  24  15.0  [   -7.507983,    -0.105829]  7.40e+00   [   -3.392950,    -2.669040]  7.24e-01    0.140       -2.669040  7.24e-01    all H      0/384      4.63e-01  4.52e-02  4.52e-02
+  48   7.5  [   -5.253203,    -1.600961]  3.65e+00   [   -3.317904,    -3.163030]  1.55e-01    0.170       -3.163030  1.55e-01    all H      0/768      2.28e-01  9.68e-03  9.68e-03
+  96   3.8  [   -4.236135,    -2.416685]  1.82e+00   [   -3.298280,    -3.262527]  3.58e-02    0.187       -3.262527  3.58e-02    all H      0/1536     1.14e-01  2.23e-03  2.23e-03
+
+=== summary against the predictions of 21:53 UTC (research log)
+(i)   exponents between k = 24 and 96, case A: first-order width -1.005 (predicted within 0.1 of -1: met); second-order width -2.148 (predicted within 0.15 of -2: met)
+(ii)  position of the exact value in the second-order bracket, k >= 24: 24: 0.144, 48: 0.171, 96: 0.186, 144: 0.193, 288: 0.209  (predicted 0.15 to 0.34: MISSED)
+(iii) case A at k = 24: second-order width per site 0.0474 nats (predicted 0.02 to 0.15); 1e-3 nats per site at k = 147 cells per angle [interpolated] (predicted 100 to 300): met
+(iv)  wall of 20 kT: bounded differences alone wider than minima/maxima at every k <= 24: False; mixed rule at k = 96: width 2.529e-02 against 1.929e-02 without the wall, ratio 1.31 (predicted at most 3): MISSED
+
+=== scalings (not predicted)
+coupling J = 0.5: second-order width at k = 48: 6.838e-03; divided by J^2: 2.735e-02; position of the exact value 0.176
+coupling J = 1.0: second-order width at k = 48: 2.541e-02; divided by J^2: 2.541e-02; position of the exact value 0.175
+coupling J = 4.0: second-order width at k = 48: 2.330e-01; divided by J^2: 1.456e-02; position of the exact value 0.159
+coupling J = 2.0: second-order width at k = 48: 8.273e-02; divided by J^2: 2.068e-02
+length: second-order width per site at k = 48: n = 8: 1.034e-02; n = 16: 9.680e-03
+reference: second-order width at k = 48: tilted 8.273e-02, uniform 3.922e-01 (ratio 4.74)
+
+controls: (1) all-M equals the bracket from minima in all 41 partitions (asserted); (2) the Jensen value as an upper end is violated in 41 of 41; (3) largest difference between the grid and the grid of twice as many points: 8.9e-16
+every bracket contains the grid value in all 41 partitions and for every threshold (asserted)
+ALL DONE  90.2 s  peak memory 1245 MB

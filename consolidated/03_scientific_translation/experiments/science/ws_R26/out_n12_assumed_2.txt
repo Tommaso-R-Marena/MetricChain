@@ -1,0 +1,36 @@
+r26_n12.py block assumed runs 20; started 2026-11-26T22:53:38Z
+assumed class: Harper's tail functions for slope u = 1.0 on Q_12; ell0 = 1.661e-08, Vmax = 7.023e+10, A = 1.074731e-03
+seeds: run r of a cell uses numpy default_rng(100000*cell + r), r = 0..19; cells numbered in order
+ theta = 20.0
+  P0 (lam=1, eta=1/2, b=0.5, delta=0.05)   K=209 J=43 x_out=3.89 pi*=1.94e-01: runs 20; INVALID 20; aborts 0; median outer points 1672; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+      closing level s_j: median 3.337e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 1672, N high: median 31; closing pass populated in 0 runs
+  P1 (b=1)                                 K=209 J=43 x_out=4.39 pi*=1.94e-01: runs 20; INVALID 20; aborts 0; median outer points 1672; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+      closing level s_j: median 3.337e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 1672, N high: median 34; closing pass populated in 0 runs
+  P2 (b=0.25)                              K=209 J=43 x_out=3.65 pi*=1.94e-01: runs 20; INVALID 20; aborts 0; median outer points 1672; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+      closing level s_j: median 3.337e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 1672, N high: median 33; closing pass populated in 0 runs
+  P3 (lam=0.5)                             K=220 J=86 x_out=3.78 pi*=1.94e-01: runs 20; INVALID 20; aborts 0; median outer points 1760; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 1174 (min 1174, max 1174)
+      closing level s_j: median 2.024e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 1760, N high: median 34; closing pass populated in 0 runs
+  P4 (eta=0.3)                             K=499 J=43 x_out=3.78 pi*=1.94e-01: runs 20; INVALID 20; aborts 0; median outer points 1996; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+      closing level s_j: median 3.337e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 1996, N high: median 38; closing pass populated in 0 runs
+  P5 (delta=0.001)                         K=279 J=43 x_out=3.89 pi*=1.94e-01: runs 20; INVALID 20; aborts 0; median outer points 2232; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 712 (min 712, max 712)
+      closing level s_j: median 3.337e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 2232, N high: median 40; closing pass populated in 0 runs
+  P6 (kappa0=0.05)                         K=210 J=46 x_out=3.87 pi*=1.94e-01: runs 20; INVALID 20; aborts 0; median outer points 1680; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 709 (min 709, max 709)
+      closing level s_j: median 3.351e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 1680, N high: median 33; closing pass populated in 0 runs
+ theta = 1.0
+  P0 (lam=1, eta=1/2, b=0.5, delta=0.05)   K=215 J=43 x_out=2.88 pi*=3.17e-03: runs 20; INVALID 20; aborts 0; median outer points 220160; false certificates: q 0, plow 0, ell 20, TAIL 0; Chernoff events failed 0; width violated 0; L/A among the 20 runs with L > A: median 2.37 (min 2.37, max 2.37)
+      closing level s_j: median 4.013e-01 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 220160, N high: median 253; closing pass populated in 20 runs
+  P1 (b=1)                                 K=215 J=43 x_out=3.35 pi*=3.17e-03: runs 20; INVALID 20; aborts 0; median outer points 1761280; false certificates: q 0, plow 0, ell 20, TAIL 0; Chernoff events failed 0; width violated 0; L/A among the 20 runs with L > A: median 3.91 (min 3.91, max 3.91)
+      closing level s_j: median 1.091e+00 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 1761280, N high: median 379; closing pass populated in 20 runs
+  P2 (b=0.25)                              K=215 J=43 x_out=2.64 pi*=3.17e-03: runs 20; INVALID 20; aborts 0; median outer points 880640; false certificates: q 0, plow 0, ell 20, TAIL 0; Chernoff events failed 0; width violated 0; L/A among the 20 runs with L > A: median 3.05 (min 3.05, max 3.05)
+      closing level s_j: median 4.013e-01 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 880640, N high: median 233; closing pass populated in 20 runs
+  P3 (lam=0.5)                             K=226 J=86 x_out=2.52 pi*=3.17e-03: runs 20; INVALID 20; aborts 0; median outer points 7232; false certificates: q 0, plow 0, ell 0, TAIL 20; Chernoff events failed 0; width violated 0; A/U among runs with U < A: median 4200 (min 4200, max 4200)
+      closing level s_j: median 2.024e-07 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 7232, N high: median 135; closing pass populated in 0 runs
+  P4 (eta=0.3)                             K=514 J=43 x_out=2.54 pi*=3.17e-03: runs 20; INVALID 20; aborts 0; median outer points 526336; false certificates: q 0, plow 0, ell 20, TAIL 0; Chernoff events failed 0; width violated 0; L/A among the 20 runs with L > A: median 2.37 (min 2.37, max 2.37)
+      closing level s_j: median 4.013e-01 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 526336, N high: median 633; closing pass populated in 20 runs
+  P5 (delta=0.001)                         K=285 J=43 x_out=2.88 pi*=3.17e-03: runs 20; INVALID 20; aborts 0; median outer points 291840; false certificates: q 0, plow 0, ell 20, TAIL 0; Chernoff events failed 0; width violated 0; L/A among the 20 runs with L > A: median 2.37 (min 2.37, max 2.37)
+      closing level s_j: median 4.013e-01 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 291840, N high: median 348; closing pass populated in 20 runs
+  P6 (kappa0=0.05)                         K=216 J=46 x_out=2.82 pi*=3.17e-03: runs 20; INVALID 20; aborts 0; median outer points 221184; false certificates: q 0, plow 0, ell 20, TAIL 0; Chernoff events failed 0; width violated 0; L/A among the 20 runs with L > A: median 2.38 (min 2.38, max 2.38)
+      closing level s_j: median 4.030e-01 (bulk max 1.2e-7, layer |a|=10: 2.2e-6, spike >= 0.2855); closing pass M: median 221184, N high: median 260; closing pass populated in 20 runs
+assumed: number of VALID runs over all cells: 0
+exit violations: 0
+finished 2026-11-26T22:53:56Z; elapsed 17.7 s; peak memory 183 MB

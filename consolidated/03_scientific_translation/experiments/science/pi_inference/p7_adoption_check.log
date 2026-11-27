@@ -1,0 +1,20 @@
+# file | variant | sites, states | my checker: accepted (leaf checks, additions) | controls rejected (bound + 1 unit; first leaf alone) | brute force: min, attained at, value at the reference | relaxation at the root (kcal/mol; negative = no shares)
+p7_02_certB_K3_H_tau0.60_ff99SB.json | greedy blocks, shared leaves | 3 sites, 18270 states | True (21, 41538) | True; True | min 0, at 1 state(s), reference 0 | -0.000720   [0s]
+p7_02_certB_LKSE6_E_tau0.60_ff99SB.json | greedy blocks, shared leaves | 6 sites, 341172 states | True (27, 59346) | True; True | min 0, at 1 state(s), reference 0 | -3.621790   [0s]
+p7_02_certB_S6_E_tau0.60_ff03.json | greedy blocks, shared leaves | 6 sites, 531441 states | True (9, 17460) | True; True | min 0, at 1 state(s), reference 0 | -0.102553   [0s]
+p7_02_certB_S6_E_tau0.70_ff03.json | greedy blocks, shared leaves | 6 sites, 531441 states | True (9, 17460) | True; True | min 0, at 1 state(s), reference 0 | -0.102553   [0s]
+p7_02_cert_K3_H_tau0.60_ff99SB.json | one leaf per state | 3 sites, 18270 states | True (21, 41538) | True; True | min 0, at 1 state(s), reference 0 | -0.000720   [0s]
+p7_02_cert_L16_P2_tau0.60_ff99SB.json | one leaf per state | 16 sites, 65536 states | True (3, 3949) | True; True | min 0, at 1 state(s), reference 0 | -0.001189   [1s]
+p7_02_cert_LKSE6_E_tau0.60_ff99SB.json | one leaf per state | 6 sites, 341172 states | True (13, 44408) | True; True | min 0, at 1 state(s), reference 0 | -3.621790   [1s]
+p7_02_cert_S6_E_tau0.60_ff03.json | one leaf per state | 6 sites, 531441 states | True (9, 17460) | True; True | min 0, at 1 state(s), reference 0 | -0.102553   [1s]
+p7_02_cert_S6_E_tau0.70_ff03.json | one leaf per state | 6 sites, 531441 states | True (9, 17460) | True; True | min 0, at 1 state(s), reference 0 | -0.102553   [1s]
+all nine: accepted, both controls rejected, minimum 0 at the reference, relaxation negative at the root: True
+ring n = 4, w = 7/4, R = 10: minimum 0.0 at (0, 0, 0, 0), second value 0.25 (unique minimiser: True)
+   root: relaxation value -1.5000 (negative: no shares)
+   branch on site 0: leaf values (unchanged, changed) = -0.2500, 0.2500 -> certifies: False
+   branch on site 1: leaf values (unchanged, changed) = -0.2500, 0.2500 -> certifies: False
+   branch on site 2: leaf values (unchanged, changed) = -0.2500, 0.2500 -> certifies: False
+   branch on site 3: leaf values (unchanged, changed) = -0.2500, 0.2500 -> certifies: False
+   depth two, three leaves (i changed | i unchanged, j changed | both unchanged): sites (0, 1): certifies (0.250, 0.250, 0.000); sites (0, 2): certifies (0.250, 0.250, 0.000); sites (0, 3): certifies (0.250, 0.250, 0.000); sites (1, 2): certifies (0.250, 0.250, 0.000); sites (1, 3): certifies (0.250, 0.250, 0.000); sites (2, 3): certifies (0.250, 0.250, 0.000)
+   -> no shares at the root: True; no single site certifies: True; a depth-two tree with three leaves certifies: True
+ALL DONE 1 s

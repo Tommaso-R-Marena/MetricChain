@@ -1,0 +1,5 @@
+u=1: smallest n with X_0(n) <= h n: 470 (theirs 470);  X_0=13.6940, h n=13.6954, n_o=1, n_i=469, L=14, K=292, ln C_max = 101.08 (theirs e^101);  ln(K * C_1) = 35.98 with C_1 the base bracket of rung 1 (x_1 = 14, ln C_1 = 30.31) (theirs e^36);  base alone at (n, xhat): ln cost 29.42; enumeration n ln 2 = 325.78
+u=2: smallest n with X_0(n) <= h n: 202 (theirs 202);  X_0=19.5913, h n=19.6507, n_o=1, n_i=201, L=20, K=295, ln C_max = 124.89 (theirs e^125);  ln(K * C_1) = 43.25 with C_1 the base bracket of rung 1 (x_1 = 20, ln C_1 = 37.56) (theirs e^43);  base alone at (n, xhat): ln cost 36.21; enumeration n ln 2 = 140.02
+u=2.5: smallest n with X_0(n) <= h n: 187 (theirs 187);  X_0=25.3463, h n=25.3539, n_o=1, n_i=186, L=26, K=302, ln C_max = 141.77 (theirs e^142);  ln(K * C_1) = 49.00 with C_1 the base bracket of rung 1 (x_1 = 26, ln C_1 = 43.29) (theirs e^49);  base alone at (n, xhat): ln cost 41.96; enumeration n ln 2 = 129.62
+violations recorded by the node checks: 0
+LAST LINE r17_smallest_slope.py: completed; wall 0.0 s; peak RSS 31.2 MB

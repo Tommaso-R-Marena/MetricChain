@@ -1,0 +1,20 @@
+Outer loop of Algorithm 2L+ at medium size, grouped exact sample, bounded regime nu_1 = 2 e^u n_o/theta
+  u = 0.5, n_o = 300: cumulative runs 160, negligible levels so far 16, failures 0  (12 s)
+  u = 0.5, n_o = 400: cumulative runs 320, negligible levels so far 43, failures 0  (32 s)
+  u = 0.5, n_o = 600: cumulative runs 480, negligible levels so far 55, failures 0  (76 s)
+  u = 1.0, n_o = 100: cumulative runs 640, negligible levels so far 160, failures 0  (91 s)
+  u = 1.0, n_o = 150: cumulative runs 798, negligible levels so far 210, failures 0  (118 s)
+  u = 1.0, n_o = 200: cumulative runs 910, negligible levels so far 253, failures 0  (145 s)
+  u = 2.0, n_o = 36: cumulative runs 1070, negligible levels so far 558, failures 0  (159 s)
+  u = 2.0, n_o = 48: cumulative runs 1230, negligible levels so far 724, failures 0  (182 s)
+  u = 2.0, n_o = 60: cumulative runs 1334, negligible levels so far 958, failures 0  (204 s)
+  stats: {'runs': 1334, 'good': 1334, 'bad_event': 0, 'widest': 3.1061, 'width_slack': 0.0158, 'tightest_count': 0.7493, 'largest_M_over_Mdag': 3.4939, 'populated': 361847, 'negligible': 958, 'closed_empty': 68, 'closed_populated': 133, 'closed_unpopulated': 1133, 'runs_with_negligible_levels': 124, 'neg_share': 0.0038, 'skipped': 106, 'closed_at_r<=p_u*n_o': 372, 'closed_at_r<=r_dagger': 155, 'log10_M(min,median,max)': (5.17, 7.59, 18.65), 'runs_with_M>1e12': 389}
+  failures: 0
+medium-size suite passed (no failure; levels are left as negligible in the bounded regime): True   (204 s)
+
+Power of the test at this size (mutated algorithm, same checks, 3 repetitions per case and profile):
+  mutation noharper :  25 of 190 runs fail; kinds {'C5 Mneg bound': 30, 'C4 closure radius': 39};  expected check 'C4 closure radius' fires: True
+  mutation maxform  :  78 of 196 runs fail; kinds {'C2 width': 78};  expected check 'C2 width' fires: True
+  mutation neg_tol  :   5 of 198 runs fail; kinds {'C6 count lemma': 11};  expected check 'C6 count lemma' fires: True
+  mutation q_plain  : 100 of 206 runs fail; kinds {'C3 q < p(s)': 278};  expected check 'C3 q < p(s)' fires: True
+all mutations detected and unmutated suite clean: True   (328 s)

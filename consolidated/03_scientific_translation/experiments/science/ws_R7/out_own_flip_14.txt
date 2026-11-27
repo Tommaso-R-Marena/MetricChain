@@ -1,0 +1,7 @@
+n=14 conformations=3576871 valid single-flip ordered pairs=90718916
+c_sf: 57 92 109 118 137 154 147 147 154 137 118 109 92 57
+
+real	0m52.379s
+user	0m51.970s
+sys	0m0.004s
+Wed Nov 25 22:05:05 UTC 2026

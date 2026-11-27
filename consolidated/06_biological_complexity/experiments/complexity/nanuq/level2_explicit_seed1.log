@@ -1,0 +1,2 @@
+120 explicit rooted networks of level <= 2 (seed 1): {'nested blobs': 126, 'critical splits': 76, 'critical <= 0': 24, 'not galled': 120, 'max leaves': 10, 'several blobs': 15, 'other splits checked': 3172}
+only the critical splits can fail, and their weights equal the formula: True

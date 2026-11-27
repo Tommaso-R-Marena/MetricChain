@@ -1,0 +1,73 @@
+{
+ "seq": "S6",
+ "bb": "H",
+ "tau": 0.7,
+ "natoms": 78,
+ "n": 6,
+ "nstates": 104976,
+ "orders": {
+  "3": {
+   "n_subsets": 20,
+   "truth_sum": 0.20181019357225694,
+   "allplus_sum": 1.7848080853182182,
+   "onepattern_sum": 1.966195695080387,
+   "LS_sum": 2.0009080219752162,
+   "pair_sum": 3.5379335347447416,
+   "P3_sum": 16.97007690635321,
+   "rem_true": 0.06558989253425551,
+   "rem_allplus": 0.4459673157216457,
+   "rem_LS": 0.5353044615476392,
+   "Gamma": 16.970076906353203,
+   "pattern_minus_fraction": 0.07692307692307693,
+   "per_subset_search": true,
+   "LS_ratio_min": 4.375731228600209,
+   "LS_ratio_median": 12.555779259780081,
+   "LS_ratio_max": 29.895365420753098
+  },
+  "4": {
+   "n_subsets": 15,
+   "truth_sum": 0.005143475747949822,
+   "allplus_sum": 0.019307492580992403,
+   "onepattern_sum": 0.024052623431543907,
+   "LS_sum": 0.03541494242085882,
+   "pair_sum": 0.0824674519363028,
+   "P3_sum": 0.8488863330338239,
+   "rem_true": 0.0016273403683442211,
+   "rem_allplus": 0.005272629754472291,
+   "rem_LS": 0.009758512315784174,
+   "Gamma": 0.8488863330338237,
+   "pattern_minus_fraction": 0.6153846153846154,
+   "per_subset_search": true,
+   "LS_ratio_min": 3.6638088261100714,
+   "LS_ratio_median": 7.589647573539298,
+   "LS_ratio_max": 15.947223601460061
+  },
+  "5": {
+   "n_subsets": 6,
+   "truth_sum": 8.877261016948523e-05,
+   "allplus_sum": 0.0002555923674663063,
+   "onepattern_sum": 0.00028318467775534373,
+   "LS_sum": 0.0004778220999038378,
+   "pair_sum": 0.0012343338978278995,
+   "P3_sum": 0.01958525302812306,
+   "rem_true": 4.222302808898348e-05,
+   "rem_allplus": 0.00012596118176588789,
+   "rem_LS": 0.00014398097300727386,
+   "Gamma": 0.01958525302812306,
+   "pattern_minus_fraction": 0.23076923076923078,
+   "per_subset_search": true,
+   "LS_ratio_min": 2.5806298097753317,
+   "LS_ratio_median": 7.220023047396419,
+   "LS_ratio_max": 16.9862521989951
+  }
+ },
+ "chain_checks": {
+  "n": 246,
+  "violations": 0
+ },
+ "state_checks": {
+  "n": 944784,
+  "violations": 0,
+  "min_ratio": 31.701728876479685
+ }
+}

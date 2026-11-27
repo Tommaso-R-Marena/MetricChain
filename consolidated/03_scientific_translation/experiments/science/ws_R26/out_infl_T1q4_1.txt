@@ -1,0 +1,16 @@
+r26_influence.py block T1q4; started 2026-11-26T22:36:04Z
+T1: nearest-neighbour chain (r = 1), no clash; influence of the last outer site on the inner block, against the coupling scale J
+    n = 10 sites, cut after site 5 (inner length k = 5); seeds [0, 1, 2, 3, 4]; all ordered pairs of boundary states
+  q = 4 states per site
+     J              osc              pt         box D=1         box D=5        box D=20         Lip u=1
+     max  median     max  median     max  median     max  median     max  median     max  median
+   0.25   1.392   0.601   0.945   0.288   0.284   0.096   0.919   0.281   0.945   0.288   0.321   0.105
+   0.50   2.784   1.202   1.836   0.574   0.536   0.182   1.775   0.556   1.836   0.574   0.662   0.223
+   1.00   5.568   2.404   3.342   1.170   0.849   0.287   3.146   1.142   3.342   1.170   1.218   0.448
+   2.00  11.137   4.809   6.847   2.399   0.989   0.425   4.625   1.714   6.847   2.399   2.458   0.727
+   4.00  22.273   9.617  14.355   4.619   1.000   0.521   4.996   2.314  14.350   4.400   3.467   0.974
+   8.00  44.547  19.235  28.724   9.091   1.000   0.732   5.000   2.822  19.999   7.951   4.086   0.985
+T1 control violations: 0
+total control violations: 0
+LP solves by method (fallbacks after a failure of the default solver): {'highs': 360, 'highs-ds': 0, 'highs-ipm': 0, 'failed': 0}
+finished 2026-11-26T22:39:26Z; elapsed 202.3 s; peak memory 109 MB

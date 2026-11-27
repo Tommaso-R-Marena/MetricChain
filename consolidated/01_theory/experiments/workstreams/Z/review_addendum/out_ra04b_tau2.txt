@@ -1,0 +1,3 @@
+cube u = 1 closed form tau_2/a = min_phi max{(1-phi)a, phi a + (1-phi) theta(phi a/(1-phi))}/a = 0.5004100181 at phi = 0.49958998;   b_2/a = 0.5004100181;  difference -1.88e-16
+cube u = 2 closed form tau_2/a = min_phi max{(1-phi)a, phi a + (1-phi) theta(phi a/(1-phi))}/a = 0.5056154420 at phi = 0.49438456;   b_2/a = 0.5056154420;  difference -8.47e-17
+Gaussian pair closed form tau_2/a = min_phi max{(1-phi)a, phi a + (1-phi) theta(phi a/(1-phi))}/a = 0.5000000000 at phi = 0.50000000;   b_2/a = 0.5000000000;  difference 0.00e+00

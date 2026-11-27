@@ -1,0 +1,13 @@
+n=5: classes=30  exact-tie candidates (|slack|<1e-9, off-diagonal): 0  nearest non-tie: 5.2105e-04
+n=6: classes=60  exact-tie candidates (|slack|<1e-9, off-diagonal): 0  nearest non-tie: 2.7114e-04
+n=7: classes=136  exact-tie candidates (|slack|<1e-9, off-diagonal): 0  nearest non-tie: 1.1553e-04
+n=8: classes=291  exact-tie candidates (|slack|<1e-9, off-diagonal): 0  nearest non-tie: 1.8238e-05
+n=9: classes=639  exact-tie candidates (|slack|<1e-9, off-diagonal): 0  nearest non-tie: 4.4733e-06
+n=10: classes=1360  exact-tie candidates (|slack|<1e-9, off-diagonal): 0  nearest non-tie: 3.2482e-07
+n=11: classes=2908  exact-tie candidates (|slack|<1e-9, off-diagonal): 5  nearest non-tie: 1.2734e-07
+    {'L': 1.0, 'eps': 'N/2', 'centre': 'tt+tt-tt---', 'point': '+t+ttt++t--', 'gmin_point': 6, 'float_slack': -3.375077994860476e-14, 'D_float': 13.000000000000034, 'D_mp': '13.0', 'deviation_mp': '-2.4892e-60'}
+    {'L': 1.0, 'eps': 'N/2', 'centre': 'tt++t-tt+t-', 'point': '+t+ttt++t--', 'gmin_point': 6, 'float_slack': -1.4210854715202004e-14, 'D_float': 13.000000000000014, 'D_mp': '13.0', 'deviation_mp': '6.223e-60'}
+    {'L': 1.0, 'eps': 'N/2', 'centre': 'tt+tt-t++t-', 'point': '+t+t--ttt++', 'gmin_point': 6, 'float_slack': -1.7763568394002505e-14, 'D_float': 13.000000000000018, 'D_mp': '13.0', 'deviation_mp': '-1.2446e-60'}
+    {'L': 1.0, 'eps': 'N/2', 'centre': 'tt+tt-t-t++', 'point': '+t+t+ttt+++', 'gmin_point': 6, 'float_slack': -2.3092638912203256e-14, 'D_float': 13.000000000000023, 'D_mp': '13.0', 'deviation_mp': '2.987e-59'}
+    {'L': 1.0, 'eps': 'N/2', 'centre': 'tt+tt-t+t--', 'point': '+t+t-ttt+++', 'gmin_point': 6, 'float_slack': -3.730349362740526e-14, 'D_float': 13.000000000000037, 'D_mp': '13.0', 'deviation_mp': '2.4892e-60'}
+n=12: classes=6137  exact-tie candidates (|slack|<1e-9, off-diagonal): 0  nearest non-tie: 2.9286e-08

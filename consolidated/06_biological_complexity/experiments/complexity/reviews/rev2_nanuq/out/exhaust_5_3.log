@@ -1,0 +1,5 @@
+n=5: 3 tree shapes
+   after 1 insertion(s): {(1, 'galled OLP'): 138, (1, 'inserted'): 138, (1, 'level', 1): 138, (1, 'ok'): 138}  [0s]
+   after 2 insertion(s): {(2, 'galled OLP'): 3986, (2, 'inserted'): 12074, (2, 'level', 1): 1392, (2, 'level', 2): 2594, (2, 'ok'): 3986}  [7s]
+   after 3 insertion(s): {(3, 'galled OLP'): 76752, (3, 'inserted'): 576944, (3, 'level', 1): 5856, (3, 'level', 2): 33888, (3, 'level', 3): 37008, (3, 'ok'): 76752}  [235s]
+failures: 0

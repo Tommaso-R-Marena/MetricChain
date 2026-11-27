@@ -1,0 +1,22 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 states, anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 6; 495 raw stage-2 tables of workstream P9 from ws_P9/cache (sum of their maxima 18.17 kT)
+(0) ball of radius 3: 96366 values (ws_P8/cache/ball_K12_H_0.70_M3_ebe4086eaa.npz); guiding Gibbs sample (seed 4242, uncertified): 1.23 sites off the anchor on average [127s]
+(1) sandwich (window form of P9's stage 2; K(T): the least mean of the reduced table under the product of the guiding sample's one-site marginals); 110 evaluated terms exact in a window, 110 reduced, 15 pairs beyond the band.  With workstream P6's allocation of the floating-point allowance (as P9 built it): [517.117625, 517.139086], width 0.0214617; with the allowance attached to each evaluated term: certified bracket [517.117635, 517.139075], width D = 0.0214398 nats [5s, peak RSS 1185 MB]
+(2) exact means under the CEILING model, by the transfer matrix with one site held at each of its states in turn: 610 items, 234 by the forward route, 271 on the mirrored chain (85 of the two through a window inside the chain), 105 without a route; 30 groups (direction, held site, first site of the window): fwd0@2, fwd0@3, fwd0@4, fwd0@5, fwd0@6, fwd1@3, fwd1@4, fwd1@5, fwd1@6, fwd2@4, fwd2@5, fwd2@6, fwd3@5, fwd3@6, fwd4@6, rev7@6, rev8@5, rev8@6, rev9@4, rev9@5, rev9@6, rev10@3, rev10@4, rev10@5, rev10@6, rev11@2, rev11@3, rev11@4, rev11@5, rev11@6; largest deviation of a clamped total mass from one: 1.3e-12 [14s, peak RSS 1382 MB]
+| class | side | items | with a route | beta x mean on the Gibbs sample of the true ensemble (nats): items with a route; without |
+|---|---|---|---|---|
+| far | ceiling | 15 | 15 | 0.0112764; 0 |
+| far | floor | 15 | 15 | 0.0107905; 0 |
+| term | ceiling | 110 | 110 | 3.40979e-05; 0 |
+| term | floor | 110 | 110 | 5.60622e-05; 0 |
+| alloc | both | 360 | 255 | 0.000208046; 9.52436e-06 |
+| recovered | lower end by (LJ) | by (LP) | upper end by (UE) | by (UP) | corrected bracket: best lower, best upper | width (nats) | D / width |
+|---|---|---|---|---|---|---|---|
+| nothing (the sandwich) | — | — | — | — | [517.1176354, 517.1390752] | **0.02144** | 1.0 |
+| far pairs | 517.1279803 | 517.1282692 | 517.1290994 | 517.1289229 | [517.1282692, 517.1289229] | **0.0006538** | 32.8 |
+| far pairs and out-of-window terms | 517.1280265 | 517.1283171 | 517.1290511 | 517.1288743 | [517.1283171, 517.1288743] | **0.0005572** | 38.5 |
+| far pairs, terms and the allocation of the penalty | 517.1281634 | 517.1284560 | 517.1289081 | 517.1287298 | [517.1284560, 517.1287298] | **0.0002738** | 78.3 |
+(3) hypotheses m_+ - E >= s_+ and E - m_- >= s_- with new evaluations of the energy — states, violations (smallest margin, kcal/mol): Gibbs (seed 20261126): 480, 0 (1.0e-07); exact samples of the floor: 1000, 0 (1.0e-07); exact samples of the ceiling: 1000, 0 (1.0e-07); uniformly random: 300, 0 (3.4e-03); exactly 4 sites off: 1000, 0 (6.8e-06); exactly 5 sites off: 1000, 0 (1.5e-05); one or two sites off (inside the ball): 600, 0 (3.0e-07) — total 5380 states, 0 violations; controls that must fail on the same states: every item doubled: 6978 violations; far items of floor and ceiling exchanged: 3008 violations [51s]
+    sum <S+> against 20000 exact samples of the ceiling: exact 0.010528, sampled 0.0104957 ± 0.00018 nats (-0.2 standard errors) [1s]
+    sum <S-> against 20000 exact samples of the ceiling: exact 0.00989387, sampled 0.00969833 ± 0.00014 nats (-1.4 standard errors) [1s]
+(4) P9's raw tables entry by entry at 5000 random states with exactly 4 sites off the anchor (new evaluations of g; the remainder there is the exact anchored term of the changed set): violations of abs(remainder) <= table entry: 0; largest remainder 0.009186 kcal/mol; ratio entry / remainder: smallest 9.753, median 266.5; control that must fail (every table replaced by its minimum): 1943 violations [4s]
+ALL DONE 202 s; peak RSS 1382 MB

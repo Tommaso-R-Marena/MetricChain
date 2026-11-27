@@ -1,0 +1,28 @@
+1732 models: 1714 with shares, 18 with a gap, other statuses: []
+slack t of the share programme over the 1714 certified models: smallest 3.966e-05 kcal/mol (L14/P2 tau 0.60 so|ff99SB-ff14SB), median 0.7000; the rounding unit of the published instance is 2^-40 = 9.09e-13
+models with a gap: in 10 of 184 instance files; distinct (peptide, backbone): ['K3/H', 'K4/E', 'L16/P2', 'LKSE6/E', 'S5/E', 'S6/E']
+root certificates by shares 1714, by one triple 16
+
+gap models (x0 min. = the reference minimises the model, so the certificate certifies x0 for the class):
+instance    tau  model              x0 min. vertex den.       gap gap/margin | sites that certify leaves, 1 per state single-state splits closing triples
+K3/H        0.60 so|ff99SB-ff14SB       yes           2   0.00072       0.00 | [0, 1, 2]                           21                   4          1 of 1
+K3/H        0.60 en|ff14SB              yes           2   0.00072       0.00 | [0, 1, 2]                           21                   4          1 of 1
+K4/E        0.60 so|coul+GB              no           2   0.60540       1.93 | [0, 1, 2]                           25                   3          1 of 4
+K4/E        0.70 so|coul+GB              no           2   0.60540       1.93 | [0, 1, 2]                           13                   3          1 of 4
+L16/P2      0.60 so|ff99SB-ff14SB       yes           2   0.00119       2.16 | []                                None                   0        0 of 560
+LKSE6/E     0.60 so|ff03-ff14SB          no           2   0.63699       1.43 | [1, 3, 5]                           13                   4         1 of 20
+LKSE6/E     0.60 so|ff15ipq-ff14SB       no           2   3.36147       8.64 | [1, 3, 5]                           13                   0         1 of 20
+LKSE6/E     0.60 so|ff99SB-ff14SB       yes           2   3.62179      47.16 | [1, 3, 5]                           13                   0         0 of 20
+LKSE6/E     0.60 en|ff14SB              yes           2   2.24645       2.54 | [1, 3, 5]                           13                   0         1 of 20
+LKSE6/E     0.60 en|ff03                yes           2   1.33053       2.64 | [1, 3, 5]                           13                   1         1 of 20
+LKSE6/E     0.60 en|ff15ipq             yes           2   3.47464       9.23 | [1, 3, 5]                           13                   3         1 of 20
+S5/E        0.60 so|GB                   no           2   0.08043       0.51 | [1, 2, 3, 4]                         9                   3         1 of 10
+S5/E        0.70 so|GB                   no           2   0.08043       0.51 | [1, 2, 3, 4]                         9                   3         1 of 10
+S5/E        0.80 so|GB                   no           2   0.08043       0.51 | [1, 2, 3, 4]                         9                   3         1 of 10
+S6/E        0.60 so|GB                   no           3   0.20173       6.76 | [2, 3, 4]                            9                   0         0 of 20
+S6/E        0.60 so|ff03-ff14SB         yes           2   0.10255       1.18 | [2, 3, 4, 5]                         9                   8         2 of 20
+S6/E        0.70 so|GB                   no           3   0.20173       6.76 | [2, 3, 4]                            9                   0         0 of 20
+S6/E        0.70 so|ff03-ff14SB         yes           2   0.10255       1.18 | [2, 3, 4, 5]                         9                   8         2 of 20
+DONE p7_04b_tables
+[run_capped] peak anonymous resident memory 2 MB (cap 3500 MB); peak file-backed resident memory 7 MB; largest VmPeak 34 MB (ulimit -v not set); 0.3 s; exit 0
+exit 0

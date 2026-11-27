@@ -1,0 +1,347 @@
+
+====================================================================================================
+B1. Fraction of (site,state) pairs eliminated when E = E0 + residual, residual in BD(c)
+====================================================================================================
+   single-site rules (polynomial time)      |  exact information-theoretic limits (brute force)
+     c |  global-osc DEE |  differential DEE |  energy window (global osc) |  contact set (envelope) | (n=6, k=3, 40 instances)
+  0.05 |           0.131 |             0.156 |                       0.626 |                   0.654
+  0.10 |           0.103 |             0.153 |                       0.535 |                   0.635
+  0.20 |           0.039 |             0.125 |                       0.461 |                   0.592
+  0.40 |           0.026 |             0.137 |                       0.235 |                   0.478
+  0.80 |           0.001 |             0.083 |                       0.038 |                   0.322
+
+====================================================================================================
+B2. Residual evaluations needed for an eps-certificate: lower bound vs brute-force optimum
+====================================================================================================
+ kappa    eps |  forced (theorem) |  min certificate | all states
+  0.00   0.00 |              5.90 |             6.25 |          8
+  0.00   0.20 |              3.75 |             4.70 |          8
+  0.50   0.00 |              2.10 |             4.00 |          8
+  0.50   0.20 |              1.30 |             3.45 |          8
+  0.90   0.00 |              1.15 |             2.60 |          8
+  0.90   0.20 |              0.00 |             2.15 |          8
+
+====================================================================================================
+B3. Lower bounds on min_X ||Dhat - Delta(X)||_F (3-D realization error of predicted squared distances)
+====================================================================================================
+   L          model | strain bound |  trace bound |  best found | trace/strain | opt/trace
+   8   uniform bias |        2.000 |        2.828 |       3.401 |         1.41 |     1.202
+   8 gaussian noise |        1.522 |        1.529 |       1.750 |         1.00 |     1.145
+   8    scale error |        2.522 |        2.819 |       2.939 |         1.12 |     1.042
+  16   uniform bias |        3.464 |        6.928 |       7.665 |         2.00 |     1.106
+  16 gaussian noise |        4.600 |        4.601 |       4.871 |         1.00 |     1.059
+  16    scale error |        5.662 |        6.331 |       7.032 |         1.12 |     1.111
+  32   uniform bias |        5.292 |       14.967 |      16.232 |         2.83 |     1.085
+  32 gaussian noise |       10.069 |       10.069 |      10.296 |         1.00 |     1.022
+  32    scale error |       25.825 |       28.874 |      32.755 |         1.12 |     1.134
+  64   uniform bias |        7.746 |       30.984 |      33.971 |         4.00 |     1.096
+  64 gaussian noise |       21.131 |       21.132 |      21.487 |         1.00 |     1.017
+  64    scale error |       54.070 |       60.452 |      72.744 |         1.12 |     1.203
+
+====================================================================================================
+B4. Certified width of ln(Z/Z0) + beta<Delta>_0 for a residual with bounded differences c (product reference)
+====================================================================================================
+ beta*c | trivial b*osc |  Hoeffding |  McDiarmid | Rio (exact sup) | worst additive |  random BD
+   0.10 |         0.600 |      0.045 |      0.008 |           0.007 |          0.004 |      0.004
+   0.30 |         1.800 |      0.405 |      0.067 |           0.067 |          0.038 |      0.038
+   1.00 |         6.000 |      4.500 |      0.750 |           0.740 |          0.460 |      0.420
+   3.00 |        18.000 |     40.500 |      6.750 |           6.045 |          4.584 |      3.582
+  10.00 |        60.000 |    450.000 |     75.000 |          40.187 |         36.082 |     26.077
+
+====================================================================================================
+B5. Leaves needed to certify the optimum of m disjoint frustrated triangles
+====================================================================================================
+  m |  sum-free (brute force minimum) | theorem 2^m | with sum rule (2m)
+  1 |                               2 |           2 |                  2
+  2 |                               4 |           4 |                  4
+  4 |             (>= 2^m by theorem) |          16 |                  8
+  8 |             (>= 2^m by theorem) |         256 |                 16
+ 16 |             (>= 2^m by theorem) |       65536 |                 32
+ 32 |             (>= 2^m by theorem) |  4294967296 |                 64
+
+====================================================================================================
+B6. Thermal DEE: actual vs certified change of ln Z after pruning every state with Goldstein margin > gamma_min
+====================================================================================================
+ beta gamma_min | pruned frac |  actual dlnZ | certified dlnZ |  energy-window count bound
+  0.5       0.5 |       0.148 |     4.59e-01 |       1.03e+00 |                   2.42e+00
+  0.5       1.5 |       0.022 |     4.51e-02 |       1.14e-01 |                   6.99e-01
+  1.0       0.5 |       0.119 |     1.38e-01 |       5.15e-01 |                   3.27e+00
+  1.0       1.5 |       0.033 |     1.76e-02 |       6.12e-02 |                   9.74e-01
+  2.0       0.5 |       0.156 |     4.31e-02 |       3.03e-01 |                   3.53e+00
+  2.0       1.5 |       0.037 |     2.14e-03 |       1.17e-02 |                   8.83e-01
+  4.0       0.5 |       0.159 |     2.91e-03 |       6.32e-02 |                   3.56e+00
+  4.0       1.5 |       0.026 |     5.34e-06 |       3.94e-04 |                   1.36e-01
+
+====================================================================================================
+B7. Kabsch RMSD after i.i.d. torsion errors of size eps: actual vs reduced-inertia chain bound vs naive lever bound
+====================================================================================================
+torsions eps(rad) | actual RMSD | reduced-inertia bound | naive lever-arm bound
+       8     0.02 |      0.0245 |                0.0814 |                0.1574
+       8     0.10 |      0.1805 |                0.5291 |                1.1057
+      32     0.02 |      0.1178 |                0.6689 |                1.5494
+      32     0.10 |      0.6685 |                3.3486 |                7.6397
+      96     0.02 |      0.3899 |                3.8334 |                9.8673
+      96     0.10 |      2.0094 |               19.6117 |               47.0006
+
+====================================================================================================
+B8. Certificate complexity exponent on product landscapes (exact layer counts) and at finite temperature
+====================================================================================================
+ rho=e/c | R* (predicted) | n=25   | n=50   | n=100  | n=200  | n=400    [(1/n) ln max_mu L_mu]
+    0.25 |         0.3509 | 0.4107 | 0.3920 | 0.3751 | 0.3647 | 0.3587
+    0.50 |         0.1882 | 0.2356 | 0.2192 | 0.2073 | 0.1994 | 0.1947
+    0.75 |         0.0798 | 0.1360 | 0.1155 | 0.1004 | 0.0916 | 0.0866
+
+finite temperature, e/c = 1/2 (zero-temperature exponent R* = 0.1882):
+  beta*c | entropy H(pi) |   R_beta
+     0.5 |        0.6854 |   0.6857
+     1.0 |        0.6628 |   0.6658
+     4.0 |        0.3653 |   0.4817
+    40.0 |        0.0000 |   0.2159
+sharp site (e/c = 2: one evaluation certifies the ground state), beta*c = ln 2:
+   0.693 |        0.5004 |   0.5143   (verified one-shot bound: ln(6/5) = 0.1823)
+
+====================================================================================================
+B9. Best-first search: evaluations vs minimal cover N_cov(eps) vs shrunk cover (theta, eps/6)
+====================================================================================================
+ kappa | mean evals | mean N_cov | mean shrunk+1 | evals > N_cov+1 | max evals/N_cov
+   0.0 |       3.06 |       2.39 |          8.13 |           0.030 |            3.00
+   0.2 |       3.10 |       2.41 |          9.14 |           0.050 |            3.00
+   0.5 |       3.00 |       2.38 |          9.65 |           0.033 |            4.00
+   0.8 |       2.90 |       2.00 |          9.59 |           0.133 |            4.00
+hub instance with  4 leaves: best-first evaluates  5 points, the smallest certificate has 2
+hub instance with  8 leaves: best-first evaluates  9 points, the smallest certificate has 2
+hub instance with 16 leaves: best-first evaluates 17 points, the smallest certificate has 2
+
+====================================================================================================
+B10. Query complexity of every algorithm: three exponents for one site, and the threshold on the cube
+====================================================================================================
+two-state site, excitation e = 0.5, envelope constant c = 1, zero residual; zero-temperature exponent R* = 0.1882
+  beta |   H(pi) | R_beta (deterministic) | R^rand_beta (randomised, >=) | U_beta (randomised, <=) | eps1_crit
+  0.25 |  0.6912 |                 0.6912 |                       0.0019 |                  0.1168 |    0.0078
+  0.50 |  0.6854 |                 0.6857 |                       0.0076 |                  0.2162 |    0.0305
+  1.00 |  0.6628 |                 0.6658 |                       0.0275 |                  0.3647 |    0.1137
+  2.00 |  0.5822 |                 0.6054 |                       0.0811 |                  0.5210 |    0.3677
+  4.00 |  0.3653 |                 0.4817 |                       0.1541 |                  0.6304 |    0.9378
+ 10.00 |  0.0402 |                 0.3110 |                       0.1874 |                  0.6898 |    2.4966
+ 40.00 |  0.0000 |                 0.2159 |                       0.1882 |                  0.6931 |   10.0000
+two-state site, excitation e = 2.0, envelope constant c = 1, zero residual; zero-temperature exponent R* = 0.0000
+  beta |   H(pi) | R_beta (deterministic) | R^rand_beta (randomised, >=) | U_beta (randomised, <=) | eps1_crit
+  0.25 |  0.6628 |                 0.6635 |                       0.0018 |                  0.1106 |    0.0073
+  0.50 |  0.5822 |                 0.5879 |                       0.0061 |                  0.1782 |    0.0245
+  1.00 |  0.3653 |                 0.3967 |                       0.0129 |                  0.2001 |    0.0540
+  2.00 |  0.0901 |                 0.1471 |                       0.0095 |                  0.1104 |    0.0466
+  4.00 |  0.0030 |                 0.0192 |                       0.0012 |                  0.0178 |    0.0087
+ 10.00 |  0.0000 |                 0.0000 |                       0.0000 |                  0.0000 |    0.0000
+ 40.00 |  0.0000 |                 0.0000 |                       0.0000 |                  0.0000 |   -0.0000
+
+uniform cube (e = 0; the deterministic exponent is ln 2 = 0.6931 for every beta):
+u=beta*c | ln2 - h(rho0) |  LP value | U = ln(2/(1+e^-u)) | threshold ln cosh(u/2) | game value | n=100 | n=400 | n=1600   [(1/n) ln(2^n/|B(r*)|), eps = 0.5]
+   0.500 |       0.00767 |   0.00767 |            0.21907 |                0.03093 |    0.03093 | 0.02336 | 0.01308 | 0.00935
+   1.000 |       0.02914 |   0.02913 |            0.37989 |                0.12011 |    0.12011 | 0.05113 | 0.03604 | 0.03123
+   2.000 |       0.09728 |   0.09724 |            0.56622 |                0.43378 |    0.43378 | 0.11977 | 0.10441 | 0.09992
+   2.773 |       0.15614 |   0.15610 |            0.63252 |                0.75377 |    0.75377 | 0.18650 | 0.16366 | 0.15903
+
+accuracy regimes on the cube at the zero residual, u = 1 (exact ball counts against the predicted exponent;
+eps = e^{-lambda n}; for exponentially small accuracies the soft-gap exponent ln2 - h(rho0) = 0.0291 is NOT attained):
+ lambda | predicted | n=3200
+   0.00 |    0.0291 | 0.0303
+   0.02 |    0.0398 | 0.0410
+   0.05 |    0.0590 | 0.0603
+   0.10 |    0.1003 | 0.1016
+   0.30 |    0.3000 | 0.3003
+   0.60 |    0.6000 | 0.5997
+   0.80 |    0.6931 | 0.6931
+
+extensive accuracies eps = n eps1, u = 1 (threshold ln cosh(1/2) = 0.1201); exponent of the lower bound against ln2 - h((Lambda1 + eps1)/u):
+  eps1 | predicted | n=3200
+ 0.020 |    0.0202 | 0.0212
+ 0.048 |    0.0104 | 0.0114
+ 0.080 |    0.0032 | 0.0040
+ 0.110 |    0.0002 | 0.0006
+
+upper bound / lower bound at the zero residual, u = 1: ln UB - ln LB (without ln(1/delta) and 1 - 2 delta)
+  unhedged spot-check (must detect at level eps/2)  |  hedged spot-check (output ln Z(0) + eps/2 - 1)
+     n |   eps=2    ln n  sqrt n   0.02n   0.06n   0.10n  |    eps=2    ln n  sqrt n   0.02n   0.06n   0.10n
+   200 |     1.0     1.8     2.6     1.5     2.6     2.9  |      1.0     0.9     0.5     1.0     0.7     0.4
+   800 |     1.0     1.9     5.9     4.0     8.1     8.6  |      1.0     0.9     0.7     0.8     0.5     0.2
+  3200 |     1.0     2.4    13.1    14.2    29.9    30.4  |      1.0     1.0     0.8     0.8     0.5     0.2
+
+whole accuracy range, eta = min(1, eps/2): largest ln UB - ln LB over eps from e^{-0.69 n} to the threshold
+   n =   200:  max = 7.58   (ln(n+1) = 5.30)
+   n =   800:  max = 9.96   (ln(n+1) = 6.69)
+   n =  3200:  max = 7.38   (ln(n+1) = 8.07)
+
+threshold of the randomised lower bound at additive instances (site e/c = 1/2, beta = 1; residual difference gamma):
+  gamma | eps1_crit(gamma) | Jensen width W1(gamma)
+ -0.900 |          0.02243 |                0.42590
+ -0.500 |          0.08776 |                0.25827
+ -0.037 |          0.11383 |                0.11389   <- largest eps1_crit
+  0.000 |          0.11367 |                0.12246
+  0.500 |          0.08132 |                0.25740
+  0.900 |          0.01963 |                0.37781
+
+====================================================================================================
+B11. Beyond the cube: generalised dips, instance thresholds, and the hint-free threshold of two-state sites
+====================================================================================================
+single-letter lower bounds on the randomised exponent of ln Z (eps = o(n)) and thresholds; Hamming envelope c = 1, zero residual
+       site (energies), beta | R^rand (single dips) | R^gen (all vertices) | eps1_crit (dips) | eps1_thr (all)
+       two-state (0, 0.5), 1 |              0.02753 |              0.02753 |          0.11367 |        0.11367
+             flat 3-state, 1 |              0.03065 |              0.03065 |          0.11950 |        0.11950
+             flat 4-state, 1 |              0.02840 |              0.02914 |          0.10737 |        0.12011
+           flat 4-state, 0.5 |              0.00655 |              0.00767 |          0.02530 |        0.03093
+      three-state (0,0,2), 1 |              0.02467 |              0.02903 |          0.09472 |        0.11969
+      three-state (0,2,2), 1 |              0.01640 |              0.02011 |          0.06383 |        0.08364
+             flat 8-state, 1 |              0.01936 |              0.03093 |          0.06957 |        0.12235
+             flat 8-state, 2 |              0.09941 |              0.11986 |          0.33703 |        0.47257
+
+exact finite-n hitting numbers on flat k-state sites, u = 1, eps = 1 (uniform sampler, binomial tails): ln N for dips centred
+at boxes of m-subsets; m = 1 are the single dips
+   k = 4, n = 20000: m=1: 572.1, m=2: 586.8
+   k = 8, n = 1000: m=1: 22.2, m=2: 30.9, m=3: 33.5, m=4: 31.8
+
+hint-free threshold of identical two-state sites (c = 1): largest chord gap of P(theta) = ln(1 + e^{-beta(e+theta)}) over [-c, c]
+    e  beta |   theta* | eps* = G(theta*) | G(0) (zero residual) | untilted width | ln cosh(beta c/2)
+ 0.00  1.00 |  -0.0000 |          0.12011 |              0.12011 |        0.12011 |           0.12011
+ 0.50  1.00 |  -0.0372 |          0.11383 |              0.11367 |        0.12246 |           0.12011
+ 1.00  1.00 |  -0.0709 |          0.09728 |              0.09678 |        0.11094 |           0.12011
+ 2.00  1.00 |  -0.1195 |          0.05479 |              0.05400 |        0.06713 |           0.12011
+ 0.50  4.00 |  -0.2457 |          1.01703 |              0.93777 |        1.52319 |           1.32500
+-1.00  2.00 |   0.2027 |          0.23925 |              0.22872 |        0.32781 |           0.43378
+
+hint-free threshold of a class of identical sites, any alphabet: eps* = min_Q [max F_Q - min F_Q] (c = 1, beta = 1)
+       site (energies) | eps1_thr at the zero residual | eps* (class, no hint) | passive width at zero | Q*
+              (0, 0.5) |                       0.11367 |               0.11383 |               0.12246 | [0.6137 0.3863]
+             (0, 0, 2) |                       0.11969 |               0.11988 |               0.12208 | [0.4707 0.4707 0.0586]
+             (0, 2, 2) |                       0.08364 |               0.08432 |               0.09889 | [0.7717 0.1141 0.1141]
+             (0, 1, 3) |                       0.10177 |               0.10218 |               0.11500 | [0.6922 0.2711 0.0367]
+          flat 3-state |                       0.11950 |               0.11950 |               0.11950 | [0.3333 0.3333 0.3333]
+          flat 4-state |                       0.12011 |               0.12011 |               0.12011 | [0.25 0.25 0.25 0.25]
+
+====================================================================================================
+B12. Without a hint on the cube: Monte Carlo is optimal among non-adaptive algorithms
+====================================================================================================
+exponents at accuracy n*eps1 (eps1 as a fraction of the threshold ln cosh(u/2)):
+      u | eps1/thr | with a hint (zero residual) | non-adaptive = Monte Carlo |  ratio | Chebyshev bound ln cosh u
+ 0.5000 |     0.00 |                     0.00767 |                    0.03030 |  3.949 |                   0.12011
+ 0.5000 |     0.10 |                     0.00621 |                    0.01421 |  2.288 |                   0.12011
+ 0.5000 |     0.25 |                     0.00431 |                    0.00761 |  1.766 |                   0.12011
+ 0.5000 |     0.50 |                     0.00191 |                    0.00262 |  1.368 |                   0.12011
+ 0.5000 |     0.75 |                     0.00048 |                    0.00055 |  1.147 |                   0.12011
+ 0.5000 |     0.90 |                     0.00008 |                    0.00008 |  1.053 |                   0.12011
+ 1.0000 |     0.00 |                     0.02914 |                    0.11094 |  3.807 |                   0.43378
+ 1.0000 |     0.10 |                     0.02356 |                    0.05254 |  2.230 |                   0.43378
+ 1.0000 |     0.25 |                     0.01632 |                    0.02830 |  1.734 |                   0.43378
+ 1.0000 |     0.50 |                     0.00723 |                    0.00979 |  1.354 |                   0.43378
+ 1.0000 |     0.75 |                     0.00180 |                    0.00206 |  1.142 |                   0.43378
+ 1.0000 |     0.90 |                     0.00029 |                    0.00030 |  1.051 |                   0.43378
+ 2.0000 |     0.00 |                     0.09728 |                    0.32781 |  3.370 |                   1.32500
+ 2.0000 |     0.10 |                     0.07827 |                    0.16061 |  2.052 |                   1.32500
+ 2.0000 |     0.25 |                     0.05390 |                    0.08807 |  1.634 |                   1.32500
+ 2.0000 |     0.50 |                     0.02371 |                    0.03106 |  1.310 |                   1.32500
+ 2.0000 |     0.75 |                     0.00589 |                    0.00664 |  1.126 |                   1.32500
+ 2.0000 |     0.90 |                     0.00094 |                    0.00098 |  1.046 |                   1.32500
+ 2.7726 |     0.00 |                     0.15614 |                    0.46943 |  3.007 |                   2.08334
+ 2.7726 |     0.10 |                     0.12504 |                    0.23820 |  1.905 |                   2.08334
+ 2.7726 |     0.25 |                     0.08562 |                    0.13279 |  1.551 |                   2.08334
+ 2.7726 |     0.50 |                     0.03742 |                    0.04765 |  1.273 |                   2.08334
+ 2.7726 |     0.75 |                     0.00927 |                    0.01031 |  1.113 |                   2.08334
+ 2.7726 |     0.90 |                     0.00148 |                    0.00154 |  1.041 |                   2.08334
+
+finite n (delta = 0.05): ln(evaluations)/n for the non-adaptive lower bound and for the Monte Carlo sample size
+    u |    eps1 |     n |    R* |    lower |    r0 |    upper |    limit
+  1.0 |  0.0300 |   100 |    36 |  0.06238 |  None |  0.72491 |  0.02830
+  1.0 |  0.0300 |   400 |   149 |  0.03975 |   133 |  0.07137 |  0.02830
+  1.0 |  0.0300 |  1600 |   606 |  0.03179 |   594 |  0.03739 |  0.02830
+  1.0 |  0.0300 |  6400 |  2437 |  0.02933 |  2425 |  0.03069 |  0.02830
+  2.0 |  0.2169 |   100 |    37 |  0.05603 |    31 |  0.12475 |  0.03106
+  2.0 |  0.2169 |   400 |   149 |  0.03975 |   144 |  0.05361 |  0.03106
+  2.0 |  0.2169 |  1600 |   600 |  0.03370 |   595 |  0.03706 |  0.03106
+  2.0 |  0.2169 |  6400 |  2405 |  0.03182 |  2399 |  0.03273 |  0.03106
+
+fixed accuracy eps = 1 (n fixed): ln(evaluations)/n; the first bound (Gamma) is void there, the two-sided lemma (Gamma') is not
+    u |     n | first bound | two-sided | non-adaptive lower bound | KL(p_u||1/2) | Chebyshev ln cosh u
+  0.5 |  1000 |        void |    0.0598 |                   0.0297 |       0.0303 |              0.1201
+  0.5 |  4000 |        void |    0.0427 |                   0.0297 |       0.0303 |              0.1201
+  1.0 |  1000 |        void |    0.1630 |                   0.1089 |       0.1109 |              0.4338
+  1.0 |  4000 |        void |    0.1338 |                   0.1093 |       0.1109 |              0.4338
+  2.0 |  1000 |        void |    0.4101 |                   0.3233 |       0.3278 |              1.3250
+  2.0 |  4000 |        void |    0.3664 |                   0.3252 |       0.3278 |              1.3250
+
+Monte Carlo at a cone (n = 60, u = 1; 400 repetitions; weights sampled exactly through the binomial law of the distance):
+       M |  median ln(Ahat/A) |  1% quantile |  certified lower end -ln(2(1+Gamma)) | fraction below
+    1000 |             -0.764 |       -2.056 |                               -5.146 |          0.000
+   10000 |             -0.356 |       -1.075 |                               -4.305 |          0.000
+  100000 |             -0.131 |       -0.580 |                               -3.955 |          0.000
+ 1000000 |             -0.039 |       -0.224 |                               -3.734 |          0.000
+
+adaptive against non-adaptive on the pair (cone, cone with flattened bottom), delta = 0.05:
+    n |    u |      eps | adaptive evaluations | non-adaptive lower bound
+   60 |  1.0 |     1.80 |                   62 |                    e^4.9
+  200 |  1.0 |     6.01 |                  202 |                    e^9.3
+ 1000 |  1.0 |    30.03 |                 1002 |                   e^33.2
+
+====================================================================================================
+B13. Adaptive algorithms without a hint: the level recursion approaches the hinted exponent
+====================================================================================================
+T_k / theta_na at accuracy n*eps1 (eps1 as a fraction of the threshold; 0.00 stands for 1e-4);
+T_1 = theta_na (non-adaptive), T_{k+1} = min(T_k, R[T_k]) (k nested levels, Theorem 11.52); last row: theta_hint / theta_na
+
+u = 0.5:  a = theta_na(0+) = 0.03030,  h = theta_hint(0+) = 0.00767,  h/a = 0.2532
+    levels |   0.00 |   0.05 |   0.25 |   0.50 |   0.75 | max (T_k - theta_hint)/a
+         2 |  0.502 |  0.533 |  0.635 |  0.755 |  0.877 |   0.2390
+         3 |  0.360 |  0.432 |  0.579 |  0.732 |  0.872 |   0.0998
+         4 |  0.307 |  0.400 |  0.568 |  0.730 |  0.871 |   0.0482
+         5 |  0.285 |  0.390 |  0.565 |  0.730 |  0.871 |   0.0266
+         7 |  0.270 |  0.383 |  0.564 |  0.730 |  0.871 |   0.0119
+        10 |  0.264 |  0.380 |  0.564 |  0.730 |  0.871 |   0.0058
+        14 |  0.262 |  0.379 |  0.564 |  0.730 |  0.871 |   0.0034
+      hint |  0.258 |  0.378 |  0.564 |  0.730 |  0.871 |
+
+u = 1.0:  a = theta_na(0+) = 0.11094,  h = theta_hint(0+) = 0.02914,  h/a = 0.2626
+    levels |   0.00 |   0.05 |   0.25 |   0.50 |   0.75 | max (T_k - theta_hint)/a
+         2 |  0.503 |  0.539 |  0.643 |  0.758 |  0.879 |   0.2306
+         3 |  0.364 |  0.440 |  0.588 |  0.740 |  0.875 |   0.0940
+         4 |  0.315 |  0.411 |  0.578 |  0.738 |  0.875 |   0.0461
+         5 |  0.294 |  0.401 |  0.576 |  0.738 |  0.875 |   0.0258
+         7 |  0.280 |  0.394 |  0.575 |  0.738 |  0.875 |   0.0120
+        10 |  0.274 |  0.391 |  0.575 |  0.738 |  0.875 |   0.0059
+        14 |  0.271 |  0.390 |  0.575 |  0.738 |  0.875 |   0.0035
+      hint |  0.268 |  0.389 |  0.575 |  0.738 |  0.875 |
+
+u = 2.0:  a = theta_na(0+) = 0.32781,  h = theta_hint(0+) = 0.09728,  h/a = 0.2968
+    levels |   0.00 |   0.05 |   0.25 |   0.50 |   0.75 | max (T_k - theta_hint)/a
+         2 |  0.506 |  0.554 |  0.661 |  0.776 |  0.889 |   0.2003
+         3 |  0.383 |  0.470 |  0.621 |  0.763 |  0.887 |   0.0796
+         4 |  0.343 |  0.447 |  0.613 |  0.762 |  0.887 |   0.0399
+         5 |  0.327 |  0.439 |  0.611 |  0.762 |  0.887 |   0.0243
+         7 |  0.315 |  0.432 |  0.610 |  0.762 |  0.887 |   0.0125
+        10 |  0.309 |  0.429 |  0.610 |  0.762 |  0.887 |   0.0063
+        14 |  0.306 |  0.429 |  0.610 |  0.762 |  0.887 |   0.0036
+      hint |  0.302 |  0.428 |  0.610 |  0.762 |  0.887 |
+
+the fixed point (Theorem 11.53(b)): outer fraction phi* = g/(g + theta_hint(g)); the outer sample has exponent phi* theta_hint(g),
+each inner bracket (1 - phi*) theta_hint(g), at inner accuracy rate g;  identity theta_na(g + theta_hint(g)) = theta_hint(g):
+    u | g/eps* |   phi* | theta_hint(g) | theta_na(g + theta_hint(g)) | theta_na(g)
+  0.5 |   0.05 |  0.183 |      0.006923 |                    0.006923 |    0.018307
+  0.5 |   0.25 |  0.642 |      0.004311 |                    0.004311 |    0.007614
+  0.5 |   0.50 |  0.890 |      0.001915 |                    0.001915 |    0.002618
+  0.5 |   0.75 |  0.980 |      0.000478 |                    0.000478 |    0.000549
+  1.0 |   0.05 |  0.186 |      0.026273 |                    0.026273 |    0.067485
+  1.0 |   0.25 |  0.648 |      0.016320 |                    0.016320 |    0.028297
+  1.0 |   0.50 |  0.893 |      0.007231 |                    0.007231 |    0.009789
+  1.0 |   0.75 |  0.980 |      0.001805 |                    0.001805 |    0.002061
+  2.0 |   0.05 |  0.199 |      0.087493 |                    0.087493 |    0.204367
+  2.0 |   0.25 |  0.668 |      0.053897 |                    0.053897 |    0.088069
+  2.0 |   0.50 |  0.901 |      0.023709 |                    0.023709 |    0.031064
+  2.0 |   0.75 |  0.982 |      0.005892 |                    0.005892 |    0.006637
+
+when would it pay?  flat instance, u = 1, accuracy rate eps*/4, delta = 0.05; ln(evaluations) of the two-level
+algorithm with the constants of the proof (expectations in place of counts; best of a few (phi, b)) against the
+two-sample bracket at the same certified width:
+      n |  two-level | two-sample bracket |  phi |  width/n
+    500 |       70.1 |               20.1 |  0.9 |   0.0492
+   1000 |       54.1 |               34.0 |  0.8 |   0.0403
+   2000 |       72.5 |               62.4 |  0.8 |   0.0355
+   5000 |      130.8 |              147.2 |  0.8 |   0.0324
+  10000 |      222.5 |              288.6 |  0.8 |   0.0313
+  20000 |      414.6 |              571.5 |  0.8 |   0.0307

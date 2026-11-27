@@ -1,0 +1,13 @@
+seed 1 time 9s
+     of which Kalmanson for the induced order                56
+  level 1                                                    334
+  level 2                                                    726
+  level 3                                                    281
+  level 4                                                    104
+  level 5                                                    47
+  level 6                                                    8
+  networks                                                   1500
+  networks in K                                              1421
+  networks in K'                                             1421
+  networks outside K'                                        79
+  six-leaf restrictions not 6-locally good                   931

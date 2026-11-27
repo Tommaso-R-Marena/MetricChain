@@ -1,0 +1,16 @@
+(1) bJ=0.5 e=+0.00: r_mu* S1 0.0291391385  S2 0.0291391385  R_unif 0.0291391385  S1 - R_unif = +3.6e-12
+(1) bJ=0.5 e=+0.03: r_mu* S1 0.0163303375  S2 0.0163303375  R_unif 0.0163303375  S1 - R_unif = +3.9e-12
+(1) bJ=0.5 e=-0.04: r_mu* S1 0.0521876837  S2 0.0521876837  R_unif 0.0521876837  S1 - R_unif = +9.2e-13
+(1) bJ=1.0 e=+0.00: r_mu* S1 0.0291391385  S2 0.0291391385  R_unif 0.0291391385  S1 - R_unif = +4.6e-12
+(1) bJ=1.0 e=+0.03: r_mu* S1 0.0163303375  S2 0.0163303375  R_unif 0.0163303375  S1 - R_unif = +3.0e-12
+(1) bJ=1.0 e=-0.04: r_mu* S1 0.0521876837  S2 0.0521876837  R_unif 0.0521876837  S1 - R_unif = +9.0e-12
+(1) bJ=-2.0 e=+0.00: r_mu* S1 0.0291391385  S2 0.0291391385  R_unif 0.0291391385  S1 - R_unif = +6.1e-12
+(1) bJ=-2.0 e=+0.03: r_mu* S1 0.0163303375  S2 0.0163303375  R_unif 0.0163303375  S1 - R_unif = +1.1e-11
+(1) bJ=-2.0 e=-0.04: r_mu* S1 0.0521876837  S2 0.0521876837  R_unif 0.0521876837  S1 - R_unif = +6.1e-12
+(2) bJ=1.2: alpha(mu*) = 0.135043685; min of G_mu* on the 2000^2 grid = 0.135044142 at nu = (0.7306, 0.2694); min of G - alpha at distance > 0.05: +0.00158  => self-consistent: True;  contact set [(np.float64(0.039), np.float64(0.961))]
+(2) bJ=1.75: alpha(mu*) = 0.326386157; min of G_mu* on the 2000^2 grid = 0.326386614 at nu = (0.7306, 0.2694); min of G - alpha at distance > 0.05: +0.00091  => self-consistent: True;  contact set [(np.float64(0.012), np.float64(0.988))]
+(2) bJ=2.0: alpha(mu*) = 0.437467959; min of G_mu* on the 2000^2 grid = 0.437468416 at nu = (0.7306, 0.2694); min of G - alpha at distance > 0.05: +0.00061  => self-consistent: True;  contact set [(np.float64(0.007), np.float64(0.099)), (np.float64(0.271), np.float64(0.729)), (np.float64(0.901), np.float64(0.993))]
+
+real	0m22.113s
+user	0m52.908s
+sys	0m0.652s

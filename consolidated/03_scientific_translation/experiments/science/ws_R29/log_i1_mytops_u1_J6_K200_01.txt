@@ -1,0 +1,37 @@
+# my certified tops, cube pair, u = 1; K = 200 sample points (+66 near the top); levels up to 6
+# a in [0.1109440716717273595071092, 0.1109440716717273595071092]; abar - a <= 1.26e-29
+   level  1 built: top c_1 = 0.110944071671727, 4 hull lines, checker violations: 0
+   level  2 built: top c_2 = 0.055517995887575, 95 hull lines, checker violations: 0
+   level  3 built: top c_3 = 0.040306463033384, 150 hull lines, checker violations: 0
+   level  4 built: top c_4 = 0.034702669348934, 182 hull lines, checker violations: 0
+   level  5 built: top c_5 = 0.032327883334661, 198 hull lines, checker violations: 0
+   level  6 built: top c_6 = 0.031212943194171, 206 hull lines, checker violations: 0
+# independent exact checker: 0 violations over 6 steps;  pairs cross-checked in multiprecision: 841, violations 0
+# columns: j | my certified c_j | c_j/a (upper) | b_j semi-analytic (mp to j=6, then doubles) | (c_j - b_j)/(b_j - h) | their committed c_j | (theirs - b_j)/(b_j - h) | mine >= b_j | theirs >= b_j
+   1 | 0.110944071671727 | 1.000000000001 | 0.110944071671727 | +1.118e-28 | 0.110944071672 | +3.333e-12 | True | True
+   2 | 0.055517995887575 | 0.500414263251 | 0.055517524914778 | +1.785e-05 | 0.055517525617 | +2.662e-08 | True | True
+   3 | 0.040306463033384 | 0.363304342685 | 0.040306053374704 | +3.669e-05 | 0.040306053705 | +2.958e-08 | True | True
+   4 | 0.034702669348934 | 0.312794264949 | 0.034702356817925 | +5.618e-05 | 0.034702358332 | +2.722e-07 | True | True
+   5 | 0.032327883334661 | 0.291389011126 | 0.032326518531093 | +4.282e-04 | 0.032326527162 | +2.708e-06 | True | True
+   6 | 0.031212943194171 | 0.281339441792 | 0.031211123647228 | +8.782e-04 | 0.031211146822 | +1.118e-05 | True | True
+# all my tops >= semi-analytic envelope tops: True;   all their committed tops >= semi-analytic envelope tops: True
+# certified M_j(g) = max_B (B - V_j(B) g) at g = 0.1h, 0.5h, h (exact maxima over the vertices, mine):
+   j = 1: 0.108030158  0.096374503  0.081804934
+   j = 2: 0.052604083  0.040948427  0.026378858
+   j = 3: 0.037392550  0.025736894  0.017199862
+   j = 4: 0.031788756  0.023101688  0.016797912
+   j = 5: 0.029413970  0.022741688  0.016694013
+   j = 6: 0.028569479  0.022593685  0.016662380
+# controls (each must be REJECTED by the independent checker):
+   (c1) e' lowered by 2^-60 in every certificate: 94 violations
+   (c2) one stored slope raised by 2^-100: 1 violations
+   (c3) cap slope lowered by 2^-90: 1 violations
+   (c4) top lowered by 2^-100: 1 violations
+   (c5) abar := lower bound of a: 1 violations
+# controls rejected: 5 of 5
+MYTOPS: ALL CHECKS PASS
+R29-END r29_i1_mytops u=1 J=6 K=200 wall 7.2 s; address-space cap 3 GB; peak RSS 36.9 MB
+
+real	0m7.282s
+user	0m7.203s
+sys	0m0.028s

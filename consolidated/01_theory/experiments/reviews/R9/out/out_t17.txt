@@ -1,0 +1,14 @@
+p=0.3 u=1.0 theta=+0.847 n=50: -ln(min mu_H) = 35.9152;  n c_1 + ln Z_H = 35.9152  (c_1 = 0.6931, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 1.000
+p=0.3 u=1.0 theta=+0.847 n=400: -ln(min mu_H) = 279.3522;  n c_1 + ln Z_H = 279.3522  (c_1 = 0.6931, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 1.000
+p=0.2 u=4.0 theta=+1.386 n=50: -ln(min mu_H) = 36.7383;  n c_1 + ln Z_H = 36.7383  (c_1 = 0.6931, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 1.000
+p=0.2 u=4.0 theta=+1.386 n=400: -ln(min mu_H) = 280.2925;  n c_1 + ln Z_H = 280.2925  (c_1 = 0.6931, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 1.000
+p=0.5 u=1.0 theta=+0.000 n=50: -ln(min mu_H) = 35.9697;  n c_1 + ln Z_H = 35.9697  (c_1 = 0.6931, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 1.000
+p=0.5 u=1.0 theta=+0.000 n=400: -ln(min mu_H) = 279.4184;  n c_1 + ln Z_H = 279.4184  (c_1 = 0.6931, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 1.000
+p=0.1 u=2.0 theta=+2.197 n=50: -ln(min mu_H) = 41.3275;  n c_1 + ln Z_H = 41.3275  (c_1 = 0.7966, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.870
+p=0.1 u=2.0 theta=+2.197 n=400: -ln(min mu_H) = 321.0253;  n c_1 + ln Z_H = 321.0253  (c_1 = 0.7966, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.870
+p=0.05 u=2.0 theta=+2.944 n=50: -ln(min mu_H) = 64.9519;  n c_1 + ln Z_H = 64.9519  (c_1 = 1.2729, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.545
+p=0.05 u=2.0 theta=+2.944 n=400: -ln(min mu_H) = 511.3263;  n c_1 + ln Z_H = 511.3263  (c_1 = 1.2729, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.545
+p=0.01 u=1.0 theta=+4.595 n=50: -ln(min mu_H) = 181.5740;  n c_1 + ln Z_H = 181.5740  (c_1 = 3.6222, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.191
+p=0.01 u=1.0 theta=+4.595 n=400: -ln(min mu_H) = 1449.8574;  n c_1 + ln Z_H = 1449.8574  (c_1 = 3.6222, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.191
+p=0.95 u=1.0 theta=-2.944 n=50: -ln(min mu_H) = 104.7229;  n c_1 + ln Z_H = 104.7229  (c_1 = 2.0782, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.334
+p=0.95 u=1.0 theta=-2.944 n=400: -ln(min mu_H) = 832.7801;  n c_1 + ln Z_H = 832.7801  (c_1 = 2.0782, ln 2 = 0.6931); union bound of Theorem 11.52 void for phi > ln2/c_1 = 0.334

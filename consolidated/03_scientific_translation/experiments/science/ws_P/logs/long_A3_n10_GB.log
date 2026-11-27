@@ -1,0 +1,8 @@
+n=10 A3 GB site   0 (dist to end 1): sampled median   6.80 max  15.16 -> local search  19.25 kcal/mol   [23s]
+n=10 A3 GB site   3 (dist to end 4): sampled median   3.93 max  20.70 -> local search  26.55 kcal/mol   [47s]
+n=10 A3 GB site   5 (dist to end 6): sampled median   3.79 max  11.97 -> local search  35.17 kcal/mol   [73s]
+n=10 A3 GB site   9 (dist to end 10): sampled median   3.47 max  11.66 -> local search  24.99 kcal/mol   [99s]
+n=10 A3 GB site  10 (dist to end 10): sampled median   5.39 max  17.48 -> local search  25.31 kcal/mol   [116s]
+n=10 A3 GB site  13 (dist to end 7): sampled median   3.72 max  25.43 -> local search  29.91 kcal/mol   [134s]
+n=10 A3 GB site  17 (dist to end 3): sampled median   3.62 max  16.35 -> local search  21.53 kcal/mol   [154s]
+n=10 A3 GB site  19 (dist to end 1): sampled median   5.00 max  10.98 -> local search  16.18 kcal/mol   [180s]

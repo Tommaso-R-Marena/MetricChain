@@ -1,0 +1,11 @@
+  scan n=5 site 1/10  10s
+  scan n=5 site 2/10  18s
+  scan n=5 site 3/10  25s
+  scan n=5 site 4/10  33s
+  scan n=5 site 5/10  41s
+  scan n=5 site 6/10  48s
+  scan n=5 site 7/10  57s
+  scan n=5 site 8/10  65s
+  scan n=5 site 9/10  73s
+  scan n=5 site 10/10  80s
+scan n=5: 150 base conformations x 10 torsions x 36 angles; 80s

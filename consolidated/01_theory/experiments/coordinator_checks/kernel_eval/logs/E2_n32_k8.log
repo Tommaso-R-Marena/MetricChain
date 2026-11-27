@@ -1,0 +1,17 @@
+import took 225ms
+GNU MP: Cannot allocate memory (size=198688)
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E2_n32_k8.lean
+MEASURE wall_seconds: 17.48
+MEASURE user_seconds: 13.41
+MEASURE sys_seconds: 4.38
+MEASURE max_rss_kb: 3322064
+MEASURE polled_peak_rss_kb: 3317820
+MEASURE rss_watchdog_killed: no
+MEASURE result: killed by signal 6
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E2_n32_k8.lean
+RUN bytes: 1223444
+RUN sha256: bfa41a01e0dff19af1ab020ac75e0c4d892b307e415a9a88756d684328e29937
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 134
+RUN note: generated file deleted after the run (regenerable with gen.py)

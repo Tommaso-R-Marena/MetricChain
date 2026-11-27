@@ -1,0 +1,16 @@
+{
+"tag": "fb_LKSEc5_P2_R3_t0.60",
+"tau": 0.7,
+"seq": "LKSEL",
+"bb": "P2",
+"grid": "R3",
+"shape": [
+0,
+21,
+9,
+11,
+0
+],
+"natoms": 98,
+"empty": true
+}

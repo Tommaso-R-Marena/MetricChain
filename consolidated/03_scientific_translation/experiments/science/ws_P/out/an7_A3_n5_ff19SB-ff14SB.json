@@ -1,0 +1,93 @@
+{
+"alphabet": "A3",
+"n": 5,
+"residual": "ff19SB-ff14SB",
+"M": 28843,
+"c": [
+1.538077375230273,
+2.58985237585053,
+1.5380773752302836,
+2.589852375850519,
+1.5380773752302872,
+2.589852375850519,
+1.5380773752302836,
+2.589852375850519,
+1.5380773752302659,
+2.589852375850505
+],
+"same_min": true,
+"regret": 0.0,
+"e_f0": [
+12.657086705235795,
+null,
+null,
+null,
+null,
+18.842071353240865,
+null,
+12.6099801453123,
+null,
+7.058628543329462
+],
+"e_E": [
+14.059065252871424,
+null,
+null,
+null,
+null,
+19.237328568043917,
+null,
+13.005237360115352,
+null,
+7.453885758132515
+],
+"e_fs": [
+12.657086705235795,
+null,
+null,
+null,
+null,
+18.842071353240865,
+null,
+12.6099801453123,
+null,
+7.058628543329462
+],
+"sharp": 4,
+"sites_with_neighbour": 4,
+"sharp_at_minE": 4,
+"sites_with_neighbour_minE": 4,
+"kappa_max": 1.0,
+"thm117_margin": -19.754540666221246,
+"thm117_viol": 1802,
+"lambda_star": 0.04288387363912849,
+"lambda_star_hamming": 10,
+"lncosh": 10.808690752423812,
+"sandwich": 15.955275213460123,
+"dlnZ": 57.01468780468169,
+"jensen": 1.20566773925173,
+"H_E": 0.07935435024602935,
+"product_bound": 0.0,
+"lnsize": 3.58351893845611,
+"cover_eps0.000": {
+"forced": 1,
+"volume": NaN,
+"partition": NaN,
+"lower": 2,
+"greedy": 3
+},
+"cover_eps0.596": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 2,
+"greedy": 3
+},
+"cover_eps2.000": {
+"forced": 0,
+"volume": NaN,
+"partition": NaN,
+"lower": 2,
+"greedy": 3
+}
+}

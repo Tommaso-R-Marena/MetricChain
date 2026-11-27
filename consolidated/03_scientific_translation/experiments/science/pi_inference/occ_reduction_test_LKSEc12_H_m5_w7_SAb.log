@@ -1,0 +1,7 @@
+=== LKSE:12 on H, tau 0.6: 12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], 7.09201e+10 assignments; anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; order m = 5, band 7; constants: workstream P8's per-subset constants 'SAb', Gamma_5 = 42.84 kT; ball 3471783 evaluations [6s]
+(0) two Gibbs samples of the true ensemble, 960 states each (uncertified): off-anchor frequencies by site (sample that guides 'occ'): 0.14 0.35 0.57 0.37 0.00 0.03 0.26 0.33 0.00 0.06 0.35 0.46 [160s]
+| rule | reduced terms; sum of their sup-norm slacks (kcal/mol) | width with all penalties zero (nats) | form S: bracket, width | form B | form T | beta x mean of m_+ - m_- over the check sample (form T) | sandwich violated at Gibbs states (S, B, T) | 2000 floor samples of form T: violations |
+|---|---|---|---|---|---|---|---|---|
+| pair | 365; 0.5997 | 0.1721 | [652.276926, 675.045915] **22.77** | [654.400201, 665.422392] **11.02** | [654.863818, 659.350547] **4.487** | 1.899 | 0, 0, 0 | 0 |   [171s, peak RSS 2048 MB]
+| occ+ | 365; 0.6719; far pairs: 1 anchored, kept site i, 9 anchored, kept site j, 0 P3; first-order cost of the reductions on the guiding sample: terms 0.000487, far pairs 0.017 nats | 0.0167 | [652.405026, 674.981492] **22.58** | [654.520557, 665.350908] **10.83** | [654.981476, 659.282763] **4.301** | 1.744 | 0, 0, 0 | 0 |   [159s, peak RSS 2048 MB]
+ALL DONE 490 s; peak RSS 2048 MB

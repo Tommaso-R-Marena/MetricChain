@@ -1,0 +1,19 @@
+R23 re-run of the audit scripts, started 2026-11-26T17:56:09Z
+AA1_01_envelope_checks: exit 0, 0.4 s, output IDENTICAL to the stored one (24 lines, sha256 aaaa7cef6520bc2a)
+AA1_02_sandwich_dependence: exit 0, 1.0 s, output IDENTICAL to the stored one (58 lines, sha256 50a44d374385b4c7)
+AA1_03_near_sharp_sites: exit 0, 0.8 s, output IDENTICAL to the stored one (36 lines, sha256 c4fccd6ad73983ef)
+AA1_04_second_order_known_part: exit 0, 0.5 s, output IDENTICAL to the stored one (40 lines, sha256 208dcad83831d267)
+AA1_05_numbers: exit 0, 15.1 s, output IDENTICAL to the stored one (65 lines, sha256 049634690182cc92)
+AA1_06_misc: exit 0, 2.7 s, output IDENTICAL to the stored one (36 lines, sha256 a37cc56fbcbb4673)
+AA1_07_lean_names: exit 0, 0.1 s, output IDENTICAL to the stored one (6 lines, sha256 4c687f55779a6e23)
+AA2_s1: exit 0, 7.5 s, output IDENTICAL to the stored one (68 lines, sha256 efb4331421f230bf)
+AA2_s2: exit 0, 2.5 s, output IDENTICAL to the stored one (13 lines, sha256 87777b2e1314c8af)
+AA2_s3: exit 0, 17.9 s, output IDENTICAL to the stored one (39 lines, sha256 b1be2a69ece7a447)
+AA2_s4: exit 0, 117.5 s, output IDENTICAL to the stored one (244 lines, sha256 ae0d65581b2dce51)
+AA2_s5: exit 0, 39.7 s, output IDENTICAL to the stored one (11 lines, sha256 133ca2484f977b66)
+AA2_s6: exit 0, 0.2 s, output IDENTICAL to the stored one (24 lines, sha256 75b60c430d6ad69d)
+AA2_s7: exit 0, 0.0 s, output IDENTICAL to the stored one (40 lines, sha256 4f91687bb6ead534)
+AA2_s8: exit 0, 1.7 s, output IDENTICAL to the stored one (75 lines, sha256 bb2a9b692cc1f45d)
+SUMMARY: identical 15, differing 0, failed 0, of 15
+finished 2026-11-26T17:59:37Z
+END rerun_audit_scripts

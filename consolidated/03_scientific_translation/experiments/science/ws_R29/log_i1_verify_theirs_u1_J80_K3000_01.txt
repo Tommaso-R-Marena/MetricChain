@@ -1,0 +1,28 @@
+# independent verification of z6_certified_tops.py  (u = 1, J = 80, K = 3000)
+# their ABAR = 0.11094407167172736; my enclosure of a: [0.11094407167172736, 0.11094407167172736]; ABAR >= a rigorously: True;  ABAR - a <= 4.89e-18 (0.4 ulp)
+# columns: j | their c_j | stored lines | records | shadow == their step | their lines == my hull of them | checker violations | least margins in ulp: e', th, slope, beta
+   1 | 0.110944071671727 |   124 |  3050 | True | True | 0 | 0.00 0.00 3.50 3.50
+   2 | 0.055517525616906 |  1645 |  3142 | True | True | 0 | 0.00 0.00 2.71 2.39
+   3 | 0.040306053704987 |  2377 |  3186 | True | True | 0 | 0.00 0.00 2.52 2.22
+   4 | 0.034702358332073 |  2751 |  3221 | True | True | 0 | 0.00 0.00 2.51 2.33
+   5 | 0.032326527161773 |  2936 |  3251 | True | True | 0 | 0.00 0.00 2.66 2.14
+   6 | 0.031211146822121 |  3027 |  3280 | True | True | 0 | 0.00 0.00 2.64 2.10
+   7 | 0.030618889371183 |  3075 |  3304 | True | True | 0 | 0.00 0.00 2.74 2.16
+   8 | 0.030260072683082 |  3105 |  3323 | True | True | 0 | 0.00 0.00 2.57 2.21
+   9 | 0.030020604900574 |  3126 |  3340 | True | True | 0 | 0.00 0.00 2.40 2.34
+  10 | 0.029851194354217 |  3143 |  3352 | True | True | 0 | 0.00 0.00 2.41 2.05
+  11 | 0.029726615762852 |  3159 |  3365 | True | True | 0 | 0.00 0.00 2.44 2.31
+  12 | 0.029632248934822 |  3170 |  3375 | True | True | 0 | 0.00 0.00 2.39 2.22
+  20 | 0.029316298341777 |  3234 |  3436 | True | True | 0 | 0.00 0.00 2.63 2.21
+  30 | 0.029217948161823 |  3283 |  3486 | True | True | 0 | 0.00 0.00 2.52 2.13
+  40 | 0.029183507059866 |  3314 |  3519 | True | True | 0 | 0.00 0.00 2.52 2.27
+  50 | 0.029167547241349 |  3340 |  3542 | True | True | 0 | 0.00 0.00 2.59 1.87
+  60 | 0.029158868358113 |  3362 |  3567 | True | True | 0 | 0.00 0.00 2.39 2.16
+  70 | 0.029153640699704 |  3379 |  3580 | True | True | 0 | 0.00 0.00 2.51 2.07
+  80 | 0.029150243464455 |  3395 |  3595 | True | True | 0 | 0.00 0.00 2.59 2.10
+# steps 80; stored lines 257394; generated lines (records) 278704; checker violations 0; hull mismatches 0; time 254 s
+# least margins over the run, in ulp of the stored double (all must be >= 0): e' 0.00, th 0.00, slope 2.20, beta 1.83
+# tops below the semi-analytic envelope tops (doubles, tolerance 1e-12): 0   [must be 0]
+# committed output out_z6_certified_u1.txt (K = 3000): 0 of 80 tops differ in the 12 printed decimals
+VERIFY-THEIRS: ALL CHECKS PASS
+R29-END r29_i1_verify_theirs u=1 J=80 K=3000 wall 255.4 s; address-space cap 3 GB; peak RSS 388.0 MB

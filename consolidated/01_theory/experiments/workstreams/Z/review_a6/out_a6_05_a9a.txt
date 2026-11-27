@@ -1,0 +1,76 @@
+# cube, u = 1:  a = 0.110944071672, h = 0.029139138502, L = 0.490034276, vth = theta_hint''(0) = -1/J''(L) = 4.244977567, eps* = 0.120114507, c_*^2 = 0.071147322
+(A) Lemma A9': r_0 and eta_0
+    J(t) <= h - (L - t)^2/(4 vth) holds on ALL of [0, L] (least slack 3.536e-09 at t = 0.4898): r_0 = L, and eta_0 may be any number below h
+    (h - J(t))/((L - t)^2/(2 vth)) at L - t = 1e-3, 1e-2, 0.1, 0.3, L: 1.00008, 1.00080, 1.00766, 1.02074, 1.03022   (-> 1 as t -> L: (H1))
+  [ok] (H1) for this pair: the ratio tends to one, and stays above 1/2 on [L - r_0, L] 
+(B) Lemma A9'
+       eta/h      L - t1(h-eta)   2 sqrt(vth eta)   J'(t1(h-eta))   eta/(L-t1)   sqrt(eta/vth)/2   kappa(h-eta)   mu_eta    (1-kappa)/(1-mu)   max_i,B [t1 - p_i - t1 mu^i]
+     9.00e-01   4.651293e-01   6.673095e-01    1.138886e-01   5.638265e-02   3.929994e-02    0.00068025   0.42576753      1.740          +8.44e-16
+     5.00e-01   3.476598e-01   4.973831e-01    8.458088e-02   4.190755e-02   2.929245e-02    0.02901454   0.49868813      1.937          +1.78e-15
+     2.00e-01   2.206868e-01   3.145727e-01    5.318181e-02   2.640768e-02   1.852617e-02    0.14455700   0.61132801      2.201          +2.55e-15
+     5.00e-02   1.107521e-01   1.572864e-01    2.641454e-02   1.315512e-02   9.263085e-03    0.40073406   0.75878779      2.484          +2.16e-15
+     1.00e-02   4.964187e-02   7.034060e-02    1.176198e-02   5.869871e-03   4.142578e-03    0.66802058   0.87552993      2.667          +1.73e-14
+     1.00e-03   1.571881e-02   2.224365e-02    3.709848e-03   1.853775e-03   1.309998e-03    0.88055946   0.95697750      2.776          +1.69e-16
+     1.00e-04   4.972843e-03   7.034060e-03    1.172163e-03   5.859653e-04   4.142578e-04    0.96058607   0.98598274      2.812          +1.68e-16
+     1.00e-06   4.973732e-04   7.034060e-04    1.171745e-04   5.858606e-05   4.142578e-05    0.99598703   0.99858036      2.827          +7.32e-17
+  [ok] the chain of inequalities, kappa(B) <= mu_eta for all B <= h - eta, and 0 <= t_1 - p_i <= t_1 mu_eta^i (i < 400, 50 intercepts per eta) 
+    (1 - kappa)/(1 - mu) -> 2 sqrt 2 = 2.828 as eta -> 0: the contraction is 1 - sqrt(2 eta/vth)/h, the lemma has 1 - sqrt(eta/vth)/(2h))
+(C) Proposition A11'
+    m(g)/(vth g^2/2) at g = 1e-3h, 0.1h, h, 2h, eps*: 1.0000, 0.9990, 0.9908, 0.9830, 0.9706
+    the three conditions on g_0 hold on (0, g_0] with g_0 = 0.39165 = 13.441 h = 3.261 eps*   (first to fail: m(g) >= vth g^2/4)
+  [ok] g_0 >= eps*: Proposition A11' applies at every rate at which theta_hint > 0 (this pair) 
+    computing the envelope sequence to 450 levels, both ways (K = 6000, refined) ...
+    ... 63 s;   bracket of b_k - h at k = 10, 100, 450:  [7.120093e-04, 7.120190e-04], [7.099876e-06, 7.105760e-06], [3.498562e-07, 3.513324e-07]
+    sup_k k^2 (b_k - h)/c_*^2 over 1 <= k <= 450: 1.4830 (at k = 2)   [this is C''/c_*^2 of Proposition A7 as far as computed]
+    the coordinator's certified c_k (run to 400 levels, K = 4000) against the bracket [grid, lines] of b_k, as k^2 (. - h)/c_*^2:
+      k =  50:  bracket [0.99704, 0.99743]   certified 0.99759
+      k = 100:  bracket [0.99791, 0.99874]   certified 0.99897
+      k = 200:  bracket [0.99824, 0.99936]   certified 0.99970
+      k = 300:  bracket [0.99806, 0.99979]   certified 1.00017
+      k = 400:  bracket [0.99623, 0.99977]   certified 1.00091
+  [ok] the coordinator's certified tops at k = [50, 100, 200, 300, 400] are above the floating-point lower bracket of the envelope tops | least (c_k - grid_k)/(b_k - h): 5.6e-04
+      g/h    eta_g/h     (L-t1(h-eta_g))g   vth g^2/12    m(g)/3      mu      k_2(g) [grid, lines]   k_2 g/h   104.5..   inequality at k_2..k_2+25   defect(k_2)
+     2.00   8.590e-04      8.4907e-04      1.2015e-03   2.3621e-03   0.960000   [  53,   53]           106.00    104.52      holds (bound 5.828e-02 .. 2.100e-02)      1.97e-10
+     1.00   2.147e-04      2.1233e-04      3.0036e-04   5.9521e-04   0.979592   [ 105,  105]           105.00    104.52      holds (bound 2.914e-02 .. 1.740e-02)      2.80e-10
+     0.50   5.369e-05      5.3090e-05      7.5091e-05   1.4947e-04   0.989691   [ 209,  209]           104.50    104.52      holds (bound 1.457e-02 .. 1.124e-02)      1.73e-09
+     0.25   1.342e-05      1.3273e-05      1.8773e-05   3.7454e-05   0.994819   [ 418,  419]           104.75    104.52      holds (bound 7.285e-03 .. 6.398e-03)      6.40e-10
+  [ok] for each rate: mu_{eta_g} = (1 + g/(48h))^-1, (L - t_1(h - eta_g)) g <= vth g^2/12 <= m/3, and the inequality of A11' for k_2 <= k <= k_2 + 25 
+  [ok] Lemma A10 as used: the tangency point B_t(k) of the cap line is beyond h - eta_g for all k >= k_2(g) computed 
+    more is true numerically (the earlier referee): B_t(k) > h for every 2 <= k <= 450: True;  B_t(1) = 0.1570 h;  (B_t(k) - h)/(b_k - h) at k = 2, 5, 20, 100: 0.0487, 0.5559, 0.9058, 0.9807
+    so the first condition in the definition of k_2(g) is far from necessary for this pair: with the second alone, k_2 g/h would be sqrt(24) pi = 15.4 instead of 104.5
+    how conservative (defect = M_k(g) - theta_hint(g); 'grid' and 'lines' bracket it):
+      g/h   true decay per level (ratio of consecutive defects, where 1e-4 > defect/g > 1e-8)   kappa_g = 1 - g/(J(t_g) + (1 - t_g) g)   e^{-g/h}   mu = (1 + g/(48h))^-1   ln(1/kappa_g)/ln(1/mu)
+      2.00   lines 0.11717, grid 0.11458 (k = 4..8)                 0.11626        0.13534     0.96000        52.7
+      1.00   lines 0.36708, grid 0.36031 (k = 8..15)                0.36356        0.36788     0.97959        49.1
+      0.50   lines 0.60730, grid 0.59493 (k = 15..26)               0.60641        0.60653     0.98969        48.3
+      0.25   lines 0.78511, grid 0.76479 (k = 26..50)               0.77902        0.77880     0.99482        48.1
+      g/h    n      levels needed for n (M_k(g) - theta_hint(g)) <= 1: computed [grid, lines]     the proof: k_2(g) + ceil(ln(g n)/ln(1 + g/(48h)))     ratio
+      2.00   1e+04   [3, 3]                                                                      209                                        69.7
+      2.00   1e+06   [5, 5]                                                                      322                                        64.4
+      2.00   1e+09   [8, 8]                                                                      492                                        61.5
+      1.00   1e+04   [5, 5]                                                                      381                                        76.2
+      1.00   1e+06   [9, 9]                                                                      604                                        67.1
+      1.00   1e+09   [16, 17]                                                                      939                                        55.2
+      0.50   1e+04   [7, 7]                                                                      690                                        98.6
+      0.50   1e+06   [15, 15]                                                                      1135                                        75.7
+      0.50   1e+09   [27, 37]                                                                      1801                                        48.7
+      0.25   1e+04   [10, 10]                                                                      1245                                        124.5
+      0.25   1e+06   [25, 25]                                                                      2132                                        85.3
+      0.25   1e+09   [49, 59]                                                                      3461                                        58.7
+(D) the observation A8':  sup_{g >= 0} [M_k(g) - theta_hint(g)] = b_k - h
+      k    b_k - h (grid, lines)        max_{g>0} [D_k(g) - D_k(0)]/(b_k - h)  (grid, lines)     dual form: sup_B [B - J(min(W_k(B), L))]/(b_k - h)  (grid, lines; = 1, at B = b_k)     second largest local value, at B/b_k (lines)
+      2   2.637839e-02, 2.637839e-02          -5.63e-10, -5.63e-10                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.190495 at 0.6154
+      3   1.116691e-02, 1.116691e-02          -1.33e-09, -1.33e-09                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.177233 at 0.7721
+      5   3.187380e-03, 3.187380e-03          -4.66e-09, -4.66e-09                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.220331 at 0.9231
+      8   1.120900e-03, 1.120908e-03          -1.33e-08, -1.33e-08                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.244787 at 0.9720
+     12   4.930549e-04, 4.930675e-04          -3.01e-08, -3.01e-08                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.247279 at 0.9875
+     20   1.771131e-04, 1.771391e-04          -8.39e-08, -8.39e-08                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.246997 at 0.9954
+     40   4.431861e-05, 4.433195e-05          -3.35e-07, -3.35e-07                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.243082 at 0.9989
+     60   1.971027e-05, 1.971913e-05          -7.54e-07, -7.54e-07                    1.000000000, 1.000000000 (at B/b_k = 1.000000)                                   0.225306 at 0.9995
+  [ok] the defect is largest at accuracy zero at k = 2, 3, 5, 8, 12, 20, 40, 60 (both brackets; 6000 rates up to 5 eps*), and the dual form holds 
+    the inequality that the 'obvious induction' needs near the top:  (b_k - h)^2/(vth h^2) >= b_k - b_{k+1}
+      k = 4: 8.59e-03 >= 2.38e-03;  k = 6: 1.19e-03 >= 5.92e-04;  k = 8: 3.49e-04 >= 2.39e-04;  k = 9: 2.16e-04 >= 1.69e-04;  k = 10: 1.41e-04 >= 1.25e-04;  k = 11: 9.57e-05 >= 9.44e-05;  k = 12: 6.74e-05 < 7.33e-05;  k = 15: 2.75e-05 < 3.82e-05;  k = 20: 8.70e-06 < 1.65e-05
+      it fails from k = 12 on (the addendum: 'from about ten levels on';  asymptotically k > pi^2 = 9.87)
+
+time 64 s
+ALL CHECKS PASS

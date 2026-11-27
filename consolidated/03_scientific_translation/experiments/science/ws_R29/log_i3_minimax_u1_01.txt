@@ -1,0 +1,15 @@
+# minimax step at the exponent level, cube u = 1: 97 convex families x 11 rates
+    cases 1067;  violations of LHS <= RHS1 (tolerance 2e-9 a): 201;  violations of RHS1 <= M_{W',b'}(g) (tolerance 1e-7 a): 396
+    largest LHS - RHS1 = 3.76e-02 a;  largest |LHS - RHS1| = 1.05e+09 a  (the minimax identity is an equality);  largest RHS1 - M_{W',b'} = 1.05e+09 a
+    VIOLATION: envelope W_0 (flat, b = a)  g = 0.003 eps*  LHS 0.099346149133  RHS1 0.099346148538  M' 0.110944071561
+    VIOLATION: envelope W_0 (flat, b = a)  g = 0.03 eps*  LHS 0.076376191408  RHS1 0.076376189525  M' 0.110944071561
+    VIOLATION: envelope W_0 (flat, b = a)  g = 0.1 eps*  LHS 0.052537486866  RHS1 0.052537483422  M' 0.110944071561
+    VIOLATION: envelope W_0 (flat, b = a)  g = 0.3 eps*  LHS 0.023196475553  RHS1 0.023196469563  M' 0.110944071561
+    VIOLATION: envelope W_0 (flat, b = a)  g = 0.6 eps*  LHS 0.005812769877  RHS1 0.005812761352  M' 0.110944071561
+    VIOLATION: envelope W_0 (flat, b = a)  g = 0.9 eps*  LHS 0.000303349255  RHS1 0.000303338751  M' 0.110944071561
+    VIOLATION: envelope W_0 (flat, b = a)  g = 0.999 eps*  LHS 0.000000039957  RHS1 0.000000028869  M' 0.110944071561
+    VIOLATION: envelope W_0 (flat, b = a)  g = 1 eps*  LHS 0.000000011094  RHS1 0.000000000000  M' 0.110944071561
+    control 2 (two levels' gain claimed for one: LHS <= M_{W'',b''}(g)): fails in 428 of 1067 cases  [must be > 0]
+CONTROL (families that are not convex): the line-by-line value is below the minimax value in 67 of 160 cases, by up to 0.251 a  [must be > 0]
+MINIMAX: CHECK FAILED
+R29-END r29_i3_minimax u=1 wall 11.9 s; address-space cap 3 GB; peak RSS 34.1 MB

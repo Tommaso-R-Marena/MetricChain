@@ -1,0 +1,35 @@
+(1) the tables
+  [ok] addendum, table of A6b: all 30 entries are the printed ratios of the stored outputs (u = 1: j <= 80 from the K = 3000 run, 200 and 400 from the K = 4000 run) 
+  [ok] theory report, table of Theorem 11.58e(f): all 29 entries are the stored ratios rounded UP to six digits (so they are valid whatever the last-digit rounding of the script's print) 
+(2) quoted figures of A6b
+  [ok] h/a at u = 1: 0.262647098 (addendum: 0.262647098) 
+  [ok] h/a at u = 2: 0.296757027 (addendum: 0.296757) 
+  [ok] h/a at u = 0.5: 0.253231070 (addendum: 0.253231) 
+     u = 1: (c_j - b_j)/(b_j - h), b_j the coordinator's floating-point envelope top: least 3.50e-08 (j = 2), largest 2.54e-03 (j = 78)
+     u = 2: (c_j - b_j)/(b_j - h), b_j the coordinator's floating-point envelope top: least 2.78e-08 (j = 2), largest 9.20e-04 (j = 40)
+     u = 1/2: (c_j - b_j)/(b_j - h), b_j the coordinator's floating-point envelope top: least 2.32e-08 (j = 2), largest 6.52e-04 (j = 31)
+  [ok] 'the certified tops exceed the floating-point envelope tops by 3e-8 to 2e-3 of their distance to h (the larger figure at 80 levels)' | over the three stored runs: 2.3e-08 to 2.5e-03; the largest is at j = 78 of u = 1 (2.54e-03), not at 80 (1.69e-03)
+  [ok] 'at 400 levels j^2 (c_j - h)/c_*^2 = 1.0009' | stored: 1.000915
+(3) what the printed decimals certify: a re-run of the coordinator's script (u = 1, K = 3000, 8 levels)
+       j   c_j as a double (exact decimal, 20 digits)   printed '%.12f'    printed below the double?    ratio double (17 digits)   printed '%.9f'   below?
+       1   0.11094407167172735951                    0.110944071672        False                    1.00000000000000044        1.000000000      True
+       2   0.05551752561690591337                    0.055517525617        False                    0.50041002444165616        0.500410024      True
+       3   0.04030605370498695911                    0.040306053705        False                    0.36330065318179994        0.363300653      True
+       4   0.03470235833207337833                    0.034702358332        True                     0.31279146158214088        0.312791462      False
+       5   0.03232652716177270014                    0.032326527162        False                    0.29137678719259325        0.291376787      True
+       6   0.03121114682212073471                    0.031211146822        True                     0.28132325010092901        0.281323250      True
+       7   0.03061888937118266776                    0.030618889371        True                     0.27598490761886740        0.275984908      False
+       8   0.03026007268308181578                    0.030260072683        True                     0.27275069525678147        0.272750695      True
+  [ok] the stored output (out_z6_certified_u1.txt) is reproduced for j = 1..8: same printed tops, ratios and numbers of lines 
+  [ok] the printed decimals are roundings to NEAREST of the certified doubles: 4 of 8 printed tops and 6 of 8 printed ratios are BELOW the double | a rigorous reading of a printed value adds one unit in its last place (5e-13 resp. 5e-10 suffices)
+  [ok] re-run: abar >= a by the referee's enclosure 
+(4) 'Where the loss is' (A6a), against out_z7_exactness_u1.txt and the referee's curves
+  [ok] the coordinator's columns theta_na(g) and M_2(g) at its 16 rates agree with the referee's (both brackets) to 5e-9 a | largest difference 4.9e-09 a
+  [ok] 'M_2 - T_2 is 0.03 a to 0.13 a for g <= 0.2 eps*' | stored: 0.028 a to 0.126 a
+  [ok] '3.7e-3 a, 1.8e-3 a, 7e-4 a at g = 0.4, 0.5, 0.6 eps*' | stored: 3.665e-03, 1.752e-03, 6.946e-04
+  [ok] 'there M_2 = b_2 - g' (the cap line): the coordinator's M_2(g) = b_2 - g at g = 0.1, 0.2, 0.3 eps* to 5e-9 a (its grid value of b_2 is 2e-9 a low) | differences -2.0e-09, -2.0e-09, -2.0e-09 a
+     the cap line of W_2 has slope m_2 = 23.883334: M_2(g) = b_2 - g for g <= 1/m_2 = 0.348586 eps*;  the level T_2 leaves b_2 - g at x* = 0.356042 eps* (a6_04)
+  [ok] 1/m_2 = 0.349 eps* < x* = 0.356 eps* (the earlier referee's postscript) 
+
+time 6 s
+ALL CHECKS PASS

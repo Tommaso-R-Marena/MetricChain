@@ -1,0 +1,44 @@
+{
+ "8": {
+  "classes": 291,
+  "min_class_distance": 0.09436206907923372,
+  "exact_ties": 0,
+  "ties_where": [],
+  "nearest_non_tie": 1.8238440297579928e-05
+ },
+ "9": {
+  "classes": 639,
+  "min_class_distance": 0.09436206907922973,
+  "exact_ties": 0,
+  "ties_where": [],
+  "nearest_non_tie": 4.473312300135035e-06
+ },
+ "10": {
+  "classes": 1360,
+  "min_class_distance": 0.09436206907922573,
+  "exact_ties": 0,
+  "ties_where": [],
+  "nearest_non_tie": 3.2482293743640867e-07
+ },
+ "11": {
+  "classes": 2908,
+  "min_class_distance": 0.035282259705011754,
+  "exact_ties": 5,
+  "ties_where": [
+   [
+    1.0,
+    "1/2*N",
+    5,
+    6.217248937900877e-14
+   ]
+  ],
+  "nearest_non_tie": 1.2733544618726e-07
+ },
+ "12": {
+  "classes": 6137,
+  "min_class_distance": 0.03528225970492116,
+  "exact_ties": 0,
+  "ties_where": [],
+  "nearest_non_tie": 2.9286305824882675e-08
+ }
+}

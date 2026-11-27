@@ -1,0 +1,15 @@
+chains: 40  (alphabets: [(2, 2, 2, 2, 2, 2, 2, 2), (2, 2, 2, 2, 2, 2, 2, 2, 2), (2, 2, 2, 2, 2, 2, 2, 2, 2, 2), (2, 3, 2, 3, 2, 3, 2), (3, 2, 2, 3, 2, 2, 3), (3, 3, 3, 3, 3, 3)])
+(U)  pi = rho e^-g / Z:  max abs dev 8.88e-16
+(U)  identity ln A_pi(psi) = ln A_rho(psi+g) - ln A_rho(g):  480 cases, max dev 7.11e-15
+(U)  psi+g in C_{d+}: largest violation 1.78e-14
+(U)  d+ attained: largest slack left by the best cone over all slack sites and letter pairs 1.78e-15
+(U)  control psi+g in C_d: violated in 480 of 480
+(L)  marginal = (x) pi_B * prod rho_j: max abs dev 5.00e-16
+(L)  two-sided bound: 480 cases, 0 violations, smallest margin 1.042e-04
+(L') psi in C_d: largest violation 1.71e-14;  A_pi(psi) = A_(x)(psi'): max dev 3.55e-15;  180 cases (25 chains skipped: class empty; 3 chains with negative entries of d- but nonempty class)
+(L') control psi' in C_{d_B}: violated in 178 of 180
+time 7.4s
+
+real	0m7.776s
+user	0m4.823s
+sys	0m0.096s

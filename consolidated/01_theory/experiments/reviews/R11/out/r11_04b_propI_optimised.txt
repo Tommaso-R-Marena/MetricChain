@@ -1,0 +1,9 @@
+p=0.4 L=12 t=0.459: start (G_L-optimum) 0.034040  ->  optimised bound 0.034040  (report 0.034026; cube 0.029139; ratio 1.168)
+      G_L = 0.408903179, Lambda_blk(N=128) = -0.000420596, exact increment k=1->2 = -0.0004206, ln lam_Q = -2.2e-16, labels with weight > 1e-5: 40, iterations 51   [8 s]
+p=0.3 L=14 t=0.434: start (G_L-optimum) 0.040143  ->  optimised bound 0.040143  (report 0.040115; cube 0.029139; ratio 1.378)
+      G_L = 0.565247286, Lambda_blk(N=128) = -0.003240345, exact increment k=1->2 = -0.0032403, ln lam_Q = 8.9e-16, labels with weight > 1e-5: 38, iterations 158   [5 s]
+p=0.2 L=14 t=0.409: start (G_L-optimum) 0.044618  ->  optimised bound 0.044622  (report 0.044599; cube 0.029139; ratio 1.531)
+      G_L = 0.638461692, Lambda_blk(N=128) = -0.013747251, exact increment k=1->2 = -0.0137472, ln lam_Q = 2.2e-16, labels with weight > 1e-5: 30, iterations 438   [3 s]
+p=0.1 L=14 t=0.38: start (G_L-optimum) 0.044346  ->  optimised bound 0.044513  (report 0.044378; cube 0.029139; ratio 1.528)
+      G_L = 0.667992951, Lambda_blk(N=128) = -0.044811939, exact increment k=1->2 = -0.0448506, ln lam_Q = -2.2e-16, labels with weight > 1e-5: 20, iterations 268   [7 s]
+23.3 s

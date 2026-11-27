@@ -1,0 +1,557 @@
+=== K8 = KKKKKKKK on H, grid R3, tau 0.7: atoms 188, sites 8, one-site domain sizes [14, 14, 12, 7, 7, 7, 7, 7]; pruned pair-clash-free product X': [14, 14, 12, 7, 7, 7, 7, 7]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [99.783 85.172 70.277 70.376 72.059 63.448 66.674 74.36 ]
+    max c_i 99.783 kcal/mol = 167.4 kT; half row sums: max 51.536, min 32.755; Dobrushin-type sums max 6.699
+    max c_ij by separation: [22.453  7.562 23.383 26.528  2.806  2.913  8.017]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [6.859 9.477 7.204 5.439 7.557 7.412 7.073 6.887]
+    max c_i 9.477 kcal/mol = 15.9 kT; half row sums: max 4.686, min 3.193; Dobrushin-type sums max 3.190
+    max c_ij by separation: [2.123 0.626 2.16  2.375 0.256 0.266 0.703]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [5.216 5.838 6.752 4.825 6.514 6.724 5.58  5.648]
+    max c_i 6.752 kcal/mol = 11.3 kT; half row sums: max 4.658, min 2.589; Dobrushin-type sums max 3.162
+    max c_ij by separation: [2.157 0.623 2.409 1.855 0.213 0.245 0.657]
+    GB double flips: site 1/8  1s
+    GB double flips: site 5/8  2s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (2514 exact GB evaluations, 50s)
+    c_i at the reference background (star)      = [48.635 32.049 21.614 23.74  18.536 26.381 31.716 37.372]
+    c_i of the pairwise surrogate (exact for it) = [86.037 66.558 58.153 56.132 55.444 54.984 59.365 63.795]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [85.469 66.132 58.031 55.369 53.94  54.676 59.043 63.177]
+    max: surrogate 86.037, lower bound 85.469 kcal/mol (143.4 kT); max |surrogate - true| at these pairs 1.5036; maximising pairs free of pair clashes: 8 of 8
+    lower bounds on c_ij (others at x0): max by separation = [17.614  7.235 18.955 17.717  2.777  2.877  7.848]
+    half row sums of these lower bounds: max 39.470, min 26.443, by site [37.451 39.47  38.585 36.384 37.11  32.077 28.847 26.443]; Dobrushin-type sums max 6.684
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [0.493 0.966 0.977 2.375 2.354 2.09  2.026 1.95 ]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 8 of 8 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 76.00, median 15.56
+    third-order mixed differences, triples among the central sites [2, 3, 4, 5, 6] (others at x0), lower bounds on c_ijk: max 0.5672 kcal/mol; (2,3,4): 0.0057 (2,3,5): 0.0217 (2,3,6): 0.3097 (2,4,5): 0.0319 (2,4,6): 0.0057 (2,5,6): 0.5672 (3,4,5): 0.0063 (3,4,6): 0.0074 (3,5,6): 0.0128 (4,5,6): 0.0065
+    [55s] -> out/long_K8_H_R3_t0.70.json
+=== K12 = KKKKKKKKKKKK on H, grid R3, tau 0.7: atoms 276, sites 12, one-site domain sizes [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7]; pruned pair-clash-free product X': [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [123.879 110.271 102.372  88.805  77.056  77.043  80.207  82.753  82.562  82.218  86.794  88.322]
+    max c_i 123.879 kcal/mol = 207.8 kT; half row sums: max 62.827, min 34.710; Dobrushin-type sums max 10.284
+    max c_ij by separation: [22.453  7.562 23.383 26.528  2.806  2.913  8.017  3.299  0.939  1.845  2.219]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [6.747 8.67  6.377 5.774 6.611 6.953 6.6   7.271 8.25  7.945 7.887 7.373]
+    max c_i 8.670 kcal/mol = 14.5 kT; half row sums: max 6.002, min 3.424; Dobrushin-type sums max 4.267
+    max c_ij by separation: [2.123 0.626 2.16  2.375 0.256 0.266 0.703 0.292 0.087 0.165 0.195]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [6.277 5.634 6.48  5.481 5.879 6.246 5.182 5.717 6.457 6.334 6.303 6.089]
+    max c_i 6.480 kcal/mol = 10.9 kT; half row sums: max 5.223, min 2.734; Dobrushin-type sums max 3.750
+    max c_ij by separation: [2.157 0.623 2.409 1.855 0.213 0.245 0.657 0.248 0.073 0.152 0.181]
+    GB double flips: site 1/12  2s
+    GB double flips: site 5/12  6s
+    GB double flips: site 9/12  8s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (4944 exact GB evaluations, 136s)
+    c_i at the reference background (star)      = [63.61  50.743 40.499 29.293 25.371 23.659 32.385 28.279 28.676 37.312 45.157 48.625]
+    c_i of the pairwise surrogate (exact for it) = [110.641  97.401  89.606  74.074  62.431  61.464  66.323  68.765  65.555  74.592  78.92   77.48 ]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [110.068  96.847  88.888  73.29   61.672  60.776  65.583  67.977  64.141  73.534  77.99   76.867]
+    max: surrogate 110.641, lower bound 110.068 kcal/mol (184.6 kT); max |surrogate - true| at these pairs 1.4134; maximising pairs free of pair clashes: 12 of 12
+    lower bounds on c_ij (others at x0): max by separation = [17.615  7.233 18.906 17.596  2.781  2.879  7.851  3.245  0.926  1.82   2.187]
+    half row sums of these lower bounds: max 49.203, min 28.344, by site [41.501 46.286 45.855 42.482 49.203 47.525 44.531 45.78  39.93  33.961 32.46  28.344]; Dobrushin-type sums max 10.266
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [0.354 0.791 0.82  2.519 2.502 2.434 2.385 2.322 2.305 2.032 1.962 1.92 ]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 12 of 12 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 117.34, median 19.10
+    third-order mixed differences, triples among the central sites [4, 5, 6, 7, 8] (others at x0), lower bounds on c_ijk: max 0.5642 kcal/mol; (4,5,6): 0.0077 (4,5,7): 0.0082 (4,5,8): 0.2903 (4,6,7): 0.0145 (4,6,8): 0.0052 (4,7,8): 0.5642 (5,6,7): 0.0093 (5,6,8): 0.0085 (5,7,8): 0.0144 (6,7,8): 0.0104
+    [143s] -> out/long_K12_H_R3_t0.70.json
+=== K16 = KKKKKKKKKKKKKKKK on H, grid R3, tau 0.7: atoms 364, sites 16, one-site domain sizes [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]; pruned pair-clash-free product X': [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [137.59  127.485 120.79   97.566  89.244  85.745  88.05   85.542  82.893  88.348  92.16   89.634  90.15   93.007  95.813  96.254]
+    max c_i 137.590 kcal/mol = 230.8 kT; half row sums: max 66.291, min 35.702; Dobrushin-type sums max 13.533
+    max c_ij by separation: [22.453  7.562 23.383 26.528  2.806  2.913  8.017  3.299  0.939  1.845  2.219  0.989  0.608  1.053  0.919]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [7.309 8.426 6.096 5.802 6.067 6.441 6.16  6.385 6.882 7.067 7.239 7.757 8.562 8.301 8.285 7.657]
+    max c_i 8.562 kcal/mol = 14.4 kT; half row sums: max 6.399, min 3.531; Dobrushin-type sums max 4.724
+    max c_ij by separation: [2.123 0.626 2.16  2.375 0.256 0.266 0.703 0.292 0.087 0.165 0.195 0.088 0.055 0.092 0.081]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [6.848 6.411 6.279 5.886 5.631 5.916 5.462 5.527 5.822 5.856 5.905 6.159 6.679 6.61  6.618 6.296]
+    max c_i 6.848 kcal/mol = 11.5 kT; half row sums: max 5.416, min 2.806; Dobrushin-type sums max 3.976
+    max c_ij by separation: [2.157 0.623 2.409 1.855 0.213 0.245 0.657 0.248 0.073 0.152 0.181 0.074 0.047 0.084 0.073]
+    GB double flips: site 1/16  5s
+    GB double flips: site 5/16  16s
+    GB double flips: site 9/16  21s
+    GB double flips: site 13/16  24s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (8158 exact GB evaluations, 254s)
+    c_i at the reference background (star)      = [70.831 62.934 56.721 35.681 28.176 28.933 33.532 34.817 30.826 31.43  32.705 32.358 37.551 46.946 51.534 53.541]
+    c_i of the pairwise surrogate (exact for it) = [124.167 114.371 107.72   82.698  74.428  70.911  73.144  69.698  68.492  74.304  78.053  75.53   75.055  85.074  87.806  85.287]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [123.585 113.804 107.024  81.914  73.658  70.093  72.347  68.89   67.693  73.508  77.26   74.755  74.333  84.139  86.868  84.677]
+    max: surrogate 124.167, lower bound 123.585 kcal/mol (207.3 kT); max |surrogate - true| at these pairs 0.9379; maximising pairs free of pair clashes: 16 of 16
+    lower bounds on c_ij (others at x0): max by separation = [17.618  7.233 18.899 17.557  2.782  2.88   7.851  3.245  0.927  1.82   2.187  0.975  0.6    1.039  0.907]
+    half row sums of these lower bounds: max 52.576, min 29.313, by site [43.256 48.672 48.524 44.664 52.203 52.576 49.933 51.906 52.051 49.43  48.181 47.671 40.921 34.94  33.792 29.313]; Dobrushin-type sums max 13.495
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [0.268 0.682 0.71  2.59  2.576 2.567 2.531 2.466 2.453 2.376 2.322 2.292 2.275 1.998 1.932 1.899]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 16 of 16 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 161.69, median 20.62
+    third-order mixed differences, triples among the central sites [6, 7, 8, 9, 10] (others at x0), lower bounds on c_ijk: max 0.5706 kcal/mol; (6,7,8): 0.0107 (6,7,9): 0.0090 (6,7,10): 0.3003 (6,8,9): 0.0150 (6,8,10): 0.0056 (6,9,10): 0.5706 (7,8,9): 0.0109 (7,8,10): 0.0092 (7,9,10): 0.0150 (8,9,10): 0.0110
+    [267s] -> out/long_K16_H_R3_t0.70.json
+=== K24 = KKKKKKKKKKKKKKKKKKKKKKKK on H, grid R3, tau 0.7: atoms 540, sites 24, one-site domain sizes [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]; pruned pair-clash-free product X': [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [152.11  144.285 139.561 105.427  98.813  97.037  99.785  93.5    90.592  91.75   93.967  93.551  92.874  93.483  94.778  94.859  93.558  98.725 100.098  96.655  97.351 103.346 104.437 104.79 ]
+    max c_i 152.110 kcal/mol = 255.1 kT; half row sums: max 69.415, min 36.424; Dobrushin-type sums max 17.597
+    max c_ij by separation: [22.453  7.562 23.383 26.528  2.806  2.913  8.017  3.299  0.939  1.845  2.219  0.989  0.608  1.053  0.919  0.382  0.457  0.505  0.412  0.204  0.314  0.299  0.204]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [7.837 8.157 6.206 6.078 5.805 5.995 5.808 5.863 6.134 6.226 6.238 6.425 6.618 6.791 6.861 7.036 7.318 7.645 7.875 8.232 8.983 8.736 8.685 7.989]
+    max c_i 8.983 kcal/mol = 15.1 kT; half row sums: max 6.850, min 3.610; Dobrushin-type sums max 5.105
+    max c_ij by separation: [2.123 0.626 2.16  2.375 0.256 0.266 0.703 0.292 0.087 0.165 0.195 0.088 0.055 0.092 0.081 0.034 0.041 0.044 0.036 0.019 0.028 0.026 0.018]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [7.429 7.097 6.024 6.239 6.047 5.933 6.057 5.772 5.652 5.572 5.591 5.588 5.743 5.801 5.885 6.021 6.185 6.301 6.392 6.495 6.932 6.899 6.894 6.507]
+    max c_i 7.429 kcal/mol = 12.5 kT; half row sums: max 5.569, min 2.862; Dobrushin-type sums max 4.255
+    max c_ij by separation: [2.157 0.623 2.409 1.855 0.213 0.245 0.657 0.248 0.073 0.152 0.181 0.074 0.047 0.084 0.073 0.03  0.036 0.041 0.032 0.016 0.024 0.024 0.016]
+    GB double flips: site 1/24  15s
+    GB double flips: site 5/24  56s
+    GB double flips: site 9/24  80s
+    GB double flips: site 13/24  97s
+    GB double flips: site 17/24  109s
+    GB double flips: site 21/24  115s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (16938 exact GB evaluations, 690s)
+    c_i at the reference background (star)      = [96.108 73.678 72.214 47.327 37.425 34.298 37.66  34.057 37.151 36.669 37.319 36.773 38.225 38.989 38.567 35.499 37.986 36.197 38.578 42.941 46.967 57.054 66.977 59.843]
+    c_i of the pairwise surrogate (exact for it) = [137.915 130.962 126.243  92.435  83.858  82.038  84.701  78.581  75.566  75.49   77.664  77.253  76.576  77.429  80.587  80.687  79.412  84.503  85.792  84.965  86.317  95.267  96.097  93.587]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [137.911 130.375 125.537  91.617  83.088  81.215  83.902  77.775  74.827  74.745  76.925  76.511  75.845  76.639  79.797  79.879  78.619  83.722  85.077  83.966  85.594  94.332  95.372  93.094]
+    max: surrogate 137.915, lower bound 137.911 kcal/mol (231.3 kT); max |surrogate - true| at these pairs 0.9984; maximising pairs free of pair clashes: 24 of 24
+    lower bounds on c_ij (others at x0): max by separation = [17.91   7.234 18.851 17.551  2.782  2.883  7.851  3.245  0.927  1.82   2.187  0.975  0.6    1.039  0.907  0.377  0.451  0.499  0.407  0.201  0.31   0.295  0.201]
+    half row sums of these lower bounds: max 56.249, min 29.895, by site [44.616 50.534 50.586 46.139 53.986 54.943 52.835 55.026 56.249 56.088 55.562 55.949 56.037 55.463 54.905 54.721 53.755 51.006 50.013 49.061 41.952 35.899 34.497 29.895]; Dobrushin-type sums max 17.509
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [0.174 0.574 0.582 2.658 2.648 2.651 2.636 2.578 2.57  2.562 2.534 2.507 2.496 2.475 2.436 2.415 2.4   2.319 2.273 2.255 2.236 1.959 1.9   1.871]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 24 of 24 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 257.05, median 21.91
+    third-order mixed differences, triples among the central sites [10, 11, 12, 13, 14] (others at x0), lower bounds on c_ijk: max 0.5800 kcal/mol; (10,11,12): 0.0113 (10,11,13): 0.0093 (10,11,14): 0.3123 (10,12,13): 0.0152 (10,12,14): 0.0061 (10,13,14): 0.5800 (11,12,13): 0.0113 (11,12,14): 0.0093 (11,13,14): 0.0152 (12,13,14): 0.0113
+    [716s] -> out/long_K24_H_R3_t0.70.json
+=== S12 = SSSSSSSSSSSS on E, grid R3, tau 0.7: atoms 144, sites 12, one-site domain sizes [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]; pruned pair-clash-free product X': [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [6.993 6.574 7.382 7.414 7.463 7.465 7.465 7.445 7.392 7.292 6.287 6.122]
+    max c_i 7.465 kcal/mol = 12.5 kT; half row sums: max 5.061, min 2.583; Dobrushin-type sums max 3.263
+    max c_ij by separation: [1.336 3.097 0.336 0.191 0.074 0.052 0.027 0.021 0.013 0.011 0.007]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [4.833 4.583 4.797 4.792 4.809 4.808 4.807 4.81  4.791 4.798 4.633 4.596]
+    max c_i 4.833 kcal/mol = 8.1 kT; half row sums: max 0.592, min 0.304; Dobrushin-type sums max 0.495
+    max c_ij by separation: [0.195 0.307 0.048 0.027 0.012 0.008 0.004 0.003 0.002 0.002 0.001]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [2.673 2.678 2.693 2.695 2.694 2.695 2.693 2.69  2.68  2.659 2.547 2.414]
+    max c_i 2.695 kcal/mol = 4.5 kT; half row sums: max 0.974, min 0.497; Dobrushin-type sums max 0.806
+    max c_ij by separation: [0.263 0.587 0.066 0.039 0.015 0.011 0.005 0.004 0.003 0.002 0.001]
+    GB double flips: site 1/12  1s
+    GB double flips: site 5/12  2s
+    GB double flips: site 9/12  3s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (5479 exact GB evaluations, 5s)
+    c_i at the reference background (star)      = [4.147 3.422 3.895 3.812 3.888 3.862 3.885 3.876 3.89  3.894 3.901 4.066]
+    c_i of the pairwise surrogate (exact for it) = [4.988 4.88  5.101 5.14  5.164 5.183 5.17  5.168 5.12  5.024 4.756 4.43 ]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [4.988 4.88  5.101 5.14  5.163 5.183 5.17  5.168 5.12  5.024 4.756 4.43 ]
+    max: surrogate 5.183, lower bound 5.183 kcal/mol (8.7 kT); max |surrogate - true| at these pairs 0.0004; maximising pairs free of pair clashes: 12 of 12
+    lower bounds on c_ij (others at x0): max by separation = [1.307 2.423 0.332 0.189 0.073 0.052 0.026 0.021 0.013 0.01  0.007]
+    half row sums of these lower bounds: max 4.345, min 2.226, by site [2.226 2.874 4.08  4.238 4.321 4.345 4.345 4.321 4.238 4.08  2.875 2.226]; Dobrushin-type sums max 3.050
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [1.111 1.127 1.125 1.126 1.125 1.126 1.125 1.126 1.125 1.124 1.11  1.024]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 12 of 12 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 3.86, median 3.70
+    third-order mixed differences, triples among the central sites [4, 5, 6, 7, 8] (others at x0), lower bounds on c_ijk: max 0.0042 kcal/mol; (4,5,6): 0.0042 (4,5,7): 0.0005 (4,5,8): 0.0000 (4,6,7): 0.0007 (4,6,8): 0.0004 (4,7,8): 0.0000 (5,6,7): 0.0042 (5,6,8): 0.0005 (5,7,8): 0.0007 (6,7,8): 0.0042
+    [9s] -> out/long_S12_E_R3_t0.70.json
+=== S24 = SSSSSSSSSSSSSSSSSSSSSSSS on E, grid R3, tau 0.7: atoms 276, sites 24, one-site domain sizes [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]; pruned pair-clash-free product X': [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [6.999 6.581 7.391 7.427 7.48  7.489 7.502 7.504 7.509 7.51  7.511 7.511 7.511 7.51  7.508 7.505 7.501 7.493 7.481 7.458 7.401 7.299 6.292 6.126]
+    max c_i 7.511 kcal/mol = 12.6 kT; half row sums: max 5.169, min 2.597; Dobrushin-type sums max 3.354
+    max c_ij by separation: [1.336 3.097 0.336 0.191 0.074 0.052 0.027 0.021 0.013 0.011 0.007 0.006 0.004 0.004 0.003 0.002 0.002 0.002 0.001 0.001 0.001 0.001 0.001]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [4.834 4.584 4.799 4.793 4.812 4.809 4.814 4.813 4.814 4.814 4.815 4.815 4.814 4.815 4.814 4.815 4.812 4.814 4.808 4.812 4.791 4.799 4.633 4.597]
+    max c_i 4.834 kcal/mol = 8.1 kT; half row sums: max 0.609, min 0.307; Dobrushin-type sums max 0.509
+    max c_ij by separation: [0.195 0.307 0.048 0.027 0.012 0.008 0.004 0.003 0.002 0.002 0.001 0.001 0.001 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [2.674 2.68  2.695 2.698 2.698 2.7   2.7   2.701 2.701 2.701 2.701 2.701 2.701 2.701 2.701 2.7   2.699 2.698 2.695 2.691 2.681 2.66  2.547 2.415]
+    max c_i 2.701 kcal/mol = 4.5 kT; half row sums: max 0.995, min 0.500; Dobrushin-type sums max 0.824
+    max c_ij by separation: [0.263 0.587 0.066 0.039 0.015 0.011 0.005 0.004 0.003 0.002 0.001 0.001 0.001 0.001 0.001 0.    0.    0.    0.    0.    0.    0.    0.   ]
+    GB double flips: site 1/24  4s
+    GB double flips: site 5/24  19s
+    GB double flips: site 9/24  31s
+    GB double flips: site 13/24  41s
+    GB double flips: site 17/24  47s
+    GB double flips: site 21/24  51s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (22621 exact GB evaluations, 57s)
+    c_i at the reference background (star)      = [4.146 3.418 3.893 3.811 3.885 3.86  3.88  3.87  3.878 3.873 3.877 3.874 3.877 3.875 3.877 3.876 3.878 3.877 3.881 3.881 3.887 3.896 3.9   4.063]
+    c_i of the pairwise surrogate (exact for it) = [4.994 4.893 5.112 5.161 5.193 5.219 5.227 5.238 5.241 5.246 5.246 5.248 5.246 5.246 5.242 5.24  5.231 5.225 5.203 5.19  5.13  5.035 4.763 4.438]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [4.994 4.893 5.111 5.161 5.193 5.219 5.227 5.238 5.241 5.246 5.246 5.248 5.246 5.246 5.242 5.24  5.231 5.225 5.203 5.19  5.13  5.035 4.762 4.438]
+    max: surrogate 5.248, lower bound 5.248 kcal/mol (8.8 kT); max |surrogate - true| at these pairs 0.0004; maximising pairs free of pair clashes: 24 of 24
+    lower bounds on c_ij (others at x0): max by separation = [1.307 2.423 0.332 0.189 0.073 0.052 0.026 0.021 0.013 0.01  0.007 0.006 0.004 0.004 0.003 0.002 0.002 0.002 0.001 0.001 0.001 0.001 0.001]
+    half row sums of these lower bounds: max 4.451, min 2.240, by site [2.24  2.892 4.102 4.266 4.359 4.395 4.42  4.432 4.441 4.446 4.45  4.451 4.451 4.45  4.446 4.441 4.432 4.42  4.395 4.359 4.266 4.102 2.892 2.24 ]; Dobrushin-type sums max 3.140
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [1.111 1.127 1.125 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.126 1.125 1.124 1.11  1.024]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 24 of 24 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 3.95, median 3.92
+    third-order mixed differences, triples among the central sites [10, 11, 12, 13, 14] (others at x0), lower bounds on c_ijk: max 0.0042 kcal/mol; (10,11,12): 0.0042 (10,11,13): 0.0005 (10,11,14): 0.0000 (10,12,13): 0.0007 (10,12,14): 0.0004 (10,13,14): 0.0000 (11,12,13): 0.0042 (11,12,14): 0.0005 (11,13,14): 0.0007 (12,13,14): 0.0042
+    [76s] -> out/long_S24_E_R3_t0.70.json
+=== S12 = SSSSSSSSSSSS on H, grid R3, tau 0.7: atoms 144, sites 12, one-site domain sizes [9, 9, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]; pruned pair-clash-free product X': [9, 9, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [12.546 12.924  8.55   6.5    7.398  7.671  7.875  8.337  8.624  8.318  8.606  9.022]
+    max c_i 12.924 kcal/mol = 21.7 kT; half row sums: max 8.284, min 3.837; Dobrushin-type sums max 4.590
+    max c_ij by separation: [5.077 0.724 1.372 2.766 0.437 0.237 0.436 0.207 0.116 0.12  0.113]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [5.174 4.99  4.758 4.499 4.566 4.625 4.717 4.847 4.857 4.651 4.702 4.909]
+    max c_i 5.174 kcal/mol = 8.7 kT; half row sums: max 0.895, min 0.408; Dobrushin-type sums max 0.742
+    max c_ij by separation: [0.541 0.077 0.159 0.296 0.055 0.031 0.039 0.029 0.012 0.009 0.013]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [2.62  2.513 2.081 2.022 2.284 2.315 2.347 2.34  2.177 2.04  2.07  2.002]
+    max c_i 2.620 kcal/mol = 4.4 kT; half row sums: max 1.580, min 0.739; Dobrushin-type sums max 1.280
+    max c_ij by separation: [0.961 0.139 0.269 0.524 0.084 0.045 0.088 0.042 0.022 0.024 0.023]
+    GB double flips: site 1/12  0s
+    GB double flips: site 5/12  1s
+    GB double flips: site 9/12  1s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (2884 exact GB evaluations, 3s)
+    c_i at the reference background (star)      = [6.803 4.42  2.106 2.127 2.244 2.611 2.058 2.53  3.689 5.011 5.511 5.831]
+    c_i of the pairwise surrogate (exact for it) = [9.844 9.127 7.205 6.154 7.665 7.448 6.936 6.949 6.612 7.416 7.805 7.605]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [9.844 9.078 7.207 6.129 7.658 7.443 6.926 6.94  6.604 7.402 7.792 7.597]
+    max: surrogate 9.844, lower bound 9.844 kcal/mol (16.5 kT); max |surrogate - true| at these pairs 0.0485; maximising pairs free of pair clashes: 12 of 12
+    lower bounds on c_ij (others at x0): max by separation = [2.799 0.705 1.333 2.288 0.443 0.24  0.428 0.206 0.115 0.119 0.111]
+    half row sums of these lower bounds: max 5.972, min 3.497, by site [4.391 5.622 5.042 5.1   5.97  5.972 5.972 5.963 4.915 4.317 4.193 3.497]; Dobrushin-type sums max 4.341
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [0.476 1.175 0.303 0.106 0.22  0.235 0.265 0.23  0.292 0.27  0.311 0.597]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 12 of 12 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 48.25, median 16.73
+    third-order mixed differences, triples among the central sites [4, 5, 6, 7, 8] (others at x0), lower bounds on c_ijk: max 0.0187 kcal/mol; (4,5,6): 0.0035 (4,5,7): 0.0029 (4,5,8): 0.0097 (4,6,7): 0.0041 (4,6,8): 0.0066 (4,7,8): 0.0187 (5,6,7): 0.0036 (5,6,8): 0.0029 (5,7,8): 0.0041 (6,7,8): 0.0036
+    [4s] -> out/long_S12_H_R3_t0.70.json
+=== S24 = SSSSSSSSSSSSSSSSSSSSSSSS on H, grid R3, tau 0.7: atoms 276, sites 24, one-site domain sizes [9, 9, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]; pruned pair-clash-free product X': [9, 9, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [12.679 13.107  8.643  6.424  7.425  7.754  8.241  8.725  8.998  9.199  9.339  9.433  9.501  9.544  9.543  9.529  9.523  9.445  9.33   9.278  9.176  8.619  8.85   9.178]
+    max c_i 13.107 kcal/mol = 22.0 kT; half row sums: max 8.520, min 4.010; Dobrushin-type sums max 5.494
+    max c_ij by separation: [5.077 0.724 1.372 2.766 0.437 0.237 0.436 0.207 0.116 0.12  0.113 0.063 0.05  0.054 0.041 0.029 0.028 0.026 0.02  0.016 0.016 0.014 0.011]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [5.202 5.026 4.821 4.563 4.614 4.742 4.856 4.952 4.991 5.014 5.032 5.053 5.067 5.062 5.055 5.065 5.07  5.006 4.985 5.019 4.992 4.764 4.789 4.973]
+    max c_i 5.202 kcal/mol = 8.7 kT; half row sums: max 0.921, min 0.427; Dobrushin-type sums max 0.764
+    max c_ij by separation: [0.541 0.077 0.159 0.296 0.055 0.031 0.039 0.029 0.012 0.009 0.013 0.008 0.005 0.005 0.005 0.003 0.003 0.003 0.003 0.002 0.001 0.002 0.001]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [2.68  2.588 2.14  2.125 2.412 2.501 2.564 2.61  2.649 2.668 2.684 2.699 2.703 2.697 2.69  2.681 2.659 2.605 2.574 2.521 2.318 2.159 2.166 2.078]
+    max c_i 2.703 kcal/mol = 4.5 kT; half row sums: max 1.627, min 0.774; Dobrushin-type sums max 1.320
+    max c_ij by separation: [0.961 0.139 0.269 0.524 0.084 0.045 0.088 0.042 0.022 0.024 0.023 0.013 0.01  0.011 0.008 0.006 0.006 0.005 0.004 0.003 0.003 0.003 0.002]
+    GB double flips: site 1/24  3s
+    GB double flips: site 5/24  10s
+    GB double flips: site 9/24  15s
+    GB double flips: site 13/24  19s
+    GB double flips: site 17/24  22s
+    GB double flips: site 21/24  23s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (10972 exact GB evaluations, 28s)
+    c_i at the reference background (star)      = [6.864 4.575 1.881 1.833 1.668 1.818 1.561 1.452 1.528 1.6   1.527 1.541 1.577 1.6   1.608 1.622 1.644 1.777 2.037 2.409 3.462 4.824 5.476 5.742]
+    c_i of the pairwise surrogate (exact for it) = [9.975 9.055 7.115 6.067 7.532 7.387 6.682 6.605 6.701 6.896 7.032 7.123 7.19  7.232 7.231 7.219 7.214 7.139 7.03  6.985 6.889 7.403 7.812 7.582]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [9.975 9.007 7.117 6.042 7.525 7.383 6.674 6.598 6.686 6.881 7.017 7.108 7.174 7.217 7.216 7.204 7.198 7.124 7.015 6.97  6.873 7.389 7.799 7.574]
+    max: surrogate 9.975, lower bound 9.975 kcal/mol (16.7 kT); max |surrogate - true| at these pairs 0.0486; maximising pairs free of pair clashes: 24 of 24
+    lower bounds on c_ij (others at x0): max by separation = [2.798 0.705 1.333 2.287 0.443 0.24  0.428 0.206 0.115 0.119 0.111 0.062 0.049 0.054 0.041 0.029 0.028 0.026 0.019 0.016 0.016 0.014 0.011]
+    half row sums of these lower bounds: max 7.050, min 3.668, by site [4.573 5.854 5.316 5.419 6.383 6.59  6.688 6.87  6.95  6.989 7.02  7.047 7.05  7.019 6.984 6.951 6.863 6.661 6.562 6.367 5.234 4.586 4.41  3.668]; Dobrushin-type sums max 5.242
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [0.474 1.174 0.306 0.105 0.221 0.241 0.276 0.246 0.251 0.249 0.257 0.259 0.259 0.259 0.259 0.259 0.259 0.253 0.248 0.243 0.3   0.28  0.313 0.597]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 24 of 24 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 51.45, median 26.68
+    third-order mixed differences, triples among the central sites [10, 11, 12, 13, 14] (others at x0), lower bounds on c_ijk: max 0.0188 kcal/mol; (10,11,12): 0.0038 (10,11,13): 0.0030 (10,11,14): 0.0098 (10,12,13): 0.0042 (10,12,14): 0.0068 (10,13,14): 0.0188 (11,12,13): 0.0038 (11,12,14): 0.0030 (11,13,14): 0.0042 (12,13,14): 0.0038
+    [32s] -> out/long_S24_H_R3_t0.70.json
+=== L24 = LLLLLLLLLLLLLLLLLLLLLLLL on H, grid R3, tau 0.6: atoms 468, sites 24, one-site domain sizes [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; pruned pair-clash-free product X': [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [3.173 2.98  2.545 9.804 9.478 9.424 9.33  9.28  9.265 9.253 9.24  9.233 9.231 9.23  9.231 9.233 9.234 9.223 9.233 9.232 8.142 7.837 7.775 7.491]
+    max c_i 9.804 kcal/mol = 16.4 kT; half row sums: max 1.157, min 0.580; Dobrushin-type sums max 0.933
+    max c_ij by separation: [0.123 0.    0.088 0.929 0.002 0.    0.014 0.001 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [0.779 0.813 0.853 0.297 0.305 0.302 0.287 0.268 0.263 0.261 0.258 0.256 0.255 0.256 0.256 0.258 0.26  0.263 0.268 0.274 0.284 0.303 0.298 0.325]
+    max c_i 0.853 kcal/mol = 1.4 kT; half row sums: max 0.039, min 0.020; Dobrushin-type sums max 0.033
+    max c_ij by separation: [0.002 0.001 0.006 0.022 0.004 0.001 0.    0.002 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [0.887 0.938 0.97  0.493 0.511 0.513 0.492 0.475 0.473 0.471 0.466 0.465 0.464 0.464 0.465 0.466 0.466 0.472 0.478 0.478 0.482 0.515 0.511 0.478]
+    max c_i 0.970 kcal/mol = 1.6 kT; half row sums: max 0.018, min 0.010; Dobrushin-type sums max 0.015
+    max c_ij by separation: [0.001 0.001 0.    0.01  0.002 0.    0.001 0.002 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+    GB double flips: site 1/24  1s
+    GB double flips: site 5/24  4s
+    GB double flips: site 9/24  6s
+    GB double flips: site 13/24  8s
+    GB double flips: site 17/24  9s
+    GB double flips: site 21/24  10s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (1201 exact GB evaluations, 18s)
+    c_i at the reference background (star)      = [0.633 0.594 0.837 0.226 0.568 0.376 0.028 0.126 0.202 0.255 0.295 0.32  0.336 0.347 0.355 0.363 0.373 0.372 0.37  0.345 0.284 0.209 0.53  0.717]
+    c_i of the pairwise surrogate (exact for it) = [0.845 0.851 1.176 0.553 0.907 0.778 0.467 0.557 0.678 0.748 0.793 0.818 0.835 0.849 0.859 0.869 0.871 0.84  0.785 0.652 0.546 0.431 0.696 0.797]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [0.831 0.815 1.147 0.525 0.877 0.776 0.321 0.724 0.811 0.869 0.896 0.893 0.909 0.918 0.918 0.868 0.858 0.817 0.74  0.561 0.468 0.355 0.65  0.753]
+    max: surrogate 1.176, lower bound 1.147 kcal/mol (1.9 kT); max |surrogate - true| at these pairs 0.1670; maximising pairs free of pair clashes: 24 of 24
+    lower bounds on c_ij (others at x0): max by separation = [0.104 0.048 0.123 0.345 0.062 0.041 0.041 0.045 0.029 0.021 0.017 0.01  0.005 0.003 0.002 0.001 0.    0.    0.    0.    0.    0.    0.   ]
+    half row sums of these lower bounds: max 0.553, min 0.158, by site [0.338 0.329 0.315 0.284 0.48  0.484 0.43  0.49  0.541 0.553 0.552 0.543 0.536 0.528 0.521 0.513 0.498 0.479 0.453 0.397 0.374 0.283 0.243 0.158]; Dobrushin-type sums max 0.464
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [1.472 1.195 0.517 8.387 6.79  6.927 7.18  7.269 7.331 7.371 7.397 7.417 7.43  7.44  7.449 7.459 7.472 7.473 7.481 7.458 7.235 6.855 7.113 7.14 ]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 0 of 24 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 0.61, median 0.07
+    third-order mixed differences, triples among the central sites [10, 11, 12, 13, 14] (others at x0), lower bounds on c_ijk: max 0.0358 kcal/mol; (10,11,12): 0.0091 (10,11,13): 0.0236 (10,11,14): 0.0306 (10,12,13): 0.0170 (10,12,14): 0.0244 (10,13,14): 0.0358 (11,12,13): 0.0091 (11,12,14): 0.0236 (11,13,14): 0.0170 (12,13,14): 0.0090
+    [18s] -> out/long_L24_H_R3_t0.60.json
+=== L32 = LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL on H, grid R3, tau 0.6: atoms 620, sites 32, one-site domain sizes [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; pruned pair-clash-free product X': [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [3.17  2.977 2.541 9.8   9.473 9.419 9.324 9.272 9.257 9.243 9.228 9.22  9.216 9.212 9.208 9.207 9.206 9.205 9.206 9.207 9.208 9.211 9.216 9.22  9.223 9.213 9.225 9.225 8.135 7.831 7.77  7.486]
+    max c_i 9.800 kcal/mol = 16.4 kT; half row sums: max 1.158, min 0.580; Dobrushin-type sums max 0.934
+    max c_ij by separation: [0.123 0.    0.088 0.929 0.002 0.    0.014 0.001 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [0.778 0.812 0.852 0.295 0.303 0.301 0.285 0.266 0.26  0.258 0.255 0.252 0.251 0.25  0.249 0.249 0.249 0.249 0.249 0.249 0.25  0.251 0.252 0.255 0.257 0.261 0.266 0.273 0.282 0.301 0.297 0.324]
+    max c_i 0.852 kcal/mol = 1.4 kT; half row sums: max 0.040, min 0.021; Dobrushin-type sums max 0.034
+    max c_ij by separation: [0.002 0.001 0.006 0.022 0.004 0.001 0.    0.002 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [0.886 0.937 0.969 0.492 0.509 0.511 0.49  0.472 0.47  0.468 0.463 0.46  0.459 0.458 0.457 0.457 0.456 0.456 0.456 0.457 0.457 0.458 0.461 0.462 0.463 0.469 0.476 0.476 0.48  0.513 0.509 0.477]
+    max c_i 0.969 kcal/mol = 1.6 kT; half row sums: max 0.019, min 0.010; Dobrushin-type sums max 0.016
+    max c_ij by separation: [0.001 0.001 0.    0.01  0.002 0.    0.001 0.002 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+    GB double flips: site 1/32  2s
+    GB double flips: site 5/32  10s
+    GB double flips: site 9/32  17s
+    GB double flips: site 13/32  22s
+    GB double flips: site 17/32  27s
+    GB double flips: site 21/32  30s
+    GB double flips: site 25/32  32s
+    GB double flips: site 29/32  33s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (2113 exact GB evaluations, 48s)
+    c_i at the reference background (star)      = [0.63  0.591 0.833 0.222 0.564 0.371 0.022 0.132 0.209 0.263 0.304 0.33  0.345 0.356 0.365 0.369 0.372 0.375 0.376 0.376 0.377 0.378 0.377 0.381 0.388 0.384 0.379 0.353 0.291 0.215 0.535 0.722]
+    c_i of the pairwise surrogate (exact for it) = [0.842 0.847 1.172 0.549 0.903 0.773 0.462 0.563 0.684 0.754 0.798 0.82  0.833 0.843 0.85  0.854 0.857 0.861 0.864 0.867 0.872 0.878 0.881 0.886 0.886 0.852 0.795 0.66  0.554 0.437 0.701 0.802]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [0.828 0.812 1.143 0.521 0.873 0.771 0.315 0.73  0.817 0.874 0.901 0.897 0.909 0.919 0.926 0.93  0.933 0.937 0.939 0.941 0.945 0.946 0.939 0.885 0.872 0.829 0.75  0.569 0.475 0.361 0.655 0.758]
+    max: surrogate 1.172, lower bound 1.143 kcal/mol (1.9 kT); max |surrogate - true| at these pairs 0.1667; maximising pairs free of pair clashes: 32 of 32
+    lower bounds on c_ij (others at x0): max by separation = [0.104 0.048 0.123 0.345 0.062 0.041 0.041 0.045 0.029 0.021 0.017 0.01  0.005 0.003 0.002 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+    half row sums of these lower bounds: max 0.554, min 0.159, by site [0.339 0.329 0.316 0.284 0.481 0.485 0.431 0.49  0.541 0.554 0.552 0.543 0.536 0.53  0.525 0.521 0.519 0.518 0.517 0.516 0.516 0.514 0.512 0.507 0.494 0.477 0.452 0.396 0.374 0.283 0.243 0.159]; Dobrushin-type sums max 0.464
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [1.472 1.195 0.517 8.387 6.789 6.926 7.179 7.268 7.329 7.369 7.395 7.413 7.424 7.431 7.436 7.439 7.441 7.443 7.445 7.447 7.449 7.452 7.457 7.464 7.475 7.475 7.482 7.458 7.236 6.855 7.114 7.14 ]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 0 of 32 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 0.61, median 0.07
+    third-order mixed differences, triples among the central sites [14, 15, 16, 17, 18] (others at x0), lower bounds on c_ijk: max 0.0350 kcal/mol; (14,15,16): 0.0090 (14,15,17): 0.0235 (14,15,18): 0.0307 (14,16,17): 0.0170 (14,16,18): 0.0245 (14,17,18): 0.0350 (15,16,17): 0.0090 (15,16,18): 0.0235 (15,17,18): 0.0170 (16,17,18): 0.0090
+    [49s] -> out/long_L32_H_R3_t0.60.json
+=== LKSE:8 = LKSELKSE on H, grid R3, tau 0.6: atoms 146, sites 8, one-site domain sizes [2, 31, 9, 13, 2, 22, 9, 13]; pruned pair-clash-free product X': [2, 29, 9, 12, 2, 16, 9, 13]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [ 6.106 51.694 58.36  74.507 10.976 65.806 72.39  69.038]
+    max c_i 74.507 kcal/mol = 125.0 kT; half row sums: max 48.564, min 2.537; Dobrushin-type sums max 6.040
+    max c_ij by separation: [11.897  8.357 27.536 41.229  1.543  5.454  0.174]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [ 1.336  6.327  6.004  9.958  0.982  6.44   7.04  11.413]
+    max c_i 11.413 kcal/mol = 19.1 kT; half row sums: max 4.320, min 0.387; Dobrushin-type sums max 2.585
+    max c_ij by separation: [1.435 0.307 2.363 4.071 0.164 0.172 0.039]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [1.067 5.985 3.142 6.874 0.679 6.198 3.261 4.922]
+    max c_i 6.874 kcal/mol = 11.5 kT; half row sums: max 4.531, min 0.192; Dobrushin-type sums max 2.283
+    max c_ij by separation: [0.71  0.812 1.117 5.843 0.139 0.566 0.054]
+    GB double flips: site 1/8  0s
+    GB double flips: site 5/8  1s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (3551 exact GB evaluations, 7s)
+    c_i at the reference background (star)      = [ 0.372 15.62  15.246 26.193  1.828 36.727 17.4   14.901]
+    c_i of the pairwise surrogate (exact for it) = [ 2.586 37.593 26.88  61.088  3.276 58.822 33.416 42.31 ]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [ 2.622 37.576 26.884 59.98   3.392 58.702 32.043 41.339]
+    max: surrogate 61.088, lower bound 59.980 kcal/mol (100.6 kT); max |surrogate - true| at these pairs 1.3728; maximising pairs free of pair clashes: 8 of 8
+    lower bounds on c_ij (others at x0): max by separation = [11.129  8.23  15.572 32.593  1.612  5.354  0.308]
+    half row sums of these lower bounds: max 36.723, min 2.306, by site [ 2.306 30.165 14.234 36.723  2.967 30.073 17.012 28.453]; Dobrushin-type sums max 5.959
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [1.377 0.56  0.152 0.77  6.534 2.049 0.815 0.691]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 7 of 8 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 93.65, median 31.04
+    third-order mixed differences, triples among the central sites [2, 3, 4, 5, 6] (others at x0), lower bounds on c_ijk: max 0.2318 kcal/mol; (2,3,4): 0.0954 (2,3,5): 0.0613 (2,3,6): 0.2318 (2,4,5): 0.0140 (2,4,6): 0.0106 (2,5,6): 0.1922 (3,4,5): 0.0100 (3,4,6): 0.0296 (3,5,6): 0.2203 (4,5,6): 0.0221
+    [11s] -> out/long_LKSEc8_H_R3_t0.60.json
+=== LKSE:12 = LKSELKSELKSE on H, grid R3, tau 0.6: atoms 213, sites 12, one-site domain sizes [2, 31, 9, 13, 2, 22, 9, 13, 2, 22, 9, 13]; pruned pair-clash-free product X': [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [ 6.166 61.846 58.844 74.165 12.265 58.003 78.634 69.534 10.683 73.784 73.198 76.392]
+    max c_i 78.634 kcal/mol = 131.9 kT; half row sums: max 70.945, min 2.576; Dobrushin-type sums max 8.589
+    max c_ij by separation: [11.897  8.357 27.536 41.229  1.543  5.007  2.261  4.171  0.737  3.738  0.05 ]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [ 1.352  6.272  6.284  9.299  0.999  7.169  7.805 11.753  0.891  6.563  7.352 11.406]
+    max c_i 11.753 kcal/mol = 19.7 kT; half row sums: max 6.505, min 0.402; Dobrushin-type sums max 3.647
+    max c_ij by separation: [1.435 0.307 2.363 4.071 0.164 0.172 0.21  0.308 0.066 0.086 0.018]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [1.087 6.149 3.198 7.973 0.695 6.472 3.894 7.146 0.609 6.5   3.446 5.358]
+    max c_i 7.973 kcal/mol = 13.4 kT; half row sums: max 7.587, min 0.207; Dobrushin-type sums max 3.388
+    max c_ij by separation: [0.71  0.812 1.117 5.843 0.139 0.462 0.148 0.264 0.063 0.361 0.02 ]
+    GB double flips: site 1/12  0s
+    GB double flips: site 5/12  5s
+    GB double flips: site 9/12  7s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (7472 exact GB evaluations, 20s)
+    c_i at the reference background (star)      = [ 0.41  18.238 15.133 31.242  1.731 27.638 19.028 14.329  0.084 44.241  9.476 15.253]
+    c_i of the pairwise surrogate (exact for it) = [ 2.731 47.49  27.484 61.084  4.008 46.693 38.885 55.565  4.719 60.014 34.114 49.397]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [ 2.774 47.493 27.491 59.876  4.293 46.597 37.258 54.58   4.199 60.001 32.885 48.655]
+    max: surrogate 61.084, lower bound 60.001 kcal/mol (100.6 kT); max |surrogate - true| at these pairs 1.6269; maximising pairs free of pair clashes: 12 of 12
+    lower bounds on c_ij (others at x0): max by separation = [11.12   8.231 15.658 32.602  1.631  4.961  2.196  4.112  0.74   3.705  0.059]
+    half row sums of these lower bounds: max 55.010, min 2.384, by site [ 2.384 34.13  15.239 41.593  3.43  47.018 21.816 55.01   3.352 33.829 18.337 31.306]; Dobrushin-type sums max 8.587
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [1.36  0.514 0.157 0.769 6.867 2.107 0.994 0.677 6.859 2.059 0.808 0.693]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 10 of 12 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 96.97, median 22.51
+    third-order mixed differences, triples among the central sites [4, 5, 6, 7, 8] (others at x0), lower bounds on c_ijk: max 0.1449 kcal/mol; (4,5,6): 0.0256 (4,5,7): 0.0258 (4,5,8): 0.0969 (4,6,7): 0.0549 (4,6,8): 0.1449 (4,7,8): 0.0920 (5,6,7): 0.1191 (5,6,8): 0.0713 (5,7,8): 0.0349 (6,7,8): 0.0913
+    [24s] -> out/long_LKSEc12_H_R3_t0.60.json
+=== LKSE:16 = LKSELKSELKSELKSE on H, grid R3, tau 0.6: atoms 280, sites 16, one-site domain sizes [2, 31, 9, 13, 2, 22, 9, 13, 2, 22, 9, 13, 2, 22, 9, 13]; pruned pair-clash-free product X': [2, 29, 9, 12, 2, 14, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [ 6.187 64.971 58.71  72.788 12.325 57.256 79.117 66.919 11.972 71.5   79.442 76.887 10.695 78.674 73.235 78.456]
+    max c_i 79.442 kcal/mol = 133.3 kT; half row sums: max 75.917, min 2.592; Dobrushin-type sums max 11.121
+    max c_ij by separation: [11.897  8.357 27.536 41.229  1.543  5.007  2.261  4.171  0.737  3.738  0.472  1.054  0.277  2.161  0.02 ]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [ 1.359  6.188  6.361  9.088  1.015  7.107  8.085 11.103  0.908  7.292  8.117 11.746  0.877  6.569  7.408 11.453]
+    max c_i 11.746 kcal/mol = 19.7 kT; half row sums: max 6.742, min 0.407; Dobrushin-type sums max 3.846
+    max c_ij by separation: [1.435 0.307 2.363 4.071 0.164 0.172 0.21  0.308 0.066 0.086 0.057 0.087 0.035 0.043 0.007]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [1.095 6.198 3.193 8.374 0.715 6.671 4.139 8.216 0.624 6.529 4.194 7.435 0.612 6.532 3.531 5.52 ]
+    max c_i 8.374 kcal/mol = 14.0 kT; half row sums: max 8.003, min 0.213; Dobrushin-type sums max 3.735
+    max c_ij by separation: [0.71  0.812 1.117 5.843 0.139 0.462 0.148 0.263 0.063 0.361 0.038 0.083 0.027 0.194 0.008]
+    GB double flips: site 1/16  1s
+    GB double flips: site 5/16  13s
+    GB double flips: site 9/16  20s
+    GB double flips: site 13/16  23s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (12762 exact GB evaluations, 45s)
+    c_i at the reference background (star)      = [ 0.782 15.757  9.103 34.58   0.798 14.635 15.5   24.967  1.283 33.293 19.308 13.763  0.028 41.312  9.241 15.764]
+    c_i of the pairwise surrogate (exact for it) = [ 2.782 50.665 27.517 62.297  4.123 50.667 38.263 55.538  4.857 57.703 39.738 56.571  4.903 64.878 34.162 51.479]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [ 2.81  50.55  27.38  62.411  4.433 50.36  37.559 54.502  5.017 57.644 38.09  55.616  4.357 65.137 32.926 50.734]
+    max: surrogate 64.878, lower bound 65.137 kcal/mol (109.3 kT); max |surrogate - true| at these pairs 1.6478; maximising pairs free of pair clashes: 16 of 16
+    lower bounds on c_ij (others at x0): max by separation = [11.017  8.233 15.662 32.602  1.617  4.966  2.196  4.109  0.74   3.703  0.464  1.04   0.275  2.137  0.021]
+    half row sums of these lower bounds: max 59.748, min 2.342, by site [ 2.342 35.821 15.601 43.44   3.315 50.203 22.677 59.748  3.639 51.1   23.08  57.913  3.435 35.554 18.646 32.608]; Dobrushin-type sums max 11.163
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [1.341 0.494 0.137 0.767 6.889 2.106 0.946 0.676 7.204 2.121 1.049 0.673 6.875 2.073 0.804 0.7  ]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 13 of 16 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 113.47, median 23.90
+    third-order mixed differences, triples among the central sites [6, 7, 8, 9, 10] (others at x0), lower bounds on c_ijk: max 0.2521 kcal/mol; (6,7,8): 0.0835 (6,7,9): 0.0743 (6,7,10): 0.2521 (6,8,9): 0.0132 (6,8,10): 0.0090 (6,9,10): 0.2047 (7,8,9): 0.0115 (7,8,10): 0.0254 (7,9,10): 0.2344 (8,9,10): 0.0227
+    [60s] -> out/long_LKSEc16_H_R3_t0.60.json
+=== K8 = KKKKKKKK on E, grid R3, tau 0.7: atoms 188, sites 8, one-site domain sizes [21, 21, 21, 21, 21, 21, 21, 21]; pruned pair-clash-free product X': [13, 13, 13, 13, 13, 13, 21, 21]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [ 70.804  64.11   65.281  67.696  75.875  81.674 100.795 101.558]
+    max c_i 101.558 kcal/mol = 170.4 kT; half row sums: max 70.813, min 39.137; Dobrushin-type sums max 6.943
+    max c_ij by separation: [12.52  51.262  5.451  5.779  2.046  1.588  0.937]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [4.402 4.808 5.292 5.281 5.839 5.967 7.007 5.725]
+    max c_i 7.007 kcal/mol = 11.8 kT; half row sums: max 5.889, min 3.243; Dobrushin-type sums max 3.147
+    max c_ij by separation: [0.944 4.357 0.426 0.47  0.158 0.133 0.072]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [6.155 6.942 7.12  7.085 7.002 7.002 7.861 7.741]
+    max c_i 7.861 kcal/mol = 13.2 kT; half row sums: max 5.486, min 3.035; Dobrushin-type sums max 3.297
+    max c_ij by separation: [1.277 3.634 0.489 0.444 0.168 0.121 0.074]
+    GB double flips: site 1/8  1s
+    GB double flips: site 5/8  4s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (6389 exact GB evaluations, 52s)
+    c_i at the reference background (star)      = [44.196 32.087 17.264  9.45  24.603 29.436 43.717 47.87 ]
+    c_i of the pairwise surrogate (exact for it) = [59.76  55.583 56.078 54.871 55.122 60.693 70.629 73.641]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [59.742 55.564 56.045 54.8   55.069 60.634 70.435 73.466]
+    max: surrogate 73.641, lower bound 73.466 kcal/mol (123.2 kT); max |surrogate - true| at these pairs 0.1938; maximising pairs free of pair clashes: 8 of 8
+    lower bounds on c_ij (others at x0): max by separation = [12.149 41.371  5.369  5.693  2.019  1.563  0.925]
+    half row sums of these lower bounds: max 60.422, min 33.907, by site [33.907 38.863 58.766 60.422 60.416 58.745 39.498 34.525]; Dobrushin-type sums max 6.939
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [2.051 2.229 2.22  2.233 2.217 2.203 1.509 1.43 ]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 8 of 8 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 27.25, median 26.33
+    third-order mixed differences, triples among the central sites [2, 3, 4, 5, 6] (others at x0), lower bounds on c_ijk: max 0.2092 kcal/mol; (2,3,4): 0.1385 (2,3,5): 0.0418 (2,3,6): 0.0008 (2,4,5): 0.0679 (2,4,6): 0.2092 (2,5,6): 0.0007 (3,4,5): 0.1387 (3,4,6): 0.0419 (3,5,6): 0.0788 (4,5,6): 0.1387
+    [81s] -> out/long_K8_E_R3_t0.70.json
+=== K12 = KKKKKKKKKKKK on E, grid R3, tau 0.7: atoms 276, sites 12, one-site domain sizes [21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21]; pruned pair-clash-free product X': [13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 21, 21]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [ 76.238  69.755  69.091  71.564  71.516  76.447  81.03   84.458  87.807  91.911 110.442 110.145]
+    max c_i 110.442 kcal/mol = 185.3 kT; half row sums: max 76.543, min 40.003; Dobrushin-type sums max 9.900
+    max c_ij by separation: [12.52  51.262  5.451  5.779  2.046  1.588  0.937  0.698  0.487  0.367  0.28 ]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [4.595 5.053 5.27  5.4   5.427 5.581 5.832 5.98  6.241 6.322 7.318 6.001]
+    max c_i 7.318 kcal/mol = 12.3 kT; half row sums: max 6.348, min 3.310; Dobrushin-type sums max 3.529
+    max c_ij by separation: [0.944 4.357 0.426 0.47  0.158 0.133 0.072 0.058 0.038 0.03  0.022]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [6.257 7.049 7.173 7.132 7.137 7.123 7.088 7.163 7.185 7.305 8.134 7.966]
+    max c_i 8.134 kcal/mol = 13.6 kT; half row sums: max 5.936, min 3.103; Dobrushin-type sums max 3.672
+    max c_ij by separation: [1.277 3.634 0.489 0.444 0.168 0.121 0.074 0.053 0.038 0.028 0.022]
+    GB double flips: site 1/12  4s
+    GB double flips: site 5/12  14s
+    GB double flips: site 9/12  21s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (13703 exact GB evaluations, 155s)
+    c_i at the reference background (star)      = [49.702 37.825 25.851 16.657 23.582 22.068 20.344 25.283 33.196 42.319 54.504 60.072]
+    c_i of the pairwise surrogate (exact for it) = [64.767 61.117 62.975 58.845 58.574 59.262 59.661 61.873 64.718 67.979 80.991 82.07 ]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [64.75  61.099 62.949 58.815 58.548 59.201 59.603 61.809 64.661 67.935 80.822 81.934]
+    max: surrogate 82.070, lower bound 81.934 kcal/mol (137.4 kT); max |surrogate - true| at these pairs 0.1689; maximising pairs free of pair clashes: 12 of 12
+    lower bounds on c_ij (others at x0): max by separation = [12.146 41.367  5.369  5.693  2.019  1.565  0.925  0.688  0.48   0.362  0.276]
+    half row sums of these lower bounds: max 66.024, min 34.762, by site [34.762 40.041 60.568 62.994 65.471 66.019 66.024 65.484 62.945 60.51  40.719 35.416]; Dobrushin-type sums max 9.876
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [2.056 2.237 2.23  2.251 2.244 2.246 2.242 2.235 2.224 2.204 1.586 1.504]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 12 of 12 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 29.45, median 27.72
+    third-order mixed differences, triples among the central sites [4, 5, 6, 7, 8] (others at x0), lower bounds on c_ijk: max 0.1931 kcal/mol; (4,5,6): 0.1392 (4,5,7): 0.0408 (4,5,8): 0.0008 (4,6,7): 0.0700 (4,6,8): 0.1931 (4,7,8): 0.0008 (5,6,7): 0.1467 (5,6,8): 0.0403 (5,7,8): 0.0683 (6,7,8): 0.1468
+    [211s] -> out/long_K12_E_R3_t0.70.json
+=== K16 = KKKKKKKKKKKKKKKK on E, grid R3, tau 0.7: atoms 364, sites 16, one-site domain sizes [21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21]; pruned pair-clash-free product X': [13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 21, 21]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [ 78.889  72.328  71.852  72.644  72.995  74.074  77.426  80.431  82.952  85.158  87.536  89.461  92.016  95.85  114.779 114.293]
+    max c_i 114.779 kcal/mol = 192.5 kT; half row sums: max 78.603, min 40.282; Dobrushin-type sums max 11.504
+    max c_ij by separation: [12.52  51.262  5.451  5.779  2.046  1.588  0.937  0.698  0.487  0.367  0.28   0.216  0.174  0.138  0.114]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [4.678 5.151 5.392 5.548 5.506 5.506 5.569 5.688 5.829 5.936 6.092 6.198 6.416 6.469 7.48  6.144]
+    max c_i 7.480 kcal/mol = 12.5 kT; half row sums: max 6.509, min 3.333; Dobrushin-type sums max 3.664
+    max c_ij by separation: [0.944 4.357 0.426 0.47  0.158 0.133 0.072 0.058 0.038 0.03  0.022 0.018 0.013 0.011 0.009]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [6.304 7.1   7.189 7.147 7.164 7.148 7.14  7.134 7.122 7.21  7.272 7.361 7.339 7.434 8.256 8.072]
+    max c_i 8.256 kcal/mol = 13.8 kT; half row sums: max 6.097, min 3.124; Dobrushin-type sums max 3.807
+    max c_ij by separation: [1.277 3.634 0.489 0.444 0.168 0.121 0.074 0.053 0.038 0.028 0.022 0.016 0.013 0.01  0.009]
+    GB double flips: site 1/16  10s
+    GB double flips: site 5/16  49s
+    GB double flips: site 9/16  74s
+    GB double flips: site 13/16  89s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (23721 exact GB evaluations, 333s)
+    c_i at the reference background (star)      = [52.254 41.241 28.905 21.63  24.311 25.685 20.33  19.726 25.876 27.176 26.557 27.397 42.307 47.809 62.581 65.495]
+    c_i of the pairwise surrogate (exact for it) = [67.202 63.534 65.7   62.184 60.031 61.095 60.819 60.996 61.52  62.967 64.109 66.162 68.193 70.809 85.711 86.141]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [67.185 63.516 65.674 62.157 60.006 61.068 60.748 60.932 61.477 62.928 64.051 66.092 68.151 70.768 85.581 86.028]
+    max: surrogate 86.141, lower bound 86.028 kcal/mol (144.3 kT); max |surrogate - true| at these pairs 0.1299; maximising pairs free of pair clashes: 16 of 16
+    lower bounds on c_ij (others at x0): max by separation = [12.141 41.366  5.369  5.693  2.019  1.565  0.925  0.688  0.48   0.362  0.276  0.213  0.171  0.136  0.113]
+    half row sums of these lower bounds: max 68.059, min 35.037, by site [35.037 40.397 61.015 63.588 66.323 67.18  67.829 68.059 68.022 67.797 67.184 66.316 63.56  60.971 41.103 35.728]; Dobrushin-type sums max 11.462
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [2.058 2.239 2.232 2.255 2.249 2.254 2.251 2.252 2.249 2.246 2.244 2.236 2.225 2.205 1.634 1.537]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 16 of 16 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 30.24, median 29.03
+    third-order mixed differences, triples among the central sites [6, 7, 8, 9, 10] (others at x0), lower bounds on c_ijk: max 0.1946 kcal/mol; (6,7,8): 0.1471 (6,7,9): 0.0416 (6,7,10): 0.0008 (6,8,9): 0.0683 (6,8,10): 0.1946 (6,9,10): 0.0007 (7,8,9): 0.1396 (7,8,10): 0.0419 (7,9,10): 0.0701 (8,9,10): 0.1394
+    [418s] -> out/long_K16_E_R3_t0.70.json
+=== LKSE:8 = LKSELKSE on E, grid R3, tau 0.6: atoms 146, sites 8, one-site domain sizes [2, 31, 9, 16, 2, 31, 9, 16]; pruned pair-clash-free product X': [2, 27, 9, 13, 2, 23, 9, 15]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [ 20.245  71.941  10.186  96.939  19.558  75.161  10.401 104.125]
+    max c_i 104.125 kcal/mol = 174.7 kT; half row sums: max 66.651, min 0.374; Dobrushin-type sums max 4.748
+    max c_ij by separation: [ 6.455 65.547  1.548 10.234  0.484  1.986  0.016]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [ 1.358  3.908  5.721 12.811  1.567  4.168  5.616 11.333]
+    max c_i 12.811 kcal/mol = 21.5 kT; half row sums: max 2.802, min 0.251; Dobrushin-type sums max 2.030
+    max c_ij by separation: [0.965 2.091 0.151 0.782 0.049 0.049 0.006]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [ 0.98   9.192  2.422 17.905  1.186 12.392  2.259 10.105]
+    max c_i 17.905 kcal/mol = 30.0 kT; half row sums: max 10.225, min 0.154; Dobrushin-type sums max 2.560
+    max c_ij by separation: [ 0.528 12.132  0.093  0.669  0.038  0.194  0.006]
+    GB double flips: site 1/8  0s
+    GB double flips: site 5/8  2s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (4206 exact GB evaluations, 7s)
+    c_i at the reference background (star)      = [ 0.127 45.964  3.696 42.399  0.396 37.872  3.765 49.108]
+    c_i of the pairwise surrogate (exact for it) = [ 0.896 67.255 10.181 56.654  1.879 72.828 10.047 53.499]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [ 0.87  67.299 10.16  56.646  1.844 72.841 10.009 53.501]
+    max: surrogate 72.828, lower bound 72.841 kcal/mol (122.2 kT); max |surrogate - true| at these pairs 0.0433; maximising pairs free of pair clashes: 8 of 8
+    lower bounds on c_ij (others at x0): max by separation = [ 6.321 78.368  1.537 10.1    0.477  1.963  0.016]
+    half row sums of these lower bounds: max 74.283, min 0.602, by site [ 0.602 48.094  7.18  72.642  1.265 74.283  7.004 45.912]; Dobrushin-type sums max 4.881
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [19.841  1.517  0.996  0.67  19.629  0.499  0.979  0.009]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 6 of 8 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 5030.86, median 19.46
+    third-order mixed differences, triples among the central sites [2, 3, 4, 5, 6] (others at x0), lower bounds on c_ijk: max 0.0847 kcal/mol; (2,3,4): 0.0246 (2,3,5): 0.0108 (2,3,6): 0.0001 (2,4,5): 0.0069 (2,4,6): 0.0002 (2,5,6): 0.0003 (3,4,5): 0.0847 (3,4,6): 0.0073 (3,5,6): 0.0121 (4,5,6): 0.0710
+    [13s] -> out/long_LKSEc8_E_R3_t0.60.json
+=== LKSE:8 = LKSELKSE on P2, grid R3, tau 0.6: atoms 146, sites 8, one-site domain sizes [2, 31, 9, 18, 2, 31, 9, 18]; pruned pair-clash-free product X': [2, 31, 9, 18, 2, 31, 9, 18]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [  1.269  62.862  30.95  165.481   2.55   65.913  30.867 160.212]
+    max c_i 165.481 kcal/mol = 277.6 kT; half row sums: max 64.791, min 0.728; Dobrushin-type sums max 5.609
+    max c_ij by separation: [21.002 50.111  6.444  9.824  0.875  4.469  0.029]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [ 1.833  6.489  6.497 12.264  2.108  7.369  6.499 11.742]
+    max c_i 12.264 kcal/mol = 20.6 kT; half row sums: max 2.786, min 0.307; Dobrushin-type sums max 2.117
+    max c_ij by separation: [1.992 1.243 0.713 0.739 0.08  0.084 0.011]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [1.451 9.445 2.943 9.065 1.76  9.093 2.928 7.167]
+    max c_i 9.445 kcal/mol = 15.8 kT; half row sums: max 5.378, min 0.221; Dobrushin-type sums max 3.059
+    max c_ij by separation: [2.026 4.334 0.483 0.811 0.068 0.44  0.012]
+    GB double flips: site 1/8  0s
+    GB double flips: site 5/8  2s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (5967 exact GB evaluations, 7s)
+    c_i at the reference background (star)      = [ 2.304 47.117  6.588 52.656  1.7   45.777  6.75  55.003]
+    c_i of the pairwise surrogate (exact for it) = [ 5.234 55.829 24.846 57.763  4.985 71.417 23.447 63.175]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [ 5.143 55.85  24.828 57.762  4.89  71.726 23.475 63.173]
+    max: surrogate 71.417, lower bound 71.726 kcal/mol (120.3 kT); max |surrogate - true| at these pairs 0.3086; maximising pairs free of pair clashes: 8 of 8
+    lower bounds on c_ij (others at x0): max by separation = [13.035 50.288  6.202  9.572  0.864  4.42   0.029]
+    half row sums of these lower bounds: max 60.875, min 1.985, by site [ 1.985 36.395 15.857 57.207  3.295 60.875 14.669 32.497]; Dobrushin-type sums max 5.706
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [2.356 1.667 0.165 0.015 2.332 1.612 0.185 0.01 ]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 7 of 8 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 3901.87, median 58.58
+    third-order mixed differences, triples among the central sites [2, 3, 4, 5, 6] (others at x0), lower bounds on c_ijk: max 0.4492 kcal/mol; (2,3,4): 0.0414 (2,3,5): 0.4492 (2,3,6): 0.0010 (2,4,5): 0.0550 (2,4,6): 0.0001 (2,5,6): 0.0029 (3,4,5): 0.3799 (3,4,6): 0.0049 (3,5,6): 0.1730 (4,5,6): 0.0267
+    [18s] -> out/long_LKSEc8_P2_R3_t0.60.json
+=== V16 = VVVVVVVVVVVVVVVV on E, grid R3, tau 0.7: atoms 268, sites 16, one-site domain sizes [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; pruned pair-clash-free product X': [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [4.484 4.397 4.365 4.364 4.363 4.363 4.362 4.363 4.362 4.363 4.362 4.363 4.361 4.36  4.111 3.908]
+    max c_i 4.484 kcal/mol = 7.5 kT; half row sums: max 0.195, min 0.097; Dobrushin-type sums max 0.163
+    max c_ij by separation: [0.022 0.171 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [0.613 0.467 0.513 0.497 0.507 0.503 0.506 0.505 0.506 0.505 0.506 0.506 0.507 0.514 0.497 0.522]
+    max c_i 0.613 kcal/mol = 1.0 kT; half row sums: max 0.039, min 0.020; Dobrushin-type sums max 0.033
+    max c_ij by separation: [0.01  0.023 0.002 0.003 0.001 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [1.118 1.19  1.205 1.21  1.212 1.213 1.214 1.214 1.214 1.214 1.214 1.213 1.212 1.211 1.211 1.204]
+    max c_i 1.214 kcal/mol = 2.0 kT; half row sums: max 0.006, min 0.003; Dobrushin-type sums max 0.005
+    max c_ij by separation: [0.003 0.002 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+    GB double flips: site 1/16  0s
+    GB double flips: site 5/16  1s
+    GB double flips: site 9/16  2s
+    GB double flips: site 13/16  2s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (1161 exact GB evaluations, 4s)
+    c_i at the reference background (star)      = [0.306 0.358 0.37  0.372 0.373 0.373 0.374 0.374 0.374 0.374 0.374 0.374 0.375 0.376 0.427 0.369]
+    c_i of the pairwise surrogate (exact for it) = [0.353 0.416 0.427 0.428 0.43  0.43  0.431 0.43  0.431 0.431 0.431 0.43  0.431 0.43  0.439 0.38 ]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [0.353 0.415 0.426 0.428 0.429 0.429 0.43  0.43  0.43  0.43  0.43  0.43  0.431 0.43  0.439 0.38 ]
+    max: surrogate 0.439, lower bound 0.439 kcal/mol (0.7 kT); max |surrogate - true| at these pairs 0.0009; maximising pairs free of pair clashes: 16 of 16
+    lower bounds on c_ij (others at x0): max by separation = [0.112 0.047 0.004 0.001 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.   ]
+    half row sums of these lower bounds: max 0.157, min 0.078, by site [0.082 0.135 0.156 0.157 0.157 0.157 0.157 0.157 0.157 0.157 0.157 0.157 0.157 0.154 0.132 0.078]; Dobrushin-type sums max 0.132
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [2.468 2.65  2.816 2.816 2.816 2.816 2.816 2.816 2.816 2.816 2.816 2.816 2.815 2.814 2.831 2.768]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 0 of 16 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 0.06, median 0.06
+    third-order mixed differences, triples among the central sites [6, 7, 8, 9, 10] (others at x0), lower bounds on c_ijk: max 0.0054 kcal/mol; (6,7,8): 0.0054 (6,7,9): 0.0007 (6,7,10): 0.0001 (6,8,9): 0.0008 (6,8,10): 0.0002 (6,9,10): 0.0001 (7,8,9): 0.0054 (7,8,10): 0.0007 (7,9,10): 0.0008 (8,9,10): 0.0054
+    [5s] -> out/long_V16_E_R3_t0.70.json
+=== F16 = FFFFFFFFFFFFFFFF on H, grid R3, tau 0.6: atoms 332, sites 16, one-site domain sizes [6, 6, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; pruned pair-clash-free product X': [5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+--- f (pair-additive: EXACT on the product domain)
+    c_i = [10.777  9.973  8.664  9.702  7.881  7.894  7.895  7.893  7.884  7.825  7.794  7.76   7.815  7.262  7.313  7.355]
+    max c_i 10.777 kcal/mol = 18.1 kT; half row sums: max 1.150, min 0.287; Dobrushin-type sums max 0.937
+    max c_ij by separation: [0.834 0.037 0.785 0.24  0.003 0.011 0.031 0.005 0.001 0.002 0.002 0.001 0.001 0.001 0.   ]
+--- ff03-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [1.27  1.467 1.491 0.831 0.285 0.279 0.28  0.289 0.291 0.298 0.308 0.33  0.279 0.345 0.331 0.286]
+    max c_i 1.491 kcal/mol = 2.5 kT; half row sums: max 0.307, min 0.132; Dobrushin-type sums max 0.257
+    max c_ij by separation: [0.186 0.015 0.145 0.103 0.001 0.004 0.011 0.002 0.001 0.001 0.001 0.    0.    0.001 0.   ]
+--- ff15ipq-ff14SB (pair-additive: EXACT on the product domain)
+    c_i = [2.468 2.53  2.409 0.156 0.055 0.056 0.051 0.05  0.034 0.024 0.024 0.027 0.085 0.135 0.114 0.023]
+    max c_i 2.530 kcal/mol = 4.2 kT; half row sums: max 0.160, min 0.007; Dobrushin-type sums max 0.134
+    max c_ij by separation: [0.116 0.021 0.071 0.024 0.    0.    0.004 0.002 0.    0.001 0.001 0.    0.    0.    0.   ]
+    GB double flips: site 1/16  1s
+    GB double flips: site 5/16  2s
+    GB double flips: site 9/16  3s
+    GB double flips: site 13/16  3s
+--- GB: anchored order-2 expansion at the ICM minimiser of f (853 exact GB evaluations, 7s)
+    c_i at the reference background (star)      = [0.699 1.159 0.827 0.805 0.693 0.57  0.649 0.654 0.667 0.715 0.734 0.787 0.868 1.337 1.178 1.017]
+    c_i of the pairwise surrogate (exact for it) = [0.966 1.261 1.098 1.175 0.836 0.811 0.799 0.832 0.838 0.862 0.881 0.943 1.053 1.549 1.392 1.142]
+    TRUE GB difference at the surrogate's maximising pair = rigorous lower bound on c_i(GB) = [0.958 1.303 1.107 1.168 0.833 0.807 0.799 0.831 0.838 0.862 0.881 0.943 1.053 1.55  1.392 1.142]
+    max: surrogate 1.549, lower bound 1.550 kcal/mol (2.6 kT); max |surrogate - true| at these pairs 0.0416; maximising pairs free of pair clashes: 16 of 16
+    lower bounds on c_ij (others at x0): max by separation = [0.434 0.177 0.364 0.184 0.008 0.01  0.033 0.005 0.001 0.002 0.002 0.001 0.001 0.001 0.   ]
+    half row sums of these lower bounds: max 0.709, min 0.270, by site [0.602 0.709 0.611 0.549 0.496 0.497 0.495 0.512 0.507 0.49  0.483 0.486 0.411 0.311 0.312 0.27 ]; Dobrushin-type sums max 0.590
+    candidate minimiser of f + (pairwise surrogate of GB) by ICM: single-site excitation energies [0.668 0.24  7.59  7.73  7.577 7.719 7.656 7.658 7.656 7.652 7.647 7.667 8.04  8.149 8.041 7.922]
+    row-sum condition with the LOWER BOUNDS on c_ij: violated at 1 of 16 sites (a violation with lower bounds is a violation with the true constants); ratio half-row-sum/excitation: max 2.96, median 0.06
+    third-order mixed differences, triples among the central sites [6, 7, 8, 9, 10] (others at x0), lower bounds on c_ijk: max 0.0008 kcal/mol; (6,7,8): 0.0004 (6,7,9): 0.0008 (6,7,10): 0.0003 (6,8,9): 0.0002 (6,8,10): 0.0003 (6,9,10): 0.0005 (7,8,9): 0.0004 (7,8,10): 0.0008 (7,9,10): 0.0002 (8,9,10): 0.0004
+    [8s] -> out/long_F16_H_R3_t0.60.json

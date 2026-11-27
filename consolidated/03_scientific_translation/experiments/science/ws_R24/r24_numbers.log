@@ -1,0 +1,5 @@
+item 86 / SCI-MSG-0031: 44 numbers typed from the texts against the logs: 0 disagree ; logs that did not reach their last line: none; control (first number 15.324 typed as 15.327): reported: True (must be True)
+item 90 / SCI-MSG-0032 / SCI-RES-0032 s5: 60 numbers typed from the texts against the logs: 0 disagree ; logs that did not reach their last line: none; control (first number 6 typed as 9): reported: True (must be True)
+SCI-RES-0032 s2 / item 87 (d): 24 numbers typed from the texts against the logs: 0 disagree ; logs that did not reach their last line: none; control (first number 17.9 typed as 17.2): reported: True (must be True)
+in all 128 numbers, 0 disagreements
+ALL DONE; peak RSS 13 MB

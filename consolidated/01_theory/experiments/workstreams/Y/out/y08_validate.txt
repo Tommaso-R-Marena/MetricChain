@@ -1,0 +1,21 @@
+(a) DP inequality on random inhomogeneous binary chains
+   300 cases: min of [sum pi_phi^t Q^(1-t)] / [prod c_i] = 1.129157  (must be >= 1)
+(b) F+, F-, DP at fixed t, binary symmetric chain, u = 1
+   p=0.4 t=0.30: F+_1,2,3 = 0.072677 0.103881 0.134460  sub-add: F+_2 - 2F+_1 = -0.041473, F+_3 - F+_1 - F+_2 = -0.042097 (<= 0) | DP: FD_2 - 2FD_1 = -0.001338, FD_3 - FD_1 - FD_2 = -0.002600 (<= 0) | F-_1,2,3 = 0.000936 0.021499 0.053411  super-add: +0.019626, +0.030976 (>= 0) | sandwich F- <= F <= F+: True | (F+_3 - F-_3)/(t*2(u+K)) = 0.096 (<= 1)
+   p=0.4 t=0.45: F+_1,2,3 = 0.082877 0.116072 0.148407  sub-add: F+_2 - 2F+_1 = -0.049683, F+_3 - F+_1 - F+_2 = -0.050542 (<= 0) | DP: FD_2 - 2FD_1 = -0.002978, FD_3 - FD_1 - FD_2 = -0.005911 (<= 0) | F-_1,2,3 = 0.001103 0.025085 0.061313  super-add: +0.022878, +0.035125 (>= 0) | sandwich F- <= F <= F+: True | (F+_3 - F-_3)/(t*2(u+K)) = 0.069 (<= 1)
+   p=0.4 t=0.70: F+_1,2,3 = 0.065923 0.089866 0.117042  sub-add: F+_2 - 2F+_1 = -0.041981, F+_3 - F+_1 - F+_2 = -0.038747 (<= 0) | DP: FD_2 - 2FD_1 = -0.004945, FD_3 - FD_1 - FD_2 = -0.006970 (<= 0) | F-_1,2,3 = 0.000935 0.020817 0.049146  super-add: +0.018946, +0.027393 (>= 0) | sandwich F- <= F <= F+: True | (F+_3 - F-_3)/(t*2(u+K)) = 0.035 (<= 1)
+   p=0.3 t=0.30: F+_1,2,3 = 0.136308 0.174390 0.210644  sub-add: F+_2 - 2F+_1 = -0.098225, F+_3 - F+_1 - F+_2 = -0.100054 (<= 0) | DP: FD_2 - 2FD_1 = -0.002923, FD_3 - FD_1 - FD_2 = -0.005544 (<= 0) | plain <= F+: True | plain <= DP*L-type bound: F_L <= L*FD_1: True
+   p=0.3 t=0.45: F+_1,2,3 = 0.150267 0.186967 0.222216  sub-add: F+_2 - 2F+_1 = -0.113566, F+_3 - F+_1 - F+_2 = -0.115018 (<= 0) | DP: FD_2 - 2FD_1 = -0.005753, FD_3 - FD_1 - FD_2 = -0.011282 (<= 0) | plain <= F+: True | plain <= DP*L-type bound: F_L <= L*FD_1: True
+   p=0.3 t=0.70: F+_1,2,3 = 0.112523 0.136121 0.167747  sub-add: F+_2 - 2F+_1 = -0.088924, F+_3 - F+_1 - F+_2 = -0.080897 (<= 0) | DP: FD_2 - 2FD_1 = -0.008430, FD_3 - FD_1 - FD_2 = -0.015374 (<= 0) | plain <= F+: True | plain <= DP*L-type bound: F_L <= L*FD_1: True
+(c) Step 5: are class-wise upper quantiles admissible?  (t_{class(y)} <= t_{class(x)} e^{d(x,y)} for all x, y)
+   n=9: 10 type classes, 74 Markov (pair) type classes
+   600 (residual, q) cases, u = 1: violations for type classes: 0 (largest excess 4.44e-16);  for Markov type classes: 598 (largest excess 6.000)
+   example: psi = d(., 000000010): level of the class of x = 110000000: 0.0498 (= e^-3); of y = 010000000: 1.0000; d(x,y) = 1; admissibility needs t_y <= t_x e = 0.1353: VIOLATED
+(d) exact increments of ln E[Xi^r] against the operator value (slow cases of y03)
+   kappa=1.5 eta=0.1 q=0.3 r=5: operator 7.82486426; increments n=12..21: 7.81500 7.81806 7.82020 7.82168; gap ratios 0.884 0.882 0.881
+   kappa=2.0 eta=0.3 q=0.1 r=3: operator 6.79834873; increments n=12..21: 6.79609 6.79795 6.79828 6.79834; gap ratios 0.563 0.562 0.562
+11.7 s
+
+real	0m12.227s
+user	0m12.138s
+sys	0m0.695s

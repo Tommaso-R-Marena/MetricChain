@@ -1,0 +1,15 @@
+(1) 40 sets whose span has no other sign vector: x^T (I - P_L) x vanishes exactly on V among all states: True
+(2) 54 sets whose span has other sign vectors: the zero set of x^T (I - P_L) x is V plus exactly these: True
+(3) span of K uniform random sign vectors of length n: fraction of 60 trials with another sign vector,
+    and the bound 2^(K-n) + C(n,K) 2^K (3/4)^(n-K) (meaningful only when < 1):
+    n =  12, K =  3: observed 0.117; bound 132
+    n =  12, K =  6: observed 0.850; bound 1.05e+04
+    n =  12, K =  9: observed 1.000; bound 4.75e+04
+    n =  12, K = 11: observed 1.000; bound 1.84e+04
+    n =  16, K =  4: observed 0.133; bound 922
+    n =  16, K =  8: observed 0.767; bound 3.3e+05
+    n =  16, K = 12: observed 1.000; bound 2.36e+06
+    n =  40, K =  2: observed not simulated; bound 0.0558
+    n =  60, K =  3: observed not simulated; bound 0.0207
+    n = 100, K =  5: observed not simulated; bound 0.00326
+    n = 200, K = 10: observed not simulated; bound 4.2e-05

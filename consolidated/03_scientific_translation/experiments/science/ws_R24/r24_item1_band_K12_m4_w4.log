@@ -1,0 +1,31 @@
+[theirs] === K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 4; 495 raw stage-2 tables of workstream P9 (sum of their maxima 18.17 kT)
+[theirs] (1) floor without penalty built (52 evaluated terms exact in a window, 168 reduced, 28 pairs beyond the band); K(T): the least mean of the reduced table under the product of the guiding sample's one-site marginals; penalty tables in the window form: 1 on one site, 28 on pairs, 85 on larger sub-tuples; sum of their maxima 16.637 
+[theirs] (2) ln Z(m_0) = 517.1422012 (no penalty); slope at 0: beta <pen>_0 = 0.000527025 nats per unit of lambda; 4 exact samples per lambda
+(0) ln Z(m_0): my elimination 517.142201179; their transfer matrix 517.142201179 (difference 4.5e-13); least entry of any penalty table 0 (>= 0: True); 102 tables of the floor without penalty, 125 penalty tables, largest scope 4 sites [129s, peak RSS 1031 MB]
+(1) my evaluation of their tables against their evaluators at 4000 uniformly random states: floor without penalty 1.1e-11, penalty 0.0e+00 kcal/mol; penalty at the anchor 0; random states with a negative penalty: 0
+(2) ground state of m_0 by my (min,+): 0 sites off the anchor, c = -ln pi_0 = 1.329475 (their S_a)
+(3) DINKELBACH for lambda_gs from lambda = 64: iterates 18.152598, 15.497319; 3 passes; closing pass max_x [lambda b - c] = -1.36e-11; minimiser: 10 of 12 sites off, b* = 6.20502, c* = 96.1611, state [3, 3, 1, 6, 6, 6, 0, 5, 5, 5, 3, 3]
+(3) DINKELBACH for lambda_gs from lambda = 1000: iterates 22.077433, 16.521398, 15.497319; 4 passes; closing pass max_x [lambda b - c] = -1.36e-11; minimiser: 10 of 12 sites off, b* = 6.20502, c* = 96.1611, state [3, 3, 1, 6, 6, 6, 0, 5, 5, 5, 3, 3]
+(3) DINKELBACH for lambda_gs from lambda = 20: iterates 16.521398, 15.497319; 3 passes; closing pass max_x [lambda b - c] = -1.36e-11; minimiser: 10 of 12 sites off, b* = 6.20502, c* = 96.1611, state [3, 3, 1, 6, 6, 6, 0, 5, 5, 5, 3, 3]
+(4) **lambda_gs = 15.497319** (three starts agree to 1e-9: True); **lambda_kink = 15.2830609** (Dinkelbach on (c - c_a)/b, 3 passes, closing value 0.00e+00); same minimiser: True; lambda_gs - lambda_kink = 0.214258 against c_a / b* = 0.214258
+(5) their committed log: c*/b* = 15.49732, lambda_kink in [15.283, 15.284]; mine - theirs: lambda_gs -9.51e-07, lambda_kink within their bracket (4 digits): True
+(6) the model's own (min,+) pass (BandModel.dp) against my elimination at 5 lambdas: largest difference of G 1.7e-12
+(7) every single-site change of the minimiser has a larger ratio: 91 of 91 (must be all); control of the iteration: with ln Z(m_0) replaced by ln Z(m_0) + 0.01 the same state gives 15.498931 (visible: True)
+(8) F(lambda) = ln Z(m_lambda) - ln Z(m_0) by my (+,x) elimination against their transfer matrix at lambda = 1, lambda_kink, lambda_gs: largest difference 0.0e+00; F(1) = 0.000534858785; F(lambda_kink) = 0.6656; F(lambda_gs) = 1.4337 (G = 0 there); slope at 0: 0.000527025; occupancy (mean sites off) at 0: 1.1563, at lambda_gs: 7.951 [129s]
+(9) EXACT lambda_c of the scan's definition (mean number of sites off the anchor = n/2; exact occupancy, no sampling): **15.327350** (the committed scan, 1000 samples per lambda: see its line (4)); F = ln 2 at **15.293033**; F = ln 2 + lambda s0 at 15.295894.  lambda_gs / lambda_c = 1.01109; lambda_kink / lambda_c = 0.99711; (lambda_gs - lambda_c) b* = 1.0547 nats; F(lambda_c) = 0.7943
+(10) their two-entropy estimate lam_eq = lambda_gs - (S_d(lam_in) - lam_in s0) / b* as a function of the lambda at which S_d is read off the exact ln Z: lam_in = lambda_kink = 15.283 -> 15.2948 (-0.213 % from the exact lambda_c); lam_in = 0.99 lambda_c = 15.174 -> 15.3934 (+0.431 % from the exact lambda_c); lam_in = lambda_c = 15.327 -> 15.2986 (-0.187 % from the exact lambda_c); lam_in = 1.01 lambda_c = 15.481 -> 15.3107 (-0.109 % from the exact lambda_c); lam_in = lambda_gs = 15.497 -> 15.3119 (-0.101 % from the exact lambda_c); lambda_kink itself is -0.289 %, the root of F = ln 2 is -0.224 %, lambda_gs +1.109 % from it
+(11) F(lambda) <= ln sum_x pi_0(x)^(1 - lambda/lambda_gs) at 8 values: 0 violations (must be 0); control, without the Renyi term (F <= 0): 8 violations (must be positive)
+      lambda/lambda_gs | exact F | Renyi upper bound
+        0.05 | 0.000413057 | 0.205032
+        0.10 | 0.000835756 | 0.434849
+        0.20 | 0.0017118 | 0.991819
+        0.30 | 0.00263201 | 1.7305
+        0.50 | 0.00462569 | 4.13537
+        0.70 | 0.00688439 | 8.78659
+        0.90 | 0.0105566 | 17.6837
+        1.00 | 1.43366 | 25.2762
+      ln(number of states) = 25.276 = the bound at lambda = lambda_gs; Shannon-like slope: the bound at 0.05 lambda_gs is 0.2050
+(12) F reaches t = 0.100 at lambda_t = 14.870798 (exact, my elimination); certified from lambda_gs and the model without penalty alone: [lambda_gs (1 - theta_t), lambda_gs + t/b*] = [0.38851, 15.51344] (theta_t = 0.97493); inside: True; lower end / lambda_t = 0.026
+(12) F reaches t = 0.693 at lambda_t = 15.293033 (exact, my elimination); certified from lambda_gs and the model without penalty alone: [lambda_gs (1 - theta_t), lambda_gs + t/b*] = [2.31972, 15.60903] (theta_t = 0.85031); inside: True; lower end / lambda_t = 0.152
+(12) F reaches t = 1.000 at lambda_t = 15.388867 (exact, my elimination); certified from lambda_gs and the model without penalty alone: [lambda_gs (1 - theta_t), lambda_gs + t/b*] = [3.11937, 15.65848] (theta_t = 0.79872); inside: True; lower end / lambda_t = 0.203
+ALL DONE 133 s; 29 (min,+) passes of mine; peak RSS 1031 MB

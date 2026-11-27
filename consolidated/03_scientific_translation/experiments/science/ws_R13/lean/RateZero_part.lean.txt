@@ -1,0 +1,199 @@
+
+/-! ## The same rate at accuracy zero (Proposition R13.1): the quantitative form of `levels_reach_hint_at_zero` -/
+
+namespace ScienceR13
+
+open MetricChain.HintRecursion
+
+variable {θna θh : ℝ → ℝ} {a h E : ℝ}
+
+/-- A limit of upper bounds: if `t ≤ (1 − φ) b` for all `0 < φ < φs`, then `t ≤ (1 − φs) b`. -/
+theorem le_of_forall_lt_frac {t b φs : ℝ} (hφs : 0 < φs) (hall : ∀ φ, 0 < φ → φ < φs → t ≤ (1 - φ) * b) :
+    t ≤ (1 - φs) * b := by
+  refine le_of_forall_pos_le_add fun ε hε => ?_
+  obtain ⟨δ, hδ0, hδφ, hδB⟩ : ∃ δ : ℝ, 0 < δ ∧ δ < φs ∧ δ * |b| ≤ ε := by
+    refine ⟨min (φs / 2) (ε / (|b| + 1)), lt_min (by linarith) (by positivity),
+      lt_of_le_of_lt (min_le_left _ _) (by linarith), ?_⟩
+    have h1 : min (φs / 2) (ε / (|b| + 1)) ≤ ε / (|b| + 1) := min_le_right _ _
+    have h2 : ε / (|b| + 1) * |b| ≤ ε := by
+      rw [div_mul_eq_mul_div, div_le_iff₀ (by positivity)]
+      nlinarith [abs_nonneg b]
+    calc min (φs / 2) (ε / (|b| + 1)) * |b| ≤ ε / (|b| + 1) * |b| :=
+          mul_le_mul_of_nonneg_right h1 (abs_nonneg b)
+      _ ≤ ε := h2
+  have key := hall (φs - δ) (by linarith) (by linarith)
+  have e : (1 - (φs - δ)) * b = (1 - φs) * b + δ * b := by ring
+  have hB : δ * b ≤ δ * |b| := mul_le_mul_of_nonneg_left (le_abs_self b) hδ0.le
+  linarith
+
+/-- After `J = ⌈h/(b − h)⌉` levels above a level bounded by `b > h`, the slope is at least one on `(0, h/J)`
+(Lemma 1 applied `J` times; the first half of `epoch_of_stepLE`). -/
+theorem slope_of_stepLE (hp : HintPair θna θh a h E) (T : ℕ → ℝ → ℝ)
+    (hstep : ∀ k, StepLE θna (T k) (T (k + 1)))
+    (hanti : ∀ k x y, 0 < x → x ≤ y → T k y ≤ T k x)
+    {n : ℕ} {b : ℝ} (hb : h < b) (hTb : ∀ x, 0 < x → T n x ≤ b) :
+    ∀ x, 0 < x → x < h / (⌈h / (b - h)⌉₊ : ℝ) → T (n + ⌈h / (b - h)⌉₊) x ≤ b - x := by
+  have hh := hp.h_pos
+  have hbh : 0 < b - h := by linarith
+  have hdpos : 0 < h / (b - h) := div_pos hh hbh
+  obtain ⟨c, hc⟩ : ∃ c : ℝ, c = b / h - 1 := ⟨_, rfl⟩
+  have hc0 : 0 < c := by
+    rw [hc]
+    have : 1 < b / h := by rw [lt_div_iff₀ hh]; linarith
+    linarith
+  have hdc : h / (b - h) * c = 1 := by
+    rw [hc]
+    field_simp
+  obtain ⟨J, hJ⟩ : ∃ J : ℕ, J = ⌈h / (b - h)⌉₊ := ⟨_, rfl⟩
+  rw [← hJ]
+  have hJ1 : h / (b - h) ≤ J := by rw [hJ]; exact Nat.le_ceil _
+  have hJr : (0 : ℝ) < J := lt_of_lt_of_le hdpos hJ1
+  have hJpos : 1 ≤ J := by
+    have : 0 < J := by exact_mod_cast hJr
+    omega
+  have ind : ∀ j : ℕ, 1 ≤ j → j ≤ J → ∀ x, 0 < x → x < h / (j : ℝ) → T (n + j) x ≤ b - ((j : ℝ) * c) * x := by
+    intro j hj1
+    induction j, hj1 using Nat.le_induction with
+    | base =>
+      intro _ x hx hxh
+      have hxh' : x < h := by simpa using hxh
+      have key := lemma1_top hp (hstep n) (hanti n) hTb x hx hxh'
+      rw [← hc] at key
+      simpa using key
+    | succ j hj ih =>
+      intro hjJ x hx hxh
+      have ihj := ih (by omega)
+      have hjr : (0 : ℝ) < j := by exact_mod_cast hj
+      have hσ : (j : ℝ) * c ≤ 1 := by
+        have h1 : (j : ℝ) + 1 ≤ J := by exact_mod_cast hjJ
+        have hJ2 : (J : ℝ) < h / (b - h) + 1 := by rw [hJ]; exact Nat.ceil_lt_add_one hdpos.le
+        have h2 : (j : ℝ) < h / (b - h) := by linarith
+        nlinarith
+      have hx0 : 0 < h / (j : ℝ) := div_pos hh hjr
+      have e : h / (j : ℝ) * h / (h + h / (j : ℝ)) = h / ((j : ℝ) + 1) := by
+        field_simp
+      have hxh' : x < h / (j : ℝ) * h / (h + h / (j : ℝ)) := by
+        rw [e]
+        push_cast at hxh
+        exact hxh
+      have key := lemma1 hp (hstep (n + j)) (hanti (n + j)) hσ hx0 ihj x hx hxh'
+      have e2 : b - ((j : ℝ) * c + b / h - 1) * x = b - (((j + 1 : ℕ) : ℝ) * c) * x := by
+        push_cast
+        rw [hc]
+        ring
+      rw [e2] at key
+      exact key
+  have hJc : 1 ≤ (J : ℝ) * c := by nlinarith
+  intro x hx hxJ
+  have h1 := ind J hJpos le_rfl x hx hxJ
+  nlinarith
+
+/-- **The rate at accuracy zero** (Proposition R13.1 of the workstream report).  Besides the levels `T k` of
+`rate_top0`, let `τ k` obey the one-level bound at accuracy zero for every outer fraction — the hypothesis `hstep0`
+of `MetricChain.BoundedAccuracy.levels_reach_hint_at_zero` — with `τ 0 ≤ a`.  Then
+`τ n ≤ h + c₁/(n + 1 + c₂)` for every `n`: the quantitative form of that theorem. -/
+theorem rate_zero (hp : HintPair θna θh a h E) (hah : h < a) (T : ℕ → ℝ → ℝ) (τ : ℕ → ℝ)
+    (hstep : ∀ k, StepLE θna (T k) (T (k + 1)))
+    (hmono : ∀ k x, 0 < x → T (k + 1) x ≤ T k x)
+    (hanti : ∀ k x y, 0 < x → x ≤ y → T k y ≤ T k x)
+    (hbdd : ∀ x, 0 < x → T 0 x ≤ a) (hτ0 : τ 0 ≤ a)
+    (hstep0 : ∀ k φ B, 0 < φ → φ < 1 → (1 - φ) * τ k ≤ B →
+      (∀ γ, 0 < γ → γ ≤ φ * a → γ + (1 - φ) * T k (γ / (1 - φ)) ≤ B) → τ (k + 1) ≤ B) :
+    ∀ n : ℕ, τ n ≤ h + c1 a h / (((n + 1 : ℕ) : ℝ) + c2 a h) := by
+  have hh := hp.h_pos
+  have ha := hp.a_pos
+  -- one level keeps a common bound
+  have pers : ∀ m b, τ m ≤ b → (∀ x, 0 < x → T m x ≤ b) → τ (m + 1) ≤ b := by
+    intro m b hτb hTb
+    have hall : ∀ φ, 0 < φ → φ < 1 → τ (m + 1) ≤ (1 - φ) * b + φ * a := by
+      intro φ hφ0 hφ1
+      have h1 : 0 < 1 - φ := by linarith
+      apply hstep0 m φ _ hφ0 hφ1
+      · have := mul_le_mul_of_nonneg_left hτb h1.le
+        nlinarith
+      · intro γ hγ0 hγ
+        have h2 := hTb _ (div_pos hγ0 h1)
+        have h3 := mul_le_mul_of_nonneg_left h2 h1.le
+        linarith
+    refine le_of_forall_pos_le_add fun ε hε => ?_
+    obtain ⟨φ, hφ0, hφ1, hφε⟩ : ∃ φ : ℝ, 0 < φ ∧ φ < 1 ∧ φ * |a - b| ≤ ε := by
+      refine ⟨min (1 / 2) (ε / (|a - b| + 1)), lt_min (by norm_num) (by positivity),
+        lt_of_le_of_lt (min_le_left _ _) (by norm_num), ?_⟩
+      have h1 : min (1 / 2) (ε / (|a - b| + 1)) ≤ ε / (|a - b| + 1) := min_le_right _ _
+      have h2 : ε / (|a - b| + 1) * |a - b| ≤ ε := by
+        rw [div_mul_eq_mul_div, div_le_iff₀ (by positivity)]
+        nlinarith [abs_nonneg (a - b)]
+      calc min (1 / 2) (ε / (|a - b| + 1)) * |a - b| ≤ ε / (|a - b| + 1) * |a - b| :=
+            mul_le_mul_of_nonneg_right h1 (abs_nonneg _)
+        _ ≤ ε := h2
+    have key := hall φ hφ0 hφ1
+    have e : (1 - φ) * b + φ * a = b + φ * (a - b) := by ring
+    have hB : φ * (a - b) ≤ φ * |a - b| := mul_le_mul_of_nonneg_left (le_abs_self _) hφ0.le
+    linarith
+  have key := rate_of_epochs hh hah (fun n b => τ (n - 1) ≤ b ∧ ∀ x, 0 < x → T (n - 1) x ≤ b)
+    (by
+      intro n b hn hP
+      obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+      have e : m + 1 + 1 - 1 = m + 1 := by omega
+      have e' : m + 1 - 1 = m := by omega
+      rw [e]
+      rw [e'] at hP
+      exact ⟨pers m b hP.1 hP.2, fun x hx => (hmono m x hx).trans (hP.2 x hx)⟩)
+    (fun _ _ _ hP hbb' => ⟨hP.1.trans hbb', fun x hx => (hP.2 x hx).trans hbb'⟩)
+    ⟨hτ0, hbdd⟩
+    (by
+      intro n b hn hP hb
+      obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+      have e' : m + 1 - 1 = m := by omega
+      rw [e'] at hP
+      have e : m + 1 + ⌈h / (b - h)⌉₊ + 1 - 1 = m + ⌈h / (b - h)⌉₊ + 1 := by omega
+      rw [e]
+      refine ⟨?_, epoch_of_stepLE hp T hstep hanti hb hP.2⟩
+      -- the common bound persists for J levels
+      have hbh : 0 < b - h := by linarith
+      have hdpos : 0 < h / (b - h) := div_pos hh hbh
+      have hslope := slope_of_stepLE hp T hstep hanti hb hP.2
+      obtain ⟨J, hJ⟩ : ∃ J : ℕ, J = ⌈h / (b - h)⌉₊ := ⟨_, rfl⟩
+      rw [← hJ] at hslope ⊢
+      have hJr : (0 : ℝ) < J := lt_of_lt_of_le hdpos (by rw [hJ]; exact Nat.le_ceil _)
+      have hboth : ∀ j : ℕ, τ (m + j) ≤ b ∧ ∀ x, 0 < x → T (m + j) x ≤ b := by
+        intro j
+        induction j with
+        | zero => exact hP
+        | succ j ih => exact ⟨pers (m + j) b ih.1 ih.2, fun x hx => (hmono (m + j) x hx).trans (ih.2 x hx)⟩
+      have hx0 : 0 < h / (J : ℝ) := div_pos hh hJr
+      have hax : 0 < a + h / (J : ℝ) := by linarith
+      have hφs0 : 0 < h / (J : ℝ) / (a + h / (J : ℝ)) := div_pos hx0 hax
+      have hall : ∀ φ, 0 < φ → φ < h / (J : ℝ) / (a + h / (J : ℝ)) → τ (m + J + 1) ≤ (1 - φ) * b := by
+        intro φ hφ0 hφlt
+        have hφ1 : φ < 1 := lt_trans hφlt (by rw [div_lt_one hax]; linarith)
+        have h1 : 0 < 1 - φ := by linarith
+        apply hstep0 (m + J) φ _ hφ0 hφ1
+        · exact mul_le_mul_of_nonneg_left (hboth J).1 h1.le
+        · intro γ hγ0 hγ
+          have hlt : γ / (1 - φ) < h / (J : ℝ) := by
+            rw [div_lt_iff₀ h1]
+            have : φ * (a + h / (J : ℝ)) < h / (J : ℝ) := by rwa [lt_div_iff₀ hax] at hφlt
+            nlinarith
+          have h2 := hslope _ (div_pos hγ0 h1) hlt
+          have h3 := mul_le_mul_of_nonneg_left h2 h1.le
+          have h4 : (1 - φ) * (b - γ / (1 - φ)) = (1 - φ) * b - γ := by
+            have hne : (1 - φ) ≠ 0 := h1.ne'
+            field_simp
+          rw [h4] at h3
+          linarith
+      have hlim := le_of_forall_lt_frac hφs0 hall
+      have e2 : (1 - h / (J : ℝ) / (a + h / (J : ℝ))) * b = b * ((J : ℝ) * a) / ((J : ℝ) * a + h) := by
+        field_simp
+        ring
+      rw [← e2]
+      exact hlim)
+  intro n
+  have := (key (n + 1) (by omega)).1
+  simpa using this
+
+end ScienceR13
+
+#print axioms ScienceR13.slope_of_stepLE
+#print axioms ScienceR13.rate_zero
+#check @ScienceR13.rate_zero

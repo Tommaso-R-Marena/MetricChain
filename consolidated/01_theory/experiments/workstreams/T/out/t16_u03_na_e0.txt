@@ -1,0 +1,5 @@
+X = e + R = 0.0022646 (e = 0.0, R = 0.0022646)
+ (1) symmetric binary shells: sup n_mu(X) = 0.0018400 at x = 0.45138   [12s]
+ (2) general binary profiles: 0.0018400 at (m,a,b) = (0.5000,0.4514,0.4514)   [62s]
+ (3) with a free block: 0.0018400 at (lf, x) = (0.0000,0.4514)   [261s]
+ ratio of the best shell value to R: 0.8125   (time 261s)

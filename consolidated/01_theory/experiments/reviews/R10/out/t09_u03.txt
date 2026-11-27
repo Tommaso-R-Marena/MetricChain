@@ -1,0 +1,21 @@
+# u=0.3: contact set [(np.float64(0.04647), np.float64(0.12374)), (np.float64(0.47451), np.float64(0.5255)), (np.float64(0.87626), np.float64(0.95353))];  R_unif(0) = 0.00279417, p_u = 0.42556
+# binary barrier shells: R2(e), optimal x
+   e=-0.0020  R2=0.00347485  x=0.43619  S2(dual, I)=0.00347485   t=33
+   e=-0.0010  R2=0.00284781  x=0.43749  S2(dual, I)=0.00284781   t=73
+   e=-0.0005  R2=0.00255235  x=0.43884  S2(dual, I)=0.00255235   t=107
+   e=+0.0000  R2=0.00226456  x=0.44091  S2(dual, I)=0.00226380   t=136
+   e=+0.0001  R2=0.00220789  x=0.44133  S2(dual, I)=0.00220789   t=188
+   e=+0.0003  R2=0.00209550  x=0.44219  S2(dual, I)=0.00209550   t=239
+   e=+0.0006  R2=0.00192939  x=0.44350  S2(dual, I)=0.00192932   t=281
+   e=+0.0010  R2=0.00171284  x=0.44529  S2(dual, I)=0.00171284   t=320
+   e=+0.0020  R2=0.00120005  x=0.45005  S2(dual, I)=0.00120003   t=359
+#   slopes between consecutive accuracies: [-0.627 -0.591 -0.576 -0.567 -0.562 -0.554 -0.541 -0.513]
+# S(0) = R2(0) = 0.00226456 at x = 0.44091
+#   n_mu(S(0)) at the optimal shell: 0.00000000
+#   r_mu(e) for the shell x=0.4409: -0.0020:0.003433  -0.0010:0.002827  +0.0000:0.002265  +0.0002:-0.000000  +0.0005:-0.000000  +0.0010:0.000000  +0.0015:0.000000  +0.0020:0.000000
+#   r_mu(e) for the shell x=0.4514: -0.0020:0.003078  -0.0010:0.002538  +0.0000:0.002039  +0.0002:0.001944  +0.0005:0.001805  +0.0010:0.001582  +0.0015:0.001371  +0.0020:0.001172
+# sup over symmetric shells of n_mu(S(0)) = 0.00184002 (two-parameter grid) = 0.00184002 (through r_mu, T8(b)) at x = 0.45138  ( = 0.813 R2(0); report 0.0018400 at x = 0.4514)   t=367
+#   the same n_mu by a full grid over exit profiles with I in the constraint (upper bound of the minimum): 0.00184002 at nu = (0.51199, 0.45138)
+# sup over general binary profiles of n_mu(S(0)) (3 Nelder-Mead starts): 0.00184004 0.45138@0.50000  0.54862@0.50000   t=371
+# proved upper end of the bracket for theta_na(S(0)): R_unif(S_unif^-1(0.0022646)) = 0.00337705  (the report's upper end 0.00226456 is the binary value, a LOWER bound of R_H(0))
+time 370.86953687667847

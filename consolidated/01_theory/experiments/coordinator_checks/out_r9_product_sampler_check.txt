@@ -1,0 +1,7 @@
+(1) tilt identity  u rho + KL(rho||p_s) = Lambda_s + KL(rho||eta_s): max error 2.0e-15
+(3) exponents at accuracy x (per site): theta_na | best single r | plain pi   [referee: .1033 (r=.185) .2743; .0451 (r=.170) .1430; .0244 (r=.319) .0348]
+   p=0.1, u=2.0, x=0.05E=0.01061: theta_na = 0.1020 | best r = 0.185: 0.1035 | plain pi: 0.2743   (best single r exceeds theta_na by 1.5 %)
+   p=0.1, u=2.0, x=0.25E=0.05307: theta_na = 0.0440 | best r = 0.171: 0.0453 | plain pi: 0.1430   (best single r exceeds theta_na by 3.0 %)
+   p=0.3, u=1.0, x=0.25E=0.02578: theta_na = 0.0243 | best r = 0.320: 0.0245 | plain pi: 0.0348   (best single r exceeds theta_na by 0.6 %)
+(2) exact, n=2000, p=0.1, u=2.0, x=0.05E: plain Monte Carlo from pi needs at least (1-2 delta) e^(n*0.2841) points (centre 1^n, radius 1234); single-letter value 0.2743
+R9 m4 CHECK OK

@@ -1,0 +1,10 @@
+(kappa, u, e) = (0.3, 1.0, -0.03): h(kappa) = 0.6109; two-block supremum R2 = 0.041620 (-e = 0.03);  60 random feasible profiles with 3-5 blocks: max (r_mu - R2) = -4.44e-03;  shell of the centre m = kappa with F = -e: value 0.030000
+(kappa, u, e) = (0.3, 1.0, -0.1): h(kappa) = 0.6109; two-block supremum R2 = 0.100000 (-e = 0.1);  60 random feasible profiles with 3-5 blocks: max (r_mu - R2) = -2.45e-04;  shell of the centre m = kappa with F = -e: value 0.100000
+(kappa, u, e) = (0.5, 1.0, -0.05): h(kappa) = 0.6931; two-block supremum R2 = 0.059050 (-e = 0.05);  60 random feasible profiles with 3-5 blocks: max (r_mu - R2) = -4.53e-03;  shell of the centre m = kappa with F = -e: value 0.050000
+(kappa, u, e) = (0.2, 2.0, -0.05): h(kappa) = 0.5004; two-block supremum R2 = 0.090377 (-e = 0.05);  60 random feasible profiles with 3-5 blocks: max (r_mu - R2) = -2.43e-03;  shell of the centre m = kappa with F = -e: value 0.050000
+(kappa, u, e) = (0.4, 0.5, -0.02): h(kappa) = 0.6730; two-block supremum R2 = 0.020730 (-e = 0.02);  60 random feasible profiles with 3-5 blocks: max (r_mu - R2) = -1.70e-04;  shell of the centre m = kappa with F = -e: value 0.020000
+(kappa, u, e) = (0.5, 3.0, -0.2): h(kappa) = 0.6931; two-block supremum R2 = 0.273597 (-e = 0.2);  60 random feasible profiles with 3-5 blocks: max (r_mu - R2) = -5.12e-03;  shell of the centre m = kappa with F = -e: value 0.200000
+total: 360 profiles, violations of r_mu(e) <= R2(e) (beyond 2e-6): 0
+two-point law A: mean 0.3000, MI = 0.0060, feasible at e = -0.1: False
+two-point law B: mean 0.3000, MI = 0.6093, feasible at e = -0.1: True
+their equal mixture (4 blocks): mean 0.3000, MI = 0.3076, feasible: True — a feasible law with an infeasible two-point component

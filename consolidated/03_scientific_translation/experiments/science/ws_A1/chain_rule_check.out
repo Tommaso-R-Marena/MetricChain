@@ -1,0 +1,10 @@
+PASS A1  every instance generated is u-Lipschitz (sanity of the generators)   112 instances
+PASS A2  (i) all conditional means nu(y_i = 1 | prefix) lie in [a0, a1] (3 coordinate orders, all prefixes)   largest excursion outside the interval: 3.7e-15
+PASS A3  (ii) KL(nu_psi || Bern(r*)^n) <= n a for every instance; equality at one of the cones around 0^n, 1^n   max KL/(n a) = 1.000000; max over the two constant cones = 1.000000
+PASS A4  (iii) exact upper tail of the log-density under nu_psi is below exp(-s^2/(2 n u^2))
+PASS A5  (iv) E|A_hat/A - 1| <= sqrt(tau/M) + 2 P_nu(rho > tau) with M = e^{na+t}, tau = e^{na+t/2} (27 instances, 300 runs each)   tightest case: n=12 p=0.2 u=1.5 cone(0^n): M=130, measured 0.227, bound 0.471
+PASS A6  (v) a(p,u) <= a(1/2,u) = ln2 - h(p_u), maximal at p = 1/2  (odds-ratio lemma in capacity form; logit a1 - logit a0 = 2u)   argmax p = 0.50, a = 0.110944; a(0.3) = 0.095301, a(0.1) = 0.043863
+PASS A6b the cone channel has log odds ratio exactly 2u for every p
+PASS A7  mutations detected (3u-Lipschitz function leaves the interval; proposal r = p exceeds n a; interval is tight)   KL(cone||pi)/(n a) = 1.284
+
+failures: 0

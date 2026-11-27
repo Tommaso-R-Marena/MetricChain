@@ -1,0 +1,11 @@
+V20 P2 0.70 5 --N 50000 --siteres --w 2 --seed 2026
+V20 P2 0.70 5 --N 50000 --siteres --w 1 --seed 2026
+V20 P2 0.70 5 --N 50000 --siteres --w 8 --seed 2026
+V8 P2 0.70 5 --N 20000 --siteres --w 2
+V8 P2 0.70 5 --N 20000 --siteres --w 1
+V10 P2 0.70 5 --N 20000 --siteres --w 2
+V10 P2 0.70 5 --N 20000 --siteres --w 1
+V6 P2 0.70 5 --N 20000 --siteres --w 2
+V6 P2 0.70 5 --N 20000 --siteres --w 1
+V6 P2 0.70 5 --N 20000 --siteres
+V12 P2 0.70 5 --N 20000 --siteres --w 2

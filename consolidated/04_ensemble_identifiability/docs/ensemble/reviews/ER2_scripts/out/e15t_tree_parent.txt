@@ -1,0 +1,3 @@
+194 (tree, parents-first order) pairs on 5 and 6 sites: largest variation of h_i at a fixed state of the parent = 5.55e-16
+control (reverse order, children first): largest variation of h_i at a fixed state of one conditioning site = 7.91e-01
+[exit 0]

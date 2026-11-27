@@ -1,0 +1,5 @@
+['GCGC'] : (Y,S) pairs 7 of which with non-zero weight 1 | author alpha=0: 7 (= count including zero-weight structures, 0**0 = 1) | alpha=1: 1
+   alpha=-1 raises ZeroDivisionError
+['GGCC', 'GGCC'] : (Y,S) pairs 68 of which with non-zero weight 35 | author alpha=0: 37 (= count including zero-weight structures, 0**0 = 1) | alpha=1: 304/15
+   alpha=-1 raises ZeroDivisionError
+alpha = 200, GGCC x3, model sizes: exact equality with brute force: True

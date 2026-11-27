@@ -1,0 +1,52 @@
+== BCH codes: parameters, true minimum distance, dual sizes
+  m=3 n'=7 t=1: BCH dim=4 (>= n'-mt=4), d_min=3, |C|=|dual|=2^3 <= (n'+1)^t=2^3: True
+  m=3 n'=7 t=2: BCH dim=1 (>= n'-mt=1), d_min=7, |C|=|dual|=2^6 <= (n'+1)^t=2^6: True
+  m=3 n'=7 t=3: BCH dim=1 (>= n'-mt=-2), d_min=7, |C|=|dual|=2^6 <= (n'+1)^t=2^9: True
+  m=3 n'=7 t=4: BCH dim=0 (>= n'-mt=-5), d_min=inf, |C|=|dual|=2^7 <= (n'+1)^t=2^12: True
+  m=4 n'=15 t=1: BCH dim=11 (>= n'-mt=11), d_min=3, |C|=|dual|=2^4 <= (n'+1)^t=2^4: True
+  m=4 n'=15 t=2: BCH dim=7 (>= n'-mt=7), d_min=5, |C|=|dual|=2^8 <= (n'+1)^t=2^8: True
+  m=4 n'=15 t=3: BCH dim=5 (>= n'-mt=3), d_min=7, |C|=|dual|=2^10 <= (n'+1)^t=2^12: True
+  m=4 n'=15 t=4: BCH dim=1 (>= n'-mt=-1), d_min=15, |C|=|dual|=2^14 <= (n'+1)^t=2^16: True
+  m=4 n'=15 t=5: BCH dim=1 (>= n'-mt=-5), d_min=15, |C|=|dual|=2^14 <= (n'+1)^t=2^20: True
+  m=4 n'=15 t=6: BCH dim=1 (>= n'-mt=-9), d_min=15, |C|=|dual|=2^14 <= (n'+1)^t=2^24: True
+  m=4 n'=15 t=7: BCH dim=1 (>= n'-mt=-13), d_min=15, |C|=|dual|=2^14 <= (n'+1)^t=2^28: True
+  m=4 n'=15 t=8: BCH dim=0 (>= n'-mt=-17), d_min=inf, |C|=|dual|=2^15 <= (n'+1)^t=2^32: True
+  m=5 n'=31 t=1: BCH dim=26 (>= n'-mt=26), d_min=None, |C|=|dual|=2^5 <= (n'+1)^t=2^5: True
+  m=5 n'=31 t=2: BCH dim=21 (>= n'-mt=21), d_min=5, |C|=|dual|=2^10 <= (n'+1)^t=2^10: True
+  m=5 n'=31 t=3: BCH dim=16 (>= n'-mt=16), d_min=7, |C|=|dual|=2^15 <= (n'+1)^t=2^15: True
+  m=5 n'=31 t=4: BCH dim=11 (>= n'-mt=11), d_min=11, |C|=|dual|=2^20 <= (n'+1)^t=2^20: True
+  m=5 n'=31 t=5: BCH dim=11 (>= n'-mt=6), d_min=11, |C|=|dual|=2^20 <= (n'+1)^t=2^25: True
+  m=5 n'=31 t=6: BCH dim=6 (>= n'-mt=1), d_min=15, |C|=|dual|=2^25 <= (n'+1)^t=2^30: True
+  m=5 n'=31 t=7: BCH dim=6 (>= n'-mt=-4), d_min=15, |C|=|dual|=2^25 <= (n'+1)^t=2^35: True
+  m=5 n'=31 t=8: BCH dim=1 (>= n'-mt=-9), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^40: True
+  m=5 n'=31 t=9: BCH dim=1 (>= n'-mt=-14), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^45: True
+  m=5 n'=31 t=10: BCH dim=1 (>= n'-mt=-19), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^50: True
+  m=5 n'=31 t=11: BCH dim=1 (>= n'-mt=-24), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^55: True
+  m=5 n'=31 t=12: BCH dim=1 (>= n'-mt=-29), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^60: True
+  m=5 n'=31 t=13: BCH dim=1 (>= n'-mt=-34), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^65: True
+  m=5 n'=31 t=14: BCH dim=1 (>= n'-mt=-39), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^70: True
+  m=5 n'=31 t=15: BCH dim=1 (>= n'-mt=-44), d_min=31, |C|=|dual|=2^30 <= (n'+1)^t=2^75: True
+  m=5 n'=31 t=16: BCH dim=0 (>= n'-mt=-49), d_min=inf, |C|=|dual|=2^31 <= (n'+1)^t=2^80: True
+== Claim: for every n, k: linear C of length n, dual distance > k, |C| <= (2n)^ceil(k/2)
+  n <= 31, all k <= n, two coordinate choices each: failures = 0; max of ln|C| - ceil(k/2) ln(2n) = 0.000 (<= 0 means the bound holds)
+== Odd k: extended-BCH duals have dual distance >= 2t+2 > k = 2t+1 and size <= 2 (2^m)^t
+  m=3 t=1: length 8, |C_ext|=2^4 (<= 2*8^1=2^4), dual distance=4 (> k=3: True); note's bound (2n)^ceil(k/2) = 256; Rao M_t = 9
+  m=3 t=2: length 8, |C_ext|=2^7 (<= 2*8^2=2^7), dual distance=8 (> k=5: True); note's bound (2n)^ceil(k/2) = 4096; Rao M_t = 37
+  m=3 t=3: length 8, |C_ext|=2^7 (<= 2*8^3=2^10), dual distance=8 (> k=7: True); note's bound (2n)^ceil(k/2) = 65536; Rao M_t = 93
+  m=4 t=1: length 16, |C_ext|=2^5 (<= 2*16^1=2^5), dual distance=4 (> k=3: True); note's bound (2n)^ceil(k/2) = 1024; Rao M_t = 17
+  m=4 t=2: length 16, |C_ext|=2^9 (<= 2*16^2=2^9), dual distance=6 (> k=5: True); note's bound (2n)^ceil(k/2) = 32768; Rao M_t = 137
+  m=4 t=3: length 16, |C_ext|=2^11 (<= 2*16^3=2^13), dual distance=8 (> k=7: True); note's bound (2n)^ceil(k/2) = 1048576; Rao M_t = 697
+  m=5 t=1: length 32, |C_ext|=2^6 (<= 2*32^1=2^6), dual distance=4 (> k=3: True); note's bound (2n)^ceil(k/2) = 4096; Rao M_t = 33
+  m=5 t=2: length 32, |C_ext|=2^11 (<= 2*32^2=2^11), dual distance=6 (> k=5: True); note's bound (2n)^ceil(k/2) = 262144; Rao M_t = 529
+  m=5 t=3: length 32, |C_ext|=2^16 (<= 2*32^3=2^16), dual distance=8 (> k=7: True); note's bound (2n)^ceil(k/2) = 16777216; Rao M_t = 5489
+  m=6 t=1: length 64, |C_ext|=2^7 (<= 2*64^1=2^7), dual distance=4 (> k=3: True); note's bound (2n)^ceil(k/2) = 16384; Rao M_t = 65
+  m=6 t=2: length 64, |C_ext|=2^13 (<= 2*64^2=2^13), dual distance=6 (> k=5: True); note's bound (2n)^ceil(k/2) = 2097152; Rao M_t = 2081
+  m=6 t=3: length 64, |C_ext|=2^19 (<= 2*64^3=2^19), dual distance=8 (> k=7: True); note's bound (2n)^ceil(k/2) = 268435456; Rao M_t = 43745
+== Codes used later
+  Golay24: dim 12 min weight 8 dual dim 12 dual min weight 8 -> k = 7; (2n)^4 = 5308416 ; M_3 = 2325
+  dual of BCH(15,t=2): dim 8 min weight 4 dual distance 5 -> k = 4; (2n)^2 = 900 ; M_2 = 121
+  dual of BCH(31,t=2): dim 10 min weight 12 dual distance 5 -> k = 4; (2n)^2 = 3844 ; M_2 = 497
+  dual of BCH(31,t=3): dim 15 min weight 8 dual distance 7 -> k = 6; (2n)^3 = 238328 ; M_3 = 4992
+== Puncturing can destroy the MINIMUM distance of C (not used in the note, but needed
+   for any argument that wants the basins of nu_{C,b} to be distinguishable):
+  simplex[15,4,8] restricted to 8 coordinates (zero set of a word + 1): dim 4 min weight 1 dual distance 3

@@ -1,0 +1,9 @@
+=== p8_04_gamma12: K12 on H, tau 0.7: atoms 276, sites 12, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7]; anchor (ICM) (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3), E = -307.507549 kcal/mol; order 4: 495 subsets
+    subset 495/495 done, checkpoint written, 39 s
+    closed forms (1 s): P3's Gamma_4 = 410.95407 kcal/mol, sum over the 495 subsets of variant 'P3' = 410.95407 (relative deviation 1.7e-15); anchored-hosts closed form 299.02548, sum of variant 'AH' 299.02548 (relative deviation 9.5e-16)
+    per-subset chains SA <= S <= P3, SA <= AH <= P3: 1980 comparisons, 0 violations
+    Gamma_4[P3] =      410.954 kcal/mol =      689.334 kT  (self 6.858);  P3 / P3: sums 1.000; per subset min 1.00, median 1.00, max 1.00
+    Gamma_4[S ] =      27.7017 kcal/mol =      46.4668 kT  (self 0.1139);  P3 / S: sums 14.835; per subset min 3.22, median 12.53, max 355.57
+    Gamma_4[AH] =      299.025 kcal/mol =      501.585 kT  (self 6.2);  P3 / AH: sums 1.374; per subset min 1.03, median 2.56, max 478.82
+    Gamma_4[SA] =        25.69 kcal/mol =      43.0924 kT  (self 0.1124);  P3 / SA: sums 15.997; per subset min 3.49, median 15.20, max 733.08
+DONE in 39.4 s

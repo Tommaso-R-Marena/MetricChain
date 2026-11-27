@@ -1,0 +1,5 @@
+500 random two-letter sites (logits of the two vertex laws up to |14|), grid step 0.01 in t:
+   sites with a positive second difference of F* (beyond 1e-11 relative): 0
+   largest (second difference)/max F*: -3.467e-06 at (P1(0), P2(0), t, d2, maxF) = (np.float64(0.00025708909197210827), np.float64(0.9999491489413352), np.float64(0.9700000000000001), np.float64(-1.4600642010524634e-06), np.float64(0.42115806079151896))
+[80 s]
+exit=0

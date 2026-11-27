@@ -1,0 +1,54 @@
+T2 chimera search  graph=K33+e N=6 m=10 K=2 ensembles=10 LM starts=30 seed=2102  start 2026-11-26T17:26:53Z
+   thresholds: LM residual < 1e-6 or exact defect < 1e-9 counts as a chimera found
+ens 0: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.289
+    EXACT: min defect = 3.682e-03; infeasible (no realisation of the spanning subgraph) 580; found (<1e-9): 0.   C-const max 1.1e-15, C-plant max 6.0e-12; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 1.160e-03, q01 = 3.823e-03, median = 3.383e-01; found (<1e-6): 0
+           C-const max 1.0e-15 (violations 0/2); C-plant: violations 0/200, per-start success 0.486, least successful target 1/30
+    agreement: LM residual at the EXACT minimiser = 2.388e-03; exact defect at the LM minimiser = 1.706e-02
+ens 1: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.153
+    EXACT: min defect = 5.244e-05; infeasible (no realisation of the spanning subgraph) 568; found (<1e-9): 0.   C-const max 2.2e-15, C-plant max 5.5e-13; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 1.030e-05, q01 = 3.662e-03, median = 4.737e-01; found (<1e-6): 0
+           C-const max 9.2e-16 (violations 0/2); C-plant: violations 1/200, per-start success 0.477, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 1.030e-05; exact defect at the LM minimiser = 5.244e-05
+ens 2: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.155
+    EXACT: min defect = 4.150e-03; infeasible (no realisation of the spanning subgraph) 804; found (<1e-9): 0.   C-const max 1.4e-14, C-plant max 2.6e-12; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 4.695e-05, q01 = 3.176e-03, median = 6.071e-01; found (<1e-6): 0
+           C-const max 2.5e-16 (violations 0/2); C-plant: violations 1/200, per-start success 0.482, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 9.521e-04; exact defect at the LM minimiser = 9.512e-03
+ens 3: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.628
+    EXACT: min defect = 2.023e-03; infeasible (no realisation of the spanning subgraph) 556; found (<1e-9): 0.   C-const max 2.2e-15, C-plant max 2.4e-11; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 1.628e-04, q01 = 2.910e-03, median = 7.913e-01; found (<1e-6): 0
+           C-const max 1.1e-15 (violations 0/2); C-plant: violations 1/200, per-start success 0.494, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 1.628e-04; exact defect at the LM minimiser = 2.023e-03
+ens 4: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.231
+    EXACT: min defect = 3.016e-03; infeasible (no realisation of the spanning subgraph) 784; found (<1e-9): 0.   C-const max 2.2e-15, C-plant max 4.0e-13; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 1.046e-03, q01 = 7.025e-03, median = 8.258e-01; found (<1e-6): 0
+           C-const max 1.0e-15 (violations 0/2); C-plant: violations 1/200, per-start success 0.461, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 1.046e-03; exact defect at the LM minimiser = 3.016e-03
+ens 5: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.244
+    EXACT: min defect = 9.786e-03; infeasible (no realisation of the spanning subgraph) 892; found (<1e-9): 0.   C-const max 4.0e-15, C-plant max 9.1e-13; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 8.362e-04, q01 = 1.767e-02, median = 1.331e+00; found (<1e-6): 0
+           C-const max 2.0e-15 (violations 0/2); C-plant: violations 1/200, per-start success 0.450, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 3.539e-03; exact defect at the LM minimiser = 2.229e-02
+ens 6: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.160
+    EXACT: min defect = 5.841e-03; infeasible (no realisation of the spanning subgraph) 696; found (<1e-9): 0.   C-const max 2.2e-15, C-plant max 4.3e-13; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 2.595e-03, q01 = 1.131e-02, median = 1.105e+00; found (<1e-6): 0
+           C-const max 2.2e-15 (violations 0/2); C-plant: violations 1/200, per-start success 0.478, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 2.674e-03; exact defect at the LM minimiser = 8.969e-02
+ens 7: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.399
+    EXACT: min defect = 1.840e-03; infeasible (no realisation of the spanning subgraph) 468; found (<1e-9): 0.   C-const max 2.2e-16, C-plant max 1.9e-12; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 3.465e-04, q01 = 3.191e-03, median = 5.617e-01; found (<1e-6): 0
+           C-const max 2.5e-15 (violations 0/2); C-plant: violations 1/200, per-start success 0.502, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 9.274e-04; exact defect at the LM minimiser = 6.414e-03
+ens 8: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.065
+    EXACT: min defect = 3.648e-03; infeasible (no realisation of the spanning subgraph) 952; found (<1e-9): 0.   C-const max 8.0e-15, C-plant max 1.1e-12; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 5.424e-04, q01 = 1.147e-02, median = 2.067e+00; found (<1e-6): 0
+           C-const max 2.0e-15 (violations 0/2); C-plant: violations 1/200, per-start success 0.462, least successful target 0/30
+    agreement: LM residual at the EXACT minimiser = 5.424e-04; exact defect at the LM minimiser = 3.648e-03
+ens 9: 1022 non-constant colourings (all); min over pairs/edges |len_i - len_j| = 0.952
+    EXACT: min defect = 4.682e-03; infeasible (no realisation of the spanning subgraph) 786; found (<1e-9): 0.   C-const max 1.8e-15, C-plant max 6.4e-13; control violations 0/202
+    LM   : LM on all colourings examined; min residual = 3.451e-05, q01 = 1.029e-02, median = 1.524e+00; found (<1e-6): 0
+           C-const max 2.7e-16 (violations 0/2); C-plant: violations 0/200, per-start success 0.474, least successful target 1/30
+    agreement: LM residual at the EXACT minimiser = 3.451e-05; exact defect at the LM minimiser = 4.682e-03
+SUMMARY graph=K33+e K=2: ensembles=10; non-constant colourings examined=10220; chimeras found=0; control violations=8; smallest LM residual=1.030e-05 (median over ensembles 4.445e-04); smallest exact defect=5.244e-05 (median over ensembles 3.665e-03)
+DONE t2_chimera_search K33+e 2 2026-11-26T17:29:51Z

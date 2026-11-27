@@ -1,0 +1,6 @@
+n = 10 seed 2 time 17s
+   ("K'\\K", 'Kalmanson', 'wrong support') 159
+   ('K', 'Kalmanson', 'exact support') 2341
+   outside K' (skipped) 2100
+   systems 2500
+  systems of K'\K with exact support: []

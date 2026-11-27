@@ -1,0 +1,71 @@
+chain | quantity | mine | theirs | diff
+bin   E               0.103131   0.103131   +4.9e-09
+bin   a               0.095301   0.095301   -5.0e-07
+bin   h=R(0)          0.025034   0.025034   -4.6e-07
+bin   R(0.3E)         0.012209   0.012209   -2.6e-07
+bin   theta_na(0.3E)  0.019941   0.019941   -5.2e-08
+bin   R_0(0)          0.024814   (no reference value)
+bin     brackets: E in [0.103131005, 0.103131005], a in [0.095300502, 0.095300502], largest duality gap of F* at the three optimal slopes 1.3e-16
+bin     t*(0)=0.4901  t*(0.3E)=0.3397  tau*(theta_na)=0.4361;  theta_na via R^(S^-1(x)) = 0.019940948 (direct sup: 0.019940948, diff -3.5e-17), S^-1(0.3E) = 0.010998
+bin     site bin: centre law [0.6806 0.3194], gamma* [ 0.     -0.0908], M* [0.5006 0.4994] on vertices [(np.float64(0.0), np.float64(-1.0)), (np.float64(0.0), np.float64(1.0))]
+path  E               0.400622   0.400622   +3.4e-08
+path  a               0.294791   0.294791   +2.1e-07
+path  h=R(0)          0.089589   0.089589   +2.1e-08
+path  R(0.3E)         0.043375   0.043375   +2.0e-07
+path  theta_na(0.3E)  0.066899   0.066899   +5.7e-08
+path  R_0(0)          0.080032   0.080032   +4.2e-07
+path    brackets: E in [0.400622034, 0.400622034], a in [0.294791205, 0.294791205], largest duality gap of F* at the three optimal slopes 1.1e-13
+path    t*(0)=0.4601  t*(0.3E)=0.3119  tau*(theta_na)=0.3922;  theta_na via R^(S^-1(x)) = 0.066899057 (direct sup: 0.066899057, diff +1.1e-15), S^-1(0.3E) = 0.053288
+path    site path: centre law [0.4734 0.2456 0.281 ], gamma* [ 0.      0.1454 -0.3946], M* [0.5039 0.     0.     0.4961] on vertices [(np.float64(0.0), np.float64(-0.8), np.float64(-2.4)), (np.float64(0.0), np.float64(0.8), np.float64(2.4))]
+tri   E               0.284907   0.284907   -1.5e-07
+tri   a               0.247541   0.247541   -1.5e-07
+tri   h=R(0)          0.066729   0.066729   -1.9e-07
+tri   R(0.3E)         0.032077   0.032077   -1.3e-07
+tri   theta_na(0.3E)  0.051124   0.051124   +2.9e-07
+tri   R_0(0)          0.065233   0.065233   -1.1e-07
+tri     brackets: E in [0.284906845, 0.284906845], a in [0.247540849, 0.247540849], largest duality gap of F* at the three optimal slopes 1.5e-13
+tri     t*(0)=0.4856  t*(0.3E)=0.3243  tau*(theta_na)=0.4232;  theta_na via R^(S^-1(x)) = 0.051124285 (direct sup: 0.051124285, diff +2.2e-16), S^-1(0.3E) = 0.034348
+tri     site tri: centre law [0.2093 0.4477 0.3431], gamma* [ 0.      0.1558 -0.0888], M* [0.     0.1654 0.4577 0.     0.3768 0.    ] on vertices [(np.float64(0.0), np.float64(-1.0), np.float64(0.5)), (np.float64(0.0), np.float64(-0.5), np.float64(-2.0)), (np.float64(0.0), np.float64(1.0), np.float64(2.0))]
+asym  E               0.191059   0.191059   -1.3e-07
+asym  a               0.166046   0.166046   -1.2e-07
+asym  h=R(0)          0.045407   0.045407   +4.8e-07
+asym  R(0.3E)         0.022108   0.022108   +7.3e-09
+asym  theta_na(0.3E)  0.035544   0.035544   -1.6e-07
+asym  R_0(0)          0.033856   0.033856   +3.0e-07
+asym    brackets: E in [0.191058867, 0.191058867], a in [0.166045880, 0.166045880], largest duality gap of F* at the three optimal slopes 8.3e-15
+asym    t*(0)=0.4820  t*(0.3E)=0.3323  tau*(theta_na)=0.4242;  theta_na via R^(S^-1(x)) = 0.035543837 (direct sup: 0.035543837, diff +5.6e-17), S^-1(0.3E) = 0.021774
+asym    site asym: centre law [0.4365 0.2416 0.3218], gamma* [ 0.      0.0806 -0.6115], M* [0.     0.     0.5009 0.     0.4991] on vertices [(np.float64(0.0), np.float64(-0.5), np.float64(-2.0)), (np.float64(0.0), np.float64(0.5), np.float64(1.0))]
+mix   E               0.251877   0.251877   -4.8e-07
+mix   a               0.195046   0.195046   -1.5e-07
+mix   h=R(0)          0.057275   0.057275   +4.0e-07
+mix   R(0.3E)         0.027759   0.027759   +4.2e-07
+mix   theta_na(0.3E)  0.043288   0.043288   +2.2e-07
+mix   R_0(0)          0.052360   0.052360   -8.9e-08
+mix     brackets: E in [0.251876519, 0.251876519], a in [0.195045854, 0.195045854], largest duality gap of F* at the three optimal slopes 8.0e-14
+mix     t*(0)=0.4665  t*(0.3E)=0.3173  tau*(theta_na)=0.4009;  theta_na via R^(S^-1(x)) = 0.043288223 (direct sup: 0.043288223, diff -4.2e-16), S^-1(0.3E) = 0.032275
+mix     site bin: centre law [0.6809 0.3191], gamma* [ 0.     -0.0894], M* [0.502 0.498] on vertices [(np.float64(0.0), np.float64(-1.0)), (np.float64(0.0), np.float64(1.0))]
+mix     site path: centre law [0.4736 0.245  0.2815], gamma* [ 0.      0.1483 -0.3961], M* [0.5033 0.     0.     0.4967] on vertices [(np.float64(0.0), np.float64(-0.8), np.float64(-2.4)), (np.float64(0.0), np.float64(0.8), np.float64(2.4))]
+mix2  E               0.212197   0.212197   -4.9e-07
+mix2  a               0.186645   0.186645   -2.9e-07
+mix2  h=R(0)          0.050050   0.050050   +5.7e-08
+mix2  R(0.3E)         0.024122   0.024122   -4.5e-07
+mix2  theta_na(0.3E)  0.038641   0.038641   +4.3e-07
+mix2  R_0(0)          0.049065   0.049065   -3.5e-07
+mix2    brackets: E in [0.212196509, 0.212196509], a in [0.186644710, 0.186644710], largest duality gap of F* at the three optimal slopes 1.9e-13
+mix2    t*(0)=0.4865  t*(0.3E)=0.3272  tau*(theta_na)=0.4257;  theta_na via R^(S^-1(x)) = 0.038641432 (direct sup: 0.038641432, diff +1.2e-16), S^-1(0.3E) = 0.025018
+mix2    site bin: centre law [0.6806 0.3194], gamma* [ 0.     -0.0905], M* [0.5008 0.4992] on vertices [(np.float64(0.0), np.float64(-1.0)), (np.float64(0.0), np.float64(1.0))]
+mix2    site tri: centre law [0.2093 0.4477 0.3431], gamma* [ 0.      0.1558 -0.0888], M* [0.     0.1656 0.4576 0.     0.3767 0.    ] on vertices [(np.float64(0.0), np.float64(-1.0), np.float64(0.5)), (np.float64(0.0), np.float64(-0.5), np.float64(-2.0)), (np.float64(0.0), np.float64(1.0), np.float64(2.0))]
+largest |mine - theirs| over the table: 5.0e-07  (their table is rounded to 6 decimals)
+
+== three-state sites: best two-state coarse-graining / best deletion at e = 0 ==
+path  cut: mine 0.048586 theirs 0.048586 (-2.7e-07);  pair: mine 0.115369 theirs 0.115369 (-1.9e-07)
+tri   cut: mine 0.053168 theirs 0.053168 (+1.2e-07);  pair: mine 0.094950 theirs 0.094950 (+8.1e-08)
+asym  cut: mine 0.024685 theirs 0.024685 (-3.1e-08);  pair: mine 0.058646 theirs 0.058646 (+4.5e-07)
+
+== 'the exponents do not add' (chain mix): average at a common accuracy against R^ ==
+e/E=0.3: R^=0.027759  average=0.030121  excess=8.5 %   (theirs: +8.5 %)
+e/E=0.5: R^=0.014126  average=0.020800  excess=47.3 %   (theirs: +47 %)
+e/E=0.7: R^=0.005090  average=0.013844  excess=172.0 %   (theirs: +172 %)
+e/E=0.9: R^=0.000568  average=0.008322  excess=1365.0 %   (theirs: +1365 %)
+[403.8 s]
+exit=0

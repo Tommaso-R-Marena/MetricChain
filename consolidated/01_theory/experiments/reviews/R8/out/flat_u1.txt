@@ -1,0 +1,9 @@
+# exact number of evaluations of Algorithm 2L+ with Proposition-K0 brackets inside, at psi = 0
+# parameters of the report's section 6.4: b=0.5, lam=0.2, eta=eta'=theta=0.05, delta=0.05, 40 rungs, nu_1 = 2e^u n_o/theta
+u = 1.0: a = 0.11094, h = 0.02914, h/a = 0.2626
+     n   best phi   ln(cost)/(na)   ln(C_max)/(na)   hinted LB/(na)   cost>=LB   cost<=C_max   width<=x_out  all phi: ln(cost)/(na)
+   250    0.85        1.5735          2.9016          0.3324       True       True        True      2.158 2.084 1.962 1.934 1.889 1.837 1.747 1.640 1.574   [0s]
+  1000    0.80        0.7123          1.4948          0.2857       True       True        True      1.205 1.090 0.984 0.920 0.868 0.815 0.751 0.712 0.749   [1s]
+  4000    0.65        0.5519          0.8934          0.2707       True       True        True      0.880 0.772 0.667 0.613 0.559 0.552 0.597 0.684 0.725   [2s]
+ 16000    0.55        0.5126          0.6428          0.2649       True       True        True      0.772 0.668 0.565 0.513 0.534 0.580 0.625 0.718 0.766   [11s]
+ 64000    0.55        0.5136          0.5913          0.2633       True       True        True      0.730 0.628 0.527 0.514 0.560 0.608 0.655 0.752 0.801   [42s]

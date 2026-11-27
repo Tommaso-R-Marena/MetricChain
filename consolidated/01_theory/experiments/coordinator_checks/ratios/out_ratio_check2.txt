@@ -1,0 +1,19 @@
+full LP on Q_n against the LP on types, and the tilt formula: {'full_vs_type': '3.66e-15', 'tilt': '6.76e-16'}
+band A = types in [0.45, 0.55], B = types <= 0.3 or >= 0.7; bJ=0.0 bB=0.0 u=1.0
+   n=  50  ln R+/n: LP 0.276673   best cone around a type class 0.276673   formula 0.282287 (P* = 0.5000)
+   n= 100  ln R+/n: LP nan   best cone around a type class 0.280182   formula 0.282287 (P* = 0.5000)
+   n= 200  ln R+/n: LP nan   best cone around a type class 0.281308   formula 0.282287 (P* = 0.5000)
+   n= 400  ln R+/n: LP nan   best cone around a type class 0.281814   formula 0.282287 (P* = 0.5000)
+   n= 800  ln R+/n: LP nan   best cone around a type class 0.282053   formula 0.282287 (P* = 0.5000)
+band A = types in [0.4, 0.6], B = types <= 0.2 or >= 0.8; bJ=1.5 bB=0.0 u=0.6
+   n=  50  ln R+/n: LP 0.079519   best cone around a type class 0.079519   formula 0.102745 (P* = 0.5000)
+   n= 100  ln R+/n: LP nan   best cone around a type class 0.089911   formula 0.102745 (P* = 0.5000)
+   n= 200  ln R+/n: LP nan   best cone around a type class 0.095821   formula 0.102745 (P* = 0.5000)
+   n= 400  ln R+/n: LP nan   best cone around a type class 0.099169   formula 0.102745 (P* = 0.5000)
+   n= 800  ln R+/n: LP nan   best cone around a type class 0.100936   formula 0.102745 (P* = 0.5000)
+band A = types in [0.6, 0.7], B = types <= 0.5 or >= 0.9; bJ=0.5 bB=0.2 u=2.0
+   n=  50  ln R+/n: LP nan   best cone around a type class 0.437803   formula 0.437707 (P* = 0.7000)
+   n= 100  ln R+/n: LP nan   best cone around a type class 0.439001   formula 0.437707 (P* = 0.7000)
+   n= 200  ln R+/n: LP nan   best cone around a type class 0.438432   formula 0.437707 (P* = 0.7000)
+   n= 400  ln R+/n: LP nan   best cone around a type class 0.438077   formula 0.437707 (P* = 0.7000)
+   n= 800  ln R+/n: LP nan   best cone around a type class 0.437898   formula 0.437707 (P* = 0.7000)

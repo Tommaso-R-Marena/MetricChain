@@ -1,0 +1,7 @@
+=== p8_04c_termwise12: K12 on H, tau 0.7: 276 atoms, anchor (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3); order 5; 4 random subsets of 792
+    T = (0, 2, 7, 9, 11): mine (Sb) 2.2442966836e-05, P3 termwise anchored 2.2442966836e-05, relative deviation 1.5e-16;  P3 closed-form summand (gfbound) 7.9354e-04 = 35.4 x
+    T = (1, 4, 5, 9, 11): mine (Sb) 3.7721337544e-04, P3 termwise anchored 3.7721337544e-04, relative deviation 1.4e-16;  P3 closed-form summand (gfbound) 3.4006e-02 = 90.2 x
+    T = (4, 5, 7, 9, 10): mine (Sb) 5.5124682418e-04, P3 termwise anchored 5.5124682418e-04, relative deviation 3.9e-16;  P3 closed-form summand (gfbound) 1.4170e-02 = 25.7 x
+    T = (4, 7, 9, 10, 11): mine (Sb) 1.1828078644e-03, P3 termwise anchored 1.1828078644e-03, relative deviation 0.0e+00;  P3 closed-form summand (gfbound) 6.9354e-02 = 58.6 x
+    largest relative deviation over 4 subsets: 3.9e-16;  time per subset: mine 0.88 s, P3's termwise 2.8 s
+DONE in 28.1 s; peak RSS 394 MB

@@ -1,0 +1,6 @@
+# n_o n_i  x_1   kind      M_max     |C_2| honest   |C_2| with wide rung-1 brackets    N_2     violated
+  10  4   1.0  flat       393216         145         162178                    59059   True
+  11  4   1.5  cone       786432         906         413649                   105262   True
+  10  5   0.8  flathist   393216         259         307083                    50968   True
+  11  3   2.0  walk       786432        1043          37619                   164868   False
+  10  6   1.2  dip        393216         556         393216                    79931   True

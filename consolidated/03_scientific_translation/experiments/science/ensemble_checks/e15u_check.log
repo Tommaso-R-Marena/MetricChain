@@ -1,0 +1,18 @@
+Proposition E15U (Ensemble division, 7eb9cae; statement as in ENSEMBLE-MSG-0005 §2) — replication on 2, 3 and 4 binary sites
+
+n = 2:    4 up-sets; 400 random measures: condition holds for 205, fails for 195; when it holds the largest excess TV - bound over members is -3.14e-08 (<= 0: no violation); when it fails the two-level member of the minimising up-set violates the bound, smallest violation 5.16e-05, equal to t q (1-q)(1-m)/(1+tq) to 1e-12; control: 37 measures have 0.9 <= m < 1 and a violating member (a threshold of 0.9 would be wrong)
+n = 3:   18 up-sets; 400 random measures: condition holds for 105, fails for 295; when it holds the largest excess TV - bound over members is -4.85e-08 (<= 0: no violation); when it fails the two-level member of the minimising up-set violates the bound, smallest violation 2.93e-06, equal to t q (1-q)(1-m)/(1+tq) to 1e-12; control: 20 measures have 0.9 <= m < 1 and a violating member (a threshold of 0.9 would be wrong)
+n = 4:  166 up-sets; 150 random measures: condition holds for 29, fails for 121; when it holds the largest excess TV - bound over members is -2.51e-07 (<= 0: no violation); when it fails the two-level member of the minimising up-set violates the bound, smallest violation 2.43e-06, equal to t q (1-q)(1-m)/(1+tq) to 1e-12; control: 6 measures have 0.9 <= m < 1 and a violating member (a threshold of 0.9 would be wrong)
+
+(B1) two sites, pi ~ exp(-x1 x2 / 2), centre (+,+), slopes 1
+   m = 0.6192 < 1 (the condition fails); largest excess of TV over the bound, grid search over all members: 0.169599 at log-density (site 1, site 2, both) = (np.float64(0.0), np.float64(2.0), np.float64(2.0)); their closed form (1+e^2)/(3+e^2) - 2/(3+e^-2) = 0.169599
+
+(B2) three sites, nu = (1 - lam (-1)^N)/8: the least lam at which the condition fails
+   threshold lam = 0.500000000 (their statement: the bound holds iff lam <= 1/2); pair covariances at lam = 0.4: 6.9e-18 (their statement: all zero)
+
+(C) a frozen site (slope 0 at site 1), three sites: the bound can hold for every member although the condition fails at an up-set that cuts through the frozen site
+   an instance: least m over the 4 up-sets invariant under site 1: 1.0518 >= 1; least m over all 18 up-sets: 0.5225 < 1 (at an up-set that is not invariant: True); largest excess over 4012 members with slopes (0, 1, 1): -1.16e-05 (<= 0: the bound holds for every member tested, the condition over all up-sets fails)
+
+summary: 950 random measures on 2-4 sites: condition holds for 339 (no violation among 20340 random members and 22572 two-level members), fails for 611 (an explicit admissible member violates the bound each time, by the closed form); control instances with 0.9 <= m < 1: 63
+         their two-site excess reproduced: True; their three-site threshold 1/2 reproduced: True
+ALL DONE  77.6 s  peak memory 36 MB

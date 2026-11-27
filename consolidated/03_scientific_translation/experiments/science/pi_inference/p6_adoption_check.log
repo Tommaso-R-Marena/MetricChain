@@ -1,0 +1,10 @@
+=== 1. the counting lemmas on random non-negative constants (exhaustive over s in {0,1}^n)
+   86400 inequalities of the chain envelope <= triples <= triples in a window <= pairs <= banded pairs <= sites: no violation (largest excess 1.4e-14); inclusion-exclusion and both double-counting identities hold
+=== 2. Val8 on PPII, order 4: site, pair and triple forms built here from P3's constants and the enumerated energy
+   6561 states (cache); anchor [1, 1, 1, 1, 1, 1, 1, 1]; 70 subsets, Gamma_4 = 0.71712 kcal/mol = 1.2029 kT
+   remainder g - I_3 g: range [-0.00043, 0.00240] kcal/mol; exact ln Z(E) = 245.947014
+   env    form: |remainder| > penalty at 0 of 6561 states;  ln Z in [245.946273, 245.947898], width 0.00162 nats (the envelope itself: the best any share allocation can do);  exact inside: True
+   triple form: |remainder| > penalty at 0 of 6561 states;  ln Z in [245.941871, 245.952859], width 0.01099 nats (P6's pairwise model with reduced three-site terms: 0.0123; difference +0.0013);  exact inside: True
+   pair   form: |remainder| > penalty at 0 of 6561 states;  ln Z in [245.914237, 245.984611], width 0.07037 nats (P6's pairwise model with reduced three-site terms: 0.0717; difference +0.0013);  exact inside: True
+   site   form: |remainder| > penalty at 0 of 6561 states;  ln Z in [245.749928, 246.173389], width 0.42346 nats (P6's pairwise model with reduced three-site terms: 0.425; difference +0.0015);  exact inside: True
+ALL DONE 4 s

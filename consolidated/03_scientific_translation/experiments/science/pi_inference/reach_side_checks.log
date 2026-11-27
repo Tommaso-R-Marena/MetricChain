@@ -1,0 +1,19 @@
+# (1) instance | states | off the anchor (mean) | per order m: Gamma_m (kcal/mol) | sup |g - I_{m-1} g| (kcal/mol) | ratio | rms of the remainder under the true ensemble
+K3/H (2352 states, k = [14, 14, 12]; 0.99 of 3 off) || m=2: 162.2 | 30.6 | 5.3 | 0.59 || m=3: 13.64 | 0.141 | 96.9 | 5.3e-05  [4s]
+K4/H (16464 states, k = [14, 14, 12, 7]; 0.96 of 4 off) || m=2: 271.5 | 36 | 7.55 | 0.62 || m=3: 33.58 | 0.189 | 178 | 9.4e-05 || m=4: 0.8538 | 0.00294 | 290 | 3.5e-07  [13s]
+LKSE:4/H (7254 states, k = [2, 31, 9, 13]; 1.57 of 4 off) || m=2: 638.1 | 9.54 | 66.9 | 0.81 || m=3: 125.1 | 0.132 | 948 | 0.00028 || m=4: 5.251 | 0.00733 | 716 | 6.1e-07  [17s]
+LKSE:5/H (14508 states, k = [2, 31, 9, 13, 2]; 1.45 of 5 off) || m=2: 1206 | 9.74 | 124 | 0.76 || m=3: 286.6 | 0.475 | 603 | 0.00018 || m=4: 29.15 | 0.0505 | 578 | 5.6e-07 || m=5: 1.531 | 0.00441 | 347 | 1.1e-09  [25s]
+S4/H (2916 states, k = [9, 9, 6, 6]; 2.21 of 4 off) || m=2: 71.37 | 4.41 | 16.2 | 0.8 || m=3: 4.132 | 0.0468 | 88.4 | 0.0014 || m=4: 0.03911 | 0.000132 | 297 | 1.8e-06  [26s]
+S5/H (17496 states, k = [9, 9, 6, 6, 6]; 2.73 of 5 off) || m=2: 121.3 | 5.56 | 21.8 | 0.9 || m=3: 8.976 | 0.0491 | 183 | 0.0021 || m=4: 0.2125 | 0.00114 | 187 | 1.9e-05 || m=5: 0.002387 | 3e-05 | 79.6 | 2e-07  [30s]
+L6/H (64 states, k = [2, 2, 2, 2, 2, 2]; 0.49 of 6 off) || m=2: 790.8 | 0.434 | 1.82e+03 | 0.015 || m=3: 131.7 | 0.0569 | 2.32e+03 | 9.1e-05 || m=4: 12.88 | 0.0301 | 428 | 2.9e-07 || m=5: 0.7763 | 0.00222 | 350 | 3.4e-11 || m=6: 0.02155 | 0.000121 | 178 | 1.9e-14  [32s]
+# (2) Leu12 on the helix (4096 states, exact enumeration)
+exact ln Z = 374.345343; the solvent term over all states: g - g(anchor) in [-2.72, 1.23] kcal/mol; all twelve flipped: E - E(anchor) = 76.84 kcal/mol = 128.9 kT
+    0 flips (   1 states): f - f(anchor) in [   0.00,    0.00]   g - g(anchor) in [  0.00,   0.00]   E - E(anchor) >=   0.00 kcal/mol
+    2 flips (  66 states): f - f(anchor) in [   3.31,   16.77]   g - g(anchor) in [ -1.45,   1.04]   E - E(anchor) >=   1.95 kcal/mol
+    4 flips ( 495 states): f - f(anchor) in [  12.01,   32.27]   g - g(anchor) in [ -2.29,   1.19]   E - E(anchor) >=  10.34 kcal/mol
+    6 flips ( 924 states): f - f(anchor) in [  25.59,   47.39]   g - g(anchor) in [ -2.72,   1.11]   E - E(anchor) >=  24.22 kcal/mol
+    8 flips ( 495 states): f - f(anchor) in [  40.83,   62.32]   g - g(anchor) in [ -2.52,   0.64]   E - E(anchor) >=  39.38 kcal/mol
+   10 flips (  66 states): f - f(anchor) in [  59.07,   72.73]   g - g(anchor) in [ -2.13,  -0.10]   E - E(anchor) >=  57.78 kcal/mol
+   12 flips (   1 states): f - f(anchor) in [  78.01,   78.01]   g - g(anchor) in [ -1.17,  -1.17]   E - E(anchor) >=  76.84 kcal/mol
+   certified constants: Gamma_1 = 5251 kcal/mol (8809 kT); Gamma_2 = 3924 kcal/mol (6583 kT); Gamma_3 = 1034 kcal/mol (1734 kT); Gamma_4 = 188.7 kcal/mol (316.5 kT)
+ALL DONE 39 s

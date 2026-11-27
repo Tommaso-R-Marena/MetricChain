@@ -1,0 +1,686 @@
+228 cases
+[('GC', 1)] letters1: structs 2 pairs-by-R {1: 2}: OK
+[('GC', 1)] letters2: structs 2 pairs-by-R {1: 2}: OK
+[('GC', 1)] letters3: structs 2 pairs-by-R {1: 2}: OK
+[('GC', 2)] letters1: structs 3 pairs-by-R {1: 2, 2: 1}: OK
+[('GC', 2)] letters2: structs 3 pairs-by-R {1: 2, 2: 1}: OK
+[('GC', 2)] letters3: structs 3 pairs-by-R {1: 2, 2: 1}: OK
+[('GC', 3)] letters1: structs 4 pairs-by-R {1: 3, 3: 1}: OK
+[('GC', 3)] letters2: structs 4 pairs-by-R {1: 3, 3: 1}: OK
+[('GC', 3)] letters3: structs 4 pairs-by-R {1: 3, 3: 1}: OK
+[('GC', 4)] letters1: structs 5 pairs-by-R {1: 4, 4: 1}: OK
+[('GC', 4)] letters2: structs 5 pairs-by-R {1: 4, 4: 1}: OK
+[('GC', 4)] letters3: structs 5 pairs-by-R {1: 4, 4: 1}: OK
+[('GC', 5)] letters1: structs 6 pairs-by-R {1: 5, 5: 1}: OK
+[('GC', 5)] letters2: structs 6 pairs-by-R {1: 5, 5: 1}: OK
+[('GC', 5)] letters3: structs 6 pairs-by-R {1: 5, 5: 1}: OK
+[('GC', 6)] letters1: structs 7 pairs-by-R {1: 6, 6: 1}: OK
+[('GC', 6)] letters2: structs 7 pairs-by-R {1: 6, 6: 1}: OK
+[('GC', 6)] letters3: structs 7 pairs-by-R {1: 6, 6: 1}: OK
+[('GC', 7)] letters1: structs 8 pairs-by-R {1: 7, 7: 1}: OK
+[('GC', 7)] letters2: structs 8 pairs-by-R {1: 7, 7: 1}: OK
+[('GC', 7)] letters3: structs 8 pairs-by-R {1: 7, 7: 1}: OK
+[('GC', 8)] letters1: structs 9 pairs-by-R {1: 8, 8: 1}: OK
+[('GC', 8)] letters2: structs 9 pairs-by-R {1: 8, 8: 1}: OK
+[('GC', 8)] letters3: structs 9 pairs-by-R {1: 8, 8: 1}: OK
+[('GGCC', 1)] letters1: structs 6 pairs-by-R {1: 6}: OK
+[('GGCC', 1)] letters2: structs 6 pairs-by-R {1: 6}: OK
+[('GGCC', 1)] letters3: structs 6 pairs-by-R {1: 6}: OK
+[('GGCC', 2)] letters1: structs 68 pairs-by-R {1: 62, 2: 6}: OK
+[('GGCC', 2)] letters2: structs 68 pairs-by-R {1: 62, 2: 6}: OK
+[('GGCC', 2)] letters3: structs 68 pairs-by-R {1: 62, 2: 6}: OK
+[('GGCC', 3)] letters1: structs 963 pairs-by-R {1: 957, 3: 6}: OK
+[('GGCC', 3)] letters2: structs 963 pairs-by-R {1: 957, 3: 6}: OK
+[('GGCC', 3)] letters3: structs 963 pairs-by-R {1: 957, 3: 6}: OK
+[('GGCC', 4)] letters1: structs 15284 pairs-by-R {1: 15196, 2: 82, 4: 6}: OK
+[('GGCC', 4)] letters2: structs 15284 pairs-by-R {1: 15196, 2: 82, 4: 6}: OK
+[('GGCC', 4)] letters3: structs 15284 pairs-by-R {1: 15196, 2: 82, 4: 6}: OK
+[('GGCC', 5)] letters1: structs 259991 pairs-by-R {1: 259985, 5: 6}: OK
+[('GGCC', 5)] letters2: structs 259991 pairs-by-R {1: 259985, 5: 6}: OK
+[('GGCC', 5)] letters3: structs 259991 pairs-by-R {1: 259985, 5: 6}: OK
+[('GCGC', 2)] letters1: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCGC', 2)] letters2: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCGC', 2)] letters3: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCGC', 3)] letters1: structs 1559 pairs-by-R {1: 1551, 3: 8}: OK
+[('GCGC', 3)] letters2: structs 1559 pairs-by-R {1: 1551, 3: 8}: OK
+[('GCGC', 3)] letters3: structs 1559 pairs-by-R {1: 1551, 3: 8}: OK
+[('GCGC', 4)] letters1: structs 28814 pairs-by-R {1: 28668, 2: 138, 4: 8}: OK
+[('GCGC', 4)] letters2: structs 28814 pairs-by-R {1: 28668, 2: 138, 4: 8}: OK
+[('GCGC', 4)] letters3: structs 28814 pairs-by-R {1: 28668, 2: 138, 4: 8}: OK
+[('ACGT', 2)] letters1: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('ACGT', 2)] letters2: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('ACGT', 2)] letters3: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('ACGT', 3)] letters1: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('ACGT', 3)] letters2: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('ACGT', 3)] letters3: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('ACGT', 4)] letters1: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('ACGT', 4)] letters2: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('ACGT', 4)] letters3: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('ACGT', 5)] letters1: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('ACGT', 5)] letters2: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('ACGT', 5)] letters3: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('ACGT', 6)] letters1: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('ACGT', 6)] letters2: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('ACGT', 6)] letters3: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('GATC', 2)] letters1: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('GATC', 2)] letters2: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('GATC', 2)] letters3: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('GATC', 3)] letters1: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('GATC', 3)] letters2: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('GATC', 3)] letters3: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('GATC', 4)] letters1: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('GATC', 4)] letters2: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('GATC', 4)] letters3: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('GATC', 5)] letters1: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('GATC', 5)] letters2: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('GATC', 5)] letters3: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('GATC', 6)] letters1: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('GATC', 6)] letters2: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('GATC', 6)] letters3: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('GGATCC', 2)] letters1: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('GGATCC', 2)] letters2: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('GGATCC', 2)] letters3: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('GGATCC', 3)] letters1: structs 15912 pairs-by-R {1: 15894, 3: 18}: OK
+[('GGATCC', 3)] letters2: structs 15912 pairs-by-R {1: 15894, 3: 18}: OK
+[('GGATCC', 3)] letters3: structs 15912 pairs-by-R {1: 15894, 3: 18}: OK
+[('GCATGC', 2)] letters1: structs 523 pairs-by-R {1: 500, 2: 23}: OK
+[('GCATGC', 2)] letters2: structs 523 pairs-by-R {1: 500, 2: 23}: OK
+[('GCATGC', 2)] letters3: structs 523 pairs-by-R {1: 500, 2: 23}: OK
+[('GCATGC', 3)] letters1: structs 25688 pairs-by-R {1: 25665, 3: 23}: OK
+[('GCATGC', 3)] letters2: structs 25688 pairs-by-R {1: 25665, 3: 23}: OK
+[('GCATGC', 3)] letters3: structs 25688 pairs-by-R {1: 25665, 3: 23}: OK
+[('AGCT', 2)] letters1: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('AGCT', 2)] letters2: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('AGCT', 2)] letters3: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('AGCT', 3)] letters1: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('AGCT', 3)] letters2: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('AGCT', 3)] letters3: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('AGCT', 4)] letters1: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('AGCT', 4)] letters2: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('AGCT', 4)] letters3: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('AGCT', 5)] letters1: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('AGCT', 5)] letters2: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('AGCT', 5)] letters3: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('AGCT', 6)] letters1: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('AGCT', 6)] letters2: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('AGCT', 6)] letters3: structs 100520 pairs-by-R {1: 100200, 2: 288, 3: 28, 6: 4}: OK
+[('GTAC', 2)] letters1: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('GTAC', 2)] letters2: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('GTAC', 2)] letters3: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('GTAC', 3)] letters1: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('GTAC', 3)] letters2: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('GTAC', 3)] letters3: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('GTAC', 4)] letters1: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('GTAC', 4)] letters2: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('GTAC', 4)] letters3: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('GTAC', 5)] letters1: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('GTAC', 5)] letters2: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('GTAC', 5)] letters3: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('TGCA', 2)] letters1: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('TGCA', 2)] letters2: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('TGCA', 2)] letters3: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('TGCA', 3)] letters1: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('TGCA', 3)] letters2: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('TGCA', 3)] letters3: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('TGCA', 4)] letters1: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('TGCA', 4)] letters2: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('TGCA', 4)] letters3: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('TGCA', 5)] letters1: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('TGCA', 5)] letters2: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('TGCA', 5)] letters3: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('CATG', 2)] letters1: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('CATG', 2)] letters2: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('CATG', 2)] letters3: structs 24 pairs-by-R {1: 20, 2: 4}: OK
+[('CATG', 3)] letters1: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('CATG', 3)] letters2: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('CATG', 3)] letters3: structs 172 pairs-by-R {1: 168, 3: 4}: OK
+[('CATG', 4)] letters1: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('CATG', 4)] letters2: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('CATG', 4)] letters3: structs 1360 pairs-by-R {1: 1328, 2: 28, 4: 4}: OK
+[('CATG', 5)] letters1: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('CATG', 5)] letters2: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('CATG', 5)] letters3: structs 11444 pairs-by-R {1: 11440, 5: 4}: OK
+[('GAGCTC', 2)] letters1: structs 260 pairs-by-R {1: 246, 2: 14}: OK
+[('GAGCTC', 2)] letters2: structs 260 pairs-by-R {1: 246, 2: 14}: OK
+[('GAGCTC', 2)] letters3: structs 260 pairs-by-R {1: 246, 2: 14}: OK
+[('GAGCTC', 3)] letters1: structs 9038 pairs-by-R {1: 9024, 3: 14}: OK
+[('GAGCTC', 3)] letters2: structs 9038 pairs-by-R {1: 9024, 3: 14}: OK
+[('GAGCTC', 3)] letters3: structs 9038 pairs-by-R {1: 9024, 3: 14}: OK
+[('AGGCCT', 2)] letters1: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('AGGCCT', 2)] letters2: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('AGGCCT', 2)] letters3: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('CTGCAG', 3)] letters1: structs 12223 pairs-by-R {1: 12207, 3: 16}: OK
+[('CTGCAG', 3)] letters2: structs 12223 pairs-by-R {1: 12207, 3: 16}: OK
+[('CTGCAG', 3)] letters3: structs 12223 pairs-by-R {1: 12207, 3: 16}: OK
+[('GAATTC', 2)] letters1: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('GAATTC', 2)] letters2: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('GAATTC', 2)] letters3: structs 380 pairs-by-R {1: 362, 2: 18}: OK
+[('GAATTC', 3)] letters1: structs 15912 pairs-by-R {1: 15894, 3: 18}: OK
+[('GAATTC', 3)] letters2: structs 15912 pairs-by-R {1: 15894, 3: 18}: OK
+[('GAATTC', 3)] letters3: structs 15912 pairs-by-R {1: 15894, 3: 18}: OK
+[('GGC', 2)] letters1: structs 10 pairs-by-R {1: 8, 2: 2}: OK
+[('GGC', 2)] letters2: structs 10 pairs-by-R {1: 8, 2: 2}: OK
+[('GGC', 2)] letters3: structs 10 pairs-by-R {1: 8, 2: 2}: OK
+[('GGC', 3)] letters1: structs 35 pairs-by-R {1: 33, 3: 2}: OK
+[('GGC', 3)] letters2: structs 35 pairs-by-R {1: 33, 3: 2}: OK
+[('GGC', 3)] letters3: structs 35 pairs-by-R {1: 33, 3: 2}: OK
+[('GGC', 4)] letters1: structs 126 pairs-by-R {1: 120, 2: 4, 4: 2}: OK
+[('GGC', 4)] letters2: structs 126 pairs-by-R {1: 120, 2: 4, 4: 2}: OK
+[('GGC', 4)] letters3: structs 126 pairs-by-R {1: 120, 2: 4, 4: 2}: OK
+[('GGC', 5)] letters1: structs 462 pairs-by-R {1: 460, 5: 2}: OK
+[('GGC', 5)] letters2: structs 462 pairs-by-R {1: 460, 5: 2}: OK
+[('GGC', 5)] letters3: structs 462 pairs-by-R {1: 460, 5: 2}: OK
+[('GGC', 6)] letters1: structs 1716 pairs-by-R {1: 1692, 2: 18, 3: 4, 6: 2}: OK
+[('GGC', 6)] letters2: structs 1716 pairs-by-R {1: 1692, 2: 18, 3: 4, 6: 2}: OK
+[('GGC', 6)] letters3: structs 1716 pairs-by-R {1: 1692, 2: 18, 3: 4, 6: 2}: OK
+[('GCAAAGC', 2)] letters1: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCAAAGC', 2)] letters2: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCAAAGC', 2)] letters3: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCAAAGC', 3)] letters1: structs 1559 pairs-by-R {1: 1551, 3: 8}: OK
+[('GCAAAGC', 3)] letters2: structs 1559 pairs-by-R {1: 1551, 3: 8}: OK
+[('GCAAAGC', 3)] letters3: structs 1559 pairs-by-R {1: 1551, 3: 8}: OK
+[('GCTTTTGC', 2)] letters1: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCTTTTGC', 2)] letters2: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GCTTTTGC', 2)] letters3: structs 94 pairs-by-R {1: 86, 2: 8}: OK
+[('GGGAAACCCAGGGAAACCC', 1)] letters1: structs 1710 pairs-by-R {1: 1710}: OK
+[('GGGAAACCCAGGGAAACCC', 1)] letters2: structs 1710 pairs-by-R {1: 1710}: OK
+[('GGGAAACCCAGGGAAACCC', 1)] letters3: structs 1710 pairs-by-R {1: 1710}: OK
+[('GCGAAGCTTGC', 1)] letters1: structs 175 pairs-by-R {1: 175}: OK
+[('GCGAAGCTTGC', 1)] letters2: structs 175 pairs-by-R {1: 175}: OK
+[('GCGAAGCTTGC', 1)] letters3: structs 175 pairs-by-R {1: 175}: OK
+[('GCGAAGCTTGC', 2)] letters1: structs 176052 pairs-by-R {1: 175578, 2: 474}: OK
+[('GCGAAGCTTGC', 2)] letters2: structs 176052 pairs-by-R {1: 175578, 2: 474}: OK
+[('GCGAAGCTTGC', 2)] letters3: structs 176052 pairs-by-R {1: 175578, 2: 474}: OK
+[('GA', 1), ('TC', 1)] letters1: structs 3 pairs-by-R {1: 6}: OK
+[('GA', 1), ('TC', 1)] letters2: structs 3 pairs-by-R {1: 6}: OK
+[('GA', 1), ('TC', 1)] letters3: structs 3 pairs-by-R {1: 6}: OK
+[('GA', 2), ('TC', 2)] letters1: structs 5 pairs-by-R {1: 8, 2: 2}: OK
+[('GA', 2), ('TC', 2)] letters2: structs 5 pairs-by-R {1: 8, 2: 2}: OK
+[('GA', 2), ('TC', 2)] letters3: structs 5 pairs-by-R {1: 8, 2: 2}: OK
+[('GA', 3), ('TC', 3)] letters1: structs 7 pairs-by-R {1: 12, 3: 2}: OK
+[('GA', 3), ('TC', 3)] letters2: structs 7 pairs-by-R {1: 12, 3: 2}: OK
+[('GA', 3), ('TC', 3)] letters3: structs 7 pairs-by-R {1: 12, 3: 2}: OK
+[('GA', 2), ('TC', 4)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 2), ('TC', 4)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 2), ('TC', 4)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 4), ('TC', 2)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 4), ('TC', 2)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 4), ('TC', 2)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 4), ('TC', 4)] letters1: structs 9 pairs-by-R {1: 16, 4: 2}: OK
+[('GA', 4), ('TC', 4)] letters2: structs 9 pairs-by-R {1: 16, 4: 2}: OK
+[('GA', 4), ('TC', 4)] letters3: structs 9 pairs-by-R {1: 16, 4: 2}: OK
+[('GA', 6), ('TC', 2)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 6), ('TC', 2)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 6), ('TC', 2)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 2), ('TC', 6)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 2), ('TC', 6)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 2), ('TC', 6)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 6), ('TC', 3)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 6), ('TC', 3)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 6), ('TC', 3)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 3), ('TC', 6)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 3), ('TC', 6)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 3), ('TC', 6)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 5), ('TC', 5)] letters1: structs 11 pairs-by-R {1: 20, 5: 2}: OK
+[('GA', 5), ('TC', 5)] letters2: structs 11 pairs-by-R {1: 20, 5: 2}: OK
+[('GA', 5), ('TC', 5)] letters3: structs 11 pairs-by-R {1: 20, 5: 2}: OK
+[('GA', 6), ('TC', 6)] letters1: structs 13 pairs-by-R {1: 24, 6: 2}: OK
+[('GA', 6), ('TC', 6)] letters2: structs 13 pairs-by-R {1: 24, 6: 2}: OK
+[('GA', 6), ('TC', 6)] letters3: structs 13 pairs-by-R {1: 24, 6: 2}: OK
+[('GA', 1), ('TC', 2)] letters1: structs 1 pairs-by-R {1: 3}: OK
+[('GA', 1), ('TC', 2)] letters2: structs 1 pairs-by-R {1: 3}: OK
+[('GA', 1), ('TC', 2)] letters3: structs 1 pairs-by-R {1: 3}: OK
+[('GA', 3), ('TC', 2)] letters1: structs 1 pairs-by-R {1: 5}: OK
+[('GA', 3), ('TC', 2)] letters2: structs 1 pairs-by-R {1: 5}: OK
+[('GA', 3), ('TC', 2)] letters3: structs 1 pairs-by-R {1: 5}: OK
+[('GAC', 1), ('GTC', 1)] letters1: structs 7 pairs-by-R {1: 14}: OK
+[('GAC', 1), ('GTC', 1)] letters2: structs 7 pairs-by-R {1: 14}: OK
+[('GAC', 1), ('GTC', 1)] letters3: structs 7 pairs-by-R {1: 14}: OK
+[('GAC', 2), ('GTC', 2)] letters1: structs 112 pairs-by-R {1: 316, 2: 10}: OK
+[('GAC', 2), ('GTC', 2)] letters2: structs 112 pairs-by-R {1: 316, 2: 10}: OK
+[('GAC', 2), ('GTC', 2)] letters3: structs 112 pairs-by-R {1: 316, 2: 10}: OK
+[('GAC', 3), ('GTC', 3)] letters1: structs 2012 pairs-by-R {1: 9570, 3: 10}: OK
+[('GAC', 3), ('GTC', 3)] letters2: structs 2012 pairs-by-R {1: 9570, 3: 10}: OK
+[('GAC', 3), ('GTC', 3)] letters3: structs 2012 pairs-by-R {1: 9570, 3: 10}: OK
+[('GAC', 2), ('GTC', 4)] letters1: structs 932 pairs-by-R {1: 4524, 2: 33}: OK
+[('GAC', 2), ('GTC', 4)] letters2: structs 932 pairs-by-R {1: 4524, 2: 33}: OK
+[('GAC', 2), ('GTC', 4)] letters3: structs 932 pairs-by-R {1: 4524, 2: 33}: OK
+[('GAC', 4), ('GTC', 2)] letters1: structs 932 pairs-by-R {1: 4524, 2: 33}: OK
+[('GAC', 4), ('GTC', 2)] letters2: structs 932 pairs-by-R {1: 4524, 2: 33}: OK
+[('GAC', 4), ('GTC', 2)] letters3: structs 932 pairs-by-R {1: 4524, 2: 33}: OK
+[('GAC', 4), ('GTC', 4)] letters1: structs 47668 pairs-by-R {1: 320096, 2: 268, 4: 10}: OK
+[('GAC', 4), ('GTC', 4)] letters2: structs 47668 pairs-by-R {1: 320096, 2: 268, 4: 10}: OK
+[('GAC', 4), ('GTC', 4)] letters3: structs 47668 pairs-by-R {1: 320096, 2: 268, 4: 10}: OK
+[('GAC', 6), ('GTC', 2)] letters1: structs 4239 pairs-by-R {1: 29072, 2: 76}: OK
+[('GAC', 6), ('GTC', 2)] letters2: structs 4239 pairs-by-R {1: 29072, 2: 76}: OK
+[('GAC', 6), ('GTC', 2)] letters3: structs 4239 pairs-by-R {1: 29072, 2: 76}: OK
+[('GAC', 2), ('GTC', 6)] letters1: structs 4239 pairs-by-R {1: 29072, 2: 76}: OK
+[('GAC', 2), ('GTC', 6)] letters2: structs 4239 pairs-by-R {1: 29072, 2: 76}: OK
+[('GAC', 2), ('GTC', 6)] letters3: structs 4239 pairs-by-R {1: 29072, 2: 76}: OK
+[('GAC', 1), ('GTC', 2)] letters1: structs 16 pairs-by-R {1: 48}: OK
+[('GAC', 1), ('GTC', 2)] letters2: structs 16 pairs-by-R {1: 48}: OK
+[('GAC', 1), ('GTC', 2)] letters3: structs 16 pairs-by-R {1: 48}: OK
+[('GAC', 3), ('GTC', 2)] letters1: structs 280 pairs-by-R {1: 1400}: OK
+[('GAC', 3), ('GTC', 2)] letters2: structs 280 pairs-by-R {1: 1400}: OK
+[('GAC', 3), ('GTC', 2)] letters3: structs 280 pairs-by-R {1: 1400}: OK
+[('GGC', 1), ('GCC', 1)] letters1: structs 16 pairs-by-R {1: 32}: OK
+[('GGC', 1), ('GCC', 1)] letters2: structs 16 pairs-by-R {1: 32}: OK
+[('GGC', 1), ('GCC', 1)] letters3: structs 16 pairs-by-R {1: 32}: OK
+[('GGC', 2), ('GCC', 2)] letters1: structs 865 pairs-by-R {1: 2528, 2: 26}: OK
+[('GGC', 2), ('GCC', 2)] letters2: structs 865 pairs-by-R {1: 2528, 2: 26}: OK
+[('GGC', 2), ('GCC', 2)] letters3: structs 865 pairs-by-R {1: 2528, 2: 26}: OK
+[('GGC', 3), ('GCC', 3)] letters1: structs 55781 pairs-by-R {1: 272076, 3: 26}: OK
+[('GGC', 3), ('GCC', 3)] letters2: structs 55781 pairs-by-R {1: 272076, 3: 26}: OK
+[('GGC', 3), ('GCC', 3)] letters3: structs 55781 pairs-by-R {1: 272076, 3: 26}: OK
+[('GGC', 2), ('GCC', 4)] letters1: structs 33141 pairs-by-R {1: 163416, 2: 189}: OK
+[('GGC', 2), ('GCC', 4)] letters2: structs 33141 pairs-by-R {1: 163416, 2: 189}: OK
+[('GGC', 2), ('GCC', 4)] letters3: structs 33141 pairs-by-R {1: 163416, 2: 189}: OK
+[('GGC', 4), ('GCC', 2)] letters1: structs 33141 pairs-by-R {1: 163416, 2: 189}: OK
+[('GGC', 4), ('GCC', 2)] letters2: structs 33141 pairs-by-R {1: 163416, 2: 189}: OK
+[('GGC', 4), ('GCC', 2)] letters3: structs 33141 pairs-by-R {1: 163416, 2: 189}: OK
+[('GGC', 4), ('GCC', 4)] letters1: structs 4893707 pairs-by-R {1: 33566072, 2: 2540, 4: 26}: OK
+[('GGC', 4), ('GCC', 4)] letters2: structs 4893707 pairs-by-R {1: 33566072, 2: 2540, 4: 26}: OK
+[('GGC', 4), ('GCC', 4)] letters3: structs 4893707 pairs-by-R {1: 33566072, 2: 2540, 4: 26}: OK
+[('GGC', 6), ('GCC', 2)] letters1: structs 950365 pairs-by-R {1: 6584656, 2: 1124}: OK
+[('GGC', 6), ('GCC', 2)] letters2: structs 950365 pairs-by-R {1: 6584656, 2: 1124}: OK
+[('GGC', 6), ('GCC', 2)] letters3: structs 950365 pairs-by-R {1: 6584656, 2: 1124}: OK
+[('GGC', 2), ('GCC', 6)] letters1: structs 950365 pairs-by-R {1: 6584656, 2: 1124}: OK
+[('GGC', 2), ('GCC', 6)] letters2: structs 950365 pairs-by-R {1: 6584656, 2: 1124}: OK
+[('GGC', 2), ('GCC', 6)] letters3: structs 950365 pairs-by-R {1: 6584656, 2: 1124}: OK
+[('GGC', 1), ('GCC', 2)] letters1: structs 73 pairs-by-R {1: 219}: OK
+[('GGC', 1), ('GCC', 2)] letters2: structs 73 pairs-by-R {1: 219}: OK
+[('GGC', 1), ('GCC', 2)] letters3: structs 73 pairs-by-R {1: 219}: OK
+[('GGC', 3), ('GCC', 2)] letters1: structs 4448 pairs-by-R {1: 22240}: OK
+[('GGC', 3), ('GCC', 2)] letters2: structs 4448 pairs-by-R {1: 22240}: OK
+[('GGC', 3), ('GCC', 2)] letters3: structs 4448 pairs-by-R {1: 22240}: OK
+[('GC', 1), ('GGCC', 1)] letters1: structs 13 pairs-by-R {1: 26}: OK
+[('GC', 1), ('GGCC', 1)] letters2: structs 13 pairs-by-R {1: 26}: OK
+[('GC', 1), ('GGCC', 1)] letters3: structs 13 pairs-by-R {1: 26}: OK
+[('GC', 2), ('GGCC', 2)] letters1: structs 599 pairs-by-R {1: 1776, 2: 20}: OK
+[('GC', 2), ('GGCC', 2)] letters2: structs 599 pairs-by-R {1: 1776, 2: 20}: OK
+[('GC', 2), ('GGCC', 2)] letters3: structs 599 pairs-by-R {1: 1776, 2: 20}: OK
+[('GC', 3), ('GGCC', 3)] letters1: structs 34136 pairs-by-R {1: 170256, 3: 20}: OK
+[('GC', 3), ('GGCC', 3)] letters2: structs 34136 pairs-by-R {1: 170256, 3: 20}: OK
+[('GC', 3), ('GGCC', 3)] letters3: structs 34136 pairs-by-R {1: 170256, 3: 20}: OK
+[('GC', 2), ('GGCC', 4)] letters1: structs 217625 pairs-by-R {1: 1085664, 2: 501}: OK
+[('GC', 2), ('GGCC', 4)] letters2: structs 217625 pairs-by-R {1: 1085664, 2: 501}: OK
+[('GC', 2), ('GGCC', 4)] letters3: structs 217625 pairs-by-R {1: 1085664, 2: 501}: OK
+[('GC', 4), ('GGCC', 2)] letters1: structs 2801 pairs-by-R {1: 13962, 2: 45}: OK
+[('GC', 4), ('GGCC', 2)] letters2: structs 2801 pairs-by-R {1: 13962, 2: 45}: OK
+[('GC', 4), ('GGCC', 2)] letters3: structs 2801 pairs-by-R {1: 13962, 2: 45}: OK
+[('GC', 4), ('GGCC', 4)] letters1: structs 2707044 pairs-by-R {1: 18891536, 2: 1716, 4: 20}: OK
+[('GC', 4), ('GGCC', 4)] letters2: structs 2707044 pairs-by-R {1: 18891536, 2: 1716, 4: 20}: OK
+[('GC', 4), ('GGCC', 4)] letters3: structs 2707044 pairs-by-R {1: 18891536, 2: 1716, 4: 20}: OK
+[('GC', 6), ('GGCC', 2)] letters1: structs 9439 pairs-by-R {1: 66024, 2: 84}: OK
+[('GC', 6), ('GGCC', 2)] letters2: structs 9439 pairs-by-R {1: 66024, 2: 84}: OK
+[('GC', 6), ('GGCC', 2)] letters3: structs 9439 pairs-by-R {1: 66024, 2: 84}: OK
+[('GC', 6), ('GGCC', 3)] letters1: structs 443799 pairs-by-R {1: 3723408, 3: 45}: OK
+[('GC', 6), ('GGCC', 3)] letters2: structs 443799 pairs-by-R {1: 3723408, 3: 45}: OK
+[('GC', 6), ('GGCC', 3)] letters3: structs 443799 pairs-by-R {1: 3723408, 3: 45}: OK
+[('GC', 1), ('GGCC', 2)] letters1: structs 151 pairs-by-R {1: 453}: OK
+[('GC', 1), ('GGCC', 2)] letters2: structs 151 pairs-by-R {1: 453}: OK
+[('GC', 1), ('GGCC', 2)] letters3: structs 151 pairs-by-R {1: 453}: OK
+[('GC', 3), ('GGCC', 2)] letters1: structs 1092 pairs-by-R {1: 5460}: OK
+[('GC', 3), ('GGCC', 2)] letters2: structs 1092 pairs-by-R {1: 5460}: OK
+[('GC', 3), ('GGCC', 2)] letters3: structs 1092 pairs-by-R {1: 5460}: OK
+[('GCA', 1), ('TGC', 1)] letters1: structs 10 pairs-by-R {1: 20}: OK
+[('GCA', 1), ('TGC', 1)] letters2: structs 10 pairs-by-R {1: 20}: OK
+[('GCA', 1), ('TGC', 1)] letters3: structs 10 pairs-by-R {1: 20}: OK
+[('GCA', 2), ('TGC', 2)] letters1: structs 194 pairs-by-R {1: 440, 2: 18}: OK
+[('GCA', 2), ('TGC', 2)] letters2: structs 194 pairs-by-R {1: 440, 2: 18}: OK
+[('GCA', 2), ('TGC', 2)] letters3: structs 194 pairs-by-R {1: 440, 2: 18}: OK
+[('GCA', 3), ('TGC', 3)] letters1: structs 4384 pairs-by-R {1: 13926, 3: 18}: OK
+[('GCA', 3), ('TGC', 3)] letters2: structs 4384 pairs-by-R {1: 13926, 3: 18}: OK
+[('GCA', 3), ('TGC', 3)] letters3: structs 4384 pairs-by-R {1: 13926, 3: 18}: OK
+[('GCA', 2), ('TGC', 4)] letters1: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('GCA', 2), ('TGC', 4)] letters2: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('GCA', 2), ('TGC', 4)] letters3: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('GCA', 4), ('TGC', 2)] letters1: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('GCA', 4), ('TGC', 2)] letters2: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('GCA', 4), ('TGC', 2)] letters3: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('GCA', 4), ('TGC', 4)] letters1: structs 112327 pairs-by-R {1: 490136, 2: 472, 4: 18}: OK
+[('GCA', 4), ('TGC', 4)] letters2: structs 112327 pairs-by-R {1: 490136, 2: 472, 4: 18}: OK
+[('GCA', 4), ('TGC', 4)] letters3: structs 112327 pairs-by-R {1: 490136, 2: 472, 4: 18}: OK
+[('GCA', 6), ('TGC', 2)] letters1: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('GCA', 6), ('TGC', 2)] letters2: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('GCA', 6), ('TGC', 2)] letters3: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('GCA', 2), ('TGC', 6)] letters1: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('GCA', 2), ('TGC', 6)] letters2: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('GCA', 2), ('TGC', 6)] letters3: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('GCA', 1), ('TGC', 2)] letters1: structs 20 pairs-by-R {1: 60}: OK
+[('GCA', 1), ('TGC', 2)] letters2: structs 20 pairs-by-R {1: 60}: OK
+[('GCA', 1), ('TGC', 2)] letters3: structs 20 pairs-by-R {1: 60}: OK
+[('GCA', 3), ('TGC', 2)] letters1: structs 380 pairs-by-R {1: 1900}: OK
+[('GCA', 3), ('TGC', 2)] letters2: structs 380 pairs-by-R {1: 1900}: OK
+[('GCA', 3), ('TGC', 2)] letters3: structs 380 pairs-by-R {1: 1900}: OK
+[('G', 1), ('GCC', 1)] letters1: structs 3 pairs-by-R {1: 6}: OK
+[('G', 1), ('GCC', 1)] letters2: structs 3 pairs-by-R {1: 6}: OK
+[('G', 1), ('GCC', 1)] letters3: structs 3 pairs-by-R {1: 6}: OK
+[('G', 2), ('GCC', 2)] letters1: structs 10 pairs-by-R {1: 28, 2: 2}: OK
+[('G', 2), ('GCC', 2)] letters2: structs 10 pairs-by-R {1: 28, 2: 2}: OK
+[('G', 2), ('GCC', 2)] letters3: structs 10 pairs-by-R {1: 28, 2: 2}: OK
+[('G', 3), ('GCC', 3)] letters1: structs 28 pairs-by-R {1: 138, 3: 2}: OK
+[('G', 3), ('GCC', 3)] letters2: structs 28 pairs-by-R {1: 138, 3: 2}: OK
+[('G', 3), ('GCC', 3)] letters3: structs 28 pairs-by-R {1: 138, 3: 2}: OK
+[('G', 2), ('GCC', 4)] letters1: structs 252 pairs-by-R {1: 1248, 2: 12}: OK
+[('G', 2), ('GCC', 4)] letters2: structs 252 pairs-by-R {1: 1248, 2: 12}: OK
+[('G', 2), ('GCC', 4)] letters3: structs 252 pairs-by-R {1: 1248, 2: 12}: OK
+[('G', 4), ('GCC', 2)] letters1: structs 0 pairs-by-R {}: OK
+[('G', 4), ('GCC', 2)] letters2: structs 0 pairs-by-R {}: OK
+[('G', 4), ('GCC', 2)] letters3: structs 0 pairs-by-R {}: OK
+[('G', 4), ('GCC', 4)] letters1: structs 90 pairs-by-R {1: 624, 2: 4, 4: 2}: OK
+[('G', 4), ('GCC', 4)] letters2: structs 90 pairs-by-R {1: 624, 2: 4, 4: 2}: OK
+[('G', 4), ('GCC', 4)] letters3: structs 90 pairs-by-R {1: 624, 2: 4, 4: 2}: OK
+[('G', 6), ('GCC', 2)] letters1: structs 0 pairs-by-R {}: OK
+[('G', 6), ('GCC', 2)] letters2: structs 0 pairs-by-R {}: OK
+[('G', 6), ('GCC', 2)] letters3: structs 0 pairs-by-R {}: OK
+[('G', 2), ('GCC', 6)] letters1: structs 5148 pairs-by-R {1: 35976, 2: 60}: OK
+[('G', 2), ('GCC', 6)] letters2: structs 5148 pairs-by-R {1: 35976, 2: 60}: OK
+[('G', 2), ('GCC', 6)] letters3: structs 5148 pairs-by-R {1: 35976, 2: 60}: OK
+[('G', 6), ('GCC', 3)] letters1: structs 0 pairs-by-R {}: OK
+[('G', 6), ('GCC', 3)] letters2: structs 0 pairs-by-R {}: OK
+[('G', 6), ('GCC', 3)] letters3: structs 0 pairs-by-R {}: OK
+[('G', 3), ('GCC', 6)] letters1: structs 7150 pairs-by-R {1: 60048, 3: 12}: OK
+[('G', 3), ('GCC', 6)] letters2: structs 7150 pairs-by-R {1: 60048, 3: 12}: OK
+[('G', 3), ('GCC', 6)] letters3: structs 7150 pairs-by-R {1: 60048, 3: 12}: OK
+[('G', 5), ('GCC', 5)] letters1: structs 286 pairs-by-R {1: 2770, 5: 2}: OK
+[('G', 5), ('GCC', 5)] letters2: structs 286 pairs-by-R {1: 2770, 5: 2}: OK
+[('G', 5), ('GCC', 5)] letters3: structs 286 pairs-by-R {1: 2770, 5: 2}: OK
+[('G', 6), ('GCC', 6)] letters1: structs 1040 pairs-by-R {1: 11988, 2: 18, 3: 4, 6: 2}: OK
+[('G', 6), ('GCC', 6)] letters2: structs 1040 pairs-by-R {1: 11988, 2: 18, 3: 4, 6: 2}: OK
+[('G', 6), ('GCC', 6)] letters3: structs 1040 pairs-by-R {1: 11988, 2: 18, 3: 4, 6: 2}: OK
+[('G', 1), ('GCC', 2)] letters1: structs 10 pairs-by-R {1: 30}: OK
+[('G', 1), ('GCC', 2)] letters2: structs 10 pairs-by-R {1: 30}: OK
+[('G', 1), ('GCC', 2)] letters3: structs 10 pairs-by-R {1: 30}: OK
+[('G', 3), ('GCC', 2)] letters1: structs 2 pairs-by-R {1: 10}: OK
+[('G', 3), ('GCC', 2)] letters2: structs 2 pairs-by-R {1: 10}: OK
+[('G', 3), ('GCC', 2)] letters3: structs 2 pairs-by-R {1: 10}: OK
+[('C', 1), ('GGC', 1)] letters1: structs 3 pairs-by-R {1: 6}: OK
+[('C', 1), ('GGC', 1)] letters2: structs 3 pairs-by-R {1: 6}: OK
+[('C', 1), ('GGC', 1)] letters3: structs 3 pairs-by-R {1: 6}: OK
+[('C', 2), ('GGC', 2)] letters1: structs 10 pairs-by-R {1: 28, 2: 2}: OK
+[('C', 2), ('GGC', 2)] letters2: structs 10 pairs-by-R {1: 28, 2: 2}: OK
+[('C', 2), ('GGC', 2)] letters3: structs 10 pairs-by-R {1: 28, 2: 2}: OK
+[('C', 3), ('GGC', 3)] letters1: structs 28 pairs-by-R {1: 138, 3: 2}: OK
+[('C', 3), ('GGC', 3)] letters2: structs 28 pairs-by-R {1: 138, 3: 2}: OK
+[('C', 3), ('GGC', 3)] letters3: structs 28 pairs-by-R {1: 138, 3: 2}: OK
+[('C', 2), ('GGC', 4)] letters1: structs 252 pairs-by-R {1: 1248, 2: 12}: OK
+[('C', 2), ('GGC', 4)] letters2: structs 252 pairs-by-R {1: 1248, 2: 12}: OK
+[('C', 2), ('GGC', 4)] letters3: structs 252 pairs-by-R {1: 1248, 2: 12}: OK
+[('C', 4), ('GGC', 2)] letters1: structs 0 pairs-by-R {}: OK
+[('C', 4), ('GGC', 2)] letters2: structs 0 pairs-by-R {}: OK
+[('C', 4), ('GGC', 2)] letters3: structs 0 pairs-by-R {}: OK
+[('C', 4), ('GGC', 4)] letters1: structs 90 pairs-by-R {1: 624, 2: 4, 4: 2}: OK
+[('C', 4), ('GGC', 4)] letters2: structs 90 pairs-by-R {1: 624, 2: 4, 4: 2}: OK
+[('C', 4), ('GGC', 4)] letters3: structs 90 pairs-by-R {1: 624, 2: 4, 4: 2}: OK
+[('C', 6), ('GGC', 2)] letters1: structs 0 pairs-by-R {}: OK
+[('C', 6), ('GGC', 2)] letters2: structs 0 pairs-by-R {}: OK
+[('C', 6), ('GGC', 2)] letters3: structs 0 pairs-by-R {}: OK
+[('C', 2), ('GGC', 6)] letters1: structs 5148 pairs-by-R {1: 35976, 2: 60}: OK
+[('C', 2), ('GGC', 6)] letters2: structs 5148 pairs-by-R {1: 35976, 2: 60}: OK
+[('C', 2), ('GGC', 6)] letters3: structs 5148 pairs-by-R {1: 35976, 2: 60}: OK
+[('C', 6), ('GGC', 3)] letters1: structs 0 pairs-by-R {}: OK
+[('C', 6), ('GGC', 3)] letters2: structs 0 pairs-by-R {}: OK
+[('C', 6), ('GGC', 3)] letters3: structs 0 pairs-by-R {}: OK
+[('C', 3), ('GGC', 6)] letters1: structs 7150 pairs-by-R {1: 60048, 3: 12}: OK
+[('C', 3), ('GGC', 6)] letters2: structs 7150 pairs-by-R {1: 60048, 3: 12}: OK
+[('C', 3), ('GGC', 6)] letters3: structs 7150 pairs-by-R {1: 60048, 3: 12}: OK
+[('C', 5), ('GGC', 5)] letters1: structs 286 pairs-by-R {1: 2770, 5: 2}: OK
+[('C', 5), ('GGC', 5)] letters2: structs 286 pairs-by-R {1: 2770, 5: 2}: OK
+[('C', 5), ('GGC', 5)] letters3: structs 286 pairs-by-R {1: 2770, 5: 2}: OK
+[('C', 6), ('GGC', 6)] letters1: structs 1040 pairs-by-R {1: 11988, 2: 18, 3: 4, 6: 2}: OK
+[('C', 6), ('GGC', 6)] letters2: structs 1040 pairs-by-R {1: 11988, 2: 18, 3: 4, 6: 2}: OK
+[('C', 6), ('GGC', 6)] letters3: structs 1040 pairs-by-R {1: 11988, 2: 18, 3: 4, 6: 2}: OK
+[('C', 1), ('GGC', 2)] letters1: structs 10 pairs-by-R {1: 30}: OK
+[('C', 1), ('GGC', 2)] letters2: structs 10 pairs-by-R {1: 30}: OK
+[('C', 1), ('GGC', 2)] letters3: structs 10 pairs-by-R {1: 30}: OK
+[('C', 3), ('GGC', 2)] letters1: structs 2 pairs-by-R {1: 10}: OK
+[('C', 3), ('GGC', 2)] letters2: structs 2 pairs-by-R {1: 10}: OK
+[('C', 3), ('GGC', 2)] letters3: structs 2 pairs-by-R {1: 10}: OK
+[('AGC', 1), ('GCT', 1)] letters1: structs 10 pairs-by-R {1: 20}: OK
+[('AGC', 1), ('GCT', 1)] letters2: structs 10 pairs-by-R {1: 20}: OK
+[('AGC', 1), ('GCT', 1)] letters3: structs 10 pairs-by-R {1: 20}: OK
+[('AGC', 2), ('GCT', 2)] letters1: structs 194 pairs-by-R {1: 440, 2: 18}: OK
+[('AGC', 2), ('GCT', 2)] letters2: structs 194 pairs-by-R {1: 440, 2: 18}: OK
+[('AGC', 2), ('GCT', 2)] letters3: structs 194 pairs-by-R {1: 440, 2: 18}: OK
+[('AGC', 3), ('GCT', 3)] letters1: structs 4384 pairs-by-R {1: 13926, 3: 18}: OK
+[('AGC', 3), ('GCT', 3)] letters2: structs 4384 pairs-by-R {1: 13926, 3: 18}: OK
+[('AGC', 3), ('GCT', 3)] letters3: structs 4384 pairs-by-R {1: 13926, 3: 18}: OK
+[('AGC', 2), ('GCT', 4)] letters1: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('AGC', 2), ('GCT', 4)] letters2: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('AGC', 2), ('GCT', 4)] letters3: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('AGC', 4), ('GCT', 2)] letters1: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('AGC', 4), ('GCT', 2)] letters2: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('AGC', 4), ('GCT', 2)] letters3: structs 1294 pairs-by-R {1: 5862, 2: 48}: OK
+[('AGC', 4), ('GCT', 4)] letters1: structs 112327 pairs-by-R {1: 490136, 2: 472, 4: 18}: OK
+[('AGC', 4), ('GCT', 4)] letters2: structs 112327 pairs-by-R {1: 490136, 2: 472, 4: 18}: OK
+[('AGC', 4), ('GCT', 4)] letters3: structs 112327 pairs-by-R {1: 490136, 2: 472, 4: 18}: OK
+[('AGC', 6), ('GCT', 2)] letters1: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('AGC', 6), ('GCT', 2)] letters2: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('AGC', 6), ('GCT', 2)] letters3: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('AGC', 2), ('GCT', 6)] letters1: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('AGC', 2), ('GCT', 6)] letters2: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('AGC', 2), ('GCT', 6)] letters3: structs 5291 pairs-by-R {1: 35080, 2: 100}: OK
+[('AGC', 1), ('GCT', 2)] letters1: structs 20 pairs-by-R {1: 60}: OK
+[('AGC', 1), ('GCT', 2)] letters2: structs 20 pairs-by-R {1: 60}: OK
+[('AGC', 1), ('GCT', 2)] letters3: structs 20 pairs-by-R {1: 60}: OK
+[('AGC', 3), ('GCT', 2)] letters1: structs 380 pairs-by-R {1: 1900}: OK
+[('AGC', 3), ('GCT', 2)] letters2: structs 380 pairs-by-R {1: 1900}: OK
+[('AGC', 3), ('GCT', 2)] letters3: structs 380 pairs-by-R {1: 1900}: OK
+[('GAAC', 1), ('GTTC', 1)] letters1: structs 23 pairs-by-R {1: 46}: OK
+[('GAAC', 1), ('GTTC', 1)] letters2: structs 23 pairs-by-R {1: 46}: OK
+[('GAAC', 1), ('GTTC', 1)] letters3: structs 23 pairs-by-R {1: 46}: OK
+[('GAAC', 2), ('GTTC', 2)] letters1: structs 2024 pairs-by-R {1: 5588, 2: 50}: OK
+[('GAAC', 2), ('GTTC', 2)] letters2: structs 2024 pairs-by-R {1: 5588, 2: 50}: OK
+[('GAAC', 2), ('GTTC', 2)] letters3: structs 2024 pairs-by-R {1: 5588, 2: 50}: OK
+[('GAAC', 3), ('GTTC', 3)] letters1: structs 219564 pairs-by-R {1: 974682, 3: 50}: OK
+[('GAAC', 3), ('GTTC', 3)] letters2: structs 219564 pairs-by-R {1: 974682, 3: 50}: OK
+[('GAAC', 3), ('GTTC', 3)] letters3: structs 219564 pairs-by-R {1: 974682, 3: 50}: OK
+[('GAAC', 2), ('GTTC', 4)] letters1: structs 63380 pairs-by-R {1: 301320, 2: 333}: OK
+[('GAAC', 2), ('GTTC', 4)] letters2: structs 63380 pairs-by-R {1: 301320, 2: 333}: OK
+[('GAAC', 2), ('GTTC', 4)] letters3: structs 63380 pairs-by-R {1: 301320, 2: 333}: OK
+[('GAAC', 4), ('GTTC', 2)] letters1: structs 63380 pairs-by-R {1: 301320, 2: 333}: OK
+[('GAAC', 4), ('GTTC', 2)] letters2: structs 63380 pairs-by-R {1: 301320, 2: 333}: OK
+[('GAAC', 4), ('GTTC', 2)] letters3: structs 63380 pairs-by-R {1: 301320, 2: 333}: OK
+[('GAAC', 1), ('GTTC', 2)] letters1: structs 96 pairs-by-R {1: 288}: OK
+[('GAAC', 1), ('GTTC', 2)] letters2: structs 96 pairs-by-R {1: 288}: OK
+[('GAAC', 1), ('GTTC', 2)] letters3: structs 96 pairs-by-R {1: 288}: OK
+[('GAAC', 3), ('GTTC', 2)] letters1: structs 10272 pairs-by-R {1: 51360}: OK
+[('GAAC', 3), ('GTTC', 2)] letters2: structs 10272 pairs-by-R {1: 51360}: OK
+[('GAAC', 3), ('GTTC', 2)] letters3: structs 10272 pairs-by-R {1: 51360}: OK
+[('GCGC', 1), ('GC', 1)] letters1: structs 16 pairs-by-R {1: 32}: OK
+[('GCGC', 1), ('GC', 1)] letters2: structs 16 pairs-by-R {1: 32}: OK
+[('GCGC', 1), ('GC', 1)] letters3: structs 16 pairs-by-R {1: 32}: OK
+[('GCGC', 2), ('GC', 2)] letters1: structs 888 pairs-by-R {1: 2608, 2: 30}: OK
+[('GCGC', 2), ('GC', 2)] letters2: structs 888 pairs-by-R {1: 2608, 2: 30}: OK
+[('GCGC', 2), ('GC', 2)] letters3: structs 888 pairs-by-R {1: 2608, 2: 30}: OK
+[('GCGC', 3), ('GC', 3)] letters1: structs 59424 pairs-by-R {1: 292722, 3: 30}: OK
+[('GCGC', 3), ('GC', 3)] letters2: structs 59424 pairs-by-R {1: 292722, 3: 30}: OK
+[('GCGC', 3), ('GC', 3)] letters3: structs 59424 pairs-by-R {1: 292722, 3: 30}: OK
+[('GCGC', 2), ('GC', 4)] letters1: structs 4163 pairs-by-R {1: 20508, 2: 72}: OK
+[('GCGC', 2), ('GC', 4)] letters2: structs 4163 pairs-by-R {1: 20508, 2: 72}: OK
+[('GCGC', 2), ('GC', 4)] letters3: structs 4163 pairs-by-R {1: 20508, 2: 72}: OK
+[('GCGC', 4), ('GC', 2)] letters1: structs 432968 pairs-by-R {1: 2150448, 2: 906}: OK
+[('GCGC', 4), ('GC', 2)] letters2: structs 432968 pairs-by-R {1: 2150448, 2: 906}: OK
+[('GCGC', 4), ('GC', 2)] letters3: structs 432968 pairs-by-R {1: 2150448, 2: 906}: OK
+[('GCGC', 4), ('GC', 4)] letters1: structs 5464866 pairs-by-R {1: 37784200, 2: 3280, 4: 30}: OK
+[('GCGC', 4), ('GC', 4)] letters2: structs 5464866 pairs-by-R {1: 37784200, 2: 3280, 4: 30}: OK
+[('GCGC', 4), ('GC', 4)] letters3: structs 5464866 pairs-by-R {1: 37784200, 2: 3280, 4: 30}: OK
+[('GCGC', 2), ('GC', 6)] letters1: structs 13797 pairs-by-R {1: 95368, 2: 140}: OK
+[('GCGC', 2), ('GC', 6)] letters2: structs 13797 pairs-by-R {1: 95368, 2: 140}: OK
+[('GCGC', 2), ('GC', 6)] letters3: structs 13797 pairs-by-R {1: 95368, 2: 140}: OK
+[('GCGC', 3), ('GC', 6)] letters1: structs 759950 pairs-by-R {1: 6318702, 3: 72}: OK
+[('GCGC', 3), ('GC', 6)] letters2: structs 759950 pairs-by-R {1: 6318702, 3: 72}: OK
+[('GCGC', 3), ('GC', 6)] letters3: structs 759950 pairs-by-R {1: 6318702, 3: 72}: OK
+[('GCGC', 1), ('GC', 2)] letters1: structs 30 pairs-by-R {1: 90}: OK
+[('GCGC', 1), ('GC', 2)] letters2: structs 30 pairs-by-R {1: 90}: OK
+[('GCGC', 1), ('GC', 2)] letters3: structs 30 pairs-by-R {1: 90}: OK
+[('GCGC', 3), ('GC', 2)] letters1: structs 15173 pairs-by-R {1: 75865}: OK
+[('GCGC', 3), ('GC', 2)] letters2: structs 15173 pairs-by-R {1: 75865}: OK
+[('GCGC', 3), ('GC', 2)] letters3: structs 15173 pairs-by-R {1: 75865}: OK
+[('AT', 1), ('GATC', 1)] letters1: structs 3 pairs-by-R {1: 6}: OK
+[('AT', 1), ('GATC', 1)] letters2: structs 3 pairs-by-R {1: 6}: OK
+[('AT', 1), ('GATC', 1)] letters3: structs 3 pairs-by-R {1: 6}: OK
+[('AT', 2), ('GATC', 2)] letters1: structs 40 pairs-by-R {1: 148, 2: 2}: OK
+[('AT', 2), ('GATC', 2)] letters2: structs 40 pairs-by-R {1: 148, 2: 2}: OK
+[('AT', 2), ('GATC', 2)] letters3: structs 40 pairs-by-R {1: 148, 2: 2}: OK
+[('AT', 3), ('GATC', 3)] letters1: structs 702 pairs-by-R {1: 4182, 3: 2}: OK
+[('AT', 3), ('GATC', 3)] letters2: structs 702 pairs-by-R {1: 4182, 3: 2}: OK
+[('AT', 3), ('GATC', 3)] letters3: structs 702 pairs-by-R {1: 4182, 3: 2}: OK
+[('AT', 2), ('GATC', 4)] letters1: structs 3653 pairs-by-R {1: 20016, 2: 48}: OK
+[('AT', 2), ('GATC', 4)] letters2: structs 3653 pairs-by-R {1: 20016, 2: 48}: OK
+[('AT', 2), ('GATC', 4)] letters3: structs 3653 pairs-by-R {1: 20016, 2: 48}: OK
+[('AT', 4), ('GATC', 2)] letters1: structs 98 pairs-by-R {1: 564, 2: 3}: OK
+[('AT', 4), ('GATC', 2)] letters2: structs 98 pairs-by-R {1: 564, 2: 3}: OK
+[('AT', 4), ('GATC', 2)] letters3: structs 98 pairs-by-R {1: 564, 2: 3}: OK
+[('AT', 4), ('GATC', 4)] letters1: structs 17138 pairs-by-R {1: 129800, 2: 100, 4: 2}: OK
+[('AT', 4), ('GATC', 4)] letters2: structs 17138 pairs-by-R {1: 129800, 2: 100, 4: 2}: OK
+[('AT', 4), ('GATC', 4)] letters3: structs 17138 pairs-by-R {1: 129800, 2: 100, 4: 2}: OK
+[('AT', 6), ('GATC', 2)] letters1: structs 192 pairs-by-R {1: 1496, 2: 4}: OK
+[('AT', 6), ('GATC', 2)] letters2: structs 192 pairs-by-R {1: 1496, 2: 4}: OK
+[('AT', 6), ('GATC', 2)] letters3: structs 192 pairs-by-R {1: 1496, 2: 4}: OK
+[('AT', 6), ('GATC', 3)] letters1: structs 3334 pairs-by-R {1: 29943, 3: 3}: OK
+[('AT', 6), ('GATC', 3)] letters2: structs 3334 pairs-by-R {1: 29943, 3: 3}: OK
+[('AT', 6), ('GATC', 3)] letters3: structs 3334 pairs-by-R {1: 29943, 3: 3}: OK
+[('AT', 1), ('GATC', 2)] letters1: structs 20 pairs-by-R {1: 60}: OK
+[('AT', 1), ('GATC', 2)] letters2: structs 20 pairs-by-R {1: 60}: OK
+[('AT', 1), ('GATC', 2)] letters3: structs 20 pairs-by-R {1: 60}: OK
+[('AT', 3), ('GATC', 2)] letters1: structs 62 pairs-by-R {1: 310}: OK
+[('AT', 3), ('GATC', 2)] letters2: structs 62 pairs-by-R {1: 310}: OK
+[('AT', 3), ('GATC', 2)] letters3: structs 62 pairs-by-R {1: 310}: OK
+[('ACGT', 1), ('CG', 1)] letters1: structs 3 pairs-by-R {1: 6}: OK
+[('ACGT', 1), ('CG', 1)] letters2: structs 3 pairs-by-R {1: 6}: OK
+[('ACGT', 1), ('CG', 1)] letters3: structs 3 pairs-by-R {1: 6}: OK
+[('ACGT', 2), ('CG', 2)] letters1: structs 40 pairs-by-R {1: 148, 2: 2}: OK
+[('ACGT', 2), ('CG', 2)] letters2: structs 40 pairs-by-R {1: 148, 2: 2}: OK
+[('ACGT', 2), ('CG', 2)] letters3: structs 40 pairs-by-R {1: 148, 2: 2}: OK
+[('ACGT', 3), ('CG', 3)] letters1: structs 702 pairs-by-R {1: 4182, 3: 2}: OK
+[('ACGT', 3), ('CG', 3)] letters2: structs 702 pairs-by-R {1: 4182, 3: 2}: OK
+[('ACGT', 3), ('CG', 3)] letters3: structs 702 pairs-by-R {1: 4182, 3: 2}: OK
+[('ACGT', 2), ('CG', 4)] letters1: structs 98 pairs-by-R {1: 564, 2: 3}: OK
+[('ACGT', 2), ('CG', 4)] letters2: structs 98 pairs-by-R {1: 564, 2: 3}: OK
+[('ACGT', 2), ('CG', 4)] letters3: structs 98 pairs-by-R {1: 564, 2: 3}: OK
+[('ACGT', 4), ('CG', 2)] letters1: structs 3653 pairs-by-R {1: 20016, 2: 48}: OK
+[('ACGT', 4), ('CG', 2)] letters2: structs 3653 pairs-by-R {1: 20016, 2: 48}: OK
+[('ACGT', 4), ('CG', 2)] letters3: structs 3653 pairs-by-R {1: 20016, 2: 48}: OK
+[('ACGT', 4), ('CG', 4)] letters1: structs 17138 pairs-by-R {1: 129800, 2: 100, 4: 2}: OK
+[('ACGT', 4), ('CG', 4)] letters2: structs 17138 pairs-by-R {1: 129800, 2: 100, 4: 2}: OK
+[('ACGT', 4), ('CG', 4)] letters3: structs 17138 pairs-by-R {1: 129800, 2: 100, 4: 2}: OK
+[('ACGT', 2), ('CG', 6)] letters1: structs 192 pairs-by-R {1: 1496, 2: 4}: OK
+[('ACGT', 2), ('CG', 6)] letters2: structs 192 pairs-by-R {1: 1496, 2: 4}: OK
+[('ACGT', 2), ('CG', 6)] letters3: structs 192 pairs-by-R {1: 1496, 2: 4}: OK
+[('ACGT', 3), ('CG', 6)] letters1: structs 3334 pairs-by-R {1: 29943, 3: 3}: OK
+[('ACGT', 3), ('CG', 6)] letters2: structs 3334 pairs-by-R {1: 29943, 3: 3}: OK
+[('ACGT', 3), ('CG', 6)] letters3: structs 3334 pairs-by-R {1: 29943, 3: 3}: OK
+[('ACGT', 1), ('CG', 2)] letters1: structs 4 pairs-by-R {1: 12}: OK
+[('ACGT', 1), ('CG', 2)] letters2: structs 4 pairs-by-R {1: 12}: OK
+[('ACGT', 1), ('CG', 2)] letters3: structs 4 pairs-by-R {1: 12}: OK
+[('ACGT', 3), ('CG', 2)] letters1: structs 348 pairs-by-R {1: 1740}: OK
+[('ACGT', 3), ('CG', 2)] letters2: structs 348 pairs-by-R {1: 1740}: OK
+[('ACGT', 3), ('CG', 2)] letters3: structs 348 pairs-by-R {1: 1740}: OK
+[('GA', 1), ('TC', 1), ('GC', 1)] letters1: structs 4 pairs-by-R {1: 12}: OK
+[('GA', 1), ('TC', 1), ('GC', 1)] letters2: structs 4 pairs-by-R {1: 12}: OK
+[('GA', 1), ('TC', 1), ('GC', 1)] letters3: structs 4 pairs-by-R {1: 12}: OK
+[('GA', 2), ('TC', 2), ('GC', 2)] letters1: structs 14 pairs-by-R {1: 60, 2: 3}: OK
+[('GA', 2), ('TC', 2), ('GC', 2)] letters2: structs 14 pairs-by-R {1: 60, 2: 3}: OK
+[('GA', 2), ('TC', 2), ('GC', 2)] letters3: structs 14 pairs-by-R {1: 60, 2: 3}: OK
+[('GA', 2), ('TC', 2), ('GC', 4)] letters1: structs 27 pairs-by-R {1: 176, 2: 4}: OK
+[('GA', 2), ('TC', 2), ('GC', 4)] letters2: structs 27 pairs-by-R {1: 176, 2: 4}: OK
+[('GA', 2), ('TC', 2), ('GC', 4)] letters3: structs 27 pairs-by-R {1: 176, 2: 4}: OK
+[('GA', 4), ('TC', 2), ('GC', 2)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 4), ('TC', 2), ('GC', 2)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 4), ('TC', 2), ('GC', 2)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 3), ('TC', 3), ('GC', 3)] letters1: structs 40 pairs-by-R {1: 297, 3: 3}: OK
+[('GA', 3), ('TC', 3), ('GC', 3)] letters2: structs 40 pairs-by-R {1: 297, 3: 3}: OK
+[('GA', 3), ('TC', 3), ('GC', 3)] letters3: structs 40 pairs-by-R {1: 297, 3: 3}: OK
+[('GA', 4), ('TC', 4), ('GC', 4)] letters1: structs 130 pairs-by-R {1: 1356, 2: 6, 4: 3}: OK
+[('GA', 4), ('TC', 4), ('GC', 4)] letters2: structs 130 pairs-by-R {1: 1356, 2: 6, 4: 3}: OK
+[('GA', 4), ('TC', 4), ('GC', 4)] letters3: structs 130 pairs-by-R {1: 1356, 2: 6, 4: 3}: OK
+[('GA', 2), ('TC', 4), ('GC', 6)] letters1: structs 0 pairs-by-R {}: OK
+[('GA', 2), ('TC', 4), ('GC', 6)] letters2: structs 0 pairs-by-R {}: OK
+[('GA', 2), ('TC', 4), ('GC', 6)] letters3: structs 0 pairs-by-R {}: OK
+[('GA', 1), ('TC', 2), ('GC', 3)] letters1: structs 4 pairs-by-R {1: 24}: OK
+[('GA', 1), ('TC', 2), ('GC', 3)] letters2: structs 4 pairs-by-R {1: 24}: OK
+[('GA', 1), ('TC', 2), ('GC', 3)] letters3: structs 4 pairs-by-R {1: 24}: OK
+[('GAC', 1), ('GTC', 1), ('GC', 1)] letters1: structs 20 pairs-by-R {1: 60}: OK
+[('GAC', 1), ('GTC', 1), ('GC', 1)] letters2: structs 20 pairs-by-R {1: 60}: OK
+[('GAC', 1), ('GTC', 1), ('GC', 1)] letters3: structs 20 pairs-by-R {1: 60}: OK
+[('GAC', 2), ('GTC', 2), ('GC', 2)] letters1: structs 1515 pairs-by-R {1: 8406, 2: 36}: OK
+[('GAC', 2), ('GTC', 2), ('GC', 2)] letters2: structs 1515 pairs-by-R {1: 8406, 2: 36}: OK
+[('GAC', 2), ('GTC', 2), ('GC', 2)] letters3: structs 1515 pairs-by-R {1: 8406, 2: 36}: OK
+[('GAC', 2), ('GTC', 2), ('GC', 4)] letters1: structs 7869 pairs-by-R {1: 60816, 2: 84}: OK
+[('GAC', 2), ('GTC', 2), ('GC', 4)] letters2: structs 7869 pairs-by-R {1: 60816, 2: 84}: OK
+[('GAC', 2), ('GTC', 2), ('GC', 4)] letters3: structs 7869 pairs-by-R {1: 60816, 2: 84}: OK
+[('GAC', 4), ('GTC', 2), ('GC', 2)] letters1: structs 26520 pairs-by-R {1: 205224, 2: 156}: OK
+[('GAC', 4), ('GTC', 2), ('GC', 2)] letters2: structs 26520 pairs-by-R {1: 205224, 2: 156}: OK
+[('GAC', 4), ('GTC', 2), ('GC', 2)] letters3: structs 26520 pairs-by-R {1: 205224, 2: 156}: OK
+[('GAC', 3), ('GTC', 3), ('GC', 3)] letters1: structs 186848 pairs-by-R {1: 1665324, 3: 36}: OK
+[('GAC', 3), ('GTC', 3), ('GC', 3)] letters2: structs 186848 pairs-by-R {1: 1665324, 3: 36}: OK
+[('GAC', 3), ('GTC', 3), ('GC', 3)] letters3: structs 186848 pairs-by-R {1: 1665324, 3: 36}: OK
+[('GAC', 1), ('GTC', 2), ('GC', 3)] letters1: structs 350 pairs-by-R {1: 2100}: OK
+[('GAC', 1), ('GTC', 2), ('GC', 3)] letters2: structs 350 pairs-by-R {1: 2100}: OK
+[('GAC', 1), ('GTC', 2), ('GC', 3)] letters3: structs 350 pairs-by-R {1: 2100}: OK
+[('GA', 1), ('TC', 1), ('GATC', 1)] letters1: structs 18 pairs-by-R {1: 54}: OK
+[('GA', 1), ('TC', 1), ('GATC', 1)] letters2: structs 18 pairs-by-R {1: 54}: OK
+[('GA', 1), ('TC', 1), ('GATC', 1)] letters3: structs 18 pairs-by-R {1: 54}: OK
+[('GA', 2), ('TC', 2), ('GATC', 2)] letters1: structs 911 pairs-by-R {1: 4344, 2: 36}: OK
+[('GA', 2), ('TC', 2), ('GATC', 2)] letters2: structs 911 pairs-by-R {1: 4344, 2: 36}: OK
+[('GA', 2), ('TC', 2), ('GATC', 2)] letters3: structs 911 pairs-by-R {1: 4344, 2: 36}: OK
+[('GA', 2), ('TC', 2), ('GATC', 4)] letters1: structs 150329 pairs-by-R {1: 1087248, 2: 552}: OK
+[('GA', 2), ('TC', 2), ('GATC', 4)] letters2: structs 150329 pairs-by-R {1: 1087248, 2: 552}: OK
+[('GA', 2), ('TC', 2), ('GATC', 4)] letters3: structs 150329 pairs-by-R {1: 1087248, 2: 552}: OK
+[('GA', 4), ('TC', 2), ('GATC', 2)] letters1: structs 536 pairs-by-R {1: 3888, 2: 24}: OK
+[('GA', 4), ('TC', 2), ('GATC', 2)] letters2: structs 536 pairs-by-R {1: 3888, 2: 24}: OK
+[('GA', 4), ('TC', 2), ('GATC', 2)] letters3: structs 536 pairs-by-R {1: 3888, 2: 24}: OK
+[('GA', 3), ('TC', 3), ('GATC', 3)] letters1: structs 62128 pairs-by-R {1: 499806, 3: 36}: OK
+[('GA', 3), ('TC', 3), ('GATC', 3)] letters2: structs 62128 pairs-by-R {1: 499806, 3: 36}: OK
+[('GA', 3), ('TC', 3), ('GATC', 3)] letters3: structs 62128 pairs-by-R {1: 499806, 3: 36}: OK
+[('GA', 1), ('TC', 2), ('GATC', 3)] letters1: structs 2466 pairs-by-R {1: 14796}: OK
+[('GA', 1), ('TC', 2), ('GATC', 3)] letters2: structs 2466 pairs-by-R {1: 14796}: OK
+[('GA', 1), ('TC', 2), ('GATC', 3)] letters3: structs 2466 pairs-by-R {1: 14796}: OK
+[('AG', 1), ('CT', 1), ('AGCT', 1)] letters1: structs 18 pairs-by-R {1: 54}: OK
+[('AG', 1), ('CT', 1), ('AGCT', 1)] letters2: structs 18 pairs-by-R {1: 54}: OK
+[('AG', 1), ('CT', 1), ('AGCT', 1)] letters3: structs 18 pairs-by-R {1: 54}: OK
+[('AG', 2), ('CT', 2), ('AGCT', 2)] letters1: structs 911 pairs-by-R {1: 4344, 2: 36}: OK
+[('AG', 2), ('CT', 2), ('AGCT', 2)] letters2: structs 911 pairs-by-R {1: 4344, 2: 36}: OK
+[('AG', 2), ('CT', 2), ('AGCT', 2)] letters3: structs 911 pairs-by-R {1: 4344, 2: 36}: OK
+[('AG', 2), ('CT', 2), ('AGCT', 4)] letters1: structs 150329 pairs-by-R {1: 1087248, 2: 552}: OK
+[('AG', 2), ('CT', 2), ('AGCT', 4)] letters2: structs 150329 pairs-by-R {1: 1087248, 2: 552}: OK
+[('AG', 2), ('CT', 2), ('AGCT', 4)] letters3: structs 150329 pairs-by-R {1: 1087248, 2: 552}: OK
+[('AG', 4), ('CT', 2), ('AGCT', 2)] letters1: structs 536 pairs-by-R {1: 3888, 2: 24}: OK
+[('AG', 4), ('CT', 2), ('AGCT', 2)] letters2: structs 536 pairs-by-R {1: 3888, 2: 24}: OK
+[('AG', 4), ('CT', 2), ('AGCT', 2)] letters3: structs 536 pairs-by-R {1: 3888, 2: 24}: OK
+[('AG', 3), ('CT', 3), ('AGCT', 3)] letters1: structs 62128 pairs-by-R {1: 499806, 3: 36}: OK
+[('AG', 3), ('CT', 3), ('AGCT', 3)] letters2: structs 62128 pairs-by-R {1: 499806, 3: 36}: OK
+[('AG', 3), ('CT', 3), ('AGCT', 3)] letters3: structs 62128 pairs-by-R {1: 499806, 3: 36}: OK
+[('AG', 1), ('CT', 2), ('AGCT', 3)] letters1: structs 2466 pairs-by-R {1: 14796}: OK
+[('AG', 1), ('CT', 2), ('AGCT', 3)] letters2: structs 2466 pairs-by-R {1: 14796}: OK
+[('AG', 1), ('CT', 2), ('AGCT', 3)] letters3: structs 2466 pairs-by-R {1: 14796}: OK
+[('GA', 1), ('TC', 1), ('CA', 1), ('TG', 1)] letters1: structs 13 pairs-by-R {1: 52}: OK
+[('GA', 1), ('TC', 1), ('CA', 1), ('TG', 1)] letters2: structs 13 pairs-by-R {1: 52}: OK
+[('GA', 1), ('TC', 1), ('CA', 1), ('TG', 1)] letters3: structs 13 pairs-by-R {1: 52}: OK
+[('GA', 2), ('TC', 2), ('CA', 2), ('TG', 2)] letters1: structs 152 pairs-by-R {1: 1128, 2: 4}: OK
+[('GA', 2), ('TC', 2), ('CA', 2), ('TG', 2)] letters2: structs 152 pairs-by-R {1: 1128, 2: 4}: OK
+[('GA', 2), ('TC', 2), ('CA', 2), ('TG', 2)] letters3: structs 152 pairs-by-R {1: 1128, 2: 4}: OK
+[('GA', 3), ('TC', 3), ('CA', 3), ('TG', 3)] letters1: structs 1888 pairs-by-R {1: 22212, 3: 4}: OK
+[('GA', 3), ('TC', 3), ('CA', 3), ('TG', 3)] letters2: structs 1888 pairs-by-R {1: 22212, 3: 4}: OK
+[('GA', 3), ('TC', 3), ('CA', 3), ('TG', 3)] letters3: structs 1888 pairs-by-R {1: 22212, 3: 4}: OK
+[('G', 1), ('C', 1), ('GC', 1), ('GGCC', 1)] letters1: structs 19 pairs-by-R {1: 76}: OK
+[('G', 1), ('C', 1), ('GC', 1), ('GGCC', 1)] letters2: structs 19 pairs-by-R {1: 76}: OK
+[('G', 1), ('C', 1), ('GC', 1), ('GGCC', 1)] letters3: structs 19 pairs-by-R {1: 76}: OK
+[('G', 2), ('C', 2), ('GC', 2), ('GGCC', 2)] letters1: structs 1135 pairs-by-R {1: 8928, 2: 12}: OK
+[('G', 2), ('C', 2), ('GC', 2), ('GGCC', 2)] letters2: structs 1135 pairs-by-R {1: 8928, 2: 12}: OK
+[('G', 2), ('C', 2), ('GC', 2), ('GGCC', 2)] letters3: structs 1135 pairs-by-R {1: 8928, 2: 12}: OK
+[('G', 3), ('C', 3), ('GC', 3), ('GGCC', 3)] letters1: structs 90929 pairs-by-R {1: 1090728, 3: 12}: OK
+[('G', 3), ('C', 3), ('GC', 3), ('GGCC', 3)] letters2: structs 90929 pairs-by-R {1: 1090728, 3: 12}: OK
+[('G', 3), ('C', 3), ('GC', 3), ('GGCC', 3)] letters3: structs 90929 pairs-by-R {1: 1090728, 3: 12}: OK
+[('GA', 1), ('TC', 1), ('GC', 1), ('AT', 1)] letters1: structs 4 pairs-by-R {1: 16}: OK
+[('GA', 1), ('TC', 1), ('GC', 1), ('AT', 1)] letters2: structs 4 pairs-by-R {1: 16}: OK
+[('GA', 1), ('TC', 1), ('GC', 1), ('AT', 1)] letters3: structs 4 pairs-by-R {1: 16}: OK
+[('GA', 2), ('TC', 2), ('GC', 2), ('AT', 2)] letters1: structs 36 pairs-by-R {1: 288}: OK
+[('GA', 2), ('TC', 2), ('GC', 2), ('AT', 2)] letters2: structs 36 pairs-by-R {1: 288}: OK
+[('GA', 2), ('TC', 2), ('GC', 2), ('AT', 2)] letters3: structs 36 pairs-by-R {1: 288}: OK
+[('GA', 3), ('TC', 3), ('GC', 3), ('AT', 3)] letters1: structs 400 pairs-by-R {1: 4800}: OK
+[('GA', 3), ('TC', 3), ('GC', 3), ('AT', 3)] letters2: structs 400 pairs-by-R {1: 4800}: OK
+[('GA', 3), ('TC', 3), ('GC', 3), ('AT', 3)] letters3: structs 400 pairs-by-R {1: 4800}: OK
+ALL OK

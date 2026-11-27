@@ -1,0 +1,5 @@
+PASS U  two-round upper value T2(0)/a re-computed from the printed formula   u=0.5: T2(0)/a = 0.6196 (report 0.620); u=1.0: T2(0)/a = 0.6243 (report 0.624); u=2.0: T2(0)/a = 0.6412 (report 0.641); u=3.0: T2(0)/a = 0.6646 (report 0.665)
+PASS L  two-round lower value theta2*/a, theta2*/h re-computed from the printed formula   u=0.5: theta2*/a = 0.3493 (report 0.349), theta2*/h = 1.379 (report 1.38); u=1.0: theta2*/a = 0.3592 (report 0.359), theta2*/h = 1.368 (report 1.37); u=2.0: theta2*/a = 0.3924 (report 0.394), theta2*/h = 1.322 (report 1.33); u=3.0: theta2*/a = 0.4395 (report 0.440), theta2*/h = 1.277 (report 1.28)
+PASS U' small-slope limit: T2(0)/a -> (sqrt(5)-1)/2 = 0.618   at u = 0.02: 0.6181
+
+failures: 0

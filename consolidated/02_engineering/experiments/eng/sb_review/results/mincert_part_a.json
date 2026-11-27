@@ -1,0 +1,18 @@
+{
+ "seconds": 31.0,
+ "seed": 20261126,
+ "result": {
+  "cases": 22472,
+  "structure_valid": 4118,
+  "sb_accept": 12354,
+  "sb_reject": 10118,
+  "disagree_ours": 0,
+  "disagree_reference": 0,
+  "unsound_sb": 0,
+  "unsound_format": 0,
+  "conversion_malformed": 0,
+  "reference_checked": 22472,
+  "exact_at_bound": 4118,
+  "examples": []
+ }
+}

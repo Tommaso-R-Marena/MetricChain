@@ -1,0 +1,50 @@
+# entropy bracket, cone: S = 5.1942297588; n h(sigma) = 5.1942297588; n ln 2 = 6.9314718056
+# entropy bracket, flat: S = 6.9314718056; n h(sigma) = 5.1942297588; n ln 2 = 6.9314718056
+# entropy bracket n h(sigma_u) <= ln Z + U <= n ln 2: 400 random members of the class (n = 3..11, u in 0.3..5), no violation; smallest slack below -4.4e-14, above 1.1e-04
+# asymptotic table (per site): accuracy eps1 | equal twins h - eps1 | plateau twin | no datum theta_hint | window end a | ln cosh(u/2)
+# u=1.0: sigma=0.2689 rho0=0.3799 h=0.02914 a=0.11094 ln cosh(u/2)=0.12011  plateau bound void from eps1^c=0.08612
+#   eps1=0.00555 (0.05 a): +0.02359 | 0.02645 | 0.02649
+#   eps1=0.01109 (0.10 a): +0.01804 | 0.02382 | 0.02396
+#   eps1=0.02774 (0.25 a): +0.00140 | 0.01634 | 0.01717
+#   eps1=0.05547 (0.50 a): -0.02633 | 0.00585 | 0.00838
+#   eps1=0.08321 (0.75 a): -0.05407 | 0.00008 | 0.00273
+#   eps1=0.09985 (0.90 a): -0.07071 | 0.00000 | 0.00082
+#   eps1=0.11094 (1.00 a): -0.08180 | 0.00000 | 0.00017
+# u=2.0: sigma=0.1192 rho0=0.2831 h=0.09728 a=0.32781 ln cosh(u/2)=0.43378  plateau bound void from eps1^c=0.27308
+#   eps1=0.01639 (0.05 a): +0.08089 | 0.08969 | 0.08983
+#   eps1=0.03278 (0.10 a): +0.06450 | 0.08214 | 0.08271
+#   eps1=0.08195 (0.25 a): +0.01533 | 0.06000 | 0.06324
+#   eps1=0.16391 (0.50 a): -0.06663 | 0.02633 | 0.03687
+#   eps1=0.24586 (0.75 a): -0.14858 | 0.00255 | 0.01776
+#   eps1=0.29503 (0.90 a): -0.19775 | 0.00000 | 0.00966
+#   eps1=0.32781 (1.00 a): -0.23053 | 0.00000 | 0.00563
+# u=4.0: sigma=0.0180 rho0=0.1687 h=0.23925 a=0.60305 ln cosh(u/2)=1.32500  plateau bound void from eps1^c=0.55688
+#   eps1=0.03015 (0.05 a): +0.20910 | 0.22683 | 0.22743
+#   eps1=0.06031 (0.10 a): +0.17894 | 0.21371 | 0.21600
+#   eps1=0.15076 (0.25 a): +0.08849 | 0.17149 | 0.18395
+#   eps1=0.30153 (0.50 a): -0.06228 | 0.09689 | 0.13735
+#   eps1=0.45229 (0.75 a): -0.21304 | 0.02747 | 0.09848
+#   eps1=0.54275 (0.90 a): -0.30350 | 0.00089 | 0.07857
+#   eps1=0.60305 (1.00 a): -0.36380 | 0.00000 | 0.06665
+# free accuracy per site: with the datum a(u) = KL(sigma||1/2); without it ln cosh(u/2) = KL(1/2||sigma); difference = sum_{k>=2} t^{2k}(k-1)/(k(2k-1)), t = tanh(u/2)
+#   u=0.25: a=0.007752  ln cosh(u/2)=0.007792  difference=0.000040 (series 0.000040)  no-datum exponent at eps1 = a: 0.000000
+#   u=0.5: a=0.030300  ln cosh(u/2)=0.030930  difference=0.000630 (series 0.000630)  no-datum exponent at eps1 = a: 0.000003
+#   u=1.0: a=0.110944  ln cosh(u/2)=0.120115  difference=0.009170 (series 0.009170)  no-datum exponent at eps1 = a: 0.000168
+#   u=2.0: a=0.327813  ln cosh(u/2)=0.433781  difference=0.105968 (series 0.105968)  no-datum exponent at eps1 = a: 0.005625
+#   u=4.0: a=0.603052  ln cosh(u/2)=1.325003  difference=0.721950 (series 0.721950)  no-datum exponent at eps1 = a: 0.066646
+#   u=8.0: a=0.690129  ln cosh(u/2)=3.307188  difference=2.617059 (series 2.617059)  no-datum exponent at eps1 = a: 0.232743
+# exact finite-n checks (overlapping supports, D = n/2 unless stated)
+n=1000 u=1.0 eps1=0.020 D=500: r1=400 r2=422 kappa*=137.4892 (m-U0=+0.0e+00) gap/n=0.02010 | plateau edge (r2-kappa)/n=0.2845 [hinv(h(sigma)+gap/n)=0.2902] rho2=0.4220 [asym 0.4211] | hinted r=400 | exponents at this n: equal twins +0.00262 <= plateau 0.01493 <= no datum 0.02313 | S0/n=0.58220 [h(sigma)=0.58220] proved gap bound 16.78 <= gap 20.10
+n=1000 u=1.0 eps1=0.050 D=500: r1=400 r2=461 kappa*=133.3718 (m-U0=+0.0e+00) gap/n=0.05053 | plateau edge (r2-kappa)/n=0.3276 [hinv(h(sigma)+gap/n)=0.3280] rho2=0.4610 [asym 0.4583] | hinted r=431 | exponents at this n: equal twins -0.02782 <= plateau 0.00508 <= no datum 0.01214 | S0/n=0.58220 [h(sigma)=0.58220] proved gap bound 48.03 <= gap 50.53
+n=2000 u=1.0 eps1=0.020 D=1000: r1=780 r2=824 kappa*=249.0802 (m-U0=-8.5e-13) gap/n=0.02033 | plateau edge (r2-kappa)/n=0.2875 [hinv(h(sigma)+gap/n)=0.2904] rho2=0.4120 [asym 0.4111] | hinted r=801 | exponents at this n: equal twins +0.00556 <= plateau 0.01716 <= no datum 0.02159 | S0/n=0.58220 [h(sigma)=0.58220] proved gap bound 37.28 <= gap 40.67
+n=2000 u=1.0 eps1=0.050 D=1000: r1=780 r2=899 kappa*=244.5749 (m-U0=+8.8e-13) gap/n=0.05002 | plateau edge (r2-kappa)/n=0.3272 [hinv(h(sigma)+gap/n)=0.3273] rho2=0.4495 [asym 0.4483] | hinted r=860 | exponents at this n: equal twins -0.02412 <= plateau 0.00640 <= no datum 0.01129 | S0/n=0.58220 [h(sigma)=0.58220] proved gap bound 97.52 <= gap 100.04
+n=1000 u=2.0 eps1=0.050 D=500: r1=304 r2=332 kappa*=187.9284 (m-U0=+0.0e+00) gap/n=0.05142 | plateau edge (r2-kappa)/n=0.1441 [hinv(h(sigma)+gap/n)=0.1466] rho2=0.3320 [asym 0.3306] | hinted r=309 | exponents at this n: equal twins +0.03053 <= plateau 0.06120 <= no datum 0.07867 | S0/n=0.36533 [h(sigma)=0.36533] proved gap bound 47.99 <= gap 51.42
+n=1000 u=2.0 eps1=0.150 D=500: r1=304 r2=398 kappa*=185.7372 (m-U0=+0.0e+00) gap/n=0.15078 | plateau edge (r2-kappa)/n=0.2123 [hinv(h(sigma)+gap/n)=0.2116] rho2=0.3980 [asym 0.3958] | hinted r=359 | exponents at this n: equal twins -0.06882 <= plateau 0.02397 <= no datum 0.04372 | S0/n=0.36533 [h(sigma)=0.36533] proved gap bound 148.40 <= gap 150.78
+n=600 u=4.0 eps1=0.100 D=300: r1=120 r2=139 kappa*=109.8454 (m-U0=+6.2e-12) gap/n=0.10460 | plateau edge (r2-kappa)/n=0.0486 [hinv(h(sigma)+gap/n)=0.0487] rho2=0.2317 [asym 0.2292] | hinted r=117 | exponents at this n: equal twins +0.09300 <= plateau 0.15870 <= no datum 0.20699 | S0/n=0.09009 [h(sigma)=0.09009] proved gap bound 61.51 <= gap 62.76
+n=600 u=4.0 eps1=0.300 D=300: r1=120 r2=190 kappa*=109.4954 (m-U0=+6.2e-12) gap/n=0.30073 | plateau edge (r2-kappa)/n=0.1342 [hinv(h(sigma)+gap/n)=0.1323] rho2=0.3167 [asym 0.3140] | hinted r=147 | exponents at this n: equal twins -0.10312 <= plateau 0.07468 <= no datum 0.14307 | S0/n=0.09009 [h(sigma)=0.09009] proved gap bound 179.54 <= gap 180.44
+n=1000 u=1.0 eps1=0.050 D=450: r1=400 r2=461 kappa*=133.3718 (m-U0=+4.8e-13) gap/n=0.05053 | plateau edge (r2-kappa)/n=0.3276 [hinv(h(sigma)+gap/n)=0.3280] rho2=0.4610 [asym 0.4583] | hinted r=431 | exponents at this n: equal twins -0.02782 <= plateau 0.00508 <= no datum 0.01214 | S0/n=0.58220 [h(sigma)=0.58220] proved gap bound 48.03 <= gap 50.53
+n=1000 u=1.0 eps1=0.050 D=550: r1=400 r2=461 kappa*=133.3718 (m-U0=+0.0e+00) gap/n=0.05053 | plateau edge (r2-kappa)/n=0.3276 [hinv(h(sigma)+gap/n)=0.3280] rho2=0.4610 [asym 0.4583] | hinted r=431 | exponents at this n: equal twins -0.02782 <= plateau 0.00508 <= no datum 0.01214 | S0/n=0.58220 [h(sigma)=0.58220] proved gap bound 48.03 <= gap 50.53
+
+real	0m13.457s
+user	0m8.658s
+sys	0m2.277s

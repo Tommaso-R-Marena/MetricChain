@@ -1,0 +1,19 @@
+sinc_sqrt_lipschitz : ∀ (q : ℝ) {s s' : ℝ},
+  0 ≤ s → 0 ≤ s' → |Real.sinc (q * √s) - Real.sinc (q * √s')| ≤ q ^ 2 / 6 * |s - s'|
+@debye_sub_le : ∀ {ι : Type u_1} [inst : Fintype ι] (N : ℕ) (q : ℝ) (s s' : ι → ℝ),
+  (∀ (k : ι), 0 ≤ s k) →
+    (∀ (k : ι), 0 ≤ s' k) → ∀ (σ : Equiv.Perm ι), |debye N q s - debye N q s'| ≤ q ^ 2 / 3 * ∑ k, |s k - s' (σ k)|
+@debye_eq_of_matching : ∀ {ι : Type u_1} [inst : Fintype ι] (N : ℕ) (q : ℝ) (s s' : ι → ℝ),
+  (∀ (k : ι), 0 ≤ s k) →
+    (∀ (k : ι), 0 ≤ s' k) → ∀ (σ : Equiv.Perm ι), (∀ (k : ι), s k = s' (σ k)) → debye N q s = debye N q s'
+def MetricChain.Scattering.debye.{u_1} : {ι : Type u_1} → [Fintype ι] → ℕ → ℝ → (ι → ℝ) → ℝ :=
+fun {ι} [Fintype ι] N q s => ↑N + 2 * ∑ k, Real.sinc (q * √(s k))
+'MetricChain.Scattering.le_add_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Scattering.sub_cube_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Scattering.abs_sinc_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Scattering.sinc_sqrt_lipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Scattering.debye_sum_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Scattering.debye_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Scattering.debye_eq_of_matching' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Scattering.one_sub_sinc_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit: 0

@@ -1,0 +1,41 @@
+# engine=enum nruns=3000 seed=208 mutation=None Kdiv=8
+runs completed 3000, skipped (sample too large for the simulation) 0   [28 s]
+good event: events used by the proof failed in 29 runs; (V2),(V3) at all levels and realised sizes failed in 47 runs
+runs with a violated claim: 0 on the good event, 19 off it
+  violated claims on the good event: none
+  violated claims off the good event: {'ii-pbar': 19}
+levels left as populated 109405, as negligible 33 (in 12 runs)
+closures: empty tail 1501, at a populated pass 336, at an unpopulated pass 1163; by the tail lemma at r <= n_o-2: 1487, at r <= r_dagger: 910
+widest bracket ln(U/L) = 6.416; smallest distance to the width bound = 0.0197; count/bound max = 0.914; negligible part / budget max = 0.0684; max M/M_dagger = 12.00; largest sample = 1.06e+05 points
+  example (good event False): halfcone Q8xQ3 u=2.0 | lam=0.26 eta=1/3 etap=0.5 theta=5 b=0.2 nu1=bdd L=3 K=60 J=193 rdag=0 rule=mixed | [('ii-pbar', 'level 86 M=120'), ('ii-pbar', 'level 87 M=120'), ('ii-pbar', 'level 88 M=120')]
+  example (good event False): mcshane_max Q6xQ5 u=1.5 | lam=0.57 eta=1/3 etap=1.0 theta=1 b=0.5 nu1=1 L=2 K=54 J=67 rdag=-1 rule=bot | [('ii-pbar', 'level 34 M=216')]
+  example (good event False): mcshane_max Q9xQ5 u=2.0 | lam=0.24 eta=1/2 etap=1.0 theta=50 b=0.2 nu1=1 L=3 K=30 J=257 rdag=1 rule=mixed | [('ii-pbar', 'level 139 M=1920'), ('ii-pbar', 'level 140 M=1920'), ('ii-pbar', 'level 141 M=1920')]
+  example (good event False): anticone Q9xQ4 u=2.0 | lam=0.89 eta=1/2 etap=0.5 theta=0.3 b=2.5 nu1=bdd L=2 K=28 J=68 rdag=-1 rule=bot | [('ii-pbar', 'level 37 M=224'), ('ii-pbar', 'level 38 M=224')]
+
+# engine=enum nruns=3000 seed=2040 mutation=None Kdiv=40
+runs completed 3000, skipped (sample too large for the simulation) 0   [25 s]
+good event: events used by the proof failed in 942 runs; (V2),(V3) at all levels and realised sizes failed in 1250 runs
+runs with a violated claim: 0 on the good event, 613 off it
+  violated claims on the good event: none
+  violated claims off the good event: {'ii-pbar': 492, 'ii-q': 130, 'v-count': 4, 'ii-L': 1, 'ii-ell': 1}
+levels left as populated 106697, as negligible 40 (in 19 runs)
+closures: empty tail 1410, at a populated pass 379, at an unpopulated pass 1211; by the tail lemma at r <= n_o-2: 1586, at r <= r_dagger: 908
+widest bracket ln(U/L) = 6.367; smallest distance to the width bound = 0.0132; count/bound max = 1.072; negligible part / budget max = 0.0355; max M/M_dagger = 12.00; largest sample = 2.05e+04 points
+  example (good event False): cone Q7xQ4 u=1.5 | lam=0.92 eta=1/2 etap=0.5 theta=0.3 b=2.5 nu1=bdd L=2 K=5 J=45 rdag=-1 rule=mixed | [('ii-pbar', 'level 19 M=5')]
+  example (good event False): anticone Q7xQ5 u=1.0 | lam=0.27 eta=1/3 etap=1.0 theta=0.05 b=0.2 nu1=bdd L=1 K=11 J=107 rdag=-1 rule=mid | [('ii-pbar', 'level 46 M=22'), ('ii-pbar', 'level 47 M=22'), ('ii-pbar', 'level 48 M=22')]
+  example (good event False): mixture Q6xQ5 u=1.5 | lam=0.89 eta=1/2 etap=0.5 theta=5 b=0.2 nu1=1 L=1 K=5 J=42 rdag=0 rule=adv_lo | [('ii-pbar', 'level 20 M=20')]
+  example (good event False): trunc Q8xQ4 u=2.0 | lam=0.47 eta=1/4 etap=0.1 theta=0.05 b=0.5 nu1=1 L=3 K=19 J=117 rdag=-1 rule=adv_hi | [('ii-q', 'level 61 M=76'), ('ii-q', 'level 61 M=152'), ('ii-q', 'level 62 M=76')]
+
+# engine=grouped nruns=1500 seed=301 mutation=None Kdiv=16
+runs completed 1489, skipped (sample too large for the simulation) 11   [83 s]
+good event: events used by the proof failed in 442 runs; (V2),(V3) at all levels and realised sizes failed in 490 runs
+runs with a violated claim: 0 on the good event, 303 off it
+  violated claims on the good event: none
+  violated claims off the good event: {'ii-pbar': 285, 'ii-q': 28}
+levels left as populated 354547, as negligible 931 (in 94 runs)
+closures: empty tail 115, at a populated pass 252, at an unpopulated pass 1122; by the tail lemma at r <= n_o-2: 1374, at r <= r_dagger: 154
+widest bracket ln(U/L) = 3.139; smallest distance to the width bound = 0.0182; count/bound max = 0.979; negligible part / budget max = 0.0085; max M/M_dagger = 55.00; largest sample = 2.13e+18 points
+  example (good event False): critical n_o=34 n_i=4 u=2.0 inner=anticone d0=28 | lam=0.43 eta=1/3 etap=1.0 theta=0.1 b=0.2 nu1=bdd L=3 K=34 J=406 rdag=0 rule=rand | [('ii-pbar', 'level 177 M=1088'), ('ii-pbar', 'level 178 M=1088')]
+  example (good event False): cone n_o=130 n_i=3 u=1.0 inner=zero d0=17 | lam=0.50 eta=1/2 etap=0.5 theta=0.1 b=0.5 nu1=bdd L=2 K=17 J=710 rdag=22 rule=mixed | [('ii-pbar', 'level 189 M=272'), ('ii-pbar', 'level 199 M=4352'), ('ii-pbar', 'level 201 M=4352')]
+  example (good event False): anticone n_o=34 n_i=3 u=2.0 inner=cone d0=33 | lam=0.69 eta=1/2 etap=0.1 theta=1 b=0.2 nu1=bdd L=3 K=16 J=249 rdag=0 rule=rand | [('ii-pbar', 'level 66 M=64'), ('ii-pbar', 'level 67 M=64')]
+  example (good event False): critical n_o=54 n_i=4 u=2.0 inner=anticone d0=10 | lam=0.67 eta=1/3 etap=1.0 theta=1 b=0.2 nu1=bdd L=1 K=33 J=404 rdag=1 rule=rand | [('ii-pbar', 'level 173 M=16896')]

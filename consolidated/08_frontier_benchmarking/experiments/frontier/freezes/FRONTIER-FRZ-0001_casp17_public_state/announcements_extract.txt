@@ -1,0 +1,29 @@
+Verbatim extracts from https://predictioncenter.org/news.cgi and /casp17/results.cgi
+(fetched 2026-11-26 22:37-23:02 UTC; (c) Protein Structure Prediction Center, CC BY 4.0)
+
+## CASP17 program is online
+(2026-11-25)
+Dear CASPers,
+The CASP17 Conference Program and Abstract Explorer are now live on the CASP17 website: https://predictioncenter.org/casp17.
+Results will be posted on Sunday, November 29.
+The CASP Organizers
+
+## In preparation for the CASP17 conference
+(2026-11-18)
+Dear CASP17 conference participants,
+CASP17 in Rome will be the largest CASP meeting to date, and the conference is already oversubscribed. Please note four important updates ahead of the meeting:
+Gala dinner
+The Gala Dinner has been moved from December 3 to December 4 and will begin at 8:00 p.m. Very important: space is extremely limited. If you know that you will not be able to attend the Gala Dinner, please let us know as soon as possible so that we can adjust the final arrangements.
+Poster abstract deadline
+The deadline for poster abstract submissions is today, Wednesday, November 18. To be considered for the poster session, please send your abstract to: casp17posters@gmail.com.
+Nominate abstracts for the methods talks
+Today is also your last chance to nominate Methods abstracts for the Methods talks at the conference via https://predictioncenter.org/casp17/abstracts_browser.cgi.
+Program, abstracts, and results
+CASP17 program and abstracts will be publicly available next week. The results of numerical evaluations will be posted two days ahead of the conference.
+Conference registration
+Registration for the CASP17 conference has closed.
+Many thanks, and we look forward to seeing you in Rome.
+CASP17 Organizing Team
+
+## /casp17/results.cgi
+No results available yet or you don't have permissions to retrieve them.

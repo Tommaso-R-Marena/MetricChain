@@ -1,0 +1,20 @@
+(a) lamellae (own builder); N, (h3,h8,h11,g)/N, (1-h3/N) N^(1/3) or (1/2-h3/N) N^(1/2)
+  M= 9 Q= 1 ell= 16: N=   284  (0.3944, 1.6056, 1.2394; 0.0845)  (1/2 - h3/N) N^(1/2) = 1.780
+  M=33 Q= 1 ell= 64: N=  4196  (0.4728, 1.8990, 1.4337; 0.0229)  (1/2 - h3/N) N^(1/2) = 1.760
+  M=65 Q= 1 ell=128: N= 16580  (0.4864, 1.9493, 1.4668; 0.0116)  (1/2 - h3/N) N^(1/2) = 1.755
+  M= 5 Q= 5 ell=  6: N=   280  (0.6286, 3.1714, 3.6429; 0.2571)  (1 - h3/N) N^(1/3) = 2.430;  (35 - ||N^x||_1/N) N^(1/3) = 85.14
+  M= 9 Q= 9 ell= 10: N=  1544  (0.7876, 3.9482, 4.6166; 0.1554)  (1 - h3/N) N^(1/3) = 2.455;  (35 - ||N^x||_1/N) N^(1/3) = 86.71
+  M=17 Q=17 ell= 18: N= 10120  (0.8854, 4.4300, 5.2411; 0.0854)  (1 - h3/N) N^(1/3) = 2.479;  (35 - ||N^x||_1/N) N^(1/3) = 88.04
+  M=25 Q=25 ell= 26: N= 31880  (0.9215, 4.6088, 5.4768; 0.0587)  (1 - h3/N) N^(1/3) = 2.491;  (35 - ||N^x||_1/N) N^(1/3) = 88.62
+(b) hairpins t^a g g g t^b, 3 <= a, b <= 18; flip of the middle fold torsion; 256 cases with d >= 5: D - 14 d in [-15, -5]  (claimed [-15, -5]); D <= 70(d+3)
+(c) volume bounds  vol(X + B(r/2)) / vol B(r/2)  and a greedy packing in T0  [claimed: box, K1 (N->inf), K2; T0]
+  L=1, eps1=0.5: box 26437.0 (claimed 26437), K1 3719.3 (3719), K2 3626.5 (3627);  own greedy packing in T0: 52 (claimed lower bound 50)
+  L=1, eps1=0.25: box 191833.0 (claimed 191833), K1 23935.7 (23936), K2 23272.0 (23272);  own greedy packing in T0: 162 (claimed lower bound 157)
+  L=0.2, eps1=0.5: box 392.2 (claimed 392), K1 93.9 (94), K2 92.5 (93);  own greedy packing in T0: 7 (claimed lower bound 7)
+  L=0.2, eps1=0.25: box 2194.6 (claimed 2195), K1 400.7 (401), K2 392.8 (393);  own greedy packing in T0: 14 (claimed lower bound 14)
+(d) exact covering numbers (set cover by MILP; clients = classes with their smallest gauche count, e = 1)
+  N=15 beads, L=1, eps=N/2, norm c: N_cov = 8 (status 0); claimed 8
+  N=15 beads, L=1, eps=N/2, norm w: N_cov = 10 (status 0); claimed 10
+  N=15 beads, L=0.2, eps=N/2, norm c: N_cov = 2 (status 0); claimed 2
+  N=21 beads, L=1, eps=N/2, norm c: N_cov = 11 (status 0); claimed 11
+PART 4 OK

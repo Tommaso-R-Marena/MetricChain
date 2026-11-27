@@ -1,0 +1,14 @@
+T1  DI against mpmath (80 digits): 1308 containments verified, 0 violations; widest interval 3.45e-65
+T1  control (series truncated 30 terms early, no remainder): 172 of 200 containments fail  [must be > 0]
+T2  upper hull against brute force: 11096 exact comparisons, 0 violations
+T2  control (hull without popping): 1710 of 2000 comparisons fail  [must be > 0]
+T3  top_exact: 200 cases, 0 violations; control (top lowered by 2^-100): (S1) fails in 200 cases  [must be > 0]
+T4  u = 0.5: a = 0.030299861980765910864  h = 0.0076728664780286145976  L = 0.49742523814649  eps* = 0.0309298036201614  c_*^2 = 0.0188826920027
+    max |Sigma(J) - Sigma(direct)|/(1+Sigma) = 2.71e-38;  max defect of theta(h)=h, J(L)=h, J'(L)=0, (11.18.1), shift identity = 1.35e-41
+T4  u = 1: a = 0.11094407167172735462  h = 0.029139138501623953081  L = 0.490034276419214  eps* = 0.120114506958278  c_*^2 = 0.0711473217006
+    max |Sigma(J) - Sigma(direct)|/(1+Sigma) = 1.05e-38;  max defect of theta(h)=h, J(L)=h, J'(L)=0, (11.18.1), shift identity = 1.15e-41
+T4  u = 2: a = 0.32781332547273770109  h = 0.097280907746611257385  L = 0.46454447152745  eps* = 0.433780830483027  c_*^2 = 0.230100536814
+    max |Sigma(J) - Sigma(direct)|/(1+Sigma) = 3.43e-40;  max defect of theta(h)=h, J(L)=h, J'(L)=0, (11.18.1), shift identity = 2.3e-41
+T4  control (wrong Lambda in J): max |Sigma(J) - Sigma(direct)| = 0.0678  [must be large]
+SELFTEST: ALL PASS (0 failures)
+R29-END r29_i1_selftest wall 5.2 s; address-space cap 3 GB; peak RSS 18.4 MB

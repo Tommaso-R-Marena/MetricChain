@@ -1,0 +1,3 @@
+=== ball_precompute L30/H tau 0.6: 582 atoms, anchor E = -516.4958, ball of radius 5: 174437 states; cache file ball_L30_H_t0.60_gbn2_M5_20f5b82d67.npz
+    merged 2 parts; 24 random ball states re-evaluated with P3's own evaluator: largest deviation 4.24e-11 kcal/mol
+DONE in 10.4 s

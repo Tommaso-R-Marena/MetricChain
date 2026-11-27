@@ -1,0 +1,10 @@
+# Python dependencies of the STRUCTBIO research software (src/metricchain_sb) and its tests.
+# Versions are those of the session machine on 2026-11-26 (Python 3.13); the core package
+# (model, certificates, checkers) needs numpy only.
+numpy==2.5.5
+scipy==1.18.1
+mpmath==1.4.1
+pytest
+# baselines and the molecular model layer (not needed by the checkers)
+pytoulbar2==1.4.0.3
+openmm==8.6.1

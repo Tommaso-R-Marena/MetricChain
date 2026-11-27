@@ -1,0 +1,58 @@
+# Referee R12, check 6: the lower bound, the base family, an explicit constant
+
+# Part A: ln LB - n h,  LB = (1 - 2 delta) 2^n/|B(n, k*(eps))|,  delta = 0.05;  'ref' = the referee's bound -((eps + ln 2)/u) ln((1-rho_h)/rho_h) + ln(1 - 2 delta)
+#   u    eps      ref     | n: ln LB - n h  [k* - rho_h n]
+  0.5   0.01    -0.455   | 10: 2.724 [-2.38];  100: 4.241 [-6.81];  1000: 4.953 [-10.14];  4000: 5.217 [-9.56];  16000: 5.762 [-9.25];  64000: 6.622 [-9.99];  256000: 7.300 [-9.94]
+  0.5   0.10    -0.500   | 10: 1.579 [-1.38];  100: 2.687 [-3.81];  1000: 3.498 [-5.14];  4000: 3.921 [-4.56];  16000: 4.756 [-5.25];  64000: 5.375 [-4.99];  256000: 6.055 [-4.94]
+  0.5   1.00    -0.948   | 10: 0.007 [1.62];  100: 0.820 [1.19];  1000: 1.880 [0.86];  4000: 2.650 [0.44];  16000: 3.255 [0.75];  64000: 3.881 [1.01];  256000: 4.563 [1.06]
+  0.5  10.00    -5.424   | 10: -0.182 [5.62];  100: -0.869 [19.19];  1000: -2.334 [19.86];  4000: -1.952 [19.44];  16000: -1.438 [19.75];  64000: -0.588 [19.01];  256000: 0.088 [19.06]
+  1.0   0.01    -0.450   | 10: 4.137 [-2.80];  100: 4.717 [-4.99];  1000: 5.082 [-4.89];  4000: 6.033 [-5.54];  16000: 6.521 [-5.17];  64000: 6.966 [-4.67];  256000: 7.666 [-4.69]
+  1.0   0.10    -0.494   | 10: 2.509 [-1.80];  100: 3.324 [-2.99];  1000: 4.058 [-2.89];  4000: 4.546 [-2.54];  16000: 5.538 [-3.17];  64000: 5.986 [-2.67];  256000: 6.685 [-2.69]
+  1.0   1.00    -0.935   | 10: 0.579 [0.20];  100: 1.538 [0.01];  1000: 2.552 [0.11];  4000: 3.068 [0.46];  16000: 4.066 [-0.17];  64000: 4.515 [0.33];  256000: 5.215 [0.31]
+  1.0  10.00    -5.345   | 10: -0.397 [6.20];  100: -1.844 [9.01];  1000: -1.739 [9.11];  4000: -1.309 [9.46];  16000: -0.826 [9.83];  64000: 0.107 [9.33];  256000: 0.805 [9.31]
+  2.0   0.01    -0.432   | 10: 3.455 [-1.83];  100: 4.164 [-2.31];  1000: 5.890 [-3.11];  4000: 5.932 [-2.44];  16000: 6.914 [-2.75];  64000: 7.847 [-3.01];  256000: 8.578 [-3.05]
+  2.0   0.10    -0.474   | 10: 3.455 [-1.83];  100: 3.129 [-1.31];  1000: 4.946 [-2.11];  4000: 5.000 [-1.44];  16000: 5.984 [-1.75];  64000: 6.918 [-2.01];  256000: 7.648 [-2.05]
+  2.0   1.00    -0.892   | 10: 0.683 [0.17];  100: 2.143 [-0.31];  1000: 3.073 [-0.11];  4000: 4.069 [-0.44];  16000: 4.125 [0.25];  64000: 5.060 [-0.01];  256000: 5.790 [-0.05]
+  2.0  10.00    -5.073   | 10: -1.022 [4.17];  100: -2.098 [4.69];  1000: -1.525 [4.89];  4000: -0.566 [4.56];  16000: 0.411 [4.25];  64000: 0.415 [4.99];  256000: 1.145 [4.95]
+# violations of the referee's bound: 0   (so ln N >= n h - O(1) for fixed eps and delta < 1/2; the report says n h - O(ln n))
+#   small sizes: u in {0.3 ... 12}, n = 2 ... 200, eps in {0.001 ... 20}: 19839 cases with k* <= n/2, of which 255 have the radius of the argument below p_u n;
+#   violations of the bound with c0 = (eps + ln 2)/u: 0 (least slack 0.6030 at (u, n, eps, k*) = (12.0, 2, 0.001, 0));  with max(1, c0): 0
+
+# Part B: Proposition Q5(a):  b_G0(d, x, delta) <= d a + E_base(d, x; ln(1/delta))
+#   u     cases    violations   least slack at (d, x, ln delta)     cases with enumeration   largest cost - d ln 2
+  0.1    26265      0       8.506 at (7, 10.0, -0.0)     1803   0.0e+00
+  0.5    26265      0      10.559 at (7, 10.0, -0.0)     2060   0.0e+00
+  1.0    26265      0      14.475 at (7, 10.0, -0.0)     2958   0.0e+00
+  2.0    26265      0      29.449 at (7, 42.0, -0.0)     7098   0.0e+00
+  4.0    26265      0     158.714 at (3, 36.0, -0.0)    16930   0.0e+00
+#
+#         Proposition Q5(b): x >= 2 ln 3, x >= ln 12 + 2 ln(d+1) + 2u + e^u + d e  =>  b <= d theta_na(e) + ln(8K) + ln(d+1), K = ceil(18 ln(4/delta));
+#         and for x >= max(c'_d, 2 ln 3):  b <= d theta_na(x/d) + u sqrt(d c'_d/2) + ln(8K(d+1)),  c'_d = ln 12 + 2 ln(d+1) + 2u + e^u
+#   u     cases (b)   violations   least slack    | cases (consequence)   violations   least slack
+  0.5     1560      0       2.873     |    975      0       5.796
+  1.0     1560      0       2.873     |    975      0       7.789
+  2.0     1560      0       2.873     |    975      0      11.242
+
+# Part C: an explicit constant.  ratio(n) = ( min{n ln 2, min_M [n B_M + E_M(n, eps, delta)]} - n h )/sqrt(n ln n),
+#         maximised over 2 <= n <= 10^12 (every integer up to 300, then 40 sizes per decade up to 10^6 and 10 per decade above);
+#         M ranges over the epochs with k_M <= max(100, 0.15 sqrt(n)) (the minimum is interior: asserted)
+#   u    eps     delta      sup of the ratio   at n       (which bound there)     ratio at 1e12    2 sqrt((a-h)(a/h+4))    C_*
+  1.0   1.00   5.0e-02        3.773            16788   formula, M = 2              2.408            1.598              8.641
+  0.5   1.00   5.0e-02        2.767               69   enumeration 2^n             1.168            0.848              4.646
+  2.0   1.00   5.0e-02        8.742             8913   formula, M = 1              4.587            2.607              13.524
+  1.0   0.01   5.0e-02        4.803              299   formula, M = 0              2.688            1.598              8.641
+  1.0   1.00   1.0e-09        3.773            16788   formula, M = 2              2.408            1.598              8.641
+  4.0   1.00   5.0e-02       32.249            56234   formula, M = 1              8.540            3.080              14.789
+
+# Part D: r_dagger with the comparison tolerance +1e-12 (as used), -1e-9 and +1e-9; K_REPORT 6.4 design (n_o = n/2) and slope-step levels
+  21 designs, r_dagger depends on the tolerance in 0
+
+# Part E: the smallest slope-step level (least n with h n >= X_0(n)), and what it costs: could Theorem K1 be simulated in this regime?
+  least first size over u in {0.50, 0.55, ..., 6.00}: n = 187 at u = 2.50
+#   u      n    xhat = X_0   n_o   L    K      ln C_max (level as built)   ln(K C_1) (the first K points each need the first rung)   base family at the same accuracy   n ln 2
+  1.00    470     13.69     1   14    292         101.1                        36.0                                                  29.4                      325.8
+  2.00    202     19.59     1   20    295         124.9                        43.3                                                  36.2                      140.0
+  2.50    187     25.35     1   26    302         141.8                        49.0                                                  42.0                      129.6
+  4.00    299     71.33     1   72    338         227.9                        96.1                                                  88.9                      207.3
+
+# done in 9 s

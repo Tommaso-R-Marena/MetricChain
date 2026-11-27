@@ -1,0 +1,23 @@
+3-PARTITION shape a=[2, 2, 2, 2, 2, 2] m=2 B=6: L=10 Til=720  L*m!*(3!)^m=720  prod mu!=720  Til/prod=1  ok
+3-PARTITION shape a=[3, 2, 2, 3, 2, 2] m=2 B=7: L=6 Til=432  L*m!*(3!)^m=432  prod mu!=48  Til/prod=9  ok
+3-PARTITION shape a=[3, 3, 3, 3, 3, 3] m=2 B=9: L=10 Til=720  L*m!*(3!)^m=720  prod mu!=720  Til/prod=1  ok
+3-PARTITION shape a=[4, 4, 3, 3, 3, 3] m=2 B=10: L=6 Til=432  L*m!*(3!)^m=432  prod mu!=48  Til/prod=9  ok
+3-PARTITION shape a=[5, 3, 3, 5, 3, 3] m=2 B=11: L=6 Til=432  L*m!*(3!)^m=432  prod mu!=48  Til/prod=9  ok
+3-PARTITION shape a=[5, 4, 3, 3, 4, 3] m=2 B=11: L=3 Til=216  L*m!*(3!)^m=216  prod mu!=12  Til/prod=18  ok
+3-PARTITION shape a=[4, 4, 4, 4, 5, 5] m=2 B=13: L=6 Til=432  L*m!*(3!)^m=432  prod mu!=48  Til/prod=9  ok
+3-PARTITION shape a=[4, 4, 4, 4, 4, 6] m=2 B=13: L=0 Til=0  L*m!*(3!)^m=0  prod mu!=120  Til/prod=0  ok
+3-PARTITION shape a=[6, 5, 5, 4, 4, 4] m=2 B=14: L=3 Til=216  L*m!*(3!)^m=216  prod mu!=12  Til/prod=18  ok
+3-PARTITION shape a=[6, 6, 6, 4, 4, 4] m=2 B=15: L=0 Til=0  L*m!*(3!)^m=0  prod mu!=36  Til/prod=0  ok
+3-PARTITION shape a=[7, 5, 4, 4, 5, 5] m=2 B=15: L=1 Til=72  L*m!*(3!)^m=72  prod mu!=12  Til/prod=6  ok
+3-PARTITION shape a=[2, 2, 2, 2, 2, 2, 2, 2, 2] m=3 B=6: L=280 Til=362880  L*m!*(3!)^m=362880  prod mu!=362880  Til/prod=1  ok
+3-PARTITION shape a=[3, 2, 2, 3, 2, 2, 3, 2, 2] m=3 B=7: L=90 Til=116640  L*m!*(3!)^m=116640  prod mu!=4320  Til/prod=27  ok
+3-PARTITION shape a=[4, 3, 3, 4, 3, 3, 3, 4, 3] m=3 B=10: L=90 Til=116640  L*m!*(3!)^m=116640  prod mu!=4320  Til/prod=27  ok
+4-PARTITION shape a=[4, 4, 4, 4, 4, 4, 4, 4] m=2 B=16: L=35 Til=40320  L*m!*(4!)^m=40320  prod mu!=40320  Til/prod=1  ok
+4-PARTITION shape a=[5, 4, 4, 4, 5, 4, 4, 4] m=2 B=17: L=20 Til=23040  L*m!*(4!)^m=23040  prod mu!=1440  Til/prod=16  ok
+4-PARTITION shape a=[5, 5, 5, 5, 4, 4, 4, 4] m=2 B=18: L=18 Til=20736  L*m!*(4!)^m=20736  prod mu!=576  Til/prod=36  ok
+4-PARTITION shape a=[6, 5, 4, 4, 5, 5, 5, 4] m=2 B=19: L=12 Til=13824  L*m!*(4!)^m=13824  prod mu!=144  Til/prod=96  ok
+4-PARTITION shape a=[6, 6, 4, 4, 4, 4, 5, 5] m=2 B=19: L=12 Til=13824  L*m!*(4!)^m=13824  prod mu!=96  Til/prod=144  ok
+4-PARTITION shape a=[6, 6, 6, 4, 4, 4, 4, 4] m=2 B=19: L=0 Til=0  L*m!*(4!)^m=0  prod mu!=720  Til/prod=0  ok
+SUMMARY: 20 instances; identity violations: 0; control (wrong factor) fails on 17 instances (must be > 0; it cannot fail where L = 0)
+RESULT: PASS
+END r20_packing_identities.py

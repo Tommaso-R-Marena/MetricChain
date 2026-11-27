@@ -1,0 +1,109 @@
+=== Ace-Lys5-NMe on the helix, tau 0.7: 122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]
+(0) ammonium groups (atom indices; charges): site 0: [22, 25, 23, 24] q = [-0.3854, 0.34, 0.34, 0.34]; site 1: [44, 47, 45, 46] q = [-0.3854, 0.34, 0.34, 0.34] ...
+    R = sum|q| / |sum q|: ammonium (4 atoms) 2.2146 (R^2 = 4.905; net charge +0.6346); with CE, HE2, HE3 (7 atoms: charges [-0.0143, 0.1135, 0.1135, -0.3854, 0.34, 0.34, 0.34]) 1.9435 (R^2 = 3.777; net charge +0.8473)
+| T | point of the largest abs(Delta_T g): context; states of T | Delta_T g there (kcal/mol): from the stored g; from the kernel matrix | pair of lysines (in T?) | group | kernel block: mean; min; max (1/nm) | rho (reference: mean) | rho (midrange) | R_a R_b | rho R_a R_b (midrange) | t of the block (kcal/mol) | SB of the block / abs(t), exact | the lemma's bound on that ratio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| (0, 1, 2, 3) | context site 4 at state 6; states [6, 13, 2, 6] | +0.004209; +0.004209 | 0, 1 (both) | ammonium | -9.251e-07; -1.107e-05; +3.550e-10 | 11 | 1 | 4.905 | 4.9 | +2.975e-05 | 1.95 | not in the regime |
+| | | | 0, 1 (both) | with CE, HE | -3.786e-07; -1.107e-05; +2.679e-06 | 28.2 | 1.64 | 3.777 | 6.19 | +3.464e-05 | 2.07 | not in the regime |
+| | | | 0, 2 (both) | ammonium | -2.877e-07; -3.146e-06; -2.480e-12 | 9.94 | 1 | 4.905 | 4.9 | +7.744e-06 | 2.35 | not in the regime |
+| | | | 0, 2 (both) | with CE, HE | -1.180e-07; -3.146e-06; +6.726e-08 | 25.7 | 1.04 | 3.777 | 3.94 | +8.343e-06 | 2.32 | not in the regime |
+| | | | 0, 3 (both) | ammonium | -1.233e-09; -2.603e-08; +9.291e-09 | 20.1 | 2.11 | 4.905 | 10.3 | +9.339e-09 | 30.3 | not in the regime |
+| | | | 0, 3 (both) | with CE, HE | -3.926e-09; -4.596e-08; +1.760e-08 | 10.7 | 2.24 | 3.777 | 8.46 | +7.245e-08 | 5.19 | not in the regime |
+| | | | 0, 4 (one) | ammonium | +1.774e-10; -3.101e-11; +1.259e-09 | 6.1 | 1.05 | 4.905 | 5.15 | +3.647e-10 | 33.1 | not in the regime |
+| | | | 0, 4 (one) | with CE, HE | -5.407e-11; -1.064e-08; +2.232e-08 | 414 | 2.82 | 3.777 | 10.7 | -1.589e-08 | 3.83 | not in the regime |
+| | | | 1, 2 (both) | ammonium | -1.284e-08; -1.206e-07; +4.172e-08 | 8.39 | 2.06 | 4.905 | 10.1 | +1.707e-07 | 9.84 | not in the regime |
+| | | | 1, 2 (both) | with CE, HE | -3.943e-09; -1.206e-07; +6.134e-08 | 29.6 | 3.07 | 3.777 | 11.6 | +1.831e-07 | 10.4 | not in the regime |
+| | | | 1, 3 (both) | ammonium | +2.301e-06; +5.648e-12; +2.006e-05 | 7.72 | 1 | 4.905 | 4.9 | -4.758e-05 | 3.08 | not in the regime |
+| | | | 1, 3 (both) | with CE, HE | +3.247e-06; -3.718e-07; +7.680e-05 | 22.7 | 1.01 | 3.777 | 3.81 | -1.385e-04 | 2.01 | not in the regime |
+| | | | 1, 4 (one) | ammonium | +2.261e-08; +1.072e-10; +1.380e-07 | 5.11 | 0.998 | 4.905 | 4.9 | -3.183e-07 | 4.58 | not in the regime |
+| | | | 1, 4 (one) | with CE, HE | +6.931e-08; -1.617e-09; +1.266e-06 | 17.3 | 1 | 3.777 | 3.79 | -2.003e-06 | 2.23 | not in the regime |
+| | | | 2, 3 (both) | ammonium | +2.611e-07; +2.847e-13; +2.273e-06 | 7.71 | 1 | 4.905 | 4.9 | -4.315e-06 | 3.89 | not in the regime |
+| | | | 2, 3 (both) | with CE, HE | +8.352e-07; -7.646e-08; +2.645e-05 | 30.7 | 1.01 | 3.777 | 3.8 | -3.130e-05 | 1.93 | not in the regime |
+| | | | 2, 4 (one) | ammonium | +4.461e-10; -2.109e-12; +4.321e-09 | 8.69 | 1 | 4.905 | 4.91 | -7.656e-09 | 3.72 | not in the regime |
+| | | | 2, 4 (one) | with CE, HE | +6.065e-09; -1.252e-11; +2.257e-07 | 36.2 | 1 | 3.777 | 3.78 | -2.560e-07 | 1.44 | not in the regime |
+| | | | 3, 4 (one) | ammonium | -2.767e-10; -1.280e-09; +3.815e-10 | 3.62 | 1.85 | 4.905 | 9.07 | -7.333e-10 | 30.3 | not in the regime |
+| | | | 3, 4 (one) | with CE, HE | -1.665e-09; -2.050e-08; +6.074e-10 | 11.3 | 1.06 | 3.777 | 4.01 | +3.363e-08 | 2.78 | not in the regime |
+| (0, 1, 2, 4) | context site 3 at state 6; states [9, 13, 2, 1] | +0.006583; +0.006583 | 0, 1 (both) | ammonium | -4.004e-05; -3.556e-04; -5.533e-09 | 7.88 | 1 | 4.905 | 4.9 | +9.681e-04 | 2.62 | not in the regime |
+| | | | 0, 1 (both) | with CE, HE | -1.778e-05; -3.556e-04; +2.103e-05 | 19 | 1.13 | 3.777 | 4.25 | +1.073e-03 | 2.65 | not in the regime |
+| | | | 0, 2 (both) | ammonium | -3.173e-06; -3.203e-05; -4.426e-11 | 9.1 | 1 | 4.905 | 4.9 | +8.232e-05 | 2.44 | not in the regime |
+| | | | 0, 2 (both) | with CE, HE | -1.050e-06; -3.203e-05; +1.027e-06 | 29.5 | 1.07 | 3.777 | 4.03 | +8.108e-05 | 2.5 | not in the regime |
+| | | | 0, 3 (one) | ammonium | -3.947e-09; -2.315e-08; +1.368e-09 | 4.86 | 1.13 | 4.905 | 5.52 | +7.859e-08 | 3.29 | not in the regime |
+| | | | 0, 3 (one) | with CE, HE | -2.158e-09; -2.315e-08; +2.024e-09 | 9.72 | 1.19 | 3.777 | 4.5 | +1.086e-07 | 2.88 | not in the regime |
+| | | | 0, 4 (both) | ammonium | +3.523e-08; -3.064e-08; +1.042e-07 | 1.96 | 1.83 | 4.905 | 8.99 | -3.310e-07 | 6.94 | not in the regime |
+| | | | 0, 4 (both) | with CE, HE | +1.215e-08; -6.433e-08; +1.042e-07 | 7.57 | 4.23 | 3.777 | 16 | -2.818e-07 | 8.75 | not in the regime |
+| | | | 1, 2 (both) | ammonium | -3.917e-08; -1.941e-07; -7.864e-10 | 3.95 | 0.992 | 4.905 | 4.86 | +6.602e-07 | 3.81 | not in the regime |
+| | | | 1, 2 (both) | with CE, HE | -3.110e-08; -2.152e-07; -1.167e-10 | 5.92 | 0.999 | 3.777 | 3.77 | +1.047e-06 | 3.17 | not in the regime |
+| | | | 1, 3 (one) | ammonium | -2.448e-08; -2.299e-07; -6.084e-14 | 8.39 | 1 | 4.905 | 4.9 | +7.468e-07 | 2.06 | not in the regime |
+| | | | 1, 3 (one) | with CE, HE | -1.476e-08; -2.299e-07; +2.646e-11 | 14.6 | 1 | 3.777 | 3.78 | +9.684e-07 | 1.94 | not in the regime |
+| | | | 1, 4 (both) | ammonium | -1.104e-05; -7.510e-05; -2.105e-09 | 5.8 | 1 | 4.905 | 4.9 | -3.432e-05 | 21.3 | not in the regime |
+| | | | 1, 4 (both) | with CE, HE | -5.430e-05; -1.310e-03; +3.012e-06 | 23.1 | 1 | 3.777 | 3.79 | +1.465e-03 | 2.18 | not in the regime |
+| | | | 2, 3 (one) | ammonium | -3.578e-09; -3.598e-08; -3.997e-15 | 9.06 | 1 | 4.905 | 4.9 | +9.868e-08 | 2.29 | not in the regime |
+| | | | 2, 3 (one) | with CE, HE | -2.949e-09; -5.841e-08; +1.835e-10 | 18.8 | 1.01 | 3.777 | 3.8 | +1.593e-07 | 2.03 | not in the regime |
+| | | | 2, 4 (both) | ammonium | -1.494e-07; -1.452e-06; -5.815e-13 | 8.72 | 1 | 4.905 | 4.9 | -3.084e-06 | 3.24 | not in the regime |
+| | | | 2, 4 (both) | with CE, HE | -2.586e-06; -9.572e-05; +3.124e-12 | 36 | 1 | 3.777 | 3.78 | +1.007e-04 | 1.53 | not in the regime |
+| | | | 3, 4 (one) | ammonium | +2.829e-10; +1.244e-12; +7.748e-10 | 1.74 | 0.997 | 4.905 | 4.89 | -3.374e-10 | 56 | not in the regime |
+| | | | 3, 4 (one) | with CE, HE | +6.678e-10; -1.582e-09; +4.383e-09 | 5.56 | 2.13 | 3.777 | 8.04 | -1.137e-08 | 3.8 | not in the regime |
+| (0, 1, 3, 4) | context site 2 at state 2; states [13, 2, 6, 1] | +0.017081; +0.017081 | 0, 1 (both) | ammonium | -7.560e-05; -3.172e-04; -7.682e-06 | 3.2 | 0.953 | 4.905 | 4.67 | +1.279e-03 | 3.8 | not in the regime |
+| | | | 0, 1 (both) | with CE, HE | -3.299e-05; -3.172e-04; +4.075e-05 | 8.62 | 1.29 | 3.777 | 4.89 | +1.439e-03 | 3.71 | not in the regime |
+| | | | 0, 2 (one) | ammonium | -1.182e-06; -7.244e-06; -3.823e-10 | 5.13 | 1 | 4.905 | 4.9 | +2.171e-05 | 3.46 | not in the regime |
+| | | | 0, 2 (one) | with CE, HE | -4.905e-07; -7.244e-06; +1.526e-09 | 13.8 | 1 | 3.777 | 3.78 | +2.217e-05 | 3.47 | not in the regime |
+| | | | 0, 3 (both) | ammonium | -4.436e-04; -2.013e-03; -1.674e-06 | 3.54 | 0.998 | 4.905 | 4.9 | +7.600e-03 | 3.74 | not in the regime |
+| | | | 0, 3 (both) | with CE, HE | -2.764e-04; -3.316e-03; +8.224e-05 | 11 | 1.05 | 3.777 | 3.97 | +1.153e-02 | 3.05 | not in the regime |
+| | | | 0, 4 (both) | ammonium | -1.344e-04; -4.707e-04; -1.008e-05 | 2.5 | 0.958 | 4.905 | 4.7 | +2.021e-03 | 4.28 | not in the regime |
+| | | | 0, 4 (both) | with CE, HE | -1.042e-04; -1.215e-03; +7.003e-05 | 10.7 | 1.12 | 3.777 | 4.24 | +3.789e-03 | 3.18 | not in the regime |
+| | | | 1, 2 (one) | ammonium | -3.617e-09; -2.785e-08; -1.955e-12 | 6.7 | 1 | 4.905 | 4.9 | +6.267e-08 | 3.68 | not in the regime |
+| | | | 1, 2 (one) | with CE, HE | -1.487e-09; -2.785e-08; -2.043e-14 | 17.7 | 1 | 3.777 | 3.78 | +6.353e-08 | 3.74 | not in the regime |
+| | | | 1, 3 (both) | ammonium | -4.296e-07; -3.773e-06; +9.885e-10 | 7.78 | 1 | 4.905 | 4.91 | +8.464e-06 | 3.22 | not in the regime |
+| | | | 1, 3 (both) | with CE, HE | -4.153e-07; -9.517e-06; +8.303e-09 | 21.9 | 1 | 3.777 | 3.78 | +1.933e-05 | 2.13 | not in the regime |
+| | | | 1, 4 (both) | ammonium | -4.730e-06; -2.547e-05; -1.518e-08 | 4.39 | 0.999 | 4.905 | 4.9 | +5.785e-05 | 5.28 | not in the regime |
+| | | | 1, 4 (both) | with CE, HE | -6.683e-06; -1.418e-04; +6.682e-06 | 20.2 | 1.1 | 3.777 | 4.15 | +2.130e-04 | 2.78 | not in the regime |
+| | | | 2, 3 (one) | ammonium | -3.792e-11; -3.389e-10; +3.017e-11 | 7.94 | 1.2 | 4.905 | 5.86 | +7.256e-10 | 3.87 | not in the regime |
+| | | | 2, 3 (one) | with CE, HE | -2.454e-11; -8.863e-10; +3.386e-10 | 35.1 | 2.24 | 3.777 | 8.45 | +1.458e-09 | 3.01 | not in the regime |
+| | | | 2, 4 (one) | ammonium | -1.435e-11; -8.478e-11; +5.957e-12 | 4.91 | 1.15 | 4.905 | 5.65 | +2.435e-10 | 3.97 | not in the regime |
+| | | | 2, 4 (one) | with CE, HE | -6.983e-10; -1.161e-08; +2.452e-10 | 15.6 | 1.04 | 3.777 | 3.94 | -2.824e-09 | 11 | not in the regime |
+| | | | 3, 4 (both) | ammonium | -9.096e-07; -3.968e-06; +7.929e-08 | 3.36 | 1.04 | 4.905 | 5.1 | +5.686e-06 | 10.7 | not in the regime |
+| | | | 3, 4 (both) | with CE, HE | -3.128e-06; -3.753e-05; +1.865e-06 | 11 | 1.1 | 3.777 | 4.17 | +6.438e-05 | 3.23 | not in the regime |
+| (0, 2, 3, 4) | context site 1 at state 9; states [3, 11, 6, 0] | +0.001798; +0.001798 | 0, 1 (one) | ammonium | +7.470e-14; -8.882e-16; +5.542e-13 | 6.42 | 1 | 4.905 | 4.92 | -2.609e-13 | 20.8 | not in the regime |
+| | | | 0, 1 (one) | with CE, HE | +7.660e-11; -8.882e-16; +1.770e-09 | 22.1 | 1 | 3.777 | 3.78 | -8.425e-11 | 15.2 | not in the regime |
+| | | | 0, 2 (both) | ammonium | +7.266e-11; +1.332e-15; +8.908e-10 | 11.3 | 1 | 4.905 | 4.9 | +2.729e-09 | 1.86 | not in the regime |
+| | | | 0, 2 (both) | with CE, HE | +2.424e-08; -4.441e-16; +1.887e-07 | 6.79 | 1 | 3.777 | 3.78 | -3.034e-07 | 1.88 | not in the regime |
+| | | | 0, 3 (both) | ammonium | +2.538e-07; +2.481e-09; +1.027e-06 | 3.05 | 0.995 | 4.905 | 4.88 | +5.525e-07 | 30.6 | not in the regime |
+| | | | 0, 3 (both) | with CE, HE | +2.277e-06; +1.202e-09; +2.436e-05 | 9.7 | 1 | 3.777 | 3.78 | -3.576e-05 | 2.55 | not in the regime |
+| | | | 0, 4 (both) | ammonium | +6.139e-08; +9.824e-10; +1.849e-07 | 2.01 | 0.989 | 4.905 | 4.85 | +5.785e-08 | 71 | not in the regime |
+| | | | 0, 4 (both) | with CE, HE | +5.650e-07; +9.824e-10; +4.580e-06 | 7.11 | 1 | 3.777 | 3.78 | -7.662e-06 | 2.86 | not in the regime |
+| | | | 1, 2 (one) | ammonium | -2.199e-13; -2.017e-12; +0.000e+00 | 8.17 | 1 | 4.905 | 4.9 | +4.278e-12 | 3.29 | not in the regime |
+| | | | 1, 2 (one) | with CE, HE | -2.682e-13; -2.353e-12; +9.193e-14 | 7.77 | 1.08 | 3.777 | 4.08 | +8.460e-12 | 2.75 | not in the regime |
+| | | | 1, 3 (one) | ammonium | +7.847e-10; +2.887e-15; +5.949e-09 | 6.58 | 1 | 4.905 | 4.9 | -7.877e-09 | 6.42 | not in the regime |
+| | | | 1, 3 (one) | with CE, HE | +1.526e-09; +4.441e-16; +1.895e-08 | 11.4 | 1 | 3.777 | 3.78 | -1.527e-08 | 6.17 | not in the regime |
+| | | | 1, 4 (one) | ammonium | +1.153e-10; +3.197e-14; +5.692e-10 | 3.94 | 1 | 4.905 | 4.9 | -1.860e-10 | 41.7 | not in the regime |
+| | | | 1, 4 (one) | with CE, HE | +3.644e-09; -2.465e-14; +5.070e-08 | 12.9 | 1 | 3.777 | 3.78 | -3.851e-08 | 3.41 | not in the regime |
+| | | | 2, 3 (both) | ammonium | +3.052e-06; +1.824e-09; +1.928e-05 | 5.32 | 1 | 4.905 | 4.9 | -4.480e-05 | 4.4 | not in the regime |
+| | | | 2, 3 (both) | with CE, HE | +3.917e-06; -1.162e-07; +3.710e-05 | 8.47 | 1.01 | 3.777 | 3.8 | -1.027e-04 | 3.2 | not in the regime |
+| | | | 2, 4 (both) | ammonium | +1.709e-08; +1.159e-13; +1.375e-07 | 7.04 | 1 | 4.905 | 4.9 | -1.859e-07 | 5.96 | not in the regime |
+| | | | 2, 4 (both) | with CE, HE | +2.004e-07; -4.906e-09; +3.742e-06 | 17.7 | 1 | 3.777 | 3.79 | -4.574e-06 | 1.96 | not in the regime |
+| | | | 3, 4 (both) | ammonium | +4.757e-06; +4.423e-08; +1.475e-05 | 2.1 | 0.994 | 4.905 | 4.88 | -5.618e-05 | 5.5 | not in the regime |
+| | | | 3, 4 (both) | with CE, HE | +7.036e-06; +8.490e-09; +6.532e-05 | 8.28 | 1 | 3.777 | 3.78 | -1.549e-04 | 3.41 | not in the regime |
+| (1, 2, 3, 4) | context site 0 at state 8; states [13, 2, 6, 1] | -0.000554; -0.000554 | 0, 1 (one) | ammonium | -1.185e-10; -1.302e-09; -2.220e-16 | 9.99 | 1 | 4.905 | 4.9 | -3.501e-09 | 2.29 | not in the regime |
+| | | | 0, 1 (one) | with CE, HE | -1.901e-09; -2.332e-08; -2.220e-16 | 11.3 | 1 | 3.777 | 3.78 | +2.472e-08 | 2.32 | not in the regime |
+| | | | 0, 2 (one) | ammonium | -1.930e-11; -2.197e-10; -1.332e-15 | 10.4 | 1 | 4.905 | 4.9 | -6.561e-10 | 2.02 | not in the regime |
+| | | | 0, 2 (one) | with CE, HE | -4.163e-10; -7.291e-09; +6.661e-16 | 16.5 | 1 | 3.777 | 3.78 | +7.177e-09 | 2.26 | not in the regime |
+| | | | 0, 3 (one) | ammonium | +9.913e-12; -1.039e-11; +6.643e-11 | 5.7 | 1.37 | 4.905 | 6.72 | -3.608e-11 | 21.3 | not in the regime |
+| | | | 0, 3 (one) | with CE, HE | -1.636e-11; -4.127e-10; +1.839e-10 | 24.2 | 2.61 | 3.777 | 9.85 | +1.633e-10 | 9.22 | not in the regime |
+| | | | 0, 4 (one) | ammonium | +3.343e-12; +1.865e-14; +1.317e-11 | 2.94 | 0.997 | 4.905 | 4.89 | +7.807e-12 | 29.6 | not in the regime |
+| | | | 0, 4 (one) | with CE, HE | +2.806e-12; -2.017e-10; +7.982e-11 | 72.9 | 2.31 | 3.777 | 8.72 | +8.681e-11 | 8.2 | not in the regime |
+| | | | 1, 2 (both) | ammonium | -6.092e-08; -2.950e-07; -1.122e-09 | 3.84 | 0.992 | 4.905 | 4.87 | +1.049e-06 | 3.72 | not in the regime |
+| | | | 1, 2 (both) | with CE, HE | -4.342e-08; -2.950e-07; -1.479e-10 | 5.79 | 0.999 | 3.777 | 3.77 | +1.553e-06 | 3.18 | not in the regime |
+| | | | 1, 3 (both) | ammonium | -7.166e-07; -7.679e-06; -3.223e-12 | 9.72 | 1 | 4.905 | 4.9 | +2.011e-05 | 2.24 | not in the regime |
+| | | | 1, 3 (both) | with CE, HE | -5.969e-07; -9.538e-06; +9.676e-10 | 15 | 1 | 3.777 | 3.78 | +3.210e-05 | 1.95 | not in the regime |
+| | | | 1, 4 (both) | ammonium | -2.384e-07; -1.715e-06; +2.131e-07 | 6.19 | 1.28 | 4.905 | 6.3 | -1.073e-06 | 16.4 | not in the regime |
+| | | | 1, 4 (both) | with CE, HE | -1.796e-06; -4.321e-05; +2.131e-07 | 23.1 | 1.01 | 3.777 | 3.81 | +4.822e-05 | 1.99 | not in the regime |
+| | | | 2, 3 (both) | ammonium | -8.529e-08; -8.957e-07; -1.783e-13 | 9.5 | 1 | 4.905 | 4.9 | +2.124e-06 | 2.55 | not in the regime |
+| | | | 2, 3 (both) | with CE, HE | -1.239e-07; -3.125e-06; +8.191e-09 | 24.2 | 1.01 | 3.777 | 3.8 | +5.315e-06 | 1.99 | not in the regime |
+| | | | 2, 4 (both) | ammonium | -2.998e-09; -3.049e-08; +3.316e-11 | 9.17 | 1 | 4.905 | 4.92 | -7.074e-08 | 2.84 | not in the regime |
+| | | | 2, 4 (both) | with CE, HE | -5.977e-08; -2.028e-06; +3.316e-11 | 32.9 | 1 | 3.777 | 3.78 | +2.128e-06 | 1.53 | not in the regime |
+| | | | 3, 4 (both) | ammonium | +7.098e-10; +3.521e-12; +3.092e-09 | 3.36 | 0.998 | 4.905 | 4.89 | +2.940e-10 | 160 | not in the regime |
+| | | | 3, 4 (both) | with CE, HE | +2.461e-09; +6.919e-13; +2.163e-08 | 7.79 | 1 | 3.777 | 3.78 | -4.635e-08 | 2.93 | not in the regime |
+(1) ammonium: 50 blocks (5 subsets x 10 pairs); rho (midrange): smallest 0.953, median 1, largest 2.11; rho R_a R_b < 1 in 0 of 50; SB/|t| of the blocks: median 3.88; among the 4 blocks whose |t| is at least a tenth of the largest: rho from 0.953 to 1, rho R_a R_b < 1 in 0, SB/|t| from 2.62 to 4.28
+(1) with CE, HE: 50 blocks (5 subsets x 10 pairs); rho (midrange): smallest 0.999, median 1.01, largest 4.23; rho R_a R_b < 1 in 0 of 50; SB/|t| of the blocks: median 2.82; among the 4 blocks whose |t| is at least a tenth of the largest: rho from 1 to 1.29, rho R_a R_b < 1 in 0, SB/|t| from 2.18 to 3.71
+(2) the lemma's inequality on the 0 blocks in its regime: 0 violations
+ALL DONE 2 s; peak RSS 115 MB

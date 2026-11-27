@@ -1,0 +1,30 @@
+$ python3 t23_ctl_profile_sets.py 600
+p=0.1 u=2.0 n=600: 273 sets with theta >= 6 ln(n)/n = 0.0640 (757 larger sets skipped);
+     largest e - chi(theta - 3 ln n/n) - 3 ln n/n = -0.06077 at ('anisotropic ball', 0.5, 0.18336, -0.17979, -0.18336)   (Theorem F6 with omega_n = 3 ln n/n: must be <= 0)
+     largest raw e - chi(theta) = +0.00409 at ('density ball', 0.5, 0.10246, -0.08794, -0.09203)   [4s]
+     raw, by shape: Hamming ball: +0.0027, anisotropic ball: +0.0036, band: +0.0025, density ball: +0.0041, far corner: +0.0011, rectangle: +0.0034
+p=0.3 u=1.0 n=600: 280 sets with theta >= 6 ln(n)/n = 0.0640 (745 larger sets skipped);
+     largest e - chi(theta - 3 ln n/n) - 3 ln n/n = -0.06122 at ('band', 0.35, 0.12133, -0.11847, -0.12133)   (Theorem F6 with omega_n = 3 ln n/n: must be <= 0)
+     largest raw e - chi(theta) = +0.00381 at ('anisotropic ball', 0.5, 0.07816, -0.0734, -0.07721)   [8s]
+     raw, by shape: Hamming ball: +0.0022, anisotropic ball: +0.0038, band: +0.0037, density ball: +0.0023, far corner: +0.0021, rectangle: +0.0021
+p=0.5 u=1.0 n=600: 221 sets with theta >= 6 ln(n)/n = 0.0640 (805 larger sets skipped);
+     largest e - chi(theta - 3 ln n/n) - 3 ln n/n = -0.06033 at ('Hamming ball', 0.5, 0.13837, -0.13468, -0.13837)   (Theorem F6 with omega_n = 3 ln n/n: must be <= 0)
+     largest raw e - chi(theta) = +0.00488 at ('anisotropic ball', 0.5, 0.09616, -0.09069, -0.09556)   [11s]
+     raw, by shape: Hamming ball: +0.0037, anisotropic ball: +0.0049, band: +0.0032, density ball: +0.0029, far corner: +0.0018, rectangle: +0.0020
+$ python3 t23_ctl_profile_sets.py 2000
+p=0.1 u=2.0 n=2000: 385 sets with theta >= 6 ln(n)/n = 0.0228 (640 larger sets skipped);
+     largest e - chi(theta - 3 ln n/n) - 3 ln n/n = -0.02175 at ('anisotropic ball', 0.2, 0.20892, -0.20786, -0.20892)   (Theorem F6 with omega_n = 3 ln n/n: must be <= 0)
+     largest raw e - chi(theta) = +0.00485 at ('anisotropic ball', 0.5, 0.03053, 0.04724, 0.04239)   [36s]
+     raw, by shape: Hamming ball: +0.0008, anisotropic ball: +0.0048, band: +0.0009, density ball: +0.0028, far corner: +0.0004, rectangle: +0.0006
+p=0.3 u=1.0 n=2000: 365 sets with theta >= 6 ln(n)/n = 0.0228 (667 larger sets skipped);
+     largest e - chi(theta - 3 ln n/n) - 3 ln n/n = -0.02187 at ('anisotropic ball', 0.35, 0.11616, -0.11523, -0.11616)   (Theorem F6 with omega_n = 3 ln n/n: must be <= 0)
+     largest raw e - chi(theta) = +0.00168 at ('density ball', 0.5, 0.03025, -0.00844, -0.01012)   [71s]
+     raw, by shape: Hamming ball: +0.0007, anisotropic ball: +0.0009, band: +0.0008, density ball: +0.0017, far corner: +0.0006, rectangle: +0.0006
+p=0.5 u=1.0 n=2000: 305 sets with theta >= 6 ln(n)/n = 0.0228 (725 larger sets skipped);
+     largest e - chi(theta - 3 ln n/n) - 3 ln n/n = -0.02156 at ('Hamming ball', 0.5, 0.13365, -0.13241, -0.13365)   (Theorem F6 with omega_n = 3 ln n/n: must be <= 0)
+     largest raw e - chi(theta) = +0.00296 at ('Hamming ball', 0.5, 0.04816, -0.03083, -0.0338)   [103s]
+     raw, by shape: Hamming ball: +0.0030, anisotropic ball: +0.0024, band: +0.0010, density ball: +0.0019, far corner: +0.0006, rectangle: +0.0006
+
+real	1m43.870s
+user	1m41.621s
+sys	0m1.570s

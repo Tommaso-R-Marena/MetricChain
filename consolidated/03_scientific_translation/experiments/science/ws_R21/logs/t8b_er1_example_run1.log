@@ -1,0 +1,8 @@
+T8b start 2026-11-26T18:44:15Z
+pendant lengths (4-0, 4-1): conformer 1 1.5000 1.5000 ; conformer 2 3.0000 2.5000 ; base |x0 x1|: 2.0, 5.0
+realisable colourings: ['00000000', '00000001', '00000010', '00000011', '11111111'] ; chimeras: 3 ; smallest exact defect among the non-realisable: 6.000e-01
+LM residuals of the realisable colourings (30 starts): [0.00e+00 8.88e-16 0.00e+00 8.88e-16 0.00e+00]
+weights (0.5, 0.5): largest mass on chimeras compatible with the eight laws = -0.00e+00 (LP status 0)
+weights (0.3, 0.7): largest mass on chimeras compatible with the eight laws = -0.00e+00 (LP status 0)
+weights (0.8, 0.2): largest mass on chimeras compatible with the eight laws = -0.00e+00 (LP status 0)
+DONE t8b_er1_example 2026-11-26T18:44:16Z

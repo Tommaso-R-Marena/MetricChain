@@ -1,0 +1,21 @@
+# three nested levels: outer 2L+ / middle 2L+ / bottom K0; constants of the theorems; pool of 40 middle runs per (fibre, rung)
+  instance  0: mcshane_max Q3x(Q3xQ4) u=1.0 | outer: L=2 b=2.50 x_out=4.746 width=3.969 points=3264 stop level 12 | middle styles ['K1.b', 'K2'], x_out ['5.92', '2.07'] | evaluations/C_max = 4.25e-07  [45 s]
+  instance  1: trunc Q4x(Q3xQ3) u=0.5 | outer: L=1 b=2.50 x_out=4.205 width=3.463 points=12224 stop level 11 | middle styles ['K2'], x_out ['2.10'] | evaluations/C_max = 1.08e-05  [77 s]
+  instance  2: mcshane_min Q4x(Q3xQ3) u=0.5 | outer: L=2 b=2.50 x_out=4.097 width=3.530 points=12640 stop level 10 | middle styles ['K2', 'K2'], x_out ['3.13', '2.10'] | evaluations/C_max = 4.19e-07  [136 s]
+  instance  3: mcshane_max Q4x(Q3xQ3) u=1.0 | outer: L=1 b=3.50 x_out=5.590 width=4.936 points=12576 stop level 15 | middle styles ['K2'], x_out ['2.84'] | evaluations/C_max = 1.41e-06  [157 s]
+  instance  4: noise_reg Q3x(Q4xQ3) u=1.0 | outer: L=1 b=2.50 x_out=4.755 width=4.130 points=3168 stop level 16 | middle styles ['K2'], x_out ['2.07'] | evaluations/C_max = 3.23e-07  [190 s]
+  instance  5: dips Q3x(Q4xQ3) u=1.0 | outer: L=2 b=3.50 x_out=5.130 width=4.507 points=6576 stop level 16 | middle styles ['K1.b', 'K2'], x_out ['7.00', '2.84'] | evaluations/C_max = 5.20e-07  [216 s]
+  instance  6: mcshane_min Q3x(Q4xQ3) u=1.0 | outer: L=2 b=2.50 x_out=4.844 width=4.284 points=3216 stop level 16 | middle styles ['K1.b', 'K2'], x_out ['5.92', '2.07'] | evaluations/C_max = 4.57e-07  [249 s]
+  instance  7: outer_cone_inner_noise Q3x(Q3xQ4) u=0.5 | outer: L=1 b=3.50 x_out=5.366 width=4.074 points=756 stop level 11 | middle styles ['K2'], x_out ['2.85'] | evaluations/C_max = 6.46e-06  [272 s]
+  instance  8: dips Q4x(Q3xQ3) u=1.0 | outer: L=2 b=3.50 x_out=5.691 width=4.859 points=6624 stop level 18 | middle styles ['K1.b', 'K2'], x_out ['6.48', '2.84'] | evaluations/C_max = 1.23e-06  [299 s]
+  instance  9: dip Q3x(Q3xQ4) u=1.0 | outer: L=1 b=3.50 x_out=5.519 width=4.911 points=6432 stop level 16 | middle styles ['K2'], x_out ['2.84'] | evaluations/C_max = 4.93e-07  [323 s]
+  instance 10: trunc Q3x(Q3xQ4) u=0.5 | outer: L=2 b=2.50 x_out=4.667 width=4.114 points=3056 stop level 8 | middle styles ['K2', 'K2'], x_out ['3.33', '2.09'] | evaluations/C_max = 1.03e-06  [387 s]
+  instance 11: cliff Q3x(Q3xQ4) u=0.5 | outer: L=1 b=3.50 x_out=5.360 width=3.492 points=776 stop level 10 | middle styles ['K2'], x_out ['2.85'] | evaluations/C_max = 8.46e-07  [409 s]
+  instance 12: additive Q3x(Q3xQ4) u=1.0 | outer: L=2 b=3.50 x_out=5.418 width=4.762 points=6544 stop level 16 | middle styles ['K1.b', 'K2'], x_out ['7.00', '2.84'] | evaluations/C_max = 6.94e-07  [436 s]
+  instance 13: mixture Q3x(Q3xQ3) u=0.5 | outer: L=2 b=2.50 x_out=4.238 width=2.948 points=1520 stop level 6 | middle styles ['K2', 'K2'], x_out ['3.13', '2.10'] | evaluations/C_max = 1.08e-07  [464 s]
+  instance 14: halfcone Q3x(Q3xQ3) u=0.5 | outer: L=1 b=3.50 x_out=5.662 width=3.633 points=752 stop level 8 | middle styles ['K2'], x_out ['2.85'] | evaluations/C_max = 3.11e-06  [475 s]
+  instance 15: cliff Q3x(Q3xQ4) u=0.5 | outer: L=2 b=2.50 x_out=4.835 width=4.109 points=3024 stop level 8 | middle styles ['K2', 'K2'], x_out ['3.33', '2.09'] | evaluations/C_max = 3.75e-06  [534 s]
+# time limit after 16 instances
+instances 16; middle runs 9920: invalid 0, wider than certified 0, aborts 0, claim violations on the good event 0, good event failed 0
+bottom brackets 232294025 (rungs with a real two-sample bracket 25, by enumeration 0), invalid or too wide 0
+outer runs: invalid 0, wider than x_out 0, aborts 0, claim violations on the good event 0, good event failed 0; cost above C_max 0 (largest evaluations/C_max = 1.08e-05)   [534 s]

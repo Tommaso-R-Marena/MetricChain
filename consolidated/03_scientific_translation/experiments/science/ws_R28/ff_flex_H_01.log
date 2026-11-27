@@ -1,0 +1,30 @@
+R28 ff_flex.py  start 2026-11-27T00:16:53Z {'bb': 'H', 'map': 0.0, 'emax': 25.0, 'out': ''}
+R3 all atoms frozen: energy after 'minimisation' -80.622711 kT; rigid builder -80.622711 kT; difference +0.0e+00  -> ok
+rigid model (H): cell minima mt (np.float64(287.5), np.float64(157.5)) at 0.000 kT, tp (np.float64(190.0), np.float64(80.0)) at 0.562 kT above the grid minimum; ideal rotamers: (300,180) 5.908, (180,60) 4.349
+
+=== variant A: backbone, ACE, NME frozen; HA, CB and the side chain relax
+   ideal mt (300,180)    : relaxed E =   -90.4323 kT (rigid at the same torsions   -80.6227; relaxation   9.810 kT); chi = (300.00, 179.99); CA-CB-CG = 115.47 deg; restraint energy 0.0001 kT
+   ideal tp (180,60)     : relaxed E =   -90.6943 kT (rigid at the same torsions   -82.1816; relaxation   8.513 kT); chi = (180.00, 60.01); CA-CB-CG = 114.95 deg; restraint energy 0.0002 kT
+   rigid mt minimum      : relaxed E =   -89.1283 kT (rigid at the same torsions   -86.5307; relaxation   2.598 kT); chi = (287.52, 157.54); CA-CB-CG = 113.52 deg; restraint energy 0.0025 kT
+   rigid tp minimum      : relaxed E =   -89.2218 kT (rigid at the same torsions   -85.9685; relaxation   3.253 kT); chi = (189.97, 79.96); CA-CB-CG = 113.41 deg; restraint energy 0.0031 kT
+   R4 second minimisation of (300,180) from a perturbed start: -90.4322 kT (difference +1.1e-04) -> ok
+   relaxed minimum of the mt well (chi free): E =   -90.4603 kT at chi = (298.58, 177.40); CA-CB-CG = 115.31 deg; backbone torsions off target by 0.00e+00 deg
+   relaxed minimum of the tp well (chi free): E =   -90.7526 kT at chi = (178.29, 62.82); CA-CB-CG = 114.83 deg; backbone torsions off target by 0.00e+00 deg
+   SUMMARY variant A: strain of the ideal rotamers above the relaxed well minima: (300,180): 0.028 kT, (180,60): 0.058 kT
+      relaxed two-state table: E(300,180) - E(180,60) = +0.262 kT   (rigid: +1.559);  well bottoms: E(tp) - E(mt) = -0.292 kT   (rigid: +0.562)
+      the two-state table with relaxed geometry names the well of the relaxed minimum: True
+   R1 restraint fidelity: largest |chi - target| = 0.042 deg -> ok;  R2 relaxed energy above the rigid one at the same torsions: 0 of 4 (must be 0)
+
+=== variant B: all atoms relax; phi, psi, omega restrained
+   ideal mt (300,180)    : relaxed E =   -94.0474 kT (rigid at the same torsions   -80.6227; relaxation  13.425 kT); chi = (300.00, 179.99); CA-CB-CG = 115.56 deg; restraint energy 0.0039 kT
+   ideal tp (180,60)     : relaxed E =   -94.2788 kT (rigid at the same torsions   -82.1816; relaxation  12.097 kT); chi = (180.00, 60.02); CA-CB-CG = 115.33 deg; restraint energy 0.0025 kT
+   rigid mt minimum      : relaxed E =   -92.6446 kT (rigid at the same torsions   -86.5307; relaxation   6.114 kT); chi = (287.53, 157.54); CA-CB-CG = 113.60 deg; restraint energy 0.0060 kT
+   rigid tp minimum      : relaxed E =   -92.9156 kT (rigid at the same torsions   -85.9685; relaxation   6.947 kT); chi = (189.98, 79.96); CA-CB-CG = 113.92 deg; restraint energy 0.0052 kT
+   R4 second minimisation of (300,180) from a perturbed start: -94.0481 kT (difference -7.3e-04) -> ok
+   relaxed minimum of the mt well (chi free): E =   -94.0683 kT at chi = (300.00, 177.62); CA-CB-CG = 115.51 deg; backbone torsions off target by 4.44e-02 deg
+   relaxed minimum of the tp well (chi free): E =   -94.3303 kT at chi = (180.77, 63.24); CA-CB-CG = 115.08 deg; backbone torsions off target by 3.71e-02 deg
+   SUMMARY variant B: strain of the ideal rotamers above the relaxed well minima: (300,180): 0.021 kT, (180,60): 0.052 kT
+      relaxed two-state table: E(300,180) - E(180,60) = +0.231 kT   (rigid: +1.559);  well bottoms: E(tp) - E(mt) = -0.262 kT   (rigid: +0.562)
+      the two-state table with relaxed geometry names the well of the relaxed minimum: True
+   R1 restraint fidelity: largest |chi - target| = 0.043 deg -> ok;  R2 relaxed energy above the rigid one at the same torsions: 0 of 4 (must be 0)
+END 2026-11-27T00:16:55Z  wall 2.6 s  peak memory 69 MB (ru_maxrss; address space capped at 3 GB)

@@ -1,0 +1,15 @@
+r20_validate.py  seed 7
+systems checked: 189  matchings (all, crossing or not): 47546  non-crossing (order, structure) pairs: 51142  connected labelled structures: 7560
+  check   V1 violations: 0
+  check   V2 violations: 0
+  check   V3 violations: 0
+  check   V4 violations: 0
+  check   V5 violations: 0
+  control C1 violations: 99   (must be > 0)
+  control C2 violations: 466421   (must be > 0)
+  control C3 violations: 30124   (must be > 0)
+  control C4 violations: 9332   (must be > 0)
+  control C5 violations: 159   (must be > 0)
+elapsed 7.0 s
+RESULT: PASS (all checks 0 violations, all controls fail as they must)
+END r20_validate.py

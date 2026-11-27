@@ -1,0 +1,12 @@
+=== K5 on H, tau 0.7: 5 sites, states per site [14, 14, 12, 7, 7], 115248 states, anchor [10, 10, 8, 3, 3]; order m = 4, band 3; 5 raw stage-2 tables of workstream P9 from p9_verification/cache (sum of their maxima 1.0472 kT)
+(0) 2 groups on 2 held sites [0, 4]; from every state (115248), ceiling weights; group-level values from the states against the driver's exact ones: A 6.647513e-03 / 6.647513e-03, C' 1.237257e-02 / 1.237257e-02; the driver's corrected bracket [251.3484184, 251.3484828], width 6.437e-05 [38s]
+| what enters | lower end above ln Z(m_+), nats | gain, as a fraction of the corrected width | upper end | gain, as a fraction of the corrected width |
+|---|---|---|---|---|
+| groups, one by one (the driver: (LP), (UP)) | 6.625516e-03 | **+0.000** | 251.3484828 | **+0.000** |
+| groups merged per held site (one held site) | 6.625516e-03 | **+0.000** | 251.3484828 | **+0.000** |
+| + pairs of held sites (two held sites) -- the proposition | 6.627313e-03 | **+0.028** | 251.3484786 | **+0.066** |
+| the exact joint law of all groups | 6.627313e-03 | **+0.028** | 251.3484786 | **+0.066** |
+(1) **the proposition would narrow the corrected bracket by 0.094 of its width** (merging per held site alone: 0.000; the exact joint law of all groups: 0.094); new width 5.832e-05 against 6.437e-05
+(2) checks at every state: lower chain (groups <= held sites; held sites + pairs <= joint): 0 violations; upper chain: 0 violations (both must be 0); control, the lower pair term doubled: 81551 violations (must be positive)
+(3) cost: 21 computations with one site held and 98 with two (per set of tables: one for the lower end, two for the upper); of the 84 pairs of held states with a non-zero pair term the largest 3 carry 90 % of the lower pair term and 13 carry 99 %; upper pair term: 3 and 14
+ALL DONE 38 s; peak RSS 273 MB

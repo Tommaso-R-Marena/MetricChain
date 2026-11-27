@@ -1,0 +1,11 @@
+=== s1_cancel: S6 on H, tau 0.7: atoms 78, sites 6, domain [9, 9, 6, 6, 6, 6] = 104976 states; anchor x0 = argmin E = (7, 7, 4, 2, 2, 2); ROWS [39, 78]
+    grouping 'residue': 8 groups; |group charge|: max 0.0000, mean 0.0000 e
+    grouping 'rigid': 14 groups; |group charge|: max 0.1567, mean 0.1343 e
+    grouping 'peptide': 21 groups; |group charge|: max 0.2711, mean 0.1686 e
+    grouping 'united': 34 groups; |group charge|: max 0.2821, mean 0.1411 e
+    41 subsets of order 3..5; rows 39..77 in blocks of 3 atoms (13 blocks)
+    block 1/13 done, 69 s
+    block 5/13 done, 193 s
+    block 9/13 done, 328 s
+    block 13/13 done, 445 s
+DONE in 446.3 s

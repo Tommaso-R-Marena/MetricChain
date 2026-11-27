@@ -1,0 +1,36 @@
+R2 witness_big.txt (first lines):
+   bridge from the system (0,12/5,22/5;4/5), box 128: N = 166199; verified by my code: self-avoiding lattice walk, bridge; (h3,h8,h11,g) = (1717,376013,687789,131710)
+      report: N = 166199, (1717, 376013, 687789, 131710): match = True
+      2h11-5h3-8N = 37401 = 0.22504 N   (report: 37401 = 0.225N);  168/(N+3) = 0.001011
+      => a point (p*,g*) of K^br with 2p11*-5p3*-8 >= 0.22504 - 2*0.00101 = 0.22302; by the gauche bound of Prop 11.72(c), gamma(p*) >= that  (report: >= 0.22)
+      g/N = 0.79248
+   
+nine box-64 bridges: R2's counts are all in the theory division's verified list: True
+theory division's verified list: [(12041, (67, 939, 12182, 1329)), (12767, (128, 6369, 26941, 12379)), (16238, (5001, 25514, 45530, 10743)), (17245, (7778, 31236, 39648, 1565)), (17796, (660, 18651, 50084, 2192)), (21235, (606, 45769, 82876, 16567)), (22351, (382, 60150, 83122, 2349)), (27144, (12436, 98046, 113574, 2722)), (33988, (30825, 155368, 187735, 3006)), (166199, (1717, 376013, 687789, 131710))]
+vertex list of the packings = 4 exact points + the 10 bridges with delta = 168/(N+3): True;  max delta = 42/3011 = 0.013948854201262038
+(L, eps1) = (1, 1/2): 116 points; smallest margin = 261097786554183532996251461731299887537154969580147394915804159/259432460913451527614749240807058309391568182953126909004122267550 = 0.001006; all pairs strict: True
+(L, eps1) = (1, 1/4): 451 points; smallest margin = 4535198569876073193130206833864213399621923924851052338171561/32942774893417798444021489849496231090691706095802098017144645488 = 0.000138; all pairs strict: True
+(L, eps1) = (1/5, 1/2): 8 points; smallest margin = 184895838947675616068561349302393/9275030666707207430299716382031140 = 0.019935; all pairs strict: True
+(L, eps1) = (1/5, 1/4): 19 points; smallest margin = 61564687817972883631967623145582663041/189282488824839081725385173517294004398730 = 0.000325; all pairs strict: True
+
+hull C of the 14 profile densities: vol = 1.631706; vertices used: 11
+erosion by delta = 0.013949 (dual norms of the facet normals between 0.196 and 0.552): vol = 1.563226
+   report: vol C = 1.6317, eroded 1.5632, '1.56 <= vol K'
+
+K_2 from the 12 printed vertices: vol = 3.125000 (report 3.125); all 12 are vertices: True
+the 14 proved profile densities lie in K_2 (necessary for consistency; bridges are finite, so up to O(1/N)): True ; largest violation: 2.220446049250313e-16
+
+arithmetic:
+  3627/116 = 31.267241379310345 ; 116/15 = 7.733333333333333 ; 3627/15 = 241.8
+  17.6 N^-1/3 - 17/N at N = 43512, 43513: 0.5000004905801031 0.4999966662599362
+  largest N with 17.6 N^-1/3 - 17/N >= 1/4: 348709
+  largest N with 24.1 N^-1/3 - 29.4/N >= 1/2: 111803
+  Bezdek constant 3(18 pi)^(1/3)/pi = 3.665322346265143 ; 2*bez*2^(-2/3) = 4.618016778709519
+  9*2^(-2/3) + 4*4.617 = 24.13764472452693 ; 9*2^(-2/3)+4*3 = 17.66964472452693
+  k >= (9*2^(-2/3)+12)/35 = 0.5048469921293408 ; with Bezdek: 0.6897631954104287
+  constant term: 17 + 4*3.1 = 29.4
+  c = 2 sqrt(beta (d+1)(beta'+R)) = 277.1281292110204
+  168/12044 = 0.013948854201262038 ; 168/(166199+3) = 0.0010108181610329599 ; 2.4*168/22354 = 0.018037040350720228
+  g - 9p3 + 3p8 - p11 at the 22 351-bead bridge: 4.305802872354706
+  2h11 - 5h3 - 8N at the 166 199-bead bridge: 37401 = 0.22503745509900783 N
+  density of the 12 041-bead bridge: [0.006, 0.078, 1.012, 0.11]

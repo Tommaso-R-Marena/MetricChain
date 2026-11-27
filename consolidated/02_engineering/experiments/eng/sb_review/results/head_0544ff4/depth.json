@@ -1,0 +1,49 @@
+{
+ "recursion_limit": 1000,
+ "rows": [
+  {
+   "sites": 20,
+   "states": 20,
+   "accepted_in_memory": true,
+   "prune": 380,
+   "depth": 381,
+   "dumps": "ok",
+   "to_metricchain_cert1": "ok",
+   "loads": "ok, accepted",
+   "bytes": 25661
+  },
+  {
+   "sites": 40,
+   "states": 30,
+   "accepted_in_memory": true,
+   "prune": 1160,
+   "depth": 1161,
+   "dumps": "ok",
+   "to_metricchain_cert1": "ok",
+   "loads": "ok, accepted",
+   "bytes": 106354
+  },
+  {
+   "sites": 60,
+   "states": 30,
+   "accepted_in_memory": true,
+   "prune": 1740,
+   "depth": 1741,
+   "dumps": "ok",
+   "to_metricchain_cert1": "ok",
+   "loads": "ok, accepted",
+   "bytes": 160637
+  },
+  {
+   "sites": 120,
+   "states": 40,
+   "accepted_in_memory": true,
+   "prune": 4680,
+   "depth": 4681,
+   "dumps": "ok",
+   "to_metricchain_cert1": "ok",
+   "loads": "ok, accepted",
+   "bytes": 547782
+  }
+ ]
+}

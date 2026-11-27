@@ -1,0 +1,29 @@
+(1) six-point tree-generated systems: 150; locally good: 127; with all Phi6 >= 0 (K'): 133; in K' but not locally good: 6
+     missing splits: ['011110', '111000']
+     missing splits: ['011100', '110000']
+     missing splits: ['001110', '111100']
+     missing splits: ['001110', '011000']
+     missing splits: ['001100', '111000']
+     missing splits: ['000110', '011100']
+(2) every five-point tree-generated system with a doubled leaf has Phi6 >= 0 in all placements: True
+(3) systems with some Phi6 < 0: 17
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 1, 2Phi6 = -1;  weights for m = 1..6: [3, 2, -1, -6, -13, -22];  least m with a negative weight: 3
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 1, 2Phi6 = -1;  weights for m = 1..6: [3, 2, -1, -6, -13, -22];  least m with a negative weight: 3
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 0, 2Phi6 = -1;  weights for m = 1..6: [2, 0, -4, -10, -18, -28];  least m with a negative weight: 3
+     2Phi4 = 0, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [-1, -4, -9, -16, -25, -36];  least m with a negative weight: 1
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 0, 2Phi6 = -1;  weights for m = 1..6: [2, 0, -4, -10, -18, -28];  least m with a negative weight: 3
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 0, 2Phi6 = -1;  weights for m = 1..6: [2, 0, -4, -10, -18, -28];  least m with a negative weight: 3
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 0, 2Phi6 = -1;  weights for m = 1..6: [2, 0, -4, -10, -18, -28];  least m with a negative weight: 3
+     2Phi4 = 0, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [-1, -4, -9, -16, -25, -36];  least m with a negative weight: 1
+     2Phi4 = 0, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [-1, -4, -9, -16, -25, -36];  least m with a negative weight: 1
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 0, 2Phi6 = -1;  weights for m = 1..6: [2, 0, -4, -10, -18, -28];  least m with a negative weight: 3
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 1, 0, 2Phi6 = -1;  weights for m = 1..6: [2, 0, -4, -10, -18, -28];  least m with a negative weight: 3
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [1, -2, -7, -14, -23, -34];  least m with a negative weight: 2
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [1, -2, -7, -14, -23, -34];  least m with a negative weight: 2
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [1, -2, -7, -14, -23, -34];  least m with a negative weight: 2
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [1, -2, -7, -14, -23, -34];  least m with a negative weight: 2
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [1, -2, -7, -14, -23, -34];  least m with a negative weight: 2
+     2Phi4 = 2, 2Phi5(z), 2Phi5(w) = 0, 0, 2Phi6 = -1;  weights for m = 1..6: [1, -2, -7, -14, -23, -34];  least m with a negative weight: 2
+    closed formula alpha(m) = 2Phi4 + 2m(Phi5(z)+Phi5(w)) + 2m^2 Phi6 agrees in all cases: True
+    largest 'least m': 3 (so at most 10 leaves)
+(4) the 6 systems of K' outside the 127: 2760 blow-ups (clades of up to 3 leaves at three positions, at most 10 leaves), all Kalmanson: True

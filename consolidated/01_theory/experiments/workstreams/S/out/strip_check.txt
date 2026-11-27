@@ -1,0 +1,9 @@
+degrees inside the strip: {('rod0', 'A'): {2}, ('rod0', 'B'): {3}, ('rod1', 'A'): {3}, ('rod1', 'B'): {2}}
+bonds between levels 10 and 11: [(('rod0', 10), ('rod0', 11)), (('rod1', 8), ('rod1', 9))]
+bonds between levels 11 and 12: [(('rod0', 11), ('rod0', 12)), (('rod0', 11), ('rod1', 10)), (('rod1', 9), ('rod1', 10))]
+bonds between levels 12 and 13: [(('rod0', 12), ('rod0', 13)), (('rod1', 10), ('rod1', 11))]
+bonds between levels 13 and 14: [(('rod0', 13), ('rod0', 14)), (('rod0', 13), ('rod1', 12)), (('rod1', 11), ('rod1', 12))]
+ell = 3: 8 sites; Hamiltonian paths from a lowest to a highest site: 0
+ell = 4: 12 sites; Hamiltonian paths from a lowest to a highest site: 0
+ell = 5: 16 sites; Hamiltonian paths from a lowest to a highest site: 0
+ell = 6: 20 sites; Hamiltonian paths from a lowest to a highest site: 0

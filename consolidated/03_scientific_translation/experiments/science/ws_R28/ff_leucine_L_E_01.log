@@ -1,0 +1,95 @@
+R28 ff_leucine.py  start 2026-11-27T00:14:10Z {'grid': '/home/user/MetricChain/experiments/science/ws_R28/grid_L_E_144.npz', 'label': '(L, strand)'}
+
+=== V0  the claim, by energy part (L, strand)
+[total = vacuum + GBn2] rigid table: minimum-energy state (180, 60) deg, gap to the next state 32.9498 kT; continuous minimum at (195, 82.5) deg, cell (1, 0); same cell: True; TV(grid cells, rigid) = 0.2746, TV(grid cells, cell-minimised) = 0.0442
+      rigid table, four lowest states [kT above the continuous minimum]: (180, 60): 4.390; (300, 180): 37.340; (60, 180): 286.458; (180, 300): 1485.589
+      cell minima, four lowest [kT]: cell (1, 0): 0.000; cell (1, 1): 1.516; cell (2, 1): 1.588; cell (2, 0): 3.851
+      strain of the ideal rotamer above its cell minimum [kT], cells by population: cell (1, 0) pop 0.7254: 4.390; cell (2, 1) pop 0.1520: 35.752; cell (1, 1) pop 0.1142: 1493.591; cell (2, 0) pop 0.0083: 4635.033
+[vacuum ff14SB alone] rigid table: minimum-energy state (180, 60) deg, gap to the next state 31.9208 kT; continuous minimum at (195, 82.5) deg, cell (1, 0); same cell: True; TV(grid cells, rigid) = 0.2849, TV(grid cells, cell-minimised) = 0.0569
+      rigid table, four lowest states [kT above the continuous minimum]: (180, 60): 4.296; (300, 180): 36.217; (60, 180): 285.332; (180, 300): 1484.318
+      cell minima, four lowest [kT]: cell (1, 0): 0.000; cell (1, 1): 1.364; cell (2, 1): 1.563; cell (2, 0): 3.684
+      strain of the ideal rotamer above its cell minimum [kT], cells by population: cell (1, 0) pop 0.7151: 4.296; cell (2, 1) pop 0.1531: 34.654; cell (1, 1) pop 0.1225: 1493.137; cell (2, 0) pop 0.0092: 4634.657
+[GBn2 alone (no sterics: not a model, a diagnostic)] rigid table: minimum-energy state (180, 60) deg, gap to the next state 0.4494 kT; continuous minimum at (247.5, 145) deg, cell (2, 1); same cell: False; TV(grid cells, rigid) = 0.1228, TV(grid cells, cell-minimised) = 0.0485
+      rigid table, four lowest states [kT above the continuous minimum]: (180, 60): 0.305; (300, 60): 0.755; (180, 180): 0.817; (300, 180): 1.334
+      cell minima, four lowest [kT]: cell (2, 1): 0.000; cell (1, 1): 0.016; cell (1, 0): 0.109; cell (2, 0): 0.206
+      strain of the ideal rotamer above its cell minimum [kT], cells by population: cell (1, 0) pop 0.1779: 0.196; cell (2, 1) pop 0.1589: 1.334; cell (1, 1) pop 0.1485: 0.801; cell (2, 0) pop 0.1457: 0.548
+      term 'tors' [kT] at the ideal rotamers (300,180): -4.493, (180,60): -2.413  (relative to its value at the continuous minimum)
+      term 'lj' [kT] at the ideal rotamers (300,180): +40.537, (180,60): +6.598  (relative to its value at the continuous minimum)
+      Coulomb [kT] at (300,180): +0.173, (180,60): +0.111;  GBn2 at (300,180): +1.123, (180,60): +0.094
+
+=== V1  shifted cell boundaries (cells [s, s+120], [s+120, s+240], [s+240, s+360]); the ideal rotamers stay inside their cells for |s| < 60
+   shift   rigid minimum state in the cell of the continuous minimum?   TV(grid, rigid)   TV(grid, cell-minimised)   populations of the cells of (300,180) and (180,60): grid | rigid
+    -57.5   False   0.9986   0.2783   grid 0.9193, 0.0014 | rigid 0.0000, 1.0000
+    -55.0   False   0.9948   0.3071   grid 0.8734, 0.0052 | rigid 0.0000, 1.0000
+    -50.0   False   0.9712   0.3104   grid 0.7373, 0.0288 | rigid 0.0000, 1.0000
+    -40.0   False   0.7898   0.2236   grid 0.3556, 0.2102 | rigid 0.0000, 1.0000
+    -30.0   True    0.4834   0.1292   grid 0.1801, 0.5166 | rigid 0.0000, 1.0000
+    -20.0   True    0.3402   0.0478   grid 0.1652, 0.6598 | rigid 0.0000, 1.0000
+    -10.0   True    0.2982   0.0278   grid 0.1593, 0.7018 | rigid 0.0000, 1.0000
+     +0.0   True    0.2746   0.0442   grid 0.1520, 0.7254 | rigid 0.0000, 1.0000
+    +10.0   True    0.2383   0.0698   grid 0.1366, 0.7617 | rigid 0.0000, 1.0000
+    +20.0   True    0.1801   0.1005   grid 0.1045, 0.8199 | rigid 0.0000, 1.0000
+    +30.0   True    0.1534   0.1694   grid 0.0537, 0.8466 | rigid 0.0000, 1.0000
+    +40.0   True    0.0857   0.2251   grid 0.0135, 0.9143 | rigid 0.0000, 1.0000
+    +50.0   True    0.0097   0.1101   grid 0.0002, 0.9903 | rigid 0.0000, 1.0000
+    +55.0   True    0.0135   0.1537   grid 0.0000, 0.9865 | rigid 0.0000, 1.0000
+    +57.5   True    0.0262   0.1914   grid 0.0000, 0.9738 | rigid 0.0000, 1.0000
+   the claim (different cells) is KEPT at 8 of 47 shifts between -57.5 and +57.5 deg
+
+=== V2  wells without boundaries: basins of steepest descent on the grid (8 neighbours, periodic)
+   14 basins; the six most populated:
+     minimum at (195, 82.5) deg, 0.000 kT, population 0.7137; ideal rotamers inside: (180, 60) at 4.390 kT
+     minimum at (267.5, 160) deg, 1.588 kT, population 0.1562; ideal rotamers inside: (300, 180) at 37.340 kT
+     minimum at (190, 135) deg, 1.516 kT, population 0.1209; ideal rotamers inside: (180, 180) at 1495.107 kT
+     minimum at (280, 105) deg, 3.851 kT, population 0.0091; ideal rotamers inside: (300, 60) at 4638.884 kT
+     minimum at (57.5, 112.5) deg, 9.189 kT, population 0.0000; ideal rotamers inside: (60, 60) at 68612.885 kT
+     minimum at (227.5, 307.5) deg, 25.671 kT, population 0.0000; ideal rotamers inside: none
+   basin of the rigid table's minimum-energy state (180, 60): minimum at (195, 82.5) deg, 0.000 kT above the global minimum, population 0.7137; basin of the global minimum: population 0.7137;  same basin: True
+   total variation between basin populations (continuous) and the rigid table's weights summed by basin: 0.2863
+
+=== V3a  uniform offsets of the ideal positions: rotamers at (60+d1, 180+d1, 300+d1) x (60+d2, 180+d2, 300+d2)
+   the rigid table names a cell other than that of the continuous minimum at 273 of 625 offsets (d1, d2) in [-30, 30]^2 (step 2.5)
+   map (rows d1 = chi_1 offset from -30 to +30; columns d2 from -30 to +30; X = wrong cell, . = right cell):
+    -30.0  XXXXXXXXXXXXXXX........XX
+    -27.5  XXXXXXXXXXXXXX.........XX
+    -25.0  XXXXXXXXXXXXXX..........X
+    -22.5  XXXXXXXXXXXXX...........X
+    -20.0  XXXXXXXXXXXXX...........X
+    -17.5  XXXXXXXXXXXXX............
+    -15.0  XXXXXXXXXXXX.............
+    -12.5  XXXXXXXXXXXX.............
+    -10.0  XXXXXXXXXXX..............
+     -7.5  XXXXXXXXXXX..............
+     -5.0  XXXXXXXXXXX..............
+     -2.5  XXXXXXXXXX...............
+     +0.0  XXXXXXXXXX...............
+     +2.5  XXXXXXXXX................
+     +5.0  XXXXXXXXX................
+     +7.5  XXXXXXXX.................
+    +10.0  XXXXXXXX.................
+    +12.5  XXXXXXXX.................
+    +15.0  XXXXXXX..................
+    +17.5  XXXXXXXX.................
+    +20.0  XXXXXXXXX................
+    +22.5  XXXXXXXXXX...............
+    +25.0  XXXXXXXXXXX..............
+    +27.5  XXXXXXXXXX...............
+    +30.0  XXXXXXXXXX...............
+   smallest offset (in max norm) that removes the claim: d1 = +0.0, d2 = +0.0 deg
+   total variation at (0, 0): 0.2746; smallest over the offsets: 0.1226 at d1 = +7.5, d2 = -10.0
+   within |d1|, |d2| <= 5 deg: wrong cell at 1 of 25 offsets
+   within |d1|, |d2| <= 10 deg: wrong cell at 15 of 81 offsets
+   within |d1|, |d2| <= 15 deg: wrong cell at 48 of 169 offsets
+
+=== V3b  product library at the bottoms of the one-torsion slices through the global minimum
+   slice bottoms: positions chi_1 (0.0, 195.0, 240.0), chi_2 (82.5, 135.0, 272.5): minimum-energy state (195, 82.5), gap 1.860 kT; in the cell of the continuous minimum: True; TV(grid cells, table) = 0.1603; ln Z offset per torsion +1.6515
+=== V3c  product library at the minima of the one-torsion marginal free energies
+   marginal minima: positions chi_1 (55.0, 195.0, 267.5), chi_2 (80.0, 160.0, 305.0): minimum-energy state (195, 80), gap 1.554 kT; in the cell of the continuous minimum: True; TV(grid cells, table) = 0.1226; ln Z offset per torsion +1.6578
+=== V3d  library-like positions quoted FROM MEMORY (leucine 'mt' about (-65, 175), 'tp' about (-177, 65); not verified against any source)
+      E at mt (295, 175): 9.208 kT above the continuous minimum
+      E at tp (182.5, 65): 2.537 kT above the continuous minimum
+      E at tp (185, 65): 3.100 kT above the continuous minimum
+      E at ideal (300, 180): 37.340 kT above the continuous minimum
+      E at ideal (180, 60): 4.390 kT above the continuous minimum
+=== control: a table with one rotamer at each 2-D cell minimum (the 'minimised' model) names the cell of the continuous minimum by construction: True
+END 2026-11-27T00:14:11Z  wall 0.9 s  peak memory 63 MB (ru_maxrss; address space capped at 3 GB)

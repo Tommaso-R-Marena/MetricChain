@@ -1,0 +1,12 @@
+V12/E tau 0.7: 531441 states, n = 12; mean number of sites off the anchor under pi_E = 0.1214 (fraction p = 0.0101); probability of the anchor 0.8853; of at most one changed site 0.9936
+V12/P2 tau 0.7: 531441 states, n = 12; mean number of sites off the anchor under pi_E = 2.0697 (fraction p = 0.1725); probability of the anchor 0.0958; of at most one changed site 0.3529
+L12/P2 tau 0.6: 4096 states, n = 12; mean number of sites off the anchor under pi_E = 0.3275 (fraction p = 0.0273); probability of the anchor 0.7160; of at most one changed site 0.9600
+L16/P2 tau 0.6: 65536 states, n = 16; mean number of sites off the anchor under pi_E = 0.4205 (fraction p = 0.0263); probability of the anchor 0.6515; of at most one changed site 0.9360
+S6/E tau 0.7: 531441 states, n = 6; mean number of sites off the anchor under pi_E = 1.4925 (fraction p = 0.2487); probability of the anchor 0.1807; of at most one changed site 0.5373
+L8/H tau 0.6: 256 states, n = 8; mean number of sites off the anchor under pi_E = 0.4243 (fraction p = 0.0530); probability of the anchor 0.6171; of at most one changed site 0.9597
+L12/H tau 0.6: 4096 states, n = 12; mean number of sites off the anchor under pi_E = 0.4598 (fraction p = 0.0383); probability of the anchor 0.5883; of at most one changed site 0.9532
+L16/H tau 0.6: 65536 states, n = 16; mean number of sites off the anchor under pi_E = 0.4682 (fraction p = 0.0293); probability of the anchor 0.5816; of at most one changed site 0.9516
+S5/H tau 0.7: 17496 states, n = 5; mean number of sites off the anchor under pi_E = 2.7320 (fraction p = 0.5464); probability of the anchor 0.0201; of at most one changed site 0.1378
+K4/H tau 0.7: 16464 states, n = 4; mean number of sites off the anchor under pi_E = 0.9646 (fraction p = 0.2412); probability of the anchor 0.3141; of at most one changed site 0.7590
+LKSE:5/H tau 0.6: 14508 states, n = 5; mean number of sites off the anchor under pi_E = 1.4455 (fraction p = 0.2891); probability of the anchor 0.1425; of at most one changed site 0.5397
+DONE p6_08_occupancy [20s]

@@ -1,0 +1,72 @@
+[own seed 7001] starting six-tuple: smallest singular value of (R) 0.0244; real components of the curve: 2 (146, 5501 points); states per component: [1, 5]; the sixth state is on component 0
+  positions of the sixth state at which the determinant of the twelve conditions changes sign: 4
+  [own seed 7001/0] singular values 11, 12 of (R): 0.2616, 5.9e-16; smallest singular value of the lifts 0.2017
+      sixth state: 3.021574, 1.795724, 0.044609
+      real components: 2; states per component: [1, 5]; range of q_0 on each: [-1.74e-01, -0.0000], [8.06e-09, 2.1128]
+      q_0 on the curve: min -1.74e-01, min at distance > 0.1 from the states -0.1737, max 2.1128; second derivatives along the curve at the states: 0.2615, 1.4958, 0.2168, 0.1633, 0.0433, -2.2046
+      case (b); least mass on the six states (LP over the sampled curve, 2797 points): 0.000000
+  [own seed 7001/1] singular values 11, 12 of (R): 0.4087, 5.5e-16; smallest singular value of the lifts 0.2166
+      sixth state: 2.777405, 2.021691, -0.089790
+      real components: 2; states per component: [1, 5]; range of q_0 on each: [3.50e-05, 0.1478], [8.34e-09, 2.0810]
+      q_0 on the curve: min 8.34e-09, min at distance > 0.1 from the states 0.0005, max 2.0810; second derivatives along the curve at the states: 0.3806, 1.3833, 0.2244, 0.1983, 0.0863, 3.5000
+      case (a); least mass on the six states (LP over the sampled curve, 2796 points): 1.000000
+      smallest A for which the normal-plane minimisation along the curve finds no negative value: 1994.000; the certificate is tested with A = 2991.000
+      certificate f = 2991 (g_1^2 + g_2^2) + h: |grad h| at the states 6.9e-15; smallest Hessian eigenvalue of f at the states 0.0381
+      Hessians positive definite from A = 1639.649 on; first-order requirement along the curve (away from the states): A > 15005.569 (largest at distance 0.380 from the nearest state)
+      grid 96^3: minimum 4.142e-03; 7549 local minimisations: lowest value -1.096e-12; local minima at distance > 1e-3 from the states: 0
+  [own seed 7001/2] on component 1: the six lifts are dependent (smallest singular value 4.2e-15): the sixth zero of the lifted certificate of the five states, (0.612621, -1.866536, -0.848230)
+  [own seed 7001/3] singular values 11, 12 of (R): 0.1844, 2.5e-16; smallest singular value of the lifts 0.1853
+      sixth state: -2.791917, 1.674457, 0.115798
+      real components: 2; states per component: [0, 6]; range of q_0 on each: [-2.49e-01, -0.0645], [7.39e-09, 2.1185]
+      q_0 on the curve: min -2.49e-01, min at distance > 0.1 from the states -0.2487, max 2.1185; second derivatives along the curve at the states: 0.2078, 1.5358, 0.2121, 0.1470, 0.0242, 0.3536
+      case (b); least mass on the six states (LP over the sampled curve, 2797 points): 0.000000
+  (283 s)
+[own seed 7002] starting six-tuple: smallest singular value of (R) 0.1482; real components of the curve: 1 (6330 points); states per component: [6]; the sixth state is on component 0
+  positions of the sixth state at which the determinant of the twelve conditions changes sign: 2
+  [own seed 7002/0] singular values 11, 12 of (R): 0.1334, 5.2e-16; smallest singular value of the lifts 0.0265
+      sixth state: 0.976342, -2.453412, -1.587751
+      real components: 1; states per component: [6]; range of q_0 on each: [1.79e-09, 2.2064]
+      q_0 on the curve: min 1.79e-09, min at distance > 0.1 from the states 0.0003, max 2.2064; second derivatives along the curve at the states: 0.1185, 0.4346, 0.0720, 0.3131, 0.0684, 0.0523
+      case (a); least mass on the six states (LP over the sampled curve, 3129 points): 1.000000
+      smallest A for which the normal-plane minimisation along the curve finds no negative value: 201.875; the certificate is tested with A = 302.812
+      certificate f = 302.812 (g_1^2 + g_2^2) + h: |grad h| at the states 2.6e-15; smallest Hessian eigenvalue of f at the states 0.0274
+      Hessians positive definite from A = 140.982 on; first-order requirement along the curve (away from the states): A > 420.631 (largest at distance 0.047 from the nearest state)
+      grid 96^3: minimum 1.066e-04; 6649 local minimisations: lowest value -4.202e-14; local minima at distance > 1e-3 from the states: 1, lowest 1.3453e-05 at (1.0221, -2.4279, -1.6178)
+  [own seed 7002/1] on component 0: the six lifts are dependent (smallest singular value 5.3e-16): the sixth zero of the lifted certificate of the five states, (1.277906, -2.095410, -1.457303)
+  (253 s)
+[own seed 7004] starting six-tuple: smallest singular value of (R) 0.2137; real components of the curve: 1 (6581 points); states per component: [6]; the sixth state is on component 0
+  positions of the sixth state at which the determinant of the twelve conditions changes sign: 2
+  [own seed 7004/0] singular values 11, 12 of (R): 0.0388, 8.5e-16; smallest singular value of the lifts 0.0010
+      sixth state: 1.303486, -1.019221, 2.694306
+      real components: 1; states per component: [6]; range of q_0 on each: [3.83e-12, 2.4866]
+      q_0 on the curve: min 3.83e-12, min at distance > 0.1 from the states 0.0000, max 2.4866; second derivatives along the curve at the states: 0.0001, 0.0399, 1.0708, 0.1530, 0.8201, 0.0001
+      case (a); least mass on the six states (LP over the sampled curve, 3272 points): 1.000000
+      smallest A for which the normal-plane minimisation along the curve finds no negative value: 1.320; the certificate is tested with A = 1.980
+      certificate f = 1.98047 (g_1^2 + g_2^2) + h: |grad h| at the states 4.8e-16; smallest Hessian eigenvalue of f at the states 0.0000
+      Hessians positive definite from A = 1.163 on; first-order requirement along the curve (away from the states): A > 61.892 (largest at distance 0.175 from the nearest state)
+      grid 96^3: minimum 1.414e-05; 6838 local minimisations: lowest value -9.745e-16; local minima at distance > 1e-3 from the states: 2, lowest 1.3843e-10 at (1.2960, -1.0182, 2.6979)
+  [own seed 7004/1] on component 0: the six lifts are dependent (smallest singular value 4.3e-17): the sixth zero of the lifted certificate of the five states, (0.888386, -0.974142, 2.550837)
+  (171 s)
+[own seed 7005] starting six-tuple: smallest singular value of (R) 0.0041; real components of the curve: 2 (1069, 4376 points); states per component: [3, 3]; the sixth state is on component 1
+  positions of the sixth state at which the determinant of the twelve conditions changes sign: 4
+  [own seed 7005/0] singular values 11, 12 of (R): 0.1763, 6.4e-16; smallest singular value of the lifts 0.0490
+      sixth state: -1.658545, 1.916296, -0.869033
+      real components: 2; states per component: [4, 2]; range of q_0 on each: [6.67e-12, 0.2525], [1.59e-07, 2.7342]
+      q_0 on the curve: min 6.67e-12, min at distance > 0.1 from the states 0.0000, max 2.7342; second derivatives along the curve at the states: 0.0078, 0.8211, 0.0082, 0.2807, 0.2230, 0.2368
+      case (a); least mass on the six states (LP over the sampled curve, 2706 points): 1.000000
+      smallest A for which the normal-plane minimisation along the curve finds no negative value: 60.625; the certificate is tested with A = 90.938
+      certificate f = 90.9375 (g_1^2 + g_2^2) + h: |grad h| at the states 1.3e-15; smallest Hessian eigenvalue of f at the states 0.0060
+      Hessians positive definite from A = 51.427 on; first-order requirement along the curve (away from the states): A > 1138.886 (largest at distance 0.895 from the nearest state)
+      grid 96^3: minimum 3.160e-04; 7345 local minimisations: lowest value -1.700e-14; local minima at distance > 1e-3 from the states: 0
+  [own seed 7005/1] singular values 11, 12 of (R): 0.0003, 7.7e-16; smallest singular value of the lifts 0.0020
+      sixth state: -2.011357, 2.522201, -0.121089
+      real components: 2; states per component: [4, 2]; range of q_0 on each: [-7.72e-01, 0.0000], [7.04e-08, 1.8278]
+      q_0 on the curve: min -7.72e-01, min at distance > 0.1 from the states -0.7718, max 1.8278; second derivatives along the curve at the states: -0.0000, 0.3631, -0.0003, 0.1021, -0.1877, -0.0000
+      case (b); least mass on the six states (LP over the sampled curve, 2706 points): 0.484590
+  [own seed 7005/2] on component 1: the six lifts are dependent (smallest singular value 3.1e-15): the sixth zero of the lifted certificate of the five states, (-1.750112, 0.566155, -0.992982)
+  [own seed 7005/3] singular values 11, 12 of (R): 0.0126, 6.2e-16; smallest singular value of the lifts 0.0587
+      sixth state: -1.298143, -0.115763, 0.829546
+      real components: 2; states per component: [3, 3]; range of q_0 on each: [-9.39e-01, -0.0000], [1.29e-08, 1.8740]
+      q_0 on the curve: min -9.39e-01, min at distance > 0.1 from the states -0.9393, max 1.8740; second derivatives along the curve at the states: -0.0031, 0.1120, -0.0036, 0.0119, -0.3128, 0.0092
+      case (b); least mass on the six states (LP over the sampled curve, 2706 points): 0.000000
+  (231 s)

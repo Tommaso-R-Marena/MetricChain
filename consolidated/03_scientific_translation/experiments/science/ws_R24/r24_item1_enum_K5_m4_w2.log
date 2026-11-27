@@ -1,0 +1,32 @@
+[theirs] === K5 on H, tau 0.7: 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]; order m = 4, band 2; 5 raw stage-2 tables of workstream P9 (sum of their maxima 1.0472 kT)
+[theirs] (1) floor without penalty built (3 evaluated terms exact in a window, 7 reduced, 3 pairs beyond the band); K(T): workstream P9's stored choice; penalty tables in the window form: 0 on one site, 2 on pairs, 2 on larger sub-tuples; sum of their maxima 1.0266 kT [17s, peak RSS 273 MB]
+[theirs] (2) ln Z(m_0) = 251.3789390 (no penalty); slope at 0: beta <pen>_0 = 0.00114923 nats per unit of lambda; 4 exact samples per lambda
+(0) 115248 states; my evaluation of their tables against their own evaluators at every state: floor without penalty 0.0e+00 kcal/mol, penalty 0.0e+00 (control: one table entry moved by 1e-6 is seen as 1.0e-06) [17s]
+(1) signs: least entry of any penalty table 0 kcal/mol (>= 0: True); penalty at the anchor 0; states with a positive penalty: 109620 of 115248; states with a NEGATIVE penalty: 0; RND - 1 = 1.0e-09 (the model subtracts lambda*RND*pen: b = beta*RND*pen)
+(2) ln Z(m_0): by enumeration 251.3789389642; by my elimination 251.3789389642; their transfer matrix 251.3789389642; least c(x) = 1.109e+00 at state [10, 10, 8, 3, 3] (anchor [10, 10, 8, 3, 3]: c = 1.108918); rounding of c: an error eps in ln Z(m_0) moves every ratio c/b by eps/b, here |L0 - z0| = 2.8e-14
+(3) BRUTE FORCE over every state: lambda_gs = min c/b = 25.82545173 at state [10, 3, 1, 5, 1] (4 of 5 sites off; b* = 0.593782, c* = 15.3347); lambda_kink = min (c - c_min)/b = 23.9579008 at state [10, 3, 1, 5, 1]; same state: True; second smallest ratio c/b: 26.50273104
+(4) DINKELBACH with my own (min,+) elimination: start 74.1885 (the state of largest penalty), iterates 33.404167, 25.825452; 3 passes; lambda_gs = 25.82545173; closing pass at that lambda: max_x [lambda b - c] = -2.84e-14 (must be 0 to rounding); brute force - Dinkelbach = 0.00e+00
+(5) the MODEL'S OWN (min,+) pass (BandModel.dp, their back-tracking): value against mine at 6 lambdas: largest difference 1.4e-13; Dinkelbach with it: 3 passes, lambda_gs = 25.82545173 (brute force - this = 0.00e+00)
+(6) controls: the least ratio with ln Z(m_0) wrong by 1e-3: 25.82713588 (differs from lambda_gs by 1.68e-03; must be visible); without the factor RND in b: differs by 2.58e-08 (relative 1e-09: NOT visible at the printed digits)
+(7) THEIR script re-run (output in rerun_floor_ground_state_K5_m4_w2.log, reached ALL DONE: True): lambda_kink in [23.958, 23.958], lambda_gs in [25.825, 25.826], c*/b* = 25.825; brute force inside their bracket for lambda_gs: True; for lambda_kink: True
+(8) G(lambda) <= F(lambda) = ln Z(m_lambda) - ln Z(m_0) on 151 values of lambda up to 3 lambda_gs, exact by enumeration: 0 violations (must be 0); control, 1.05 max(G, 0) + 0.001 <= F: 45 violations (must be positive)
+(9) exact 'transition' of this floor by three definitions: mean number of sites off the anchor = n/2 at lambda = 24.1992 (the scan's definition; occupancy at 4 lambda_gs: 4.270); states with a positive penalty carry half the weight at 23.4423; F = ln 2 at 23.5746.  lambda_gs / these: 1.0672, 1.1017, 1.0955; lambda_kink / these: 0.9900, 1.0220, 1.0163
+    at lambda_gs: F = 1.4145 (G = 0), weight of the minimiser 0.2431, of the anchor 0.0802, mean sites off 3.076; at lambda = 1 (the certificate): F = 0.00119925, mean sites off 0.9537
+(10) TWO-SIDED: F(lambda) <= (lambda/lambda') G(lambda') + ln sum_x pi_0(x)^(1 - lambda/lambda') for 0 <= lambda <= lambda', 164 pairs (lambda' = 0.7, 1, 1.5, 2.5 lambda_gs): 0 violations (must be 0; largest F - bound = 0.00e+00); control, the same without the Renyi term: 84 violations (must be positive); for information, with HALF the Renyi term: 0 violations (0 means the bound is loose by more than a factor two in the exponent -- the first version of this script used this as its control, and it could not fail)
+     with lambda' = lambda_gs (G = 0):  lambda/lambda_gs | exact F | upper bound ln sum pi_0^(1 - lambda/lambda_gs)
+       0.0 | -1.04361e-14 | -1.04361e-14
+       0.1 | 0.00333195 | 0.321616
+       0.2 | 0.00763999 | 0.709103
+       0.3 | 0.0135013 | 1.18845
+       0.4 | 0.0220011 | 1.79482
+       0.5 | 0.0354555 | 2.57387
+       0.6 | 0.0597465 | 3.58214
+       0.7 | 0.112458 | 4.88737
+       0.8 | 0.249305 | 6.57323
+       0.9 | 0.617645 | 8.7591
+       1.0 | 1.41446 | 11.6548
+(11) F reaches t = 0.100 at lambda_t = 17.6421 (exact); certified bracket [lambda_gs (1 - theta_t), lambda_gs + t/b*] = [0.851172, 25.9939] (theta_t = 0.96704); inside: True; lower end / lambda_t = 0.048
+(11) F reaches t = 0.693 at lambda_t = 23.5746 (exact); certified bracket [lambda_gs (1 - theta_t), lambda_gs + t/b*] = [5.06852, 26.9928] (theta_t = 0.80374); inside: True; lower end / lambda_t = 0.215
+(11) F reaches t = 1.000 at lambda_t = 24.6744 (exact); certified bracket [lambda_gs (1 - theta_t), lambda_gs + t/b*] = [6.80061, 27.5096] (theta_t = 0.73667); inside: True; lower end / lambda_t = 0.276
+(12) their two-entropy estimate lam_eq = lambda_gs - (S_d(lam_in) - lam_in s0)/b*, with S_d read off the exact ln Z at lam_in (s0 = beta <pen>_0 = 0.00114918 exactly): lam_in = lambda_kink = 23.958 -> 23.732 (-1.93 % from lambda_c); lam_in = 0.95 lambda_c = 22.989 -> 24.526 (+1.35 % from lambda_c); lam_in = lambda_c (occupancy n/2, exact) = 24.199 -> 23.77 (-1.77 % from lambda_c); lam_in = 1.05 lambda_c = 25.409 -> 23.932 (-1.10 % from lambda_c); lam_in = lambda_gs = 25.825 -> 23.979 (-0.91 % from lambda_c).  Its fixed point is the root of F = ln 2 + lambda s0: 23.6866 (-2.12 % from lambda_c); for comparison lambda_kink is -1.00 % and lambda_gs +6.72 % from lambda_c; (lambda_gs - lambda_c) b* = 0.966 nats, c* = 15.33, so 1 nat is 6.5 % of lambda_gs here
+ALL DONE 35 s; peak RSS 273 MB

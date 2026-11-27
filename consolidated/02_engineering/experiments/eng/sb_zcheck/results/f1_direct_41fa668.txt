@@ -1,0 +1,8 @@
+model_sha256 c93c651da1c59181  energies 677 678  ln Z = -676.6867383124818
+exact 64 accepted True {'ln_z_hi': -676.6867383118664, 'ln_z_lo': -676.6867383130972, 'removed_upper': None, 'slack_hi': 0.0, 'slack_lo': 0.0} reason accepted
+float 64 accepted True {'ln_z_hi': -676.6867383118664, 'ln_z_lo': -676.6867383130972, 'removed_upper': None, 'slack_hi': 0.0, 'slack_lo': 0.0} reason accepted
+exact 990 accepted True {'ln_z_hi': -676.6867383118664, 'ln_z_lo': -676.6867383130973, 'removed_upper': None, 'slack_hi': 0.0, 'slack_lo': 0.0} reason accepted
+float 980 accepted True {'ln_z_hi': -676.6867383118664, 'ln_z_lo': -676.6867383130972, 'removed_upper': None, 'slack_hi': 0.0, 'slack_lo': 0.0} reason accepted
+float 990 accepted True {'ln_z_hi': -676.9999958362221, 'ln_z_lo': -677.0000000006157, 'removed_upper': None, 'slack_hi': 0.0, 'slack_lo': 0.0} reason accepted
+float 991 accepted True {'ln_z_hi': -676.9999958362221, 'ln_z_lo': -677.0000000006157, 'removed_upper': None, 'slack_hi': 0.0, 'slack_lo': 0.0} reason accepted
+float 992 accepted False {'ln_z_hi': None, 'ln_z_lo': None, 'removed_upper': None, 'slack_hi': None, 'slack_lo': None} reason abstained: the lower bound of the partition sum is not positive at this precision

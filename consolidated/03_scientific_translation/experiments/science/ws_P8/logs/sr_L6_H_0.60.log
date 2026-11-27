@@ -1,0 +1,69 @@
+=== p8_03_sr_validate: L6 on H, tau 0.6: atoms 126, sites 6, domain [2, 2, 2, 2, 2, 2], anchor (1, 1, 1, 1, 1, 1); 42 subsets of order 3..6
+    bounds of 42 subsets in the variants ('P3', 'S', 'AH', 'SA') done, 2 s
+    C0 variant 'P3' against P3's own summands: 336042 summands, largest deviation relative to the largest summand 1.6e-16, largest relative deviation of a summand 1.7e-15
+    C1 'S' summand >= exact anchored constant (all contexts), every (T, atom), (T, atom pair): 336042 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0002, pair 1.0104; medians 1.12, 2.84
+    C2 'SA' summand >= exact restricted constant (hosts outside T at the anchor): 336042 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0002, pair 1.0104; medians 1.10, 2.87
+    C2 'AH' summand >= exact restricted constant: 336042 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0002, pair 1.0104; medians 1.10, 2.87
+    (for information: 'SA' summand < exact ALL-context constant in 52830 of 336042 cases -- 'SA' is a bound of the restricted constants only)
+    C3 chains SA <= S <= P3 and SA <= AH <= P3, summand by summand: 1344168 comparisons, 0 violations
+    C4 per atom pair and order: sum_T summand >= sup_x |t_pq - I_(m-1) t_pq|: 32004 comparisons per variant; violations P3: 0, S: 0, AH: 0, SA: 0; smallest ratio P3: 1.002, S: 1.002, AH: 1.002, SA: 1.002
+    C5 at every state, |g_s - I_(m-1) g_s|(x) <= envelope sum_(T in S(x)) chat_T, for 2 charge systems (true charges, all charges positive): 512 state checks per variant; violations P3: 0, S: 0, AH: 0, SA: 0; smallest ratio envelope/|remainder| P3: 7.93, S: 7.92, AH: 7.77, SA: 7.77
+    C6 closed form total_ah(m) against the sum over subsets of the 'AH' constants: largest relative deviation 1.6e-16
+--- order 3: 20 subsets; sums (kcal/mol): truth 2.6782e-01 | best pair-by-pair 3.7287e+01 (restricted contexts 3.6466e+01) | P3 1.3167e+02 | S 1.2993e+02 | AH 1.2768e+02 | SA 1.2768e+02
+    P3/S = 1.01;  P3/AH = 1.03;  P3/SA = 1.03;   to the truth: P3 492, S 485.2, SA 476.7;  to the best pair-by-pair: P3 3.53, S 3.48, SA/restricted 3.50
+    cross part by host pattern:   best pair-by-pair (all contexts; restricted) | P3 | S | AH | SA | P3/PP | S/PP | SA/PPA
+      0 moving, 0 host(s) in T: 9.6891e+00; 9.6891e+00 | 3.1243e+01 | 3.1243e+01 | 3.1243e+01 | 3.1243e+01 |    3.22 |   3.22 |   3.22
+      1 moving, 0 host(s) in T: 1.5802e+00; 1.0795e+00 | 5.8816e+00 | 5.1252e+00 | 3.5972e+00 | 3.5972e+00 |    3.72 |   3.24 |   3.33
+      1 moving, 1 host(s) in T: 1.6544e+01; 1.6544e+01 | 7.2330e+01 | 7.2330e+01 | 7.2330e+01 | 7.2330e+01 |    4.37 |   4.37 |   4.37
+      2 moving, 0 host(s) in T: 2.0787e-02; 7.8540e-03 | 1.8703e-01 | 4.2111e-02 | 1.4939e-02 | 1.4939e-02 |    9.00 |   2.03 |   1.90
+      2 moving, 1 host(s) in T: 6.8077e-01; 3.7445e-01 | 2.3293e+00 | 1.5014e+00 | 8.0502e-01 | 8.0502e-01 |    3.42 |   2.21 |   2.15
+      2 moving, 2 host(s) in T: 7.8322e+00; 7.8322e+00 | 1.8605e+01 | 1.8605e+01 | 1.8605e+01 | 1.8605e+01 |    2.38 |   2.38 |   2.38
+    by atom class:   best pair-by-pair (all contexts; restricted) | P3 | S | SA | P3/PP | S/PP | SA/PPA
+      bb-bb        9.6891e+00; 9.6891e+00 | 3.1243e+01 | 3.1243e+01 | 3.1243e+01 |    3.22 |   3.22 |   3.22
+      bb-nsc       1.8124e+01; 1.7624e+01 | 7.8211e+01 | 7.7455e+01 | 7.5927e+01 |    4.32 |   4.27 |   4.31
+      nsc-nsc      8.5337e+00; 8.2145e+00 | 2.1121e+01 | 2.0148e+01 | 1.9424e+01 |    2.47 |   2.36 |   2.36
+      self:bb      8.1636e-01; 8.1636e-01 | 9.3037e-01 | 9.3037e-01 | 9.3037e-01 |    1.14 |   1.14 |   1.14
+      self:nsc     1.2353e-01; 1.2259e-01 | 1.6617e-01 | 1.5603e-01 | 1.5486e-01 |    1.35 |   1.26 |   1.26
+--- order 4: 15 subsets; sums (kcal/mol): truth 6.0705e-02 | best pair-by-pair 2.3371e+00 (restricted contexts 2.2992e+00) | P3 1.2881e+01 | S 1.2767e+01 | AH 1.2645e+01 | SA 1.2645e+01
+    P3/S = 1.01;  P3/AH = 1.02;  P3/SA = 1.02;   to the truth: P3 212, S 210.3, SA 208.3;  to the best pair-by-pair: P3 5.51, S 5.46, SA/restricted 5.50
+    cross part by host pattern:   best pair-by-pair (all contexts; restricted) | P3 | S | AH | SA | P3/PP | S/PP | SA/PPA
+      0 moving, 0 host(s) in T: 8.2753e-01; 8.2753e-01 | 3.6787e+00 | 3.6787e+00 | 3.6787e+00 | 3.6787e+00 |    4.45 |   4.45 |   4.45
+      1 moving, 0 host(s) in T: 8.1393e-02; 5.1768e-02 | 3.7420e-01 | 3.1025e-01 | 2.0942e-01 | 2.0942e-01 |    4.60 |   3.81 |   4.05
+      1 moving, 1 host(s) in T: 1.0970e+00; 1.0970e+00 | 7.7911e+00 | 7.7911e+00 | 7.7911e+00 | 7.7911e+00 |    7.10 |   7.10 |   7.10
+      2 moving, 0 host(s) in T: 1.3843e-04; 3.8034e-05 | 4.3441e-03 | 3.9904e-04 | 1.0525e-04 | 1.0525e-04 |   31.38 |   2.88 |   2.77
+      2 moving, 1 host(s) in T: 1.6449e-02; 8.1948e-03 | 8.7689e-02 | 4.1672e-02 | 2.0751e-02 | 2.0751e-02 |    5.33 |   2.53 |   2.53
+      2 moving, 2 host(s) in T: 2.9399e-01; 2.9399e-01 | 8.9611e-01 | 8.9611e-01 | 8.9611e-01 | 8.9611e-01 |    3.05 |   3.05 |   3.05
+    by atom class:   best pair-by-pair (all contexts; restricted) | P3 | S | SA | P3/PP | S/PP | SA/PPA
+      bb-bb        8.2753e-01; 8.2753e-01 | 3.6787e+00 | 3.6787e+00 | 3.6787e+00 |    4.45 |   4.45 |   4.45
+      bb-nsc       1.1783e+00; 1.1487e+00 | 8.1653e+00 | 8.1014e+00 | 8.0005e+00 |    6.93 |   6.88 |   6.96
+      nsc-nsc      3.1058e-01; 3.0223e-01 | 9.8814e-01 | 9.3818e-01 | 9.1696e-01 |    3.18 |   3.02 |   3.03
+      self:bb      1.9288e-02; 1.9288e-02 | 4.6851e-02 | 4.6851e-02 | 4.6851e-02 |    2.43 |   2.43 |   2.43
+      self:nsc     1.4047e-03; 1.4014e-03 | 2.0704e-03 | 1.9236e-03 | 1.9197e-03 |    1.47 |   1.37 |   1.37
+--- order 5: 6 subsets; sums (kcal/mol): truth 4.1843e-03 | best pair-by-pair 9.7945e-02 (restricted contexts 9.7380e-02) | P3 7.7634e-01 | S 7.7268e-01 | AH 7.6925e-01 | SA 7.6925e-01
+    P3/S = 1.00;  P3/AH = 1.01;  P3/SA = 1.01;   to the truth: P3 186, S 184.7, SA 183.8;  to the best pair-by-pair: P3 7.93, S 7.89, SA/restricted 7.90
+    cross part by host pattern:   best pair-by-pair (all contexts; restricted) | P3 | S | AH | SA | P3/PP | S/PP | SA/PPA
+      0 moving, 0 host(s) in T: 3.1191e-02; 3.1191e-02 | 2.8236e-01 | 2.8236e-01 | 2.8236e-01 | 2.8236e-01 |    9.05 |   9.05 |   9.05
+      1 moving, 0 host(s) in T: 1.6048e-03; 1.1218e-03 | 1.0586e-02 | 7.8185e-03 | 4.6585e-03 | 4.6585e-03 |    6.60 |   4.87 |   4.15
+      1 moving, 1 host(s) in T: 5.6507e-02; 5.6507e-02 | 4.5747e-01 | 4.5747e-01 | 4.5747e-01 | 4.5747e-01 |    8.10 |   8.10 |   8.10
+      2 moving, 0 host(s) in T: 1.0029e-07; 3.4292e-08 | 7.9915e-06 | 2.9854e-07 | 1.0677e-07 | 1.0677e-07 |   79.69 |   2.98 |   3.11
+      2 moving, 1 host(s) in T: 1.5244e-04; 7.0056e-05 | 1.3860e-03 | 5.0166e-04 | 2.3632e-04 | 2.3632e-04 |    9.09 |   3.29 |   3.37
+      2 moving, 2 host(s) in T: 7.6476e-03; 7.6476e-03 | 2.3311e-02 | 2.3311e-02 | 2.3311e-02 | 2.3311e-02 |    3.05 |   3.05 |   3.05
+    by atom class:   best pair-by-pair (all contexts; restricted) | P3 | S | SA | P3/PP | S/PP | SA/PPA
+      bb-bb        3.1191e-02; 3.1191e-02 | 2.8236e-01 | 2.8236e-01 | 2.8236e-01 |    9.05 |   9.05 |   9.05
+      bb-nsc       5.8111e-02; 5.7628e-02 | 4.6806e-01 | 4.6529e-01 | 4.6213e-01 |    8.05 |   8.01 |   8.02
+      nsc-nsc      7.8001e-03; 7.7177e-03 | 2.4705e-02 | 2.3813e-02 | 2.3547e-02 |    3.17 |   3.05 |   3.05
+      self:bb      8.3647e-04; 8.3647e-04 | 1.2104e-03 | 1.2104e-03 | 1.2104e-03 |    1.45 |   1.45 |   1.45
+      self:nsc     6.2844e-06; 6.2823e-06 | 8.5107e-06 | 8.3339e-06 | 8.3305e-06 |    1.35 |   1.33 |   1.33
+--- order 6: 1 subsets; sums (kcal/mol): truth 1.2138e-04 | best pair-by-pair 1.9149e-03 (restricted contexts 1.9149e-03) | P3 2.1551e-02 | S 2.1551e-02 | AH 2.1551e-02 | SA 2.1551e-02
+    P3/S = 1.00;  P3/AH = 1.00;  P3/SA = 1.00;   to the truth: P3 178, S 177.5, SA 177.5;  to the best pair-by-pair: P3 11.25, S 11.25, SA/restricted 11.25
+    cross part by host pattern:   best pair-by-pair (all contexts; restricted) | P3 | S | AH | SA | P3/PP | S/PP | SA/PPA
+      0 moving, 0 host(s) in T: 8.3057e-04; 8.3057e-04 | 1.0518e-02 | 1.0518e-02 | 1.0518e-02 | 1.0518e-02 |   12.66 |  12.66 |  12.66
+      1 moving, 1 host(s) in T: 1.0053e-03; 1.0053e-03 | 1.0751e-02 | 1.0751e-02 | 1.0751e-02 | 1.0751e-02 |   10.69 |  10.69 |  10.69
+      2 moving, 2 host(s) in T: 7.4261e-05; 7.4261e-05 | 2.6669e-04 | 2.6669e-04 | 2.6669e-04 | 2.6669e-04 |    3.59 |   3.59 |   3.59
+    by atom class:   best pair-by-pair (all contexts; restricted) | P3 | S | SA | P3/PP | S/PP | SA/PPA
+      bb-bb        8.3057e-04; 8.3057e-04 | 1.0518e-02 | 1.0518e-02 | 1.0518e-02 |   12.66 |  12.66 |  12.66
+      bb-nsc       1.0053e-03; 1.0053e-03 | 1.0751e-02 | 1.0751e-02 | 1.0751e-02 |   10.69 |  10.69 |  10.69
+      nsc-nsc      7.4261e-05; 7.4261e-05 | 2.6669e-04 | 2.6669e-04 | 2.6669e-04 |    3.59 |   3.59 |   3.59
+      self:bb      4.7667e-06; 4.7667e-06 | 1.4493e-05 | 1.4493e-05 | 1.4493e-05 |    3.04 |   3.04 |   3.04
+      self:nsc     4.4758e-09; 4.4758e-09 | 6.7850e-09 | 6.7850e-09 | 6.7850e-09 |    1.52 |   1.52 |   1.52
+DONE in 3.3 s; peak RSS 167 MB

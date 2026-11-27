@@ -1,0 +1,14 @@
+== Part A: per-site rate G_t^(L)(M_L)/(L+m) of the reduced-end block family (exact for every k) ==
+cube: h = 0.029139 (exact exponent of the uniform cube at bounded accuracy, u = 1)
+summary (valid for every number of blocks k, exact, no limit taken):
+
+== Part B: end-to-end brute force, n = 16 = 2 blocks of 8, p = 0.3, m = 0 ==
+block: 16 labels (<= 1 wall), end slope 0.1527;  G_t^(8)(M_L) = 0.246946108;  per site 0.030868
+all 256 residuals psi = phi_a + phi_b + ln rho_0 are in C_d: largest edge violation 4.44e-16 (<= 0 admissible)
+Gibbs laws are products of block Gibbs laws: max |ln pi_psi - ln(pi_a x pi_b)| = 7.11e-15;  A_pi(psi) = A(phi_a) A(phi_b): 4.44e-16
+G_t^(16)(M_L x M_L) = 0.493892215  =  2 G_t^(8)(M_L) = 0.493892215;   cube: 16 F_c(t) = 0.459402;  ratio 1.075
+gamma* in C_d: largest edge violation -4.90e-02;  osc gamma* = 3.2333
+alternatives gamma* - (r - Phi_phi)_+ with r = eps = 0.5: all in C_d (largest edge violation 8.88e-16); smallest gain in ln A = 0.807624 (> eps = 0.5: True)
+exponential weights: max_x sum_phi M e^(-t(Phi-r)) = 0.756621452, min_x = 0.756621452;  e^(t r - G) = 0.756621452
+hard packing with the weights M: max_x sum_phi M 1[x in D_phi] = 0.379056  ->  E|Q| >= (1-2 delta) * 2.6381;   exponential-weights bound (1-2 delta) * 1.3217
+3.4 s

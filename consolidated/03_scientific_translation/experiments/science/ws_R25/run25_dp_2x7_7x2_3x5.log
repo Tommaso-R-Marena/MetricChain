@@ -1,0 +1,20 @@
+start 2026-11-26T22:03:58Z
+  family m=2 B=7: compositions 8192, connected structures 21205002972, elapsed 75.0 s
+  family m=7 B=2: compositions 8192, connected structures 21205002972, elapsed 134.5 s
+  family m=3 B=5: compositions 16384, connected structures 138317675654, elapsed 375.2 s
+DP families (m,B): [(2, 7), (7, 2), (3, 5)]; max_parts None; compositions (ordered instances) 32768
+DP B1_nontiling_structures: 0
+DP ctrl_B>=2_sep_ineq_without_L: 11126205782
+DP ctrl_B>=2_sep_ineq_without_r: 288389936
+DP ctrl_B>=2_sep_ineq_without_z: 1332505448
+DP structures: 180727681598
+DP structures_B>=2: 180727681598
+DP tilings: 8320
+DP viol_bond_count: 0
+DP viol_nick_count: 0
+DP viol_sep_ineq_B1: 0
+DP viol_sep_ineq_B>=2: 0
+DP viol_tiling_iff_L0_nobulge: 0
+DP viol_tiling_signature: 0
+DP wrote sig_dp_q14_15a_v2.json; time 382.9 s
+peak memory 485.4 MB

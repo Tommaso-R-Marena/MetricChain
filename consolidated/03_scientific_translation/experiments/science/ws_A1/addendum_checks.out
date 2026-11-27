@@ -1,0 +1,21 @@
+PASS Q1  cube dictionary: F*_c = (1-t)C_t; E_sp = sup_a ((1-a)/a)(C_a - theta) = KL(rho_theta||p_u) = F_g - (ln2 - R); E_sp - theta = u rho_theta - Lambda_1   max deviation 1.3e-12
+PASS Q2  F*_k(t) = t Psi_k(u) - Psi_k(tu) = (1-t) C_t of the k-ary symmetric channel with p_k = e^u/(e^u+k-1)   max deviation 3.2e-16
+PASS Q2a cutoff rate R_0(k) = C_{1/2} is maximal over real k at k = e^{u/2} + 1   u=1: argmax k = 2.6487, sqrt(L)+1 = 2.6487; u=2: argmax k = 3.7183, sqrt(L)+1 = 3.7183; u=3: argmax k = 5.4817, sqrt(L)+1 = 5.4817; u=5: argmax k = 13.1825, sqrt(L)+1 = 13.1825
+PASS Q2b at e^u = k(k-1):  F*_k(t) = F*_{k+1}(1-t) for all t, hence h_k = h_{k+1} and R_0(k) = R_0(k+1)   (k = 2..6)   max |F_k(t) - F_{k+1}(1-t)| = 4.4e-16; max |h_k - h_{k+1}| = 1.7e-16; off the crossing the identity fails by 4.0e-03
+PASS Q2b' replication of the theory report's values h_2, h_3, h_4 at u = 0.5 (0.007673, 0.007425, 0.006552) and u = 1 (0.029139, 0.030654, 0.028405)   mine: 0.007673, 0.007425, 0.006552 ; 0.029139, 0.030654, 0.028405
+PASS Q2d for (k-1)(k-2) < e^u < k(k-1) the integer maximiser of the cutoff rate and of h over the number of groups is k  (k = 2..12)   31 slopes
+PASS Q2c Shannon capacity a_k maximal at k = (L-1)^2/(L ln L - L + 1), L = e^u  -- a different law from the cutoff rate's   u=1: argmax k = 2.952 (formula 2.952; e^{u/2}+1 = 2.649); u=2: argmax k = 4.866 (formula 4.866; e^{u/2}+1 = 3.718); u=3: argmax k = 8.847 (formula 8.847; e^{u/2}+1 = 5.482); u=5: argmax k = 36.543 (formula 36.543; e^{u/2}+1 = 13.182)
+PASS Q2c' crossing a_2 = a_3 at u = 0.5194 (theory report)   mine: 0.51937
+PASS Q3  generators produce admissible instances (asymmetric envelopes, two site types, 2-3 letters)   36 instances
+PASS Q3i every conditional law of nu_psi lies in the window polytope of its site   largest relative violation 4.9e-15
+PASS Q3ii KL(nu_psi || product of capacity-achieving site laws) <= sum_i a_tau(i); equality for additive instances on capacity-achieving vertices   max KL/(sum a) = 1.000000; additive vertex instances: min ratio 1.000000
+PASS Q3iii the vertices of the window are Gibbs laws of vertices of the site's Lipschitz polytope (>= q-1 tight constraints)
+PASS Q3m mutation: a non-admissible psi leaves the window   ratio 720.319
+PASS Q4  adaptive law e(theta) = E_sp(theta) - theta on the cube against Burnashev's line C_1(1 - R/C) for BSC(p_u): C_1 = u tanh(u/2); e(0+) = ln cosh(u/2); e vanishes at h < a; e strictly convex (not a line)   
+      u=0.5: C_1 = 0.1225, e(0+) = 0.0309, h = 0.00767 < a = 0.03030, e(h/2) = 0.0090 against the chord's 0.0155
+      u=1.0: C_1 = 0.4621, e(0+) = 0.1201, h = 0.02914 < a = 0.11094, e(h/2) = 0.0350 against the chord's 0.0601
+      u=2.0: C_1 = 1.5232, e(0+) = 0.4338, h = 0.09728 < a = 0.32781, e(h/2) = 0.1244 against the chord's 0.2169
+      u=3.0: C_1 = 2.7154, e(0+) = 0.8554, h = 0.17283 < a = 0.50228, e(h/2) = 0.2410 against the chord's 0.4277
+PASS Q4m mutation: the straight line between the two endpoints differs from e at theta = h/2   chord - e = 0.0925 at u = 2
+
+failures: 0

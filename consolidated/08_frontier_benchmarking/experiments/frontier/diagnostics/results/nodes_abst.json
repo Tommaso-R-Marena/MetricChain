@@ -1,0 +1,32 @@
+[
+ {
+  "best_known": 34168,
+  "budget": 900.0,
+  "instance": "pdb1kwh",
+  "nodes_entered": 2306,
+  "seconds": 900.1,
+  "status": "abstained_budget",
+  "sweeps": 49660,
+  "toulbar2_proved": true
+ },
+ {
+  "best_known": 50662,
+  "budget": 900.0,
+  "instance": "pdb1fmj",
+  "nodes_entered": 1308,
+  "seconds": 906.9,
+  "status": "abstained_budget",
+  "sweeps": 34756,
+  "toulbar2_proved": true
+ },
+ {
+  "best_known": 58671,
+  "budget": 900.0,
+  "instance": "pdb1jmx",
+  "nodes_entered": 620,
+  "seconds": 902.0,
+  "status": "abstained_budget",
+  "sweeps": 38399,
+  "toulbar2_proved": true
+ }
+]

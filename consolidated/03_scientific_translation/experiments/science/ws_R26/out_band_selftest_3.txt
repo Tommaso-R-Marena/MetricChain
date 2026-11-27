@@ -1,0 +1,10 @@
+selftest 1: brute force vs transfer matrices vs boundary formula, 24 models: violations 0, largest difference 4.97e-14
+selftest 2: box influence, level-set formula on the boundary layer vs threshold scan on the whole block with the optimality condition, 984 cases, largest difference 7.11e-15; vs LP for D <= 3, 48 cases, largest difference 1.16e-07; violations 171
+selftest 3: Lipschitz LP vs k*max ln[(1+p(e^(+-u)-1))/(1+p'(e^(+-u)-1))], 4 cases: violations 0, largest difference 1.78e-15
+selftest 4: symmetric binary chain, LP vs own recursion vs closed form: violations 0, largest difference 2.66e-15
+    p=0.3 u=1.0 k=6: u+iota: LP 1.525944  recursion 1.525944  closed form u+g(v^(k)) 1.525944   pointwise u+K 1.8473
+    p=0.2 u=0.5 k=6: u+iota: LP 1.128162  recursion 1.128162  closed form u+g(v^(k)) 1.128162   pointwise u+K 1.8863
+    p=0.3 u=2.35 k=6: u+iota: LP 3.117818  recursion 3.117818  closed form u+g(v^(k)) 3.117818   pointwise u+K 3.1973
+    p=0.1 u=1.0 k=8: u+iota: LP 2.748502  recursion 2.748502  closed form u+g(v^(k)) 2.748502   pointwise u+K 3.1972
+selftest total violations: 171
+elapsed 0.4 s; peak memory 93 MB

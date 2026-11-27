@@ -1,0 +1,912 @@
+{
+ "A_small": {
+  "S": {
+   "runs": 1664,
+   "discarded": 0,
+   "closed": 1664,
+   "closed_LgtU": 0,
+   "abort": 0,
+   "abort_cost": 0,
+   "abort_unclassified": 0,
+   "G_failed": 0,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 340984,
+   "neg": 180,
+   "runs_neg": 14,
+   "close_pop": 243,
+   "close_unpop": 1421,
+   "close_tail0": 360,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 652,
+   "runs_big_blocks": 0
+  },
+  "max": {
+   "M_over_Mbar": 0.0014517335563567994,
+   "M_over_Mdag": 1.983875198289752,
+   "M_over_capnew": 0.8433740467435463,
+   "lnq_over_lnCmax": 0.7964611494335402,
+   "q_over_Cvi": 0.0014517335563668911,
+   "calls_over_bound": 0.12534168569224496,
+   "used_over_cnt": 0.17724952966802832,
+   "count_ineq": 0.8690337323776656,
+   "lnM": 29.693873323152324
+  },
+  "census": {
+   "cells": 8,
+   "n": [
+    24,
+    40,
+    48,
+    60,
+    64,
+    80
+   ],
+   "n_o": [
+    10,
+    12,
+    24,
+    30,
+    32,
+    40
+   ],
+   "u": [
+    0.5,
+    1.0,
+    2.0
+   ],
+   "Kov": [
+    "None"
+   ],
+   "runs_per_cell": [
+    208,
+    208,
+    208,
+    208,
+    208,
+    208,
+    208,
+    208
+   ],
+   "behaviours": 10,
+   "profiles": 17
+  }
+ },
+ "A_ties": {
+  "S": {
+   "runs": 465,
+   "discarded": 35,
+   "closed": 465,
+   "closed_LgtU": 0,
+   "abort": 0,
+   "abort_cost": 0,
+   "abort_unclassified": 0,
+   "G_failed": 0,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 167890,
+   "neg": 1960,
+   "runs_neg": 151,
+   "close_pop": 21,
+   "close_unpop": 444,
+   "close_tail0": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 14,
+   "q_gt_Cmax": 0,
+   "runs_big_blocks": 9
+  },
+  "max": {
+   "M_over_Mbar": 0.00016872433983910383,
+   "M_over_Mdag": 1.4858718860009597,
+   "M_over_capnew": 0.18085625533238603,
+   "lnq_over_lnCmax": 0.770871838216544,
+   "q_over_Cvi": 2.601507044176463e-05,
+   "calls_over_bound": 0.20596870415004814,
+   "used_over_cnt": 0.2764633890339252,
+   "count_ineq": 0.662503112119533,
+   "lnM": 57.75747966512591
+  },
+  "census": {
+   "cells": 5,
+   "n": [
+    48,
+    64,
+    200,
+    300
+   ],
+   "n_o": [
+    24,
+    32,
+    100,
+    120
+   ],
+   "u": [
+    1.0,
+    2.0
+   ],
+   "Kov": [
+    "None"
+   ],
+   "runs_per_cell": [
+    82,
+    83,
+    100,
+    100,
+    100
+   ],
+   "behaviours": 6,
+   "profiles": 6
+  }
+ },
+ "A_medium": {
+  "S": {
+   "runs": 302,
+   "discarded": 11,
+   "closed": 302,
+   "closed_LgtU": 0,
+   "abort": 0,
+   "abort_cost": 0,
+   "abort_unclassified": 0,
+   "G_failed": 0,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 343787,
+   "neg": 1674,
+   "runs_neg": 108,
+   "close_pop": 49,
+   "close_unpop": 253,
+   "close_tail0": 2,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 31,
+   "q_gt_Cmax": 0,
+   "runs_big_blocks": 45
+  },
+  "max": {
+   "M_over_Mbar": 4.2138711301546955e-05,
+   "M_over_Mdag": 2.072147143611625,
+   "M_over_capnew": 0.3811501666084225,
+   "lnq_over_lnCmax": 0.830503006647273,
+   "q_over_Cvi": 1.791055440993065e-05,
+   "calls_over_bound": 0.17204993526458004,
+   "used_over_cnt": 0.3440998705291601,
+   "count_ineq": 0.5591245533172723,
+   "lnM": 54.27920441307345
+  },
+  "census": {
+   "cells": 12,
+   "n": [
+    120,
+    160,
+    200,
+    300,
+    500,
+    600,
+    1000,
+    1200,
+    2000
+   ],
+   "n_o": [
+    60,
+    80,
+    100,
+    120,
+    250,
+    300,
+    400,
+    500,
+    1000
+   ],
+   "u": [
+    0.5,
+    1.0,
+    2.0,
+    3.0
+   ],
+   "Kov": [
+    "None"
+   ],
+   "runs_per_cell": [
+    20,
+    21,
+    26,
+    26,
+    26,
+    26,
+    26,
+    26,
+    26,
+    26,
+    26,
+    27
+   ],
+   "behaviours": 10,
+   "profiles": 17
+  }
+ },
+ "D_2L": {
+  "S": {
+   "runs": 239,
+   "discarded": 0,
+   "closed": 239,
+   "closed_LgtU": 0,
+   "abort": 0,
+   "abort_cost": 0,
+   "abort_unclassified": 0,
+   "G_failed": 0,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 257477,
+   "neg": 475,
+   "runs_neg": 48,
+   "close_pop": 82,
+   "close_unpop": 157,
+   "close_tail0": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 85,
+   "q_gt_Cmax": 0,
+   "runs_big_blocks": 59
+  },
+  "max": {
+   "M_over_Mbar": 0.00032524577499033357,
+   "M_over_Mdag": 3.02517479048263,
+   "lnq_over_lnCmax": 0.7188572589082186,
+   "calls_over_bound": 0.020038806001667655,
+   "used_over_cnt": 0.08775945552159206,
+   "count_ineq": 0.18615975501210263,
+   "M_over_capnew": 0.5564498056843425,
+   "lnM": 50.85875999698456
+  },
+  "census": {
+   "cells": 8,
+   "n": [
+    40,
+    60,
+    600,
+    1000,
+    1200,
+    2000,
+    3000
+   ],
+   "n_o": [
+    12,
+    30,
+    300,
+    400,
+    500,
+    1000,
+    1500
+   ],
+   "u": [
+    0.5,
+    1.0,
+    2.0
+   ],
+   "Kov": [
+    "None"
+   ],
+   "runs_per_cell": [
+    29,
+    30,
+    30,
+    30,
+    30,
+    30,
+    30,
+    30
+   ],
+   "behaviours": 10,
+   "profiles": 17
+  }
+ },
+ "B_reducedK": {
+  "S": {
+   "runs": 396,
+   "discarded": 4,
+   "closed": 396,
+   "closed_LgtU": 0,
+   "abort": 0,
+   "abort_cost": 0,
+   "abort_unclassified": 0,
+   "G_failed": 101,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 281688,
+   "neg": 1929,
+   "runs_neg": 131,
+   "close_pop": 33,
+   "close_unpop": 363,
+   "close_tail0": 10,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 34,
+   "q_gt_Cmax": 0,
+   "runs_big_blocks": 57
+  },
+  "max": {
+   "M_over_Mbar": 6.862844712616688e-05,
+   "M_over_Mdag": 2.072147143611625,
+   "M_over_capnew": 0.3811501666084225,
+   "lnq_over_lnCmax": 0.8221000936522241,
+   "q_over_Cvi": 2.0970405094486358e-05,
+   "calls_over_bound": 0.14429127853677015,
+   "used_over_cnt": 0.2741082853111108,
+   "count_ineq": 0.6989128216062969,
+   "lnM": 57.53121598647546
+  },
+  "census": {
+   "cells": 15,
+   "n": [
+    80,
+    120,
+    160,
+    200,
+    1200
+   ],
+   "n_o": [
+    40,
+    60,
+    80,
+    100,
+    400
+   ],
+   "u": [
+    1.0,
+    2.0,
+    3.0
+   ],
+   "Kov": [
+    "20",
+    "50",
+    "8"
+   ],
+   "runs_per_cell": [
+    24,
+    25,
+    26,
+    26,
+    26,
+    26,
+    27,
+    27,
+    27,
+    27,
+    27,
+    27,
+    27,
+    27,
+    27
+   ],
+   "behaviours": 10,
+   "profiles": 17
+  }
+ },
+ "B_invalid": {
+  "S": {
+   "runs": 390,
+   "discarded": 10,
+   "closed": 218,
+   "closed_LgtU": 18,
+   "abort": 154,
+   "abort_cost": 0,
+   "abort_unclassified": 154,
+   "G_failed": 390,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 208784,
+   "neg": 6268,
+   "runs_neg": 132,
+   "close_pop": 24,
+   "close_unpop": 194,
+   "close_tail0": 19,
+   "invalid_final": 117,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 33,
+   "q_gt_Cmax": 0,
+   "runs_big_blocks": 17
+  },
+  "max": {
+   "M_over_Mbar": 0.0009115544078952058,
+   "M_over_Mdag": 2.072147143611625,
+   "M_over_capnew": 0.8433740467435463,
+   "lnq_over_lnCmax": 0.866428586996604,
+   "q_over_Cvi": 0.0049571062939675545,
+   "lnM": 54.94679109665386
+  },
+  "census": {
+   "cells": 7,
+   "n": [
+    24,
+    80,
+    120,
+    160,
+    200,
+    1200
+   ],
+   "n_o": [
+    12,
+    40,
+    60,
+    80,
+    100,
+    400
+   ],
+   "u": [
+    1.0,
+    2.0,
+    3.0
+   ],
+   "Kov": [
+    "20",
+    "None"
+   ],
+   "runs_per_cell": [
+    52,
+    52,
+    57,
+    57,
+    57,
+    57,
+    58
+   ],
+   "behaviours": 9,
+   "profiles": 17
+  }
+ },
+ "B_lazy": {
+  "S": {
+   "runs": 319,
+   "discarded": 1,
+   "closed": 177,
+   "closed_LgtU": 0,
+   "abort": 142,
+   "abort_cost": 142,
+   "abort_unclassified": 0,
+   "G_failed": 319,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 237262,
+   "neg": 1463,
+   "runs_neg": 84,
+   "q_gt_Cmax": 0,
+   "runs_big_blocks": 12,
+   "close_pop": 28,
+   "close_unpop": 149,
+   "close_tail0": 2,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 31
+  },
+  "max": {
+   "M_over_Mbar": 6.862844712616688e-05,
+   "M_over_Mdag": 2.072147143611625,
+   "M_over_capnew": 0.3811501666084225,
+   "lnq_over_lnCmax": 0.9999880926957397,
+   "q_over_Cvi": 0.9940113130069959,
+   "lnM": 54.27920441307345
+  },
+  "census": {
+   "cells": 12,
+   "n": [
+    80,
+    120,
+    160,
+    200,
+    300,
+    1200
+   ],
+   "n_o": [
+    40,
+    60,
+    80,
+    100,
+    120,
+    400
+   ],
+   "u": [
+    1.0,
+    2.0,
+    3.0
+   ],
+   "Kov": [
+    "None"
+   ],
+   "runs_per_cell": [
+    9,
+    10,
+    10,
+    10,
+    10,
+    10,
+    43,
+    43,
+    43,
+    43,
+    44,
+    44
+   ],
+   "behaviours": 2,
+   "profiles": 9
+  }
+ },
+ "D_2L_off": {
+  "S": {
+   "runs": 300,
+   "discarded": 0,
+   "closed": 256,
+   "closed_LgtU": 0,
+   "abort": 44,
+   "abort_cost": 0,
+   "abort_unclassified": 44,
+   "G_failed": 144,
+   "det_viol": 0,
+   "good_viol": 0,
+   "pop": 308890,
+   "neg": 458,
+   "runs_neg": 46,
+   "close_pop": 83,
+   "close_unpop": 173,
+   "close_tail0": 0,
+   "invalid_final": 44,
+   "invalid_final_on_G": 0,
+   "close_r_le_rdag": 81,
+   "q_gt_Cmax": 0,
+   "runs_big_blocks": 24
+  },
+  "max": {
+   "M_over_Mbar": 0.00021500141434798115,
+   "M_over_Mdag": 2.5688801769888125,
+   "lnq_over_lnCmax": 0.7238972950588073,
+   "M_over_capnew": 0.47251910197352015,
+   "lnM": 41.84784664970527,
+   "calls_over_bound": 0.0004643562128016763,
+   "used_over_cnt": 0.08487140439520223,
+   "count_ineq": 0.1901706474153889
+  },
+  "census": {
+   "cells": 5,
+   "n": [
+    60,
+    600,
+    1200
+   ],
+   "n_o": [
+    30,
+    300,
+    400
+   ],
+   "u": [
+    1.0,
+    2.0
+   ],
+   "Kov": [
+    "10",
+    "30",
+    "None"
+   ],
+   "runs_per_cell": [
+    60,
+    60,
+    60,
+    60,
+    60
+   ],
+   "behaviours": 19,
+   "profiles": 17
+  }
+ },
+ "B_reducedK_byK": {
+  "(8, 'valid')": {
+   "runs": 135,
+   "Gfail": 65,
+   "det": 0,
+   "good": 0,
+   "abort": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0
+  },
+  "(20, 'valid')": {
+   "runs": 133,
+   "Gfail": 33,
+   "det": 0,
+   "good": 0,
+   "abort": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0
+  },
+  "(50, 'valid')": {
+   "runs": 128,
+   "Gfail": 3,
+   "det": 0,
+   "good": 0,
+   "abort": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0
+  }
+ },
+ "D_2L_off_byK": {
+  "(10, 'invalid')": {
+   "runs": 51,
+   "Gfail": 51,
+   "det": 0,
+   "good": 0,
+   "abort": 11,
+   "invalid_final": 17,
+   "invalid_final_on_G": 0
+  },
+  "(30, 'invalid')": {
+   "runs": 32,
+   "Gfail": 32,
+   "det": 0,
+   "good": 0,
+   "abort": 12,
+   "invalid_final": 11,
+   "invalid_final_on_G": 0
+  },
+  "(None, 'invalid')": {
+   "runs": 55,
+   "Gfail": 55,
+   "det": 0,
+   "good": 0,
+   "abort": 21,
+   "invalid_final": 16,
+   "invalid_final_on_G": 0
+  },
+  "(None, 'valid')": {
+   "runs": 65,
+   "Gfail": 0,
+   "det": 0,
+   "good": 0,
+   "abort": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0
+  },
+  "(10, 'valid')": {
+   "runs": 69,
+   "Gfail": 6,
+   "det": 0,
+   "good": 0,
+   "abort": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0
+  },
+  "(30, 'valid')": {
+   "runs": 28,
+   "Gfail": 0,
+   "det": 0,
+   "good": 0,
+   "abort": 0,
+   "invalid_final": 0,
+   "invalid_final_on_G": 0
+  }
+ },
+ "B_lazy_split": {
+  "steep_runs": 260,
+  "steep_abort_cost": 142,
+  "steep_q_gt_Cmax": 0,
+  "steep_max_lnq_minus_lnCmax": -0.006006691095535643,
+  "cheap_runs": 59,
+  "cheap_abort_cost": 0,
+  "cheap_max_q_over_Cvi": 0.020972500244140664
+ },
+ "e2e_K1": {
+  "runs": 129,
+  "closed": 129,
+  "abort": 0,
+  "real_brackets": 9786461,
+  "inner_calls": 12363569,
+  "rungs_real": 224,
+  "rungs": 270,
+  "invalid_inner": 0,
+  "runs_with_invalid_inner": 0,
+  "G_failed": 0,
+  "det_viol": 0,
+  "good_viol": 0,
+  "invalid_final": 0,
+  "invalid_final_on_G": 0,
+  "too_wide_final": 0,
+  "max_q_over_Cmax": 0.006040175941347989,
+  "neg": 0,
+  "points": 9352668,
+  "max_width_excess": -0.13950228054812053
+ },
+ "e2e_K16": {
+  "runs": 400,
+  "closed": 400,
+  "abort": 0,
+  "real_brackets": 1844727,
+  "inner_calls": 2444604,
+  "rungs_real": 667,
+  "rungs": 802,
+  "invalid_inner": 0,
+  "runs_with_invalid_inner": 0,
+  "G_failed": 31,
+  "det_viol": 0,
+  "good_viol": 0,
+  "invalid_final": 0,
+  "invalid_final_on_G": 0,
+  "too_wide_final": 0,
+  "max_q_over_Cmax": 0.023282922451070522,
+  "neg": 0,
+  "points": 1769956,
+  "max_width_excess": -0.13541254327051833
+ },
+ "three": {
+  "outer_runs": 19,
+  "outer_closed": 19,
+  "outer_invalid": 0,
+  "outer_too_wide": 0,
+  "outer_det": 0,
+  "outer_good": 0,
+  "middle_runs": 1152,
+  "middle_closed": 1152,
+  "middle_invalid": 0,
+  "middle_too_wide": 0,
+  "middle_det": 0,
+  "middle_good": 0,
+  "bottom_brackets": 80363188,
+  "bottom_invalid": 0,
+  "runs_with_real_bottom": 12,
+  "sizes": [
+   [
+    3,
+    3,
+    3
+   ],
+   [
+    3,
+    3,
+    4
+   ],
+   [
+    3,
+    4,
+    3
+   ],
+   [
+    4,
+    3,
+    3
+   ]
+  ],
+  "max_lnq_minus_lnCmax": -5.412525865520813
+ },
+ "adversarial": [
+  {
+   "cell": {
+    "Kov": null,
+    "L_ext": 5,
+    "b": 0.5,
+    "delta": 0.05,
+    "eta": "1/2",
+    "etap": 1.0,
+    "kind": "2L+",
+    "lam": 0.5,
+    "n": 48,
+    "n_o": 24,
+    "nu1": 79.13862099360615,
+    "theta": 1.0,
+    "u": 0.5
+   },
+   "objective": "cap",
+   "evaluations": 594,
+   "completed": 594,
+   "seed": 32,
+   "best": 0.18124675750732422,
+   "violations": 0
+  },
+  {
+   "cell": {
+    "Kov": null,
+    "L_ext": 5,
+    "b": 2.0,
+    "delta": 0.05,
+    "eta": "1/3",
+    "etap": 0.3333333333333333,
+    "kind": "2L+",
+    "lam": 0.3333333333333333,
+    "n": 80,
+    "n_o": 40,
+    "nu1": 652.3876388301709,
+    "theta": 0.3333333333333333,
+    "u": 1.0
+   },
+   "objective": "ineq",
+   "evaluations": 23,
+   "completed": 23,
+   "seed": 99,
+   "best": 0.5711162384985503,
+   "violations": 0
+  },
+  {
+   "cell": {
+    "Kov": null,
+    "L_ext": 5,
+    "b": 0.5,
+    "delta": 0.05,
+    "eta": "1/2",
+    "etap": 1.0,
+    "kind": "2L+",
+    "lam": 0.5,
+    "n": 160,
+    "n_o": 80,
+    "nu1": 1.0,
+    "theta": 0.5,
+    "u": 2.0
+   },
+   "objective": "calls",
+   "evaluations": 122,
+   "completed": 122,
+   "seed": 233,
+   "best": 0.2029837879336636,
+   "violations": 0
+  },
+  {
+   "cell": {
+    "Kov": null,
+    "L_ext": 5,
+    "b": 0.5,
+    "delta": 0.05,
+    "eta": "1/2",
+    "etap": 1.0,
+    "kind": "2L+",
+    "lam": 1.0,
+    "n": 200,
+    "n_o": 100,
+    "nu1": 1477.8112197861299,
+    "theta": 1.0,
+    "u": 2.0
+   },
+   "objective": "cap",
+   "evaluations": 66,
+   "completed": 61,
+   "seed": 234,
+   "best": 3.7632882595062256e-05,
+   "violations": 0
+  },
+  {
+   "cell": {
+    "Kov": null,
+    "L_ext": 5,
+    "b": 0.5,
+    "delta": 0.05,
+    "eta": "1/2",
+    "etap": 1.0,
+    "kind": "2L+",
+    "lam": 1.0,
+    "n": 200,
+    "n_o": 100,
+    "nu1": 1477.8112197861299,
+    "theta": 1.0,
+    "u": 2.0
+   },
+   "objective": "ineq",
+   "evaluations": 178,
+   "completed": 176,
+   "seed": 231,
+   "best": 0.44782817266889097,
+   "violations": 0
+  }
+ ],
+ "capcorner": {
+  "runs": 4500,
+  "degenerate": 4151,
+  "rdag_ge1_degenerate": 1801,
+  "pass_at_Mdd": 2361,
+  "pass_at_Mdd_unpop": 2266,
+  "pass_at_Mdd_unpop_notclosed": 1255,
+  "cap_viol": 0,
+  "det_viol": 0,
+  "good_viol": 0,
+  "sample_eq_2Mdd": 1133,
+  "closed": 4209,
+  "abort": 291,
+  "rge1_unpop_at_Mdd": 193,
+  "rge1_notclosed_after_pop": 0,
+  "rge1_notclosed_after_neg": 0,
+  "max_M_over_cap": 0.5
+ }
+}

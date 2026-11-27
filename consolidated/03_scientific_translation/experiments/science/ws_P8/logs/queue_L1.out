@@ -1,0 +1,63 @@
+[06:50:30] START python3 -B p8_04b_gamma12_blocks.py K12 H 0.70 6 --budget 1000
+[06:50:31] END   (exit 0) p8_04b_gamma12_blocks.py K12 H 0.70 6 --budget 1000
+[06:50:31] START python3 -B p8_07_estimate.py K12 H 0.70 6
+[06:50:39] END   (exit 0) p8_07_estimate.py K12 H 0.70 6
+[06:50:39] START python3 -B p8_05_gibbs.py LKSE:12 H 0.60 --budget 1000
+[06:53:20] END   (exit 0) p8_05_gibbs.py LKSE:12 H 0.60 --budget 1000
+[06:53:20] START python3 -B p8_05_gibbs.py LKSE:12 H 0.60 --budget 1000
+[06:53:21] END   (exit 0) p8_05_gibbs.py LKSE:12 H 0.60 --budget 1000
+[06:53:21] START python3 -B p8_04b_gamma12_blocks.py LKSE:12 H 0.60 4 --budget 1000
+[06:53:45] END   (exit 0) p8_04b_gamma12_blocks.py LKSE:12 H 0.60 4 --budget 1000
+[06:53:45] START python3 -B p8_04b_gamma12_blocks.py LKSE:12 H 0.60 5 --budget 1000
+[06:54:32] END   (exit 0) p8_04b_gamma12_blocks.py LKSE:12 H 0.60 5 --budget 1000
+[06:54:32] START python3 -B p8_04b_gamma12_blocks.py LKSE:12 H 0.60 6 --budget 1000
+[06:55:42] END   (exit 0) p8_04b_gamma12_blocks.py LKSE:12 H 0.60 6 --budget 1000
+[06:55:42] START python3 -B p8_07_estimate.py LKSE:12 H 0.60 7
+[06:55:51] END   (exit 0) p8_07_estimate.py LKSE:12 H 0.60 7
+[06:55:51] START python3 -B p8_08_ideal.py LKSE:12 H 0.60
+[06:56:03] END   (exit 0) p8_08_ideal.py LKSE:12 H 0.60
+[06:56:03] START python3 -B p8_05_gibbs.py S12 H 0.70 --budget 1000
+[06:57:26] END   (exit 0) p8_05_gibbs.py S12 H 0.70 --budget 1000
+[06:57:26] START python3 -B p8_04b_gamma12_blocks.py S12 H 0.70 4 --budget 1000
+[06:57:34] END   (exit 0) p8_04b_gamma12_blocks.py S12 H 0.70 4 --budget 1000
+[06:57:34] START python3 -B p8_04b_gamma12_blocks.py S12 H 0.70 5 --budget 1000
+[06:57:49] END   (exit 0) p8_04b_gamma12_blocks.py S12 H 0.70 5 --budget 1000
+[06:57:49] START python3 -B p8_04b_gamma12_blocks.py S12 H 0.70 6 --budget 1000
+[06:58:08] END   (exit 0) p8_04b_gamma12_blocks.py S12 H 0.70 6 --budget 1000
+[06:58:08] START python3 -B p8_07_estimate.py S12 H 0.70 7
+[06:58:19] END   (exit 0) p8_07_estimate.py S12 H 0.70 7
+[06:58:19] START python3 -B p8_08_ideal.py S12 H 0.70
+[07:00:39] END   (exit 0) p8_08_ideal.py S12 H 0.70
+[07:00:39] START python3 -B p8_05_gibbs.py L12 H 0.60 --budget 1000
+[07:01:40] END   (exit 0) p8_05_gibbs.py L12 H 0.60 --budget 1000
+[07:01:40] START python3 -B p8_04b_gamma12_blocks.py L12 H 0.60 4 --budget 1000
+[07:01:45] END   (exit 0) p8_04b_gamma12_blocks.py L12 H 0.60 4 --budget 1000
+[07:01:45] START python3 -B p8_04b_gamma12_blocks.py L12 H 0.60 5 --budget 1000
+[07:01:56] END   (exit 0) p8_04b_gamma12_blocks.py L12 H 0.60 5 --budget 1000
+[07:01:56] START python3 -B p8_04b_gamma12_blocks.py L12 H 0.60 6 --budget 1000
+[07:02:12] END   (exit 0) p8_04b_gamma12_blocks.py L12 H 0.60 6 --budget 1000
+[07:02:12] START python3 -B p8_07_estimate.py L12 H 0.60 11
+[07:02:24] END   (exit 0) p8_07_estimate.py L12 H 0.60 11
+[07:02:24] START python3 -B p8_08_ideal.py L12 H 0.60
+[07:02:25] END   (exit 0) p8_08_ideal.py L12 H 0.60
+[07:02:25] START python3 -B p8_06_distance.py K12 H 0.70 --budget 1000
+[07:05:10] END   (exit 0) p8_06_distance.py K12 H 0.70 --budget 1000
+[07:05:10] START python3 -B p8_06_distance.py K12 H 0.70 --budget 1000
+[07:05:10] END   (exit 0) p8_06_distance.py K12 H 0.70 --budget 1000
+[07:05:10] START python3 -B p8_06_distance.py LKSE:12 H 0.60 --budget 1000
+[07:08:13] END   (exit 0) p8_06_distance.py LKSE:12 H 0.60 --budget 1000
+[07:08:13] START python3 -B p8_06_distance.py LKSE:12 H 0.60 --budget 1000
+[07:08:13] END   (exit 0) p8_06_distance.py LKSE:12 H 0.60 --budget 1000
+[07:08:13] START python3 -B p8_06_distance.py S12 H 0.70 --budget 1000
+[07:08:28] END   (exit 0) p8_06_distance.py S12 H 0.70 --budget 1000
+[07:08:28] START python3 -B p8_06_distance.py L12 H 0.60 --budget 1000
+[07:08:31] END   (exit 0) p8_06_distance.py L12 H 0.60 --budget 1000
+[07:08:31] START python3 -B p8_07_estimate.py K12 H 0.70 6
+[07:08:39] END   (exit 0) p8_07_estimate.py K12 H 0.70 6
+[07:08:39] START python3 -B p8_12_certificate.py K4 H 0.70 4 3 --variant SA --enum
+[07:08:43] END   (exit 0) p8_12_certificate.py K4 H 0.70 4 3 --variant SA --enum
+[07:08:43] START python3 -B p8_12_certificate.py K5 H 0.70 4 4 --variant SA --enum
+[07:08:52] END   (exit 0) p8_12_certificate.py K5 H 0.70 4 4 --variant SA --enum
+[07:08:52] START python3 -B p8_12_certificate.py K5 H 0.70 5 4 --variant SA --enum
+[07:09:23] END   (exit 0) p8_12_certificate.py K5 H 0.70 5 4 --variant SA --enum
+[07:09:23] START python3 -B p8_12_certificate.py K12 H 0.70 4 6 --variant SAb --budget 1000

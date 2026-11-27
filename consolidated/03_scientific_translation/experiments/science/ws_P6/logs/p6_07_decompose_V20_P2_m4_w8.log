@@ -1,0 +1,6 @@
+=== decomposition (diagnostic): V20 on P2, tau 0.7, m = 4, band 8; Gamma_4 = 2.8213e+00 kcal/mol; ball 9921
+    (0) no penalty, band reductions of the evaluated terms only: width 0.004561 nats
+    site form:        (1) tail only 1.734969   (2) certified (with P3's site allocation of the fp allowance) 1.735567
+    banded pair form: (1) tail only 0.305371   (2) certified (pair allocation of the fp allowance) 0.305644   [(2') banded pair tail with P3's SITE allocation of the fp allowance: 0.305966]
+    fp allowance: per changed site (P3's allocation) 4.960e-05; per changed pair (pair allocation) 5.200e-06; per changed site in the pair allocation 2.0e-07 kcal/mol
+DONE p6_07_decompose V20 P2 0.7 m=4 w=8 [6s]

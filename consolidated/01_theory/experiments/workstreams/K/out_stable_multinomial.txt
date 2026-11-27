@@ -1,0 +1,31 @@
+(1) small case: z-scores of the cell means [-0.12  0.6  -0.73  0.29  0.43 -0.23], variance ratios [1.006 1.002 0.999 0.996 1.012 0.994]: True
+(2) tail mass 6.67e-18 (expected count       3.8): stable sampler mean/expected 1.0012, var/expected 0.909  [True];   numpy multinomial mean/expected 0.0000
+(2) tail mass 9.48e-17 (expected count      54.6): stable sampler mean/expected 1.0119, var/expected 0.994  [True];   numpy multinomial mean/expected 0.0000
+(2) tail mass 3.42e-16 (expected count     197.1): stable sampler mean/expected 0.9982, var/expected 1.205  [True];   numpy multinomial mean/expected 0.5162
+(2) tail mass 4.09e-15 (expected count    2355.0): stable sampler mean/expected 0.9994, var/expected 1.060  [True];   numpy multinomial mean/expected 0.9581
+(2) tail mass 4.37e-14 (expected count   25186.8): stable sampler mean/expected 1.0001, var/expected 0.982  [True];   numpy multinomial mean/expected 0.9960
+(2) tail mass 4.20e-13 (expected count  241912.4): stable sampler mean/expected 1.0000, var/expected 0.903  [True];   numpy multinomial mean/expected 0.9997
+(3) Bin(n, mu/n), 200 000 draws: mean, z-score of the mean, z-score of the variance, chi-square z-score against Poisson(mu)
+                         n     mu | numpy.Generator.binomial:       mean   z_mean    z_var   z_chi2 | binomial_exact:       mean   z_mean    z_var   z_chi2
+       2305843009213693952     92 |                              91.2784   -33.65    24.72   730.31 |                    91.9867    -0.62    -2.56     0.19  [True]
+       1000000000000000000    500 |                             498.9777   -20.45    -9.48    59.59 |                   499.9768    -0.46    -0.84    -0.62  [True]
+       4611686018427387903   5000 |                            4999.5037    -3.14    -6.48     1.19 |                  4999.9811    -0.12    -0.96     0.16  [True]
+        100000000000000000     92 |                              91.9873    -0.59   -20.86   145.67 |                    91.9966    -0.16    -0.46     0.53  [True]
+          9007199254740992    500 |                             500.3976     7.95   -18.56    34.36 |                   499.9274    -1.45    -1.21     1.29  [True]
+          9007199254740991    500 |                             500.4192     8.38     8.23    19.00 |                   499.9320    -1.36    -0.51     0.16  [True]
+          1125899906842624     92 |                              92.0094     0.44    -0.36    -0.90 |                    92.0292     1.36     0.60     3.61  [True]
+    numpy's sampler fails at n = 2^61, n p = 92 (z of the mean below -15): True
+(4) through StableMultinomial.sample: first version (legacy=True) against second version
+    two cells (92/2^61, rest), n = 2^61, 20000 draws: first version mean 91.310 (z = -10.2); second version mean 92.032 (z = 0.5)  [True]
+    shells of Q_250, block of 2^59 points, the 123 rarest shells together (expected count 76.96), 4000 draws: first version mean 77.053 (z = 0.7), var/expected 1.168 (z = 7.5); second version mean 77.214 (z = 1.9), var/expected 1.008 (z = 0.3)  [True]
+(5) binomial_exact (reduction to 2^31 trials) against numpy's binomial at sizes where numpy is exact, 200 000 draws each: z of the difference of the means, ratio of the variances
+    n = 34359738368, p = 3e-09: z(mean_exact - mean_numpy) = -0.09, z(mean_exact - n p) = 0.39, var_exact/var_numpy = 0.9950  [True]
+    n = 274877919289, p = 1.7e-09: z(mean_exact - mean_numpy) = -0.91, z(mean_exact - n p) = -1.81, var_exact/var_numpy = 0.9974  [True]
+    n = 1099511627776, p = 0.3: z(mean_exact - mean_numpy) = 0.92, z(mean_exact - n p) = 0.82, var_exact/var_numpy = 1.0064  [True]
+    n = 68719476736, p = 0.5: z(mean_exact - mean_numpy) = -1.11, z(mean_exact - n p) = -0.89, var_exact/var_numpy = 0.9971  [True]
+    n = 8589934592, p = 2e-05: z(mean_exact - mean_numpy) = 0.64, z(mean_exact - n p) = -0.06, var_exact/var_numpy = 1.0013  [True]
+stable multinomial self-test passed: True
+
+real	1m22.929s
+user	0m57.042s
+sys	0m0.379s

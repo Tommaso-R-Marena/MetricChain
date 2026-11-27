@@ -1,0 +1,15 @@
+== exact pairs on non-flat visible landscapes ==
+  n=600 u=2.0 v=1.4 rc=214 P=300 eps1=0.0492: visible S/n=0.4974 U=-133.43; twin: plateau radius 143, level L=-134.604 (U'=U exactly), gap=29.77 > 29.50
+       exact hit probability: exponent 0.04954 (worst query weight 300);  rate machinery: 0.04539;  plateau twin on the flat background (rho1 = rho0+0.01): 0.07082 (asymptotic theta_pl 0.07467)
+  n=600 u=2.0 v=1.4 rc=214 P=240 eps1=0.0492: visible S/n=0.4974 U=-133.43; twin: plateau radius 143, level L=-134.604 (U'=U exactly), gap=29.77 > 29.50
+       exact hit probability: exponent 0.03697 (worst query weight 214);  rate machinery: 0.03298;  plateau twin on the flat background (rho1 = rho0+0.01): 0.07082 (asymptotic theta_pl 0.07467)
+  n=600 u=2.0 v=1.0 rc=239 P=270 eps1=0.0328: visible S/n=0.5822 U=-77.63; twin: plateau radius 186, level L=-78.176 (U'=U exactly), gap=20.13 > 19.67
+       exact hit probability: exponent 0.03158 (worst query weight 239);  rate machinery: 0.02785;  plateau twin on the flat background (rho1 = rho0+0.01): 0.07864 (asymptotic theta_pl 0.08214)
+  n=600 u=2.0 v=1.2 rc=600 P=270 eps1=0.0328: visible S/n=0.5411 U=-553.34; twin: plateau radius 159, level L=-554.205 (U'=U exactly), gap=20.63 > 19.67
+       exact hit probability: exponent -0.00000 (worst query weight 578);  rate machinery: 0.00000;  plateau twin on the flat background (rho1 = rho0+0.01): 0.07864 (asymptotic theta_pl 0.08214)
+  n=600 u=2.0 v=0.8 rc=600 P=240 eps1=0.0164: visible S/n=0.6191 U=-331.19; twin: plateau radius 203, level L=-331.592 (U'=U exactly), gap=10.38 > 9.83
+       exact hit probability: exponent -0.00000 (worst query weight 596);  rate machinery: 0.00000;  plateau twin on the flat background (rho1 = rho0+0.01): 0.08551 (asymptotic theta_pl 0.08969)
+
+real	0m19.169s
+user	0m16.323s
+sys	0m2.837s

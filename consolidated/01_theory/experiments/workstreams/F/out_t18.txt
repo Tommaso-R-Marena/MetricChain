@@ -1,0 +1,14 @@
+$ python3 t18_exact_vs_family.py
+p=0.1 u=0.6: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 1.135  at (q, exact, family) = (np.float64(0.251540477644), 0.1634706717497283, np.float64(0.1440306068221509))
+p=0.1 u=1.0: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 1.201  at (q, exact, family) = (np.float64(0.251834595951), 0.3647688879967561, np.float64(0.3036314228622632))
+p=0.1 u=2.0: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 1.286  at (q, exact, family) = (np.float64(0.191307397104), 1.305534814897694, np.float64(1.0149610897003154))
+p=0.3 u=0.6: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 1.308  at (q, exact, family) = (np.float64(0.261549290574), 0.41447528849785675, np.float64(0.3169038366450257))
+p=0.3 u=1.0: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 1.427  at (q, exact, family) = (np.float64(0.255835331256), 0.962573075718238, np.float64(0.6745224985925654))
+p=0.3 u=2.0: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 1.653  at (q, exact, family) = (np.float64(0.187794366903), 2.734810063909241, np.float64(1.6543061337698481))
+p=0.5 u=0.6: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 2.000  at (q, exact, family) = (np.float64(0.106272598297), 0.14981921362569342, np.float64(0.07490960681284671))
+p=0.5 u=1.0: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 2.000  at (q, exact, family) = (np.float64(0.093781993426), 0.2497440525926716, np.float64(0.1248720262963358))
+p=0.5 u=2.0: largest ratio exact Xi_H(q) / best family set with mu_H <= q : 2.000  at (q, exact, family) = (np.float64(0.051599755088), 0.5917992509071812, np.float64(0.2958996254535906))
+
+real	0m5.077s
+user	0m8.922s
+sys	0m0.047s

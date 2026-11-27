@@ -1,0 +1,9 @@
+=== LKSE:5 on H, tau 0.6: 5 sites, states per site [2, 31, 9, 13, 2], 14508 states, anchor [1, 15, 1, 7, 1]; order m = 4: the ball of radius 3 has 5172 states; largest |g - I_3 g| inside the ball 0.00e+00 kcal/mol
+(1) |g - I| <= env at every state: 0 violations; the remainder is non-zero at 9335 states, where env / |g - I| is at least 17.03 (median 312); control that must fail (every table divided by 1000): 7809 violations (with every table only halved: 0 -- the envelope is that loose)
+(2) exact ln Z = 276.4672934; the box [ln Z(f + I + env), ln Z(f + I - env)] = [276.4672513, 276.4673359] contains it: True; **the box limit W* = 8.459e-05 nats**; first-order size 2 beta <env> under f + I: 8.459e-05 (ratio W* / first order 1.000); mean number of sites off the anchor under E: 1.445; Gibbs weight of the states with at least 4 sites off: 0.00934
+    where the exact value sits in the box: ln Z - lower end = 4.22e-05, upper end - ln Z = 4.24e-05 (the true remainder uses 0.3 % of the half-width, on one side)
+(3) the certificate with a band, from the committed logs of pi_inference/first_order_recovery.py:
+| band | sandwich D | D / W* | corrected bracket | its width | width / W* | corrected bracket contains the box [ln Z(f+I+env), ln Z(f+I-env)] |
+|---|---|---|---|---|---|---|
+| 2 | 0.2054 | 2428.0 | [276.4669085, 276.4684663] | 0.001558 | 18.42 | True |
+ALL DONE 0 s; peak RSS 106 MB

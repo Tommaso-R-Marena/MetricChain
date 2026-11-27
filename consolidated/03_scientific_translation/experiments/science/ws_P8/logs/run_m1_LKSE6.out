@@ -1,0 +1,20 @@
+=== p8_01_measure: LKSE:6 (LKSELK) on H, tau 0.6: atoms 120, sites 6, domain [2, 29, 9, 13, 2, 16] = 217152 states; anchor x0 = argmin E = (1, 14, 1, 7, 1, 7); 42 subsets of order 3..6
+    class bb   :  54 atoms, net charge -0.3441 e, sum |q| 16.1961 e
+    class nsc  :  28 atoms, net charge +0.2117 e, sum |q| 4.9621 e
+    class chain:  27 atoms, net charge +0.6954 e, sum |q| 1.1834 e
+    class head :  11 atoms, net charge +0.4370 e, sum |q| 5.2538 e
+    fine groups (net charge): -0:bb +0.000, L1:bb -0.184, L1:nsc +0.184, K2:bb -0.035, K2:chain +0.401, K2:head +0.635, S3:bb +0.157, S3:nsc -0.157, E4:bb -0.062, E4:chain -0.106, E4:head -0.832, L5:bb -0.184, L5:nsc +0.184, K6:bb -0.035, K6:chain +0.401, K6:head +0.635, -7:bb -0.000
+    row 4/120 done, checkpoint written, 249 s
+    row 8/120 done, checkpoint written, 315 s
+    row 13/120 done, checkpoint written, 385 s
+    row 18/120 done, checkpoint written, 447 s
+    row 23/120 done, checkpoint written, 508 s
+    row 29/120 done, checkpoint written, 577 s
+    row 35/120 done, checkpoint written, 643 s
+    row 42/120 done, checkpoint written, 708 s
+    row 49/120 done, checkpoint written, 771 s
+    row 58/120 done, checkpoint written, 840 s
+    row 68/120 done, checkpoint written, 902 s
+    row 80/120 done, checkpoint written, 965 s
+    row 89/120 done, checkpoint written, 1002 s
+BUDGET REACHED at row 89/120: checkpoint on disk, run the same command again to continue (this log part is not a complete run)

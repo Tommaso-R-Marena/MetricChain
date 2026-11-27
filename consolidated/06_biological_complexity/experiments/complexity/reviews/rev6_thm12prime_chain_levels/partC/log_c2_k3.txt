@@ -1,0 +1,1 @@
+k=3: classes by KEY 96095, by INV 96271 (KEYs carrying several INVs: 106); labelled by KEY (sum of orbit sizes) 1151442; systems at this level 114

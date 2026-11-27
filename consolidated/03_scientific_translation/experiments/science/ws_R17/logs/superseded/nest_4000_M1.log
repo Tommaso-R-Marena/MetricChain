@@ -1,0 +1,20 @@
+r17_nest: u=1 n=4000 M=1 eps=0.8715 delta=0.05   (a=0.110944 h=0.029139)
+cross-check of the cached base bracket against r16lib.k0 (210 cases): max |difference| = 0.00e+00
+
+variant 'min': family D[S[G_0]], 3 nested levels (k_M), alpha_0 = 0.678541
+  exact certified ln cost = 458.20  = 1.0325 n a      Theorem Q8 bound n B_M + E_M = 766.06 = 1.7262 n a      n B_M = 351.47 (B_M/a = 0.7920)
+  top-level check  cost <= n B_M + E_M: True (slack 307.86)
+  top drop: chosen 'noshift'; candidates {'noshift': np.float64(458.2), 'passthrough': np.float64(511.07)}
+  top level as chosen: n_o = 832, r_dag = 186, K = 72013, ln 2Mbar = 162.8, ln(1/delta') = 171.1, L = 94
+  nodes: 4442 (base 4346); levels built: slope 78, drop with shift 0, drop without shift 1
+  violations: 0;  least slack: induction 41.33, Lemma Q4 3.116, Lemma Q3 79.18, (4.1) 15.00, (4.2) inf, Prop Q6 116.13, Prop Q7 333.76;  max |x_out - xhat| of slope levels 0.0e+00
+  [1 s; tables cached now: 38]
+
+variant 'proof': family D[S[G_0]], 3 nested levels (k_M), alpha_0 = 0.678541
+  exact certified ln cost = 511.07  = 1.1516 n a      Theorem Q8 bound n B_M + E_M = 766.06 = 1.7262 n a      n B_M = 351.47 (B_M/a = 0.7920)
+  top-level check  cost <= n B_M + E_M: True (slack 254.99)
+  top drop: chosen 'passthrough'; candidates {'passthrough': np.float64(511.07)}
+  nodes: 3 (base 1); levels built: slope 0, drop with shift 0, drop without shift 0
+  violations: 0;  least slack: induction 87.06, Lemma Q4 inf, Lemma Q3 inf, (4.1) inf, (4.2) inf, Prop Q6 inf, Prop Q7 inf;  max |x_out - xhat| of slope levels 0.0e+00
+  [0 s; tables cached now: 1]
+LAST LINE r17_nest.py n=4000 M=1: completed; min 458.20 proof 511.07; wall 0.7 s; peak RSS 38.0 MB

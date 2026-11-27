@@ -1,0 +1,43 @@
+# entropy bracket, cone: S = 5.1942297588; n h(sigma) = 5.1942297588; n ln 2 = 6.9314718056
+# entropy bracket, flat: S = 6.9314718056; n h(sigma) = 5.1942297588; n ln 2 = 6.9314718056
+# entropy bracket n h(sigma_u) <= ln Z + U <= n ln 2: 400 random members of the class (n = 3..11, u in 0.3..5), no violation; smallest slack below -4.4e-14, above 1.1e-04
+# asymptotic table (per site): accuracy eps1 | equal twins h - eps1 | plateau twin | no datum theta_hint | window end a | ln cosh(u/2)
+# u=1.0: sigma=0.2689 rho0=0.3799 h=0.02914 a=0.11094 ln cosh(u/2)=0.12011  plateau bound void from eps1^c=0.08612
+#   eps1=0.00555 (0.05 a): +0.02359 | 0.02645 | 0.02649
+#   eps1=0.01109 (0.10 a): +0.01804 | 0.02382 | 0.02396
+#   eps1=0.02774 (0.25 a): +0.00140 | 0.01634 | 0.01717
+#   eps1=0.05547 (0.50 a): -0.02633 | 0.00585 | 0.00838
+#   eps1=0.08321 (0.75 a): -0.05407 | 0.00008 | 0.00273
+#   eps1=0.09985 (0.90 a): -0.07071 | 0.00000 | 0.00082
+#   eps1=0.11094 (1.00 a): -0.08180 | 0.00000 | 0.00017
+# u=2.0: sigma=0.1192 rho0=0.2831 h=0.09728 a=0.32781 ln cosh(u/2)=0.43378  plateau bound void from eps1^c=0.27308
+#   eps1=0.01639 (0.05 a): +0.08089 | 0.08969 | 0.08983
+#   eps1=0.03278 (0.10 a): +0.06450 | 0.08214 | 0.08271
+#   eps1=0.08195 (0.25 a): +0.01533 | 0.06000 | 0.06324
+#   eps1=0.16391 (0.50 a): -0.06663 | 0.02633 | 0.03687
+#   eps1=0.24586 (0.75 a): -0.14858 | 0.00255 | 0.01776
+#   eps1=0.29503 (0.90 a): -0.19775 | 0.00000 | 0.00966
+#   eps1=0.32781 (1.00 a): -0.23053 | 0.00000 | 0.00563
+# u=4.0: sigma=0.0180 rho0=0.1687 h=0.23925 a=0.60305 ln cosh(u/2)=1.32500  plateau bound void from eps1^c=0.55688
+#   eps1=0.03015 (0.05 a): +0.20910 | 0.22683 | 0.22743
+#   eps1=0.06031 (0.10 a): +0.17894 | 0.21371 | 0.21600
+#   eps1=0.15076 (0.25 a): +0.08849 | 0.17149 | 0.18395
+#   eps1=0.30153 (0.50 a): -0.06228 | 0.09689 | 0.13735
+#   eps1=0.45229 (0.75 a): -0.21304 | 0.02747 | 0.09848
+#   eps1=0.54275 (0.90 a): -0.30350 | 0.00089 | 0.07857
+#   eps1=0.60305 (1.00 a): -0.36380 | 0.00000 | 0.06665
+# free accuracy per site: with the datum a(u) = KL(sigma||1/2); without it ln cosh(u/2) = KL(1/2||sigma); difference = sum_{k>=2} t^{2k}(k-1)/(k(2k-1)), t = tanh(u/2)
+#   u=0.25: a=0.007752  ln cosh(u/2)=0.007792  difference=0.000040 (series 0.000040)  no-datum exponent at eps1 = a: 0.000000
+#   u=0.5: a=0.030300  ln cosh(u/2)=0.030930  difference=0.000630 (series 0.000630)  no-datum exponent at eps1 = a: 0.000003
+#   u=1.0: a=0.110944  ln cosh(u/2)=0.120115  difference=0.009170 (series 0.009170)  no-datum exponent at eps1 = a: 0.000168
+#   u=2.0: a=0.327813  ln cosh(u/2)=0.433781  difference=0.105968 (series 0.105968)  no-datum exponent at eps1 = a: 0.005625
+#   u=4.0: a=0.603052  ln cosh(u/2)=1.325003  difference=0.721950 (series 0.721950)  no-datum exponent at eps1 = a: 0.066646
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R8/coordinator_script_copy/plateau_twin_check.py", line 190, in <module>
+    assert abs(klr - math.log(math.cosh(u/2))) < 1e-12 and abs((klr - a) - ser) < 1e-9
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+real	0m0.637s
+user	0m0.831s
+sys	0m0.029s

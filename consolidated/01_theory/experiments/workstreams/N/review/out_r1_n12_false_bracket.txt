@@ -1,0 +1,65 @@
+Referee's reproduction of Proposition N12   (m = 12, k = 16, u = 1, J = 4, tau = 10.5)
+====================================================================================================
+1. the instance
+  |a|  count  p(a)=sigma(J(tau-|a|))   V(a)
+   0      1   1.000000               1.125352e-07
+   1     12   1.000000               1.125352e-07
+   2     66   1.000000               1.125352e-07
+   3    220   1.000000               1.125352e-07
+   4    495   1.000000               1.125352e-07
+   5    792   1.000000               1.125352e-07
+   6    924   1.000000               1.125352e-07
+   7    792   0.999999               1.125377e-07
+   8    495   0.999955               1.126757e-07
+   9    220   0.997527               1.204338e-07
+  10     66   0.880797               2.218540e-06
+  11     12   0.119203               2.855179e-01
+  12      1   0.002473               9.752831e-01
+  A = 1.07473100e-03;  share of the 13 points with |a| >= 11: 99.986364 %
+  V at |a| = 10: 2.2185e-06   V at |a| <= 9: at most 1.2043e-07
+  ln V(w+1)/V(w), w = 0..11: 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0012 0.0666 2.9135 11.7652 1.2284
+  largest edge ratio e^{11.7652};  k c(J,u) = 11.7652  (c = 0.73533; assumed slope u = 1)
+  (TU) with Harper's function of slope u, at the levels s = V-values (p(s) = q exactly at ball sizes):
+    s = V(|a|=11) = 2.8552e-01   q =    1/4096   E(V-s)+ = 1.6840e-04   s Xi_u(q) = 1.1978e-04   ratio 1.406
+    s = V(|a|=10) = 2.2185e-06   q =   13/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 1.4629e-08   ratio 7.346e+04
+    s = V(|a|= 9) = 1.2043e-07   q =   79/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 6.1499e-09   ratio 1.747e+05
+    s = V(|a|= 8) = 1.1268e-07   q =  299/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 2.9773e-08   ratio 3.609e+04
+    s = V(|a|= 7) = 1.1254e-07   q =  794/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 1.1832e-07   ratio 9082
+    s = V(|a|= 6) = 1.1254e-07   q = 1586/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 3.9649e-07   ratio 2710
+    s = V(|a|= 5) = 1.1254e-07   q = 2510/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 1.1963e-06   ratio 898.3
+    s = V(|a|= 4) = 1.1254e-07   q = 3302/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 3.4076e-06   ratio 315.4
+    s = V(|a|= 3) = 1.1254e-07   q = 3797/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 9.4422e-06   ratio 113.8
+    s = V(|a|= 2) = 1.1254e-07   q = 4017/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 2.5856e-05   ratio 41.56
+    s = V(|a|= 1) = 1.1254e-07   q = 4083/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 7.0477e-05   ratio 15.25
+    s = V(|a|= 0) = 1.1254e-07   q = 4083/4096   E(V-s)+ = 1.0746e-03   s Xi_u(q) = 7.0477e-05   ratio 15.25
+  largest violation factor of (TU): 1.747e+05  (at s = V(|a| = 9))
+  part (c): E(V-s)+ = 1.0746e-03 >= s mu(D)(e^{kc}-1) = 9.0618e-04;   s Xi_u(mu(D)) = 1.4629e-08 <= s mu(D)(e^{u(m-tau+1/2)}-1) = 4.4987e-08
+
+2./3. Algorithm A, own implementation; reference data ell0 = e^{-uk} (V >= e^{-uk}), V_max = 1, kappa0 = 1
+----------------------------------------------------------------------------------------------------
+  tail functions: Harper's for the ASSUMED class (slope u = 1)
+  theta=20  J=16 K=194 pi_*=0.1938 (r_dag=4) Mbar=9.54e+05 x_out=4.385 | runs 40 stops {'closed': 40} | INVALID 40 | width bad 0 |
+            sampled certificates false in 0 runs; Chernoff events (V2),(V3) violated in 0 runs
+            A/U: min 285.7 median 302.1 max 302.1 | outer points: median 776 max 1552 | closing level j: 1..2
+            true E(V-s_j)+ / certified tail s_j Xi(q) at the closing pass: min 330.5 median 330.5 max 366.8
+  theta=1   J=32 K=213 pi_*=0.003174 (r_dag=1) Mbar=8.66e+07 x_out=2.453 | runs 40 stops {'closed': 40} | INVALID 40 | width bad 0 |
+            sampled certificates false in 0 runs; Chernoff events (V2),(V3) violated in 0 runs
+            A/U: min 2779 median 4582 max 4582 | outer points: median 6816 max 6816 | closing level j: 1..2
+            true E(V-s_j)+ / certified tail s_j Xi(q) at the closing pass: min 1.329e+04 median 2.192e+04 max 2.192e+04
+  referee   J=32 K=798 pi_*=0.003174 (r_dag=1) Mbar=7.89e+07 x_out=2.046 | runs 40 stops {'closed': 40} | INVALID 40 | width bad 0 |
+            sampled certificates false in 0 runs; Chernoff events (V2),(V3) violated in 0 runs
+            A/U: min 2824 median 2824 max 2824 | outer points: median 6384 max 6384 | closing level j: 1..1
+            true E(V-s_j)+ / certified tail s_j Xi(q) at the closing pass: min 5509 median 5509 max 5509
+----------------------------------------------------------------------------------------------------
+  tail functions: Harper's for the TRUE class (slope 11.765)
+  theta=20  J=16 K=203 pi_*=0.0002441 (r_dag=-1) Mbar=7.92e+08 x_out=4.385 | runs 12 stops {'cap': 12} | INVALID 0 | width bad 0 |
+            sampled certificates false in 0 runs; Chernoff events (V2),(V3) violated in 0 runs
+            A/U: min 0.1647 median 0.2976 max 0.4269 | outer points: median 467712 max 1662976 | closing level j: 16..16
+  theta=1   J=32 K=225 pi_*=0.0002441 (r_dag=-1) Mbar=5.63e+13 x_out=2.453 | runs 12 stops {'cap': 12} | INVALID 0 | width bad 0 |
+            sampled certificates false in 0 runs; Chernoff events (V2),(V3) violated in 0 runs
+            A/U: min 0.2441 median 0.3452 max 0.4146 | outer points: median 921600 max 1843200 | closing level j: 32..32
+  referee   J=32 K=810 pi_*=0.0002441 (r_dag=-1) Mbar=1.04e+09 x_out=2.046 | runs 12 stops {'cap': 12} | INVALID 0 | width bad 0 |
+            sampled certificates false in 0 runs; Chernoff events (V2),(V3) violated in 0 runs
+            A/U: min 0.5815 median 0.6051 max 0.6337 | outer points: median 3317760 max 6635520 | closing level j: 32..32
+====================================================================================================
+assumed class: 120 invalid brackets in 120 runs;   true class: 0 violations   (11.3 s)

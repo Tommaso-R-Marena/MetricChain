@@ -1,0 +1,217 @@
+{
+ "seq": "K3",
+ "bb": "H",
+ "tau": 0.7,
+ "kind": "gbn2",
+ "n": 3,
+ "k": [
+  14,
+  14,
+  12
+ ],
+ "size": 2352.0,
+ "natoms": 78,
+ "anchor": [
+  10,
+  10,
+  8
+ ],
+ "E_anchor": -101.7478795959959,
+ "w_p3": 2,
+ "bands": [
+  2,
+  1
+ ],
+ "enum": true,
+ "orders": {
+  "3": {
+   "m": 3,
+   "Gamma": 13.637030896494739,
+   "max_gamma_site": 4.545676965498246,
+   "max_gamma_pair": 4.545676965498246,
+   "pairsum_check": {
+    "n_subsets": 1,
+    "dG_max": 3.552713678800501e-15,
+    "dS_max": 3.552713678800501e-15,
+    "dGamma": 3.552713678800501e-15,
+    "rel_to_Gamma": 2.6051958859414837e-16,
+    "G_min": 13.637030896494743,
+    "n_pairs": 3
+   },
+   "nball": 493,
+   "rem_min": -0.00130425284555713,
+   "rem_max": 0.14066669342156501,
+   "remainder": {
+    "envelope": {
+     "viol": 0,
+     "ratio_min": 96.9456988345196,
+     "ratio_max": 450547320.7654531,
+     "ratio_median": 58437.8628203308
+    },
+    "pair": {
+     "viol": 0,
+     "ratio_min": 96.94569883451958,
+     "ratio_max": 450547320.7654529,
+     "ratio_median": 58437.86282033078
+    },
+    "site": {
+     "viol": 0,
+     "ratio_min": 96.94569883451959,
+     "ratio_max": 450547320.765453,
+     "ratio_median": 58437.86282033079
+    }
+   },
+   "chain_ok": true,
+   "n_states_ratio": 1859,
+   "bands": {
+    "2": {
+     "chain_banded_ok": true,
+     "remainder_banded": {
+      "viol": 0,
+      "ratio_min": 96.9456989314653,
+      "ratio_max": 450547321.2160003,
+      "ratio_median": 58437.86287876866
+     },
+     "S": {
+      "lnZ_lo": 191.29793242650447,
+      "lnZ_up": 170.6725145065654,
+      "width": 20.625417919939082,
+      "rho_cert": 27.27406562026358,
+      "min_gap_models": 2.0000004496978363e-07,
+      "min_lo": -113.66923768130621,
+      "min_up": -101.74787949599605,
+      "mean_u": 45.6970889317433,
+      "mean_u2": 2089.021779739963,
+      "max_gs": 4.545677570043924,
+      "max_g2": 0.0,
+      "viol_lower": 0,
+      "viol_upper": 0,
+      "viol_lower_strict": 0,
+      "viol_upper_strict": 0,
+      "min_E_minus_lo": 1.0000002248489182e-07,
+      "min_up_minus_E": 1.0000002248489182e-07,
+      "rho_exact": 13.777699503553364,
+      "rho_up_exact": 13.63833706297737,
+      "cost_lower": 265653205.24777302,
+      "cost_upper": 0.7070389575441784,
+      "dlnZ_lo": 19.397702280232295,
+      "dlnZ_up": 1.227715639706787,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 2352
+     },
+     "B": {
+      "lnZ_lo": 191.2944964181567,
+      "lnZ_up": 171.61561491930843,
+      "width": 19.678881498848284,
+      "rho_cert": 27.274065756633927,
+      "min_gap_models": 2.0000004496978363e-07,
+      "min_lo": -113.6692377494914,
+      "min_up": -101.74787949599605,
+      "mean_u": 45.74942779394821,
+      "mean_u2": 2093.011711524396,
+      "max_gs": 2e-07,
+      "max_g2": 4.545677392772309,
+      "viol_lower": 0,
+      "viol_upper": 0,
+      "viol_lower_strict": 0,
+      "viol_upper_strict": 0,
+      "min_E_minus_lo": 1.0000002248489182e-07,
+      "min_up_minus_E": 1.0000002248489182e-07,
+      "rho_exact": 13.77769957173851,
+      "rho_up_exact": 13.638337131162587,
+      "cost_lower": 264741984.99020204,
+      "cost_upper": 0.24769633519757617,
+      "dlnZ_lo": 19.394266271884533,
+      "dlnZ_up": 0.2846152269637514,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 2352
+     },
+     "p3_repro": {
+      "file": "floor_K3_H_t0.70_gbn2_m3_siteres.json",
+      "dlo": 5.684341886080802e-14,
+      "dup": 0.0,
+      "p3_width": 20.62541791993914
+     }
+    },
+    "1": {
+     "chain_banded_ok": true,
+     "remainder_banded": {
+      "viol": 0,
+      "ratio_min": 96.94569893146529,
+      "ratio_max": 450547321.21600026,
+      "ratio_median": 58437.862878768654
+     },
+     "S": {
+      "lnZ_lo": 191.32506643458095,
+      "lnZ_up": 170.66492423554382,
+      "width": 20.660142199037125,
+      "rho_cert": 27.477417619079798,
+      "min_gap_models": 0.06494183021829514,
+      "min_lo": -113.68329933762772,
+      "min_up": -101.7433593791234,
+      "mean_u": 45.745608271374685,
+      "mean_u2": 2093.467586521617,
+      "max_gs": 4.545677570043924,
+      "max_g2": 0.0,
+      "viol_lower": 0,
+      "viol_upper": 0,
+      "viol_lower_strict": 0,
+      "viol_upper_strict": 0,
+      "min_E_minus_lo": 0.06042161334562479,
+      "min_up_minus_E": 0.004520216872663241,
+      "rho_exact": 13.981051502369567,
+      "rho_up_exact": 13.840394021419868,
+      "cost_lower": 272960126.21063,
+      "cost_upper": 0.7092541934991652,
+      "dlnZ_lo": 19.424836288308768,
+      "dlnZ_up": 1.235305910728357,
+      "dp_vs_enum": 5.684341886080802e-14,
+      "truth_inside": true,
+      "states": 2352
+     },
+     "B": {
+      "lnZ_lo": 191.32163107644868,
+      "lnZ_up": 171.00969123095075,
+      "width": 20.311939845497932,
+      "rho_cert": 27.477417755450148,
+      "min_gap_models": 0.06494183021829514,
+      "min_lo": -113.68329940581287,
+      "min_up": -101.7433593791234,
+      "mean_u": 45.79756720188642,
+      "mean_u2": 2097.4416275538406,
+      "max_gs": 2.2728388963861548,
+      "max_g2": 4.545677392772309,
+      "viol_lower": 0,
+      "viol_upper": 0,
+      "viol_lower_strict": 0,
+      "viol_upper_strict": 0,
+      "min_E_minus_lo": 0.06042161334562479,
+      "min_up_minus_E": 0.004520216872663241,
+      "rho_exact": 13.98105157055474,
+      "rho_up_exact": 13.840394089605041,
+      "cost_lower": 272024019.2697654,
+      "cost_upper": 0.5895654963020381,
+      "dlnZ_lo": 19.421400930176503,
+      "dlnZ_up": 0.8905389153214287,
+      "dp_vs_enum": 0.0,
+      "truth_inside": true,
+      "states": 2352
+     }
+    }
+   },
+   "seconds": 0.36297011375427246
+  }
+ },
+ "lnZ_E": 171.90023014627218,
+ "minE": -101.74787959599607,
+ "anchor_is_min": true,
+ "enum_src": "evaluated now",
+ "bulk_vs_own": 6.821210263296962e-13,
+ "state_checks": 18816,
+ "violations": 0,
+ "remainder_checks": 11760,
+ "remainder_violations": 0,
+ "seconds": 3.070225954055786
+}

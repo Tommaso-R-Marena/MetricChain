@@ -1,0 +1,46 @@
+import took 159ms
+elaboration took 221ms
+process pre-definitions took 122ms
+elaboration took 1.37s
+experiments/coordinator_checks/kernel_eval/generated/E1_n16_k4_plaindef.lean:365:4: error: maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+compilation (LCNF base) took 161ms
+type checking took 1.18s
+'check_ok' does not depend on any axioms
+cumulative profiling times:
+	attribute application 0.275ms
+	blocked (unaccounted) 2.09s
+	compilation (IR) 11.7ms
+	compilation (LCNF base) 216ms
+	compilation (LCNF impure) 49.4ms
+	compilation (LCNF mono) 57.1ms
+	elaboration 1.79s
+	fix level params 2.12ms
+	import 159ms
+	initialization 39.2ms
+	instantiate metavars 0.234ms
+	interpretation 3.5ms
+	let-to-have transformation 71.9ms
+	linting 75.4ms
+	parsing 59.3ms
+	process pre-definitions 163ms
+	share common exprs 34.4ms
+	tactic execution 0.898ms
+	type checking 1.22s
+	typeclass inference 410ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E1_n16_k4_plaindef.lean
+MEASURE wall_seconds: 4.54
+MEASURE user_seconds: 4.75
+MEASURE sys_seconds: 0.18
+MEASURE max_rss_kb: 711800
+MEASURE polled_peak_rss_kb: 713636
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 1
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E1_n16_k4_plaindef.lean
+RUN bytes: 123968
+RUN sha256: a9b18ac5484d38a5aa19508978386f959de0c37d55cf6722f387aa24307f299e
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 1
+RUN note: generated file deleted after the run (regenerable with gen.py)

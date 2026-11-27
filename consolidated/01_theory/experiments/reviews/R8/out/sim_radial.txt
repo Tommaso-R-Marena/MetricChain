@@ -1,0 +1,10 @@
+# engine=radial nruns=1500 seed=102 mutation=None Kdiv=1
+# time limit reached after 1418 runs
+runs completed 1128, skipped (sample too large for the simulation) 290   [521 s]
+good event: events used by the proof failed in 0 runs; (V2),(V3) at all levels and realised sizes failed in 0 runs
+runs with a violated claim: 0 on the good event, 0 off it
+  violated claims on the good event: none
+  violated claims off the good event: none
+levels left as populated 57829, as negligible 222 (in 39 runs)
+closures: empty tail 98, at a populated pass 126, at an unpopulated pass 904; by the tail lemma at r <= n_o-2: 1029, at r <= r_dagger: 301
+widest bracket ln(U/L) = 6.424; smallest distance to the width bound = 0.0297; count/bound max = 0.780; negligible part / budget max = 0.0271; max M/M_dagger = 8.67; largest sample = 8.13e+06 points

@@ -1,0 +1,6 @@
+u=0.5 n=8000 phi=0.50 flat bottom: mine ln cost 182.824812821 level 20324 ln M 87.938332 | stored 182.824812821 level 20324 ln M 87.938332 | difference +0.000e+00  constants equal (mine, theirs, stored): True  AGREE  (8 s)
+u=0.5 n=8000 phi=0.50 flat top   : mine ln cost 168.218001387 level 20321 ln M 87.938332 | stored 168.218001387 level 20321 ln M 87.938332 | difference +0.000e+00  constants equal (mine, theirs, stored): True  AGREE  (15 s)
+u=1 n=8000 phi=0.50 flat bottom: mine ln cost 548.607104535 level 41729 ln M 369.430458 | stored 548.607104535 level 41729 ln M 369.430458 | difference +0.000e+00  constants equal (mine, theirs, stored): True  AGREE  (54 s)
+u=1 n=8000 phi=0.50 flat top   : mine ln cost 534.744157610 level 41726 ln M 369.430458 | stored 534.744157610 level 41726 ln M 369.430458 | difference -1.137e-13  constants equal (mine, theirs, stored): True  AGREE  (109 s)
+compared 4; different 0; largest |difference of ln cost| 1.137e-13
+wall 124.4 s  peak RSS MB: 98.0

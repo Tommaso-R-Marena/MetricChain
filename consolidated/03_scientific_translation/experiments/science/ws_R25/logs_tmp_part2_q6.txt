@@ -1,0 +1,31 @@
+  family m=1 B=1: compositions 1, connected structures 1, elapsed 0.0 s
+  family m=1 B=2: compositions 2, connected structures 6, elapsed 0.0 s
+  family m=1 B=3: compositions 4, connected structures 34, elapsed 0.0 s
+  family m=1 B=4: compositions 8, connected structures 200, elapsed 0.0 s
+  family m=1 B=5: compositions 16, connected structures 1211, elapsed 0.1 s
+  family m=1 B=6: compositions 32, connected structures 7476, elapsed 0.6 s
+  family m=2 B=1: compositions 2, connected structures 6, elapsed 0.6 s
+  family m=2 B=2: compositions 8, connected structures 200, elapsed 0.7 s
+  family m=2 B=3: compositions 32, connected structures 7476, elapsed 1.3 s
+  family m=3 B=1: compositions 4, connected structures 34, elapsed 1.3 s
+  family m=3 B=2: compositions 32, connected structures 7476, elapsed 2.0 s
+  family m=4 B=1: compositions 8, connected structures 200, elapsed 2.0 s
+  family m=5 B=1: compositions 16, connected structures 1211, elapsed 2.1 s
+  family m=6 B=1: compositions 32, connected structures 7476, elapsed 2.8 s
+PART2 families (m,B) with mB <= 6: 14; compositions (ordered instances) 197
+PART2 B1_nontiling_structures: 8922
+PART2 ctrl_sep_ineq_without_L: 11245
+PART2 ctrl_sep_ineq_without_r: 9134
+PART2 ctrl_sep_ineq_without_z: 9230
+PART2 noncrossing_pair_sets: 128202
+PART2 structures: 33007
+PART2 tilings: 96
+PART2 viol_sep_ineq_B1: 8865
+PART2 violations: Fact 1 (connected iff no face with >= 2 nicks) 0; DP LB != LA on a composition 0
+PART2 control (mutant DP differs from LA): detected on 178 of 197 compositions
+PART2 wrote tmp_trial_q6.json; time 2.8 s
+peak memory 15.0 MB
+
+real	0m2.822s
+user	0m2.788s
+sys	0m0.005s

@@ -1,0 +1,43 @@
+=== sandwich: V20 on P2, tau 0.7, gbn2: atoms 332, sites 20, states/site 3..3, |X| = 3.48678e+09; anchor 11111111111111111111 E = -306.568715 kcal/mol; orders [3, 4, 5]; bands [12, 8, 4, 2, 1] (P3's default band: 12); enumeration: False [1.2s]
+  -- m = 3: Gamma_3 = 6.191545e+01 kcal/mol = 103.8569 kT; pair sums read from pairsums_V20_P2_t0.70_gbn2_m3.npz; max G_ij/C(m,2) = 1.8210e+00, max S_i/m = 3.6141e+00
+     ball of radius 2: 801 values of g (prefix of ws_P3/cache/ball_V20_P2_t0.70_gbn2_M4_78d2725e4b.npz) [0.0s]
+     w = 12 form S: ln Z(m_-) = 587.101384, ln Z(m_+) = 514.311019, width 72.790365 nats; rho_cert = 207.7140 kT; E_(pi-) u = 1.9779e+02; min m_- = -347.908431 [2.9s]
+     w = 12 form B: ln Z(m_-) = 585.044867, ln Z(m_+) = 517.256310, width 67.788557 nats; rho_cert = 207.7141 kT; E_(pi-) u = 2.0438e+02; min m_- = -347.206790 [2.8s]
+     w =  8 form S: ln Z(m_-) = 587.101402, ln Z(m_+) = 514.311004, width 72.790399 nats; rho_cert = 207.7142 kT; E_(pi-) u = 1.9779e+02; min m_- = -347.908433 [0.0s]
+     w =  8 form B: ln Z(m_-) = 585.045234, ln Z(m_+) = 517.254514, width 67.790720 nats; rho_cert = 207.7142 kT; E_(pi-) u = 2.0438e+02; min m_- = -347.206790 [0.0s]
+     w =  4 form S: ln Z(m_-) = 587.102209, ln Z(m_+) = 514.310892, width 72.791317 nats; rho_cert = 207.7192 kT; E_(pi-) u = 1.9780e+02; min m_- = -347.908477 [0.0s]
+     w =  4 form B: ln Z(m_-) = 585.060171, ln Z(m_+) = 517.157578, width 67.902593 nats; rho_cert = 207.7192 kT; E_(pi-) u = 2.0432e+02; min m_- = -347.206790 [0.0s]
+     w =  2 form S: ln Z(m_-) = 587.227957, ln Z(m_+) = 514.263682, width 72.964275 nats; rho_cert = 208.1187 kT; E_(pi-) u = 1.9822e+02; min m_- = -347.964247 [0.0s]
+     w =  2 form B: ln Z(m_-) = 585.433605, ln Z(m_+) = 515.762316, width 69.671289 nats; rho_cert = 208.1188 kT; E_(pi-) u = 2.0385e+02; min m_- = -347.266702 [0.0s]
+     w =  1 form S: ln Z(m_-) = 587.282164, ln Z(m_+) = 513.973701, width 73.308463 nats; rho_cert = 208.5222 kT; E_(pi-) u = 1.9843e+02; min m_- = -347.966444 [0.0s]
+     w =  1 form B: ln Z(m_-) = 586.071426, ln Z(m_+) = 514.321510, width 71.749916 nats; rho_cert = 208.5223 kT; E_(pi-) u = 2.0247e+02; min m_- = -347.586020 [0.0s]
+  -- m = 4: Gamma_4 = 2.821341e+00 kcal/mol = 4.7325 kT; pair sums read from pairsums_V20_P2_t0.70_gbn2_m4.npz; max G_ij/C(m,2) = 7.0617e-02, max S_i/m = 1.7538e-01
+     ball of radius 3: 9921 values of g (prefix of ws_P3/cache/ball_V20_P2_t0.70_gbn2_M4_78d2725e4b.npz) [0.2s]
+     w = 12 form S: ln Z(m_-) = 519.219843, ln Z(m_+) = 517.484312, width 1.735532 nats; rho_cert = 9.6591 kT; E_(pi-) u = 2.1087e+00; min m_- = -306.568716 [2.6s]
+     w = 12 form B: ln Z(m_-) = 518.431059, ln Z(m_+) = 518.126133, width 0.304926 nats; rho_cert = 9.6591 kT; E_(pi-) u = 3.7313e-01; min m_- = -306.568716 [2.8s]
+     w =  8 form S: ln Z(m_-) = 519.219855, ln Z(m_+) = 517.484288, width 1.735567 nats; rho_cert = 9.6592 kT; E_(pi-) u = 2.1087e+00; min m_- = -306.568720 [0.1s]
+     w =  8 form B: ln Z(m_-) = 518.431429, ln Z(m_+) = 518.125785, width 0.305644 nats; rho_cert = 9.6592 kT; E_(pi-) u = 3.7393e-01; min m_- = -306.568720 [0.1s]
+     w =  8 form S against P3's own run (floor_V20_P2_t0.70_gbn2_m4_siteres.json): |ln Z(m_-) - P3| = 0.0e+00, |ln Z(m_+) - P3| = 0.0e+00
+     w =  4 form S: ln Z(m_-) = 519.220537, ln Z(m_+) = 517.483536, width 1.737001 nats; rho_cert = 9.6642 kT; E_(pi-) u = 2.1105e+00; min m_- = -306.569135 [0.0s]
+     w =  4 form B: ln Z(m_-) = 518.455825, ln Z(m_+) = 518.103809, width 0.352017 nats; rho_cert = 9.6643 kT; E_(pi-) u = 4.2617e-01; min m_- = -306.569135 [0.0s]
+     w =  2 form S: ln Z(m_-) = 519.273500, ln Z(m_+) = 517.394960, width 1.878540 nats; rho_cert = 10.0479 kT; E_(pi-) u = 2.2755e+00; min m_- = -306.597589 [0.0s]
+     w =  2 form B: ln Z(m_-) = 518.708176, ln Z(m_+) = 517.837179, width 0.870997 nats; rho_cert = 10.0479 kT; E_(pi-) u = 1.0155e+00; min m_- = -306.597589 [0.0s]
+     w =  1 form S: ln Z(m_-) = 519.301573, ln Z(m_+) = 517.133863, width 2.167711 nats; rho_cert = 10.3749 kT; E_(pi-) u = 2.5617e+00; min m_- = -306.597589 [0.0s]
+     w =  1 form B: ln Z(m_-) = 518.963572, ln Z(m_+) = 517.391029, width 1.572543 nats; rho_cert = 10.3749 kT; E_(pi-) u = 1.8031e+00; min m_- = -306.597589 [0.0s]
+  -- m = 5: Gamma_5 = 8.222732e-02 kcal/mol = 0.1379 kT; pair sums read from pairsums_V20_P2_t0.70_gbn2_m5.npz; max G_ij/C(m,2) = 1.8024e-03, max S_i/m = 5.4974e-03
+     ball of radius 4: 87441 values of g (prefix of ws_P3/cache/ball_V20_P2_t0.70_gbn2_M4_78d2725e4b.npz) [1.4s]
+     w = 12 form S: ln Z(m_-) = 518.293640, ln Z(m_+) = 518.233182, width 0.060457 nats; rho_cert = 0.5099 kT; E_(pi-) u = 6.0980e-02; min m_- = -306.568716 [3.0s]
+     w = 12 form B: ln Z(m_-) = 518.270969, ln Z(m_+) = 518.255663, width 0.015307 nats; rho_cert = 0.5099 kT; E_(pi-) u = 1.5450e-02; min m_- = -306.568716 [3.0s]
+     w =  8 form S: ln Z(m_-) = 518.293650, ln Z(m_+) = 518.233156, width 0.060494 nats; rho_cert = 0.5100 kT; E_(pi-) u = 6.1017e-02; min m_- = -306.568720 [0.4s]
+     w =  8 form B: ln Z(m_-) = 518.271430, ln Z(m_+) = 518.255189, width 0.016241 nats; rho_cert = 0.5100 kT; E_(pi-) u = 1.6389e-02; min m_- = -306.568720 [0.4s]
+     w =  8 form S against P3's own run (floor_V20_P2_t0.70_gbn2_m5_siteres.json): |ln Z(m_-) - P3| = 0.0e+00, |ln Z(m_+) - P3| = 0.0e+00
+     w =  4 form S: ln Z(m_-) = 518.294332, ln Z(m_+) = 518.232260, width 0.062072 nats; rho_cert = 0.5151 kT; E_(pi-) u = 6.2608e-02; min m_- = -306.569135 [0.2s]
+     w =  4 form B: ln Z(m_-) = 518.274433, ln Z(m_+) = 518.251982, width 0.022451 nats; rho_cert = 0.5151 kT; E_(pi-) u = 2.2633e-02; min m_- = -306.569135 [0.2s]
+     w =  2 form S: ln Z(m_-) = 518.345846, ln Z(m_+) = 518.134956, width 0.210890 nats; rho_cert = 0.8994 kT; E_(pi-) u = 2.1267e-01; min m_- = -306.597589 [0.2s]
+     w =  2 form B: ln Z(m_-) = 518.332908, ln Z(m_+) = 518.147638, width 0.185270 nats; rho_cert = 0.8994 kT; E_(pi-) u = 1.8654e-01; min m_- = -306.597589 [0.1s]
+     w =  2 form S against P3's own run (floor_V20_P2_t0.70_gbn2_m5_siteres_w2.json): |ln Z(m_-) - P3| = 0.0e+00, |ln Z(m_+) - P3| = 0.0e+00
+     w =  1 form S: ln Z(m_-) = 518.369863, ln Z(m_+) = 517.879222, width 0.490641 nats; rho_cert = 1.2214 kT; E_(pi-) u = 4.9221e-01; min m_- = -306.597589 [0.1s]
+     w =  1 form B: ln Z(m_-) = 518.362530, ln Z(m_+) = 517.886424, width 0.476106 nats; rho_cert = 1.2214 kT; E_(pi-) u = 4.7741e-01; min m_- = -306.597589 [0.1s]
+     w =  1 form S against P3's own run (floor_V20_P2_t0.70_gbn2_m5_siteres_w1.json): |ln Z(m_-) - P3| = 0.0e+00, |ln Z(m_+) - P3| = 0.0e+00
+    checks of m_- <= E and of E <= m_+ in this run: 0, violations: 0; checks of |remainder| <= penalty: 0, violations: 0  -> out/sandwich_V20_P2_t0.70_gbn2_b12-8-4-2-1.json
+DONE p6_02_sandwich V20 P2 0.7 gbn2 [22s]

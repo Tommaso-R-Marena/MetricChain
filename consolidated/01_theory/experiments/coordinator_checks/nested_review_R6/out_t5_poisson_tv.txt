@@ -1,0 +1,11 @@
+TV(Bin(n,p), Poisson(np)) against p(1 - e^{-np}), and the ratio TV/p
+  n =      10000, p =  1.0e-03, np =     10.00:  TV = 2.446e-04   bound = 1.000e-03   TV/p = 0.245
+  n =      10000, p =  1.0e-02, np =    100.00:  TV = 2.435e-03   bound = 1.000e-02   TV/p = 0.244
+  n =    1000000, p =  1.0e-04, np =    100.00:  TV = 2.423e-05   bound = 1.000e-04   TV/p = 0.242
+  n =    1000000, p =  1.0e-06, np =      1.00:  TV = 2.759e-07   bound = 6.321e-07   TV/p = 0.276
+  n =   10000000, p =  5.0e-05, np =    500.00:  TV = 1.210e-05   bound = 5.000e-05   TV/p = 0.242
+  n =  100000000, p =  1.0e-06, np =    100.00:  TV = 2.423e-07   bound = 1.000e-06   TV/p = 0.242
+  n = 1000000000, p =  9.2e-08, np =     92.00:  TV = 2.226e-08   bound = 9.200e-08   TV/p = 0.242
+  n =       1000, p =  5.0e-02, np =     50.00:  TV = 1.245e-02   bound = 5.000e-02   TV/p = 0.249
+  n =         50, p =  2.0e-01, np =     10.00:  TV = 5.476e-02   bound = 2.000e-01   TV/p = 0.274
+TV <= p(1 - e^(-np)) in all cases: True

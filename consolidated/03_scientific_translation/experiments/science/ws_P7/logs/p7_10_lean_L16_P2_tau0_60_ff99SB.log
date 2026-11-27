@@ -1,0 +1,8 @@
+$ cd /home/user/MetricChain && (ulimit -v 16384000; lake env lean /home/user/MetricChain/experiments/science/ws_P7/lean/P7S_L16_P2_tau0_60_ff99SB.lean)   [through run_capped.py; MemAvailable before: 13370 MB]
+true
+false
+false
+9
+
+[run_capped] peak anonymous resident memory 570 MB (cap 1500 MB); peak file-backed resident memory 6605 MB; largest VmPeak 14998 MB (ulimit -v 16000 MB); 13.4 s; exit 0
+exit 0  (13.4s)

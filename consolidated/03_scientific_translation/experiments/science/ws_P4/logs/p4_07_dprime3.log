@@ -1,0 +1,43 @@
+[    2s] F10/H tau 0.60: |X_tau| 69846 |D'(x*)| 27840; c3 max 0.0962 sum 0.6592; bound slack -7.1e-15; sound 0.0e+00; margin env3/pair/site 0.2053/0.2053/0.0787; dlnZ 2.19e-07/2.19e-02/1.58e-01 (2s)
+[    2s] F3/E tau 0.60: |X_tau| 75 |D'(x*)| 60; c3 max 0.0672 sum 0.0672; bound slack -7.1e-15; sound -7.1e-15; margin env3/pair/site 1.2870/1.2870/1.2646; dlnZ 1.55e-10/5.19e-05/4.43e-03 (0s)
+[    3s] F3/H tau 0.60: |X_tau| 120 |D'(x*)| 110; c3 max 0.0804 sum 0.0804; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0788/0.0788/0.0520; dlnZ 1.34e-07/8.50e-03/3.79e-02 (0s)
+[    3s] F3/P2 tau 0.60: |X_tau| 239 |D'(x*)| 239; c3 max 0.0933 sum 0.0933; bound slack -3.6e-15; sound -3.6e-15; margin env3/pair/site 0.0079/0.0079/-0.0232; dlnZ 8.65e-04/7.53e-03/3.99e-02 (0s)
+[    3s] F4/E tau 0.60: |X_tau| 225 |D'(x*)| 144; c3 max 0.0708 sum 0.1699; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 1.9670/1.9670/1.9179; dlnZ 5.19e-11/2.01e-05/3.74e-03 (0s)
+[    3s] F4/H tau 0.60: |X_tau| 360 |D'(x*)| 330; c3 max 0.0808 sum 0.2076; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.3784/0.3784/0.3251; dlnZ 7.99e-08/9.15e-03/6.26e-02 (0s)
+[    3s] F4/P2 tau 0.60: |X_tau| 1335 |D'(x*)| 1335; c3 max 0.1650 sum 0.4127; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0379/0.0379/-0.0685; dlnZ 4.16e-03/2.98e-02/1.58e-01 (0s)
+[    4s] F4/P2 tau 0.70: |X_tau| 12 |D'(x*)| 8; c3 max 0.0146 sum 0.0146; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0379/0.0379/0.0330; dlnZ 1.98e-04/1.09e-03/5.98e-03 (0s)
+[    4s] F5/E tau 0.60: |X_tau| 600 |D'(x*)| 288; c3 max 0.0730 sum 0.2501; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 1.9708/1.9708/1.9124; dlnZ 1.48e-11/1.91e-05/4.34e-03 (0s)
+[    4s] F5/H tau 0.60: |X_tau| 948 |D'(x*)| 660; c3 max 0.0834 sum 0.2678; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.4436/0.4436/0.3676; dlnZ 8.34e-08/9.37e-03/7.42e-02 (0s)
+[    4s] F5/P2 tau 0.60: |X_tau| 7385 |D'(x*)| 7385; c3 max 0.1702 sum 0.8579; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0347/0.0347/-0.1069; dlnZ 5.26e-03/4.03e-02/2.53e-01 (0s)
+[    5s] F5/P2 tau 0.70: |X_tau| 18 |D'(x*)| 8; c3 max 0.0146 sum 0.0146; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0347/0.0347/0.0298; dlnZ 1.69e-04/9.96e-04/5.85e-03 (0s)
+[    5s] F6/E tau 0.60: |X_tau| 1600 |D'(x*)| 576; c3 max 0.0695 sum 0.3299; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 1.9708/1.9708/1.9119; dlnZ 7.80e-12/1.92e-05/4.38e-03 (0s)
+[    5s] F6/H tau 0.60: |X_tau| 2460 |D'(x*)| 1740; c3 max 0.0906 sum 0.5126; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.1202/0.1202/0.0002; dlnZ 1.47e-07/2.16e-02/1.53e-01 (0s)
+[    5s] F6/P2 tau 0.60: |X_tau| 40849 |D'(x*)| 40849; c3 max 0.1737 sum 1.3432; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0332/0.0332/-0.1192; dlnZ 5.85e-03/4.81e-02/3.31e-01 (0s)
+[    6s] F6/P2 tau 0.70: |X_tau| 27 |D'(x*)| 8; c3 max 0.0146 sum 0.0146; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0332/0.0332/0.0283; dlnZ 1.59e-04/9.55e-04/5.79e-03 (0s)
+[    6s] F7/E tau 0.60: |X_tau| 4200 |D'(x*)| 1152; c3 max 0.0696 sum 0.4095; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 1.9701/1.9701/1.9107; dlnZ 6.54e-12/1.93e-05/4.42e-03 (0s)
+[    6s] F7/H tau 0.60: |X_tau| 6006 |D'(x*)| 3480; c3 max 0.0949 sum 0.5771; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.1398/0.1398/0.0151; dlnZ 1.63e-07/2.23e-02/1.59e-01 (0s)
+[    8s] F7/P2 tau 0.60: |X_tau| 225451 |D'(x*)| 225451; c3 max 0.1759 sum 1.8481; bound slack -7.1e-15; sound -7.1e-15; margin env3/pair/site 0.0321/0.0321/-0.1256; dlnZ 6.39e-03/5.48e-02/4.00e-01 (2s)
+[    8s] F7/P2 tau 0.70: |X_tau| 36 |D'(x*)| 8; c3 max 0.0146 sum 0.0146; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0321/0.0321/0.0273; dlnZ 1.60e-04/9.60e-04/5.80e-03 (0s)
+[    9s] F8/E tau 0.60: |X_tau| 11025 |D'(x*)| 2304; c3 max 0.0697 sum 0.4890; bound slack -1.4e-14; sound -1.4e-14; margin env3/pair/site 1.9697/1.9697/1.9101; dlnZ 6.30e-12/1.93e-05/4.44e-03 (1s)
+[    9s] F8/H tau 0.60: |X_tau| 14014 |D'(x*)| 6960; c3 max 0.0955 sum 0.6135; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.1706/0.1706/0.0449; dlnZ 1.77e-07/2.17e-02/1.58e-01 (0s)
+[   10s] K3/E tau 0.60: |X_tau| 27931 |D'(x*)| 25916; c3 max 1.6540 sum 1.6540; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.7383/0.7383/0.1870; dlnZ 4.44e-02/1.41e-01/6.85e-01 (1s)
+[   11s] K3/E tau 0.70: |X_tau| 8400 |D'(x*)| 5712; c3 max 0.0889 sum 0.0889; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.7383/0.7383/0.7087; dlnZ 4.55e-04/3.96e-03/2.63e-02 (0s)
+[   11s] K3/H tau 0.60: |X_tau| 20718 |D'(x*)| 20718; c3 max 1.8525 sum 1.8525; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site -0.1368/-0.1368/-0.3619; dlnZ 5.06e-01/7.19e-01/1.39e+00 (1s)
+[   12s] K3/P2 tau 0.60: |X_tau| 29357 |D'(x*)| 29357; c3 max 0.6573 sum 0.6573; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 1.1411/1.1411/0.9220; dlnZ 5.97e-03/3.00e-02/1.91e-01 (1s)
+[   19s] K4/E tau 0.60: |X_tau| 811801 |D'(x*)| 698896; c3 max 3.7753 sum 13.8824; bound slack -1.1e-13; sound -1.1e-13; margin env3/pair/site -7.7445/-7.7445/-7.7445; dlnZ 1.46e+01/1.46e+01/1.47e+01 (8s)
+[   21s] K4/E tau 0.70: |X_tau| 160000 |D'(x*)| 73984; c3 max 0.1008 sum 0.3341; bound slack -1.1e-13; sound -1.1e-13; margin env3/pair/site 0.6226/0.6226/0.5314; dlnZ 1.24e-03/1.30e-02/9.66e-02 (1s)
+[   25s] K4/H tau 0.60: |X_tau| 452821 |D'(x*)| 452821; c3 max 1.9048 sum 4.1285; bound slack -1.1e-13; sound -1.1e-13; margin env3/pair/site -0.2360/-0.7286/-1.4699; dlnZ 1.15e+00/1.68e+00/3.08e+00 (4s)
+[   33s] K4/P2 tau 0.60: |X_tau| 898619 |D'(x*)| 898619; c3 max 10.2669 sum 14.6351; bound slack -1.1e-13; sound -1.1e-13; margin env3/pair/site -7.9532/-7.9532/-8.2490; dlnZ 1.66e+01/1.66e+01/1.71e+01 (8s)
+[   33s] LKSE4/E tau 0.60: |X_tau| 8694 |D'(x*)| 7722; c3 max 0.1463 sum 0.2912; bound slack -2.8e-14; sound -5.7e-14; margin env3/pair/site 0.0715/0.0715/0.0099; dlnZ 1.06e-02/4.22e-02/1.52e-01 (0s)
+[   34s] LKSE5/E tau 0.60: |X_tau| 17388 |D'(x*)| 15444; c3 max 0.1503 sum 0.4162; bound slack -2.8e-14; sound -5.7e-14; margin env3/pair/site 0.0652/0.0652/-0.0284; dlnZ 9.53e-03/4.73e-02/1.98e-01 (1s)
+[   37s] LKSE6/E tau 0.60: |X_tau| 512244 |D'(x*)| 441000; c3 max 0.4888 sum 1.4440; bound slack 0.0e+00; sound 0.0e+00; margin env3/pair/site 0.0979/0.0979/-0.3174; dlnZ 2.09e-02/1.26e-01/6.88e-01 (3s)
+[   39s] LKSE6/H tau 0.60: |X_tau| 294840 |D'(x*)| 268164; c3 max 1.9191 sum 5.5849; bound slack -5.7e-14; sound -5.7e-14; margin env3/pair/site 0.1622/0.1622/-1.3656; dlnZ 1.10e-01/7.20e-01/3.03e+00 (2s)
+
+34 analyses of g_GB with a non-product X_tau and at least three sites that can change inside D'(x*)
+remainder bound of Theorem 11.18 (m = 3) on D'(x*), constants over the boxes inside D'(x*): smallest slack -1.14e-13; smallest E - m over all states, domains and models -1.14e-13
+x* minimises the env3 model over D'(x*): 30 of 34;  by family: {'F': '22/22', 'K': '4/8', 'LKSE': '4/4'}
+x* minimises the pair model over D'(x*): 30 of 34;  by family: {'F': '22/22', 'K': '4/8', 'LKSE': '4/4'}
+x* minimises the site model over D'(x*): 22 of 34;  by family: {'F': '17/22', 'K': '4/8', 'LKSE': '1/4'}
+not certified by the pair model: ['K3/H(.60): env3 -0.137, pair -0.137, c3max 1.85', 'K4/E(.60): env3 -7.745, pair -7.745, c3max 3.78', 'K4/H(.60): env3 -0.236, pair -0.729, c3max 1.90', 'K4/P2(.60): env3 -7.953, pair -7.953, c3max 10.27']
+[39s] DONE p4_07_dprime3
+exit 0

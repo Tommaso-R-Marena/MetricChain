@@ -1,0 +1,29 @@
+# u = 0.5 (h = 0.00767, a = 0.03030, d_min = 3), n = N = 100000, k = 2 levels above the base, eps^ = 1, ln delta = -40000.000, base error E_0 = 0, blocks = design/1
+# chain: s_t = L + 0.05, b_0 = h + 0.0008; base level J0 = 6; (b_j - h)/h, j = 6..8: 0.0794 0.0618 0.0496;  W_j(b_j): 0.824 0.815 0.808;  X = X_0(N) + 1 = 18.260
+#   level 8: block m = 9951 (design 9951), chain levels at d = n: 10, d_0 = 9970; unrolled terms: chain 422.45, level 76.86
+#   level 7: block m = 9837 (design 9837), chain levels at d = n: 10, d_0 = 9856; unrolled terms: chain 418.45, level 76.86
+exact ln cost of F_8(n, eps^, delta): 1547.353 = n b_k + 742.022   (n b_k = 805.331, n b_base = 828.242, n h = 767.287, n a = 3029.986)
+bound by the composed error functions: n b_k + 994.626;   unrolled bound of section 6: n b_k + 994.626
+nodes evaluated exactly: F_8: 10 Z-levels, 10 chain levels; F_7: 386 Z-levels, 36 chain levels   [37 s]
+check                                               number  least slack  viol.   at
+F7 type (Prop. Z4)                                      72      105.702      0   (27257, 18.260269023288465)
+F8 type (Prop. Z4)                                      20      220.084      0   (50245, 18.260269023288465)
+T7 accuracy                                             36        0.007      0   (19082,)
+T7 claim (Prop. T(iii))                                 36      101.320      0   (27257,)
+T7 claim (bottom)                                       10      193.400      0   (9575,)
+T7 delta' (Prop. T(ii))                                 36     6444.836      0   (17164,)
+T8 accuracy                                             10        0.007      0   (100000,)
+T8 claim (Prop. T(iii))                                 10      215.580      0   (50245,)
+T8 claim (bottom)                                        1      879.270      0   (490,)
+T8 delta' (Prop. T(ii))                                 10     6519.826      0   (10441,)
+TOP: Ehat_k <= unrolled error of section 6               1        0.000      0   None
+TOP: exact <= n b_k + Ehat_k(n, eps^; Lam_0)             1      252.604      0   None
+Z6 (U-inf)                                             386       12.535      0   (19082, 23.0, 1945)
+Z6 accuracy                                            386        2.861      0   (86023, 101.0)
+Z6 delta' (Lemma Z2)                                   386      565.027      0   (7327, 18.260269024288466, 811)
+Z6 type (Prop. Z3)                                     386       22.765      0   (19082, 22.0, 1858)
+Z7 (U-inf)                                              10      125.035      0   (40294, 18.260269024288466, 2128)
+Z7 accuracy                                             10        1.183      0   (490, 18.260269024288466)
+Z7 delta' (Lemma Z2)                                    10      288.565      0   (490, 18.260269024288466, 408)
+Z7 type (Prop. Z3)                                      10      136.026      0   (40294, 18.260269024288466, 2128)
+TOTAL: 1827 checks, 0 violations   ALL CHECKS PASS

@@ -1,0 +1,66 @@
+C1  identities for L(w)
+    w        L(w)          ln S(e^w)     a-1-ln a      max_t          L/(w^2/8)   lncosh(w/2)/L
+      0.01  0.0000125000  0.0000125000  0.0000125000  0.0000125000   0.999999    0.999997
+      0.10  0.0012498264  0.0012498264  0.0012498264  0.0012498264   0.999861    0.999722
+      0.50  0.0311420923  0.0311420923  0.0311420923  0.0311420923   0.996547    0.993183
+      1.00  0.1233015615  0.1233015615  0.1233015615  0.1233015615   0.986412    0.974152
+      2.00  0.4744746471  0.4744746471  0.4744746471  0.4744746471   0.948949    0.914234
+      3.00  1.0075056199  1.0075056199  1.0075056199  1.0075056198   0.895561    0.849067
+      5.00  2.4177196126  2.4177196126  2.4177196126  2.4177196126   0.773670    0.750115
+      8.00  4.9229075410  4.9229075410  4.9229075410  4.9229075410   0.615363    0.671796
+     12.00  8.5151609370  8.5151609370  8.5151609370  8.5151609366   0.473064    0.623225
+     20.00  16.0042677656  16.0042677656  16.0042677656  16.0042677656   0.320085    0.581523
+     30.00  25.5988026183  25.5988026183  25.5988026183  25.5988026171   0.227545    0.558888
+    largest disagreement between the four forms: 1.25e-09
+    L(w) <= w^2/8 on (0,60]: True | ln cosh(w/2) <= L(w): True
+    large w: L(w) - (w - 1 - ln w) at w = 30, 60: 2.71e-12, 0.00e+00
+C2  random laws on [0,w]: ratio (ln E e^Y - E Y)/L(w)
+    40000 laws, largest ratio 1.000000 (must be <= 1)
+    two-point law at w=0.5: mass t = 1/w - 1/(e^w-1) = 0.458506 on the top point, value/L = 1.000000000000
+    two-point law at w=3.0: mass t = 1/w - 1/(e^w-1) = 0.280938 on the top point, value/L = 1.000000000000
+    two-point law at w=10.0: mass t = 1/w - 1/(e^w-1) = 0.099955 on the top point, value/L = 1.000000000000
+C3  KL between a law and its tilt by a function of oscillation w
+    largest KL(tilt||base)/L(w) = 1.000000, largest KL(base||tilt)/L(w) = 1.000000 (both must be <= 1)
+    w=1.0: KL(base||tilt) at the C2 law = 1.000000000000 * L;  KL(tilt||base) at the mirrored pair = 1.000000000000 * L (same pair, roles swapped)
+    w=4.0: KL(base||tilt) at the C2 law = 1.000000000000 * L;  KL(tilt||base) at the mirrored pair = 1.000000000000 * L (same pair, roles swapped)
+C4  tilt lemma  D_alpha(P||Q) <= alpha w^2/8  (P = tilt of Q by a function of oscillation w)
+    60000 random tilts, largest D_alpha/(alpha w^2/8) = 0.999419 (must be <= 1)
+    two-point supremum of D_alpha (numerical, over the mass t of the top point), as a fraction of alpha w^2/8:
+      alpha= 1.0: w=0.1: 0.9999  w=1.0: 0.9864  w=3.0: 0.8956  w=6.0: 0.7157
+      alpha= 2.0: w=0.1: 0.9996  w=1.0: 0.9609  w=3.0: 0.7604  w=6.0: 0.5132
+      alpha= 5.0: w=0.1: 0.9971  w=1.0: 0.7987  w=3.0: 0.4244  w=6.0: 0.2389
+C5  product reference: D_p(pi_g||pi) against p K/8 and against p^2 K/(8(p-1))  [K = sum c_i^2]
+    1200 random members; largest D_p/(pK/8):   p=1.0: 0.9894  p=1.01: 0.9893  p=1.5: 0.9807  p=2.0: 0.9759  p=3.0: 0.9780  p=6.0: 0.9473
+                   largest D_p/(p^2K/(8(p-1))): p=1.01: 0.0098  p=1.5: 0.3269  p=2.0: 0.4880  p=3.0: 0.6520  p=6.0: 0.7894
+       largest D_p/((p-1)K/8 + sum_i L(c_i)): p=1.0: 0.9927  p=1.01: 0.9925  p=1.5: 0.9829  p=2.0: 0.9765  p=3.0: 0.9784  p=6.0: 0.9475
+    hill-climb on r (cube), objective D_p/(pK/8):
+      n=3, p=2.0, P(x_i=1)=0.5: best ratio found 0.999888  (50-digit re-evaluation: 0.999888, K = 0.001)
+      n=4, p=2.0, P(x_i=1)=0.5: best ratio found 0.999921  (50-digit re-evaluation: 0.999921, K = 0.001)
+      n=4, p=2.0, P(x_i=1)=0.2: best ratio found 0.938330  (50-digit re-evaluation: 0.938330, K = 4.22)
+      n=5, p=2.0, P(x_i=1)=0.5: best ratio found 0.999936  (50-digit re-evaluation: 0.999936, K = 0.001)
+      n=4, p=1.0, P(x_i=1)=0.5: best ratio found 0.999966  (50-digit re-evaluation: 0.999966, K = 0.00101)
+      n=4, p=5.0, P(x_i=1)=0.3: best ratio found 0.961467  (50-digit re-evaluation: 0.961467, K = 0.324)
+      n=6, p=2.0, P(x_i=1)=0.5: best ratio found 0.999947  (50-digit re-evaluation: 0.999947, K = 0.001)
+    non-product reference pi (random), ranges c~_i of the conditional free energy of the remainder:
+      240 instances; largest D_p/((p-1)K~/8 + sum_i L(c~_i)): p=1.0: 0.6980  p=1.01: 0.6977  p=1.5: 0.6828  p=2.0: 0.6809  p=3.0: 0.7088  p=6.0: 0.7396
+    additive cube instance r = u|x|, u=0.3, n=4: D_2 = n ln(1+tanh^2(u/2)) = 0.087699;  K/4 = 0.090000;  K/2 = 0.180000
+    additive cube instance r = u|x|, u=0.3, n=12: D_2 = n ln(1+tanh^2(u/2)) = 0.263096;  K/4 = 0.270000;  K/2 = 0.540000
+C6  T3 against the [0,1]-valued mean-estimation problem (X = e^{-(r-lo)} under the floor measure, mean m = Z(g)/Z(lo))
+    m=5.000e-01, eps=0.1: (1/m-1)/eps = 10;  1/(eps m) = 20;  max-variance term (1-m)/(eps^2 m) = 100;  ratio var/hinted = 10 = 1/eps
+    m=4.979e-02, eps=0.2: (1/m-1)/eps = 95.43;  1/(eps m) = 100.4;  max-variance term (1-m)/(eps^2 m) = 477.1;  ratio var/hinted = 5 = 1/eps
+    m=2.472e-02, eps=0.1: (1/m-1)/eps = 394.5;  1/(eps m) = 404.5;  max-variance term (1-m)/(eps^2 m) = 3945;  ratio var/hinted = 10 = 1/eps
+    m=1.679e-07, eps=0.1: (1/m-1)/eps = 5.957e+07;  1/(eps m) = 5.957e+07;  max-variance term (1-m)/(eps^2 m) = 5.957e+08;  ratio var/hinted = 10 = 1/eps
+C7  no-hint stopping rule at the centre of a constant box (exact failure probabilities)
+    m=0.0498, eps=0.2, delta=0.05: N = 287; worst failure probability over alternatives = 0.0483 (<= delta: True);  N / (hinted count (1/m-1)/eps) = 3.01  [ln(1/delta) = 3.00]
+    m=0.0247, eps=0.1, delta=0.05: N = 1183; worst failure probability over alternatives = 0.0286 (<= delta: True);  N / (hinted count (1/m-1)/eps) = 3.00  [ln(1/delta) = 3.00]
+    m=0.5000, eps=0.1, delta=0.01: N = 48; worst failure probability over alternatives = 0.0062 (<= delta: True);  N / (hinted count (1/m-1)/eps) = 4.80  [ln(1/delta) = 4.61]
+    theory division's example: hinted spot check with the half-half sampler: N = 1088 (they state 1088); no-hint rule 'all N samples of pi agree': N = 545  [least detectable masses: dip 0.005511, bump 0.095163]
+C8  Hoeffding (4.12)-(4.13) with the mean position p: gap <= -w p + ln(1-p+p e^w) <= L(w)
+    19467 laws (533 nearly degenerate ones skipped): largest gap/Hoeffding bound = 1.000000 (<= 1); Hoeffding bound / L(w): median 0.772, max 1.000000 (<= 1)
+C9  Markov-chain reference: mgf and Renyi bounds with the coupling-matrix constant 1/(1-theta)^2,
+    and Bennett's sharp two-point bound (A17.7) on random laws
+    120 random two-state chains with random r: largest ln E e^(lam(r-Er)) / (lam^2 K/(8(1-theta)^2)) = 0.0967; largest D_p/(p^2 K/(8(p-1)(1-theta)^2)) = 0.0602; largest Var/(K/(1-theta)^2) = 0.0214  (all must be <= 1)
+    Bennett two-point bound: largest gap/W(b, s2) = 1.000000 (<= 1); largest W/((s2/b^2)(e^b-1-b)) = 1.000000 (<= 1)
+    middle form: largest W/ln(1 + (s2/b^2)(e^b-1-b)) = 1.000000 (<= 1); with a floor and a variance bound that are not tight: largest gap/W(b', s2') = 0.989782 (<= 1)
+    lower half (needs the exact variance and a ceiling a above the mean): largest ln(1 + s2 (e^-a - 1 + a)/a^2)/gap = 0.999975 (<= 1)
+done

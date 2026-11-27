@@ -1,0 +1,3 @@
+p=0.1 u=2.0 x=0.05E: type-uniform theta_na = 0.1020;  best single r: 0.1033 at r = 0.185 (report: 0.1046 at r = 0.186);  plain pi (r = p): 0.2743 (report: 0.2729)
+p=0.1 u=2.0 x=0.25E: type-uniform theta_na = 0.0440;  best single r: 0.0451 at r = 0.170 (report: 0.047 at r = 0.168);  plain pi (r = p): 0.1430 (report: 0.142)
+p=0.3 u=1.0 x=0.25E: type-uniform theta_na = 0.0243;  best single r: 0.0244 at r = 0.319 (report: 0.0247 at r = 0.319);  plain pi (r = p): 0.0348 (report: 0.0347)

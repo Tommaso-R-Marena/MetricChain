@@ -1,0 +1,26 @@
+# cube u = 4: h = 0.239250, a = 0.603052, d_min = 2;  chain: s_t = L + 0.04, b_0 = h + 0.02; range condition to level 24: True (largest W_j(b_j) = 0.656)
+# (b_j - h)/h at j = 0, 5, 10, 20: 0.0836 0.0836 0.0283 0.0081
+# 651 cases, 4116 levels evaluated exactly  [150 s]
+#      d       N   j        xhat    n_o*   ln C_max   type(j+1)   excess-E   allowed   E
+       6       6   6        75.9       5      21.98       0.00     13.76     92.41   5/x+lnLam
+      60      60   3        86.3      41      30.02       0.00     20.74    102.34   5/x+lnLam
+      21      42  18       238.5      20      23.83       0.00     15.08     97.65   5/x+lnLam
+     800     800  20       176.6     327     218.16     129.03      5.41    114.83   Lam/7
+      13      26   3        72.0       9      21.30       0.00     15.31     95.84   Lam/7
+   12000   24000   7     13773.7   11956      76.92      47.16     29.77    128.33   0
+     800    2400  12       347.0     585     156.36      82.30    -10.80    114.83   3sqrt(d)
+    5000   10000   6     21293.9    4999      24.47       0.00   -187.67    123.96   3sqrt(d)
+      33      33  20        70.2       7      22.39       0.00     22.39     99.63   0
+     200    2000   2        74.3      17      76.00      23.85     41.88    108.17   5/x+lnLam
+    3000    3000   6       792.5    1828     477.40     444.53     32.87    121.41   0
+       9      18  20        69.6       4      25.30       0.00     16.33     94.79   5/x+lnLam
+     300     300   3        72.4      13     102.61      46.75     45.39    110.00   5/x+lnLam
+     500    1000   6        73.6      46     135.29      92.71     42.58    112.53   0
+violations: (A) accuracy 0, (B) (U-infinity) 0, (B') delta' bookkeeping 0, (C) exponent 0, (D) the type 0   [each must be 0]
+largest excess (negative = slack): (A) -1.0000, (B) -5.247, (B') -2.236, (C) -2.0469, (D) -55.444
+   worst case of (A): (20000, 40000, 2, 8289.59936650759, 19999)
+   worst case of (B): (3, 3, 3, 75.38305668293224, 1, -6.907755278982137, '0')
+   worst case of (C): (2000, 20000, 4, 16076.600299873098)
+   worst case of (D): (1300, 1300, 3, 73.86765080032485, 13, -1300.0, '0')
+controls: (D) without ell_0 and X_0(d) fails in 529 cases; (C) with W_{j+2} fails in 37 cases; accuracy against a target lowered by 1.3 fails in 1165 levels   [each must be > 0]
+ALL CHECKS PASS

@@ -1,0 +1,8 @@
+n=3 p=0.4: exact max_phi KL(pi||pi_phi) over 38 vertices = 0.4501504;  uniform field 0.4501504;  safe recursion G=201: 0.4536742, G=801: 0.4512480;  safe >= exact: True
+n=3 p=0.3: exact max_phi KL(pi||pi_phi) over 38 vertices = 0.5468315;  uniform field 0.5468315;  safe recursion G=201: 0.5539673, G=801: 0.5483320;  safe >= exact: True
+n=3 p=0.2: exact max_phi KL(pi||pi_phi) over 38 vertices = 0.6478817;  uniform field 0.6478817;  safe recursion G=201: 0.6563281, G=801: 0.6515060;  safe >= exact: True
+n=3 p=0.1: exact max_phi KL(pi||pi_phi) over 38 vertices = 0.7512749;  uniform field 0.7512749;  safe recursion G=201: 0.7797387, G=801: 0.7549422;  safe >= exact: True
+n=4 p=0.4: exact max_phi KL(pi||pi_phi) over 990 vertices = 0.6191308;  uniform field 0.6191308;  safe recursion G=201: 0.6228014, G=801: 0.6203988;  safe >= exact: True
+n=4 p=0.3: exact max_phi KL(pi||pi_phi) over 990 vertices = 0.7772709;  uniform field 0.7772709;  safe recursion G=201: 0.7873508, G=801: 0.7795210;  safe >= exact: True
+n=4 p=0.2: exact max_phi KL(pi||pi_phi) over 990 vertices = 0.9508970;  uniform field 0.9508970;  safe recursion G=201: 0.9625669, G=801: 0.9562555;  safe >= exact: True
+n=4 p=0.1: exact max_phi KL(pi||pi_phi) over 990 vertices = 1.1350712;  uniform field 1.1350712;  safe recursion G=201: 1.1668089, G=801: 1.1393466;  safe >= exact: True

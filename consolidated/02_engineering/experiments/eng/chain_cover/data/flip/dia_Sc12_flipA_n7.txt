@@ -1,0 +1,10 @@
+# dia_flip n_torsions=7 n_beads=10 s_cut=12 mode=A split_k=0 split_W=1 split_w=0
+# conformations=2005
+# columns: torsion | c_sf (max ||N^x - N^x'||_1 over single flips) | flips inside the domain | flips leaving it
+0 31 3922 88
+1 45 3830 180
+2 47 3754 256
+3 48 3658 352
+4 47 3754 256
+5 45 3830 180
+6 31 3922 88

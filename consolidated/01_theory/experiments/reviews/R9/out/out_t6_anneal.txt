@@ -1,0 +1,15 @@
+n=5: stochastic search over subsets (9 restarts x 3000 steps) for a large omega(D) (least omega with theta <= R^max(e-omega)+omega)
+  p=0.1 u=2.0: largest omega found = 0.2455 at |D|=7, theta=0.343, e=0.161;  Hamming balls only: 0.2230   [24s]
+  p=0.3 u=1.0: largest omega found = 0.1673 at |D|=15, theta=0.203, e=0.148;  Hamming balls only: 0.1089   [49s]
+  p=0.2 u=4.0: largest omega found = 0.4077 at |D|=1, theta=0.732, e=0.172;  Hamming balls only: 0.4077   [70s]
+  p=0.5 u=1.0: largest omega found = 0.1671 at |D|=20, theta=0.200, e=0.160;  Hamming balls only: 0.1048   [93s]
+  p=0.5 u=2.0: largest omega found = 0.2528 at |D|=5, theta=0.492, e=0.025;  Hamming balls only: 0.2240   [115s]
+n=6: stochastic search over subsets (6 restarts x 3000 steps) for a large omega(D) (least omega with theta <= R^max(e-omega)+omega)
+  p=0.1 u=2.0: largest omega found = 0.2072 at |D|=12, theta=0.301, e=0.127;  Hamming balls only: 0.2014   [130s]
+  p=0.3 u=1.0: largest omega found = 0.1387 at |D|=25, theta=0.180, e=0.109;  Hamming balls only: 0.1057   [145s]
+  p=0.2 u=4.0: largest omega found = 0.3154 at |D|=7, theta=0.458, e=0.518;  Hamming balls only: 0.3166   [160s]
+[160s]
+
+real	2m40.352s
+user	2m35.231s
+sys	0m1.975s

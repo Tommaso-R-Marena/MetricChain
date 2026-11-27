@@ -1,0 +1,30 @@
+(i) ln Z_H and the largest / smallest mu_H(T_kappa)(n+1) over the types of the window
+   p=0.1 u=2.0 n=10: ln Z_H = 0.9424 (ln(n+1) = 2.3979) ok=True; mu_H(T) (n+1) in the window: min 1.075, max 1.661; mass of the window: 0.4704
+   p=0.1 u=2.0 n=100: ln Z_H = 1.7758 (ln(n+1) = 4.6151) ok=True; mu_H(T) (n+1) in the window: min 1.368, max 4.677; mass of the window: 0.8258
+   p=0.1 u=2.0 n=1000: ln Z_H = 2.8032 (ln(n+1) = 6.9088) ok=True; mu_H(T) (n+1) in the window: min 1.538, max 6.263; mass of the window: 0.9398
+   p=0.3 u=1.0 n=10: ln Z_H = 0.7586 (ln(n+1) = 2.3979) ok=True; mu_H(T) (n+1) in the window: min 1.268, max 1.556; mass of the window: 0.4991
+   p=0.3 u=1.0 n=100: ln Z_H = 1.5169 (ln(n+1) = 4.6151) ok=True; mu_H(T) (n+1) in the window: min 1.764, max 2.532; mass of the window: 0.7749
+   p=0.3 u=1.0 n=1000: ln Z_H = 2.5050 (ln(n+1) = 6.9088) ok=True; mu_H(T) (n+1) in the window: min 2.062, max 2.998; mass of the window: 0.9178
+   p=0.5 u=1.0 n=10: ln Z_H = 0.7977 (ln(n+1) = 2.3979) ok=True; mu_H(T) (n+1) in the window: min 1.219, max 1.322; mass of the window: 0.5771
+   p=0.5 u=1.0 n=100: ln Z_H = 1.5761 (ln(n+1) = 4.6151) ok=True; mu_H(T) (n+1) in the window: min 1.662, max 1.870; mass of the window: 0.8050
+   p=0.5 u=1.0 n=1000: ln Z_H = 2.5743 (ln(n+1) = 6.9088) ok=True; mu_H(T) (n+1) in the window: min 1.924, max 2.170; mass of the window: 0.9254
+   p=0.9 u=3.0 n=10: ln Z_H = 1.1862 (ln(n+1) = 2.3979) ok=True; mu_H(T) (n+1) in the window: min 0.827, max 1.301; mass of the window: 0.5204
+   p=0.9 u=3.0 n=100: ln Z_H = 2.1093 (ln(n+1) = 4.6151) ok=True; mu_H(T) (n+1) in the window: min 0.975, max 4.531; mass of the window: 0.8734
+   p=0.9 u=3.0 n=1000: ln Z_H = 3.1730 (ln(n+1) = 6.9088) ok=True; mu_H(T) (n+1) in the window: min 1.057, max 6.754; mass of the window: 0.9568
+(ii) HintPair fields on grids
+   p=0.1 u=2.0: slopes of R^max in [-1.0000, 0.0000], min second difference 0.0e+00; S nondecreasing (min increment 0.0e+00); R^max = 0 beyond E (0.0e+00), > 0 below (1.2e-06); R^max(e) = -e for e <= -a (4.4e-16); theta_na nonincreasing (2.1e-15), <= a (-6.5e-03), max jump 1.4e-02; theta_na(h) - h = -1.4e-17; ident 7.8e-15; min[R^max(e) - (h - e)] = 5.3e-05
+   p=0.3 u=1.0: slopes of R^max in [-1.0000, 0.0000], min second difference 0.0e+00; S nondecreasing (min increment 0.0e+00); R^max = 0 beyond E (0.0e+00), > 0 below (2.5e-06); R^max(e) = -e for e <= -a (4.7e-16); theta_na nonincreasing (1.2e-15), <= a (-5.7e-03), max jump 7.4e-03; theta_na(h) - h = 1.6e-16; ident 1.0e-14; min[R^max(e) - (h - e)] = 5.1e-05
+   p=0.5 u=1.0: slopes of R^max in [-1.0000, 0.0000], min second difference 0.0e+00; S nondecreasing (min increment 0.0e+00); R^max = 0 beyond E (0.0e+00), > 0 below (2.2e-06); R^max(e) = -e for e <= -a (3.3e-16); theta_na nonincreasing (2.6e-15), <= a (-6.2e-03), max jump 8.9e-03; theta_na(h) - h = -1.1e-16; ident 9.7e-15; min[R^max(e) - (h - e)] = 5.1e-05
+   p=0.05 u=2.0: slopes of R^max in [-1.0000, 0.0000], min second difference 0.0e+00; S nondecreasing (min increment 0.0e+00); R^max = 0 beyond E (0.0e+00), > 0 below (1.9e-06); R^max(e) = -e for e <= -a (3.1e-16); theta_na nonincreasing (1.7e-15), <= a (-5.0e-03), max jump 7.5e-03; theta_na(h) - h = 1.2e-16; ident 7.5e-15; min[R^max(e) - (h - e)] = 5.3e-05
+   p=0.2 u=4.0: slopes of R^max in [-1.0000, 0.0000], min second difference 0.0e+00; S nondecreasing (min increment 0.0e+00); R^max = 0 beyond E (0.0e+00), > 0 below (1.6e-07); R^max(e) = -e for e <= -a (3.3e-16); theta_na nonincreasing (0.0e+00), <= a (-7.8e-03), max jump 4.9e-02; theta_na(h) - h = -2.8e-17; ident 4.0e-15; min[R^max(e) - (h - e)] = 6.0e-05
+   p=0.8 u=0.5: slopes of R^max in [-1.0000, 0.0000], min second difference 0.0e+00; S nondecreasing (min increment 0.0e+00); R^max = 0 beyond E (0.0e+00), > 0 below (1.3e-05); R^max(e) = -e for e <= -a (3.9e-16); theta_na nonincreasing (3.2e-15), <= a (-2.7e-03), max jump 9.3e-04; theta_na(h) - h = -9.5e-15; ident 9.1e-15; min[R^max(e) - (h - e)] = 5.0e-05
+(iii) every-n lower bound at gamma*|x| (Theorem F1(a): E|Q| >= (1-2 delta) exp(n [F(gamma*,t*) - t* eps1])) against exp(n R_0)
+   p=0.1 u=2.0 eps1=0.3E: R^max = 0.023270 = F(gamma*,t*) - t* eps1 = 0.023270 at gamma* = -0.5634, t* = 0.3166 (game value by LP: 0.023270); R_0 = 0.019497; the bound exceeds e^(n R_0) for n > ln(1/(1-2 delta))/(R^max - R_0) = 184 (delta = 1/4)
+   p=0.3 u=1.0 eps1=0.3E: R^max = 0.012209 = F(gamma*,t*) - t* eps1 = 0.012209 at gamma* = -0.0818, t* = 0.3397 (game value by LP: 0.012209); R_0 = 0.012049; the bound exceeds e^(n R_0) for n > ln(1/(1-2 delta))/(R^max - R_0) = 4336 (delta = 1/4)
+   p=0.2 u=4.0 eps1=0.3E: R^max = 0.100321 = F(gamma*,t*) - t* eps1 = 0.100321 at gamma* = -0.8645, t* = 0.2542 (game value by LP: 0.100321); R_0 = 0.086324; the bound exceeds e^(n R_0) for n > ln(1/(1-2 delta))/(R^max - R_0) = 50 (delta = 1/4)
+   p=0.05 u=2.0 eps1=0.1E: R^max = 0.022897 = F(gamma*,t*) - t* eps1 = 0.022897 at gamma* = -0.7052, t* = 0.4158 (game value by LP: 0.022897); R_0 = 0.019026; the bound exceeds e^(n R_0) for n > ln(1/(1-2 delta))/(R^max - R_0) = 179 (delta = 1/4)
+[301s]
+
+real	5m2.087s
+user	4m58.892s
+sys	0m1.062s

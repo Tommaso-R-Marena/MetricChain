@@ -1,0 +1,13 @@
+=== p9_00b_consistency K4 on H, tau 0.7; started 2026-11-26 10:51:55 UTC
+    100 atoms, 4 sites, states per site [14, 14, 12, 7], anchor [10, 10, 8, 3]
+--- m = 3: 4 subsets, 64 blocks; C1 stage-1 block maximum against P8's 'SAb' block constant: largest relative deviation 0.0e+00; C2 stage 2 in maxmode against stage 1: largest deviation relative to the block maximum 4.2e-16; C3 stage 2 > stage 1 at 0 table entries; C4 lite outside [stage 2, stage 1] at 0 entries; seconds per subset: stage 1 0.102, stage 2 0.009, lite 0.008
+    sums over these subsets (kT): SAb 13.93 | stage 1: max 13.89, median 8.427, min 7.0384 | stage 2: max 8.7237, median 0.48619, min 0.0025792 | lite: max 8.7393, median 0.52517, min 0.042267
+      T = (0, 1, 2): SAb 3.814 | stage 1 max/med/min 3.814 2.234 1.939 | stage 2 2.493 0.1068 0.0003107 | lite 2.497 0.1182 0.01198
+      T = (0, 1, 3): SAb 2.487 | stage 1 max/med/min 2.466 1.461 1.167 | stage 2 1.532 0.09804 0.0005798 | lite 1.534 0.1023 0.004857
+      T = (0, 2, 3): SAb 0.9571 | stage 1 max/med/min 0.9543 0.6329 0.504 | stage 2 0.5072 0.0455 0.0003387 | lite 0.5082 0.04826 0.003149
+      T = (1, 2, 3): SAb 1.047 | stage 1 max/med/min 1.047 0.6966 0.5866 | stage 2 0.6682 0.03954 0.0003084 | lite 0.6713 0.04431 0.005216
+--- m = 4: 1 subsets, 16 blocks; C1 stage-1 block maximum against P8's 'SAb' block constant: largest relative deviation 0.0e+00; C2 stage 2 in maxmode against stage 1: largest deviation relative to the block maximum 3.7e-16; C3 stage 2 > stage 1 at 0 table entries; C4 lite outside [stage 2, stage 1] at 0 entries; seconds per subset: stage 1 0.004, stage 2 0.021, lite 0.023
+    sums over these subsets (kT): SAb 0.33669 | stage 1: max 0.33572, median 0.22804, min 0.18589 | stage 2: max 0.17227, median 0.0027398, min 1.1252e-06 | lite: max 0.17227, median 0.0027398, min 1.1252e-06
+      T = (0, 1, 2, 3): SAb 0.2007 | stage 1 max/med/min 0.2001 0.1359 0.1108 | stage 2 0.1027 0.001633 6.708e-07 | lite 0.1027 0.001633 6.708e-07
+foreign writes attempted during import (refused): 0
+ALL DONE 2 s; peak RSS 150 MB

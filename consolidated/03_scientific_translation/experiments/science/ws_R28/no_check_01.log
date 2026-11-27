@@ -1,0 +1,23 @@
+R28 no_check.py  start 2026-11-27T00:24:22Z
+S1 580 tiny models of 5 shapes, 91258880 vertex scenarios enumerated in all
+   (N) criterion equals enumeration in 580/580  (necessarily optimal in 179)
+   (U) criterion equals enumeration in 580/580  (necessarily the only minimiser in 151)
+   controls — mutilated criteria, disagreements with enumeration (each must be > 0): others not lowered 177; own entries not raised 159; no allowance 401; pair bounds ignored 181
+S2 possibly optimal: criterion (own entries lowered, others raised) equals enumeration for 5430/5430 configurations
+S3 per site and well (2720 cases): the 'no possibly-optimal configuration outside W' form equals enumeration in 2720; sufficient and true 1373; TRUE WITHOUT the sufficient condition 49; sufficient but false 0 (must be 0); neither 1298
+   explicit example (2 sites x 2 states; energies in tenths; every entry within b = 10):
+      configurations [(0, 0), (0, 1), (1, 0), (1, 1)]: nominal energies [0, 1, 50, 50]; x* = (0, 0)
+      x* necessarily optimal: False;  site 0 keeps its state in every one of the 256 vertex scenarios: True;  sufficient condition (E~ of every configuration with another state at site 0 above E~(x*)): False  [E~ = [30, -9, 40, 20]]
+S4 400 larger models (3-6 sites, 2-4 states, complete and random sparse graphs): (N) holds in 249, fails in 151; where it holds: x* not a minimiser in 0 of 14940 sampled scenarios (must be 0); where it fails: E~ has a strictly better configuration in 151/151 (must be all)
+S5 complete graphs, uniform b, 392 models with a unique minimiser: exact radius b* <= gap/(2n) in 392 (must be all); b* = gap/(2n) in 194; b* < gap/(2n) in 198 (the binding competitor differs at several sites in 200; the second-best configuration differs at several sites in 114); radius confirmed by the criterion just below / just above in 784/784
+   entries a configuration differing at d of n sites uses that x* does not (complete graph): d(2n+1-d)/2 — checked for n = 2..6: True; d = 1 gives n, the smallest value
+   path graphs (each site in at most two pair tables): b* EXCEEDS gap/(2n) in 245 of 293 models — the count 2n holds for dense tables only; in general it is 2(1 + degree of the flipped site)
+S6 gap/(2n) for the five published (sites, gap in kcal/mol):
+   1CRN: 0.0451 / (2 x 26) = 8.6731e-04  -> two significant digits 8.7e-04; claimed 8.7e-04; equal: True; with the gap known to +-5e-5: 8.663e-04 .. 8.683e-04; one-site allowance 2bn at b = 2^-21: 2.480e-05
+   5PTI: 0.0243 / (2 x 36) = 3.3750e-04  -> two significant digits 3.4e-04; claimed 3.4e-04; equal: True; with the gap known to +-5e-5: 3.368e-04 .. 3.382e-04; one-site allowance 2bn at b = 2^-21: 3.433e-05
+   1BPI: 0.1102 / (2 x 36) = 1.5306e-03  -> two significant digits 1.5e-03; claimed 1.5e-03; equal: True; with the gap known to +-5e-5: 1.530e-03 .. 1.531e-03; one-site allowance 2bn at b = 2^-21: 3.433e-05
+   1PGA: 0.0068 / (2 x 46) = 7.3913e-05  -> two significant digits 7.4e-05; claimed 7.4e-05; equal: True; with the gap known to +-5e-5: 7.337e-05 .. 7.446e-05; one-site allowance 2bn at b = 2^-21: 4.387e-05
+   2IGD: 0.0039 / (2 x 49) = 3.9796e-05  -> two significant digits 4.0e-05; claimed 4.0e-05; equal: True; with the gap known to +-5e-5: 3.929e-05 .. 4.031e-05; one-site allowance 2bn at b = 2^-21: 4.673e-05
+   disagreements: 0 of 5;  2^-21 = 4.7684e-07 (the 'rounding unit 4.8e-7' of the text)
+   one-site allowance 2bn for n = 26 and n = 65: b = 2^-21: 2.48e-05, 6.20e-05; b = 0.01: 0.52, 1.30; b = 0.1: 5.2, 13.0
+END 2026-11-27T00:25:11Z  wall 48.6 s  peak memory 691 MB (ru_maxrss; address space capped at 3 GB)

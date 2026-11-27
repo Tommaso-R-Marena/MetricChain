@@ -1,0 +1,13 @@
+# one level exactly, cube u = 1, sizes [300, 1000, 3000]
+Part 1: 2548 levels by my evaluator and by theirs (qlib + r12lib): largest difference of ln C_max, accuracy, ln delta' = 1.24e-12;
+        levels on which an integer constant (J, K, r_dagger, m_max) differs: 0;  their two evaluators differ by at most 1.4e-14
+        d = 300 done (37674 levels so far, 6 s)
+        d = 1000 done (80010 levels so far, 13 s)
+        d = 3000 done (122472 levels so far, 35 s)
+Part 2: 18 families x 7 accuracies x sizes = 378 cases, 122472 levels evaluated exactly with my evaluator
+        violations: (A) accuracy 0, (B) (U-infinity) 0, (C) exponent step 0, (D) the type 0   [each must be 0]
+        least slack in nats: (B) 7.670, (C) 1.222, (D) 15.626
+        controls: (D) without its losses fails in 362 cases; (C) with the second envelope step fails in 127 cases   [each must be > 0]
+        control (families that are NOT convex, d = 300): the claim (C) with the line-by-line value fails in 6 of 24 cases   [must be > 0]
+ONELEVEL: no violation; all controls fail as they must
+R29-END r29_i35_onelevel u=1 sizes=[300, 1000, 3000] wall 35.6 s; address-space cap 3 GB; peak RSS 63.3 MB

@@ -1,0 +1,12 @@
+n= 5 conformations=     99 classes=    30 pairs/bead=1.62 sigma(0.25)=0.009 sigma(0.5)=0.087 sigma(1)=0.313 sigma(1.25)=0.354 sigma(2.5)=0.560 sigma(5)=0.661  (0 s)
+n= 6 conformations=    239 classes=    60 pairs/bead=1.88 sigma(0.25)=0.019 sigma(0.5)=0.091 sigma(1)=0.314 sigma(1.25)=0.385 sigma(2.5)=0.567 sigma(5)=0.661  (0 s)
+n= 7 conformations=    577 classes=   136 pairs/bead=2.08 sigma(0.25)=0.034 sigma(0.5)=0.119 sigma(1)=0.358 sigma(1.25)=0.433 sigma(2.5)=0.591 sigma(5)=0.675  (0 s)
+n= 8 conformations=   1393 classes=   291 pairs/bead=2.27 sigma(0.25)=0.085 sigma(0.5)=0.182 sigma(1)=0.390 sigma(1.25)=0.460 sigma(2.5)=0.606 sigma(5)=0.682  (0 s)
+n= 9 conformations=   3363 classes=   639 pairs/bead=2.43 sigma(0.25)=0.101 sigma(0.5)=0.229 sigma(1)=0.424 sigma(1.25)=0.484 sigma(2.5)=0.620 sigma(5)=0.689  (1 s)
+n=10 conformations=   8115 classes=  1360 pairs/bead=2.58 sigma(0.25)=0.116 sigma(0.5)=0.258 sigma(1)=0.448 sigma(1.25)=0.502 sigma(2.5)=0.628 sigma(5)=0.692  (2 s)
+n=11 conformations=  19559 classes=  2908 pairs/bead=2.72 sigma(0.25)=0.130 sigma(0.5)=0.279 sigma(1)=0.465 sigma(1.25)=0.518 sigma(2.5)=0.635 sigma(5)=0.696  (8 s)
+rows regenerated identical to stored (all fields but timings): {'5': True, '6': True, '7': True, '8': True, '9': True, '10': True, '11': True, '12': True, '13': True, '14': True}
+
+real	0m11.529s
+user	0m4.821s
+sys	0m2.463s

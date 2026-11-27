@@ -1,0 +1,3 @@
+remainder identity, g_GB of Val6/PPII (729 states), 40 random x, all m: max |lhs - rhs| = 1.78e-13 kcal/mol
+remainder identity, random function on a 3x4x2x3x3 grid, anchor (1,2,0,1,2):           max |lhs - rhs| = 7.11e-15
+Corollary L1 (phi = tanh, orders 1..4, 2000 random cases): max(|Delta| - bound) = -2.90e-10 (must be <= 0)

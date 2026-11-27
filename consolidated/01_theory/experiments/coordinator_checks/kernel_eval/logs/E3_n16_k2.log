@@ -1,0 +1,15 @@
+import took 167ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E3_n16_k2.lean
+MEASURE wall_seconds: 22.49
+MEASURE user_seconds: 0.00
+MEASURE sys_seconds: 0.00
+MEASURE max_rss_kb: 8948
+MEASURE polled_peak_rss_kb: 5003192
+MEASURE rss_watchdog_killed: yes
+MEASURE result: killed by signal 9
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E3_n16_k2.lean
+RUN bytes: 42907
+RUN sha256: 5286f674b4ab4018ac5448837d769055f5a7db835a1803cfbb9bc692bd1fd406
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 137

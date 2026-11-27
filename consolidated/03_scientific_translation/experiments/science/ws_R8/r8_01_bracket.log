@@ -1,0 +1,49 @@
+== A1/A3: random members, exact enumeration ==
+  members tested: 576
+  min over members of  S - n h(sigma_u)   = -7.327e-15   (must be >= 0)
+  min over members of  n ln2 - S          = 9.355e-07   (must be >= 0)
+  max excursion of a conditional probability outside [sigma,1-sigma] = 1.110e-16
+  least (S - n h)/(n a) per family (0 = lower end attained):
+     lower env noise      -0.000000
+     upper env noise      -0.000000
+     min of cones         0.000000
+     plateaus             0.015558
+     additive             0.056580
+     full cone            -0.000000
+     dist to code         0.000000
+     rugged saturating    0.484116
+== A2: adversarial minimisation of the entropy over the class ==
+  n=3 u=0.50: min entropy found 1.9885419557   n h(sigma_u) = 1.9885419557   diff -3.33e-15
+  n=3 u=1.00: min entropy found 1.7466093267   n h(sigma_u) = 1.7466093267   diff -4.88e-15
+  n=3 u=2.00: min entropy found 1.0960015653   n h(sigma_u) = 1.0960015653   diff -1.02e-14
+  n=3 u=4.00: min entropy found 0.2702843033   n h(sigma_u) = 0.2702843033   diff -1.11e-16
+  n=4 u=0.50: min entropy found 2.6513892743   n h(sigma_u) = 2.6513892743   diff -8.88e-16
+  n=4 u=1.00: min entropy found 2.3288124356   n h(sigma_u) = 2.3288124356   diff -1.33e-15
+  n=4 u=2.00: min entropy found 1.4613354203   n h(sigma_u) = 1.4613354203   diff -7.11e-15
+  n=4 u=4.00: min entropy found 0.3603790711   n h(sigma_u) = 0.3603790711   diff -3.11e-15
+  n=5 u=0.50: min entropy found 3.3142365929   n h(sigma_u) = 3.3142365929   diff -4.44e-16
+  n=5 u=1.00: min entropy found 2.9110155444   n h(sigma_u) = 2.9110155444   diff -8.88e-16
+  n=5 u=2.00: min entropy found 1.8266692754   n h(sigma_u) = 1.8266692754   diff -5.11e-15
+  n=5 u=4.00: min entropy found 0.4504738388   n h(sigma_u) = 0.4504738388   diff -7.77e-16
+  n=6 u=1.00: greedy descent, least entropy 3.49321865   n h(sigma_u) = 3.49321865   diff +0.00e+00
+  n=6 u=3.00: greedy descent, least entropy 1.14518983   n h(sigma_u) = 1.14518983   diff -5.11e-15
+  n=8 u=1.00: greedy descent, least entropy 4.65762487   n h(sigma_u) = 4.65762487   diff +8.88e-16
+  n=8 u=3.00: greedy descent, least entropy 1.52691977   n h(sigma_u) = 1.52691977   diff -1.78e-15
+  n=10 u=1.00: greedy descent, least entropy 5.86925542   n h(sigma_u) = 5.82203109   diff +4.72e-02
+  n=10 u=3.00: greedy descent, least entropy 1.90864971   n h(sigma_u) = 1.90864971   diff +0.00e+00
+== A4: product reference Bern(p)^n ==
+  cases 288: min( -U - ln(Z_g/Z_0) ) = 7.300e-06 ; min( ln(Z_g/Z_0) + U + n max KL ) = 0.000e+00  (both >= 0)
+  cone around 0^n (g = u|x|): -U - ln(Z/Z0) = 1.4078963345 ; n KL(a0||p) = 1.4078963345 ; n KL(a1||p) = 2.3729357998
+  cone around 1^n (g = -u|x|): -U - ln(Z/Z0) = 2.3729357998 ; n KL(a0||p) = 1.4078963345 ; n KL(a1||p) = 2.3729357998
+== A5: mutation (the test must be able to fail) ==
+  1.5u-cone: S = 4.750516 < n h(sigma_u) = 5.822031 : violation detected = True
+== B: Corollary A16.2 ==
+  u=0.5: a(u)=0.03030  ln cosh(u/2)=0.03093  KL(1/2||s)-lncosh=9.7e-42  series ok  exponent without datum at eps1=a: 3.175e-06  rho0+a/u=0.49874
+  u=1.0: a(u)=0.11094  ln cosh(u/2)=0.12011  KL(1/2||s)-lncosh=-1.4e-42  series ok  exponent without datum at eps1=a: 1.682e-04  rho0+a/u=0.49083
+  u=2.0: a(u)=0.32781  ln cosh(u/2)=0.43378  KL(1/2||s)-lncosh=0.0e+00  series ok  exponent without datum at eps1=a: 5.625e-03  rho0+a/u=0.44702
+  u=4.0: a(u)=0.60305  ln cosh(u/2)=1.32500  KL(1/2||s)-lncosh=2.3e-41  series ok  exponent without datum at eps1=a: 6.665e-02  rho0+a/u=0.31951
+SUMMARY {'A1': True, 'A2': np.True_, 'A4': np.True_, 'A5': np.True_, 'B': True}   time 132.0s
+
+real	2m13.078s
+user	1m41.323s
+sys	0m0.083s

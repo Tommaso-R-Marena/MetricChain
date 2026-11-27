@@ -1,0 +1,6 @@
+(3) one-coordinate macrostates: {'additive': '3.36e-15', 'lower_gap': '6.55e+00', 'upper_gap': '7.46e+01', 'lower_viol': '0.00e+00', 'upper_viol': '0.00e+00', 'strict_lower': 120, 'strict_upper': 120, 'cases': 120}
+(4) n=  6 types=  28  ln R+/n: cone 0.53013 <= LP 0.54618 <= plan 0.70806;  max-min on types 0.42496
+(4) n=  9 types=  55  ln R+/n: cone 0.45791 <= LP 0.46840 <= plan 0.57159;  max-min on types 0.36124
+(4) n= 12 types=  91  ln R+/n: cone 0.40211 <= LP 0.41028 <= plan 0.52617;  max-min on types 0.31609
+(4) n= 15 types= 136  ln R+/n: cone 0.37966 <= LP 0.38553 <= plan 0.44920;  max-min on types 0.31521
+(4) n= 18 types= 190  ln R+/n: cone 0.42046 <= LP 0.42765 <= plan 0.47602;  max-min on types 0.34979

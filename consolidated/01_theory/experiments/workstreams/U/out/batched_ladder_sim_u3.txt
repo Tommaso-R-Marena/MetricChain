@@ -1,0 +1,8 @@
+u = 3.0, runs per mutation <= 100, seed 7
+mutation=None: {'runs': 100, 'closed': 100, 'good': 82, 'good_contained': 82, 'bad_event': 18, 'bad_event_notcontained': 0, 'violA': 0, 'violB': 0, 'invalid': 0, 'neg_levels': 348, 'pop_levels': 5379}  max |C_l|/bound = 0.009  calls at rungs 2,3,4: sequential [330144, 144827, 37015] batched [24669736, 12066844, 3497467] of [82984960, 59809792, 34390016] sampled points  (64s)
+mutation=M1: {'runs': 100, 'closed': 100, 'good': 82, 'good_contained': 69, 'bad_event': 18, 'bad_event_notcontained': 2, 'violA': 13, 'violB': 0, 'invalid': 0, 'neg_levels': 348, 'pop_levels': 5379}  max |C_l|/bound = 0.001  calls at rungs 2,3,4: sequential [330144, 144827, 37015] batched [13720008, 7076674, 1366278] of [82984960, 59809792, 34390016] sampled points  (61s)
+mutation=M2: {'runs': 100, 'closed': 100, 'good': 82, 'good_contained': 75, 'bad_event': 18, 'bad_event_notcontained': 3, 'violA': 7, 'violB': 0, 'invalid': 0, 'neg_levels': 348, 'pop_levels': 5379}  max |C_l|/bound = 0.004  calls at rungs 2,3,4: sequential [330144, 144827, 37015] batched [21435530, 10279946, 2753690] of [82984960, 59809792, 34390016] sampled points  (64s)
+
+real	3m9.147s
+user	2m51.737s
+sys	0m14.625s

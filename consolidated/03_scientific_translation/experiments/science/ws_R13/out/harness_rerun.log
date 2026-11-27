@@ -1,0 +1,54 @@
+66cc05bbc2514bfecd5d240d024e19e740372400493178678e60c072cfd8031d  /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_63e36f7/experiments/falsify_conjectures.py
+Thu Nov 26 05:30:22 UTC 2026
+### cmd: python3 -I -B /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_63e36f7/experiments/falsify_conjectures.py --only "XI.21 "   (full mode)
+MetricChain falsification harness — seed=20261124, trials/test=400
+[                survived] XI.21 Share certificates after the Scientific Discovery Division's review SCI-REV-0012 (theory report Propositions 11.18b (d), (e) and 11.18c (a) as corrected; StateShares.lean).  (a) State-dependent shares s_ij(a) >= 0 with s_ij(a) + s_ji(b) >= c_ij - T_ij(a, b) for changed states and loads sum_j s_ij(a) <= A_i(a) certify that the reference minimises the pairwise lower model L(x) - L(x0) = sum_{i changed} A_i(x_i) + sum_{i<j changed} [T_ij(x_i, x_j) - c_ij]; constant shares of the deficits are a special case and strictly weaker (an instance with two sites and three states, the one of stateShare_witness); (b) such shares exist exactly when the reference solves the pairwise linear relaxation (local polytope) of the minimisation of L - they are a dual solution - so they can fail although the reference minimises L (an explicit frustrated triangle with an integrality gap); (c) on a reset-closed domain that is not a product the sound direction survives (shares imply that the reference minimises the lower model over the domain) and completeness does not: two sites with states {0, 1, 2}, the pair of states (1, 1) excluded, excitation energies (1, 10), pair constant 3 - the reference is certified for every member of the class on the domain (linear programme over the class) although the set of both sites is over-dense, 3 > 1 + 1  (2.8s) instances=200, state=146, const=138, state_not_const=9, minimiser=148, gap=2, domains=100, nonproduct=97, complete_fails=11, sound_domain=55
+
+ALL TESTS BEHAVE AS EXPECTED
+
+real	0m3.985s
+user	0m2.013s
+sys	0m0.329s
+exit 0
+### cmd: python3 -I -B /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_63e36f7/experiments/falsify_conjectures.py --only "XVIII.8 "   (full mode)
+MetricChain falsification harness — seed=20261124, trials/test=400
+[                survived] XVIII.8 The concatenation error of bridges is a coboundary (theory report Proposition 11.69b as adopted at the eighteenth checkpoint: Theorem R9.1(a)-(e) of the Scientific Discovery Division, SCI-REV-0009; verified exhaustively up to 14 and 22 beads in experiments/coordinator_checks/limit_shape_review/r9/).  For a bridge x with last bond b and bond before it b', a bond c1 is admissible if c1 = b' when b' is an up-bond and if c1 is an up-bond out of the last bead otherwise; t1 = last + c1, t2 = t1 + b, t3 = t2 + c1 are beads N, N+1, N+2 and s1 = x0 - u2, s2 = s1 - u1, s3 = s2 - u2 beads -1, -2, -3; A(x, c1) counts the pairs (t_j, x_p) at chain separation at least 3 at squared distance 3, 8, 11, followed by [b' is a down-bond], and B(x) the same for the s_j, followed by 0.  Then (a) (h, g)(x1 o x2) = (h, g)(x1) + (h, g)(x2) + A(x1, c1) + B(x2), B(x1 o x2) = B(x1), and A(x1 o x2, phi(c1'')) = A(x2, c1'') for every bond admissible for x2, the phi(c1'') being the bonds admissible for the concatenation: (h, g) + A + B is exactly additive for all bridges; (b) clean bridges (b' up, A = 0, B = 0 - the same set as in XVIII.7) concatenate to clean bridges; (c) a head of two beads and a tail of three turn every bridge into a clean one with (h, g) = (h, g)(x) + A(x, c1) + B(x), a head of one bead fails for a bridge with 8 beads and a tail of two for a bridge with 12; 0 <= A <= (1, 6, 10; 1) and 0 <= B <= (0, 3, 4; 0), both attained, so that the concatenation of a bridge with 21 beads and one with 14 has the error (1, 9, 14; 1) of norm 60; (d) (h, g)/N is within 108/(N + 3) of the exact point ((h, g) + A + B)/(N + 3); (e) five clean bridges with 4, 5, 7, 8, 10 beads have vectors (h3, h8, h11, g; N + 3) of determinant 1  (1.1s) bridges=1312, pairs=1750, nonzero_error=521, with_B=72, two_bonds_differ=8, clean_pairs=1042, cleaned=1508, head1_fails=24, largest_A=(0, 1, 2, 1), largest_B=(0, 1, 2, 0), closest_108=0.142
+
+ALL TESTS BEHAVE AS EXPECTED
+
+real	0m1.491s
+user	0m1.192s
+sys	0m0.048s
+exit 0
+### cmd: python3 -I -B /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_63e36f7/experiments/falsify_conjectures.py --only "XXV.1 "   (full mode)
+MetricChain falsification harness — seed=20261124, trials/test=400
+[                survived] XXV.1 Nearest-neighbour chains as known parts: the two exact reductions to products of blocks, and the lower bound for every algorithm (theory report Theorem 11.116(a)-(c); workstream Y, Theorems Y1, Y3 and Lemma A; re-derived by referee R11 and by the Scientific Discovery Division, SCI-REV-0010).  (U) With cuts between blocks, pi = rho e^{-g}/E_rho e^{-g} for the product rho of the free-boundary block laws and g the cut interactions, ln A_pi(psi) = ln A_rho(psi + g) - ln A_rho(g), and psi + g lies in the class of the envelope with the slacks delta^-(a, a') = max_b [J(a, b) - J(a', b)] at the site left of a cut and delta^+(b, b') = max_a [J(a, b) - J(a, b')] at the site right of it - and not in the class without them; (L') for blocks with gaps, the marginal on the blocks is the product of the block marginals times prod rho_j, and for every psi' in the class of the envelope reduced by eps^-/+ at the block ends, psi' + sum ln rho_j is a member of the chain's class with A_pi = A_product(psi') exactly; (A) for any label law M and 0 < t < 1 the soft minimum gamma* of the normalised labels is a member, sum_phi M(phi) (pi_phi/pi_gamma*)^t is the constant e^{-G_t(M)}, and gamma* - (r - Phi_phi)_+ is a member that raises ln A by at least r  (0.1s) chains=20, U=80, U_needs_slack=78, Lp=30, Lp_needs_reduction=28, A=20, worst=8.882e-16
+
+ALL TESTS BEHAVE AS EXPECTED
+
+real	0m0.535s
+user	0m0.366s
+sys	0m0.051s
+exit 0
+### cmd: python3 -I -B /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_63e36f7/experiments/falsify_conjectures.py --only "XXV.2 "   (full mode)
+MetricChain falsification harness — seed=20261124, trials/test=400
+[                survived] XXV.2 The symmetric binary chain with flip probability p at slope u: what the interaction does to the exponents (theory report Theorem 11.116(d)-(f), Proposition 11.117; workstream Y, Propositions F, J; referee R11, section 4.4; Scientific Discovery Division, SCI-REV-0010, finding M1).  (a) The Markov recursion: for every member phi, every Markov chain Q and 0 < t < 1, sum_x pi_phi^t Q^{1-t} >= prod_i c_i with c_i the least one-site value over the class of the envelope with the one-sided slack d*_i = d_i + G_i (random inhomogeneous chains); (b) the threshold: max over all vertices of KL(pi || pi_phi) is attained by the uniform field and equals ln Z_n(u/2)/Z_n(0) for n <= 4, whose growth rate is E_F = ln[(1-p)cosh(u/2) + sqrt((1-p)^2 sinh^2(u/2) + p^2)] > ln cosh(u/2); (c) at u = 1 the exponent of every algorithm is above the uniform cube's: with block labels of reduced end slopes the product of block Gibbs laws is the Gibbs law of a member of the chain's class (checked end to end on 8 sites), so G_t of one block of 10 sites divided by 10 is a lower bound for every algorithm, and it exceeds 0.029139 at p = 0.3; (d) the direction depends on the slope: at (p, u) = (0.2, 3) the capacity of the block channel of three sites with slopes (u, u, u*), divided by 3 - an upper bound for the non-adaptive exponent at vanishing accuracy - is below the cube's ln 2 - H(1/(1+e^u)), while the threshold is above the cube's at every slope  (2.7s) F_cases=100, F_smallest=1.063, F_needs_slack=1, thr=6, block_bound=0.03276, reversal=0.9308
+
+ALL TESTS BEHAVE AS EXPECTED
+
+real	0m3.130s
+user	0m2.589s
+sys	0m0.064s
+exit 0
+### cmd: python3 -I -B /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_63e36f7/experiments/falsify_conjectures.py --only "XXV.3 "   (full mode)
+MetricChain falsification harness — seed=20261124, trials/test=400
+[                survived] XXV.3 The small-slope law (theory report Proposition 11.117(b): Propositions R10.1, R10.2 of the Scientific Discovery Division, SCI-REV-0010).  For a finite space with law pi and envelope u d_0, F*(t) = (t(1-t)/2) u^2 V + O(u^3) with V the largest variance of a function that is 1-Lipschitz for d_0; for binary sites with the Hamming envelope and an associated law (a ferromagnetic chain with any fields) V = Var(sum_i s_i)/4, attained by the uniform field; for an antiferromagnetic chain it is the staggered field and Var(sum s_i)/4 is strictly smaller, so the factor is the structure factor at zero wave vector for ferromagnetic chains only; for the symmetric chain Var(sum s_i)/n tends to (1-p)/p  (0.0s) chains=15, random_f=200, closest=1, expansion=[(0.9979, 0.9981), (0.9971, 0.9976), (0.9995, 0.9995), (0.9993, 0.9994)]
+
+ALL TESTS BEHAVE AS EXPECTED
+
+real	0m0.583s
+user	0m0.335s
+sys	0m0.052s
+exit 0
+Thu Nov 26 05:30:32 UTC 2026
+R13_10_DONE

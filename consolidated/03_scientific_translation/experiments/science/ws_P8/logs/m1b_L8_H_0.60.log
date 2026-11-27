@@ -1,0 +1,8 @@
+=== p8_01b_restricted: L8 on H, tau 0.6: atoms 164, sites 8, 256 states, anchor (1, 1, 1, 1, 1, 1, 1, 1); 210 subsets
+    row 164/164 done, checkpoint written, 6 s, RSS 137 MB
+    checks: PPA <= PP for every (T, pair): 2841300 comparisons, 0 violations; equal where no host of the pair is outside T: 1519476 of 1519476
+    order 3: sum over subsets and pairs of the exact constants: all contexts 1.057914e+02, hosts outside T at the anchor 1.020982e+02 (ratio 1.036)
+    order 4: sum over subsets and pairs of the exact constants: all contexts 1.012338e+01, hosts outside T at the anchor 9.856596e+00 (ratio 1.027)
+    order 5: sum over subsets and pairs of the exact constants: all contexts 7.139975e-01, hosts outside T at the anchor 7.021911e-01 (ratio 1.017)
+    order 6: sum over subsets and pairs of the exact constants: all contexts 3.800748e-02, hosts outside T at the anchor 3.769230e-02 (ratio 1.008)
+DONE in 8.4 s; peak RSS 239 MB

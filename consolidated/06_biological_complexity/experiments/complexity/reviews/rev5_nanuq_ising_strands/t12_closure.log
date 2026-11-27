@@ -1,0 +1,12 @@
+n = 4: 6 circular splits, 6 pairs, rank of the split metrics = 6
+n = 5: 10 circular splits, 10 pairs, rank of the split metrics = 10
+n = 6: 15 circular splits, 15 pairs, rank of the split metrics = 15
+n = 7: 21 circular splits, 21 pairs, rank of the split metrics = 21
+n = 8: 28 circular splits, 28 pairs, rank of the split metrics = 28
+n = 9: 36 circular splits, 36 pairs, rank of the split metrics = 36
+n = 10: 45 circular splits, 45 pairs, rank of the split metrics = 45
+K'_6 o (tree-generated on 3,4,5 points): 33250 substitutions, not in K': 0
+K'_6 o K'_6 (10 points): 1500 random substitutions, not in K': 0
+sanity: (outside K') o (4-point system) in K'? False
+K_6 with one leaf replaced by a cherry: 762 systems, not in K: 0
+five-point tree-generated systems with one leaf doubled: 80, not 6-locally good: 0

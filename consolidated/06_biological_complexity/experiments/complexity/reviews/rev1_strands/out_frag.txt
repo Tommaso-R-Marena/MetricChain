@@ -1,0 +1,38 @@
+instances: 112 (YES 67, NO 45)
+model                                                | NO: MFE > E_til ? (ok/bad)   | YES: MFE == E_til ? (ok/bad)       | YES: minima == tilings ? (ok/bad)   first counterexample
+(control) stack-only                                 |  45 /   0  min gap 100       |  67 /   0                        |  67 /   0   
+ext const +37                                        |  45 /   0  min gap 63        |  67 /   0                        |  67 /   0   
+ext const -37                                        |  45 /   0  min gap 100       |  67 /   0                        |  67 /   0   
+coax -50, bulge/int 0                                |  45 /   0  min gap 50        |  67 /   0                        |  67 /   0   
+coax -99, bulge/int 0                                |  45 /   0  min gap 1         |  67 /   0                        |  67 /   0   
+coax -100 (=sigma), bulge/int 0                      |  13 /  32  min gap 100       |  67 /   0                        |  34 /  33   YES (1, 1, 2) m=2 B=2: 6 minima, 4 tilings
+coax -101, bulge/int 0                               |  13 /  32  min gap 97        |  34 /  33                        |  34 /  33   YES (1, 1, 2) m=2 B=2: MFE -202 < E_til -201
+coax -150, bulge/int 0                               |  10 /  35  min gap 50        |  32 /  35                        |  30 /  37   YES (1, 1, 2) m=2 B=2: MFE -300 < E_til -250
+coax -50, bulge/int +30                              |  45 /   0  min gap 80        |  67 /   0                        |  67 /   0   
+coax -100 (=sigma), bulge/int +30                    |  45 /   0  min gap 30        |  67 /   0                        |  67 /   0   
+coax -100 (=sigma), only A-bulge +30                 |  45 /   0  min gap 30        |  67 /   0                        |  67 /   0   
+coax -101, bulge/int +30                             |  45 /   0  min gap 29        |  67 /   0                        |  67 /   0   
+coax -120, bulge/int +30                             |  45 /   0  min gap 10        |  67 /   0                        |  67 /   0   
+coax -150, bulge/int +30                             |  13 /  32  min gap 70        |  33 /  34                        |  33 /  34   YES (1, 1, 2) m=2 B=2: MFE -270 < E_til -250
+dangles -10/adjacency, bulge/int 0                   |  45 /   0  min gap 70        |  67 /   0                        |  67 /   0   
+dangles -30/adjacency, bulge/int 0                   |  45 /   0  min gap 10        |  67 /   0                        |  67 /   0   
+dangles -34/adjacency, bulge/int 0                   |  37 /   8  min gap 28        |  29 /  38                        |  29 /  38   YES (2, 1) m=1 B=3: MFE -102 < E_til -100
+dangles -50/adjacency, bulge/int 0                   |  18 /  27  min gap 50        |  29 /  38                        |  12 /  55   YES (2,) m=1 B=2: 5 minima, 1 tilings
+dangles -60/adjacency, bulge/int 0                   |  17 /  28  min gap 20        |  12 /  55                        |  12 /  55   YES (2,) m=1 B=2: MFE -120 < E_til -100
+dangles -100/adjacency, bulge/int 0                  |   8 /  37  min gap 100       |  12 /  55                        |  12 /  55   YES (2,) m=1 B=2: MFE -200 < E_til -100
+dangles -30/adjacency, bulge/int +50                 |  45 /   0  min gap 10        |  67 /   0                        |  67 /   0   
+dangles -50/adjacency, bulge/int +50                 |  18 /  27  min gap 50        |  29 /  38                        |  12 /  55   YES (2,) m=1 B=2: 5 minima, 1 tilings
+bulges -50, interior 0                               |  45 /   0  min gap 50        |  67 /   0                        |  67 /   0   
+bulges -99, interior 0                               |  45 /   0  min gap 1         |  67 /   0                        |  67 /   0   
+bulges -100 (=sigma), interior 0                     |   0 /  45  min gap None      |  67 /   0                        |  34 /  33   NO (2,) m=2 B=1: MFE -100 <= E_til -100
+bulges -101, interior 0                              |   0 /  45  min gap None      |  34 /  33                        |  34 /  33   NO (2,) m=2 B=1: MFE -101 <= E_til -100
+template-side bulges 0, item-side bulges -199        |  45 /   0  min gap 1         |  67 /   0                        |  67 /   0   
+template-side bulges 0, item-side bulges -201        |  15 /  30  min gap 98        |  38 /  29                        |  38 /  29   YES (3,) m=1 B=3: MFE -201 < E_til -200
+interior -199, bulges 0                              |  45 /   0  min gap 1         |  67 /   0                        |  67 /   0   
+interior -201, bulges 0                              |   7 /  38  min gap 100       |  38 /  29                        |  38 /  29   YES (3,) m=1 B=3: MFE -201 < E_til -200
+generalised (H2'): g = sigma*iota + 1 for bulge/int  |  45 /   0  min gap 1         |  67 /   0                        |  67 /   0   
+borderline: g = sigma*iota for bulge/int             |   0 /  45  min gap None      |  67 /   0                        |  24 /  43   YES (3,) m=1 B=3: 4 minima, 1 tilings
+Turner-2004-like bulges (no dangles), sigma=-326     |  45 /   0  min gap 326       |  67 /   0                        |  67 /   0   
+Turner-2004-like + dangles 3'=-110 5'=-30            |  45 /   0  min gap 76        |  67 /   0                        |  67 /   0   
+Turner-2004-like + coax -326                         |  45 /   0  min gap 55        |  67 /   0                        |  67 /   0   
+Turner-2004-like + coax -326 + dangles               |  45 /   0  min gap 106       |  67 /   0                        |  67 /   0   

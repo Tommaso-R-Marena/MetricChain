@@ -1,0 +1,215 @@
+6e6e32d4206e6ee14e0a9ea12dfca9919eb83ff9ba7747c6279d94b29fb47610  /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_9408e33/experiments/mutation_tests.py
+b09937abcbb4e96d464273bcac5872cdc4fd9ecec6cb46ac508a2431a74e3a7e  /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_9408e33/experiments/falsify_conjectures.py
+### cmd: python3 -I -B /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_9408e33/experiments/mutation_tests.py XXIV
+[         caught] XXIV.1 M1: largest Jensen gap claimed to be w^2/8 exactly
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.1 M2: range of ln Z after evaluations with the floor and the ceiling exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.1 M3: deterministic certificate claimed to need the mass 1 - 2q* only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.1 M4: Jensen bracket with the mean taken with the opposite sign
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M1: dip weight with the instance at the ceiling (w (e^{-lo} - e^{-hi}) replaced by w (e^{-r} - e^{-hi}))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M2: detection probability claimed without the factor 1/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M3: the least detection probability of the relaxation claimed to be at most 1.2 p (at the centre of a constant box it is exactly 2p)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.2 M4: spot check with half the number of samples
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.3 M1: a set of mass p0/2 lowered to the floor claimed to be sensitive
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.3 M2: number of disjoint sensitive dips claimed to be 1/p0
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.3 M3: upper and lower bound claimed to differ by a factor 2 at most
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.4 M1: truncated cones claimed to gain at most (e^{rho/2} - 1) per unit of support
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.4 M2: the cube exponent claimed to stay below the cap up to n = 2000
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.5 M1: empirical Bernstein bound without the range term
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.28 M1: the naive interval tested on a law without rare dips (Bernoulli(1/2)), where it does cover
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M1: the bracket claimed with half the variance
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M2: the floor measured above the mean instead of below it
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M3: the centred cumulant claimed to be at most half the variance (no floor needed)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M4: the extremal two-point law with the probability sigma^2/b^2 at the floor
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M1: the detection lemma with the exponent 1 for every order
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M2: the spot check sized with e^eps - 1 in place of 1 - e^-eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M3: the alternative of the lower bound with the height (B - B0)/q
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M4: the second moment bounded by the product of the first moment and the p-norm
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M5: the Kullback-Leibler detection bound without the term ln 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M6: the bound from one-site oscillations linear in the order
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M5: Hoeffding's bound with the weights of the two-point law exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.6 M6: the second-order lower bound with the curvature at the ceiling taken on the wrong side
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.7 M7: the sharp bound from one-site oscillations without the divergence term of one site
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M1: the detection bound of a ratio claimed at twice the level
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M2: the detection bound of a ratio without the factor one half of the mixture
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M3: the rise of the log-ratio bounded by the dips of one macrostate alone
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M4: sets with half the dip weight claimed to change the ratio by more than eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.8 M5: the cost number of a macrostate computed with the weights of the whole system
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M1: sets with half the bump weight claimed to change ln Z by more than eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M2: the two-sided statement with the packing number of the dips alone (the first version of the theorem)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M3: detection at the centre claimed at twice the bound
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.9 M4: the rule without a hint sized for dips only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M1: the sampled variable measured from the lower model
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M2: the rejection sampler accepting with the Boltzmann factor of the gap
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M3: a bracket of a quarter of the Hoeffding width
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXIV.10 M4: the gain over plain sampling claimed to be the square of E d/max d
+                  exit=1  1 TEST(S) MISBEHAVED
+
+41 mutations: 41 caught, 0 expected pass, 0 not as expected
+11 baseline runs of the unmutated harness (one per selection): 11 behave as expected, 0 misbehave
+
+real	0m38.742s
+user	0m19.929s
+sys	0m2.841s
+exit 0
+### cmd: python3 -I -B /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_9408e33/experiments/mutation_tests.py XI
+[         caught] XI.1 M1: slack without the residual terms (s = d)
+                  exit=1  2 TEST(S) MISBEHAVED
+[         caught] XI.1 M2: claim N* <= N_cov (the extra evaluation of a minimiser dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.2 M1: partition-function bound with the smallest slack partition sum (min over anchors)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.2 M2: exponential-weights bound without the factor exp(-t eps)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.3 M1: sharpness tested against half the envelope constant
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.3 M2: product bound with the smallest single-site kernel sum (min over anchor states)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.4 M1: no radius shrinkage (theta = (1-kappa)/(1+kappa))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.4 M2: separation (c) claimed for the arbitrary first point as well
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.5 M1: claim 'gamma(G) evaluations' (the minimiser is forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.5 M2: no distinguished minimiser (f = 1 everywhere)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M1: conditional envelope without the original envelope (U(x) - L(y) only)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M2: conditional envelope transposed (U(y) - L(x))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M3: claim N_point <= N_conf
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.7 M1: upper end with the transposed envelope d(x, y)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.7 M2: interval claimed 1% narrower at the lower end
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M1: entropy bound without the accuracy term t eps / beta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M2: Hoelder converse with the kernel exponent t = beta instead of beta (1 - p) / p
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M3: optimistic partition function written with the slack TO the evaluated set
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.9 M1: relative entropy with its arguments exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.9 M2: transport cost with half the envelope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.10 M1: remainder claimed to be half as large
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.10 M2: interpolant one order too low (ball of radius m - 2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.11 M1: star envelope claimed with half the pair remainder
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.11 M2: certified-minimiser criterion with the additive interpolant only (remainder ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.12 M1: cut bracket from one direction of the cut pairs only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.12 M2: elimination of an end site without the factor on the reverse ordered pair
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.7 M1: candidate restricted to evaluated points (the true statement II.4) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.13 M1: tail bound claimed with exponent -8 N eta^2 / C
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.13 M2: sampled interval without the slack |beta| eta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.9 M1: product reference with the same marginals (the true statement III.3) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.6 M1: comparison with covers at the shrunk radii (the true statement XI.4) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M1: pair shares of a quarter in place of a third (the pair penalties no longer cover the triples)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M2: the site penalty claimed to be at most the pair penalty (the order of the two forms reversed)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M3: the remainder claimed to be at most half the sum of the triple constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M4: the interpolant taken without its pair terms (order one) and claimed exact on the ball of radius two
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M5: third-order constants taken at the reference configuration only (not uniformly over base points)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.16 M6: site shares of a quarter (the site penalties no longer cover a triple at its own three sites)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M1: the row-sum condition claimed to be necessary as well (equal shares always suffice)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M2: over-dense sets searched among single sites and pairs only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M3: loads allowed up to twice the excitation energies
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M4: pairwise known part: the deficits taken without the second differences of the known part
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M5: the rule of thirds claimed to be necessary for triples
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.17 M6: pairwise known part: the largest instead of the least excitation energy of each site
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M1: the whole domain D claimed to be closed under resetting (no compatibility with the reference required)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M2: pair constants taken from the rectangles at the reference only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M3: the third-order remainder claimed to be at most half the sum of the triple constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M4: the three-point domain replaced by the full square (where a rectangle does constrain the fourth value)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.18 M5: the second-order remainder claimed to be at most half the sum of the pair constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M1: the base point of the remainder term switched at the changed sites before the last site of the set
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M2: every remainder term taken at the reference itself
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M3: site penalties with shares 1/(m + 1)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.19 M4: anchored constants taken at the reference configuration only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M1: the dimension count with k states off the reference
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M2: a hidden direction claimed for the whole ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M4: the support of a function of order below m claimed to be a fraction k^-(m-2) at least
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.20 M3: the functions of order m counted among those of order below m
+                  exit=1  1 TEST(S) MISBEHAVED
+
+56 mutations: 56 caught, 0 expected pass, 0 not as expected
+21 baseline runs of the unmutated harness (one per selection): 21 behave as expected, 0 misbehave
+
+real	3m1.932s
+user	1m29.793s
+sys	0m4.678s
+exit 0
+R12_07B_DONE

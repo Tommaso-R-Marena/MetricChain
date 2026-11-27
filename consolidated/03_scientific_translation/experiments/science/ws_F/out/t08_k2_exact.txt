@@ -1,0 +1,29 @@
+--- n=11 p=0.3 u=1.0 gamma=-0.0908 (p_gamma=0.31940); centre types 3,8; depth r=1.0; theta=0.5; |G|=110, orbit sizes 55,55
+    single types: (c1,c2-c1^2) = (0.23465,-0.004354) and (0.45696,-0.007090)   [negative: below the parabola, no mixture of product measures matches]
+    mixed excess: x=0.345251, h=y-x^2=+0.006640, self-consistency gap g=x-p_gamma=+0.025853
+    compensation: a=0.908544 (weight of the hard component), p_2=0.602081 (window [0.13619,0.53810])
+    p_2 outside the window
+--- n=13 p=0.3 u=1.0 gamma=-0.0908 (p_gamma=0.31940); centre types 4,9; depth r=1.0; theta=0.5; |G|=156, orbit sizes 78,78
+    single types: (c1,c2-c1^2) = (0.25234,-0.003743) and (0.43743,-0.005675)   [negative: below the parabola, no mixture of product measures matches]
+    mixed excess: x=0.344515, h=y-x^2=+0.003860, self-consistency gap g=x-p_gamma=+0.025117
+    compensation: a=0.859529 (weight of the hard component), p_2=0.498203 (window [0.13619,0.53810])
+    in class: base True, alternative True
+    one-body: base 0.344515286899 (spread 0.0e+00), alt spread 1.1e-15, max|alt-base| = 2.61e-15
+    two-body P(x_i=x_j=1): base 0.122550942893 (spread 4.2e-16), alt spread 2.9e-16, max|alt-base| over all 78 pairs = 4.02e-16
+    separation ln A(alt)/A(base) = 1.028890;  |difference set| = 8192 of 8192
+    control: max difference of three-body marginals P(x_i=x_j=x_l=1): 3.81e-04 (not matched, as expected)
+--- n=13 p=0.1 u=2.0 gamma=-0.5634 (p_gamma=0.16330); centre types 4,10; depth r=1.5; theta=0.5; |G|=156, orbit sizes 78,78
+    single types: (c1,c2-c1^2) = (0.15262,-0.003841) and (0.36888,-0.006142)   [negative: below the parabola, no mixture of product measures matches]
+    mixed excess: x=0.260604, h=y-x^2=+0.006702, self-consistency gap g=x-p_gamma=+0.097300
+    compensation: a=0.414489 (weight of the hard component), p_2=0.329484 (window [0.01481,0.45085])
+    in class: base True, alternative True
+    one-body: base 0.260604057451 (spread 0.0e+00), alt spread 5.0e-16, max|alt-base| = 6.66e-15
+    two-body P(x_i=x_j=1): base 0.074616446157 (spread 1.8e-16), alt spread 1.8e-16, max|alt-base| over all 78 pairs = 3.19e-16
+    separation ln A(alt)/A(base) = 0.980313;  |difference set| = 8192 of 8192
+    control: max difference of three-body marginals P(x_i=x_j=x_l=1): 2.19e-04 (not matched, as expected)
+--- n=13 p=0.2 u=1.5 gamma=-0.2624 (p_gamma=0.24530); centre types 5,9; depth r=1.2; theta=0.4; |G|=156, orbit sizes 78,78
+    single types: (c1,c2-c1^2) = (0.24032,-0.005316) and (0.40129,-0.006959)   [negative: below the parabola, no mixture of product measures matches]
+    mixed excess: x=0.336809, h=y-x^2=-0.000079, self-consistency gap g=x-p_gamma=+0.091512
+    h <= 0: no exact two-body compensation with these two types
+
+SUMMARY: max one-body deviation: 6.661338147750939e-15  max two-body deviation: 4.0245584642661925e-16

@@ -1,0 +1,9 @@
+n= 1 N= 4 conformations=       3 classes=   2  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 2 N= 5 conformations=       9 classes=   4  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 3 N= 6 conformations=      27 classes=   7  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 4 N= 7 conformations=      79 classes=  13  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 5 N= 8 conformations=     233 classes=  22  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 6 N= 9 conformations=     683 classes=  37  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 7 N=10 conformations=    2005 classes=  57  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 8 N=11 conformations=    5849 classes=  90  (A)==(B) for all: yes   class table identical to the other division's: yes
+n= 9 N=12 conformations=   17107 classes= 129  (A)==(B) for all: yes   class table identical to the other division's: yes

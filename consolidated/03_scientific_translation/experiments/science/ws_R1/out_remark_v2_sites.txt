@@ -1,0 +1,21 @@
+[PASS] (S1) thresholds, u=1: uniform, 3 letters: E in [0.119499092, 0.119499093] (claimed 0.119499); pi = (0.05, 0.5, 0.45): E in [0.120196008, 0.120196009] (claimed 0.120196); uniform, 2 letters: E in [0.120114507, 0.120114507] (claimed 0.120115)
+      uniform sites: value from the vertex channel (all 2^q - 2 vertices) | best equal grouping k | q
+        q=3 u=0.5: E = 0.029098 (k=3: 0.029098)   a = 0.030167 (k=3: 0.030167)   h = 0.007425 at t=0.505 (k=3: 0.007425)   ok
+        q=3 u=1.0: E = 0.119499 (k=3: 0.119499)   a = 0.123284 (k=3: 0.123284)   h = 0.030654 at t=0.504 (k=3: 0.030654)   ok
+        q=3 u=2.0: E = 0.474266 (k=3: 0.474266)   a = 0.433040 (k=3: 0.433040)   h = 0.117699 at t=0.488 (k=3: 0.117699)   ok
+        q=3 u=3.0: E = 0.996311 (k=3: 0.996311)   a = 0.732018 (k=3: 0.732018)   h = 0.229348 at t=0.460 (k=3: 0.229348)   ok
+        q=4 u=0.5: E = 0.030930 (k=2: 0.030930)   a = 0.030300 (k=2: 0.030300)   h = 0.007673 at t=0.497 (k=2: 0.007673)   ok
+        q=4 u=1.0: E = 0.120115 (k=2: 0.120115)   a = 0.117993 (k=4: 0.117993)   h = 0.029139 at t=0.490 (k=2: 0.029139)   ok
+        q=4 u=2.0: E = 0.454459 (k=4: 0.454459)   a = 0.468011 (k=4: 0.468011)   h = 0.119862 at t=0.504 (k=4: 0.119862)   ok
+        q=4 u=3.0: E = 1.002912 (k=4: 1.002912)   a = 0.857234 (k=4: 0.857234)   h = 0.250741 at t=0.480 (k=4: 0.250741)   ok
+[PASS] (S2) uniform sites group their letters: q = 3, 4, u in (.5,1,2,3): E, a, h equal the best equal grouping in all 8 cases (largest duality bracket 1.2e-08); q=4,u=1: E=0.120115 (=E_2, claimed 0.120115), a=0.117993 (=a_4, claimed 0.117993), h=0.029139 (=h_2, claimed 0.029139); the single-dip-on-letters values quoted at 5ed4072 for k=4 were h_4(0.5)=0.006552, h_4(1)=0.028405
+[PASS] (S3) near (1/2,1/2,0), u=0.5: pi_3=0.3333: h=0.007425; pi_3=0.1000: h=0.007610; pi_3=0.0100: h=0.007673; pi_3=0.0010: h=0.007673; pi_3=0.0001: h=0.007673  (h_2 = 0.007673, h_3 = 0.007425); a_2(0.3) = 0.011125, a_3(0.3) = 0.010582, a_2 = a_3 at u = 0.519366
+[PASS] (S4) crossings e^u = k(k-1): h_2 = h_3 at u = 0.6931471806 (ln 2 = 0.6931471806); h_3 = h_4 at u = 1.7917594692 (ln 6 = 1.7917594692); h_4 = h_5 at u = 2.4849066498 (ln 12 = 2.4849066498); h_5 = h_6 at u = 2.9957322736 (ln 20 = 2.9957322736)
+      grid of 171 three-letter laws (i,j,k)/20: the law with the largest h, against the uniform law
+        u=1.0: h(uniform) = 0.030654; largest h on the grid = 0.030572 at pi = [0.35, 0.35, 0.3]  -> uniform law hardest on the grid: True (claimed True)
+        u=2.0: h(uniform) = 0.117699; largest h on the grid = 0.117413 at pi = [0.35, 0.35, 0.3]  -> uniform law hardest on the grid: True (claimed True)
+        u=0.5: h(uniform) = 0.007425; largest h on the grid = 0.007675 at pi = [0.05, 0.45, 0.5]  -> uniform law hardest on the grid: False (claimed False)
+[PASS] (S5) which three-letter law is hardest: uniform law hardest for h on the grid at u = 1, 2; NOT at u = 0.5 (laws near (1/2,1/2,0) are harder)
+[PASS] (S6) four letters contain the binary cube: F*_(uniform 4 letters)(t) - F*_(binary cube)(t) >= -2.85e-16 for u in (.3,.5,1,2,3), t in (.2,.5,.8)
+
+SUMMARY: ALL PASS

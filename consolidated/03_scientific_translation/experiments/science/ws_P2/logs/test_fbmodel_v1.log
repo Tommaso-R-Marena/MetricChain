@@ -1,0 +1,78 @@
+
+VVVV on H (-57.0, -47.0): atoms 76, sites 4, states/site [3, 3, 3, 3]; fixed-atom clash score 0.804; states with one-site score > 0.70: [1, 1, 1, 0]
+   43 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 1.1e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 2.8e-14|6e-16; lj 2.9e-13|8e-15; coul 1.3e-13|2e-15; ff99SB_tors 7.1e-15|2e-16; ff99SB_lj 9.6e-14|4e-15; ff99SB_coul 1.8e-13|2e-15; ff03_tors 2.1e-14|6e-16; ff03_lj 9.6e-14|4e-15; ff03_coul 5.0e-14|4e-15; ff15ipq_tors 8.9e-15|6e-16; ff15ipq_lj 2.8e-13|7e-15; ff15ipq_coul 9.9e-14|1e-15; gbn2(tables) vs FastFF 2.2e-13|1e-14; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 1.4e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 4.2e-13
+   timing: setup 0.4s; FastFF 1.22 ms/conf; table GB 138 us/conf (first call includes the tables)
+
+VVVV on E (-139.0, 135.0): atoms 76, sites 4, states/site [3, 3, 3, 3]; fixed-atom clash score 0.783; states with one-site score > 0.70: [3, 3, 3, 3]
+   200 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 3.3e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 1.4e-14|3e-16; lj 1.3e-13|5e-15; coul 1.7e-13|1e-15; ff99SB_tors 2.5e-14|8e-16; ff99SB_lj 1.9e-13|7e-15; ff99SB_coul 2.7e-13|2e-15; ff03_tors 0.0e+00|0e+00; ff03_lj 1.9e-13|7e-15; ff03_coul 2.3e-13|5e-15; ff15ipq_tors 2.5e-14|1e-15; ff15ipq_lj 1.6e-13|6e-15; ff15ipq_coul 1.3e-13|2e-15; gbn2(tables) vs FastFF 3.8e-13|1e-14; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 2.0e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 7.5e-13
+   timing: setup 0.3s; FastFF 0.95 ms/conf; table GB 165 us/conf (first call includes the tables)
+
+LLL on H (-57.0, -47.0): atoms 69, sites 3, states/site [9, 9, 9]; fixed-atom clash score 0.804; states with one-site score > 0.70: [0, 0, 0]
+   26 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 2.2e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 2.1e-14|7e-16; lj 5.1e-13|6e-15; coul 1.8e-13|2e-15; ff99SB_tors 2.5e-14|8e-16; ff99SB_lj 6.3e-13|7e-15; ff99SB_coul 2.3e-13|2e-15; ff03_tors 1.8e-14|6e-16; ff03_lj 6.3e-13|7e-15; ff03_coul 7.1e-14|2e-15; ff15ipq_tors 8.0e-15|2e-15; ff15ipq_lj 5.7e-13|6e-15; ff15ipq_coul 1.1e-13|3e-15; gbn2(tables) vs FastFF 2.7e-13|1e-14; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 1.3e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 5.1e-13
+   timing: setup 0.3s; FastFF 0.59 ms/conf; table GB 173 us/conf (first call includes the tables)
+
+LLL on P2 (-75.0, 145.0): atoms 69, sites 3, states/site [9, 9, 9]; fixed-atom clash score 0.858; states with one-site score > 0.70: [0, 0, 0]
+   16 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 2.2e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 2.1e-14|7e-16; lj 7.4e-13|5e-15; coul 2.6e-13|3e-15; ff99SB_tors 2.1e-14|8e-16; ff99SB_lj 8.5e-13|5e-15; ff99SB_coul 2.8e-13|3e-15; ff03_tors 1.8e-14|8e-16; ff03_lj 8.5e-13|5e-15; ff03_coul 5.7e-14|3e-15; ff15ipq_tors 5.3e-15|5e-16; ff15ipq_lj 1.0e-12|5e-15; ff15ipq_coul 5.0e-14|2e-15; gbn2(tables) vs FastFF 1.6e-13|2e-14; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 16 conformations: 1.1e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 5.8e-13
+   timing: setup 0.2s; FastFF 0.56 ms/conf; table GB 155 us/conf (first call includes the tables)
+
+SSS on E (-139.0, 135.0): atoms 45, sites 3, states/site [9, 9, 9]; fixed-atom clash score 0.783; states with one-site score > 0.70: [9, 9, 9]
+   200 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 1.1e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 2.1e-14|6e-16; lj 2.4e-14|5e-15; coul 1.1e-13|2e-15; ff99SB_tors 1.4e-14|6e-16; ff99SB_lj 4.3e-14|9e-15; ff99SB_coul 9.9e-14|2e-15; ff03_tors 1.1e-14|4e-16; ff03_lj 4.3e-14|9e-15; ff03_coul 1.1e-13|4e-15; ff15ipq_tors 4.4e-15|6e-16; ff15ipq_lj 4.3e-14|1e-14; ff15ipq_coul 1.0e-13|1e-14; gbn2(tables) vs FastFF 3.3e-13|7e-15; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 1.4e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 2.6e-13
+   timing: setup 0.3s; FastFF 0.29 ms/conf; table GB 61 us/conf (first call includes the tables)
+
+FFF on H (-57.0, -47.0): atoms 72, sites 3, states/site [9, 9, 9]; fixed-atom clash score 0.804; states with one-site score > 0.70: [2, 2, 1]
+   146 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 1.9e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 1.8e-14|6e-16; lj 3.4e-13|4e-14; coul 1.5e-13|5e-15; ff99SB_tors 1.8e-14|6e-16; ff99SB_lj 3.1e-13|4e-14; ff99SB_coul 2.1e-13|7e-15; ff03_tors 1.4e-14|5e-16; ff03_lj 3.1e-13|4e-14; ff03_coul 7.8e-14|2e-14; ff15ipq_tors 1.1e-14|1e-15; ff15ipq_lj 3.4e-13|3e-14; ff15ipq_coul 7.1e-14|7e-14; gbn2(tables) vs FastFF 2.7e-13|9e-15; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 1.8e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 5.1e-13
+   timing: setup 0.3s; FastFF 0.69 ms/conf; table GB 201 us/conf (first call includes the tables)
+
+KKK on H (-57.0, -47.0): atoms 78, sites 3, states/site [81, 81, 81]; fixed-atom clash score 0.804; states with one-site score > 0.70: [14, 14, 12]
+   109 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 2.8e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 2.1e-14|7e-16; lj 9.9e-13|4e-14; coul 3.4e-13|5e-15; ff99SB_tors 2.5e-14|1e-15; ff99SB_lj 8.0e-13|4e-14; ff99SB_coul 3.4e-13|5e-15; ff03_tors 1.4e-14|7e-16; ff03_lj 8.0e-13|4e-14; ff03_coul 2.6e-13|9e-15; ff15ipq_tors 5.3e-15|4e-15; ff15ipq_lj 4.8e-13|4e-14; ff15ipq_coul 3.1e-13|4e-15; gbn2(tables) vs FastFF 2.8e-13|8e-16; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 2.2e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 8.0e-13
+   timing: setup 0.5s; FastFF 0.89 ms/conf; table GB 4647 us/conf (first call includes the tables)
+
+KKK on E (-139.0, 135.0): atoms 78, sites 3, states/site [81, 81, 81]; fixed-atom clash score 0.783; states with one-site score > 0.70: [21, 21, 21]
+   105 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 5.8e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 7.1e-15|4e-16; lj 2.6e-13|6e-14; coul 2.8e-13|1e-14; ff99SB_tors 1.4e-14|8e-16; ff99SB_lj 4.0e-13|6e-14; ff99SB_coul 3.1e-13|1e-14; ff03_tors 1.8e-14|9e-16; ff03_lj 4.0e-13|6e-14; ff03_coul 3.1e-13|2e-14; ff15ipq_tors 5.3e-15|2e-15; ff15ipq_lj 3.4e-13|6e-14; ff15ipq_coul 3.4e-13|9e-15; gbn2(tables) vs FastFF 2.3e-13|8e-16; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 1.8e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 7.4e-13
+   timing: setup 0.5s; FastFF 0.62 ms/conf; table GB 4292 us/conf (first call includes the tables)
+
+LKSE on H (-57.0, -47.0): atoms 79, sites 4, states/site [9, 81, 9, 27]; fixed-atom clash score 0.804; states with one-site score > 0.70: [0, 14, 6, 4]
+   66 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 1.7e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 5.0e-14|1e-15; lj 5.1e-13|1e-14; coul 1.7e-13|1e-13; ff99SB_tors 5.0e-14|1e-15; ff99SB_lj 8.8e-13|1e-14; ff99SB_coul 1.8e-13|9e-14; ff03_tors 2.8e-14|8e-16; ff03_lj 8.8e-13|1e-14; ff03_coul 1.1e-13|1e-13; ff15ipq_tors 5.3e-15|1e-15; ff15ipq_lj 6.0e-13|2e-14; ff15ipq_coul 1.0e-13|7e-14; gbn2(tables) vs FastFF 4.5e-13|5e-15; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 3.8e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 7.1e-13
+   timing: setup 0.3s; FastFF 0.67 ms/conf; table GB 545 us/conf (first call includes the tables)
+
+LKSE on P2 (-75.0, 145.0): atoms 79, sites 4, states/site [9, 81, 9, 27]; fixed-atom clash score 0.858; states with one-site score > 0.70: [0, 21, 9, 11]
+   72 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 2.5e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 2.8e-14|8e-16; lj 6.8e-13|2e-14; coul 2.2e-13|4e-14; ff99SB_tors 1.4e-14|4e-16; ff99SB_lj 8.0e-13|2e-14; ff99SB_coul 2.7e-13|3e-14; ff03_tors 2.8e-14|1e-15; ff03_lj 8.0e-13|2e-14; ff03_coul 1.3e-13|1e-14; ff15ipq_tors 1.4e-14|9e-16; ff15ipq_lj 6.8e-13|2e-14; ff15ipq_coul 2.6e-13|2e-13; gbn2(tables) vs FastFF 4.3e-13|5e-15; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 25 conformations: 3.6e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 1.0e-12
+   timing: setup 0.3s; FastFF 0.66 ms/conf; table GB 484 us/conf (first call includes the tables)
+
+LKSELKSE on H (-57.0, -47.0): atoms 146, sites 8, states/site [9, 81, 9, 27, 9, 81, 9, 27]; fixed-atom clash score 0.804; states with one-site score > 0.70: [0, 14, 6, 4, 0, 7, 6, 4]
+   12 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 3.6e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors 8.5e-14|1e-15; lj 1.1e-12|5e-14; coul 2.5e-13|4e-13; ff99SB_tors 9.9e-14|1e-15; ff99SB_lj 8.0e-13|4e-14; ff99SB_coul 1.9e-13|3e-13; ff03_tors 7.1e-14|1e-15; ff03_lj 8.0e-13|4e-14; ff03_coul 3.6e-13|3e-13; ff15ipq_tors 1.6e-14|3e-15; ff15ipq_lj 5.7e-13|4e-14; ff15ipq_coul 3.2e-13|3e-13; gbn2(tables) vs FastFF 4.5e-13|5e-15; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 12 conformations: 8.9e-12 kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): 1.9e-12
+   timing: setup 0.5s; FastFF 2.57 ms/conf; table GB 3509 us/conf (first call includes the tables)
+
+LLLLLL on Hp (-70.0, -40.0): atoms 126, sites 6, states/site [9, 9, 9, 9, 9, 9]; fixed-atom clash score 0.806; states with one-site score > 0.70: [0, 0, 0, 0, 0, 0]
+   0 of 200 random assignments with clash score > 0.5;  max |assembled - full build| = 0.0e+00 A;  max |clash(tables) - clash(FastFF)| = 2.6e-16
+   max |tables - FastFF| (kcal/mol; clash-free | relative on all): tors nan|2e-15; lj nan|3e-14; coul nan|4e-15; ff99SB_tors nan|1e-15; ff99SB_lj nan|3e-14; ff99SB_coul nan|4e-15; ff03_tors nan|1e-15; ff03_lj nan|3e-14; ff03_coul nan|4e-15; ff15ipq_tors nan|2e-15; ff15ipq_lj nan|3e-14; ff15ipq_coul nan|5e-15; gbn2(tables) vs FastFF nan|2e-14; 
+   GBn2(tables) vs OpenMM Reference CustomGBForce on 0 conformations: nan kcal/mol;  f(tables) vs OpenMM (torsion + nonbonded groups): nan
+   timing: setup 0.3s; FastFF 1.75 ms/conf; table GB 561 us/conf (first call includes the tables)
+
+worst over all systems (clash-free conformations): {'tors': '8.5e-14', 'lj': '1.1e-12', 'coul': '3.4e-13', 'ff99SB_tors': '9.9e-14', 'ff99SB_lj': '8.8e-13', 'ff99SB_coul': '3.4e-13', 'ff03_tors': '7.1e-14', 'ff03_lj': '8.8e-13', 'ff03_coul': '3.6e-13', 'ff15ipq_tors': '2.5e-14', 'ff15ipq_lj': '1.0e-12', 'ff15ipq_coul': '3.4e-13', 'gbn2(tables) vs FastFF': '4.5e-13', 'gbn2 vs OpenMM': '8.9e-12', 'f vs OpenMM': '1.9e-12'}
+
+real	0m15.384s
+user	0m13.794s
+sys	0m1.514s

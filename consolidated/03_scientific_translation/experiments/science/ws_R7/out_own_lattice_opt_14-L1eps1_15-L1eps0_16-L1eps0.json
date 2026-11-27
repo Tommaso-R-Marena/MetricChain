@@ -1,0 +1,86 @@
+[
+ {
+  "n": 14,
+  "key": "L=1,eps=1",
+  "classes": 641,
+  "published": 25,
+  "published_proved": true,
+  "eng_solvers": {
+   "highs": 25,
+   "cpsat": 25
+  },
+  "certified_lb": 24,
+  "lp": 23.340624999999996,
+  "highs": {
+   "status": 0,
+   "primal": 25,
+   "feasible": true,
+   "bound": 25.0,
+   "seconds": 12.8
+  },
+  "cpsat": {
+   "status": "FEASIBLE",
+   "primal": 27,
+   "feasible": true,
+   "bound": 6.0,
+   "seconds": 120.9
+  },
+  "seconds": 133.9
+ },
+ {
+  "n": 15,
+  "key": "L=1,eps=0",
+  "classes": 818,
+  "published": 33,
+  "published_proved": true,
+  "eng_solvers": {
+   "highs": 33,
+   "cpsat": 33
+  },
+  "certified_lb": 32,
+  "lp": 31.512500000000014,
+  "highs": {
+   "status": 0,
+   "primal": 33,
+   "feasible": true,
+   "bound": 33.0,
+   "seconds": 6.4
+  },
+  "cpsat": {
+   "status": "FEASIBLE",
+   "primal": 38,
+   "feasible": true,
+   "bound": 6.0,
+   "seconds": 120.1
+  },
+  "seconds": 126.6
+ },
+ {
+  "n": 16,
+  "key": "L=1,eps=0",
+  "classes": 1037,
+  "published": 38,
+  "published_proved": true,
+  "eng_solvers": {
+   "highs": 38,
+   "cpsat": 38
+  },
+  "certified_lb": 36,
+  "lp": 35.5593133986345,
+  "highs": {
+   "status": 0,
+   "primal": 38,
+   "feasible": true,
+   "bound": 38.00000000000005,
+   "seconds": 44.8
+  },
+  "cpsat": {
+   "status": "FEASIBLE",
+   "primal": 50,
+   "feasible": true,
+   "bound": 7.0,
+   "seconds": 120.1
+  },
+  "seconds": 165.1
+ }
+]

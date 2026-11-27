@@ -1,0 +1,16 @@
+(a) largest slope of a chord from the top of the barrier: 0.28153 (to kappa = 0.1183);  mean slope to the well (0.0707): 0.26834;  largest slope of I on the barrier: 0.41509
+(b) u = 0.30: contact set pieces [(np.float64(0.0464), np.float64(0.124)), (np.float64(0.4745), np.float64(0.5255)), (np.float64(0.876), np.float64(0.9536))]
+    best symmetric barrier shell at e = 0: x = 0.4409, r = 0.0022646   (report: 0.4409, 0.0022646)   [9s]
+    n_mu(S(0)) at the optimal dip shell x = 0.4409: 0.0000000   (report: 0, the pair identity fails there)   [10s]
+       shell x = 0.4435: n_mu(S(0)) = 0.0000000   [10s]
+       shell x = 0.447: n_mu(S(0)) = 0.0000000   [10s]
+       shell x = 0.4495: n_mu(S(0)) = 0.0000000   [11s]
+       shell x = 0.4514: n_mu(S(0)) = 0.0018390   [24s]
+       shell x = 0.4535: n_mu(S(0)) = 0.0017113   [38s]
+       shell x = 0.456: n_mu(S(0)) = 0.0015511   [52s]
+       shell x = 0.46: n_mu(S(0)) = 0.0012865   [66s]
+    sup over these symmetric shells of n_mu(S(0)): 0.0018390 at x = 0.4514   (report: 0.0018400 at 0.4514; ratio to R: 0.812)
+(c) free block at e = 0.02, u = 1
+    bJ = 1.12: binary 0.0201047 (report 0.0201047);  best of eight profiles with a free block 0.0200874  (report: no gain)   [71s]
+    bJ = 1.2: binary 0.0189503 (report 0.0189503);  with a free block 0.0192108 at (x, lam_f) = [0.2694 0.0339]  (report 0.0192108 at (0.2694, 0.034))   [109s]
+    bJ = 1.3: binary 0.0175999 (report 0.0175999);  with a free block 0.0181202 at (x, lam_f) = [0.2719 0.0727]  (report 0.0181202 at (0.272, 0.072))   [140s]

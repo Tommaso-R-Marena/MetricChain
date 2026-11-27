@@ -1,0 +1,11 @@
+# R16 replication (own code r16lib.py). u = 1, a = 0.110944, n = 64000, n a = 7100.4206
+# started 2026-11-26T09:19:25Z
+n=64000 phi_1=0.150: two 0.8907 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.8205 [2L+ rungs: 18 of 40 (13-20, 31-40); max(xout - x_l) over them 0] | searched 0.4772 [2L+ rungs: 28 of 40 (13-40); max(xout - x_l) over them 0] |   [25 s]
+n=64000 phi_1=0.225: two 0.8143 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.7484 [2L+ rungs: 18 of 40 (13-20, 31-40); max(xout - x_l) over them 0] | searched 0.4364 [2L+ rungs: 28 of 40 (13-40); max(xout - x_l) over them 0] |   [45 s]
+n=64000 phi_1=0.275: two 0.7633 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.7004 [2L+ rungs: 18 of 40 (13-20, 31-40); max(xout - x_l) over them 0] | searched 0.4341 [2L+ rungs: 28 of 40 (13-40); max(xout - x_l) over them 0] |   [65 s]
+n=64000 phi_1=0.300: two 0.7378 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6763 [2L+ rungs: 18 of 40 (13-20, 31-40); max(xout - x_l) over them 0] | searched 0.4559 [2L+ rungs: 28 of 40 (13-40); max(xout - x_l) over them 0] |   [83 s]
+n=64000 phi_1=0.350: two 0.6868 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.6283 [2L+ rungs: 18 of 40 (13-20, 31-40); max(xout - x_l) over them 0] | searched 0.4558 [2L+ rungs: 28 of 40 (13-40); max(xout - x_l) over them 0] |   [97 s]
+n=64000 phi_1=0.400: two 0.6357 [2L+ rungs: 0 of 40 (-); max(xout - x_l) over them nan] | tuned 0.5804 [2L+ rungs: 18 of 40 (13-20, 31-40); max(xout - x_l) over them 0] | searched 0.4768 [2L+ rungs: 28 of 40 (13-40); max(xout - x_l) over them 0] |   [109 s]
+n=64000 best over these outer fractions: two 0.6357 (phi_1 = 0.4); tuned 0.5804 (phi_1 = 0.4); searched 0.4341 (phi_1 = 0.275)
+# finished 2026-11-26T09:21:14Z; elapsed 109 s
+peak RSS MB 141.91015625

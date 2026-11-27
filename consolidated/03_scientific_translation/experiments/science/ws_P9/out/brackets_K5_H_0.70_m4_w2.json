@@ -1,0 +1,179 @@
+{
+ "seq": "K5",
+ "m": 4,
+ "w": 2,
+ "width_zero": 0.04590249446061989,
+ "rows": {
+  "ref:S": {
+   "lnZ_lo": 251.00373419953814,
+   "lnZ_hi": 251.8527695408494,
+   "width": 0.8490353413112643,
+   "first_order": 0.8275823593466058,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "ref:B": {
+   "lnZ_lo": 251.18556474137506,
+   "lnZ_hi": 251.59727960004625,
+   "width": 0.4117148586711892,
+   "first_order": 0.393205872683697,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "ref:T": {
+   "lnZ_lo": 251.1985276079928,
+   "lnZ_hi": 251.57278457497569,
+   "width": 0.3742569669828981,
+   "first_order": 0.3581306581458794,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "sab:S": {
+   "lnZ_lo": 251.00373419953814,
+   "lnZ_hi": 251.8527695408494,
+   "width": 0.8490353413112643,
+   "first_order": 0.8275823593466078,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "sab:B": {
+   "lnZ_lo": 251.18556474137517,
+   "lnZ_hi": 251.59727960004602,
+   "width": 0.4117148586708481,
+   "first_order": 0.39320587268318247,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "sab:T": {
+   "lnZ_lo": 251.19852760799301,
+   "lnZ_hi": 251.57278457497512,
+   "width": 0.3742569669821023,
+   "first_order": 0.3581306581452372,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "sab:W": {
+   "lnZ_lo": 251.32389147892627,
+   "lnZ_hi": 251.41028672282596,
+   "width": 0.08639524389968756,
+   "first_order": 0.09345545056732393,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "cJ2:S": {
+   "lnZ_lo": 251.1559862959184,
+   "lnZ_hi": 251.59663427322505,
+   "width": 0.4406479773066394,
+   "first_order": 0.43851313153453947,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "cJ2:B": {
+   "lnZ_lo": 251.25320701827798,
+   "lnZ_hi": 251.47940764461293,
+   "width": 0.22620062633495763,
+   "first_order": 0.22523153991655998,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "cJ2:T": {
+   "lnZ_lo": 251.26039880506926,
+   "lnZ_hi": 251.46935551957358,
+   "width": 0.20895671450432474,
+   "first_order": 0.2084816667694618,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "cJ2:W": {
+   "lnZ_lo": 251.3279672729126,
+   "lnZ_hi": 251.3907127259008,
+   "width": 0.06274545298822432,
+   "first_order": 0.07330733775644338,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s1:S": {
+   "lnZ_lo": 251.0604271018724,
+   "lnZ_hi": 251.7495167591478,
+   "width": 0.6890896572754173,
+   "first_order": 0.6812599456541444,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s1:B": {
+   "lnZ_lo": 251.22475339368225,
+   "lnZ_hi": 251.52542607659404,
+   "width": 0.30067268291179516,
+   "first_order": 0.29574745794452334,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s1:T": {
+   "lnZ_lo": 251.23629984468425,
+   "lnZ_hi": 251.5066410506745,
+   "width": 0.2703412059902348,
+   "first_order": 0.2671034518016094,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s1:W": {
+   "lnZ_lo": 251.32682486163117,
+   "lnZ_hi": 251.3904311234047,
+   "width": 0.06360626177354334,
+   "first_order": 0.06974986834832554,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s2:S": {
+   "lnZ_lo": 251.2307731313648,
+   "lnZ_hi": 251.49523450475976,
+   "width": 0.26446137339496545,
+   "first_order": 0.26679084946216697,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s2:B": {
+   "lnZ_lo": 251.29566273093155,
+   "lnZ_hi": 251.42092027581725,
+   "width": 0.12525754488569874,
+   "first_order": 0.12967063307174737,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s2:T": {
+   "lnZ_lo": 251.29895821137825,
+   "lnZ_hi": 251.41691373817628,
+   "width": 0.11795552679802768,
+   "first_order": 0.12240992288961627,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  },
+  "s2:W": {
+   "lnZ_lo": 251.33248590433072,
+   "lnZ_hi": 251.3801392427157,
+   "width": 0.04765333838497554,
+   "first_order": 0.05678482807453072,
+   "viol_gibbs": 0,
+   "viol_all": 0,
+   "inside": true
+  }
+ }
+}

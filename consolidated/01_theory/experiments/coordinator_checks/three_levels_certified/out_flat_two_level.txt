@@ -1,0 +1,26 @@
+two levels at the flat instance (exact, deterministic) against the certified three-level bound; u = 1, a = 0.110944; all figures are ln(.)/(n a)
+n=4000  grid of step 0.01 (0.30 ... 0.85): minimum 0.5336 at n_o = 2520 (phi = 0.63); its own certified bound there 0.8723
+       every  outer block size in [2400, 2640]: minimum 0.5322 at n_o = 2513 (phi = 0.6282)
+       certified three-level bound 0.6106; margin (two-level flat minimum minus the bound): -0.0784 n a = -35 nats
+       grid fractions at which two levels at the flat instance cost no more than the bound: 0.56 ... 0.71 (16 of 56)
+       (68 s)
+n=8000  grid of step 0.01 (0.30 ... 0.85): minimum 0.5110 at n_o = 4720 (phi = 0.59); its own certified bound there 0.7384
+       every 2-th outer block size in [4480, 4960]: minimum 0.5080 at n_o = 4700 (phi = 0.5875)
+       certified three-level bound 0.5262; margin (two-level flat minimum minus the bound): -0.0182 n a = -16 nats
+       grid fractions at which two levels at the flat instance cost no more than the bound: 0.58 ... 0.60 (3 of 56)
+       (144 s)
+n=16000  grid of step 0.01 (0.30 ... 0.85): minimum 0.5027 at n_o = 8960 (phi = 0.56); its own certified bound there 0.6532
+       every 4-th outer block size in [8480, 9440]: minimum 0.4991 at n_o = 9024 (phi = 0.5640)
+       certified three-level bound 0.4782; margin (two-level flat minimum minus the bound): +0.0209 n a = +37 nats
+       grid fractions at which two levels at the flat instance cost no more than the bound: none
+       (292 s)
+n=32000  grid of step 0.01 (0.30 ... 0.85): minimum 0.4998 at n_o = 17280 (phi = 0.54); its own certified bound there 0.5999
+       every 8-th outer block size in [16320, 18240]: minimum 0.4980 at n_o = 17368 (phi = 0.5427)
+       certified three-level bound 0.4439; margin (two-level flat minimum minus the bound): +0.0541 n a = +192 nats
+       grid fractions at which two levels at the flat instance cost no more than the bound: none
+       (580 s)
+n=64000  grid of step 0.01 (0.30 ... 0.85): minimum 0.4961 at n_o = 33920 (phi = 0.53); its own certified bound there 0.5710
+       every 16-th outer block size in [32000, 35840]: minimum 0.4954 at n_o = 33968 (phi = 0.5308)
+       certified three-level bound 0.4341; margin (two-level flat minimum minus the bound): +0.0613 n a = +435 nats
+       grid fractions at which two levels at the flat instance cost no more than the bound: none
+       (1195 s)

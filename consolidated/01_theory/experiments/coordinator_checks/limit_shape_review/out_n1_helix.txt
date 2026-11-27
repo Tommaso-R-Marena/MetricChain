@@ -1,0 +1,18 @@
+own code: helix for N = 4..200, 500, 1000, 4096, 10007: self-avoiding lattice walk, every bond an up-bond, bridge,
+   (h3,h8,h11,g) = (0,0,N-3,N-3) by two own counts (hash look-up and O(N^2) definition / k-d tree): failures: []
+   first nine beads: [(0, 0, 0), (1, 1, 1), (0, 2, 2), (-1, 3, 1), (0, 4, 0), (1, 5, 1), (0, 6, 2), (-1, 7, 1), (0, 8, 0)]
+   bead i+4 - bead i = (0, 4, 0)  squared 1-5 distance 16 ; 1-4: 11 ; 1-6: 27 ; 1-7: 40
+   smallest squared distance at chain separation >= 4 (N = 400): 16
+harness helpers (ls_valid_walk, ls_is_bridge, ls_profile) on the same walks, N = 4..120, 1000: failures: []
+N =  4: 8 bridges from the origin (harness ls_enum: 8), 2 profile classes; gauche counts with h = (0,0,1): {1: 4}
+N =  5: 20 bridges from the origin (harness ls_enum: 20), 3 profile classes; gauche counts with h = (0,0,2): {2: 4}
+N =  6: 48 bridges from the origin (harness ls_enum: 48), 5 profile classes; gauche counts with h = (0,0,3): {3: 4}
+N =  7: 116 bridges from the origin (harness ls_enum: 116), 8 profile classes; gauche counts with h = (0,0,4): {4: 4}
+N =  8: 312 bridges from the origin (harness ls_enum: 312), 16 profile classes; gauche counts with h = (0,0,5): {5: 4}
+N =  9: 804 bridges from the origin (harness ls_enum: 804), 28 profile classes; gauche counts with h = (0,0,6): {6: 4}
+N = 10: 2144 bridges from the origin (harness ls_enum: 2144), 43 profile classes; gauche counts with h = (0,0,7): {7: 4}
+N = 11: 5732 bridges from the origin (harness ls_enum: 5732), 64 profile classes; gauche counts with h = (0,0,8): {8: 4}
+N = 12: 15296 bridges from the origin (harness ls_enum: None), 101 profile classes; gauche counts with h = (0,0,9): {9: 4}
+N = 13: 41364 bridges from the origin (harness ls_enum: None), 138 profile classes; gauche counts with h = (0,0,10): {10: 4}
+N = 14: 112168 bridges from the origin (harness ls_enum: None), 198 profile classes; gauche counts with h = (0,0,11): {11: 4}
+time 14.3 s

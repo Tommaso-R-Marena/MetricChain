@@ -1,0 +1,30 @@
+
+centre tt+tt-tt--- (pairs inside cutoff 34, gauche 5)   point +t+ttt++t-- (inside 33, gauche 6)
+  positions that differ: 12 of 66;  sum of positive differences 9.663050135923998448050994  sum of negative 3.336949864076001551949006  total |.| 13.0
+  sum over ALL truncated distances: centre 815.637085751631708009212842863  point 809.31098547978371111311085532  difference 6.32610027184799689610198754284
+  centre: sum of the squared distances inside the cutoff = 303.6370857516317080092128; integer relation with (1, c, c^2, c^3), c = cos 69deg: None
+  point: sum of the squared distances inside the cutoff = 281.3109854797837111131109; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -173, -247, -138, -45]
+
+centre tt++t-tt+t- (pairs inside cutoff 34, gauche 5)   point +t+ttt++t-- (inside 33, gauche 6)
+  positions that differ: 11 of 66;  sum of positive differences 9.863112599330223969990178  sum of negative 3.136887400669776030009822  total |.| 13.0
+  sum over ALL truncated distances: centre 816.037210678444159053091210928  point 809.31098547978371111311085532  difference 6.72622519866044793998035560828
+  centre: sum of the squared distances inside the cutoff = 304.0372106784441590530912; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -189, -268, -135, -36]
+  point: sum of the squared distances inside the cutoff = 281.3109854797837111131109; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -173, -247, -138, -45]
+
+centre tt+tt-t++t- (pairs inside cutoff 34, gauche 5)   point +t+t--ttt++ (inside 33, gauche 6)
+  positions that differ: 11 of 66;  sum of positive differences 9.961300263172554946553483  sum of negative 3.038699736827445053446517  total |.| 13.0
+  sum over ALL truncated distances: centre 816.135398342286490029654516423  point 809.212797815941380136547549826  difference 6.92260052634510989310696659668
+  centre: sum of the squared distances inside the cutoff = 304.1353983422864900296545; integer relation with (1, c, c^2, c^3), c = cos 69deg: [-2, 375, 545, 273, 63]
+  point: sum of the squared distances inside the cutoff = 281.2127978159413801365475; integer relation with (1, c, c^2, c^3), c = cos 69deg: [-2, 349, 485, 273, 99]
+
+centre tt+tt-t-t++ (pairs inside cutoff 32, gauche 5)   point +t+t+ttt+++ (inside 31, gauche 6)
+  positions that differ: 13 of 66;  sum of positive differences 10.06317506273644949192936  sum of negative 2.936824937263550508070638  total |.| 13.0
+  sum over ALL truncated distances: centre 823.061170294127495286613882648  point 815.934820168654596302755158974  difference 7.12635012547289898385872367372
+  centre: sum of the squared distances inside the cutoff = 279.0611702941274952866139; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -174, -250, -114, -18]
+  point: sum of the squared distances inside the cutoff = 255.9348201686545963027552; integer relation with (1, c, c^2, c^3), c = cos 69deg: None
+
+centre tt+tt-t+t-- (pairs inside cutoff 32, gauche 5)   point +t+t-ttt+++ (inside 31, gauche 6)
+  positions that differ: 12 of 66;  sum of positive differences 10.06317506273644949192936  sum of negative 2.936824937263550508070638  total |.| 13.0
+  sum over ALL truncated distances: centre 825.675887532343586639135928221  point 818.549537406870687655277204547  difference 7.12635012547289898385872367372
+  centre: sum of the squared distances inside the cutoff = 281.6758875323435866391359; integer relation with (1, c, c^2, c^3), c = cos 69deg: [1, -177, -250, -111, -18]
+  point: sum of the squared distances inside the cutoff = 258.5495374068706876552772; integer relation with (1, c, c^2, c^3), c = cos 69deg: None

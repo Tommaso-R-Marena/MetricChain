@@ -1,0 +1,26 @@
+u = 1:  a in [0.11094407167172735951, 0.11094407167172735951] (referee);  script: ALOW = 0.11094407167172733175, abar = 0.11094407167172735951
+  [ok] u = 1: abar >= a and ALOW <= a (proved with the referee's enclosure) | slack (abar - a)/ulp = 0.352, (a - ALOW)/ulp = 1.648
+  [ok] u = 1: 1513 pairs (random rho, both ends, rho = 1/2): e' >= KL(rho||p_u) and thbar >= KL(rho||1/2), proved | slack in ulps: e' 2.0e-04 .. 5.8e+09, thbar 8.6e-04 .. 7.0e+00
+u = 2:  a in [0.3278133254727377266, 0.3278133254727377266] (referee);  script: ALOW = 0.32781332547273761557, abar = 0.3278133254727377266
+  [ok] u = 2: abar >= a and ALOW <= a (proved with the referee's enclosure) | slack (abar - a)/ulp = 0.459, (a - ALOW)/ulp = 1.541
+  [ok] u = 2: 1513 pairs (random rho, both ends, rho = 1/2): e' >= KL(rho||p_u) and thbar >= KL(rho||1/2), proved | slack in ulps: e' 2.9e-04 .. 1.3e+09, thbar 1.1e-04 .. 7.0e+00
+u = 0.5:  a in [0.030299861980765910308, 0.030299861980765910308] (referee);  script: ALOW = 0.030299861980765906838, abar = 0.030299861980765913777
+  [ok] u = 0.5: abar >= a and ALOW <= a (proved with the referee's enclosure) | slack (abar - a)/ulp = 0.840, (a - ALOW)/ulp = 1.160
+  [ok] u = 0.5: 613 pairs (random rho, both ends, rho = 1/2): e' >= KL(rho||p_u) and thbar >= KL(rho||1/2), proved | slack in ulps: e' 1.1e-03 .. 2.8e+10, thbar 1.1e-03 .. 7.0e+00
+u = 0.25:  a in [0.0077518859025512733274, 0.0077518859025512733274] (referee);  script: ALOW = 0.0077518859025512715927, abar = 0.0077518859025512733274
+  [ok] u = 0.25: abar >= a and ALOW <= a (proved with the referee's enclosure) | slack (abar - a)/ulp = 0.128, (a - ALOW)/ulp = 1.872
+  [ok] u = 0.25: 613 pairs (random rho, both ends, rho = 1/2): e' >= KL(rho||p_u) and thbar >= KL(rho||1/2), proved | slack in ulps: e' 3.8e-05 .. 1.4e+11, thbar 7.9e-04 .. 7.0e+00
+u = 3:  a in [0.5022822094535028814, 0.5022822094535028814] (referee);  script: ALOW = 0.50228220945350277038, abar = 0.50228220945350299242
+  [ok] u = 3: abar >= a and ALOW <= a (proved with the referee's enclosure) | slack (abar - a)/ulp = 0.760, (a - ALOW)/ulp = 1.240
+  [ok] u = 3: 613 pairs (random rho, both ends, rho = 1/2): e' >= KL(rho||p_u) and thbar >= KL(rho||1/2), proved | slack in ulps: e' 3.9e-04 .. 4.5e+08, thbar 3.6e-05 .. 7.0e+00
+u = 5:  a in [0.65296757744940292501, 0.65296757744940292501] (referee);  script: ALOW = 0.65296757744940281398, abar = 0.65296757744940303603
+  [ok] u = 5: abar >= a and ALOW <= a (proved with the referee's enclosure) | slack (abar - a)/ulp = 0.658, (a - ALOW)/ulp = 1.342
+  [ok] u = 5: 613 pairs (random rho, both ends, rho = 1/2): e' >= KL(rho||p_u) and thbar >= KL(rho||1/2), proved | slack in ulps: e' 4.1e-04 .. 1.6e+07, thbar 2.0e-03 .. 7.0e+00
+(3) u = 5: certified upper bounds of tau_2 against the closed form a^2/(a + x*) of A6a
+    closed form a^2/(a + x*) = 0.394427156714 = 0.604053203 a;   tau_2 = min_x a max(a, x + theta)/(a + x) = 0.393669889867 = 0.602893472 a
+    certified c_2: the coordinator's script (K = 2000): 0.393669898283755 = 0.602893485 a;   the referee's sequence: 0.393669898283639 = 0.602893485 a
+  [ok] u = 5: both certified second tops are below the closed form by more than 1e-3 a (so tau_2 < a^2/(a + x*), given the statements the certificate rests on) 
+  [ok] u = 5: both certified second tops are above tau_2 and within 1e-6 a of it | (c_2 - tau_2)/a: script 1.3e-08, referee 1.3e-08
+
+time 16 s
+ALL CHECKS PASS

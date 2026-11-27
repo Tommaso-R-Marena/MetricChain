@@ -1,0 +1,4 @@
+A. bJ=0.5 bB=0.3 (convex, ferro), e=0.0: binary optimum 0.023983166 [0.47308@0.56291  0.86902@0.43709]; best of 12 multi-atom SLP+NM runs 0.023983166 [0.47308@0.56293  0.86900@0.43707]; excess over binary -2.15e-10   t=92
+A. bJ=0.5 bB=0.3 (convex, ferro), e=0.03: binary optimum 0.011596391 [0.47022@0.57189  0.86771@0.42811]; best of 14 multi-atom SLP+NM runs 0.011596391 [0.47024@0.57193  0.86771@0.42807]; excess over binary +5.02e-10   t=177
+A. bJ=1.0 bB=0.1 (critical), e=0.0: binary optimum 0.027963822 [0.29030@0.59613  0.75138@0.40387]; best of 10 multi-atom SLP+NM runs 0.027963823 [0.29028@0.59614  0.75140@0.40386]; excess over binary +8.61e-10   t=271
+time 270.6893436908722

@@ -1,0 +1,38 @@
+  binary n=8 inst 0: no non-global strict local minimum; skipped
+  binary n=8 inst 1 beta=2.0 metropolis      rev.defect=7.9e-19 |A|=  1 flux/pi(A)=1.338e-01 pi(wall)/pi(A)=1.070e+00  T=3: surv=0.6500 >= 0.5987 >= -2.2103   ok=True
+  binary n=8 inst 1 beta=2.0 non-reversible  rev.defect=1.1e-02 |A|=  1 flux/pi(A)=1.338e-01 pi(wall)/pi(A)=1.070e+00  T=3: surv=0.6500 >= 0.5987 >= -2.2103   ok=True
+  binary n=8 inst 1 beta=2.0 heat-bath       rev.defect=1.6e-18 |A|=  1 flux/pi(A)=9.205e-02 pi(wall)/pi(A)=1.070e+00  T=5: surv=0.6170 >= 0.5398 >= -4.3505   ok=True
+  binary n=8 inst 1 beta=4.0 metropolis      rev.defect=2.3e-19 |A|=  1 flux/pi(A)=6.753e-02 pi(wall)/pi(A)=5.402e-01  T=7: surv=0.6130 >= 0.5273 >= -2.7817   ok=True
+  binary n=8 inst 1 beta=4.0 non-reversible  rev.defect=3.8e-04 |A|=  1 flux/pi(A)=6.753e-02 pi(wall)/pi(A)=5.402e-01  T=7: surv=0.6130 >= 0.5273 >= -2.7817   ok=True
+  binary n=8 inst 1 beta=4.0 heat-bath       rev.defect=4.6e-19 |A|=  1 flux/pi(A)=4.776e-02 pi(wall)/pi(A)=5.402e-01  T=10: surv=0.6130 >= 0.5224 >= -4.4025   ok=True
+  binary n=8 inst 2 beta=2.0 metropolis      rev.defect=5.5e-19 |A|=  2 flux/pi(A)=1.341e-01 pi(wall)/pi(A)=1.073e+00  T=3: surv=0.6499 >= 0.5978 >= -2.2179   ok=True
+  binary n=8 inst 2 beta=2.0 non-reversible  rev.defect=9.5e-03 |A|=  2 flux/pi(A)=1.341e-01 pi(wall)/pi(A)=1.073e+00  T=3: surv=0.6499 >= 0.5978 >= -2.2179   ok=True
+  binary n=8 inst 2 beta=2.0 heat-bath       rev.defect=8.6e-18 |A|=  2 flux/pi(A)=9.945e-02 pi(wall)/pi(A)=1.073e+00  T=5: surv=0.5932 >= 0.5027 >= -4.3631   ok=True
+  binary n=8 inst 2 beta=4.0 metropolis      rev.defect=4.8e-18 |A|=  2 flux/pi(A)=4.923e-02 pi(wall)/pi(A)=3.939e-01  T=10: surv=0.6041 >= 0.5077 >= -2.9388   ok=True
+  binary n=8 inst 2 beta=4.0 non-reversible  rev.defect=2.5e-03 |A|=  2 flux/pi(A)=4.923e-02 pi(wall)/pi(A)=3.939e-01  T=10: surv=0.6041 >= 0.5077 >= -2.9388   ok=True
+  binary n=8 inst 2 beta=4.0 heat-bath       rev.defect=4.7e-18 |A|=  2 flux/pi(A)=4.067e-02 pi(wall)/pi(A)=3.939e-01  T=12: surv=0.6083 >= 0.5120 >= -3.7265   ok=True
+  binary n=8 inst 3 beta=2.0 metropolis      rev.defect=2.9e-19 |A|=  1 flux/pi(A)=5.987e-02 pi(wall)/pi(A)=4.790e-01  T=8: surv=0.6102 >= 0.5210 >= -2.8320   ok=True
+  binary n=8 inst 3 beta=2.0 non-reversible  rev.defect=2.7e-04 |A|=  1 flux/pi(A)=5.987e-02 pi(wall)/pi(A)=4.790e-01  T=8: surv=0.6102 >= 0.5210 >= -2.8320   ok=True
+  binary n=8 inst 3 beta=2.0 heat-bath       rev.defect=2.3e-18 |A|=  1 flux/pi(A)=5.264e-02 pi(wall)/pi(A)=4.790e-01  T=9: surv=0.6146 >= 0.5262 >= -3.3110   ok=True
+  binary n=8 inst 3 beta=4.0 metropolis      rev.defect=2.2e-19 |A|=  1 flux/pi(A)=8.366e-03 pi(wall)/pi(A)=6.692e-02  T=59: surv=0.6092 >= 0.5064 >= -2.9485   ok=True
+  binary n=8 inst 3 beta=4.0 non-reversible  rev.defect=1.1e-06 |A|=  1 flux/pi(A)=8.366e-03 pi(wall)/pi(A)=6.692e-02  T=59: surv=0.6092 >= 0.5064 >= -2.9485   ok=True
+  binary n=8 inst 3 beta=4.0 heat-bath       rev.defect=3.5e-21 |A|=  1 flux/pi(A)=8.156e-03 pi(wall)/pi(A)=6.692e-02  T=61: surv=0.6068 >= 0.5025 >= -3.0824   ok=True
+  3-state n=5 inst 0: no non-global strict local minimum; skipped
+  3-state n=5 inst 1: no non-global strict local minimum; skipped
+  3-state n=5 inst 2 beta=2.0 metropolis      rev.defect=1.2e-17 |A|=  4 flux/pi(A)=2.187e-02 pi(wall)/pi(A)=1.843e-01  T=22: surv=0.6182 >= 0.5189 >= -3.0539   ok=True
+  3-state n=5 inst 2 beta=2.0 non-reversible  rev.defect=1.6e-02 |A|=  4 flux/pi(A)=2.187e-02 pi(wall)/pi(A)=1.843e-01  T=22: surv=0.6179 >= 0.5189 >= -3.0539   ok=True
+  3-state n=5 inst 2 beta=2.0 heat-bath       rev.defect=6.4e-18 |A|=  4 flux/pi(A)=3.534e-02 pi(wall)/pi(A)=1.843e-01  T=14: surv=0.6099 >= 0.5052 >= -1.5798   ok=True
+  3-state n=5 inst 2 beta=4.0 metropolis      rev.defect=1.0e-17 |A|=  4 flux/pi(A)=1.062e-03 pi(wall)/pi(A)=8.987e-03  T=470: surv=0.6078 >= 0.5010 >= -3.2240   ok=True
+  3-state n=5 inst 2 beta=4.0 non-reversible  rev.defect=8.0e-03 |A|=  4 flux/pi(A)=1.062e-03 pi(wall)/pi(A)=8.987e-03  T=470: surv=0.6077 >= 0.5010 >= -3.2240   ok=True
+  3-state n=5 inst 2 beta=4.0 heat-bath       rev.defect=1.1e-17 |A|=  4 flux/pi(A)=1.800e-03 pi(wall)/pi(A)=8.987e-03  T=277: surv=0.6083 >= 0.5013 >= -1.4895   ok=True
+  3-state n=5 inst 3 beta=2.0 metropolis      rev.defect=9.9e-18 |A|=  5 flux/pi(A)=3.859e-02 pi(wall)/pi(A)=3.600e-01  T=12: surv=0.6955 >= 0.5370 >= -3.3196   ok=True
+  3-state n=5 inst 3 beta=2.0 non-reversible  rev.defect=7.4e-02 |A|=  5 flux/pi(A)=3.859e-02 pi(wall)/pi(A)=3.600e-01  T=12: surv=0.6953 >= 0.5370 >= -3.3196   ok=True
+  3-state n=5 inst 3 beta=2.0 heat-bath       rev.defect=1.0e-17 |A|=  5 flux/pi(A)=5.349e-02 pi(wall)/pi(A)=3.600e-01  T=9: surv=0.6574 >= 0.5186 >= -2.2397   ok=True
+  3-state n=5 inst 3 beta=4.0 metropolis      rev.defect=2.1e-17 |A|=  5 flux/pi(A)=3.757e-03 pi(wall)/pi(A)=3.633e-02  T=133: surv=0.7668 >= 0.5003 >= -3.8320   ok=True
+  3-state n=5 inst 3 beta=4.0 non-reversible  rev.defect=7.2e-03 |A|=  5 flux/pi(A)=3.757e-03 pi(wall)/pi(A)=3.633e-02  T=133: surv=0.7658 >= 0.5003 >= -3.8320   ok=True
+  3-state n=5 inst 3 beta=4.0 heat-bath       rev.defect=5.4e-18 |A|=  5 flux/pi(A)=5.594e-03 pi(wall)/pi(A)=3.633e-02  T=89: surv=0.7442 >= 0.5021 >= -2.2334   ok=True
+T9 summary: 30 (instance, beta, kernel) cases, violations: 0
+
+real	0m2.118s
+user	0m0.585s
+sys	0m0.025s

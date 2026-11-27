@@ -1,0 +1,12 @@
+| case | reference state: lambda, sites off, slope | displaced state: lambda, sites off, slope | lambda_c | points with weight 0.1-0.9 | slope predicted from the occupancy / exact slope: min, median, max | control, slope predicted from lambda / exact: min, max | lever rule -ln(1-w) at lambda_c | ln Z excess over the reference branch there | width in lambda of the 10-90 % range: predicted | span of the points found in that range |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Lys12, order 4, band 4 | 12, 1.14, 0.000858 | 16, 10.01, 5.859 | 15.32 | 8 | 0.99, 1.04, 1.18 | 1.2, 5 | 0.823 | 0.762 | 0.75 | 0.5 |
+| Lys12, order 4, band 7 | 16, 1.15, 0.000162 | 24, 11.76, 5.763 | 18.8 | 7 | 1.00, 1.08, 1.17 | 0.59, 2.3 | 0.599 | 0.613 | 0.763 | 0.5 |
+| Lys12, order 3, band 7 | 1.1, 1.33, 0.271 | 1.5, 11.14, 71.46 | 1.318 | 8 | 1.11, 1.20, 1.22 | 0.87, 1.6 | 0.642 | 0.774 | 0.0617 | 0.0313 |
+| (LKSE)3, order 3, band 7 | 0, 2.78, 0.179 | 0.3, 12.00, 722.9 | 0.1983 | 7 | 1.11, 1.23, 1.33 | 1.5, 4.6 | 0.413 | 0.401 | 0.00608 | 0.0031 |
+
+Reading.  If the floor's ensemble between the two grid points were a mixture of the two states, every mean would be linear in the weight: the sixth column would be 1 at every point
+and the two lever-rule columns equal.  The occupancy is a mean of 1000 exact samples (standard error about 0.15 sites near the transition, i.e. about 0.02 in the weight); the slope is exact.
+The displaced state is not one state: between its first pure grid point and the largest lambda its slope still grows (see the tables of the four logs), which limits the agreement.
+The control: with lambda as the abscissa (a smooth response between the same two grid points) the same points are off by the factors of the seventh column.
+ALL DONE

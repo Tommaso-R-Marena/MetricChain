@@ -1,0 +1,26 @@
+(i) cube closed forms u=1:  h=0.0291391 at t*=0.4900   a=0.1109441   E=0.1201145
+(ii) one uniform site, 2 vertices              h in [0.0291391, 0.0291391] (t=0.4900)  a in [0.1109441, 0.1109441]  E in [0.1201145, 0.1201145]
+(iv) n=1: 2 integer height functions (all edges tight: True, distinct: True, f(0)=0: True)  0.0s
+(iv) n=2: 6 integer height functions (all edges tight: True, distinct: True, f(0)=0: True)  0.0s
+(iv) n=3: 38 integer height functions (all edges tight: True, distinct: True, f(0)=0: True)  0.0s
+(iv) n=4: 990 integer height functions (all edges tight: True, distinct: True, f(0)=0: True)  0.0s
+(iv) n=5: 395094 integer height functions (all edges tight: True, distinct: True, f(0)=0: True)  6.2s
+(iii) L=2: 6 vertices, 4 additive, 2 non-additive
+      all vertices, per site                   h in [0.0291391, 0.0291391] (t=0.4900)  a in [0.1109441, 0.1109441]  E in [0.1201145, 0.1201145]
+      weight on non-additive vertices: Renyi 3.30e-10, capacity 8.28e-11, threshold 7.80e-11
+      additive vertices only, per site         h in [0.0291391, 0.0291391] (t=0.4900)  a in [0.1109441, 0.1109441]  E in [0.1201145, 0.1201145]
+      non-additive vertices only, per site     h in [0.0145696, 0.0145696] (t=0.4900)  a in [0.0554720, 0.0554720]  E in [0.0600573, 0.0600573]
+      sitewise_labels(), per site              h in [0.0291391, 0.0291391] (t=0.4900)  a in [0.1109441, 0.1109441]  E in [0.1201145, 0.1201145]
+(iii) L=3: 38 vertices, 8 additive, 30 non-additive
+      all vertices, per site                   h in [0.0291391, 0.0291391] (t=0.4900)  a in [0.1109441, 0.1109441]  E in [0.1201145, 0.1201145]
+      weight on non-additive vertices: Renyi 3.32e-10, capacity 9.21e-11, threshold 7.41e-11
+      additive vertices only, per site         h in [0.0291391, 0.0291391] (t=0.4900)  a in [0.1109441, 0.1109441]  E in [0.1201145, 0.1201145]
+      non-additive vertices only, per site     h in [0.0194261, 0.0194261] (t=0.4900)  a in [0.0763123, 0.0763123]  E in [0.0800763, 0.0800763]
+      sitewise_labels(), per site              h in [0.0291391, 0.0291391] (t=0.4900)  a in [0.1109441, 0.1109441]  E in [0.1201145, 0.1201145]
+(v) field control (0.7,0.3), one site          h in [0.0250335, 0.0250335] (t=0.4901)  a in [0.0953005, 0.0953005]  E in [0.1031310, 0.1031310]
+(vi) weighted cube slopes (1.847,1,1.847): 120 vertices; (1,1,1): 38; (1.5,1): 8
+time 13.9s
+
+real	0m14.151s
+user	0m13.355s
+sys	0m0.036s

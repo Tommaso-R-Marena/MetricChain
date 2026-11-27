@@ -1,0 +1,117 @@
+{
+ "seconds": 0.4,
+ "seed": 20261126,
+ "result": [
+  {
+   "degree": 4092,
+   "hub_site_sum_bits": 62,
+   "ours_proves": 3,
+   "true_minimum": 3,
+   "supported_expected": true,
+   "claim_proves_plus_0": {
+    "accepted": true,
+    "reason": "accepted"
+   },
+   "claim_proves_plus_1": {
+    "accepted": false,
+    "reason": "a leaf bound is below the claimed lower bound"
+   }
+  },
+  {
+   "degree": 4093,
+   "hub_site_sum_bits": 62,
+   "ours_proves": 3,
+   "true_minimum": 3,
+   "supported_expected": false,
+   "claim_proves_plus_0": {
+    "accepted": false,
+    "reason": "table magnitude or degree outside the supported integer range"
+   },
+   "claim_proves_plus_1": {
+    "accepted": false,
+    "reason": "table magnitude or degree outside the supported integer range"
+   }
+  },
+  {
+   "claim_bits": 63,
+   "claim_is_true": true,
+   "accepted": false,
+   "reason": "table magnitude or degree outside the supported integer range"
+  },
+  {
+   "claim_bits": 62,
+   "claim_is_true": true,
+   "accepted": true,
+   "reason": "accepted"
+  },
+  {
+   "claim_bits": 63,
+   "claim_is_true": true,
+   "accepted": false,
+   "reason": "table magnitude or degree outside the supported integer range"
+  },
+  {
+   "entry_bits": 51,
+   "entry_is_power": true,
+   "message_bits": 0,
+   "accepted": false,
+   "reason": "table magnitude or degree outside the supported integer range"
+  },
+  {
+   "entry_bits": 50,
+   "entry_is_power": false,
+   "message_bits": 0,
+   "accepted": true,
+   "reason": "accepted"
+  },
+  {
+   "entry_bits": 41,
+   "entry_is_power": true,
+   "message_bits": 10,
+   "accepted": false,
+   "reason": "table magnitude or degree outside the supported integer range"
+  },
+  {
+   "entry_bits": 40,
+   "entry_is_power": false,
+   "message_bits": 10,
+   "accepted": true,
+   "reason": "accepted"
+  },
+  {
+   "all_zero_model": true,
+   "message_bits": 62,
+   "accepted": true,
+   "reason": "accepted",
+   "seconds": 0.0
+  },
+  {
+   "all_zero_model": true,
+   "message_bits": 63,
+   "accepted": false,
+   "reason": "rejected: OverflowError while checking",
+   "seconds": 0.0
+  },
+  {
+   "all_zero_model": true,
+   "message_bits": 64,
+   "accepted": false,
+   "reason": "rejected: OverflowError while checking",
+   "seconds": 0.0
+  },
+  {
+   "all_zero_model": true,
+   "message_bits": 200,
+   "accepted": false,
+   "reason": "rejected: OverflowError while checking",
+   "seconds": 0.0
+  },
+  {
+   "all_zero_model": true,
+   "message_bits": 100000,
+   "accepted": false,
+   "reason": "rejected: OverflowError while checking",
+   "seconds": 0.0
+  }
+ ]
+}

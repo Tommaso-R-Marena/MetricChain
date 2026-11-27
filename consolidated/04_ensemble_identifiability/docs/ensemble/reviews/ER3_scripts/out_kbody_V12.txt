@@ -1,0 +1,6 @@
+V. n = 12, even order <= 4: 2048 states, 562 features
+   K = 232: 5 supports; division's is_face = reviewer's decision in 5, different in 0, undecided 0; face frequency 0.800 (division) / 0.800 (reviewer); faces: smallest margin (|y| <= 1) 1.06e-01; non-faces: largest Stiemke residual 5.0e-10; inside is_face: 29 LPs, status != 0 in 0, 'not a face' with 0 < t <= 1e-7 in 0   (97 s)
+
+real	1m37.443s
+user	1m29.993s
+sys	0m1.038s

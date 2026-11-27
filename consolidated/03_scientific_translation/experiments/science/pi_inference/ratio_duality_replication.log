@@ -1,0 +1,8 @@
+Theorem 11.105 (a), (c): 400 random instances (4..12 states, asymmetric envelopes, A and B not covering X): full programme = B->A programme = bipartite dual, largest |ln ratio| = 3.0e-15
+Theorem 11.105 (e) sandwich: 400 instances, no violation;  (d) one-state closed forms: 396 instances, agree to 1e-7
+control, envelopes without the triangle inequality: B->A programme strictly larger than the full one in 243 of 400 instances (largest ln ratio 2.27) -- the triangle inequality is used
+Theorem 11.106, two sides of a threshold on the cube (n = 4, 6, 8; uniform and random exchangeable weights; with and without a gap): full programme = maximal-field formula, largest |ln ratio| = 6.7e-15 over 24 cases
+
+real	0m12.644s
+user	0m4.772s
+sys	0m0.156s

@@ -1,0 +1,266 @@
+Threshold computations quoted in docs/ensemble/ENSEMBLE_REPORT.md §4.4 (numerical evidence only).
+Recorded 2026-11-26.  Seeds are fixed in the scripts; the fine grid for n = 10, 12, 14 used
+capacity_threshold.is_simplicial_face with numpy default_rng(777) (driver below).
+
+===== capacity_threshold.py 8 10 12 (full LP over the cube) =====
+(first run; see the tables printed by the script)
+
+===== fine grid, full LP (driver: rng = default_rng(777); n, trials = (10,400),(12,300),(14,120); K = round(a*n), a in 0.8..1.4) =====
+n = 10, trials = 400
+   K =   8  K/n = 0.80  face frequency = 0.875   (6 s)
+   K =   9  K/n = 0.90  face frequency = 0.787   (6 s)
+   K =  10  K/n = 1.00  face frequency = 0.613   (6 s)
+   K =  11  K/n = 1.10  face frequency = 0.383   (6 s)
+   K =  12  K/n = 1.20  face frequency = 0.253   (5 s)
+   K =  13  K/n = 1.30  face frequency = 0.072   (5 s)
+   K =  14  K/n = 1.40  face frequency = 0.022   (5 s)
+n = 12, trials = 300
+   K =  10  K/n = 0.83  face frequency = 0.890   (31 s)
+   K =  11  K/n = 0.92  face frequency = 0.773   (31 s)
+   K =  12  K/n = 1.00  face frequency = 0.677   (31 s)
+   K =  13  K/n = 1.08  face frequency = 0.537   (30 s)
+   K =  14  K/n = 1.17  face frequency = 0.323   (29 s)
+   K =  16  K/n = 1.33  face frequency = 0.060   (27 s)
+   K =  17  K/n = 1.42  face frequency = 0.020   (26 s)
+n = 14, trials = 120
+   K =  11  K/n = 0.79  face frequency = 0.983   (107 s)
+   K =  13  K/n = 0.93  face frequency = 0.858   (104 s)
+   K =  14  K/n = 1.00  face frequency = 0.792   (107 s)
+   K =  15  K/n = 1.07  face frequency = 0.767   (110 s)
+   K =  17  K/n = 1.21  face frequency = 0.183   (114 s)
+   K =  18  K/n = 1.29  face frequency = 0.058   (108 s)
+
+===== capacity_cutting_plane.py 12 60 1.0 1.25 (validation against the full LP) =====
+n = 12: K = 12: 0.733; K = 15: 0.133
+
+===== capacity_cutting_plane.py 16 100 0.9 1.0 1.1 1.2 1.3 1.4 =====
+n = 16: 32768 states modulo flip, 100 trials per K
+   K =  14  K/n = 0.88   face frequency = 0.990   (undecided 0; mean iterations 7.7; 60 s)
+   K =  16  K/n = 1.00   face frequency = 0.940   (undecided 0; mean iterations 8.8; 93 s)
+   K =  18  K/n = 1.12   face frequency = 0.660   (undecided 0; mean iterations 8.2; 103 s)
+   K =  19  K/n = 1.19   face frequency = 0.260   (undecided 0; mean iterations 6.2; 68 s)
+   K =  21  K/n = 1.31   face frequency = 0.070   (undecided 0; mean iterations 3.5; 34 s)
+   K =  22  K/n = 1.38   face frequency = 0.010   (undecided 0; mean iterations 2.0; 17 s)
+
+===== capacity_cutting_plane.py 18 60 0.9 1.0 1.1 1.2 1.3 1.4 =====
+n = 18: 131072 states modulo flip, 60 trials per K
+   K =  16  K/n = 0.89   face frequency = 1.000   (undecided 0; mean iterations 10.5; 131 s)
+   K =  18  K/n = 1.00   face frequency = 0.933   (undecided 0; mean iterations 11.4; 137 s)
+   K =  20  K/n = 1.11   face frequency = 0.617   (undecided 0; mean iterations 12.4; 191 s)
+   K =  22  K/n = 1.22   face frequency = 0.200   (undecided 0; mean iterations 9.2; 167 s)
+   K =  23  K/n = 1.28   face frequency = 0.017   (undecided 0; mean iterations 5.1; 73 s)
+   K =  25  K/n = 1.39   face frequency = 0.000   (undecided 0; mean iterations 1.8; 19 s)
+
+===== capacity_cutting_plane.py 20 40 1.0 1.1 1.2 1.3 1.4 =====
+n = 20: 524288 states modulo flip, 40 trials per K
+   K =  20  K/n = 1.00   face frequency = 1.000   (undecided 0; mean iterations 16.6; 422 s)
+   K =  22  K/n = 1.10   face frequency = 0.625   (undecided 0; mean iterations 17.1; 399 s)
+   K =  24  K/n = 1.20   face frequency = 0.100   (undecided 0; mean iterations 11.1; 279 s)
+   K =  26  K/n = 1.30   face frequency = 0.000   (undecided 0; mean iterations 5.7; 106 s)
+   K =  28  K/n = 1.40   face frequency = 0.000   (undecided 0; mean iterations 2.8; 43 s)
+
+===== symmetric_stability.py 10 14 20 30 (columns: K, K/n, P(strict single-flip stability with symmetric Q), P(... and equal energies)) =====
+n = 20 (40 trials): 0.80: 1.00 1.00 | 0.90: 1.00 1.00 | 1.00: 0.97 0.97 | 1.10: 1.00 1.00 | 1.20: 0.93 0.93 | 1.30: 0.80 0.80 | 1.50: 0.17 0.10 | 1.75: 0.00 | 2.00: 0.00
+n = 30 (20 trials): 0.80-1.30: 1.00 | 1.50: 0.55 0.50 | 1.73: 0.00 | 2.00: 0.00
+(n = 10, 14 are confounded by adjacent conformers: DEAD_ENDS.md ED8)
+
+===== symmetric stability, n = 40 (10 trials), 60 (6 trials); driver rng = default_rng(4242) =====
+n = 40
+   K/n = 1.30: P(strictly stable, symmetric Q) = 1.00  (22 s)
+   K/n = 1.50: P(strictly stable, symmetric Q) = 0.80  (28 s)
+   K/n = 1.60: P(strictly stable, symmetric Q) = 0.20  (33 s)
+   K/n = 1.70: P(strictly stable, symmetric Q) = 0.00  (28 s)
+   K/n = 1.80: P(strictly stable, symmetric Q) = 0.00  (30 s)
+   K/n = 1.90: P(strictly stable, symmetric Q) = 0.00  (33 s)
+n = 60
+   K/n = 1.30: P(strictly stable, symmetric Q) = 1.00  (216 s)
+   K/n = 1.50: P(strictly stable, symmetric Q) = 1.00  (279 s)
+   K/n = 1.60: P(strictly stable, symmetric Q) = 0.33  (324 s)
+   K/n = 1.70: P(strictly stable, symmetric Q) = 0.00  (266 s)
+   K/n = 1.80: P(strictly stable, symmetric Q) = 0.00  (290 s)
+   K/n = 1.90: P(strictly stable, symmetric Q) = 0.00  (232 s)
+
+===== capacity_cutting_plane.py 22 24 1.0 1.1 1.2 1.3 1.4 =====
+n = 22: 2097152 states modulo flip, 24 trials per K
+   K =  22  K/n = 1.00   face frequency = 1.000   (undecided 0; mean iterations 22.9; 497 s)
+   K =  24  K/n = 1.09   face frequency = 0.583   (undecided 0; mean iterations 22.0; 530 s)
+   K =  26  K/n = 1.18   face frequency = 0.083   (undecided 0; mean iterations 16.3; 332 s)
+   K =  29  K/n = 1.32   face frequency = 0.000   (undecided 0; mean iterations 7.2; 123 s)
+   K =  31  K/n = 1.41   face frequency = 0.000   (undecided 0; mean iterations 4.1; 63 s)
+
+===== Part VI (report §4c.3): data of even order <= 2d on the cube; kbody_capacity.py (seed fixed in the script) =====
+(columns: K, frequency with which K random conformers form a face, frequency of lift isolation for the degree-d lift)
+
+===== kbody_capacity.py 8 2 40 16 22 29 45 65 75 85 95 =====
+n = 8, data of even order <= 4: 128 states modulo flip, 99 features (constant included); lift dimension C(n-1,<=2) = 29; Cover-type bound 2*D_odd = 84
+   K =    16   face frequency = 1.000   lift-isolated = 0.950   (undecided 0; mean iterations 1.0; 0 s)
+   K =    22   face frequency = 1.000   lift-isolated = 0.700   (undecided 0; mean iterations 1.0; 0 s)
+   K =    29   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    45   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    65   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    75   face frequency = 0.575   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    85   face frequency = 0.025   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+   K =    95   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 0 s)
+
+===== kbody_capacity.py 10 2 20 46 90 120 140 150 160 170 180 =====
+n = 10, data of even order <= 4: 512 states modulo flip, 256 features (constant included); lift dimension C(n-1,<=2) = 46; Cover-type bound 2*D_odd = 186
+   K =    46   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 3 s)
+   K =    90   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 2 s)
+   K =   120   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 2 s)
+   K =   140   face frequency = 0.900   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   150   face frequency = 0.700   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   160   face frequency = 0.200   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   170   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+   K =   180   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 1 s)
+
+===== kbody_capacity.py 8 2g 40 55 65 70 75 80 85 95   (Gaussian control) =====
+n = 8, data of even order <= 4: 128 states modulo flip, 99 features (constant included); lift dimension C(n-1,<=2) = 29; Cover-type bound 2*D_odd = 84
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =    55   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 11 s)
+   K =    65   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 11 s)
+   K =    70   face frequency = 0.975   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 10 s)
+   K =    75   face frequency = 0.650   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 10 s)
+   K =    80   face frequency = 0.450   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 13 s)
+   K =    85   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 15 s)
+   K =    95   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 20 s)
+
+===== kbody_capacity.py 10 2g 20 120 130 140 150 160 170   (Gaussian control) =====
+n = 10, data of even order <= 4: 512 states modulo flip, 256 features (constant included); lift dimension C(n-1,<=2) = 46; Cover-type bound 2*D_odd = 186
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =   120   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 39 s)
+   K =   130   face frequency = 0.800   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 37 s)
+   K =   140   face frequency = 0.600   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 46 s)
+   K =   150   face frequency = 0.150   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 38 s)
+   K =   160   face frequency = 0.050   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 46 s)
+   K =   170   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 1.0; 30 s)
+
+===== kbody_capacity.py 12 1 40 11 12 13 14 15 16   (pair data, for comparison with the control) =====
+n = 12, data of even order <= 2: 2048 states modulo flip, 67 features (constant included); lift dimension C(n-1,<=1) = 12; Cover-type bound 2*D_odd = 22
+   K =    11   face frequency = 0.775   lift-isolated = 0.000   (undecided 0; mean iterations 3.3; 10 s)
+   K =    12   face frequency = 0.775   lift-isolated = 0.000   (undecided 0; mean iterations 3.4; 10 s)
+   K =    13   face frequency = 0.400   lift-isolated = 0.000   (undecided 0; mean iterations 2.7; 9 s)
+   K =    14   face frequency = 0.225   lift-isolated = 0.000   (undecided 0; mean iterations 2.6; 9 s)
+   K =    15   face frequency = 0.150   lift-isolated = 0.000   (undecided 0; mean iterations 2.5; 8 s)
+   K =    16   face frequency = 0.025   lift-isolated = 0.000   (undecided 0; mean iterations 2.2; 9 s)
+
+===== kbody_capacity.py 12 1g 40 5 6 7 8 9 10 11 12   (Gaussian control, pair-data dimensions) =====
+n = 12, data of even order <= 2: 2048 states modulo flip, 67 features (constant included); lift dimension C(n-1,<=1) = 12; Cover-type bound 2*D_odd = 22
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =     5   face frequency = 1.000   lift-isolated = 0.325   (undecided 0; mean iterations 3.1; 14 s)
+   K =     6   face frequency = 1.000   lift-isolated = 0.175   (undecided 0; mean iterations 3.0; 10 s)
+   K =     7   face frequency = 1.000   lift-isolated = 0.100   (undecided 0; mean iterations 3.3; 11 s)
+   K =     8   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.5; 13 s)
+   K =     9   face frequency = 0.850   lift-isolated = 0.000   (undecided 0; mean iterations 3.4; 11 s)
+   K =    10   face frequency = 0.725   lift-isolated = 0.000   (undecided 0; mean iterations 3.3; 13 s)
+   K =    11   face frequency = 0.450   lift-isolated = 0.000   (undecided 0; mean iterations 3.1; 10 s)
+   K =    12   face frequency = 0.275   lift-isolated = 0.000   (undecided 0; mean iterations 2.6; 12 s)
+
+===== kbody_capacity.py 14 1g 30 6 7 8 9 10 11 12   (Gaussian control, pair-data dimensions) =====
+n = 14, data of even order <= 2: 8192 states modulo flip, 92 features (constant included); lift dimension C(n-1,<=1) = 14; Cover-type bound 2*D_odd = 26
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =     6   face frequency = 1.000   lift-isolated = 0.367   (undecided 0; mean iterations 3.8; 31 s)
+   K =     7   face frequency = 1.000   lift-isolated = 0.133   (undecided 0; mean iterations 4.0; 32 s)
+   K =     8   face frequency = 0.900   lift-isolated = 0.033   (undecided 0; mean iterations 3.9; 33 s)
+   K =     9   face frequency = 0.967   lift-isolated = 0.033   (undecided 0; mean iterations 4.2; 36 s)
+   K =    10   face frequency = 0.933   lift-isolated = 0.000   (undecided 0; mean iterations 4.4; 37 s)
+   K =    11   face frequency = 0.567   lift-isolated = 0.000   (undecided 0; mean iterations 3.8; 36 s)
+   K =    12   face frequency = 0.433   lift-isolated = 0.000   (undecided 0; mean iterations 3.8; 34 s)
+
+===== kbody_capacity.py 12 2 20 67 150 200 220 240 260 280 =====
+n = 12, data of even order <= 4: 2048 states modulo flip, 562 features (constant included); lift dimension C(n-1,<=2) = 67; Cover-type bound 2*D_odd = 352
+   K =    67   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 9.7; 584 s)
+   K =   150   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 11.8; 801 s)
+   K =   200   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 5.8; 323 s)
+   K =   220   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 5.8; 283 s)
+   K =   240   face frequency = 0.300   lift-isolated = 0.000   (undecided 0; mean iterations 4.2; 182 s)
+   K =   260   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.1; 144 s)
+   K =   280   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 2.8; 127 s)
+
+===== kbody_capacity.py 12 2g 12 190 205 220 235 250   (Gaussian control at the size of n = 12, four-body) =====
+n = 12, data of even order <= 4: 2048 states modulo flip, 562 features (constant included); lift dimension C(n-1,<=2) = 67; Cover-type bound 2*D_odd = 352
+   GAUSSIAN CONTROL: the feature vectors are replaced by independent Gaussian vectors (same number of points, same dimension); the lift-isolated column still refers to the cube
+   K =   190   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 5.8; 150 s)
+   K =   205   face frequency = 0.750   lift-isolated = 0.000   (undecided 0; mean iterations 5.6; 176 s)
+   K =   220   face frequency = 0.333   lift-isolated = 0.000   (undecided 0; mean iterations 4.3; 139 s)
+   K =   235   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.3; 122 s)
+   K =   250   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 3.0; 124 s)
+
+===== degree2_vs_face.py   (report §4.2: identified against certified at degree 2; default arguments: 10 300 12 200; seed fixed in the script) =====
+n = 10, 300 random supports per K (distinct modulo the flip); columns: K, P(face), P(degree-2 certificate), P(face without degree-2 certificate), P(degree-2 certificate but not a face)
+   K =   3  K/n = 0.30   1.000   0.773   0.227   0.000   (5 s)
+   K =   4  K/n = 0.40   1.000   0.450   0.550   0.000   (5 s)
+   K =   5  K/n = 0.50   0.993   0.197   0.797   0.000   (5 s)
+   K =   6  K/n = 0.60   0.963   0.043   0.920   0.000   (5 s)
+   K =   7  K/n = 0.70   0.940   0.007   0.933   0.000   (5 s)
+   K =   8  K/n = 0.80   0.880   0.003   0.877   0.000   (5 s)
+   K =   9  K/n = 0.90   0.773   0.000   0.773   0.000   (5 s)
+n = 12, 200 random supports per K (distinct modulo the flip); columns: K, P(face), P(degree-2 certificate), P(face without degree-2 certificate), P(degree-2 certificate but not a face)
+   K =   3  K/n = 0.25   1.000   0.890   0.110   0.000   (23 s)
+   K =   4  K/n = 0.33   1.000   0.625   0.375   0.000   (23 s)
+   K =   5  K/n = 0.42   1.000   0.350   0.650   0.000   (25 s)
+   K =   6  K/n = 0.50   0.995   0.165   0.830   0.000   (29 s)
+   K =   7  K/n = 0.58   0.990   0.090   0.900   0.000   (33 s)
+   K =   8  K/n = 0.67   0.950   0.015   0.935   0.000   (36 s)
+   K =   9  K/n = 0.75   0.920   0.005   0.915   0.000   (35 s)
+   K =  10  K/n = 0.83   0.905   0.000   0.905   0.000   (38 s)
+   K =  11  K/n = 0.92   0.815   0.000   0.815   0.000   (27 s)
+
+===== kbody_capacity.py 14 2 10 280 300 320 340 360   (four-body data at n = 14; 10 supports per K; run of 2026-11-26, about four hours on one core) =====
+n = 14, data of even order <= 4: 8192 states modulo flip, 1093 features (constant included); lift dimension C(n-1,<=2) = 92; Cover-type bound 2*D_odd = 598
+   K =   280   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 15.8; 4740 s)
+   K =   300   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 12.8; 3263 s)
+   K =   320   face frequency = 1.000   lift-isolated = 0.000   (undecided 0; mean iterations 12.5; 2595 s)
+   K =   340   face frequency = 0.200   lift-isolated = 0.000   (undecided 0; mean iterations 10.7; 1879 s)
+   K =   360   face frequency = 0.000   lift-isolated = 0.000   (undecided 0; mean iterations 8.9; 1156 s)
+
+===== gaussian_threshold.py   (the Donoho-Tanner curve at the sizes of the four-body computations; method of the review ER3) =====
+check: rho_W^+(1/2) = 0.5582   (Donoho-Tanner: .5581)
+data of even order <= 4 on the cube: N = 2^(n-1) states modulo the flip, D = number of non-constant features
+   n = 8: N = 128, D = 98, D/N = 0.766: Gaussian threshold 76.4; lift dimension 29; 2 D_odd = 84
+   n = 10: N = 512, D = 255, D/N = 0.498: Gaussian threshold 142.0; lift dimension 46; 2 D_odd = 186
+   n = 12: N = 2048, D = 561, D/N = 0.274: Gaussian threshold 215.2; lift dimension 67; 2 D_odd = 352
+   n = 14: N = 8192, D = 1092, D/N = 0.133: Gaussian threshold 295.8; lift dimension 92; 2 D_odd = 598
+
+===== torus_four_angles.py --survey 0 20 and --survey 20 40   (report section 4c.4, Proposition E20e: thirteen random states on a torus of four angles; run of 2026-11-27) =====
+seed 0: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.0800); a twin on the curve with least mass 0.000000 on the states
+seed 1: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0030 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.2455, smallest local minimum away from the states 0.0027
+seed 2: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0027 on the curve at distance > 0.15 from the states; certificate with A = 1e+04: smallest Hessian eigenvalue at the states 0.2188, smallest local minimum away from the states 0.0015
+seed 3: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0002 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.0143, smallest local minimum away from the states 0.0001
+seed 4: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0020 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.1603, smallest local minimum away from the states 0.0016
+seed 5: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0001 on the curve at distance > 0.15 from the states; certificate with A = 1e+07: smallest Hessian eigenvalue at the states 0.0049, smallest local minimum away from the states 0.0000
+seed 6: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0002 on the curve at distance > 0.15 from the states; certificate with A = 1e+07: smallest Hessian eigenvalue at the states 0.0154, smallest local minimum away from the states 0.0001
+seed 7: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0009 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.0741, smallest local minimum away from the states 0.0006
+seed 8: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0012 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.0979, smallest local minimum away from the states 0.0005
+seed 9: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0074 on the curve at distance > 0.15 from the states; certificate with A = 1e+04: smallest Hessian eigenvalue at the states 0.4697, smallest local minimum away from the states 0.3159
+seed 10: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.3120); a twin on the curve with least mass 0.000000 on the states
+seed 11: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.0574); a twin on the curve with least mass 0.079283 on the states
+seed 12: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0032 on the curve at distance > 0.15 from the states; certificate with A = 1e+06: smallest Hessian eigenvalue at the states 0.2234, smallest local minimum away from the states 0.0026
+seed 13: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.0341); a twin on the curve with least mass 0.000000 on the states
+seed 14: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.0684); a twin on the curve with least mass 0.000000 on the states
+seed 15: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0003 on the curve at distance > 0.15 from the states; certificate with A = 1e+04: smallest Hessian eigenvalue at the states 0.0160, smallest local minimum away from the states 0.0000
+seed 16: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.0792); a twin on the curve with least mass 0.000000 on the states
+seed 17: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.1798); a twin on the curve with least mass 0.000000 on the states
+seed 18: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0022 on the curve at distance > 0.15 from the states; certificate with A = 1e+04: smallest Hessian eigenvalue at the states 0.1792, smallest local minimum away from the states 0.0017
+seed 19: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0010 on the curve at distance > 0.15 from the states; certificate with A = 1e+07: smallest Hessian eigenvalue at the states 0.0800, smallest local minimum away from the states 0.0007
+thirteen random states on T^4, seeds 0..19: IDENTIFIED: 13; NOT IDENTIFIED: 7
+seed 20: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0007 on the curve at distance > 0.15 from the states; certificate with A = 1e+06: smallest Hessian eigenvalue at the states 0.0601, smallest local minimum away from the states 0.0003
+seed 21: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0015 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.1162, smallest local minimum away from the states 0.0013
+seed 22: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.1110); a twin on the curve with least mass 0.000000 on the states
+seed 23: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0001 on the curve at distance > 0.15 from the states; certificate with A = 1e+06: smallest Hessian eigenvalue at the states 0.0117, smallest local minimum away from the states 0.0001
+seed 24: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0000 on the curve at distance > 0.15 from the states; certificate with A = 1e+06: smallest Hessian eigenvalue at the states 0.0056, smallest local minimum away from the states 0.0000
+seed 25: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0094 on the curve at distance > 0.15 from the states; certificate with A = 1e+03: smallest Hessian eigenvalue at the states 0.7218, smallest local minimum away from the states 0.0059
+seed 26: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.2634); a twin on the curve with least mass 0.000000 on the states
+seed 27: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; UNDECIDED (no candidate; no twin found)
+seed 28: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0011 on the curve at distance > 0.15 from the states; certificate with A = 1e+06: smallest Hessian eigenvalue at the states 0.0891, smallest local minimum away from the states 0.0007
+seed 29: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0024 on the curve at distance > 0.15 from the states; certificate with A = 1e+06: smallest Hessian eigenvalue at the states 0.1868, smallest local minimum away from the states 0.0017
+seed 30: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0009 on the curve at distance > 0.15 from the states; certificate with A = 1e+06: smallest Hessian eigenvalue at the states 0.1375, smallest local minimum away from the states 0.0008
+seed 31: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.4035); a twin on the curve with least mass 0.000000 on the states
+seed 32: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; UNDECIDED (no candidate; no twin found)
+seed 33: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0023 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.1971, smallest local minimum away from the states 0.0013
+seed 34: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0059 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.4695, smallest local minimum away from the states 0.0025
+seed 35: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0018 on the curve at distance > 0.15 from the states; certificate with A = 1e+04: smallest Hessian eigenvalue at the states 0.1436, smallest local minimum away from the states 0.0014
+seed 36: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; UNDECIDED (a candidate on the curve; torus check failed)
+seed 37: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; UNDECIDED (no candidate; no twin found)
+seed 38: real components of the curve 3; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0021 on the curve at distance > 0.15 from the states; certificate with A = 1e+04: smallest Hessian eigenvalue at the states 0.1703, smallest local minimum away from the states 0.0008
+seed 39: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0025 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.2246, smallest local minimum away from the states 0.0009
+thirteen random states on T^4, seeds 20..39: IDENTIFIED: 13; NOT IDENTIFIED: 3; UNDECIDED (a candidate on the curve; torus check failed): 1; UNDECIDED (no candidate; no twin found): 3

@@ -1,0 +1,25 @@
+E1  unisolvent sets and their Lagrange functions of order below m
+   grid (2, 2, 2), m = 2: N_ball = 4 of 8 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 2.0
+   grid (2, 2, 2), m = 3: N_ball = 7 of 8 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 1.0
+   grid (2, 2, 3), m = 2: N_ball = 5 of 12 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 2.0
+   grid (2, 2, 3), m = 3: N_ball = 10 of 12 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 1.0
+   grid (3, 3, 2), m = 2: N_ball = 6 of 18 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 2.0
+   grid (3, 3, 2), m = 3: N_ball = 14 of 18 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 1.0
+   grid (2, 2, 2, 2), m = 2: N_ball = 5 of 16 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 3.0
+   grid (2, 2, 2, 2), m = 3: N_ball = 11 of 16 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 3.0
+   grid (3, 2, 2, 2), m = 3: N_ball = 15 of 24 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 3.0
+   grid (4, 3), m = 2: N_ball = 6 of 12 points; balls around 3 references unisolvent; Lagrange functions exist; largest |h_a| off the ball 1.0
+E2  level 2: the best vertex for L is an ordering vertex of the pairs (n = 4, m = 3, k = 2)
+   40 instances (product and non-product laws): the minimum of L over all 81 vertices is attained at an ordering vertex in 40; 51 of the 81 vertices are ordering vertices
+E3  one pair of nearly tied sites, c = 2 ln(1/p): the most frozen site against equal shares at the upper end
+   p = 0.1: U(vertex) = 2.389 (ln(1/p) = 2.303), U(equal) = 1.284 (2 ln(2 - p) = 1.284), ratio 1.86;  L(vertex) = 1.04e-01, L(equal) = 1.89e-01, ratio 0.553 (bound m = 2 for the lower end)
+   p = 0.01: U(vertex) = 4.615 (ln(1/p) = 4.605), U(equal) = 1.376 (2 ln(2 - p) = 1.376), ratio 3.35;  L(vertex) = 1.00e-02, L(equal) = 1.99e-02, ratio 0.505 (bound m = 2 for the lower end)
+   p = 0.001: U(vertex) = 6.909 (ln(1/p) = 6.908), U(equal) = 1.385 (2 ln(2 - p) = 1.385), ratio 4.99;  L(vertex) = 1.00e-03, L(equal) = 2.00e-03, ratio 0.501 (bound m = 2 for the lower end)
+   p = 1e-06: U(vertex) = 13.816 (ln(1/p) = 13.816), U(equal) = 1.386 (2 ln(2 - p) = 1.386), ratio 9.97;  L(vertex) = 1.00e-06, L(equal) = 2.00e-06, ratio 0.500 (bound m = 2 for the lower end)
+E4  (THY-RES-0012 section 3.2 item 3) level 2, independent sites: 'the two most frozen sites of T, a second difference'
+   gamma_ab = Gamma(A + a + b) - Gamma(A + a) - Gamma(A + b) + Gamma(A), A the sites after b in the order: largest error 5.3e-15 over 20 instances
+E5  every allocation covers: pen_lam(S) >= sum of c_T over the T inside S, for every changed set S (levels 1, 2, 3)
+   60 random allocations (n = 5..7, m = 3, 4, k = 1, 2, 3): least pen - envelope over all changed sets -3.6e-15 (zero up to rounding at the set of all sites, positive elsewhere or zero); equality at the set of all sites to 3.6e-15
+ALL CHECKS PASSED
+seconds 0.3
+peak RSS MB 35.875

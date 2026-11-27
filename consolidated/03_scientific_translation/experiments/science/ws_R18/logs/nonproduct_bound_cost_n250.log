@@ -1,0 +1,28 @@
+R18-RUNNER start 2026-11-26T16:19:45Z script=/home/user/MetricChain/experiments/science/ws_R18/rerun_copy/chunks/cost_n250/experiments/eng/twolevel/nonproduct_bound.py job=cost chunk=cost_n250 address-space limit 2.0 GB; python -I -B; kernel: R18 adapter over their meanrun.mean_run
+{
+ "by_u": {
+  "0.5": {
+   "cells": 12,
+   "max_gap": 1.2000356264252332e-10,
+   "max_gap_over_na": 1.5842126636576825e-11,
+   "max_worst_increase_over_na": 0.0,
+   "worst_increase_at": null
+  },
+  "1": {
+   "cells": 12,
+   "max_gap": 2.6546885578682122e-08,
+   "max_gap_over_na": 9.571267821225007e-10,
+   "max_worst_increase_over_na": 0.0,
+   "worst_increase_at": null
+  },
+  "2": {
+   "cells": 12,
+   "max_gap": 1.522055015357182e-08,
+   "max_gap_over_na": 1.8572216527955177e-10,
+   "max_worst_increase_over_na": 0.0,
+   "worst_increase_at": null
+  }
+ },
+ "above_Cmax": 0
+}
+R18-RUNNER done 2026-11-26T16:19:50Z exit=0 wall=6.0s mean_runs=288 peak RSS MB=83.3

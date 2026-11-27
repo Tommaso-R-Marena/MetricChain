@@ -1,0 +1,11 @@
+T7 fewer means for one conformation  start 2026-11-26T18:17:56Z
+K4: |E| = 6; means used: |E| + 3 = 9 (Corollary E8 with K = 1: 12). 10 random frameworks:
+    Omega psd 10/10; rank N-3 10/10; max |Omega x|, |Omega 1| = 4.4e-16; max |tr(p^T Omega p) - sum_e omega_e t_e(p)| on random p = 7.1e-15; E2 directions not on a conic 10/10
+    zeros of f from 20000 minimisations: congruent to x 20000 (control: must be > 0), NOT congruent to x 0 (Proposition C: must be 0)
+    negative control, E2 = two edges (on a conic): zeros congruent to x 0, NOT congruent 20000 (must be > 0)
+K5: |E| = 10; means used: |E| + 3 = 13 (Corollary E8 with K = 1: 20). 10 random frameworks:
+    Omega psd 10/10; rank N-3 10/10; max |Omega x|, |Omega 1| = 1.0e-15; max |tr(p^T Omega p) - sum_e omega_e t_e(p)| on random p = 1.4e-14; E2 directions not on a conic 10/10
+    zeros of f from 20000 minimisations: congruent to x 20000 (control: must be > 0), NOT congruent to x 0 (Proposition C: must be 0)
+    negative control, E2 = two edges (on a conic): zeros congruent to x 0, NOT congruent 20000 (must be > 0)
+violations: 0
+DONE t7_fewer_means 2026-11-26T18:20:28Z

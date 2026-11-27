@@ -1,0 +1,113 @@
+== part 0: validation at n = 16 (full enumeration) ==
+  n=16 u=1.0 r1=7 r2=9 D=8 kappa=3.3: errors lnZ0 3.6e-15 U0 4.4e-16 lnZ' 3.6e-15 U'-U0 3.3e-16   (U'-U0 = -0.537418)
+  n=16 u=2.0 r1=6 r2=8 D=5 kappa=2.7: errors lnZ0 3.6e-15 U0 8.0e-15 lnZ' 1.8e-15 U'-U0 8.2e-15   (U'-U0 = +1.675684)
+  n=16 u=0.7 r1=8 r2=10 D=11 kappa=6.0: errors lnZ0 3.6e-15 U0 1.3e-15 lnZ' 0.0e+00 U'-U0 1.6e-15   (U'-U0 = -1.224102)
+  n=16 u=1.3 r1=7 r2=12 D=3 kappa=4.1: errors lnZ0 1.8e-15 U0 2.7e-15 lnZ' 3.6e-15 U'-U0 3.4e-15   (U'-U0 = -0.872389)
+== part 1: exact plateau twins (own cases) ==
+  n=400 u=1.0 rho1=rho0+0.030 r1=164 D=200 target eps1=0.0200 (eps=8.00):
+     S0-n h(sig)=+3.369e-04  |U0|-u(r1-sig n)=-3.311e-04
+     r2=173 (formula 172.4)  kappa*=61.7399 > kappa_lo=55.4231: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=8.0274  bound (b)=5.2659  gap-bound=+2.762   gap at r2-1: 7.1816
+     plateau edge (r2-kappa*)/n=0.27815 vs sigma2(gap/n)=0.29013;  r2/n=0.43250 vs rho1'-sig+sigma2=0.43119
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-10.9 against ln(1/r2)=-5.2 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-9.2
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.01457 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.00955 ; theta_hint(eps1)=0.02018
+  n=800 u=1.0 rho1=rho0+0.020 r1=320 D=400 target eps1=0.0300 (eps=24.00):
+     S0-n h(sig)=+1.087e-05  |U0|-u(r1-sig n)=-1.077e-05
+     r2=348 (formula 346.1)  kappa*=108.9270 > kappa_lo=103.8469: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=24.6636  bound (b)=22.3575  gap-bound=+2.306   gap at r2-1: 23.8565
+     plateau edge (r2-kappa*)/n=0.29884 vs sigma2(gap/n)=0.30258;  r2/n=0.43500 vs rho1'-sig+sigma2=0.43364
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-23.5 against ln(1/r2)=-5.9 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-19.3
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.01150 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.00913 ; theta_hint(eps1)=0.01633
+  n=800 u=1.0 rho1=rho0+0.020 r1=320 D=336 target eps1=0.0300 (eps=24.00):
+     S0-n h(sig)=+1.087e-05  |U0|-u(r1-sig n)=-1.077e-05
+     r2=348 (formula 346.1)  kappa*=108.9270 > kappa_lo=103.8469: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=24.6636  bound (b)=22.3575  gap-bound=+2.306   gap at r2-1: 23.8565
+     plateau edge (r2-kappa*)/n=0.29884 vs sigma2(gap/n)=0.30258;  r2/n=0.43500 vs rho1'-sig+sigma2=0.43364
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-10.7 against ln(1/r2)=-5.9 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-16.0
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.01150 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.00913 ; theta_hint(eps1)=0.01633
+  n=800 u=1.0 rho1=rho0+0.020 r1=320 D=464 target eps1=0.0300 (eps=24.00):
+     S0-n h(sig)=+1.087e-05  |U0|-u(r1-sig n)=-1.077e-05
+     r2=348 (formula 346.1)  kappa*=108.9270 > kappa_lo=103.8469: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=24.6636  bound (b)=22.3575  gap-bound=+2.306   gap at r2-1: 23.8565
+     plateau edge (r2-kappa*)/n=0.29884 vs sigma2(gap/n)=0.30258;  r2/n=0.43500 vs rho1'-sig+sigma2=0.43364
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-41.3 against ln(1/r2)=-5.9 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-24.0
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.01150 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.00913 ; theta_hint(eps1)=0.01633
+  n=1500 u=1.0 rho1=rho0+0.010 r1=585 D=750 target eps1=0.0500 (eps=75.00):
+     S0-n h(sig)=+4.704e-05  |U0|-u(r1-sig n)=-4.678e-05
+     r2=675 (formula 672.4)  kappa*=183.9317 > kappa_lo=180.5878: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=75.2640  bound (b)=73.1046  gap-bound=+2.159   gap at r2-1: 74.5585
+     plateau edge (r2-kappa*)/n=0.32738 vs sigma2(gap/n)=0.32748;  r2/n=0.45000 vs rho1'-sig+sigma2=0.44854
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-49.9 against ln(1/r2)=-6.5 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-40.3
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.00663 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.00538 ; theta_hint(eps1)=0.00986
+  n=1000 u=2.0 rho1=rho0+0.010 r1=294 D=500 target eps1=0.1000 (eps=100.00):
+     S0-n h(sig)=+1.218e-07  |U0|-u(r1-sig n)=-1.214e-07
+     r2=352 (formula 350.8)  kappa*=176.4432 > kappa_lo=174.2971: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=100.1348  bound (b)=97.3112  gap-bound=+2.824   gap at r2-1: 98.6102
+     plateau edge (r2-kappa*)/n=0.17556 vs sigma2(gap/n)=0.17613;  r2/n=0.35200 vs rho1'-sig+sigma2=0.35092
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-192.8 against ln(1/r2)=-5.9 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-101.7
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.04795 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.04573 ; theta_hint(eps1)=0.05679
+  n=1000 u=2.0 rho1=rho0+0.010 r1=294 D=470 target eps1=0.2000 (eps=200.00):
+     S0-n h(sig)=+1.218e-07  |U0|-u(r1-sig n)=-1.214e-07
+     r2=430 (formula 427.5)  kappa*=175.4116 > kappa_lo=174.2971: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=200.3293  bound (b)=198.3021  gap-bound=+2.027   gap at r2-1: 199.2600
+     plateau edge (r2-kappa*)/n=0.25459 vs sigma2(gap/n)=0.25305;  r2/n=0.43000 vs rho1'-sig+sigma2=0.42785
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-157.9 against ln(1/r2)=-6.1 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-89.4
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.01243 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.01080 ; theta_hint(eps1)=0.02758
+  n=700 u=4.0 rho1=rho0+0.010 r1=126 D=350 target eps1=0.3000 (eps=210.00):
+     S0-n h(sig)=-4.377e-12  |U0|-u(r1-sig n)=+4.718e-12
+     r2=208 (formula 205.8)  kappa*=113.6520 > kappa_lo=113.1597: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=211.4398  bound (b)=209.0994  gap-bound=+2.340   gap at r2-1: 209.5839
+     plateau edge (r2-kappa*)/n=0.13478 vs sigma2(gap/n)=0.13305;  r2/n=0.29714 vs rho1'-sig+sigma2=0.29507
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-inf against ln(1/r2)=-5.3 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-inf
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.09006 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.08858 ; theta_hint(eps1)=0.13778
+  n=700 u=4.0 rho1=rho0+0.010 r1=126 D=371 target eps1=0.4500 (eps=315.00):
+     S0-n h(sig)=-4.377e-12  |U0|-u(r1-sig n)=+4.718e-12
+     r2=278 (formula 274.9)  kappa*=113.5403 > kappa_lo=113.1597: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=315.8097  bound (b)=314.0429  gap-bound=+1.767   gap at r2-1: 314.6262
+     plateau edge (r2-kappa*)/n=0.23494 vs sigma2(gap/n)=0.23164;  r2/n=0.39714 vs rho1'-sig+sigma2=0.39365
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-762.7 against ln(1/r2)=-5.6 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-185.8
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.02540 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.02376 ; theta_hint(eps1)=0.09902
+  n=1200 u=0.5 rho1=rho0+0.010 r1=538 D=600 target eps1=0.0060 (eps=7.20):
+     S0-n h(sig)=+9.575e-02  |U0|-u(r1-sig n)=-9.354e-02
+     r2=555 (formula 553.2)  kappa*=94.5268 > kappa_lo=82.7641: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=7.5116  bound (b)=5.0300  gap-bound=+2.482   gap at r2-1: 7.0955
+     plateau edge (r2-kappa*)/n=0.38373 vs sigma2(gap/n)=0.39081;  r2/n=0.46250 vs rho1'-sig+sigma2=0.46160
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-9.2 against ln(1/r2)=-6.3 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-8.8
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.00454 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.00307 ; theta_hint(eps1)=0.00498
+  n=900 u=3.0 rho1=rho0+0.015 r1=207 D=450 target eps1=0.2500 (eps=225.00):
+     S0-n h(sig)=-1.245e-11  |U0|-u(r1-sig n)=+1.239e-11
+     r2=311 (formula 309.0)  kappa*=164.7263 > kappa_lo=163.9834: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=225.8314  bound (b)=224.7529  gap-bound=+1.078   gap at r2-1: 224.1975
+     plateau edge (r2-kappa*)/n=0.16253 vs sigma2(gap/n)=0.16128;  r2/n=0.34556 vs rho1'-sig+sigma2=0.34386
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-467.7 against ln(1/r2)=-5.7 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-164.6
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.05236 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.05004 ; theta_hint(eps1)=0.08383
+  n=2400 u=1.0 rho1=rho0+0.005 r1=924 D=1200 target eps1=0.0200 (eps=48.00):
+     S0-n h(sig)=+1.305e-03  |U0|-u(r1-sig n)=-1.300e-03
+     r2=976 (formula 974.7)  kappa*=285.7873 > kappa_lo=277.5393: True   F(kappa_lo)>0: True  F(r2)<0: True  sign changes on grid: 1
+     gap=48.2127  bound (b)=45.1671  gap-bound=+3.046   gap at r2-1: 47.3331
+     plateau edge (r2-kappa*)/n=0.28759 vs sigma2(gap/n)=0.29016;  r2/n=0.40667 vs rho1'-sig+sigma2=0.40622
+     (c) difference inside B(a',r2-1): True;  deep end: ln(omega/W2)=-84.9 against ln(1/r2)=-6.9 -> condition holds: True;  ln(frac of B(a',r2-1) in V)=-70.1
+     exponent  n^-1 ln(2^n/|B(n,r2-1)|) = 0.01891 ;  asymptotic ln2-h(rho1-sig+sigma2(eps1)) = 0.01778 ; theta_hint(eps1)=0.02018
+== part 2: for which n is there a root (u=1, rho1=rho0+0.01, D=n/2) ==
+  n=  60 r1= 24 U0=  -6.222 kappa_lo=  5.222 ln(W/2^n)~ 1.21:  r2=r1+1: root 7.873 gap 0.701  r2=r1+2: root 7.590 gap 1.090
+  n= 100 r1= 39 U0=  -8.943 kappa_lo=  7.943 ln(W/2^n)~ 1.01:  r2=r1+1: root 11.213 gap 0.600  r2=r1+3: root 10.628 gap 1.438
+  n= 150 r1= 59 U0= -16.484 kappa_lo= 15.484 ln(W/2^n)~ 2.02:  r2=r1+1: root 20.764 gap 0.933  r2=r1+4: root 19.177 gap 2.809
+  n= 200 r1= 78 U0= -21.388 kappa_lo= 20.388 ln(W/2^n)~ 2.02:  r2=r1+1: root 26.354 gap 0.917  r2=r1+6: root 24.036 gap 4.324
+  n= 250 r1= 98 U0= -29.346 kappa_lo= 28.346 ln(W/2^n)~ 3.03:  r2=r1+1: root 36.830 gap 1.126  r2=r1+7: root 32.871 gap 5.717
+  n= 300 r1=117 U0= -34.651 kappa_lo= 33.651 ln(W/2^n)~ 3.03:  r2=r1+1: root 42.883 gap 1.125  r2=r1+9: root 38.140 gap 7.405
+  n= 350 r1=137 U0= -42.129 kappa_lo= 41.129 ln(W/2^n)~ 4.04:  r2=r1+1: root 52.998 gap 1.217  r2=r1+10: root 46.203 gap 8.587
+  n= 400 r1=156 U0= -47.591 kappa_lo= 46.591 ln(W/2^n)~ 4.05:  r2=r1+1: root 59.479 gap 1.219  r2=r1+12: root 51.651 gap 10.325
+  n= 500 r1=195 U0= -60.147 kappa_lo= 59.147 ln(W/2^n)~ 5.06:  r2=r1+1: root 75.329 gap 1.258  r2=r1+15: root 64.519 gap 13.141
+  n= 600 r1=234 U0= -72.467 kappa_lo= 71.467 ln(W/2^n)~ 6.07:  r2=r1+1: root 90.496 gap 1.274  r2=r1+18: root 76.943 gap 15.908
+  n= 800 r1=312 U0= -96.817 kappa_lo= 95.817 ln(W/2^n)~ 8.09:  r2=r1+1: root 119.243 gap 1.286  r2=r1+24: root 101.598 gap 21.397
+== part 3: centres that are close (the statement asks for |D - n/2| <= sqrt(n ln n)) ==
+  n=800 D=400 (sqrt(n ln n)=73):  r2=r1+1: ln(omega/W2)=  -23.5 root 127.478 gap 1.287  r2=r1+30: ln(omega/W2)=  -23.5 root 108.718 gap 26.262
+  n=800 D=280 (sqrt(n ln n)=73):  r2=r1+1: ln(omega/W2)=   -3.8 root 127.478 gap 1.287  r2=r1+30: ln(omega/W2)=   -3.8 root 108.718 gap 26.262
+  n=800 D=200 (sqrt(n ln n)=73):  r2=r1+1: ln(omega/W2)=   -0.2 root 127.478 gap 1.287  r2=r1+30: ln(omega/W2)=   -0.2 root 108.718 gap 26.262
+  n=800 D=120 (sqrt(n ln n)=73):  r2=r1+1: ln(omega/W2)=   -0.0 root 127.478 gap 1.287  r2=r1+30: ln(omega/W2)=   -0.0 root 108.718 gap 26.262
+  n=800 D=64 (sqrt(n ln n)=73):  r2=r1+1: ln(omega/W2)=   -0.0 root 127.473 gap 1.287  r2=r1+30: ln(omega/W2)=   -0.0 root 108.718 gap 26.262
+SUMMARY part0 True part1 (a),(b),(c) in all cases: True  time 84s
+
+real	1m24.084s
+user	1m9.215s
+sys	0m14.000s

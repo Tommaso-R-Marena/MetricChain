@@ -1,0 +1,24 @@
+# independent verification of z6_certified_tops.py  (u = 0.5, J = 40, K = 3000)
+# their ABAR = 0.030299861980765914; my enclosure of a: [0.03029986198076591, 0.03029986198076591]; ABAR >= a rigorously: True;  ABAR - a <= 2.91e-18 (0.8 ulp)
+# columns: j | their c_j | stored lines | records | shadow == their step | their lines == my hull of them | checker violations | least margins in ulp: e', th, slope, beta
+   1 | 0.030299861980766 |    32 |  3042 | True | True | 0 | 0.00 0.00 3.50 3.50
+   2 | 0.015150741226595 |  1539 |  3137 | True | True | 0 | 0.00 0.00 2.71 2.62
+   3 | 0.010866895035615 |  2305 |  3181 | True | True | 0 | 0.00 0.00 2.59 2.17
+   4 | 0.009262063228083 |  2706 |  3216 | True | True | 0 | 0.00 0.00 2.22 2.07
+   5 | 0.008571748825657 |  2909 |  3246 | True | True | 0 | 0.00 0.00 2.60 2.23
+   6 | 0.008246638019542 |  3013 |  3274 | True | True | 0 | 0.00 0.00 2.57 2.07
+   7 | 0.008076739560000 |  3067 |  3299 | True | True | 0 | 0.00 0.00 2.43 2.17
+   8 | 0.007976363273748 |  3100 |  3319 | True | True | 0 | 0.00 0.00 2.74 2.24
+   9 | 0.007910569147633 |  3123 |  3335 | True | True | 0 | 0.00 0.00 2.78 2.21
+  10 | 0.007864446849873 |  3141 |  3349 | True | True | 0 | 0.00 0.00 2.35 1.92
+  11 | 0.007830683291756 |  3155 |  3361 | True | True | 0 | 0.00 0.00 2.47 2.21
+  12 | 0.007805176351496 |  3167 |  3373 | True | True | 0 | 0.00 0.00 2.68 1.91
+  20 | 0.007720194123618 |  3233 |  3434 | True | True | 0 | 0.00 0.00 2.56 2.17
+  30 | 0.007693868863999 |  3279 |  3483 | True | True | 0 | 0.00 0.00 2.47 2.16
+  40 | 0.007684670860482 |  3314 |  3516 | True | True | 0 | 0.00 0.00 2.54 2.19
+# steps 40; stored lines 122522; generated lines (records) 136048; checker violations 0; hull mismatches 0; time 122 s
+# least margins over the run, in ulp of the stored double (all must be >= 0): e' 0.00, th 0.00, slope 2.22, beta 1.90
+# tops below the semi-analytic envelope tops (doubles, tolerance 1e-12): 0   [must be 0]
+# committed output out_z6_certified_u0.5.txt (K = 3000): 0 of 40 tops differ in the 12 printed decimals
+VERIFY-THEIRS: ALL CHECKS PASS
+R29-END r29_i1_verify_theirs u=0.5 J=40 K=3000 wall 121.8 s; address-space cap 3 GB; peak RSS 310.1 MB

@@ -1,0 +1,16 @@
+A. three angles, six generic states: measures on the zero curve of the projector certificate
+   instance 1: 10698 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 1.1e-15, LP status 0)
+   instance 2: 11378 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 1.7e-15, LP status 0)
+   instance 3: 12000 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 0.434 (residual 9.4e-16, LP status 0)
+   instance 4: 8282 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 7.0e-15, LP status 0)
+   instance 5: 11508 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 9.2e-16, LP status 0)
+   instance 6: 12000 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 3.1e-15, LP status 0)
+   instance 7: 10690 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 1.6e-15, LP status 0)
+   instance 8: 9622 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 5.8e-16, LP status 0)
+   instance 9: 12000 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 1.000 (residual 7.8e-15, LP status 0)
+   instance 10: 11888 points on the curve; dimension of the span of the 27 products on the curve: 12; largest mass farther than 0.05 from the six states with the same data: 0.987 (residual 5.6e-16, LP status 0)
+C. four angles, thirteen generic states: measures on the zero curve of the projector certificate
+   instance 1: 9712 points on the curve; dimension of the span of the 81 products on the curve: 36; largest mass farther than 0.05 from the thirteen states with the same data: -0.00e+00 (residual 1.5e-15, LP status 0)
+   instance 2: 8376 points on the curve; dimension of the span of the 81 products on the curve: 36; largest mass farther than 0.05 from the thirteen states with the same data: -0.00e+00 (residual 2.2e-16, LP status 0)
+   instance 3: 10860 points on the curve; dimension of the span of the 81 products on the curve: 36; largest mass farther than 0.05 from the thirteen states with the same data: 1.00e+00 (residual 1.4e-14, LP status 0)
+   instance 4: 10248 points on the curve; dimension of the span of the 81 products on the curve: 36; largest mass farther than 0.05 from the thirteen states with the same data: 1.00e+00 (residual 3.9e-14, LP status 0)

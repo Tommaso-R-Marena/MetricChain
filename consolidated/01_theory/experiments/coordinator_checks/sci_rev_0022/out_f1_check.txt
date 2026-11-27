@@ -1,0 +1,10 @@
+# Part 1: the boundary member g0 = -c*C(|x|,2), E = e|x|, c = 1, e = 0.1, eps = 0
+n = 2: N_2 = 3 (a certifying set: ((0, 0), (0, 1), (1, 0)));  K_- = 4;  K_- <= N_2 FAILS
+   control, zero residual: N_2 = 4, K_- = 4, (n+1)K_+ + 1 = 7: sandwich holds
+n = 3: N_2 = 4 (a certifying set: ((0, 0, 0), (0, 0, 1), (0, 1, 0), (1, 0, 0)));  K_- = 8;  K_- <= N_2 FAILS
+   control, zero residual: N_2 = 8, K_- = 8, (n+1)K_+ + 1 = 9: sandwich holds
+# Part 2: the substitute K_-[(1-kappa)c] <= N_2 <= (n+1)K_+[(1+kappa)c] + 1 for |D_iD_j g| <= kappa*c; n = 3
+kappa = 0.0: cases so far 6; violations of the substitute 0; of the original lower bound K_-[c] <= N_2: 0
+kappa = 0.5: cases so far 12; violations of the substitute 0; of the original lower bound K_-[c] <= N_2: 4
+kappa = 0.9: cases so far 18; violations of the substitute 0; of the original lower bound K_-[c] <= N_2: 7
+RESULT: ALL CHECKS PASS (the counterexample is confirmed; the substitute holds in every case)

@@ -1,0 +1,8 @@
+=== w07 non-adaptive finite-n: chain asym; e = 0.0 E = 0.000000; R(e) = 0.045407; accuracy rate x = e + R(e) = 0.045407; theta_na(x) = R(e) = 0.045407; eps = x n + 1.0 ===
+  cone labels (vertices) [[0.0, -0.5, -2.0], [0.0, 0.5, 1.0]] with weights [0.5009 0.4991]
+  n =   30: block sizes [15, 15]; eps =    2.362; least q with x_n(q) > eps: q = 5.5909e-02 (x_n = 2.362, largest orbit density of the truncated set 5.591e-02)  ->  theta_n = 0.096134   (theta_na = 0.045407; (theta_n - theta_na) n / ln n = +0.447); 0.0 s
+  n =   60: block sizes [30, 30]; eps =    3.724; least q with x_n(q) > eps: q = 8.3053e-03 (x_n = 3.725, largest orbit density of the truncated set 8.305e-03)  ->  theta_n = 0.079848   (theta_na = 0.045407; (theta_n - theta_na) n / ln n = +0.505); 0.1 s
+  n =  120: block sizes [60, 60]; eps =    6.449; least q with x_n(q) > eps: q = 3.0360e-04 (x_n = 6.450, largest orbit density of the truncated set 3.036e-04)  ->  theta_n = 0.067498   (theta_na = 0.045407; (theta_n - theta_na) n / ln n = +0.554); 0.5 s
+  n =  240: block sizes [120, 120]; eps =   11.898; least q with x_n(q) > eps: q = 7.1213e-07 (x_n = 11.898, largest orbit density of the truncated set 7.121e-07)  ->  theta_n = 0.058979   (theta_na = 0.045407; (theta_n - theta_na) n / ln n = +0.594); 6.6 s
+  two-point extrapolation a + b ln n/n from n = 120, 240: a = 0.047576, b = 0.499   (theta_na = 0.045407)
+time 8 s

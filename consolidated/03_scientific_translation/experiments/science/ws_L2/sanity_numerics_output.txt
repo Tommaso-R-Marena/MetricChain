@@ -1,0 +1,31 @@
+A11: 400 instances, n=1..4, half with signed constants (cup+cdn>=0):
+   worst violation of field admissibility      8.88e-16
+   worst relative violation of Holley cond.     3.50e-15
+   worst violation of E_lo<=E_g<=E_hi           4.44e-16
+   worst relative violation of macrostate products 2.44e-15
+   instances with a strict inequality           400
+A11 needs beta>=0: beta=+1:  E_(f+hup) phi = 0.6465,  E_(f+g) phi = 1.0000  (<=)
+A11 needs beta>=0: beta=-1:  E_(f+hup) phi = 1.3535,  E_(f+g) phi = 1.0000  (>)
+R6.1: 2000 random pairs (g0,T), up to 8 points: |Z'-(Z0+E)|/Z' <= 3.9e-16, identity error <= 2.7e-15
+R5(2) max >= sum - pairwise minima, nonneg families: least slack -4.44e-16
+R5(2) without nonnegativity: family (0,0,-1): max = 0.0, sum - pairwise minima = 1.0  -> inequality FAILS
+R5(2) on cubes n=3..8, random centre sets: least slack of |C|Z(flat) - Z(flat^C): 0.00e+00; of Z(cone^C) - (|C|Z(cone) - pair sums): 0.00e+00
+R6.2 (exact sums by classes; hypotheses (i) W >= 8 r1 e^u 2^n, (ii) omega_+1 <= e^-u W/(2(r1+1))):
+   2622 instances (n in 12..40, all r1 < n/2, u in 0.5..6, 7 distances); hypotheses hold in 465; conclusion violated in 0
+   example n=24, r1=5, u=4.0, D=24: W/(8 r1 e^u 2^n) = 0.0205, omega_+1 = 0, U'_+1-U0 = -4.3177, U'_-1-U0 = +0.0631
+   signs fail with (ii) true, (i) false:  (12, 1, 0.25, 2, -0.0011404219543100073, 0.0)
+   signs fail with (i) true, (ii) false:  (12, 4, 4.0, 1, -4.004417742287082, -1.7763568394002505e-15)
+R6.2 witness of the Lean file (n=4, r1=2, u=6, antipodal centres):
+   (i)  W / (8 r1 e^u 2^n) = 1.5915 (>= 1),  (ii) omega_+1 = 0.0 <= 67.905
+   U'_+1 - U0 = -5.985529,  U'_-1 - U0 = +0.014471,  s* = -0.000193786,  U'_s* - U0 = 0.0e+00
+   ln Z'_s* - ln Z0 = 0.692517 >= ln(1 + e^-u (1 - 1/r1)) = 0.001239
+A11 Remark (1), products of chains (200 instances, 1..3 sites, 1..3 levels, signed costs): worst violations: admissibility 1.1e-15, Holley 2.4e-15, sandwich 4.4e-16
+A1.2: 300 instances, 1..3 sites, 2..3 letters, asymmetric envelopes:
+   item 2, worst violation of the window inequalities (all sites, all conditioning sets) 3.33e-16
+   item 3, chain rule identity error 8.9e-16; least slack of sum of window maxima - KL -6.66e-16
+   additive instances: |KL - sum of site KLs| <= 1.8e-15
+all checks passed
+
+real	1m36.465s
+user	0m41.388s
+sys	0m0.451s

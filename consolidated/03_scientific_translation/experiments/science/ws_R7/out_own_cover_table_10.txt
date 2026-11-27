@@ -1,0 +1,12 @@
+n=10 L=1.0 eps=0: classes=1360 greedy=342 LP=315.4620 certLB=316 MILP primal=319 dual=319.00000000000006 feas=True margin=5.344e-04 status=0 t=21.7s
+n=10 L=1.0 eps=1: classes=1360 greedy=245 LP=218.9891 certLB=219 MILP primal=223 dual=223.0 feas=True margin=3.380e-04 status=0 t=87.8s
+n=10 L=1.0 eps=N/20: classes=1360 greedy=282 LP=250.8621 certLB=251 MILP primal=255 dual=255.0 feas=True margin=2.648e-04 status=0 t=184.4s
+n=10 L=1.0 eps=N/10: classes=1360 greedy=236 LP=205.9118 certLB=206 MILP primal=211 dual=209.0 feas=True margin=5.259e-04 status=1 t=240.3s
+n=10 L=1.0 eps=N/4: classes=1360 greedy=138 LP=116.6015 certLB=117 MILP primal=123 dual=119.0 feas=True margin=6.109e-05 status=1 t=240.4s
+n=10 L=1.0 eps=N/2: classes=1360 greedy=76 LP=57.7531 certLB=58 MILP primal=60 dual=60.00000000000009 feas=True margin=1.474e-05 status=0 t=212.9s
+n=10 L=0.2 eps=0: classes=1360 greedy=15 LP=12.2500 certLB=13 MILP primal=13 dual=13.0 feas=True margin=3.248e-07 status=0 t=15.8s
+n=10 L=0.2 eps=1: classes=1360 greedy=11 LP=8.0000 certLB=8 MILP primal=8 dual=8.000000000000004 feas=True margin=3.248e-07 status=0 t=14.3s
+n=10 L=0.2 eps=N/20: classes=1360 greedy=12 LP=10.0000 certLB=10 MILP primal=10 dual=10.0 feas=True margin=8.992e-07 status=0 t=13.0s
+n=10 L=0.2 eps=N/10: classes=1360 greedy=9 LP=8.0000 certLB=8 MILP primal=8 dual=8.0 feas=True margin=7.472e-06 status=0 t=12.3s
+n=10 L=0.2 eps=N/4: classes=1360 greedy=6 LP=5.0000 certLB=5 MILP primal=5 dual=5.0 feas=True margin=1.396e-05 status=0 t=13.0s
+n=10 L=0.2 eps=N/2: classes=1360 greedy=5 LP=3.0000 certLB=3 MILP primal=3 dual=3.0 feas=True margin=2.753e-05 status=0 t=12.0s

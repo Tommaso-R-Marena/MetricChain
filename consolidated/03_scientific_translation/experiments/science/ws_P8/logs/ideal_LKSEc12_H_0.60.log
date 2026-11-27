@@ -1,0 +1,11 @@
+=== p8_08_ideal: LKSE:12 on H, tau 0.6: 1600 Gibbs states, 977 distinct; changed sites per state: mean 2.836, max 8; corner evaluations needed: 14857
+    200/977 distinct states, 4208 evaluations, 5 s
+    400/977 distinct states, 7880 evaluations, 8 s
+    600/977 distinct states, 10624 evaluations, 10 s
+    exact remainders at 977 distinct states from 14152 evaluations of g, 12 s; states with more than 13 changed sites skipped: 0 of 1600
+    order m | mean |R_m| (kcal/mol) | max |R_m| in the sample | FLOOR of any order-m certificate, 2 beta <|R_m|> (nats) | exact-term envelope 2 beta <A_m> (nats) | fraction of states with >= m changed sites
+      3 | 1.825e-04 | 1.961e-02 | 6.121e-04 (+- 8.1e-05) | 7.880e-04 (+- 1.0e-04) | 0.5856
+      4 | 5.206e-07 | 1.937e-04 | 1.747e-06 (+- 5.0e-07) | 2.237e-06 (+- 6.2e-07) | 0.3113
+      5 | 3.253e-10 | 6.204e-08 | 1.091e-09 (+- 3.1e-10) | 1.349e-09 (+- 3.7e-10) | 0.1113
+      6 | 3.240e-13 | 1.114e-10 | 1.087e-12 (+- 2.9e-13) | 1.522e-12 (+- 5.0e-13) | 0.0181
+DONE in 11.7 s; peak RSS 187 MB

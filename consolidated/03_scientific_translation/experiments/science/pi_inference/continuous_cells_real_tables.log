@@ -1,0 +1,41 @@
+TABLE 1 — the rotamer model against the continuous model (per torsion; nats)
+
+| block, backbone (grid) | rigid rotamers: `ln Z` minus the grid's | cell-minimised rotamers: the same | populations of rotamer cells, total variation from the grid's: rigid | minimised | minimum-energy state of the rigid table in the cell of the continuous minimum? |
+|---|---|---|---|---|---|
+| Ace-VV-NMe, helix (2.5°) | +2.001 | +2.011 | 0.0001 | 0.0000 | yes |
+| Ace-VV-NMe, strand (2.5°) | +1.857 | +1.940 | 0.0091 | 0.0056 | yes |
+| Ace-VAV-NMe, helix (2.5°) | +1.995 | +1.999 | 0.0000 | 0.0000 | yes |
+| Ace-VAV-NMe, strand (2.5°) | +1.850 | +1.939 | 0.0087 | 0.0057 | yes |
+| Ace-VAAV-NMe, helix (2.5°) | -3.177 | +2.271 | 0.0000 | 0.0000 | yes |
+| Ace-VAAAV-NMe, helix (2.5°) | -3.076 | +2.276 | 0.0000 | 0.0000 | yes |
+| Ace-VVV-NMe, helix (5°) | +1.992 | +1.992 | 0.0000 | 0.0000 | yes |
+| Ace-VVV-NMe, strand (5°) | +1.856 | +1.894 | 0.0122 | 0.0059 | yes |
+| Ace-S-NMe, helix (2.5°) | +1.042 | +1.214 | 0.0561 | 0.0799 | yes |
+| Ace-S-NMe, strand (2.5°) | +1.024 | +1.180 | 0.1466 | 0.0554 | yes |
+| Ace-L-NMe, helix (2.5°) | -0.580 | +1.769 | 0.4808 | 0.0444 | **no** |
+| Ace-L-NMe, strand (2.5°) | -0.616 | +1.763 | 0.2746 | 0.0442 | yes |
+
+TABLE 2 — certified brackets for the continuous `ln Z` from k cells per torsion (width per torsion; nats)
+
+| block, backbone | uniform reference, whole energy as one term: k = 3 | 12 | 72 | 144 | range of the remainder after one-site slices [kT] | tilted reference: Jensen end below the grid at k = 3 | certified upper end above the grid at k = 3 | at k = 12 |
+|---|---|---|---|---|---|---|---|---|
+| Ace-VV-NMe, helix | 10.5 | 3.4 | 0.083 | 0.0196 | -2.01 to 0.919 | 7.2e-07 | 0.0184 | 1.66e-05 |
+| Ace-VV-NMe, strand | 8.13 | 2.67 | 0.0679 | 0.0163 | -0.175 to 0.0597 | 3.0e-07 | 0.000723 | 1.07e-05 |
+| Ace-VAV-NMe, helix | 15.5 | 3.38 | 0.0804 | 0.0191 | -0.0159 to 0.0609 | 1.8e-08 | 0.000372 | 5.79e-06 |
+| Ace-VAV-NMe, strand | 8.16 | 2.67 | 0.0682 | 0.0163 | -0.187 to 0.117 | 1.2e-05 | 0.00733 | 0.000415 |
+| Ace-VAAV-NMe, helix | 57 | 3.06 | 0.2 | 0.0445 | -0.0213 to 0.484 | 1.2e-09 | 0.000919 | 9.66e-07 |
+| Ace-VAAAV-NMe, helix | 56.7 | 3.07 | 0.204 | 0.046 | -0.285 to 0.183 | 3.6e-06 | 0.0157 | 0.000864 |
+| Ace-VVV-NMe, helix | 14 | 3.39 | 0.0812 | — | -4.22 to 0.789 | 1.3e-06 | 0.0362 | 4.6e-05 |
+| Ace-VVV-NMe, strand | 8.12 | 2.68 | 0.0683 | — | -0.508 to 0.155 | 8.8e-06 | 0.00855 | 0.00032 |
+| Ace-S-NMe, helix | 2.97 | 0.865 | 0.0216 | 0.00526 | -9.07 to 8.94 | 1.0e-01 | 2.77 | 0.169 |
+| Ace-S-NMe, strand | 3.04 | 0.852 | 0.0197 | 0.00481 | -8.25 to 1.61 | 2.5e-02 | 1.93 | 0.0883 |
+| Ace-L-NMe, helix | 6.85e+03 | 1.54 | 0.256 | 0.133 | -1.10e+03 to 1.29e+10 | 3.0e-01 | 546 | 328 |
+| Ace-L-NMe, strand | 5.26e+03 | 1.56 | 0.259 | 0.127 | -1.30e+03 to 3.63e+07 | 1.7e-01 | 632 | 526 |
+
+DERIVED (asserted from the rows above)
+valine dipeptide block, helix minus strand: rigid +0.143, minimised +0.071 nats per torsion
+valine on the helix, neighbours (VV) minus i,i+3 (VAAV): rigid +5.178, minimised -0.260 nats per torsion
+valine blocks (8 cases): rigid offset -3.177 to +2.001; minimised offset +1.894 to +2.276; remainder within [-4.22, 0.919] kT; tilted upper end above the grid at k = 3: 3.72e-04 to 3.62e-02; at k = 12: 9.66e-07 to 8.64e-04; Jensen end at k = 3 at most 1.2e-05 below
+uniform-reference bracket at k = 3 over valine blocks: 8.12 to 57; at the finest partition: 0.0163 to 0.0812
+largest change of ln Z when every second grid point is dropped: 1.2e-03
+ALL DONE  12 of 12 cases

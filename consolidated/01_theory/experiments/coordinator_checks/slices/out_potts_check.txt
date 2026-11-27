@@ -1,0 +1,23 @@
+(1) maximal mutual information of a Potts pair over both marginals (40 restarts each):
+    q = 3, s = 0.2: max = 0.004975 on 2 letters;  uniform on k = 2..3 letters: 0.004975, 0.004626;  max - best uniform = 3.3e-16
+    q = 3, s = 0.5: max = 0.030300 on 2 letters;  uniform on k = 2..3 letters: 0.030300, 0.030167;  max - best uniform = 2.9e-16
+    q = 3, s = 1.0: max = 0.123284 on 3 letters;  uniform on k = 2..3 letters: 0.110944, 0.123284;  max - best uniform = 1.5e-16
+    q = 3, s = 1.5: max = 0.266789 on 3 letters;  uniform on k = 2..3 letters: 0.218096, 0.266789;  max - best uniform = 1.7e-16
+    q = 3, s = 3.0: max = 0.732018 on 3 letters;  uniform on k = 2..3 letters: 0.502282, 0.732018;  max - best uniform = 0.0e+00
+    q = 4, s = 0.2: max = 0.004975 on 2 letters;  uniform on k = 2..4 letters: 0.004975, 0.004626, 0.003994;  max - best uniform = 3.7e-16
+    q = 4, s = 0.5: max = 0.030300 on 2 letters;  uniform on k = 2..4 letters: 0.030300, 0.030167, 0.027033;  max - best uniform = 3.1e-16
+    q = 4, s = 1.0: max = 0.123284 on 3 letters;  uniform on k = 2..4 letters: 0.110944, 0.123284, 0.117993;  max - best uniform = -4.2e-17
+    q = 4, s = 1.5: max = 0.272367 on 4 letters;  uniform on k = 2..4 letters: 0.218096, 0.266789, 0.272367;  max - best uniform = 1.1e-16
+    q = 4, s = 3.0: max = 0.857234 on 4 letters;  uniform on k = 2..4 letters: 0.502282, 0.732018, 0.857234;  max - best uniform = 6.7e-16
+    crossings of the uniform laws: I_2 = I_3 at s = 0.519366,  I_3 = I_4 at s = 1.335309
+(2) uniform k-ary cubes, zero residual:  u, R_2(0), R_3(0), R_4(0)
+    0.25  0.001944  0.001803  0.001554
+    0.50  0.007673  0.007425  0.006552
+    0.75  0.016888  0.017050  0.015413
+    1.00  0.029139  0.030654  0.028405
+    2.00  0.097281  0.117699  0.119862
+    4.00  0.239250  0.335578  0.383813
+    R_2(0) = R_3(0) at u = 0.6931;  R_3(0) = R_4(0) at u = 1.7918
+(3) F*(t) = t u int_{tu}^{u} I(s)/s^2 ds:
+    uniform k-ary cubes: largest difference 1.7e-16
+    binary type classes (three pairs (m, kappa)): largest difference 7.7e-10

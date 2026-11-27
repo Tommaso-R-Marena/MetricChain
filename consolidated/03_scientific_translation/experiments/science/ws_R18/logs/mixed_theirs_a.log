@@ -1,0 +1,21 @@
+r18_mixed.py costs=theirs start 2026-11-26T17:08:15Z
+n=100 u=1 phi=0.5 profile=flat costs=theirs: n_o=50 n_i=50 L=17 K=22036  (560 mean runs, 16 s)
+   uniform bottom: product ln cost 44.483875 (level 503, m 9);  placement-free bound 44.483875
+   uniform top   : product ln cost 36.906359 (level 500, m 9);  placement-free bound 36.906359
+   target = max of the two bounds = 44.483875;  ln C_max = 56.256347
+   best shell-dependent behaviour found: ln cost 45.044595 (level 503, m 10; 'top' on 7 of 51 shells; after thresholds 45.001386; coordinate ascent)
+   EXCESS over the target: +0.560720   (the bound is EXCEEDED by an instance with point-dependent behaviour); below C_max: True
+n=100 u=1 phi=0.5 profile=dip1.1 costs=theirs: n_o=50 n_i=50 L=17 K=22036  (371 mean runs, 15 s)
+   uniform bottom: product ln cost 43.015846 (level 578, m 29);  placement-free bound 43.015846
+   uniform top   : product ln cost 41.809283 (level 575, m 29);  placement-free bound 41.809283
+   target = max of the two bounds = 43.015846;  ln C_max = 56.256347
+   best shell-dependent behaviour found: ln cost 43.015948 (level 578, m 29; 'top' on 5 of 51 shells; after thresholds 43.015948; T for the 5 shells of largest W, B below; places ref)
+   EXCESS over the target: +0.000102   (the bound is EXCEEDED by an instance with point-dependent behaviour); below C_max: True
+n=150 u=2 phi=0.6 profile=dip1.1 costs=theirs: n_o=90 n_i=60 L=26 K=24876  (912 mean runs, 233 s)
+   uniform bottom: product ln cost 78.800672 (level 1773, m 84);  placement-free bound 78.800672
+   uniform top   : product ln cost 78.800671 (level 1770, m 84);  placement-free bound 78.800671
+   target = max of the two bounds = 78.800672;  ln C_max = 90.375056
+   best shell-dependent behaviour found: ln cost 78.800672 (level 1773, m 84; 'top' on 6 of 91 shells; after thresholds 78.800672; coordinate ascent)
+   EXCESS over the target: +0.000000   (the bound is EXCEEDED by an instance with point-dependent behaviour); below C_max: True
+cases 3; with the target exceeded: 3; largest excess +0.560720
+end 2026-11-26T17:12:39Z  wall 264.2 s  peak RSS MB: 62.4

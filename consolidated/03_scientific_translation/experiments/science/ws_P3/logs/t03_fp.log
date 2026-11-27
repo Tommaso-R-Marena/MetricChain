@@ -1,0 +1,8 @@
+   state 0: g(double) = -36.118996793083, |double - mpmath(40 digits)| = 2.23e-13 kcal/mol  [2s]
+   state 1: g(double) = -37.172524109318, |double - mpmath(40 digits)| = 1.84e-12 kcal/mol  [3s]
+   state 2: g(double) = -36.948691746589, |double - mpmath(40 digits)| = 1.64e-13 kcal/mol  [5s]
+V6 E tau 0.7 (108 atoms): worst |g(double) - g(mpmath)| = 1.84e-12 kcal/mol (allowance used: 1e-7); worst |I_p(tables, double) - I_p(mpmath)| = 5.73e-15 nm^-1 (allowance used for a table difference: 2e-10)
+   state 0: g(double) = -62.746989470310, |double - mpmath(40 digits)| = 4.89e-13 kcal/mol  [0s]
+   state 1: g(double) = -48.144928904180, |double - mpmath(40 digits)| = 5.29e-13 kcal/mol  [1s]
+   state 2: g(double) = -59.465647551272, |double - mpmath(40 digits)| = 3.25e-13 kcal/mol  [1s]
+S4 H tau 0.7 (56 atoms): worst |g(double) - g(mpmath)| = 5.29e-13 kcal/mol (allowance used: 1e-7); worst |I_p(tables, double) - I_p(mpmath)| = 5.28e-15 nm^-1 (allowance used for a table difference: 2e-10)

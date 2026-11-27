@@ -1,0 +1,39 @@
+# u = 2 (h = 0.09728, a = 0.32781, d_min = 2), n = N = 5000, k = 3 levels above the base, eps^ = 1, ln delta = -2.996, base error E_0 = 0, blocks = design/1
+# chain: s_t = L + 0.05, b_0 = h + 0.01; base level J0 = 6; (b_j - h)/h, j = 6..9: 0.0746 0.0580 0.0465 0.0382;  W_j(b_j): 0.776 0.767 0.761 0.757;  X = X_0(N) + 1 = 24.005
+#   level 9: block m = 764 (design 764), chain levels at d = n: 6, d_0 = 771; unrolled terms: chain 516.99, level 71.58
+#   level 8: block m = 759 (design 759), chain levels at d = n: 6, d_0 = 766; unrolled terms: chain 513.48, level 71.65
+#   level 7: block m = 751 (design 751), chain levels at d = n: 6, d_0 = 758; unrolled terms: chain 507.98, level 71.72
+exact ln cost of F_9(n, eps^, delta): 1451.734 = n b_k + 946.769   (n b_k = 504.965, n b_base = 522.684, n h = 486.405, n a = 1639.067)
+bound by the composed error functions: n b_k + 1753.399;   unrolled bound of section 6: n b_k + 1753.401
+nodes evaluated exactly: F_9: 6 Z-levels, 6 chain levels; F_8: 61 Z-levels, 15 chain levels; F_7: 1354 Z-levels, 204 chain levels   [6 s]
+check                                               number  least slack  viol.   at
+F7 type (Prop. Z4)                                     408      249.458      0   (2226, 24.005061558017662)
+F8 type (Prop. Z4)                                      30      517.971      0   (4052, 24.005061558017662)
+F9 type (Prop. Z4)                                      12      787.787      0   (4236, 24.005061558017662)
+T7 accuracy                                            204        0.011      0   (1003,)
+T7 claim (Prop. T(iii))                                204      242.874      0   (2226,)
+T7 claim (bottom)                                       61      297.405      0   (753,)
+T7 delta' (Prop. T(ii))                                204      196.841      0   (761,)
+T8 accuracy                                             15        0.011      0   (1107,)
+T8 claim (Prop. T(iii))                                 15      511.245      0   (4052,)
+T8 claim (bottom)                                        6      967.837      0   (371,)
+T8 delta' (Prop. T(ii))                                 15      200.333      0   (1016,)
+T9 accuracy                                              6        0.011      0   (5000,)
+T9 claim (Prop. T(iii))                                  6      780.955      0   (4236,)
+T9 claim (bottom)                                        1     1531.013      0   (416,)
+T9 delta' (Prop. T(ii))                                  6      200.907      0   (1180,)
+TOP: Ehat_k <= unrolled error of section 6               1        0.002      0   None
+TOP: exact <= n b_k + Ehat_k(n, eps^; Lam_0)             1      806.630      0   None
+Z6 (U-inf)                                            1354        6.620      0   (10, 24.005061559017662, 9)
+Z6 accuracy                                           1354        1.044      0   (22, 24.005061559017662)
+Z6 delta' (Lemma Z2)                                  1354        9.350      0   (10, 24.005061559017662, 9)
+Z6 type (Prop. Z3)                                    1354       23.255      0   (1668, 24.005061559017662, 127)
+Z7 (U-inf)                                              61      266.451      0   (3315, 38.0, 295)
+Z7 accuracy                                             61        2.724      0   (257, 24.005061559017662)
+Z7 delta' (Lemma Z2)                                    61       34.749      0   (257, 24.005061559017662, 45)
+Z7 type (Prop. Z3)                                      61      280.038      0   (3315, 38.0, 295)
+Z8 (U-inf)                                               6      540.808      0   (4236, 24.005061559017662, 184)
+Z8 accuracy                                              6        3.204      0   (416, 24.005061559017662)
+Z8 delta' (Lemma Z2)                                     6       35.104      0   (416, 24.005061559017662, 45)
+Z8 type (Prop. Z3)                                       6      552.796      0   (4236, 24.005061559017662, 184)
+TOTAL: 6879 checks, 0 violations   ALL CHECKS PASS

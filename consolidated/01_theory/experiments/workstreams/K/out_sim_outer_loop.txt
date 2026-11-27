@@ -1,0 +1,13 @@
+Algorithm 2L+ with the constants of Theorem K1 (K, nu, J from the formulas; delta = 0.05); seed 20261125
+  stats: {'runs': 394, 'good': 394, 'bad_event': 0, 'widest': 5.7097, 'width_slack': 0.0741, 'tightest_count': 0.5683, 'most_levels': 421, 'points': 15073280, 'largest_M_over_Mdag': 4.5, 'populated': 30445, 'negligible': 36, 'closed_empty': 52, 'closed_populated': 55, 'closed_unpopulated': 287, 'skipped': 46, 'neg_share': 0.0173, 'runs_with_negligible_levels': 10, 'closed_by_tail_lemma_at_r<=n_o-2': 341, 'closed_at_r<=r_dagger': 118, 'seconds': 125.8}
+  failures: 0
+main suite passed (no failure; populated and negligible levels occur; closures at populated and at unpopulated levels occur): True
+
+mutations (each must produce failures of the stated kind):
+  mutation maxform     :   18 failing runs of 143, kinds ['C2 width']   expected 'C2 width': DETECTED
+  mutation noharper    :   11 failing runs of 142, kinds ['C4 closure radius', 'C5 Mneg bound']   expected 'C4 closure radius': DETECTED
+  mutation close_at_no :  150 failing runs of 164, kinds ['C1 validity']   expected 'C1 validity': DETECTED
+  mutation neg_tol     :   21 failing runs of 143, kinds ['C5 Mneg bound', 'C6 count lemma']   expected 'C6 count lemma': DETECTED
+  mutation q_plain     :   41 failing runs of 150, kinds ['C1 validity', 'C3 q < p(s)']   expected 'C3 q < p(s)': DETECTED
+
+all as expected: True

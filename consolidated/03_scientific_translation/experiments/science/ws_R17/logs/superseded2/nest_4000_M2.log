@@ -1,0 +1,24 @@
+r17_nest: u=1 n=4000 M=2 eps=0.8715 delta=0.05   (a=0.110944 h=0.029139)
+cross-check of the cached base bracket against r16lib.k0 (210 cases): max |difference| = 0.00e+00
+
+variant 'min': family D[S[D[S[G_0]]]], 5 nested levels (k_M), alpha_0 = 0.612468
+  exact certified ln cost = 449.75  = 1.0135 n a      Theorem Q8 bound n B_M + E_M = 933.09 = 2.1026 n a      n B_M = 278.36 (B_M/a = 0.6272)
+  top-level check  cost <= n B_M + E_M: True (slack 483.35)
+  top drop: chosen 'noshift'; candidates {'noshift': np.float64(449.75), 'passthrough': np.float64(459.45)}
+  top level as chosen: n_o = 832, r_dag = 182, K = 661772, ln 2Mbar = 171.1, ln(1/delta') = 179.3, L = 94
+  nodes: 91515 (base 87672); levels built: slope 2443, drop with shift 0, drop without shift 81
+  violations: 0;  least slack: induction 37.85, Lemma Q4 0.029, Lemma Q3 79.18, (4.1) 12.31, (4.2) inf, Prop Q6 87.69, Prop Q7 289.55;  max |x_out - xhat| of slope levels 7.1e-15
+  base family (Proposition Q5(a)): 87672 calls (0 by enumeration), dimensions >= 424, ln(1/delta) from 3.0 to 430.2 (largest ln(1/delta)/d = 0.82); least slack of  cost <= d a + E_base(d, x; ln(1/delta) + d ln 2): 37.85
+  least slack of the induction inequality over the nodes that are not base brackets (slope and drop families): 145.06
+  [6 s; tables cached now: 26]
+
+variant 'proof': family D[S[D[S[G_0]]]], 5 nested levels (k_M), alpha_0 = 0.612468
+  exact certified ln cost = 512.26  = 1.1543 n a      Theorem Q8 bound n B_M + E_M = 933.09 = 2.1026 n a      n B_M = 278.36 (B_M/a = 0.6272)
+  top-level check  cost <= n B_M + E_M: True (slack 420.83)
+  top drop: chosen 'passthrough'; candidates {'passthrough': np.float64(512.26)}
+  nodes: 5 (base 1); levels built: slope 0, drop with shift 0, drop without shift 0
+  violations: 0;  least slack: induction 86.98, Lemma Q4 inf, Lemma Q3 inf, (4.1) inf, (4.2) inf, Prop Q6 inf, Prop Q7 inf;  max |x_out - xhat| of slope levels 0.0e+00
+  base family (Proposition Q5(a)): 1 calls (0 by enumeration), dimensions >= 4000, ln(1/delta) from 3.0 to 3.0 (largest ln(1/delta)/d = 0.00); least slack of  cost <= d a + E_base(d, x; ln(1/delta) + d ln 2): 86.98
+  least slack of the induction inequality over the nodes that are not base brackets (slope and drop families): 188.14
+  [0 s; tables cached now: 1]
+LAST LINE r17_nest.py n=4000 M=2: completed; min 449.75 proof 512.26; wall 5.6 s; peak RSS 57.9 MB

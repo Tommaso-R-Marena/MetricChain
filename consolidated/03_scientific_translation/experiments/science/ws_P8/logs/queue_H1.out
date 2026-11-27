@@ -1,0 +1,91 @@
+[06:50:29] START python3 -B p8_01b_restricted.py LKSE:6 H 0.60 --budget 1000
+[07:03:36] END   (exit 0) p8_01b_restricted.py LKSE:6 H 0.60 --budget 1000
+[07:03:36] START python3 -B p8_01b_restricted.py LKSE:6 H 0.60 --budget 1000
+[07:03:37] END   (exit 0) p8_01b_restricted.py LKSE:6 H 0.60 --budget 1000
+[07:03:37] START python3 -B p8_02_signblind.py LKSE:6 H 0.60
+[07:08:53] END   (exit 0) p8_02_signblind.py LKSE:6 H 0.60
+[07:08:53] START python3 -B p8_03_sr_validate.py LKSE:6 H 0.60
+[07:09:00] END   (exit 0) p8_03_sr_validate.py LKSE:6 H 0.60
+[07:09:00] START python3 -B p8_03c_blockcheck.py K3 H 0.70
+[07:09:06] END   (exit 0) p8_03c_blockcheck.py K3 H 0.70
+[07:09:06] START python3 -B p8_03c_blockcheck.py K4 H 0.70
+[07:09:48] END   (exit 0) p8_03c_blockcheck.py K4 H 0.70
+[07:09:48] START python3 -B p8_03c_blockcheck.py LKSE:4 H 0.60
+[07:10:01] END   (exit 0) p8_03c_blockcheck.py LKSE:4 H 0.60
+[07:10:01] START python3 -B p8_03c_blockcheck.py LKSE:5 H 0.60
+[07:10:23] END   (exit 0) p8_03c_blockcheck.py LKSE:5 H 0.60
+[07:10:23] START python3 -B p8_03c_blockcheck.py K5 H 0.70 --budget 1000
+[07:19:11] END   (exit 0) p8_03c_blockcheck.py K5 H 0.70 --budget 1000
+[07:19:11] START python3 -B p8_03c_blockcheck.py K5 H 0.70 --budget 1000
+[07:19:12] END   (exit 0) p8_03c_blockcheck.py K5 H 0.70 --budget 1000
+[07:19:12] START python3 -B p8_03b_statecheck.py LKSE:4 H 0.60
+[07:19:17] END   (exit 0) p8_03b_statecheck.py LKSE:4 H 0.60
+[07:19:17] START python3 -B p8_03b_statecheck.py LKSE:5 H 0.60
+[07:19:37] END   (exit 0) p8_03b_statecheck.py LKSE:5 H 0.60
+[07:19:37] START python3 -B p8_01_measure.py S4 H 0.70
+[07:19:40] END   (exit 0) p8_01_measure.py S4 H 0.70
+[07:19:40] START python3 -B p8_01b_restricted.py S4 H 0.70
+[07:19:42] END   (exit 0) p8_01b_restricted.py S4 H 0.70
+[07:19:42] START python3 -B p8_03_sr_validate.py S4 H 0.70
+[07:19:43] END   (exit 0) p8_03_sr_validate.py S4 H 0.70
+[07:19:43] START python3 -B p8_03c_blockcheck.py S4 H 0.70
+[07:19:45] END   (exit 0) p8_03c_blockcheck.py S4 H 0.70
+[07:19:45] START python3 -B p8_01_measure.py S5 H 0.70
+[07:20:05] END   (exit 0) p8_01_measure.py S5 H 0.70
+[07:20:05] START python3 -B p8_01b_restricted.py S5 H 0.70
+[07:20:18] END   (exit 0) p8_01b_restricted.py S5 H 0.70
+[07:20:18] START python3 -B p8_03_sr_validate.py S5 H 0.70
+[07:20:19] END   (exit 0) p8_03_sr_validate.py S5 H 0.70
+[07:20:19] START python3 -B p8_03c_blockcheck.py S5 H 0.70
+[07:20:34] END   (exit 0) p8_03c_blockcheck.py S5 H 0.70
+[07:20:34] START python3 -B p8_01_measure.py L6 H 0.60
+[07:20:39] END   (exit 0) p8_01_measure.py L6 H 0.60
+[07:20:39] START python3 -B p8_01b_restricted.py L6 H 0.60
+[07:20:42] END   (exit 0) p8_01b_restricted.py L6 H 0.60
+[07:20:42] START python3 -B p8_03_sr_validate.py L6 H 0.60
+[07:20:45] END   (exit 0) p8_03_sr_validate.py L6 H 0.60
+[07:20:45] START python3 -B p8_03c_blockcheck.py L6 H 0.60
+[07:20:51] END   (exit 0) p8_03c_blockcheck.py L6 H 0.60
+[07:20:51] START python3 -B p8_01_measure.py L8 H 0.60
+[07:21:28] END   (exit 0) p8_01_measure.py L8 H 0.60
+[07:21:28] START python3 -B p8_01b_restricted.py L8 H 0.60
+[07:21:36] END   (exit 0) p8_01b_restricted.py L8 H 0.60
+[07:21:36] START python3 -B p8_03_sr_validate.py L8 H 0.60
+[07:21:51] END   (exit 0) p8_03_sr_validate.py L8 H 0.60
+[07:21:51] START python3 -B p8_03c_blockcheck.py L8 H 0.60
+[07:22:12] END   (exit 0) p8_03c_blockcheck.py L8 H 0.60
+[07:22:12] START python3 -B p8_01_measure.py K3 E 0.70
+[07:22:29] END   (exit 0) p8_01_measure.py K3 E 0.70
+[07:22:29] START python3 -B p8_01b_restricted.py K3 E 0.70
+[07:22:36] END   (exit 0) p8_01b_restricted.py K3 E 0.70
+[07:22:36] START python3 -B p8_02_signblind.py K3 E 0.70
+[07:22:41] END   (exit 0) p8_02_signblind.py K3 E 0.70
+[07:22:41] START python3 -B p8_03_sr_validate.py K3 E 0.70
+[07:22:43] END   (exit 0) p8_03_sr_validate.py K3 E 0.70
+[07:22:43] START python3 -B p8_01_measure.py LKSE:5 E 0.60
+[07:23:37] END   (exit 0) p8_01_measure.py LKSE:5 E 0.60
+[07:23:37] START python3 -B p8_01b_restricted.py LKSE:5 E 0.60
+[07:23:59] END   (exit 0) p8_01b_restricted.py LKSE:5 E 0.60
+[07:23:59] START python3 -B p8_02_signblind.py LKSE:5 E 0.60
+[07:24:17] END   (exit 0) p8_02_signblind.py LKSE:5 E 0.60
+[07:24:17] START python3 -B p8_03_sr_validate.py LKSE:5 E 0.60
+[07:24:19] END   (exit 0) p8_03_sr_validate.py LKSE:5 E 0.60
+[07:24:19] START python3 -B p8_01_measure.py S6 H 0.70 --budget 1000
+[07:31:02] END   (exit 0) p8_01_measure.py S6 H 0.70 --budget 1000
+[07:31:02] START python3 -B p8_01_measure.py S6 H 0.70 --budget 1000
+[07:31:02] END   (exit 0) p8_01_measure.py S6 H 0.70 --budget 1000
+[07:31:02] START python3 -B p8_01b_restricted.py S6 H 0.70 --budget 1000
+[07:36:39] END   (exit 0) p8_01b_restricted.py S6 H 0.70 --budget 1000
+[07:36:39] START python3 -B p8_03_sr_validate.py S6 H 0.70
+[07:36:41] END   (exit 0) p8_03_sr_validate.py S6 H 0.70
+[07:36:41] START python3 -B p8_01_measure.py K4 E 0.70 --budget 1000
+[07:39:39] END   (exit 0) p8_01_measure.py K4 E 0.70 --budget 1000
+[07:39:39] START python3 -B p8_01_measure.py K4 E 0.70 --budget 1000
+[07:39:39] END   (exit 0) p8_01_measure.py K4 E 0.70 --budget 1000
+[07:39:39] START python3 -B p8_01b_restricted.py K4 E 0.70 --budget 1000
+[07:41:23] END   (exit 0) p8_01b_restricted.py K4 E 0.70 --budget 1000
+[07:41:23] START python3 -B p8_02_signblind.py K4 E 0.70
+[07:42:32] END   (exit 0) p8_02_signblind.py K4 E 0.70
+[07:42:32] START python3 -B p8_03_sr_validate.py K4 E 0.70
+[07:42:35] END   (exit 0) p8_03_sr_validate.py K4 E 0.70
+[07:42:35] QUEUE DONE queue_H1.txt

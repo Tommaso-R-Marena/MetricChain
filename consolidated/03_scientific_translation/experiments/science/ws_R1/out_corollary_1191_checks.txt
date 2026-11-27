@@ -1,0 +1,16 @@
+[PASS] (C1) chain: 142 random two-block profiles x 4 rate functions x landscapes (v, 0): max[r_mu(e) - r^kappa_mu(e+(I-lam)(kappa))] = 1.56e-16; max[r^kappa_mu - R^kappa] = 1.39e-17; max[R^kappa(e+(I-lam)(kappa)) - R_unif(e)] = -1.65e-07  (all must be <= 0 up to solver tolerance)
+[PASS] (C2) field p=0.3, u=1: sup over binary centres of r_mu(0) with all exits (multistart search) = 0.025034 at (m,a,b)=(0.4994,0.1362,0.5381), type 0.3374; vertex-channel formula h = 0.025034; claimed 0.025034; slice bound sup_kappa R^kappa((I-v)(kappa)) = 0.029139 (claimed 0.029139)
+[PASS] (C3) CW bJ=1.5, barrier shell: r_mu(0) at (m; a, b) = (1/2; 1-x, x), x = 0.29803: 0.0251012 (claimed 0.0251012); neighbours: x=0.288: 0.0249241, x=0.293: 0.0250572, x=0.29803: 0.0251012, x=0.303: 0.0250593, x=0.308: 0.0249352; I(1/2) = 0.1152 (claimed barrier 0.1152)
+[PASS] (C4) equality (ii): antiferromagnet bJ=-2 and ferromagnet bJ=0.8 (B=0): |r_mu(e) - R_unif(e)| <= 2.8e-14 at the cube's optimal profile (m=1/2, shell l*), e in (0, .01, .04 / 0, .02), exits of every type allowed
+      (C5) Curie-Weiss, B = 0: r_mu(0) at the cube's optimal profile against R_unif(0)
+        u=1.0: bJ* = 1.1250; bJ = 1.0625 (0.50 of the way): r_mu(0) = 0.0291391, R_unif(0) = 0.0291391, difference -9.71e-17; 1/2 a contact type: True
+        u=1.0: bJ* = 1.1250; bJ = 1.1000 (0.80 of the way): r_mu(0) = 0.0291391, R_unif(0) = 0.0291391, difference -9.71e-17; 1/2 a contact type: True
+        u=1.0: bJ* = 1.1250; bJ = 1.1187 (0.95 of the way): r_mu(0) = 0.0291391, R_unif(0) = 0.0291391, difference -9.71e-17; 1/2 a contact type: True
+        u=1.0: bJ* = 1.1250; bJ = 1.1312 (1.05 of the way): r_mu(0) = 0.0291271, R_unif(0) = 0.0291391, difference -1.20e-05; 1/2 a contact type: True
+        u=3.0: bJ* = 2.1158; bJ = 1.5579 (0.50 of the way): r_mu(0) = 0.1728309, R_unif(0) = 0.1728309, difference -5.55e-17; 1/2 a contact type: True
+        u=3.0: bJ* = 2.1158; bJ = 1.8926 (0.80 of the way): r_mu(0) = 0.1728309, R_unif(0) = 0.1728309, difference +0.00e+00; 1/2 a contact type: True
+        u=3.0: bJ* = 2.1158; bJ = 2.0600 (0.95 of the way): r_mu(0) = 0.1728309, R_unif(0) = 0.1728309, difference +5.55e-17; 1/2 a contact type: True
+        u=3.0: bJ* = 2.1158; bJ = 2.1716 (1.05 of the way): r_mu(0) = 0.1725358, R_unif(0) = 0.1728309, difference -2.95e-04; 1/2 a contact type: True
+[PASS] (C5) junction: u = 1: equality for bJ < bJ* and strict inequality just above, as stated; u = 3: no early junction found on this grid
+
+SUMMARY: ALL PASS

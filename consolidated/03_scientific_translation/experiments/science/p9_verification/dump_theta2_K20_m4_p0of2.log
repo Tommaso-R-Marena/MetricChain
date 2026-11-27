@@ -1,0 +1,16 @@
+=== K20 on H, tau 0.7: 452 atoms, 20 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order 4: 4845 subsets, this run 2423 (part 0 of 2) [86s setup]
+    subset 0 (0, 1, 2, 3): 11154 entries, maximum 2.289e-01 kT [17s]
+    subset 400 (0, 3, 15, 17): 2808 entries, maximum 6.297e-05 kT [175s]
+    subset 800 (0, 8, 16, 19): 2808 entries, maximum 3.243e-05 kT [261s]
+    subset 1200 (1, 3, 12, 16): 2808 entries, maximum 1.805e-04 kT [382s]
+    subset 1600 (1, 8, 13, 15): 2808 entries, maximum 8.646e-05 kT [548s]
+    subset 2000 (2, 4, 15, 16): 2376 entries, maximum 1.343e-04 kT [659s]
+    subset 2400 (2, 11, 15, 17): 2376 entries, maximum 1.397e-04 kT [815s]
+    subset 2800 (3, 7, 16, 18): 1296 entries, maximum 1.061e-04 kT [959s]
+    subset 3200 (4, 7, 8, 15): 1296 entries, maximum 1.592e-02 kT [1078s]
+    subset 3600 (5, 7, 12, 17): 1296 entries, maximum 5.065e-05 kT [1220s]
+    subset 4000 (6, 9, 15, 16): 1296 entries, maximum 2.881e-03 kT [1328s]
+    subset 4400 (8, 10, 11, 17): 1296 entries, maximum 1.800e-03 kT [1404s]
+    subset 4800 (12, 15, 16, 17): 1296 entries, maximum 4.947e-02 kT [1480s]
+written cache/theta2_K20_H_0.70_m4_p0of2.npz: 2423 raw stage-2 tables; sum of their maxima 22.173 kT; foreign writes refused during P9's import: 0
+ALL DONE 1574 s (0.61 s per subset); peak RSS 732 MB

@@ -1,0 +1,12 @@
+  E15(c): binary product, 5 sites: 6 instances x 40 starts: largest local maximum of the excess = +5.33e-15   [1 s]
+  E15(c): binary product, 6 sites: 3 instances x 24 starts: largest local maximum of the excess = +2.66e-15   [2 s]
+  E15(b): alphabets (3,3,3): 4 instances x 40 starts: largest local maximum of the excess = +3.55e-15   [3 s]
+  E15(b): alphabets (2,3,2,3): 3 instances x 30 starts: largest local maximum of the excess = +7.11e-15   [4 s]
+  E15(b): alphabets (4,4,3): 3 instances x 24 starts: largest local maximum of the excess = +1.33e-15   [4 s]
+  E15T(a): Ising chain, 5 sites, bonds satisfied: 4 instances x 40 starts: largest local maximum of the excess = +5.77e-15   [5 s]
+  E15T(a): Ising ring, 6 sites, bonds satisfied: 3 instances x 24 starts: largest local maximum of the excess = +8.44e-15   [6 s]
+  E15T(a): complete graph, 5 sites, bonds satisfied: 4 instances x 40 starts: largest local maximum of the excess = +9.33e-15   [7 s]
+  E15T(a): complete graph, 6 sites, bonds satisfied: 3 instances x 24 starts: largest local maximum of the excess = +1.91e-14   [7 s]
+LOCAL SEARCH: NO COUNTEREXAMPLE
+  control (Ising chain, 5 sites, first bond violated by the centre): largest excess found = +0.000, +0.295, +0.057, +0.051
+[exit 0]

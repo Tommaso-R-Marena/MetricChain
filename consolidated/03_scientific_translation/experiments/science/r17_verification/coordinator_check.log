@@ -1,0 +1,14 @@
+(1) constants
+    u = 0.5: p_u = 0.377541, Lambda_1 = 0.219070, a = 0.030300, rho_h = 0.438140, h = 0.007673, h/a = 0.253231, ln((1-rho_h)/rho_h) = 0.248713
+    u = 1.0: p_u = 0.268941, Lambda_1 = 0.379885, a = 0.110944, rho_h = 0.379885, h = 0.029139, h/a = 0.262647, ln((1-rho_h)/rho_h) = 0.490034
+    u = 2.0: p_u = 0.119203, Lambda_1 = 0.566219, a = 0.327813, rho_h = 0.283110, h = 0.097281, h/a = 0.296757, ln((1-rho_h)/rho_h) = 0.929089
+(2) the lower bound (c): exact hinted bound against the closed form
+    2844 cases with k* <= n/2 (498 skipped: k* > n/2 or no k*): violations of (c): 0; least slack 0.684 nats; control that must fail (the bound without its O(1) term, 'ln N >= n h'): 841 violations
+    excess of the hinted bound over n h at u = 1, eps = 1, delta = 0.05 (R17: 0.579, 2.552, 4.066): n = 10: k* = 4, excess 0.579; n = 1000: k* = 380, excess 2.552; n = 16000: k* = 6078, excess 4.066
+(3) the epoch schedule at u = 1
+    M = 5: k_M = 13 (R17's table: 13; agree: True); slope steps J_0..J_(M-1) sum to 7; leading term B_M/a = 0.3881; R17's bound/(n a) at n = 6.4e+04: 0.7072 -> error term / (n a) = 0.3191
+    M = 10: k_M = 43 (R17's table: 43; agree: True); slope steps J_0..J_(M-1) sum to 32; leading term B_M/a = 0.2892; R17's bound/(n a) at n = 1.0e+06: 0.3713 -> error term / (n a) = 0.0821
+    M = 17: k_M = 268 (R17's table: 268; agree: True); slope steps J_0..J_(M-1) sum to 250; leading term B_M/a = 0.2656; R17's bound/(n a) at n = 1.0e+08: 0.2731 -> error term / (n a) = 0.0075
+    M = 25: k_M = 2868 (R17's table: 2868; agree: True); slope steps J_0..J_(M-1) sum to 2842; leading term B_M/a = 0.2629; R17's bound/(n a) at n = 1.0e+10: 0.2637 -> error term / (n a) = 0.0008
+    h/a = 0.2626: the limit of bound/(n a)
+ALL DONE 10 s

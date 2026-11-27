@@ -1,0 +1,33 @@
+populated test of my run: their tolerance, 2^m P(HIGH) >= 2^(-1e-12)
+r18_xcheck.py cases=150 seed=1 start 2026-11-26T16:29:24Z
+  10 designs, 6 s
+  20 designs, 9 s
+  30 designs, 15 s
+  40 designs, 28 s
+  50 designs, 39 s
+  60 designs, 47 s
+  70 designs, 55 s
+  80 designs, 59 s
+  90 designs, 64 s
+  100 designs, 73 s
+  110 designs, 78 s
+  120 designs, 81 s
+  130 designs, 87 s
+  140 designs, 95 s
+  150 designs, 104 s
+
+MY MEAN RUN AGAINST THEIR PYTHON REFERENCE (mismatches must be 0)
+  bottom                     runs   300  closed   300  levels compared    117959  mismatches 0
+  top                        runs   300  closed   300  levels compared    117054  mismatches 0
+  positions                  runs   300  closed   300  levels compared    117401  mismatches 0
+  corner place               runs   600  closed   600  levels compared    235104  mismatches 0
+  old convention in range    runs   600  closed   600  levels compared    235051  mismatches 0
+  union bound in range       runs   600  closed   600  levels compared    235013  mismatches 0
+  designs with different constants (J, K, r_dagger, m_max): 0 of 150
+CONTROLS
+  old convention at a corner place where the exact shift differs: 301 runs of their reference, of which the run changes (level, sample sizes or cost): 257
+  union bound (A0 = hi, B0 = x0 - lo): 600 runs; calls of some rung BELOW the product instance's: 0 (must be 0)
+  lo and hi exchanged (A0 = lo, B0 = x0 - hi): 600 runs; calls of some rung below the product instance's: 243 (must be > 0)
+THE TOLERANCE OF THEIR TEST 'populated' (2^m P(HIGH) >= 2^(-1e-12) instead of N >= K): my run with and without it, 600 runs (bottom/top, feasible place): sample sizes change in 154 runs, at 4513 levels in all; largest |change of ln cost| 3.455e-02; largest |change of ln calls of a rung| 3.455e-02; smallest n_o with a change 43, largest n_o without 191
+VERDICT: AGREEMENT on every compared quantity
+end 2026-11-26T16:31:07Z  wall 103.9 s  peak RSS MB: 77.2

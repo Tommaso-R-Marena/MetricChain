@@ -1,0 +1,25 @@
+# Part 1: arrays, reduced K = 6 and eta' = 100 (the reviewer's reduction), u = 1, lambda = 1/sqrt(2), eta = 1/2,
+#         theta = 3; flat instance; x_2 = b = x_1/2
+# n_o n_i  x_1     M_max      N_2   |C_2| honest (alpha = 0, 1/2, 1)   |C_2| all wide   violated   closed form agrees
+  10  4   1.0    196608     61927   [444, 219, 0]       117491   True   True
+  11  4   1.5    393216    109951   [444, 444, 444]        99818   False   True
+  10  5   0.8    196608     52653   [219, 0, 219]       196608   True   True
+  11  3   2.0    393216    171564   [900, 900, 900]        35137   False   True
+  10  6   1.2    196608     82909   [444, 444, 444]       196608   True   True
+# Part 1: |C_2| > N_2 with trivial rung-1 brackets in 3 of 5 rows; never with honest brackets
+#
+# Part 2: closed form, UNREDUCED constants of the theorem (eta' = 1, K with L+3), lambda = 1/sqrt(2), eta = 1/2,
+#         theta = 3 (u = 1), 50 (u = 2, 3), nu_1 = 1, delta = 0.05; flat instance; x_2 = b = x_1/2
+# u  n_o n_i  x_1     K   r_dag        M_max          N_2   |C_2| honest (alpha = 0, 1/2, 1)       |C_2| all wide   violated
+  1    8   6  1.5   217    1  1.4221e+07  1.8251e+08   ['8.259e+05', '8.259e+05', '8.259e+05']   1.4221e+07   False   (N_2 >= M_max: Claim B is vacuous here)
+  1   60  20  1.0   261   12  2.2420e+12  4.3867e+09   ['2.811e+06', '0.000e+00', '5.702e+06']   2.2420e+12   True
+  1  100  40  2.0   275   22  6.0473e+14  3.7677e+10   ['2.110e+07', '2.110e+07', '1.040e+07']   6.0473e+14   True
+  1  200 160  5.0   298   47  6.8714e+20  4.9332e+12   ['9.488e+08', '9.488e+08', '9.488e+08']   6.8714e+20   True
+  2   30  10  1.0   262    1  7.2018e+13  3.5585e+09   ['2.537e+06', '0.000e+00', '5.145e+06']   7.2018e+13   True
+  2   60  30  3.0   284    3  1.6371e+20  1.4010e+11   ['5.086e+07', '5.086e+07', '5.086e+07']   1.6371e+20   True
+  3   20   8  1.0   259    0  2.2248e+12  3.5451e+09   ['5.106e+06', '2.518e+06', '0.000e+00']   2.2248e+12   True
+  3   40  20  4.0   282    0  5.0801e+18  3.5344e+11   ['2.008e+08', '2.008e+08', '2.008e+08']   5.0801e+18   True
+# Part 2: |C_2| > N_2 with trivial rung-1 brackets in 7 of 8 rows (every row with N_2 < M_max);
+#         never with honest brackets of ratio e^{x_1}.
+# With the rule 'before stage 2: if |C_2| > N_2, stop and return the trivial bracket' stage 2 never runs
+# on more than N_2 fibres, and with honest rung-1 brackets the rule fires in no row above.

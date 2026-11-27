@@ -1,0 +1,33 @@
+== (1) the inequality of Proposition F on random inhomogeneous binary chains ==
+150 random chains (n = 3..7, asymmetric envelopes, random t): smallest [sum pi_phi^t Q^(1-t)] / [prod c_i] = 1.076174  (must be >= 1)
+   -ln V_i is d*_i-Lipschitz in x_i: largest violation 1.11e-15;  the minimum defining c_i is at an end of the segment: largest (end value - grid minimum) = 0.00e+00
+
+== (2) fixed point u* and the one-site bounds (L = 1); block versions L = 2, 3 ==
+p=0.4: u* = 1.2183 (report 1.218), slack g(u*) = 0.2183 < K = 0.4055
+      h <= 0.04053, 0.03889, 0.03736   report: 0.04053, 0.03889, 0.03736
+      E <= 0.16935, 0.16921, 0.16916   report: 0.16935, 0.16921, 0.16917
+      a <= 0.15094, 0.13507, 0.12970   report (L=3): 0.12970
+p=0.3: u* = 1.5261 (report 1.526), slack g(u*) = 0.5261 < K = 0.8473
+      h <= 0.05484, 0.05180, 0.04902   report: 0.05484, 0.05180, 0.04902
+      E <= 0.23419, 0.23324, 0.23285   report: 0.23419, 0.23324, 0.23285
+      a <= 0.19709, 0.16875, 0.15401   report (L=3): 0.15401
+p=0.2: u* = 1.9807 (report 1.981), slack g(u*) = 0.9807 < K = 1.3863
+      h <= 0.07202, 0.06672, 0.06197   report: 0.07202, 0.06672, 0.06197
+      E <= 0.31886, 0.31554, 0.31376   report: 0.31886, 0.31554, 0.31376
+      a <= 0.24450, 0.20407, 0.17747   report (L=3): 0.17747
+p=0.1: u* = 2.7497 (report 2.75), slack g(u*) = 1.7497 < K = 2.1972
+      h <= 0.09157, 0.08299, 0.07542   report: 0.09157, 0.08299, 0.07542
+      E <= 0.43245, 0.42378, 0.41799   report: 0.43245, 0.42378, 0.41799
+      a <= 0.28391, 0.23239, 0.19678   report (L=3): 0.19678
+
+== (3) necessary condition: exact optimum over site-wise labels (n = 8) <= 8 * one-site DP bound ==
+p=0.4 t=0.3: site-wise optimum n=8: 0.243062 (per site 0.030383);  8 * DP = 0.277991;  cube 8 F_c = 0.198610;  ok: True
+p=0.4 t=0.45: site-wise optimum n=8: 0.271513 (per site 0.033939);  8 * DP = 0.322575;  cube 8 F_c = 0.231598;  ok: True
+p=0.4 t=0.7: site-wise optimum n=8: 0.213582 (per site 0.026698);  8 * DP = 0.265279;  cube 8 F_c = 0.192330;  ok: True
+p=0.3 t=0.3: site-wise optimum n=8: 0.296097 (per site 0.037012);  8 * DP = 0.379895;  cube 8 F_c = 0.198610;  ok: True
+p=0.3 t=0.45: site-wise optimum n=8: 0.321134 (per site 0.040142);  8 * DP = 0.437268;  cube 8 F_c = 0.231598;  ok: True
+p=0.3 t=0.7: site-wise optimum n=8: 0.242247 (per site 0.030281);  8 * DP = 0.353919;  cube 8 F_c = 0.192330;  ok: True
+p=0.1 t=0.3: site-wise optimum n=8: 0.374063 (per site 0.046758);  8 * DP = 0.661927;  cube 8 F_c = 0.198610;  ok: True
+p=0.1 t=0.45: site-wise optimum n=8: 0.376869 (per site 0.047109);  8 * DP = 0.732447;  cube 8 F_c = 0.231598;  ok: True
+p=0.1 t=0.7: site-wise optimum n=8: 0.265588 (per site 0.033198);  8 * DP = 0.552322;  cube 8 F_c = 0.192330;  ok: True
+39.1 s

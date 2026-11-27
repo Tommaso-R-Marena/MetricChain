@@ -1,0 +1,4 @@
+[d] K=6 sampling: {'instances': 3847, 'full LP also run': 2404, 'not exposed': 2046, 'not exposed, no 4 states with constant product': 694, '  ... of these, containing 5 singleton-like states': 229, 'Theorem 6 checked': 3578, 'exposed': 1801, '  ... of these, with neither obstruction': 465} time 256 s
+     example with neither obstruction: ['++++++', '--++++', '+-+-++', '+-+++-', '+-++-+', '+--+++']
+     example with neither obstruction: ['++++++', '+-+++-', '+--+++', '+-++-+', '--++++', '+-+-++']
+     example with neither obstruction: ['++++++', '-+--+-', '----++', '---++-', '--+-+-', '+---+-']

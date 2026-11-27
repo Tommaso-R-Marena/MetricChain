@@ -1,0 +1,10 @@
+case ['K5', '4', '3', '--enum']: ln Z of the models rebuilt from the stored tables against the driver's: +0.0e+00, +0.0e+00; D = 0.01890505; 10 routed items, 2 groups [0s, peak RSS 53 MB]
+exact means under the FLOOR by held-site passes on the stored routes: beta <s_-> = 0.015241719, beta <s_+> = 0.0740637; largest |mass - 1| = 1.6e-13 [0s, peak RSS 54 MB]
+<m+ - m-> under the floor: transfer matrix 0.05327566519, my enumeration 0.05327566519
+floor, 1000000 exact samples [3s, peak RSS 553 MB]: smallest W = m+ - s+ - m- at a sample 2.00e-07 (must be >= 0); beta <W> exact 0.015300825, sampled 0.015062629 +- 0.0001 (-2.35 standard errors); second order <e^(-beta W) - 1 + beta W> = 0.003005 +- 6e-05
+    beta <s_-> exact 0.015241719, sampled 0.015003674 +- 0.0001 (-2.35 standard errors); second order <e^(-beta s-) - 1 + beta s-> = 0.002996 +- 6e-05
+corrected bracket (the driver's statistics, no safety factor): [251.348418441, 251.348482815], width 6.43737e-05   (LJ 251.345411880, LP 251.348418441, UE 251.350592054, UP 251.348482815)
+the same routed items put back exactly:                        [251.348326136 +- 6.1e-05, 251.348376161 +- 6.1e-05], width 5.00248e-05 +- 5.5e-07
+LOSS BETWEEN GROUPS, measured: lower end -9.23e-05 +- 6.1e-05, upper end 0.0001067 +- 6.1e-05, total 1.435e-05 +- 5.5e-07 nats;  D^2/4 = 8.935e-05;  loss / (D^2/4) = 0.161 +- 0.006;  loss / corrected width = 0.223;  what the exact treatment of the routed items leaves (envelope, items without a route, allowances): 5.002e-05
+    (validation: compare the second line with the driver's own enumeration, 'ln Z of the models with the routed items put back exactly', in the committed *_enum.log)
+ALL DONE 3 s; peak RSS 553 MB

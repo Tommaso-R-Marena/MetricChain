@@ -1,0 +1,13 @@
+E13 attack: random envelopes on 4 and 5 states (symmetric metrics, quasi-metrics, with zero entries, without triangle inequality)
+  instances 66, vertices found by brute force over bases 966
+  (a) vertices with a DISCONNECTED tight graph: 0
+  (a) proper mixtures of vertices with a CONNECTED tight graph: 0
+  (a) members built from a spanning tree of tight constraints: 3392; of these NOT in the vertex list: 0
+  (a) disagreements between 'tight graph connected' and 'active constraints have full rank': 0
+  (b) (member, Phi) cases 10464; identified by the fibre LP 2723; disagreements with the exposed-face criterion: 0
+      by kind of member (kind, identified): {('centre', False): 277, ('centre', True): 23, ('mid', False): 3017, ('mid', True): 583, ('mix', False): 1621, ('mix', True): 179, ('vertex', False): 2826, ('vertex', True): 1938}
+  (b) vertices: 4764 cases; disagreements 'identified <=> unique maximiser of some f in the span': 0
+  (c) flow certificate feasible at t >= max and infeasible at max - 1e-3: failures 0 of 330
+  infinite envelope (simplex), delta_x: components of the tight graph = 4 (extreme; (a) needs a finite envelope)
+E13: NO COUNTEREXAMPLE
+[exit 0]

@@ -1,0 +1,6 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 7; 495 raw stage-2 tables of workstream P9 (sum of their maxima 18.17 kT)
+(1) 333 tables; least entry 0 kT (must be >= 0)
+(2) largest entry with at least one site of the table at its anchor: 0 kT (must be 0: their hypothesis)
+    control: one entry with one site at the anchor set to 1e-3 kT in a copy of the table on (8, 9, 10, 11): the test reports 0.001 kT (must be 1e-3)
+(3) mean of a table over its all-off entries / its maximum: weighted by the maxima 0.055; over tables: median 0.069, least 0.016, largest 0.410
+ALL DONE 313 s; peak RSS 1954 MB

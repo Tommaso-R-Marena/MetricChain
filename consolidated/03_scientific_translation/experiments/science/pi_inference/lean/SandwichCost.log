@@ -1,0 +1,7 @@
+'ScienceA17.exp_neg_le_quadratic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceA17.exp_le_quadratic_mul_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceA17.exp_mean_le_mean_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceA17.floor_side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceA17.ceiling_side' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceA17.Z_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ScienceA17.sandwich_cost' depends on axioms: [propext, Classical.choice, Quot.sound]

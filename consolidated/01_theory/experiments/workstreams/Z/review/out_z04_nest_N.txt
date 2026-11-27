@@ -1,0 +1,59 @@
+# u = 2 (h = 0.09728, a = 0.32781, d_min = 2), n = N = 3000, k = 5 levels above the base, eps^ = 1, ln delta = -2.996, base error E_0 = 0, blocks = design/1
+# chain: s_t = L + 0.05, b_0 = h + 0.01; base level J0 = 0; (b_j - h)/h, j = 0..5: 0.1028 0.1028 0.1028 0.1028 0.1028 0.1001;  W_j(b_j): 0.000 0.352 0.465 0.571 0.682 0.788;  X = X_0(N) + 1 = 23.494
+#   level 5: block m = 690 (design 690), chain levels at d = n: 4, d_0 = 696; unrolled terms: chain 466.48, level 69.04
+#   level 4: block m = 689 (design 689), chain levels at d = n: 4, d_0 = 695; unrolled terms: chain 465.79, level 69.12
+#   level 3: block m = 689 (design 689), chain levels at d = n: 4, d_0 = 695; unrolled terms: chain 465.86, level 69.19
+#   level 2: block m = 690 (design 690), chain levels at d = n: 4, d_0 = 696; unrolled terms: chain 466.52, level 69.26
+#   level 1: block m = 690 (design 690), chain levels at d = n: 4, d_0 = 696; unrolled terms: chain 466.58, level 69.32
+exact ln cost of F_5(n, eps^, delta): 1386.041 = n b_k + 1064.987   (n b_k = 321.054, n b_base = 321.843, n h = 291.843, n a = 983.440)
+bound by the composed error functions: n b_k + 2677.148;   unrolled bound of section 6: n b_k + 2677.153
+nodes evaluated exactly: F_5: 4 Z-levels, 4 chain levels; F_4: 72 Z-levels, 5 chain levels; F_3: 2420 Z-levels, 108 chain levels; F_2: 43856 Z-levels, 2880 chain levels; F_1: 81175 Z-levels, 32643 chain levels   [253 s]
+check                                               number  least slack  viol.   at
+F1 type (Prop. Z4)                                   65286      241.895      0   (891, 23.494369232039126)
+F2 type (Prop. Z4)                                    5760      494.515      0   (1706, 23.494369232039126)
+F3 type (Prop. Z4)                                     216      829.171      0   (2000, 23.494369232039126)
+F4 type (Prop. Z4)                                      10     1355.899      0   (2067, 23.494369232039126)
+F5 type (Prop. Z4)                                       8     1593.643      0   (3000, 23.494369232039126)
+T1 accuracy                                          32643        0.015      0   (702,)
+T1 claim (Prop. T(iii))                              32643      225.660      0   (891,)
+T1 claim (bottom)                                    43856      274.395      0   (695,)
+T1 delta' (Prop. T(ii))                              32643      179.714      0   (696,)
+T2 accuracy                                           2880        0.015      0   (700,)
+T2 claim (Prop. T(iii))                               2880      480.940      0   (1706,)
+T2 claim (bottom)                                     2420      801.521      0   (695,)
+T2 delta' (Prop. T(ii))                               2880      179.725      0   (696,)
+T3 accuracy                                            108        0.015      0   (712,)
+T3 claim (Prop. T(iii))                                108      818.103      0   (2000,)
+T3 claim (bottom)                                       72     1332.432      0   (677,)
+T3 delta' (Prop. T(ii))                                108      179.611      0   (712,)
+T4 accuracy                                              5        0.015      0   (812,)
+T4 claim (Prop. T(iii))                                  5     1347.427      0   (2067,)
+T4 claim (bottom)                                        4     1858.301      0   (689,)
+T4 delta' (Prop. T(ii))                                  5      179.685      0   (749,)
+T5 accuracy                                              4        0.015      0   (3000,)
+T5 claim (Prop. T(iii))                                  4     1587.667      0   (3000,)
+T5 claim (bottom)                                        1     2479.063      0   (240,)
+T5 delta' (Prop. T(ii))                                  4      180.069      0   (930,)
+TOP: Ehat_k <= unrolled error of section 6               1        0.005      0   None
+TOP: exact <= n b_k + Ehat_k(n, eps^; Lam_0)             1     1612.161      0   None
+Z0 (U-inf)                                           81175        5.719      0   (6, 23.494369233039126, 5)
+Z0 accuracy                                          81175        1.035      0   (28, 23.494369233039126)
+Z0 delta' (Lemma Z2)                                 81175        6.116      0   (6, 23.494369233039126, 5)
+Z0 type (Prop. Z3)                                   81175       25.431      0   (6, 23.494369233039126, 5)
+Z1 (U-inf)                                           43856      262.356      0   (1166, 64.0, 357)
+Z1 accuracy                                          43856        1.043      0   (23, 23.494369233039126)
+Z1 delta' (Lemma Z2)                                 43856        6.116      0   (6, 23.494369233039126, 5)
+Z1 type (Prop. Z3)                                   43856      277.276      0   (1166, 64.0, 357)
+Z2 (U-inf)                                            2420      515.706      0   (1823, 47.0, 335)
+Z2 accuracy                                           2420        1.043      0   (23, 23.494369233039126)
+Z2 delta' (Lemma Z2)                                  2420       19.116      0   (23, 23.494369233039126, 22)
+Z2 type (Prop. Z3)                                    2420      528.787      0   (1823, 47.0, 335)
+Z3 (U-inf)                                              72      860.990      0   (2067, 24.0, 67)
+Z3 accuracy                                             72        1.500      0   (60, 23.494369233039126)
+Z3 delta' (Lemma Z2)                                    72       28.186      0   (60, 23.494369233039126, 36)
+Z3 type (Prop. Z3)                                      72      871.880      0   (2067, 24.0, 67)
+Z4 (U-inf)                                               4     1362.915      0   (2310, 23.494369233039126, 243)
+Z4 accuracy                                              4        2.534      0   (240, 23.494369233039126)
+Z4 delta' (Lemma Z2)                                     4       37.796      0   (240, 23.494369233039126, 51)
+Z4 type (Prop. Z3)                                       4     1375.041      0   (2310, 23.494369233039126, 243)
+TOTAL: 734663 checks, 0 violations   ALL CHECKS PASS

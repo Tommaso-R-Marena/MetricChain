@@ -1,0 +1,106 @@
+# r9_semi NMAX=11 NPAIR=9 NSCR=11 part=0/1
+# combinations (head,tail): (5,5) (2,3) (1,3) (2,2) (0,3) (3,0) (0,0) (2,1) 
+N= 3 bridges=1 bprime_up=1 topclean=1 botclean=1 clean=1 | classes h: all=1 clean=1 ; (h,g): all=1 clean=1
+      A-part max (d3,d8,d11,dg | norm) = (0,0,0,0 | 0), #(x,c1) with d3>=1: 0 ; B-part max = (0,0,0 | 0)
+      head 5 tail 5: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 3: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 1 tail 3: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 2: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 0 tail 3: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 3 tail 0: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 0 tail 0: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 1, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      [0.0 s]
+N= 4 bridges=2 bprime_up=2 topclean=2 botclean=2 clean=2 | classes h: all=2 clean=2 ; (h,g): all=2 clean=2
+      A-part max (d3,d8,d11,dg | norm) = (0,0,0,0 | 0), #(x,c1) with d3>=1: 0 ; B-part max = (0,0,0 | 0)
+      head 5 tail 5: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 3: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 1 tail 3: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 2: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 0 tail 3: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 3 tail 0: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 0 tail 0: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 2, NOT clean 0 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      [0.0 s]
+N= 5 bridges=5 bprime_up=4 topclean=4 botclean=5 clean=4 | classes h: all=3 clean=3 ; (h,g): all=3 clean=3
+      A-part max (d3,d8,d11,dg | norm) = (0,0,1,1 | 2), #(x,c1) with d3>=1: 0 ; B-part max = (0,0,0 | 0)
+      head 5 tail 5: tried 6, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 2 tail 3: tried 6, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 1 tail 3: tried 6, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 2 tail 2: tried 6, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 0 tail 3: tried 6, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 3 tail 0: tried 6, NOT clean 2 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 0 tail 0: tried 6, NOT clean 2 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 6, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      [0.0 s]
+N= 6 bridges=12 bprime_up=10 topclean=10 botclean=12 clean=10 | classes h: all=5 clean=4 ; (h,g): all=5 clean=4
+      A-part max (d3,d8,d11,dg | norm) = (0,0,1,1 | 2), #(x,c1) with d3>=1: 0 ; B-part max = (0,0,0 | 0)
+      head 5 tail 5: tried 14, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 2 tail 3: tried 14, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 1 tail 3: tried 14, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 2 tail 2: tried 14, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 0 tail 3: tried 14, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 3 tail 0: tried 14, NOT clean 4 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 0 tail 0: tried 14, NOT clean 4 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 14, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      [0.0 s]
+N= 7 bridges=29 bprime_up=24 topclean=24 botclean=29 clean=24 | classes h: all=8 clean=6 ; (h,g): all=8 clean=6
+      A-part max (d3,d8,d11,dg | norm) = (0,0,1,1 | 2), #(x,c1) with d3>=1: 0 ; B-part max = (0,0,0 | 0)
+      head 5 tail 5: tried 34, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 2 tail 3: tried 34, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 1 tail 3: tried 34, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 2 tail 2: tried 34, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 0 tail 3: tried 34, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 3 tail 0: tried 34, NOT clean 10 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 0 tail 0: tried 34, NOT clean 10 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 34, NOT clean 0 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      [0.0 s]
+N= 8 bridges=78 bprime_up=66 topclean=66 botclean=76 clean=64 | classes h: all=16 clean=12 ; (h,g): all=16 clean=12
+      A-part max (d3,d8,d11,dg | norm) = (0,0,1,1 | 2), #(x,c1) with d3>=1: 0 ; B-part max = (0,1,2 | 6)
+      head 5 tail 5: tried 90, NOT clean 0 ; cost min (0,0,0,0) max (0,1,2,1 | norm 6)
+      head 2 tail 3: tried 90, NOT clean 0 ; cost min (0,0,0,0) max (0,1,2,1 | norm 6)
+      head 1 tail 3: tried 90, NOT clean 2 ; cost min (0,0,0,0) max (0,1,1,1 | norm 5)
+      head 2 tail 2: tried 90, NOT clean 0 ; cost min (0,0,0,0) max (0,1,2,1 | norm 6)
+      head 0 tail 3: tried 90, NOT clean 2 ; cost min (0,0,0,0) max (0,0,1,1 | norm 2)
+      head 3 tail 0: tried 90, NOT clean 24 ; cost min (0,0,0,0) max (0,1,2,0 | norm 6)
+      head 0 tail 0: tried 90, NOT clean 26 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 90, NOT clean 0 ; cost min (0,0,0,0) max (0,1,2,1 | norm 6)
+      [0.0 s]
+N= 9 bridges=201 bprime_up=172 topclean=168 botclean=191 clean=159 | classes h: all=28 clean=17 ; (h,g): all=29 clean=17
+      A-part max (d3,d8,d11,dg | norm) = (0,1,2,1 | 6), #(x,c1) with d3>=1: 0 ; B-part max = (0,1,2 | 6)
+      head 5 tail 5: tried 230, NOT clean 0 ; cost min (0,0,0,0) max (0,2,4,1 | norm 12)
+      head 2 tail 3: tried 230, NOT clean 0 ; cost min (0,0,0,0) max (0,2,4,1 | norm 12)
+      head 1 tail 3: tried 230, NOT clean 4 ; cost min (0,0,0,0) max (0,2,3,1 | norm 11)
+      head 2 tail 2: tried 230, NOT clean 0 ; cost min (0,0,0,0) max (0,2,4,1 | norm 12)
+      head 0 tail 3: tried 230, NOT clean 10 ; cost min (0,0,0,0) max (0,1,2,1 | norm 6)
+      head 3 tail 0: tried 230, NOT clean 62 ; cost min (0,0,0,0) max (0,1,2,0 | norm 6)
+      head 0 tail 0: tried 230, NOT clean 71 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 230, NOT clean 4 ; cost min (0,0,0,0) max (0,2,3,1 | norm 11)
+      [0.0 s]
+N=10 bridges=536 bprime_up=458 topclean=436 botclean=511 clean=420 | classes h: all=43 clean=29 ; (h,g): all=56 clean=37
+      A-part max (d3,d8,d11,dg | norm) = (0,1,3,1 | 8), #(x,c1) with d3>=1: 0 ; B-part max = (0,2,3 | 11)
+      head 5 tail 5: tried 614, NOT clean 0 ; cost min (0,0,0,0) max (0,2,6,1 | norm 15)
+      head 2 tail 3: tried 614, NOT clean 0 ; cost min (0,0,0,0) max (0,2,6,1 | norm 15)
+      head 1 tail 3: tried 614, NOT clean 14 ; cost min (0,0,0,0) max (0,2,5,1 | norm 14)
+      head 2 tail 2: tried 614, NOT clean 0 ; cost min (0,0,0,0) max (0,2,6,1 | norm 15)
+      head 0 tail 3: tried 614, NOT clean 28 ; cost min (0,0,0,0) max (0,1,3,1 | norm 8)
+      head 3 tail 0: tried 614, NOT clean 178 ; cost min (0,0,0,0) max (0,2,3,0 | norm 11)
+      head 0 tail 0: tried 614, NOT clean 194 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 614, NOT clean 10 ; cost min (0,0,0,0) max (0,2,6,1 | norm 15)
+      [0.0 s]
+N=11 bridges=1433 bprime_up=1236 topclean=1174 botclean=1352 clean=1115 | classes h: all=64 clean=44 ; (h,g): all=106 clean=64
+      A-part max (d3,d8,d11,dg | norm) = (0,2,3,1 | 11), #(x,c1) with d3>=1: 0 ; B-part max = (0,2,3 | 11)
+      head 5 tail 5: tried 1630, NOT clean 0 ; cost min (0,0,0,0) max (0,3,4,1 | norm 16)
+      head 2 tail 3: tried 1630, NOT clean 0 ; cost min (0,0,0,0) max (0,3,4,1 | norm 16)
+      head 1 tail 3: tried 1630, NOT clean 36 ; cost min (0,0,0,0) max (0,3,4,1 | norm 15)
+      head 2 tail 2: tried 1630, NOT clean 0 ; cost min (0,0,0,0) max (0,3,4,1 | norm 16)
+      head 0 tail 3: tried 1630, NOT clean 90 ; cost min (0,0,0,0) max (0,2,3,1 | norm 11)
+      head 3 tail 0: tried 1630, NOT clean 456 ; cost min (0,0,0,0) max (0,2,3,0 | norm 11)
+      head 0 tail 0: tried 1630, NOT clean 515 ; cost min (0,0,0,0) max (0,0,0,0 | norm 0)
+      head 2 tail 1: tried 1630, NOT clean 36 ; cost min (0,0,0,0) max (0,2,4,1 | norm 13)
+      [0.0 s]
+# from-scratch profile checks: 2297 ; O(n^2) brute-force checks: 1
+# stored clean bridges with at most 9 beads: 264
+(S1) part 0/1: 69696 ordered pairs of clean bridges (N1,N2 <= 9) concatenated from coordinates:
+     symmetry not unique: 0 ; not a self-avoiding lattice walk: 0 ; not a bridge: 0 ; (h,g) not exactly additive: 0 ; not clean: 0
+     O(n^2) brute-force profile checks on concatenations: 17   [0.2 s]

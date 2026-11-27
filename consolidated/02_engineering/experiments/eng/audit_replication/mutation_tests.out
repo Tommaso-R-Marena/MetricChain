@@ -1,0 +1,330 @@
+[         caught] X.1 M1: valid envelope replaced by the invalid offset kappa/(4d) (pointwise hypothesis check active)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M1b: same, with the pointwise hypothesis check disabled (only the integral comparison can catch it)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M2: Taylor envelope without Hessian enclosure used as 'valid', pointwise check disabled
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M3: Gershgorin off-diagonal radius dropped from the Hessian enclosure (pointwise check active)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M4: claimed ratio bound with half the width (exp(beta*sum w/2))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M4b: Taylor width w_i reported 1% too small (ratio bound must fail on a second-order envelope)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M5: lower and upper envelopes swapped in the sandwich
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] X.1 M6: 'Fubini' broken: envelope integrals multiplied by 1 + 1e-8 (tiny relative error in one factor)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M1: threshold (1-kappa) sigma + eps (sign of eps flipped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M2: threshold sigma - eps (kappa replaced by 0)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M3: threshold (1-kappa) sigma - eps/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M4: threshold (1-kappa/2) sigma - eps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M5: certificate only required at non-anchor... replaced by: lower bound checked at anchors only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.4 M6: separation taken as the LARGEST distance to another anchor
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M1: unsound elimination rule in the tables and the joint search (margin >= -2 accepted)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M2: leaf bound = exact minimum instead of the LP bound (integrality gap ignored) in the block tables
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M2b: leaf rule mis-modelled: pair constraint with p_ij instead of 2 p_ij (bound doubles on pairs)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M2c: leaf = exact minimum in tables AND validation switched off (only the search result can catch it)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M3: branch charges only the cheaper child (block search)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M4: prune rule only wrong in the joint search (margin >= -2): joint ground truth must disagree
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.1 M5: claim 'at least 2^(K+1) leaves' (too strong)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M1: Consistent without the clause c_i >= 0
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M2: pair condition checked in one direction only (p before q in the list)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M3: pair condition with the absolute value of the envelope constants
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.7 M4: pair condition with a strict inequality
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M1: upper envelope with twice the envelope (not admissible)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M2: targets up to 1% beyond the upper end of the interval
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M3: interpolation that is not a convex combination (pointwise max of the envelopes scaled)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] II.8 M4: partition-function interval claimed 2% wider
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] III.6 M1: bound with sum of squares (the DEAD.5 claim)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] III.6 M2: constant 1/8 replaced by 1/8.1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.5 M1: the surviving bound (sum c_i)^2 registered as a dead end -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[  expected pass] DEAD.5 M2: product references only (independent sites) -> random search must find nothing, fallback fires
+                  exit=0  ALL TESTS BEHAVE AS EXPECTED
+[         caught] I.6 M1: injective transport formula used for a many-to-one map (factor m dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.2 M1: description length of the peeling certificate claimed to be at most 100 m^3
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] VII.2 M2: sum nodes not charged for the sub-instances they embed (closed form must disagree)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.1 M1: slack without the residual terms (s = d)
+                  exit=1  2 TEST(S) MISBEHAVED
+[         caught] XI.1 M2: claim N* <= N_cov (the extra evaluation of a minimiser dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.2 M1: partition-function bound with the smallest slack partition sum (min over anchors)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.2 M2: exponential-weights bound without the factor exp(-t eps)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.3 M1: sharpness tested against half the envelope constant
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.3 M2: product bound with the smallest single-site kernel sum (min over anchor states)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.4 M1: no radius shrinkage (theta = (1-kappa)/(1+kappa))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.4 M2: separation (c) claimed for the arbitrary first point as well
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.5 M1: claim 'gamma(G) evaluations' (the minimiser is forgotten)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.5 M2: no distinguished minimiser (f = 1 everywhere)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M1: conditional envelope without the original envelope (U(x) - L(y) only)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M2: conditional envelope transposed (U(y) - L(x))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.6 M3: claim N_point <= N_conf
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.7 M1: upper end with the transposed envelope d(x, y)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.7 M2: interval claimed 1% narrower at the lower end
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M1: entropy bound without the accuracy term t eps / beta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M2: Hoelder converse with the kernel exponent t = beta instead of beta (1 - p) / p
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.8 M3: optimistic partition function written with the slack TO the evaluated set
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.9 M1: relative entropy with its arguments exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.9 M2: transport cost with half the envelope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.10 M1: remainder claimed to be half as large
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.10 M2: interpolant one order too low (ball of radius m - 2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.11 M1: star envelope claimed with half the pair remainder
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.11 M2: certified-minimiser criterion with the additive interpolant only (remainder ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.12 M1: cut bracket from one direction of the cut pairs only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.12 M2: elimination of an end site without the factor on the reverse ordered pair
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.7 M1: candidate restricted to evaluated points (the true statement II.4) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.13 M1: tail bound claimed with exponent -8 N eta^2 / C
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.13 M2: sampled interval without the slack |beta| eta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.9 M1: product reference with the same marginals (the true statement III.3) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.6 M1: comparison with covers at the shrunk radii (the true statement XI.4) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.14 M1: normal form built from the known part itself instead of its Pasch-Hausdorff envelope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.14 M2: client form compared with the transposed centre form
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.15 M1: dip bound claimed one step larger, c C(d + 2, 2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.15 M2: stars claimed to combine (uncertainty c C(d - 1, 2) for unions of stars)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XI.15 M3: dip profile with the wrong support (vanishing only from distance r + 1 on)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.17 M1: a steep known part (eta = 0.9: the grid right of the hub is short) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.1 M1: dip built from the transposed envelope (d(y, a) instead of d(a, y))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.1 M2: effect of a dip claimed to be at least beta c (soft gap dropped)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.2 M1: factor (1 - delta) instead of (1 - 2 delta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.2 M2: detection balls of half the radius (a larger packing is claimed)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.3 M1: thermal detection radius without the soft gap
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.3 M2: thermal detection balls of half the radius in the packing
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.4 M1: closed balls of radius gap + eps instead of gap + eps/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.4 M2: the block of near-minimisers replaced by the whole space (upward alternatives ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.3 M3: factor (1 - delta) instead of (1 - 2 delta) on the uniform metric with blind guesses
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.5 M1: initial segments in binary order claimed to have the largest erosions (instead of the simplicial order)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.5 M2: sets one point larger than the ball claimed to have at most the effect of the ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M1: the set of eta-minimisers replaced by the whole space (upward alternatives ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M2: hedged window with closed balls of radius gap + eps (the hedge eta dropped from the radius)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M3: hedged mixtures with the factor (1 - delta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.7 M4: pairs claimed to be detected with probability 1 - delta
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.8 M1: the two radii of the bracket claimed to differ by at most 2 for every u
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.8 M2: exponent formula without the volume regime (ln 2 - h((Lambda_1 - lam)/u) for every lam)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.6 M1: dip weights without the factor (1 + eta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.6 M2: soft gap computed from the transposed slack
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.6 M3: Gibbs weight of the difference set claimed to be at least 2 (Z - Z')
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.9 M1: radius of a generalised dip without its soft gap
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.9 M2: supports of the generalised dips claimed at half the radius
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.10 M1: constant gamma(Q) computed from the distance functions (single dips) only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.10 M2: hitting bound four times larger
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.11 M1: closed form of the flat sites with single dips only (m = 1)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.12 M1: sandwich with the untilted reference (theta = 0) and the width n eps*
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.12 M2: slack of the instance theta M with the wrong orientation
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.13 M1: lower end of the one-reference sandwich replaced by the Gibbs variational value at a class member (psi = 0)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.13 M2: upper end computed from the distance functions only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.13 M3: hint-free width claimed to equal the instance threshold of the zero residual
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.14 M1: residual-free formula with the transposed envelope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.15 M1: Curie-Weiss threshold claimed at w = 3 (positivity required already at w = 3.5)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.15 M2: Jensen gap of the tent claimed to be ln(sinh 2b / 2b)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XII.15 M3: droplet with the support radius off by one
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.10 M1: accuracy eps = 0.5 instead of 0 (certificates then exist) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.11 M1: known part f = 0 on the dyadic line (the shrunk covers are then small) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.12 M1: two identical site types (per-site maximisation is then exact) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.13 M1: the zero function in place of the class member that vanishes on the ball -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.15 M1: accuracy eps = 1 instead of 0 (the soft-gap bound is then attained up to a polynomial) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.16 M1: low temperature u = 3.5 (above the crossover: single dips are then the hardest to hit) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] DEAD.14 M1: a deeper perturbation scale (beta = 3: single local dips are sensitive) -> must be flagged UNEXPECTEDLY SURVIVED
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.1 M1: Harper bound with the ball of radius r - 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.1 M2: pointwise tail bound with half the slope
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M1: Monte Carlo claimed to stay above 0.9 A (no isoperimetric allowance)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M2: exponent of Gamma_n claimed to be KL(rho || 1/2)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M4: Chernoff bound claimed with the constant e^{-2K}
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M5: two-sided tail lemma claimed with Gamma'/8
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M6: below p_u the first bound claimed to vanish like the second
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.2 M3: truncated mean claimed to be at least 1.5 t* q
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M1: difference set claimed to be the closed ball
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M2: counting bound with the ball of radius R - 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M3: centre read off with the wrong sign
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M4: closed form of the drop with the floor at R - 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.3 M5: adaptive certificate without the evaluation at the antipode
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.5 M1: certified bracket without the isoperimetric tail term
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.5 M2: certified bracket with a lower end above the truncated mean
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.4 M1: order of the two exponents reversed
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIII.4 M2: finite-n bounds compared with the hinted exponent
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M1: dual of the span bracket without the centre of the box
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M2: feature envelope with half the weights
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M3: value claimed to be determined at every configuration
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M4: remainder transported in the wrong direction
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M5: width claimed to equal twice the distance to the span for all data
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.1 M6: lower end with the envelope in the orientation of the upper end
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.4 M1: sorted-distance form without truncation at the cutoff
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.4 M2: radial function that does not vanish at the cutoff
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.4 M3: entropy lemma with half the rounding error
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M1: profile envelope with the pair counts instead of the cumulative counts
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M2: summation by parts with the radial function shifted by one cell
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.3 M1: leaf bound taken at the upper corner of the coefficient box
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.3 M2: data term with the smaller of the two corner values
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.3 M3: data term capped (a bounded penalty on boxes that contradict the anchors)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M4: dominance claimed to give the larger energy
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XIV.2 M3: span bracket claimed to equal McShane's bound
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M1: identity between the relative entropies with the wrong sign of Lambda1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M2: fixed point claimed at the outer fraction g/(g + 2 theta_hint)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M3: inner accuracy not rescaled to the inner dimension
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.1 M4: identity theta_hint(e) = theta_na(e) claimed (without the shift by theta_hint)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M1: outer exponent without the tolerance (theta_na at g/phi instead of (g - beta)/phi)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M2: every sampled point charged at the finest accuracy (count of close points ignored)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M3: inner accuracy not rescaled in the recursion
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.2 M4: close points counted as e^{gamma - beta} (a superseded accounting)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M1: negligibility threshold without the tolerance e^b
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M2: lower end without the tolerance e^{-b}
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M3: closure attempted while every sampled fibre is above the level (tail lemma on the whole cube)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M4: upper end with the level itself in place of the next level
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M5: 'high' without a tolerance (classification cannot end)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.3 M6: certified exceedance probability without the factor 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.4 M1: second branch with one of the two observed values only
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.4 M2: caps bounded at radius r - 3
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XV.4 M3: centre taken to be the sampled point itself
+                  exit=1  1 TEST(S) MISBEHAVED
+
+164 mutations: 163 caught, 1 expected pass, 0 not as expected

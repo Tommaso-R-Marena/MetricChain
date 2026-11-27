@@ -1,0 +1,103 @@
+54 instances, 2380760 structures
+
+=== Theorem 1: (H0),(H1),(H2') ===
+sigma=-1 bulge = (uC+1)sigma + delta, delta=1/100: failures 0; min over instances of (min non-tiling E - E*) = 1/100
+sigma=-1 bulge = (uC+1)sigma + delta, delta=1/2: failures 0; min over instances of (min non-tiling E - E*) = 1/2
+sigma=-1 bulge = (uC+1)sigma + delta, delta=|sigma|: failures 0; min over instances of (min non-tiling E - E*) = 1
+sigma=-1 bulge = (uC+1)sigma + 5: failures 0; min over instances of (min non-tiling E - E*) = 1
+sigma=-1 bulge = 0 (H2), delta=|sigma|: failures 0; min over instances of (min non-tiling E - E*) = 1
+sigma=-1 bulge = (uC+1)sigma + 1/7 + uT/3 (depends on template side): failures 0; min over instances of (min non-tiling E - E*) = 1/7
+sigma=-1 CONTROL bulge = (uC+1)sigma (delta = 0): failures 40; min over instances of (min non-tiling E - E*) = 0; first failures [(((2,), 2, 1), [], Fraction(0, 1)), (((2, 1), 3, 1), [], Fraction(0, 1)), (((3,), 3, 1), [], Fraction(0, 1))]
+sigma=-1 CONTROL bulge = (uC+1)sigma - 1/10: failures 40; min over instances of (min non-tiling E - E*) = -1/2; first failures [(((2,), 2, 1), [], Fraction(-1, 10)), (((2, 1), 3, 1), [], Fraction(-1, 10)), (((3,), 3, 1), [], Fraction(-1, 5))]
+sigma=-1 CONTROL bulge = sigma + 1/2 regardless of uC (violates H2' when uC>=1 ... only if (uC+1)sigma+delta > sigma+1/2): failures 0; min over instances of (min non-tiling E - E*) = 1/2
+sigma=-3/2 bulge = (uC+1)sigma + delta, delta=1/100: failures 0; min over instances of (min non-tiling E - E*) = 1/100
+sigma=-3/2 bulge = (uC+1)sigma + delta, delta=1/2: failures 0; min over instances of (min non-tiling E - E*) = 1/2
+sigma=-3/2 bulge = (uC+1)sigma + delta, delta=|sigma|: failures 0; min over instances of (min non-tiling E - E*) = 3/2
+sigma=-3/2 bulge = (uC+1)sigma + 5: failures 0; min over instances of (min non-tiling E - E*) = 3/2
+sigma=-3/2 bulge = 0 (H2), delta=|sigma|: failures 0; min over instances of (min non-tiling E - E*) = 3/2
+sigma=-3/2 bulge = (uC+1)sigma + 1/7 + uT/3 (depends on template side): failures 0; min over instances of (min non-tiling E - E*) = 1/7
+sigma=-3/2 CONTROL bulge = (uC+1)sigma (delta = 0): failures 40; min over instances of (min non-tiling E - E*) = 0; first failures [(((2,), 2, 1), [], Fraction(0, 1)), (((2, 1), 3, 1), [], Fraction(0, 1)), (((3,), 3, 1), [], Fraction(0, 1))]
+sigma=-3/2 CONTROL bulge = (uC+1)sigma - 1/10: failures 40; min over instances of (min non-tiling E - E*) = -1/2; first failures [(((2,), 2, 1), [], Fraction(-1, 10)), (((2, 1), 3, 1), [], Fraction(-1, 10)), (((3,), 3, 1), [], Fraction(-1, 5))]
+sigma=-3/2 CONTROL bulge = sigma + 1/2 regardless of uC (violates H2' when uC>=1 ... only if (uC+1)sigma+delta > sigma+1/2): failures 0; min over instances of (min non-tiling E - E*) = 1/2
+
+=== Theorem 1c: flush coaxial stacking, sigma = -1, bulge/interior = gamma exactly ===
+rows x, columns gamma = ['0', '1/10', '1/2', '1', '3/2', '2', '3']
+entry: H = hypothesis holds; h = hypothesis fails; then ok/FAIL(n) = conclusion (tiling <=> E = E*_x, others >= E*_x + eps_x resp. > E*_x) on instances with B>=2
+x=     0: H ok | H ok | H ok | H ok | H ok | H ok | H ok
+x=  -1/2: H ok | H ok | H ok | H ok | H ok | H ok | H ok
+x= -9/10: H ok | H ok | H ok | H ok | H ok | H ok | H ok
+x=    -1: h FAIL(29) | H ok | H ok | H ok | H ok | H ok | H ok
+x=-11/10: h FAIL(29) | h FAIL(29) | H ok | H ok | H ok | H ok | H ok
+x=  -3/2: h FAIL(32) | h FAIL(30) | h FAIL(29) | H ok | H ok | H ok | H ok
+x=-19/10: h FAIL(32) | h FAIL(32) | h FAIL(31) | H ok | H ok | H ok | H ok
+x=    -2: h FAIL(37) | h FAIL(33) | h FAIL(33) | h FAIL(32) | h FAIL(13) | h FAIL(13) | h FAIL(13)
+x=  -5/2: h FAIL(37) | h FAIL(37) | h FAIL(37) | h FAIL(33) | h FAIL(32) | h FAIL(13) | h FAIL(13)
+violations of Theorem 1c: 0
+
+--- Theorem 1c on B = 1 instances (allowed only for |x| < |sigma|) ---
+x=0 gamma=0 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=0 gamma=1/2 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=0 gamma=2 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=-1/2 gamma=0 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=-1/2 gamma=1/2 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=-1/2 gamma=2 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=-9/10 gamma=0 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=-9/10 gamma=1/2 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=-9/10 gamma=2 hyp(|x|<|s|+min)=True |x|<|sigma|=True: failing B=1 instances: []
+x=-1 gamma=0 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(0, 1)), (((2, 1), 3, 1), Fraction(0, 1)), (((3,), 3, 1), Fraction(0, 1)), (((2, 2), 4, 1), Fraction(0, 1))]
+x=-1 gamma=1/2 hyp(|x|<|s|+min)=True |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(0, 1)), (((2, 1), 3, 1), Fraction(0, 1)), (((3,), 3, 1), Fraction(0, 1)), (((2, 2), 4, 1), Fraction(0, 1))]
+x=-1 gamma=2 hyp(|x|<|s|+min)=True |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(0, 1)), (((2, 1), 3, 1), Fraction(0, 1)), (((3,), 3, 1), Fraction(0, 1)), (((2, 2), 4, 1), Fraction(0, 1))]
+x=-11/10 gamma=0 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 10)), (((2, 1), 3, 1), Fraction(-1, 10)), (((3,), 3, 1), Fraction(-1, 5)), (((2, 2), 4, 1), Fraction(-1, 5))]
+x=-11/10 gamma=1/2 hyp(|x|<|s|+min)=True |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 10)), (((2, 1), 3, 1), Fraction(-1, 10)), (((3,), 3, 1), Fraction(-1, 5)), (((2, 2), 4, 1), Fraction(-1, 5))]
+x=-11/10 gamma=2 hyp(|x|<|s|+min)=True |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 10)), (((2, 1), 3, 1), Fraction(-1, 10)), (((3,), 3, 1), Fraction(-1, 5)), (((2, 2), 4, 1), Fraction(-1, 5))]
+x=-3/2 gamma=0 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 2)), (((2, 1), 3, 1), Fraction(-1, 2)), (((3,), 3, 1), Fraction(-1, 1)), (((2, 2), 4, 1), Fraction(-1, 1))]
+x=-3/2 gamma=1/2 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 2)), (((2, 1), 3, 1), Fraction(-1, 2)), (((3,), 3, 1), Fraction(-1, 1)), (((2, 2), 4, 1), Fraction(-1, 1))]
+x=-3/2 gamma=2 hyp(|x|<|s|+min)=True |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 2)), (((2, 1), 3, 1), Fraction(-1, 2)), (((3,), 3, 1), Fraction(-1, 1)), (((2, 2), 4, 1), Fraction(-1, 1))]
+x=-19/10 gamma=0 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-9, 10)), (((2, 1), 3, 1), Fraction(-9, 10)), (((3,), 3, 1), Fraction(-9, 5)), (((2, 2), 4, 1), Fraction(-9, 5))]
+x=-19/10 gamma=1/2 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-9, 10)), (((2, 1), 3, 1), Fraction(-9, 10)), (((3,), 3, 1), Fraction(-9, 5)), (((2, 2), 4, 1), Fraction(-9, 5))]
+x=-19/10 gamma=2 hyp(|x|<|s|+min)=True |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-9, 10)), (((2, 1), 3, 1), Fraction(-9, 10)), (((3,), 3, 1), Fraction(-9, 5)), (((2, 2), 4, 1), Fraction(-9, 5))]
+x=-2 gamma=0 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 1)), (((2, 1), 3, 1), Fraction(-1, 1)), (((3,), 3, 1), Fraction(-2, 1)), (((2, 2), 4, 1), Fraction(-2, 1))]
+x=-2 gamma=1/2 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 1)), (((2, 1), 3, 1), Fraction(-1, 1)), (((3,), 3, 1), Fraction(-2, 1)), (((2, 2), 4, 1), Fraction(-2, 1))]
+x=-2 gamma=2 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-1, 1)), (((2, 1), 3, 1), Fraction(-1, 1)), (((3,), 3, 1), Fraction(-2, 1)), (((2, 2), 4, 1), Fraction(-2, 1))]
+x=-5/2 gamma=0 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-3, 2)), (((2, 1), 3, 1), Fraction(-3, 2)), (((3,), 3, 1), Fraction(-3, 1)), (((2, 2), 4, 1), Fraction(-3, 1))]
+x=-5/2 gamma=1/2 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-3, 2)), (((2, 1), 3, 1), Fraction(-3, 2)), (((3,), 3, 1), Fraction(-3, 1)), (((2, 2), 4, 1), Fraction(-3, 1))]
+x=-5/2 gamma=2 hyp(|x|<|s|+min)=False |x|<|sigma|=False: failing B=1 instances: [(((2,), 2, 1), Fraction(-3, 2)), (((2, 1), 3, 1), Fraction(-3, 2)), (((3,), 3, 1), Fraction(-3, 1)), (((2, 2), 4, 1), Fraction(-3, 1))]
+
+--- Theorem 1c with bulge = gamma + uT/5 + uC/3 ---
+x=-1 gamma=1/10: eps_x=1/10 failures 0, min gap observed 3/10
+x=-3/2 gamma=3/4: eps_x=1/4 failures 0, min gap observed 9/20
+x=-19/10 gamma=1: eps_x=1/10 failures 0, min gap observed 1/10
+x=-1/2 gamma=0: eps_x=1/2 failures 0, min gap observed 1/2
+x=-1 gamma=1/1000: eps_x=1/1000 failures 0, min gap observed 201/1000
+
+=== Theorem 1d: dangles, sigma = -1, (H2) bulge >= 0 ===
+DG=0 DC=0 eA=0 eA(one paired nb)=0 bulge=0: hyp=True eps=1 failures=0 min gap=1
+DG=0 DC=0 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=True eps=1 failures=0 min gap=1
+DG=0 DC=0 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=True eps=1 failures=0 min gap=1
+DG=1/4 DC=1/4 eA=0 eA(one paired nb)=0 bulge=0: hyp=True eps=1/2 failures=0 min gap=1/2
+DG=1/4 DC=1/4 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=True eps=1/2 failures=0 min gap=1/2
+DG=1/4 DC=1/4 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=True eps=1/2 failures=0 min gap=1/2
+DG=2/5 DC=1/2 eA=0 eA(one paired nb)=0 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=2/5 DC=1/2 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=2/5 DC=1/2 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=9/10 DC=0 eA=0 eA(one paired nb)=0 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=9/10 DC=0 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=9/10 DC=0 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=0 DC=9/10 eA=0 eA(one paired nb)=0 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=0 DC=9/10 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=0 DC=9/10 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=True eps=1/10 failures=0 min gap=1/10
+DG=1/2 DC=1/2 eA=0 eA(one paired nb)=0 bulge=0: hyp=False eps=0 failures=38 min gap=0
+DG=1/2 DC=1/2 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=False eps=0 failures=38 min gap=0
+DG=1/2 DC=1/2 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=False eps=0 failures=38 min gap=0
+DG=3/5 DC=1/2 eA=0 eA(one paired nb)=0 bulge=0: hyp=False eps=-1/10 failures=38 min gap=-3/5
+DG=3/5 DC=1/2 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=False eps=-1/10 failures=38 min gap=-1/2
+DG=3/5 DC=1/2 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=False eps=-1/10 failures=38 min gap=-1/2
+DG=1 DC=0 eA=0 eA(one paired nb)=0 bulge=0: hyp=False eps=0 failures=38 min gap=0
+DG=1 DC=0 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=False eps=0 failures=38 min gap=0
+DG=1 DC=0 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=False eps=0 failures=38 min gap=0
+DG=0 DC=1 eA=0 eA(one paired nb)=0 bulge=0: hyp=False eps=0 failures=47 min gap=0
+DG=0 DC=1 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=False eps=0 failures=47 min gap=0
+DG=0 DC=1 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=False eps=0 failures=47 min gap=0
+DG=0 DC=6/5 eA=0 eA(one paired nb)=0 bulge=0: hyp=False eps=-1/5 failures=47 min gap=-6/5
+DG=0 DC=6/5 eA=-1/3 eA(one paired nb)=-1/3 bulge=0: hyp=False eps=-1/5 failures=47 min gap=-6/5
+DG=0 DC=6/5 eA=-2 eA(one paired nb)=-2 bulge=0: hyp=False eps=-1/5 failures=47 min gap=-6/5

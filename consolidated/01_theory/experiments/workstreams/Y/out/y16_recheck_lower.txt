@@ -1,0 +1,8 @@
+p=0.3 t=0.434 L=14: 184 labels (132 with weight > 1e-5); G_L = 0.564818823 (recomputed 0.564818823); Lam_blk: N=40 -0.003202780, N=80 -0.003202780; exact increments k=1->2: -0.0032028, k=2->3 (support truncated at 1e-5): -0.0032028; ln lam_Q = 0.000000000;  bound = 0.040115   [5 s]
+p=0.4 t=0.459 L=12: 134 labels (110 with weight > 1e-5); G_L = 0.408732091 (recomputed 0.408732091); Lam_blk: N=40 -0.000417498, N=80 -0.000417498; exact increments k=1->2: -0.0004175, k=2->3 (support truncated at 1e-5): -0.0004175; ln lam_Q = -0.000000000;  bound = 0.034026   [14 s]
+p=0.2 t=0.409 L=14: 184 labels (78 with weight > 1e-5); G_L = 0.638251913 (recomputed 0.638251913); Lam_blk: N=40 -0.013864116, N=80 -0.013864116; exact increments k=1->2: -0.0138641, k=2->3 (support truncated at 1e-5): -0.0138655; ln lam_Q = -0.000000000;  bound = 0.044599   [15 s]
+p=0.1 t=0.380 L=14: 184 labels (40 with weight > 1e-5); G_L = 0.669310392 (recomputed 0.669310392); Lam_blk: N=40 -0.048019064, N=80 -0.048019064; exact increments k=1->2: -0.0480347, k=2->3 (support truncated at 1e-5): -0.0480233; ln lam_Q = 0.000000000;  bound = 0.044378   [15 s]
+
+real	0m15.563s
+user	0m45.594s
+sys	0m0.128s

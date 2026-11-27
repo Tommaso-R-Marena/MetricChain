@@ -1,0 +1,11 @@
+n = 10, K = 9: faces by capacity_threshold.is_simplicial_face 49/60, by my max-margin LP 49/60, disagreements 0
+n = 10, K = 10: faces by capacity_threshold.is_simplicial_face 40/60, by my max-margin LP 40/60, disagreements 0
+n = 10, K = 11: faces by capacity_threshold.is_simplicial_face 24/60, by my max-margin LP 24/60, disagreements 0
+n = 10, K = 12: faces by capacity_threshold.is_simplicial_face 13/60, by my max-margin LP 13/60, disagreements 0
+n = 10, K = 13: faces by capacity_threshold.is_simplicial_face 5/60, by my max-margin LP 5/60, disagreements 0
+n = 12, K = 12: faces by capacity_threshold.is_simplicial_face 17/25, by my max-margin LP 17/25, disagreements 0
+n = 12, K = 13: faces by capacity_threshold.is_simplicial_face 13/25, by my max-margin LP 13/25, disagreements 0
+n = 12, K = 14: faces by capacity_threshold.is_simplicial_face 12/25, by my max-margin LP 12/25, disagreements 0
+n = 12, K = 15: faces by capacity_threshold.is_simplicial_face 2/25, by my max-margin LP 2/25, disagreements 0
+total 400 instances, disagreements 0
+[exit 0]

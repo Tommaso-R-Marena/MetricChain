@@ -1,0 +1,43 @@
+F-A  Lemma N.0 on random finite spaces (7 points, random quasi-metric = shortest-path closure, random mu)
+     largest E(V-s)+/(s Xi(p(s))) = 1.0000000000; smallest E min(V,s)/(s Theta(pbar(s))) = 1.0000000000; dips attain F(D) to 4.4e-16
+     with the formula read literally at q = 1 (sup over D != X, finite): (TU) violated in 296 cases (s below min V)
+F-B  Q_4, all subsets: exact tail functions against Harper
+     u = 0.5  exact = Harper at ball sizes: True; Harper's step functions valid at all cardinalities: True; largest step/exact (upper) 3.324
+     u = 1    exact = Harper at ball sizes: True; Harper's step functions valid at all cardinalities: True; largest step/exact (upper) 3.859
+     u = 2    exact = Harper at ball sizes: True; Harper's step functions valid at all cardinalities: True; largest step/exact (upper) 7.659
+F-C  Theorem N4: class-relative influence of product Bernoulli laws over u-Lipschitz fibres
+     40 triples (k, u, p, p'), 8 000 random fibres: largest ln[E_p w / E_p' w] - iota = 8.882e-16 (must be <= 0); uniform field: 8.9e-16 (attained)
+     outer Q_3 x inner Q_3, p = p(|a|): largest ln[V(a)/V(a')] - (u + iota(a,a')) over 1 200 members = 1.332e-15 (must be <= 0); additive candidates reach 8.9e-16
+F-D  nearest-neighbour chain (symmetric binary, flip p): outer sites 1..c, inner sites c+1..c+k
+     p=0.3 u=1.0: slope in a non-boundary letter <= 1.000000 (u = 1.0); in the boundary letter <= 1.525462, formula u+g(v^(k)) = 1.525462, uniform field 1.525462
+     p=0.1 u=1.0: slope in a non-boundary letter <= 1.000000 (u = 1.0); in the boundary letter <= 2.723420, formula u+g(v^(k)) = 2.723420, uniform field 2.723420
+     p=0.2 u=0.5: slope in a non-boundary letter <= 0.500000 (u = 0.5); in the boundary letter <= 1.117121, formula u+g(v^(k)) = 1.117121, uniform field 1.117121
+     p=0.4 u=2.0: slope in a non-boundary letter <= 2.000000 (u = 2.0); in the boundary letter <= 2.332231, formula u+g(v^(k)) = 2.332231, uniform field 2.332231
+F-E  Proposition N2 on (R, N(0,1)): V = e^{-psi}, psi piecewise linear with slopes +-L; exact A; Xi_L, Theta_L
+     L=1.0 lin  eta=0.50 K=60 M=4000: misses 0/300 (bound on the failure probability 0.143), ratio bound 3.337 exceeded 0 times
+     L=1.0 lin  eta=0.25 K=200 M=20000: misses 0/300 (bound on the failure probability 0.143), ratio bound 1.745 exceeded 0 times
+     L=1.0 lin  eta=0.50 K=40 M=200000: misses 0/300 (bound on the failure probability 0.433), ratio bound 3.010 exceeded 0 times
+     L=2.0 lin  eta=0.50 K=60 M=4000: misses 0/300 (bound on the failure probability 0.143), ratio bound 6.542 exceeded 0 times
+     L=2.0 lin  eta=0.25 K=200 M=20000: misses 0/300 (bound on the failure probability 0.143), ratio bound 2.478 exceeded 0 times
+     L=2.0 lin  eta=0.50 K=40 M=200000: misses 0/300 (bound on the failure probability 0.433), ratio bound 3.242 exceeded 0 times
+     L=2.0 abs  eta=0.50 K=60 M=4000: misses 0/300 (bound on the failure probability 0.143), ratio bound 6.542 exceeded 0 times
+     L=2.0 abs  eta=0.25 K=200 M=20000: misses 0/300 (bound on the failure probability 0.143), ratio bound 2.478 exceeded 0 times
+     L=2.0 abs  eta=0.50 K=40 M=200000: misses 0/300 (bound on the failure probability 0.433), ratio bound 3.242 exceeded 0 times
+     L=1.5 tent eta=0.50 K=60 M=4000: misses 0/300 (bound on the failure probability 0.143), ratio bound 4.220 exceeded 0 times
+     L=1.5 tent eta=0.25 K=200 M=20000: misses 0/300 (bound on the failure probability 0.143), ratio bound 1.950 exceeded 0 times
+     L=1.5 tent eta=0.50 K=40 M=200000: misses 0/300 (bound on the failure probability 0.433), ratio bound 3.057 exceeded 0 times
+     total: 3600 brackets, 0 misses, 0 above the ratio bound
+F-F  Proposition N7(a): theta_na(e + theta_hint(e)) = theta_hint(e)
+     Gaussian profile, c = 1.3          w + id nonincreasing: True   largest |theta_na(e+theta_hint(e)) - theta_hint(e)| = 0.0000
+     cube profile, u = 1                w + id nonincreasing: True   largest deviation = 0.0000   (E = 0.12011, a = 0.11094, h = 0.02914)
+     transport profile, u = 1 (N_REPORT 3.1) w + id nonincreasing: False  largest |theta_na(e+theta_hint(e)) - theta_hint(e)| = 0.4950
+     (for the transport profile the hypothesis (P1) fails and so does the identity, as the report says)
+F-G  Proposition N8(a): min(gamma0, mu) + Rhat_beta(gamma0) >= Rhat_nu(G) on random splits, two kinds of binary sites
+     400 random (slopes, composition, split, G, B): smallest margin 3.239e-05 (must be >= 0 up to the grid in t)
+F-H  outer points against queries on V = e^{La}, a ~ N(0,1), n_i = 0, when rung 0 uses the reference query only
+     rung 0: [e^{-L|a|}, e^{L|a|}] without a query if |a| <= 6 (x_0 = 12 L), else one query; rung 1: one query, exact value
+     L=3.0 theta=2 nu1=3.0: K=200 x_out=2.357, N10(b) bound on M_max 375.9 | runs (M_max, queries, valid, width ok): (204800, 3413, True, np.True_)  (204800, 3305, True, np.True_)  (204800, 3535, True, np.True_)
+     L=3.5 theta=2 nu1=3.5: K=207 x_out=2.357, N10(b) bound on M_max 667.3 | runs (M_max, queries, valid, width ok): (1695744, 4185, True, np.True_)  (1695744, 4667, True, np.True_)  (1695744, 4648, True, np.True_)
+     L=4.0 theta=20 nu1=1.0: K=204 x_out=3.517, N10(b) bound on M_max 674.7 | runs (M_max, queries, valid, width ok): (104448, 3212, True, np.True_)  (104448, 3247, True, np.True_)  (104448, 3117, True, np.True_)
+     L=4.0 theta=3 nu1=2.7: K=212 x_out=2.472, N10(b) bound on M_max 1370 | runs (M_max, queries, valid, width ok): (6946816, 5586, True, np.True_)  (6946816, 5576, True, np.True_)  (6946816, 5517, True, np.True_)
+violations: 0   (26.6 s)

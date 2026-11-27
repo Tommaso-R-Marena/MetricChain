@@ -1,0 +1,22 @@
+# cube u = 2: h = 0.097281, a = 0.327813; chain s_t = L + 0.05, b_0 = h + 0.02; horizon N = 6000, k = 2 levels; range condition: True
+# (b_j - h)/h, j = 0..2: 0.2056 0.2056 0.2056;   X = X_0(N) + 1 = 24.19
+# blocks of the chains (top first): [673, 674];  levels of a chain started at N: [8, 8]
+#      d      x     ln cost     type(W_k)   cost - type   error bound E_k   cost - d h    d (a - h)
+    6000     1.0     1252.70      703.09      549.61        1052.63        669.01     1383.19
+    6000    24.2      997.57      689.19      308.38        1052.63        413.89     1383.19
+    6000   144.2      857.48      617.29      240.19        1052.63        273.79     1383.19
+    3000     1.0      896.29      351.24      545.04        1042.95        604.44      691.60
+# levels of section 4 evaluated: [197, 14] (per family, base first);  chain levels: [48, 12];  checks: 1050;  evaluators differ by at most 5.7e-14
+#   level family 1: measured loss (ln C_max - type of W_1) between 29.1 and 33.1 nats over 197 evaluations
+#   level family 2: measured loss (ln C_max - type of W_2) between 140.8 and 315.1 nats over 14 evaluations
+least slack per inequality:
+   T: accuracy                                        0.009   (60 checks)
+   T: ln(1/pi_dagger) <= varpi                      168.376   (60 checks)
+   Z3: (U-infinity)                                  14.548   (211 checks)
+   Z3: accuracy                                       2.377   (211 checks)
+   Z3: the type                                      29.977   (211 checks)
+   Z4: the type of the combined family              239.869   (221 checks)
+   induction T                                      217.362   (76 checks)
+violations: 0   [must be 0]
+time 1 s
+ALL CHECKS PASS

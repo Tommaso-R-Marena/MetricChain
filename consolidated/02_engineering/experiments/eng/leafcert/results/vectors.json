@@ -1,0 +1,2390 @@
+{
+ "source": {
+  "commit": "2b4ccdf",
+  "branch": "research/scientific-translation",
+  "directory": "experiments/science/ws_P7/out",
+  "checksum_file": "experiments/science/ws_P7/logs/run1/cert_sha256.txt",
+  "report_table": "docs/science/workstreams/P7_REPORT.md section 5.2"
+ },
+ "summary": {
+  "files": 9,
+  "accepted_by_both_engines": 9,
+  "controls": 27,
+  "controls_rejected_by_both_engines_on_an_inequality": 27,
+  "files_whose_counts_equal_the_report_table": 9,
+  "files_checked_by_brute_force": 9,
+  "files_with_bound_confirmed_by_brute_force": 9,
+  "files_with_annotation_findings": 0,
+  "all_as_expected": true
+ },
+ "vectors": [
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_cert_S6_E_tau0.60_ff03.json",
+   "sha256": "46266eede279372c9a87b217f30a819a7c43645e12d2dce4465774b92412e7ae",
+   "sha256_matches_checksum_file": true,
+   "report_row": "Ser6, one leaf per state",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 9,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 2619,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 9,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 2619,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 9,
+    "leaf_boxes": 9,
+    "integers": 2619,
+    "instance_integers": 1269,
+    "additions": 17640,
+    "comparisons": 8118
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 9,
+    "leaf_boxes": 9,
+    "integers": 2619,
+    "additions": 17640,
+    "comparisons": 8118,
+    "split": null,
+    "states": 531441
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 17640,
+    "comparisons": 8118
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 8,
+       "leaf": 8,
+       "path": [
+        [
+         3,
+         8
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 17640,
+       "comparisons": 8118
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 8,
+       "leaf": 8,
+       "path": [
+        [
+         3,
+         8
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 17640,
+       "comparisons": 8118
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 3,
+       "a": 2,
+       "j": null,
+       "b": null,
+       "lhs": 1943096754720,
+       "rhs": 1884717149438
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 150,
+       "comparisons": 30
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 3,
+       "a": 2,
+       "j": null,
+       "b": null,
+       "lhs": 1943096754720,
+       "rhs": 1884717149438
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 150,
+       "comparisons": 30
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         3,
+         0
+        ]
+       ],
+       "i": 3,
+       "a": 0,
+       "j": null,
+       "b": null,
+       "lhs": 2944479767261,
+       "rhs": 1943096754720
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 140,
+       "comparisons": 28
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         3,
+         0
+        ]
+       ],
+       "i": 3,
+       "a": 0,
+       "j": null,
+       "b": null,
+       "lhs": 2944479767261,
+       "rhs": 1943096754720
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 140,
+       "comparisons": 28
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 36,
+    "rejected": 36,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 531441,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_cert_S6_E_tau0.70_ff03.json",
+   "sha256": "c1d8fc910f91d4eb99068c7a80f9abca66fc5a24c14d8d142a2a274f33eaf7ed",
+   "sha256_matches_checksum_file": true,
+   "report_row": "Ser6, one leaf per state",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 9,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 2619,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 9,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 2619,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 9,
+    "leaf_boxes": 9,
+    "integers": 2619,
+    "instance_integers": 1269,
+    "additions": 17640,
+    "comparisons": 8118
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 9,
+    "leaf_boxes": 9,
+    "integers": 2619,
+    "additions": 17640,
+    "comparisons": 8118,
+    "split": null,
+    "states": 531441
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 17640,
+    "comparisons": 8118
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 8,
+       "leaf": 8,
+       "path": [
+        [
+         3,
+         8
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 17640,
+       "comparisons": 8118
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 8,
+       "leaf": 8,
+       "path": [
+        [
+         3,
+         8
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 17640,
+       "comparisons": 8118
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 3,
+       "a": 2,
+       "j": null,
+       "b": null,
+       "lhs": 1943096754720,
+       "rhs": 1884717149438
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 150,
+       "comparisons": 30
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 3,
+       "a": 2,
+       "j": null,
+       "b": null,
+       "lhs": 1943096754720,
+       "rhs": 1884717149438
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 150,
+       "comparisons": 30
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         3,
+         0
+        ]
+       ],
+       "i": 3,
+       "a": 0,
+       "j": null,
+       "b": null,
+       "lhs": 2944479767261,
+       "rhs": 1943096754720
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 140,
+       "comparisons": 28
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         3,
+         0
+        ]
+       ],
+       "i": 3,
+       "a": 0,
+       "j": null,
+       "b": null,
+       "lhs": 2944479767261,
+       "rhs": 1943096754720
+      },
+      "counts": {
+       "leaf_certificates": 9,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 2619,
+       "instance_integers": 1269,
+       "additions": 140,
+       "comparisons": 28
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 36,
+    "rejected": 36,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 531441,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_certB_S6_E_tau0.60_ff03.json",
+   "sha256": "63b6b7b05c8224e9cf91a8b5853ac29fe6ae3491679f18bd63fdf37c3b2edebe",
+   "sha256_matches_checksum_file": true,
+   "report_row": "Ser6, shared leaves",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 2,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 582,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 2,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 582,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 2,
+    "leaf_boxes": 9,
+    "integers": 582,
+    "instance_integers": 1269,
+    "additions": 17640,
+    "comparisons": 8118
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 2,
+    "leaf_boxes": 9,
+    "integers": 582,
+    "additions": 17640,
+    "comparisons": 8118,
+    "split": [
+     4585,
+     2126
+    ],
+    "states": null
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 4585,
+    "comparisons": 2126
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 1960,
+       "comparisons": 902
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 1960,
+       "comparisons": 902
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 4,
+       "lhs": 0,
+       "rhs": -329668279066
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 442,
+       "comparisons": 140
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 4,
+       "lhs": 0,
+       "rhs": -329668279066
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 442,
+       "comparisons": 140
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 0,
+       "a": 1,
+       "j": 2,
+       "b": 0,
+       "lhs": -542127232615,
+       "rhs": -627652106001
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 396,
+       "comparisons": 129
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 0,
+       "a": 1,
+       "j": 2,
+       "b": 0,
+       "lhs": -542127232615,
+       "rhs": -627652106001
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 396,
+       "comparisons": 129
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 8,
+    "rejected": 8,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 531441,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_certB_S6_E_tau0.70_ff03.json",
+   "sha256": "b59e691a98698db5aae40261aac502f8addd849894343d5bc5e07862691d7681",
+   "sha256_matches_checksum_file": true,
+   "report_row": "Ser6, shared leaves",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 2,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 582,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 2,
+     "leaf_boxes": 9,
+     "depth": 1,
+     "cert_integers": 582,
+     "instance_integers": 1269,
+     "additions": 17640,
+     "comparisons": 8118
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 2,
+    "leaf_boxes": 9,
+    "integers": 582,
+    "instance_integers": 1269,
+    "additions": 17640,
+    "comparisons": 8118
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 2,
+    "leaf_boxes": 9,
+    "integers": 582,
+    "additions": 17640,
+    "comparisons": 8118,
+    "split": [
+     4585,
+     2126
+    ],
+    "states": null
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 4585,
+    "comparisons": 2126
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 1960,
+       "comparisons": 902
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 1960,
+       "comparisons": 902
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 4,
+       "lhs": 0,
+       "rhs": -329668279066
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 442,
+       "comparisons": 140
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 4,
+       "lhs": 0,
+       "rhs": -329668279066
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 291,
+       "instance_integers": 1269,
+       "additions": 442,
+       "comparisons": 140
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 0,
+       "a": 1,
+       "j": 2,
+       "b": 0,
+       "lhs": -542127232615,
+       "rhs": -627652106001
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 396,
+       "comparisons": 129
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 0,
+       "a": 1,
+       "j": 2,
+       "b": 0,
+       "lhs": -542127232615,
+       "rhs": -627652106001
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 9,
+       "depth": 1,
+       "cert_integers": 582,
+       "instance_integers": 1269,
+       "additions": 396,
+       "comparisons": 129
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 8,
+    "rejected": 8,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 531441,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_cert_K3_H_tau0.60_ff99SB.json",
+   "sha256": "0d96f3911dc558f79db4b35582319c61be330e4bfdb3a3f0eba25ff62c6eec0e",
+   "sha256_matches_checksum_file": true,
+   "report_row": "Lys3, one leaf per state",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 21,
+     "leaf_boxes": 21,
+     "depth": 1,
+     "cert_integers": 3486,
+     "instance_integers": 2189,
+     "additions": 41643,
+     "comparisons": 20790
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 21,
+     "leaf_boxes": 21,
+     "depth": 1,
+     "cert_integers": 3486,
+     "instance_integers": 2189,
+     "additions": 41643,
+     "comparisons": 20790
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 21,
+    "leaf_boxes": 21,
+    "integers": 3486,
+    "instance_integers": 2189,
+    "additions": 41643,
+    "comparisons": 20790
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 21,
+    "leaf_boxes": 21,
+    "integers": 3486,
+    "additions": 41643,
+    "comparisons": 20790,
+    "split": null,
+    "states": 18270
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 41643,
+    "comparisons": 20790
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 11,
+       "leaf": 11,
+       "path": [
+        [
+         2,
+         11
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 21,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 3486,
+       "instance_integers": 2189,
+       "additions": 23796,
+       "comparisons": 11880
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 11,
+       "leaf": 11,
+       "path": [
+        [
+         2,
+         11
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 21,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 3486,
+       "instance_integers": 2189,
+       "additions": 23796,
+       "comparisons": 11880
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 2,
+       "a": 5,
+       "j": null,
+       "b": null,
+       "lhs": 25043295487915,
+       "rhs": 19906031230798
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 166,
+       "instance_integers": 2189,
+       "additions": 130,
+       "comparisons": 65
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 2,
+       "a": 5,
+       "j": null,
+       "b": null,
+       "lhs": 25043295487915,
+       "rhs": 19906031230798
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 166,
+       "instance_integers": 2189,
+       "additions": 130,
+       "comparisons": 65
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 2,
+       "a": 0,
+       "j": null,
+       "b": null,
+       "lhs": 25658519947994,
+       "rhs": 25043295487915
+      },
+      "counts": {
+       "leaf_certificates": 21,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 3486,
+       "instance_integers": 2189,
+       "additions": 120,
+       "comparisons": 60
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 2,
+       "a": 0,
+       "j": null,
+       "b": null,
+       "lhs": 25658519947994,
+       "rhs": 25043295487915
+      },
+      "counts": {
+       "leaf_certificates": 21,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 3486,
+       "instance_integers": 2189,
+       "additions": 120,
+       "comparisons": 60
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 210,
+    "rejected": 210,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 18270,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_certB_K3_H_tau0.60_ff99SB.json",
+   "sha256": "3eaebc51b5b126093a8ddd937412a28c8b42d772395a034f55ae66dc21aa2c96",
+   "sha256_matches_checksum_file": true,
+   "report_row": "Lys3, shared leaves",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 2,
+     "leaf_boxes": 21,
+     "depth": 1,
+     "cert_integers": 332,
+     "instance_integers": 2189,
+     "additions": 41643,
+     "comparisons": 20790
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 2,
+     "leaf_boxes": 21,
+     "depth": 1,
+     "cert_integers": 332,
+     "instance_integers": 2189,
+     "additions": 41643,
+     "comparisons": 20790
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 2,
+    "leaf_boxes": 21,
+    "integers": 332,
+    "instance_integers": 2189,
+    "additions": 41643,
+    "comparisons": 20790
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 2,
+    "leaf_boxes": 21,
+    "integers": 332,
+    "additions": 41643,
+    "comparisons": 20790,
+    "split": [
+     6246,
+     3120
+    ],
+    "states": null
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 6246,
+    "comparisons": 3120
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 332,
+       "instance_integers": 2189,
+       "additions": 1983,
+       "comparisons": 990
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 332,
+       "instance_integers": 2189,
+       "additions": 1983,
+       "comparisons": 990
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 18,
+       "lhs": 0,
+       "rhs": -693234279240
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 166,
+       "instance_integers": 2189,
+       "additions": 1938,
+       "comparisons": 969
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 18,
+       "lhs": 0,
+       "rhs": -693234279240
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 166,
+       "instance_integers": 2189,
+       "additions": 1938,
+       "comparisons": 969
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 0,
+       "lhs": -1036982010119,
+       "rhs": -1214184789465
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 332,
+       "instance_integers": 2189,
+       "additions": 1862,
+       "comparisons": 931
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         2,
+         0
+        ]
+       ],
+       "i": 0,
+       "a": 0,
+       "j": 2,
+       "b": 0,
+       "lhs": -1036982010119,
+       "rhs": -1214184789465
+      },
+      "counts": {
+       "leaf_certificates": 2,
+       "leaf_boxes": 21,
+       "depth": 1,
+       "cert_integers": 332,
+       "instance_integers": 2189,
+       "additions": 1862,
+       "comparisons": 931
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 20,
+    "rejected": 20,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 18270,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_cert_LKSE6_E_tau0.60_ff99SB.json",
+   "sha256": "c6221d31e4db79d2fc17a872efe61ad0dfb9bdde08653f54a439e79d050a3bb6",
+   "sha256_matches_checksum_file": true,
+   "report_row": "LKSE:6, one leaf per state (site 3)",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 13,
+     "leaf_boxes": 13,
+     "depth": 1,
+     "cert_integers": 5473,
+     "instance_integers": 2422,
+     "additions": 44668,
+     "comparisons": 20891
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 13,
+     "leaf_boxes": 13,
+     "depth": 1,
+     "cert_integers": 5473,
+     "instance_integers": 2422,
+     "additions": 44668,
+     "comparisons": 20891
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 13,
+    "leaf_boxes": 13,
+    "integers": 5473,
+    "instance_integers": 2422,
+    "additions": 44668,
+    "comparisons": 20891
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 13,
+    "leaf_boxes": 13,
+    "integers": 5473,
+    "additions": 44668,
+    "comparisons": 20891,
+    "split": null,
+    "states": 341172
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 44668,
+    "comparisons": 20891
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 8,
+       "leaf": 8,
+       "path": [
+        [
+         3,
+         8
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 13,
+       "leaf_boxes": 13,
+       "depth": 1,
+       "cert_integers": 5473,
+       "instance_integers": 2422,
+       "additions": 30924,
+       "comparisons": 14463
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 8,
+       "leaf": 8,
+       "path": [
+        [
+         3,
+         8
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 13,
+       "leaf_boxes": 13,
+       "depth": 1,
+       "cert_integers": 5473,
+       "instance_integers": 2422,
+       "additions": 30924,
+       "comparisons": 14463
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 3,
+       "a": 1,
+       "j": null,
+       "b": null,
+       "lhs": 58518168188543,
+       "rhs": 26856837353487
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 421,
+       "instance_integers": 2422,
+       "additions": 200,
+       "comparisons": 40
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 3,
+       "a": 1,
+       "j": null,
+       "b": null,
+       "lhs": 58518168188543,
+       "rhs": 26856837353487
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 421,
+       "instance_integers": 2422,
+       "additions": 200,
+       "comparisons": 40
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         3,
+         0
+        ]
+       ],
+       "i": 2,
+       "a": 2,
+       "j": 3,
+       "b": 0,
+       "lhs": -706640468229,
+       "rhs": -740845630066
+      },
+      "counts": {
+       "leaf_certificates": 13,
+       "leaf_boxes": 13,
+       "depth": 1,
+       "cert_integers": 5473,
+       "instance_integers": 2422,
+       "additions": 2716,
+       "comparisons": 1256
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         3,
+         0
+        ]
+       ],
+       "i": 2,
+       "a": 2,
+       "j": 3,
+       "b": 0,
+       "lhs": -706640468229,
+       "rhs": -740845630066
+      },
+      "counts": {
+       "leaf_certificates": 13,
+       "leaf_boxes": 13,
+       "depth": 1,
+       "cert_integers": 5473,
+       "instance_integers": 2422,
+       "additions": 2716,
+       "comparisons": 1256
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 78,
+    "rejected": 78,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 341172,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_certB_LKSE6_E_tau0.60_ff99SB.json",
+   "sha256": "33e64a5d7f490042f4bce76ce49b2cd5f7de54758b5165aaaffd5381f865e315",
+   "sha256_matches_checksum_file": true,
+   "report_row": "LKSE:6, shared leaves (site 1)",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 3,
+     "leaf_boxes": 27,
+     "depth": 1,
+     "cert_integers": 1263,
+     "instance_integers": 2422,
+     "additions": 59886,
+     "comparisons": 27513
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 3,
+     "leaf_boxes": 27,
+     "depth": 1,
+     "cert_integers": 1263,
+     "instance_integers": 2422,
+     "additions": 59886,
+     "comparisons": 27513
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 1,
+    "leaf_certificates": 3,
+    "leaf_boxes": 27,
+    "integers": 1263,
+    "instance_integers": 2422,
+    "additions": 59886,
+    "comparisons": 27513
+   },
+   "report_table": {
+    "depth": 1,
+    "leaf_certificates": 3,
+    "leaf_boxes": 27,
+    "integers": 1263,
+    "additions": 59886,
+    "comparisons": 27513,
+    "split": [
+     9318,
+     4353
+    ],
+    "states": null
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 9318,
+    "comparisons": 4353
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         1,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 27,
+       "depth": 1,
+       "cert_integers": 1263,
+       "instance_integers": 2422,
+       "additions": 2218,
+       "comparisons": 1019
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 0,
+       "leaf": 0,
+       "path": [
+        [
+         1,
+         0
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 27,
+       "depth": 1,
+       "cert_integers": 1263,
+       "instance_integers": 2422,
+       "additions": 2218,
+       "comparisons": 1019
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 1,
+       "a": 15,
+       "j": 2,
+       "b": 1,
+       "lhs": 0,
+       "rhs": -934166651912
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 421,
+       "instance_integers": 2422,
+       "additions": 986,
+       "comparisons": 373
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 1,
+       "a": 15,
+       "j": 2,
+       "b": 1,
+       "lhs": 0,
+       "rhs": -934166651912
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 421,
+       "instance_integers": 2422,
+       "additions": 986,
+       "comparisons": 373
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 2,
+       "path": [
+        [
+         1,
+         0
+        ]
+       ],
+       "i": 1,
+       "a": 0,
+       "j": 2,
+       "b": 0,
+       "lhs": 463954877457,
+       "rhs": 257971577593
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 27,
+       "depth": 1,
+       "cert_integers": 1263,
+       "instance_integers": 2422,
+       "additions": 480,
+       "comparisons": 159
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 2,
+       "path": [
+        [
+         1,
+         0
+        ]
+       ],
+       "i": 1,
+       "a": 0,
+       "j": 2,
+       "b": 0,
+       "lhs": 463954877457,
+       "rhs": 257971577593
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 27,
+       "depth": 1,
+       "cert_integers": 1263,
+       "instance_integers": 2422,
+       "additions": 480,
+       "comparisons": 159
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 74,
+    "rejected": 74,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 341172,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  },
+  {
+   "file": "experiments/science/ws_P7/out/p7_02_cert_L16_P2_tau0.60_ff99SB.json",
+   "sha256": "6576024ff50a08d55043a3615999a65060b0401170d82cd38ea1f2c48935fe6d",
+   "sha256_matches_checksum_file": true,
+   "report_row": "Leu16",
+   "c": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 3,
+     "leaf_boxes": 3,
+     "depth": 2,
+     "cert_integers": 1848,
+     "instance_integers": 512,
+     "additions": 4354,
+     "comparisons": 1386
+    }
+   },
+   "python": {
+    "verdict": "accept",
+    "kind": null,
+    "failure": null,
+    "counts": {
+     "leaf_certificates": 3,
+     "leaf_boxes": 3,
+     "depth": 2,
+     "cert_integers": 1848,
+     "instance_integers": 512,
+     "additions": 4354,
+     "comparisons": 1386
+    }
+   },
+   "engines_agree": true,
+   "counts": {
+    "depth": 2,
+    "leaf_certificates": 3,
+    "leaf_boxes": 3,
+    "integers": 1848,
+    "instance_integers": 512,
+    "additions": 4354,
+    "comparisons": 1386
+   },
+   "report_table": {
+    "depth": 2,
+    "leaf_certificates": 3,
+    "leaf_boxes": 3,
+    "integers": 1848,
+    "additions": 4354,
+    "comparisons": 1386,
+    "split": null,
+    "states": 65536
+   },
+   "split_rule": {
+    "accepted": true,
+    "additions": 4354,
+    "comparisons": 1386
+   },
+   "differences_from_report": [],
+   "controls": {
+    "bound_plus_one": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 2,
+       "leaf": 2,
+       "path": [
+        [
+         1,
+         1
+        ],
+        [
+         6,
+         1
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 3,
+       "depth": 2,
+       "cert_integers": 1848,
+       "instance_integers": 512,
+       "additions": 4354,
+       "comparisons": 1386
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "total",
+       "visit": 2,
+       "leaf": 2,
+       "path": [
+        [
+         1,
+         1
+        ],
+        [
+         6,
+         1
+        ]
+       ],
+       "i": null,
+       "a": null,
+       "j": null,
+       "b": null,
+       "lhs": 1,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 3,
+       "depth": 2,
+       "cert_integers": 1848,
+       "instance_integers": 512,
+       "additions": 4354,
+       "comparisons": 1386
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "first_leaf_alone": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 1,
+       "a": 1,
+       "j": null,
+       "b": null,
+       "lhs": 11637530574,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 616,
+       "instance_integers": 512,
+       "additions": 60,
+       "comparisons": 4
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "site",
+       "visit": 0,
+       "leaf": 0,
+       "path": [],
+       "i": 1,
+       "a": 1,
+       "j": null,
+       "b": null,
+       "lhs": 11637530574,
+       "rhs": 0
+      },
+      "counts": {
+       "leaf_certificates": 1,
+       "leaf_boxes": 1,
+       "depth": 0,
+       "cert_integers": 616,
+       "instance_integers": 512,
+       "additions": 60,
+       "comparisons": 4
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    },
+    "children_exchanged": {
+     "c": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         1,
+         0
+        ],
+        [
+         6,
+         0
+        ]
+       ],
+       "i": 1,
+       "a": 0,
+       "j": 2,
+       "b": 1,
+       "lhs": 0,
+       "rhs": -83008526119
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 3,
+       "depth": 2,
+       "cert_integers": 1848,
+       "instance_integers": 512,
+       "additions": 566,
+       "comparisons": 88
+      }
+     },
+     "python": {
+      "verdict": "reject",
+      "kind": "inequality",
+      "failure": {
+       "inequality": "pair",
+       "visit": 0,
+       "leaf": 1,
+       "path": [
+        [
+         1,
+         0
+        ],
+        [
+         6,
+         0
+        ]
+       ],
+       "i": 1,
+       "a": 0,
+       "j": 2,
+       "b": 1,
+       "lhs": 0,
+       "rhs": -83008526119
+      },
+      "counts": {
+       "leaf_certificates": 3,
+       "leaf_boxes": 3,
+       "depth": 2,
+       "cert_integers": 1848,
+       "instance_integers": 512,
+       "additions": 566,
+       "comparisons": 88
+      }
+     },
+     "rejected_by_both_on_an_inequality": true,
+     "engines_agree": true
+    }
+   },
+   "exchange_survey": {
+    "exchanges": 2,
+    "rejected": 2,
+    "still_accepted": []
+   },
+   "brute_force": {
+    "states": 65536,
+    "minimum": 0,
+    "bound": 0,
+    "bound_confirmed": true,
+    "bound_attained": true,
+    "minimisers": 1,
+    "energy_at_ref": 0,
+    "ref_is_a_minimiser": true
+   },
+   "annotation_findings": []
+  }
+ ]
+}

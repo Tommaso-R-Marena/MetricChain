@@ -1,0 +1,4 @@
+p=0.2 L=4 m=1 (n=9, end slope 0.246): members: largest edge violation 0.0e+00;  block marginal = product: 1.1e-16;  G^(n)(M x M) = 0.2074823957,  2 G^(L)(M) = 0.2074823957
+p=0.2 L=4 m=2 (n=10, end slope 0.561): members: largest edge violation 6.7e-16;  block marginal = product: 3.3e-16;  G^(n)(M x M) = 0.2751726958,  2 G^(L)(M) = 0.2751726958
+p=0.1 L=4 m=3 (n=11, end slope 0.130): members: largest edge violation 4.4e-16;  block marginal = product: 2.2e-16;  G^(n)(M x M) = 0.2088091666,  2 G^(L)(M) = 0.2088091666
+p=0.3 L=5 m=1 (n=11, end slope 0.677): members: largest edge violation 4.4e-16;  block marginal = product: 8.3e-17;  G^(n)(M x M) = 0.3355812440,  2 G^(L)(M) = 0.3355812440

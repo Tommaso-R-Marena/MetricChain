@@ -1,0 +1,12 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 states, anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; order m = 4, band 7; 495 raw stage-2 tables of workstream P9 from ws_P9/cache (sum of their maxima 18.17 kT)
+(0) 20 groups on 8 held sites [0, 1, 2, 3, 8, 9, 10, 11]; from 400000 exact independent samples of the ceiling model (seed 20261126); group-level values from the states against the driver's exact ones: A 2.862621e-03 / 2.856883e-03, C' 4.430925e-03 / 4.417664e-03; the driver's corrected bracket [517.1285108, 517.1285924], width 8.161e-05 [584s]
+| what enters | lower end above ln Z(m_+), nats | gain, as a fraction of the corrected width | upper end | gain, as a fraction of the corrected width |
+|---|---|---|---|---|
+| groups, one by one (the driver: (LP), (UP)) | 2.852810e-03 | **+0.000** | 517.1285924 | **+0.000** |
+| groups merged per held site (one held site) | 2.852820e-03 | **+0.000** | 517.1285924 | **+0.000** |
+| + pairs of held sites (two held sites) -- the proposition | 2.855908e-03 | **+0.038** | 517.1285755 | **+0.208** |
+| the exact joint law of all groups | 2.855910e-03 | **+0.038** | 517.1285754 | **+0.208** |
+(1) **the proposition would narrow the corrected bracket by 0.246 of its width** (merging per held site alone: 0.001; the exact joint law of all groups: 0.246); new width 6.154e-05 against 8.161e-05
+(2) checks at every sample: lower chain (groups <= held sites; held sites + pairs <= joint): 0 violations; upper chain: 0 violations (both must be 0); control, the lower pair term doubled: 54006 violations (must be positive)
+(3) cost: 75 computations with one site held and 2422 with two (per set of tables: one for the lower end, two for the upper); of the 765 pairs of held states with a non-zero pair term (among the samples) the largest 75 carry 90 % of the lower pair term and 147 carry 99 %; upper pair term: 53 and 126
+ALL DONE 584 s; peak RSS 2839 MB

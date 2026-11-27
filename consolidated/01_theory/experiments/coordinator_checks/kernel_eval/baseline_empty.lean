@@ -1,0 +1,1 @@
+-- Empty file: what starting `lean` and loading the core library costs (see README.md).

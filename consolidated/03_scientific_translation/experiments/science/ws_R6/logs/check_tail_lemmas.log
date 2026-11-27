@@ -1,0 +1,17 @@
+Harper (form used), all nonempty subsets of Q_1: 3 sets, 0 violations
+Harper (form used), all nonempty subsets of Q_2: 15 sets, 0 violations
+Harper (form used), all nonempty subsets of Q_3: 255 sets, 0 violations
+Harper (form used), all nonempty subsets of Q_4: 65535 sets, 0 violations
+Harper, random/structured subsets of Q_5: 20000 sets, 0 violations
+Harper, random/structured subsets of Q_6: 20000 sets, 0 violations
+Harper, random/structured subsets of Q_7: 20000 sets, 0 violations
+Lemma K.1 on Q_4, u=0.7: (a) 2383 thresholds, 0 violations, max lhs/rhs 1.000000; (b) 2683 thresholds, 0 violations, max rhs/lhs 1.000000
+Lemma K.1 on Q_6, u=1.0: (a) 6090 thresholds, 0 violations, max lhs/rhs 1.000000; (b) 6390 thresholds, 0 violations, max rhs/lhs 1.000000
+Lemma K.1 on Q_8, u=0.5: (a) 8836 thresholds, 0 violations, max lhs/rhs 1.000000; (b) 8986 thresholds, 0 violations, max rhs/lhs 1.000000
+Lemma K.1 on Q_8, u=2.0: (a) 10203 thresholds, 0 violations, max lhs/rhs 1.000000; (b) 10353 thresholds, 0 violations, max rhs/lhs 1.000000
+Lemma K.1 on Q_10, u=1.3: (a) 7361 thresholds, 0 violations, max lhs/rhs 1.000000; (b) 7421 thresholds, 0 violations, max rhs/lhs 1.000000
+Lemma K.4(a),(b) and inequality (3.0): 22583 cases, 0 violations; largest ratios lhs/rhs: (a) 0.8857, (b) 0.8542, (3.0) 0.2644
+
+real	0m8.750s
+user	0m6.471s
+sys	0m0.041s

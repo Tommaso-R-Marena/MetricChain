@@ -1,0 +1,14 @@
+T10(1) n=12: max |m_r - brute| = 3.55e-15;  max |ln Z_r - brute| = 7.11e-15
+T10(2) n=200: E(a)=-154.684 E(b)=-235.100
+   barrier bracket: max_r min_(q=r) E = -153.3080 (level r=1)  <=  B(a,b)  <=  -153.1660 (best single-domain growth path);  height above a in [1.3758, 1.5178]
+   Lagrangian (convexified) value at the top level r=1: -155.1098  (trivial bound max(E(a),E(b)) = -154.6838; true level minimum -153.3080)
+   beta=1.0: best TST cut A={q<1}: ln k_TST <= 2.165  => mean exit time from pi_A >= 1.148e-01 (unit: 1/proposal rate per neighbour); sampler: P(no exit in T attempts) >= 1 - T*4.356e-02
+            capacity(q=0 <-> q=n): ln cap <= -88.787 (Nash-Williams over 200 levels) vs best single level cut -88.690;  -(1/beta) ln k_TST = -2.165 vs barrier height lower bound 1.376
+   beta=2.0: best TST cut A={q<1}: ln k_TST <= -0.326  => mean exit time from pi_A >= 1.385e+00 (unit: 1/proposal rate per neighbour); sampler: P(no exit in T attempts) >= 1 - T*3.609e-03
+            capacity(q=0 <-> q=n): ln cap <= -161.671 (Nash-Williams over 200 levels) vs best single level cut -161.457;  -(1/beta) ln k_TST = 0.163 vs barrier height lower bound 1.376
+   beta=3.0: best TST cut A={q<1}: ln k_TST <= -2.366  => mean exit time from pi_A >= 1.066e+01 (unit: 1/proposal rate per neighbour); sampler: P(no exit in T attempts) >= 1 - T*4.691e-04
+            capacity(q=0 <-> q=n): ln cap <= -243.769 (Nash-Williams over 200 levels) vs best single level cut -243.628;  -(1/beta) ln k_TST = 0.789 vs barrier height lower bound 1.376
+
+real	0m2.884s
+user	0m0.798s
+sys	0m0.020s

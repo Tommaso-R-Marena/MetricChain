@@ -1,0 +1,5 @@
+Sigma(B, 0) for B = [0.1   0.5   0.9   0.999 1.   ] : [0.08, 0.4, 0.72, 0.7992, 0.8]  (0.8 B; finite at B = a = 1)
+x                      : [0.05 0.2  0.5  1.   1.2 ]
+T_1 = theta(x)         : [0.96 0.84 0.6  0.2  0.04]
+literal rule  M(x)     : [0.95 0.8  0.5  0.   0.  ]  -> theta - M = [0.01 0.04 0.1  0.2  0.04]  (positive: NOT a majorant)
+corrected rule M(x)    : [0.96 0.84 0.6  0.2  0.04]  -> theta - M = [0. 0. 0. 0. 0.]

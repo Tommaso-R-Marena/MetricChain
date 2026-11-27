@@ -1,0 +1,15 @@
+n=12 K=2 seed=0 weights [0.4196, 0.5804]; rank Pi_perp = 5 (= n-1-3K = 5)
+  phi at the states: ['2.9e-30', '3.3e-30']
+  identity phi = -1/2<Pi_perp, D>: max defect 2.2e-14; isometry invariance defect 5.3e-15
+  5000 random chains: min phi = 0.8036, min ratio phi/min_k d_P^2 = 0.11431, median ratio 0.4150
+  local kappa at state 0: smallest eigenvalues [0.077202, 0.203821, 0.253003] ... largest 0.9231
+  local kappa at state 1: smallest eigenvalues [0.052008, 0.138443, 0.26759] ... largest 0.9409
+     finite-step ratio along the softest flex of state 0: ['0.077326', '0.077214', '0.077204'] (limit 0.077202)
+     finite-step ratio along the softest flex of state 1: ['0.051984', '0.052006', '0.052008'] (limit 0.052008)
+  minimising phi from 400 starts: 187 runs reach a true state (phi -> 0); 213 end in other local minima
+     smallest phi at a local minimum away from the states: 0.10297 (d_P = 1.457, ratio 0.04850)
+     smallest ratio at such a minimum: 0.02593 (phi = 0.14060, d_P = 2.329)
+  minimising the ratio from 100 starts: smallest ratio found 0.023617 at d_P = 2.4881 from the nearest state
+     distribution of final ratios: min 0.023617, 10% 0.030299, median 0.068682
+     local values: [0.077202, 0.052008]  => kappa (numerical) = 0.023617
+     constant of G(c): sqrt(n-1-dK)/(2 kappa) ~ 47.3

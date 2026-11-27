@@ -1,0 +1,92 @@
+=== p8_01_measure: K4 (KKKK) on H, tau 0.7: atoms 100, sites 4, domain [14, 14, 12, 7] = 16464 states; anchor x0 = argmin E = (10, 10, 8, 3); 5 subsets of order 3..4
+    class bb   :  40 atoms, net charge -0.1412 e, sum |q| 12.3500 e
+    class nsc  :   0 atoms, net charge +0.0000 e, sum |q| 0.0000 e
+    class chain:  44 atoms, net charge +1.6028 e, sum |q| 2.1004 e
+    class head :  16 atoms, net charge +2.5384 e, sum |q| 5.6216 e
+    fine groups (net charge): -0:bb +0.000, K1:bb -0.035, K1:chain +0.401, K1:head +0.635, K2:bb -0.035, K2:chain +0.401, K2:head +0.635, K3:bb -0.035, K3:chain +0.401, K3:head +0.635, K4:bb -0.035, K4:chain +0.401, K4:head +0.635, -5:bb -0.000
+    row 100/100 done, checkpoint written, 29 s
+    check: sum of the pair terms equals P3's evaluator G.energy at all 16464 states to 1.14e-12 kcal/mol
+    exact constants done, 29 s
+    GFDecomp against P3's GFBound (14 totals): largest relative deviation 2.2e-16; summands add up to the totals to 3.1e-16
+    P3 bounds done, 2 s
+    CHECK P3 summand >= exact constant for every (T, atom) and (T, atom pair): 25250 comparisons, 0 violations; smallest ratio bound/exact (exact > 1e-10): self 1.0004, pair 1.0317; medians 1.82, 5.40
+    chains truth <= fine groups <= PP <= P3; self <= P3_self; cross <= P3_cross; all-plus <= PP <= P3; truth <= sum of class-pair constants: 40 checks, 0 violations
+    per-pair remainders against the sums of their own anchored constants (Proposition 1 for each pair term): 10100 checks, 0 violations
+--- order 3: 4 subsets; sums over the subsets (kcal/mol) and ratio to the truth
+    total      2.3244e-01   /truth      1.00
+    self       2.9618e-02   /truth      0.13
+    cross      2.1425e-01   /truth      0.92
+    fine       5.3573e-01   /truth      2.30
+    allplus    1.4294e+00   /truth      6.15
+    PP_self    9.6199e-02   /truth      0.41
+    PP_cross   4.2929e+00   /truth     18.47
+    PP         4.3891e+00   /truth     18.88
+    P3_self    1.0592e+00   /truth      4.56
+    P3_cross   3.2525e+01   /truth    139.93
+    P3         3.3584e+01   /truth    144.49
+    Gamma_3 (closed form over all subsets): self 1.0592e+00 + cross 3.2525e+01 = 3.3584e+01  (sum of the per-subset bounds: 3.3584e+01)
+    true remainder g - I_2 g over all states: [-8.9290e-03, 1.8887e-01];  Gamma_3 / sup|remainder| = 178
+    by atom class (sums over the 4 subsets):   signed share of the truth | exact constant of the class-pair function | best pair-by-pair | P3 | P3 / pair-by-pair
+      bb-bb        +2.4279e-03 (   +1.0 %) | 2.1412e-02 | 6.4129e-01 | 2.3590e+00 |    3.68
+      bb-chain     +2.2539e-02 (   +9.7 %) | 2.8846e-02 | 6.8269e-01 | 2.6778e+00 |    3.92
+      bb-head      +6.7093e-02 (  +28.9 %) | 9.3591e-02 | 2.0364e+00 | 1.1054e+01 |    5.43
+      chain-chain  +7.3212e-03 (   +3.1 %) | 1.2111e-02 | 7.7815e-02 | 4.6166e-01 |    5.93
+      chain-head   +5.3184e-02 (  +22.9 %) | 6.7161e-02 | 3.7722e-01 | 4.4867e+00 |   11.89
+      head-head    +6.0888e-02 (  +26.2 %) | 6.4087e-02 | 4.7743e-01 | 1.1485e+01 |   24.06
+      self:bb      -5.6095e-03 (   -2.4 %) | 3.4149e-02 | 5.2624e-02 | 7.0994e-02 |    1.35
+      self:chain   +9.0283e-05 (   +0.0 %) | 4.8561e-04 | 1.6688e-03 | 1.7123e-02 |   10.26
+      self:head    +2.4503e-02 (  +10.5 %) | 2.7903e-02 | 4.1906e-02 | 9.7111e-01 |   23.17
+    cross part by host pattern (moving atoms of the pair; of which with their site in T):   best pair-by-pair | P3 | ratio
+      0 moving, 0 host(s) in T: 6.4129e-01 | 2.3590e+00 |    3.68
+      1 moving, 0 host(s) in T: 5.9882e-02 | 3.5453e-01 |    5.92
+      1 moving, 1 host(s) in T: 2.6592e+00 | 1.3377e+01 |    5.03
+      2 moving, 0 host(s) in T: 2.0827e-04 | 1.8744e-02 |   90.00
+      2 moving, 1 host(s) in T: 1.8004e-02 | 7.5921e-01 |   42.17
+      2 moving, 2 host(s) in T: 9.1425e-01 | 1.5656e+01 |   17.12
+    cross part by Dmin = min over all states of r^2/(4 B_p B_q):   pairs | best pair-by-pair | P3 | ratio
+      Dmin in [ 0.0,  0.1):   115 | 2.0171e-01 | 2.6268e+00 |   13.02
+      Dmin in [ 0.1,  0.3):   472 | 4.2916e-01 | 4.7090e+00 |   10.97
+      Dmin in [ 0.3,  1.0):  1317 | 1.7437e+00 | 1.4019e+01 |    8.04
+      Dmin in [ 1.0,  2.0):  1406 | 1.6494e+00 | 9.4428e+00 |    5.73
+      Dmin in [ 2.0,  4.0):  1139 | 2.5347e-01 | 1.6175e+00 |    6.38
+      Dmin in [ 4.0,  8.0):   456 | 1.5427e-02 | 1.0899e-01 |    7.06
+      Dmin in [ 8.0, 16.0):    45 | 4.0506e-05 | 2.3689e-04 |    5.85
+      Dmin in [16.0,  inf):     0 | 0.0000e+00 | 0.0000e+00 |     nan
+--- order 4: 1 subsets; sums over the subsets (kcal/mol) and ratio to the truth
+    total      2.9417e-03   /truth      1.00
+    self       2.4628e-04   /truth      0.08
+    cross      2.9051e-03   /truth      0.99
+    fine       1.1147e-02   /truth      3.79
+    allplus    1.2547e-02   /truth      4.27
+    PP_self    6.4132e-04   /truth      0.22
+    PP_cross   7.6814e-02   /truth     26.11
+    PP         7.7455e-02   /truth     26.33
+    P3_self    4.6571e-03   /truth      1.58
+    P3_cross   8.4912e-01   /truth    288.65
+    P3         8.5377e-01   /truth    290.24
+    Gamma_4 (closed form over all subsets): self 4.6571e-03 + cross 8.4912e-01 = 8.5377e-01  (sum of the per-subset bounds: 8.5377e-01)
+    true remainder g - I_3 g over all states: [-4.4164e-04, 2.9417e-03];  Gamma_4 / sup|remainder| = 290
+    by atom class (sums over the 1 subsets):   signed share of the truth | exact constant of the class-pair function | best pair-by-pair | P3 | P3 / pair-by-pair
+      bb-bb        -5.5896e-04 (  -19.0 %) | 5.5896e-04 | 1.4361e-02 | 6.2373e-02 |    4.34
+      bb-chain     +3.5868e-04 (  +12.2 %) | 4.7682e-04 | 1.1936e-02 | 7.1762e-02 |    6.01
+      bb-head      +3.2618e-03 ( +110.9 %) | 3.2618e-03 | 4.2194e-02 | 3.0638e-01 |    7.26
+      chain-chain  -5.5421e-05 (   -1.9 %) | 1.6704e-04 | 1.3118e-03 | 1.1952e-02 |    9.11
+      chain-head   -1.0054e-04 (   -3.4 %) | 4.5419e-04 | 4.8246e-03 | 1.2309e-01 |   25.51
+      head-head    -4.4126e-07 (   -0.0 %) | 2.3451e-04 | 2.1869e-03 | 2.7356e-01 |  125.09
+      self:bb      +3.6039e-05 (   +1.2 %) | 2.4659e-04 | 5.7429e-04 | 7.8962e-04 |    1.37
+      self:chain   +1.3435e-08 (   +0.0 %) | 1.0757e-06 | 5.0420e-06 | 5.5139e-05 |   10.94
+      self:head    +5.3588e-07 (   +0.0 %) | 2.2167e-05 | 6.1986e-05 | 3.8123e-03 |   61.50
+    cross part by host pattern (moving atoms of the pair; of which with their site in T):   best pair-by-pair | P3 | ratio
+      0 moving, 0 host(s) in T: 1.4361e-02 | 6.2373e-02 |    4.34
+      1 moving, 1 host(s) in T: 5.4130e-02 | 3.7814e-01 |    6.99
+      2 moving, 2 host(s) in T: 8.3234e-03 | 4.0860e-01 |   49.09
+    cross part by Dmin = min over all states of r^2/(4 B_p B_q):   pairs | best pair-by-pair | P3 | ratio
+      Dmin in [ 0.0,  0.1):   115 | 1.9422e-03 | 1.3871e-02 |    7.14
+      Dmin in [ 0.1,  0.3):   472 | 9.3090e-03 | 5.2891e-02 |    5.68
+      Dmin in [ 0.3,  1.0):  1317 | 2.0583e-02 | 2.9462e-01 |   14.31
+      Dmin in [ 1.0,  2.0):  1406 | 3.6208e-02 | 3.5320e-01 |    9.75
+      Dmin in [ 2.0,  4.0):  1139 | 8.1734e-03 | 1.1428e-01 |   13.98
+      Dmin in [ 4.0,  8.0):   456 | 5.9548e-04 | 2.0208e-02 |   33.94
+      Dmin in [ 8.0, 16.0):    45 | 2.9951e-06 | 4.8627e-05 |   16.24
+      Dmin in [16.0,  inf):     0 | 0.0000e+00 | 0.0000e+00 |     nan
+DONE in 30.8 s

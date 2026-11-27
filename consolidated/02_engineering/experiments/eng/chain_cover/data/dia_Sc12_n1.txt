@@ -1,0 +1,6 @@
+# dia_enum n_torsions=1 n_beads=4 s_cut=12 mirror=1 split_k=0 split_W=1 split_w=0
+# distances 3 8 11
+# conformations=3 classes=2
+# columns: pair counts at each distance | count | gmin | count_gmin | gmax
+0 0 0 1 0 1 0
+0 0 1 2 1 2 1

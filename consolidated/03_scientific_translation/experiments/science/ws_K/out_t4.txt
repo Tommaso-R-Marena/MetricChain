@@ -1,0 +1,9 @@
+T4 structured examples
+  Ising chain n=10 J=1 h=0.3, all-down -> all-up: H=1.400 trivial=0.000 box=1.400 sphere=1.400 count=1.400 lagrangian=-0.600  |I_box|=6 (I_count,r)=(6,1)
+  Ising ring  n=10 J=1 h=0.3, all-down -> all-up: H=3.400 trivial=0.000 box=3.400 sphere=3.400 count=3.400 lagrangian=-0.600  |I_box|=10 (I_count,r)=(10,1)
+  Curie-Weiss n=10 J=1 h=0.05, all-down -> all-up: H=4.500 trivial=0.000 box=1.700 sphere=4.500 count=4.500 lagrangian=-0.100  |I_box|=3 (I_count,r)=(10,5)
+T4 random pairwise models: every non-global strict local minimum a, b = its exit target
+  binary n=10 chain+: 28 minima; box: mean frac 0.99, exact in 93%; sphere: mean frac 0.69, exact in 50%; count: mean frac 1.00, exact in 96%; lagr: mean frac 0.00, exact in 0%; lagrangian <= trivial bound always: True
+  binary n=10 complete: 36 minima; box: mean frac 0.96, exact in 89%; sphere: mean frac 0.86, exact in 72%; count: mean frac 0.96, exact in 92%; lagr: mean frac 0.00, exact in 0%; lagrangian <= trivial bound always: True
+  3-state n=6 chain+: 37 minima; box: mean frac 0.90, exact in 76%; sphere: mean frac 0.82, exact in 59%; count: mean frac 0.91, exact in 81%; lagr: mean frac 0.00, exact in 0%; lagrangian <= trivial bound always: True
+  3-state n=6 complete: 50 minima; box: mean frac 0.89, exact in 76%; sphere: mean frac 0.84, exact in 60%; count: mean frac 0.91, exact in 78%; lagr: mean frac 0.00, exact in 0%; lagrangian <= trivial bound always: True

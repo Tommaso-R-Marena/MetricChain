@@ -1,0 +1,10 @@
+bridges (canonical) with 3..8 beads: 127; second factor 3..16 beads: 329695
+ordered pairs: 41871265; concatenations built (all admissible c1): 48465165
+number of height-preserving symmetries with (u1,u2)->(c1,b): min 1 max 1 (lemma: exactly 1)
+failures (not a self-avoiding lattice bridge with N1+N2+3 beads, or delta outside [0,1]x[0,9]x[0,14]x{0,1}): 0
+delta_g != [b' is a down-bond]: 0
+observed maxima (d3,d8,d11,dg) = (0,3,5,1); largest norm 9d3+4d8+d11+dg = 18 (beta=60)
+histogram d3: 0:48465165 1:0
+histogram d8: 0:46944009 1:1363278 2:155673 3:2205 4:0 5:0 6:0 7:0 8:0 9:0
+histogram d11: 0:33148386 1:13564640 2:1210084 3:470808 4:70407 5:840 6:0 7:0 8:0 9:0 10:0 11:0 12:0 13:0 14:0
+histogram dg: 0:35277365 1:13187800

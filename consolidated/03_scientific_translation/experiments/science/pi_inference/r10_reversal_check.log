@@ -1,0 +1,17 @@
+number of vertices (height functions with h(0) = 0) for n = 1..4: [2, 6, 38, 990]  (expected 2, 6, 38, 990)
+# slope u = 1.0: cube a = ln 2 - H(sigma_u) = 0.110944 per site
+   p = 0.5: a_1 = 0.110944 (increment 0.110944, 1.0000 of the cube);  a_2 = 0.221888 (increment 0.110944, 1.0000 of the cube);  a_3 = 0.332832 (increment 0.110944, 1.0000 of the cube);  a_4 = 0.443776 (increment 0.110944, 1.0000 of the cube)
+   p = 0.3: a_1 = 0.110944 (increment 0.110944, 1.0000 of the cube);  a_2 = 0.256558 (increment 0.145614, 1.3125 of the cube);  a_3 = 0.379059 (increment 0.122502, 1.1042 of the cube);  a_4 = 0.509132 (increment 0.130073, 1.1724 of the cube)
+   p = 0.2: a_1 = 0.110944 (increment 0.110944, 1.0000 of the cube);  a_2 = 0.282108 (increment 0.171164, 1.5428 of the cube);  a_3 = 0.420670 (increment 0.138562, 1.2489 of the cube);  a_4 = 0.540550 (increment 0.119879, 1.0805 of the cube)
+   p = 0.1: a_1 = 0.110944 (increment 0.110944, 1.0000 of the cube);  a_2 = 0.305794 (increment 0.194850, 1.7563 of the cube);  a_3 = 0.462728 (increment 0.156933, 1.4145 of the cube);  a_4 = 0.572656 (increment 0.109928, 0.9908 of the cube)
+# slope u = 3.0: cube a = ln 2 - H(sigma_u) = 0.502282 per site
+   p = 0.5: a_1 = 0.502282 (increment 0.502282, 1.0000 of the cube);  a_2 = 1.004564 (increment 0.502282, 1.0000 of the cube);  a_3 = 1.506847 (increment 0.502282, 1.0000 of the cube);  a_4 = 2.009129 (increment 0.502282, 1.0000 of the cube)
+   p = 0.3: a_1 = 0.502282 (increment 0.502282, 1.0000 of the cube);  a_2 = 0.960499 (increment 0.458217, 0.9123 of the cube);  a_3 = 1.422781 (increment 0.462282, 0.9204 of the cube);  a_4 = 1.885039 (increment 0.462258, 0.9203 of the cube)
+   p = 0.2: a_1 = 0.502282 (increment 0.502282, 1.0000 of the cube);  a_2 = 0.894675 (increment 0.392392, 0.7812 of the cube);  a_3 = 1.312767 (increment 0.418092, 0.8324 of the cube);  a_4 = 1.730839 (increment 0.418072, 0.8323 of the cube)
+   p = 0.1: a_1 = 0.502282 (increment 0.502282, 1.0000 of the cube);  a_2 = 0.780231 (increment 0.277949, 0.5534 of the cube);  a_3 = 1.141616 (increment 0.361385, 0.7195 of the cube);  a_4 = 1.516911 (increment 0.375295, 0.7472 of the cube)
+# slope u = 4.0: cube a = ln 2 - H(sigma_u) = 0.603052 per site
+   p = 0.5: a_1 = 0.603052 (increment 0.603052, 1.0000 of the cube);  a_2 = 1.206105 (increment 0.603052, 1.0000 of the cube);  a_3 = 1.809157 (increment 0.603052, 1.0000 of the cube);  a_4 = 2.412210 (increment 0.603052, 1.0000 of the cube)
+   p = 0.3: a_1 = 0.603052 (increment 0.603052, 1.0000 of the cube);  a_2 = 1.173436 (increment 0.570383, 0.9458 of the cube);  a_3 = 1.744330 (increment 0.570894, 0.9467 of the cube);  a_4 = 2.315237 (increment 0.570907, 0.9467 of the cube)
+   p = 0.2: a_1 = 0.603052 (increment 0.603052, 1.0000 of the cube);  a_2 = 1.119067 (increment 0.516015, 0.8557 of the cube);  a_3 = 1.642362 (increment 0.523295, 0.8677 of the cube);  a_4 = 2.165675 (increment 0.523313, 0.8678 of the cube)
+   p = 0.1: a_1 = 0.603052 (increment 0.603052, 1.0000 of the cube);  a_2 = 0.995008 (increment 0.391956, 0.6500 of the cube);  a_3 = 1.453531 (increment 0.458522, 0.7603 of the cube);  a_4 = 1.909339 (increment 0.455809, 0.7558 of the cube)
+ALL OK (control p = 1/2: a_n = n * cube, to 1e-8)

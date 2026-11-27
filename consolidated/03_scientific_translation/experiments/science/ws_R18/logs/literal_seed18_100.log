@@ -1,0 +1,256 @@
+r18_literal.py runs per case = 100 seed = 18 start 2026-11-26T16:40:27Z
+
+psi+ (actual psi, high W at hi)  u=1 n_o=30 n_i=6 lambda=1/5 bottom:  K=901  L=3  places in [3.721, 9.721] of [3.721, 9.721]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['1.8452e+06', '4.3522e+05', '15655']
+                    mean run     ['1.8452e+06', '4.2978e+05', '15395']
+      product:      literal mean ['1.8452e+06', '4.3522e+05', '15655']
+                    mean run     ['1.8452e+06', '4.2978e+05', '15395']
+      union bound:  literal mean (realised sizes) ['1.8452e+06', '4.3522e+05', '15655']
+                    mean run     ['1.8452e+06', '4.2978e+05', '15395']
+  single literal runs above the MEAN-RUN bound at some rung: 75 of 100; largest ratio 1.1125
+
+psi+ (actual psi, high W at hi)  u=1 n_o=30 n_i=6 lambda=1/5 top:  K=901  L=3  places in [3.721, 9.721] of [3.721, 9.721]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['1.8452e+06', '7772.2', '7716.5']
+                    mean run     ['1.8452e+06', '7633.9', '7579']
+      product:      literal mean ['1.8452e+06', '7772.2', '7716.5']
+                    mean run     ['1.8452e+06', '7633.9', '7579']
+      union bound:  literal mean (realised sizes) ['1.8452e+06', '7772.2', '7716.5']
+                    mean run     ['1.8452e+06', '7633.9', '7579']
+  single literal runs above the MEAN-RUN bound at some rung: 67 of 100; largest ratio 1.0961
+
+psi- (actual psi, high W at lo)  u=1 n_o=30 n_i=6 lambda=1/5 bottom:  K=901  L=3  places in [3.721, 9.721] of [3.721, 9.721]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 100
+  calls per rung:   literal mean ['4.0511e+07', '2.2811e+05', '33446']
+                    mean run     ['4.1009e+07', '2.2717e+05', '34108']
+      product:      literal mean ['2.0309e+07', '2.2811e+05', '33446']
+                    mean run     ['2.0621e+07', '2.2717e+05', '34108']
+      union bound:  literal mean (realised sizes) ['1.2029e+08', '2.2811e+05', '33446']
+                    mean run     ['1.2113e+08', '2.2717e+05', '34108']
+  single literal runs above the MEAN-RUN bound at some rung: 69 of 100; largest ratio 1.0539
+
+psi- (actual psi, high W at lo)  u=1 n_o=30 n_i=6 lambda=1/5 top:  K=901  L=3  places in [3.721, 9.721] of [3.721, 9.721]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 100
+  calls per rung:   literal mean ['5.2822e+07', '10871', '10682']
+                    mean run     ['5.3271e+07', '10905', '10714']
+      product:      literal mean ['4.081e+07', '10871', '10682']
+                    mean run     ['4.1259e+07', '10905', '10714']
+      union bound:  literal mean (realised sizes) ['1.7905e+08', '10871', '10682']
+                    mean run     ['1.7986e+08', '10905', '10714']
+  single literal runs above the MEAN-RUN bound at some rung: 45 of 100; largest ratio 1.0685
+
+two (simulated: hi for the upper half of W, lo for the lower)  u=1 n_o=30 n_i=6 lambda=1/5 bottom:  K=901  L=3  places in [3.721, 9.721] of [3.721, 9.721]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['2.4886e+07', '2.3431e+05', '56568']
+                    mean run     ['2.8095e+07', '2.3858e+05', '57368']
+      product:      literal mean ['2.4454e+08', '2.3431e+05', '56568']
+                    mean run     ['2.5171e+08', '2.3858e+05', '57368']
+      union bound:  literal mean (realised sizes) ['2.4454e+08', '2.3431e+05', '56568']
+                    mean run     ['2.5171e+08', '2.3858e+05', '57368']
+  single literal runs above the MEAN-RUN bound at some rung: 58 of 100; largest ratio 1.0299
+
+two (simulated: hi for the upper half of W, lo for the lower)  u=1 n_o=30 n_i=6 lambda=1/5 top:  K=901  L=3  places in [3.721, 9.721] of [3.721, 9.721]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['1.1243e+08', '10571', '10464']
+                    mean run     ['1.1244e+08', '10659', '10554']
+      product:      literal mean ['5.9039e+08', '10571', '10464']
+                    mean run     ['5.9134e+08', '10659', '10554']
+      union bound:  literal mean (realised sizes) ['5.9039e+08', '10571', '10464']
+                    mean run     ['5.9134e+08', '10659', '10554']
+  single literal runs above the MEAN-RUN bound at some rung: 46 of 100; largest ratio 1.0628
+
+psi+ (actual psi, high W at hi)  u=2 n_o=24 n_i=4 lambda=1/5 bottom:  K=927  L=3  places in [5.735, 13.735] of [5.735, 13.735]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 100
+  calls per rung:   literal mean ['9.7203e+08', '1.1196e+07', '7.6698e+05']
+                    mean run     ['9.7203e+08', '1.1195e+07', '7.6666e+05']
+      product:      literal mean ['9.4103e+08', '1.1196e+07', '7.6698e+05']
+                    mean run     ['9.4103e+08', '1.1195e+07', '7.6666e+05']
+      union bound:  literal mean (realised sizes) ['9.7203e+08', '1.1196e+07', '7.6698e+05']
+                    mean run     ['9.7203e+08', '1.1195e+07', '7.6666e+05']
+  single literal runs above the MEAN-RUN bound at some rung: 78 of 100; largest ratio 1.0038
+
+psi+ (actual psi, high W at hi)  u=2 n_o=24 n_i=4 lambda=1/5 top:  K=927  L=3  places in [5.735, 13.735] of [5.735, 13.735]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 68
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 100
+  calls per rung:   literal mean ['6.9986e+08', '7626.3', '7626.3']
+                    mean run     ['9.7203e+08', '7520.8', '7520.8']
+      product:      literal mean ['6.9932e+08', '7626.3', '7626.3']
+                    mean run     ['9.7128e+08', '7520.8', '7520.8']
+      union bound:  literal mean (realised sizes) ['6.9986e+08', '7626.3', '7626.3']
+                    mean run     ['9.7203e+08', '7520.8', '7520.8']
+  single literal runs above the MEAN-RUN bound at some rung: 53 of 100; largest ratio 1.0967
+
+psi- (actual psi, high W at lo)  u=2 n_o=24 n_i=4 lambda=1/5 bottom:  K=927  L=3  places in [5.735, 13.735] of [5.735, 13.735]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 100
+  calls per rung:   literal mean ['9.3122e+07', '6.4502e+05', '80075']
+                    mean run     ['7.3026e+07', '5.1421e+05', '68547']
+      product:      literal mean ['2.2855e+07', '6.4502e+05', '80075']
+                    mean run     ['1.783e+07', '5.1421e+05', '68547']
+      union bound:  literal mean (realised sizes) ['1.1494e+08', '6.4502e+05', '80075']
+                    mean run     ['9.4839e+07', '5.1421e+05', '68547']
+  single literal runs above the MEAN-RUN bound at some rung: 85 of 100; largest ratio 1.5045
+
+psi- (actual psi, high W at lo)  u=2 n_o=24 n_i=4 lambda=1/5 top:  K=927  L=3  places in [5.735, 13.735] of [5.735, 13.735]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 100
+  calls per rung:   literal mean ['3.1585e+08', '12115', '12115']
+                    mean run     ['2.5097e+08', '11492', '11492']
+      product:      literal mean ['8.8787e+07', '12115', '12115']
+                    mean run     ['6.3177e+07', '11492', '11492']
+      union bound:  literal mean (realised sizes) ['3.1616e+08', '12115', '12115']
+                    mean run     ['2.5128e+08', '11492', '11492']
+  single literal runs above the MEAN-RUN bound at some rung: 86 of 100; largest ratio 1.4955
+
+two (simulated: hi for the upper half of W, lo for the lower)  u=2 n_o=24 n_i=4 lambda=1/5 bottom:  K=927  L=3  places in [5.735, 13.735] of [5.735, 13.735]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['2.8207e+05', '85794', '82632']
+                    mean run     ['2.7146e+05', '75195', '72029']
+      product:      literal mean ['9.1472e+07', '6.4068e+05', '82632']
+                    mean run     ['7.3346e+07', '5.2227e+05', '72029']
+      union bound:  literal mean (realised sizes) ['9.1472e+07', '6.4068e+05', '82632']
+                    mean run     ['7.3346e+07', '5.2227e+05', '72029']
+  single literal runs above the MEAN-RUN bound at some rung: 85 of 100; largest ratio 1.3350
+
+two (simulated: hi for the upper half of W, lo for the lower)  u=2 n_o=24 n_i=4 lambda=1/5 top:  K=927  L=3  places in [5.735, 13.735] of [5.735, 13.735]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['1.4419e+06', '10764', '10764']
+                    mean run     ['1.3263e+06', '10214', '10214']
+      product:      literal mean ['3.0864e+08', '10764', '10764']
+                    mean run     ['2.525e+08', '10214', '10214']
+      union bound:  literal mean (realised sizes) ['3.0864e+08', '10764', '10764']
+                    mean run     ['2.525e+08', '10214', '10214']
+  single literal runs above the MEAN-RUN bound at some rung: 84 of 100; largest ratio 1.1617
+
+psi+ (actual psi, high W at hi)  u=0.5 n_o=40 n_i=8 lambda=1/5 bottom:  K=855  L=2  places in [2.247, 6.247] of [2.247, 6.247]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['2.1888e+05', '1.093e+05']
+                    mean run     ['2.1888e+05', '1.0928e+05']
+      product:      literal mean ['2.1888e+05', '1.093e+05']
+                    mean run     ['2.1888e+05', '1.0928e+05']
+      union bound:  literal mean (realised sizes) ['2.1888e+05', '1.093e+05']
+                    mean run     ['2.1888e+05', '1.0928e+05']
+  single literal runs above the MEAN-RUN bound at some rung: 53 of 100; largest ratio 1.0055
+
+psi+ (actual psi, high W at hi)  u=0.5 n_o=40 n_i=8 lambda=1/5 top:  K=855  L=2  places in [2.247, 6.247] of [2.247, 6.247]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['2.1888e+05', '5054.7']
+                    mean run     ['2.1888e+05', '5037.7']
+      product:      literal mean ['2.1888e+05', '5054.7']
+                    mean run     ['2.1888e+05', '5037.7']
+      union bound:  literal mean (realised sizes) ['2.1888e+05', '5054.7']
+                    mean run     ['2.1888e+05', '5037.7']
+  single literal runs above the MEAN-RUN bound at some rung: 53 of 100; largest ratio 1.0886
+
+psi- (actual psi, high W at lo)  u=0.5 n_o=40 n_i=8 lambda=1/5 bottom:  K=855  L=2  places in [2.247, 6.247] of [2.247, 6.247]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 100
+  calls per rung:   literal mean ['8.4249e+05', '46364']
+                    mean run     ['8.423e+05', '46304']
+      product:      literal mean ['7.8629e+05', '46364']
+                    mean run     ['7.8613e+05', '46304']
+      union bound:  literal mean (realised sizes) ['1.5855e+06', '46364']
+                    mean run     ['1.5856e+06', '46304']
+  single literal runs above the MEAN-RUN bound at some rung: 45 of 100; largest ratio 1.0857
+
+psi- (actual psi, high W at lo)  u=0.5 n_o=40 n_i=8 lambda=1/5 top:  K=855  L=2  places in [2.247, 6.247] of [2.247, 6.247]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['9.4505e+05', '7059.3']
+                    mean run     ['9.4472e+05', '7052.5']
+      product:      literal mean ['1.0388e+06', '7059.3']
+                    mean run     ['1.0386e+06', '7052.5']
+      union bound:  literal mean (realised sizes) ['1.6596e+06', '7059.3']
+                    mean run     ['1.6595e+06', '7052.5']
+  single literal runs above the MEAN-RUN bound at some rung: 44 of 100; largest ratio 1.0677
+
+two (simulated: hi for the upper half of W, lo for the lower)  u=0.5 n_o=40 n_i=8 lambda=1/5 bottom:  K=855  L=2  places in [2.247, 6.247] of [2.247, 6.247]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['2.5844e+05', '37572']
+                    mean run     ['2.5824e+05', '37503']
+      product:      literal mean ['4.3776e+05', '37572']
+                    mean run     ['4.3776e+05', '37503']
+      union bound:  literal mean (realised sizes) ['4.3776e+05', '37572']
+                    mean run     ['4.3776e+05', '37503']
+  single literal runs above the MEAN-RUN bound at some rung: 52 of 100; largest ratio 1.0620
+
+two (simulated: hi for the upper half of W, lo for the lower)  u=0.5 n_o=40 n_i=8 lambda=1/5 top:  K=855  L=2  places in [2.247, 6.247] of [2.247, 6.247]
+  literal runs 100, closed 100; stopping level and largest sample equal to the mean run's in 100
+  (a) sample sizes and counts of every level identical to the product instance on the same outer sample: 100 of 100
+  identity (own windows, realised sizes) violated in 0 runs;  union window violated in 0 runs   (both must be 0)
+  CONTROL lo/hi exchanged: exceeded in 100 of 100 runs   (must be > 0)
+  runs with more calls at some rung than the product instance on the same sample: 0
+  calls per rung:   literal mean ['2.9468e+05', '4400.8']
+                    mean run     ['2.9418e+05', '4388.9']
+      product:      literal mean ['4.3775e+05', '4400.8']
+                    mean run     ['4.3775e+05', '4388.9']
+      union bound:  literal mean (realised sizes) ['4.3776e+05', '4400.8']
+                    mean run     ['4.3776e+05', '4388.9']
+  single literal runs above the MEAN-RUN bound at some rung: 52 of 100; largest ratio 1.0925
+
+TOTAL literal runs 1800 (closed 1800): identity violated 0, union window violated 0 (must be 0); control exceeded in 1800 runs (must be > 0); sample sizes identical to the product instance in 1800; single runs above the mean-run bound: 1130
+end 2026-11-26T16:47:43Z  wall 435.6 s  peak RSS MB: 47.4

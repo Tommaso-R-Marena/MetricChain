@@ -1,0 +1,73 @@
+p7_01_five  started 2026-11-26 05:41:29 UTC
+
+P4 second order (out/p4_01_shares.json): 908 analyses
+residual         analyses x0 minimises L constant shares state shares neither (gap)
+GB                    184            110             106          110             0
+coul+GB               180            145             119          145             0
+ff03-ff14SB           184            156             120          154             2
+ff15ipq-ff14SB        180            155             126          155             0
+ff99SB-ff14SB         180            180             125          177             3
+all                   908            746             596          741             5
+P4 third order, pair form (out/p4_02_third.json): 136 instances, reference minimises the model in 132, constant shares 110, state-dependent shares 132, neither 0
+P4 third order, site form (out/p4_02_third.json): 136 instances, reference minimises the model in 113, constant shares 104, state-dependent shares 113, neither 0
+P4 joint programme (out/p4_08_joint.json): 136 instances, reference minimises the three-body envelope in 133, joint certificate in 133, envelope minimised but no joint certificate: 0
+
+==> analyses with 'reference minimises the model, no shares of either kind': 5 (second order) + 0 + 0 + 0 (third order: pair form, site form, joint)
+
+S6/E  tau 0.60  split ff03-ff14SB  order 2  domain X' = [9, 9, 9, 9, 9, 9] (531441 states)  x0 = [8, 8, 8, 8, 8, 8]
+   max c_ij = 3.071e-01; model pairwise up to 2.6e-13; x0 is the unique minimiser of the published instance: True
+   margin (enumeration) = 0.087244691  (P4 stored 0.087244691);   share LP t = -0.017092227  (P4 stored -0.017092227)
+   relaxation value - L(x0): primal LP -0.102553361, dual LP -0.102553361   [true minimum - L(x0) = 0]
+   EXACT: LP vertex has denominator 2; all constraints hold in integers; value = -0.102553361379 (float-table model, exact Fraction), -0.102553361388 (published instance) < 0  ==> no shares exist
+   EXACT bracket of the relaxation value of the published instance: [-0.102553361398, -0.102553361388]
+   fractional sites [2, 3, 4, 5];  vertex (site: [(state, weight)]): {'0': [(4, '2/2')], '1': [(4, '2/2')], '2': [(2, '1/2'), (4, '1/2')], '3': [(2, '1/2'), (4, '1/2')], '4': [(2, '1/2'), (4, '1/2')], '5': [(2, '1/2'), (4, '1/2')]}
+   LP size 1269 variables x 276 rows  (0.4s)
+
+S6/E  tau 0.70  split ff03-ff14SB  order 2  domain X' = [9, 9, 9, 9, 9, 9] (531441 states)  x0 = [8, 8, 8, 8, 8, 8]
+   max c_ij = 3.071e-01; model pairwise up to 2.6e-13; x0 is the unique minimiser of the published instance: True
+   margin (enumeration) = 0.087244691  (P4 stored 0.087244691);   share LP t = -0.017092227  (P4 stored -0.017092227)
+   relaxation value - L(x0): primal LP -0.102553361, dual LP -0.102553361   [true minimum - L(x0) = 0]
+   EXACT: LP vertex has denominator 2; all constraints hold in integers; value = -0.102553361379 (float-table model, exact Fraction), -0.102553361388 (published instance) < 0  ==> no shares exist
+   EXACT bracket of the relaxation value of the published instance: [-0.102553361398, -0.102553361388]
+   fractional sites [2, 3, 4, 5];  vertex (site: [(state, weight)]): {'0': [(4, '2/2')], '1': [(4, '2/2')], '2': [(2, '1/2'), (4, '1/2')], '3': [(2, '1/2'), (4, '1/2')], '4': [(2, '1/2'), (4, '1/2')], '5': [(2, '1/2'), (4, '1/2')]}
+   LP size 1269 variables x 276 rows  (0.5s)
+
+K3/H  tau 0.60  split ff99SB-ff14SB  order 2  domain X' = [30, 29, 21] (18270 states)  x0 = [15, 14, 11]
+   max c_ij = 1.442e-10; model pairwise up to 2.3e-13; x0 is the unique minimiser of the published instance: True
+   margin (enumeration) = 0.367583672  (P4 stored 0.367583672);   share LP t = -0.000360130  (P4 stored -0.000360130)
+   relaxation value - L(x0): primal LP -0.000720261, dual LP -0.000720261   [true minimum - L(x0) = 0]
+   EXACT: LP vertex has denominator 2; all constraints hold in integers; value = -0.000720260635 (float-table model, exact Fraction), -0.000720260637 (published instance) < 0  ==> no shares exist
+   EXACT bracket of the relaxation value of the published instance: [-0.000720260641, -0.000720260637]
+   fractional sites [0, 1, 2];  vertex (site: [(state, weight)]): {'0': [(8, '1/2'), (15, '1/2')], '1': [(14, '1/2'), (20, '1/2')], '2': [(12, '1/2'), (18, '1/2')]}
+   LP size 2189 variables x 163 rows  (0.5s)
+
+L16/P2  tau 0.60  split ff99SB-ff14SB  order 2  domain X' = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] (65536 states)  x0 = [1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0]
+   max c_ij = 1.194e-12; model pairwise up to 1.0e-11; x0 is the unique minimiser of the published instance: True
+   margin (enumeration) = 0.000551217  (P4 stored 0.000551217);   share LP t = -0.000237889  (P4 stored -0.000237889)
+   relaxation value - L(x0): primal LP -0.001189447, dual LP -0.001189447   [true minimum - L(x0) = 0]
+   EXACT: LP vertex has denominator 2; all constraints hold in integers; value = -0.001189446960 (float-table model, exact Fraction), -0.001189446967 (published instance) < 0  ==> no shares exist
+   EXACT bracket of the relaxation value of the published instance: [-0.001189446993, -0.001189446967]
+   fractional sites [1, 2, 4, 5, 6, 7, 8, 9, 10, 11];  vertex (site: [(state, weight)]): {'0': [(1, '2/2')], '1': [(0, '1/2'), (1, '1/2')], '2': [(0, '1/2'), (1, '1/2')], '3': [(0, '2/2')], '4': [(0, '1/2'), (1, '1/2')], '5': [(0, '1/2'), (1, '1/2')], '6': [(0, '1/2'), (1, '1/2')], '7': [(0, '1/2'), (1, '1/2')], '8': [(0, '1/2'), (1, '1/2')], '9': [(0, '1/2'), (1, '1/2')], '10': [(0, '1/2'), (1, '1/2')], '11': [(0, '1/2'), (1, '1/2')], '12': [(0, '2/2')], '13': [(0, '2/2')], '14': [(0, '2/2')], '15': [(0, '2/2')]}
+   LP size 512 variables x 496 rows  (0.1s)
+
+LKSE6/E  tau 0.60  split ff99SB-ff14SB  order 2  domain X' = [2, 27, 9, 13, 2, 27] (341172 states)  x0 = [1, 17, 8, 8, 1, 4]
+   max c_ij = 2.963e-10; model pairwise up to 3.4e-13; x0 is the unique minimiser of the published instance: True
+   margin (enumeration) = 0.076790565  (P4 stored 0.076790565);   share LP t = -1.898308255  (P4 stored -1.898308255)
+   relaxation value - L(x0): primal LP -3.621790248, dual LP -3.621790248   [true minimum - L(x0) = 0]
+   EXACT: LP vertex has denominator 2; all constraints hold in integers; value = -3.621790248172 (float-table model, exact Fraction), -3.621790248174 (published instance) < 0  ==> no shares exist
+   EXACT bracket of the relaxation value of the published instance: [-3.621790248190, -3.621790248174]
+   fractional sites [1, 2, 3, 5];  vertex (site: [(state, weight)]): {'0': [(1, '2/2')], '1': [(15, '1/2'), (17, '1/2')], '2': [(0, '1/2'), (1, '1/2')], '3': [(8, '1/2'), (10, '1/2')], '4': [(1, '2/2')], '5': [(2, '1/2'), (4, '1/2')]}
+   LP size 2422 variables x 406 rows  (0.6s)
+
+SUMMARY (gap = L(x0) - value of the relaxation, kcal/mol; margin = second-best state above L(x0))
+instance   tau  split           X′                        states    margin         gap gap/margin    frac. sites
+S6/E       0.60 ff03-ff14SB     [9, 9, 9, 9, 9, 9]        531441  0.087245    0.102553       1.18   [2, 3, 4, 5]
+S6/E       0.70 ff03-ff14SB     [9, 9, 9, 9, 9, 9]        531441  0.087245    0.102553       1.18   [2, 3, 4, 5]
+K3/H       0.60 ff99SB-ff14SB   [30, 29, 21]               18270  0.367584    0.000720       0.00      [0, 1, 2]
+L16/P2     0.60 ff99SB-ff14SB   2 x 16                     65536  0.000551    0.001189       2.16       10 sites
+LKSE6/E    0.60 ff99SB-ff14SB   [2, 27, 9, 13, 2, 27]     341172  0.076791    3.621790      47.16   [1, 2, 3, 5]
+
+[2s] wrote out/p7_01_five.json   finished 2026-11-26 05:41:31 UTC
+DONE p7_01_five
+[run_capped] peak anonymous resident memory 218 MB (cap 3500 MB); peak file-backed resident memory 47 MB; largest VmPeak 624 MB (ulimit -v not set); 2.8 s; exit 0
+exit 0

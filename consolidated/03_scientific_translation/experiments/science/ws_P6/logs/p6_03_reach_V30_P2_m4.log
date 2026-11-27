@@ -1,0 +1,17 @@
+=== reach: V30 on P2, tau 0.7, order m = 4: atoms 492, sites 30, states/site 3..3, |X| = 10^14.31; anchor 111111111111111111111111111111 E = -440.600038 kcal/mol; bands [8, 4] [2.9s]
+      GFBatch: host site 1/30 done, 4s
+      GFBatch: host site 7/30 done, 28s
+      GFBatch: host site 13/30 done, 48s
+      GFBatch: host site 19/30 done, 66s
+      GFBatch: host site 25/30 done, 79s
+      GFBatch: host site 30/30 done, 88s
+    Gamma_4 = 4.578162e+00 kcal/mol = 7.6794 kT; pair sums: computed, 235 exclusion sets, 105.7s; pair sums available for 204 pairs; max S_i/m = 1.7557e-01, max G_ij/C(m,2) = 7.0646e-02 [105.8s]
+      ball evaluations 4096/34281  18s
+    ball of radius 3: 34281 values of g (evaluated now) [142.0s]
+    w =  8 form S: CERTIFIED ln Z(E) in [743.921909, 746.753175], width 2.831266 nats; rho_cert = 15.6702 kT; E_(pi-) u = 3.4677e+00; min m_- = -440.600048, min m_+ = -440.600017 [0.1s]
+    w =  8 form B: CERTIFIED ln Z(E) in [744.961423, 745.463573], width 0.502150 nats; rho_cert = 15.6702 kT; E_(pi-) u = 6.1929e-01; min m_- = -440.600048, min m_+ = -440.600017 [0.1s]
+    w =  4 form S: CERTIFIED ln Z(E) in [743.920648, 746.754321], width 2.833674 nats; rho_cert = 15.6788 kT; E_(pi-) u = 3.4707e+00; min m_- = -440.600745, min m_+ = -440.599915 [0.1s]
+    w =  4 form B: CERTIFIED ln Z(E) in [744.923618, 745.505807], width 0.582190 nats; rho_cert = 15.6788 kT; E_(pi-) u = 7.1005e-01; min m_- = -440.600745, min m_+ = -440.599915 [0.1s]
+    SAMPLED CHECK (band 8, form B): 1000 exact samples of pi_(m_-) (seed 20261126; 995 distinct; mean number of sites off the anchor 5.86), E evaluated at each [3.8s]: m_- > E: 0, m_+ < E: 0; beta(E - m_-): mean 3.184e-01, max 1.884e+00; mean beta(m_+ - m_-) = 6.329e-01
+    -> out/reach_V30_P2_t0.70_gbn2_m4.json
+DONE p6_03_reach V30 P2 0.7 m=4 [255s]

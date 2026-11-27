@@ -1,0 +1,90 @@
+# u n n_o xhat theta=e^... L K J r_dag(r1) ln2Mbar | profile d0 s_in oracle | status G det good | width/xhat maxM/Mbar maxM/Mdag calls/bound used/cnt q/Cvi lnq/lnCmax levels t
+## level u=0.5 n=1700 n_o=1 n_i=1699 xhat=12.8910 ln(theta)=11.891 L=13 K=303 J=1702 m_max=18 r_dag=0 (r1=0, rho_h n_o=0.44, p_u n_o=0.38) ln(1/pi)=0.693 (<= n_o h + ln(n_o+1) = 0.701) ln 2Mbar=18.57 (4.1) slack 11.20 |x_out - xhat|=0.0e+00 ln C_max=72.61 Q6 slack 30.56  design ok: True
+0.5 1700 1 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 1.974e-05 0.8413 lev=852 1.0s
+0.5 1700 1 | flat           d0=0   s_in=0.25  random       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 1.145e-05 0.8338 lev=653 0.8s
+0.5 1700 1 | cone           d0=0   s_in=0.25  bottom       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 2.095e-05 3.781e-06 2.095e-05 0.8421 lev=653 0.8s
+0.5 1700 1 | cone           d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.551e-05 3.781e-06 1.766e-05 0.8397 lev=852 1.0s
+0.5 1700 1 | dip_rho_h      d0=0   s_in=0.25  top          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 6.447e-06 0.8259 lev=652 0.8s
+0.5 1700 1 | dip_rho_h      d0=0   s_in=0     narrow       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.048e-05 3.781e-06 8.967e-06 0.8304 lev=852 1.1s
+0.5 1700 1 | dip_small      d0=0   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 2.095e-05 3.781e-06 2.095e-05 0.8421 lev=653 0.8s
+0.5 1700 1 | dip_small      d0=0   s_in=0     random       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.585e-05 3.781e-06 1.699e-05 0.8392 lev=852 1.0s
+0.5 1700 1 | dip_large      d0=0   s_in=0.25  bottom       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 2.095e-05 3.781e-06 2.095e-05 0.8421 lev=653 0.8s
+0.5 1700 1 | dip_large      d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.423e-05 3.781e-06 1.883e-05 0.8406 lev=852 1.0s
+0.5 1700 1 | plateau_cone   d0=0   s_in=0.25  top          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 6.447e-06 0.8259 lev=652 0.8s
+0.5 1700 1 | plateau_cone   d0=0   s_in=0     narrow       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.048e-05 3.781e-06 9.038e-06 0.8305 lev=852 1.0s
+0.5 1700 1 | flattened_cone d0=0   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.048e-05 3.781e-06 1.975e-05 0.8413 lev=653 0.7s
+0.5 1700 1 | flattened_cone d0=0   s_in=0     random       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 1.166e-05 0.8340 lev=852 0.9s
+0.5 1700 1 | equal_mass     d0=0   s_in=0     bottom       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 2.095e-05 3.781e-06 2.095e-05 0.8421 lev=852 1.0s
+0.5 1700 1 | equal_mass     d0=0   s_in=0.25  mix          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.433e-05 3.781e-06 1.782e-05 0.8399 lev=653 0.8s
+0.5 1700 1 | rw_uniform     d0=0   s_in=0     top          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 6.447e-06 0.8259 lev=851 1.0s
+0.5 1700 1 | rw_uniform     d0=0   s_in=0.25  narrow       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 6.055e-06 0.8250 lev=653 0.8s
+0.5 1700 1 | rw_pm          d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.048e-05 3.781e-06 1.973e-05 0.8413 lev=852 1.0s
+0.5 1700 1 | rw_pm          d0=0   s_in=0.25  random       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.048e-05 3.781e-06 1.360e-05 0.8361 lev=653 0.8s
+0.5 1700 1 | rw_down        d0=0   s_in=0     bottom       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 2.095e-05 3.781e-06 2.095e-05 0.8421 lev=852 1.0s
+0.5 1700 1 | rw_down        d0=0   s_in=0.25  mix          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.447e-05 3.781e-06 1.844e-05 0.8403 lev=653 0.8s
+0.5 1700 1 | half_cone      d0=0   s_in=0     top          | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.571e-05 3.781e-06 6.447e-06 0.8259 lev=851 1.0s
+0.5 1700 1 | half_cone      d0=0   s_in=0.25  narrow       | closed     G=1 det=0 good=0 | 0.1939 2.095e-05 1.000e+00 1.048e-05 3.781e-06 6.464e-06 0.8259 lev=653 0.8s
+## level u=0.5 n=2500 n_o=3 n_i=2497 xhat=13.2918 ln(theta)=12.292 L=14 K=311 J=2504 m_max=18 r_dag=2 (r1=2, rho_h n_o=1.31, p_u n_o=1.13) ln(1/pi)=0.134 (<= n_o h + ln(n_o+1) = 1.409) ln 2Mbar=18.42 (4.1) slack 12.16 |x_out - xhat|=0.0e+00 ln C_max=96.72 Q6 slack 32.57  design ok: True
+0.5 2500 3 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.870e-05 2.570e-06 2.359e-05 0.8827 lev=1252 1.6s
+0.5 2500 3 | flat           d0=0   s_in=0.167 some_trivial | abort      G=0 det=0 good=-1 | nan 6.232e-06 4.375e-01 - - 4.824e-07 0.8424 lev=4 0.0s  ABORT: unclassified at the last rung
+0.5 2500 3 | cone           d0=1   s_in=0     mix          | closed     G=1 det=0 good=0 | 0.2224 2.493e-05 1.750e+00 1.579e-05 2.246e-06 2.068e-05 0.8813 lev=1252 1.6s
+0.5 2500 3 | dip_rho_h      d0=0   s_in=0.25  adv_lo       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.944e-05 2.570e-06 2.493e-05 0.8832 lev=958 1.2s
+0.5 2500 3 | dip_small      d0=1   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 2.493e-05 2.570e-06 2.493e-05 0.8832 lev=959 1.2s
+0.5 2500 3 | dip_small      d0=0   s_in=0.167 inv_above    | closed     G=0 det=0 good=-1 | 0.1982 2.493e-05 1.750e+00 - - 2.262e-05 0.8822 lev=1052 0.3s
+0.5 2500 3 | dip_large      d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | 0.1881 2.493e-05 1.750e+00 1.299e-05 2.570e-06 1.798e-05 0.8799 lev=1251 1.7s
+0.5 2500 3 | plateau_cone   d0=1   s_in=0     adv_lo       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.246e-05 2.570e-06 2.493e-05 0.8832 lev=1251 1.7s
+0.5 2500 3 | flattened_cone d0=0   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.313e-05 2.570e-06 2.438e-05 0.8830 lev=959 1.2s
+0.5 2500 3 | flattened_cone d0=0   s_in=0.167 some_trivial | abort      G=0 det=0 good=-1 | nan 6.232e-06 4.375e-01 - - 2.777e-07 0.8367 lev=3 0.0s  ABORT: unclassified at the last rung
+0.5 2500 3 | equal_mass     d0=1   s_in=0.25  mix          | closed     G=1 det=0 good=0 | 0.1881 2.493e-05 1.750e+00 1.870e-05 2.570e-06 1.885e-05 0.8804 lev=959 1.3s
+0.5 2500 3 | rw_uniform     d0=0   s_in=0     adv_lo       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.870e-05 2.570e-06 2.493e-05 0.8832 lev=1251 1.7s
+0.5 2500 3 | rw_pm          d0=1   s_in=0     center       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.270e-05 2.570e-06 2.435e-05 0.8830 lev=1252 1.7s
+0.5 2500 3 | rw_pm          d0=0   s_in=0.167 inv_above    | closed     G=0 det=0 good=-1 | 0.2283 2.493e-05 1.750e+00 - - 2.122e-05 0.8816 lev=1054 0.4s
+0.5 2500 3 | rw_down        d0=0   s_in=0.25  mix          | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.673e-05 2.570e-06 2.158e-05 0.8817 lev=959 1.4s
+0.5 2500 3 | half_cone      d0=1   s_in=0.25  adv_lo       | closed     G=1 det=0 good=0 | 0.1982 2.493e-05 1.750e+00 1.246e-05 2.570e-06 2.493e-05 0.8832 lev=959 1.3s
+## level u=0.5 n=2500 n_o=40 n_i=2460 xhat=13.5757 ln(theta)=12.576 L=14 K=311 J=2529 m_max=18 r_dag=39 (r1=18, rho_h n_o=17.53, p_u n_o=15.10) ln(1/pi)=0.000 (<= n_o h + ln(n_o+1) = 4.020) ln 2Mbar=18.30 (4.1) slack 12.58 |x_out - xhat|=0.0e+00 ln C_max=95.47 Q6 slack 32.98  design ok: True
+0.5 2500 40 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | 0.3038 2.821e-05 2.000e+00 2.116e-05 2.545e-06 2.670e-05 0.8824 lev=1252 1.7s
+0.5 2500 40 | flat           d0=0   s_in=0.167 some_trivial | abort      G=0 det=0 good=-1 | nan 7.052e-06 5.000e-01 - - 6.090e-07 0.8428 lev=22 0.0s  ABORT: unclassified at the last rung
+0.5 2500 40 | cone           d0=20  s_in=0     mix          | closed     G=1 det=0 good=0 | 0.3468 2.821e-05 2.000e+00 1.410e-05 1.686e-06 2.030e-05 0.8796 lev=1252 1.8s
+0.5 2500 40 | dip_rho_h      d0=0   s_in=0.25  adv_lo       | closed     G=1 det=0 good=0 | 0.3038 2.821e-05 2.000e+00 2.127e-05 2.545e-06 2.803e-05 0.8829 lev=954 1.3s
+0.5 2500 40 | dip_small      d0=20  s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.3038 2.821e-05 2.000e+00 2.116e-05 2.545e-06 2.670e-05 0.8824 lev=964 1.2s
+0.5 2500 40 | dip_small      d0=0   s_in=0.167 inv_above    | closed     G=0 det=0 good=-1 | 0.3038 2.821e-05 2.000e+00 - - 2.553e-05 0.8820 lev=1051 0.3s
+0.5 2500 40 | dip_large      d0=0   s_in=0     mix          | closed     G=1 det=0 good=0 | 0.3468 2.821e-05 2.000e+00 1.435e-05 1.721e-06 2.029e-05 0.8796 lev=1242 1.7s
+0.5 2500 40 | plateau_cone   d0=20  s_in=0     adv_lo       | closed     G=1 det=0 good=0 | 0.3834 2.821e-05 2.000e+00 1.762e-05 2.158e-06 2.801e-05 0.8829 lev=1251 1.7s
+0.5 2500 40 | flattened_cone d0=0   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.3303 2.821e-05 2.000e+00 1.410e-05 1.702e-06 2.622e-05 0.8822 lev=963 1.4s
+0.5 2500 40 | flattened_cone d0=0   s_in=0.167 some_trivial | abort      G=0 det=0 good=-1 | nan 7.052e-06 5.000e-01 - - 9.232e-08 0.8231 lev=19 0.0s  ABORT: unclassified at the last rung
+0.5 2500 40 | equal_mass     d0=20  s_in=0.25  mix          | closed     G=1 det=0 good=0 | 0.2880 2.821e-05 2.000e+00 1.671e-05 2.545e-06 2.242e-05 0.8806 lev=964 1.3s
+0.5 2500 40 | rw_uniform     d0=0   s_in=0     adv_lo       | closed     G=1 det=0 good=0 | 0.3038 2.821e-05 2.000e+00 1.417e-05 2.545e-06 2.821e-05 0.8830 lev=1251 1.5s
+0.5 2500 40 | rw_pm          d0=20  s_in=0     center       | closed     G=1 det=0 good=0 | 0.3307 2.821e-05 2.000e+00 1.410e-05 2.312e-06 2.670e-05 0.8824 lev=1252 1.8s
+0.5 2500 40 | rw_pm          d0=0   s_in=0.167 inv_above    | closed     G=0 det=0 good=-1 | 0.3292 2.821e-05 2.000e+00 - - 2.480e-05 0.8817 lev=1054 0.3s
+0.5 2500 40 | rw_down        d0=0   s_in=0.25  mix          | closed     G=1 det=0 good=0 | 0.3292 2.821e-05 2.000e+00 1.515e-05 2.236e-06 2.167e-05 0.8802 lev=958 1.3s
+0.5 2500 40 | half_cone      d0=20  s_in=0.25  adv_lo       | closed     G=1 det=0 good=0 | 0.3106 2.821e-05 2.000e+00 1.719e-05 2.510e-06 2.810e-05 0.8830 lev=963 1.3s
+## level u=0.5 n=2500 n_o=250 n_i=2250 xhat=15.1870 ln(theta)=14.187 L=16 K=314 J=2675 m_max=18 r_dag=134 (r1=110, rho_h n_o=109.54, p_u n_o=94.39) ln(1/pi)=0.122 (<= n_o h + ln(n_o+1) = 7.444) ln 2Mbar=18.48 (4.1) slack 14.07 |x_out - xhat|=0.0e+00 ln C_max=89.43 Q6 slack 34.27  design ok: True
+0.5 2500 250 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | 0.6983 2.361e-05 1.771e+00 1.771e-05 2.406e-06 2.250e-05 0.8726 lev=1252 1.9s
+0.5 2500 250 | cone           d0=125 s_in=0.25  bottom       | closed     G=1 det=0 good=0 | 0.9721 2.361e-05 1.771e+00 1.180e-05 1.297e-06 1.259e-05 0.8661 lev=989 1.5s
+0.5 2500 250 | dip_rho_h      d0=125 s_in=0.25  top          | closed     G=1 det=0 good=0 | 0.6983 2.361e-05 1.771e+00 1.771e-05 2.406e-06 7.460e-06 0.8602 lev=988 1.5s
+0.5 2500 250 | dip_small      d0=125 s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.6983 2.361e-05 1.771e+00 2.361e-05 2.406e-06 2.361e-05 0.8731 lev=988 1.5s
+0.5 2500 250 | dip_large      d0=0   s_in=0.25  bottom       | closed     G=1 det=0 good=0 | 0.8245 2.361e-05 1.771e+00 1.180e-05 1.337e-06 1.462e-05 0.8678 lev=927 1.5s
+0.5 2500 250 | plateau_cone   d0=0   s_in=0.25  top          | closed     G=1 det=0 good=0 | 0.8492 2.361e-05 1.771e+00 1.180e-05 1.420e-06 1.526e-05 0.8682 lev=981 1.5s
+0.5 2500 250 | flattened_cone d0=0   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.9136 2.361e-05 1.771e+00 1.180e-05 1.364e-06 1.798e-05 0.8701 lev=981 1.5s
+0.5 2500 250 | equal_mass     d0=125 s_in=0     bottom       | closed     G=1 det=0 good=0 | 0.7249 2.361e-05 1.771e+00 1.367e-05 1.203e-06 1.933e-05 0.8709 lev=1253 1.8s
+0.5 2500 250 | rw_uniform     d0=125 s_in=0     top          | closed     G=1 det=0 good=0 | 0.6983 2.361e-05 1.771e+00 1.180e-05 2.406e-06 1.467e-05 0.8678 lev=1251 2.1s
+0.5 2500 250 | rw_pm          d0=125 s_in=0     center       | closed     G=1 det=0 good=0 | 0.8685 2.361e-05 1.771e+00 1.374e-05 2.284e-06 2.282e-05 0.8727 lev=1251 2.0s
+0.5 2500 250 | rw_down        d0=0   s_in=0     bottom       | closed     G=1 det=0 good=0 | 0.7908 2.361e-05 1.771e+00 1.180e-05 1.580e-06 1.616e-05 0.8689 lev=1222 1.9s
+0.5 2500 250 | half_cone      d0=0   s_in=0     top          | closed     G=1 det=0 good=0 | 0.9091 2.361e-05 1.771e+00 1.180e-05 1.879e-06 1.643e-05 0.8691 lev=1220 1.8s
+## level u=0.5 n=1700 n_o=6 n_i=1694 xhat=12.9293 ln(theta)=11.929 L=13 K=302 J=1706 m_max=17 r_dag=5 (r1=3, rho_h n_o=2.63, p_u n_o=2.27) ln(1/pi)=0.016 (<= n_o h + ln(n_o+1) = 1.992) ln 2Mbar=17.89 (4.1) slack 11.91 |x_out - xhat|=0.0e+00 ln C_max=71.78 Q6 slack 31.28  design ok: True
+0.5 1700 6 | flat           d0=0   s_in=0     center       | closed     G=1 det=0 good=0 | 0.2233 4.115e-05 1.969e+00 3.087e-05 3.772e-06 3.878e-05 0.8488 lev=852 1.1s
+0.5 1700 6 | cone           d0=3   s_in=0.25  bottom       | closed     G=1 det=0 good=0 | 0.2437 4.115e-05 1.969e+00 2.913e-05 2.361e-06 3.661e-05 0.8480 lev=654 0.8s
+0.5 1700 6 | dip_rho_h      d0=3   s_in=0.25  top          | closed     G=1 det=0 good=0 | 0.2437 4.115e-05 1.969e+00 2.058e-05 3.772e-06 2.068e-05 0.8401 lev=653 0.8s
+0.5 1700 6 | dip_small      d0=3   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.2233 4.115e-05 1.969e+00 4.115e-05 3.772e-06 4.115e-05 0.8497 lev=653 0.8s
+0.5 1700 6 | dip_large      d0=0   s_in=0.25  bottom       | closed     G=1 det=0 good=0 | 0.2340 4.115e-05 1.969e+00 2.538e-05 3.394e-06 2.829e-05 0.8444 lev=652 0.8s
+0.5 1700 6 | plateau_cone   d0=0   s_in=0.25  top          | closed     G=1 det=0 good=0 | 0.2437 4.115e-05 1.969e+00 2.058e-05 3.722e-06 2.203e-05 0.8410 lev=653 0.9s
+0.5 1700 6 | flattened_cone d0=0   s_in=0.25  center       | closed     G=1 det=0 good=0 | 0.2437 4.115e-05 1.969e+00 2.834e-05 3.731e-06 4.048e-05 0.8494 lev=653 0.8s
+0.5 1700 6 | equal_mass     d0=3   s_in=0     bottom       | closed     G=1 det=0 good=0 | 0.2340 4.115e-05 1.969e+00 3.087e-05 3.772e-06 2.807e-05 0.8443 lev=852 1.1s
+0.5 1700 6 | rw_uniform     d0=3   s_in=0     top          | closed     G=1 det=0 good=0 | 0.2437 4.115e-05 1.969e+00 2.058e-05 3.772e-06 1.829e-05 0.8384 lev=852 1.0s
+0.5 1700 6 | rw_pm          d0=3   s_in=0     center       | closed     G=1 det=0 good=0 | 0.2340 4.115e-05 1.969e+00 3.625e-05 3.772e-06 4.084e-05 0.8496 lev=851 1.0s
+0.5 1700 6 | rw_down        d0=0   s_in=0     bottom       | closed     G=1 det=0 good=0 | 0.2437 4.115e-05 1.969e+00 3.441e-05 2.476e-06 4.059e-05 0.8495 lev=852 1.0s
+0.5 1700 6 | half_cone      d0=0   s_in=0     top          | closed     G=1 det=0 good=0 | 0.2437 4.115e-05 1.969e+00 2.058e-05 3.772e-06 1.867e-05 0.8387 lev=851 1.0s
+
+SUMMARY: runs 80 (valid inner oracle 72, invalid 8); closed 76, closed with L>U 0, aborted 4; the events (V1)-(V3) held in 72 runs (72 of them with a valid oracle); violations of statements claimed for EVERY run: 0; violations of statements claimed on the good event: 0; design-level violations (x_out, Lemma Q4, (4.1), constants, Prop Q6): 0; skipped 0
+WORST RATIOS: M_over_Mbar=4.115e-05, M_over_Mdag=2, calls_over_bound=4.115e-05, used_over_cnt=3.781e-06, count_ineq=0.3767, q_over_Cvi=4.115e-05, width_over_xhat=0.9721, lnq_over_lnCmax=0.8832
+LAST LINE r17_sim_slope.py uhalf seed 19: completed; wall 90.0 s; peak RSS 46.1 MB

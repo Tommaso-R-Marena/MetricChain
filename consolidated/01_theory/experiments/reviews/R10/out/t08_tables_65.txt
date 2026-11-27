@@ -1,0 +1,5 @@
+# Section 6.5 (bJ = 1.5, B = 0, e = 0): rows u = 0.60, 0.30, 0.25
+  u=0.6: contact [(np.float64(0.032), np.float64(0.968))]  R2(0) 0.00907142 [0.37746@0.49937  0.62154@0.50063] S2 0.00907142 (report 0.00907144, x=0.378)   best symmetric shell on scan: x=0.3778 0.00907138   cone formula 0.00321748 at m=0.5000 (report 0.00321748)   R_unif 0.01096292  t=60
+  u=0.3: contact [(np.float64(0.0465), np.float64(0.1237)), (np.float64(0.4745), np.float64(0.5255)), (np.float64(0.8763), np.float64(0.9535))]  R2(0) 0.00226456 [0.44091@0.50000  0.55909@0.50000] S2 0.00226456 (report 0.00226457, x=0.4409)   best symmetric shell on scan: x=0.4411 0.00226290   cone formula 0.00075446 at m=0.5000 (report 0.00075446)   R_unif 0.00279417  t=128
+  u=0.25: contact [(np.float64(0.0496), np.float64(0.1102)), (np.float64(0.8898), np.float64(0.9504))]  R2(0) 0.00052346 [0.05759@0.46304  0.09153@0.53696] S2 0.00052346 (report 0.00052346, x=None)   best symmetric shell on scan: x=0.3000 0.00000000   cone formula 0.00052067 at m=0.5000 (report 0.00052067)   R_unif 0.00194427  t=158
+time 158.3859097957611

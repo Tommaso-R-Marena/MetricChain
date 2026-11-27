@@ -1,0 +1,308 @@
+===== exposedness_checks.py (exit 0, 40 s) =====
+T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiable instances)
+T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
+T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
+PASS
+===== rigidity_checks.py (exit 0, 138 s) =====
+R1 rigidity matroids: ok
+    K4 in R^2: rank 5, connected = True
+    K5 in R^3: rank 9, connected = True
+    wheel W5 in R^2: rank 9, connected = True
+    K3 in R^2: rank 3, connected = False
+    K4 + degree-2 vertex in R^2: rank 7, connected = False
+    K4 - e in R^2: rank 5, connected = False
+    K5 in R^2: rank 7, connected = True
+    K6 in R^3: rank 12, connected = True
+R2 chimeras, complete graphs: ok
+    K_4 in R^2, 2 conformers: 1240 non-constant splices, smallest |CM| = 9.556e-03; largest |CM| at true conformers = 1.8e-13
+    K_4 in R^2, 3 conformers: 2904 non-constant splices, smallest |CM| = 1.462e-02; largest |CM| at true conformers = 4.9e-13
+    K_5 in R^3, 2 conformers: 20440 non-constant splices, smallest |CM| = 1.623e-03; largest |CM| at true conformers = 2.6e-12
+    K_5 in R^3, 3 conformers: 79998 non-constant splices, smallest |CM| = 1.789e-02; largest |CM| at true conformers = 3.9e-12
+R3 chimeras, wheel: ok
+    wheel W5 in R^2: smallest least-squares residual over 180 random splices = 6.007e-04 (true conformer: 2.7e-15); control: 20/20 planted realisable vectors found by the same search (a search that misses realisable vectors is not evidence of absence)
+R4 negative controls: ok
+    triangle: {(3,4,5),(4,5,6)} and {(3,5,6),(4,4,5)} have equal edge-length laws: True
+    K4 + degree-2 vertex: 192/240 splices of the three blocks realised (all six non-constant colourings; 20 nearby pairs, 20 independent pairs); agreement with the two-circle criterion 240/240
+R5 explicit certificate: ok
+    certificate for K4, two conformers: 203 zeros found in 400 starts (100 near each conformer, 200 random); 128 at conformer 1, 75 at conformer 2, 0 elsewhere
+R6 toy feature maps: ok
+    connected toy map: smallest violation of the equations of the variety over all splices = 1.53e-03
+    direct-sum toy map (x, x^2, y, y^3): the splice of (x1,y1), (x2,y2) along {1,2}|{3,4} is G(x1,y2) (exact)
+R7 identified with chimeras: ok
+    K4 + degree-2 vertex, the review's pair and 20 perturbations: realisable splices = the two conformers and three chimeras in 21/21 pairs
+    smallest |Cayley-Menger| of a mixed K4 block = 16.13 (the pair), 11.29 (all 21); smallest margin of the two-circle criterion = 0.48; chimeras realised to 3.0e-15
+    largest chimera mass compatible with the eight edge-length laws (LP, 3 weightings) = 0.0e+00: identified although chimeras exist
+R8 non-generic twin on the line: ok
+    4-cycle on the line, x = (8,0,3,5), x' = (8,3,5,0): lengths (8, 3, 2, 3) and (5, 2, 5, 8), no shared length; complementary splices that both close up: [((8, 2, 2, 8), (5, 3, 5, 3))]
+R9 joint genericity (Example D1): ok
+    K4, Example D1: squared lengths ('29/4', '25/4', '17/4', '25', '13', '4') and ('125/4', '17/2', '9/2', '113/4', '65/4', '16'): no length in common: True; the reflected pair has the same law on every edge: True; and is a different ensemble: True
+R10 a shared rigid part (Example D2): ok
+    K5 minus an edge (rigidity rank 7 = 2*5 - 3), two conformers sharing a triangle: the exchanged pair has the same law on every measured edge in 200/200; the law of the unmeasured edge differs in 200/200
+PASS
+===== pair_capacity_checks.py (exit 0, 16 s) =====
+C1 Littlewood-Offord lemma: ok
+    7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4 at c = ('-1', '-1', '-1')
+C2 sign vectors in random spans: ok
+    n = 16, K = 5: spurious sign vector in 1111/4000 = 0.2777; 4*C(K,3)*(3/4)^n = 0.4009
+    n = 20, K = 6: spurious sign vector in 803/4000 = 0.2008; 4*C(K,3)*(3/4)^n = 0.2537
+    n = 24, K = 8: spurious sign vector in 351/2000 = 0.1755; 4*C(K,3)*(3/4)^n = 0.2248
+    n = 30, K = 10: spurious sign vector in 119/1500 = 0.0793; 4*C(K,3)*(3/4)^n = 0.0857
+    n = 36, K = 12: spurious sign vector in 16/600 = 0.0267; 4*C(K,3)*(3/4)^n = 0.0280
+C3 projector certificate: ok
+    n = 9: 198 random supports (K = 2..6); certificate implies fibre is a point in 198/198; identified by the fibre LP: 195; smallest certificate gap: 0.434
+C4 worst case (cut polytope): ok
+    n = 5: triples containing a fixed vertex that are faces: 105/105; 4-sets: 445/455; a 4-set that is not a face: ['+++++', '+---+', '+--+-', '+++--']
+    n = 6: triples containing a fixed vertex that are faces: 465/465; 4-sets: 1478/1500; a 4-set that is not a face: ['++++++', '+--+--', '+-+-++', '++----']
+C5 Gaussian rounding: ok
+    n = 300, K = 2.0 n: smallest eigenvalue of sin(pi C/2) = -0.4365 (first-order prediction -0.4360)
+    n = 300, K = 4.0 n: smallest eigenvalue of sin(pi C/2) = -0.1961 (first-order prediction -0.1781)
+    n = 300, K = 5.5 n: smallest eigenvalue of sin(pi C/2) = -0.0568 (first-order prediction -0.0540)
+    n = 300, K = 6.34 n: smallest eigenvalue of sin(pi C/2) = +0.0119 (first-order prediction +0.0001)
+    n = 300, K = 7.0 n: smallest eigenvalue of sin(pi C/2) = +0.0403 (first-order prediction +0.0370)
+    n = 300, K = 9.0 n: smallest eigenvalue of sin(pi C/2) = +0.1332 (first-order prediction +0.1273)
+    n = 300, K = 12.0 n: smallest eigenvalue of sin(pi C/2) = +0.2150 (first-order prediction +0.2240)
+C6 adaptivity: ok
+    n = 60, 1 conformers (rank 1): 59 entries read (r n - r(r+1)/2 = 59; all pairs: 1770); reconstruction error 0.0e+00
+    n = 60, 2 conformers (rank 2): 117 entries read (r n - r(r+1)/2 = 117; all pairs: 1770); reconstruction error 2.2e-16
+    n = 60, 3 conformers (rank 3): 174 entries read (r n - r(r+1)/2 = 174; all pairs: 1770); reconstruction error 6.7e-16
+    n = 60, 5 conformers (rank 5): 285 entries read (r n - r(r+1)/2 = 285; all pairs: 1770); reconstruction error 1.0e-15
+    n = 60, 8 conformers (rank 8): 444 entries read (r n - r(r+1)/2 = 444; all pairs: 1770); reconstruction error 4.4e-16
+    two two-conformer ensembles: their pair-correlation matrices differ exactly at [(0, 1)]
+PASS
+===== finite_temperature_checks.py (exit 0, 37 s) =====
+F1 one-body data, cube (Theorem E15): ok
+    n = 3, b = 0.5: max over the class of TV(mu, P_a) - sum_i tau_i = +6.66e-16 (exact, 256 LPs)
+    n = 3, b = 1.0: max over the class of TV(mu, P_a) - sum_i tau_i = +4.44e-16 (exact, 256 LPs)
+    n = 3, b = 2.0: max over the class of TV(mu, P_a) - sum_i tau_i = +1.33e-15 (exact, 256 LPs)
+    n = 4..6: 360 (member, centre) pairs: max of TV - sum_i tau_i = -1.02e-01; largest ratio TV/sum tau = 0.8572
+F2 general alphabets (Theorem E15): ok
+    three-letter heterogeneous sites, symmetric site envelopes (metrics): 96 cases; mu*_a (cost into the centre) is a member in 96/96; max of mu_i(a_i) - mu*_i(a_i) = +0.00e+00; max of TV - sum_i (1 - mu_i(a_i)/mu*_i(a_i)) = -1.60e-02; with the cost out of the centre the measure is a member in 96/96
+    three-letter heterogeneous sites, one-sided site envelopes (quasi-metrics): 96 cases; mu*_a (cost into the centre) is a member in 96/96; max of mu_i(a_i) - mu*_i(a_i) = -1.05e-02; max of TV - sum_i (1 - mu_i(a_i)/mu*_i(a_i)) = -5.76e-02; with the cost out of the centre the measure is a member in 5/96
+F3 members identified by one-body data: ok
+    n = 3, b = 1: identified by one-body data inside the class <=> at most one unsaturated marginal: 60/60
+F4 the double cone (Theorem E16): ok
+    n = 4, b = 1.0: max E[M^2] over the class = 7.605870; double cone: 7.605870; largest spread of a weight on the optimal face = 1.94e-16
+    n = 6, b = 0.7: max E[M^2] over the class = 11.060055; double cone: 11.060055; largest spread of a weight on the optimal face = 9.26e-16
+    n = 5, b = 1.0: max E[M^2] over the class = 10.233839; double cone: 10.233839; largest spread of a weight on the optimal face = 1.10e-01
+        odd n: end points D_(+-theta), theta = tanh(b/2), are members and optimal; predicted spread at the all-plus state 0.110218
+F5 modulus duality (Theorem E17): ok
+    modulus duality, l^infinity data norm, class of all ensembles (200 instances x 4 tolerances): largest gap 1.02e-14
+    constant of E17(c): kappa = E sech^2(1 + Z) = 0.449600 (Gauss-Hermite), 0.449600 (trapezoid); risk of the Bayes rule under the two hypotheses = 0.112400, 0.112400 = kappa/4 = 0.112400; sqrt(kappa)/2 = 0.3353; the testing bound of version 2: Phi_N(-1) = 0.1587, sqrt(Phi_N(-1))/2 = 0.1992
+F6 an interacting reference (Theorem E15T): ok
+    three sites, chains and triangles, every bond satisfied (6 cases, exact): max of TV - sum of deficits = +4.00e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +2.22e-16
+    complete graphs on 4..7 sites, every bond satisfied (12 references, 1200 members): max of TV - sum of deficits = +1.68e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +3.33e-16
+    chains of three sites with one bond violated by the centre (5 cases, exact): max of TV - sum of deficits = +0.196, +0.573, +0.109, +0.165, +0.254; max of mu(x_j = a_j) - mu*(x_j = a_j) = +0.555, +0.482, +0.057, +0.359, +0.328
+    two sites, pi ~ exp(-x1 x2/2), centre (+,+), b = 1: max of TV - sum of deficits = +0.169599, max population excess = +0.169599 (closed form +0.169599)
+    triangle pi ~ exp(x1 x2 + x2 x3 - x1 x3/2), centre (+,+,+), b = 1 (bond 1-3 violated): max of TV - sum of deficits = +8.88e-16, max population excess = +0.00e+00: both bounds hold
+    hypothesis of E15T(a): the triangle's mu*_a: least covariance of two up-set indicators (20 up-sets) = +0.00e+00 (positively associated), least lattice defect = -7.753e-03 (not log-supermodular); the two-site example: least covariance (6 up-sets) = -0.0880 (not positively associated)
+F7 exact criteria on up-sets (Proposition E15U): ok
+    three sites, 40 references with couplings of both signs (half with one slope per site): the up-set criterion (C) agrees with the exact maximum of TV - sum of deficits in 40/40, the criterion (B) with the exact maximal population excess in 40/40; (C) holds in 8, (B) in 5, positive association in 5
+    pure three-body known part on three sites, mu*_a = (1 - lam (-1)^N)/8, slope 1: lam = 11/13: largest pair covariance 0.0e+00; slack of (C) at U = {e_2 or e_3}: -0.043269 (formula (1 - 2 lam)/16 = -0.043269), least slack over all up-sets -0.043269; exact max of TV - sum of deficits = +0.047731; lam = 1/2: largest pair covariance 0.0e+00; slack of (C) at U = {e_2 or e_3}: +0.000000 (formula (1 - 2 lam)/16 = +0.000000), least slack over all up-sets +0.000000; exact max of TV - sum of deficits = +0.000000; lam = 1/3: largest pair covariance 0.0e+00; slack of (C) at U = {e_2 or e_3}: +0.020833 (formula (1 - 2 lam)/16 = +0.020833), least slack over all up-sets -0.000000; exact max of TV - sum of deficits = +0.000000
+    pair-interaction known part on four sites, K = (K12, K13, K14, K23, K24, K34) = (-1.4, 6, -2.6, -0.5, 3.3, 0), fields (0.1, 0.5, -1, 1.4) in e: least Cov(e_i, N - e_i) = +0.0105 (the conditions (D) hold); at U = {e_2 = e_4 = 1}: E[N | U] - E[N | U^c] = 0.9634 < 1, slack of (C) = -0.0080; the member with density ~ 1 + (e^2 - 1) 1_U (in the class: True) has TV = 0.2621 > sum of deficits = 0.2525
+    how often (D) fails to decide (C) for random pair-interaction known parts (couplings of both signs): n = 3 (18 up-sets), 2000 random pair models: (C) and (D) differ in 0; (C) holds in 447, of which positively associated 285; n = 4 (166 up-sets), 1000 random pair models: (C) and (D) differ in 0; (C) holds in 103, of which positively associated 34 — rare, and not never (the instance above)
+    weak coupling, four sites, eps = 0.02: the sign of min_i sum_j J_ij v_j decides the criterion (C) in 228/228 instances (the bound holds in 57 of them)
+PASS
+===== platform_checks.py (exit 0, 154 s) =====
+P1 matroid of the legs: ok
+    d = 2, 3 legs: rank 3, connected = False
+    d = 2, 4 legs: rank 3, connected = True
+    d = 2, 5 legs: rank 3, connected = True
+    d = 3, 6 legs: rank 6, connected = False
+    d = 3, 7 legs: rank 6, connected = True
+    d = 3, 8 legs: rank 6, connected = True
+P2 planar platform: ok
+    d = 2, 4 legs: smallest residual over 84 non-constant splices = 1.946e-03 (true pose: 3.7e-15)
+    d = 2, 5 legs: smallest residual over 180 non-constant splices = 4.428e-02 (true pose: 5.8e-15)
+    d = 2, 3 legs (free matroid): splices of nearby poses realised in 20/20 cases
+P3 spatial platform: ok
+    d = 3, 7 legs: smallest residual over 80 non-constant splices = 2.366e-03 (true pose: 5.5e-15)
+    d = 3, 6 legs (free matroid): splices of nearby poses realised in 20/20 cases
+P4 pose uniqueness, and planar bodies: ok
+    d = 2, three generic legs, 100 instances: number of real poses with the three lengths -> {2: 38, 4: 59, 6: 3} (always even, never one)
+    a fourth leg singles out the true pose in 100/100; smallest mismatch of the fourth length at another pose of the fibre: 1.07e-03
+    collinear attachment points on both bodies, six legs, 20 poses: the mirror pose has the same six leg lengths (largest difference 0.0e+00) — no number of legs determines the pose
+PASS
+===== lifted_checks.py (exit 0, 228 s) =====
+L1 lift isolation on the cube: ok
+    n = 10 (45 pair observables): lift-isolated frequency K = 20: 1.000, K = 22: 1.000, K = 33: 0.925, K = 35: 0.950, K = 45: 0.520
+    n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955
+L2 four-body data: ok
+    n = 8, 4-body data (99 features): 38 lift-isolated supports with K = 12..24 (the pair-data capacity is below 2n = 16): identification confirmed by the fibre LP in 38; 10 supports not isolated (skipped)
+L3 a prior on the number of conformers: ok
+    n = 5, K = 6, 7: 3 supports flat-isolated but not faces (not identified among all ensembles), 6 faces; random weights with a twin of at most K atoms: 0 (expected 0); non-faces for which SOME weights have such a twin: 3 of 3
+L4 torus: ok
+    two-state certificate on the r-torus, r = 2..5, 40 random pairs (some angles shared): every zero found is one of the two states; smallest value at distance > 0.3 from both: 0.007
+    2-torus, 24 x 24 grid, nine product observables: two states differing in both angles identified in 9 sampled cases; differing in one angle: not identified in 3 case(s)
+    r = 3, K = 4 generic points: 4 zeros of the projector certificate found (expected 4); rank-one matrices on the zero set linearly independent: True
+    r = 3, K = 5 generic points: 6 zeros of the projector certificate found (expected 6); rank-one matrices on the zero set linearly independent: True
+    r = 4, K = 11 generic points: 11 zeros of the projector certificate found (expected 11); rank-one matrices on the zero set linearly independent: True
+L5 three conformers: ok
+    n = 6: 4960 triples of conformers; sign vectors in the span beyond the three: at most 1 (present in 2880 triples); zero sets with affinely dependent pair features: 0
+L6 certified stability on the torus: ok
+    growth inequality, r = 2..5, 46 random pairs of states (14 further pairs with some beta < 0.05 set aside): smallest observed f / (c* min(d_p^2, d_q^2)) = 1.25 (must be >= 1)
+    2-torus, 30 x 30 grid, four pairs of states, tau = 1e-3 and 1e-2: largest int min(d_p^2, d_q^2) dnu over data-compatible measures is between 0.147 and 0.297 of the bound Lambda tau / c* (must be <= 1)
+L7 the permanent certificate: ok
+    torus, K = 3, 4 states differing pairwise in every angle (15 random cases, r = K..5): zeros of the permanent that are not states: 0
+    three states coinciding in two of four angles (Hall condition fails): the permanent vanishes at a configuration at distance 1.32 from every state (value 0.0e+00)
+    cube n = 6, all 41664 triples: Hall condition holds in 30720, zero set of the permanent energy = the triple in all of them: True; fails in 10944, the predicted sub-cube is in the zero set in all of them: True (zero set strictly larger than the triple in 960)
+PASS
+===== torus_six_states.py (exit 0, 67 s) =====
+S1  five rational states on T^3 (Proposition E20a), exact
+  the five lifts are linearly independent: ok
+  the zero set of the lifted certificate is finite in all eight charts: ok
+  it has six points in the main chart (a univariate polynomial of degree 6 in the lex basis): ok
+  all six are rational: the five states and a sixth point: ok
+  the sixth point is found exactly: ok
+    the sixth zero (t-coordinates): [18235067499/12017196881, 167269954148/19784421235, 458968156077/323733747838]
+  the six lifted outer products are linearly independent (rank 6): ok
+S2  six rational states on T^3 (Theorem E20b), exact
+    instance 1: rank of the 12 tangential conditions 12; dimension of the numerators vanishing on the curve 15
+  instance 1: the curve is smooth at the six states: ok
+  instance 1: rank 12, dimension 15, and the 15 lie in the kernel: ok
+    instance 2: rank of the 12 tangential conditions 12; dimension of the numerators vanishing on the curve 15
+  instance 2: the curve is smooth at the six states: ok
+  instance 2: rank 12, dimension 15, and the 15 lie in the kernel: ok
+S3  six random states on T^3: a second measure on the curve, away from the states (linear programme)
+    a measure with the same 27 data and no mass on the six states: in 10/10 instances (largest value of the least mass on the states: 0.00e+00)
+  a twin on the curve in every instance: ok
+S4  an exceptional configuration of six states on T^3 (Proposition E20c)
+  a configuration with independent lifts at which the determinant of the 12 conditions changes sign: ok
+    generic starting configuration: smallest singular value of the 12 conditions 0.5599; exceptional configuration: singular value 11 is 0.7860, singular value 12 is below 1e-12
+  rank 11 at the exceptional configuration: ok
+    the exceptional sixth state (angles): 2.666708, 1.951347, 1.012184
+    real components of the curve: 1; the extra function on the curve: minimum above -1e-9, minimum at distance > 0.1 from the states 0.0023, maximum 2.1750
+  the extra numerator is non-negative on the curve and positive away from the states: ok
+    least mass on the six states among measures on the sampled curve with the same data: 1.000000
+  no other measure on the sampled curve has the data: ok
+    certificate f = 100*(g_1^2 + g_2^2) + h: gradient of h at the states below 1e-9: True; smallest Hessian eigenvalue of f at the states 0.4199; global minimum of f on the torus above -1e-9 (grid of 48^3 points and 60 local refinements); local minima away from the states: none: all 60 end at a state
+  f is non-negative on the torus, with non-degenerate zeros at the six states and no other zero found: ok
+S4b an exceptional configuration at which the extra function changes sign between the two real components
+  an exceptional configuration (rank 11, independent lifts) is found: ok
+    real components of the curve: 2; signs of the extra function on them: [-1, 1]
+  two components, and the extra function is non-negative on one and non-positive on the other: ok
+    least mass on the six states among measures on the sampled curve with the same data: 0.000000
+  a twin exists: the ensemble is not determined although the rank is 11: ok
+S5  conditions 'value and full gradient at K states' on the 3^r numerators (integer states; rank modulo 2^31 - 1, a lower bound for the rank over Q)
+    r = 2, K =  2:  6 conditions on 9 numerators, rank 6
+    r = 2, K =  3:  9 conditions on 9 numerators, rank 8
+    r = 2, K =  4: 12 conditions on 9 numerators, rank 9
+    r = 3, K =  5: 20 conditions on 27 numerators, rank 20
+    r = 3, K =  6: 24 conditions on 27 numerators, rank 24
+    r = 3, K =  7: 28 conditions on 27 numerators, rank 26
+    r = 3, K =  8: 32 conditions on 27 numerators, rank 27
+    r = 4, K = 12: 60 conditions on 81 numerators, rank 60
+    r = 4, K = 16: 80 conditions on 81 numerators, rank 80
+    r = 4, K = 17: 85 conditions on 81 numerators, rank 81
+  r = 2: three double points impose 8 conditions, not 9 (the square of the bilinear form through them): ok
+  r = 3: six double points impose 24 conditions, seven impose 26 (not 27), eight impose 27: ok
+  r = 4: sixteen double points impose 80 conditions, seventeen impose 81: no numerator is left: ok
+S6  sixteen random states on T^4: the unique function of the data span with sixteen double points
+    its Hessian has eigenvalues of both signs at some state in 12/12 instances
+  so it is not semidefinite in any of them: sixteen states were never determined: ok
+PASS
+===== torus_four_angles.py (exit 0, 32 s) =====
+T1  thirteen random states on T^4 that are not determined (Proposition E20e (b))
+    seed 0: real components of the curve 1; functions on the curve 36; rank of the 26 conditions 26; candidates 10; NOT IDENTIFIED: no candidate is positive on the curve (dual margin 0.0800); a twin on the curve with least mass 0.000000 on the states
+  the curve carries 36 functions of the data span, the 26 conditions are independent, 10 candidates remain: ok
+  no candidate is positive on the curve, with a positive dual margin, and a twin exists: ok
+T2  thirteen random states on T^4 that are determined (Proposition E20e (a))
+    seed 1: real components of the curve 2; functions on the curve 36; rank of the 26 conditions 26; candidates 10; IDENTIFIED: a candidate with minimum 0.0030 on the curve at distance > 0.15 from the states; certificate with A = 1e+05: smallest Hessian eigenvalue at the states 0.2455, smallest local minimum away from the states 0.0027
+  36 functions, 26 independent conditions, 10 candidates: ok
+  a candidate positive on the curve, and a certificate that is non-negative on the torus with non-degenerate zeros at the thirteen states and no other zero found: ok
+PASS
+===== nonlinear_data_checks.py (exit 0, 49 s) =====
+Q1 ratio data are linear (Proposition E23): ok
+    ratio data: 60 instances; the optimal ensembles of the linear programme satisfy the ratio constraint; 40 instances with tolerance compared with 40 000 sampled ensembles each: no sampled feasible ensemble outside the LP range (largest excess +0.0e+00)
+Q2 the norm of a mean vector (Theorem E25): ok
+    least norm: 40 clouds in dimension 2 and 3; certificate z*.Phi - r^2 >= 0 on every cloud; features affinely independent on its zero set in 40 (then the ensemble of least norm is unique)
+    stability at the least norm (tau = 1e-3, 1e-2): largest (mass off the zero set)/(r tau/gamma) = 1.000; largest |mean - z*|/sqrt(2 r tau + tau^2) = 1.000 (with a face of positive dimension: 1.000 — the square root is attained)
+    largest norm: largest (mass off the farthest configuration)/(tau/gamma') over the clouds = 0.966
+    in between: corners of a square, |E Phi| = 1: the ensembles (1/2, 1/2, 0, 0) and (1/2, 0, 1/2, 0) both have it: True
+Q3 squared means and subset sums (Theorem E26): ok
+    squared means: 60 random instances (3 to 8 integers): consistency of the data, decided by up to 2^(m-1) linear feasibility problems, agrees with the subset-sum table in 60/60 (24 consistent); four fixed instances: True
+    squared means with small numbers: 40 random families of 3 to 7 three-element subsets of a six-element set: consistency of the data agrees with the existence of an exact cover in 40/40 (20 with a cover)
+Q4 a reverse-convex constraint as a union over directions (Proposition E24): ok
+    lower bound on the norm of a mean vector in the plane, 12 feasible instances: the net of 24 or 96 directions with the certified enlargement never falls below the fine search (1 440 directions); largest overestimate with 96 directions: 0.139
+Q5 data known up to a factor (Proposition E23(b)): ok
+    data known up to a factor: 388 random instances with integer observables (12 with zero data set aside): the direct test (is another ensemble compatible?) and the criterion of E23(b) agree in 388/388 (62 determined up to the factor); the three-point example of the text: True
+PASS
+===== misspecification_checks.py (exit 0, 14 s) =====
+M1  several unknown gains and offsets (Proposition E23.1)
+    300 random instances (1 to 3 groups of 2 to 4 integer observables, an unknown gain in every group and an unknown common offset in some): the criterion and the direct search agree in 300/300 (176 determined up to the gains and offsets)
+  criterion of E23.1 against the direct search: ok
+    example (four configurations, four data): determined with one common gain: True; with a separate gain for each pair of data: False
+  the example: one gain keeps identification, two gains lose it: ok
+M2  convex data and two time scales (Proposition E27)
+    1096 random cases (g = square, exp, cube of the modulus; random partitions): largest violation of convexity 2.0e-15, of g(E phi) <= D 6.7e-16, of D <= E g(phi) 0.0e+00, of monotonicity under refinement 0.0e+00
+  D_B is convex, bracketed by the two limits, and increases under refinement: ok
+    g = square: the ensemble that generated the datum (with a random, 'unknown' partition) lies in the convex outer bound, and its target value in the interval computed from it, in 200/200 cases
+  the outer bound contains the truth whatever the partition: ok
+    variance: largest violation of concavity in 1000 random cases 0.0e+00
+  the variance is concave in the ensemble: ok
+M3  a library that misses configurations (Proposition E28)
+    150 random instances: the library is falsified (no ensemble on it fits) in 49; the certified bound with the exact support function equals the least missing mass (largest difference 1.4e-15); with box bounds on the observables it is a valid lower bound in 150/150 (positive in 49; largest loss 0.252)
+  lower bounds on the missing mass: tight with the support function, valid with box bounds: ok
+M4  the number of conformers (Proposition E29)
+    120 random instances (integer observables): supp(mu) in X_G and K_min <= |supp mu| <= K_max = |X_G|, K_min <= dim G + 1, in 120/120; the data bound the number of conformers from above (|X_G| < |X|) in 50
+  K_min <= |supp| <= K_max = |X_G| and the Caratheodory bound: ok
+    pair data on the cube with five sites: rank of the correlation matrix <= K_min <= number of conformers in 40/40 (rank = K_min in 39); the noisy version (eigenvalues above the norm of the perturbation) never exceeds K_min
+  the rank bound and its noisy version: ok
+    exact cover by 3-sets: 40 random families: 'an ensemble with at most q conformers has the data' agrees with the existence of an exact cover in 40/40 (25 with a cover)
+  the reduction from exact cover: ok
+PASS
+===== robustness_checks.py (exit 0, 51 s) =====
+R1  one gain and one offset with tolerances (Proposition E23.1(d))
+    60 random instances (gain in [1/3, 4], free offset, tolerance 0.02): the scan over 221 values of the gain never leaves the interval of the single linear programme (largest excess 5.0e-16) and comes within 0.0048 of its ends; the truth is inside in every case
+  one linear programme in (nu, 1/gain, offset/gain) gives the interval: ok
+R2  error sets that are not boxes (Proposition E17.2)
+    low-rank-plus-box error sets, 80 random instances: the dual bound with the certificate orthogonal to the systematic directions equals the primal value (largest difference 6.6e-15)
+  systematic directions: the certificate must be orthogonal to them, and then the bound is tight: ok
+    ellipsoidal error sets, 25 random instances: the primal value never exceeds the dual bound (largest excess 2.0e-11) and the two agree within 1.0e-04
+  ellipsoids: the tolerance term is rho times the dual norm: ok
+R3  refining the pool (Proposition E30)
+    40 random instances on a circle (720 points; pools of 60, 36 or 24 points): pool interval at tau within the full interval within the pool interval at tau + L h widened by L_psi h, largest violation 0.0e+00; the outer interval is 34.2 times as wide as the exact one (median)
+  the two pool intervals bracket the exact one: ok
+R4  the identifiability radius (Proposition E31)
+    30 random instances (5 to 8 configurations, exact data): the largest width over all subsets equals the largest total-variation distance between two vertices of the compatible polytope (largest difference 1.6e-15); max_x w_x <= R_TV <= min(1, (1/2) sum_x w_x) in 30/30; the upper bound is 1.00 times R_TV (median), at most 1.42
+  R_TV is the largest width of a population interval; the cheap bounds hold: ok
+    the partition instances: 'two compatible ensembles with disjoint supports exist (R_TV = 1)' agrees with the subset-sum table in 40/40 (10 with a split)
+  deciding R_TV = 1 encodes the partition problem: ok
+R5  quantitative Renyi-Heppes (Proposition E4.1)
+    40 random instances on the 5 x 5 grid (3 to 6 directions of lines, 1 to m - 1 conformers, every law within 0.01 in total variation): the largest mass off the conformers never exceeds m eps/(m - K) (largest excess 3.4e-16) and reaches 1.000 of it
+  the mass off the conformers is at most m eps / (m - K (r - 1)): ok
+PASS
+===== bilinear_checks.py (exit 0, 132 s) =====
+U1  planted instances (n = 12, m = 8, p = 2, two conformers, box [1/2,3/2] x [0,1])
+    seed 1: radius 4.759e-03; cells 103 (in the neighbourhood 4, excluded 99, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 2: radius 2.396e-03; cells 69 (in the neighbourhood 4, excluded 65, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 3: the local criterion fails
+    seed 4: radius 3.243e-04; cells 203 (in the neighbourhood 5, excluded 198, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 5: radius 1.176e-02; cells 67 (in the neighbourhood 4, excluded 63, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 6: the local criterion fails
+    seed 7: radius 4.291e-03; cells 69 (in the neighbourhood 4, excluded 65, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+U2  a twin
+    data of (mu, a_0) and of (nu_2, a_2) equal exactly: True; total variation between the ensembles 1; a_0 = (1, 1/2), a_2 = (5/4, 1/4)
+    subdivision to depth 9: 69 cells excluded, 40 not; cells not excluded contain a_0: True, a_2: True; hull of the cells not excluded: [0.969, 1.312] x [0.188, 1.000]
+U3  outer bounds for the weight of configuration 0 on the twin instance
+    range over the slices of a 241 x 241 grid of parameters (an inner estimate): [0.0000, 0.3333]
+    cells of depth 0: certified outer bound [0.0000, 0.5556]
+    cells of depth 3: certified outer bound [0.0000, 0.3715]
+    cells of depth 6: certified outer bound [0.0000, 0.3349]
+    cells of depth 9: certified outer bound [0.0000, 0.3333]
+U4  Gaussian forward models: frequency of the local criterion and Wendel's formula
+    n = 12, m =  7, p = 1, K = 2: frequency 0.5100, formula 0.5000 (within four standard errors)
+    n = 12, m =  8, p = 2, K = 2: frequency 0.4860, formula 0.5000 (within four standard errors)
+    n = 12, m = 10, p = 2, K = 2: frequency 0.9070, formula 0.9102 (within four standard errors)
+    n = 12, m =  9, p = 3, K = 2: frequency 0.5140, formula 0.5000 (within four standard errors)
+    n = 16, m = 11, p = 2, K = 3: frequency 0.6025, formula 0.6128 (within four standard errors)
+    n = 12, m =  6, p = 2, K = 2: frequency 0.0975, formula 0.0898 (within four standard errors)
+SUMMARY  U1 unique compatible pair certified on 5 instances; U2 twin: True; U3 outer bounds nested and containing the inner estimate: True; U4 Gaussian count: True
+PASS
+===== benchmark_controls.py (exit 0, 1 s) =====
+benchmark controls: 25 instances, 38 verifications, 0 failure(s)
+written: experiments/ensemble/benchmarks/controls_v1.json
+PASS
+===== check_quotes.py (exit 0) =====
+quoted numbers: 152 entries, 0 failure(s)
+PASS
+ALL PASS

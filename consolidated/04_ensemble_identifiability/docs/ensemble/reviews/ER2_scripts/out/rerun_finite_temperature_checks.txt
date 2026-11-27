@@ -1,0 +1,22 @@
+F1 one-body data, cube (Theorem E15): ok
+    n = 3, b = 0.5: max over the class of TV(mu, P_a) - sum_i tau_i = +6.66e-16 (exact, 256 LPs)
+    n = 3, b = 1.0: max over the class of TV(mu, P_a) - sum_i tau_i = +4.44e-16 (exact, 256 LPs)
+    n = 3, b = 2.0: max over the class of TV(mu, P_a) - sum_i tau_i = +1.33e-15 (exact, 256 LPs)
+    n = 4..6: 360 (member, centre) pairs: max of TV - sum_i tau_i = -1.02e-01; largest ratio TV/sum tau = 0.8572
+F2 general alphabets (Theorem E15): ok
+    three-letter heterogeneous sites: 96 cases, max of TV - sum_i (1 - mu_i(a_i)/mu*_i(a_i)) = -1.60e-02
+F3 members identified by one-body data: ok
+    n = 3, b = 1: identified by one-body data inside the class <=> at most one unsaturated marginal: 60/60
+F4 the double cone (Theorem E16): ok
+    n = 4, b = 1.0: max E[M^2] over the class = 7.605870; double cone: 7.605870; largest spread of a weight on the optimal face = 1.94e-16
+    n = 6, b = 0.7: max E[M^2] over the class = 11.060055; double cone: 11.060055; largest spread of a weight on the optimal face = 9.26e-16
+    n = 5, b = 1.0: max E[M^2] over the class = 10.233839; double cone: 10.233839; largest spread of a weight on the optimal face = 1.10e-01
+        odd n: end points D_(+-theta), theta = tanh(b/2), are members and optimal; predicted spread at the all-plus state 0.110218
+F5 modulus duality (Theorem E17): ok
+    modulus duality (200 instances x 4 tolerances): largest gap 4.88e-15
+F6 an interacting reference (Theorem E15T): ok
+    three sites, chains and triangles, every bond satisfied (6 cases, exact): max of TV - sum of deficits = +2.84e-14; max of mu(x_j = a_j) - mu*(x_j = a_j) = +1.67e-16
+    complete graphs on 4..7 sites, every bond satisfied (12 references, 1200 members): max of TV - sum of deficits = +2.28e-15; max of mu(x_j = a_j) - mu*(x_j = a_j) = +4.44e-16
+    chains of three sites with one bond violated by the centre (5 cases, exact): max of TV - sum of deficits = +0.965, +0.522, +0.024, +0.062, +0.294
+PASS
+exit 0

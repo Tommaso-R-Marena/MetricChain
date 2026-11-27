@@ -1,0 +1,18 @@
+# V homopeptide on backbone E, chain model with window W = 2; energies in k_BT at 300 K
+   built V10 on E: 172 atoms, states per site [3], window W=2; 184 GB evaluations for the model tables; 1 s
+   check of the transfer matrix at n = 10: ln Z(m) = 325.159669 against enumeration 325.159669 (59049 states)
+   V10_E (validation): ln Z(m) = 325.1597;  remainder over 4000 samples of pi_m: mean +36.23804, sd 0.00271, min +36.2309, max +36.2583 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 288.9216 +- 0.00004 (standard error);  exponential-average estimate of K = 3.66e-06;  Bennett W at the sampled floor b = 0.007 and variance: 3.68e-06
+      EXACT (enumeration): ln Z(g) = 288.9216;  E r = +36.23804, sd 0.00274, floor b = 0.030, K = 3.73e-06, Bennett W = 3.78e-06;  first-order error = K;  sampled first-order - exact = -0.00001
+   built V30 on E: 492 atoms, states per site [3], window W=2; 604 GB evaluations for the model tables; 8 s
+   V30_E: ln Z(m) = 1018.5852;  remainder over 4000 samples of pi_m: mean +275.41879, sd 0.00529, min +275.4023, max +275.4526 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 743.1665 +- 0.00008 (standard error);  exponential-average estimate of K = 1.39e-05;  Bennett W at the sampled floor b = 0.016 and variance: 1.41e-05
+      (number of rotamer assignments: about 10^14.3)
+   built V50 on E: 812 atoms, states per site [3], window W=2; 1024 GB evaluations for the model tables; 32 s
+   V50_E: ln Z(m) = 1799.8294;  remainder over 4000 samples of pi_m: mean +602.42081, sd 0.00652, min +602.4044, max +602.4732 (k_BT)
+      first-order estimate ln Z(g) ~ ln Z(m) - mean r = 1197.4086 +- 0.00010 (standard error);  exponential-average estimate of K = 2.12e-05;  Bennett W at the sampled floor b = 0.016 and variance: 2.14e-05
+      (number of rotamer assignments: about 10^23.9)
+
+real	3m42.537s
+user	1m33.977s
+sys	0m14.761s

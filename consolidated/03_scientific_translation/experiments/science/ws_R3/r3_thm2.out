@@ -1,0 +1,55 @@
+=== Theorem 2(d): S(mu_g) >= n h(sigma(b)) on random class members
+  3200 members, n in (3,5,8,10): min of S - n h(sigma(b)) = -2.665e-15 (>= 0 required)
+  adversarial descent, n=4, b=1.5, 200 starts: min of S - n h(sigma) = -4.441e-16
+=== dual of BCH(15, t=2)  [15,8,4], dual distance 5: n=15, |C|=2^8, claimed order k=4
+  coset table: 128 cosets x 256 words, 0.0s; covering radius = 4
+  b=0.5: sum nu = 1.000000000000000; S(nu) = 10.397200 in [9.942710, 15.487887] -> True;  S - n h = 0.4545 of ln|C| = 5.5452;  n ln2 - S = 0.0000;  variant S = 10.325611 (in range: True)
+    [nu_{C,b}] spot check vs direct summation at 300 random x: max rel err 2.23e-16
+    [nu_{C,b}] max single-flip ratio = 1.016725071104 vs e^b = 1.648721270700 (in class: True);
+    [nu_{C,b}] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 8.8e-04 2.2e-04 5.3e-05  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 8.813e-04)
+    [exp(-b d(x,C))] max single-flip ratio = 1.648721270700 vs e^b = 1.648721270700 (in class: True);
+    [exp(-b d(x,C))] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 6.4e-02 4.6e-02 7.3e-03  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 8.813e-04)
+  b=1.0: sum nu = 1.000000000000000; S(nu) = 10.392153 in [8.733047, 14.278224] -> True;  S - n h = 1.6591 of ln|C| = 5.5452;  n ln2 - S = 0.0051;  variant S = 10.096161 (in range: True)
+    [nu_{C,b}] spot check vs direct summation at 300 random x: max rel err 3.77e-16
+    [nu_{C,b}] max single-flip ratio = 1.532880689821 vs e^b = 2.718281828459 (in class: True);
+    [nu_{C,b}] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 2.1e-02 9.7e-03 4.5e-03  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 2.107e-02)
+    [exp(-b d(x,C))] max single-flip ratio = 2.718281828459 vs e^b = 2.718281828459 (in class: True);
+    [exp(-b d(x,C))] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 1.5e-01 1.1e-01 4.9e-02  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 2.107e-02)
+  b=2.0: sum nu = 1.000000000000000; S(nu) = 9.852406 in [5.480008, 11.025185] -> True;  S - n h = 4.3724 of ln|C| = 5.5452;  n ln2 - S = 0.5448;  variant S = 9.154673 (in range: True)
+    [nu_{C,b}] spot check vs direct summation at 300 random x: max rel err 9.46e-16
+    [nu_{C,b}] max single-flip ratio = 6.811073427194 vs e^b = 7.389056098931 (in class: True);
+    [nu_{C,b}] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 2.6e-01 2.0e-01 1.5e-01  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 2.562e-01)
+    [exp(-b d(x,C))] max single-flip ratio = 7.389056098931 vs e^b = 7.389056098931 (in class: True);
+    [exp(-b d(x,C))] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 3.9e-01 3.3e-01 2.5e-01  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 2.562e-01)
+  b=4.0: sum nu = 1.000000000000000; S(nu) = 6.873132 in [1.351422, 6.896599] -> True;  S - n h = 5.5217 of ln|C| = 5.5452;  n ln2 - S = 3.5241;  variant S = 6.779428 (in range: True)
+    [nu_{C,b}] spot check vs direct summation at 300 random x: max rel err 8.46e-16
+    [nu_{C,b}] max single-flip ratio = 54.524765178903 vs e^b = 54.598150033144 (in class: True);
+    [nu_{C,b}] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 8.3e-01 8.0e-01 7.7e-01  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 8.326e-01)
+    [exp(-b d(x,C))] max single-flip ratio = 54.598150033144 vs e^b = 54.598150033144 (in class: True);
+    [exp(-b d(x,C))] max |E chi_T| by order |T|=1..7: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 8.4e-01 8.1e-01 7.9e-01  -> first visible order = 5 (expected k+1 = 5; tau^(k+1) = 8.326e-01)
+  (e) path b' in [0,4.0]: S from 10.3972 (n ln 2 = 10.3972) down to 6.8731; monotone decreasing: True
+=== extended Golay [24,12,8], dual distance 8: n=24, |C|=2^12, claimed order k=7
+  coset table: 4096 cosets x 4096 words, 1.3s; covering radius = 4
+  b=1.0: sum nu = 1.000000000000000; S(nu) = 16.634140 in [13.972875, 22.290641] -> True;  S - n h = 2.6613 of ln|C| = 8.3178;  n ln2 - S = 0.0014;  variant S = 16.371103 (in range: True)
+    [nu_{C,b}] spot check vs direct summation at 300 random x: max rel err 2.91e-16
+    [nu_{C,b}] max single-flip ratio = 1.853111557998 vs e^b = 2.718281828459 (in class: True);
+    [nu_{C,b}] max |E chi_T| by order |T|=1..10: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 2.1e-03 0.0e+00 0.0e+00  -> first visible order = 8 (expected k+1 = 8; tau^(k+1) = 2.080e-03)
+    [exp(-b d(x,C))] max single-flip ratio = 2.718281828459 vs e^b = 2.718281828459 (in class: True);
+    [exp(-b d(x,C))] max |E chi_T| by order |T|=1..10: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 3.3e-02 0.0e+00 0.0e+00  -> first visible order = 8 (expected k+1 = 8; tau^(k+1) = 2.080e-03)
+  b=2.0: sum nu = 1.000000000000000; S(nu) = 15.834657 in [8.768013, 17.085779] -> True;  S - n h = 7.0666 of ln|C| = 8.3178;  n ln2 - S = 0.8009;  variant S = 15.148439 (in range: True)
+    [nu_{C,b}] spot check vs direct summation at 300 random x: max rel err 6.37e-16
+    [nu_{C,b}] max single-flip ratio = 7.377779236346 vs e^b = 7.389056098931 (in class: True);
+    [nu_{C,b}] max |E chi_T| by order |T|=1..10: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 1.1e-01 0.0e+00 0.0e+00  -> first visible order = 8 (expected k+1 = 8; tau^(k+1) = 1.132e-01)
+    [exp(-b d(x,C))] max single-flip ratio = 7.389056098931 vs e^b = 7.389056098931 (in class: True);
+    [exp(-b d(x,C))] max |E chi_T| by order |T|=1..10: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 1.6e-01 0.0e+00 0.0e+00  -> first visible order = 8 (expected k+1 = 8; tau^(k+1) = 1.132e-01)
+  b=4.0: sum nu = 1.000000000000000; S(nu) = 10.478103 in [2.162274, 10.480041] -> True;  S - n h = 8.3158 of ln|C| = 8.3178;  n ln2 - S = 6.1574;  variant S = 10.469015 (in range: True)
+    [nu_{C,b}] spot check vs direct summation at 300 random x: max rel err 1.06e-15
+    [nu_{C,b}] max single-flip ratio = 54.598149511847 vs e^b = 54.598150033144 (in class: True);
+    [nu_{C,b}] max |E chi_T| by order |T|=1..10: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 7.5e-01 0.0e+00 0.0e+00  -> first visible order = 8 (expected k+1 = 8; tau^(k+1) = 7.460e-01)
+    [exp(-b d(x,C))] max single-flip ratio = 54.598150033144 vs e^b = 54.598150033144 (in class: True);
+    [exp(-b d(x,C))] max |E chi_T| by order |T|=1..10: 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 0.0e+00 7.5e-01 0.0e+00 0.0e+00  -> first visible order = 8 (expected k+1 = 8; tau^(k+1) = 7.460e-01)
+  (e) path b' in [0,4.0]: S from 16.6355 (n ln 2 = 16.6355) down to 10.4781; monotone decreasing: True
+
+real	4m22.787s
+user	0m47.307s
+sys	0m25.572s

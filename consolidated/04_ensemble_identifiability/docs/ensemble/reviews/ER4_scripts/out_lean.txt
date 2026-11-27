@@ -1,0 +1,107 @@
+ER4 Lean scratch check (file kept outside the repository: /tmp/er4_lean/ER4Check.lean)
+command: lake env lean /tmp/er4_lean/ER4Check.lean   (exit status below)
+===== source =====
+import proofs.Ensemble.Exposedness
+
+/-! ER4 scratch file (kept outside the repository).  What `eq_of_homogeneous_certificate` states. -/
+
+open MetricChain.Ensemble
+
+#check @MetricChain.Ensemble.eq_of_homogeneous_certificate
+#print axioms MetricChain.Ensemble.eq_of_homogeneous_certificate
+
+/-- An instance of my own: four configurations, three observables
+`φ₀ = (1,0,1,2)`, `φ₁ = (0,1,1,1)`, `φ₂ = (0,0,1,3)`, support `{0,1}`, certificate `λ = (0,0,1)`.
+Every ensemble whose data are `t` times those of `μ = (1/3, 2/3, 0, 0)`, for ANY real `t`
+(no positivity of `t` is assumed), equals `μ`. -/
+theorem er4_instance (ν : Fin 4 → ℝ) (hν : IsEnsemble ν) (t : ℝ)
+    (h0 : mean ν (fun x : Fin 4 => if x = 0 then (1:ℝ) else if x = 1 then 0 else if x = 2 then 1 else 2) = t * (1/3))
+    (h1 : mean ν (fun x : Fin 4 => if x = 0 then (0:ℝ) else if x = 1 then 1 else if x = 2 then 1 else 1) = t * (2/3))
+    (h2 : mean ν (fun x : Fin 4 => if x = 0 then (0:ℝ) else if x = 1 then 0 else if x = 2 then 1 else 3) = 0) :
+    ν = fun x => if x = 0 then (1/3 : ℝ) else if x = 1 then 2/3 else 0 := by
+  have hμ : IsEnsemble (fun x : Fin 4 => if x = 0 then (1/3 : ℝ) else if x = 1 then 2/3 else 0) := by
+    constructor
+    · intro x
+      fin_cases x <;> simp <;> norm_num
+    · simp [Fin.sum_univ_four]
+      norm_num
+  refine eq_of_homogeneous_certificate (ι := Fin 3)
+    (fun i x => if i = 0 then (if x = 0 then (1:ℝ) else if x = 1 then 0 else if x = 2 then 1 else 2)
+      else if i = 1 then (if x = 0 then (0:ℝ) else if x = 1 then 1 else if x = 2 then 1 else 1)
+      else (if x = 0 then (0:ℝ) else if x = 1 then 0 else if x = 2 then 1 else 3))
+    (fun x : Fin 4 => if x = 0 then (1/3 : ℝ) else if x = 1 then 2/3 else 0) ν hμ hν {0, 1} ?_
+    (fun i => if i = 2 then (1:ℝ) else 0) ?_ ?_ ?_ t ?_
+  · intro x hx
+    fin_cases x <;> simp_all
+  · intro x hx
+    fin_cases x <;> simp_all [energy, Fin.sum_univ_three]
+  · intro x hx
+    fin_cases x <;> simp_all [energy, Fin.sum_univ_three]
+  · intro h hoff hdat x
+    have e2 : h 2 = 0 := hoff 2 (by decide)
+    have e3 : h 3 = 0 := hoff 3 (by decide)
+    have d0 := hdat 0
+    have d1 := hdat 1
+    simp [Fin.sum_univ_four, e2, e3] at d0 d1
+    fin_cases x <;> simp_all
+  · intro i
+    fin_cases i
+    · simp only [mean] at h0 ⊢
+      simp [Fin.sum_univ_four] at h0 ⊢
+      linarith
+    · simp only [mean] at h1 ⊢
+      simp [Fin.sum_univ_four] at h1 ⊢
+      linarith
+    · simp only [mean] at h2 ⊢
+      simp [Fin.sum_univ_four] at h2 ⊢
+      linarith
+
+/-- The factor is forced: under the hypotheses of the theorem, if some datum of `μ` is non-zero then `t = 1`.
+(So "any real multiple" in the report's sentence is accurate, and for `t ≠ 1` the hypothesis `hdata` is
+unsatisfiable when the data of `μ` are not all zero.) -/
+theorem er4_factor_forced {X : Type*} [Fintype X] {ι : Type*} [Fintype ι]
+    (Φ : ι → X → ℝ) (μ ν : X → ℝ) (hμ : IsEnsemble μ) (hν : IsEnsemble ν)
+    (S : Finset X) (hsupp : ∀ x, x ∉ S → μ x = 0)
+    (lam : ι → ℝ)
+    (hzero : ∀ x ∈ S, energy lam Φ x = 0)
+    (hpos : ∀ x, x ∉ S → 0 < energy lam Φ x)
+    (hindep : ∀ h : X → ℝ, (∀ x, x ∉ S → h x = 0) →
+        (∀ i, ∑ x, h x * Φ i x = 0) → ∀ x, h x = 0)
+    (t : ℝ) (hdata : ∀ i, mean ν (Φ i) = t * mean μ (Φ i))
+    (i₀ : ι) (hne : mean μ (Φ i₀) ≠ 0) : t = 1 := by
+  have hνμ : ν = μ := eq_of_homogeneous_certificate Φ μ ν hμ hν S hsupp lam hzero hpos hindep t hdata
+  have h := hdata i₀
+  rw [hνμ] at h
+  have : (1 - t) * mean μ (Φ i₀) = 0 := by linarith
+  rcases mul_eq_zero.mp this with h1 | h1
+  · linarith
+  · exact absurd h1 hne
+
+#print axioms er4_instance
+#print axioms er4_factor_forced
+===== output =====
+@eq_of_homogeneous_certificate : ∀ {X : Type u_1} [inst : Fintype X] {ι : Type u_2} [inst_1 : Fintype ι] (Φ : ι → X → ℝ)
+  (μ ν : X → ℝ),
+  IsEnsemble μ →
+    IsEnsemble ν →
+      ∀ (S : Finset X),
+        (∀ x ∉ S, μ x = 0) →
+          ∀ (lam : ι → ℝ),
+            (∀ x ∈ S, energy lam Φ x = 0) →
+              (∀ x ∉ S, 0 < energy lam Φ x) →
+                (∀ (h : X → ℝ), (∀ x ∉ S, h x = 0) → (∀ (i : ι), ∑ x, h x * Φ i x = 0) → ∀ (x : X), h x = 0) →
+                  ∀ (t : ℝ), (∀ (i : ι), mean ν (Φ i) = t * mean μ (Φ i)) → ν = μ
+'MetricChain.Ensemble.eq_of_homogeneous_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+/tmp/er4_lean/ER4Check.lean:34:38: warning: This simp argument is unused:
+  Fin.sum_univ_three
+
+Hint: Omit it from the simp argument list.
+  simp_all [energy,̵ ̵F̵i̵n̵.̵s̵u̵m̵_̵u̵n̵i̵v̵_̵t̵h̵r̵e̵e̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/tmp/er4_lean/ER4Check.lean:22:27: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+'er4_instance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'er4_factor_forced' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit status: 0

@@ -1,0 +1,45 @@
+R28 ff_window.py  start 2026-11-27T00:14:57Z
+control: 184 points shared between the 1-deg windows and the 2.5-deg grid; largest energy difference 0.00e+00 kT -> ok
+
+W1 [total] 1-deg windows: mt-well minimum at (287.0, 157.0) deg; tp-well minimum at (191.0, 81.0) deg; E(tp min) - E(mt min) = +0.5488 kT   (2.5-deg grid: +0.5621)
+   lowering of the minima by the finer grid: mt 0.0022 kT, tp 0.0155 kT
+   strains of the ideal rotamers above the 1-deg well minima: (300,180): 5.9101 kT; (180,60): 3.8024 kT; rigid two-state gap E(300,180) - E(180,60) = +1.5589 kT
+W2 [total] E(180+d1, 60+d2) - E(300+d1, 180+d2) [kT]; negative = the table prefers (180,60).  rows d1 = -5..5, columns d2 = -5..5
+   d1 = -5:   +1.40   +0.12   -1.13   -2.35   -3.55   -4.73   -5.89   -7.02   -8.12   -9.19  -10.22
+   d1 = -4:   +1.64   +0.44   -0.73   -1.87   -3.00   -4.12   -5.21   -6.28   -7.32   -8.34   -9.31
+   d1 = -3:   +1.95   +0.83   -0.27   -1.36   -2.43   -3.49   -4.53   -5.55   -6.54   -7.51   -8.44
+   d1 = -2:   +2.33   +1.26   +0.22   -0.82   -1.84   -2.85   -3.85   -4.83   -5.79   -6.72   -7.62
+   d1 = -1:   +2.76   +1.75   +0.75   -0.24   -1.23   -2.21   -3.17   -4.12   -5.05   -5.95   -6.83
+   d1 = +0:   +3.25   +2.28   +1.31   +0.35   -0.61   -1.56   -2.50   -3.43   -4.34   -5.22   -6.08
+   d1 = +1:   +3.80   +2.85   +1.91   +0.97   +0.03   -0.91   -1.83   -2.75   -3.64   -4.52   -5.38
+   d1 = +2:   +4.39   +3.47   +2.54   +1.61   +0.68   -0.25   -1.17   -2.08   -2.98   -3.85   -4.71
+   d1 = +3:   +5.04   +4.12   +3.20   +2.27   +1.34   +0.41   -0.52   -1.43   -2.33   -3.22   -4.08
+   d1 = +4:   +5.73   +4.81   +3.88   +2.95   +2.01   +1.07   +0.13   -0.80   -1.71   -2.61   -3.49
+   d1 = +5:   +6.46   +5.54   +4.60   +3.65   +2.69   +1.73   +0.77   -0.18   -1.12   -2.04   -2.95
+   negative (table prefers the tp state) at 75 of 121 offsets
+W3 [total] slope of the energy at the ideal rotamer (300,180): dE/dchi1 = -0.358, dE/dchi2 = +0.509 kT per degree
+W3 [total] slope of the energy at the ideal rotamer (180,60): dE/dchi1 = +0.293, dE/dchi2 = -0.438 kT per degree
+W3 [total] curvature at the mt minimum (287.0, 157.0): Hessian eigenvalues 0.0144, 0.0243 kT/deg^2 -> thermal widths (std) 6.4 and 8.3 deg
+W3 [total] curvature at the tp minimum (191.0, 81.0): Hessian eigenvalues 0.0108, 0.0303 kT/deg^2 -> thermal widths (std) 5.7 and 9.6 deg
+
+W1 [vac] 1-deg windows: mt-well minimum at (287.0, 157.0) deg; tp-well minimum at (190.0, 81.0) deg; E(tp min) - E(mt min) = -0.0587 kT   (2.5-deg grid: -0.0554)
+   lowering of the minima by the finer grid: mt 0.0023 kT, tp 0.0056 kT
+   strains of the ideal rotamers above the 1-deg well minima: (300,180): 5.8335 kT; (180,60): 3.4149 kT; rigid two-state gap E(300,180) - E(180,60) = +2.4773 kT
+W2 [vac] E(180+d1, 60+d2) - E(300+d1, 180+d2) [kT]; negative = the table prefers (180,60).  rows d1 = -5..5, columns d2 = -5..5
+   d1 = -5:   +0.22   -1.05   -2.28   -3.48   -4.66   -5.82   -6.95   -8.06   -9.14  -10.19  -11.20
+   d1 = -4:   +0.49   -0.69   -1.84   -2.97   -4.08   -5.17   -6.24   -7.29   -8.31   -9.30  -10.26
+   d1 = -3:   +0.83   -0.27   -1.36   -2.42   -3.47   -4.51   -5.53   -6.53   -7.50   -8.45   -9.36
+   d1 = -2:   +1.24   +0.20   -0.83   -1.84   -2.85   -3.84   -4.81   -5.77   -6.71   -7.62   -8.50
+   d1 = -1:   +1.70   +0.71   -0.27   -1.24   -2.20   -3.16   -4.10   -5.03   -5.94   -6.83   -7.69
+   d1 = +0:   +2.23   +1.28   +0.33   -0.61   -1.55   -2.48   -3.40   -4.31   -5.20   -6.07   -6.91
+   d1 = +1:   +2.81   +1.89   +0.97   +0.04   -0.88   -1.79   -2.70   -3.59   -4.47   -5.33   -6.17
+   d1 = +2:   +3.44   +2.54   +1.63   +0.72   -0.19   -1.10   -2.00   -2.90   -3.77   -4.63   -5.48
+   d1 = +3:   +4.12   +3.22   +2.32   +1.41   +0.50   -0.41   -1.31   -2.21   -3.10   -3.97   -4.82
+   d1 = +4:   +4.84   +3.95   +3.04   +2.13   +1.21   +0.28   -0.63   -1.55   -2.45   -3.33   -4.20
+   d1 = +5:   +5.62   +4.71   +3.79   +2.86   +1.92   +0.98   +0.04   -0.90   -1.82   -2.73   -3.62
+   negative (table prefers the tp state) at 85 of 121 offsets
+W3 [vac] slope of the energy at the ideal rotamer (300,180): dE/dchi1 = -0.368, dE/dchi2 = +0.507 kT per degree
+W3 [vac] slope of the energy at the ideal rotamer (180,60): dE/dchi1 = +0.317, dE/dchi2 = -0.419 kT per degree
+W3 [vac] curvature at the mt minimum (287.0, 157.0): Hessian eigenvalues 0.0139, 0.0242 kT/deg^2 -> thermal widths (std) 6.4 and 8.5 deg
+W3 [vac] curvature at the tp minimum (190.0, 81.0): Hessian eigenvalues 0.0099, 0.0303 kT/deg^2 -> thermal widths (std) 5.7 and 10.0 deg
+END 2026-11-27T00:14:57Z  wall 0.2 s  peak memory 59 MB (ru_maxrss; address space capped at 3 GB)

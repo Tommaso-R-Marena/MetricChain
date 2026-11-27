@@ -1,0 +1,2 @@
+[B] Lemma 0: 14473 (network, Y) pairs on 1500 networks; T(N|_Y) != {T|_Y}: 0 ; unions with several sources: 0 ; switchings of the union not spanning Y: 0
+    networks by (mode, hybrids): {('any', 1): 179, ('any', 2): 198, ('any', 3): 181, ('any', 4): 173, ('galled-planar', 1): 85, ('galled-planar', 2): 104, ('galled-planar', 3): 110, ('galled-planar', 4): 86, ('planar', 1): 95, ('planar', 2): 98, ('planar', 3): 95, ('planar', 4): 96}

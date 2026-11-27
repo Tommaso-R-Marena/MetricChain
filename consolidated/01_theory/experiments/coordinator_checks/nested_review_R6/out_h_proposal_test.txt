@@ -1,0 +1,16 @@
+proposal applied to a copy: 4 replacements, diff of 48 lines
+  patched harness --only XVI.3 --quick: exit 0; [                survived] XVI.3 Alg ... (0.6s) runs=11, widest=0.9151, tightest_count=0.4629, populated=460, unpopulated=20, skipped=0, harper_active=64, harper_decisive=3
+  patched harness --only XVI.3: exit 0; [                survived] XVI.3 Alg ... (2.3s) runs=48, widest=0.9437, tightest_count=0.4629, populated=1404, unpopulated=52, skipped=0, harper_active=163, harper_decisive=4
+  patched harness --only XVI.4 --quick: exit 0; [                survived] XVI.4 Sam ... (15.3s) runs=79, samples_above_M_dag=26, largest_over_new_cap=0.9095, largest_over_M_dag=3.689, smallest_old_cap_over_new=20.2
+  [caught] XVI.3 M1: lower end without the layer-cake sum (largest single term only)   reason=the bracket is wider than ln[(2 p_u)^n + e^b (e^lam (1+eta)/(1-eta) + eta' + theta)], width=1.753, bound=1.345, tag=('radial', 24, 2)
+  [caught] XVI.3 M2: tail lemma applied while the ball is the whole cube   reason=the bracket of Algorithm 2L+ does not contain the mean, lower=0.04389, A=1.152, upper=0.01427, tag=('cube', 0)
+  [caught] XVI.3 M3: certified exceedance probability without the Chernoff factor 1/(1 - eta)   reason=a certified upper bound q on an exceedance probability is too small, level=19, p=0.75, q=0.7423, tag=('cube', 1)
+  [caught] XVI.3 M4: negligibility threshold without the tolerance e^b   reason=a negligibility threshold exceeds (1+eta) e^lam nu_0 M_dagger, level=16, tag=('cube', 2)
+  [caught] XVI.3 M5: no Harper term in the running lower bound   reason=a level was left although its closing radius is at most r_dagger, level=15, r=1, rdag=1, tag=('cube', 0)
+  [caught] XVI.3 M6: lower end without the tolerance e^{-b}   reason=the bracket of Algorithm 2L+ does not contain the mean, lower=0.936, A=0.1595, upper=21.54, tag=('cube', 2)
+  [caught] XVI.4 M1: the cap claimed without the shift of the closing radius (2 e^lambda M_dag)   reason=a sample is not smaller than 2 max(e^lambda M_dag, M_ddag), n_o=24, u=0.5, d0=4, frac=0.6, par={'lam': 0.5, 'eta': 0.25, 'etap': 0.5, 'theta': 
+  [caught] XVI.4 M2: every sample claimed to be at most M_dag   reason=a sample is not smaller than 2 max(e^lambda M_dag, M_ddag), n_o=24, u=0.5, d0=0, frac=0.6, par={'lam': 0.5, 'eta': 0.25, 'etap': 0.5, 'theta': 
+  [caught] XVI.4 M3: the tail sums claimed to fall by e^{-2u} per unit of the radius   reason=E_{r-1} <= e^{-u} E_r fails, m=30, u=0.5, r=10
+  [NOT CAUGHT] (for information, not proposed) Harper term with one shell too many (radius k + 1)   
+mutations caught on the patched copy: 9 of 9
+proposal test passed: True

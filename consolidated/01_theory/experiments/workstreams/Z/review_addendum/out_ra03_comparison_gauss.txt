@@ -1,0 +1,51 @@
+# Gaussian pair: a = 1.00000000, h = 0.25000000, L = 0.500000, c_*^2 = 0.61685028
+
+== (a) the fixed-rate sequence ==
+c* = ah/(a-h) = 0.333333 = 0.3333 a;  first j0 with c_j <= c*: 5   (c_j/a for j = 0..8: 1.0000 1.0000 0.5714 0.4324 0.3657 0.3278 0.3050 0.2925 0.2847)
+G_j for j = 0..6: 3.0000 1.7143 1.2973 1.0971 1.0000 1.0000 1.0000
+(S2)  max of V_{j+1} - Sigma(., V_j) on [0, c_{j+1}], all j < 140: 0.000e+00   (must be <= 0)
+values in [0,1]: max of V_{j+1}(c_{j+1}) - 1: 2.220e-16   (must be <= 0)
+the bound of A6: max over i >= 0 of (c_{j0+i+1} - h) - h(1 - h/a)/(i + h/a): -3.212e-05   (must be <= 0)
+comparison (Corollary A4): max of b_j - c_j: 0.000e+00 (must be <= 0);  max of V_j - W_j on [0, b_j], j <= 60: 0.000e+00 (must be <= 0)
+   j     b_j/a      c_j/a     (c_j - h)·j/h    (b_j - h) j^2/c_*^2
+    1   1.00000   1.00000      3.0000          1.2159
+    2   0.50000   0.57143      2.5714          1.6211
+    3   0.35714   0.43243      2.1892          1.5632
+    4   0.30332   0.36571      1.8514          1.3829
+    5   0.28004   0.32778      1.5557          1.2176
+    6   0.26906   0.30498      1.3195          1.1123
+    8   0.25999   0.28465      1.1090          1.0370
+   10   0.25629   0.27530      1.0121          1.0200
+   20   0.25155   0.26077      0.8615          1.0043
+   40   0.25039   0.25501      0.8019          1.0011
+   80   0.25010   0.25242      0.7751          1.0003
+  140   0.25003   0.25136      0.7641          1.0001
+
+== (b) the cut orbit curves (R_REPORT section 6) and Proposition A7 ==
+s_t = L + 0.05, b_0 = h + 0.02:  range condition: max W_{j+1}(b_{j+1}) = 0.8277 (<= 1: True);  first level in case B: 3;  k_1 = 6 (b_{k1} = h + 0.01906)
+   (S2) for the cut curves: max of Wcut_{i+1} - Sigma(., Wcut_i): 2.220e-16 (must be <= 0 up to rounding)
+   comparison: max of b_{k1+i} - bcut_i: -9.451e-05 (must be <= 0);   max of Wcut_i - W_{k1+i} on [0, b_{k1+i}]: 1.665e-16 (must be <= 0)
+     i    bcut_i - h      b_{k1+i} - h     ratio      i^2 (bcut_i - h)/c_*^2    (k1+i)^2 (b_{k1+i} - h)/c_*^2
+     0   2.000000e-02   1.905893e-02   0.9529          0.0000                    1.1123
+     1   2.000000e-02   1.334347e-02   0.6672          0.0324                    1.0599
+     2   2.000000e-02   9.994699e-03   0.4997          0.1297                    1.0370
+     5   2.000000e-02   5.179185e-03   0.2590          0.8106                    1.0159
+    10   8.533390e-03   2.426343e-03   0.2843          1.3834                    1.0070
+    20   2.381869e-03   9.148064e-04   0.3841          1.5445                    1.0025
+    40   5.683401e-04   2.917479e-04   0.5133          1.4742                    1.0008
+    60   2.361715e-04   1.416634e-04   0.5998          1.3783                    1.0004
+s_t = L + 0.05, b_0 = h + 0.005:  range condition: max W_{j+1}(b_{j+1}) = 0.7927 (<= 1: True);  first level in case B: 8;  k_1 = 12 (b_{k1} = h + 0.00434)
+   (S2) for the cut curves: max of Wcut_{i+1} - Sigma(., Wcut_i): 1.665e-16 (must be <= 0 up to rounding)
+   comparison: max of b_{k1+i} - bcut_i: -1.171e-04 (must be <= 0);   max of Wcut_i - W_{k1+i} on [0, b_{k1+i}]: 1.665e-16 (must be <= 0)
+     i    bcut_i - h      b_{k1+i} - h     ratio      i^2 (bcut_i - h)/c_*^2    (k1+i)^2 (b_{k1+i} - h)/c_*^2
+     0   5.000000e-03   4.339632e-03   0.8679          0.0000                    1.0131
+     1   5.000000e-03   3.689870e-03   0.7380          0.0081                    1.0109
+     2   5.000000e-03   3.176410e-03   0.6353          0.0324                    1.0093
+     5   5.000000e-03   2.147489e-03   0.4295          0.2026                    1.0061
+    10   5.000000e-03   1.279030e-03   0.2558          0.8106                    1.0036
+    20   2.381869e-03   6.033885e-04   0.2533          1.5445                    1.0017
+    40   5.683401e-04   2.282660e-04   0.4016          1.4742                    1.0006
+    60   2.361715e-04   1.190293e-04   0.5040          1.3783                    1.0003
+
+== (c) random admissible sequences against the envelope sequence (grids of 3000 points, 12 levels, 40 sequences) ==
+max of (b_j - c_j)/a: 0.000e+00 (must be <= 0 up to the grid);   max of V_j - W_j on [0, b_j]: 0.000e+00 (must be <= 0 up to the grid)

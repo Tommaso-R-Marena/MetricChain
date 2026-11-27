@@ -1,0 +1,18 @@
+p=0.5 u=1.0 e=0.3E R0    g=+0.0: formula 0.014206347  direct max-min (SLSQP-polished) 0.014206347  diff -1.67e-16
+p=0.5 u=1.0 e=0.1E Rg    g=+0.4: formula 0.018698473  direct max-min (SLSQP-polished) 0.018698473  diff -2.19e-16
+p=0.5 u=1.0 e=0.6E Rg    g=+0.4: formula 0.001892088  direct max-min (SLSQP-polished) 0.001892088  diff -7.81e-17
+p=0.1 u=2.0 e=0.0E R0    g=+0.0: formula 0.042692029  direct max-min (SLSQP-polished) 0.042692029  diff -1.67e-16
+p=0.05 u=2.0 e=0.0E Rg    g=-1.0: formula 0.027507562  direct max-min (SLSQP-polished) 0.027507562  diff +3.82e-16
+p=0.05 u=2.0 e=0.1E R0    g=+0.0: formula 0.019025739  direct max-min (SLSQP-polished) 0.019025739  diff +6.11e-16
+p=0.2 u=4.0 e=0.9E R0    g=+0.0: formula 0.000634536  direct max-min (SLSQP-polished) 0.000634536  diff -2.19e-16
+p=0.1 u=2.0 e=0.3E Rmax  g=+0.0: formula 0.023270334  direct max-min (SLSQP-polished) 0.023270334  diff -1.63e-16
+p=0.2 u=4.0 e=0.3E Rmax  g=+0.0: formula 0.100320666  direct max-min (SLSQP-polished) 0.100320668  diff +2.20e-09
+p=0.3 u=1.0 e=0.1E Rmax  g=+0.0: formula 0.020240928  direct max-min (SLSQP-polished) 0.020240928  diff -5.27e-16
+p=0.1 u=2.0 e=0.3E na    g=+0.0: formula 0.023270334  direct max-min (SLSQP-polished) 0.023270334  diff -1.18e-15
+p=0.2 u=4.0 e=0.1E na    g=+0.0: formula 0.170418938  direct max-min (SLSQP-polished) 0.170418938  diff -6.94e-16
+p=0.7 u=1.5 e=0.6E na    g=+0.0: formula 0.008371698  direct max-min (SLSQP-polished) 0.008371698  diff -3.75e-16
+largest |difference| = 2.20e-09   [31.3s]
+
+real	0m32.096s
+user	0m30.216s
+sys	0m1.106s

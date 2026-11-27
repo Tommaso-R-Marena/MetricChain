@@ -1,0 +1,375 @@
+{
+ "rule": "NOTES.md 2026-11-26T17:25Z",
+ "samples": {
+  "AA1|P": {
+   "N": 16,
+   "m": 6,
+   "k": 2,
+   "start": 1,
+   "selected": [
+    {
+     "index": 1,
+     "line": 364,
+     "col": 7,
+     "entry": "E8"
+    },
+    {
+     "index": 3,
+     "line": 522,
+     "col": 7,
+     "entry": "E15"
+    },
+    {
+     "index": 5,
+     "line": 679,
+     "col": 45,
+     "entry": "E20"
+    },
+    {
+     "index": 7,
+     "line": 762,
+     "col": 7,
+     "entry": "E25"
+    },
+    {
+     "index": 9,
+     "line": 1115,
+     "col": 7,
+     "entry": "E37"
+    },
+    {
+     "index": 11,
+     "line": 1262,
+     "col": 7,
+     "entry": "E42"
+    }
+   ]
+  },
+  "AA1|F": {
+   "N": 47,
+   "m": 5,
+   "k": 9,
+   "start": 3,
+   "selected": [
+    {
+     "index": 3,
+     "line": 195,
+     "col": 10,
+     "entry": "E3"
+    },
+    {
+     "index": 12,
+     "line": 491,
+     "col": 7,
+     "entry": "E14"
+    },
+    {
+     "index": 21,
+     "line": 743,
+     "col": 23,
+     "entry": "E24"
+    },
+    {
+     "index": 30,
+     "line": 891,
+     "col": 82,
+     "entry": "E29"
+    },
+    {
+     "index": 39,
+     "line": 1110,
+     "col": 7,
+     "entry": "E37"
+    }
+   ]
+  },
+  "AA1|Q": {
+   "N": 39,
+   "m": 3,
+   "k": 13,
+   "start": 11,
+   "selected": [
+    {
+     "index": 11,
+     "line": 498,
+     "col": 7,
+     "entry": "E14"
+    },
+    {
+     "index": 24,
+     "line": 927,
+     "col": 80,
+     "entry": "E31"
+    },
+    {
+     "index": 37,
+     "line": 1438,
+     "col": 15,
+     "entry": "E48"
+    }
+   ]
+  },
+  "AA1|?": {
+   "N": 23,
+   "m": 2,
+   "k": 11,
+   "start": 6,
+   "selected": [
+    {
+     "index": 6,
+     "line": 768,
+     "col": 7,
+     "entry": "E25"
+    },
+    {
+     "index": 17,
+     "line": 1392,
+     "col": 7,
+     "entry": "E46"
+    }
+   ]
+  },
+  "AA2|P": {
+   "N": 62,
+   "m": 6,
+   "k": 10,
+   "start": 8,
+   "selected": [
+    {
+     "index": 8,
+     "line": 337,
+     "col": 72,
+     "entry": "Entry 10"
+    },
+    {
+     "index": 18,
+     "line": 446,
+     "col": 42,
+     "entry": "Entry 15"
+    },
+    {
+     "index": 28,
+     "line": 617,
+     "col": 61,
+     "entry": "Entry 24"
+    },
+    {
+     "index": 38,
+     "line": 887,
+     "col": 21,
+     "entry": "Entry 40"
+    },
+    {
+     "index": 48,
+     "line": 1099,
+     "col": 24,
+     "entry": "Entry 56"
+    },
+    {
+     "index": 58,
+     "line": 1386,
+     "col": 41,
+     "entry": "Entry 73"
+    }
+   ]
+  },
+  "AA2|F": {
+   "N": 52,
+   "m": 5,
+   "k": 10,
+   "start": 8,
+   "selected": [
+    {
+     "index": 8,
+     "line": 352,
+     "col": 59,
+     "entry": "Entry 11"
+    },
+    {
+     "index": 18,
+     "line": 606,
+     "col": 11,
+     "entry": "Entry 23"
+    },
+    {
+     "index": 28,
+     "line": 931,
+     "col": 41,
+     "entry": "Entry 43"
+    },
+    {
+     "index": 38,
+     "line": 1114,
+     "col": 74,
+     "entry": "Entry 57"
+    },
+    {
+     "index": 48,
+     "line": 1357,
+     "col": 67,
+     "entry": "Entry 72"
+    }
+   ]
+  },
+  "AA2|Q": {
+   "N": 28,
+   "m": 3,
+   "k": 9,
+   "start": 4,
+   "selected": [
+    {
+     "index": 4,
+     "line": 200,
+     "col": 30,
+     "entry": "Entry 4"
+    },
+    {
+     "index": 13,
+     "line": 594,
+     "col": 1,
+     "entry": "Entry 22"
+    },
+    {
+     "index": 22,
+     "line": 1233,
+     "col": 18,
+     "entry": "Entry 64"
+    }
+   ]
+  },
+  "AA2|?": {
+   "N": 45,
+   "m": 2,
+   "k": 22,
+   "start": 0,
+   "selected": [
+    {
+     "index": 0,
+     "line": 406,
+     "col": 31,
+     "entry": "Entry 13"
+    },
+    {
+     "index": 22,
+     "line": 908,
+     "col": 70,
+     "entry": "Entry 41"
+    }
+   ]
+  }
+ },
+ "population_counts": {
+  "AA1": {
+   "E": 52,
+   "P": 16,
+   "C": 26,
+   "Q": 39,
+   "X": 13,
+   "F": 47,
+   "?": 23
+  },
+  "AA2": {
+   "E": 63,
+   "P": 62,
+   "C": 29,
+   "Q": 28,
+   "X": 18,
+   "F": 52,
+   "?": 45
+  }
+ },
+ "rebuild_order": [
+  {
+   "rep": "AA2",
+   "line": 1357,
+   "entry": "Entry 72"
+  },
+  {
+   "rep": "AA2",
+   "line": 1114,
+   "entry": "Entry 57"
+  },
+  {
+   "rep": "AA2",
+   "line": 931,
+   "entry": "Entry 43"
+  },
+  {
+   "rep": "AA2",
+   "line": 352,
+   "entry": "Entry 11"
+  },
+  {
+   "rep": "AA1",
+   "line": 743,
+   "entry": "E24"
+  },
+  {
+   "rep": "AA1",
+   "line": 1110,
+   "entry": "E37"
+  },
+  {
+   "rep": "AA2",
+   "line": 606,
+   "entry": "Entry 23"
+  },
+  {
+   "rep": "AA1",
+   "line": 491,
+   "entry": "E14"
+  },
+  {
+   "rep": "AA1",
+   "line": 891,
+   "entry": "E29"
+  },
+  {
+   "rep": "AA1",
+   "line": 195,
+   "entry": "E3"
+  }
+ ],
+ "citations": {
+  "N": 27,
+  "k": 5,
+  "start": 2,
+  "selected": [
+   {
+    "drawn_index": 2,
+    "used_index": 2,
+    "file": "AA1",
+    "line": 839,
+    "msg": "SCI-REV-0012"
+   },
+   {
+    "drawn_index": 7,
+    "used_index": 7,
+    "file": "AA1",
+    "line": 1380,
+    "msg": "SCI-REV-0006"
+   },
+   {
+    "drawn_index": 12,
+    "used_index": 12,
+    "file": "AA2",
+    "line": 449,
+    "msg": "SCI-REV-0016"
+   },
+   {
+    "drawn_index": 17,
+    "used_index": 17,
+    "file": "AA2",
+    "line": 944,
+    "msg": "SCI-REV-0003"
+   },
+   {
+    "drawn_index": 22,
+    "used_index": 22,
+    "file": "AA2",
+    "line": 1071,
+    "msg": "SCI-REV-0005"
+   }
+  ]
+ }
+}

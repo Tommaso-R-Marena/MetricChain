@@ -1,0 +1,48 @@
+T1  binary sites, heterogeneous slopes, non-uniform product reference (exact)
+    87 instances (n = 1..4): max over the class of TV - sum_i [sigma_i - mu_i(a_i)]: largest +1.78e-15, smallest -1.11e-16
+    (a): largest of max_mu mu_i(a_i) - sigma_i = +4.44e-16;  equality at mu*_(a'), a' one flip from a: largest |TV - rhs| = 5.55e-16
+    -> no counterexample   [244 s]
+T2  general alphabets, random symmetric site metrics, non-uniform product reference (exact)
+    30 instances with 3..12 states: max over the class of TV - sum_i [1 - mu_i(a_i)/sigma_i]: largest +2.66e-15
+    (a): largest of max_mu mu_i(a_i) - sigma_i = +4.44e-16
+    the (c)-form TV - sum_i [sigma_i - mu_i(a_i)] for NON-binary sites (not claimed): max over the class ranges from +0.013 to +0.353; positive in 30/30 instances
+    one site, three letters, uniform reference, discrete metric (delta = 1), a = 0: sigma = 0.5761; max (b)-excess = +4.44e-16; max (c)-form excess = +0.0566 at mu = [0.4223 0.4223 0.1554]
+    best constant c in TV <= c * sum_i [1 - mu_i(a_i)/sigma_i], two binary sites: 0.7042  (sigma_i = [0.7042 0.6049])
+    best constant c in TV <= c * sum_i [1 - mu_i(a_i)/sigma_i], one ternary site: 0.9690  (sigma_i = [0.8171])
+    best constant c in TV <= c * sum_i [1 - mu_i(a_i)/sigma_i], two ternary sites: 0.9153  (sigma_i = [0.6108 0.7608])
+    best constant c in TV <= c * sum_i [1 - mu_i(a_i)/sigma_i], binary x ternary: 0.8481  (sigma_i = [0.8481 0.5106])
+    -> no counterexample   [364 s]
+T3  NON-symmetric site envelopes (the theorem assumes symmetry: is it needed?)
+    mu* from delta_i(a_i, s) (as written in the report): member of the class in 3/30; largest (a)-excess +3.969e-01; largest (b)-excess +1.709e+00
+    mu* from delta_i(s, a_i): member of the class in 30/30; largest (a)-excess +3.331e-16; largest (b)-excess +1.332e-15
+    one binary site, delta(0,1) = 2, delta(1,0) = 0.5, a = 0, report: mu*(a) = 0.8808, member = False, max_mu mu(a) = 0.6225
+    one binary site, delta(0,1) = 2, delta(1,0) = 0.5, a = 0, to_centre: mu*(a) = 0.6225, member = True, max_mu mu(a) = 0.6225
+    -> no counterexample   [379 s]
+T4  edge cases (exact)
+    one binary site, b = 0: member True; (a)-excess +0.0e+00; (b)-excess +0.0e+00; (c)-excess +0.0e+00
+    one binary site, b = 30: member True; (a)-excess +0.0e+00; (b)-excess +0.0e+00; (c)-excess +0.0e+00
+    binary x one-letter site: member True; (a)-excess +0.0e+00; (b)-excess +4.4e-16; (c)-excess +4.4e-16
+    three binary sites, slopes (0, 1, 12): member True; (a)-excess +0.0e+00; (b)-excess +8.9e-16; (c)-excess +8.9e-16
+    ternary site with a zero distance (pseudo-metric) x binary: member True; (a)-excess +5.6e-17; (b)-excess +4.4e-16
+    the same, centre at the far letter: member True; (a)-excess +1.1e-16; (b)-excess +4.4e-16
+    four-letter site (4-cycle metric, ties) x binary: member True; (a)-excess +0.0e+00; (b)-excess +4.4e-16
+    b = infinity (simplex, mu* = delta_a, n = 3): max of TV(mu, delta_a) - sum_i mu(x_i != a_i) = +0.0
+    -> no counterexample   [380 s]
+T5  (d): identified by one-body marginals inside the cube class <=> at most one unsaturated marginal
+    n = 2, b = 0.3: 6 vertices (brute force over bases); 291 members tested; identified 107; criterion agrees in 291/291; identified members that are not product measures: 0
+        members by (kind, number of unsaturated marginals): {('mid', 1): 4, ('mid', 2): 11, ('mix', 1): 16, ('mix', 2): 134, ('product', 0): 43, ('product', 1): 40, ('product', 2): 37, ('vertex', 0): 4, ('vertex', 2): 2}
+    n = 2, b = 1.0: 6 vertices (brute force over bases); 291 members tested; identified 109; criterion agrees in 291/291; identified members that are not product measures: 0
+        members by (kind, number of unsaturated marginals): {('mid', 1): 4, ('mid', 2): 11, ('mix', 1): 14, ('mix', 2): 136, ('product', 0): 37, ('product', 1): 50, ('product', 2): 33, ('vertex', 0): 4, ('vertex', 2): 2}
+    n = 2, b = 2.5: 6 vertices (brute force over bases); 291 members tested; identified 105; criterion agrees in 291/291; identified members that are not product measures: 0
+        members by (kind, number of unsaturated marginals): {('mid', 1): 4, ('mid', 2): 11, ('mix', 1): 9, ('mix', 2): 141, ('product', 0): 43, ('product', 1): 45, ('product', 2): 32, ('vertex', 0): 4, ('vertex', 2): 2}
+    n = 3, b = 0.4: 38 vertices (brute force over bases); 768 members tested; identified 122; criterion agrees in 768/768; identified members that are not product measures: 0
+        members by (kind, number of unsaturated marginals): {('mid', 1): 9, ('mid', 2): 32, ('mid', 3): 359, ('mix', 1): 2, ('mix', 2): 5, ('mix', 3): 143, ('product', 0): 27, ('product', 1): 29, ('product', 2): 28, ('product', 3): 36, ('sat x vertex', 0): 47, ('sat x vertex', 2): 13, ('vertex', 0): 8, ('vertex', 2): 12, ('vertex', 3): 18}
+    n = 3, b = 1.0: 38 vertices (brute force over bases); 768 members tested; identified 119; criterion agrees in 768/768; identified members that are not product measures: 0
+        members by (kind, number of unsaturated marginals): {('mid', 1): 5, ('mid', 2): 33, ('mid', 3): 362, ('mix', 2): 8, ('mix', 3): 142, ('product', 0): 26, ('product', 1): 28, ('product', 2): 29, ('product', 3): 37, ('sat x vertex', 0): 52, ('sat x vertex', 2): 8, ('vertex', 0): 8, ('vertex', 2): 12, ('vertex', 3): 18}
+    n = 3, b = 2.0: 38 vertices (brute force over bases); 768 members tested; identified 133; criterion agrees in 768/768; identified members that are not product measures: 0
+        members by (kind, number of unsaturated marginals): {('mid', 1): 6, ('mid', 2): 34, ('mid', 3): 360, ('mix', 1): 2, ('mix', 2): 5, ('mix', 3): 143, ('product', 0): 27, ('product', 1): 33, ('product', 2): 31, ('product', 3): 29, ('sat x vertex', 0): 57, ('sat x vertex', 2): 3, ('vertex', 0): 8, ('vertex', 2): 12, ('vertex', 3): 18}
+    n = 4, b = 1.0: 158 distinct LP vertices; 888 members tested; identified 101; criterion agrees in 888/888; identified members that are not product measures: 0
+        members by (kind, number of unsaturated marginals): {('mid', 2): 5, ('mid', 3): 32, ('mid', 4): 363, ('mix', 3): 8, ('mix', 4): 142, ('product', 0): 26, ('product', 1): 24, ('product', 2): 32, ('product', 3): 17, ('product', 4): 21, ('sat x vertex', 0): 35, ('sat x vertex', 2): 12, ('sat x vertex', 3): 13, ('vertex', 0): 16, ('vertex', 2): 27, ('vertex', 3): 37, ('vertex', 4): 78}
+    -> no counterexample   [415 s]
+E15: NO COUNTEREXAMPLE to the statements as written (symmetric site metrics)
+[exit 0]

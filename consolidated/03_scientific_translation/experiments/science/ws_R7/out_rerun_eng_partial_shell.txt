@@ -1,0 +1,46 @@
+u=1.0 n=250 phi=0.6 n_o=150: cylinder k= 0: worst ln(cost)/(na) = 2.0811  (stored worst, radial: 2.0811; C_max 2.5367); max ln cost - ln C_max = -12.64; instances violating a claim: 0 of 3774
+u=1.0 n=250 phi=0.6 n_o=150: cylinder k= 1: worst ln(cost)/(na) = 2.0553  (stored worst, radial: 2.0811; C_max 2.5367); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
+u=1.0 n=250 phi=0.6 n_o=150: cylinder k= 2: worst ln(cost)/(na) = 2.0553  (stored worst, radial: 2.0811; C_max 2.5367); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
+u=1.0 n=250 phi=0.6 n_o=150: cylinder k= 4: worst ln(cost)/(na) = 2.0553  (stored worst, radial: 2.0811; C_max 2.5367); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
+u=1.0 n=250 phi=0.6 n_o=150: cylinder k= 8: worst ln(cost)/(na) = 2.0553  (stored worst, radial: 2.0811; C_max 2.5367); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
+u=1.0 n=250 phi=0.6 n_o=150: cylinder k=16: worst ln(cost)/(na) = 2.0553  (stored worst, radial: 2.0811; C_max 2.5367); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
+u=1.0 n=250 phi=0.6 n_o=150: cylinder k=32: worst ln(cost)/(na) = 2.0553  (stored worst, radial: 2.0811; C_max 2.5367); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.55 n_o=550: cylinder k= 0: worst ln(cost)/(na) = 1.0401  (stored worst, radial: 1.0402; C_max 1.1720); max ln cost - ln C_max = -14.62; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.55 n_o=550: cylinder k= 1: worst ln(cost)/(na) = 0.9959  (stored worst, radial: 1.0402; C_max 1.1720); max ln cost - ln C_max = -19.53; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.55 n_o=550: cylinder k= 2: worst ln(cost)/(na) = 0.9959  (stored worst, radial: 1.0402; C_max 1.1720); max ln cost - ln C_max = -19.53; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.55 n_o=550: cylinder k= 4: worst ln(cost)/(na) = 0.9959  (stored worst, radial: 1.0402; C_max 1.1720); max ln cost - ln C_max = -19.53; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.55 n_o=550: cylinder k= 8: worst ln(cost)/(na) = 0.9932  (stored worst, radial: 1.0402; C_max 1.1720); max ln cost - ln C_max = -19.83; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.55 n_o=550: cylinder k=16: worst ln(cost)/(na) = 0.9904  (stored worst, radial: 1.0402; C_max 1.1720); max ln cost - ln C_max = -20.14; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.55 n_o=550: cylinder k=32: worst ln(cost)/(na) = 0.9911  (stored worst, radial: 1.0402; C_max 1.1720); max ln cost - ln C_max = -20.07; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.8 n_o=800: cylinder k= 0: worst ln(cost)/(na) = 1.3382  (stored worst, radial: 1.3382; C_max 1.4879); max ln cost - ln C_max = -16.61; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.8 n_o=800: cylinder k= 1: worst ln(cost)/(na) = 1.2882  (stored worst, radial: 1.3382; C_max 1.4879); max ln cost - ln C_max = -22.15; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.8 n_o=800: cylinder k= 2: worst ln(cost)/(na) = 1.2882  (stored worst, radial: 1.3382; C_max 1.4879); max ln cost - ln C_max = -22.15; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.8 n_o=800: cylinder k= 4: worst ln(cost)/(na) = 1.2882  (stored worst, radial: 1.3382; C_max 1.4879); max ln cost - ln C_max = -22.15; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.8 n_o=800: cylinder k= 8: worst ln(cost)/(na) = 1.2757  (stored worst, radial: 1.3382; C_max 1.4879); max ln cost - ln C_max = -23.54; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.8 n_o=800: cylinder k=16: worst ln(cost)/(na) = 1.2632  (stored worst, radial: 1.3382; C_max 1.4879); max ln cost - ln C_max = -24.92; instances violating a claim: 0 of 3774
+u=1.0 n=1000 phi=0.8 n_o=800: cylinder k=32: worst ln(cost)/(na) = 1.2632  (stored worst, radial: 1.3382; C_max 1.4879); max ln cost - ln C_max = -24.92; instances violating a claim: 0 of 3774
+u=0.5 n=1000 phi=0.55 n_o=550: cylinder k= 0: worst ln(cost)/(na) = 1.8285  (stored worst, radial: 1.8285; C_max 2.2442); max ln cost - ln C_max = -12.59; instances violating a claim: 0 of 3774
+u=0.5 n=1000 phi=0.55 n_o=550: cylinder k= 1: worst ln(cost)/(na) = 1.8285  (stored worst, radial: 1.8285; C_max 2.2442); max ln cost - ln C_max = -12.59; instances violating a claim: 0 of 3774
+u=0.5 n=1000 phi=0.55 n_o=550: cylinder k= 2: worst ln(cost)/(na) = 1.8285  (stored worst, radial: 1.8285; C_max 2.2442); max ln cost - ln C_max = -12.59; instances violating a claim: 0 of 3774
+u=0.5 n=1000 phi=0.55 n_o=550: cylinder k= 4: worst ln(cost)/(na) = 1.8285  (stored worst, radial: 1.8285; C_max 2.2442); max ln cost - ln C_max = -12.59; instances violating a claim: 0 of 3774
+u=0.5 n=1000 phi=0.55 n_o=550: cylinder k= 8: worst ln(cost)/(na) = 1.8285  (stored worst, radial: 1.8285; C_max 2.2442); max ln cost - ln C_max = -12.59; instances violating a claim: 0 of 3774
+u=0.5 n=1000 phi=0.55 n_o=550: cylinder k=16: worst ln(cost)/(na) = 1.8285  (stored worst, radial: 1.8285; C_max 2.2442); max ln cost - ln C_max = -12.59; instances violating a claim: 0 of 3774
+u=0.5 n=1000 phi=0.55 n_o=550: cylinder k=32: worst ln(cost)/(na) = 1.8285  (stored worst, radial: 1.8285; C_max 2.2442); max ln cost - ln C_max = -12.59; instances violating a claim: 0 of 3774
+u=2.0 n=1000 phi=0.5 n_o=500: cylinder k= 0: worst ln(cost)/(na) = 0.7723  (stored worst, radial: 0.7726; C_max 0.8056); max ln cost - ln C_max = -10.89; instances violating a claim: 0 of 3774
+u=2.0 n=1000 phi=0.5 n_o=500: cylinder k= 1: worst ln(cost)/(na) = 0.7723  (stored worst, radial: 0.7726; C_max 0.8056); max ln cost - ln C_max = -10.91; instances violating a claim: 0 of 3774
+u=2.0 n=1000 phi=0.5 n_o=500: cylinder k= 2: worst ln(cost)/(na) = 0.7723  (stored worst, radial: 0.7726; C_max 0.8056); max ln cost - ln C_max = -10.91; instances violating a claim: 0 of 3774
+u=2.0 n=1000 phi=0.5 n_o=500: cylinder k= 4: worst ln(cost)/(na) = 0.7727  (stored worst, radial: 0.7726; C_max 0.8056); max ln cost - ln C_max = -10.76; instances violating a claim: 0 of 3774
+u=2.0 n=1000 phi=0.5 n_o=500: cylinder k= 8: worst ln(cost)/(na) = 0.7728  (stored worst, radial: 0.7726; C_max 0.8056); max ln cost - ln C_max = -10.75; instances violating a claim: 0 of 3774
+u=2.0 n=1000 phi=0.5 n_o=500: cylinder k=16: worst ln(cost)/(na) = 0.7723  (stored worst, radial: 0.7726; C_max 0.8056); max ln cost - ln C_max = -10.90; instances violating a claim: 0 of 3774
+u=2.0 n=1000 phi=0.5 n_o=500: cylinder k=32: worst ln(cost)/(na) = 0.7723  (stored worst, radial: 0.7726; C_max 0.8056); max ln cost - ln C_max = -10.91; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 0: worst ln(cost)/(na) = 0.6941  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -12.72; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 1: worst ln(cost)/(na) = 0.6934  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -13.06; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 2: worst ln(cost)/(na) = 0.6937  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -12.89; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 4: worst ln(cost)/(na) = 0.6927  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -13.35; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k= 8: worst ln(cost)/(na) = 0.6929  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -13.26; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k=16: worst ln(cost)/(na) = 0.6926  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -13.38; instances violating a claim: 0 of 3774
+u=1.0 n=4000 phi=0.5 n_o=2000: cylinder k=32: worst ln(cost)/(na) = 0.6939  (stored worst, radial: 0.6941; C_max 0.7228); max ln cost - ln C_max = -12.80; instances violating a claim: 0 of 3774
+
+real	6m24.882s
+user	5m52.447s
+sys	0m0.101s

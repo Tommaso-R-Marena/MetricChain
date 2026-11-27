@@ -1,0 +1,19 @@
+=== pair sums: V8 on P2, tau 0.7, gbn2, order m = 4: atoms 140, sites 8, states/site 3..3; anchor 11111111, E = -145.726106 kcal/mol [0.3s]
+    enclosures and instances [0.0s]
+      GFBatch: host site 1/8 done, 0s
+      GFBatch: host site 2/8 done, 0s
+      GFBatch: host site 3/8 done, 0s
+      GFBatch: host site 4/8 done, 0s
+      GFBatch: host site 5/8 done, 0s
+      GFBatch: host site 6/8 done, 0s
+      GFBatch: host site 7/8 done, 0s
+      GFBatch: host site 8/8 done, 0s
+    37 exclusion sets (1 + 8 + 28 pairs) by the batched closed form [0.4s]: Gamma_4 = 7.171160e-01 kcal/mol (self 5.228e-03, cross 7.119e-01)
+    S_i = sum_(T ni i): min 1.6116e-01, max 5.4586e-01; sum_i S_i / m = 7.171160e-01 (must equal Gamma: rel. dev. 1.5e-16)
+    G_ij: min 1.7106e-03, max 3.8356e-01; sum_(i<j) G_ij / C(m,2) = 7.171160e-01 (must equal Gamma: rel. dev. 1.2e-15); row identity sum_j G_ij = (m-1) S_i: max abs dev 1.78e-15
+    mean G_ij by separation |i-j| = 1..7: 2.61e-01 2.18e-01 1.61e-01 7.13e-02 2.22e-02 6.60e-03 1.71e-03
+    CHECK (a) batched closed form vs P3's total(m) and total(m, exclude=i), 9 values: max rel. dev. 8.04e-16 [0.6s]
+    CHECK (b) batched closed form vs P3's loop with a set of excluded sites (GFBound2.total_ex), 37 values: max rel. dev. 1.11e-15 [2.2s]
+    CHECK (c) EXPLICIT ENUMERATION of the 70 subsets of order 4 (P3's total(m, T)) [1.2s]: Gamma: gf 7.171159626686e-01 enum 7.171159626686e-01 (rel. dev. 1.5e-16); S_i: max abs dev 3.33e-16 (rel. to Gamma 4.6e-16); G_ij (28 pairs): max abs dev 6.44e-16 kcal/mol (rel. to Gamma 9.0e-16; largest dev. relative to G_ij itself 2.9e-13; smallest G_ij 1.711e-03)
+    -> out/pairsums_V8_P2_t0.70_gbn2_m4.npz
+DONE p6_01_pairsums V8 P2 0.7 4 [5s]

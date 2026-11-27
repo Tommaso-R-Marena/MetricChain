@@ -1,0 +1,13 @@
+p = 0.10, u = 1; cube h = 0.029139, a = 0.110944, E = 0.120115;  E_F = 0.4017194
+  E: G= 801: safe growth of the relaxed max KL(pi||pi_phi): 0.4307078 (bracket 8.6e-11);  grid-restricted (unsafe) value: 0.4238897;  safe - E_F = 2.90e-02   [56 s]
+  E: G=1601: safe growth of the relaxed max KL(pi||pi_phi): 0.4276598 (bracket 9.8e-11);  grid-restricted (unsafe) value: 0.4238897;  safe - E_F = 2.59e-02   [121 s]
+  E: G=3201: safe growth of the relaxed max KL(pi||pi_phi): 0.4263140 (bracket 9.1e-11);  grid-restricted (unsafe) value: 0.4238897;  safe - E_F = 2.46e-02   [229 s]
+  coarse (G=401): B(0.10)=0.03353@qt=0.115  B(0.20)=0.05427@qt=0.115  B(0.30)=0.06487@qt=0.115  B(0.35)=0.06739@qt=0.115  B(0.40)=0.06827@qt=0.115  B(0.45)=0.06769@qt=0.115  B(0.50)=0.06583@qt=0.115  B(0.60)=0.05888@qt=0.115  B(0.70)=0.04851@qt=0.115  B(0.80)=0.03520@qt=0.115  B(0.90)=0.01937@qt=0.115   [271 s]
+  G=801, 39 values of t: largest grid value B(t) = 0.066539 at t = 0.4000 (qt = 0.1175)   [411 s]
+  h <= 0.066765  (bound over ALL t in (0,1) by the interval rule, worst interval [0.3812, 0.3875]; ratio to the cube 2.291)
+  a <= 0.192774 at qt = 0.1100 (safe, G=801; ratio to the cube 1.738);  scan: 0.24926 0.23909 0.22990 0.22174 0.21455 0.20809 0.20235 0.19722 0.19277   [424 s]
+424.3 s
+
+real	7m4.813s
+user	6m44.692s
+sys	0m16.627s

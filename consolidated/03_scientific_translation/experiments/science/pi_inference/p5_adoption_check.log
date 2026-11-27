@@ -1,0 +1,13 @@
+=== 1. Leu6 on the helix: the remainder of the anchored expansion for the true charges and for reversed signs
+  64 states, 126 atoms; my kernel sum against P3's table evaluator: largest difference 4.7e-12 kcal/mol; anchor (argmin E) (1, 1, 1, 1, 1, 1)
+  m = 3: true remainder sup = 0.056866 (P5: 0.056866);  all charges positive: 3.600712 (P5: 3.600712);  best of 400 random sign patterns here: 3.7926 (P5's local search: 8.6845);  P3's Gamma_m = 131.672;  so every sign-blind bound / truth >= 66.7 by my patterns (152.7 by P5's)
+  m = 4: true remainder sup = 0.030119 (P5: 0.030119);  all charges positive: 0.573930 (P5: 0.573930);  best of 400 random sign patterns here: 0.2274 (P5's local search: 0.6848);  P3's Gamma_m = 12.881;  so every sign-blind bound / truth >= 19.1 by my patterns (22.7 by P5's)
+  m = 5: true remainder sup = 0.002221 (P5: 0.002221);  all charges positive: 0.004578 (P5: 0.004578);  best of 400 random sign patterns here: 0.0114 (P5's local search: 0.0367);  P3's Gamma_m = 0.776;  so every sign-blind bound / truth >= 5.1 by my patterns (16.5 by P5's)
+--- 1b. my own local search (1-flip ascent on the quadratic form of the remainder at one state, then exact evaluation at all states)
+  m = 3: pattern found by my search: remainder sup = 8.6845 kcal/mol (P5's search: 8.6845);  truth 0.056866;  every sign-blind bound of the remainder / truth >= 152.7 (P5: 152.7);  P3's Gamma_m / pattern = 15.2
+  m = 4: pattern found by my search: remainder sup = 0.6848 kcal/mol (P5's search: 0.6848);  truth 0.030119;  every sign-blind bound of the remainder / truth >= 22.7 (P5: 22.7);  P3's Gamma_m / pattern = 18.8
+  m = 5: pattern found by my search: remainder sup = 0.0367 kcal/mol (P5's search: 0.0367);  truth 0.002221;  every sign-blind bound of the remainder / truth >= 16.5 (P5: 16.5);  P3's Gamma_m / pattern = 21.2
+=== 2. Leu12 on the helix, order 6, site penalties: P5's run of P3's pipeline against a rebuild through P6's driver
+  anchor here (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), P5's (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);  ln Z(m_-) = 374.5276673543 (P5: 374.5276673543);  ln Z(m_+) = 374.2090967932 (P5: 374.2090967932);  exact ln Z(E) = 374.345343432 (P5: 374.345343432)
+  sandwich at all 4096 states: m_- > E at 0, m_+ < E at 0;  largest E - m_- = 5.1215 (P5: 5.1215), largest m_+ - E = 4.3331 (P5: 4.3331) kcal/mol;  cost number Z(m_-)/Z(E) - 1 = 0.200003 (P5: 0.200003)
+ALL DONE 7 s

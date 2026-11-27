@@ -1,0 +1,5 @@
+chains 10962, levels 3506109 (parts (i), (ii) at every level; the claim (iii) at 323001 levels: >= 40 evenly spaced levels per chain and the last three), violations 0
+least slack of the claim 3.356 nats at (u, N, B'/a, alpha, X, m, ln delta, levels, exact - N B', E_T) = (4.0, 2500, 0.698, 1e-09, 40.0, 600, -125000.0, 4, 263.9, 268.54)
+least slack of the bottom (base family against d B' + e_0): -0.000 nats
+chains in which varpi is the bound of Lemma Q3 (not the trivial one): 755
+time 200 s

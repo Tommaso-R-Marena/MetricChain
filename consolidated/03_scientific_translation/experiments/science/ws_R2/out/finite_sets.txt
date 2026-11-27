@@ -1,0 +1,9 @@
+(a) all 65535 non-empty subsets of a 16-site connected piece: no violation
+(b) 4000 random subsets of a box of 171 sites (all densities): no violation
+(c) 3000 random connected animals (2..120 sites): no violation
+(d) balls / cubes / octahedra of lattice sites up to 3059 sites: no violation;  min (2N-e3)/N^(2/3) = 1.657 (proved >= 0.630),  min (6N-e8)/N^(2/3) = 6.000 (proved >= 3)
+largest value of [lhs - bN - 2M n_E] per row (must be <= 0): ['0', '0', '-6', '-6', '-3', '-12', '-12', '-24', '-9', '-8', '-12']
+
+real	0m32.784s
+user	0m10.575s
+sys	0m0.020s

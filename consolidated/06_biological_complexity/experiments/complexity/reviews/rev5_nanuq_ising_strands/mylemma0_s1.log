@@ -1,0 +1,1 @@
+seed 1 networks 400 by number of hybrid nodes {1: 129, 3: 93, 4: 62, 2: 116} subsets tested 14919 mismatches T(N|Y) vs {T|Y}: 0  U has a unique source = LSA(Y) violated: 0

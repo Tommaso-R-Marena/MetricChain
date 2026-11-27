@@ -1,0 +1,65 @@
+====================================================================================================
+A. exact tail functions of (Q_m, uniform, u*Hamming) against Harper's formulas
+====================================================================================================
+m=2 u=0.5  subsets     14   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=2 u=1.0  subsets     14   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=2 u=2.0  subsets     14   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=3 u=0.5  subsets    254   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=3 u=1.0  subsets    254   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=3 u=2.0  subsets    254   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=4 u=0.5  subsets  65534   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=4 u=1.0  subsets  65534   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+m=4 u=2.0  subsets  65534   max exact/Harper (upper) 1.000000 [<=1]  equality at ball sizes: True   min exact/Harper (lower) 1.000000 [>=1]  equality at ball sizes: True   attained by simplicial segments at every size: True / True
+
+====================================================================================================
+B. (TU), (TL) with Harper's functions on random members of L_u(Q_m)
+====================================================================================================
+m= 6 u=0.5   12564 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.4999 flattened cone 1.0000 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m= 6 u=1.0   12438 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.3132 flattened cone 1.0000 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m= 6 u=2.0   12426 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.1654 flattened cone 1.0000 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m= 9 u=0.5   69204 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.4333 flattened cone 1.0000 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m= 9 u=1.0   68448 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.2697 flattened cone 1.0000 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m= 9 u=2.0   69018 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.1467 flattened cone 1.0000 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m=12 u=0.5  150525 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.3601 flattened cone 0.9986 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m=12 u=1.0  150303 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.2129 flattened cone 1.0000 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+m=12 u=2.0  150357 levels   max E(W-s)_+/(s Xi(q)) by kind: min-envelope 1.0000 max-envelope 1.0000 additive 0.1033 flattened cone 0.8115 dip 1.0000   min E min(W,s)/(s Theta(p)): 1.0000 1.0000 1.0000 1.0000 1.0000
+
+====================================================================================================
+C. weighted Hamming envelopes: the sorted-slope Harper bound against the exact tail function (uniform measure)
+   bound(q) = 2^-m sum_{j=1}^{r+1} (e^{U_j} - e^{U_{j-1}}) |B(m, r+1-j)|,  U_j = sum of the j largest slopes, r = r(q)
+====================================================================================================
+m=3 slopes equal      [1.00, 1.00, 1.00]   exact/bound over all q: max 1.0000 [<=1], min 0.2977
+m=3 slopes two kinds  [2.00, 0.50, 0.50]   exact/bound over all q: max 0.8421 [<=1], min 0.0427
+m=3 slopes random     [2.21, 1.74, 1.61]   exact/bound over all q: max 0.9137 [<=1], min 0.1246
+m=3 slopes one steep  [3.00, 0.30, 0.30]   exact/bound over all q: max 0.9157 [<=1], min 0.0084
+m=4 slopes equal      [1.00, 1.00, 1.00, 1.00]   exact/bound over all q: max 1.0000 [<=1], min 0.2591
+m=4 slopes two kinds  [2.00, 2.00, 0.50, 0.50]   exact/bound over all q: max 0.5616 [<=1], min 0.0164
+m=4 slopes random     [1.21, 0.49, 0.88, 0.60]   exact/bound over all q: max 0.7257 [<=1], min 0.1003
+m=4 slopes one steep  [3.00, 0.30, 0.30, 0.30]   exact/bound over all q: max 0.6867 [<=1], min 0.0068
+
+====================================================================================================
+D. biased product measure Bernoulli(p)^4 with the Hamming envelope, slope u: the exact tail function of the
+   class under the measure itself, at the measures of the Hamming balls around 1111 and 0000 (for the record)
+====================================================================================================
+p=0.3 u=1.0   Xi(0.001)=0  Xi(0.010)=0.03248  Xi(0.050)=0.08969  Xi(0.200)=0.4378  Xi(0.500)=1.33  Xi(0.900)=6.667
+p=0.2 u=2.0   Xi(0.001)=0  Xi(0.010)=0.08178  Xi(0.050)=0.3271  Xi(0.200)=2.997  Xi(0.500)=10.82  Xi(0.900)=71.22
+   (TU), (TL) with the enumerated functions on 400 random members: checked
+
+====================================================================================================
+E. two valid tail functions that use no isoperimetry (N_REPORT 4(e)), on the cube, against Harper's exact values
+   ball-volume:  Xi_in(q) = q (e^{u(r'+1)} - 1),  r' the largest radius with |B(r')| <= 2^m q
+   transport:    Xi_T(q)  = int_0^{um} e^r min{q, exp(-2 (r - r_0)_+^2/(m u^2))} dr,  r_0 = u sqrt(m ln(1/(1-q))/2)
+====================================================================================================
+m=  4 u=0.5  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 0.347;   Harper/transport: max 0.4431 [<=1], min 0.174
+m=  4 u=1.0  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 0.218;   Harper/transport: max 0.3210 [<=1], min 0.0781
+m=  4 u=2.0  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 0.11;   Harper/transport: max 0.2069 [<=1], min 0.0106
+m= 12 u=0.5  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 0.0667;   Harper/transport: max 0.2537 [<=1], min 0.0153
+m= 12 u=1.0  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 0.0105;   Harper/transport: max 0.0928 [<=1], min 0.00086
+m= 12 u=2.0  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 0.00112;   Harper/transport: max 0.0230 [<=1], min 1.13e-06
+m= 64 u=0.5  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 8.15e-07;   Harper/transport: max 0.0706 [<=1], min 3.38e-09
+m= 64 u=1.0  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 2.76e-11;   Harper/transport: max 0.0096 [<=1], min 4.34e-17
+m= 64 u=2.0  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 1.83e-16;   Harper/transport: max 0.0000 [<=1], min 2.28e-33
+m=256 u=0.5  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 4.4e-25;   Harper/transport: max 0.0155 [<=1], min 9.61e-34
+m=256 u=1.0  Harper/ball-volume over all ball sizes: max 1.0000 [<=1], min 5.82e-43;   Harper/transport: max 0.0004 [<=1], min 3.51e-66
+
+violations: 0    time 8.2 s

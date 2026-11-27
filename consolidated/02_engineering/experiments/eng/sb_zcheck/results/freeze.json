@@ -1,0 +1,53 @@
+{
+ "what": "freeze record of the independent checker indep_zcheck.py (phase 1 of the response to STRUCTBIO-REQ-0004)",
+ "frozen_utc": "2026-11-27 00:33:34 UTC",
+ "indep_zcheck_sha256_at_freeze": "0a9d17a19c0ff2a7b2c932f3d1b9e99a716fa96d2deb92653e44b0fb68ba227a",
+ "indep_zcheck_lines_at_freeze": 982,
+ "reviewed_commit": "0544ff4",
+ "read_before_freeze": [
+  {
+   "utc": "2026-11-27 00:05",
+   "what": "docs/collaboration/requests/structural-biology/STRUCTBIO-REQ-0004.md, whole"
+  },
+  {
+   "utc": "2026-11-27 00:06",
+   "what": "zcert.py: module docstring, signatures and docstrings only (printed with ast; no body)"
+  },
+  {
+   "utc": "2026-11-27 00:07",
+   "what": "zcheck.py, expo.py, itables.py, model.py, modelio.py: module docstrings, signatures and docstrings only"
+  },
+  {
+   "utc": "2026-11-27 00:08",
+   "what": "mincert.py lines 405-425 (body of model_sha256, 3 lines; the 16 lines above it belong to the loader of the other certificate format and were on screen) and lines 278-284 (body of _model_to_json): needed because no docstring defines the checksum"
+  },
+  {
+   "utc": "2026-11-27 00:08",
+   "what": "output of zcert.dumps on three hand-built ZCertificate objects (file layout by example; no body read)"
+  }
+ ],
+ "not_read_before_freeze": [
+  "any body of zcheck.py",
+  "bodies of zcert.loads, zcert._node_from_json, zcert.validate_structure, zcert.dumps and helpers",
+  "bodies of expo.py, itables.py, model.py, partition.py",
+  "tests/structbio/*"
+ ],
+ "specification_gaps_recorded_before_freeze": [
+  "G1 file layout (key names, nesting, where the checksum is) is in no docstring",
+  "G2 'canonical rational' is not defined",
+  "G3 the instance checksum is defined only as 'canonical JSON of scale and tables'",
+  "G4 encoding of the keys of 'children' is not stated",
+  "G5 length of f, g (all states of the site, or the working domain) is not stated",
+  "G6 whether a leaf's order under conditioning contains the conditioned sites is not stated",
+  "G7 validity conditions of a prune (r, t in the working domain, r != t, sign of the margin) are not stated",
+  "G8 admissible beta (sign, zero) is not stated",
+  "G9 empty domains / empty boxes, duplicate or unsorted states in 'domains' are not addressed",
+  "G10 relax of a pair that is not listed, listed in the other orientation, or already relaxed is not addressed",
+  "G11 the returned interval is implementation-defined (exp_bits, tier, log rounding): only containment relations can be compared; acceptance of a claim therefore depends on the checker",
+  "G12 structure of ZResult.populations and the meaning of population(a) for a state outside the root box are not stated",
+  "G13 whether a branch may name a site with one state left (e.g. already conditioned), and whether surplus children are errors, is not stated",
+  "G14 'meta' (free text? valid JSON?), optional vs required top-level keys, key order and whitespace are not addressed",
+  "G15 limits (nesting depth, integer size, table budget semantics) are not stated"
+ ],
+ "self_tests_before_freeze": "my checker against enumeration (Arb balls) and against a second direct evaluator of the recursion on certificates of my own producer; variants; loader strictness; fuzz; exp/ln enclosures (Arb vs Taylor vs mpmath); none used the reviewed package"
+}

@@ -1,0 +1,51 @@
+'MetricChain.Geometry.stacked_sqdist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.stress_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.mixture_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.stress_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.block_coeff_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.block_rigidity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.sqdist_midpoint_of_conic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.globallyRigid_of_ensembleRigid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.ensembleRigid_of_universal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.fourAtom_not_ensembleRigid_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.Geometry.block_rigidity_nonvacuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+@MetricChain.Geometry.block_rigidity : ∀ {V : Type u_1} {W : Type u_2} [inst : NormedAddCommGroup V]
+  [inst_1 : InnerProductSpace ℝ V] [inst_2 : NormedAddCommGroup W] [inst_3 : InnerProductSpace ℝ W]
+  [FiniteDimensional ℝ W] (U₁ U₂ : Submodule ℝ V),
+  U₁ ⟂ U₂ →
+    ∀ (d : ℕ),
+      0 < d →
+        Module.finrank ℝ ↥U₁ = d →
+          Module.finrank ℝ ↥U₂ = d →
+            Module.finrank ℝ W ≤ d →
+              ∀ (A : V →ₗ[ℝ] W) (c₁ c₂ : ℝ),
+                (∀ u ∈ U₁, ∀ u' ∈ U₂, ‖A (u + u')‖ ^ 2 = c₁ * ‖u‖ ^ 2 + c₂ * ‖u'‖ ^ 2) → c₁ = 0 ∨ c₂ = 0
+@MetricChain.Geometry.stress_certificate : ∀ {n : Type u_1} [inst : Fintype n] {J : Type u_2} {K : Type u_3}
+  {C : Type u_4} [inst_1 : Fintype J] [inst_2 : Fintype K] [inst_3 : Fintype C] (Ω : Matrix n n ℝ),
+  Ω.PosSemidef →
+    (∀ (i : n), ∑ j, Ω i j = 0) →
+      ∀ (w : K → ℝ) (X : K → C → n → ℝ),
+        (∀ (k : K) (c : C), Ω.mulVec (X k c) = 0) →
+          ∀ (v : J → ℝ),
+            (∀ (a : J), 0 ≤ v a) →
+              ∀ (Y : J → C → n → ℝ),
+                (∀ (i j : n),
+                    Ω i j ≠ 0 → ∑ a, v a * ∑ c, (Y a c i - Y a c j) ^ 2 = ∑ k, w k * ∑ c, (X k c i - X k c j) ^ 2) →
+                  ∀ (a : J), 0 < v a → ∀ (c : C), Ω.mulVec (Y a c) = 0
+@MetricChain.Geometry.ensembleRigid_of_universal : ∀ {ι : Type u_2} {E : Type u_1} [inst : NormedAddCommGroup E]
+  [InnerProductSpace ℝ E] (E₀ F : Set (ι × ι)) (x : ι → E),
+  MetricChain.Geometry.UniversallyRigid (F ∪ E₀) x →
+    MetricChain.Geometry.EnsembleRigid E₀ Set.univ x → MetricChain.Geometry.EnsembleRigid E₀ F x
+@MetricChain.Geometry.globallyRigid_of_ensembleRigid : ∀ {ι : Type u_2} {E : Type u_1} [inst : NormedAddCommGroup E]
+  (E₀ F : Set (ι × ι)) (x : ι → E),
+  MetricChain.Geometry.EnsembleRigid E₀ F x → MetricChain.Geometry.GloballyRigid (F ∪ E₀) x
+@MetricChain.Geometry.sqdist_midpoint_of_conic : ∀ {m : Type u_1} [inst : Fintype m] [inst_1 : DecidableEq m]
+  (S : Matrix m m ℝ),
+  (1 + S).PosSemidef →
+    (1 - S).PosSemidef →
+      ∀ (edges : Set (m → ℝ)),
+        (∀ e ∈ edges, e ⬝ᵥ S.mulVec e = 0) →
+          ∃ Ap Am,
+            (∀ e ∈ edges, Ap.mulVec e ⬝ᵥ Ap.mulVec e = e ⬝ᵥ e ∧ Am.mulVec e ⬝ᵥ Am.mulVec e = e ⬝ᵥ e) ∧
+              (∀ (v : m → ℝ), Ap.mulVec v ⬝ᵥ Ap.mulVec v - v ⬝ᵥ v = v ⬝ᵥ S.mulVec v) ∧
+                ∀ (v : m → ℝ), Ap.mulVec v ⬝ᵥ Ap.mulVec v + Am.mulVec v ⬝ᵥ Am.mulVec v = 2 * v ⬝ᵥ v

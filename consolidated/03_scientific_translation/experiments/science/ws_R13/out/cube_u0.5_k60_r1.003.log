@@ -1,0 +1,73 @@
+# r13_01_cube_recursion.py u=0.5 levels=60 grid ratio=1.003
+# p_u=0.377540668798 Lam1=0.219070196380 eps*=0.030929803620 a=0.030299861981 h=0.007672866478
+# kappa=0.039226641727 c1=0.203276317099 c2=6.644693927534 c1/a=6.708820
+# self-check one step from theta_hint, f=0.999: min(V-th)=+9.453e-13 max(V-th)=5.968e-06 max rel (all but top 5 cells)=1.438e-01
+# self-check one step from theta_hint, f=0.999999: min(V-th)=+9.424e-13 max(V-th)=3.240e-06 max rel (all but top 5 cells)=7.377e-04
+# self-check one step from theta_hint, f=0.999999999: min(V-th)=+4.361e-13 max(V-th)=3.240e-06 max rel (all but top 5 cells)=7.377e-04
+k=  1  B_k-h=2.262700e-02  c1/(k+c2)=2.659051e-02  ratio(a)=0.8509  max_g(U-th)=2.2621e-02  max ratio(b)=0.8198  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.747  t=0s
+k=  2  B_k-h=7.478695e-03  c1/(k+c2)=2.351458e-02  ratio(a)=0.3180  max_g(U-th)=7.4761e-03  max ratio(b)=0.3064  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.987  t=6s
+k=  3  B_k-h=3.144321e-03  c1/(k+c2)=2.107649e-02  ratio(a)=0.1492  max_g(U-th)=3.1432e-03  max ratio(b)=0.1437  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.934  t=11s
+k=  4  B_k-h=1.540562e-03  c1/(k+c2)=1.909649e-02  ratio(a)=0.0807  max_g(U-th)=1.5391e-03  max ratio(b)=0.0777  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.814  t=16s
+k=  5  B_k-h=8.605059e-04  c1/(k+c2)=1.745656e-02  ratio(a)=0.0493  max_g(U-th)=8.5932e-04  max ratio(b)=0.0474  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.710  t=22s
+k=  6  B_k-h=5.475325e-04  c1/(k+c2)=1.607602e-02  ratio(a)=0.0341  max_g(U-th)=5.4711e-04  max ratio(b)=0.0328  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.651  t=27s
+k=  7  B_k-h=3.877397e-04  c1/(k+c2)=1.489783e-02  ratio(a)=0.0260  max_g(U-th)=3.8742e-04  max ratio(b)=0.0251  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.627  t=32s
+k=  8  B_k-h=2.944288e-04  c1/(k+c2)=1.388054e-02  ratio(a)=0.0212  max_g(U-th)=2.9420e-04  max ratio(b)=0.0204  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.622  t=37s
+k=  9  B_k-h=2.334241e-04  c1/(k+c2)=1.299331e-02  ratio(a)=0.0180  max_g(U-th)=2.3321e-04  max ratio(b)=0.0173  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.624  t=42s
+k= 10  B_k-h=1.902666e-04  c1/(k+c2)=1.221268e-02  ratio(a)=0.0156  max_g(U-th)=1.9015e-04  max ratio(b)=0.0150  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.628  t=47s
+k= 11  B_k-h=1.583477e-04  c1/(k+c2)=1.152054e-02  ratio(a)=0.0137  max_g(U-th)=1.5825e-04  max ratio(b)=0.0132  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.632  t=52s
+k= 12  B_k-h=1.345359e-04  c1/(k+c2)=1.090264e-02  ratio(a)=0.0123  max_g(U-th)=1.3451e-04  max ratio(b)=0.0119  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.639  t=57s
+k= 13  B_k-h=1.157716e-04  c1/(k+c2)=1.034764e-02  ratio(a)=0.0112  max_g(U-th)=1.1566e-04  max ratio(b)=0.0108  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.646  t=62s
+k= 14  B_k-h=1.007762e-04  c1/(k+c2)=9.846420e-03  ratio(a)=0.0102  max_g(U-th)=1.0070e-04  max ratio(b)=0.0099  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.652  t=67s
+k= 15  B_k-h=8.873124e-05  c1/(k+c2)=9.391508e-03  ratio(a)=0.0094  max_g(U-th)=8.8669e-05  max ratio(b)=0.0091  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.659  t=72s
+k= 16  B_k-h=7.886871e-05  c1/(k+c2)=8.976775e-03  ratio(a)=0.0088  max_g(U-th)=7.8824e-05  max ratio(b)=0.0085  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.666  t=77s
+k= 17  B_k-h=7.059155e-05  c1/(k+c2)=8.597122e-03  ratio(a)=0.0082  max_g(U-th)=7.0557e-05  max ratio(b)=0.0079  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.673  t=82s
+k= 18  B_k-h=6.374246e-05  c1/(k+c2)=8.248279e-03  ratio(a)=0.0077  max_g(U-th)=6.3699e-05  max ratio(b)=0.0074  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.682  t=87s
+k= 19  B_k-h=5.777537e-05  c1/(k+c2)=7.926642e-03  ratio(a)=0.0073  max_g(U-th)=5.7737e-05  max ratio(b)=0.0070  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.688  t=92s
+k= 20  B_k-h=5.288541e-05  c1/(k+c2)=7.629148e-03  ratio(a)=0.0069  max_g(U-th)=5.2844e-05  max ratio(b)=0.0067  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.698  t=97s
+k= 21  B_k-h=4.869119e-05  c1/(k+c2)=7.353177e-03  ratio(a)=0.0066  max_g(U-th)=4.8657e-05  max ratio(b)=0.0064  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.709  t=103s
+k= 22  B_k-h=4.497453e-05  c1/(k+c2)=7.096474e-03  ratio(a)=0.0063  max_g(U-th)=4.4945e-05  max ratio(b)=0.0061  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.718  t=108s
+k= 23  B_k-h=4.176178e-05  c1/(k+c2)=6.857089e-03  ratio(a)=0.0061  max_g(U-th)=4.1729e-05  max ratio(b)=0.0059  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.729  t=113s
+k= 24  B_k-h=3.893897e-05  c1/(k+c2)=6.633328e-03  ratio(a)=0.0059  max_g(U-th)=3.8912e-05  max ratio(b)=0.0057  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.740  t=118s
+k= 25  B_k-h=3.633626e-05  c1/(k+c2)=6.423709e-03  ratio(a)=0.0057  max_g(U-th)=3.6308e-05  max ratio(b)=0.0054  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.750  t=124s
+k= 26  B_k-h=3.410397e-05  c1/(k+c2)=6.226933e-03  ratio(a)=0.0055  max_g(U-th)=3.4080e-05  max ratio(b)=0.0053  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.761  t=129s
+k= 27  B_k-h=3.209143e-05  c1/(k+c2)=6.041854e-03  ratio(a)=0.0053  max_g(U-th)=3.2066e-05  max ratio(b)=0.0051  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.772  t=134s
+k= 28  B_k-h=3.034525e-05  c1/(k+c2)=5.867459e-03  ratio(a)=0.0052  max_g(U-th)=3.0324e-05  max ratio(b)=0.0050  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.785  t=139s
+k= 29  B_k-h=2.871259e-05  c1/(k+c2)=5.702849e-03  ratio(a)=0.0050  max_g(U-th)=2.8699e-05  max ratio(b)=0.0048  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.797  t=144s
+k= 30  B_k-h=2.726887e-05  c1/(k+c2)=5.547224e-03  ratio(a)=0.0049  max_g(U-th)=2.7248e-05  max ratio(b)=0.0047  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.810  t=150s
+k= 31  B_k-h=2.588698e-05  c1/(k+c2)=5.399866e-03  ratio(a)=0.0048  max_g(U-th)=2.5865e-05  max ratio(b)=0.0046  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.821  t=155s
+k= 32  B_k-h=2.469218e-05  c1/(k+c2)=5.260135e-03  ratio(a)=0.0047  max_g(U-th)=2.4673e-05  max ratio(b)=0.0045  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.834  t=160s
+k= 33  B_k-h=2.362871e-05  c1/(k+c2)=5.127453e-03  ratio(a)=0.0046  max_g(U-th)=2.3610e-05  max ratio(b)=0.0044  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.849  t=165s
+k= 34  B_k-h=2.264869e-05  c1/(k+c2)=5.001300e-03  ratio(a)=0.0045  max_g(U-th)=2.2632e-05  max ratio(b)=0.0044  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.864  t=171s
+k= 35  B_k-h=2.171209e-05  c1/(k+c2)=4.881206e-03  ratio(a)=0.0044  max_g(U-th)=2.1694e-05  max ratio(b)=0.0043  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.878  t=176s
+k= 36  B_k-h=2.088042e-05  c1/(k+c2)=4.766743e-03  ratio(a)=0.0044  max_g(U-th)=2.0864e-05  max ratio(b)=0.0042  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.893  t=182s
+k= 37  B_k-h=2.011797e-05  c1/(k+c2)=4.657526e-03  ratio(a)=0.0043  max_g(U-th)=2.0104e-05  max ratio(b)=0.0042  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.909  t=187s
+k= 38  B_k-h=1.940526e-05  c1/(k+c2)=4.553202e-03  ratio(a)=0.0043  max_g(U-th)=1.9391e-05  max ratio(b)=0.0041  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.925  t=193s
+k= 39  B_k-h=1.874605e-05  c1/(k+c2)=4.453449e-03  ratio(a)=0.0042  max_g(U-th)=1.8732e-05  max ratio(b)=0.0041  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.941  t=198s
+k= 40  B_k-h=1.816621e-05  c1/(k+c2)=4.357973e-03  ratio(a)=0.0042  max_g(U-th)=1.8153e-05  max ratio(b)=0.0040  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.959  t=203s
+k= 41  B_k-h=1.759258e-05  c1/(k+c2)=4.266505e-03  ratio(a)=0.0041  max_g(U-th)=1.7578e-05  max ratio(b)=0.0040  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.976  t=208s
+k= 42  B_k-h=1.706797e-05  c1/(k+c2)=4.178797e-03  ratio(a)=0.0041  max_g(U-th)=1.7309e-05  max ratio(b)=0.0039  min(U-th)=+9.84e-11  (tau-h)k^2/a=0.994  t=214s
+k= 43  B_k-h=1.656471e-05  c1/(k+c2)=4.094623e-03  ratio(a)=0.0040  max_g(U-th)=1.7309e-05  max ratio(b)=0.0039  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.011  t=219s
+k= 44  B_k-h=1.610905e-05  c1/(k+c2)=4.013773e-03  ratio(a)=0.0040  max_g(U-th)=1.7309e-05  max ratio(b)=0.0039  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.029  t=224s
+k= 45  B_k-h=1.566720e-05  c1/(k+c2)=3.936054e-03  ratio(a)=0.0040  max_g(U-th)=1.7309e-05  max ratio(b)=0.0038  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.047  t=229s
+k= 46  B_k-h=1.525293e-05  c1/(k+c2)=3.861288e-03  ratio(a)=0.0040  max_g(U-th)=1.7309e-05  max ratio(b)=0.0038  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.065  t=235s
+k= 47  B_k-h=1.488437e-05  c1/(k+c2)=3.789309e-03  ratio(a)=0.0039  max_g(U-th)=1.7309e-05  max ratio(b)=0.0038  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.085  t=240s
+k= 48  B_k-h=1.452926e-05  c1/(k+c2)=3.719964e-03  ratio(a)=0.0039  max_g(U-th)=1.7309e-05  max ratio(b)=0.0038  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.105  t=245s
+k= 49  B_k-h=1.419533e-05  c1/(k+c2)=3.653112e-03  ratio(a)=0.0039  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.125  t=251s
+k= 50  B_k-h=1.387069e-05  c1/(k+c2)=3.588621e-03  ratio(a)=0.0039  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.144  t=256s
+k= 51  B_k-h=1.358741e-05  c1/(k+c2)=3.526366e-03  ratio(a)=0.0039  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.166  t=261s
+k= 52  B_k-h=1.332276e-05  c1/(k+c2)=3.466235e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.189  t=266s
+k= 53  B_k-h=1.305817e-05  c1/(k+c2)=3.408121e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.211  t=272s
+k= 54  B_k-h=1.282104e-05  c1/(k+c2)=3.351923e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.234  t=277s
+k= 55  B_k-h=1.259034e-05  c1/(k+c2)=3.297548e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.257  t=282s
+k= 56  B_k-h=1.237195e-05  c1/(k+c2)=3.244909e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.280  t=289s
+k= 57  B_k-h=1.216220e-05  c1/(k+c2)=3.193924e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.304  t=294s
+k= 58  B_k-h=1.196266e-05  c1/(k+c2)=3.144517e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.328  t=300s
+k= 59  B_k-h=1.177704e-05  c1/(k+c2)=3.096615e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.353  t=305s
+k= 60  B_k-h=1.158755e-05  c1/(k+c2)=3.050150e-03  ratio(a)=0.0038  max_g(U-th)=1.7309e-05  max ratio(b)=0.0037  min(U-th)=+9.84e-11  (tau-h)k^2/a=1.377  t=311s
+# levels with B_k-h > c1/(k+c2): []
+# levels with some grid point above A(g)/(k+c2): []
+# levels where the upper bound dips below theta_hint (must be empty): []
+# max ratio(a) = 0.850942 at k=1
+# max ratio(b) = 0.819769 at k=1
+# wrote out/cube_u0.5_k60_r1.003.json; 311 s
+# END

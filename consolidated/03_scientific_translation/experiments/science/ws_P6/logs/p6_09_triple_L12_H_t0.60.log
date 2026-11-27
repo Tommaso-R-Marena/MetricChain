@@ -1,0 +1,18 @@
+=== triple shares: L12 on H, tau 0.6: atoms 240, sites 12, |X| = 4096; anchor E = -222.853947; orders [4]; bands [11, 4, 2]; enumeration True [0.6s]
+    enumeration: 4096 states (cache); ln Z(E) = 374.345343
+  -- m = 4: Gamma_4 = 1.886576e+02 kcal/mol; 220 in-window triple sums (window 11) by the closed form with three excluded sites [9.1s]; max H_ijk/C(m,3) = 3.3199e+00; sum over in-window triples / C(m,3) = 1.886576e+02 (100.00 % of Gamma)
+     triple sums vs EXPLICIT ENUMERATION of 495 subsets: max |H_ijk - enum| = 5.62e-13 kcal/mol over 220 triples (relative to Gamma 3.0e-15)
+     w = 11 form S: ln Z(m_-) = 564.161221, ln Z(m_+) = 373.814894, width 190.346328 nats; min m_- = -336.258269 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 1.1e-13; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack 0.0e+00 [0.0s]
+     w = 11 form B: ln Z(m_-) = 564.039160, ln Z(m_+) = 374.300202, width 189.738958 nats; min m_- = -336.258279 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 1.1e-13; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack -1.7e-13 [0.0s]
+     w = 11 form T: ln Z(m_-) = 564.039508, ln Z(m_+) = 374.343559, width 189.695949 nats; min m_- = -336.258487 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 2.3e-13; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack -1.7e-13 [0.0s]
+     w = 11: |remainder| <= triple penalty: violations 0, ratio min 184; pointwise envelope <= triple: True; triple <= banded pair: True
+     w =  4 form S: ln Z(m_-) = 564.330839, ln Z(m_+) = 373.400618, width 190.930221 nats; min m_- = -336.357371 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 1.1e-13; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack 9.9e-02 [0.0s]
+     w =  4 form B: ln Z(m_-) = 564.205415, ln Z(m_+) = 373.401594, width 190.803822 nats; min m_- = -336.357381 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 0.0e+00; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack 9.9e-02 [0.0s]
+     w =  4 form T: ln Z(m_-) = 564.205475, ln Z(m_+) = 373.401594, width 190.803882 nats; min m_- = -336.357430 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 4.5e-13; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack 9.9e-02 [0.0s]
+     w =  4: |remainder| <= triple penalty: violations 0, ratio min 696; pointwise envelope <= triple: True; triple <= banded pair: True
+     w =  2 form S: ln Z(m_-) = 571.854134, ln Z(m_+) = 372.198885, width 199.655249 nats; min m_- = -340.877125 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 1.1e-13; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack 9.6e-01 [0.0s]
+     w =  2 form B: ln Z(m_-) = 571.789100, ln Z(m_+) = 372.198885, width 199.590214 nats; min m_- = -340.877136 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 0.0e+00; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack 9.6e-01 [0.0s]
+     w =  2 form T: ln Z(m_-) = 571.788234, ln Z(m_+) = 372.198885, width 199.589349 nats; min m_- = -340.877145 | ENUM 4096 states: violations of m_- <= E <= m_+: 0; |DP - enum| = 0.0e+00; truth inside: True; EXTREME MEMBERS of the class: violations 0, smallest slack 9.6e-01 [0.0s]
+     w =  2: |remainder| <= triple penalty: violations 0, ratio min 959; pointwise envelope <= triple: True; triple <= banded pair: True
+    checks with the real energy and of |remainder| <= penalty: 86016, violations 0; checks of the extreme members: 73728, violations 0
+DONE p6_09_triple L12 H 0.6 [30s]

@@ -1,0 +1,29 @@
+hub_tail_check.py   started 2026-11-26 23:53:09 UTC
+recursion against enumeration of 2^12 inner configurations: largest relative difference 3.6e-15
+
+== chain of the report: 16 inner sites, couplings 14 kT across the cut, 11 kT inside
+  pi_h = 0.002: ln(V_1/V_0) = 11.4486; share of the rare boundary state in A = 99.47 %
+     (A) product-class envelope: V exceeds it by 10.449 nats; worst (TU) ratio 1.746e+04 at level s = 1.07e-05, p(s) = 0.002
+     (B) envelope with the influence at the boundary site: V exceeds it by 0.0e+00; worst (TU) ratio 1.000000
+  pi_h = 0.02: ln(V_1/V_0) = 11.4486; share of the rare boundary state in A = 99.95 %
+     (A) product-class envelope: V exceeds it by 10.449 nats; worst (TU) ratio 1.746e+04 at level s = 1.07e-05, p(s) = 0.02
+     (B) envelope with the influence at the boundary site: V exceeds it by 0.0e+00; worst (TU) ratio 1.000000
+  pi_h = 0.2: ln(V_1/V_0) = 11.4486; share of the rare boundary state in A = 100.00 %
+     (A) product-class envelope: V exceeds it by 10.449 nats; worst (TU) ratio 2.58e+04 at level s = 3.92e-06, p(s) = 0.3
+     (B) envelope with the influence at the boundary site: V exceeds it by 0.0e+00; worst (TU) ratio 1.000000
+  control, no coupling across the cut (pi_h = 0.02): ln(V_1/V_0) = 0.00e+00; worst (TU) ratio with the product-class envelope 1.000000 (must be <= 1)
+
+== the weaker chain: 12 inner sites, couplings 10 and 7.6 kT
+  pi_h = 0.002: ln(V_1/V_0) = 7.9784; share of the rare boundary state in A = 85.39 %
+     (A) product-class envelope: V exceeds it by 6.978 nats; worst (TU) ratio 542.6 at level s = 0.000341, p(s) = 0.002
+     (B) envelope with the influence at the boundary site: V exceeds it by 0.0e+00; worst (TU) ratio 1.000000
+  pi_h = 0.02: ln(V_1/V_0) = 7.9784; share of the rare boundary state in A = 98.35 %
+     (A) product-class envelope: V exceeds it by 6.978 nats; worst (TU) ratio 542.6 at level s = 0.000341, p(s) = 0.02
+     (B) envelope with the influence at the boundary site: V exceeds it by 0.0e+00; worst (TU) ratio 1.000000
+  pi_h = 0.2: ln(V_1/V_0) = 7.9784; share of the rare boundary state in A = 99.86 %
+     (A) product-class envelope: V exceeds it by 6.978 nats; worst (TU) ratio 802.5 at level s = 0.000125, p(s) = 0.3
+     (B) envelope with the influence at the boundary site: V exceeds it by 0.0e+00; worst (TU) ratio 1.000000
+  control, no coupling across the cut (pi_h = 0.02): ln(V_1/V_0) = 0.00e+00; worst (TU) ratio with the product-class envelope 1.000000 (must be <= 1)
+
+statements that must hold and did not: 0
+ALL DONE   computed in 2.7 s   peak memory 49 MB

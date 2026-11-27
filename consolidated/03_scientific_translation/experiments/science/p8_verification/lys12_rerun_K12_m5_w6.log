@@ -1,0 +1,41 @@
+=== K12 on H, tau 0.7: 276 atoms, 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], 9.49117e+10 assignments; anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3], E = -307.507549 kcal/mol; order m = 5, band 6
+(0) self-test of the interpolation formula against the grid recursion (random table, m = 2..5): largest deviation 1.4e-14
+(1) 792 constants per variant read from ws_P8/out/g12_K12_H_0.70_m5.npz and g12b_...: Gamma_5 (kT): P3 145.2, AH 110.7, S 3.273, SA 3.083, Sb 2.54, SAb 2.405; chains SAb <= SA <= S <= P3, SAb <= Sb <= S, SA <= AH <= P3 for every subset: True
+(1a) workstream P3's closed form by my driver's route (79 closed-form sums over exclusion sets, 12s): Gamma_5 = 145.222 kT; P8's per-subset 'P3' variant summed: 145.222 kT; relative deviations: Gamma 1.1e-15, site sums S_i at most 6.1e-15, pair sums G_ij at most 3.1e-14 (the closed-form route obtains S_i and G_ij by inclusion-exclusion over exclusion sets, the other by plain sums over the subsets)
+(2) ball of radius 4: 1621056 values from ws_P8/cache/ball_K12_H_0.70_M4_ebe4086eaa.npz; its states equal pwmodel.ball_states row by row; 3000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol [59s]
+(3) |g - I_4 g| against sum of constants over the 5-subsets of the changed set, at 250 uniformly random states for each number s of sites off the anchor [62s]:
+| s | states | largest |g - I g| (kcal/mol) | median | variant | violations | smallest bound/|g - I g| | median bound (kcal/mol) |
+|---|---|---|---|---|---|---|---|
+| 5 | 250 | 2.583e-05 | 4.82e-09 | P3 | 0 | 2344.58 | 0.0328 |
+| 5 | 250 | 2.583e-05 | 4.82e-09 | Sb | 0 | 75.30 | 0.000836 |
+| 5 | 250 | 2.583e-05 | 4.82e-09 | SAb | 0 | 72.53 | 0.000795 |
+| 6 | 250 | 0.0001161 | 4.78e-08 | P3 | 0 | 18963.83 | 0.314 |
+| 6 | 250 | 0.0001161 | 4.78e-08 | Sb | 0 | 383.67 | 0.00656 |
+| 6 | 250 | 0.0001161 | 4.78e-08 | SAb | 0 | 369.01 | 0.00603 |
+| 7 | 250 | 8.238e-05 | 2.36e-07 | P3 | 0 | 25262.75 | 1.51 |
+| 7 | 250 | 8.238e-05 | 2.36e-07 | Sb | 0 | 736.05 | 0.0306 |
+| 7 | 250 | 8.238e-05 | 2.36e-07 | SAb | 0 | 665.87 | 0.0288 |
+| 8 | 250 | 0.0002676 | 8.86e-07 | P3 | 0 | 11041.42 | 4.89 |
+| 8 | 250 | 0.0002676 | 8.86e-07 | Sb | 0 | 191.05 | 0.101 |
+| 8 | 250 | 0.0002676 | 8.86e-07 | SAb | 0 | 171.85 | 0.0956 |
+| 9 | 250 | 0.0001479 | 2.96e-06 | P3 | 0 | 86136.30 | 12.3 |
+| 9 | 250 | 0.0001479 | 2.96e-06 | Sb | 0 | 1618.72 | 0.23 |
+| 9 | 250 | 0.0001479 | 2.96e-06 | SAb | 0 | 1509.99 | 0.217 |
+| 10 | 250 | 0.0003426 | 4.22e-06 | P3 | 0 | 61425.58 | 26 |
+| 10 | 250 | 0.0003426 | 4.22e-06 | Sb | 0 | 1086.55 | 0.457 |
+| 10 | 250 | 0.0003426 | 4.22e-06 | SAb | 0 | 1019.51 | 0.433 |
+| 11 | 250 | 0.0005881 | 1.41e-05 | P3 | 0 | 68231.07 | 50.3 |
+| 11 | 250 | 0.0005881 | 1.41e-05 | Sb | 0 | 1220.54 | 0.817 |
+| 11 | 250 | 0.0005881 | 1.41e-05 | SAb | 0 | 1150.02 | 0.775 |
+| 12 | 250 | 0.000831 | 2.3e-05 | P3 | 0 | 104178.91 | 86.6 |
+| 12 | 250 | 0.000831 | 2.3e-05 | Sb | 0 | 1822.37 | 1.51 |
+| 12 | 250 | 0.000831 | 2.3e-05 | SAb | 0 | 1725.17 | 1.43 |
+(4) my Gibbs sample (8 chains, 120 sweeps each after 30, seed 777): 960 states, 1.13 sites off the anchor on average; by site: 0.37 0.24 0.19 0.02 0.02 0.02 0.03 0.03 0.04 0.06 0.05 0.07 [166s]
+    constants 'Sb' (Gamma_5 = 2.54 kT), form S, exact window terms (245 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.772872, 517.610489], width 0.837618 nats; sandwich violated at 0 of my 960 Gibbs states and at 0 of the 2000 random states [3s, peak RSS 1727 MB]
+    constants 'Sb' (Gamma_5 = 2.54 kT), form B, exact window terms (245 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.933049, 517.411202], width 0.478152 nats; sandwich violated at 0 of my 960 Gibbs states and at 0 of the 2000 random states [4s, peak RSS 1727 MB]
+    constants 'Sb' (Gamma_5 = 2.54 kT), form T, exact window terms (245 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.944029, 517.396915], width 0.452886 nats; sandwich violated at 0 of my 960 Gibbs states and at 0 of the 2000 random states [4s, peak RSS 1727 MB]
+    constants 'SAb' (Gamma_5 = 2.405 kT), form S, exact window terms (245 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.783538, 517.595434], width 0.811896 nats; sandwich violated at 0 of my 960 Gibbs states and at 0 of the 2000 random states; P8's run: [516.783538, 517.595434], differences +0.0e+00, +0.0e+00 [4s, peak RSS 1727 MB]
+    constants 'SAb' (Gamma_5 = 2.405 kT), form B, exact window terms (245 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.936649, 517.406968], width 0.470319 nats; sandwich violated at 0 of my 960 Gibbs states and at 0 of the 2000 random states; P8's run: [516.936649, 517.406968], differences +0.0e+00, +0.0e+00 [3s, peak RSS 1727 MB]
+    constants 'SAb' (Gamma_5 = 2.405 kT), form T, exact window terms (245 exact, 470 reduced, 15 pairs beyond the band): ln Z(E) in [516.947234, 517.393364], width 0.44613 nats; sandwich violated at 0 of my 960 Gibbs states and at 0 of the 2000 random states; P8's run: [516.947234, 517.393364], differences +0.0e+00, +0.0e+00 [4s, peak RSS 1727 MB]
+(5) 2000 exact samples of the floor of the triple form ('SAb'; my seed): 1.20 sites off the anchor on average; m_- > E at 0, m_+ < E at 0; uncertified estimate by reweighting: ln Z(E) = 517.128530 +- 0.001746 (inside the bracket: True)
+ALL DONE 195 s; peak RSS 1727 MB

@@ -1,0 +1,4 @@
+bJ=1.5 u=1.0 eps = 0.05*n + 1; profile S4: lams [0.3948 0.1052 0.1052 0.3948], mus [0.7248 0.5662 0.4338 0.2752];  single-letter value V(mu, e + alpha) = 0.006382
+      n   block sizes          theta = ln(1/maxdens)/n   ln(1+Phi)/n   B*        theta - V     (theta - V)/(ln n/n)   time
+    150   (59, 16, 16, 59)     0.005091                  0.057006      0.31718   -0.001291     -0.039                 2s
+    300   (118, 32, 32, 118)   0.005593                  0.053391      0.28933   -0.000788     -0.041                 42s

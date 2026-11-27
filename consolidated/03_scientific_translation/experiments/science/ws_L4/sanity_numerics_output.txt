@@ -1,0 +1,15 @@
+A1 general remainder identity (all S, m = 0..n+1, arbitrary base and target): 9984 cases, worst |lhs - rhs| = 1.78e-15
+A1' controls: reversed order ('i > max T') worst defect = 8.88e-16 (also an identity); base point x0 for every T: worst defect = 5.25e+00 (not an identity)
+A2 allocation lemma, general shares, c possibly negative: 12840 cases, max(lhs - rhs) = 0.00e+00 (must be <= 0)
+B0 key lemma c^2(e^u-1-u) <= u^2(e^c-1-c) for u <= c, all signs: max relative violation = -1.18e-11 (must be <= ~1e-16)
+B1 two-point bound: 38637 random laws; max(E e^X - B(b,v)) = 0.00e+00; max(B - 1 - (v/b^2)(e^b-1-b)) = 2.22e-16; max(1 - E e^X | EX=0) = 0.00e+00; ceiling lower bound max violation = 0.00e+00 (all must be <= ~1e-12)
+B2 two-point law: worst defect of (mass, mean, second moment, mgf) = 6.66e-16; monotonicity of B in b, in v, in both: max relative decrease = 0.00e+00
+B3 deterministic bracket: max violation upper = -1.28e-04, lower = -3.51e-05
+B4 (new) W(b2,v) - b2 <= W(b1,v) - b1 for b1 <= b2: max violation = -3.34e-06; sharper certificate W(rbar - eta - lo): 35505 cases, max violation = 0.00e+00; largest gain (paper - sharp)/(2 eta) = 0.885
+B5 unnormalised weights (bennett_bracket_weights): max violation = 1.78e-15
+B6 size of the gain of the sharper upper end, W(b + 2 eta, v) - W(b, v), b = rbar - eta - lo:
+   P3 m=5 inputs, N=50000, delta=0.05: W(b,v) = 2.3840e-03, eta = 1.386e-03, gain = 4.907e-06 = 0.0018 * 2 eta
+   theory example W(3.7, 0.036^2), N=1000, delta=0.05: W(b,v) = 3.3781e-03, eta = 5.091e-03, gain = 1.940e-05 = 0.0019 * 2 eta
+   deep floor b=8, v=0.25, N=1000, delta=0.05: W(b,v) = 2.5309e+00, eta = 7.071e-02, gain = 9.876e-02 = 0.6984 * 2 eta
+A3 anchored constants by brute force (two grids, all m >= 1, all y): corollary max violation = 4.44e-16; with ordered anchored constants = 4.44e-16; sandwich with site penalties = 0.00e+00; |R(y) - R(y reset at i)| - m gamma_i = 2.22e-16; |R(y) - R(y')| - 2 m gamma_i = -2.85e-01 (all must be <= ~1e-15); smallest ratio (sum of ordered anchored constants)/(sum of anchored constants) = 0.604
+B7 N iid samples, exact enumeration of Omega^N: |mse - Var/N| max = 2.22e-16; (1 - v/(N eta^2)) - coverage max = 0.00e+00 (must be <= 0); Proposition 6 (i), (ii) max violation = 1.11e-16

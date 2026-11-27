@@ -1,0 +1,15 @@
+torsions of X (degrees): [49.306, -82.877, -165.25]
+  stress_residual: 1.006890444130258e-15
+  stress_eigenvalues: [-0.514182, -0.0, -0.0, 0.0, 0.0, 1.55526]
+  fourD_residual: 1.7763568394002505e-15
+  fourD_singular_values: [2.5731, 1.2633, 0.5223, 0.2632]
+  quadric_residual: 3.885780586188048e-16
+  weights: (np.float64(0.5500169147726323), np.float64(0.44998308522736774))
+  max_dev_statewise_Xp: 1.7763568394002505e-15
+  max_dev_statewise_Xm: 2.220446049250313e-15
+  max_dev_mixture_vs_Y_all_pairs: 3.552713678800501e-15
+  max_dev_mixture_vs_X_on_F: 1.7763568394002505e-15
+  Xp_differs_from_X_on_F: 2.1727608783408217
+  Xm_differs_from_X_on_F: 2.655778126059678
+  mixture_differs_from_X_on_unmeasured: 1.0458414017037105
+OK: the two-state ensemble reproduces the averaged data of X on F

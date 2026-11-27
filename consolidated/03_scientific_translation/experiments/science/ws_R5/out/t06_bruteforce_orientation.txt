@@ -1,0 +1,13 @@
+space: 36 points, 18 joint types; envelopes asymmetric: A True, B True
+(1) quotient envelope min d(x,y) over T_P x T_P' against sum_j n_j W_j(P_j,P'_j) [primal LP]: max deviation 4.4e-16; delta asymmetric: True
+    Kantorovich: primal LP against max over the vertices of L of E_P' phi - E_P phi, 300 random pairs: 8.9e-16
+    flat-histogram instance of the lattice psi_H = -V_n(P_x) in the class: True; its transpose-built variant min_P'[J_P' + delta(P, P')] in the class: False
+    Z_H = 15.0464 (1 <= Z_H <= N_orb = 18)
+(2) deepest dips: not in the class 0; dip formula max error 4.4e-16; minimality violations 0
+(3) fibre averages (-ln W in the class of the outer block): violations 0
+(4) tail lemma relative to H: 11485 levels, violations 0;  with the TRANSPOSED slack: 8602 violations
+(5) truncation at orbit-wise q-quantiles: levels not admissible 0; truncation not in the class 0; changed on orbit density > q 0
+(6) Z_g Phi_g^+(D) <= Z_H Phi_H^+(D) and Lambda_g <= V_n on 300 random invariant instances and sets: violations 0
+(7) generalised dips with independent vertex labels, 40 random (gamma, t, r): violations 0; largest [max_x P(x in support)] / [e^(tr) prod rho^(n_j)] = 0.9095 (must be <= 1)
+[4.4 s]
+exit=0

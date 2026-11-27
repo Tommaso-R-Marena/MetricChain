@@ -1,0 +1,24 @@
+=== K12 on H, tau 0.7: 12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7]; order m = 3: 220 subsets; Gibbs sample of 960 states (seed 4242), 1.23 sites off the anchor on average [128s]
+(1) first-order width of the box at order 3: 2 beta <env> = 0.06349 nats (Monte Carlo standard error of the sum, ignoring correlation along the chains: 0.012); subsets with a non-zero contribution on the sample: 79 of 220; evaluations in the shell of radius 3: 92525
+| subsets taken by | share of the sum | share of the subsets needed | share of the shell's evaluations they cost |
+|---|---|---|---|
+| contribution | 0.5 | 0.005 | 0.020 |
+| contribution | 0.9 | 0.023 | 0.061 |
+| contribution | 0.99 | 0.100 | 0.212 |
+| contribution | 0.999 | 0.259 | 0.397 |
+| contribution per evaluation | 0.5 | 0.005 | 0.020 |
+| contribution per evaluation | 0.9 | 0.027 | 0.066 |
+| contribution per evaluation | 0.99 | 0.109 | 0.202 |
+| contribution per evaluation | 0.999 | 0.268 | 0.394 |
+(2) by the span of the subset (largest site minus smallest): span 2: 10 subsets, 67.30 % of the sum; span 3: 18 subsets, 2.59 % of the sum; span 4: 24 subsets, 21.70 % of the sum; span 5: 28 subsets, 5.82 % of the sum; span 6: 30 subsets, 0.52 % of the sum; span 7: 30 subsets, 0.77 % of the sum; span 8: 28 subsets, 0.73 % of the sum; span 9: 24 subsets, 0.25 % of the sum; span 10: 18 subsets, 0.21 % of the sum; span 11: 10 subsets, 0.11 % of the sum
+(3) control, tables shuffled among the subsets: 99 % of the sum then needs 0.132 of the subsets (against 0.100 with the true assignment); total 0.05907 nats
+(4) occupation from the product of the one-site marginals (smoothed counts; a model of the occupation, not the ensemble): 2 beta <env> = 0.06956 nats
+| subsets taken by | share of the sum | share of the subsets needed | share of the shell's evaluations they cost | control: share of the subsets needed with shuffled tables |
+|---|---|---|---|---|
+| contribution per evaluation | 0.5 | 0.005 | 0.020 | 0.005 |
+| contribution per evaluation | 0.9 | 0.032 | 0.079 | 0.032 |
+| contribution per evaluation | 0.99 | 0.200 | 0.340 | 0.223 |
+| contribution per evaluation | 0.999 | 0.595 | 0.716 | 0.600 |
+    by the span of the subset: span 2: 73.32 %; span 3: 9.57 %; span 4: 10.42 %; span 5: 2.44 %; span 6: 1.06 %; span 7: 1.46 %; span 8: 0.92 %; span 9: 0.41 %; span 10: 0.26 %; span 11: 0.12 %
+    the tables themselves: largest entry per subset from 7.86e-03 to 1.30e+01 kT (median 3.30e-01); the 22 subsets with the largest maxima hold 62.7 % of the sum of the maxima
+ALL DONE 128 s; peak RSS 1006 MB

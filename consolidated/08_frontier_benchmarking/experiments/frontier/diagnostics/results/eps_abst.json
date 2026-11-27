@@ -1,0 +1,29 @@
+[
+ {
+  "best_known": 34168,
+  "budget": 200.0,
+  "eps": "4095/4096",
+  "instance": "pdb1kwh",
+  "seconds": 200.9,
+  "status": "abstained_budget",
+  "toulbar2_proved": true
+ },
+ {
+  "best_known": 50662,
+  "budget": 200.0,
+  "eps": "4095/4096",
+  "instance": "pdb1fmj",
+  "seconds": 203.7,
+  "status": "abstained_budget",
+  "toulbar2_proved": true
+ },
+ {
+  "best_known": 58671,
+  "budget": 200.0,
+  "eps": "4095/4096",
+  "instance": "pdb1jmx",
+  "seconds": 202.9,
+  "status": "abstained_budget",
+  "toulbar2_proved": true
+ }
+]

@@ -1,0 +1,11 @@
+r26_cost.py; started 2026-11-26T22:37:26Z
+check 1 (iota = 0 reproduces Harper; monotone in iota): violations 300
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_cost.py", line 148, in <module>
+    v = main()
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_cost.py", line 97, in main
+    En = A.EnumeratedEnvelope(mu, u * ham + iota * hot)
+  File "/home/user/MetricChain/experiments/science/ws_R26/r26_alg.py", line 90, in __init__
+    assert N <= 20
+           ^^^^^^^
+AssertionError

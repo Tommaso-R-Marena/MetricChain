@@ -1,0 +1,12 @@
+u=2.0 n_o=24 n_i=6: K 946/946  closing level 303/303  r 4/4  M 1937408/1937408  r_dag -1/-1  pop/neg 303/0 vs 303/0  width 0.946 <= 1.259   same: True
+u=1.0 n_o=30 n_i=10: K 894/894  closing level 162/162  r 8/8  M 228864/228864  r_dag 2/2  pop/neg 162/0 vs 162/0  width 1.017 <= 1.350   same: True
+u=2.0 n_o=36 n_i=4: K 270/270  closing level 162/162  r 8/8  M 1105920/1105920  r_dag 0/0  pop/neg 162/0 vs 162/0  width 1.991 <= 2.783   same: True
+u=0.5 n_o=40 n_i=8: K 844/844  closing level 106/106  r 12/12  M 216064/216064  r_dag 7/7  pop/neg 106/0 vs 106/0  width 0.655 <= 1.066   same: True
+u=1.0 n_o=34 n_i=6: K 5092/5092  closing level 238/238  r 8/8  M 5214208/5214208  r_dag 2/2  pop/neg 238/0 vs 238/0  width 0.581 <= 0.734   same: True
+u=2.0 n_o=40 n_i=2 (nu1 = 1): K 270/270  closing level 180/180  r 10/10  M 552960/552960  r_dag 1/1  pop/neg 180/0 vs 180/0   same: True
+u=2.0 n_o=36 n_i=6 (nu1 = 1): K 263/263  closing level 94/94  r 9/9  M 269312/269312  r_dag 0/0  pop/neg 94/0 vs 94/0   same: True
+u=1.5 n_o=44 n_i=2 (nu1 = 1): K 273/273  closing level 227/227  r 12/12  M 559104/559104  r_dag 0/0  pop/neg 226/1 vs 226/1   same: True
+u=2.0 n_o=40 n_i=2 (nu1 = 1): K 278/278  closing level 274/274  r 10/10  M 569344/569344  r_dag 1/1  pop/neg 273/1 vs 273/1   same: True
+u=1.5 n_o=44 n_i=2 (nu1 = 1): K 283/283  closing level 304/304  r 12/12  M 579584/579584  r_dag 0/0  pop/neg 302/2 vs 302/2   same: True
+u=2.0 n_o=36 n_i=2 (nu1 = 1): K 291/291  closing level 449/449  r 9/9  M 297984/297984  r_dag 0/0  pop/neg 449/0 vs 449/0   same: True
+closed-form flat trajectory agrees with the simulated outer loop: True

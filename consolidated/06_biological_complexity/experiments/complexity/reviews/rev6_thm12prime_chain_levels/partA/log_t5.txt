@@ -1,0 +1,1 @@
+N[kB,0,k2], kB = 3..6, k2 = 0..2: no six-leaf restriction of the bloblet has the pattern; with clades of sizes 1..4 (47 networks, up to 15 leaves) all split weights are >= 0 and positive exactly on the displayed splits

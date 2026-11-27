@@ -1,0 +1,21 @@
+start 2026-11-26T21:28:01Z
+  unit: [(1,)]: q=2, |T|=3, models 1, matchings 1, predicted 1, sizes ok True
+  unit negative: [(-1,)]: q=2, |T|=3, models 1, matchings 1, predicted 1, sizes ok True
+  x and not x (unsat): [(1,), (-1,)]: q=4, |T|=6, models 0, matchings 0, predicted 0, sizes ok True
+  repeated literal: [(1, 1, 2)]: q=6, |T|=21, models 3, matchings 12, predicted 12, sizes ok True
+  repeated literal thrice: [(1, 1, 1)]: q=6, |T|=21, models 1, matchings 6, predicted 6, sizes ok True
+  repeated literal thrice + not x (unsat): [(1, 1, 1), (-1,)]: q=8, |T|=24, models 0, matchings 0, predicted 0, sizes ok True
+  tautological clause: [(1, -1)]: q=4, |T|=10, models 2, matchings 2, predicted 2, sizes ok True
+  tautological clause + units (sat): [(1, -1, 2), (-2,)]: q=8, |T|=24, models 2, matchings 4, predicted 4, sizes ok True
+  variable once: [(1, 2, 3)]: q=6, |T|=21, models 7, matchings 24, predicted 24, sizes ok True
+  only positive: [(1, 2), (1, 3), (2, 3)]: q=12, |T|=30, models 4, matchings 14, predicted 14, sizes ok True
+  only negative: [(-1, -2), (-1, -3)]: q=8, |T|=20, models 5, matchings 10, predicted 10, sizes ok True
+  duplicate clauses: [(1, -2), (1, -2)]: q=8, |T|=20, models 3, matchings 6, predicted 6, sizes ok True
+  two-literal unsat: [(1, 2), (1, -2), (-1, 2), (-1, -2)]: q=16, |T|=40, models 0, matchings 0, predicted 0, sizes ok True
+  all eight 3-clauses (unsat): [(1, 2, 3), (1, 2, -3), (1, -2, 3), (1, -2, -3), (-1, 2, 3), (-1, 2, -3), (-1, -2, 3), (-1, -2, -3)]: q=48, |T|=168, models 0, matchings 0, predicted 0, sizes ok True
+  seven 3-clauses (one model): [(1, 2, -3), (1, -2, 3), (1, -2, -3), (-1, 2, 3), (-1, 2, -3), (-1, -2, 3), (-1, -2, -3)]: q=42, |T|=147, models 1, matchings 3072, predicted 3072, sizes ok True
+[special] violations 0 of 15
+[special] exact-cover counter vs naive subset enumeration: 0 disagreements on 112 instances
+[special] control (naive count ignoring the W coordinate differs from the counter): 14 instances
+[special] empty clause, formula [(1, 2), ()]: |W|=4, |X|=5, |Y|=5, |T|=10; elements in no triple: [('c1', 1), ('c2', 1)]; exact covers 0
+peak memory 13.8 MB

@@ -1,0 +1,2556 @@
+{
+ "version": 1,
+ "generated_by": "experiments/ensemble/benchmark_controls.py",
+ "conventions": "numbers in quotes are exact rationals; unquoted numbers are decimal approximations",
+ "controls": [
+  {
+   "id": "B1-01",
+   "family": "identified",
+   "title": "Three conformers on the 4-cube, pair correlations",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^4 modulo the global flip (first sign +)",
+    "states": [
+     "++++",
+     "+++-",
+     "++-+",
+     "++--",
+     "+-++",
+     "+-+-",
+     "+--+",
+     "+---"
+    ]
+   },
+   "observables": {
+    "names": [
+     "x1*x2",
+     "x1*x3",
+     "x1*x4",
+     "x2*x3",
+     "x2*x4",
+     "x3*x4"
+    ],
+    "table": [
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1"
+     ]
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "++++",
+     "++--",
+     "+-+-"
+    ],
+    "weights": [
+     "1/2",
+     "3/10",
+     "1/5"
+    ]
+   },
+   "data": [
+    "3/5",
+    "2/5",
+    "0",
+    "0",
+    "2/5",
+    "3/5"
+   ],
+   "question": "Is the ensemble determined by the six pair correlations among all ensembles on the space?",
+   "expected": {
+    "verdict": "IDENTIFIED",
+    "certificate": {
+     "c": "2",
+     "lambda": [
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1"
+     ],
+     "gamma": "2",
+     "lambda_l1_norm": "6"
+    },
+    "stability": "every ensemble with pair correlations within tau (max norm) of the data has mass at most lambda_l1_norm * tau / gamma outside the support (Proposition E1.1)"
+   },
+   "why": "Any three conformers are determined by pair correlations (Proposition E9(a)); the answer does not depend on the weights.",
+   "source": "ENSEMBLE_REPORT.md section 2.1 (E1, E1.1), section 4.1 (E9)"
+  },
+  {
+   "id": "B1-02",
+   "family": "identified",
+   "title": "Five conformers on the 6-cube that form a face, pair correlations",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^6 modulo the global flip",
+    "states": [
+     "++++++",
+     "+++++-",
+     "++++-+",
+     "++++--",
+     "+++-++",
+     "+++-+-",
+     "+++--+",
+     "+++---",
+     "++-+++",
+     "++-++-",
+     "++-+-+",
+     "++-+--",
+     "++--++",
+     "++--+-",
+     "++---+",
+     "++----",
+     "+-++++",
+     "+-+++-",
+     "+-++-+",
+     "+-++--",
+     "+-+-++",
+     "+-+-+-",
+     "+-+--+",
+     "+-+---",
+     "+--+++",
+     "+--++-",
+     "+--+-+",
+     "+--+--",
+     "+---++",
+     "+---+-",
+     "+----+",
+     "+-----"
+    ]
+   },
+   "observables": {
+    "names": [
+     "x1*x2",
+     "x1*x3",
+     "x1*x4",
+     "x1*x5",
+     "x1*x6",
+     "x2*x3",
+     "x2*x4",
+     "x2*x5",
+     "x2*x6",
+     "x3*x4",
+     "x3*x5",
+     "x3*x6",
+     "x4*x5",
+     "x4*x6",
+     "x5*x6"
+    ],
+    "table": [
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1"
+     ]
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "++++++",
+     "++++-+",
+     "+++--+",
+     "++----",
+     "+--+-+"
+    ],
+    "weights": [
+     "3/10",
+     "1/4",
+     "1/5",
+     "3/20",
+     "1/10"
+    ]
+   },
+   "data": [
+    "4/5",
+    "1/2",
+    "3/10",
+    "-2/5",
+    "7/10",
+    "7/10",
+    "1/10",
+    "-1/5",
+    "1/2",
+    "2/5",
+    "1/10",
+    "4/5",
+    "3/10",
+    "3/5",
+    "-1/10"
+   ],
+   "question": "Is the ensemble determined by the fifteen pair correlations?",
+   "expected": {
+    "verdict": "IDENTIFIED",
+    "certificate": {
+     "c": "6",
+     "lambda": [
+      "-3",
+      "0",
+      "-3/2",
+      "5/2",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "0",
+      "-1",
+      "-1",
+      "-1",
+      "-1/2",
+      "1/2"
+     ],
+     "gamma": "2",
+     "lambda_l1_norm": "16"
+    }
+   },
+   "why": "The support is the exact ground-state set of a pair energy and its pair features are affinely independent (Theorem E1(a)).",
+   "source": "section 2.1 (E1)"
+  },
+  {
+   "id": "B2-01",
+   "family": "not identified",
+   "title": "The square: one-body data do not see which sites move together",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^2",
+    "states": [
+     "++",
+     "+-",
+     "-+",
+     "--"
+    ]
+   },
+   "observables": {
+    "names": [
+     "x1",
+     "x2"
+    ],
+    "table": [
+     [
+      "1",
+      "1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1"
+     ]
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "++",
+     "--"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": [
+    "0",
+    "0"
+   ],
+   "question": "Is the ensemble determined by the two one-body means (equivalently, by the laws of the two coordinates)?",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "support": [
+      "+-",
+      "-+"
+     ],
+     "weights": [
+      "1/2",
+      "1/2"
+     ]
+    },
+    "remark": "with the observable x1*x2 added every ensemble on this space is determined (the four feature vectors are affinely independent)"
+   },
+   "why": "Two conformers and two coordinate laws: the smallest instance of the sharpness of the Renyi-Heppes count (Theorem E4).",
+   "source": "section 3.1 (E4)"
+  },
+  {
+   "id": "B2-02",
+   "family": "not identified",
+   "title": "Exposed is not identified",
+   "space": {
+    "type": "finite",
+    "description": "three configurations a, b, c",
+    "states": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "observables": {
+    "names": [
+     "phi"
+    ],
+    "table": [
+     [
+      "0",
+      "0",
+      "1"
+     ]
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "a",
+     "b"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": [
+    "0"
+   ],
+   "question": "Is the ensemble determined by the mean of phi?",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "support": [
+      "a",
+      "b"
+     ],
+     "weights": [
+      "1/4",
+      "3/4"
+     ]
+    },
+    "trap": "the support {a, b} IS the zero set of the non-negative function phi in the span; a tool that tests only this condition answers IDENTIFIED, wrongly: the features are not affinely independent on the support"
+   },
+   "why": "Condition (i) of Theorem E1(a) fails while condition (ii) holds.",
+   "source": "section 2.1; report section 7 item 6, F1"
+  },
+  {
+   "id": "B2-03",
+   "family": "not identified",
+   "title": "Four conformers on the 5-cube with a twin of the other parity",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^5 modulo the global flip",
+    "states": [
+     "+++++",
+     "++++-",
+     "+++-+",
+     "+++--",
+     "++-++",
+     "++-+-",
+     "++--+",
+     "++---",
+     "+-+++",
+     "+-++-",
+     "+-+-+",
+     "+-+--",
+     "+--++",
+     "+--+-",
+     "+---+",
+     "+----"
+    ]
+   },
+   "observables": {
+    "names": [
+     "x1*x2",
+     "x1*x3",
+     "x1*x4",
+     "x1*x5",
+     "x2*x3",
+     "x2*x4",
+     "x2*x5",
+     "x3*x4",
+     "x3*x5",
+     "x4*x5"
+    ],
+    "table": [
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1"
+     ]
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "+++++",
+     "+++--",
+     "++-+-",
+     "++--+"
+    ],
+    "weights": [
+     "1/4",
+     "1/4",
+     "1/4",
+     "1/4"
+    ]
+   },
+   "data": [
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   "question": "Is the ensemble determined by the ten pair correlations?",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "support": [
+      "++++-",
+      "+++-+",
+      "++-++",
+      "++---"
+     ],
+     "weights": [
+      "1/4",
+      "1/4",
+      "1/4",
+      "1/4"
+     ]
+    },
+    "remark": "three of the four conformers, with any weights, are determined (B1-01); the fourth breaks it"
+   },
+   "why": "A Hadamard quadruple on four of the sites (Proposition E9(b)); the cut polytope is 3-neighbourly and not 4-neighbourly.",
+   "source": "section 4.1 (E9(b)); internal review ER3, F2"
+  },
+  {
+   "id": "B2-04",
+   "family": "not identified",
+   "title": "Two triangles: the laws of the three side lengths",
+   "space": {
+    "type": "continuous",
+    "description": "triangles in the plane up to congruence, given by their side lengths (edges 01, 02, 12)"
+   },
+   "observables": {
+    "names": [
+     "law of |01|",
+     "law of |02|",
+     "law of |12|"
+    ]
+   },
+   "ensemble": {
+    "conformers": [
+     [
+      3,
+      4,
+      5
+     ],
+     [
+      4,
+      5,
+      6
+     ]
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": {
+    "edge laws (multisets)": [
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      6
+     ]
+    ]
+   },
+   "question": "Is the two-conformer ensemble determined by the three edge-length laws?",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "conformers": [
+      [
+       3,
+       5,
+       6
+      ],
+      [
+       4,
+       4,
+       5
+      ]
+     ],
+     "weights": [
+      "1/2",
+      "1/2"
+     ]
+    }
+   },
+   "why": "The rigidity matroid of the triangle is free, hence disconnected: lengths of different conformers can be spliced (Theorem E5(b)).",
+   "source": "section 3.2 (E5); check R4"
+  },
+  {
+   "id": "B2-05",
+   "family": "not identified",
+   "title": "A globally rigid graph, individually generic conformers, a twin (the science division's Example D1)",
+   "space": {
+    "type": "continuous",
+    "description": "four points in the plane up to congruence; all six distances measured (K4)"
+   },
+   "observables": {
+    "names": [
+     "law of the squared distance 01",
+     "law of the squared distance 02",
+     "law of the squared distance 03",
+     "law of the squared distance 12",
+     "law of the squared distance 13",
+     "law of the squared distance 23"
+    ]
+   },
+   "ensemble": {
+    "conformers": [
+     [
+      [
+       "1/2",
+       "2"
+      ],
+      [
+       "3",
+       "3"
+      ],
+      [
+       "-1",
+       "0"
+      ],
+      [
+       "1",
+       "0"
+      ]
+     ],
+     [
+      [
+       "1/2",
+       "3/2"
+      ],
+      [
+       "3/2",
+       "-4"
+      ],
+      [
+       "-2",
+       "0"
+      ],
+      [
+       "2",
+       "0"
+      ]
+     ]
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": {
+    "squared edge-length laws (multisets)": [
+     [
+      "29/4",
+      "125/4"
+     ],
+     [
+      "25/4",
+      "17/2"
+     ],
+     [
+      "17/4",
+      "9/2"
+     ],
+     [
+      "25",
+      "113/4"
+     ],
+     [
+      "13",
+      "65/4"
+     ],
+     [
+      "4",
+      "16"
+     ]
+    ]
+   },
+   "question": "Is the ensemble determined by the six edge-length laws?",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "conformers": [
+      [
+       [
+        "1/2",
+        "2"
+       ],
+       [
+        "3",
+        "-3"
+       ],
+       [
+        "-1",
+        "0"
+       ],
+       [
+        "1",
+        "0"
+       ]
+      ],
+      [
+       [
+        "1/2",
+        "3/2"
+       ],
+       [
+        "3/2",
+        "4"
+       ],
+       [
+        "-2",
+        "0"
+       ],
+       [
+        "2",
+        "0"
+       ]
+      ]
+     ],
+     "weights": [
+      "1/2",
+      "1/2"
+     ]
+    },
+    "trap": "K4 is generically globally rigid and the two conformers have no length in common, but the pair is not JOINTLY generic: in both, points 2 and 3 lie on a common line through which point 1 can be reflected"
+   },
+   "why": "Theorem E7 needs jointly generic conformers; this is the counterexample of the science division's review SCI-REV-0020.",
+   "source": "section 3.3 (E7, Example D1); check R9"
+  },
+  {
+   "id": "B2-06",
+   "family": "not identified",
+   "title": "A shared rigid part: two mobile groups whose coupling the data do not see (Example D2)",
+   "space": {
+    "type": "continuous",
+    "description": "five points in the plane up to congruence; all distances measured except 3-4"
+   },
+   "observables": {
+    "names": [
+     "law of the squared distance 01",
+     "law of the squared distance 02",
+     "law of the squared distance 03",
+     "law of the squared distance 04",
+     "law of the squared distance 12",
+     "law of the squared distance 13",
+     "law of the squared distance 14",
+     "law of the squared distance 23",
+     "law of the squared distance 24"
+    ]
+   },
+   "ensemble": {
+    "conformers": [
+     [
+      [
+       "0",
+       "0"
+      ],
+      [
+       "1",
+       "0"
+      ],
+      [
+       "0",
+       "1"
+      ],
+      [
+       "2",
+       "1"
+      ],
+      [
+       "-1",
+       "2"
+      ]
+     ],
+     [
+      [
+       "0",
+       "0"
+      ],
+      [
+       "1",
+       "0"
+      ],
+      [
+       "0",
+       "1"
+      ],
+      [
+       "1",
+       "3"
+      ],
+      [
+       "3",
+       "-1"
+      ]
+     ]
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": {
+    "squared edge-length laws (multisets)": [
+     [
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "1"
+     ],
+     [
+      "5",
+      "10"
+     ],
+     [
+      "5",
+      "10"
+     ],
+     [
+      "2",
+      "2"
+     ],
+     [
+      "2",
+      "9"
+     ],
+     [
+      "5",
+      "8"
+     ],
+     [
+      "4",
+      "5"
+     ],
+     [
+      "2",
+      "13"
+     ]
+    ]
+   },
+   "question": "Is the ensemble determined by the nine measured edge-length laws?",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "conformers": [
+      [
+       [
+        "0",
+        "0"
+       ],
+       [
+        "1",
+        "0"
+       ],
+       [
+        "0",
+        "1"
+       ],
+       [
+        "2",
+        "1"
+       ],
+       [
+        "3",
+        "-1"
+       ]
+      ],
+      [
+       [
+        "0",
+        "0"
+       ],
+       [
+        "1",
+        "0"
+       ],
+       [
+        "0",
+        "1"
+       ],
+       [
+        "1",
+        "3"
+       ],
+       [
+        "-1",
+        "2"
+       ]
+      ]
+     ],
+     "weights": [
+      "1/2",
+      "1/2"
+     ]
+    },
+    "what_is_determined": "the positions of points 3 and 4 relative to the triangle 0-1-2, separately; not which position of 3 goes with which position of 4"
+   },
+   "why": "The graph is rigid, but the conformers share the triangle 0-1-2: the laws cannot see how the two motions are coupled.",
+   "source": "section 3.3 (Example D2), Problem O3; check R10"
+  },
+  {
+   "id": "B2-07",
+   "family": "not identified",
+   "title": "Three states on a torus of two angles, all products of 1, cos, sin over the two angles",
+   "space": {
+    "type": "continuous",
+    "description": "the torus of two angles (phi1, phi2)"
+   },
+   "observables": {
+    "names": [
+     "means of u(phi1)*v(phi2), u, v in {1, cos, sin} (nine numbers)"
+    ]
+   },
+   "ensemble": {
+    "conformers_in_units_of_pi": [
+     [
+      "0",
+      "0"
+     ],
+     [
+      "2/3",
+      "2/3"
+     ],
+     [
+      "4/3",
+      "4/3"
+     ]
+    ],
+    "weights": [
+     "1/3",
+     "1/3",
+     "1/3"
+    ]
+   },
+   "data": {
+    "E cos*cos": "1/2",
+    "E sin*sin": "1/2",
+    "the other six non-constant means": "0"
+   },
+   "question": "Is the ensemble determined by the nine means among all probability measures on the torus?",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "conformers_in_units_of_pi": [
+      [
+       "1/3",
+       "1/3"
+      ],
+      [
+       "1",
+       "1"
+      ],
+      [
+       "5/3",
+       "5/3"
+      ]
+     ],
+     "weights": [
+      "1/3",
+      "1/3",
+      "1/3"
+     ]
+    },
+    "remark": "no three-state ensemble on this torus is determined by these data (Proposition E22); two states that differ in both angles are (Proposition E20')",
+    "trap": "a search restricted to a product grid of angles reports IDENTIFIED: the twin does not lie on the grid"
+   },
+   "why": "Every measure with the data lives on the circle where the bilinear form through the three states vanishes, and there the data are trigonometric moments of order at most two.",
+   "source": "section 4c.4 (Proposition E22; found by the internal review ER3)"
+  },
+  {
+   "id": "B2-08",
+   "family": "not identified",
+   "title": "Two planar rigid bodies: a mirror pose for every number of legs",
+   "space": {
+    "type": "continuous",
+    "description": "relative poses (rotation angle theta, translation t) of two rigid bodies in the plane; leg e joins the point U[e] of the first body to the point V[e] of the second (body coordinates), length |U[e] - R(theta) V[e] - t|"
+   },
+   "observables": {
+    "names": [
+     "six leg lengths"
+    ],
+    "U": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      0.0
+     ],
+     [
+      3.0,
+      0.0
+     ],
+     [
+      4.5,
+      0.0
+     ],
+     [
+      6.0,
+      0.0
+     ],
+     [
+      7.0,
+      0.0
+     ]
+    ],
+    "V": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      2.0,
+      0.0
+     ],
+     [
+      5.0,
+      0.0
+     ],
+     [
+      -1.0,
+      0.0
+     ],
+     [
+      1.5,
+      0.0
+     ],
+     [
+      3.0,
+      0.0
+     ]
+    ]
+   },
+   "ensemble": {
+    "conformers": [
+     {
+      "theta": 0.7,
+      "t": [
+       0.4,
+       1.3
+      ]
+     }
+    ],
+    "weights": [
+     "1"
+    ]
+   },
+   "data": {
+    "squared leg lengths": [
+     1.85,
+     7.564310724153,
+     21.938933064693,
+     24.096739948915,
+     24.963100233848,
+     28.987147343988
+    ]
+   },
+   "question": "Is the single pose determined by its six leg lengths?  (Four legs determine a generic pose in the plane.)",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "conformers": [
+      {
+       "theta": -0.7,
+       "t": [
+        0.4,
+        -1.3
+       ]
+      }
+     ],
+     "weights": [
+      "1"
+     ]
+    },
+    "trap": "all attachment points of each body are collinear; then the reflected pose (-theta, (t_x, -t_y)) has the same length for every leg, for any number of legs, although the leg matroid is connected"
+   },
+   "why": "Theorem E7' is for generic attachment points; planar (here: collinear) bodies are excluded.  Connectivity of the matroid is not the whole criterion.",
+   "source": "section 3.3 (E7', 'What genericity excludes'); check P4; internal review ER2, F6"
+  },
+  {
+   "id": "B3-01",
+   "family": "identified but ill-conditioned",
+   "title": "A vertex of a regular 360-gon, means of (cos, sin)",
+   "space": {
+    "type": "finite",
+    "description": "the vertices (cos(2 pi k/360), sin(2 pi k/360)), k = 0..359"
+   },
+   "observables": {
+    "names": [
+     "cos",
+     "sin"
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "k = 0"
+    ],
+    "weights": [
+     "1"
+    ]
+   },
+   "data": [
+    "1",
+    "0"
+   ],
+   "question": "(a) Is the conformation k = 0 determined by the two means?  (b) If each mean is known within tau, how much mass can be elsewhere?",
+   "expected": {
+    "verdict": "IDENTIFIED",
+    "certificate": {
+     "f": "1 - cos",
+     "gamma": 0.00015230484360873042,
+     "lambda_l1_norm": 1
+    },
+    "stability_constant": 6565.779369229975,
+    "largest mass off the conformation compatible with the data within tau": {
+     "1e-05": 0.065658,
+     "0.0001": 0.656578,
+     "0.0002": 1.0
+    },
+    "closed form": "min(1, tau / gamma), gamma = 1 - cos(2 pi/360) = 1.523e-4: attained by the two neighbouring vertices"
+   },
+   "why": "The verdict IDENTIFIED is correct and nearly useless: an error of 1.5e-4 in one mean leaves the population of the conformation completely undetermined.  On a continuous circle the modulus is a square root (Example E1.2, Proposition E2.2).",
+   "source": "section 2.1 (E1.1, E1.2), section 2.2 (E2.2)"
+  },
+  {
+   "id": "B4-01",
+   "family": "must abstain",
+   "title": "Identified, but not by the projection certificate",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^8 modulo the global flip (128 states)",
+    "states": "all sign vectors of length 8 with first sign +"
+   },
+   "observables": {
+    "names": "the 28 pair products x_i*x_j, i < j"
+   },
+   "ensemble": {
+    "support": [
+     "+++-+-+-",
+     "+-++-+++",
+     "+-+-+-+-",
+     "+--+----"
+    ],
+    "weights": "any positive weights"
+   },
+   "question": "Is every ensemble on these four conformers determined by its pair correlations?",
+   "expected": {
+    "verdict": "IDENTIFIED",
+    "certificate": {
+     "c": "11",
+     "lambda (order of the 28 pairs)": [
+      "2",
+      "-2",
+      "-1",
+      "0",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "0",
+      "0",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1",
+      "1",
+      "-1",
+      "0",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "-1",
+      "0"
+     ],
+     "gamma": "4"
+    },
+    "must_abstain": "a tool that only has the projection certificate ||x - Px||^2 (Theorem E10) must answer ABSTAIN or 'not certified by this certificate', never NOT_IDENTIFIED",
+    "other sign vector in the span": {
+     "vector": "++++-+++",
+     "coefficients on the conformers": [
+      "1",
+      "1",
+      "-1",
+      "0"
+     ]
+    }
+   },
+   "why": "The span of the conformers contains another sign vector, so every positive semidefinite certificate vanishes there too; the support is nevertheless the exact ground-state set of a pair energy, which needs a certificate of degree at least 4 (the Complexity division's Proposition 13).  At n = 12, K = 9 this is the case for 92 % of random supports.",
+   "source": "section 4.2 (E10; 'Deciding exposedness'); degree2_vs_face.py"
+  },
+  {
+   "id": "B5-01",
+   "family": "partial identification",
+   "title": "One-body data on the 3-cube: the range of a pair correlation",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^3",
+    "states": [
+     "+++",
+     "++-",
+     "+-+",
+     "+--",
+     "-++",
+     "-+-",
+     "--+",
+     "---"
+    ]
+   },
+   "observables": {
+    "names": [
+     "x1",
+     "x2",
+     "x3"
+    ],
+    "table": [
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "1",
+      "-1",
+      "-1",
+      "1",
+      "1",
+      "-1",
+      "-1"
+     ],
+     [
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1",
+      "1",
+      "-1"
+     ]
+    ]
+   },
+   "data": [
+    "1/5",
+    "1/2",
+    "-3/10"
+   ],
+   "question": "What is the range of E[x1*x2] over all ensembles with these three means?",
+   "expected": {
+    "verdict": "INTERVAL",
+    "interval": [
+     "-3/10",
+     "7/10"
+    ],
+    "dual certificates": {
+     "upper": "x1*x2 <= 1 + x1 - x2 on the cube, so E[x1*x2] <= 1 + m1 - m2",
+     "lower": "x1*x2 >= -1 + x1 + x2 on the cube, so E[x1*x2] >= -1 + m1 + m2"
+    },
+    "closed form": "[|m1 + m2| - 1, 1 - |m1 - m2|]"
+   },
+   "why": "Nothing is identified here except the one-body means; the certified answer is an interval with a dual certificate for each end (Theorem E2(a) / E17(a)).",
+   "source": "section 2.2, section 4b; SOFTWARE_INTERFACE.md F3"
+  },
+  {
+   "id": "B5-02",
+   "family": "partial identification",
+   "title": "The same data: the range of the population of one state",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^3"
+   },
+   "observables": {
+    "names": [
+     "x1",
+     "x2",
+     "x3"
+    ]
+   },
+   "data": [
+    "1/5",
+    "1/2",
+    "-3/10"
+   ],
+   "question": "What is the range of the population of the state +++?",
+   "expected": {
+    "verdict": "INTERVAL",
+    "interval": [
+     "0",
+     "7/20"
+    ],
+    "closed form": "[max(0, p1 + p2 + p3 - 2), min(p1, p2, p3)], p_i = (1 + m_i)/2",
+    "reading": "the data are compatible with the state being absent and with a population of 35 %"
+   },
+   "why": "A certified restriction on a population when the ensemble is not identified.",
+   "source": "SOFTWARE_INTERFACE.md F3"
+  },
+  {
+   "id": "B5-03",
+   "family": "partial identification",
+   "title": "The same question with each mean known within 1/20",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^3"
+   },
+   "observables": {
+    "names": [
+     "x1",
+     "x2",
+     "x3"
+    ]
+   },
+   "data": [
+    "1/5",
+    "1/2",
+    "-3/10"
+   ],
+   "tolerance": {
+    "norm": "max",
+    "tau": "1/20"
+   },
+   "question": "What is the range of E[x1*x2] over all ensembles whose three means are within 1/20 of the data?",
+   "expected": {
+    "verdict": "INTERVAL",
+    "interval": [
+     "-2/5",
+     "4/5"
+    ],
+    "dual certificates": "the same two inequalities; each end moves by tau times the l1 norm (= 2) of its dual vector"
+   },
+   "why": "Bounded errors enter through the dual norm of the certificate (Theorem E2(a)).",
+   "source": "section 2.2"
+  },
+  {
+   "id": "B6-01",
+   "family": "hypothesis must be checked",
+   "title": "A frustrated known part: the thermal union bound fails",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^2; disagreement variables e_i = [x_i != +1]; states in the order e = 00, 01, 10, 11"
+   },
+   "model": {
+    "reference": "pi proportional to exp(-x1*x2/2)",
+    "envelope": "d(x, y) = number of sites where x and y differ (slopes 1)",
+    "centre": "++"
+   },
+   "ensemble": {
+    "member": "mu proportional to pi * exp(-e1 + e2)",
+    "weights (order 00, 01, 10, 11)": [
+     0.096255135257,
+     0.711234594228,
+     0.096255135257,
+     0.096255135257
+    ]
+   },
+   "data": {
+    "polarised member (order 00, 01, 10, 11)": [
+     0.318945155673,
+     0.318945155673,
+     0.318945155673,
+     0.04316453298
+    ]
+   },
+   "question": "Is TV(mu, mu*) at most the sum over sites of mu*(x_i = +) - mu(x_i = +)?",
+   "expected": {
+    "verdict": "NO",
+    "TV": 0.44538,
+    "sum of one-body deficits": 0.275781,
+    "excess (closed form (1+e^2)/(3+e^2) - 2/(3+e^-2))": 0.169599,
+    "trap": "the bound is a theorem for product references and for positively associated polarised members; here the polarised member has Cov(e1, e2) < 0.  A tool must check the hypothesis (Proposition E15U) or abstain"
+   },
+   "why": "A violated bond can break the bound (Theorem E15T(d)).",
+   "source": "section 4a.2 (E15T, E15U); check F6"
+  },
+  {
+   "id": "B6-02",
+   "family": "identified inside a class",
+   "title": "Product reference: the equality case of the thermal union bound",
+   "space": {
+    "type": "finite",
+    "description": "{+1,-1}^3, uniform reference, envelope = Hamming distance (slopes 1), centre +++"
+   },
+   "ensemble": {
+    "member": "the member most polarised towards -++ (it is in the class)"
+   },
+   "data": {
+    "one-body populations of + at sites 1, 2, 3": [
+     0.26894142137,
+     0.73105857863,
+     0.73105857863
+    ],
+    "sigma": 0.73105857863
+   },
+   "question": "How far, in total variation, can a member with these one-body populations be from the member polarised towards +++?",
+   "expected": {
+    "verdict": "BOUND",
+    "bound": 0.46211715726,
+    "attained": true,
+    "formula": "sum_i (sigma - mu(x_i = +)) = (sigma - (1 - sigma)) + 0 + 0 = 2 sigma - 1, sigma = 1/(1 + e^-1)"
+   },
+   "why": "Theorem E15(c), with equality for members polarised towards a centre one flip away.",
+   "source": "section 4a.2 (E15)"
+  },
+  {
+   "id": "B7-01",
+   "family": "noise",
+   "title": "Two configurations, one noisy mean",
+   "space": {
+    "type": "finite",
+    "description": "{0, 1}",
+    "states": [
+     "0",
+     "1"
+    ]
+   },
+   "observables": {
+    "names": [
+     "phi(x) = x"
+    ],
+    "table": [
+     [
+      "0",
+      "1"
+     ]
+    ]
+   },
+   "noise": {
+    "model": "y = E[phi] + sigma * standard Gaussian",
+    "sigma": "1/2"
+   },
+   "question": "How well can the population p of state 1 be estimated from y, in the worst case over p?",
+   "expected": {
+    "verdict": "BRACKET",
+    "modulus omega(2 sigma)": 1,
+    "minimax root-mean-square error between": [
+     0.3353,
+     0.5
+    ],
+    "estimator that attains the upper end": "T = y (lambda = 1, c = 0): risk sigma^2 = 1/4",
+    "reading": "at this noise level no estimator knows p to better than 0.335 in the worst case"
+   },
+   "why": "Theorem E17: the dual vector of the identified interval is a near-minimax estimator; lower constant sqrt(E sech^2(1+Z))/2.",
+   "source": "section 4b (E17); check F5"
+  },
+  {
+   "id": "B8-01",
+   "family": "non-linear data",
+   "title": "An unknown calibration factor destroys an identification",
+   "space": {
+    "type": "finite",
+    "description": "three configurations a, b, c",
+    "states": [
+     "a",
+     "b",
+     "c"
+    ]
+   },
+   "observables": {
+    "names": [
+     "phi1",
+     "phi2"
+    ],
+    "table": [
+     [
+      "1",
+      "0",
+      "1"
+     ],
+     [
+      "0",
+      "1",
+      "1"
+     ]
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "a",
+     "b"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": [
+    "1/2",
+    "1/2"
+   ],
+   "question": "(a) Is the ensemble determined by its two means?  (b) Is it determined if the two data are known only up to one common unknown positive factor?",
+   "expected": {
+    "(a)": {
+     "verdict": "IDENTIFIED",
+     "reason": "nu(a) + nu(c) = 1/2, nu(b) + nu(c) = 1/2 and total mass 1 force nu(c) = 0"
+    },
+    "(b)": {
+     "verdict": "NOT_IDENTIFIED",
+     "twin": {
+      "support": [
+       "c"
+      ],
+      "weights": [
+       "1"
+      ],
+      "its means": [
+       "1",
+       "1"
+      ]
+     },
+     "reason": "no combination of phi1, phi2 WITHOUT a constant term is non-negative with zero set {a, b}"
+    },
+    "control": "the ensemble concentrated on a IS determined up to the factor (certificate phi2)"
+   },
+   "why": "With an unknown factor the constant function leaves the span in which a certificate must be found (Proposition E23(b)).",
+   "source": "section 4d.1 (E23); check Q5"
+  },
+  {
+   "id": "B8-02",
+   "family": "non-linear data",
+   "title": "The length of a mean vector between its extremes determines nothing",
+   "space": {
+    "type": "finite",
+    "description": "the four corners (+-1, +-1) of a square; the observable is the position vector",
+    "states": [
+     "(1,1)",
+     "(1,-1)",
+     "(-1,1)",
+     "(-1,-1)"
+    ]
+   },
+   "observables": {
+    "names": [
+     "the length |E Phi| of the mean position"
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "(1,1)",
+     "(1,-1)"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": {
+    "length of the mean vector": "1"
+   },
+   "question": "Is the ensemble determined by the length of its mean vector?  (Lengths range from 0 to sqrt 2.)",
+   "expected": {
+    "verdict": "NOT_IDENTIFIED",
+    "twin": {
+     "support": [
+      "(1,1)",
+      "(-1,1)"
+     ],
+     "weights": [
+      "1/2",
+      "1/2"
+     ]
+    },
+    "what_is_determined": "at length sqrt 2 a single corner (up to the symmetry of the square: four ensembles have it); at length 0 only that the mean vanishes",
+    "remark": "for a moment body of dimension at least two a length strictly between the least and the largest is shared by infinitely many mean vectors"
+   },
+   "why": "Theorem E25(b), (e).",
+   "source": "section 4d.3 (E25); check Q2"
+  },
+  {
+   "id": "B8-03",
+   "family": "non-linear data",
+   "title": "The least possible length of a mean vector identifies an ensemble",
+   "space": {
+    "type": "finite",
+    "description": "four points of the plane: (1,0), (0,1), (2,2), (3,1)",
+    "states": [
+     "(1,0)",
+     "(0,1)",
+     "(2,2)",
+     "(3,1)"
+    ]
+   },
+   "observables": {
+    "names": [
+     "the length |E Phi| of the mean position"
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "(1,0)",
+     "(0,1)"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": {
+    "squared length of the mean vector": "1/2"
+   },
+   "question": "(a) Is the ensemble determined by the length of its mean vector?  (b) If the length is known within tau, how much mass can be on the other two points, and how far can the weights move?",
+   "expected": {
+    "verdict": "IDENTIFIED",
+    "certificate": {
+     "f": "z*.Phi(x) - |z*|^2 with z* = (1/2, 1/2)",
+     "values at the four points": [
+      "0",
+      "0",
+      "3/2",
+      "3/2"
+     ],
+     "gamma": "3/2"
+    },
+    "stability": {
+     "mass off the support": "at most r tau / gamma with r = sqrt(1/2), gamma = 3/2",
+     "weights": "the mean moves by at most sqrt(2 r tau + tau^2): a SQUARE ROOT of the error, attained along the segment between the two support points"
+    }
+   },
+   "why": "The length is at its minimum over all ensembles; Theorem E25(d).",
+   "source": "section 4d.3 (E25); check Q2"
+  },
+  {
+   "id": "B8-04",
+   "family": "non-linear data",
+   "title": "Squared means: consistency of the data is a partition problem",
+   "space": {
+    "type": "finite",
+    "description": "2m configurations (i, +) and (i, -), i = 1..m; observable phi_i equals +A at (i, +), -A at (i, -), 0 elsewhere, A = a_1 + ... + a_m"
+   },
+   "observables": {
+    "names": [
+     "(E phi_i)^2 for i = 1..m",
+     "(E (phi_1 + ... + phi_m))^2"
+    ]
+   },
+   "data": {
+    "instance 1": {
+     "a": [
+      3,
+      1,
+      1,
+      2,
+      2,
+      1
+     ],
+     "(E phi_i)^2": [
+      9,
+      1,
+      1,
+      4,
+      4,
+      1
+     ],
+     "(E sum phi_i)^2": 0
+    },
+    "instance 2": {
+     "a": [
+      5,
+      4,
+      2
+     ],
+     "(E phi_i)^2": [
+      25,
+      16,
+      4
+     ],
+     "(E sum phi_i)^2": 0
+    }
+   },
+   "question": "Is there any ensemble with these data?",
+   "expected": {
+    "instance 1": {
+     "verdict": "CONSISTENT",
+     "signs": [
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1
+     ],
+     "an ensemble": {
+      "(1,+)": "3/10",
+      "(2,+)": "1/10",
+      "(3,+)": "1/10",
+      "(4,-)": "2/10",
+      "(5,-)": "2/10",
+      "(6,-)": "1/10"
+     }
+    },
+    "instance 2": {
+     "verdict": "INCONSISTENT",
+     "reason": "5, 4, 2 cannot be split into two parts of equal sum"
+    },
+    "trap": "a local fit of an ensemble to squared data can stall on instance 2 without proving anything; the certified answer enumerates signs (2^m linear programmes) or abstains"
+   },
+   "why": "Deciding consistency of squared-mean data is NP-complete (Theorem E26).",
+   "source": "section 4d.4 (E26); check Q3"
+  },
+  {
+   "id": "B9-01",
+   "family": "incomplete model",
+   "title": "One unknown gain keeps an identification that two gains lose",
+   "space": {
+    "type": "finite",
+    "description": "four configurations a, b, c, d",
+    "states": [
+     "a",
+     "b",
+     "c",
+     "d"
+    ]
+   },
+   "observables": {
+    "names": [
+     "phi1",
+     "phi2",
+     "phi3",
+     "phi4"
+    ],
+    "table": [
+     [
+      "1",
+      "0",
+      "1",
+      "1"
+     ],
+     [
+      "0",
+      "1",
+      "1",
+      "0"
+     ],
+     [
+      "1",
+      "0",
+      "2",
+      "0"
+     ],
+     [
+      "0",
+      "1",
+      "1",
+      "2"
+     ]
+    ],
+    "groups": "data 1, 2 form one group and data 3, 4 another (two instruments)"
+   },
+   "ensemble": {
+    "support": [
+     "a",
+     "b"
+    ],
+    "weights": [
+     "1/2",
+     "1/2"
+    ]
+   },
+   "data": [
+    "1/2",
+    "1/2",
+    "1/2",
+    "1/2"
+   ],
+   "question": "Is the ensemble determined if (a) all four data share one unknown positive gain; (b) each group has its own unknown positive gain?",
+   "expected": {
+    "(a)": {
+     "verdict": "IDENTIFIED",
+     "reason": "the four means must be equal, which forces nu(c) = nu(d) = 0 and nu(a) = nu(b)"
+    },
+    "(b)": {
+     "verdict": "NOT_IDENTIFIED",
+     "twin": {
+      "weights on a, b, c, d": [
+       "1/7",
+       "2/7",
+       "3/7",
+       "1/7"
+      ],
+      "its means": [
+       "5/7",
+       "5/7",
+       "1",
+       "1"
+      ]
+     }
+    }
+   },
+   "why": "Every unknown gain removes one direction from the span in which a certificate must be found (Proposition E23.1).",
+   "source": "section 4d.1 (E23.1); check M1"
+  },
+  {
+   "id": "B9-02",
+   "family": "incomplete model",
+   "title": "Data that falsify a library bound the weight it misses",
+   "space": {
+    "type": "finite",
+    "description": "the library lists the configurations with phi = 0 and phi = 1; all that is known about unlisted configurations is 0 <= phi <= 2"
+   },
+   "observables": {
+    "names": [
+     "phi"
+    ]
+   },
+   "data": {
+    "mean of phi": "3/2",
+    "tolerance": "0"
+   },
+   "question": "(a) Can an ensemble on the library have the datum?  (b) What do the data say about the weight of unlisted configurations?",
+   "expected": {
+    "(a)": {
+     "verdict": "LIBRARY_FALSIFIED",
+     "certificate": "lambda = 1: lambda.y = 3/2 exceeds the largest value 1 of phi on the library"
+    },
+    "(b)": {
+     "missing weight": "at least 1/2",
+     "attained_by": "weight 1/2 at phi = 1 and 1/2 at phi = 2",
+     "no_upper_bound": "weight 3/4 at phi = 2 and 1/4 at phi = 0 has the datum with three quarters of the weight off the library"
+    }
+   },
+   "why": "An incomplete library is testable; a failed test gives a certified lower bound on the missing weight from bounds on the observables alone (Proposition E28).",
+   "source": "section 4e.2 (E28); check M3"
+  },
+  {
+   "id": "B9-03",
+   "family": "incomplete model",
+   "title": "How many conformers do the data require, and how many do they allow?",
+   "space": {
+    "type": "finite",
+    "description": "configurations 0, 1, 2, 3 on a line",
+    "states": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ]
+   },
+   "observables": {
+    "names": [
+     "x",
+     "x^2"
+    ]
+   },
+   "ensemble": {
+    "support": [
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "weights": [
+     "1/4",
+     "1/4",
+     "1/4",
+     "1/4"
+    ]
+   },
+   "data": [
+    "3/2",
+    "7/2"
+   ],
+   "question": "What are the least and the largest number of conformers of an ensemble with these two means?",
+   "expected": {
+    "K_min": 3,
+    "K_max": 4,
+    "with three conformers": [
+     [
+      0,
+      1,
+      3
+     ],
+     [
+      0,
+      2,
+      3
+     ]
+    ],
+    "remark": "a fit with the fewest conformers returns three; the truth has four",
+    "control": {
+     "data": [
+      "3/2",
+      "5/2"
+     ],
+     "K_min": 2,
+     "K_max": 2,
+     "verdict": "IDENTIFIED",
+     "certificate": "(x - 1)(x - 2) = x^2 - 3x + 2 is non-negative on the four configurations with zero set {1, 2}"
+    }
+   },
+   "why": "The largest number is the size of the zero set of a certificate; the smallest is a combinatorial search; they agree iff the ensemble is identified (Proposition E29).",
+   "source": "section 4e.3 (E29); check M4"
+  }
+ ]
+}

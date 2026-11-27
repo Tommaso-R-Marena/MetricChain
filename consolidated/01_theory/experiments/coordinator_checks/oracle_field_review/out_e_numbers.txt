@@ -1,0 +1,7 @@
+R_0(e) without the oracle       : 0.013669
+tilt upper bound U_0(e)         : 0.012941  at lambda = -0.14843
+sup over profiles of type p     : 0.012941  at (m, v0, v1) = (0.4502, 0.0956, 0.4386)
+... block laws in the window    : 0.012635  at (m, v0, v1) = (0.5517, 0.4233, 0.1092)  window = (0.1092, 0.4754)
+dips around the Gibbs shell of cones of the forced centre type m0 (annular): 0.008450  m0 = 0.3845
+plain cone dips (balls) of the forced centre type m0, h(m0) - h((Lambda_m0 + e)/u): 0.005704
+decrease by the oracle: between 5.3 % and 7.6 %

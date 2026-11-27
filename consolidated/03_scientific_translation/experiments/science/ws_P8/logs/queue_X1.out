@@ -1,0 +1,17 @@
+[07:42:37] START python3 -B p8_14_exact_terms12.py L12 H 0.60 4
+[07:42:39] END   (exit 0) p8_14_exact_terms12.py L12 H 0.60 4
+[07:42:39] START python3 -B p8_07_estimate.py L12 H 0.60 11
+[07:42:53] END   (exit 0) p8_07_estimate.py L12 H 0.60 11
+[07:42:53] START python3 -B p8_14_exact_terms12.py K12 H 0.70 3
+[07:43:07] END   (exit 0) p8_14_exact_terms12.py K12 H 0.70 3
+[07:43:07] START python3 -B p8_14_exact_terms12.py K5 H 0.70 4
+[07:43:09] END   (exit 0) p8_14_exact_terms12.py K5 H 0.70 4
+[07:43:09] START python3 -B p8_14_exact_terms12.py LKSE:5 H 0.60 4
+[07:43:12] END   (exit 0) p8_14_exact_terms12.py LKSE:5 H 0.60 4
+[07:43:12] START python3 -B p8_14_exact_terms12.py S12 H 0.70 4 --budget 1000
+[07:45:44] END   (exit 0) p8_14_exact_terms12.py S12 H 0.70 4 --budget 1000
+[07:45:44] START python3 -B p8_14_exact_terms12.py S12 H 0.70 4 --budget 1000 --resume
+[07:45:44] END   (exit 0) p8_14_exact_terms12.py S12 H 0.70 4 --budget 1000 --resume
+[07:45:44] START python3 -B p8_07_estimate.py S12 H 0.70 7
+[07:45:57] END   (exit 0) p8_07_estimate.py S12 H 0.70 7
+[07:45:57] QUEUE DONE queue_X1.txt

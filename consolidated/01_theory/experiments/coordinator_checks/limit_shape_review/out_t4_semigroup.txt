@@ -1,0 +1,9 @@
+(2) all 3456 bridges with 3..10 beads, every admissible c1: head and tail of 5 zigzag beads give a bridge in S; change of (h,g): min [0, 0, 0, 0], max [0, 2, 6, 1]
+    bridges that are in S as they stand (in S, all) per N: {3: (4, 4), 4: (8, 8), 5: (16, 20), 6: (40, 48), 7: (96, 116), 8: (256, 312), 9: (636, 804), 10: (1680, 2144)}
+    test set: 494 members of S (with 3..20 beads)
+(1) 20000 random ordered pairs of members: the concatenation is a bridge with N1+N2+3 beads, (h,g) EXACTLY additive, and again in S
+time 6.6 s
+
+real	0m6.722s
+user	0m6.718s
+sys	0m0.038s

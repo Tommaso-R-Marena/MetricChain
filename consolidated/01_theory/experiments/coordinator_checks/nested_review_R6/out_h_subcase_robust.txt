@@ -1,0 +1,5 @@
+fixed sub-case: plateau of radius 4, then a cone of slope u, n_o = 24, n = 26, u = 0.5, {'lam': 0.5, 'eta': 0.25, 'etap': 0.5, 'theta': 2.0, 'b': 0.5, 'delta': 0.01, 'nu1': 1.0}; 1000 seeds per inner behaviour
+  inner behaviour 0: completed 1000/1000; Harper term decides the closure in 1000; [P] through Gamma'' only at a populated pass with r <= r_dagger in 1000; without the Harper term a level is left with r <= r_dagger (caught) in 1000   (19 s)
+  inner behaviour 1: completed 1000/1000; Harper term decides the closure in 1000; [P] through Gamma'' only at a populated pass with r <= r_dagger in 1000; without the Harper term a level is left with r <= r_dagger (caught) in 1000   (16 s)
+  inner behaviour 2: completed 1000/1000; Harper term decides the closure in 1000; [P] through Gamma'' only at a populated pass with r <= r_dagger in 1000; without the Harper term a level is left with r <= r_dagger (caught) in 1000   (12 s)
+the sub-case exercises the Harper step in every run: True

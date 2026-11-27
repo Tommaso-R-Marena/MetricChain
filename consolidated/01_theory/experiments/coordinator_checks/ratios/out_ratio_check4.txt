@@ -1,0 +1,8 @@
+vertices of the Lipschitz polytope: 6
+W by vertices = W by transport: ok
+continuum formula: 0.41422
+n=  12 types=    91  ln R+/n in [0.47423, 0.54714]  width*n/ln n = 0.35   max-min on the lattice 0.42101   continuum 0.41422
+n=  24 types=   325  ln R+/n in [0.45225, 0.49309]  width*n/ln n = 0.31   max-min on the lattice 0.40616   continuum 0.41422
+n=  48 types=  1225  ln R+/n in [0.43940, 0.47019]  width*n/ln n = 0.38   max-min on the lattice 0.40812   continuum 0.41422
+n=  96 types=  4753  ln R+/n in [0.42982, 0.44900]  width*n/ln n = 0.40   max-min on the lattice 0.41140   continuum 0.41422
+n= 144 types= 10585  ln R+/n in [0.42558, 0.43999]  width*n/ln n = 0.42   max-min on the lattice 0.41236   continuum 0.41422

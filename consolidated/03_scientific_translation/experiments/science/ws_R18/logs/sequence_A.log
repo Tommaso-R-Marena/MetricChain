@@ -1,0 +1,26 @@
+R18-RUNNER done 2026-11-26T16:19:44Z exit=0 wall=8.7s mean_runs=288 peak RSS MB=90.5
+R18-RUNNER done 2026-11-26T16:19:50Z exit=0 wall=6.0s mean_runs=288 peak RSS MB=83.3
+R18-RUNNER done 2026-11-26T16:19:59Z exit=0 wall=8.5s mean_runs=288 peak RSS MB=90.8
+R18-RUNNER done 2026-11-26T16:20:14Z exit=0 wall=14.9s mean_runs=288 peak RSS MB=107.3
+R18-RUNNER done 2026-11-26T16:20:29Z exit=0 wall=15.3s mean_runs=288 peak RSS MB=107.5
+R18-RUNNER done 2026-11-26T16:20:53Z exit=0 wall=23.0s mean_runs=288 peak RSS MB=130.8
+R18-RUNNER done 2026-11-26T16:21:15Z exit=0 wall=22.7s mean_runs=288 peak RSS MB=132.3
+R18-RUNNER done 2026-11-26T16:21:55Z exit=0 wall=39.2s mean_runs=288 peak RSS MB=178.6
+R18-RUNNER done 2026-11-26T16:22:33Z exit=0 wall=38.3s mean_runs=288 peak RSS MB=182.2
+R18-RUNNER done 2026-11-26T16:23:37Z exit=0 wall=63.8s mean_runs=480 peak RSS MB=182.5
+R18-RUNNER done 2026-11-26T16:23:41Z exit=0 wall=4.5s mean_runs=32 peak RSS MB=122.7
+R18-RUNNER done 2026-11-26T16:24:52Z exit=0 wall=69.9s mean_runs=288 peak RSS MB=261.6
+R18-RUNNER done 2026-11-26T16:26:04Z exit=0 wall=72.5s mean_runs=288 peak RSS MB=275.2
+R18-RUNNER done 2026-11-26T16:26:18Z exit=0 wall=13.3s mean_runs=96 peak RSS MB=140.4
+R18-RUNNER done 2026-11-26T16:26:47Z exit=0 wall=29.3s mean_runs=96 peak RSS MB=237.7
+R18-RUNNER done 2026-11-26T16:28:10Z exit=0 wall=83.2s mean_runs=96 peak RSS MB=602.3
+R18-RUNNER done 2026-11-26T16:28:25Z exit=0 wall=14.7s mean_runs=96 peak RSS MB=161.5
+R18-RUNNER done 2026-11-26T16:28:55Z exit=0 wall=29.8s mean_runs=96 peak RSS MB=250.4
+R18-RUNNER done 2026-11-26T16:30:25Z exit=0 wall=90.2s mean_runs=96 peak RSS MB=614.4
+R18-RUNNER done 2026-11-26T16:31:12Z exit=0 wall=46.1s mean_runs=96 peak RSS MB=356.8
+R18-RUNNER done 2026-11-26T16:33:05Z exit=0 wall=112.9s mean_runs=96 peak RSS MB=683.5
+R18-RUNNER done 2026-11-26T16:38:25Z exit=0 wall=320.5s mean_runs=96 peak RSS MB=1672.6
+R18-RUNNER done 2026-11-26T16:39:11Z exit=0 wall=45.2s mean_runs=96 peak RSS MB=373.7
+R18-RUNNER done 2026-11-26T16:41:45Z exit=0 wall=154.6s mean_runs=96 peak RSS MB=825.8
+R18-RUNNER done 2026-11-26T16:48:17Z exit=0 wall=390.9s mean_runs=96 peak RSS MB=1691.9
+R18 sequence finished 2026-11-26T16:48:17Z

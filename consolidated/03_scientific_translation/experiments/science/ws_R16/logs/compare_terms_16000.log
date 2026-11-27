@@ -1,0 +1,6 @@
+# r16_compare_terms.py: mine = logs/rep_terms_16000.log ; theirs = /tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_9befefd/experiments/coordinator_checks/three_levels_certified/out_terms_16000.txt
+section n=16000 phi_1=0.300 mode searched: 325 fields compared (5 header fields + 40 rungs x 8), 0 differ; servers: mine 15-40 | theirs 15-40
+section n=16000 phi_1=0.300 mode tuned: 325 fields compared (5 header fields + 40 rungs x 8), 0 differ; servers: mine 15-21, 30-40 | theirs 15-21, 30-40
+section (16000, 0.3, 'two'): not in their file (not compared)
+TOTAL: 650 fields compared, 0 differ; first difference: None
+peak RSS MB 12.45703125

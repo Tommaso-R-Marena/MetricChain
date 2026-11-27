@@ -1,0 +1,26 @@
+theorem_small_run2_17models.log    set small             43 instances (24 solvable, 19 not)      2526779 structures   203.7 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+theorem_edge_run2.log              set edge              14 instances ( 8 solvable,  6 not)        15013 structures     7.9 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+theorem_medium_a_run1.log          set medium_a           5 instances ( 3 solvable,  2 not)      5125260 structures   519.2 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+theorem_their_extra_run1.log       set their_extra        1 instances ( 1 solvable,  0 not)       513120 structures    57.6 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+theorem_large_reduced_a_run1.log   set large_reduced_a    3 instances ( 2 solvable,  1 not)    571111224 structures   245.3 s  U-violations {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+
+TOTAL over the logs above: 66 instances (38 solvable, 28 not), 579291396 connected labelled structures; U totals {'U1': 0, 'U2': 0, 'U3': 0, 'U4': 0, 'U5': 0}
+loop function                  class   S1   S2   S3   S4   S5  wrong  instances (not solvable) it was run on
+H1_stack_only                  H        0    0    0    0    0      0  66 (28)
+H2_penalties                   H        0    0    0    0    0      0  66 (28)
+H3_hash_0to9                   H        0    0    0    0    0      0  66 (28)
+H4_hash_0to3                   H        0    0    0    0    0      0  66 (28)
+H5_boundary_zero               H        0    0    0    0    0      0  66 (28)
+GEN1_H2star_delta1             GEN      0    0    0    0    0      0  66 (28)
+GEN2_H2star_mixed              GEN      0    0    0    0    0      0  66 (28)
+GEN3_coax_weaker               GEN      0    0    0    0    0      0  66 (28)
+GEN4_coax_equal_bulge_pos      GEN      0    0    0    0    0      0  66 (28)
+GEN5_dangles_small             GEN      0    0    0    0    0      0  66 (28)
+GEN6_exterior_constant         GEN      0    0    0    0    0      0  66 (28)
+GEN7_coax_equal_Abulge_only    GEN      0    0    0    0    0      0  61 (26)
+CTRL1_H0_coax_equal            CTRL    26   19   45   45   26     19  66 (28)
+CTRL2_H2_bulge_as_stack        CTRL     0   28   44   44    0     28  66 (28)
+CTRL3_H1_sigma_zero            CTRL     0    0   58   58    0     28  66 (28)
+CTRL4_H2star_delta0            CTRL     0   28   49   49    0     28  66 (28)
+CTRL5_dangles_large            CTRL    30   20   44   44    0     20  66 (28)
+END r20_aggregate.py

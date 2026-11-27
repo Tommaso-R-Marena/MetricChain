@@ -1,0 +1,36 @@
+H. finite product spaces {0..q-1}^r
+   q = 2, r = 3, K = 2: 28 families; (a) wrong: 0; Hall holds in 16: zero set != states: 0, no SDR: 0; Hall fails in 12: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 12, no SDR: 0
+   q = 2, r = 3, K = 3: 56 families; (a) wrong: 0; Hall holds in 8: zero set != states: 0, no SDR: 0; Hall fails in 48: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 24, no SDR: 0
+   q = 2, r = 4, K = 2: 120 families; (a) wrong: 0; Hall holds in 88: zero set != states: 0, no SDR: 0; Hall fails in 32: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 32, no SDR: 0
+   q = 2, r = 4, K = 3: 560 families; (a) wrong: 0; Hall holds in 208: zero set != states: 0, no SDR: 0; Hall fails in 352: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 256, no SDR: 0
+   q = 2, r = 4, K = 4: 1820 families; (a) wrong: 0; Hall holds in 212: zero set != states: 0, no SDR: 0; Hall fails in 1608: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 688, no SDR: 24
+   q = 2, r = 5, K = 3: 4960 families; (a) wrong: 0; Hall holds in 2880: zero set != states: 0, no SDR: 0; Hall fails in 2080: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 1760, no SDR: 0
+   q = 2, r = 6, K = 3: 41664 families; (a) wrong: 0; Hall holds in 30720: zero set != states: 0, no SDR: 0; Hall fails in 10944: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 9984, no SDR: 0
+   q = 2, r = 5, K = 4: 35960 families; (a) wrong: 0; Hall holds in 11680: zero set != states: 0, no SDR: 0; Hall fails in 24280: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 16520, no SDR: 80
+   q = 3, r = 3, K = 2: 351 families; (a) wrong: 0; Hall holds in 270: zero set != states: 0, no SDR: 0; Hall fails in 81: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 0, no SDR: 0
+   q = 3, r = 3, K = 3: 2925 families; (a) wrong: 0; Hall holds in 1224: zero set != states: 0, no SDR: 0; Hall fails in 1701: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 0, no SDR: 27
+   q = 3, r = 4, K = 3: 85320 families; (a) wrong: 0; Hall holds in 61560: zero set != states: 0, no SDR: 0; Hall fails in 23760: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 0, no SDR: 108
+   q = 3, r = 4, K = 4: 30000 families (sampled); (a) wrong: 0; Hall holds in 14742: zero set != states: 0, no SDR: 0; Hall fails in 15258: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 0, no SDR: 232
+   q = 4, r = 3, K = 3: 41664 families; (a) wrong: 0; Hall holds in 24768: zero set != states: 0, no SDR: 0; Hall fails in 16896: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 0, no SDR: 192
+   q = 2, r = 6, K = 4: 30000 families (sampled); (a) wrong: 0; Hall holds in 16107: zero set != states: 0, no SDR: 0; Hall fails in 13893: predicted sub-product not in the zero set: 0, zero set = states nevertheless: 11405, no SDR: 19
+N. neighbourliness of the polytope of correlations of order <= t on {0,1}^4 (16 states)
+   order t = 2 (10 observables): all 560 sets of 3 = 2^t - 1 states are simplicial faces (failures: 0); the 4 even states of a 3-cube are a face: False; of the 120 families of K = t states, 32 violate the Hall condition of E21 and are identified all the same
+   order t = 3 (14 observables): all 11440 sets of 7 = 2^t - 1 states are simplicial faces (failures: 0); the 8 even states of a 4-cube are a face: False; of the 560 families of K = t states, 352 violate the Hall condition of E21 and are identified all the same
+   cube modulo flip, n = 5, even correlations of order <= 2: all 560 sets of 3 conformers are faces (failures: 0)  [d = 1 is Proposition E9(a); for general d the bound 2^(2d) - 1 is Kahle's theorem]
+   cube modulo flip, n = 6, even correlations of order <= 2: all 4960 sets of 3 conformers are faces (failures: 0)  [d = 1 is Proposition E9(a); for general d the bound 2^(2d) - 1 is Kahle's theorem]
+   cube modulo flip, n = 6, even correlations of order <= 4 (30 observables): 300 random sets of 15 conformers: not a face in 0; an explicit set of 16 conformers (even half of a 5-cube in z) is a face: False
+   cube modulo flip, n = 7, even correlations of order <= 4 (56 observables): 300 random sets of 15 conformers: not a face in 0; an explicit set of 16 conformers (even half of a 5-cube in z) is a face: False
+   cube modulo flip, n = 8, even correlations of order <= 4 (98 observables): 300 random sets of 15 conformers: not a face in 0; an explicit set of 16 conformers (even half of a 5-cube in z) is a face: False
+T. torus
+   (i) three states on the 3-torus, every pair sharing one angle (Hall condition holds): 8 random families; zeros that are not states: 0; smallest value on the 90^3 grid at distance > 0.15 from the states: 3.03e-04
+   (ii) Hall fails: three states coinciding in two of four angles: max |f| on 2000 points of the predicted 2-subtorus = 0.0e+00; a pair differing in one angle (third state generic): max |f| on the circle = 0.0e+00
+   (iii) part (c): 25 Hall triples of grid states on the 10^3 grid: identified by the 26 products over at most three angles in 25
+         Remark 3: four grid states on the 3-torus, pairwise different in every angle (Hall fails: four states, three coordinates): identified by the 26 multilinear observables in 25/25
+         Remark 3, the count: for 2000 random triples on the 2-torus the 9 x 9 matrix of the double-point conditions (value and gradient of the nine products at three points) has smallest relative singular value at most 1.5e-16 and second smallest at least 8.0e-06: RANK 8, NOT 9 -- the kernel is |B|^2, B the bilinear form through the three points
+         Remark 3, the truth: a measure with the data of three states lives on the curve B = 0 (a circle on the torus: | |z2| - 1 | <= 2.8e-14 on it); 20 random triples, LP over measures on 3000 points of the curve: a twin with mass 1.000..1.000 off the three states and the same nine data (residual 3.9e-15): NOT identified, for every triple (truncated trigonometric moment problem of degree 2 on the curve)
+         (grid artefact: three states of a 24 x 24 product grid are 'identified' among measures on the grid in 38/40 cases, because the grid has no other point on the curve; a product-grid LP cannot test non-identification here)
+PASS
+
+real	5m7.355s
+user	3m34.031s
+sys	0m1.725s

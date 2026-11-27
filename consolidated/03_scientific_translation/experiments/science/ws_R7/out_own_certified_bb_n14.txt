@@ -1,0 +1,6 @@
+n=14 L=1,eps=1: published N_cov = 25; instance (641, 641) -> reduced (265, 175)
+{'n': 14, 'key': 'L=1,eps=1', 'target': 25, 'reduced': [265, 175], 'nodes': 598, 'pruned_by_certified_bound': 486, 'pruned_infeasible': 0, 'full_cover_leaves': 0, 'max_depth': 19, 'complete': True, 'smaller_cover_found': None, 'seconds': 3.9, 'conclusion': 'PROVED with exact certificates: every cover has at least 25 centres'}
+
+real	0m4.903s
+user	0m4.673s
+sys	0m0.068s

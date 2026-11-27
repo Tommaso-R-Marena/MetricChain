@@ -1,0 +1,25 @@
+# cube: is tau_2 = a^2/(a + x*)?   40-digit arithmetic
+#    u        lambda* = |theta'(x*)|     x*/(a + x*)        a^2/(a + x*) / a          tau_2 / a            closed form
+    0.5   0.0102875324825   0.499973263556   0.500026736444142   0.500026736444142   holds
+  [ok] u = 0.5: the closed form holds iff lambda* <= x*/(a + x*) 
+      1   0.0396532287205   0.499589981887   0.50041001811299   0.50041001811299   holds
+  [ok] u = 1: the closed form holds iff lambda* <= x*/(a + x*) 
+      2   0.13781085096   0.494384557966   0.50561544203439   0.50561544203439   holds
+  [ok] u = 2: the closed form holds iff lambda* <= x*/(a + x*) 
+      4   0.356759551838   0.444109153471   0.555890846528578   0.555890846528578   holds
+  [ok] u = 4: the closed form holds iff lambda* <= x*/(a + x*) 
+    4.5   0.401408844105   0.421706095045   0.57829390495458   0.57829390495458   holds
+  [ok] u = 4.5: the closed form holds iff lambda* <= x*/(a + x*) 
+      5   0.441197865509   0.395946796847   0.604053203153265   0.602893471993203   FAILS by 0.00116 a
+  [ok] u = 5: the closed form holds iff lambda* <= x*/(a + x*) 
+      6   0.507931837369   0.337059937987   0.662940062012779   0.646969825558671   FAILS by 0.01597 a
+  [ok] u = 6: the closed form holds iff lambda* <= x*/(a + x*) 
+      8   0.60369909823   0.21255711607   0.787442883929661   0.713948379654865   FAILS by 0.07349 a
+  [ok] u = 8: the closed form holds iff lambda* <= x*/(a + x*) 
+     12   0.715043975367   0.054561353704   0.945438646296037   0.79210222124754   FAILS by 0.1533 a
+  [ok] u = 12: the closed form holds iff lambda* <= x*/(a + x*) 
+  threshold slope u_0 = 4.65351961849582;  there tau_2/a = 0.585872814064, lambda* = 0.4141271859
+  [ok] u_0 = 4.6535196 (a6_01, double precision: 4.653520) 
+  [ok] u = 5: tau_2 = 0.602893472 a < a^2/(a + x*) = 0.604053203 a 
+
+ALL CHECKS PASS

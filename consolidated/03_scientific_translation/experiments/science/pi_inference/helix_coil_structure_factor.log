@@ -1,0 +1,26 @@
+(1) transfer matrix against brute-force enumeration, n = 3, 6, 9, 12, 9 parameter pairs each: largest deviation 3.4e-13
+    n = 5, s = 1, sigma = 1e-3: Var(N_h) = 0.102379   (workstream R10 reports V_5 = 0.102379 over all vertices)
+(2) n -> infinity, s = 1.0, sigma = 0.001: bulk helix fraction 0.5000; d Var(N_h)/dn / [theta(1-theta)] = 31.623;  formula (1+s)/sqrt((1-s)^2+4 sigma s) = 31.623
+(2) n -> infinity, s = 1.0, sigma = 0.0001: bulk helix fraction 0.5000; d Var(N_h)/dn / [theta(1-theta)] = 100.000;  formula (1+s)/sqrt((1-s)^2+4 sigma s) = 100.000
+(2) n -> infinity, s = 1.1, sigma = 0.001: bulk helix fraction 0.9167; d Var(N_h)/dn / [theta(1-theta)] = 17.500;  formula (1+s)/sqrt((1-s)^2+4 sigma s) = 17.500
+(2) n -> infinity, s = 1.5, sigma = 0.001: bulk helix fraction 0.9941; d Var(N_h)/dn / [theta(1-theta)] = 4.941;  formula (1+s)/sqrt((1-s)^2+4 sigma s) = 4.941
+(2) n -> infinity, s = 0.8, sigma = 0.001: bulk helix fraction 0.0189; d Var(N_h)/dn / [theta(1-theta)] = 8.660;  formula (1+s)/sqrt((1-s)^2+4 sigma s) = 8.660
+(3) finite chains.  Columns: s; helix fraction <N_h>/n; Var(N_h); S_n = Var(N_h)/sum theta_i(1-theta_i); second-order
+    coefficients per residue  E_n/(n u^2) = a_n/(n u^2) = Var(N_h)/(2n)  [independent residues at theta = 1/2: 0.125];  u_max := 1/sd(N_h)
+  sigma = 0.001   (infinite chain at s = 1: S = 31.6; cooperative length sigma^(-1/2) = 32 residues)
+    n =    10 | s = 1: s = 1.000, <N_h>/n = 0.021, Var = 1.111, S_n = 5.42, Var/(2n) = 0.0555, u_max = 0.949 | largest Var: s = 1.753, <N_h>/n = 0.447, Var = 16.363, S_n = 6.93, Var/(2n) = 0.8182, u_max = 0.247
+    n =    20 | s = 1: s = 1.000, <N_h>/n = 0.066, Var = 12.040, S_n = 9.93, Var/(2n) = 0.3010, u_max = 0.288 | largest Var: s = 1.244, <N_h>/n = 0.429, Var = 52.076, S_n = 11.54, Var/(2n) = 1.3019, u_max = 0.139
+    n =    30 | s = 1: s = 1.000, <N_h>/n = 0.120, Var = 42.746, S_n = 13.82, Var/(2n) = 0.7124, u_max = 0.153 | largest Var: s = 1.124, <N_h>/n = 0.416, Var = 100.234, S_n = 15.13, Var/(2n) = 1.6706, u_max = 0.100
+    n =    50 | s = 1: s = 1.000, <N_h>/n = 0.218, Var = 159.125, S_n = 19.50, Var/(2n) = 1.5912, u_max = 0.079 | largest Var: s = 1.052, <N_h>/n = 0.419, Var = 219.361, S_n = 20.05, Var/(2n) = 2.1936, u_max = 0.068
+    n =   100 | s = 1: s = 1.000, <N_h>/n = 0.347, Var = 547.472, S_n = 25.80, Var/(2n) = 2.7374, u_max = 0.043 | largest Var: s = 1.015, <N_h>/n = 0.432, Var = 575.210, S_n = 25.75, Var/(2n) = 2.8760, u_max = 0.042
+    n =   300 | s = 1: s = 1.000, <N_h>/n = 0.449, Var = 2129.614, S_n = 29.87, Var/(2n) = 3.5494, u_max = 0.022 | largest Var: s = 1.003, <N_h>/n = 0.471, Var = 2135.084, S_n = 29.85, Var/(2n) = 3.5585, u_max = 0.022
+    n =  1000 | s = 1: s = 1.000, <N_h>/n = 0.485, Var = 7663.600, S_n = 31.12, Var/(2n) = 3.8318, u_max = 0.011 | largest Var: s = 1.001, <N_h>/n = 0.493, Var = 7664.702, S_n = 31.11, Var/(2n) = 3.8324, u_max = 0.011
+  sigma = 0.0001   (infinite chain at s = 1: S = 100.0; cooperative length sigma^(-1/2) = 100 residues)
+    n =    10 | s = 1: s = 1.000, <N_h>/n = 0.002, Var = 0.120, S_n = 5.49, Var/(2n) = 0.0060, u_max = 2.887 | largest Var: s = 2.277, <N_h>/n = 0.459, Var = 19.151, S_n = 7.93, Var/(2n) = 0.9575, u_max = 0.229
+    n =    20 | s = 1: s = 1.000, <N_h>/n = 0.008, Var = 1.566, S_n = 10.44, Var/(2n) = 0.0392, u_max = 0.799 | largest Var: s = 1.425, <N_h>/n = 0.440, Var = 65.983, S_n = 14.21, Var/(2n) = 1.6496, u_max = 0.123
+    n =    30 | s = 1: s = 1.000, <N_h>/n = 0.016, Var = 7.176, S_n = 15.31, Var/(2n) = 0.1196, u_max = 0.373 | largest Var: s = 1.232, <N_h>/n = 0.429, Var = 135.535, S_n = 19.89, Var/(2n) = 2.2589, u_max = 0.086
+    n =    50 | s = 1: s = 1.000, <N_h>/n = 0.040, Var = 47.045, S_n = 24.66, Var/(2n) = 0.4704, u_max = 0.146 | largest Var: s = 1.108, <N_h>/n = 0.421, Var = 330.872, S_n = 29.83, Var/(2n) = 3.3087, u_max = 0.055
+    n =   100 | s = 1: s = 1.000, <N_h>/n = 0.122, Var = 467.552, S_n = 44.72, Var/(2n) = 2.3378, u_max = 0.046 | largest Var: s = 1.036, <N_h>/n = 0.405, Var = 1054.069, S_n = 48.78, Var/(2n) = 5.2703, u_max = 0.031
+    n =   300 | s = 1: s = 1.000, <N_h>/n = 0.336, Var = 5012.704, S_n = 80.27, Var/(2n) = 8.3545, u_max = 0.014 | largest Var: s = 1.005, <N_h>/n = 0.423, Var = 5318.207, S_n = 80.25, Var/(2n) = 8.8637, u_max = 0.014
+    n =  1000 | s = 1: s = 1.000, <N_h>/n = 0.451, Var = 22525.000, S_n = 94.74, Var/(2n) = 11.2625, u_max = 0.007 | largest Var: s = 1.001, <N_h>/n = 0.474, Var = 22573.521, S_n = 94.65, Var/(2n) = 11.2868, u_max = 0.007
+ALL OK

@@ -1,0 +1,56 @@
+@SuperAdditive.hausdorff_limit : ∀ {W : Type u_1} [inst : NormedAddCommGroup W] [inst_1 : NormedSpace ℝ W]
+  [ProperSpace W] {Q : ℕ → Set W} {β β' R : ℝ},
+  SuperAdditive Q β β' R →
+    (∀ (M : ℕ), 1 ≤ M → (Q M).Nonempty) →
+      IsCompact (lowerLimit (scaled Q)) ∧
+        (lowerLimit (scaled Q)).Nonempty ∧
+          (∀ ε > 0, ∀ᶠ (M : ℕ) in Filter.atTop, ∀ x ∈ scaled Q M, ∃ z ∈ lowerLimit (scaled Q), ‖x - z‖ ≤ ε) ∧
+            ∀ ε > 0, ∀ᶠ (M : ℕ) in Filter.atTop, ∀ z ∈ lowerLimit (scaled Q), ∃ y ∈ scaled Q M, ‖y - z‖ ≤ ε
+@SuperAdditive.dist_limit_le : ∀ {W : Type u_1} [inst : NormedAddCommGroup W] [inst_1 : NormedSpace ℝ W] [ProperSpace W]
+  {Q : ℕ → Set W} {β β' R : ℝ},
+  SuperAdditive Q β β' R → ∀ {M : ℕ}, 1 ≤ M → ∀ {x : W}, x ∈ scaled Q M → ∃ z ∈ lowerLimit (scaled Q), ‖z - x‖ ≤ β / ↑M
+@SuperAdditive.convex_limit : ∀ {W : Type u_1} [inst : NormedAddCommGroup W] [inst_1 : NormedSpace ℝ W] {Q : ℕ → Set W}
+  {β β' R : ℝ}, SuperAdditive Q β β' R → Convex ℝ (lowerLimit (scaled Q))
+@SuperAdditive.cover_sandwich : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] [inst_1 : NormedSpace ℝ V]
+  [ProperSpace V] {Q : ℕ → Set (V × ℝ)} {β β' R : ℝ},
+  SuperAdditive Q β β' R →
+    (∀ (M : ℕ), 1 ≤ M → (Q M).Nonempty) →
+      ∀ {L e : ℝ},
+        0 ≤ L →
+          0 ≤ e →
+            ∀ (ε : ℝ) {η : ℝ},
+              0 < η →
+                ∀ᶠ (M : ℕ) in Filter.atTop,
+                  ∀ (k : ℕ),
+                    (HasCover L e ε (lowerLimit (scaled Q)) k → HasCover L e (ε + (2 * L + e) * η) (scaled Q M) k) ∧
+                      (HasCover L e (ε - (2 * L + e) * η) (scaled Q M) k → HasCover L e ε (lowerLimit (scaled Q)) k)
+@hasCover_of_close : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] {L e ε η : ℝ},
+  0 ≤ L →
+    0 ≤ e →
+      ∀ {F F' : Set (V × ℝ)},
+        (∀ x ∈ F, ∃ y ∈ F', ‖y.1 - x.1‖ ≤ η ∧ |y.2 - x.2| ≤ η) →
+          (∀ y ∈ F', ∃ x ∈ F, ‖y.1 - x.1‖ ≤ η ∧ |y.2 - x.2| ≤ η) →
+            ∀ {k : ℕ}, HasCover L e ε F k → HasCover L e (ε + (2 * L + e) * η) F' k
+@hasCover_sandwich : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] {L e ε η : ℝ},
+  0 ≤ L →
+    0 ≤ e →
+      ∀ {F F' : Set (V × ℝ)},
+        (∀ x ∈ F, ∃ y ∈ F', ‖y.1 - x.1‖ ≤ η ∧ |y.2 - x.2| ≤ η) →
+          (∀ y ∈ F', ∃ x ∈ F, ‖y.1 - x.1‖ ≤ η ∧ |y.2 - x.2| ≤ η) →
+            ∀ (k : ℕ),
+              (HasCover L e ε F k → HasCover L e (ε + (2 * L + e) * η) F' k) ∧
+                (HasCover L e (ε - (2 * L + e) * η) F' k → HasCover L e ε F k)
+@hasCover_upper_iff : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] {L e ε : ℝ},
+  0 ≤ e → ∀ {F : Set (V × ℝ)} {k : ℕ}, HasCover L e ε (upper F) k ↔ HasCover L e ε F k
+'MetricChain.SetLimit.SuperAdditive.hausdorff_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.SetLimit.SuperAdditive.dist_limit_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.SetLimit.SuperAdditive.convex_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.SetLimit.SuperAdditive.cover_sandwich' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.CoverStability.hasCover_sandwich' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.CoverStability.hasCover_upper_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.CoverStability.hasCover_limit_point' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.CoverStability.not_hasCover_shifted' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+real	2m22.730s
+user	0m6.224s
+sys	0m9.449s

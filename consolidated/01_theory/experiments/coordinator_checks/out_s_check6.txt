@@ -1,0 +1,8 @@
+box 128: bridge with N = 166199 beads (own check: valid walk, bridge); (h3, h8, h11, g) = (1717, 376013, 687789, 131710)
+  2 h11 - 5 h3 - 8 N = 37401 = 0.2250 N;  g/N = 0.7925;  168/(N+3) = 0.00101
+  => a point (p*, g*) of the limit set with 2 p11* - 5 p3* - 8 >= 0.2230, hence gamma(p*) >= that
+PART 6 OK
+
+real	0m34.729s
+user	0m33.892s
+sys	0m0.123s

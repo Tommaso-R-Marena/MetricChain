@@ -1,0 +1,45 @@
+== cos(bond angle) = -1/3, unit bonds ==
+  complete data                            K=2 n= 7: params  9, data 10, rank  9 -> FULL column rank; smallest kept sv 0.11468
+  complete data                            K=2 n= 6: params  7, data  6, rank  6 -> DEFICIENT (column rank < params); smallest kept sv 0.17865
+  complete data                            K=2 n= 8: params 11, data 15, rank 11 -> FULL column rank; smallest kept sv 0.16818
+  band w=5 (=K+3), square                  K=2 n= 7: params  9, data  9, rank  9 -> FULL column rank; smallest kept sv 0.088444
+  band w=5                                 K=2 n= 8: params 11, data 12, rank 11 -> FULL column rank; smallest kept sv 0.080588
+  band w=5                                 K=2 n=10: params 15, data 18, rank 15 -> FULL column rank; smallest kept sv 0.024684
+  band w=4 (=K+2)                          K=2 n= 7: params  9, data  7, rank  7 -> DEFICIENT (column rank < params); smallest kept sv 0.097388
+  band w=4 (=K+2)                          K=2 n= 8: params 11, data  9, rank  9 -> DEFICIENT (column rank < params); smallest kept sv 0.19668
+  band w=4 (=K+2)                          K=2 n= 9: params 13, data 11, rank 11 -> DEFICIENT (column rank < params); smallest kept sv 0.11375
+  band w=4 (=K+2)                          K=2 n=10: params 15, data 13, rank 13 -> DEFICIENT (column rank < params); smallest kept sv 0.0078139
+  band w=4 (=K+2)                          K=2 n=12: params 19, data 17, rank 17 -> DEFICIENT (column rank < params); smallest kept sv 0.026274
+  complete data                            K=3 n= 9: params 20, data 21, rank 20 -> FULL column rank; smallest kept sv 0.025721
+  complete data                            K=3 n= 8: params 17, data 15, rank 15 -> DEFICIENT (column rank < params); smallest kept sv 0.060068
+  band w=6 (=K+3), square                  K=3 n=11: params 26, data 26, rank 26 -> FULL column rank; smallest kept sv 0.011848
+  band w=5 (=K+2)                          K=3 n=11: params 26, data 21, rank 21 -> DEFICIENT (column rank < params); smallest kept sv 0.092957
+  K=1: band w=3 (=K+2)                     K=1 n= 8: params  5, data  5, rank  5 -> FULL column rank; smallest kept sv 0.050309
+  K=1: band w=4 (=K+3)                     K=1 n= 8: params  5, data  9, rank  5 -> FULL column rank; smallest kept sv 1.0451
+== bond angle 97 deg, unit bonds ==
+  complete data                            K=2 n= 7: params  9, data 10, rank  9 -> FULL column rank; smallest kept sv 0.1281
+  complete data                            K=2 n= 6: params  7, data  6, rank  6 -> DEFICIENT (column rank < params); smallest kept sv 0.25806
+  complete data                            K=2 n= 8: params 11, data 15, rank 11 -> FULL column rank; smallest kept sv 0.22116
+  band w=5 (=K+3), square                  K=2 n= 7: params  9, data  9, rank  9 -> FULL column rank; smallest kept sv 0.12768
+  band w=5                                 K=2 n= 8: params 11, data 12, rank 11 -> FULL column rank; smallest kept sv 0.096042
+  band w=5                                 K=2 n=10: params 15, data 18, rank 15 -> FULL column rank; smallest kept sv 0.032396
+  band w=4 (=K+2)                          K=2 n= 7: params  9, data  7, rank  7 -> DEFICIENT (column rank < params); smallest kept sv 0.14714
+  band w=4 (=K+2)                          K=2 n= 8: params 11, data  9, rank  9 -> DEFICIENT (column rank < params); smallest kept sv 0.24417
+  band w=4 (=K+2)                          K=2 n= 9: params 13, data 11, rank 11 -> DEFICIENT (column rank < params); smallest kept sv 0.14873
+  band w=4 (=K+2)                          K=2 n=10: params 15, data 13, rank 13 -> DEFICIENT (column rank < params); smallest kept sv 0.03429
+  band w=4 (=K+2)                          K=2 n=12: params 19, data 17, rank 17 -> DEFICIENT (column rank < params); smallest kept sv 0.027494
+  complete data                            K=3 n= 9: params 20, data 21, rank 20 -> FULL column rank; smallest kept sv 0.042295
+  complete data                            K=3 n= 8: params 17, data 15, rank 15 -> DEFICIENT (column rank < params); smallest kept sv 0.10221
+  band w=6 (=K+3), square                  K=3 n=11: params 26, data 26, rank 26 -> FULL column rank; smallest kept sv 0.021639
+  band w=5 (=K+2)                          K=3 n=11: params 26, data 21, rank 21 -> DEFICIENT (column rank < params); smallest kept sv 0.11211
+  K=1: band w=3 (=K+2)                     K=1 n= 8: params  5, data  5, rank  5 -> FULL column rank; smallest kept sv 0.055757
+  K=1: band w=4 (=K+3)                     K=1 n= 8: params  5, data  9, rank  5 -> FULL column rank; smallest kept sv 1.3068
+== unequal bond lengths (0.9..1.7), bond angle 97 deg ==
+  complete data                            K=2 n= 7: params  9, data 10, rank  9 -> FULL column rank; smallest kept sv 0.30221
+  band w=5, square                         K=2 n= 7: params  9, data  9, rank  9 -> FULL column rank; smallest kept sv 0.19195
+  complete data                            K=3 n= 9: params 20, data 21, rank 20 -> FULL column rank; smallest kept sv 0.066203
+  band w=6, square                         K=3 n=11: params 26, data 26, rank 26 -> FULL column rank; smallest kept sv 0.030171
+
+real	0m6.763s
+user	0m6.603s
+sys	0m0.004s

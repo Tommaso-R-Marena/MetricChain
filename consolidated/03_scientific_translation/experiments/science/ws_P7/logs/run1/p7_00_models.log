@@ -1,0 +1,9 @@
+p7_00_models  started 2026-11-26 05:40:55 UTC
+instance  tau  split            range of g  max c_ij  max |L - E|  range of f   reading
+S6/E      0.60 ff03-ff14SB       2.676e+01  3.07e-01    2.919e+00      30.985   a genuine lower model (constants > 0)
+S6/E      0.70 ff03-ff14SB       2.676e+01  3.07e-01    2.919e+00      30.985   a genuine lower model (constants > 0)
+K3/H      0.60 ff99SB-ff14SB     1.451e-06  1.44e-10    4.325e-10     189.700   the lower model is the energy E itself; the residual is constant: E = f + const
+L16/P2    0.60 ff99SB-ff14SB     1.983e+01  1.19e-12    9.175e-11      22.612   the lower model is the energy E itself
+LKSE6/E   0.60 ff99SB-ff14SB     8.178e+00  2.96e-10    8.281e-10     184.518   the lower model is the energy E itself
+DONE p7_00_models
+exit 0

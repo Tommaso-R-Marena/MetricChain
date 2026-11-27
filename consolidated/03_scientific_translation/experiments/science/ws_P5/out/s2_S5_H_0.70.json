@@ -1,0 +1,73 @@
+{
+ "seq": "S5",
+ "bb": "H",
+ "tau": 0.7,
+ "natoms": 67,
+ "n": 5,
+ "nstates": 17496,
+ "orders": {
+  "3": {
+   "n_subsets": 10,
+   "truth_sum": 0.12634248224809852,
+   "allplus_sum": 1.0093003222718835,
+   "onepattern_sum": 1.0529382239092229,
+   "LS_sum": 1.1187072766412454,
+   "pair_sum": 1.9740294629982675,
+   "P3_sum": 8.976047167755102,
+   "rem_true": 0.049131859179340154,
+   "rem_allplus": 0.24493382662512886,
+   "rem_LS": 0.26813896271232807,
+   "Gamma": 8.976047167755103,
+   "pattern_minus_fraction": 0.05970149253731343,
+   "per_subset_search": true,
+   "LS_ratio_min": 4.350346371809487,
+   "LS_ratio_median": 11.92163220279837,
+   "LS_ratio_max": 22.597111370303402
+  },
+  "4": {
+   "n_subsets": 5,
+   "truth_sum": 0.0017942713605805238,
+   "allplus_sum": 0.008799026027190848,
+   "onepattern_sum": 0.009447933446040224,
+   "LS_sum": 0.014179555737984094,
+   "pair_sum": 0.033301638367165765,
+   "P3_sum": 0.2124503470651164,
+   "rem_true": 0.001136176116290244,
+   "rem_allplus": 0.0038205299661058234,
+   "rem_LS": 0.0046000293644965495,
+   "Gamma": 0.21245034706511626,
+   "pattern_minus_fraction": 0.44776119402985076,
+   "per_subset_search": true,
+   "LS_ratio_min": 6.127866708007921,
+   "LS_ratio_median": 7.215830421513378,
+   "LS_ratio_max": 10.567295929182443
+  },
+  "5": {
+   "n_subsets": 1,
+   "truth_sum": 2.996812595768006e-05,
+   "allplus_sum": 4.35571218986297e-05,
+   "onepattern_sum": 0.00012112820240872679,
+   "LS_sum": 0.00012112820240872679,
+   "pair_sum": 0.00030121900171241334,
+   "P3_sum": 0.0023866531485209654,
+   "rem_true": 2.996812595768006e-05,
+   "rem_allplus": 4.35571218986297e-05,
+   "rem_LS": 0.00012112820240872679,
+   "Gamma": 0.0023866531485209654,
+   "pattern_minus_fraction": 0.6865671641791045,
+   "per_subset_search": true,
+   "LS_ratio_min": 4.041901137888296,
+   "LS_ratio_median": 4.041901137888296,
+   "LS_ratio_max": 4.041901137888296
+  }
+ },
+ "chain_checks": {
+  "n": 96,
+  "violations": 0
+ },
+ "state_checks": {
+  "n": 157464,
+  "violations": 0,
+  "min_ratio": 19.70352982262219
+ }
+}

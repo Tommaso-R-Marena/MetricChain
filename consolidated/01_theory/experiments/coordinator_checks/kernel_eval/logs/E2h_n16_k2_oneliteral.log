@@ -1,0 +1,40 @@
+import took 155ms
+elaboration took 206ms
+type checking took 101ms
+'check_ok' does not depend on any axioms
+cumulative profiling times:
+	attribute application 0.195ms
+	blocked (unaccounted) 103ms
+	compilation (IR) 1.13ms
+	compilation (LCNF base) 9.63ms
+	compilation (LCNF impure) 4.97ms
+	compilation (LCNF mono) 6.04ms
+	elaboration 326ms
+	fix level params 0.142ms
+	import 155ms
+	initialization 38.4ms
+	instantiate metavars 0.094ms
+	interpretation 3.68ms
+	let-to-have transformation 0.125ms
+	linting 6.2ms
+	parsing 7.69ms
+	process pre-definitions 8.21ms
+	share common exprs 0.681ms
+	tactic execution 0.471ms
+	type checking 104ms
+	typeclass inference 5.59ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E2h_n16_k2_oneliteral.lean
+MEASURE wall_seconds: 0.73
+MEASURE user_seconds: 0.66
+MEASURE sys_seconds: 0.07
+MEASURE max_rss_kb: 478868
+MEASURE polled_peak_rss_kb: 477040
+MEASURE rss_watchdog_killed: no
+MEASURE result: exit status 0
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E2h_n16_k2_oneliteral.lean
+RUN bytes: 33614
+RUN sha256: e1a2acd3eaa111850c98f2f5751e584ce1682be2e42cf40a9095ac91791f5acf
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 0
+RUN note: generated file deleted after the run (regenerable with gen.py)

@@ -1,0 +1,4 @@
+=== sampler on the triple-share sandwich, enumerated: V8 on P2, tau 0.7, m = 4, window 7; 6561 states; D = 0.012267; acceptance 0.01219; seed 2026112643
+    ENUMERATION: W in [0.00103334, 0.999535], states with W outside [0, 1]: 0; exact E_q W = 0.44447037; identity: 245.9470141531 against ln Z(E) = 245.9470141531, difference 1.7e-13
+    COVERAGE: 200 repetitions with N = 1200: truth inside the bracket in 200 of 200; mean width 9.628e-04 (deterministic 1.227e-02); rms error of the point estimate 3.31e-05; observed acceptance 0.01222 [71.3s]
+DONE p6_11_sampler_triple_enum V8 P2 0.7 m=4 w=7 [72s]

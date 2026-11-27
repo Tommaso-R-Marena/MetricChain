@@ -1,0 +1,29 @@
+=== p9_05_brackets K5 on H, tau 0.7: order m = 4, band 3; sources ['ref', 'sab', 'cJ2', 's1', 's2'], forms ['S', 'B', 'T', 'W']; started 2026-11-26 11:07:01 UTC
+    5 sites, states per site [14, 14, 12, 7, 7], 115248 assignments, anchor [10, 10, 8, 3, 3]; P8's 'SAb' constants from ws_P8/out/bc_K5_H_0.70.json: Gamma_4 = 2.086 kT; my recorded ones differ by at most 2.2e-16 (relative)
+    ball of radius 3: 9636 values, ws_P8/cache/ball_K5_H_0.70_M3_8b9e31c706.npz (states equal pwmodel.ball_states row by row; 1000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol) [6s]
+    Gibbs samples of ws_P9/cache (coordinator's sampler): seed 4242 guides the reductions, seed 777 is the check sample (960 states, 0.91 sites off the anchor on average)
+    enumeration: 115248 states, exact ln Z = 251.348445
+(0) the models with ALL penalties zero (not a sandwich: what the reductions of the evaluated terms cost): width 0.0186999 nats; 7 evaluated terms exact in the window, 3 reduced, 1 pairs beyond the band (0 anchored, kept site i, 1 anchored, kept site j, 0 P3) [0s, peak RSS 251 MB]
+| source | form | certified bracket of ln Z | width (nats) | beta x mean of m_+ - m_- on the check sample | sandwich violated at Gibbs states | violated at any state; exact ln Z inside | exact samples of the floor: sites off the anchor (mean); violations | seconds |
+|---|---|---|---|---|---|---|---|---|
+| ref | S | [251.009728, 251.826210] | **0.8165** | 0.8018 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| ref | B | [251.249719, 251.492067] | **0.2423** | 0.2406 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| ref | T | [251.279396, 251.442920] | **0.1635** | 0.1657 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | S | [251.009728, 251.826210] | **0.8165** | 0.8018 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | B | [251.249719, 251.492067] | **0.2423** | 0.2406 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | T | [251.279396, 251.442920] | **0.1635** | 0.1657 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | W | [251.339596, 251.366718] | **0.02712** | 0.04074 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | S | [251.163218, 251.574417] | **0.4112** | 0.4127 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | B | [251.293006, 251.419954] | **0.1269** | 0.1339 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | T | [251.309315, 251.398735] | **0.08942** | 0.09693 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | W | [251.340612, 251.362874] | **0.02226** | 0.03493 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | S | [251.066796, 251.724459] | **0.6577** | 0.6555 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | B | [251.279027, 251.442354] | **0.1633** | 0.169 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | T | [251.302968, 251.408369] | **0.1054** | 0.113 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | W | [251.340182, 251.364163] | **0.02398** | 0.03685 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | S | [251.239107, 251.476136] | **0.237** | 0.241 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | B | [251.323205, 251.381054] | **0.05785** | 0.06586 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | T | [251.329603, 251.373832] | **0.04423** | 0.05244 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | W | [251.341792, 251.360699] | **0.01891** | 0.02952 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+foreign writes attempted during import (refused): 0
+ALL DONE 6 s; peak RSS 251 MB

@@ -1,0 +1,130 @@
+=== p9_02_gibbs K5 on H, tau 0.7; started 2026-11-26 11:06:19 UTC
+    122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]
+    seed 4242: 960 states (8 chains, 120 sweeps each after 30) [14s]; sites off the anchor: mean 0.94, largest 4; frequencies by site: 0.30 0.22 0.29 0.06 0.06; distribution of the number of sites off the anchor: 0:315 1:421 2:191 3:30 4:3
+    seed 777: 960 states (8 chains, 120 sweeps each after 30) [11s]; sites off the anchor: mean 0.91, largest 4; frequencies by site: 0.27 0.23 0.29 0.05 0.07; distribution of the number of sites off the anchor: 0:336 1:406 2:187 3:28 4:3
+foreign writes attempted during import (refused): 0
+ALL DONE 26 s; peak RSS 249 MB
+=== p9_03_tables K5 on H, tau 0.7, order 4, window 2; started 2026-11-26 11:06:45 UTC
+    122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]; 5 subsets of order 4, 5 in this run; sum over them of the number of states of T: 3.869e+04
+    subset 5/5 done, 1 s (0.16 s per subset), RSS now 135 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 5 subsets of order 4.  Gamma_4 in kT:  P8's Sb 2.11018, P8's SAb 2.08556 | stage 1: joint maximum 2.05933, median over the states 1.08291, minimum 0.862528 | stage 2: joint maximum 1.04722, median 0.0167105, minimum 2.20507e-05
+    stage 1: joint maximum / SAb per subset: min 0.970, median 0.999, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.000814 kT; window form: 4 tables, sub-tuples kept by size: 2: 1, 3: 4
+    stage 2: joint maximum / SAb per subset: min 0.420, median 0.498, max 0.5591; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 3.38e-05 kT; window form: 4 tables, sub-tuples kept by size: 2: 2, 3: 3
+    my recorded 'SAb' constants against P8's stored per-subset values (ws_P8/out/bc_K5_H_0.70.json): largest relative deviation 2.2e-16
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0.0007554, stage 2 1.729e-05; largest: 0.2533, 0.01429; states with a non-zero envelope: 3
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 0.0005976, stage 2 1.226e-05; largest: 0.2667, 0.0104; states with a non-zero envelope: 3
+foreign writes attempted during import (refused): 0
+ALL DONE 3 s; peak RSS 151 MB
+=== p9_03_tables K5 on H, tau 0.7, order 4, window 3; started 2026-11-26 11:06:49 UTC
+    122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]; 5 subsets of order 4, 5 in this run; sum over them of the number of states of T: 3.869e+04
+    subset 5/5 done, 1 s (0.15 s per subset), RSS now 136 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 5 subsets of order 4.  Gamma_4 in kT:  P8's Sb 2.11018, P8's SAb 2.08556 | stage 1: joint maximum 2.05933, median over the states 1.08291, minimum 0.862528 | stage 2: joint maximum 1.04722, median 0.0167105, minimum 2.20507e-05
+    stage 1: joint maximum / SAb per subset: min 0.970, median 0.999, max 1.0000; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 0.000814 kT; window form: 5 tables, sub-tuples kept by size: 3: 3, 4: 2
+    stage 2: joint maximum / SAb per subset: min 0.420, median 0.498, max 0.5591; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 3.38e-05 kT; window form: 5 tables, sub-tuples kept by size: 3: 3, 4: 2
+    my recorded 'SAb' constants against P8's stored per-subset values (ws_P8/out/bc_K5_H_0.70.json): largest relative deviation 2.2e-16
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0.0007554, stage 2 1.729e-05; largest: 0.2533, 0.01429; states with a non-zero envelope: 3
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 0.0005976, stage 2 1.226e-05; largest: 0.2667, 0.0104; states with a non-zero envelope: 3
+foreign writes attempted during import (refused): 0
+ALL DONE 3 s; peak RSS 151 MB
+=== p9_03_tables K5 on H, tau 0.7, order 5, window 3; started 2026-11-26 11:06:52 UTC
+    122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]; 1 subsets of order 5, 1 in this run; sum over them of the number of states of T: 6.692e+04
+    subset 1/1 done, 1 s (0.88 s per subset), RSS now 152 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 1 subsets of order 5.  Gamma_5 in kT:  P8's Sb 0.0401662, P8's SAb 0.0401662 | stage 1: joint maximum 0.0385086, median over the states 0.0229719, minimum 0.0187899 | stage 2: joint maximum 0.0129953, median 8.48629e-05, minimum 9.47025e-09
+    stage 1: joint maximum / SAb per subset: min 0.959, median 0.959, max 0.9587; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 1.791e-06 kT; window form: 1 tables, sub-tuples kept by size: 4: 1
+    stage 2: joint maximum / SAb per subset: min 0.324, median 0.324, max 0.3235; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 8.655e-09 kT; window form: 1 tables, sub-tuples kept by size: 4: 1
+    my recorded 'SAb' constants against P8's stored per-subset values (ws_P8/out/bc_K5_H_0.70.json): largest relative deviation 0.0e+00
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0, stage 2 0; largest: 0, 0; states with a non-zero envelope: 0
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 0, stage 2 0; largest: 0, 0; states with a non-zero envelope: 0
+foreign writes attempted during import (refused): 0
+ALL DONE 3 s; peak RSS 151 MB
+=== p9_05_brackets K5 on H, tau 0.7: order m = 4, band 2; sources ['ref', 'sab', 'cJ2', 's1', 's2'], forms ['S', 'B', 'T', 'W']; started 2026-11-26 11:06:55 UTC
+    5 sites, states per site [14, 14, 12, 7, 7], 115248 assignments, anchor [10, 10, 8, 3, 3]; P8's 'SAb' constants from ws_P8/out/bc_K5_H_0.70.json: Gamma_4 = 2.086 kT; my recorded ones differ by at most 2.2e-16 (relative)
+    ball of radius 3: 9636 values, ws_P8/cache/ball_K5_H_0.70_M3_8b9e31c706.npz (states equal pwmodel.ball_states row by row; 1000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol) [6s]
+    Gibbs samples of ws_P9/cache (coordinator's sampler): seed 4242 guides the reductions, seed 777 is the check sample (960 states, 0.91 sites off the anchor on average)
+    enumeration: 115248 states, exact ln Z = 251.348445
+(0) the models with ALL penalties zero (not a sandwich: what the reductions of the evaluated terms cost): width 0.0459025 nats; 3 evaluated terms exact in the window, 7 reduced, 3 pairs beyond the band (0 anchored, kept site i, 3 anchored, kept site j, 0 P3) [0s, peak RSS 250 MB]
+| source | form | certified bracket of ln Z | width (nats) | beta x mean of m_+ - m_- on the check sample | sandwich violated at Gibbs states | violated at any state; exact ln Z inside | exact samples of the floor: sites off the anchor (mean); violations | seconds |
+|---|---|---|---|---|---|---|---|---|
+| ref | S | [251.003734, 251.852770] | **0.849** | 0.8276 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| ref | B | [251.185565, 251.597280] | **0.4117** | 0.3932 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| ref | T | [251.198528, 251.572785] | **0.3743** | 0.3581 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| sab | S | [251.003734, 251.852770] | **0.849** | 0.8276 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| sab | B | [251.185565, 251.597280] | **0.4117** | 0.3932 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| sab | T | [251.198528, 251.572785] | **0.3743** | 0.3581 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| sab | W | [251.323891, 251.410287] | **0.0864** | 0.09346 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| cJ2 | S | [251.155986, 251.596634] | **0.4406** | 0.4385 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| cJ2 | B | [251.253207, 251.479408] | **0.2262** | 0.2252 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| cJ2 | T | [251.260399, 251.469356] | **0.209** | 0.2085 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| cJ2 | W | [251.327967, 251.390713] | **0.06275** | 0.07331 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s1 | S | [251.060427, 251.749517] | **0.6891** | 0.6813 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s1 | B | [251.224753, 251.525426] | **0.3007** | 0.2957 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s1 | T | [251.236300, 251.506641] | **0.2703** | 0.2671 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s1 | W | [251.326825, 251.390431] | **0.06361** | 0.06975 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s2 | S | [251.230773, 251.495235] | **0.2645** | 0.2668 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s2 | B | [251.295663, 251.420920] | **0.1253** | 0.1297 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s2 | T | [251.298958, 251.416914] | **0.118** | 0.1224 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+| s2 | W | [251.332486, 251.380139] | **0.04765** | 0.05678 | 0 | 0; True | — | 0 (peak RSS 250 MB) |
+foreign writes attempted during import (refused): 0
+ALL DONE 6 s; peak RSS 250 MB
+=== p9_05_brackets K5 on H, tau 0.7: order m = 4, band 3; sources ['ref', 'sab', 'cJ2', 's1', 's2'], forms ['S', 'B', 'T', 'W']; started 2026-11-26 11:07:01 UTC
+    5 sites, states per site [14, 14, 12, 7, 7], 115248 assignments, anchor [10, 10, 8, 3, 3]; P8's 'SAb' constants from ws_P8/out/bc_K5_H_0.70.json: Gamma_4 = 2.086 kT; my recorded ones differ by at most 2.2e-16 (relative)
+    ball of radius 3: 9636 values, ws_P8/cache/ball_K5_H_0.70_M3_8b9e31c706.npz (states equal pwmodel.ball_states row by row; 1000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol) [6s]
+    Gibbs samples of ws_P9/cache (coordinator's sampler): seed 4242 guides the reductions, seed 777 is the check sample (960 states, 0.91 sites off the anchor on average)
+    enumeration: 115248 states, exact ln Z = 251.348445
+(0) the models with ALL penalties zero (not a sandwich: what the reductions of the evaluated terms cost): width 0.0186999 nats; 7 evaluated terms exact in the window, 3 reduced, 1 pairs beyond the band (0 anchored, kept site i, 1 anchored, kept site j, 0 P3) [0s, peak RSS 251 MB]
+| source | form | certified bracket of ln Z | width (nats) | beta x mean of m_+ - m_- on the check sample | sandwich violated at Gibbs states | violated at any state; exact ln Z inside | exact samples of the floor: sites off the anchor (mean); violations | seconds |
+|---|---|---|---|---|---|---|---|---|
+| ref | S | [251.009728, 251.826210] | **0.8165** | 0.8018 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| ref | B | [251.249719, 251.492067] | **0.2423** | 0.2406 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| ref | T | [251.279396, 251.442920] | **0.1635** | 0.1657 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | S | [251.009728, 251.826210] | **0.8165** | 0.8018 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | B | [251.249719, 251.492067] | **0.2423** | 0.2406 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | T | [251.279396, 251.442920] | **0.1635** | 0.1657 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| sab | W | [251.339596, 251.366718] | **0.02712** | 0.04074 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | S | [251.163218, 251.574417] | **0.4112** | 0.4127 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | B | [251.293006, 251.419954] | **0.1269** | 0.1339 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | T | [251.309315, 251.398735] | **0.08942** | 0.09693 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| cJ2 | W | [251.340612, 251.362874] | **0.02226** | 0.03493 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | S | [251.066796, 251.724459] | **0.6577** | 0.6555 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | B | [251.279027, 251.442354] | **0.1633** | 0.169 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | T | [251.302968, 251.408369] | **0.1054** | 0.113 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s1 | W | [251.340182, 251.364163] | **0.02398** | 0.03685 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | S | [251.239107, 251.476136] | **0.237** | 0.241 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | B | [251.323205, 251.381054] | **0.05785** | 0.06586 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | T | [251.329603, 251.373832] | **0.04423** | 0.05244 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+| s2 | W | [251.341792, 251.360699] | **0.01891** | 0.02952 | 0 | 0; True | — | 0 (peak RSS 251 MB) |
+foreign writes attempted during import (refused): 0
+ALL DONE 6 s; peak RSS 251 MB
+=== p9_05_brackets K5 on H, tau 0.7: order m = 5, band 3; sources ['ref', 'sab', 'cJ2', 's1', 's2'], forms ['S', 'B', 'T', 'W']; started 2026-11-26 11:07:08 UTC
+    5 sites, states per site [14, 14, 12, 7, 7], 115248 assignments, anchor [10, 10, 8, 3, 3]; P8's 'SAb' constants from ws_P8/out/bc_K5_H_0.70.json: Gamma_5 = 0.04017 kT; my recorded ones differ by at most 0.0e+00 (relative)
+    ball of radius 4: 48324 values, ws_P8/cache/ball_K5_H_0.70_M4_8b9e31c706.npz (states equal pwmodel.ball_states row by row; 1000 random values re-evaluated here: largest deviation 0.0e+00 kcal/mol) [6s]
+    Gibbs samples of ws_P9/cache (coordinator's sampler): seed 4242 guides the reductions, seed 777 is the check sample (960 states, 0.91 sites off the anchor on average)
+    enumeration: 115248 states, exact ln Z = 251.348445
+(0) the models with ALL penalties zero (not a sandwich: what the reductions of the evaluated terms cost): width 0.0187002 nats; 9 evaluated terms exact in the window, 6 reduced, 1 pairs beyond the band (0 anchored, kept site i, 1 anchored, kept site j, 0 P3) [0s, peak RSS 253 MB]
+| source | form | certified bracket of ln Z | width (nats) | beta x mean of m_+ - m_- on the check sample | sandwich violated at Gibbs states | violated at any state; exact ln Z inside | exact samples of the floor: sites off the anchor (mean); violations | seconds |
+|---|---|---|---|---|---|---|---|---|
+| ref | S | [251.334516, 251.368102] | **0.03359** | 0.04392 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| ref | B | [251.340026, 251.362493] | **0.02247** | 0.03291 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| ref | T | [251.340765, 251.361727] | **0.02096** | 0.03142 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| sab | S | [251.334516, 251.368102] | **0.03359** | 0.04392 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| sab | B | [251.340026, 251.362493] | **0.02247** | 0.03291 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| sab | T | [251.340765, 251.361727] | **0.02096** | 0.03142 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| sab | W | [251.341857, 251.360578] | **0.01872** | 0.02925 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| cJ2 | S | [251.339479, 251.363004] | **0.02352** | 0.034 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| cJ2 | B | [251.341268, 251.361190] | **0.01992** | 0.03043 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| cJ2 | T | [251.341508, 251.360943] | **0.01943** | 0.02995 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| cJ2 | W | [251.341862, 251.360571] | **0.01871** | 0.02925 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s1 | S | [251.335689, 251.366904] | **0.03122** | 0.04163 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s1 | B | [251.340486, 251.362019] | **0.02153** | 0.03201 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s1 | T | [251.341049, 251.361434] | **0.02039** | 0.03088 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s1 | W | [251.341859, 251.360575] | **0.01872** | 0.02925 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s2 | S | [251.340311, 251.362143] | **0.02183** | 0.03227 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s2 | B | [251.341549, 251.360892] | **0.01934** | 0.02984 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s2 | T | [251.341649, 251.360790] | **0.01914** | 0.02964 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+| s2 | W | [251.341864, 251.360568] | **0.0187** | 0.02925 | 0 | 0; True | — | 0 (peak RSS 253 MB) |
+foreign writes attempted during import (refused): 0
+ALL DONE 7 s; peak RSS 253 MB
+exit 0

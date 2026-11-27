@@ -1,0 +1,85 @@
+all 13 old logs and all 14 new logs end with 'ALL DONE': True
+
+=== (1) the regression claim, run by run ===
+| run | items old/new | routed old -> new (inner) | per class routed, old -> new | stage rows 0-2 identical to the last digit (LJ, LP, UE, UP, bracket) | last stage: lower end old -> new | upper end old -> new | new inside old | width old -> new |
+|---|---|---|---|---|---|---|---|---|
+| K5_m4_w2_enum | 25/25 | 14 -> 18 (4) | {('term', 'ceiling'): (4, 6), ('term', 'floor'): (4, 6)} | [True, True, False] | 251.3475751 -> 251.3475876 | 251.3504878 -> 251.3504722 | True (both ends moved) | 0.002913 -> 0.002885 |
+| K5_m4_w3_enum | 11/11 | 10 -> 10 (0) | none changed | [True, True, True] | 251.3484184 -> 251.3484184 | 251.3484828 -> 251.3484828 | True (identical) | 6.437e-05 -> 6.437e-05 |
+| K5_m5_w3_enum | 15/15 | 12 -> 12 (0) | none changed | [True, True, True] | 251.3484424 -> 251.3484424 | 251.3484495 -> 251.3484495 | True (identical) | 7.104e-06 -> 7.104e-06 |
+| LKSEc5_m4_w2_enum | 25/25 | 14 -> 18 (4) | {('term', 'ceiling'): (4, 6), ('term', 'floor'): (4, 6)} | [True, True, False] | 276.4668782 -> 276.4669085 | 276.4684894 -> 276.4684663 | True (both ends moved) | 0.001611 -> 0.001558 |
+| K12_m3_w7 | 100/100 | 100 -> 100 (0) | none changed | [True, True, True] | 517.1160739 -> 517.1160739 | 517.1771913 -> 517.1771913 | True (identical) | 0.06112 -> 0.06112 |
+| K12_m4_w7 | 465/465 | 380 -> 415 (35) | {('alloc', 'both'): (200, 235)} | [True, True, True] | 517.1285101 -> 517.1285108 | 517.1285931 -> 517.1285924 | True (both ends moved) | 8.297e-05 -> 8.161e-05 |
+| K12_m5_w7 | 1346/1346 | 818 -> 996 (178) | {('term', 'ceiling'): (280, 315), ('term', 'floor'): (280, 315), ('alloc', 'both'): (238, 346)} | [True, True, False] | 517.1285395 -> 517.1285396 | 517.1285614 -> 517.1285614 | True (one end moved) | 2.184e-05 -> 2.178e-05 |
+| K12_m4_w6 | 610/610 | 420 -> 505 (85) | {('alloc', 'both'): (170, 255)} | [True, True, True] | 517.1284536 -> 517.1284560 | 517.1287322 -> 517.1287298 | True (both ends moved) | 0.0002786 -> 0.0002738 |
+| K12_m4_w5 | 742/742 | 352 -> 543 (191) | {('term', 'ceiling'): (100, 136), ('term', 'floor'): (100, 136), ('alloc', 'both'): (110, 229)} | [True, True, False] | 517.1284057 -> 517.1284232 | 517.1288274 -> 517.1288122 | True (both ends moved) | 0.0004217 -> 0.000389 |
+| K12_m4_w4 | 854/854 | 262 -> 513 (251) | {('term', 'ceiling'): (76, 148), ('term', 'floor'): (76, 148), ('alloc', 'both'): (54, 161)} | [True, True, False] | 517.1283040 -> 517.1283300 | 517.1289915 -> 517.1289748 | True (both ends moved) | 0.0006875 -> 0.0006449 |
+| LKSEc12_m4_w7 | 465/465 | 380 -> 415 (35) | {('alloc', 'both'): (200, 235)} | [True, True, True] | 655.6119691 -> 655.6120305 | 655.6135057 -> 655.6134443 | True (both ends moved) | 0.001537 -> 0.001414 |
+| LKSEc12_m5_w7 | 1346/1346 | 818 -> 996 (178) | {('term', 'ceiling'): (280, 315), ('term', 'floor'): (280, 315), ('alloc', 'both'): (238, 346)} | [True, True, False] | 655.6126377 -> 655.6126392 | 655.6127810 -> 655.6127798 | True (both ends moved) | 0.0001433 -> 0.0001407 |
+| S12_m5_w7 | 1346/1346 | 818 -> 996 (178) | {('term', 'ceiling'): (280, 315), ('term', 'floor'): (280, 315), ('alloc', 'both'): (238, 346)} | [True, True, False] | 227.3678308 -> 227.3678932 | 227.3696220 -> 227.3695587 | True (both ends moved) | 0.001791 -> 0.001666 |
+runs in which the claim fails: none; runs with all four stage rows identical: 3; runs with the new last bracket inside the old one (weakly): 13 of 13
+    (what 'same items' can be read from: the per-class numbers of items with a route; the item tables themselves are not in the logs)
+
+=== (2) what else is identical / changed between old and new logs ===
+  K5_m4_w2_enum: static part identical; hypothesis check (states, violations, control 1, control 2) old (115248, 0, 229329, 112163) new (115248, 0, 229329, 112163) same; groups 4 -> 6; z-scores old [] new []; tables check (new only): None; time 36 -> 34 s, RSS 264 -> 264 MB
+  K5_m4_w3_enum: static part identical; hypothesis check (states, violations, control 1, control 2) old (115248, 0, 183268, 97286) new (115248, 0, 183268, 97286) same; groups 2 -> 2; z-scores old [] new []; tables check (new only): None; time 34 -> 35 s, RSS 273 -> 265 MB
+  K5_m5_w3_enum: static part identical; hypothesis check (states, violations, control 1, control 2) old (115248, 0, 195290, 98784) new (115248, 0, 195290, 98784) same; groups 2 -> 2; z-scores old [] new []; tables check (new only): None; time 35 -> 36 s, RSS 289 -> 290 MB
+  LKSEc5_m4_w2_enum: static part identical; hypothesis check (states, violations, control 1, control 2) old (14508, 0, 22687, 12011) new (14508, 0, 22687, 12011) same; groups 4 -> 6; z-scores old [] new []; tables check (new only): None; time 9 -> 9 s, RSS 113 -> 113 MB
+  K12_m3_w7: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 4341, 1316) new (5380, 0, 4341, 1316) same; groups 8 -> 8; z-scores old [-1.4, -1.6] new [-1.4, -1.6]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 0.4925, 'ratio_min': 9.929, 'ratio_med': 317.7, 'ctrl': 660}; time 364 -> 350 s, RSS 2650 -> 2790 MB
+  K12_m4_w7: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 6123, 2554) new (5380, 0, 6123, 2554) same; groups 8 -> 20; z-scores old [-0.8, -1.4] new [-0.8, -1.4]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 0.009186, 'ratio_min': 9.753, 'ratio_med': 266.5, 'ctrl': 1943}; time 515 -> 502 s, RSS 2732 -> 2840 MB
+  K12_m5_w7: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 6872, 3094) new (5380, 0, 6872, 3094) same; groups 8 -> 20; z-scores old [-0.9, -1.5] new [-0.9, -1.5]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 5.85e-05, 'ratio_min': 8.963, 'ratio_med': 212.7, 'ctrl': 2733}; time 696 -> 649 s, RSS 3757 -> 3883 MB
+  K12_m4_w6: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 6978, 3008) new (5380, 0, 6978, 3008) same; groups 10 -> 30; z-scores old [-0.2, -1.4] new [-0.2, -1.4]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 0.009186, 'ratio_min': 9.753, 'ratio_med': 266.5, 'ctrl': 1943}; time 214 -> 202 s, RSS 1361 -> 1382 MB
+  K12_m4_w5: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 7364, 3188) new (5380, 0, 7364, 3188) same; groups 12 -> 42; z-scores old [0.0, -1.4] new [0.0, -1.4]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 0.009186, 'ratio_min': 9.753, 'ratio_med': 266.5, 'ctrl': 1943}; time 199 -> 185 s, RSS 1085 -> 1096 MB
+  K12_m4_w4: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 7446, 3210) new (5380, 0, 7446, 3210) same; groups 14 -> 56; z-scores old [-0.1, -1.6] new [-0.1, -1.6]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 0.009186, 'ratio_min': 9.753, 'ratio_med': 266.5, 'ctrl': 1943}; time 192 -> 189 s, RSS 1070 -> 1073 MB
+  LKSEc12_m4_w7: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 8090, 3202) new (5380, 0, 8090, 3202) same; groups 8 -> 20; z-scores old [-0.1, 0.1] new [-0.2, 0.0]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 0.02211, 'ratio_min': 11.764, 'ratio_med': 343.3, 'ctrl': 1452}; time 472 -> 456 s, RSS 1510 -> 1876 MB
+  LKSEc12_m5_w7: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 9173, 4138) new (5380, 0, 9173, 4138) same; groups 8 -> 20; z-scores old [0.1, 0.3] new [0.1, 0.3]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 0.002267, 'ratio_min': 12.897, 'ratio_med': 315.2, 'ctrl': 2515}; time 625 -> 682 s, RSS 3712 -> 4291 MB
+  S12_m5_w7: static part identical; hypothesis check (states, violations, control 1, control 2) old (5380, 0, 10011, 4021) new (5380, 0, 10011, 4021) same; groups 8 -> 20; z-scores old [-0.3, -0.2] new [-0.3, -0.2]; tables check (new only): {'n': 5000, 'viol': 0, 'rmax': 2.447e-05, 'ratio_min': 4.618, 'ratio_med': 88.7, 'ctrl': 343}; time 75 -> 71 s, RSS 623 -> 658 MB
+
+=== (3) the table of item 78 against the logs ===
+  K5_m4_w2_enum: all eight numbers agree  (log: routed 14 -> 18 (4) / 25; width 0.002913 -> 0.002885; [251.3475876, 251.3504722])
+  K5_m4_w3_enum: all eight numbers agree  (log: routed 10 -> 10 (0) / 11; width 6.437e-05 -> 6.437e-05; [251.3484184, 251.3484828])
+  K5_m5_w3_enum: all eight numbers agree  (log: routed 12 -> 12 (0) / 15; width 7.104e-06 -> 7.104e-06; [251.3484424, 251.3484495])
+  LKSEc5_m4_w2_enum: all eight numbers agree  (log: routed 14 -> 18 (4) / 25; width 0.001611 -> 0.001558; [276.4669085, 276.4684663])
+  K12_m3_w7: all eight numbers agree  (log: routed 100 -> 100 (0) / 100; width 0.06112 -> 0.06112; [517.1160739, 517.1771913])
+  K12_m4_w7: all eight numbers agree  (log: routed 380 -> 415 (35) / 465; width 8.297e-05 -> 8.161e-05; [517.1285108, 517.1285924])
+  K12_m5_w7: all eight numbers agree  (log: routed 818 -> 996 (178) / 1346; width 2.184e-05 -> 2.178e-05; [517.1285396, 517.1285614])
+  K12_m4_w6: all eight numbers agree  (log: routed 420 -> 505 (85) / 610; width 0.0002786 -> 0.0002738; [517.1284560, 517.1287298])
+  K12_m4_w5: all eight numbers agree  (log: routed 352 -> 543 (191) / 742; width 0.0004217 -> 0.000389; [517.1284232, 517.1288122])
+  K12_m4_w4: all eight numbers agree  (log: routed 262 -> 513 (251) / 854; width 0.0006875 -> 0.0006449; [517.1283300, 517.1289748])
+  LKSEc12_m4_w7: all eight numbers agree  (log: routed 380 -> 415 (35) / 465; width 0.001537 -> 0.001414; [655.6120305, 655.6134443])
+  LKSEc12_m5_w7: all eight numbers agree  (log: routed 818 -> 996 (178) / 1346; width 0.0001433 -> 0.0001407; [655.6126392, 655.6127798])
+  S12_m5_w7: all eight numbers agree  (log: routed 818 -> 996 (178) / 1346; width 0.001791 -> 0.001666; [227.3678932, 227.3695587])
+  numbers of the table of item 78 that disagree with the logs: 0 of 104
+  'the means against exact samples within 1.6 standard errors': largest |z| in the nine sampled new logs 1.6 (18 comparisons); 'the control failing at 343 to 2 733 states': 343 to 2733 (9 logs); table violations: [0, 0, 0, 0, 0, 0, 0, 0, 0]; smallest ratio entry/remainder per log: [9.929, 9.753, 8.963, 9.753, 9.753, 9.753, 11.764, 12.897, 4.618]
+  hypothesis violations in the 13 new logs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; control 1: [229329, 183268, 195290, 22687, 4341, 6123, 6872, 6978, 7364, 7446, 8090, 9173, 10011]; control 2: [112163, 97286, 98784, 12011, 1316, 2554, 3094, 3008, 3188, 3210, 3202, 4138, 4021]
+  enumerated: exact ln Z inside every corrected bracket: [True, True, True, True]; largest deviation of the group means: [9.2e-13, 2.5e-13, 2e-13, 7.3e-14]; largest |mass - 1|: 1.3e-12
+  'K12_m4_w5: tighten by 8 per cent': 7.8 % (0.0004217 -> 0.000389); items newly routed 191
+  'K12_m4_w4: tighten by 6 per cent': 6.2 % (0.0006875 -> 0.0006449); items newly routed 251
+  band 4: 'the subsets that still have none carry 1.1e-4 nats of first-order slack per side': log 0.000105952; D^2/4 = 0.000207 for D = 0.0287696
+
+=== (4) item 79 (Lys20) against its log ===
+  sum of the table maxima 45.23 (text 45.2); ball 385566 (text 385 566); sandwich D = 0.0181381 [800.505214, 800.523352] (text 0.01814 [800.505214, 800.523352]); corrected [800.5150660, 800.5154710] width 0.0004051 (text [800.5150660, 800.5154710], 4.05e-4); stages 0.0007586, 0.000698, 0.0004051 (text 7.6e-4, 7.0e-4, 4.05e-4); D/width 44.8 (text 45)
+  items 6175 = 156 far + 1664 terms + 4355 subsets (text 6 175 = 156 + 1 664 + 4 355); with a route 3823 = 3823 (text 3 823), inner 2029 (text 2 029); without 2352 (text 2 352), of them four-site subsets 2240 (text 2 240), their first-order slack 1.15253e-05 (text 1.2e-5 per side); groups 156 (text 156)
+  hypotheses: {'states': 5380, 'viol': 0, 'c1': 8029, 'c2': 3501} (text: 5 380 states, no violation, controls 8 029 and 3 501); z [-0.6, -1.4] (text: within 1.4); tables {'n': 20000, 'viol': 0, 'rmax': 0.01702, 'ratio_min': 10.859, 'ratio_med': 239.7, 'ctrl': 5556} (text: 20 000 states, no violation, smallest ratio 10.9, median 240, control 5 556); 1390 s, 5469 MB (text 1 390 s, 5.5 GB)
+
+=== (5) SCI-RES-0024 section 3 (a) and section 4 against the logs ===
+  band 4: ln Z(m-) log 517.1427360 text 517.1427360 ok; ln Z(m+) log 517.1139664 text 517.1139664 ok
+  band 5: ln Z(m-) log 517.1411643 text 517.1411643 ok; ln Z(m+) log 517.1158165 text 517.1158165 ok
+  band 6: ln Z(m-) log 517.1390752 text 517.1390752 ok; ln Z(m+) log 517.1176354 text 517.1176354 ok
+  band 7: ln Z(m-) log 517.1329875 text 517.1329875 ok; ln Z(m+) log 517.1256580 text 517.1256580 ok
+  'from band 4 to band 7: 0.0097 on the floor's side, 0.0117 on the ceiling's': 0.0097, 0.0117
+  monotone in the band: floors ['517.1427360', '517.1411643', '517.1390752', '517.1329875'], ceilings ['517.1139664', '517.1158165', '517.1176354', '517.1256580']
+  section 4, K12_m4_w7: log 8.297e-05 -> 8.161e-05 (text 8.30e-5 -> 8.16e-5)
+  section 4, LKSEc12_m5_w7: log 0.0001433 -> 0.0001407 (text 1.43e-4 -> 1.41e-4)
+  section 4, K12_m4_w4: log 0.0006875 -> 0.0006449 (text 6.9e-4 -> 6.4e-4)
+  section 2: '20 groups for Lys12 at band 7 and 156 for Lys20': 20 (order 4), 20 (order 5), 156; 'D^2/4: 1.3e-5 of the 2.2e-5 left for Lys12 at order 5, 8e-5 of the 4e-4 for Lys20': D^2/4 = 1.27e-05 (width 2.178e-05), 8.22e-05 (width 0.0004051)
+
+=== (6) 'the loss between groups is about D^2/4': what the four enumerated logs say (loss = corrected width - width with the routed items put back exactly) ===
+  K5_m4_w2_enum (old): D = 0.0476513, corrected 0.002913, exact treatment of the same items 0.001669, loss 0.00124 = 2.19 x D^2/4 (4 groups)
+  K5_m4_w2_enum (new): D = 0.0476513, corrected 0.002885, exact treatment of the same items 0.001614, loss 0.00127 = 2.24 x D^2/4 (6 groups)
+  K5_m4_w3_enum (old): D = 0.0189051, corrected 6.44e-05, exact treatment of the same items 4.996e-05, loss 1.44e-05 = 0.16 x D^2/4 (2 groups)
+  K5_m4_w3_enum (new): D = 0.0189051, corrected 6.44e-05, exact treatment of the same items 4.996e-05, loss 1.44e-05 = 0.16 x D^2/4 (2 groups)
+  K5_m5_w3_enum (old): D = 0.0187016, corrected 7.1e-06, exact treatment of the same items 1.573e-06, loss 5.53e-06 = 0.06 x D^2/4 (2 groups)
+  K5_m5_w3_enum (new): D = 0.0187016, corrected 7.1e-06, exact treatment of the same items 1.573e-06, loss 5.53e-06 = 0.06 x D^2/4 (2 groups)
+  LKSEc5_m4_w2_enum (old): D = 0.205387, corrected 0.001611, exact treatment of the same items 0.0008813, loss 0.00073 = 0.07 x D^2/4 (4 groups)
+  LKSEc5_m4_w2_enum (new): D = 0.205387, corrected 0.001558, exact treatment of the same items 0.0008185, loss 0.000739 = 0.07 x D^2/4 (6 groups)
+ALL DONE; peak RSS 14 MB

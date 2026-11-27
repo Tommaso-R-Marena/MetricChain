@@ -1,0 +1,48 @@
+--- experiments/falsify_conjectures.py
++++ experiments/falsify_conjectures.py (proposed)
+@@ -6000,4 +6000,5 @@
+                 while ball[k + 2] <= max(1.0, No * pbar):
+                     k += 1
++                ell_markov = max(ell, s * math.exp(-b) * pbar)                               # the bound without the Harper term (statistics only)
+                 ell = max(ell, s * math.exp(-b) * pbar, s * math.exp(-b) * Tk[k] / No)       # Markov, and the Harper term
+             if No * q < 1:
+@@ -6006,5 +6007,6 @@
+                 r = next(rr for rr in range(n_o + 1) if ball[rr + 1] >= No * q)
+                 tail = s * E[r] / No if r < n_o else math.inf         # no closure while the ball is the whole cube
+-            rec = dict(s=s, M=M, q=q, pbar=pbar, pop=pop, ell_in=ell_in, r=r, Mneg=Mneg)
++            rec = dict(s=s, M=M, q=q, pbar=pbar, pop=pop, ell_in=ell_in, r=r, Mneg=Mneg, tail=tail, ell_out=ell,
++                       ell_markov=(ell_markov if pop else ell))
+             if tail <= theta * math.exp(b) * ell:
+                 lower = max(ell, Sigma + (1 - math.exp(-lam)) * math.exp(-b) * s * pbar)
+@@ -6051,4 +6053,10 @@
+             stats["tightest_count"] = max(stats["tightest_count"], lhs / cap)
+         stats["populated" if lv["pop"] else "unpopulated"] += 1
++    # how often the Harper term is exercised (a question of the Scientific Discovery Division, SCI-REV-0007): populated passes
++    # at which it raises the running bound, and runs whose closure it decides (the closing pass is populated and would fail
++    # the closure test with the bound without the Harper term)
++    seq, last = run["levels"] + [run["last"]], run["last"]
++    stats["harper_active"] = stats.get("harper_active", 0) + sum(1 for lv in seq if lv["pop"] and lv["ell_out"] > lv["ell_markov"])
++    stats["harper_decisive"] = stats.get("harper_decisive", 0) + int(last["pop"] and last["tail"] > theta * math.exp(b) * last["ell_markov"])
+     stats["runs"] += 1
+     return None
+@@ -6111,5 +6119,19 @@
+         if bad:
+             return False, bad
+-    if stats["populated"] == 0 or stats["unpopulated"] == 0 or stats["skipped"] > 0:
++    # (iii) a fixed sub-case in which the Harper term decides the closure (plateau of radius 4, then a cone of slope u): the
++    # closing pass is populated, its radius is at most r_dagger, and the closure test holds through the Harper term only --
++    # without that term the level is left and the check of the closing radius fails.  (3000 of 3000 runs over seeds and
++    # inner behaviours: experiments/coordinator_checks/nested_review_R6/h_subcase_robust.py)
++    n_o, u = 24, 0.5
++    f = u * np.maximum(np.arange(n_o + 1, dtype=float) - 4, 0.0)
++    vals, probs = np.exp(-f), np.array([math.comb(n_o, j) for j in range(n_o + 1)], dtype=float) / 2 ** n_o
++    decisive_before = stats.get("harper_decisive", 0)
++    for mode in (1, 2):
++        bad = one(vals, probs, 0.0, n_o, n_o + 2, u, dict(lam=0.5, eta=0.25, etap=0.5, theta=2.0, b=0.5, delta=0.01, nu1=1.0), mode, ("harper", mode))
++        if bad:
++            return False, bad
++    if stats.get("harper_decisive", 0) - decisive_before != 2:
++        return False, dict(reason="the fixed sub-case no longer exercises the Harper step", **stats)
++    if stats["populated"] == 0 or stats["unpopulated"] == 0 or stats["skipped"] > 0 or stats.get("harper_active", 0) == 0:
+         return False, dict(reason="the test has no power", **stats)
+     return True, stats

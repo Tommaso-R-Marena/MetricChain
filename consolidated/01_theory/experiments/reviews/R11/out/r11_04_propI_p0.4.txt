@@ -1,0 +1,11 @@
+== (1) Proposition I against the definitions ==
+L=3 k=2 p=0.3 t=0.43: direct 0.131022730207  formula 0.131022730207  |c_def - c_matrix| <= 3.3e-16;  per block: G_L 0.066994, ln E[c^t]/(k-1) 0.007779 (operator Lambda_blk 0.008227), t ln E_Q/(k-1) 0.010745 (t ln lam_Q 0.011482)
+L=3 k=3 p=0.3 t=0.43: direct 0.208319233561  formula 0.208319233561  |c_def - c_matrix| <= 7.8e-16;  per block: G_L 0.069731, ln E[c^t]/(k-1) -0.004677 (operator Lambda_blk -0.004768), t ln E_Q/(k-1) -0.004240 (t ln lam_Q -0.004368)
+L=3 k=2 p=0.1 t=0.7: direct 0.129891800139  formula 0.129891800139  |c_def - c_matrix| <= 4.4e-16;  per block: G_L 0.074849, ln E[c^t]/(k-1) 0.015106 (operator Lambda_blk 0.031980), t ln E_Q/(k-1) 0.034912 (t ln lam_Q 0.062230)
+L=4 k=2 p=0.2 t=0.3: direct 0.218068410231  formula 0.218068410231  |c_def - c_matrix| <= 8.9e-16;  per block: G_L 0.110948, ln E[c^t]/(k-1) -0.003185 (operator Lambda_blk -0.003158), t ln E_Q/(k-1) 0.000643 (t ln lam_Q 0.000746)
+L=2 k=4 p=0.4 t=0.55: direct 0.168017764827  formula 0.168017764827  |c_def - c_matrix| <= 8.9e-16;  per block: G_L 0.042630, ln E[c^t]/(k-1) 0.006386 (operator Lambda_blk 0.006441), t ln E_Q/(k-1) 0.007220 (t ln lam_Q 0.007295)
+largest deviation: 9.99e-16
+
+== (2) headline lower ends: site-wise labels with <= 2 walls per block ==
+p=0.4 L=12 t=0.459: 134 labels (54 with weight > 1e-5);  G_L = [0.408902930, 0.408948735] (dual over these labels);  Lambda_blk: N=64 -0.000420636, N=128 -0.000420636; exact increments k=1->2: -0.0004206, k=2->3 (weights > 1e-7): -0.0004206;  ln lam_Q = 1.11e-15
+      bound per site = 0.034040   (report 0.034026;  cube 0.029139;  ratio 1.168)   [265 s]

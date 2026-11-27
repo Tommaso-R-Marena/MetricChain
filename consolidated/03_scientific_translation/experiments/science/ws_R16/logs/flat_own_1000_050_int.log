@@ -1,0 +1,5 @@
+# r16_flat_own.py started 2026-11-26T09:27:11Z; n = 1000, phi = 0.5
+# variant int: rungs at which the radius r^ of the proposition (integer M) is below r*: 12 of 40
+variant int: n = 1000 phi = 0.5 (n_o = 500): status closed; ln(evaluations)/(n a) = 0.9839; ln C_max/(n a) = 1.1384; levels 5110 (populated 5002, negligible 107); last sample K 2^48; closing radius 164 (r-dagger 107); returned width 0.7742 <= x_out 0.8715: True; rungs used: deepest 35   [2 s]
+# finished 2026-11-26T09:27:12Z
+peak RSS MB 55.29296875

@@ -1,0 +1,20 @@
+seed 2 time 121s
+  built                                              65231
+  checked                                            12000
+  critical splits                                    838
+  critical splits with weight <= 0                   58
+  galled                                             7113
+  hybrid nodes = 2                                   7176
+  hybrid nodes = 3                                   3124
+  hybrid nodes = 4                                   1202
+  hybrid nodes = 5                                   377
+  hybrid nodes = 6                                   121
+  invalid                                            39215
+  level > 2                                          11685
+  networks with >1 distinct induced order found      11667
+  nonplanar                                          2331
+  orders checked                                     55932
+  other splits (first order)                         433659
+  with a nested blob                                 4887
+  with several non-trivial blobs                     8829
+  critical weights: {-23: 2, -17: 1, -16: 2, -15: 1, -13: 1, -12: 4, -11: 2, -10: 1, -8: 4, -7: 3, -6: 2, -5: 3, -4: 4, -3: 6, -2: 4, -1: 10, 0: 8, 1: 15, 2: 36, 3: 97, 4: 72, 5: 108, 6: 64, 7: 91, 8: 77, 9: 73, 10: 52, 11: 17, 12: 9, 13: 22, 14: 12, 15: 10, 16: 9, 17: 5, 18: 1, 19: 4, 20: 1, 22: 1, 25: 3, 26: 1}

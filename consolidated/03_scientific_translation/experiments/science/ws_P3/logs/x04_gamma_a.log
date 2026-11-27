@@ -1,0 +1,24 @@
+V6:E:0.70: atoms 108, sites 6, states 3..; anchor E = -118.041 (18 evals); Gamma_3 = 1.2964e+01 (self 2.27e-01) [21.7 kT, 0s]; Gamma_4 = 4.3233e-01 (self 3.42e-03) [0.725 kT, 0s]; Gamma_5 = 6.6276e-03 (self 8.08e-06) [0.0111 kT, 0s]; Gamma_6 = 5.6580e-05 (self 7.68e-09) [9.49e-05 kT, 0s];  total 1s
+V8:E:0.70: atoms 140, sites 8, states 3..; anchor E = -145.112 (24 evals); Gamma_3 = 2.0920e+01 (self 3.49e-01) [35.1 kT, 0s]; Gamma_4 = 8.0736e-01 (self 5.96e-03) [1.35 kT, 0s]; Gamma_5 = 1.7097e-02 (self 1.81e-05) [0.0287 kT, 0s]; Gamma_6 = 2.9129e-04 (self 3.11e-08) [0.000489 kT, 0s];  total 1s
+V12:E:0.70: atoms 204, sites 12, states 3..; anchor E = -199.252 (36 evals); Gamma_3 = 3.6873e+01 (self 5.95e-01) [61.9 kT, 0s]; Gamma_4 = 1.5649e+00 (self 1.11e-02) [2.62 kT, 0s]; Gamma_5 = 3.8982e-02 (self 3.88e-05) [0.0654 kT, 0s]; Gamma_6 = 8.4278e-04 (self 8.37e-08) [0.00141 kT, 1s];  total 2s
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_P3/x04_gamma.py", line 24, in <module>
+    GF = GFBound(G, x0, sup, K=mmax)
+  File "/home/user/MetricChain/experiments/science/ws_P3/gfbound.py", line 96, in __init__
+    self.site = [self._instances(l) for l in range(ns)]
+                 ~~~~~~~~~~~~~~~^^^
+  File "/home/user/MetricChain/experiments/science/ws_P3/gfbound.py", line 140, in _instances
+    o.per_state.append(self._state_data(o.atoms, G.S[l][b], C, l))
+                       ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MetricChain/experiments/science/ws_P3/gfbound.py", line 116, in _state_data
+    supB[k] = self.sup.sup_ib(k, atoms, Ilo, Ihi)
+              ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MetricChain/experiments/science/ws_P3/encl.py", line 261, in sup_ib
+    return self._per_class(atoms, Ilo, Ihi, "rmB", k)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MetricChain/experiments/science/ws_P3/encl.py", line 251, in _per_class
+    a, b = self._cells(np.asarray(Ilo), np.asarray(Ihi))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/MetricChain/experiments/science/ws_P3/encl.py", line 247, in _cells
+    raise ValueError(f"descreening integral outside the enclosure grid [0, {self.Imax}]: {Ilo.min()}, {Ihi.max()}")
+ValueError: descreening integral outside the enclosure grid [0, 16.0]: 5.522095622145617, 16.409789180145903

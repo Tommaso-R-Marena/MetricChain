@@ -1,0 +1,9 @@
+# EXTRA queue X2 (starts when the light queue L2, i.e. the Lys12 order-5 certificate, has ended): written 07:32, LKSE:12 added at 07:37
+p8_14_exact_terms12.py K12 H 0.70 4
+p8_07_estimate.py K12 H 0.70 6
+p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000
+p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+p8_14_exact_terms12.py LKSE:12 H 0.60 4 --budget 1000 --resume
+p8_07_estimate.py LKSE:12 H 0.60 7
+p8_12_certificate.py LKSE:12 H 0.60 5 7 --variant SAb --budget 1000

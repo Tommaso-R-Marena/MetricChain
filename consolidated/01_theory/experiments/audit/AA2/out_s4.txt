@@ -1,0 +1,244 @@
+== A. uniform cube (sections 11.16, 11.18, 11.19, 11.24) ==
+PASS  11.18 notation / 11.19: h at u=1                           computed 0.02913914     quoted 0.029139     tol 6e-07 
+PASS  11.18 notation / 11.19: a at u=1                           computed 0.1109441      quoted 0.110944     tol 6e-07 
+PASS  11.117 table: cube threshold ln cosh(1/2)                  computed 0.1201145      quoted 0.120115     tol 6e-07 
+PASS  11.58a Numbers: h/a at u=1                                 computed 0.2626471      quoted 0.2626       tol 6e-05 
+PASS  11.16 line 4276: theta_hint(0+) at u=1.0                   computed 0.02913914     quoted 0.0291       tol 6e-05 
+PASS  11.16 line 4276: theta_na(0+) at u=1.0                     computed 0.1109441      quoted 0.1109       tol 6e-05 
+PASS  11.16 line 4276: theta_hint(0+) at u=0.5                   computed 0.007672866    quoted 0.0077       tol 6e-05 
+PASS  11.16 line 4276: theta_na(0+) at u=0.5                     computed 0.03029986     quoted 0.0303       tol 6e-05 
+PASS  11.16 line 4276: theta_hint(0+) at u=2.0                   computed 0.09728091     quoted 0.0973       tol 6e-05 
+PASS  11.16 line 4276: theta_na(0+) at u=2.0                     computed 0.3278133      quoted 0.3278       tol 6e-05 
+PASS  11.16: ratio a/h -> 4 as u -> 0 (u = 0.05)                 computed 3.999479       quoted 4            tol 0.01 
+PASS  11.58a(b): C_* at u=0.5                                    computed 4.645618       quoted 4.65         tol 0.006 
+PASS  11.53 remark: kappa at u=1                                 computed 0.04264811     quoted 0.0427       tol 6e-05 
+PASS  11.53 remark: c1 at u=1                                    computed 0.7123849      quoted 0.712        tol 0.0006 
+PASS  11.53 remark: c1/a at u=1 ('6.4a')                         computed 6.421117       quoted 6.4          tol 0.06 
+PASS  11.53 remark: c2 at u=1                                    computed 6.352133       quoted 6.35         tol 0.006 
+PASS  11.58a(b): C_* at u=1.0                                    computed 8.641007       quoted 8.64         tol 0.006 
+PASS  11.58a(b): C_* at u=2.0                                    computed 13.52396       quoted 13.5         tol 0.06 
+PASS  11.19 remark (1): tau_2/a at u=1 (closed form)             computed 0.50041        quoted 0.5004       tol 6e-05 
+PASS  11.84(b): T^(2)(0)/a at u=0.05                             computed 0.6180502      quoted 0.618        tol 0.0015 
+PASS  11.84(b): T^(2)(0)/a at u=0.5                              computed 0.6196408      quoted 0.62         tol 0.0006 
+PASS  11.84(b): T^(2)(0)/a at u=1.0                              computed 0.6243213      quoted 0.624        tol 0.0006 
+PASS  11.84(b): T^(2)(0)/a at u=2.0                              computed 0.6412441      quoted 0.641        tol 0.0006 
+PASS  11.84(b): T^(2)(0)/a at u=3.0                              computed 0.6646107      quoted 0.665        tol 0.0006 
+PASS  11.86 table: theta_2*/a at u=0.5                           computed 0.3493286      quoted 0.349        tol 0.0015 
+PASS  11.86 table: theta_2*/h at u=0.5                           computed 1.379485       quoted 1.38         tol 0.012 
+PASS  11.86 table: best phi_1 at u=0.5                           computed 0.65           quoted 0.65         tol 0.011 
+PASS  11.86 table: theta_2*/a at u=1.0                           computed 0.3592193      quoted 0.359        tol 0.0015 
+PASS  11.86 table: theta_2*/h at u=1.0                           computed 1.367688       quoted 1.37         tol 0.012 
+PASS  11.86 table: best phi_1 at u=1.0                           computed 0.64           quoted 0.64         tol 0.011 
+PASS  11.86 table: theta_2*/a at u=2.0                           computed 0.394          quoted 0.394        tol 0.0015 
+PASS  11.86 table: theta_2*/h at u=2.0                           computed 1.327685       quoted 1.33         tol 0.012 
+PASS  11.86 table: best phi_1 at u=2.0                           computed 0.606          quoted 0.61         tol 0.011 
+PASS  11.86 table: theta_2*/a at u=3.0                           computed 0.4395472      quoted 0.44         tol 0.0015 
+PASS  11.86 table: theta_2*/h at u=3.0                           computed 1.277415       quoted 1.28         tol 0.012 
+PASS  11.86 table: best phi_1 at u=3.0                           computed 0.56           quoted 0.56         tol 0.011 
+PASS  11.19 (1a) table: ln LB, u=1.0, n=1000                     computed 110.9021       quoted 110.9        tol 0.006 
+PASS  11.19 (1a) table: ln hinted LB, u=1.0, n=1000              computed 31.69153       quoted 31.69        tol 0.006 
+PASS  11.19 (1a) table: ln LB, u=1.0, n=1350                     computed 149.0169       quoted 149.02       tol 0.006 
+PASS  11.19 (1a) table: ln hinted LB, u=1.0, n=1350              computed 42.0174        quoted 42.02        tol 0.006 
+PASS  11.19 (1a) table: ln LB, u=1.0, n=1400                     computed 155.023        quoted 155.02       tol 0.006 
+PASS  11.19 (1a) table: ln hinted LB, u=1.0, n=1400              computed 43.48941       quoted 43.49        tol 0.006 
+PASS  11.19 (1a) table: ln LB, u=2.0, n=540                      computed 176.477        quoted 176.48       tol 0.006 
+PASS  11.19 (1a) table: ln hinted LB, u=2.0, n=540               computed 55.08467       quoted 55.08        tol 0.006 
+PASS  11.19 (1a) table: ln LB, u=0.5, n=4700                     computed 141.5392       quoted 141.54       tol 0.006 
+PASS  11.19 (1a) table: ln hinted LB, u=0.5, n=4700              computed 38.96686       quoted 38.97        tol 0.006 
+PASS  11.19 (1a): ln LB at n=16 000, u=1                         computed 1767.571       quoted 1767.6       tol 0.06 
+PASS  11.16: non-adaptive LB exponent, n=6400, eps1=estar/4, delta=.05 computed 0.02932822     quoted 0.0293       tol 6e-05 
+PASS  11.45(d): 'e^{188}' at n = 6400                            computed 187.7006       quoted 188          tol 0.6 
+
+== B. a field as known part (section 11.20) ==
+PASS  11.65 table u=2, theta=0.0: R_0(0+)                        computed 0.09728091     quoted 0.0973       tol 6e-05 
+PASS  11.65 table u=2, theta=0.0: R^max(0+)                      computed 0.09728091     quoted 0.0973       tol 6e-05 
+PASS  11.65 table u=2, theta=0.0: gamma*                         computed 1.001602e-08   quoted 0            tol 0.002 
+PASS  11.65 table u=2, theta=0.0: a                              computed 0.3278133      quoted 0.3278       tol 6e-05 
+PASS  11.65 table u=2, theta=0.0: plain Monte Carlo from pi      computed 0.3278133      quoted 0.3278       tol 6e-05 
+PASS  11.65 table u=2, theta=0.5: R_0(0+)                        computed 0.09289521     quoted 0.0929       tol 6e-05 
+PASS  11.65 table u=2, theta=0.5: R^max(0+)                      computed 0.09375841     quoted 0.0938       tol 6e-05 
+PASS  11.65 table u=2, theta=0.5: gamma*                         computed -0.1703116     quoted -0.17        tol 0.002 
+PASS  11.65 table u=2, theta=0.5: a                              computed 0.3161773      quoted 0.3162       tol 6e-05 
+PASS  11.65 table u=2, theta=0.5: plain Monte Carlo from pi      computed 0.4078127      quoted 0.4078       tol 6e-05 
+PASS  11.61 product samplers: p at theta=0.5                     computed 0.3775407      quoted 0.3775       tol 6e-05 
+PASS  11.61 product samplers: r* at theta=0.5                    computed 0.4308386      quoted 0.4308       tol 6e-05 
+PASS  11.65 table u=2, theta=1.0: R_0(0+)                        computed 0.08109269     quoted 0.0811       tol 6e-05 
+PASS  11.65 table u=2, theta=1.0: R^max(0+)                      computed 0.08393601     quoted 0.0839       tol 6e-05 
+PASS  11.65 table u=2, theta=1.0: gamma*                         computed -0.3297645     quoted -0.33        tol 0.002 
+PASS  11.65 table u=2, theta=1.0: a                              computed 0.2836245      quoted 0.2836       tol 6e-05 
+PASS  11.65 table u=2, theta=1.0: plain Monte Carlo from pi      computed 0.4621172      quoted 0.4621       tol 6e-05 
+PASS  11.61 product samplers: p at theta=1.0                     computed 0.2689414      quoted 0.2689       tol 6e-05 
+PASS  11.61 product samplers: r* at theta=1.0                    computed 0.3606742      quoted 0.3607       tol 6e-05 
+PASS  11.65 table u=2, theta=2.0: R_0(0+)                        computed 0.04871597     quoted 0.0487       tol 6e-05 
+PASS  11.65 table u=2, theta=2.0: R^max(0+)                      computed 0.05417078     quoted 0.0542       tol 6e-05 
+PASS  11.65 table u=2, theta=2.0: gamma*                         computed -0.5834591     quoted -0.583       tol 0.002 
+PASS  11.65 table u=2, theta=2.0: a                              computed 0.1840899      quoted 0.1841       tol 6e-05 
+PASS  11.65 table u=2, theta=2.0: plain Monte Carlo from pi      computed 0.4337808      quoted 0.4338       tol 6e-05 
+PASS  11.61 product samplers: p at theta=2.0                     computed 0.1192029      quoted 0.1192       tol 6e-05 
+PASS  11.61 product samplers: r* at theta=2.0                    computed 0.222508       quoted 0.2225       tol 6e-05 
+PASS  11.65 table u=2, theta=3.0: R_0(0+)                        computed 0.02304048     quoted 0.023        tol 6e-05 
+PASS  11.65 table u=2, theta=3.0: R^max(0+)                      computed 0.02719417     quoted 0.0272       tol 6e-05 
+PASS  11.65 table u=2, theta=3.0: gamma*                         computed -0.7335527     quoted -0.734       tol 0.002 
+PASS  11.65 table u=2, theta=3.0: a                              computed 0.09284546     quoted 0.0928       tol 6e-05 
+PASS  11.65 table u=2, theta=3.0: plain Monte Carlo from pi      computed 0.2732085      quoted 0.2732       tol 6e-05 
+PASS  11.61 product samplers: p at theta=3.0                     computed 0.04742587     quoted 0.0474       tol 6e-05 
+PASS  11.61 product samplers: r* at theta=3.0                    computed 0.1123627      quoted 0.1124       tol 6e-05 
+PASS  11.61: plain MC / a, largest ratio in the table ('up to 2.9') computed 2.942616       quoted 2.9          tol 0.06 
+PASS  11.103 example table, site 'bin': E                        computed 0.1031309      quoted 0.103131     tol 3e-06 
+PASS  11.103 example table, site 'bin': a                        computed 0.0953005      quoted 0.095301     tol 6e-07 
+PASS  11.103 example table, site 'bin': h = R^(0)                computed 0.02503354     quoted 0.025034     tol 6e-07 
+PASS  11.103 example table, 'bin': R^(0.3E)  (= 11.109a 'R^max = 0.012210') computed 0.01220874     quoted 0.012209     tol 1.5e-06 
+PASS  11.103 example table, 'bin': theta_na(0.3E)                computed 0.01994095     quoted 0.019941     tol 1.5e-06 
+PASS  11.25 'what the corollary does not say': R^max(0) at p=0.3, u=1 computed 0.02503354     quoted 0.025034     tol 6e-07 
+PASS  D49 item 11 / 11.20: threshold E at p=0.1, u=2             computed 0.2122944      quoted 0.212295     tol 3e-06 
+PASS  11.20 Numbers: R^max(0.3E) at p=0.1, u=2                   computed 0.0232703      quoted 0.02327      tol 1.5e-06 
+
+== C. slices (section 11.25, Theorem 11.90 numbers at u = 1) ==
+PASS  11.90 numbers: R^kappa(0), kappa=0.5                       computed 0.02913914     quoted 0.029139     tol 1.5e-06 
+PASS  11.90 numbers: best centre type for R, kappa=0.5           computed 0.5            quoted 0.5          tol 0.002 
+PASS  11.90 numbers: N^kappa(0+), kappa=0.5                      computed 0.1109441      quoted 0.110944     tol 1.5e-06 
+PASS  11.90 numbers: centre type for N, kappa=0.5                computed 0.5000022      quoted 0.5          tol 0.002 
+PASS  11.90 numbers: R^kappa(0), kappa=0.45                      computed 0.02885579     quoted 0.028856     tol 1.5e-06 
+PASS  11.90 numbers: best centre type for R, kappa=0.45          computed 0.4770228      quoted 0.477        tol 0.002 
+PASS  11.90 numbers: N^kappa(0+), kappa=0.45                     computed 0.1098985      quoted 0.109898     tol 1.5e-06 
+PASS  11.90 numbers: centre type for N, kappa=0.45               computed 0.470902       quoted 0.471        tol 0.002 
+PASS  11.90 numbers: R^kappa(0), kappa=0.4                       computed 0.02800486     quoted 0.028005     tol 1.5e-06 
+PASS  11.90 numbers: best centre type for R, kappa=0.4           computed 0.4540393      quoted 0.454        tol 0.002 
+PASS  11.90 numbers: N^kappa(0+), kappa=0.4                      computed 0.106755       quoted 0.106755     tol 1.5e-06 
+PASS  11.90 numbers: centre type for N, kappa=0.4                computed 0.4418059      quoted 0.442        tol 0.002 
+PASS  11.90 numbers: R^kappa(0), kappa=0.3                       computed 0.0245875      quoted 0.024588     tol 1.5e-06 
+PASS  11.90 numbers: best centre type for R, kappa=0.3           computed 0.4080259      quoted 0.408        tol 0.002 
+PASS  11.90 numbers: N^kappa(0+), kappa=0.3                      computed 0.09407985     quoted 0.09408      tol 1.5e-06 
+PASS  11.90 numbers: centre type for N, kappa=0.3                computed 0.3834328      quoted 0.383        tol 0.002 
+PASS  11.90 numbers: R^kappa(0), kappa=0.2                       computed 0.01884202     quoted 0.018842     tol 1.5e-06 
+PASS  11.90 numbers: best centre type for R, kappa=0.2           computed 0.3618989      quoted 0.362        tol 0.002 
+PASS  11.90 numbers: N^kappa(0+), kappa=0.2                      computed 0.0725744      quoted 0.072574     tol 1.5e-06 
+PASS  11.90 numbers: centre type for N, kappa=0.2                computed 0.3248238      quoted 0.325        tol 0.002 
+PASS  11.90 numbers: R^kappa(0), kappa=0.1                       computed 0.01068803     quoted 0.010688     tol 1.5e-06 
+PASS  11.90 numbers: best centre type for R, kappa=0.1           computed 0.3155774      quoted 0.316        tol 0.002 
+PASS  11.90 numbers: N^kappa(0+), kappa=0.1                      computed 0.04158844     quoted 0.041588     tol 1.5e-06 
+PASS  11.90 numbers: centre type for N, kappa=0.1                computed 0.2656689      quoted 0.266        tol 0.002 
+PASS  11.91 proof: -K(u/2) at u=1 ('-0.11')                      computed -0.1109441     quoted -0.11        tol 0.006 
+PASS  Lemma 11.89: ln 2 - h(sigma(s)) = K(s/2) at s=1            computed 0.1109441      quoted 0.1109441    tol 1e-12 
+
+== D. alphabets (section 11.26, Proposition 11.103) ==
+PASS  11.103(d): h_2 at u=0.5                                    computed 0.007672866    quoted 0.007673     tol 6e-07 
+PASS  11.103(d): h_3 at u=0.5                                    computed 0.007425205    quoted 0.007425     tol 6e-07 
+PASS  11.103(d): a_2 at u=0.3                                    computed 0.01112469     quoted 0.011125     tol 6e-07 
+PASS  11.103(d): a_3 at u=0.3                                    computed 0.01058206     quoted 0.010582     tol 6e-07 
+PASS  11.103(e): h_2 = h_3 exactly at e^u = 2                    computed 1.214306e-16   quoted 0            tol 1e-11 
+PASS  11.103(e): h_3 = h_4 exactly at e^u = 6                    computed -5.551115e-17  quoted 0            tol 1e-11 
+PASS  11.103(e): h_4 = h_5 exactly at e^u = 12                   computed 0              quoted 0            tol 1e-11 
+PASS  11.103(d): a_2 = a_3 at u = 0.5194                         computed 0.5193658      quoted 0.5194       tol 6e-05 
+PASS  11.103(e): q=4, u=1: h_2                                   computed 0.02913914     quoted 0.029139     tol 6e-07 
+PASS  11.103(e): q=4, u=1: a_4                                   computed 0.1179929      quoted 0.117993     tol 6e-07 
+PASS  11.103(e): q=4, u=1: E_2                                   computed 0.1201145      quoted 0.120115     tol 6e-07 
+PASS  11.103(d): E of the uniform three-letter law at u=1        computed 0.1194991      quoted 0.119499     tol 6e-07 
+PASS  11.103(d)/(b): h of the uniform three-letter law at u=1    computed 0.03065363     quoted 0.030654     tol 6e-07 
+PASS  11.103(d): a of the uniform three-letter law at u=1        computed 0.1232845      quoted 0.123284     tol 6e-07 
+PASS  11.103(f): cube h/(u^2/32) at u=0.1                        computed 0.9992714      quoted 0.9993       tol 6e-05 
+PASS  11.103(f): uniform 3-letter site below the ceiling u^2/32 at u=0.5 (%) computed 4.957378       quoted 5            tol 0.06 
+PASS  11.103(f): uniform 3-letter site below the ceiling u^2/32 at u=1.0 (%) computed 1.908385       quoted 1.9          tol 0.06 
+PASS  11.103(f): uniform 3-letter site below the ceiling u^2/32 at u=2.0 (%) computed 5.84071        quoted 5.8          tol 0.06 
+PASS  11.103(f): the same as u -> 0 (u = 0.01), '11 %'           computed 10.96339       quoted 11           tol 0.3 
+PASS  11.99: E_sp(theta) - theta at theta = 0.3a, cube u=1 ('-0.008') computed -0.008167004   quoted -0.008       tol 0.0006 
+
+== E. box classes (section 11.30) ==
+PASS  11.111: 544 evaluations at the centre (rho=3, eps=0.2, delta=0.05) computed 544            quoted 544          tol 0 
+PASS  11.111: 1088 evaluations by the general count              computed 1088           quoted 1088         tol 0 (computed from the display of 11.110(c))
+PASS  11.111 'what the hint buys': 545 without a hint            computed 545            quoted 545          tol 0 
+PASS  11.111: n from which the box bound is smaller (0.0291 n = ln 1088) computed 240.2782       quoted 240          tol 1 
+PASS  11.110(f): L(3.7)                                          computed 1.460429       quoted 1.46         tol 0.006 
+PASS  11.110(f): W(3.7, 0.036^2)                                 computed 0.003378142    quoted 0.0034       tol 6e-05 
+PASS  11.110(a): L(w) <= w^2/8 at w = 1 (difference)             computed 0.001698439    quoted 0            tol 1 (sign only)
+PASS  11.114: e^8 - 1 '~ 2980'                                   computed 2979.958       quoted 2980         tol 1 
+PASS  11.114: cost number for ln Z '0.11'                        computed 0.1081508      quoted 0.11         tol 0.006 
+PASS  11.113(d): factor e^-Delta at Delta=0.0605                 computed 0.9412938      quoted 0.94         tol 0.006 
+PASS  11.113(d): factor e^-Delta at Delta=1.0                    computed 0.3678794      quoted 0.37         tol 0.006 
+PASS  11.113(d): factor e^-Delta at Delta=3.0                    computed 0.04978707     quoted 0.05         tol 0.006 
+PASS  11.113 illustration: width from 50 000 samples (nats)      computed 0.0007575935   quoted 0.00076      tol 6e-06 
+PASS  11.113 illustration: width from 1 200 samples (nats)       computed 0.004890245    quoted 0.005        tol 0.0002 
+PASS  11.112(f): ln mu change of a 100 kT dip on mass 1e-6 ('86') computed 86.18449       quoted 86           tol 0.6 
+PASS  11.113a: kappa(delta) at delta = 0.1                       computed 0.8553804      quoted 0.855        tol 0.0006 
+PASS  11.113a: kappa(delta) at delta = 0.05                      computed 0.8777952      quoted 0.878        tol 0.0006 
+PASS  11.113a: kappa(delta) at delta = 0.01                      computed 0.9100876      quoted 0.91         tol 0.0006 
+PASS  11.113a: ((sqrt(1+4 kappa) - 1)/2)^2 at delta = 0.05       computed 0.3158182      quoted 0.316        tol 0.0006 
+PASS  11.113a: factor sqrt(ln(6/delta)/ln(2/delta)) at delta=0.05 computed 1.139218       quoted 1.14         tol 0.006 
+
+== F. a nearest-neighbour chain (section 11.32) ==
+PASS  11.117 table: E_inf = E_F at p=0.4, u=1                    computed 0.1691273      quoted 0.1691       tol 6e-05 
+PASS  11.117 table: E_inf = E_F at p=0.3, u=1                    computed 0.2324005      quoted 0.2324       tol 6e-05 
+PASS  11.117 table: E_inf = E_F at p=0.2, u=1                    computed 0.3107665      quoted 0.3108       tol 6e-05 
+PASS  11.117(a): threshold ratio at p=0.3 ('1.935')              computed 1.934825       quoted 1.935        tol 0.0006 
+PASS  11.117(c): E_F(0.7, 1)                                     computed 0.05404449     quoted 0.054        tol 6e-05 
+PASS  11.116(d): one-sided slack u* at u=1, p=0.4                computed 1.21827        quoted 1.218        tol 0.0006 
+PASS  11.116(d): u* < u + K at p=0.4 (margin)                    computed 0.1871956      quoted 1            tol 1 (sign only)
+PASS  11.116(d): one-sided slack u* at u=1, p=0.3                computed 1.526105       quoted 1.526        tol 0.0006 
+PASS  11.116(d): u* < u + K at p=0.3 (margin)                    computed 0.3211924      quoted 1            tol 1 (sign only)
+PASS  11.116(d): one-sided slack u* at u=1, p=0.2                computed 1.980747       quoted 1.981        tol 0.0006 
+PASS  11.116(d): u* < u + K at p=0.2 (margin)                    computed 0.405547       quoted 1            tol 1 (sign only)
+PASS  11.116(d): one-sided slack u* at u=1, p=0.1                computed 2.749727       quoted 2.75         tol 0.0006 
+PASS  11.116(d): u* < u + K at p=0.1 (margin)                    computed 0.4474978      quoted 1            tol 1 (sign only)
+PASS  11.117(b): Var(sum s)/n at n=4, p=0.3                      computed 1.792          quoted 1.792        tol 0.0006 
+PASS  11.117(b): structure factor (1-p)/p at p=0.3               computed 2.333333       quoted 2.33         tol 0.006 
+PASS  11.117(b): antiferromagnet, n=3, p=0.7: Var(sum s)/4       computed 0.43           quoted 0.43         tol 0.006 
+PASS  11.117(b): antiferromagnet, staggered: 1.23                computed 1.23           quoted 1.23         tol 0.006 
+PASS  11.117(d) table: cube a at u=3                             computed 0.5022822      quoted 0.5023       tol 6e-05 
+PASS  11.117(d) table: cube a at u=4                             computed 0.6030524      quoted 0.6031       tol 6e-05 
+PASS  11.117(d) table: cube h at u=4                             computed 0.2392496      quoted 0.2393       tol 6e-05 
+PASS  11.117(d): ratio 0.4958/0.5023                             computed 0.9870945      quoted 0.987        tol 0.0006 
+PASS  11.117(d): ratio 0.4675/0.5023                             computed 0.9307517      quoted 0.931        tol 0.0006 
+PASS  11.117(d): ratio 0.5097/0.6031                             computed 0.8452002      quoted 0.845        tol 0.0006 
+PASS  11.117(d): ratio 0.2331/0.2393                             computed 0.9742961      quoted 0.974        tol 0.0006 
+PASS  11.117(a): h_inf larger by 38 % (0.0401/0.029139 - 1)      computed 37.6156        quoted 38           tol 0.6 
+PASS  11.117(a): ... to 54 % (0.0450/0.029139 - 1)               computed 54.43147       quoted 54           tol 0.6 
+PASS  11.117(a): a_inf larger by 14 % (0.1264/0.110944 - 1)      computed 13.93128       quoted 14           tol 0.6 
+PASS  11.117(a): ... to 27 % (0.1409/0.110944 - 1)               computed 27.00093       quoted 27           tol 0.6 
+
+== G. limit shape of the lattice chain (section 11.22) ==
+PASS  11.68: beta = norm of (1,9,14;1)                           computed 60             quoted 60           tol 0 
+PASS  11.68: beta' = norm of (1,3,6;1)                           computed 28             quoted 28           tol 0 
+PASS  11.69: R = norm of the box corner (1,5,6;1)                computed 36             quoted 36           tol 0 
+PASS  11.69: 168 = beta + 3R                                     computed 168            quoted 168          tol 0 
+PASS  11.69b(c): norm of A <= (1,6,10;1)                         computed 44             quoted 44           tol 0 
+PASS  11.69b(c): norm of B <= (0,3,4;0)                          computed 16             quoted 16           tol 0 
+PASS  11.69b(d): 108 = 15 + 54 + 36 + 3                          computed 108            quoted 108          tol 0 
+PASS  11.69a: c = 2 sqrt(beta (d+1)(beta'+R)) for bridges        computed 277.1281       quoted 277          tol 0.6 
+PASS  11.69b: 216*14 + 108                                       computed 3132           quoted 3132         tol 0 
+PASS  11.73: coefficient 9*2^(-2/3) + 4*3                        computed 17.66964       quoted 17.6         tol 0.08 
+PASS  11.73 (Bezdek): coefficient 9*2^(-2/3) + 4*4.617           computed 24.13764       quoted 24.1         tol 0.06 
+PASS  11.73: constant 9 + 8 + 4*3.1                              computed 29.4           quoted 29.4         tol 0.01 
+PASS  11.73 (Bezdek): 3 (18 pi)^(1/3)/pi                         computed 3.665322       quoted 3.665        tol 0.0006 
+PASS  11.73 'when the shape is resolved': N <= 43 512            computed 43512.13       quoted 43512        tol 60 
+PASS  11.73: >= 1/4 for N <= 3.4e5                               computed 348709.6       quoted 340000       tol 12000 
+PASS  11.73: with Bezdek's constant, N <= 1.1e5                  computed 111803.7       quoted 110000       tol 6000 
+PASS  11.73: proved k >= 0.50 (17.6/35)                          computed 0.5028571      quoted 0.5          tol 0.006 
+PASS  11.73: k >= 0.689 with Bezdek (24.1/35)                    computed 0.6885714      quoted 0.689        tol 0.0006 
+PASS  11.73: beads needed for 50 % of the bulk extent (k = 1.8)  computed 46.656         quoted 47           tol 0.94 
+PASS  11.73: beads needed for 80 % of the bulk extent (k = 1.8)  computed 729            quoted 730          tol 14.6 
+PASS  11.73: beads needed for 90 % of the bulk extent (k = 1.8)  computed 5832           quoted 5800         tol 116 
+PASS  11.72(b): vol K_1                                          computed 3.226852       quoted 3.2269       tol 6e-05 
+PASS  11.72(b): number of vertices of K_1                        computed 12             quoted 12           tol 0 
+PASS  11.72(c): vol K_2                                          computed 3.125          quoted 3.125        tol 1e-09 
+PASS  11.72(c): number of vertices of K_2                        computed 12             quoted 12           tol 0 
+PASS  11.72(c): the 12 listed vertices are the vertices of K_2   computed 1              quoted 1            tol 0 
+PASS  11.72: K_1 as a share of the bulk box (%)                  computed 10.75617       quoted 10.8         tol 0.06 
+PASS  11.72: K_2 as a share of the bulk box (%)                  computed 10.41667       quoted 10.4         tol 0.06 
+PASS  11.72(d): volume of the tetrahedron rod-row-crystal-helix  computed 0.08333333     quoted 0.08333333   tol 1e-12 
+PASS  11.72(e): 37 401/166 199                                   computed 0.2250375      quoted 0.225        tol 0.0006 
+PASS  11.71: ratio of the ends of the bracket [116, 3627] ('a factor 31') computed 31.26724       quoted 31           tol 0.5 
+
+== H. sizes at which the proved error terms are below the exponents (computational reading; no quoted value) ==
+INFO  Theorem 11.63: omega_n = 2 n^(-1/8) <= exponent (u=1 cube exponent h = 0.0291) needs n >= 4.93e+14
+INFO  Theorem 11.63: omega_n = 2 n^(-1/8) <= exponent (u=2, theta=1: R^max = 0.0839) needs n >= 1.04e+11
+INFO  Theorem 11.63: omega_n = 2 n^(-1/8) <= exponent (u=2, theta=0 a = 0.3278) needs n >= 1.92e+06
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.05 with q_max = 2 needs n >= 4.10e+09
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.3 with q_max = 2 needs n >= 8.78e+04
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.05 with q_max = 3 needs n >= 1.68e+14
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.3 with q_max = 3 needs n >= 1.00e+08
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.05 with q_max = 4 needs n >= 1.07e+19
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.3 with q_max = 4 needs n >= 1.78e+11
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.05 with q_max = 20 needs n >= 1.93e+109
+INFO  Theorem 11.97(c): q_max n^(-1/(2 q_max + 2)) <= 0.3 with q_max = 20 needs n >= 4.02e+76
+
+SUMMARY: 216 of 216 checks PASS, 0 FAIL

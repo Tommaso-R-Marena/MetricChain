@@ -1,0 +1,1098 @@
+{
+ "campaign": "z12",
+ "seed": 101,
+ "seconds": 369.9,
+ "by_source": {
+  "gen producer": {
+   "cases": 3000,
+   "mine_accept": 3000,
+   "mine_ok": 3000,
+   "their_accept": 2960,
+   "agree_accept": 2960,
+   "mine_truth_yes": 3000,
+   "mine_pop_yes": 3545,
+   "their_truth_yes": 2960,
+   "their_pop_yes": 3545,
+   "their_not_run_hazard": 40,
+   "their_not_run_hazard_prune": 21,
+   "mine_accept_where_theirs_not_run": 40,
+   "mine_accept_rounded_mode": 25,
+   "their_not_run_hazard_magnitude": 19
+  },
+  "their producer": {
+   "cases": 1392,
+   "mine_accept": 1392,
+   "mine_ok": 1392,
+   "their_accept": 1391,
+   "agree_accept": 1391,
+   "mine_truth_yes": 1392,
+   "mine_pop_yes": 1580,
+   "their_truth_yes": 1391,
+   "their_pop_yes": 1580,
+   "mine_accept_rounded_mode": 2,
+   "their_not_run_hazard": 1,
+   "their_not_run_hazard_magnitude": 1,
+   "mine_accept_where_theirs_not_run": 1
+  },
+  "variant beta_negative": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_invalid": 1500,
+   "their_reject": 1500,
+   "agree_reject": 1500
+  },
+  "variant beta_zero": {
+   "cases": 1500,
+   "mine_accept": 1500,
+   "mine_ok": 1500,
+   "their_accept": 1500,
+   "agree_accept": 1500,
+   "mine_truth_yes": 1500,
+   "their_truth_yes": 1500,
+   "mine_pop_yes": 1790,
+   "their_pop_yes": 1790
+  },
+  "variant branch_child_key_leading_zero": {
+   "cases": 386,
+   "mine_reject": 386,
+   "mine_malformed": 386,
+   "their_reject": 383,
+   "agree_reject": 383,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 1,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant branch_missing_child": {
+   "cases": 386,
+   "mine_reject": 386,
+   "mine_invalid": 386,
+   "their_reject": 382,
+   "agree_reject": 382,
+   "their_not_run_hazard": 4,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant branch_on_kept_site": {
+   "cases": 742,
+   "mine_reject": 742,
+   "mine_invalid": 742,
+   "their_reject": 733,
+   "agree_reject": 733,
+   "their_not_run_hazard": 9,
+   "their_not_run_hazard_magnitude": 6,
+   "their_not_run_hazard_prune": 3
+  },
+  "variant branch_on_kept_site_same_arity": {
+   "cases": 77,
+   "mine_reject": 77,
+   "mine_invalid": 77,
+   "their_reject": 75,
+   "agree_reject": 75,
+   "their_not_run_hazard": 2,
+   "their_not_run_hazard_magnitude": 1,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant branch_on_single_state_site": {
+   "cases": 1177,
+   "mine_accept": 1177,
+   "mine_ok": 1177,
+   "their_accept": 1164,
+   "agree_accept": 1164,
+   "mine_truth_yes": 1177,
+   "their_truth_yes": 1164,
+   "mine_pop_yes": 1224,
+   "their_pop_yes": 1224,
+   "mine_accept_rounded_mode": 10,
+   "their_not_run_hazard": 13,
+   "their_not_run_hazard_magnitude": 8,
+   "mine_accept_where_theirs_not_run": 13,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant branch_site_negative_alias": {
+   "cases": 386,
+   "mine_reject": 386,
+   "mine_invalid": 386,
+   "their_reject": 381,
+   "agree_reject": 381,
+   "their_not_run_hazard": 5,
+   "their_not_run_hazard_magnitude": 3,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant branch_site_out_of_range": {
+   "cases": 386,
+   "mine_reject": 386,
+   "mine_invalid": 386,
+   "their_reject": 386,
+   "agree_reject": 386
+  },
+  "variant branch_surplus_child_out_of_range": {
+   "cases": 386,
+   "mine_reject": 386,
+   "mine_invalid": 386,
+   "their_reject": 381,
+   "agree_reject": 381,
+   "their_not_run_hazard": 5,
+   "their_not_run_hazard_magnitude": 3,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant branch_surplus_child_outside_domain": {
+   "cases": 183,
+   "mine_reject": 183,
+   "mine_invalid": 183,
+   "their_accept": 180,
+   "only_theirs_accepts": 180,
+   "their_truth_yes": 180,
+   "their_pop_yes": 196,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant child_prunes_conditioned_state": {
+   "cases": 224,
+   "mine_reject": 224,
+   "mine_invalid": 224,
+   "their_reject": 223,
+   "agree_reject": 223,
+   "their_not_run_hazard": 1,
+   "their_not_run_hazard_magnitude": 1
+  },
+  "variant domain_duplicate_state": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_malformed": 1500,
+   "their_reject": 1486,
+   "agree_reject": 1486,
+   "their_not_run_hazard": 14,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant domain_empty": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_invalid": 1500,
+   "their_reject": 1499,
+   "agree_reject": 1499,
+   "their_not_run_hazard": 1,
+   "their_not_run_hazard_magnitude": 1
+  },
+  "variant domain_negative_aliases": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_malformed": 1500,
+   "their_reject": 1490,
+   "agree_reject": 1490,
+   "their_not_run_hazard": 10,
+   "their_not_run_hazard_magnitude": 6,
+   "their_not_run_hazard_prune": 4
+  },
+  "variant domain_not_sorted": {
+   "cases": 1299,
+   "mine_reject": 1299,
+   "mine_malformed": 1299,
+   "their_accept": 1285,
+   "only_theirs_accepts": 1285,
+   "their_truth_yes": 1285,
+   "their_pop_yes": 1617,
+   "their_not_run_hazard": 14,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant domain_state_out_of_range": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_malformed": 1500,
+   "their_reject": 1500,
+   "agree_reject": 1500
+  },
+  "variant domains_one_too_many": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_malformed": 1500,
+   "their_reject": 1486,
+   "agree_reject": 1486,
+   "their_not_run_hazard": 14,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant keep_minus_one": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_malformed": 1500,
+   "their_reject": 1486,
+   "agree_reject": 1486,
+   "their_not_run_hazard": 14,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant keep_out_of_range": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_malformed": 1500,
+   "their_reject": 1486,
+   "agree_reject": 1486,
+   "their_not_run_hazard": 14,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant order_contains_kept_site": {
+   "cases": 742,
+   "mine_reject": 742,
+   "mine_invalid": 742,
+   "their_reject": 733,
+   "agree_reject": 733,
+   "their_not_run_hazard": 9,
+   "their_not_run_hazard_magnitude": 6,
+   "their_not_run_hazard_prune": 3
+  },
+  "variant order_missing_site": {
+   "cases": 1398,
+   "mine_reject": 1398,
+   "mine_invalid": 1398,
+   "their_reject": 1385,
+   "agree_reject": 1385,
+   "their_not_run_hazard": 13,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant order_negative_aliases": {
+   "cases": 1398,
+   "mine_reject": 1398,
+   "mine_invalid": 1398,
+   "their_reject": 1385,
+   "agree_reject": 1385,
+   "their_not_run_hazard": 13,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant order_repeat_replaces_site": {
+   "cases": 1150,
+   "mine_reject": 1150,
+   "mine_invalid": 1150,
+   "their_reject": 1137,
+   "agree_reject": 1137,
+   "their_not_run_hazard": 13,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant order_repeated_site": {
+   "cases": 1398,
+   "mine_reject": 1398,
+   "mine_invalid": 1398,
+   "their_reject": 1385,
+   "agree_reject": 1385,
+   "their_not_run_hazard": 13,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant order_site_out_of_range": {
+   "cases": 1500,
+   "mine_reject": 1500,
+   "mine_invalid": 1500,
+   "their_reject": 1486,
+   "agree_reject": 1486,
+   "their_not_run_hazard": 14,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant order_without_conditioned_sites": {
+   "cases": 386,
+   "mine_reject": 386,
+   "mine_invalid": 386,
+   "their_reject": 381,
+   "agree_reject": 381,
+   "their_not_run_hazard": 5,
+   "their_not_run_hazard_magnitude": 3,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant prune_by_removed_state": {
+   "cases": 898,
+   "mine_reject": 898,
+   "mine_invalid": 898,
+   "their_reject": 886,
+   "agree_reject": 886,
+   "their_not_run_hazard": 12,
+   "their_not_run_hazard_magnitude": 7,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant prune_dominator_is_removed": {
+   "cases": 898,
+   "mine_reject": 898,
+   "mine_invalid": 898,
+   "their_reject": 888,
+   "agree_reject": 888,
+   "their_not_run_hazard": 10,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant prune_dominator_minus_one": {
+   "cases": 898,
+   "mine_reject": 898,
+   "mine_invalid": 898,
+   "their_reject": 888,
+   "agree_reject": 888,
+   "their_not_run_hazard": 10,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant prune_dominator_out_of_range": {
+   "cases": 898,
+   "mine_reject": 898,
+   "mine_invalid": 898,
+   "their_reject": 888,
+   "agree_reject": 888,
+   "their_not_run_hazard": 10,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant prune_dominator_outside_domain": {
+   "cases": 1122,
+   "mine_reject": 1122,
+   "mine_invalid": 1122,
+   "their_reject": 1109,
+   "agree_reject": 1109,
+   "their_not_run_hazard": 13,
+   "their_not_run_hazard_magnitude": 7,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant prune_last_state_by_itself": {
+   "cases": 1290,
+   "mine_reject": 1290,
+   "mine_invalid": 1290,
+   "their_reject": 1278,
+   "agree_reject": 1278,
+   "their_not_run_hazard": 12,
+   "their_not_run_hazard_magnitude": 7,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant prune_removed_outside_domain": {
+   "cases": 1122,
+   "mine_reject": 1122,
+   "mine_invalid": 1122,
+   "their_reject": 1109,
+   "agree_reject": 1109,
+   "their_not_run_hazard": 13,
+   "their_not_run_hazard_magnitude": 7,
+   "their_not_run_hazard_prune": 6
+  },
+  "variant prune_repeated": {
+   "cases": 898,
+   "mine_reject": 898,
+   "mine_invalid": 898,
+   "their_reject": 886,
+   "agree_reject": 886,
+   "their_not_run_hazard": 12,
+   "their_not_run_hazard_magnitude": 7,
+   "their_not_run_hazard_prune": 5
+  },
+  "variant prune_roles_swapped": {
+   "cases": 898,
+   "mine_accept": 738,
+   "mine_ok": 738,
+   "their_not_run_hazard": 219,
+   "their_not_run_hazard_prune": 215,
+   "mine_accept_where_theirs_not_run": 181,
+   "mine_truth_yes": 738,
+   "their_accept": 557,
+   "agree_accept": 557,
+   "their_truth_yes": 557,
+   "mine_pop_yes": 737,
+   "their_pop_yes": 737,
+   "mine_accept_rounded_mode": 8,
+   "mine_reject": 160,
+   "mine_invalid": 160,
+   "their_reject": 122,
+   "agree_reject": 122,
+   "their_not_run_hazard_magnitude": 4
+  },
+  "variant prune_site_negative_alias": {
+   "cases": 898,
+   "mine_reject": 898,
+   "mine_invalid": 898,
+   "their_reject": 871,
+   "agree_reject": 871,
+   "their_not_run_hazard": 27,
+   "their_not_run_hazard_magnitude": 7,
+   "their_not_run_hazard_prune": 20
+  },
+  "variant prune_site_out_of_range": {
+   "cases": 898,
+   "mine_reject": 898,
+   "mine_invalid": 898,
+   "their_reject": 898,
+   "agree_reject": 898
+  },
+  "variant relax_f_too_long": {
+   "cases": 738,
+   "mine_reject": 738,
+   "mine_invalid": 738,
+   "their_reject": 728,
+   "agree_reject": 728,
+   "their_not_run_hazard": 10,
+   "their_not_run_hazard_magnitude": 8,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant relax_g_too_short": {
+   "cases": 523,
+   "mine_reject": 523,
+   "mine_invalid": 523,
+   "their_reject": 520,
+   "agree_reject": 520,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant relax_other_f": {
+   "cases": 738,
+   "mine_accept": 738,
+   "mine_ok": 738,
+   "their_accept": 728,
+   "agree_accept": 728,
+   "mine_truth_yes": 738,
+   "their_truth_yes": 728,
+   "mine_pop_yes": 873,
+   "their_pop_yes": 873,
+   "mine_accept_rounded_mode": 10,
+   "their_not_run_hazard": 10,
+   "their_not_run_hazard_magnitude": 8,
+   "mine_accept_where_theirs_not_run": 10,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant relax_pair_reversed_consistent": {
+   "cases": 738,
+   "mine_accept": 738,
+   "mine_ok": 738,
+   "their_reject": 738,
+   "only_mine_accepts": 738,
+   "mine_truth_yes": 738,
+   "mine_pop_yes": 890,
+   "mine_accept_rounded_mode": 10
+  },
+  "variant relax_pair_reversed_same_shapes": {
+   "cases": 174,
+   "mine_accept": 174,
+   "mine_ok": 174,
+   "mine_accept_rounded_mode": 4,
+   "their_reject": 174,
+   "only_mine_accepts": 174,
+   "mine_truth_yes": 174,
+   "mine_pop_yes": 212
+  },
+  "variant relax_pair_same_site": {
+   "cases": 738,
+   "mine_reject": 738,
+   "mine_invalid": 738,
+   "their_reject": 738,
+   "agree_reject": 738
+  },
+  "variant relax_repeated": {
+   "cases": 738,
+   "mine_reject": 738,
+   "mine_invalid": 738,
+   "their_reject": 738,
+   "agree_reject": 738
+  },
+  "variant relax_site_negative_alias": {
+   "cases": 738,
+   "mine_reject": 738,
+   "mine_invalid": 738,
+   "their_reject": 738,
+   "agree_reject": 738
+  },
+  "variant relax_unlisted_pair": {
+   "cases": 871,
+   "mine_reject": 871,
+   "mine_invalid": 871,
+   "their_reject": 871,
+   "agree_reject": 871
+  }
+ },
+ "relation": {
+  "instances_tempered": 1353,
+  "instances": 1500,
+  "their_producer_certificates": 1392,
+  "their_producer_with_branch": 99,
+  "both_accept": 8300,
+  "both_accept_exact": 8295,
+  "mine_inside_theirs": 8300,
+  "pop_compared": 8572,
+  "mine_pop_inside_theirs": 8572,
+  "instances_not_tempered": 147,
+  "their_producer_abstained": 108,
+  "both_accept_rounded": 5
+ },
+ "float_tier": {
+  "with_their_exact_claim": 1391,
+  "with_their_exact_claim_rejected_by_float_tier": 934,
+  "cases": 17386,
+  "both_tiers_accept": 9757,
+  "float_contains_exact": 5666,
+  "float_lo_above_exact_lo": 2671,
+  "float_hi_below_exact_hi": 1970,
+  "float_truth_yes": 9757,
+  "float_pop_yes": 11541,
+  "both_tiers_reject": 7621,
+  "tiers_disagree_on_acceptance": 8,
+  "only_exact_accepts": 8
+ },
+ "excess_lo_relative": {
+  "n": 8300,
+  "min": 8.497964978023155e-17,
+  "median": 8.993376495996234e-13,
+  "p99": 9.310992859056083e-13,
+  "max": 1.0710779429863216e-12
+ },
+ "excess_hi_relative": {
+  "n": 8300,
+  "min": 3.4683903273936116e-14,
+  "median": 2.3545971689218506e-10,
+  "p99": 602.5186868298296,
+  "max": 93016.70863619653
+ },
+ "excess_hi_relative_without_prunes": {
+  "n": 3403,
+  "min": 3.4683903273936116e-14,
+  "median": 9.094947017729282e-13,
+  "p99": 9.338561669989887e-13,
+  "max": 9.87287925601476e-13
+ },
+ "float_inside_exact_gap_relative": {
+  "n": 4091,
+  "min": 5.386097761200534e-21,
+  "median": 2.2232508040998433e-15,
+  "p99": 5.093491676762598e-14,
+  "max": 1.5631940186722204e-13
+ },
+ "disagreements": {
+  "variant domain_not_sorted | theirs accepts | mine: malformed: domain of site # is not strictly increasing within #..#": 1285,
+  "variant relax_pair_reversed_consistent | mine accepts | theirs: malformed: relax: pair must be a listed pair [i, j] with i < j": 738,
+  "variant branch_surplus_child_outside_domain | theirs accepts | mine: invalid: the children are not exactly the states of the working domain of site ": 180,
+  "variant relax_pair_reversed_same_shapes | mine accepts | theirs: malformed: relax: pair must be a listed pair [i, j] with i < j": 174,
+  "tiers | exact: accepted | float: abstained: the lower bound of the partition sum is not positive at thi": 8
+ },
+ "their_reject_reasons": {
+  "prune step": 6451,
+  "loader: malformed: prune: dominator out of range": 1776,
+  "loader: malformed: prune: site out of range": 1769,
+  "relax step": 738,
+  "loader: malformed: relax: f must list one integer per state of site ": 728,
+  "loader: malformed: relax: g must list one integer per state of site ": 520,
+  "loader: malformed: relax: pair must be a listed pair [i, j] with i <": 3259,
+  "loader: malformed: order must list every site other than `keep` exac": 7892,
+  "loader: malformed: domain of site # must be a non-empty duplicate-fr": 5975,
+  "loader: malformed: domains must list # sites": 1486,
+  "loader: malformed: beta must be a nonnegative Fraction": 1500,
+  "loader: malformed: keep must be a site or None": 2972,
+  "loader: malformed: branch: a site other than the kept one": 1575,
+  "branch on site # has no child for state #": 432,
+  "loader: malformed: branch: child state out of range": 381,
+  "loader: malformed: branch: child key '##' is not a canonical natural": 383
+ },
+ "examples": [
+  {
+   "kind": "float tier not containing exact tier",
+   "certificate": "{\"format\":\"structbio-zcert/1\",\"model_sha256\":\"f99945e12c5344b81cd698e3ee74fc616f8375e2cb08038709597a6b2f629dd5\",\"beta\":\"1/2\",\"domains\":[[0,1],[0,1,2],[0,1,2,3],[0],[0,1]],\"keep\":0,\"claim\":{},\"root\":{\"steps\":[{\"op\":\"relax\",\"pair\":[1,3],\"f\":[4995,3,2],\"g\":[0]},{\"op\":\"relax\",\"pair\":[1,4],\"f\":[-6,3,-29],\"g\":[-6,6]},{\"op\":\"relax\",\"pair\":[2,3],\"f\":[-43,-19,-4,-49],\"g\":[0]},{\"op\":\"relax\",\"pair\":[2,4],\"f\":[-7,5,18,-12],\"g\":[-1,1]},{\"op\":\"relax\",\"pair\":[3,4],\"f\":[2500],\"g\":[-2499,2498]}],\"order\":[3,4,1,2]},\"meta\":\"{\\\"arithmetic\\\": \\\"exact\\\", \\\"planned_largest_table\\\": 24, \\\"planned_leaves\\\": 1, \\\"producer\\\": \\\"metricchain_sb.partition.certify_partition\\\", \\\"tau\\\": \\\"625/16\\\", \\\"theta\\\": \\\"3\\\"}\"}",
+   "tables": {
+    "unary": [
+     [
+      -2,
+      2
+     ],
+     [
+      -1,
+      -3,
+      5002
+     ],
+     [
+      0,
+      2,
+      398,
+      1
+     ],
+     [
+      396
+     ],
+     [
+      2,
+      -2
+     ]
+    ],
+    "pair": {
+     "0,1": [
+      [
+       4,
+       5,
+       401
+      ],
+      [
+       398,
+       396,
+       405
+      ]
+     ],
+     "0,2": [
+      [
+       3,
+       -25,
+       -9,
+       19
+      ],
+      [
+       -13,
+       -41,
+       -25,
+       3
+      ]
+     ],
+     "0,3": [
+      [
+       14
+      ],
+      [
+       -26
+      ]
+     ],
+     "0,4": [
+      [
+       404,
+       397
+      ],
+      [
+       3,
+       4997
+      ]
+     ],
+     "1,2": [
+      [
+       -5,
+       -4,
+       4,
+       403
+      ],
+      [
+       4996,
+       404,
+       5,
+       5
+      ],
+      [
+       4998,
+       2,
+       -4,
+       -1
+      ]
+     ],
+     "1,3": [
+      [
+       4995
+      ],
+      [
+       3
+      ],
+      [
+       2
+      ]
+     ],
+     "1,4": [
+      [
+       -12,
+       0
+      ],
+      [
+       -3,
+       9
+      ],
+      [
+       -35,
+       -23
+      ]
+     ],
+     "2,3": [
+      [
+       -43
+      ],
+      [
+       -19
+      ],
+      [
+       -4
+      ],
+      [
+       -49
+      ]
+     ],
+     "2,4": [
+      [
+       -8,
+       -6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       17,
+       19
+      ],
+      [
+       -12,
+       -11
+      ]
+     ],
+     "3,4": [
+      [
+       1,
+       4998
+      ]
+     ]
+    },
+    "scale_bits": 7
+   },
+   "exact": [
+    "-1.9044798158983253231925997",
+    "-1.9005735658948646473018956"
+   ],
+   "float": [
+    "-1.9044798158983679557567453",
+    "-1.9005735658948930690113260"
+   ]
+  },
+  {
+   "kind": "float tier not containing exact tier",
+   "certificate": "{\"format\":\"structbio-zcert/1\",\"model_sha256\":\"f99945e12c5344b81cd698e3ee74fc616f8375e2cb08038709597a6b2f629dd5\",\"beta\":\"1/3\",\"domains\":[[0,1],[0,1,2],[0,1,2,3],[0],[0,1]],\"keep\":4,\"claim\":{},\"root\":{\"steps\":[{\"op\":\"relax\",\"pair\":[1,2],\"f\":[-5,5,-4],\"g\":[0,1,0,0]},{\"op\":\"relax\",\"pair\":[0,4],\"f\":[0,0],\"g\":[0,0]}],\"order\":[1,2,3,0]},\"meta\":\"{}\"}",
+   "tables": {
+    "unary": [
+     [
+      -2,
+      2
+     ],
+     [
+      -1,
+      -3,
+      5002
+     ],
+     [
+      0,
+      2,
+      398,
+      1
+     ],
+     [
+      396
+     ],
+     [
+      2,
+      -2
+     ]
+    ],
+    "pair": {
+     "0,1": [
+      [
+       4,
+       5,
+       401
+      ],
+      [
+       398,
+       396,
+       405
+      ]
+     ],
+     "0,2": [
+      [
+       3,
+       -25,
+       -9,
+       19
+      ],
+      [
+       -13,
+       -41,
+       -25,
+       3
+      ]
+     ],
+     "0,3": [
+      [
+       14
+      ],
+      [
+       -26
+      ]
+     ],
+     "0,4": [
+      [
+       404,
+       397
+      ],
+      [
+       3,
+       4997
+      ]
+     ],
+     "1,2": [
+      [
+       -5,
+       -4,
+       4,
+       403
+      ],
+      [
+       4996,
+       404,
+       5,
+       5
+      ],
+      [
+       4998,
+       2,
+       -4,
+       -1
+      ]
+     ],
+     "1,3": [
+      [
+       4995
+      ],
+      [
+       3
+      ],
+      [
+       2
+      ]
+     ],
+     "1,4": [
+      [
+       -12,
+       0
+      ],
+      [
+       -3,
+       9
+      ],
+      [
+       -35,
+       -23
+      ]
+     ],
+     "2,3": [
+      [
+       -43
+      ],
+      [
+       -19
+      ],
+      [
+       -4
+      ],
+      [
+       -49
+      ]
+     ],
+     "2,4": [
+      [
+       -8,
+       -6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       17,
+       19
+      ],
+      [
+       -12,
+       -11
+      ]
+     ],
+     "3,4": [
+      [
+       1,
+       4998
+      ]
+     ]
+    },
+    "scale_bits": 7
+   },
+   "exact": [
+    "-25.4736512063001088346993828",
+    "0.5575987937239688108093105"
+   ],
+   "float": [
+    "-25.4736512063000946238446676",
+    "0.5575987937239972325187409"
+   ]
+  },
+  {
+   "kind": "float tier not containing exact tier",
+   "certificate": "{\"format\":\"structbio-zcert/1\",\"model_sha256\":\"f99945e12c5344b81cd698e3ee74fc616f8375e2cb08038709597a6b2f629dd5\",\"beta\":\"5/2\",\"domains\":[[0,1],[0,2],[3],[0],[0,1]],\"keep\":null,\"claim\":{},\"root\":{\"steps\":[{\"op\":\"prune\",\"site\":4,\"remove\":1,\"dominator\":0},{\"op\":\"prune\",\"site\":1,\"remove\":2,\"dominator\":0},{\"op\":\"relax\",\"pair\":[2,4],\"f\":[-7863,-5430,5146,3429],\"g\":[-6680,-1551]}],\"order\":[2,4,3,1,0]},\"meta\":\"{}\"}",
+   "tables": {
+    "unary": [
+     [
+      -2,
+      2
+     ],
+     [
+      -1,
+      -3,
+      5002
+     ],
+     [
+      0,
+      2,
+      398,
+      1
+     ],
+     [
+      396
+     ],
+     [
+      2,
+      -2
+     ]
+    ],
+    "pair": {
+     "0,1": [
+      [
+       4,
+       5,
+       401
+      ],
+      [
+       398,
+       396,
+       405
+      ]
+     ],
+     "0,2": [
+      [
+       3,
+       -25,
+       -9,
+       19
+      ],
+      [
+       -13,
+       -41,
+       -25,
+       3
+      ]
+     ],
+     "0,3": [
+      [
+       14
+      ],
+      [
+       -26
+      ]
+     ],
+     "0,4": [
+      [
+       404,
+       397
+      ],
+      [
+       3,
+       4997
+      ]
+     ],
+     "1,2": [
+      [
+       -5,
+       -4,
+       4,
+       403
+      ],
+      [
+       4996,
+       404,
+       5,
+       5
+      ],
+      [
+       4998,
+       2,
+       -4,
+       -1
+      ]
+     ],
+     "1,3": [
+      [
+       4995
+      ],
+      [
+       3
+      ],
+      [
+       2
+      ]
+     ],
+     "1,4": [
+      [
+       -12,
+       0
+      ],
+      [
+       -3,
+       9
+      ],
+      [
+       -35,
+       -23
+      ]
+     ],
+     "2,3": [
+      [
+       -43
+      ],
+      [
+       -19
+      ],
+      [
+       -4
+      ],
+      [
+       -49
+      ]
+     ],
+     "2,4": [
+      [
+       -8,
+       -6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       17,
+       19
+      ],
+      [
+       -12,
+       -11
+      ]
+     ],
+     "3,4": [
+      [
+       1,
+       4998
+      ]
+     ]
+    },
+    "scale_bits": 7
+   },
+   "exact": [
+    "-118.9442325617392900608698538",
+    "2885.3936977434272136613260981"
+   ],
+   "float": [
+    "-118.9442325617392190065962777",
+    "2885.3936977434272136613260981"
+   ]
+  }
+ ],
+ "findings": [],
+ "instances": 1500
+}

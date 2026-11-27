@@ -1,0 +1,70 @@
+=== Section 4 of the review: thermodynamic integration on the fibre, AM-GM, curvature form ===
+  d omega/dc = S: largest relative error of a central difference 6.0e-10;  dI/dc = omega: largest error 2.8e-09  (400 tables)
+  S / (16 cosh^2(omega/4)) over 20 000 random tables: smallest 1.000015 (must be >= 1); equality checked at uniform marginals for omega = 0.3, 1, 2.5, 6
+  I - K(|omega|/4): largest -6.56e-11 (must be <= 0)
+  curvature: max of Psi''_(m,kappa)(s) - Psi_c''(s) = 4/S - sech^2(s/2)/4 over 3000 random (m, kappa, s): -3.32e-04 (must be <= 0)
+  Psi'' = 4/S against a second difference of the Legendre transform (300 cases): largest relative error 6.2e-07
+  gap F*_c(t) - F*_(m,kappa)(t) = t D(u) - D(tu): smallest value of (gap, increment of the gap from u1 to u2 > u1) over 2000 cases: 4.29e-06 (must be >= 0)
+
+=== m1, m2: the optimal input of an asymmetric channel P(b, x) ~ exp(J b x + h1 b + h2 x) ===
+  60 channels (J in [0.1, 2.5], h2 in [0.05, 3]): optimal tilt h1* in (-h2, 0): 60/60;  E[B] > 0 at the optimum (the input DISTRIBUTION favours the more reliable symbol): 60/60
+  0 < g(h2) < delta(h2) < J (existence of the root of delta(k) = g(h2)): 60/60;  |delta(-h1*) - g(h2)| <= 5.7e-08
+  d^2 I/dh1^2 at the maximiser against -1/2 (1 - mu^2) delta'(h1) Delta(h2): largest relative error 3.4e-05 (so the maximum is non-degenerate)
+
+=== m3: the closed form of Theorem 11.90(b) holds over the shells l >= 0 only ===
+  (m, kappa, u) = (0.83, 0.166, 4.0), e = 0: closed form V_(m,kappa)(0) = 0.0202;  brute force over shells l >= 0 (exits on a grid of 4001): 0.0202;
+     brute force over the WHOLE ray: 0.1441;  closed form of the antipodal centre V_(1-m,kappa)(0) = 0.1441
+
+=== m4: the game form of V_(m,kappa) for negative accuracies ===
+  (m, kappa, u) = (0.4, 0.3, 1.0): F(l*) = 0.0939, F(l_max) = 0.3859, h(kappa) = 0.6109;  e = -0.0470: sup over feasible shells 0.053318, game form 0.053318;  e = -0.2399: sup over feasible shells 0.239929, game form 0.239929;  e = -0.4359: sup over feasible shells -inf, game form 0.435930
+  (m, kappa, u) = (0.7, 0.3, 2.0): F(l*) = 0.1129, F(l_max) = 0.1328, h(kappa) = 0.6109;  e = -0.0564: sup over feasible shells 0.070668, game form 0.070668;  e = -0.1229: sup over feasible shells 0.122859, game form 0.122859;  e = -0.1828: sup over feasible shells -inf, game form 0.182829
+
+=== m5: R_unif(e) = KL((Lambda_1 + e)/u || 1/2) against the game form max_t [F*_c(t) - te] ===
+  u = 1.0: -K(u/2) = -0.110944, ln cosh(u/2) = 0.120115, -Lambda_1 = -0.379885
+     e=-0.3761: KL 0.668184 / game 0.376087
+     e=-0.1609: KL 0.167582 / game 0.160944
+     e=-0.1109: KL 0.110944 / game 0.110944
+     e=-0.0609: KL 0.067078 / game 0.067078
+     e=+0.0000: KL 0.029139 / game 0.029139
+     e=+0.0601: KL 0.007231 / game 0.007231
+     e=+0.1201: KL -0.000000 / game 0.000000
+     e=+0.1701: KL 0.005008 / game 0.000000
+  u = 2.0: -K(u/2) = -0.327813, ln cosh(u/2) = 0.433781, -Lambda_1 = -0.566219
+     e=-0.5606: KL 0.673710 / game 0.560557
+     e=-0.3778: KL 0.380992 / game 0.377813
+     e=-0.3278: KL 0.327813 / game 0.327813
+     e=-0.2778: KL 0.280627 / game 0.280627
+     e=+0.0000: KL 0.097281 / game 0.097281
+     e=+0.2169: KL 0.023709 / game 0.023709
+     e=+0.4338: KL 0.000000 / game 0.000000
+     e=+0.4838: KL 0.001251 / game 0.000000
+
+=== m6: strict inequality R^kappa < cube for kappa != 1/2 fails for e <= -K(u/2) (game form) ===
+  kappa = 0.3, u = 1, e = -0.300000: R^kappa = 0.300000000, cube (game form) = 0.300000000, difference 0.00e+00
+  kappa = 0.3, u = 1, e = -0.110944: R^kappa = 0.110944072, cube (game form) = 0.110944072, difference 0.00e+00
+  kappa = 0.3, u = 1, e = -0.100944: R^kappa = 0.100944072, cube (game form) = 0.101196431, difference 2.52e-04
+  kappa = 0.3, u = 1, e = -0.050000: R^kappa = 0.055574932, cube (game form) = 0.059049667, difference 3.47e-03
+  kappa = 0.3, u = 1, e = +0.000000: R^kappa = 0.024587500, cube (game form) = 0.029139139, difference 4.55e-03
+  kappa = 0.45, u = 1, e = -0.300000: R^kappa = 0.300000000, cube (game form) = 0.300000000, difference 0.00e+00
+  kappa = 0.45, u = 1, e = -0.110944: R^kappa = 0.110944072, cube (game form) = 0.110944072, difference 0.00e+00
+  kappa = 0.45, u = 1, e = -0.100944: R^kappa = 0.101148382, cube (game form) = 0.101196431, difference 4.80e-05
+  kappa = 0.45, u = 1, e = -0.050000: R^kappa = 0.058823954, cube (game form) = 0.059049667, difference 2.26e-04
+  kappa = 0.45, u = 1, e = +0.000000: R^kappa = 0.028855793, cube (game form) = 0.029139139, difference 2.83e-04
+
+=== table of Theorem 11.90 (u = 1) and m11: centre types for N^kappa(0+), the cusp at X = 0 ===
+  kappa = 0.50: R^kappa(0) = 0.029139 at m = 0.5000;  N^kappa(0+) = sup_m F(l*) = 0.110944 at m = 0.5000
+  kappa = 0.45: R^kappa(0) = 0.028856 at m = 0.4770;  N^kappa(0+) = sup_m F(l*) = 0.109898 at m = 0.4709
+  kappa = 0.40: R^kappa(0) = 0.028005 at m = 0.4540;  N^kappa(0+) = sup_m F(l*) = 0.106755 at m = 0.4418
+  kappa = 0.30: R^kappa(0) = 0.024588 at m = 0.4080;  N^kappa(0+) = sup_m F(l*) = 0.094080 at m = 0.3834
+  kappa = 0.20: R^kappa(0) = 0.018842 at m = 0.3619;  N^kappa(0+) = sup_m F(l*) = 0.072574 at m = 0.3248
+  kappa = 0.10: R^kappa(0) = 0.010688 at m = 0.3156;  N^kappa(0+) = sup_m F(l*) = 0.041588 at m = 0.2656
+  cusp: kappa = 0.3, N(0+) - N(1e-12) = 5.801e-07  (N(1e-12) = 0.094079);  u sqrt(2X/F''(l*)) at the best centre = 5.801e-07
+  cusp: kappa = 0.5, N(0+) - N(1e-09) = 1.983e-05  (N(1e-09) = 0.110924);  u sqrt(2X/F''(l*)) at the best centre = 1.983e-05
+  cusp: kappa = 0.3, N(0+) - N(1e-09) = 1.834e-05  (N(1e-09) = 0.094062);  u sqrt(2X/F''(l*)) at the best centre = 1.834e-05
+
+=== m12: the non-adaptive function n for profiles with any number of blocks (LP over all grid laws) ===
+  kappa=0.5, u=1.0, X=0.02: two-block sup N^kappa(X) = 0.039517616 (m = 0.5000);  sup_(tau,xi)[LP - tau X] over all grid laws = 0.039517443 (tau = 1.346, 2 atoms);  LP - two-block = -1.74e-07  [13 s]
+  kappa=0.3, u=1.0, X=0.01: two-block sup N^kappa(X) = 0.044727978 (m = 0.3989);  sup_(tau,xi)[LP - tau X] over all grid laws = 0.044727553 (tau = 2.028, 2 atoms);  LP - two-block = -4.25e-07  [14 s]
+  kappa=0.3, u=2.0, X=0.05: two-block sup N^kappa(X) = 0.118328803 (m = 0.3438);  sup_(tau,xi)[LP - tau X] over all grid laws = 0.118327784 (tau = 1.333, 2 atoms);  LP - two-block = -1.02e-06  [13 s]
+  kappa=0.7, u=0.5, X=0.004: two-block sup N^kappa(X) = 0.009459219 (m = 0.5522);  sup_(tau,xi)[LP - tau X] over all grid laws = 0.009459094 (tau = 1.523, 2 atoms);  LP - two-block = -1.25e-07  [11 s]
+  kappa=0.2, u=3.0, X=0.2: two-block sup N^kappa(X) = 0.065107933 (m = 0.2405);  sup_(tau,xi)[LP - tau X] over all grid laws = 0.065107535 (tau = 0.479, 2 atoms);  LP - two-block = -3.98e-07  [11 s]

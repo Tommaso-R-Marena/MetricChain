@@ -1,0 +1,6 @@
+beta J = 1.5, u = 0.2, gamma = -0.2: excess = 1.6204 (audit: 1.6204); Lipschitz constant of psi / u = 1.0000
+beta J = 1.5, u = 0.2, gamma = +0.2: excess = 1.6204 (audit: 1.6204); Lipschitz constant of psi / u = 1.0000
+control beta J = 0: excess = 0.00e+00
+member gamma|b| + s u|a|: fibre average changes by 2.6204 u per outer flip (audit: 2.6204); all four members are in L_u
+violations = 0
+END item1_s8_owncheck

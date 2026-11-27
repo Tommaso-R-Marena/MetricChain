@@ -1,0 +1,26 @@
+(a) vertices of the Lipschitz polytopes: {'bin': 2, 'path': 4, 'tri': 6, 'asym': 5}  (report: 2, 4, 6, 5)
+(b) F*(t): Renyi form [primal, dual bound] against the best game value found by a blind search over gamma
+    bin   t = 0.20: Renyi 0.016345818 (dual bound 0.016345820);  game at gamma* 0.016345818 (in the class: True);  blind search 0.016345818
+    bin   t = 0.46: Renyi 0.024941724 (dual bound 0.024941727);  game at gamma* 0.024941724 (in the class: True);  blind search 0.024941724
+    bin   t = 0.80: Renyi 0.015582369 (dual bound 0.015582370);  game at gamma* 0.015582369 (in the class: True);  blind search 0.015582369
+    path  t = 0.20: Renyi 0.061946070 (dual bound 0.061946070);  game at gamma* 0.061946070 (in the class: True);  blind search 0.061946073
+    path  t = 0.46: Renyi 0.089589014 (dual bound 0.089589016);  game at gamma* 0.089589014 (in the class: True);  blind search 0.089589017
+    path  t = 0.80: Renyi 0.050982909 (dual bound 0.050982910);  game at gamma* 0.050982909 (in the class: True);  blind search 0.050982909
+    tri   t = 0.20: Renyi 0.044534069 (dual bound 0.044534071);  game at gamma* 0.044534069 (in the class: True);  blind search 0.044534069
+    tri   t = 0.46: Renyi 0.066549519 (dual bound 0.066549519);  game at gamma* 0.066549519 (in the class: True);  blind search 0.066549519
+    tri   t = 0.80: Renyi 0.040949303 (dual bound 0.040949304);  game at gamma* 0.040949303 (in the class: True);  blind search 0.040949303
+    asym  t = 0.20: Renyi 0.030102224 (dual bound 0.030102225);  game at gamma* 0.030102224 (in the class: True);  blind search 0.030102226
+    asym  t = 0.46: Renyi 0.045316832 (dual bound 0.045316835);  game at gamma* 0.045316832 (in the class: True);  blind search 0.045316836
+    asym  t = 0.80: Renyi 0.027594617 (dual bound 0.027594618);  game at gamma* 0.027594617 (in the class: True);  blind search 0.027594619
+(c) chain: E, a, h = R^max(0) [t*], R^max(0.3E), theta_na(0.3E)   -- report in brackets
+    bin   E = 0.103131 [0.103131], a = 0.095301 [0.095301], h = 0.025034 [0.025034] (t* = 0.490), R(0.3E) = 0.012209 [None], theta_na(0.3E) = 0.019941 [None]
+    path  E = 0.400622 [0.400622], a = 0.294791 [0.294791], h = 0.089589 [0.089589] (t* = 0.460), R(0.3E) = 0.043375 [0.043375], theta_na(0.3E) = 0.066899 [0.066899]
+    tri   E = 0.284907 [0.284907], a = 0.247541 [0.247541], h = 0.066729 [0.066729] (t* = 0.486), R(0.3E) = 0.032077 [0.032077], theta_na(0.3E) = 0.051124 [0.051124]
+    asym  E = 0.191059 [0.191059], a = 0.166046 [0.166046], h = 0.045407 [0.045407] (t* = 0.482), R(0.3E) = 0.022108 [0.022108], theta_na(0.3E) = 0.035544 [0.035544]
+    mix   E = 0.251877 [0.251877], a = 0.195046 [0.195046], h = 0.057275 [0.057275] (t* = 0.466), R(0.3E) = 0.027759 [0.027759], theta_na(0.3E) = 0.043288 [0.043288]
+    mix2  E = 0.212197 [0.212197], a = 0.186645 [0.186645], h = 0.050050 [0.05005] (t* = 0.487), R(0.3E) = 0.024122 [0.024122], theta_na(0.3E) = 0.038641 [0.038641]
+    largest deviation from the report: 5.0e-07
+(d) mix at 0.3E: R^max = 0.027759, average at a common accuracy = 0.030121  (report: 0.027759/0.030121, 0.014126/0.020800, 0.000568/0.008322)
+(d) mix at 0.5E: R^max = 0.014126, average at a common accuracy = 0.020800  (report: 0.027759/0.030121, 0.014126/0.020800, 0.000568/0.008322)
+(d) mix at 0.9E: R^max = 0.000568, average at a common accuracy = 0.008322  (report: 0.027759/0.030121, 0.014126/0.020800, 0.000568/0.008322)
+(e) pair identity theta_na(e + R(e)) = R(e): largest deviation 1.2e-13

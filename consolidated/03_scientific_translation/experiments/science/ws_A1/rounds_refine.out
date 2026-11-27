@@ -1,0 +1,3 @@
+u=1.0: theta2*/a = 0.35922 at phi1 = 0.640; theta2*/h = 1.3677; (phi2 a)/a at optimum = 0.36000; binding 'theta<phi2 a': False
+u=2.0: theta2*/a = 0.39400 at phi1 = 0.606; theta2*/h = 1.3277; (phi2 a)/a at optimum = 0.39400; binding 'theta<phi2 a': True
+u=3.0: theta2*/a = 0.43955 at phi1 = 0.560; theta2*/h = 1.2774; (phi2 a)/a at optimum = 0.44000; binding 'theta<phi2 a': False

@@ -1,0 +1,46 @@
+rank of 'value and gradient at K general states' on V (3^r functions); three random integer instances each;
+rank = max over three primes of the rank modulo p (a lower bound for the rational rank), which equals the
+upper bound min(K(r+1), 3^r) or 3^r - 1 (square of the multilinear form) in every line marked 'exact'
+  r = 1, K =  1:   2 conditions on   3 functions; rank 2 in 3/3 instances; expected 2; defect 0; exact
+  r = 1, K =  2:   4 conditions on   3 functions; rank 3 in 3/3 instances; expected 3; defect 0; exact
+  r = 1, K =  3:   6 conditions on   3 functions; rank 3 in 3/3 instances; expected 3; defect 0; exact
+  r = 2, K =  1:   3 conditions on   9 functions; rank 3 in 3/3 instances; expected 3; defect 0; exact
+  r = 2, K =  2:   6 conditions on   9 functions; rank 6 in 3/3 instances; expected 6; defect 0; exact
+  r = 2, K =  3:   9 conditions on   9 functions; rank 8 in 3/3 instances; expected 9; defect 1; exact
+  r = 2, K =  4:  12 conditions on   9 functions; rank 9 in 3/3 instances; expected 9; defect 0; exact
+  r = 2, K =  5:  15 conditions on   9 functions; rank 9 in 3/3 instances; expected 9; defect 0; exact
+  r = 3, K =  1:   4 conditions on  27 functions; rank 4 in 3/3 instances; expected 4; defect 0; exact
+  r = 3, K =  2:   8 conditions on  27 functions; rank 8 in 3/3 instances; expected 8; defect 0; exact
+  r = 3, K =  3:  12 conditions on  27 functions; rank 12 in 3/3 instances; expected 12; defect 0; exact
+  r = 3, K =  4:  16 conditions on  27 functions; rank 16 in 3/3 instances; expected 16; defect 0; exact
+  r = 3, K =  5:  20 conditions on  27 functions; rank 20 in 3/3 instances; expected 20; defect 0; exact
+  r = 3, K =  6:  24 conditions on  27 functions; rank 24 in 3/3 instances; expected 24; defect 0; exact
+  r = 3, K =  7:  28 conditions on  27 functions; rank 26 in 3/3 instances; expected 27; defect 1; exact
+  r = 3, K =  8:  32 conditions on  27 functions; rank 27 in 3/3 instances; expected 27; defect 0; exact
+  r = 3, K =  9:  36 conditions on  27 functions; rank 27 in 3/3 instances; expected 27; defect 0; exact
+  r = 4, K = 11:  55 conditions on  81 functions; rank 55 in 3/3 instances; expected 55; defect 0; exact
+  r = 4, K = 12:  60 conditions on  81 functions; rank 60 in 3/3 instances; expected 60; defect 0; exact
+  r = 4, K = 13:  65 conditions on  81 functions; rank 65 in 3/3 instances; expected 65; defect 0; exact
+  r = 4, K = 14:  70 conditions on  81 functions; rank 70 in 3/3 instances; expected 70; defect 0; exact
+  r = 4, K = 15:  75 conditions on  81 functions; rank 75 in 3/3 instances; expected 75; defect 0; exact
+  r = 4, K = 16:  80 conditions on  81 functions; rank 80 in 3/3 instances; expected 80; defect 0; exact
+  r = 4, K = 17:  85 conditions on  81 functions; rank 81 in 3/3 instances; expected 81; defect 0; exact
+  r = 4, K = 18:  90 conditions on  81 functions; rank 81 in 3/3 instances; expected 81; defect 0; exact
+  r = 5, K = 26: 156 conditions on 243 functions; rank 156 in 1/1 instances; expected 156; defect 0; exact
+  r = 5, K = 39: 234 conditions on 243 functions; rank 234 in 1/1 instances; expected 234; defect 0; exact
+  r = 5, K = 40: 240 conditions on 243 functions; rank 240 in 1/1 instances; expected 240; defect 0; exact
+  r = 5, K = 41: 246 conditions on 243 functions; rank 243 in 1/1 instances; expected 243; defect 0; exact
+  r = 5, K = 42: 252 conditions on 243 functions; rank 243 in 1/1 instances; expected 243; defect 0; exact
+exceptions (defect > 0): [(2, 3, 1), (3, 7, 1)]
+least K with rank 3^r (no non-zero function with K double points):
+  r = 1: K = 2;  ceil(3^r/(r+1)) = 2
+  r = 2: K = 4;  ceil(3^r/(r+1)) = 3
+  r = 3: K = 8;  ceil(3^r/(r+1)) = 7
+  r = 4: K = 17;  ceil(3^r/(r+1)) = 17
+  r = 5: K = 41;  ceil(3^r/(r+1)) = 41
+arithmetic of (b): ceil(3^r/(r+1)) for r = 4, 5, 6, 7, 8: [17, 41, 105, 274, 729] ; 2^r - r - 1: [11, 26, 57, 120, 247]
+PASS
+
+real	0m6.973s
+user	0m6.885s
+sys	0m0.020s

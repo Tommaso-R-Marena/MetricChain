@@ -1,0 +1,10 @@
+$ python3 t16_single_letter_sup.py
+p=0.3 u=1.0: so far  max over laws of [V_H - R^max] = -5.234e-05;  |V_H(generalised dip) - R^max| <= 1.415e-13;  laws tested 183 + 300  [47s]
+p=0.1 u=2.0: so far  max over laws of [V_H - R^max] = -2.463e-05;  |V_H(generalised dip) - R^max| <= 8.185e-13;  laws tested 371 + 599  [95s]
+p=0.2 u=4.0: so far  max over laws of [V_H - R^max] = -2.463e-05;  |V_H(generalised dip) - R^max| <= 6.630e-12;  laws tested 514 + 899  [131s]
+p=0.5 u=1.0: so far  max over laws of [V_H - R^max] = -2.463e-05;  |V_H(generalised dip) - R^max| <= 6.630e-12;  laws tested 696 + 1197  [169s]
+RESULT: no law with V_H > R^max: True  equality at the generalised dip: True
+
+real	2m49.858s
+user	2m48.931s
+sys	0m0.217s

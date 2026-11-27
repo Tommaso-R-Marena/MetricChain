@@ -1,0 +1,11 @@
+=== p9_06_check12 K12 on H, tau 0.7, order 5; started 2026-11-26 11:35:21 UTC
+    12 sites, states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7], anchor [10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3]; 792 stage-2 tables Theta_T read from ws_P9/cache
+(c) 20000 random states with EXACTLY 5 sites off the anchor (subset and rotamers uniformly at random; g evaluated here, 40 s; lower orders from the ball of radius 4): |d_T(x_T)| <= Theta^2_T(x_T) violated at 0; smallest ratio 9.96, median 222 over the 12603 states with |d_T| > 1e-9 kcal/mol; largest |d_T| 7.78e-05 kcal/mol; CONTROLS: minimum over the states in place of the value: 9475 violations; table rolled by one rotamer: 550 violations  -> both FAIL as intended
+foreign writes attempted during import (refused): 0
+ALL DONE 53 s; peak RSS 1159 MB
+=== p9_06_check12 LKSE:12 on H, tau 0.6, order 5; started 2026-11-26 11:36:14 UTC
+    12 sites, states per site [2, 29, 9, 12, 2, 14, 9, 12, 2, 16, 9, 13], anchor [1, 14, 1, 6, 1, 6, 2, 6, 1, 7, 2, 7]; 792 stage-2 tables Theta_T read from ws_P9/cache
+(c) 20000 random states with EXACTLY 5 sites off the anchor (subset and rotamers uniformly at random; g evaluated here, 17 s; lower orders from the ball of radius 4): |d_T(x_T)| <= Theta^2_T(x_T) violated at 0; smallest ratio 13.14, median 323 over the 18758 states with |d_T| > 1e-9 kcal/mol; largest |d_T| 0.00395 kcal/mol; CONTROLS: minimum over the states in place of the value: 9919 violations; table rolled by one rotamer: 140 violations  -> both FAIL as intended
+foreign writes attempted during import (refused): 0
+ALL DONE 22 s; peak RSS 1376 MB
+exit 0

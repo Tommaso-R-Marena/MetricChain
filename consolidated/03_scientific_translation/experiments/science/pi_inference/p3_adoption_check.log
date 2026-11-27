@@ -1,0 +1,20 @@
+# (1) remainder identity of the anchored expansion
+   2520 cases (40 random functions on random product grids with 2-6 sites and 2-4 states, 12 points each, every order m): largest |lhs - rhs| / (1 + max|g|) = 2.91e-15
+# (2) allocation lemma at order m
+   24288 pairs (constants, S): largest (sum over T inside S of c_T) - (sum of gamma_i over S) = 7.11e-15  (must be <= 0 up to rounding)
+# (3) Lemma R: coverage of the sample-range bracket
+   uniform on [0.2, 1], N = 50: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   uniform on [0.2, 1], N = 500: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   uniform on [0.2, 1], N = 5000: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   nearly constant 0.97 with a 1 % atom at 1, N = 50: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   nearly constant 0.97 with a 1 % atom at 1, N = 500: miss rate 0.0075  (must be <= 0.05 up to the simulation error 0.0068)
+   nearly constant 0.97 with a 1 % atom at 1, N = 5000: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   0.9 with an atom of mass 3/N at w_min = 0.1 (adversarial for the lower side), N = 50: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   0.9 with an atom of mass 3/N at w_min = 0.1 (adversarial for the lower side), N = 500: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   0.9 with an atom of mass 3/N at w_min = 0.1 (adversarial for the lower side), N = 5000: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   0.3 with an atom of mass 3/N at 1 (adversarial for the upper side), N = 50: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   0.3 with an atom of mass 3/N at 1 (adversarial for the upper side), N = 500: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+   0.3 with an atom of mass 3/N at 1 (adversarial for the upper side), N = 5000: miss rate 0.0000  (must be <= 0.05 up to the simulation error 0.0068)
+# (4) Corollary L1: mixed differences of phi(c + sum_i a_i(x_i))
+   6000 cases (tanh and exp, orders 1-4): largest |Delta| - bound = -5.80e-15  (must be <= 0 up to the grid allowance)
+ALL OK

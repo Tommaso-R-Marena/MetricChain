@@ -1,0 +1,17 @@
+[exh nv=2 m<=3] formulas 7769 (satisfiable 6959, unsatisfiable 810); largest instance: q = |W| = 18, |T| = 63; perfect matchings counted 296616
+[exh nv=2 m<=3] coverage: unit_clause 2314, two_clause 4845, repeated_literal 7090, complementary_pair 4845, var_once 1312, var_only_positive 2459, var_only_negative 2459, duplicate_clause 1190
+[exh nv=2 m<=3] violations: S sizes 0; E satisfiable-but-no-matching 0, unsatisfiable-but-matching 0; N counting identity 0; F recipe of the proof 0 of 12768; B decoding 0 of 184912
+[exh nv=2 m<=3] control K4 (identity without (l-1)!): fails on 6416 formulas
+[exh nv=2 m<=3] control drop:true: satisfiable-but-no-matching 2304, unsatisfiable-but-matching 0; first disagreement [(1,)]
+[exh nv=2 m<=3] control drop:false: satisfiable-but-no-matching 2304, unsatisfiable-but-matching 0; first disagreement [(-1,)]
+[exh nv=2 m<=3] control drop:clause: satisfiable-but-no-matching 2178, unsatisfiable-but-matching 0; first disagreement [(1,)]
+[exh nv=2 m<=3] control drop:garbage_p: satisfiable-but-no-matching 106, unsatisfiable-but-matching 0; first disagreement [(1,), (-1, 2)]
+[exh nv=2 m<=3] control drop:garbage_n: satisfiable-but-no-matching 384, unsatisfiable-but-matching 0; first disagreement [(-1,), (1, -1)]
+[exh nv=2 m<=3] control add_wrong_clause: satisfiable-but-no-matching 0, unsatisfiable-but-matching 683; first disagreement [(1,), (-1,)]
+[exh nv=2 m<=3] control unlinked: satisfiable-but-no-matching 0, unsatisfiable-but-matching 810; first disagreement [(1,), (-1,)]
+[exh nv=2 m<=3] time 13.2 s
+peak memory 15.2 MB
+
+real	0m13.216s
+user	0m13.077s
+sys	0m0.063s

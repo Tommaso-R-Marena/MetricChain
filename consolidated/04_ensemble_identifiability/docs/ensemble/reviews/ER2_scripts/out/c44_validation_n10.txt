@@ -1,0 +1,12 @@
+n = 10: 512 states modulo the flip; 40 instances per K
+   K =   9 (K/n = 0.90): faces by the script 26/40, by the full LP 26/40; instance-wise disagreements 0   (2 s)
+   K =  10 (K/n = 1.00): faces by the script 28/40, by the full LP 28/40; instance-wise disagreements 0   (3 s)
+   K =  11 (K/n = 1.10): faces by the script 17/40, by the full LP 17/40; instance-wise disagreements 0   (2 s)
+   K =  12 (K/n = 1.20): faces by the script 8/40, by the full LP 8/40; instance-wise disagreements 0   (2 s)
+   K =  13 (K/n = 1.30): faces by the script 5/40, by the full LP 5/40; instance-wise disagreements 0   (2 s)
+   K =  14 (K/n = 1.40): faces by the script 2/40, by the full LP 2/40; instance-wise disagreements 0   (2 s)
+   total 240: agreement script / full LP in 240; primal and dual certificates inconsistent in 0; undecided by the script 0
+   margins t* of the 86 faces (|Q_ij| <= 1): min 5.195e-02, 1% quantile 8.506e-02, median 5.000e-01   (script: 'not a face' if t <= 1e-7; 'face' needs min energy - c > 1e-5)
+   LP solves inside the script: 513; with status != 0 (counted as 'not a face' by the script): 0
+   float32 energies of the script against float64, random |Q_ij| <= 1: largest error 9.21e-07
+[exit 0]

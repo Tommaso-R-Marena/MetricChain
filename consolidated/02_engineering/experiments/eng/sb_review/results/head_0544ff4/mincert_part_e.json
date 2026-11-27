@@ -1,0 +1,392 @@
+{
+ "seconds": 30.7,
+ "seed": 20261126,
+ "result": {
+  "random": {
+   "instances": 150,
+   "wrong_optimum": 0,
+   "rejected": 0,
+   "gap_nonzero": 0,
+   "raised": {},
+   "ours_disagrees": 0,
+   "reference_disagrees": 0
+  },
+  "tolerance": {
+   "instances": 40,
+   "bad": 0
+  },
+  "degenerate": [
+   {
+    "name": "one site, one state",
+    "truth": 4,
+    "accepted": true,
+    "lower_bound": "4",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0003,
+    "correct": true
+   },
+   {
+    "name": "one site, three equal states",
+    "truth": 2,
+    "accepted": true,
+    "lower_bound": "2",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0001,
+    "correct": true
+   },
+   {
+    "name": "five sites, no pair",
+    "truth": -15,
+    "accepted": true,
+    "lower_bound": "-15",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0003,
+    "correct": true
+   },
+   {
+    "name": "all tables zero",
+    "truth": 0,
+    "accepted": true,
+    "lower_bound": "0",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0012,
+    "correct": true
+   },
+   {
+    "name": "every site has one state",
+    "truth": -13,
+    "accepted": true,
+    "lower_bound": "-13",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0004,
+    "correct": true
+   },
+   {
+    "name": "two components",
+    "truth": 2,
+    "accepted": true,
+    "lower_bound": "2",
+    "gap": "0",
+    "nodes": 1,
+    "seconds": 0.0007,
+    "correct": true
+   },
+   {
+    "name": "entries in {0, 1}, many ties",
+    "truth": 5,
+    "accepted": true,
+    "lower_bound": "5",
+    "gap": "0",
+    "nodes": 4,
+    "seconds": 0.1415,
+    "correct": true
+   },
+   {
+    "name": "antiferromagnetic triangle (frustrated)",
+    "truth": 1,
+    "accepted": true,
+    "lower_bound": "1",
+    "gap": "0",
+    "nodes": 3,
+    "seconds": 0.0016,
+    "correct": true
+   }
+  ],
+  "trees": [
+   {
+    "sites": 50,
+    "states": 6,
+    "truth": -2991,
+    "accepted": true,
+    "correct": true,
+    "seconds": 0.079,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 91
+    },
+    "bytes": 14633,
+    "check_seconds": 0.004,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.0033
+   },
+   {
+    "sites": 100,
+    "states": 6,
+    "truth": -5594,
+    "accepted": true,
+    "correct": true,
+    "seconds": 0.082,
+    "nodes": 1,
+    "stats": {
+     "leaf": 1,
+     "branch": 0,
+     "prune": 135
+    },
+    "bytes": 29061,
+    "check_seconds": 0.0062,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.0054
+   },
+   {
+    "sites": 200,
+    "states": 6,
+    "truth": -11059,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.142,
+    "nodes": 7,
+    "stats": {
+     "leaf": 6,
+     "branch": 1,
+     "prune": 329
+    },
+    "bytes": 155742,
+    "check_seconds": 0.0316,
+    "ours_accepts": true,
+    "ours_check_seconds": 0.041
+   }
+  ],
+  "dense": [
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1702,
+    "accepted": true,
+    "correct": true,
+    "seconds": 0.534,
+    "nodes": 7,
+    "stats": {
+     "leaf": 5,
+     "branch": 2,
+     "prune": 3
+    },
+    "bytes": 15510
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1513,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.153,
+    "nodes": 16,
+    "stats": {
+     "leaf": 11,
+     "branch": 5,
+     "prune": 4
+    },
+    "bytes": 30351
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1363,
+    "accepted": true,
+    "correct": true,
+    "seconds": 2.015,
+    "nodes": 28,
+    "stats": {
+     "leaf": 19,
+     "branch": 9,
+     "prune": 6
+    },
+    "bytes": 49169
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1500,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.021,
+    "nodes": 13,
+    "stats": {
+     "leaf": 9,
+     "branch": 4,
+     "prune": 0
+    },
+    "bytes": 25512
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1594,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.072,
+    "nodes": 13,
+    "stats": {
+     "leaf": 9,
+     "branch": 4,
+     "prune": 7
+    },
+    "bytes": 24768
+   },
+   {
+    "sites": 10,
+    "states": 3,
+    "truth": -1744,
+    "accepted": true,
+    "correct": true,
+    "seconds": 0.327,
+    "nodes": 4,
+    "stats": {
+     "leaf": 3,
+     "branch": 1,
+     "prune": 0
+    },
+    "bytes": 10542
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -2239,
+    "accepted": true,
+    "correct": true,
+    "seconds": 1.809,
+    "nodes": 19,
+    "stats": {
+     "leaf": 13,
+     "branch": 6,
+     "prune": 6
+    },
+    "bytes": 51937
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1938,
+    "accepted": true,
+    "correct": true,
+    "seconds": 5.611,
+    "nodes": 49,
+    "stats": {
+     "leaf": 33,
+     "branch": 16,
+     "prune": 55
+    },
+    "bytes": 116341
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1668,
+    "accepted": true,
+    "correct": true,
+    "seconds": 3.803,
+    "nodes": 34,
+    "stats": {
+     "leaf": 23,
+     "branch": 11,
+     "prune": 10
+    },
+    "bytes": 87391
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1911,
+    "accepted": true,
+    "correct": true,
+    "seconds": 3.525,
+    "nodes": 34,
+    "stats": {
+     "leaf": 23,
+     "branch": 11,
+     "prune": 16
+    },
+    "bytes": 86473
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -2231,
+    "accepted": true,
+    "correct": true,
+    "seconds": 2.055,
+    "nodes": 19,
+    "stats": {
+     "leaf": 13,
+     "branch": 6,
+     "prune": 5
+    },
+    "bytes": 51386
+   },
+   {
+    "sites": 12,
+    "states": 3,
+    "truth": -1795,
+    "accepted": true,
+    "correct": true,
+    "seconds": 3.481,
+    "nodes": 37,
+    "stats": {
+     "leaf": 25,
+     "branch": 12,
+     "prune": 29
+    },
+    "bytes": 93332
+   }
+  ],
+  "magnitude": [
+   {
+    "entry_bits": 48,
+    "message_bits": 0,
+    "exact_and_accepted": 10,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 49,
+    "message_bits": 0,
+    "exact_and_accepted": 10,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 37,
+    "message_bits": 12,
+    "exact_and_accepted": 10,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 30,
+    "message_bits": 12,
+    "exact_and_accepted": 10,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   },
+   {
+    "entry_bits": 20,
+    "message_bits": 12,
+    "exact_and_accepted": 10,
+    "not_accepted_or_not_exact": 0,
+    "raised": 0,
+    "notes": {}
+   }
+  ],
+  "abstention": [
+   {
+    "kw": "{'max_nodes': 1}",
+    "outcome": "abstained: more than 1 branch-and-bound nodes"
+   },
+   {
+    "kw": "{'time_limit': 0.0}",
+    "outcome": "abstained: time limit of 0.0 s reached"
+   }
+  ],
+  "examples": []
+ }
+}

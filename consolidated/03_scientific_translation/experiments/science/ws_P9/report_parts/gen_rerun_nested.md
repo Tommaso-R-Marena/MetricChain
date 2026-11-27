@@ -1,0 +1,1 @@
+`p9_07_nested.py LKSE:12 H 5 7 W window --N 1200 --Nf 400000 > logs/nested_LKSEc12_H_m5_w7.log`; `p9_07_nested.py LKSE:12 H 4 7 W window --N 1200 --Nf 400000 > logs/nested_LKSEc12_H_m4_w7.log` (both need the tables stored by `p9_03_tables.py … --keeptabs`)

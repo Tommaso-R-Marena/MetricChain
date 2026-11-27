@@ -1,0 +1,35 @@
+T5b start 2026-11-26T18:23:16Z
+replay ens 0: g1 = 1.416e-05, min exact defect 1.398e-04
+replay ens 1: g1 = 1.141e-05, min exact defect 1.403e-04
+replay ens 2: g1 = 1.190e-09, min exact defect 5.388e-07
+ensemble 2: colouring #43620 2012211122 ; LM residual 1.190101e-09 ; exact defect of this colouring 5.387894e-07 ; rank of this colouring by exact defect: 0
+target squared lengths: [1.703717 2.72152  6.531471 5.927834 0.490068 4.070958 0.524565 3.123985
+ 7.367915 3.009067]
+conformer squared lengths (rows = conformers):
+[[ 2.3392  2.7215  0.1784  2.9628  0.6163  6.533   5.3351  1.5093  1.7627
+   3.8401]
+ [13.6226 12.9608  6.5315 10.8147  9.5241  4.071   0.5246  3.124   4.4916
+   7.7858]
+ [ 1.7037  7.2315  0.8829  5.9278  0.4901  4.9843  0.6391 10.7139  7.3679
+   3.0091]]
+differences |t_e(x_i) - t_e(x_j)| smallest three: [0.11458 0.12624 0.63553]
+edges per conformer: [1, 4, 5] ; ||target - t(x_c)||_2 for c = 0,1,2: [10.6533 19.5828 10.5214]
+LM minimiser, coordinates: [[ 0.       0.     ] [ 1.30527  0.     ] [ 0.13571 -1.64411] [ 1.90208 -1.70692] [ 2.22516  0.98817] [ 0.63942  0.28498]]
+   hub triangle (0,1,2): signed area -1.0730e+00
+   hub triangle (0,2,3): signed area 1.4478e+00
+   hub triangle (0,3,4): signed area 2.8389e+00
+   hub triangle (0,4,5): signed area 1.1342e-03
+   hub triangle (0,1,5): signed area 1.8599e-01
+at the LM minimiser: residual 1.1901009222e-09, gradient norm 2.18e-14, singular values of J: [8.547 6.424 5.785 5.154 3.245 3.146 2.669 0.938 0.579]
+LM  1000 iterations: from the minimiser -> 1.1901008045e-09 ; best of 400 random starts -> 1.1901007789e-09 ; number of starts below 1e-7: 127
+LM 10000 iterations: from the minimiser -> 1.1901008045e-09 ; best of 400 random starts -> 1.1901007912e-09 ; number of starts below 1e-7: 126
+   flip pattern  3: feasible, check-edge deviation -1.974894e-03
+   flip pattern  7: feasible, check-edge deviation 5.387894e-07
+40-digit evaluation at the float minimiser: residual 2-norm = 1.1901012346593e-9
+40-digit stationary point of ||F - t||^2 (Newton from the float minimiser): residual 2-norm = 1.19010123465522e-9 ; moved by 2.8514e-15
+   residual per edge: ['-1.749e-12', '-4.684e-13', '2.843e-13', '3.071e-10', '-1.066e-9', '4.555e-13', '2.628e-12', '-3.376e-13', '-1.722e-13', '-4.309e-10']
+DONE t5b_w6_followup 2026-11-26T18:24:05Z
+
+real	0m49.217s
+user	0m48.577s
+sys	0m0.090s

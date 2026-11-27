@@ -1,0 +1,57 @@
+=== p8_06_distance: K12 on H, tau 0.7: 276 atoms, 12 sites (KKKKKKKKKKKK), states per site [14, 14, 12, 7, 7, 7, 7, 7, 7, 7, 7, 7]; anchor (ICM) (10, 10, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3)
+(C) group responses done: 38 groups, 0 s
+    group | net charge | sum|q| | first-order response R1 to the nearest other site and to the farthest (kcal/mol; centroid distance nm)
+    -0:bb      +0.000 1.868 | nearest: site 2 at 0.48 nm, R1 = 5.253e-01 | farthest: site 11 at 1.82 nm, R1 = 4.307e-04
+    K1:bb      -0.035 2.338 | nearest: site 0 at 0.43 nm, R1 = 3.055e-01 | farthest: site 11 at 1.61 nm, R1 = 7.833e-04
+    K1:chain   +0.401 0.525 | nearest: site 3 at 0.59 nm, R1 = 7.227e-02 | farthest: site 9 at 1.65 nm, R1 = 1.378e-04
+    K1:head    +0.635 1.405 | nearest: site 4 at 0.69 nm, R1 = 4.396e-02 | farthest: site 9 at 1.89 nm, R1 = 1.248e-04
+    K2:bb      -0.035 2.338 | nearest: site 1 at 0.43 nm, R1 = 3.478e-01 | farthest: site 11 at 1.47 nm, R1 = 1.060e-03
+    K2:chain   +0.401 0.525 | nearest: site 4 at 0.59 nm, R1 = 7.322e-02 | farthest: site 10 at 1.65 nm, R1 = 1.403e-04
+    K2:head    +0.635 1.405 | nearest: site 5 at 0.69 nm, R1 = 4.400e-02 | farthest: site 10 at 1.89 nm, R1 = 1.250e-04
+    K3:bb      -0.035 2.338 | nearest: site 2 at 0.43 nm, R1 = 3.909e-01 | farthest: site 11 at 1.45 nm, R1 = 9.590e-04
+    K3:chain   +0.401 0.525 | nearest: site 5 at 0.59 nm, R1 = 7.548e-02 | farthest: site 11 at 1.65 nm, R1 = 1.495e-04
+    K3:head    +0.635 1.405 | nearest: site 6 at 0.69 nm, R1 = 4.411e-02 | farthest: site 11 at 1.89 nm, R1 = 1.253e-04
+    K4:bb      -0.035 2.338 | nearest: site 3 at 0.35 nm, R1 = 1.105e-01 | farthest: site 11 at 1.26 nm, R1 = 2.381e-03
+    K4:chain   +0.401 0.525 | nearest: site 6 at 0.59 nm, R1 = 7.724e-02 | farthest: site 11 at 1.30 nm, R1 = 7.141e-04
+    K4:head    +0.635 1.405 | nearest: site 7 at 0.69 nm, R1 = 4.442e-02 | farthest: site 9 at 1.45 nm, R1 = 5.801e-04
+    K5:bb      -0.035 2.338 | nearest: site 4 at 0.35 nm, R1 = 1.086e-01 | farthest: site 11 at 1.01 nm, R1 = 8.107e-03
+    K5:chain   +0.401 0.525 | nearest: site 7 at 0.59 nm, R1 = 7.834e-02 | farthest: site 10 at 1.20 nm, R1 = 8.630e-04
+    K5:head    +0.635 1.405 | nearest: site 8 at 0.69 nm, R1 = 4.457e-02 | farthest: site 10 at 1.45 nm, R1 = 5.834e-04
+    K6:bb      -0.035 2.338 | nearest: site 5 at 0.35 nm, R1 = 1.086e-01 | farthest: site 0 at 1.25 nm, R1 = 2.089e-03
+    K6:chain   +0.401 0.525 | nearest: site 8 at 0.59 nm, R1 = 7.816e-02 | farthest: site 0 at 1.45 nm, R1 = 7.959e-04
+    K6:head    +0.635 1.405 | nearest: site 9 at 0.69 nm, R1 = 4.456e-02 | farthest: site 0 at 1.46 nm, R1 = 5.034e-04
+    K7:bb      -0.035 2.338 | nearest: site 6 at 0.35 nm, R1 = 1.091e-01 | farthest: site 0 at 1.38 nm, R1 = 1.159e-03
+    K7:chain   +0.401 0.525 | nearest: site 9 at 0.59 nm, R1 = 7.811e-02 | farthest: site 1 at 1.45 nm, R1 = 7.963e-04
+    K7:head    +0.635 1.405 | nearest: site 10 at 0.69 nm, R1 = 4.458e-02 | farthest: site 1 at 1.46 nm, R1 = 5.037e-04
+    K8:bb      -0.035 2.338 | nearest: site 7 at 0.35 nm, R1 = 1.105e-01 | farthest: site 0 at 1.40 nm, R1 = 1.363e-03
+    K8:chain   +0.401 0.525 | nearest: site 10 at 0.59 nm, R1 = 7.812e-02 | farthest: site 2 at 1.45 nm, R1 = 7.971e-04
+    K8:head    +0.635 1.405 | nearest: site 11 at 0.69 nm, R1 = 4.464e-02 | farthest: site 2 at 1.46 nm, R1 = 5.046e-04
+    K9:bb      -0.035 2.338 | nearest: site 8 at 0.35 nm, R1 = 1.171e-01 | farthest: site 0 at 1.59 nm, R1 = 8.979e-04
+    K9:chain   +0.401 0.525 | nearest: site 11 at 0.59 nm, R1 = 7.626e-02 | farthest: site 0 at 1.68 nm, R1 = 7.595e-04
+    K9:head    +0.635 1.405 | nearest: site 5 at 0.76 nm, R1 = 1.811e-02 | farthest: site 0 at 1.81 nm, R1 = 9.650e-04
+    K10:bb     -0.035 2.338 | nearest: site 9 at 0.39 nm, R1 = 1.047e-01 | farthest: site 0 at 1.81 nm, R1 = 3.623e-04
+    K10:chain  +0.401 0.525 | nearest: site 5 at 0.66 nm, R1 = 4.804e-02 | farthest: site 0 at 1.94 nm, R1 = 1.719e-04
+    K10:head   +0.635 1.405 | nearest: site 6 at 0.76 nm, R1 = 1.805e-02 | farthest: site 0 at 2.08 nm, R1 = 1.452e-04
+    K11:bb     -0.035 2.338 | nearest: site 10 at 0.35 nm, R1 = 1.040e-01 | farthest: site 0 at 1.90 nm, R1 = 2.691e-04
+    K11:chain  +0.401 0.525 | nearest: site 6 at 0.66 nm, R1 = 4.772e-02 | farthest: site 1 at 1.94 nm, R1 = 1.708e-04
+    K11:head   +0.635 1.405 | nearest: site 7 at 0.76 nm, R1 = 1.803e-02 | farthest: site 1 at 2.08 nm, R1 = 1.451e-04
+    K12:bb     -0.035 2.338 | nearest: site 11 at 0.35 nm, R1 = 1.374e-01 | farthest: site 0 at 1.99 nm, R1 = 2.690e-04
+    K12:chain  +0.401 0.525 | nearest: site 7 at 0.66 nm, R1 = 4.723e-02 | farthest: site 0 at 1.98 nm, R1 = 3.456e-04
+    K12:head   +0.635 1.405 | nearest: site 8 at 0.76 nm, R1 = 1.798e-02 | farthest: site 2 at 2.08 nm, R1 = 1.448e-04
+    -13:bb     -0.000 1.129 | nearest: site 11 at 0.47 nm, R1 = 1.634e-01 | farthest: site 0 at 2.17 nm, R1 = 1.638e-04
+    triple 34/220 done (35574 evaluations in this run), checkpoint written, 71 s
+    triple 117/220 done (95256 evaluations in this run), checkpoint written, 132 s
+    triple 220/220 done (135240 evaluations in this run), checkpoint written, 165 s
+(B) 220 triples done; sum of M_T = 11.9422 kcal/mol; largest 0.8050 at T = (1, 2, 5)
+    by sequence span (last - first site): number | sum of M_T | mean | max   (kcal/mol)
+      span  2:  10 | 2.3916e-01 | 2.3916e-02 | 1.4979e-01
+      span  3:  18 | 3.5092e-01 | 1.9496e-02 | 7.6282e-02
+      span  4:  24 | 7.2888e+00 | 3.0370e-01 | 8.0497e-01
+      span  5:  28 | 1.8191e-01 | 6.4969e-03 | 1.4767e-02
+      span  6:  30 | 1.2282e-01 | 4.0940e-03 | 1.5305e-02
+      span  7:  30 | 3.6320e+00 | 1.2107e-01 | 5.0751e-01
+      span  8:  28 | 8.2384e-02 | 2.9423e-03 | 1.3427e-02
+      span  9:  24 | 1.1537e-02 | 4.8071e-04 | 1.0315e-03
+      span 10:  18 | 1.8390e-02 | 1.0217e-03 | 2.6280e-03
+      span 11:  10 | 1.4249e-02 | 1.4249e-03 | 5.2016e-03
+DONE in 164.7 s; peak RSS 1085 MB

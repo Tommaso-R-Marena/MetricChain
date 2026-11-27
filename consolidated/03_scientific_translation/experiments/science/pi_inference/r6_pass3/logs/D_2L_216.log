@@ -1,0 +1,26 @@
+D_2L seed 216 time 192s
+{
+ "runs": 240,
+ "harness_limit": 0,
+ "closed": 240,
+ "abort": 0,
+ "Gfail": 0,
+ "det_viol": 0,
+ "good_viol": 0,
+ "pop": 258997,
+ "neg": 475,
+ "runs_with_neg": 48,
+ "close_pop": 82,
+ "close_unpop": 158,
+ "close_tail0": 0,
+ "invalid_bracket_any": 0,
+ "maxratio": {
+  "M_over_Mbar": 0.00032524577499033357,
+  "M_over_Mdag": 3.02517479048263,
+  "lnq_over_lnCmax": 0.7188572589082186,
+  "calls_over_bound": 0.020038806001667655,
+  "used_over_cnt": 0.08775945552159206,
+  "count_ineq": 0.18615975501210263,
+  "M_over_capnew": 0.5564498056843425
+ }
+}

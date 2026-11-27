@@ -1,0 +1,7 @@
+# verbatim working copy of files of the engineering branch (read at the commit named in NOTES.md);
+# kept local on purpose: the science branch does not carry copies of another division's files
+eng_copy/
+# compiled from own_dia.c, own_flip.c, l1kern.c with gcc -O2 (see NOTES.md); binaries are not kept under version control
+own_dia
+own_flip
+l1kern.so

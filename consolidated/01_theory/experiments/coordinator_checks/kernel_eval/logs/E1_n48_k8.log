@@ -1,0 +1,16 @@
+import took 213ms
+MEASURE command: timeout 600 lean --profile experiments/coordinator_checks/kernel_eval/generated/E1_n48_k8.lean
+MEASURE wall_seconds: 78.82
+MEASURE user_seconds: 0.00
+MEASURE sys_seconds: 0.01
+MEASURE max_rss_kb: 9052
+MEASURE polled_peak_rss_kb: 5005616
+MEASURE rss_watchdog_killed: yes
+MEASURE result: killed by signal 9
+RUN file: experiments/coordinator_checks/kernel_eval/generated/E1_n48_k8.lean
+RUN bytes: 4341391
+RUN sha256: 0f6a09aeba83c4a42e3cf821fcf062486e47cf8e3dc8dd12a5b34ac8f0a41400
+RUN limits: ulimit -v 12000000 kB, rss kill 5000000 kB, timeout 600 s
+RUN lean: Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+RUN status: 137
+RUN note: generated file deleted after the run (regenerable with gen.py)

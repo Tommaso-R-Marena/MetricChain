@@ -1,0 +1,9 @@
+[07:48:19] START python3 -B p8_12_certificate.py K5 H 0.70 4 4 --variant SA --enum --force
+[07:48:29] END   (exit 0) p8_12_certificate.py K5 H 0.70 4 4 --variant SA --enum --force
+[07:48:29] START python3 -B p8_12_certificate.py K5 H 0.70 5 4 --variant SA --enum --force
+[07:48:39] END   (exit 0) p8_12_certificate.py K5 H 0.70 5 4 --variant SA --enum --force
+[07:48:39] START python3 -B p8_12_certificate.py K12 H 0.70 4 6 --variant SAb --force
+[07:49:50] END   (exit 0) p8_12_certificate.py K12 H 0.70 4 6 --variant SAb --force
+[07:49:50] START python3 -B p8_12_certificate.py K12 H 0.70 5 6 --variant SAb --force
+[07:51:09] END   (exit 0) p8_12_certificate.py K12 H 0.70 5 6 --variant SAb --force
+[07:51:09] QUEUE DONE queue_C1.txt

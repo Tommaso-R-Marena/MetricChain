@@ -1,0 +1,19 @@
+=== reach: V30 on E, tau 0.7, order m = 4: atoms 492, sites 30, states/site 3..3, |X| = 10^14.31; anchor 111111111111111111111111111111 E = -442.875087 kcal/mol; bands [8, 4, 2] [4.7s]
+      GFBatch: host site 1/30 done, 6s
+      GFBatch: host site 7/30 done, 41s
+      GFBatch: host site 13/30 done, 71s
+      GFBatch: host site 19/30 done, 95s
+      GFBatch: host site 25/30 done, 116s
+      GFBatch: host site 30/30 done, 131s
+    Gamma_4 = 4.971687e+00 kcal/mol = 8.3395 kT; pair sums: computed, 235 exclusion sets, 156.4s; pair sums available for 204 pairs; max S_i/m = 1.8926e-01, max G_ij/C(m,2) = 7.7832e-02 [156.5s]
+      ball evaluations 4096/34281  25s
+    ball of radius 3: 34281 values of g (evaluated now) [189.6s]
+    w =  8 form S: CERTIFIED ln Z(E) in [743.098881, 743.257189], width 0.158308 nats; rho_cert = 16.8273 kT; E_(pi-) u = 2.0935e-01; min m_- = -442.875097, min m_+ = -442.875072; independent estimate 743.1665 inside: True [0.4s]
+    w =  8 form B: CERTIFIED ln Z(E) in [743.165709, 743.167411], width 0.001702 nats; rho_cert = 16.8273 kT; E_(pi-) u = 1.8734e-03; min m_- = -442.875097, min m_+ = -442.875072; independent estimate 743.1665 inside: True [0.3s]
+    w =  4 form S: CERTIFIED ln Z(E) in [743.098710, 743.257523], width 0.158813 nats; rho_cert = 16.8319 kT; E_(pi-) u = 2.0988e-01; min m_- = -442.875283, min m_+ = -442.874977; independent estimate 743.1665 inside: True [0.1s]
+    w =  4 form B: CERTIFIED ln Z(E) in [743.163495, 743.169818], width 0.006323 nats; rho_cert = 16.8319 kT; E_(pi-) u = 6.5779e-03; min m_- = -442.875283, min m_+ = -442.874977; independent estimate 743.1665 inside: True [0.1s]
+    w =  2 form S: CERTIFIED ln Z(E) in [743.096727, 743.258789], width 0.162062 nats; rho_cert = 16.8993 kT; E_(pi-) u = 2.1356e-01; min m_- = -442.875700, min m_+ = -442.873884; independent estimate 743.1665 inside: True [0.1s]
+    w =  2 form B: CERTIFIED ln Z(E) in [743.143508, 743.190746], width 0.047238 nats; rho_cert = 16.8993 kT; E_(pi-) u = 5.1336e-02; min m_- = -442.875700, min m_+ = -442.873884; independent estimate 743.1665 inside: True [0.1s]
+    SAMPLED CHECK (band 8, form B): 1000 exact samples of pi_(m_-) (seed 20261126; 73 distinct; mean number of sites off the anchor 0.28), E evaluated at each [0.3s]: m_- > E: 0, m_+ < E: 0; beta(E - m_-): mean 6.530e-04, max 1.007e-01; mean beta(m_+ - m_-) = 1.318e-03
+    -> out/reach_V30_E_t0.70_gbn2_m4.json
+DONE p6_03_reach V30 E 0.7 m=4 [352s]

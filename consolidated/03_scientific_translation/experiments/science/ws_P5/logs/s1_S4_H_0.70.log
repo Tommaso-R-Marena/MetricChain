@@ -1,0 +1,78 @@
+=== s1_cancel: S4 on H, tau 0.7: atoms 56, sites 4, domain [9, 9, 6, 6] = 2916 states; anchor x0 = argmin E = (7, 7, 4, 2)
+    grouping 'residue': 6 groups; |group charge|: max 0.0000, mean 0.0000 e
+    grouping 'rigid': 10 groups; |group charge|: max 0.1567, mean 0.1254 e
+    grouping 'peptide': 15 groups; |group charge|: max 0.2711, mean 0.1638 e
+    grouping 'united': 24 groups; |group charge|: max 0.2821, mean 0.1381 e
+    5 subsets of order 3..4; rows 0..55 in blocks of 56 atoms (1 blocks)
+    block 1/1 done, 5 s
+    check: sum_pq W_pq equals P3's evaluator G.energy at all 2916 states to 1.43e-12 kcal/mol
+    exact constants done, 5 s
+    P3 bounds done, 0 s
+    inequality checks (triangle-inequality chains; P3 bound >= exact part constants and >= sum of exact term constants): 260 checks, 0 violations
+--- order 3: 4 subsets; sums over subsets of exact anchored constants (kcal/mol), and ratio to the total
+    total        sum  7.0852e-02   /total      1.00   per subset min/median/max     1.00     1.00      1.00
+    self         sum  1.0738e-02   /total      0.15   per subset min/median/max     0.08     0.09      0.18
+    cross        sum  6.1601e-02   /total      0.87   per subset min/median/max     0.82     0.96      1.04
+    grp_residue  sum  8.5101e-02   /total      1.20   per subset min/median/max     1.01     1.56      1.90
+    grp_rigid    sum  9.2393e-02   /total      1.30   per subset min/median/max     1.10     1.72      2.22
+    grp_peptide  sum  9.5461e-02   /total      1.35   per subset min/median/max     1.12     1.84      2.52
+    grp_united   sum  1.0040e-01   /total      1.42   per subset min/median/max     1.17     1.96      2.62
+    atom         sum  2.3839e-01   /total      3.36   per subset min/median/max     2.88     4.64      6.29
+    gg_residue   sum  1.1336e-01   /total      1.60   per subset min/median/max     1.17     2.46      3.50
+    gg_rigid     sum  1.4287e-01   /total      2.02   per subset min/median/max     1.50     2.98      4.89
+    gg_peptide   sum  1.5899e-01   /total      2.24   per subset min/median/max     1.61     3.53      5.72
+    gg_united    sum  1.8532e-01   /total      2.62   per subset min/median/max     1.86     4.10      6.97
+    ag_residue   sum  3.1945e-01   /total      4.51   per subset min/median/max     3.43     6.76     11.12
+    ag_rigid     sum  3.5496e-01   /total      5.01   per subset min/median/max     3.68     7.61     13.37
+    ag_peptide   sum  3.6637e-01   /total      5.17   per subset min/median/max     3.76     7.99     14.27
+    ag_united    sum  3.9047e-01   /total      5.51   per subset min/median/max     3.95     8.60     15.73
+    ggx_residue  sum  1.2116e-01   /total      1.71   per subset min/median/max     1.30     2.55      3.66
+    ggx_rigid    sum  1.6237e-01   /total      2.29   per subset min/median/max     1.79     3.23      5.16
+    ggx_peptide  sum  1.7561e-01   /total      2.48   per subset min/median/max     1.87     3.69      5.93
+    ggx_united   sum  2.0602e-01   /total      2.91   per subset min/median/max     2.15     4.37      7.28
+    agx_residue  sum  3.1678e-01   /total      4.47   per subset min/median/max     3.37     6.76     11.12
+    agx_rigid    sum  3.6231e-01   /total      5.11   per subset min/median/max     3.79     7.69     13.37
+    agx_peptide  sum  3.7199e-01   /total      5.25   per subset min/median/max     3.85     8.03     14.23
+    agx_united   sum  4.0036e-01   /total      5.65   per subset min/median/max     4.08     8.73     15.77
+    pair_self    sum  3.0250e-02   /total      0.43   per subset min/median/max     0.39     0.43      0.63
+    pair_cross   sum  7.7855e-01   /total     10.99   per subset min/median/max     7.61    17.39     37.02
+    pair         sum  8.0880e-01   /total     11.42   per subset min/median/max     8.05    17.80     37.66
+    P3_self      sum  1.3499e-01   /total      1.91   per subset min/median/max     0.82     0.96      2.44
+    P3_cross     sum  3.9974e+00   /total     56.42   per subset min/median/max    49.97    62.48    130.29
+    P3           sum  4.1323e+00   /total     58.32   per subset min/median/max    50.79    64.16    131.30
+    Gamma_3 (P3, closed form over all subsets): self 1.3499e-01 + cross 3.9974e+00 = 4.1323e+00; sum over subsets of chat_T: 4.1323e+00
+    true remainder g - I_2 g over all states: [-1.6060e-02, 4.6752e-02]
+--- order 4: 1 subsets; sums over subsets of exact anchored constants (kcal/mol), and ratio to the total
+    total        sum  1.3175e-04   /total      1.00   per subset min/median/max     1.00     1.00      1.00
+    self         sum  4.6462e-05   /total      0.35   per subset min/median/max     0.35     0.35      0.35
+    cross        sum  1.2168e-04   /total      0.92   per subset min/median/max     0.92     0.92      0.92
+    grp_residue  sum  4.0919e-04   /total      3.11   per subset min/median/max     3.11     3.11      3.11
+    grp_rigid    sum  5.0304e-04   /total      3.82   per subset min/median/max     3.82     3.82      3.82
+    grp_peptide  sum  5.1159e-04   /total      3.88   per subset min/median/max     3.88     3.88      3.88
+    grp_united   sum  5.8594e-04   /total      4.45   per subset min/median/max     4.45     4.45      4.45
+    atom         sum  1.3190e-03   /total     10.01   per subset min/median/max    10.01    10.01     10.01
+    gg_residue   sum  9.0486e-04   /total      6.87   per subset min/median/max     6.87     6.87      6.87
+    gg_rigid     sum  1.2737e-03   /total      9.67   per subset min/median/max     9.67     9.67      9.67
+    gg_peptide   sum  1.4116e-03   /total     10.71   per subset min/median/max    10.71    10.71     10.71
+    gg_united    sum  1.6575e-03   /total     12.58   per subset min/median/max    12.58    12.58     12.58
+    ag_residue   sum  2.3663e-03   /total     17.96   per subset min/median/max    17.96    17.96     17.96
+    ag_rigid     sum  2.8660e-03   /total     21.75   per subset min/median/max    21.75    21.75     21.75
+    ag_peptide   sum  2.9737e-03   /total     22.57   per subset min/median/max    22.57    22.57     22.57
+    ag_united    sum  3.2194e-03   /total     24.44   per subset min/median/max    24.44    24.44     24.44
+    ggx_residue  sum  9.4991e-04   /total      7.21   per subset min/median/max     7.21     7.21      7.21
+    ggx_rigid    sum  1.3060e-03   /total      9.91   per subset min/median/max     9.91     9.91      9.91
+    ggx_peptide  sum  1.4221e-03   /total     10.79   per subset min/median/max    10.79    10.79     10.79
+    ggx_united   sum  1.6920e-03   /total     12.84   per subset min/median/max    12.84    12.84     12.84
+    agx_residue  sum  2.3924e-03   /total     18.16   per subset min/median/max    18.16    18.16     18.16
+    agx_rigid    sum  2.8883e-03   /total     21.92   per subset min/median/max    21.92    21.92     21.92
+    agx_peptide  sum  2.9645e-03   /total     22.50   per subset min/median/max    22.50    22.50     22.50
+    agx_united   sum  3.2403e-03   /total     24.59   per subset min/median/max    24.59    24.59     24.59
+    pair_self    sum  7.9719e-05   /total      0.61   per subset min/median/max     0.61     0.61      0.61
+    pair_cross   sum  6.1409e-03   /total     46.61   per subset min/median/max    46.61    46.61     46.61
+    pair         sum  6.2206e-03   /total     47.21   per subset min/median/max    47.21    47.21     47.21
+    P3_self      sum  3.2311e-04   /total      2.45   per subset min/median/max     2.45     2.45      2.45
+    P3_cross     sum  3.8786e-02   /total    294.38   per subset min/median/max   294.38   294.38    294.38
+    P3           sum  3.9109e-02   /total    296.84   per subset min/median/max   296.84   296.84    296.84
+    Gamma_4 (P3, closed form over all subsets): self 3.2311e-04 + cross 3.8786e-02 = 3.9109e-02; sum over subsets of chat_T: 3.9109e-02
+    true remainder g - I_3 g over all states: [-7.8747e-05, 1.3175e-04]
+DONE in 5.6 s

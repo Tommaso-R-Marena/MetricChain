@@ -1,0 +1,31 @@
+X. lift isolation at n = 12 decided exactly (arithmetic modulo a 31-bit prime) against the floating-point test
+   K = 54: 200 supports (0 with dependent lifted vectors); lift-isolated: exact 1.000, floating point (tolerance 1e-7) 1.000; supports classified differently: 0; states classified differently: 0
+   K = 66: 400 supports (0 with dependent lifted vectors); lift-isolated: exact 0.978, floating point (tolerance 1e-7) 0.978; supports classified differently: 0; states classified differently: 0
+L. lift isolation, degree-2 lift
+   n = 10 (45 pair observables, lift dimension 46): K = 20: 1.000, K = 22: 1.000, K = 33: 0.960, K = 35: 0.910, K = 45: 0.537; dependent lifted vectors in 3 trials; smallest non-zero distance from the span: 8.35e-05 (tolerance used: 1e-7)
+   n = 12 (66 pair observables, lift dimension 67): K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.993, K = 66: 0.960; dependent lifted vectors in 0 trials; smallest non-zero distance from the span: 2.10e-06 (tolerance used: 1e-7)
+C. Cover's count for the points of E19(d) (not in general position)
+   n = 5, d = 1: D_odd = 4, K = 9: separable labellings minus Cover's bound 2 sum_(i<D) C(K-1,i) = 186 (of 512): at most -138; equality in 0 of 3 samples
+   n = 6, d = 1: D_odd = 5, K = 10: separable labellings minus Cover's bound 2 sum_(i<D) C(K-1,i) = 512 (of 1024): at most -406; equality in 0 of 3 samples
+   n = 6, d = 1: D_odd = 5, K = 12: separable labellings minus Cover's bound 2 sum_(i<D) C(K-1,i) = 1124 (of 4096): at most -880; equality in 0 of 3 samples
+   n = 5, d = 2: D_odd = 8, K = 10: separable labellings minus Cover's bound 2 sum_(i<D) C(K-1,i) = 1004 (of 1024): at most -876; equality in 0 of 3 samples
+   n = 6, d = 2: D_odd = 15, K = 11: separable labellings minus Cover's bound 2 sum_(i<D) C(K-1,i) = 2048 (of 2048): at most -1536; equality in 0 of 3 samples
+   n = 7, d = 1, K = 14 (D_odd = 6, K / D_odd = 2.33): labels -x_1 strictly separable in 0.085 of 400 samples; bound P(Bin(K-1, 1/2) <= D_odd - 1) = 0.291
+   n = 7, d = 1, K = 18 (D_odd = 6, K / D_odd = 3.00): labels -x_1 strictly separable in 0.007 of 400 samples; bound P(Bin(K-1, 1/2) <= D_odd - 1) = 0.072
+   n = 8, d = 1, K = 20 (D_odd = 7, K / D_odd = 2.86): labels -x_1 strictly separable in 0.013 of 300 samples; bound P(Bin(K-1, 1/2) <= D_odd - 1) = 0.084
+   n = 6, d = 2, K = 36 (D_odd = 15, K / D_odd = 2.40): labels -x_1 strictly separable in 0.000 of 200 samples; bound P(Bin(K-1, 1/2) <= D_odd - 1) = 0.155
+   n = 6, d = 2, K = 44 (D_odd = 15, K / D_odd = 2.93): labels -x_1 strictly separable in 0.000 of 200 samples; bound P(Bin(K-1, 1/2) <= D_odd - 1) = 0.016
+PASS
+P. E19(c) at n = 6: vertices of the polytope of ensembles with the same pair data
+   K = 13, flat-isolated support 1: 400 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {14: 1, 15: 54, 16: 345}  (a twin with at most K atoms would show as a vertex with <= 13 atoms)
+   K = 13, flat-isolated support 2: 400 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {14: 2, 15: 26, 16: 372}  (a twin with at most K atoms would show as a vertex with <= 13 atoms)
+   K = 13, flat-isolated support 3: 384 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {14: 37, 15: 347}  (a twin with at most K atoms would show as a vertex with <= 13 atoms)
+   K = 13, flat-isolated support 4: 396 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {14: 8, 15: 81, 16: 307}  (a twin with at most K atoms would show as a vertex with <= 13 atoms)
+   K = 14, flat-isolated support 1: 399 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {15: 121, 16: 278}  (a twin with at most K atoms would show as a vertex with <= 14 atoms)
+   K = 14, flat-isolated support 2: 400 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {15: 13, 16: 387}  (a twin with at most K atoms would show as a vertex with <= 14 atoms)
+   K = 14, flat-isolated support 3: 400 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {15: 15, 16: 385}  (a twin with at most K atoms would show as a vertex with <= 14 atoms)
+   K = 14, flat-isolated support 4: 399 of 400 random-objective vertices are not the ensemble itself; their numbers of atoms: {15: 399}  (a twin with at most K atoms would show as a vertex with <= 14 atoms)
+
+real	1m6.720s
+user	0m52.997s
+sys	0m2.087s

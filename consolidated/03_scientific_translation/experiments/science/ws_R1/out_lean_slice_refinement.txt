@@ -1,0 +1,6 @@
+'MetricChain.SliceRefinement.sum_mem_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.SliceRefinement.bracket_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.SliceRefinement.argmax_deficit_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.SliceRefinement.deficit_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MetricChain.SliceRefinement.mean_le_of_biregular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'lower_end_any' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,19 @@
+(1) finite chains: relaxed value (G=401, C=41) against the exact maximum over ALL vertices
+  n=3 p=0.4: t=0.30 qt=0.40: exact 0.091715 relaxed 0.091715 | t=0.30 qt=0.45: exact 0.097442 relaxed 0.097442 | t=0.45 qt=0.40: exact 0.105947 relaxed 0.105947 | t=0.45 qt=0.45: exact 0.114643 relaxed 0.114643 | t=0.70 qt=0.40: exact 0.086403 relaxed 0.086403 | t=0.70 qt=0.45: exact 0.096157 relaxed 0.096157
+          max_phi KL(pi||pi_phi): exact 0.4501504, relaxed 0.4501504
+  n=3 p=0.3: t=0.30 qt=0.30: exact 0.109368 relaxed 0.109368 | t=0.30 qt=0.40: exact 0.126708 relaxed 0.126708 | t=0.45 qt=0.30: exact 0.124835 relaxed 0.124835 | t=0.45 qt=0.40: exact 0.149344 relaxed 0.149344 | t=0.70 qt=0.30: exact 0.099547 relaxed 0.099547 | t=0.70 qt=0.40: exact 0.124869 relaxed 0.124869
+          max_phi KL(pi||pi_phi): exact 0.5468315, relaxed 0.5468315
+  n=3 p=0.1: t=0.30 qt=0.10: exact 0.143298 relaxed 0.143298 | t=0.30 qt=0.30: exact 0.220499 relaxed 0.220499 | t=0.45 qt=0.10: exact 0.158697 relaxed 0.158697 | t=0.45 qt=0.30: exact 0.253549 relaxed 0.253549 | t=0.70 qt=0.10: exact 0.119874 relaxed 0.119874 | t=0.70 qt=0.30: exact 0.200751 relaxed 0.200751
+          max_phi KL(pi||pi_phi): exact 0.7512749, relaxed 0.7512749
+  n=4 p=0.4: t=0.30 qt=0.40: exact 0.125752 relaxed 0.125752 | t=0.30 qt=0.45: exact 0.134709 relaxed 0.134709 | t=0.45 qt=0.40: exact 0.144977 relaxed 0.144977 | t=0.45 qt=0.45: exact 0.158656 relaxed 0.158656 | t=0.70 qt=0.40: exact 0.117796 relaxed 0.117796 | t=0.70 qt=0.45: exact 0.133184 relaxed 0.133184
+          max_phi KL(pi||pi_phi): exact 0.6191308, relaxed 0.6191308
+  n=4 p=0.3: t=0.30 qt=0.30: exact 0.153763 relaxed 0.153763 | t=0.30 qt=0.40: exact 0.181660 relaxed 0.181660 | t=0.45 qt=0.30: exact 0.174310 relaxed 0.174310 | t=0.45 qt=0.40: exact 0.214238 relaxed 0.214238 | t=0.70 qt=0.30: exact 0.137339 relaxed 0.137339 | t=0.70 qt=0.40: exact 0.178791 relaxed 0.178791
+          max_phi KL(pi||pi_phi): exact 0.7772709, relaxed 0.7772709
+  n=4 p=0.1: t=0.30 qt=0.10: exact 0.206546 relaxed 0.206546 | t=0.30 qt=0.30: exact 0.332142 relaxed 0.332142 | t=0.45 qt=0.10: exact 0.222409 relaxed 0.222409 | t=0.45 qt=0.30: exact 0.379072 relaxed 0.379072 | t=0.70 qt=0.10: exact 0.160656 relaxed 0.160656 | t=0.70 qt=0.30: exact 0.293818 relaxed 0.293818
+          max_phi KL(pi||pi_phi): exact 1.1350712, relaxed 1.1350712
+  4 s
+3.9 s
+
+real	0m4.431s
+user	0m3.981s
+sys	0m0.629s

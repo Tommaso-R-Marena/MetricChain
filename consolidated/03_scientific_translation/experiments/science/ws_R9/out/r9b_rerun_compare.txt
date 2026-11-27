@@ -1,0 +1,4 @@
+t4_head_tail.py (their code, unchanged, from the export): exit status 0, 3 s, stderr 0 bytes; output identical (cmp) to their published out_t4_head_tail.txt
+t4_lattice_index.py (their code, unchanged, from the export): exit status 0, 4 s, stderr 0 bytes; output identical (cmp) to their published out_t4_lattice_index.txt
+files left in the working directory besides this log and the two stderr files: 0
+__pycache__ directories in the export after the runs: 0

@@ -1,0 +1,60 @@
+1. Lemma R: simulated range of the angular distance after m steps vs claimed J_m
+   alpha= 25.0 (m0=8; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [  25.0,  25.0] claim [  25.0,  25.0]; m=2: sim [   0.0,  50.0] claim [   0.0,  50.0]; m=3: sim [   0.1,  75.0] claim [   0.0,  75.0]; m=4: sim [   0.1, 100.0] claim [   0.0, 100.0]; m=5: sim [   0.1, 123.7] claim [   0.0, 125.0]; m=6: sim [   0.0, 146.9] claim [   0.0, 150.0]; m=7: sim [   0.2, 169.4] claim [   0.0, 175.0]; m=8: sim [   0.1, 176.9] claim [   0.0, 180.0]; m=9: sim [   0.3, 178.5] claim [   0.0, 180.0]
+   alpha= 40.0 (m0=5; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [  40.0,  40.0] claim [  40.0,  40.0]; m=2: sim [   0.0,  80.0] claim [   0.0,  80.0]; m=3: sim [   0.0, 120.0] claim [   0.0, 120.0]; m=4: sim [   0.0, 159.9] claim [   0.0, 160.0]; m=5: sim [   0.1, 179.6] claim [   0.0, 180.0]; m=6: sim [   0.3, 179.4] claim [   0.0, 180.0]
+   alpha= 60.0 (m0=3; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [  60.0,  60.0] claim [  60.0,  60.0]; m=2: sim [   0.0, 120.0] claim [   0.0, 120.0]; m=3: sim [   0.3, 179.9] claim [   0.0, 180.0]; m=4: sim [   0.1, 179.8] claim [   0.0, 180.0]
+   alpha= 83.0 (m0=3; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [  83.0,  83.0] claim [  83.0,  83.0]; m=2: sim [   0.0, 166.0] claim [   0.0, 166.0]; m=3: sim [   0.2, 179.5] claim [   0.0, 180.0]; m=4: sim [   0.1, 179.8] claim [   0.0, 180.0]
+   alpha= 90.0 (m0=2; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [  90.0,  90.0] claim [  90.0,  90.0]; m=2: sim [   0.0, 180.0] claim [   0.0, 180.0]; m=3: sim [   0.5, 179.3] claim [   0.0, 180.0]
+   alpha= 97.0 (m0=3; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [  97.0,  97.0] claim [  97.0,  97.0]; m=2: sim [   0.0, 166.0] claim [   0.0, 166.0]; m=3: sim [   0.3, 179.1] claim [   0.0, 180.0]; m=4: sim [   0.1, 179.4] claim [   0.0, 180.0]
+   alpha=120.0 (m0=3; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [ 120.0, 120.0] claim [ 120.0, 120.0]; m=2: sim [   0.0, 120.0] claim [   0.0, 120.0]; m=3: sim [   0.0, 179.9] claim [   0.0, 180.0]; m=4: sim [   0.2, 179.8] claim [   0.0, 180.0]
+   alpha=140.0 (m0=5; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [ 140.0, 140.0] claim [ 140.0, 140.0]; m=2: sim [   0.0,  80.0] claim [   0.0,  80.0]; m=3: sim [  60.0, 179.9] claim [  60.0, 180.0]; m=4: sim [   0.2, 159.9] claim [   0.0, 160.0]; m=5: sim [   0.2, 179.8] claim [   0.0, 180.0]; m=6: sim [   0.4, 179.4] claim [   0.0, 180.0]
+   alpha=165.0 (m0=12; J_m0 = [0,pi]: True; already at m0-1: False): m=1: sim [ 165.0, 165.0] claim [ 165.0, 165.0]; m=2: sim [   0.0,  30.0] claim [   0.0,  30.0]; m=3: sim [ 135.0, 179.9] claim [ 135.0, 180.0]; m=4: sim [   0.0,  59.9] claim [   0.0,  60.0]; m=5: sim [ 105.2, 179.9] claim [ 105.0, 180.0]; m=6: sim [   0.1,  88.9] claim [   0.0,  90.0]; m=7: sim [  77.1, 179.9] claim [  75.0, 180.0]; m=8: sim [   0.1, 113.5] claim [   0.0, 120.0]; m=9: sim [  56.4, 180.0] claim [  45.0, 180.0]; m=10: sim [   0.1, 140.7] claim [   0.0, 150.0]; m=11: sim [  34.7, 179.9] claim [  15.0, 180.0]; m=12: sim [   0.2, 158.4] claim [   0.0, 180.0]; m=13: sim [  25.8, 179.9] claim [   0.0, 180.0]
+   violations of 'simulated subset of claimed': []
+   interval recursion vs closed formulas for 400 values of alpha, m <= 39: mismatches 0
+   'J_m = [0,pi] iff m >= m0': mismatches 0
+2. Theorem C(a): rank of the conic conditions at N random points of (S^2)^K
+   K=1 D_K=6: N=  5 points -> rank 5, nullity 1 (trivial quadrics: 0)
+   K=1 D_K=6: N=  6 points -> rank 6, nullity 0 (trivial quadrics: 0)
+   K=1 D_K=6: N=  9 points -> rank 6, nullity 0 (trivial quadrics: 0)
+   K=2 D_K=20: N= 19 points -> rank 19, nullity 2 (trivial quadrics: 1)
+   K=2 D_K=20: N= 20 points -> rank 20, nullity 1 (trivial quadrics: 1)
+   K=2 D_K=20: N= 23 points -> rank 20, nullity 1 (trivial quadrics: 1)
+   K=3 D_K=43: N= 42 points -> rank 42, nullity 3 (trivial quadrics: 2)
+   K=3 D_K=43: N= 43 points -> rank 43, nullity 2 (trivial quadrics: 2)
+   K=3 D_K=43: N= 46 points -> rank 43, nullity 2 (trivial quadrics: 2)
+   K=4 D_K=75: N= 74 points -> rank 74, nullity 4 (trivial quadrics: 3)
+   K=4 D_K=75: N= 75 points -> rank 75, nullity 3 (trivial quadrics: 3)
+   K=4 D_K=75: N= 78 points -> rank 75, nullity 3 (trivial quadrics: 3)
+3. Theorem C(c): chains with prescribed every m0-th bond direction; rank from those bonds alone
+   bond angle  97.0, K=1: m0=3, n = m0(D_K-1)+2 = 17; constraint violation 2.2e-16; rank from the 6 prescribed bonds = 6 (D_K = 6); rank of the full E0 system = 6
+   bond angle  97.0, K=2: m0=3, n = m0(D_K-1)+2 = 59; constraint violation 4.4e-16; rank from the 20 prescribed bonds = 20 (D_K = 20); rank of the full E0 system = 20
+   bond angle 150.0, K=1: m0=6, n = m0(D_K-1)+2 = 32; constraint violation 3.3e-16; rank from the 6 prescribed bonds = 6 (D_K = 6); rank of the full E0 system = 6
+   bond angle  40.0, K=1: m0=5, n = m0(D_K-1)+2 = 27; constraint violation 2.2e-16; rank from the 6 prescribed bonds = 6 (D_K = 6); rank of the full E0 system = 6
+   bond angle 130.0, K=2: m0=4, n = m0(D_K-1)+2 = 78; constraint violation 4.4e-16; rank from the 20 prescribed bonds = 20 (D_K = 20); rank of the full E0 system = 20
+4. Proof of Theorem G(d): is ||D(Delta)||_F <= 4 ||Delta||_F^2 ?
+   n= 6: Delta = one displaced atom: ||D(Delta)||_F / ||Delta||^2 = 3.1623 (= sqrt(2(n-1)) = 3.1623); random sparse Delta sup 3.460; bound 4 ok; max-entry norm ratio 1.0
+   n= 9: Delta = one displaced atom: ||D(Delta)||_F / ||Delta||^2 = 4.0000 (= sqrt(2(n-1)) = 4.0000); random sparse Delta sup 4.082; bound 4 VIOLATED; max-entry norm ratio 1.0
+   n=10: Delta = one displaced atom: ||D(Delta)||_F / ||Delta||^2 = 4.2426 (= sqrt(2(n-1)) = 4.2426); random sparse Delta sup 4.298; bound 4 VIOLATED; max-entry norm ratio 1.0
+   n=12: Delta = one displaced atom: ||D(Delta)||_F / ||Delta||^2 = 4.6904 (= sqrt(2(n-1)) = 4.6904); random sparse Delta sup 4.729; bound 4 VIOLATED; max-entry norm ratio 1.0
+   n=14: Delta = one displaced atom: ||D(Delta)||_F / ||Delta||^2 = 5.0990 (= sqrt(2(n-1)) = 5.0990); random sparse Delta sup 5.126; bound 4 VIOLATED; max-entry norm ratio 1.0
+   n=40: Delta = one displaced atom: ||D(Delta)||_F / ||Delta||^2 = 8.8318 (= sqrt(2(n-1)) = 8.8318); random sparse Delta sup 8.832; bound 4 VIOLATED; max-entry norm ratio 1.0
+5. Corollary 9.1: average of (g x)(g y)^T over a finite irreducible subgroup (= Haar average for a quadratic)
+   O (24 rotations, subgroup of SO(3)): max|avg - <x,y>/3 I| = 2.2e-16
+   O_h (48, subgroup of O(3)): max|avg - <x,y>/3 I| = 3.3e-16
+   Monte Carlo Haar SO(3), 2e5 samples: max|avg - <x,y>/3 I| = 1.7e-03
+   (second moments are invariant under an independent reflection of each state: for SO(3) data the
+    handedness of the states is NOT determined by the second moment)
+6. Theorem F' hypothesis: smallest singular value over all windows of 3K+1 consecutive stacked points
+   K=2, n=14: min over 20 random ensembles and all windows of sigma_min/sigma_max = 1.16e-05 (> 0: hypothesis holds)
+   K=3, n=25: min over 20 random ensembles and all windows of sigma_min/sigma_max = 6.33e-06 (> 0: hypothesis holds)
+   K=4, n=40: min over 20 random ensembles and all windows of sigma_min/sigma_max = 3.84e-06 (> 0: hypothesis holds)
+   K=2, n=14, all states helices: min sigma_min over windows = 9.2e-18; dim N(z) = 7 (trivial would be 1)
+   K=3, n=25, all states helices: min sigma_min over windows = 1.9e-17; dim N(z) = 19 (trivial would be 2)
+7. Theorem G(d) bracket: Jacobian of (torsions, weights) -> M at (CC) points
+   n=12 seed=0: Jacobian (45, 19), singular values max 35.552 min 0.3771 -> rank 19 of 19
+   n=12 seed=1: Jacobian (45, 19), singular values max 20.006 min 0.6139 -> rank 19 of 19
+   n=13 seed=0: Jacobian (55, 21), singular values max 46.110 min 0.6336 -> rank 21 of 21
+   n=14 seed=0: Jacobian (66, 23), singular values max 56.548 min 0.5307 -> rank 23 of 23
+
+real	0m5.793s
+user	0m5.383s
+sys	0m0.306s

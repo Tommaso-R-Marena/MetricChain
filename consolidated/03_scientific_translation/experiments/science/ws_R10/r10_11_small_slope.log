@@ -1,0 +1,47 @@
+1. binary symmetric chain: V_n = max over ALL vertices of Var_pi(f) (unit slope)
+   p=0.4 n=3: V_n = 0.970000 (maximiser additive: True, signs [-1, -1, -1]);  (1/4)Var(m) = 0.970000;  (1/4)Var(m_stag) = 0.570000;  V_n/(n/4) = 1.2933;  chi=(1+|lam|)/(1-|lam|) = 1.5000
+   p=0.4 n=4: V_n = 1.344000 (maximiser additive: True, signs [-1, -1, -1, -1]);  (1/4)Var(m) = 1.344000;  (1/4)Var(m_stag) = 0.736000;  V_n/(n/4) = 1.3440;  chi=(1+|lam|)/(1-|lam|) = 1.5000
+   p=0.4 n=5: V_n = 1.718800 (maximiser additive: True, signs [-1, -1, -1, -1, -1]);  (1/4)Var(m) = 1.718800;  (1/4)Var(m_stag) = 0.902800;  V_n/(n/4) = 1.3750;  chi=(1+|lam|)/(1-|lam|) = 1.5000
+   p=0.3 n=3: V_n = 1.230000 (maximiser additive: True, signs [-1, -1, -1]);  (1/4)Var(m) = 1.230000;  (1/4)Var(m_stag) = 0.430000;  V_n/(n/4) = 1.6400;  chi=(1+|lam|)/(1-|lam|) = 2.3333
+   p=0.3 n=4: V_n = 1.792000 (maximiser additive: True, signs [-1, -1, -1, -1]);  (1/4)Var(m) = 1.792000;  (1/4)Var(m_stag) = 0.528000;  V_n/(n/4) = 1.7920;  chi=(1+|lam|)/(1-|lam|) = 2.3333
+   p=0.3 n=5: V_n = 2.366800 (maximiser additive: True, signs [-1, -1, -1, -1, -1]);  (1/4)Var(m) = 2.366800;  (1/4)Var(m_stag) = 0.638800;  V_n/(n/4) = 1.8934;  chi=(1+|lam|)/(1-|lam|) = 2.3333
+   p=0.1 n=3: V_n = 1.870000 (maximiser additive: True, signs [-1, -1, -1]);  (1/4)Var(m) = 1.870000;  (1/4)Var(m_stag) = 0.270000;  V_n/(n/4) = 2.4933;  chi=(1+|lam|)/(1-|lam|) = 9.0000
+   p=0.1 n=4: V_n = 3.096000 (maximiser additive: True, signs [-1, -1, -1, -1]);  (1/4)Var(m) = 3.096000;  (1/4)Var(m_stag) = 0.184000;  V_n/(n/4) = 3.0960;  chi=(1+|lam|)/(1-|lam|) = 9.0000
+   p=0.1 n=5: V_n = 4.526800 (maximiser additive: True, signs [-1, -1, -1, -1, -1]);  (1/4)Var(m) = 4.526800;  (1/4)Var(m_stag) = 0.302800;  V_n/(n/4) = 3.6214;  chi=(1+|lam|)/(1-|lam|) = 9.0000
+   p=0.7 n=3: V_n = 1.230000 (maximiser additive: True, signs [-1, 1, -1]);  (1/4)Var(m) = 0.430000;  (1/4)Var(m_stag) = 1.230000;  V_n/(n/4) = 1.6400;  chi=(1+|lam|)/(1-|lam|) = 2.3333
+   p=0.7 n=4: V_n = 1.792000 (maximiser additive: True, signs [-1, 1, -1, 1]);  (1/4)Var(m) = 0.528000;  (1/4)Var(m_stag) = 1.792000;  V_n/(n/4) = 1.7920;  chi=(1+|lam|)/(1-|lam|) = 2.3333
+   p=0.7 n=5: V_n = 2.366800 (maximiser additive: True, signs [-1, 1, -1, 1, -1]);  (1/4)Var(m) = 0.638800;  (1/4)Var(m_stag) = 2.366800;  V_n/(n/4) = 1.8934;  chi=(1+|lam|)/(1-|lam|) = 2.3333
+   convergence of F*_4(t;u) / (u^2 t(1-t)/2) to V_4 (all 990 vertices):
+      p=0.3 t=0.3: u=0.40: 1.71682  u=0.20: 1.77254  u=0.10: 1.78709  u=0.05: 1.79077   -> V_4 = 1.79200
+      p=0.3 t=0.6: u=0.40: 1.66375  u=0.20: 1.75847  u=0.10: 1.78352  u=0.05: 1.78987   -> V_4 = 1.79200
+      p=0.7 t=0.3: u=0.40: 1.71682  u=0.20: 1.77254  u=0.10: 1.78709  u=0.05: 1.79077   -> V_4 = 1.79200
+      p=0.7 t=0.6: u=0.40: 1.66375  u=0.20: 1.75847  u=0.10: 1.78352  u=0.05: 1.78987   -> V_4 = 1.79200
+2. frustrated binary chain  pi ~ exp(J1 sum s_i s_{i+1} + J2 sum s_i s_{i+2}),  n = 5, all 395094 vertices
+   J1=+0.5 J2=+0.0: V_5 = 2.616051 (maximiser additive: True);  best site-wise label 2.616051 (signs [1, 1, 1, 1, 1]);  zero wave vector (1/4)Var(m) = 2.616051;  product measure n/4 = 1.2500
+   J1=+0.5 J2=-0.5: V_5 = 1.962027 (maximiser additive: True);  best site-wise label 1.962027 (signs [-1, -1, 1, 1, 1]);  zero wave vector (1/4)Var(m) = 1.013967;  product measure n/4 = 1.2500
+   J1=+0.3 J2=-0.8: V_5 = 2.390469 (maximiser additive: True);  best site-wise label 2.390469 (signs [1, 1, -1, -1, 1]);  zero wave vector (1/4)Var(m) = 0.530399;  product measure n/4 = 1.2500
+   J1=-0.4 J2=-0.6: V_5 = 2.041870 (maximiser additive: True);  best site-wise label 2.041870 (signs [1, -1, -1, 1, 1]);  zero wave vector (1/4)Var(m) = 0.481296;  product measure n/4 = 1.2500
+3. three-letter Potts chain  pi ~ exp(J sum 1[x_i = x_{i+1}]),  Hamming envelope, unit slope
+   n=2: 763 integer Lipschitz functions of H(2,3)  (0.0s)
+      J=+0.0: V_n = 0.444444;  Var(N_a) = 0.444444 (formula (2/9) sum lam2^|i-j| = 0.444444);  best site-wise label 0.444444;  product measure n*2/9 = 0.4444;  V_n/(n 2/9) = 1.0000;  (1+lam2)/(1-lam2) = 1.0000
+      J=+0.7: V_n = 0.556698;  Var(N_a) = 0.556698 (formula (2/9) sum lam2^|i-j| = 0.556698);  best site-wise label 0.556698;  product measure n*2/9 = 0.4444;  V_n/(n 2/9) = 1.2526;  (1+lam2)/(1-lam2) = 1.6758
+      J=+1.5: V_n = 0.683181;  Var(N_a) = 0.683181 (formula (2/9) sum lam2^|i-j| = 0.683181);  best site-wise label 0.683181;  product measure n*2/9 = 0.4444;  V_n/(n 2/9) = 1.5372;  (1+lam2)/(1-lam2) = 3.3211
+      J=-1.0: V_n = 0.563092;  Var(N_a) = 0.325797 (formula (2/9) sum lam2^|i-j| = 0.325797);  best site-wise label 0.563092;  product measure n*2/9 = 0.4444;  V_n/(n 2/9) = 1.2670;  (1+lam2)/(1-lam2) = 0.5786
+      n=2, J=0.7: 534 vertices; F*(0.4;u)/(u^2 t(1-t)/2): u=0.40: 0.59698  u=0.20: 0.57909  u=0.10: 0.56839  u=0.05: 0.56267  -> V = 0.55670
+4. helix-coil chain (Zimm-Bragg weights: coil 1, helix after helix s, helix after coil sigma*s), n = 5, all vertices
+   s=1.0 sigma=1e-02: helicity 0.062; V_5 = 0.828185 (maximiser additive: True, signs [1, 1, 1, 1, 1]);  Var(N_helix) = 0.828185;  bulk factor (1+r)/(1-r) = 10.0  (1/sqrt(sigma) = 10.0)
+   s=1.0 sigma=1e-03: helicity 0.007; V_5 = 0.102379 (maximiser additive: True, signs [1, 1, 1, 1, 1]);  Var(N_helix) = 0.102379;  bulk factor (1+r)/(1-r) = 31.6  (1/sqrt(sigma) = 31.6)
+   s=1.3 sigma=1e-03: helicity 0.016; V_5 = 0.263237 (maximiser additive: True, signs [1, 1, 1, 1, 1]);  Var(N_helix) = 0.263237;  bulk factor (1+r)/(1-r) = 7.5  (1/sqrt(sigma) = 31.6)
+   s=0.7 sigma=1e-02: helicity 0.025; V_5 = 0.291291 (maximiser additive: True, signs [1, 1, 1, 1, 1]);  Var(N_helix) = 0.291291;  bulk factor (1+r)/(1-r) = 4.9  (1/sqrt(sigma) = 10.0)
+3b. Potts chain, n = 3 and 4: V_n by LP ascent (successive linearisation of the variance over the Lipschitz polytope; local maxima, 40 starts) -- a LOWER estimate of V_n
+   n=3 J=+0.7: best local maximum of the variance 0.919525;  Var(N_a) = 0.919525;  ratio to the product measure (n 2/9): 1.3793;  finite-n structure-factor sum 1.3793;  bulk (1+lam2)/(1-lam2) = 1.6758
+   n=3 J=+1.5: best local maximum of the variance 1.272379;  Var(N_a) = 1.272379;  ratio to the product measure (n 2/9): 1.9086;  finite-n structure-factor sum 1.9086;  bulk (1+lam2)/(1-lam2) = 3.3211
+   n=3 J=-1.0: best local maximum of the variance 0.935635;  Var(N_a) = 0.461046;  ratio to the product measure (n 2/9): 1.4035;  finite-n structure-factor sum 0.6916;  bulk (1+lam2)/(1-lam2) = 0.5786
+   n=4 J=+0.7: best local maximum of the variance 1.289513;  Var(N_a) = 1.289513;  ratio to the product measure (n 2/9): 1.4507;  finite-n structure-factor sum 1.4507;  bulk (1+lam2)/(1-lam2) = 1.6758
+   n=4 J=+1.5: best local maximum of the variance 1.930462;  Var(N_a) = 1.930462;  ratio to the product measure (n 2/9): 2.1718;  finite-n structure-factor sum 2.1718;  bulk (1+lam2)/(1-lam2) = 3.3211
+   n=4 J=-1.0: best local maximum of the variance 1.316634;  Var(N_a) = 0.587839;  ratio to the product measure (n 2/9): 1.4812;  finite-n structure-factor sum 0.6613;  bulk (1+lam2)/(1-lam2) = 0.5786
+time 65s
+
+real	1m5.554s
+user	0m51.014s
+sys	0m0.916s

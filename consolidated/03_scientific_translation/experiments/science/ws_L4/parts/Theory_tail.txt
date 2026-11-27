@@ -1,0 +1,44 @@
+/-! ## The headline theorems with every name of the theory division written out
+
+Each statement below is closed by the corresponding theorem of Parts 1–6 as it stands, so the
+kernel has checked that those theorems are statements about `MetricChain.mixedDiff`,
+`MetricChain.supp`, `MetricChain.anchoredInterp` and `MetricChain.HigherDiffBound`. -/
+
+namespace ScienceL4
+
+open Finset
+
+/-- **Proposition 1** for the theory division's `mixedDiff` and `anchoredInterp`
+(`ScienceL4.switchedBase x₀ y T i = if ∀ t ∈ T, i < t then y i else x₀ i`). -/
+theorem remainder_identity_theory {ι : Type*} {σ : ι → Type*} [Fintype ι] [LinearOrder ι]
+    [DecidableEq ι] [∀ i, DecidableEq (σ i)] (m : ℕ) (g : (∀ i, σ i) → ℝ) (x₀ y : ∀ i, σ i) :
+    g y - MetricChain.anchoredInterp m g x₀ y =
+      ∑ T ∈ (MetricChain.supp x₀ y).powersetCard m,
+        MetricChain.mixedDiff g (ScienceL4.switchedBase x₀ y T) T y :=
+  remainder_identity m g x₀ y
+
+/-- The theory division's Theorem 11.18 — literally the statement of
+`MetricChain.higherOrder_remainder`, with no order on the sites — obtained from the identity. -/
+theorem higherOrder_remainder_of_identity {ι : Type*} {σ : ι → Type*} [Fintype ι]
+    [DecidableEq ι] [∀ i, DecidableEq (σ i)] (m : ℕ) (g : (∀ i, σ i) → ℝ)
+    (c : Finset ι → ℝ) (hg : MetricChain.HigherDiffBound m g c) (x₀ y : ∀ i, σ i) :
+    |g y - MetricChain.anchoredInterp m g x₀ y| ≤
+      ∑ T ∈ (MetricChain.supp x₀ y).powersetCard m, c T :=
+  abs_remainder_le_of_anchored_unordered m g c x₀ (anchoredDiffBound_of_class hg x₀) y
+
+/-- **The sandwich** for the theory division's declarations, with the anchored hypothesis and the
+site penalties written out; no order on the sites. -/
+theorem anchored_sandwich_theory {ι : Type*} {σ : ι → Type*} [Fintype ι]
+    [DecidableEq ι] [∀ i, DecidableEq (σ i)] {m : ℕ} (hm : 1 ≤ m) (g : (∀ i, σ i) → ℝ)
+    (c : Finset ι → ℝ) (x₀ : ∀ i, σ i)
+    (hg : ∀ (z b : ∀ i, σ i) (T : Finset ι), T.card = m → (∀ i ∈ T, z i = x₀ i) →
+      |MetricChain.mixedDiff g z T b| ≤ c T) (y : ∀ i, σ i) :
+    MetricChain.anchoredInterp m g x₀ y - ∑ i ∈ MetricChain.supp x₀ y,
+        (1 / (m : ℝ)) * ∑ T ∈ ((univ : Finset ι).powersetCard m).filter (fun T => i ∈ T), c T ≤
+        g y ∧
+      g y ≤ MetricChain.anchoredInterp m g x₀ y + ∑ i ∈ MetricChain.supp x₀ y,
+        (1 / (m : ℝ)) * ∑ T ∈ ((univ : Finset ι).powersetCard m).filter (fun T => i ∈ T), c T :=
+  anchored_sandwich_unordered hm g c x₀ hg y
+
+end ScienceL4
+

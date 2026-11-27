@@ -1,0 +1,10 @@
+N=4: 3 walks, 2 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=5: 9 walks, 4 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=6: 27 walks, 7 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=7: 79 walks, 13 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=8: 233 walks, 22 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=9: 683 walks, 37 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=10: 2005 walks, 57 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=11: 5849 walks, 90 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+N=12: 17107 walks, 129 classes: Lemma 11.67 (1),(2) hold for every walk; gauche rule (index==distance) holds; class table == r2_enum.c: True
+random finite site sets (box of 171 sites, 1..40 sites): local formulas hold on 3000/3000

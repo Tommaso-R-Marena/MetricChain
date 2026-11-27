@@ -1,0 +1,7 @@
+# enum mode=bridge n_beads=6 leaves=24 classes=5
+# columns: h3 h8 h11 count gmin gmax gmask
+0 0 0 2 0 0 1
+0 0 1 8 1 1 2
+0 0 2 10 2 2 4
+0 1 2 2 2 2 4
+0 0 3 2 3 3 8

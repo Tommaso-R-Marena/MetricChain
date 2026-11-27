@@ -1,0 +1,12 @@
+=== p9_03_tables K5 on H, tau 0.7, order 5, window 3; started 2026-11-26 11:06:52 UTC
+    122 atoms, 5 sites, states per site [14, 14, 12, 7, 7], anchor [10, 10, 8, 3, 3]; 1 subsets of order 5, 1 in this run; sum over them of the number of states of T: 6.692e+04
+    subset 1/1 done, 1 s (0.88 s per subset), RSS now 152 MB
+    stage 2 > stage 1 at 0 table entries (must be 0)
+--- 1 subsets of order 5.  Gamma_5 in kT:  P8's Sb 0.0401662, P8's SAb 0.0401662 | stage 1: joint maximum 0.0385086, median over the states 0.0229719, minimum 0.0187899 | stage 2: joint maximum 0.0129953, median 8.48629e-05, minimum 9.47025e-09
+    stage 1: joint maximum / SAb per subset: min 0.959, median 0.959, max 0.9587; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 1.791e-06 kT; window form: 1 tables, sub-tuples kept by size: 4: 1
+    stage 2: joint maximum / SAb per subset: min 0.324, median 0.324, max 0.3235; sum over the subsets of E_prod[Theta_T; T off the anchor] (product of the one-site marginals of the guiding sample): 8.655e-09 kT; window form: 1 tables, sub-tuples kept by size: 4: 1
+    my recorded 'SAb' constants against P8's stored per-subset values (ws_P8/out/bc_K5_H_0.70.json): largest relative deviation 0.0e+00
+    Gibbs sample 777 (960 states): mean of beta x envelope: stage 1 0, stage 2 0; largest: 0, 0; states with a non-zero envelope: 0
+    Gibbs sample 4242 (960 states): mean of beta x envelope: stage 1 0, stage 2 0; largest: 0, 0; states with a non-zero envelope: 0
+foreign writes attempted during import (refused): 0
+ALL DONE 3 s; peak RSS 151 MB

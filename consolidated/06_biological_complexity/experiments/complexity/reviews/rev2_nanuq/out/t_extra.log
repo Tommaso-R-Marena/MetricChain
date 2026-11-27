@@ -1,0 +1,88 @@
+bloblet version
+   N(1,1): n=6 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=1 #negative alphas (planar order)=0 min alpha=0 | Kalmanson orders: 1 of 60
+   N(1,2): n=7 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-1 #negative alphas (planar order)=1 min alpha=-1 | Kalmanson orders: 0 of 360
+   N(2,1): n=7 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-1 #negative alphas (planar order)=1 min alpha=-1 | Kalmanson orders: 0 of 360
+   N(2,2): n=8 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-4 #negative alphas (planar order)=1 min alpha=-4 | Kalmanson orders: 0 of 2520
+   N(1,3): n=8 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-4 #negative alphas (planar order)=1 min alpha=-4 | Kalmanson orders: 0 of 2520
+   N(3,1): n=8 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-4 #negative alphas (planar order)=1 min alpha=-4 | Kalmanson orders: 0 of 2520
+   N(2,3): n=9 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-8 #negative alphas (planar order)=1 min alpha=-8
+   N(3,2): n=9 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-8 #negative alphas (planar order)=1 min alpha=-8
+   N(3,3): n=10 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-13 #negative alphas (planar order)=1 min alpha=-13
+   N(4,4): n=12 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-26 #negative alphas (planar order)=1 min alpha=-26
+   N(2,5): n=11 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=-19 #negative alphas (planar order)=1 min alpha=-19
+clade version
+   N(1,1): n=6 level=2 bloblet=True galled=False OLP=True alpha(xy|rest)=1 #negative alphas (planar order)=0 min alpha=0 | Kalmanson orders: 1 of 60
+   N(1,2): n=7 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=0 #negative alphas (planar order)=0 min alpha=0 | Kalmanson orders: 2 of 360
+   N(2,1): n=7 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=0 #negative alphas (planar order)=0 min alpha=0 | Kalmanson orders: 2 of 360
+   N(2,2): n=8 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-2 #negative alphas (planar order)=1 min alpha=-2 | Kalmanson orders: 0 of 2520
+   N(1,3): n=8 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-1 #negative alphas (planar order)=1 min alpha=-1 | Kalmanson orders: 0 of 2520
+   N(3,1): n=8 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-1 #negative alphas (planar order)=1 min alpha=-1 | Kalmanson orders: 0 of 2520
+   N(2,3): n=9 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-4 #negative alphas (planar order)=1 min alpha=-4
+   N(3,2): n=9 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-4 #negative alphas (planar order)=1 min alpha=-4
+   N(3,3): n=10 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-7 #negative alphas (planar order)=1 min alpha=-7
+   N(4,4): n=12 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-14 #negative alphas (planar order)=1 min alpha=-14
+   N(2,5): n=11 level=2 bloblet=False galled=False OLP=True alpha(xy|rest)=-8 #negative alphas (planar order)=1 min alpha=-8
+listed blow-ups (from the author's characterize6.py output), recomputed:
+   missing [(4, 5)]: 6-point system 'ok', 6-locally good: False; blow-up (1, 1, 1, 1, 1, 2) (n=7) -> 'support' {(0, 2): '0'}
+   missing [(1, 2)]: 6-point system 'ok', 6-locally good: False; blow-up (1, 1, 2, 1, 1, 1) (n=7) -> 'support' {(4, 6): '0'}
+   missing [(2, 3), (4, 5)]: 6-point system 'ok', 6-locally good: False; blow-up (1, 1, 1, 1, 1, 3) (n=8) -> 'support' {(0, 2): '0'}
+   missing [(2, 3, 4, 5), (4, 5)]: 6-point system 'ok', 6-locally good: False; blow-up (1, 1, 1, 1, 2, 2) (n=8) -> 'support' {(0, 2): '0'}
+   missing [(2, 3), (2, 3, 4, 5), (4, 5)]: 6-point system 'ok', 6-locally good: False; blow-up (1, 1, 1, 1, 3, 3) (n=10) -> 'neg' {(0, 2): '-1'}
+   missing [(1, 2), (1, 2, 3, 4), (3, 4)]: 6-point system 'ok', 6-locally good: False; blow-up (1, 1, 1, 3, 3, 1) (n=10) -> 'neg' {(1, 9): '-1'}
+own search: smallest failing blow-up (mult in {1,2,3}^6, total <= 10) for each of the 14 systems:
+   missing [(3, 4)] -> ((1, 1, 1, 1, 2, 1), 'support')
+   missing [(4, 5)] -> ((1, 1, 1, 1, 1, 2), 'support')
+   missing [(2, 3), (4, 5)] -> ((1, 1, 1, 1, 1, 3), 'support')
+   missing [(2, 3), (2, 3, 4, 5)] -> ((1, 1, 1, 3, 1, 1), 'support')
+   missing [(1, 2), (1, 2, 3, 4), (3, 4)] -> ((1, 1, 1, 3, 3, 1), 'neg')
+   missing [(1, 2), (3, 4)] -> ((1, 1, 1, 1, 3, 1), 'support')
+   missing [(2, 3, 4, 5)] -> ((1, 2, 1, 1, 1, 1), 'support')
+   missing [(1, 2, 3, 4)] -> ((1, 1, 1, 1, 1, 2), 'support')
+   missing [(2, 3)] -> ((1, 1, 1, 2, 1, 1), 'support')
+   missing [(2, 3, 4, 5), (4, 5)] -> ((1, 1, 1, 1, 2, 2), 'support')
+   missing [(1, 2), (1, 2, 3, 4)] -> ((1, 1, 1, 1, 1, 3), 'support')
+   missing [(1, 2, 3, 4), (3, 4)] -> ((1, 1, 1, 2, 2, 1), 'support')
+   missing [(2, 3), (2, 3, 4, 5), (4, 5)] -> ((1, 1, 1, 1, 3, 3), 'neg')
+   missing [(1, 2)] -> ((1, 1, 2, 1, 1, 1), 'support')
+systems treated: 14
+(A) local terms of alpha({x,y}|rest) in N(s,t)
+   bloblet N(1,2): alpha/2=-1/2  Phi4=1  Phi5 terms=['0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '-1/2'): 1, ('ad', '-1/2'): 2}
+   bloblet N(2,2): alpha/2=-2  Phi4=1  Phi5 terms=['0', '0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '-1/2'): 1, ('ad', '-1/2'): 4, ('dd', '-1/2'): 1}
+   bloblet N(3,3): alpha/2=-13/2  Phi4=1  Phi5 terms=['0', '0', '0', '0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '-1/2'): 3, ('ad', '-1/2'): 9, ('dd', '-1/2'): 3}
+   bloblet N(2,4): alpha/2=-13/2  Phi4=1  Phi5 terms=['0', '0', '0', '0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '-1/2'): 6, ('ad', '-1/2'): 8, ('dd', '-1/2'): 1}
+   clade   N(1,2): alpha/2=0  Phi4=1  Phi5 terms=['0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '0'): 1, ('ad', '-1/2'): 2}
+   clade   N(2,2): alpha/2=-1  Phi4=1  Phi5 terms=['0', '0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '0'): 1, ('ad', '-1/2'): 4, ('dd', '0'): 1}
+   clade   N(3,3): alpha/2=-7/2  Phi4=1  Phi5 terms=['0', '0', '0', '0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '0'): 3, ('ad', '-1/2'): 9, ('dd', '0'): 3}
+   clade   N(2,4): alpha/2=-3  Phi4=1  Phi5 terms=['0', '0', '0', '0', '0', '0']  Phi6 terms by leaf types (a/d): {('aa', '0'): 6, ('ad', '-1/2'): 8, ('dd', '0'): 1}
+(B) Chepoi-Fichet identity and Lemma 1 on random outer-labeled planar networks
+   networks (galled or not) on which d_N = d_Sigma and d = 1/2 sum alpha delta: 320
+(C) random iterated substitutions
+    {(10, 'ok'): 392, (11, 'ok'): 205, (12, 'ok'): 91, (13, 'ok'): 31, (7, 'ok'): 135, (8, 'ok'): 264, (9, 'ok'): 382}
+(D) blow-ups with a NEGATIVE weight for the 23 excluded six-point systems (mult in {1,2,3}^6, total <= 11)
+    missing [(3, 4)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 1, 3, 1), 'neg')
+    missing [(4, 5)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 1, 1, 3), 'neg')
+    missing [(2, 3), (4, 5)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 1, 2, 3), 'neg')
+    missing [(1, 2), (2, 3, 4)] | six-point status: support | smallest blow-up with a negative weight: None
+    missing [(2, 3, 4, 5), (3, 4)] | six-point status: neg | smallest blow-up with a negative weight: ((1, 1, 1, 1, 1, 1), 'neg')
+    missing [(2, 3), (3, 4, 5)] | six-point status: support | smallest blow-up with a negative weight: None
+    missing [(2, 3, 4), (4, 5)] | six-point status: support | smallest blow-up with a negative weight: None
+    missing [(2, 3), (2, 3, 4, 5)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 2, 3, 1, 1), 'neg')
+    missing [(1, 2, 3), (3, 4)] | six-point status: support | smallest blow-up with a negative weight: None
+    missing [(1, 2, 3, 4), (3, 4, 5)] | six-point status: support | smallest blow-up with a negative weight: None
+    missing [(1, 2), (1, 2, 3, 4), (3, 4)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 3, 3, 1), 'neg')
+    missing [(1, 2, 3, 4), (2, 3)] | six-point status: neg | smallest blow-up with a negative weight: ((1, 1, 1, 1, 1, 1), 'neg')
+    missing [(1, 2), (3, 4)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 2, 3, 1), 'neg')
+    missing [(2, 3, 4, 5)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 3, 1, 1, 1, 1), 'neg')
+    missing [(1, 2, 3, 4)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 1, 1, 3), 'neg')
+    missing [(2, 3)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 3, 1, 1), 'neg')
+    missing [(2, 3, 4, 5), (4, 5)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 1, 2, 3), 'neg')
+    missing [(1, 2), (1, 2, 3, 4)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 2, 3, 1, 1, 1), 'neg')
+    missing [(1, 2, 3, 4), (3, 4)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 2, 3, 1), 'neg')
+    missing [(1, 2), (4, 5)] | six-point status: neg | smallest blow-up with a negative weight: ((1, 1, 1, 1, 1, 1), 'neg')
+    missing [(2, 3), (2, 3, 4, 5), (4, 5)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 1, 1, 3, 3), 'neg')
+    missing [(1, 2, 3), (2, 3, 4, 5)] | six-point status: support | smallest blow-up with a negative weight: None
+    missing [(1, 2)] | six-point status: ok | smallest blow-up with a negative weight: ((1, 1, 3, 1, 1, 1), 'neg')
+
+real	0m24.387s
+user	0m23.998s
+sys	0m0.056s

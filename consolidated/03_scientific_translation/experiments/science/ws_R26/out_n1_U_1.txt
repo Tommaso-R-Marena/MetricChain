@@ -1,0 +1,29 @@
+r26_n1.py block U runs 6; started 2026-11-26T22:36:14Z
+seeds: run r of cell c uses default_rng(3000000 + 1000*c + r), r < 6
+ Gauss line, V = e^(L x), L = 1.5: A = 3.0802, ell0 = 0.4116, u0 = 5.7489; (TU), (TL) on 400 levels: largest excess over equality 3.6e-13
+   standard: theta = 1.0, eta' = 1.0, nu1 = 1.00: pi* = 1.331e-02, J = 9, K = 184, Mbar = 7.75e+06; runs 6; violations 0; Chernoff failed 0; levels left populated 24, NEGLIGIBLE 0; highest closing level 4 (J = 9); largest sample 11776
+   small theta: theta = 0.5, eta' = 1.0, nu1 = 1.00: pi* = 3.151e-05, J = 15, K = 200, Mbar = 5.69e+09; runs 6; violations 0; Chernoff failed 0; levels left populated 30, NEGLIGIBLE 0; highest closing level 5 (J = 15); largest sample 25600
+   large eta' (nu0 small: negligible levels): theta = 1.0, eta' = 60.0, nu1 = 1.00: pi* = 1.331e-02, J = 9, K = 179, Mbar = 4.39e+05; runs 6; violations 0; Chernoff failed 0; levels left populated 24, NEGLIGIBLE 2; highest closing level 5 (J = 9); largest sample 22912
+   large eta', small theta: theta = 0.3, eta' = 200.0, nu1 = 1.00: pi* = 3.525e-10, J = 27, K = 217, Mbar = 2.01e+13; runs 3; violations 0; Chernoff failed 0; levels left populated 12, NEGLIGIBLE 18; highest closing level 10 (J = 27); largest sample 3555328
+ Gauss line, V = e^(L x), L = 2.5: A = 22.7599, ell0 = 0.2827, u0 = 45.2371; (TU), (TL) on 400 levels: largest excess over equality 5.7e-13
+   standard: theta = 1.0, eta' = 1.0, nu1 = 1.00: pi* = 3.965e-06, J = 20, K = 208, Mbar = 6.17e+10; runs 6; violations 0; Chernoff failed 0; levels left populated 54, NEGLIGIBLE 0; highest closing level 9 (J = 20); largest sample 212992
+   small theta: theta = 0.5, eta' = 1.0, nu1 = 1.00: pi* = 3.519e-13, J = 36, K = 229, Mbar = 1.35e+18; runs 6; violations 0; Chernoff failed 0; levels left populated 60, NEGLIGIBLE 0; highest closing level 10 (J = 36); largest sample 937984
+   large eta' (nu0 small: negligible levels): theta = 1.0, eta' = 60.0, nu1 = 1.00: pi* = 3.965e-06, J = 20, K = 204, Mbar = 1.68e+09; runs 6; violations 0; Chernoff failed 0; levels left populated 54, NEGLIGIBLE 12; highest closing level 11 (J = 20); largest sample 835584
+   large eta', small theta: theta = 0.3, eta' = 200.0, nu1 = 1.00: pi* = 1.104e-26, J = 67, K = 249, Mbar = 7.35e+29; runs 0; violations 0; Chernoff failed 0; levels left populated 0, NEGLIGIBLE 0; highest closing level 0 (J = 67); largest sample 0
+ Laplace line, V = e^(u x), u = 0.5 (Pareto index 2.00): A = 1.3333, ell0 = 0.6667, u0 = 2.0000; (TU), (TL) on 400 levels: largest excess over equality 4.6e-12
+   standard: theta = 1.0, eta' = 1.0, nu1 = 1.05: pi* = 5.950e-01, J = 4, K = 162, Mbar = 7.63e+04; runs 6; violations 0; Chernoff failed 0; levels left populated 6, NEGLIGIBLE 0; highest closing level 1 (J = 4); largest sample 648
+   small theta: theta = 0.5, eta' = 1.0, nu1 = 2.10: pi* = 2.111e-01, J = 5, K = 169, Mbar = 2.69e+05; runs 6; violations 0; Chernoff failed 0; levels left populated 12, NEGLIGIBLE 0; highest closing level 2 (J = 5); largest sample 5408
+   large eta' (nu0 small: negligible levels): theta = 1.0, eta' = 60.0, nu1 = 1.05: pi* = 5.950e-01, J = 4, K = 156, Mbar = 8.98e+03; runs 6; violations 0; Chernoff failed 0; levels left populated 6, NEGLIGIBLE 0; highest closing level 1 (J = 4); largest sample 624
+   large eta', small theta: theta = 0.3, eta' = 200.0, nu1 = 3.50: pi* = 7.487e-02, J = 6, K = 172, Mbar = 2.62e+05; runs 6; violations 0; Chernoff failed 0; levels left populated 12, NEGLIGIBLE 0; highest closing level 2 (J = 6); largest sample 5504
+ Laplace line, V = e^(u x), u = 0.8 (Pareto index 1.25): A = 2.7778, ell0 = 0.5556, u0 = 5.0000; (TU), (TL) on 400 levels: largest excess over equality 1.2e-13
+   standard: theta = 1.0, eta' = 1.0, nu1 = 4.20: pi* = 6.668e-03, J = 9, K = 185, Mbar = 1.55e+07; runs 6; violations 0; Chernoff failed 0; levels left populated 30, NEGLIGIBLE 0; highest closing level 5 (J = 9); largest sample 94720
+   small theta: theta = 0.5, eta' = 1.0, nu1 = 8.40: pi* = 4.205e-04, J = 12, K = 194, Mbar = 3.36e+08; runs 6; violations 0; Chernoff failed 0; levels left populated 46, NEGLIGIBLE 0; highest closing level 8 (J = 12); largest sample 3178496
+   large eta' (nu0 small: negligible levels): theta = 1.0, eta' = 60.0, nu1 = 4.20: pi* = 6.668e-03, J = 9, K = 183, Mbar = 3.76e+06; runs 6; violations 0; Chernoff failed 0; levels left populated 30, NEGLIGIBLE 0; highest closing level 5 (J = 9); largest sample 93696
+   large eta', small theta: theta = 0.3, eta' = 200.0, nu1 = 14.00: pi* = 4.451e-05, J = 14, K = 199, Mbar = 2.04e+09; runs 0; violations 0; Chernoff failed 0; levels left populated 0, NEGLIGIBLE 0; highest closing level 0 (J = 14); largest sample 0
+ Laplace line, nu1 = 1: Xi(q)/q = u/(1-u) for all q <= 1/2, so [N'] holds iff theta >= u/(1-u):
+   u = 0.5: u/(1-u) = 1.00; one evaluation certifies the ratio (1+u)/(1-u) = 3.0; closing level: theta=0.3: none; theta=1: 1.86e-223; theta=3: 8.41e-01; theta=10: 8.41e-01; theta=30: 8.41e-01
+   u = 0.8: u/(1-u) = 4.00; one evaluation certifies the ratio (1+u)/(1-u) = 9.0; closing level: theta=0.3: none; theta=1: none; theta=3: none; theta=10: 8.41e-01; theta=30: 8.41e-01
+   u = 0.95: u/(1-u) = 19.00; one evaluation certifies the ratio (1+u)/(1-u) = 39.0; closing level: theta=0.3: none; theta=1: none; theta=3: none; theta=10: none; theta=30: 7.07e-01
+block U: 81 runs; violations of any claim of Theorem N1': 0
+exit violations: 0
+finished 2026-11-26T22:36:22Z; elapsed 7.9 s; peak memory 341 MB

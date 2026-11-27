@@ -1,0 +1,25 @@
+# R4 own computation; exponents of section 11.24
+# small-slope limit (units a = 1; h = 1/4)
+gauss: theta2*/a = 0.346035  theta2*/h = 1.38414  best phi1 = 0.6540   T2(0)/a = 0.618034 (golden ratio (sqrt5-1)/2 = 0.618034) at xi/a = 0.38197 (sqrt(xi/a) = 0.61803)
+   gauss Xi(h, phi1=0.1) = +0.01707
+   gauss Xi(h, phi1=0.3) = +0.05400
+   gauss Xi(h, phi1=0.5) = +0.09583
+   gauss Xi(h, phi1=0.65) = +0.13183
+
+#   u      a          h          h/a      theta2*    theta2*/a  theta2*/h  phi1*    T2(0)dir  T2/a(dir) T2/a(bal) phi_ub  xi_ub     (a+h)/2a
+ 0.100 0.00124844 0.00031227 0.25013  0.00043218 0.34617   1.38397   0.6538  0.00077166 0.61810   0.61810   0.5528  0.00048   0.62507
+ 4.000 0.60305241 0.23924964 0.39673  0.29415286 0.48777   1.22948   0.5122  0.41635042 0.69041   0.69040   0.5766  0.38036   0.69837
+ 6.000 0.67583576 0.33607584 0.49727  0.38854012 0.57490   1.15611   0.4251  0.49949814 0.73908   0.73908   0.6014  0.57745   0.74864
+10.000 0.69264780 0.44129625 0.63711  0.47805472 0.69018   1.08330   0.3098  0.55845666 0.80626   0.80626   0.6442  0.87703   0.81856
+
+# identities used in the proofs:  D(h)=0,  theta_na(h)=h,  a + u p_u = Lambda1
+u=0.1: D(h)=-1.73e-16  theta_na(h)-h=-2.86e-10  a+u*pu-Lam=-9.02e-17
+u=4.0: D(h)=-1.11e-16  theta_na(h)-h=+5.58e-08  a+u*pu-Lam=-1.11e-16
+u=6.0: D(h)=-2.22e-16  theta_na(h)-h=+1.83e-07  a+u*pu-Lam=-1.11e-16
+u=10.0: D(h)=+1.11e-16  theta_na(h)-h=+1.81e-07  a+u*pu-Lam=+0.00e+00
+
+# is theta -> Xi(theta,phi1) decreasing on (0, phi2 a)?  and Xi(h, phi1) > 0 ?
+u=0.1: phi1=0.1: decreasing=True, Xi(h)=+0.00002; phi1=0.3: decreasing=True, Xi(h)=+0.00007; phi1=0.5: decreasing=True, Xi(h)=+0.00012; phi1=0.64: decreasing=True, Xi(h)=+0.00016; phi1=0.8: decreasing=True, Xi(h)=+nan
+u=4.0: phi1=0.1: decreasing=True, Xi(h)=+0.01869; phi1=0.3: decreasing=True, Xi(h)=+0.05849; phi1=0.5: decreasing=True, Xi(h)=+0.10227; phi1=0.64: decreasing=True, Xi(h)=+nan; phi1=0.8: decreasing=True, Xi(h)=+nan
+u=6.0: phi1=0.1: decreasing=True, Xi(h)=+0.02793; phi1=0.3: decreasing=True, Xi(h)=+0.08678; phi1=0.5: decreasing=True, Xi(h)=+0.15025; phi1=0.64: decreasing=True, Xi(h)=+nan; phi1=0.8: decreasing=True, Xi(h)=+nan
+u=10.0: phi1=0.1: decreasing=True, Xi(h)=+0.03934; phi1=0.3: decreasing=True, Xi(h)=+0.12089; phi1=0.5: decreasing=True, Xi(h)=+nan; phi1=0.64: decreasing=True, Xi(h)=+nan; phi1=0.8: decreasing=True, Xi(h)=+nan

@@ -1,0 +1,45 @@
+r26_hub.py runs 20; started 2026-11-26T22:27:38Z
+chain: c = 4 outer sites, k = 12 inner sites, u = 1.0; cross-cut coupling ln((1-p_x)/p_x) = 10.00 kT, inner coupling ln((1-p_in)/p_in) = 7.60 kT
+V_h by the transfer recursion against enumeration of the 2^12 inner configurations: rel. diff 1.6e-16
+influence of the boundary site on the inner block: pointwise 10.000 / 10.000;  class-relative (u-Lipschitz fibre weights, LP on 2^12 points): iota(1->0) = 7.9787, iota(0->1) = 7.9787;  ln(V_1/V_0) = 7.9787  (u*k = 12.0)
+
+pi_h = P(a_c = 1) = 0.002:  A = 7.4534e-04; share of the boundary state a_c = 1: 85.40 %; V_0 = 3.409e-04, V_1 = 9.948e-01; ell0 = 3.430e-04, Vmax = 8.840e+06
+  (TU) worst ratio: assumed envelope 5.428e+02; N4 envelope 1.0000 (must be <= 1).   (TL) worst ratio: assumed 157.620; N4 1.0000 (must be <= 1)
+ theta = 20.0  (seeds default_rng(10000*cell + r), r = 0..19; cells in order of print)
+  (A) product-class tail function (slope u at every outer site)   : runs 20; INVALID 0; median outer points 828; false: q 0, plow 0, ell 0, tail 20; Chernoff failed 0
+  (B) envelope of Theorem N4 (u + iota at the boundary site)      : runs 20; INVALID 0; median outer points 828; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  (C) conditioning on the boundary site (2 product sub-problems)       : runs 20; INVALID 0; median outer points 1464
+ theta = 5.0  (seeds default_rng(10000*cell + r), r = 0..19; cells in order of print)
+  (A) product-class tail function (slope u at every outer site)   : runs 20; INVALID 0; median outer points 828; false: q 0, plow 0, ell 0, tail 20; Chernoff failed 0
+  (B) envelope of Theorem N4 (u + iota at the boundary site)      : runs 20; INVALID 0; median outer points 423936; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  (C) conditioning on the boundary site (2 product sub-problems)       : runs 20; INVALID 0; median outer points 1464
+ theta = 1.0  (seeds default_rng(10000*cell + r), r = 0..19; cells in order of print)
+  (A) product-class tail function (slope u at every outer site)   : runs 20; INVALID 0; median outer points 828; false: q 0, plow 0, ell 0, tail 20; Chernoff failed 0
+  (B) envelope of Theorem N4 (u + iota at the boundary site)      : runs 20; INVALID 0; median outer points 847872; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  (C) conditioning on the boundary site (2 product sub-problems)       : runs 20; INVALID 0; median outer points 5856
+
+pi_h = P(a_c = 1) = 0.2:  A = 6.3738e-02; share of the boundary state a_c = 1: 99.86 %; V_0 = 3.409e-04, V_1 = 9.948e-01; ell0 = 2.350e-02, Vmax = 8.840e+06
+  (TU) worst ratio: assumed envelope 8.028e+02; N4 envelope 1.0000 (must be <= 1).   (TL) worst ratio: assumed 2.468; N4 1.0000 (must be <= 1)
+ theta = 20.0  (seeds default_rng(10000*cell + r), r = 0..19; cells in order of print)
+  (A) product-class tail function (slope u at every outer site)   : runs 20; INVALID 20; median outer points 792; false: q 0, plow 0, ell 0, tail 20; Chernoff failed 0; A/U (U < A): median 1.1
+  (B) envelope of Theorem N4 (u + iota at the boundary site)      : runs 20; INVALID 0; median outer points 3168; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  (C) conditioning on the boundary site (2 product sub-problems)       : runs 20; INVALID 0; median outer points 1464
+ theta = 5.0  (seeds default_rng(10000*cell + r), r = 0..19; cells in order of print)
+  (A) product-class tail function (slope u at every outer site)   : runs 20; INVALID 20; median outer points 792; false: q 0, plow 0, ell 0, tail 20; Chernoff failed 0; A/U (U < A): median 1.1
+  (B) envelope of Theorem N4 (u + iota at the boundary site)      : runs 20; INVALID 0; median outer points 3168; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  (C) conditioning on the boundary site (2 product sub-problems)       : runs 20; INVALID 0; median outer points 1464
+ theta = 1.0  (seeds default_rng(10000*cell + r), r = 0..19; cells in order of print)
+  (A) product-class tail function (slope u at every outer site)   : runs 20; INVALID 20; median outer points 792; false: q 0, plow 0, ell 0, tail 20; Chernoff failed 0; A/U (U < A): median 1.1
+  (B) envelope of Theorem N4 (u + iota at the boundary site)      : runs 20; INVALID 0; median outer points 25344; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  (C) conditioning on the boundary site (2 product sub-problems)       : runs 20; INVALID 0; median outer points 5856
+
+control: the same chain with NO coupling across the cut (p_x = 1/2), algorithm (A):
+  pi_h=0.002 theta=20.0: runs 20; INVALID 0; median outer points 808; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  pi_h=0.002 theta=5.0: runs 20; INVALID 0; median outer points 808; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  pi_h=0.002 theta=1.0: runs 20; INVALID 0; median outer points 1616; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  pi_h=0.2 theta=20.0: runs 20; INVALID 0; median outer points 784; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  pi_h=0.2 theta=5.0: runs 20; INVALID 0; median outer points 784; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+  pi_h=0.2 theta=1.0: runs 20; INVALID 0; median outer points 1568; false: q 0, plow 0, ell 0, tail 0; Chernoff failed 0
+control violations: 0
+violations of the statements that must hold ((B), (C), control, exact checks): 0
+finished 2026-11-26T22:27:57Z; elapsed 19.1 s; peak memory 221 MB

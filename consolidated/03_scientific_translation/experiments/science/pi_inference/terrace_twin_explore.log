@@ -1,0 +1,12 @@
+u=1.0 eps1=0.0111: flat-background plateau twin 0.02382 | best terrace 0.02382 at rho_T=0.5000 | no datum 0.02396
+u=1.0 eps1=0.0277: flat-background plateau twin 0.01634 | best terrace 0.01634 at rho_T=0.5000 | no datum 0.01717
+u=1.0 eps1=0.0555: flat-background plateau twin 0.00585 | best terrace 0.00585 at rho_T=0.5000 | no datum 0.00838
+u=1.0 eps1=0.0832: flat-background plateau twin 0.00008 | best terrace 0.00008 at rho_T=0.5000 | no datum 0.00273
+u=2.0 eps1=0.0328: flat-background plateau twin 0.08214 | best terrace 0.08214 at rho_T=0.5000 | no datum 0.08271
+u=2.0 eps1=0.0820: flat-background plateau twin 0.06000 | best terrace 0.06000 at rho_T=0.5000 | no datum 0.06324
+u=2.0 eps1=0.1639: flat-background plateau twin 0.02633 | best terrace 0.02633 at rho_T=0.5000 | no datum 0.03687
+u=2.0 eps1=0.2459: flat-background plateau twin 0.00255 | best terrace 0.00255 at rho_T=0.5000 | no datum 0.01776
+u=4.0 eps1=0.0603: flat-background plateau twin 0.21371 | best terrace 0.21371 at rho_T=0.5000 | no datum 0.21600
+u=4.0 eps1=0.1508: flat-background plateau twin 0.17149 | best terrace 0.17149 at rho_T=0.5000 | no datum 0.18395
+u=4.0 eps1=0.3015: flat-background plateau twin 0.09689 | best terrace 0.09689 at rho_T=0.5000 | no datum 0.13735
+u=4.0 eps1=0.4523: flat-background plateau twin 0.02747 | best terrace 0.02747 at rho_T=0.5000 | no datum 0.09848

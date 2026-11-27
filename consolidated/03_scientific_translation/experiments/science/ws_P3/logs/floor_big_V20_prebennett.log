@@ -1,0 +1,22 @@
+=== V20 on P2, tau 0.7, gbn2, truncation order m = 4: atoms 332, sites 20, states/site 3..3, |X| = 3.49e+09; anchor E = -306.5687 kcal/mol; band w = 8
+    site penalties gamma_i (kcal/mol) = [0.0416 0.0786 0.1136 0.1473 0.1654 0.1718 0.1742 0.175  0.1753 0.1754
+ 0.1754 0.1752 0.1749 0.1741 0.1715 0.1645 0.1452 0.1083 0.0734 0.0407]; sum = 2.82134e+00 (= Gamma_4 up to rounding)
+    Gamma_4 = 2.82134e+00 kcal/mol (self 1.922e-02, cross 2.802e+00) + floating-point allowance 9.92e-04 = 9.92100e-04 = 0.0017 kT   [28.6s]
+      ball evaluations 4096/9921  10s
+    ball of radius 3: 9921 evaluations of g (0.000285 % of the domain) [25.1s]; sum_T max|d_T| (order 3) = 2.114e-01
+    models: ln Z(m_-) = 519.221164, ln Z(m_+) = 517.482867: deterministic certified bracket of ln Z(E), width 1.73830 nats; rho_cert = max(m_+ - m_-) = 5.75844 kcal/mol = 9.6592 kT (min 2.00e-03); min m_- = -306.5697, min m_+ = -306.5677 kcal/mol [0.1s]
+    SAMPLING: N = 50000 exact samples of pi_(m_-) (29321 distinct; mean number of sites off the anchor 4.27), E evaluated at each [120.8s]; W in [0.0001, 1], mean 0.382512, std 1.68e-01; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [518.244164, 518.275921] (width 0.03176 nats); point estimate 518.260168; Gibbs-Bogoliubov lower bound (same confidence) 518.103561; mean gap 6.3130e-01, max sampled gap 1.9660e+00 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [515.923393, 519.219492] (width 3.29610 nats); W sampled in [0.036968, 0.998329]
+    [177s] -> out/floor_V20_P2_t0.70_gbn2_m4_siteres.json
+=== V20 on P2, tau 0.7, gbn2, truncation order m = 5: atoms 332, sites 20, states/site 3..3, |X| = 3.49e+09; anchor E = -306.5687 kcal/mol; band w = 8
+    site penalties gamma_i (kcal/mol) = [0.0011 0.002  0.0029 0.0038 0.0047 0.0052 0.0054 0.0055 0.0055 0.0055
+ 0.0055 0.0055 0.0055 0.0054 0.0051 0.0046 0.0037 0.0028 0.0019 0.001 ]; sum = 8.22273e-02 (= Gamma_5 up to rounding)
+    Gamma_5 = 8.22273e-02 kcal/mol (self 9.749e-05, cross 8.213e-02) + floating-point allowance 8.74e-03 = 8.74410e-03 = 0.0147 kT   [49.5s]
+      ball evaluations 4096/87441  12s
+      ball evaluations 86016/87441  252s
+    ball of radius 4: 87441 evaluations of g (0.00251 % of the domain) [258.8s]; sum_T max|d_T| (order 3) = 2.114e-01; sum_T max|d_T| (order 4) = 1.199e-02
+    models: ln Z(m_-) = 518.305702, ln Z(m_+) = 518.221069: deterministic certified bracket of ln Z(E), width 0.08463 nats; rho_cert = max(m_+ - m_-) = 0.30405 kcal/mol = 0.5100 kT (min 1.75e-02); min m_- = -306.5775, min m_+ = -306.5600 kcal/mol [0.7s]
+    SAMPLING: N = 50000 exact samples of pi_(m_-) (22719 distinct; mean number of sites off the anchor 3.58), E evaluated at each [151.3s]; W in [0.6005, 1], mean 0.957556, std 1.51e-02; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [518.259793, 518.264862] (width 0.00507 nats); point estimate 518.262331; Gibbs-Bogoliubov lower bound (same confidence) 518.259108; mean gap 2.5931e-02, max sampled gap 7.9687e-02 kcal/mol
+    sample-range bound (delta = 0.05): ln Z(E) in [518.172011, 518.291027] (width 0.11902 nats); W sampled in [0.874881, 0.985431]
+    [462s] -> out/floor_V20_P2_t0.70_gbn2_m5_siteres.json
+BATCH DONE batch_D.txt

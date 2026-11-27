@@ -1,0 +1,12 @@
+bridge N=19 total=4338769 classes=836
+N=19 seconds=1.916006781
+bridge N=20 total=11995926 classes=1070
+N=20 seconds=5.536461518
+bridge N=21 total=33195473 classes=1328
+N=21 seconds=16.957932320
+bridge N=22 total=92121332 classes=1617
+N=22 seconds=43.026408924
+bridge N=23 total=255871235 classes=1950
+N=23 seconds=160.134489782
+bridge N=24 total=712195212 classes=2350
+N=24 seconds=1087.568692088

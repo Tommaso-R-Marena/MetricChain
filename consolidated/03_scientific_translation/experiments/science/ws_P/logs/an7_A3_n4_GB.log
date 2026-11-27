@@ -1,0 +1,15 @@
+=== A3 n=4 residual GB: 3844 clash-free conformations; kT = 0.5962 kcal/mol
+c_i (single-flip, kcal/mol): [17.27 13.35 22.88 20.05 22.9  20.49 16.29 12.77]
+argmin f: states [0 2 0 2 0 2 0 2], f = min;  argmin E: states [1 2 1 2 1 2 1 2];  same conformation: False;  E(argmin f) - min E = 2.133 kcal/mol = 3.58 kT
+site gaps of the KNOWN part at argmin f (kcal/mol):   [1.35 4.72 0.76 4.67 0.73 4.8  1.25 5.28]
+site gaps of the TRUE energy at argmin E (kcal/mol):  [0.57 1.5  0.63 1.48 0.61 1.54 0.47 1.54]
+sharp sites (gap of f at argmin f >= c_i): 0 of 8;   ratios e_i/c_i: [0.078 0.353 0.033 0.233 0.032 0.234 0.077 0.414]
+validity of d = sum c_i[x_i != y_i] on the clash-free domain: max |g(x)-g(y)|/d(x,y) = 1.0000  (envelope valid as measured)
+Theorem 11.7 (one evaluation certifies iff d(x0,y) <= f(y)-f(x0) for all y): min margin = -142.92 kcal/mol -> NO;  conformations violating: 3824 of 3843
+beta*c_i: [29.  22.4 38.4 33.6 38.4 34.4 27.3 21.4]
+sum_i ln cosh(beta c_i/2) = 116.9 nats = 69.7 kcal/mol;   beta^2 sum c_i^2/8 = 976 nats;   range of g on the domain = 43.8 kcal/mol = 73 kT
+exact on the grid: ln Z(f+g) - ln Z(f) = 58.94 nats; -beta <g>_f = 56.39; Jensen gap = 2.557 nats (the class bound above is 117); Gibbs weight of argmin E: 0.195; entropy H(pi_E) = 3.29 nats
+product-landscape formula (Thm 11.8, Boltzmann weights) with the measured star of f at argmin f and measured c_i: ln N >= 4.10 (t = 0.17) of ln(prod k_i) = 8.79; i.e. N >= 60.4   [heuristic for a non-additive f]
+cover at eps = 0.000 kcal/mol: forced points 447, volume bound 121.2, partition bound 36.0 => N_cov >= 447;  greedy cover 782  (of M = 3844;  mean set size 27.86, max 141)  [5s]
+cover at eps = 0.596 kcal/mol: forced points 378, volume bound 108.5, partition bound 32.0 => N_cov >= 378;  greedy cover 717  (of M = 3844;  mean set size 29.46, max 151)  [5s]
+cover at eps = 2.000 kcal/mol: forced points 261, volume bound 84.9, partition bound 24.1 => N_cov >= 261;  greedy cover 609  (of M = 3844;  mean set size 33.60, max 171)  [5s]

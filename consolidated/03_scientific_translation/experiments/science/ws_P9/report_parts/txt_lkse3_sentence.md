@@ -1,0 +1,1 @@
+there the method stops: the window form of stage 2 gives {LKSE_3_s2_W} nats and the triple form {LKSE_3_s2_T} — its floor has all twelve side chains off the anchor ({LKSE_3_s2_W_floor} on average in its samples) — although the first-order number on the Gibbs sample is 0.39 nats.  The patterned sequence is certified from order 4 on, not from order 3.

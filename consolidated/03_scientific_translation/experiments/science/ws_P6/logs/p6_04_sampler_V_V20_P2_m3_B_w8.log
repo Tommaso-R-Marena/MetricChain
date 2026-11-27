@@ -1,0 +1,9 @@
+=== sandwich sampler (theory division, Prop. 11.113): V20 on P2, tau 0.7, m = 3, form B, band 8; ball 801 values; ln Z(m_-) = 585.045234, ln Z(m_+) = 517.254514, deterministic width D = 67.790720 nats; exact acceptance rate 1 - e^-D = 1.00000; seed 2026112631; delta 0.05 [1.8s]
+    1200 accepted of 1200 proposals (empirical acceptance 1.00000; exact 1.00000) [0.2s]; 679 distinct states to evaluate; mean number of sites off the anchor among accepted points 19.56
+      123 of the 679 distinct states already have a value of g on disk (ball caches, earlier runs); 556 new evaluations
+      evaluations 556/556  2s
+    E evaluated at the accepted points [1.7s]; m_- <= E <= m_+ at all 1200 accepted points: violations below 0, above 0; W in [0.000000, 0.000000] (outside [0,1]: 0); mean rounding half-width of W 1.7e-07
+    N =   1200 (the first 1200 accepted points): mean W = 0.000000 (std 0.0000); Hoeffding half-width t = 0.039205; CERTIFIED (prob. >= 0.95): ln Z(E) in [517.254514, 581.806288], width 6.455e+01 nats (bound (e^D - 1) 2t = 2.165e+28); point estimate 517.254514
+               [not certified here -- empirical Bernstein half-width (formula quoted from memory) t_EB = 0.008528: ln Z(E) in [517.254514, 580.280820], width 6.303e+01]
+    -> out/sampler_V20_P2_t0.70_gbn2_m3_B_w8.json
+DONE p6_04_sampler V20 P2 0.7 m=3 B w=8 [4s]

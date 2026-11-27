@@ -1,0 +1,27 @@
+=== V6 on E, tau 0.7, gbn2, truncation order m = 3: atoms 108, sites 6, states/site 3..3, |X| = 729; anchor E = -118.0409 kcal/mol; band w = 5
+    Gamma_3 = 1.29642e+01 kcal/mol (self 2.268e-01, cross 1.274e+01) + floating-point allowance 7.30e-06 = 1.29642e+01 = 21.7461 kT   [0.1s]
+      ball evaluations 73/73  0s
+    ball of radius 2: 73 evaluations of g (10 % of the domain) [0.1s]; 
+    models: ln Z(m_-) = 219.814109, ln Z(m_+) = 176.321908: deterministic certified bracket of ln Z(E), width 43.49220 nats; rho_cert = max(m_+ - m_-) = 25.92836 kcal/mol = 43.4922 kT (min 2.59e+01); min m_- = -131.0051, min m_+ = -105.0767 kcal/mol [0.0s]
+    ENUMERATION (729 states, 1.0s): violations m_- > E: 0, m_+ < E: 0; exact remainder g - I_2 g in [-4.083e-03, 4.896e-03] (certified |.| <= 1.296e+01); ln Z(E) = 198.068008; |lnZ(m_-) DP - enum| = 1.4e-13; rho = max(E - m_-) = 12.96908 kcal/mol = 21.7543 kT; cost number Z(m_-)/Z(E) - 1 = 2781067093.90689; min E = -118.0409 (anchor is the minimiser: True)
+    SAMPLING: N = 20000 exact samples of pi_(m_-) (27 distinct; mean number of sites off the anchor 0.07), E evaluated at each [13.1s]; W in [0.0000, 1], mean 0.000000, std 8.27e-24; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [176.321908, 215.168453] (width 38.84655 nats); point estimate 198.068008; Gibbs-Bogoliubov lower bound (same confidence) 197.650343; mean gap 1.2964e+01, max sampled gap 1.2964e+01 kcal/mol
+    truth 198.068008 inside the bracket: True
+    [15s] -> out/floor_V6_E_t0.70_gbn2_m3.json
+=== V6 on E, tau 0.7, gbn2, truncation order m = 4: atoms 108, sites 6, states/site 3..3, |X| = 729; anchor E = -118.0409 kcal/mol; band w = 5
+    Gamma_4 = 4.32333e-01 kcal/mol (self 3.417e-03, cross 4.289e-01) + floating-point allowance 2.33e-05 = 4.32356e-01 = 0.7252 kT   [0.2s]
+      ball evaluations 233/233  0s
+    ball of radius 3: 233 evaluations of g (32 % of the domain) [0.1s]; sum_T max|d_T| (order 3) = 1.470e-02
+    models: ln Z(m_-) = 198.793242, ln Z(m_+) = 197.342774: deterministic certified bracket of ln Z(E), width 1.45047 nats; rho_cert = max(m_+ - m_-) = 0.87815 kcal/mol = 1.4730 kT (min 8.65e-01); min m_- = -118.4733, min m_+ = -117.6086 kcal/mol [0.0s]
+    ENUMERATION (729 states, 0.4s): violations m_- > E: 0, m_+ < E: 0; exact remainder g - I_3 g in [-3.341e-04, 5.246e-04] (certified |.| <= 4.324e-01); ln Z(E) = 198.068008; |lnZ(m_-) DP - enum| = 5.7e-14; rho = max(E - m_-) = 0.44204 kcal/mol = 0.7415 kT; cost number Z(m_-)/Z(E) - 1 = 1.06521; min E = -118.0409 (anchor is the minimiser: True)
+    SAMPLING: N = 20000 exact samples of pi_(m_-) (27 distinct; mean number of sites off the anchor 0.07), E evaluated at each [13.0s]; W in [0.2292, 1], mean 0.484211, std 6.82e-06; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [198.052604, 198.083179] (width 0.03058 nats); point estimate 198.068008; Gibbs-Bogoliubov lower bound (same confidence) 198.053863; mean gap 4.3236e-01, max sampled gap 4.3283e-01 kcal/mol
+    truth 198.068008 inside the bracket: True
+    [14s] -> out/floor_V6_E_t0.70_gbn2_m4.json
+=== V6 on E, tau 0.7, gbn2, truncation order m = 5: atoms 108, sites 6, states/site 3..3, |X| = 729; anchor E = -118.0409 kcal/mol; band w = 5
+    Gamma_5 = 6.62763e-03 kcal/mol (self 8.079e-06, cross 6.620e-03) + floating-point allowance 4.73e-05 = 6.67493e-03 = 0.0112 kT   [0.2s]
+      ball evaluations 473/473  0s
+    ball of radius 4: 473 evaluations of g (64.9 % of the domain) [0.3s]; sum_T max|d_T| (order 3) = 1.470e-02; sum_T max|d_T| (order 4) = 1.052e-03
+    models: ln Z(m_-) = 198.079205, ln Z(m_+) = 198.056810: deterministic certified bracket of ln Z(E), width 0.02239 nats; rho_cert = max(m_+ - m_-) = 0.02784 kcal/mol = 0.0467 kT (min 1.33e-02); min m_- = -118.0476, min m_+ = -118.0342 kcal/mol [0.0s]
+    ENUMERATION (729 states, 0.4s): violations m_- > E: 0, m_+ < E: 0; exact remainder g - I_4 g in [-1.888e-05, 3.408e-06] (certified |.| <= 6.675e-03); ln Z(E) = 198.068008; |lnZ(m_-) DP - enum| = 2.8e-14; rho = max(E - m_-) = 0.01697 kcal/mol = 0.0285 kT; cost number Z(m_-)/Z(E) - 1 = 0.01126; min E = -118.0409 (anchor is the minimiser: True)
+    SAMPLING: N = 20000 exact samples of pi_(m_-) (27 distinct; mean number of sites off the anchor 0.07), E evaluated at each [11.7s]; W in [0.9544, 1], mean 0.988865, std 1.84e-05; Hoeffding (delta = 0.05, two-sided): ln Z(E) in [198.067565, 198.068451] (width 0.00089 nats); point estimate 198.068008; Gibbs-Bogoliubov lower bound (same confidence) 198.067560; mean gap 6.6752e-03, max sampled gap 7.3388e-03 kcal/mol
+    truth 198.068008 inside the bracket: True
+    [13s] -> out/floor_V6_E_t0.70_gbn2_m5.json

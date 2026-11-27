@@ -1,0 +1,1072 @@
+{
+ "model": "generic chain: bond 1, angle 111 deg, torsions 180/+60/-60, hard core s >= 3 for q-p >= 3",
+ "s_cut": 16,
+ "known_part": "#gauche (e = 1)",
+ "residual": "zero",
+ "rows": {
+  "5": {
+   "n_torsions": 5,
+   "n_beads": 8,
+   "conformations": 99,
+   "classes": 30,
+   "min_core_margin": 0.8187545599651074,
+   "min_rejected_margin": 0.07539578212819942,
+   "max_pairs_below_cutoff_per_bead": 1.875,
+   "enumeration_seconds": 0.0,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 27,
+     "upper": 27,
+     "exact": true,
+     "reduced": [
+      27,
+      27
+     ],
+     "nearest_tie": 0.10643352489131752
+    },
+    "L=1,eps=1": {
+     "lower": 23,
+     "upper": 23,
+     "exact": true,
+     "reduced": [
+      23,
+      23
+     ],
+     "nearest_tie": 0.3276221402745172
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 26,
+     "upper": 26,
+     "exact": true,
+     "reduced": [
+      26,
+      26
+     ],
+     "nearest_tie": 0.12385900891761814
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 23,
+     "upper": 23,
+     "exact": true,
+     "reduced": [
+      23,
+      23
+     ],
+     "nearest_tie": 0.18528276178390612
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 19,
+     "upper": 19,
+     "exact": true,
+     "reduced": [
+      19,
+      19
+     ],
+     "nearest_tie": 0.02279188171415214
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 9,
+     "upper": 9,
+     "exact": true,
+     "reduced": [
+      9,
+      9
+     ],
+     "nearest_tie": 0.035452606779885265
+    },
+    "L=1/5,eps=0": {
+     "lower": 5,
+     "upper": 5,
+     "exact": true,
+     "reduced": [
+      5,
+      5
+     ],
+     "nearest_tie": 0.0067402011652046845
+    },
+    "L=1/5,eps=1": {
+     "lower": 3,
+     "upper": 3,
+     "exact": true,
+     "reduced": [
+      3,
+      3
+     ],
+     "nearest_tie": 0.006740201165212234
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 4,
+     "upper": 4,
+     "exact": true,
+     "reduced": [
+      4,
+      4
+     ],
+     "nearest_tie": 0.0005210545938028055
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 3,
+     "upper": 3,
+     "exact": true,
+     "reduced": [
+      3,
+      3
+     ],
+     "nearest_tie": 0.0024269696350134318
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 2,
+     "upper": 2,
+     "exact": true,
+     "reduced": [
+      2,
+      2
+     ],
+     "nearest_tie": 0.0174557079460822
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 2,
+     "upper": 2,
+     "exact": true,
+     "reduced": [
+      2,
+      2
+     ],
+     "nearest_tie": 0.001520800794086341
+    }
+   },
+   "seconds": 0.7
+  },
+  "6": {
+   "n_torsions": 6,
+   "n_beads": 9,
+   "conformations": 239,
+   "classes": 60,
+   "min_core_margin": 0.8187545599651074,
+   "min_rejected_margin": 0.07539578212819897,
+   "max_pairs_below_cutoff_per_bead": 2.3333333333333335,
+   "enumeration_seconds": 0.0,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 48,
+     "upper": 48,
+     "exact": true,
+     "reduced": [
+      48,
+      48
+     ],
+     "nearest_tie": 0.10643352489132107
+    },
+    "L=1,eps=1": {
+     "lower": 43,
+     "upper": 43,
+     "exact": true,
+     "reduced": [
+      43,
+      43
+     ],
+     "nearest_tie": 0.02720674573095927
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 46,
+     "upper": 46,
+     "exact": true,
+     "reduced": [
+      46,
+      46
+     ],
+     "nearest_tie": 0.07385900891761121
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 43,
+     "upper": 43,
+     "exact": true,
+     "reduced": [
+      43,
+      43
+     ],
+     "nearest_tie": 0.05903980810124132
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 29,
+     "upper": 29,
+     "exact": true,
+     "reduced": [
+      29,
+      29
+     ],
+     "nearest_tie": 0.004353773165492569
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 15,
+     "upper": 15,
+     "exact": true,
+     "reduced": [
+      15,
+      15
+     ],
+     "nearest_tie": 0.0437363201046983
+    },
+    "L=1/5,eps=0": {
+     "lower": 5,
+     "upper": 5,
+     "exact": true,
+     "reduced": [
+      5,
+      5
+     ],
+     "nearest_tie": 0.004250459765969161
+    },
+    "L=1/5,eps=1": {
+     "lower": 4,
+     "upper": 4,
+     "exact": true,
+     "reduced": [
+      4,
+      4
+     ],
+     "nearest_tie": 0.003076395644527441
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 5,
+     "upper": 5,
+     "exact": true,
+     "reduced": [
+      5,
+      5
+     ],
+     "nearest_tie": 0.0014759509992829933
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 4,
+     "upper": 4,
+     "exact": true,
+     "reduced": [
+      4,
+      4
+     ],
+     "nearest_tie": 0.0007702269700398112
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 3,
+     "upper": 3,
+     "exact": true,
+     "reduced": [
+      3,
+      3
+     ],
+     "nearest_tie": 0.00027114284353579876
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 2,
+     "upper": 2,
+     "exact": true,
+     "reduced": [
+      2,
+      2
+     ],
+     "nearest_tie": 0.0012084209601894713
+    }
+   },
+   "seconds": 0.8
+  },
+  "7": {
+   "n_torsions": 7,
+   "n_beads": 10,
+   "conformations": 577,
+   "classes": 136,
+   "min_core_margin": 0.8187545599651056,
+   "min_rejected_margin": 0.07539578212819853,
+   "max_pairs_below_cutoff_per_bead": 2.8,
+   "enumeration_seconds": 0.1,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 92,
+     "upper": 92,
+     "exact": true,
+     "reduced": [
+      92,
+      92
+     ],
+     "nearest_tie": 0.019400890355992573
+    },
+    "L=1,eps=1": {
+     "lower": 66,
+     "upper": 66,
+     "exact": true,
+     "reduced": [
+      66,
+      66
+     ],
+     "nearest_tie": 0.019400890355992573
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 82,
+     "upper": 82,
+     "exact": true,
+     "reduced": [
+      82,
+      82
+     ],
+     "nearest_tie": 0.005036583277239437
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 66,
+     "upper": 66,
+     "exact": true,
+     "reduced": [
+      66,
+      66
+     ],
+     "nearest_tie": 0.019400890355992573
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 44,
+     "upper": 44,
+     "exact": true,
+     "reduced": [
+      55,
+      57
+     ],
+     "nearest_tie": 0.0050365832772865105
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 21,
+     "upper": 21,
+     "exact": true,
+     "reduced": [
+      63,
+      55
+     ],
+     "nearest_tie": 0.00850948070175761
+    },
+    "L=1/5,eps=0": {
+     "lower": 6,
+     "upper": 6,
+     "exact": true,
+     "reduced": [
+      6,
+      6
+     ],
+     "nearest_tie": 0.00012837141571031552
+    },
+    "L=1/5,eps=1": {
+     "lower": 5,
+     "upper": 5,
+     "exact": true,
+     "reduced": [
+      5,
+      5
+     ],
+     "nearest_tie": 0.0001283714157067628
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 6,
+     "upper": 6,
+     "exact": true,
+     "reduced": [
+      7,
+      7
+     ],
+     "nearest_tie": 0.0003484467068828323
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 5,
+     "upper": 5,
+     "exact": true,
+     "reduced": [
+      5,
+      5
+     ],
+     "nearest_tie": 0.0001283714157067628
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 3,
+     "upper": 3,
+     "exact": true,
+     "reduced": [
+      3,
+      3
+     ],
+     "nearest_tie": 0.0001155330939921484
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 2,
+     "upper": 2,
+     "exact": true,
+     "reduced": [
+      2,
+      2
+     ],
+     "nearest_tie": 0.0005996410758752901
+    }
+   },
+   "seconds": 1.1
+  },
+  "8": {
+   "n_torsions": 8,
+   "n_beads": 11,
+   "conformations": 1393,
+   "classes": 291,
+   "min_core_margin": 0.3755445375459163,
+   "min_rejected_margin": 0.07539578212819853,
+   "max_pairs_below_cutoff_per_bead": 3.272727272727273,
+   "enumeration_seconds": 0.2,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 137,
+     "upper": 137,
+     "exact": true,
+     "reduced": [
+      137,
+      137
+     ],
+     "nearest_tie": 0.007863845468866426
+    },
+    "L=1,eps=1": {
+     "lower": 97,
+     "upper": 97,
+     "exact": true,
+     "reduced": [
+      117,
+      113
+     ],
+     "nearest_tie": 0.0028511781641800127
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 115,
+     "upper": 115,
+     "exact": true,
+     "reduced": [
+      117,
+      117
+     ],
+     "nearest_tie": 0.0016469644738927869
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 94,
+     "upper": 94,
+     "exact": true,
+     "reduced": [
+      112,
+      108
+     ],
+     "nearest_tie": 0.004435235633709844
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 59,
+     "upper": 59,
+     "exact": true,
+     "reduced": [
+      127,
+      115
+     ],
+     "nearest_tie": 0.0016046388858868
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 34,
+     "upper": 34,
+     "exact": true,
+     "reduced": [
+      178,
+      165
+     ],
+     "nearest_tie": 0.008574455419092075
+    },
+    "L=1/5,eps=0": {
+     "lower": 9,
+     "upper": 9,
+     "exact": true,
+     "reduced": [
+      51,
+      38
+     ],
+     "nearest_tie": 3.713574735098035e-05
+    },
+    "L=1/5,eps=1": {
+     "lower": 6,
+     "upper": 6,
+     "exact": true,
+     "reduced": [
+      6,
+      6
+     ],
+     "nearest_tie": 0.00012837141569965738
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 7,
+     "upper": 7,
+     "exact": true,
+     "reduced": [
+      39,
+      38
+     ],
+     "nearest_tie": 1.997776083406677e-05
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 5,
+     "upper": 5,
+     "exact": true,
+     "reduced": [
+      5,
+      5
+     ],
+     "nearest_tie": 0.00043429376193770963
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 4,
+     "upper": 4,
+     "exact": true,
+     "reduced": [
+      4,
+      4
+     ],
+     "nearest_tie": 1.8238440297579928e-05
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 3,
+     "upper": 3,
+     "exact": true,
+     "reduced": [
+      3,
+      3
+     ],
+     "nearest_tie": 3.425855043381887e-05
+    }
+   },
+   "seconds": 0.9
+  },
+  "9": {
+   "n_torsions": 9,
+   "n_beads": 12,
+   "conformations": 3363,
+   "classes": 639,
+   "min_core_margin": 0.3755445375459159,
+   "min_rejected_margin": 0.07539578212819809,
+   "max_pairs_below_cutoff_per_bead": 3.75,
+   "enumeration_seconds": 0.4,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 215,
+     "upper": 215,
+     "exact": true,
+     "reduced": [
+      275,
+      270
+     ],
+     "nearest_tie": 0.00033494231639963346
+    },
+    "L=1,eps=1": {
+     "lower": 147,
+     "upper": 147,
+     "exact": true,
+     "reduced": [
+      318,
+      285
+     ],
+     "nearest_tie": 0.0027073168534723635
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 176,
+     "upper": 176,
+     "exact": true,
+     "reduced": [
+      255,
+      242
+     ],
+     "nearest_tie": 0.00027326143544836867
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 141,
+     "upper": 141,
+     "exact": true,
+     "reduced": [
+      307,
+      274
+     ],
+     "nearest_tie": 4.4733123116813545e-06
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 86,
+     "upper": 86,
+     "exact": true,
+     "reduced": [
+      403,
+      366
+     ],
+     "nearest_tie": 0.0016254541008162704
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 43,
+     "upper": 43,
+     "exact": true,
+     "reduced": [
+      482,
+      450
+     ],
+     "nearest_tie": 0.0016834441947910506
+    },
+    "L=1/5,eps=0": {
+     "lower": 11,
+     "upper": 11,
+     "exact": true,
+     "reduced": [
+      148,
+      107
+     ],
+     "nearest_tie": 2.8772262117726655e-05
+    },
+    "L=1/5,eps=1": {
+     "lower": 7,
+     "upper": 7,
+     "exact": true,
+     "reduced": [
+      15,
+      16
+     ],
+     "nearest_tie": 6.21843345580686e-05
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 8,
+     "upper": 8,
+     "exact": true,
+     "reduced": [
+      8,
+      8
+     ],
+     "nearest_tie": 1.2678472585569978e-05
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 7,
+     "upper": 7,
+     "exact": true,
+     "reduced": [
+      7,
+      7
+     ],
+     "nearest_tie": 9.075910919076335e-05
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 4,
+     "upper": 4,
+     "exact": true,
+     "reduced": [
+      4,
+      4
+     ],
+     "nearest_tie": 9.962843989441694e-05
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 3,
+     "upper": 3,
+     "exact": true,
+     "reduced": [
+      3,
+      3
+     ],
+     "nearest_tie": 6.400065110767628e-06
+    }
+   },
+   "seconds": 13.4
+  },
+  "10": {
+   "n_torsions": 10,
+   "n_beads": 13,
+   "conformations": 8115,
+   "classes": 1360,
+   "min_core_margin": 0.07846150758941395,
+   "min_rejected_margin": 0.02000827373949443,
+   "max_pairs_below_cutoff_per_bead": 4.230769230769231,
+   "enumeration_seconds": 1.0,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 319,
+     "upper": 319,
+     "exact": true,
+     "reduced": [
+      770,
+      722
+     ],
+     "nearest_tie": 0.0005344109250060569
+    },
+    "L=1,eps=1": {
+     "lower": 223,
+     "upper": 223,
+     "exact": true,
+     "reduced": [
+      825,
+      754
+     ],
+     "nearest_tie": 0.0003379617895280518
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 255,
+     "upper": 255,
+     "exact": true,
+     "reduced": [
+      790,
+      741
+     ],
+     "nearest_tie": 0.00026475840892814517
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 209,
+     "upper": 211,
+     "exact": false,
+     "reduced": [
+      845,
+      780
+     ],
+     "nearest_tie": 0.0005258601702484711
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 119,
+     "upper": 123,
+     "exact": false,
+     "reduced": [
+      927,
+      887
+     ],
+     "nearest_tie": 6.109085125771685e-05
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 60,
+     "upper": 60,
+     "exact": true,
+     "reduced": [
+      1041,
+      970
+     ],
+     "nearest_tie": 1.473554913111741e-05
+    },
+    "L=1/5,eps=0": {
+     "lower": 13,
+     "upper": 13,
+     "exact": true,
+     "reduced": [
+      307,
+      177
+     ],
+     "nearest_tie": 3.248229383245871e-07
+    },
+    "L=1/5,eps=1": {
+     "lower": 8,
+     "upper": 8,
+     "exact": true,
+     "reduced": [
+      8,
+      8
+     ],
+     "nearest_tie": 3.2482295431179864e-07
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 10,
+     "upper": 10,
+     "exact": true,
+     "reduced": [
+      10,
+      10
+     ],
+     "nearest_tie": 8.992231581572696e-07
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 8,
+     "upper": 8,
+     "exact": true,
+     "reduced": [
+      8,
+      8
+     ],
+     "nearest_tie": 7.472166849709083e-06
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 5,
+     "upper": 5,
+     "exact": true,
+     "reduced": [
+      5,
+      5
+     ],
+     "nearest_tie": 1.3964318695158795e-05
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 3,
+     "upper": 3,
+     "exact": true,
+     "reduced": [
+      3,
+      3
+     ],
+     "nearest_tie": 2.7531959181814614e-05
+    }
+   },
+   "seconds": 388.6
+  },
+  "11": {
+   "n_torsions": 11,
+   "n_beads": 14,
+   "conformations": 19559,
+   "classes": 2908,
+   "min_core_margin": 0.07846150758941395,
+   "min_rejected_margin": 0.020008273739490434,
+   "max_pairs_below_cutoff_per_bead": 4.714285714285714,
+   "enumeration_seconds": 4.1,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 474,
+     "upper": 484,
+     "exact": false,
+     "reduced": [
+      1844,
+      1731
+     ],
+     "nearest_tie": 0.0002543269372399237
+    },
+    "L=1,eps=1": {
+     "lower": 339,
+     "upper": 350,
+     "exact": false,
+     "reduced": [
+      2016,
+      1894
+     ],
+     "nearest_tie": 3.209089927835862e-05
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 379,
+     "upper": 392,
+     "exact": false,
+     "reduced": [
+      1986,
+      1845
+     ],
+     "nearest_tie": 0.00011901638146571969
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 308,
+     "upper": 319,
+     "exact": false,
+     "reduced": [
+      2059,
+      1933
+     ],
+     "nearest_tie": 2.7502088340014552e-05
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 168,
+     "upper": 179,
+     "exact": false,
+     "reduced": [
+      2295,
+      2244
+     ],
+     "nearest_tie": 3.965150401796791e-06
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 85,
+     "upper": 90,
+     "exact": false,
+     "reduced": [
+      2477,
+      2355
+     ],
+     "nearest_tie": 1.7763568394002505e-15
+    },
+    "L=1/5,eps=0": {
+     "lower": 16,
+     "upper": 16,
+     "exact": true,
+     "reduced": [
+      1245,
+      510
+     ],
+     "nearest_tie": 3.248229347718734e-07
+    },
+    "L=1/5,eps=1": {
+     "lower": 10,
+     "upper": 10,
+     "exact": true,
+     "reduced": [
+      309,
+      153
+     ],
+     "nearest_tie": 1.2733544618726e-07
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 11,
+     "upper": 11,
+     "exact": true,
+     "reduced": [
+      245,
+      140
+     ],
+     "nearest_tie": 1.5984916323930065e-07
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 10,
+     "upper": 10,
+     "exact": true,
+     "reduced": [
+      32,
+      27
+     ],
+     "nearest_tie": 4.216699078796182e-06
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 6,
+     "upper": 6,
+     "exact": true,
+     "reduced": [
+      6,
+      6
+     ],
+     "nearest_tie": 2.3025885980132443e-06
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 4,
+     "upper": 4,
+     "exact": true,
+     "reduced": [
+      4,
+      4
+     ],
+     "nearest_tie": 1.2455957492107927e-06
+    }
+   },
+   "seconds": 565.4
+  },
+  "12": {
+   "n_torsions": 12,
+   "n_beads": 15,
+   "conformations": 47141,
+   "classes": 6137,
+   "min_core_margin": 0.05171078326993461,
+   "min_rejected_margin": 0.020008273739490434,
+   "max_pairs_below_cutoff_per_bead": 5.2,
+   "enumeration_seconds": 10.5,
+   "cover": {
+    "L=1,eps=0": {
+     "lower": 757,
+     "upper": 788,
+     "exact": false,
+     "reduced": [
+      4338,
+      4120
+     ],
+     "nearest_tie": 3.209089930145126e-05
+    },
+    "L=1,eps=1": {
+     "lower": 552,
+     "upper": 595,
+     "exact": false,
+     "reduced": [
+      4629,
+      4383
+     ],
+     "nearest_tie": 2.108349533358478e-05
+    },
+    "L=1,eps=1/20*N": {
+     "lower": 605,
+     "upper": 645,
+     "exact": false,
+     "reduced": [
+      4503,
+      4279
+     ],
+     "nearest_tie": 3.6496441328637275e-05
+    },
+    "L=1,eps=1/10*N": {
+     "lower": 484,
+     "upper": 526,
+     "exact": false,
+     "reduced": [
+      4762,
+      4519
+     ],
+     "nearest_tie": 6.34794630904878e-06
+    },
+    "L=1,eps=1/4*N": {
+     "lower": 251,
+     "upper": 284,
+     "exact": false,
+     "reduced": [
+      5270,
+      5108
+     ],
+     "nearest_tie": 2.5346121503844188e-06
+    },
+    "L=1,eps=1/2*N": {
+     "lower": 109,
+     "upper": 136,
+     "exact": false,
+     "reduced": [
+      5574,
+      5400
+     ],
+     "nearest_tie": 3.965150343177015e-06
+    },
+    "L=1/5,eps=0": {
+     "lower": 21,
+     "upper": 21,
+     "exact": true,
+     "reduced": [
+      3202,
+      1013
+     ],
+     "nearest_tie": 2.9286305824882675e-08
+    },
+    "L=1/5,eps=1": {
+     "lower": 13,
+     "upper": 13,
+     "exact": true,
+     "reduced": [
+      1632,
+      595
+     ],
+     "nearest_tie": 2.9286305824882675e-08
+    },
+    "L=1/5,eps=1/20*N": {
+     "lower": 15,
+     "upper": 15,
+     "exact": true,
+     "reduced": [
+      1510,
+      594
+     ],
+     "nearest_tie": 1.7287860387682485e-07
+    },
+    "L=1/5,eps=1/10*N": {
+     "lower": 11,
+     "upper": 11,
+     "exact": true,
+     "reduced": [
+      11,
+      11
+     ],
+     "nearest_tie": 4.846720758067136e-07
+    },
+    "L=1/5,eps=1/4*N": {
+     "lower": 6,
+     "upper": 6,
+     "exact": true,
+     "reduced": [
+      6,
+      6
+     ],
+     "nearest_tie": 5.19331706527737e-08
+    },
+    "L=1/5,eps=1/2*N": {
+     "lower": 4,
+     "upper": 4,
+     "exact": true,
+     "reduced": [
+      4,
+      4
+     ],
+     "nearest_tie": 2.8548138253370325e-07
+    }
+   },
+   "seconds": 700.6
+  }
+ }
+}

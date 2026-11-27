@@ -1,0 +1,6 @@
+MUT=1: failures: 36667 | first: FAIL (h,g)(x1 o x2) != (h,g)(x1) + (h,g)(x2) + A(x1,c1) + B(x2): N1 = 3, N2 = 8, c1 = (1,1,1)
+MUT=2: failures: 69121 | first: FAIL B(x1 o x2) != B(x1): N1 = 3, N2 = 8, c1 = (1,1,1)
+MUT=3: failures: 321815 | first: FAIL A(x1 o x2, phi(c1'')) != A(x2, c1''): N1 = 3, N2 = 5, c1 = (1,1,1)
+MUT=4: failures: 219456 | first: FAIL (h,g)(x1 o x2) != (h,g)(x1) + (h,g)(x2) + A(x1,c1) + B(x2): N1 = 5, N2 = 3, c1 = (1,1,1)
+MUT=5: failures: 856224 | first: FAIL (h,g)(x1 o x2) != (h,g)(x1) + (h,g)(x2) + A(x1,c1) + B(x2): N1 = 3, N2 = 3, c1 = (1,1,1)
+MUT=6: failures: 813096 | first: FAIL (h,g)(x1 o x2) != (h,g)(x1) + (h,g)(x2) + A(x1,c1) + B(x2): N1 = 3, N2 = 3, c1 = (-1,1,-1)

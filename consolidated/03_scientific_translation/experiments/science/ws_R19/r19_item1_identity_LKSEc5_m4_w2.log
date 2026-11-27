@@ -1,0 +1,44 @@
+##### R19: output of the coordinator's driver (re-run, unmodified) #####
+=== LKSE:5 on H, tau 0.6: 5 sites, states per site [2, 31, 9, 13, 2], 14508 states, anchor [1, 15, 1, 7, 1]; order m = 4, band 2; 5 raw stage-2 tables of workstream P9 from p9_verification/cache (sum of their maxima 13.417 kT)
+(0) ball of radius 3: 5172 values (ws_P8/cache/ball_LKSEc5_H_0.60_M4_519a57fa16.npz); guiding Gibbs sample (seed 4242, uncertified): 1.45 sites off the anchor on average [8s]
+(1) sandwich (window form of P9's stage 2; K(T): workstream P9's stored choice); 3 evaluated terms exact in a window, 7 reduced, 3 pairs beyond the band.  With workstream P6's allocation of the floating-point allowance (as P9 built it): [276.417293, 276.622683], width 0.20539; with the allowance attached to each evaluated term: certified bracket [276.417294, 276.622681], width D = 0.205387 nats [0s, peak RSS 113 MB]
+(2) exact means under the CEILING model, by the transfer matrix with one site held at each of its states in turn: 25 items, 6 by the forward route, 12 on the mirrored chain (4 of the two through a window inside the chain), 7 without a route; 6 groups (direction, held site, first site of the window): fwd0@2, fwd0@3, fwd1@3, rev3@3, rev4@2, rev4@3; largest deviation of a clamped total mass from one: 2.4e-14 [0s, peak RSS 113 MB]
+| class | side | items | with a route | beta x mean on the Gibbs sample of the true ensemble (nats): items with a route; without |
+|---|---|---|---|---|
+| far | ceiling | 3 | 3 | 0.058742; 0 |
+| far | floor | 3 | 3 | 0.10787; 0 |
+| term | ceiling | 7 | 6 | 0.000200812; 0 |
+| term | floor | 7 | 6 | 3.34418e-05; 0 |
+| alloc | both | 5 | 0 | 0; 0.000350296 |
+| recovered | lower end by (LJ) | by (LP) | upper end by (UE) | by (UP) | corrected bracket: best lower, best upper | width (nats) | D / width |
+|---|---|---|---|---|---|---|---|
+| nothing (the sandwich) | — | — | — | — | [276.4172943, 276.6226814] | **0.2054** | 1.0 |
+| far pairs | 276.4591657 | 276.4667344 | 276.5178136 | 276.4686005 | [276.4667344, 276.4686005] | **0.001866** | 110.1 |
+| far pairs and out-of-window terms | 276.4593376 | 276.4669085 | 276.5177053 | 276.4684663 | [276.4669085, 276.4684663] | **0.001558** | 131.8 |
+| far pairs, terms and the allocation of the penalty | 276.4593376 | 276.4669085 | 276.5177053 | 276.4684663 | [276.4669085, 276.4684663] | **0.001558** | 131.8 |
+(3) EVERY state (14508): hypotheses m_+ - E >= s_+ and E - m_- >= s_- violated at 0 states (smallest margin 1.00e-07 kcal/mol); controls that must fail: every item doubled: 22687 violations; far items of floor and ceiling exchanged: 12011 violations; the group means (a, e, b, c, cp) by enumeration against the transfer matrix: largest relative deviation 7.3e-14
+    exact ln Z = 276.4672934: inside every corrected bracket: True; distances to the ends of the last one: 3.849e-04, 1.173e-03; for comparison, ln Z of the models with the routed items put back exactly (by enumeration; no band model can hold them): [276.4669098, 276.4677283], width 0.0008185 [2s]
+ALL DONE 9 s; peak RSS 113 MB
+##### R19: my checks on the captured objects #####
+instance: n = 5, k = [2, 31, 9, 13, 2], anchor [1, 15, 1, 7, 1], order m = 4, band w = 2, 14508 states, 25 items (6 far, 14 term, 5 alloc); eps_g = 1e-07, RND - 1 = 1.0e-09
+(a) anchored terms of the driver: non-zero entries where a site of the term is at the anchor: 0 (must be 0); allowance tables d_up - d and d - d_lo against 2^|U| eps_g [all sites off]: largest deviation 1.2e-15; routed items whose window does not hold all sites but the held one: 0; items that would fit a window: 0; smallest entry of any item 0.0e+00 (items must be >= 0)
+(b) my interpolant (26 terms from the enumerated g) against the driver's (ball cache): largest difference 1.99e-13 kcal/mol; my evaluation of the models against the driver's: 0.0e+00
+    THE IDENTITY at every state: R+ - P+ in [-1.068e-13, 1.500e-08] (allowed [0, 15 x 1e-9]), outside at 0 states; R- - P- in [-8.185e-14, 1.300e-08] (allowed [0, 15 x 1e-9]), outside at 0 states (tolerance 2e-10)
+    (b1) ceiling: |model - source model| - (far + term items): in [-9.948e-14, 1.000e-08] (allowed [0, 10 x 1e-9]); outside at 0 states; largest reduction 6.439 kcal/mol
+    (b1) floor: |model - source model| - (far + term items): in [-1.137e-13, 1.000e-08] (allowed [0, 10 x 1e-9]); outside at 0 states; largest reduction 6.485 kcal/mol
+    (b2) pen - env - (alloc items): in [0.000e+00, 5.000e-09] (allowed [0, 5 x 1e-9]); outside at 0 states; largest pen 7.999, largest env 7.457 kcal/mol
+    (b3) Theorem R with the stored tables at every state: violations of |r| <= env + A: 0; inside the ball (5172 states) largest |r| 0.00e+00; outside (9336 states): largest |r| 0.05046, smallest env/|r| 17.03, median 311.7; states with r > 0: 5862, with r < 0: 3473
+(c) no change: hypothesis violations (ceiling, floor) = (0, 0); identity violations (R - P < -2e-10) = (0, 0)   [both must be (0, 0)]
+    K1 each single item doubled in turn (25 items with a non-zero table; 0 identically zero): the driver's hypothesis check fails for 6 of 6 far, 14 of 14 term, 5 of 5 alloc; my identity check fails for 6 of 6 far, 14 of 14 term, 5 of 5 alloc
+    K2 allocation slack of the floor moved to the ceiling (s_+ + s_- unchanged): hypothesis violations (ceiling, floor) = (8804, 0); identity (10036, 0)
+    K3 the whole penalty claimed as slack on both sides (envelope counted as recoverable): hypothesis violations = (5500, 3186); identity (9336, 9336)
+    K4 Theta halved inside the alloc items (s + env/2 on both sides): hypothesis violations = (0, 0); identity (9336, 9336)
+    K4b Theta divided by ten inside the alloc items (s + 0.9 env): hypothesis violations = (0, 0); identity (9336, 9336)
+    K5 class 'far' doubled alone: hypothesis violations = (7044, 9659); identity (10530, 10530)
+    K5 class 'term' doubled alone: hypothesis violations = (6264, 5455); identity (12059, 12011)
+    K5 class 'alloc' doubled alone: hypothesis violations = (8804, 8790); identity (10036, 10036)
+    (the driver's own control, every item doubled: 22687 violations — the driver printed its count above)
+(d) ln Z of the two models, mine (enumeration) against the driver's (transfer matrix): +0.00e+00, +5.68e-14; groups: same keys True (6); five statistics per group, largest relative deviation 7.3e-14
+    the four bounds from my statistics (no safety factor, 200 iterations): [276.466908498, 276.468466275] against the driver's [276.466908498, 276.468466275]: differences +4.84e-11, -1.67e-10; exact ln Z = 276.467293422, inside mine: True, inside the driver's: True
+    D = 0.205387; corrected width 0.001558; D+ = ln Z(E) - ln Z(m+) = 0.0499992, D- = 0.155388; first-order slack recovered: beta sum<S+> = 0.0420433, beta sum <S->(ceiling) = 0.115988
+ALL DONE 10 s; peak RSS 113 MB

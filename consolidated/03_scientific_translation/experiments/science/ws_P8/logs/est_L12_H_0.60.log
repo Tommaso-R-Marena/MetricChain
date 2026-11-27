@@ -1,0 +1,69 @@
+=== p8_07_estimate: L12 on H, tau 0.6, band 11: 3200 Gibbs states (16 chains); off the anchor 0.469 of 12; by site 0.082 0.113 0.274 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
+--- order 3: 220 subsets; ball of radius 2: 79 evaluations (1.9 % of the domain).  First-order bracket 2 beta <penalty> (nats; standard error from the 16 chains in brackets)
+    exact3: Gamma =      4.319 kT | site 0.206 (0.0039) | pair/w11 0.00237 (0.00023) | pair 0.00237 (0.00023) | triple/w11 3.31e-06 (3.3e-06) | occ3/w11 3.31e-06 (3.3e-06) | occW/w11 3.31e-06 (3.3e-06) | triple 3.31e-06 (3.3e-06) | envelope 3.31e-06 (3.3e-06)
+        independent sites: site 0.206 | pair 0.0029 | triple 2.69e-05 | envelope 2.69e-05
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.207 [0.64] | pair/w11 0.00237 [0.065] | pair 0.00237 [0.065] | triple/w11 3.31e-06 [0.0053] | occ3/w11 3.31e-06 [0.0053] | occW/w11 3.31e-06 [0.0053] | triple 3.31e-06 [0.0053] | envelope 3.31e-06 [0.0053]
+--- order 4: 495 subsets; ball of radius 3: 299 evaluations (7.3 % of the domain).  First-order bracket 2 beta <penalty> (nats; standard error from the 16 chains in brackets)
+    coordinator's table (P3's constants, band 11, with fp allowances, own Gibbs sample): Gamma = 316.5 kT; refined rule site 18.71, banded pair 0.3383, banded triple 0.0005958
+    P3    : Gamma =      316.5 kT | site 18.7 (0.37) | pair/w11 0.338 (0.032) | pair 0.338 (0.032) | triple/w11 0.000595 (0.00059) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 0.000595 (0.00059) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 18.7 | pair 0.413 | triple 0.00482 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 47.6 [55] | pair/w11 2.02 [9.5] | pair 2.02 [9.5] | triple/w11 0.000688 [0.95] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 0.000688 [0.95] | quad 0 [0] | envelope 0 [0]
+    S     : Gamma =      293.8 kT | site 17 (0.33) | pair/w11 0.307 (0.029) | pair 0.307 (0.029) | triple/w11 0.000563 (0.00056) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 0.000563 (0.00056) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 17 | pair 0.375 | triple 0.00456 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 42.3 [50] | pair/w11 1.44 [8.6] | pair 1.44 [8.6] | triple/w11 0.000642 [0.9] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 0.000642 [0.9] | quad 0 [0] | envelope 0 [0]
+    AH    : Gamma =      286.1 kT | site 16.4 (0.32) | pair/w11 0.297 (0.028) | pair 0.297 (0.028) | triple/w11 0.000543 (0.00054) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 0.000543 (0.00054) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 16.4 | pair 0.362 | triple 0.0044 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 40.7 [48] | pair/w11 1.28 [8.3] | pair 1.28 [8.3] | triple/w11 0.000614 [0.87] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 0.000614 [0.87] | quad 0 [0] | envelope 0 [0]
+    SA    : Gamma =      286.1 kT | site 16.4 (0.32) | pair/w11 0.297 (0.028) | pair 0.297 (0.028) | triple/w11 0.000543 (0.00054) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 0.000543 (0.00054) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 16.4 | pair 0.362 | triple 0.0044 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 40.7 [48] | pair/w11 1.28 [8.3] | pair 1.28 [8.3] | triple/w11 0.000614 [0.87] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 0.000614 [0.87] | quad 0 [0] | envelope 0 [0]
+    Sb    : Gamma =      291.9 kT | site 16.8 (0.33) | pair/w11 0.305 (0.029) | pair 0.305 (0.029) | triple/w11 0.00056 (0.00056) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 0.00056 (0.00056) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 16.8 | pair 0.372 | triple 0.00455 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 42 [50] | pair/w11 1.41 [8.6] | pair 1.41 [8.6] | triple/w11 0.000639 [0.9] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 0.000639 [0.9] | quad 0 [0] | envelope 0 [0]
+    SAb   : Gamma =      286.1 kT | site 16.4 (0.32) | pair/w11 0.297 (0.028) | pair 0.297 (0.028) | triple/w11 0.000543 (0.00054) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 0.000543 (0.00054) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 16.4 | pair 0.362 | triple 0.0044 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 40.7 [48] | pair/w11 1.28 [8.3] | pair 1.28 [8.3] | triple/w11 0.000614 [0.87] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 0.000614 [0.87] | quad 0 [0] | envelope 0 [0]
+    exact4: Gamma =      1.294 kT | site 0.0815 (0.0016) | pair/w11 0.00134 (0.00012) | pair 0.00134 (0.00012) | triple/w11 1.79e-06 (1.8e-06) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 1.79e-06 (1.8e-06) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 0.0815 | pair 0.0016 | triple 1.46e-05 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.0815 [0.25] | pair/w11 0.00134 [0.038] | pair 0.00134 [0.038] | triple/w11 1.79e-06 [0.0029] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 1.79e-06 [0.0029] | quad 0 [0] | envelope 0 [0]
+--- order 5: 792 subsets; ball of radius 4: 794 evaluations (19 % of the domain).  First-order bracket 2 beta <penalty> (nats; standard error from the 16 chains in brackets)
+    coordinator's table (P3's constants, band 11, with fp allowances, own Gibbs sample): Gamma = 45.12 kT; refined rule site 2.719, banded pair 0.04735, banded triple 8.869e-05
+    P3    : Gamma =      45.12 kT | site 2.72 (0.054) | pair/w11 0.0473 (0.0045) | pair 0.0473 (0.0045) | triple/w11 8.57e-05 (8.6e-05) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 8.57e-05 (8.6e-05) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 2.72 | pair 0.0575 | triple 0.000695 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 3.64 [8] | pair/w11 0.0492 [1.3] | pair 0.0492 [1.3] | triple/w11 8.6e-05 [0.14] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 8.6e-05 [0.14] | quad 0 [0] | envelope 0 [0]
+    S     : Gamma =      41.56 kT | site 2.45 (0.048) | pair/w11 0.0425 (0.004) | pair 0.0425 (0.004) | triple/w11 7.87e-05 (7.9e-05) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.87e-05 (7.9e-05) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 2.45 | pair 0.0516 | triple 0.000638 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 3.17 [7.2] | pair/w11 0.0438 [1.2] | pair 0.0438 [1.2] | triple/w11 7.89e-05 [0.13] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.89e-05 [0.13] | quad 0 [0] | envelope 0 [0]
+    AH    : Gamma =      40.79 kT | site 2.4 (0.047) | pair/w11 0.0415 (0.004) | pair 0.0415 (0.004) | triple/w11 7.68e-05 (7.7e-05) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.68e-05 (7.7e-05) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 2.4 | pair 0.0504 | triple 0.000623 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 3.08 [7] | pair/w11 0.0428 [1.1] | pair 0.0428 [1.1] | triple/w11 7.7e-05 [0.12] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.7e-05 [0.12] | quad 0 [0] | envelope 0 [0]
+    SA    : Gamma =      40.79 kT | site 2.4 (0.047) | pair/w11 0.0415 (0.004) | pair 0.0415 (0.004) | triple/w11 7.68e-05 (7.7e-05) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.68e-05 (7.7e-05) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 2.4 | pair 0.0504 | triple 0.000623 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 3.08 [7] | pair/w11 0.0428 [1.1] | pair 0.0428 [1.1] | triple/w11 7.7e-05 [0.12] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.7e-05 [0.12] | quad 0 [0] | envelope 0 [0]
+    Sb    : Gamma =      41.36 kT | site 2.44 (0.048) | pair/w11 0.0423 (0.004) | pair 0.0423 (0.004) | triple/w11 7.84e-05 (7.8e-05) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.84e-05 (7.8e-05) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 2.44 | pair 0.0514 | triple 0.000636 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 3.15 [7.2] | pair/w11 0.0436 [1.2] | pair 0.0436 [1.2] | triple/w11 7.86e-05 [0.13] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.86e-05 [0.13] | quad 0 [0] | envelope 0 [0]
+    SAb   : Gamma =      40.79 kT | site 2.4 (0.047) | pair/w11 0.0415 (0.004) | pair 0.0415 (0.004) | triple/w11 7.68e-05 (7.7e-05) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.68e-05 (7.7e-05) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 2.4 | pair 0.0504 | triple 0.000623 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 3.08 [7] | pair/w11 0.0428 [1.1] | pair 0.0428 [1.1] | triple/w11 7.7e-05 [0.12] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.7e-05 [0.12] | quad 0 [0] | envelope 0 [0]
+--- order 6: 924 subsets; ball of radius 5: 1586 evaluations (39 % of the domain).  First-order bracket 2 beta <penalty> (nats; standard error from the 16 chains in brackets)
+    coordinator's table (P3's constants, band 11, with fp allowances, own Gibbs sample): Gamma = 5.012 kT; refined rule site 0.3104, banded pair 0.005215, banded triple 1.858e-05
+    P3    : Gamma =      5.012 kT | site 0.31 (0.0061) | pair/w11 0.00521 (0.00049) | pair 0.00521 (0.00049) | triple/w11 8.85e-06 (8.8e-06) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 8.85e-06 (8.8e-06) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 0.31 | pair 0.00631 | triple 7.17e-05 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.312 [0.92] | pair/w11 0.00521 [0.14] | pair 0.00521 [0.14] | triple/w11 8.85e-06 [0.014] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 8.85e-06 [0.014] | quad 0 [0] | envelope 0 [0]
+    S     : Gamma =      4.592 kT | site 0.278 (0.0055) | pair/w11 0.00463 (0.00044) | pair 0.00463 (0.00044) | triple/w11 7.92e-06 (7.9e-06) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.92e-06 (7.9e-06) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 0.278 | pair 0.00561 | triple 6.42e-05 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.28 [0.82] | pair/w11 0.00463 [0.13] | pair 0.00463 [0.13] | triple/w11 7.92e-06 [0.013] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.92e-06 [0.013] | quad 0 [0] | envelope 0 [0]
+    AH    : Gamma =      4.532 kT | site 0.274 (0.0054) | pair/w11 0.00455 (0.00043) | pair 0.00455 (0.00043) | triple/w11 7.78e-06 (7.8e-06) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.78e-06 (7.8e-06) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 0.274 | pair 0.00552 | triple 6.31e-05 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.276 [0.81] | pair/w11 0.00456 [0.13] | pair 0.00456 [0.13] | triple/w11 7.78e-06 [0.012] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.78e-06 [0.012] | quad 0 [0] | envelope 0 [0]
+    SA    : Gamma =      4.532 kT | site 0.274 (0.0054) | pair/w11 0.00455 (0.00043) | pair 0.00455 (0.00043) | triple/w11 7.78e-06 (7.8e-06) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.78e-06 (7.8e-06) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 0.274 | pair 0.00552 | triple 6.31e-05 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.276 [0.81] | pair/w11 0.00456 [0.13] | pair 0.00456 [0.13] | triple/w11 7.78e-06 [0.012] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.78e-06 [0.012] | quad 0 [0] | envelope 0 [0]
+    Sb    : Gamma =      4.576 kT | site 0.277 (0.0055) | pair/w11 0.00461 (0.00044) | pair 0.00461 (0.00044) | triple/w11 7.89e-06 (7.9e-06) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.89e-06 (7.9e-06) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 0.277 | pair 0.00559 | triple 6.4e-05 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.279 [0.82] | pair/w11 0.00461 [0.13] | pair 0.00461 [0.13] | triple/w11 7.89e-06 [0.013] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.89e-06 [0.013] | quad 0 [0] | envelope 0 [0]
+    SAb   : Gamma =      4.532 kT | site 0.274 (0.0054) | pair/w11 0.00455 (0.00043) | pair 0.00455 (0.00043) | triple/w11 7.78e-06 (7.8e-06) | occ3/w11 0 (0) | occW/w11 0 (0) | triple 7.78e-06 (7.8e-06) | quad 0 (0) | envelope 0 (0)
+        independent sites: site 0.274 | pair 0.00552 | triple 6.31e-05 | quad 0 | envelope 0
+        ln<e^(beta pen)> - ln<e^(-beta pen)> on the sample [largest beta*pen on the sample]: site 0.276 [0.81] | pair/w11 0.00456 [0.13] | pair 0.00456 [0.13] | triple/w11 7.78e-06 [0.012] | occ3/w11 0 [0] | occW/w11 0 [0] | triple 7.78e-06 [0.012] | quad 0 [0] | envelope 0 [0]
+DONE in 14.1 s; peak RSS 148 MB

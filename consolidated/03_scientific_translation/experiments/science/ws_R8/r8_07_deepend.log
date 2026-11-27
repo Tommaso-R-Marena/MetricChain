@@ -1,0 +1,30 @@
+== 1: the deep-end chain, exact sums ==
+  n=400 u=1.0 r1=164 r2=r1+1 D=200: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)=  -10.9 vs ln(1/r2)=-5.1: sufficient condition True;  m(r2) < U0: True
+  n=400 u=1.0 r1=164 r2=r1+12 D=200: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)=  -10.9 vs ln(1/r2)=-5.2: sufficient condition True;  m(r2) < U0: True
+  n=800 u=1.0 r1=320 r2=r1+30 D=336: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)=  -10.7 vs ln(1/r2)=-5.9: sufficient condition True;  m(r2) < U0: True
+  n=800 u=2.0 r1=235 r2=r1+60 D=400: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)= -155.4 vs ln(1/r2)=-5.7: sufficient condition True;  m(r2) < U0: True
+  n=600 u=4.0 r1=108 r2=r1+80 D=330: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)=   -inf vs ln(1/r2)=-5.2: sufficient condition True;  m(r2) < U0: True
+  n=800 u=1.0 r1=320 r2=r1+30 D=200: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)=   -0.2 vs ln(1/r2)=-5.9: sufficient condition False;  m(r2) < U0: True
+  n=800 u=1.0 r1=320 r2=r1+30 D=80: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)=   -0.0 vs ln(1/r2)=-5.9: sufficient condition False;  m(r2) < U0: True
+  n=300 u=0.5 r1=138 r2=r1+5 D=150: (i) True (ii) True (iii) True (iv) True (v) True;  ln(omega/W2)=   -2.7 vs ln(1/r2)=-5.0: sufficient condition False;  m(r2) < U0: True
+  least n from which Hoeffding's bound gives the sufficient condition p < 1/r2  (rho_bar = r2/n):
+     u=1.0 rho1=rho0+0.01 rho_bar=0.45: n >= 6100
+     u=1.0 rho1=rho0+0.01 rho_bar=0.49: n >= 6300
+     u=2.0 rho1=rho0+0.01 rho_bar=0.4: n >= 1400
+     u=4.0 rho1=rho0+0.01 rho_bar=0.3: n >= 450
+     u=0.5 rho1=rho0+0.01 rho_bar=0.47: n >= 33350
+== 2: expectation against high probability in A16.6 ==
+  (a) quantile lower bound: every class-correct algorithm with the datum uses more than m evaluations at g0 with
+      probability >= (1-2 delta)(1-2/n^2) - m|B(n,r2-1)|/2^n;  e.g. delta=0.05, m = 0.45*2^n/|B|: >= 0.45 - o(1).
+  (b) tolerant test: least k0 with (M'|V|/2^n)^(k0+1) * 2^n <= 1, M' = 3(ln(1/delta)+k0) 2^n/|B(n,R)|, delta = 0.05
+     n=800 u=1.0 r1=320 R=344: ln(M|V|/2^n) =    -7.83;  k0 = 234  (asymptotically k0 ~ ln2/(h(R/n)-h(r1/n)) = 67.3)
+     n=1500 u=1.0 r1=585 R=670: ln(M|V|/2^n) =   -27.98;  k0 = 43  (asymptotically k0 ~ ln2/(h(R/n)-h(r1/n)) = 37.1)
+     n=1000 u=2.0 r1=294 R=348: ln(M|V|/2^n) =   -40.46;  k0 = 18  (asymptotically k0 ~ ln2/(h(R/n)-h(r1/n)) = 17.1)
+     n=700 u=4.0 r1=126 R=203: ln(M|V|/2^n) =   -92.06;  k0 = 5  (asymptotically k0 ~ ln2/(h(R/n)-h(r1/n)) = 5.3)
+     n=400 u=1.0 r1=164 R=170: ln(M|V|/2^n) =    -1.42;  k0 = None  (asymptotically k0 ~ ln2/(h(R/n)-h(r1/n)) = 138.7)
+     n=2400 u=1.0 r1=924 R=972: ln(M|V|/2^n) =   -19.99;  k0 = 108  (asymptotically k0 ~ ln2/(h(R/n)-h(r1/n)) = 81.3)
+SUMMARY deep-end chain holds in all cases: True
+
+real	0m0.455s
+user	0m0.885s
+sys	0m0.052s

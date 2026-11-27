@@ -1,0 +1,13 @@
+[4] conclusion (circular decomposable with exact support) at test points, 1493 random networks (4..12 leaves):
+    inside (a): (0.1,1,0.7,1)                            in(a)=True  in(b)=True  | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    inside (a): (0,1,0.9,1)                              in(a)=True  in(b)=True  | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    boundary (a): NANUQ (0,1,1/2,1)                      in(a)=True  in(b)=True  | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    boundary (a): (0.4,1,0.7,1)  c+s=2a                  in(a)=True  in(b)=True  | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    outside (a), inside (b): Modified (1/2,1,1/2,1)      in(a)=False in(b)=True  | class A: ok 1043 fail 0 | general: ok 352 fail 98
+    outside (a), inside (b): (0.5,1,0.7,1)               in(a)=False in(b)=True  | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    outside (a): c+s = 2a + 0.02: (0.42,1,0.7,1)         in(a)=False in(b)=True  | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    outside: o = s + 0.02: (0.1,1,0.7,1.02)              in(a)=False in(b)=False | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    outside: o = s - 0.02: (0.1,1,0.7,0.98)              in(a)=False in(b)=False | class A: ok 1043 fail 0 | general: ok 450 fail 0
+    outside: a = s: (0,1,1,1)                            in(a)=False in(b)=False | class A: ok 81 fail 962 | general: ok 65 fail 385
+    outside (b): c = a + 0.02: (0.72,1,0.7,1)            in(a)=False in(b)=False | class A: ok 1041 fail 2 | general: ok 345 fail 105
+    outside (b): s = 2a + 0.02: (0,1,0.49,1)             in(a)=False in(b)=False | class A: ok 1043 fail 0 | general: ok 450 fail 0

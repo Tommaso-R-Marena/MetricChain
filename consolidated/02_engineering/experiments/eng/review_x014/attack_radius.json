@@ -1,0 +1,6111 @@
+{
+ "mode": "radius",
+ "seed": 20261126,
+ "minutes": 10.0,
+ "summary": {
+  "configurations": 46,
+  "skipped": 2,
+  "runs": 91013,
+  "closed": 90991,
+  "aborted": 0,
+  "tie_aborts": 22,
+  "good": 91013,
+  "runs_with_ties": 1479,
+  "invalid_on_good_event": 0,
+  "invalid_off_good_event": 0,
+  "violations_on_good_event": {},
+  "violations_off_good_event": {},
+  "deterministic_violations": {},
+  "max_class_violation": 6.050715484207103e-15,
+  "min_slack_width": 0.16307289297865268,
+  "max_lcost_minus_lCmax": -4.629124664862834,
+  "negligible_levels": 4150,
+  "closed_empty_tail": 127,
+  "closed_at_radius_0": 0,
+  "closed_at_radius_ge_1": 90864,
+  "closed_at_populated_pass": 15440,
+  "memory_errors": 0,
+  "max_tail_ratio": 0.4388897602670697,
+  "min_harper_ratio": 1.0203918535984837
+ },
+ "rows": [
+  {
+   "shape": [
+    8,
+    0.3,
+    [
+     10.0
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20261126,
+   "K": 210,
+   "K_used": 210,
+   "J": 32,
+   "r_dag": 3,
+   "m_max": 13,
+   "x_out": 3.3179518850358596,
+   "lCmax": 16.18500973443278,
+   "lM_bar": 13.882424547911175,
+   "Omega": 12.4,
+   "Omega_Y": 10.0,
+   "lPi": -10.596562729607928,
+   "runs": 1418,
+   "closed": 1418,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1418,
+   "ties_runs": 44,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.6032109916137642,
+   "min_slack_width": 0.7147408934220953,
+   "max_lcost": 9.729193687429403,
+   "neg_levels": 0,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "anticone": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1418,
+   "closed_at_populated_pass": 249,
+   "max_tail_ratio": 0.311946642290597,
+   "min_harper_ratio": 1.1347942421894321,
+   "seconds": 25.0000958442688
+  },
+  {
+   "shape": [
+    8,
+    0.3,
+    [
+     10.0
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20269045,
+   "K": 213,
+   "K_used": 213,
+   "J": 51,
+   "r_dag": 3,
+   "m_max": 12,
+   "x_out": 2.754702342159376,
+   "lCmax": 15.351166296696315,
+   "lM_bar": 13.271724539702001,
+   "Omega": 12.4,
+   "Omega_Y": 10.0,
+   "lPi": -10.596562729607928,
+   "runs": 1180,
+   "closed": 1180,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1180,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.1203334613967457,
+   "min_slack_width": 0.6343688807626302,
+   "max_lcost": 8.827174771362785,
+   "neg_levels": 0,
+   "class_violation": 6.050715484207103e-15,
+   "by_kind": {
+    "rough_up": {
+     "runs": 75,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 75,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 76,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 74,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 74,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 74,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 74,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 73,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 74,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 74,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 73,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 73,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 73,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 73,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 73,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 72,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1180,
+   "closed_at_populated_pass": 384,
+   "max_tail_ratio": 0.30896549328435585,
+   "min_harper_ratio": 1.1365841001778347,
+   "seconds": 25.00260877609253
+  },
+  {
+   "shape": [
+    8,
+    0.3,
+    [
+     10.0
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20276964,
+   "K": 204,
+   "K_used": 204,
+   "J": 32,
+   "r_dag": 7,
+   "m_max": 11,
+   "x_out": 9.003066405379883,
+   "lCmax": 14.924214830698899,
+   "lM_bar": 12.844772959032753,
+   "Omega": 12.4,
+   "Omega_Y": 10.0,
+   "lPi": -10.596562729607928,
+   "runs": 2024,
+   "closed": 2024,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2024,
+   "ties_runs": 72,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.9537132096898606,
+   "min_slack_width": 6.049353195690022,
+   "max_lcost": 8.09101504171053,
+   "neg_levels": 0,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "rough": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 128,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 128,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2024,
+   "closed_at_populated_pass": 503,
+   "max_tail_ratio": 0.21776005131499376,
+   "min_harper_ratio": 1.1347942421894324,
+   "seconds": 25.015618562698364
+  },
+  {
+   "shape": [
+    8,
+    0.3,
+    [
+     10.0
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20284883,
+   "K": 201,
+   "K_used": 201,
+   "J": 40,
+   "r_dag": 3,
+   "m_max": 13,
+   "x_out": 11.317950979600258,
+   "lCmax": 15.441980988232862,
+   "lM_bar": 14.055686430490608,
+   "Omega": 12.4,
+   "Omega_Y": 10.0,
+   "lPi": -10.596562729607928,
+   "runs": 2438,
+   "closed": 2426,
+   "aborted": 0,
+   "tie_aborts": 12,
+   "good": 2438,
+   "ties_runs": 73,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 10.60151964979493,
+   "min_slack_width": 0.716431329805328,
+   "max_lcost": 8.769196271411001,
+   "neg_levels": 2685,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "cone0": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2426,
+   "closed_at_populated_pass": 639,
+   "max_tail_ratio": 0.3245518658433693,
+   "min_harper_ratio": 1.137641952567851,
+   "seconds": 25.008818864822388
+  },
+  {
+   "shape": [
+    8,
+    0.3,
+    [
+     10.0
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20292802,
+   "K": 211,
+   "K_used": 211,
+   "J": 31,
+   "r_dag": 3,
+   "m_max": 18,
+   "x_out": 2.7164672057855648,
+   "lCmax": 19.84786804151083,
+   "lM_bar": 17.768426497431165,
+   "Omega": 12.4,
+   "Omega_Y": 10.0,
+   "lPi": -10.596562729607928,
+   "runs": 1865,
+   "closed": 1865,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1865,
+   "ties_runs": 58,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.101519649794931,
+   "min_slack_width": 0.6149475559906339,
+   "max_lcost": 9.510815266226716,
+   "neg_levels": 0,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "outer_dip": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 115,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 119,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 118,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 114,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 118,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 115,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1865,
+   "closed_at_populated_pass": 430,
+   "max_tail_ratio": 0.3245518658433693,
+   "min_harper_ratio": 1.1347942421894324,
+   "seconds": 25.020832061767578
+  },
+  {
+   "shape": [
+    8,
+    0.3,
+    [
+     10.0
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20300721,
+   "K": 740,
+   "K_used": 740,
+   "J": 62,
+   "r_dag": 2,
+   "m_max": 14,
+   "x_out": 1.6780036916298653,
+   "lCmax": 17.931826662054018,
+   "lM_bar": 15.629241552755504,
+   "Omega": 12.4,
+   "Omega_Y": 10.0,
+   "lPi": -10.596562729607928,
+   "runs": 710,
+   "closed": 710,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 710,
+   "ties_runs": 28,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.4191697671621544,
+   "min_slack_width": 0.2588339244677109,
+   "max_lcost": 12.374975404956045,
+   "neg_levels": 0,
+   "class_violation": 4.274358644806853e-15,
+   "by_kind": {
+    "rough": {
+     "runs": 43,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 45,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 46,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 47,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 45,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 46,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 45,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 46,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 44,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 44,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 43,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 45,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 43,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 42,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 44,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 42,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 710,
+   "closed_at_populated_pass": 125,
+   "max_tail_ratio": 0.3023199855977939,
+   "min_harper_ratio": 1.095388826844681,
+   "seconds": 25.006909370422363
+  },
+  {
+   "shape": [
+    10,
+    0.2,
+    [
+     2.0,
+     0.7
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20308640,
+   "K": 197,
+   "K_used": 197,
+   "J": 18,
+   "r_dag": 6,
+   "m_max": 11,
+   "x_out": 3.3199548198682147,
+   "lCmax": 14.745050869842144,
+   "lM_bar": 12.442465382112896,
+   "Omega": 4.7,
+   "Omega_Y": 2.7,
+   "lPi": -2.8937365870250056,
+   "runs": 2466,
+   "closed": 2466,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2466,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.5142940648245617,
+   "min_slack_width": 0.805660755043653,
+   "max_lcost": 8.97221007835365,
+   "neg_levels": 0,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "outer_dip": {
+     "runs": 157,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 156,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2466,
+   "closed_at_populated_pass": 344,
+   "max_tail_ratio": 0.2618726705549609,
+   "min_harper_ratio": 1.1013398383475852,
+   "seconds": 25.014017820358276
+  },
+  {
+   "shape": [
+    10,
+    0.2,
+    [
+     2.0,
+     0.7
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20316559,
+   "K": 200,
+   "K_used": 200,
+   "J": 28,
+   "r_dag": 6,
+   "m_max": 10,
+   "x_out": 2.7582175778150644,
+   "lCmax": 13.880257549411759,
+   "lM_bar": 11.800815070426903,
+   "Omega": 4.7,
+   "Omega_Y": 2.7,
+   "lPi": -2.8937365870250056,
+   "runs": 2173,
+   "closed": 2173,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2173,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.0022850673247072,
+   "min_slack_width": 0.7559325104903571,
+   "max_lcost": 8.071218539969863,
+   "neg_levels": 0,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "outer_set": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 135,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 135,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 135,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 136,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2173,
+   "closed_at_populated_pass": 408,
+   "max_tail_ratio": 0.26314836450054285,
+   "min_harper_ratio": 1.1007938230576995,
+   "seconds": 25.006839990615845
+  },
+  {
+   "shape": [
+    10,
+    0.2,
+    [
+     2.0,
+     0.7
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20324478,
+   "K": 194,
+   "K_used": 194,
+   "J": 18,
+   "r_dag": 9,
+   "m_max": 11,
+   "x_out": 9.003073214429202,
+   "lCmax": 14.31894782840796,
+   "lM_bar": 12.239505682278514,
+   "Omega": 4.7,
+   "Omega_Y": 2.7,
+   "lPi": -2.8937365870250056,
+   "runs": 1983,
+   "closed": 1983,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1983,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.6531925000247067,
+   "min_slack_width": 6.349880714404495,
+   "max_lcost": 8.040768994367578,
+   "neg_levels": 0,
+   "class_violation": 2.886579864025407e-15,
+   "by_kind": {
+    "anticone": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1983,
+   "closed_at_populated_pass": 302,
+   "max_tail_ratio": 0.21364502944287034,
+   "min_harper_ratio": 1.1023344928703613,
+   "seconds": 25.02895212173462
+  },
+  {
+   "shape": [
+    10,
+    0.2,
+    [
+     2.0,
+     0.7
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20332397,
+   "K": 185,
+   "K_used": 185,
+   "J": 19,
+   "r_dag": 6,
+   "m_max": 11,
+   "x_out": 4.748430881831213,
+   "lCmax": 13.817206132267033,
+   "lM_bar": 12.430910772840782,
+   "Omega": 4.7,
+   "Omega_Y": 2.7,
+   "lPi": -2.8937365870250056,
+   "runs": 2567,
+   "closed": 2567,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2567,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 3.9442940648245615,
+   "min_slack_width": 0.8041368170066518,
+   "max_lcost": 7.993282328101591,
+   "neg_levels": 0,
+   "class_violation": 1.9984014443252818e-15,
+   "by_kind": {
+    "outer_plateau": {
+     "runs": 161,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 162,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 162,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 161,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 161,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 160,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2567,
+   "closed_at_populated_pass": 419,
+   "max_tail_ratio": 0.22685615947367146,
+   "min_harper_ratio": 1.1035039516257248,
+   "seconds": 25.000868320465088
+  },
+  {
+   "shape": [
+    10,
+    0.2,
+    [
+     2.0,
+     0.7
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20340316,
+   "K": 199,
+   "K_used": 199,
+   "J": 17,
+   "r_dag": 6,
+   "m_max": 16,
+   "x_out": 2.7201191996486838,
+   "lCmax": 18.389963814249043,
+   "lM_bar": 16.310522262257273,
+   "Omega": 4.7,
+   "Omega_Y": 2.7,
+   "lPi": -2.8937365870250056,
+   "runs": 1793,
+   "closed": 1793,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1793,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.0142940648245617,
+   "min_slack_width": 0.705825134824122,
+   "max_lcost": 8.750841375375533,
+   "neg_levels": 0,
+   "class_violation": 1.9984014443252818e-15,
+   "by_kind": {
+    "outer_plateau": {
+     "runs": 113,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1793,
+   "closed_at_populated_pass": 259,
+   "max_tail_ratio": 0.21364502944287034,
+   "min_harper_ratio": 1.1001873882286028,
+   "seconds": 25.000607013702393
+  },
+  {
+   "shape": [
+    10,
+    0.2,
+    [
+     2.0,
+     0.7
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20348235,
+   "K": 701,
+   "K_used": 701,
+   "J": 34,
+   "r_dag": 3,
+   "m_max": 13,
+   "x_out": 1.6882859284465057,
+   "lCmax": 17.189762336285266,
+   "lM_bar": 14.88717720904749,
+   "Omega": 4.7,
+   "Omega_Y": 2.7,
+   "lPi": -2.8937365870250056,
+   "runs": 1103,
+   "closed": 1103,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1103,
+   "ties_runs": 32,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.3008845130707152,
+   "min_slack_width": 0.38740141537579054,
+   "max_lcost": 10.241423003850693,
+   "neg_levels": 0,
+   "class_violation": 2.831068712794149e-15,
+   "by_kind": {
+    "ridges": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 70,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 68,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 68,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 70,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 67,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 70,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1103,
+   "closed_at_populated_pass": 61,
+   "max_tail_ratio": 0.3511908958437398,
+   "min_harper_ratio": 1.074293545864978,
+   "seconds": 25.009310007095337
+  },
+  {
+   "shape": [
+    11,
+    0.15,
+    [
+     2.0
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20356154,
+   "K": 193,
+   "K_used": 193,
+   "J": 16,
+   "r_dag": 8,
+   "m_max": 10,
+   "x_out": 3.3216139807107283,
+   "lCmax": 14.457982595807598,
+   "lM_bar": 12.155396976822868,
+   "Omega": 3.6499999999999995,
+   "Omega_Y": 2.0,
+   "lPi": -2.2896893700084813,
+   "runs": 1698,
+   "closed": 1698,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1698,
+   "ties_runs": 1,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.380858736924573,
+   "min_slack_width": 0.9407552437861555,
+   "max_lcost": 8.258681496264236,
+   "neg_levels": 0,
+   "class_violation": 1.2490009027033011e-15,
+   "by_kind": {
+    "cone": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 105,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 108,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 105,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 105,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 105,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1698,
+   "closed_at_populated_pass": 199,
+   "max_tail_ratio": 0.31130931430906034,
+   "min_harper_ratio": 1.0917884679392882,
+   "seconds": 25.001434087753296
+  },
+  {
+   "shape": [
+    11,
+    0.15,
+    [
+     2.0
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20364073,
+   "K": 198,
+   "K_used": 198,
+   "J": 26,
+   "r_dag": 8,
+   "m_max": 10,
+   "x_out": 2.761125458713746,
+   "lCmax": 13.744954676786644,
+   "lM_bar": 11.6655120620017,
+   "Omega": 3.6499999999999995,
+   "Omega_Y": 2.0,
+   "lPi": -2.2896893700084813,
+   "runs": 1433,
+   "closed": 1433,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1433,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.729951304224573,
+   "min_slack_width": 1.0311741544891728,
+   "max_lcost": 8.06117135969092,
+   "neg_levels": 0,
+   "class_violation": 1.3322676295501878e-15,
+   "by_kind": {
+    "outer_cone": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 91,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 91,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 91,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 91,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1433,
+   "closed_at_populated_pass": 264,
+   "max_tail_ratio": 0.3862159387866125,
+   "min_harper_ratio": 1.0888600809749025,
+   "seconds": 25.116032600402832
+  },
+  {
+   "shape": [
+    11,
+    0.15,
+    [
+     2.0
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20371992,
+   "K": 190,
+   "K_used": 190,
+   "J": 16,
+   "r_dag": 10,
+   "m_max": 10,
+   "x_out": 9.003078865108186,
+   "lCmax": 14.186399552916347,
+   "lM_bar": 12.106957321115729,
+   "Omega": 3.6499999999999995,
+   "Omega_Y": 2.0,
+   "lPi": -2.2896893700084813,
+   "runs": 1752,
+   "closed": 1752,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1752,
+   "ties_runs": 2,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.380858736924573,
+   "min_slack_width": 6.6222201281836135,
+   "max_lcost": 8.019941687677365,
+   "neg_levels": 0,
+   "class_violation": 2.1371793224034263e-15,
+   "by_kind": {
+    "ridges": {
+     "runs": 112,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 111,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 109,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 108,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 111,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 110,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 109,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 108,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 109,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 109,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 110,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 110,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 110,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 110,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 109,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1752,
+   "closed_at_populated_pass": 211,
+   "max_tail_ratio": 0.41128825994303914,
+   "min_harper_ratio": 1.0917884679392882,
+   "seconds": 25.005449056625366
+  },
+  {
+   "shape": [
+    11,
+    0.15,
+    [
+     2.0
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20379911,
+   "K": 183,
+   "K_used": 183,
+   "J": 17,
+   "r_dag": 8,
+   "m_max": 11,
+   "x_out": 4.119598532104213,
+   "lCmax": 13.545647025505795,
+   "lM_bar": 12.159351354599352,
+   "Omega": 3.6499999999999995,
+   "Omega_Y": 2.0,
+   "lPi": -2.2896893700084813,
+   "runs": 2450,
+   "closed": 2450,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2450,
+   "ties_runs": 1,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 3.1808587369245727,
+   "min_slack_width": 0.9387397951796403,
+   "max_lcost": 7.289610521451167,
+   "neg_levels": 0,
+   "class_violation": 1.2490009027033011e-15,
+   "by_kind": {
+    "wells": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 152,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2450,
+   "closed_at_populated_pass": 355,
+   "max_tail_ratio": 0.41128825994303897,
+   "min_harper_ratio": 1.113835117874521,
+   "seconds": 25.001858472824097
+  },
+  {
+   "shape": [
+    11,
+    0.15,
+    [
+     2.0
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20387830,
+   "K": 198,
+   "K_used": 198,
+   "J": 16,
+   "r_dag": 8,
+   "m_max": 16,
+   "x_out": 2.723139833145091,
+   "lCmax": 18.1724383785382,
+   "lM_bar": 16.09299682404066,
+   "Omega": 3.6499999999999995,
+   "Omega_Y": 2.0,
+   "lPi": -2.2896893700084813,
+   "runs": 1700,
+   "closed": 1700,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1700,
+   "ties_runs": 1,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.8808587369245728,
+   "min_slack_width": 0.842281096220518,
+   "max_lcost": 8.06117135969092,
+   "neg_levels": 0,
+   "class_violation": 2.1371793224034263e-15,
+   "by_kind": {
+    "wells": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 108,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 110,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 107,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 105,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 106,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 105,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 105,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1700,
+   "closed_at_populated_pass": 222,
+   "max_tail_ratio": 0.41128825994303914,
+   "min_harper_ratio": 1.0786456569397598,
+   "seconds": 25.011052131652832
+  },
+  {
+   "shape": [
+    11,
+    0.15,
+    [
+     2.0
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20395749,
+   "K": 686,
+   "K_used": 686,
+   "J": 31,
+   "r_dag": 5,
+   "m_max": 11,
+   "x_out": 1.6967394306366257,
+   "lCmax": 16.145601689822687,
+   "lM_bar": 13.843016499541754,
+   "Omega": 3.6499999999999995,
+   "Omega_Y": 2.0,
+   "lPi": -2.2896893700084813,
+   "skipped": "samples of up to 3.7e+06 points"
+  },
+  {
+   "shape": [
+    9,
+    0.5,
+    [
+     3.0,
+     0.4
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20403668,
+   "K": 206,
+   "K_used": 206,
+   "J": 24,
+   "r_dag": 2,
+   "m_max": 14,
+   "x_out": 3.3181710113172933,
+   "lCmax": 17.285251850728244,
+   "lM_bar": 14.982666726609114,
+   "Omega": 7.9,
+   "Omega_Y": 3.4,
+   "lPi": -5.1036764754352575,
+   "runs": 828,
+   "closed": 828,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 828,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.99048756387624,
+   "min_slack_width": 0.3276834474410535,
+   "max_lcost": 10.403080323368991,
+   "neg_levels": 0,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "anticone0": {
+     "runs": 51,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 51,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 52,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 53,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 51,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 53,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 53,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 54,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 51,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 51,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 54,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 50,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 49,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 53,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 52,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 50,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 828,
+   "closed_at_populated_pass": 10,
+   "max_tail_ratio": 0.3802034266339571,
+   "min_harper_ratio": 1.2170002176416685,
+   "seconds": 25.02267622947693
+  },
+  {
+   "shape": [
+    9,
+    0.5,
+    [
+     3.0,
+     0.4
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20411587,
+   "K": 209,
+   "K_used": 209,
+   "J": 37,
+   "r_dag": 2,
+   "m_max": 13,
+   "x_out": 2.7550871772380723,
+   "lCmax": 16.415655960269067,
+   "lM_bar": 14.33621434432645,
+   "Omega": 7.9,
+   "Omega_Y": 3.4,
+   "lPi": -5.1036764754352575,
+   "runs": 766,
+   "closed": 766,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 766,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.3611042338027963,
+   "min_slack_width": 0.39398294343527596,
+   "max_lcost": 10.194401895568575,
+   "neg_levels": 0,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "wells": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 47,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 48,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 47,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 766,
+   "closed_at_populated_pass": 25,
+   "max_tail_ratio": 0.28018558101112717,
+   "min_harper_ratio": 1.204505625579012,
+   "seconds": 25.0012469291687
+  },
+  {
+   "shape": [
+    9,
+    0.5,
+    [
+     3.0,
+     0.4
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20419506,
+   "K": 199,
+   "K_used": 199,
+   "J": 24,
+   "r_dag": 8,
+   "m_max": 11,
+   "x_out": 9.003067149645618,
+   "lCmax": 14.619809177910966,
+   "lM_bar": 12.540367188829414,
+   "Omega": 7.9,
+   "Omega_Y": 3.4,
+   "lPi": -5.1036764754352575,
+   "runs": 1526,
+   "closed": 1526,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1526,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 4.1420285266757775,
+   "min_slack_width": 4.861038622969841,
+   "max_lcost": 8.066207568006265,
+   "neg_levels": 0,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "outer_cone": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 95,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 95,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 95,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 95,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1526,
+   "closed_at_populated_pass": 482,
+   "max_tail_ratio": 0.35026611180811296,
+   "min_harper_ratio": 1.2170002176416685,
+   "seconds": 25.00327777862549
+  },
+  {
+   "shape": [
+    9,
+    0.5,
+    [
+     3.0,
+     0.4
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20427425,
+   "K": 196,
+   "K_used": 196,
+   "J": 26,
+   "r_dag": 2,
+   "m_max": 15,
+   "x_out": 5.37797902594318,
+   "lCmax": 16.396160695030826,
+   "lM_bar": 15.009866258186177,
+   "Omega": 7.9,
+   "Omega_Y": 3.4,
+   "lPi": -5.1036764754352575,
+   "runs": 2032,
+   "closed": 2032,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2032,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 5.0601324542646875,
+   "min_slack_width": 0.3178465716784924,
+   "max_lcost": 9.437077458800523,
+   "neg_levels": 0,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "cone0": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 128,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 128,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 128,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 126,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2032,
+   "closed_at_populated_pass": 109,
+   "max_tail_ratio": 0.3024086516699335,
+   "min_harper_ratio": 1.2094745210470725,
+   "seconds": 25.01845407485962
+  },
+  {
+   "shape": [
+    9,
+    0.5,
+    [
+     3.0,
+     0.4
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20435344,
+   "K": 208,
+   "K_used": 208,
+   "J": 23,
+   "r_dag": 2,
+   "m_max": 20,
+   "x_out": 2.7168670370076597,
+   "lCmax": 20.942971190911326,
+   "lM_bar": 18.863529648428738,
+   "Omega": 7.9,
+   "Omega_Y": 3.4,
+   "lPi": -5.1036764754352575,
+   "runs": 1411,
+   "closed": 1411,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1411,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.4804529210259143,
+   "min_slack_width": 0.23641411598174544,
+   "max_lcost": 10.189605903011726,
+   "neg_levels": 0,
+   "class_violation": 2.220446049250313e-15,
+   "by_kind": {
+    "ridges": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 89,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1411,
+   "closed_at_populated_pass": 28,
+   "max_tail_ratio": 0.24545999468650226,
+   "min_harper_ratio": 1.212944629789658,
+   "seconds": 25.021934270858765
+  },
+  {
+   "shape": [
+    9,
+    0.5,
+    [
+     3.0,
+     0.4
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20443263,
+   "K": 730,
+   "K_used": 730,
+   "J": 46,
+   "r_dag": 1,
+   "m_max": 16,
+   "x_out": 1.6791327523740611,
+   "lCmax": 19.626713872216246,
+   "lM_bar": 17.324128776228378,
+   "Omega": 7.9,
+   "Omega_Y": 3.4,
+   "lPi": -5.1036764754352575,
+   "runs": 426,
+   "closed": 426,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 426,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.5160598593954084,
+   "min_slack_width": 0.16307289297865268,
+   "max_lcost": 12.96938467720724,
+   "neg_levels": 0,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "outer_dip": {
+     "runs": 28,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 27,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 25,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 28,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 28,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 28,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 25,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 26,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 27,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 28,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 26,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 26,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 26,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 26,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 25,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 27,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 426,
+   "closed_at_populated_pass": 16,
+   "max_tail_ratio": 0.34114959518243443,
+   "min_harper_ratio": 1.1193104539411158,
+   "seconds": 25.023422718048096
+  },
+  {
+   "shape": [
+    7,
+    0.1,
+    [
+     5.0,
+     5.0
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20451182,
+   "K": 204,
+   "K_used": 204,
+   "J": 28,
+   "r_dag": 6,
+   "m_max": 11,
+   "x_out": 3.3179555136141103,
+   "lCmax": 15.02207589790997,
+   "lM_bar": 12.719490505692633,
+   "Omega": 10.7,
+   "Omega_Y": 10.0,
+   "lPi": -8.985882692453725,
+   "runs": 1487,
+   "closed": 1487,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1487,
+   "ties_runs": 24,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.234300647666976,
+   "min_slack_width": 1.0836548659471346,
+   "max_lcost": 8.314097335405807,
+   "neg_levels": 0,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "linear": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 93,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 95,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 93,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 92,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 91,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 94,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 92,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 91,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 91,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 93,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 90,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1487,
+   "closed_at_populated_pass": 115,
+   "max_tail_ratio": 0.22839743077385746,
+   "min_harper_ratio": 1.0520762807193518,
+   "seconds": 25.00650119781494
+  },
+  {
+   "shape": [
+    7,
+    0.1,
+    [
+     5.0,
+     5.0
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20459101,
+   "K": 208,
+   "K_used": 208,
+   "J": 44,
+   "r_dag": 6,
+   "m_max": 10,
+   "x_out": 2.7547087152789307,
+   "lCmax": 14.178096688571959,
+   "lM_bar": 12.098654451017506,
+   "Omega": 10.7,
+   "Omega_Y": 10.0,
+   "lPi": -8.985882692453725,
+   "runs": 1407,
+   "closed": 1407,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1407,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.5833932149669785,
+   "min_slack_width": 1.1713155003119522,
+   "max_lcost": 8.110427237575024,
+   "neg_levels": 0,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "ridges": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 87,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 88,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1407,
+   "closed_at_populated_pass": 206,
+   "max_tail_ratio": 0.326906050766864,
+   "min_harper_ratio": 1.0528730821813361,
+   "seconds": 25.018766403198242
+  },
+  {
+   "shape": [
+    7,
+    0.1,
+    [
+     5.0,
+     5.0
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20467020,
+   "K": 201,
+   "K_used": 201,
+   "J": 28,
+   "r_dag": 6,
+   "m_max": 11,
+   "x_out": 9.00306641770308,
+   "lCmax": 14.784117341198954,
+   "lM_bar": 12.704675419907494,
+   "Omega": 10.7,
+   "Omega_Y": 10.0,
+   "lPi": -8.985882692453725,
+   "runs": 1935,
+   "closed": 1935,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1935,
+   "ties_runs": 48,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.234300647666977,
+   "min_slack_width": 6.768765770036103,
+   "max_lcost": 8.076204527239026,
+   "neg_levels": 0,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "rough_up": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 120,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 120,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 120,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 120,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 120,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 120,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1935,
+   "closed_at_populated_pass": 163,
+   "max_tail_ratio": 0.31986592444465,
+   "min_harper_ratio": 1.0517721859071072,
+   "seconds": 25.006295919418335
+  },
+  {
+   "shape": [
+    7,
+    0.1,
+    [
+     5.0,
+     5.0
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20474939,
+   "K": 198,
+   "K_used": 198,
+   "J": 36,
+   "r_dag": 6,
+   "m_max": 12,
+   "x_out": 11.317950980817514,
+   "lCmax": 14.31955459040356,
+   "lM_bar": 12.933259625200705,
+   "Omega": 10.7,
+   "Omega_Y": 10.0,
+   "lPi": -8.985882692453725,
+   "runs": 1948,
+   "closed": 1948,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1948,
+   "ties_runs": 41,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 10.234300647666977,
+   "min_slack_width": 1.083650333150537,
+   "max_lcost": 7.368339686311381,
+   "neg_levels": 1465,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "rough": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 121,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 120,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1948,
+   "closed_at_populated_pass": 297,
+   "max_tail_ratio": 0.21721550737531573,
+   "min_harper_ratio": 1.0543767625885838,
+   "seconds": 25.00962519645691
+  },
+  {
+   "shape": [
+    7,
+    0.1,
+    [
+     5.0,
+     5.0
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20482858,
+   "K": 208,
+   "K_used": 208,
+   "J": 27,
+   "r_dag": 6,
+   "m_max": 17,
+   "x_out": 2.716473827299851,
+   "lCmax": 18.695281826445196,
+   "lM_bar": 16.615840277166612,
+   "Omega": 10.7,
+   "Omega_Y": 10.0,
+   "lPi": -8.985882692453725,
+   "runs": 1545,
+   "closed": 1545,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1545,
+   "ties_runs": 30,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.7343006476669758,
+   "min_slack_width": 0.9821731796328752,
+   "max_lcost": 8.110427237575024,
+   "neg_levels": 0,
+   "class_violation": 5.329070518200751e-15,
+   "by_kind": {
+    "wells": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1545,
+   "closed_at_populated_pass": 100,
+   "max_tail_ratio": 0.3266077007203608,
+   "min_harper_ratio": 1.054376762588584,
+   "seconds": 25.014509201049805
+  },
+  {
+   "shape": [
+    7,
+    0.1,
+    [
+     5.0,
+     5.0
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20490777,
+   "K": 719,
+   "K_used": 719,
+   "J": 54,
+   "r_dag": 4,
+   "m_max": 11,
+   "x_out": 1.678022396455771,
+   "lCmax": 16.089887260924016,
+   "lM_bar": 13.787302065068964,
+   "Omega": 10.7,
+   "Omega_Y": 10.0,
+   "lPi": -8.985882692453725,
+   "runs": 989,
+   "closed": 989,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 989,
+   "ties_runs": 42,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.171869311231223,
+   "min_slack_width": 0.5061530852245479,
+   "max_lcost": 9.57366316988638,
+   "neg_levels": 0,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "ridges": {
+     "runs": 60,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 61,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 62,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 62,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 60,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 60,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 60,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 61,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 62,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 62,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 62,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 989,
+   "closed_at_populated_pass": 279,
+   "max_tail_ratio": 0.4388897602670697,
+   "min_harper_ratio": 1.0277666151471603,
+   "seconds": 25.0110125541687
+  },
+  {
+   "shape": [
+    11,
+    0.25,
+    [
+     1.5
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20498696,
+   "K": 198,
+   "K_used": 198,
+   "J": 18,
+   "r_dag": 5,
+   "m_max": 12,
+   "x_out": 3.3210136638505916,
+   "lCmax": 15.2546700249429,
+   "lM_bar": 12.952084694821838,
+   "Omega": 4.25,
+   "Omega_Y": 1.5,
+   "lPi": -2.468980729930688,
+   "runs": 1989,
+   "closed": 1989,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1989,
+   "ties_runs": 74,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.584305762901829,
+   "min_slack_width": 0.7367079009487627,
+   "max_lcost": 8.97727273946428,
+   "neg_levels": 0,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "outer_cone": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 123,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 127,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 122,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 124,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 125,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1989,
+   "closed_at_populated_pass": 105,
+   "max_tail_ratio": 0.34044866862901985,
+   "min_harper_ratio": 1.113378802271725,
+   "seconds": 25.005666255950928
+  },
+  {
+   "shape": [
+    11,
+    0.25,
+    [
+     1.5
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20506615,
+   "K": 201,
+   "K_used": 201,
+   "J": 28,
+   "r_dag": 5,
+   "m_max": 11,
+   "x_out": 2.760073749646421,
+   "lCmax": 14.519877216566908,
+   "lM_bar": 12.440435180465336,
+   "Omega": 4.25,
+   "Omega_Y": 1.5,
+   "lPi": -2.468980729930688,
+   "runs": 1858,
+   "closed": 1858,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1858,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.053323855942503,
+   "min_slack_width": 0.7067498937039183,
+   "max_lcost": 8.766394277049736,
+   "neg_levels": 0,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "anticone": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 114,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 118,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 115,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 117,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 116,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 114,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1858,
+   "closed_at_populated_pass": 51,
+   "max_tail_ratio": 0.38222334962149135,
+   "min_harper_ratio": 1.1187362711245539,
+   "seconds": 25.011505603790283
+  },
+  {
+   "shape": [
+    11,
+    0.25,
+    [
+     1.5
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20514534,
+   "K": 194,
+   "K_used": 194,
+   "J": 18,
+   "r_dag": 10,
+   "m_max": 11,
+   "x_out": 9.003076819503143,
+   "lCmax": 14.318459189553675,
+   "lM_bar": 12.239017043128797,
+   "Omega": 4.25,
+   "Omega_Y": 1.5,
+   "lPi": -2.468980729930688,
+   "runs": 2106,
+   "closed": 2106,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2106,
+   "ties_runs": 67,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.815027575829176,
+   "min_slack_width": 6.188049243673967,
+   "max_lcost": 8.040768994367578,
+   "neg_levels": 0,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "ridges": {
+     "runs": 134,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 131,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 131,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 134,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 133,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 129,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 131,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 131,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 131,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 133,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 131,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 131,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 130,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 134,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 132,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 130,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2106,
+   "closed_at_populated_pass": 467,
+   "max_tail_ratio": 0.22850587144514325,
+   "min_harper_ratio": 1.113378802271725,
+   "seconds": 25.032506942749023
+  },
+  {
+   "shape": [
+    11,
+    0.25,
+    [
+     1.5
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20522453,
+   "K": 186,
+   "K_used": 186,
+   "J": 18,
+   "r_dag": 5,
+   "m_max": 12,
+   "x_out": 3.6701101922220998,
+   "lCmax": 14.275859330024105,
+   "lM_bar": 12.889564337840506,
+   "Omega": 4.25,
+   "Omega_Y": 1.5,
+   "lPi": -2.468980729930688,
+   "runs": 3486,
+   "closed": 3486,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 3486,
+   "ties_runs": 145,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.935460378581764,
+   "min_slack_width": 0.7346498136403357,
+   "max_lcost": 7.998671361015776,
+   "neg_levels": 0,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "rough": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 220,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 219,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 219,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 217,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 218,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 217,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 216,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 216,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 3486,
+   "closed_at_populated_pass": 395,
+   "max_tail_ratio": 0.3343665508500058,
+   "min_harper_ratio": 1.13775177699764,
+   "seconds": 25.00046968460083
+  },
+  {
+   "shape": [
+    11,
+    0.25,
+    [
+     1.5
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20530372,
+   "K": 200,
+   "K_used": 200,
+   "J": 17,
+   "r_dag": 5,
+   "m_max": 17,
+   "x_out": 2.722047383542806,
+   "lCmax": 18.89953236270799,
+   "lM_bar": 16.82009081483321,
+   "Omega": 4.25,
+   "Omega_Y": 1.5,
+   "lPi": -2.468980729930688,
+   "runs": 2487,
+   "closed": 2487,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2487,
+   "ties_runs": 99,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.085410707353644,
+   "min_slack_width": 0.6366366761891618,
+   "max_lcost": 8.764209507142004,
+   "neg_levels": 0,
+   "class_violation": 8.881784197001252e-16,
+   "by_kind": {
+    "ridges": {
+     "runs": 156,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 157,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 159,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 156,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 156,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 156,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 157,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 156,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 153,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 155,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 154,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2487,
+   "closed_at_populated_pass": 116,
+   "max_tail_ratio": 0.40841300492531113,
+   "min_harper_ratio": 1.1133788022717253,
+   "seconds": 25.002787590026855
+  },
+  {
+   "shape": [
+    11,
+    0.25,
+    [
+     1.5
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20538291,
+   "K": 701,
+   "K_used": 701,
+   "J": 34,
+   "r_dag": 3,
+   "m_max": 13,
+   "x_out": 1.6936874146129757,
+   "lCmax": 17.75196630529491,
+   "lM_bar": 15.449381192783601,
+   "Omega": 4.25,
+   "Omega_Y": 1.5,
+   "lPi": -2.468980729930688,
+   "skipped": "samples of up to 3.8e+06 points"
+  },
+  {
+   "shape": [
+    6,
+    0.4,
+    [
+     0.9,
+     2.2,
+     0.3
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20546210,
+   "K": 197,
+   "K_used": 197,
+   "J": 17,
+   "r_dag": 2,
+   "m_max": 12,
+   "x_out": 3.3189012292772726,
+   "lCmax": 15.57023288698575,
+   "lM_bar": 13.267647621036428,
+   "Omega": 5.8,
+   "Omega_Y": 3.4,
+   "lPi": -3.640359328329519,
+   "runs": 2981,
+   "closed": 2980,
+   "aborted": 0,
+   "tie_aborts": 1,
+   "good": 2981,
+   "ties_runs": 111,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.7593054547363387,
+   "min_slack_width": 0.5595957745409339,
+   "max_lcost": 10.358409269356885,
+   "neg_levels": 0,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "rough_up": {
+     "runs": 187,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 186,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 188,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 186,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 186,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 187,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 186,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 186,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 188,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 189,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 185,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 186,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 186,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 185,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 185,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 185,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2980,
+   "closed_at_populated_pass": 725,
+   "max_tail_ratio": 0.3056814981086459,
+   "min_harper_ratio": 1.1568096552267804,
+   "seconds": 25.003154039382935
+  },
+  {
+   "shape": [
+    6,
+    0.4,
+    [
+     0.9,
+     2.2,
+     0.3
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20554129,
+   "K": 201,
+   "K_used": 201,
+   "J": 27,
+   "r_dag": 2,
+   "m_max": 11,
+   "x_out": 2.7563691443432186,
+   "lCmax": 14.729402694960983,
+   "lM_bar": 12.649960752320478,
+   "Omega": 5.8,
+   "Omega_Y": 3.4,
+   "lPi": -3.640359328329519,
+   "runs": 2868,
+   "closed": 2868,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2868,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.281373542441873,
+   "min_slack_width": 0.4749956019013455,
+   "max_lcost": 8.769196271411001,
+   "neg_levels": 0,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "cone0": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 180,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 178,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 181,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 180,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 180,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 178,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 178,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 179,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 181,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2868,
+   "closed_at_populated_pass": 210,
+   "max_tail_ratio": 0.36561864908567543,
+   "min_harper_ratio": 1.1566464096937046,
+   "seconds": 25.00418782234192
+  },
+  {
+   "shape": [
+    6,
+    0.4,
+    [
+     0.9,
+     2.2,
+     0.3
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20562048,
+   "K": 193,
+   "K_used": 193,
+   "J": 17,
+   "r_dag": 5,
+   "m_max": 11,
+   "x_out": 9.003069631015594,
+   "lCmax": 14.274483981782181,
+   "lM_bar": 12.195041808170107,
+   "Omega": 5.8,
+   "Omega_Y": 3.4,
+   "lPi": -3.640359328329519,
+   "runs": 4525,
+   "closed": 4524,
+   "aborted": 0,
+   "tie_aborts": 1,
+   "good": 4525,
+   "ties_runs": 137,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 3.2385342518735394,
+   "min_slack_width": 5.764535379142054,
+   "max_lcost": 8.035602692918582,
+   "neg_levels": 0,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "anticone": {
+     "runs": 283,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 281,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 282,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 285,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 284,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 286,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 281,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 283,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 284,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 284,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 281,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 284,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 283,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 282,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 281,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 281,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 4524,
+   "closed_at_populated_pass": 1051,
+   "max_tail_ratio": 0.36545935358387605,
+   "min_harper_ratio": 1.1568096552267804,
+   "seconds": 25.001408576965332
+  },
+  {
+   "shape": [
+    6,
+    0.4,
+    [
+     0.9,
+     2.2,
+     0.3
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20569967,
+   "K": 187,
+   "K_used": 187,
+   "J": 19,
+   "r_dag": 2,
+   "m_max": 12,
+   "x_out": 5.378072142650401,
+   "lCmax": 14.70720779589019,
+   "lM_bar": 13.320913024810851,
+   "Omega": 5.8,
+   "Omega_Y": 3.4,
+   "lPi": -3.640359328329519,
+   "runs": 5137,
+   "closed": 5131,
+   "aborted": 0,
+   "tie_aborts": 6,
+   "good": 5137,
+   "ties_runs": 159,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 4.819305454736339,
+   "min_slack_width": 0.558766687914062,
+   "max_lcost": 9.39007525287337,
+   "neg_levels": 0,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "cone": {
+     "runs": 321,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 324,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 322,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 322,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 322,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 323,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 321,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 321,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 321,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 320,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 320,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 320,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 320,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 320,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 320,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 320,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 5131,
+   "closed_at_populated_pass": 1304,
+   "max_tail_ratio": 0.32816773696950713,
+   "min_harper_ratio": 1.156656623369477,
+   "seconds": 25.003877878189087
+  },
+  {
+   "shape": [
+    6,
+    0.4,
+    [
+     0.9,
+     2.2,
+     0.3
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20577886,
+   "K": 201,
+   "K_used": 201,
+   "J": 17,
+   "r_dag": 2,
+   "m_max": 18,
+   "x_out": 2.718198916208444,
+   "lCmax": 19.279213351703326,
+   "lM_bar": 17.19977180578566,
+   "Omega": 5.8,
+   "Omega_Y": 3.4,
+   "lPi": -3.640359328329519,
+   "runs": 3160,
+   "closed": 3159,
+   "aborted": 0,
+   "tie_aborts": 1,
+   "good": 3160,
+   "ties_runs": 103,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.259305454736339,
+   "min_slack_width": 0.45889346147210475,
+   "max_lcost": 10.155374039382549,
+   "neg_levels": 0,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 198,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 198,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 198,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 196,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 196,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 199,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 198,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 197,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 197,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 197,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 199,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 197,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 198,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 199,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 197,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 196,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 3159,
+   "closed_at_populated_pass": 665,
+   "max_tail_ratio": 0.3056814981086459,
+   "min_harper_ratio": 1.1568096552267804,
+   "seconds": 25.001898288726807
+  },
+  {
+   "shape": [
+    6,
+    0.4,
+    [
+     0.9,
+     2.2,
+     0.3
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20585805,
+   "K": 699,
+   "K_used": 699,
+   "J": 33,
+   "r_dag": 1,
+   "m_max": 13,
+   "x_out": 1.6828878453370804,
+   "lCmax": 17.536766426682348,
+   "lM_bar": 15.234181309484748,
+   "Omega": 5.8,
+   "Omega_Y": 3.4,
+   "lPi": -3.640359328329519,
+   "runs": 1106,
+   "closed": 1106,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1106,
+   "ties_runs": 50,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.477878651266183,
+   "min_slack_width": 0.20500919407089735,
+   "max_lcost": 12.907641761819514,
+   "neg_levels": 0,
+   "class_violation": 2.1094237467877974e-15,
+   "by_kind": {
+    "cone0": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 68,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 70,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 71,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 71,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 70,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 67,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 70,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 68,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 68,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 70,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 68,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 69,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 979,
+   "closed_at_populated_pass": 359,
+   "max_tail_ratio": 0.37717487253703086,
+   "min_harper_ratio": 1.0203918535984837,
+   "closed_empty_tail": 127,
+   "seconds": 25.0249125957489
+  },
+  {
+   "shape": [
+    10,
+    0.35,
+    [
+     0.35,
+     0.35,
+     3.0
+    ]
+   ],
+   "design": "EXT lam=1 eta=1/2 eta'=1 theta=1",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20593724,
+   "K": 203,
+   "K_used": 203,
+   "J": 23,
+   "r_dag": 4,
+   "m_max": 12,
+   "x_out": 3.31830139651429,
+   "lCmax": 15.795710980960896,
+   "lM_bar": 13.493125749925273,
+   "Omega": 7.2,
+   "Omega_Y": 3.7,
+   "lPi": -4.638259869319777,
+   "runs": 1658,
+   "closed": 1657,
+   "aborted": 0,
+   "tie_aborts": 1,
+   "good": 1658,
+   "ties_runs": 1,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.7098176118890884,
+   "min_slack_width": 0.6084837846252014,
+   "max_lcost": 9.695294188174604,
+   "neg_levels": 0,
+   "class_violation": 1.887379141862766e-15,
+   "by_kind": {
+    "anticone": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 103,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 103,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 103,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 104,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 102,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 103,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1657,
+   "closed_at_populated_pass": 407,
+   "max_tail_ratio": 0.35254555066510734,
+   "min_harper_ratio": 1.1651028948622828,
+   "seconds": 25.000551462173462
+  },
+  {
+   "shape": [
+    10,
+    0.35,
+    [
+     0.35,
+     0.35,
+     3.0
+    ]
+   ],
+   "design": "generic lam eta=1/2",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20601643,
+   "K": 206,
+   "K_used": 206,
+   "J": 36,
+   "r_dag": 4,
+   "m_max": 11,
+   "x_out": 2.7553161327401337,
+   "lCmax": 14.940481087995193,
+   "lM_bar": 12.86103922165327,
+   "Omega": 7.2,
+   "Omega_Y": 3.7,
+   "lPi": -4.638259869319777,
+   "runs": 1542,
+   "closed": 1542,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1542,
+   "ties_runs": 0,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.1426240973774693,
+   "min_slack_width": 0.6126920353626644,
+   "max_lcost": 9.486835098787386,
+   "neg_levels": 0,
+   "class_violation": 2.3314683517128287e-15,
+   "by_kind": {
+    "ridges": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 97,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 96,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1542,
+   "closed_at_populated_pass": 530,
+   "max_tail_ratio": 0.3273603952897909,
+   "min_harper_ratio": 1.1634773074186087,
+   "seconds": 25.00722098350525
+  },
+  {
+   "shape": [
+    10,
+    0.35,
+    [
+     0.35,
+     0.35,
+     3.0
+    ]
+   ],
+   "design": "large theta=e^8",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20609562,
+   "K": 198,
+   "K_used": 198,
+   "J": 23,
+   "r_dag": 9,
+   "m_max": 11,
+   "x_out": 9.00306759257805,
+   "lCmax": 14.57297141562658,
+   "lM_bar": 12.493529405091227,
+   "Omega": 7.2,
+   "Omega_Y": 3.7,
+   "lPi": -4.638259869319777,
+   "runs": 2713,
+   "closed": 2713,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2713,
+   "ties_runs": 1,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 3.503506807720486,
+   "min_slack_width": 5.4995607848575645,
+   "max_lcost": 8.06117135969092,
+   "neg_levels": 0,
+   "class_violation": 2.3314683517128287e-15,
+   "by_kind": {
+    "anticone": {
+     "runs": 171,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 170,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 170,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 170,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 171,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 170,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 171,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 169,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 168,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2713,
+   "closed_at_populated_pass": 622,
+   "max_tail_ratio": 0.23142397004326026,
+   "min_harper_ratio": 1.1645110061819752,
+   "seconds": 25.00786066055298
+  },
+  {
+   "shape": [
+    10,
+    0.35,
+    [
+     0.35,
+     0.35,
+     3.0
+    ]
+   ],
+   "design": "one rung",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20617481,
+   "K": 191,
+   "K_used": 191,
+   "J": 25,
+   "r_dag": 4,
+   "m_max": 12,
+   "x_out": 5.6479850787943064,
+   "lCmax": 14.898530606295079,
+   "lM_bar": 13.512235906603653,
+   "Omega": 7.2,
+   "Omega_Y": 3.7,
+   "lPi": -4.638259869319777,
+   "runs": 3090,
+   "closed": 3090,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 3090,
+   "ties_runs": 2,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 5.039817611889088,
+   "min_slack_width": 0.6081674669052184,
+   "max_lcost": 8.718172930028725,
+   "neg_levels": 0,
+   "class_violation": 2.6645352591003757e-15,
+   "by_kind": {
+    "linear": {
+     "runs": 193,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 195,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 195,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 193,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 193,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 194,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 193,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 194,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 195,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 193,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 192,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 192,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 192,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 192,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 192,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 192,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 3090,
+   "closed_at_populated_pass": 753,
+   "max_tail_ratio": 0.345243939674357,
+   "min_harper_ratio": 1.1685439087432672,
+   "seconds": 25.002768993377686
+  },
+  {
+   "shape": [
+    10,
+    0.35,
+    [
+     0.35,
+     0.35,
+     3.0
+    ]
+   ],
+   "design": "small eta'=0.02",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20625400,
+   "K": 205,
+   "K_used": 205,
+   "J": 22,
+   "r_dag": 4,
+   "m_max": 18,
+   "x_out": 2.717104911537966,
+   "lCmax": 19.45183468627703,
+   "lM_bar": 17.372393141031246,
+   "Omega": 7.2,
+   "Omega_Y": 3.7,
+   "lPi": -4.638259869319777,
+   "runs": 2238,
+   "closed": 2238,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 2238,
+   "ties_runs": 3,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 2.2098176118890884,
+   "min_slack_width": 0.5072872996488775,
+   "max_lcost": 9.481969279105716,
+   "neg_levels": 0,
+   "class_violation": 2.3314683517128287e-15,
+   "by_kind": {
+    "outer_set": {
+     "runs": 138,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 140,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 138,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 141,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 139,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 140,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 140,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 141,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 140,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 141,
+     "invalid": 0,
+     "viol": 0
+    },
+    "twofibre": {
+     "runs": 141,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 141,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 140,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 140,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 140,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 138,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 2238,
+   "closed_at_populated_pass": 435,
+   "max_tail_ratio": 0.3452439396743579,
+   "min_harper_ratio": 1.1632770074122953,
+   "seconds": 25.00286316871643
+  },
+  {
+   "shape": [
+    10,
+    0.35,
+    [
+     0.35,
+     0.35,
+     3.0
+    ]
+   ],
+   "design": "BND lam=1/2 eta=eta'=theta=1/4",
+   "mode": "radius",
+   "kdiv": 1,
+   "mutation": null,
+   "table_factor": null,
+   "seed": 20633319,
+   "K": 720,
+   "K_used": 720,
+   "J": 44,
+   "r_dag": 2,
+   "m_max": 14,
+   "x_out": 1.6798040824225133,
+   "lCmax": 18.539816026846065,
+   "lM_bar": 16.237230924975144,
+   "Omega": 7.2,
+   "Omega_Y": 3.7,
+   "lPi": -4.638259869319777,
+   "runs": 1016,
+   "closed": 1016,
+   "aborted": 0,
+   "tie_aborts": 0,
+   "good": 1016,
+   "ties_runs": 30,
+   "viol_good": {},
+   "viol_bad": {},
+   "det_viol": {},
+   "invalid_good": 0,
+   "invalid_bad": 0,
+   "max_width": 1.4692444152283524,
+   "min_slack_width": 0.21055966719416097,
+   "max_lcost": 11.654433707761807,
+   "neg_levels": 0,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "twofibre": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "flat": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "linear": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "dip": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_set": {
+     "runs": 62,
+     "invalid": 0,
+     "viol": 0
+    },
+    "rough_up": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone0": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_plateau": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_cone": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "ridges": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "cone0": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    },
+    "anticone": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "wells": {
+     "runs": 64,
+     "invalid": 0,
+     "viol": 0
+    },
+    "outer_dip": {
+     "runs": 63,
+     "invalid": 0,
+     "viol": 0
+    }
+   },
+   "examples": [],
+   "closed_at_radius_ge_1": 1016,
+   "closed_at_populated_pass": 41,
+   "max_tail_ratio": 0.2559357279615385,
+   "min_harper_ratio": 1.099799755044337,
+   "seconds": 25.028298377990723
+  }
+ ],
+ "seconds": 575.535585641861
+}

@@ -1,0 +1,63 @@
+{
+ "description": "Public PDB entries used by the STRUCTBIO molecular model layer (src/metricchain_sb/molecular)",
+ "licence": "wwPDB, CC0 1.0",
+ "source": "RCSB PDB file server (files.rcsb.org), PDB format",
+ "entries": [
+  {
+   "pdb_id": "1CRN",
+   "file": "1CRN.pdb",
+   "url": "https://files.rcsb.org/download/1CRN.pdb",
+   "sha256": "42199a30a0701864a2a5cc76cd7f35cc544cd0e65fbcf63e03c166543249b811",
+   "downloaded_utc": "2026-11-26T22:22:05Z",
+   "role": "crambin (report + fast acceptance test)"
+  },
+  {
+   "pdb_id": "1UBQ",
+   "file": "1UBQ.pdb",
+   "url": "https://files.rcsb.org/download/1UBQ.pdb",
+   "sha256": "d4a6812d8951cf6594e6a0763f089e35f5a80b62acb3c117b2c5565228a7b161",
+   "downloaded_utc": "2026-11-26T22:22:06Z",
+   "role": "ubiquitin (report + slow acceptance test)"
+  },
+  {
+   "pdb_id": "2IGD",
+   "file": "2IGD.pdb",
+   "url": "https://files.rcsb.org/download/2IGD.pdb",
+   "sha256": "ad7ec5336e2d0d3a11277f1abc3d3680b9ed22cde74d07aefbe7063359b527c5",
+   "downloaded_utc": "2026-11-26T22:22:06Z",
+   "role": "protein G B1 domain (report)"
+  },
+  {
+   "pdb_id": "1PGA",
+   "file": "1PGA.pdb",
+   "url": "https://files.rcsb.org/download/1PGA.pdb",
+   "sha256": "908f8dbf3bb7567f36eec4683eb8cfab5ac0c011dfee1b9c940cab7f482bc841",
+   "downloaded_utc": "2026-11-26T22:22:07Z",
+   "role": "protein G B1 domain, alternative (report)"
+  },
+  {
+   "pdb_id": "5PTI",
+   "file": "5PTI.pdb",
+   "url": "https://files.rcsb.org/download/5PTI.pdb",
+   "sha256": "5f7c9d165cc405e709c5e5437864356dac55534ecb4cea07f3692f9f23845c20",
+   "downloaded_utc": "2026-11-26T22:22:07Z",
+   "role": "BPTI, joint X-ray/neutron (report)"
+  },
+  {
+   "pdb_id": "1BPI",
+   "file": "1BPI.pdb",
+   "url": "https://files.rcsb.org/download/1BPI.pdb",
+   "sha256": "2289dd009b6eae05ac142836277e23098e178185df9441e2a3b9c1bed7dd75df",
+   "downloaded_utc": "2026-11-26T22:22:08Z",
+   "role": "BPTI, alternative X-ray (report)"
+  },
+  {
+   "pdb_id": "1L2Y",
+   "file": "1L2Y.pdb",
+   "url": "https://files.rcsb.org/download/1L2Y.pdb",
+   "sha256": "5d1bbb545a312dfff1ae1e64b6d8addecb2f561ddc4011aeb5bee9d1dfcd4438",
+   "downloaded_utc": "2026-11-26T22:22:08Z",
+   "role": "Trp-cage NMR ensemble, model 1 used (fast unit tests)"
+  }
+ ]
+}

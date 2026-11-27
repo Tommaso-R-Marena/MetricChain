@@ -1,0 +1,1 @@
+gauche-rich (0,12/5,22/5;4/5)    N = 166199  (h,g) = (1717, 376013, 687789, 131710) (= the stored counts)  A = (0, 0, 0, 0)  B = (0, 0, 0, 0)  clean as built: True  -> exact point of K^br: (0.01033, 2.26239, 4.13827, 0.79247)   [75 s]

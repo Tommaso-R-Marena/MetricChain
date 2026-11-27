@@ -1,0 +1,11 @@
+=== K4 on H, tau 0.7: 100 atoms, 4 sites, states per site [14, 14, 12, 7], 16464 states; anchor [10, 10, 8, 3]
+(0) g evaluated at every state with P3's bulk evaluator [6s]
+    P8's stored enumeration of g (ws_P8/out/m1_K4_H_0.70.npz) against mine: largest deviation 1.31e-12 kcal/mol; its anchor equals mine: True
+    exact ln Z = 211.742695; mean number of sites off the anchor in the true ensemble: 0.965
+| m | variant | subsets | sum of constants (kT) | states with >= m sites off the anchor | violations R > B | largest R (kcal/mol) | smallest B/R (R > 1e-9) | Boltzmann mean of beta R | Boltzmann mean of beta B | ratio |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 3 | Sb | 4 | 14.09 | 15743 | 0 | 0.1889 | 26.799 | 2.051e-05 | 1.996e-01 | 9729.5 |
+| 3 | SAb | 4 | 13.93 | 15743 | 0 | 0.1889 | 26.569 | 2.051e-05 | 1.977e-01 | 9636.0 |
+| 4 | Sb | 1 | 0.3367 | 11154 | 0 | 0.002942 | 68.235 | 1.333e-08 | 5.210e-04 | 39080.0 |
+| 4 | SAb | 1 | 0.3367 | 11154 | 0 | 0.002942 | 68.235 | 1.333e-08 | 5.210e-04 | 39080.0 |
+ALL DONE 6 s; peak RSS 185 MB

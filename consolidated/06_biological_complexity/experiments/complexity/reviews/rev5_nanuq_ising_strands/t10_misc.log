@@ -1,0 +1,9 @@
+bloblets with 4..13 leaves: 445  violations: 0  negative critical weight: 66  zero: 9
+seven leaves: size assignments with critical weight < 0 / = 0: {'zero': 4, 'negative': 2}
+    ('zero', (3, 1, 1), (1, 1, 2, 1, 1, 1), 0)
+    ('zero', (3, 1, 1), (1, 2, 1, 1, 1, 1), 0)
+    ('zero', (4, 1, 0), (1, 1, 2, 1, 1, 1), 0)
+    ('zero', (4, 1, 0), (1, 2, 1, 1, 1, 1), 0)
+    ('neg', (4, 1, 1), (1, 1, 1, 1, 1, 1, 1), -1)
+    ('neg', (5, 1, 0), (1, 1, 1, 1, 1, 1, 1), -1)
+Theorem 9(c): both formulas are instances of Theorem 12(b) for 0 <= s,t <= 7

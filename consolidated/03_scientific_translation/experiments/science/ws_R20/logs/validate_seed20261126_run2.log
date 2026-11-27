@@ -1,0 +1,10 @@
+r20_validate.py  seed 20261126
+systems checked: 179  matchings (all, crossing or not): 7421  non-crossing (order, structure) pairs: 16064  connected labelled structures: 1623
+  V1 violations: 0
+  V2 violations: 0
+  V3 violations: 0
+  V4 violations: 0
+  V5 violations: 0
+elapsed 0.7 s
+RESULT: PASS
+END r20_validate.py
