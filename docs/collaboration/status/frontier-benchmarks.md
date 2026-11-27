@@ -2,6 +2,50 @@
 
 *Updated at every checkpoint.  The newest entry is first.*
 
+## 2026-11-27, about 00:40 UTC — checkpoint 2: protocols, registers, two pilots, held-out list, three freezes
+
+**Done since checkpoint 1**
+
+* `ASSESSMENT_PROTOCOLS.md` (FB-P-01 … FB-P-11), `BENCHMARK_REGISTRY.md` (53 rows),
+  `STATE_OF_THE_ART.md`, `CONTAMINATION_AUDIT.md`, `MATHEMATICAL_FEEDBACK.md`,
+  `RESULTS.md`, `NEGATIVE_RESULTS.md`, `SCIENTIFIC_SYNTHESIS.md`, `RESEARCH_LOG.md`,
+  `HANDOFF.md`.
+* Second read-only synchronisation (23:36 UTC): all branches had moved; linked corrections
+  issued (FRONTIER-MSG-0002 §1).
+* **Freeze FRONTIER-FRZ-0002**: sealed held-out list of 47 structures (key with the research
+  owner).  **Freeze FRONTIER-FRZ-0003**: our scores of 1,163 public CASP17 model files,
+  frozen before the official numbers (a check of our scoring code).
+* Scoring tools with planted-answer controls and cross-checks; 64 tests.
+* **Pilot 1** (exploratory): the software division's certified minimum against toulbar2 on
+  ten public fixed-sequence instances — agreement wherever both finish; the certified route
+  much slower, with abstentions; certificates contain little or no search.
+* **Pilot 2** (exploratory): nine planted identification controls of the ensemble division
+  recomputed independently — all replicate; two baselines return single, sometimes wrong,
+  ensembles on the non-identified ones.
+* FRONTIER-MSG-0002 (all), FRONTIER-REQ-0001 (engineering), FRONTIER-REQ-0002 (science).
+
+**Waiting on others**
+
+| who | what | reference |
+|---|---|---|
+| structural biology | a frozen release for held-out evaluation; acceptance of the opening sequence | FRONTIER-MSG-0002 §2 |
+| engineering | accept / revise / decline parts A, B, C; whether it already holds a held-out list; whether it wants its manifests time-stamped | FRONTIER-REQ-0001; FRONTIER-MSG-0002 §§2–3 |
+| science | adversarial review of interpretations | FRONTIER-REQ-0002 |
+| theory, ensemble, geometry, complexity | the questions of `MATHEMATICAL_FEEDBACK.md` | FRONTIER-MSG-0002 §6 |
+| research owner | holds the passphrase and commitment salt of the sealed list; releases them to engineering after the software division's freeze | FRZ-0002 `SELECTION_RULE.md` |
+| CASP organisers | official results, announced for 2026-11-29 | FRZ-0003 `COMPARISON_PLAN.md` |
+
+**Open obligations of ours:** `HANDOFF.md` §5.
+
+**Results claimed:** none as validation.  Two exploratory pilots and the conformance of our
+own instruments (`RESULTS.md`).  **Negative results recorded:** sixteen
+(`NEGATIVE_RESULTS.md`), five of them about our own work.
+
+**Answer to the founding question at this checkpoint** (`SCIENTIFIC_SYNTHESIS.md`): not
+established in either direction on any dimension involving experiment; established as a
+design property on guarantees; currently negative on speed; most distinctive on recognising
+insufficient evidence.
+
 ## 2026-11-26, about 23:45 UTC — checkpoint 1: intake, CASP17 determination, integrity tooling
 
 **Done**

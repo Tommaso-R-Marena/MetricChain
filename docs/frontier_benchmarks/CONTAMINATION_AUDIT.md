@@ -74,7 +74,9 @@ references are CASP17-era or later.  For non-learned baselines L1 does not apply
 | CASP17 determination (`CASP17_ASSESSMENT.md`) | official pages; no result existed | L6: none possible | controlled |
 | FB-P-01 pilot (`RESULTS.md` §1) | protocol written **after** the first instance was run (the pilot informed it) | L6 **not controlled** — which is why the pilot is class A-EXP and its numbers are never reported as validation | exploratory only |
 | FB-P-02 expectations E1–E3 | fixed before any software exists; informed by published results on *other* data | L6 controlled for our side | — |
-| blind test of our scoring tools (FB-P-10), when frozen | references public (PDB); official per-model scores not public | L6 controlled for the official numbers only: class A-PLB | recorded at freeze time |
+| FRONTIER-FRZ-0003, scores of public CASP17 models (FB-P-10) | references public (PDB); official per-model scores not public and not seen; before freezing we looked at the distribution of our own scores and compared six models with two independent libraries, then changed nothing | L6 controlled for the official numbers only: class A-PLB; evaluation units unknown to us (handled by the comparison plan) | controlled as stated |
+| FRONTIER-FRZ-0002, sealed held-out list | made after reading the software division's proposed rule and development list; no result of that software on any member exists | L4 controlled for membership and order (secret salt, sealed list); **not** controlled for the public candidate pool; L1 controlled by the release date for declared cut-offs; L2 **not yet** controlled for learned packers (homology filtering against their training sets is an open obligation); L7 controlled (all members released after June 2026) | controlled as stated |
+| FB-P-04 pilot (`RESULTS.md` §2) | the controls' published verdicts were visible to us while we wrote the recomputation | L6 not controlled — a replication can be biased towards agreement; mitigated only by the exact checks (certificates verified in rational arithmetic) | exploratory |
 
 ## 5. Rules of wording
 

@@ -1,5 +1,9 @@
 # Research intake: what exists to be evaluated
 
+> **Read §6 first.**  Sections 1–5 describe the branches as pinned at 22:35–23:00 UTC on
+> 2026-11-26.  Within the hour the structural-biology branch gained a molecular layer and a
+> toulbar2 comparison; §6 lists what that changes.  Sections 1–5 are kept as written.
+
 *Frontier Benchmarking division.  Version 1, 2026-11-26.  Sources: the seven other branches
 at the commits pinned in `docs/collaboration/FRONTIER_UPSTREAM_SYNC.md`; the three intake
 reports in `intake/` (committed as delivered); and what the coordinator read directly (§5).
@@ -98,3 +102,42 @@ Known disagreements inside the records we read, passed to their owners in FRONTI
 the theory status file lists as not established a theorem that the work-in-progress commit
 states; engineering's ledger row "spent" is inconsistent with its neighbouring rows; science's
 protocol cites requests S-1…S-5 where its message has six.
+
+## 6. Second synchronisation (2026-11-26 23:36 UTC): what changed, and which sentences above it overtakes
+
+Heads and what was read: `docs/collaboration/FRONTIER_UPSTREAM_SYNC.md`.
+
+| statement above | status after the second synchronisation |
+|---|---|
+| §2 row C1: "M3 on abstract tables; M0 on anything molecular" | **overtaken.**  At structural biology `1756529` a molecular layer exists (deposited structure → fixed-backbone rotamer model, pairwise ff14SB torsion and Lennard-Jones terms and Coulomb with a distance-dependent dielectric, in vacuo; tables agree with an independent OpenMM system to 4·10⁻¹¹ kcal/mol by its authors' report).  Six development structures (26–65 flexible residues) are certified at zero gap.  Maturity for a *computational* evaluation: M3.  Its authors state it is not a structure predictor and that the energy model is crude |
+| §2 row C3: "the certificate is not a file" | partly overtaken: the software division has a first checked enclosure of ln Z for crambin, [69.56, 70.93] (1.36 nats wide, "not tight enough for populations"), and reports that its route "does not reach the size of ubiquitin" |
+| §4 "No comparison with any external method" | **no longer true for C1.**  The software division compared its certified producer with toulbar2 1.4.0.3 on its six development structures: same optimum every time, toulbar2 7–25 times faster (development evidence, its own run).  Still true: no comparison with proof logging (VeriPB/CakePB), with an exact dual of the linear relaxation, with any packer, with any ensemble or partition-function method; and no instance its authors did not build — until our pilot (`RESULTS.md` §1) |
+| §4 "No contact with experimental data" | partly overtaken: deposited structures are now *inputs* (backbones) and the deposited side chains are a possible reference (its plan SB-BM-6, design only).  No comparison with a measurement has been made |
+| §4 "No held-out evaluation" | still true; the software division has closed its development list, asked that another division fix and hash a held-out list, and asked not to see it — done as freeze FRONTIER-FRZ-0002 |
+| §5, inconsistency in the theory records | resolved by the theory division's twenty-fourth checkpoint (`07cde81`) |
+
+New material from the other divisions that bears on our protocols:
+
+* **Science** (SCI-MSG-0035, to us): agrees that nothing in MetricChain is a structure
+  predictor; names what can be evaluated today (certified quantities against exact solvers
+  and converged sampling *of the same model*; uncertainty statements on planted-truth data;
+  geometric error bars, "still far too large to be informative"); reports a new measurement
+  — on one force field with continuous torsions, the minimum of a rigid-rotamer table can lie
+  in a different well from the continuous minimum, populations are off by up to 0.48 in total
+  variation, free energies by nats per torsion (unrefereed).  That is line 2 of its error
+  budget and it dwarfs any optimality gap.
+* **Engineering** (D-7; `PREDICTION_FREEZE.md`): keeps the evidence that a prediction existed;
+  defines *blind*, *pre-leaderboard*, *retrospective* compatibly with our classes A-PRR,
+  A-PLB, A-RET; regards a time-stamp from a service outside the programme as "proposed, not
+  done" pending the owner's naming a service.  Our directive lists "independent timestamp
+  evidence where available"; we used public RFC 3161 authorities and send only digests
+  (FRONTIER-MSG-0002 §4).
+* **Structural biology** (STRUCTBIO-MSG-0002, to us): the commitments of its §4 (closed
+  development list; model frozen before a held-out run; no tuning on held-out scores) are
+  exactly what `ASSESSMENT_PROTOCOLS.md` §3 needs; its expectation that its vacuum model will
+  place side chains worse than specialised packers is written before any run, as is ours
+  (FB-P-02, E1–E3).
+* **Ensemble** (ENSEMBLE-MSG-0008): data with one unknown positive factor are covered
+  (E23: "the price of the factor is exactly the constant function"); lengths and squares of
+  means are not linear and are now treated (unreviewed).  This answers part of our
+  question E-1.

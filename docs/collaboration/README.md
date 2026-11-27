@@ -266,7 +266,7 @@ mismatch.
 ```
 python3 -m venv ~/.venvs/frontier && ~/.venvs/frontier/bin/pip install -r requirements-frontier.txt
 ~/.venvs/frontier/bin/python -m pytest tests/frontier -q                 # tools, synthetic controls, freeze integrity
-~/.venvs/frontier/bin/python -m metricchain_fb.freeze verify PATH/manifest.json   # one frozen artifact set
+PYTHONPATH=src ~/.venvs/frontier/bin/python -m metricchain_fb.freeze verify experiments/frontier/freezes   # every freeze, strictly
 ```
 
 Every FRONTIER-RES names the commit, the command, the seeds, the input and output files with

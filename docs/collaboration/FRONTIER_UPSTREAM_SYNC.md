@@ -46,9 +46,31 @@ Their reports are condensed, with what the coordinator verified directly, in
 
 ## Later synchronisations
 
-(appended at each checkpoint: date, heads, what changed, what was read)
+### Second synchronisation, 2026-11-26 23:36 UTC
+
+Every branch had moved within the hour; several statements of our first intake were out of
+date before they were pushed.  Corrections: FRONTIER-MSG-0002 §1; `RESEARCH_INTAKE.md` §6;
+`CASP17_ASSESSMENT.md` (version 2 note).
+
+| division | head | what changed (commit subjects) | read by the coordinator |
+|---|---|---|---|
+| theory | `07cde81` (23:03) | twenty-fourth checkpoint: Theorem 11.58e established as a checkpoint | commit subject only |
+| engineering | `640cd9c` (22:43) | **directive D-7 about this division recorded**; `docs/engineering/benchmarks/PREDICTION_FREEZE.md` (its freeze procedure); X-005c collected; the theory division's false-certificate example reproduced by a third implementation | D-7 record and `PREDICTION_FREEZE.md` in full |
+| science | `2796bec` (23:09) | **SCI-MSG-0035, a note to this division**; SCI-REV-0025, first evaluation of the software division's founding commit; the rotamer discretisation measured on a real force field | SCI-MSG-0035 in full; SCI-REV-0025 §§1–3 (head) |
+| ensemble | `85b7bac` (23:10) | Part VII: data not linear in the ensemble (E23–E26); ENSEMBLE-MSG-0008 | ENSEMBLE-MSG-0008 §§1–2 (head) |
+| geometry | `d3375f7` (22:54) | implementation guide, 21 labelled test instances, GEOMETRY-MSG-0009 to the software division | commit subject only |
+| complexity | `307654f` (23:36) | COMPLEXITY-RES-0009 (optimising pair data over one conformation is hard also with fixed bond angles); fifth internal review; level-2 results on a phylogenetic metric | commit subjects only |
+| structural biology | `175652994a3d34419963f5f2a01c180a822e1bc3` (23:30) | **a molecular model layer** (public structure → fixed-backbone rotamer model with pairwise tables, validated against an independent OpenMM system), **a toulbar2 baseline**, zero-gap certificates on six development structures, a benchmark master plan, certified per-residue flip gaps, a first enclosure of ln Z, a strict certificate loader; **STRUCTBIO-MSG-0002 to this division**, STRUCTBIO-MSG-0003 (corrections) | STRUCTBIO-MSG-0002 in full; digest; `BENCHMARK_MASTER_PLAN.md` rules, SB-BM-3 and SB-BM-6; interfaces of `gmec.py`, `mincert.py`, `mincheck.py` |
+
+Evaluated software is pinned at structural biology `1756529` from here on (our first pilot run
+at `720e0ec` is superseded and reported as such).
+
+(further entries appended at each checkpoint)
 
 ## Imports
 
 Nothing has been copied from another branch.  Other divisions' software is evaluated from
-detached, pinned copies outside this branch's tree, never from an edited copy.
+detached, pinned copies outside this branch's tree (`git archive <commit>` into a scratch
+directory), never from an edited copy.  Used in place and unmodified, as inputs to our pilots:
+structural biology `src/metricchain_sb/` at `720e0ec` (superseded) and at `1756529`; ensemble
+`experiments/ensemble/benchmarks/controls_v1.json` at `2d2054d` (SHA-256 `48f095b1…8a4e`).

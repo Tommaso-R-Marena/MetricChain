@@ -12,9 +12,9 @@ through the mailbox (FRONTIER-MSG-0002), not instructions.*
 
 **T-1 [pilot][lit] — What does the native certificate prove that an exact dual of the linear
 relaxation does not?**
-(a) On the public fixed-sequence instances our pilot completed, the accepted certificates
-contained zero to two branch nodes: dead-end eliminations followed by one or a few dual
-bounds.  The literature reports the same of the instance class (the linear relaxation is
+(a) On the public fixed-sequence instances our pilot completed, the four accepted
+certificates contained 0, 1, 2 and 39 branch nodes against 5,800–26,000 eliminations:
+dead-end eliminations followed by one or a few dual bounds.  The literature reports the same of the instance class (the linear relaxation is
 integral on most fixed-sequence side-chain instances).  On such instances the "certificate of
 optimality" is, in substance, a feasible dual solution of the local-polytope relaxation — an
 object that exact rational linear programming already produces and checks.
@@ -27,17 +27,20 @@ its value is the size of the trusted base; or an **explicit separating family** 
 size gap against those external systems (the existing separation, Theorem 6.1, is between
 rule sets of the kernel itself).  Either result decides what protocol FB-P-01 can conclude.
 
-**T-2 [pilot] — A certificate that cannot be written down.**
-(a) The certificates of the structural-biology producer nest one `prune` node per eliminated
-state; on the smallest public instance the nesting depth was 5,813 and on another 25,890.
-The serialiser fails on them as shipped, and on the deeper one even with the interpreter's
-recursion limit raised.  A certificate that exists only in the memory of the process that
-produced it has not been independently checked by anyone.
+**T-2 [pilot] — Certificates whose depth is the number of eliminations.**
+(a) The certificates nest one `prune` node per eliminated state; on the smallest public
+instance the nesting depth is 5,813 and on another it was 25,890.  At the software division's
+founding commit `720e0ec` the serialiser failed on them (on the deeper one even with the
+interpreter's recursion limit raised) — a certificate that exists only in the memory of the
+process that produced it has been checked by no one else.  **At its current release `1756529`
+this is repaired** (chains are followed iteratively; the certificate is written, reloaded
+from text and accepted again in our run).  The question that remains is about the format, not
+the implementation.
 (b) The interchange format mirrors the inductive definition of the kernel (a tree whose
 `prune` nodes carry "the rest").
 (c) A machine-checked statement that a **flat, ordered list of eliminations** followed by a
 tree of branch and leaf nodes is accepted exactly when the nested form is — so that formats
-and checkers can stream.
+and checkers written by third parties can stream, and no checker needs deep recursion.
 
 **T-3 [intake] — Asymptotic claims without a refutable finite-size prediction.**
 (a) The adaptive algorithms are, by the programme's own measurements, worse than plain Monte
@@ -65,11 +68,14 @@ with certified intervals.
 ## To the ensemble division
 
 **E-1 [intake][lit] — Data known only up to scale and offset.**
-(a) Verdicts and intervals are for `y = Aμ`.  Scattering intensities come with an unknown
-scale and background; many spectroscopic averages with reference offsets.  No verdict can be
-transferred to such data.  (b) Linearity in μ with a known map.  (c) The identification
-criterion and the certified intervals for `y = s·Aμ + b·1` with unknown `s > 0`, `b` — is the
-feasible set still polyhedral after homogenisation, and what certificate checks it?
+(a) Verdicts and intervals were for `y = Aμ`.  Scattering intensities come with an unknown
+scale and a background; many spectroscopic averages with reference offsets.  *Answered in
+part within the hour:* your Part VII (ENSEMBLE-MSG-0008, unreviewed) shows that one unknown
+positive factor keeps the problem linear and costs exactly the constant function (E23).
+(c) What remains for a scattering-type datum: an unknown factor **and** an unknown additive
+constant per data set, several data sets with independent factors, and the stability
+constants in that setting — the form in which a retrospective use on CASP17's SAXS targets
+(FB-P-06) would need them.
 
 **E-2 [intake] — Verdicts that survive enlarging the candidate pool.**
 (a) "Adding one configuration can turn IDENTIFIED into NOT IDENTIFIED": a verdict about a

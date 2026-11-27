@@ -7,7 +7,10 @@ the SHA-256 of that file.  Tooling and its limits: `src/metricchain_fb/freeze.py
 
 ## How to check any row yourself
 
+From the repository root, with `PYTHONPATH=src` (the package is not installed):
+
 ```
+export PYTHONPATH=src
 python -m metricchain_fb.freeze verify experiments/frontier/freezes            # bytes unchanged?
 python -m metricchain_fb.timestamp verify experiments/frontier/freezes/<dir>/MANIFEST.json
 sha256sum experiments/frontier/freezes/<dir>/MANIFEST.json                     # must equal the row
@@ -47,3 +50,16 @@ strict mode: editing, adding or removing any file of any freeze fails the test-s
 | id | what was frozen | kind · class · stage | manifest SHA-256 | attested not later than (verifying authorities) | reference at freeze time | status |
 |---|---|---|---|---|---|---|
 | FRONTIER-FRZ-0001 | public state of CASP17 three days before the announced results: target list, download-area listings, announcements, PDB release status of the references named on the list (`FRONTIER-FRZ-0001_casp17_public_state/`) | data-snapshot · n/a · n/a | `899f916eb2bbf6747f1237ec305276b591c36229c57d822fed1cfed83bde0d29` | 2026-11-26T23:03:21Z (DigiCert, Sectigo, GlobalSign, Certum; all four verify) | no prediction in this freeze; it *is* the record of what was public: results page "No results available yet", reference and results directories empty, 19 of 239 targets with a released PDB entry | frozen |
+| FRONTIER-FRZ-0002 | **sealed held-out list v1**: 47 high-resolution single-chain crystal structures first released on or after 2026-07-01, one per 30 % cluster, in a secret salted order; public rule and query, salted commitment, encrypted list (`FRONTIER-FRZ-0002_heldout_commitment_v1/`).  For FB-P-01 (held-out stage), FB-P-02, SB-BM-3, SB-BM-6 | held-out-commitment · n/a · held-out | `c5df5b3cdedcf5a3389ff1cde78959d563a4e7d0e39247eda332ed4d8df54284` | 2026-11-26T23:42:32Z (DigiCert, Sectigo, GlobalSign, Certum; all verify) | the members are public PDB entries — "held out" from development, never blind; membership and order unknown to the software division; passphrase and commitment salt with the research owner | sealed; to be opened after the software division freezes its release |
+| FRONTIER-FRZ-0003 | **our scores of every public CASP17 model file of T2409, T2410, T2411** (1,163 files) against the released PDB references, with the plan for comparing them with the official numbers (`FRONTIER-FRZ-0003_casp17_scoring_check/`).  Tests our scoring code, no MetricChain method | scores · **A-PLB** · development | `2a65d774cfb244c1413ef10bba1c6a2fc9341011627ce112fbcd74e4a46cb334` | 2026-11-26T23:58:17Z (the same four; all verify) | references public (PDB, released 2026-09-16); official per-model scores not public (results announced for 2026-11-29) | frozen; **to be assessed** against the official numbers by `COMPARISON_PLAN.md` |
+
+## Freezes kept by other divisions
+
+The engineering division keeps the custody record of every batch it runs, in its own format
+(`docs/engineering/benchmarks/PREDICTION_FREEZE.md` on its branch: `MANIFEST.sha256`,
+`PROVENANCE.json`, `FREEZE.md`, pushed at once).  Its words *blind*, *pre-leaderboard* and
+*retrospective* correspond to our classes A-PRR, A-PLB and A-RET; its rule that a prediction
+whose category cannot be established is retrospective is adopted here for anything reported
+as a prediction.  Its batches are indexed in this register by manifest digest when they
+exist; none exists yet.  Any file can be time-stamped without being modified:
+`python -m metricchain_fb.timestamp stamp-file PATH`.

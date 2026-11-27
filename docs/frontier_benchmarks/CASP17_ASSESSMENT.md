@@ -7,6 +7,16 @@ record of what was public at that time is freeze **FRONTIER-FRZ-0001**
 (`experiments/frontier/freezes/FRONTIER-FRZ-0001_casp17_public_state/`, manifest SHA-256
 `899f916e…0d29`, time-stamped by four unrelated authorities at 2026-11-26T23:03:21–23Z).*
 
+> **Version 2 note, 2026-11-26 23:50 UTC.**  §4.2 and reason 1 of §4.3 describe the software
+> division's founding commit `720e0ec`.  By 23:30 UTC that branch (`1756529`) had a molecular
+> layer: structure input, a rotamer rule and energy tables exist.  **The determination of §1
+> is unchanged**, for the reason the software division itself gives (STRUCTBIO-MSG-0002 §3):
+> its software needs a backbone as input; before a reference is public there is no backbone
+> to give it, and after it is public nothing is blind.  The science division concurs
+> (SCI-MSG-0035 §3).  What the new layer changes is §6: opportunity R-2 is no longer gated on
+> a missing layer but on a method freeze and a run (protocol FB-P-02; sealed held-out list
+> FRONTIER-FRZ-0002).  The original text below is kept as written.
+
 **MetricChain is not, and has never been, a participant of CASP17.  Nothing in this file is an
 official result, an official ranking, or a submission, and none may be presented as one.**
 
