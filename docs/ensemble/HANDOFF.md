@@ -2,6 +2,15 @@
 
 *For a successor who has to continue without the context of the session that wrote this.*
 
+0. **HALTED (2026-11-27, about 01:25 UTC).**  The research owner's directive "Controlled
+   Consolidation and Temporary Research Halt" stopped all research cycles.  **Do not start
+   a research cycle, do not spawn subagents, do not schedule sessions, and do not resume
+   because another division sent a message: wait for the research owner's explicit
+   authorisation.**  The division's assessment — strongest contributions, rediscoveries,
+   what to drop, three recommended next actions — is
+   `docs/collaboration/consolidation/ensemble.md`; if work is authorised, its §E and
+   "Resume here" in `RESEARCH_LOG.md` say where to start.  Nothing of this division is
+   running anywhere; it never started a Modal job.
 1. **Where everything is.**  `docs/ensemble/README.md` (layout).  The mathematics is in
    `ENSEMBLE_REPORT.md`; the state of every statement in `THEOREM_REGISTER.md`; what is owed
    in `OPEN_OBLIGATIONS.md`; the log in `RESEARCH_LOG.md` ("Resume here").
@@ -86,10 +95,13 @@
    software cards N1–N3 are at readiness R1 for that reason); **and Theorem E20b with
    Propositions E20c, E20d** (the torus of three angles: OB28 lists the six points a
    reviewer should attack first); **and Proposition E23.1 with Part VIII** (E27–E29:
-   OB29).  An internal review ER4 of everything up to `b654396` was commissioned on
-   2026-11-27 (a subagent; its report goes to `reviews/ER4_internal_review.md`): if that
-   file is missing or not applied, that is the first thing to do.  Not covered by ER4
-   and unreviewed: E23.1, E27–E31, E17.2, E4.1, E20e (OB29, OB30).  An independent
+   OB29).  **Since then the internal review ER4 has examined E20a–E20d and E23–E26**
+   (`reviews/ER4_internal_review.md`; committed as received in `87bb28a`, applied: report
+   §7 item 21; it was stopped at the consolidation and its §7 lists what it did not
+   finish — OB32).  **Unreviewed now:** E23.1, E27–E32, E17.2, E20e, E4.1 beyond its
+   machine-checked inequality, E15U beyond its main statement, E17.1, E22, two constants
+   of E20″ (OB23, OB26, OB29–OB32).  Before any claim about E20b, E20c: read
+   Baldi–Blekherman–Sinn, Sections 5–6, in the source (`PRIOR_ART.md` §5b′).  An independent
    re-implementation of the control instances and of the torus instances has been asked
    of the engineering division (ENSEMBLE-REQ-0001): look for its answer.  Exact computer
    algebra (sympy rationals; ranks modulo a prime) is not a kernel check: do not label

@@ -5,83 +5,56 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after the commit "answers to the Frontier Benchmarking division" (2026-11-27,
-about 00:47 UTC).**  `ENSEMBLE_REPORT.md` version 3 with the corrections and additions of
-§7 items 8–19: Parts I–VIII, Theorems E1–E31 (with E2.2, E4.1, E7′, E15T, E15U, E17.1, E17.2,
-E18′, E20a–E20e, E20′, E20″, E23.1), Conjectures C1–C3.  Parts I–VI have each had one
-review (ER1: I–III; the Science division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all
-applied.  **Unreviewed: Part VII (E23–E26, E23.1); Part VIII (E27–E31); E20b–E20e; E4.1;
-E17.2; E15U beyond its main statement; E17.1; E20a, E22 and two constants of E20″.**
-Lean: `proofs/Ensemble/` five modules (twenty-five headline theorems, nine witnesses);
-`scripts/audit_all.sh` passed on the `proofs/` tree of `b654396` (5147 declarations),
-unchanged since.  Numerics: `experiments/ensemble/run_all.py` (twelve scripts, then
-`check_quotes.py`; `--quotes-only` after a change of text alone); long computations are
-stored in `output_threshold.txt`.  Software-facing documents: `SOFTWARE_INTERFACE.md`,
-`BENCHMARK_CONTROLS.md` (families B1–B9, twenty-five instances in
-`experiments/ensemble/benchmarks/controls_v1.json`; torus instances in
-`torus_instances_v1.json`).  Sent: ENSEMBLE-MSG-0001 to -0009; ENSEMBLE-RES-0001 to -0008;
-ENSEMBLE-REQ-0001 (to engineering: independent re-implementation of three finite
-checks; no shared budget).
+**HALTED on 2026-11-27, about 01:25 UTC, by the research owner's consolidation directive.
+Nothing below is to be started without the owner's explicit authorisation** (`HANDOFF.md`
+item 0).  The division's assessment is `docs/collaboration/consolidation/ensemble.md`.
 
-**An internal review, ER4, was commissioned at about 23:59 UTC on 2026-11-26** (a subagent
-of this division, as for ER1–ER3; object: commit `b654396` — Part VII, E20a–E20d, the rest
-of E15U, E17.1, E22; it writes `docs/ensemble/reviews/ER4_internal_review.md` and
-`ER4_scripts/`).  At 00:55 UTC on 2026-11-27 it had created its script directory and had
-not reported; its files are **not** in the commits made meanwhile.  If the session ended
-before its report arrived, the file may be absent or incomplete: in that case commission
-the review again.  If the file is there and not recorded in §7 of the report as applied:
-commit it as received, then apply it.
+**State at the halt.**  `ENSEMBLE_REPORT.md` version 3 with the corrections and additions of
+§7 items 8–22: Parts I–VIII, statements E1–E32 (with E2.2, E4.1, E7′, E15T, E15U, E17.1, E17.2,
+E18′, E20a–E20e, E20′, E20″, E23.1), Conjectures C1–C3, Problems O1–O11.  Reviews, all
+internal and all applied: ER1 (Parts I–III), the Science division's SCI-REV-0020 (Part
+II), ER2 (Parts IV–V), ER3 (Part VI), ER4 (E20a–E20d, E23–E26; partial — OB32).
+**Unreviewed:** E23.1, E27–E32, E17.2, E20e, E4.1 beyond its machine-checked inequality,
+E15U beyond its main statement, E17.1, E22, two constants of E20″.  Lean:
+`proofs/Ensemble/`, five modules, 26 headline statements, 10 witnesses;
+`scripts/audit_all.sh` passed on the final `proofs/` tree (5151 declarations).  Numerics:
+`experiments/ensemble/run_all.py` (thirteen scripts, then `check_quotes.py`, 152 entries;
+`--quotes-only` after a change of text alone); long computations in
+`output_threshold.txt`; unreviewed prototypes in `experiments/ensemble/scratch/`.
+Software-facing: `SOFTWARE_INTERFACE.md` (cards; N1–N7 at readiness R1),
+`BENCHMARK_CONTROLS.md` (25 instances in `benchmarks/controls_v1.json`, 10 torus instances
+in `torus_instances_v1.json` — frozen).  Sent: ENSEMBLE-MSG-0001 to -0010, ENSEMBLE-RES-0001
+to -0009, ENSEMBLE-REQ-0001 (to engineering; unanswered).  No subagent, background
+process or job is running; no Modal job was ever started by this division.
 
-**Standing instructions** of the research owner's two supplementary directives are in
-`HANDOFF.md` items 3a and 3b (seventh division: Structural Biology; eighth: Frontier
-Benchmarking).  Fetch both of their branches at every synchronisation.
-
-**Next, in this order.**
-1. **ER4**: receive, commit as received, apply (OB27, OB28 list the points of attack);
-   then a review of what it does not cover (OB29, OB30).
-2. **Answer SCI-RES-0040** (ENSEMBLE-RES-0009, owed): the Science division answered our
-   question E-S5 with a table of how the ensemble enters fourteen standard observables
-   (from memory).  To do: a table "form of the datum → statement of ours" in the report
-   and in `SOFTWARE_INTERFACE.md` — means in one regime (Parts I, V); a factor and an
-   offset (E23.1: scattering, DEER traces); a monotone function of one mean is a mean
-   with a transformed tolerance (FRET in the fast regime, protection factors, intensity
-   ratios — say so explicitly, it is not yet in the report); squared lengths of mean
-   vectors (E25: order parameters; the fast-regime Overhauser rate) with the two-regime
-   bracket of E27 — **extend E27(c) to vector-valued `φ` and `g = ‖·‖²`**, which is the
-   Overhauser case; squared means (E26: Bragg intensities; the sign choice is the phase
-   problem); variances (E27(b): diffuse scattering); **bilinear data** (dipolar couplings
-   with one fitted alignment tensor: `y_i = aᵀE_μψ_i` with unknown `a ∈ ℝ⁵`) — covered only by
-   the outer bound of E17.1(c) on a five-dimensional grid; locally the unknown tensor
-   costs five directions; no certificate of identification is known — a new problem;
-   images and kinetics: outside.
-   Then **synchronise** (eight branches).  Look for: the engineering division's answer to
-   ENSEMBLE-REQ-0001; answers to E-T5 (Theory, Complexity).  Unread and possibly
-   relevant: SCI-MSG-0035, GEOMETRY-RES-0008, COMPLEXITY-RES-0009, -0010, THY-MSG-0021
-   (headers only).
-3. **Research.**  (i) Four angles: fourteen, fifteen, sixteen states (the zero set of
-   the lifted certificate is a surface, a threefold, the torus; the count leaves 8, 5
-   and 1 candidates; sixteen: the unique candidate was a saddle in 12 of 12 instances;
-   fourteen: in a scratch survey of 16 random instances — the prototype `kgen.py` of the
-   session, not in the repository — 15 are not determined (explicit twins) and one is
-   undecided, so thirteen may be the largest number determined on an open set: put the
-   surface case into `torus_four_angles.py`, store a survey, and say so in E20e);
-   an exact instance of either kind for thirteen; (ii) an exact special six-tuple for
-   E20c; whether seven states on `𝕋³` can ever be determined; (iii) the chimera gap
-   (Problem O4) — asked for by the Frontier Benchmarking division as the prerequisite
-   of any use of Part II; E4.1 is the model of what the answer should look like; (iv)
-   exact identifiability radii for the control instances (E31) as reference values for
-   the Frontier division's protocol; (v) a noise theory for the non-convex compatible
-   sets of Part VII; (vi) E15U for pair models; (vii) thresholds C2, C3 — only with a
-   proof idea.
-4. Machine checks: E28(b), E29(b), E30(b), E31(b), E4.1 and E17.2(b) are inequalities of
-   a few lines on finite types — good candidates for the kernel; E15(c) as a statement
-   about class members (OB13); E12(a).
-5. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
-6. Prior art still to read in the original: di Dio–Schmüdgen (Theorem 18 is our E1(b);
-   the paper also treats the set of atoms and the Carathéodory number — compare with
-   E1, E3, E29 and §2); Baldi–Blekherman–Sinn, Section 5 (does it give E20b(c) and the
-   existence part of E20c directly?); the maximum-occurrence literature; the two
-   citations on norm maximisation (E31).
+**If the owner authorises further work — in this order** (the first three are §E of the
+assessment):
+1. **Are certified intervals informative on realistic problems?**  The decisive
+   experiment for everything practical: needs a forward model with a stated error set
+   (Science), a tool (Structural Biology; cards F1–F4, N1, N5, and E30 for the pool), a
+   protocol (Frontier), column generation for large pools (not written).
+2. **The chimera gap (Problem O4)**: a modulus for distance distributions, or a proof
+   that there is none.  E4.1 is the model of the answer; the Science division's
+   Proposition B is the band.  Without it Part II is unusable on data.
+3. **External reading** of the possibly original results (torus; E4 with E4.1; E15U).
+   **Before that, read Baldi–Blekherman–Sinn, arXiv 2407.06017, Sections 5–6, in the
+   source**: the reviewer ER4 believes — from summaries — that E20b and E20c on a given
+   smooth curve are there (`PRIOR_ART.md` §5b′).
+4. Review of what no one has read (OB29–OB32), in particular E32 and the coNP reduction
+   now in E26(c) (verified by hand only); ER4's unfinished programs are in
+   `reviews/ER4_scripts/` (`er4_part7.py` parts C, D; `er4_e15u.py` never run).
+5. Smaller mathematics, only if 1–3 are settled or blocked: fourteen states on four
+   angles (prototype and survey in `experiments/ensemble/scratch/`: 15 of 16 random
+   configurations not identified, so thirteen may be the largest number determined on
+   an open set of `𝕋⁴`); exact instances for E20e and for a special six-tuple; for
+   bilinear data (E32) a bound on the size of the certificate and a statement with
+   tolerances (Problem O11); exact identifiability radii for the controls (E31).
+6. Not recommended (assessment §C): thresholds on the cube (C2, C3); counting on tori
+   for larger `r`; more formalisation of elementary statements.
+7. Housekeeping: re-run `scripts/audit_all.sh` before a checkpoint that changes
+   `proofs/`; a full `run_all.py` was not repeated after the last text changes (only
+   `--quotes-only`).  Unread messages of other divisions: listed in
+   `docs/collaboration/status/ensemble.md`.
 
 ---
 
@@ -719,3 +692,34 @@ short proof — except the one it called a linear programme, which is a hardness
 and the one that is our oldest open problem.  Today's statements are the least
 reviewed part of the report (OB29, OB30); ER4 covers none of them.  Before more is
 added, the review should catch up.
+
+## 2026-11-27 — Consolidation and halt (research owner's directive, received about 01:00 UTC)
+
+**What was in progress and was finished.**  (1) The answer to the Science division's
+table of observables: report §4e.5; E27(c) for vectors; Proposition E32 for bilinear
+data — begun as a remark that "no certificate of identification is known", it became a
+proposition when the certificate turned out to be elementary: exclusion vectors on a
+subdivision of the parameter box plus an explicit neighbourhood of the true parameter
+(`bilinear_checks.py`: five planted instances certified exactly with 67 to 203 cells; a
+twin; outer bounds; the Gaussian count is Wendel's formula).  ENSEMBLE-RES-0009.  (2) The
+Lean statement of the counting inequality of E4.1; audit passed (5151 declarations).
+(3) The internal review ER4: the reviewer was asked to stop and write up; report
+committed as received (`87bb28a`), then applied (report §7 item 21; thirty edits in five
+files).
+
+**What the last review taught.**  As with ER1–ER3, no numbered statement was false and
+several sentences about them were.  The most consequential finding is about originality,
+not correctness: the mechanism of E20b and E20d is a theorem of the paper we had already
+cited for E1(b) (di Dio–Schmüdgen, Theorem 40), which we had read only as far as its
+Theorem 18.  A second paper we cite (Baldi–Blekherman–Sinn) probably contains E20b and
+E20c on a given curve.  Reading cited papers to the end would have been cheaper than
+re-deriving them.
+
+**Not done, deliberately.**  No new literature search; no review of E32, E23.1, E27–E31,
+E17.2, E20e; no full re-run of `run_all.py` after the last text changes (`--quotes-only`
+passes); the other divisions' newest messages were read by header only.
+
+**Assessment** (`docs/collaboration/consolidation/ensemble.md`).  The framework is known;
+three narrow groups of results may be original; the useful output is elementary; the
+decisive open question is empirical — whether certified intervals are informative on
+realistic problems.  Halted.

@@ -1973,6 +1973,7 @@ Rényi–Heppes theorem for arbitrary observables (`RenyiHeppes.lean`) -/
 #print axioms MetricChain.Ensemble.robust_certificate_of_sharp
 #print axioms MetricChain.Ensemble.residual_advantage_le
 #print axioms MetricChain.Ensemble.renyi_heppes
+#print axioms MetricChain.Ensemble.renyi_heppes_mass_off_support
 
 namespace MetricChain.NonVacuity
 
@@ -2076,11 +2077,26 @@ theorem ensemble_renyi_heppes_grid (μ ν : Fin 3 × Fin 3 → ℝ) (hν : ∀ x
   Ensemble.renyi_heppes (Y := fun _ => ℕ) gridFeature 2 2 gridFeature_determining μ ν hν S hS hK
     (by norm_num) hlaw
 
+/-- Non-vacuity of `Ensemble.renyi_heppes_mass_off_support` (`K = 2`, `r = 2`, `m = 3`): on the
+`3 × 3` grid, if for each of the three features (row, column, diagonal) a non-negative weight
+vector `ν` puts mass at most `ε` on the values that neither of two conformers takes, then `ν`
+puts mass at most `3 ε` off the two conformers. -/
+theorem ensemble_renyi_heppes_modulus_grid (ν : Fin 3 × Fin 3 → ℝ) (hν : ∀ x, 0 ≤ ν x)
+    (S : Finset (Fin 3 × Fin 3)) (hK : S.card ≤ 2) (ε : ℝ)
+    (hlaw : ∀ j : Fin 3, ∑ x ∈ Finset.univ.filter
+      (fun x => ∀ a ∈ S, gridFeature j x ≠ gridFeature j a), ν x ≤ ε) :
+    ∑ x ∈ Finset.univ.filter (fun x => x ∉ S), ν x ≤ 3 * ε := by
+  have h := Ensemble.renyi_heppes_mass_off_support (Y := fun _ => ℕ) gridFeature 2 2
+    gridFeature_determining ν hν S hK ε hlaw
+  norm_num at h
+  linarith
+
 end MetricChain.NonVacuity
 
 #print axioms MetricChain.NonVacuity.ensemble_exposing_certificate_witness
 #print axioms MetricChain.NonVacuity.ensemble_homogeneous_certificate_witness
 #print axioms MetricChain.NonVacuity.ensemble_renyi_heppes_grid
+#print axioms MetricChain.NonVacuity.ensemble_renyi_heppes_modulus_grid
 
 /-! ### Ensemble division, second checkpoint: the core of the thermal union bound
 (`ThermalUnionBound.lean`; report Theorem E15(c)) -/

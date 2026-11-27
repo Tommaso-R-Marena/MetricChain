@@ -1,0 +1,16 @@
+{'seed': 0, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 21.0}
+{'seed': 1, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 20.5}
+{'seed': 2, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 16.7}
+{'seed': 3, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 14.3}
+{'seed': 4, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': 0.0021233155713293616, 'grad': 5.828483182591073e-15, 'qmin_sample': 2.0536022406663325e-05, 'cert': None, 'last': {'A': 10000000.0, 'minimum': np.float64(-9.197190280853092e-09), 'hessian': 0.007028908289401281, 'away': 1.8892766447242883e-08}, 'verdict': 'UNDECIDED (candidate on the sample; torus check failed)', 'secs': 20.4}
+{'seed': 5, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 15.3}
+{'seed': 6, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 12.1}
+{'seed': 7, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.2627556225766701, 'verdict': 'NOT IDENTIFIED', 'secs': 10.8}
+{'seed': 8, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 12.0}
+{'seed': 9, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.3956597148603841, 'verdict': 'NOT IDENTIFIED', 'secs': 15.3}
+{'seed': 10, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 15.9}
+{'seed': 11, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 15.1}
+{'seed': 12, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 12.9}
+{'seed': 13, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 13.2}
+{'seed': 14, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 13.7}
+{'seed': 15, 'K': 14, 'dimR': 50, 'conditions': 42, 'rank': 42, 'candidates': 8, 't': -0.0, 'least_mass_on_states': 0.0, 'verdict': 'NOT IDENTIFIED', 'secs': 16.1}

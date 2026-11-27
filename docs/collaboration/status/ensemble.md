@@ -1,8 +1,60 @@
 # Status of the Ensemble Identifiability and Certified Inference Division
 
-*Updated 2026-11-27, about 00:47 UTC (after the fifth checkpoint: Part VII; the torus of three angles settled; Part VIII; the answers to the Frontier Benchmarking division; see the commit time).  Branch `research/ensemble-identifiability`.*
+*Updated 2026-11-27, about 01:25 UTC — **consolidated and halted** under the research owner's directive "Controlled Consolidation and Temporary Research Halt" (see the commit time).  Branch `research/ensemble-identifiability`.*
 
-## State
+## Halted
+
+**This division is halted.**  No subagent, background process, scheduled session or
+computational job of this division is active; it never started a Modal job.  It resumes
+only on the research owner's explicit authorisation — not on a message from another
+division.  Assessment: `docs/collaboration/consolidation/ensemble.md`.  Final message:
+ENSEMBLE-MSG-0010.  Hand-over: `docs/ensemble/HANDOFF.md` (item 0), `RESEARCH_LOG.md`
+("Resume here").
+
+**Since the previous status (commit `fb22cb8`).**
+1. *Internal review ER4* (a subagent; object: E20a–E20d and E23–E26 at `b654396`) was
+   told to stop and report, was committed as received (`87bb28a`) and applied (report §7
+   item 21): no numbered statement false; five major findings — a false clause in the
+   proof of E20b (theorem unaffected), three sentences that said more than was proved,
+   one check mis-described — and seven minor ones, among them prior art: the mechanism of
+   E20b and E20d is Theorem 40 of di Dio–Schmüdgen.  Linked corrections in
+   ENSEMBLE-MSG-0010.  What the review did not finish: OB32.
+2. *Answer to the Science division* (ENSEMBLE-RES-0009; report §4e.5, §7 item 20): the
+   forms of its table of observables against our statements; Proposition E32 (unknown
+   linear parameters shared by all conformers), with `bilinear_checks.py`.  Unreviewed
+   (OB31); no literature search.
+3. *Machine check*: the counting inequality of Proposition E4.1,
+   `Ensemble.renyi_heppes_mass_off_support`, with the witness
+   `ensemble_renyi_heppes_modulus_grid`.
+4. *Preserved*: the prototype for fourteen states on four angles and its survey
+   (`experiments/ensemble/scratch/`, marked as not a result).
+
+**Verification state of the final tree.**  Lean: `proofs/Ensemble/` five modules, 26
+headline statements and 10 non-vacuity witnesses in `proofs/AxiomAudit.lean`;
+`scripts/audit_all.sh` run on exactly this `proofs/` tree, 00:48–01:20 UTC: **AUDIT
+PASSED** (build 8653 jobs without warning; token scan; 5151 declarations on the three
+standard axioms; falsification harness).  Numerics: thirteen check scripts; the stored
+blocks of the first twelve are those of the last full run (before `fb22cb8`; those
+scripts are unchanged since), the block of `bilinear_checks.py` is from its own run of
+01:07 UTC; `run_all.py --quotes-only`: 152 entries, all pass; `scripts/check_doc_refs.py`:
+OK.  A full `run_all.py` (about twenty minutes) was **not** repeated after the last text
+changes.
+
+**Synchronisation at 01:19 UTC** (heads only): theory `61461f3`, engineering `8df6e5e`
+(no answer to ENSEMBLE-REQ-0001), science `340081a`, geometry `229527e`, complexity
+`05865bb`, structural biology `602b867`, frontier benchmarks `3c6446b`.  Added by others
+since our last synchronisation and **read by header only**: SCI-MSG-0036, SCI-MSG-0037
+(science's consolidation message; lists our RES-0007, RES-0008, MSG-0009 as unread by
+it), SCI-REV-0029, SCI-REV-0030; GEOMETRY-MSG-0011, -0012, GEOMETRY-RES-0009, -0010;
+STRUCTBIO-MSG-0004, STRUCTBIO-RES-0003; the consolidation documents of science, geometry
+and structural biology.  None is addressed to us alone; none was acted upon.
+
+**Open at the halt.**  Mathematics: Problems O1–O11 of the report, first of all O4 (a
+modulus for distance distributions).  Obligations: `OPEN_OBLIGATIONS.md` OB1–OB32, first
+of all the unreviewed statements (OB23, OB26, OB29–OB32) and the reading of
+Baldi–Blekherman–Sinn §5–6.  Requests: ENSEMBLE-REQ-0001 to engineering, unanswered.
+
+## State before the halt (kept as written at `fb22cb8`)
 
 **The Frontier Benchmarking division's mathematical feedback answered** (ENSEMBLE-RES-0008;
 report §7 item 19; **unreviewed**, obligation OB30).  Its five items for us, read from its

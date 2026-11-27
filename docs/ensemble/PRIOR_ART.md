@@ -254,6 +254,28 @@ was not read).  Classification: E20b "an application of a known mechanism to the
 with an elementary self-contained proof; the statement for the torus not found";
 E20c "the same; existence numerical here"; E20d an application of a published theorem.
 
+**Added from the internal review ER4 (F10), 2026-11-27.**  (1) *di Dio–Schmüdgen (2018),
+Section 7* — read in the source by the reviewer, not by us: Definition 33 (the moment map
+and its derivative), Lemma 37(ii), Theorem 40 ((vii) ⇒ (i) ⇒ (iii): full rank of the
+derivative at a representing measure ⇒ inner point of the moment cone ⇒ every point is
+an atom of a representing measure).  **This is the mechanism of E20b(a), (b) on the curve
+`Z` and of E20d(a), (b) on the torus**; what is ours is the reduction from the torus to the
+curve, the statement for the torus, and the exact ranks.  (2) *The same paper,
+Proposition 22 and Examples 23, 24*: a criterion of the type of our E18, and
+determinate functionals whose certificates are the Robinson and Motzkin polynomials.
+So "an identified ensemble whose certificate is not a sum of squares" is in print for
+polynomial data on the plane; our question E-T5 should be read with that in mind.
+(3) *Baldi–Blekherman–Sinn, Sections 5–6* — seen by the reviewer **only through summaries
+of a fetch tool**: the boundary of the dual cone of the quadrics on an elliptic normal
+curve is described by sums of `n + 1` points with total `O` or the positive two-torsion
+point.  If that is what the paper says, E20b and E20c *on a given smooth curve* are its
+statements and the existence of case-(a) six-tuples follows without numerics.  **To be
+checked in the source before any claim about E20c.**  (4) From the reviewer's memory,
+unchecked: the classification of multiforms for which non-negative equals sum of
+squares (Choi–Lam–Reznick) presumably covers multidegree `(2, 2, 2)`.
+Classification after ER4: E20b, E20d "a known criterion applied to the torus"; E20c
+"probably known on a given curve; an instance on the torus".
+
 ## 5c. Part VII (data that are not linear in the ensemble)
 
 No search was made.  From memory: the reduction of a linear-fractional programme to a
@@ -294,6 +316,29 @@ the frameproof-code lemma of §3.1.  E20e: the neighbouring literature is that o
 (moment problems on real curves; typical ranks of real tensors) — whether "no generic
 answer over the reals" for this moment problem is in print was not looked for.
 Classification: all elementary except E20e, which is numerical; obligation OB30.
+
+## 5f. Proposition E32 (bilinear data) and the additions of §4e.5 — not searched
+
+Written during the consolidation of 2026-11-27; **no search was made** (the research owner's
+directive suspended literature investigations).  From memory only, nothing opened:
+
+* *Bilinear inverse problems and lifting* (blind deconvolution and self-calibration:
+  Ahmed–Recht–Romberg; Ling–Strohmer; identifiability: Choudhary–Mitra; Li–Lee–Bresler).
+  They treat generic identifiability of a bilinear map under sparsity or subspace
+  constraints; E32 is a certificate for one instance with a probability vector and a box.
+  The relaxation of E32(a) is the standard convex-hull (McCormick / reformulation-
+  linearisation) relaxation of a product of a simplex and a box; spatial branch and bound
+  with such relaxations is textbook global optimisation.  **E32(a) and the scheme of (c)
+  should be assumed known in substance.**
+* *The count of E32(d)* for `p = 1`: Donoho and Tanner, "Counting the faces of
+  randomly-projected hypercubes and orthants, with applications", Discrete Comput. Geom.
+  43 (2010) — the weak threshold `2 − 1/δ` for the orthant.  Our formula reduces to theirs
+  as we remember it; the reference was not opened.  Wendel's theorem (1962) is classical.
+* *Ensembles with a fitted alignment tensor*: fitting one tensor to an ensemble by
+  singular value decomposition is standard practice in the analysis of residual dipolar
+  couplings (from memory); we know no certified treatment and did not look for one.
+* The vector form of E27(c) and the remark on monotone functions of one mean are
+  immediate.
 
 ## 6. Search log (2026-11-26)
 

@@ -271,11 +271,38 @@ R5  quantitative Renyi-Heppes (Proposition E4.1)
     40 random instances on the 5 x 5 grid (3 to 6 directions of lines, 1 to m - 1 conformers, every law within 0.01 in total variation): the largest mass off the conformers never exceeds m eps/(m - K) (largest excess 3.4e-16) and reaches 1.000 of it
   the mass off the conformers is at most m eps / (m - K (r - 1)): ok
 PASS
+===== bilinear_checks.py (exit 0, 132 s) =====
+U1  planted instances (n = 12, m = 8, p = 2, two conformers, box [1/2,3/2] x [0,1])
+    seed 1: radius 4.759e-03; cells 103 (in the neighbourhood 4, excluded 99, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 2: radius 2.396e-03; cells 69 (in the neighbourhood 4, excluded 65, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 3: the local criterion fails
+    seed 4: radius 3.243e-04; cells 203 (in the neighbourhood 5, excluded 198, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 5: radius 1.176e-02; cells 67 (in the neighbourhood 4, excluded 63, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+    seed 6: the local criterion fails
+    seed 7: radius 4.291e-03; cells 69 (in the neighbourhood 4, excluded 65, open 0); certificate verified exactly: True; grid parameters other than a_0 with a non-empty slice: 0 of 1680
+U2  a twin
+    data of (mu, a_0) and of (nu_2, a_2) equal exactly: True; total variation between the ensembles 1; a_0 = (1, 1/2), a_2 = (5/4, 1/4)
+    subdivision to depth 9: 69 cells excluded, 40 not; cells not excluded contain a_0: True, a_2: True; hull of the cells not excluded: [0.969, 1.312] x [0.188, 1.000]
+U3  outer bounds for the weight of configuration 0 on the twin instance
+    range over the slices of a 241 x 241 grid of parameters (an inner estimate): [0.0000, 0.3333]
+    cells of depth 0: certified outer bound [0.0000, 0.5556]
+    cells of depth 3: certified outer bound [0.0000, 0.3715]
+    cells of depth 6: certified outer bound [0.0000, 0.3349]
+    cells of depth 9: certified outer bound [0.0000, 0.3333]
+U4  Gaussian forward models: frequency of the local criterion and Wendel's formula
+    n = 12, m =  7, p = 1, K = 2: frequency 0.5100, formula 0.5000 (within four standard errors)
+    n = 12, m =  8, p = 2, K = 2: frequency 0.4860, formula 0.5000 (within four standard errors)
+    n = 12, m = 10, p = 2, K = 2: frequency 0.9070, formula 0.9102 (within four standard errors)
+    n = 12, m =  9, p = 3, K = 2: frequency 0.5140, formula 0.5000 (within four standard errors)
+    n = 16, m = 11, p = 2, K = 3: frequency 0.6025, formula 0.6128 (within four standard errors)
+    n = 12, m =  6, p = 2, K = 2: frequency 0.0975, formula 0.0898 (within four standard errors)
+SUMMARY  U1 unique compatible pair certified on 5 instances; U2 twin: True; U3 outer bounds nested and containing the inner estimate: True; U4 Gaussian count: True
+PASS
 ===== benchmark_controls.py (exit 0, 1 s) =====
 benchmark controls: 25 instances, 38 verifications, 0 failure(s)
 written: experiments/ensemble/benchmarks/controls_v1.json
 PASS
 ===== check_quotes.py (exit 0) =====
-quoted numbers: 137 entries, 0 failure(s)
+quoted numbers: 152 entries, 0 failure(s)
 PASS
 ALL PASS

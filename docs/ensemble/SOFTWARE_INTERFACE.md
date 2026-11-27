@@ -230,7 +230,8 @@ that agrees with one atom on `r` observables is that atom.  The intersection has
 `K^m` candidate combinations; for small `K` and `m` this is a finite search, in general it
 is exponential.  Exact laws — or laws known within `ε` in total variation (Proposition
 E4.1, R1): then the mass off the conformers is at most `mε/(m − K(r − 1))`, a bound that
-is attained.  This does not extend to distance distributions.
+is attained (its counting inequality is machine-checked:
+`Ensemble.renyi_heppes_mass_off_support`).  This does not extend to distance distributions.
 
 ### L2 — Edge-length laws of point configurations  (Theorems E5–E8, E7′, §3) — **R1**
 
@@ -268,14 +269,18 @@ differing angles nearly coincides; a bound on the weights that is linear in `τ`
 states on a torus of two angles are **never** determined by bilinear data (Proposition
 E22; control B2-07): a tool must not extend the two-state statement by analogy.
 *How many states (readiness R1: written after the last review).*  With all multilinear
-means of three angles: five states in general position are determined, six never
-(Theorem E20b) — except on a hypersurface of special six-tuples, where they are
-(Proposition E20c).  *Trap:* at such a configuration an identifiability test answers
+means of three angles: five states in general position are determined, six in general
+position never (Theorem E20b) — except where the twelve conditions drop rank *and* the
+extra function keeps one sign on the curve (Proposition E20c(a); numerical instances):
+part of a hypersurface.  A special six-tuple whose extra function changes sign is not
+determined (E20c(b)).  *Trap:* at such a configuration an identifiability test answers
 "identified", an arbitrarily small displacement of one state turns the answer into
 "not identified", and yet nothing observable changes much — in both cases every
-measure with nearly the same data sits near the six states.  A tool should report the
+measure with nearly the same data is concentrated, in mean square, near the six states
+(it may still put a little mass anywhere on the curve).  A tool should report the
 stability bound of its certificate (card F2), not only the verdict.  For four angles:
-eleven states are always determined, seventeen never (Proposition E20d); thirteen are
+eleven states in general position are always determined, seventeen in general position
+never (Proposition E20d); thirteen are
 determined for some configurations and not for others, each on an open set
 (Proposition E20e, numerical: 26 and 10 of 40 random 13-tuples; instances in
 `experiments/ensemble/benchmarks/torus_instances_v1.json`) — the number of states and of
@@ -330,7 +335,7 @@ elementary and have numerical checks, but nobody except their author has read th
 the variables `(ν, t_g = 1/gain_g, offset_g/gain_g)`; the constraints
 `t_g(y_g − τ_g) ≤ E_νΦ_g + offset′_g ≤ t_g(y_g + τ_g)` are linear, and F3 applies unchanged.
 *A common unknown positive factor on all data.*  Drop the normalisation: the data
-constrain the unnormalised measure.  The ensemble is determined up to the factor iff its
+constrain the unnormalised measure.  For data `y ≠ 0` the ensemble is determined up to the factor iff its
 features are **linearly** independent on the support and some combination of the
 observables **without a constant term** is non-negative with the support as its zero
 set.  Same linear programme as F1 with the constant removed; ranges of targets by one
@@ -352,8 +357,8 @@ ensemble that two separate gains leave open.
 new.  *A lower bound* is a union over unit directions `u` of the linear constraints
 `u·E_μΦ ≥ ρ`: a net of directions with every constraint relaxed by `R·h` (`R = max‖Φ‖`, `h` the
 mesh) gives a certified outer bound; the cost is `(1/h)^{m−1}` linear programmes for a
-vector of `m` means.  *What a length alone identifies:* only at its least or largest
-possible value — there with an explicit linear certificate, a linear modulus for the
+vector of `m` means.  *What a length alone identifies* (moment body of dimension at least
+two): only at its least or largest possible value — there with an explicit linear certificate, a linear modulus for the
 support and, at the least value, only a square-root modulus for the weights (control
 B8-03); in between nothing (control B8-02).
 
@@ -364,7 +369,9 @@ values of a target is then a union of up to `2^m` intervals, not an interval.  D
 whether such data are consistent with any ensemble is NP-complete, also when all numbers
 are small.  A tool must
 enumerate the signs (feasible for a handful of such data), or abstain; given the signs,
-everything is F1–F4 and its certificates.  *Trap (control B8-04):* a local fit proves
+everything is F1–F4 and its certificates.  One sign vector with a feasible ensemble
+certifies "consistent" and nothing else: "determined", "inconsistent" and an exact range
+need every sign vector examined (deciding uniqueness is coNP-hard, E26(c)).  *Trap (control B8-04):* a local fit proves
 neither consistency nor inconsistency.
 
 ### N4 — A datum averaged on unknown time scales  (Proposition E27) — **R1**
@@ -398,6 +405,24 @@ produce.  `K_min`: exhaustive over supports (NP-hard in general) with the certif
 bound "number of eigenvalues of the lifted moment matrix above the data error" when the
 data contain such a matrix (pair correlations do).  The ensemble is identified exactly
 when the two agree.  *Trap (control B9-03):* returning the sparsest fit as "the" ensemble.
+
+### N7 — Unknown linear parameters shared by all conformers  (Proposition E32) — **R1: unreviewed, no literature search**
+
+*Model.*  `y = B(μ)a`, `B(ν) = Σ_x ν_xΨ(x)`, `Ψ(x)` an `m × p` matrix per configuration, `a` in a stated box
+(one alignment tensor fitted for all conformers: `p = 5`).  *Not* the case of one predicted
+tensor per conformer, which is linear (card F1).
+*Output.*  For a subdivision of the box: per cell either an exclusion vector `λ`
+(`λ·y > max_x Σ_k max(lo_k c_k, hi_k c_k)`, `c = Ψ(x)ᵀλ` — one exact inequality per configuration) or
+the range of the target over the cell's relaxation (variables `ν`, `W_x ∈ ν_x·cell`,
+`Σ_x Ψ(x)W_x = y`; one linear programme each way).  The union of the ranges is a certified
+outer bound; the hull of the cells that are not excluded is a certified outer bound for
+the parameter.
+*What it must not print.*  "The tensor is `a`", from a fit.  A verdict of uniqueness needs
+the certificate of E32(c), which exists for exact data only.
+*Cost.*  Cells grow exponentially with `p`; no bound is known (Problem O11).  With
+tolerances, add `τ‖λ‖_*` to the right-hand side of the exclusion inequality and the
+tolerance to the equality of the relaxation (immediate; not checked numerically).
+*Reference.*  `experiments/ensemble/bilinear_checks.py` (`p = 2`, twelve configurations).
 
 ## 6. What an algorithm must establish, and whether checking is easier than constructing
 
@@ -442,7 +467,7 @@ hence no stability constant.
 | correlated Gaussian noise, known non-singular covariance | F5 after whitening: Proposition E17.1(a) (the norm `‖λ‖₂` becomes `‖Σ^{1/2}λ‖₂`) |
 | missing observables, restricted designs | covered: every statement is for an arbitrary set of observables; fewest pair correlations: P2 |
 | an observation function known up to a uniform error `δ_i` | **exactly** equivalent to enlarging the tolerance of that datum by `δ_i` (Proposition E17.1(b)): F1–F4 with the nominal functions and the tolerances `τ + δ` are valid for the truth, and nothing smaller is |
-| an observation function with unknown parameters (`φ_θ`) | a certified **outer** bound (Proposition E17.1(c)): the compatible set is a union over `θ`, not convex; if `φ_θ` is Lipschitz in `θ` (constant `L`, uniformly on `X`), F3 on a grid of mesh `h` with every tolerance enlarged by `Lh` contains the exact range and converges to it.  Cost: one LP per grid point — practical for a few parameters only |
+| an observation function with unknown parameters (`φ_θ`) | a certified **outer** bound (Proposition E17.1(c)): the compatible set is a union over `θ`, not convex; if `φ_θ` is Lipschitz in `θ` (constant `L`, uniformly on `X`), F3 on a grid of mesh `h` with every tolerance enlarged by `Lh` contains the exact range and converges to it.  Cost: one LP per grid point — practical for a few parameters only  **Parameters that enter linearly and are shared by all conformers** (one fitted tensor): card N7 (Proposition E32, R1) — outer bounds by subdivision of the parameter box with an exact exclusion test per cell, a certified outer bound for the parameter itself, and a finite certificate of uniqueness for exact data |
 | a ratio of two means with a positive denominator; all data known up to one unknown positive factor; several groups of data, each with its own unknown gain and offset | **linear after rewriting** (N1; Propositions E23, E23.1).  An earlier version of this file listed ratios as not covered: that was wrong |
 | the length of a vector of means; squares of means | N2, N3 (Theorems E25, E26): a union of linear problems over directions or signs; a certified outer bound by a net; NP-complete consistency in general |
 | a datum that is "`g` of an average" for fast motions and "an average of `g`" for slow ones, with an unknown split | a **convex outer bound** valid for every split (N4; Proposition E27, R1) |

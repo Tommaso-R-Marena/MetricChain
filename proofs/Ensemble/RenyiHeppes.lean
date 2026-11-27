@@ -17,6 +17,11 @@ weight vector such that every feature has the same law under `ν` and `μ`.  If
 `m ≥ K (r − 1) + 1`, then `ν = μ`.
 
 Nothing is assumed about `ν` beyond non-negativity: it need not be supported on few points.
+
+`renyi_heppes_mass_off_support` is the quantitative form of the first step (report Proposition
+E4.1): if for every feature the `ν`-mass of the values that no conformer takes is at most `ε`
+— as it is when each law is known within `ε` in total variation — then
+`(m − K (r − 1)) · ν(X ∖ S) ≤ m · ε`.
 -/
 
 namespace MetricChain.Ensemble
@@ -123,5 +128,85 @@ theorem renyi_heppes {m : ℕ} {Y : Fin m → Type*} [∀ j, DecidableEq (Y j)]
   by_cases hx : x ∈ S
   · exact step2 x hx
   · rw [step1 x hx, hS x hx]
+
+/-- **A modulus for Rényi–Heppes (report Proposition E4.1, first bound).**  Let the features
+`T j`, `j < m`, be such that two distinct configurations agree on fewer than `r` of them, let
+`S` be a set of at most `K` configurations (the conformers) and `ν` any non-negative weight
+vector.  Suppose that for every feature the `ν`-mass of the configurations whose value of that
+feature is taken by no conformer is at most `ε` — which holds when the law of the feature
+under `ν` is within `ε` in total variation of its law under a measure carried by `S`.  Then
+
+  `(m − K (r − 1)) · ν(X ∖ S) ≤ m · ε`.
+
+Nothing is assumed about `ν` beyond non-negativity. -/
+theorem renyi_heppes_mass_off_support {m : ℕ} {Y : Fin m → Type*} [∀ j, DecidableEq (Y j)]
+    (T : ∀ j, X → Y j) (r K : ℕ)
+    (hdet : ∀ x x' : X, x ≠ x' → (Finset.univ.filter fun j => T j x = T j x').card < r)
+    (ν : X → ℝ) (hν : ∀ x, 0 ≤ ν x)
+    (S : Finset X) (hK : S.card ≤ K) (ε : ℝ)
+    (hlaw : ∀ j, ∑ x ∈ Finset.univ.filter (fun x => ∀ a ∈ S, T j x ≠ T j a), ν x ≤ ε) :
+    ((m : ℝ) - ((K * (r - 1) : ℕ) : ℝ)) * ∑ x ∈ Finset.univ.filter (fun x => x ∉ S), ν x
+      ≤ (m : ℝ) * ε := by
+  classical
+  -- the features of `x` whose value no conformer takes
+  set good : X → Finset (Fin m) := fun x => Finset.univ.filter fun j => ∀ a ∈ S, T j x ≠ T j a
+    with hgood
+  -- a configuration outside `S` has at least `m − K (r − 1)` such features
+  have hcount : ∀ x, x ∉ S → (m : ℝ) - ((K * (r - 1) : ℕ) : ℝ) ≤ ((good x).card : ℝ) := by
+    intro x hx
+    have hbad : (Finset.univ.filter fun j : Fin m => ¬ ∀ a ∈ S, T j x ≠ T j a).card
+        ≤ S.card * (r - 1) := by
+      have hsub : (Finset.univ.filter fun j : Fin m => ¬ ∀ a ∈ S, T j x ≠ T j a) ⊆
+          S.biUnion (fun a => Finset.univ.filter fun j : Fin m => T j x = T j a) := by
+        intro j hj
+        have hj' := (Finset.mem_filter.mp hj).2
+        push Not at hj'
+        obtain ⟨a, haS, hTa⟩ := hj'
+        exact Finset.mem_biUnion.mpr ⟨a, haS, Finset.mem_filter.mpr ⟨Finset.mem_univ j, hTa⟩⟩
+      refine (Finset.card_le_card hsub).trans ?_
+      refine (Finset.card_biUnion_le).trans ?_
+      calc ∑ a ∈ S, (Finset.univ.filter fun j : Fin m => T j x = T j a).card
+          ≤ ∑ _a ∈ S, (r - 1) := by
+            refine Finset.sum_le_sum fun a ha => ?_
+            have hxa : x ≠ a := fun h => hx (h ▸ ha)
+            have := hdet x a hxa
+            omega
+        _ = S.card * (r - 1) := by rw [Finset.sum_const, smul_eq_mul]
+    have hsplit : (good x).card +
+        (Finset.univ.filter fun j : Fin m => ¬ ∀ a ∈ S, T j x ≠ T j a).card = m := by
+      have := Finset.card_filter_add_card_filter_not
+        (s := (Finset.univ : Finset (Fin m))) (p := fun j => ∀ a ∈ S, T j x ≠ T j a)
+      simpa [hgood] using this
+    have hle : S.card * (r - 1) ≤ K * (r - 1) := Nat.mul_le_mul_right _ hK
+    have hnat : m ≤ (good x).card + K * (r - 1) := by omega
+    have : (m : ℝ) ≤ ((good x).card : ℝ) + ((K * (r - 1) : ℕ) : ℝ) := by exact_mod_cast hnat
+    linarith
+  -- double counting
+  have hswap : ∑ j : Fin m, ∑ x ∈ Finset.univ.filter (fun x => ∀ a ∈ S, T j x ≠ T j a), ν x
+      = ∑ x : X, ((good x).card : ℝ) * ν x := by
+    have h1 : ∀ j : Fin m, ∑ x ∈ Finset.univ.filter (fun x => ∀ a ∈ S, T j x ≠ T j a), ν x
+        = ∑ x : X, if (∀ a ∈ S, T j x ≠ T j a) then ν x else 0 := by
+      intro j
+      rw [Finset.sum_filter]
+    simp_rw [h1]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun x _ => ?_
+    rw [← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul]
+  have htotal : ∑ x : X, ((good x).card : ℝ) * ν x ≤ (m : ℝ) * ε := by
+    rw [← hswap]
+    calc ∑ j : Fin m, ∑ x ∈ Finset.univ.filter (fun x => ∀ a ∈ S, T j x ≠ T j a), ν x
+        ≤ ∑ _j : Fin m, ε := Finset.sum_le_sum fun j _ => hlaw j
+      _ = (m : ℝ) * ε := by rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+  calc ((m : ℝ) - ((K * (r - 1) : ℕ) : ℝ)) * ∑ x ∈ Finset.univ.filter (fun x => x ∉ S), ν x
+      = ∑ x ∈ Finset.univ.filter (fun x => x ∉ S), ((m : ℝ) - ((K * (r - 1) : ℕ) : ℝ)) * ν x := by
+        rw [Finset.mul_sum]
+    _ ≤ ∑ x ∈ Finset.univ.filter (fun x => x ∉ S), ((good x).card : ℝ) * ν x := by
+        refine Finset.sum_le_sum fun x hx => ?_
+        exact mul_le_mul_of_nonneg_right (hcount x (Finset.mem_filter.mp hx).2) (hν x)
+    _ ≤ ∑ x : X, ((good x).card : ℝ) * ν x := by
+        refine Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _) ?_
+        intro x _ _
+        exact mul_nonneg (Nat.cast_nonneg _) (hν x)
+    _ ≤ (m : ℝ) * ε := htotal
 
 end MetricChain.Ensemble

@@ -160,7 +160,7 @@ TABLE = [
      "finds a measure with the same 27 data and no mass on the six states in 10/10 instances"),
     ("lit", O, "singular value 11 is 0.7860, singular value 12 is below 1e-12", "value 11 is 0.7860, singular value 12 is below 1e-12"),
     ("lit", O, "real components of the curve: 1; the extra function on the curve: minimum above -1e-9, minimum at distance > 0.1 "
-               "from the states 0.0023, maximum 2.1750", "(minimum at distance > 0.1 from the states 0.0023, maximum 2.1750)"),
+               "from the states 0.0023, maximum 2.1750", "(minimum at distance > 0.1 from the states 0.0023, maximum 2.1750;"),
     ("lit", O, "least mass on the six states among measures on the sampled curve with the same data: 1.000000",
      "on the six states among measures on the sampled curve with the same data: 1.000000"),
     ("lit", O, "smallest Hessian eigenvalue of f at the states 0.4199; global minimum of f on the torus above -1e-9 (grid of 48^3 "
@@ -238,6 +238,25 @@ TABLE = [
      "at the size of `n = 14` the curve gives `295.8`"),
     ("lit", TH, "n = 12: N = 2048, D = 561, D/N = 0.274: Gaussian threshold 215.2; lift dimension 67; 2 D_odd = 352",
      "`76.4, 142.0, 215.2`"),
+    # ---- bilinear_checks.py (Proposition E32)
+    ("lit", O, "seed 4: radius 3.243e-04; cells 203 (in the neighbourhood 5, excluded 198, open 0); certificate verified exactly: True",
+     "radii between `3.2·10⁻⁴` and `1.2·10⁻²`; subdivisions of 67 to 203 cells"),
+    ("lit", O, "seed 5: radius 1.176e-02; cells 67 (in the neighbourhood 4, excluded 63, open 0); certificate verified exactly: True",
+     "at five of seven seeds the hypothesis of (b)"),
+    ("lit", O, "total variation between the ensembles 1; a_0 = (1, 1/2), a_2 = (5/4, 1/4)",
+     "ensembles at total variation 1 and parameters `(1, 1/2)` and `(5/4, 1/4)`"),
+    ("lit", O, "cells of depth 0: certified outer bound [0.0000, 0.5556]", "`[0, 0.5556]`, `[0, 0.3715]`, `[0, 0.3349]`, `[0, 0.3333]`"),
+    ("lit", O, "cells of depth 3: certified outer bound [0.0000, 0.3715]", "for cells of depth 0, 3, 6, 9"),
+    ("lit", O, "cells of depth 6: certified outer bound [0.0000, 0.3349]", "`[0, 0.3333]` from the slices of a `241 × 241` grid"),
+    ("lit", O, "cells of depth 9: certified outer bound [0.0000, 0.3333]", "U3: on the twin, the certified outer bounds"),
+    ("lit", O, "(an inner estimate): [0.0000, 0.3333]", "against `[0, 0.3333]` from the slices"),
+    ("lit", O, "n = 12, m = 7, p = 1, K = 2: frequency 0.5100, formula 0.5000", "`0.5100`/`0.5000`"),
+    ("lit", O, "n = 12, m = 8, p = 2, K = 2: frequency 0.4860, formula 0.5000", "`0.4860`/`0.5000`"),
+    ("lit", O, "n = 12, m = 10, p = 2, K = 2: frequency 0.9070, formula 0.9102", "`0.9070`/`0.9102`"),
+    ("lit", O, "n = 12, m = 9, p = 3, K = 2: frequency 0.5140, formula 0.5000", "`0.5140`/`0.5000`"),
+    ("lit", O, "n = 16, m = 11, p = 2, K = 3: frequency 0.6025, formula 0.6128", "`0.6025`/`0.6128`"),
+    ("lit", O, "n = 12, m = 6, p = 2, K = 2: frequency 0.0975, formula 0.0898", "`0.0975`/`0.0898`"),
+    ("lit", O, "SUMMARY U1 unique compatible pair certified on 5 instances", "certify that the planted pair is the only compatible one"),
 ]
 
 
