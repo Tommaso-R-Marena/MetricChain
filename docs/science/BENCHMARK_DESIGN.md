@@ -42,6 +42,16 @@ where a script is named.  Revised after workstreams P (a real force field) and K
 | H10 | the robust range of a free-energy difference between two macrostates is certified by a transport plan from one macrostate to the other, checkable site by site for one-coordinate macrostates | theory (theory report §11.28, Theorems 11.105, 11.107; reviewed and replicated by us for 11.105, 11.106) |
 | H11 | a surrogate energy certifies `ln Z` by reweighting at a cost set by a divergence of the **true ensemble from the surrogate** (`e^{D_p}/ε^{p/(p−1)}`; floor = `D_∞`), not by its root-mean-square error and not by the variational gap `D_1(surrogate‖truth)`; consequently a surrogate fitted variationally can be accurate by every test drawn from itself and uncertifiable.  **Status after benchmark B10 (addendum A17 (12)):** the cost theorems are in print (SCI-RES-0009); "can be accurate and uncertifiable" is confirmed on the planted control and between *splits* on real instances (vacuum force field as the model: `D_2` up to 45); **between *fits* of one family to the solvated energy it is refuted for the `D_2` cost on 45 real instances** (the root-mean-square remainder predicts `D_2` within a factor 2.5; fits differ by at most 0.34 nats) **and confirmed for the floor** (`D_∞` differs by up to 3.2 nats across fits and is not predicted by the root-mean-square remainder) | science (addendum A17: **[P]**, author only) with theory (box classes, THY-RES-0007 §4, to be its §11.30) |
 
+**Addendum (checkpoint 71, 27 November 2026): H1 and H2 are read by strata** — a proposal of the Frontier
+Benchmarking division (its `MATHEMATICAL_FEEDBACK.md`, item S-2), adopted here with three conditions
+(SCI-RES-0041 §2).  (1) An instance is *tight* if the optimum of its local-polytope relaxation, computed in
+exact arithmetic, equals the optimum of an uncertified exact solver — a rule fixed in advance and computed
+without the producer under test; "the producer needed no branching" is an outcome, not a stratum.  (2) The
+sizes of the two strata are reported per class of instance.  (3) H2 is two hypotheses: on tight instances a
+comparison of formats and trusted bases (the native certificate is a dual solution with eliminations), with
+no large factor expected either way; on the others a comparison of a branching tree over relaxation bounds
+with cutting planes, where we expect H2 to **fail**.  H1 needs its solver and its factor named before a run.
+
 ## 2. The benchmarks
 
 ### B1 — which class do residuals live in?  (tests H3; refutes it if the numbers say so)

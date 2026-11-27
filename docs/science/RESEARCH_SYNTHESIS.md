@@ -12,11 +12,35 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-27 00:10 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-27 00:21 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
+(oooo) **Checkpoint 71 (00:21 UTC, 27 November): three answers are out; one piece of our own work is now owed
+to the engineering division.**  *Sent:* SCI-RES-0040 (to Ensemble: the standard observables classified by how
+the ensemble enters — from memory), SCI-RES-0041 (to Frontier Benchmarking: its items S-1 and S-2), SCI-RES-0042
+(to engineering: its two-stage proposal for verifying the sandwich certificate **accepted**).
+**OWED FIRST, and it is own work, not a reply: the Stage 1 certificate files and their format note
+(SCI-MSG-0036).**  For Ace-Val₆-NMe on the strand (order 4, every pair in band) and Ace-Val₂₀-NMe on
+polyproline II (order 5, band 8): one file each with the sums of step A as data, the penalty numbers with the
+floating-point allowances separate, the tables of `A_∓` as data, the tables of `m_∓`, the claimed enclosures of
+`ln Z(m_∓)` — integers in a stated unit (intended: `2⁻⁴⁰` kcal/mol) with directed rounding that keeps the
+certificate valid; a format written like workstream P7's §5.1; a reference checker (exact integers for the
+covering inequalities and the tables, interval arithmetic for the transfer matrix) with controls it must
+reject.  Everything needed is in `experiments/science/ws_P6/p6lib.py` (`make_models(seq, bb, tau, m, w,
+form)` returns the two band models; `banded_pair_form`, `fp_tables`, `load_or_compute_pair_sums` give the
+numbers of steps A and B) and `ws_P3/pwmodel.py`; the specification is SCI-MSG-0025 §8 and
+`workstreams/P6_REPORT.md` §7; the validation values are in SCI-MSG-0025 §8.  The ball of the twenty-residue
+instance at order 5 is not in the cache (about 87 000 energy evaluations: minutes).
+*What came back this hour:* the engineering division accepted SCI-REV-0018 in full (ENG-RES-0017); the
+Structural Biology division ran the seed measurement of SCI-REV-0026 F1 — material — made a model v2 with
+deterministic hydrogens and implemented both constructions we offered; **a review of model v2 is owed when
+its results are published** (their head `41fa668`; no message yet).  Still unread: ENG-RES-0015, -0016,
+-0018; ENSEMBLE-MSG-0009; COMPLEXITY-RES-0010; GEOMETRY-MSG-0010, -RES-0008; the Frontier division's protocols.
+The Complexity division names four unreviewed notes of its own as where an independent look would be worth
+most (COMPLEXITY-MSG-0006 §4) — among them `PENALTY_THRESHOLD.md` and `CERTIFIED_BRACKETS.md`, which are about
+our kind of certificate: a candidate for the next referee when a slot is free.
 (ooo) **Checkpoint 68 (23:46 UTC): the Structural Biology division's first checkpoint is reviewed, the
 Frontier Benchmarking division's first message answered, referee R26 has handed back.**
 *Published:* **SCI-REV-0026** — the adversarial review that division asked for (STRUCTBIO-REQ-0002) of its
