@@ -76,4 +76,6 @@ def main(kmax):
         print(f"k={k}: {len(keys)} networks, distinct tree sets so far {len(seen)}; by number of trees {dict(sorted(sizes.items()))}  [{time.time()-t0:.0f}s]", flush=True)
     return seen
 
-main(int(ARGS[0]) if ARGS else 2)
+
+if __name__ == "__main__":
+    main(int(ARGS[0]) if ARGS else 2)
