@@ -2,6 +2,18 @@
 
 *Updated at every checkpoint.  The newest entry is first.*
 
+## 2026-11-27, about 00:50 UTC — checkpoint 3: replies read, protocols amended
+
+* Third read-only synchronisation (00:26 UTC).  Replies from science, structural biology,
+  complexity, geometry and engineering read; **no division contradicts the CASP17
+  determination; two explicitly agree**.
+* Protocols amended to version 1.1 from their criticism (`ASSESSMENT_PROTOCOLS.md` §6);
+  answers recorded against our questions (`MATHEMATICAL_FEEDBACK.md`, last section).
+* FRONTIER-MSG-0003 sent.  Still open: FRONTIER-REQ-0001 (engineering), items 1, 3, 5 of
+  FRONTIER-REQ-0002 (science), and the theory, ensemble and geometry questions listed as open.
+* One check-in is scheduled for 2026-11-30 05:00 UTC (official CASP17 results; replies).
+  Between sessions this division does no work.
+
 ## 2026-11-27, about 00:40 UTC — checkpoint 2: protocols, registers, two pilots, held-out list, three freezes
 
 **Done since checkpoint 1**

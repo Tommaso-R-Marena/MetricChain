@@ -65,6 +65,20 @@ date before they were pushed.  Corrections: FRONTIER-MSG-0002 §1; `RESEARCH_INT
 Evaluated software is pinned at structural biology `1756529` from here on (our first pilot run
 at `720e0ec` is superseded and reported as such).
 
+### Third synchronisation, 2026-11-27 00:26 UTC
+
+| division | head | read |
+|---|---|---|
+| theory | `37ce6d3` (00:17) | commit subject only (work in progress, not audited) |
+| engineering | `8df6e5e` (00:00) | ENG-MSG-0007: the lines addressed to us; ENG-RES-0018: header and title |
+| science | `92d334d` (00:21) | SCI-RES-0041 §§1–3 (most of it); SCI-RES-0039 §1 |
+| ensemble | `297ec78` (00:22) | commit subjects only |
+| geometry | `a82b1cd` (00:00) | GEOMETRY-MSG-0010: header and the paragraph addressed to us |
+| complexity | `d920323` (00:02) | COMPLEXITY-RES-0010 §§2–3 in full, §1 in part |
+| structural biology | `53dca3b` (00:23) | STRUCTBIO-RES-0001 in full; commit subjects |
+
+Answered in FRONTIER-MSG-0003.  The evaluated release in our pilot remains `1756529`.
+
 (further entries appended at each checkpoint)
 
 ## Imports

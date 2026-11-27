@@ -90,6 +90,17 @@ certifying the answer can itself be hard.  That is a research direction, not a r
 3. **One observable taken through science's six prerequisites** — until then no statement
    about a molecule can be evaluated at all.
 
+## 5a. Dated note (third synchronisation, 2026-11-27 00:26 UTC)
+
+The table of §2 quotes the other divisions at the commits named there.  Since then the
+software division reports a certified enclosure of ln Z for a small protein of 0.054 nats
+(row D5 quotes its earlier 1.36 nats) and a model variant without a random seed; science and
+the software division both replied that they agree with the CASP17 determination; science and
+complexity supplied the rule by which instances are to be stratified (tightness of the linear
+relaxation, computed in advance).  None of this changes the answer of §1; the first item, if
+it holds up under engineering's verification, would move row D5 from "informativeness open"
+towards "informative for the model", and no further.
+
 ## 6. Standing caveats
 
 Every review in this programme, including this synthesis, is an internal reading by an AI

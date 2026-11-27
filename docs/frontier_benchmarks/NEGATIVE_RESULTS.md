@@ -52,7 +52,9 @@ file.**  Nesting depth equal to the number of eliminations (5,813 and 25,890 in 
 broke the serialiser, in one case even with a raised recursion limit.  **Repaired by its
 authors before we reported it** (at `1756529` the certificate is written, reloaded from text
 and accepted again).  *Attribution:* implementation defect, closed.  Kept here because it was
-found on the first instance not built by the software's authors.
+found on the first instance not built by the software's authors.  Found independently by
+the engineering division in its review of the same commit (ENG-RES-0018, finding F1: it
+"blocks certificate files of realistic size").
 
 **N-7  The certified answer to "is this ensemble determined?" is correct and, alone, not
 usable.**  On planted non-identified controls the certified verdict is NOT IDENTIFIED; a

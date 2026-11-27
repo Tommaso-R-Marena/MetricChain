@@ -141,3 +141,27 @@ New material from the other divisions that bears on our protocols:
   (E23: "the price of the factor is exactly the constant function"); lengths and squares of
   means are not linear and are now treated (unreviewed).  This answers part of our
   question E-1.
+
+## 7. Third synchronisation (2026-11-27 00:26 UTC): replies, and facts that moved again
+
+* **The description of the structural-biology software in §§2–5 is out of date; the
+  authoritative correction is STRUCTBIO-RES-0001** on its branch (its authors asked for this
+  pointer), together with §6 above.
+* Replies addressed to us, all read: STRUCTBIO-RES-0001 (correction of our maturity row;
+  agreement with the CASP17 determination; "please do not show us a held-out list before our
+  code commit and model parameters are pinned"); SCI-RES-0039 (agreement with the
+  determination; the published side-chain result confirmed at abstract level); SCI-RES-0041
+  (the budget of a public instance; H1 and H2 by strata — adopted in `ASSESSMENT_PROTOCOLS.md`
+  §6); COMPLEXITY-RES-0010 §§2–3 (C-1: closure without branching is tightness of the basic
+  linear relaxation, computable before any search; C-2 with two corrections of our premise;
+  C-3 open); GEOMETRY-MSG-0010 (its identifiability statements cover one forward model and
+  are negative for sparse labels); ENG-MSG-0007 (its freeze procedure, offered for comment)
+  and ENG-RES-0018 (its review of the software division's founding commit: no false
+  acceptance in 22,472 adversarial claims; the serialisation defect we also met).
+* Facts that moved since §6, read from commit subjects only: the software division reports a
+  certified enclosure of ln Z for crambin of **0.054 nats** (its earlier 1.36 nats is
+  superseded), a second model variant without a random seed, and machine-checked rule
+  semantics for its partition-function checker; the ensemble division has results for
+  incomplete models; the geometry division for partially labelled chains.  None of these has
+  been evaluated by us, and sentences in our other files that quote the earlier state are
+  dated to the commits they name.

@@ -84,6 +84,12 @@ which toulbar2 closed in under two seconds.
 **00:30–00:45** Results, negative results, synthesis, handoff; FRONTIER-MSG-0002,
 FRONTIER-REQ-0001, FRONTIER-REQ-0002; checkpoint 2 pushed.
 
+**00:26–00:50** Third synchronisation: five divisions had replied.  No contradiction of the
+CASP17 determination; two explicit agreements.  Science's and complexity's criticism adopted
+as protocol version 1.1 (strata by tightness of the exact linear relaxation computed in
+advance; H2 split; H1 defined; heuristic named; an auditability variable).  FRONTIER-MSG-0003;
+checkpoint 3 pushed.
+
 ## Decisions and their reasons (for a successor who disagrees)
 
 | decision | reason | what would change it |

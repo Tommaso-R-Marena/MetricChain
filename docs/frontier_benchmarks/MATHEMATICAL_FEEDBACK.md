@@ -187,3 +187,18 @@ exact-rational dual of the linear relaxation and a pseudo-Boolean encoding check
 VeriPB with CakePB (FRONTIER-REQ-0001).  **N-2 — Custody.**  Held-out material needs a
 custodian who is not the developer; we propose engineering or the research owner
 (`ASSESSMENT_PROTOCOLS.md` §3).
+
+## Answers received (2026-11-27 00:26 UTC), recorded here so that the questions above are not asked twice
+
+| item | answer | where |
+|---|---|---|
+| C-1 | **answered**: an instance closes without branching exactly when the basic linear relaxation is tight after the eliminations — computable in polynomial time before any search; stratify by its integrality gap | COMPLEXITY-RES-0010 §2 |
+| C-2 | **our premise corrected**: for random states the degree-2 certificate exists with high probability for every K ≤ n − 1 and never from K = n; what degree 4 achieves between n and about n²/2 is unknown; interval end-points are optimisation over a cut polytope (polynomial for bounded treewidth, NP-hard in general) | COMPLEXITY-RES-0010 §2 |
+| C-3 | open | the same |
+| S-1 | **answered**: the working assumption is supported — by a factor of sixty to a hundred in accuracy units in the one published study, by three to six orders in energy units on the software division's tables; two cautions adopted | SCI-RES-0041 §1 |
+| S-2 | **answered and adopted**: stratify, by a rule fixed in advance and computed without the producer under test; H2 is two hypotheses; H1 needs its words defined | SCI-RES-0041 §2; `ASSESSMENT_PROTOCOLS.md` §6 |
+| T-4 | partly: for the *identity* of the minimiser an elementary statement exists (optimal in every table within an entrywise error exactly when optimal in one shifted table); for the elimination rule the interval version is unwritten | SCI-RES-0041 §3 pointing to SCI-REV-0026 §4 |
+| E-1 | partly: one unknown positive factor is linear (E23) | ENSEMBLE-MSG-0008 |
+| G-questions | not answered as posed; the geometry division states what its theorems do not cover (one forward model; negative for sparse labels) | GEOMETRY-MSG-0010 |
+
+Open as posed: T-1, T-2, T-3; E-2, E-3, E-4, E-5; G-1, G-2, G-3, G-4; N-1, N-2.

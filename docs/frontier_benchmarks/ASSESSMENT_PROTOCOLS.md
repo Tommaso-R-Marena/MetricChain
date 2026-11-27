@@ -1,6 +1,6 @@
 # Assessment protocols
 
-*Frontier Benchmarking division.  Version 1, 2026-11-26.  A protocol here is a design until it
+*Frontier Benchmarking division.  Version 1.1, 2026-11-27 (version 1 of 2026-11-26 amended in §6 after criticism from the science and complexity divisions; no protocol had been frozen).  A protocol here is a design until it
 is frozen (hash and time-stamp, `PREDICTION_FREEZE_REGISTER.md`) and executed; substantial
 execution belongs to the engineering division and is requested through the mailbox.  These
 protocols complement, and do not replace, engineering's stages A–F
@@ -163,3 +163,70 @@ Pilot outcome: `RESULTS.md` §1 and `NEGATIVE_RESULTS.md`.
 * Running the 2011 design instances "as pure optimisation": their solutions are designed
   sequences, and the same solver questions are answered by fixed-sequence and synthetic
   instances.
+
+## 6. Amendments of version 1.1 (2026-11-27), and where they come from
+
+Criticism received within two hours of version 1 — SCI-RES-0041 (science), COMPLEXITY-RES-0010
+(complexity), GEOMETRY-MSG-0010 (geometry) — changes four things.  Where an amendment
+contradicts a table above, the amendment holds; the tables are kept as first written so that
+the change is visible.
+
+**FB-P-01**
+
+1. *Strata are assigned by a rule fixed in advance and computed without the software under
+   test* (science: "'the producer needed no branching' is an outcome"; complexity: closure
+   without branching is exactly tightness of the basic linear relaxation after the
+   eliminations, a polynomial-time instance property).  **Definition:** an instance is in the
+   *tight* stratum iff the optimum of the local-polytope relaxation, computed in exact rational
+   arithmetic by the evaluator, equals the optimum established by the uncertified exact
+   solver; otherwise *not tight*; if no optimum is established within the budget, *unknown*.
+   Field 10's "fraction of instances closed without branching" is replaced by this.  Our
+   pilot did not compute it and reports branch-node counts only as an observation.
+2. *The sizes of the strata are reported per class of instance* (public fixed-sequence,
+   structures from the sealed list, synthetic), because a conclusion about the not-tight
+   stratum may be a conclusion about a generator.
+3. *H2 is two hypotheses, with expectations written now.*  **Tight:** a format comparison —
+   native certificate against an exact-rational dual and against the same eliminations logged
+   as steps of a pseudo-Boolean proof; expectation: no large factor either way.  **Not
+   tight:** a tree of branchings over relaxation bounds against cutting planes; expectation
+   (science's, adopted): the external proof system is the stronger one and **H2 fails**.
+4. *H1's two words are defined before the run.*  "Solving" = toulbar2 1.4.x, the better of its
+   default and its authors' published settings, on one core.  "Comparable" = the certified
+   route completes on at least 90 % of the instances that solver completes within the same
+   budget, with total time (production plus checking) within a factor 10 on at least half of
+   them.  By this definition the pilot's outcome at 300 s is negative (4 of 7; factors 17–326).
+
+**FB-P-02**
+
+5. *The heuristic is named and the expectation carries its interval* (science, caution (a):
+   with a hard repulsive wall and idealised rotamers "the direction is not obvious").
+   **Heuristic:** Metropolis simulated annealing on the identical tables, 100 independent
+   restarts of 10⁶ single-residue moves each with a geometric temperature schedule from 10 to
+   0.05 kcal/mol, best energy kept; seeds 0–99.  **Expectation E1:** the difference in the
+   primary metric between the certified optimum and that heuristic lies in [−0.5, +0.5]
+   percentage points; a difference outside it in either direction is reported as a finding.
+6. *Auditability gets its own outcome variable* (science, caution (b): "no difference" would
+   show that certification buys no accuracy and would not test auditability).  **Variable A:**
+   the number of instance–method pairs in which an uncertified method returned a value that
+   was not a proved optimum without saying so, or two uncertified methods disagreed, and the
+   certified route either proved the optimum or abstained.  In the pilot A = 3 of 10 for
+   toulbar2's default interface (time-limited values returned without a flag), with the
+   certified route abstaining in all three; A is reported whether or not it is favourable.
+
+**FB-P-06**
+
+7. *The prerequisite is further away than version 1 implied.*  The geometry division states
+   (GEOMETRY-MSG-0010) that it has an identifiability statement for one forward model only —
+   exact averaged squared distances among labelled sites — and that for sparse labels it is
+   negative; it asks not to be counted on for the CASP17 ensemble data.  FB-P-06 stays
+   **gated**, with the ensemble division's linear and one-unknown-factor results (E1, E23) as
+   the only candidates and no forward model with a stated error on any branch.
+
+**All protocols**
+
+8. *Literature rows are upgraded where another division verified them at a higher read
+   level.*  The statement that the exact optimum of a standard energy improves side-chain
+   accuracy by less than 0.1 % (ours: search snippet) is confirmed by science at the level of
+   the abstract through its PubMed record (Yanover, Schueler-Furman and Weiss, J. Comput.
+   Biol. 15 (2008) 899), with the further figures 72 % → 78 % for learned weights and 82.6 %
+   with an extended library.
