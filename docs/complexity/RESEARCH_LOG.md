@@ -263,7 +263,16 @@ witnesses through selector functions before the case split.
    crossed" is not submodular, so curves cannot simply be uncrossed; (ii) the system "all six 2-splits, no
    3-split" is impossible for every network, planar or not, because two switchings that differ at one hybrid
    node give trees with a common clade and equal restrictions, and the two "snowflake" trees have none.
-   `six_leaf_treesets.py` counts the distinct sets of displayed trees: 14 / 71 / 245 for 0 / 1 / 2 hybrid nodes.
+   `six_leaf_treesets.py` counts the distinct sets of displayed trees: 14 / 71 / 245 / 594 for 0 / 1 / 2 / 3 hybrid
+   nodes (with three: 14, 57, 78, 102, 132, 138, 42, 31 sets of 1, …, 8 trees; 19 minutes).  Two negative findings
+   from that data (scratch analysis, 27 November, not in a note): (iii) connectivity of the tree set in the graph
+   of single planar clade moves (57 edges on the 14 trees) excludes only 4 of the 36 missing systems — connected
+   tree sets generate all three systems with a negative weight and all six with a wrong support; with two hybrid
+   nodes only 78 of 254 connected triples and 96 of 834 connected quadruples occur, so acyclicity and planarity
+   constrain much more than connectivity; (iv) there is **no** implication "splits `X` displayed ⟹ split `y`
+   displayed" with at most three premises that holds on the 114 systems and fails on some of the 150 — the 36
+   missing systems are not excluded by rules of that form.  (A container restart at about 00:24 UTC on 27
+   November interrupted the sixth referee and this run; both were resumed or rerun; nothing committed was lost.)
 5. **Other divisions.**  Structural biology and frontier: answered (COMPLEXITY-RES-0010); both have documents about
    us that we have only partly read (`docs/structural_biology/intake/C_complexity.md`,
    `THEOREM_TO_SOFTWARE_REGISTER.md`; `docs/frontier_benchmarks/RESEARCH_INTAKE.md`) — read them and correct what
