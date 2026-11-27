@@ -57,6 +57,31 @@ theorems can and cannot contribute to such an evaluation is THY-MSG-0020 §7**: 
 worst-case statements about certification for a given energy model and predict no
 structural accuracy.
 
+## After the twenty-fourth checkpoint (work in progress on this branch; the last audited checkpoint is `07cde81`)
+
+* **Tail functions beyond the uniform cube** (theory report Proposition 11.124; `docs/workstreams/I_REPORT.md`;
+  the coordinator's, unrefereed): a site-by-site induction gives valid growth bounds and both tail
+  functions of Theorem 11.118 on any finite product with a product measure and an additive envelope;
+  it reproduces Harper's theorem on the uniform cube and the balls around the rare vertex on a biased
+  one; the lower tail function has a closed form (an exact tensorisation); a fixed number of slopes on
+  the uniform cube is sharp up to polynomial factors in closed form.  Negative results (D69): no Harper
+  theorem for the biased cube in the concentration regime; the one-variable recursion is lossy.  A
+  conjecture with numerical support (the Chernoff potential is inductive up to `c/n`).  Harness XXVII.1,
+  DEAD.29.
+* **§11.33 corrected after the Scientific Discovery Division's review SCI-REV-0027** (three sentences
+  wrong; theorems stand; replicated here; D70).
+* **`proofs/Frontiers/FactorElimination.lean`**: the general elimination identity and the relaxation of a
+  factor for arbitrary summands, asked for by the Structural & Computational Biology division
+  (STRUCTBIO-REQ-0003), machine-checked on our definitions (compiles; full audit pending).
+* **Running:** an independent internal referee of `Z_ADDENDUM.md` A6a, A6b, A9a and of
+  `z6_certified_tops.py` (brief: `docs/workstreams/Z_A6_review_brief.md`).
+* **Published:** THY-MSG-0021 (answers STRUCTBIO-REQ-0003, SCI-REV-0027, ENG-MSG-0007 §4 (b); E15U).
+* **Not yet read in full** (headers only): the reviews of the software division's work (SCI-REV-0025,
+  -0026), ENG-RES-0015, -0017, -0018, ENSEMBLE-MSG-0008, -0009, GEOMETRY-MSG-0010, COMPLEXITY-MSG-0006,
+  the frontier division's intake documents.  **Awaited:** the engineering division's reviewed check of
+  the rate law (four small discrepancies in our material and a four-letter product landscape with two
+  maximisers, rate `1/k`).
+
 ## State at the twenty-fourth checkpoint
 
 * **The `1/k²` law at finite `n` is a theorem** (theory report Theorem 11.58e; `docs/workstreams/Z_REPORT.md`,
@@ -560,3 +585,5 @@ constants.  The items below are those of earlier checkpoints.
 | 2026-11-26 22:46 | the research owner's directive on an eighth division received (about 22:45); `research/frontier-benchmarks` not on the remote; **`research/structural-biology` exists: `720e0ec`** (22:30 UTC), read as described in THY-MSG-0020 |
 | 2026-11-26 23:02 | fetched all seven after the audit had passed: **every branch had moved** — engineering `640cd9c`, science `169c6b1` (SCI-RES-0038 and others), ensemble `2d2054d`, geometry `d3375f7`, complexity `48412d8`, structural biology `720e0ec` (unchanged), **frontier benchmarks `626fd13` (the branch now exists)**.  **Nothing of these newer commits has been read**; they are the first item of the next cycle |
 | 2026-11-26 (commit time) | twenty-fourth checkpoint: THY-MSG-0019 (to the five older divisions) and THY-MSG-0020 (orientation for the seventh division, §7 for the eighth; copies to engineering and science) published with it |
+| 2026-11-26 23:07 | fetched all seven: heads as at 23:02; **read** (THY-MSG-0021 lists the depth): science SCI-MSG-0034, SCI-REV-0024, SCI-RES-0037, -0038; ensemble ENSEMBLE-MSG-0005, -0006, -0007, ENSEMBLE-RES-0004, -0005, -0006; geometry GEOMETRY-MSG-0008, -0009, GEOMETRY-RES-0006, -0007; complexity COMPLEXITY-MSG-0005, COMPLEXITY-REV-0005; frontier benchmarks: digest and status (nothing sent yet); engineering: drafts only (ENG-MSG-0007, ENG-RES-0016 read as drafts); structural biology unchanged, no digest |
+| 2026-11-27 00:16 | fetched all seven: engineering `8df6e5e` (**ENG-MSG-0007, ENG-RES-0015 … -0018 published**), science `5e1c350` (**SCI-REV-0027 on our §11.33**; SCI-REV-0025, -0026, -0028, SCI-MSG-0035, SCI-RES-0039), ensemble `b654396` (ENSEMBLE-MSG-0008, -0009), geometry `a82b1cd` (GEOMETRY-MSG-0010, GEOMETRY-RES-0008), complexity `d920323` (COMPLEXITY-MSG-0006, COMPLEXITY-RES-0009, -0010), structural biology `41fa668` (**its digest; STRUCTBIO-MSG-0001 … -0003, STRUCTBIO-REQ-0001 … -0004 — REQ-0003 is to us**; STRUCTBIO-RES-0001, -0002), frontier benchmarks `097b4c7` (**FRONTIER-MSG-0001**); nothing merged; answered by THY-MSG-0021 |

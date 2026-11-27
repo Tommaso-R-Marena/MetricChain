@@ -88,6 +88,7 @@ import proofs.Frontiers.LineDynamics
 import proofs.Frontiers.ResolvedPenalties
 import proofs.Frontiers.GibbsRecovery
 import proofs.Frontiers.Bonferroni
+import proofs.Frontiers.FactorElimination
 import proofs.AuditCommand
 
 /-!
@@ -1967,6 +1968,15 @@ Proposition A17.23 of the Scientific Discovery Division, SCI-RES-0035; `Bonferro
 #print axioms MetricChain.Bonferroni.prod_one_sub_mem
 #print axioms MetricChain.Bonferroni.pairSum_eq_offDiag
 #print axioms MetricChain.Bonferroni.prod_one_sub_le_witness
+
+/-! ### Summing a site out of a box sum for arbitrary summands — the identity behind bucket
+elimination, and the termwise relaxation of a factor (items R-1 and R-3 of STRUCTBIO-REQ-0003;
+`FactorElimination.lean`) -/
+
+#print axioms MetricChain.sum_boxFinset_branch
+#print axioms MetricChain.sum_boxFinset_elim
+#print axioms MetricChain.sum_boxFinset_sumOut
+#print axioms MetricChain.sum_boxFinset_relax
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

@@ -1,0 +1,5 @@
+chain with one boundary site: largest E(V - s)_+ / (s Xi(q)) over the levels (above 1 = (TU) fails)
+  pi_h = 0.002: ln(V_1/V_0) = 11.4486;  (A) product-class envelope: 1.746e+04;  (B) with the influence at the boundary site: 1.000000;  (C) no coupling, envelope (A): 1.000000
+  pi_h = 0.02: ln(V_1/V_0) = 11.4486;  (A) product-class envelope: 1.746e+04;  (B) with the influence at the boundary site: 1.000000;  (C) no coupling, envelope (A): 1.000000
+  pi_h = 0.2: ln(V_1/V_0) = 11.4486;  (A) product-class envelope: 2.58e+04;  (B) with the influence at the boundary site: 1.000000;  (C) no coupling, envelope (A): 1.000000
+ALL CHECKS PASSED: (A) fails by four orders of magnitude, (B) and (C) hold

@@ -1,5 +1,30 @@
 # Workstream N — the nesting theorem for the structure it uses: tail functions, instances, obstructions
 
+> **Errata after the Scientific Discovery Division's review (SCI-REV-0027, its workstream R26; applied in the
+> theory report §11.33 on 2026-11-27; this file is otherwise unchanged).**  No theorem examined fails
+> (N1, N1′, N4, N9, N10, N12(a)–(c): proved as stated).  Wrong or misleading in this file:
+> **(F1)** §5.2 / N12(d): there are *two* false steps — the upper tail bound when the run closes before the
+> spike is populated, the lower tail function (the Harper term) when the spike is populated first; "the run
+> closes below the spike" holds at `θ = 20` and for some ladders only.  **(F2)** §5.2, last sentence, "*Not a
+> counterexample:* … a hub": false at finite size — one hub site on a chain, two on the cube `Q₁₂`, break
+> validity; conditioning is the repair (`q^{k₀}` sub-problems), and only for a fixed hub and growing outer
+> blocks does the failure need a spread influence.  Confirmed with our own code
+> (`experiments/coordinator_checks/sci_rev_0027/hub_chain_check.py`).  **(F3)** for band models "dependence costs
+> slope" is the wrong tool: condition on the boundary layer.  **(F4)** Lemma N.0 must read `Ξ(1) = +∞`.
+> **(F5)** Theorem N4 uses its hypothesis for the fibre weight of the comparison point only; in N12(a) "(F1)
+> holds" should read "(F1′) holds"; (F1′) supposes procedures that this report does not supply for
+> non-product conditional laws.  **(F6)** remark (R5) uses constants that are undefined for `Ξ ≡ +∞`.
+> **(F7)** the closing level of N1′ is a hypothesis of its own (it can be zero).  **(F8)** (TU), (TL) are used
+> at ladder levels only.  **(F9)** "gains nothing" in N10 is about the algorithm at an instance chosen after
+> the split, on its good event.  **(F10)** the cost multiples "25 to 225" depend on unstated constants (that
+> referee: 872).  **Assumption table (§6), eight rows where that referee differs:** 1 (independent blocks:
+> add "removal changes the complexity" — conditioning; the evidence for "false" was too narrow), 2 ("the
+> only step" is wrong: (F2) fails through either tail function), 9 and 10 (add the classes X and
+> F-sensitive), 11 (atoms make the closing level automatic: W, not C), 15 (P, not C), 23 (exact evaluations:
+> replaceable by a bounded, repeatable evaluation error with explicit tail functions), 25 (where the cut is
+> put decides the influence).
+
+
 Independent report on the brief `docs/workstreams/N_brief.md` (2026-11-26).  Paper proofs with numerical checks; no
 Lean.  Created by this workstream: this file and `experiments/workstreams/N/` (a library and five scripts with their
 stored outputs; commands in §7).  Nothing else in the repository was modified, no state-changing git command was

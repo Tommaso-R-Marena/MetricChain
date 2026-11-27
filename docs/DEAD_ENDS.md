@@ -2563,7 +2563,7 @@ Proposition 11.124), the following were believed for some minutes or hours and a
    integral of its depth inside the fibre although each of its points leaves at the cost of
    one flip; iterated, a ball of the critical radius in a subcube.  On the uniform cube the
    recursion's value at measure `e^{−nα}` is at least `exp(−n·ln 2·(α − h)/(ln 2 − h))`.  At sixteen
-   and thirty-two sites the factor is `2.9` and `6.9` — small enough to look like a polynomial.
+   and thirty-two sites the factor is `2.7` and `7.2` — small enough to look like a polynomial.
 4. **"The Laplace inequality at every scale gives growth at every radius"** — Theorem I3 of
    the workstream holds with no error term, for every set and every `λ`, and applied to all
    neighbourhoods of a set it still admits the profile that does not grow at all until it
@@ -2587,3 +2587,39 @@ Proposition 11.124), the following were believed for some minutes or hours and a
    bonds of strength `J` that value is `1 + k[1/(1 + e^{2J+λ}) − 1/(1 + e^{−2J+λ})]`, negative from a
    total coupling `k·J ≈ 1.3` on: then a member has positive distance and a *negative* sum of
    one-body deficits, and no constant exists (`experiments/coordinator_checks/ens_e15u/`).
+
+## D70. Three sentences of the nesting section that an outside review removed: "the run closes below the spike", "a hub is not a counterexample", "on a chain the nesting is valid without cutting" (the Scientific Discovery Division's SCI-REV-0027, after the twenty-fourth checkpoint of cycle 10)  **[`experiments/coordinator_checks/sci_rev_0027/hub_chain_check.py`]**
+
+Section 11.33 of the theory report (workstream N) had been refereed internally; its
+theorems stand after a second, outside review with replication (Theorems 11.118, 11.119(b),
+11.120(a), (b), Proposition 11.121(a)–(c): proved as stated).  Three sentences do not.
+
+1. **"The false step is the tail bound, and the run closes below the spike"** (Proposition
+   11.121(c), the false certificate under unbounded influence).  True at the larger
+   threshold; at the smaller one most ladders populate the spike first and the bracket is
+   then invalid *from below*, through the lower tail function of the assumed class.  Our
+   runs and our referee's had used ladders on which the first mechanism decides.  A
+   certificate format must carry the influence bound for both tail functions.
+2. **"Not a counterexample: an unbounded influence of boundedly many outer sites (condition
+   on them)"** (11.121(d)).  The parenthesis is the truth and the heading is false: without
+   the conditioning one hub site on a chain, or two on the cube of dimension twelve, break
+   validity; only for a fixed hub and outer blocks growing without bound is a spread
+   influence needed.  Read literally the sentence exempted every band model — the case the
+   software division would have met first.  Confirmed here without the algorithm: on the
+   reviewing division's chain the tail inequality of the product-class envelope fails by
+   four orders of magnitude and holds exactly with the influence added or the coupling
+   removed.
+3. **"For a nearest-neighbour chain the nesting is valid without cutting the chain, with a
+   one-sided slack at the boundary site"** (Theorem 11.119(b)).  Valid *with the envelope
+   that carries the influence*, and then without a usable closing level at a bounded
+   accuracy; the usable rule is to condition on the boundary layer (as many product
+   sub-problems as the layer has states), or not to nest.  "Dependence costs slope" is true
+   and, for band models, the wrong tool.
+4. Smaller: the displayed tail function needs `Ξ(1) = +∞` (a literal reading returns false
+   brackets); the closing level of the version without a cap is a hypothesis of its own;
+   two cost multiples depended on unstated constants.
+
+*What the episode says about our own reviews.*  The internal referee had reproduced the
+false certificate "from its description alone" — with the description's parameters.  The
+outside referee varied the threshold and the ladder and found the second mechanism, and
+tested the one sentence nobody had tested because it was a remark.

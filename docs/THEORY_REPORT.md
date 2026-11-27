@@ -1483,6 +1483,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/ResolvedPenalties.lean` | `resolved_allocation`, `resolved_allocation_univ`, `order_pos_of_weights`, `fibreOff`, `maxTable`, `maxTable_congr`, `le_maxTable`, `maxTable_nonneg`, `maxTable_le`, `resolved_allocation_max`, `reduction_step`, `anchored_remainder_bound_orders_state`, `anchored_remainder_bound_orders_off_anchor`, `resolved_remainder_bound` (**statements of the Scientific Discovery Division** — its Proposition P and Theorem R, SCI-MSG-0028, requests P9-T1 and P9-T3 —, proofs re-derived and machine-checked here: a sum of state-dependent constants over the `m`-subsets of the changed sites is dominated by tables indexed by sub-tuples to which each constant is distributed with weights summing to one; the least such tables; the reduction of a table to a smaller sub-tuple; the remainder bound of the anchored expansion with constants that depend on the state; §11.7, Theorem 11.18d and Proposition 11.18f) |
 | `proofs/Frontiers/GibbsRecovery.lean` | `Z`, `avg`, `lower_jensen`, `lower_product`, `avg_ceiling_le_avg_true`, `upper_jensen`, `upper_product`, `ueStep`, `upStep`, `log_Z_le_of_steps`, `log_Z_le_ueStep_iterate`, `log_Z_le_upStep_iterate`, `ueStep_iterate_antitone`, `upStep_iterate_antitone` (**a statement of the Scientific Discovery Division** — its Proposition A17.19, SCI-MSG-0028, request A19-T1 —, machine-checked here: four inequalities that recover `ln Z` of an energy lying between a floor model and a ceiling model from the partition functions of the two models and means under the ceiling model of slack functions that bound the two gaps from below; the two iterated upper bounds are valid at every step and do not increase; the lower Jensen form needs no sign condition on the slacks) |
 | `proofs/Frontiers/Bonferroni.lean` | `pairSum`, `sum_sq_le_sq_sum`, `pairSum_nonneg`, `pairSum_insert`, `prod_one_sub_le`, `one_sub_sum_le_prod`, `prod_one_sub_mem`, `pairSum_eq_offDiag` (the second Bonferroni inequality for a product of numbers in `[0, 1]`, `∏(1 − c_i) ≤ 1 − Σc_i + Σ_{pairs} c_ic_j`, with the first as its lower partner — inequality (c) of the Scientific Discovery Division's Proposition A17.23 (its SCI-RES-0035: an upper end for a partition function from the laws of single held sites and of pairs of held sites under the floor); the statement and the induction are that division's, the file is the coordinator's; twenty-fourth checkpoint) |
+| `proofs/Frontiers/FactorElimination.lean` | `sum_boxFinset_branch`, `sum_boxFinset_elim`, `sum_boxFinset_sumOut`, `sum_boxFinset_relax` (summing a site out of a box sum for *arbitrary* summands — the identity behind bucket elimination, of which `WInstance.elim1` and `WInstance.elim2` are the cases that stay pairwise — and the termwise relaxation of a factor; semantic rules asked for by the Structural & Computational Biology division, STRUCTBIO-REQ-0003 items R-1 and R-3; not an executable kernel: a table-level checker that implements them is not verified by this file) |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -6329,8 +6330,10 @@ on.  (vii) Machine checks: none.
 *Remarks.*  (1) **Depth is necessary for this family of algorithms, and bounded accuracy is
 where the recursion converges most slowly.**  With `τ_k` the exponent of `k` levels at bounded
 accuracy (`τ₁ = a`, `τ_{k+1} = inf_φ sup_{γ≥0}[min(γ, φa) + (1−φ)T_k(γ/(1−φ))]`):
-`τ_k/a = 0.5004, 0.361, 0.311, 0.290, 0.280, …, 0.2631` for `k = 2, 3, 4, 5, 6, …, 40` at `u = 1`, against
-`h/a = 0.2626` (the first value from the closed form
+`τ_k/a = 0.5004, 0.361, 0.311, 0.290, 0.280, …, 0.2630` for `k = 2, 3, 4, 5, 6, …, 40` at `u = 1`, against
+`h/a = 0.2626` (the last value read `0.2631` until the twenty-fourth checkpoint — a grid value
+above the certified bound `0.263047` of Theorem 11.58e(f); found by the Computational Research
+Division's check of the rate law, ENG-MSG-0007 §4; the first value from the closed form
 `τ₂ = min_φ max{(1−φ)a, φa + (1−φ)θ_na(φa/(1−φ))}`; earlier versions had the grid values `0.5006` and
 `0.2627` — Scientific Discovery Division, SCI-REV-0014, m9; both re-computed); `(τ_k − h)/a ≈ 0.65/k²` — now Theorem 11.53b: `k²(τ_k − h)/a → 2π²h²θ_hint″(0)/a = 0.6413` at `u = 1` —; `max_g(T_k − θ_hint)(g) = τ_k − h` **[N; workstream; `τ₂` re-computed by
 the coordinator]**.  The algorithm of the proof has about `ln(a/h)·a/η` bounded levels on top of
@@ -12306,7 +12309,15 @@ proof (the assembly of the levels — stated here as a plan); one claim about a 
 tail function wrong (corrected here); one proof incomplete for randomised procedures
 (repaired by the referee).  The audit of the cube's proof finds 31 uses of the cube, 15 of
 them in validity or in the probability of the good event; every one of those is an
-instance of four facts about an *outer integrand* on a probability space.
+instance of four facts about an *outer integrand* on a probability space.  **Reviewed with
+replication by the Scientific Discovery Division** (SCI-REV-0027, its workstream R26, a
+referee that had seen neither this section nor our review; own implementation of the
+algorithm, 990 + 81 runs on Theorem 11.118 without a violated claim): Theorems 11.118,
+11.119(b), 11.120(a), (b) and Proposition 11.121(a)–(c) **proved as stated**; three
+sentences wrong or misleading and replaced below (the description of the false
+certificate; "a hub is not a counterexample"; the sentence on chains), seven minor points
+applied; its eight differences on the assumption table are listed at the head of
+`docs/workstreams/N_REPORT.md`.
 
 **Tail functions.**  Let `V > 0` be measurable on a probability space `(X, μ)`.  An *upper tail
 function* `Ξ` and a nondecreasing *lower tail function* `Θ` of `V` satisfy, for all `s > 0`, `0 < q ≤ 1`:
@@ -12316,7 +12327,10 @@ function* `Ξ` and a nondecreasing *lower tail function* `Θ` of `V` satisfy, fo
 (`Θ(q) = q` is always admissible).  For an envelope `ρ` on `X` (`V(x) ≤ V(z)e^{ρ(x,z)}`: the class of a
 Lipschitz condition) the functions `Ξ_ρ(q) = sup{∫_D (e^{ρ(x→Dᶜ)} − 1)dμ : μ(D) ≤ q}` and
 `Θ_ρ(p) = inf{∫ e^{−ρ(S→x)}dμ : μ(S) ≥ p}` are tail functions of the class, the best ones when `ρ`
-satisfies the triangle inequality: tail functions are isoperimetric profiles.  On the cube
+satisfies the triangle inequality: tail functions are isoperimetric profiles.  (Convention:
+`Ξ_ρ(1) = +∞` — for `D` the whole space the exit cost is the infimum over the empty set; a
+literal implementation with "`D` a proper subset" at `q = 1` returns false brackets, and `q = 1`
+occurs at every level below the minimum: SCI-REV-0027, F4.)  On the cube
 they are Lemma 11.43 (Harper) and the lower tail lemma of Theorem 11.56.
 
 **Theorem 11.118 (one more level, on any probability space) [P: workstream N, Theorem N1 —
@@ -12340,7 +12354,10 @@ Atoms, integrality of radii and the convention `s₀ ≤ min W` of the cube are 
 the cube's conventions every constant of Theorem 11.56 is reproduced (ten parameter
 sets, against the evaluator of workstream Q).  *Without a cap* (an unbounded integrand)
 the theorem holds with an upper bound `u₀ ≥ A` and termination through the closing level
-(Theorem N1′ of the workstream).
+(Theorem N1′ of the workstream) — a positive closing level is then a hypothesis of its
+own: it can be zero for the *exact* tail function of a class with a finite exponential
+moment, and then there is no cost bound (SCI-REV-0027, F7).  (TU) and (TL) are used at the
+levels of the ladder only (its F8).
 *What `π_*` is and is not* (the referee's correction): it is a design constant, a supremum
 over **all** smaller `q`, and bounds the sample in every run; a run may close far earlier.
 With the transport bound as tail function on the cubes of dimension `m = 30` and `60` (`u = 1`), `π_* = 2^{−m}` and the cap on
@@ -12370,8 +12387,22 @@ form is sharp where the pointwise bound `dμ(·|a)/dμ(·|a′) ≤ e^{ι}` is n
 laws `Bernoulli(p(a))^{⊗k}` and `u`-Lipschitz fibres,
 `ι(a, a′) = k·max_± ln[(1 + p(a)(e^{±u} − 1))/(1 + p(a′)(e^{±u} − 1))]`, attained by a uniform field (the
 largest slope of `−ln V` in a simulation: `1.3120`, where the pointwise bound gives `1.754`).
-For a nearest-neighbour chain the nesting is valid without cutting the chain, with a
-one-sided slack at the boundary site.
+The theorem supposes inner procedures that are valid under every conditional law; for
+conditional laws that are not products this section has none with a cost bound below
+enumeration.  *Band models* (replacing our sentence "for a nearest-neighbour chain the
+nesting is valid without cutting the chain, with a one-sided slack at the boundary site";
+Scientific Discovery Division, SCI-REV-0027 §3, its statements R26.1–R26.4, paper proofs of
+its referee replicated on random models, not re-derived here): for a band model of
+bandwidth `r` the conditional law of the inner block depends on the last `r` outer sites
+only.  **Conditioning on them** — `q^r` sub-problems with weights from the transfer matrix —
+reduces the problem to product known parts with no hypothesis on any influence (part
+(a)).  Without conditioning the envelope is `u·d_H + ι` with `ι` charged at the boundary
+sites only and at most the smaller of the oscillation of the change of the energy across
+the cut and `u·k`; its exact tail function does not contain `ι` below the least probability
+of a boundary state, and a bound that charges `ι` to every set is valid but has no usable
+closing level at a bounded accuracy.  So for band models "dependence costs slope" is true
+and the wrong tool: **condition on the boundary layer, or do not nest**; validity is
+decided by which tail function is used, not by the size of `ι`.
 
 **Theorem 11.120 (Gauss space: where nesting gains nothing) [P, given the Gaussian
 isoperimetric inequality (Sudakov–Tsirel'son, Borell; quoted from memory) and, for (c), a
@@ -12414,7 +12445,9 @@ line is whether the envelope is additive over independent parts, not whether the
 is discrete or continuous.**
 
 **Proposition 11.121 (unbounded influence: a false certificate) [(a)–(c) P, (d) N:
-workstream N, Proposition N12; reproduced by the referee with independent code].**
+workstream N, Proposition N12; reproduced by the referee with independent code; reviewed
+with replication by the Scientific Discovery Division (SCI-REV-0027): (a)–(c) proved as
+stated, the description of the runs in (c) and the remark (d) corrected — both as below].**
 Let the outer block be the cube of dimension `m` with the uniform marginal and the inner block the cube of dimension `k` with the
 conditional law `Bernoulli(p(a))^{⊗k}`, `p(a) = σ(J(τ − |a|))` — a complete bipartite coupling of
 strength `J` per pair — and let the residual be `ψ(a, b) = u|b|`, a member of the cube class.
@@ -12428,16 +12461,42 @@ violated by the factor `1.7·10⁵`).  Run with the tail function of the assumed
 **returns an invalid bracket in every run** — 80 of 80 (workstream), 120 of 120 (referee) —
 with the certified upper end below `A` by factors of about `300` (threshold `θ = 20`) and
 `2 800`–`4 600` (`θ = 1`).  Every certificate obtained by sampling is true and the Chernoff
-events hold in every run: the false step is the tail bound, and the run closes below
-the spike.  Run with the tail function of the true class it is valid, at `25` to more
-than `1 000` times the cost of enumerating the outer cube.
-(d) Not a counterexample: an unbounded influence of boundedly many outer sites (condition
-on them).
+events hold in every run.  **Two steps are false, and which one decides depends on the
+threshold and on the ladder** (Scientific Discovery Division, SCI-REV-0027 §2.1, 592 runs
+with its own implementation — our first version said "the false step is the tail bound,
+and the run closes below the spike", which is what happens at `θ = 20` and, at `θ = 1`, for
+some ladders only): when the run closes before the spike is populated, the *upper* tail
+bound is false and the upper end is below `A` by factors of `10²` to `10^{3.6}`; when the spike
+is populated first (six of that division's seven parameter sets at `θ = 1`), the *lower*
+tail function — the Harper term of Theorem 11.56 — is false and the lower end is above `A`,
+by `2.4` to `3.9`; for still smaller thresholds the two false bounds cross and the abort rule
+returns the trivial bracket.  Run with the tail functions of the true class it is valid,
+at a large multiple of the cost of enumerating the outer cube (the multiple depends on
+constants that the texts do not fix: `25` to `225` in the workstream, up to more than `1 000`
+for our referee, `872` for that division's).
+(d) *Influence confined to boundedly many outer sites (a hub; for a band model: the last
+`r` sites of the outer block) is repaired by conditioning on them* — as many product
+sub-problems as the hub has states, with exactly known weights — *and is **not** harmless
+without it.*  Our first version read "Not a counterexample: an unbounded influence of
+boundedly many outer sites (condition on them)"; read literally that exempts every band
+model, and it is false at finite size (SCI-REV-0027 §2.2): without the conditioning the
+failure is the one of (c) whenever `e^ι` exceeds what the product-class tail function allows
+to a set of the measure of a hub state.  On a nearest-neighbour chain of four outer and
+sixteen inner binary sites with a coupling of `14` across the cut — one hub site — that
+division's runs return false brackets in 260 of 300 cases; on the uniform cube of
+dimension `12` with Harper's functions, from two hub sites on.  Checked here without the
+algorithm and with our own code (`experiments/coordinator_checks/sci_rev_0027/hub_chain_check.py`):
+on that chain `ln(V₁/V₀) = 11.4486`, and (TU) for the exact tail function of the product-class
+envelope fails by the factors `1.75·10⁴` to `2.58·10⁴` over the levels, while with the
+influence added at the boundary site, and without the coupling, the worst ratio is exactly
+one.  Only for a fixed hub and outer blocks growing without bound does the failure need
+the influence to be spread.
 *This is the hypothesis whose failure a dependent known part produces, and it yields a
 false certificate, not a higher cost.*  (It is not the only validity hypothesis — the
 lower tail function, the bound `ℓ₀`, the cap, the inner brackets and the sampling law are
 validity hypotheses as well; the referee's correction to the workstream's "the only".)
-A certificate format built on the level theorem must carry the bound on the influence.
+A certificate format built on the level theorem must carry the bound on the influence
+**for both tail functions**.
 
 **Proposition 11.122 (unbounded oscillation) [P: workstream N, Proposition N13, with the
 referee's repair for procedures that may fail with probability `δ`].**  For the class

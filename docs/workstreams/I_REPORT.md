@@ -226,7 +226,7 @@ minimisers are products of balls, with a loss of a factor at most `Π(2K)` in th
 the neighbourhood of a product of balls is a union over at most `Π(t/u_j + 1)` budget splits.
 So for a fixed number of types the bound is sharp up to polynomial factors.  **[N]**
 (`out_i8_blocks.txt`.)  Exhaustive on `Q_2 × Q_2` with costs `(1, 2)`: `v*` is below the true minimum
-for every cardinality and budget (smallest ratio `0.28`); for `n_1 = n_2 = 10` it is `0.10`–`0.36` of
+for every cardinality and budget (smallest ratio `0.28`); for `n_1 = n_2 = 10` it is `0.10`–`0.50` of
 the neighbourhood of a product of two balls.  The site-by-site recursion of I1 is sharper and
 costs more; the composition is the closed form.
 
@@ -269,8 +269,8 @@ leaves at cost `u`: with `Ξ` superadditive the recursion prefers `½Ξ_k(2q)` t
 and iterating, a ball of the critical radius inside a subcube.  On the uniform cube this
 gives `Ξ^{rec}(e^{−nα}) ≥ exp(−n·ln 2·(α − h)/(ln 2 − h))` (`h` the hinted exponent), above the true
 `≈ e^{−nα}` for every `h < α < ln 2`; the rate is small (`0.02` per site at `α = 0.21`, `u = 1`), which
-is why the measured ratio is only `2.9` at `n = 16` and `6.9` at `n = 32` (`out_i3_tail_dp_n*.txt`).  The
-lower recursion loses `0.82`, `0.69` at the same sizes.  Use the growth bound (I1, I2).
+is why the measured ratio is only `2.7` at `n = 16` and `7.2` at `n = 32` (`out_i3_tail_dp_n*.txt`, grid
+step `0.005`).  The lower recursion loses `0.82`, `0.65` at the same sizes.  Use the growth bound (I1, I2).
 
 **(d) Laplace inequalities at all scales do not imply growth at a given radius.**  Theorem I3
 applied to every neighbourhood `E_s` gives `∫_0^∞ λe^{−λr} μ(E_{s+r}) dr ≥ exp(−Φ^λ(ln 1/μ(E_s)))` for all

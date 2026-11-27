@@ -2871,6 +2871,55 @@ authority beyond it): the referees of `Z_REPORT.md` and of `Z_ADDENDUM.md`.  Eve
 — the assembly, the addendum, the certified computation, the exactness result, the
 application of SCI-REV-0022 — is the coordinator's.
 
+### After the twenty-fourth checkpoint (2026-11-27, first hours UTC): tail functions beyond the uniform cube; §11.33 corrected by an outside review; the first request of the software division — work in progress, not yet audited
+
+**Workstream I (the coordinator's; `docs/workstreams/I_REPORT.md`; theory report Proposition 11.124; unrefereed).**
+The level theorem on a general probability space (Theorem 11.118) needs an upper and a lower
+tail function that are *valid* at the size at hand; beyond the uniform cube with one slope the
+programme had an asymptotic statement (a field) and a valid bound that is not sharp (several
+slopes).  Now: (a) a two-point recursion over the sites — "the fibre of a neighbourhood is a
+union over the letters of neighbourhoods of fibres, and a union is at least its largest member"
+— gives a valid lower bound for the measure of neighbourhoods on any finite product with a
+product measure and an additive cost; numerically it reproduces Harper's theorem at ball sizes
+and, on a biased cube, the balls around the **rare** vertex, and it is attained on every
+exhaustively enumerated instance; (b) both tail functions follow from it; (c) the lower one
+has a closed form by an exact tensorisation of a Laplace functional (Marton's coupling with the
+exact single-letter trade-off; no novelty claimed); (d) for a fixed number of slopes on the
+uniform cube, Harper per block and a layer-cake argument give closed forms sharp up to
+polynomial factors.  *Negative* (D69): no Harper theorem for the biased cube in the
+concentration regime (exhaustive, `n ≤ 4`: the rare-vertex ball is an exact minimiser in 78 of
+78 cases in which its neighbourhood is not the whole cube); the piecewise-linear interpolation
+of ball values is not inductive on a biased cube; the one-variable recursion is valid and
+exponentially lossy; Laplace inequalities at all scales do not give growth at a radius.
+*Conjecture:* the Chernoff potential is inductive up to `c/n` (`n·defect ≤ 1 − 1/e` on the cube,
+`n ≤ 1000`; heuristically half the variance of one site over the total variance) — a closed
+form with polynomial precision on every finite product space.  Prior art read at the level
+stated in the report (Bollobás–Leader 1991; Yu, arXiv 2205.07596).  Harness XXVII.1 (nine
+mutations) and DEAD.29.
+
+**SCI-REV-0027** (the Scientific Discovery Division's review with replication of §11.33): the
+theorems stand; three sentences were wrong and are replaced (the false certificate has two
+mechanisms; "a hub is not a counterexample" is false at finite size; for band models
+condition on the boundary layer); its decisive finding replicated here with our own code
+(`experiments/coordinator_checks/sci_rev_0027/`); D70.
+
+**STRUCTBIO-REQ-0003** (the software division's first request): general elimination, pruning
+before elimination, product-form relaxation, rounded exponentials, a second-order bound on a
+correlated reference.  Answered in THY-MSG-0021: the elimination identity and the relaxation
+rule are machine-checked for arbitrary summands (`proofs/Frontiers/FactorElimination.lean`, four
+theorems, registered in the axiom audit); `zprune_sound` already is the exported two-sided
+statement; the second-order question has the martingale answer of the Complexity division
+(derived here independently) and stays open beyond it.
+
+**Also:** the Ensemble division's Proposition E15U re-derived; its best constant is the
+reciprocal of the least conditional-mean difference over up-sets, and our question "a
+constant `e^{O(ι)}`?" has the answer no (a hub with total antiferromagnetic coupling about
+`1.3`; D69 item 6).  ENG-MSG-0007 §4 (b): the engineering division's design for cubes with
+several slopes (outer blocks of one type) is Theorem 11.118 with 11.119(a) — confirmed with
+the dictionary; a digit of §11.19 remark (1) corrected after its check of the rate law.
+An independent referee of `Z_ADDENDUM.md` A6a, A6b, A9a and of the certified-tops script was
+launched (brief in the repository).
+
 ### Resume here (cycle 10, twenty-fourth checkpoint)
 
 **State.**  Every module under `proofs/` (91 files, 49 212 lines) builds with zero warnings and is walked by the axiom audit (5062 declarations; 692 headline theorems); the harness (190 registered tests: 161 that must survive, 29 documented refutations) and its mutation tests (609 mutations: 608 caught, one expected pass; 156 baseline runs; crashing mutants rejected) pass; `bash scripts/audit_all.sh` exits 0 (`AUDIT PASSED`, 2026-11-26 23:01 UTC).  **Eight divisions** work on eight branches: this one;
@@ -2937,7 +2986,7 @@ previous version of this section (item 0-C below) is thereby done.
    below the slope map) are pure convex analysis and would make the certified tops
    machine-checked statements given the level recursion.  (iii) Proposition U needs a
    minimax theorem (not in Mathlib in the form needed).
-0-zero. **Unread inbound.**  At 23:02 UTC, after the audit of this checkpoint had passed, every
+0-zero. **(Done after the checkpoint: read and answered in THY-MSG-0021; newer inbound of 2026-11-27 00:16 UTC is listed in `docs/collaboration/status/theory.md` with what was read.)**  ~~Unread inbound.~~  At 23:02 UTC, after the audit of this checkpoint had passed, every
    other branch had moved (engineering `640cd9c`, science `169c6b1`, ensemble `2d2054d`, geometry
    `d3375f7`, complexity `48412d8`; frontier benchmarks `626fd13`, its first commit).  None of
    that has been read: read it first (`docs/collaboration/status/theory.md`, synchronisation
@@ -2965,6 +3014,19 @@ previous version of this section (item 0-C below) is thereby done.
    rounding directions and exact checks are stated at its head; the referee of the
    addendum compared its 30 tops with its own envelope tops — all above, by at most
    `6·10⁻⁷·a` — but did not review the script).
+0-I. **Workstream I** (new, after the checkpoint; `docs/workstreams/I_REPORT.md` I8).  (1) Prove or refute
+   Conjecture I6 (the Chernoff potential fails the two-point induction by at most `c/n`): the step is
+   exact for a fixed dual variable, the defect is a mean Bregman gap of size half the variance of one
+   site over the total variance; a proof must be uniform at the corners.  With it Lemma 11.58b –
+   Theorem 11.58e would transfer to cubes with several slopes.  (2) Are the balls around the rare
+   vertex exact minimisers whenever their neighbourhood is not the whole cube (78 of 78 exhaustive
+   cases)?  (3) An interval-arithmetic and a faster version of the recursion (the split is a
+   one-dimensional, local minimisation).  (4) A referee.  (5) The full audit of the tree with
+   `FactorElimination.lean`, harness XXVII.1 and DEAD.29 — **not yet run**.
+0-J. **Open inbound** (2026-11-27 00:16 UTC): the engineering division's reviewed check of the rate
+   law (three discrepancies and a four-letter product landscape with two maximisers — the kink case,
+   rate `1/k`); ENG-RES-0015, -0017, -0018; the reviews of the software division's work; the frontier
+   division's intake statements about us; the referee of A6a/A6b/A9a (running when this was written).
 0-H. **Effective constants.**  `n₀` and `C′` of Theorem 11.58e; a bound that is certified end
    to end at one size (certified tops + the exact unrolling; the exact nests reach two
    levels over the real base at `n = 50 000`).

@@ -2,3 +2,21 @@
   t=1: bound/true min   k=1: 0.0523/0.1875  k=2: 0.1047/0.2500  k=3: 0.1580/0.2500  k=4: 0.2096/0.2500  k=6: 0.3156/0.5000  k=8: 0.4198/0.5000  k=12: 0.6305/0.7500
   t=2: bound/true min   k=1: 0.2148/0.3750  k=2: 0.3014/0.5000  k=3: 0.3751/0.6250  k=4: 0.4359/0.7500  k=6: 0.5366/0.8125  k=8: 0.6305/0.8750  k=12: 0.7940/1.0000
   t=3: bound/true min   k=1: 0.5625/0.6250  k=2: 0.6039/0.7500  k=3: 0.6397/0.7500  k=4: 0.6698/0.7500  k=6: 0.7269/0.9375  k=8: 0.7510/1.0000  k=12: 0.8805/1.0000
+  t=4: bound/true min   k=1: 0.7500/0.8125  k=2: 0.7500/0.8750  k=3: 0.7500/0.9375  k=4: 0.7828/1.0000  k=6: 0.8430/1.0000  k=8: 0.8995/1.0000  k=12: 0.9891/1.0000
+  violations (bound above the true minimum): 0; smallest bound/truth = 0.279
+(2) moderate sizes: n1 = n2 = 10, costs (1, 2): bound against a product of two balls
+  balls (1,1) m=1.154e-04 t=2: v* = 4.6248e-04, pigeonhole bound = 6.8361e-05, product of balls = 2.3184e-03  (ratio v*/achievable 0.199)
+  balls (1,1) m=1.154e-04 t=4: v* = 3.3008e-03, pigeonhole bound = 9.2843e-04, product of balls = 1.5505e-02  (ratio v*/achievable 0.213)
+  balls (1,1) m=1.154e-04 t=8: v* = 4.9567e-02, pigeonhole bound = 2.4362e-02, product of balls = 1.6318e-01  (ratio v*/achievable 0.304)
+  balls (2,1) m=5.875e-04 t=2: v* = 1.4275e-03, pigeonhole bound = 2.3612e-04, product of balls = 6.4526e-03  (ratio v*/achievable 0.221)
+  balls (2,1) m=5.875e-04 t=4: v* = 7.6699e-03, pigeonhole bound = 2.4584e-03, product of balls = 3.1870e-02  (ratio v*/achievable 0.241)
+  balls (2,1) m=5.875e-04 t=8: v* = 8.7422e-02, pigeonhole bound = 3.7669e-02, product of balls = 2.4202e-01  (ratio v*/achievable 0.361)
+  balls (1,3) m=1.846e-03 t=2: v* = 3.2889e-03, pigeonhole bound = 5.9759e-04, product of balls = 3.1744e-02  (ratio v*/achievable 0.104)
+  balls (1,3) m=1.846e-03 t=4: v* = 1.5339e-02, pigeonhole bound = 4.5943e-03, product of balls = 1.4498e-01  (ratio v*/achievable 0.106)
+  balls (1,3) m=1.846e-03 t=8: v* = 1.3010e-01, pigeonhole bound = 5.3240e-02, product of balls = 5.5540e-01  (ratio v*/achievable 0.234)
+  balls (3,3) m=2.954e-02 t=2: v* = 3.0431e-02, pigeonhole bound = 8.0132e-03, product of balls = 1.4233e-01  (ratio v*/achievable 0.214)
+  balls (3,3) m=2.954e-02 t=4: v* = 9.1982e-02, pigeonhole bound = 3.0906e-02, product of balls = 3.3255e-01  (ratio v*/achievable 0.277)
+  balls (3,3) m=2.954e-02 t=8: v* = 3.6824e-01, pigeonhole bound = 1.9290e-01, product of balls = 7.5730e-01  (ratio v*/achievable 0.486)
+  balls (4,2) m=2.061e-02 t=2: v* = 2.2236e-02, pigeonhole bound = 6.0791e-03, product of balls = 8.9462e-02  (ratio v*/achievable 0.249)
+  balls (4,2) m=2.061e-02 t=4: v* = 7.1777e-02, pigeonhole bound = 2.3704e-02, product of balls = 2.2845e-01  (ratio v*/achievable 0.314)
+  balls (4,2) m=2.061e-02 t=8: v* = 3.2550e-01, pigeonhole bound = 1.7282e-01, product of balls = 6.5585e-01  (ratio v*/achievable 0.496)
