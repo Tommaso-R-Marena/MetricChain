@@ -156,8 +156,12 @@ and the six-leaf survey is evidence, not a classification.
 * **Where.**  `docs/complexity/STRANDS_ALGORITHM.md` (added `e8824ed`, last changed `13b582b`); CX-T10–T12, T30;
   `experiments/complexity/strands/multiset_dp.py`, `level_counts.py`, tests; Lean `JordanOrbit.lean` (CX-V2, the
   orbit formula).
-* **Review.**  REV-0003 and REV-0005: correct; exact agreement with exhaustive enumeration on 280 systems
-  (ours) and about 740 runs with the referees' enumerators.
+* **Verification, review, validation.**  Paper proofs.  REV-0003 and REV-0005: correct; exact agreement with
+  exhaustive enumeration on 280 systems (ours) and about 740 runs with the referees' enumerators.  Lean covers
+  the orbit-counting formula only.
+* **Essential assumptions.**  Connected unpseudoknotted structures; a loop-decomposable nearest-neighbour energy
+  in which exterior loops, including loops with a nick, have energy 0; association and symmetry terms as in the
+  formal model of the DNA 31 paper; unit-cost arithmetic (the numbers have `O(N·E_max/ε)` bits).
 * **Closest prior art and distinction.**  Boehmer, Berkemer, Will, Ponty (Algorithms Mol. Biol. 21:4, 2025): the
   same scheme for the base-pair model (their Theorem 4), count-indexing for few species (Theorem 5), and the
   sentence that the extension to the Turner model "does not pose any algorithmic challenges".  Shalaby and
@@ -184,8 +188,18 @@ and the six-leaf survey is evidence, not a classification.
   Odlyzko's (1988).  No source found for the `K`-dimensional criterion, the Sidon criterion, the singleton
   family as stated and the NP-completeness of the span problem, which a referee called "a routine
   Partition-style reduction".
-* **Utility.**  Two independent exact programs for the same verdicts; a checkable certificate when it exists.
-  ±1 spins and complete pair data only — it does not transfer to rotamer models as it stands.
+* **Essential assumptions.**  ±1 spins; pair energies with free real couplings on all pairs; *exact* equality of
+  the ground set with the given set.
+* **For / against originality.**  For: two referees' searches found no source for the four statements just
+  listed.  Against: four other statements of this note that we had presented as ours or listed under "no
+  source found" were located by the referees in Laurent–Poljak and Odlyzko; the face lattice of the cut
+  polytope has a large literature that nobody here has read in full.
+* **Utility and validation.**  Two independent exact programs for the same verdicts (the tables for
+  `K = 4, 5` and the `2^K` algorithm, cross-checked against each other and against a referee's own code); a checkable certificate when it exists.  ±1 spins and complete
+  pair data only — it does not transfer to rotamer models as it stands.
+* **Limitations and remaining work.**  The question as asked (`K` in the input) is open, and three attempts at
+  hardness failed; nothing for `q` states, sparse interaction graphs or approximate ground sets.  Not a
+  publication on its own.
 
 ## C. Negative results, rediscoveries, and what to drop
 
