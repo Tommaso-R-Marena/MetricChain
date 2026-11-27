@@ -125,9 +125,11 @@ writes `software`), so it is `null` in all six rows; the instance metadata copie
 
 ## 3. Capability C1 — certified GMEC of a pairwise integer-table model (implemented)
 
-1. **Scientific purpose.** Remove search error from the statement "configuration `x*` has the
-   lowest energy among all configurations of this discrete rotamer model", with a proof that a
-   small independent program checks.
+1. **Scientific purpose.** Replace trust in an exact solver's implementation by trust in a small
+   independent checker, for the statement "configuration `x*` has the lowest energy among all
+   configurations of this discrete rotamer model".  *(Wording corrected 2026-11-27 after
+   SCI-REV-0026 §1: the earlier text said "remove search error"; no search error was exhibited
+   on any instance — toulbar2 returned the same optimum each time.)*
 2. **Mathematical specification.** Instance: `n` sites, states `0..k_i−1`, integer tables
    `U_i`, `P_ij` (`i < j`), scale `s`; `E(x) = 2**-s (Σ_i U_i(x_i) + Σ_{(i,j)} P_ij(x_i,x_j))`.
    Output: `L`, `x*` and a certificate such that acceptance implies `L ≤ E(x)` for all `x` in

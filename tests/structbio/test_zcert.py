@@ -207,3 +207,33 @@ def test_z_certificate_files_round_trip_strictly_and_are_judged_identically():
             zcert.loads(text[:-1] + ',"keep":null}', model=model)         # duplicate key
         with pytest.raises(zcert.MalformedZCertificate):
             zcert.loads(text.replace('"domains":[[', '"domains":[[0.5,', 1), model=model)   # a non-integer state
+
+
+def test_state_weights_enter_the_table_as_one_body_terms_and_the_weighted_sum_is_what_is_enclosed():
+    """Z_w = sum_x prod_i w_i(x_i) exp(-beta E(x)) is the partition function of the model whose
+    one-body tables carry -(1/beta) ln w, rounded to the grid.  The rounding moves ln Z_w by at
+    most beta * n * half a grid step (the weighted integer table is the model from then on)."""
+    import itertools
+    import math
+
+    from metricchain_sb.partition import weighted_model
+
+    beta = Fraction(3, 2)
+    for seed in range(6):
+        model = random_pair_model(seed, n=4, kmax=4, density=1.0, scale_bits=10, kmin=2)
+        rng = random.Random(seed)
+        weights = [[rng.uniform(0.05, 1.0) for _ in range(k)] for k in model.sizes]
+        weighted = weighted_model(model, weights, beta)
+        assert weighted.scale_bits == model.scale_bits and weighted.sizes == model.sizes
+        assert all((weighted.pair[k] == model.pair[k]).all() for k in model.pair)
+        direct = math.log(sum(math.prod(weights[i][a] for i, a in enumerate(x)) * math.exp(-float(beta) * float(model.energy(x)))
+                              for x in itertools.product(*[range(k) for k in model.sizes])))
+        cert = certify_partition(weighted, beta)
+        res = check_partition_certificate(cert, arithmetic="exact")
+        assert res.accepted
+        slack = float(beta) * model.n * 2.0 ** -(model.scale_bits + 1) + 1e-9
+        assert float(res.ln_z_lo) - slack <= direct <= float(res.ln_z_hi) + slack
+    with pytest.raises(ValueError):
+        weighted_model(model, [[0.0] * k for k in model.sizes], beta)
+    with pytest.raises(ValueError):
+        weighted_model(model, [[1.0]] * model.n, beta)

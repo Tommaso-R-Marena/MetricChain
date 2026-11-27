@@ -206,3 +206,34 @@ def certify_partition(model: PairModel, beta: Fraction, domains=None, keep=None,
         raise PartitionBudgetExceeded(f"the checker did not accept the certificate: {result.reason}")
     cert.claim = {"ln_z_lo": result.ln_z_lo, "ln_z_hi": result.ln_z_hi}
     return cert
+
+
+def weighted_model(model: PairModel, weights, beta: Fraction) -> PairModel:
+    """The model whose partition function is `sum_x prod_i w_i(x_i) exp(-beta E(x))`.
+
+    `weights[i][a] > 0` is the weight of state `a` of site `i` (for a rotamer library: the share
+    of the residue's torsion space the state stands for, `molecular.rotamers.state_share`).  It
+    enters the one-body table as `-(1/beta) ln w`, rounded to the nearest grid point; the
+    weighted integer table *is* the model from then on (the rounding moves `ln Z` by at most
+    `beta * n * 2**-(scale_bits + 1)`; nothing is certified about the unrounded weights).
+
+    Why: a sum over a state set is a quadrature of torsion space only if each state stands for
+    a stated volume (science division, SCI-REV-0026 F2 (c)); with shares that add up to one per
+    site the sum is an average of `exp(-beta E)` over uniformly distributed torsions, i.e.
+    `-ln Z_w / beta` is a free energy relative to non-interacting free rotors.
+    """
+    if len(weights) != model.n or any(len(w) != k for w, k in zip(weights, model.sizes)):
+        raise ValueError("weights do not have the shape of the model's state sets")
+    beta = Fraction(beta)
+    if beta <= 0:
+        raise ValueError("beta must be positive")
+    scale = 2 ** model.scale_bits
+    unary = []
+    for u, w in zip(model.unary, weights):
+        if any(not (float(v) > 0.0) for v in w):
+            raise ValueError("state weights must be positive")
+        shift = [int(round(-np.log(float(v)) / float(beta) * scale)) for v in w]
+        unary.append(np.asarray(u, dtype=np.int64) + np.asarray(shift, dtype=np.int64))
+    meta = dict(model.meta)
+    meta["state_weights"] = {"beta": str(beta), "note": "one-body tables carry -(1/beta) ln(weight), rounded to the grid"}
+    return PairModel(unary, {k: np.asarray(t).copy() for k, t in model.pair.items()}, scale_bits=model.scale_bits, meta=meta)

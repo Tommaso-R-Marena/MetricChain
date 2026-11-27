@@ -18,6 +18,15 @@ or size observed on a named machine; [H] uncertified estimate.  The session mach
 *Experiment:* SB-X-001, `experiments/structbio/gmec_dev/run.py`, software commit `c128625`,
 rows and certificates at `c3aa6f9`.  *Reproduce:* `python experiments/structbio/gmec_dev/run.py --check`.
 
+**Read with R-8 and R-9 (added 2026-11-27).**  This table is on **model v1 with seed 0**.  The
+tables of v1 depend on the seed of its hydrogen placement by tens of kcal/mol (R-8), so each
+number below is a property of the seed-0 tables and of nothing more general; the same
+experiment on the deterministic model v2 is R-9.  The six structures are **four proteins**:
+5PTI and 1BPI are the same protein (bovine pancreatic trypsin inhibitor, identical 58-residue
+sequences, two crystal forms), and 1PGA and 2IGD are two immunoglobulin-binding domains of
+streptococcal protein G with 51 of 56 residues identical (sequences read from the SEQRES
+records of the files).
+
 | PDB | flexible sites | states | pair tables | certified minimum (kcal/mol) [CK] | certified gap | tables (s) | toulbar2 (s) | certificate produced (s) | checked (s) | eliminations / leaves / branchings | certificate (bytes) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1CRN | 26 | 380 | 325 | −36.476240 | 0 | 1.0 | 0.013 | 0.33 | 0.04 | 344 / 1 / 0 | 38 154 |
@@ -39,10 +48,13 @@ production.
 What it does not show, and what is unfavourable.  (a) toulbar2 is 7 to 25 times faster than
 our producer on every structure, and on none of them does the certificate change the answer.
 (b) These are development instances; no held-out structure has been run.  (c) The certified
-conformation is not close to the deposited one: on ubiquitin it differs from the deposited
-state at 37 of 65 residues and lies 139.1 kcal/mol below it in model energy (1PGA: 26 of 46,
-37.9 kcal/mol below).  That is a property of an in-vacuo model with rigid rotamers, and it is
-the reason nothing here is called a prediction.  (d) The re-run reproduces the instances bit
+configuration is not the deposited one: on ubiquitin it uses a library state rather than the
+deposited state at 37 of 65 sites and lies 139.1 kcal/mol below the deposited configuration in
+model energy (1PGA: 26 of 46 sites, 37.9 kcal/mol below).  *(Wording corrected 2026-11-27,
+correction RC-1 below: the count is of sites whose chosen state is a library state; a library
+state can lie a few degrees from the deposited conformation, and how many of these sites are in
+another rotamer well was not counted on v1.  On v2 it is counted: R-9.)*  That is a property of
+an in-vacuo model with rigid rotamers, and it is the reason nothing here is called a prediction.  (d) The re-run reproduces the instances bit
 for bit on the same machine; other machines are untested.
 
 Four-line error budget.  (i) Certified width 0 (integer tables).  (ii) Discretisation: not
@@ -129,7 +141,9 @@ loose and our depth-first search needs hundreds of nodes at 25 sites: 600 to 1 7
 slower than toulbar2, whose bounds and heuristics are far stronger.  The real structures of
 R-1 behave differently (one node, or four): there dead-end elimination and the dual bound
 nearly close the problem.  Certified optimality at toulbar2's speed on hard instances would
-need its search with proof logging, which does not exist (`PRIOR_ART.md` §B).
+need its search with proof logging, for which we found no implementation (bounded searches,
+2026-11-26; `PRIOR_ART.md` §B).  *(Corrected 2026-11-27, RC-2: the earlier text said "which does
+not exist"; four bounded searches by four divisions do not establish that.)*
 
 ## R-6 — Certified per-residue flip gaps: the certified minimum is unique, survives rounding, and is thermally negligible (development evidence)
 
@@ -209,9 +223,123 @@ ubiquitin is out of reach (R-3).  No baseline has been run: toulbar2's
 `Z*ε` and the K\*-family algorithms give floating-point `ε`-brackets without certificates on
 such instances, and we have not compared widths or times with them.
 
+## R-8 — The tables of model v1 depend on a random seed by tens of kcal/mol (development measurement asked for by the science division)
+
+*Kind:* development measurement, not a benchmark.  *Experiment:* SB-X-005,
+`experiments/structbio/seed_dev/run.py`; the reading and our prediction were committed in
+`0544ff4` before the first run; 60 seed rows and 6 summaries in
+`experiments/structbio/seed_dev/results.jsonl` (code as at `0544ff4`).  *Origin:* SCI-REV-0026,
+finding F1 — model v1 places hydrogens with OpenMM's `addHydrogens`, which starts them at random
+positions and runs at most 50 minimiser iterations; `seed = 0` made that reproducible, not
+meaningful.  For each structure the tables were built with seeds 0 to 9 and the minimum of each
+integer table was certified (zero gap, full box) and compared with toulbar2.
+
+| PDB | sites | certified minimum over the ten seeds (kcal/mol) | range | sites whose certified state differs from seed 0 (largest over seeds) | sites whose state is not the same for all ten seeds | other seeds' minimisers, evaluated in the seed-0 table, above its minimum (largest) | spread of one-body entries over seeds: median / 90 % / 99 % | spread of pair entries: median / 99 % |
+|---|---|---|---|---|---|---|---|---|
+| 1CRN | 26 | −52.14 … −36.48 | 15.7 | 4 (15.4 %) | 6 | 3.0 | 4.1 / 50 / 437 | 0.0043 / 7.6 |
+| 5PTI | 36 | −133.68 … −111.34 | 22.3 | 2 (5.6 %) | 5 | 1.1 | 1.4 / 16 / 303 | 0.0011 / 0.41 |
+| 1BPI | 36 | −143.42 … −129.45 | 14.0 | 5 (13.9 %) | 6 | 5.1 | 2.9 / 61 / 346 | 0.0015 / 0.63 |
+| 1PGA | 46 | −26.63 … −13.87 | 12.8 | 5 (10.9 %) | 7 | 4.2 | 1.6 / 32 / 259 | 0.0006 / 0.86 |
+| 2IGD | 49 | −56.70 … −38.12 | 18.6 | 2 (4.1 %) | 7 | 0.6 | 1.6 / 25 / 245 | 0.0005 / 0.50 |
+| 1UBQ | 65 | −93.02 … −68.47 | 24.6 | 6 (9.2 %) | 13 | 7.9 | 1.9 / 46 / 455 | 0.0009 / 0.55 |
+
+(Energies in kcal/mol; spreads are max − min over the ten seeds of one table entry, over the
+entries that are clipped for no seed.)  All 60 instances were certified with zero gap, toulbar2
+returned the same optimum on each, and no minimiser uses a clipped entry.
+
+**Reading, as committed beforehand.**  "Material if in any structure some seed changes the
+certified state at more than 5 % of the sites or the certified minimum ranges over more than
+1 kcal/mol."  The range criterion is met in all six structures (12.8 to 24.6 kcal/mol) and the
+site criterion in five.  Our prediction (more than 5 % of sites in at least four structures;
+more than 10 kcal/mol in at least four) was met: five and six.
+
+**What it shows.**  The science division's finding F1 is confirmed on our own instances: the
+seed of model v1 is a model parameter whose effect on table entries is tens of kcal/mol —
+a certified minimum of a v1 table is a certified property of one draw.  Two details that
+qualify it without rescuing it: (1) the *identity* of the minimiser moves less than its
+*value* — the other seeds' minimisers cost at most 0.6 to 7.9 kcal/mol in the seed-0 table —
+because much of the spread sits in entries that good configurations share; (2) pair entries
+are affected far less than one-body entries (median spread below 0.005 kcal/mol).
+
+**Consequences, as committed beforehand.**  (i) R-1, R-6 and R-7 are statements about the
+seed-0 tables of v1 and are labelled so.  (ii) No held-out run will be made on v1.
+(iii) Hydrogen placement became a deterministic function of the heavy atoms under a new model
+name, v2 (`src/metricchain_sb/molecular/hydrogens.py`; its tables are identical for every seed —
+tested), and development results and hypotheses are formed again on v2 (R-9, R-10).
+
+## R-9 — Model v2 (deterministic hydrogens): certified minima with and without the deposited state (development evidence)
+
+*Kind:* development.  *Experiment:* SB-X-001 with `--model v2` and `--model v2-lib`
+(`experiments/structbio/gmec_dev/run.py`), software `87082ef`; rows in `gmec_dev/results.jsonl`
+(field `model`), certificates under `gmec_dev/certs/v2/` and `certs/v2-lib/`.  Label [CK].
+Model v2: hydrogens by the geometric rule of `molecular/hydrogens.py` (force-field equilibrium
+bond lengths and angles, staggered methyl and ammonium groups, hydroxyl hydrogens anti; nothing
+random, no minimiser); everything else as v1.  `v2` has the deposited state plus the library
+at every site; `v2-lib` has library states only (SCI-REV-0026, F2).  Our expectations E1–E5 were
+written in the commit message of `87082ef`, before any v2 table was certified.
+
+| PDB | sites | `v2`: certified minimum (kcal/mol) | deposited configuration | sites at a library state | sites in another rotamer well than deposited | produce / check / toulbar2 (s) | `v2-lib`: certified minimum | sites in another well than deposited | produce / check / toulbar2 (s) |
+|---|---|---|---|---|---|---|---|---|---|
+| 1CRN | 26 | −42.4936 | −31.6 | 8 | 3 | 0.3 / 0.03 / 0.01 | 12.0977 | 5 | 0.3 / 0.03 / 0.01 |
+| 5PTI | 36 | −121.3447 | −67.9 | 19 | 11 | 1.6 / 0.19 / 0.25 | 118.8744 | 19 | 1.8 / 0.19 / 0.24 |
+| 1BPI | 36 | −123.7356 | 217.6 | 12 | 6 | 2.3 / 0.18 / 0.26 | 397.9441 | 17 | 2.1 / 0.17 / 0.26 |
+| 1PGA | 46 | 4.5137 | 77.9 | 30 | 14 | 3.6 / 0.18 / 0.28 | 855.1930 | 23 | 3.1 / 0.15 / 0.22 |
+| 2IGD | 49 | −21.7985 | −10.2 | 15 | 5 | 5.7 / 0.68 / 0.22 | 198.2204 | 17 | 3.3 / 0.17 / 0.24 |
+| 1UBQ | 65 | −76.0937 | 658.3 | 41 | 28 | 45.4 / 2.44 / 1.68 | −1.7768 | 35 | 19.8 / 1.68 / 0.99 |
+
+All twelve certificates have zero gap over the full state set and are accepted by the checker;
+toulbar2 returns the same optimum on each identical integer instance; **no certified minimiser
+uses a clipped entry**, so each is also the minimum of the unclipped integer table (clipping
+only lowers entries: the check the science division asked to see with each row).  A rotamer
+well is, per χ, the nearest library value (`molecular/rotamers.py`, `well_of`).
+
+**Expectations against outcome.**  E1 (v2 certifies within ten minutes; v2-lib not on all six):
+first half met, second half **wrong** — all six library-only instances certify, ubiquitin
+faster than with the deposited state.  E2 (toulbar2 agrees), E3 (no clipped entry used): met.
+E4 (the v2 minimum lies less far below the deposited configuration than under v1): **wrong** —
+the distances are 10.8, 53.5, 341.4, 73.4, 11.6 and 734.4 kcal/mol (v1: 2.3, 32.1, 24.0, 37.9,
+11.6, 139.1).  E5 (more than half of the sites keep the deposited well under v2): met (12 to
+43 % of sites change well).
+
+**Why E4 failed — a property of v2 that must be written next to its results.**  The energy of
+the deposited configuration is dominated by single residues: ubiquitin's Arg72 has a one-body
+entry of 534.5 kcal/mol (an ideal `HG3` 1.48 Å from the residue's own carbonyl oxygen,
+`HD2`–`HH11` at 1.51 Å, `HB2`–`HE` at 1.52 Å: the deposited side chain is folded on itself) and
+Glu7 of 1BPI 334.8 kcal/mol (`HG3` 1.53 Å from the carbonyl oxygen of Phe4; the residue is
+deposited with two alternate conformations of occupancy 0.53 and 0.47, and the first is used).
+Under v1 the 50 minimiser iterations had moved those hydrogens away (entries 29.0 and 26.1) —
+which is exactly the science division's point F2 (d): in v1 the hydrogens were relaxed around
+the deposited conformation, an advantage that no library state received.  v2 does not have
+that bias and does not have that relief: ideal hydrogens on a strained deposited side chain
+clash, and the model then prefers a library state there.
+
+**What it shows.**  (1) Cost: certification stays cheap in all three variants (at most 45 s to
+produce, 2.5 s to check); toulbar2 is 6 to 27 times faster than our producer on v2.  (2) F2 (b):
+removing the deposited state did not make these six instances harder for either solver; the
+hypotheses formed with the deposited state present are not contradicted by the variant without
+it — on development structures only.  (3) Library-only minima are strained by hundreds of
+kcal/mol (+12 to +855 where `v2` has −124 to +4.5) and put 19 to 54 % of the sites in another
+well than the deposited conformation: the idealised library, rotated rigidly against an
+unsoftened repulsive wall, as the science division's F5 expects.  That is development evidence
+for the expected failure of SB-BM-6 and says nothing about certificates.  (4) Under v2 polar
+hydrogens still do not look for partners (F3 stands); a variant with hydroxyl torsions as states
+is open problem SB-OP-13.
+
 ---
 
 ## Withdrawn or corrected statements
 
-None yet.  Corrections will be entries here that name the statement, the commit that made it
-and the commit that corrects it; the original text stays.
+Corrections are entries here that name the statement, where it was made and what replaces it.
+In living documents the text is replaced with a dated note beside it; in messages, which are
+historical, the body stays and a status line points to the correcting message
+(STRUCTBIO-MSG-0004).
+
+| # | statement, and where it was made | what was wrong | replacement | origin |
+|---|---|---|---|---|
+| RC-1 | "it differs from the deposited state at 37 of 65 residues" (R-1 (c); PHYSICAL_APPLICABILITY §3; STRUCTBIO-MSG-0001; STRUCTBIO-RES-0001; plan SB-BM-6) | the driver counted sites whose chosen *state* is a library state; a library state can lie a few degrees from the deposited conformation | "uses a library state rather than the deposited one at 37 of 65 sites (how many lie in another rotamer well was not counted)"; on v2 the count of other-well sites is recorded with every row | SCI-REV-0026 §1 |
+| RC-2 | "…proof logging, which does not exist" (R-5) | bounded searches certify nothing | "for which we found no implementation (bounded searches, 2026-11-26)" | SCI-REV-0026 §1 |
+| RC-3 | "the certificate removes search error from a model-relative statement and nothing else"; "Line (iii) is five to six orders of magnitude above line (i)" (PHYSICAL_APPLICABILITY §2; ARCHITECTURE §3; STRUCTBIO-MSG-0001) | no search error was exhibited (toulbar2 found every optimum); line (i) is zero, so there is no ratio | "the certificate replaces trust in an exact solver's implementation by trust in a checker, and changes no number here"; "line (iii) is at least three orders of magnitude above the rounding bound of line (iv) and ten above its observed agreement; line (i) is zero" | SCI-REV-0026 §1 |
+| RC-4 | every number of R-1, R-6, R-7 read as a property of "the model" | model v1 contains a seed whose effect on its tables is tens of kcal/mol (R-8) | each is a property of the seed-0 tables of v1; the deterministic model v2 replaces v1 for all further work (R-9, R-10) | SCI-REV-0026 F1; SB-X-005 |
+| RC-5 | "six structures" as six independent cases (R-1 and elsewhere) | they are four proteins | stated in R-1 | SCI-REV-0026 §2 |
+| RC-6 | "`ln Z` exceeds the minimiser's exponent by 8.1 to 9.4 nats" read as entropy of the ensemble (STRUCTBIO-MSG-0003 §3; R-7 gives `−βE(x*)` next to `ln Z`) | the sum runs over a state set with the deposited conformation as an extra state and unequal numbers of library points per well, so part of the excess is a count of library points | for C2 the state set is library-only with stated shares of torsion space (`rotamers.state_share`); R-7 stands as a statement about the v1 table only | SCI-REV-0026 §0, F2 (c) |
+| RC-7 | header times of STRUCTBIO-RES-0001 (23:45), -RES-0002 (23:48) and -REQ-0004 (23:55) | written as estimates; the commits that contain them are earlier (23:39:58 and 23:52:35 UTC) — a time later than its commit was not read from the clock | header times are now read from `date -u` immediately before the commit; the three headers carry a note | SCI-REV-0026 §10; DEAD_ENDS SB-DEF-09 |

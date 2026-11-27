@@ -243,16 +243,55 @@ Outward-rounded log-sum-exp is a routine application of these libraries.
 
 ---
 
+## G. The discretisation has a literature: rigid rotamers against continuous torsions (added 2026-11-27)
+
+Added after the science division's review SCI-REV-0026 §6, which pointed out that our prior
+art (and its own earlier review) had presented "the minimum of a rigid-rotamer table need not
+be the minimum" without its literature.  The six records below were resolved by us through
+PubMed on 2026-11-27 (citation lookup; for the first five also the abstract); **the papers
+themselves were not opened**.  According to PubMed:
+
+| reference | what the abstract says that bears on us | bears on |
+|---|---|---|
+| Georgiev, Lilien, Donald, *J. Comput. Chem.* 29 (2008) 1527, [doi:10.1002/jcc.20909](https://doi.org/10.1002/jcc.20909), PMID 18293294 | "a conformation that is pruned using rigid-rotamer energies may subsequently minimize to a lower energy than the rigid-GMEC.  That is, the rigid-GMEC and the conformation with the lowest energy among all energy-minimized conformations (the minimized-GMEC) are likely to be different"; a provable DEE-like criterion (MinDEE) that does not prune rotamers of the minimized-GMEC; also "a hybrid scoring and search algorithm for computing partition functions over molecular ensembles" | C1 (the minimum of our table is a *rigid-GMEC*), C2 |
+| Gainza, Roberts, Donald, *PLoS Comput. Biol.* 8 (2012) e1002335, [doi:10.1371/journal.pcbi.1002335](https://doi.org/10.1371/journal.pcbi.1002335), PMID 22279426 | in 69 protein-core redesigns "in nearly all of our redesigns the sequence found by the continuous-rotamer model is different and has a lower energy than the one found by the rigid-rotamer model"; "using more rigid rotamers was never better than a continuous-rotamer model"; iMinDEE "guarantees finding the optimal answer" with continuous rotamers.  (A design study; cited for what it says about discretisation, not for design, which is outside our scope.) | C1, SB-BM-7 |
+| Petrella, Karplus, *J. Mol. Biol.* 312 (2001) 1161, [doi:10.1006/jmbi.2001.4965](https://doi.org/10.1006/jmbi.2001.4965) (DOI as cited by the science division), PMID 11580256 | energetics of off-rotamer conformations (abstract not fetched by us; the science division quotes: discrepancies between predicted and observed fractions "are largest for leucine residues") | C1, SB-BM-7 |
+| Yanover, Schueler-Furman, Weiss, *J. Comput. Biol.* 15 (2008) 899, [doi:10.1089/cmb.2007.0158](https://doi.org/10.1089/cmb.2007.0158), PMID 18707538 | tree-reweighted belief propagation "can obtain the global optimum of the ROSETTA energy function in a few minutes of computation for approximately 85% of the proteins in a standard benchmark set"; "finding the global minimum does not significantly improve side-chain prediction for an energy function based on ROSETTA's default energy terms (less than 0:1%), while learning new weights gives a significant boost from 72% to 78%"; with a softer repulsive term 77 % → 78 %; highest accuracy 82.6 % with an extended rotamer library and learned weights; the method "can also effectively bound the partition function" | C1 (exact optima were cheap in 2008; what limits agreement with experiment is the energy function and the library, not the search); C2 (an uncertified bound on `Z` of side-chain models) |
+| Zhang, Liu, *PLoS Comput. Biol.* 2 (2006) e168, [doi:10.1371/journal.pcbi.0020168](https://doi.org/10.1371/journal.pcbi.0020168), PMID 17154716 | side-chain conformational entropy of 675 proteins on fixed backbones by a Monte Carlo method | C2 (an uncertified precedent for the quantity) |
+| DuBay, Geissler, *J. Mol. Biol.* 391 (2009) 484, [doi:10.1016/j.jmb.2009.05.068](https://doi.org/10.1016/j.jmb.2009.05.068), PMID 19481551 | total side-chain torsional entropy of 12 small proteins by Monte Carlo on a fixed crystallographic backbone, relative to a non-interacting reference | C2 (an uncertified precedent; note the *relative-to-a-reference* definition, which our library-only state set with stated shares of torsion space now mirrors) |
+
+**Consequences for our claims.**  (1) The certified minimum of our table is, in the vocabulary
+of that literature, a *rigid-GMEC of a discrete library*; that it need not be the minimum of
+the continuous model of the same energy is established knowledge, not a finding of this
+project.  (2) Provable algorithms for the continuous-rotamer problem exist (MinDEE, iMinDEE in
+OSPREY); a certificate for a rigid table does not compete with them, it answers a narrower
+question.  (3) For side-chain placement on fixed backbones, exact optimisation was reported to
+change accuracy by less than 0.1 % under one energy function: the search is not what limits
+agreement with experiment.  Our expectation for SB-BM-6 is written with that in view.
+
+## H. Learned side-chain packers (context for SB-BM-6 only; added 2026-11-27)
+
+Our context list ended in 2020.  Two later methods named by the science division
+(SCI-REV-0026 §7.4); citations resolved by us in PubMed, abstracts **not** fetched by us — the
+performance statements are the science division's reading of the abstracts: DLPacker (Misiura
+et al., *Proteins* 90 (2022) 1278, [doi:10.1002/prot.26311](https://doi.org/10.1002/prot.26311),
+PMID 35122328): reconstruction errors about 20 % below SCWRL4 and the Rosetta packer;
+AttnPacker (McPartlon and Xu, *PNAS* 120 (2023) e2216438120,
+[doi:10.1073/pnas.2216438120](https://doi.org/10.1073/pnas.2216438120), PMID 37253017): better
+RMSD and dihedral accuracy than SCWRL4, FASPR, the Rosetta packer and DLPacker.  The Frontier
+Benchmarking division's register has more.  None of these is a baseline for a certificate;
+they are the context in which any recovery percentage of ours must be read.
+
 ## Summary table
 
 | STRUCTBIO claim | Closest prior art | What remains possibly new | Evidence level of that statement |
 |---|---|---|---|
 | C1: exact GMEC of rotamer model | DEE/A* (1998), Kingsford ILP (2005), toulbar2 CFN (2013–15) | Nothing (algorithmically known) | Searched; `[repo]`+`[V]` |
 | C1: independently checkable optimality certificate, exact integer check, Lean-checked rule semantics | VeriPB+CakePB with LP/Farkas (Koops et al. CP 2025); certified B&B MaxSAT (AAAI 2026); exact SCIP+VIPR; PBLean | A native CFN/DEE+LP-dual certificate. Its advantage over PB/VIPR encodings is **unmeasured**. | Searched (searches 1, 2, 5, 22, code search); NOT FOUND for CFN |
-| C1b: certified per-residue gaps / robustness radius | Constrained re-solves (routine); perturbation stability (Lang et al. 2018, 2019) | Certified margins on protein models | Partly searched (search 25); routine nature `[mem]` |
+| C1b: certified per-residue gaps / gaps for leaving a rotamer well / optimality in every table within an entrywise error (`stability.py`) | Constrained re-solves (routine); perturbation stability (Lang et al. 2018, 2019); the worst-case-scenario criterion of combinatorial optimisation with interval data (classical; named by the science division from memory, nothing opened) | Nothing in the criteria; certified margins on protein models as an application | Partly searched (search 25); routine nature `[mem]`; no search for the interval-data literature has been made |
 | C2: two-sided bound on Z for rotamer model | Z\*ε (CP 2016, double precision); K\*/BBK\*/MARK\*; WMB; AND/OR bounds; TRW | Outward rounding plus certificate plus explicit abstention | Searched; `[V]` for Z\*ε |
-| C2: certified enclosures of rotamer marginals | Mooij–Kappen 2008 (generic, floating point); exact JTree | Certified marginal enclosures on real protein models | Searched (6, 7, 21); NOT FOUND |
-| C2: machine-checked weighted counting | CPOG (Lean 4, exact rational product weights); Cheng et al. IJCAI 2024 (two-sided) | Irrational Boltzmann weights handled by validated enclosures; pairwise (non-product) weights | Searched; `[V]` |
+| C2: certified enclosures of rotamer marginals | Mooij–Kappen 2008 (generic, floating point); exact JTree; **every method that brackets `Z` (the K\* family, toulbar2's `Z*ε`) brackets populations by division** (SCI-REV-0026 §5.3) | A published report of guaranteed two-sided population bounds on a real protein model was not found; "not available" would be false.  Class: an application of established methods | Searched (6, 7, 21); NOT FOUND as a report |
+| C2: machine-checked weighted counting | CPOG (Lean 4, exact rational product weights); Cheng et al. IJCAI 2024 (two-sided) | A front end and the semantics of abstention — *at most a new combination of existing techniques*.  Corrected 2026-11-27 (SCI-REV-0026 §5.2): the earlier entry also listed "pairwise (non-product) weights"; pair weights are not an obstacle — the standard encodings of a factor graph into weighted model counting give each table entry its own variable (Chavira and Darwiche, *Artif. Intell.* 172 (2008), cited by the science division from memory, not opened by anyone), and a count is monotone in every weight, so two exact counts with rational bounds of the Boltzmann factors enclose `Z`.  **That composition is the certified baseline for C2** | Searched; `[V]` for CPOG; the encoding `[mem]` |
 | C2 components: GB/Hoeffding sandwich, thermal DEE with certified loss, weak-pair relaxation | Bogoliubov inequality; K\* ε-pruning; Jain et al. PLoS Comput. Biol. 2017 sparse-graph energy bounding `[repo]` | Only the certified combination | Partly searched; components `[mem]`/`[repo]` |
 | C3: exact LP-duality identification certificates for ensemble weights | MaxOcc; BME/MaxEnt; Manski-style partial identification | Exact-arithmetic certificates for conformer libraries | Searched (12, 13, 15, 16); NOT FOUND |
 | Implementation: outward-rounded sums of exponentials | Arb/FLINT, MPFI, INTLAB | None | Searched (14) |

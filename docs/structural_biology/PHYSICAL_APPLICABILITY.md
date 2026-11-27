@@ -33,8 +33,19 @@ protein.
 | (iii) energy model | refits within one force-field lineage change single-residue terms by 1.1 to 4.4 `kT` (SCI-MSG-0034 §2.3); a vacuum model with `ε = 4r` is cruder than that | science division [M]; this division's model choice |
 | (iv) evaluation and rounding | ≤ 4·10⁻¹¹ kcal/mol observed disagreement with OpenMM on low-energy configurations [N]; rounding moves a configuration's energy by at most `(n + n(n−1)/2)·2⁻²¹` kcal/mol (1.0·10⁻³ for ubiquitin) | `MOLECULAR_LAYER_REPORT.md` §3; `model.from_float` |
 
-Line (iii) is five to six orders of magnitude above line (i): the certificate removes search
-error from a model-relative statement and nothing else.
+Line (iii) is at least three orders of magnitude above the rounding bound of line (iv) and ten
+above its observed agreement; line (i) is zero.  The certificate replaces trust in an exact
+solver's implementation by trust in a checker, and changes no number here.
+
+*(Corrected 2026-11-27 after SCI-REV-0026 §1; RESULTS.md, correction RC-3.  The earlier text
+read: "Line (iii) is five to six orders of magnitude above line (i): the certificate removes
+search error from a model-relative statement and nothing else."  Line (i) is zero, so that was
+not a comparison; and no search error was exhibited — an exact solver without certificate
+returned the same optimum on every instance.)*
+
+**Line (iii) has a further entry for model v1, measured 2026-11-27 (RESULTS R-8):** the seed of
+the hydrogen placement.  Between seeds 0 and 9 the certified minimum of a v1 table ranges over
+12.8 to 24.6 kcal/mol and up to 4 to 15 % of the sites change state.  Model v2 has no seed.
 
 ## 3. What the certified minimum says, and what it does not
 
@@ -53,8 +64,10 @@ de-duplication is done.)
 
 It says: within this model, no configuration of the discrete state set has lower energy than
 the witness. It does not say that the deposited side chains are wrong, that the witness is
-closer to nature, or that the model is good. On ubiquitin the minimum differs from the deposited
-state at 37 of 65 residues and lies 139 kcal/mol below it; the molecular-layer report explains
+closer to nature, or that the model is good. On ubiquitin (model v1) the minimum uses a library state rather than the
+deposited state at 37 of 65 sites (how many of these lie in another rotamer well was not
+counted on v1; on v2 28 of 65 sites are in another well, RESULTS R-9) and lies 139 kcal/mol
+below the deposited configuration; the molecular-layer report explains
 the mechanism in this model (in vacuo with `ε0 = 4`, charged side chains collapse onto each
 other, `MOLECULAR_LAYER_REPORT.md` §3). A further bias: hydrogens of the deposited state were
 minimised by OpenMM and those of library states were not. These are properties of the model. A

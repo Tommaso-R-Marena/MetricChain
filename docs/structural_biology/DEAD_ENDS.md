@@ -66,6 +66,14 @@ such rows are annotated where they are reported).  *Fix:* the drivers read the c
 when the module is loaded (`START_COMMIT`); regression test
 `tests/structbio/test_provenance.py`, seen to fail before the change.
 
+**SB-DEF-09 — message headers with times that were not read from the clock (found by the
+science division, SCI-REV-0026 §10).**  The headers of STRUCTBIO-RES-0001 and -RES-0002 give
+23:45 and 23:48 UTC; the commit that contains them is 23:39:58 UTC.  STRUCTBIO-REQ-0004 gives
+23:55; its commit is 23:52:35.  The times were estimates written while drafting.  No finding
+depends on them, but a header later than its commit is a false record.  *Fix:* a header time
+is read from `date -u` immediately before the commit that first contains the file; the three
+headers carry a note pointing here (the original values stay).
+
 ## Approaches that do not work as hoped
 
 **SB-D-E-01 — exact elimination with first-order relaxation of weak pairs, for the partition
@@ -95,6 +103,33 @@ instances store Boltzmann weights with six decimals floored at `10⁻⁶` and no
 temperature, and carry no stated licence: usable (with care about the licence) as rational
 weight instances for minimisation, not as energy models for a stated temperature.
 
+**SB-D-E-08 — model v1: hydrogens from a seeded random start with fifty minimiser iterations
+(abandoned 2026-11-27; RESULTS R-8).**  What it was: OpenMM's `addHydrogens` as the definition
+of where hydrogens are, made reproducible with `seed = 0`.  Why it fails as a *model
+definition*: the seed moves the certified minimum of the six development tables by 12.8 to
+24.6 kcal/mol and changes the certified state at up to 4 to 15 % of the sites (SB-X-005; the
+science division's finding F1) — the tables contain a draw of noise a hundred times `RT` in
+single entries.  It also relaxed hydrogens around the deposited conformation only, an
+advantage no library state received (their F2 (d)).  What replaced it: model v2, hydrogens by
+a deterministic geometric rule.  What v2 costs: no relief of clashes at strained deposited side
+chains (two residues of the development set carry 335 and 535 kcal/mol in their deposited
+state, R-9), and polar hydrogens that still do not look for partners.  v1 is kept in the code
+only so that the rows recorded on it can be reproduced.
+
+**SB-D-E-09 — entrywise error bounds on dense tables are too severe to certify much
+(2026-11-27; RESULTS R-10).**  The shifted-table criterion decides exactly whether a
+configuration minimises every table within `b` per entry.  On tables with every pair present
+and no cutoff, a competitor that differs at `k` sites collects an allowance of roughly
+`2·b·k·n`, so the certified minimiser survives only `b` of the order of the second-best gap
+divided by `2n`: on the development set it is necessarily optimal at one table unit
+(`10⁻⁶` kcal/mol) everywhere, at `10⁻³` kcal/mol on crambin only, and nowhere at `10⁻²`.  The
+per-site version (which wells are kept in every scenario) is a sufficient condition that
+compares against the minimiser alone and is weaker than the truth by an unknown amount.  The
+science division predicted this outcome.  What it means: with an entrywise error model, a
+realistic force-field error cannot be carried through to a certified statement about the
+whole configuration; an error model with structure (correlated errors, per-term bounds, a
+cutoff) would be needed, and none is available.
+
 ## Statements of ours that were too strong, with their corrections
 
 **SB-D-E-04 — "checking costs at most 10 % of production"** (hypothesis H3c in the first
@@ -115,3 +150,17 @@ status pointer.
 **SB-D-E-07 — hypothesis H2b of the benchmark plan** ("at least 90 % of contact models up to
 60 sites certified within 600 s").  The first synthetic rows (RESULTS R-5) show abstentions at
 40 sites within 120 s.  Kept as written in the plan; expected to fail.
+
+**SB-D-E-10 — four statements corrected after the science division's adversarial review
+(SCI-REV-0026 §1; table in RESULTS.md, "Withdrawn or corrected statements", RC-1 … RC-7).**
+"Removes search error" (no search error was exhibited); "which does not exist" (bounded
+searches); "differs from the deposited state at 37 of 65 residues" (states, not conformations);
+"five to six orders of magnitude above line (i)" (line (i) is zero).  Each was an
+overstatement or an imprecision in our favour or in favour of the drama of the result.
+
+**SB-D-E-11 — two expectations about model v2 that were wrong (RESULTS R-9).**  Written before
+any v2 table was certified: (E1, second half) that library-only instances would not all
+certify — all six did, faster than with the deposited state; (E4) that the v2 minimum would
+lie less far below the deposited configuration than under v1 — it lies further (up to
+734 kcal/mol on ubiquitin), because ideal hydrogens are not relaxed around the deposited
+conformation.  Kept as written.

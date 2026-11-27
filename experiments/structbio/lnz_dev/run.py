@@ -10,10 +10,26 @@ outward rounding, assumptions F1-F3 of `metricchain_sb.itables`), at `beta = 100
     python experiments/structbio/lnz_dev/run.py 1CRN
     python experiments/structbio/lnz_dev/run.py 1CRN --exact-check    # also the exact-rational tier at the coarsest threshold
 
-The interval is the one the checker computes (`zcheck`); rule semantics are [V] for chains and [P]
-in general, the checker implementation is tested — label [CP].  Z certificates have no file
-format yet: a row records the recipe (counts of steps, order length) and is reproduced by
-re-running at the recorded commit.
+The interval is the one the checker computes (`zcheck`).  Rule semantics: machine-checked in
+`proofs/StructBio/FactorElimination.lean` (this division's file, 2026-11-27; before that: [V] for
+chains and a paper argument in general); the checker implementation is tested.  A row records the
+recipe (counts of steps) and is reproduced by re-running at the recorded commit; certificates can
+be written with `zcert.dumps`.
+
+MODELS (added 2026-11-27).  The rows of 2026-11-26 are on model v1 (seeded hydrogens, deposited
+state among the states, every state with weight one): `--model v1 --unweighted` reproduces them.
+The default is now `--model v2-lib` with state weights: library states only, each entering with
+its share of the residue's torsion space (`molecular.rotamers.state_share`), so that the sum is
+an average of exp(-beta E) over uniformly distributed torsions and `-ln Z_w / beta` is a free
+energy relative to non-interacting free rotors (SCI-REV-0026 F2 (c): a sum over "the deposited
+state plus a library" is not a quadrature of anything).
+
+EXPECTATIONS FOR CRAMBIN ON v2-lib, WEIGHTED, WRITTEN BEFORE THE FIRST SUCH RUN (2026-11-27):
+  H7a  with conditioning (table budget 3e6, up to 2e5 leaves) the width is below 1 nat at
+       threshold 0.01 and below 0.3 nats at 0.003 kcal/mol (v1: 0.478 and 0.137);
+  H7b  the exact tier's interval lies inside the float tier's at the coarsest threshold;
+  H7c  (direction unknown) whether the strained library-only table prunes to fewer states than
+       v1's did (v1: 233 eliminations at margin 12 kcal/mol without conditioning).
 """
 from __future__ import annotations
 
@@ -31,7 +47,7 @@ sys.path.insert(0, str(ROOT / "experiments" / "structbio" / "gmec_dev"))
 
 import run as dev  # noqa: E402
 from metricchain_sb import mincert  # noqa: E402
-from metricchain_sb.partition import PartitionBudgetExceeded, certify_partition  # noqa: E402
+from metricchain_sb.partition import PartitionBudgetExceeded, certify_partition, weighted_model  # noqa: E402
 from metricchain_sb.zcheck import check_partition_certificate  # noqa: E402
 
 BETA = Fraction(1000, 593)
@@ -50,17 +66,25 @@ def main() -> int:
     ap.add_argument("--max-entries", type=int, default=MAX_ENTRIES)
     ap.add_argument("--populations", action="store_true",
                     help="also certify population intervals of every residue at the last threshold")
+    ap.add_argument("--model", choices=sorted(dev.MODELS), default="v2-lib")
+    ap.add_argument("--unweighted", action="store_true",
+                    help="every state with weight one (the only possibility when the deposited state is a state)")
     args = ap.parse_args()
+    if dev.MODELS[args.model]["include_native"] and not args.unweighted:
+        raise SystemExit("the deposited state stands for no share of torsion space: use a library-only model, "
+                         "or --unweighted to sum over the states as they are")
     with open(HERE / "results.jsonl", "a") as out:
         for pdb_id in args.ids:
-            model, _, _ = dev.build_model(pdb_id)
+            base, _, tmeta = dev.build_model(pdb_id, args.model)
+            model = base if args.unweighted else weighted_model(base, [s["state_shares"] for s in tmeta["sites"]], BETA)
             e_star = None
-            cert_path = ROOT / "experiments" / "structbio" / "gmec_dev" / "certs" / f"{pdb_id}.mincert.json"
-            if cert_path.exists():
-                e_star = model.energy(mincert.loads(cert_path.read_text(), model=model).witness)
+            cert_path = dev.cert_path(pdb_id, args.model)
+            if cert_path.exists():             # the certified minimiser of the unweighted table, evaluated in this table
+                e_star = model.energy(mincert.loads(cert_path.read_text(), model=base).witness)
             runs = [(theta, "float") for theta in args.thetas] + ([(args.thetas[0], "exact")] if args.exact_check else [])
             for theta, tier in runs:
                 row = {"experiment": "SB-X-004", "split": "development", "pdb_id": pdb_id, "commit": dev.git_commit(),
+                       "model": args.model, "weighted_by_state_share": not args.unweighted,
                        "model_sha256": mincert.model_sha256(model), "beta_per_kcal": str(BETA), "tau_kcal": TAU,
                        "theta_kcal": theta, "arithmetic": tier, "max_entries": args.max_entries,
                        "max_leaves": args.max_leaves}
@@ -90,6 +114,9 @@ def main() -> int:
                 theta = args.thetas[-1]
                 for site in range(model.n):
                     row = {"experiment": "SB-X-004", "kind": "population", "split": "development", "pdb_id": pdb_id,
+                           "model": args.model, "weighted_by_state_share": not args.unweighted,
+                           "resname": tmeta["sites"][site]["resname"], "resnum": tmeta["sites"][site]["resnum"],
+                           "wells": tmeta["sites"][site]["wells"], "deposited_well": tmeta["sites"][site]["deposited_well"],
                            "commit": dev.git_commit(), "model_sha256": mincert.model_sha256(model), "site": site,
                            "theta_kcal": theta, "tau_kcal": TAU, "beta_per_kcal": str(BETA), "arithmetic": "float",
                            "max_entries": args.max_entries, "max_leaves": args.max_leaves}

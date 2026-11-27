@@ -62,3 +62,34 @@ below the deposited state).  Any change of model is a new named model, chosen be
 **SB-OP-12.**  A forward model with stated error for one public experimental observable of
 side-chain ensembles (χ1 populations from scalar couplings; alternate conformations in
 high-resolution crystal structures), before any level-5 comparison is designed.
+
+**SB-OP-13 (added 2026-11-27).**  Polar hydrogens as part of the state.  In models v1 and v2
+hydroxyl and thiol hydrogens ride rigidly on the last χ (v2: anti to the atom towards the
+backbone), so a serine, threonine or tyrosine cannot turn its hydrogen towards a partner
+(science division, F3; size of the bias unmeasured).  A model v3 with the hydroxyl torsion as
+an extra state coordinate (three values for sp3 oxygens, two for tyrosine) is a small change
+of `molecular/` and multiplies the states of those residues by three or two.  It is a new
+named model and its hypotheses would have to be written before its results.
+
+**SB-OP-14 (added 2026-11-27).**  What the worst-case criterion leaves open.  (a) Exact
+per-site robustness: decide whether *every minimiser of every table within `b`* has site `i`
+in a given well — our certificate is a sufficient condition (comparison against `x*` alone).
+(b) An error model with structure — per energy term, with a cutoff, or correlated across the
+entries that share atoms — under which a realistic model error leaves a non-trivial certified
+set of wells.  (c) The literature of optimisation with interval data has not been searched by
+us; the criterion is classical and nothing is claimed.
+
+**SB-OP-15 (added 2026-11-27).**  The published instance across machines.  The integer tables
+are built from floating-point arithmetic (numpy trigonometric functions, OpenMM parameters)
+and rounded to `2⁻²⁰` kcal/mol; an entry within one ulp of a rounding boundary can round
+differently on another platform, and with `10⁶` entries that is not negligible.  The
+checksum comparison of `run.py --check` detects it; it has only been run on one machine.
+Until it has been run elsewhere, a held-out run must ship the integer instance itself
+(`modelio.save_model`) next to its certificate, so that the statement certified is about a
+file and not about a rebuild.
+
+**SB-OP-16 (added 2026-11-27).**  The float tier of the Z checker: assumptions F1–F3 (IEEE-754
+round-to-nearest products and sums in numpy, the a-priori factor for sums, the clamps) are
+stated and tested against the exact tier, not proved for this platform; and the correspondence
+between the Python steps and the Lean statements of `proofs/StructBio/FactorElimination.lean`
+is by reading.  An independent checker (STRUCTBIO-REQ-0004) is the remedy for the second.
