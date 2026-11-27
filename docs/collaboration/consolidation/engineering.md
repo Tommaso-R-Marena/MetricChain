@@ -7,7 +7,7 @@ result was produced by a subagent and only spot-checked by the coordinator, the 
 division made **no literature search** of its own: statements about prior art are the coordinator's
 general knowledge or cite another division's notes, and are weaker evidence than a search.*
 
-**Scope note added 2026-11-27 about 05:40 UTC, while assembling the unified archive (directive D-9);
+**Scope note added 2026-11-27 about 05:30 UTC, while assembling the unified archive (directive D-9);
 no new work, only what the other branches' final commits make necessary to say.**  (1) Wherever
 this report and ENG-RES-0019 say "the six stored certificates" of the structural-biology division,
 they mean the six files at the top level of `experiments/structbio/gmec_dev/certs/` on its branch —
@@ -21,6 +21,20 @@ finding F1, and its repair range-checks that parameter; whether our reproduction
 the repaired code is not known.  (3) No other division had read ENG-RES-0019 or ENG-MSG-0008 when it
 halted: the structural-biology report still lists its two requests as unanswered, and the theory
 branch does not mention the run-time defect of the kernel.
+
+**Note added 2026-11-27 about 19:00 UTC (directive D-10: final collection); the report below is
+otherwise as written at the halt.**  (1) The two Modal jobs that §E, §G and §H describe as running
+are closed.  33 of their 34 cells are stored; the cell `u = 1`, `n = 32 000`, family "wide" of job
+M-016 has no row (restarted by the platform, stopped before it could return, not restarted).
+Tables and outcomes: `docs/engineering/benchmarks/X-011_ADDENDUM.md`; costs: the ledger's "Final
+reconciliation".  (2) §E says that these cells "answer hypotheses H12 and H13 when collected".
+They answer less: H12 is refuted; H13(a) is refuted again at the larger sizes; H13(b) and H1 are
+not decided there, because the searches with five and six levels ran into their time limits; H3
+is refuted at two more sizes.  §C counts three pre-registered predictions that failed; with H12
+they are four, and H3 and H13(a) fail at more sizes than §C says.  (3) Nothing in §B changes:
+the new rows are bounds at sizes and slopes where no instance was run.  (4) The heading of the
+scope note above read "about 05:40 UTC" until this commit; the commit that first contains it
+was made at 05:30 UTC, and the heading is corrected.
 
 ## A. Executive assessment
 
@@ -200,7 +214,9 @@ is documented as not converged.
 * **Four published statements of ours were wrong** (a conclusion of ENG-RES-0014; a two-solver validation, withdrawn; three sentences about the chain covers; hand arithmetic on rounded table entries, twice).  The
   generated-tables rule exists because of them.
 * **Three pre-registered predictions failed** (H3 at `n = 16 000`; H13(a) for the fourth level in both
-  directions; H5 for six slope classes).
+  directions; H5 for six slope classes).  *Added 2026-11-27 (D-10):* a fourth, H12, failed on the rows
+  collected after the halt, and H3 and H13(a) failed at further sizes
+  (`docs/engineering/benchmarks/X-011_ADDENDUM.md` §5).
 * **Certificates cost more than solving** (producer benchmark, subagent, unreviewed by the
   coordinator; `experiments/eng/leafcert_bench/REPORT.md`): over all certified instances 15 % of the
   time was search and 85 % assembling and checking; dynamic programming was 55–89 times faster on
@@ -265,7 +281,7 @@ without loading the whole proof library in the interpreter (today: 3–45 s of c
 
 Cheap to close without a new investigation: the six cells of job M-016 and ten of M-021 still running
 (the certified bound at `n = 32 000 … 128 000` and at slopes ½ and 2) answer hypotheses H12 and H13
-when collected (§G).
+when collected (§G).  *(Collected on 2026-11-27: see the second note at the head of this report.)*
 
 ## F. Publication readiness
 
@@ -305,7 +321,7 @@ predictions are published.
 | GEOMETRY-REQ-0006 (X-019) | certified by a subagent; reproduction checked; core not read | `experiments/eng/geometry_req6/REPORT.md` |
 | producer benchmark for leaf certificates | subagent; tests pass; **report not reviewed** | `experiments/eng/leafcert_bench/REPORT.md` |
 | rate of the level recursion (theory's Theorem R) | subagent; limit reproduced; four numerical discrepancies and a site where hypothesis (H1) fails; **coordinator's review incomplete** | `experiments/eng/level_rate/REPORT.md` |
-| nested designs at `n ≥ 32 000` and slopes ½, 2 (H12, H13) | jobs running; collect and regenerate the tables | §G; `make_tables_x011.py` |
+| nested designs at `n ≥ 32 000` and slopes ½, 2 (H12, H13) | jobs running; collect and regenerate the tables.  **2026-11-27, after the halt (D-10): collected and closed** — 33 of 34 cells (one cell of M-016 has no row); H12 refuted; H13(a) refuted at the larger sizes; H13(b) and H1 not decided there | §G; `make_tables_x011.py`; `docs/engineering/benchmarks/X-011_ADDENDUM.md` |
 | held-out benchmark, proof logging, long `ln Z` runs | reviewed, not started | ENG-RES-0019 §4 |
 | requests of the theory and science divisions not started | listed with decisions | `docs/collaboration/status/engineering.md` |
 

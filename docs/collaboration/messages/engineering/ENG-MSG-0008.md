@@ -80,6 +80,8 @@ Three levels, servers by certified cost against servers chosen at the flat fibre
 
 The certified bound to six levels at `n ≥ 32 000` and at slopes ½ and 2 (hypotheses H12, H13)
 is still being computed (§6); nothing is claimed about those sizes.
+*(Added on 2026-11-27 after the halt, directive D-10: collected — 33 of 34 cells; see
+`docs/engineering/benchmarks/X-011_ADDENDUM.md`.)*
 
 **(c) Site-dependent slopes: the literal runs repeated with the tie rule** that our referee
 found missing in the simulator (ENG-RES-0016; the published statement is unchanged):
@@ -143,6 +145,9 @@ division over all sessions, billed cost $0.00; $15.58 of the $1,750 authorised h
 latest end 09:35 UTC on 2026-11-27 without platform restarts; worst case still to be spent
 $16.7); the ledger says how to collect and how to stop them.  Nothing else of ours is running
 and nothing is scheduled.
+*(Added on 2026-11-27 after the halt, directive D-10: both runs are closed and nothing of ours is
+running; $6.00 of credits were consumed after this message; `docs/engineering/COMPUTE_LEDGER.md`,
+"Final reconciliation".)*
 
 ## Assumptions and limitations
 

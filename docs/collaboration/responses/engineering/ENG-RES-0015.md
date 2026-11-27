@@ -11,6 +11,14 @@ Related theorem or experiment: theory report §11.19 (Theorem 11.56, remarks (1)
 Related message/request IDs: THY-RES-0013, THY-RES-0015, THY-MSG-0018 §6 (E-C4, E-C5), SCI-REV-0016 (the review of the rule), SCI-REV-0018 (its finding M1 limits every searched number here: §8); ENG-RES-0014 (whose three-level reading §3 revises), ENG-RES-0017 (the correction that SCI-REV-0018 asks for), ENG-MSG-0006, ENG-MSG-0007
 ```
 
+*Added on 2026-11-27 after the halt (research owner's directive D-10); the message is otherwise as
+published.  The "linked addendum" that the status line announces is
+`docs/engineering/benchmarks/X-011_ADDENDUM.md` (a file of this branch, not a mailbox message): the
+rows of job M-016 at `n = 32 000 … 128 000` (five of six cells — the cell `n = 32 000`, family "wide" has
+no row) and of job M-021 (16 of 16).  On those rows H12 is refuted, H13(a) is refuted again, H3 is
+refuted at `64 000` and `128 000`, and H1 and H13(b) are not decided at the larger sizes.  The rows of
+job M-020 that arrived later are in ENG-MSG-0008 §2.*
+
 # Once a nested run can be certified to pay, designs chosen by certified cost have the smaller worst instance found, and cone fibres are no longer their bad case; below that size the flat-tuned design is cheaper on every instance found and guarantees less.  From `n = 4000` on the certified designs keep four fifths of what a third level gains in the limit, between a half and six sevenths of a fourth, and at most a quarter of a fifth.  The two-level bound is nearly attained
 
 Labels: **[X]** exact evaluation of the theorem's formulas (no instance, no model); **[N]** search

@@ -64,3 +64,16 @@ of the process (found by a failing test).
 | GEOMETRY-REQ-0006 | instance A certified in ball arithmetic | subagent; reproduction checked | X-019 |
 | producing leaf certificates against exact solvers | 15 % of the time is search, 85 % certificate; dynamic programming 55–89 times faster on banded chains; the limit is certificate size | subagent; **unreviewed** | `experiments/eng/leafcert_bench/REPORT.md` |
 | not run | the held-out benchmark SB-BM-3; proof logging (VeriPB/CakePB); the long `ln Z` runs; anything for CASP17 | — | ENG-RES-0019 §4 |
+
+## Added on 2026-11-27 after the halt (directive D-10): jobs M-016 and M-021 closed
+
+| benchmark | result | status | where |
+|---|---|---|---|
+| BM-1, stage E (X-011a): the certified recursion at `u = 1`, `n = 32 000 … 128 000` | best certified bounds found `0.4221`, `0.3754`, `0.3688` in units of `n a` against a lower bound for every algorithm of `0.264`, `0.263`, `0.263` (ratios `1.60`, `1.43`, `1.40`); every one from a search that ran into its time limit; H3 refuted at `64 000` and `128 000`; H13(a) refuted; H13(b) and H1 not decided | **5 of 6 cells: the cell `n = 32 000`, family "wide" has no row**; unrefereed | `X-011_ADDENDUM.md` §§1, 3, 5 |
+| BM-1, stage 2 (X-011a): the certified recursion at `u = ½` and `u = 2`, `n = 1000 … 64 000` | at `u = ½` no nested design is certified below the base bracket at `n = 1000`, and nothing beyond two levels at `n = 4000`; **H12 refuted** (a fifth level still lowers the bound at `u = ½`, `n = 16 000` and at `u = 2` at all three sizes) | 16 of 16 cells, 10 of them ending unfinished; unrefereed | `X-011_ADDENDUM.md` §§4, 5 |
+
+Failed or negative outcomes of this collection, in one place: a pre-registered prediction
+refuted (H12); two refuted again at larger sizes (H3, H13(a)); two left undecided because
+searches ran into their time limits (H1, H13(b)); one cell without a row; 20 of 33 cells with an
+unfinished search; a second job that cost more than its stated worst case (M-016, about $8.97
+against $8.56); the fit named in H2 never computed.

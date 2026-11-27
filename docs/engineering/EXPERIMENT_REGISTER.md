@@ -203,7 +203,7 @@ commit that adds or last changes the files named).  Costs are in
 | Validation | seven published numbers of the theory division's table reproduced to four digits; the pruned search equals the plain recursion to nine digits; two-level cells reproduce ENG-RES-0014 (`0.9839`, `1.0114`, `1.0461` at `n = 1000`); the flat-tuned trees reproduce the referee's flat costs and served-rung counts (`portfolio.py --check`); `tests/eng/test_certified.py` |
 | Code | `src/metricchain_eng/twolevel/certified.py`; `experiments/eng/twolevel/nested_bench.py`, `portfolio.py`, `rung_anatomy.py`, `fibre_slopes.py`, `nested_literal.py`, `make_tables_x011.py`; `modal_jobs/bench_app.py`, `bench_collect.py` |
 | Limitation stated up front | costs on instances are in the mean-run model (literal nested runs only at 15 sites); searched worst cases are lower bounds within radial outer landscapes and cone fibres; finite design families; one slope and one accuracy |
-| Result, interpretation, limitations | ENG-RES-0015 (and its addendum for `n ≥ 32 000`) |
+| Result, interpretation, limitations | ENG-RES-0015; its addendum for `n ≥ 32 000` and for the slopes `½` and `2` is `docs/engineering/benchmarks/X-011_ADDENDUM.md` (2026-11-27; one cell of M-016 has no row; H12 refuted) |
 
 ## X-012  An exact checker for "shares at the leaves" certificates
 
