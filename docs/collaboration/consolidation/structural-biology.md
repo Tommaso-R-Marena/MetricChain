@@ -32,8 +32,9 @@ has been attacked three times (Engineering: 22 472 random claims at our first co
 adversarial reviewer: 60 000 hand-built certificates; the Frontier division ran it unmodified
 on ten larger public instances) and the Z checker once (40 000 certificates in two tiers): no
 false acceptance under normal use.  Our adversarial review found 19 defects outside that
-envelope (STRUCTBIO-REV-0001); their repair is the last engineering item of this checkpoint
-(§ "State at the halt").
+envelope (STRUCTBIO-REV-0001); they were repaired in the last code commit of this checkpoint
+(`0e934eb`; § "State at the halt"), and the repaired code has not been attacked again by an
+independent reviewer.
 
 **What has not been shown, and what was found against us.**  No improvement over established
 methods has been demonstrated on any dimension.  toulbar2 finds every certified optimum 6 to 27
@@ -198,7 +199,8 @@ and say honestly where it is not.  Not done.
 
 **E1. Frozen held-out evaluation of C1 and the null method.**  *Objective:* hypotheses
 H3a–H3f of our plan and the Frontier division's H1/H2 on its sealed list (47 structures).
-*Prerequisites:* this checkpoint after the checker repair; a freeze record (commit, models
+*Prerequisites:* this checkpoint (the checker repair is in it) and an independent attack on
+the repaired checkers; a freeze record (commit, models
 `v2` and `v2-lib`, `SCALE_BITS = 20`, rotamer rule) — **not issued**; a standalone format
 note for a second checker — **not written** (the specification is in the docstrings of
 `mincert.py`, `mincheck.py`).  *Baselines:* toulbar2 on the identical instance; an
@@ -250,5 +252,12 @@ verification of elementary statements and is not evidence of novelty.  The seed 
 - **Open requests.**  STRUCTBIO-REQ-0001 (Engineering: independent verification of C1) and
   -REQ-0004 (C2) are unanswered; -REQ-0002 was answered by SCI-REV-0026 (our response:
   STRUCTBIO-RES-0003); -REQ-0003 was answered in part by COMPLEXITY-RES-0010.
-- **Processes.**  See the final section of `docs/structural_biology/HANDOFF.md` for what was
-  running and what was stopped at the moment of the final commit.
+- **Checker repair.**  Done in commit `0e934eb`: the 19 findings of our adversarial review and
+  Engineering's three proposals; `tests/structbio` 360 passed, 1 skipped; the 18 stored
+  certificates re-check; our own probe against enumeration (SB-X-009) found no unsound
+  acceptance.  Tested, not verified, and not yet attacked again by an independent reviewer.
+  Limits, evidence and open points: `docs/structural_biology/VERIFICATION_REPORT.md` §10 and
+  `HANDOFF.md` ("Unfinished work", item 1).
+- **Processes.**  None.  No subagent, no background process, no scheduled session and no
+  remote job of this division is running or pending (`docs/structural_biology/HANDOFF.md`,
+  final section).

@@ -7,8 +7,8 @@ Newest entry first.  "Resume here" is the recovery point for a successor.
 **The division is halted by the owner's directive SB-D-3.  Do nothing without explicit
 authorisation.**  When authorised, in this order: (1) read
 `docs/collaboration/consolidation/structural-biology.md` and `HANDOFF.md` ("Unfinished work");
-(2) run the three verification commands of `HANDOFF.md`; (3) fetch the other seven branches
-and read what answers STRUCTBIO-MSG-0004, -RES-0003, -REQ-0001, -REQ-0004 (never the Frontier
+(2) run the verification commands of `HANDOFF.md`; (3) fetch the other seven branches
+and read what answers STRUCTBIO-MSG-0004, -MSG-0005, -RES-0003, -REQ-0001, -REQ-0004 (never the Frontier
 division's sealed list); (4) take the owner's decision on which of the three recommended
 actions (consolidation report §E) to pursue.  Environment of the session machine, which a new
 machine will not have: Python environment `~/.venvs/structbio` (rebuild from
@@ -38,6 +38,12 @@ machine will not have: Python environment `~/.venvs/structbio` (rebuild from
   them; then the owner's consolidation directive arrived.  Stopped: everything listed in
   `OWNER_DIRECTIVES.md` SB-D-3 ("How this division applied it").  Written: results R-10 … R-13,
   STRUCTBIO-RES-0003, STRUCTBIO-MSG-0004, the consolidation assessment, this handoff.
+- The repair agent reported at about 02:30 UTC (360 passed, 1 skipped).  The coordinator read
+  every changed line of the trusted code, re-ran the suite and the check of the 18 stored
+  certificates, probed both checkers against enumeration (SB-X-009, no unsound acceptance)
+  and committed the repair as `0e934eb`.  Records: `VERIFICATION_REPORT.md` §10, `HANDOFF.md`
+  item 1, defect SB-DEF-10, STRUCTBIO-MSG-0005.  No process of this division remains
+  active.  **Halted.**
 
 ## Resume here as it stood at the second checkpoint (2026-11-26 about 23:40 UTC; superseded)
 

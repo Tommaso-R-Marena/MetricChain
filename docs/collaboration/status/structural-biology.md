@@ -8,7 +8,8 @@
 **HALTED** under the research owner's consolidation directive (recorded as SB-D-3 in
 `docs/structural_biology/OWNER_DIRECTIVES.md`).  No research cycle is running and none will
 start, and no message will be acted on, until the owner authorises it.  Assessment:
-`docs/collaboration/consolidation/structural-biology.md`.  Final message: STRUCTBIO-MSG-0004.
+`docs/collaboration/consolidation/structural-biology.md`.  Final messages: STRUCTBIO-MSG-0004 and
+its addendum STRUCTBIO-MSG-0005 (outcome of the checker repair).
 
 | | |
 |---|---|
@@ -19,11 +20,13 @@ start, and no message will be acted on, until the owner authorises it.  Assessme
 | C2 certified `ln Z` and populations | implemented with conditioning, state weights and a strict file format; rule semantics machine-checked in our Lean file; R-7 (v1), R-11 (v2-lib: crambin, all populations), R-13 (why it stops) |
 | C3, C4 | not started |
 | C5 | blocked |
-| internal review STRUCTBIO-REV-0001 | done: no false acceptance under normal use in 100 000 certificates; 19 defects outside it; repair: see `HANDOFF.md`, unfinished work, item 1 |
+| internal review STRUCTBIO-REV-0001 | done: no false acceptance under normal use in 100 000 certificates; 19 defects outside it, **repaired in `0e934eb`** (`tests/structbio`: 360 passed, 1 skipped; limits and evidence: `VERIFICATION_REPORT.md` §10).  Open: the repaired code has not been attacked again by an independent reviewer; the rest in `HANDOFF.md`, unfinished work, item 1 |
 | release frozen for held-out evaluation | **none**; the Frontier division's sealed list has not been opened by us |
 | requests of ours | REQ-0001, REQ-0004 (Engineering): unanswered; REQ-0002: answered by SCI-REV-0026, our response RES-0003; REQ-0003: Q-5 answered by COMPLEXITY-RES-0010 |
 | requests and reviews received since the second checkpoint | SCI-REV-0026 (answered: RES-0003); ENG-RES-0018, ENG-MSG-0007, FRONTIER-MSG-0002, FRONTIER-REQ-0001, COMPLEXITY-RES-0010, COMPLEXITY-MSG-0005, THY-MSG-0020, ENSEMBLE-MSG-0006/-0008, ENSEMBLE-RES-0007, GEOMETRY-MSG-0009/-0010 (answered in MSG-0004) |
 | compute | everything ran locally on the session machine (4 cores); no Modal, no paid service; the credit balances are not visible to this division |
+| subagents since the second checkpoint | one Lean prover, one adversarial reviewer, one read-only reader of the other branches, one repair agent; all finished |
+| processes at the halt | **none**: no subagent, no background process, no scheduled session, no remote job |
 
 ## Pins
 
@@ -60,7 +63,7 @@ start, and no message will be acted on, until the owner authorises it.  Assessme
 | id | scope | state |
 |---|---|---|
 | (unnumbered) | specification of the `min` checker written from the code by a subagent | done; found the loader and scope defects (STRUCTBIO-MSG-0003 C-2, C-3) and the misattributed theorem (C-1) |
-| STRUCTBIO-REV-0001 | adversarial review of all checkers by a subagent with a mandate to break them | in progress at this checkpoint |
+| STRUCTBIO-REV-0001 | adversarial review of all checkers by a subagent with a mandate to break them | done (19 findings); repaired in `0e934eb`; no second review of the repaired code |
 
 ## Requests we have sent
 

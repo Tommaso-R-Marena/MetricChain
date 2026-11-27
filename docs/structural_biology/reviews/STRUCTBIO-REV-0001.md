@@ -8,6 +8,12 @@
 | Scope | `src/metricchain_sb`: `mincheck`, `mincert` (format, loader, converter), `zcheck`, `zcert` (format, loader), `itables`, `expo`, `model`, `stability`; producers only where they touch a checker. |
 | Mandate | Adversarial: break the checkers, do not confirm them. Internal AI review, **not** peer review. |
 
+> **Disposition (added by the coordinator on 2026-11-27; the review below is unchanged).**  All 19 findings were
+> addressed in commit `0e934eb`; finding 14 is the one whose test changed its contract.  What changed, the
+> documented limits, the evidence and what stayed open: `docs/structural_biology/VERIFICATION_REPORT.md` §10 and
+> `docs/structural_biology/HANDOFF.md` ("Unfinished work", item 1).  The repaired code has not been reviewed
+> again by an independent reviewer.
+
 Severity: **S1** a false statement accepted; **S2** exception or hang; **S3** one file two readings, silent truncation, strictness, claim weaker than it appears; **S4** documentation. Reproducers are in `tests/structbio/test_adversarial_*.py` (M = `…_mincheck.py`, F = `…_mincert_files.py`, Z = `…_zcheck.py`, E = `…_expo_model_stability.py`); tests for findings are left **failing**.
 
 ## Verdict

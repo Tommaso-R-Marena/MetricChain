@@ -337,3 +337,116 @@ be described as formally verified.
 - **Internal adversarial review.**  STRUCTBIO-REV-0001 (a subagent with the mandate to break
   both checkers) — its findings and their handling are recorded in
   `docs/structural_biology/reviews/` and DEAD_ENDS when it reports.
+
+## 10. Checker hardening after STRUCTBIO-REV-0001 (commit `0e934eb`, 2026-11-27; last change before the consolidation halt)
+
+Sections 2–9 describe the code before this commit, and the line numbers quoted there are those
+of the earlier files.  Where they differ from this section, this section governs.
+
+**What the review found** (`reviews/STRUCTBIO-REV-0001.md`).  No unsound acceptance under
+normal use — certificates read from files, unmodified instances, default options — in 100 000
+certificates; 19 defects outside it, five of them conditional unsound acceptances.  Claim Z5
+of STRUCTBIO-REQ-0004 ("the checker never raises") and the sentence "inputs outside the
+supported range are rejected, never wrapped" were false as written (linked correction:
+STRUCTBIO-MSG-0004 §2).
+
+**What changed in the trusted code.**
+
+1. *What a checker computes with.*  `check_min_certificate` and `check_partition_certificate`
+   first take a `normalised` copy of the certificate (every integer a Python `int`; NumPy
+   integers converted; `bool`, `float`, `str` refused; unknown fields refused; the node graph
+   copied as a tree in one iterative pass, a repeated branch or prune node refused) and a
+   snapshot of the instance taken at that moment (`model.integer_tables`, which re-establishes
+   what the constructor established).  Neighbours are derived from the pair tables of the
+   snapshot; nothing is cached on `PairModel`.  `validate_structure` is now "`normalised`
+   succeeds": the conditions of §2.2 plus the three refusals just named.  This closes the
+   conditional unsound acceptances 1, 2 and 4 of the review (finding 5 is closed by item 7).
+2. *Float tier* (finding 3).  The conversion of an exact weight to a double decides on the
+   value for every mantissa and exponent; `exp_bits` is range-checked per tier.
+3. *Bounded work* (findings 6, 7, 8, 10).  Every argument of an exponential is bounded before the
+   exponential is formed; loaders, serialiser and converter are iterative; numerals and
+   nesting have documented limits (table below).  Outside the limits the answer is a rejection
+   with a reason, never an exception and never a wrapped number.
+4. *One reading per file* (findings 9, 11, 13).  Loaders raise only their own exception; a file
+   that embeds another instance than the one supplied is refused; non-canonical keys and
+   non-ASCII digits are errors.  Refusals instead of silent readings (findings 15–17): a
+   witness that is not a tuple or list is refused, `PairModel` refuses entries that are not
+   integers, and a negative state index is a `ValueError`, not "the last state".
+5. *Verdicts that name their instance* (asked for by Engineering, ENG-RES-0018 F3–F5).
+   `mincheck.check_text` goes from the text of a file to a verdict in one call that never
+   raises; `CheckResult.model_sha256` is the checksum of the tables the checker read.
+6. *Claims a producer stores* (finding 12).  The Z producer stores `zcert.outward_claim` of its
+   interval (both ends moved outward to the grid of `2**-20` nats and one step further), so an
+   honest certificate is accepted by either tier.  A stored claim is at most about `2e-6` nats
+   wider on each side than the interval computed; the intervals in our result rows are the
+   checker's, not the claim's, and are unchanged.
+7. *Gaps and verdicts of `stability.py`* (finding 18).  `check_exclusion_gap` and
+   `check_necessary_optimality` decide a claim from the claim and the instance alone — the box
+   and the shifted table are derived again — and the `certify_*` functions refuse to return a
+   claim that fails them.  The shift is computed in Python integers.
+8. *The exponential* (finding 19).  The number of Taylor terms follows the precision asked for
+   (twelve whenever twelve suffice, so results at the default 64 bits are bit for bit what they
+   were).  The enclosure `lo <= exp(q) <= hi` is the theory division's theorem for every
+   positive number of terms and does not depend on this change.  The *width* statement
+   (`hi/lo − 1 < 2**-bits`) is a paper derivation in the docstring of `expo._terms`, tested,
+   unrefereed: label [P], and no certified number depends on it.
+
+**Documented limits** (each enforced where named; each tested on both sides in
+`tests/structbio/test_hardening.py`):
+
+| name | value | enforced in |
+|---|---|---|
+| `model.MAX_SCALE_BITS` | 1024 | both checkers, before any power of two is formed |
+| `mincheck.MAX_MESSAGE_BITS` | 49 | `mincheck` |
+| table entry × `2**message_bits`, and every message | below `2**50` in absolute value | `mincheck` (as before) |
+| `mincert.MAX_INT_DIGITS` | 1000 decimal digits per numeral | both loaders |
+| `mincert.MAX_FILE_DEPTH` | 2000 nodes on a path of a `structbio-mincert/1` file | `mincert.dumps`, `mincert.loads` |
+| `mincert.MAX_CERT1_NESTING` | 5000 levels of the converted `metricchain-cert/1` tree | `to_metricchain_cert1` (raises `ConversionTooDeep`) |
+| `zcert.MAX_BRANCH_DEPTH` | 500 nested conditioning nodes | `zcert.normalised`, `zcert.loads` |
+| `zcert.CLAIM_GRID_BITS` | 20 | `zcert.outward_claim` (producer) |
+| `zcheck.MAX_EXPONENT` | `2**16` nats | table entries, working weights, relax ranges, accumulated factors |
+| `zcheck.MIN_PRUNE_EXPONENT` | −9 (β × margin) | prune step: rejected below |
+| `zcheck.PRUNE_EXPONENT_CAP` | `2**13` (β × margin) | prune step: bounded by `exp(−2**13)`, not rejected |
+| `zcheck.EXP_BITS_RANGE` | float tier 16 to 512, exact tier 16 to 1024 | `zcheck` |
+| weighted one-body entry | below `2**62` in absolute value | `partition.weighted_model` |
+
+**Where the repair departs from what the review asked** (each departure is sound; decided by
+the coordinator or accepted on review):
+
+- A prune step with a negative margin is legal mathematics (the rule holds for every margin)
+  and is still evaluated down to β × margin = −9; below that it is rejected as a resource
+  guard.  Rejecting every negative margin would have rejected honest certificates.
+- In the `min` format a *leaf* object may be referred to from several places (a leaf has no
+  descendants, and the pass stays linear); a repeated branch or prune node is refused.  In the
+  Z format every repeated node is refused.
+- Finding 14: the equivalence "the reference checker accepts the converted document iff ours
+  accepts the certificate" has a size limit, because the nested reference format cannot be
+  written or parsed beyond about 10 000 levels.  The converter now refuses beyond 5000 levels
+  with a dedicated exception instead of producing a document nobody can read.  This is the one
+  adversarial test whose contract was changed (its docstring says so); every other test of the
+  review is as the reviewer delivered it.
+
+**Evidence** (tests of an implementation; nothing here is formal verification of the Python):
+
+- `tests/structbio`: 360 passed, 1 skipped.  Before the repair: 257 passed, 59 failed on
+  purpose, 1 skipped.  44 new tests in `test_hardening.py`, each seen failing first (as
+  reported by the repair agent; the coordinator ran the suite before and after).
+- `experiments/structbio/gmec_dev/run.py --check`: all 18 stored certificates are rebuilt,
+  loaded and accepted with zero gap, as before.
+- SB-X-009 (`experiments/structbio/checker_probe/`, the coordinator's own probe, seed fixed):
+  4 900 checks of `min` certificates (2 456 accepted), 3 072 checks of Z certificates in both
+  tiers (1 917 accepted) and 1 892 population intervals compared with exhaustive enumeration:
+  no unsound acceptance, no disagreement between the verdict in memory and from the file.
+- As measured by the repair agent, with scratch files that are not in the repository and were
+  not re-run by the coordinator: old against new code on existing random certificates, 2 560
+  `min` and 2 000 Z runs, no difference in any verdict or interval; Z intervals of 84
+  certificates bit-identical at `exp_bits` 48 and 64, and different at 96 in 32 of 84 by at
+  most `1.1e-13` (the change of item 8); the crambin rows of `lnz_dev/results.jsonl`
+  reproduced.
+
+**Not done.**  The repaired code has not been attacked again by an independent reviewer; the
+float-tier assumptions F1–F3 and the producers' int64 arithmetic were not re-examined; a Z
+verdict names no instance checksum; two helper functions still form powers of two for any
+`message_bits`.  The list, with what to do about each, is `HANDOFF.md`, "Unfinished work",
+item 1.  Labels are unchanged: [CK] means rule semantics machine-checked and this
+implementation tested.

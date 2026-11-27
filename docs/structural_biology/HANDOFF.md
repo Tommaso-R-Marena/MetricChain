@@ -28,7 +28,7 @@ or publications without the owner's authorisation.
 | Lean: rule semantics of the Z checker (19 theorems) and our own axiom audit | `proofs/StructBio/FactorElimination.lean`, `AxiomAudit.lean` | builds; standard axioms only; not reviewed by the theory division |
 | molecular layer: structure → rotamer model → tables; models `v1` (retired), `v2`, `v2-lib`; deterministic hydrogens; rotamer wells and torsion-space shares | `molecular/` | validated numerically against an independent OpenMM system; hydrogen rule tested against a force-field minimum |
 | baseline | `baselines/toulbar2.py` | toulbar2 on the identical integer instance |
-| experiments (drivers, rows, expectations written before runs) | `experiments/structbio/`: `gmec_dev` (SB-X-001), `gmec_synth` (-002), `flipgaps_dev` (-003, model v1), `lnz_dev` (-004), `seed_dev` (-005), `wellgaps_dev` (-006), `nullmethod_dev` (-007), `regime_dev` (-008) | rows in each `results.jsonl`; `min` certificates in `gmec_dev/certs/` (v1), `certs/v2/`, `certs/v2-lib/` |
+| experiments (drivers, rows, expectations written before runs) | `experiments/structbio/`: `gmec_dev` (SB-X-001), `gmec_synth` (-002), `flipgaps_dev` (-003, model v1), `lnz_dev` (-004), `seed_dev` (-005), `wellgaps_dev` (-006), `nullmethod_dev` (-007), `regime_dev` (-008), `checker_probe` (-009: repaired checkers against enumeration; expectation *not* committed first) | rows in each `results.jsonl`; `min` certificates in `gmec_dev/certs/` (v1), `certs/v2/`, `certs/v2-lib/` |
 | reviews | `docs/structural_biology/reviews/STRUCTBIO-REV-0001.md`; intake reports in `intake/` (first synchronisation; `SYNC4_REPORT.md`) | — |
 
 ## The scientific state in one paragraph
@@ -48,8 +48,9 @@ nothing has been run on held-out structures.
 
 ```
 python3 -m venv ~/.venvs/structbio && ~/.venvs/structbio/bin/pip install -r requirements-structbio.txt
-~/.venvs/structbio/bin/python -m pytest tests/structbio -q
+~/.venvs/structbio/bin/python -m pytest tests/structbio -q                       # 360 passed, 1 skipped (about 75 s)
 ~/.venvs/structbio/bin/python experiments/structbio/gmec_dev/run.py --check      # rebuilds 18 instances, re-checks the stored certificates (about 3 min)
+~/.venvs/structbio/bin/python experiments/structbio/checker_probe/run.py         # SB-X-009: checkers against enumeration, zero failures (about 1 min)
 python3 experiments/reference_checker.py --selftest --quick                       # the theory division's checker, unmodified
 lake exe cache get && lake build proofs.StructBio.AxiomAudit                      # Lean 4.31.0, Mathlib v4.31.0; prints the axioms of our 19 theorems
 ```
@@ -73,7 +74,32 @@ records the commit of the code in memory at process start.
 
 ## Unfinished work, with what is needed to resume each item
 
-1. **Checker repair after STRUCTBIO-REV-0001.**  In progress at this commit (a fixer subagent is repairing the 19 findings; 59 adversarial tests fail on purpose until its changes are reviewed and committed).  This item is rewritten in the final commit of the halt.
+1. **Checker repair after STRUCTBIO-REV-0001: done (commit `0e934eb`); what stayed open.**
+   All 19 findings of the review and Engineering's proposals F3–F5 (ENG-RES-0018) were
+   addressed.  `tests/structbio`: 360 passed, 1 skipped (before: 59 failing on purpose); the 18
+   stored certificates re-check; the coordinator's probe against enumeration (SB-X-009,
+   `experiments/structbio/checker_probe/`) found no unsound acceptance.  What changed, the
+   documented limits, the deviations from what the review asked and the evidence:
+   `VERIFICATION_REPORT.md` §10.  Open, most consequential first:
+   (a) the repaired code was written by one agent, reviewed line by line by the coordinator
+   and probed — it was **not attacked again by an independent reviewer**; do that, or ask
+   Engineering, before any held-out run;
+   (b) the float tier rests on assumptions F1–F3 of `itables.py` (stated, not proved; not
+   re-examined in the repair);
+   (c) a Z verdict (`ZResult`) names no instance checksum and there is no `check_text` for Z
+   files: the caller must load the file with the right instance (`zcert.loads` compares the
+   checksum);
+   (d) `MinCertificate.lower_bound_fraction` and `mincert.to_metricchain_cert1` form
+   `2**(scale_bits + message_bits)` for whatever `message_bits` they are given: judge a
+   certificate with `check_min_certificate` (which bounds it) before calling them on
+   untrusted input;
+   (e) `stability.second_best_gap` cannot know whether the gaps it is given cover every site;
+   (f) Python objects with overridden methods (a `dict` subclass as a node) are outside what
+   the checkers defend against — certificates are meant to be read from files;
+   (g) the producers' own int64 arithmetic was not re-examined (a wrong producer yields a
+   rejected certificate, not a wrongly accepted one);
+   (h) cost, as measured by the repair agent and not re-measured: a Z node with a prune margin
+   near the cap takes about 0.12 s (crambin's nodes: about 25 ms).
 2. **Tighter population intervals (not started; specified here).**  Today
    `p_lo(a) = L_a / Z_hi`, `p_hi(a) = 1 − Σ_{b≠a} p_lo(b)`, so every state's interval has width
    about `1 − exp(−w)` (`w` = width of `ln Z`).  Better: let every node return, for each state
@@ -104,7 +130,7 @@ records the commit of the code in memory at process start.
    machine (SB-OP-15).
 5. **Runs not made or not finished.**  SB-X-006 on ubiquitin
    (`wellgaps_dev/run.py 1UBQ --b-kcal 0.01 --time-limit 120`: about 260 certified
-   minimisations of about 45 s); the gap rows of 2IGD (running at this commit); SB-X-004 at threshold 0.0001 on crambin
+   minimisations of about 45 s); SB-X-004 at threshold 0.0001 on crambin
    (stopped by a command time limit); the necessary-optimality run with `b` = the spread over
    seeds (`seed_dev/1CRN_entry_spread.npz`; outcome not in doubt, not computed); SB-BM-7.
 6. **Baselines not run.**  Pseudo-Boolean proof logging (VeriPB/CakePB) on an encoding and on
@@ -135,4 +161,12 @@ SB-D-3 nothing is to be acted on without the owner's authorisation.
 
 ## Processes at the halt
 
-At this commit: one fixer subagent (checker repair) and one local run (SB-X-006 on 2IGD) are still active.  This section is rewritten in the final commit of the halt.
+**None.**  At the final commit of the halt no subagent, no background process, no scheduled
+session and no remote job (Modal or any other service) of this division is running or
+pending.  This division never scheduled a session and never launched a remote job.  The last
+subagent (the checker repair) reported at about 02:30 UTC on 2026-11-27; its changes were
+reviewed and are commit `0e934eb`.  The last local runs (SB-X-006 on 2IGD, the populations of
+SB-X-004, SB-X-007, SB-X-008) finished before commit `f2a02a1`; SB-X-009 (42 s) ran after
+`0e934eb`.  The session's scratch files (logs, the repair agent's before/after baselines) are
+not in the repository; nothing stated in our records depends on them except where a sentence
+says "as measured by the repair agent".

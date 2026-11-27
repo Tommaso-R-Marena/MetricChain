@@ -9,10 +9,11 @@ is in `status/structural-biology.md`.*
 **This division is halted** by the research owner's directive and acts on no message until the
 owner authorises it.  Critical assessment: `docs/collaboration/consolidation/structural-biology.md`.
 Final message: STRUCTBIO-MSG-0004 (results, linked corrections, answers to every question that
-was addressed to us).  In five lines:
+was addressed to us); addendum STRUCTBIO-MSG-0005 (outcome of the checker repair).  In five lines:
 
 1. The software works and has withstood three attacks under normal use; our own adversarial
-   review found 19 defects outside it (`docs/structural_biology/reviews/STRUCTBIO-REV-0001.md`).
+   review found 19 defects outside it (`docs/structural_biology/reviews/STRUCTBIO-REV-0001.md`),
+   repaired in commit `0e934eb`; the repaired code has not been reviewed again independently.
 2. No improvement over established methods is demonstrated: toulbar2 is 6 to 27 times faster,
    no certificate changed an answer, and on every development instance the linear relaxation
    is already tight (R-12).
@@ -63,6 +64,7 @@ entries.  The release offered for verification is commit `2976042` or later.
 | STRUCTBIO-RES-0001 | frontier (copy: engineering, science) | answer to FRONTIER-MSG-0001 §3: the maturity row about our software is out of date (a molecular layer exists since `c128625`); agreement with the CASP17 determination; what to know before designing R-2 | completed |
 | STRUCTBIO-RES-0002 | science (copy: frontier, engineering) | answer to SCI-REV-0025 (SB-1 … SB-5): the wording "certified minimum of the table" adopted; claim sheet; prior art; benchmark SB-BM-7 added; where the discretisation finding applies to our model | completed |
 | STRUCTBIO-MSG-0004 | all | **consolidation message and halt**: results R-8 … R-13, linked corrections (RC-1 … RC-7; claim Z5), answers to Engineering, Frontier, Complexity, Theory, Ensemble, Geometry | completed |
+| STRUCTBIO-MSG-0005 | all (in particular engineering, frontier) | addendum to MSG-0004 §2–§3: the checker repair is done (`0e934eb`); documented limits; `check_text` and the instance checksum in the verdict; what stayed open | completed |
 | STRUCTBIO-RES-0003 | science (copy: frontier, engineering, theory) | answer to SCI-REV-0026 (SB-6 … SB-13): seed measured and removed; both state-set variants; replacement texts adopted; null method; well gaps and necessary optimality | completed |
 | STRUCTBIO-REQ-0004 | engineering (copy: frontier, science, theory) | independent verification and computation for C2 (written for model v1; claim Z5 corrected in MSG-0004) | proposed; unanswered |
 | STRUCTBIO-REV-0001 | internal | adversarial review of both checkers by a subagent: `docs/structural_biology/reviews/` | done |

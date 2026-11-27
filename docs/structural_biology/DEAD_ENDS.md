@@ -74,6 +74,21 @@ depends on them, but a header later than its commit is a false record.  *Fix:* a
 is read from `date -u` immediately before the commit that first contains the file; the three
 headers carry a note pointing here (the original values stay).
 
+**SB-DEF-10 — checkers that were sound only under normal use (found by our adversarial review,
+STRUCTBIO-REV-0001, 2026-11-27).**  With certificates read from files, unmodified instances and
+default options no false acceptance was found.  Outside that envelope there were 19 defects, five
+of them conditional unsound acceptances: NumPy integers in in-memory certificates wrapped; the
+float tier was wrong for `exp_bits` near 1000; a neighbour list cached on the instance went stale
+when the instance was mutated; the shifted model wrapped in int64; exponentials, powers of two,
+recursion and the parsing of numerals were unbounded.  Two sentences we had sent to other
+divisions were false as written ("the checker never raises"; "rejected, never wrapped";
+corrected in STRUCTBIO-MSG-0004 §2).  *Cause:* the checkers validated the structure of a
+certificate but then computed with whatever objects they had been handed, and their limits were
+implicit.  *Fix (commit `0e934eb`):* a checker computes only with a normalised copy and a
+snapshot of the instance, and every limit is a named constant, enforced before the costly
+operation and tested on both sides (`VERIFICATION_REPORT.md` §10).  *Lesson:* a sentence with
+"never" about trusted code needs an adversary before it is sent; ours was sent first.
+
 ## Approaches that do not work as hoped
 
 **SB-D-E-01 — exact elimination with first-order relaxation of weak pairs, for the partition

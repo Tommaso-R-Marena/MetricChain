@@ -8,6 +8,11 @@ code. Uncommitted work in progress seen at the time of writing — a `domains` a
 `ASSUMPTION_REGISTER.md`, `PHYSICAL_APPLICABILITY.md`, `VERIFICATION_REPORT.md` (labels [CK],
 [CP], [M], [H] are defined in §1 of the last).
 
+*Note of 2026-11-27.*  Since commit `0e934eb` both checkers compute with `normalised` copies of a
+certificate and with a snapshot of the instance (`model.integer_tables`); where this document says
+`validate_structure`, read "`normalised` succeeds".  The changes and the documented limits are in
+`VERIFICATION_REPORT.md` §10.
+
 ## 1. The six layers of the founding directive §9
 
 | layer | modules | role | trusted? |

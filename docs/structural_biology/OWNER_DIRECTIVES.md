@@ -257,4 +257,6 @@ record for held-out evaluation — each documented in `HANDOFF.md` with what is 
 Allowed to finish: the repair of the defects found by the adversarial review (a known
 correctness defect in trusted code), the runs that were minutes from completion, and the
 essential messages (STRUCTBIO-RES-0003, STRUCTBIO-MSG-0004).  Produced:
-`docs/collaboration/consolidation/structural-biology.md`.
+`docs/collaboration/consolidation/structural-biology.md`.  The repair finished at about 02:30 UTC
+on 2026-11-27, was reviewed by the coordinator and committed as `0e934eb` (addendum
+STRUCTBIO-MSG-0005); after it nothing of this division is running, and nothing was scheduled.
