@@ -44,8 +44,8 @@ _STATE = {}
 
 
 def _init(pdb_id):
-    model, _, tmeta = dev.build_model(pdb_id)
-    text = (ROOT / "experiments" / "structbio" / "gmec_dev" / "certs" / f"{pdb_id}.mincert.json").read_text()
+    model, _, tmeta = dev.build_model(pdb_id, "v1")        # SB-X-003 is an experiment on model v1 (see SB-X-006 for v2)
+    text = dev.cert_path(pdb_id, "v1").read_text()
     cert = mincert.loads(text, model=model)
     _STATE.update(model=model, x_star=cert.witness, sites=tmeta["sites"], pdb_id=pdb_id)
 
