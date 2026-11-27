@@ -24,7 +24,12 @@ here because they are the *floating-point assumptions* of every result of this t
 * F3 (range).  Lower bounds below `1e-300` are replaced by `0` and positive upper bounds are
   kept at or above `1e-300`, so no input of an operation is subnormal and the bounds do not
   depend on flush-to-zero settings; an overflow (a non-finite upper bound) is an error and
-  aborts the computation.
+  aborts the computation.  The conversion of an exact weight `m * 2**e` decides this on the
+  *value* (`_ldexp_down`, `_ldexp_up`): scaling a double by a power of two is exact whenever the
+  result is a normal double, and a result below the normal range is below `1e-300`.  (Until
+  review STRUCTBIO-REV-0001, finding 3, the upper conversion returned `1e-300` whenever the
+  exponent was below -2000 — wrong for mantissas of more than about 1000 bits, i.e. for
+  `exp_bits` near 1000; the Z checker now also refuses `exp_bits` above 512 in this tier.)
 
 Assumed and not proved here: that `numpy` multiplies and adds doubles as IEEE-754 round-to-nearest
 operations on this platform (F1, F2 are stated for such operations), and that `numpy.nextafter`
@@ -142,16 +147,18 @@ class FloatTables:
 
     @staticmethod
     def _ldexp_down(f: float, e: int) -> float:
-        if f == 0.0 or e < -2000:
+        """A double not above `f * 2**e` (`f >= 0` finite): the product itself when it is at least
+        `1e-300`, else 0."""
+        if f == 0.0:
             return 0.0
-        v = math.ldexp(f, e)                           # exact unless it underflows
-        return v if v >= _TINY else 0.0
+        v = math.ldexp(f, e)                           # exact when the result is a normal double; below the
+        return v if v >= _TINY else 0.0                # normal range it is rounded, and is then below 1e-300
 
     @staticmethod
     def _ldexp_up(f: float, e: int) -> float:
-        if e < -2000:
-            return _TINY
-        v = math.ldexp(f, e)
+        """A double not below `f * 2**e` (`f >= 0` finite): the product itself when it is at least
+        `1e-300`, else `1e-300`.  The decision is taken on the value, for every mantissa and exponent."""
+        v = math.ldexp(f, e)                           # raises OverflowError above the double range
         if math.isinf(v):
             raise OverflowError("weight above the double range after scaling")
         return v if v >= _TINY else _TINY

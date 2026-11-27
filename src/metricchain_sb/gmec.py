@@ -220,6 +220,8 @@ def certify_gmec(model: PairModel, eps: Fraction = Fraction(0), witness=None, me
     `eps` is an exact rational in energy units (`0` asks for a proof of exact optimality).
     `domains` restricts the claim to a box (a non-empty list of states per site); the witness
     then lies in that box and the certificate is about that box only.
+    `witness`, if given, must be a configuration of the model (`ValueError` otherwise); one that
+    lies outside the box is ignored.
     `eliminate=False` switches dead-end elimination off (dual bound and search only; with
     `max_nodes=1` the dual bound alone — the null method of the benchmark plan).
     Raises :class:`CertificationBudgetExceeded` (an abstention) when `max_nodes` branch-and-bound
@@ -241,8 +243,10 @@ def certify_gmec(model: PairModel, eps: Fraction = Fraction(0), witness=None, me
                                 for d, k in zip(domains, P.sizes)):
         raise ValueError("domains must give a non-empty, duplicate-free list of existing states for every site")
     D0 = [np.array(d, dtype=np.int64) for d in domains]
-    if witness is not None and any(int(a) not in d for a, d in zip(witness, domains)):
-        witness = None                       # a witness outside the box is of no use
+    if witness is not None:
+        witness = model.configuration(witness)   # ValueError unless it assigns an existing state to every site
+        if any(a not in d for a, d in zip(witness, domains)):
+            witness = None                       # a witness outside the box is of no use
     if witness is None:
         dual = _Dual(P, D0, None)
         dual.run(max_sweeps=min(max_sweeps, 50), target=np.inf, tol=tol)

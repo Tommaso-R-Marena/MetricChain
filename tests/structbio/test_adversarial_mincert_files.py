@@ -328,12 +328,70 @@ def test_loader_rejects_fields_and_encodings_outside_the_format(label):
 
 
 def test_converted_document_can_be_judged_by_the_reference_checker_whenever_ours_accepts(reference_checker):
-    """FINDING (the stated equivalence holds only below a size limit).  A valid chain of 10,050
-    prune nodes (one per two-state site) is accepted by our iterative checker and converted, but
-    the document is 10,050 objects deep: `json.dumps` cannot write it and the reference checker
-    cannot parse it ("nested too deeply"), whatever the recursion limit.  The development
-    certificates have 344 to 1,280 consecutive prunes; an instance eight times the size of
-    ubiquitin is beyond the limit."""
+    """FINDING 14, CONTRACT CHANGED WITH THE FIX (the one test of the review whose meaning was changed,
+    by decision of the coordinator; every other test is as the reviewer delivered it).
+
+    As delivered, this test demanded that a valid chain of 10,050 prune nodes be converted *and*
+    judged by the reference checker.  That cannot be had: the nested format puts every prune node
+    one JSON level deeper, `json.dumps` cannot write 10,050 levels and the reference checker cannot
+    parse them ("nested too deeply"), whatever the recursion limit.  The equivalence "the reference
+    checker accepts the document iff ours accepts the certificate" therefore has a size limit, and
+    the fix states it instead of producing a document nobody can read:
+
+    * up to `mincert.MAX_CERT1_NESTING` levels (one per prune node, two per branch node) the
+      certificate is converted, the document can be written with `json.dumps`, and the reference
+      checker judges it as our checker does — asserted here *at* the limit, for a chain of
+      eliminations and for nested branches, on an accepted and on a rejected certificate;
+    * one level more, and for the 10,050 prunes of the original test, `to_metricchain_cert1` raises
+      `mincert.ConversionTooDeep` (a `ValueError` that is not a `MalformedCertificate`: our checker
+      still judges the certificate)."""
+    from metricchain_sb.mincert import MAX_CERT1_NESTING, ConversionTooDeep
+
+    def elimination_chain(prunes):
+        """One site with `prunes + 1` states of energies 0, 1, 2, ...: every state but 0 is eliminated by 0."""
+        model = PairModel(unary=[np.arange(prunes + 1)], pair={}, scale_bits=0)
+        node = {"node": "leaf", "m": {}}
+        for state in range(1, prunes + 1):
+            node = {"node": "prune", "site": 0, "remove": state, "dominator": 0, "rest": node}
+        return MinCertificate(model=model, message_bits=0, domains=[list(range(prunes + 1))], lower_bound=0,
+                              witness=(0,), root=node)
+
+    def nested_branches(depth):
+        model = PairModel(unary=[np.array([0, 1])], pair={}, scale_bits=0)
+        node = {"node": "leaf", "m": {}}
+        for _ in range(depth):
+            node = {"node": "branch", "site": 0, "children": {0: node, 1: {"node": "leaf", "m": {}}}}
+        return MinCertificate(model=model, message_bits=0, domains=[[0, 1]], lower_bound=0, witness=(0,), root=node)
+
+    def nesting(doc):                                            # levels of the converted tree, counted without recursion
+        deepest, stack = 0, [(doc["certificate"], 1)]
+        while stack:
+            node, level = stack.pop()
+            deepest = max(deepest, level)
+            if node["node"] == "prune":
+                stack.append((node["rest"], level + 1))
+            elif node["node"] == "branch":
+                stack.extend((child, level + 2) for child in node["children"].values())
+        return deepest
+
+    # --- at the limit: converted, writable, and judged identically
+    for cert in (elimination_chain(MAX_CERT1_NESTING - 1), nested_branches((MAX_CERT1_NESTING - 1) // 2)):
+        for delta in (0, 1):                                     # the true bound, and one unit too much
+            cert.lower_bound = delta
+            ours = check_min_certificate(cert)
+            assert ours.accepted is (delta == 0)
+            doc = to_metricchain_cert1(cert)
+            assert MAX_CERT1_NESTING - 1 <= nesting(doc) <= MAX_CERT1_NESTING
+            text = json.dumps(doc)                               # no RecursionError
+            verdict = reference_checker.check_text(text)
+            assert verdict["accepted"] is ours.accepted, (delta, verdict)
+    # --- one level beyond the limit: a dedicated refusal, and our checker still judges the certificate
+    for cert in (elimination_chain(MAX_CERT1_NESTING), nested_branches(MAX_CERT1_NESTING // 2)):
+        assert check_min_certificate(cert).accepted
+        with pytest.raises(ConversionTooDeep):
+            to_metricchain_cert1(cert)
+    assert issubclass(ConversionTooDeep, ValueError) and not issubclass(ConversionTooDeep, MalformedCertificate)
+    # --- the certificate of the test as delivered: 10,050 prune nodes, one per two-state site
     n = 10_050
     model = PairModel(unary=[np.array([0, 1]) for _ in range(n)], pair={}, scale_bits=0)
     node = {"node": "leaf", "m": {}}
@@ -342,22 +400,5 @@ def test_converted_document_can_be_judged_by_the_reference_checker_whenever_ours
     cert = MinCertificate(model=model, message_bits=0, domains=[[0, 1] for _ in range(n)], lower_bound=0,
                           witness=None, root=node)
     assert check_min_certificate(cert).accepted
-    doc = to_metricchain_cert1(cert)
-    parts, cur, depth = [], doc["certificate"], 0                # write the chain without recursion
-    while cur["node"] == "prune":
-        head = dict(cur)
-        cur = head.pop("rest")
-        parts.append(json.dumps(head)[:-1] + ',"rest":')
-        depth += 1
-    top = dict(doc)
-    top["certificate"] = "@@"
-    text = json.dumps(top).replace('"@@"', "".join(parts) + json.dumps(cur) + "}" * depth)
-    verdict = reference_checker.check_text(text)
-    try:
-        json.dumps(doc)
-        writable = True
-    except RecursionError:
-        writable = False
-    assert writable and verdict["accepted"] is True, (
-        f"ours: accepted; json.dumps of the converted document: {'ok' if writable else 'RecursionError'}; "
-        f"reference checker: {verdict}")
+    with pytest.raises(ConversionTooDeep):
+        to_metricchain_cert1(cert)

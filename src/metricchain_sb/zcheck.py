@@ -4,10 +4,15 @@ sums the sites out on interval tables, and returns the enclosure it has itself c
 
 The checker contains no search and trusts no number of the certificate: margins of prune steps
 and residual ranges of relax steps are recomputed here; a claim is accepted only if it contains
-the interval computed here.  It imports the data classes of `zcert`, the certified exponential
-of `expo` and the interval tables of `itables` — nothing from the producer (`partition`).
+the interval computed here.  It imports the data classes and the normalisation of `zcert`, the
+certified exponential of `expo` and the interval tables of `itables` — nothing from the
+producer (`partition`).
 
-Arithmetic.  Steps: Python integers (exact).  Boltzmann factors: `expo.exp_bounds_me` (integer
+Arithmetic.  Steps: Python integers and rationals of Python integers, exact — the checker
+computes with the `zcert.normalised` copy of the certificate and with the `model.integer_tables`
+snapshot of the instance, so no integer of the certificate or of the instance is a fixed-width
+NumPy integer, and the neighbour structure is derived here from the pair tables (review
+STRUCTBIO-REV-0001, findings 2 and 4).  Boltzmann factors: `expo.exp_bounds_me` (integer
 arithmetic, outward rounded).  Elimination: tier ``exact`` (rationals; exact) or ``float``
 (binary64 with outward rounding; assumptions F1–F3 of `itables`).  Logarithms of the final
 bounds: `expo.log_bounds` (certified through the exponential).
@@ -25,8 +30,34 @@ and a state of `t` that prune steps removed everywhere has population at most
 `1 - sum_b [lower bound of P(x_t = b)]`.  Probabilities are those of the Boltzmann distribution
 of the published tables *on the root box of the certificate*.
 
-The checker never raises: malformed input, an invalid step, an over-budget table or an
-arithmetic overflow is a rejection with a reason.
+The range this checker evaluates (finding 6).  An exponential is returned as an exact rational
+of about `1.44 * |argument|` bits, so every argument is bounded *before* it is exponentiated,
+and what lies outside is rejected with a reason, not computed:
+
+* ``scale_bits <= model.MAX_SCALE_BITS = 1024`` (checked before any power of two is formed);
+* ``beta * |entry| <= MAX_EXPONENT = 2**16`` nats for every table entry of the instance (checked
+  up front) and of the working model on the box (checked when its weight is needed).  The
+  crambin certificates of SB-X-004 reach about 3,400 (entries clipped at 1000 kcal/mol,
+  RT = 0.593 kcal/mol, plus the additive parts moved into the one-body tables by relax steps);
+* relax step: ``beta * |r| <= MAX_EXPONENT`` for both ends of the residual range; node: the
+  accumulated logarithmic factors `|A_lo|`, `|A_hi|` at most ``MAX_EXPONENT``;
+* prune step with margin `m`: rejected when ``beta * m < MIN_PRUNE_EXPONENT = -9`` — legal
+  mathematics (the rule holds for every `m`) but useless: the step would add more than
+  `e**9` (about 8,100) nats to the upper bound, and without a floor a 300-byte certificate
+  asks for the exponential of `e**(beta*|m|)`.  Margins between `-9/beta` and 0 are evaluated
+  as before.  For ``beta * m > PRUNE_EXPONENT_CAP = 2**13`` the factor `exp(-beta*m)` is
+  replaced by the larger `exp(-PRUNE_EXPONENT_CAP)` (below 1e-3557): sound because the
+  exponential is monotone, and it keeps the denominators of `A_hi` short (the work of a node
+  grows with the square of that length).  Below the cap nothing changes: the bounds of the
+  crambin certificates (largest margin about 3,431 nats) are bit for bit what they were;
+* ``exp_bits`` in ``EXP_BITS_RANGE``: 16..512 in the float tier (finding 3: the conversion of
+  weights to doubles is now correct for every mantissa, and nothing is gained beyond the 53
+  bits of a double), 16..1024 in the exact tier;
+* branch nodes nested at most `zcert.MAX_BRANCH_DEPTH` deep (the evaluator recurses per level).
+
+Inside these limits the work is polynomial in the size of the certificate and of the numbers
+written in it.  The checker never raises: malformed input, an invalid step, an over-budget
+table, an argument outside the range above or an arithmetic overflow is a rejection with a reason.
 """
 from __future__ import annotations
 
@@ -35,9 +66,16 @@ from fractions import Fraction
 
 from .expo import exp_bounds, exp_bounds_me, log_bounds
 from .itables import ExactTables, FloatTables, TableTooLarge
-from .zcert import MalformedZCertificate, ZCertificate, validate_structure
+from .model import MAX_SCALE_BITS, exact_int
+from .zcert import MalformedZCertificate, ZCertificate, snapshot
 
-__all__ = ["ZResult", "check_partition_certificate"]
+__all__ = ["ZResult", "check_partition_certificate", "MAX_EXPONENT", "MIN_PRUNE_EXPONENT", "PRUNE_EXPONENT_CAP",
+           "EXP_BITS_RANGE"]
+
+MAX_EXPONENT = 2 ** 16              # largest |argument| of an exponential (nats)
+MIN_PRUNE_EXPONENT = -9             # smallest beta * margin of a prune step
+PRUNE_EXPONENT_CAP = 2 ** 13        # beta * margin above this is bounded by exp(-PRUNE_EXPONENT_CAP)
+EXP_BITS_RANGE = {"exact": (16, 1024), "float": (16, 512)}
 
 
 @dataclass
@@ -68,6 +106,8 @@ def check_partition_certificate(cert: ZCertificate, arithmetic: str = "exact", m
         return ZResult(False, f"malformed certificate: {exc}")
     except TableTooLarge as exc:
         return ZResult(False, f"abstained: {exc}")
+    except RecursionError:
+        return ZResult(False, "rejected: nested too deeply for the interpreter's recursion limit")
     except (OverflowError, ArithmeticError) as exc:
         return ZResult(False, f"rejected: arithmetic failure ({exc})")
     except Exception as exc:  # noqa: BLE001  (a rejection is always sound)
@@ -79,13 +119,34 @@ class _Reject(Exception):
 
 
 def _check(cert: ZCertificate, arithmetic: str, max_entries, exp_bits: int) -> ZResult:
-    validate_structure(cert)
-    if arithmetic not in ("exact", "float"):
+    # the certificate as Python integers and rationals forming a tree, and the instance as it is now
+    cert, instance = snapshot(cert)
+    if not isinstance(arithmetic, str) or arithmetic not in ("exact", "float"):
         return ZResult(False, "unknown arithmetic tier")
+    low, high = EXP_BITS_RANGE[arithmetic]
+    try:
+        exp_bits = exact_int(exp_bits, "exp_bits")
+    except TypeError:
+        return ZResult(False, "exp_bits must be an integer")
+    if not low <= exp_bits <= high:
+        return ZResult(False, f"exp_bits = {exp_bits} is outside the range of the {arithmetic} tier ({low} to {high})")
+    if max_entries is not None:
+        try:
+            max_entries = exact_int(max_entries, "max_entries")
+        except TypeError:
+            return ZResult(False, "max_entries must be an integer or None")
+    scale_bits, unary, pair = instance
+    if scale_bits > MAX_SCALE_BITS:
+        return ZResult(False, f"scale_bits = {scale_bits} is outside the supported range (at most {MAX_SCALE_BITS})")
     tables = ExactTables() if arithmetic == "exact" else FloatTables()
-    model, beta, keep = cert.model, cert.beta, cert.keep
-    n = model.n
-    unit = Fraction(1, 2 ** model.scale_bits)
+    beta, keep = cert.beta, cert.keep
+    n = len(unary)
+    unit = Fraction(1, 2 ** scale_bits)
+    largest = max((max(max(u), -min(u)) for u in unary), default=0)
+    for rows in pair.values():
+        largest = max(largest, max(map(max, rows)), -min(map(min, rows)))
+    if beta * largest * unit > MAX_EXPONENT:
+        return ZResult(False, f"beta times a table entry exceeds {MAX_EXPONENT}: outside the range this checker evaluates")
     stats = {"prune": 0, "relax": 0, "leaves": 0, "largest_table": 0}
     weight_cache = {}
 
@@ -93,7 +154,11 @@ def _check(cert: ZCertificate, arithmetic: str, max_entries, exp_bits: int) -> Z
         """Certified enclosure of exp(-beta * energy), as mantissa/exponent pairs (cached)."""
         hit = weight_cache.get(energy_int)
         if hit is None:
-            hit = weight_cache[energy_int] = exp_bounds_me(-beta * energy_int * unit, exp_bits)
+            q = -beta * energy_int * unit
+            if abs(q) > MAX_EXPONENT:
+                raise _Reject(f"beta times an entry of the working model exceeds {MAX_EXPONENT}: "
+                              f"outside the range this checker evaluates")
+            hit = weight_cache[energy_int] = exp_bounds_me(q, exp_bits)
         return hit
 
     def evaluate(node, D, H, J, nbrs):
@@ -118,7 +183,13 @@ def _check(cert: ZCertificate, arithmetic: str, max_entries, exp_bits: int) -> Z
                 margin = H[i][r] - H[i][t]
                 for j in nbrs[i]:
                     margin += min(pair_entry(i, j, r, s) - pair_entry(i, j, t, s) for s in D[j])
-                a_hi += exp_bounds(-beta * margin * unit, exp_bits)[1]      # ln(1 + rho) <= rho <= its upper enclosure
+                q = beta * margin * unit                # beta * m in nats; rho = exp(-q)
+                if q < MIN_PRUNE_EXPONENT:
+                    raise _Reject(f"prune step: beta times the margin is below {MIN_PRUNE_EXPONENT} (the dominator is "
+                                  f"far above the removed state on the box): outside the range this checker evaluates")
+                if q > PRUNE_EXPONENT_CAP:
+                    q = Fraction(PRUNE_EXPONENT_CAP)    # rho <= exp(-cap): the exponential is monotone
+                a_hi += exp_bounds(-q, exp_bits)[1]                         # ln(1 + rho) <= rho <= its upper enclosure
                 D[i].remove(r)
                 stats["prune"] += 1
             else:
@@ -135,9 +206,16 @@ def _check(cert: ZCertificate, arithmetic: str, max_entries, exp_bits: int) -> Z
                     H[j][b] += g[b]
                 nbrs[i].discard(j)
                 nbrs[j].discard(i)
-                a_lo += -beta * r_hi * unit
-                a_hi += -beta * r_lo * unit
+                lo_term, hi_term = -beta * r_hi * unit, -beta * r_lo * unit
+                if abs(lo_term) > MAX_EXPONENT or abs(hi_term) > MAX_EXPONENT:
+                    raise _Reject(f"relax step: beta times the residual range exceeds {MAX_EXPONENT}: "
+                                  f"outside the range this checker evaluates")
+                a_lo += lo_term
+                a_hi += hi_term
                 stats["relax"] += 1
+        if abs(a_lo) > MAX_EXPONENT or abs(a_hi) > MAX_EXPONENT:
+            raise _Reject(f"the accumulated logarithmic factor of a node's steps exceeds {MAX_EXPONENT}: "
+                          f"outside the range this checker evaluates")
 
         if node.get("branch") is not None:
             i = node["branch"]
@@ -185,20 +263,21 @@ def _check(cert: ZCertificate, arithmetic: str, max_entries, exp_bits: int) -> Z
             lows = dict(zip(D[keep], lo_list)) if keep is not None else {}
             stats["leaves"] += 1
 
-        f_lo = exp_bounds(a_lo, exp_bits)[0]
+        f_lo = exp_bounds(a_lo, exp_bits)[0]            # |a_lo|, |a_hi| <= MAX_EXPONENT (checked above)
         f_hi = exp_bounds(a_hi, exp_bits)[1]
         return z_lo * f_lo, z_hi * f_hi, {a: v * f_lo for a, v in lows.items()}, a_lo, a_hi
 
     D0 = [list(d) for d in cert.domains]
-    H0 = [[int(v) for v in u.tolist()] for u in model.unary]
-    J0 = {key: [[int(v) for v in row] for row in t.tolist()] for key, t in model.pair.items()}
-    nbrs0 = {i: set(model.neighbors(i)) for i in range(n)}
+    nbrs0 = {i: set() for i in range(n)}                # neighbours, derived here from the pair tables
+    for (i, j) in pair:
+        nbrs0[i].add(j)
+        nbrs0[j].add(i)
     try:
-        z_lo, z_hi, lows, a_lo, a_hi = evaluate(cert.root_node(), D0, H0, J0, nbrs0)
+        z_lo, z_hi, lows, a_lo, a_hi = evaluate(cert.root_node(), D0, unary, pair, nbrs0)
     except _Reject as exc:
         return ZResult(False, str(exc), stats=stats)
 
-    full_box = all(sorted(d) == list(range(k)) for d, k in zip(cert.domains, model.sizes))
+    full_box = all(sorted(d) == list(range(len(u))) for d, u in zip(cert.domains, unary))
     if z_lo <= 0:
         return ZResult(False, "abstained: the lower bound of the partition sum is not positive at this precision",
                        stats=stats)

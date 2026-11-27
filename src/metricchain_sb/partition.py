@@ -17,6 +17,12 @@ Heuristics (none of them is claimed to be good):
 `tau = None` and `theta = None` switch the two rules off; the result is then exact up to the
 width of the certified exponential.  The producer abstains (`PartitionBudgetExceeded`) when its
 order would create a table with more than `max_entries` entries.
+
+The claim stored in a certificate is `zcert.outward_claim` of the interval the checker computed
+when the certificate was made (both ends moved outward on the grid of `2**-20` nats), not that
+interval itself: the last digits of the interval depend on the tier and on `exp_bits`, which a
+file does not bind, and an honest certificate must be accepted whichever of them a checker uses
+(review STRUCTBIO-REV-0001, finding 12).
 """
 from __future__ import annotations
 
@@ -25,7 +31,7 @@ from fractions import Fraction
 import numpy as np
 
 from .model import PairModel
-from .zcert import ZCertificate
+from .zcert import ZCertificate, outward_claim
 from .zcheck import check_partition_certificate
 
 __all__ = ["certify_partition", "PartitionBudgetExceeded", "plan_order"]
@@ -204,7 +210,7 @@ def certify_partition(model: PairModel, beta: Fraction, domains=None, keep=None,
     result = check_partition_certificate(cert, arithmetic=arithmetic, max_entries=max_entries, exp_bits=exp_bits)
     if not result.accepted:
         raise PartitionBudgetExceeded(f"the checker did not accept the certificate: {result.reason}")
-    cert.claim = {"ln_z_lo": result.ln_z_lo, "ln_z_hi": result.ln_z_hi}
+    cert.claim = outward_claim(result.ln_z_lo, result.ln_z_hi)
     return cert
 
 
@@ -221,19 +227,40 @@ def weighted_model(model: PairModel, weights, beta: Fraction) -> PairModel:
     a stated volume (science division, SCI-REV-0026 F2 (c)); with shares that add up to one per
     site the sum is an average of `exp(-beta E)` over uniformly distributed torsions, i.e.
     `-ln Z_w / beta` is a free energy relative to non-interacting free rotors.
+
+    The rounded term is added in Python integers.  `ValueError` when a weight, `beta` or the
+    resulting shift is not a finite positive binary64 number, or when a weighted entry would be
+    `2**62` or more in absolute value (the limit below which `PairModel` and the instance files
+    hold a table as int64).
     """
     if len(weights) != model.n or any(len(w) != k for w, k in zip(weights, model.sizes)):
         raise ValueError("weights do not have the shape of the model's state sets")
     beta = Fraction(beta)
     if beta <= 0:
         raise ValueError("beta must be positive")
+    try:
+        beta_float = float(beta)
+    except OverflowError:
+        beta_float = float("inf")
+    if not (beta_float > 0.0 and np.isfinite(beta_float)):
+        raise ValueError("beta is outside the range of binary64")
     scale = 2 ** model.scale_bits
     unary = []
     for u, w in zip(model.unary, weights):
         if any(not (float(v) > 0.0) for v in w):
             raise ValueError("state weights must be positive")
-        shift = [int(round(-np.log(float(v)) / float(beta) * scale)) for v in w]
-        unary.append(np.asarray(u, dtype=np.int64) + np.asarray(shift, dtype=np.int64))
+        try:
+            shift = [-np.log(float(v)) / beta_float * scale for v in w]
+        except OverflowError:
+            raise ValueError("a state weight is outside the range of binary64 at this scale") from None
+        if not all(np.isfinite(x) for x in shift):
+            raise ValueError("a state weight gives a shift that is not finite")
+        # the sum is formed in Python integers (never in int64, which wraps without a word), and a
+        # table that leaves the range held as int64 by PairModel and by instance files is refused
+        row = [int(v) + int(round(x)) for v, x in zip(u.tolist(), shift)]
+        if any(abs(v) >= 2 ** 62 for v in row):
+            raise ValueError("a weighted one-body entry is 2**62 or more in absolute value: outside the supported range")
+        unary.append(row)
     meta = dict(model.meta)
     meta["state_weights"] = {"beta": str(beta), "note": "one-body tables carry -(1/beta) ln(weight), rounded to the grid"}
     return PairModel(unary, {k: np.asarray(t).copy() for k, t in model.pair.items()}, scale_bits=model.scale_bits, meta=meta)
