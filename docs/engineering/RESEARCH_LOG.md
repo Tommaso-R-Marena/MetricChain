@@ -534,7 +534,7 @@ there).  If the engineering branch gets a new commit, the archive is refreshed b
 commit into `pins.json`, running the script and committing — nothing else.  D-9 authorises that
 and item 1 below, and no research.
 
-**Added 2026-11-27, about 19:00 UTC (directive D-10: final collection and handoff).**  Item 1
+**Added 2026-11-27, about 18:45 UTC (directive D-10: final collection and handoff).**  Item 1
 below is **done**: both jobs are collected and closed (M-021 complete; M-016 one cell short —
 `u = 1`, `n = 32 000`, family "wide" has no row and was not restarted), the rows checked, the tables
 and the outcomes of the pre-registered hypotheses written up in

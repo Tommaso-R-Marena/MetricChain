@@ -22,7 +22,7 @@ the repaired code is not known.  (3) No other division had read ENG-RES-0019 or 
 halted: the structural-biology report still lists its two requests as unanswered, and the theory
 branch does not mention the run-time defect of the kernel.
 
-**Note added 2026-11-27 about 19:00 UTC (directive D-10: final collection); the report below is
+**Note added 2026-11-27 about 18:45 UTC (directive D-10: final collection); the report below is
 otherwise as written at the halt.**  (1) The two Modal jobs that §E, §G and §H describe as running
 are closed.  33 of their 34 cells are stored; the cell `u = 1`, `n = 32 000`, family "wide" of job
 M-016 has no row (restarted by the platform, stopped before it could return, not restarted).
