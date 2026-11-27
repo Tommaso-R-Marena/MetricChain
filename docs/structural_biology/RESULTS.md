@@ -325,6 +325,193 @@ for the expected failure of SB-BM-6 and says nothing about certificates.  (4) Un
 hydrogens still do not look for partners (F3 stands); a variant with hydroxyl torsions as states
 is open problem SB-OP-13.
 
+<!-- R10-13-BEGIN (tables generated from the result rows by a script; regenerate rather than edit) -->
+## R-10 — Leaving a rotamer well costs kcal/mol where leaving a state costs tenths; an entrywise table error of 0.01 kcal/mol already defeats optimality (development evidence, model v2)
+
+*Kind:* development.  *Experiment:* SB-X-006, `experiments/structbio/wellgaps_dev/run.py`
+(software `41fa668`; expectations H6a–H6d written in that commit, before any run); rows in
+`wellgaps_dev/results.jsonl`.  Every number is a certified minimum of a restricted box or of a
+shifted table ([CK]); the two constructions are the science division's (SCI-REV-0026 §0, §4).
+Energies in kcal/mol; `RT` = 0.593.  Ubiquitin was not run (about 300 certified minimisations
+of about 45 s each; not started because of the consolidation directive of 2026-11-27).
+
+*Does the certified minimiser minimise every table whose entries lie within `b` of ours?*
+("no (m; k)": a certified counterexample exists whose worst-scenario energy is `m` below the
+minimiser's, with `k` sites in another well.)
+
+| PDB | sites | b = one unit (9.5·10⁻⁷) | b = 0.001 | b = 0.01 | b = 0.1 |
+|---|---|---|---|---|---|
+| 1CRN | 26 | yes | yes | no (-1.71; 0) | no (-51.86; 3) |
+| 5PTI | 36 | yes | no (-0.10; 0) | no (-7.20; 6) | no (-111.70; 14) |
+| 1BPI | 36 | yes | no (-0.11; 1) | no (-4.54; 4) | no (-100.72; 12) |
+| 1PGA | 46 | yes | no (-0.10; 0) | no (-9.30; 8) | no (-181.83; 18) |
+| 2IGD | — | yes | no (-0.53; 3) | no (-14.90; 5) | no (-215.33; 9) |
+| 1UBQ | — | not run | not run | not run | not run |
+
+*Gaps at `b = 0`, and the number of sites whose well is kept by every minimiser of every table
+within `b`* (a sufficient condition: comparison against the minimiser alone):
+
+| PDB | sites | state gap: smallest / median | well gap: smallest / median | sites with well gap below RT / 3RT | wells kept in every table within b = 0.001 / 0.01 / 0.1 |
+|---|---|---|---|---|---|
+| 1CRN | 26 | 0.0589 / 0.80 | 0.569 / 4.74 | 1 / 6 | 26 / 20 / 6 |
+| 5PTI | 36 | 0.0343 / 0.50 | 0.096 / 3.78 | 9 / 16 | 35 / 11 / 4 |
+| 1BPI | 36 | 0.0023 / 1.39 | 0.033 / 4.99 | 6 / 10 | 33 / 18 / 5 |
+| 1PGA | 46 | 0.0438 / 0.80 | 0.096 / 3.28 | 6 / 18 | 44 / 14 / 3 |
+| 2IGD | — | not run or not finished | | | |
+| 1UBQ | — | not run or not finished | | | |
+
+No gap certificate abstained or was rejected (0 of the rows).
+
+**Expectations against outcome.**  H6a (necessarily optimal at one table unit everywhere):
+met on the five structures run.  H6b (nowhere at 0.01): met.  H6c (at 0.01 at least half of
+the sites of every structure keep their well; at 0.1 fewer than half): first half **wrong**
+for 5PTI and 1PGA, second half met.  H6d (median well gap above `RT` — met, 3.3 to 5.0 — while
+the median state gap is below it): second half **wrong** except for 5PTI.
+
+**What it shows.**  (1) The reading the science division proposed is borne out: the model
+determines *wells* much more firmly than *states* — the median cost of leaving a well is 3.3
+to 5.0 kcal/mol where the median cost of leaving a state is 0.5 to 1.4 — yet 1 to 9 sites per
+structure can change well for less than `RT`.  (2) With one table unit of error (which covers
+the rounding of the tables and the observed evaluation error) the certified minimiser is the
+minimiser of every such table: the sentence "the published model is the rounded tables" is no
+longer needed for these five instances — under an evaluation-error bound that is observed, not
+proved.  (3) At `b = 0.01` kcal/mol per entry no minimiser survives and a third to a half of
+the wells are no longer certified; at 0.1 almost none.  A realistic force-field error is
+orders of magnitude larger.  **The certified minimiser is the minimiser of the published
+integers and of nothing near them** (the science division's sentence; DEAD_ENDS SB-D-E-09).
+
+## R-11 — On the weighted library-only table of model v2, crambin's `ln Z` is enclosed to 0.0075 nats and every residue's rotamer populations to 0.024 (development evidence)
+
+*Kind:* development.  *Experiment:* SB-X-004 with the default `--model v2-lib` (software
+`d61fc53`/`7722963`; expectations H7a–H7c written in the driver before the first run).  The
+object: `Z_w = Σ_x Π_i w_i(x_i) exp(−β E(x))` over library states only, each state weighted by
+its share of the residue's torsion space; `−ln Z_w / β` is a free energy relative to
+non-interacting free rotors — of this table, in vacuo, with rigid idealised rotamers.
+`β = 1000/593` per kcal/mol; pruning margin 12 kcal/mol.  Label [CK] (float tier: under F1–F3).
+
+| threshold (kcal/mol) | tier | leaves | largest table | certified `ln Z_w` | width (nats) | time (s) |
+|---|---|---|---|---|---|---|
+| 1 | exact | 1 | `4.8e+03` | [-77.8219, -65.6855] | 12.1364 | 6.4 |
+| 1 | float | 1 | `4.8e+03` | [-77.8219, -65.6855] | 12.1364 | 0.5 |
+| 0.3 | float | 1 | `3.9e+04` | [-73.5510, -68.7337] | 4.8173 | 0.6 |
+| 0.1 | float | 1 | `1.2e+05` | [-72.3708, -69.8253] | 2.5455 | 0.7 |
+| 0.03 | float | 1 | `1.2e+05` | [-71.6339, -70.6393] | 0.9945 | 0.8 |
+| 0.01 | float | 19 | `3.5e+05` | [-71.3082, -70.9936] | 0.3145 | 2.8 |
+| 0.003 | float | 29 | `7.3e+05` | [-71.1844, -71.1253] | 0.0590 | 7.0 |
+| 0.001 | float | 29 | `2.2e+06` | [-71.1649, -71.1408] | 0.0241 | 18.0 |
+| 0.0003 | float | 145 | `2.8e+06` | [-71.1574, -71.1499] | 0.0075 | 64.8 |
+
+(Threshold 0.0001 did not finish in the 417 s left to that command.)  The exact tier's
+interval at threshold 1 lies inside the float tier's.  H7a (width below 1 nat at 0.01 and
+below 0.3 at 0.003) and H7b are met; H7c: 118 of 354 states survive pruning (model v1: 147 of
+380).  The library-only table is far cheaper than v1's (0.059 nats in 7 s against 0.137 nats
+in 91 s) because its strained states are pruned.
+
+**Certified populations, threshold 0.001, all 26 residues** (26 certificates,
+782 s in total on one core; interval widths 0.020 to 0.024):
+
+| residue | most populated state: certified population | deposited well: certified population | residue | most populated state | deposited well |
+|---|---|---|---|---|---|
+| Thr1 | [0.976, 1.000] | [0.976, 1.000] | Thr2 | [0.977, 1.000] | [0.000, 0.023] |
+| Ser6 | [0.939, 0.961] | [0.939, 0.961] | Ile7 | [0.977, 0.998] | [0.977, 0.998] |
+| Val8 | [0.979, 1.000] | [0.979, 1.000] | Arg10 | [0.978, 1.000] | [0.978, 1.000] |
+| Ser11 | [0.905, 0.927] | [0.073, 0.095] | Asn12 | [0.970, 0.991] | [0.970, 0.991] |
+| Phe13 | [0.977, 1.000] | [0.977, 1.000] | Asn14 | [0.837, 0.859] | [0.837, 0.859] |
+| Val15 | [0.976, 1.000] | [0.976, 1.000] | Arg17 | [0.789, 0.812] | [0.000, 0.000] |
+| Leu18 | [0.875, 0.895] | [0.875, 0.895] | Thr21 | [0.976, 1.000] | [0.976, 1.000] |
+| Glu23 | [0.452, 0.474] | [0.452, 0.474] | Ile25 | [0.979, 0.999] | [0.001, 0.021] |
+| Thr28 | [0.813, 0.834] | [0.813, 0.834] | Tyr29 | [0.976, 1.000] | [0.976, 1.000] |
+| Thr30 | [0.976, 1.000] | [0.976, 1.000] | Ile33 | [0.979, 1.000] | [0.979, 1.000] |
+| Ile34 | [0.979, 1.000] | [0.979, 1.000] | Ile35 | [0.976, 1.000] | [0.976, 1.000] |
+| Thr39 | [0.980, 1.000] | [0.980, 1.000] | Asp43 | [0.648, 0.669] | [0.014, 0.036] |
+| Tyr44 | [0.976, 1.000] | [0.976, 1.000] | Asn46 | [0.858, 0.879] | [0.858, 0.879] |
+
+25 of 26 residues have one state whose population is certified above 0.5; for 20 of 26 the
+deposited rotamer well is certified above 0.5; for four (Thr2, Arg17, Ile25, Asp43) the
+deposited well is certified below 0.05.  **What this is:** the first complete table of
+guaranteed population intervals this project has for a deposited structure — a property of
+the weighted table of a vacuum model with rigid ideal rotamers.  **What it is not:** a
+statement about crambin; the science division measured that a rigid-rotamer table misplaces
+populations by up to 0.48 in total variation against continuous torsions of the same energy
+(SCI-REV-0025 §3), twenty times the width certified here.  Known weakness of the interval
+itself: its width is the same for every state (about `1 − exp(−w)`); a ratio bound that uses
+per-state upper ends would shrink it to about `2w·p(1−p)` (not implemented; HANDOFF).
+
+## R-12 — The null method: on every development instance the dual bound alone certifies the exact minimum (development evidence)
+
+*Kind:* development; baseline asked for by the Frontier division (FRONTIER-MSG-0001 §4 (a)) and
+the science division (SCI-REV-0026 §7.2).  *Experiment:* SB-X-007,
+`experiments/structbio/nullmethod_dev/run.py` (software `7722963`; expectation written there
+before the run: exact for at least four of six structures in each variant).  A certificate
+that is **one leaf on the full box** — the exact dual bound of the pairwise relaxation, no
+dead-end elimination, no search — checked by the same checker.
+
+| PDB | sites | `v2`: one leaf certifies the exact minimum? (s) | `v2-lib` (s) |
+|---|---|---|---|
+| 1CRN | 26 | yes (0.3) | yes (0.4) |
+| 5PTI | 36 | yes (2.0) | yes (3.2) |
+| 1BPI | 36 | yes (3.5) | yes (2.0) |
+| 1PGA | 46 | yes (3.8) | yes (4.0) |
+| 2IGD | 49 | yes (9.1) | yes (4.4) |
+| 1UBQ | 65 | yes (35.9) | yes (26.9) |
+
+**What it shows, plainly.**  The basic linear relaxation is tight on all twelve development
+instances (integrality gap zero: the number the Complexity division asked for).  On these
+instances the eliminations and the search of our producer are unnecessary, and a certificate
+is, in substance, one exact dual solution of a linear programme — established technology, as
+the Frontier division's negative result N-5 says.  This agrees with Yanover, Schueler-Furman
+and Weiss (2008): a relaxation found the optimum for about 85 % of a standard side-chain set.
+It does not extend to larger instances: on the ten public instances of the Frontier pilot
+(337 to 1 972 residues; their exploratory run of our software at `1756529`) the four
+certificates contained 0, 1, 2 and 39 branch nodes and six runs abstained within 300 s.
+
+## R-13 — Which regime the instances are in: the quantity that matters is `max_i β c_i`, and no threshold makes both parts tractable beyond crambin (exploratory measurement)
+
+*Kind:* exploratory; asked for by the Complexity division (COMPLEXITY-RES-0010).
+*Experiment:* SB-X-008, `experiments/structbio/regime_dev/run.py` (software `627a860`).
+Weighted library-only tables of v2 after thermal pruning (margin 12 kcal/mol); a pair is
+"weak" at a threshold if the oscillation `o_e` of its non-additive part is at most the
+threshold; `c_i` is the sum of `o_e` over the weak pairs at site `i`.  The last-but-one column
+is `(β²/8) Σ_i c_i²`: what a site-wise second-order bound would give **at best** (product
+reference, unit influence) — an indicator; nothing of the kind is implemented or certified.
+
+| PDB | sites | states after pruning (before) | threshold | weak / exact pairs | `β Σ o_e` (nats) | `max_i β c_i` | site-wise second-order indicator (nats) | largest table of the exact part (log₁₀ entries) |
+|---|---|---|---|---|---|---|---|---|
+| 1CRN | 26 | 118 (354) | 1 | 309 / 16 | 12.14 | 5.83 | 7.983 | 3.7 |
+| 1CRN | 26 | 118 (354) | 0.1 | 294 / 31 | 2.55 | 0.55 | 0.219 | 5.1 |
+| 1CRN | 26 | 118 (354) | 0.01 | 254 / 71 | 0.30 | 0.08 | 0.003 | 7.7 |
+| 5PTI | 36 | 321 (1116) | 1 | 571 / 59 | 39.07 | 8.55 | 35.889 | 5.1 |
+| 5PTI | 36 | 321 (1116) | 0.1 | 524 / 106 | 10.88 | 1.27 | 2.203 | 10.0 |
+| 5PTI | 36 | 321 (1116) | 0.01 | 366 / 264 | 1.09 | 0.14 | 0.021 | 17.3 |
+| 1BPI | 36 | 330 (1116) | 1 | 567 / 63 | 46.66 | 9.32 | 50.309 | 4.9 |
+| 1BPI | 36 | 330 (1116) | 0.1 | 505 / 125 | 11.31 | 1.32 | 2.219 | 9.8 |
+| 1BPI | 36 | 330 (1116) | 0.01 | 326 / 304 | 1.01 | 0.12 | 0.019 | 19.9 |
+| 1PGA | 46 | 345 (921) | 1 | 961 / 74 | 68.10 | 7.13 | 70.114 | 4.1 |
+| 1PGA | 46 | 345 (921) | 0.1 | 870 / 165 | 19.21 | 1.58 | 4.835 | 12.6 |
+| 1PGA | 46 | 345 (921) | 0.01 | 577 / 458 | 2.28 | 0.17 | 0.067 | 22.4 |
+| 2IGD | 49 | 380 (978) | 1 | 1108 / 68 | 59.22 | 7.04 | 53.406 | 6.1 |
+| 2IGD | 49 | 380 (978) | 0.1 | 1019 / 157 | 15.98 | 1.70 | 3.656 | 12.5 |
+| 2IGD | 49 | 380 (978) | 0.01 | 787 / 389 | 2.47 | 0.17 | 0.079 | 21.8 |
+| 1UBQ | 65 | 684 (1698) | 1 | 1926 / 154 | 110.21 | 10.56 | 131.120 | 12.0 |
+| 1UBQ | 65 | 684 (1698) | 0.1 | 1768 / 312 | 33.55 | 2.25 | 10.615 | 24.1 |
+| 1UBQ | 65 | 684 (1698) | 0.01 | 1283 / 797 | 3.86 | 0.20 | 0.129 | 37.6 |
+
+**Reading.**  (1) The first-order width our relaxation loses is `β Σ o_e`; a second-order
+bound could replace it by something like the indicator only where `max_i β c_i` is below one
+— on these tables at thresholds of 0.1 kcal/mol or less.  There the indicator is 5 to 30
+times smaller than the first-order width.  (2) But at those thresholds the *exact* part needs
+elimination tables of `10¹⁰` to `10³⁸` entries for everything larger than crambin.  For
+ubiquitin there is no threshold at which the exact part is tractable and the weak part small:
+at 1 kcal/mol the exact part needs `10¹²` entries and the weak part loses 110 nats at first
+order and no less at second (`max β c_i` = 10.6).  (3) So the obstruction to certified
+partition functions of whole proteins under this dense vacuum model is the width of the
+strongly coupled part, not the order of the bound on the weak part (the Complexity division's
+Theorem 2 says which regime no certificate format can reach).  A model with a cutoff or
+screened electrostatics would have a sparser strong graph; that is a different model
+(SB-OP-11) and was not tried.
+
+<!-- R10-13-END -->
+
 ---
 
 ## Withdrawn or corrected statements

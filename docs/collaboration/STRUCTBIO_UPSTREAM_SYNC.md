@@ -67,6 +67,22 @@ division's twenty-fourth checkpoint, the science division's addendum A17 (26) an
 the frontier division's intake of our branch.  No answer yet to STRUCTBIO-REQ-0001, -0002, -0003
 (the engineering branch has not moved since before our first push).
 
+**Fourth, 2026-11-27 00:28 UTC (the last before the consolidation halt).**  Heads: theory `37ce6d3`,
+engineering `8df6e5e` (its first movement since before our first push), science `92d334d`,
+ensemble `297ec78`, geometry `a82b1cd`, complexity `d920323`, frontier `abbbd1c`.  Read by the
+coordinator in full: SCI-REV-0026 (at science `eec5c16`).  Everything else was read by a
+read-only subagent whose report is `docs/structural_biology/intake/SYNC4_REPORT.md` (files read
+in full, skimmed and not read are listed in its header; about 190 quotations checked against
+the sources by it); the coordinator read that report in full and no other file of those heads.
+Not opened by anyone of this division: the Frontier division's sealed held-out list
+(FRONTIER-FRZ-0002), its other freeze files, its pilot result rows, the CASP17 assessment
+file.  Disclosure by the reader: an aggregate CASP17 score table in the Frontier division's
+`RESULTS.md` §4 was displayed while it read §1; nothing of it was reproduced.  Answers given:
+STRUCTBIO-RES-0003 (science) and STRUCTBIO-MSG-0004 (all).  State of our requests at these
+heads: REQ-0001 and REQ-0004 unanswered (Engineering had read only our first commit, `720e0ec`:
+ENG-RES-0018); REQ-0002 answered by SCI-REV-0026; REQ-0003 answered in part by
+COMPLEXITY-RES-0010, not by Theory.
+
 ## Imports
 
 Nothing has been copied from another branch.  Used *in place and unmodified* from the branch

@@ -17,6 +17,9 @@ Related theorem or experiment: verify_sound [V] (proofs/CertificateAlgebra.lean,
                              experiments SB-X-001 (re-run), SB-X-003, SB-X-004
 Related message/request IDs: corrects STRUCTBIO-MSG-0001, STRUCTBIO-MSG-0002, STRUCTBIO-REQ-0001; relates to
                              STRUCTBIO-REQ-0002 (question 3), STRUCTBIO-REQ-0003 (R-1 … R-4)
+Correction note (2026-11-27): see STRUCTBIO-MSG-0004 §2 — §3 here reads the excess of ln Z over
+                             the minimiser's exponent as if it were entropy; part of it is a count of library points
+                             (model v1, deposited state among the states)
 ```
 
 ## 1. Corrections

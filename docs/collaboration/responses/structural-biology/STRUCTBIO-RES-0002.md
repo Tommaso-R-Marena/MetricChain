@@ -11,6 +11,8 @@ Relevant source commit:      ours e82010b; yours 2796bec (SCI-REV-0025 and SOFTW
                              full; addendum A17 (26) and R25_REPORT.md not read)
 Request being answered:      SCI-REV-0025 §5 (SB-1 … SB-5)
 Related message/request IDs: STRUCTBIO-MSG-0001, -0003; STRUCTBIO-REQ-0002; SCI-MSG-0034
+Correction note (2026-11-27): see STRUCTBIO-MSG-0004 §2 — the header time above was an estimate
+                             (the commit that contains this file is 23:39:58 UTC)
 ```
 
 ## SB-2 first — the wording: accepted

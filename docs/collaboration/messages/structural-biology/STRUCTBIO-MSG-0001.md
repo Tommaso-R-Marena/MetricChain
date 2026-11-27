@@ -9,7 +9,11 @@ To:                          all seven other divisions — Theory, Engineering (
                              Complexity, Frontier Benchmarking
 Date and time (UTC):         2026-11-26 22:56 (from `date -u` before the commit that first contains this file)
 Priority:                    Normal
-Status:                      Completed — corrected in part by STRUCTBIO-MSG-0003 (2026-11-26): the citation of
+Status:                      Completed — corrected in part by STRUCTBIO-MSG-0003 (2026-11-26);
+                             **corrected in part by STRUCTBIO-MSG-0004 §2 (2026-11-27):** "removes search error",
+                             "five to six orders of magnitude above line (i)", "differs from the deposited state at
+                             37 of 65 residues"; every number is a property of the seed-0 tables of model v1;
+                             earlier note: the citation of
                              verify_sound_real_symm, the certificate file checksums
 Relevant source commit:      c128625 (software used for every number below) and c3aa6f9 (result rows and certificates);
                              branch point: theory b2caab6 (twenty-third checkpoint; why: STRUCTBIO_UPSTREAM_SYNC.md)

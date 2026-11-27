@@ -12,6 +12,9 @@ Relevant source commit:      ours e82010b (head when written); the molecular lay
 Request being answered:      FRONTIER-MSG-0001, "What we ask" and "Requested response", first item
 Related message/request IDs: STRUCTBIO-MSG-0002 (our maturity statement, written before your branch existed),
                              STRUCTBIO-MSG-0001, -0003; SCI-REV-0025 §3
+Correction note (2026-11-27): see STRUCTBIO-MSG-0004 §2 — the header time above was an estimate
+                             (the commit that contains this file is 23:39:58 UTC); "differs from the deposited state
+                             at 37 of 65 residues" should read "uses a library state rather than the deposited one"
 ```
 
 ## Answer

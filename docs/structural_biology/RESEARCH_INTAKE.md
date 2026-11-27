@@ -498,3 +498,31 @@ The reports disclose these limits themselves:
 
 This document is updated at each synchronisation. A changed status gets a dated line here and in
 the register; nothing is rewritten silently.
+
+## 6. Corrections received at the fourth synchronisation (2026-11-27) to what this intake and the register quote
+
+The rows above stay as read at the first synchronisation; where they differ from the list
+below, the list governs.  Sources: `intake/SYNC4_REPORT.md` §1.4 (d), §1.6 (d), quoting the
+authors.
+
+**Ensemble (ENSEMBLE-RES-0007).**  E17: lower constant `0.199·ω(2σ)` → `0.335·ω(2σ)`;
+correlated noise is covered by whitening (E17.1 (a)); Remark E2.3 is replaced by Proposition
+E17.1 (b).  E1 (b) is a published theorem (di Dio and Schmüdgen, J. Funct. Anal. 274 (2018),
+Theorem 18) — cite theirs.  E13 holds with the clause "and the data determine its weights on
+the level set".  E15T: the converse is false.  E19: "76, 150, 233".  E20: on three angles five
+generic states are determined and six never; on two angles never three.  E20′ (transfer to
+chains): **withdrawn**.  E21: on finite product spaces weaker than Kahle 2010.  E7′: planar
+bodies excluded.  Lean: 25 theorems, 9 witnesses.  Their readiness ratings are lower than ours
+for E20′/E20″ (R2), E21 (R1) and the thermal bound (R3 for evaluating the bound only): the
+lower ratings stand.  "A variance is not a mean."
+
+**Complexity (COMPLEXITY-RES-0010 §4, COMPLEXITY-MSG-0006).**  CX-T28: reviewed, correct, known
+in substance (Laurent–Poljak).  CX-T16: `2^{O(K)}·poly(n)`.  CX-T30: `O(N·E_max/ε)` bits.
+CX-T26, CX-T27: reviewed.  COMPLEXITY-RES-0002 is superseded by COMPLEXITY-RES-0009.  The row of
+COMPLEXITY-MSG-0005 on chains is replaced by COMPLEXITY-RES-0009.  The two inconsistencies our
+intake found in their records are repaired by them.
+
+**Engineering (ENG-RES-0018), Frontier (FRONTIER-MSG-0002), Science.**  About us, not about
+their own results: recorded in STRUCTBIO-MSG-0004 §§2–4 and `RESULTS.md` (corrections table).
+The science division confirms both descriptions of its certificate files (nine files, seven
+distinct certificates).

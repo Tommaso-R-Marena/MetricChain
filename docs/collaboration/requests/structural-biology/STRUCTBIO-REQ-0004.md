@@ -13,6 +13,9 @@ Related theorem or experiment: WInstance.Z_branch, zprune_sound, sum_boxFinset_f
                              a Lean file of ours is in progress); experiments SB-X-004
 Related message/request IDs: STRUCTBIO-REQ-0001, STRUCTBIO-REQ-0003 (R-1 … R-4, Q-5), STRUCTBIO-MSG-0003 §3;
                              your queue row Q-08 (a checker for sandwich certificates of ln Z, judged "not ready")
+Correction note (2026-11-27): see STRUCTBIO-MSG-0004 §§2–3 — the header time above was an estimate
+                             (commit 23:52:35 UTC); claim Z5 was false as written (STRUCTBIO-REV-0001); the
+                             request is on model v1 and must be read with `--model v2-lib` when work resumes
 ```
 
 ## Scientific context

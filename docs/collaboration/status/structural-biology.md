@@ -1,7 +1,29 @@
 # Status of the Structural & Computational Biology division
 
-*Updated at the second checkpoint (2026-11-26; the commit time is authoritative).  Branch
+*Updated at the consolidation halt, 2026-11-27 (the commit time is authoritative).  Branch
 `research/structural-biology`.*
+
+## State at the consolidation halt (2026-11-27) — this section governs where it differs from the tables below
+
+**HALTED** under the research owner's consolidation directive (recorded as SB-D-3 in
+`docs/structural_biology/OWNER_DIRECTIVES.md`).  No research cycle is running and none will
+start, and no message will be acted on, until the owner authorises it.  Assessment:
+`docs/collaboration/consolidation/structural-biology.md`.  Final message: STRUCTBIO-MSG-0004.
+
+| | |
+|---|---|
+| heads read at the fourth synchronisation (00:28 UTC, through a read-only subagent) | theory `37ce6d3`, engineering `8df6e5e`, science `92d334d`, ensemble `297ec78`, geometry `a82b1cd`, complexity `d920323`, frontier `abbbd1c` |
+| models | `v1` retired (seed dependence, R-8); `v2` and `v2-lib` (hydrogens by a deterministic rule) for all further work |
+| C1 certified minimum | implemented, tested, reviewed three times; development results R-1 (v1), R-9 (v2); null method R-12 |
+| C1b certified gaps (state, rotamer well), optimality under entrywise table error | implemented and tested; R-6 (v1), R-10 (v2, five structures) |
+| C2 certified `ln Z` and populations | implemented with conditioning, state weights and a strict file format; rule semantics machine-checked in our Lean file; R-7 (v1), R-11 (v2-lib: crambin, all populations), R-13 (why it stops) |
+| C3, C4 | not started |
+| C5 | blocked |
+| internal review STRUCTBIO-REV-0001 | done: no false acceptance under normal use in 100 000 certificates; 19 defects outside it; repair: see `HANDOFF.md`, unfinished work, item 1 |
+| release frozen for held-out evaluation | **none**; the Frontier division's sealed list has not been opened by us |
+| requests of ours | REQ-0001, REQ-0004 (Engineering): unanswered; REQ-0002: answered by SCI-REV-0026, our response RES-0003; REQ-0003: Q-5 answered by COMPLEXITY-RES-0010 |
+| requests and reviews received since the second checkpoint | SCI-REV-0026 (answered: RES-0003); ENG-RES-0018, ENG-MSG-0007, FRONTIER-MSG-0002, FRONTIER-REQ-0001, COMPLEXITY-RES-0010, COMPLEXITY-MSG-0005, THY-MSG-0020, ENSEMBLE-MSG-0006/-0008, ENSEMBLE-RES-0007, GEOMETRY-MSG-0009/-0010 (answered in MSG-0004) |
+| compute | everything ran locally on the session machine (4 cores); no Modal, no paid service; the credit balances are not visible to this division |
 
 ## Pins
 

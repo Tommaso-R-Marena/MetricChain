@@ -2,7 +2,44 @@
 
 Newest entry first.  "Resume here" is the recovery point for a successor.
 
-## Resume here (state at the second checkpoint, 2026-11-26 about 23:40 UTC)
+## Resume here (state at the consolidation halt, 2026-11-27)
+
+**The division is halted by the owner's directive SB-D-3.  Do nothing without explicit
+authorisation.**  When authorised, in this order: (1) read
+`docs/collaboration/consolidation/structural-biology.md` and `HANDOFF.md` ("Unfinished work");
+(2) run the three verification commands of `HANDOFF.md`; (3) fetch the other seven branches
+and read what answers STRUCTBIO-MSG-0004, -RES-0003, -REQ-0001, -REQ-0004 (never the Frontier
+division's sealed list); (4) take the owner's decision on which of the three recommended
+actions (consolidation report §E) to pursue.  Environment of the session machine, which a new
+machine will not have: Python environment `~/.venvs/structbio` (rebuild from
+`requirements-structbio.txt`); Lean 4.31.0 under `~/.lean/` with Mathlib v4.31.0 in `.lake/`
+(`lake exe cache get`).
+
+## 2026-11-27 — third cycle and consolidation (about 23:45 UTC on 26 November to the halt)
+
+- Crambin on v1 with conditioning: `ln Z` to 0.054 nats; request STRUCTBIO-REQ-0004; defect
+  SB-DEF-08 (rows recorded the head at row time).
+- SCI-REV-0026 arrived (adversarial review by Science).  Its major finding F1 was measured
+  with the reading committed first (SB-X-005): the seed of model v1 moves the certified
+  minimum by 12.8 to 24.6 kcal/mol.  Model v2 written test-first (deterministic hydrogens;
+  wells; shares of torsion space); development set re-run on `v2` and `v2-lib` (R-9); two of
+  our five expectations were wrong and are recorded.
+- The science division's two constructions implemented and run (well gaps; optimality under
+  entrywise error): R-10.  State weights for C2; crambin on `v2-lib`: `ln Z_w` to 0.0075 nats,
+  populations of all residues to 0.024 (R-11).  Null method (R-12): the relaxation is tight on
+  all twelve development instances.  Regime quantities for Complexity (R-13).
+- Lean subagent delivered 19 theorems for the Z rules; verified by our own build and audit;
+  the theory division's audit file left untouched.
+- A container restart at about 00:25 UTC killed two background jobs; files survived; the jobs
+  were re-run.
+- Fourth synchronisation through a read-only subagent (`intake/SYNC4_REPORT.md`): Engineering's
+  review of our first commit, Frontier's sealed list and pilot, Complexity's answer to Q-5.
+- Adversarial reviewer closed STRUCTBIO-REV-0001: 19 findings; a fixer subagent was started on
+  them; then the owner's consolidation directive arrived.  Stopped: everything listed in
+  `OWNER_DIRECTIVES.md` SB-D-3 ("How this division applied it").  Written: results R-10 … R-13,
+  STRUCTBIO-RES-0003, STRUCTBIO-MSG-0004, the consolidation assessment, this handoff.
+
+## Resume here as it stood at the second checkpoint (2026-11-26 about 23:40 UTC; superseded)
 
 1. **Branch** `research/structural-biology`, created at theory `b2caab6`; nothing merged from
    anywhere.  Directives: `OWNER_DIRECTIVES.md` (SB-D-1 founding, SB-D-2 eighth division).

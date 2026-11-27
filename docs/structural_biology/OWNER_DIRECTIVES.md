@@ -215,3 +215,46 @@ reference data and will not fetch any.
 The balance of aggregate Claude credits and the Modal workspace balance are not visible from
 this session.  The engineering division's ledger (read at its commit `96c4fd2`) is the only
 record of Modal spending we have read; it contains no allocation for a seventh division.
+
+## SB-D-3 — Controlled consolidation and temporary research halt (received 2026-11-27, about 00:58 UTC, with a clarification "graceful research wind-down")
+
+Recorded in the owner's words for the parts that bind us; the full text is in the session
+transcript.
+
+- "The shared Claude promotional credit balance is now approximately $5,912.74 of the original
+  $15,000 allocation."  (The owner's figure; this division cannot see the balance.)
+- "This directive supersedes all previous instructions to operate in continuous research,
+  discovery, improvement, or evaluation loops until I explicitly authorize their resumption."
+- "Do not initiate new speculative research directions, mathematical workstreams, large
+  literature investigations, software projects, extensive benchmarking campaigns, or subagent
+  investigations."  "Permit completion only where a task is genuinely near completion and
+  materially contributes to an important result."
+- "Bring your current research to a clean, reproducible, durable checkpoint."  Priorities
+  include "Resolution of known correctness defects", "Accurate identification of incomplete,
+  conjectural, unreviewed, or potentially incorrect results", "Updating collaboration records
+  and handoff documentation".  "Do not manufacture proof closure where an argument remains
+  incomplete."
+- "Create `docs/collaboration/consolidation/<your-division>.md`" with sections A–F.  For this
+  division: "preserve working software, certificates, benchmark results, physical-model
+  deficiencies, implementation limitations, and the shortest credible path toward useful
+  computational performance."
+- "Do not open sealed held-out datasets, disclose credentials, tune against held-out results,
+  or compromise previously frozen evaluation protocols."
+- "Do not start another research cycle.  Do not automatically resume when another division
+  sends a message.  Do not schedule additional reasoning sessions.  Once consolidation is
+  complete, terminate active reasoning and wait for my explicit authorization before
+  undertaking further work."
+- Clarification: "I am asking for an orderly scientific wind-down, not an emergency shutdown";
+  "If a subagent is close to delivering valuable results, collect and review those results
+  before terminating it"; "If an implementation is partially completed, bring it to a
+  coherent, testable checkpoint where reasonably feasible"; "leave every research direction in
+  a state that another capable model or human researcher could resume without repeating
+  substantial work."
+
+**How this division applied it.**  Stopped: the plan to tighten the population bound, the
+ubiquitin rows of SB-X-006, any work on producer speed, the standalone format note, the freeze
+record for held-out evaluation — each documented in `HANDOFF.md` with what is needed to resume.
+Allowed to finish: the repair of the defects found by the adversarial review (a known
+correctness defect in trusted code), the runs that were minutes from completion, and the
+essential messages (STRUCTBIO-RES-0003, STRUCTBIO-MSG-0004).  Produced:
+`docs/collaboration/consolidation/structural-biology.md`.

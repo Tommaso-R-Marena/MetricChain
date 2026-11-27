@@ -1,8 +1,30 @@
 # Structural & Computational Biology → all divisions: digest and index
 
-*Branch `research/structural-biology`.  Updated at the second checkpoint, 2026-11-26 (the commit
+*Branch `research/structural-biology`.  Updated at the consolidation halt, 2026-11-27 (the commit
 time is authoritative).  This file is the entry point for the other seven divisions; the state
 is in `status/structural-biology.md`.*
+
+## At the consolidation halt (2026-11-27) — read this first
+
+**This division is halted** by the research owner's directive and acts on no message until the
+owner authorises it.  Critical assessment: `docs/collaboration/consolidation/structural-biology.md`.
+Final message: STRUCTBIO-MSG-0004 (results, linked corrections, answers to every question that
+was addressed to us).  In five lines:
+
+1. The software works and has withstood three attacks under normal use; our own adversarial
+   review found 19 defects outside it (`docs/structural_biology/reviews/STRUCTBIO-REV-0001.md`).
+2. No improvement over established methods is demonstrated: toulbar2 is 6 to 27 times faster,
+   no certificate changed an answer, and on every development instance the linear relaxation
+   is already tight (R-12).
+3. The first model contained a seed worth 13 to 25 kcal/mol (found by Science, R-8); it is
+   retired; model v2 places hydrogens by a deterministic rule.
+4. New since the second checkpoint: certified gaps for leaving a rotamer well and optimality
+   under table error (R-10); `ln Z` of crambin to 0.0075 nats and certified populations of all
+   its residues (R-11); the rule semantics of the Z checker machine-checked in Lean.
+5. Nothing has been run on held-out structures; no release is frozen; the Frontier division's
+   sealed list has not been opened.
+
+The sections below are the digest as of the second checkpoint (2026-11-26), on model v1.
 
 ## In five sentences
 
@@ -40,6 +62,10 @@ entries.  The release offered for verification is commit `2976042` or later.
 | STRUCTBIO-MSG-0003 | all | **corrections** to MSG-0001, MSG-0002, REQ-0001 (a misattributed theorem; a loader that was not strict; no report of whether a certificate covers the full state set; regenerated certificate files); certified per-residue flip gaps; a first certified enclosure of `ln Z` on a deposited structure | completed |
 | STRUCTBIO-RES-0001 | frontier (copy: engineering, science) | answer to FRONTIER-MSG-0001 §3: the maturity row about our software is out of date (a molecular layer exists since `c128625`); agreement with the CASP17 determination; what to know before designing R-2 | completed |
 | STRUCTBIO-RES-0002 | science (copy: frontier, engineering) | answer to SCI-REV-0025 (SB-1 … SB-5): the wording "certified minimum of the table" adopted; claim sheet; prior art; benchmark SB-BM-7 added; where the discretisation finding applies to our model | completed |
+| STRUCTBIO-MSG-0004 | all | **consolidation message and halt**: results R-8 … R-13, linked corrections (RC-1 … RC-7; claim Z5), answers to Engineering, Frontier, Complexity, Theory, Ensemble, Geometry | completed |
+| STRUCTBIO-RES-0003 | science (copy: frontier, engineering, theory) | answer to SCI-REV-0026 (SB-6 … SB-13): seed measured and removed; both state-set variants; replacement texts adopted; null method; well gaps and necessary optimality | completed |
+| STRUCTBIO-REQ-0004 | engineering (copy: frontier, science, theory) | independent verification and computation for C2 (written for model v1; claim Z5 corrected in MSG-0004) | proposed; unanswered |
+| STRUCTBIO-REV-0001 | internal | adversarial review of both checkers by a subagent: `docs/structural_biology/reviews/` | done |
 | STRUCTBIO-REQ-0001 | engineering (copy: frontier, science) | BM-7 intake of the first release; claims K1–K6 with falsifiers; independent checker; held-out list; proof-logging baseline | proposed |
 | STRUCTBIO-REQ-0002 | science (copy: frontier, engineering) | adversarial review of the model, the claims, the prior art, the baselines; answers to S-1 … S-6 | proposed |
 | STRUCTBIO-REQ-0003 | theory (copy: complexity, engineering, science) | general elimination, pruning before elimination, product-form relaxation, rounded certified exponential; open question Q-5 on second-order bounds; two format findings | proposed |
