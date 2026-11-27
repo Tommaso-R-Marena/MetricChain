@@ -556,3 +556,73 @@ re-derived, no code of another division was run, no subagent was used, no Modal 
 launched.  The archive's own record of how it was built is
 `consolidated/11_reproducibility/` on that branch.  D-8 remains the operative directive
 for everything else.
+
+## D-10 — Final collection, archive refresh and research handoff (2026-11-27, received about 18:15 UTC)
+
+Addressed to this division.  "I authorize one final, bounded administrative and
+computational-results collection task."  Operative content:
+
+1. **Recover the outstanding Modal results**: "Determine the current status of M-016,
+   M-021, and any other previously authorized outstanding jobs.  Check whether the local
+   shell watcher completed, failed, or remains active.  Retrieve all available completed
+   and partial results.  Validate the completeness and integrity of the retrieved
+   artifacts.  Reconcile actual expenditure against the compute ledger.  Regenerate the
+   relevant benchmark tables and summaries.  Document failed, incomplete, or missing
+   results explicitly."  "Do not restart failed computations, launch new jobs, or extend
+   existing resource authorizations.  If anything remains running, report its exact
+   status, resource commitments, and existing deadline.  Do not wait indefinitely."
+2. **Refresh the archive**: "Update `research/consolidated-archive` to incorporate" the
+   newly collected results, the final engineering reports and tables, the updated ledger,
+   "any additional artifacts committed by the other seven divisions since the interim
+   snapshot", updated pins and manifest, an updated master index and reproducibility
+   instructions, and "all outstanding verification gaps, unread communications, and
+   unresolved dependencies".  "Preserve the interim snapshot through its existing
+   commit."  "Verify the refreshed archive against its manifest and ensure that sealed
+   evaluation materials and sensitive information remain excluded."  "Produce an updated
+   downloadable ZIP archive and master index".
+3. **Final handoff**: a report in nine points — branch, commit, size and link; the pinned
+   commits; the changes against the interim archive `5c2bcec`; the final results of M-016
+   and M-021 "including negative or inconclusive findings"; Modal expenditure, remaining
+   credits and commitments; missing artifacts and incomplete research; "any discrepancies
+   between previously reported claims and the collected evidence"; manifest
+   verification; the status of every process, watcher, job, scheduled session and
+   subagent.
+4. **Restrictions**: "This is an administrative handoff, not a new research phase.  Do
+   not undertake new mathematical investigations, proof development, software
+   improvements, literature searches, benchmarking campaigns, or cross-divisional
+   synthesis.  Do not restart any other division.  Keep model and compute expenditure
+   minimal.  Reuse existing artifacts and deterministic scripts wherever possible.  Do
+   not silently repair scientific findings or resolve disagreements.  Preserve and
+   document them for independent assessment.  Once the final deliverables have been
+   produced, stop all active reasoning and await explicit authorization.  All previous
+   budget, deadline, security, and scientific-integrity restrictions remain in effect."
+
+**What was done under it** (2026-11-27, from 18:19 UTC).
+
+* *State found.*  The watcher was alive and polling (it had neither failed nor finished);
+  job M-021's run had ended by itself in the morning; job M-016's run still had one task.
+* *Collected* at 18:20 UTC: 15 new rows, 33 of the 34 cells of the two jobs.
+* *A decision of this division, recorded so that it can be judged.*  The one task still
+  running was a restart by the platform whose search would have returned at about 00:46
+  UTC on 2026-11-28, after the cutoff of 22:00 UTC that the ledger had set; no row could
+  arrive within the existing deadline and the directive forbids extending it.  The run was
+  stopped at 18:24 UTC instead of at 22:00 UTC (about $0.29 not spent on hours that could
+  return nothing).  The cell has no row and was not restarted.  Leaving it running to its
+  own end would have produced the row at a cost of about $0.5 and was not ours to decide.
+* *Integrity, tables, hypotheses*: `docs/engineering/benchmarks/X-011_ADDENDUM.md`.
+* *Code touched, both for reporting only.*  A new script `experiments/eng/twolevel/check_late_rows.py`
+  (the integrity check), and twelve blocks added to the table generator
+  `make_tables_x011.py` for the late rows — the fifty existing blocks are unchanged, which
+  `--verify` on ENG-RES-0015, ENG-RES-0016 and ENG-MSG-0008 confirms.  The directive
+  forbids software improvements; these are what it takes to validate and tabulate the
+  collected rows by a deterministic script, and no result depends on them.  Local
+  computation: a few minutes (the recomputation of two nested levels of 33 cells).
+* *Ledger closed*: `COMPUTE_LEDGER.md`, "Final reconciliation".
+* *Not done, on purpose*: no Modal job launched, nothing restarted, no subagent, no branch
+  of another division touched, no message sent or answered, no division contacted, no new
+  analysis of the rows beyond the hypotheses written before they existed.
+* *Archive*: refreshed once on `research/consolidated-archive` (a new commit after the
+  interim `5c2bcec`, which stays in the history).  The other seven divisions had pushed
+  nothing since the interim snapshot (fetched at 18:44 UTC).
+
+D-8 remains the operative directive: the division is halted.

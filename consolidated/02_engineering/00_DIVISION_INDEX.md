@@ -5,9 +5,9 @@
 | | |
 |---|---|
 | branch | `research/ubuntu-engineering` |
-| pinned commit | `af74a0e66534294bad1dcbc3d5a9d85433cb72a4` (2026-11-27T05:30:47Z) |
+| pinned commit | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` (2026-11-27T18:46:01Z) |
 | what was imported | files added or modified relative to the merge-base with the pinned theory commit `d81eb8aba138` (2026-11-25T03:39:29Z) |
-| files | 719 imported (36.69 MiB); 0 left out by reference (0.00 MiB); the branch tree has 837 files |
+| files | 722 imported (36.84 MiB); 0 left out by reference (0.00 MiB); the branch tree has 840 files |
 | formal verification, as the division documents it | one Lean file of its own (`experiments/eng/sb_review/lean_kernel/RunKernel.lean`): "`verifyM_eq`: checked by Lean (a four-case induction). The runs: executions by Lean's interpreter, not proof terms"; everything else is tested software and stored computations  *(source: `docs/collaboration/consolidation/engineering.md`)* |
 
 ## Start here
@@ -23,6 +23,7 @@
 | class | files | MiB | meaning |
 |---|---:|---:|---|
 | consolidation-report | 1 | 0.03 | the division's own critical assessment written under the consolidation directive |
+| mathematical-report | 1 | 0.03 | theorem statements, definitions, proofs, workstream reports and research notes |
 | lean-proof | 1 | 0.01 | Lean 4 source (formal statements and proofs) |
 | theorem-register | 1 | 0.04 | registers of statements, proof obligations, experiments or improvements, with their status |
 | mailbox-message | 8 | 0.10 | messages between divisions |
@@ -31,43 +32,44 @@
 | status-or-digest | 4 | 0.08 | status tables, digests to other divisions, synchronisation logs, mailbox rules |
 | negative-results | 1 | 0.01 | dead ends, withdrawn claims, negative results |
 | handoff-or-log | 5 | 0.05 | research logs, handoff documents, plans, READMEs |
-| owner-directives | 1 | 0.04 | the research owner's directives as recorded by a division |
-| benchmark-or-evaluation-record | 11 | 0.12 | benchmark plans, protocols, registries, results, ledgers, verification reports |
+| owner-directives | 1 | 0.05 | the research owner's directives as recorded by a division |
+| benchmark-or-evaluation-record | 11 | 0.13 | benchmark plans, protocols, registries, results, ledgers, verification reports |
 | source-code | 47 | 0.53 | packages, job drivers and repository scripts |
 | test | 13 | 0.35 | test suites |
-| experiment-script | 108 | 1.28 | scripts of experiments, checks and reviews |
+| experiment-script | 109 | 1.29 | scripts of experiments, checks and reviews |
 | experiment-report | 8 | 0.22 | reports and READMEs stored with experiments |
 | certificate | 13 | 0.06 | certificate files and conformance vectors |
-| stored-result | 476 | 33.38 | stored outputs and raw results of computations |
+| stored-result | 477 | 33.47 | stored outputs and raw results of computations |
 | build-config | 1 | 0.00 | toolchain and dependency pins, ignore files |
 
 ## Documents (mailbox items, briefs and files under `experiments/` not listed)
 
 | class | file | title | kB |
 |---|---|---|---:|
-| consolidation-report | [`docs/collaboration/consolidation/engineering.md`](docs/collaboration/consolidation/engineering.md) | Consolidation assessment — Computational Research Division ("engineering", "Ubuntu") | 28 |
-| theorem-register | [`docs/engineering/EXPERIMENT_REGISTER.md`](docs/engineering/EXPERIMENT_REGISTER.md) | Experiment register (Computational Research Division) | 42 |
+| consolidation-report | [`docs/collaboration/consolidation/engineering.md`](docs/collaboration/consolidation/engineering.md) | Consolidation assessment — Computational Research Division ("engineering", "Ubuntu") | 30 |
+| mathematical-report | [`docs/engineering/benchmarks/X-011_ADDENDUM.md`](docs/engineering/benchmarks/X-011_ADDENDUM.md) | Addendum to ENG-RES-0015 (experiment X-011, campaign BM-1): the rows collected after the halt | 27 |
+| theorem-register | [`docs/engineering/EXPERIMENT_REGISTER.md`](docs/engineering/EXPERIMENT_REGISTER.md) | Experiment register (Computational Research Division) | 43 |
 | status-or-digest | [`docs/collaboration/ENGINEERING_TO_THEORY.md`](docs/collaboration/ENGINEERING_TO_THEORY.md) | Engineering → all divisions: digest and index | 27 |
 | status-or-digest | [`docs/collaboration/README.md`](docs/collaboration/README.md) | MetricChain collaboration hub | 16 |
 | status-or-digest | [`docs/collaboration/UPSTREAM_SYNC.md`](docs/collaboration/UPSTREAM_SYNC.md) | Upstream synchronisation log (engineering) | 17 |
-| status-or-digest | [`docs/collaboration/status/engineering.md`](docs/collaboration/status/engineering.md) | Status of the Computational Research Division | 22 |
+| status-or-digest | [`docs/collaboration/status/engineering.md`](docs/collaboration/status/engineering.md) | Status of the Computational Research Division | 24 |
 | negative-results | [`docs/engineering/DEAD_ENDS.md`](docs/engineering/DEAD_ENDS.md) | Engineering dead ends and negative findings | 13 |
 | handoff-or-log | [`ENGINEERING.md`](ENGINEERING.md) | MetricChain — engineering branch (`research/ubuntu-engineering`) | 2 |
 | handoff-or-log | [`docs/engineering/DEPENDENCY_MAP.md`](docs/engineering/DEPENDENCY_MAP.md) | Dependency map: what each engineering result rests on | 11 |
 | handoff-or-log | [`docs/engineering/README.md`](docs/engineering/README.md) | Engineering documents | 2 |
-| handoff-or-log | [`docs/engineering/RESEARCH_LOG.md`](docs/engineering/RESEARCH_LOG.md) | Engineering research log (Computational Research Division) | 40 |
+| handoff-or-log | [`docs/engineering/RESEARCH_LOG.md`](docs/engineering/RESEARCH_LOG.md) | Engineering research log (Computational Research Division) | 41 |
 | handoff-or-log | [`docs/engineering/drafts/README.md`](docs/engineering/drafts/README.md) | Drafts | 0 |
-| owner-directives | [`docs/engineering/DIRECTIVES.md`](docs/engineering/DIRECTIVES.md) | Directives of the research owner to the Computational Research Division | 41 |
-| benchmark-or-evaluation-record | [`docs/engineering/COMPUTE_LEDGER.md`](docs/engineering/COMPUTE_LEDGER.md) | Compute ledger (Computational Research Division) | 44 |
+| owner-directives | [`docs/engineering/DIRECTIVES.md`](docs/engineering/DIRECTIVES.md) | Directives of the research owner to the Computational Research Division | 46 |
+| benchmark-or-evaluation-record | [`docs/engineering/COMPUTE_LEDGER.md`](docs/engineering/COMPUTE_LEDGER.md) | Compute ledger (Computational Research Division) | 48 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BASELINE_SPECIFICATIONS.md`](docs/engineering/benchmarks/BASELINE_SPECIFICATIONS.md) | Baseline specifications | 4 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_LIMITATIONS.md`](docs/engineering/benchmarks/BENCHMARK_LIMITATIONS.md) | Benchmark limitations | 5 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_MASTER_PLAN.md`](docs/engineering/benchmarks/BENCHMARK_MASTER_PLAN.md) | Benchmark master plan (Computational Research Division) | 14 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_READINESS.md`](docs/engineering/benchmarks/BENCHMARK_READINESS.md) | Benchmark readiness | 5 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_REGISTRY.md`](docs/engineering/benchmarks/BENCHMARK_REGISTRY.md) | Benchmark registry — the shared queue of computations | 20 |
-| benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_RESULTS.md`](docs/engineering/benchmarks/BENCHMARK_RESULTS.md) | Benchmark results — index | 8 |
+| benchmark-or-evaluation-record | [`docs/engineering/benchmarks/BENCHMARK_RESULTS.md`](docs/engineering/benchmarks/BENCHMARK_RESULTS.md) | Benchmark results — index | 10 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/PREDICTION_FREEZE.md`](docs/engineering/benchmarks/PREDICTION_FREEZE.md) | Freezing predictions: what makes a prediction artifact evidence | 6 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/REPRODUCIBILITY.md`](docs/engineering/benchmarks/REPRODUCIBILITY.md) | Reproducibility | 4 |
-| benchmark-or-evaluation-record | [`docs/engineering/benchmarks/protocols/BM-1_X-011.md`](docs/engineering/benchmarks/protocols/BM-1_X-011.md) | Protocol of X-011 (campaign BM-1) — written before jobs M-016 and M-017 were launched | 10 |
+| benchmark-or-evaluation-record | [`docs/engineering/benchmarks/protocols/BM-1_X-011.md`](docs/engineering/benchmarks/protocols/BM-1_X-011.md) | Protocol of X-011 (campaign BM-1) — written before jobs M-016 and M-017 were launched | 12 |
 | benchmark-or-evaluation-record | [`docs/engineering/benchmarks/protocols/BM-6_X-014.md`](docs/engineering/benchmarks/protocols/BM-6_X-014.md) | Protocol of X-014 (campaign BM-6) — written before job M-018 was launched | 5 |
 
 Mailbox items of this division: 28, listed with dates and titles in [`../09_cross_divisional_dependencies/MAILBOX_INDEX.md`](../09_cross_divisional_dependencies/MAILBOX_INDEX.md).  Briefs to subagents: 0 (class `workstream-brief` in `MANIFEST.json`).
@@ -97,7 +99,7 @@ Mailbox items of this division: 28, listed with dates and titles in [`../09_cros
 | [`experiments/eng/sb_review/`](experiments/eng/sb_review) | 30 | 0.21 | certificate 12, experiment-script 10, stored-result 7, lean-proof 1 |
 | [`experiments/eng/sb_zcheck/`](experiments/eng/sb_zcheck) | 17 | 0.25 | experiment-script 10, stored-result 6, experiment-report 1 |
 | [`experiments/eng/slices/`](experiments/eng/slices) | 3 | 0.02 | experiment-script 2, stored-result 1 |
-| [`experiments/eng/twolevel/`](experiments/eng/twolevel) | 73 | 16.85 | stored-result 45, experiment-script 27, certificate 1 |
+| [`experiments/eng/twolevel/`](experiments/eng/twolevel) | 75 | 16.96 | stored-result 46, experiment-script 28, certificate 1 |
 | [`experiments/eng/weighted_cube/`](experiments/eng/weighted_cube) | 34 | 0.56 | stored-result 26, experiment-script 7, experiment-report 1 |
 | [`modal_jobs/`](modal_jobs) | 6 | 0.04 | source-code 6 |
 | [`src/metricchain_eng/`](src/metricchain_eng) | 1 | 0.00 | source-code 1 |

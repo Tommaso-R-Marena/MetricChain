@@ -9,10 +9,10 @@ The division is in the controlled halt ordered by the research owner: no researc
 experiment, no new subagent, no new Modal job, and **no resumption when a message arrives** — only
 on the research owner's explicit authorisation.  The assessment of the division's work, the state of
 every open item and the record of what is still running are in
-`docs/collaboration/consolidation/engineering.md`; the final message is ENG-MSG-0008.  Still running:
-two detached Modal runs (jobs M-016, M-021; sixteen tasks) that end by themselves; how to collect
-them: `docs/engineering/COMPUTE_LEDGER.md`, "Jobs left running".  The tables below are the state at
-the halt; "in progress" means *stopped in that state*.
+`docs/collaboration/consolidation/engineering.md`; the final message is ENG-MSG-0008.  Still running
+*at the halt*: two detached Modal runs (jobs M-016, M-021; sixteen tasks) — **closed on 2026-11-27,
+see "Administrative task D-10" below; nothing of this division is running**.  The tables below are
+the state at the halt; "in progress" means *stopped in that state*.
 
 **Administrative task D-9 (2026-11-27, about 05:00–06:00 UTC).**  On the research owner's order this
 division assembled the unified archive of all eight divisions on the new branch
@@ -21,7 +21,21 @@ every division's own files at pinned commits with a manifest of provenance and c
 administrative: nothing was re-derived, no other branch was modified, the sealed held-out list was
 neither copied nor read.  What this division still owes under D-9, and nothing else: collect the two
 Modal runs once they have ended, close them in the ledger, regenerate the tables, commit, and refresh
-the archive once.
+the archive once.  *(Done under D-10, next paragraph.)*
+
+**Administrative task D-10 (2026-11-27, about 18:20–20:00 UTC): final collection and handoff.**  On
+the research owner's order the two Modal runs were collected and closed: job M-021 complete (16 of
+16 cells), job M-016 with 17 of 18 — the cell `u = 1`, `n = 32 000`, family "wide" has no row: its
+task had been restarted by the platform and could not return before the existing cutoff, so its
+run was stopped at 18:24 UTC and nothing was restarted.  The 33 stored rows were checked
+(structure; the first two nested levels recomputed locally, 33 of 33 equal), the tables generated,
+and the pre-registered hypotheses read off: H12 refuted; H13(a) and H3 refuted again at larger
+sizes; H13(b) and H1 not decided there.  All of it, with what is missing and what the rows cannot
+show: `docs/engineering/benchmarks/X-011_ADDENDUM.md`.  Money: credits consumed by the workspace
+$62.99, billed cost $0.00, $21.58 of the $1,750 authorised used, nothing committed
+(`docs/engineering/COMPUTE_LEDGER.md`, "Final reconciliation").  The unified archive was refreshed
+once more with these files and with whatever the other divisions had pushed since.  **Nothing of
+this division is running, scheduled or owed.  The halt of D-8 stands.**
 
 ## Pins
 
@@ -32,7 +46,7 @@ the archive once.
 | latest theory commit audited on the engineering machine | `9408e33` — `AUDIT PASSED` (2026-11-26 04:05 UTC, one hour on four threads): 69 Lean files, 37 543 lines, 4015 audited declarations, 504 headline theorems; full harness as expected; 435 mutations, 434 caught, 1 expected pass; 136 baseline runs as expected; 2377 declarations indexed by the document check (ENG-MSG-0004 §2) |
 | latest science commit read | `59e88bc` — SCI-REV-0018 with `R18_REPORT.md` §§2, 6; SCI-RES-0030; SCI-RES-0033; the section "Engineering division" of its digest.  Nothing else of the 20 new messages beyond titles (ENG-MSG-0007 §1) |
 | other branches read | ensemble `8d42f60`, geometry `288b2de` (GEOMETRY-REQ-0001 with the correction of GEOMETRY-MSG-0003; GEOMETRY-REQ-0006), complexity `1ba144d`: headers and what names engineering.  **Structural biology `720e0ec`: its software read in full and tested (ENG-RES-0018).**  Frontier benchmarking: no branch at 2026-11-26 22:41 UTC |
-| the research owner's directives | `docs/engineering/DIRECTIVES.md`, D-1 … D-9 (D-6, D-7: a seventh division whose software this division verifies; an eighth that designs evaluations, CASP17 feasibility; **D-8: controlled consolidation and halt — the operative one**) |
+| the research owner's directives | `docs/engineering/DIRECTIVES.md`, D-1 … D-10 (D-6, D-7: a seventh division whose software this division verifies; an eighth that designs evaluations, CASP17 feasibility; **D-8: controlled consolidation and halt — the operative one**) |
 | text that experiment X-010 implements | the referee's design of three levels, docstring of `experiments/reviews/R8/r8_flat3.py` at theory `9408e33`; Proposition K0 of `K_REPORT.md` |
 | text that experiments X-005, X-006, X-006b implement | `docs/workstreams/K_REPORT.md` §§2–3 at `63efc69`, with errata m1 and m10 of referee R8 |
 
@@ -72,7 +86,7 @@ the archive once.
 | THY-REQ-0010 | type classes of the cube: smallest sensitive sets; finite-size approach; refinement across classes | accepted | **in progress** — question 2 done (exact, to `n = 10 000`), the best-centre part of question 1 done; arbitrary sets, shells and question 3 not started | **ENG-RES-0012** |
 | THY-RES-0004 §7 (proposals) | three levels at the worst instance; exhaustive test over tail functions; SCI-REV-0004 §6 | first: **done in its smallest form** (ENG-RES-0014 §3); second: deferred with reasons; third: accepted, not started | — | ENG-MSG-0004 §3, ENG-RES-0014 |
 | THY-MSG-0015 | (correction: sequential numpy binomials are not tail-safe) | — | received; answered by X-006b | ENG-MSG-0005 |
-| THY-RES-0013 §4, THY-RES-0015 §6 (R16-THY-1(b)) | designs with servers by certified cost: reproduce and extend the table; run them; two levels at three more sizes | accepted | **completed** up to the sizes still running | ENG-RES-0015 |
+| THY-RES-0013 §4, THY-RES-0015 §6 (R16-THY-1(b)) | designs with servers by certified cost: reproduce and extend the table; run them; two levels at three more sizes | accepted | **completed** up to the sizes still running at the halt; those were collected on 2026-11-27, one cell short | ENG-RES-0015; `docs/engineering/benchmarks/X-011_ADDENDUM.md` |
 | THY-MSG-0017 §6, THY-MSG-0018 §6 (candidates E-C1 … E-C5; a small interval computation) | "S proved under H; believed or doubted under H′" | E-C1: a numerical check in review (subagent); E-C3: **Proposition 11.121 reproduced by a third implementation** (X-015); E-C4/E-C5: the finite-size counterpart is ENG-RES-0015 §2, a comparison at `n = 10⁵ … 10⁶` offered; E-C2: nothing computed; the interval computation: the theory division has since certified the upper side itself, the lower side offered | in progress | ENG-MSG-0007 §4 |
 
 ## Requests received from the Scientific Discovery Division
@@ -160,6 +174,11 @@ and M-021 (ten tasks)**, bounded by their timeouts (latest end 09:35 UTC on 2026
 platform restarts; worst case still to be spent $16.7).  M-020 is complete.  Limits, launch test,
 every job, the reconciliation and the commands to collect or stop the running jobs are in
 `docs/engineering/COMPUTE_LEDGER.md`.  Nothing is deployed and nothing is scheduled.
+
+*Final figures (2026-11-27 18:37 UTC, directive D-10):* both jobs closed; **$30.28** for this division
+over all sessions by the billing report; credits consumed by the workspace **$62.99**, billed cost
+**$0.00**; **$21.58 of the $1,750 authorised** used; no job running or queued; one job (M-016) cost
+about $0.4 more than its stated worst case because the platform restarted tasks.
 
 ## Synchronisation log
 

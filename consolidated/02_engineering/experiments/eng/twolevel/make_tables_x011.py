@@ -48,6 +48,14 @@ def split(name: str) -> tuple[list[dict], list[dict]]:
 # ---------------------------------------------------------------------------------------------
 # X-011a: certified bounds
 # ---------------------------------------------------------------------------------------------
+# C_UP[k] is the theory division's certified upper bound of tau_{k+1}/a at u = 1 (its workstream Z, file
+# experiments/workstreams/Z/out_z6_certified_u1_J400.txt at its commit ddc6c32: interval arithmetic, "tau_j <= c_j";
+# not recomputed here).  Its floating-point values are 0.500 and 0.361 for two and three levels, so
+# "bound - c" understates the overhead to tau itself by at most 0.0023.
+C_UP = {1: 0.5004, 2: 0.3633, 3: 0.3128, 4: 0.2914, 5: 0.2813}
+C_UP_ROUNDING = 0.00005          # the constants are quoted to four decimals
+
+
 def bounds_blocks() -> dict[str, str]:
     """ENG-RES-0015 has the rows of job M-016 that were stored when it was published (blocks x011_bounds, ...); the
     sizes that were still running are in blocks with the suffix _large (the addendum)."""
@@ -122,12 +130,7 @@ def _bounds_blocks(rows: list[dict], suffix: str) -> dict[str, str]:
         r0 = by.get((n, "theory")) or by.get((n, "wide"))
         lines.append(f"| {n} | {vbest:.4f}{'' if complete else '*'} | {r0['lower_bound']:.4f} | {ratio:.2f} | {ex:.0f} | {ex / math.sqrt(n * math.log(n)):.2f} |")
     blocks["x011_excess" + suffix] = "\n".join(lines)
-    # finite-size overhead against the asymptotic exponents of the same number of levels.  C_UP[k] is the theory
-    # division's certified upper bound of tau_{k+1}/a at u = 1 (its workstream Z, file
-    # experiments/workstreams/Z/out_z6_certified_u1_J400.txt at its commit ddc6c32: interval arithmetic, "tau_j <= c_j";
-    # not recomputed here).  Its floating-point values are 0.500 and 0.361 for two and three levels, so
-    # "bound - c" understates the overhead to tau itself by at most 0.0023.
-    C_UP = {1: 0.5004, 2: 0.3633, 3: 0.3128, 4: 0.2914, 5: 0.2813}
+    # finite-size overhead against the asymptotic exponents of the same number of levels (C_UP, defined above)
     kshow = [k for k in range(1, kmax + 1) if k in C_UP][:4]
     lines = ["| `n` | " + " | ".join(f"{k + 1} levels: bound − `c_{k + 1}`; in nats" for k in kshow) + " |", "|---|" + "---|" * len(kshow)]
     over = {}
@@ -189,6 +192,139 @@ def _bounds_blocks(rows: list[dict], suffix: str) -> dict[str, str]:
                 lines.append(f"| {n} | {fam} | " + " | ".join(cells) + " |")
         blocks["x011_h13" + suffix] = "\n".join(lines)
     return blocks
+
+
+# ---------------------------------------------------------------------------------------------
+# X-011a, rows collected on 2026-11-27 after the halt (jobs M-016 at n >= 32 000 and M-021): the tables at the other
+# slopes, and the hypotheses of the protocol that these rows decide (H1, H3, H12, H13).  Nothing here is new analysis:
+# the tables are those of ``_bounds_blocks``, and the hypothesis blocks print the quantity each hypothesis names next
+# to the range written down in docs/engineering/benchmarks/protocols/BM-1_X-011.md before the rows existed.
+# ---------------------------------------------------------------------------------------------
+SLOPES = ((0.5, "½", "_u05"), (2.0, "2", "_u2"))
+IMPROVES = 1e-4                  # the threshold of the column "levels after which nothing improves" of x011_bounds
+
+
+def _best_levels(r: dict, k: int):
+    """(least bound found with at most k nested levels, whether every search up to k finished) — as in _bounds_blocks."""
+    val, complete = None, True
+    for x in r["rows"][:k]:
+        complete = complete and x["complete"]
+        if x["best"] is not None and (val is None or x["best"] < val - 1e-12):
+            val = x["best"]
+    if len(r["rows"]) < k:
+        complete = False
+    return val, complete
+
+
+def _star(v, complete) -> str:
+    return "—" if v is None else f"{v:.4f}" + ("" if complete else "*")
+
+
+def slopes_blocks() -> dict[str, str]:
+    """Job M-021: the tables x011_bounds and x011_excess at u = 1/2 and u = 2, and hypothesis H12.  The tables that
+    compare with the theory division's exponents c_k are not produced at these slopes: the constants are for u = 1."""
+    rows = jl("x011_certified2.jsonl")
+    out = {}
+    if not rows:
+        return out
+    for u, label, suffix in SLOPES:
+        sub = [r for r in rows if r["u"] == u]
+        if not sub:
+            continue
+        b = _bounds_blocks(sub, suffix)
+        out["x011_bounds" + suffix] = b["x011_bounds" + suffix]
+        out["x011_bounds_caption" + suffix] = b["x011_bounds_caption" + suffix].replace("`u = 1`", f"`u = {label}`", 1)
+        out["x011_excess" + suffix] = b["x011_excess" + suffix]
+    # H12: "At u = 1/2 and 2 the certified bound stops improving after four levels for n <= 16 000."
+    lines = ["| `u` | `n` | `n a` in nats | family | four levels | five levels | six levels | does a fifth or sixth level lower the bound? |",
+             "|---|---|---|---|---|---|---|---|"]
+    count = defaultdict(lambda: defaultdict(int))
+    for u, label, _ in SLOPES:
+        for r in sorted((r for r in rows if r["u"] == u and r["n"] <= 16000), key=lambda r: (r["n"], r["family"])):
+            na = r["n"] * r["a"]
+            (v4, c4), (v5, c5), (v6, c6) = (_best_levels(r, k) for k in (3, 4, 5))
+            if not c4:
+                verdict, key = "not determined (the search with four levels did not finish)", "open"
+            elif v4 - v6 > IMPROVES:
+                verdict, key = f"**yes**, by {v4 - v6:.4f} ({(v4 - v6) * na:.1f} nats)" + ("" if c6 else " at least (search unfinished)"), "yes"
+            elif c6:
+                verdict, key = "no", "no"
+            else:
+                verdict, key = "not determined (search unfinished; nothing better found)", "open"
+            count[label][key] += 1
+            lines.append(f"| {label} | {r['n']} | {na:.0f} | {r['family']} | {_star(v4, c4)} | {_star(v5, c5)} | {_star(v6, c6)} | {verdict} |")
+    out["x011_h12"] = "\n".join(lines)
+    parts = []
+    for _, label, _ in SLOPES:
+        c = count[label]
+        if c:
+            parts.append(f"`u = {label}`: of {sum(c.values())} cells (three sizes, two families) a fifth or sixth level lowers the certified bound "
+                         f"by more than `{IMPROVES:g}` in {c['yes']}, lowers nothing in {c['no']} whose searches finished, and {c['open']} are not determined")
+    out["x011_h12_summary"] = ";  ".join(parts) + ".  An asterisk: the search did not finish within its time limit; a bound it found is still a bound."
+    return out
+
+
+def late_hypotheses_blocks() -> dict[str, str]:
+    """Hypotheses H1, H3 and H13 on the sizes of job M-016 that were collected after ENG-RES-0015 (n >= 32 000)."""
+    _, later = split("x011_certified1.jsonl")
+    if not later:
+        return {}
+    later = sorted(later, key=lambda r: (r["n"], r["family"]))
+    out = {}
+    # H1: "Refuted if a fifth nested level still lowers the bound by more than 0.001 at some size."
+    lines = ["| `n` | family | five levels (four nested) | six levels (five nested) | the search with five nested levels |", "|---|---|---|---|---|"]
+    for r in later:
+        (v5, c5), (v6, c6) = _best_levels(r, 4), _best_levels(r, 5)
+        if len(r["rows"]) < 5:
+            state = "not reached: the search with " + ("four" if len(r["rows"]) == 4 else str(len(r["rows"]))) + " nested levels ran into the time limit"
+        elif c6:
+            state = f"finished; lowers the bound by {v5 - v6:.4f}"
+        else:
+            state = f"reached, unfinished; best bound found lower by {v5 - v6:.4f}"
+        lines.append(f"| {r['n']} | {r['family']} | {_star(v5, c5)} | {_star(v6, c6) if len(r['rows']) >= 5 else '—'} | {state} |")
+    out["x011_h1_large"] = "\n".join(lines)
+    # H3: "wide" lowers the bound by less than 0.02 against "theory" with at most three nested levels, at every size
+    by = {(r["n"], r["family"]): r for r in later}
+    lines = ["| `n` | levels | family \"theory\" | family \"wide\" | difference | below `0.02` |", "|---|---|---|---|---|---|"]
+    for n in sorted({r["n"] for r in later}):
+        t, w = by.get((n, "theory")), by.get((n, "wide"))
+        if t is None or w is None:
+            lines.append(f"| {n} | 2, 3, 4 | {'present' if t else 'no row'} | {'present' if w else 'no row'} | — | not decidable: one family has no row |")
+            continue
+        for k in (1, 2, 3):
+            (vt, ct), (vw, cw) = _best_levels(t, k), _best_levels(w, k)
+            lines.append(f"| {n} | {k + 1} | {_star(vt, ct)} | {_star(vw, cw)} | {vt - vw:.4f} | {'yes' if vt - vw < 0.02 else '**no**'} |")
+    out["x011_h3_large"] = "\n".join(lines)
+    # H13: the shares of x011_h13_large to four decimals against the predicted ranges; "stable" = the same side of the
+    # range at both ends of what the four-decimal rounding of c_k and c_{k+1} allows
+    ranges = {1: ("at least `0.80`", lambda s: s >= 0.80), 2: ("`0.40` to `0.80`", lambda s: 0.40 <= s <= 0.80),
+              3: ("less than `0.50`", lambda s: s < 0.50), 4: ("less than `0.25`", lambda s: s < 0.25)}
+    lines = ["| `n` | family | level | share kept | search finished | predicted | inside | same side within the rounding of `c_k` |", "|---|---|---|---|---|---|---|---|"]
+    tally = defaultdict(int)
+    for r in later:
+        for k in (1, 2, 3, 4):
+            if k + 1 > len(r["rows"]):
+                continue
+            (v0, c0), (v1, c1) = _best_levels(r, k), _best_levels(r, k + 1)
+            if v0 is None or v1 is None:
+                continue
+            gap = C_UP[k] - C_UP[k + 1]
+            share, lo, hi = (max(0.0, (v0 - v1) / g) for g in (gap, gap + 2 * C_UP_ROUNDING, gap - 2 * C_UP_ROUNDING))
+            name, inside = ranges[k]
+            finished = c0 and c1
+            stable = inside(lo) == inside(hi)
+            if finished:
+                tally[("in" if inside(share) else "out") + ("" if stable else "_unstable")] += 1
+            else:
+                tally["unfinished"] += 1
+            lines.append(f"| {r['n']} | {r['family']} | {k + 2} | {share:.4f} | {'yes' if finished else 'no — reported, not counted'} | {name} | "
+                         f"{'yes' if inside(share) else '**no**'} | {'yes' if stable else f'no ({lo:.4f} … {hi:.4f})'} |")
+    out["x011_h13_check_large"] = "\n".join(lines)
+    out["x011_h13_summary_large"] = (
+        f"Shares whose searches finished: {tally['in'] + tally['in_unstable'] + tally['out'] + tally['out_unstable']}; inside the predicted range: "
+        f"{tally['in'] + tally['in_unstable']}; outside: {tally['out'] + tally['out_unstable']}, of which {tally['out_unstable']} within what the rounding of the "
+        f"constants `c_k` can move ({tally['in_unstable']} of those inside likewise).  Shares with an unfinished search (reported, not counted, as the protocol fixed): {tally['unfinished']}.")
+    return out
 
 
 # ---------------------------------------------------------------------------------------------
@@ -670,7 +806,8 @@ def _stage2_blocks(rows: list[dict], suffix: str) -> dict[str, str]:
 
 def build() -> dict[str, str]:
     blocks = {}
-    for fn in (bounds_blocks, runs_blocks, rung_blocks, cone_blocks, nested_literal_blocks, stage2_blocks, hetero_blocks):
+    for fn in (bounds_blocks, slopes_blocks, late_hypotheses_blocks, runs_blocks, rung_blocks, cone_blocks, nested_literal_blocks, stage2_blocks,
+               hetero_blocks):
         blocks.update(fn())
     return blocks
 

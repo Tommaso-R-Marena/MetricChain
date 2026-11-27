@@ -1,7 +1,8 @@
 # Benchmark status across the eight divisions
 
-*Written for the archive on 2026-11-27 from the divisions' own registries and results files.  Nothing was
-run, re-run or re-analysed for this file.  Paths are relative to `consolidated/`; in the tables of §§2–6,
+*Written for the archive on 2026-11-27 from the divisions' own registries and results files; the rows
+about engineering's jobs M-016 and M-021 (§§2–4) were rewritten at the final refresh of the same day from
+that division's addendum and ledger.  Nothing was run, re-run or re-analysed for this file.  Paths are relative to `consolidated/`; in the tables of §§2–6,
 `07_…/X.md` and `08_…/X.md` abbreviate the documents directory of that division given in full in §1.*
 
 **The state in four sentences.**  Every computational evaluation so far is on synthetic instances or on
@@ -10,7 +11,7 @@ held-out evaluation has been run by anyone: the sealed held-out list (47 structu
 software release is frozen for it.  Nothing has been compared with an experimental observable.  No
 MetricChain entry exists for CASP17, by a determination that no division contradicted.
 
-Other files here: [`COMPUTE_AND_MODAL.md`](COMPUTE_AND_MODAL.md) (every Modal job; what is still running),
+Other files here: [`COMPUTE_AND_MODAL.md`](COMPUTE_AND_MODAL.md) (every Modal job; the final reconciliation),
 [`INCOMPLETE_AND_UNREVIEWED.md`](INCOMPLETE_AND_UNREVIEWED.md) (unfinished subagent work, unreviewed
 statements, incomplete computations).
 
@@ -33,7 +34,7 @@ statements, incomplete computations).
 |---|---|---|---|
 | Lean audit, falsification harness, mutation tests | theory | "AUDIT PASSED … 192 harness tests; 618 mutations, 617 caught and one expected pass" | theory consolidation report, header |
 | Replication of that audit on a second machine | engineering; science | no divergence at four heads (engineering); several commits, "not at its newest" (science) | engineering report §A.1; science report §B4 |
-| Certified recursion of nested runs to six levels (Q-01, X-011a) | engineering | published to `n = 16 000` (`ENG-RES-0015`); larger sizes: see §4 | registry Q-01 |
+| Certified recursion of nested runs to six levels (Q-01, Q-10; X-011a) | engineering | published to `n = 16 000` at slope 1 (`ENG-RES-0015`).  Collected on 2026-11-27, after the halt, in an **unrefereed** addendum: `n = 32 000, 64 000, 128 000` at slope 1 (5 of 6 cells) and `n = 1000 … 64 000` at slopes ½ and 2 (16 of 16); 20 of the 33 stored cells end with a search that ran into its time limit — §3, §4 | registry Q-01, Q-10; `02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md` |
 | Nested designs run on searched instances (Q-02, X-011b) | engineering | complete, 288 of 288 cells; hypothesis H14 holds at all three slopes at `n = 16 000` | registry Q-02; `ENG-MSG-0008` §2(b) |
 | Two-level worst cases at three more sizes (Q-03); exact checker of "shares at the leaves" (Q-04); weighted cubes (Q-05) | engineering | done; Q-04 and Q-05 re-run by science | registry |
 | Site-dependent slopes (Q-11, X-014) | engineering | published (`ENG-RES-0016`); 64 800 literal runs with the theorem's constants, 0 invalid, 0 aborted | registry Q-11; `ENG-MSG-0008` §2(c) |
@@ -55,6 +56,8 @@ statements, incomplete computations).
 | Structural biology's hypothesis H2b (synthetic instances) | fails | `07_…/RESULTS.md` R-5 |
 | The speed hypothesis formed on the development set | "held on its development set and fails on public instances; that set never searches" | frontier report §C |
 | Engineering's pre-registered predictions H3 (at `n = 16 000`), H13(a), H5 | failed; published with the runs | engineering report §C |
+| Engineering's pre-registered predictions on the rows collected after the halt (**unrefereed**) | **H12 refuted** (at slopes ½ and 2 a fifth level still lowers the certified bound: at `u = ½`, `n = 16 000`, and at `u = 2` at all three sizes; it holds at `u = ½`, `n ≤ 4000`); **H3 and H13(a) refuted again** at `n = 64 000` and `128 000`; **H1 and H13(b) not decided** at `n ≥ 32 000` — the searches with five and six levels ran into their time limits (H13(b): one finished share, `0.5018` against "less than `0.50`", inside the rounding of constants that were not recomputed) | `02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md` §5 |
+| The same rows, slope ½ | no nested design is certified below the base bracket at `n = 1000`, and nothing beyond two levels at `n = 4000` | same, §4 |
 | Worst-case search by differential evolution (Q-15) | "not converged to the requested `10⁻⁴·na`, and said so"; a published conclusion withdrawn | registry Q-15; `ENG-RES-0017` |
 | Deep nesting at the sizes computed | a fifth level keeps at most a quarter of its asymptotic gain at `n ≤ 16 000` | engineering report §C |
 | Cost of producing leaf certificates (subagent's benchmark, **unreviewed**) | 15 % search, 85 % assembling and checking; dynamic programming 55–89 times faster on banded chains | `02_engineering/experiments/eng/leafcert_bench/REPORT.md` |
@@ -62,18 +65,20 @@ statements, incomplete computations).
 | Blind check of the scoring instruments | "has little power: three easy targets" (N-14) | frontier report §B3 |
 | CASP17 | "no assessment class admits a MetricChain entry; none was produced" | `08_…/CASP17_ASSESSMENT.md` |
 
-## 4. Running when this version of the archive was built
+## 4. The two runs that were open at the interim version of the archive: closed
 
 <!-- GEN:status -->
-INTERIM (built 2026-11-27): two bounded Modal runs of the engineering division (compute-ledger jobs M-016 and M-021) were still running when this version was built, and their results are not in it.  The engineering section is refreshed once after they have been collected; the other seven divisions are pinned at the heads they pushed under the consolidation directive.
+FINAL (built 2026-11-27 under the research owner's directive for the final collection and handoff): every Modal job of the programme is closed and nothing is running.  The engineering section is pinned at the commit that holds the collected results of jobs M-016 and M-021, the tables made from them and the closed compute ledger; one cell of job M-016 has no result, and most of the larger searches ran into their time limits (see the record of incomplete items).  The other seven divisions pushed nothing after the interim version and are pinned at the same commits as there.  The interim version remains in the history of this branch as commit 5c2bcec.
 <!-- /GEN:status -->
 
 | job | what | registry row | state |
 |---|---|---|---|
-| M-016 | the certified cost bound of nested runs to six levels at `n = 32 000, 64 000, 128 000`, slope 1, two families (hypotheses H12, H13) | Q-01, Q-17 | see [`COMPUTE_AND_MODAL.md`](COMPUTE_AND_MODAL.md) |
-| M-021 | the same bound at slopes ½ and 2 | Q-10 | see [`COMPUTE_AND_MODAL.md`](COMPUTE_AND_MODAL.md) |
+| M-016 | the certified cost bound of nested runs to six levels at `n = 32 000, 64 000, 128 000`, slope 1, two families (hypotheses H1, H3, H13) | Q-01, Q-17 | **closed, 5 of 6 cells: the cell `n = 32 000`, family "wide" has no result** (restarted by the platform; its run was stopped before it could return; not restarted) — [`COMPUTE_AND_MODAL.md`](COMPUTE_AND_MODAL.md) §5 |
+| M-021 | the same bound at slopes ½ and 2 (hypothesis H12) | Q-10 | **done, 16 of 16 cells** |
 
-Nothing else was running in any division (each consolidation report's last section).
+Results: [`X-011_ADDENDUM.md`](../02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md).  **Nothing is
+running in any division**: the other seven say so in the last section of their consolidation reports
+and have pushed nothing since; engineering's ledger records the final state.
 
 ## 5. Frozen, outcome pending
 

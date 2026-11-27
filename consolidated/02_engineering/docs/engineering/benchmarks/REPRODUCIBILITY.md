@@ -30,6 +30,11 @@ Every table and summary sentence of a published message is a block
     python experiments/eng/<experiment>/make_tables.py --verify <message.md>     # fails if a block differs from the artifacts
     python experiments/eng/<experiment>/make_tables.py --write  <message.md>     # regenerates the blocks
 
+The addendum `X-011_ADDENDUM.md` (rows of jobs M-016 and M-021 collected after the halt) is verified the
+same way with `experiments/eng/twolevel/make_tables_x011.py`; the integrity of its rows with
+`python experiments/eng/twolevel/check_late_rows.py --recompute` (output stored in
+`experiments/eng/twolevel/results/x011_late_rows_check.txt`).
+
 Numbers in running prose are checked against the generated tables before publication;
 arithmetic by hand on rounded entries has produced published errors twice
 (ENG-MSG-0004 §4) and is not done.

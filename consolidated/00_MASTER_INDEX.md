@@ -5,9 +5,12 @@ task of the research owner.  This index and the files under `09_…`, `10_…`, 
 archive; **everything under `01_…` – `08_…` (except each `00_DIVISION_INDEX.md`) is a byte-for-byte copy
 of a division's own files at a pinned commit.**  Nothing was edited, redacted, merged or re-derived.*
 
+*This is the final version, refreshed the same day at about 19:30 UTC after the last two computations had
+been collected and closed.  What changed against the interim version: §0.5.*
+
 **Status of this version.**
 <!-- GEN:status -->
-INTERIM (built 2026-11-27): two bounded Modal runs of the engineering division (compute-ledger jobs M-016 and M-021) were still running when this version was built, and their results are not in it.  The engineering section is refreshed once after they have been collected; the other seven divisions are pinned at the heads they pushed under the consolidation directive.
+FINAL (built 2026-11-27 under the research owner's directive for the final collection and handoff): every Modal job of the programme is closed and nothing is running.  The engineering section is pinned at the commit that holds the collected results of jobs M-016 and M-021, the tables made from them and the closed compute ledger; one cell of job M-016 has no result, and most of the larger searches ran into their time limits (see the record of incomplete items).  The other seven divisions pushed nothing after the interim version and are pinned at the same commits as there.  The interim version remains in the history of this branch as commit 5c2bcec.
 <!-- /GEN:status -->
 
 **Read this before anything else.**
@@ -34,18 +37,18 @@ the commit below is the head of that branch when the archive was built.
 | # | division | branch | pinned commit | commit date (UTC) | merge-base with theory | files | MiB |
 |---|---|---|---|---|---|---:|---:|
 | 01 | Theoretical Research Division | `claude/determined-ride-og1u7j` | `b3c5d6115df06bb160d6490a95d9ec6e1a108d02` | 2026-11-27 01:26:54 | — | 1864 | 18.46 |
-| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `af74a0e66534294bad1dcbc3d5a9d85433cb72a4` | 2026-11-27 05:30:47 | `d81eb8aba138` | 719 | 36.69 |
+| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` | 2026-11-27 18:46:01 | `d81eb8aba138` | 722 | 36.84 |
 | 03 | Scientific Discovery, Translation & Independent Validation Division | `research/scientific-translation` | `340081afba8841a4093b3df9b18387e8a36f20b1` | 2026-11-27 01:17:37 | `5ed407282d89` | 4281 | 60.43 |
 | 04 | Ensemble Identifiability and Certified Inference Division | `research/ensemble-identifiability` | `a089a0ce2427c7f3797b838837d16659c8b0a1e4` | 2026-11-27 01:24:04 | `a844b5a8f374` | 181 | 2.20 |
 | 05 | Geometric Inference, Rigidity and Inverse Problems Division | `research/geometric-inference` | `229527e37bbd53428f31718339b7ceb61bc1e942` | 2026-11-27 01:08:57 | `a844b5a8f374` | 189 | 1.88 |
 | 06 | Mathematical Biology and Computational Complexity Division | `research/biological-complexity` | `4a09627d3560dc86cf162bce6c93f030ae84efb9` | 2026-11-27 01:27:10 | `a844b5a8f374` | 437 | 2.95 |
 | 07 | Structural & Computational Biology, Software Development and Applications Division | `research/structural-biology` | `a5cc106dd59d984237dff483716360cae5306538` | 2026-11-27 02:49:58 | `b2caab689155` | 127 | 9.58 |
 | 08 | Frontier Benchmarking, Experimental Evidence and Scientific Evaluation Division | `research/frontier-benchmarks` | `14254f33bee9cc33f7e015f5ec5c58976f7efcb5` | 2026-11-27 01:25:04 | `b2caab689155` | 98 | 1.15 |
-| | **all eight** | | | | | **7896** | **133.33** |
+| | **all eight** | | | | | **7899** | **133.48** |
 <!-- /GEN:pins -->
 
 <!-- GEN:totals -->
-7896 files (133.33 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T04:58:54Z.
+7899 files (133.48 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T18:47:45Z.
 <!-- /GEN:totals -->
 All divisions share one history (root `897242c`, 2026-11-24); every branch other than theory forked from
 the theory branch at the merge-base shown, so its tree also contains an older copy of the theory files.
@@ -105,6 +108,39 @@ A text scan of every Lean file in the archive (not a build): [`11_reproducibilit
 2. §2 below for the mathematics-paper candidate.
 3. [`09_cross_divisional_dependencies/README.md`](09_cross_divisional_dependencies/README.md) for how the pieces relate.
 4. Then the registers of statements (§3) and the reports they point to.
+
+### 0.5 Versions of this archive, and what changed since the interim version
+
+| version | commit of the branch `research/consolidated-archive` | built (UTC) | state |
+|---|---|---|---|
+| interim | `2035fe86ff74d62391f83aee35cba70cec4a6f9d`, then `5c2bcec920e8023a9db37df31249013af4da72ea` (engineering re-pinned at `af74a0e` for a record of the owner's directive and a scope note) | 2026-11-27, about 05:30 | two Modal jobs of engineering still running; 7896 files, 133.33 MiB |
+| **final** | the commit that contains this file (`git log -1`; it is the head of the branch) | 2026-11-27, about 19:30 | nothing running; 7899 files, 133.48 MiB |
+
+Both interim commits stay in the history of the branch and can be downloaded by their hashes (§13).
+Changes of the final version against `5c2bcec`:
+
+* **Engineering is pinned at `dcb49f3e0372b0383bf816ef4050716b5d8da5e6`** instead of `af74a0e`: 19 files
+  of that branch differ (16 changed, 3 new; 991 lines added, 30 removed).  New:
+  [`X-011_ADDENDUM.md`](02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md) (the rows collected
+  after the halt, their tables, the outcomes of the hypotheses fixed in advance — **unrefereed**),
+  `02_engineering/experiments/eng/twolevel/check_late_rows.py` and its stored output
+  `results/x011_late_rows_check.txt` (the integrity check of those rows).  Changed: the two result files
+  `x011_certified1.jsonl` (12 → 17 rows) and `x011_certified2.jsonl` (6 → 16 rows); the table generator
+  (twelve blocks added for the new rows; the existing ones unchanged, by its own `--verify`); the compute
+  ledger ("Final reconciliation"); the record of the owner's directives (the tenth); status, registry,
+  results summary, protocol ("Deviations"), research log, experiment register, reproducibility note and
+  synchronisation log; dated notes in the consolidation report, ENG-RES-0015 and ENG-MSG-0008.
+* **The other seven divisions are pinned at the same commits as in the interim version**: none of them
+  pushed anything between the two builds (fetched 2026-11-27 18:47 UTC), and no new branch or tag
+  appeared.  Consequently **every verification gap, unread message and unresolved dependency recorded in
+  `09_cross_divisional_dependencies/README.md` §3 stands unchanged**; one item was added there (§3.9).
+* **One result that was expected is missing**: the cell `u = 1`, `n = 32 000`, family "wide" of job M-016
+  (`10_benchmark_status/INCOMPLETE_AND_UNREVIEWED.md` §3).
+* Rewritten for the final state: the status line above; `10_benchmark_status/` (all three files);
+  `11_reproducibility/README.md` (§§1, 5, 7, 8); in this index §0.5, one row each in §2.2 and §2.4, one
+  item each in §6 and §12, and the sentence of §7 about running jobs.  Everything else in the index files
+  is as in the interim version.
+* Unchanged: the rule of import, the three files left out, the result of the scan for sensitive data.
 
 ---
 
@@ -210,7 +246,7 @@ and the consolidation report §E1, §F.
 | what | where |
 |---|---|
 | Theory's own evaluations of the cost formulas; nests of two to seven levels; certified tops | `01_theory/experiments/workstreams/{K,Q,Q2,R,Z}/`; `01_theory/experiments/coordinator_checks/{nested_review_R6,level_rate,three_levels_certified}/`; `01_theory/experiments/reviews/R8/`, `R12/` |
-| Engineering: the certified recursion of nested runs to six levels at `n ≤ 16 000`, designs run on searched instances, literal simulations on cubes of 8–16 sites; what a third, fourth, fifth level keeps of its asymptotic gain | `02_engineering/src/metricchain_eng/twolevel/`, `02_engineering/experiments/eng/twolevel/`; [`ENG-RES-0008`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0008.md), [`-0013`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0013.md), [`-0014`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0014.md), [`-0015`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0015.md), [`-0017`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0017.md); protocol with hypotheses written before collection: [`BM-1_X-011.md`](02_engineering/docs/engineering/benchmarks/protocols/BM-1_X-011.md) |
+| Engineering: the certified recursion of nested runs to six levels at `n ≤ 16 000`, designs run on searched instances, literal simulations on cubes of 8–16 sites; what a third, fourth, fifth level keeps of its asymptotic gain | `02_engineering/src/metricchain_eng/twolevel/`, `02_engineering/experiments/eng/twolevel/`; [`ENG-RES-0008`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0008.md), [`-0013`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0013.md), [`-0014`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0014.md), [`-0015`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0015.md), [`-0017`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0017.md); protocol with hypotheses written before collection: [`BM-1_X-011.md`](02_engineering/docs/engineering/benchmarks/protocols/BM-1_X-011.md).  **Added at the final refresh:** the same recursion at `n = 32 000, 64 000, 128 000` (one cell missing) and at slopes ½ and 2, collected after the halt — unrefereed: [`X-011_ADDENDUM.md`](02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md) |
 | Engineering: sites with different slopes (heterogeneous cubes), certified algorithm and 64 800 literal runs | [`ENG-RES-0016`](02_engineering/docs/collaboration/responses/engineering/ENG-RES-0016.md); `02_engineering/experiments/eng/review_x014/REPORT.md`; [`ENG-MSG-0008`](02_engineering/docs/collaboration/messages/engineering/ENG-MSG-0008.md) §2(c) |
 | Engineering: numerical check of the rate theorem on new instances — **subagent's report, the coordinator's review not complete** (reports four numerical discrepancies in the theory report's tables and a site outside the binary family where hypothesis (H1) fails) | [`02_engineering/experiments/eng/level_rate/REPORT.md`](02_engineering/experiments/eng/level_rate/REPORT.md) |
 | Science: replications (nested cost accounting; the rate; the third level; Theorem 11.58a) | `03_scientific_translation/experiments/science/ws_R6/`, `ws_R13/`, `ws_R16/`, `ws_R17/`, `ws_R29/` |
@@ -241,6 +277,7 @@ and the consolidation report §E1, §F.
 | Beyond the uniform cube: tail functions by induction over the sites (**unrefereed**) | theory (B5) | `01_theory/docs/workstreams/I_REPORT.md` |
 | Averaged data added to energy evaluations change no exponent in the worst case | science (B2); theory Proposition 11.104, Theorem 11.109a | `03_scientific_translation/docs/science/INFERENCE_LIMITS.md`; `01_theory/docs/THEORY_REPORT.md` §§11.27, 11.29 |
 | Finite size: "not competitive at any size at which it has been run"; worse than plain Monte Carlo up to about `2·10⁴` sites; a fifth level keeps at most a quarter of its asymptotic gain at `n ≤ 16 000` | theory §A, §B1; engineering B2, §C | `02_engineering/docs/collaboration/consolidation/engineering.md` |
+| Finite size, rows collected after the halt (**unrefereed; read by no other division**): at `n = 32 000, 64 000, 128 000` the best certified bounds found are `1.60`, `1.43`, `1.40` times the lower bound for every algorithm, each from a search that ran into its time limit; at slopes ½ and 2 a fifth level still lowers the certified bound where engineering had predicted it would not; "how many levels pay" is not determined above `n = 16 000` | engineering (addendum §§3–6) | `02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md` |
 | "the theory division's finite-size theorem beats non-adaptive cost only where it certifies `e^{890}` evaluations (their numbers, read by one referee)" | science §C | `03_scientific_translation/docs/collaboration/consolidation/science.md` |
 | The constants of the finite-`n` theorem "are far from what the exact recursion shows (47–50 `ln n` per level in the proof, one to two and a half measured)" | theory §B1 | `01_theory/docs/collaboration/consolidation/theory.md` |
 | Strongest unresolved problem: "is `n·h + Θ(n^{1/3})` the true second-order cost, or an artefact of block nesting" | theory, "State at the halt" | same |
@@ -268,7 +305,7 @@ Internal referee reports and their corrections are listed per division in each `
 | class | files | MiB | meaning |
 |---|---:|---:|---|
 | consolidation-report | 8 | 0.21 | the division's own critical assessment written under the consolidation directive |
-| mathematical-report | 62 | 5.42 | theorem statements, definitions, proofs, workstream reports and research notes |
+| mathematical-report | 63 | 5.45 | theorem statements, definitions, proofs, workstream reports and research notes |
 | lean-proof | 198 | 5.36 | Lean 4 source (formal statements and proofs) |
 | theorem-register | 9 | 0.33 | registers of statements, proof obligations, experiments or improvements, with their status |
 | referee-report | 61 | 3.10 | internal AI referee reports and reviews kept as documents |
@@ -284,16 +321,16 @@ Internal referee reports and their corrections are listed per division in each `
 | negative-results | 8 | 0.33 | dead ends, withdrawn claims, negative results |
 | open-problems | 5 | 0.17 | open problems, publication opportunities, frontier maps |
 | handoff-or-log | 27 | 1.09 | research logs, handoff documents, plans, READMEs |
-| owner-directives | 4 | 0.12 | the research owner's directives as recorded by a division |
+| owner-directives | 4 | 0.13 | the research owner's directives as recorded by a division |
 | benchmark-or-evaluation-record | 28 | 0.51 | benchmark plans, protocols, registries, results, ledgers, verification reports |
 | software-documentation | 4 | 0.11 | interfaces, formats and implementation guides |
 | workstream-brief | 85 | 0.61 | briefs given to subagents (what a workstream or referee was asked to do) |
 | source-code | 77 | 0.82 | packages, job drivers and repository scripts |
 | test | 32 | 0.58 | test suites |
-| experiment-script | 1854 | 13.81 | scripts of experiments, checks and reviews |
+| experiment-script | 1855 | 13.82 | scripts of experiments, checks and reviews |
 | experiment-report | 180 | 2.83 | reports and READMEs stored with experiments |
 | certificate | 68 | 6.21 | certificate files and conformance vectors |
-| stored-result | 4775 | 83.14 | stored outputs and raw results of computations |
+| stored-result | 4776 | 83.23 | stored outputs and raw results of computations |
 | evaluation-freeze | 31 | 0.31 | frozen evaluation records: manifests, commitments, time-stamp tokens, frozen scores |
 | input-data | 12 | 1.49 | public input structures and test data |
 | build-config | 10 | 0.01 | toolchain and dependency pins, ignore files |
@@ -354,6 +391,11 @@ The ones the divisions themselves call consequential:
   the certificate is in substance an LP dual.
 * **The nested adaptive algorithm is not competitive at any size at which it has been run** (theory §C;
   engineering §C).
+* **More of engineering's predictions about the nested bounds failed, and its largest searches did not
+  finish** (rows collected after the halt; unrefereed): of the hypotheses it had written down before the
+  rows existed, H12 is refuted, H3 and H13(a) are refuted again at larger sizes, and H1 and H13(b) are
+  left undecided because the searches with five and six levels ran into their time limits; one of the
+  34 cells has no result ([`X-011_ADDENDUM.md`](02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md) §§1, 5).
 * **The verified kernel as written cannot be executed at realistic size** — exponential in the length of
   an elimination chain; a proved-equal memoised version can (engineering B1(d); `ENG-MSG-0008` §2).
 * **The cheap residual classes do not contain the physics measured so far** (science B3: class constants
@@ -375,7 +417,7 @@ The ones the divisions themselves call consequential:
 
 See [`10_benchmark_status/README.md`](10_benchmark_status/README.md) (one table across divisions, with
 sources), [`10_benchmark_status/COMPUTE_AND_MODAL.md`](10_benchmark_status/COMPUTE_AND_MODAL.md) (every
-Modal job and what is still running) and
+Modal job and the final reconciliation — nothing is running) and
 [`10_benchmark_status/INCOMPLETE_AND_UNREVIEWED.md`](10_benchmark_status/INCOMPLETE_AND_UNREVIEWED.md).
 In one sentence: every evaluation so far is on development or synthetic instances; **no held-out
 evaluation has been run by anyone**, the sealed held-out list is unopened, and no MetricChain entry
@@ -477,6 +519,8 @@ separate, explicitly authorised phase.
   The passphrase and the commitment salt are, by that division's account, held by the research owner
   outside the repository; nothing in the archive contains them.
 * Two certificates larger than 5 MiB are referenced, not copied.
+* **One computed result does not exist** and is therefore in no branch: the cell `u = 1`, `n = 32 000`,
+  family "wide" of engineering's job M-016 ([`10_benchmark_status/INCOMPLETE_AND_UNREVIEWED.md`](10_benchmark_status/INCOMPLETE_AND_UNREVIEWED.md) §3).
 * Not in any branch, hence not here: the divisions' untracked caches (regenerable by their account),
   logs of cloud jobs, tool installations.
 * Files a division only inherited from the theory branch are not copied a second time.
@@ -492,5 +536,7 @@ python3 MetricChain/consolidated/11_reproducibility/verify_manifest.py
 
 or the branch as one compressed file:
 <https://github.com/Tommaso-R-Marena/MetricChain/archive/refs/heads/research/consolidated-archive.zip>
-(`.tar.gz` in place of `.zip` also works).  Details, and how to retrieve what was left out:
+(`.tar.gz` in place of `.zip` also works; for a fixed version put a commit hash in place of
+`refs/heads/research/consolidated-archive` — the interim version is
+`5c2bcec920e8023a9db37df31249013af4da72ea`).  Details, and how to retrieve what was left out:
 [`11_reproducibility/README.md`](11_reproducibility/README.md).

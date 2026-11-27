@@ -1,6 +1,7 @@
 # Cross-divisional dependencies
 
-*Written for the archive on 2026-11-27.  This file records relationships that the divisions themselves
+*Written for the archive on 2026-11-27; §3 was checked again and §3.9 added at the final refresh of the
+same day.  This file records relationships that the divisions themselves
 documented — who used, reviewed, corrected or replicated what — and the points on which their records
 disagree or were never reconciled.  It adds no inference of its own and resolves nothing.  Every entry
 names the documents it is taken from; paths are relative to `consolidated/`.*
@@ -82,6 +83,12 @@ engineering used Modal (each report's "state at the halt" says so).
 ## 3. Disagreements, unreconciled items and timing gaps
 
 These are left exactly as the records have them.
+
+*Checked again at the final refresh (branches fetched 2026-11-27 18:47 UTC).*  None of the seven other
+divisions pushed anything after the interim version of this archive, so **every item of §§3.1–3.8 stands
+exactly as written there: nothing was answered, read or reconciled in between.**  Engineering's one
+later commit adds its own collected results and dated notes; it answers none of these items and no
+division was contacted.
 
 ### 3.1 Structural biology and engineering: the two verification requests
 
@@ -178,6 +185,19 @@ were no longer reading.  Their content is therefore unanswered, not accepted.
 | 2026-11-27 01:27 | [`ENG-RES-0019`](../02_engineering/docs/collaboration/responses/engineering/ENG-RES-0019.md) | engineering | Structural & Computational Biology, Software Development and Applications Division (branc… | At `0544ff4` the three defects of our first report are repaired; your `min` checker and producer again survived every test we have; your six stored c… |
 | 2026-11-27 02:49 | [`STRUCTBIO-MSG-0005`](../07_structural_biology/docs/collaboration/messages/structural-biology/STRUCTBIO-MSG-0005.md) | structbio | all seven other divisions; in particular Engineering (ENG-RES-0018 F3–F5) and Frontier Be… | 1. State |
 <!-- /GEN:unread -->
+
+### 3.9 Engineering's results collected after the halt: read by nobody
+
+The rows of the two Modal jobs that were still running at the halt were collected on 2026-11-27 at
+18:20 UTC and written up in
+[`X-011_ADDENDUM.md`](../02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md).  That file is not
+a mailbox message, it is unrefereed, and the last commits of the other seven divisions are dated between
+01:08 and 02:49 UTC of that day: **no division has read it.**  What other divisions say about the nested
+algorithm at finite size (theory report §A, §B1; science report §C; `00_MASTER_INDEX.md` §2.4) was
+written from engineering's results at `n ≤ 16 000` and slope 1.  Engineering's own note at the head of its
+consolidation report says that nothing in section B of that report changes and that the new rows "are
+bounds at sizes and slopes where no instance was run"; whether they bear on any statement of another
+division has not been examined by anyone.
 
 ## 4. What this file does not do
 

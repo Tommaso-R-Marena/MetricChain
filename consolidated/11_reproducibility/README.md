@@ -1,6 +1,7 @@
 # Reproducibility and provenance of the archive
 
-*Written for the archive on 2026-11-27.  Paths are relative to `consolidated/`.*
+*Written for the archive on 2026-11-27; updated at the final refresh of the same day (§8 says what a
+refresh is).  Paths are relative to `consolidated/`.*
 
 | file | content |
 |---|---|
@@ -19,18 +20,18 @@
 | # | division | branch | pinned commit | commit date (UTC) | merge-base with theory | files | MiB |
 |---|---|---|---|---|---|---:|---:|
 | 01 | Theoretical Research Division | `claude/determined-ride-og1u7j` | `b3c5d6115df06bb160d6490a95d9ec6e1a108d02` | 2026-11-27 01:26:54 | — | 1864 | 18.46 |
-| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `af74a0e66534294bad1dcbc3d5a9d85433cb72a4` | 2026-11-27 05:30:47 | `d81eb8aba138` | 719 | 36.69 |
+| 02 | Computational Research Division (engineering) | `research/ubuntu-engineering` | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` | 2026-11-27 18:46:01 | `d81eb8aba138` | 722 | 36.84 |
 | 03 | Scientific Discovery, Translation & Independent Validation Division | `research/scientific-translation` | `340081afba8841a4093b3df9b18387e8a36f20b1` | 2026-11-27 01:17:37 | `5ed407282d89` | 4281 | 60.43 |
 | 04 | Ensemble Identifiability and Certified Inference Division | `research/ensemble-identifiability` | `a089a0ce2427c7f3797b838837d16659c8b0a1e4` | 2026-11-27 01:24:04 | `a844b5a8f374` | 181 | 2.20 |
 | 05 | Geometric Inference, Rigidity and Inverse Problems Division | `research/geometric-inference` | `229527e37bbd53428f31718339b7ceb61bc1e942` | 2026-11-27 01:08:57 | `a844b5a8f374` | 189 | 1.88 |
 | 06 | Mathematical Biology and Computational Complexity Division | `research/biological-complexity` | `4a09627d3560dc86cf162bce6c93f030ae84efb9` | 2026-11-27 01:27:10 | `a844b5a8f374` | 437 | 2.95 |
 | 07 | Structural & Computational Biology, Software Development and Applications Division | `research/structural-biology` | `a5cc106dd59d984237dff483716360cae5306538` | 2026-11-27 02:49:58 | `b2caab689155` | 127 | 9.58 |
 | 08 | Frontier Benchmarking, Experimental Evidence and Scientific Evaluation Division | `research/frontier-benchmarks` | `14254f33bee9cc33f7e015f5ec5c58976f7efcb5` | 2026-11-27 01:25:04 | `b2caab689155` | 98 | 1.15 |
-| | **all eight** | | | | | **7896** | **133.33** |
+| | **all eight** | | | | | **7899** | **133.48** |
 <!-- /GEN:pins -->
 
 <!-- GEN:totals -->
-7896 files (133.33 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T04:58:54Z.
+7899 files (133.48 MiB) imported from the eight branches; 3 files (24.74 MiB) left out by reference; heads pinned at 2026-11-27T18:47:45Z.
 <!-- /GEN:totals -->
 
 ## 2. What was copied, and by which rule
@@ -91,6 +92,9 @@ To rebuild from scratch: clone the repository with all branches, check out `rese
 and run `python3 consolidated/11_reproducibility/build_archive.py`; the output is a function of
 `pins.json` and of the hand-written files only, so `git status` must then show no change.
 
+Run on the final version before it was published: `7899 imported artifacts and 23 index files listed; 0
+problems`, with `--git` — every imported file is the identical git object of its pinned commit.
+
 ## 5. The scan before publication
 
 `scan_sensitive.py` searches every text file of the archive for key and token formats, private-key
@@ -103,6 +107,10 @@ copy of their public announcements (`08_frontier_benchmarking/…/FRONTIER-FRZ-0
 three matrix products in Python source that look like addresses.  A second pass looked for a salt or
 passphrase written next to a long token and found only git object ids, file paths and the public manifest
 digest of the held-out commitment.
+
+Final version: 7847 text files scanned; the same findings as in the interim version and no others (the
+container path, counting its mention in this paragraph and in two generated files, 332 times; four
+address-like strings); no credential, no supplied literal.  The sealed file is not in the tree.
 
 ## 6. Environments and toolchains
 
@@ -134,3 +142,21 @@ or one compressed file of the branch (it contains `consolidated/` and a one-page
 * <https://github.com/Tommaso-R-Marena/MetricChain/archive/refs/heads/research/consolidated-archive.tar.gz>
 
 For a fixed version, replace `refs/heads/research/consolidated-archive` by the commit hash.
+
+## 8. Versions, and what a refresh is
+
+| version | commit of this branch | engineering pinned at | other seven divisions |
+|---|---|---|---|
+| interim, first | `2035fe86ff74d62391f83aee35cba70cec4a6f9d` | `846e58c` | as in §1 |
+| interim, second | `5c2bcec920e8023a9db37df31249013af4da72ea` | `af74a0e66534294bad1dcbc3d5a9d85433cb72a4` | as in §1 |
+| final | the head of the branch (the commit that contains this file) | `dcb49f3e0372b0383bf816ef4050716b5d8da5e6` | as in §1 — unchanged since the first version |
+
+A refresh changes nothing by hand under `01_…` – `08_…`: the new commit of a division is written into
+`pins.json`, `build_archive.py` is run (it copies the files of the pinned commits, removes what is no
+longer in them, and regenerates the indexes and the manifest), then `verify_manifest.py --git` and
+`scan_sensitive.py`.  The hand-written index files are edited where the state they describe has changed;
+which ones were, for the final version, is listed in `00_MASTER_INDEX.md` §0.5.  Earlier versions are
+never rewritten: every version is a commit of this branch, and the branch has never been force-pushed.
+
+For the final version all eight branches were fetched again (2026-11-27 18:47 UTC): only engineering had
+a new commit.  Result of the checks on the final version: see the last lines of §4 and §5.

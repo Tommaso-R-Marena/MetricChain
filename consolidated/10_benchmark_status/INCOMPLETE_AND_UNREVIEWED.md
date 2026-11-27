@@ -4,7 +4,9 @@
 (the last section of its consolidation report, and its handoff and obligation files).  Recorded
 separately, as the research owner asked, so that no item of the archive is read as more finished than
 its authors say.  Nothing was completed, reviewed or re-run for this file, and no division was restarted
-to supply missing material.  Paths are relative to `consolidated/`.*
+to supply missing material.  Paths are relative to `consolidated/`.  The entries about engineering's jobs
+M-016 and M-021 (§2, §3, §6) were rewritten at the final refresh of the same day; the other seven
+divisions had pushed nothing in between, so their entries stand as written.*
 
 ## 1. Subagent investigations that ended unfinished or were never reviewed
 
@@ -32,12 +34,15 @@ to supply missing material.  Paths are relative to `consolidated/`.*
 | structural biology | the repaired checkers (commit `0e934eb`): "Tested, not verified, and not yet attacked again by an independent reviewer"; the Lean file "not reviewed by the theory division"; model v2 not reviewed by science | report "State at the halt", §B4; science report §G |
 | frontier | the pilot is "**Not replicated**: the request to engineering (FRONTIER-REQ-0001) was unanswered at the halt"; several literature rows "at snippet or memory level" | report §B1, "Not ranked" |
 | engineering | the `mincert` checker and its tests: "the coordinator's own; unrefereed"; the type-class computation "was not refereed"; subagent results as in §1 | report §B1, §B3 |
+| engineering | the addendum on the rows collected after the halt: "**Unrefereed**: no referee of this division or of any other has read it, and the coordinator who wrote it also ran the jobs"; its integrity check recomputes only the first two nested levels of each cell | `02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md` (head, §2) |
 
 ## 3. Computations that are incomplete
 
 | division | item | state | source |
 |---|---|---|---|
-| engineering | Modal jobs M-016 and M-021 (the certified bound of nested designs at `n ≥ 32 000` and at slopes ½ and 2; hypotheses H12, H13) | see [`COMPUTE_AND_MODAL.md`](COMPUTE_AND_MODAL.md) §5 and the status line at the head of `00_MASTER_INDEX.md` | ledger |
+| engineering | Modal job M-016, one cell: the certified bound at `u = 1`, `n = 32 000`, family "wide" | "**The cell has no row and no partial result, and it was not restarted.**"  Its task was restarted by the platform and its run stopped on 2026-11-27 at 18:24 UTC before it could return; "one task of twelve hours on one core with 4 GiB (about $0.95) would have to be authorised and launched again".  Consequence: at `n = 32 000` every table has one family, and that row "is not comparable with its neighbours" | `02_engineering/docs/engineering/benchmarks/X-011_ADDENDUM.md` §1; [`COMPUTE_AND_MODAL.md`](COMPUTE_AND_MODAL.md) §5 |
+| engineering | Modal jobs M-016 and M-021, the searches | 20 of the 33 stored cells "end with a search that ran into its time limit"; such a number is "a valid bound of the formula, an upper bound of the minimum over the family, and **not reproducible to the digit**".  Hypotheses H1 and H13(b) are therefore not decided at `n ≥ 32 000`, and "how many levels pay" is not determined above `n = 16 000` at slope 1, above `4000` at slope ½, or at any size at slope 2 | same, §§2, 5, 6 |
+| engineering | the fit `excess = c·n^γ` named in hypothesis H2 of its protocol | "was not reported in ENG-RES-0015 and is not computed here — a deviation from the protocol" | same, §5; `02_engineering/docs/engineering/benchmarks/protocols/BM-1_X-011.md`, "Deviations" |
 | engineering | worst-case searches at `n ≤ 500` | "documented as not converged to `10⁻⁴·na`" | report §B2 |
 | engineering | the off-lattice chain | "in floating point and on hold until it is done in exact arithmetic" | report §B3 |
 | structural biology | SB-X-006 (well gaps) | "complete for five structures (… ubiquitin not run)" | commit subject `f2a02a1`; `07_structural_biology/docs/structural_biology/RESULTS.md` R-10 |
@@ -72,6 +77,8 @@ bears on another division's results are discussed there in §§3.1–3.3.
 ## 6. Processes
 
 Every division states that nothing of its own was running after its consolidation commit, with two
-exceptions that are recorded rather than hidden: the engineering division's two Modal jobs and the local
-watcher that collects them once (`COMPUTE_AND_MODAL.md`), and the frontier division's scheduled check-in
-of 2026-11-30, which it "paused, not deleted".
+exceptions that were recorded rather than hidden.  (1) The engineering division's two Modal jobs and the
+local watcher that waited for them: **both ended on 2026-11-27** — the last run was stopped at 18:24 UTC,
+the watcher exited by itself at 18:32 UTC, and the ledger's final reconciliation records no job running
+or queued (`COMPUTE_AND_MODAL.md` §3a, §5).  (2) The frontier division's scheduled check-in of 2026-11-30,
+which it "paused, not deleted" — unchanged, by that division's report; not verified by anyone else.

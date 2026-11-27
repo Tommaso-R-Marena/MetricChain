@@ -534,7 +534,19 @@ there).  If the engineering branch gets a new commit, the archive is refreshed b
 commit into `pins.json`, running the script and committing — nothing else.  D-9 authorises that
 and item 1 below, and no research.
 
-1. **The one thing that needs doing even while halted** (a single command, safe and
+**Added 2026-11-27, about 19:00 UTC (directive D-10: final collection and handoff).**  Item 1
+below is **done**: both jobs are collected and closed (M-021 complete; M-016 one cell short —
+`u = 1`, `n = 32 000`, family "wide" has no row and was not restarted), the rows checked, the tables
+and the outcomes of the pre-registered hypotheses written up in
+`docs/engineering/benchmarks/X-011_ADDENDUM.md`, the ledger closed ("Final reconciliation"), the
+archive refreshed.  Nothing of this division is running or owed.  A successor who is authorised
+to work again starts at item 2.  Two things worth knowing: a task of the twelve-hour tier can be
+restarted by the platform more than once, so "one restart each" is not a bound on when a detached
+job ends — give detached jobs a hard stop of their own; and `modal app stop` needs `--yes` when
+no terminal is attached.
+
+1. **The one thing that needs doing even while halted** — *done on 2026-11-27, see above; kept
+   as written* — (a single command, safe and
    repeatable, if the research owner wants the results): collect the two Modal runs that
    were left to finish — their result store expires seven days after its last access.
 
