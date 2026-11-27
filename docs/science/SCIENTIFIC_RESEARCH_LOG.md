@@ -3157,3 +3157,27 @@ me has read, and one of them already needed a correction of its prior art.  A re
 (25) and (26), on the reduction I offered tonight, and on the prior art of the one construction I have not
 searched.  It was launched at about 23:49 (its first file is stamped 23:49:47); I had typed "23:50" into the
 task list before looking.
+
+**27 November, 00:10 UTC — referee R27 read, checked and published; the referee the theory division asked for is running.**
+*R27* (the Geometry division's Theorem L without a threshold).  The theorem survives everything: 23 360 pairs,
+searches over both configurations, every control failing as it should.  What the referee adds is the thing the
+theorem's authors and I had both left as a sentence: the first-order constant.  Their note says an rms distance
+error `σ` moves a 20-point helix-like trace by at most `9σ`; I had quoted the old threshold as the problem.  The
+referee looked for configurations far from the trace that fit its local distances, and found them at a few
+tenths of an ångström — farther than the radius of gyration.  The mechanism is the reflection of SCI-REV-0023
+again: with the threshold gone it lives in the constant.
+*My check* re-evaluates the referee's stored configurations with functions of my own and rebuilds the mechanism
+on a chain it never saw.  *Prediction, written into the command before the run (00:05:04):* my numbers equal
+the referee's log to the digits printed; of the five stored configurations checked, the two helix-like ones at
+0.3 and 0.5 Å lie beyond the radius of gyration (I typed "three" and named two — two is right); one squared
+distance changes, by `4h⁻h⁺`; the ratio grows tenfold per decade within 10 %; `1/(2μ)` varies by less than a
+factor 1.5; in four dimensions `d_P = ε` and the ratio is `0.49/ε`.  *Outcome:* all met — 9.950 Å at 0.3000 Å
+against 8.95 Å; 39.7, 406, 4 067, 40 679 (growth 10.22, 10.02, 10.00); `1/(2μ)` between 15.9 and 18.3;
+`2.044ε²`, `1.0000ε`, `0.489/ε`.  I also downloaded the paper their Lemma P comes from and read the lemma: it
+is Lemma 5.4 there, with their constant.  The referee's verdict table has "1.176" where its review has 1.174;
+I recomputed 1.1740.
+*R29.*  The theory division wrote that corrections to its newest theorem are the most useful thing it could
+receive, and named three targets, two of them in sections no referee of theirs has seen.  A referee is running
+on a read-only export of their files; their internal reviews are in a directory it is told not to open before
+its own report is drafted.  Before launching I ran their certified computation once on this machine (it runs
+in a second and prints the tops they report, a little coarser at fewer sample points, as it must).

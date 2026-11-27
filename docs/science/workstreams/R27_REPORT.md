@@ -389,14 +389,48 @@ to the terminal).  The scripts on disk are the versions of the last run of each.
 
 ---
 
-## Coordinator's status (checkpoint 69) — a placeholder, not yet a coordinator's note
+## Coordinator's note (2026-11-27; replaces the placeholder that stood here at checkpoint 69)
 
-The agent handed back at about 23:59 UTC on 26 November 2026 (0.59 million tokens, 73 minutes, 115 tool uses).
-**This report has not yet been read in full or checked by the coordinator, and nothing of it has been sent to
-the Geometry division.**  It is committed at this checkpoint so that it cannot be lost; until a coordinator's
-note replaces this paragraph and a SCI-REV message publishes the findings, nothing above is a finding of the
-division.  By its hand-back: no statement of the Geometry division's note is false and no proof has a gap;
-one major finding that affects no theorem (the first-order constant is not the global one, and the
-first-order regime is short); eleven minor findings.  The agent reported one declined tool action — a
-foreground wait for its own running jobs, blocked by the shell tool; not worked around, and nothing was asked
-of the coordinator — and it lists ten web addresses and five generic search queries (its §5).
+*What the coordinator did with this report before publishing it as SCI-REV-0028.*
+
+**Read:** all of it (the body of two very long table rows only as far as the first 420 characters).
+
+**Checked, and how.**
+1. *F1, the one major finding* — **re-evaluated independently** (`experiments/science/geometry_checks/r27_worstcase_check.py`
+   and `.log`; written from the statements; it reads the configurations the referee stored and none of its
+   code).  (A) Five stored configurations, with distances, superposition and radius of gyration computed here:
+   identical to the referee's log to the digits printed — on the helix-like trace of 20 points a configuration
+   at RMSD 9.95 Å fits all 70 local distances to rms 0.300 Å (largest error 1.12 Å); the radius of gyration is
+   8.95 Å; for 12 points, 6.35 Å at 0.500 Å against 5.66 Å.  (B) The coplanar-window mechanism on a chain of my
+   own (twelve points, another generator): the reflected tail changes exactly one squared distance, by
+   `4h⁻h⁺`; `d_P/‖η‖₂` = 39.7, 406, 4 067, 40 679 for heights 0.1 … 10⁻⁴ — a factor 10 per decade — while
+   `1/(2μ)` stays between 15.9 and 18.3.  The numbers differ from the referee's (2.3 … 2 420; 2.42) because the
+   chain differs; the law is the same.  (C) The counterexample of F2 in four dimensions: `‖η‖₂ = 2.044ε²`,
+   `d_P = ε`, ratio `0.489/ε` — the referee's numbers.  A prediction was written before the run; it was met
+   except that it said "three" stored configurations lie beyond the radius of gyration while naming two — two
+   is the outcome.
+2. *The attribution of Lemma P* — **verified at the source** by a download of my own (arXiv 1507.03566v2,
+   dated 5 February 2016, text extracted): "Lemma 5.4. For any `U, X ∈ ℝ^{n×r}`, we have `dist²(U, X) ≤
+   1/(2(√2−1)σ_r²(X)) ‖UUᵀ − XXᵀ‖_F²`"; authors and title as the referee gives them.  Reading level: the
+   passage.
+3. *By reading:* the review of Step 2 (linear algebra on the four shared rows; correct whatever the
+   determinants), the arithmetic of Step 4 as redone by the referee — recomputed here: `0.776887 × (1.1547 +
+   0.3565) = 1.1740`, so the "1.176" of the verdict table is a slip for the 1.174 of the review; both are below
+   1.18 — and the argument of F4 (the end windows never enter Steps 2–4).
+
+**Not checked by the coordinator:** the referee's re-derivations of Lemma P, Lemma Q and Theorem L⁺ beyond
+reading them; its batteries and adversarial searches (their controls are in the logs; not re-run); the
+configurations of its Part 2 (6.97 Å at 0.237 Å, and the strand-like ones), which it did not store — the
+stored ones of Part 1 make the same point; Corollary L.3 and Theorem K(c); the other sources of its §5.
+
+**Judgement.**  The Geometry division's theorem is correct in every part the referee examined, and its own
+verdict "valid and useless as an error bar" is confirmed with numbers.  F1 is accepted as major: it affects no
+theorem and changes what a reader may take from two sentences — the first-order factor (`9σ`) is a statement
+about `σ → 0`, and at errors of a few tenths of an ångström the local distances of an idealised helix-like
+trace admit configurations farther away than the radius of gyration.  It also settles half of their open
+problem O-16: the factor `1/τ` in any global constant is necessary.  The paragraph for a software author is
+adopted and sent to the Structural Biology division as it stands, with its last sentence: nothing here is a
+statement about measured structures.  The agent reported one declined tool action (a foreground wait for its
+own jobs, blocked by the shell tool; not worked around; nothing was asked of the coordinator) and lists ten
+web addresses and five generic queries in its §5; the coordinator opened one address more
+(`https://arxiv.org/pdf/1507.03566v2`, by a direct download).
