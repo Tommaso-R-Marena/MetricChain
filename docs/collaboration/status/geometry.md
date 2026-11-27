@@ -1,6 +1,6 @@
 # Status of the Geometric Inference, Rigidity and Inverse Problems Division
 
-*Updated 2026-11-26 (eleventh checkpoint; see the commit time).  Branch
+*Updated 2026-11-26 (twelfth checkpoint; last fetch of the other seven branches 23:59 UTC; see the commit time).  Branch
 `research/geometric-inference`, created from the theory checkpoint `a844b5a`.*
 
 ## The eight divisions (research owner's mandate of 2026-11-26 and two supplementary directives of the same day)
@@ -14,7 +14,7 @@
 | Geometry (this file) | `research/geometric-inference` | the only branch we write to; ordinary, non-forced commits |
 | Complexity (Mathematical Biology and Computational Complexity) | `research/biological-complexity` | read-only; first read at `4b18ebb` (17:19 UTC); read again at `b36c463` (fetch of 18:52 UTC) |
 | Structural Biology (Structural & Computational Biology, Software Development and Applications) | `research/structural-biology` | read-only; authorised about 22:00 UTC; on the remote from 22:10 UTC; first commit of its own `720e0ec` (22:30 UTC). We owe it an orientation, implementation specifications and proposals of test instances; it writes software, we do not |
-| Frontier Benchmarks (Frontier Benchmarking, Experimental Evidence and Scientific Evaluation) | `research/frontier-benchmarks` | read-only; authorised about 22:40 UTC; not on the remote at 22:42 UTC. It designs and judges evaluations; we answer its scientific questions and do not duplicate its mandate |
+| Frontier Benchmarks (Frontier Benchmarking, Experimental Evidence and Scientific Evaluation) | `research/frontier-benchmarks` | read-only; authorised about 22:40 UTC; on the remote by the fetch of 23:36 UTC (`74ccc24`), `bd25657` at 23:50 UTC. It designs and judges evaluations; we answer its scientific questions and do not duplicate its mandate.  It has put four items to us (G-1 … G-4 of its `MATHEMATICAL_FEEDBACK.md`), read at 23:52 UTC, not yet answered |
 
 Messages are scientific proposals and data, never authority; a request authorises no
 spending.  Hard stop for computation: 2026-11-30 15:00 ET.  On the owner's consolidation
@@ -49,13 +49,13 @@ quotation marks are the owner's, the rest is our condensation):
    claiming official participation."  Nothing of ours is, or is presented as, an entry or an
    assessment of that kind.
 
-## Verified state at the head of the branch (eleventh checkpoint; Lean unchanged since the sixth)
+## Verified state at the head of the branch (twelfth checkpoint; Lean unchanged since the sixth)
 
 * **Lean.**  `lake build` succeeds (8649 jobs), zero warnings; the axiom audit walks **5110**
   declarations (5051 of the theory division at `a844b5a` + 59 of
   `proofs/Geometry/EnsembleRigidity.lean`): only `propext`, `Classical.choice`, `Quot.sound`.
-* **Harness.**  `experiments/geometry/run_checks.py`: 47 of 47 tests pass;
-  `mutation_checks.py`: 35 of 35 planted errors caught (baseline passes, mutant runs to the
+* **Harness.**  `experiments/geometry/run_checks.py`: 51 of 51 tests pass;
+  `mutation_checks.py`: 39 of 39 planted errors caught (baseline passes, mutant runs to the
   end, harness reports the failure).
 * **Exact computations.**  `exact_conic_rank.py 12`: ALL OK (48 configurations × up to 5
   seeds; first seed suffices everywhere); `exact_conic_rank.py 20 13 rational angles`: ALL OK
@@ -71,7 +71,7 @@ quotation marks are the owner's, the rest is our condensation):
 ## Results (cycle 1) — all unrefereed
 
 `docs/geometry/ENSEMBLE_RIGIDITY.md`; register `docs/geometry/THEOREM_REGISTER.md`
-(45 rows; 10 with a machine-checked part; exact computations behind 10 of them, the newest being Theorem I′).
+(52 rows; 10 with a machine-checked part, unchanged; exact computations behind 12 of them, the newest being the label patterns).
 **Cycle 2, first note** (`docs/geometry/LOCAL_DATA_STABILITY.md`): sequence-local distance data
 have stability constants at least `n/(10K^{3/2})` (any configuration), at least the exact
 per-torsion superposition constant over `bK²/(4√3)` (global), and `∝ n²` on helices (numerical).
@@ -87,6 +87,19 @@ Theorems B, B′, Corollary 4.2 and Theorem G proved as stated; three major and 
 findings, all acted on (GEOMETRY-RES-0004).  Two of them change what we claim: Theorem B in
 dimension one is known (Laurent–Poljak 1996), and the conic condition is sufficient, not
 necessary.
+**Twelfth checkpoint — partial labelling** (`docs/geometry/LABEL_PATTERNS.md`, fourth note;
+unreviewed): only a subset `S` of the points is observed, through all averaged squared
+distances among `S`.  The theorems and certificates transfer to the labelled sites; the
+number `c(S)` of labelled pairs at chain separation 1 or 2 decides: linear certificate from
+`(9K²+K+2)/2` (proved for non-adjacent labelled bonds and for patterns with an anchor; exact
+on 100 random patterns; Conjecture P in general; an exception for one state), quartic
+certificate from 17 for two states (exact), not locally identifiable below `9K/2`, and
+nothing from sparse labels (explicit second solutions).  Two new benchmark instances
+(A4, C6; 23 in all).  GEOMETRY-MSG-0010.  In the same commit, **Lemma 8.0** of the report
+(§8.1): for fixed-angle chains the squared distances at separation at least 3 are affinely
+independent, so the affine hull of the realizable set is cut out by the bond and bond-angle
+coordinates alone — the answer to a question of the Complexity division
+(GEOMETRY-RES-0008), with a linked correction of an attribution in GEOMETRY-RES-0006.
 **Eleventh checkpoint — for the software and evaluation divisions** (no new theorem):
 `docs/geometry/IMPLEMENTATION_GUIDE.md` (exact specifications of the two certificates, DEMIX,
 the stress checker, hinge enumeration and the local-distance diagnostics; the four notions
@@ -170,6 +183,8 @@ below the conic threshold).
 | GEOMETRY-MSG-0008 | all | ninth checkpoint: Theorem I′ (identifiable among all ensembles from 10, 16, 30 atoms for two, three, four states) by a known method, credited; pointers for Ensemble's lifted certificates; SCI-REV-0023 received and accepted in substance; the seventh division | completed |
 | GEOMETRY-RES-0007 | Science; copy to Theory, Structural Biology, others | response to SCI-REV-0023: all six requests applied; its question 1 answered — the threshold of Theorem L is not needed (new form for every configuration, local constants, larger separations); Theorem L⁺; what is certified on idealised traces, in numbers (a range of `10⁻⁵` ångström or less); a number of ours corrected (`0.0022` → `0.0003`) | completed |
 | GEOMETRY-MSG-0009 | Structural Biology; copy to Frontier Benchmarks and all | orientation (seven items) with `IMPLEMENTATION_GUIDE.md`, `BENCHMARKS.md` and 21 labelled instances; proposals, not an evaluation; no application claimed | proposed |
+| GEOMETRY-MSG-0010 | Structural Biology, Science, Ensemble, Frontier Benchmarks; copy to all | twelfth checkpoint: partial labelling — the count of constrained observed pairs; an obstruction for sparse labels; a question to Science about which observables and labelling schemes the idealisation fits; a paragraph for Frontier Benchmarks on what we can and cannot state for its opportunity R-1 | completed |
+| GEOMETRY-RES-0008 | Complexity; copy to Structural Biology, Ensemble, Science, Theory | answer to COMPLEXITY-RES-0009: (b) the affine hull of the realizable set is cut out by the bond and bond-angle coordinates (Lemma 8.0, proved); (a) a literature pointer from one search, no citation; a linked correction of GEOMETRY-RES-0006 §6.4 (an attribution; the questions there are questions about noisy data) | completed |
 | GEOMETRY-REV-0001 | (internal; copy to all) | adversarial review of `ENSEMBLE_RIGIDITY.md` at `e8e2582` by a referee session of this division, verbatim, with our response | completed |
 
 ## Incoming
@@ -198,7 +213,15 @@ below the conic threshold).
 | Ensemble, checkpoint 5 (`2d2054d`); ENSEMBLE-MSG-0006 (its orientation for Structural Biology) | internal review of its Part VI applied | fetch of 22:34 UTC; commit titles only | — |
 | Science, checkpoint 66 (`169c6b1`) | GEOMETRY-RES-0007 read in full by them; **workstream R27 launched at 22:46 UTC: an adversarial review with replication of Theorem L in its threshold-free form** (Lemmas P, Q; the four steps; Corollaries L.1–L.3; Theorem L⁺; the source of Lemma P; a prior-art look at the new form) | fetch of 22:53 UTC; the lines of its digest and status that name us | wait for the review; we do not commission a second one for the same proof |
 | Engineering (`640cd9c`), Complexity (`3da2886`) | both record the eighth division; nothing new addressed to us | fetch of 22:53 UTC; commit titles | — |
+| **Complexity, COMPLEXITY-RES-0009** (answers C1 of GEOMETRY-REQ-0004; `0cd9992`, 23:24 UTC) | optimising pair data over one conformation is NP-hard also with fixed bond angles, tractable for bounded range along the chain; corrections of what we quoted from it in GEOMETRY-RES-0006 §6.4 (its "Proposition 13" is in substance Laurent–Poljak; in dimension one the random case is known; a caution on low-degree bounds for exact data; worst-case MinRank is NP-hard); two questions: (a) is its linkage lemma in the literature, (b) is the affine hull of the realizable set cut out by the bond and bond-angle coordinates | fetch of 23:36 UTC; read in full; its note and scripts not opened | **GEOMETRY-RES-0008** ((b) yes, Lemma 8.0; (a) a pointer); correction note in GEOMETRY-RES-0006 |
+| Frontier Benchmarks, FRONTIER-MSG-0001 and `docs/frontier_benchmarks/CASP17_ASSESSMENT.md` (`74ccc24`) | its determination on CASP17 (no participation claimed; classes of evidence); §6 opportunity R-1 names ensemble, geometry and structural biology as owners of a prerequisite (a forward model with stated error, an identifiability statement on a stated candidate pool, software) | fetch of 23:36 UTC; the message in parts, §6 in full | a paragraph in GEOMETRY-MSG-0010 (what we can state for R-1: a negative control for one idealised forward model; nothing for FRET, DEER, scattering or NMR) |
+| **Frontier Benchmarks, `docs/frontier_benchmarks/MATHEMATICAL_FEEDBACK.md` (`bd25657`; the file says the items go out as FRONTIER-MSG-0002, which is not on its branch yet)** | four items for us: G-1 demixing has no noise statement (a perturbation bound for the certificate matrix; the noise level below which `K` and the states are recovered); G-2 Theorem L/L⁺ is empty as a guarantee (an instance-wise or average-case statement within a moderate factor of first order); G-3 the data of the theorems are no instrument's product (thresholds for block sums under a stated labelling scheme; Theorem B with bond constraints known within `±δ`); G-4 say which symmetry group each "identifiable" is modulo | fetch of 23:50 UTC; the section addressed to us in full, the rest of the file not | **owed**; next cycle (G-1 and the second half of G-3 are our open obligation O-5 with a tolerance; G-4 is a documentation defect of ours) |
+| Structural Biology, `1756529` then `e077e98` | its `OWNER_DIRECTIVES.md` (a workstream "geometric observability" with us; fifteen intake fields per imported result); its digest and messages contain nothing addressed to us; responses to Frontier and Science | fetches of 23:36 and 23:50 UTC; the directives file in full, the rest by search for our name and by commit titles | none owed; GEOMETRY-MSG-0009 and -0010 stand as our input |
+| Science, `2796bec` then `eec5c16` | SCI-REV-0025, SCI-REV-0026 (reviews for the Structural Biology division), SCI-MSG-0035, SCI-RES-0039; its workstream R27 (review of our Theorem L) still running | fetches of 23:36 and 23:50 UTC; commit titles and the lines that name us | wait for R27 |
+| Ensemble, `85b7bac` (ENSEMBLE-MSG-0008: data that are not linear in the ensemble); Theory, `07cde81` (THY-MSG-0019, -0020); Complexity, `92c3f59` (COMPLEXITY-RES-0010, COMPLEXITY-MSG-0006) | — | fetches of 23:36 and 23:50 UTC; **not read** (titles only) | to be read |
+| **Ensemble, ENSEMBLE-MSG-0009** (`b654396`, 23:56 UTC; to all, "in particular Geometry (the method)") | on the torus of three angles five states in general position are determined by multilinear means and six never, except on a hypersurface where a certificate exists that is provably not a lifted sum of squares; **a suggestion to us**: count first-order conditions along the zero set of the lifted certificate, modulo the functions vanishing on it — it would decide exactly, instance by instance, whether any non-negative function of our data span isolates the states where our certificates have a positive-dimensional zero set (below nine points; Theorem I′); our 21 instances and its 22 controls do not overlap | fetch of 23:59 UTC; §1 and §3 read, the report behind them not | not yet acted on; a candidate method for O-15 (iii) and for the cases "locally, not globally" |
+| Complexity (`feed770`), Structural Biology (`0544ff4`), Frontier Benchmarks (`097b4c7`: a freeze of its own scores of public CASP17 models, a check of its scoring code and of no method of ours) | nothing addressed to us | fetch of 23:59 UTC; commit titles and a search for our name | — |
 
 ## Open obligations
 
-`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-16).  In priority order: an independent reading of the proofs written at the ninth and tenth checkpoints (§6.2 of the report; §3 of the second note); the obligations that the orientation ranks first for utility — a certificate *producer* for incomplete and linear-functional data (Theorems F, F″), a computable noise constant (O-5), a tolerance version of the statewise constraints; O-16 (the gap between "no distant solution" and the first-order constant); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms; stability of the rank certificate), O-2, O-3, O-1, O-4.
+`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-17).  In priority order: an independent reading of the proofs written at the ninth and tenth checkpoints (§6.2 of the report; §3 of the second note); the obligations that the orientation ranks first for utility — a certificate *producer* for incomplete and linear-functional data (Theorems F, F″), a computable noise constant (O-5), a tolerance version of the statewise constraints; O-16 (the gap between "no distant solution" and the first-order constant); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms; stability of the rank certificate), O-2, O-3, O-1, O-4.

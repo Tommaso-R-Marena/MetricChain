@@ -913,8 +913,86 @@ def theorem_L_sharp_constant():
 
 
 @test
+def label_patterns_linear():
+    """LABEL_PATTERNS.md, Theorem P2: when only a subset S of the points is observed, the linear
+    certificate holds and DEMIX recovers the labelled-site states exactly when the number c(S) of
+    labelled pairs at chain separation 1 or 2 is at least (9K^2 + K + 2)/2; nullity max(K-1, D_K - c)."""
+    import label_patterns as LP
+    shift = 1 if MUT == "label_count_off_by_one" else 0       # planted error: one constrained pair fewer suffices
+    ok, out = True, []
+    pats = LP.PATTERNS[:11] if QUICK else LP.PATTERNS
+    for name, K, n, S in pats:
+        Xs, w = LP.random_mixture(K, n, seed=K * 100 + len(S))
+        nul, c = LP.conic_nullity(Xs, w, S)
+        cert, rmsd = LP.demix_pattern(Xs, w, S)
+        D = 3 * K * (3 * K + 1) // 2
+        ok &= (cert == (c >= LP.needed(K) - shift)) and nul == max(K - 1, D - c) and (not cert or rmsd < 1e-5)
+        out.append(f"{c}:{'yes' if cert else 'no'}")
+    return ok, f"{len(pats)} patterns (c : certified) " + " ".join(out)
+
+
+@test
+def label_patterns_exact():
+    """LABEL_PATTERNS.md: exact conic ranks min(c, D_K - K + 1) on random label patterns and subsets
+    (K <= 3), the one-state exception (two labelled triples: rank 5), and the quartic certificate
+    for patterns of two states (h_4 = K from c = 17; K + dim L when two hyperplanes cover)."""
+    import subprocess
+    here = os.path.dirname(os.path.abspath(__file__))
+    cmd = [sys.executable, os.path.join(here, "exact_label_patterns.py")]
+    if MUT == "label_quartic_one_fewer":
+        cmd.append("--mutate")
+    r = subprocess.run(cmd, capture_output=True, text=True, cwd=here)
+    return r.returncode == 0 and "ALL OK" in r.stdout, "100 exact ranks, 0 exceptions; 7 quartic cases" if r.returncode == 0 else r.stdout[-200:]
+
+
+@test
+def sparse_labels_second_solution():
+    """LABEL_PATTERNS.md, Proposition P3: with labels every fourth point (no two labelled points at
+    chain separation 1 or 2) a rotation of the stacked labelled configuration gives labelled sites of
+    two OTHER chains (fitted to rounding) with the same averaged squared distances."""
+    import label_patterns as LP
+    r = LP.second_solution(gap=4, eps=0.03, orthogonal=(MUT != "labels_rotation_not_orthogonal"))
+    ok = r["fit_residual"] < 1e-9 and r["data_difference"] < 1e-9 and r["moved"] > 1e-2
+    return ok, (f"chains fitted to {r['fit_residual']:.0e}; data differ by {r['data_difference']:.0e}; "
+                f"labelled sites moved by RMSD {r['moved']:.2f}")
+
+
+@test
+def chain_affine_hull():
+    """ENSEMBLE_RIGIDITY.md Lemma 8.0: over chains with a fixed bond angle the squared distances at
+    chain separation >= 3 are affinely independent (rank of [1 | squared distances] is full), for
+    several bond angles including the right angle; and the top Fourier coefficient of <b_k, b_l>
+    has modulus (sin^2 a / 2) ((1 + cos a)/2)^(p-1), a = pi - theta."""
+    rng = np.random.default_rng(36)
+    minsep = 2 if MUT == "affine_hull_separation_two" else 3       # planted error: separation 2 claimed free
+    ok, worst = True, np.inf
+    for theta_deg in (60.0, 90.0, 111.0, 150.0):
+        n = 9
+        prs = [(i, j) for i in range(n) for j in range(i + minsep, n)]
+        F = np.ones((4 * len(prs) + 20, len(prs) + 1))
+        for s in range(len(F)):
+            X = chain(n, rng.uniform(-np.pi, np.pi, n - 3), theta=np.deg2rad(theta_deg))
+            F[s, 1:] = [np.sum((X[i] - X[j]) ** 2) for i, j in prs]
+        sv = np.linalg.svd(F, compute_uv=False)
+        ok &= int((sv > 1e-9 * sv[0]).sum()) == len(prs) + 1
+        worst = min(worst, sv[-1] / sv[0])
+    a = np.pi - np.deg2rad(111.0)
+    m, p_t = 12, 2
+    grid = 2 * np.pi * np.arange(m) / m
+    acc = 0j
+    for i1 in range(m):
+        for i2 in range(m):
+            X = chain(5, [grid[i1], grid[i2]], theta=np.deg2rad(111.0))
+            acc += ((X[1] - X[0]) @ (X[4] - X[3])) * np.exp(-1j * (grid[i1] + grid[i2]))
+    coef = abs(acc) / m ** 2
+    pred = np.sin(a) ** 2 / 2 * (1 + np.cos(a)) / 2
+    ok &= abs(coef - pred) < 1e-9
+    return ok, f"full rank at four bond angles (smallest relative singular value {worst:.0e}); top coefficient {coef:.6f} = formula {pred:.6f}"
+
+
+@test
 def benchmark_suite_labels():
-    """docs/geometry/BENCHMARKS.md: the pinned instances of benchmark_suite/ are what MANIFEST.json
+    """docs/geometry/BENCHMARKS.md: the 23 pinned instances of benchmark_suite/ are what MANIFEST.json
     says (SHA-256); the truth of every instance with averaged data reproduces the data; every
     'second solution' satisfies the statewise constraints, differs from the truth, and has the
     same data (averaged squared distances, or distances of separation <= 3 for C5)."""
@@ -923,7 +1001,7 @@ def benchmark_suite_labels():
     from geomlib import edm, kabsch_rmsd
     here = os.path.join(os.path.dirname(os.path.abspath(__file__)), "benchmark_suite")
     manifest = json.load(open(os.path.join(here, "MANIFEST.json")))
-    ok, nsec, worst = len(manifest) == 21, 0, 0.0
+    ok, nsec, worst = len(manifest) == 23, 0, 0.0
     for entry in manifest:
         raw = open(os.path.join(here, entry["id"] + ".json")).read()
         ok &= hashlib.sha256(raw.encode()).hexdigest() == entry["sha256"]
@@ -931,8 +1009,10 @@ def benchmark_suite_labels():
         Xs = [np.array(X) for X in d["truth"]["states"]]
         w = np.array(d["truth"]["weights"])
         c = d["chain"]["second_neighbour_distance"]
+        lab = d["data"].get("labelled_sites")                    # partial labelling: data among these sites only
+        sub = (lambda X: X[lab]) if lab else (lambda X: X)
         if "matrix" in d["data"] and d["id"] not in ("G2", "G4"):
-            ok &= np.abs(sum(wk * edm(X) for wk, X in zip(w, Xs)) - np.array(d["data"]["matrix"])).max() < 1e-9
+            ok &= np.abs(sum(wk * edm(sub(X)) for wk, X in zip(w, Xs)) - np.array(d["data"]["matrix"])).max() < 1e-9
         for key in ("second_solution", "second_solution_variant_a"):
             if key not in d:
                 continue
@@ -944,14 +1024,14 @@ def benchmark_suite_labels():
             if d["id"] == "C5":
                 gap = max(abs(np.linalg.norm(Xs[0][j] - Xs[0][k]) - np.linalg.norm(S[0][j] - S[0][k])) for j, k in d["data"]["pairs_a"])
             else:
-                gap = np.abs(sum(vk * edm(X) for vk, X in zip(v, S)) - np.array(d["data"]["matrix"])).max()
+                gap = np.abs(sum(vk * edm(sub(X)) for vk, X in zip(v, S)) - np.array(d["data"]["matrix"])).max()
             worst = max(worst, gap)
             ok &= gap < 1e-9 and abs(v.sum() - 1) < 1e-9 and v.min() > 0
             if d["id"] != "C4":                             # C4's second solution deliberately violates the constraints
                 ok &= all(max(abs(np.linalg.norm(Y[i + 1] - Y[i]) - 1) for i in range(len(Y) - 1)) < 1e-8 for Y in S)
                 ok &= all(max(abs(np.linalg.norm(Y[i + 2] - Y[i]) - c) for i in range(len(Y) - 2)) < 1e-8 for Y in S)
-            ok &= max(min(kabsch_rmsd(X, Y) for X in Xs) for Y in S) > 1e-2
-    return ok and nsec == 5, f"21 instances match the manifest; {nsec} second solutions reproduce the data to {worst:.0e}"
+            ok &= max(min(kabsch_rmsd(sub(X), sub(Y)) for X in Xs) for Y in S) > 1e-2
+    return ok and nsec == 6, f"23 instances match the manifest; {nsec} second solutions reproduce the data to {worst:.0e}"
 
 
 @test

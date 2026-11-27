@@ -174,3 +174,19 @@ inside a five-point window; general lateration graphs; (v) Lemma P is cited from
 (Tu et al. 2016) — the proof in the note is self-contained, the attribution should be
 checked; (vi) the proofs of Theorems L, L⁺ have not been read by anyone outside this
 session.
+
+**O-17.  Label patterns (`LABEL_PATTERNS.md`).**  Proved: the transfer (Theorem P1); the
+linear threshold for non-adjacent labelled bonds and for patterns with an anchor; the
+obstruction given regularity.  Open: (i) **Conjecture P** — the generic conic rank is
+`min(c(S), N_K)` for every pattern when `K ≥ 2` (exact on 100 random patterns and subsets,
+`K ≤ 3`; the exception for one state shows that a proof must use `K ≥ 2`: the natural route
+is the one of Theorem C (c), submodularity of the generic rank, now on the lattice of
+patterns); (ii) regularity (R) as a theorem, with the size of the realisable neighbourhood
+(small for labels at every third point); (iii) the quartic certificate on patterns for three
+states; a description of the patterns with structural points (two hyperplanes covering
+the labelled bond vectors) and of longer covers; (iv) the middle of the table of §6: what
+happens between `c = 9K/2` and the information threshold, and at `c = 16` for two states;
+(v) other statewise equalities (rigid labelled bodies); patterns combined with states that
+share rigid parts; (vi) data that are not all pairs among the labelled sites (then a
+stress certificate is needed: Theorem F; no producer); (vii) noise.
+

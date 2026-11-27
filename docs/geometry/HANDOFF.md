@@ -19,11 +19,12 @@ verification, documentation and preservation.
 | cycle-1 results with proofs | `docs/geometry/ENSEMBLE_RIGIDITY.md` |
 | cycle 2, first note: sequence-local distance data | `docs/geometry/LOCAL_DATA_STABILITY.md` |
 | third note: states that share rigid segments (hinges, reflections, interval moments) | `docs/geometry/HINGE_ENSEMBLES.md` |
+| fourth note: only a subset of the points observed (count of constrained labelled pairs; obstruction for sparse labels) | `docs/geometry/LABEL_PATTERNS.md` |
 | every statement with label, evidence, review, novelty | `docs/geometry/THEOREM_REGISTER.md` |
 | what is known / not found, with the search log | `docs/geometry/PRIOR_ART.md` |
 | withdrawn or weakened claims | `docs/geometry/DEAD_ENDS.md` |
 | the internal review, verbatim, with our response | `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; the referee's code: `experiments/geometry/review1/` |
-| open proof obligations (O-1 … O-16) | `docs/geometry/PROOF_OBLIGATIONS.md` |
+| open proof obligations (O-1 … O-17) | `docs/geometry/PROOF_OBLIGATIONS.md` |
 | **for software and evaluation:** exact specifications of what can be implemented, with proof status, Lean names, assumptions, conditioning, validation criteria; the four notions (global / local identifiability, recoverability, certification); the distance from the idealised observable to measurements | `docs/geometry/IMPLEMENTATION_GUIDE.md` |
 | labelled test instances in six classes, with second solutions where the data do not determine the answer; ways to falsify our claims | `docs/geometry/BENCHMARKS.md`; `experiments/geometry/benchmark_instances.py`, `benchmark_suite/` |
 | the research owner's three directives to this division, condensed | `docs/collaboration/status/geometry.md` ("Directives of the research owner") |
@@ -40,8 +41,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 47 tests, about 65 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 35 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 51 tests, about 70 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 39 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
@@ -68,6 +69,8 @@ python3 experiments/geometry/hinge_fourier_rank.py      # what the squared dista
 python3 experiments/geometry/local_data_upper.py        # Lemma P, Theorems L (any Y, every proof step), L+, Proposition L0, tube bound (10 s)
 python3 experiments/geometry/local_data_guarantees.py   # what Theorems L, L+ certify on idealised traces (the table of section 6)
 python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
+python3 experiments/geometry/label_patterns.py          # partial labelling: certificate iff enough constrained labelled pairs; second solutions for sparse labels (10 s)
+python3 experiments/geometry/exact_label_patterns.py    # the same in exact arithmetic on random patterns; quartic certificate on patterns (1 s)
 python3 experiments/geometry/benchmark_instances.py     # labelled test instances for software (BENCHMARKS.md): self-check of every label (1 min); --write regenerates benchmark_suite/
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \
@@ -136,4 +139,7 @@ of the thin-rod rigidity estimate (SCI-REV-0023).  Since the tenth checkpoint Th
 Gram matrices; frames compared on shared tetrahedra), a local constant, and a companion
 (Theorem L⁺) with the first-order constant `1/(2μ)` in an explicit range.  On idealised
 traces that range is `10⁻⁵` ångström or less: the theorems are about scaling, and their
-guarantees are empty for data of realistic accuracy (§6 of the note; O-16).
+guarantees are empty for data of realistic accuracy (§6 of the note; O-16).  Third topic
+(`LABEL_PATTERNS.md`): if only a subset of the points is observed, everything is governed
+by the number of observed pairs at chain separation 1 or 2 — linear certificate from
+`(9K² + K + 2)/2`, no local identifiability below `9K/2`, nothing at all from sparse labels.

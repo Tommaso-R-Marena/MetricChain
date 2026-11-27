@@ -44,6 +44,10 @@ MUTATIONS = [
     ("theorem_L_drop_sep4", "theorem_L_any_Y"),
     ("theorem_Lplus_first_order", "theorem_L_sharp_constant"),
     ("benchmark_second_solution_weights", "benchmark_suite_labels"),
+    ("label_count_off_by_one", "label_patterns_linear"),
+    ("label_quartic_one_fewer", "label_patterns_exact"),
+    ("labels_rotation_not_orthogonal", "sparse_labels_second_solution"),
+    ("affine_hull_separation_two", "chain_affine_hull"),
     ("third_moment_generic_rank", "third_moment_blocks"),
 ]
 

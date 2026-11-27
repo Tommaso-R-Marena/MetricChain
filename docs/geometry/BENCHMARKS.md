@@ -17,7 +17,7 @@ For held-out use the evaluating division should draw fresh instances with seeds 
 from the generator (§5).
 
 Files: `experiments/geometry/benchmark_instances.py` (generator; re-derives every label it
-can and fails otherwise; one minute), `experiments/geometry/benchmark_suite/*.json` (the 21
+can and fails otherwise; one minute), `experiments/geometry/benchmark_suite/*.json` (the 23
 instances, pinned) and `MANIFEST.json` (SHA-256 of each).  Format of an instance: `chain`
 (bond length, bond angle, the statewise constraints), `data` (what a tool receives),
 `truth` (states, weights), `label`, `expected_behaviour_of_a_correct_tool`,
@@ -28,8 +28,8 @@ instances, pinned) and `MANIFEST.json` (SHA-256 of each).  Format of an instance
 
 | class | instances | what is true | evidence |
 |---|---|---|---|
-| **uniquely reconstructible** | A1, A2 (two states, 12 and 16 points), A3 (three states, 23 points); B1 (two states, 11 points), B3 (three states, 17 points), B2 (two states, 10 points); C5 variant b (one conformation, distances of sequence separation at most 4) | the ensemble (the conformation) is the only one with the data | A: Theorem B with the certificate computed on the instance; B: Theorem I′ generically, floating point on the instance; C5b: Theorem L |
-| **non-unique** | C1 (two states, 8 points), C2 (one differing torsion), C3 (two half-turn hinges), C4 (no statewise constraints supplied), C5 variant a (separation at most 3), G2 (a continuous family) | another ensemble (conformation) has the same data — **supplied** in the instance, data equal to `10⁻⁹` or better | by construction; C2, C3 also by theorem |
+| **uniquely reconstructible** | A1, A2 (two states, 12 and 16 points), A3 (three states, 23 points); A4 (two states, 19 of 60 points observed: an anchor of 12 and 7 isolated labels — the labelled sites are determined, the others are not); B1 (two states, 11 points), B3 (three states, 17 points), B2 (two states, 10 points); C5 variant b (one conformation, distances of sequence separation at most 4) | the ensemble (the conformation) is the only one with the data | A: Theorem B with the certificate computed on the instance; B: Theorem I′ generically, floating point on the instance; C5b: Theorem L |
+| **non-unique** | C1 (two states, 8 points), C2 (one differing torsion), C3 (two half-turn hinges), C4 (no statewise constraints supplied), C5 variant a (separation at most 3), C6 (two states, labels at every fourth point), G2 (a continuous family) | another ensemble (conformation) has the same data — **supplied** in the instance, data equal to `10⁻⁹` or better | by construction; C2, C3 also by theorem |
 | **locally but not globally identifiable** | C1 | the Jacobian of (torsions, weight) ↦ data has full rank 11 of 11, and nine other chains reproduce the data | computed on the instance |
 | **identifiable, but no efficient certificate known** | E1 (two states, 9 points), E2 (three states, 15 points); for tools limited to the linear certificate also B1–B3 | believed determined; neither the linear nor the quartic certificate applies | numerical (E1: 24 instances searched) and conjectural (E2) — **not theorems** |
 | **numerically ill-conditioned** | F1a, F1b (two states differing by torsion changes of size `10⁻¹`, `10⁻³`), F2 (one nearly planar window), F3 (a helix of 100 points) | determined for exact data; rank decisions or error amplification are close to failing | computed condition numbers are in the instance |
@@ -39,7 +39,8 @@ instances, pinned) and `MANIFEST.json` (SHA-256 of each).  Format of an instance
 
 * **A.**  Returns the number of states, the states up to congruence (mirror images are the
   same shape) and permutation, the weights, **and the certificate**.  Tolerances we meet on
-  exact data: RMSD `10⁻⁶`, weights `10⁻⁶`.
+  exact data: RMSD `10⁻⁶`, weights `10⁻⁶`.  On A4 the answer concerns the 19 labelled sites
+  only; reporting positions of the 41 unlabelled points as determined is an error.
 * **B.**  A tool that has only the linear certificate answers "**not certified**" — not
   "not unique", and not a list of states without a caveat.
 * **C.**  Does **not** report the truth as the unique answer.  Acceptable: "not certified";

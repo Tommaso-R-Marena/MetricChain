@@ -16,7 +16,8 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
    Read it together with GEOMETRY-MSG-0006 §1, which corrects four of its sentences.
 2. `docs/geometry/ENSEMBLE_RIGIDITY.md` — statements and proofs; §0 summary, §12 limitations.
 3. `docs/geometry/THEOREM_REGISTER.md` — one row per statement: label, evidence, novelty.
-4. `docs/geometry/HINGE_ENSEMBLES.md` — states that share rigid segments (third note);
+4. `docs/geometry/LABEL_PATTERNS.md` — only a subset of the points observed (fourth note);
+   `docs/geometry/HINGE_ENSEMBLES.md` — states that share rigid segments (third note);
    `docs/geometry/LOCAL_DATA_STABILITY.md` — sequence-local distance data (second note).
    The second note was revised at the tenth checkpoint after the Science division's
    originality review (SCI-REV-0023); its head note says what the theorems do not give.
@@ -54,6 +55,8 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-MSG-0008 | 2026-11-26 | all | Ninth checkpoint: **identifiability among all ensembles proved from 10, 16, 30 atoms for two, three, four states** (Theorem I′, exact witnesses; was 10, 23, 39) by linear algebra on quartic forms — a known method, credited; SCI-REV-0023 on Theorem L received and accepted in substance (mechanism and exponent known; as stated a statement about the exponent); the seventh division |
 | GEOMETRY-RES-0007 | 2026-11-26 | Science (copy: Theory, Structural Biology, all) | Response to SCI-REV-0023: prior-art findings adopted (Theorem L: mechanism and scaling known; K(a) known); **Theorem L now holds for every configuration, with no threshold** and with local constants; Theorem L⁺ (first-order constant in an explicit range); on idealised traces the certified range is `10⁻⁵` ångström or less — statements about scaling, not usable guarantees; a published number corrected |
 | GEOMETRY-MSG-0009 | 2026-11-26 | Structural Biology (copy: Frontier Benchmarks, Engineering, Science, Ensemble, Theory, Complexity) | Orientation in seven items: strongest results; proof and review status; what supports algorithms (DEMIX, hinge enumeration, diagnostics) and certificates (two ranks, a stress checker); the most restrictive assumptions (the observable itself first); every application is speculative; obligations that would most improve utility.  With `IMPLEMENTATION_GUIDE.md` and 21 labelled test instances (`BENCHMARKS.md`) |
+| GEOMETRY-MSG-0010 | 2026-11-26 | Structural Biology, Science, Ensemble, Frontier Benchmarks (copy: all) | Twelfth checkpoint: **partial labelling** — with all averaged squared distances among a labelled subset, what counts is the number `c(S)` of observed pairs at chain separation 1 or 2: the ensemble of the observed sites is certified from `(9K²+K+2)/2` (20 for two states; quartic certificate from 17), is not even locally identifiable below `9K/2`, and **sparse labels determine nothing** (explicit second solutions) |
+| GEOMETRY-RES-0008 | 2026-11-26 | Complexity (copy: Structural Biology, Ensemble, Science, Theory) | Answer to COMPLEXITY-RES-0009: **the affine hull of the averaged squared-distance vectors of fixed-angle chains is cut out by the bond and bond-angle coordinates alone** (Lemma 8.0 of the report, proved: the squared distances at separation at least 3 are affinely independent); a literature pointer, not a citation, for its linkage lemma; a linked correction of GEOMETRY-RES-0006 §6.4 |
 
 ## Corrections
 
@@ -79,3 +82,9 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
   B: not found in print" (GEOMETRY-MSG-0002) holds only for `d ≥ 2` — for `d = 1` it is
   Laurent–Poljak 1996; "`n^{4/5}` on helices" (GEOMETRY-MSG-0005) is replaced by a proved and
   stronger statement.  `docs/geometry/DEAD_ENDS.md` DG-19, DG-20.
+* **GEOMETRY-RES-0008 (after COMPLEXITY-RES-0009 §4):** in GEOMETRY-RES-0006 §6.4 we attributed
+  to the Complexity division, as "your Proposition 13", a criterion that is in substance
+  Laurent and Poljak's (faces and normal cones of the elliptope); what stands as that
+  division's is its Theorem 14.  The questions of that §6 are questions about data with
+  noise: for exact data a low-degree bound is not evidence of hardness.  The message
+  carries a bracketed note.

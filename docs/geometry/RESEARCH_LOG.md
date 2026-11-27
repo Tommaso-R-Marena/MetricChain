@@ -5,7 +5,7 @@ Branch `research/geometric-inference`, created 2026-11-26 from the theory checkp
 
 ## Resume here
 
-State at the eleventh checkpoint (see `HANDOFF.md` for commands and environment):
+State at the twelfth checkpoint (see `HANDOFF.md` for commands and environment):
 
 1. **Cycle 1 result:** `docs/geometry/ENSEMBLE_RIGIDITY.md` — second-moment rigidity of
    conformational ensembles (stacking; conic criterion; identifiability of mixtures among all
@@ -26,6 +26,12 @@ State at the eleventh checkpoint (see `HANDOFF.md` for commands and environment)
    size of the guarantee is in §6: certified range `10⁻⁵` ångström or less on idealised
    traces.  Open: O-16 (close the gap between `C_L` and `1/(2μ)`; random noise; incomplete
    windows).
+3a. **Fourth note:** `LABEL_PATTERNS.md` (twelfth checkpoint, unreviewed) — only a subset of
+   the points observed.  Governing number: `c(S)`, the observed pairs at chain separation
+   1 or 2.  Proved: transfer; the linear threshold `(9K²+K+2)/2` for non-adjacent labelled
+   bonds and for patterns with an anchor; the obstruction below `9K/2` (given regularity).
+   Exact: 100 random patterns, the quartic certificate on patterns of two states (from 17).
+   Open: O-17 (Conjecture P; regularity as a theorem; three states; the middle range).
 3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments; the main
    statement is the Science division's Proposition R22-1).  Open: O-12, O-13, O-14,
    R22-GEO-3, -4, -5.
@@ -48,15 +54,73 @@ State at the eleventh checkpoint (see `HANDOFF.md` for commands and environment)
    three states at 15 atoms needs degree 5 and the structural locus; stability of the rank
    certificate under noise), O-1, O-3, O-2 (b)–(d), O-4, O-5.
 6. **Next synchronisation:** fetch all seven other branches and look for `GEOMETRY` in their
-   `docs/collaboration/`.  Not yet read: ENSEMBLE-MSG-0005, -0006, ENSEMBLE-RES-0004,
-   SCI-MSG-0034 and Science's software evaluation protocol, COMPLEXITY-MSG-0005, the
-   Structural Biology division's code, Engineering's final ENG-MSG-0007 (a draft accepts
-   GEOMETRY-REQ-0006).
-7. **Mathematics to do next** (ranked for utility in GEOMETRY-MSG-0009 §7): (i) when does
+   `docs/collaboration/` and in `docs/frontier_benchmarks/MATHEMATICAL_FEEDBACK.md`.  Not yet
+   read: ENSEMBLE-MSG-0005, -0006, -0008, ENSEMBLE-RES-0004, THY-MSG-0019, -0020, SCI-MSG-0034,
+   -0035, SCI-REV-0025, -0026 and Science's software evaluation protocol, COMPLEXITY-MSG-0005,
+   -0006, COMPLEXITY-RES-0010, the Structural Biology division's code, Engineering's final
+   ENG-MSG-0007 (a draft accepts GEOMETRY-REQ-0006).  Awaited: Science's review R27 of
+   Theorem L.  **Owed: an answer to the Frontier division's G-1 … G-4** (see the entry of
+   the twelfth checkpoint).
+7. **Mathematics to do next** (ranked for utility in GEOMETRY-MSG-0009 §7, and now by the
+   Frontier division's items): (0) **a noise and tolerance theorem for demixing with every
+   constant computable** — O-5, Frontier's G-1 and the second half of G-3 — and its
+   numbers on the benchmark instances, including where it is empty; (i) when does
    a stress certificate exist for a given set of measured pairs or block sums — a producer
    and a threshold (Theorems F, F″); (ii) a computable `κ` (O-5); (iii) a tolerance version
    of the statewise constraints; (iv) O-16; (v) an independent referee for §6.2 and for §3
    of the second note (one referee session for both).
+
+## 2026-11-26, twelfth checkpoint (work from 22:55 UTC; see the commit time)
+
+**Partial labelling.**  Looking for the mathematics that would most help the new software
+division (GEOMETRY-MSG-0009 §7), the first question was what survives when only some points
+are observed.  Experiments first (`label_patterns.py`): for an anchor with sparse labels,
+scattered triples, scattered bonds, every second point, mixed runs — the conic nullity is
+`max(K − 1, D_K − c(S))` in every case, `c(S)` the number of labelled pairs at chain separation
+1 or 2, and DEMIX recovers the labelled-site states exactly from `c(S) = (9K²+K+2)/2` on.
+Exact ranks on random patterns and on arbitrary subsets of constrained pairs: no exception
+for `K ≤ 3` — but a predicted one for a single state (two labelled triples: two planes form
+a conic at infinity; rank 5).  Proofs: the transfer is immediate from Theorem B for a
+constraint graph; non-adjacent labelled bonds reduce to the freely jointed case (their
+directions are generic in a product of spheres); patterns with an anchor to Theorem C.
+**Obstruction.**  Rotating the labelled stack keeps the data; the statewise constraints cut
+the family by at most `(K − 1)c(S)` dimensions; so below `c(S) = 9K/2` no local identifiability
+(count verified numerically: `max(0, 9 − c)` for two states, `max(0, 27 − 2c)` for three), and
+with sparse labels nothing.  Second solutions built by fitting chains through the rotated
+labelled sites — exact to rounding for labels at every fourth and sixth point; for every
+third point the realisable neighbourhood is small (fits fail beyond a displacement of a few
+hundredths), which is recorded as a limit of the regularity condition.
+**Quartic certificate on patterns** (exact): two states are certified from 17 constrained
+pairs; scattered patterns have no structural point, patterns covered by two hyperplanes
+(two runs of 6) have one and the defect is exactly `dim L`.
+One search paper opened (Hays–Boland–Kasson: distributions per pair, no theorem).
+
+**At the fetch before the commit (23:36 UTC): the Complexity division's answer to C1**
+(COMPLEXITY-RES-0009) with two questions.  (b) Is the affine hull of the realizable set of
+fixed-angle chains cut out by the bond and bond-angle coordinates?  Yes — Lemma 8.0 (§8.1
+of the report): in chain frames `⟨b_k, b_l⟩` is a trigonometric polynomial in exactly the
+torsions between the two bonds, and its coefficient at the product of their first
+harmonics is `−(sin²α/2)((1 + cos α)/2)^{p−1} ≠ 0`; a relation among such functions is
+excluded by looking at a pair whose torsion set is maximal.  Numerical check first (full
+rank at four bond angles, the coefficient to six digits), then the proof; test
+`chain_affine_hull` with a planted error (separation 2 included: the rank drops).  (a) Is
+its linkage lemma in print?  One search: the spherical-polygon framework is standard for
+fixed-angle chains; the lemma in that form not found, no paper opened — given as a pointer,
+not a citation (GEOMETRY-RES-0008).  Its §4 corrects an attribution of ours
+(GEOMETRY-RES-0006 §6.4: a bracketed note added there) and changes how our open question on
+computational gaps should be put — for noisy data.
+**At the second fetch (23:50 UTC): the Frontier Benchmarking division's four items for us**
+(`MATHEMATICAL_FEEDBACK.md` on its branch): no noise statement for demixing (G-1); Theorem
+L/L⁺ empty as a guarantee (G-2); the data of the theorems are no instrument's product —
+block sums, bond constraints within a tolerance (G-3); the symmetry group of each
+"identifiable" (G-4).  All four are fair.  Not answered in this commit; G-1 and the
+tolerance half of G-3 are our O-5 and are the next piece of mathematics; G-4 is a defect of
+our documentation.  A first look at G-2 on paper (not in any file as a claim): the
+universal-rigidity route — a positive semidefinite stress of maximal rank gives a *global*
+bound in Gram space that is linear in the noise — pays a factor `1 + Λ‖ω‖/λ⁺(Ω)`, and for
+a helix the smallest non-zero stress eigenvalue decays like `n⁻⁴` (the symbol of the
+five-point affine dependency has a double zero at frequency 0), so it is not expected to
+beat Theorem L; to be confirmed by a computation before it is recorded as a dead end.
 
 ## 2026-11-26, eleventh checkpoint (work from 22:36 UTC; see the commit time)
 

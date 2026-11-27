@@ -34,6 +34,7 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 | Theorem J (laws of separations 3 and 4) | **application** of the Ensemble division's E5/E6 (its report, 2026-11-26) | its remark on prior art: Garamvölgyi–Gortler–Jordán 2022 (Lemma 3.1), unlabeled PCA |
 | Corollary 9.1 (second moment suffices under bond constraints) | **instance of a known principle** with a specific prior | Bandeira–Blum-Smith–Kileel–Perry–Weed–Wein (moments and sample complexity for orbit recovery); Bendory–Edidin and co-authors: sparse priors, generic semi-algebraic priors, non-uniform rotations make the second moment sufficient [confirmed at summary level] |
 | Hinge ensembles (`HINGE_ENSEMBLES.md`): reduction to a moment problem on `O(2)^s` with interval moments; two states at two or more hinges identifiable, the cube of eight candidates (Theorem M) | **not found** (three summary-level searches); ingredients classical | composition of rotations by reflections; reflection branching in discretizable distance geometry; truncated (matricial) trigonometric moment problems and flat extensions (Curto–Fialkow); ghost orientations of domains from residual dipolar couplings (a different observable) |
+| Label patterns (`LABEL_PATTERNS.md`): identifiability from averaged squared distances among a labelled subset is governed by the number `c(S)` of statewise-constrained labelled pairs (linear certificate from `(9K²+K+2)/2`, no local identifiability below `9K/2`, nothing from sparse labels) | **not found**, on a thin basis; the positive part is Theorem B for a constraint graph (dimension one: Laurent–Poljak), the obstruction is the classical rotation indeterminacy of second-moment data restricted to realisable configurations | factor rotation; Kam's autocorrelation ambiguity in cryo-EM [search summary]; Hays–Boland–Kasson, arXiv 2010.15612 (per-pair distance *distributions* from separate experiments; "separately measured label sets do not provide information on the joint distribution"; a simulation-based estimator, no identifiability theorem) [read through an automated fetch, without the supplement] |
 | Theorems L, L⁺ (`LOCAL_DATA_STABILITY.md`): global bound `≤ C n²` — for every configuration, no threshold — for reconstruction from distances of sequence separation `≤ 4` on chains with non-degenerate windows; matching lower bound on rods (Theorem K(c)); the first-order constant in a certified range | **not found as stated; mechanism and scaling known** (thin-rod geometric rigidity: Mora–Müller 2003; Blanchard–Griso 2009; lattice versions: Alicandro–Lazzaroni–Palombaro 2016, Schmidt–Zeman 2022); first-order polynomial bounds in print (Daitch–Spielman 2007; Kyng et al. 2018; Lew et al. 2023); the published *global* bound for this lateration graph is exponential (Arias-Castro–Vishwanath) [Science division A4, 2026-11-26].  Lemma P is Tu et al. 2016, Lemma 5.4 [from memory].  Not read: Schrader 1967 and the geodesy of trilateration chains; Luo–Wu 2011; Anderson–Shames–Mao–Fidan 2010; Friesecke–James–Müller 2002 itself.  The threshold-free form and Theorem L⁺ were written after the search | Science division, SCI-REV-0023 and `docs/science/workstreams/A4_REPORT.md` on its branch (123 logged queries, 33 texts opened); ours: arXiv 2310.10900 [one automated reading], two searches |
 
 ## 2. Related work that is *not* the same problem
@@ -61,7 +62,7 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 * **Simplicial faces of the elliptope** (Tropp 2018): faces spanned by rank-one sign
   matrices; ours are faces of the hull of rank-3 chain Gram matrices.
 
-## 3. Search log (2026-11-26; web search, summaries only unless an entry says that a paper was read; searches 9–11 for `HINGE_ENSEMBLES.md`, 12–13 for Theorem L, 14–15 for §6.2)
+## 3. Search log (2026-11-26; web search, summaries only unless an entry says that a paper was read; searches 9–11 for `HINGE_ENSEMBLES.md`, 12–13 for Theorem L, 14–15 for §6.2, 16–17 for `LABEL_PATTERNS.md`)
 
 1. "identifiability conformational ensemble from ensemble-averaged squared distances mixture
    Euclidean distance matrices bond length constraints" — nothing on the question; pointers to
@@ -152,6 +153,21 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
     `r(min(n_1, n_2) − r) + 1` for matrices of rank at most `r`).  Its Remark 6.10 and
     §§6.2–6.5 were not reached by the fetch.
 
+16. "identifiability conformational ensemble from average distances between labelled sites
+    subset of residues ensemble non-uniqueness mean distances sparse labels FRET DEER
+    underdetermined" — no identifiability theorem; methodological papers on ensembles from
+    sparse label data (arXiv 2010.15612; a Frontiers article on distance distributions
+    against means; maximum-occurrence approaches; reviews).  arXiv 2010.15612 was then read
+    through an automated fetch (all of the HTML text; not the supplement): per-pair distance
+    distributions, each from a separate experiment; a simulation-based estimator; no
+    theorem, no count of label pairs, no second moments.
+17. "mixture of point configurations second moment identifiability rotation indeterminacy
+    constraints factor analysis orthogonal ambiguity resolved by known within-component
+    distances" — the orthogonal ambiguity of second-moment data in cryo-EM (Kam) and its
+    removal for point-mass models; rotation invariance of factor models; nothing with
+    statewise distance constraints.  No paper opened; none is classified as not containing
+    our statements beyond what the summaries say.
+
 Sources returned by the searches and used above:
 [arXiv 1203.6602](https://arxiv.org/pdf/1203.6602),
 [arXiv 1205.2040](https://arxiv.org/pdf/1205.2040),
@@ -182,7 +198,8 @@ Sources returned by the searches and used above:
 [arXiv 2212.03851](https://ar5iv.labs.arxiv.org/html/2212.03851),
 [arXiv 2504.17947](https://arxiv.org/html/2504.17947v1),
 [arXiv 2409.18948](https://arxiv.org/abs/2409.18948),
-[Phys. Rev. A 106, 062443](https://link.aps.org/accepted/10.1103/PhysRevA.106.062443).
+[Phys. Rev. A 106, 062443](https://link.aps.org/accepted/10.1103/PhysRevA.106.062443),
+[arXiv 2010.15612](https://ar5iv.labs.arxiv.org/html/2010.15612).
 
 ## 3a. What the Science division's review found that our searches missed (SCI-REV-0021 F3, F9)
 

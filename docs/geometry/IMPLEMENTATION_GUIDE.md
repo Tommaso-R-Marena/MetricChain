@@ -57,7 +57,8 @@ justified substituting it for any.  The gaps, as mathematics:
 
 | idealisation | what a measurement differs in (as far as this collaboration has established) | what we have | what is missing |
 |---|---|---|---|
-| all pairs | only some pairs, or only linear functionals `⟨C_a, M⟩` (block sums — the Science division's analysis of labelled scattering, SCI-RES-0029) | Theorem F (a stress certificate for a subset of pairs; instances exist for scattered pairs), Theorem F″ (the same for linear functionals; **no instance**) | a certificate *producer* (a semidefinite programme) specified and tested; thresholds |
+| every point observed | only a labelled subset `S` of the points, with all pairs among `S` | `LABEL_PATTERNS.md` (twelfth checkpoint): everything transfers to the labelled sites; what counts is the number `c(S)` of labelled pairs at chain separation 1 or 2 — linear certificate from `(9K² + K + 2)/2` (20, 43, 75), quartic from 17 for two states, **nothing from sparse labels** (S8 below) | a proof of the count for all patterns; three states below the linear threshold |
+| all pairs among the observed points | only some pairs, or only linear functionals `⟨C_a, M⟩` (block sums — the Science division's analysis of labelled scattering, SCI-RES-0029) | Theorem F (a stress certificate for a subset of pairs; instances exist for scattered pairs), Theorem F″ (the same for linear functionals; **no instance**) | a certificate *producer* (a semidefinite programme) specified and tested; thresholds |
 | squared distances | other averages of the distance (inverse powers, transfer efficiencies) are not quadratic in the coordinates | nothing: the stacking lemma fails | a theory |
 | second moments | distance *distributions* (laws) carry more | Theorem J (laws at separations 3 and 4 determine generic finite ensembles), resting on the Ensemble division's E5/E6 | constructive version; noise |
 | exact data | noise | Theorem G: `W₂² ≤ C·‖ΔM‖` with a constant `κ` that is **not computed** (a global infimum); numerical thresholds of one implementation | a certified `κ` (`PROOF_OBLIGATIONS.md` O-5) |
@@ -254,6 +255,31 @@ decide, for given synthetic or model data, whether a claimed identification is c
 * **Reference code.**  `local_data_upper.py` (`sharp_constants`, `theorem_L_bounds`,
   `theorem_Lplus_bound`), `local_data_guarantees.py`.
 
+## 8a. Specification S8 — partial labelling (only a subset of the points is observed)
+
+* **Statement.**  *`LABEL_PATTERNS.md`, Theorems P1, P2, Propositions P3, P4 [P; P-exact;
+  **unreviewed**].*  Let `S` be the observed points, the data all averaged squared distances
+  among `S`, and `c(S)` the number of pairs of `S` at chain separation 1 or 2.  S1–S3 apply to
+  `(M_S, E₀(S))` unchanged and determine the ensemble of configurations **of the labelled
+  sites**.  The linear certificate needs `c(S) ≥ (9K² + K + 2)/2` and, for patterns in general
+  position, holds from there (proved for non-adjacent labelled bonds and for patterns with
+  an anchor of `⌈(9K² + K + 8)/4⌉` consecutive points; exact on random patterns; conjectured
+  in general for `K ≥ 2`; **false for one state** with two labelled triples).  Below
+  `c(S) = 9K/2` the ensemble is not even locally identifiable; with no two labelled points at
+  separation 1 or 2 nothing is determined.
+* **Input.**  `M_S`; the positions of the labelled sites along the chain (to form `E₀(S)` and
+  the lengths).  **Output.**  As S2, for the labelled sites only.  A tool must not output
+  positions of unlabelled points as determined.
+* **Computation and complexity.**  As S2 with `n` replaced by `|S|` and `2n − 3` by `c(S)`.
+* **Pre-check that costs nothing.**  Count `c(S)`.  If `c(S) < 9K/2`: refuse, the answer is
+  provably not unique.  If `c(S) < (9K² + K + 2)/2`: the linear certificate cannot hold.
+* **Instances.**  A4 (an anchor of 12 with 7 isolated labels: certified, all 19 sites
+  recovered), C6 (labels at every fourth point: a second solution supplied).
+* **Reference code.**  `label_patterns.py` (`constrained_pairs`, `demix_pattern`,
+  `second_solution`), `exact_label_patterns.py`.
+* **Readiness.**  The pre-check and S2 on patterns: ready as a reference.  Everything
+  between the two thresholds: exploratory.
+
 ## 9. What a tool claiming more would have to contradict (obstructions)
 
 | claim | obstruction | status |
@@ -262,6 +288,8 @@ decide, for given synthetic or model data, whether a claimed identification is c
 | a continuous conformational distribution is recovered from second moments | never determined (Corollary 4.2 (c); instance G2) | P (Science division) |
 | two states that differ in one torsion are resolved | only the mean of `(cos, sin)` is determined (instance C2) | P (Science division) |
 | a unique fold from distances at sequence separation at most 3 | `2^{n−3}` mirror choices (instance C5) | P |
+| an ensemble from averaged squared distances between sparse labels (no two at chain separation 1 or 2) | a family of other ensembles of dimension at least `9K(K − 1)/2`; even one conformation is not determined among ensembles (`LABEL_PATTERNS.md` Proposition P3; instance C6) | P given a regularity condition that holds numerically |
+| an ensemble from fewer than `9K/2` statewise-constrained observed pairs | not even locally identifiable (the same proposition) | P given regularity |
 | accuracy from local distances that does not degrade with length | first-order amplification at least of order `n`, and `n²` on rod-like chains (Theorem K; instance F3) | P |
 | identification at the "parameter count" threshold | local identifiability only (Theorem H; instance C1 at 8 points for two states) | P-exact / N |
 | a certificate of uniqueness below 10, 16, 30 points for two, three, four generic states | none known to us; possible in principle down to the conjectured 10, 14, 19 | open |
@@ -287,6 +315,7 @@ others); an instance is covered only by running its certificate.
 | S5 hinges | none | P, P-exact; two derivations | two states, rigid segments on no conic | exact degrees 8 / 2 | one hinge; two half-turns | eight candidates, a linear programme | more than two states | reference ready |
 | S6 local identifiability | none | P-exact | generic | exact Jacobian ranks `K ≤ 8` | C1 | Jacobian rank | as evidence of identification | diagnostic only |
 | S7 local-distance diagnostics | none | P; **unreviewed**; mechanism known | exact complete data of separation `≤ 4` | 420 arbitrary competitors | separation `≤ 3` | sparse SVD | as an error bar at realistic noise | diagnostics ready; guarantee vacuous |
+| S8 partial labelling | (S2's declarations apply) | P, P-exact; **unreviewed**; one conjecture | all pairs among the labelled sites; exact common local geometry | exact ranks on 100 random patterns; second solutions | sparse labels (C6); one state with two triples | counting `c(S)`; then S2 | `c(S)` below the thresholds | pre-check and reference ready |
 
 (Originating division: Geometry, except where a row or the text names the Science
 division.  Commit: the one that adds this file.  Physical interpretation, potential

@@ -66,6 +66,18 @@
   "sha256": "8f34c9acc6807e874ad5c3d77b0adfc9fa0f2380e9c621fd3016c777951e824b"
  },
  {
+  "id": "A4",
+  "category": "A uniquely determined; linear certificate (partial labelling)",
+  "title": "2 generic states, 60 points of which 19 are observed: 12 consecutive ones and 7 scattered",
+  "sha256": "e8cfbabdd9879052ab0a1218016901ea37ab3554ad570f79e1d5fc046ce4867c"
+ },
+ {
+  "id": "C6",
+  "category": "C not determined (sparse labels)",
+  "title": "2 states, 41 points of which every fourth is observed (11 labelled sites)",
+  "sha256": "36ab9976c9c61aa4e4c11cbadb9c5fb133d80eb57e47106543a2a82dec540081"
+ },
+ {
   "id": "E1",
   "category": "E determined (numerical evidence or conjecture); no efficient certificate known",
   "title": "2 generic states, 9 points",

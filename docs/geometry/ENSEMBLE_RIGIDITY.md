@@ -1175,6 +1175,32 @@ spaces of arbitrary dimension satisfying the `E₀`-constraints ("Hilbert-space 
 passes the semidefinite (Schoenberg) test with the statewise constraints imposed on the
 averages.
 
+**Lemma 8.0 (the affine hull of the realizable set) [P].**  For chains with unit bonds and a
+bond angle `θ ∉ {0, π}`, the squared distances `|x_i − x_j|²`, `j − i ≥ 3`, are affinely independent
+as functions on the conformation space.  Hence the affine hull of `D(𝒞)`, and of `𝒦`, is cut
+out by the bond and bond-angle coordinates alone: `{m : m_{i,i+1} = 1, m_{i,i+2} = c₁₃²}`.
+(Asked by the Complexity division, COMPLEXITY-RES-0009, for its hardness result on
+realizability.)
+
+*Proof.*  Let `b_k` be the bond vectors and `α = π − θ`.  The squared distances are an invertible
+linear image of the inner products `⟨b_k, b_l⟩`, `k ≤ l` (`|x_i − x_j|² = Σ_{i ≤ k, l < j} ⟨b_k, b_l⟩`),
+with `⟨b_k, b_k⟩ = 1` and `⟨b_k, b_{k+1}⟩ = cos α`; so it suffices that the functions
+`⟨b_k, b_l⟩`, `l − k ≥ 2`, are linearly independent modulo constants.  In frames along the chain
+`⟨b_k, b_l⟩ = e_zᵀ X(α) Z(φ_1) X(α) Z(φ_2) ⋯ Z(φ_p) X(α) e_z`, where `φ_1, …, φ_p` are the
+`p = l − k − 1` torsions between the two bonds, `Z(φ)` is the rotation by `φ` about `e_z` and `X(α)`
+the rotation by `α` about `e_x`.  With `Z(φ) = P_0 + e^{iφ}P_+ + e^{−iφ}P_-` the Fourier coefficient
+at the character `e^{i(φ_1 + ⋯ + φ_p)}` is `(e_zᵀXv_+)(v_+^*Xv_+)^{p−1}(v_+^*Xe_z)`, of modulus
+`(sin²α/2)((1 + cos α)/2)^{p−1} ≠ 0`.  So every `⟨b_k, b_l⟩` has a non-zero coefficient at a
+character in which exactly its own torsions occur.  In a linear relation modulo constants,
+take a pair with non-zero coefficient whose set of torsions is maximal under inclusion:
+its character occurs in no other term (a function of a set of torsions that does not
+contain this one has no such coefficient, and different pairs have different sets),
+a contradiction.  ∎
+
+[N: `experiments/geometry/run_checks.py`, test `chain_affine_hull` — the rank of the constant
+and the squared distances at separation at least 3 is full for bond angles 60°, 90°, 111°,
+150°; the modulus of the coefficient agrees with the formula to six digits.]
+
 **Theorem D [P; (a) from a known bound, (b) with an exact witness].**
 (a) If `|E₀| < (d + 1)(d + 2)/2` then `𝒦 = 𝒮`.  In space: if `|E₀| ≤ 9`.  In particular for
 chains with fixed bond lengths and angles and `n ≤ 6` atoms, and for freely jointed chains

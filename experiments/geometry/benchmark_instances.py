@@ -26,6 +26,7 @@ from scipy.optimize import linprog
 import demix as DM
 import demix4 as D4
 import hinge_pairs as HP
+import label_patterns as LP
 from geomlib import chain, edm, kabsch_rmsd
 from local_data_upper import band_pairs, sharp_constants, csig3
 
@@ -273,6 +274,38 @@ def build(quick=False):
                   "P (variant a: the second solution is given; variant b: Theorem L, exact data)",
                   "LOCAL_DATA_STABILITY.md Theorem L, Proposition L0",
                   {"second_solution_variant_a": {"states": [Y.tolist()], "weights": [1.0]}}))
+
+    # ---- label patterns: only a subset of the points is observed -----------------------
+    S = sorted(list(range(20, 32)) + [0, 7, 13, 40, 47, 55, 59])
+    Xs, w = LP.random_mixture(2, 60, seed=71)
+    nul, c = LP.conic_nullity(Xs, w, S)
+    cert, rmsd = LP.demix_pattern(Xs, w, S)
+    check("A4: an anchor stretch of 12 labelled points certifies all 19 labelled sites", cert and rmsd < 1e-6 and nul == 1 and c == 21, f"c = {c}, RMSD {rmsd:.1e}")
+    I.append(inst("A4", "A uniquely determined; linear certificate (partial labelling)",
+                  "2 generic states, 60 points of which 19 are observed: 12 consecutive ones and 7 scattered", THETA, Xs, w,
+                  {"kind": "ensemble-averaged squared distances among the labelled sites only, exact", "labelled_sites": S,
+                   "matrix": sum(wk * edm(X[S]) for wk, X in zip(w, Xs)).tolist()},
+                  {"globally_identifiable": "the ensemble of configurations of the 19 labelled sites: yes; the unlabelled points: not determined",
+                   "linear_certificate": True, "constrained_labelled_pairs": c, "needed": LP.needed(2)},
+                  "report the two configurations of the labelled sites (all 19, including the 7 isolated ones) and the weights, with the "
+                  "certificate; must not report positions of unlabelled points as determined",
+                  "P for this instance (Theorem B for the labelled constraint graph, certificate computed in floating point)",
+                  "LABEL_PATTERNS.md Theorems P1, P2"))
+    r = LP.second_solution(n=41, gap=4, eps=0.03, seed=0)
+    check("C6: with labels every fourth point two other chains have the same labelled data",
+          r["fit_residual"] < 1e-9 and r["data_difference"] < 1e-9 and r["moved"] > 1e-2 and all(constraints_ok(Y, THETA) for Y in r["second"]),
+          f"data difference {r['data_difference']:.1e}, labelled sites moved by RMSD {r['moved']:.2f}")
+    I.append(inst("C6", "C not determined (sparse labels)", "2 states, 41 points of which every fourth is observed (11 labelled sites)", THETA,
+                  r["truth"], r["weights"],
+                  {"kind": "ensemble-averaged squared distances among the labelled sites only, exact", "labelled_sites": r["S"],
+                   "matrix": sum(wk * edm(X[r["S"]]) for wk, X in zip(r["weights"], r["truth"])).tolist()},
+                  {"globally_identifiable": False, "locally_identifiable_within_K_states": False, "constrained_labelled_pairs": 0,
+                   "reason": "no two labelled sites are at chain separation 1 or 2: no statewise equality constraint among the observed "
+                             "points; the two-state ensembles with these data form a family of dimension at least 9"},
+                  "must not report two definite configurations of the labelled sites",
+                  "P (Proposition P3); the second solution is given",
+                  "LABEL_PATTERNS.md Proposition P3",
+                  {"second_solution": {"states": [Y.tolist() for Y in r["second"]], "weights": [float(x) for x in r["weights"]]}}))
 
     # ---- E: determined, but no efficient certificate known ---------------------------
     for iid, K, n, seed in (("E1", 2, 9, 31), ("E2", 3, 15, 32)):

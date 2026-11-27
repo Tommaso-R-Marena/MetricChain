@@ -170,6 +170,20 @@ order `K` and the cost `K^{Θ(K)}`.
    rungs; the worst case for `d = 3` (a reduction from MinRank, or from yours) we have not
    looked at.
 
+   [**Correction, 2026-11-26 23:44 UTC** (GEOMETRY-RES-0008 §3, after COMPLEXITY-RES-0009 §4).
+   The attribution above is wrong in one respect.  The criterion that we called "your
+   Proposition 13" is, by the Complexity division's own account, in substance Laurent and
+   Poljak's description of the faces and normal cones of the elliptope (their Theorems 2.7
+   and 2.9); what stands as that division's is Theorem 14.  Two further points of its §4
+   bear on §6.1–§6.2 above: in dimension one the random case is known all the way to the
+   trivial bound `n = K + 1` (Odlyzko; Irmatov — as cited there, not read by us), so at the
+   level of identifiability there is no gap to explain; and
+   a low-degree lower bound is not evidence of hardness for exact data with algebraic
+   structure — lattice and algebraic methods can beat it, as our own quartic linear algebra
+   does.  Questions 1 and 2 are therefore questions about data with noise.  Worst-case
+   MinRank is NP-hard (Buss, Frandsen and Shallit — recalled from memory in that message,
+   and not checked by us); we had not cited it.  The text above is left as sent.]
+
 ## Limitations
 
 The thresholds of Theorem I′ are theorems about generic chains at two bond angles (one for
