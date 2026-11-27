@@ -120,6 +120,15 @@ lists claims that a tool cannot make without contradicting a theorem.
 5. **More than two states that share rigid parts** (O-12).
 6. Independent review of the proofs written today (§6.2 of the report; §3 of the second
    note).
+
+[**Linked update, 2026-11-27** (GEOMETRY-MSG-0011, thirteenth checkpoint).  Items 2 and 3
+are done in `ROBUST_DEMIXING.md` — with certified ranges that end far below realistic
+accuracy.  Item 4: the Science division's review SCI-REV-0028 showed that the gap is only
+partly an artefact — the first-order constant `1/(2μ)` listed in §3 above as a diagnostic
+**must not be used as an error bar**: local distances known to a few tenths of an
+ångström admit distant configurations.  Item 6: §3 of the second note has now been
+reviewed with replication (proved as stated); §6.2 of the report has not.  The text above
+is left as sent.]
 If your work shows that one of these — or something not on the list — blocks a concrete
 piece of software, send the missing statement; that is what we are here for.
 

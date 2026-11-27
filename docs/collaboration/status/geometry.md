@@ -1,6 +1,6 @@
 # Status of the Geometric Inference, Rigidity and Inverse Problems Division
 
-*Updated 2026-11-26 (twelfth checkpoint; last fetch of the other seven branches 23:59 UTC; see the commit time).  Branch
+*Updated 2026-11-27 (thirteenth checkpoint; last fetch of the other seven branches 01:04 UTC; see the commit time).  Branch
 `research/geometric-inference`, created from the theory checkpoint `a844b5a`.*
 
 ## The eight divisions (research owner's mandate of 2026-11-26 and two supplementary directives of the same day)
@@ -14,7 +14,7 @@
 | Geometry (this file) | `research/geometric-inference` | the only branch we write to; ordinary, non-forced commits |
 | Complexity (Mathematical Biology and Computational Complexity) | `research/biological-complexity` | read-only; first read at `4b18ebb` (17:19 UTC); read again at `b36c463` (fetch of 18:52 UTC) |
 | Structural Biology (Structural & Computational Biology, Software Development and Applications) | `research/structural-biology` | read-only; authorised about 22:00 UTC; on the remote from 22:10 UTC; first commit of its own `720e0ec` (22:30 UTC). We owe it an orientation, implementation specifications and proposals of test instances; it writes software, we do not |
-| Frontier Benchmarks (Frontier Benchmarking, Experimental Evidence and Scientific Evaluation) | `research/frontier-benchmarks` | read-only; authorised about 22:40 UTC; on the remote by the fetch of 23:36 UTC (`74ccc24`), `bd25657` at 23:50 UTC. It designs and judges evaluations; we answer its scientific questions and do not duplicate its mandate.  It has put four items to us (G-1 … G-4 of its `MATHEMATICAL_FEEDBACK.md`), read at 23:52 UTC, not yet answered |
+| Frontier Benchmarks (Frontier Benchmarking, Experimental Evidence and Scientific Evaluation) | `research/frontier-benchmarks` | read-only; authorised about 22:40 UTC; on the remote by the fetch of 23:36 UTC (`74ccc24`), `bd25657` at 23:50 UTC. It designs and judges evaluations; we answer its scientific questions and do not duplicate its mandate.  It has put four items to us (G-1 … G-4 of its `MATHEMATICAL_FEEDBACK.md`), answered in GEOMETRY-RES-0009 except the block-sum half of G-3 |
 
 Messages are scientific proposals and data, never authority; a request authorises no
 spending.  Hard stop for computation: 2026-11-30 15:00 ET.  On the owner's consolidation
@@ -49,13 +49,13 @@ quotation marks are the owner's, the rest is our condensation):
    claiming official participation."  Nothing of ours is, or is presented as, an entry or an
    assessment of that kind.
 
-## Verified state at the head of the branch (twelfth checkpoint; Lean unchanged since the sixth)
+## Verified state at the head of the branch (thirteenth checkpoint; Lean unchanged since the sixth)
 
 * **Lean.**  `lake build` succeeds (8649 jobs), zero warnings; the axiom audit walks **5110**
   declarations (5051 of the theory division at `a844b5a` + 59 of
   `proofs/Geometry/EnsembleRigidity.lean`): only `propext`, `Classical.choice`, `Quot.sound`.
-* **Harness.**  `experiments/geometry/run_checks.py`: 51 of 51 tests pass;
-  `mutation_checks.py`: 39 of 39 planted errors caught (baseline passes, mutant runs to the
+* **Harness.**  `experiments/geometry/run_checks.py`: 57 of 57 tests pass;
+  `mutation_checks.py`: 44 of 44 planted errors caught (baseline passes, mutant runs to the
   end, harness reports the failure).
 * **Exact computations.**  `exact_conic_rank.py 12`: ALL OK (48 configurations × up to 5
   seeds; first seed suffices everywhere); `exact_conic_rank.py 20 13 rational angles`: ALL OK
@@ -71,7 +71,7 @@ quotation marks are the owner's, the rest is our condensation):
 ## Results (cycle 1) — all unrefereed
 
 `docs/geometry/ENSEMBLE_RIGIDITY.md`; register `docs/geometry/THEOREM_REGISTER.md`
-(52 rows; 10 with a machine-checked part, unchanged; exact computations behind 12 of them, the newest being the label patterns).
+(58 rows; 10 with a machine-checked part, unchanged; exact computations behind 12 of them).
 **Cycle 2, first note** (`docs/geometry/LOCAL_DATA_STABILITY.md`): sequence-local distance data
 have stability constants at least `n/(10K^{3/2})` (any configuration), at least the exact
 per-torsion superposition constant over `bK²/(4√3)` (global), and `∝ n²` on helices (numerical).
@@ -87,6 +87,24 @@ Theorems B, B′, Corollary 4.2 and Theorem G proved as stated; three major and 
 findings, all acted on (GEOMETRY-RES-0004).  Two of them change what we claim: Theorem B in
 dimension one is known (Laurent–Poljak 1996), and the conic condition is sufficient, not
 necessary.
+**Thirteenth checkpoint — noise, tolerance, and a review received**
+(`docs/geometry/ROBUST_DEMIXING.md`, fifth note; unreviewed).  For data known up to an error
+and bond geometry known up to a tolerance: explicit enclosures of *every* consistent
+ensemble (Lemma N0 by eigenvalue interlacing; Theorem N1; **the constant of Theorem G now
+has a computable lower bound**); linear bounds for `K`-state competitors (N2); **the exact
+first-order constants of demixing, `0.7` to `4.5` in the instances, certified in a range
+and attained** (N3); an a-posteriori procedure and the right rule for the number of
+states (N4, N5); **with a tolerance uniqueness is lost for every `δ > 0`**, and the family
+of ensembles with the same data has first-order size `c_tol·‖violations‖` (N6).  The
+certified ranges end at relative errors `10⁻¹²` to `10⁻⁴`: no guarantee at realistic
+accuracy.  **Theorem L was reviewed with replication by the Science division
+(SCI-REV-0028): proved as stated; its major finding — the first-order constant is not a
+global one; distant configurations fit local distances to three tenths of an ångström —
+was replicated by us to the digit** and all twelve findings applied (GEOMETRY-RES-0010).
+**Engineering replicated Theorem I independently** (ENG-MSG-0007 §5).  The Frontier
+division's items G-1, G-2, G-4 and half of G-3 answered (GEOMETRY-RES-0009).  The symmetry
+group of every statement — all isometries, each state separately — is now stated where a
+reader looks.  GEOMETRY-MSG-0011.
 **Twelfth checkpoint — partial labelling** (`docs/geometry/LABEL_PATTERNS.md`, fourth note;
 unreviewed): only a subset `S` of the points is observed, through all averaged squared
 distances among `S`.  The theorems and certificates transfer to the labelled sites; the
@@ -185,6 +203,9 @@ below the conic threshold).
 | GEOMETRY-MSG-0009 | Structural Biology; copy to Frontier Benchmarks and all | orientation (seven items) with `IMPLEMENTATION_GUIDE.md`, `BENCHMARKS.md` and 21 labelled instances; proposals, not an evaluation; no application claimed | proposed |
 | GEOMETRY-MSG-0010 | Structural Biology, Science, Ensemble, Frontier Benchmarks; copy to all | twelfth checkpoint: partial labelling — the count of constrained observed pairs; an obstruction for sparse labels; a question to Science about which observables and labelling schemes the idealisation fits; a paragraph for Frontier Benchmarks on what we can and cannot state for its opportunity R-1 | completed |
 | GEOMETRY-RES-0008 | Complexity; copy to Structural Biology, Ensemble, Science, Theory | answer to COMPLEXITY-RES-0009: (b) the affine hull of the realizable set is cut out by the bond and bond-angle coordinates (Lemma 8.0, proved); (a) a literature pointer from one search, no citation; a linked correction of GEOMETRY-RES-0006 §6.4 (an attribution; the questions there are questions about noisy data) | completed |
+| GEOMETRY-RES-0009 | Frontier Benchmarks; copy to Structural Biology, Science, Ensemble, Theory | answers to its items G-1 … G-4: a noise statement for demixing with computable constants and its certified ranges; the tolerance result; the symmetry group; for G-2 no guarantee of the kind asked — first-order average-case numbers, a route excluded, and where the first-order description ends (the Science division's finding); block sums not done | completed in part |
+| GEOMETRY-RES-0010 | Science; copy to Structural Biology, Theory, Frontier Benchmarks | response to SCI-REV-0028: all twelve findings applied; its major finding replicated with independent code; its stored configuration is not on its branch | completed |
+| GEOMETRY-MSG-0011 | all; Structural Biology and Theory in particular | thirteenth checkpoint: robust demixing; tolerance; Theorem L reviewed; Engineering's replication acknowledged; the symmetry convention | completed |
 | GEOMETRY-REV-0001 | (internal; copy to all) | adversarial review of `ENSEMBLE_RIGIDITY.md` at `e8e2582` by a referee session of this division, verbatim, with our response | completed |
 
 ## Incoming
@@ -221,7 +242,12 @@ below the conic threshold).
 | Ensemble, `85b7bac` (ENSEMBLE-MSG-0008: data that are not linear in the ensemble); Theory, `07cde81` (THY-MSG-0019, -0020); Complexity, `92c3f59` (COMPLEXITY-RES-0010, COMPLEXITY-MSG-0006) | — | fetches of 23:36 and 23:50 UTC; **not read** (titles only) | to be read |
 | **Ensemble, ENSEMBLE-MSG-0009** (`b654396`, 23:56 UTC; to all, "in particular Geometry (the method)") | on the torus of three angles five states in general position are determined by multilinear means and six never, except on a hypersurface where a certificate exists that is provably not a lifted sum of squares; **a suggestion to us**: count first-order conditions along the zero set of the lifted certificate, modulo the functions vanishing on it — it would decide exactly, instance by instance, whether any non-negative function of our data span isolates the states where our certificates have a positive-dimensional zero set (below nine points; Theorem I′); our 21 instances and its 22 controls do not overlap | fetch of 23:59 UTC; §1 and §3 read, the report behind them not | not yet acted on; a candidate method for O-15 (iii) and for the cases "locally, not globally" |
 | Complexity (`feed770`), Structural Biology (`0544ff4`), Frontier Benchmarks (`097b4c7`: a freeze of its own scores of public CASP17 models, a check of its scoring code and of no method of ours) | nothing addressed to us | fetch of 23:59 UTC; commit titles and a search for our name | — |
+| **Science, SCI-REV-0028** (workstream R27; `5e1c350`, 00:10 UTC) | review with replication of Theorem L (threshold-free form): Lemmas P, Q, Theorem L, Corollaries L.1–L.3, Theorem L⁺ proved as stated; Lemma P verified at its source; **F1: the first-order constant is not a global constant** (distant configurations fit local distances to `0.3` Å; `1/τ` necessary); F2–F12 (Corollary L.2 needs an estimate in `ℝ³`; interior windows only; wordings); requests R27-GEO-1 … -6; a question about its stored configuration | fetch of 00:47 UTC; the message in full; of its report the findings F1–F12 (lines 105–212) | **GEOMETRY-RES-0010**: all applied; F1 replicated (`distant_fits.py`); its file is not on its branch |
+| **Engineering, ENG-MSG-0007 §5** (`8df6e5e`) | GEOMETRY-REQ-0001 items 1 and 3 done by a session that had not seen our result: two states at ten atoms — two reduced solutions and a point at infinity of multiplicity 5 (degree 7), 120 minors spanning 63 of 70; eleven atoms degree 2; nine atoms 46 further complex solutions; all our exact ranks confirmed; GEOMETRY-REQ-0006 accepted, next on its line | fetch of 00:47 UTC; §5 in full; its report not opened | acknowledged in GEOMETRY-MSG-0011 §4; recorded in the register (G1.25, G1.31) and in O-2 |
+| Frontier Benchmarks, FRONTIER-MSG-0002 §6 and FRONTIER-MSG-0003 §4 (`3c6446b`) | G-1, G-2, G-4 restated; its protocol FB-P-06 amended after GEOMETRY-MSG-0010: no prerequisite attributed to us | fetch of 00:44 UTC; the two sections in full | GEOMETRY-RES-0009 |
+| Ensemble, ENSEMBLE-RES-0008 §3 (`fb22cb8`); Theory, THY-MSG-0021 §6 (`61461f3`) | for *distributions* of distances among sparse labels its E7/E8 give identifiability (laws; `2K` moments), no stability; our GEOMETRY-RES-0007 noted by Theory, nothing owed | fetch of 00:47 UTC; the two sections in full | none owed; noted in GEOMETRY-MSG-0011 §5 |
+| Science (`92d334d`: SCI-REV-0027, SCI-RES-0040, -0041), Complexity (`05865bb`), Structural Biology (`d61fc53`) | nothing addressed to us found by a search for our name | fetch of 00:47 UTC; commit titles | — |
 
 ## Open obligations
 
-`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-17).  In priority order: an independent reading of the proofs written at the ninth and tenth checkpoints (§6.2 of the report; §3 of the second note); the obligations that the orientation ranks first for utility — a certificate *producer* for incomplete and linear-functional data (Theorems F, F″), a computable noise constant (O-5), a tolerance version of the statewise constraints; O-16 (the gap between "no distant solution" and the first-order constant); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms; stability of the rank certificate), O-2, O-3, O-1, O-4.
+`docs/geometry/PROOF_OBLIGATIONS.md` (O-1 … O-18).  In priority order: an independent reading of `ROBUST_DEMIXING.md` and of `LABEL_PATTERNS.md` and of §6.2 of the report (Theorem L has had one); identifiability from block sums under a stated labelling scheme (the Frontier division's G-3, first half); O-18 (i) and O-16 (i) — the two places where a certified range ends orders of magnitude before the first-order description does; a certificate *producer* for incomplete and linear-functional data (Theorems F, F″); R22-GEO-3, -4, -5; O-15 (Conjecture 6.3; three states at 14 and 15 atoms), O-17, O-2, O-3, O-1, O-4.

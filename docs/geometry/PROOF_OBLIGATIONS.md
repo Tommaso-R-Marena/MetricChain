@@ -50,6 +50,15 @@ two states at 10 atoms.  Still open: (a) `K = 3` at 14 and 15 atoms, `K = 4` at 
 infinity is positive-dimensional and the certificate needs a higher level (O-15);
 (b) `K = 2`, `n = 9`: identifiable in
 six instances although further chains exist — is it generic, and is there a proof?
+[**Independent replication, received at the thirteenth checkpoint** (Engineering,
+ENG-MSG-0007 §5; its report `experiments/eng/geometry_req1/REPORT.md` on its branch, not
+opened by us): by a session that had not seen our result, two states at ten atoms have
+exactly the two solutions, each reduced, and one point at infinity of multiplicity 5 —
+degree 7; the 120 minors span 63 of 70 dimensions; eleven atoms: degree 2; every exact
+rank of ours confirmed over ℚ on eight witnesses; and for (b): at nine atoms exactly 46
+further affine complex solutions, of which 2 to 8 are real and positive semidefinite on
+six witnesses.  Its remark that "63" is an open condition (the span is at most 63 a
+priori) is the genericity argument of Theorem I′.]
 (c) `K = 2`, `n = 7, 8`: non-identifiability is numerical (explicit competing ensembles to
 `10⁻¹⁴`); a proof would show that the identity is interior to the convex hull of `𝒫(z)`.
 (d) An independent replication of the degree-7 computation with another system
@@ -73,10 +82,16 @@ H).  Open: the smallest separation that identifies a generic `K`-mixture among a
 for long chains.  Heuristic: the statewise constraints over-determine the block structure, so
 the answer may be much smaller than `3K + 1`.
 
-**O-5.  The constant of Theorem G.**  `κ` is a global infimum over the conformation space.
-Needed for a certified constant: a rigorous lower bound of `φ(X)/min_k d_P(X, X_k)²` on the
-torus of torsions (local part: an eigenvalue; global part: branch-and-bound).  Also: `C_μ` is
-not explicit in the smoothness constant of the conformation space.
+**O-5.  The constant of Theorem G.**  *Closed at the thirteenth checkpoint in the sense
+"computable":* `ROBUST_DEMIXING.md` Corollary N1.1 gives `κ ≥ min(φ₁/r(φ₁)², φ₁/(2D_n²))` with
+every quantity a finite computation (unreviewed).  *Still open:* (i) the bound is four to
+eight orders of magnitude smaller than the values found by search in two-state instances — a certified constant of the right
+order needs a global optimisation over the torus of torsions outside the basin, or a
+sharper version of Lemma N0 that uses positive semidefiniteness beyond eigenvalue counts;
+(ii) `C_μ` of Theorem G(d) (the weights of an arbitrary competing ensemble to first order
+in the error) is still not explicit — the mechanism is known (the mean out-of-stack
+displacement of each cell is of the order of the error, not of its square root) and the
+bookkeeping was not done.
 
 **O-6.  Theorem H for every `K`.**  Base cases are exact computations for `K ≤ 8`; the
 extension in `n` is proved.  Needed: an induction on `K`, or a structural reason why the
@@ -156,24 +171,28 @@ many others; no statement for a given other angle, none for position-dependent a
 (vi) Noise: nothing.  The certificate is a rank; its stability constant is the smallest
 singular value of a matrix of size `C(m + 3, 4)` and was not studied.
 
-**O-16.  Local distance data: between "no distant solution" and "the nearby solution is
-well conditioned"** (`LOCAL_DATA_STABILITY.md` §6).  Theorem L excludes distant
-configurations with a constant `C_L ≈ 1.2 b n²/(s_*τ_*)`; Theorem L⁺ gives the first-order
-constant `1/(2μ)` when `‖η‖₂ ≤ μ/(ΛC_L)`.  On idealised traces `C_L` is about a thousand times
-`1/(2μ)` and the range is `10⁻⁵` ångström or less, so for data of realistic accuracy nothing
-is certified.  Open: (i) a global bound whose constant is within a moderate factor of
-`1/(2μ)` — the loss is in the conversion of window errors to frame rotations (worst case
-over all ten distances of a window, where bending changes them coherently) and in the
-crude bound `Λv²` for the second-order term, which is far from attained on smooth
-displacements; a two-scale argument (linearise inside windows, compare frames between
-them) is the natural attempt; (ii) an instance-specific *computed* radius of injectivity
+**O-16.  Local distance data: the size of the best global constant** (`LOCAL_DATA_STABILITY.md`
+§6; restated at the thirteenth checkpoint after the Science division's review
+SCI-REV-0028).  Theorem L excludes distant configurations with a constant
+`C_L ≈ 1.2 b n²/(s_*τ_*)`; Theorem L⁺ gives the first-order constant `1/(2μ)` when
+`‖η‖₂ ≤ μ/(ΛC_L)`.  **Settled by that review (its F1; replicated by us, `distant_fits.py`):**
+the gap between `C_L` and `1/(2μ)` is only partly an artefact — `C_glob(X) = sup_Y d_P/‖η‖₂`
+is unbounded relative to `1/(2μ)` (a nearly coplanar interior window: `d_P/‖η‖₂ ∝ 1/τ` with
+`1/(2μ)` bounded), so the factor `1/τ` is necessary in every global constant and the range
+of Theorem L⁺ cannot be `μ²/Λ`; on the 20-point helix-like trace configurations at the
+radius of gyration fit the local distances to `0.27` Å.  **Open:** (i) the size of `C_glob`
+between the lower bounds and `C_L` — between `1.92` and `456` (or `88.7` with the local form)
+on that trace: a factor 240 (46), and 55 on the worst pair found by search; is the true
+constant of order `n²b/(s τ)` with a small absolute factor, and is the product `s_*τ_*`
+or only `τ_*` necessary?  (ii) an instance-specific *computed* radius of injectivity
 (interval arithmetic or a sum-of-squares certificate for one chain) — a computation to be
-specified for Engineering, not requested; (iii) random noise: a statement in expectation
-(the typical error is far below the worst case); (iv) incomplete windows: a missing pair
-inside a five-point window; general lateration graphs; (v) Lemma P is cited from memory
-(Tu et al. 2016) — the proof in the note is self-contained, the attribution should be
-checked; (vi) the proofs of Theorems L, L⁺ have not been read by anyone outside this
-session.
+specified for Engineering, not requested; (iii) random noise: a statement in expectation —
+the first-order expectation is now in the table of §6, but a guarantee needs (i);
+(iv) incomplete windows: a missing interior pair of separation at most 3 (needed by the
+proof, the conclusion not settled — the referee's conjecture); general lateration graphs;
+(v) the stress route is excluded for long chains (`DEAD_ENDS.md` DG-26).  *Closed:* the
+attribution of Lemma P (checked at the source by the Science division); an outside reading
+of the proofs of Theorems L, L⁺ (SCI-REV-0028: proved as stated).
 
 **O-17.  Label patterns (`LABEL_PATTERNS.md`).**  Proved: the transfer (Theorem P1); the
 linear threshold for non-adjacent labelled bonds and for patterns with an anchor; the
@@ -190,3 +209,17 @@ happens between `c = 9K/2` and the information threshold, and at `c = 16` for tw
 share rigid parts; (vi) data that are not all pairs among the labelled sites (then a
 stress certificate is needed: Theorem F; no producer); (vii) noise.
 
+**O-18.  Robust demixing (`ROBUST_DEMIXING.md`).**  Proved (unreviewed): Lemma N0, Theorems
+N1–N3, Corollary N4, Propositions N5, N6.  Not done: (i) **the certified ranges** end at
+relative errors `10⁻¹²` to `10⁻⁴`; closing the gap to the scale at which the linearisation
+really fails needs a better way into the basin than Theorem N2 (its constant is a product
+of four worst cases); (ii) random noise — a statement in probability or in expectation,
+and the first-order covariance of the estimate (the delta method is immediate; a
+non-asymptotic statement is not); (iii) certificates in exact or interval arithmetic for
+the constants (`σ_c`, the pseudo-inverse norms), so that the output is a certificate in the
+sense of the theory division's kernels; (iv) the same analysis below the conic threshold
+(for the quartic certificate — O-15) and for label patterns and block sums; (v) tolerances
+that are not a box common to all states; (vi) hypothesis (J) as a consequence of (CC) with
+a constant, instead of a numerical check per instance; (vii) the sharp first-order
+tolerance constant `c_tol` in a certified range (the certified one, `T_k`, is 4 to 6 times
+larger because it allows violation patterns that exact data exclude).

@@ -5,7 +5,7 @@ Branch `research/geometric-inference`, created 2026-11-26 from the theory checkp
 
 ## Resume here
 
-State at the twelfth checkpoint (see `HANDOFF.md` for commands and environment):
+State at the thirteenth checkpoint (see `HANDOFF.md` for commands and environment):
 
 1. **Cycle 1 result:** `docs/geometry/ENSEMBLE_RIGIDITY.md` — second-moment rigidity of
    conformational ensembles (stacking; conic criterion; identifiability of mixtures among all
@@ -22,16 +22,26 @@ State at the twelfth checkpoint (see `HANDOFF.md` for commands and environment):
    five-point windows; frames compared on shared tetrahedra; local constants; any
    separation `K ≥ 4`); Theorem L⁺ (first-order constant `1/(2μ)` in the range
    `‖η‖ ≤ μ/(ΛC_L)`); Proposition L₀ (the earlier form).  Originality reviewed by Science
-   (SCI-REV-0023): mechanism and scaling known.  **Proofs of §3 unreviewed.**  The honest
-   size of the guarantee is in §6: certified range `10⁻⁵` ångström or less on idealised
-   traces.  Open: O-16 (close the gap between `C_L` and `1/(2μ)`; random noise; incomplete
-   windows).
+   (SCI-REV-0023): mechanism and scaling known.  **§3 reviewed with replication by Science
+   (SCI-REV-0028, thirteenth checkpoint): proved as stated; twelve findings applied.**  Its
+   major finding, replicated by us (`distant_fits.py`): the first-order constant is not a
+   global one — configurations at the radius of gyration fit the local distances of a
+   20-point helix-like trace to `0.27` Å.  Certified range `10⁻⁵` ångström or less.  Open:
+   O-16 restated (the size of the best global constant, between `1.92` and `456` there).
 3a. **Fourth note:** `LABEL_PATTERNS.md` (twelfth checkpoint, unreviewed) — only a subset of
    the points observed.  Governing number: `c(S)`, the observed pairs at chain separation
    1 or 2.  Proved: transfer; the linear threshold `(9K²+K+2)/2` for non-adjacent labelled
    bonds and for patterns with an anchor; the obstruction below `9K/2` (given regularity).
    Exact: 100 random patterns, the quartic certificate on patterns of two states (from 17).
    Open: O-17 (Conjecture P; regularity as a theorem; three states; the middle range).
+3b. **Fifth note:** `ROBUST_DEMIXING.md` (thirteenth checkpoint, unreviewed) — noisy data
+   and inexact bond geometry.  Lemma N0 (a rank-3 solution of the conic system up to `ρ`
+   is near a projector: interlacing); Theorem N1 (every ensemble: enclosure; computable
+   `κ` for Theorem G — O-5 closed as "computable"); N2 (`K`-state competitors: crude linear
+   bound); N3 (first-order constants `C_state`, `C_w` certified by bootstrapping, attained);
+   N4/N5 (a-posteriori procedure; count of states with the threshold at the error level);
+   N6 (tolerance: uniqueness lost, first-order constant `c_tol`).  `C_state` is `0.7`–`4.5`;
+   certified ranges end at relative errors `10⁻¹²`–`10⁻⁴`.  Open: O-18.
 3. **Third note:** `HINGE_ENSEMBLES.md` (states that share rigid segments; the main
    statement is the Science division's Proposition R22-1).  Open: O-12, O-13, O-14,
    R22-GEO-3, -4, -5.
@@ -58,17 +68,71 @@ State at the twelfth checkpoint (see `HANDOFF.md` for commands and environment):
    read: ENSEMBLE-MSG-0005, -0006, -0008, ENSEMBLE-RES-0004, THY-MSG-0019, -0020, SCI-MSG-0034,
    -0035, SCI-REV-0025, -0026 and Science's software evaluation protocol, COMPLEXITY-MSG-0005,
    -0006, COMPLEXITY-RES-0010, the Structural Biology division's code, Engineering's final
-   ENG-MSG-0007 (a draft accepts GEOMETRY-REQ-0006).  Awaited: Science's review R27 of
-   Theorem L.  **Owed: an answer to the Frontier division's G-1 … G-4** (see the entry of
-   the twelfth checkpoint).
-7. **Mathematics to do next** (ranked for utility in GEOMETRY-MSG-0009 §7, and now by the
-   Frontier division's items): (0) **a noise and tolerance theorem for demixing with every
-   constant computable** — O-5, Frontier's G-1 and the second half of G-3 — and its
-   numbers on the benchmark instances, including where it is empty; (i) when does
+   ENG-MSG-0007 beyond its §5.  **Received and answered at the thirteenth checkpoint:**
+   Science's review of Theorem L (SCI-REV-0028 → GEOMETRY-RES-0010), the Frontier
+   division's G-1 … G-4 (→ GEOMETRY-RES-0009; the block-sum half of G-3 not done),
+   Engineering's replication of Theorem I (ENG-MSG-0007 §5).  Awaited: Engineering on
+   GEOMETRY-REQ-0006 (accepted).  Also unread: SCI-REV-0027, SCI-RES-0037 … -0041,
+   ENSEMBLE-RES-0007, THY-MSG-0021 beyond §6, the Frontier division's protocols.
+7. **Mathematics to do next** (ranked for utility in GEOMETRY-MSG-0009 §7 and by the
+   Frontier division's items; the noise and tolerance theorem is done — fifth note):
+   (0) identifiability from **block sums** under a stated labelling scheme (the first half
+   of the Frontier division's G-3; a local-identifiability rank computation first);
+   (0′) O-18 (i): a better way into the basin than Theorem N2; O-16 (i): the best global
+   constant for local distances; (0″) the Ensemble division's method (first-order
+   conditions along the zero set of the certificate) for our cases below the thresholds;
+   (i) when does
    a stress certificate exist for a given set of measured pairs or block sums — a producer
    and a threshold (Theorems F, F″); (ii) a computable `κ` (O-5); (iii) a tolerance version
    of the statewise constraints; (iv) O-16; (v) an independent referee for §6.2 and for §3
    of the second note (one referee session for both).
+
+## 2026-11-27, thirteenth checkpoint (work from 00:00 UTC; see the commit time)
+
+**Robust demixing (fifth note).**  Prompted by the Frontier division's four items (all
+fair) and our own O-5.  The idea that made the constants computable: a chain that is
+nearly an affine image of the stack gives a positive semidefinite matrix of rank at most
+3 that nearly solves the conic system; decompose it along the reference projectors; by
+Weyl's inequalities at most one coefficient can be large, because the matrix has only
+three non-zero eigenvalues (Lemma N0).  No compactness argument is left, so the constant
+of Theorem G has an explicit lower bound.  Numerics first (`robust_demix.py`): every
+inequality on chains near the states, random chains, far chains that are nearly affine
+images (found by minimising `φ` from random starts), split states, spurious states; no
+violation; the bounds are loose by factors of 150 and more.  Then the first-order
+constants: block norms of the pseudo-inverse of the linearised map on weights and
+tangent displacements — between `0.7` and `4.5`, i.e. the problem is well conditioned to
+first order even at the thresholds, where the reported certificate value `σ_c` is small;
+`σ_c` governs the certified range, not the accuracy.  Theorem N3: exact expansion of
+`G(μ′) − G(μ₀)` (a cubic polynomial), constraints give the non-tangent part at second
+order, bootstrap from the crude bound; checked step by step; the extremal direction
+attains the constant (ratio 1.0000).  A posteriori: polish the DEMIX output to an exact
+mixture so that the reference violates nothing.  Tolerance: with exact data the
+competitors are the rotated stacks; first-order constant `c_tol` by a generalised singular
+value; the certified constant uses the linearised violation-to-displacement map (4 to 6
+times `c_tol`; a first version, through triangle inequalities, was 40 times).  Count of
+states: threshold at the error level; our DG-7 was a fixed-threshold failure.
+A first draft attributed that failure to an observation of the Frontier division; it
+quotes our own dead end (DG-27).  Prior art: two searches, one paper opened in part
+(Cai–Li, joint block diagonalisation): tools standard, statements not found.
+**Honest size:** certified ranges end at relative errors `10⁻¹²`–`10⁻⁴`.
+
+**The stress route for Theorem L, computed and excluded** (DG-26, `stress_route.py`): global
+and linear in Gram space, but the factor grows faster than `n⁴`.  **First-order
+average-case numbers** added to the table of the second note.
+
+**At the fetch of 00:47 UTC: SCI-REV-0028**, the Science division's review of Theorem L
+with replication: every statement proved as stated; Lemma P verified at its source; and
+a finding we did not have — distant configurations fit the local distances of our own
+20-point trace to three tenths of an ångström, so `1/(2μ)` is not a global constant and
+`1/τ` is necessary.  Its stored configuration is not on its branch; we wrote our own
+search (`distant_fits.py`) and obtained the same numbers to the digit (9.95 Å at 0.300 Å;
+9.0 at 0.271; strand-like 18.6 at 0.200).  All twelve findings applied, with their
+replacement texts and attribution; two of them change a statement (the hypothesis of
+Theorem L is needed for interior windows only; Corollary L.2 needs an estimate in three
+dimensions) — we re-read the proof for the first and agree.  GEOMETRY-RES-0007 carries a
+bracketed correction.  **ENG-MSG-0007 §5:** Engineering computed Theorem I independently
+(degree 7; 63 of 70) — agreement.  ENSEMBLE-RES-0008 §3, THY-MSG-0021 §6: read; nothing
+owed.
 
 ## 2026-11-26, twelfth checkpoint (work from 22:55 UTC; see the commit time)
 

@@ -1035,6 +1035,119 @@ def benchmark_suite_labels():
 
 
 @test
+def distant_configurations_fit():
+    """LOCAL_DATA_STABILITY.md section 6 (i), the major finding of the Science division's review
+    SCI-REV-0028 replicated with our own search: on the helix-like trace of 20 points a
+    configuration at RMSD >= 9.0 (the radius of gyration is 8.95) fits the 70 local distances to
+    rms 0.30 or better, while at RMSD >= 1.0 the best fit found is the first-order value, 0.11."""
+    import distant_fits as DF
+    from local_data_guarantees import trace
+    improper = MUT != "distant_fit_proper_only"           # planted error: superposition without reflections
+    X = trace(20, 2.3, 1.5, 100.0)
+    rng = np.random.default_rng(28)
+    far = DF.best_fit(X, 9.0, rng, random_starts=2, improper=improper)
+    near = DF.best_fit(X, 1.0, rng, random_starts=2, improper=improper)
+    rg = float(np.sqrt(((X - X.mean(0)) ** 2).sum() / len(X)))
+    ok = far is not None and near is not None and far[0] <= 0.30 and far[2] > rg and 0.10 <= near[0] <= 0.12
+    return ok, (f"RMSD {far[2]:.2f} > radius of gyration {rg:.2f} at rms distance error {far[0]:.3f}; at RMSD 1.0 the "
+                f"best fit is {near[0]:.3f}" if far is not None and near is not None else "no configuration found")
+
+
+@test
+def robust_enclosure_all_ensembles():
+    """ROBUST_DEMIXING.md Lemma N0, Theorems N1, N2 with a reference cut from noisy data: every
+    inequality of the proofs on chains near the states, random chains, chains that are nearly
+    affine images of the stack, split states with a spurious state, perturbed K-mixtures."""
+    import robust_demix as RD
+    if MUT == "robust_rho_without_linear_term":           # planted error: the residual claimed second order
+        RD.rho_of = lambda num, phi: num["delta_norm"] + num["Lam0"] * phi
+    bad, app, far = [], 0, []
+    for K, n, seed, noise in ((2, 16, 3, 1e-7), (2, 24, 5, 1e-6)):
+        st = RD.check_instance(K, n, seed, noise, verbose=False)
+        bad += st["bad"]
+        app += st["chains_applicable"] + st["n2_applicable"]
+        far.append(st["far_phi"] / st["phi_max"])
+    ok = not bad and app > 100
+    return ok, (f"{app} competitors inside the hypotheses, no inequality violated; far near-affine chains at "
+                f"{min(far):.0f} to {max(far):.0f} times the certified basin" if ok else f"violations {sorted(set(bad))[:4]}")
+
+
+@test
+def robust_sharp_constants():
+    """Theorem N3: the first-order constants hold for every K-state competitor in the certified
+    range (each step of the proof with actual quantities) and are attained along the extremal
+    direction."""
+    import robust_demix as RD
+    if MUT == "robust_sharp_constant_too_small":          # planted error: 0.9 C_state
+        orig = RD.first_order
+
+        def smaller(Xs, w, edges):
+            fo = orig(Xs, w, edges)
+            fo["C_state"] = [0.9 * c for c in fo["C_state"]]
+            return fo
+        RD.first_order = smaller
+    bad, vals, att = [], [], []
+    for K, n, seed in ((2, 16, 3), (3, 23, 7)):
+        st = RD.check_sharp(K, n, seed, verbose=False)
+        bad += st["bad"]
+        if not st["injective"] or st["applicable"] == 0 or st["attained"] is None:
+            bad.append("not applicable")
+        else:
+            att.append(st["attained"])
+        vals += st["C_state"]
+    ok = not bad and all(abs(a - 1) < 1e-2 for a in att)
+    return ok, (f"C_state between {min(vals):.2f} and {max(vals):.2f}; attained to {max(abs(a - 1) for a in att):.0e}"
+                if ok else f"violations {sorted(set(bad))[:4]}, attained {att}")
+
+
+@test
+def robust_a_posteriori():
+    """Corollary N4: from noisy data alone (DEMIX, polish, Theorem N3 at the polished mixture) the
+    truth lies inside the certified bound; at noise 1e-9 the bound is certified."""
+    import robust_demix as RD
+    out = [RD.a_posteriori(2, 16, 3, 1e-9, verbose=False), RD.a_posteriori(2, 24, 5, 1e-8, verbose=False)]
+    ok = all(o["certified"] and not o["bad"] for o in out)
+    ratio = [max(o["bounds"]) / max(o["errs"]) for o in out] if ok else []
+    return ok, (f"truth inside the certified bound; bound/actual error {min(ratio):.1f} to {max(ratio):.1f}"
+                if ok else "not certified or violated")
+
+
+@test
+def robust_tolerance_family():
+    """Proposition N6: with exact data and a tolerance on the constraints the rotated stacks have
+    the same data; the first-order constant c_tol is attained and is below the certified one."""
+    import robust_demix as RD
+    if MUT == "robust_tolerance_constant_too_small":      # planted error: 0.9 c_tol
+        orig = RD.tolerance_constant
+
+        def smaller(w, Xs, edges, lengths):
+            tc = orig(w, Xs, edges, lengths)
+            tc["c_tol"] = [0.9 * c for c in tc["c_tol"]]
+            return tc
+        RD.tolerance_constant = smaller
+    out = [RD.check_tolerance(2, 16, 3, verbose=False), RD.check_tolerance(3, 23, 7, verbose=False)]
+    ok = all(not o["bad"] and o["injective"] and o["applicable"] > 0 and abs(o["attained"] - 1) < 1e-2 for o in out)
+    cs = [c for o in out for c in o["c_tol"]]
+    return ok, (f"c_tol between {min(cs):.2f} and {max(cs):.2f}, attained; certified constants "
+                f"{min(float(c) for o in out for c in o['C_up']):.1f} to {max(float(c) for o in out for c in o['C_up']):.1f}"
+                if ok else f"violations {[sorted(set(o['bad']))[:3] for o in out]}")
+
+
+@test
+def robust_count_of_states():
+    """Proposition N5: with the threshold at the error level the eigenvalue count is 3K for errors
+    up to 0.49 lambda_m; the fixed relative threshold of demix.py is wrong on most of them."""
+    import robust_demix as RD
+    if MUT == "robust_count_threshold_half":              # planted error: threshold at half the error level
+        orig = RD.count_states
+        RD.count_states = lambda Gt, eps: orig(Gt, eps / 2)
+    out = [RD.check_count(2, 16, 3, verbose=False), RD.check_count(3, 30, 7, verbose=False)]
+    ok = all(not o["bad"] for o in out) and all(o["fixed_rule_wrong"] > 0 for o in out)
+    return ok, (f"count correct in 60 of 60; fixed relative threshold wrong in "
+                f"{sum(o['fixed_rule_wrong'] for o in out)} of 60" if ok else "count wrong")
+
+
+@test
 def third_moment_blocks():
     """Proposition 9.2: the 3-form of mean triple products is determined by the data and its
     contractions have rank 2 exactly on block vectors."""

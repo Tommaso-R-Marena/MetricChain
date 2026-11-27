@@ -4,7 +4,7 @@ For a successor who starts with nothing but this repository.
 
 ## What this division is
 
-One of six MetricChain divisions (research owner's mandate of 2026-11-26).  It writes only to
+One of eight MetricChain divisions (research owner's mandate of 2026-11-26 and two supplementary directives; the list is in `docs/collaboration/status/geometry.md`).  It writes only to
 `research/geometric-inference`; it reads the other branches and never merges, force-pushes or
 opens pull requests.  Mandate: reconstructability, identifiability, rigidity, stability and
 complexity of articulated geometric systems under incomplete, noisy or indirect observations.
@@ -20,11 +20,12 @@ verification, documentation and preservation.
 | cycle 2, first note: sequence-local distance data | `docs/geometry/LOCAL_DATA_STABILITY.md` |
 | third note: states that share rigid segments (hinges, reflections, interval moments) | `docs/geometry/HINGE_ENSEMBLES.md` |
 | fourth note: only a subset of the points observed (count of constrained labelled pairs; obstruction for sparse labels) | `docs/geometry/LABEL_PATTERNS.md` |
+| fifth note: noisy data and inexact bond geometry — enclosures of every consistent ensemble, first-order constants certified in a range, the tolerance family | `docs/geometry/ROBUST_DEMIXING.md` |
 | every statement with label, evidence, review, novelty | `docs/geometry/THEOREM_REGISTER.md` |
 | what is known / not found, with the search log | `docs/geometry/PRIOR_ART.md` |
 | withdrawn or weakened claims | `docs/geometry/DEAD_ENDS.md` |
 | the internal review, verbatim, with our response | `docs/collaboration/messages/geometry/GEOMETRY-REV-0001.md`; the referee's code: `experiments/geometry/review1/` |
-| open proof obligations (O-1 … O-17) | `docs/geometry/PROOF_OBLIGATIONS.md` |
+| open proof obligations (O-1 … O-18) | `docs/geometry/PROOF_OBLIGATIONS.md` |
 | **for software and evaluation:** exact specifications of what can be implemented, with proof status, Lean names, assumptions, conditioning, validation criteria; the four notions (global / local identifiability, recoverability, certification); the distance from the idealised observable to measurements | `docs/geometry/IMPLEMENTATION_GUIDE.md` |
 | labelled test instances in six classes, with second solutions where the data do not determine the answer; ways to falsify our claims | `docs/geometry/BENCHMARKS.md`; `experiments/geometry/benchmark_instances.py`, `benchmark_suite/` |
 | the research owner's three directives to this division, condensed | `docs/collaboration/status/geometry.md` ("Directives of the research owner") |
@@ -41,8 +42,8 @@ source scripts/lean_env.sh
 lake env lean proofs/Geometry/EnsembleRigidity.lean     # single file, about 15 s, no output = OK
 lake build                                              # whole project; the last lines print the axiom audit
 # Python (numpy, scipy; exact parts use only the standard library)
-python3 experiments/geometry/run_checks.py              # 51 tests, about 70 s (one is skipped, and says so, without Singular)
-python3 experiments/geometry/mutation_checks.py         # 39 planted errors, all must be caught
+python3 experiments/geometry/run_checks.py              # 57 tests, about 100 s (one is skipped, and says so, without Singular)
+python3 experiments/geometry/mutation_checks.py         # 44 planted errors, all must be caught
 python3 experiments/geometry/exact_conic_rank.py 12     # Theorem C(b), about 35 s
 python3 experiments/geometry/exact_conic_rank.py 20 13 rational angles   # Theorem C(b), K = 13..20, about 3 min
 python3 experiments/geometry/exact_jacobian_rank.py 8   # Theorem H, about 3 s
@@ -71,6 +72,9 @@ python3 experiments/geometry/local_data_guarantees.py   # what Theorems L, L+ ce
 python3 experiments/geometry/torsion_sharpness.py       # kink formula, worst conformations (GEOMETRY-RES-0002; slow part (2))
 python3 experiments/geometry/label_patterns.py          # partial labelling: certificate iff enough constrained labelled pairs; second solutions for sparse labels (10 s)
 python3 experiments/geometry/exact_label_patterns.py    # the same in exact arithmetic on random patterns; quartic certificate on patterns (1 s)
+python3 experiments/geometry/robust_demix.py            # noise and tolerance bounds for demixing: every inequality of every proof on competitors (2.5 min); --table: constants and certified ranges
+python3 experiments/geometry/distant_fits.py            # distant configurations that fit local distances (replication of SCI-REV-0028 F1; 1 min)
+python3 experiments/geometry/stress_route.py            # the stress route that does not close the gap of Theorem L (DEAD_ENDS DG-26)
 python3 experiments/geometry/benchmark_instances.py     # labelled test instances for software (BENCHMARKS.md): self-check of every label (1 min); --write regenerates benchmark_suite/
 # read-only synchronisation with the other divisions
 for b in claude/determined-ride-og1u7j research/ubuntu-engineering research/scientific-translation \

@@ -154,6 +154,18 @@ connected, `𝒞` modulo translations is compact.
   of pairs; all pairs if `F` is not named) if every ensemble `ν` on `𝒞` with
   `M(ν)_ij = M(μ)_ij` for `ij ∈ F` satisfies `[ν] = [μ]`.  Note the quantifier: `ν` ranges over
   all probability measures, not over mixtures with a prescribed number of states.
+* **What every statement is modulo.**  `[μ]` is a distribution on congruence classes: *each
+  state is determined up to its own isometry of space, reflections included, independently
+  of the other states*; the weights exactly; the states are not ordered.  Averaged squared
+  distances cannot see the handedness of any state, so nothing in this report
+  distinguishes a state from its mirror image, or an ensemble from the one in which some
+  of its states are mirrored.  A comparison with a reference must therefore superpose each
+  state separately and allow improper superpositions; a score that sees chirality needs
+  information from outside these data.  (Different in kind: the mirrored assemblies of
+  `HINGE_ENSEMBLES.md`, where reflecting a *part* of a chain changes the data and yields a
+  genuine competitor.)  For single configurations (`LOCAL_DATA_STABILITY.md`) the group is
+  the same.  [Stated here at the thirteenth checkpoint, on item G-4 of the Frontier
+  Benchmarking division; the definitions above already implied it.]
 
 ---
 
@@ -1159,9 +1171,18 @@ over `𝒞` (not attempted; `PROOF_OBLIGATIONS.md`, O-5).  **The local value is 
 with 12 to 18 atoms the smallest ratio `φ/min_k d_P²` found by global search is attained at a
 chain *far* from both states (a near-affine image of the stack) and is 2 to 12 times smaller
 than the smaller local value (e.g. `0.0023` against `0.028` at `n = 14`); the constant
-`√(n − 1 − 3K)/(2κ)` of (c) is then between 47 and 570 in these instances.  Until `κ` has a
-certified lower bound, (c) and (d) are qualitative statements.  The smoothness of `𝒞` near the
+`√(n − 1 − 3K)/(2κ)` of (c) is then between 47 and 570 in these instances.  The smoothness of `𝒞` near the
 states is used in (d) only; (a)–(c) hold without it (referee's remark).
+
+**Thirteenth checkpoint: `κ` has a computable lower bound** (`ROBUST_DEMIXING.md`, Corollary
+N1.1): `κ ≥ min(φ₁/r(φ₁)², φ₁/(2D_n²))`, where `φ₁` and `r` are explicit in the smallest
+non-trivial singular value `σ_c` of the conic system, `‖z‖_op`, the weights and the bond
+data.  So (c) is an effective statement.  The bound is far from the truth — `10⁻¹³` to
+`10⁻⁷` in the instances there, against `2·10⁻³` to `3·10⁻²` found by search here — because it
+multiplies four worst cases and uses a trivial bound outside a small basin.  For
+competitors with `K` states the same note gives linear bounds with the exact first-order
+constants in a certified range (Theorems N2, N3).  The constant `C_μ` of (d) is still not
+explicit.
 
 ---
 

@@ -16,11 +16,16 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
    Read it together with GEOMETRY-MSG-0006 §1, which corrects four of its sentences.
 2. `docs/geometry/ENSEMBLE_RIGIDITY.md` — statements and proofs; §0 summary, §12 limitations.
 3. `docs/geometry/THEOREM_REGISTER.md` — one row per statement: label, evidence, novelty.
-4. `docs/geometry/LABEL_PATTERNS.md` — only a subset of the points observed (fourth note);
+4. `docs/geometry/ROBUST_DEMIXING.md` — noisy data and inexact bond geometry: what is still
+   determined, with every constant computable, and where the certified ranges end (fifth
+   note);
+   `docs/geometry/LABEL_PATTERNS.md` — only a subset of the points observed (fourth note);
    `docs/geometry/HINGE_ENSEMBLES.md` — states that share rigid segments (third note);
    `docs/geometry/LOCAL_DATA_STABILITY.md` — sequence-local distance data (second note).
    The second note was revised at the tenth checkpoint after the Science division's
-   originality review (SCI-REV-0023); its head note says what the theorems do not give.
+   originality review (SCI-REV-0023) and at the thirteenth after its review with
+   replication (SCI-REV-0028: proved as stated; the first-order constant is not a global
+   one); its head note says what the theorems do not give.
 5. `docs/geometry/PRIOR_ART.md`, `DEAD_ENDS.md`, `PROOF_OBLIGATIONS.md`.
 6. `docs/geometry/HANDOFF.md` — commands.
 7. **If you write, verify or evaluate software:** `docs/geometry/IMPLEMENTATION_GUIDE.md`
@@ -57,6 +62,9 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
 | GEOMETRY-MSG-0009 | 2026-11-26 | Structural Biology (copy: Frontier Benchmarks, Engineering, Science, Ensemble, Theory, Complexity) | Orientation in seven items: strongest results; proof and review status; what supports algorithms (DEMIX, hinge enumeration, diagnostics) and certificates (two ranks, a stress checker); the most restrictive assumptions (the observable itself first); every application is speculative; obligations that would most improve utility.  With `IMPLEMENTATION_GUIDE.md` and 21 labelled test instances (`BENCHMARKS.md`) |
 | GEOMETRY-MSG-0010 | 2026-11-26 | Structural Biology, Science, Ensemble, Frontier Benchmarks (copy: all) | Twelfth checkpoint: **partial labelling** — with all averaged squared distances among a labelled subset, what counts is the number `c(S)` of observed pairs at chain separation 1 or 2: the ensemble of the observed sites is certified from `(9K²+K+2)/2` (20 for two states; quartic certificate from 17), is not even locally identifiable below `9K/2`, and **sparse labels determine nothing** (explicit second solutions) |
 | GEOMETRY-RES-0008 | 2026-11-26 | Complexity (copy: Structural Biology, Ensemble, Science, Theory) | Answer to COMPLEXITY-RES-0009: **the affine hull of the averaged squared-distance vectors of fixed-angle chains is cut out by the bond and bond-angle coordinates alone** (Lemma 8.0 of the report, proved: the squared distances at separation at least 3 are affinely independent); a literature pointer, not a citation, for its linkage lemma; a linked correction of GEOMETRY-RES-0006 §6.4 |
+| GEOMETRY-MSG-0011 | 2026-11-27 | all (Structural Biology and Theory in particular) | Thirteenth checkpoint: **demixing under noise and under inexact bond geometry** (`ROBUST_DEMIXING.md`): explicit enclosures of every consistent ensemble; the first-order constants (`0.7`–`4.5`) certified in a range and attained; with a tolerance uniqueness is lost and the error is proportional to it; certified ranges end at relative errors `10⁻¹²`–`10⁻⁴`.  Theorem L reviewed by the Science division — proved as stated; **its finding: local distances known to a few tenths of an ångström do not determine a fold in the worst case** (replicated by us).  Engineering's independent replication of Theorem I acknowledged |
+| GEOMETRY-RES-0009 | 2026-11-27 | Frontier Benchmarks (copy: Structural Biology, Science, Ensemble, Theory) | Answers to its items G-1 … G-4: the noise statement and its ranges; the tolerance result; all isometries, each state separately; no guarantee of the kind asked for Theorem L — average-case first-order numbers, a route excluded, where the first-order description ends; block sums not done |
+| GEOMETRY-RES-0010 | 2026-11-27 | Science (copy: Structural Biology, Theory, Frontier Benchmarks) | Response to SCI-REV-0028: all twelve findings applied (hypothesis of Theorem L for interior windows only; Corollary L.2 needs a three-dimensional estimate; wordings); its major finding replicated with independent code to the digit; a bracketed correction in GEOMETRY-RES-0007 |
 
 ## Corrections
 
@@ -88,3 +96,13 @@ git show origin/research/geometric-inference:docs/collaboration/GEOMETRY_TO_ALL.
   division's is its Theorem 14.  The questions of that §6 are questions about data with
   noise: for exact data a low-degree bound is not evidence of hardness.  The message
   carries a bracketed note.
+* **GEOMETRY-RES-0010 (after the Science division's review SCI-REV-0028):** in
+  GEOMETRY-RES-0007 §4, "to first order the local data of a 20-point helix-like trace are
+  not badly conditioned (at most `9σ`)" describes the limit of vanishing errors and is not
+  a bound at finite errors — configurations at the radius of gyration fit the local
+  distances to `0.27` Å; "the vacuity is the gap between `C_L` and `1/(2μ)`" is half right
+  (`1/(2μ)` is not a global constant); Corollary L.2 holds for estimates in `ℝ³` with every
+  pair measured, not for "any algorithm's output".  In GEOMETRY-MSG-0009 and the
+  implementation guide, S7 is qualified accordingly.  In `ROBUST_DEMIXING.md` a draft
+  sentence that attributed our own dead end DG-7 to the Frontier division was corrected
+  before publication (DG-27).

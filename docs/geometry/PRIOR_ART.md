@@ -35,6 +35,7 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
 | Corollary 9.1 (second moment suffices under bond constraints) | **instance of a known principle** with a specific prior | Bandeira–Blum-Smith–Kileel–Perry–Weed–Wein (moments and sample complexity for orbit recovery); Bendory–Edidin and co-authors: sparse priors, generic semi-algebraic priors, non-uniform rotations make the second moment sufficient [confirmed at summary level] |
 | Hinge ensembles (`HINGE_ENSEMBLES.md`): reduction to a moment problem on `O(2)^s` with interval moments; two states at two or more hinges identifiable, the cube of eight candidates (Theorem M) | **not found** (three summary-level searches); ingredients classical | composition of rotations by reflections; reflection branching in discretizable distance geometry; truncated (matricial) trigonometric moment problems and flat extensions (Curto–Fialkow); ghost orientations of domains from residual dipolar couplings (a different observable) |
 | Label patterns (`LABEL_PATTERNS.md`): identifiability from averaged squared distances among a labelled subset is governed by the number `c(S)` of statewise-constrained labelled pairs (linear certificate from `(9K²+K+2)/2`, no local identifiability below `9K/2`, nothing from sparse labels) | **not found**, on a thin basis; the positive part is Theorem B for a constraint graph (dimension one: Laurent–Poljak), the obstruction is the classical rotation indeterminacy of second-moment data restricted to realisable configurations | factor rotation; Kam's autocorrelation ambiguity in cryo-EM [search summary]; Hays–Boland–Kasson, arXiv 2010.15612 (per-pair distance *distributions* from separate experiments; "separately measured label sets do not provide information on the joint distribution"; a simulation-based estimator, no identifiability theorem) [read through an automated fetch, without the supplement] |
+| Robust demixing (`ROBUST_DEMIXING.md`): explicit enclosures of every ensemble consistent with noisy data (Lemma N0, Theorem N1; a computable constant for Theorem G), linear bounds for `K`-state competitors (N2), the first-order constants certified in a range and attained (N3), the count of states (N5), the family of ensembles with the same data under a tolerance on the constraints and its first-order size (N6) | **tools standard; statements for this problem not found** (two summary-level searches, one paper opened in part — a thin basis) | perturbation bounds for moment and simultaneous-diagonalisation methods: Anandkumar–Ge–Hsu–Kakade–Telgarsky 2012, Hsu–Kakade 2013, Kuleshov–Chaganty–Liang 2015 [search summaries]; **joint block diagonalisation — the algebraic step of DEMIX — has a perturbation theory with an error bound and a condition number: Cai–Li, arXiv 1703.00591** [abstract and §§1–2 read through a page-reading agent, §3 through its summary]; Weyl, Eckart–Young, Procrustes–Gram (Tu et al. 2016), quantitative inverse-function arguments [classical].  Ours, not found: the interlacing lemma that encloses *all* ensembles (not a diagonalisation statement), the tolerance family and its constant |
 | Theorems L, L⁺ (`LOCAL_DATA_STABILITY.md`): global bound `≤ C n²` — for every configuration, no threshold — for reconstruction from distances of sequence separation `≤ 4` on chains with non-degenerate windows; matching lower bound on rods (Theorem K(c)); the first-order constant in a certified range | **not found as stated; mechanism and scaling known** (thin-rod geometric rigidity: Mora–Müller 2003; Blanchard–Griso 2009; lattice versions: Alicandro–Lazzaroni–Palombaro 2016, Schmidt–Zeman 2022); first-order polynomial bounds in print (Daitch–Spielman 2007; Kyng et al. 2018; Lew et al. 2023); the published *global* bound for this lateration graph is exponential (Arias-Castro–Vishwanath) [Science division A4, 2026-11-26].  Lemma P is Tu et al. 2016, Lemma 5.4 [from memory].  Not read: Schrader 1967 and the geodesy of trilateration chains; Luo–Wu 2011; Anderson–Shames–Mao–Fidan 2010; Friesecke–James–Müller 2002 itself.  The threshold-free form and Theorem L⁺ were written after the search | Science division, SCI-REV-0023 and `docs/science/workstreams/A4_REPORT.md` on its branch (123 logged queries, 33 texts opened); ours: arXiv 2310.10900 [one automated reading], two searches |
 
 ## 2. Related work that is *not* the same problem
@@ -167,6 +168,28 @@ A second division is asked to repeat the search independently (GEOMETRY-REQ-0003
     removal for point-mass models; rotation invariance of factor models; nothing with
     statewise distance constraints.  No paper opened; none is classified as not containing
     our statements beyond what the summaries say.
+18. (For a question of the Complexity division, COMPLEXITY-RES-0009 (a); recorded in
+    GEOMETRY-RES-0008.)  "fixed-angle chain span reachable bond directions spherical polygon
+    every m-th bond free" — the framework is standard: the bond directions of a fixed-angle
+    chain form a spherical polygonal path (Benbernou–O'Rourke, arXiv 0801.0258, on the span
+    of fixed-angle chains; "Cauchy's arm lemma on a growing sphere", arXiv 0804.0986;
+    polygons with prescribed angles, arXiv 2008.10192).  The lemma in the Complexity
+    division's form was not found.  No paper opened: a pointer, not a classification.
+19. "robust algorithm linear section of variety low-rank matrices in subspace perturbation
+    bound noise Johnston Lovitz Vijayaraghavan robust analogue" — nothing on linear sections
+    of varieties under noise; results on robust low-rank matrix completion (arXiv 2308.03661
+    and others), which is a different problem.  No paper opened.
+20. "stability of mixture identification from second moments perturbation bound simultaneous
+    diagonalization orthogonal projectors noise Davis-Kahan robust decomposition identity sum
+    of low-rank projectors" — perturbation analyses for tensor and moment methods (arXiv
+    1210.7559, arXiv 1203.0683), noisy simultaneous diagonalisation (arXiv 1501.06318), and
+    **"Perturbation Analysis for Matrix Joint Block Diagonalization" (Cai and Li, arXiv
+    1703.00591)**, which was then opened through a page-reading agent: abstract and §§1–2
+    verbatim, §3 (the main theorem: a finite inequality under an explicit size condition,
+    with a uniqueness modulus in the denominator) only through the agent's summary.  It is
+    the general perturbation theory of the algebraic step of DEMIX; it does not contain the
+    reduction from averaged distances, an enclosure of ensembles with other numbers of
+    states, or a tolerance on constraints.
 
 Sources returned by the searches and used above:
 [arXiv 1203.6602](https://arxiv.org/pdf/1203.6602),
@@ -199,7 +222,12 @@ Sources returned by the searches and used above:
 [arXiv 2504.17947](https://arxiv.org/html/2504.17947v1),
 [arXiv 2409.18948](https://arxiv.org/abs/2409.18948),
 [Phys. Rev. A 106, 062443](https://link.aps.org/accepted/10.1103/PhysRevA.106.062443),
-[arXiv 2010.15612](https://ar5iv.labs.arxiv.org/html/2010.15612).
+[arXiv 2010.15612](https://ar5iv.labs.arxiv.org/html/2010.15612),
+[arXiv 1210.7559](https://ar5iv.arxiv.org/html/1210.7559),
+[arXiv 1203.0683](https://arxiv.org/pdf/1203.0683),
+[arXiv 1501.06318](https://arxiv.org/pdf/1501.06318),
+[arXiv 1703.00591](https://arxiv.org/abs/1703.00591),
+[arXiv 2308.03661](https://pdf.arxiv.org/pdf/2308.03661).
 
 ## 3a. What the Science division's review found that our searches missed (SCI-REV-0021 F3, F9)
 

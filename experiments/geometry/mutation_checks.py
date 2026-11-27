@@ -48,6 +48,11 @@ MUTATIONS = [
     ("label_quartic_one_fewer", "label_patterns_exact"),
     ("labels_rotation_not_orthogonal", "sparse_labels_second_solution"),
     ("affine_hull_separation_two", "chain_affine_hull"),
+    ("distant_fit_proper_only", "distant_configurations_fit"),
+    ("robust_rho_without_linear_term", "robust_enclosure_all_ensembles"),
+    ("robust_sharp_constant_too_small", "robust_sharp_constants"),
+    ("robust_tolerance_constant_too_small", "robust_tolerance_family"),
+    ("robust_count_threshold_half", "robust_count_of_states"),
     ("third_moment_generic_rank", "third_moment_blocks"),
 ]
 

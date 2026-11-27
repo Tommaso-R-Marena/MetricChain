@@ -32,6 +32,18 @@ For an ensemble `μ` (a probability distribution over conformations of one chain
 A tool must say which of the four it has established.  "The optimiser converged to the
 truth on synthetic data" establishes none of them.
 
+**Modulo what.**  In all four, "the ensemble" means the set of pairs (weight, state up to
+an isometry of space, **reflections included, each state separately**).  The data cannot
+see the handedness of any state.  A tool must not report a chirality, and an evaluation
+must superpose each state separately with improper superpositions allowed — a
+superposition-based score that sees chirality will penalise a correct answer, a
+distance-based score will not (the Frontier Benchmarking division's item G-4).
+
+**With noise there is a fifth thing to report: a radius.**  For data known up to `ε` the
+question "identifiable?" has no yes/no answer; what can be established is an *enclosure* —
+every ensemble consistent with the data lies within a stated distance of the output — and
+whether that enclosure is certified or only first-order (§8b).
+
 Thresholds for chains with fixed bond lengths and bond angles, generic states (number of
 points `n`):
 
@@ -61,9 +73,9 @@ justified substituting it for any.  The gaps, as mathematics:
 | all pairs among the observed points | only some pairs, or only linear functionals `⟨C_a, M⟩` (block sums — the Science division's analysis of labelled scattering, SCI-RES-0029) | Theorem F (a stress certificate for a subset of pairs; instances exist for scattered pairs), Theorem F″ (the same for linear functionals; **no instance**) | a certificate *producer* (a semidefinite programme) specified and tested; thresholds |
 | squared distances | other averages of the distance (inverse powers, transfer efficiencies) are not quadratic in the coordinates | nothing: the stacking lemma fails | a theory |
 | second moments | distance *distributions* (laws) carry more | Theorem J (laws at separations 3 and 4 determine generic finite ensembles), resting on the Ensemble division's E5/E6 | constructive version; noise |
-| exact data | noise | Theorem G: `W₂² ≤ C·‖ΔM‖` with a constant `κ` that is **not computed** (a global infimum); numerical thresholds of one implementation | a certified `κ` (`PROOF_OBLIGATIONS.md` O-5) |
+| exact data | noise | `ROBUST_DEMIXING.md` (thirteenth checkpoint, unreviewed): for data known up to `ε`, explicit enclosures of **every** consistent ensemble (Theorem N1: all but a stated fraction of the mass within a stated radius of the output states; the constant of Theorem G is now computable), linear bounds for `K`-state competitors (Theorem N2), and the exact first-order constants `C_state`, `C_w` — of order one in the instances — certified in a small range and attained (Theorem N3); the count of states with the threshold at the error level (Proposition N5) (S9 below) | the certified ranges end at relative errors `10⁻¹²` to `10⁻⁴`: **no guarantee at realistic accuracy**; random noise; exact-arithmetic certificates; anything below the conic threshold |
 | finitely many states | a continuous part | an obstruction: an ensemble with a continuous part is **never** determined (Corollary 4.2 (c)) | what *is* determined (moments), as a theorem with constants |
-| the same bond lengths and bond angles in every state, exactly | fluctuating local geometry; coarse-grained traces whose virtual bond angle varies with the conformation | an obstruction for unconstrained states (Proposition 3.1); the certificates *refuse* when the supplied constraints are false (instance G1) | a tolerance version |
+| the same bond lengths and bond angles in every state, exactly | fluctuating local geometry; coarse-grained traces whose virtual bond angle varies with the conformation | an obstruction for unconstrained states (Proposition 3.1); the certificates *refuse* when the supplied constraints are false (instance G1); **for a tolerance `δ` on the squared constrained distances** (`ROBUST_DEMIXING.md` Proposition N6): uniqueness is lost for every `δ > 0` — an explicit family of ensembles with the same data, of dimension `9K(K − 1)/2 + K − 1` — and the family has size `c_tol·‖violations‖` to first order, `c_tol` between `0.7` and `1.8` in the instances, with a certified constant within a factor 6 | tolerances that differ between states or are correlated; virtual bond angles that depend on the conformation (not a box) |
 | states in general position | states that share rigid parts (the common case of a hinge motion): the conic condition fails | `HINGE_ENSEMBLES.md`: a complete answer for two states (first by the Science division) | more than two states |
 | labelled points | unassigned data | nothing | — |
 
@@ -230,9 +242,10 @@ decide, for given synthetic or model data, whether a claimed identification is c
 
 ## 8. Specification S7 — one conformation from distances between points close along the chain
 
-* **Statements.**  *Theorem L [P; unreviewed; mechanism and scaling known — thin-rod
-  rigidity, SCI-REV-0023].*  If no four consecutive points of `X` are coplanar, then for
-  every configuration `Y`: `min_g‖Y − gX‖_F ≤ 1.2 (b/(s_*τ_*)) (n + 2)² ‖η‖₂`, `η` the errors of the
+* **Statements.**  *Theorem L [P; **reviewed with replication by the Science division,
+  SCI-REV-0028: proved as stated**; mechanism and scaling known — thin-rod rigidity,
+  SCI-REV-0023].*  If no four consecutive *interior* points of `X` are coplanar, then for
+  every configuration `Y` **in `ℝ³`**: `min_g‖Y − gX‖_F ≤ 1.2 (b/(s_*τ_*)) (n + 2)² ‖η‖₂`, `η` the errors of the
   squared distances of sequence separation at most 4.  *Theorem L⁺ [P].*  For
   `‖η‖₂ ≤ μ/(ΛC_L)` the bound is `‖η‖₂/(μ + √(μ² − Λ‖η‖₂))`, tending to the first-order constant
   `1/(2μ)`.  *Theorem K [P; (a) known].*  The first-order constant is at least of order `n` for
@@ -246,14 +259,30 @@ decide, for given synthetic or model data, whether a claimed identification is c
   the remainder is weakly determined (instance F2).  (iii) For separation at most 3: report
   non-uniqueness.
 * **What not to implement as a guarantee.**  The global error bar of Corollary L.2 is valid
-  for any estimate and any noise bound, and **vacuous at realistic accuracy**: on a
+  for any estimate **in three dimensions** (false for an unprojected four-dimensional
+  solution), with **every** pair of separation at most 4 measured and a bound on the
+  errors of the *squared* distances — and **vacuous at realistic accuracy**: on a
   20-point helix-like trace `C_L = 456` against `1/(2μ) = 0.45`, and the range in which the
   first-order constant is certified is `3·10⁻⁶` ångström in root-mean-square distance error
   (`LOCAL_DATA_STABILITY.md` §6).  Printing it as an uncertainty would mislead.
+* **Do not use the first-order number as an error bar either** (the Science division's
+  review, SCI-REV-0028 §2 and §4; replicated by us, `distant_fits.py`).  `1/(2μ)` describes
+  the limit of vanishing errors.  On the idealised 20-point helix-like trace configurations
+  farther away than the radius of gyration fit all local distances to `0.27`–`0.30` Å, and on
+  the strand-like trace to `0.2` Å; the first-order description ends near `0.2` Å and a few
+  hundredths of an ångström respectively.  **In the worst case, sequence-local distances
+  with errors of a few tenths of an ångström do not determine the fold of these traces,
+  whatever the algorithm.**
+* **What can be used** (same review, §4).  (1) *One window:* five consecutive points whose
+  ten distances are known to within `0.1` Å are fixed, up to an isometry, to RMSD `≤ 0.32` Å
+  on a helix-like window and `≤ 2.1` Å on a strand-like one (Lemma Q; no smallness
+  condition; within a factor 2 to 3 of the worst case found).  (2) The first-order
+  sensitivity as a *diagnostic of conditioning*, not as a bound.  Longer-range information
+  is needed, and nearly planar stretches are where it is needed first.
 * **Complexity.**  `O(n)` singular value problems of size 5 × 3 for the thicknesses; one sparse
   SVD of size `(4n) × (3n)` for `μ`.
 * **Reference code.**  `local_data_upper.py` (`sharp_constants`, `theorem_L_bounds`,
-  `theorem_Lplus_bound`), `local_data_guarantees.py`.
+  `theorem_Lplus_bound`), `local_data_guarantees.py`, `distant_fits.py`.
 
 ## 8a. Specification S8 — partial labelling (only a subset of the points is observed)
 
@@ -280,6 +309,48 @@ decide, for given synthetic or model data, whether a claimed identification is c
 * **Readiness.**  The pre-check and S2 on patterns: ready as a reference.  Everything
   between the two thresholds: exploratory.
 
+## 8b. Specification S9 — demixing from noisy data, with an enclosure
+
+* **Statement.**  *`ROBUST_DEMIXING.md`, Lemma N0, Theorems N1–N3, Corollary N4, Propositions
+  N5, N6 [P; **unreviewed**; the tools are standard perturbation theory].*  Data: the centred
+  matrix `G̃ = −½JM̃J` with `‖G̃ − G(truth)‖_F ≤ ε`; statewise constraints known within a
+  tolerance `δ_e` on the squared distances.  For a reference mixture `μ₀` (below) and
+  `η = ε + ‖G(μ₀) − G̃‖_F`: (a) every ensemble consistent with the data has all but a
+  fraction `√(n−1−3K)·η/φ₁` of its mass within `r(φ₁)` of the states of `μ₀`; (b) every
+  consistent mixture with `K` states has its states within `B_k` and its weights within
+  `A` of those of `μ₀`, where `B_k → C_state,k·η + T_k‖violations‖` as `η, δ → 0`; (c) both
+  only when the stated hypotheses hold — otherwise nothing is certified.
+* **Input.**  `G̃` (or `M̃`), `ε`, `δ`, the constraint lengths, and `K` or the rule of
+  Proposition N5 (count the eigenvalues of `G̃` above `ε`; correct when `ε < λ_{3K}/2`).
+  **Output.**  The mixture `μ₀`; its residual; `C_state`, `C_w` (first-order condition
+  numbers — always reported); the certified radii `B_k`, `A`, or the statement "not
+  certified"; the enclosure of (a) with its mass fraction.
+* **Computation.**  DEMIX on `G̃` with `K` given; least squares over weights and torsions
+  started there (`polish`); at `μ₀`: one SVD of the conic system on the complement of the
+  trivial quadrics (`σ_c`), the rigidity matrices of the states, the pseudo-inverse of the
+  linearised map `(weights, tangent displacements) ↦ G` (size `n² × (K(n−3) + K − 1)`), a
+  scalar fixed-point iteration.  `O(n²·(Kn)²)` operations for the pseudo-inverse.
+* **Semantics of the two kinds of number.**  `C_state`, `C_w`, `c_tol` are *first-order*:
+  true in a neighbourhood whose size is certified only up to the ranges of the table in
+  §8 of the note (relative errors `10⁻¹²` to `10⁻⁴`).  `B_k`, `A` are *certified* when
+  returned.  A tool must not present the former as the latter.  `σ_c` governs the
+  certified range, **not** the accuracy: a small `σ_c` with a small `C_state` is a
+  well-conditioned problem with a weak certificate.
+* **Counterexamples and limits.**  With a tolerance, exact uniqueness never holds
+  (Proposition N6).  The number of states is not bounded above by noisy data
+  (Proposition N5 (iii)).  The hypothesis (J) (injective linearisation) is checked
+  numerically.  Floating point; not a kernel-checked certificate.
+* **Validation criteria.**  On synthetic mixtures with planted noise of known norm: the
+  truth lies inside `B_k`, `A` whenever they are returned (never violated in our runs); along
+  the extremal direction the ratio displacement/(`C_state η`) tends to 1; with the planted
+  errors of `mutation_checks.py` (a constant 10 % too small, the residual claimed second
+  order, the tolerance constant too small, the count threshold halved) the tests fail.
+* **Reference code.**  `robust_demix.py` (`reference`, `numbers`, `theorem_N2`, `theorem_N3`,
+  `first_order`, `polish`, `a_posteriori`, `tolerance_constant`, `count_states`).
+* **Readiness.**  The first-order condition numbers and the count rule: ready as
+  diagnostics.  The certified radii: correct, and empty at realistic accuracy.
+  Exploratory until reviewed.
+
 ## 9. What a tool claiming more would have to contradict (obstructions)
 
 | claim | obstruction | status |
@@ -291,15 +362,20 @@ decide, for given synthetic or model data, whether a claimed identification is c
 | an ensemble from averaged squared distances between sparse labels (no two at chain separation 1 or 2) | a family of other ensembles of dimension at least `9K(K − 1)/2`; even one conformation is not determined among ensembles (`LABEL_PATTERNS.md` Proposition P3; instance C6) | P given a regularity condition that holds numerically |
 | an ensemble from fewer than `9K/2` statewise-constrained observed pairs | not even locally identifiable (the same proposition) | P given regularity |
 | accuracy from local distances that does not degrade with length | first-order amplification at least of order `n`, and `n²` on rod-like chains (Theorem K; instance F3) | P |
+| a fold from sequence-local distances (separation at most 4) known to a few tenths of an ångström | on idealised helix-like traces of 12 and 20 points, configurations farther away than the radius of gyration fit all local distances to `0.27`–`0.37` Å; on a strand-like trace to `0.2` Å (found by the Science division, SCI-REV-0028 F1; replicated by us) | N (explicit configurations by search) |
 | identification at the "parameter count" threshold | local identifiability only (Theorem H; instance C1 at 8 points for two states) | P-exact / N |
 | a certificate of uniqueness below 10, 16, 30 points for two, three, four generic states | none known to us; possible in principle down to the conjectured 10, 14, 19 | open |
+| exact identification when the bond geometry is known only within a tolerance | for every tolerance `δ > 0` the rotated stacks give a family of ensembles with exactly the same data, of dimension `9K(K − 1)/2 + K − 1` (`ROBUST_DEMIXING.md` Proposition N6) | P |
+| the number of states from noisy data, as an upper bound | a state of weight `t` changes the data by at most `2tD_n²`; only "at least `K`" can be established (Proposition N5) | P |
+| a guarantee of accuracy for demixing at realistic noise | none exists in this collaboration: the certified ranges end at relative errors `10⁻¹²` to `10⁻⁴`; the first-order constants are of order one but are not certified there | open |
 
 ## 10. What must remain exploratory until independently reviewed
 
 `ENSEMBLE_RIGIDITY.md` §6.2 (Proposition 6.2, Theorem I′, Conjecture 6.3) and
 `LOCAL_DATA_STABILITY.md` §3 (Theorems L, L⁺) were written at the ninth and tenth
-checkpoints and have been read by nobody outside the sessions that wrote them.  Theorem G's
-constant is not computed.  Theorem J rests on results of the Ensemble division that this
+checkpoints and have been read by nobody outside the sessions that wrote them; the same
+holds for `LABEL_PATTERNS.md` and `ROBUST_DEMIXING.md` (twelfth and thirteenth).  Theorem G's
+constant now has a computable lower bound, which is very small (S9).  Theorem J rests on results of the Ensemble division that this
 division did not review.  Everything labelled [N] or [C] in the table of §0.  The
 thresholds are for *generic* chains at specific bond angles (and all but finitely many
 others); an instance is covered only by running its certificate.
@@ -314,8 +390,9 @@ others); an instance is covered only by running its certificate.
 | S4 stress certificate (checker) | `stress_certificate` | V (core) + P; reviewed | S2 + a stress supplied | instances by the referee's programme | bands of separation `≤ 6`: no stress exists | `LDLᵀ`, ranks | no producer; `κ` unknown | checker ready |
 | S5 hinges | none | P, P-exact; two derivations | two states, rigid segments on no conic | exact degrees 8 / 2 | one hinge; two half-turns | eight candidates, a linear programme | more than two states | reference ready |
 | S6 local identifiability | none | P-exact | generic | exact Jacobian ranks `K ≤ 8` | C1 | Jacobian rank | as evidence of identification | diagnostic only |
-| S7 local-distance diagnostics | none | P; **unreviewed**; mechanism known | exact complete data of separation `≤ 4` | 420 arbitrary competitors | separation `≤ 3` | sparse SVD | as an error bar at realistic noise | diagnostics ready; guarantee vacuous |
+| S7 local-distance diagnostics | none | P; **reviewed with replication by the Science division (SCI-REV-0028)**; mechanism known | exact complete data of separation `≤ 4` | 420 arbitrary competitors | separation `≤ 3` | sparse SVD | as an error bar at realistic noise | diagnostics ready; guarantee vacuous |
 | S8 partial labelling | (S2's declarations apply) | P, P-exact; **unreviewed**; one conjecture | all pairs among the labelled sites; exact common local geometry | exact ranks on 100 random patterns; second solutions | sparse labels (C6); one state with two triples | counting `c(S)`; then S2 | `c(S)` below the thresholds | pre-check and reference ready |
+| S9 demixing from noisy data | none | P; **unreviewed**; standard perturbation theory | S2 + an error level `ε` in Frobenius norm + a box tolerance on the constraints | every inequality checked on competitors; constants attained; four planted errors caught | exact uniqueness with a tolerance; an upper bound on `K` | DEMIX, a least-squares polish, one pseudo-inverse | as a guarantee beyond relative errors `10⁻¹²`–`10⁻⁴` | condition numbers and count rule ready; certified radii empty at realistic accuracy |
 
 (Originating division: Geometry, except where a row or the text names the Science
 division.  Commit: the one that adds this file.  Physical interpretation, potential

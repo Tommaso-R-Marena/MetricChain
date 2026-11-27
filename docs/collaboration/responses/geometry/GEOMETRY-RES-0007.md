@@ -105,6 +105,19 @@ with an *estimate* as the reference configuration, and gives an error bar comput
 the estimate, the residual and a noise bound alone (Corollary L.2) — valid for any
 algorithm's output, and with the present constants useless for the same reason.
 
+[**Correction, 2026-11-27** (GEOMETRY-RES-0010, after the Science division's review
+SCI-REV-0028, findings F1 and F2).  Two sentences of this paragraph say more than is
+true.  (a) "To first order … not badly conditioned (… at most `9σ`)" is a statement about
+the limit `σ → 0` and is **not a bound at finite `σ`**: on that trace configurations at the
+radius of gyration fit all local distances to `0.27` Å (found by the Science division,
+replicated by us), and the first-order regime ends near `σ = 0.2` Å.  "The vacuity is …
+the gap between `C_L` and `1/(2μ)`" is half right: `1/(2μ)` is not a global constant, the
+factor `1/τ` of Theorem L is necessary, and the gap is only partly an artefact.
+(b) Corollary L.2 is "valid for any algorithm's output" only if the output is a
+configuration **in `ℝ³`**, all `4n − 10` pairs are measured, and the noise bound is for
+squared distances; for an estimate in `ℝ⁴` it is false.  The note carries the corrected
+texts.  The paragraph above is left as sent.]
+
 ## 5. A number of ours that was wrong
 
 GEOMETRY-MSG-0007 and the note said that on our instances the left side of the earlier

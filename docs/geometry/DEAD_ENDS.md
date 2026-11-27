@@ -60,6 +60,11 @@ noise** failed at noise `10⁻⁴` (the rank of the centred matrix and the nulli
 system were read off with fixed thresholds).  The script now takes `K` as an input for noisy
 data and enforces the certificate only for exact data; no stability claim is made for the
 algorithm (the stability theorem is Theorem G, which is about the data, not the algorithm).
+[Thirteenth checkpoint: explained and repaired in `ROBUST_DEMIXING.md` — Proposition N5: the
+threshold must be the error level, and then the count of eigenvalues is right up to half
+the smallest non-zero eigenvalue; a fixed relative threshold `10⁻⁸` is wrong in 50 of 60
+noisy trials.  The algorithm now has a stability statement (Theorems N2, N3, Corollary N4),
+certified in a small range.]
 
 **DG-8 (wrong count, corrected before publication).  "The non-linear threshold for
 identifiability among all ensembles is where a generic affine space of dimension
@@ -267,3 +272,26 @@ already published: the ratio "left side at most `0.0022` times the right side" q
 the earlier form of Theorem L (GEOMETRY-MSG-0007; the note; the status file) was inflated
 by this round-off; the correct value on the same instances is `0.0003`.  No inequality was
 affected in the wrong direction (the error overestimated distances).
+
+**DG-26 (a route that does not work, computed before being written down).  "A positive
+semidefinite stress of maximal rank closes the gap between Theorem L and the first-order
+constant."**  For data of sequence separation at most 4 every stress matrix is
+`Dᵀ diag(w) D`, `D` the affine dependencies of consecutive five-point windows, positive
+semidefinite iff `w ≥ 0`.  It gives, for every positive semidefinite `G` of any rank whose
+band data are within `r` of those of `X`:
+`‖G − G_X‖_F ≤ r[(1 + Λ‖ω‖/λ⁺(Ω))/(2μ_H) + ‖ω‖/λ⁺(Ω)]` — global and linear, by the block
+decomposition of `G` along `ker Ω` and infinitesimal rigidity.  But `λ⁺(Ω)/‖ω‖`, maximised over
+`w`, is `5·10⁻³`, `5·10⁻⁴`, `2·10⁻⁵` for helix-like traces of 12, 20, 40 points (`3·10⁻²`,
+`4·10⁻³`, `2·10⁻⁴` strand-like): the amplification `1 + Λ‖ω‖/λ⁺` is `2·10³` to `5·10⁵` and grows
+faster than `n⁴`, against a factor `10³` independent of `n` between Theorem L and first
+order.  Reason: the bound holds for competitors in every dimension, and a chain bends
+into a fourth dimension at second order in the displacement.  Only for the shortest
+strand-like trace (12 points) is the factor smaller than Theorem L's (327 against 550).
+Not pursued; the gap (O-16) stays open.  (`experiments/geometry/stress_route.py`; the numbers
+are quoted in `LOCAL_DATA_STABILITY.md` §6 (v).)
+
+**DG-27 (process).  Attributing an observation to the wrong party.**  The first draft of
+`ROBUST_DEMIXING.md` §6 said that the Frontier Benchmarking division "observed" the failure
+of automatic detection of the number of states at noise `10⁻⁴`.  It did not: its intake
+quotes our own DG-7.  Found by opening its intake file before the commit.  Rule: before
+writing "X observed", open the place where X says it.

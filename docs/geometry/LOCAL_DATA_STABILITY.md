@@ -2,7 +2,7 @@
 
 **Geometric Inference division — cycle 2, first note** (lower bounds: fifth checkpoint;
 upper bound, Theorem L: eighth checkpoint).  Labels as in `ENSEMBLE_RIGIDITY.md`.
-Unrefereed.  Single conformations, no ensembles.
+§3 reviewed by the Science division (SCI-REV-0028); §1, §2, §3.5 not.  Single conformations, no ensembles.
 
 > **Read this first (tenth checkpoint, 2026-11-26).**  The Science division reviewed the
 > originality of this note at our request (SCI-REV-0023; our proofs were not reviewed).
@@ -13,7 +13,18 @@ Unrefereed.  Single conformations, no ensembles.
 > about the threshold led to the present form of Theorem L, **which has no threshold**, and
 > to Theorem L⁺.  Its assessment of relevance stands and is sharpened in §6: **these are
 > theorems about the exponent and the first-order constant; for data of realistic accuracy
-> their guarantees are empty.**  §3 was rewritten at the tenth checkpoint and is unreviewed.
+> their guarantees are empty.**  §3 was rewritten at the tenth checkpoint.
+>
+> **And this (thirteenth checkpoint, 2026-11-27).**  §3 has now been **reviewed with
+> replication by the Science division** (SCI-REV-0028, an internal review by another
+> session, not external peer review): Lemmas P, Q, Theorem L in both forms, Corollaries
+> L.1–L.3 and Theorem L⁺ are proved as stated; Lemma P was verified at its source.  One
+> finding changes what a reader may conclude, and it is theirs: **the first-order constant
+> is not a global constant, and the first-order regime is short** — local distances fitted
+> to three tenths of an ångström admit configurations farther away than the radius of
+> gyration; the factor `1/τ` of Theorem L is necessary.  We replicated it independently
+> (`experiments/geometry/distant_fits.py`).  All twelve findings are applied below, each
+> marked "SCI-REV-0028"; the wordings in §6 (i), (ii) follow the review's proposals.
 
 ## 0. Summary
 
@@ -40,7 +51,8 @@ literature (Arias-Castro–Vishwanath) is exponential in `n`; for the first-orde
 polynomial bounds are in print, and the continuum analogue — the geometric rigidity
 estimate in a thin rod — has exactly this scaling (§5).  So for rod-like chains the
 stability constant of sequence-local distance data is `Θ(n²)`, with explicit constants on
-both sides.  **What this does not give** (§6): the range in which the absence of distant
+both sides (far apart: on the helix-like trace of §6 they are `2.3·10⁻⁴` and `28.8`, the
+computed value `0.0104` — SCI-REV-0028 F9).  **What this does not give** (§6): the range in which the absence of distant
 solutions is certified is far below any measurement accuracy, so for realistic data these
 are statements about scaling, not guarantees.  Consequences: a length-independent stability constant needs measured pairs
 of sequence separation at least of order `n^{2/3}` for any configuration, whatever the
@@ -170,8 +182,11 @@ inside `F_i`.
 
     min_{R ∈ O(r)} ‖U − XR‖_F²  ≤  ‖UUᵀ − XXᵀ‖_F² / ( 2(√2 − 1) σ_r(X)² ) .
 
-(Tu, Boczar, Simchowitz, Soltanolkotabi and Recht, 2016, Lemma 5.4 — cited from memory; the
-proof here is self-contained.)
+(Tu, Boczar, Simchowitz, Soltanolkotabi and Recht, *Low-rank Solutions of Linear Matrix
+Equations via Procrustes Flow*, Proc. 33rd ICML, 2016, Lemma 5.4; arXiv 1507.03566v2,
+Lemma 5.4 — we cited it from memory; **the statement and the number were checked at the
+source by the Science division** (SCI-REV-0028 F5), which also notes that the constant is
+attained for every `X` when `m > r`.  The proof here is self-contained.)
 
 *Proof.*  Replace `X` by `XR` for an optimal `R`; then `XᵀU` is symmetric positive
 semidefinite (`R` is the orthogonal polar factor of `XᵀU`).  Put `Δ = U − X`, `A = ΔᵀΔ ⪰ 0` and
@@ -194,15 +209,24 @@ distances, `J` the centring projection).  So the Gram matrices of the two centre
 differ by `−½ J E J`, `E = (η_jk)_{j,k∈S}`, of Frobenius norm at most `½‖E‖_F = e/√2`.  Apply
 Lemma P to the centred windows.  ∎
 
-*The lemma is sharp up to a constant where it matters.*  Mirror one end point of `F_i` in
-the plane of its three middle points: exactly one squared distance changes, by `4h⁻h⁺`
-(`h^±` the heights of the two end points over that plane — the computation of SCI-REV-0023
-§5 (a)), and the window moves by `2 min(h⁻, h⁺)` up to a rigid motion.  The lemma gives
-`3.11 h⁻h⁺/s`, and `s ≤ √2 max(h⁻, h⁺)`.
+*The constant is essentially optimal, and the dependence on `s` is attained on every
+window* [N; the Science division's review SCI-REV-0028, F3, whose wording this is — our
+earlier sentence claimed sharpness from an inequality in the wrong direction].  The
+supremum of `‖Y_S − X_SR − 1tᵀ‖_F·s/(κe)` over pairs of five-point windows is at least `0.97`
+(numerically), and on a fixed window collapsing its thin direction gives at least `0.73` on
+the windows tried.  The reflection of SCI-REV-0023 §5 (a) — mirror one end point of `F_i` in
+the plane of its three middle points: exactly one squared distance changes, by `4h⁻h⁺`, and
+the window moves by at most `2 min(|h⁻|, |h⁺|)` — attains the bound `3.11|h⁻h⁺|/s` only up to a
+factor that depends on the shape of the window: `0.55` on a helix-like window, `0.21`–`0.24`
+on strand-like ones, arbitrarily small when the three middle points are nearly collinear.
 
 **Theorem L (global quantitative rigidity from sequence-local distances; no threshold)
-[P].**  Let `τ_* > 0`.  For **every** configuration `Y` of `n` points in `ℝ³` there is an
-isometry `g` (possibly improper) such that for every `k`, with `i(k) = min(k, n − 4)`,
+[P].**  Let `s_i > 0` for all `i` and `τ_i > 0` for `2 ≤ i ≤ n − 4` (for `n ≥ 6` the second
+condition implies the first); in this theorem `τ_*` may be read as `min_{2 ≤ i ≤ n−4} τ_i` —
+**the end windows `W_1`, `W_{n−3}` may be flat**; for `n = 5` the theorem is Lemma Q.  For
+**every** configuration `Y` of `n` points in `ℝ³` there is an isometry `g` (possibly improper)
+such that for every `k`, with `i(k)` any index such that `k ∈ F_{i(k)}` — the smallest,
+`i(k) = max(1, k − 4)`, gives the best bound; our scripts use the largest —
 `δ_j = κ e_j/s_j` and `c_{j+1}` the centroid of `W_{j+1}`,
 
     (local)      |y_k − g(x_k)|  ≤  δ_{i(k)} + Σ_{j < i(k)} (δ_j + δ_{j+1}) · ( |x_k − c_{j+1}| / τ_{j+1} + ½ ) ,
@@ -212,7 +236,11 @@ and consequently
     (uniform)    ‖Y − gX‖_F  ≤  1.2 · (b / (s_* τ_*)) · (n + 2)² · ‖η‖₂ .
 
 Nothing is assumed about `Y`: no closeness to `X`, no bound on the errors, no chain
-structure.
+structure — except that `Y` is a configuration **in `ℝ³`** (essential: SCI-REV-0028 F2).
+[The hypothesis on interior windows only and the free choice of `i(k)` are the Science
+division's observations (SCI-REV-0028 F4, F7): Step 2 uses `τ_{j+1}` for `1 ≤ j ≤ n − 5` only,
+and Step 3 holds for every window that contains `k`.  We re-read the proof with them and
+agree.  An interior window may not be flat: then `η = 0` with `d_P > 0` occurs.]
 
 *Proof.*  Points are row vectors; an isometry is `x ↦ xR + t`.
 *Step 1 (windows).*  Lemma Q for each `F_i` gives `R_i ∈ O(3)`, `t_i` and a residual
@@ -245,18 +273,26 @@ Summing the squares over `k` (`Σ_k (k + ½)³ ≤ (n + 3/2)⁴/4`, `(2√k + 1)
 **Corollary L.1 (any estimator that fits as well as the truth; any noise level) [P].**  Let
 `q_jk = |x_j − x_k|² + ε_jk` for `|j − k| ≤ 4` and let `Ŷ` be any configuration with
 `Σ(|ŷ_j − ŷ_k|² − q_jk)² ≤ Σ ε_jk²` — for instance a global minimiser of this stress.  Then
-`min_g ‖Ŷ − gX‖_F ≤ 2.4 (b/(s_*τ_*)) (n + 2)² ‖ε‖₂`.  (`‖η(Ŷ)‖₂ ≤ 2‖ε‖₂`.)
+`min_g ‖Ŷ − gX‖_F ≤ 2.4 (b/(s_*τ_*)) (n + 2)² ‖ε‖₂`.  (`‖η(Ŷ)‖₂ ≤ 2‖ε‖₂`.)  (The hypothesis cannot be
+checked from the data, `Σε²` being unknown: it holds for a global minimiser of the stress,
+not for the output of a local optimiser — SCI-REV-0028 F10.)
 
 **Corollary L.2 (an error bar computed from the estimate alone) [P].**  Let `Ŷ` be *any*
-configuration with `τ_*(Ŷ) > 0` — the output of any algorithm — and let the data be
-`q_jk = |x_j − x_k|² + ε_jk` for an unknown configuration `X`, with `‖ε‖₂ ≤ ν`.  Then
+configuration **of `n` points in `ℝ³`** with `τ_*(Ŷ) > 0` — the output of any algorithm **that
+returns three-dimensional coordinates** — and let the data be `q_jk = |x_j − x_k|² + ε_jk` **for
+all `4n − 10` pairs of separation at most 4**, for an unknown configuration `X` **in `ℝ³`**, with
+`‖ε‖₂ ≤ ν` **(errors of the squared distances)**.  Then
 
     min_g ‖X − gŶ‖_F ≤ C(Ŷ) · ( ‖r‖₂ + ν ),     r_jk = |ŷ_j − ŷ_k|² − q_jk ,     C(Ŷ) = 1.2 b(Ŷ)(n + 2)² / (s_*(Ŷ) τ_*(Ŷ)) .
 
 Every quantity on the right is computed from the estimate, the data and the noise bound;
 nothing is assumed about `X`.  (Theorem L with `Ŷ` as the reference configuration and `X` as
-the arbitrary one.)  This is possible only because the theorem has no smallness condition
-to verify.
+the arbitrary one.)  The absence of a smallness condition makes the bar unconditional;
+with a threshold it would exist only below the threshold.  **The statement is false for
+an estimate in `ℝ⁴`** — an unprojected semidefinite or scaling solution: `y_i = (x_i, εw_i)`,
+`w` the affine dependency of a five-point window, has `‖η‖₂ = O(ε²)` and `d_P ≍ ε`.  [The three
+conditions in bold and this counterexample are the Science division's (SCI-REV-0028 F2);
+the corollary was right, its wording hid them.]
 
 **Corollary L.3 (the exponent is sharp; `Θ(n²)` on helices; infinitesimal rigidity with a
 constant) [P].**  (a) For ideal helices of fixed geometry and distances of separation at
@@ -271,13 +307,18 @@ smallest non-zero singular value `μ` of the matrix `A` of Theorem L⁺ satisfie
 row per pair of separation at most 4 — `(x_j − x_k)ᵀ` in the block of `j`, its negative in the
 block of `k`: half the Jacobian of the squared distances — and `μ > 0` its smallest non-zero
 singular value (the `(3n − 6)`-th).  Let `Λ` be the largest Laplacian eigenvalue of the graph
-of measured pairs (`Λ < 11.04`) and `C_L` any constant for which Theorem L holds for `X`.  For
-every `Y` with `‖η‖₂ ≤ μ/(ΛC_L)`:
+of measured pairs (`Λ < 11.04`) and `C_L` any constant for which Theorem L holds for `X` — the
+uniform one, or `2‖M‖₂` with `M` the matrix of the local form, which is 5 times smaller on
+the 20-point helix-like trace (88.7 against 456; SCI-REV-0028 F8).  Let `X` be as in
+Theorem L (then `μ > 0` by Corollary L.3 (b)).  For every `Y` **in `ℝ³`** with `‖η‖₂ ≤ μ/(ΛC_L)`:
 
     d_P(X, Y) ≤ ‖η‖₂ / ( μ + √(μ² − Λ‖η‖₂) )    if ‖η‖₂ ≤ μ²/Λ ,        and    d_P(X, Y) ≤ ‖η‖₂/μ    in any case.
 
 As `‖η‖₂ → 0` the constant tends to `1/(2μ)`, the first-order constant, which is attained
-along the softest mode; at finite amplitude `1/(2μ)` alone is not a bound.
+along the softest mode; at finite amplitude `1/(2μ)` alone is in general not a bound (it
+fails along the softest mode `V` whenever `⟨AV, Q(V)⟩ ≠ 0`; on the 20-point helix-like trace
+this number vanishes — SCI-REV-0028 F8).  **The range cannot be enlarged to `‖η‖₂ ≤ μ²/Λ`,
+and `1/(2μ)` is not a global constant** (§6, reading (ii)).
 
 *Proof.*  Let `g` be optimal, `X′ = gX`, `V = Y − X′`, `v = ‖V‖_F = d_P(X, Y)`.  Optimality gives
 `Σ v_k = 0` and `Σ x′_k × v_k = 0`, i.e. `V` is orthogonal to the infinitesimal isometries of
@@ -311,8 +352,13 @@ configuration with nearly the same local distances.  The range is small (§6).
    use windows of `K` and `K + 1` consecutive points: (local) holds verbatim with `½`
    replaced by `1/√K`, and the thicknesses can only grow with the window (checked on
    instances for `K = 5, 6, 7`; the uniform constant was written out for `K = 4` only).
-5. *The constants are crude.*  On the instances of §4 the left side is at most `0.064`
-   times the local bound and `0.002` times the uniform one.
+5. *The constants.*  On the instances of §4 the left side is at most `0.064` times the local
+   bound and `0.002` times the uniform one; these are not worst cases.  An adversarial
+   search over both configurations (Science division, SCI-REV-0028 F6) reaches `0.84` of
+   the local bound point-wise, `0.43` of it in Frobenius form (`n = 5`; `0.25` at `n = 16`) and
+   `0.018` of the uniform bound (`n = 16`: two straight arms joined by a short thin hinge).
+   So the local form cannot be improved by more than a small factor in general; the
+   uniform constant is at least 55 times too large on every pair tried.
 6. *Other dimensions.*  In `ℝ^d`: windows of `d + 1` and `d + 2` points, distances of
    separation at most `d + 1`.
 
@@ -516,32 +562,80 @@ radius, rise and turn — the geometries of SCI-REV-0023 §5, not structures fro
 gives, for squared distances of separation at most 4: the constant `C_L` of Theorem L; the
 sharp first-order constant `1/(2μ)`; the range `‖η‖₂ ≤ μ/(ΛC_L)` in which Theorem L⁺ certifies
 it, expressed as a root-mean-square error of the distances; and the worst-case first-order
-RMSD per unit root-mean-square distance error.
+RMSD per unit root-mean-square distance error.  (The range is computed with the largest
+Laplacian eigenvalue of the finite graph, not with `11.04`, and converted to a distance
+error by dividing by `2 d̄ √N`, `d̄` the mean measured distance and `N` the number of pairs.
+The table was reproduced to the digits given by the Science division, SCI-REV-0028 F12.)
 
-| trace | `n` | `C_L` | `1/(2μ)` | certified range (rms distance error) | first-order RMSD per unit rms distance error, worst case |
-|---|---|---|---|---|---|
-| helix-like (radius 2.3, rise 1.5, 100° per point) | 12 | 185 | 0.23 | `2·10⁻⁵` | 4.2 |
-| | 20 | 456 | 0.45 | `3·10⁻⁶` | 9.0 |
-| | 100 | 9 800 | 9.5 | `2·10⁻⁹` | 207 |
-| strand-like (radius 0.94, rise 3.3, 160° per point) | 12 | 1 780 | 3.3 | `9·10⁻⁸` | 58 |
-| | 20 | 4 410 | 7.3 | `1·10⁻⁸` | 140 |
-| | 100 | 94 700 | 168 | `9·10⁻¹²` | 3 460 |
-| strand-like, 175° per point | 20 | 65 100 | 42 | `1·10⁻¹⁰` | 753 |
+| trace | `n` | `C_L` | `1/(2μ)` | certified range (rms distance error) | first-order RMSD per unit rms distance error, worst case | the same, independent errors, on average |
+|---|---|---|---|---|---|---|
+| helix-like (radius 2.3, rise 1.5, 100° per point) | 12 | 185 | 0.23 | `2·10⁻⁵` | 4.2 | 1.6 |
+| | 20 | 456 | 0.45 | `3·10⁻⁶` | 9.0 | 2.3 |
+| | 100 | 9 800 | 9.5 | `2·10⁻⁹` | 207 | 16.5 |
+| strand-like (radius 0.94, rise 3.3, 160° per point) | 12 | 1 780 | 3.3 | `9·10⁻⁸` | 58 | 12.3 |
+| | 20 | 4 410 | 7.3 | `1·10⁻⁸` | 140 | 25 |
+| | 100 | 94 700 | 168 | `9·10⁻¹²` | 3 460 | 271 |
+| strand-like, 175° per point | 20 | 65 100 | 42 | `1·10⁻¹⁰` | 753 | 102 |
+
+(Last column, added at the thirteenth checkpoint: for independent distance errors of equal
+variance the least-squares reconstruction has, to first order, mean squared displacement
+`σ² Σ_i s_i(R)⁻²` — the sum over the non-zero singular values of the rigidity matrix.  It is
+a first-order expectation, **not a guarantee**: nothing certifies it outside the range of
+the fifth column.)
 
 Reading.  (i) *First order:* on a helix-like trace of 20 points, distance errors of
-root-mean-square size `σ` move the reconstruction by at most `9σ` (RMSD) to first order; the
-factor grows like `n²` and is one to two orders of magnitude larger on strand-like traces.
-This is the instability of local data that Theorem K describes, with its true constant.
+root-mean-square size `σ` move the reconstruction by at most `9σ` (RMSD) **in the limit
+`σ → 0`**; the factor grows like `n²` and is one to two orders of magnitude larger on
+strand-like traces.  **This is not a bound at finite `σ`, and the regime is short** [N; the
+major finding of the Science division's review SCI-REV-0028 (F1), explicit configurations
+found by search; replicated by us with independent code, `distant_fits.py`, to the digits]:
+the local distances of that trace are fitted to rms `0.27` Å by a configuration at RMSD
+`9.0` Å — its radius of gyration is `8.95` Å — and to `0.30` Å by one at `9.95` Å (to `0.24` Å
+at `7.0` Å by the Science division's finer search); for 12 points, to `0.37` Å at `5.76` Å
+(radius of gyration `5.66` Å); on the strand-like trace of 20 points, to `0.10` Å at `12` Å
+and to `0.20` Å at `18.6` Å.  The first-order factor is recovered only up to `σ ≈ 0.2` Å on the
+helix-like trace (at `σ = 0.11` Å the worst configuration found is at RMSD `1.0` Å).  **In the
+worst case, sequence-local distances with errors of a few tenths of an ångström
+(helix-like) or a few hundredths (strand-like) do not determine the fold of these
+idealised traces, whatever the algorithm.**
 (ii) *Globally:* the range in which we can **certify** that no distant configuration fits
 the data is `10⁻⁵` ångström or less.  Above it Theorem L still holds, but its constant is a
 thousand times the first-order one and its bound exceeds the size of the molecule.  So, as
 the Science division's review says of the earlier form, **these are theorems about the
 exponent and about the first-order constant; as a guarantee for data of realistic accuracy
 they are empty**, and nothing in this note shows that sequence-local distances of
-realistic accuracy determine a fold.  The gap between `C_L` and `1/(2μ)` — between "no
-distant solution" and "the nearby solution is well conditioned" — is the open problem
-(`PROOF_OBLIGATIONS.md` O-16).  (iii) Corollary L.2 gives an error bar from an estimate
-alone; with the present constants it is valid and useless for the same reason.
+realistic accuracy determine a fold — by (i), in the worst case they do not.  **The gap
+between `C_L` and `1/(2μ)` is only partly an artefact** [SCI-REV-0028 F1; the text of this
+paragraph follows its proposal]: the best global constant `C_glob = sup_Y d_P/‖η‖₂` is not
+`1/(2μ)`.  On the 20-point helix-like trace it is at least `1.92` (against `0.447`), and for
+chains with one nearly coplanar interior window `1/(2μ)` stays bounded while the reflected
+tail gives `d_P/‖η‖₂ ∝ 1/τ` (one squared distance changes, by `4h⁻h⁺`).  Hence **the factor
+`1/τ` of Theorem L is necessary in every global constant**, and the range of Theorem L⁺
+cannot be enlarged to `‖η‖₂ ≤ μ²/Λ`.  What remains open (`PROOF_OBLIGATIONS.md` O-16) is the
+size of `C_glob` between these lower bounds and `C_L`: a factor 240 on the helix-like trace,
+and 55 on the worst pair found by search.
+(iii) Corollary L.2 gives an error bar from an estimate alone — for an estimate in `ℝ³`
+with every pair measured; with the present constants it is valid and useless for the
+same reason.  **One part is not empty** (SCI-REV-0028 F11): Lemma Q alone is a usable bound
+for one window with complete distances — a helix-like five-point window whose ten
+distances are known to within `0.1` Å is fixed to RMSD `≤ 0.32` Å up to an isometry, within
+a factor `2.2` of the worst case found; it is the chaining that makes the constants
+useless.
+(iv) *On average* (the Frontier Benchmarking division's item G-2 asks for an average-case
+statement): to first order, independent errors are four to thirteen times less harmful
+than the worst case, because the worst case is one soft mode out of `3n − 6`; a 20-point
+helix-like trace with distance errors of `0.1` Å would be reconstructed to `0.23` Å RMSD on
+average.  By (i) this description can hold at most up to errors of about `0.2` Å on that
+trace and a few hundredths on the strand-like one; below those levels it is supported by
+search only, and certified only in the range of the fifth column.
+(v) *A route that does not close the gap* [N; `DEAD_ENDS.md` DG-26]: a positive semidefinite
+stress of maximal rank gives a bound that is global and linear in the error in Gram
+space (for every configuration in every dimension), at the price of the factor
+`1 + Λ‖ω‖/λ⁺(Ω)`.  With the best stress supported on the band, this factor is `2·10³`,
+`2·10⁴`, `5·10⁵` for helix-like traces of 12, 20, 40 points and `3·10²`, `3·10³`, `7·10⁴` for
+strand-like ones — it grows faster than `n⁴` (the five-point affine dependency acts like
+a fourth difference) — against `C_L·2μ ≈ 10³` and `6·10²` for Theorem L, independent of `n`.
+The relaxation loses because chains fold softly into a fourth dimension.
 
 **Other limitations.**
 
