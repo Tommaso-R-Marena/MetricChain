@@ -214,12 +214,14 @@ def _exact_bound(P: _Problem, D: list, mint: dict) -> int:
 
 def certify_gmec(model: PairModel, eps: Fraction = Fraction(0), witness=None, message_bits: int = 12,
                  max_nodes: int = 100_000, max_sweeps: int = 300, tol: float = 1e-12,
-                 time_limit: float | None = None, domains=None) -> MinCertificate:
+                 time_limit: float | None = None, domains=None, eliminate: bool = True) -> MinCertificate:
     """Find a configuration `x*` and a certificate that `E(x) >= E(x*) - eps` for every `x`.
 
     `eps` is an exact rational in energy units (`0` asks for a proof of exact optimality).
     `domains` restricts the claim to a box (a non-empty list of states per site); the witness
     then lies in that box and the certificate is about that box only.
+    `eliminate=False` switches dead-end elimination off (dual bound and search only; with
+    `max_nodes=1` the dual bound alone — the null method of the benchmark plan).
     Raises :class:`CertificationBudgetExceeded` (an abstention) when `max_nodes` branch-and-bound
     nodes or `time_limit` seconds do not suffice.
     """
@@ -261,7 +263,7 @@ def certify_gmec(model: PairModel, eps: Fraction = Fraction(0), witness=None, me
         if time_limit is not None and time.monotonic() - t0 > time_limit:
             raise CertificationBudgetExceeded(f"time limit of {time_limit} s reached")
         D = [d.copy() for d in D]
-        prunes = dead_end_elimination(P, D)
+        prunes = dead_end_elimination(P, D) if eliminate else []
 
         def wrap(node):
             for (i, r, t) in reversed(prunes):

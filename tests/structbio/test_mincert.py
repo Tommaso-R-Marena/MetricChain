@@ -262,3 +262,21 @@ def test_check_result_says_whether_the_claim_covers_every_state_of_every_site():
     domains = [[0] if k > 1 else [0] for k in model.sizes]
     part = check_min_certificate(certify_gmec(model, eps=Fraction(0), domains=domains))
     assert part.accepted and part.full_box is (all(k == 1 for k in model.sizes))
+
+
+def test_the_producer_can_run_without_eliminations_and_then_emits_no_prune_node():
+    """The null method of the benchmark plan: dual bound and search only (with `max_nodes=1`: the
+    dual bound alone).  The certificates stay exact; they just contain no elimination."""
+    from metricchain_sb.mincert import count_nodes
+
+    with_prunes = 0
+    for seed in range(10):
+        model = random_pair_model(seed, n=5, kmax=4, density=0.9, scale_bits=2, kmin=2)
+        emin, _ = brute_force_min(model)
+        cert = certify_gmec(model, eps=Fraction(0), eliminate=False)
+        assert count_nodes(cert.root)["prune"] == 0
+        result = check_min_certificate(cert)
+        assert result.accepted and result.certified_gap == 0
+        assert result.lower_bound == Fraction(emin, 2 ** model.scale_bits)
+        with_prunes += count_nodes(certify_gmec(model, eps=Fraction(0)).root)["prune"] > 0
+    assert with_prunes >= 5          # the default producer does eliminate on these instances

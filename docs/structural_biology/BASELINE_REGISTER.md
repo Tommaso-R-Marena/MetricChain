@@ -79,6 +79,29 @@ All baselines run on **the same pairwise instance, with the same integerised or 
    - BP and mean field, labelled "uncertified".
 4. **Ensemble identification (C3).** A floating-point LP (HiGHS or SciPy) computing the same ranges, plus MaxOcc-style weight bounds. The question is whether exact certificates change any reported conclusion.
 
+### Additions of 2026-11-27 (after the science division's review SCI-REV-0026 §7)
+
+1. **The null method for GMEC**: the exact-rational dual bound of the pairwise relaxation alone
+   (no eliminations, no search).  In our format that is a certificate with a single leaf on
+   the full box, so it needs no other software; the count "certified by the leaf alone" per
+   instance is owed and not yet made.
+2. **Search separated from certificate format**: translate *our own* derivation into the
+   pseudo-Boolean proof format — a dead-end elimination is a redundance-based strengthening
+   whose objective condition is the Goldstein inequality, a dual-bound leaf is a linear
+   combination of the pair inequalities (the science division's reading of the published
+   rules, from memory, untested) — and have the verified checker check it.  This also gives
+   one real instance a check by a verified checker.  Not implemented; proposed to the
+   engineering division with STRUCTBIO-REQ-0001.
+3. **For line 2 of the budget (discretisation)**: the provable incumbent is dead-end
+   elimination with continuous rotamers (MinDEE; iMinDEE in OSPREY).  As a solver comparison
+   it remains excluded (a different optimisation problem); the measurement owed is SB-BM-7
+   (rigid minimum against the per-well continuous minimum of the same energy).
+4. **Certified baseline for C2**: rational bounds of each Boltzmann factor, then
+   machine-checked weighted model counting (CPOG) twice — the count is monotone in every
+   weight.  Not installed; proposed.
+5. **Context for SB-BM-6**: learned packers (DLPacker, AttnPacker) next to FASPR, SCWRL4 and
+   the Rosetta packer; none is a same-instance baseline.
+
 ## Comparisons that would be meaningless (avoid)
 
 1. **Certified GMEC energy versus SCWRL4, FASPR or Rosetta energies or runtimes.** These use different energy functions, rotamer libraries and pruning. Even a comparison of χ accuracy against their published DB379 numbers (for example SCWRL4's 86% χ1 within 40° `[V-abs]`) compares models, not solvers.
