@@ -579,3 +579,63 @@ has considered and set aside, using the fifteen fields of the founding directive
   records any changed statement.
 - Contradictions between sources stay visible (`RESEARCH_INTAKE.md` §4) until resolved by a dated
   entry.
+
+## Dated changes — 2026-11-27 (third checkpoint)
+
+**A-SB-1. Rule semantics of the partition-function checker (new; this division's own Lean file).**
+1. Division: structural biology (proofs written by a subagent of this division, checked by Lean).
+2. Commit: `53dca3b` (`proofs/StructBio/FactorElimination.lean`, `proofs/StructBio/AxiomAudit.lean`).
+3. Identifiers: rules R-1 … R-4 of STRUCTBIO-REQ-0003.
+4. Lean (namespace `MetricChain`): `sum_boxFinset_branch`, `sum_boxFinset_sumOut`,
+   `sum_boxFinset_elim` (general elimination, any number of neighbours), `sum_boxFinset_mono`,
+   `sum_boxFinset_prod_mono`, `sum_boxFinset_prune`, `partitionFn_prune`
+   (`Z(D∖r) ≤ Z(D) ≤ (1 + exp(−βγ))·Z(D∖r)` when the dominator is lower by `γ` on the box),
+   `sum_boxFinset_relax`, `sum_boxFinset_relax_pair`, `partitionFn_relax_pair`
+   (`exp(−β r_hi)·Z′ ≤ Z ≤ exp(−β r_lo)·Z′`), `iterate_sq_rounded_down`, `iterate_sq_rounded_up`,
+   `exp_enclosure_rounded` (the exponential with any downward/upward rounding after each
+   squaring), and six auxiliary statements; 19 theorems.
+5. Assumptions: finite boxes; nonnegative weights where an inequality needs them (on the box
+   only); `0 ≤ β`; rounding functions that round in the stated direction.  The theory division's
+   vocabulary (`Config`, `Dom`, `boxFinset`, `partitionFn`, `expLo`, `expHi`) is reused unchanged.
+6. Proof status: [V] by our own build and audit (Lean 4.31.0, Mathlib v4.31.0; `#print axioms`
+   of every theorem and a walk over the 22 declarations of `proofs.StructBio.*`: only `propext`,
+   `Classical.choice`, `Quot.sound`).
+7. Review: none outside this division.  Not part of the theory division's audited tree
+   (`proofs/AxiomAudit.lean` is not modified by us); offered to the theory division in
+   STRUCTBIO-MSG-0004.
+8. Numerical evidence: the checker that implements these rules contains the 60-digit enumerated
+   `ln Z` and every enumerated population on all test instances, in two arithmetic tiers.
+9. Counterexamples: none known.  10. Physical interpretation: none — statements about finite sums.
+11. Prerequisites: none beyond the kernel files.
+12. Software: `zcheck.py` (each step of a Z certificate is an instance of one of these
+    statements — by reading; nothing is proved about the Python).
+13. Competing: the theory division's `zverify2` (exact to two neighbours); weighted model
+    counting with machine-checked counts (CPOG).
+14. Useless when: never as mathematics; as support for a *software* claim it is worth what the
+    correspondence between code and statement is worth.
+15. Ready: yes, as rule semantics.  **Label of C2 results from this date:** [CK] in the sense of
+    its definition — rule semantics [V], checker implementation tested — for the exact tier;
+    for the float tier additionally conditional on F1–F3 (stated and tested, not proved).  The
+    label is never to be read as "the software is formally verified".
+
+**A-SB-2. Optimality in every table within an entrywise error (the science division's construction).**
+1. Division: science.  2. Commit: science `eec5c16` (SCI-REV-0026 §4).  3. Identifier: "the
+shifted-table criterion".  4. Lean: none.  5. Assumptions: a pairwise table; an error bound
+`b ≥ 0` per entry; scenarios are all tables within `b` entrywise.  6. Proof status: elementary
+argument by its authors (linearity of energy differences in the scenario), tested by them by
+brute force (400 random models with all 262 144 vertex scenarios; 600 larger models).
+7. Review: our tests re-derive the worst case per competitor from the definition (160 cases)
+and sample scenarios (`tests/structbio/test_stability.py`).  8. Numerical evidence: RESULTS R-10.
+9. Counterexamples: none.  10. Physical interpretation: whether the certified minimiser survives
+a stated error of the table — lines 3 and 4 of the budget carried into the certificate.
+11. Prerequisites: certified minimisation (C1).  12. Software: `stability.shifted_model`,
+`certify_necessary_optimality`, `certify_exclusion_gaps` (also: gaps for leaving a rotamer well,
+their §0 point 1).  13. Competing: classical worst-case analysis of optimisation with interval
+data (not searched).  14. Useless when: dense tables without a cutoff and any realistic `b`
+(R-10; DEAD_ENDS SB-D-E-09) — the answer "not necessarily optimal" is then the result.
+15. Ready: implemented; each output is a `min` certificate, label [CK].
+
+**Model v2** replaces v1 for all further work (hydrogens by a deterministic rule;
+`ASSUMPTION_REGISTER.md` SB-A-15b); reason and evidence: RESULTS R-8.  Nothing in Part A
+depended on the hydrogen placement mathematically; every *number* quoted from v1 is a property
+of its seed-0 tables.

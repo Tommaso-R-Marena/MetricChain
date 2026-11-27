@@ -310,3 +310,30 @@ be described as formally verified.
 - **Known gaps:** no independent implementation; assumptions F1–F3 are stated, not proved for
   this platform; the producer's heuristics are untuned; no baseline has been run; the adversarial
   review STRUCTBIO-REV-0001 covers this code and is recorded in `reviews/`.
+
+## 9. Changes of 2026-11-27 (third checkpoint)
+
+- **C2, rule semantics.**  §8 above was written when the general elimination, the relaxation
+  and the rounded exponential rested on paper arguments.  They are now machine-checked in this
+  division's `proofs/StructBio/FactorElimination.lean` (19 theorems; build "completed
+  successfully (8567 jobs)"; our audit: only `propext`, `Classical.choice`, `Quot.sound`, 22
+  declarations walked).  The label of C2 results changes from [CP] to **[CK]** — rule semantics
+  [V], checker implementation tested — for the exact tier, and [CK] under F1–F3 for the float
+  tier.  *Not* verified: the Python (its steps are instances of the theorems by reading; one
+  author wrote producer and checker; no independent implementation exists yet —
+  STRUCTBIO-REQ-0004 asks for one).
+- **C1b extended** (`stability.py`): gaps for leaving a set of states (a rotamer well) and
+  optimality in every table within an entrywise error `b`.  Each output is a `min` certificate
+  on a restricted box or on the shifted table, checked by the same checker; exact proposition
+  for the latter: if the certificate of the shifted model has minimum equal to the shifted
+  energy of `x*`, then `x*` minimises every pairwise table whose entries lie within `b` of the
+  model's (the science division's argument, SCI-REV-0026 §4; tested against the definition).
+- **The model.**  v2 has no random element; its preparation is a function of the deposited
+  heavy atoms (tested for two seeds bit for bit).  Trusted in addition for v2:
+  `molecular/hydrogens.py` (geometry) — tested against a converged force-field minimisation of
+  the hydrogens and by five planted wrong rules.
+- **Provenance.**  Rows now record the commit of the code in memory at process start
+  (SB-DEF-08).  Header times of messages are read from the clock (SB-DEF-09).
+- **Internal adversarial review.**  STRUCTBIO-REV-0001 (a subagent with the mandate to break
+  both checkers) — its findings and their handling are recorded in
+  `docs/structural_biology/reviews/` and DEAD_ENDS when it reports.
