@@ -1,0 +1,13 @@
+R27 item2_adv_jointU.py started 2026-11-26T23:33:45Z  budget 530 s  seed 27121
+gradient self-check (20 directions, n = 8, p = 12): worst relative error 1.59e-08;  surrogate <= exact: True
+lengths: [18, 20, 24, 28, 32, 40];  continuation from: item2_adv_jointU_best_n16_seed27116.npy
+n = 18: largest rho found 0.0155226   (4 starts, 61 s; at the maximiser tau*/b = 0.050, s*/b = 0.064, tau max/min = 9.55, bonds min/max = 0.29, d_P/diam = 4.54, share of ||eta||^2 on separation 4: 0.00)
+n = 20: largest rho found 0.0158288   (4 starts, 67 s; at the maximiser tau*/b = 0.058, s*/b = 0.073, tau max/min = 8.42, bonds min/max = 0.30, d_P/diam = 4.03, share of ||eta||^2 on separation 4: 0.00)
+n = 24: largest rho found 0.0128584   (4 starts, 77 s; at the maximiser tau*/b = 0.054, s*/b = 0.068, tau max/min = 9.16, bonds min/max = 0.30, d_P/diam = 2.86, share of ||eta||^2 on separation 4: 0.00)
+n = 28: largest rho found 0.0141016   (5 starts, 105 s; at the maximiser tau*/b = 0.068, s*/b = 0.085, tau max/min = 8.00, bonds min/max = 0.32, d_P/diam = 4.76, share of ||eta||^2 on separation 4: 0.01)
+n = 32: largest rho found 0.0125649   (5 starts, 118 s; at the maximiser tau*/b = 0.070, s*/b = 0.088, tau max/min = 8.27, bonds min/max = 0.38, d_P/diam = 5.68, share of ||eta||^2 on separation 4: 0.01)
+n = 40: largest rho found 0.00975892   (6 starts, 169 s; at the maximiser tau*/b = 0.069, s*/b = 0.086, tau max/min = 8.44, bonds min/max = 0.36, d_P/diam = 3.81, share of ||eta||^2 on separation 4: 0.01)
+
+largest ratio d_P/(uniform bound) found: 0.0158288 at n = 20;  violations (rho > 1): 0
+control of the optimiser: the uniform bound with the constant divided by 100 is violated iff this exceeds 0.01: True;  divided by 1000: True
+ALL DONE 2026-11-26T23:43:42Z  596.9 s  peak memory 76 MB

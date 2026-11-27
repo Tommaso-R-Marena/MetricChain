@@ -1,0 +1,6 @@
+R27 item2_adv_step2.py started 2026-11-26T23:44:14Z
+sup found of ||R_1 - R_2||_F tau/(delta_1 + delta_2): 0.830257   (at the maximiser: det R_1 det R_2 = -1, tau/s_1 = 7.448e-01, ||R_1 - R_2||_F = 2.0000)
+sup found of ||R_1 - R_2||_F tau/(||eps_1|W|| + ||eps_2|W||): 1.000000   (at the maximiser: det R_1 det R_2 = -1, tau/s_1 = 1.066e-01, ||R_1 - R_2||_F = 2.0000)
+starts: 120;  violations (ratio > 1): 0
+CONTROL (s_1 in place of tau): largest value of ||R_1 - R_2||_F s_1/(delta_1 + delta_2) met: 527566.071  (> 1 means the wrong statement is violated: True)
+ALL DONE 2026-11-26T23:46:46Z  151.7 s  peak memory 76 MB

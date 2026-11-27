@@ -1,0 +1,49 @@
+R27 item4_worstcase_verify.py started 2026-11-26T23:39:59Z
+
+Part 1.  columns: case | sigma imposed | rms, max distance error recomputed | RMSD (improper allowed) | RMSD (proper only) | R_g | windows of Y with the chirality of X / opposite (after the optimal isometry) | radius of gyration of Y
+   helix-like n=12        |  0.01 | 0.0100 0.020 |   0.042 |   0.042 |   5.66 |  9 /  0 |   5.66
+   helix-like n=12        |  0.03 | 0.0300 0.060 |   0.127 |   0.127 |   5.66 |  9 /  0 |   5.66
+   helix-like n=12        |  0.10 | 0.1000 0.191 |   0.434 |   0.434 |   5.66 |  9 /  0 |   5.66
+   helix-like n=12        |  0.20 | 0.2000 0.364 |   0.902 |   0.902 |   5.66 |  9 /  0 |   5.64
+   helix-like n=12        |  0.30 | 0.3000 0.533 |   1.418 |   1.418 |   5.66 |  9 /  0 |   5.59
+   helix-like n=12        |  0.50 | 0.5000 1.172 |   6.354 |   6.354 |   5.66 |  5 /  4 |   3.62
+   helix-like n=12        |  1.00 | 1.0000 1.808 |   6.867 |   6.867 |   5.66 |  5 /  4 |   3.89
+   helix-like n=20        |  0.01 | 0.0100 0.026 |   0.090 |   0.090 |   8.95 | 17 /  0 |   8.95
+   helix-like n=20        |  0.03 | 0.0300 0.081 |   0.269 |   0.269 |   8.95 | 17 /  0 |   8.94
+   helix-like n=20        |  0.10 | 0.1000 0.279 |   0.907 |   0.907 |   8.95 | 17 /  0 |   8.86
+   helix-like n=20        |  0.30 | 0.3000 1.116 |   9.950 |   9.950 |   8.95 |  9 /  8 |   4.96
+   helix-like n=20        |  0.50 | 0.5000 1.245 |  10.259 |  10.259 |   8.95 |  9 /  8 |   5.35
+   helix-like n=20        |  1.00 | 1.0000 2.211 |  10.646 |  10.646 |   8.95 |  9 /  8 |   5.91
+   strand-like 160 n=12   |  0.01 | 0.0100 0.027 |   0.579 |   0.579 |  11.43 |  9 /  0 |  11.40
+   strand-like 160 n=12   |  0.03 | 0.0300 0.075 |   1.750 |   1.750 |  11.43 |  5 /  4 |  11.29
+   strand-like 160 n=12   |  0.10 | 0.1000 0.168 |   4.330 |   4.330 |  11.43 |  5 /  4 |  10.25
+   strand-like 160 n=12   |  0.20 | 0.2000 0.453 |   6.481 |   6.481 |  11.43 |  4 /  5 |   9.06
+   strand-like 160 n=12   |  0.30 | 0.3000 0.587 |   7.973 |   7.973 |  11.43 |  5 /  4 |   8.17
+   strand-like 160 n=12   |  0.50 | 0.5000 1.036 |  10.066 |  10.066 |  11.43 |  6 /  3 |   6.96
+   strand-like 160 n=12   |  1.00 | 1.0000 2.238 |  12.916 |  12.916 |  11.43 |  6 /  3 |   6.09
+   strand-like 160 n=20   |  0.01 | 0.0100 0.035 |   1.371 |   1.896 |  19.05 | 17 /  0 |  18.94
+   strand-like 160 n=20   |  0.03 | 0.0300 0.082 |   3.195 |   3.195 |  19.05 | 17 /  0 |  18.52
+   strand-like 160 n=20   |  0.10 | 0.1000 0.338 |  12.002 |  12.002 |  19.05 |  9 /  8 |  13.87
+   strand-like 160 n=20   |  0.20 | 0.2000 0.488 |  18.620 |  18.620 |  19.05 |  9 /  8 |   9.79
+   strand-like 160 n=20   |  0.30 | 0.3000 0.745 |  21.159 |  21.159 |  19.05 | 11 /  6 |   9.24
+   strand-like 160 n=20   |  0.50 | 0.5000 1.212 |  21.437 |  21.437 |  19.05 | 13 /  4 |   9.84
+   strand-like 160 n=20   |  1.00 | 1.0000 1.783 |  21.809 |  21.809 |  19.05 | 10 /  7 |  10.63
+   stored configurations that violate the constraint they were found under: 0
+
+Part 2.  helix-like n = 20 (R_g = 8.95 A; first-order worst case 8.96 sigma).  columns: sigma | worst RMSD on the NEARBY branch (continuation from small sigma) | worst RMSD found from DISTANT starts | first-order value | max |distance error| of the distant one | windows with opposite chirality
+    0.05 |   0.449 |    none |  0.448
+    0.08 |   0.499 |    none |  0.717
+    0.10 |    none |    none |  0.896
+    0.12 |    none |    none |  1.075
+    0.14 |    none |    none |  1.254
+    0.16 |    none |    none |  1.434
+    0.18 |    none |    none |  1.613
+    0.20 |    none |    none |  1.792
+    0.22 |    none |    none |  1.971
+    0.25 |   1.455 |    none |  2.240
+    0.30 |   8.997 |   9.950 |  2.688 | 1.116 |  9 of 17
+/home/user/MetricChain/experiments/science/ws_R27/item4_worstcase_verify.py:151: RuntimeWarning: All-NaN axis encountered
+  thr = [r[0] for r in rows if np.nanmax([r[1], r[2]]) > 5.0]
+   smallest sigma of the scan at which a configuration with RMSD > 5 A fits the distances: 0.3
+   control: at sigma = 0.05 both searches must return the first-order value 0.448: nearby 0.449, from distant starts nan
+ALL DONE 2026-11-26T23:40:42Z  43.4 s  peak memory 77 MB

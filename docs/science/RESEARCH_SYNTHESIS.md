@@ -12,7 +12,7 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-26 23:46 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-26 23:59 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
@@ -33,8 +33,13 @@ SCI-REV-0026 §6 — the finding "a rigid-rotamer minimum need not be the well o
 search log).  *Read:* THY-MSG-0019 (they machine-checked inequality (c) of our Proposition A17.23; accepted
 SCI-REV-0022 in full) and THY-MSG-0020.
 **Owed next, in this order.**
-  (1) **R26** — `workstreams/R26_REPORT.md` (728 lines; ends in a placeholder) and `experiments/science/ws_R26/`
-  are committed **unchecked**.  Read the report in full; check what decides each major finding (the
+  (1) *Done at checkpoint 69 (23:59 UTC, 26 November):* **R26 is published as SCI-REV-0027** — every theorem of the
+  theory division's §11.33 that was examined stands; three sentences are corrected (two mechanisms of the false
+  certificate; "a hub is not a counterexample" is false at finite size — a chain with one boundary site,
+  replicated by the coordinator in `experiments/science/r26_verification/`; the band-model sentence); the
+  influence between blocks of a band model is computed; **rule: on a band model condition on the boundary
+  layer or do not nest.**  New open problem I10.  *What stood here before:* `workstreams/R26_REPORT.md` and `experiments/science/ws_R26/`
+  were committed **unchecked** at checkpoint 68.  Read the report in full; check what decides each major finding (the
   counterexample to the theory division's remark on hubs — a nearest-neighbour chain with the influence at one
   boundary site; the two mechanisms of the false certificate; Lemma N.0 at `q = 1`); replace the placeholder
   by a coordinator's note; publish as **SCI-REV-0027** to Theory (copy Engineering, Structural Biology).  Their
@@ -44,10 +49,18 @@ SCI-REV-0022 in full) and THY-MSG-0020.
   of the ensemble — a question of physical meaning, ours to answer (a short SCI-RES; from textbook knowledge,
   labelled as such; read their message in full first).
   (2′) The Frontier division's **mathematical feedback** (their commit `60a71d1`, seen by title): read it.
-  (3) **R27** when it hands back → SCI-REV-0028 to Geometry.
-  (4) **A referee for our own parts (25) and (26)** (Proposition A17.24; the force-field measurement that two
-  reviews now rest on), with a prior-art search for the construction of item 101 (b) — the next workstream
-  when a slot is free (never more than two agents).
+  (3) **R27 handed back at about 23:59 UTC on 26 November** — `workstreams/R27_REPORT.md` (ends in a placeholder)
+  and `experiments/science/ws_R27/` are committed **unchecked** at checkpoint 69.  Read the report in full, check
+  what decides its one major finding (explicit configurations that fit all local distances to tenths of an
+  ångström at an RMSD above the radius of gyration; the coplanar-window family with `d_P/‖η‖` growing like the
+  inverse height), replace the placeholder, publish as **SCI-REV-0028** to Geometry (copy Structural Biology,
+  Theory).  Its paragraph for a software author says: do not use Theorem L or Corollary L.2 as an error bar.
+  (4) **R28 is running** (launched about 23:49 UTC on 26 November; brief `workstreams/R28_brief.md`;
+  directory `experiments/science/ws_R28/`, report `workstreams/R28_REPORT.md`): a referee for our own parts
+  (25) and (26) — Proposition A17.24, the force-field measurement that two reviews rest on, the
+  necessary-optimality reduction — with a prior-art search for the construction of item 101 (b).  When it
+  hands back: corrections go by linked messages to the divisions that received the claims (Structural
+  Biology: SCI-REV-0025 §3, SCI-REV-0026 §§0, 4, 6; Frontier Benchmarking: SCI-MSG-0035 §2).
   (5) The theory division names corrections to its Theorem 11.58e (the minimax step; the certified tops of
   `z6_certified_tops.py`) as the most useful reply — a later referee.
 (oo) **A fourth directive of the research owner arrived at about 22:41 UTC on 26 November
@@ -83,8 +96,8 @@ force-field measurement of item (ii) — for a single leucine on an ideal helix 
 minimum-energy state of the rigid-rotamer table is not the rotamer well that holds the
 minimum of the same energy with continuous torsions.  At every synchronisation: fetch their branch; read digest and status first
 when they exist; answer with reviews, not with help.
-(i) **One workstream is running (R27; its directory is uncommitted while it runs); R26 handed back at
-23:11 UTC and is committed unchecked — see (ooo) (1).**
+(i) **One workstream is running (R28; its directory is uncommitted while it runs); R27 has handed back and
+is committed unchecked — see (ooo) (3); R26 is published — see (ooo) (1).**
 R26 (launched 21:51 UTC; brief `docs/science/workstreams/R26_brief.md`): a referee of the
 theory division's §11.33 (nesting on general spaces; first of all the class-relative
 influence between blocks computed for band models) — `workstreams/R26_REPORT.md`,
@@ -153,7 +166,7 @@ expansion of the chain's exponent?  D12 (a′) — a certified statement between
 D14 (down-closed families), D16 (a certified discretisation term; G-5 is answered).  Unrefereed inside the division:
 addendum A17 (13)–(18) (the research owner's decision, as recorded), parts (23), (24)
 and (25).
-(v) Heads at the fetch of 23:43 UTC: theory `07cde81`, engineering `640cd9c`, ensemble `85b7bac`, geometry `d3375f7`, complexity `307654f`, structural biology `e077e98`, frontier benchmarks `60a71d1`.  Read since checkpoint 67: the Structural Biology division's first and second checkpoints and its answer to our first evaluation (all answered in SCI-REV-0026), THY-MSG-0019 and -0020, FRONTIER-MSG-0001 (answered).  **Seen and not yet answered: ENSEMBLE-MSG-0008 (a question to us).  Seen by title only: the Frontier division's second checkpoint (`60a71d1`: assessment protocols, registers and a file of mathematical feedback — owed a reading, because D-4 makes a limitation exposed by evaluation a question for us); COMPLEXITY-RES-0009 (a copy, header read).  The engineering division has sent no message since ENG-MSG-0006; its drafts of a correction after our SCI-REV-0018 are still drafts.**
+(v) Heads at the fetch of 23:58:32 UTC on 26 November: theory `07cde81`, engineering `640cd9c`, ensemble `b654396`, geometry `d3375f7`, complexity `feed770`, structural biology `0544ff4`, frontier benchmarks `bd25657`.  **Seen by title only and owed a reading, in this order:** (1) the Structural Biology division's four commits after our review — among them the seed measurement that SCI-REV-0026 asked for, set up with a written prediction (their `0544ff4`), an enclosure of `ln Z` for crambin with conditioning, and STRUCTBIO-REQ-0004 to engineering; (2) the Frontier division's second checkpoint (`60a71d1`: protocols, registers, a file of mathematical feedback — D-4 makes a limitation exposed by evaluation a question for us) — **not** its sealed held-out list (`bd25657`), which we neither open nor ask about; (3) ENSEMBLE-MSG-0008 (a question to us, unanswered) and ENSEMBLE-MSG-0009; (4) COMPLEXITY-MSG-0006 (may answer SCI-REV-0024) and COMPLEXITY-RES-0010.  The engineering division has sent no message since ENG-MSG-0006.
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

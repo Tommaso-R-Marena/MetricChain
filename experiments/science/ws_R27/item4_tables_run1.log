@@ -1,0 +1,68 @@
+R27 item4_tables.py started 2026-11-26T23:20:57Z
+
+[T1] replication of the table of section 6 of the note.  Their numbers (n: C_L | 1/(2mu) | certified range as rms distance error | first-order RMSD per unit rms distance error):
+     helix-like 12: 185 | 0.23 | 2e-5 | 4.2;   20: 456 | 0.45 | 3e-6 | 9.0;   100: 9800 | 9.5 | 2e-9 | 207
+     strand-like 160: 12: 1780 | 3.3 | 9e-8 | 58;   20: 4410 | 7.3 | 1e-8 | 140;   100: 94700 | 168 | 9e-12 | 3460;      strand-like 175, 20: 65100 | 42 | 1e-10 | 753
+     mine (certified range = mu/(11.04 C_L) as a squared-distance l2 norm, converted to an rms distance error by /(2 d_rms sqrt(N)) and by /(2 d_max sqrt(N));
+           first-order worst case = sqrt(N/n)/s_7(rigidity matrix)):
+     helix-like (2.3, 1.5, 100)     n=  12: C_L =     184.5 | 1/(2mu) =  0.2313 | range 1.06e-03 A^2 -> rms 1.7e-05 (d_rms) / 1.4e-05 (d_max) A | first-order worst case    4.208 | tau* = 1.4638, s* = 3.3347, b = 3.8298
+     helix-like (2.3, 1.5, 100)     n=  20: C_L =     455.7 | 1/(2mu) =  0.4471 | range 2.22e-04 A^2 -> rms 2.6e-06 (d_rms) / 2.1e-06 (d_max) A | first-order worst case     8.96 | tau* = 1.4638, s* = 3.3347, b = 3.8298
+     helix-like (2.3, 1.5, 100)     n= 100: C_L =      9795 | 1/(2mu) =   9.502 | range 4.87e-07 A^2 -> rms 2.4e-09 (d_rms) / 2.0e-09 (d_max) A | first-order worst case    206.8 | tau* = 1.4638, s* = 3.3347, b = 3.8298
+     strand-like (0.94, 3.3, 160)   n=  12: C_L =      1784 | 1/(2mu) =   3.246 | range 7.82e-06 A^2 -> rms 7.2e-08 (d_rms) / 4.8e-08 (d_max) A | first-order worst case    57.82 | tau* = 0.6332, s* = 0.7877, b = 3.7839
+     strand-like (0.94, 3.3, 160)   n=  20: C_L =      4406 | 1/(2mu) =   7.311 | range 1.41e-06 A^2 -> rms 9.4e-09 (d_rms) / 6.3e-09 (d_max) A | first-order worst case    140.1 | tau* = 0.6332, s* = 0.7877, b = 3.7839
+     strand-like (0.94, 3.3, 160)   n= 100: C_L = 9.471e+04 | 1/(2mu) =   167.9 | range 2.85e-09 A^2 -> rms 7.9e-12 (d_rms) / 5.4e-12 (d_max) A | first-order worst case     3463 | tau* = 0.6332, s* = 0.7877, b = 3.7839
+     strand-like (0.94, 3.3, 175)   n=  20: C_L = 6.513e+04 | 1/(2mu) =   41.61 | range 1.67e-08 A^2 -> rms 1.1e-10 (d_rms) / 7.6e-11 (d_max) A | first-order worst case      753 | tau* = 0.1637, s* = 0.2068, b = 3.7971
+
+[T2] for which noise levels is the error bar of Theorem L smaller than the object?
+     columns: n | R_g  d_max | C_L  C_loc  1/(2mu) | rms distance error below which the RMSD bound is < R_g: with C_L, with C_loc | ... < 1 A: with C_L, with C_loc |
+              the same two thresholds for the first-order worst case (NOT a guarantee: the best any worst-case theorem could give) | typical/worst (Gaussian noise, first order)
+   helix-like (2.3, 1.5, 100)
+        5 |   3.08   6.20 |      46.13      1.042   0.1205 | 3.8e-03 1.7e-01 | 1.2e-03 5.5e-02 | 1.8e+00 5.9e-01 | 0.672
+        8 |   4.13   6.20 |      94.15      11.37   0.1624 | 2.1e-03 1.8e-02 | 5.2e-04 4.3e-03 | 1.5e+00 3.7e-01 | 0.492
+       12 |   5.66   6.20 |      184.5      28.76   0.2313 | 1.4e-03 8.9e-03 | 2.5e-04 1.6e-03 | 1.3e+00 2.4e-01 | 0.381
+       20 |   8.95   6.20 |      455.7      88.65   0.4471 | 8.5e-04 4.3e-03 | 9.5e-05 4.9e-04 | 1.0e+00 1.1e-01 | 0.260
+       50 |  21.77   6.20 |       2546      622.3    2.429 | 3.5e-04 1.4e-03 | 1.6e-05 6.6e-05 | 4.2e-01 1.9e-02 | 0.122
+      100 |  43.36   6.20 |       9795       2598    9.502 | 1.8e-04 6.8e-04 | 4.2e-06 1.6e-05 | 2.1e-01 4.8e-03 | 0.080
+      200 |  86.63   6.20 |  3.842e+04  1.062e+04    37.79 | 9.1e-05 3.3e-04 | 1.1e-06 3.8e-06 | 1.0e-01 1.2e-03 | 0.055
+   strand-like (0.94, 3.3, 160)
+        5 |   4.76  13.26 |      446.1      4.411   0.6091 | 2.8e-04 2.9e-02 | 6.0e-05 6.0e-03 | 4.9e-01 1.0e-01 | 0.405
+        8 |   7.62  13.26 |      910.4      168.5     1.57 | 1.9e-04 1.0e-03 | 2.5e-05 1.4e-04 | 2.9e-01 3.8e-02 | 0.249
+       12 |  11.43  13.26 |       1784      516.7    3.246 | 1.4e-04 4.7e-04 | 1.2e-05 4.1e-05 | 2.0e-01 1.7e-02 | 0.196
+       20 |  19.05  13.26 |       4406       1768    7.311 | 8.7e-05 2.2e-04 | 4.6e-06 1.1e-05 | 1.4e-01 7.1e-03 | 0.173
+       50 |  47.63  13.26 |  2.462e+04  1.312e+04    42.02 | 3.7e-05 7.0e-05 | 7.9e-07 1.5e-06 | 5.6e-02 1.2e-03 | 0.112
+      100 |  95.26  13.26 |  9.471e+04  5.542e+04    167.9 | 1.9e-05 3.3e-05 | 2.0e-07 3.4e-07 | 2.8e-02 2.9e-04 | 0.078
+      200 | 190.53  13.26 |  3.715e+05  2.277e+05    671.3 | 9.7e-06 1.6e-05 | 5.1e-08 8.3e-08 | 1.4e-02 7.2e-05 | 0.055
+   strand-like (0.94, 3.3, 170)
+        5 |   4.76  13.22 |       1675      8.482    1.178 | 7.6e-05 1.5e-02 | 1.6e-05 3.2e-03 | 2.6e-01 5.4e-02 | 0.377
+        8 |   7.62  13.22 |       3418      616.7    3.277 | 5.1e-05 2.8e-04 | 6.7e-06 3.7e-05 | 1.4e-01 1.8e-02 | 0.238
+       12 |  11.43  13.22 |       6699       1912    7.327 | 3.6e-05 1.3e-04 | 3.2e-06 1.1e-05 | 9.0e-02 7.8e-03 | 0.182
+       20 |  19.05  13.22 |  1.654e+04       6580    19.17 | 2.3e-05 5.9e-05 | 1.2e-06 3.1e-06 | 5.5e-02 2.9e-03 | 0.142
+       50 |  47.63  13.22 |  9.242e+04  4.902e+04    92.92 | 1.0e-05 1.9e-05 | 2.1e-07 4.0e-07 | 2.7e-02 5.6e-04 | 0.111
+      100 |  95.26  13.22 |  3.556e+05  2.073e+05    369.7 | 5.1e-06 8.8e-06 | 5.4e-08 9.2e-08 | 1.3e-02 1.4e-04 | 0.078
+      200 | 190.53  13.22 |  1.395e+06  8.523e+05     1478 | 2.6e-06 4.3e-06 | 1.4e-08 2.2e-08 | 6.6e-03 3.5e-05 | 0.055
+   strand-like (0.94, 3.3, 175)
+        5 |   4.76  13.20 |       6594       16.8    2.335 | 1.9e-05 7.6e-03 | 4.1e-06 1.6e-03 | 1.3e-01 2.7e-02 | 0.370
+        8 |   7.62  13.20 |  1.346e+04       2398    6.619 | 1.3e-05 7.3e-05 | 1.7e-06 9.5e-06 | 6.9e-02 9.1e-03 | 0.236
+       12 |  11.43  13.20 |  2.638e+04       7480    15.09 | 9.2e-06 3.3e-05 | 8.1e-07 2.8e-06 | 4.4e-02 3.8e-03 | 0.179
+       20 |  19.05  13.20 |  6.513e+04  2.581e+04    41.61 | 5.9e-06 1.5e-05 | 3.1e-07 7.8e-07 | 2.5e-02 1.3e-03 | 0.134
+       50 |  47.63  13.20 |  3.639e+05  1.926e+05    229.1 | 2.5e-06 4.8e-06 | 5.3e-08 1.0e-07 | 1.1e-02 2.3e-04 | 0.092
+      100 |  95.26  13.20 |    1.4e+06  8.152e+05    760.2 | 1.3e-06 2.2e-06 | 1.4e-08 2.4e-08 | 6.6e-03 6.9e-05 | 0.078
+      200 | 190.53  13.20 |  5.491e+06  3.352e+06     3025 | 6.6e-07 1.1e-06 | 3.5e-09 5.7e-09 | 3.3e-03 1.7e-05 | 0.055
+
+[T3] for a given rms distance error sigma, the lengths n >= 5 for which the uniform error bar (RMSD) is below the radius of gyration
+     (RMSD bound = C_L 2 d_max sigma sqrt(N/n); 'none' = for no n in 5..300)
+   helix-like (2.3, 1.5, 100)     sigma = 1 A: none;  sigma = 0.1 A: none;  sigma = 0.01 A: none;  sigma = 0.001 A: n in 5..16;  sigma = 0.0001 A: n in 5..150;  sigma = 1e-05 A: n in 5..300
+                                  at n = 5 the bar is below R_g iff sigma < 3.80e-03 A;  the threshold decreases with n: n=5: 3.8e-03, n=10: 1.7e-03, n=20: 8.5e-04, n=50: 3.5e-04, n=100: 1.8e-04, n=300: 6.1e-05
+   strand-like (0.94, 3.3, 160)   sigma = 1 A: none;  sigma = 0.1 A: none;  sigma = 0.01 A: none;  sigma = 0.001 A: none;  sigma = 0.0001 A: n in 5..17;  sigma = 1e-05 A: n in 5..150
+                                  at n = 5 the bar is below R_g iff sigma < 2.85e-04 A;  the threshold decreases with n: n=5: 2.8e-04, n=10: 1.6e-04, n=20: 8.7e-05, n=50: 3.7e-05, n=100: 1.9e-05, n=300: 6.5e-06
+   strand-like (0.94, 3.3, 170)   sigma = 1 A: none;  sigma = 0.1 A: none;  sigma = 0.01 A: none;  sigma = 0.001 A: none;  sigma = 0.0001 A: none;  sigma = 1e-05 A: n in 5..50
+                                  at n = 5 the bar is below R_g iff sigma < 7.60e-05 A;  the threshold decreases with n: n=5: 7.6e-05, n=10: 4.2e-05, n=20: 2.3e-05, n=50: 1.0e-05, n=100: 5.1e-06, n=300: 1.7e-06
+   strand-like (0.94, 3.3, 175)   sigma = 1 A: none;  sigma = 0.1 A: none;  sigma = 0.01 A: none;  sigma = 0.001 A: none;  sigma = 0.0001 A: none;  sigma = 1e-05 A: n in 5..10
+                                  at n = 5 the bar is below R_g iff sigma < 1.93e-05 A;  the threshold decreases with n: n=5: 1.9e-05, n=10: 1.1e-05, n=20: 5.9e-06, n=50: 2.5e-06, n=100: 1.3e-06, n=300: 4.4e-07
+
+[T4] Corollary L.2 in practice: the constant computed from an ESTIMATE instead of the truth (helix-like n = 20; the estimate = truth + Gaussian noise of size s)
+     s = 0.00 A: C(estimate) median     455.7  range [    455.7,     455.7]   (C of the truth: 455.7)
+     s = 0.05 A: C(estimate) median     516.3  range [    491.5,     535.3]   (C of the truth: 455.7)
+     s = 0.20 A: C(estimate) median     807.5  range [    710.9,     985.1]   (C of the truth: 455.7)
+     s = 0.50 A: C(estimate) median      2461  range [     1145, 2.376e+04]   (C of the truth: 455.7)
+ALL DONE 2026-11-26T23:20:58Z  1.7 s  peak memory 43 MB

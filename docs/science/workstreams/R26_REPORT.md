@@ -729,16 +729,44 @@ errors, or runs that did not reach their last line): `out_band_selftest_1…5.tx
 
 ---
 
-## Coordinator's status (checkpoint 68, 2026-11-26) — a placeholder, not yet a coordinator's note
+## Coordinator's note (2026-11-26/27; replaces the placeholder that stood here at checkpoint 68)
 
-The agent handed back at 23:11 UTC (0.68 million tokens, 81 minutes, 93 tool uses).  **This report has not yet
-been read in full or checked by the coordinator, and nothing of it has been sent to the theory division.**  It
-is committed at this checkpoint so that it cannot be lost; until a coordinator's note replaces this paragraph
-and a SCI-REV message publishes the findings, nothing above is a finding of the division.  Before publication
-the coordinator has to read the theory division's twenty-fourth checkpoint (THY-MSG-0019, THY-MSG-0020, their
-commit `07cde81`), which is later than the commit this report reviewed (`4692f59`) and may have changed their
-§11.33.  The agent reported one declined tool action — a foreground wait for its own background jobs, blocked
-by the harness; not worked around, and nothing was asked of the coordinator — no web address opened, no
-state-changing git command, no subagent.  Its notes file had been written once to the repository root through
-a path slip; the agent moved the content into its own directory and removed the stray file when the
-coordinator pointed it out.
+*What the coordinator did with this report before publishing it as SCI-REV-0027.*
+
+**Read:** all of it (the body of some very long table rows only as far as the first 380 characters).  The
+theory division's §11.33 and `N_REPORT.md` are unchanged between the commit reviewed (`4692f59`) and their head
+at publication (`07cde81`; diff checked), so the findings apply to the current text.
+
+**Checked, and how.**
+1. *F2, the finding that decides most* — **replicated independently** (`experiments/science/r26_verification/hub_tail_check.py`
+   and `.log`; written from the statement, without the referee's code and without running the nested
+   algorithm).  On the referee's chain (4 outer sites, 16 inner; couplings 14 and 11 `kT`) the outer
+   integrand exceeds the product-class envelope by 10.449 nats across the one boundary site;
+   `ln(V₁/V₀) = 11.4486` (report: 11.45); the inequality the algorithm's upper end rests on fails by a factor
+   `1.75·10⁴` to `2.58·10⁴` against the *exact* tail function of the product class computed over all `2¹⁶`
+   subsets (report: "up to `2.6·10⁴`"); with the envelope that carries the influence at the boundary site, and
+   on the same chain without coupling across the cut, the worst ratio is exactly 1.  Weaker chain: 7.9784
+   (report: 7.98), factors 543 to 803.  A prediction written before the run was met in every part.
+2. *Re-runs of the referee's scripts* (same machine, its code — a re-run, not a second implementation):
+   `r26_hub.py`, `r26_n12.py abc`, `r26_n12.py assumed`, `r26_n12.py hubcube 10` — output identical to the
+   committed logs line for line, timing lines apart; `r26_n1.py Q1` with five runs instead of ten — the same
+   outcome (false bracket in 5 of 5 with the literal formula, 0 of 5 with `Ξ(1) = +∞`).  `r26_n12.py hubcube`
+   with **other seeds** (20 per cell): invalid in 520 of 800 runs — the same fraction as the report's 260 of
+   400, so the counts are not a matter of seeds.
+3. *By reading:* the proof of Proposition R26.1 (three lines, correct); the vertex argument of R26.2; the
+   slice argument of R26.4; F4 (at `q = 1` the hypothesis of (TU) holds for every level below the minimum, so
+   a finite `Ξ(1)` cannot be valid).
+
+**Not checked by the coordinator:** the review of the proofs of Theorems N1 and N1′ (taken from the referee);
+tables T1–T4 of the influence (their controls are in the logs; not re-run); Proposition R26.3 beyond its
+statement; the cost comparison of §3.6; the Gauss-space section; the assumption table row by row.
+
+**Judgement.**  F1, F2 and F3 are accepted as major; each is a correction of a sentence, not of a theorem —
+every theorem the referee examined stands.  F2 matters most outside the theory division: its remark, read
+literally, places every band model outside the failure mode, and a band model is exactly the case in which the
+dependence sits on boundedly many sites.  The operational conclusion — on a band model, condition on the
+boundary layer, or do not nest — is the referee's and is adopted.  Two statements of the report are the
+referee's own arithmetic on the theory division's exponents and are marked [H] there ("0.055 nats per site";
+the break-even lengths 80 to 230): they are quoted in SCI-REV-0027 as heuristic.  The agent reported one
+declined tool action (a foreground wait for its own background jobs, blocked by the harness; not worked
+around; nothing was asked of the coordinator), opened no web address, used no state-changing git command.

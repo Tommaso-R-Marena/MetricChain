@@ -1,0 +1,50 @@
+R27 item1_lemmas.py started 2026-11-26T23:01:41Z   kappa = 0.776886987  (claimed < 0.777: True);  2(sqrt2-1) = 0.828427125
+
+[P1] Lemma P on random pairs (m x r), U arbitrary: Gaussian, X + small/large noise, collapsed, rank-deficient, column-reflected,
+     orthogonal complement, X ill-conditioned
+     pairs: 22000   violations: 0   max LHS/RHS: 1.000000   CONTROL (factor sqrt2-1 dropped) violated by 4472 pairs
+
+[P2] the equality case derived in the review:  U = X - X p p^T + w p^T,  p = weakest right singular vector of X,
+     w orthogonal to the columns of X, |w|^2 = (sqrt2 - 1) sigma_r^2   (needs m >= r + 1)
+     max |LHS/RHS - 1| over 1200 instances: 5.07e-13  -> the constant 2(sqrt2 - 1) is attained: Lemma P is sharp for every X
+
+[P3] adversarial: maximise LHS/RHS over U by L-BFGS from random starts, X random (m x r)
+     m = 3, r = 3: sup found 0.828427   (m = r: U cannot leave the column space of X)
+     m = 4, r = 3: sup found 1.000000
+     m = 5, r = 3: sup found 1.000000
+
+[Q1] Lemma Q on random windows (|S| = 4, 5, 6, 8) of several kinds, Y arbitrary (9 kinds)
+     windows: 12000   violations: 0   max LHS/RHS by |S|: 4: 0.6436, 5: 0.9333, 6: 0.9059, 8: 0.8970
+     CONTROLS violated by: kappa -> 1/2: 635 pairs;  proper rotations only: 1332 pairs;  sigma_2 in place of sigma_3: 987 pairs
+
+[Q2] adversarial: supremum of ||eps|| s / (kappa e) over BOTH the window X_S and Y_S (L-BFGS, numerical gradient, random starts)
+     |S| = 4: sup found 0.807955   (window singular values [1.     0.9751 0.9751], of Y [1.1616 1.1373 0.    ])
+     |S| = 5: sup found 0.971257   (window singular values [1.    0.872 0.872], of Y [1.0565 0.9363 0.6587])
+     |S| = 6: sup found 0.971075   (window singular values [1.     0.9388 0.9388], of Y [1.0641 1.0133 0.7029])
+     -> Lemma Q holds with room; with kappa replaced by 1/2 it is violated by the maximiser if sup > 0.5/kappa = 0.6436: True
+
+[Q2'] for a FIXED window the supremum over Y (how sharp is the lemma on a given window?)
+     helix-like window (2.3, 1.5, 100)    s/sigma_1 = 6.97e-01   sup_Y ||eps|| s/(kappa e) = 0.9447
+     strand-like 160                      s/sigma_1 = 7.54e-02   sup_Y ||eps|| s/(kappa e) = 0.8213
+     strand-like 175                      s/sigma_1 = 1.98e-02   sup_Y ||eps|| s/(kappa e) = 0.8128
+     double regular tetrahedron           s/sigma_1 = 6.12e-01   sup_Y ||eps|| s/(kappa e) = 0.7942
+     random unit chain                    s/sigma_1 = 1.93e-01   sup_Y ||eps|| s/(kappa e) = 0.8716
+     thin Gaussian window (1,1,1e-3)      s/sigma_1 = 2.66e-04   sup_Y ||eps|| s/(kappa e) = 0.7328
+
+[Q3] the reflection example: mirror the end point x_5 of a five-point window in the plane of its three middle points
+     columns: h-, h+ | changed squared distances (count), the change, 4h-h+ | d_P of the window, 2 min(|h-|,|h+|) | s, sqrt2 max|h| | Lemma Q bound 4 kappa |h-h+|/s | d_P/bound
+     helix-like (2.3, 1.5, 100)                  -2.9356   2.9356 | 1  -34.4708  -34.4708 |  4.4332  5.8712 |  3.33469  4.1516 |    8.0307 | 0.5520
+     strand-like (0.94, 3.3, 150)                -1.7365   1.7365 | 1  -12.0623  -12.0623 |  2.0496  3.4731 |  1.10661  2.4558 |    8.4682 | 0.2420
+     strand-like (0.94, 3.3, 160)                -1.2413   1.2413 | 1   -6.1637   -6.1637 |  1.3711  2.4827 |  0.78767  1.7555 |    6.0794 | 0.2255
+     strand-like (0.94, 3.3, 170)                -0.6472   0.6472 | 1   -1.6753   -1.6753 |  0.6807  1.2943 |  0.40963  0.9152 |    3.1773 | 0.2142
+     strand-like (0.94, 3.3, 175)                -0.3270   0.3270 | 1   -0.4277   -0.4277 |  0.3393  0.6540 |  0.20684  0.4624 |    1.6063 | 0.2112
+     strand-like (0.94, 3.3, 179)                -0.0656   0.0656 | 1   -0.0172   -0.0172 |  0.0678  0.1312 |  0.04150  0.0928 |    0.3224 | 0.2102
+     double regular tetrahedron                   2.3094  -2.3094 | 1  -21.3333  -21.3333 |  4.1312  4.6188 |  2.00000  3.2660 |    8.2868 | 0.4985
+     ends on the same side, big middle triangle   1.0000   1.0000 | 1    4.0000    4.0000 |  1.7859  2.0000 |  1.09499  1.4142 |    2.8380 | 0.6293
+     h- = 0.01 h+                                 0.0100   1.0000 | 1    0.0400    0.0400 |  0.0174  0.0200 |  0.86017  1.4142 |    0.0361 | 0.4825
+     thin middle triangle (width 0.1)             1.0000   1.0000 | 1    4.0000    4.0000 |  1.6857  2.0000 |  0.06224  1.4142 |   49.9251 | 0.0338
+     thin middle triangle (width 0.01)            1.0000   1.0000 | 1    4.0000    4.0000 |  1.7167  2.0000 |  0.00623  1.4142 |  498.4826 | 0.0034
+     thin middle triangle (width 0.001)           1.0000   1.0000 | 1    4.0000    4.0000 |  1.7176  2.0000 |  0.00062  1.4142 | 4984.7498 | 0.0003
+     2000 random five-point chains: d_P/bound in [0.0201, 0.6264] (median 0.2151);  d_P/(2 min|h|) in [0.2580, 0.8942];  s/(sqrt2 max|h|) in [4.30e-02, 0.8303]
+     asserted on every case: exactly one squared distance changes, by 4 h- h+;  d_P <= 2 min(|h-|,|h+|);  s <= sqrt2 max(|h-|,|h+|);  d_P <= bound
+ALL DONE 2026-11-26T23:06:39Z  297.5 s  peak memory 78 MB

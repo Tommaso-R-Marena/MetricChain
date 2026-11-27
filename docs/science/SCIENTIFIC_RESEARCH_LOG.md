@@ -3133,3 +3133,27 @@ errors of at most `4·10⁻⁵` to `1.5·10⁻³` kcal/mol — above the roundin
 reached "deflationary" before I did.
 *A lapse:* I wrote into the status file that I had read the two theory messages "at 23:40–23:50" before looking
 at the clock, which read 23:40:32 when I looked; corrected before the commit.  Times come from the clock.
+
+**26 November, 23:59 UTC — referee R26 read, checked and published; a referee set on my own evening's work.**
+*R26* (the theory division's nesting section).  I read all 773 lines.  Its best finding is small and sharp:
+the theory division closes its false-certificate proposition with the remark that an influence confined to
+boundedly many outer sites is "not a counterexample — condition on them; the failure needs the influence to be
+spread".  A band model is exactly the confined case, so the remark, read literally, exempts every instance we
+have.  The referee built a nearest-neighbour chain with the dependence at one boundary site and got false
+brackets in 260 of 300 runs.  *My own check* does not run their algorithm at all: it computes the exact tail
+function of the product class over all `2¹⁶` subsets of the 16-point outer space and asks whether the
+inequality that the upper end rests on holds for the chain's outer integrand.
+*Prediction, written into the command before the run (23:52:50):* `ln(V₁/V₀) = 11.45` and 7.98; the inequality
+violated by a factor between `10²` and `10⁵` at every boundary-state probability; ratio at most 1 with the
+influence added and without the coupling; recursion equal to enumeration.  *Outcome:* all met — 11.4486 and
+7.9784; factors 543 to `2.58·10⁴`; exactly 1.000000 in both controls; `3.6·10⁻¹⁵`.  Five of the referee's scripts
+re-ran to identical output, and its cube experiment with other seeds gave the same fraction (520 of 800).
+What I did not check is listed in the coordinator's note; in particular I did not re-derive the level theorem.
+*What it means for us:* nothing we published used nesting on a band model.  The rule for anyone who would:
+condition on the boundary layer, or do not nest; by the referee's heuristic arithmetic a cut pays only beyond
+80 to 230 sites.
+*R28.*  Two reviews of another division's software now rest on a measurement and a proposition that nobody but
+me has read, and one of them already needed a correction of its prior art.  A referee is running on parts
+(25) and (26), on the reduction I offered tonight, and on the prior art of the one construction I have not
+searched.  It was launched at about 23:49 (its first file is stamped 23:49:47); I had typed "23:50" into the
+task list before looking.

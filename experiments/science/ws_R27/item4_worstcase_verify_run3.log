@@ -1,0 +1,76 @@
+R27 item4_worstcase_verify.py started 2026-11-26T23:41:20Z
+
+Part 1.  columns: case | sigma imposed | rms, max distance error recomputed | RMSD (improper allowed) | RMSD (proper only) | R_g | windows of Y with the chirality of X / opposite (after the optimal isometry) | radius of gyration of Y
+   helix-like n=12        |  0.01 | 0.0100 0.020 |   0.042 |   0.042 |   5.66 |  9 /  0 |   5.66
+   helix-like n=12        |  0.03 | 0.0300 0.060 |   0.127 |   0.127 |   5.66 |  9 /  0 |   5.66
+   helix-like n=12        |  0.10 | 0.1000 0.191 |   0.434 |   0.434 |   5.66 |  9 /  0 |   5.66
+   helix-like n=12        |  0.20 | 0.2000 0.364 |   0.902 |   0.902 |   5.66 |  9 /  0 |   5.64
+   helix-like n=12        |  0.30 | 0.3000 0.533 |   1.418 |   1.418 |   5.66 |  9 /  0 |   5.59
+   helix-like n=12        |  0.50 | 0.5000 1.172 |   6.354 |   6.354 |   5.66 |  5 /  4 |   3.62
+   helix-like n=12        |  1.00 | 1.0000 1.808 |   6.867 |   6.867 |   5.66 |  5 /  4 |   3.89
+   helix-like n=20        |  0.01 | 0.0100 0.026 |   0.090 |   0.090 |   8.95 | 17 /  0 |   8.95
+   helix-like n=20        |  0.03 | 0.0300 0.081 |   0.269 |   0.269 |   8.95 | 17 /  0 |   8.94
+   helix-like n=20        |  0.10 | 0.1000 0.279 |   0.907 |   0.907 |   8.95 | 17 /  0 |   8.86
+   helix-like n=20        |  0.30 | 0.3000 1.116 |   9.950 |   9.950 |   8.95 |  9 /  8 |   4.96
+   helix-like n=20        |  0.50 | 0.5000 1.245 |  10.259 |  10.259 |   8.95 |  9 /  8 |   5.35
+   helix-like n=20        |  1.00 | 1.0000 2.211 |  10.646 |  10.646 |   8.95 |  9 /  8 |   5.91
+   strand-like 160 n=12   |  0.01 | 0.0100 0.027 |   0.579 |   0.579 |  11.43 |  9 /  0 |  11.40
+   strand-like 160 n=12   |  0.03 | 0.0300 0.075 |   1.750 |   1.750 |  11.43 |  5 /  4 |  11.29
+   strand-like 160 n=12   |  0.10 | 0.1000 0.168 |   4.330 |   4.330 |  11.43 |  5 /  4 |  10.25
+   strand-like 160 n=12   |  0.20 | 0.2000 0.453 |   6.481 |   6.481 |  11.43 |  4 /  5 |   9.06
+   strand-like 160 n=12   |  0.30 | 0.3000 0.587 |   7.973 |   7.973 |  11.43 |  5 /  4 |   8.17
+   strand-like 160 n=12   |  0.50 | 0.5000 1.036 |  10.066 |  10.066 |  11.43 |  6 /  3 |   6.96
+   strand-like 160 n=12   |  1.00 | 1.0000 2.238 |  12.916 |  12.916 |  11.43 |  6 /  3 |   6.09
+   strand-like 160 n=20   |  0.01 | 0.0100 0.035 |   1.371 |   1.896 |  19.05 | 17 /  0 |  18.94
+   strand-like 160 n=20   |  0.03 | 0.0300 0.082 |   3.195 |   3.195 |  19.05 | 17 /  0 |  18.52
+   strand-like 160 n=20   |  0.10 | 0.1000 0.338 |  12.002 |  12.002 |  19.05 |  9 /  8 |  13.87
+   strand-like 160 n=20   |  0.20 | 0.2000 0.488 |  18.620 |  18.620 |  19.05 |  9 /  8 |   9.79
+   strand-like 160 n=20   |  0.30 | 0.3000 0.745 |  21.159 |  21.159 |  19.05 | 11 /  6 |   9.24
+   strand-like 160 n=20   |  0.50 | 0.5000 1.212 |  21.437 |  21.437 |  19.05 | 13 /  4 |   9.84
+   strand-like 160 n=20   |  1.00 | 1.0000 1.783 |  21.809 |  21.809 |  19.05 | 10 /  7 |  10.63
+   stored configurations that violate the constraint they were found under: 0
+
+Part 2.  the smallest rms distance error found at which some configuration lies at RMSD >= r from the trace (penalty method, L-BFGS; an UPPER bound
+         for the true minimum: every row is an explicit configuration, re-evaluated).  columns: r (A) | rms distance error | RMSD achieved | max |distance error| |
+         first-order value r / (sqrt(N/n)/s_7) | windows with opposite chirality | start that gave it
+   helix-like n=20:  R_g = 8.95 A, first-order RMSD per unit rms distance error = 8.960
+        0.5 | 0.0556 |   0.500 | 0.144 | 0.0558 |  0 of 17 | soft mode 1
+        1.0 | 0.1099 |   1.000 | 0.306 | 0.1116 |  0 of 17 | previous r
+        2.0 | 0.2097 |   2.000 | 0.527 | 0.2232 |  0 of 17 | soft mode 2
+        3.0 | 0.2704 |   8.701 | 1.215 | 0.3348 |  8 of 17 | distant configuration found at sigma = 0.5
+        4.0 | 0.2369 |   6.967 | 1.389 | 0.4464 |  1 of 17 | soft mode 1
+        5.0 | 0.2369 |   6.967 | 1.389 | 0.5580 |  1 of 17 | soft mode 1
+        6.0 | 0.2369 |   6.967 | 1.389 | 0.6696 |  1 of 17 | previous r
+        7.0 | 0.2369 |   7.150 | 1.389 | 0.7812 | 16 of 17 | soft mode 2
+        8.0 | 0.2453 |   8.000 | 1.366 | 0.8928 | 16 of 17 | previous r
+        9.0 | 0.2714 |   9.000 | 1.215 | 1.0044 |  8 of 17 | distant configuration found at sigma = 0.5
+       10.0 | 0.3079 |  10.000 | 1.130 | 1.1160 |  9 of 17 | distant configuration found at sigma = 0.5
+   helix-like n=12:  R_g = 5.66 A, first-order RMSD per unit rms distance error = 4.208
+        0.5 | 0.1147 |   0.500 | 0.218 | 0.1188 |  0 of 9 | soft mode 1
+        1.0 | 0.2199 |   1.000 | 0.397 | 0.2376 |  0 of 9 | soft mode 1
+        2.0 | 0.3669 |   5.763 | 1.214 | 0.4753 |  5 of 9 | distant configuration found at sigma = 0.5
+        3.0 | 0.3203 |   4.283 | 1.376 | 0.7129 |  1 of 9 | soft mode 3
+        4.0 | 0.3203 |   4.283 | 1.376 | 0.9505 |  1 of 9 | soft mode 3
+        5.0 | 0.3669 |   5.763 | 1.214 | 1.1881 |  5 of 9 | distant configuration found at sigma = 0.5
+        6.0 | 0.3727 |   6.000 | 1.183 | 1.4258 |  5 of 9 | soft mode 3
+        7.0 | 1.3599 |   7.000 | 2.463 | 1.6634 |  4 of 9 | soft mode 2
+        8.0 | 3.2932 |   7.999 | 5.851 | 1.9010 |  4 of 9 | soft mode 3
+        9.0 | 5.0922 |   8.999 | 10.097 | 2.1386 |  4 of 9 | soft mode 3
+       10.0 | 6.7355 |   9.999 | 14.250 | 2.3763 |  3 of 9 | soft mode 3
+   strand-like 160 n=20:  R_g = 19.05 A, first-order RMSD per unit rms distance error = 140.061
+        0.5 | 0.0036 |   0.500 | 0.012 | 0.0036 |  0 of 17 | distant configuration found at sigma = 0.3
+        1.0 | 0.0071 |   1.000 | 0.024 | 0.0071 |  0 of 17 | soft mode 1
+        2.0 | 0.0140 |   2.000 | 0.051 | 0.0143 |  0 of 17 | previous r
+        3.0 | 0.0206 |   3.000 | 0.067 | 0.0214 |  0 of 17 | soft mode 2
+        4.0 | 0.0263 |   4.000 | 0.071 | 0.0286 |  8 of 17 | distant configuration found at sigma = 0.1
+        5.0 | 0.0318 |   5.000 | 0.071 | 0.0357 |  4 of 17 | soft mode 1
+        6.0 | 0.0373 |   6.000 | 0.076 | 0.0428 | 13 of 17 | soft mode 3
+        7.0 | 0.0436 |   7.000 | 0.082 | 0.0500 | 11 of 17 | previous r
+        8.0 | 0.0508 |   8.000 | 0.087 | 0.0571 | 11 of 17 | soft mode 1
+        9.0 | 0.0589 |   9.000 | 0.102 | 0.0643 |  6 of 17 | soft mode 1
+       10.0 | 0.0681 |  10.000 | 0.119 | 0.0714 |  8 of 17 | soft mode 3
+   control: at the smallest r the rms error found must equal the first-order value: helix n=20: 0.0556 vs 0.0558;  helix n=12: 0.1147 vs 0.1188;  strand n=20: 0.0036 vs 0.0036  (<= by at most a few per cent: second-order effects)
+   helix-like n=20: an rms distance error of 0.237 A already admits a configuration at RMSD >= R_g/2; 0.271 A admits one at RMSD >= R_g = 8.95 A
+   helix-like n=12: an rms distance error of 0.320 A already admits a configuration at RMSD >= R_g/2; 0.367 A admits one at RMSD >= R_g = 5.66 A
+   strand-like 160 n=20: an rms distance error of 0.068 A already admits a configuration at RMSD >= R_g/2; none at RMSD >= R_g = 19.05 A among the targets
+ALL DONE 2026-11-26T23:41:29Z  8.9 s  peak memory 76 MB

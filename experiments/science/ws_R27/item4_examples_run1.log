@@ -1,0 +1,26 @@
+R27 item4_examples.py started 2026-11-26T23:34:34Z
+
+(A1) interior four-point window exactly coplanar: Y = points beyond it reflected in its plane
+     n =  6, coplanar window W_2 (1-based): tau = 3.5e-16, ||eta||_2 = 1.2e-15, d_P(X, Y) = 0.5056  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  6, coplanar window W_2 (1-based): tau = 4.9e-16, ||eta||_2 = 4.3e-16, d_P(X, Y) = 0.0170  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  6, coplanar window W_2 (1-based): tau = 2.1e-17, ||eta||_2 = 1.2e-15, d_P(X, Y) = 0.6724  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  8, coplanar window W_2 (1-based): tau = 1.1e-16, ||eta||_2 = 2.9e-15, d_P(X, Y) = 1.5268  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  8, coplanar window W_3 (1-based): tau = 1.8e-16, ||eta||_2 = 4.4e-16, d_P(X, Y) = 0.7797  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  8, coplanar window W_4 (1-based): tau = 1.4e-16, ||eta||_2 = 9.7e-16, d_P(X, Y) = 0.1136  -> d_P/||eta|| unbounded: conclusion FALSE
+     n = 12, coplanar window W_2 (1-based): tau = 2.6e-16, ||eta||_2 = 7.6e-15, d_P(X, Y) = 1.3236  -> d_P/||eta|| unbounded: conclusion FALSE
+     n = 12, coplanar window W_5 (1-based): tau = 1.0e-16, ||eta||_2 = 2.5e-15, d_P(X, Y) = 3.6215  -> d_P/||eta|| unbounded: conclusion FALSE
+     n = 12, coplanar window W_8 (1-based): tau = 1.8e-16, ||eta||_2 = 5.3e-16, d_P(X, Y) = 0.6678  -> d_P/||eta|| unbounded: conclusion FALSE
+
+(A2) the END windows W_1 and W_{n-3} exactly coplanar (interior windows generic): (local) and the uniform bound with tau* := min over interior windows
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R27/item4_examples.py", line 136, in <module>
+    assert tau[0] < 1e-12 and tau[-1] < 1e-12 and (n == 6 or tau[1:n - 4].min() > 1e-3) and s.min() > 1e-3, (tau, s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (array([0.00000000e+00, 5.36664762e-04, 6.33568480e-02, 3.11703965e-01,
+       3.36370454e-01, 3.02022693e-01, 3.40337351e-01, 4.08721489e-01,
+       2.24810482e-01, 2.97551820e-01, 4.98018010e-01, 4.89222257e-01,
+       2.82617729e-01, 3.31711292e-01, 2.86704729e-01, 3.41980639e-01,
+       1.79530140e-16]), array([0.00394343, 0.15816215, 0.31933955, 0.33915777, 0.34370275,
+       0.40293904, 0.43744112, 0.42152772, 0.30791575, 0.59860029,
+       0.55477032, 0.52858061, 0.33183148, 0.33588377, 0.34200046,
+       0.38036347]))

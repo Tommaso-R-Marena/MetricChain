@@ -1,0 +1,16 @@
+R27 item2_adv_jointU.py started 2026-11-26T23:23:36Z  budget 530 s  seed 27116
+gradient self-check (20 directions, n = 8, p = 12): worst relative error 1.77e-08;  surrogate <= exact: True
+n =  5: largest rho found 0.00765452   (102 starts, 19 s; at the maximiser tau*/b = 0.693, s*/b = 0.706, tau max/min = 1.00, bonds min/max = 0.99, d_P/diam = 1.30, share of ||eta||^2 on separation 4: 0.18)
+n =  6: largest rho found 0.00847649   (65 starts, 25 s; at the maximiser tau*/b = 0.511, s*/b = 0.706, tau max/min = 1.00, bonds min/max = 0.93, d_P/diam = 1.25, share of ||eta||^2 on separation 4: 0.05)
+n =  7: largest rho found 0.00982682   (41 starts, 31 s; at the maximiser tau*/b = 0.429, s*/b = 0.651, tau max/min = 1.01, bonds min/max = 0.99, d_P/diam = 1.81, share of ||eta||^2 on separation 4: 0.34)
+n =  8: largest rho found 0.0112998   (45 starts, 38 s; at the maximiser tau*/b = 0.218, s*/b = 0.281, tau max/min = 2.04, bonds min/max = 0.52, d_P/diam = 2.61, share of ||eta||^2 on separation 4: 0.03)
+n =  9: largest rho found 0.0119542   (20 starts, 46 s; at the maximiser tau*/b = 0.250, s*/b = 0.305, tau max/min = 1.22, bonds min/max = 0.51, d_P/diam = 2.83, share of ||eta||^2 on separation 4: 0.04)
+n = 10: largest rho found 0.0145361   (8 starts, 54 s; at the maximiser tau*/b = 0.072, s*/b = 0.092, tau max/min = 5.16, bonds min/max = 0.21, d_P/diam = 3.16, share of ||eta||^2 on separation 4: 0.00)
+n = 11: largest rho found 0.0140899   (8 starts, 61 s; at the maximiser tau*/b = 0.147, s*/b = 0.178, tau max/min = 2.07, bonds min/max = 0.37, d_P/diam = 3.35, share of ||eta||^2 on separation 4: 0.02)
+n = 12: largest rho found 0.0166613   (7 starts, 75 s; at the maximiser tau*/b = 0.063, s*/b = 0.080, tau max/min = 5.86, bonds min/max = 0.20, d_P/diam = 3.59, share of ||eta||^2 on separation 4: 0.00)
+n = 14: largest rho found 0.0138597   (7 starts, 92 s; at the maximiser tau*/b = 0.082, s*/b = 0.100, tau max/min = 4.14, bonds min/max = 0.22, d_P/diam = 3.01, share of ||eta||^2 on separation 4: 0.01)
+n = 16: largest rho found 0.0179618   (8 starts, 109 s; at the maximiser tau*/b = 0.062, s*/b = 0.077, tau max/min = 7.33, bonds min/max = 0.26, d_P/diam = 4.23, share of ||eta||^2 on separation 4: 0.00)
+
+largest ratio d_P/(uniform bound) found: 0.0179618 at n = 16;  violations (rho > 1): 0
+control of the optimiser: the uniform bound with the constant divided by 100 is violated iff this exceeds 0.01: True;  divided by 1000: True
+ALL DONE 2026-11-26T23:32:43Z  547.1 s  peak memory 77 MB

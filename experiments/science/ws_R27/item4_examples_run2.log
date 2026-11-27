@@ -1,0 +1,48 @@
+R27 item4_examples.py started 2026-11-26T23:34:47Z
+
+(A1) interior four-point window exactly coplanar: Y = points beyond it reflected in its plane
+     n =  6, coplanar window W_2 (1-based): tau = 3.5e-16, ||eta||_2 = 1.2e-15, d_P(X, Y) = 0.5056  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  6, coplanar window W_2 (1-based): tau = 4.9e-16, ||eta||_2 = 4.3e-16, d_P(X, Y) = 0.0170  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  6, coplanar window W_2 (1-based): tau = 2.1e-17, ||eta||_2 = 1.2e-15, d_P(X, Y) = 0.6724  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  8, coplanar window W_2 (1-based): tau = 1.1e-16, ||eta||_2 = 2.9e-15, d_P(X, Y) = 1.5268  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  8, coplanar window W_3 (1-based): tau = 1.8e-16, ||eta||_2 = 4.4e-16, d_P(X, Y) = 0.7797  -> d_P/||eta|| unbounded: conclusion FALSE
+     n =  8, coplanar window W_4 (1-based): tau = 1.4e-16, ||eta||_2 = 9.7e-16, d_P(X, Y) = 0.1136  -> d_P/||eta|| unbounded: conclusion FALSE
+     n = 12, coplanar window W_2 (1-based): tau = 2.6e-16, ||eta||_2 = 7.6e-15, d_P(X, Y) = 1.3236  -> d_P/||eta|| unbounded: conclusion FALSE
+     n = 12, coplanar window W_5 (1-based): tau = 1.0e-16, ||eta||_2 = 2.5e-15, d_P(X, Y) = 3.6215  -> d_P/||eta|| unbounded: conclusion FALSE
+     n = 12, coplanar window W_8 (1-based): tau = 1.8e-16, ||eta||_2 = 5.3e-16, d_P(X, Y) = 0.6678  -> d_P/||eta|| unbounded: conclusion FALSE
+
+(A2) the END windows W_1 and W_{n-3} exactly coplanar (interior windows generic): (local) and the uniform bound with tau* := min over interior windows
+     3600 pairs (X with both end windows coplanar, tau_1 = tau_(n-3) = 0; Y arbitrary): violations 0;  max per-point (local) ratio 0.2857;  max ||Y - g1 X||_F / uniform bound with interior tau*: 0.00216
+     control (an interior window flattened as well): eta = 0 and d_P > 0 in 48 of 48 cases (must be all)
+
+(B1) one pair of separation 4 unmeasured: reflection of the points beyond x_{i+3} in the plane of x_{i+1}, x_{i+2}, x_{i+3}
+     n =  5, pair (1,5) unmeasured: ||eta|| over the measured pairs = 2.4e-16, the unmeasured one changed by -3.0713, d_P = 0.9573 -> FALSE
+     n =  8, pair (1,5) unmeasured: ||eta|| over the measured pairs = 6.1e-15, the unmeasured one changed by -1.9858, d_P = 1.4607 -> FALSE
+     n =  8, pair (2,6) unmeasured: ||eta|| over the measured pairs = 2.0e-15, the unmeasured one changed by -2.0964, d_P = 1.1506 -> FALSE
+     n =  8, pair (4,8) unmeasured: ||eta|| over the measured pairs = 1.3e-16, the unmeasured one changed by -2.3851, d_P = 1.0236 -> FALSE
+     n = 12, pair (1,5) unmeasured: ||eta|| over the measured pairs = 4.7e-15, the unmeasured one changed by -2.2376, d_P = 1.5587 -> FALSE
+     n = 12, pair (4,8) unmeasured: ||eta|| over the measured pairs = 5.5e-15, the unmeasured one changed by +2.4064, d_P = 3.4898 -> FALSE
+     n = 12, pair (8,12) unmeasured: ||eta|| over the measured pairs = 1.1e-15, the unmeasured one changed by +2.2594, d_P = 1.6978 -> FALSE
+(B2) the pair (1,2) unmeasured: x_1 reflected in the plane of x_3, x_4, x_5
+     n =  6: ||eta|| over the measured pairs = 7.7e-16, pair (1,2) changed by +3.5729, d_P = 1.2064 -> FALSE
+     n = 12: ||eta|| over the measured pairs = 2.3e-15, pair (1,2) changed by +4.7400, d_P = 2.6585 -> FALSE
+(B3) one INTERIOR pair of separation 1, 2 or 3 unmeasured: the (3n-6)-th singular value of the half-Jacobian of the remaining pairs (first-order rigidity)
+     n =  8: all pairs: mu = 0.3021;  without (4,5): 0.2805;  without (4,6): 0.3016;  without (4,7): 0.3016   (positive: still infinitesimally rigid; whether a global bound survives is NOT settled here)
+     n = 12: all pairs: mu = 0.1793;  without (6,7): 0.1673;  without (6,8): 0.1784;  without (6,9): 0.1790   (positive: still infinitesimally rigid; whether a global bound survives is NOT settled here)
+
+(C) Y in R^4:  y_i = (x_i, eps w_i), w = the affine dependency of the five points (unit vector orthogonal to 1 and to the coordinates)
+     eps =   1e+00: ||eta||_2 = 2.044e+00   d_P in R^4 = 1.000e+00   d_P/||eta|| = 4.891e-01   (Lemma Q in R^3 would allow at most 0.233)
+     eps =   1e-01: ||eta||_2 = 2.044e-02   d_P in R^4 = 1.000e-01   d_P/||eta|| = 4.891e+00   (Lemma Q in R^3 would allow at most 0.233)
+     eps =   1e-02: ||eta||_2 = 2.044e-04   d_P in R^4 = 1.000e-02   d_P/||eta|| = 4.891e+01   (Lemma Q in R^3 would allow at most 0.233)
+     eps =   1e-03: ||eta||_2 = 2.044e-06   d_P in R^4 = 1.000e-03   d_P/||eta|| = 4.891e+02   (Lemma Q in R^3 would allow at most 0.233)
+     eps =   1e-04: ||eta||_2 = 2.044e-08   d_P in R^4 = 1.000e-04   d_P/||eta|| = 4.891e+03   (Lemma Q in R^3 would allow at most 0.233)
+     -> d_P/||eta|| grows like 1/eps: with Y outside R^3 there is no Lipschitz bound (only a Hoelder-1/2 one): 'Y in R^3' is ESSENTIAL
+
+(D) the analogue in R^d with separations <= K (windows of K and K+1 points; 1/2 -> 1/sqrt(K)); X = random chains with unit steps in R^d; Y arbitrary
+     d = 2, K = 3: pairs 1000, violations 0, max per-point ratio 0.4401;  control (lever-arm term dropped) violated by 60 pairs
+     d = 3, K = 4: pairs 1000, violations 0, max per-point ratio 0.2768;  control (lever-arm term dropped) violated by 14 pairs
+     d = 3, K = 5: pairs 1000, violations 0, max per-point ratio 0.3751;  control (lever-arm term dropped) violated by 8 pairs
+     d = 3, K = 6: pairs 1000, violations 0, max per-point ratio 0.4428;  control (lever-arm term dropped) violated by 5 pairs
+     d = 3, K = 7: pairs 1000, violations 0, max per-point ratio 0.4468;  control (lever-arm term dropped) violated by 4 pairs
+     d = 4, K = 5: pairs 1000, violations 0, max per-point ratio 0.2187;  control (lever-arm term dropped) violated by 8 pairs
+ALL DONE 2026-11-26T23:34:57Z  9.6 s  peak memory 36 MB
