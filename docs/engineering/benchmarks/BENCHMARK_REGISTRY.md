@@ -11,12 +11,12 @@ How to send a request: `docs/collaboration/README.md`, "Shared computation" — 
 the exact source commit, assumptions, method, baselines, correctness criteria, expected
 outputs, a resource estimate, a stopping condition.
 
-## Status at checkpoint 6 (2026-11-26/27) — this table is the current one; the rows below keep the specifications
+## Status at the consolidation halt (2026-11-27; directive D-8) — this table is the current one; the rows below keep the specifications.  **The queue is frozen: nothing is started without the research owner's authorisation**
 
 | # | what | status |
 |---|---|---|
-| Q-01 | the certified recursion of nested runs to six levels (X-011a; M-016) | **published to `n = 16 000`** (ENG-RES-0015 §2); `n = 32 000 … 128 000` running (six tasks); predictions H13 (failed in part at 16 000), H1, H3 (failed at 16 000) recorded |
-| Q-02 | the designs run on searched instances (X-011b; M-017, M-020) | **published** for `u = 1` (stage 1) and for `u = ½, 1, 2` at `n = 4000`, `u = ½, 1` at `n = 16 000` (stage 2); `u = 2`, `n = 16 000` running |
+| Q-01 | the certified recursion of nested runs to six levels (X-011a; M-016) | **published to `n = 16 000`** (ENG-RES-0015 §2); `n = 32 000 … 128 000` running (six tasks); predictions H13 (failed in part at 16 000), H1, H3 (failed at 16 000) recorded  **At the halt: six tasks of M-016 and ten of M-021 still running unsupervised; collect as the ledger says; H12 and H13 at the large sizes not evaluated** |
+| Q-02 | the designs run on searched instances (X-011b; M-017, M-020) | **complete**: stage 1 (`u = 1`) and stage 2 (`u = ½, 1, 2` at `n = 4000` and `16 000`; 288 of 288 cells) — ENG-RES-0015 and, for the cells collected last, ENG-MSG-0008 §2; H14 holds at all three slopes |
 | Q-03 | R16-THY-1(b): two levels of the table's design at three more sizes | **done** (ENG-RES-0015 §6) |
 | Q-04 | the exact checker of "shares at the leaves" (X-012) | **done**; re-run by the science division (SCI-RES-0030) |
 | Q-05 | the weighted cubes (X-013) | **done**; re-run and closed by the science division (SCI-RES-0033) |
@@ -29,11 +29,11 @@ outputs, a resource estimate, a stopping condition.
 | Q-13 | the rate of the level recursion on new instances | computed; report filed, **the coordinator's review not complete** (`experiments/eng/level_rate/REPORT.md`) |
 | Q-14 | producing and checking leaf certificates against exact solvers | a subagent's producer and benchmark **in progress**; the structural-biology division's producer (ENG-RES-0018) joins the comparison |
 | Q-15 | SCI-REV-0018 (X-005c; M-023, M-024, M-025) | **done** (ENG-RES-0017): conclusion withdrawn; three rounds; not converged to the requested `10⁻⁴·na`, and said so |
-| Q-16 | GEOMETRY-REQ-0006, a certified optimum on a 4-torus | accepted; next |
+| Q-16 | GEOMETRY-REQ-0006, a certified optimum on a 4-torus | **done for instance A** by a subagent (X-019; `experiments/eng/geometry_req6/REPORT.md`); reproduction checked, core unread by the coordinator |
 | Q-17 | certified designs at the sizes of the theory division's Theorem Z table | `n = 128 000` inside M-016 (running); `10⁶` offered |
-| Q-18 | software of the structural-biology division (BM-7) | **first review done** at `720e0ec` (ENG-RES-0018, X-016); waiting for a release |
+| Q-18 | software of the structural-biology division (BM-7) | **stages S0–S3 done for capability C1 at `0544ff4`** (ENG-RES-0019; X-016, X-017: the verified kernel accepts the six stored certificates); capability C2: an independent checker with findings (X-018).  S4–S6 (held-out benchmark SB-BM-3, proof logging, the long `ln Z` runs): reviewed, **not run** |
 | Q-19 | directed rounding from real-valued energies to integer tables | design started; waits for the specification of the energy |
-| Q-20 | evaluations designed by the frontier-benchmarking division; CASP17 feasibility (D-7) | nothing received (no branch at 22:41 UTC); the freeze procedure is written (`PREDICTION_FREEZE.md`); today no software exists that could produce a structure prediction to freeze |
+| Q-20 | evaluations designed by the frontier-benchmarking division; CASP17 feasibility (D-7) | **agreed with its determination: nothing is mature enough; nothing run, nothing to freeze** (ENG-MSG-0008 §5); no sealed list opened or requested |
 
 ## Active and next
 

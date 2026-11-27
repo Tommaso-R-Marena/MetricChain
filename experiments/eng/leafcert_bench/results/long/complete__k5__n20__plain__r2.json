@@ -1,0 +1,78 @@
+{
+ "cpu": 7,
+ "error": null,
+ "family": "complete",
+ "instances": [
+  {
+   "alphabets": [
+    5
+   ],
+   "dense_instance_integers": 4850,
+   "dense_ints_per_leaf": 2110,
+   "digest": "ead112c2d11264990615284c31438179611400593cf78d88d2cd64ddcf32eaf7",
+   "edges": 190,
+   "index": 2,
+   "log10_states": 13.979400086720377,
+   "plain": {
+    "anomalies": 0,
+    "ascents": 422375,
+    "best_bound": -55691,
+    "branch_nodes": 21878,
+    "cert_integers": 182951770,
+    "check_ops": 754134036,
+    "depth": 11,
+    "initial_ub": -55691,
+    "leaf_boxes": 87513,
+    "leaf_certificates": 86707,
+    "lp_calls": 0,
+    "lp_failures": 0,
+    "lp_rounding_loss_root": null,
+    "lp_seconds": 0.0,
+    "nodes": 105293,
+    "root_lp_value": null,
+    "root_value": -112142,
+    "seconds": 105.85203702900071,
+    "shared_by_parent": 4098,
+    "shared_by_sibling": 0,
+    "status": "optimal",
+    "stop": null,
+    "sweeps": 3071407,
+    "ub_updates": 0,
+    "upper_bound": -55691,
+    "value": -55691
+   },
+   "seed": 6398389603076126845,
+   "site_states": 100,
+   "sites": 20,
+   "sparse_instance_integers": 4850,
+   "sparse_ints_per_leaf": 2110
+  }
+ ],
+ "k": 5,
+ "limit_hits": {},
+ "master": "leafcert-bench-v1",
+ "n": 20,
+ "phase": "long",
+ "protocol_version": 1,
+ "seconds": 105.85918339700038,
+ "started_utc": "2026-11-27T00:01:19Z",
+ "task": {
+  "caps": {
+   "max_cert_integers": 10000000,
+   "max_check_ops": 100000000,
+   "max_leaves": 1000000
+  },
+  "family": "complete",
+  "file": "complete__k5__n20__plain__r2",
+  "id": 7,
+  "index": 2,
+  "k": 5,
+  "master": "leafcert-bench-v1",
+  "n": 20,
+  "phase": "long",
+  "solver": "plain",
+  "time_limit": 600.0
+ },
+ "worker_rss_peak_mb": 349.5234375,
+ "worker_vm_peak_mb": 1049.19140625
+}

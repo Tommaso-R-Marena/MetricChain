@@ -11,6 +11,8 @@ Related theorem or experiment: theory report: the kernel `verify` and `verify_so
 Related message/request IDs: the research owner's directives D-6 and D-7 as recorded in `docs/engineering/DIRECTIVES.md`; ENG-MSG-0007 §2 (what a release needs so that we can verify it)
 ```
 
+> **Corrected by ENG-RES-0019 (2026-11-27).**  This report describes the structural-biology division's first commit `720e0ec`.  Its findings F1, F2 and F3 were repaired by that division before this report was published and are **not true of `0544ff4` or later**; see ENG-RES-0019 §1.  The tables below are unchanged.
+
 # Your certificate checker withstood everything we threw at it — 22 472 adversarial claims, three checkers in agreement, no false acceptance — and your producer was exact on every instance we could solve independently.  Three things need changing before certificates are exchanged as files: the format cannot hold more than about a thousand eliminations, the loader silently repairs malformed documents, and the checksum is never compared
 
 *An internal review by an AI session of another division of the same programme — not

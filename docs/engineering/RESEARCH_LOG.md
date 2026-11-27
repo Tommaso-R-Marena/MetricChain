@@ -496,72 +496,71 @@ coordinator's review marked incomplete.  (12) Checkpoint 6 published.
 * Our own literal simulator had no tie rule and our negative controls were weak — found
   by the referee, not by us.  A referee with its own simulator is worth its cost.
 
+## 4.7 Consolidation (2026-11-27, 00:05 – about 01:30 UTC)
+
+After checkpoint 6: the structural-biology division's head `0544ff4` reviewed and reproduced
+(S0–S3 of BM-7), then `41fa668` re-run; the theory division's kernel `verify` found to be
+executable but exponential in the length of an elimination chain; `verifyM` written and proved
+equal to it (`experiments/eng/sb_review/lean_kernel/RunKernel.lean`); the six stored
+certificates accepted by it (X-017).  At about 01:00 UTC the research owner's consolidation
+directive arrived (D-8).  From then on nothing new was started.  The two subagents then running
+were told to finish the step in progress and handed back within twenty minutes: the checker of
+partition-function certificates (X-018; its finding F1 reproduced by the coordinator) and
+GEOMETRY-REQ-0006 (X-019; tests and drivers re-run by the coordinator).  Job M-020 collected
+complete; M-016 and M-021 left running.  Published: ENG-RES-0019, ENG-MSG-0008,
+`docs/collaboration/consolidation/engineering.md`.
+
+*Things learned that a successor should not have to learn again.*  (i) `lake env lean --run`
+on a file that imports the proof library needs four to five minutes and about 4 GB before it
+prints anything, and fails with "failed to read file" under an address-space limit — do not
+run it under `ulimit -v`.  (ii) A Lean function that returns a function is compiled with the
+extra argument, so a `let` inside it is re-evaluated at every application; to force a value,
+return a structure (`Memo.of`).  (iii) A background command of the form `A && B && nohup C &`
+puts the whole chain in a subshell: variables set in `A` are not visible afterwards.
+
 ## Resume here
 
-**State at 2026-11-27 about 00:05 UTC: checkpoint 6 is published** (ENG-MSG-0007,
-ENG-RES-0015, -0016, -0017, -0018; reports of X-012, X-013, GEOMETRY-REQ-0001, the referee
-of X-014, the rate check).  Read `docs/engineering/DIRECTIVES.md` first (D-1 … D-7): the
-research owner asked for a *continuous* loop; a finished checkpoint is not a reason to
-stop; a consolidation directive will come when about $2,000 of Claude credits remain.
+**The division is HALTED by the research owner (D-8, 2026-11-27).  Do not resume the loop,
+the queue or the mailbox without the research owner's explicit authorisation.**  A new session
+does only what the research owner asks in that session.  Read, in this order:
+`docs/engineering/DIRECTIVES.md` (D-8), `docs/collaboration/consolidation/engineering.md` (the
+assessment; §H lists every open item with its state), this section.
 **Hard stop for computation: 2026-11-30 15:00 US Eastern (20:00 UTC).**
 
-0. **At the start of every session:** `git fetch origin` — **eight** branches now: theory
-   `claude/determined-ride-og1u7j`, science `research/scientific-translation`,
-   `research/ensemble-identifiability`, `research/geometric-inference`,
-   `research/biological-complexity`, `research/structural-biology` (its software is ours
-   to verify: D-6), `research/frontier-benchmarks` (did not exist at 22:41 UTC on
-   2026-11-26; CASP17 feasibility is time-sensitive: official results on 29 November).
-   Follow `docs/collaboration/UPSTREAM_SYNC.md`; read what is addressed to engineering in
-   every digest; read `COMPUTE_LEDGER.md` ("Policy") before any remote job.  Commit before
-   launching anything whose rows store a commit; stop processes by PID; give every
-   subagent a hard memory limit.
-1. **Remote jobs still open** (detached; results wait in a `modal.Dict` for seven days;
-   the apps end by themselves):
+1. **The one thing that needs doing even while halted** (a single command, safe and
+   repeatable, if the research owner wants the results): collect the two Modal runs that
+   were left to finish — their result store expires seven days after its last access.
 
-       python modal_jobs/bench_collect.py --driver nested_bench --job certified1+instances2+certified2   # M-016, M-020, M-021
-       modal app list --json ; modal container list --json ; modal billing summary
+       python modal_jobs/bench_collect.py --driver nested_bench --job certified1+certified2    # M-016, M-021
+       modal app list --json ; modal billing summary                                            # nothing of ours running; Billed Cost $0.00
 
-   M-016: `n = 32 000, 64 000, 128 000` (six tasks of the twelve-hour tier, launched 16:20
-   UTC on the 26th).  M-020: stage 2 at `u = 2`, `n = 16 000` (19 rows missing).  M-021: the
-   recursion at `u = ½, 2` (16 rows).  When they are in: `python
-   experiments/eng/twolevel/make_tables_x011.py` prints the addendum blocks (suffixes
-   `_large`, `_late`); evaluate **H12, H13 (sizes ≥ 32 000), H14 (`u = 2`)** as written in
-   `benchmarks/protocols/BM-1_X-011.md`; publish the addendum as ENG-RES-0019; enter the
-   measured costs (`modal billing report --for today --json`, by app run) and close the
-   jobs; check **Billed Cost $0.00**.
-2. **Local runs in flight when this was written**: the literal experiment of X-014 with
-   the tie rule (`python experiments/eng/twolevel/hetero_literal.py` →
-   `results/x014_literal_v2.json`, about an hour) — its table goes into the addendum of
-   ENG-RES-0016 (compare with the first version; the tie case "outer_cone0" must show no
-   abort).
-3. **Subagents**: (a) geometry REQ-0001 — done, filed, published.  (b) the referee of
-   X-014 — done, filed, applied.  (c) the rate check — **report filed, the coordinator's
-   review incomplete** (`experiments/eng/level_rate/REPORT.md`, last section): read Claims
-   A–C of its §3, compare with the theory division's workstream Z (certified `c_k`), then
-   send its findings to the theory division (four discrepancies in their material; the
-   four-letter Hamming site at `u = ln 3` where (H1) fails and the rate is `1/k`).
-   (d) the producer of leaf certificates and its benchmark (`src/metricchain_eng/leafprod/`,
-   `tests/eng/test_leafprod.py`, `experiments/eng/leafcert_bench/`) — **still running when
-   this was written; untracked**; review it like any contribution when it reports, and
-   add the structural-biology division's producer to the comparison.
-4. **Next, in this order** (queue: `benchmarks/BENCHMARK_REGISTRY.md`, status table at its
-   head):
-   (a) **the frontier-benchmarking and structural-biology branches** — check for a
-   release, a benchmark specification or a request at every synchronisation; apply
-   `BENCHMARK_MASTER_PLAN.md` §3a (read before running; pinned worktree; our own tests)
-   and `PREDICTION_FREEZE.md`; do not run an immature implementation to meet a date;
-   (b) ENG-MSG-0008: the reviewed rate check; the producer benchmark; the addendum;
-   (c) **GEOMETRY-REQ-0006** (accepted): a certified global maximum on a 4-torus by
-   interval branch and bound, and a Krawczyk certificate of a four-dimensional
-   realisation; local; the request has the data, the controls and a stopping rule;
-   (d) the directed-rounding reference (Q-19) once the science division names the energy
-   terms; a prototype on a model energy can start before;
-   (e) X-011 continued: fibres that are hard for the bounded design; the searches of
-   X-010/X-011 with the review's starting points; the wider design family run on
-   instances; certified designs at `n = 10⁶` against the theory division's Theorem Z table
-   if they want it;
-   (f) the sandwich checker when its file format exists (Q-08); the off-lattice chain in
-   exact arithmetic (Q-06), then the enumeration job (Q-07); THY-REQ-0003 (Q-09).
-5. Not done: the audit of any theory head after `9408e33`; the proofs of workstreams N,
-   R, Z, Q2 are unread; of the science division's twenty new messages only three were
-   read in full.
+   Table of the running tasks, worst case and how to stop them:
+   `docs/engineering/COMPUTE_LEDGER.md`, "Jobs left running".  When the rows are in,
+   `python experiments/eng/twolevel/make_tables_x011.py` prints the blocks with the suffix
+   `_large`; hypotheses H12 and H13 (sizes ≥ 32 000) of `benchmarks/protocols/BM-1_X-011.md`
+   can then be evaluated and the jobs closed in the ledger with their measured cost.
+2. **If work is authorised again**, the three follow-ups this division recommends are §E of
+   the assessment: the held-out certified-optimum benchmark with the proof-logging
+   comparison; an independent implementation of the energy tables with a proved rounding
+   relation; a compiled, memoised kernel in the theory division's tree.
+3. **Filed but not reviewed by the coordinator** (each report says so at its head):
+   `experiments/eng/leafcert_bench/REPORT.md` (producer benchmark),
+   `experiments/eng/level_rate/REPORT.md` (rate check of Theorem R; Claims A–C of its §3 are
+   unread), `experiments/eng/sb_zcheck/REPORT.md` (checker of partition-function
+   certificates; `campaign_z5.py` written and never run), `experiments/eng/geometry_req6/REPORT.md`
+   (core of 956 lines unread).
+4. **Not done at the halt**: everything marked "not started" or "in progress" in
+   `docs/collaboration/status/engineering.md`; the audit of any theory head after `9408e33`;
+   the new code of the structural-biology head `41fa668` (hydrogens, wells, the shifted
+   model) beyond one diff; the science division's messages after SCI-REV-0018 except
+   SCI-REV-0026 (read in part); the theory head `37ce6d3`, complexity `d920323`, frontier
+   `097b4c7` were fetched and not read.
+5. **Tests**: `python -m pytest tests/eng -q` *without* `ulimit -v` (the sanitizer test cannot run under an
+   address-space limit): 571 passed, 4 skipped, 3 expected failures at the halt.  Read-only worktrees of the
+   structural-biology branch stand beside the repository (`MetricChain-sb-720e0ec`, `-0544ff4`, `-41fa668`);
+   `tests/eng/test_sb_zcheck.py` uses the second and skips without it.
+6. **Environment**: `source "$HOME/.venvs/metricchain/bin/activate"`; the structural-biology
+   software runs in a second environment with its pinned packages (`requirements-structbio.txt`
+   on its branch) from a read-only worktree, never from our tree; commit with the repository's
+   own identity; the repository is public — no workspace names, local paths or addresses in
+   committed files.

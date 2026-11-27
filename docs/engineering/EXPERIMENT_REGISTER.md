@@ -281,3 +281,49 @@ commit that adds or last changes the files named).  Costs are in
 | Code | `experiments/eng/sb_review/indep_mincheck.py`, `attack_mincert.py`, `make_tables.py` |
 | Result | the checker and the producer survive every test (no false acceptance; no wrong optimum).  Three findings as software: the nested format cannot hold more than about a thousand eliminations (`dumps`, `loads`, the conversion: `RecursionError`); the loader repairs malformed documents instead of rejecting them; the model checksum is never compared.  ENG-RES-0018 |
 | Limitation | no molecular layer, no benchmark and no file-format note existed at that commit; nothing about physics; the checker was compared with the theory division's Python reference checker, not with the Lean kernel |
+
+## X-016 (continued)  The structural-biology software at its commit `0544ff4` (BM-7, stages S0–S3)
+
+| | |
+|---|---|
+| Date | 2026-11-27 |
+| Parts | their tests and `run.py --check` re-run in a separate environment from a copy of a read-only worktree (also at `41fa668`); parts A–E of X-016 repeated; an independent strict parser and checker of *detached* certificate files (`check_files.py`); toulbar2 through our own call; six boxes for `full_box`; their OpenMM validation on more configurations |
+| Outputs | `experiments/eng/sb_review/results/head_0544ff4/`, `dev_certificates_0544ff4.json`, `probe_head_0544ff4.json` |
+| Code | `experiments/eng/sb_review/check_files.py`, `export_tables.py`, `probe_head.py`, `depth_head.py` |
+| Result | the three findings of ENG-RES-0018 are repaired; claims K1–K4, K6–K8 survive; the six instance checksums reproduce bit for bit on a second machine; all six stored certificates accepted by our checker; six optima equal toulbar2's.  ENG-RES-0019 |
+| Limitation | development instances only; claim K5 rests on one author's code on both sides except OpenMM; model v1 has since been withdrawn by its authors |
+
+## X-017  The theory division's machine-checked kernel executed on the structural-biology certificates
+
+| | |
+|---|---|
+| Date | 2026-11-27 |
+| Question | does the verified function `verify` itself (not a Python mirror of it) accept the six stored certificates for the published integer tables? |
+| Method | a Lean program reads an instance and a certificate (our parser and translator; their conversion is not used), builds the kernel's objects and evaluates the kernel; digests of the instance as the kernel reads it are compared with the Python side; negative controls |
+| Finding about the kernel | `verify` takes time exponential in the length of an elimination chain (30 ms, 179 ms, 1.4 s, 6.2 s, 34 s for 9 … 21 eliminations): its domains are nested function updates that are re-evaluated at every lookup.  `verifyM` (domains copied into an array after every step) is **proved equal to `verify`** (`verifyM_eq`, checked by Lean at every run) |
+| Outputs | `experiments/eng/sb_review/results/kernel_0544ff4.json`, `kernel_small.json`, `kernel_run_*.log` |
+| Code | `experiments/eng/sb_review/lean_kernel/RunKernel.lean`, `export_for_kernel.py`, `make_small.py`, `collect.py` |
+| Result | all six accepted at exactly the witness's energy (3.3 to 44.9 s each), the bound plus one unit refused in all six, three corrupted inputs refused; on eight small cases `verify` and `verifyM` were both executed and agree.  ENG-RES-0019 §3 |
+| Limitation | an execution by Lean's interpreter, not a proof term; the reader is trusted up to the digests; token files and exported tables are not committed (regenerable; identified by checksums) |
+
+## X-018  An independent checker of the structural-biology division's partition-function certificates (subagent)
+
+| | |
+|---|---|
+| Date | 2026-11-27; stopped at the step in progress by the consolidation directive |
+| Method | a checker written from the docstrings and frozen before the implementation was read; differential testing on enumerable instances against a truth in ball arithmetic; adversarial variants; the certified exponential against two references |
+| Outputs | `experiments/eng/sb_zcheck/results/` |
+| Code | `experiments/eng/sb_zcheck/` (`indep_zcheck.py` frozen; `campaign_z5.py` **never run**), `tests/eng/test_sb_zcheck.py` |
+| Result | 96 559 certificates on 3 000 instances: no accepted interval misses the truth at default settings.  **F1: the float tier at `exp_bits` 990–991 accepts an interval 0.31 nats off** (reproduced by the coordinator: `f1_direct.py`).  Claim Z3 false as worded; loader exceptions; a certificate that exhausts the checker.  `experiments/eng/sb_zcheck/REPORT.md`; ENG-RES-0019 §4 |
+| Limitation | the checker (982 lines) is unread by the coordinator; claim Z5, rounding-mode and magnitude experiments not run |
+
+## X-019  GEOMETRY-REQ-0006: a certified global maximum on the 4-torus and a certified realisation in four dimensions (subagent)
+
+| | |
+|---|---|
+| Date | 2026-11-27 |
+| Method | Arb ball arithmetic (python-flint): branch and bound with vertex bounds for multi-affine forms, Krawczyk for the local step, a second certificate by reduction to two angles; Krawczyk on the 16 length equations; seven controls; 18 mutants |
+| Outputs | `experiments/eng/geometry_req6/results/` |
+| Code | `experiments/eng/geometry_req6/`, `tests/eng/test_geometry_req6.py` |
+| Result | instance A (couplings rounded to six decimals): the maximum `1.170178163968538…` is attained exactly at `±θ̂`; a realisation in `ℝ⁴` with fourth singular value `≥ 0.238`; controls as expected; 17 of 18 mutants killed, the survivor equivalent.  `experiments/eng/geometry_req6/REPORT.md`; ENG-MSG-0008 §4 |
+| Limitation | the coordinator re-ran tests and drivers and did not read the trusted core; the model identity at 111° is tested, not proved; instance B not examined |

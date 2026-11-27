@@ -431,3 +431,65 @@ positive result is not."
   fixed-sequence structural characterisation and inside the charter; nothing in D-7
   lifts the boundary on sequence engineering, target-specific functional optimisation or
   experiments.  Spending limits are unchanged ("Do not expand existing spending limits").
+
+## D-8 — Controlled consolidation and temporary research halt (2026-11-27, received about 01:00 UTC; with a clarification "graceful research wind-down")
+
+Addressed to all eight divisions.  "This directive supersedes all previous instructions
+to operate in continuous research, discovery, improvement, or evaluation loops until I
+explicitly authorize their resumption."  The shared reasoning-credit balance was "approximately
+$5,912.74 of the original $15,000 allocation" when it was written.  Operative content:
+
+1. **Suspend expansion**: "Do not initiate new speculative research directions,
+   mathematical workstreams, large literature investigations, software projects,
+   extensive benchmarking campaigns, or subagent investigations."  Identify active
+   subagents and tasks; "Permit completion only where a task is genuinely near completion
+   and materially contributes to an important result.  Otherwise, terminate or suspend it
+   safely."  "Unresolved problems should be documented accurately rather than pursued
+   indefinitely."
+2. **Finish and preserve**: a clean, reproducible, durable checkpoint; known correctness
+   defects; "Accurate identification of incomplete, conjectural, unreviewed, or potentially
+   incorrect results"; source, tests, raw results, reproduction instructions; collaboration
+   records and handoff.  "Do not manufacture proof closure where an argument remains
+   incomplete."
+3. **A critical research assessment** in `docs/collaboration/consolidation/<division>.md`:
+   executive assessment; up to five strongest contributions with prior art and evidence
+   for and against originality; negative results and rediscoveries; practical
+   opportunities; at most three recommended next actions; publication readiness.  "Do not
+   invent cost estimates when the necessary information is unavailable."  "Do not equate
+   formal verification with novelty."
+4. **This division**: "preserve reproducible benchmark evidence, identify actual
+   implementation bottlenecks, reconcile the compute ledger, and document the status of
+   every running Modal job."
+5. **Modal**: "Engineering may allow already authorized, bounded, useful Modal jobs to
+   finish without continuous Claude supervision where this is technically possible and
+   safe.  Do not launch new substantial Modal jobs under this directive.  Record running
+   jobs, remaining timeouts, worst-case outstanding expenditure, and the procedure for
+   collecting results later.  All existing budget limits remain binding."
+6. **Evaluation integrity**: "Do not open sealed held-out datasets, disclose credentials,
+   tune against held-out results, or compromise previously frozen evaluation protocols."
+7. **Final handoff and halt**: commit and push; update the status file and the digest;
+   "Send a final concise consolidation message"; report to the owner the final commit, the
+   strongest contributions, the most consequential unresolved problems, a recommendation,
+   and whether anything remains active.  "Do not start another research cycle.  Do not
+   automatically resume when another division sends a message.  Do not schedule additional
+   reasoning sessions.  Once consolidation is complete, terminate active reasoning and wait
+   for my explicit authorization before undertaking further work."
+
+The clarification: "not an instruction to abruptly interrupt valuable research"; finish
+what is "reasonably close to completion"; collect and review the results of subagents that
+are close to delivering; "Finish essential cross-divisional communications concerning
+discoveries, corrections, dependencies, and unresolved problems"; where something cannot
+be completed, "preserve the complete current argument, intermediate findings, attempted
+approaches, unresolved … steps, code, and precise instructions for resuming".  "Do not
+begin another autonomous research cycle after reaching this checkpoint."
+
+**What this division did with it** (the record is `docs/collaboration/consolidation/engineering.md`
+and ENG-MSG-0008): no new subagent, no new Modal job and no new experiment was started
+after the directive.  Finished because it was hours or minutes from a result: the two
+subagents then running (the checker of partition-function certificates, GEOMETRY-REQ-0006),
+each told to complete only the step in progress; the run of the machine-checked kernel on
+the structural-biology certificates (X-017); the reply to the structural-biology
+division's two requests (ENG-RES-0019).  Left running without supervision: the detached
+Modal runs of jobs M-016 and M-021, bounded by their timeouts (ledger).  **This directive
+is the operative one for any successor: do not resume the loop of D-3, D-6 or D-7 without
+the research owner's explicit authorisation.**

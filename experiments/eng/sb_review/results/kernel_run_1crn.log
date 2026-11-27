@@ -1,0 +1,52 @@
+file 1CRN.tokens
+n 26 k 82 den 8192 tokens 131156 certificate_tokens 65624 size 345
+claimed_bound -38248110/1
+verifyM_claimed_bound true
+verifyM_bound_plus_one_unit false
+ms_verifyM 3342 ms_verifyM_plus_one 2936
+witness_in_box true
+witness_energy -38248110/1
+digest_h 234165296693926
+digest_J 1342814643724229974
+non_integer_entries 0
+ms_rest 9725
+file 1CRN.bound.tokens
+n 26 k 82 den 8192 tokens 131156 certificate_tokens 65624 size 345
+claimed_bound -156664258559/4096
+verifyM_claimed_bound false
+verifyM_bound_plus_one_unit false
+ms_verifyM 2202 ms_verifyM_plus_one 2227
+witness_in_box true
+witness_energy -38248110/1
+digest_h 234165296693926
+digest_J 1342814643724229974
+non_integer_entries 0
+ms_rest 7054
+file 1CRN.witness-entry.tokens
+n 26 k 82 den 8192 tokens 131156 certificate_tokens 65624 size 345
+claimed_bound -38248110/1
+verifyM_claimed_bound false
+verifyM_bound_plus_one_unit false
+ms_verifyM 1702 ms_verifyM_plus_one 2144
+witness_in_box true
+witness_energy -38248111/1
+digest_h 234165296693924
+digest_J 1342814643724229974
+non_integer_entries 0
+ms_rest 9308
+file 1CRN.prune-order.tokens
+n 26 k 82 den 8192 tokens 131156 certificate_tokens 65624 size 345
+claimed_bound -38248110/1
+verifyM_claimed_bound false
+verifyM_bound_plus_one_unit false
+ms_verifyM 8 ms_verifyM_plus_one 8
+witness_in_box true
+witness_energy -38248110/1
+digest_h 234165296693926
+digest_J 1342814643724229974
+non_integer_entries 0
+ms_rest 7960
+
+real	6m44.592s
+user	1m25.896s
+sys	3m35.881s

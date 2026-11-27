@@ -1,0 +1,228 @@
+{
+ "k8": [
+  {
+   "name": "full box, states in order",
+   "domains": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "accepted": true,
+   "full_box": true,
+   "expected_full_box": true,
+   "as_expected": true,
+   "reason": "accepted"
+  },
+  {
+   "name": "full box, states in another order",
+   "domains": [
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "accepted": true,
+   "full_box": true,
+   "expected_full_box": true,
+   "as_expected": true,
+   "reason": "accepted"
+  },
+  {
+   "name": "one state of site 0 missing",
+   "domains": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "accepted": true,
+   "full_box": false,
+   "expected_full_box": false,
+   "as_expected": true,
+   "reason": "accepted"
+  },
+  {
+   "name": "the minimiser's state missing: a true bound on the sub-box that is false globally",
+   "domains": [
+    [
+     1,
+     2
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "accepted": true,
+   "full_box": false,
+   "expected_full_box": false,
+   "as_expected": true,
+   "reason": "accepted"
+  },
+  {
+   "name": "one state of site 1 missing",
+   "domains": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0
+    ]
+   ],
+   "accepted": true,
+   "full_box": false,
+   "expected_full_box": false,
+   "as_expected": true,
+   "reason": "accepted"
+  },
+  {
+   "name": "a single configuration",
+   "domains": [
+    [
+     2
+    ],
+    [
+     1
+    ]
+   ],
+   "accepted": true,
+   "full_box": false,
+   "expected_full_box": false,
+   "as_expected": true,
+   "reason": "accepted"
+  }
+ ],
+ "k5": [
+  {
+   "pdb_id": "1CRN",
+   "seed": 1,
+   "random": {
+    "n": 101,
+    "max_abs_diff": 17.1875,
+    "max_rel_diff": 1.9168217020802406e-13,
+    "max_abs_energy": 89666660082923.61,
+    "min_contact_ratio": 0.06657750531840066
+   },
+   "low_energy": {
+    "n": 101,
+    "max_abs_diff": 6.188827228470473e-12,
+    "max_rel_diff": 1.45208476435093e-11,
+    "max_abs_energy": 9.960015921263846,
+    "min_contact_ratio": 0.7550409116613418
+   },
+   "bonded_constant_max_spread": 1.2505552149377763e-12
+  },
+  {
+   "pdb_id": "1CRN",
+   "seed": 2,
+   "random": {
+    "n": 101,
+    "max_abs_diff": 0.00254058837890625,
+    "max_rel_diff": 5.24302396654942e-14,
+    "max_abs_energy": 76882847742.97383,
+    "min_contact_ratio": 0.11092177943325239
+   },
+   "low_energy": {
+    "n": 101,
+    "max_abs_diff": 7.897682507973514e-12,
+    "max_rel_diff": 8.980473802704418e-12,
+    "max_abs_energy": 9.985339196494067,
+    "min_contact_ratio": 0.7058995183374537
+   },
+   "bonded_constant_max_spread": 1.1084466677857563e-12
+  },
+  {
+   "pdb_id": "1CRN",
+   "seed": 3,
+   "random": {
+    "n": 101,
+    "max_abs_diff": 15.375,
+    "max_rel_diff": 2.3025746517517563e-13,
+    "max_abs_energy": 89669027671023.08,
+    "min_contact_ratio": 0.06227097103580681
+   },
+   "low_energy": {
+    "n": 101,
+    "max_abs_diff": 9.606537787476555e-12,
+    "max_rel_diff": 4.755097654587259e-12,
+    "max_abs_energy": 9.9447475728644,
+    "min_contact_ratio": 0.7058995183374537
+   },
+   "bonded_constant_max_spread": 1.0800249583553523e-12
+  },
+  {
+   "pdb_id": "1UBQ",
+   "seed": 1,
+   "random": {
+    "n": 101,
+    "max_abs_diff": 7864320.0,
+    "max_rel_diff": 9.644723518736717e-13,
+    "max_abs_energy": 5.93094872708035e+20,
+    "min_contact_ratio": 0.01748306047666284
+   },
+   "low_energy": {
+    "n": 101,
+    "max_abs_diff": 3.276312554589822e-11,
+    "max_rel_diff": 1.562324550575252e-09,
+    "max_abs_energy": 129.71006796171207,
+    "min_contact_ratio": 0.6515486722647469
+   },
+   "bonded_constant_max_spread": 5.286437954055145e-12
+  },
+  {
+   "pdb_id": "1UBQ",
+   "seed": 2,
+   "random": {
+    "n": 101,
+    "max_abs_diff": 7995392.0,
+    "max_rel_diff": 9.847506608322464e-13,
+    "max_abs_energy": 5.930948585943288e+20,
+    "min_contact_ratio": 0.01748306047666284
+   },
+   "low_energy": {
+    "n": 101,
+    "max_abs_diff": 3.1533886613033246e-11,
+    "max_rel_diff": 6.101105054783873e-10,
+    "max_abs_energy": 129.71006796171207,
+    "min_contact_ratio": 0.6278670380161955
+   },
+   "bonded_constant_max_spread": 4.149569576838985e-12
+  },
+  {
+   "pdb_id": "1UBQ",
+   "seed": 3,
+   "random": {
+    "n": 101,
+    "max_abs_diff": 7995392.0,
+    "max_rel_diff": 9.150640452402081e-13,
+    "max_abs_energy": 5.93094867608707e+20,
+    "min_contact_ratio": 0.01748306047666284
+   },
+   "low_energy": {
+    "n": 101,
+    "max_abs_diff": 2.802380549837835e-11,
+    "max_rel_diff": 4.75813649532492e-11,
+    "max_abs_energy": 129.71006796171207,
+    "min_contact_ratio": 0.6605630207150538
+   },
+   "bonded_constant_max_spread": 4.945377440890297e-12
+  }
+ ]
+}

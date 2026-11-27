@@ -1,7 +1,18 @@
 # Status of the Computational Research Division
 
-*Updated at checkpoint 6 of the engineering branch (2026-11-26/27; the commit time is
+*Updated at the consolidation checkpoint of the engineering branch (2026-11-27; the commit time is
 authoritative).  Branch `research/ubuntu-engineering`.*
+
+## HALTED (research owner's directive D-8, 2026-11-27)
+
+The division is in the controlled halt ordered by the research owner: no research loop, no new
+experiment, no new subagent, no new Modal job, and **no resumption when a message arrives** — only
+on the research owner's explicit authorisation.  The assessment of the division's work, the state of
+every open item and the record of what is still running are in
+`docs/collaboration/consolidation/engineering.md`; the final message is ENG-MSG-0008.  Still running:
+two detached Modal runs (jobs M-016, M-021; sixteen tasks) that end by themselves; how to collect
+them: `docs/engineering/COMPUTE_LEDGER.md`, "Jobs left running".  The tables below are the state at
+the halt; "in progress" means *stopped in that state*.
 
 ## Pins
 
@@ -12,7 +23,7 @@ authoritative).  Branch `research/ubuntu-engineering`.*
 | latest theory commit audited on the engineering machine | `9408e33` — `AUDIT PASSED` (2026-11-26 04:05 UTC, one hour on four threads): 69 Lean files, 37 543 lines, 4015 audited declarations, 504 headline theorems; full harness as expected; 435 mutations, 434 caught, 1 expected pass; 136 baseline runs as expected; 2377 declarations indexed by the document check (ENG-MSG-0004 §2) |
 | latest science commit read | `59e88bc` — SCI-REV-0018 with `R18_REPORT.md` §§2, 6; SCI-RES-0030; SCI-RES-0033; the section "Engineering division" of its digest.  Nothing else of the 20 new messages beyond titles (ENG-MSG-0007 §1) |
 | other branches read | ensemble `8d42f60`, geometry `288b2de` (GEOMETRY-REQ-0001 with the correction of GEOMETRY-MSG-0003; GEOMETRY-REQ-0006), complexity `1ba144d`: headers and what names engineering.  **Structural biology `720e0ec`: its software read in full and tested (ENG-RES-0018).**  Frontier benchmarking: no branch at 2026-11-26 22:41 UTC |
-| the research owner's directives | `docs/engineering/DIRECTIVES.md`, D-1 … D-7 (the last two: a seventh division whose software this division verifies; an eighth that designs evaluations, CASP17 feasibility) |
+| the research owner's directives | `docs/engineering/DIRECTIVES.md`, D-1 … D-8 (D-6, D-7: a seventh division whose software this division verifies; an eighth that designs evaluations, CASP17 feasibility; **D-8: controlled consolidation and halt — the operative one**) |
 | text that experiment X-010 implements | the referee's design of three levels, docstring of `experiments/reviews/R8/r8_flat3.py` at theory `9408e33`; Proposition K0 of `K_REPORT.md` |
 | text that experiments X-005, X-006, X-006b implement | `docs/workstreams/K_REPORT.md` §§2–3 at `63efc69`, with errata m1 and m10 of referee R8 |
 
@@ -24,9 +35,9 @@ authoritative).  Branch `research/ubuntu-engineering`.*
   contains unchanged; 45 Lean files, 3016 declarations).  Not repeated at checkpoint 4:
   no file outside `docs/collaboration/`, `docs/engineering/`, `src/metricchain_eng/`,
   `experiments/eng/`, `tests/eng/` and `modal_jobs/` was touched.
-* `python -m pytest tests/eng/test_certified.py tests/eng/test_chains.py tests/eng/test_geometry_req1.py tests/eng/test_hetero.py tests/eng/test_leafcert.py tests/eng/test_slices.py tests/eng/test_twolevel.py tests/eng/test_weighted_cube.py -q` **in one session**: 466 passed, 4 skipped (2026-11-26 23:45 UTC).  "In one session" matters: until checkpoint 6 one test failed whenever the weighted-cube tests were collected with it, because importing the Parma Polyhedra binding switches the process to upward rounding; the module now restores the mode and `tests/eng/conftest.py` guards it before and after every test.  Two further test files belong to work of subagents that is still in review and are not counted (`test_leafprod.py`, `test_level_rate.py`).
+* `python -m pytest tests/eng -q` **in one session** (2026-11-27 01:26 UTC, the whole directory, twelve test files): 570 passed, 4 skipped, 3 expected failures, 1 failure that is an artefact of the run.  The three expected failures stand for three findings in the structural-biology division's software (`tests/eng/test_sb_zcheck.py`; they need its commit `0544ff4` checked out beside the repository and are skipped without it).  The one failure, `test_c_parser_under_sanitizers` in `tests/eng/test_leafcert.py`, occurs only under an address-space limit (`ulimit -v`), which the sanitizer cannot work under; run alone without the limit it passes.  So: run the suite without `ulimit -v`, and expect 571 passed.  "In one session" matters: until checkpoint 6 one test failed whenever the weighted-cube tests were collected with it, because importing the Parma Polyhedra binding switches the process to upward rounding; the module now restores the mode and `tests/eng/conftest.py` guards it before and after every test.  Three of the twelve files test work of subagents (`test_leafprod.py`, `test_geometry_req6.py`, `test_sb_zcheck.py`): the tests pass; the code they test was not read by the coordinator.
 * `python experiments/eng/twolevel/three_levels.py --check`: the referee's 48 three-level numbers at the flat instance reproduced.
-* `make_tables_x011.py --verify` for ENG-RES-0015 and ENG-RES-0016, `make_tables_x005c.py --verify` for ENG-RES-0017, `experiments/eng/sb_review/make_tables.py --verify` for ENG-RES-0018: the tables of the messages equal the stored artifacts (the first two use the rows listed in `results/x011_published_rows.json`, so they keep holding while detached jobs append rows).
+* `make_tables_x011.py --verify` for ENG-RES-0015, ENG-RES-0016 and ENG-MSG-0008, `make_tables_x005c.py --verify` for ENG-RES-0017, `experiments/eng/sb_review/make_tables.py --verify` for ENG-RES-0018 and ENG-RES-0019: the tables of the messages equal the stored artifacts (the first two use the rows listed in `results/x011_published_rows.json`, so they keep holding while detached jobs append rows).
 * `python experiments/eng/chain_cover/run_lattice.py --check`: all published values of
   `P_REPORT.md` §3.3 for the lattice chain reproduced.
 * `python experiments/eng/twolevel/controls.py --theory <checkout of 63efc69>`: 324 + 18 published
@@ -87,14 +98,24 @@ First read at checkpoint 4.  Decisions with reasons: ENG-RES-0013 §§0, 6.
 | id | subject | decision | status |
 |---|---|---|---|
 | GEOMETRY-REQ-0001 items 1, 3 | the exact elimination for two states and ten atoms; replication of the exact ranks for `K = 2, 3, 4` | accepted | **completed** (`experiments/eng/geometry_req1/REPORT.md`; ENG-MSG-0007 §5): two reduced affine solutions and one point at infinity of multiplicity 5, found independently of the geometry division's own computation; every rank confirmed |
-| GEOMETRY-REQ-0006 (item 2 of -0001) | a certified global maximum on a 4-torus; a certified realisation in four dimensions | **accepted** | next on this line; local |
+| GEOMETRY-REQ-0006 (item 2 of -0001) | a certified global maximum on a 4-torus; a certified realisation in four dimensions | **accepted** | **completed for instance A** by a subagent (X-019; `experiments/eng/geometry_req6/REPORT.md`; ENG-MSG-0008 §4): both questions certified in ball arithmetic with the couplings rounded to six decimals; seven controls; the coordinator re-ran tests and drivers and did not read the trusted core.  Instance B not examined |
+
+## Requests received from the Structural & Computational Biology Division
+
+| id | subject | decision | status |
+|---|---|---|---|
+| STRUCTBIO-REQ-0001 items 1–3 | intake, reproduction, independent tests of capability C1 (claims K1–K8) | accepted | **completed** at `0544ff4` (ENG-RES-0019 §§1–3) |
+| STRUCTBIO-REQ-0001 item 4 | the held-out benchmark SB-BM-3 | accepted in principle | **not run**: the model was not frozen (v1 replaced by v2 the same day) and the list must come from the frontier division; then stopped by D-8 |
+| STRUCTBIO-REQ-0001 item 5 | proof logging (VeriPB/CakePB, exact SCIP/VIPR) on the same instances | accepted | **not started**; two points for its specification in ENG-RES-0019 §4 |
+| STRUCTBIO-REQ-0004 items 1, 2 | an independent checker of partition-function certificates; adversarial tests of Z1–Z5 | accepted | **done in part** by a subagent (X-018): Z1/Z2 at defaults and Z4 survive, a defect at `exp_bits` 990–991, Z3 false as worded, the Z5 campaign written and not run |
+| STRUCTBIO-REQ-0004 items 3, 4 | crambin at fine thresholds with populations, 5PTI, 1BPI; baselines | reviewed | **not run** (ENG-RES-0019 §4) |
 
 ## Assigned by the research owner (D-6, D-7)
 
 | what | status |
 |---|---|
-| independent verification of the structural-biology division's software, and review of its benchmark specifications | **first review done** at its first commit `720e0ec` (ENG-RES-0018): checker and producer survive; three findings as software.  Procedure: `docs/engineering/benchmarks/BENCHMARK_MASTER_PLAN.md` §3a.  Checked at every synchronisation |
-| coordination with the frontier-benchmarking division: CASP17 assessment feasibility; frozen, independently timestamped predictions | procedure written (`docs/engineering/benchmarks/PREDICTION_FREEZE.md`); what we need from that division is in ENG-MSG-0007 §2; its branch did not exist at 22:41 UTC.  At the reviewed commit no software exists that could produce a structure prediction, so nothing can be frozen yet |
+| independent verification of the structural-biology division's software, and review of its benchmark specifications | **stages S0–S3 done for capability C1 at `0544ff4`** (ENG-RES-0019, which corrects ENG-RES-0018): claims K1–K4, K6–K8 survive; the six stored certificates are accepted by our independent checker and by the theory division's kernel executed on them (X-017); **capability C2: an independent checker by a subagent (X-018) — one soundness defect at a non-default precision, claim Z3 false as worded, Z5 untested**.  Held-out benchmark, proof-logging comparison and long `ln Z` runs: reviewed, **not run** (ENG-RES-0019 §4).  New code of `41fa668` not reviewed |
+| coordination with the frontier-benchmarking division: CASP17 assessment feasibility; frozen, independently timestamped predictions | **agreed with its determination that nothing is mature enough for a CASP17 evaluation** (ENG-MSG-0008 §5); nothing was run and nothing exists to freeze; no sealed list was opened or asked for; our manual freeze procedure (`docs/engineering/benchmarks/PREDICTION_FREEZE.md`) defers to its tooling |
 
 ## Requests and questions sent to the other divisions
 
@@ -123,15 +144,13 @@ First read at checkpoint 4.  Decisions with reasons: ENG-RES-0013 §§0, 6.
 
 ## Compute
 
-Sessions 1–3: jobs M-001 … M-014, $8.73.  Session 4 (2026-11-26): M-015 … M-025, $13.07 by
-the billing report at checkpoint 6, with two app runs still open (M-016: six long tasks;
-M-020/M-021: eleven).  Credits consumed by the workspace: $55.39; billed cost $0.00.  One
-job cost more than the worst case entered for it (M-022: $2.48 against $2.28, restarted
-tasks); worst cases now count two attempts for tasks of an hour or more.  The research
-owner's authorisation (up to $1,750 of additional expenditure, a ceiling of about
-$1,791.41 of cumulative workspace usage, $200 of credits kept in reserve), our own
-ask-first line at $1,500, the launch test and every job are in
-`docs/engineering/COMPUTE_LEDGER.md`.  Nothing is deployed.
+25 jobs (M-001 … M-025), $24.10 for this division over all sessions by the billing report; credits
+consumed by the workspace $56.99 and billed cost $0.00 at 01:16 UTC on 2026-11-27; $15.58 of the
+$1,750 authorised by the research owner has been used.  **Left running under D-8: M-016 (six tasks)
+and M-021 (ten tasks)**, bounded by their timeouts (latest end 09:35 UTC on 2026-11-27 without
+platform restarts; worst case still to be spent $16.7).  M-020 is complete.  Limits, launch test,
+every job, the reconciliation and the commands to collect or stop the running jobs are in
+`docs/engineering/COMPUTE_LEDGER.md`.  Nothing is deployed and nothing is scheduled.
 
 ## Synchronisation log
 

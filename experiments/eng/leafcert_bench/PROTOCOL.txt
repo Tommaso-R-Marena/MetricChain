@@ -1,0 +1,298 @@
+PROTOCOL OF THE CERTIFICATE BENCHMARK (experiments/eng/leafcert_bench)
+Computational Research Division, 2026-11-26.  Protocol version 1.  The same protocol as data: config.py.
+
+Written BEFORE any run on the test seeds.  Sections 1-8 are not changed afterwards; anything that had to
+change is recorded in section 9, "Deviations", with the reason.
+
+Subject: what it costs to PRODUCE and to CHECK a "shares at the leaves" certificate (the format of
+src/metricchain_eng/leafcert) for the claim "min E = L" on a synthetic pairwise instance, against solving
+the minimisation exactly without a certificate.  Producer: src/metricchain_eng/leafprod.
+
+
+0. WHAT WAS KNOWN WHEN THIS WAS WRITTEN (so that the hypotheses can be judged)
+
+The producer, its defaults and this protocol were developed on instances with the master seed string
+"leafprod-dev" (indices 0-9 of some cells, including three trial runs of this benchmark's driver on the
+families band3, complete, chain and grid) and on small random instances of the test-suite.  No instance
+with the test master "leafcert-bench-v1" was solved before this file was written; one of them (grid, k = 3,
+n = 25, index 0) was generated, not solved, to pin the generator's checksum in the test-suite.  From the
+development runs (a few instances per cell, a machine shared with other jobs) the following was seen and
+shaped the hypotheses and the design:
+  * chains, trees and the attractive Potts grid were certified with one leaf at every size tried;
+  * the search is fast (integer message passing in C: a few hundred to a few thousand nodes per second) and
+    assembling plus checking the dense certificate took 3 to 10 times as long as the search whenever the
+    tree had more than about a hundred leaves; the Python engine was the slowest part;
+  * branching rule "strong" gave trees about half the size of "maxdeg"; a first rule ("probe": the site whose
+    children keep the least total gap according to the node's own messages) gave trees 10 to 100 times
+    larger on bands and grids and was removed; the leaf bound from the linear programme cost 10 to 1000
+    times more per node and gave smaller trees on complete graphs in the first runs, about equal ones in
+    the last trial (see H8);
+  * a decoding step had to be added: without it the search did not find the minimiser of a chain of 100
+    sites with 10 states and branched although the root bound was already the minimum;
+  * the size caps and the rules R1-R3 below were set after the trial runs showed what a cell costs: with
+    the first settings (general solvers on three instances of every ladder, the search without certificate
+    on every instance) two families alone took more than 16 minutes on two CPUs;
+  * CP-SAT with one worker and default parameters did not prove optimality within 20 s on a chain of 100
+    sites with 10 states; with linearization_level = 2 it was 5 to 15 times faster on the development
+    instances, and that setting is the baseline.  HiGHS as a mixed-integer solver was added as a second
+    general solver because it was faster than CP-SAT on most development instances.
+
+
+1. INSTANCES
+
+Generator: metricchain_eng.leafprod.families.make(family, n, k, seed), seed = families.seed_of(MASTER,
+family, k, n, index) = the first 8 bytes of sha256("MASTER|family|k=K|n=N|r=INDEX"), MASTER =
+"leafcert-bench-v1", index = 0 .. 9.  Random numbers come from random.Random(seed) of the standard library
+only.  Every instance's seed and a sha256 of its tables (families.digest) are stored with its results.
+
+Tables: integers.  In the families chain, tree, band2, band3, grid, cubic, complete every entry of every
+field H_i(a) and of every pair table J_ij(a, b) of an edge is uniform in {-1000, ..., 1000}, independently
+(random signed couplings; no structure, hence frustration wherever the graph has cycles).  potts: the grid
+with J_ij(a, b) = -w_ij [a = b], w_ij uniform in {1, ..., 1000}, and uniform fields in {-1000, ..., 1000}
+(attractive; the easy case).  Graphs: chain = path; tree = random recursive tree with shuffled labels;
+band2, band3 = pairs with |i - j| <= 2, 3; grid = rows x cols with open boundary, as square as n allows
+(6 = 2x3, 12 = 3x4, 25 = 5x5, 49 = 7x7, 100 = 10x10); cubic = random 3-regular graph (pairing model,
+loops and double edges rejected); complete = all pairs.
+
+Alphabets: k in {2, 3, 5, 10} for all sites, and "mixed": every site draws its alphabet uniformly from
+{2, 3, 5, 10}.
+
+Sizes (a "ladder" is a family with an alphabet, climbed in increasing n):
+  chain, tree, band2, band3:  6, 12, 25, 50, 100
+  grid, potts:                6, 12, 25, 49, 100
+  cubic:                      6, 12, 24, 50, 100
+  complete:                   6, 8, 10, 12, 16, 20, 24, 28, 32, 36
+8 families x 5 alphabets = 40 ladders; 10 instances per cell.
+
+
+2. WHAT IS RUN ON AN INSTANCE (main pass)
+
+(P) The producer: produce(instance, bound="mp", branching="strong", order="best", seed=0, partial=False),
+    i.e. integer message passing for the leaves, strong branching, best-first search; target L = min E.
+    Limits: 60 s for the search; at most 2,000,000 integers in the leaf certificates; at most 20,000,000
+    checker operations (additions plus comparisons, the checker's own closed formula); at most 10^6 leaf
+    boxes (not expected to bind).  The search stops as soon as the finished tree is known to exceed a cap
+    (open nodes counted with what they need at least), so that a failure is cheap.  The two size caps are a
+    budget decision: on this machine a certificate at the caps takes about 20 to 40 s to assemble and to
+    check with both engines (the Python engine about 12 s for the operations alone), and the whole
+    benchmark has two hours.  "Certified" means: produce() returned status "certified", which it does only
+    after BOTH engines of the checker accepted the assembled object with identical counts.  A run that
+    hits any limit is a failure and is counted as one.
+    Measured: time of the search, of assembling, of check(obj, "c"), of check(obj, "python"), their sum;
+    time of leafcert.c alone on its text encoding (best of 3); nodes, leaf boxes, distinct leaf
+    certificates, depth; integers of the certificate and of the instance; checker operations; bytes of the
+    compact JSON; the same counts for a hypothetical sparse variant of the format (formats.py); peak
+    resident memory of the run (VmHWM, reset before the run).
+(S) The same search without certificate: produce(..., certificate=False), 60 s, no size cap.  It visits the
+    same nodes; nothing is stored, assembled or checked.  It isolates what the certificate itself costs,
+    and it says how large the certificate would have been where the producer stopped at a cap.
+(D) Dynamic programming (variable elimination, exact.eliminate) if the largest table of the greedy
+    elimination order has at most 2^23 entries.  Exact; no proof left behind.
+(B) Enumeration (exact.brute_force) if the domain has at most 2^24 states.  Ground truth.
+(C) OR-tools CP-SAT 9.15, one worker, linearization_level = 2, a Boolean per (site, state) and per
+    (edge, state, state) tied by the equalities of the pairwise relaxation; 60 s.  It proves optimality
+    internally and leaves no proof that our checker can verify.
+(M) HiGHS as a mixed-integer solver (scipy.optimize.milp) on the same relaxation with integral site
+    marginals, relative gap 0; 60 s.  Same remark.
+(R) The pairwise relaxation at the root (scipy linprog, HiGHS dual simplex, 20 s): its value, for the gap
+    "optimum minus relaxation".
+
+Rules that keep the benchmark within its time (all fixed here, none decided after seeing results):
+  R1  (C) and (M) are run on the instances 0 and 1 of a cell only, and only on the ladders with k in {2, 3}
+      and on the ladders with k = 5 of chain, grid and complete.  A general solver leaves a ladder after its
+      first time-limit hit.  (Development: for k = 10 they need seconds per instance already at n = 6.)
+  R2  (S) is run on every instance the producer certified and on the first three instances of a cell that
+      it did not certify.  It stops within a cell after two time-limit hits (the remaining instances of the
+      cell are not run with it) and then leaves the ladder; it also leaves the ladder if it solved fewer
+      than half of the instances it was run on.
+  R3  (P) is run on all 10 instances of a cell.  It leaves the ladder after a cell in which it certified
+      fewer than 5 of 10.  Cells of the ladder after that are "extension cells": instances 0-2 only, the
+      baselines that are still on the ladder, no producer.
+  R4  A ladder ends when neither (P) nor (S) is on it, or at its last size.
+  R5  Budget rule.  Cells are scheduled level by level (all ladders at their first size, then all at their
+      second, ...; within a level in the order chain, tree, potts, grid, cubic, band2, band3, complete and
+      k = 2, 3, 5, 10, mixed), on two worker processes.  No new cell of the main pass is started after 64
+      minutes of wall time; a started cell is finished.  Cells not started are reported as "not run
+      (budget)", never as failures or successes.
+  R6  Every instance that was run is reported.  No instance, cell or solver result is dropped.
+
+Consistency: all exact values obtained for an instance (certified L, (S), (D), (B), (C), (M)) must be equal,
+and no solver may report a state below them.  Any disagreement is reported as an error of the benchmark.
+
+
+3. COMPARISON PASS (leaf-bound methods and branching rules), 20 minutes, same budget rule
+
+Searches without certificate on instances of the main pass (same seeds), 60 s each; a configuration stops in
+a cell after two time-limit hits.
+  Branching rules, bound "mp", all 10 instances: strong (main), maxdeg, margin, maxdom, and strong with
+  share=False, on the cells
+      band3 k=3 n=50, band3 k=5 n=50, band2 k=5 n=50, grid k=5 n=49, cubic k=5 n=50, complete k=2 n=20,
+      complete k=3 n=12, complete k=5 n=10, complete k=10 n=8, complete mixed n=12, grid mixed n=49,
+      band3 k=2 n=50, band2 k=3 n=50, grid k=3 n=49, grid k=10 n=49, cubic k=3 n=50, potts k=5 n=49.
+  Leaf-bound methods, instances 0-4: mp/strong, lp/strong (the linear programme, rounded), hybrid/strong,
+  lp/frac, on the cells (smaller, because one linear programme per node is slow)
+      complete k=2 n=20, complete k=3 n=12, complete k=5 n=8, band3 k=3 n=25, band3 k=5 n=25,
+      band2 k=5 n=25, grid k=5 n=25, grid k=10 n=25, cubic k=5 n=24.
+  On the instances 0 and 1 of these nine cells lp/strong and hybrid/strong are also run as producers (same
+  caps), so that certificates from rounded linear programmes are built and checked, not only counted.
+Order of the cells: the nine bound cells first, then the remaining rule cells as listed.
+
+
+4. SECOND PASS (600 s), 16 minutes, same budget rule
+
+For each entry of the list below, in this order: the first cell of the ladder in which the solver missed an
+instance in the main pass, and the first two instances it missed there; that solver alone, 600 s; the
+producer with the caps raised five-fold (10,000,000 integers, 100,000,000 operations).
+    complete k=2: search without certificate; complete k=2: producer; band3 k=3: producer;
+    complete k=2: MILP; complete k=2: CP-SAT; complete k=5: producer; complete k=5: search; grid k=5: producer.
+The purpose is to see whether ten times the time (and five times the certificate) moves the frontier.
+
+
+5. MACHINE AND LIMITS
+
+One laptop CPU (4 cores, 8 threads), shared with other jobs of the project during the runs: timings are
+noisy and are reported as medians with ranges; the load average is recorded at the start and the end of
+each pass.  Two worker processes, each pinned to one logical CPU (5 and 7, different cores), one thread
+each (OMP/BLAS thread variables set to 1; CP-SAT num_workers = 1), address space limited to 3 GiB per
+worker; with the caps a worker is expected to stay below 1 GiB resident.  Wall time: 64 + 20 + 16 minutes
+plus the cells in progress when a budget ends; target at most two hours in all.
+
+Reproducibility: with the caps, whether an instance is certified does not depend on timing unless the 60 s
+search limit is hit (expected: never for the producer).  Certificates are deterministic; their sha256 is
+stored.
+
+
+6. HYPOTHESES (stated before the runs; each is checked by make_tables.py, section "numbers for the hypotheses")
+
+H1  Forests.  Every chain and tree instance (500) is certified with exactly one leaf box.  At n = 100 the
+    search is the smaller part of the producer's time (assembling and checking take more than half), the
+    producer needs less than 5 s per instance even for k = 10, and dynamic programming is at least 10 times
+    faster than producing and checking (median).
+H2  Potts grid.  k = 2: all 50 instances with one leaf.  k >= 3 and mixed: all instances certified, and at
+    least 8 of 10 instances of every cell with one leaf.
+H3  Sparse frustrated families (grid, cubic, band2, band3).
+    (a) every instance with n <= 12 is certified;
+    (b) the median number of leaf boxes does not decrease with n in any ladder, and in band3 (k >= 3) and
+        band2 (k >= 5) it grows by more than a factor 4 from n = 25 to n = 50;
+    (c) the producer leaves the ladder (fewer than 5 of 10 certified) at n = 100 or earlier in band3 with
+        k = 3, 5, 10, in band2 with k = 5, 10 and in grid with k = 10; it certifies at least 8 of 10 at
+        n = 100 in grid k = 2, cubic k = 2 and cubic k = 3;
+    (d) where the producer fails in these families the cause is a size cap, not the 60 s limit, and the
+        search without certificate solves the same instance within 60 s.
+H4  Complete graphs.
+    (a) the relaxation is far from tight: the relative gap (optimum - relaxation) / |optimum| exceeds 20 %
+        for every instance with k = 2 and n >= 16;
+    (b) the median number of leaf boxes grows geometrically with n: by a factor between 1.2 and 1.6 per
+        added site for k = 2, and by more than 1.6 per site for k = 5;
+    (c) the producer leaves the ladder at n = 32 for k = 2 (at least 5 of 10 certified at n = 28), at n = 16
+        for k = 5, and at n = 10 or n = 12 for k = 10;
+    (d) at the size where the producer leaves, the search without certificate still solves at least half
+        of the instances within 60 s.
+H5  Cost of the certificate.  For certified instances with more than 100 leaf certificates, assembling and
+    checking take longer than the search in at least 90 % of the instances and at least twice as long in
+    the median, and the Python engine takes more than half of the time after the search (median).
+H6  Checking.  leafcert.c alone checks every certificate of the benchmark in less than 1 s.  In
+    check(obj, "c") more than 80 % of the time is strict loading and encoding on the Python side, not
+    leafcert.c (median over certificates with at least 10^5 operations).  Per operation the Python engine is
+    20 to 100 times slower than leafcert.c.
+H7  Density (arithmetic, stated in advance).  At n = 100 a dense leaf certificate of a chain with k = 10 has
+    104,050 integers against 2,179 in a sparse variant (48 times); on the 10 x 10 grid with k = 10, 104,050
+    against 3,880 (27 times); on complete graphs the two are equal.  Consequence expected in the data: at
+    n = 100, at least 80 % of the producer's failures are stops at the integer cap while the search itself
+    completes.
+H8  Leaf-bound methods.  With the same branching rule the two leaf bounds give trees of similar size: the
+    median ratio of leaf boxes lp/mp lies between 0.5 and 2 in every one of the nine cells (the last trial
+    on development seeds showed ratios of 1.0 to 1.15 on complete graphs; an earlier impression that the
+    programme gives clearly smaller trees there did not survive it).  The lp search is slower than the mp
+    search in every cell, at least 5 times in the median.  hybrid/strong has tree sizes within 20 % of
+    lp/strong (median) at a time between the two.  The value lost by rounding the programme's multipliers
+    at the root is below 20 units in the median in every cell.
+H9  Branching rules.  "strong" has the smallest median number of leaf boxes in at least 13 of the 17 cells,
+    at no more than 3 times the search time of "maxdeg" (median).  "maxdom" produces exactly the trees of
+    "maxdeg" on uniform alphabets (true by construction: a consistency check) and trees at least 1.5 times
+    larger on the two mixed cells (median).
+H10 Baselines.
+    (a) dynamic programming applies to every chain, tree, band2 and band3 instance and is the fastest exact
+        method on at least 90 % of those with n >= 50;
+    (b) on complete graphs with n >= 16 the search without certificate is faster than MILP and than CP-SAT
+        in the median, in every cell where they are run;
+    (c) CP-SAT leaves the complete ladders (first 60 s hit) at a smaller n than the search does;
+    (d) for certified band2 and band3 instances that needed branching, producing and checking takes at
+        least 10 times as long as the fastest exact baseline (median): an order of magnitude or more.
+H11 Shared leaves.  For k = 2 the number of leaf certificates equals the number of leaf boxes in every
+    instance.  For k = 10 sharing saves between 5 % and 30 % of the leaf certificates (distinct certificates
+    against leaf boxes, summed over the certified instances with at least two leaf boxes): a modest saving.
+H12 Exploratory, no threshold: how often the relaxation is tight at the root (LP value = optimum) while the
+    producer still needs more than one leaf -- integer messages at zero margin, or the ascent stalling
+    below the programme's value.
+H13 Memory.  No producer run exceeds 1 GiB of resident memory.
+
+Expected failure modes of the producer, to be counted: integer cap; operation cap; 60 s search limit
+(expected: none); a certificate rejected by the checker (expected: none; would be a defect); inconsistent
+exact values (expected: none).
+
+
+7. ANALYSIS
+
+Per cell: number certified out of 10 and the reasons of the failures; median and range (minimum-maximum)
+of leaf boxes, leaf certificates, depth, integers, bytes, and of the times (producer: over the certified
+instances; baselines: over the instances they solved, with the count solved / attempted).  Ratios are
+computed per instance and summarised by median and range.  Growth factors per site are computed from the
+median leaf boxes of the search without certificate at the first and the last size of a ladder at which
+it solved all instances and the median exceeds 1 (descriptive, two points; no model is fitted).  No
+significance tests: the statements are about counts and medians of 10 instances per cell, and the cell
+tables give the ranges.  Exact (integer arithmetic, accepted by the checker): every "certified", every
+count of boxes, certificates, integers and operations, every agreement of exact values.  Measured: every
+time and memory figure.  Conjectured: anything said beyond the sizes that were run.
+
+Tables: python experiments/eng/leafcert_bench/make_tables.py regenerates every table of the report from
+results/main, results/compare, results/long and writes results/tables.txt; --verify compares.
+
+
+8. COMMANDS
+
+  source "$HOME/.venvs/metricchain/bin/activate"
+  python -m pytest tests/eng/test_leafprod.py -q
+  python experiments/eng/leafcert_bench/run_bench.py main
+  python experiments/eng/leafcert_bench/run_bench.py compare
+  python experiments/eng/leafcert_bench/run_bench.py long
+  python experiments/eng/leafcert_bench/make_tables.py
+
+
+9. DEVIATIONS AND ADDITIONS (written after the runs, 2026-11-27)
+
+Sections 0-8 are as they were before the first run on the test seeds (sha256 of this file at that time:
+40432dfaf78bae04...; of config.py: c870885c2f57e152..., unchanged since).  No rule was changed and no budget
+was reached:
+  main pass        2047 s of wall time (budget for starting cells: 3840 s): 211 cells, i.e. every cell that
+                   the rules R1-R4 allowed; none was cut by the budget rule R5.
+  comparison pass   526 s (budget 1200 s): all 24 cells.
+  second pass       175 s (budget  960 s): all 10 tasks that the rule of section 4 produced (for four of
+                   its eight entries the solver had missed one instance or none in the main pass).
+  The three passes together: 2748 s, started 2026-11-26 23:17 UTC, finished 2026-11-27 00:03 UTC.
+
+Additions after the freeze (neither changes a stored number of the three passes):
+  A1  integrality_probe.py and results/exploratory_integrality.json: an exploratory look at H12 (why does
+      the producer branch when the relaxation is tight at the root?).  Not a test stated in advance.
+  A2  make_tables.py was extended after the first results had been seen: the compact tables per family,
+      the column "ended by" of the overview, the table of the exploratory probe, and the way the numbers
+      for H3-H13 are printed.  It only reads the stored results.
+
+  A3  A spot re-run after the passes, nothing stored: one randomly chosen instance of each of the 199
+      cells with producer runs was regenerated and produced again with the settings of section 2.  The
+      checksum of every instance, the status of every run (199 of 199) and the sha256 of every certificate
+      (186 of 186 certified) were the same as in the main pass.
+
+What did not go as this protocol assumed:
+  B1  H7 expected the integer cap to be the usual stop at n = 100; the operation cap was (31 of 48 stops).
+      Both caps were fixed in advance; the expectation was wrong, not the rule.
+  B2  Because of rule R2, "the search without certificate solves the instance" (H3d, H4d, H7) could be
+      checked only on the first three uncertified instances of a cell (45 of the 101 failures in the sparse
+      frustrated families).
+  B3  The machine was less loaded than during development (load average 7.3 at the start of the main
+      pass and 2.8 at its end; 2 to 3 during the other two passes; 9 to 14 during the trial runs).  The
+      passes therefore ended far inside their budgets, and times are not comparable with the trial runs.
+  B4  An operator error without effect on the data: a shell command queued to start the comparison pass
+      after the main pass waited on a condition that could never become true and was killed before it had
+      started anything; a corrected command then ran the comparison pass, the second pass and the probe in
+      the order of section 8.

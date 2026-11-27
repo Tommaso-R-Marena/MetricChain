@@ -1,5 +1,11 @@
 # Freezing predictions: what makes a prediction artifact evidence
 
+> **State at the consolidation halt (2026-11-27).**  Nothing was ever frozen under this procedure: no MetricChain
+> implementation was mature enough to produce a prediction, and this division agrees with the Frontier Benchmarking
+> Division's determination (ENG-MSG-0008 §5).  That division has since built tooling for freezes (normal-form manifests,
+> RFC 3161 time-stamps, salted commitments; on its branch).  When there is something to freeze, use its tooling and its
+> protocols; what follows is kept as the record of what this division would have done by hand.
+
 Authority: directive D-7 of the research owner (2026-11-26; `docs/engineering/DIRECTIVES.md`):
 "Preserve independently timestamped prediction artifacts and exact computational
 provenance."  "Maintain strict distinctions between genuine blind assessment,

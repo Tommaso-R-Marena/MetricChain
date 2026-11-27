@@ -51,3 +51,16 @@ predictions wrong (H3, H13) and one refuted at one slope (H9); weak negative con
 and a simulator without a tie rule (found by our referee before publication); a job that
 cost more than its stated worst case (M-022); a library that changes the rounding mode
 of the process (found by a failing test).
+
+## Added at the consolidation halt (2026-11-27)
+
+| benchmark | result | status | where |
+|---|---|---|---|
+| BM-7, stages S0–S3: the structural-biology `min` certificates at `0544ff4` | 22 472 adversarial claims, three checkers agree, no unsound acceptance; the six stored certificates accepted by an independent checker and by the theory division's kernel executed on them (3.3–44.9 s each); six optima equal toulbar2's (0.006–0.64 s) | development instances only; held-out stage **not run** | ENG-RES-0019; X-016, X-017 |
+| the kernel `verify` as an executable | time grows about 1.8-fold per elimination in a chain (34 s at 21 eliminations); a memoised twin proved equal runs real certificates in seconds | a defect of performance, reported to the theory division | ENG-MSG-0008 §2 |
+| partition-function certificates (capability C2), small enumerable instances | 96 559 certificates: no accepted interval misses the truth at default settings; **the float tier at `exp_bits` 990–991 accepts an interval 0.31 nats off**; claim Z3 false as worded | subagent; one finding reproduced by the coordinator; claim Z5 untested | X-018 |
+| BM-1, stage 2 (X-011): both rules of design, three slopes | complete (288 cells); H14 holds at `u = ½, 1, 2` at `n = 16 000`; no searched cost above a certified bound | published | ENG-RES-0015; ENG-MSG-0008 §2 |
+| BM-6 (X-014): literal runs with the tie rule | 64 800 runs with the theorem's constants: 0 invalid, 0 aborted | published | ENG-MSG-0008 §2 |
+| GEOMETRY-REQ-0006 | instance A certified in ball arithmetic | subagent; reproduction checked | X-019 |
+| producing leaf certificates against exact solvers | 15 % of the time is search, 85 % certificate; dynamic programming 55–89 times faster on banded chains; the limit is certificate size | subagent; **unreviewed** | `experiments/eng/leafcert_bench/REPORT.md` |
+| not run | the held-out benchmark SB-BM-3; proof logging (VeriPB/CakePB); the long `ln Z` runs; anything for CASP17 | — | ENG-RES-0019 §4 |

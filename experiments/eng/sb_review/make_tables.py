@@ -119,12 +119,133 @@ def build() -> dict[str, str]:
     return blocks
 
 
+HEAD = RES / "head_0544ff4"
+
+
+def build_head() -> dict[str, str]:
+    """Blocks of ENG-RES-0019: the same tests, and the checks of the stored files, at the division's commit 0544ff4."""
+    blocks: dict[str, str] = {}
+
+    def hp(name):
+        f = HEAD / name
+        return json.loads(f.read_text()) if f.exists() else None
+
+    a = hp("mincert_part_a.json")
+    if a:
+        a = a["result"]
+        blocks["sbh_a"] = (f"{a['cases']:,} claims on random certificate trees at `0544ff4`: accepted {a['sb_accept']:,}, rejected {a['sb_reject']:,}; disagreements with our "
+                           f"checker {a['disagree_ours']}; with the reference checker after conversion {a['disagree_reference']} of {a['reference_checked']:,}; acceptances above "
+                           f"the true minimum {a['unsound_sb']}.")
+    b, c = hp("mincert_part_b.json"), hp("mincert_part_c.json")
+    if b:
+        b = b["result"]
+        blocks["sbh_b"] = f"{len(b)} traps at `0544ff4`: {sum(1 for r in b if r['as_expected'] and not r['unsound'])} behave as they should; unsound acceptances {sum(1 for r in b if r['unsound'])}."
+    d = hp("mincert_part_d.json")
+    if d:
+        d = [r for r in d["result"] if r["name"] != "the unchanged document"]
+        still = [r for r in d if r["their_loader"] == "loaded"]
+        blocks["sbh_d"] = (f"Of the {len(d)} altered documents of ENG-RES-0018 §2 (F2), the loader of `0544ff4` refuses {sum(1 for r in d if r['their_loader'].startswith('raises MalformedCertificate'))} "
+                           f"with `MalformedCertificate` and raises another exception for {sum(1 for r in d if r['their_loader'].startswith('raises') and 'MalformedCertificate' not in r['their_loader'])}; "
+                           f"still loaded: {len(still)}" + (" (" + "; ".join(r["name"] for r in still) + ")" if still else "") + ".")
+    e = hp("mincert_part_e.json")
+    if e:
+        e = e["result"]
+        R = e["random"]
+        blocks["sbh_e"] = (f"The producer at `0544ff4`, the short version of the tests of ENG-RES-0018 §1 E: {R['instances']} random instances against enumeration — wrong optimum "
+                           f"{R['wrong_optimum']}, rejected {R['rejected']}, raised {sum(R['raised'].values())}; with a tolerance {e['tolerance']['instances']} instances, "
+                           f"{e['tolerance']['bad']} bad; degenerate instances {sum(1 for x in e['degenerate'] if x['correct'])} of {len(e['degenerate'])} exact; trees "
+                           f"{sum(1 for x in e['trees'] if x.get('correct'))} of {len(e['trees'])} exact against dynamic programming; dense instances "
+                           f"{sum(1 for x in e['dense'] if x.get('correct'))} of {len(e['dense'])} exact against enumeration.")
+    dp = hp("depth.json")
+    if dp:
+        lines = ["| chain: sites × states | eliminations | `dumps` | `loads`, then checked | `to_metricchain_cert1` | file, bytes |", "|---|---|---|---|---|---|"]
+        for r in dp["rows"]:
+            lines.append(f"| {r['sites']} × {r['states']} | {r['prune']:,} | {r['dumps']} | {r.get('loads', '—')} | {r['to_metricchain_cert1']} | {r.get('bytes', 0):,} |")
+        blocks["sbh_depth"] = "\n".join(lines)
+    f = RES / "dev_certificates_0544ff4.json"
+    if f.exists():
+        rows = json.loads(f.read_text())
+        order = ["1CRN", "5PTI", "1BPI", "1PGA", "2IGD", "1UBQ"]
+        rows.sort(key=lambda r: order.index(r["pdb_id"]) if r["pdb_id"] in order else 99)
+        lines = ["| structure | sites / states / pair tables | checksum of the tables = the file's = your row's | our checker | the tree proves (kcal/mol) | = your certified minimum | witness energy − bound | nodes: leaves / branches / eliminations (yours) | our check, s (yours) | toulbar2 through our own call: optimum equal; s |",
+                 "|---|---|---|---|---|---|---|---|---|---|"]
+        for r in rows:
+            unit = 2 ** r["unit_bits"]
+            st, ts = r["stats"], r.get("their_stats", {})
+            lines.append(f"| {r['pdb_id']} | {r['sites']} / {r['states_total']} / {r['pairs']} | {'yes' if r['checksum_matches_certificate'] and r.get('their_model_sha256_matches') else '**NO**'} | "
+                         f"{'accepted, full box' if r['accepted'] and r['full_box'] else r['reason']} | {r['proves'] / unit:.6f} | {'yes' if r['proves'] == r['claimed_lower_bound'] else '**NO**'} | "
+                         f"{r.get('gap')} | {st['leaf']} / {st['branch']} / {st['prune']} ({ts.get('leaf')} / {ts.get('branch')} / {ts.get('prune')}) | {r['seconds']} ({r.get('their_check_seconds')}) | "
+                         f"{'yes' if r.get('toulbar2_equals_certified') else '**NO**'}; {r.get('our_toulbar2_seconds')} |")
+        blocks["sbh_files"] = "\n".join(lines)
+        blocks["sbh_files_summary"] = (f"{len(rows)} stored certificate files: {sum(1 for r in rows if r['accepted'] and r['full_box'])} accepted on the full box by our checker; "
+                                       f"{sum(1 for r in rows if r['proves'] == r['claimed_lower_bound'] and r.get('gap') == 0)} with the tree proving exactly the claimed bound and a witness "
+                                       f"of that energy; {sum(1 for r in rows if r.get('toulbar2_equals_certified'))} with the same optimum from toulbar2 called by us; "
+                                       f"{sum(1 for r in rows if r.get('their_cert_sha256_matches'))} files with the checksum your rows record.")
+    pr = RES / "probe_head_0544ff4.json"
+    if pr.exists():
+        pv = json.loads(pr.read_text())
+        k8 = pv["k8"]
+        blocks["sbh_k8"] = (f"`full_box` on {len(k8)} hand-made boxes (the full box in order and permuted; boxes missing one state of either site, the minimiser's state, all but one "
+                            f"configuration): {sum(1 for r in k8 if r['as_expected'])} of {len(k8)} as they should be.")
+        lines = ["| structure | seed | low-energy configurations: number; largest `|ΔE_table − ΔE_OpenMM|`, kcal/mol; closest contact `r/σ` | random configurations: number; largest relative difference; largest `|ΔE|`, kcal/mol; closest contact | spread of the bonded terms, kcal/mol |",
+                 "|---|---|---|---|---|"]
+        for r in pv["k5"]:
+            lo, ra = r["low_energy"], r["random"]
+            lines.append(f"| {r['pdb_id']} | {r['seed']} | {lo['n']}; `{lo['max_abs_diff']:.1e}`; {lo['min_contact_ratio']:.2f} | {ra['n']}; `{ra['max_rel_diff']:.1e}`; `{ra['max_abs_energy']:.1e}`; "
+                         f"{ra['min_contact_ratio']:.3f} | `{r['bonded_constant_max_spread']:.1e}` |")
+        blocks["sbh_k5"] = "\n".join(lines)
+    ks = RES / "kernel_small.json"
+    if ks.exists():
+        rows = json.loads(ks.read_text())
+        chains = sorted((r for r in rows if r["name"].startswith("chain") and "ms_verify" in r["lean"]), key=lambda r: r["prune"])
+        lines = ["| instance (chain of sites with 4 states) | eliminations in the chain | `verify`, ms | `verifyM`, ms | both accept the claimed bound | both digests equal the Python side's |",
+                 "|---|---|---|---|---|---|"]
+        for r in chains:
+            L = r["lean"]
+            lines.append(f"| {r['sites']} sites | {r['prune']} | {L['ms_verify']:,} | {L['ms_verifyM']} | {'yes' if L['verify_claimed_bound'] and L['verifyM_claimed_bound'] else '**NO**'} | "
+                         f"{'yes' if r['digest_h_matches'] and r['digest_J_matches'] else '**NO**'} |")
+        dense = [r for r in rows if r["name"].startswith("dense")]
+        ratio = [chains[i + 1]["lean"]["ms_verify"] / chains[i]["lean"]["ms_verify"] for i in range(len(chains) - 1)]
+        blocks["sbh_kernel_plain"] = "\n".join(lines) + (
+            f"\n\nEach row has three eliminations more than the one above; the time of `verify` grows by factors of " + ", ".join(f"{x:.1f}" for x in ratio) +
+            f" (doubling per elimination would be 8).  On {len(dense)} branching instances from your producer ({min(r['leaf'] for r in dense)}–{max(r['leaf'] for r in dense)} leaves, "
+            f"chains of at most {max(r['prune'] for r in dense)} eliminations in total) both functions were executed as well: "
+            f"{sum(1 for r in dense if r['lean'].get('verify_claimed_bound') and r['lean']['verifyM_claimed_bound'])} of {len(dense)} accepted by both; in all "
+            f"{len(rows)} small cases `verifyM` refuses the claimed bound plus one unit in {sum(1 for r in rows if r['lean']['verifyM_bound_plus_one_unit'] is False)} "
+            f"and the kernel's own energy of the witness equals the bound in {sum(1 for r in rows if r['witness_energy_equals_bound'])}.")
+    kf = RES / "kernel_0544ff4.json"
+    if kf.exists():
+        rows = json.loads(kf.read_text())
+        order = ["1CRN", "5PTI", "1BPI", "1PGA", "2IGD", "1UBQ"]
+        real = sorted((r for r in rows if r["corrupt"] is None), key=lambda r: order.index(r["name"]) if r["name"] in order else 99)
+        lines = ["| structure | sites / `k` | leaves / branches / eliminations | `verifyM` (= `verify`) on the claimed bound | on the bound plus one unit | witness in the box; its energy by the kernel's `energy` = the bound | digests of the instance as the kernel reads it = the Python side's (unary; pair) | `verifyM`, s |",
+                 "|---|---|---|---|---|---|---|---|"]
+        for r in real:
+            L = r["lean"]
+            if "error" in L:
+                lines.append(f"| {r['name']} | {r['sites']} / {r['states_max']} | {r['leaf']} / {r['branch']} / {r['prune']} | **not run: {L['error']}** | | | | |")
+                continue
+            dj = "not computed" if r["digest_J_matches"] is None else ("yes" if r["digest_J_matches"] else "**NO**")
+            lines.append(f"| {r['name']} | {r['sites']} / {r['states_max']} | {r['leaf']} / {r['branch']} / {r['prune']} | {'**accepted**' if L['verifyM_claimed_bound'] else '**REFUSED**'} | "
+                         f"{'refused' if L['verifyM_bound_plus_one_unit'] is False else '**ACCEPTED**'} | {'yes' if L['witness_in_box'] else '**NO**'}; "
+                         f"{'yes' if r['witness_energy_equals_bound'] and r['witness_energy_matches'] else '**NO**'} | {'yes' if r['digest_h_matches'] else '**NO**'}; {dj} | {L['ms_verifyM'] / 1000:.1f} |")
+        blocks["sbh_kernel"] = "\n".join(lines)
+        ctrl = [r for r in rows if r["corrupt"] is not None]
+        if ctrl:
+            names = {"bound": "the claim raised by one unit of `2⁻¹²` of a table unit", "witness-entry": "one table entry used by the witness lowered by one unit (the witness then lies below the claim)",
+                     "prune-order": "the eliminations of the chain in reverse order"}
+            blocks["sbh_kernel_controls"] = ("Negative controls on " + ctrl[0]["name"].split(".")[0] + " (the translator alters its output; the kernel must refuse): " +
+                                             "; ".join(f"{names.get(r['corrupt'], r['corrupt'])} — {'refused' if r['lean'].get('verifyM_claimed_bound') is False else '**ACCEPTED**'}" for r in ctrl) + ".")
+    return blocks
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", type=Path)
     ap.add_argument("--verify", type=Path)
     args = ap.parse_args()
     blocks = build()
+    blocks.update(build_head())
     target = args.write or args.verify
     if target is None:
         for k, v in blocks.items():

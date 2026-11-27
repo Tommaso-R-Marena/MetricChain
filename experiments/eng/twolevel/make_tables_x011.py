@@ -508,6 +508,27 @@ def hetero_blocks() -> dict[str, str]:
             f"{tot['too_wide']} wider than the certified accuracy, {tot['aborted']} aborted, {tot['over_budget']} above the cost bound, {tot['bad_certificates']} false certificates.  "
             f"Negative controls: " + "; ".join(f"{r['what'].replace('negative control: ', '')} ({r['n_o']} outer sites of slope {r['u_o']:g}): {r['invalid']} of {r['runs']} brackets miss the truth, "
                                                 f"{r['aborted']} aborted, {r['bad_certificates']} false certificates" for r in ctrl) + ".")
+    p = RESULTS / "x014_literal_v2.json"            # the same runs after the tie rule was added to the simulator, with one more kind of instance
+    if p.exists():
+        d = json.loads(p.read_text())
+        tot, kinds = defaultdict(int), defaultdict(lambda: defaultdict(int))
+        for r in d["results"]:
+            if r["what"] == "theorem's constants":
+                for key in ("runs", "closed", "invalid", "too_wide", "aborted", "over_budget", "bad_certificates"):
+                    tot[key] += r[key]
+                for kind, v in r["by_kind"].items():
+                    for key, val in v.items():
+                        kinds[kind][key] += val
+        ctrl = [r for r in d["results"] if r["what"] != "theorem's constants"]
+        oc = kinds.get("outer_cone0", {})
+        blocks["x014_literal_v2_summary"] = (
+            f"With the tie rule in the simulator and the theorem's constants: {tot['runs']:,} literal runs on cubes of "
+            f"{min(r['n_o'] + len(r['inner_slopes']) for r in d['results'])}–{max(r['n_o'] + len(r['inner_slopes']) for r in d['results'])} sites, {tot['closed']:,} closed, "
+            f"{tot['invalid']} brackets that miss the truth, {tot['too_wide']} wider than the certified accuracy, {tot['aborted']} aborted, {tot['over_budget']} above the cost bound, "
+            f"{tot['bad_certificates']} false certificates; of these, the kind on which the simulator without the tie rule aborted (a cone on the outer block with its apex at the "
+            f"reference, flat fibres): {oc.get('runs', 0):,} runs, {oc.get('aborted', 0)} aborted, {oc.get('invalid', 0)} brackets that miss the truth.  Negative controls "
+            f"({len(ctrl)} configurations, {sum(r['runs'] for r in ctrl):,} runs): {sum(r['invalid'] for r in ctrl)} brackets miss the truth, "
+            f"{sum(r['bad_certificates'] for r in ctrl)} false certificates, {sum(r['aborted'] for r in ctrl)} aborted.")
     return blocks
 
 

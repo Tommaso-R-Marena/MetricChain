@@ -1,0 +1,61 @@
+{
+ "cpu": 5,
+ "error": null,
+ "family": "complete",
+ "instances": [
+  {
+   "alphabets": [
+    2
+   ],
+   "cpsat": {
+    "bound": -67390,
+    "branches": 413157,
+    "conflicts": 956,
+    "encoding": "marginal",
+    "seconds": 125.63057146399842,
+    "seconds_build": 0.03618114399978367,
+    "seconds_solve": 125.59439031999864,
+    "status": "optimal",
+    "value": -67390
+   },
+   "dense_instance_integers": 2592,
+   "dense_ints_per_leaf": 3186,
+   "digest": "7d5a4a55782d67a5c62ff47abe0d884e44365ca37bc16905b7992b22b9e01819",
+   "edges": 630,
+   "index": 0,
+   "log10_states": 10.837079843903323,
+   "seed": 1135447901611175095,
+   "site_states": 72,
+   "sites": 36,
+   "sparse_instance_integers": 2592,
+   "sparse_ints_per_leaf": 3186
+  }
+ ],
+ "k": 2,
+ "limit_hits": {},
+ "master": "leafcert-bench-v1",
+ "n": 36,
+ "phase": "long",
+ "protocol_version": 1,
+ "seconds": 125.98540261000016,
+ "started_utc": "2026-11-27T00:00:50Z",
+ "task": {
+  "caps": {
+   "max_cert_integers": 10000000,
+   "max_check_ops": 100000000,
+   "max_leaves": 1000000
+  },
+  "family": "complete",
+  "file": "complete__k2__n36__cpsat__r0",
+  "id": 4,
+  "index": 0,
+  "k": 2,
+  "master": "leafcert-bench-v1",
+  "n": 36,
+  "phase": "long",
+  "solver": "cpsat",
+  "time_limit": 600.0
+ },
+ "worker_rss_peak_mb": 1236.125,
+ "worker_vm_peak_mb": 1589.91015625
+}

@@ -1,0 +1,183 @@
+{
+ "budget_minutes": 20.0,
+ "cells": [
+  {
+   "error": false,
+   "file": "complete__k3__n12",
+   "finished_after_seconds": 4.926438808441162,
+   "seconds": 4.918715088000681
+  },
+  {
+   "error": false,
+   "file": "complete__k5__n8",
+   "finished_after_seconds": 7.1004204750061035,
+   "seconds": 2.1710573789987393
+  },
+  {
+   "error": false,
+   "file": "band3__k3__n25",
+   "finished_after_seconds": 12.956080436706543,
+   "seconds": 5.85172461899856
+  },
+  {
+   "error": false,
+   "file": "complete__k2__n20",
+   "finished_after_seconds": 14.66135835647583,
+   "seconds": 14.653756145999068
+  },
+  {
+   "error": false,
+   "file": "band2__k5__n25",
+   "finished_after_seconds": 26.631922245025635,
+   "seconds": 11.96825478699975
+  },
+  {
+   "error": false,
+   "file": "grid__k5__n25",
+   "finished_after_seconds": 27.772263050079346,
+   "seconds": 1.1357910909991915
+  },
+  {
+   "error": false,
+   "file": "band3__k5__n25",
+   "finished_after_seconds": 33.44751715660095,
+   "seconds": 20.487551574000463
+  },
+  {
+   "error": false,
+   "file": "cubic__k5__n24",
+   "finished_after_seconds": 33.98048400878906,
+   "seconds": 0.5310045380010706
+  },
+  {
+   "error": false,
+   "file": "grid__k10__n25",
+   "finished_after_seconds": 37.24323797225952,
+   "seconds": 9.467783537000287
+  },
+  {
+   "error": false,
+   "file": "band3__k3__n50",
+   "finished_after_seconds": 45.54862952232361,
+   "seconds": 11.564095873000042
+  },
+  {
+   "error": false,
+   "file": "band2__k5__n50",
+   "finished_after_seconds": 58.69411325454712,
+   "seconds": 13.141006981999453
+  },
+  {
+   "error": false,
+   "file": "grid__k5__n49",
+   "finished_after_seconds": 59.47100472450256,
+   "seconds": 0.7739656789999572
+  },
+  {
+   "error": false,
+   "file": "cubic__k5__n50",
+   "finished_after_seconds": 60.01713013648987,
+   "seconds": 0.5412817289998202
+  },
+  {
+   "error": false,
+   "file": "complete__k5__n10",
+   "finished_after_seconds": 61.45160627365112,
+   "seconds": 1.4302474269989034
+  },
+  {
+   "error": false,
+   "file": "complete__k10__n8",
+   "finished_after_seconds": 63.79542016983032,
+   "seconds": 2.3406195229999867
+  },
+  {
+   "error": false,
+   "file": "complete__kmixed__n12",
+   "finished_after_seconds": 66.94013524055481,
+   "seconds": 3.1409991119999177
+  },
+  {
+   "error": false,
+   "file": "grid__kmixed__n49",
+   "finished_after_seconds": 67.42646193504333,
+   "seconds": 0.4828984930009028
+  },
+  {
+   "error": false,
+   "file": "band3__k2__n50",
+   "finished_after_seconds": 68.03685474395752,
+   "seconds": 0.6071848209994641
+  },
+  {
+   "error": false,
+   "file": "band2__k3__n50",
+   "finished_after_seconds": 69.52041983604431,
+   "seconds": 1.480669623999347
+  },
+  {
+   "error": false,
+   "file": "grid__k3__n49",
+   "finished_after_seconds": 69.84471678733826,
+   "seconds": 0.3212807710006018
+  },
+  {
+   "error": false,
+   "file": "grid__k10__n49",
+   "finished_after_seconds": 85.72048091888428,
+   "seconds": 15.872375803999603
+  },
+  {
+   "error": false,
+   "file": "cubic__k3__n50",
+   "finished_after_seconds": 85.96310901641846,
+   "seconds": 0.23869614099930914
+  },
+  {
+   "error": false,
+   "file": "potts__k5__n49",
+   "finished_after_seconds": 86.33096241950989,
+   "seconds": 0.3638460889997077
+  },
+  {
+   "error": false,
+   "file": "band3__k5__n50",
+   "finished_after_seconds": 525.9992520809174,
+   "seconds": 488.7526524980003
+  }
+ ],
+ "cpus": [
+  5,
+  7
+ ],
+ "levels": 0,
+ "load_average_end": [
+  2.04248046875,
+  2.4189453125,
+  3.9736328125
+ ],
+ "master": "leafcert-bench-v1",
+ "not_started_budget": [],
+ "only": [],
+ "phase": "compare",
+ "protocol_version": 1,
+ "started_utc": "2026-11-26T23:51:23Z",
+ "stopped_by_rule": [],
+ "time_limit_override": null,
+ "versions": {
+  "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+  "load_average": [
+   2.68994140625,
+   3.6318359375,
+   5.31103515625
+  ],
+  "logical_cpus": 8,
+  "machine": "x86_64",
+  "numpy": "2.5.5",
+  "ortools": "9.15.6755",
+  "python": "3.12.16",
+  "scipy": "1.18.1",
+  "system": "Linux"
+ },
+ "wall_seconds": 526.0227868556976
+}

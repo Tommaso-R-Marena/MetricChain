@@ -11,6 +11,24 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 
 ## Digest (most important first)
 
+0000. **The division is halted (research owner's directive of 2026-11-27).  Final message:
+   ENG-MSG-0008; assessment: `consolidation/engineering.md`; published with it: ENG-RES-0019.**
+   It does not resume when a message arrives.  What the halt checkpoint adds:
+   (a) **An error in another division's software:** the float tier of the structural-biology
+   division's partition-function checker, at `exp_bits` 990–991, accepts an interval that
+   misses `ln Z` by 0.31 nats (defaults and the exact tier unaffected; ENG-RES-0019 §4).
+   (b) **The theory division's verified kernel was executed on the six stored protein
+   certificates and accepts them** — through `verifyM`, a memoised twin proved equal to
+   `verify` in Lean, because `verify` as written takes time exponential in the length of an
+   elimination chain (ENG-RES-0019 §3; ENG-MSG-0008 §2).
+   (c) ENG-RES-0018 is corrected: its three findings were repaired before it was published.
+   (d) GEOMETRY-REQ-0006, instance A, certified in ball arithmetic by a subagent (ENG-MSG-0008 §4).
+   (e) The second stage of the nested-design runs is complete; hypothesis H14 holds at all
+   three slopes (ENG-MSG-0008 §2).  Sixteen Modal tasks finish unsupervised (ledger).
+   (f) **Unreviewed by the coordinator, filed with that label:** the producer benchmark for
+   leaf certificates, the rate check of Theorem R, the checker of partition-function
+   certificates (one finding reproduced), the geometry certification (reproduction checked).
+
 000. **New at checkpoint 6 (2026-11-26/27): ENG-MSG-0007, ENG-RES-0015, -0016, -0017, -0018.**
    (a) **A linked correction — a published conclusion of ours is withdrawn (ENG-RES-0017).**
    ENG-RES-0014 §4 said that instances which are not products cost no more than the worst
@@ -223,7 +241,9 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 | [ENG-RES-0015](responses/engineering/ENG-RES-0015.md) | checkpoint 6 | theory, science | response to THY-RES-0013 §4, THY-RES-0015 §6; the research owner's question | nested runs designed by certified cost (X-011): the recursion to six levels, the share of each level's asymptotic gain that is kept, runs on searched instances at three slopes, literal three-level runs, a portfolio | completed to `n = 16 000`; addendum to follow |
 | [ENG-RES-0016](responses/engineering/ENG-RES-0016.md) | checkpoint 6 | theory, science | own result | site-dependent slopes at finite `n` (X-014): type-aligned nesting, an exact lower bound, mixed blocks, a binned profile, literal runs; refereed inside the division | completed as a first stage; conditional on its §2 until the theory division confirms the reading |
 | [ENG-RES-0017](responses/engineering/ENG-RES-0017.md) | checkpoint 6 | science, theory | response to SCI-REV-0018; **linked correction of ENG-RES-0014 and ENG-RES-0008** | the conclusion of ENG-RES-0014 §4 withdrawn; the worst product instance at `n ≤ 500` re-searched (not converged); code findings applied | completed |
-| [ENG-RES-0018](responses/engineering/ENG-RES-0018.md) | checkpoint 6 | structural biology; theory, science, frontier | independent review of software (D-6) | `src/metricchain_sb` at `720e0ec`: checker and producer survive; three findings as software | completed for that commit |
+| [ENG-RES-0018](responses/engineering/ENG-RES-0018.md) | checkpoint 6 | structural biology; theory, science, frontier | independent review of software (D-6); **its findings F1–F3 are superseded: corrected by ENG-RES-0019** | `src/metricchain_sb` at `720e0ec`: checker and producer survive; three findings as software | completed for that commit |
+| [ENG-RES-0019](responses/engineering/ENG-RES-0019.md) | consolidation checkpoint (2026-11-27) | structural biology; theory, science, frontier | response to STRUCTBIO-REQ-0001, -0004; corrects ENG-RES-0018 | C1 at `0544ff4`: claims survive, six certificates accepted by an independent checker and by the verified kernel executed on them; C2: a soundness defect at a non-default precision, Z3 false as worded; benchmarks reviewed and not run | completed for S0–S3 |
+| [ENG-MSG-0008](messages/engineering/ENG-MSG-0008.md) | consolidation checkpoint (2026-11-27) | all divisions | final consolidation message | the halt; the kernel's run-time defect and `verifyM_eq`; second stage of the nested-design runs complete; GEOMETRY-REQ-0006 certified; agreement with the CASP17 determination; jobs left running | completed; the division is halted |
 
 ## Responses and reviews received
 

@@ -1,0 +1,1571 @@
+{
+ "seconds": 1814.1182675361633,
+ "results": [
+  {
+   "n_o": 8,
+   "u_o": 0.5,
+   "inner_slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.317963345801866,
+   "K": 210,
+   "J": 31,
+   "lCmax_unit": 17.075919601120198,
+   "table_slope": 0.5,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 2.93942921649722,
+   "max_lcost": 10.971056270572776,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 8,
+   "u_o": 0.5,
+   "inner_slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "design": {
+    "lam": 0.5,
+    "eta": 0.25,
+    "etap": 0.25,
+    "b": 0.5,
+    "Lr": 4,
+    "theta": 0.25,
+    "bounded": true,
+    "name": "lam=1/2, eta=eta'=theta=1/4, b=1/2"
+   },
+   "x_out": 1.678062769354026,
+   "K": 747,
+   "J": 61,
+   "lCmax_unit": 19.338934642637867,
+   "table_slope": 0.5,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 1.4971292842081385,
+   "max_lcost": 14.258659301090246,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 8,
+   "u_o": 2.0,
+   "inner_slopes": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3179511021937023,
+   "K": 223,
+   "J": 43,
+   "lCmax_unit": 21.468513789881406,
+   "table_slope": 2.0,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 3.159630394034615,
+   "max_lcost": 13.254936060613806,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 8,
+   "u_o": 2.0,
+   "inner_slopes": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "design": {
+    "lam": 0.5,
+    "eta": 0.25,
+    "etap": 0.25,
+    "b": 0.5,
+    "Lr": 4,
+    "theta": 0.25,
+    "bounded": true,
+    "name": "lam=1/2, eta=eta'=theta=1/4, b=1/2"
+   },
+   "x_out": 1.6779996561483497,
+   "K": 782,
+   "J": 85,
+   "lCmax_unit": 23.04547269218235,
+   "table_slope": 2.0,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 1.51081736637353,
+   "max_lcost": 14.509617777539255,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 10,
+   "u_o": 1.0,
+   "inner_slopes": [
+    0.4,
+    0.4,
+    2.5
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.31795815666069,
+   "K": 219,
+   "J": 35,
+   "lCmax_unit": 21.86907812644691,
+   "table_slope": 1.0,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 3.07478878349377,
+   "max_lcost": 13.813492523100958,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 10,
+   "u_o": 1.0,
+   "inner_slopes": [
+    0.4,
+    0.4,
+    2.5
+   ],
+   "design": {
+    "lam": 0.5,
+    "eta": 0.25,
+    "etap": 0.25,
+    "b": 0.5,
+    "Lr": 4,
+    "theta": 0.25,
+    "bounded": true,
+    "name": "lam=1/2, eta=eta'=theta=1/4, b=1/2"
+   },
+   "x_out": 1.67803602082284,
+   "K": 770,
+   "J": 69,
+   "lCmax_unit": 22.860672326390628,
+   "table_slope": 1.0,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 1.51009314915224,
+   "max_lcost": 15.433842203644877,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 9,
+   "u_o": 0.3,
+   "inner_slopes": [
+    1.0,
+    1.0,
+    3.0,
+    0.7
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3181055886512985,
+   "K": 204,
+   "J": 25,
+   "lCmax_unit": 15.59818047800912,
+   "table_slope": 0.3,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 2.657620621088353,
+   "max_lcost": 9.007121989469242,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 9,
+   "u_o": 0.3,
+   "inner_slopes": [
+    1.0,
+    1.0,
+    3.0,
+    0.7
+   ],
+   "design": {
+    "lam": 0.5,
+    "eta": 0.25,
+    "etap": 0.25,
+    "b": 0.5,
+    "Lr": 4,
+    "theta": 0.25,
+    "bounded": true,
+    "name": "lam=1/2, eta=eta'=theta=1/4, b=1/2"
+   },
+   "x_out": 1.6787957658944972,
+   "K": 725,
+   "J": 48,
+   "lCmax_unit": 18.135457396140765,
+   "table_slope": 0.3,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 1.445118662019377,
+   "max_lcost": 10.968215530759236,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 10,
+   "u_o": 1.5,
+   "inner_slopes": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3179517857959717,
+   "K": 223,
+   "J": 41,
+   "lCmax_unit": 21.38473535372196,
+   "table_slope": 1.5,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 3.1737039754490373,
+   "max_lcost": 13.754934309977807,
+   "class_violation": 7.105427357601002e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 10,
+   "u_o": 1.5,
+   "inner_slopes": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "design": {
+    "lam": 0.5,
+    "eta": 0.25,
+    "etap": 0.25,
+    "b": 0.5,
+    "Lr": 4,
+    "theta": 0.25,
+    "bounded": true,
+    "name": "lam=1/2, eta=eta'=theta=1/4, b=1/2"
+   },
+   "x_out": 1.67800318005782,
+   "K": 784,
+   "J": 80,
+   "lCmax_unit": 23.27674264140401,
+   "table_slope": 1.5,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 1.509533768185901,
+   "max_lcost": 14.633883232475538,
+   "class_violation": 7.105427357601002e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 7,
+   "u_o": 1.0,
+   "inner_slopes": [
+    1.7
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3180967516662148,
+   "K": 210,
+   "J": 24,
+   "lCmax_unit": 19.6404679783021,
+   "table_slope": 1.0,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 3.057479053568855,
+   "max_lcost": 11.712005805579137,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 7,
+   "u_o": 1.0,
+   "inner_slopes": [
+    1.7
+   ],
+   "design": {
+    "lam": 0.5,
+    "eta": 0.25,
+    "etap": 0.25,
+    "b": 0.5,
+    "Lr": 4,
+    "theta": 0.25,
+    "bounded": true,
+    "name": "lam=1/2, eta=eta'=theta=1/4, b=1/2"
+   },
+   "x_out": 1.6787502403342638,
+   "K": 737,
+   "J": 46,
+   "lCmax_unit": 20.6372120838923,
+   "table_slope": 1.0,
+   "K_scale": 1.0,
+   "runs": 5400,
+   "closed": 5400,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 1.4884477624309154,
+   "max_lcost": 13.757204309143143,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "flat": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "dip": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "ridges": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "linear": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "mixed": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "outer_cone0": {
+     "runs": 600,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "theorem's constants"
+  },
+  {
+   "n_o": 8,
+   "u_o": 0.5,
+   "inner_slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.317963345801866,
+   "K": 210,
+   "J": 31,
+   "lCmax_unit": 17.075919601120198,
+   "table_slope": 0.125,
+   "K_scale": 1.0,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 0,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 2.399753549390618,
+   "max_lcost": 8.338544879988579,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: outer tables for a quarter of the slope"
+  },
+  {
+   "n_o": 8,
+   "u_o": 0.5,
+   "inner_slopes": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.317963345801866,
+   "K": 210,
+   "J": 31,
+   "lCmax_unit": 17.075919601120198,
+   "table_slope": 0.5,
+   "K_scale": 0.015625,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 1,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 4,
+   "max_width": 2.94103244946805,
+   "max_lcost": 7.039660349862076,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 1,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: K divided by 64"
+  },
+  {
+   "n_o": 8,
+   "u_o": 2.0,
+   "inner_slopes": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3179511021937023,
+   "K": 223,
+   "J": 43,
+   "lCmax_unit": 21.468513789881406,
+   "table_slope": 0.5,
+   "K_scale": 1.0,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 12,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 2,
+   "max_width": 2.5780354959869674,
+   "max_lcost": 10.331072861728375,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 6,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 3,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 3,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: outer tables for a quarter of the slope"
+  },
+  {
+   "n_o": 8,
+   "u_o": 2.0,
+   "inner_slopes": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3179511021937023,
+   "K": 223,
+   "J": 43,
+   "lCmax_unit": 21.468513789881406,
+   "table_slope": 2.0,
+   "K_scale": 0.015625,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 6,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 32,
+   "max_width": 3.0982039920925386,
+   "max_lcost": 9.234154550075438,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 2,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 1,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 3,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: K divided by 64"
+  },
+  {
+   "n_o": 10,
+   "u_o": 1.0,
+   "inner_slopes": [
+    0.4,
+    0.4,
+    2.5
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.31795815666069,
+   "K": 219,
+   "J": 35,
+   "lCmax_unit": 21.86907812644691,
+   "table_slope": 0.25,
+   "K_scale": 1.0,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 5,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 0,
+   "max_width": 2.637369255164683,
+   "max_lcost": 8.970050661827003,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 3,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 2,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: outer tables for a quarter of the slope"
+  },
+  {
+   "n_o": 10,
+   "u_o": 1.0,
+   "inner_slopes": [
+    0.4,
+    0.4,
+    2.5
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.31795815666069,
+   "K": 219,
+   "J": 35,
+   "lCmax_unit": 21.86907812644691,
+   "table_slope": 1.0,
+   "K_scale": 0.015625,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 3,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 8,
+   "max_width": 3.1031071285795635,
+   "max_lcost": 9.495444123413163,
+   "class_violation": 3.552713678800501e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 1,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 2,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: K divided by 64"
+  },
+  {
+   "n_o": 9,
+   "u_o": 0.3,
+   "inner_slopes": [
+    1.0,
+    1.0,
+    3.0,
+    0.7
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3181055886512985,
+   "K": 204,
+   "J": 25,
+   "lCmax_unit": 15.59818047800912,
+   "table_slope": 0.075,
+   "K_scale": 1.0,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 22,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 22,
+   "max_width": 2.1841464395790644,
+   "max_lcost": 8.314097335405807,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 5,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 8,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 9,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: outer tables for a quarter of the slope"
+  },
+  {
+   "n_o": 9,
+   "u_o": 0.3,
+   "inner_slopes": [
+    1.0,
+    1.0,
+    3.0,
+    0.7
+   ],
+   "design": {
+    "lam": 1.0,
+    "eta": 0.5,
+    "etap": 1.0,
+    "b": 1.0,
+    "Lr": 4,
+    "theta": 1.0,
+    "bounded": false,
+    "name": "lam=1, eta=1/2, eta'=1, theta=1, b=1"
+   },
+   "x_out": 3.3181055886512985,
+   "K": 204,
+   "J": 25,
+   "lCmax_unit": 15.59818047800912,
+   "table_slope": 0.3,
+   "K_scale": 0.015625,
+   "runs": 540,
+   "closed": 540,
+   "invalid": 1,
+   "too_wide": 0,
+   "aborted": 0,
+   "over_budget": 0,
+   "bad_certificates": 1,
+   "max_width": 2.651363655251898,
+   "max_lcost": 5.081404364984463,
+   "class_violation": 1.7763568394002505e-15,
+   "by_kind": {
+    "dip": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "wells": {
+     "runs": 180,
+     "invalid": 1,
+     "aborted": 0,
+     "too_wide": 0
+    },
+    "cone": {
+     "runs": 180,
+     "invalid": 0,
+     "aborted": 0,
+     "too_wide": 0
+    }
+   },
+   "what": "negative control: K divided by 64"
+  }
+ ]
+}

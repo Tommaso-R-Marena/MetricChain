@@ -1,0 +1,259 @@
+{
+ "campaign": "z4",
+ "seed": 1,
+ "cases": 20000,
+ "seconds": 72.2,
+ "exp": {
+  "cases": 20000,
+  "lower_confirmed_arb": 20000,
+  "lower_confirmed_taylor": 20000,
+  "lower_confirmed": 20000,
+  "upper_confirmed_arb": 20000,
+  "upper_confirmed_taylor": 20000,
+  "upper_confirmed": 20000,
+  "exp_bounds_equals_me_form": 11695,
+  "exp_bounds_differs_from_me_form": 0,
+  "wider_than_2^-(bits-4)_bits=80": 547,
+  "wider_than_2^-(bits-4)_bits=80_1e9": 114,
+  "wider_than_2^-(bits-4)_bits=80_2^200": 118,
+  "wider_than_2^-(bits-4)_bits=64": 1093,
+  "wider_than_2^-(bits-4)_bits=64_2^64": 328,
+  "wider_than_2^-(bits-4)_bits=64_2^1000": 335,
+  "wider_than_2^-(bits-4)_bits=64_dyadic_edge": 65,
+  "wider_than_2^-(bits-4)_bits=80_1e6": 67,
+  "wider_than_2^-(bits-4)_bits=24": 218,
+  "wider_than_2^-(bits-4)_bits=24_2^200": 99,
+  "wider_than_2^-(bits-4)_bits=40": 264,
+  "wider_than_2^-(bits-4)_bits=40_2^64": 22,
+  "wider_than_2^-(bits-4)_bits=64_2^200": 350,
+  "wider_than_2^-(bits-4)_bits=80_2^1000": 107,
+  "wider_than_2^-(bits-4)_bits=40_2^200": 106,
+  "wider_than_2^-(bits-4)_bits=40_2^1000": 131,
+  "wider_than_2^-(bits-4)_bits=24_2^1000": 119,
+  "wider_than_2^-(bits-4)_bits=80_2^64": 104,
+  "wider_than_2^-(bits-4)_bits=64_1e9": 15,
+  "wider_than_2^-(bits-4)_bits=80_dyadic_edge": 31,
+  "wider_than_2^-(bits-4)_bits=80_near_integer_ln2": 6,
+  "wider_than_2^-(bits-4)_bits=40_dyadic_edge": 5
+ },
+ "exp_exceptions": {},
+ "exp_log2_relative_width": {
+  "1e4 bits=64": {
+   "n": 342,
+   "min": -79.35188550415876,
+   "median": -78.5504105064547,
+   "max": -77.09543234160827
+  },
+  "1e4 bits=80": {
+   "n": 123,
+   "min": -92.15066489748821,
+   "median": -84.02092598906684,
+   "max": -77.82777083475378
+  },
+  "1e6 bits=64": {
+   "n": 325,
+   "min": -79.1162074902799,
+   "median": -75.71550920288033,
+   "max": -65.96625896853274
+  },
+  "1e6 bits=80": {
+   "n": 120,
+   "min": -85.75975760402135,
+   "median": -75.33023941184908,
+   "max": -65.62932541993543
+  },
+  "1e9 bits=64": {
+   "n": 373,
+   "min": -76.1611244769651,
+   "median": -65.76204549885476,
+   "max": -56.02060818221624
+  },
+  "1e9 bits=80": {
+   "n": 115,
+   "min": -76.22976250204292,
+   "median": -66.21482418086073,
+   "max": -58.073681801991185
+  },
+  "2^1000 bits=64": {
+   "n": 335,
+   "min": 3.2224559212566634e+266,
+   "median": 1.6863351957884457e+271,
+   "max": 1.0491450879242877e+275
+  },
+  "2^1000 bits=80": {
+   "n": 107,
+   "min": 1.3503763859751935e+267,
+   "median": 2.433039863465226e+271,
+   "max": 5.987555957662689e+274
+  },
+  "2^200 bits=64": {
+   "n": 350,
+   "min": 2.923457816071431e+27,
+   "median": 2.6763547589740446e+30,
+   "max": 1.0343755083088409e+34
+  },
+  "2^200 bits=80": {
+   "n": 118,
+   "min": 7.442058538205851e+26,
+   "median": 5.149029618869071e+30,
+   "max": 2.2059058823688254e+33
+  },
+  "2^64 bits=64": {
+   "n": 328,
+   "min": -51.168313176038545,
+   "median": -39.1255889527304,
+   "max": -29.58797504981448
+  },
+  "2^64 bits=80": {
+   "n": 104,
+   "min": -48.81641590080401,
+   "median": -38.54347550492544,
+   "max": -28.889588883980736
+  },
+  "dyadic_edge bits=64": {
+   "n": 342,
+   "min": -79.20558413364465,
+   "median": -78.43014439234086,
+   "max": -23.69743585361355
+  },
+  "dyadic_edge bits=80": {
+   "n": 95,
+   "min": -95.10518223669204,
+   "median": -94.43014439166905,
+   "max": -23.74252007527283
+  },
+  "hundreds bits=64": {
+   "n": 323,
+   "min": -79.48312433077818,
+   "median": -78.81577234150109,
+   "max": -78.05926974900136
+  },
+  "hundreds bits=80": {
+   "n": 112,
+   "min": -94.24021499913778,
+   "median": -89.23561836240187,
+   "max": -84.15984879204427
+  },
+  "many_digits bits=64": {
+   "n": 316,
+   "min": -79.50092905060484,
+   "median": -78.61408768172657,
+   "max": -78.1820720806312
+  },
+  "many_digits bits=80": {
+   "n": 114,
+   "min": -95.37809600221215,
+   "median": -94.4607223396492,
+   "max": -89.7128551314751
+  },
+  "near_integer_ln2 bits=64": {
+   "n": 321,
+   "min": -79.63466223758628,
+   "median": -78.42453589911247,
+   "max": -74.6804124603678
+  },
+  "near_integer_ln2 bits=80": {
+   "n": 104,
+   "min": -90.60634026305962,
+   "median": -81.74615535833348,
+   "max": -74.72747584138207
+  },
+  "small bits=64": {
+   "n": 356,
+   "min": -79.11742817357137,
+   "median": -78.84939764139361,
+   "max": -78.23739264050822
+  },
+  "small bits=80": {
+   "n": 114,
+   "min": -95.12462147187914,
+   "median": -94.44707592049164,
+   "max": -93.96587527825952
+  },
+  "tens bits=64": {
+   "n": 337,
+   "min": -79.39281268790448,
+   "median": -78.65394678805905,
+   "max": -78.0849209037711
+  },
+  "tens bits=80": {
+   "n": 87,
+   "min": -95.07358680277073,
+   "median": -93.66753086837514,
+   "max": -87.86494008604015
+  },
+  "tiny bits=64": {
+   "n": 348,
+   "min": -80.0,
+   "median": -78.43014439166905,
+   "max": -78.43014439166905
+  },
+  "tiny bits=80": {
+   "n": 102,
+   "min": -96.0,
+   "median": -94.43014439166905,
+   "max": -94.43014439166905
+  },
+  "unit bits=64": {
+   "n": 344,
+   "min": -79.43487989651172,
+   "median": -78.62160966867027,
+   "max": -77.946805805247
+  },
+  "unit bits=80": {
+   "n": 121,
+   "min": -95.18270967950714,
+   "median": -94.32032348617435,
+   "max": -91.56499151406236
+  },
+  "zero bits=64": {
+   "n": 319,
+   "min": -Infinity,
+   "median": -Infinity,
+   "max": -Infinity
+  },
+  "zero bits=80": {
+   "n": 105,
+   "min": -Infinity,
+   "median": -Infinity,
+   "max": -Infinity
+  }
+ },
+ "exp_microseconds_per_call_bits64": {
+  "1e4": 255.1,
+  "1e6": 283.4,
+  "1e9": 271.1,
+  "2^1000": 9661.1,
+  "2^200": 922.4,
+  "2^64": 432.4,
+  "dyadic_edge": 418.4,
+  "hundreds": 249.4,
+  "many_digits": 4907.7,
+  "near_integer_ln2": 393.1,
+  "small": 198.2,
+  "tens": 206.1,
+  "tiny": 1896.2,
+  "unit": 180.5,
+  "zero": 5.7
+ },
+ "log": {
+  "cases": 2000,
+  "lower_confirmed": 2000,
+  "upper_confirmed": 2000,
+  "huge_fraction_cases": 326,
+  "huge_fraction_wider_than_4x_2^-40": 0
+ },
+ "log_width_in_units_of_2^-40": {
+  "n": 2000,
+  "min": 1.9999999999995683,
+  "median": 2.0,
+  "max": 2.0000000000007145
+ },
+ "log_monotonicity": {
+  "pairs": 2000,
+  "lower_not_monotone": 471,
+  "upper_not_monotone": 471
+ },
+ "log_worst_inversion_relative": 2.1730141858245026e-15,
+ "violations": []
+}

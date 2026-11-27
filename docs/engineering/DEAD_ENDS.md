@@ -168,3 +168,28 @@ every local run and four subagents (2026-11-26 18:03 UTC).  The detached Modal j
 unaffected, and nothing committed was lost.  **Lessons:** `weighted_shells` now refuses
 more than `3·10⁷` shells; every exploratory script of a subagent runs under a hard
 address-space limit, and the brief says so.
+
+## ED-13  Running the verified kernel as written on a real certificate
+
+The theory division's kernel `verify` is a computable Lean function, so the obvious check
+of a certificate is to evaluate it.  On crambin's certificate (344 eliminations in one
+chain) the evaluation ran for twelve minutes without output and was stopped (2026-11-27).
+Cause: the domains are nested function updates (`Dom.remove`, `Dom.fix`), and a Lean
+definition that returns a function is compiled with the extra argument, so the update
+below is re-evaluated at every lookup — measured: 30 ms, 179 ms, 1.4 s, 6.2 s, 34 s for 9
+to 21 eliminations.  **What works:** `verifyM` in
+`experiments/eng/sb_review/lean_kernel/RunKernel.lean`, the same function with the domains
+copied into an array (returned as a *structure*, so that it is a value), with a proof that
+it equals `verify`.  **Lessons:** an executable specification is not an executable program
+until it has been run at realistic size; and when a twin is needed, prove it equal rather
+than argue it.
+
+## ED-14  A precision knob on a rigorous float tier
+
+The structural-biology division's partition-function checker has a float tier whose
+exponential takes a precision parameter `exp_bits` (default 64).  At 990 and 991 the tier
+accepts an interval that misses `ln Z` by 0.31 nats, because a helper returns `1e-300` as
+an "upper bound" for a weight whose mantissa is longer than the helper assumes (found by
+our subagent, reproduced by a direct call; X-018).  **Lesson for our own code:** every
+parameter of a rigorous routine belongs to its claim; test the claim over the parameter's
+whole range or restrict the range in the code.
