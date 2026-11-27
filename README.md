@@ -13,6 +13,7 @@ evaluation only.
 
 | you want | read |
 |---|---|
+| **the critical assessment at the consolidation halt of 27 November 2026** — what is established, what is conjectural or unrefereed, the strongest contributions with the evidence for and against their originality, negative results, what to do next | [`docs/collaboration/consolidation/theory.md`](docs/collaboration/consolidation/theory.md) |
 | the results, proofs, and an honest known-vs-new table | [`docs/THEORY_REPORT.md`](docs/THEORY_REPORT.md) |
 | to implement the checkers / solvers | [`docs/BLUEPRINT.md`](docs/BLUEPRINT.md) |
 | how the program evolved and what is open | [`docs/RESEARCH_LOG.md`](docs/RESEARCH_LOG.md) |
@@ -738,6 +739,30 @@ programme of our own.  That division also derived the weak-coupling coefficient 
 chain exponents — the direction in which a nearest-neighbour coupling moves the
 non-adaptive exponent changes sign at the slope `1.5055` — which we confirmed by a
 brute-force capacity computation and record as its result and an open question.
+(xxv) *Consolidation checkpoint (27 November 2026): tail functions beyond the uniform cube;
+the nesting section corrected by an outside review; general elimination; halt* (theory
+report Proposition 11.124 and §11.33 as corrected; `docs/workstreams/I_REPORT.md`;
+`proofs/Frontiers/FactorElimination.lean`; `docs/collaboration/consolidation/theory.md`).  **The
+level theorem can be supplied with valid tail functions on any product of sites with a
+product measure and an additive envelope**: a two-point recursion over the sites bounds
+the measure of neighbourhoods from below (it reproduces Harper's theorem at ball sizes
+and, on a biased cube, the balls around the rare vertex; it is attained on exhaustively
+enumerated instances), both tail functions follow, the lower one in closed form by an
+exact tensorisation, and for a fixed number of slopes on the uniform cube products of
+balls are extremal up to polynomial factors — the coordinator's own, **unrefereed**, with
+a conjecture (the single-letter potential is inductive up to a constant over `n`) and
+four negative results (no Harper theorem for the biased cube in the concentration
+regime, exhaustively for at most four sites; D69).  **Three sentences of the nesting
+section were wrong** (the Scientific Discovery Division's review with replication,
+SCI-REV-0027; the theorems stand): the false certificate under an uncertified influence
+has two mechanisms; an influence confined to one hub site already breaks validity at
+finite size; for band models the usable rule is to condition on the boundary layer
+(D70).  The identity behind bucket elimination and the relaxation of a factor are
+machine-checked for arbitrary summands, at the request of the software division.  The
+last three unrefereed sections behind item (xxiv) were refereed: one closed form (the
+second level of the cube) holds for slopes up to `4.65` only and is corrected; the
+certificate script is sound.  **The division then halted under the research owner's
+consolidation directive**; nothing is running.
 
 What is *not* established: the guarantees are relative to published inputs (rational tables,
 envelope constants, anchor values); certifying envelope constants for a concrete learned residual,

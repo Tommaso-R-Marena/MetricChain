@@ -6,8 +6,12 @@ they are called certified.  **Refereed internally** (an AI referee, not external
 `docs/workstreams/Z_ADDENDUM_REVIEW.md`, with its own code in
 `experiments/workstreams/Z/review_addendum/` — "no error of substance; every numbered statement
 is correct as stated or correct after a repair of wording"; its ten findings are applied
-below and listed in the note that follows.  **Sections A6a, A6b and A9a were added after the
-review and have not been seen by the referee.**  Notation and the quoted
+below and listed in the note that follows.  **Sections A6a, A6b and A9a were added after that
+review; they have since had a referee of their own** (`docs/workstreams/Z_A6_REVIEW.md`, own code in
+`experiments/workstreams/Z/review_a6/`): *one statement wrong as first stated — the closed form of the second
+level for the cube, which holds for `u ≤ 4.6535` only; everything else correct as stated or after a repair of
+wording or of a citation; the script is a sound certificate.*  Its findings are applied in the text and
+listed in the second note below.  Notation and the quoted
 statements are those of `Z_REPORT.md` §1 and of `R_REPORT.md` (`θ = θ_na` satisfying (H0), (H1) there;
 `a = θ(0+)`, `h` the fixed point, `Σ` the slope map, `p_j` the orbit curves, `M_{W,b}`, `𝓔(W, b)`).*
 
@@ -29,6 +33,29 @@ statements are those of `Z_REPORT.md` §1 and of `R_REPORT.md` (`θ = θ_na` sat
 > statements that Theorems Z′, Z″ are conditional on (read, not re-derived), the one-level
 > test and the nests in envelope mode (not re-run), pairs with a finite slope at zero (by
 > hand only); nothing of the referee's is certified.
+
+> **Coordinator's note after the review of A6a, A6b, A9a (2026-11-27; `Z_A6_REVIEW.md`).**  That referee
+> re-derived every statement of the three sections, verified the *output* of `z6_certified_tops.py` line by
+> line with an independent verifier (31 946 lines, among them the first eight levels of the published run;
+> its own integer interval arithmetic, no mpmath), built an independent certified sequence, and tried to break
+> each statement on random inputs and twelve pairs.  **Verdicts:** Proposition A12(a), (b), (d), Lemma A9′,
+> Proposition A11′ correct as stated; Theorem Z‴ correct as stated, conditionally as Theorem Z′; the script is a
+> sound certificate.  **Applied in place:** **(1)** *wrong as first stated* — "for the cube `τ₂ = b₂ = a²/(a + x*)`":
+> true exactly for `u ≤ 4.6535196` (A6a; theory report Theorem 11.58e(e)); no proof used it.  **(2)** The
+> nine-digit table of A6b prints certified doubles rounded *to nearest*: a rigorous reading adds one unit in the
+> last printed place (the six-digit table of the theory report is rounded up and valid).  **(3)** A citation that
+> did not carry the claim: `τ₂ = b₂` and A12(d) use `sup T_{k+1} = τ(T_k)`, which the theory report's remark only
+> *defines*; it is Lemma R0 of the review (§1.1, ten lines, confirmed by brute force).  **(4)** Two numbers of the
+> table of A6a (`τ₃` is `5·10⁻⁶·a` high; `τ(M_{W₂,b₂})` equals `b₃`).  **(5)** Proposition A13: the cap line is below the
+> *maximum* of such lines and the zero line; "nondecreasing" follows from convexity, nonnegativity and the value
+> zero at zero; the restriction "pair with infinite slope at zero" is not needed in A12(b), (c) or A13; "by Lemma
+> A1 and Proposition A8" needs Corollary A4 or the base case of A8 read for a start on `[0, ā]`.  **(6)** mpmath's
+> interval logarithm is not a proved enclosure in its last bit — harmless here (the four-ulp rounding of the
+> coefficients leaves a proved headroom of one double ulp; `ā ≥ a` verified independently at six slopes); one more
+> `nextafter` would remove the dependence (not changed: the script is the audited one).  **(7)** "at 80 levels" is
+> at 78; the range in A10.  **Not checked by that referee:** Proposition U and the finite-`n` statements (read,
+> not re-derived); the published runs beyond level eight of `u = 1` and the runs at `u = 2`, `u = ½` and to 400
+> levels (compared with its own tops and brackets only); nothing of its is machine-checked.
 
 ## A0. What changes
 
@@ -193,7 +220,7 @@ time settle it.)  **The numbers of this table are floating point** (a convex env
 values is not a minorant between the grid points, and the grid errs downwards, by about
 `10⁻⁷·a` at `k = 80` — the referee); certified upper bounds are in section A6b.
 
-## A6a. Where the envelope step is exact, and where it is not  *(added after the review; not seen by the referee)*
+## A6a. Where the envelope step is exact, and where it is not  *(added after the first review; refereed since — `Z_A6_REVIEW.md`, second note at the head)*
 
 For a nonincreasing `T ≥ 0` on `[0, ∞)` let
 
@@ -223,8 +250,16 @@ zero `Σ(B, W(B)) < ∞` iff `B < (1 − W(B))a` (or `B = 0`), and `B` increases
 `M_{W₁, a}(x) = sup_B (B − x·min(1, Σ(B, 0)))`: the lines with `Σ(B, 0) ≤ 1` are the tangent lines of `θ` with slopes
 in `[−1, 0]`, whose supremum is `θ(x)` where `θ′(x) ≥ −1` and is below `a − x` before; the others give `sup B − x = a − x`.
 Then `τ₂ = τ(θ) = τ(θ^♯) = τ(M_{W₁, a}) = b₂`.  (d) `T_j ≤ M_{W_j, b_j}` (Proposition A8) and `τ` is monotone.  ∎
+(*The identity `τ_{k+1} := sup T_{k+1} = τ(T_k)` used in (c), (d)* is not in the theory report's remark, which defines the
+bounded-accuracy sequence by the formula and proves "at most"; it is Lemma R0 of `Z_A6_REVIEW.md` §1.1.  The
+restriction "infinite slope at zero" in (b), (c) is not needed.)
 
-For the cube `x + θ(x) − a` changes sign once, at `x* > 0`, and `τ₂ = b₂ = a²/(a + x*)`.
+For the cube `x + θ(x) − a` changes sign once, at `x* > 0`, and `τ₂ = b₂ = a²/(a + x*)` **for `u ≤ u₀ = 4.6535196`** —
+exactly when `|θ′(x*)|·(a + x*) ≤ x*`, i.e. when the top lies on the cap line of `W₁`.  For larger slopes the minimum
+of `a·max(a, x + θ(x))/(a + x)` is beyond the kink, `τ₂ = b₂` is the root of `B = (1 − Σ(B, 0))·a` on the uncapped curve
+and is *smaller* than `a²/(a + x*)` (`0.602893·a` against `0.604053·a` at `u = 5`; `0.7139·a` against `0.7874·a` at `u = 8`).
+(The first version stated the closed form for every slope: found by the referee of this section, its §1.5; no
+proof uses the closed form, and the numbers quoted at `u = ½, 1, 2` are right.)
 
 **From the third level on the envelope tops are strictly above the true exponents [N].**
 (`experiments/workstreams/Z/z7_exactness.py` → `out_z7_exactness_u1.txt`; cube, `u = 1`; floating point.  The
@@ -236,8 +271,8 @@ postscript that (b) and (c) of Proposition A12 hold numerically to `10⁻¹⁵`,
 |---|---|---|
 | `τ₂`, closed form `a²/(a + x*)` | `0.055517524915 = 0.500410018·a` | |
 | `b₂`, envelope sequence on a grid of 8 000 / certified upper bound (A6b) | `0.055517524693` / `0.055517525617` | equal, as proved |
-| `τ₃ = τ(T₂)`, with `T₂ = min(θ, R[θ])` computed by direct minimisation over `(φ, β)` at 420 rates, the outer fraction of the third level refined to `10⁻⁹` | `0.361189·a` | the referee, by brute force with another mesh: `0.361184·a`; the theory report has `0.361·a` |
-| `τ(M_{W₂, b₂})`, the same operator on the envelope majorant | `0.363303·a` | |
+| `τ₃ = τ(T₂)`, with `T₂ = min(θ, R[θ])` computed by direct minimisation over `(φ, β)` at 420 rates, the outer fraction of the third level refined to `10⁻⁹` | `0.361189·a` (about `5·10⁻⁶·a` high: `0.361184·a` by two referees' independent computations) | the referee, by brute force with another mesh: `0.361184·a`; the theory report has `0.361·a` |
+| `τ(M_{W₂, b₂})`, the same operator on the envelope majorant | `0.363303·a` | a discretisation value of a quantity that *equals* `b₃` by Proposition A12(b) |
 | `b₃` | `0.363301·a` | `b₃ − τ₃ = 2.1·10⁻³·a` |
 
 *Where the loss is.*  The second level `T₂` is below its envelope majorant `M₂ := M_{W₂, b₂}` at every positive
@@ -254,7 +289,7 @@ of lines with the inner tolerance zero**, not of the recursion: a step that also
 close the gap at the exponent level (not written; at finite `n` the tolerance is what Lemma U's finite range
 and the drops of workstream Q2 are about).
 
-## A6b. Certified tops  *(added after the review; not seen by the referee)*
+## A6b. Certified tops  *(added after the first review; refereed since — `Z_A6_REVIEW.md`, second note at the head)*
 
 The tops in the table of A6 are floating-point numbers.  Admissibility asks only for `≤` in (S2) and `≥` in (S1),
 so a *lower* bound of the slope map suffices, and that needs no optimisation:
@@ -278,8 +313,8 @@ valid (interval arithmetic, 30 digits, rounded outwards); the lines are stored a
 rounded down and the intercept rounded down; which lines and rates are used is chosen in floating point (one
 line per sample point, the rate by a golden-section search) and affects the quality only; the upper hull, the
 tangent line from `(c′, 1)` that caps the curve at one, the values at the top and the inequality
-`c′ + āV(c′) ≥ ā` are computed in exact rational arithmetic.  By Lemma A1 and Proposition A8 its tops are
-**rigorous upper bounds for the exponents of the level recursion, `τ_j ≤ c_j`** — given those two statements —
+`c′ + āV(c′) ≥ ā` are computed in exact rational arithmetic.  By Lemma A1, Corollary A4 and Proposition A8 (its base case read for a start on `[0, ā]`) its tops are
+**rigorous upper bounds for the exponents of the level recursion, `τ_j ≤ c_j`** — given those statements —
 and `T_j(g) ≤ max_B (B − V_j(B)g)` at every rate (the maximum is evaluated exactly at the vertices).
 
 | `j` | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 20 | 40 | 80 | 200 | 400 |
@@ -288,10 +323,12 @@ and `T_j(g) ≤ max_B (B − V_j(B)g)` at every rate (the maximum is evaluated e
 | `u = 2` | `0.505615446` | `0.383347314` | `0.341033400` | `0.323697863` | `0.315235252` | `0.307181543` | `0.303467854` | `0.298465858` | `0.297189804` | | | |
 | `u = ½` | `0.500026741` | `0.358645034` | `0.305680047` | `0.282897289` | `0.272167511` | `0.263247512` | `0.259553884` | `0.254793046` | `0.253620656` | | | |
 
-(`h/a = 0.262647098, 0.296757, 0.253231` at `u = 1, 2, ½`; 3 000 sample points per level, 4 000 for the run to 400
+(The entries are the script's printed values of certified doubles, **rounded to nearest: a rigorous reading adds
+one unit in the last printed place**; the six-digit table of the theory report is rounded up.
+`h/a = 0.262647098, 0.296757, 0.253231` at `u = 1, 2, ½`; 3 000 sample points per level, 4 000 for the run to 400
 levels; `out_z6_certified_*.txt`.  The referee's postscript: all thirty certified tops lie above its own
 envelope tops, by at most `6·10⁻⁷·a`, as Corollary A4 requires; the script itself was not refereed.)  The certified tops exceed the floating-point envelope tops by `3·10⁻⁸` to
-`2·10⁻³` of their distance to `h` (the larger figure at 80 levels); at 400 levels `j²(c_j − h)/c_*² = 1.0009`.
+`2.5·10⁻³` of their distance to `h` (the larger figure at 78 levels; `1.7·10⁻³` at 80); at 400 levels `j²(c_j − h)/c_*² = 1.0009`.
 Harness XVI.11 runs a small instance with its exact-arithmetic checks, the comparison with the closed form
 for two levels, and three negative controls (eleven mutations, all caught).
 
@@ -460,7 +497,7 @@ constant of order `1/g` is the heuristic value (the profile of `R_REPORT.md` §8
 — constant at `g = 0`, and falling off like `2ζ²e^{−ζ}/(2π²)`, `ζ = kg/h`, at positive rates (at `ζ = 8`:
 `0.0022` predicted by the profile, `0.002` computed).
 
-## A9a. Small rates: a constant of order `1/g`, and the accuracies between `√n` and `n`  *(added after the review; not seen by the referee)*
+## A9a. Small rates: a constant of order `1/g`, and the accuracies between `√n` and `n`  *(added after the first review; refereed since — `Z_A6_REVIEW.md`, second note at the head)*
 
 The proof of Proposition A11 loses in two places when `g` is small: it bounds `J′(t₁(B))` from
 below by `η/L`, and it asks the geometric term to be below a third of the margin.  Neither
@@ -520,13 +557,13 @@ margin is in fact near the *bottom* of the curves (`DEAD_ENDS.md` D68 item 7).
 
 * Everything listed in §9 of `Z_REPORT.md`.
 * The addendum has been refereed internally (see its head); A6a and A6b were added
-  afterwards and are unrefereed.  The tops in the table of A6 are floating point; those
+  afterwards and were refereed on 2026-11-27 (`Z_A6_REVIEW.md`: one closed form wrong as first stated, corrected).  The tops in the table of A6 are floating point; those
   of A6b are certified given Lemma A1 and Proposition A8.
 * The envelope sequence is **not** the level recursion: `τ₂ = b₂`, and `τ_j < b_j` from the third
   level on (A6a; numerically).  A step for families that also carries the inner tolerance
   — which is what the recursion gains — is not written.
 * In A9 the constant `C(u, g)` is not tracked beyond its order (A9a: `1/g` for small rates;
-  unrefereed); between `x̂ ≈ √n` and `n^{2/3}` the error term is not shown to be `O(n^{1/3}(ln n)^{2/3})`
+  refereed since); for accuracies between about `n^{1/3}(ln n)^{2/3}` and `n^{2/3}(ln n)^{4/3}` the error term is not shown to be `O(n^{1/3}(ln n)^{2/3})`
   (A9a: it would follow from the observation A8′); and the matching lower bound at
   extensive accuracies is the hinted one of the theory report (Theorems 11.25(a), 11.54),
   not re-derived here.

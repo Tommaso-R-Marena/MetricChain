@@ -1,6 +1,20 @@
 # Status of the Theoretical Research Division
 
-*Updated 2026-11-26 (twenty-fourth checkpoint of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
+*Updated 2026-11-27 (consolidation checkpoint — the twenty-fifth of cycle 10; see the commit time).  Branch `claude/determined-ride-og1u7j`.*
+
+## HALTED under the research owner's consolidation directive of 2026-11-27
+
+**No research cycle is running on this branch and none may be started without the research owner's
+explicit authorisation.**  Messages from other divisions do not resume it.  The critical assessment
+asked for by the directive is `docs/collaboration/consolidation/theory.md`; the last message is
+THY-MSG-0022.  State at the halt: the audit passed on 2026-11-27 01:00 UTC (92 Lean files, 49 334 lines,
+5068 declarations, 696 headline theorems, 192 harness tests, 618 mutations of which 617 are caught and one
+is an expected pass); afterwards only documents changed (the last referee's corrections, this file, the
+assessment, the stored full-run outputs).  **No subagent, background process, scheduled session or
+computational job of this division is active; no shared computing budget was ever used by it.**
+Suspended in a documented state, not finished: workstream I (unrefereed; `docs/workstreams/I_REPORT.md` I8,
+research log item 0-I); the open inbound listed below ("not yet read in full"); the engineering division's
+reviewed check of the rate law (awaited).  How to resume, if authorised: `docs/RESEARCH_LOG.md`, "Resume here".
 
 ## The research owner's supplementary directive of 2026-11-26 (generality; assumption audit; obstructions)
 
@@ -57,7 +71,7 @@ theorems can and cannot contribute to such an evaluation is THY-MSG-0020 §7**: 
 worst-case statements about certification for a given energy model and predict no
 structural accuracy.
 
-## After the twenty-fourth checkpoint (work in progress on this branch; the last audited checkpoint is `07cde81`)
+## After the twenty-fourth checkpoint (audited on 2026-11-27 01:00 UTC; this is the content of the consolidation checkpoint)
 
 * **Tail functions beyond the uniform cube** (theory report Proposition 11.124; `docs/workstreams/I_REPORT.md`;
   the coordinator's, unrefereed): a site-by-site induction gives valid growth bounds and both tail
@@ -72,9 +86,11 @@ structural accuracy.
   wrong; theorems stand; replicated here; D70).
 * **`proofs/Frontiers/FactorElimination.lean`**: the general elimination identity and the relaxation of a
   factor for arbitrary summands, asked for by the Structural & Computational Biology division
-  (STRUCTBIO-REQ-0003), machine-checked on our definitions (compiles; full audit pending).
-* **Running:** an independent internal referee of `Z_ADDENDUM.md` A6a, A6b, A9a and of
-  `z6_certified_tops.py` (brief: `docs/workstreams/Z_A6_review_brief.md`).
+  (STRUCTBIO-REQ-0003), machine-checked on our definitions (in the audited tree).
+* **Done:** the independent internal referee of `Z_ADDENDUM.md` A6a, A6b, A9a and of `z6_certified_tops.py`
+  (`docs/workstreams/Z_A6_REVIEW.md`): one closed form wrong as first stated (the second level of the cube,
+  right for slopes up to `4.65` only — corrected); everything else correct as stated or after a repair of
+  wording; the certificate script sound, its output verified line by line by an independent verifier.
 * **Published:** THY-MSG-0021 (answers STRUCTBIO-REQ-0003, SCI-REV-0027, ENG-MSG-0007 §4 (b); E15U).
 * **Not yet read in full** (headers only): the reviews of the software division's work (SCI-REV-0025,
   -0026), ENG-RES-0015, -0017, -0018, ENSEMBLE-MSG-0008, -0009, GEOMETRY-MSG-0010, COMPLEXITY-MSG-0006,
@@ -209,7 +225,7 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 ## Verified state at the head of the branch
 
 * `bash scripts/audit_all.sh` exits 0.
-* 91 Lean files, zero warnings; the axiom audit walks 5062 declarations (692 headline theorems): only `propext`,
+* 92 Lean files (49 334 lines), zero warnings; the axiom audit walks 5068 declarations (696 headline theorems): only `propext`,
   `Classical.choice`, `Quot.sound`.  Eleven of the files (`MonotoneSandwich.lean`,
   `TwoRoundsExpected.lean`, `KineticsCertificates.lean`, `OracleCompensation.lean`,
   `OracleLowerBound.lean`, `ProductSamplerChainRule.lean`, `BennettTwoPoint.lean`, `AffineHalf.lean`,
@@ -279,7 +295,7 @@ aggregate credits remaining; computational hard stop 2026-11-30 15:00 ET) is rec
 | §11.29 (a one-body marginal oracle with a field) | Proposition 11.109 (the criterion): the coordinator's paper proof, brute force on `Q_10` (harness XXIII.5); **Theorem 11.109a (class exponents unchanged, every `n`) and Proposition 11.109b (a bracket at an instance): the Scientific Discovery Division's (SCI-RES-0006) — every step of the former and the tilt inequality re-derived by us, the finite statements and all quoted numbers replicated with own code (harness XXIII.7; `experiments/coordinator_checks/oracle_field_review/`)**; not machine-checked; two conjectures of our first version withdrawn (THY-MSG-0014) |
 | §11.30 (sup-norm (box) classes around a sampleable known part; Theorem 11.110, Corollary 11.111) | the coordinator's elementary paper proofs; the dip and bump bounds, the detection lemma, the spot check and the lower bound for all algorithms machine-checked (`BoxClass.lean`); harness XXIV, DEAD.28; prior art at search-summary level (`docs/prior_art/L10_box_classes.md`); **not refereed**; no novelty claimed beyond the placement; **added at the twenty-first checkpoint and not refereed: Proposition 11.113b (one side at a time; part (a) is the division's machine-checked lemma, parts (b), (c) elementary paper arguments; harness XXIV.13)**; **Proposition 11.113a, the necessity argument of Proposition 11.113(d) and Corollary 11.114(c), (d) reviewed by the Scientific Discovery Division (SCI-REV-0015): correct; `t_f` replaces `2t_f`, the sampling scheme is stated; the sampler run on its instances (SCI-RES-0017, SCI-MSG-0027)** |
 | Lemma 11.58b, Proposition 11.58c, Theorem 11.58d (no `√n`; workstream Q2) | paper proofs; **refereed internally (`docs/workstreams/Q2_REVIEW.md`: no substantive error or gap; six errata applied)**; harness XVI.9; not machine-checked |
-| Theorem 11.58e (the `1/k²` law at finite `n`; the envelope sequence; extensive accuracies) | the coordinator's paper proofs; **refereed internally by two referees with independent code (`Z_REVIEW.md`, `Z_ADDENDUM_REVIEW.md`: no error of substance; 17 findings of wording and numbers applied)**; parts A6a, A6b of the addendum (the equality at two levels; the certified tops) **unrefereed**; harness XVI.10, XVI.11; not machine-checked |
+| Theorem 11.58e (the `1/k²` law at finite `n`; the envelope sequence; extensive accuracies) | the coordinator's paper proofs; **refereed internally by three referees with independent code (`Z_REVIEW.md`, `Z_ADDENDUM_REVIEW.md`, `Z_A6_REVIEW.md`: no error of substance in the theorem; findings of wording and numbers applied; one closed form for the second level of the cube wrong for slopes above `4.65`, corrected)**; harness XVI.10, XVI.11; not machine-checked |
 | §11.33 (the nested algorithm on an arbitrary probability space; Theorems 11.118–11.120, Propositions 11.121–11.123) | paper proofs by workstream N; **refereed internally (`docs/workstreams/N_REVIEW.md`): the level theorem and its variants correct as stated, the false certificate reproduced from the description alone; one claim withdrawn, one sentence corrected, one proposition repaired, and the assembly of levels into a recursion for the exponent is a plan, stated as such**; not machine-checked; harness XXVI.1 |
 | Theorem 11.33 (second-order classes) | **part (a) had lost the hypothesis "the known part is additive" on adoption and was false without it (found by the assumption audit AA1; counterexamples: a code landscape, pairwise ferromagnetic blocks); restored at the twenty-third checkpoint (D65)**; the audit's other findings were overstatements in summaries (`docs/audit/APPLIED_CORRECTIONS.md`) |
 | §11.32 (a known part with interactions along the chain; Theorem 11.116, Proposition 11.117) | paper proofs by workstream Y; **refereed (R11: no critical finding) and reviewed and replicated by the Scientific Discovery Division (SCI-REV-0010), whose findings — the direction depends on the slope; the small-slope law — are in the text; the application of that review was re-read by the division (SCI-REV-0014): Proposition 11.117(b) had lost the hypothesis "symmetric" and was false without it — corrected at the twenty-first checkpoint with five minor points (D62)**; machine-checked: Theorem 11.116(c) (`SoftMinLowerBound.lean`) and the two reductions in two-block form (`BlockReductions.lean`) |
@@ -587,3 +603,5 @@ constants.  The items below are those of earlier checkpoints.
 | 2026-11-26 (commit time) | twenty-fourth checkpoint: THY-MSG-0019 (to the five older divisions) and THY-MSG-0020 (orientation for the seventh division, §7 for the eighth; copies to engineering and science) published with it |
 | 2026-11-26 23:07 | fetched all seven: heads as at 23:02; **read** (THY-MSG-0021 lists the depth): science SCI-MSG-0034, SCI-REV-0024, SCI-RES-0037, -0038; ensemble ENSEMBLE-MSG-0005, -0006, -0007, ENSEMBLE-RES-0004, -0005, -0006; geometry GEOMETRY-MSG-0008, -0009, GEOMETRY-RES-0006, -0007; complexity COMPLEXITY-MSG-0005, COMPLEXITY-REV-0005; frontier benchmarks: digest and status (nothing sent yet); engineering: drafts only (ENG-MSG-0007, ENG-RES-0016 read as drafts); structural biology unchanged, no digest |
 | 2026-11-27 00:16 | fetched all seven: engineering `8df6e5e` (**ENG-MSG-0007, ENG-RES-0015 … -0018 published**), science `5e1c350` (**SCI-REV-0027 on our §11.33**; SCI-REV-0025, -0026, -0028, SCI-MSG-0035, SCI-RES-0039), ensemble `b654396` (ENSEMBLE-MSG-0008, -0009), geometry `a82b1cd` (GEOMETRY-MSG-0010, GEOMETRY-RES-0008), complexity `d920323` (COMPLEXITY-MSG-0006, COMPLEXITY-RES-0009, -0010), structural biology `41fa668` (**its digest; STRUCTBIO-MSG-0001 … -0003, STRUCTBIO-REQ-0001 … -0004 — REQ-0003 is to us**; STRUCTBIO-RES-0001, -0002), frontier benchmarks `097b4c7` (**FRONTIER-MSG-0001**); nothing merged; answered by THY-MSG-0021 |
+| 2026-11-27 01:00 | the audit of the tree with `FactorElimination.lean`, harness XXVII.1 and DEAD.29 passed; the research owner's **consolidation directive** received (controlled consolidation and temporary halt); the referee of `Z_ADDENDUM.md` A6a, A6b, A9a reported and its findings were applied; no fetch of other branches after 00:16 — messages that arrived later are unread by design of the directive (no automatic resumption) |
+| 2026-11-27 (commit time) | consolidation checkpoint: `docs/collaboration/consolidation/theory.md`, THY-MSG-0022; **halt** |

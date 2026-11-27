@@ -1,0 +1,63 @@
+# independent verification of an output of z6_certified_tops.py: cube, u = 1, 8 levels, K = 3000 sample points
+# the script's tops c_j: 0.110944071671727, 0.0555175256169059, 0.040306053704987, 0.0347023583320734, 0.0323265271617727, 0.0312111468221207, 0.0306188893711827, 0.0302600726830818
+# lines per level: 124, 1645, 2377, 2751, 2936, 3027, 3075, 3105
+(0) abar
+  [ok] abar = 0.11094407167172736 >= a (referee's enclosure: a <= 0.11094407167172736; abar - a <= 4.89e-18) 
+  [ok] the script's ALOW = 0.11094407167172733 <= a 
+(1) the levels
+level 1: c' = 0.110944071671727 (c = 0.110944071671727, c' = c) | 124 lines: 124 certified by a single (line, pair) [124 from the zero line], 0 not of that form
+  [ok] level 1 (T) top 
+  [ok] level 1 (F) family: slopes > 0, betas >= 0, V'(c') = 1 <= 1; stored lines = exact upper hull 
+  [ok] level 1 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 9.1e-17
+       e.g. line (alpha, beta) = (8.3307267910402594, 9.8716120797740163e-08)  <-  l = (0, 0) [zero line],  e0 = 0.12003754595283395, th0 = 1.1849640886544241e-08, witness rho = 0.49992302714491548832
+       [5 s]
+level 2: c' = 0.0555175256169059 (c = 0.110944071671727, c' + abar V(c') >= abar exactly) | 1645 lines: 1645 certified by a single (line, pair) [0 from the zero line], 0 not of that form
+  [ok] level 2 (T) top 
+  [ok] level 2 (F) family: slopes > 0, betas >= 0, V'(c') = 1 <= 1; stored lines = exact upper hull 
+  [ok] level 2 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 6.3e-17
+       e.g. line (alpha, beta) = (8.3280596285372663, 2.4711007914453611e-08)  <-  l = (8.3307267910402594, 9.8716120797740163e-08),  e0 = 0.12007599240671615, th0 = 2.9671985057879083e-09, witness rho = 0.49996148248124006042
+       [12 s]
+level 3: c' = 0.040306053704987 (c = 0.0555175256169059, c' + abar V(c') >= abar exactly) | 2377 lines: 2377 certified by a single (line, pair) [0 from the zero line], 0 not of that form
+  [ok] level 3 (T) top 
+  [ok] level 3 (F) family: slopes > 0, betas >= 0, V'(c') = 0.99999999999999989 <= 1; stored lines = exact upper hull 
+  [ok] level 3 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 6.5e-17
+       e.g. line (alpha, beta) = (8.3273279350518301, 1.3026358370003822e-08)  <-  l = (8.3280596285372663, 2.4711007914453611e-08),  e0 = 0.12008654166461366, th0 = 1.5642902884824632e-09, witness rho = 0.49997203314204580193
+       [29 s]
+level 4: c' = 0.0347023583320734 (c = 0.040306053704987, c' + abar V(c') >= abar exactly) | 2751 lines: 2751 certified by a single (line, pair) [0 from the zero line], 0 not of that form
+  [ok] level 4 (T) top 
+  [ok] level 4 (F) family: slopes > 0, betas >= 0, V'(c') = 0.99999999999999967 <= 1; stored lines = exact upper hull 
+  [ok] level 4 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 6.5e-17
+       [55 s]
+level 5: c' = 0.0323265271617727 (c = 0.0347023583320734, c' + abar V(c') >= abar exactly) | 2936 lines: 2936 certified by a single (line, pair) [0 from the zero line], 0 not of that form
+  [ok] level 5 (T) top 
+  [ok] level 5 (F) family: slopes > 0, betas >= 0, V'(c') = 0.99999999999999911 <= 1; stored lines = exact upper hull 
+  [ok] level 5 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 6.4e-17
+       [87 s]
+level 6: c' = 0.0312111468221207 (c = 0.0323265271617727, c' + abar V(c') >= abar exactly) | 3027 lines: 3027 certified by a single (line, pair) [0 from the zero line], 0 not of that form
+  [ok] level 6 (T) top 
+  [ok] level 6 (F) family: slopes > 0, betas >= 0, V'(c') = 0.99999999999999989 <= 1; stored lines = exact upper hull 
+  [ok] level 6 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 6.1e-17
+       [121 s]
+level 7: c' = 0.0306188893711827 (c = 0.0312111468221207, c' + abar V(c') >= abar exactly) | 3075 lines: 3075 certified by a single (line, pair) [0 from the zero line], 0 not of that form
+  [ok] level 7 (T) top 
+  [ok] level 7 (F) family: slopes > 0, betas >= 0, V'(c') = 0.99999999999999989 <= 1; stored lines = exact upper hull 
+  [ok] level 7 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 6.6e-17
+       [156 s]
+level 8: c' = 0.0302600726830818 (c = 0.0306188893711827, c' + abar V(c') >= abar exactly) | 3105 lines: 3105 certified by a single (line, pair) [0 from the zero line], 0 not of that form
+  [ok] level 8 (T) top 
+  [ok] level 8 (F) family: slopes > 0, betas >= 0, V'(c') = 0.99999999999999833 <= 1; stored lines = exact upper hull 
+  [ok] level 8 (L) every other line is exactly [B - th0 (1 - l(B))]/e0 with th0 >= theta(e0) proved | narrowest witness window rho_b - rho_a: 6.6e-17
+       [192 s]
+(2) the certified majorant: the script's M_upper(g) against the exact maximum over the vertices
+       g = 0: script 0.030260072683081816, referee 0.030260072683081816
+       g = 0.00291391385016: script 0.028121949130253648, referee 0.028121949130253648
+       g = 0.0145695692508: script 0.022489233866645614, referee 0.022489233866645614
+       g = 0.0291391385016: script 0.01664763439471692, referee 0.01664763439471692
+       g = 0.0600572534791: script 0.0072311952622944615, referee 0.0072311952622944615
+       g = 3: script 8.8164048273996551e-10, referee 8.8164048273996551e-10
+  [ok] M_upper is the least double >= the exact maximum (level 8, six rates) 
+
+(3) negative controls: skipped for this instance (run without the fourth argument)
+
+time 192 s
+ALL CHECKS PASS

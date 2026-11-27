@@ -1,0 +1,57 @@
+(1) tau_2 and b_2
+  u = 1:  a = 0.110944071672
+     tau_2 = inf_x a max(a, x + theta(x))/(a + x)   = 0.055517524915 = 0.5004100181 a
+     closed form a^2/(a + x*), x* = 0.1107622644      = 0.055517524915 = 0.5004100181 a
+     b_2, floating point: grid (errs down) 0.055517524915, lines (errs up) 0.055517524915  = [0.5004100181, 0.5004100181] a
+     certified upper bounds: 0.055517525617 (coordinator, K = 3000); 0.055517524916064 (referee, a6_03)
+  [ok] u = 1: tau_2 (formula) = closed form = b_2 to 2e-10 a | (b_2 - tau_2)/a: grid 0.0e+00, lines -1.9e-16
+  u = 2:  a = 0.327813325473
+     tau_2 = inf_x a max(a, x + theta(x))/(a + x)   = 0.165747479464 = 0.5056154420 a
+     closed form a^2/(a + x*), x* = 0.3205318361      = 0.165747479464 = 0.5056154420 a
+     b_2, floating point: grid (errs down) 0.165747479464, lines (errs up) 0.165747479464  = [0.5056154420, 0.5056154420] a
+     certified upper bounds: 0.165747480 = 0.505615446 a (coordinator); 0.165747479467515 (referee, a6_03)
+  [ok] u = 2: tau_2 (formula) = closed form = b_2 to 2e-10 a | (b_2 - tau_2)/a: grid -8.5e-17, lines -8.5e-17
+  u = 0.5:  a = 0.030299861981
+     tau_2 = inf_x a max(a, x + theta(x))/(a + x)   = 0.015150741101 = 0.5000267364 a
+     closed form a^2/(a + x*), x* = 0.0302966217      = 0.015150741101 = 0.5000267364 a
+     b_2, floating point: grid (errs down) 0.015150741101, lines (errs up) 0.015150741101  = [0.5000267364, 0.5000267364] a
+     certified upper bounds: 0.500026741 a (coordinator); -
+  [ok] u = 0.5: tau_2 (formula) = closed form = b_2 to 2e-10 a | (b_2 - tau_2)/a: grid -2.3e-16, lines -9.2e-16
+  [ok] u = 1: the addendum's numbers  tau_2 = 0.055517524915 = 0.500410018 a 
+  [ok] u = 1: the addendum's grid value b_2 = 0.055517524693 is BELOW tau_2 = b_2 (by 2e-9 a: the grid errs downwards); its certified 0.055517525617 is above 
+(2) Proposition A12(b) on the computed curves:  tau(M_{W_j, b_j}) = b_{j+1}
+     u = 1, j =  1: tau(M_j)/a = 0.500410018113 (lines), 0.500410018113 (grid);   b_{j+1}/a = 0.500410018113 (lines), 0.500410018113 (grid)
+     u = 1, j =  2: tau(M_j)/a = 0.363300650205 (lines), 0.363300650205 (grid);   b_{j+1}/a = 0.363300650205 (lines), 0.363300650205 (grid)
+     u = 1, j =  3: tau(M_j)/a = 0.312791447934 (lines), 0.312791447934 (grid);   b_{j+1}/a = 0.312791447934 (lines), 0.312791447934 (grid)
+     u = 1, j =  6: tau(M_j)/a = 0.275984632972 (lines), 0.275984630401 (grid);   b_{j+1}/a = 0.275984632972 (lines), 0.275984630401 (grid)
+     u = 1, j = 12: tau(M_j)/a = 0.266431103478 (lines), 0.266431081183 (grid);   b_{j+1}/a = 0.266431103478 (lines), 0.266431081183 (grid)
+  [ok] u = 1: inf_x a (x + M_j(x))/(a + x) = next top, j = 1..12, both sequences | largest difference 1.3e-16 a
+     u = 2, j =  1: tau(M_j)/a = 0.505615442034 (lines), 0.505615442034 (grid);   b_{j+1}/a = 0.505615442034 (lines), 0.505615442034 (grid)
+     u = 2, j =  2: tau(M_j)/a = 0.383347293690 (lines), 0.383347293690 (grid);   b_{j+1}/a = 0.383347293690 (lines), 0.383347293690 (grid)
+     u = 2, j =  3: tau(M_j)/a = 0.341033365384 (lines), 0.341033365118 (grid);   b_{j+1}/a = 0.341033365384 (lines), 0.341033365118 (grid)
+     u = 2, j =  6: tau(M_j)/a = 0.310336499288 (lines), 0.310336491111 (grid);   b_{j+1}/a = 0.310336499288 (lines), 0.310336491111 (grid)
+     u = 2, j = 12: tau(M_j)/a = 0.300757076960 (lines), 0.300757061536 (grid);   b_{j+1}/a = 0.300757076960 (lines), 0.300757061536 (grid)
+  [ok] u = 2: inf_x a (x + M_j(x))/(a + x) = next top, j = 1..12, both sequences | largest difference 1.7e-16 a
+     u = 1: tau(M_{W_2, b_2}) = b_3 = 0.3633006502 a  (addendum's table: 0.363303 a and 0.363301 a -- the first is a grid value in phi)
+  [ok] u = 1: b_3 = 0.3633006502 a (both floating-point sequences agree to 1e-12 a) 
+(3) the second and third level on the operator R itself (u = 1)
+     table of theta_na (2e6 points in sqrt(e)): largest interpolation error on 20000 random rates: 2.0e-13 a
+     g = 0.001 eps*:  R[theta](g) = 0.0522553872  (phi = 0.5010, beta/g = 0.4359);  coordinator's table: 0.0522553962;  difference -8.1e-08 a
+     g = 0.010 eps*:  R[theta](g) = 0.0458554772  (phi = 0.5131, beta/g = 0.3471);  coordinator's table: 0.0458555137;  difference -3.3e-07 a
+     g = 0.100 eps*:  R[theta](g) = 0.0295522807  (phi = 0.6356, beta/g = 0.0995);  coordinator's table: 0.0295522827;  difference -1.8e-08 a
+     g = 0.200 eps*:  R[theta](g) = 0.0212155188  (phi = 0.7364, beta/g = 0.0379);  coordinator's table: 0.0212155198;  difference -9.0e-09 a
+     g = 0.400 eps*:  R[theta](g) = 0.0109243534  (phi = 0.8697, beta/g = 0.0070);  coordinator's table: 0.0109243554;  difference -1.8e-08 a
+     g = 0.600 eps*:  R[theta](g) = 0.0046821006  (phi = 0.9482, beta/g = 0.0010);  coordinator's table: 0.0046821020;  difference -1.2e-08 a
+     g = 0.900 eps*:  R[theta](g) = 0.0002886136  (phi = 0.9974, beta/g = 0.0000);  coordinator's table: 0.0002886242;  difference -9.6e-08 a
+  [ok] the coordinator's values of R[theta] at seven rates are reproduced to 5e-7 a, and the referee's minima are never above them (any mesh point is an upper bound) | largest difference 3.3e-07 a
+     y + T_2(y) - tau_2 at y/h = 1e-05, 0.00147, 0.218, 1, 1.6, 2.2, 2.8, 3.4, 4:
+        -1.65e-04, -1.93e-03, -1.36e-02, -7.86e-03, +2.50e-03, +1.50e-02, +2.91e-02, +4.44e-02, +6.11e-02
+     first root of x + T_2(x) = tau_2:  x* = 1.467642 h = 0.356042 eps*;   a tau_2/(a + x*) = 0.361184 a
+     a (x + T_2(x))/(a + x) at x = x*(1 + 5e-4, 2e-3, 1e-2, 5e-2): 0.361222, 0.361336, 0.361948, 0.365050 a;  coarse-grid minimum of a S(x)/(a + x): 0.362875 a
+  [ok] the kink is the minimiser: the function increases beyond x* (so tau_3 = a tau_2/(a + x*)) 
+     tau_3 = 0.361184 a   (coordinator: 0.361189 a; earlier referee: 0.361184 a; theory report: 0.361 a);   b_3 = 0.363301 a;   (b_3 - tau_3)/a = 2.117e-03
+  [ok] tau_3 = 0.36118(4) a: agrees with the earlier referee's 0.361184 a to 2e-6 a; the coordinator's 0.361189 a is 5e-6 a above 
+  [ok] tau_3 < b_3, by 2.1e-3 a (0.6 per cent) 
+
+time 83 s
+ALL CHECKS PASS

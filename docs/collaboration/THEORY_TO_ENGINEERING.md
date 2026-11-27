@@ -8,11 +8,15 @@ Computational Research Division.  Each entry links to a durable message; correct
 new linked messages.  Protocol: `docs/collaboration/README.md`.  Current state of the theory
 branch: `docs/collaboration/status/theory.md`.
 
+**2026-11-27: this division is halted under the research owner's consolidation directive.**  Its critical
+assessment is [`consolidation/theory.md`](consolidation/theory.md); its last message is THY-MSG-0022.  Nothing
+below is withdrawn; nothing new will be added until the research owner authorises it.
+
 ## Digest (most important first)
 
 1. **The verified state to build on is the head of `claude/determined-ride-og1u7j`**
-   (`bash scripts/audit_all.sh` exits 0; at the twenty-fourth checkpoint: 91 Lean files, 5062
-   audited declarations, 190 harness tests, 609 mutations — the counts of every checkpoint
+   (`bash scripts/audit_all.sh` exits 0; at the consolidation checkpoint of 2026-11-27: 92 Lean files, 5068
+   audited declarations, 192 harness tests, 618 mutations — the counts of every checkpoint
    are in `status/theory.md`; the figures 57 and 3432 that stood here until then were those
    of an early checkpoint, as the engineering division pointed out, ENG-MSG-0004 §2).  A map of
    the established results with exact Lean declarations and their epistemic status is in
@@ -539,6 +543,7 @@ branch: `docs/collaboration/status/theory.md`.
 | [THY-MSG-0019](messages/theory/THY-MSG-0019.md) | 2026-11-26 | message (to the five older divisions) | **`n·h + O(n^{1/3}(ln n)^{2/3})`** (Theorem 11.58e), certified exponents of `k` nested levels, `n·θ_hint(g) + O((ln n)²)` at extensive accuracies; what was done about SCI-REV-0022 (the review of our assumption audit); answers to SCI-RES-0033, -0035, SCI-MSG-0031 – -0033, GEOMETRY-MSG-0006, -0007, ENSEMBLE-MSG-0004 (E-T4), COMPLEXITY-RES-0005, -0006, COMPLEXITY-MSG-0003, -0004; candidates E-C4, E-C5 done | twenty-fourth checkpoint |
 | [THY-MSG-0020](messages/theory/THY-MSG-0020.md) | 2026-11-26 | message (orientation for the Structural & Computational Biology division; copies to engineering and science) | what is ready to be implemented as a checked guarantee, with Lean statements, proof status, assumptions, trusted inputs and limits; what must not be implemented as a guarantee; five open questions; the research owner's directive on the seventh division, verbatim | twenty-fourth checkpoint |
 | [THY-MSG-0021](messages/theory/THY-MSG-0021.md) | 2026-11-27 | message (to all seven other divisions) | answer to STRUCTBIO-REQ-0003 (general elimination machine-checked: `sum_boxFinset_elim`; pruning, relaxation, rounded exponentials; the second-order question); SCI-REV-0027 on §11.33 accepted and applied (three sentences wrong, replicated here); ENG-MSG-0007 §4 (b): yes, ENG-RES-0016 §2 is Theorem 11.118 with 11.119(a); new: tail functions beyond the uniform cube (Proposition 11.124, workstream I); E15U re-derived, quantitative form, a negative answer to our own question | work in progress — the tree is not yet audited |
+| [THY-MSG-0022](messages/theory/THY-MSG-0022.md) | 2026-11-27 | **final consolidation message** (to all seven other divisions) | the division is halted under the research owner's consolidation directive; the assessment is `docs/collaboration/consolidation/theory.md`; the audited state; what is established, what is unrefereed or conjectural, what was left unread; a correction for the Frontier Benchmarking division's intake (the transfer from rational tables to real energies *is* machine-checked given entrywise bounds); the last referee's result (one closed form corrected) | completed; no reply expected |
 | [THY-REQ-0001](requests/theory/THY-REQ-0001.md) | 2026-11-25 | request | break the cost claim of the two-level layer-cake algorithm (validity at scale, cost exponent, crossover) | **done for two levels at bounded accuracy (ENG-RES-0008)**: no violation; the flat instance is not the worst at finite `n`; answered by THY-RES-0004; open: three levels, the extensive regime |
 | [THY-REQ-0002](requests/theory/THY-REQ-0002.md) | 2026-11-25 | request | exact chain covering beyond 12 torsions; where does chain-length independence set in? | in progress — lattice done to 24 torsions, off-lattice to 12 (ENG-RES-0002, -0007): it does not set in |
 | [THY-REQ-0003](requests/theory/THY-REQ-0003.md) | 2026-11-25 | request | does a physically motivated residual have a useful constant in the profile format? | accepted in a revised design (ENG-RES-0003); our clarification in THY-MSG-0005 §3(b) |

@@ -1216,6 +1216,24 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXVI.1 M8: the profile of the cube claimed to have slope at most -1 also below p_u
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M1: the fibre that serves across the last site keeps the whole budget
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M2: the two fibres' contributions added instead of the larger one taken
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M3: the weights of the two letters exchanged in the recursion
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M4: the costs of the two directions exchanged in the recursion
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M5: the upper tail function with the weights of the layer below
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M6: the upper tail function with the interior of depth j bounded through the budget j
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M7: the lower tail function with the growth at one more unit of budget
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M8: the Laplace exponent without the cost of transport
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVII.1 M9: the Laplace exponent with the equal split of the divergence in place of the max-plus convolution over the sites
+                  exit=1  1 TEST(S) MISBEHAVED
 
-609 mutations: 608 caught, 1 expected pass, 0 not as expected
-156 baseline runs of the unmutated harness (one per selection): 156 behave as expected, 0 misbehave
+618 mutations: 617 caught, 1 expected pass, 0 not as expected
+157 baseline runs of the unmutated harness (one per selection): 157 behave as expected, 0 misbehave

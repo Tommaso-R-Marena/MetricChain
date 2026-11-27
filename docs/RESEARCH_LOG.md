@@ -2920,7 +2920,42 @@ the dictionary; a digit of §11.19 remark (1) corrected after its check of the r
 An independent referee of `Z_ADDENDUM.md` A6a, A6b, A9a and of the certified-tops script was
 launched (brief in the repository).
 
-### Resume here (cycle 10, twenty-fourth checkpoint)
+### Cycle 10, twenty-fifth checkpoint — consolidation and halt (2026-11-27)
+
+**The research owner's directive "Controlled Consolidation and Temporary Research Halt" was
+received at about 01:00 UTC**, when the audit of the tree described in the previous entry had
+just passed.  Done under it, and nothing else: (1) the one running subagent — the referee of
+`Z_ADDENDUM.md` A6a, A6b, A9a and of the certified-tops script — was allowed to finish, being
+in its last runs: **one statement wrong as first stated** (the closed form `τ₂ = a²/(a + x*)` for
+the cube holds for `u ≤ 4.6535` only; no proof used it), everything else correct as stated or
+after a repair of wording or of a citation, the script a sound certificate whose output it
+verified line by line with its own interval arithmetic (`docs/workstreams/Z_A6_REVIEW.md`); its
+findings are applied in the addendum (second note at its head) and in Theorem 11.58e (e)–(g).
+(2) The critical assessment `docs/collaboration/consolidation/theory.md`.  (3) The stored
+full-run outputs regenerated; status file, digest, README; THY-MSG-0022.  No new research was
+started; workstream I and the open inbound were left as documented.
+
+**Numbers of the audit that closes the checkpoint** (2026-11-27 01:00 UTC, on the code tree of
+commit `61461f3`; only documents and stored outputs changed afterwards): 92 Lean files, 49 334
+lines, 5068 declarations and 696 headline theorems on the three standard axioms; 192 harness
+tests (162 that must survive, 30 documented refutations); 618 mutations (617 caught, one
+expected pass; 157 baseline runs); benchmarks, reference checker, conformance vectors and
+document references pass.
+
+**Subagents of this checkpoint:** the referee named above (brief in the repository; no
+authority beyond it).  **Active at the halt:** none — no subagent, no background process, no
+scheduled session, no computational job.
+
+### Resume here (cycle 10, twenty-fourth checkpoint; valid at the consolidation halt of 2026-11-27 with the changes stated first)
+
+**HALTED.**  This branch is halted under the research owner's consolidation directive of 2026-11-27; do not
+resume without the owner's explicit authorisation, and not because another division sends a message.  Read
+`docs/collaboration/consolidation/theory.md` first.  Changes against the block below: the verified state is that
+of the twenty-fifth checkpoint (entry above: 92 files, 5068 declarations, 192 tests, 618 mutations); item 0-G is
+**done** (`Z_A6_REVIEW.md`); item 0-zero is done; items 0-I and 0-J (added after the twenty-fourth checkpoint)
+are where the work stopped; the recommended next actions are E1–E3 of the assessment, in that order, and
+nothing else is recommended.
+
 
 **State.**  Every module under `proofs/` (91 files, 49 212 lines) builds with zero warnings and is walked by the axiom audit (5062 declarations; 692 headline theorems); the harness (190 registered tests: 161 that must survive, 29 documented refutations) and its mutation tests (609 mutations: 608 caught, one expected pass; 156 baseline runs; crashing mutants rejected) pass; `bash scripts/audit_all.sh` exits 0 (`AUDIT PASSED`, 2026-11-26 23:01 UTC).  **Eight divisions** work on eight branches: this one;
 `research/ubuntu-engineering` (Computational Research); `research/scientific-translation`

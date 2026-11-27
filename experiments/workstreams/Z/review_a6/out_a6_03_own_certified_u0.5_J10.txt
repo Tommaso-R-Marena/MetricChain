@@ -1,0 +1,28 @@
+# cube, u = 0.5: referee's certified multi-rate sequence (K = 1500 sample points + 400 around the cap tangency), 10 levels
+# a in [0.03029986198076591, 0.03029986198076591] (referee's enclosure, width 6.1e-59); abar = 0.030299861980765914; h = 0.007672866478 (float)
+# floating-point bracket of the envelope tops (K = 20000, refined): 4 s
+# tau_2 = 0.015150741101 = 0.500026736 a (float; minimum of a max(a, x + theta(x))/(a + x))
+# columns: j | own certified c_j (the double, 17 significant digits) | c_j/a, an upper bound printed with an exact ceiling | lines | float bracket of b_j/a: [grid, lines] | coordinator's certified c_j/a (as printed) | (own - b_j)/(b_j - h) | (coord - b_j)/(b_j - h) | j^2 (own - h)/c_*^2
+   1 | 0.030299861980765914 | 1.0000000001 |   196 | [1.0000000000, 1.0000000000] | 1.000000000 |  0.00e+00 |       nan | 1.198293
+   2 | 0.015150741101022831 | 0.5000267365 |   976 | [0.5000267364, 0.5000267364] | 0.500026741 |  9.70e-12 |  1.69e-08 | 1.584070
+   3 | 0.010866894763765714 | 0.3586450253 |  1361 | [0.3586450252, 0.3586450252] | 0.358645034 |  1.09e-10 |  8.53e-08 | 1.522360
+   4 | 0.0092620627692628042 | 0.3056800317 |  1573 | [0.3056800316, 0.3056800316] | 0.305680047 |  7.59e-10 |  2.89e-07 | 1.346585
+   5 | 0.0085717479164019988 | 0.2828972595 |  1663 | [0.2828972200, 0.2828972203] | 0.282897289 |  1.33e-06 |  2.34e-06 | 1.190086
+   6 | 0.0082466367980796734 | 0.2721674708 |  1722 | [0.2721673513, 0.2721673525] | 0.272167511 |  6.31e-06 |  8.44e-06 | 1.093898
+   7 | 0.008076738184350743 | 0.2665602302 |  1753 | [0.2665601794, 0.2665601820] | 0.266560276 |  3.81e-06 |  7.22e-06 | 1.048035
+   8 | 0.0079763796205635819 | 0.2632480513 |  1779 | [0.2632473311, 0.2632473382] | 0.263247512 |  7.19e-05 |  1.80e-05 | 1.028711
+   9 | 0.0079105829827179758 | 0.2610765352 |  1773 | [0.2610759254, 0.2610759355] | 0.261076079 |  7.77e-05 |  1.95e-05 | 1.019719
+  10 | 0.0078644523310401372 | 0.2595540646 |  1788 | [0.2595536941, 0.2595537037] | 0.259553884 |  5.86e-05 |  3.00e-05 | 1.014611
+
+  [ok] own certified tops are nonincreasing and above h 
+  [ok] own certified tops >= floating-point lower bracket of the envelope tops (Corollary A4) | least (c_j - grid_j)/a: 6.87e-16
+  [ok] the coordinator's certified tops (as printed, 12 decimals) >= floating-point lower bracket, at all 10 common levels | least (c_j - grid_j)/a: 7.73e-12
+  [ok] the two certified sequences agree to within 1e-2 of b_j - h at every common level (they need not agree further) | largest |own - coordinator|/(b_j - h): 5.82e-05; own is the smaller one at 7 of 10 levels
+  [ok] the bracket [grid, lines] is consistent (grid <= lines up to rounding) and narrow | largest width (lines - grid)/(b_j - h): 1.51e-06
+  [ok] j = 2: own certified c_2 >= tau_2 (closed form), and within 1e-6 a of it | (c_2 - tau_2)/a = 2.39e-12
+  [ok] j = 2: the coordinator's certified c_2 >= tau_2 | (c_2 - tau_2)/a = 4.16e-09
+  level 10, certified majorant M(g) at g = 0.1h, 0.5h, h:  0.007353721  0.005887562  0.004333417   (theta_hint: 0.007295981  0.005883955  0.004333344)
+  [ok] own certified majorant >= theta_hint at the three rates 
+
+time 33 s
+ALL CHECKS PASS
