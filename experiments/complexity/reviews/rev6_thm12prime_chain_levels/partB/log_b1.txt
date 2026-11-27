@@ -1,0 +1,26 @@
+Theorem 1 with Lam = 4|E| (the note's choice):
+claw K_{1,3}                 n= 4 |E|= 3 Lam= 12.00 maxcut= 3 OPT_3(G)= 3.00000 (2mc-|E|=3)  target=  1083.0000  explicit(red/full)=  1083.0000/  1083.0000  best reduced=  1083.000000  best full=  1083.000000  attained; never exceeded; reached: True
+paw                          n= 4 |E|= 4 Lam= 16.00 maxcut= 3 OPT_3(G)= 2.50000 (2mc-|E|=2)  target=  1442.0000  explicit(red/full)=  1442.0000/  1442.0000  best reduced=  1442.000000  best full=  1442.000000  attained; never exceeded; reached: True
+bull                         n= 5 |E|= 5 Lam= 20.00 maxcut= 4 OPT_3(G)= 3.50000 (2mc-|E|=3)  target=  2203.0000  explicit(red/full)=  2203.0000/  2203.0000  best reduced=  2203.000000  best full=  2203.000000  attained; never exceeded; reached: True
+K_{2,3}                      n= 5 |E|= 6 Lam= 24.00 maxcut= 6 OPT_3(G)= 6.00000 (2mc-|E|=6)  target=  2646.0000  explicit(red/full)=  2646.0000/  2646.0000  best reduced=  2646.000000  best full=  2646.000000  attained; never exceeded; reached: True
+K_5                          n= 5 |E|=10 Lam= 40.00 maxcut= 6 OPT_3(G)= 2.50000 (2mc-|E|=2)  target=  4402.0000  explicit(red/full)=  4402.0000/  4402.0000  best reduced=  4402.000000  best full=  4402.000000  attained; never exceeded; reached: True
+C_7                          n= 7 |E|= 7 Lam= 28.00 maxcut= 6 OPT_3(G)= 6.30678 (2mc-|E|=5)  target=  4205.0000  explicit(red/full)=  4205.0000/  4205.0000  best reduced=  4205.000000  best full=  4205.000000  attained; never exceeded; reached: True
+prism                        n= 6 |E|= 9 Lam= 36.00 maxcut= 7 OPT_3(G)= 6.00000 (2mc-|E|=5)  target=  4685.0000  explicit(red/full)=  4685.0000/  4685.0000  best reduced=  4685.000000  best full=  4685.000000  attained; never exceeded; reached: True
+K_3 + K_2 (disconnected)     n= 5 |E|= 4 Lam= 16.00 maxcut= 3 OPT_3(G)= 2.50000 (2mc-|E|=2)  target=  1762.0000  explicit(red/full)=  1762.0000/  1762.0000  best reduced=  1762.000000  best full=  1762.000000  attained; never exceeded; reached: True
+edge + isolated vertex       n= 3 |E|= 1 Lam=  4.00 maxcut= 1 OPT_3(G)= 1.00000 (2mc-|E|=1)  target=   281.0000  explicit(red/full)=   281.0000/   281.0000  best reduced=   281.000000  best full=   281.000000  attained; never exceeded; reached: True
+W_5 (wheel, 6 vertices)      n= 6 |E|=10 Lam= 40.00 maxcut= 7 OPT_3(G)= 4.73607 (2mc-|E|=4)  target=  5204.0000  explicit(red/full)=  5204.0000/  5204.0000  best reduced=  5204.000000  best full=  5204.000000  attained; never exceeded; reached: True
+Petersen                     n=10 |E|=15 Lam= 60.00 maxcut=12 OPT_3(G)= 9.92820 (2mc-|E|=9)  target= 12609.0000  explicit(red/full)= 12609.0000/ 12609.0000  best reduced= 12609.000000  best full= 12609.000000  attained; never exceeded; reached: True
+Power of the test: the same with a much smaller Lam (the formula should then FAIL when OPT_3(G) > 2maxcut-|E|):
+paw                          n= 4 |E|= 4 Lam=  0.05 maxcut= 3 OPT_3(G)= 2.50000 (2mc-|E|=2)  target=     6.5000  explicit(red/full)=     6.5000/     6.5000  best reduced=     6.940826  best full=     6.940826  attained; EXCEEDED by 0.440826; reached: False
+      -> excess over the formula 0.44083 (violation detected)
+paw                          n= 4 |E|= 4 Lam=  0.50 maxcut= 3 OPT_3(G)= 2.50000 (2mc-|E|=2)  target=    47.0000  explicit(red/full)=    47.0000/    47.0000  best reduced=    47.000000  best full=    47.000000  attained; never exceeded; reached: True
+      -> excess over the formula 0.00000 (no violation)
+K_5                          n= 5 |E|=10 Lam=  0.05 maxcut= 6 OPT_3(G)= 2.50000 (2mc-|E|=2)  target=     7.5000  explicit(red/full)=     7.5000/     7.5000  best reduced=     7.946574  best full=     7.946574  attained; EXCEEDED by 0.446574; reached: False
+      -> excess over the formula 0.44657 (violation detected)
+K_5                          n= 5 |E|=10 Lam=  0.50 maxcut= 6 OPT_3(G)= 2.50000 (2mc-|E|=2)  target=    57.0000  explicit(red/full)=    57.0000/    57.0000  best reduced=    57.000000  best full=    57.000000  attained; never exceeded; reached: True
+      -> excess over the formula 0.00000 (no violation)
+C_7                          n= 7 |E|= 7 Lam=  0.05 maxcut= 6 OPT_3(G)= 6.30678 (2mc-|E|=5)  target=    12.5000  explicit(red/full)=    12.5000/    12.5000  best reduced=    13.720511  best full=    13.720511  attained; EXCEEDED by 1.220511; reached: False
+      -> excess over the formula 1.22051 (violation detected)
+C_7                          n= 7 |E|= 7 Lam=  0.50 maxcut= 6 OPT_3(G)= 6.30678 (2mc-|E|=5)  target=    80.0000  explicit(red/full)=    80.0000/    80.0000  best reduced=    80.461318  best full=    80.461318  attained; EXCEEDED by 0.461318; reached: False
+      -> excess over the formula 0.46132 (violation detected)
+ALL OK (8s)

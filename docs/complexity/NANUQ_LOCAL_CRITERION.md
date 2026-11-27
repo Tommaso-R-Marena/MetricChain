@@ -1,8 +1,9 @@
 # The NANUQ metric: a local criterion, all galled planar networks, and why "galled" cannot be dropped
 
-Working paper of the complexity division, first version 2026-11-26; **revised 2026-11-26 after the internal
-adversarial reviews `COMPLEXITY-REV-0002`, `COMPLEXITY-REV-0004` and `COMPLEXITY-REV-0005`** (what changed: §11;
-the third covers the later additions, Corollary 5′, §7.1 and §7.2).  Register: `THEOREMS.md` CX-T5–CX-T9, CX-T13,
+Working paper of the complexity division, first version 2026-11-26; **revised 2026-11-26 and 2026-11-27 after the
+internal adversarial reviews `COMPLEXITY-REV-0002`, `COMPLEXITY-REV-0004`, `COMPLEXITY-REV-0005` and
+`COMPLEXITY-REV-0006`** (what changed: §11; the third covers the later additions, Corollary 5′, §7.1 and §7.2; the
+fourth covers Theorem 12′ and Corollary 14(v); internal AI reviews, not peer review).  Register: `THEOREMS.md` CX-T5–CX-T9, CX-T13,
 CX-T26, CX-T27, CX-V3, CX-V5.  Problem: `OPEN_PROBLEMS.md` B (Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke,
 *Distinguishing Phylogenetic Level-2 Networks with Quartets and Inter-Taxon Quartet Distances*, Bull. Math.
 Biol. 2025; cited as [HABIMRW] by the numbering of arXiv:2507.17308v2).  References are listed in §12.
@@ -58,7 +59,7 @@ networks of the class (B1) and circular decomposability for level-3 bloblets (B2
    hanging at the positions.  So for level 2 the statement of B1 holds for a network **if and only if** these
    numbers are positive; for bloblets: `k_1 + k_2 > C(k_B − 1, 2)`, resp. `k_1 + 1 > C(k_B − 2, 2)` when no leaf
    hangs between the lower hybrid node and the far branch node (§7.2).  This contains both formulas of
-   Theorem 9.  **Theorem 12′ (added after REV-0005, unreviewed)** [P + X]: when one of these numbers is negative,
+   Theorem 9.  **Theorem 12′ (added after REV-0005; internally reviewed in REV-0006)** [P + X]: when one of these numbers is negative,
    the metric is Kalmanson for *no* circular order — five leaves and three four-point inequalities suffice —
    so for level 2 "`d_N` is circular decomposable" is decided by the critical weights.
 
@@ -954,11 +955,12 @@ the new network is Kalmanson for no circular order.  ∎
 metric" and proved the failure for the induced order only; the referee pointed out that Theorem 10′(d) cannot be
 invoked for other orders (the networks obtained from one network by attaching clades are not a class closed under
 restriction) and found no order in 270 instances.  For an hour (v) read "for the induced circular order".
-Theorem 12′, found after the review and **not seen by any referee**, proves the statement for every order.
+Theorem 12′, found after that review, proves the statement for every order; the sixth review (REV-0006) found
+the theorem and this corollary correct.
 
-**Theorem 12′ (a negative critical weight excludes every circular order) [P + X; added 2026-11-26 after REV-0005,
-unreviewed].**  Let `N` be an outer-labeled planar network of level at most 2 and `C` a circular order for which it
-is outer-labeled planar.  If the critical split of some nested blob has negative weight, then `d_N` is Kalmanson
+**Theorem 12′ (a negative critical weight excludes every circular order) [P, given Theorem 12] + [X]; added
+2026-11-26 after REV-0005; internally reviewed in REV-0006.**  Let `N` be a binary semi-directed network of level at
+most 2 on `n ≥ 4` leaves and `C` a circular order for which it is outer-labeled planar.  If the critical split of some nested blob has negative weight, then `d_N` is Kalmanson
 for **no** circular order of the leaves.  Consequently, for these networks:
 (a) `d_N` is circular decomposable — Kalmanson for some circular order — if and only if every critical split has
 weight `≥ 0`; and then it is Kalmanson for `C`.
@@ -979,8 +981,9 @@ A metric is Kalmanson for a circular order `C'` iff on every four leaves the sum
 `C'` is at least each of the other two pair sums.  So a pair sum that is strictly the largest of the three must
 belong to the pairs that cross in `C'`.
 
-Let `𝔅` be a nested blob with `α(S*) < 0`.  By Theorem 12(b), `M` contains at least two positions.  Choose leaves:
-`B_1`, the first leaf (in `C`) at `b_1`;  `Z` at a position `b_j` with `j ∈ M`, and `j < k_B` if `k_2 = 0`;  `C_c`, the last
+Let `𝔅` be a nested blob with `α(S*) < 0`.  Then `k_1 ≥ 1` and `k_B ≥ 2` (Theorem 12(a)), and by Theorem 12(b) `M`
+contains at least two positions.  Choose leaves:
+`B_1`, the first leaf (in `C`) at `b_1`;  `Z` at a position `b_j` with `j ∈ M` (so `j < k_B` if `k_2 = 0`);  `C_c`, the last
 leaf at `c_1` if `k_2 ≥ 1`, the last leaf at `b_{k_B}` if `k_2 = 0`;  `Y` at `y`;  `X_1` at `x_1`.  In `C` they occur in the order
 `B_1, Z, C_c, Y, X_1`.  We use three facts.  By Theorem 12(a) a split other than a critical split has `w ≥ 0`, and
 `w > 0` iff it is displayed.  The critical split of another blob `𝔅'` has the leaves of all positions of `𝔅` but one
@@ -1026,9 +1029,23 @@ backtracking search over all circular orders on the 423 instances with at most t
 the others, the Kalmanson property for `C`.  `level2_all_orders_explicit.py`, on **explicit rooted networks** with
 general pendant subnetworks (trees, level-1 cycles, further nested blobs; blobs entered through the root or a cut
 edge; metric from the switchings, `netcalc.py`): 1 400 networks with at most 14 leaves, 287 negative critical
-weights, the five leaves taken from the circular order alone, 1 534 choices, all inequalities strict; all circular
-orders tried on the 53 networks with at most 8 or 9 leaves, none works.  Logs: `level2_all_orders.log`,
-`level2_all_orders_explicit.log`.)
+weights, `B_1` and `C_c` read off the circular order and `Z`, `Y`, `X_1` taken from the generator's record of the
+positions, 1 534 choices, all inequalities strict; all circular orders tried on the 53 networks with at most 8
+or 9 leaves, none works.  Logs: `level2_all_orders.log`, `level2_all_orders_explicit.log`.)
+
+*What these two programs do not test, and what does* (REV-0006, findings 5, 6).  Checking the inequalities on
+leaves chosen by the proof is not independent of the proof; the independent part of our evidence is the search
+over all orders (423 + 53 instances).  And the explicit test hardly reaches the cases step (1) is about: of its
+287 negative critical weights, 262 belong to blobs entered through the root; of the 25 entered through a cut
+edge, 15 enter at a middle `b`-position, 7 at `b_{k_B}`, 2 at `b_1`, 1 at `c_1`; position `y` carries more than one
+leaf in 6 cases, `x_1` in 11.  The referee supplied what was missing, with its own code written from the
+definitions: 25 620 explicit networks with a negative critical weight (7 to 14 leaves), each searched exactly
+over **all** circular orders — none is Kalmanson; among them 2 024 / 2 001 / 1 828 / 2 328 / 3 440 negative blobs
+entered at `b_1` / `c_1` / another `c`-position / `b_{k_B}` / a middle `b`-position with compound pendant
+subnetworks at `y` and `x_1`, networks with two nested blobs one inside the other at every kind of position, and
+9 338 networks generated from random trees and mutations without any use of blobs or positions; 224 739
+quintuples satisfy the three inequalities; 35 002 further splits separating `{Y,X_1}` from `{B_1,C_c}` have weight
+exactly 0 (`reviews/rev6_thm12prime_chain_levels/partA/`).
 
 So for level at most 2 the property studied in [HABIMRW] — "`d_N` is circular decomposable", with or without the
 displayed splits as support — is decided by the critical weights: no circular order other than the planar ones
@@ -1146,9 +1163,11 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
 * Nothing about networks that are not outer-labeled planar.
 * The non-galled planar networks for which the conclusion survives are classified for level 2 only
   (Theorem 12); for level 3 and above the blobs that are not galled have not been listed.  For level at most
-  2 the other circular orders are settled by Theorem 12′ (a negative critical weight excludes every order),
-  which was written after the last review and has not been seen by a referee; before it, this was known by
-  computation only (the nine bloblets with at most nine leaves; the 270 instances of the referee of REV-0005).
+  2 the other circular orders are settled by Theorem 12′ (a negative critical weight excludes every order;
+  reviewed in REV-0006, which also searched all orders on 25 620 explicit networks); before it, this was known
+  by computation only (the nine bloblets with at most nine leaves; the 270 instances of the referee of REV-0005).
+  Theorem 12′ is conditional on Theorem 12(a) — in particular on the claim that undisplayed non-critical splits
+  have weight exactly zero — which rests on a computed table that no kernel checks.
 * For "Kalmanson" without exact support the sharp class is `𝒦′` (Theorem 10′, §7.1) — for classes closed
   under restriction and cherry replacement; nothing is shown about a single system outside `𝒦′` (§7.1,
   Remark 3), and the six-leaf outer-labeled planar networks that display the forbidden pattern are not
@@ -1166,8 +1185,9 @@ number of blobs it is not sufficient — Modified NANUQ lies in it and fails on 
 * The strongest objection of the third referee, in its words: Theorem 12 "classifies split weights for the
   planar order only"; the blob in question is the second level-2 generator, which is known; where a critical
   weight is negative the note does not show that the metric fails for every circular order; and these networks
-  lie outside the class about which [HABIMRW] conjecture anything.  The third point is answered by Theorem 12′
-  (unreviewed); the others stand.
+  lie outside the class about which [HABIMRW] conjecture anything.  The third point is answered by Theorem 12′;
+  the others stand.  The objection of the fourth referee of this note (REV-0006) to Theorem 12′ itself: "a ten-line corollary.  All its
+  content is in Theorem 12(a) … The five-leaf obstruction gives no handle on level 3."  Accepted.
 
 ## 10. Reproduction
 
@@ -1185,7 +1205,7 @@ Our programs: `experiments/complexity/nanuq/` (Python 3 + `networkx`).
 | `level2_explicit.py N seed maxleaves` | Theorem 12 on **explicit rooted networks** (only `netcalc.py`; independent of the four trees and of Lemmas C, D); logs for `120 1 10`, `400 2 12`, `400 3 11` | minutes |
 | `level2_fourtrees_check.py` | the four trees of §7.2 are the trees displayed by the explicit network, 155 bloblets | seconds |
 | `level2_all_orders.py 13 10` | Theorem 12′: on all blow-ups of the nested bloblets with position sizes ≤ 3 and at most 13 leaves — the formula of Theorem 12(b); for a negative critical weight the three strict four-point inequalities for every admissible choice of the five leaves and the identity for the first difference; an independent search over all circular orders (≤ 10 leaves); for weight ≥ 0 the Kalmanson property for the planar order.  Log: `level2_all_orders.log` | minutes |
-| `level2_all_orders_explicit.py N seed maxleaves brute` | Theorem 12′ on explicit rooted networks with general pendant subnetworks (only `netcalc.py` and the generator of `level2_explicit.py`); log for `500 6 12 8`, `500 7 13 9`, `400 8 14 8` | minutes |
+| `level2_all_orders_explicit.py N seed maxleaves brute` | Theorem 12′ on explicit rooted networks with general pendant subnetworks (only `netcalc.py` and the generator of `level2_explicit.py`); log for `500 6 12 8`, `500 7 13 9`, `400 8 14 8`.  Coverage (REV-0006): 262 of the 287 negative cases are blobs entered through the root; the targeted and blob-free generators of the referee are in `reviews/rev6_thm12prime_chain_levels/partA/` (`t1_thm12prime.py`, `t2_twoblobs.py`, `t3_mutation.py`; library `rn.py`) | minutes |
 | `kalmanson_only.py`, `kalmanson_only.py extra`, `forbidden_in_nstar.py` | Corollary 5′ on all six-point systems; Theorem 10′(d): 133 = 127 + 6, the 17 excluded systems, the formula of (c) for `m ≤ 6`, no circular order for the least failing blow-ups; the pattern in `N*` | seconds |
 | `test_bloblets.py k n…`, `test_multiblob.py n` | the conclusion of Theorem 7 on all bloblets of level `k` / all networks with `n` leaves, **as generated from twin trees and substitution** | minutes |
 | `counterexample7.py`, `verify_nongalled.py`, `verify_nongalled2.py`, `nongalled_family.py`, `nongalled_formula.py` | Theorem 9 | seconds–minutes |
@@ -1263,16 +1283,23 @@ were caught, the formula of the note never.
 
 | finding | change |
 |---|---|
-| 1 (major under one reading): Corollary 14, (v) ⇒ (i) is proved for the induced circular order only | first narrowed to "for the induced circular order" (commit `13b582b`); then **proved for every circular order: Theorem 12′** (five leaves, three four-point inequalities; `level2_all_orders.py`), and (v) restored to "for some circular order".  Theorem 12′ is later than the review and unreviewed |
+| 1 (major under one reading): Corollary 14, (v) ⇒ (i) is proved for the induced circular order only | first narrowed to "for the induced circular order" (commit `13b582b`); then **proved for every circular order: Theorem 12′** (five leaves, three four-point inequalities; `level2_all_orders.py`), and (v) restored to "for some circular order".  Theorem 12′ is later than that review; it was reviewed in REV-0006 |
 | 2: the dichotomy of Lemma C is Lemma 4.2 of Huber et al., arXiv:2408.12997 | attribution paragraph after Lemma C; §0 item 6; §12; `PRIOR_ART.md` B-VIII; Lemma C is [K] for the dichotomy, [P] for the orientation argument, the source, parallel edges and the planarity statement |
 | 3: the last sentence of §7.1, Remark 1 is not proved | sentence replaced: stated as not proved, with the range in which it was computed (all systems on 6–8 points; samples on 9–10) |
 | 4: "624 substitutions" are 624 quadruples giving 74 systems, and are covered by Lemma 8 | said so in Step 1 of the proof of Theorem 12 |
 | 5: the formula of Theorem 10′(c) holds for arbitrary clades; the "no circular order" statement of (d) depends on the clades | both said; the clades used are described, and the referee's recomputation for all four orientations of the caterpillars is cited |
 | 6: wording of Lemma 0, step (2) and of the last sentence before "(⊇)" | reworded as the referee asks |
 
-Not reviewed by anyone: `NANUQ_HIGHER_LEVELS.md` (Theorem A and the six-leaf survey) and the Lean file
-`NanuqPattern.lean` (kernel-checked, so its content is not in doubt, but the correspondence between the file and
-the note was not examined by a referee).
+**Changes after the review COMPLEXITY-REV-0006** (Theorem 12′, Corollary 14(v), "History of (v)").  The referee
+re-derived every step and found no gap; its findings concern how the note described its own evidence.
+
+| finding | change |
+|---|---|
+| 5: the explicit test hardly exercises the cases step (1) is about | the breakdown of that test and the referee's own runs are reported after the proof of Theorem 12′ |
+| 6: only `B_1`, `C_c` are read off the order; wording of the theorem ("binary semi-directed, `n ≥ 4`"; a redundant proviso; `k_1 ≥ 1`, `k_B ≥ 2`; the label) | sentence and wording corrected |
+
+`NANUQ_HIGHER_LEVELS.md` was reviewed in REV-0006 as well (changes recorded there).  Not examined by any referee:
+the correspondence between the Lean files and the note.
 
 ## 12. References
 

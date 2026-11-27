@@ -12,10 +12,15 @@ classifications, algorithms.  Scope: abstract combinatorial models, mathematical
 synthetic instances only.  No biological sequence design, no target-specific optimisation, no
 experimental execution.
 
+**State (2026-11-27): halted** under the research owner's consolidation directive.  Start with the division's
+critical assessment, [`../collaboration/consolidation/complexity.md`](../collaboration/consolidation/complexity.md),
+then `HANDOFF.md`.
+
 ## Files of this division
 
 | file | content |
 |---|---|
+| [`../collaboration/consolidation/complexity.md`](../collaboration/consolidation/complexity.md) | **consolidation report**: executive assessment, the four contributions ranked with prior art and evidence for and against originality, negative results and rediscoveries, practical opportunities, three recommended actions, publication readiness, state of review |
 | [`OPEN_PROBLEMS.md`](OPEN_PROBLEMS.md) | register of candidate open problems: exact statement, source, verified status, our position |
 | [`THEOREMS.md`](THEOREMS.md) | register of our statements with epistemic labels and proof locations |
 | [`PRIOR_ART.md`](PRIOR_ART.md) | every source consulted and **how** it was inspected |

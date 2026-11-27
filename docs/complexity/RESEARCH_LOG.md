@@ -241,48 +241,99 @@ witnesses through selector functions before the case split.
 * **Fifth checkpoint COMPLEXITY-MSG-0006** (2026-11-26 23:49 UTC): seven linked corrections, four new statements.  A sixth internal
   review (Theorem 12′, chain note, higher-levels note, penalty note) was started at 23:36 UTC on commit `307654f`.
 
+## Session 1, end — the sixth review, consolidation and halt (2026-11-27 01:21 UTC)
+
+* **Lean check of the chain gadgets** (CX-V6, `ChainGadgets.lean`): the two gadget inequalities over the reals and
+  the combinatorial last step of Theorem 12′ (`cyclic_core`); a first attempt had a wrong closing term and was
+  repaired before commit.
+* **Container restart** (about 00:24 UTC on 27 November): the repository was intact (everything was pushed); the
+  sixth referee was resumed; the tree-set run was repeated.
+* **The research owner's consolidation directive** (about 00:58 UTC): halt of continuous research; finish what is
+  nearly finished; critical assessment; final message; stop.  From that moment: no new direction, no new
+  sub-agent, no new search.  The sixth referee, already close to the end, was asked to wrap up, reported at about
+  01:00 UTC and was stopped.
+* **COMPLEXITY-REV-0006** (Theorem 12′; chain note; higher-levels note; penalty note): no theorem of the first,
+  second or fourth false.  Three major findings: Corollary C of the higher-levels note false as written (the
+  qualifier `k_1 ≥ 1` of Corollary 14 dropped); the "robust iff" of that note unproved in one direction unless
+  subnetworks are included; Corollary 5 of the chain note claimed accuracy `1/poly` on a citation from memory
+  that gives accuracy in binary (true by a theorem nobody here has read).  Minor: the survey's invariant is not
+  complete from three hybrid nodes on; the evidence for Theorem 12′ was described as more independent and more
+  comprehensive than it was (the referee's own search over all orders on 25 620 networks fills the gap); a
+  literature on fixed-angle chains that our search had missed; a misprinted chain in the penalty note.  All
+  sixteen findings have a disposition; two remedies are deliberately not carried out (reading the two sources
+  for Corollary 5; re-running the four-hybrid level with a complete canonical form).
+* **Consolidation report** `docs/collaboration/consolidation/complexity.md`; final message COMPLEXITY-MSG-0007.
+* **What I would say about this session in three sentences.**  The strand hardness theorem is the one result
+  that may be worth a specialist's time; the level-2 classification of the NANUQ problem is clean mathematics on
+  a question nobody posed in print, next to a third-party claim we could not read.  Everything else is service
+  to other divisions, mostly correct assemblies of known results.  The recurring failure was not in proofs but
+  in what was said about them — novelty, attribution, the reach of a corollary, the independence of a test —
+  and each of the six reviews found some of it.
+
+### Explorations on the open six-leaf question (not in a note; for whoever resumes)
+
+Question (`NANUQ_HIGHER_LEVELS.md` §2.3; `OPEN_PROBLEMS.md` B, "Beyond level 2", item 1): is every six-leaf
+system displayed by an outer-labeled planar network, of any level, one of the 114 found?  A proof would make
+the level-2 criterion a theorem for every level.  Eight dihedral classes (36 systems) would have to be excluded;
+4 systems are excluded (below).
+
+(i) *A planar criterion for displayed splits.*  A split `A|B` is displayed iff some closed curve separating `A`
+    from `B` crosses exactly one edge that is kept, all other crossed edges being hybrid edges into pairwise
+    different hybrid nodes (the kept edge may be the second parent edge of one of them).  The cost "non-hybrid
+    edges crossed + hybrid nodes with both parent edges crossed" is not submodular, so curves cannot simply be
+    uncrossed.  Not written up; not checked by anyone.
+(ii) *Four systems are impossible for every network* (now in the note, §2.2; found independently by the sixth
+    referee): two switchings that differ at one hybrid node give trees that differ by moving one pendant
+    subtree, so the displayed trees are connected under such moves; in the systems "all six 2-splits, no
+    3-split" and `12 23 45 56 | 234 345` (three images) the only two binary trees inside the system share no
+    non-trivial split and differ after deleting any single leaf.
+(iii) *Connectivity does not go further.*  `six_leaf_treesets.py` counts the distinct sets of displayed trees:
+    14 / 71 / 245 / 594 for 0 / 1 / 2 / 3 hybrid nodes (with three: 14, 57, 78, 102, 132, 138, 42, 31 sets of 1, …, 8
+    trees; 19 minutes).  Connected tree sets (in the graph of single planar clade moves, 57 edges on the 14
+    trees) generate all three systems with a negative weight and all six with a wrong support; with two hybrid
+    nodes only 78 of 254 connected triples and 96 of 834 connected quadruples occur.  Acyclicity and planarity
+    constrain much more than connectivity.  (Scratch analysis; the script is committed, the analysis is not.)
+(iv) *No small implication.*  There is no rule "splits `X` displayed ⟹ split `y` displayed" with at most three
+    premises that holds on the 114 systems and fails on some of the 150.  (Scratch analysis, not committed.)
+(v) *What the referee adds:* a random search with parallel edges allowed, up to 12 hybrid nodes, finds no
+    system outside the 114 (`reviews/rev6_thm12prime_chain_levels/partC/c5_random_search.py`).
+
 ### Resume here
 
-1. *(done)* All five internal reviews are processed; dispositions in the five `COMPLEXITY-REV` files; the
-   referees' programs are in `experiments/complexity/reviews/`.
-2. *(done)* Fifth checkpoint COMPLEXITY-MSG-0006 published; survey written up (CX-T31, CX-X3).
-3. **A sixth internal review is running** (started 23:36 UTC on commit `307654f`; task output arrives as a hand-back
-   message; scratch directory `…/scratchpad/review6/`): Theorem 12′ (CX-T34), `CHAIN_GEOMETRY_HARDNESS.md`,
-   `NANUQ_HIGHER_LEVELS.md`, `PENALTY_THRESHOLD.md`.  **Do not start a second one; do not edit those four files
-   until it reports.**  Then: `COMPLEXITY-REV-0006.md` verbatim, the referee's programs to
-   `experiments/complexity/reviews/rev6_…/`, a disposition for every finding, registers, a linked correction if
-   anything sent to another division changes.  `CERTIFIED_BRACKETS.md` (CX-T35, T36) is not in that review.
-4. **Open question with evidence** (`NANUQ_HIGHER_LEVELS.md` §2.3): is every six-leaf system displayed by an
-   outer-labeled planar network, of any level, one of the 114?  A proof would make the robust criterion of
-   Corollary 14 a theorem for every level.  Eight dihedral classes would have to be excluded (listed there);
-   the mechanism to exploit is that the trees of a network are connected by single switchings.  Two things
-   found while thinking about it, neither written into a note: (i) a planar criterion — a split `A|B` is
-   displayed iff some closed curve separating `A` from `B` crosses exactly one edge that is kept, all other
-   crossed edges being hybrid edges into pairwise different hybrid nodes (the kept edge may be the second
-   parent edge of one of them); the cost "non-hybrid edges crossed + hybrid nodes with both parent edges
-   crossed" is not submodular, so curves cannot simply be uncrossed; (ii) the system "all six 2-splits, no
-   3-split" is impossible for every network, planar or not, because two switchings that differ at one hybrid
-   node give trees with a common clade and equal restrictions, and the two "snowflake" trees have none.
-   `six_leaf_treesets.py` counts the distinct sets of displayed trees: 14 / 71 / 245 / 594 for 0 / 1 / 2 / 3 hybrid
-   nodes (with three: 14, 57, 78, 102, 132, 138, 42, 31 sets of 1, …, 8 trees; 19 minutes).  Two negative findings
-   from that data (scratch analysis, 27 November, not in a note): (iii) connectivity of the tree set in the graph
-   of single planar clade moves (57 edges on the 14 trees) excludes only 4 of the 36 missing systems — connected
-   tree sets generate all three systems with a negative weight and all six with a wrong support; with two hybrid
-   nodes only 78 of 254 connected triples and 96 of 834 connected quadruples occur, so acyclicity and planarity
-   constrain much more than connectivity; (iv) there is **no** implication "splits `X` displayed ⟹ split `y`
-   displayed" with at most three premises that holds on the 114 systems and fails on some of the 150 — the 36
-   missing systems are not excluded by rules of that form.  (A container restart at about 00:24 UTC on 27
-   November interrupted the sixth referee and this run; both were resumed or rerun; nothing committed was lost.)
-5. **Other divisions.**  Structural biology and frontier: answered (COMPLEXITY-RES-0010); both have documents about
-   us that we have only partly read (`docs/structural_biology/intake/C_complexity.md`,
-   `THEOREM_TO_SOFTWARE_REGISTER.md`; `docs/frontier_benchmarks/RESEARCH_INTAKE.md`) — read them and correct what
-   is wrong.  ENSEMBLE-MSG-0008 names us (data not linear in the ensemble): not read.  Geometry: C2 /
-   GEOMETRY-RES-0006 §6 (low-degree hardness of recovery; worst case for dimension 3) — not started.  Theory:
-   THY-MSG-0017 §5 item 1 still unanswered.
-6. E-C1 for `K` in the input: "polynomial for `K = O(log n)`, open beyond".  A hardness proof has to make the
-   diagonal-combination condition of Theorem 6 hard; the span condition alone cannot do it (Theorem 14(c)).
-7. A3′ (fixed-temperature #P-hardness of the partition function): no approach yet.  W[1]-hardness in the number of
-   species (C2 of `OPEN_PROBLEMS.md`).  NANUQ: generators of level 3 that are not galled; whether a network that
-   violates Corollary 14(i) has a blow-up that is Kalmanson for no circular order (270 instances say yes).
-8. **Before any novelty statement:** search under the classical name of the nearest known problem, and read the
-   journal version of every source (`ASSUMPTION_AUDIT.md` §6, the rule adopted after REV-0005).
+**Halted.**  Under the directive of 27 November nothing below may be started without the research owner's
+explicit authorisation — not on a message from another division, not on a schedule.  If work is authorised
+again, this is the order I would propose (it is the list of `docs/collaboration/consolidation/complexity.md` §E):
+
+1. **Strands: make the hardness theorem externally defensible and compare the reference algorithm with
+   established software** (consolidation §E1).  First steps: read the journal version of Boehmer et al. and
+   Lyngsø's paper ourselves; state which conventions of NUPACK and ViennaRNA satisfy (H0), (H1), (H2′); write an
+   adapter from a published parameter file to the loop-energy interface of `multiset_dp.py`.
+2. **NANUQ: settle the status** (§E2).  Needs the owner's authorisation to read the third-party repository
+   (denied once); then delimit what remains ours; a specialist should read Theorems 12 and 12′.
+3. **Certification on the Structural Biology division's instances** (§E3); `CERTIFIED_BRACKETS.md` has not been
+   reviewed by anyone and should be before it is used.
+
+Small repairs that are known and not done:
+
+* Read Liu's Proposition 2.8 (thesis, 2007) and the Grötschel–Lovász–Schrijver statement; until then Corollary 5
+  of the chain note is conditional for accuracy `1/poly` (REV-0006, finding 1).
+* Six-leaf survey: a complete canonical form (or all networks of a key) and a re-run of the four-hybrid level
+  (REV-0006, finding 4).
+* Open the papers on fixed-angle chains that the sixth referee found (`PRIOR_ART.md` D-VIII); nobody has read
+  them.
+* `CERTIFIED_BRACKETS.md`, CX-T25 and Proposition 11 of the Ising note are unreviewed.
+* Documents of other divisions about us that were only partly read: `docs/structural_biology/intake/
+  C_complexity.md`, `THEOREM_TO_SOFTWARE_REGISTER.md` (structural biology); `docs/frontier_benchmarks/
+  RESEARCH_INTAKE.md` (frontier); ENSEMBLE-MSG-0008 (names us; not read); GEOMETRY-RES-0006 §6 (their open
+  questions on the planted model; not taken up); THY-MSG-0017 §5 item 1 (never answered).
+
+Open problems, documented and not pursued (`OPEN_PROBLEMS.md`): E-C1 for `K ≫ log n` (three parties failed to
+prove hardness; the span condition alone cannot do it, Theorem 14(c) of the Ising note); #P-hardness of the
+partition function at a fixed temperature (A3′; no approach); fixed-parameter tractability in the number of
+species (W[1]-hardness?); the six-leaf question above; the robust criterion beyond level 2 without subnetworks;
+generators of level 3 that are not galled and their critical polynomials; realizability of averaged distances
+for chains with a fixed bond angle; the Geometry division's planted MinRank model; the Theory division's open
+problem 1.
+
+**Before any novelty statement:** search under the classical name of the nearest known problem, and read the
+journal version of every source (`ASSUMPTION_AUDIT.md` §6).

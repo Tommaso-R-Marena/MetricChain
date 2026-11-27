@@ -2,7 +2,9 @@
 
 Companion to `NANUQ_LOCAL_CRITERION.md` (cited as [LC]; its §7.2 defines blobs, positions, pendant
 subnetworks, the bloblet `𝔅°` and its split system `Σ(𝔅)`, and proves Lemma D).  Complexity division,
-2026-11-26.  **Unreviewed.**  Register: `THEOREMS.md` CX-T31, CX-X3.  Labels as in [LC]: [P] paper proof,
+2026-11-26; **revised 2026-11-27 after the internal review COMPLEXITY-REV-0006** (Theorem A found correct; one
+corollary was misquoted and one summary sentence claimed more than is proved — both corrected below; the survey
+identifies networks by an invariant that is not complete).  Register: `THEOREMS.md` CX-T31, CX-X3.  Labels as in [LC]: [P] paper proof,
 [X] exact finite computation.
 
 The source paper (Holtgrefe, Allman, Baños, van Iersel, Moulton, Rhodes, Wicke, Bull. Math. Biol. 2025) asks
@@ -53,8 +55,8 @@ no blob has weight `≥ 0`, positive iff it is displayed.
 
 *Proof.*  (a) is Step 1 of the proof of [LC] Theorem 12, which nowhere uses the level: if some cut edge has
 at least two leaves of `Y` on each side, `Σ|_Y` is a substitution of two tree-generated systems with at
-least three leaves each ([LC] Lemma D(i), Lemma 7(ii)), and the 624 such systems on six points are all
-6-locally good [X]; otherwise every cut edge has at most one leaf of `Y` on one side, the cut edges
+least three leaves each ([LC] Lemma D(i), Lemma 7(ii)), and the 624 such substitutions on six points (74
+different systems) are all 6-locally good [X]; otherwise every cut edge has at most one leaf of `Y` on one side, the cut edges
 directed towards the other side point to one blob, each pendant subnetwork of which contains at most one
 leaf of `Y`, and [LC] Lemma D(ii) applies.
 (b) "Only if": `Σ(𝔅)` is the restriction of `Σ` to one leaf per position (Lemma D(ii)), and both classes are
@@ -74,11 +76,17 @@ in every other term each position is met at most twice, so by Lemma D(iii) the t
 `Σ(𝔅)` with cherries at the positions met twice, and it depends only on the positions of the further
 leaves.  The last sentence of (e) is (d) together with [LC] Lemmas 3 and 4.  ∎
 
-So the question "for which outer-labeled planar networks does the conclusion hold, and keep holding when
-leaves are replaced by clades" is, at every level, a question about **single blobs with six positions**:
+Say that the conclusion holds *robustly* for `N` if it holds for `N`, for every subnetwork `N|_Y`, and for every
+network obtained from one of these by replacing leaves by clades.  By (b) and (c) this is, at every level, a
+question about **single blobs with six positions**:
 
 > the conclusion holds robustly for `N` if and only if no blob of `N` has six positions on which its
 > bloblet displays one of the 23 excluded six-point systems.
+
+(The first version defined "robustly" through `N` and its clade replacements only, without subnetworks; for that
+reading the "only if" is **not proved** beyond level 2 — REV-0006, finding 3: the six-leaf term that goes wrong
+need not be a term of a split of `N` itself, because its end leaves need not be adjacent in `N`.  For level at
+most 2 it is true in that reading too: [LC] Corollary 14 with Theorem 12′.)
 
 **Corollary B (Theorem 7 of [LC] again) [P].**  In a galled network the edge below a hybrid node is a cut
 edge ([LC] Lemma B0), so every hybrid node of a blob is a position, `𝔅°` is a network all of whose hybrid
@@ -87,9 +95,13 @@ galled outer-labeled planar networks of every level.  This is a second proof of 
 Lemma D instead of Lemma B and no induction.
 
 **Corollary C (level 2).**  [LC] Corollary 14: a blob with two hybrid nodes has `Σ(𝔅) ∈ 𝒦` (equivalently
-`∈ 𝒦′`) iff it is galled, or nested with at most one middle position.
+`∈ 𝒦′`) iff it is galled, or nested with `k_1 = 0`, or nested with at most one middle position (`k_B ≤ 2`, or
+`k_B = 3` and `k_2 = 0`).  (The first version omitted the case `k_1 = 0` and was false as written — REV-0006,
+finding 2: a nested blob without `x`-positions is in `𝒦` whatever its middle positions; the referee checked 47
+such networks with clades, up to 15 leaves.)
 
-**Remark (what Theorem A gives and does not give).**  (b)–(c) decide the robust question.  For a single
+**Remark (what Theorem A gives and does not give).**  (b)–(c) decide the robust question in the sense just
+defined.  For a single
 network a blob outside `𝒦` does not imply failure: by (e) the weight of each split that cuts the blob is a
 polynomial of degree two in the sizes of its positions, and its sign has to be computed — as [LC]
 Theorem 12 does for the nested blob with two hybrid nodes, where the answer is not monotone in the number
@@ -121,18 +133,30 @@ leaves (the wheel has one embedding, and the network must lie in its hexagonal f
 their unfolding, with the option `sym` up to the twelve rotations and reflections of the labels.  For every
 network the union of the split systems of the trees of its switchings is recorded.
 
+**The unfolding is not a complete invariant** (REV-0006, finding 4; the program's first docstring said it was).
+Two hybrid nodes with a common hybrid child have equal unfoldings, so their parents can be paired in different
+ways; the referee exhibits two non-isomorphic networks with three hybrid nodes, both generated, with the same
+key.  Hence the numbers of §2.2 count *unfolding classes*.  For at most two hybrid nodes these are the networks.
+With three, by the referee's finer invariant, there are at least 1 153 548 labelled networks and 96 271 classes
+up to rotation and reflection, against 1 151 442 and 96 095 keys; in all 106 collisions the merged networks
+display the same set of trees, so the systems found with at most three hybrid nodes are unaffected.  But only
+one network per key is extended, so **with four hybrid nodes the extensions of the networks that were merged
+away were never generated**; whether a system is lost there was not tested.
+
 *What this does and does not cover.*  The networks have no parallel edges at any stage, and the root is never
 moved (a root with a hybrid child is obtained by inserting the hybrid node on an edge leaving the root).  A network
 all of whose reductions by one hybrid edge produce parallel edges — for instance one containing a blob with only
 two incident cut edges, such as two nested triangles — is not generated; such blobs do not change the displayed
 trees, but we have not proved that every outer-labeled planar network on six leaves with `k` hybrid nodes has the
-split system of a generated one.  The enumeration is therefore **a survey [X], not a classification**.  For
+split system of a generated one.  Moreover six positions of a blob in a larger network give a subnetwork that,
+after suppression of nodes, may have parallel edges, so the hypothesis used in §2.3, item 2, concerns more
+networks than the survey generates.  The enumeration is therefore **a survey [X], not a classification**.  For
 `k ≤ 2` it agrees with the theorems of [LC] (galled networks give `𝒞_6`; a nested blob gives in addition exactly the
 six images of one system, Theorem 12, Step 1).
 
 ### 2.2 Results
 
-| hybrid nodes | rooted labelled networks | up to rotation and reflection | systems found so far |
+| hybrid nodes | rooted labelled networks (unfolding classes) | up to rotation and reflection (unfolding classes) | systems found so far |
 |---|---|---|---|
 | 0 | 126 | 12 | 14, all in `𝒞_6` |
 | 1 | 2 988 | 253 | 71, all in `𝒞_6` |
@@ -163,6 +187,21 @@ representative, leaves `1,…,6`):
 | pattern, good at six leaves | 2 | 12 34 56 | 123 234 345 |
 | pattern, good at six leaves | 6 | 12 23 34 56 | 123 234 345 |
 
+**Four of the 36 are impossible for every network, planar or not [P]** (REV-0006, finding 13; found
+independently by us).  Two switchings that differ at one hybrid node display trees that are equal or differ by
+moving the subtree below that node: the trees have a common clade `L` and equal restrictions to `L` and to its
+complement.  Since any two switchings are joined by a sequence of such steps, the displayed trees of a network
+are connected under these moves.  In the system "all six 2-splits, no 3-split" the only trees are the two with
+three cherries, and in each of the three systems of the class `12 23 45 56 | 234 345` the only trees are
+`{23, 234, 56}` and `{45, 345, 12}`; in both cases the two trees are both needed, have no common non-trivial
+split, and have different restrictions after the removal of any one leaf — so no single move joins them.  For
+the other six classes (32 systems) a connected family of trees covering the system exists, and this argument
+says nothing.
+
+Further evidence from the referee of REV-0006, with its own generator and with parallel edges allowed: 151 159
+random six-leaf planar networks with four hybrid nodes and 374 402 with five to twelve display no system
+outside the 114.  The counts for at most three hybrid nodes were reproduced with the referee's code.
+
 (`six_leaf_survey.py 3`, 27 minutes: log `six_leaf_survey_k3.log`; `six_leaf_survey.py 4 sym`, 90 minutes: log
 `six_leaf_survey_k4_sym.log`; the two runs agree on the systems for `k ≤ 3`.  `six_leaf_examples.py` re-derives the
 example networks printed in a log from the explicit network with `netcalc.py`.)
@@ -185,3 +224,24 @@ example networks printed in a log from the explicit network with `netcalc.py`.)
    whether the 19 good systems outside `𝒞_6` occur at all; a list of the blobs of level 3 that are not galled,
    with their critical splits — by Theorem A(e) each critical weight is again a quadratic polynomial in the sizes
    of the positions, but we have not computed these polynomials.
+
+## 3. Review and limitations
+
+Reviewed internally once (COMPLEXITY-REV-0006, 2026-11-27; an AI referee commissioned by us, **not peer review**).
+Outcome: Theorem A(a)–(e) and Corollary B correct ((a) also on 12 000 networks of levels 2–8 with the referee's
+own code; (e) not checked numerically; "at most one blob" in (d) not tested beyond its proof); Corollary C was
+false as written and the summary of the robust criterion claimed an unproved direction — both corrected in §1;
+the counts of §2.2 were reproduced for at most three hybrid nodes (four not re-run); the unfolding is not a
+complete invariant (§2.1).
+
+Not done, and needed before §2 is quoted as more than a survey: a re-run of the four-hybrid level with a
+complete canonical form (the extensions of the networks merged at three hybrid nodes were never generated);
+networks with parallel edges and networks not reachable by insertion; any level above four.
+
+The referee's strongest objection, in its words: "Theorem A is a re-reading of two steps of an existing proof.
+Its one new use, the robust criterion, is overstated, and its level-2 corollary is misquoted.  The survey is not
+a classification, identifies networks by an invariant that is not one, and four levels of it say nothing about
+arbitrary level.  The open question is untouched except for four systems that fall to a two-line argument."
+The two errors named are corrected; the rest we accept as a fair description.  No prior-art search was made for
+Theorem A specifically, and no novelty is claimed for it beyond the main note.
+

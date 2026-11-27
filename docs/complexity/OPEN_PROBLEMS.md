@@ -58,8 +58,8 @@ Algorithms for Structure Prediction and Interactions*, WABI 2024, LIPIcs 312, 18
   Definition 11, and the hardness of the multi-strand case depends on whether the loop-energy function
   is part of the input (then BPS is a special case, as A-I's footnote 2 notes) or is a fixed table.
   Verified on 2026-11-26.
-* Our position: **OURS-[P], internally reviewed twice (COMPLEXITY-REV-0001; SCI-REV-0019, independent of
-  it) — not peer reviewed** for the multi-strand unpseudoknotted half: `THEOREMS.md` CX-T1–CX-T4, CX-T14,
+* Our position: **OURS-[P], internally reviewed three times (COMPLEXITY-REV-0001; SCI-REV-0019, independent of
+  it; the additions in COMPLEXITY-REV-0003) — not peer reviewed** for the multi-strand unpseudoknotted half: `THEOREMS.md` CX-T1–CX-T4, CX-T14,
   CX-T15, CX-T20, `STRANDS_NN_HARDNESS.md`.  In the formal model of the question (a loop with a nick is an
   exterior loop of energy 0): strongly NP-hard for *every fixed* loop-energy function with the `GG/CC` stack
   negative and bulge/interior loops less favourable than the stacks they displace (hypothesis (H2′); so also
@@ -149,8 +149,9 @@ Algorithms for Structure Prediction and Interactions*, WABI 2024, LIPIcs 312, 18
   (connectedness, rotational symmetry, all orderings) in `O(N^4 · Π_i C(n_i+2,2))` arithmetic operations:
   `3^c` instead of `(c−1)!` for distinct strands (question 3), and polynomial time for unboundedly many
   strands of a bounded number of species (a partial answer to question 4; with CX-T2 the picture is
-  "bounded species: polynomial; unbounded species: NP-hard" — for the base-pair model that dichotomy is
-  A-III's).  MFE and level counts per symmetry class: CX-T30 (the first version cited A-II's decoding, which
+  "bounded species: polynomial; unbounded species: NP-hard" — the polynomial half for the base-pair model is
+  A-III's; their hardness theorem needs a richer energy model, as they say, so in the base-pair model the
+  hard half is not theirs — corrected after REV-0005).  MFE and level counts per symmetry class: CX-T30 (the first version cited A-II's decoding, which
   is per ordering and does not apply).  What is ours is the extension of the scheme of A-III (journal) and
   of A-II's slices to loop energies, all orderings and arbitrary magnification — not the scheme.
   Open: `2^c` by fast subset convolution (remark only); FPT in the number of species.  ETH-tightness: CX-T14.
@@ -230,8 +231,9 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
     6 points (`DEAD_ENDS.md` CX-D2).
   - [X] B2 holds for every network in `B_3` with at most 8 leaves, and Theorem 4.7 is reproduced for
     `B_1`, `B_2` up to 7 leaves (`experiments/complexity/nanuq/test_bloblets.py`).
-* Our position (2026-11-26, after the internal review COMPLEXITY-REV-0002): **OURS-[P]+[X], finite inputs
-  [V], internally reviewed once — not peer reviewed** — `NANUQ_LOCAL_CRITERION.md`, `THEOREMS.md` CX-T5–CX-T9,
+* Our position (2026-11-27, after the internal reviews COMPLEXITY-REV-0002, -0004, -0005, -0006): **OURS-[P]+[X],
+  finite inputs [V], every part internally reviewed at least once — not peer reviewed** —
+  `NANUQ_LOCAL_CRITERION.md`, `NANUQ_HIGHER_LEVELS.md`, `THEOREMS.md` CX-T5–CX-T9, T13, T26, T27, T31, T34, CX-X3,
   CX-V3:
   - B1 and B2 hold, as special cases of a statement for every level and any number of blobs (CX-T6).
     **In all likelihood a rediscovery**: the third-party summary counts "122 distinct quartet systems", and
@@ -243,15 +245,36 @@ arXiv:2507.17308v2 (13 Oct 2025) on 2026-11-26.
     circular decomposable, with exact weights `2 − C(s+t,2)` in a family (CX-T7); the criterion is sharp for
     "Kalmanson with exact support" among classes of split systems (CX-T8); for "Kalmanson" alone the sharp
     class is given by a forbidden six-leaf pattern — three 3-splits without all six 2-splits (CX-T26,
-    unreviewed); and **for level 2 the scope of B1 is determined exactly** (CX-T27, unreviewed): an
+    reviewed in REV-0005); and **for level 2 the scope of B1 is determined exactly** (CX-T27, reviewed in
+    REV-0005; for every circular order CX-T34, reviewed in REV-0006): an
     outer-labeled planar network of level ≤ 2 satisfies the conclusion iff, for each of its *nested* blobs
     (the only kind that is not galled), `β_1·G + ξ_1·R > Σ_{j<l∈M} β_jβ_l` in the numbers of leaves hanging at
     the positions of the blob; for bloblets `k_1 + k_2 > C(k_B − 1, 2)`.
-  - B3 (parametric family): **OURS-[P]+[X], not reviewed** (CX-T13; the referee only spot-checked it): for
+  - B3 (parametric family): **OURS-[P]+[X]** (CX-T13; first reviewed in REV-0004, (c) restated there): for
     **our** extension of the NANUQ⁺ family beyond level 1, the conclusion of Theorem 4.7 holds on the whole
     class exactly when `ρ_o = ρ_s` and `ρ_c + ρ_s ≤ 2ρ_a < 2ρ_s`; the Modified NANUQ distance `(½,1,½,1)` is
     outside and fails on an explicit level-1 network, although it works when every hybrid node has a leaf
     child.
+  - **Beyond level 2 — OPEN, documented and not pursued (consolidation halt of 2026-11-27).**
+    `NANUQ_HIGHER_LEVELS.md` (CX-T31, CX-X3).  Proved: the question is local to one blob at every level
+    (Theorem A).  Open, in order of consequence:
+    1. *Which six-leaf split systems are displayed by outer-labeled planar networks?*  The survey by hybrid
+       insertion finds 114 of the 150 systems up to four hybrid nodes (the 108 of galled networks and the six
+       images of one further system) and none of the other 36.  Four of the 36 are impossible for every network
+       ([P], REV-0006).  For the other 32 nothing is proved in either direction.  If none of them occurs, the
+       level-2 classification extends verbatim to every level (one forbidden six-leaf pattern).  What was tried
+       and failed: connectivity of the displayed trees under pendant-subtree moves (excludes only the 4); an
+       implication with at most three premises among "split displayed" statements separating the 114 from the
+       36 (none exists); see `RESEARCH_LOG.md`, "Explorations on the open six-leaf question".
+    2. *The survey is not exhaustive.*  The identification of networks by their unfolding merges
+       non-isomorphic networks from three hybrid nodes on (REV-0006, finding 4), so at four hybrid nodes the
+       extensions of the merged networks were never generated; networks with parallel edges, and networks not
+       reachable by insertion, are not covered either.  Remedy (not done): a complete canonical form, or keeping
+       all networks of a key, and a re-run of `six_leaf_survey.py 4 sym` (about 90 minutes before the change).
+    3. *The "only if" of the robust criterion for a network and its clade replacements alone* (without
+       subnetworks) is proved at level ≤ 2 (through the explicit formula and Theorem 12′) and open beyond.
+    4. *The list of blobs with three hybrid nodes* and their critical polynomials (Theorem A(e) makes this a
+       finite computation per blob; not started).
 
 ---
 
@@ -301,7 +324,8 @@ exact statement and status have been verified.
 > and without bond angles), exactly or approximately; in particular whether the freely jointed case inherits
 > the hardness of the rank-3 Grothendieck problem and whether the linear order of a chain helps."
 
-* **Status of C1** (`CHAIN_GEOMETRY_HARDNESS.md`, CX-T32, CX-T33; **unreviewed**, 2026-11-26):
+* **Status of C1** (`CHAIN_GEOMETRY_HARDNESS.md`, CX-T32, CX-T33; internally reviewed in COMPLEXITY-REV-0006,
+  2026-11-27):
   - the optimisation problem for freely jointed chains *is* the ground-state problem of the classical
     Heisenberg model (linear bijection between data and couplings): the linear order does not help — **[P]**;
   - that problem is NP-hard, and hard to approximate within some constant — **KNOWN** since 2024/2025
@@ -310,10 +334,16 @@ exact statement and status have been verified.
     self-contained proofs and claim no novelty for the statement;
   - with a fixed bond angle the problem stays strongly NP-hard, for every angle — **[P]**, elementary;
   - realizability itself, with complete data, for freely jointed chains: NP-hard in the weak sense under
-    Turing reductions — **[P] given the Grötschel–Lovász–Schrijver equivalence [K, from memory]**;
+    Turing reductions — **[P] given the Grötschel–Lovász–Schrijver equivalence [K, from memory]** for an
+    accuracy written in binary; for accuracy `1/poly` **given Liu's Proposition 2.8 (via Gharibian 2010), which
+    nobody here has read** (REV-0006, finding 1; our first version claimed `1/poly` on the first citation);
+  - for a *single* pair the fixed-angle problem is polynomial (Borcea–Streinu 2011, from a search summary):
+    the hardness needs many pairs with data of both signs;
   - tractable regime: data of range `w` along the chain, exponential in `w` only; no `2^{o(w)}` under ETH — **[P]**.
   - **OPEN:** realizability with a fixed bond angle (technical conditions not checked); random or planted data;
-    steric constraints.
+    steric constraints; data of one sign (attractive or repulsive only), where the reduction does not apply.
+    **To do before any external use:** read Liu's Proposition 2.8 and the Grötschel–Lovász–Schrijver statement
+    in the sources.
 * **Status of C2** (the gap between identifiability and certification): the Geometry division formulated the
   planted model (GEOMETRY-RES-0006): a planted MinRank problem for rank 3 in a subspace cut out by rank-one
   conditions along a chain; detection is easy; their open questions are (1) a rank conjecture for the first level,

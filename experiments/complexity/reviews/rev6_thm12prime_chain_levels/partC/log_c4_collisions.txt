@@ -1,0 +1,1 @@
+k=3 up to rotation/reflection: KEYs 96095, (KEY,INV) classes 96271; KEYs with several INVs 106 (number of INVs per such KEY: {2: 36, 3: 70}); of these, KEYs whose networks do NOT all have the same set of displayed trees: 0

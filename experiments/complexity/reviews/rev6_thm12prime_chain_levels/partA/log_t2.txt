@@ -1,0 +1,33 @@
+1368 two-blob networks, 15s; both critical weights negative in 340
+   networks : 1368
+   with_negative : 1032
+   negative_splits : 1372
+   searched : 1032
+   quintuples : 12641
+   kalm_for_C : 336
+   zero_crit : 32
+   nonleaf_pos_neg : 1372
+   nested_blobs : 2736
+   max_n : 14
+   several_neg : 340
+   other_sep_splits_checked : 130
+   neg_blob_inside_pos : {}
+positions of the upper blob at which a lower blob with negative weight hangs while the upper is negative too:
+     lower at b2 of (4, 1, 1) 20
+     lower at b2 of (4, 2, 1) 20
+     lower at b2 of (5, 1, 0) 20
+     lower at b2 of (5, 1, 1) 20
+     lower at b2 of (6, 1, 0) 20
+     lower at b3 of (4, 1, 1) 20
+     lower at b3 of (4, 2, 1) 20
+     lower at b3 of (5, 1, 0) 20
+     lower at b3 of (5, 1, 1) 20
+     lower at b3 of (6, 1, 0) 20
+     lower at b4 of (4, 1, 1) 20
+     lower at b4 of (4, 2, 1) 20
+     lower at b4 of (5, 1, 0) 20
+     lower at b4 of (5, 1, 1) 20
+     lower at b4 of (6, 1, 0) 20
+     lower at b5 of (5, 1, 1) 20
+     lower at b5 of (6, 1, 0) 20
+ALL CHECKS PASSED

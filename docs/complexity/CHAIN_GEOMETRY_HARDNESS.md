@@ -1,6 +1,9 @@
 # Optimising pair data over one chain conformation: hard in the worst case — also with fixed bond angles — and where it is easy
 
-Complexity division, 2026-11-26.  **Unreviewed.**  Register: `THEOREMS.md` CX-T32, CX-T33.  Written in answer to
+Complexity division, 2026-11-26; **revised 2026-11-27 after the internal review COMPLEXITY-REV-0006** (every
+derivation found correct; one corollary cited a theorem that does not give the accuracy claimed; the literature
+on fixed-angle chains was missing — both repaired, §2b and §7; internal AI review, not peer review).  Register:
+`THEOREMS.md` CX-T32, CX-T33; the gadget inequalities are kernel-checked (CX-V6).  Written in answer to
 the Geometry division's question C1 (GEOMETRY-REQ-0004; our first answer was COMPLEXITY-RES-0002) and to the
 research owner's directive on algorithmic feasibility ("tractability of articulated systems").  Labels: [P] paper
 proof, [X] exact computation, [N] numerical evidence, [K] known and cited.
@@ -38,7 +41,8 @@ constraints are not modelled.)
    as summarised" from that message.  By Piddock's theorem there is moreover a constant `α < 1` such that
    approximating the maximum within the factor `α` is NP-hard (Remark in §2a).  **Corollary 5** [P, given K]: the
    question as the Geometry division asked it — is a complete table of averaged squared distances that of some
-   ensemble of freely jointed chains? — is NP-hard in the weak sense under Turing reductions (§2b).
+   ensemble of freely jointed chains? — is NP-hard in the weak sense under Turing reductions (§2b; for
+   polynomially small accuracy this rests on a theorem that we have not read).
 3. **Theorem 3** [P; N].  CHAIN(θ) is strongly NP-hard for every fixed `θ ∈ (0, π)`: every `m`-th bond of a
    fixed-angle chain is a free unit vector, `m = ⌈π / min(θ, π − θ)⌉` (`m = 3` for the tetrahedral angle).
    **Fixing the bond angles does not make the problem easier in the worst case.**
@@ -182,7 +186,8 @@ maximiser on the sphere shows that it is at most its maximum over unit vectors, 
 
 **Consequence [K].**  Starting from Max-Cut on simple graphs (`k = 1`) and applying the proposition `k − 1` times
 gives, for every fixed `k`, a polynomial-time reduction of Max-Cut to the threshold problem for `OPT_k` on simple
-unweighted graphs; the thresholds to be distinguished differ by `2·9^{k−1}`.  So vector Max-Cut in `ℝ^k` is NP-hard
+unweighted graphs (the degree of the polynomial grows with `k`: `|V(H')| ≈ 22.5(k+1)nΔ` and `Δ(H') ≥ 8n`); the
+thresholds to be distinguished differ by `2·9^{k−1}`.  So vector Max-Cut in `ℝ^k` is NP-hard
 for every fixed `k` — the theorem of Piddock (and of Kallaugher et al. for `k = 3`), obtained there with different
 gadgets and, in Piddock's case, with hardness of approximation, which our identity does not give by itself (the
 additive term `25nL` dominates).  We do not know whether this exact identity, or the right-angle triangle with
@@ -214,9 +219,10 @@ exists if and only if `m_{i,i+1} = 1` for all `i` and the symmetric matrix `G(m)
 G_kl  =  ½ ( m_{k,l+1} + m_{k+1,l} − m_{k,l} − m_{k+1,l+1} )        (k < l)
 ```
 
-lies in the convex hull `conv E_3` of the Gram matrices of `n − 1` unit vectors in `ℝ^3`.  Deciding this, in the weak
-sense (accept if `G(m)` is in the body, reject if it is at distance at least `δ` from it, `δ^{-1}` polynomial in
-`n`), is NP-hard under polynomial-time Turing reductions.
+lies in the convex hull `conv E_3` of the Gram matrices of `n − 1` unit vectors in `ℝ^3`.  Deciding this in the weak
+sense (accept if `G(m)` is in the body, reject if it is at distance at least `δ` from it) is NP-hard under
+polynomial-time Turing reductions when `δ` is part of the input, written in binary; and for `δ^{-1}` polynomial in
+`n` provided the sharper reduction quoted at the end of the proof is as reported.
 
 *Proof.*  `⟨b_k,b_l⟩ = ½(|x_k − x_{l+1}|² + |x_{k+1} − x_l|² − |x_k − x_l|² − |x_{k+1} − x_{l+1}|²)`, so the averaged Gram
 matrix of the bonds of an ensemble is `G(m)`; conversely `m_ij = Σ_{k,l=i}^{j−1} G_kl` recovers `m` from a symmetric
@@ -227,7 +233,16 @@ around `0`, and lies in the ball of radius `C(n−1,2)^{1/2}`.  For such bodies 
 reduces in polynomial time to weak membership [K: Grötschel, Lovász, Schrijver, *Geometric Algorithms and
 Combinatorial Optimization*, the equivalence of weak membership and weak optimisation for centred well-bounded
 convex bodies; cited from memory], and weak optimisation over `conv E_3` — maximising `Σ Q_kl G_kl`, to additive
-accuracy `½`, for integer `Q` — is NP-hard by Theorem 1 (thresholds are integers).  ∎
+accuracy `½`, for integer `Q` — is NP-hard by Theorem 1 (thresholds are integers).  That equivalence is
+polynomial in the *encoding length* of the accuracy, so it gives the statement for `δ` in binary — possibly
+exponentially small.  For polynomially small `δ` one needs a reduction with polynomial loss: for
+`B(p,r) ⊆ K ⊆ B(0,R) ⊂ ℝ^m`, weak optimisation with error `ε` reduces to weak membership with error
+`r³ε³ / (2¹³·3³·m⁵·R⁴·(R+r))` [K: Y.-K. Liu, thesis (2007), Proposition 2.8, as used by S. Gharibian, Quantum Inf.
+Comput. 10 (2010) 343–360, arXiv:0810.4507 — found by the referee of REV-0006, who read a summary of Gharibian's
+paper; **not read by us**].  With `m = C(n−1,2)`, `R = 1/r = √m` and `ε^{-1}` polynomial this error is
+polynomially small.  ∎
+
+(The first version claimed `δ^{-1}` polynomial on the strength of the first citation alone — REV-0006, finding 1.)
 
 So C1 with complete data is hard for freely jointed chains although membership in `E_3` itself (one conformation)
 is a rank computation: the difficulty is the convex hull.  (For a graph `F` of pairs given in the input, E.-Nagy,
@@ -251,6 +266,11 @@ of the arc, perpendicular to it, with `cos φ = cos ψ / cos(d/2)`; if `d = π`,
 to the ends will do).  If `θ > π/2`, apply this with `ψ = π − θ` to `p` and `(−1)^m q`, and negate the points with odd
 index: consecutive inner products become `−cos ψ = cos θ`.  ∎
 
+(REV-0006, finding 8: the distinction by the parity of `r` is not needed — stepping towards `q` whenever more
+than two steps remain already keeps `d ≤ rψ`; `m` is best possible, since `m − 1` steps stay within distance
+`(m−1)ψ < π`; and the lemma is a special case of the classical closing condition for spherical polygons, which
+the referee quotes from memory without a primary source.)
+
 **Theorem 3 [P].**  For every fixed `θ ∈ (0,π)`, CHAIN(θ) is strongly NP-hard.
 
 *Proof.*  Given `Q` on `N` spins, consider chains with `(N−1)m + 1` bonds and couplings only between the bonds
@@ -261,7 +281,8 @@ non-zero data points proportional to the number of non-zero couplings).  ∎
 
 (`heisenberg_reduction.py` parts 4, 5: the construction of the Lemma for six angles, and one instance end to end
 — the triangle graph becomes a chain with 56 atoms and tetrahedral angles whose objective at the explicit
-optimum equals the threshold 841.)
+optimum equals the threshold 841.  The program takes `Q̃ = Q/2`, so that the objective is `F` and the data `2c`
+are integers; with the integer data of §1 (`Q̃ = Q`) the objective is `2F` and the threshold 1682.)
 
 ## 4. Where it is easy: short-range data
 
@@ -317,20 +338,30 @@ a violation; the proofs are the paper proofs above.
 
 | source | how inspected (2026-11-26) | what it contains for this note |
 |---|---|---|
-| J. Kallaugher, O. Parekh, K. Thompson, Y. Wang, J. Yirka, *Complexity classification of product state problems for local Hamiltonians*, arXiv:2401.06725v2 (January 2025; conference version reported as ITCS 2025) | abstract and §1 through a page-reading sub-agent (about a quarter of the text; its report read, not the paper) | Theorem 1.5: "MC_3 is NP-complete" (vector Max-Cut in `ℝ^3`, unit weights; by a reduction from 3-colouring); "it has been conjectured by Lovász that MC_k is NP-complete for all constants k≥1 … no proof has been given for any k>1"; product-state problems for all 2-local interaction sets, with couplings of both signs.  **This contains Theorem 1 of this note** (a product state of the Heisenberg interaction is a configuration of unit vectors in `ℝ^3`) |
+| J. Kallaugher, O. Parekh, K. Thompson, Y. Wang, J. Yirka, *Complexity classification of product state problems for local Hamiltonians*, arXiv:2401.06725v2 (January 2025; conference version reported as ITCS 2025) | abstract and §1 through a page-reading sub-agent (about a quarter of the text; its report read, not the paper) | Theorem 1.5: "MC_3 is NP-complete" (vector Max-Cut in `ℝ^3`, unit weights; by a reduction from 3-colouring); "it has been conjectured by Lovász that MC_k is NP-complete for all constants k≥1 … no proof has been given for any k>1"; product-state problems for all 2-local interaction sets, with couplings of both signs.  **This contains Theorem 1 of this note** (a product state of the Heisenberg interaction is a configuration of unit vectors in `ℝ^3`), after scaling the couplings; their Theorem 1.5 is for a promise version (a completeness value and a gap of order `m^{-2}`), and a footnote credits an earlier unpublished proof for product states of Quantum Max-Cut to J. Wright (2022) |
 | S. Piddock, *Quantum Max-Cut is NP hard to approximate*, arXiv:2510.07995v1 (9 October 2025; preprint, no journal reference) | full text of v1 through a page-reading sub-agent (its report read, not the paper) | Theorem 3: "There is a PTAS reduction from Max-Cut_k to Max-Cut_{k+1}.  Therefore Max-Cut_k is APX-complete for all (constant) k≥1", on unweighted graphs; gadgets: unit triangles (which fix the angle `2π/3` to a reference vector) and a bipartite expander; "no other hardness results are known for k≠1,3" before it.  **This contains Proposition 1a as a hardness statement, and more** (hardness of approximation) |
-| M. E.-Nagy, M. Laurent, A. Varvitsiotis, *Complexity of the positive semidefinite matrix completion problem with a rank constraint*, arXiv:1203.6602 | introduction through a page-reading sub-agent (its report read) | membership in the rank-`k` elliptope `E_k(G)` is NP-hard for `k ≥ 2`; "It is believed that linear optimization over conv E_k(G) is also hard for any fixed k" — the question that the two papers above answer |
+| M. E.-Nagy, M. Laurent, A. Varvitsiotis, *Complexity of the positive semidefinite matrix completion problem with a rank constraint*, arXiv:1203.6602 | introduction through a page-reading sub-agent (its report read) | membership in the rank-`k` elliptope `E_k(G)` is NP-hard for `k ≥ 2`, **and so is membership in its convex hull** — the closest prior art for the realizability question with data on a graph of pairs; "It is believed that linear optimization over conv E_k(G) is also hard for any fixed k" — the question that the two papers above answer |
 | L. Lovász, *Graphs and Geometry* (2019), p. 236 | **not read**; known through the two papers above | the conjecture that vector Max-Cut is NP-hard in every fixed dimension |
 | J. Briët, F. de Oliveira Filho, F. Vallentin, the positive semidefinite Grothendieck problem with rank constraint | **from memory**, as in COMPLEXITY-RES-0002; cited by both papers above for the approximation algorithm | constant approximation ratios for positive semidefinite objectives |
 | distance geometry of protein-like chains (Saxe 1979; Lavor, Liberti, Maculan and co-authors) | search summaries only | NP-hardness of the *feasibility* problem for exact distances; a different problem from the optimisation considered here |
+| **fixed-angle chains** ("freely rotating chains"): M. Soss, G. Toussaint, J. Math. Chem. 27 (2000) 303–318; E. Demaine, S. Eisenstat, WADS 2011; E. Demaine, H. Ito, J. Lynch, R. Uehara, arXiv:2212.12450; N. Benbernou, J. O'Rourke, arXiv:0801.0258; C. Borcea, I. Streinu, *Extremal reaches in polynomial time*, SoCG 2011 | found by the referee of REV-0006 from search summaries and one abstract page; **full texts opened by nobody here** | flattening a fixed-angle chain and its minimum / maximum flat span are NP-hard (strongly, also for equal lengths); the maximum span in space is polynomial for equal angles; **the largest and smallest end-to-end distance of a chain in space with fixed lengths and angles are computed in polynomial time** (Borcea–Streinu).  The last is CHAIN(θ) with the single datum `c_{1n} = ±1`.  So the hardness of Theorem 3 comes from many pairs with data of both signs, not from the fixed angle.  According to the referee none of these papers contains Theorem 3 |
 
 * Two searches on 2026-11-26 before the proofs were written found neither of the first two sources; a third and a
   fourth, aimed at "rank-constrained Grothendieck problem" and "vector Max-Cut", found them.  The order matters:
   for an hour the lifting of §2a looked like a proof of an open conjecture.  It is a second proof of a theorem
   of 2025.
 * We claim: the translation to chains (§1, elementary), Theorem 3 (elementary), Proposition 4 (elementary), and
-  self-contained derivations of known hardness results.  Whether the statement of Theorem 3 is in the literature
-  on protein distance geometry we have not searched beyond the summaries above.
+  self-contained derivations of known hardness results.  The referee of REV-0006 searched the literature on
+  fixed-angle chains (row above) and for the lifting identity and the 3-4-5 triangle, and found neither Theorem 3
+  nor the identity; searches only, which proves nothing.
+* The referee's strongest objection, in its words: "Everything hard here is known.  The translation to chains is
+  a change of variables.  Theorem 3 shows only that the model is unphysical: a phantom chain with couplings of
+  both signs and of size `|E|` between every `m`-th bond, the fixed angle being bought off with `m − 1` idle bonds
+  per spin."  (The objection continues with the two points repaired above: the uncited literature and the
+  citation behind Corollary 5.)  We agree that the instances are artificial; the theorem is a worst-case
+  statement about guarantees, not about typical data.
 * Theorem 1 and Proposition 1a are threshold statements; membership in NP is not claimed (the optimum is
   irrational in general; Kallaugher et al. and Piddock treat this through additive accuracy).
-* Unreviewed.
+* Reviewed internally once (COMPLEXITY-REV-0006: Theorem 1 on 11 further graphs with adversarial starts,
+  Proposition 1a on 14 liftings up to dimension 5, the lemma of §3 on 6 420 cases, all identities); not peer
+  reviewed.  The dynamic programme of Proposition 4 is not implemented.

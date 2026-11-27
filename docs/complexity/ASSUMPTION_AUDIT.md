@@ -74,7 +74,7 @@ synthetic family (a long template and many homopolymer strands) and says nothing
 | Thm 11: the reading of "4-cycle" above level 1 | **V**, ours | the family is defined in the source for level 1 only |
 | the list of 108 six-leaf systems | computed | the six-point check is kernel-checked for the list; that the list is the closure is not (CX-V3) |
 
-### 3a. Added after the reviews: the sharp class for "Kalmanson" alone and level 2 (CX-T26, CX-T27) — unreviewed
+### 3a. Added after the reviews: the sharp class for "Kalmanson" alone and level 2 (CX-T26, CX-T27) — reviewed by COMPLEXITY-REV-0005; Theorem 12′ and the higher-levels note by COMPLEXITY-REV-0006
 
 | hypothesis | class | what happens without it; evidence |
 |---|---|---|
@@ -107,7 +107,7 @@ many for the network class, but for an arbitrary split system given explicitly i
 | the earlier reformulation "exposed ⇔ unique decomposition of the Hamming metric" | **false** beyond simplicial faces | corrected after REV-0004, finding 1 |
 | Prop. 11: general position of the conformers | **T** | assumed for random conformers beyond `D_d'`, not cited |
 
-## 5. Penalised models (`PENALTY_THRESHOLD.md`; CX-T21–T23) — unreviewed (not covered by REV-0003 or -0004)
+## 5. Penalised models (`PENALTY_THRESHOLD.md`; CX-T21–T23) — reviewed by COMPLEXITY-REV-0006 (`λ ≥ 0` was used and unstated: now a hypothesis, class **E** for the sign of `e^{λγ}−1`)
 
 | hypothesis | class | remark |
 |---|---|---|
@@ -163,3 +163,31 @@ attribution statements and in sentences added in passing.  Rule adopted: a state
 found" is written only after a search aimed at the *nearest classical formulation* of the statement (here:
 "span of random ±1 vectors", "faces of the elliptope", "level-2 generators"), not at our own wording of it.
 
+Found by the review COMPLEXITY-REV-0006 (2026-11-27, about 01:00 UTC) and corrected in the notes — this time
+two statements that were false or unproved as written, one citation that does not carry its claim, and again a
+literature we had not found:
+
+* **higher-levels note:** Corollary C quoted Corollary 14 of the main note without its qualifier `k_1 ≥ 1` and
+  was false as written (a nested blob without `x`-positions is in `𝒦` whatever its middle positions).  The
+  summary sentence "the conclusion holds robustly iff every bloblet is in `𝒦`" was proved in the "only if"
+  direction only for networks obtained from *subnetworks*; the main note records the same obstacle for a single
+  network (§7.1, Remark 2), and we overlooked it one note later.  The survey called the marked unfolding "a
+  complete invariant"; it is not from three hybrid nodes on (explicit pair in the review), so the counts are
+  counts of unfolding classes and the four-hybrid level did not extend every network.
+* **chain note:** Corollary 5 claimed weak-membership hardness for accuracy `1/poly` on the Grötschel–Lovász–
+  Schrijver equivalence, cited from memory; that equivalence is polynomial in the *encoding length* of the
+  accuracy.  The claim is true by a different theorem (Liu's Proposition 2.8, via Gharibian), which nobody here
+  has read.  A theorem cited from memory was credited with more than it says.  The literature on fixed-angle
+  chains (`PRIOR_ART.md` D-VIII) was not found by our search, which used the wrong vocabulary.
+* **main NANUQ note:** the description of the evidence for Theorem 12′ overstated its independence ("the five
+  leaves taken from the circular order alone": only two are) and its coverage (262 of 287 negative cases in the
+  explicit test are blobs entered through the root).
+* **penalty note:** a misprinted chain of inequalities whose printed form is false in some cases (the program
+  checked a correct variant, not the printed one); the hypothesis `λ ≥ 0` unstated.
+
+**Pattern across the six reviews** (for a successor; replaces the paragraph above): no theorem with a complete
+written proof was found false.  What the reviews found were (i) attributions — statements presented as ours that
+were known, five times, each time findable by searching under the nearest classical formulation; (ii) summary
+sentences, corollaries and abstracts that said more than the theorem beneath them, typically by dropping a
+qualifier; (iii) citations from memory credited with more than they say; (iv) descriptions of numerical
+evidence that overstated its independence of the proof.  Check these four first.

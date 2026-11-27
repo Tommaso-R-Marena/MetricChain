@@ -1,0 +1,23 @@
+(1) gadget inequality h(t) <= 10 - t^2 on [-1,1], equality only at t = 0: True
+(2) reduction MAX-CUT -> Heisenberg ground state in R^3:
+    triangle: 19 spins, Lam = 12, maxcut = 2; formula 841; explicit configuration 841.000000000; best of 60 numerical maximisations 841.000000 (never above the formula: True; reaches it: True)
+    path P3: 19 spins, Lam = 8, maxcut = 2; formula 562; explicit configuration 562.000000000; best of 60 numerical maximisations 562.000000 (never above the formula: True; reaches it: True)
+    C4: 24 spins, Lam = 16, maxcut = 4; formula 1444; explicit configuration 1444.000000000; best of 60 numerical maximisations 1444.000000 (never above the formula: True; reaches it: True)
+    K4: 24 spins, Lam = 24, maxcut = 4; formula 2162; explicit configuration 2162.000000000; best of 60 numerical maximisations 2162.000000 (never above the formula: True; reaches it: True)
+    C5: 29 spins, Lam = 20, maxcut = 4; formula 2203; explicit configuration 2203.000000000; best of 60 numerical maximisations 2203.000000 (never above the formula: True; reaches it: True)
+    K4 minus an edge: 24 spins, Lam = 20, maxcut = 4; formula 1803; explicit configuration 1803.000000000; best of 60 numerical maximisations 1803.000000 (never above the formula: True; reaches it: True)
+(3) identity sum c_ij |x_i - x_j|^2 = sum Q_kl <b_k, b_l> and the inverse map on 30 random chains: True
+(4) fixed bond angle: every m-th bond is free
+    angle between consecutive bond vectors 70.529 deg: m = 3; largest deviation of a constructed angle: 2.2e-15
+    angle between consecutive bond vectors 60.000 deg: m = 3; largest deviation of a constructed angle: 3.1e-15
+    angle between consecutive bond vectors 90.000 deg: m = 2; largest deviation of a constructed angle: 2.2e-16
+    angle between consecutive bond vectors 109.471 deg: m = 3; largest deviation of a constructed angle: 2.2e-15
+    angle between consecutive bond vectors 35.000 deg: m = 6; largest deviation of a constructed angle: 6.0e-14
+    angle between consecutive bond vectors 150.000 deg: m = 6; largest deviation of a constructed angle: 8.9e-16
+(5) end to end:
+    triangle graph -> 19 spins -> fixed-angle chain with 56 atoms (m = 3); data 2c integral: True; objective on the explicit chain 841.000000, threshold 841
+ALL OK
+
+real	3m24.075s
+user	6m30.959s
+sys	0m0.133s

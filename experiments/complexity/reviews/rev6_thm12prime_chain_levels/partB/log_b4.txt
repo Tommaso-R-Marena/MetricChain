@@ -1,0 +1,2 @@
+identities of sections 1, 2a (Remark), 2b and the two elementary bounds of the proof of Theorem 1: True
+Proposition 4: max |change of <b_k,b_l>| / delta over 300 single-torsion perturbations = 0.9926 (<= 1); only pairs with the torsion strictly between them change: True

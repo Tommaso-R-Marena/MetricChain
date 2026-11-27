@@ -7,8 +7,11 @@ acyclic iff d is not an ancestor-or-equal of a).  A network is kept if every spl
 circular for (0..5) (necessary) and if the network is outer-labeled planar WITH THAT ORDER: the underlying graph
 together with the hexagon through the leaves and an apex joined to all leaves is planar (the wheel has a unique
 embedding and the connected network, attached to all six rim vertices, must lie in its hexagonal face).
-Rooted labelled networks are identified by their unfolding (a complete invariant for binary networks with
-distinct leaf labels; here it is only used to avoid repeated work).
+Rooted labelled networks are identified by their unfolding.  This is NOT a complete invariant (COMPLEXITY-REV-0006,
+finding 4: two hybrid nodes with a common hybrid child have equal unfoldings; from three hybrid nodes on,
+non-isomorphic networks can share a key).  So the counts printed are counts of unfolding classes, only one
+network per class is extended, and at four hybrid nodes some networks are never generated.  In the 106 collisions
+at three hybrid nodes the merged networks display the same trees.
 
 For every network: the split system (union of the splits of the trees of all switchings).  Reported: for each
 number of hybrid nodes, the systems that occur, by status

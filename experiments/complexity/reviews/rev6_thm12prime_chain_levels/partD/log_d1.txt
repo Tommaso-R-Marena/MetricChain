@@ -1,0 +1,3 @@
+Theorem 1, Propositions 3, 4 and the connected-set count: all assertions hold on 32 random instances x 10 values of lambda
+Theorem 2 (with the middle sum restricted to |S| >= s'): LEFT <= MID* <= RIGHT in all 480 applicable (instance, lambda, s) cases
+Theorem 2 as printed (middle sum over all connected S with |S| > s): MIDlit <= RIGHT fails in 70 of these cases (all with s + 1 < k_min)

@@ -1,0 +1,11 @@
+planar binary trees: 14  tree-generated systems on six points: 150
+found by the re-enumeration (<= 3 hybrid nodes): 114  all tree-generated: True  not found: 36
+dihedral classes of the systems not found: 8
+  class of size  1: good at six leaves                       2-splits 12 23 34 45 56 61 | 3-splits none | planar trees inside: 2, SPR-components: [1, 1], a component covers the system: False
+  class of size  3: good at six leaves                       2-splits 12 23 45 56 | 3-splits 234 345 | planar trees inside: 2, SPR-components: [1, 1], a component covers the system: False
+  class of size  3: good at six leaves                       2-splits 12 23 34 45 56 61 | 3-splits 123 | planar trees inside: 6, SPR-components: [6], a component covers the system: True
+  class of size 12: good at six leaves                       2-splits 12 23 34 56 | 3-splits 123 345 | planar trees inside: 4, SPR-components: [4], a component covers the system: True
+  class of size  2: good at six leaves; has the pattern      2-splits 12 34 56 | 3-splits 123 234 345 | planar trees inside: 4, SPR-components: [4], a component covers the system: True
+  class of size  6: good at six leaves; has the pattern      2-splits 12 23 34 56 | 3-splits 123 234 345 | planar trees inside: 6, SPR-components: [6], a component covers the system: True
+  class of size  3: negative weight; has the pattern         2-splits 12 23 45 56 | 3-splits 123 234 345 | planar trees inside: 6, SPR-components: [6], a component covers the system: True
+  class of size  6: wrong support                            2-splits 12 23 34 45 61 | 3-splits 123 234 | planar trees inside: 5, SPR-components: [5], a component covers the system: True

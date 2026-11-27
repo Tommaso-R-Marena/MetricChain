@@ -1,0 +1,16 @@
+seed 3, max leaves 13, all-order search up to 13 leaves; 19s
+   networks : 3000
+   with_negative : 1090
+   negative_splits : 1091
+   searched : 1090
+   quintuples : 6739
+   kalm_for_C : 1910
+   zero_crit : 156
+   entry_neg : {'A/kB7k22': 23, 'A/kB7k20': 37, 'b2/kB5k22': 10, 'b5/kB6k21': 9, 'b3/kB6k21': 13, 'A/kB6k21': 29, 'A/kB3k23': 2, 'A/kB5k22': 30, 'b4/kB6k20': 16, 'b5/kB5k20': 7, 'b1/kB6k20': 14, 'A/kB6k23': 22, 'b3/kB4k22': 8, 'b1/kB5k22': 4, 'A/kB5k21': 35, 'c1/kB5k22': 9, 'b4/kB4k21': 16, 'c1/kB4k21': 10, 'b3/kB6k20': 14, 'b3/kB5k22': 8, 'A/kB6k20': 44, 'c1/kB7k23': 3, 'A/kB4k22': 9, 'b4/kB7k21': 7, 'b3/kB5k21': 14, 'c2/kB6k22': 8, 'b2/kB3k21': 9, 'c2/kB5k22': 11, 'b2/kB6k20': 19, 'b2/kB3k22': 3, 'c3/kB5k23': 3, 'A/kB5k23': 12, 'b2/kB7k21': 9, 'c3/kB6k23': 3, 'A/kB7k21': 23, 'b2/kB5k23': 4, 'b4/kB6k23': 5, 'b2/kB4k22': 8, 'b1/kB5k23': 2, 'b2/kB5k20': 23, 'b3/kB4k21': 14, 'b2/kB6k22': 7, 'b6/kB7k20': 9, 'b2/kB4k21': 22, 'A/kB4k21': 37, 'c2/kB7k23': 1, 'b4/kB7k20': 11, 'A/kB5k20': 32, 'A/kB6k22': 23, 'b5/kB6k23': 1, 'A/kB3k22': 2, 'b5/kB7k20': 7, 'b3/kB5k20': 14, 'b2/kB7k22': 3, 'A/kB7k23': 7, 'c1/kB5k21': 11, 'b4/kB6k21': 8, 'b1/kB7k21': 6, 'b1/kB5k20': 11, 'b7/kB7k22': 3, 'b4/kB5k20': 20, 'c1/kB4k23': 1, 'b7/kB7k20': 9, 'c1/kB5k23': 3, 'b1/kB6k23': 2, 'b3/kB4k20': 9, 'b6/kB6k20': 9, 'b3/kB7k21': 4, 'c1/kB6k21': 9, 'b1/kB5k21': 9, 'A/kB3k21': 4, 'b4/kB5k21': 17, 'b3/kB5k23': 5, 'c1/kB3k22': 1, 'b3/kB4k23': 3, 'b1/kB6k22': 6, 'b2/kB4k20': 4, 'b1/kB7k20': 8, 'b4/kB4k22': 3, 'A/kB4k23': 6, 'b4/kB4k23': 1, 'b3/kB3k21': 6, 'b6/kB6k21': 9, 'b5/kB6k22': 7, 'b1/kB4k21': 7, 'b1/kB7k22': 2, 'b5/kB6k20': 14, 'c1/kB7k22': 5, 'b4/kB5k22': 7, 'b6/kB7k21': 5, 'b4/kB7k23': 1, 'b6/kB6k23': 2, 'c1/kB6k23': 5, 'b5/kB5k21': 11, 'b3/kB7k20': 6, 'c2/kB7k22': 2, 'b1/kB6k21': 5, 'b3/kB7k22': 1, 'c3/kB7k23': 1, 'b7/kB7k21': 5, 'b2/kB6k21': 6, 'b6/kB6k22': 4, 'b5/kB7k21': 2, 'c1/kB3k21': 3, 'b4/kB7k22': 3, 'b3/kB6k23': 3, 'b2/kB7k20': 9, 'b2/kB6k23': 3, 'b5/kB5k22': 9, 'b2/kB5k21': 11, 'b1/kB4k22': 1, 'c1/kB6k22': 5, 'b2/kB4k23': 1, 'b4/kB5k23': 3, 'c2/kB6k23': 3, 'b3/kB6k22': 3, 'b5/kB5k23': 1, 'c3/kB4k23': 1, 'b6/kB7k22': 3, 'c2/kB4k23': 1, 'b1/kB4k20': 1, 'A/kB4k20': 5, 'c2/kB5k23': 2, 'b2/kB7k23': 1, 'b3/kB3k23': 2, 'b4/kB4k20': 1, 'c1/kB7k21': 1, 'b4/kB6k22': 2, 'b5/kB7k23': 1, 'c1/kB4k22': 1, 'b5/kB7k22': 1}
+   nonleaf_pos_neg : 747
+   nested_blobs : 3288
+   max_n : 13
+   several_neg : 1
+   other_sep_splits_checked : 211
+   modes : {'A': 938, 'cut': 1539, 'generic': 523}
+ALL CHECKS PASSED

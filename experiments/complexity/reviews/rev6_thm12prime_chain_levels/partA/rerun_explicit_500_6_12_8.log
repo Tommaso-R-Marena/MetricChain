@@ -1,0 +1,6 @@
+explicit rooted networks of level <= 2 (seed 6, at most 12 leaves): {'networks': 500, 'nested blobs': 565, 'negative critical weights': 100, 'choices of five leaves': 489, 'networks searched over all orders': 15, 'entered through a cut edge': 6, 'pendant position not a single leaf': 35}
+negative critical weight: the three strict four-point inequalities for every admissible choice of the five leaves, the identity for the first difference, and no circular order at all up to 8 leaves: True
+
+real	0m3.681s
+user	0m3.644s
+sys	0m0.028s

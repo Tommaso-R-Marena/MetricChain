@@ -4,7 +4,9 @@ Working paper of the complexity division, 2026-11-26.  Written in answer to THY-
 division: "a computable criterion (Kotecký–Preiss type or algorithmic, via zero-freeness) for the hypergraph
 of penalty tables"), THY-RES-0016 §5 (iv) ("a computable *threshold* — a bound that is tight up to the
 transition") and SCI-RES-0027 Q-CX3 / SCI-RES-0031 §1 (science division: the transition of a floor is governed
-by an extremal ratio).  Register: `THEOREMS.md` CX-T21–CX-T23.  **Unreviewed.**  Labels: [P] paper proof, [N]
+by an extremal ratio).  Register: `THEOREMS.md` CX-T21–CX-T23.  **Reviewed internally once** (COMPLEXITY-REV-0006, 2026-11-27: all
+statements correct; the displayed chain of Theorem 2 was misprinted and the hypothesis `λ ≥ 0` was unstated —
+both corrected; internal AI review, not peer review).  Labels: [P] paper proof, [N]
 numerical check against exact enumeration on toy models, [K] known, cited.
 
 Nothing here is new mathematics: these are the standard inequalities for a gas of polymers with
@@ -29,7 +31,7 @@ maximum degree and `k_min` the smallest size of a table.
 
 ## 2. A bracket that is first-order exact and stays sharp up to the transition
 
-**Theorem 1 [P].**  Let `w_λ(Γ) = ⟨ Π_{U∈Γ} (e^{λγ_U} − 1) ⟩_0 ≥ 0` and `W(λ) = Σ_{Γ connected} w_λ(Γ)`.  Then
+**Theorem 1 [P].**  Let `λ ≥ 0`, `w_λ(Γ) = ⟨ Π_{U∈Γ} (e^{λγ_U} − 1) ⟩_0 ≥ 0` and `W(λ) = Σ_{Γ connected} w_λ(Γ)`.  Then
 
 ```
 max( λ⟨G⟩_0 , ln(1 + W(λ)) )   ≤   gain(λ)   ≤   W(λ) .
@@ -53,13 +55,15 @@ exponential of the gain) and the other bounds take over.
 
 **Theorem 2 (an explicit Kotecký–Preiss-type criterion) [P; K for the count of connected sets].**
 Let `λ_0 = min_S ( Σ_{i∈S} ln(1/q_i) ) / γ^max(S)` over sets `S` with `γ^max(S) > 0`, `q_max = max_i q_i`, and
-`ε(λ) = eΔ · q_max^{1 − λ/λ_0}`.  For every `s ≥ 0`,
+`ε(λ) = eΔ · q_max^{1 − λ/λ_0}`.  For every `λ ≥ 0` and `s ≥ 0`, with `s' = max(s + 1, k_min)`,
 
 ```
-Σ_{Γ connected, |supp Γ| > s} w_λ(Γ)   ≤   Σ_{S connected, |S| > s} q(S) e^{λγ^max(S)}   ≤   n · ε^{s'} / ( eΔ · s' · (1 − ε) )
+Σ_{Γ connected, |supp Γ| > s} w_λ(Γ)   ≤   Σ_{S connected, |S| ≥ s'} q(S) e^{λγ^max(S)}   ≤   n · ε^{s'} / ( eΔ · s' · (1 − ε) )
 ```
 
-whenever `ε(λ) < 1`, with `s' = max(s + 1, k_min)`.  In particular, for
+whenever `ε(λ) < 1` (which forces `λ < λ_0`, because `q_max < 1`).  (The first version let the middle sum run over
+`|S| > s`; that includes sets too small to contain a table when `s + 1 < k_min`, and then "middle ≤ right" can
+fail — COMPLEXITY-REV-0006, finding 14.  The outer inequality, the proof and the program were not affected.)  In particular, for
 
 ```
 λ  <  λ* = λ_0 · ( 1 − ln(eΔ) / ln(1/q_max) )
@@ -233,3 +237,18 @@ Not read for this note; cited from memory as standard: Kotecký–Preiss (1986) 
 polymer expansions; Picard (1976) for maximum closure / project selection; Dinkelbach (1967) for ratio
 optimisation; Jerrum–Sinclair (1993), Goldberg–Jerrum (2007), Helmuth–Perkins–Regts (2019) for §3 (iii).  The
 Finner bound and the comparison principle are quoted from THY-RES-0016 §5.
+
+## 8. Review
+
+Reviewed internally once (COMPLEXITY-REV-0006, 2026-11-27; an AI referee commissioned by us, **not peer review**):
+Theorems 1, 2 and Propositions 3, 4, 5 correct (32 random instances with 10 values of `λ` each; our programs
+re-run); the displayed chain of Theorem 2 was misprinted and is corrected (the program had checked a correct
+variant, not the printed one); `λ ≥ 0` is now a stated hypothesis.  Not checked by the referee beyond a
+read-through: the list "what is polynomial" of §6 (including the bound `n^{1+log₂Q}`) and the complexity remarks
+of §3 (iii), which this note marks as from memory.
+
+The referee's strongest objection, in its words: "Standard polymer-gas inequalities.  By the note's own
+correction the explicit criterion is void on the instances that motivated it.  The one displayed chain of
+inequalities is misprinted."  Accepted: the note claims no new mathematics (first page), and §4 says where the
+explicit criterion says nothing.
+

@@ -1,0 +1,1 @@
+k=3: classes up to rotation/reflection by KEY 96095, by (KEY,INV) 96271; labelled networks by (KEY,INV) = sum of orbit sizes = 1153548  (by KEY alone the survey counts 1151442)

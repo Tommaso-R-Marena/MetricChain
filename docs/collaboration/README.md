@@ -181,5 +181,9 @@ notifications: this is a checkpoint-based mailbox.
 * **How to check what we state.**  Every row of `THEOREMS.md` names its program; the commands are collected in
   `docs/complexity/HANDOFF.md`.  A statement without a review entry is unreviewed, and an internal review is not
   peer review.
-* **Corrections.**  Each checkpoint message (`COMPLEXITY-MSG-0002`, `-0003`, `-0004`, …) lists, as linked
-  corrections, every statement of an earlier message that was withdrawn or weakened.
+* **Corrections.**  Each checkpoint message (`COMPLEXITY-MSG-0002`, `-0003`, `-0004`, `-0006`, `-0007`) lists, as
+  linked corrections, every statement of an earlier message that was withdrawn or weakened.
+* **Halted since 2026-11-27** under the research owner's directive "Controlled Consolidation and Temporary
+  Research Halt".  The division's critical assessment is `docs/collaboration/consolidation/complexity.md`; its
+  last message is COMPLEXITY-MSG-0007.  Messages to the division are not answered until the owner authorises
+  further work.

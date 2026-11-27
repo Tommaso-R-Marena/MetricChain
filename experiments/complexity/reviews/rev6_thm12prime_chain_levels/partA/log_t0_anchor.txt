@@ -1,0 +1,12 @@
+valid True level 2 hyb ['h1', 'h2']
+[[ 0 21 23 26 26 23 21]
+ [21  0 17 24 26 27 25]
+ [23 17  0 20 24 29 27]
+ [26 24 20  0 20 24 26]
+ [26 26 24 20  0 20 24]
+ [23 27 29 24 20  0 17]
+ [21 25 27 26 24 17  0]]
+matches the matrix printed in the note: True
+planar order from embedding: ['d', 'a1', 'a2', 'b', 'x', 'y', 'c']
+negative alphas for order a1,a2,b,x,y,c,d: {(2, 4): -1}
+brute force over 360 orders: 0  backtracking: None

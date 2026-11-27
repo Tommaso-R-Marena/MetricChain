@@ -1,0 +1,3 @@
+k=0: networks by KEY 126, by INV 126; systems so far 14  [0s]
+k=1: networks by KEY 2988, by INV 2988; systems so far 71  [1s]
+k=2: networks by KEY 59706, by INV 59706; systems so far 113  [36s]
