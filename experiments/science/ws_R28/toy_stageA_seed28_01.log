@@ -1,0 +1,26 @@
+R28 toy_run.py  start 2026-11-26T23:58:10Z  args: {'phases': 'own:28', 'n': 8, 'J': 2.0, 'N': 1440, 'ks': '3,6,12,24,48,96,144,288', 'wall': 'none', 'wallphase': '0', 'reference': 'tilted', 'search': 1}
+phases theta_i: [5.35223  5.559946 4.811089 0.20231  0.315414 2.069776 5.504094]
+exact ln of the reference-normalised integral on the 1440-point grid: 5.765346949307
+
+ k   cell   first-order   all-H        all-M(up)/Jensen  best-threshold (tau, #H cells)   local-search   position(all-H)  position(best)
+   3 120.00        3.296        4.734        1.084            1.076 (3.46, 6)         1.076     0.0291     0.1281
+   6  60.00        1.944        1.274       0.6875           0.6424 (2, 12)        0.6047     0.0460     0.0912
+  12  30.00        0.962       0.2379       0.3947           0.2379 (2.07, 96)        0.2352     0.0985     0.0985
+  24  15.00       0.4699      0.04658       0.2127          0.04658 (1.04, 192)           nan     0.1440     0.1440
+  48   7.50       0.2336      0.01018        0.111          0.01018 (0.523, 384)           nan     0.1709     0.1709
+  96   3.75       0.1166     0.002373      0.05683         0.002373 (0.262, 768)           nan     0.1863     0.1863
+ 144   2.50      0.07773      0.00103       0.0382          0.00103 (0.175, 1152)           nan     0.1932     0.1932
+ 288   1.25      0.03886    0.0002514      0.01926        0.0002514 (0.0873, 2304)           nan     0.2097     0.2097
+
+Jensen gap per angle (exact - Jensen end): 0.1379 0.05861 0.02343 0.006708 0.00174 0.000442 0.000199 5.272e-05
+minima end above exact per angle        : 0.9458 0.6289 0.3713 0.206 0.1093 0.05639 0.038 0.01921
+exponents between 24 and 96 cells: first-order -1.0052 (2-point) -1.0052 (LSQ on 24,48,96);  all-H -2.1476 (2-point) -2.1476 (LSQ)
+cells per angle for 1e-3 nats per angle: 146.1 (power law through 96 and 144, EXTRAPOLATED beyond 144); 146.1 (power law through 144 and 288)
+brackets checked: 611;  brackets that exclude the exact value: 0  (must be 0)
+CONTROL too-small oscillation (all-H, c_i scaled by f): k where the exact value is EXCLUDED:
+    f = 0.3: [12, 24, 48, 96, 144, 288]
+    f = 0.1: [3, 6, 12, 24, 48, 96, 144, 288]
+    f = 0.5: nowhere
+CONTROL cell minima used as a 'lower end': above the exact value (not a lower bound) in 8 of 8
+CONTROL Jensen value used as an 'upper end': below the exact value in 8 of 8
+END 2026-11-26T23:59:06Z  wall 56.5 s  peak memory 308 MB (ru_maxrss; address space capped at 3 GB)

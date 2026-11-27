@@ -1,0 +1,13 @@
+export_cert.py V20 P2 0.7 m=5 w=8   started 2026-11-27 00:46:48 UTC
+  instance: n = 20, states per site [3], anchor [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], E(anchor) = -306.568715 kcal/mol; in-band pairs 124 of 190
+  step A: 211 sums (read from pairsums_V20_P2_t0.70_gbn2_m5.npz); Gamma = 0.0822273218 kcal/mol
+  counting identities among the sums, exact arithmetic on the doubles: |m Gamma - sum_i S_i| = 5.898e-16, max_i |(m-1) S_i - sum_j G_ij| = 2.408e-15 kcal/mol; the interval slack 3e-9 Gamma is 2.467e-10
+  ball of radius 4: 87441 evaluated values of g (ball_V20_P2_t0.70_gbn2_M4_78d2725e4b.npz)
+  written: certs/sandwich_V20_P2_m5_w8.json (80430 bytes)
+  claim (integer tables): ln Z(E) in [518.255189142, 518.271429999], width 1.624e-02 nats
+  for comparison, the floating-point pipeline (p6lib.make_models, form B): ln Z(m_-) = 518.271429992954, ln Z(m_+) = 518.255189147971
+     the integer tables (double-precision transfer matrix):                 ln Z(m_lower) = 518.271429993900, ln Z(m_upper) = 518.255189147042
+     effect of the integer rounding on ln Z: +9.452e-10 (m_lower), -9.288e-10 (m_upper) nats; the claim widens each end by 5e-9 and rounds outwards to 9 decimals
+     a state uses 145 entries of a table; each entry of A_lower / A_upper moved by less than one unit: less than 1.319e-10 kcal/mol per state
+     integer penalties against p6lib's floating-point ones: largest difference 2.659e-10 (site), 9.818e-12 (pair) kcal/mol; largest site penalty 0.000257477, largest pair penalty 0.00184842 kcal/mol
+ALL DONE   computed in 4.9 s   peak memory 187 MB

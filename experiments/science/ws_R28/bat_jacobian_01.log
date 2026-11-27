@@ -1,0 +1,6 @@
+R28 bat_jacobian.py  start 2026-11-27T00:37:50Z
+chain of 6 atoms, 200 random internal geometries (bonds 0.9-1.8, angles 34-149 deg, torsions free):
+  |det J| / (prod b^2 prod sin theta): mean 0.89120736, relative spread (max-min)/mean 2.09e-09  -> constant: True
+  control, sin(theta) left out: relative spread 1.44e+00;  control, b in place of b^2: 3.08e+00  (both must be large)
+  => the Cartesian volume element is a product measure in bond-angle-torsion coordinates (unbranched chain; numerical evidence, N = 6)
+END 2026-11-27T00:37:51Z  wall 1.2 s  peak memory 34 MB (ru_maxrss; address space capped at 3 GB)

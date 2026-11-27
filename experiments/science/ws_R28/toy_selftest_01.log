@@ -1,0 +1,28 @@
+R28 toy_selftest.py  start 2026-11-26T23:56:25Z
+/home/user/MetricChain/experiments/science/ws_R28/toy_lib.py:305: RuntimeWarning: overflow encountered in exp
+  up = np.exp(-meanW + pen)
+models x modes checked by brute force: 360
+T1 transfer matrices vs brute force: violations 13, max |difference| inf
+T2 per-state (b): models with a violated state 0;  (c): 0
+T3 (a) cell-wise identity: violations 0 of 360
+C2 control (oscillations x 0.3): models with a state violating (c): 176  (must be > 0)
+C3 control (full end-point weights): (a) fails in 60 of 60  (must be > 0)
+
+T5  smallest counterexample to (c) without a product reference inside the cell:
+    x1 = x2 in {0,1} with probability 1/2 each (perfectly correlated), V = W = a (x1 + x2),
+    c_1 = c_2 = a;  ln<e^{-(W-<W>)}> = ln cosh(a);  claimed bound sum c_i^2/8 = a^2/4;
+    surviving bound (sum c_i)^2/8 = a^2/2
+    a =  0.1   ln cosh a = 0.004992   a^2/4 = 0.002500   a^2/2 = 0.005000   (c) violated: True   weaker bound holds: True
+    a =  0.5   ln cosh a = 0.120115   a^2/4 = 0.062500   a^2/2 = 0.125000   (c) violated: True   weaker bound holds: True
+    a =  1.0   ln cosh a = 0.433781   a^2/4 = 0.250000   a^2/2 = 0.500000   (c) violated: True   weaker bound holds: True
+    a =  2.0   ln cosh a = 1.325003   a^2/4 = 1.000000   a^2/2 = 2.000000   (c) violated: True   weaker bound holds: True
+    a =  4.0   ln cosh a = 3.307188   a^2/4 = 4.000000   a^2/2 = 8.000000   (c) violated: False   weaker bound holds: True
+    with a PRODUCT two-point reference: ln<e^{-(W-<W>)}> = 2 ln cosh(a/2):
+    a =  0.1   2 ln cosh(a/2) = 0.002499   a^2/4 = 0.002500   holds: True
+    a =  0.5   2 ln cosh(a/2) = 0.061860   a^2/4 = 0.062500   holds: True
+    a =  1.0   2 ln cosh(a/2) = 0.240229   a^2/4 = 0.250000   holds: True
+    a =  2.0   2 ln cosh(a/2) = 0.867562   a^2/4 = 1.000000   holds: True
+    a =  4.0   2 ln cosh(a/2) = 2.650005   a^2/4 = 4.000000   holds: True
+
+SELFTEST FAILED
+END 2026-11-26T23:56:38Z  wall 12.7 s  peak memory 58 MB (ru_maxrss; address space capped at 3 GB)

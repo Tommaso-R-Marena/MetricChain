@@ -12,11 +12,62 @@ first; it points to everything else.  The digest for the other two divisions is
 
 ## 0. Resume here
 
-*State at 2026-11-27 00:21 UTC.  (The block is rewritten when the state changes; the
+*State at 2026-11-27 00:57 UTC.  (The block is rewritten when the state changes; the
 history is in `SCIENTIFIC_RESEARCH_LOG.md`, cycles 37–61.)*
 
 **Open right now (newest first; everything below this paragraph is older and still true
 unless this paragraph says otherwise).**
+(pppp) **Checkpoint 72 (00:57 UTC, 27 November): Stage 1 of the sandwich certificate is delivered — the item
+"OWED FIRST" of (oooo) below is done.**  *Sent:* **SCI-MSG-0036** to engineering.  *On the branch:*
+`docs/science/SANDWICH_CERTIFICATE_FORMAT.md` (the specification: fields, the statement, five groups of
+checks W / A0 / B / D / E, the covering lemma with proof, rounding, what Stage 2 must establish) and
+`experiments/science/sandwich_cert/` — `export_cert.py` (producer: P3/P6 pipeline unchanged, directed rounding
+to integers in units of `2⁻⁴⁰` kcal/mol, smallest integer penalties the inequalities allow),
+`check_cert.py` (reference checker: standard library + `mpmath`; imports nothing from the producer),
+`controls.py` (85 controls: planted truth for the recursion and for the lemma, 77 mutations of the files),
+`certs/` (two files), `vectors/` (43 mutated files with `EXPECTED.tsv` for a second checker), logs,
+`PREDICTIONS.md`.  Accepted: Val₆ `[198.067925225, 198.068095790]`, Val₂₀ `[518.255189142, 518.271429999]`.
+**Every such bracket is conditional on three data assumptions (G1)–(G3)** — say so whenever one is quoted.
+To re-run: `cd experiments/science/sandwich_cert; python3 -B export_cert.py V6 E 0.70 4 5;
+python3 -B export_cert.py V20 P2 0.70 5 8; python3 -B check_cert.py certs/*.json; python3 -B controls.py`
+(the exporter needs the caches of `ws_P3`/`ws_P6`, which are local and untracked: without them the
+twenty-residue ball costs about 87 000 energy evaluations and the enclosure tables must be rebuilt; the
+checker and the controls need nothing but the files).
+**Next piece of own work on this line (open problem E5): Stage 2, step (i) — the evaluated part recomputed
+exactly.**  Design, not yet coded: a second file per instance with the evaluated values on the ball as
+integers (nearest rounding; the tolerance absorbs it) and the tables of the pairwise part rounded down / up;
+the two tables of the evaluated part then built **in exact integer arithmetic** by the construction of
+`ws_P3/pwmodel.py build_band_models` (far pairs split additively — any integer column function is valid, take
+the floor of the column mean; terms of order 3 to `m − 1` reduced by min / max onto one in-band pair), with
+the choice of pair for every such term published as a witness so that a checker recomputes the tables without
+reproducing our heuristic.  The published Stage 1 tables are floors of floating-point sums and can exceed the
+exact sum by one unit in a few entries, so new certificate files will come with that step (the brackets move
+by about `10⁻⁹` nats).  After it, what remains unchecked is the step-A sums (G2), the evaluation tolerance
+(G3) and the identity of the pairwise tables with the force field.
+**Arrived while this was being finished, and NOT yet read (do these first, in this order).**
+  (1) **Referee R28 handed back at about 00:55 UTC** — `workstreams/R28_REPORT.md` (490 lines) and `ws_R28/`
+  are committed **unread and unchecked**.  By its hand-back note it has five major findings about our own
+  statements: the leucine example ("the rigid-rotamer minimum is in the wrong well") replicates exactly but is
+  **overstated as carried outward** — it disappears under a 1.6° shift of the rotamer positions, without the
+  solvent term, on the strand, and when bond angles are relaxed (the strain of ideal rotamers falls from 5.9 /
+  3.8 kT to 0.03 / 0.06 kT), so the use of those numbers in SCI-REV-0026 F5 as evidence about the Structural
+  Biology division's model is not supported; cell free energies as discrete state energies are **in print**
+  (LUTE, Hallen–Jou–Donald 2017; PLUG) — our item 101 (b) needs its prior art; item 99 (ii) names a wrong
+  class; no pair-model upper end was tested; "mode M" is the wrong tool for the lower end with walls.  To do:
+  read the report in full, check the deciding points with own code, write the coordinator's note, and publish
+  **linked corrections** wherever the leucine numbers and the "new" bracket were carried outward — to
+  Structural Biology (SCI-REV-0025, SCI-REV-0026) and Frontier Benchmarking (SCI-MSG-0035, SCI-RES-0041); the
+  exact passages are to be found by reading those texts against the report, not from memory — as SCI-REV-0029.  Its data files (`*.npz`, `cc_cache/`) are
+  ignored by git and exist only in this container.
+  (2) **THY-MSG-0021** (theory `61461f3`): their answer to SCI-REV-0027 — §11.33 corrected, an elimination
+  identity machine-checked.  (3) **FRONTIER-MSG-0002, -0003, FRONTIER-REQ-0001, -0002** (frontier `3c6446b`).
+  (4) **The Structural Biology division's results after our review** (`7722963`: seed measurement complete —
+  material on all six structures; models v2 and v2-lib; results R-8, R-9; seven corrected statements; a
+  null-method baseline): **the D-3 review of model v2 is now due.**  (5) Ensemble `fb22cb8` (ENSEMBLE-RES-0007,
+  -0008, ENSEMBLE-REQ-0001; ENSEMBLE-MSG-0009 still unread).
+*Still running:* referee R29 (theory's Theorem 11.58e; `ws_R29/` is its working directory and is not committed
+until it hands back).  *Still owed from before:* ENG-RES-0015, -0016, -0018; COMPLEXITY-RES-0010;
+GEOMETRY-MSG-0010, -RES-0008; the Frontier division's protocols (not its freezes).
 (oooo) **Checkpoint 71 (00:21 UTC, 27 November): three answers are out; one piece of our own work is now owed
 to the engineering division.**  *Sent:* SCI-RES-0040 (to Ensemble: the standard observables classified by how
 the ensemble enters — from memory), SCI-RES-0041 (to Frontier Benchmarking: its items S-1 and S-2), SCI-RES-0042
@@ -195,7 +246,7 @@ expansion of the chain's exponent?  D12 (a′) — a certified statement between
 D14 (down-closed families), D16 (a certified discretisation term; G-5 is answered).  Unrefereed inside the division:
 addendum A17 (13)–(18) (the research owner's decision, as recorded), parts (23), (24)
 and (25).
-(v) Heads at the fetch of 00:08:54 UTC on 27 November: theory `07cde81`, engineering `8df6e5e`, ensemble `b654396`, geometry `a82b1cd`, complexity `d920323`, structural biology `0544ff4`, frontier benchmarks `097b4c7`.  **Seen by title only and owed a reading, in this order:** (1) the Structural Biology division's four commits after our review — the seed measurement that SCI-REV-0026 asked for, set up with a written prediction (their `0544ff4`), an enclosure of `ln Z` for crambin with conditioning, STRUCTBIO-REQ-0004 to engineering; (2) **the engineering division's checkpoint 6** (`8df6e5e`: ENG-MSG-0007 and ENG-RES-0015 … -0018, about 2 200 lines) — ENG-RES-0017 first (their correction after our SCI-REV-0018) and ENG-MSG-0007 (the queue through which our computation requests go); (3) the Frontier division's second checkpoint (`60a71d1`: protocols, registers, a file of mathematical feedback) — **not** its freezes (`bd25657`, a sealed held-out list; `097b4c7`, scores of public CASP17 models), which we neither open nor ask about; (4) ENSEMBLE-MSG-0008 (a question to us, unanswered) and ENSEMBLE-MSG-0009; (5) COMPLEXITY-MSG-0006 (may answer SCI-REV-0024) and COMPLEXITY-RES-0010; (6) GEOMETRY-MSG-0010 and GEOMETRY-RES-0008 (their twelfth checkpoint).
+(v) **Heads at the fetch of 00:54:42 UTC on 27 November: theory `61461f3`, engineering `8df6e5e`, ensemble `fb22cb8`, geometry `a82b1cd`, complexity `05865bb`, structural biology `7722963`, frontier benchmarks `3c6446b` — what is unread of them is listed in §0 (pppp).**  *The rest of this item is the state at an earlier fetch and is kept for the reading order it gives:* heads at the fetch of 00:08:54 UTC on 27 November: theory `07cde81`, engineering `8df6e5e`, ensemble `b654396`, geometry `a82b1cd`, complexity `d920323`, structural biology `0544ff4`, frontier benchmarks `097b4c7`.  **Seen by title only and owed a reading, in this order:** (1) the Structural Biology division's four commits after our review — the seed measurement that SCI-REV-0026 asked for, set up with a written prediction (their `0544ff4`), an enclosure of `ln Z` for crambin with conditioning, STRUCTBIO-REQ-0004 to engineering; (2) **the engineering division's checkpoint 6** (`8df6e5e`: ENG-MSG-0007 and ENG-RES-0015 … -0018, about 2 200 lines) — ENG-RES-0017 first (their correction after our SCI-REV-0018) and ENG-MSG-0007 (the queue through which our computation requests go); (3) the Frontier division's second checkpoint (`60a71d1`: protocols, registers, a file of mathematical feedback) — **not** its freezes (`bd25657`, a sealed held-out list; `097b4c7`, scores of public CASP17 models), which we neither open nor ask about; (4) ENSEMBLE-MSG-0008 (a question to us, unanswered) and ENSEMBLE-MSG-0009; (5) COMPLEXITY-MSG-0006 (may answer SCI-REV-0024) and COMPLEXITY-RES-0010; (6) GEOMETRY-MSG-0010 and GEOMETRY-RES-0008 (their twelfth checkpoint).
 
 0. **Read the research owner's governing texts first: `docs/science/OWNER_DIRECTIVES.md`**
    (the charter D-0, the supplementary directive D-1, the expansion directive D-2 —

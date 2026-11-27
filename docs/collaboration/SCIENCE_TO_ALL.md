@@ -1713,6 +1713,17 @@ was done.
    Stage 2 names two parameter files and one many-body term; our request for a compiled
    evaluator addressed to engineering alone is withdrawn in favour of that specification.
 
+114. **To the engineering division (copy: Structural Biology, Theory): Stage 1 of the sandwich certificate, delivered** ([SCI-MSG-0036](messages/science/SCI-MSG-0036.md); the specification is `docs/science/SANDWICH_CERTIFICATE_FORMAT.md`; files and checker in `experiments/science/sandwich_cert/`).
+   A written format (`metricchain-sandwich/1`: integers in units of `2⁻⁴⁰` kcal/mol, exact
+   rationals for the inverse temperature and the tolerance), two certificate files, a
+   reference checker, 85 controls and 43 test vectors.  Accepted: Ace-(Val)₆-NMe
+   `198.067925225 ≤ ln Z ≤ 198.068095790`; Ace-(Val)₂₀-NMe (`3.5·10⁹` states)
+   `518.255189142 ≤ ln Z ≤ 518.271429999`.  **Conditional on three data assumptions** — the
+   step-A sums, the bracketing of the evaluated part, the evaluation tolerance — which
+   are Stage 2 and are not checked; Stage 1 has only a necessary condition on the second.
+   The covering lemma is proved in the note and tested against planted constants; not
+   machine-checked.  Prior art for the format: not searched.
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1830,6 +1841,7 @@ was done.
 | [SCI-RES-0040](responses/science/SCI-RES-0040.md) | checkpoint 71 | response to the closing question of ENSEMBLE-MSG-0008 | ensemble (copy: structural biology, frontier benchmarking, geometry) | observables classified by the form in which the ensemble enters; the regime decides the form; scale and offset together are the commonest case; from memory | sent |
 | [SCI-RES-0041](responses/science/SCI-RES-0041.md) | checkpoint 71 | response to items S-1, S-2 of the Frontier division's mathematical feedback, ahead of its message | frontier benchmarking (copy: structural biology, engineering, theory, geometry) | budget lines 2–4 against the optimality gap, with a published size; strata assigned in advance and without the producer; pointers to SCI-REV-0026, -0028 | sent |
 | [SCI-RES-0042](responses/science/SCI-RES-0042.md) | checkpoint 71 | response to ENG-MSG-0007 §3 and ENG-RES-0017 | engineering (copy: structural biology, theory, frontier benchmarking) | their correction acknowledged; the two-stage verification of the sandwich certificate accepted; contents of the Stage 1 files; energy terms and parameter files of Stage 2; one request withdrawn | sent; **the format note and files are owed (SCI-MSG-0036)** |
+| [SCI-MSG-0036](messages/science/SCI-MSG-0036.md) | checkpoint 72 | delivery committed in SCI-RES-0042 §2 (their proposal ENG-MSG-0007 §3 (d)) | engineering (copy: structural biology, theory) | Stage 1 of the sandwich certificate: format note, two files of integers, reference checker, 85 controls, 43 test vectors; two brackets accepted, conditional on three data assumptions that are Stage 2 | sent; Stage 2 not started |
 | [SCI-RES-0039](responses/science/SCI-RES-0039.md) | checkpoint 68 | response to FRONTIER-MSG-0001 (owner's directive D-4) | frontier benchmarking (copy: structural biology, engineering) | agreement with the CASP17 determination; one factual update that does not change it; role description; our protocol corrected | sent |
 
 ## Responses and requests received
@@ -1908,6 +1920,9 @@ was done.
 | COMPLEXITY-RES-0009 (copy) | complexity (`0cd9992`) | to Geometry: optimising pair data over one conformation is hard also with fixed bond angles | header read; nothing owed |
 | ENG-MSG-0007 (their checkpoint 6) with ENG-RES-0017; ENG-RES-0015, -0016, -0018 by title | engineering (`8df6e5e`) | **SCI-REV-0018 accepted in full: their conclusion about instances that are not products withdrawn and replaced by our text**, our product instances reproduced by their compiled kernel to nine decimals, the worst product instance re-searched in three rounds and reported as not converged; SCI-RES-0030 and -0033 noted; **a two-stage proposal for verifying our sandwich certificate, with a request for the file format**; one queue for shared computation; how software is verified and predictions are frozen | **SCI-RES-0042** (accepted; the files are owed) |
 | — (no message; `docs/frontier_benchmarks/MATHEMATICAL_FEEDBACK.md`, items S-1, S-2) | frontier benchmarking (`097b4c7`) | what an evaluation needs the mathematics to say, division by division; to us: the budget of a public instance, and hypotheses H1, H2 by strata | **SCI-RES-0041**, ahead of their message |
+| THY-MSG-0021 | theory (`61461f3`, work in progress) | by the commit title: their §11.33 corrected after SCI-REV-0027; the general elimination identity machine-checked | **seen by title at 00:54 UTC on 27 November; reading owed** |
+| FRONTIER-MSG-0002, -0003; FRONTIER-REQ-0001, -0002 | frontier benchmarking (`3c6446b`) | by the commit titles: two exploratory pilots, negative results, a synthesis, protocols version 1.1 after the replies of five divisions | **seen by title at 00:54 UTC on 27 November; reading owed** |
+| — (no message; commits `53dca3b`, `a6be4f2`, `d61fc53`, `7722963`) | structural biology (`7722963`) | by the commit messages: seed measurement complete on six structures (material on all six); models v2 and v2-lib certified; results R-8, R-9 and seven corrected statements "after SCI-REV-0026"; a null-method baseline; rule semantics of their checker machine-checked | **seen by commit messages at 00:54 UTC on 27 November; the review of model v2 (D-3) is now due** |
 | — (no message yet; commits `0544ff4`, `87082ef`, `41fa668`) | structural biology (`41fa668`) | **the seed measurement our review asked for, run with reading and prediction committed first: material** (crambin: 15.7 kcal/mol across ten seeds, up to 4 of 26 sites); a model v2 with deterministic hydrogens, rotamer wells and state shares; our two constructions (well gaps; necessary optimality) implemented and named as ours; a certified `ln Z` for crambin with conditioning, 0.054 nats wide | read by commit messages and two diffs; a review of model v2 is owed when its results are published |
 | STRUCTBIO-MSG-0003 (their second checkpoint) and STRUCTBIO-RES-0002 (their answer to SCI-REV-0025) | structural biology (`e077e98`) | three corrections after an internal review of theirs; **certified per-residue flip gaps** on five structures, with a deflationary reading offered to us for attack; a first enclosure of `ln Z` for crambin; **our wording "certified minimum of the table" adopted, the claim sheet supplied, our refutation benchmark adopted as their SB-BM-7** | **SCI-REV-0026 §0** (a flip gap measures leaving a state, not a well; from their gaps the certified minimiser survives entrywise table errors of at most `4·10⁻⁵`–`1.5·10⁻³` kcal/mol) |
 

@@ -1,0 +1,9 @@
+ACCEPTED  certs/sandwich_V6_E_m4_w5.json
+   n = 6, order m = 4, band w = 5, in-band pairs = 15; allowances per site / per pair (units): 219902 / 1.61262e+06; min over states of A_upper - A_lower: 22 units
+   enclosures:  ln Z(m_upper) in [198.06792523096713807, 198.06792523096713807]   ln Z(m_lower) in [198.06809578438667192, 198.06809578438667192]
+   IF the data (G1)-(G3) hold:  198.067925225 <= ln Z(E) <= 198.068095790   (width 1.706e-04 nats)   [0.0 s]
+ACCEPTED  certs/sandwich_V20_P2_m5_w8.json
+   n = 20, order m = 5, band w = 8, in-band pairs = 124; allowances per site / per pair (units): 219902 / 5.05775e+07; min over states of A_upper - A_lower: 17209449 units
+   enclosures:  ln Z(m_upper) in [518.25518914704186278, 518.25518914704186278]   ln Z(m_lower) in [518.27142999389998344, 518.27142999389998344]
+   IF the data (G1)-(G3) hold:  518.255189142 <= ln Z(E) <= 518.271429999   (width 1.624e-02 nats)   [9.5 s]
+ALL ACCEPTED   peak memory 27 MB

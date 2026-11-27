@@ -1,0 +1,12 @@
+R28 ff_grid.py  start 2026-11-27T00:07:33Z {'seq': 'L', 'bb': 'H', 'N': 144, 'out': '/home/user/MetricChain/experiments/science/ws_R28/grid_L_H_144.npz', 'window': None, 'compare': '/home/user/MetricChain/experiments/science/ws_R28/cc_cache/E_L_H_144.npy'}
+Ace-L-NMe: 31 atoms, 1 residues, 2 side-chain torsions; backbone H (-57.0, -47.0)
+G1 dihedrals of the built coordinates (phi, psi of every residue; every chi; 40 random conformations): largest deviation from the requested value 3.69e-14 deg  ->  ok
+   control: residue 1 LEU: dihedral to the sibling atom CD2 minus chi = +120.07 deg (spread 5.7e-14) — not zero, as it must be
+   LEU bond angles of the rigid geometry [deg]: N-CA-CB 109.70, CA-CB-CG 109.50, CB-CG-CD1 109.50, CB-CG-CD2 109.50, CD1-CG-CD2 109.50
+G3 builder (bond+angle+tors+nb+gbn2) against a fresh ff14SB + GBn2 system, 8 conformations: largest relative difference 1.5e-16  ->  ok
+   control: with the OBC2 solvent term in place of GBn2 the totals differ by up to 1.390 kcal/mol (so G3 can fail)
+grid (144, 144): vacuum -31.36 .. 7.706e+09 kcal/mol; GBn2 -20.29 .. -17.22
+G2 rigid geometry: bond energy range over the grid 2.62e-27, angle energy range 1.48e-15 kcal/mol  ->  ok
+G4 my grid against the cache of the re-run (E_L_H_144.npy): vacuum largest relative difference 3.6e-14, GBn2 largest absolute difference 0.0e+00 kcal/mol  ->  ok
+   control: with the two torsion axes exchanged the largest relative difference is 1.61e+09 (must be large)
+END 2026-11-27T00:08:10Z  wall 37.5 s  peak memory 75 MB (ru_maxrss; address space capped at 3 GB)

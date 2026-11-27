@@ -3207,3 +3207,33 @@ commonest real case (a scale and an offset together) is not in their list yet.
 before a protocol is frozen, so I answered ahead of the message.
 *Not done:* I have not read engineering's three other reports, nor the newest messages of Ensemble, Geometry
 and Complexity beyond what names us.
+
+**27 November, 00:57 UTC — the first certificate of the free-energy line that someone else can check.**
+The engineering division proposed that we publish the numbers our covering inequalities and transfer matrix
+compare, and that they write the checker.  I wrote the format, a producer and a reference checker, in that
+order of independence: the checker imports nothing from the producer and follows the written note.
+*Predictions before the runs* (file `sandwich_cert/PREDICTIONS.md`): both files accepted; the validation
+values reproduced; the controls rejected for stated reasons.  *Outcomes:* all as predicted except the
+checker's run time, which I had put at 20–40 s and which is 10 s — I had counted every site of the chain as a
+full band (the last eight are not) and used a cost per interval exponential that was a third too high.
+*What I changed after the first acceptance, and why it matters for the record:* (1) the last comparison of
+the checker first used the comparison operators of the interval library, whose result for overlapping
+intervals is "undetermined"; I replaced it by an exact comparison of rational end points before any control
+was run.  (2) I added consistency checks of the data — the step-A intervals against the two counting
+identities, and the two tables of the evaluated part against each other by an exact min-plus recursion —
+after seeing that a file with the tables exchanged would have been accepted.  The second check found
+something I had not expected to be able to see at this stage: on the six-residue instance the two tables
+coincide at the anchor, so their integer difference there is exactly the number of entries used (22 units),
+and a producer rounding the wrong way would be caught; on the twenty-residue instance nothing of the kind is
+visible.  That is the honest limit of Stage 1 and it is in the note.  (3) One expectation in my controls
+script was wrong before it ran (a file with the unit halved fails at the partition functions, not at the
+covering); corrected by reasoning, recorded.
+*The lemma.*  The covering by pair shares was until now a paragraph in a workstream report and a function in
+our library.  Written out as a lemma with its proof, and tested against constants I planted: at 10 419
+patterns of changed sites the smallest penalties cover the true remainder, with equality attained; for order
+2 with a full band the inequalities are necessary, and every one-unit fault breaks a pattern.
+*What is not done:* nothing that needs the force field.  The three data assumptions are named in every
+sentence that quotes a bracket.  The next step — recomputing the tables of the evaluated part exactly from
+the ball values — I have designed and not coded; the Stage 1 tables are floors of floating-point sums and
+will be replaced by exactly built ones when that step is published.
+

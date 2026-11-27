@@ -1,0 +1,44 @@
+file	verdict	first failing check of the reference checker	description
+01_unchanged_file.json	ACCEPTED	-	unchanged file
+02_pair_number_lowered_by_one_unit.json	REJECTED	B1	pair number lowered by one unit
+03_pair_number_lowered_tables_rebuilt.json	REJECTED	B1	pair number lowered, tables rebuilt
+04_site_number_lowered_by_one_unit.json	REJECTED	B2	site number lowered by one unit
+05_site_number_lowered_tables_rebuilt.json	REJECTED	B2	site number lowered, tables rebuilt
+06_constant_lowered_by_one_unit.json	REJECTED	B3	constant lowered by one unit
+07_constant_lowered_tables_rebuilt.json	REJECTED	B3	constant lowered, tables rebuilt
+08_eps_g_doubled.json	REJECTED	B3	eps_g doubled
+09_eps_g_doubled_constant_doubled_tables_rebuilt.json	REJECTED	B1	eps_g doubled, constant doubled, tables rebuilt
+10_step_a_upper_end_of_gamma_raised_by_100_units.json	REJECTED	B1	step A: upper end of Gamma raised by 100 units
+11_step_a_lower_end_of_gamma_i_lowered_by_100_units.json	REJECTED	B1	step A: lower end of Gamma^(-i) lowered by 100 units
+12_step_a_lower_end_of_gamma_i_j_lowered_by_200_c_m_2_units.json	REJECTED	B2	step A: lower end of Gamma^(-i,-j) lowered by 200 C(m,2) units
+13_step_a_interval_of_gamma_with_lo_up.json	REJECTED	malformed	step A: interval of Gamma with lo > up
+14_step_a_gamma_i_above_gamma.json	REJECTED	A0	step A: Gamma^(-i) above Gamma
+15_order_m_raised_by_one_data_of_the_other_order.json	REJECTED	A0	order m raised by one (data of the other order)
+16_order_m_lowered_by_one_data_of_the_other_order.json	REJECTED	A0	order m lowered by one (data of the other order)
+17_a_lower_and_a_upper_exchanged_tables_rebuilt.json	REJECTED	A0	A_lower and A_upper exchanged, tables rebuilt
+18_entry_of_m_lower_one_raised_by_one_unit.json	REJECTED	D	entry of m_lower.one raised by one unit
+19_entry_of_m_upper_pair_lowered_by_one_unit.json	REJECTED	D	entry of m_upper.pair lowered by one unit
+20_entry_of_a_lower_one_raised_by_one_unit_m_lower_unchanged.json	REJECTED	D	entry of A_lower.one raised by one unit, m_lower unchanged
+21_constant_of_m_lower_raised_by_one_unit.json	REJECTED	D	constant of m_lower raised by one unit
+22_penalty_applied_at_the_anchor_state_too_m_lower_one.json	REJECTED	D	penalty applied at the anchor state too (m_lower.one)
+23_anchor_of_one_site_changed.json	REJECTED	D	anchor of one site changed
+24_unknown_format_name.json	REJECTED	malformed	unknown format name
+25_extra_top_level_key.json	REJECTED	malformed	extra top-level key
+26_in_band_pair_missing_from_m_lower_pair.json	REJECTED	malformed	in-band pair missing from m_lower.pair
+27_anchor_out_of_range.json	REJECTED	malformed	anchor out of range
+28_negative_pair_number.json	REJECTED	malformed	negative pair number
+29_band_width_changed.json	REJECTED	malformed	band width changed
+30_a_floating_point_literal.json	REJECTED	malformed	a floating-point literal
+31_a_duplicate_key.json	REJECTED	malformed	a duplicate key
+32_truncated_file.json	REJECTED	malformed	truncated file
+33_valid_pair_number_raised_by_one_unit_tables_rebuilt.json	ACCEPTED	-	VALID: pair number raised by one unit, tables rebuilt
+34_valid_annotations_removed.json	ACCEPTED	-	VALID: annotations removed
+35_valid_lower_claim_just_below_ln_z_m_upper_1e_12.json	ACCEPTED	-	VALID: lower claim just below ln Z(m_upper) (1e-12)
+36_lower_claim_just_above_ln_z_m_upper_1e_12.json	REJECTED	E	lower claim just above ln Z(m_upper) (1e-12)
+37_valid_upper_claim_just_above_ln_z_m_lower_1e_12.json	ACCEPTED	-	VALID: upper claim just above ln Z(m_lower) (1e-12)
+38_upper_claim_just_below_ln_z_m_lower_1e_12.json	REJECTED	E	upper claim just below ln Z(m_lower) (1e-12)
+39_claimed_bracket_empty_ends_exchanged.json	REJECTED	E	claimed bracket empty (ends exchanged)
+40_beta_doubled.json	REJECTED	E	beta doubled
+41_unit_changed_to_2_39_integers_unchanged.json	REJECTED	E	unit changed to 2^-39 (integers unchanged)
+42_unit_changed_to_2_41_integers_unchanged.json	REJECTED	B3	unit changed to 2^-41 (integers unchanged)
+43_every_entry_of_a_lower_up_of_a_upper_down_one_unit_rebuilt.json	REJECTED	A0	every entry of A_lower up, of A_upper down, one unit; rebuilt

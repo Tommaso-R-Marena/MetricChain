@@ -1,0 +1,94 @@
+controls.py   started 2026-11-27 00:48:59 UTC
+  writing the mutated Val6 files to vectors
+Part 0: band recursion against enumeration
+  [ok] exact minimum equals enumeration (60 random models)        expected: 60 of 60                 got: 60 of 60
+  [ok] ln Z enclosure contains enumeration (60 random models)     expected: 60 of 60                 got: 60 of 60; widest enclosure 1.5e-28
+Part 1: the covering inequalities against known constants, every pattern of changed sites
+  [ok] smallest penalties accepted by (A0) and (B)                expected: 200 of 200               got: 200 of 200
+  [ok] penalty >= true right side at every pattern                expected: 0 violations             got: 0 violations in 10419 patterns of 200 instances; smallest margin 0
+  [ok] order 2, full band: one unit less breaks a pattern         expected: 378 of 378               got: 378 of 378
+  [ok] order 2, full band: the checker rejects each of them       expected: 378 of 378               got: 378 of 378
+Part 2: mutations of certs/sandwich_V6_E_m4_w5.json
+  [ok] Val6: unchanged file                                       expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val6: pair number lowered by one unit                      expected: REJECTED: B1             got: REJECTED: B1 violated at pair (3,4)
+  [ok] Val6: pair number lowered, tables rebuilt                  expected: REJECTED: B1             got: REJECTED: B1 violated at pair (3,4)
+  [ok] Val6: site number lowered by one unit                      expected: REJECTED: B2             got: REJECTED: B2 violated at site 3
+  [ok] Val6: site number lowered, tables rebuilt                  expected: REJECTED: B2             got: REJECTED: B2 violated at site 3
+  [ok] Val6: constant lowered by one unit                         expected: REJECTED: B3             got: REJECTED: B3 violated: the constant is below eps_g
+  [ok] Val6: constant lowered, tables rebuilt                     expected: REJECTED: B3             got: REJECTED: B3 violated: the constant is below eps_g
+  [ok] Val6: eps_g doubled                                        expected: REJECTED: B3             got: REJECTED: B3 violated: the constant is below eps_g
+  [ok] Val6: eps_g doubled, constant doubled, tables rebuilt      expected: REJECTED: B1             got: REJECTED: B1 violated at pair (0,1)
+  [ok] Val6: step A: upper end of Gamma raised by 100 units       expected: REJECTED: B1             got: REJECTED: B1 violated at pair (0,1)
+  [ok] Val6: step A: lower end of Gamma^(-i) lowered by 100 units expected: REJECTED: B1             got: REJECTED: B1 violated at pair (0,3)
+  [ok] Val6: step A: lower end of Gamma^(-i,-j) lowered by 200 C(m,2) units expected: REJECTED: B2             got: REJECTED: B2 violated at site 3
+  [ok] Val6: step A: interval of Gamma with lo > up               expected: REJECTED: malformed      got: REJECTED: malformed: stepA.Gamma is not an interval 0 <= lo <= up
+  [ok] Val6: step A: Gamma^(-i) above Gamma                       expected: REJECTED: A0             got: REJECTED: A0 violated: Gamma_minus_i[3] lies above Gamma
+  [ok] Val6: order m raised by one (data of the other order)      expected: REJECTED: A0             got: REJECTED: A0 violated: sum_i S_i = m Gamma is impossible
+  [ok] Val6: order m lowered by one (data of the other order)     expected: REJECTED: A0             got: REJECTED: A0 violated: sum_i S_i = m Gamma is impossible
+  [ok] Val6: A_lower and A_upper exchanged, tables rebuilt        expected: REJECTED: A0             got: REJECTED: A0 violated: A_lower exceeds A_upper at some state
+  [ok] Val6: entry of m_lower.one raised by one unit              expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[3][0]
+  [ok] Val6: entry of m_upper.pair lowered by one unit            expected: REJECTED: D              got: REJECTED: D violated: m_upper.pair[3,4][0][0]
+  [ok] Val6: entry of A_lower.one raised by one unit, m_lower unchanged expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[3][0]
+  [ok] Val6: constant of m_lower raised by one unit               expected: REJECTED: D              got: REJECTED: D violated: m_lower.const
+  [ok] Val6: penalty applied at the anchor state too (m_lower.one) expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[3][1]
+  [ok] Val6: anchor of one site changed                           expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[3][0]
+  [ok] Val6: unknown format name                                  expected: REJECTED: malformed      got: REJECTED: malformed: unknown format
+  [ok] Val6: extra top-level key                                  expected: REJECTED: malformed      got: REJECTED: malformed: wrong set of top-level keys
+  [ok] Val6: in-band pair missing from m_lower.pair               expected: REJECTED: malformed      got: REJECTED: malformed: m_lower.pair (keys = in-band pairs)
+  [ok] Val6: anchor out of range                                  expected: REJECTED: malformed      got: REJECTED: malformed: anchor
+  [ok] Val6: negative pair number                                 expected: REJECTED: malformed      got: REJECTED: malformed: penalty.b (keys = in-band pairs)
+  [ok] Val6: band width changed                                   expected: REJECTED: malformed      got: REJECTED: malformed: stepA.Gamma_minus_ij (keys = in-band pairs)
+  [ok] Val6: a floating-point literal                             expected: REJECTED: malformed      got: REJECTED: malformed: a number that is not an integer (-40.0)
+  [ok] Val6: a duplicate key                                      expected: REJECTED: malformed      got: REJECTED: malformed: duplicate key 'unit_log2'
+  [ok] Val6: truncated file                                       expected: REJECTED: malformed      got: REJECTED: malformed: not JSON (Expecting ',' delimiter: line 1 column 5935 (char 5934))
+  [ok] Val6: VALID: pair number raised by one unit, tables rebuilt expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val6: VALID: annotations removed                           expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val6: VALID: lower claim just below ln Z(m_upper) (1e-12)  expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val6: lower claim just above ln Z(m_upper) (1e-12)         expected: REJECTED: E              got: REJECTED: E violated: claim.lnZ_lower is not below the enclosure of ln Z(m_upper)
+  [ok] Val6: VALID: upper claim just above ln Z(m_lower) (1e-12)  expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val6: upper claim just below ln Z(m_lower) (1e-12)         expected: REJECTED: E              got: REJECTED: E violated: claim.lnZ_upper is not above the enclosure of ln Z(m_lower)
+  [ok] Val6: claimed bracket empty (ends exchanged)               expected: REJECTED: E              got: REJECTED: E violated: the claimed bracket is empty
+  [ok] Val6: beta doubled                                         expected: REJECTED: E              got: REJECTED: E violated: claim.lnZ_upper is not above the enclosure of ln Z(m_lower)
+  [ok] Val6: unit changed to 2^-39 (integers unchanged)           expected: REJECTED: E              got: REJECTED: E violated: claim.lnZ_upper is not above the enclosure of ln Z(m_lower)
+  [ok] Val6: unit changed to 2^-41 (integers unchanged)           expected: REJECTED: B3             got: REJECTED: B3 violated: the constant is below eps_g
+  [ok] Val6: every entry of A_lower up, of A_upper down, one unit; rebuilt expected: REJECTED: A0             got: REJECTED: A0 violated: A_lower exceeds A_upper at some state
+Part 2: mutations of certs/sandwich_V20_P2_m5_w8.json
+  [ok] Val20: unchanged file                                      expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val20: pair number lowered by one unit                     expected: REJECTED: B1             got: REJECTED: B1 violated at pair (10,11)
+  [ok] Val20: pair number lowered, tables rebuilt                 expected: REJECTED: B1             got: REJECTED: B1 violated at pair (10,11)
+  [ok] Val20: site number lowered by one unit                     expected: REJECTED: B2             got: REJECTED: B2 violated at site 10
+  [ok] Val20: site number lowered, tables rebuilt                 expected: REJECTED: B2             got: REJECTED: B2 violated at site 10
+  [ok] Val20: constant lowered by one unit                        expected: REJECTED: B3             got: REJECTED: B3 violated: the constant is below eps_g
+  [ok] Val20: constant lowered, tables rebuilt                    expected: REJECTED: B3             got: REJECTED: B3 violated: the constant is below eps_g
+  [ok] Val20: eps_g doubled                                       expected: REJECTED: B3             got: REJECTED: B3 violated: the constant is below eps_g
+  [ok] Val20: eps_g doubled, constant doubled, tables rebuilt     expected: REJECTED: B1             got: REJECTED: B1 violated at pair (0,1)
+  [ok] Val20: step A: upper end of Gamma raised by 100 units      expected: REJECTED: B1             got: REJECTED: B1 violated at pair (0,1)
+  [ok] Val20: step A: lower end of Gamma^(-i) lowered by 100 units expected: REJECTED: B1             got: REJECTED: B1 violated at pair (2,10)
+  [ok] Val20: step A: lower end of Gamma^(-i,-j) lowered by 200 C(m,2) units expected: REJECTED: B2             got: REJECTED: B2 violated at site 10
+  [ok] Val20: step A: interval of Gamma with lo > up              expected: REJECTED: malformed      got: REJECTED: malformed: stepA.Gamma is not an interval 0 <= lo <= up
+  [ok] Val20: step A: Gamma^(-i) above Gamma                      expected: REJECTED: A0             got: REJECTED: A0 violated: Gamma_minus_i[10] lies above Gamma
+  [ok] Val20: order m raised by one (data of the other order)     expected: REJECTED: A0             got: REJECTED: A0 violated: sum_i S_i = m Gamma is impossible
+  [ok] Val20: order m lowered by one (data of the other order)    expected: REJECTED: A0             got: REJECTED: A0 violated: sum_i S_i = m Gamma is impossible
+  [ok] Val20: A_lower and A_upper exchanged, tables rebuilt       expected: REJECTED: A0             got: REJECTED: A0 violated: A_lower exceeds A_upper at some state
+  [ok] Val20: entry of m_lower.one raised by one unit             expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[10][0]
+  [ok] Val20: entry of m_upper.pair lowered by one unit           expected: REJECTED: D              got: REJECTED: D violated: m_upper.pair[10,11][0][0]
+  [ok] Val20: entry of A_lower.one raised by one unit, m_lower unchanged expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[10][0]
+  [ok] Val20: constant of m_lower raised by one unit              expected: REJECTED: D              got: REJECTED: D violated: m_lower.const
+  [ok] Val20: penalty applied at the anchor state too (m_lower.one) expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[10][1]
+  [ok] Val20: anchor of one site changed                          expected: REJECTED: D              got: REJECTED: D violated: m_lower.one[10][0]
+  [ok] Val20: unknown format name                                 expected: REJECTED: malformed      got: REJECTED: malformed: unknown format
+  [ok] Val20: extra top-level key                                 expected: REJECTED: malformed      got: REJECTED: malformed: wrong set of top-level keys
+  [ok] Val20: in-band pair missing from m_lower.pair              expected: REJECTED: malformed      got: REJECTED: malformed: m_lower.pair (keys = in-band pairs)
+  [ok] Val20: anchor out of range                                 expected: REJECTED: malformed      got: REJECTED: malformed: anchor
+  [ok] Val20: negative pair number                                expected: REJECTED: malformed      got: REJECTED: malformed: penalty.b (keys = in-band pairs)
+  [ok] Val20: band width changed                                  expected: REJECTED: malformed      got: REJECTED: malformed: stepA.Gamma_minus_ij (keys = in-band pairs)
+  [ok] Val20: a floating-point literal                            expected: REJECTED: malformed      got: REJECTED: malformed: a number that is not an integer (-40.0)
+  [ok] Val20: a duplicate key                                     expected: REJECTED: malformed      got: REJECTED: malformed: duplicate key 'unit_log2'
+  [ok] Val20: truncated file                                      expected: REJECTED: malformed      got: REJECTED: malformed: not JSON (Expecting value: line 1 column 40216 (char 40215))
+  [ok] Val20: VALID: pair number raised by one unit, tables rebuilt expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val20: VALID: annotations removed                          expected: ACCEPTED                 got: ACCEPTED
+  [ok] Val20: lower claim raised by 1e-8                          expected: REJECTED: E              got: REJECTED: E violated: claim.lnZ_lower is not below the enclosure of ln Z(m_upper)
+  [ok] Val20: upper claim lowered by 1e-8                         expected: REJECTED: E              got: REJECTED: E violated: claim.lnZ_upper is not above the enclosure of ln Z(m_lower)
+  43 test vectors and EXPECTED.tsv written
+controls: 85 of 85 behaved as expected
+ALL DONE   51.6 s

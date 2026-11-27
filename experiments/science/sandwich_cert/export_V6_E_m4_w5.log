@@ -1,0 +1,16 @@
+export_cert.py V6 E 0.7 m=4 w=5   started 2026-11-27 00:46:48 UTC
+  instance: n = 6, states per site [3], anchor [1, 1, 1, 1, 1, 1], E(anchor) = -118.040910 kcal/mol; in-band pairs 15 of 15
+  step A: 22 sums (read from pairsums_V6_E_t0.70_gbn2_m4.npz); Gamma = 0.432332706 kcal/mol
+  counting identities among the sums, exact arithmetic on the doubles: |m Gamma - sum_i S_i| = 2.220e-16, max_i |(m-1) S_i - sum_j G_ij| = 3.261e-16 kcal/mol; the interval slack 3e-9 Gamma is 1.297e-09
+      ball evaluations 233/233  0s
+  ball of radius 3: 233 evaluated values of g (evaluated now)
+  written: certs/sandwich_V6_E_m4_w5.json (11869 bytes)
+  claim (integer tables): ln Z(E) in [198.067925225, 198.068095790], width 1.706e-04 nats
+  for comparison, the floating-point pipeline (p6lib.make_models, form B): ln Z(m_-) = 198.068095784293, ln Z(m_+) = 198.067925231063
+     the integer tables (double-precision transfer matrix):                 ln Z(m_lower) = 198.068095784387, ln Z(m_upper) = 198.067925230967
+     effect of the integer rounding on ln Z: +9.379e-11 (m_lower), -9.584e-11 (m_upper) nats; the claim widens each end by 5e-9 and rounds outwards to 9 decimals
+     a state uses 22 entries of a table; each entry of A_lower / A_upper moved by less than one unit: less than 2.001e-11 kcal/mol per state
+     integer penalties against p6lib's floating-point ones: largest difference 8.028e-10 (site), 3.836e-10 (pair) kcal/mol; largest site penalty 2e-07, largest pair penalty 0.0601681 kcal/mol
+  enumeration (729 states): states with m_lower > E or m_upper < E: 0 (must be 0); smallest margins 1.000e-07, 1.000e-07 kcal/mol
+     exact ln Z(E) = 198.068008142; inside the claimed bracket: True
+ALL DONE   computed in 0.4 s   peak memory 95 MB

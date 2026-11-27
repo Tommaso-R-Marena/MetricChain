@@ -1,0 +1,36 @@
+R28 check_tables.py  start 2026-11-27T00:28:30Z
+logs parsed: 12; all reached 'ALL DONE': True; all computed their energies (no cache): True
+controls in the logs: Jensen-as-upper violated in 104 of 104 partitions
+markdown rows found: addendum table 1: 12, table 2: 12; SCI-REV-0025 table: 12
+   addendum table 1: 12 rows; cells differing from what the logs give: 0 []
+   SCI-REV-0025 §3 table: 12 rows; cells differing from what the logs give: 0 []
+   addendum table 2: 12 rows; cells differing from what the logs give: 0 []
+TABLE CHECK: 252 cells compared; 0 differ
+   entries whose logged 4th decimal is a 5 (rounding to 3 decimals rests on unseen digits): [(('VVV', 'H'), 1.9925, 1.9925), (('L', 'H'), -0.5795, 1.7689)]
+
+NUMBERS QUOTED IN THE TEXTS, recomputed from the logs
+ protocol: conformations [20736, 373248] (text: 20 736 and 373 248)
+ protocol: |change of ln Z when every second point is dropped|: 2.5-deg grids max 5.94e-04 (text: at most 6e-4); 5-deg grids max 1.24e-03 (text: 1.2e-3)
+ 100(i): rigid offsets per torsion over all cases: -3.177 .. +2.001 (texts: 'one to three nats per torsion'; '-3.2 to +2.0'); smallest |offset| 0.580
+ 100(i): VV helix minus VV strand, rigid: +0.1433 (text 0.143); VV H +2.0006 and VAAV H -3.1772 (text +2.001, -3.177)
+ 100(i): VAAV helix: continuous minimum at torsions 177.5, 167.5 deg; cell 1, 1: cell (1, 1) E_rot - E_min = 10.896 kT; cell (2, 1) E_rot - E_min = 17.199 kT  (text: minimum at 167.5 deg, ideal rotamer 10.9 kT up, both torsions together)
+ 100(i): cell-minimised offsets, valine: +1.894 .. +2.276 (text +1.89 to +2.28); all cases: +1.180 .. +2.276 (SCI-REV-0025: 'about 2 nats per torsion')
+ 100(i): VVV helix rigid +1.9925, minimised +1.9925; continuous minimum at 180, 180, 180 (text: falls on the ideal rotamers)
+ 100(ii): L helix: cell (2, 1): grid 0.5484, rigid 0.1738; cell (1, 0): grid 0.3454, rigid 0.8262 (text 0.55, 0.35; 0.17, 0.83); TV 0.4808 (0.48); gap 1.559 (1.56); minimum at 287.5, 157.5 (287.5, 157.5); 0.562 kT (0.56); strains 5.908 and 3.787 (5.9, 3.8)
+ 100(ii): cells with 4-6 % of the weight and a clashing ideal rotamer: (2, 0): population 0.0628, E_rot - E_min 211.313; (1, 1): population 0.0434, E_rot - E_min 891.252
+ 100(ii): TV rigid: L strand 0.2746 (0.27); S helix 0.0561, S strand 0.1466 (0.06, 0.15); valine max 0.0122 (0.012)
+ 100(ii): TV minimised, largest over all cases: 0.0799 (text: within 0.08)
+ 100(iii): uniform-reference bracket per torsion at k = 3: valine 8.12 .. 57 (text 8 to 57); leucine 6.85e+03, 5.26e+03 (thousands)
+ 100(iii): at 5-deg cells (k = 72): valine 0.0679 .. 0.204 (text 0.07 to 0.2); all cases 0.0197 .. 0.259
+ 100(iii): at 2.5-deg cells (k = 144): valine 0.0163 .. 0.046 (text 0.016 to 0.046); all cases 0.00481 .. 0.133
+ 100(iii): 'the toy chain was kinder by a factor of about twenty at fine cells': toy 0.00105 per angle at 144 cells -> ratios valine 15.5 .. 43.8; all cases 4.6 .. 126.7
+ 100(iv): remainder ranges, two-valine blocks: VV H [-2.01, 0.919]; VV E [-0.175, 0.0597]; VAV H [-0.0159, 0.0609]; VAV E [-0.187, 0.117]; VAAV H [-0.0213, 0.484]; VAAAV H [-0.285, 0.183]; within +-0.5 in 5 of 6 (text: five of six)
+ 100(iv): tilted Jensen gap per torsion at k = 3, two-valine blocks: max 1.22e-05 (text: at most 1.2e-5); upper gap at k = 3: 3.72e-04 .. 1.84e-02 (4e-4 to 2e-2); at k = 12: max 8.64e-04 (9e-4)
+ 100(iv): VVV: remainder H [-4.22, 0.789], E [-0.508, 0.155]; upper gap k = 3: 0.0362, 0.00855 (0.036, 0.0086); k = 12: 4.6e-05, 0.00032 (5e-5, 3e-4)
+ 100(iv)/101(b)/SCI-REV-0025 point 4: upper gap at k = 3 over all eight valine blocks: 3.72e-04 .. 3.62e-02 (texts: 4e-4 to 4e-2)
+ 100(v): remainder, serine: H [-9.07, 8.94], E [-8.25, 1.61] (text: +-9 kT); leucine H up to 1.29e+10, E up to 3.63e+07
+ 100(vi): rigid offset 'between 0.5 and 2 nats per residue — missed at the upper end by 0.0006 on the helix': VV H +2.0006; 'the bracket is wider than 2, 0.5, 0.05 at 3, 12, 72 cells': smallest over valine: 8.12, 2.67, 0.0679; over ALL cases: 2.97, 0.852, 0.0197
+ SCI-REV-0025 point 2: TV leucine 0.4808, 0.2746 (0.48, 0.27); serine 0.0561, 0.1466 (0.06, 0.15); valine max 0.0122 (0.012)
+ same-cell column: 'no' only for [('L', 'H')]
+ valine: population of the dominant cell in the grid model, per case: VV H: 0.9999, VV E: 0.9661, VAV H: 1.0000, VAV E: 0.9667, VAAV H: 1.0000, VAAAV H: 1.0000, VVV H: 1.0000, VVV E: 0.9555
+END 2026-11-27T00:28:30Z  wall 0.0 s  peak memory 15 MB (ru_maxrss; address space capped at 3 GB)
