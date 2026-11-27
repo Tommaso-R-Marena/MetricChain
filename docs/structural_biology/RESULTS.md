@@ -345,7 +345,7 @@ minimiser's, with `k` sites in another well.)
 | 5PTI | 36 | yes | no (-0.10; 0) | no (-7.20; 6) | no (-111.70; 14) |
 | 1BPI | 36 | yes | no (-0.11; 1) | no (-4.54; 4) | no (-100.72; 12) |
 | 1PGA | 46 | yes | no (-0.10; 0) | no (-9.30; 8) | no (-181.83; 18) |
-| 2IGD | — | yes | no (-0.53; 3) | no (-14.90; 5) | no (-215.33; 9) |
+| 2IGD | 49 | yes | no (-0.53; 3) | no (-14.90; 5) | no (-215.33; 9) |
 | 1UBQ | — | not run | not run | not run | not run |
 
 *Gaps at `b = 0`, and the number of sites whose well is kept by every minimiser of every table
@@ -357,7 +357,7 @@ within `b`* (a sufficient condition: comparison against the minimiser alone):
 | 5PTI | 36 | 0.0343 / 0.50 | 0.096 / 3.78 | 9 / 16 | 35 / 11 / 4 |
 | 1BPI | 36 | 0.0023 / 1.39 | 0.033 / 4.99 | 6 / 10 | 33 / 18 / 5 |
 | 1PGA | 46 | 0.0438 / 0.80 | 0.096 / 3.28 | 6 / 18 | 44 / 14 / 3 |
-| 2IGD | — | not run or not finished | | | |
+| 2IGD | 49 | 0.0060 / 0.42 | 0.006 / 4.97 | 6 / 16 | 43 / 15 / 3 |
 | 1UBQ | — | not run or not finished | | | |
 
 No gap certificate abstained or was rejected (0 of the rows).
@@ -365,18 +365,18 @@ No gap certificate abstained or was rejected (0 of the rows).
 **Expectations against outcome.**  H6a (necessarily optimal at one table unit everywhere):
 met on the five structures run.  H6b (nowhere at 0.01): met.  H6c (at 0.01 at least half of
 the sites of every structure keep their well; at 0.1 fewer than half): first half **wrong**
-for 5PTI and 1PGA, second half met.  H6d (median well gap above `RT` — met, 3.3 to 5.0 — while
-the median state gap is below it): second half **wrong** except for 5PTI.
+for 5PTI, 1PGA and 2IGD, second half met.  H6d (median well gap above `RT` — met, 3.3 to 5.0 —
+while the median state gap is below it): second half **wrong** for 1CRN, 1BPI and 1PGA.
 
 **What it shows.**  (1) The reading the science division proposed is borne out: the model
 determines *wells* much more firmly than *states* — the median cost of leaving a well is 3.3
-to 5.0 kcal/mol where the median cost of leaving a state is 0.5 to 1.4 — yet 1 to 9 sites per
-structure can change well for less than `RT`.  (2) With one table unit of error (which covers
+to 5.0 kcal/mol where the median cost of leaving a state is 0.4 to 1.4 — yet 1 to 9 sites per
+structure can change well for less than `RT`, and the smallest well gap is 0.006 to 0.57.  (2) With one table unit of error (which covers
 the rounding of the tables and the observed evaluation error) the certified minimiser is the
 minimiser of every such table: the sentence "the published model is the rounded tables" is no
 longer needed for these five instances — under an evaluation-error bound that is observed, not
-proved.  (3) At `b = 0.01` kcal/mol per entry no minimiser survives and a third to a half of
-the wells are no longer certified; at 0.1 almost none.  A realistic force-field error is
+proved.  (3) At `b = 0.01` kcal/mol per entry no minimiser survives and between a quarter and
+two thirds of the wells are no longer certified; at 0.1 almost none.  A realistic force-field error is
 orders of magnitude larger.  **The certified minimiser is the minimiser of the published
 integers and of nothing near them** (the science division's sentence; DEAD_ENDS SB-D-E-09).
 
