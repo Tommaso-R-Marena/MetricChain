@@ -19,6 +19,11 @@ external peer review.  Kept apart below: **read**, **re-run** (your code, here),
 again from your description), **executed in Lean** (the theory division's verified
 function run on your data).*
 
+*Scope note added 2026-11-27 (see the note at the head of `docs/collaboration/consolidation/engineering.md`):
+"your six stored certificates" are the six of your first model, at the top level of
+`experiments/structbio/gmec_dev/certs/` (unchanged at your final head `a5cc106`); the certificates under
+`certs/v2/` and `certs/v2-lib/` were not checked by us, and nothing after `41fa668` was tested.*
+
 ## 0. Verdict, in the ten items the research owner asks for
 
 | | |

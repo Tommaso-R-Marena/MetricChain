@@ -14,6 +14,15 @@ two detached Modal runs (jobs M-016, M-021; sixteen tasks) that end by themselve
 them: `docs/engineering/COMPUTE_LEDGER.md`, "Jobs left running".  The tables below are the state at
 the halt; "in progress" means *stopped in that state*.
 
+**Administrative task D-9 (2026-11-27, about 05:00–06:00 UTC).**  On the research owner's order this
+division assembled the unified archive of all eight divisions on the new branch
+`research/consolidated-archive` (directory `consolidated/`; start at `00_MASTER_INDEX.md`): copies of
+every division's own files at pinned commits with a manifest of provenance and checksums.  It is
+administrative: nothing was re-derived, no other branch was modified, the sealed held-out list was
+neither copied nor read.  What this division still owes under D-9, and nothing else: collect the two
+Modal runs once they have ended, close them in the ledger, regenerate the tables, commit, and refresh
+the archive once.
+
 ## Pins
 
 | what | commit |
@@ -23,7 +32,7 @@ the halt; "in progress" means *stopped in that state*.
 | latest theory commit audited on the engineering machine | `9408e33` — `AUDIT PASSED` (2026-11-26 04:05 UTC, one hour on four threads): 69 Lean files, 37 543 lines, 4015 audited declarations, 504 headline theorems; full harness as expected; 435 mutations, 434 caught, 1 expected pass; 136 baseline runs as expected; 2377 declarations indexed by the document check (ENG-MSG-0004 §2) |
 | latest science commit read | `59e88bc` — SCI-REV-0018 with `R18_REPORT.md` §§2, 6; SCI-RES-0030; SCI-RES-0033; the section "Engineering division" of its digest.  Nothing else of the 20 new messages beyond titles (ENG-MSG-0007 §1) |
 | other branches read | ensemble `8d42f60`, geometry `288b2de` (GEOMETRY-REQ-0001 with the correction of GEOMETRY-MSG-0003; GEOMETRY-REQ-0006), complexity `1ba144d`: headers and what names engineering.  **Structural biology `720e0ec`: its software read in full and tested (ENG-RES-0018).**  Frontier benchmarking: no branch at 2026-11-26 22:41 UTC |
-| the research owner's directives | `docs/engineering/DIRECTIVES.md`, D-1 … D-8 (D-6, D-7: a seventh division whose software this division verifies; an eighth that designs evaluations, CASP17 feasibility; **D-8: controlled consolidation and halt — the operative one**) |
+| the research owner's directives | `docs/engineering/DIRECTIVES.md`, D-1 … D-9 (D-6, D-7: a seventh division whose software this division verifies; an eighth that designs evaluations, CASP17 feasibility; **D-8: controlled consolidation and halt — the operative one**) |
 | text that experiment X-010 implements | the referee's design of three levels, docstring of `experiments/reviews/R8/r8_flat3.py` at theory `9408e33`; Proposition K0 of `K_REPORT.md` |
 | text that experiments X-005, X-006, X-006b implement | `docs/workstreams/K_REPORT.md` §§2–3 at `63efc69`, with errata m1 and m10 of referee R8 |
 
