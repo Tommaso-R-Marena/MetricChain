@@ -532,3 +532,231 @@ received; the words, the list and their order are the owner's.)
    biological sequence engineering, no target-specific functional optimisation, no experiments); internal AI
    review is not peer review.  "Scientific rigor, independence, empirical accuracy, computational efficiency, and
    reproducibility take precedence over favorable appearances."
+
+---
+
+## D-5 — the directive on controlled consolidation and a temporary research halt [the research owner's text, verbatim]
+
+*Received by this division on 2026-11-27 at about 01:00 UTC (it arrived while a tool was running; the clock read
+01:01:30 UTC at the first command after it).  The text below is the owner's, in full, with its clarification.*
+
+> **Urgent Research Owner Directive — Controlled Consolidation and Temporary Research Halt**
+>
+> The shared Claude promotional credit balance is now approximately $5,912.74 of the original $15,000 allocation.
+>
+> We have accomplished substantial research across all eight divisions. However, I am implementing an immediate controlled consolidation phase before determining how to allocate the remaining resources.
+>
+> This directive supersedes all previous instructions to operate in continuous research, discovery, improvement, or evaluation loops until I explicitly authorize their resumption.
+>
+> **1. Suspend expansion immediately**
+>
+> Do not initiate new speculative research directions, mathematical workstreams, large literature investigations, software projects, extensive benchmarking campaigns, or subagent investigations.
+>
+> Identify all active subagents and ongoing tasks under your control.
+>
+> Preserve their existing work. Permit completion only where a task is genuinely near completion and materially contributes to an important result. Otherwise, terminate or suspend it safely.
+>
+> Do not interpret consolidation as an instruction to solve every remaining open problem. Unresolved problems should be documented accurately rather than pursued indefinitely.
+>
+> **2. Finish and preserve the strongest existing work**
+>
+> Bring your current research to a clean, reproducible, durable checkpoint.
+>
+> Prioritize:
+>
+> * Completion of nearly finished, consequential mathematical proofs.
+> * Resolution of known correctness defects.
+> * Preservation of existing formal verification and computational evidence.
+> * Accurate identification of incomplete, conjectural, unreviewed, or potentially incorrect results.
+> * Documentation of assumptions and limitations.
+> * Preservation of source code, test suites, raw computational results, and reproducibility instructions.
+> * Updating collaboration records and handoff documentation.
+>
+> Do not spend substantial resources formalizing elementary results or performing redundant investigations merely to increase completion statistics.
+>
+> Do not manufacture proof closure where an argument remains incomplete.
+>
+> **3. Produce a critical research assessment**
+>
+> Create `docs/collaboration/consolidation/<your-division>.md` on your designated branch.
+>
+> This document must include:
+>
+> **A. Executive assessment**
+>
+> Explain what your division has actually accomplished, in scientifically defensible terms.
+>
+> **B. Five strongest contributions**
+>
+> Rank your five strongest contributions by their combined mathematical originality, correctness, significance, and potential scientific utility.
+>
+> For each, provide:
+>
+> * The exact mathematical or computational contribution.
+> * Relevant commits, files, theorem identifiers, and artifacts.
+> * Formal verification and review status.
+> * Essential assumptions.
+> * Closest known prior art.
+> * The exact distinction from that prior art.
+> * Evidence supporting originality.
+> * Evidence against originality.
+> * Current experimental or computational validation.
+> * Known limitations.
+> * Remaining work required before publication or practical deployment.
+>
+> If fewer than five contributions deserve inclusion, report fewer.
+>
+> **C. Negative results and rediscoveries**
+>
+> Identify the most consequential failures, false conjectures, rediscoveries, unfavorable comparisons, and limitations.
+>
+> Explain which research directions should be abandoned or deprioritized.
+>
+> **D. Practical opportunities**
+>
+> Identify the most promising ways in which your existing work could produce a demonstrably useful computational biology capability.
+>
+> Distinguish between mathematical possibility, implemented software, synthetic validation, realistic computational validation, and experimental evidence.
+>
+> **E. Recommended next actions**
+>
+> Propose no more than three high-priority follow-up investigations.
+>
+> For each, specify:
+>
+> * Scientific objective.
+> * Existing prerequisites.
+> * Missing mathematical or computational components.
+> * Appropriate published baselines.
+> * Proposed benchmark.
+> * Measurable success and failure criteria.
+> * Estimated Claude reasoning requirements, if estimable.
+> * Estimated computational requirements and Modal cost.
+> * Dependencies on other divisions.
+> * Whether the work requires Fable or could reasonably continue using Opus.
+>
+> Do not invent cost estimates when the necessary information is unavailable.
+>
+> **F. Publication readiness**
+>
+> Identify any potentially publishable standalone result and explain what remains necessary to make it defensible before an external human expert.
+>
+> Do not equate formal verification with novelty.
+>
+> **4. Division-specific consolidation priorities**
+>
+> Theory: preserve the strongest original mathematical results, especially adaptive free-energy query complexity, certificate kernels, and practically consequential algorithms.
+>
+> Engineering: preserve reproducible benchmark evidence, identify actual implementation bottlenecks, reconcile the compute ledger, and document the status of every running Modal job.
+>
+> Science: produce a critical assessment of mathematical originality, physical applicability, model deficiencies, and the strongest credible scientific applications.
+>
+> Ensemble Identifiability: identify the strongest original theorems and the most promising route toward informative, experimentally relevant certified ensemble inference.
+>
+> Geometry: preserve the strongest reconstruction, rigidity, and stability results, distinguishing established mathematics from potentially original contributions.
+>
+> Biological Complexity: identify genuinely original results and mathematical techniques that directly address consequential computational bottlenecks.
+>
+> Structural Biology: preserve working software, certificates, benchmark results, physical-model deficiencies, implementation limitations, and the shortest credible path toward useful computational performance.
+>
+> Frontier Benchmarking: consolidate the independent evaluation evidence, negative results, benchmark readiness assessments, contamination controls, sealed evaluation procedures, and prioritized recommendations for subsequent benchmarking.
+>
+> **5. Existing Modal computation**
+>
+> Engineering may allow already authorized, bounded, useful Modal jobs to finish without continuous Claude supervision where this is technically possible and safe.
+>
+> Do not launch new substantial Modal jobs under this directive.
+>
+> Record running jobs, remaining timeouts, worst-case outstanding expenditure, and the procedure for collecting results later.
+>
+> All existing budget limits remain binding.
+>
+> **6. Preserve evaluation integrity**
+>
+> Do not open sealed held-out datasets, disclose credentials, tune against held-out results, or compromise previously frozen evaluation protocols.
+>
+> Preserve all evaluation commitments and their associated provenance.
+>
+> **7. Final handoff and halt**
+>
+> Commit and push your consolidated research artifacts to your designated branch.
+>
+> Update your division's status file and collaboration digest.
+>
+> Send a final concise consolidation message through the established GitHub collaboration infrastructure.
+>
+> Report directly to me:
+>
+> 1. Your final commit hash.
+> 2. Your strongest contributions.
+> 3. Your most consequential unresolved problems.
+> 4. Your recommendation for the next phase.
+> 5. Whether any subagents, background processes, scheduled sessions, or computational jobs remain active.
+>
+> Do not start another research cycle.
+>
+> Do not automatically resume when another division sends a message.
+>
+> Do not schedule additional reasoning sessions.
+>
+> Once consolidation is complete, terminate active reasoning and wait for my explicit authorization before undertaking further work.
+>
+> The objective is to preserve the maximum scientific value already created while minimizing additional Claude expenditure.
+>
+> Be concise, efficient, rigorous, and critical. We will make the next research allocation decision collectively after all eight divisions have consolidated.
+>
+> **Clarification: Graceful Research Wind-Down**
+>
+> This consolidation directive is not an instruction to abruptly interrupt valuable research or artificially truncate an ongoing mathematical argument, computational investigation, software implementation, or verification process.
+>
+> I want you to reach a natural, scientifically coherent stopping point.
+>
+> Specifically:
+>
+> * If you are in the middle of a promising mathematical proof that appears reasonably close to completion, finish it if doing so requires only a bounded amount of additional work.
+> * If an ongoing investigation is approaching a consequential conclusion, allow it to reach that conclusion.
+> * If a subagent is close to delivering valuable results, collect and review those results before terminating it.
+> * If an implementation is partially completed, bring it to a coherent, testable checkpoint where reasonably feasible.
+> * If a verification or benchmark is already underway, preserve its results and allow it to finish where appropriate under existing resource constraints.
+> * Finish essential cross-divisional communications concerning discoveries, corrections, dependencies, and unresolved problems.
+>
+> Exercise judgment about the scientific value and remaining cost of each activity.
+>
+> Do not sacrifice a potentially important discovery merely to terminate the session slightly earlier. Equally, do not interpret this clarification as permission to continue indefinitely, pursue additional speculative directions, launch another wave of subagents, or attempt to resolve every outstanding problem.
+>
+> If a significant result cannot reasonably be completed during consolidation, preserve the complete current argument, intermediate findings, attempted approaches, unresolved mathematical steps, code, and precise instructions for resuming the investigation.
+>
+> Where possible, leave every research direction in a state that another capable model or human researcher could resume without repeating substantial work.
+>
+> The intended sequence is:
+>
+> 1. Finish valuable ongoing work that is reasonably close to completion.
+> 2. Verify and preserve the resulting findings.
+> 3. Complete the consolidation report and durable handoff.
+> 4. Commit and push everything to your designated branch.
+> 5. Stop active reasoning and await my explicit authorization.
+>
+> Do not begin another autonomous research cycle after reaching this checkpoint.
+>
+> I am asking for an orderly scientific wind-down, not an emergency shutdown or abandonment of the research programme.
+
+### What D-5 changes here, item by item
+
+1. **The continuous research cycle of the charter and of D-1 … D-4 is suspended** until the owner authorises its
+   resumption.  No new research direction, workstream, literature investigation or subagent.  This division does
+   not resume because another division sends a message, and schedules nothing.
+2. **What was running when it arrived, and what was done with it** (details in
+   `docs/collaboration/consolidation/science.md` §G): referee R28 had handed back an hour-long review of our own
+   newest results with five major findings — a *known correctness defect in statements we had sent to two
+   divisions*, so it was finished: read in full, its deciding point re-measured by the coordinator, corrected
+   by linked message.  Referee R29 (a review the theory division had asked for) had run for an hour: it was
+   told to stop experimenting, write up what it had established and hand back.  The Stage 1 certificate had
+   been pushed four minutes earlier.
+3. **What was not started because of it:** the review of the Structural Biology division's model v2 (owed
+   under D-3); the review asked for in FRONTIER-REQ-0002 beyond a partial answer; Stage 2 of the sandwich
+   certificate; the reading of several messages of other divisions.  Each is listed as open, with what it would
+   need, in the consolidation document and the handoff.
+4. **Unchanged:** every boundary of the charter and of D-1 … D-4 — read-only upstream branches, no pull request,
+   no force push, no direct use of Modal, no sealed data opened, the resource limits and the deadlines, the
+   scope (no sequence engineering, no target-specific optimisation, no experiments), internal AI review is not
+   peer review.

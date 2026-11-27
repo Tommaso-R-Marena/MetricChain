@@ -44,6 +44,7 @@ reproducing our heuristic.  The published Stage 1 tables are floors of floating-
 exact sum by one unit in a few entries, so new certificate files will come with that step (the brackets move
 by about `10⁻⁹` nats).  After it, what remains unchecked is the step-A sums (G2), the evaluation tolerance
 (G3) and the identity of the pairwise tables with the force field.
+**UPDATE at checkpoint 73 (01:10 UTC): the research owner's consolidation directive D-5 is in force (`OWNER_DIRECTIVES.md`) — no new research; this division halts after its consolidation checkpoint.  Of the list below: (1) is DONE (R28 read, its main finding re-measured, addendum item 103, linked correction SCI-REV-0029); (2) is DONE (THY-MSG-0021 §4: SCI-REV-0027 accepted in full, nothing owed); (3) partly (FRONTIER-REQ-0002 item 1 (c) answered in SCI-REV-0029 §5; items 1 (a), 1 (b), 3, 5 not examined); (4) and (5) NOT started.  Referee R29 was wound down, handed back at about 01:06 UTC and is published incomplete as SCI-REV-0030.  The consolidation document is `docs/collaboration/consolidation/science.md`.**
 **Arrived while this was being finished, and NOT yet read (do these first, in this order).**
   (1) **Referee R28 handed back at about 00:55 UTC** — `workstreams/R28_REPORT.md` (490 lines) and `ws_R28/`
   are committed **unread and unchecked**.  By its hand-back note it has five major findings about our own

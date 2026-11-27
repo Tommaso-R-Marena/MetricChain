@@ -1,0 +1,17 @@
+r28_leucine_check.py   started 2026-11-27 01:01:47 UTC
+builder: CA-CB-CG = 109.50 degrees (control: must be 109.50); 31 atoms; chi columns 2
+(A) the table's order under a uniform shift d of the chi_2 positions: E(180, 60+d) - E(300, 180+d), total energy, kT
+    d = +0.0: -1.5589;  d = -1.0: -0.6069;  d = -1.6: -0.0324;  d = -2.0: +0.3517;  d = +1.0: -2.5001;  d = +2.0: -3.4269
+    the order is reversed (difference > 0) at d in [-2.0]
+    control (axes exchanged, d = 0): -660.2210 (must differ from -1.5589)
+(B) 2.5 degree grid (144^2 points).  Total energy: grid minimum at (287.5, 157.5); bottom of the well of (180, 60) minus bottom of the well of (300, 180): +4.6649 kT
+    vacuum part alone: grid minimum at (190, 80); the same difference: +3.5587 kT
+    strain of the ideal rotamers above the grid minimum (total energy): (180, 60): 4.349 kT; (300, 180): 5.908 kT; table's order E(180,60) - E(300,180) = -1.5589 kT
+(C) CA-CB-CG relaxed by a scan (105 .. 121 degrees in steps of 1), 5 degree torsion grid, total energy
+    control, angle as built (109.5): map minimum at (285, 155) with angle 109.5; strain of (180, 60) above the bottom of its own well: -1.786 kT (angle 109.5); of (300, 180): 5.839 kT (angle 109.5)
+       above the map minimum: 4.280 and 5.839 kT; table's minimum at (180, 60); table and map in the same well: True; bottoms (180,60)-well minus (300,180)-well: +6.066 kT
+    angle relaxed: map minimum at (175, 65) with angle 116; strain of (180, 60) above the bottom of its own well: -0.589 kT (angle 117); of (300, 180): 0.682 kT (angle 117)
+       above the map minimum: 0.368 and 0.753 kT; table's minimum at (180, 60); table and map in the same well: False; bottoms (180,60)-well minus (300,180)-well: +0.886 kT
+    best angle at the grid points within 5 kT of the relaxed minimum (angle, count): [(111, 1), (112, 62), (113, 50), (114, 47), (115, 38), (116, 37), (117, 39), (118, 31), (119, 24), (120, 7)]
+    relaxation never raises the energy: max over the grid of (relaxed - built) = -2.159e-01 kT (must be <= 0)
+ALL DONE   77.9 s   peak memory 81 MB

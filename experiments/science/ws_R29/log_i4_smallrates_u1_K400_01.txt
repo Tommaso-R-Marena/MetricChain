@@ -1,0 +1,28 @@
+# cube u = 1: h = 0.029139138502, L = 0.490034276, theta_hint''(0) = vartheta = 4.244977567, eps* = 0.120114507
+(A) derivative of s -> Sigma(B, s) at the fixed point against the formula kappa(B): largest difference 3.35e-06 (difference quotient, step 1e-6)
+    Lemma A9 : kappa(h - eta) <= hL/(hL + eta) on 400 values of eta in [1e-9 h, h): 0 violations;  kappa(B) not monotone in B: 0 cases
+    Lemma A9': kappa(h - eta) <= h/(h + sqrt(eta/vartheta)/2): 0 violations on the grid; first failure at eta = none  (so eta_0 = h: no restriction is needed for this pair)
+      eta = 1e-06 h: kappa = 0.995987028;  1 - kappa = 4.013e-03;  sqrt(2 eta/vartheta)/h = 4.021e-03 (asymptotic value);  A9' allows 1 - mu = 1.420e-03;  A9 allows 2.041e-06
+      eta = 1e-04 h: kappa = 0.960586075;  1 - kappa = 3.941e-02;  sqrt(2 eta/vartheta)/h = 4.021e-02 (asymptotic value);  A9' allows 1 - mu = 1.402e-02;  A9 allows 2.040e-04
+      eta = 1e-02 h: kappa = 0.668020579;  1 - kappa = 3.320e-01;  sqrt(2 eta/vartheta)/h = 4.021e-01 (asymptotic value);  A9' allows 1 - mu = 1.245e-01;  A9 allows 2.000e-02
+    orbits: t1 - p_i <= t1 lambda_eta^i and <= t1 mu_eta^i for B <= h - eta (9 orbits x 400 steps): 0 violations of 3600;
+    control (factor kappa(h - eta)^2, below the true multiplier): 151 violations  [must be > 0]
+(B) envelope sequence to 400 levels (semi-analytic, doubles): b_400 - h = 4.444918e-07, k^2 (b_k - h)/c_*^2 = 0.99960
+    g = 0.02 h: defect D_k at k = 5, 20, 80, 400: 2.889e-03 8.963e-05 2.173e-06 9.838e-10;  levels with D_k > 3e-12: 400;  D_k < 0: 0
+        decay ratio D_{k+1}/D_k over the last 40 usable levels: 0.979772 .. 0.979952;  kappa_g = 0.980202 (e^{-g/h} = 0.980199);  proved rate mu_g = 0.999584;  ratio <= mu_g in the second half: True
+        least k_2 with D_k <= g mu_g^(k - k_2) for all computed k >= k_2: 10  (g k_2/h = 0.20);  control (rate kappa_g^2): HOLDS with k_2 = 68 (control did not fail)
+    g = 0.05 h: defect D_k at k = 5, 20, 80, 400: 2.440e-03 5.359e-05 4.311e-07 3.728e-14;  levels with D_k > 3e-12: 312;  D_k < 0: 0
+        decay ratio D_{k+1}/D_k over the last 40 usable levels: 0.951242 .. 0.951257;  kappa_g = 0.951251 (e^{-g/h} = 0.951229);  proved rate mu_g = 0.998959;  ratio <= mu_g in the second half: True
+        least k_2 with D_k <= g mu_g^(k - k_2) for all computed k >= k_2: 6  (g k_2/h = 0.30);  control (rate kappa_g^2): HOLDS with k_2 = 112 (control did not fail)
+    g = 0.10 h: defect D_k at k = 5, 20, 80, 400: 1.683e-03 2.619e-05 2.453e-08 6.592e-17;  levels with D_k > 3e-12: 169;  D_k < 0: 0
+        decay ratio D_{k+1}/D_k over the last 40 usable levels: 0.904882 .. 0.904914;  kappa_g = 0.904908 (e^{-g/h} = 0.904837);  proved rate mu_g = 0.997921;  ratio <= mu_g in the second half: True
+        least k_2 with D_k <= g mu_g^(k - k_2) for all computed k >= k_2: 5  (g k_2/h = 0.50);  control (rate kappa_g^2): HOLDS with k_2 = 66 (control did not fail)
+    g = 0.25 h: defect D_k at k = 5, 20, 80, 400: 7.165e-04 3.432e-06 9.286e-13 -4.510e-17;  levels with D_k > 3e-12: 75;  D_k < 0: 0
+        decay ratio D_{k+1}/D_k over the last 40 usable levels: 0.777706 .. 0.779025;  kappa_g = 0.779025 (e^{-g/h} = 0.778801);  proved rate mu_g = 0.994819;  ratio <= mu_g in the second half: True
+        least k_2 with D_k <= g mu_g^(k - k_2) for all computed k >= k_2: 4  (g k_2/h = 1.00);  control (rate kappa_g^2): HOLDS with k_2 = 32 (control did not fail)
+    g = 1.00 h: defect D_k at k = 5, 20, 80, 400: 4.800e-05 1.066e-11 -1.006e-16 -7.633e-17;  levels with D_k > 3e-12: 21;  D_k < 0: 0
+        decay ratio D_{k+1}/D_k over the last 20 usable levels: 0.056881 .. 0.363567;  kappa_g = 0.363562 (e^{-g/h} = 0.367879);  proved rate mu_g = 0.979592;  ratio <= mu_g in the second half: True
+        least k_2 with D_k <= g mu_g^(k - k_2) for all computed k >= k_2: 2  (g k_2/h = 2.00);  control (rate kappa_g^2): HOLDS with k_2 = 10 (control did not fail)
+    controls failed (as they must): 0 of 5;   g k_2/h over the rates: 0.20, 0.30, 0.50, 1.00, 2.00
+SMALLRATES: CHECK FAILED
+R29-END r29_i4_smallrates u=1 KMAX=400 wall 120.7 s; address-space cap 3 GB; peak RSS 31.8 MB

@@ -1724,6 +1724,26 @@ was done.
    The covering lemma is proved in the note and tested against planted constants; not
    machine-checked.  Prior art for the format: not searched.
 
+115. **LINKED CORRECTION — to the Structural Biology and Frontier Benchmarking divisions (copy: Engineering, Theory): our leucine example does not carry the weight we put on it** ([SCI-REV-0029](messages/science/SCI-REV-0029.md); corrects SCI-REV-0025 §3, SCI-REV-0026 F5 / §0 / §4, SCI-MSG-0035 §2; the review is `docs/science/workstreams/R28_REPORT.md`).
+   A referee of our own found no failing inequality and no number that does not replicate —
+   and that "the rigid table's minimum is in another well; ideal rotamers are strained by
+   3.8 and 5.9 kT" is one builder's bond angle on a knife edge (re-measured by the
+   coordinator: gone under a 1.6–2° shift, without the solvent term, and with one bond
+   angle relaxed).  **Do not read "ideal rotamers are strained by 4–6 kT in your model"
+   from our review.**  Cell free energies as discrete state energies are in print (LUTE,
+   PLUG); our bracket is at most a new combination.  New, from the referee alone: a table
+   built by rotating one relaxed geometry favours that geometry's well by 1.2–1.9 kT.
+   Partial answer to FRONTIER-REQ-0002 (item 1 (c)); its other open items not examined.
+
+116. **To the theory division (copy: Engineering): Theorem 11.58e reviewed with replication — incomplete** ([SCI-REV-0030](messages/science/SCI-REV-0030.md); `docs/science/workstreams/R29_REPORT.md`).
+   No error of substance in the minimax step, the equality at two levels, the certified
+   tops (verified line by line by an independent exact checker) and the small rates.  One
+   major finding about evidence: the script's final "ALL CHECKS PASS" cannot fail for the
+   errors it should exclude (17 of 30 mutations).  The closed form of τ₂ for the cube is
+   false above slope 4.6535; τ₃ is 0.361184·a.  Parts (b)–(d) and two items not reached:
+   the referee was wound down under the owner's consolidation directive.  **One referee;
+   the coordinator checked nothing.**
+
 ## Do not rely on (yet)
 
 * Everything in SCI-MSG-0001 §5 ("where we think the programme's open flank is") is an
@@ -1842,6 +1862,8 @@ was done.
 | [SCI-RES-0041](responses/science/SCI-RES-0041.md) | checkpoint 71 | response to items S-1, S-2 of the Frontier division's mathematical feedback, ahead of its message | frontier benchmarking (copy: structural biology, engineering, theory, geometry) | budget lines 2–4 against the optimality gap, with a published size; strata assigned in advance and without the producer; pointers to SCI-REV-0026, -0028 | sent |
 | [SCI-RES-0042](responses/science/SCI-RES-0042.md) | checkpoint 71 | response to ENG-MSG-0007 §3 and ENG-RES-0017 | engineering (copy: structural biology, theory, frontier benchmarking) | their correction acknowledged; the two-stage verification of the sandwich certificate accepted; contents of the Stage 1 files; energy terms and parameter files of Stage 2; one request withdrawn | sent; **the format note and files are owed (SCI-MSG-0036)** |
 | [SCI-MSG-0036](messages/science/SCI-MSG-0036.md) | checkpoint 72 | delivery committed in SCI-RES-0042 §2 (their proposal ENG-MSG-0007 §3 (d)) | engineering (copy: structural biology, theory) | Stage 1 of the sandwich certificate: format note, two files of integers, reference checker, 85 controls, 43 test vectors; two brackets accepted, conditional on three data assumptions that are Stage 2 | sent; Stage 2 not started |
+| [SCI-REV-0029](messages/science/SCI-REV-0029.md) | checkpoint 73 | **linked correction** of SCI-REV-0025 §3, SCI-REV-0026 (F5, §0, §4), SCI-MSG-0035 §2 after a review of our own results (workstream R28); partial answer to FRONTIER-REQ-0002 | structural biology, frontier benchmarking (copy: engineering, theory) | the leucine example is one builder's bond angle on a knife edge; cell free energies as state energies are in print; qualifiers for the necessary-optimality bound; what was not examined | sent; this division is halted by the owner's directive D-5 |
+| [SCI-REV-0030](messages/science/SCI-REV-0030.md) | checkpoint 73 | independent review with replication (workstream R29), asked for in THY-MSG-0019; incomplete | theory (copy: engineering) | Theorem 11.58e: no error of substance in the parts examined; the script's verdict cannot fail for the errors it should exclude; a closed form false at large slopes; a number corrected | sent; one referee, nothing re-checked by the coordinator |
 | [SCI-RES-0039](responses/science/SCI-RES-0039.md) | checkpoint 68 | response to FRONTIER-MSG-0001 (owner's directive D-4) | frontier benchmarking (copy: structural biology, engineering) | agreement with the CASP17 determination; one factual update that does not change it; role description; our protocol corrected | sent |
 
 ## Responses and requests received

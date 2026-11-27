@@ -488,3 +488,42 @@ conclusion from "an artefact of the geometry" to "a family in which the effect c
 `no_midpoint.py`; `bat_jacobian.py`; the logs named in §3 (two kept failing logs: `toy_selftest_01.log`,
 `ff_grid_L_H_144_01.log`); data: `cc_cache/` (the re-run's cache), `grid_*.npz`, `win_*.npz`, `flexmap_*.npz`.
 Nothing was written outside that directory and this report; no state-changing git command was run.
+
+---
+
+## Coordinator's note (27 November 2026; written under the owner's consolidation directive D-5)
+
+*Read:* this report in full, between the push of checkpoint 72 (00:58 UTC) and the first command after the
+consolidation directive arrived (01:01 UTC).  `NOTES.md` and the scripts of `ws_R28/` were **not** read.
+*Hand-back:* about 00:55 UTC; the referee reported no declined tool action; it opened six web addresses
+(listed in §5) and used the PubMed connector.
+
+**Verdict accepted in full: no inequality of ours fails and no number fails to replicate; five statements say
+more than was measured or known, and all fourteen replacement texts are adopted** (addendum item 103;
+linked correction SCI-REV-0029 to the two divisions that received the statements).
+
+**What I checked myself** (`experiments/science/software_evaluation/r28_leucine_check.py`, `.log`; my own code
+on workstream P2's builder, independent of the referee's code and files; predictions in the script's header,
+all three met):
+
+| deciding point of F1 | referee | coordinator |
+|---|---|---|
+| the table's order `E(180, 60+d) − E(300, 180+d)` under a shift `d` of the `χ₂` positions | −1.56, −0.61, +0.35 `kT` at `d` = 0, −1, −2° | −1.5589, −0.6069, −0.0324, +0.3517 `kT` at `d` = 0, −1, −1.6, −2°: reversed between 1.6° and 2° |
+| vacuum part alone | the continuous minimum moves into the table's well; well bottoms −0.059 `kT` against +0.549 with the solvent term | grid minimum at (190°, 80°), in the table's well; bottoms −0.055 against +0.562 `kT` (2.5° grid) |
+| bond geometry relaxed | Cartesian minimisation with torsion restraints: strains 0.03 / 0.06 `kT` instead of 5.9 / 3.8; table and minimum agree | **a different and weaker relaxation — one internal coordinate, the angle CA–CB–CG, scanned in the builder's Z-matrix:** strains above the bottoms of their own wells 0.37 / 0.30 `kT` instead of 3.79 / 5.84; the relaxed map's minimum at (175°, 65°) with the angle at 116°, in the table's well; the order of the two well bottoms reversed (−0.45 instead of +0.49 `kT`) |
+
+So the mechanism is as the referee says and needs nothing but that one angle: the builder places CG at the
+force field's *equilibrium* angle of 109.5°, the energy minimum has it near 116°, and the "strain of ideal
+rotamers" we reported is mostly the strain of that angle.  My first run had an indexing error in the cell
+function (found by a control — a strain came out negative; log kept as `r28_leucine_check_01_cellbug.log`);
+the quantities that do not use cells were the same in both runs.
+
+**Not checked by me:** the referee's flexible-geometry runs beyond that one-angle scan — in particular the
+strand results, the "geometry remembers its source" bias of 1.2–1.9 `kT`, and the widening of the wells; the
+toy-chain and force-field replications; the necessary-optimality replication; the counterexample of F3 (it
+is two lines and I re-derived it: `ln cosh a > a²/4` for small `a` since `ln cosh a = a²/2 − …`); and **none
+of the sources of §5 was re-opened by me** — the reading levels stated there are the referee's.
+
+**Still unrefereed:** addenda A17 (13)–(18) (the referee did not open them, as instructed; the earlier referee
+of those parts, R14, was stopped by a platform safeguard and its work was not done by anyone).
+

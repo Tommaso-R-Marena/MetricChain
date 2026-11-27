@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/user/MetricChain/experiments/science/ws_R29/r29_i1_verify_theirs.py", line 53, in <module>
+    z6 = load(script, [script, u_str, str(JMAX), str(K), "nocompare"])
+  File "/home/user/MetricChain/experiments/science/ws_R29/r29_i1_verify_theirs.py", line 48, in load
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/tmp/claude-0/-home-user-MetricChain/625a5006-6913-5629-a308-2f7fb488fbbb/scratchpad/thy_ro_07cde81/experiments/workstreams/Z/z6_certified_tops.py", line 74, in <module>
+    u = float(u_str)
+ValueError: could not convert string to float: '1/2'
