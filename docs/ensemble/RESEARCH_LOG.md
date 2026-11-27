@@ -5,66 +5,91 @@
 *(Updated at every checkpoint.  A successor should read `HANDOFF.md` first, then this
 section, then `OPEN_OBLIGATIONS.md`.)*
 
-**State after the commit "the torus of three angles" (2026-11-26, about 23:58 UTC).**
-`ENSEMBLE_REPORT.md` version 3 with the corrections and additions of §7 items 8–17: Parts
-I–VII, Theorems E1–E26 (with E2.2, E7′, E15T, E15U, E17.1, E18′, E20a–E20d, E20′, E20″),
-Conjectures C1–C3.  Parts I–VI have each had one review (ER1: I–III; the Science
-division's SCI-REV-0020: II; ER2: IV–V; ER3: VI), all applied.  **Unreviewed: Part VII
-(E23–E26); Theorem E20b and Propositions E20c, E20d; E15U beyond its main statement;
-E17.1; E20a, E22 and two constants of E20″.**  Lean: `proofs/Ensemble/` five modules
-(twenty-five headline theorems, nine witnesses); `scripts/audit_all.sh` passed on the
-`proofs/` tree of this commit (5147 declarations).  Numerics:
-`experiments/ensemble/run_all.py` (nine scripts, then `check_quotes.py`).  Software-facing
-documents: `SOFTWARE_INTERFACE.md` (a card per result), `BENCHMARK_CONTROLS.md` (families
-B1–B8, twenty-two instances in `experiments/ensemble/benchmarks/controls_v1.json`).  Sent:
-ENSEMBLE-MSG-0001 to -0009; ENSEMBLE-RES-0001 to -0006.
+**State after the commit "Part VIII" (2026-11-27, about 00:25 UTC).**  `ENSEMBLE_REPORT.md`
+version 3 with the corrections and additions of §7 items 8–18: Parts I–VIII, Theorems
+E1–E29 (with E2.2, E7′, E15T, E15U, E17.1, E18′, E20a–E20d, E20′, E20″, E23.1), Conjectures
+C1–C3.  Parts I–VI have each had one review (ER1: I–III; the Science division's
+SCI-REV-0020: II; ER2: IV–V; ER3: VI), all applied.  **Unreviewed: Part VII (E23–E26,
+E23.1); Part VIII (E27–E29); Theorem E20b and Propositions E20c, E20d; E15U beyond its
+main statement; E17.1; E20a, E22 and two constants of E20″.**  Lean: `proofs/Ensemble/` five
+modules (twenty-five headline theorems, nine witnesses); `scripts/audit_all.sh` passed on
+the `proofs/` tree of `b654396` (5147 declarations), unchanged since.  Numerics:
+`experiments/ensemble/run_all.py` (ten scripts, then `check_quotes.py`; `--quotes-only` after
+a change of text alone).  Software-facing documents: `SOFTWARE_INTERFACE.md` (a card per
+result; N4–N6 are the newest), `BENCHMARK_CONTROLS.md` (families B1–B9, twenty-five
+instances in `experiments/ensemble/benchmarks/controls_v1.json`).  Sent: ENSEMBLE-MSG-0001
+to -0009; ENSEMBLE-RES-0001 to -0007.
+
+**An internal review, ER4, was commissioned at about 23:59 UTC on 2026-11-26** (a subagent
+of this division, as for ER1–ER3; object: commit `b654396` — Part VII, E20a–E20d, the rest
+of E15U, E17.1, E22; it writes `docs/ensemble/reviews/ER4_internal_review.md` and
+`ER4_scripts/`).  If the session ended before its report arrived, the file may be absent
+or incomplete: in that case commission the review again.  If the file is there and not
+recorded in §7 of the report as applied: commit it as received, then apply it.
 
 **Standing instructions** of the research owner's two supplementary directives are in
 `HANDOFF.md` items 3a and 3b (seventh division: Structural Biology; eighth: Frontier
 Benchmarking).  Fetch both of their branches at every synchronisation.
 
 **Next, in this order.**
-1. **ENSEMBLE-RES-0007 to the Structural Biology division** — owed.  Its intake report on
-   our work (`docs/structural_biology/intake/N_ensemble.md` on its branch, written at our
-   `8d42f60`) is read.  The answer should contain: (i) what has changed since `8d42f60` in
-   the statements it registered (E17's lower constant is `0.335`, not `0.199`; E15T's
-   converse was false; Part VI after its review — thresholds, Kahle's theorem, chains
-   withdrawn, E20a–E22; E17.1; Part VII; the readiness levels of
-   `SOFTWARE_INTERFACE.md`); (ii) its table of data types, checked mathematically —
-   single-angle data give no cross-angle information on a product space (chimeras, §3);
-   a variance-type datum is a function of two means, concave in the ensemble (Part VII);
-   (iii) its prior-art observation (ensemble refinement, maximum occurrence, Kruskal-type
-   identifiability are not in our register): do a bounded search and say what was found.
-2. **A proposition on one-sided convexity** for Part VII (drafted in the session, not in
-   the repository): if the datum is a convex function of the means, upper bounds are
-   convex constraints (variance: concave, so lower bounds); for a datum averaged fast
-   within basins and slowly between them, `Σ_k ν(B_k) g(E_ν[φ | B_k])` with `g` convex is
-   convex in `ν` (a perspective function) and lies between `g(E_νφ)` and `E_ν g(φ)` for every
-   partition — so `{ν : g(E_νφ) ≤ y ≤ E_ν g(φ)}` is a convex outer bound that is valid
-   whatever the separation of time scales.  Prove, check numerically, add.
-3. **Synchronise** (eight branches); question E-S5 (which data are means, ratios,
-   lengths, none) is open with Science and Structural Biology, E-T5 with Theory and
-   Complexity.
-4. **An internal review (ER4)** of the unreviewed statements listed above — commission a
-   subagent; OB28 lists what to attack in E20b–E20d, OB27 in Part VII.
-5. **Research.**  (i) Four angles, thirteen to sixteen states: the count of E20b on the
+1. **ER4**: receive, commit as received, apply (OB27, OB28 list the points of attack);
+   then a review of Part VIII and E23.1 (OB29), which ER4 does not cover.
+2. **Answer the Frontier Benchmarking division** (ENSEMBLE-RES-0008, owed).  Its
+   FRONTIER-MSG-0001 asks every division whether its description of the roles and its
+   intake statements about our work are right (row C5 of its `RESEARCH_INTAKE.md`, at our
+   `2d2054d`: "18 control instances … verified by their generator only; harness not
+   built; no request to engineering" — true then; now 25 instances, ten scripts).  Its
+   `MATHEMATICAL_FEEDBACK.md` has five items for us: **E-1** data `y = s·Aμ + b·1` with
+   unknown `s > 0`, `b` — this is Proposition E23.1 (add the version with tolerances: the
+   constraints are linear in `w = sμ` and `b`, the target is linear-fractional); **E-2** a
+   "pool-robust" interval when the pool is an `h`-net and the forward map is Lipschitz —
+   the pool's interval at tolerance `τ + Lh`, widened by `L_ψ h`, contains the exact one
+   (prove, check, add); **E-3** an "identifiability radius" (largest total-variation
+   distance between two compatible ensembles) "as a linear programme" — it is **not** a
+   linear programme: it is the largest width of the interval of a population over all
+   subsets, a convex maximisation; deciding whether it equals one is NP-complete
+   (partition: a hyperplane section of a cube), polynomial for a fixed number of data;
+   certified bounds `max_x w_x ≤ R ≤ ½ Σ_x w_x` from the single-configuration intervals;
+   **E-4** a modulus for distance distributions — our open Problem O4; a partial answer
+   for features that are `r`-determining: if every law is known within `ε` in total
+   variation, the mass off the `K` conformers is at most `mε/(m − K(r − 1))` (a
+   quantitative Rényi–Heppes: prove, check, add); **E-5** error sets that are not boxes —
+   for any convex error set the tolerance term of a certificate is the support function
+   of the set (ellipsoid: a norm; a systematic direction: the certificate must be
+   orthogonal to it, as in E23.1).  All five drafted in the session notes of 2026-11-27,
+   00:20 UTC; none is in the report yet.
+   Also unread at the commit "Part VIII": GEOMETRY-MSG-0010, COMPLEXITY-MSG-0006 §1,
+   ENG-MSG-0007, STRUCTBIO-MSG-0003 (all name us).  Open questions of ours: E-S5 with
+   Science and Structural Biology; E-T5 with Theory and Complexity.
+2a. **Four angles, thirteen states** (in progress when this was written; scripts
+   `experiments/ensemble/torus_four_angles.py`, committed with "Part VIII" but not yet
+   described in the report): on the curve where the lifted certificate vanishes the
+   data span has dimension 36, the 26 first-order conditions are independent, and a
+   ten-dimensional space of candidates remains; a linear programme on the traced curve
+   decides.  In a scratch survey of 40 random instances (the prototype of the script)
+   26 are determined (certificate verified on the torus), 10 are not (twin on the curve,
+   positive dual margin) and 4 are undecided: **both outcomes occur on open sets — there
+   is no generic answer for thirteen states.**  To do: re-run the survey with the
+   repository script (`--survey 0 40`) and store its output in `output_threshold.txt`,
+   write Proposition E20e (the curve case for any number of angles: the proofs of E20b
+   and E20c carry over with `r − 1` forms), add the script to `run_all.py`.
+3. **Research.**  (i) Four angles, thirteen to sixteen states: the count of E20b on the
    zero set of the lifted certificate (a curve of genus 13 for thirteen states: a
    ten-dimensional space of candidates; is one of them non-negative on the real curve?
    — a linear programme on the traced curve decides instance by instance); (ii) an
    exact special six-tuple for E20c; whether seven states on `𝕋³` can ever be determined;
    (iii) the same count for the Geometric Inference Division's chains (suggested to it
-   in ENSEMBLE-MSG-0009); (iv) certified lower bounds on the number of conformers
-   (ranks of lifted moment matrices; the largest number compatible with the data is the
-   size of the minimal face's preimage); (v) misspecified configuration space: a library
-   that misses mass `ε` is a tolerance `ε·D`, and data outside the library's moment body
-   give a certified lower bound on the missing mass; (vi) thresholds C2, C3 — only with
-   a proof idea.
-6. Machine checks: E15(c) as a statement about class members (OB13); a torus instance
-   for the witness of the two-coordinate growth inequality; E12(a).
-7. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
-8. Prior art still to read in the original: di Dio–Schmüdgen (Theorem 18 is our E1(b);
+   in ENSEMBLE-MSG-0009); (iv) a noise theory for the non-convex compatible sets of
+   Part VII; the exact (not outer) description of two-time-scale data when the
+   partition is known; (v) E15U for pair models (three sites: no counterexample, no
+   proof); (vi) thresholds C2, C3 — only with a proof idea.
+4. Machine checks: E15(c) as a statement about class members (OB13); a torus instance
+   for the witness of the two-coordinate growth inequality; E12(a); E28(b) and E29(b)
+   are one-line inequalities that a kernel could check.
+5. Re-run `scripts/audit_all.sh` before a checkpoint that changes `proofs/`.
+6. Prior art still to read in the original: di Dio–Schmüdgen (Theorem 18 is our E1(b);
    the paper also treats the set of atoms and the Carathéodory number — compare with
-   E1, E3 and §2); Baldi–Blekherman–Sinn, Section 5 (does it give E20b(c) and the
+   E1, E3, E29 and §2); Baldi–Blekherman–Sinn, Section 5 (does it give E20b(c) and the
    existence part of E20c directly?); the maximum-occurrence literature.
 
 ---
@@ -601,3 +626,44 @@ curve or surface that a linear programme can decide instance by instance; and "t
 largest number of generic states" may not exist over the reals, because identification
 beyond the lifted range is a semialgebraic condition that can hold on an open set and
 fail on another.  The answer owed to the Structural Biology division comes first.
+
+---
+
+## 2026-11-27 — Incomplete models (Part VIII); the answer to the Structural Biology division; ER4 commissioned
+
+**Trigger.**  The Structural Biology division's intake report on our work ends each of
+its register entries with "becomes useless when": the truth is not in the library, the
+forward-model error exceeds the data accuracy, the number of conformers is unknown.
+The research owner's directive names the same things ("model misspecification",
+"unknown ensemble complexity", "unknown or imperfect observation functions").
+
+**Proved** (all elementary; checks M1–M4 passed at the first run, which after this
+week's record we note without drawing a conclusion from it).
+*E23.1:* several unknown gains and offsets keep the problem linear; identification is
+Theorem E1(a) for the features projected off each group's data direction — one
+direction of the certificate lost per gain.  *E27:* the perspective of a convex function
+makes a two-time-scale average convex in the ensemble; with Jensen on both sides it is
+bracketed by `g(E φ)` and `E g(φ)` for every partition, so the bracket is a convex
+constraint that needs no knowledge of the time scales.  This is the first statement we
+have for a datum that is *not* a function of finitely many means.  *E28:* an incomplete
+library is a tolerance `εD`; a library that the data falsify comes with a certified
+lower bound on the missing weight, computable from the library and bounds on the
+observables; tight by duality; no upper bound exists.  *E29:* `K_max` is the size of the
+zero set of a certificate, `K_min` is NP-hard with rank lower bounds, and identification
+is `K_min = K_max`.
+
+**Communicated.**  ENSEMBLE-RES-0007 to the Structural Biology division: the constants
+and statements that its register quotes from our `8d42f60` and that have changed; its
+table of data types as mathematics; its prior-art observation confirmed (E1(b) in
+print; maximum occurrence).  Controls B9-01 to B9-03.
+
+**Commissioned.**  The internal review ER4 of everything unreviewed up to `b654396`.
+
+**Reassessment.**  Part VIII is the least deep and possibly the most useful thing
+written this week: none of it needed more than convexity and duality, and each
+statement turns a sentence of the form "the method is useless when …" into a test with
+a certificate or a bound with a constant.  The deep open questions are where they
+were: the capacity thresholds (C2, C3), the torus of four angles, a modulus for
+distance distributions (O4).  The next mathematics should go to the torus of four
+angles, where the method of E20b reduces an open question to a positivity problem on a
+real curve.

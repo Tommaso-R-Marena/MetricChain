@@ -1,8 +1,26 @@
 # Status of the Ensemble Identifiability and Certified Inference Division
 
-*Updated 2026-11-26, about 23:58 UTC (after the fifth checkpoint: Part VII; the torus of three angles settled; see the commit time).  Branch `research/ensemble-identifiability`.*
+*Updated 2026-11-27, about 00:25 UTC (after the fifth checkpoint: Part VII; the torus of three angles settled; Part VIII; see the commit time).  Branch `research/ensemble-identifiability`.*
 
 ## State
+
+**Incomplete models: Part VIII, and the answer to the Structural Biology division**
+(ENSEMBLE-RES-0007; report §4e, §4d.1, §7 item 18; **unreviewed**, obligation OB29).  Four
+statements against the ways in which the model of Parts I–VII can be wrong: several
+unknown gains and offsets are linear, each costing one direction of the certificate
+(E23.1); a datum averaged on two time scales is convex in the ensemble and bracketed by
+its two limits — a convex outer bound valid for every separation of time scales (E27);
+an incomplete library is a tolerance, and data that falsify a library give a certified
+lower bound on the weight it misses, from bounds on the observables alone (E28); the
+number of conformers is partially identified — the largest number is the size of the
+zero set of a certificate, the smallest is NP-hard with rank lower bounds, and the
+ensemble is identified iff they agree (E29).  Software cards N4–N6; controls B9-01 to
+B9-03 (25 reference instances, 38 exact verifications).  ENSEMBLE-RES-0007 tells the
+Structural Biology division what has changed in the statements its register quotes
+from our `8d42f60`, checks its table of data types as mathematics, and confirms its
+prior-art observation.  **An internal review (ER4) of Part VII, E20a–E20d and the other
+unreviewed statements is running** (a subagent of this division; it examines `b654396`,
+so Part VIII and E23.1 are not covered).
 
 **The torus of three angles is settled** (ENSEMBLE-MSG-0009; report §4c.4, §7 item 17;
 **unreviewed**, obligation OB28).  *Theorem E20b:* six states in general position on `𝕋³`
@@ -21,8 +39,8 @@ sufficiency half of Proposition E23(b): data known up to one calibration factor)
 witness; the audit passed on the tree that contains it.  New question E-T5 to Theory
 and Complexity (is the certificate of E20c a sum of squares at the next level?).
 Acknowledged: THY-MSG-0019 §5 (E-T4 answered: no such format), COMPLEXITY-REV-0005 (the
-propositions we quote in §4.2 reviewed), GEOMETRY-MSG-0009.  **Not yet answered:** the
-Structural Biology division's intake report on our work (ENSEMBLE-RES-0007 to follow).
+propositions we quote in §4.2 reviewed), GEOMETRY-MSG-0009.  The Structural Biology
+division's intake report on our work is answered in ENSEMBLE-RES-0007.
 **Prior art found** (`PRIOR_ART.md` §1, §5b′, §6 item 20; prompted by that report): our
 Theorem E1(b) *is* Theorem 18 of di Dio and Schmüdgen (J. Funct. Anal. 2018) on the
 determinacy of truncated moment functionals, and the chain of its proof is Fialkow's
@@ -45,7 +63,7 @@ problems, and deciding whether such data are consistent with any ensemble is
 NP-complete, also in the strong sense (E26).  A sentence of ENSEMBLE-MSG-0006 and of
 `SOFTWARE_INTERFACE.md` ("ratios … are covered by nothing") was wrong and is corrected
 (`DEAD_ENDS.md` ED25).  Software cards N1–N3 (readiness R1); control family B8
-(twenty-two reference instances, thirty-three exact verifications in all).
+(twenty-two reference instances, thirty-three exact verifications at that commit).
 
 **Second supplementary directive of the research owner (received about 22:40 UTC):** an
 eighth division — Frontier Benchmarking, Experimental Evidence and Scientific Evaluation,
@@ -179,9 +197,10 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | engineering | `research/ubuntu-engineering` | `c683fde` | the change of its protocol copy (seven divisions; how software benchmarks are reviewed before execution); its queue not read |
 | geometry | `research/geometric-inference` | `b0734aa` | GEOMETRY-RES-0005 and GEOMETRY-MSG-0008 in full; GEOMETRY-MSG-0006 §1 and GEOMETRY-MSG-0007 §2 in full; GEOMETRY-RES-0006 header only; its report only through these messages |
 | complexity | `research/biological-complexity` | `75266b2` | COMPLEXITY-RES-0003, -0007, -0008 in full; COMPLEXITY-MSG-0004 where it names us; COMPLEXITY-MSG-0005 (its orientation for the new division) header only |
-| structural biology | `research/structural-biology` | `aec72df` | its first checkpoint (23:07 UTC).  Read in full: `STRUCTURAL_BIOLOGY_TO_ALL.md`; STRUCTBIO-MSG-0002 (its maturity statement to the Frontier division); **its intake report on our work** (`docs/structural_biology/intake/N_ensemble.md`, written at our `8d42f60` — before our fourth and fifth checkpoints, the reviews ER2 and ER3 and ENSEMBLE-MSG-0006) and the entries A15, A16 of its theorem-to-software register (capability C3, "ensemble partial identification", planned, not started).  STRUCTBIO-MSG-0001 only where it names us; STRUCTBIO-REQ-0001 to -0003 (to engineering, science, theory) by their subjects in the digest.  **To be answered** (ENSEMBLE-RES-0007): what has changed in the statements it registered, its table of data types, its prior-art observation |
-| frontier benchmarks | `research/frontier-benchmarks` | `626fd13` | founded at 22:54 UTC on the theory division's `b2caab6`.  Read in full: `FRONTIER_BENCHMARKS_TO_ALL.md` (nothing sent yet) and `status/frontier-benchmarks.md` (checkpoint 0: scaffolding; a CASP17 feasibility assessment and evaluation-integrity tooling in progress; no result claimed).  Its protocol copy and code not read |
-| *all five older branches moved between 22:27 and 23:07 UTC* | | theory `07cde81`, engineering `640cd9c`, science `169c6b1`, geometry `d3375f7`, complexity `48412d8` | **listed, not yet read** at the time of this commit: THY-MSG-0019, -0020; SCI-REV-0024; GEOMETRY-MSG-0009 (cites our messages), GEOMETRY-RES-0007; COMPLEXITY-REV-0005; the engineering protocol copy.  The rows above describe what was read at the earlier heads |
+| structural biology | `research/structural-biology` | `aec72df` | its first checkpoint (23:07 UTC).  Read in full: `STRUCTURAL_BIOLOGY_TO_ALL.md`; STRUCTBIO-MSG-0002 (its maturity statement to the Frontier division); **its intake report on our work** (`docs/structural_biology/intake/N_ensemble.md`, written at our `8d42f60` — before our fourth and fifth checkpoints, the reviews ER2 and ER3 and ENSEMBLE-MSG-0006) and the entries A15, A16 of its theorem-to-software register (capability C3, "ensemble partial identification", planned, not started).  STRUCTBIO-MSG-0001 only where it names us; STRUCTBIO-REQ-0001 to -0003 (to engineering, science, theory) by their subjects in the digest.  **Answered** in ENSEMBLE-RES-0007 (what has changed in the statements it registered, its table of data types, its prior-art observation) |
+| frontier benchmarks | `research/frontier-benchmarks` | `097b4c7` | founded at 22:54 UTC on 2026-11-26.  Read in full at the fetch of 00:18 UTC on 2026-11-27: **FRONTIER-MSG-0001** (its introduction, its determination that nothing of MetricChain is a CASP17 participant, its evaluation standards and the freeze tooling); the section "To the ensemble division" of its `MATHEMATICAL_FEEDBACK.md` (**five items E-1 … E-5**: data known up to scale and offset; verdicts that survive enlarging the candidate pool; a graded "identifiability radius"; a modulus for distance distributions; error sets that are not boxes — proposals to be sent in its FRONTIER-MSG-0002); the row C5 of its `RESEARCH_INTAKE.md` about our work (at our `2d2054d`) and §6 of its `CASP17_ASSESSMENT.md` (retrospective question R-1, "what could the ensemble data decide?", gated on prerequisites that do not exist).  Not read: its protocols, registers, literature assessments, code.  **To be answered** (ENSEMBLE-RES-0008): E-1 is our Proposition E23.1; E-5 and E-2 have short answers; E-3 as posed is not a linear programme; E-4 is our open Problem O4 |
+| *all five older branches moved between 22:27 and 23:07 UTC* | | theory `07cde81`, engineering `640cd9c`, science `169c6b1`, geometry `d3375f7`, complexity `48412d8` | read since: THY-MSG-0019 §5 (to us) in full; COMPLEXITY-REV-0005 (summary, findings 7, 8, 10, disposition table); GEOMETRY-MSG-0009 in full; headers only: THY-MSG-0020, SCI-REV-0024, GEOMETRY-RES-0007; the engineering protocol copy not read.  The rows above describe what was read at the earlier heads |
+| *all seven branches moved again by 00:18 UTC on 2026-11-27* | | theory `37ce6d3`, engineering `8df6e5e`, science `5e1c350`, geometry `a82b1cd`, complexity `d920323`, structural biology `41fa668` | **listed, not yet read** at the time of this commit (recipients read from the headers): GEOMETRY-MSG-0010 (to us among others: "the complement — distributions instead of means — is yours"); COMPLEXITY-MSG-0006 (§1 (a)–(c) to us: corrections of statements we quote); ENG-MSG-0007 (to all); STRUCTBIO-MSG-0003 (to all: a correction of its earlier messages); copies: SCI-MSG-0035, GEOMETRY-RES-0008, COMPLEXITY-RES-0009, -0010.  Not addressed to us: STRUCTBIO-REQ-0004, STRUCTBIO-RES-0001, -0002, SCI-RES-0039, SCI-REV-0025 to -0028, ENG-RES-0015 to -0018 |
 
 ## Verified state at the head of the branch
 
@@ -199,11 +218,11 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
   stage was re-run after the last edits of the documents.  Files of other divisions changed here:
   only `proofs/AxiomAudit.lean` (imports, `#print axioms` lines and witnesses appended) and
   `docs/collaboration/README.md` (an addendum).
-* Numerics: `python3 experiments/ensemble/run_all.py` — nine scripts (`torus_six_states.py`,
-  with exact rational and modular computations, and `nonlinear_data_checks.py` are the
-  new ones; the last regenerates and verifies the benchmark controls), then
-  `check_quotes.py` (every number quoted in a "Numerical check" passage of the report is
-  the one in the stored output; 113 entries): all pass
+* Numerics: `python3 experiments/ensemble/run_all.py` — ten scripts (`torus_six_states.py`,
+  with exact rational and modular computations, `nonlinear_data_checks.py` and
+  `misspecification_checks.py` are the new ones; the last regenerates and verifies the
+  benchmark controls), then `check_quotes.py` (every number quoted in a "Numerical check"
+  passage of the report is the one in the stored output; 123 entries): all pass
   (`experiments/ensemble/output.txt`).  Threshold computations and the degree-2 table:
   `output_threshold.txt`.
 
@@ -217,7 +236,8 @@ absence of chimeras".  The linked correction of the first checkpoint is ENSEMBLE
 | Proposition E15U | main statement re-derived and replicated by the Science division (SCI-RES-0038); the other three characterisations and the consequences **read by nobody but the author** |
 | Proposition E17.1 (observation models) | immediate; **read by nobody but the author** |
 | Part VII (E23–E26; data not linear in the ensemble) | paper proofs, elementary; numerical checks Q1–Q5; the sufficiency of E23(b) kernel-checked; **read by nobody but the author** (OB27); no prior-art search |
-| Theorem E20b, Propositions E20c, E20d (the torus of three angles; double points) | paper proofs with exact computer algebra at rational instances (not kernel-checked); E20c's existence numerical; **read by nobody but the author** (OB28) |
+| Theorem E20b, Propositions E20c, E20d (the torus of three angles; double points) | paper proofs with exact computer algebra at rational instances (not kernel-checked); E20c's existence numerical; **read by nobody but the author** (OB28); under internal review (ER4, running) |
+| Proposition E23.1 and Part VIII (E27–E29; incomplete models) | paper proofs, elementary; numerical checks M1–M4; **read by nobody but the author** (OB29); not covered by ER4; no prior-art search |
 | Part VI (version 3; E18–E21) | internal adversarial review ER3: no numbered statement false; two major and nine minor findings, **all applied**; five cited sources read in the original by the reviewer.  The statements taken from the review (E20a, E22, two constants of E20″) were re-derived by us and **read by nobody else** |
 | prior art | `PRIOR_ART.md`: first-checkpoint searches; the sources of ER1 and ER2 with the level at which each was read; two searches for E15U; Part VI: two cited theorems read in the sources, the rest unsearched (OB16) |
 

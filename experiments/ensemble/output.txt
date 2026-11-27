@@ -3,7 +3,7 @@ T1  characterisation by certificate vs fibre LP: 1500/1500 agree (965 identifiab
 T2  duality gap (max over 400 instances x 4 tolerances): 3.22e-15; kappa finite in 301; max relative |omega(1e-4)/1e-4 - kappa|: 4.13e-15
 T3  sup-min formula for kappa_mu: max relative error 6.50e-15; exact linearity and weight-independence: 4.28e-16 (60 instances)
 PASS
-===== rigidity_checks.py (exit 0, 131 s) =====
+===== rigidity_checks.py (exit 0, 139 s) =====
 R1 rigidity matroids: ok
     K4 in R^2: rank 5, connected = True
     K5 in R^3: rank 9, connected = True
@@ -39,7 +39,7 @@ R9 joint genericity (Example D1): ok
 R10 a shared rigid part (Example D2): ok
     K5 minus an edge (rigidity rank 7 = 2*5 - 3), two conformers sharing a triangle: the exchanged pair has the same law on every measured edge in 200/200; the law of the unmeasured edge differs in 200/200
 PASS
-===== pair_capacity_checks.py (exit 0, 13 s) =====
+===== pair_capacity_checks.py (exit 0, 14 s) =====
 C1 Littlewood-Offord lemma: ok
     7296 coefficient vectors with >= 2 non-zero entries: largest probability 3/4 at c = ('-1', '-1', '-1')
 C2 sign vectors in random spans: ok
@@ -69,7 +69,7 @@ C6 adaptivity: ok
     n = 60, 8 conformers (rank 8): 444 entries read (r n - r(r+1)/2 = 444; all pairs: 1770); reconstruction error 4.4e-16
     two two-conformer ensembles: their pair-correlation matrices differ exactly at [(0, 1)]
 PASS
-===== finite_temperature_checks.py (exit 0, 36 s) =====
+===== finite_temperature_checks.py (exit 0, 38 s) =====
 F1 one-body data, cube (Theorem E15): ok
     n = 3, b = 0.5: max over the class of TV(mu, P_a) - sum_i tau_i = +6.66e-16 (exact, 256 LPs)
     n = 3, b = 1.0: max over the class of TV(mu, P_a) - sum_i tau_i = +4.44e-16 (exact, 256 LPs)
@@ -102,7 +102,7 @@ F7 exact criteria on up-sets (Proposition E15U): ok
     how often (D) fails to decide (C) for random pair-interaction known parts (couplings of both signs): n = 3 (18 up-sets), 2000 random pair models: (C) and (D) differ in 0; (C) holds in 447, of which positively associated 285; n = 4 (166 up-sets), 1000 random pair models: (C) and (D) differ in 0; (C) holds in 103, of which positively associated 34 — rare, and not never (the instance above)
     weak coupling, four sites, eps = 0.02: the sign of min_i sum_j J_ij v_j decides the criterion (C) in 228/228 instances (the bound holds in 57 of them)
 PASS
-===== platform_checks.py (exit 0, 150 s) =====
+===== platform_checks.py (exit 0, 162 s) =====
 P1 matroid of the legs: ok
     d = 2, 3 legs: rank 3, connected = False
     d = 2, 4 legs: rank 3, connected = True
@@ -122,7 +122,7 @@ P4 pose uniqueness, and planar bodies: ok
     a fourth leg singles out the true pose in 100/100; smallest mismatch of the fourth length at another pose of the fibre: 1.07e-03
     collinear attachment points on both bodies, six legs, 20 poses: the mirror pose has the same six leg lengths (largest difference 0.0e+00) — no number of legs determines the pose
 PASS
-===== lifted_checks.py (exit 0, 170 s) =====
+===== lifted_checks.py (exit 0, 191 s) =====
 L1 lift isolation on the cube: ok
     n = 10 (45 pair observables): lift-isolated frequency K = 20: 1.000, K = 22: 1.000, K = 33: 0.925, K = 35: 0.950, K = 45: 0.520
     n = 12 (66 pair observables): lift-isolated frequency K = 24: 1.000, K = 33: 1.000, K = 49: 1.000, K = 54: 0.995, K = 66: 0.955
@@ -146,7 +146,7 @@ L7 the permanent certificate: ok
     three states coinciding in two of four angles (Hall condition fails): the permanent vanishes at a configuration at distance 1.32 from every state (value 0.0e+00)
     cube n = 6, all 41664 triples: Hall condition holds in 30720, zero set of the permanent energy = the triple in all of them: True; fails in 10944, the predicted sub-cube is in the zero set in all of them: True (zero set strictly larger than the triple in 960)
 PASS
-===== torus_six_states.py (exit 0, 56 s) =====
+===== torus_six_states.py (exit 0, 57 s) =====
 S1  five rational states on T^3 (Proposition E20a), exact
   the five lifts are linearly independent: ok
   the zero set of the lifted certificate is finite in all eight charts: ok
@@ -200,7 +200,7 @@ S6  sixteen random states on T^4: the unique function of the data span with sixt
     its Hessian has eigenvalues of both signs at some state in 12/12 instances
   so it is not semidefinite in any of them: sixteen states were never determined: ok
 PASS
-===== nonlinear_data_checks.py (exit 0, 46 s) =====
+===== nonlinear_data_checks.py (exit 0, 48 s) =====
 Q1 ratio data are linear (Proposition E23): ok
     ratio data: 60 instances; the optimal ensembles of the linear programme satisfy the ratio constraint; 40 instances with tolerance compared with 40 000 sampled ensembles each: no sampled feasible ensemble outside the LP range (largest excess +0.0e+00)
 Q2 the norm of a mean vector (Theorem E25): ok
@@ -216,11 +216,35 @@ Q4 a reverse-convex constraint as a union over directions (Proposition E24): ok
 Q5 data known up to a factor (Proposition E23(b)): ok
     data known up to a factor: 388 random instances with integer observables (12 with zero data set aside): the direct test (is another ensemble compatible?) and the criterion of E23(b) agree in 388/388 (62 determined up to the factor); the three-point example of the text: True
 PASS
+===== misspecification_checks.py (exit 0, 12 s) =====
+M1  several unknown gains and offsets (Proposition E23.1)
+    300 random instances (1 to 3 groups of 2 to 4 integer observables, an unknown gain in every group and an unknown common offset in some): the criterion and the direct search agree in 300/300 (176 determined up to the gains and offsets)
+  criterion of E23.1 against the direct search: ok
+    example (four configurations, four data): determined with one common gain: True; with a separate gain for each pair of data: False
+  the example: one gain keeps identification, two gains lose it: ok
+M2  convex data and two time scales (Proposition E27)
+    1096 random cases (g = square, exp, cube of the modulus; random partitions): largest violation of convexity 2.0e-15, of g(E phi) <= D 6.7e-16, of D <= E g(phi) 0.0e+00, of monotonicity under refinement 0.0e+00
+  D_B is convex, bracketed by the two limits, and increases under refinement: ok
+    g = square: the ensemble that generated the datum (with a random, 'unknown' partition) lies in the convex outer bound, and its target value in the interval computed from it, in 200/200 cases
+  the outer bound contains the truth whatever the partition: ok
+    variance: largest violation of concavity in 1000 random cases 0.0e+00
+  the variance is concave in the ensemble: ok
+M3  a library that misses configurations (Proposition E28)
+    150 random instances: the library is falsified (no ensemble on it fits) in 49; the certified bound with the exact support function equals the least missing mass (largest difference 1.4e-15); with box bounds on the observables it is a valid lower bound in 150/150 (positive in 49; largest loss 0.252)
+  lower bounds on the missing mass: tight with the support function, valid with box bounds: ok
+M4  the number of conformers (Proposition E29)
+    120 random instances (integer observables): supp(mu) in X_G and K_min <= |supp mu| <= K_max = |X_G|, K_min <= dim G + 1, in 120/120; the data bound the number of conformers from above (|X_G| < |X|) in 50
+  K_min <= |supp| <= K_max = |X_G| and the Caratheodory bound: ok
+    pair data on the cube with five sites: rank of the correlation matrix <= K_min <= number of conformers in 40/40 (rank = K_min in 39); the noisy version (eigenvalues above the norm of the perturbation) never exceeds K_min
+  the rank bound and its noisy version: ok
+    exact cover by 3-sets: 40 random families: 'an ensemble with at most q conformers has the data' agrees with the existence of an exact cover in 40/40 (25 with a cover)
+  the reduction from exact cover: ok
+PASS
 ===== benchmark_controls.py (exit 0, 1 s) =====
-benchmark controls: 22 instances, 33 verifications, 0 failure(s)
+benchmark controls: 25 instances, 38 verifications, 0 failure(s)
 written: experiments/ensemble/benchmarks/controls_v1.json
 PASS
 ===== check_quotes.py (exit 0) =====
-quoted numbers: 113 entries, 0 failure(s)
+quoted numbers: 123 entries, 0 failure(s)
 PASS
 ALL PASS

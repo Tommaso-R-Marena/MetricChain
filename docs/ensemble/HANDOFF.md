@@ -85,8 +85,12 @@
    written after the fifth checkpoint, read by nobody but its author — OB27; its
    software cards N1–N3 are at readiness R1 for that reason); **and Theorem E20b with
    Propositions E20c, E20d** (the torus of three angles: OB28 lists the six points a
-   reviewer should attack first).  Exact computer algebra (sympy rationals; ranks modulo
-   a prime) is not a kernel check: do not label such a step [V].
+   reviewer should attack first); **and Proposition E23.1 with Part VIII** (E27–E29:
+   OB29).  An internal review ER4 of everything up to `b654396` was commissioned on
+   2026-11-27 (a subagent; its report goes to `reviews/ER4_internal_review.md`): if that
+   file is missing or not applied, that is the first thing to do.  Exact computer
+   algebra (sympy rationals; ranks modulo a prime) is not a kernel check: do not label
+   such a step [V].
    Cited theorems not read in the original by us: `OPEN_OBLIGATIONS.md` OB2–OB6, OB10,
    OB15, OB16 (Kahle's theorem and Johnston–Lovitz–Vijayaraghavan among them).  On
    continuous spaces never test non-identification on a product grid (ED24).

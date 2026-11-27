@@ -16,7 +16,7 @@ import pathlib, subprocess, sys, time
 here = pathlib.Path(__file__).resolve().parent
 scripts = ["exposedness_checks.py", "rigidity_checks.py", "pair_capacity_checks.py", "finite_temperature_checks.py",
            "platform_checks.py", "lifted_checks.py", "torus_six_states.py", "nonlinear_data_checks.py",
-           "benchmark_controls.py"]
+           "misspecification_checks.py", "benchmark_controls.py"]
 lines, ok = [], True
 if "--quotes-only" in sys.argv[1:]:
     stored = (here / "output.txt").read_text()

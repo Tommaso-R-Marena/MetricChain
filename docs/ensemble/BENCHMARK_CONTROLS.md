@@ -36,12 +36,13 @@ accuracy tests do not see.  Each family below is built to catch one.
 | **B6** a hypothesis that must be checked | applying a bound outside its hypothesis | check the hypothesis or abstain |
 | **B7** noise | reporting a point estimate without a risk bound | report the bracket for the minimax risk |
 | **B8** non-linear data | treating a calibration factor, a length or a square of an average as if it were a mean | use the right convex or union structure (report Part VII); enumerate signs or abstain; never return a single local fit as the answer |
+| **B9** an incomplete model | assuming that the list of configurations is complete, that instruments share a calibration, or that the fewest conformers that fit are the conformers | test the library and report a certified lower bound on the weight it misses; treat every unknown gain as a lost direction; report the least *and* the largest number of conformers compatible with the data |
 
 ## 2. The reference instances
 
 File: `experiments/ensemble/benchmarks/controls_v1.json`, written by
 `experiments/ensemble/benchmark_controls.py`, which verifies every claim before writing it
-(33 verifications: twins by equality of the data in exact rational arithmetic;
+(38 verifications: twins by equality of the data in exact rational arithmetic;
 certificates by evaluating `c + λ·Φ` at every configuration in exact arithmetic after the
 linear programme's output has been rounded inside the exact solution space of the
 equalities; intervals against closed forms).  Numbers in quotes are exact rationals.
@@ -70,6 +71,9 @@ equalities; intervals against closed forms).  Numbers in quotes are exact ration
 | B8-02 | the corners of a square; datum: the length of the mean position, equal to 1 | `NOT IDENTIFIED`; explicit twin | a length strictly between its extremes determines nothing (E25) |
 | B8-03 | four points of the plane; datum: the length of the mean position at its least possible value | `IDENTIFIED`; certificate `z*·Φ − ‖z*‖²`; mass off the support `≤ rτ/γ`, weights only to order `√τ` | E25(d): two moduli |
 | B8-04 | `2m` configurations; `m + 1` squared means built from integers `a_1 … a_m` | `CONSISTENT` for `(3,1,1,2,2,1)` with explicit signs; `INCONSISTENT` for `(5,4,2)` | consistency of squared-mean data is the partition problem: NP-complete (E26) |
+| B9-01 | four configurations, four means in two groups; data known up to one common gain, or up to one gain per group | one gain: `IDENTIFIED`; two gains: `NOT IDENTIFIED` (explicit twin `(1/7, 2/7, 3/7, 1/7)`) | every unknown gain removes one direction of the certificate (E23.1) |
+| B9-02 | a library with `φ ∈ {0, 1}`; unlisted configurations known only to satisfy `0 ≤ φ ≤ 2`; datum: mean `3/2` | `LIBRARY_FALSIFIED` (certificate `λ = 1`); missing weight at least `1/2`, attained; no upper bound | a failed test of a library bounds the weight it misses from below (E28) |
+| B9-03 | configurations `0, 1, 2, 3`; data: mean and mean square of the uniform ensemble | `K_min = 3`, `K_max = 4`; control on the boundary (data `3/2, 5/2`): `K_min = K_max = 2`, `IDENTIFIED` | the fewest conformers that fit are not the conformers (E29) |
 
 ## 3. Families at scale (generators with ground truth)
 

@@ -530,6 +530,80 @@ add(id="B8-04", family="non-linear data", title="Squared means: consistency of t
     why="Deciding consistency of squared-mean data is NP-complete (Theorem E26).", source="section 4d.4 (E26); check Q3")
 
 # ================================================================================================================
+# B9  an incomplete model: several gains, a library that misses configurations, the number of conformers (Part VIII)
+# ================================================================================================================
+Phi9 = [[Fr(1), Fr(0), Fr(1), Fr(1)], [Fr(0), Fr(1), Fr(1), Fr(0)], [Fr(1), Fr(0), Fr(2), Fr(0)], [Fr(0), Fr(1), Fr(1), Fr(2)]]  # rows: observables; columns: a, b, c, d
+mu9 = {0: Fr(1, 2), 1: Fr(1, 2)}; tw9 = {0: Fr(1, 7), 1: Fr(2, 7), 2: Fr(3, 7), 3: Fr(1, 7)}
+z9, zt9 = means(Phi9, mu9), means(Phi9, tw9)
+# one common gain: nu compatible iff the four means are equal; with total mass one this linear system has one solution
+M9 = sympy.Matrix([[Phi9[0][x] - Phi9[i][x] for x in range(4)] for i in (1, 2, 3)] + [[1, 1, 1, 1]])
+sol9 = M9.solve(sympy.Matrix([0, 0, 0, 1])) if M9.rank() == 4 else None
+check("B9-01 with one common gain the ensemble is the only solution (a 4 x 4 system of full rank)",
+      sol9 is not None and list(sol9) == [Fr(1, 2), Fr(1, 2), 0, 0])
+check("B9-01 with two gains the twin has proportional means in each pair, and not with one gain",
+      zt9[0] * z9[1] == zt9[1] * z9[0] and zt9[2] * z9[3] == zt9[3] * z9[2] and zt9[0] * z9[2] != zt9[2] * z9[0]
+      and sum(tw9.values()) == 1)
+add(id="B9-01", family="incomplete model", title="One unknown gain keeps an identification that two gains lose",
+    space={"type": "finite", "description": "four configurations a, b, c, d", "states": ["a", "b", "c", "d"]},
+    observables={"names": ["phi1", "phi2", "phi3", "phi4"], "table": [frac_list(r) for r in Phi9],
+                 "groups": "data 1, 2 form one group and data 3, 4 another (two instruments)"},
+    ensemble={"support": ["a", "b"], "weights": ["1/2", "1/2"]}, data=frac_list(z9),
+    question="Is the ensemble determined if (a) all four data share one unknown positive gain; (b) each group has its own unknown positive gain?",
+    expected={"(a)": {"verdict": "IDENTIFIED", "reason": "the four means must be equal, which forces nu(c) = nu(d) = 0 and nu(a) = nu(b)"},
+              "(b)": {"verdict": "NOT_IDENTIFIED", "twin": {"weights on a, b, c, d": frac_list([tw9[i] for i in range(4)]), "its means": frac_list(zt9)}}},
+    why="Every unknown gain removes one direction from the span in which a certificate must be found (Proposition E23.1).",
+    source="section 4d.1 (E23.1); check M1")
+
+lib_max, all_max, y9 = Fr(1), Fr(2), Fr(3, 2)
+bound9 = (y9 - lib_max) / (all_max - lib_max)
+check("B9-02 the library {0, 1} is falsified by the mean 3/2, the bound on the missing weight is 1/2 and it is attained",
+      y9 > lib_max and bound9 == Fr(1, 2) and Fr(1, 2) * 1 + Fr(1, 2) * 2 == y9)
+add(id="B9-02", family="incomplete model", title="Data that falsify a library bound the weight it misses",
+    space={"type": "finite", "description": "the library lists the configurations with phi = 0 and phi = 1; all that is known about unlisted configurations is 0 <= phi <= 2"},
+    observables={"names": ["phi"]}, data={"mean of phi": fr(y9), "tolerance": "0"},
+    question="(a) Can an ensemble on the library have the datum?  (b) What do the data say about the weight of unlisted configurations?",
+    expected={"(a)": {"verdict": "LIBRARY_FALSIFIED", "certificate": "lambda = 1: lambda.y = 3/2 exceeds the largest value 1 of phi on the library"},
+              "(b)": {"missing weight": "at least " + fr(bound9), "attained_by": "weight 1/2 at phi = 1 and 1/2 at phi = 2",
+                      "no_upper_bound": "weight 3/4 at phi = 2 and 1/4 at phi = 0 has the datum with three quarters of the weight off the library"}},
+    why="An incomplete library is testable; a failed test gives a certified lower bound on the missing weight from bounds on the observables alone (Proposition E28).",
+    source="section 4e.2 (E28); check M3")
+
+X9 = [0, 1, 2, 3]
+data9 = (Fr(3, 2), Fr(7, 2))                                                 # mean and mean square of the uniform ensemble
+def fits9(sub):
+    """exact weights on the support `sub` with the two data and total mass one, if positive"""
+    A = sympy.Matrix([[1] * len(sub), [x for x in sub], [x * x for x in sub]])
+    b = sympy.Matrix([1, data9[0], data9[1]])
+    try:
+        sols = sympy.linsolve((A, b))
+    except Exception:
+        return False
+    if not sols:
+        return False
+    sol = list(sols)[0]
+    if any(v.free_symbols for v in sol):
+        return None                                                          # a family: handled below for the full support
+    return all(v > 0 for v in sol)
+by_size = {k: [sub for sub in itertools.combinations(X9, k) if fits9(sub) is True] for k in (1, 2, 3)}
+check("B9-03 no ensemble with one or two conformers has the data; two with three conformers do; the uniform one has four",
+      by_size[1] == [] and by_size[2] == [] and len(by_size[3]) == 2
+      and sum(Fr(1, 4) * x for x in X9) == data9[0] and sum(Fr(1, 4) * x * x for x in X9) == data9[1])
+edge9 = (Fr(1, 2) * 1 + Fr(1, 2) * 2, Fr(1, 2) * 1 + Fr(1, 2) * 4)
+check("B9-03 control on the boundary: the certificate (x-1)(x-2) is non-negative on X with zero set {1, 2}",
+      all((x - 1) * (x - 2) >= 0 for x in X9) and [x for x in X9 if (x - 1) * (x - 2) == 0] == [1, 2] and edge9 == (Fr(3, 2), Fr(5, 2)))
+add(id="B9-03", family="incomplete model", title="How many conformers do the data require, and how many do they allow?",
+    space={"type": "finite", "description": "configurations 0, 1, 2, 3 on a line", "states": ["0", "1", "2", "3"]},
+    observables={"names": ["x", "x^2"]},
+    ensemble={"support": ["0", "1", "2", "3"], "weights": ["1/4", "1/4", "1/4", "1/4"]}, data=frac_list(list(data9)),
+    question="What are the least and the largest number of conformers of an ensemble with these two means?",
+    expected={"K_min": 3, "K_max": 4, "with three conformers": [list(sub) for sub in by_size[3]],
+              "remark": "a fit with the fewest conformers returns three; the truth has four",
+              "control": {"data": frac_list(list(edge9)), "K_min": 2, "K_max": 2, "verdict": "IDENTIFIED",
+                          "certificate": "(x - 1)(x - 2) = x^2 - 3x + 2 is non-negative on the four configurations with zero set {1, 2}"}},
+    why="The largest number is the size of the zero set of a certificate; the smallest is a combinatorial search; they agree iff the ensemble is identified (Proposition E29).",
+    source="section 4e.3 (E29); check M4")
+
+# ================================================================================================================
 bad = [d for d, ok in checks if not ok]
 print(f"benchmark controls: {len(controls)} instances, {len(checks)} verifications, {len(bad)} failure(s)")
 for d in bad:

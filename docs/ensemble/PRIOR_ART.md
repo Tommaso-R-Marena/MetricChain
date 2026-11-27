@@ -266,6 +266,22 @@ the constant removed from the span), and the two moduli of E25(d) (support linea
 weights square root) for an ensemble identified by the least length of a mean vector.
 Classification of E23–E26: elementary; formulation for ensembles; obligation OB27.
 
+## 5d. Proposition E23.1 and Part VIII (incomplete models)
+
+No search was made.  From memory: the perspective of a convex function is jointly
+convex (any text on convex analysis); the NP-hardness of finding sparsest solutions of
+linear systems (Natarajan 1995) — our reduction from exact cover is direct; Weyl's
+inequality.  Related notions in print that we found for other reasons (§1): the set
+`W(L)` of atoms of the representing measures of a moment functional (di Dio–Schmüdgen),
+which is our `X_G` — their paper may well contain E29(a); the "maximum occurrence" of a
+conformer, which is one end of an interval of our E2(a), not of E29.  The practice
+"choose the smallest number of conformers that fits" is described in the review of
+Ravera, Sgheri, Parigi and Luchinat (2016; search summary only); E29 says what that
+number is and is not.  Not looked for: statements on incomplete conformer libraries or
+unknown gains in the ensemble-refinement literature; convexity of two-time-scale
+averages.  Classification of E23.1, E27–E29: elementary; formulation for ensembles;
+obligation OB29.
+
 ## 6. Search log (2026-11-26)
 
 1. "globally rigid graphs M-connected rigidity matroid higher dimensions" — found

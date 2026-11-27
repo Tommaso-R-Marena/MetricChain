@@ -315,6 +315,15 @@ set.  Same linear programme as F1 with the constant removed; ranges of targets b
 linear-fractional programme.  *Trap (control B8-01):* an ensemble that is identified
 with the factor known can cease to be when it is unknown.
 
+*Several gains and offsets (Proposition E23.1; readiness R1).*  Group the data by
+instrument; give each group its unknown gain `c_g > 0` and, if needed, an unknown common
+offset.  The constraints stay linear: project each group's observables off the offset
+direction, then require that the projected mean be a positive multiple of the projected
+data (`m_g − 1` equations and one inequality per group).  Identification is F1 for the
+projected features; the certificate may use only directions orthogonal to each group's
+data.  *Trap (control B9-01):* pooling two instruments under one gain can "identify" an
+ensemble that two separate gains leave open.
+
 ### N2 — The length of a mean vector  (Theorem E25)
 
 *An upper bound* `‖E_μΦ‖ ≤ ρ` is the tolerance constraint of F3 around the data `0`: nothing
@@ -335,6 +344,38 @@ are small.  A tool must
 enumerate the signs (feasible for a handful of such data), or abstain; given the signs,
 everything is F1–F4 and its certificates.  *Trap (control B8-04):* a local fit proves
 neither consistency nor inconsistency.
+
+### N4 — A datum averaged on unknown time scales  (Proposition E27) — **R1**
+
+If a datum has the form "`g` of an average" for fast motions and "average of `g`" for slow
+ones (`g` convex), then for every way of splitting the motions it lies between `g(E_νφ)` and
+`E_ν g(φ)`.  Use the two constraints `g(E_νφ) ≤ y + τ` and `E_ν g(φ) ≥ y − τ`: a convex set (for a
+square: two linear constraints and one more), valid without knowing the split; ranges
+of targets by F3.  Using only one limit as an equality is a modelling decision that the
+tool must state.  Variances: a lower bound on a variance is convex, an upper bound is
+not; with the mean also measured, a variance is a linear datum.
+
+### N5 — Is the library complete?  (Proposition E28) — **R1**
+
+*Input:* the library's observables, the data with tolerance, and for each observable
+bounds `a_i ≤ φ_i ≤ b_i` valid for every configuration, listed or not.  *Output:* either
+`LIBRARY_CONSISTENT` (some ensemble on the library fits — which does **not** show that the
+library is complete), or `LIBRARY_FALSIFIED` with a certificate `λ` and the certified bound
+`missing weight ≥ (λ·y − ‖λ‖_*τ − max_lib λ·Φ)/(Σ_i max(λ_i a_i, λ_i b_i) − max_lib λ·Φ)`; one linear
+programme over the library.  If a bound `ε` on the missing weight is available from
+elsewhere, run F1–F4 with the tolerance `τ + εD` (`D` = largest distance between listed and
+possible observable vectors) and state that the conclusions are about the ensemble
+conditioned on the library (control B9-02).
+
+### N6 — How many conformers?  (Proposition E29) — **R1**
+
+Report two numbers.  `K_max`: the number of configurations on the minimal face — one
+linear programme per configuration, or the zero set of the F1 certificate; equal to the
+size of the whole space unless the data are on the boundary of what the space can
+produce.  `K_min`: exhaustive over supports (NP-hard in general) with the certified lower
+bound "number of eigenvalues of the lifted moment matrix above the data error" when the
+data contain such a matrix (pair correlations do).  The ensemble is identified exactly
+when the two agree.  *Trap (control B9-03):* returning the sparsest fit as "the" ensemble.
 
 ## 6. What an algorithm must establish, and whether checking is easier than constructing
 
@@ -380,11 +421,14 @@ hence no stability constant.
 | missing observables, restricted designs | covered: every statement is for an arbitrary set of observables; fewest pair correlations: P2 |
 | an observation function known up to a uniform error `δ_i` | **exactly** equivalent to enlarging the tolerance of that datum by `δ_i` (Proposition E17.1(b)): F1–F4 with the nominal functions and the tolerances `τ + δ` are valid for the truth, and nothing smaller is |
 | an observation function with unknown parameters (`φ_θ`) | a certified **outer** bound (Proposition E17.1(c)): the compatible set is a union over `θ`, not convex; if `φ_θ` is Lipschitz in `θ` (constant `L`, uniformly on `X`), F3 on a grid of mesh `h` with every tolerance enlarged by `Lh` contains the exact range and converges to it.  Cost: one LP per grid point — practical for a few parameters only |
-| a ratio of two means with a positive denominator; all data known up to one unknown positive factor | **linear after rewriting** (N1; Proposition E23).  An earlier version of this file listed ratios as not covered: that was wrong |
+| a ratio of two means with a positive denominator; all data known up to one unknown positive factor; several groups of data, each with its own unknown gain and offset | **linear after rewriting** (N1; Propositions E23, E23.1).  An earlier version of this file listed ratios as not covered: that was wrong |
 | the length of a vector of means; squares of means | N2, N3 (Theorems E25, E26): a union of linear problems over directions or signs; a certified outer bound by a net; NP-complete consistency in general |
-| an average taken on the time scale of a measurement; any datum that is not a function of finitely many means of known functions | **not covered** by anything we have |
+| a datum that is "`g` of an average" for fast motions and "an average of `g`" for slow ones, with an unknown split | a **convex outer bound** valid for every split (N4; Proposition E27, R1) |
+| a variance or covariance | a lower bound is convex, an upper bound is not; linear if the mean is also measured (N4; E27(b)) |
+| a list of configurations that may be incomplete | testable: `LIBRARY_FALSIFIED` with a certified lower bound on the missing weight, or consistent — which proves nothing about completeness (N5; Proposition E28, R1) |
+| any other datum that is not a function of finitely many means of known functions (a dynamical quantity; a law of a non-linear functional) | **not covered** by anything we have |
 | laws (distributions) of an observable instead of means | Part II: exact laws only; no noise model; R1 |
-| unknown number of conformers | F1–F5 need no such number: they quantify over all ensembles.  A known bound on the number of conformers is a *prior* that can enlarge what is identified (Theorem E18′, R1) — never needed for validity |
+| unknown number of conformers | F1–F5 need no such number: they quantify over all ensembles.  A known bound on the number of conformers is a *prior* that can enlarge what is identified (Theorem E18′, R1) — never needed for validity.  What the data say about the number itself: N6 (Proposition E29, R1) — a largest number with a certificate, a smallest number that is hard to compute and has rank lower bounds |
 | model misspecification | F3 certifies infeasibility; F2 is model-free.  Class-based statements (H1, F6) are only as good as the class |
 
 ## 8. Proof obligations that bear on software

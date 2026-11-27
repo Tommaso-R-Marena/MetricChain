@@ -22,8 +22,8 @@ findings), applied here (§7 item 14).  The main statement of Proposition E15U w
 re-derived and replicated by the science division (SCI-RES-0038).  Unreviewed: the rest
 of E15U, Proposition E17.1, the statements added to Part VI from the review itself
 (E20a, E22, two constants of E20″), which we re-derived but nobody else has read, the
-statements E20b–E20d added after it, and the whole of Part VII (E23–E26).  No external
-peer review of anything.
+statements E20b–E20d added after it, the whole of Part VII (E23–E26, E23.1) and Part VIII (E27–E29).  No external peer review
+of anything.
 "New" below always means "not found in the search documented in `PRIOR_ART.md`".
 
 ---
@@ -58,10 +58,13 @@ how stably, and with what certificate.**
 | E19 | **Data of even order `≤ 2d` on the cube.**  `K ≤ (1−ε)n^d/d!` random conformers are the ground states of the explicit energy `‖P^⊥ξ_d(x)‖²` and every ensemble on them is determined among all ensembles; pair data determine up to `(1−ε)n²/2` conformers among ensembles **with at most `K` conformers** (generic weights) but nothing beyond `2n` among all; without a prior nothing is determined beyond `(2+ε)·n^{2d−1}/(2d−1)!`; for four-body data the threshold is numerically 2.6–3.5 times the sum-of-squares range, within a few per cent of the known threshold of a Gaussian cloud of the same size.  Worst case (known: Kahle 2010): any `2^{2d} − 1` conformers are determined | (a) K (Baldi–Vershynin 2019), which we re-derived before finding it; (b)–(d) P given K; (e), (f) N; (g) K | synthesis; the probabilistic core is a published theorem (rediscovery on our side); (d) is Cover's capacity bound read through E1 |
 | E20 | **Generic conformers on a variety; torsion angles.**  For a lift into `ℂ^N` whose image has projective codimension `c`, generic ensembles of `K ≤ c` conformers are determined among all ensembles; on the torus `𝕋^r` with multilinear trigonometric data: `K ≤ 2^r − r − 1`, and five generic states on `𝕋³` (E20a).  **Six states in general position on `𝕋³` are never determined** (E20b: twelve first-order conditions along the curve where the lifted certificate vanishes have rank 12), **but six-tuples on a hypersurface are, by a certificate that is not a sum of squares** (E20c); for `r ≥ 4` no `K ≥ 3^r/(r+1)` states in general position are determined (E20d: 17 for four angles).  **Two states on a torus** are determined iff they differ in at least two angles, with an explicit product certificate using pairs of angles only (E20′), with quadratic growth, a stability bound `∫ min(d_p², d_q²) dν ≤ Λτ/c*` and recovery of the weights to order `τ`, all constants explicit (E20″).  **Three states on a torus of two angles are never determined by bilinear data** (E22) | P given K (generalised trisecant lemma; Carathéodory–Toeplitz for E22; Laface–Postinghel for E20d); E20a, E20b P with exact computations at rational instances; E20c P, existence N; E20′, E20″ P, their combinatorial cores V (`twoStateCert_eq_zero_iff`, `twoStateCert_growth_three`, `twoStateCert_growth_two`) | synthesis; E20′, E20″ elementary, new (not found); E20a, E22 and two of the constants of E20″ are the internal review's (ER3); E20b–E20d not searched beyond the cited theorem, unreviewed |
 | E21 | **`K` states on a product space: the permanent certificate.**  If every set `I` of at least two states has at least `|I|` coordinates at which its states do not all coincide (for instance: pairwise at least `K` differing coordinates), the permanent of the matrix of coordinate-wise distances to the states vanishes exactly at the states; on a torus the ensemble is then determined by multilinear data of order `K`.  For `K = 2`: E20′.  On finite product spaces this is weaker than a published theorem (Kahle 2010: `2^K − 1` states, no condition) | P; the zero set V (`permCert_eq_zero_iff`, `permCert_zero_set`, via Hall's theorem) | elementary (Hall / Frobenius–König); on tori not found; on finite product spaces superseded, except for the explicit formula |
-| E23 | **Ratios and an unknown scale are linear.**  A ratio of two means with a positive denominator, exact or within a tolerance, is a pair of linear constraints.  Data known up to one unknown positive factor: the ensemble is determined up to the factor iff its features are *linearly* independent on the support and a combination of the observables *without a constant term* is non-negative with the support as zero set — the factor costs exactly the constant function | P (immediate) | elementary; written for the software division; unreviewed |
+| E23 | **Ratios and an unknown scale are linear.**  A ratio of two means with a positive denominator, exact or within a tolerance, is a pair of linear constraints.  Data known up to one unknown positive factor: the ensemble is determined up to the factor iff its features are *linearly* independent on the support and a combination of the observables *without a constant term* is non-negative with the support as zero set — the factor costs exactly the constant function.  Several groups of data with separate unknown gains and offsets: each gain and each offset direction removes one dimension of the certificate space (E23.1) | P (immediate) | elementary; written for the software division; unreviewed |
 | E24 | **Functions of finitely many means: the loss is a fibre.**  For data `y = G(E_μΦ)` the compatible ensembles are a union of convex sets over the fibre of `G` in the moment body; such data never determine more than the means would; a cover of the fibre gives a certified outer bound for the range of any target, at one linear programme per ball | P (immediate) | elementary; unreviewed |
 | E25 | **The length of a mean vector.**  An upper bound on `‖E_μΦ‖` is a convex (tolerance) constraint; a lower bound is a union over directions.  For a moment body of dimension at least two the length determines the mean vector only at its least value, or at its largest with a unique farthest point; in between infinitely many ensembles share it.  The largest length certifies a conformation (mass elsewhere `≤ τ/γ′`); the least length certifies the ensemble on the face nearest to the origin, with a linear modulus for the support (`≤ r_min τ/γ`) and a square-root modulus for the weights (`√(2r_min τ + τ²)`); both bounds are attained | P | elementary; not searched; unreviewed |
 | E26 | **Squared means.**  With `m` data of the form `(E_μφ_i)²` everything is decided by `2^m` linear programmes — and deciding whether the data are consistent with any ensemble is NP-complete, already on `2m` configurations (the partition problem) and in the strong sense (exact cover by 3-sets): the difficulty is the choice of signs, and an answer with its signs is checked in polynomial time | P | elementary; the reductions are the standard ones (sign retrieval is NP-hard); unreviewed |
+| E27 | **Convex data; two time scales.**  An upper bound on a convex function of the means is a convex constraint (variances: concave, so lower bounds).  A datum averaged before a convex `g` within blocks and after it between them is convex in the ensemble and lies between `g(E_μφ)` and `E_μ g(φ)` for every partition: these two constraints are a convex outer bound that needs no knowledge of the time scales | P | textbook convexity; formulation; unreviewed |
+| E28 | **An incomplete library.**  A true ensemble with weight `ε` outside the list of configurations gives a conditional ensemble on the list with data within `τ + εD`; data outside the list's moment body falsify the list with a certificate and give a certified lower bound on the missing weight from bounds on the observables alone, tight by duality; the data never bound the missing weight from above | P | elementary; unreviewed |
+| E29 | **The number of conformers is partially identified.**  The largest number compatible with the data is the size of the zero set of a certificate (finite information only on the boundary of the moment body); the smallest is at most `dim + 1`, at least the rank of any lifted moment matrix in the data (with a noisy version), and NP-complete to decide; the ensemble is identified iff the two agree | P | elementary; (c) known in substance; unreviewed |
 
 The thread through the report is one sentence, stated with its two conditions: **on a
 finite configuration space an ensemble is determined by a family of observables exactly
@@ -2665,6 +2668,41 @@ preserves convexity; a target `E_νψ = Σwψ/Σw` is linear-fractional.  ∎
 by them (three equations, three unknowns).  Up to a factor it is not: `δ_c` has means
 `(1, 1)`.  The ensemble `δ_a` is determined up to the factor, by the certificate `f = φ_2`.
 
+**Proposition E23.1 (several unknown gains and offsets: each costs one direction of the
+certificate).**  (Finite `X`.)  Let the observables come in groups, `Φ = (Φ_1, …, Φ_G)` with
+`Φ_g : X → ℝ^{m_g}`, and let the data of group `g` be known up to a gain and an offset:
+`y_g = c_g·E_μΦ_g + ℓ_g` with unknown `c_g > 0` and unknown `ℓ_g` in a known subspace `L_g ⊂ ℝ^{m_g}`
+(`L_g = {0}`: no offset; `L_g = ℝ·(1, …, 1)`: a common baseline).  Let `P_g` be the orthogonal
+projection onto `L_g^⊥`, `ŷ_g = P_g y_g`, assumed non-zero, and `Q_g` the orthogonal projection onto
+the complement of `ŷ_g` in `L_g^⊥`.
+(a) An ensemble `ν` is compatible with the data iff `Q_g P_g E_νΦ_g = 0` and `ŷ_g·E_νΦ_g > 0` for every
+`g`.  These are linear equations and inequalities: the compatible set is convex, and the
+range of any target over it is one linear programme.
+(b) `μ` with support `S` is the only compatible ensemble iff Theorem E1(a) holds for the
+features `Q_g P_g Φ_g`: the vectors `(1, Q_1P_1Φ_1(x), …, Q_GP_GΦ_G(x))`, `x ∈ S`, are linearly independent,
+and some `f = c + Σ_g λ_g·Φ_g` with `λ_g ⊥ L_g` and `λ_g ⊥ ŷ_g` for every `g` is non-negative on `X` with zero
+set `S`.
+(c) So every unknown gain and every unknown direction of offset removes one dimension
+from the space in which the certificate must be found: `m − G − Σ_g dim L_g` of the `m`
+observables remain.  With a separate gain for every single datum nothing remains but
+the signs of the means.
+
+**[P]**; for one group without offset it is E23(b) in another form; the sufficiency in (b)
+is the machine-checked `Ensemble.eq_of_exposing_certificate` applied to the projected
+features.  *Proof.*  (a) `y_g − c_g E_νΦ_g ∈ L_g` for some `c_g > 0` iff `P_g E_νΦ_g` is a positive multiple
+of `ŷ_g`: its component orthogonal to `ŷ_g` vanishes and `ŷ_g·P_gE_νΦ_g = ŷ_g·E_νΦ_g > 0`.  (b) If `ν` is
+compatible, `h = ν − μ` is orthogonal to the constants and to the components of every
+`Q_gP_gΦ_g`, and non-negative off `S`; conversely, for such an `h ≠ 0` the measure `μ + εh` is, for
+small `ε > 0`, a compatible ensemble (`ŷ_g·E_μΦ_g > 0` is an open condition).  So `μ` is determined
+iff the cone of the proof of Theorem E1(a), for the features `Q_gP_gΦ_g`, is `{0}`.  ∎
+
+*Example (one gain keeps an identification that two gains lose; check M1).*  Four
+configurations, four data in two pairs: `Φ(a) = (1, 0 | 1, 0)`, `Φ(b) = (0, 1 | 0, 1)`,
+`Φ(c) = (1, 1 | 2, 1)`, `Φ(d) = (1, 0 | 0, 2)`, and `μ = ½δ_a + ½δ_b` with data `(½, ½ | ½, ½)`.  If all four
+data share one unknown gain, `μ` is determined (the four means must be equal, which forces
+`ν(c) = ν(d) = 0` and `ν(a) = ν(b)`).  If each pair has its own gain it is not: the ensemble
+`(1/7, 2/7, 3/7, 1/7)` has the means `(5/7, 5/7 | 1, 1)`.
+
 ### 4d.2 The general principle: the loss is a fibre
 
 **Proposition E24 (functions of finitely many means).**  Let the data be `y = G(E_μΦ)` for a
@@ -2820,10 +2858,177 @@ instances with integer observables: agreement in 388 of 388 (62 determined up to
 factor), and the three-point example.
 
 **What this Part does not cover.**  Data that are not functions of finitely many means of
-known functions: an average taken on the time scale of a measurement, a datum that
-depends on the ensemble through a dynamical quantity, a law of a non-linear functional.
-And for the data it does cover it gives no noise theory beyond tolerances: there is no
-analogue of Theorem E17 here, because the set of compatible ensembles is not convex.
+known functions: a datum that depends on the ensemble through a dynamical quantity, a
+law of a non-linear functional.  (An average taken partly before and partly after a
+non-linear function — two time scales — is treated in Proposition E27 below, as far as
+convexity reaches.)  And for the data it does cover it gives no noise theory beyond
+tolerances: there is no analogue of Theorem E17 here, because the set of compatible
+ensembles is not convex.
+
+---
+
+## 4e. Part VIII — When the model is incomplete: time scales, missing configurations, the number of conformers
+
+Beside non-linear observation models the research owner's directive names "model
+misspecification" and "unknown ensemble complexity".  This Part contains three
+statements, each of which turns one way in which the model of Parts I–VII can be wrong
+into a constraint with a certificate: the datum averages on a time scale that is not
+known (E27); the list of configurations is incomplete (E28); the number of conformers is
+not known (E29).  *Status:* paper proofs, elementary, **read by nobody but their author**;
+checks in `experiments/ensemble/misspecification_checks.py` (M1–M4).  Nothing here says how
+a real measurement averages; that is for the Science and Structural Biology divisions.
+
+### 4e.1 Data that are convex in the ensemble; averaging on two time scales
+
+**Proposition E27 (one side is free; variances; two time scales).**
+(a) *Convex data.*  If `G` is convex on the moment body, `{ν : G(E_νΦ) ≤ c}` is convex for every
+`c`: an upper bound on such a datum is a convex constraint, and the range of a linear
+target under it is a convex programme; a lower bound is the complement of a convex set
+and costs a search over the fibre (E24(c)).  For concave `G` the sides are exchanged.
+Theorem E25(a) is the case of a norm.
+(b) *Variances.*  `Var_ν(φ) = E_νφ² − (E_νφ)²` is concave in `ν`: a lower bound on a variance is a
+convex constraint, an upper bound is not.  If the mean `E_νφ = m` is among the data, a
+variance `v` is the linear datum `E_νφ² = v + m²`.  For a vector `φ`, `Cov_ν(φ) ⪰ C` is the linear
+matrix inequality `[[E_ν φφᵀ − C, E_νφ], [E_νφᵀ, 1]] ⪰ 0` in the means.
+(c) *Two time scales.*  Let `X = B_1 ⊔ … ⊔ B_n`, let `g` be convex on an interval containing the
+values of `φ`, and let
+
+    D_B(ν) = Σ_k ν(B_k) · g( E_ν[φ | B_k] )        (terms with ν(B_k) = 0 omitted)
+
+— the datum of an ensemble in which `φ` is averaged *before* `g` is applied within each `B_k`
+(fast) and *after* it between them (slow).  Then
+ (i) `D_B` is a convex function of `ν`;
+ (ii) `g(E_νφ) ≤ D_B(ν) ≤ E_ν g(φ)`, with equality on the left for the trivial partition and on the
+right for the partition into points, and `D_B` does not decrease when the partition is
+refined;
+ (iii) hence, **whatever the partition**, every ensemble whose datum `D_B(ν)` lies in
+`[y − τ, y + τ]` belongs to
+
+    𝒞(y, τ) = { ν :  g(E_νφ) ≤ y + τ   and   E_ν g(φ) ≥ y − τ } ,
+
+a convex set (the first constraint is convex by (a), the second linear).  The range of a
+target over `𝒞` is one convex programme — for `g` a square, one linear programme, since
+`(E_νφ)² ≤ y + τ` is `|E_νφ| ≤ √(y + τ)` — and it is a certified outer bound that needs no
+knowledge of which motions are fast.
+For concave `g` all inequalities are reversed.
+
+**[P]**, elementary.  *Proof.*  (a) Sublevel sets of convex functions are convex.  (b)
+`ν ↦ (E_νφ)²` is convex; the matrix inequality is the Schur complement.  (c) (i) The term
+`ν(B) g(E_ν[φ1_B]/ν(B))` is the perspective `(m, s) ↦ s·g(m/s)` of `g` at the linear functions
+`m = E_ν[φ1_B]`, `s = ν(B)` of `ν`; the perspective of a convex function is jointly convex, and it
+extends by zero to `s = 0` because `|m| ≤ s·max|φ|`.  (ii) Jensen's inequality between the
+blocks, and inside each block; a refinement replaces `ν(B)g(m_B)` by
+`ν(B′)g(m_{B′}) + ν(B″)g(m_{B″})`, which is larger because `m_B` is the weighted mean of `m_{B′}`, `m_{B″}`.
+(iii) (ii).  ∎
+
+*Reading.*  For `g` a square the two limits are `(E_νφ)²` and `E_νφ²`.  Theorem E26 says that the
+first, known exactly, makes even consistency NP-complete.  If it is not known on which
+side of a measurement's time scale the motions lie, the constraint that can be defended
+is the bracket `𝒞`, and that one is convex: ignorance of the time scales makes the
+problem weaker and easier at once.  (With `φ` an inverse cube of a distance, the two
+limits are the mean inverse sixth power and the square of the mean inverse cube; whether
+a datum is described by either, or by something between, is not a question for this
+report.)
+
+### 4e.2 A configuration space that misses configurations
+
+Every statement of Parts I–VII is "among all ensembles on `X`".  If `X` is a list of
+conformations and the truth has weight outside the list, they say nothing — unless the
+list is tested and the missing weight is accounted for.
+
+**Proposition E28 (an incomplete library is a tolerance; the data bound the missing
+weight from below).**  Let `X_lib ⊂ X`, `Φ` continuous on the compact `X`, and for a set `A` let
+`h_A(λ) = sup_{x∈A} λ·Φ(x)`.
+(a) *Incomplete = tolerance.*  Let `μ` on `X` have weight `ε` outside `X_lib` and data within `τ` of
+`y`.  Then its conditional ensemble `μ_lib = μ(· | X_lib)` has `‖E_{μ_lib}Φ − y‖ ≤ τ + εD`, where
+`D = sup{‖Φ(x) − Φ(x′)‖ : x ∉ X_lib, x′ ∈ X_lib}`, and `TV(μ, μ_lib) = ε`.  So every statement about
+ensembles on the library — certificates, mass bounds, intervals — holds for `μ_lib` with `τ`
+replaced by `τ + εD`, and a target `E_μψ` lies within `ε·osc(ψ)` of `E_{μ_lib}ψ`.
+(b) *Falsification, with a certificate.*  If `λ·y − ‖λ‖_* τ > h_lib(λ)` for some `λ`, no ensemble on
+the library is compatible with the data, and every ensemble `μ` on `X` that is compatible
+has
+
+    μ(X ∖ X_lib)  ≥  ( λ·y − ‖λ‖_* τ − h_lib(λ) ) / ( H(λ) − h_lib(λ) )
+
+for every `H(λ) ≥ h_X(λ)` — for instance `H(λ) = Σ_i max(λ_i a_i, λ_i b_i)` when nothing is known about
+the missing configurations except bounds `a_i ≤ φ_i ≤ b_i` on the observables.
+(c) For finite `X`, with `H = h_X` and the best `λ`, the bound of (b) is the least weight outside
+the library of any compatible ensemble (linear programming duality).  With the box
+bound, the best `λ` solves a linear programme whose constraints are indexed by the
+library alone.
+(d) No upper bound on the missing weight follows from the data: if `y` is the mean of an
+ensemble carried by `X ∖ X_lib`, the data are compatible with `ε = 1`.
+
+**[P]**, elementary.  *Proof.*  (a) `E_μΦ = (1 − ε)E_{μ_lib}Φ + εE_{μ_out}Φ`, so
+`E_μΦ − E_{μ_lib}Φ = ε(E_{μ_out}Φ − E_{μ_lib}Φ)`; `μ − μ_lib = ε(μ_out − μ_lib)` with mutually singular terms.
+(b) `λ·y − ‖λ‖_* τ ≤ λ·E_μΦ ≤ (1 − ε)h_lib(λ) + εH(λ)`.  (c) The dual of
+`min{ν(X ∖ X_lib) : ‖E_νΦ − y‖ ≤ τ}` is `max{λ·y − ‖λ‖_*τ − a : λ·Φ ≤ a on X_lib, λ·Φ ≤ a + 1 on X}`.  ∎
+
+*Reading.*  "The truth is not in the library" heads the Structural Biology division's
+list of what makes library-based inference useless.  E28 says what remains: the library
+can be tested, and a failed test comes with a certificate `λ` and a certified lower bound
+on the population that the library misses, for which only the possible range of each
+observable has to be known; a passed test proves nothing about completeness (d); and
+if the missing weight is bounded by other means, it enters every conclusion as a
+tolerance `εD` and nothing else changes.
+
+### 4e.3 How many conformers?
+
+**Proposition E29 (the number of conformers is partially identified).**  Let `X` be finite,
+`y` the data of some ensemble, `G` the minimal face of the moment body through `y`,
+`X_G = Φ^{-1}(G)`, and let `K_min(y) ≤ K_max(y)` be the least and the largest number of conformers
+of an ensemble with the data `y`.
+(a) *The largest number.*  `K_max(y) = |X_G|`: the number of zeros of a certificate `f ≥ 0` in
+`span{1, Φ}` with `E f = 0` that exposes `G`.  So **the data bound the number of conformers from
+above iff `y` lies on the boundary of the moment body**, the bound has a certificate, and
+it is computed by linear programming.
+(b) *The smallest number.*  `K_min(y) ≤ dim G + 1`.  For every lift `v` with the entries of `v v*` in
+the span of the data, `K_min(y) ≥ rank E[v v*]`; and if a matrix `M̂` is within `η` of `E_μ[v v*]` in
+operator norm, every ensemble with the data of `μ` has at least as many conformers as
+`M̂` has eigenvalues larger than `η`.
+(c) *Complexity.*  Deciding whether `K_min(y) ≤ k` is NP-complete.
+(d) *Identification.*  The ensemble is determined by the data iff `K_min(y) = K_max(y)`.
+
+**[P]**, elementary; (c) is in substance the NP-hardness of sparsest solutions of linear
+systems (**[K]**, from memory), with a direct reduction.  *Proof.*  (a) Every compatible
+ensemble is carried by `X_G` (proof of Theorem E1(b)); `y` is in the relative interior of
+`G = conv Φ(X_G)`, hence a combination of the points `Φ(x)`, `x ∈ X_G`, with all weights positive
+(a relative interior point minus a small multiple of the centroid is still in `G`).  (b)
+Carathéodory's theorem in the affine hull of `G`; a sum of `K` matrices of rank one has rank
+at most `K`; Weyl's inequality.  (c) Membership: a support and a linear feasibility
+problem.  Hardness: for a family of 3-element subsets `T_j` of a set `U` of `3q` elements take
+`X` = the family, `Φ(T) = 1_T ∈ ℝ^U` and `y = (1/q, …, 1/q)`; an ensemble with at most `q` conformers
+has these data iff `q` of the sets cover `U` — an exact cover.  (d) If `K_min = K_max`, all
+compatible ensembles have the support `X_G`; two different ones would span a line that
+leaves the simplex at a compatible ensemble with a smaller support.  ∎
+
+*Reading.*  "How many states do the data require?" and "how many do they allow?" are
+different questions with answers of a different kind.  The largest number is infinite
+or enormous unless the data sit on the boundary of what the configuration space can
+produce, and then it has a certificate.  The smallest number — what a fit with the
+fewest conformers returns — is NP-hard to find, has cheap certified lower bounds
+(ranks), and by itself says nothing about the truth, which can have any number of
+conformers up to `K_max`: the uniform ensemble on `{0, 1, 2, 3}`, observed through its mean and
+mean square, has four conformers, `K_min = 3` and `K_max = 4` (control B9-03).
+
+*Numerical checks* **[N]** (`experiments/ensemble/misspecification_checks.py`).  M1: on 300
+random instances with one to three groups of integer observables, an unknown gain in
+every group and an unknown common offset in some, the criterion of E23.1 and a direct
+search for a second compatible ensemble agree in 300/300 (176 determined up to the gains
+and offsets); the example of E23.1.  M2: for `g` a square, an exponential and the cube of
+the modulus, on 1096 random cases with random partitions, the largest violations of the
+convexity of `D_B`, of the two inequalities of E27(c)(ii) and of monotonicity under
+refinement are below `10⁻¹⁰`; for `g` a square the ensemble that generated the datum, with a
+partition unknown to the programme, lies in `𝒞` and its target value in the interval
+computed from `𝒞` in 200/200 cases; the variance is concave.  M3: on 150 random instances
+with tolerance `0.01` the library is falsified in 49; the bound of E28(b) with the exact
+support function equals the least missing weight, and with box bounds on the
+observables it is a valid lower bound in 150/150 (positive in 49; largest loss 0.252).
+M4: on 120 random instances, `supp μ ⊆ X_G` and `K_min ≤ |supp μ| ≤ |X_G|`, `K_min ≤ dim G + 1` in 120/120,
+with `K_min` by exhaustive search (the data bound the number of conformers from above in
+50); for pair data on the cube with five sites the rank of the correlation matrix is at
+most `K_min` in 40/40 (equal in 39), also in its noisy version; the reduction from exact
+cover agrees with brute force on 40/40 random families (25 with a cover).
 
 ---
 
@@ -3113,6 +3318,19 @@ Items 14–15: the fifth checkpoint, commit `2d2054d`.  Item 16: after it.)*
    for the weight of a conformer is the "maximum occurrence" of the structural-biology
    literature at its upper end; the mechanism of E20b, E20c on the curve is in Baldi,
    Blekherman and Sinn (2024).
+18. **Part VIII added** (§4e: Propositions E27, E28, E29) **and Proposition E23.1** (§4d.1), in
+   answer to the items "unknown or imperfect observation functions", "model
+   misspecification" and "unknown ensemble complexity" of the research owner's
+   directive, and to the Structural Biology division's list of what makes library-based
+   inference useless.  E23.1: several unknown gains and offsets are linear, each costing
+   one direction of the certificate.  E27: a datum averaged on two time scales is convex
+   in the ensemble and bracketed by its two limits, which gives a convex outer bound
+   valid for every separation of time scales.  E28: an incomplete library is a
+   tolerance, and data that falsify it give a certified lower bound on the missing
+   weight.  E29: the number of conformers is partially identified — the largest number
+   is the size of the zero set of a certificate, the smallest is NP-hard and bounded
+   below by ranks.  Paper proofs, elementary, unreviewed; check script
+   `misspecification_checks.py` (tenth script of `run_all.py`); controls B9-01 to B9-03.
 
 ## 8. Limitations
 
