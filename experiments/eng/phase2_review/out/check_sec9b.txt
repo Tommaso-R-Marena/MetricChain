@@ -1,0 +1,22 @@
+[9.5] binary sites, monotone targets: |sup over class - E under the product tilt| <= 1.07e-14
+[9.6] binary sites: SEQ = exact for monotone targets (1.42e-14) and additive targets (1.78e-15); random targets: unsound cases = 0, largest width ratio SEQ/exact = 3.972
+[9.6] sites with three ordered states, coordinatewise monotone targets: SEQ > exact in 79/300 instances (unsound: 0); largest gap = 0.0389 of the range of g
+      example: sizes [3, 3], site laws [[0.0401, 0.5001, 0.4598], [0.3815, 0.4694, 0.1491]], slopes [1.0038, 1.0722],
+               g = [[0.0, 0.0, 0.0], [0.0, 0.0, 1.0], [0.0, 1.0, 1.0]]
+               sup over the class = 0.632633, SEQ = 0.671526
+      -> 'equality for coordinatewise monotone g' holds for binary sites (Proposition 9.5) and is FALSE as stated 'in the setting of Proposition 9.2' (sites with more than two states)
+[9.6] how loose the sequential bound can be: parity-type and band targets of one additive statistic, binary sites
+   n   reference p_i   slope   target                 exact interval          SEQ interval           width ratio
+   4   0.75            0.6     parity                [-0.23306,  0.34749]    [-0.35140,  0.44692]      1.38
+   5   0.75            0.6     parity                [-0.31965,  0.26245]    [-0.43215,  0.38750]      1.41
+   6   0.75            0.6     parity                [-0.27695,  0.30555]    [-0.40437,  0.42524]      1.42
+   8   0.75            0.6     parity                [-0.28773,  0.29488]    [-0.41595,  0.42051]      1.44
+   6   0.50            0.6     S == n/2              [ 0.15797,  0.49494]    [ 0.13904,  0.52749]      1.15
+   8   0.50            0.6     S == n/2              [ 0.12093,  0.46309]    [ 0.10038,  0.50628]      1.19
+   8   0.50            0.3     S == n/2              [ 0.18959,  0.36685]    [ 0.17451,  0.38846]      1.21
+   8   0.30            0.6     S mod 3 == 0          [ 0.19047,  0.48329]    [ 0.13906,  0.55759]      1.43
+   random functions of S on 6 binary sites (150 draws): largest width ratio SEQ/exact = 1.84   at (p, slope, values of g by S) = (0.724, 0.287, [-1.715, 0.662, 0.171, 0.744, 0.01, 2.001, -1.638])
+
+real	0m10.801s
+user	0m11.346s
+sys	0m0.241s

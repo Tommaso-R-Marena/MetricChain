@@ -93,8 +93,9 @@ def sequential_upper(site_pi, site_u, site_stats, terminal) -> float:
     """Proposition 9.6: an upper bound of sup E_p[terminal(S)] over the bounded-influence class with a product
     reference, S = sum_i stats_i[x_i] a vector of non-negative integer statistics and ``terminal`` an array indexed
     by S.  Sites are integrated out one at a time, each by the one-site threshold rule (the conditional law of a
-    site given the earlier ones lies in the one-site class).  Exact for additive and for coordinatewise monotone
-    functions; in general the bound of a larger ("sequential") class.  Cost: sites x cells x states."""
+    site given the earlier ones lies in the one-site class).  Exact for additive functions, and for coordinatewise
+    monotone functions when every site has two states - not for three (REVIEW_A, finding C3); in general the bound
+    of a larger ("sequential") class.  Cost: sites x cells x states."""
     nsite = len(site_pi)
     us = np.broadcast_to(np.asarray(site_u, dtype=float), (nsite,))
     stats = [np.asarray(st, dtype=int).reshape(len(p), -1) for p, st in zip(site_pi, site_stats)]

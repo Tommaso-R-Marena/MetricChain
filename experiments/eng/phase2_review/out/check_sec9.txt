@@ -1,0 +1,22 @@
+[8.1] interval on X vs interval on the cells: max abs diff = 2.05e-15
+[9.1] 'a.r <= 0 on the cone' <=> 'a flow exists': agree in 600/600 random graphs (325 with the property holding and a not <= 0)
+[9.1] second part on graphs that are NOT strongly connected (edges x<y only): primal vs flow dual, 200 instances, max abs diff = 9.99e-16  (compactness comes from pi > 0, r >= 0)
+[9.2] product reference: sup of random functionals of the B-marginal, whole class vs class on the B sites: max abs diff = 1.28e-15
+[9.2] correlated reference pi = (.49,.01,.01,.49), slopes (0.2, 2.0): sup p_1(1) over the class = 0.8872, over the one-site class with slope 0.2 = 0.5498  -> closure fails, as the note says
+[9.3] additive observables: formula vs programme over the whole cone (sites with 2 and 3 states)
+   m = 1: 40 instances, max |formula - programme| = 1.59e-10;   m = 2: 37 instances, 4.71e-14;   lower end (formula for -f): 2.92e-10
+   binary sites: range of p_i(1) over the class vs [sigma(theta-u), sigma(theta+u)]: max abs diff = 3.33e-16
+[9.4] uniform cube, slope u, target x_1, no observations
+   n    u    V+ class (LP)   sigma(u)    box hull ratio (LP)   e^{un}     V+ box hull   e^{un}/(1+e^{un})   min over ALL containing boxes of u(A)/l(A^c)
+   2  0.5    0.622459      0.622459        2.7183           2.7183   0.731059      0.731059          2.7183 (= e^(un): 2.7183)
+   3  0.5    0.622459      0.622459        4.4817           4.4817   0.817574      0.817574          4.4817 (= e^(un): 4.4817)
+   4  0.5    0.622459      0.622459        7.3891           7.3891   0.880797      0.880797          7.3891 (= e^(un): 7.3891)
+   4  1.0    0.731059      0.731059       54.5982          54.5982   0.982014      0.982014          54.5982 (= e^(un): 54.5982)
+   5  0.3    0.574443      0.574443        4.4817           4.4817   0.817574      0.817574          4.4817 (= e^(un): 4.4817)
+   -> the box hull has ratio e^{un} and V+ = e^{un}/(1+e^{un}); moreover NO box class containing the bounded-influence
+      class does better for this target (last column), which is stronger than the note's statement about 'the smallest'.
+[9.4 prop] chain of inequalities sum(pi r s) <= sum(r beta) <= max r sum(beta+) - min r sum(beta-): max violation = 4.44e-16; condition held in 298 cases, implication violated in 0
+
+real	1m14.456s
+user	1m14.903s
+sys	0m0.204s

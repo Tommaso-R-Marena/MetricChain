@@ -1,0 +1,53 @@
+[4.1, m=0] threshold enumeration = root of Psi = LP: max abs diff = 2.22e-16
+[4.1 b] inf_eta Psi(tau, eta) = max over the feasible part of K, at random tau: 300 instances (53 with both sides -inf), max abs diff = 3.55e-15
+[4.1 a,b] primal LP  vs  inf_eta tau*(eta) (direct minimisation)  vs  dual LP;  box regions
+   kind                m   cases  empty   max|primal - dual_direct|   max|primal - dual_LP|   soundness viol.
+   generic             0     60      0        2.22e-16                3.33e-16              0
+   generic             1     60     11        1.30e-10                2.78e-16              0
+   generic             2     60     16        1.00e-14                3.47e-16              0
+   l=u somewhere       0     60      0        1.67e-16                2.22e-16              0
+   l=u somewhere       1     60      9        1.46e-10                2.22e-16              0
+   l=u somewhere       2     60     20        5.97e-15                4.30e-16              0
+   l=u everywhere      0     60      0        1.11e-16                1.67e-16              0
+   l=u everywhere      1     60     16        1.79e-12                1.67e-16              0
+   l=u everywhere      2     60     14        9.71e-15                9.44e-16              0
+   l=0                 0     60      0        0.00e+00                0.00e+00              0
+   l=0                 1     60      7        6.87e-10                2.22e-16              0
+   l=0                 2     60      6        7.24e-14                2.68e-15              0
+   l=0 somewhere       0     60      0        2.22e-16                1.18e-16              0
+   l=0 somewhere       1     60     16        2.20e-10                2.55e-15              0
+   l=0 somewhere       2     60     14        3.07e-14                2.22e-16              0
+   u=0 somewhere       0     60      0        2.22e-16                2.22e-16              0
+   u=0 somewhere       1     60     10        4.03e-10                1.67e-16              0
+   u=0 somewhere       2     60     19        1.79e-14                5.55e-16              0
+[4.1 c] instance: l=1, u=3 on 3 states, f=(0,.5,1), phi=1{x=2}, R=[0,0.25]; V+ = 0.531250
+   eta = 0: tau*(0) = 0.700000 (Psi = 2.2e-16); threshold ensemble has E f = 0.700000, E phi = 0.6000 -> outside R: not in the identified set
+   optimal eta = 0.625000, tau = 0.531250, scores s = [-0.375  0.125  0.   ]
+   weights 'l on {s=0}': E f = 0.500000, E phi = 0.200000, feasible = True, attains V+ = False
+   weights 'u on {s=0}': E f = 0.642857, E phi = 0.428571, feasible = False, attains V+ = False
+[4.1 e] l = 0, phi = (0,1), R = [2,3]: primal = None (None = empty set)
+   sup over a wide grid of eta of Phi(eta) = 0.000e+00   (Phi = -sum u t_- <= 0 whenever l = 0: the certificate of (e) can never fire)
+   the correct model-free certificate, min over supp u of t = eta.phi - h_R(eta), at eta = -1: 1.000 > 0
+   same instance with l = 1e-3: sup Phi = 3.000e+03 > 0
+   Z_l > 0, m = 1, random: certificate fires <=> primal empty in 300/300 instances
+[4.1 b] disc of radius 0.5 tangent to the reachable set: max E phi_2 = -0.00e+00, edge y_1 in [-0.3333, 0.3333], tangency at y* = [0.1 0. ]; Z_l = 2.5
+   primal V+ (the region meets the reachable set only at y*) = 0.4466666667
+   tau*(eta) for eta = (a, -k), minimised over a:
+      k =         1: best a =  0.13333, tau* = 0.4510915317, gap to V+ = 4.425e-03, k*gap = 0.0044
+      k =        10: best a =  0.13333, tau* = 0.4471110915, gap to V+ = 4.444e-04, k*gap = 0.0044
+      k =       100: best a =  0.13333, tau* = 0.4467111111, gap to V+ = 4.444e-05, k*gap = 0.0044
+      k =      1000: best a =  0.13333, tau* = 0.4466711111, gap to V+ = 4.444e-06, k*gap = 0.0044
+      k =     10000: best a =  0.13333, tau* = 0.4466671112, gap to V+ = 4.445e-07, k*gap = 0.0044
+      k =    100000: best a =  0.13333, tau* = 0.4466667112, gap to V+ = 4.450e-08, k*gap = 0.0045
+      k =   1000000: best a =  0.13333, tau* = 0.4466666713, gap to V+ = 4.646e-09, k*gap = 0.0046
+   multi-start minimiser over eta in R^2: value 0.4466666672 (gap 5.71e-10) at eta = [ 1.33000000e-01 -4.33906818e+06]
+   -> inf_eta tau*(eta) = V+ but it is not attained: at tau = V+ no eta has Psi <= 0; the statement 'V+ = inf{tau : exists eta, Psi <= 0}' is an infimum, not a minimum, and a dual optimiser sees |eta| -> infinity
+[2.5 at a tangency] the disc instance above, region enlarged by kappa in l_inf:
+      kappa = 1e-02: V+(R + kappa B) - V+ = 1.460e-02   ratio to kappa =      1.5   ratio to sqrt(kappa) = 0.146   |eta|_1 at the optimum = 0.8
+      kappa = 1e-03: V+(R + kappa B) - V+ = 4.348e-03   ratio to kappa =      4.3   ratio to sqrt(kappa) = 0.137   |eta|_1 at the optimum = 2.2
+      kappa = 1e-04: V+(R + kappa B) - V+ = 1.347e-03   ratio to kappa =     13.5   ratio to sqrt(kappa) = 0.135   |eta|_1 at the optimum = 6.8
+      kappa = 1e-05: V+(R + kappa B) - V+ = 4.230e-04   ratio to kappa =     42.3   ratio to sqrt(kappa) = 0.134   |eta|_1 at the optimum = 21.2
+
+real	4m1.076s
+user	4m1.498s
+sys	0m0.248s

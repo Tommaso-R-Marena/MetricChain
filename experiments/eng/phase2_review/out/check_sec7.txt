@@ -1,0 +1,17 @@
+[7.1] interval with (l-, u+) contains the interval with (l, u): violations = 0/300
+[7.2] Psi <= sum_i max(lam_i b_i-, lam_i b_i+) + G+ E_q s_+ : max of (lhs - rhs) = -1.64e-02 (must be <= 0)
+[7.3] ratio rule: E_pi psi <= E_pi'[beta U s_+ - (L/beta) s_-]: max of (lhs - rhs) = -6.23e-05 (must be <= 0)
+[7.3] TV rule:    E_pi psi <= E_pi' psi + eps_TV (sup psi - inf psi): max of (lhs - rhs) = -8.67e-19 (must be <= 0)
+[7.3] tau-dependent TV shift: largest INCREASE of z_tau(y) between neighbouring thresholds (grid step 0.005) = 0.0036
+      example (N, eps_TV, L, U) = (2, 0.223, [0.0, 0.805], [0.115, 3.857])
+      -> with the shift eps_TV*(sup psi_tau - inf psi_tau) evaluated at each tau the test function is NOT monotone in tau;
+         the proof of Theorem 5.1 then does not go through.  A constant shift (a bound on the range over the whole
+         bracket of thresholds) restores it.
+[7.3] sampler off by a factor beta = 2 on the rare state, n =   200: failure rate without correction = 0.0000, with (L/beta, beta U) = 0.0000   (delta = 0.05)
+[7.3] sampler off by a factor beta = 2 on the rare state, n =  1000: failure rate without correction = 0.8642, with (L/beta, beta U) = 0.0000   (delta = 0.05)
+[7.3] sampler off by a factor beta = 2 on the rare state, n =  5000: failure rate without correction = 1.0000, with (L/beta, beta U) = 0.0000   (delta = 0.05)
+[7.4] interval from perturbed observables, region enlarged by e_phi, widened by e_f, contains the true one: violations = 0/300
+
+real	0m53.873s
+user	0m54.372s
+sys	0m0.248s

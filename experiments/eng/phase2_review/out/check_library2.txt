@@ -1,0 +1,15 @@
+[lib2] clean sample: status = 'certified', value = 0.224701
+   NaN in one validation target value    : status = 'certified', value = 1.0   (declared f_hi = 1.0)
+   NaN in one validation observable      : status = 'certified', value = 1.0   (declared f_hi = 1.0)
+   NaN in one validation U               : status = 'certified', value = 1.0   (declared f_hi = 1.0)
+[lib2] sequential_upper on two three-state sites, target 1{x_1 + x_2 >= 3} (coordinatewise monotone): library 0.671526, exact sup over the class 0.632638  -> the bound is sound but NOT exact here
+[lib2] additive_interval (Corollary 9.3) vs brute-force programme, sites with 2-3 states, one observable: max abs diff = 5.92e-13
+[lib2] ellipsoid regions (m = 2, 40 states, 25 instances): library end minus the best value found by an independent multi-start minimisation: at most 9.47e-08; cases where the library found a better optimum: 0
+[lib2] model-free (l = 0), disc region, 15 instances: library end minus the best independent dual value: at most 2.54e-01; ends inside an inner primal bracket (unsound): 0; tau_grad free of NaN: False
+[lib2] s3_interval,   2000 draws from 8 states:    0.4 s;  one end after lump(): 0.006 s  (value 0.382409)
+[lib2] s3_interval,   5000 draws from 8 states:    2.3 s;  one end after lump(): 0.006 s  (value 0.379850)
+[lib2] s3_interval,  20000 draws from 8 states:   44.8 s;  one end after lump(): 0.021 s  (value 0.380526)
+
+real	3m39.689s
+user	3m51.219s
+sys	0m0.192s

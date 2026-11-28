@@ -1,0 +1,82 @@
+[5.1 A] two states, f = x, m = 0, L = 1, U = Gamma, pi(1) = a;  V+ = Gamma a / (1 + (Gamma-1) a)
+        tau_min just below V+, B = sup psi at tau_min, one bet lambda = 0.999 / B, n with (1-a)^n just below delta
+   Gamma      a    delta      n   (1-a)^n   failure rate (s.e.)     with tau_min = 0, bets 0.5/B: failure rate
+         10  0.0500   0.05      60   0.0461    0.0459 (0.0003)                    0.0000 (0.0000)
+        100  0.0200   0.05     150   0.0483    0.0487 (0.0003)                    0.0000 (0.0000)
+       1000  0.0020   0.05    1498   0.0498    0.0493 (0.0003)                    0.0000 (0.0000)
+         10  0.2000   0.20       9   0.1342    0.1349 (0.0005)                    0.0000 (0.0000)
+    1000000  0.0001   0.01   46096   0.0100    0.0098 (0.0002)                    0.0000 (0.0000)
+          4  0.3000   0.30       5   0.1681    0.1670 (0.0006)                    0.0000 (0.0000)
+   -> the failure rate reaches (1-a)^n, i.e. delta up to the rounding of n: Theorem 5.1 cannot be improved;
+      no configuration exceeds delta.
+[5.1 B] rare state with a huge envelope: pi = (0.5, 0.499, 0.001), U = (1, 1, 1000), L = 1, f = (0, .5, 1)
+   V+ = 0.625063
+   tau_min      bets (x 1/B)                 n     failure rate (s.e.)   delta = 0.05
+    0.00000   (0.999,)                         50    0.0000 (0.0000)
+    0.00000   (0.999,)                       1000    0.0000 (0.0000)
+    0.00000   (0.999,)                       3000    0.0000 (0.0000)
+    0.00000   (0.999,)                       6000    0.0000 (0.0000)
+    0.00000   (0.999,)                      20000    0.0048 (0.0002)
+    0.00000   (0.5,)                           50    0.0000 (0.0000)
+    0.00000   (0.5,)                         1000    0.0000 (0.0000)
+    0.00000   (0.5,)                         3000    0.0000 (0.0000)
+    0.00000   (0.5,)                         6000    0.0000 (0.0000)
+    0.00000   (0.5,)                        20000    0.0000 (0.0000)
+    0.00000   (0.001, 0.01, 0.1, 0.5, 0.999)     50    0.0000 (0.0000)
+    0.00000   (0.001, 0.01, 0.1, 0.5, 0.999)   1000    0.0000 (0.0000)
+    0.00000   (0.001, 0.01, 0.1, 0.5, 0.999)   3000    0.0000 (0.0000)
+    0.00000   (0.001, 0.01, 0.1, 0.5, 0.999)   6000    0.0000 (0.0000)
+    0.00000   (0.001, 0.01, 0.1, 0.5, 0.999)  20000    0.0003 (0.0000)
+    0.62506   (0.999,)                         50    0.0000 (0.0000)
+    0.62506   (0.999,)                       1000    0.0000 (0.0000)
+    0.62506   (0.999,)                       3000    0.0264 (0.0004)
+    0.62506   (0.999,)                       6000    0.0025 (0.0001)
+    0.62506   (0.999,)                      20000    0.0000 (0.0000)
+    0.62506   (0.5,)                           50    0.0000 (0.0000)
+    0.62506   (0.5,)                         1000    0.0000 (0.0000)
+    0.62506   (0.5,)                         3000    0.0000 (0.0000)
+    0.62506   (0.5,)                         6000    0.0013 (0.0001)
+    0.62506   (0.5,)                        20000    0.0103 (0.0002)
+    0.62506   (0.001, 0.01, 0.1, 0.5, 0.999)     50    0.0000 (0.0000)
+    0.62506   (0.001, 0.01, 0.1, 0.5, 0.999)   1000    0.0000 (0.0000)
+    0.62506   (0.001, 0.01, 0.1, 0.5, 0.999)   3000    0.0000 (0.0000)
+    0.62506   (0.001, 0.01, 0.1, 0.5, 0.999)   6000    0.0023 (0.0001)
+    0.62506   (0.001, 0.01, 0.1, 0.5, 0.999)  20000    0.0007 (0.0001)
+[5.1 E] W_n(tau) on a grid of 4001 thresholds, 300 random configurations: most negative increment of log W_n = 0.00e+00 (monotone non-decreasing)
+[5.2] first-order cost: uniform envelope L = 1, U = Gamma, m = 0, 8 states, f in [0,1], test at tau = V+ + alpha
+   Gamma  alpha    mu        E psi^2    (Gamma+1)S^2   lambda*  capped   n_pred = 2 E psi^2 ln(1/d)/mu^2   n_50 (sim)   ratio   2(G+1)S^2 ln/alpha^2
+       3   0.05   -0.08333    0.16925     1.5045     0.4923  yes              146                       165     1.13             3606
+       3   0.01   -0.01986    0.18701     1.3146     0.1062  no              2841                      2960     1.04            78764
+      30   0.05   -0.24058    0.15498    13.4627     1.5524  yes               16                       360    22.44            32265
+      30   0.01   -0.07253    0.40245    11.8780     0.1802  yes              458                      1300     2.84           711668
+     300   0.05   -0.32905    0.15643   146.8467     2.1034  yes                9                      2200    254.14           351931
+     300   0.01   -0.28905    0.13171   130.5091     2.1946  yes                9                      2520    266.80          7819406
+   asserted in every row: |mu| >= alpha and E psi^2 <= (Gamma+1) S^2 (normalisation L = 1, E_pi L = 1).
+   -> the first-order formula is accurate when the bet is not capped (ratio ~ 1) and far too optimistic when it is
+      (ratios 3 - 270): there the cost is the cap term ~ B ln(1/delta)/|mu|.  The closed form 2(Gamma+1)S^2 ln/alpha^2
+      is an upper estimate (both of its ingredients are bounds), not an approximation.
+[5.1 D1] B estimated from the certification sample on the heavy-tail instance of part B (tau_min = 0, bet 0.5/B_hat)
+   n =    20: failure rate = 0.9808   (delta = 0.05)
+   n =    50: failure rate = 0.9486   (delta = 0.05)
+   n =   200: failure rate = 0.8157   (delta = 0.05)
+   n =  1000: failure rate = 0.3655   (delta = 0.05)
+[5.1 C] split-sample procedure, random 6-state instances, m = 1, box region of half-width 0.03 around the
+        mean of a member of the class; eta from n_tr training draws; B = exact sup of psi at tau_min = min f;
+        bets = (0.01, 0.03, 0.1, 0.3, 0.9)/B; delta = 0.05.  'same-sample' = eta fitted on the certification draws.
+   Gamma  n_tr  n_cert   V+       failure(split)   median excess    failure(same-sample eta)  failure(B from sample)
+       3    20      20  0.4827    0.0000            0.3985         0.0000                   0.0003
+       3   200     100  0.4827    0.0003            0.0974         0.0003                   0.0003
+       3  1000    1000  0.4827    0.0003            0.0295         0.0000                   0.0003
+       3    20      20  0.4993    0.0000            0.3909         0.0000                   0.0000
+       3   200     100  0.4993    0.0000            0.1182         0.0000                   0.0000
+       3  1000    1000  0.4993    0.0000            0.0360         0.0000                   0.0000
+      30    20      20  0.9244    0.0000               inf         0.0000                   0.0000
+      30   200     100  0.9244    0.0000            0.0330         0.0000                   0.0000
+      30  1000    1000  0.9244    0.0000            0.0119         0.0000                   0.0000
+      30    20      20  0.7880    0.0000               inf         0.0000                   0.0000
+      30   200     100  0.7880    0.0000            0.0806         0.0000                   0.0000
+      30  1000    1000  0.7880    0.0000            0.0265         0.0000                   0.0000
+
+real	7m30.406s
+user	7m41.243s
+sys	0m0.621s

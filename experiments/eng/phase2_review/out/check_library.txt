@@ -1,0 +1,43 @@
+[lib] tau_root vs independent exact root (2000 random problems incl. l=0, l=u, ties, zero weights): max abs diff = 4.44e-15
+[lib] interval() vs independent primal LP, 400 instances (box regions; l=0, l=u, displaced regions): unsound = 0, emptiness verdict differs = 0, max abs diff = 2.61e-15
+[lib] model-free (l = 0), phi in [0,1], R = [2,3] (no ensemble compatible): find_inconsistency -> 0 (never > 0);  interval() -> empty = True (hi = -inf, lo = inf)
+      certify_inconsistent on 4000 draws: status = 'trivial'  (the declared range [0,1] of phi alone excludes R: a deterministic certificate exists and is not used)
+[lib] rigorous=True, region box            : plain certified 0.233081944951, interval-arithmetic certified 0.233081944952
+[lib] rigorous=True, region ellipsoid      : plain certified 0.244932078782, interval-arithmetic certified 0.244932078782
+[lib] rigorous=True, region ellipsoid + box: plain certified 0.193654887965, interval-arithmetic certified 0.193654887965
+[lib] certify_upper_gap, 8 states, m = 1, n = 500+500, delta = 0.05: V+ = 0.3824, miss rate = 0.0000, median bound = 0.4267
+   Declared(iid=False): status = 'certified', value = 0.430953   (plain declaration: 0.430953)
+   Declared(eps_tv=0.2): status = 'certified', value = 0.430953   (plain declaration: 0.430953)
+   Declared(beta=3): status = 'certified', value = 0.430953   (plain declaration: 0.430953)
+   Declared(f_err=0.1, phi_err=0.1): status = 'certified', value = 0.430953   (plain declaration: 0.430953)
+   Declared(declared f range [-0.2, 0.2] (violated by the draws)): status = 'trivial', value = 0.200000   (plain declaration: 0.430953)
+   G = 0: status = 'certified', value = 1.0; warnings emitted: ['RuntimeWarning: divide by zero encountered in scalar divide', 'RuntimeWarning: invalid value encountered in multiply']
+[lib] s3_interval (net), n = 5000, Gamma = 2: true width 0.2829, median S3 width 0.6916, kappa = 0.1669, misses = 0/40
+[lib] s3_interval (rademacher), n = 5000, Gamma = 2: true width 0.2829, median S3 width 0.6482, kappa = 0.1455, misses = 0/40
+   region displaced by 1.5 (no ensemble compatible): status = 'inconsistent'
+   Z_l = 0: status = 'abstain', kappa = inf
+   G = 0 (no draws possible): raises ValueError: cannot reshape array of size 0 into shape (0,newaxis)
+[lib] certify_inconsistent, 6 states, Gamma = 4, reachable range of E phi = [-0.1310, 0.4634], n = 400+400, delta = 0.05
+   region tangent to the reachable set from outside (consistent) : fires in 0.0007
+   region displaced by 0.02 (inconsistent)                       : fires in 0.0047
+   region displaced by 0.2 (inconsistent)                        : fires in 1.0000
+[lib] certify_upper, m = 0, two states f in {v0, 1}, declared range [v0, 1], U_max = Gamma (exact), delta = 0.05
+   Gamma     a      v0      n     V+        miss rate   certified rate
+        10  0.05000  0.00      60  0.34483   0.0000      0.000
+        10  0.05000  0.00     600  0.34483   0.0003      1.000
+      1000  0.00200  0.00    1500  0.66711   0.0000      0.000
+      1000  0.00200  0.00   15000  0.66711   0.0000      1.000
+       100  0.00050  0.90   12800  0.90476   0.0000      1.000
+   sampler different from the nominal reference (the up-weighted state under-sampled):
+   case                                     miss rate   certified rate
+   TV 0.02, declared eps_tv = 0 (wrong)     0.8430      1.000
+   TV 0.02, declared eps_tv = 0.02          0.0000      1.000
+   ratio 1/1.5, declared beta = 1 (wrong)   1.0000      1.000
+   ratio 1/1.5, declared beta = 1.5         0.0000      1.000
+[lib] certified_interval, 6 states, m = 1, n = 1000 (500 + 500), delta = 0.1: miss rate of either end
+   Gamma =    3: true interval [-0.1698, 0.0442], miss rate = 0.0000, median certified width = 0.3281
+   Gamma =   30: true interval [-0.6674, 0.4346], miss rate = 0.0000, median certified width = 1.8910
+
+real	15m4.893s
+user	15m3.542s
+sys	0m1.309s

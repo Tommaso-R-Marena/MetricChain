@@ -1,0 +1,23 @@
+[dimension] 300 states, uniform envelope Gamma = 3.0, box of half-width 0.01 around the means of the reference itself
+            (so that the observations bind), split sample (n/2 + n/2), delta = 0.05; 20 repetitions per cell;
+            f in [-1, 1], phi in [-1, 1]^m
+   m      n     V+       median certified bound   median excess   median |eta_hat|_1   |eta*|_1 (exact dual)   misses
+    1    1000   0.2659         0.3568               0.0909              0.09                0.00             0/20
+    1   10000   0.2659         0.2909               0.0250              0.00                0.00             0/20
+    1  100000   0.2659         0.2731               0.0072              0.00                0.00             0/20
+    5    1000   0.2605         0.3525               0.0921              0.48                0.24             0/20
+    5   10000   0.2605         0.2851               0.0246              0.27                0.24             0/20
+    5  100000   0.2605         0.2673               0.0068              0.24                0.24             0/20
+   20    1000   0.2499         0.3698               0.1198              2.00                1.05             0/20
+   20   10000   0.2499         0.2788               0.0289              1.18                1.05             0/20
+   20  100000   0.2499         0.2593               0.0093              1.12                1.05             0/20
+   60    1000   0.2283         0.4833               0.2550              5.73                2.51             0/20
+   60   10000   0.2283         0.2637               0.0354              2.71                2.51             0/20
+   60  100000   0.2283         0.2394               0.0111              2.56                2.51             0/20
+   -> validity never fails, as Theorem 5.1 says; the EXCESS at fixed n grows with m (the fitted multipliers and with
+      them the scores and B grow, and the training half over-fits): the dimension is not removed from the sample size
+      needed for a given accuracy, only from the validity statement.
+
+real	0m30.970s
+user	0m30.851s
+sys	0m0.692s

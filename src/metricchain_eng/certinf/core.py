@@ -205,7 +205,10 @@ def tau_root(P: Problem, eta) -> float:
 
 
 def tau_grad(P: Problem, eta, tau: float | None = None) -> np.ndarray:
-    """A subgradient of eta -> tau_root(eta): grad h_R(eta) minus the measured averages of the extremal ensemble."""
+    """A subgradient of eta -> tau_root(eta): grad h_R(eta) minus the measured averages of an extremal ensemble
+    (weights u on {s > 0}, l on {s < 0}).  When those weights carry no mass - the case l = 0, where at the root no
+    point has s > 0 - the extremal ensembles sit on the ties {s = 0}, which are then given the upper weight
+    (REVIEW_A, finding K4: this case used to return NaN)."""
     eta = _vec(eta)
     tau = tau_root(P, eta) if tau is None else tau
     s = P.s0(eta) - tau
@@ -213,6 +216,13 @@ def tau_grad(P: Problem, eta, tau: float | None = None) -> np.ndarray:
     tot, mean = float(om.sum()), om @ P.phi
     if P.b is not None:
         tot, mean = tot + P.b[0], mean + P.b[1:-1]
+    if not tot > 0.0:
+        with np.errstate(invalid="ignore"):
+            tie = s >= -1e-9 * max(1.0, abs(tau) if math.isfinite(tau) else 1.0)
+        om = P.wt * P.Gw * tie
+        tot, mean = float(om.sum()), om @ P.phi
+        if not tot > 0.0:
+            return np.full(P.m, math.nan)
     return P.region.grad(eta) - mean / tot
 
 
@@ -245,13 +255,56 @@ def lp_dual_box(P: Problem) -> tuple[float, np.ndarray]:
     return tau_root(P, eta), eta
 
 
+def _model_free(P: Problem) -> bool:
+    """l = 0 at every point and no exact part: the class of all ensembles on the points with u > 0."""
+    return not np.any(P.wt * P.Lw > 0) and (P.b is None or not P.b[0] > 0)
+
+
+def _cutting_planes(fun, sub, x0, f0: float, iters: int = 300, tol: float = 1e-11) -> np.ndarray:
+    """Kelley's cutting planes for a convex function, started at x0 with value f0, inside a cube around the
+    incumbent that doubles while the incumbent sits on its boundary.  Every cut is a global minorant, so the cuts
+    are kept when the cube moves.  Returns the best point found; callers evaluate the function there themselves,
+    so nothing depends on this routine having converged."""
+    m = len(x0)
+    best_x, best_f = np.asarray(x0, dtype=float).copy(), float(f0)
+    centre, rad = best_x.copy(), 0.25 * max(1.0, float(np.abs(best_x).max()))
+    cost = np.concatenate([np.zeros(m), [1.0]])
+    rows, rhs = [], []
+    x = best_x.copy()
+    for _ in range(iters):
+        fx, g = fun(x), np.asarray(sub(x), dtype=float)
+        if not (abs(fx) < 1e200 and np.all(np.isfinite(g))):
+            break
+        if fx < best_f:
+            best_x, best_f = x.copy(), fx
+        rows.append(np.concatenate([g, [-1.0]]))               # fx + g . (y - x) <= t
+        rhs.append(float(g @ x) - fx)
+        while True:
+            res = linprog(cost, A_ub=np.array(rows), b_ub=np.array(rhs),
+                          bounds=[(c - rad, c + rad) for c in centre] + [(None, None)], method="highs")
+            if res.status != 0:
+                return best_x
+            if best_f - res.fun > tol * max(1.0, abs(best_f)):
+                break                                          # the model promises a decrease: evaluate there
+            if float(np.abs(best_x - centre).max()) <= 0.9 * rad or rad > 1e8:
+                return best_x                                  # no decrease left in a cube around the incumbent
+            centre, rad = best_x.copy(), 2.0 * rad
+        x = res.x[:m]
+    return best_x
+
+
 def solve_upper(P: Problem, method: str = "auto") -> tuple[float, np.ndarray]:
     """A pair (tau, eta) with Psi(tau, eta) <= 0 and tau as small as the optimiser finds it.  Whatever the optimiser
-    does, tau = tau_root(P, eta), so the pair is a certificate of Theorem 4.1(a) for the points of P."""
+    does, tau = tau_root(P, eta), so the pair is a certificate of Theorem 4.1(a) for the points of P.
+
+    Methods: 'lp' (box regions; exact up to the solver); 'descent' (quasi-Newton and simplex search on tau_root);
+    'polish' (the descent, then cutting planes).  'auto' takes the programme for a box region with at most 20 000
+    points and otherwise the descent - followed by the cutting planes when l = 0, where tau_root is a maximum of
+    linear functions plus h_R and the descent alone stalls (REVIEW_A, finding K4)."""
     if P.m == 0:
         return tau_root(P, np.zeros(0)), np.zeros(0)
-    if method == "auto":
-        method = "lp" if isinstance(P.region, Box) and P.f.size <= 20_000 else "descent"      # the programme is exact but slow beyond that
+    if method == "auto":                                       # the programme is exact but slow beyond 20 000 points
+        method = "lp" if isinstance(P.region, Box) and P.f.size <= 20_000 else "polish" if _model_free(P) else "descent"
     if method == "lp":
         return lp_dual_box(P)
     best_t, best_e = tau_root(P, np.zeros(P.m)), np.zeros(P.m)
@@ -267,6 +320,11 @@ def solve_upper(P: Problem, method: str = "auto") -> tuple[float, np.ndarray]:
         t = tau_root(P, r.x)
         if t < best_t:
             best_t, best_e = t, np.asarray(r.x, dtype=float)
+    if method == "polish" and math.isfinite(best_t):
+        x = _cutting_planes(fun, lambda e: tau_grad(P, e), best_e, best_t)
+        t = tau_root(P, x)
+        if t < best_t:
+            best_t, best_e = t, x
     return best_t, best_e
 
 
@@ -310,11 +368,16 @@ def lp_primal_box(l, u, f, phi, box: Box):
 # Inconsistency of data and class (Theorem 4.1(e))
 # ---------------------------------------------------------------------------------------------
 def phi_value(P: Problem, eta) -> float:
-    """Phi(eta) = sum [ l t_+ - u t_- ], t = eta . phi - h_R(eta).  A positive value certifies that no ensemble of
-    the class has its measured averages in the region."""
+    """The inconsistency value of Theorem 4.1(e) at eta, with t = eta . phi - h_R(eta): a positive value certifies
+    that no ensemble of the class on the points of P has its measured averages in the region.  If the lower weights
+    have positive total it is Phi(eta) = sum [ l t_+ - u t_- ], the least sum of w t over the box; if l = 0
+    everywhere (where Phi <= 0 identically: REVIEW_A, finding C2) it is the least t over the points with u > 0."""
     eta = _vec(eta)
     h = P.region.h(eta)
     t = P.phi @ eta - h
+    if _model_free(P):
+        on = P.wt * P.Gw > 0
+        return float(t[on].min()) if np.any(on) else -math.inf
     val = float((P.wt * (P.Lw * t - P.Gw * np.maximum(-t, 0.0))).sum())
     if P.b is not None:
         val += float(eta @ P.b[1:-1]) - h * P.b[0]
@@ -324,7 +387,7 @@ def phi_value(P: Problem, eta) -> float:
 def find_inconsistency(P: Problem, seed: int = 0) -> tuple[float, np.ndarray]:
     """The largest Phi(eta) found over unit vectors eta, and the vector.  Phi is concave and positively homogeneous."""
     if P.m == 0:
-        return -math.inf, np.zeros(0)
+        return 0.0, np.zeros(0)                                # nothing is measured: t = 0, nothing to contradict
 
     def fun(e):
         nrm = float(np.linalg.norm(e))

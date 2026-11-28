@@ -3,39 +3,57 @@
 *Computational Research Division, branch `research/phase2-certified-inference`, Phase II (research
 owner's directive D-11).  Written 2026-11-28.  Status of every statement: **[P]** paper proof given
 here; **[N]** checked numerically by the prototype (`src/metricchain_eng/certinf/`, tests
-`tests/eng/test_certinf.py`); nothing here is machine-checked.  An independent adversarial review by a
-subagent is recorded in `REVIEW_A.md`; until it is, read every proof as unrefereed.*
+`tests/eng/test_certinf.py`, `tests/eng/test_certinf_review.py`); nothing here is machine-checked.
+**Second version.**  The first version was reviewed adversarially by a subagent (`REVIEW_A.md`: three
+critical and eight major findings).  Every finding is answered here; §13 lists what changed.  Two claims
+of the first version were wrong and are withdrawn: that the cost in the envelope ratio is a property of
+the class (it is a property of the sampling law — Theorem 5.4), and that the sequential bound is exact
+for monotone targets on sites with more than two states.  The corrected statements and Theorem 5.4 have
+not been refereed again.*
 
 ## 0. Verdict
 
-1. **S3 is correct**, with the constant it states, once six assumptions it leaves out are added (§2).
+1. **S3 is correct**, with the constant it states, once five assumptions it leaves out are added (§2).
    Its proof is a covering-net argument and is routine.
-2. **Its sample bound is not the right one.**  The dimension enters as `log d`, not `d·log(1/ε)`
-   (Theorem 3.1).
+2. **Its sample bound can be improved when there are many observables or `ε` is small.**  The dimension
+   enters as `log d` instead of `d·log(1/ε)` (Theorem 3.1).  For `d ≤ 6` and large `ε` S3's own bound is
+   the smaller one, and both are loose by a factor 4 to 7 against simulation.
 3. **Compressing the whole moment body is the wrong tool for the stated purpose.**  A sound outer
    interval needs one expectation of one explicit function to be certified non-positive (Theorems 4.1,
-   5.1).  That removes the dimension from the sample bound altogether, adapts to the variance, needs
-   none of `b`, `G`, `Z_l`, needs no union bound over thresholds, and handles `G = 0`.
-4. **No method can avoid a cost proportional to the envelope ratio `Γ = sup u/l`** (Theorem 6.1), in
-   either access model.  For an energy envelope of half-width `ρ` this is `e^{2ρ}`: with an extensive
-   residual, the rectangular class of S3 is exponentially expensive and its identified sets are
-   nearly vacuous.  This is the main obstacle, and it is a property of the class, not of the method.
+   5.1).  The validity of that certificate does not depend on the number of observables or on the
+   sample size; it adapts to the variance, needs none of `b`, `G`, `Z_l`, needs no union bound over
+   thresholds, and handles `G = 0`.  Its *width* does depend on the number of observables, through the
+   fitted multipliers (the referee measured an excess of 0.09 to 0.26 at a thousand draws as `m` goes
+   from 1 to 60).
+4. **The cost in the envelope ratio `Γ = sup u/l` belongs to the sampling law, not to the problem.**
+   With draws from the reference, or from S3's gap distribution, no procedure avoids a number of draws
+   proportional to `Γ` in the worst case over instances (Theorem 6.1).  With draws from the extremal
+   ensemble of the class — a Boltzmann weight with a modified energy — the same certificate costs what
+   a bounded average costs: no `Γ`, and no bound on `u` to declare (Theorem 5.4, pointed out by the
+   referee).  The first version of this note said the cost was "a property of the class, not of the
+   method"; that was wrong.  What *is* a property of the class, whatever is sampled: for an energy
+   envelope of half-width `ρ`, `Γ = e^{2ρ}`, and with an extensive residual the identified sets of the
+   rectangular class of S3 are nearly vacuous (§9.4).
 5. **The class that repairs this is in the archive**: the theory division's bounded-influence
    (Lipschitz) energies, for which it already has the linear structure and a transport duality with
    gains (its Theorems 11.12 and 11.105; Theorem 9.1 here is that duality applied to a tilted score).
    What is added here: for product references the class is closed under marginalisation; for additive
    observables the identified set — with observations — is computed exactly at any system size
    without sampling (Proposition 9.2, Corollary 9.3); for functions of a few additive statistics a
-   sound outer interval is computed by dynamic programming (Proposition 9.6; within a factor 1.4 of
-   exact where it could be compared).  The rectangular hull of the same class gives an interval that
-   tends to the trivial one exponentially fast (§9.4).
+   sound outer interval is computed by dynamic programming (Proposition 9.6; 1.13 to 1.40 times the
+   exact width in the twenty cases of one experiment, up to 1.84 and 3.97 in the referee's — these are
+   cases, not a bound on the looseness); for references that are not products the computation for
+   additive observables gives a sound outer interval with enlarged constants (Proposition 9.7, on an
+   inequality of the theory division).  Every rectangular class containing the same class gives an
+   interval within `e^{−un}` of the trivial one (§9.4).
 6. **Novelty is low, and much of the exact theory was already in the archive.**  The exact dual of §4
    for exact data is the science division's item 89(d); its form with regions is the ensemble
    division's E17.2 for the model-free case; S3's sampler is the theory division's Proposition 11.113
    (for another question).  Outside the archive the ingredients are classical (§10).  What was found
    neither in the archive nor in a bounded search: the sampled certificate for an interval with data
-   (Theorem 5.1), the lower bound for it (Theorem 6.1), and the closure statements of §9.  They are
-   short, and a specialist may know them.
+   (Theorem 5.1), the lower bound for reference and gap draws (Theorem 6.1), and the closure statements
+   of §9.  Theorem 5.4 is importance sampling from a least-favourable member of the class; no search
+   was made for it.  All are short, and a specialist may know them.
 
 ## 1. Setting, and the proposal under review
 
@@ -43,7 +61,8 @@ subagent is recorded in `REVIEW_A.md`; until it is, read every proof as unrefere
 `Σ_x u(x) > 0`.  The **box class** is `W(l,u) = {w : l ≤ w ≤ u, Σ w > 0}`, and `P(l,u) = {w/Σw : w ∈
 W(l,u)}`.  It is invariant under a common rescaling of `l` and `u`.  With energies, `l = e^{−E_max}`,
 `u = e^{−E_min}`; with a reference model, `l = w₀ e^{−ρ}`, `u = w₀ e^{ρ}`.  Write `g = u − l`,
-`G = Σ g`, `Z_l = Σ l`, and `Γ = sup_x u(x)/l(x) ∈ [1, ∞]`.
+`G = Σ g`, `Z_l = Σ l`, and `Γ = sup_x u(x)/l(x) ∈ [1, ∞]` (with `0/0 = 1`).  `P(l,u)` is convex and
+compact for every envelope; for `l ≡ 0` it is the set of all probabilities on `supp u`.
 
 `φ : X → ℝ^m` are the measured observables, `f : X → ℝ` the target, `v = (1, φ, f) ∈ ℝ^d`, `d = m + 2`.
 The **observation region** `R ⊂ ℝ^m` is closed and convex, with support function
@@ -53,7 +72,8 @@ The **identified set** of the target is
 
     I = { E_p f : p ∈ P(l,u), E_p φ ∈ R },      V⁺ = sup I,   V⁻ = inf I.
 
-It is an interval (the image of a convex set under a linear-fractional map), possibly empty.
+It is a compact interval (the image of a compact convex set of ensembles under a linear map), possibly
+empty.
 
 **The proposal ("S3"), as given to this division.**  "Suppose rigorously justified energy envelopes give
 Boltzmann-weight bounds l(x) ≤ w(x) ≤ u(x).  For bounded measured observables φ(x) and bounded target
@@ -110,19 +130,27 @@ by (H1); and `M̂_0 ≥ b_0 = Z_l` for every point of `K̂`.  ∎
 | H1 | all observables scaled to `[−1, 1]` | the bound is `εG·sup‖v‖_∞`; an unscaled observable silently breaks `κ` |
 | H2 | `b`, `G` (hence `Z_l`) exact | these are sums over all of `X` — partition-function-type quantities, in general as hard as the problem itself; §7 |
 | H3 | exact independent draws from `q` | with a Markov chain sampler the Hoeffding step fails; §7 |
-| H4 | `G > 0` | `q` is undefined; §7.4 |
+| H4 | `G > 0` | `q` is undefined; §7.5 |
 | H5 | `Z_l > 0` | `κ = ∞`: no statement in the model-free case `l ≡ 0` |
-| H6 | a regularity condition for the *width* | soundness holds, but the excess width is not `O(κ)` in general (next proposition) |
+| — | (not an assumption: the *width*) | soundness holds under H1–H5, but the excess width is not `O(κ)` in general: with `φ = ε'·f` and exact data the enlargement of the region alone costs `κ/ε'` |
+
+(The first version counted the last row as a sixth assumption; it is not one.)
 
 **Proposition 2.5 (conditioning of the enlarged problem) [P].**  For every `τ, η` with `Ψ(τ, η) ≤ 0` in
-the notation of §4, `sup I(R ⊕ κB_∞) ≤ τ + κ‖η‖₁`.  Hence the enlargement of the region costs at most
-`κ·inf‖η‖₁` over dual certificates, which is finite but unbounded over instances: it is the size of the
-Lagrange multipliers of the observation constraints.
+the notation of §4, `sup I(R ⊕ κB_∞) ≤ τ + κ‖η‖₁`.  Hence, when an optimal multiplier `η⁺` exists
+(`Ψ(V⁺, η⁺) ≤ 0`), the enlargement of the region costs at most `κ‖η⁺‖₁`: the size of the Lagrange
+multipliers of the observation constraints, unbounded over instances.
 
 *Proof.*  `h_{R⊕κB_∞}(η) = h_R(η) + κ‖η‖₁`, so the score of §4 for the enlarged region at `τ + κ‖η‖₁`
 equals the score for `R` at `τ`.  ∎
 
-So the total excess width of S3's interval over `I` is up to `2κ(1 + ‖η⁺‖₁ ∨ ‖η⁻‖₁)`, not `2κ`.
+*What this gives for S3, and what it does not* (corrected after the review, finding m2).  On the event
+of Theorem 2.2 a point of `K̂` whose normalised observables lie in `R ⊕ κB_∞` corresponds to a point of
+`K` with observables in `R ⊕ 2κB_∞` and a target within `κ`.  So each end of S3's interval exceeds the
+corresponding end of `I` by at most `2κ(1 + ‖η^±‖₁)`, and the excess width is at most
+`2κ(2 + ‖η⁺‖₁ + ‖η⁻‖₁)`, not `2κ` — when optimal multipliers exist.  They need not: for a region tangent
+to the reachable set the infimum of Theorem 4.1(b) is not attained and the enlargement costs of the
+order of `√κ` (the referee's example: `0.134·√κ` for `κ = 10⁻³ … 10⁻⁵`).
 
 ## 3. The concentration bound improved
 
@@ -131,7 +159,10 @@ So the total excess width of S3's interval over `I` is up to `2κ(1 + ‖η⁺�
 
     d_{H,∞}(K, K̂) ≤ G·[ 2·√(2 ln(2d)/L) + √(ln(2/δ)/(2L)) ].
 
-So `L ≥ ε⁻²·(2√(2 ln 2d) + √(ln(2/δ)/2))²` suffices, against `2ε⁻²[d ln(1+8/ε) + ln(2/δ)]` in S3.
+So `L ≥ ε⁻²·(2√(2 ln 2d) + √(ln(2/δ)/2))²` suffices, against `2ε⁻²[d ln(1+8/ε) + ln(2/δ)]` in S3.  Not
+uniformly better: at `δ = 0.05` S3's own bound asks for fewer draws when `d = 2` and `ε > 0.21`, `d = 3`
+and `ε > 0.35`, `d = 4` and `ε > 0.53`, `d = 6` and `ε > 0.99` (the referee's computation).  The smaller
+of the two may be used, each being a deterministic bound on the same quantile.
 
 *Proof.*  Let `F = {ψ_λ : ‖λ‖₁ ≤ 1}`, `D⁺ = sup_F (E_q ψ − P_L ψ)`, `D⁻ = sup_F (P_L ψ − E_q ψ)`.  Changing
 one `X_j` changes `D^±` by at most `1/L`; McDiarmid gives `D^± ≤ E D^± + √(ln(2/δ)/(2L))` with
@@ -163,26 +194,49 @@ For `τ ∈ ℝ` and `η ∈ ℝ^m` with `h_R(η) < ∞` define the **score** an
 **Theorem 4.1 (identified interval; consistency) [P].**
 (a) *Soundness, with no assumption.*  If `Ψ(τ, η) ≤ 0` for some `η`, then `E_p f ≤ τ` for every
 `p ∈ P(l,u)` with `E_p φ ∈ R`.
-(b) *Completeness.*  For every `τ`, `inf_η Ψ(τ, η) = max{M_f − τM_0 : M ∈ K, M_φ ∈ M_0·R}` (`−∞` if the
-set is empty).  Hence, if `I ≠ ∅` and `Z_l > 0`, `V⁺ = inf{τ : ∃η, Ψ(τ, η) ≤ 0}`.
-(c) *Extremal weights.*  At a pair `(τ, η)` with `Ψ = 0`, the weights `w = u` on `{s > 0}`, `w = l` on
-`{s < 0}` (anything in between on `{s = 0}`) attain it.
+(b) *Completeness, for every envelope.*  Put `T(η) := h_R(η) + max_{p∈P(l,u)} E_p[f − η·φ]`.  Then
+`Ψ(τ, η) ≤ 0` if and only if `τ ≥ T(η)`, and `inf_η T(η) = V⁺` (`−∞` if `I = ∅`).  So
+`V⁺ = inf{τ : ∃η, Ψ(τ, η) ≤ 0}` whenever `I ≠ ∅`, also for `l ≡ 0`.  The infimum over `η` need not be
+attained (a region tangent to the reachable set).
+(c) *Extremal weights.*  Let `τ = T(η)` and `p = w/Σw ∈ P(l,u)`.  Then `E_pφ ∈ R` and `E_p f = τ` if and
+only if `w = u` on `{s > 0}`, `w = l` on `{s < 0}`, `E_pφ ∈ R` and `η·E_pφ = h_R(η)`.  Such a `p` exists if
+and only if `τ = V⁺`, i.e. `η` is an optimal multiplier; the weights on `{s = 0}` are then fixed by the
+last two conditions, not free.
 (d) *Lower endpoint.*  Apply (a)–(c) to `−f`.
-(e) *Inconsistency.*  `I = ∅` if and only if there is `η` with
-`Φ(η) := Σ_x [ l(x)t₊(x) − u(x)t₋(x) ] > 0`, where `t = η·φ − h_R(η)`.
+(e) *Inconsistency.*  With `t = η·φ − h_R(η)`: `I = ∅` if and only if there is `η` with
+`min_{p∈P(l,u)} E_p t > 0`.  For `Z_l > 0` this is `Φ(η) := Σ_x [ l(x)t₊(x) − u(x)t₋(x) ] > 0`.  For
+`l ≡ 0`, where `Φ ≤ 0` identically, it is `t > 0` on `supp u`.
 (f) *Model-free limit.*  For `l ≡ 0`, `Ψ(τ,η) ≤ 0` reads `f − η·φ + h_R(η) ≤ τ` on `supp u`: the
 classical dual of the generalised moment problem.
 
 *Proof.*  (a) Let `p = w/Σw` be feasible.  Then `Σ w(f − τ) = Σ w s + Σw·(η·E_pφ − h_R(η)) ≤ Σ w s ≤
-Σ[u s₊ − l s₋] ≤ 0`.  (b) `Ψ(τ, η) = max_{M∈K} γ(M, η)` with `γ(M, η) = M_f − τM_0 − η·M_φ +
-h_R(η)M_0`, by Proposition 2.1.  `K` is compact and convex; `γ` is linear in `M`, and convex and lower
-semicontinuous in `η` on the convex cone `{h_R < ∞}` because `M_0 ≥ 0`.  Sion's minimax theorem gives
-`inf_η max_M γ = max_M inf_η γ`.  For `M_0 > 0`, `inf_η[−η·M_φ + h_R(η)M_0] = −M_0·sup_η[η·y − h_R(η)]`
-with `y = M_φ/M_0`, and the supremum is `0` if `y ∈ R` and `+∞` otherwise (`R` closed convex).  The
-last sentence follows from strict monotonicity in `τ`.  (c) is the case of equality in (a).  (e) "If" as
-in (a).  "Only if": the set `Y = {M_φ/M_0 : M ∈ K}` is compact and convex and disjoint from the closed
-convex `R`; a strictly separating `η` has `min_{M∈K}(η·M_φ − h_R(η)M_0) > 0`, which is `Φ(η) > 0` by
-Proposition 2.1.  (f) is immediate.  ∎
+Σ[u s₊ − l s₋] ≤ 0`.  (b) `Ψ(τ, η) = max_{l≤w≤u} Σ w s_{τ,η}`, so `Ψ(τ, η) ≤ 0` if and only if
+`E_p s_{τ,η} ≤ 0` for every `p ∈ P(l,u)`, i.e. `τ ≥ T(η)`; the maximum in `T` exists because `P(l,u)` is
+compact.  The function `(p, η) ↦ E_p f − η·E_pφ + h_R(η)` is linear in `p` on the compact convex set
+`P(l,u)`, and convex and lower semicontinuous in `η` on the convex cone `{h_R < ∞}`.  Sion's minimax
+theorem gives `inf_η T(η) = max_{p∈P} inf_η[E_p f − η·E_pφ + h_R(η)]`, and `inf_η[h_R(η) − η·y]` is `0` if
+`y ∈ R` and `−∞` otherwise (`R` closed and convex): the right-hand side is
+`max{E_p f : p ∈ P, E_pφ ∈ R}`.  No hypothesis on `Z_l` and no monotonicity in `τ` is used.  (The first
+version argued through the moment body and strict monotonicity in `τ`, which fails for `Z_l = 0`; this
+argument is the referee's repair.)  (c) If `p` is feasible with `E_p f = τ = T(η)`, then
+`0 = E_p(f − τ) = E_p s + (η·E_pφ − h_R(η)) ≤ E_p s ≤ 0`, so both inequalities are equalities:
+`η·E_pφ = h_R(η)`, and `Σ w s = 0 = Ψ(τ, η)` is the maximum over the box, which forces `w = u` on
+`{s > 0}` and `w = l` on `{s < 0}`.  The converse is the same computation read backwards.  If such a `p`
+exists, `V⁺ ≥ E_p f = T(η) ≥ V⁺`; conversely, if `T(η) = V⁺`, a maximiser of `E_p f` over the compact
+feasible set qualifies.  (e) The function `(p, η) ↦ η·E_pφ − h_R(η)` is linear in `p`, and concave and
+upper semicontinuous in `η`; by Sion's theorem `min_p sup_η = sup_η min_p`, and `sup_η[η·y − h_R(η)]` is
+`0` if `y ∈ R` and `+∞` otherwise.  So `I = ∅` if and only if `sup_η min_p E_p t = +∞`, which by positive
+homogeneity in `η` means `min_p E_p t > 0` for some `η`.  For `Z_l > 0` every `w` in the box has positive
+total and `min_w Σ w t = Φ(η)`; for `l ≡ 0`, `P(l,u)` is the set of probabilities on `supp u`.  (f) is
+immediate.  ∎
+
+*Counterexamples to the first version's (c) and (e), kept* (the referee's;
+`experiments/eng/phase2_review/check_thm41.py`).  For (e): `X = {0,1}`, `l ≡ 0`, `u ≡ 1`, `φ = (0,1)`,
+`R = [2,3]` — `I = ∅` although `Φ ≤ 0` everywhere.  For (c), which said that any weights on `{s = 0}`
+attain the bound: `l ≡ 1`, `u ≡ 3` on three states, `f = (0, ½, 1)`, `φ = (0, 0, 1)`, `R = [0, ¼]`,
+`V⁺ = 0.53125`; at the optimal pair `η = 0.625`, `τ = V⁺` the scores are `(−0.375, 0.125, 0)`, the third
+state sits on `{s = 0}`, and exactly one value of its weight attains `V⁺` (the weight `l` gives
+`E_p f = 0.5`; the weight `u` gives `E_pφ = 0.4286 ∉ R`).
 
 *Remarks.*  (i) **This theorem is not new in the programme.**  With `m = 0` it is the threshold rule of
 DeRobertis and Hartigan for intervals of measures, which the ensemble division gave to the science
@@ -193,9 +247,10 @@ function of a convex error set and the Farkas certificate of infeasibility are t
 E17.2 and F3 for the model-free case, which is (f).  What this statement adds is their union — regions
 and the inconsistency certificate (e) for the box class — and a proof by one minimax argument.
 Outside the programme it is classical in substance (§10).  (ii) The problem has `m + 1` unknowns whatever
-`|X|` is; `X` enters only through sums of explicit functions.  (iii) The gradient of the root
-`τ*(η) = inf{τ : Ψ(τ,η) ≤ 0}` is `∇h_R(η) − E_{p*}φ`, with `p*` the extremal ensemble of (c): at the
-optimum the extremal ensemble's measured averages sit on the boundary point of `R` exposed by `η`.
+`|X|` is; `X` enters only through sums of explicit functions.  (iii) `T` is convex, and its
+subgradients at `η` are `∇h_R(η) − E_pφ` for the maximisers `p` of `E_p[f − η·φ]` over `P(l,u)` (weights
+`u` on `{s_{T(η),η} > 0}`, `l` on `{s < 0}`, anything in between on the ties): at an optimal `η`, when one
+exists, some maximiser has its measured averages at the boundary point of `R` exposed by `η`.
 (iv) If certified bounds cross — an upper bound below a lower bound — then `I = ∅`.
 
 ## 5. Certification from samples: one function, no union bound
@@ -217,7 +272,7 @@ for the partition sum of that one known energy.  Here the energy is never evalua
 and the output is a statement about every energy in the class.)
 
 **Theorem 5.1 (sampled certificate) [P].**  Let `η`, a level `τ_min` and numbers
-`0 ≤ λ_1, …, λ_J < 1/B` be fixed, where `B ≥ sup_x ψ_{τ_min,η}(x)`; let `Y_1, …, Y_n` be independent
+`0 ≤ λ_1, …, λ_J < 1/B` be fixed, where `B > 0` and `B ≥ sup_x ψ_{τ_min,η}(x)`; let `Y_1, …, Y_n` be independent
 draws from `π`, independent of those choices.  Define
 
     W_n(τ) = (1/J) Σ_k Π_{j=1}^n (1 − λ_k·ψ_{τ,η}(Y_j)),      τ̂ = inf{τ ≥ τ_min : W_n(τ) ≥ 1/δ}.
@@ -226,48 +281,111 @@ Then `P(τ̂ < V⁺) ≤ δ`.  That is, `τ̂` is an upper bound for the whole i
 at least `1 − δ` — for every `n`, every dimension `m`, every choice of `η` and of the `λ_k`.
 
 *Proof.*  `ψ_{τ,η}(x)` is non-increasing in `τ`, so every factor is positive for `τ ≥ τ_min` and
-`W_n` is non-decreasing and continuous in `τ`.  Let `τ° = inf{τ ≥ τ_min : E_π ψ_{τ,η} ≤ 0}`; by Theorem
-4.1(a), `τ° ≥ V⁺` or `τ° = τ_min`.  If `τ° = τ_min` and `E_π ψ_{τ_min,η} ≤ 0` every `τ̂ ≥ τ_min` is
+`W_n` is non-decreasing and continuous in `τ`.  Let `τ° = inf{τ ≥ τ_min : E_π ψ_{τ,η} ≤ 0}`; the set is
+closed, so `E_π ψ_{τ°,η} ≤ 0` and `τ° ≥ V⁺` by Theorem 4.1(a).  If `τ° = τ_min`, every `τ̂ ≥ τ_min` is
 valid.  Otherwise `E_π ψ_{τ°,η} = 0` by continuity, each product has expectation `Π(1 − λ_k·0) = 1`, so
 `E W_n(τ°) = 1` and `P(W_n(τ°) ≥ 1/δ) ≤ δ` by Markov.  On the complement, monotonicity gives
 `W_n(τ) < 1/δ` for all `τ ≤ τ°`, hence `τ̂ ≥ τ° ≥ V⁺`.  ∎
 
 Only an **upper** bound `B` on `ψ` is needed; it comes from an a-priori bound on `U` (the envelope) and
 on the ranges of `f` and `φ`.  If no such bound exists the procedure must abstain.  The same statement
-with `−ψ` and Theorem 4.1(e) certifies inconsistency: fix `η`, test `E_π[L t₊ − U t₋] > 0`.
+with `−ψ` and Theorem 4.1(e) certifies inconsistency when `Z_l > 0`: fix `η`, test
+`E_π[L t₊ − U t₋] > 0`.  For `l ≡ 0` no sample can certify inconsistency (an unsampled configuration may
+have any `φ`); only the declared range of `φ` can, deterministically.
+
+*The level is attained, so nothing may be chosen on the certification sample* (the referee's
+experiments).  With `τ_min` just below `V⁺` and one bet near `1/B` the failure rate is 0.046 to 0.049 at
+`δ = 0.05`; with `B` taken from the certification sample it is 0.37 to 0.98.  `η`, `τ_min`, the bets and
+`B` must all be fixed before, or independently of, the draws that certify.
 
 **Procedure.**  Split the sample.  On the first part solve the dual of §4 with the empirical measure
-(any optimiser; only the quality of `η`, not soundness, depends on it) and choose the bets `λ_k` (a
-geometric grid around the empirically log-optimal one).  On the second part compute `τ̂` by bisection.
-Do the same for the lower endpoint with `δ/2` each.
+(any optimiser; only the quality of `η`, not soundness, depends on it).  The bets are fixed in advance
+(the prototype: `0.9·2^{−k}/B`, `k = 0, …, 15`, with `τ_min` the lower end of the declared range of `f` —
+simple and wasteful: a `τ_min` taken from the training part would shrink `B`).  On the second part
+compute `τ̂` by bisection.  Do the same for the lower endpoint with `δ/2` each.
 
-**Proposition 5.2 (what it costs) [P, to first order].**  Let `μ = E_πψ < 0` and `σ² = Var_π ψ` at the
-tested `(τ, η)`.  With the bet `λ = |μ|/(σ² + μ²)` (if below `1/B`),
-`ln W_n ≈ nμ²/(2(σ²+μ²))`, so the certificate fires once `n ≳ 2(σ² + μ²)·ln(1/δ)/μ²`.  For a uniform
-envelope (`L ≡ 1`, `U ≡ Γ`), scores bounded by `S`, and a target excess `α` over `V⁺`:
-`|μ| ≥ α` and `σ² ≤ (Γ + 1)S²`, so
+**Proposition 5.2 (what it costs: a first-order estimate, not a theorem).**  Let `μ = E_πψ < 0` and
+`v = E_π ψ²` at the tested `(τ, η)`.  To first order a bet `λ ≤ 1/B` gives `ln W_n ≈ n(λ|μ| − λ²v/2)`.
+*Free bet* (`|μ|/v ≤ 1/B`): `ln W_n ≈ nμ²/(2v)`, and the certificate fires at `n ≈ 2v·ln(1/δ)/μ²`.
+*Capped bet* (`|μ|/v > 1/B`): the cost is `n ≈ B·ln(1/δ)/|μ|` up to a factor 2, which can exceed the
+first formula by orders of magnitude.  For a uniform envelope (`L ≡ 1`, `U ≡ Γ`), scores bounded by `S`,
+and an excess `α` over the root `T(η)` of the multiplier in use (which is `V⁺` only for an optimal `η`):
+`|μ| ≥ α`, `v ≤ (Γ + 1)S²` and `B ≤ ΓS`, so
 
-    n ≈ 2(Γ + 1)S²·ln(1/δ)/α²      (plus a term `ΓS ln(1/δ)/α` from the cap on the bet).
+    n ≲ ln(1/δ)·max{ 2(Γ + 1)S²/α² ,  2ΓS/α }.
 
-*Derivation.*  `ln(1 − λz) = −λz − λ²z²/2 + O(λ³)`; maximise `−λμ − λ²(σ²+μ²)/2`.  At the optimum
-`Γ E s₊ = E s₋ ≤ S`, so `E[Γ²s₊²] ≤ ΓS·ΓE s₊ ≤ ΓS²`; and `∂Ψ/∂τ ≤ −E_π L = −1`.  ∎
+Both entries are upper estimates.  The prototype's mixture of 16 bets adds `ln 16` to `ln(1/δ)`.
+
+*Derivation.*  `ln(1 − λz) = −λz − λ²z²/2 + O(λ³)`; maximise `λ|μ| − λ²v/2` over `λ ≤ 1/B`.  Whenever
+`E_πψ ≤ 0`, `Γ E s₊ ≤ E s₋ ≤ S`, so `E ψ² ≤ ΓS·ΓE s₊ + S·E s₋ ≤ (Γ + 1)S²`; and `∂Ψ/∂τ ≤ −E_π L = −1`.  ∎
+*Checked by the referee* in one family of instances: simulated over predicted cost 1.04 and 1.13 when
+the bet is free; the free-bet formula alone is too optimistic by factors 2.8, 22, 254 and 267 when the
+bet is capped (the first version presented the cap as a correction term).
 
 **5.3 Comparison with S3 at equal certified accuracy.**  S3 needs `L = 8(Γ−1)²κ⁻²[d ln(1 +
 16(Γ−1)/κ) + ln(2/δ)]` draws for an allowance `κ` — quadratic in `Γ`, linear in `d` — and then widens
-the region as well (Proposition 2.5).  Theorem 5.1 needs about `2(Γ+1)S² ln(1/δ)/α²`: linear in `Γ`,
-free of `d`.  The reason for the factor `Γ`: S3 controls the body to `εG` in every direction, whereas
+the region as well (Proposition 2.5).  Theorem 5.1 needs at most about `2(Γ+1)S² ln(1/δ)/α²` for a given
+multiplier: linear in `Γ`, with no `d` in the formula — but `α` is measured from the root `T(η)` of the
+fitted multiplier, whose distance to `V⁺` grows with `m` at a fixed training size, and the comparison
+is between a sufficient condition and a first-order estimate.  The reason for the factor `Γ`: S3
+controls the body to `εG` in every direction, whereas
 at the optimum the gap term satisfies `G·E_q s₊ = −λ·b ≤ Z_l·S`, i.e. it is of the order of `Z_l`, and a
 variance-sensitive test of that one direction sees a variance of order `E_q s₊`, not 1.  Measured:
-`RESULTS.md`.
+`RESULTS.md` (hypotheses H-A, H-B).
 
-## 6. A cost proportional to the envelope ratio is unavoidable
+**5.4 Draws from the extremal ensemble: the envelope ratio does not enter.**  (Observed by the referee,
+`REVIEW_A.md` finding M1(a); stated and proved here; implemented as `certify_upper_tilted`.)
 
-**Theorem 6.1 (lower bound) [P].**  Let `Γ ≥ 4`, `δ < 1/4`.  Consider procedures that draw `n`
-independent configurations and output `τ̂` with `P(V⁺ ≤ τ̂ ≤ V⁺ + α) ≥ 1 − δ` on every instance with
-envelope ratio `Γ`, no observations, and a target with values in `[0,1]`.
-(a) If the procedure knows `f` and `Γ` and samples from the reference `π`, then
+Fix `η` and a pilot level `τ₀`.  The **extremal ensemble at the pilot** is `p₀ ∝ ω₀` with `ω₀ = u` on
+`{s_{τ₀,η} > 0}` and `ω₀ = l` elsewhere: a member of `P(l,u)` (if `Σω₀ > 0`); with energies, the Boltzmann
+weight of `E_min` on `{s_{τ₀,η} > 0}` and of `E_max` elsewhere.  For `τ ≥ τ₀` put
+
+    ψ̃_τ(x) = s_{τ,η}(x)                 if s_{τ,η}(x) > 0  or  s_{τ₀,η}(x) ≤ 0,
+    ψ̃_τ(x) = (l(x)/u(x))·s_{τ,η}(x)     if s_{τ,η}(x) ≤ 0 < s_{τ₀,η}(x).
+
+**Theorem 5.4 [P].**  (i) `Ψ(τ, η) = (Σω₀)·E_{p₀}ψ̃_τ` for every `τ ≥ τ₀`.  (ii) `ψ̃_τ(x)` is non-increasing
+in `τ`, and `ψ̃_τ ≤ (s_{τ₀,η})₊`.  Hence Theorem 5.1 holds verbatim with draws `Y_j` from `p₀`, `ψ̃` in
+place of `ψ`, `τ_min = τ₀` and any `B ≥ sup_x (s_{τ₀,η}(x))₊`, `B > 0`: `τ̂ = inf{τ ≥ τ₀ : W_n(τ) ≥ 1/δ}`
+satisfies `P(τ̂ < V⁺) ≤ δ`, whatever the pilot.  (iii) If `Z_l > 0`, then for `τ ≥ max(τ₀, T(η))`,
+`E_{p₀}ψ̃_τ ≤ −(τ − T(η))·Σω_τ/Σω₀`, with `ω_τ` the extremal weight at level `τ`; in particular
+`E_{p₀}ψ̃_{τ₀} ≤ −(τ₀ − T(η))` when the pilot is above the root.
+
+*Proof.*  (i) On `{s_{τ₀} > 0}`, `ω₀ψ̃_τ` is `u·s_τ` where `s_τ > 0` and `l·s_τ` where `s_τ ≤ 0`; on
+`{s_{τ₀} ≤ 0}`, `s_τ ≤ 0` and `ω₀ψ̃_τ = l·s_τ`.  In every case it is `u(s_τ)₊ − l(s_τ)₋`.  (ii) Both
+branches are non-increasing in `τ` and agree at `s_τ = 0`; and `ψ̃_τ ≤ (s_τ)₊ ≤ (s_{τ₀})₊`.  The proof of
+Theorem 5.1 uses only that the tested variable is non-increasing in `τ`, bounded above by `B` at
+`τ_min`, and has an expectation of the sign of `Ψ`.  (iii) `Ψ(·, η)` is convex, vanishes at `T(η)`, and
+`−Σω_τ` is a subgradient at `τ`; so `0 = Ψ(T(η)) ≥ Ψ(τ) + (τ − T(η))·Σω_τ`.  ∎
+
+*What it buys.*  The tested variable is bounded by the range `S` of the score — no bound on `U` is
+declared — and has variance at most `S²`; with a pilot at an excess `α` above the root its mean is at
+most `−α`.  To first order the certificate fires at the pilot with `n ≈ 2S²·ln(1/δ)/α²` draws: **no
+`Γ`**.  On the hard instance of Theorem 6.1(a) the referee measured the least `n` with a median excess
+below 0.05: 2 240, 19 456, 221 184, 2 031 616 draws from `π` for `Γ = 10, 10², 10³, 10⁴`, against 896,
+928, 928, 896 draws from `p₀`.  Theorem 6.1 is not contradicted: its procedures draw from `π` or `q`.
+
+*What it costs.*  (1) **A sampler for `p₀`.**  It is a Boltzmann weight, so any sampler for the
+reference applies to the modified energy; but the energy jumps by `ln(u/l)` across the surface
+`{s_{τ₀,η} = 0}`, an exact sampler built by rejection from `π` costs up to `Γ` proposals per draw (in
+agreement with Theorem 6.1), and for dependent draws nothing is certified (§7.3).  (2) **A pilot.**  The
+bound cannot be below `τ₀`, and above a pilot that is too low the drift is diluted by `Σω_τ/Σω₀`.  A
+pilot from reference draws has an error of the order of Theorem 5.1's own, so the gain needs the pilot
+to be refined with draws from the extremal ensemble itself (the estimate `tilted_root`); every choice
+must be made on draws other than those that certify.  (3) For `l ≡ 0` the test has no power: under `p₀`
+the tested variable is non-negative.  Measured on the validation families with exact samplers:
+`RESULTS.md`, supplementary experiment S1 (not pre-registered).
+
+## 6. With reference or gap draws, a cost proportional to the envelope ratio is unavoidable
+
+**Theorem 6.1 (lower bound for a prescribed sampling law) [P].**  Let `Γ ≥ 4`, `δ < 1/4`.  Consider
+procedures whose only information about the instance, beyond what is named below, is `n` independent
+draws from a prescribed law together with the values of `f`, `L` and `U` at the drawn configurations —
+they cannot evaluate weights at configurations of their choice, enumerate, or draw from another law —
+and which output `τ̂` with `P(V⁺ ≤ τ̂ ≤ V⁺ + α) ≥ 1 − δ` on every instance with envelope ratio `Γ`, no
+observations, and a target with values in `[0,1]`.
+(a) If the procedure knows `f` and `Γ` and the law is the reference `π`, then
 `n ≥ Γ·ln(1/(4δ))/(72α²)` for `α < 1/6`.
-(b) If in addition it is given `b`, `G` and `Z_l` exactly and samples from the gap distribution — S3's
+(b) If in addition it is given `b`, `G` and `Z_l` exactly and the law is the gap distribution — S3's
 access model — then `n ≥ Γ·ln(1/(4δ))/(2304α²)` for `α < 1/48`.
 
 *Proof.*  (a) `X = {0,1}`, `f(x) = x`, `π(1) = a`, `L ≡ 1`, `U ≡ Γ`: `V⁺(a) = Γa/(1 + (Γ−1)a)`.  With
@@ -282,15 +400,26 @@ access model — then `n ≥ Γ·ln(1/(4δ))/(2304α²)` for `α < 1/48`.
 `V⁺(t₁) − V⁺(t₀) ≥ (Γ−1)θt₀/9 ≥ θ/48`, and `χ²(π_{t₀}‖π_{t₁}) ≤ θ²t₀(2 + 2t₀) ≤ θ²/Γ`.  Conclude as in
 (a) with `θ ↓ 48α`.  ∎
 
+*The access model matters* (the referee's findings M1 and M2).  On these two- and three-point instances
+one evaluation of `l`, or two of the unnormalised reference, reveals the parameter: the theorem is about
+what draws from `π` or `q` alone can certify.  (The atoms stand for cells of many configurations of
+equal weight whose cardinalities carry the parameter; then evaluations at the drawn configurations tell
+nothing more, and `b`, `G`, `Z_l` are unchanged.  That version is not written out.)  And the theorem is a
+worst case over instances for one sampling law: it says nothing about a given instance, and nothing
+about draws from another law — Theorem 5.4 certifies these very instances with no `Γ`.
+
 **Consequences.**  (0) This is the counterpart, for an interval of an average under an unknown energy,
 of the theory division's lower bounds for the partition sum of a known one (its Proposition 11.113(d):
 order `sinh²(Δ/2)/ε²`, which is `Γ/(4ε²)` for an envelope of width `Δ = 2ρ`; Theorem 11.110(d)).
-(i) The linear dependence on `Γ` in Proposition 5.2 is optimal up to constants.
-(ii) Exact knowledge of `b`, `G`, `Z_l` does not change the rate.  (iii) For an energy envelope of
-half-width `ρ`, `Γ = e^{2ρ}`.  If the residual is extensive, `ρ = n·ρ₁`, sampled certification costs
-`e^{2nρ₁}`, more than enumerating a space of `q^n` states as soon as `ρ₁ > ½ ln q` (0.35 kT per binary
-site).  (iv) In the model-free case `Γ = ∞`: **no finite sample certifies anything about unsampled
-configurations.**  A linear programme over a sampled pool is a statement about that pool only.  The
+(i) For reference draws the linear dependence on `Γ` in Proposition 5.2 is optimal up to constants.
+(ii) Exact knowledge of `b`, `G`, `Z_l` does not change the rate of gap sampling.  (iii) For an energy
+envelope of half-width `ρ`, `Γ = e^{2ρ}`.  If the residual is extensive, `ρ = n·ρ₁`, certification *from
+reference draws* costs `e^{2nρ₁}` in the worst case, more than enumerating a space of `q^n` states as
+soon as `ρ₁ > ½ ln q` (0.35 kT per binary site).  This is not a statement about every instance: on the
+instance of §9.4 two hundred reference draws certify the box's bound for `Γ` up to `10¹³` (the referee's
+computation) — a bound that is useless because it is nearly trivial, not because it is expensive.
+(iv) In the model-free case `Γ = ∞`: **no finite sample, from any law, certifies anything about
+unsampled configurations.**  A linear programme over a sampled pool is a statement about that pool only.  The
 ensemble division's E30 says the same from the other side — its verdicts are not stable when the pool
 is refined, and its outer interval on a net needs a Lipschitz constant of the observables in
 configuration space; its E28 bounds the weight an incomplete library can be missing.  An energy
@@ -300,16 +429,26 @@ envelope with finite `Γ` is the assumption that turns a pool into a statement a
 
 **7.1 Envelopes.**  `P(l,u) ⊂ P(l',u')` whenever `l' ≤ l` and `u ≤ u'`.  If only enclosures
 `l ∈ [l⁻, l⁺]`, `u ∈ [u⁻, u⁺]` are known, run every certificate with `(l⁻, u⁺)`.  Rounding is handled the
-same way: the prototype evaluates certificate sums in ball arithmetic and decides on the upper end.
+same way in principle: evaluate the certificate sums in interval arithmetic and decide on the upper end.
+*What the prototype does:* its population sums (`psi`, `tau_root`, `interval`, the lumped and the
+site-wise computations) are plain floating point — so the "exact" intervals of the validation are
+floating-point values — and its one rigorous-arithmetic step is the optional confirmation of the
+validation wealth (`rigorous=True`), which decides on a rigorous lower bound of the wealth.  (The first
+version said "ball arithmetic" without this qualification.)
 
 **7.2 `b`, `G`, `Z_l` (gap sampling only).**  With `b ∈ [b⁻, b⁺]` componentwise and `G ≤ G⁺`,
 `Ψ ≤ Σ_i max(λ_i b_i⁻, λ_i b_i⁺) + G⁺·E_q s₊`; certify the right-hand side.  If `b` itself is estimated
 from a sample of `p_l ∝ l`, a second test and a split of `δ` are needed.  Reference sampling needs
-neither — the reason to prefer it whenever a reference exists.
+neither — the reason to prefer it whenever a reference exists.  (A rule on paper: the prototype takes
+`b` and `G` as exact.)
 
 **7.3 Approximate sampling.**  If the sampler's law `π'` satisfies `π'/π ∈ [1/β, β]`, replace `(L, U)`
-by `(L/β, βU)`.  If only `‖π' − π‖_TV ≤ ε_TV` is known, add `ε_TV·(sup ψ − inf ψ)` to the tested
-expectation.  If the draws are dependent (Markov chain Monte Carlo) and no certified mixing bound is
+by `(L/β, βU)`.  If only `‖π' − π‖_TV ≤ ε_TV` is known, then
+`E_πψ_τ ≤ E_{π'}ψ_τ + ε_TV·(sup_x ψ_τ − inf_x ψ_τ)`; because Theorem 5.1 needs the tested function to be
+non-increasing in `τ`, the allowance must be *one constant*: fix a bracket `[τ_min, τ_max]` in advance,
+add to `ψ_τ` a bound of `ε_TV·(sup ψ_τ − inf ψ_τ)` valid on the whole bracket, and restrict `τ̂` to the
+bracket (the prototype: the declared range of `f`).  The first version added the range at each `τ`,
+which is neither monotone nor bounded (finding M6).  If the draws are dependent (Markov chain Monte Carlo) and no certified mixing bound is
 available, Theorem 5.1 does not apply and the prototype **abstains**; exact samplers exist for product,
 chain and tree references.
 
@@ -321,10 +460,12 @@ sampled value outside the declared bounds voids the certificate (reported, not i
 undefined and S3 has no content.  In §5, `ψ = L·s` and the certificate is an ordinary one-sided test of
 `E_{p_l} s ≤ 0`: a confidence interval for one ensemble average, with the observations acting as
 control variates through `η`.  If `g = 0` only on part of `X`, gap sampling never visits that part and
-relies on `b` for it; reference sampling treats all configurations alike.
+relies on `b` for it; reference sampling treats all configurations alike.  (The prototype's gap
+certificate returns the exact value `b_f/b_0` for `G = 0`; its S3 routine abstains.)
 
-**7.6 The gap distribution.**  Its limitations, collected: it needs (H2); its rate is the same as the
-reference's (Theorem 6.1(b)); when `u/l` varies it concentrates on the most uncertain configurations,
+**7.6 The gap distribution.**  Its limitations, collected: it needs (H2); its worst-case rate is the
+same as the reference's (Theorem 6.1(b)), and both lose to draws from the extremal ensemble (Theorem
+5.4); when `u/l` varies it concentrates on the most uncertain configurations,
 which need not be those that decide the query; and it does not exist for `G = 0`.  Its one advantage:
 the exactly known linear part `λ·b` acts as a control variate, so only `s₊` is sampled.
 
@@ -345,8 +486,8 @@ observables with polynomially many levels, and it does not apply to observables 
 the tractable structure (distances, scattering intensities), for which §5 is the tool.
 
 **Other directions examined.**  *Adaptive sampling*: the variance of `ψ` is minimised by a proposal
-proportional to `|u s₊ − l s₋|`; a two-stage scheme (pilot, then tilted proposal with known density
-ratio) is sound by §7.3 and not implemented.  *Low rank*: the dependence on `X` is through the law of
+proportional to `|u s₊ − l s₋|`; the two-stage scheme — a pilot, then draws from the extremal ensemble
+at the pilot — is Theorem 5.4 (sound by §5 itself with the tilted law as reference; implemented).  *Low rank*: the dependence on `X` is through the law of
 the `(m+3)`-vector `(L, U, φ, f)` under `π`; nothing else is used.  *Parametric envelopes*
 (`E = E₀ + Σ_k θ_k h_k`, `θ` in a box) are not rectangular; their box hull is sound and can be very
 loose; §9 treats the most important structured case.
@@ -367,7 +508,8 @@ metric form of differential privacy as the known neighbours.  The science divisi
 that the box is the class of a "hub" metric.  Theorem 9.1 below is Theorem 11.105 applied to the
 measure `π·|s|` with `A = {s > 0}`, `B = {s < 0}` — it is stated for a general graph and for a signed
 score because that is the form the multipliers of §4 need.  Proposition 9.5 is the science division's
-machine-checked stochastic sandwich.  Propositions 9.2, 9.4, 9.6 and Corollary 9.3 were not found in
+machine-checked stochastic sandwich.  Proposition 9.7 rests on an inequality the theory division sent
+during Phase II (THY-MSG-0023).  Propositions 9.2, 9.4, 9.6 and Corollary 9.3 were not found in
 the archive; the theory report says of closed forms that they are "special to single states".
 
 **Definition.**  Let `π > 0` on `X`, `E` a set of ordered pairs, `C_{xy} > 0` for `(x,y) ∈ E`.  The
@@ -382,8 +524,9 @@ only if there is a flow `θ : E → [0, ∞)` with
     a(x) ≤ Σ_{y:(x,y)∈E} θ_{xy} − Σ_{y:(y,x)∈E} C_{yx}·θ_{yx}        for every x.
 
 Consequently, with `a = π·s_{τ,η}`: `E_p f ≤ τ` for every `p` in the class with `E_pφ ∈ R` as soon as
-such a flow exists for some `η`; and if the class is compact after normalisation (e.g. `E` strongly
-connected) and `I ≠ ∅`, `V⁺` is the infimum of the `τ` for which one exists.
+such a flow exists for some `η`; and if `I ≠ ∅`, `V⁺` is the infimum of the `τ` for which one exists.
+(The normalised class `{r ∈ 𝒞 : Σπr = 1}` is compact because `π > 0`, whatever `E` is; a hypothesis is
+needed only for the star, whose extra node has reference weight zero.)
 
 *Proof.*  `𝒞 = {r : −r ≤ 0, Ar ≤ 0}` with rows `e_x − C_{xy}e_y`.  By Farkas' lemma the cone of vectors
 `a` with `a·r ≤ 0` on `𝒞` is `{Aᵀθ − ν : θ, ν ≥ 0}`, and `(Aᵀθ)(x)` is the right-hand side.  The
@@ -395,7 +538,7 @@ arrives as `C_{xy}` units.  For the star this is `Σ[U a₊ − L a₋] ≤ 0`: 
 class it is a transport problem with multiplicative cost `e^{c(x,y)}`.
 
 **Proposition 9.2 (closure under marginalisation) [P].**  Let `X = Π_i X_i`, `π = ⊗π_i`, and let `𝒞_u` be
-the class of `r` with `r(x) ≤ e^{u_i}r(x')` whenever `x, x'` differ only at site `i`.  For every set
+the class of `r` with `r(x) ≤ e^{u_i}r(x')` whenever `x, x'` differ only at site `i` (`u_i ≥ 0`).  For every set
 `B` of sites, the set of `B`-marginals of the ensembles of `𝒞_u` is exactly the class of the same kind
 on `Π_{i∈B} X_i` with reference `⊗_{i∈B}π_i`.
 
@@ -443,33 +586,49 @@ of Proposition 9.2, for every `g`,
 with `D_i⁺` the one-site threshold rule of Corollary 9.3; hence `V⁺ ≤ inf_η [h_R(η) + SEQ(f − η·φ)]`.
 If `g` depends on `x` through a vector of additive lattice-valued statistics, so does each
 `T_i ⋯ T_n g` through the partial sums, and `SEQ(g)` is computed by dynamic programming in time
-(sites × cells × states), at any number of sites, without sampling.  Equality holds for additive `g`
-and for coordinatewise monotone `g`.
+(sites × cells × states), at any number of sites, without sampling.  Equality holds for additive `g`,
+and — on sites with two states — for coordinatewise monotone `g`.
 
 *Proof.*  As in Proposition 9.2, the conditional law under `p` of `x_i` given `x_{<i}` is
 `π_i·r̄` with `r̄(a) = Σ_z π_{>i}(z)·r(x_{<i}, a, z)`, whose ratio is at most `e^{u_i}`: it lies in the
 one-site class.  So `E_p[g | x_{<n}] ≤ (T_n g)(x_{<n})`, and induction over the sites gives the bound.
-For additive `g` every `T_i` acts on its own term; for monotone `g` the maximising thresholds are those
-of `ν_+`.  ∎
+For additive `g` every `T_i` acts on its own term; for monotone `g` on binary sites the maximising
+thresholds are those of `ν_+`, whatever the earlier coordinates.  ∎
+
+*Counterexample to the first version, which claimed equality for monotone `g` on any sites* (the
+referee's, finding C3; kept as a test).  Two sites with three ordered states, site laws
+`(0.0401, 0.5001, 0.4598)` and `(0.3815, 0.4694, 0.1491)`, slopes `(1.0038, 1.0722)`,
+`g = 1{x₁ + x₂ ≥ 3}`: the supremum over the class is `0.632638`, `SEQ(g) = 0.671526`, and `0.634084` with
+the sites in the other order.  With three states the maximising one-site threshold (up-weight the top
+state, or the top two) depends on the earlier coordinates, and the extremal sequential ensemble leaves
+the class.
 
 The bound is the exact value for a larger class — all ensembles whose one-step conditionals lie in the
 one-site classes — and is therefore not tight in general.  Measured against the exact programme on a
 cube of ten sites, two slopes, five targets, with and without one measured average
 (`experiments/eng/phase2_seq/`, twenty cases): exact for the monotone, the additive and the
 bi-monotone target without data; in the other cases an interval 1.13 to 1.40 times as wide as the
-exact one; sound in every case.
+exact one; sound in every case.  These factors describe the cases tried, not the bound: the referee
+found 1.44 for parity on eight sites, 1.84 for a random function of one statistic on six, and 3.97 for
+a random target on at most five.
 
 **9.4 Exponential separation from the box class [P].**  Uniform cube, `π_i = ½`, slope `u` at every
 site, target `f = x_1`, no observations.  Bounded-influence class: `V⁺ = σ(u)`, for every `n`.  Every
 box class containing it has ratio at least `e^{un}` (a box needs `U(x) ≥ e^{un}L(x̄)` for antipodal
 `x, x̄`, so `U(x)U(x̄) ≥ e^{2un}L(x)L(x̄)`), and for the uniform box of that ratio — as for the box
-centred at a configuration — `V⁺ = e^{un}/(1 + e^{un})`: within `e^{−un}` of the trivial bound 1.  And by Theorem 6.1 any sampled certificate over that box needs
-`e^{un}` draws.  S3 applied to envelopes derived from a bounded-influence class therefore discards
-essentially all the information in the class.
+centred at a configuration — `V⁺ = e^{un}/(1 + e^{un})`: within `e^{−un}` of the trivial bound 1.  More is true (the referee's observation): **every** box class containing the
+bounded-influence class has `V⁺ ≥ e^{un}/(1 + e^{un})`.  Indeed containment forces
+`U(x) ≥ e^{u·d(x,y)}L(y)` for all `x, y` (test with `r = e^{−u·d(x,·)}`); with `A = {x₁ = 1}` and the
+antipode `x̄ ∈ A^c` of `x ∈ A`, `Σ_{x∈A}U(x) ≥ e^{un}Σ_{x∈A}L(x̄) = e^{un}Σ_{y∈A^c}L(y)`, and
+`V⁺ = u(A)/(u(A) + l(A^c))`.  S3 applied to envelopes derived from a bounded-influence class therefore
+discards essentially all the information in the class — whatever is sampled.  (The first version added
+that a sampled certificate over that box "needs `e^{un}` draws".  That was false: on this instance
+`π(f = 1) = ½`, and reference draws certify the nearly trivial bound cheaply.)
 
 **Proposition 9.4 (local transport plus a global remainder) [P].**  Let `r` be in a ratio-constrained
-class and also satisfy `max r/min r ≤ Γ_glob`.  Let `Q(x, ·)` be any kernel that moves a configuration
-with `s(x) > 0` along edges, with path constant `C(x,y) ≥ r(x)/r(y)`, and put
+class and also satisfy `max r/min r ≤ Γ_glob`.  Let `Q(x, ·)` be any kernel — a probability for every
+`x` with `s(x) > 0` — that moves such a configuration along edges, with path constant
+`C(x,y) ≥ r(x)/r(y)`, and put
 
     β(y) = Σ_x π(x)s₊(x)Q(x,y)C(x,y) − π(y)s₋(y).
 
@@ -481,10 +640,35 @@ Theorem 5.1 applies.
 `Σ π r s ≤ Σ_y r(y)β(y) ≤ max r·Σβ₊ − min r·Σβ₋`.  ∎
 
 *Limit of this proposition.*  The remainder pays `Γ_glob`.  For a pure bounded-influence class on `n`
-sites `Γ_glob = e^{un}`, and by Theorem 6.1 no sample can certify the remainder: the transport must
-then cancel all positive mass identically, which is an analytic statement (as in Corollary 9.3), not
-a sampled one.  Sampled certificates for metric classes are therefore available today only when a
-moderate global ratio is also assumed.  This is the main open problem (§12).
+sites `Γ_glob = e^{un}`, and with reference draws the remainder then costs `e^{un}` in the worst case
+(Theorem 6.1): the transport must cancel all positive mass identically, which is an analytic statement
+(as in Corollary 9.3), not a sampled one.  Draws from the extremal ensemble (Theorem 5.4) would avoid
+the ratio, but for a metric class that ensemble is explicit only for monotone scores (Proposition 9.5);
+in general it is the solution of the transport problem itself.  Sampled certificates for metric
+classes are therefore available today only for monotone scores, or when a moderate global ratio is
+also assumed.  This is the main open problem (§12).
+
+**Proposition 9.7 (references that are not products: a sound outer bound) [P; the inequality is the
+theory division's, THY-MSG-0023 §3(2)].**  Let `π` be any positive reference on `X = Π_i X_i`, and let
+`κ_i ≥ 0` satisfy `π(z | x_i = a) ≤ e^{κ_i}·π(z | x_i = a')` for all states `a, a'` of site `i` and all
+configurations `z` of the other sites.  Then for every `p ∝ π·r` with `r ∈ 𝒞_u` the one-site marginal is
+`p_i = π_i·r̄_i` with `max r̄_i/min r̄_i ≤ e^{u_i + κ_i}`, where `π_i` is the one-site marginal of the
+reference.  Hence, for additive `f` and `φ`,
+
+    V⁺ ≤ inf_η [ h_R(η) + Σ_i D_i⁺(f_i − η·φ_i) ],     D_i⁺ over the one-site class of ratio e^{u_i + κ_i} around π_i:
+
+a sound outer bound, computed as in Corollary 9.3 from the one-site marginals of the reference, which
+are ordinary averages under the reference.  For a Gibbs reference `π ∝ e^{−E₀}`,
+`κ_i ≤ max_{a,a'} osc_z [E₀(a, z) − E₀(a', z)]`.
+
+*Proof.*  `r̄_i(a) = Σ_z π(z | x_i = a)·r(a, z) ≤ Σ_z e^{κ_i}π(z | x_i = a')·e^{u_i}r(a', z) = e^{u_i + κ_i}·r̄_i(a')`.
+The bound follows as in Corollary 9.3, except that a tuple of one-site marginals need no longer be
+realised jointly: it is an outer bound, not the identified end.  For the Gibbs form,
+`π(z|a)/π(z|a') = e^{−D(z)}/E_{π(·|a')}e^{−D}` with `D(z) = E₀(a, z) − E₀(a', z)`.  ∎
+
+The constant is a pointwise bound on the interaction across the cut, so the bound degrades quickly
+with the coupling: for an Ising ring with coupling `J` it is `κ_i = 8|J|` in the worst case.  Measured
+against the exact programme on rings of ten sites: `RESULTS.md`, supplementary experiment S2.
 
 ## 10. Relation to the literature
 
@@ -498,19 +682,26 @@ the references was read in full by this division.
 | Theorems 2.2, 3.1 (random zonotope, additive `ℓ∞` error) | laws of large numbers and `√n` rates for averages of random sets through support functions (e.g. Beresteanu–Molinari); multiplicative approximation of zonoids (Bourgain–Lindenstrauss–Milman; Talagrand; Cohen–Peng) | routine empirical-process bounds; weaker than the multiplicative results, which need another sampling law |
 | Theorem 4.1 (dual with moment constraints) | generalised Neyman–Pearson lemma (Dantzig–Wald); intervals of measures (DeRobertis–Hartigan); linearisation of ratios (Wasserman–Lavine–Wolpert); the marginal sensitivity model with balancing constraints (Zhao–Small–Bhattacharya; Dorn–Guo); CVaR | classical structure; the combined statement was not found verbatim and is a routine corollary |
 | Theorem 5.1 (validation-sample certificate with a product test) | Monte Carlo bounding of stochastic programmes (Mak–Morton–Wood; Bayraksan–Morton), there with CLT intervals; betting confidence bounds (Waudby-Smith–Ramdas); inference for sharp sensitivity bounds is asymptotic | a known recipe applied to a new target; the monotonicity argument that removes the union bound over `τ` was not found |
-| Theorem 6.1 (cost `∝ Γ`) | — | not found; a standard two-point argument |
+| Theorem 6.1 (cost `∝ Γ` for reference or gap draws) | — | not found; a standard two-point argument |
+| Theorem 5.4 (draws from the extremal ensemble) | least-favourable distributions in robust testing (Huber–Strassen); importance sampling with a tilted or umbrella law | the principle is classical; this use was not searched for (added after the review) |
 | Theorem 9.1 (flow duality) | the theory division's Theorem 11.105 (in the archive; its own search found the general duality "not found in six searches at summary level"); generalised flows (Jewell); metric differential privacy | in the archive; a corollary |
 | Proposition 9.2, Corollary 9.3 (closure; additive observables) | closure of metric differential privacy under post-processing is the same inequality | not found for partial identification; the proofs are two lines each |
 | Proposition 9.5 (monotone targets) | the science division's Theorem A11 (Holley's inequality), machine-checked | in the archive |
 | Proposition 9.6 (sequential bound) | nested one-step robust expectations are the dynamic programming of robust Markov decision processes with rectangular uncertainty | a known device applied here; not searched |
+| Proposition 9.7 (references that are not products) | the theory division's marginalisation inequality (THY-MSG-0023, Phase II) | theirs; the use for additive observables is immediate |
 | the application (energy envelope + averaged data → guaranteed interval or inconsistency) | "maximum occurrence" of a conformation given averaged data (Bertini et al.), without energies; bounds on Gibbs averages in a Kullback–Leibler ball (Katsoulakis, Rey-Bellet and co-authors), without data; maximum-entropy, BioEn, BME, metainference: one ensemble or a posterior, not a set | not found |
 
 ## 11. What is demonstrated, and what is not
 
-* Demonstrated (proofs here; numerics in `RESULTS.md`): S3 holds under (H1)–(H5); a sound interval is
-  obtained with far fewer draws by Theorem 5.1; the cost in `Γ` is intrinsic; for bounded-influence
-  classes with product references and additive observables the identified interval is exact at any
-  size.
+* Demonstrated (proofs here, each checked numerically by the referee's independent code; the measured
+  comparisons are in `RESULTS.md` and are not repeated here): S3 holds under (H1)–(H5); Theorem 5.1 gives
+  a valid bound at every sample size, dimension and choice of multipliers; with reference or gap draws
+  a cost proportional to `Γ` cannot be avoided in the worst case, and with draws from the extremal
+  ensemble it is absent; for bounded-influence classes with product references and additive observables
+  the identified interval is exact at any size.
+* Demonstrated only on enumerable instances with exact samplers: everything statistical.  No certified
+  statement is available for dependent draws (the prototype abstains), and the extremal ensemble of
+  Theorem 5.4 has been sampled exactly, never by a Markov chain.
 * Not demonstrated: any statement about a molecule.  An identified interval is exactly as good as its
   envelope, and no envelope between a force field and nature is known; the archive's own measurements
   put the residual of one implicit-solvent term at 12–53 kT per site, for which every interval here is
@@ -522,12 +713,46 @@ the references was read in full by this division.
 1. **Sampled certificates for bounded-influence classes without a global ratio.**  Settled for
    monotone scores by the stochastic sandwich (Proposition 9.5), and for functions of a few additive
    statistics there is the deterministic outer bound of Proposition 9.6.  Open for a general score
-   with active multipliers.  Needed: a tail certificate — a bound on the mass that local transport
-   leaves — from the large-deviation exponents of the class (the theory division's exponents `a`, `h`
-   are of this kind), or a way to tighten the sequential class.
-2. **References that are not products.**  Closure fails; under a Dobrushin-type smallness of the
-   reference's own influences a perturbed closure should hold (the theory division's results on
-   certified and uncertified influence, its Theorems 11.119 and 11.121, are the natural input).
-3. **A lower bound for metric classes** matching Corollary 9.3: is the exact computation possible only
-   because the observables are additive?
-4. **Coresets** (Remark 3.2) for repeated queries.
+   with active multipliers.  Two routes: a tail certificate — a bound on the mass that local transport
+   leaves (the theory division, asked, has nothing beyond the tail functions of its §11.33:
+   THY-MSG-0023) — or a sampler for the extremal ensemble of the metric class, which would make
+   Theorem 5.4 apply; or a way to tighten the sequential class.
+2. **Samplers for the extremal ensemble of a box class** (new with Theorem 5.4).  It is a Boltzmann
+   weight whose energy jumps by `ln(u/l)` across the surface `{s = 0}`.  Needed: exact or certified
+   samplers for such weights (perfect simulation, or chains with certified mixing), and a rule for the
+   pilot with a guarantee on the width.  Without them Theorem 5.4 is a statement about enumerable or
+   exactly samplable models.
+3. **References that are not products.**  Answered in part by the theory division (THY-MSG-0023): the
+   class marginalises into the class with constants `u_i + κ_i`, `κ_i` the pointwise log-ratio of the
+   conditional laws across the cut (Proposition 9.7) — an outer bound that degrades quickly with the
+   coupling; with only an expected-distance bound on the conditionals there is no pointwise statement.
+   Open: a bound that uses the typical, not the worst, interaction across the cut.
+4. **Is additivity essential for exact intervals?**  Answered by the theory division (THY-MSG-0023; not
+   checked here): for pair observables the upper end is NP-hard to compute once the slope is of order
+   `ln n`, and for succinctly given observables at every slope; open at constant slope for pair
+   observables.
+5. **Coresets** (Remark 3.2) for repeated queries.
+
+## 13. What changed after the review (`REVIEW_A.md`)
+
+| finding | what it said | what was done |
+|---|---|---|
+| C1 | the gap-sampling certificate ignored the declaration | code: the guards and allowances of the reference path; tests |
+| C2, K3 | Theorem 4.1(e) false for `l ≡ 0`; the inconsistency certificate blind there | (e) restated and proved for every envelope; code: the right criterion for populations, abstention for samples, a deterministic check from the declared range; tests |
+| C3 | Proposition 9.6: equality for monotone targets false beyond binary sites | statement, proof and docstring corrected; the counterexample kept as a test |
+| M1 | "a property of the class", "intrinsic", "needs `e^{un}` draws" do not follow from Theorem 6.1; draws from the extremal ensemble avoid `Γ` | claims withdrawn (§0, §6, §9.4, Proposition 9.4, §11); Theorem 5.4 added, implemented, tested and measured |
+| M2 | Theorem 6.1 needs its access model | stated in the theorem; remark on evaluations |
+| M3 | "removes the dimension" holds for validity only | §0 and §5.3 reworded |
+| M4 | Theorem 4.1(c) ill-posed | restated with complementary slackness; counterexample kept |
+| M5 | completeness for `l ≡ 0` used and unproved | one proof for every envelope (the referee's) |
+| M6 | the total-variation rule of §7.3 not monotone in `τ` | §7.3 states the constant allowance that the code uses |
+| M7 | claims without support (`RESULTS.md`, "ball arithmetic", §7.2) | §7.1, §7.2, §11 reworded; `RESULTS.md` written from the stored runs |
+| M8 | Proposition 5.2 is an upper estimate; capped bets | restated with both regimes |
+| K1 | non-finite draws reported as certified | code: void; tests |
+| K2 | `G = 0` not handled | code: the exact value in the gap certificate, abstention in the S3 routine; tests |
+| K4 | model-free problems on an ellipsoid not solved | code: a valid subgradient and cutting planes; test against an independent programme; the affected baseline recomputed |
+| m1–m11 | wording, constants, hypotheses | applied: m1 (§0, Theorem 3.1), m2 (after Proposition 2.5), m3–m4 (table of §2), m5 (Theorem 5.1), m6 (Theorem 9.1), m7 (§9.4), m8 (§0, Proposition 9.6), m9 (Theorem 4.1(b)), m10 (§8), m11 (Propositions 9.2, 9.4) |
+| m12 | efficiency of the bets; no lumping in the S3 routine | recorded in §5; not changed |
+
+Not done: a second review of the corrected text; the version of Theorem 6.1 with cells; interval
+arithmetic for the population sums.
