@@ -2999,6 +2999,19 @@ inside the session.*
   in THY-MSG-0023 (marginalisation with a non-product reference: constant `u + κ`; additivity is
   essential for exact intervals once `u ≥ C ln n`).  `research/phase2-adaptive-hierarchy` did not exist
   at the last fetch.
+* **A late strengthening, and how it was found.**  Proof-reading the manuscript's abstract showed that
+  several summaries quoted the narrow-dip bound `h̄(2γ)` without the side condition `h̄(2γ) > γ` of its
+  theorem (at `u = 1`: `γ < 0.0154`).  The condition came from Markov's inequality for the overlaps of
+  the dips *at the scale of the tolerance* — an artefact: for independent uniform centres the bias
+  `E_π[(w_c − 1)ψ]` of a maximum of dips against a centred observable has mean exactly zero, overlaps
+  included (translation invariance), and one centre moves it by at most the oscillation of `ψ` times
+  the mass of a dip, so the bounded-differences inequality replaces Hoeffding and Markov.  Theorem A′
+  now needs `R = L m_r ≥ 2(e^ε − 1)` and `2 R m_r ln(2M/η) ≤ τ²` only, and Corollary A′ holds for every
+  `2γ + β < a` (`γ < 0.0555` at `u = 1`).  A second referee reviewed exactly that section
+  (`docs/phase2/PHASE2_REVIEW_A1.md`): it stands; the referee found a false corner of the statement
+  (`δ > ½` with a void bound: two negative factors) and the sharp constant.  The mean-zero identity is
+  machine-checked (`sum_tuples_sup'_bias_eq_zero`).  Lesson: when a proof compares an error term with
+  the tolerance, ask whether the error term has a mean.
 * **Open** (most consequential first): the exponent at tolerance `e^{−γn}` (between `h̄(2γ)`, `γ < a/2`,
   and `(1 − γ/ln 2)h`; nothing below for `γ ≥ a/2`); an algorithm that uses samples; exact marginals of linear order; invariance with a
   field; second-order terms.

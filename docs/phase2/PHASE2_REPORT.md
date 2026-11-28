@@ -277,6 +277,18 @@ alternative with `ln A(w_c) > ε` for which the uniform answers are admissible. 
 event of the seed `ω` = {`|G_ψ(c)| ≤ τ` for the queries of `ω`, and `O_c < R/2`}: for an oracle (O2) with at most `q`
 queries and `2 R m_r ln(2q/η) ≤ τ²`, `E|Q| ≥ (1 − η − η″ − 2δ)·2ⁿ/(L·V(n, r−1))` (no restriction on `δ` in this form).
 
+*Remark (homogeneous spaces) [P; added after both reviews, not seen by a referee].*  Lemma 2.5 and
+Theorem A′ use the cube through three facts only: maxima of dips are admissible (any metric space,
+Lemma 2.1); the reference is uniform; and the number of points at each distance from a point does not
+depend on the point.  The last one gives `E_π e_r(d(·, c)) = m_r` for every centre, the probability
+`V(r−1)/|X|` that a uniform centre has a given point in its ball (parts (ii) and the packing step), and
+the fact that for independent uniform centres the law of `(d(x, c_j))_j` does not depend on `x` (part
+(iv): `E_c max_j e_r(d(x, c_j))` is a constant).  Hence both statements hold verbatim, with `|X|` in
+place of `2ⁿ` and `V(r−1)` the size of a ball, on every finite metric space with that property —
+vertex-transitive graphs with their path metric, Hamming spaces over any alphabet, Johnson schemes.
+(Machine-checked for finite abelian groups only, `sum_tuples_sup'_bias_eq_zero`.)  Whether the bound is
+the adaptive complexity there is open (§11, problem 5).
+
 *Note (the first version, and what changed).*  The version of this theorem that the first referee
 read and found correct (`PHASE2_REVIEW.md` §3.2; the (O2) form §3.3) had the hypotheses `L ≥ 8τ^{−2}ln(2M/η)`,
 `L m_r > e^ε − 1 + τ/5` and the bound `(1 − 2δ)(1 − η − η′)·2ⁿ/(L·V(n,r−1))` with
