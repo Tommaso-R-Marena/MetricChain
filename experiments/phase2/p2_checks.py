@@ -145,7 +145,7 @@ check("A4c expected pair overlap <= m(r) V(n,r-1)/2^n", exp_pair <= m_r * V / N3
 
 # A4d-g: Lemma 2.5 (iv) and the two probabilistic steps of Theorem A' (the form with bounded differences),
 # by EXACT enumeration of all L-tuples of centres on small cubes: for centred psi the bias functional
-# G(c) = E_pi[(w_c - 1) psi] has mean zero (overlaps included); one centre moves it by at most 2 |psi|_inf m_r;
+# G(c) = E_pi[(w_c - 1) psi] has mean zero (overlaps included); one centre moves it by at most (sup psi - inf psi) m_r;
 # its exact tails are below McDiarmid's bound; P(O_c >= R/2) <= (L-1) V / 2^n.
 def all_tuples_max(n_, r_, L_, u_):
     N_ = 1 << n_
@@ -170,7 +170,7 @@ for (n4, r4, L4, u4) in [(5, 2, 3, 1.0), (6, 2, 2, 1.0), (4, 3, 4, 1.5), (5, 3, 
                  np.array([1.0 if x & 1 else -1.0 for x in range(N4)]), np.where(wt4 <= n4 // 2 - 1, 1.0, -1.0)):
         psi4 = phi4 - phi4.mean()
         G4 = np.tensordot(psi4, W4, axes=(0, 0)) / N4                        # G(c) for all tuples
-        d4 = 2 * np.abs(psi4).max() * m4
+        d4 = (psi4.max() - psi4.min()) * m4                                  # the oscillation of the observable times m_r
         okd &= abs(G4.mean()) < 1e-12 * max(1.0, m4)
         osc = (G4.max(axis=-1) - G4.min(axis=-1)).max()                      # one centre (the last; symmetric)
         oke &= osc <= d4 + 1e-12
@@ -179,13 +179,13 @@ for (n4, r4, L4, u4) in [(5, 2, 3, 1.0), (6, 2, 2, 1.0), (4, 3, 4, 1.5), (5, 3, 
             tt = t4 * math.sqrt(L4) * d4 / 2
             okf &= (np.abs(G4) >= tt - 1e-15).mean() <= 2 * math.exp(-2 * tt * tt / (L4 * d4 * d4)) + 1e-12
 check("A4d Lemma 2.5(iv): E_c E_pi[(w_c - 1) psi] = 0 for centred psi, all tuples of centres, overlaps included", okd)
-check("A4e Lemma 2.5(iv): one centre moves E_pi[(w_c - 1) psi] by at most 2 |psi|_inf m_r", oke,
+check("A4e Lemma 2.5(iv): one centre moves E_pi[(w_c - 1) psi] by at most (sup psi - inf psi) m_r", oke,
       "largest observed change / bound = %.3f" % worst_ratio)
 check("A4f exact tails of the bias functional are below the bounded-differences (McDiarmid) bound", okf)
 check("A4g A(w_c) - 1 >= R - O_c for every tuple, and P(O_c >= R/2) <= (L-1) V(n,r-1)/2^n", okg)
 
 # A4h: Theorem A' at finite n beyond the side condition of its first version (u = 1, eps = 1, M = 100, eta = 0.1):
-# the recipe of Corollary A' (largest r with 8 (2e^eps - 1) m_r ln(2M/eta) <= tau^2, L = ceil(2(e^eps - 1)/m_r)).
+# the recipe of Corollary A' (largest r with 2 (2e^eps - 1) m_r ln(2M/eta) <= tau^2, L = ceil(2(e^eps - 1)/m_r)).
 def log_binom_row(n_):
     lg = [math.lgamma(n_ + 1) - math.lgamma(j + 1) - math.lgamma(n_ - j + 1) for j in range(n_ + 1)]
     return np.array(lg)
@@ -201,7 +201,7 @@ hbar7 = lambda lam: kl7(rho07 - lam / u7, 0.5) - lam
 for n7, gam7 in [(2000, 0.005), (2000, 0.03), (20000, 0.03), (20000, 0.045), (200000, 0.03), (200000, 0.045)]:
     lb = log_binom_row(n7) - n7 * math.log(2)
     ltau2 = -2 * gam7 * n7
-    lthr = ltau2 - math.log(8 * (2 * math.exp(eps7) - 1) * math.log(2 * M7 / eta7))
+    lthr = ltau2 - math.log(2 * (2 * math.exp(eps7) - 1) * math.log(2 * M7 / eta7))
     def log_m(r_):                                                    # ln m_r
         j = np.arange(r_)
         x_ = u7 * (r_ - j)

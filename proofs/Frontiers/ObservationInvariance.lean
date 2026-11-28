@@ -49,7 +49,9 @@ parts of those proofs that are not probability theory:
   Theorem A′): the bias of any translation-equivariant family against an observable of zero
   sum vanishes when summed over all tuples of centres (`sum_tuples_bias_eq_zero`; for maxima of
   translates: `sum_tuples_sup'_bias_eq_zero`); a maximum is 1-Lipschitz in each argument
-  (`abs_sup'_sub_sup'_le`).  The bounded-differences inequality itself is cited, not proved.
+  (`abs_sup'_sub_sup'_le`; this gives the bounded difference `2‖ψ‖∞ m_r`, the report's sharper
+  constant `(sup ψ − inf ψ) m_r` uses `0 ≤ max(b, e) − b ≤ e` instead).  The bounded-differences
+  inequality itself is cited, not proved.
 
 Nothing is assumed: no statement of the report enters as a hypothesis.  What is *not* here: the
 passage from these cores to exponents (binomial asymptotics), the bound on the relative variance
@@ -774,7 +776,8 @@ Lemma 2.5 (iv) of the report.  For independent uniform centres `c = (c_j)` the w
 `E_π[(w_c − 1)ψ]` whose average over the centres is exactly zero — overlaps of the translates
 included — because the construction commutes with translations; and changing one centre changes
 `w_c` pointwise by at most the difference of the two translates.  With the bounded-differences
-inequality (cited in the report, not formalised) these two facts give Theorem A′. -/
+inequality (cited in the report, not formalised) these two facts give Theorem A′ (with the
+constant `8`; the report's constant `2` uses a sharper elementary bound on the oscillation). -/
 
 section MaximaOfTranslates
 

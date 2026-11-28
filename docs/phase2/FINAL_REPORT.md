@@ -22,7 +22,7 @@ division for computation.
 |---|---|---|
 | 1. Prove or refute S1 and S2 | **Both are correct.**  S1 = Theorem A (explicit constants; adaptive statistical queries); S2 = Theorem B (arbitrary exact observables through their joint Walsh spectrum; the bound on the subgroup is tight up to a factor 2) | `PHASE2_REPORT.md` §§2, 3, 9 |
 | 2. Formalise their essential cores in Lean | `proofs/Frontiers/ObservationInvariance.lean`, 41 declarations: packing bounds with a tolerant oracle, the admissible cone, mixtures and translations, the flat mixture, characters, the counting form of the union bound, parities on the cube, Hoeffding and Chebyshev for independent draws, two cores of the new upper bounds, maxima of random translates (no bias on average; 1-Lipschitz in each argument) | §10 of the report; theory report §9 (index row) |
-| 3. Stronger results in the exponentially precise regime | adaptive exponent at tolerance `e^{−γn}`: at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`, for every `γ < a/2` (S1's argument gives `h − 2γ`, positive for `γ < h/2` only; at `u = 1` the two thresholds are `0.0555` and `0.0146`), and at most `(1 − γ/ln 2)h`; a spectral criterion (attenuated bias) that unifies the constructions.  **The gap is open**; for `γ ≥ a/2` there is no lower bound at all.  The lower bound in this generality was found on the last day: the first version needed `γ < 0.0154` (at `u = 1`), an artefact of bounding overlaps by Markov's inequality — the bias of a maximum of random dips averages to zero exactly, and the bounded-differences inequality does the rest | Theorem A′, Corollary C, §5, Lemma 5.1 |
+| 3. Stronger results in the exponentially precise regime | adaptive exponent at tolerance `e^{−γn}`: at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`, for every `γ < a/2` (S1's argument gives `h − 2γ`, positive for `γ < h/2` only; at `u = 1` the two thresholds are `0.0555` and `0.0146`), and at most `(1 − γ/ln 2)h`; a spectral criterion (attenuated bias) that unifies the constructions.  **The gap is open**; for `γ ≥ a/2` there is no lower bound for randomised algorithms.  The lower bound in this generality was found on the last day: the first version needed `γ < 0.0154` (at `u = 1`), an artefact of bounding overlaps by Markov's inequality — the bias of a maximum of random dips averages to zero exactly, and the bounded-differences inequality does the rest | Theorem A′, Corollary C, §5, Lemma 5.1 |
 | 4. Exact non-Walsh observables, non-uniform references, transitive spaces, richer oracles | exact observables by spectrum (Theorem B); one exact point probability trivialises the problem (the archive's); any vertex-transitive space (Theorem A″); product references: a positive but smaller exponent (flat mixture: 49 % and 22 % of the class exponent in two cases); any known `κ`-Lipschitz energy: a sandwich `h(u − κ) ≤ … ≤ h(u + κ)` (Proposition 2.7); partition laws (Theorem C); all observables (Proposition C′); samples (Theorem E) | §§2.4, 2.5, 3, 4, 6 |
 | 5. Sharp characterisations for experimentally motivated operators | sharp: means with error bars in the sub-exponential regime (nothing); the law of a block of `θn` sites (exactly `(1 − θ)h`); all observables (a bounded number of evaluations; deterministic `τ·2ⁿ`); a histogram with polynomially many bins and constant error bars (nothing).  Two-sided with a gap: exponential precision; exact marginals of linear order; samples | §§4, 7, 8 |
 | 6. A deeper relation between precision, structure, concentration and computation | partial: (i) an observation oracle with `M` observables at tolerance `τ` cannot tell a continuum of hidden perturbations from `τ^{−2} ln M` random ones; (ii) dividing a perturbation's mass by `L` shrinks its volume by `L^{ℓ}`, `ℓ` the Chernoff parameter, so atoms cost `L^{1−ℓ}`; (iii) thermal noise attenuates a test of order `j` by `tanh(u/2)^j`, and one quantity — the attenuated bias of the set of hidden centres — decides hiding (Lemma 5.1); (iv) `A = E_π[w1_T]/μ(T)`: a measured mass is a reduction of the problem to a set.  No single law was found; the open problem of row 3 is where one would be | §§5.1, 7 |
@@ -40,7 +40,7 @@ exponents; `L = ⌈2τ^{−2} ln(4M/η)⌉`.
 | statement | content | status |
 |---|---|---|
 | Theorem A | means of `M` arbitrary bounded observables, each to an adversarial tolerance `τ`: `E|Q| ≥ (1−η)(1−2δ)·2ⁿ/(L·|B|)` for both lower bounds; with `q` adaptive statistical queries `(1 − η − 2δ)`; exponents unchanged if `ln(1/τ) = o(n)` and `ln ln M = o(n)` | [P], refereed (correct; one constant repaired); cores [V] |
-| Theorem A′, Corollary A′ | maxima of `L` narrow dips with `R = L m_r ≥ 2(e^ε − 1)` and `8 R m_r ln(2M/η) ≤ τ²`: `E|Q| ≥ (1−2δ)(1−η−η″)·2ⁿ/(L·V(n, r−1))`, `η″ = L·V(n, r−1)/2ⁿ`; exponent `h̄(2γ + β)` for every `2γ + β < a` | [P]; the two deterministic steps [V]; <!-- FINAL:A1 -->strengthened after the first review; its own review is described in §3<!-- /FINAL:A1 --> |
+| Theorem A′, Corollary A′ | maxima of `L` narrow dips with `R = L m_r ≥ 2(e^ε − 1)` and `2 R m_r ln(2M/η) ≤ τ²` (`δ ≤ ½`): `E|Q| ≥ (1−2δ)(1−η−η″)·2ⁿ/(L·V(n, r−1))`, `η″ = L·V(n, r−1)/2ⁿ`; exponent `h̄(2γ + β)` for every `2γ + β < a` | [P], with the bounded-differences inequality cited; the mean-zero identity [V]; strengthened after the first review and refereed separately (correct for `δ ≤ ½`; the corner `δ > ½` and a sharper constant are the second referee's) |
 | Theorem A″, Corollary A″ | flat mixture for any reference and any kernel with constant row sums; tilted baselines | [P], refereed (theorem correct; product weights and two numerical claims of ours were wrong and are corrected); identity [V] |
 | Proposition 2.7, Corollary 2.7 | absorption sandwich for a known `κ`-Lipschitz energy | [P], read by the referee (correct as stated) |
 | Theorem B, B′, Corollary B′ | exact observables by joint spectrum, `|C| < 2(M+1)`; refined exponent `h̄(ln M/n)`; marginals of order `αn`: `h̄(h₂(α)) ≤ θ(α) ≤ (1 − α)h` | [P], refereed (correct as stated); cores [V] |
@@ -66,9 +66,18 @@ D71 records the two errors.  The referee did not compile the Lean file or run th
 
 **After the review.**  Theorem A′ / Corollary A′ were strengthened (the side condition of the first
 version removed; see §1, row 3).  The first referee did not see the new proof.
-<!-- FINAL:A1REVIEW -->
-*(the outcome of the second, short review of that proof is entered in the final commit)*
-<!-- /FINAL:A1REVIEW -->
+**The second review** (`PHASE2_REVIEW_A1.md`, 161 lines; scripts `experiments/phase2/review/a1_*`): a second
+adversarial AI referee read that section alone.  Verdict: the new theorem (both oracle forms), its lemma and
+its corollary stand; every step re-derived; the removal of the side condition is legitimate.  It found one
+error in a degenerate corner of the *statement* — for `δ > ½` and `η + η″ > 1` the displayed product of two
+negative factors is a false positive bound (an explicit counterexample on a cube of four sites; the first
+version had the same corner) — repaired by the hypothesis `δ ≤ ½`; five points of wording; and a sharper
+constant (`2` for `8`).  Replication with its own code: exact enumeration over all tuples of centres in 118
+configurations; Monte Carlo at 16–20 sites where the overlaps are 0.4 to 6 times the tolerance (the regime
+the first version could not treat): no violation of the hidden-answer event in 14 500 instances; the recipe
+of the corollary up to `n = 2·10⁶`.  All incorporated; the corrected text was not re-read by a referee.
+Neither referee checked McDiarmid's inequality itself (cited), and the argument for adaptive statistical
+queries is on paper only.
 
 ## 4. R29 — and a defect found in our own verification chain
 

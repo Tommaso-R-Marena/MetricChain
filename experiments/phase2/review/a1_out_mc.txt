@@ -1,0 +1,140 @@
+a1_mc.py -- referee A1 -- Monte Carlo, numpy 2.5.3
+tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M = 8 observables, eta = 0.10); 'b' = bias = E_mu phi - E_pi phi; 'C' = overlap part of the bias
+
+== self-test: sparse instance code against a dense computation from the definitions ==
+   25 instances (n = 7..10, equal centres included): max |sparse - dense| over (A-1, O_c, G, G_sum, bias) = 1.0e-13 ok
+
+== regime A (overlaps > tau): n=20 u=1 r=2 L=10000, 2000 instances [38s]  -- narrow dips of radius 2; overlaps comparable with / above tau
+   m_r=3.887e-05  V(n,r-1)=21  R=L m_r=0.3887  eta''=L V/2^n=0.2003  sigma0=sqrt(R m_r)=0.003887
+   M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.02477 (<=1);  largest accuracy eps=ln(1+R/2)=0.1776;  new bound factor 1-eta-eta''=0.700
+   first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.06372): eta' = 7.86 at tau_min, 3.05 at max(tau_min, 0.06372)  => void in this regime (eta' >= 1 - eta)
+   overlaps:  E O_c=0.03467 (bound C(L,2) m_r V/2^n=0.03892)  E Otilde_c=0.03247   =>  E O_c/tau_min=1.40, E Otilde_c/tau_min=1.31;  first version needs O_c <= tau/5: frequency 0.0000
+   Lemma 2.5(ii): max[(R-O_c)-(A-1)]=-1.9e-03 (<=0 ok), max[(A-1)-R]=-3.1e-02 (<=0 ok);  P(O_c>=R/2)=0.0000 <= (L-1)V/2^n=0.2003 ok;  P(A-1<=R/2)=0.0000;  (A-1)/R in [0.914, 0.920]
+   bounded differences: 200 single-centre replacements: max |G(c)-G(c')|/m_r = 2.0000 (lemma: <= 2|psi|oo <= 4);  max |G(c)-G(c')|/(osc(phi) m_r) = 1.0000 (referee: <= 1) ok
+   McDiarmid at t = k*sigma0, k=(1.0, 2.0, 3.0, 4.0):  report 2exp(-k^2/8) = ['1', '1', '0.649', '0.271'];  referee 2exp(-k^2/2) = ['1', '0.271', '0.0222', '0.000671']
+   phi          |psi|oo | mean G/sig0      z | sd G/sig0 | P(|G|>k sig0), k=1,2,3,4        | |b|/tau: q50   q99    max   P(|b|>tau) | mean C/tau   sd C/tau  max|C|/tau
+   chi_1          1.000 |     +0.0279  +1.61 |    0.7739 |  0.2030  0.0075  0.0000  0.0000 |        0.0604 0.2252 0.3146    0.0000 |    +0.0012     0.0271      0.0932
+   chi_123        1.000 |     +0.0078  +0.55 |    0.6372 |  0.1180  0.0015  0.0000  0.0000 |        0.0483 0.1958 0.2651    0.0000 |    +0.0009     0.0218      0.0835
+   parity         1.000 |     +0.0005  +0.04 |    0.5419 |  0.0665  0.0000  0.0000  0.0000 |        0.0427 0.1558 0.1993    0.0000 |    -0.0002     0.0247      0.0945
+   majority       1.000 |     -0.0112  -0.75 |    0.6693 |  0.1365  0.0025  0.0000  0.0000 |        0.0536 0.1995 0.2734    0.0000 |    -0.0004     0.0230      0.0847
+   linear         1.000 |     -0.0041  -1.02 |    0.1796 |  0.0000  0.0000  0.0000  0.0000 |        0.0141 0.0536 0.0740    0.0000 |    -0.0001     0.0062      0.0213
+   cell4          0.938 |     +0.0021  +0.55 |    0.1742 |  0.0000  0.0000  0.0000  0.0000 |        0.0137 0.0513 0.0689    0.0000 |    +0.0002     0.0057      0.0206
+   1-2*B(0,5)     1.959 |     +0.0031  +0.83 |    0.1684 |  0.0000  0.0000  0.0000  0.0000 |        0.0132 0.0496 0.0671    0.0000 |    -0.0000     0.0060      0.0297
+   rand_pm1       1.001 |     -0.0079  -1.63 |    0.2169 |  0.0000  0.0000  0.0000  0.0000 |        0.0177 0.0619 0.0843    0.0000 |    -0.0000     0.0102      0.0394
+   all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.300);  max |z| of the means = 1.63;  tail violations: 0
+
+== regime B (overlaps >> tau): n=20 u=1 r=1 L=200000, 2000 instances [38s]  -- dips = single points; many coincident centres; overlaps ~ 8 tau
+   m_r=1.639e-06  V(n,r-1)=1  R=L m_r=0.3277  eta''=L V/2^n=0.1907  sigma0=sqrt(R m_r)=0.0007328
+   M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.00467 (<=1);  largest accuracy eps=ln(1+R/2)=0.1517;  new bound factor 1-eta-eta''=0.709
+   first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.01425): eta' = 33.5 at tau_min, 11 at max(tau_min, 0.01425)  => void in this regime (eta' >= 1 - eta)
+   overlaps:  E O_c=0.03126 (bound C(L,2) m_r V/2^n=0.03126)  E Otilde_c=0.02936   =>  E O_c/tau_min=6.69, E Otilde_c/tau_min=6.29;  first version needs O_c <= tau/5: frequency 0.0000
+   Lemma 2.5(ii): max[(R-O_c)-(A-1)]=-1.7e-03 (<=0 ok), max[(A-1)-R]=-2.9e-02 (<=0 ok);  P(O_c>=R/2)=0.0000 <= (L-1)V/2^n=0.1907 ok;  P(A-1<=R/2)=0.0000;  (A-1)/R in [0.909, 0.912]
+   bounded differences: 200 single-centre replacements: max |G(c)-G(c')|/m_r = 2.0000 (lemma: <= 2|psi|oo <= 4);  max |G(c)-G(c')|/(osc(phi) m_r) = 1.0000 (referee: <= 1) ok
+   McDiarmid at t = k*sigma0, k=(1.0, 2.0, 3.0, 4.0):  report 2exp(-k^2/8) = ['1', '1', '0.649', '0.271'];  referee 2exp(-k^2/2) = ['1', '0.271', '0.0222', '0.000671']
+   phi          |psi|oo | mean G/sig0      z | sd G/sig0 | P(|G|>k sig0), k=1,2,3,4        | |b|/tau: q50   q99    max   P(|b|>tau) | mean C/tau   sd C/tau  max|C|/tau
+   chi_1          1.000 |     +0.0143  +0.74 |    0.8653 |  0.2500  0.0190  0.0005  0.0000 |        0.0738 0.2631 0.3705    0.0000 |    +0.0000     0.0518      0.1758
+   chi_123        1.000 |     -0.0106  -0.55 |    0.8539 |  0.2440  0.0170  0.0000  0.0000 |        0.0711 0.2635 0.3335    0.0000 |    +0.0002     0.0496      0.1920
+   parity         1.000 |     -0.0053  -0.27 |    0.8813 |  0.2630  0.0185  0.0005  0.0000 |        0.0730 0.2722 0.3643    0.0000 |    -0.0010     0.0502      0.1941
+   majority       1.000 |     -0.0171  -0.97 |    0.7823 |  0.2045  0.0085  0.0000  0.0000 |        0.0636 0.2376 0.3354    0.0000 |    -0.0021     0.0455      0.1365
+   linear         1.000 |     -0.0046  -1.06 |    0.1931 |  0.0000  0.0000  0.0000  0.0000 |        0.0160 0.0575 0.0777    0.0000 |    -0.0006     0.0112      0.0399
+   cell4          0.938 |     +0.0109  +2.38 |    0.2058 |  0.0000  0.0000  0.0000  0.0000 |        0.0168 0.0669 0.0914    0.0000 |    -0.0000     0.0120      0.0404
+   1-2*B(0,5)     1.959 |     -0.0038  -0.69 |    0.2442 |  0.0000  0.0000  0.0000  0.0000 |        0.0194 0.0755 0.1138    0.0000 |    +0.0005     0.0142      0.0509
+   rand_pm1       1.001 |     +0.0229  +1.20 |    0.8515 |  0.2510  0.0140  0.0000  0.0000 |        0.0720 0.2534 0.3398    0.0000 |    +0.0007     0.0486      0.1644
+   all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.291);  max |z| of the means = 2.38;  tail violations: 0
+
+== regime C: n=20 u=1 r=3 L=1000, 2000 instances [39s]  -- radius 3, L = 1000
+   m_r=0.0004514  V(n,r-1)=211  R=L m_r=0.4514  eta''=L V/2^n=0.2012  sigma0=sqrt(R m_r)=0.01427
+   M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.09096 (<=1);  largest accuracy eps=ln(1+R/2)=0.2035;  new bound factor 1-eta-eta''=0.699
+   first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.2015): eta' = 2.5 at tau_min, 1.13 at max(tau_min, 0.2015)  => void in this regime (eta' >= 1 - eta)
+   overlaps:  E O_c=0.0357 (bound C(L,2) m_r V/2^n=0.04537)  E Otilde_c=0.03348   =>  E O_c/tau_min=0.39, E Otilde_c/tau_min=0.37;  first version needs O_c <= tau/5: frequency 0.0000
+   Lemma 2.5(ii): max[(R-O_c)-(A-1)]=-1.7e-03 (<=0 ok), max[(A-1)-R]=-3.1e-02 (<=0 ok);  P(O_c>=R/2)=0.0000 <= (L-1)V/2^n=0.2010 ok;  P(A-1<=R/2)=0.0000;  (A-1)/R in [0.920, 0.931]
+   bounded differences: 200 single-centre replacements: max |G(c)-G(c')|/m_r = 1.7822 (lemma: <= 2|psi|oo <= 4);  max |G(c)-G(c')|/(osc(phi) m_r) = 0.8911 (referee: <= 1) ok
+   McDiarmid at t = k*sigma0, k=(1.0, 2.0, 3.0, 4.0):  report 2exp(-k^2/8) = ['1', '1', '0.649', '0.271'];  referee 2exp(-k^2/2) = ['1', '0.271', '0.0222', '0.000671']
+   phi          |psi|oo | mean G/sig0      z | sd G/sig0 | P(|G|>k sig0), k=1,2,3,4        | |b|/tau: q50   q99    max   P(|b|>tau) | mean C/tau   sd C/tau  max|C|/tau
+   chi_1          1.000 |     -0.0262  -1.63 |    0.7203 |  0.1615  0.0070  0.0000  0.0000 |        0.0527 0.2081 0.2974    0.0000 |    -0.0003     0.0195      0.0674
+   chi_123        1.000 |     -0.0018  -0.17 |    0.4927 |  0.0445  0.0000  0.0000  0.0000 |        0.0353 0.1408 0.2137    0.0000 |    +0.0001     0.0128      0.0507
+   parity         1.000 |     +0.0008  +0.10 |    0.3557 |  0.0040  0.0000  0.0000  0.0000 |        0.0271 0.1011 0.1288    0.0000 |    -0.0001     0.0185      0.0612
+   majority       1.000 |     +0.0033  +0.26 |    0.5780 |  0.0900  0.0015  0.0000  0.0000 |        0.0417 0.1642 0.2314    0.0000 |    +0.0001     0.0164      0.0638
+   linear         1.000 |     -0.0003  -0.08 |    0.1604 |  0.0000  0.0000  0.0000  0.0000 |        0.0116 0.0455 0.0644    0.0000 |    -0.0000     0.0045      0.0164
+   cell4          0.938 |     -0.0060  -1.84 |    0.1462 |  0.0000  0.0000  0.0000  0.0000 |        0.0108 0.0409 0.0538    0.0000 |    -0.0002     0.0040      0.0167
+   1-2*B(0,5)     1.959 |     -0.0010  -0.33 |    0.1321 |  0.0000  0.0000  0.0000  0.0000 |        0.0098 0.0372 0.0498    0.0000 |    -0.0000     0.0037      0.0166
+   rand_pm1       1.001 |     -0.0008  -0.41 |    0.0813 |  0.0000  0.0000  0.0000  0.0000 |        0.0062 0.0239 0.0345    0.0000 |    -0.0000     0.0029      0.0108
+   all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.301);  max |z| of the means = 1.84;  tail violations: 0
+
+== regime D: n=18 u=2 r=2 L=3000, 2000 instances [9s]  -- steeper slope u = 2
+   m_r=0.0006432  V(n,r-1)=19  R=L m_r=1.9295  eta''=L V/2^n=0.2174  sigma0=sqrt(R m_r)=0.03523
+   M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.2245 (<=1);  largest accuracy eps=ln(1+R/2)=0.6754;  new bound factor 1-eta-eta''=0.683
+   first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.1163): eta' = 4.67 at tau_min, 4.67 at max(tau_min, 0.1163)  => void in this regime (eta' >= 1 - eta)
+   overlaps:  E O_c=0.1541 (bound C(L,2) m_r V/2^n=0.2097)  E Otilde_c=0.1437   =>  E O_c/tau_min=0.69, E Otilde_c/tau_min=0.64;  first version needs O_c <= tau/5: frequency 0.0000
+   Lemma 2.5(ii): max[(R-O_c)-(A-1)]=-7.8e-03 (<=0 ok), max[(A-1)-R]=-1.3e-01 (<=0 ok);  P(O_c>=R/2)=0.0000 <= (L-1)V/2^n=0.2174 ok;  P(A-1<=R/2)=0.0000;  (A-1)/R in [0.920, 0.930]
+   bounded differences: 200 single-centre replacements: max |G(c)-G(c')|/m_r = 2.0000 (lemma: <= 2|psi|oo <= 4);  max |G(c)-G(c')|/(osc(phi) m_r) = 1.0000 (referee: <= 1) ok
+   McDiarmid at t = k*sigma0, k=(1.0, 2.0, 3.0, 4.0):  report 2exp(-k^2/8) = ['1', '1', '0.649', '0.271'];  referee 2exp(-k^2/2) = ['1', '0.271', '0.0222', '0.000671']
+   phi          |psi|oo | mean G/sig0      z | sd G/sig0 | P(|G|>k sig0), k=1,2,3,4        | |b|/tau: q50   q99    max   P(|b|>tau) | mean C/tau   sd C/tau  max|C|/tau
+   chi_1          1.000 |     +0.0068  +0.39 |    0.7865 |  0.2040  0.0115  0.0000  0.0000 |        0.0296 0.1146 0.1605    0.0000 |    -0.0001     0.0245      0.0827
+   chi_123        1.000 |     -0.0031  -0.20 |    0.6776 |  0.1355  0.0050  0.0000  0.0000 |        0.0261 0.0974 0.1583    0.0000 |    -0.0001     0.0192      0.0726
+   parity         1.000 |     -0.0052  -0.93 |    0.2500 |  0.0000  0.0000  0.0000  0.0000 |        0.0094 0.0361 0.0516    0.0000 |    -0.0004     0.0213      0.0843
+   majority       1.000 |     -0.0105  -0.71 |    0.6648 |  0.1295  0.0035  0.0000  0.0000 |        0.0257 0.0961 0.1570    0.0000 |    +0.0004     0.0203      0.0971
+   linear         1.000 |     -0.0035  -0.84 |    0.1869 |  0.0000  0.0000  0.0000  0.0000 |        0.0071 0.0262 0.0377    0.0000 |    +0.0000     0.0057      0.0226
+   cell4          0.938 |     -0.0039  -0.96 |    0.1812 |  0.0000  0.0000  0.0000  0.0000 |        0.0069 0.0267 0.0418    0.0000 |    -0.0001     0.0053      0.0195
+   1-2*B(0,4)     1.969 |     -0.0001  -0.03 |    0.1497 |  0.0000  0.0000  0.0000  0.0000 |        0.0055 0.0216 0.0302    0.0000 |    -0.0000     0.0046      0.0213
+   rand_pm1       1.000 |     -0.0126  -1.70 |    0.3316 |  0.0025  0.0000  0.0000  0.0000 |        0.0127 0.0471 0.0704    0.0000 |    -0.0000     0.0096      0.0326
+   all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.317);  max |z| of the means = 1.70;  tail violations: 0
+
+== regime G (overlaps >> tau): n=20 u=0.3 r=2 L=20000, 1500 instances [65s]  -- flat slope u = 0.3, radius 2; overlaps ~ 4 tau
+   m_r=7.457e-06  V(n,r-1)=21  R=L m_r=0.1491  eta''=L V/2^n=0.4005  sigma0=sqrt(R m_r)=0.001055
+   M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.00672 (<=1);  largest accuracy eps=ln(1+R/2)=0.0719;  new bound factor 1-eta-eta''=0.499
+   first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.04506): eta' = 22.2 at tau_min, 3.31 at max(tau_min, 0.04506)  => void in this regime (eta' >= 1 - eta)
+   overlaps:  E O_c=0.02815 (bound C(L,2) m_r V/2^n=0.02987)  E Otilde_c=0.02475   =>  E O_c/tau_min=4.19, E Otilde_c/tau_min=3.68;  first version needs O_c <= tau/5: frequency 0.0000
+   Lemma 2.5(ii): max[(R-O_c)-(A-1)]=-3.1e-03 (<=0 ok), max[(A-1)-R]=-2.4e-02 (<=0 ok);  P(O_c>=R/2)=0.0000 <= (L-1)V/2^n=0.4005 ok;  P(A-1<=R/2)=0.0000;  (A-1)/R in [0.832, 0.837]
+   bounded differences: 200 single-centre replacements: max |G(c)-G(c')|/m_r = 1.8210 (lemma: <= 2|psi|oo <= 4);  max |G(c)-G(c')|/(osc(phi) m_r) = 0.9105 (referee: <= 1) ok
+   McDiarmid at t = k*sigma0, k=(1.0, 2.0, 3.0, 4.0):  report 2exp(-k^2/8) = ['1', '1', '0.649', '0.271'];  referee 2exp(-k^2/2) = ['1', '0.271', '0.0222', '0.000671']
+   phi          |psi|oo | mean G/sig0      z | sd G/sig0 | P(|G|>k sig0), k=1,2,3,4        | |b|/tau: q50   q99    max   P(|b|>tau) | mean C/tau   sd C/tau  max|C|/tau
+   chi_1          1.000 |     +0.0210  +1.28 |    0.6370 |  0.1160  0.0020  0.0000  0.0000 |        0.0608 0.2331 0.3029    0.0000 |    +0.0013     0.0492      0.1570
+   chi_123        1.000 |     +0.0201  +1.49 |    0.5225 |  0.0507  0.0007  0.0000  0.0000 |        0.0486 0.1911 0.3374    0.0000 |    +0.0013     0.0390      0.1856
+   parity         1.000 |     +0.0294  +2.16 |    0.5259 |  0.0600  0.0007  0.0000  0.0000 |        0.0484 0.1930 0.2979    0.0000 |    +0.0020     0.0470      0.1734
+   majority       1.000 |     +0.0130  +0.94 |    0.5350 |  0.0567  0.0007  0.0000  0.0000 |        0.0498 0.1964 0.2819    0.0000 |    +0.0008     0.0403      0.1398
+   linear         1.000 |     +0.0039  +1.07 |    0.1410 |  0.0000  0.0000  0.0000  0.0000 |        0.0129 0.0509 0.0766    0.0000 |    +0.0003     0.0106      0.0374
+   cell4          0.938 |     +0.0039  +1.08 |    0.1397 |  0.0000  0.0000  0.0000  0.0000 |        0.0127 0.0514 0.0627    0.0000 |    +0.0002     0.0101      0.0355
+   1-2*B(0,5)     1.959 |     +0.0067  +1.85 |    0.1410 |  0.0000  0.0000  0.0000  0.0000 |        0.0126 0.0504 0.0805    0.0000 |    +0.0004     0.0105      0.0453
+   rand_pm1       1.001 |     -0.0052  -1.14 |    0.1778 |  0.0000  0.0000  0.0000  0.0000 |        0.0169 0.0617 0.0888    0.0000 |    -0.0008     0.0149      0.0491
+   all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.501);  max |z| of the means = 2.16;  tail violations: 0
+
+== regime F (control): n=16 u=1 r=2 L=300, 3000 instances [3s]  -- overlaps small compared with tau: the regime of the first version
+   m_r=0.000517  V(n,r-1)=17  R=L m_r=0.1551  eta''=L V/2^n=0.0778  sigma0=sqrt(R m_r)=0.008955
+   M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.05706 (<=1);  largest accuracy eps=ln(1+R/2)=0.0747;  new bound factor 1-eta-eta''=0.822
+   first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.3679): eta' = 0.529 at tau_min, 0.082 at max(tau_min, 0.3679)  => usable in this regime
+   overlaps:  E O_c=0.005245 (bound C(L,2) m_r V/2^n=0.006015)  E Otilde_c=0.005113   =>  E O_c/tau_min=0.09, E Otilde_c/tau_min=0.09;  first version needs O_c <= tau/5: frequency 1.0000
+   Lemma 2.5(ii): max[(R-O_c)-(A-1)]=+2.8e-17 (<=0 ok), max[(A-1)-R]=-3.4e-03 (<=0 ok);  P(O_c>=R/2)=0.0000 <= (L-1)V/2^n=0.0776 ok;  P(A-1<=R/2)=0.0000;  (A-1)/R in [0.953, 0.978]
+   bounded differences: 200 single-centre replacements: max |G(c)-G(c')|/m_r = 2.0000 (lemma: <= 2|psi|oo <= 4);  max |G(c)-G(c')|/(osc(phi) m_r) = 1.0000 (referee: <= 1) ok
+   McDiarmid at t = k*sigma0, k=(1.0, 2.0, 3.0, 4.0):  report 2exp(-k^2/8) = ['1', '1', '0.649', '0.271'];  referee 2exp(-k^2/2) = ['1', '0.271', '0.0222', '0.000671']
+   phi          |psi|oo | mean G/sig0      z | sd G/sig0 | P(|G|>k sig0), k=1,2,3,4        | |b|/tau: q50   q99    max   P(|b|>tau) | mean C/tau   sd C/tau  max|C|/tau
+   chi_1          1.000 |     +0.0138  +0.88 |    0.8561 |  0.2480  0.0200  0.0000  0.0000 |        0.0780 0.2938 0.3897    0.0000 |    -0.0001     0.0134      0.0532
+   chi_123        1.000 |     -0.0126  -1.04 |    0.6603 |  0.1323  0.0010  0.0000  0.0000 |        0.0602 0.2288 0.3249    0.0000 |    -0.0002     0.0106      0.0382
+   parity         1.000 |     +0.0062  +0.60 |    0.5675 |  0.0830  0.0000  0.0000  0.0000 |        0.0527 0.1979 0.2519    0.0000 |    +0.0002     0.0125      0.0456
+   majority       1.000 |     +0.0049  +0.39 |    0.6948 |  0.1537  0.0047  0.0000  0.0000 |        0.0630 0.2463 0.3946    0.0000 |    +0.0001     0.0113      0.0385
+   linear         1.000 |     +0.0026  +0.68 |    0.2084 |  0.0000  0.0000  0.0000  0.0000 |        0.0193 0.0736 0.1072    0.0000 |    +0.0001     0.0033      0.0142
+   cell4          0.938 |     +0.0017  +0.50 |    0.1821 |  0.0000  0.0000  0.0000  0.0000 |        0.0170 0.0621 0.0834    0.0000 |    -0.0000     0.0029      0.0146
+   1-2*B(0,3)     1.979 |     -0.0006  -0.27 |    0.1205 |  0.0000  0.0000  0.0000  0.0000 |        0.0113 0.0424 0.0734    0.0000 |    -0.0000     0.0021      0.0227
+   rand_pm1       1.005 |     -0.0026  -0.53 |    0.2646 |  0.0000  0.0000  0.0000  0.0000 |        0.0246 0.0969 0.1357    0.0000 |    +0.0001     0.0068      0.0269
+   all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.178);  max |z| of the means = 1.04;  tail violations: 0
+
+== regime E (heavy overlap): n=16 u=1 r=3 L=1000, 2000 instances [22s]  -- eta'' > 1: the theorem is void, Lemma 2.5(iv) + McDiarmid still have to hold
+   m_r=0.004997  V(n,r-1)=137  R=L m_r=4.9973  eta''=L V/2^n=2.0905  sigma0=sqrt(R m_r)=0.158
+   M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=1.007 (>1: hypotheses not satisfiable);  largest accuracy eps=ln(1+R/2)=1.2524;  new bound factor 1-eta-eta''=-1.190
+   first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.2015): eta' = 25.9 at tau_min, 25.9 at max(tau_min, 0.2015)  => void in this regime (eta' >= 1 - eta)
+   overlaps:  E O_c=3.91 (bound C(L,2) m_r V/2^n=5.218)  E Otilde_c=2.232   =>  E O_c/tau_min=3.88, E Otilde_c/tau_min=2.22;  first version needs O_c <= tau/5: frequency 0.0000
+   Lemma 2.5(ii): max[(R-O_c)-(A-1)]=-1.6e+00 (<=0 ok), max[(A-1)-R]=-2.2e+00 (<=0 ok);  P(O_c>=R/2)=1.0000 <= (L-1)V/2^n=2.0884 ok;  P(A-1<=R/2)=0.0000;  (A-1)/R in [0.548, 0.559]
+   bounded differences: 200 single-centre replacements: max |G(c)-G(c')|/m_r = 0.8405 (lemma: <= 2|psi|oo <= 4);  max |G(c)-G(c')|/(osc(phi) m_r) = 0.4203 (referee: <= 1) ok
+   McDiarmid at t = k*sigma0, k=(1.0, 2.0, 3.0, 4.0):  report 2exp(-k^2/8) = ['1', '1', '0.649', '0.271'];  referee 2exp(-k^2/2) = ['1', '0.271', '0.0222', '0.000671']
+   phi          |psi|oo | mean G/sig0      z | sd G/sig0 | P(|G|>k sig0), k=1,2,3,4        | |b|/tau: q50   q99    max   P(|b|>tau) | mean C/tau   sd C/tau  max|C|/tau
+   chi_1          1.000 |     -0.0029  -0.46 |    0.2763 |  0.0005  0.0000  0.0000  0.0000 |        0.0078 0.0298 0.0489    0.0000 |    -0.0012     0.0835      0.3506
+   chi_123        1.000 |     -0.0043  -0.98 |    0.1957 |  0.0000  0.0000  0.0000  0.0000 |        0.0054 0.0206 0.0299    0.0000 |    -0.0012     0.0440      0.1556
+   parity         1.000 |     +0.0017  +1.24 |    0.0619 |  0.0000  0.0000  0.0000  0.0000 |        0.0017 0.0070 0.0090    0.0000 |    -0.0020     0.0685      0.2503
+   majority       1.000 |     -0.0048  -0.97 |    0.2198 |  0.0000  0.0000  0.0000  0.0000 |        0.0064 0.0224 0.0306    0.0000 |    -0.0009     0.0656      0.2055
+   linear         1.000 |     -0.0011  -0.72 |    0.0672 |  0.0000  0.0000  0.0000  0.0000 |        0.0019 0.0072 0.0088    0.0000 |    -0.0003     0.0205      0.0628
+   cell4          0.938 |     -0.0017  -1.32 |    0.0561 |  0.0000  0.0000  0.0000  0.0000 |        0.0016 0.0057 0.0080    0.0000 |    -0.0005     0.0153      0.0659
+   1-2*B(0,3)     1.979 |     +0.0009  +1.10 |    0.0356 |  0.0000  0.0000  0.0000  0.0000 |        0.0010 0.0037 0.0055    0.0000 |    +0.0001     0.0094      0.0441
+   rand_pm1       1.005 |     -0.0011  -0.67 |    0.0727 |  0.0000  0.0000  0.0000  0.0000 |        0.0020 0.0076 0.0124    0.0000 |    -0.0003     0.0099      0.0351
+   all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 2.190);  max |z| of the means = 1.32;  tail violations: 0
+
+summary: self-test ok; regimes 7; largest |z| of a mean of G_psi over all 56 (regime, observable) pairs: 2.38; tail violations (beyond 3 sigma MC error): 0

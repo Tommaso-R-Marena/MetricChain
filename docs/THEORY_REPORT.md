@@ -12647,14 +12647,15 @@ Besides evaluations the algorithm receives information about the normalised ense
   `ln ln M = o(n)`**; the same for `q` adaptive statistical queries.  Mechanism: the average of `L` independent
   uniform translates of a dip is admissible, has the same partition function, and its ensemble means are within
   `τ` of the uniform ones with probability `1 − η` (Hoeffding).
-* **Theorem A′ [P; the two deterministic steps V] (`sum_tuples_sup'_bias_eq_zero`, `abs_sup'_sub_sup'_le`).**  With `L` narrow dips (a maximum,
+* **Theorem A′ [P; uses the bounded-differences inequality (K); the mean-zero identity V] (`sum_tuples_sup'_bias_eq_zero`, `abs_sup'_sub_sup'_le`).**  With `L` narrow dips (a maximum,
   each carrying the `L`-th part of the excess) the adaptive exponent at tolerance `e^{−γn}` with `ln ln M ≈ βn` is at least
   `h̄(2γ + β)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ = h − (1 − ℓ)λ + O(λ²)` (`ℓ` the Chernoff parameter, `L` of §11.18), for every
   `2γ + β < a` — positive on that whole range, with a double zero at `a`.  Mechanism: the bias of a maximum of random
   dips against a centred observable has mean exactly zero over the centres, overlaps included, and one centre
   moves it by at most twice the mass of a dip, so the bounded-differences inequality applies.  (The first version,
   by Hoeffding for the main term and Markov for the overlaps, needed `h̄(λ) > γ`; the present form was written after
-  the internal review of Phase II — `docs/phase2/PHASE2_REPORT.md` §2.3, §10.)
+  the first internal review of Phase II and reviewed separately by a second AI referee, who found it correct for
+  `δ ≤ ½` and sharpened a constant — `docs/phase2/PHASE2_REPORT.md` §2.3, §10; `docs/phase2/PHASE2_REVIEW_A1.md`.)
 * **Theorem A″ [P; identity V] (`hiding_law_sum`, `flat_mixture`, `flat_mixture_truncated`).**  For any reference
   measure and any kernel with constant row sums, cones scaled to equal mass and mixed with the law
   `q(c) ∝ E_π e^{−u d(·,c)}` add up to a constant; this gives the analogue of Theorem A on every vertex-transitive

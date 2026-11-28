@@ -15092,7 +15092,7 @@ def t_oi_noisy(rng, trials):
     return True, stats
 
 
-@conjecture("XXVIII.2 Phase II, Lemma 2.5 and Corollary A' (maxima of narrow dips).  On the cube of 9 sites: w_c = 1 + max_j e_r(. + c_j) is admissible; L m_r - O_c <= A(w_c) - 1 <= L m_r with O_c the sum of the pairwise overlaps E_pi min(e, e'); the average over all pairs of centres of the pair overlap is at most m_r V(n, r-1)/2^n; TV(mu_{w_c}, ideal mixture) <= O_c/(1 + L m_r - O_c).  Lemma 2.5(iv) and the probabilistic steps of Theorem A' (bounded differences), by exact enumeration of ALL tuples of centres on cubes of 4 to 6 sites: for a centred psi the bias functional G(c) = E_pi[(w_c - 1) psi] has mean zero over the tuples, overlaps included; changing one centre moves it by at most 2 |psi|_inf m_r; its variance is at most L d^2/4 and its exact tails are below the bounded-differences bound 2 exp(-2 t^2/(L d^2)), d = 2 |psi|_inf m_r; A(w_c) - 1 >= R - O_c for every tuple and P(O_c >= R/2) <= (L-1) V(n, r-1)/2^n, R = L m_r.  Exponent function hbar(lam) = KL(rho_0 - lam/u || 1/2) - lam: hbar(0) = h, hbar(a) = 0, slope -(1 - ell) at 0, convex; rho_0 = p_u + a/u and KL(rho_0||1/2) = KL(rho_0||p_u) (h is the Chernoff information of the two site laws); hbar(2 gamma) >= h - 2 gamma and <= (1 - gamma/ln 2) h on the range where it is positive; hbar > 0 on [0, a)")
+@conjecture("XXVIII.2 Phase II, Lemma 2.5 and Corollary A' (maxima of narrow dips).  On the cube of 9 sites: w_c = 1 + max_j e_r(. + c_j) is admissible; L m_r - O_c <= A(w_c) - 1 <= L m_r with O_c the sum of the pairwise overlaps E_pi min(e, e'); the average over all pairs of centres of the pair overlap is at most m_r V(n, r-1)/2^n; TV(mu_{w_c}, ideal mixture) <= O_c/(1 + L m_r - O_c).  Lemma 2.5(iv) and the probabilistic steps of Theorem A' (bounded differences), by exact enumeration of ALL tuples of centres on cubes of 4 to 6 sites: for a centred psi the bias functional G(c) = E_pi[(w_c - 1) psi] has mean zero over the tuples, overlaps included; changing one centre moves it by at most d = (sup psi - inf psi) m_r; its variance is at most L d^2/4 and its exact tails are below the bounded-differences bound 2 exp(-2 t^2/(L d^2)); A(w_c) - 1 >= R - O_c for every tuple and P(O_c >= R/2) <= (L-1) V(n, r-1)/2^n, R = L m_r.  Exponent function hbar(lam) = KL(rho_0 - lam/u || 1/2) - lam: hbar(0) = h, hbar(a) = 0, slope -(1 - ell) at 0, convex; rho_0 = p_u + a/u and KL(rho_0||1/2) = KL(rho_0||p_u) (h is the Chernoff information of the two site laws); hbar(2 gamma) >= h - 2 gamma and <= (1 - gamma/ln 2) h on the range where it is positive; hbar > 0 on [0, a)")
 def t_oi_narrow(rng, trials):
     quick = trials < 100
     n, u = 9, 1.0
@@ -15145,11 +15145,11 @@ def t_oi_narrow(rng, trials):
         for phi4 in (rng.choice([-1.0, 1.0], size=N4), rng.uniform(-1, 1, size=N4)):
             psi4 = phi4 - phi4.mean()
             G4 = np.tensordot(psi4, W4, axes=(0, 0)) / N4                            # the bias functional, all tuples
-            d4 = 2 * np.abs(psi4).max() * m4
+            d4 = (psi4.max() - psi4.min()) * m4                                      # oscillation of the observable times m_r
             if abs(G4.mean()) > 1e-12 * max(1.0, m4):
                 return False, dict(reason="the bias of a maximum of random dips against a centred observable does not average to zero", mean=float(G4.mean()))
             if (G4.max(axis=-1) - G4.min(axis=-1)).max() > d4 + 1e-12:
-                return False, dict(reason="one centre moves the bias functional by more than 2 |psi|_inf m_r", n=n4, L=L4)
+                return False, dict(reason="one centre moves the bias functional by more than (sup psi - inf psi) m_r", n=n4, L=L4)
             if G4.var() > L4 * d4 * d4 / 4 + 1e-12:
                 return False, dict(reason="variance of the bias functional exceeds L d^2/4", n=n4, L=L4)
             for t4 in (0.5, 1.0, 1.5, 2.0, 3.0):

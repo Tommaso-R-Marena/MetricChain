@@ -18,16 +18,16 @@ PASS  A4a maximum of dips is admissible
 PASS  A4b sum - pair overlaps <= max <= sum (masses)
 PASS  A4c expected pair overlap <= m(r) V(n,r-1)/2^n   5.690e-03 <= 8.561e-03
 PASS  A4d Lemma 2.5(iv): E_c E_pi[(w_c - 1) psi] = 0 for centred psi, all tuples of centres, overlaps included
-PASS  A4e Lemma 2.5(iv): one centre moves E_pi[(w_c - 1) psi] by at most 2 |psi|_inf m_r   largest observed change / bound = 0.797
+PASS  A4e Lemma 2.5(iv): one centre moves E_pi[(w_c - 1) psi] by at most (sup psi - inf psi) m_r   largest observed change / bound = 1.000
 PASS  A4f exact tails of the bias functional are below the bounded-differences (McDiarmid) bound
 PASS  A4g A(w_c) - 1 >= R - O_c for every tuple, and P(O_c >= R/2) <= (L-1) V(n,r-1)/2^n
    Theorem A' at finite n (u = 1, eps = 1, M = 100, eta = 0.1): n, gamma, r/n, L m_r, exponents
-          n =   2000 gamma = 0.005: r/n = 0.3670 (limit 0.3699), n^-1 ln(2^n/(L V)) = 0.02414 (limit hbar(2 gamma) = 0.02425), ln eta'' = -48.3, ln eta' (first version) = -36.1
-          n =   2000 gamma = 0.030: r/n = 0.3170 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00711 (limit hbar(2 gamma) = 0.00636), ln eta'' = -14.2, ln eta' (first version) = +47.9
-          n =  20000 gamma = 0.030: r/n = 0.3196 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00649 (limit hbar(2 gamma) = 0.00636), ln eta'' = -129.9, ln eta' (first version) = +472.3
-          n =  20000 gamma = 0.045: r/n = 0.2896 (limit 0.2899), n^-1 ln(2^n/(L V)) = 0.00128 (limit hbar(2 gamma) = 0.00110), ln eta'' = -25.6, ln eta' (first version) = +876.6
-          n = 200000 gamma = 0.030: r/n = 0.3199 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00638 (limit hbar(2 gamma) = 0.00636), ln eta'' = -1276.5, ln eta' (first version) = +4725.7
-          n = 200000 gamma = 0.045: r/n = 0.2899 (limit 0.2899), n^-1 ln(2^n/(L V)) = 0.00112 (limit hbar(2 gamma) = 0.00110), ln eta'' = -224.3, ln eta' (first version) = +8777.8
+          n =   2000 gamma = 0.005: r/n = 0.3675 (limit 0.3699), n^-1 ln(2^n/(L V)) = 0.02437 (limit hbar(2 gamma) = 0.02425), ln eta'' = -48.7, ln eta' (first version) = -36.6
+          n =   2000 gamma = 0.030: r/n = 0.3175 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00722 (limit hbar(2 gamma) = 0.00636), ln eta'' = -14.4, ln eta' (first version) = +47.7
+          n =  20000 gamma = 0.030: r/n = 0.3196 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00651 (limit hbar(2 gamma) = 0.00636), ln eta'' = -130.1, ln eta' (first version) = +472.0
+          n =  20000 gamma = 0.045: r/n = 0.2897 (limit 0.2899), n^-1 ln(2^n/(L V)) = 0.00128 (limit hbar(2 gamma) = 0.00110), ln eta'' = -25.7, ln eta' (first version) = +876.5
+          n = 200000 gamma = 0.030: r/n = 0.3199 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00638 (limit hbar(2 gamma) = 0.00636), ln eta'' = -1276.7, ln eta' (first version) = +4725.4
+          n = 200000 gamma = 0.045: r/n = 0.2899 (limit 0.2899), n^-1 ln(2^n/(L V)) = 0.00112 (limit hbar(2 gamma) = 0.00110), ln eta'' = -224.5, ln eta' (first version) = +8777.7
 PASS  A4h the recipe of Corollary A' at n = 2000, 20000, 200000: hypotheses hold, eta'' < 1e-3, the exponent of the bound is positive and within 0.004 of hbar(2 gamma) (also where eta' of the first version exceeds one)
 PASS  A5 attenuated bias: E_a(dev^2) = sum_{s != 0} phihat(s)^2 rho~(s)^2 nu~(s)^2 <= E phi^2 max (|rho~| |nu~|)^2
 PASS  A6 absorption: v e^{f} in W_u for v in W_{u-kappa}, w e^{-f} in W_{u+kappa}; same ensembles; targets differ by ln Z_f

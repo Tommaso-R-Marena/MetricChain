@@ -20,8 +20,10 @@ review and were read by the referee ("correct as stated").
 *After the review.*  **Theorem A′ and Corollary A′ (§2.3) were strengthened on 2026-11-28, after that
 review**: the side condition `h̄(λ) > γ` of the first version is removed, so that the lower bound `h̄(2γ)` at
 tolerance `e^{−γn}` holds for every `γ < a/2` (at `u = 1`: up to `0.0555` instead of `0.0154`).  The first
-referee did not see the new proof.  <!-- A1 -->A second, short review of exactly that proof was commissioned
-(`docs/phase2/PHASE2_REVIEW_A1.md`, when present); see §10 for what it and the exact checks cover.<!-- /A1 -->
+referee did not see the new proof.  A second, short review of exactly that section
+(`docs/phase2/PHASE2_REVIEW_A1.md`; replications `experiments/phase2/review/a1_*`) found the new theorem, its
+lemma and its corollary correct, except in a degenerate corner of the statement (`δ > ½`; now excluded), and
+supplied a sharper constant; its seven findings are incorporated (§2.3, Note; §10).
 
 *Starting point.*  The consolidated archive at `fe9f58c` (read through
 `consolidated/00_MASTER_INDEX.md`); the two extensions S1, S2 proposed by an independent
@@ -218,7 +220,7 @@ Theorem A spends the factor `L` on `L` translates of *one* dip, each of which co
 hidden alone.  `L` narrower dips, each carrying the `L`-th part of the excess, occupy less space:
 a dip with excess `m_r ≈ m_{r*}/L` has radius `r ≈ r* − u^{−1}ln L` and volume `≈ V(n, r*)·L^{−ℓ}`.
 
-**Lemma 2.5 (maxima of dips) [P; (i) V; (ii)–(iv) checked exactly on small cubes].**  For
+**Lemma 2.5 (maxima of dips) [P; (i) V; of (iv) the mean-zero identity V; (ii)–(iv) checked exactly on small cubes].**  For
 `c = (c_1, …, c_L)` put `w_c = 1 + max_j e_r(· ⊕ c_j)`.  (i) `w_c ∈ 𝒲_u`, and `w_c = 1` off `∪_j B(c_j, r−1)`.
 (ii) `L m_r − O_c ≤ A(w_c) − 1 ≤ L m_r` with `O_c = Σ_{j<j′} E_π min(e_r(·⊕c_j), e_r(·⊕c_{j′}))`, and for
 independent uniform centres `E O_c ≤ C(L,2)·m_r·V(n,r−1)/2ⁿ`.  (iii) With the probability measure
@@ -226,7 +228,8 @@ independent uniform centres `E O_c ≤ C(L,2)·m_r·V(n,r−1)/2ⁿ`.  (iii) Wit
 `Õ_c = E_π(Σ_j e_j − max_j e_j) ≤ O_c`; hence `≤ O_c/(1 + L m_r − O_c)` whenever `O_c < 1 + L m_r`.
 (iv) *No bias on average; bounded differences.*  For `ψ` with `E_πψ = 0` put `G_ψ(c) = E_π[(w_c − 1)ψ]`, so that
 `E_{μ_{w_c}}φ − E_πφ = G_ψ(c)/A(w_c)` for `ψ = φ − E_πφ`.  For independent uniform centres `E_c G_ψ(c) = 0` —
-overlaps included — and if `c` and `c′` differ in one centre only, `|G_ψ(c) − G_ψ(c′)| ≤ 2‖ψ‖_∞ m_r`.
+overlaps included — and if `c` and `c′` differ in one centre only, `|G_ψ(c) − G_ψ(c′)| ≤ (sup ψ − inf ψ)·m_r`
+(attained: one dip, two antipodal centres).
 
 *Proof.*  (i) `w_c` is the maximum of the dips `w_{c_j, r}`.  (ii) For nonnegative numbers
 `Σ_j a_j − Σ_{j<j′} min(a_j, a_{j′}) ≤ max_j a_j ≤ Σ_j a_j` (order them; the second largest is counted once
@@ -234,29 +237,37 @@ in the middle sum with the largest, and every smaller one at least once).  For t
 `E min(e_r(·⊕c), e_r(·⊕c′)) ≤ E[e_r(x⊕c)·1{x ∈ B(c′, r−1)}] = m_r V(n,r−1)/2ⁿ`.  (iii) With `Õ = E_π(Σ_j e_j − max_j e_j) ≤ O_c`:
 `‖μ_{w_c} − μ̃_c‖₁ ≤ Õ/(1 + Lm_r − Õ) + (1 + Lm_r)·|1/(1 + Lm_r − Õ) − 1/(1 + Lm_r)| = 2Õ/(1 + Lm_r − Õ)`.
 (iv) `E_π[w_cφ] − A(w_c)E_πφ = E_π[w_cψ] = E_π[(w_c − 1)ψ]`.  For every fixed `x` the tuple `(x ⊕ c_j)_j` has the law of
-`(c_j)_j`, so `κ := E_c max_j e_r(x ⊕ c_j)` does not depend on `x`, and `E_c G_ψ = κ·E_πψ = 0`.  A maximum is
-1-Lipschitz in each argument: if only the `j`-th centre changes, `|w_c − w_{c′}| ≤ |e_r(·⊕c_j) − e_r(·⊕c′_j)| ≤
-e_r(·⊕c_j) + e_r(·⊕c′_j)` pointwise, and the mean of the right-hand side is `2m_r`.  ∎
+`(c_j)_j`, so `κ := E_c max_j e_r(x ⊕ c_j)` does not depend on `x`, and `E_c G_ψ = κ·E_πψ = 0`.  Fix all centres
+but the `j`-th and let `b = max_{i≠j} e_r(·⊕c_i)` (`b = 0` if `L = 1`).  Then `w_c − 1 = b + D` with
+`D = (e_r(·⊕c_j) − b)₊`, `0 ≤ D ≤ e_r(·⊕c_j)`, so `G_ψ(c) = E_π[bψ] + E_π[Dψ]`: the first term does not depend on
+`c_j`, and the second lies in `[m_r inf ψ, m_r sup ψ]`, because `0 ≤ E_πD ≤ m_r` and `inf ψ ≤ 0 ≤ sup ψ`.  (The
+decomposition and the sharp constant are the second referee's, `PHASE2_REVIEW_A1.md` finding 7; the cruder
+bound `2‖ψ‖_∞ m_r` follows from the fact that a maximum is 1-Lipschitz in each argument, which is the
+machine-checked form, `abs_sup'_sub_sup'_le`.)  ∎
 
-**Theorem A′ (narrow dips) [P; in this form written after the internal review, see the note below].**
-Let `M ≥ 1`, `0 < τ ≤ 1`, `0 < η < 1`, and let the radius `r ≥ 1` and the integer `L ≥ 1` satisfy, with `R := L m_r`,
+**Theorem A′ (narrow dips) [P; uses the bounded-differences inequality, K; in this form written after the first
+review and reviewed separately, see the note below].**
+Let `M ≥ 1`, `0 < τ ≤ 1`, `0 < η < 1`, `δ ≤ ½`, and let the radius `r ≥ 1` and the integer `L ≥ 1` satisfy, with
+`R := L m_r`,
 
-    R ≥ 2(e^ε − 1)        and        8 R m_r ln(2M/η) ≤ τ²        (that is, L ≥ 8R²τ^{−2} ln(2M/η)).
+    R ≥ 2(e^ε − 1)        and        2 R m_r ln(2M/η) ≤ τ²
 
-Every `(ε/2, δ)`-correct randomised algorithm with an oracle (O1) makes at the constant weight, with
-truthful uniform answers,
+(equivalently `m_r ≤ τ²/(2R ln(2M/η))`: every single dip is far below the tolerance; for a given radius,
+`2(e^ε − 1)/m_r ≤ L ≤ τ²/(2m_r² ln(2M/η))`).  Every `(ε/2, δ)`-correct randomised algorithm with an oracle (O1)
+makes at the constant weight, with truthful uniform answers,
 
     E|Q|  ≥  (1 − 2δ)(1 − η − η″) · 2ⁿ / ( L · V(n, r−1) ),      η″ = L V(n, r−1) / 2ⁿ .
 
 (`η″` is the reciprocal of the main factor: the bound is `(1 − 2δ)((1 − η)/η″ − 1)`, and it has no side
-condition — where `η″` is not small, the claim is trivial.)
+condition — where `η″` is not small, the claim is trivial.  `δ ≤ ½` is needed only for that: for `δ > ½` and
+`η + η″ > 1` the product of two negative factors would be a false positive bound.)
 
-*Proof.*  Independent uniform centres.  Let `φ` have values in `[−1, 1]` and `ψ = φ − E_πφ`, so `‖ψ‖_∞ ≤ 2`.  By
-Lemma 2.5(iv), `G_ψ` has mean zero and changes by at most `4m_r` when one centre changes; by the
+*Proof.*  Independent uniform centres.  Let `φ` have values in `[−1, 1]` and `ψ = φ − E_πφ`, so `sup ψ − inf ψ ≤ 2`.
+By Lemma 2.5(iv), `G_ψ` has mean zero and changes by at most `2m_r` when one centre changes; by the
 bounded-differences inequality (McDiarmid 1989)
-`P(|G_ψ(c)| > τ) ≤ 2exp(−2τ²/(L(4m_r)²)) = 2exp(−τ²/(8 R m_r)) ≤ η/M`.  Since `A(w_c) ≥ 1`,
-`|E_{μ_{w_c}}φ − E_πφ| ≤ |G_ψ(c)|`: outside an event of probability `η` the uniform answers are admissible for
-all `M` observables.  By Lemma 2.5(ii) and Markov's inequality
+`P(|G_ψ(c)| > τ) ≤ 2exp(−2τ²/(L(2m_r)²)) = 2exp(−τ²/(2 R m_r)) ≤ η/M`.  Since `A(w_c) ≥ 1`,
+`|E_{μ_{w_c}}φ − E_πφ| ≤ |G_ψ(c)|`: outside an event of probability at most `η` the uniform answers are admissible
+for all `M` observables.  By Lemma 2.5(ii) and Markov's inequality
 `P(O_c ≥ R/2) ≤ C(L,2)·m_r·V(n,r−1)·2^{−n}/(R/2) ≤ η″`, and `O_c < R/2` gives
 `A(w_c) ≥ 1 + R − O_c > 1 + R/2 ≥ e^ε`.  So with probability at least `1 − η − η″` the weight `w_c` is an
 alternative with `ln A(w_c) > ε` for which the uniform answers are admissible.  A point lies in
@@ -264,22 +275,29 @@ alternative with `ln A(w_c) > ε` for which the uniform answers are admissible. 
 
 *Adaptive statistical queries.*  The per-seed argument of Theorem A applies verbatim, with the good
 event of the seed `ω` = {`|G_ψ(c)| ≤ τ` for the queries of `ω`, and `O_c < R/2`}: for an oracle (O2) with at most `q`
-queries and `8 R m_r ln(2q/η) ≤ τ²`, `E|Q| ≥ (1 − η − η″ − 2δ)·2ⁿ/(L·V(n, r−1))`.
+queries and `2 R m_r ln(2q/η) ≤ τ²`, `E|Q| ≥ (1 − η − η″ − 2δ)·2ⁿ/(L·V(n, r−1))` (no restriction on `δ` in this form).
 
-*Note (the first version, and what changed).*  The version of this theorem that the internal referee
-read and found correct (`PHASE2_REVIEW.md` §1.3) had the hypotheses `L ≥ 8τ^{−2}ln(2M/η)`,
+*Note (the first version, and what changed).*  The version of this theorem that the first referee
+read and found correct (`PHASE2_REVIEW.md` §3.2; the (O2) form §3.3) had the hypotheses `L ≥ 8τ^{−2}ln(2M/η)`,
 `L m_r > e^ε − 1 + τ/5` and the bound `(1 − 2δ)(1 − η − η′)·2ⁿ/(L·V(n,r−1))` with
 `η′ = (5Lm_r/(2τ))·L V(n,r−1)/2ⁿ`: it compared `μ_{w_c}` with the ideal mixture `μ̃_c` of Lemma 2.5(iii) and
 needed the overlaps to be small *compared with `τ`* (Markov), which in the corollary is the side
-condition `h̄(λ) > γ` (at `u = 1`: `γ < 0.0154`).  That statement remains true, but the condition is an
-artefact: by symmetry the overlaps contribute nothing to the bias on average (Lemma 2.5(iv)), and
+condition `h̄(λ) > γ` (at `u = 1` and `β = 0`: `γ < 0.0154`).  That statement remains true (in constants the two
+are incomparable), but the condition is an artefact: by symmetry the overlaps contribute nothing to the bias on average (Lemma 2.5(iv)), and
 the bounded-differences inequality controls their fluctuations together with those of the main
 term.  The present form needs the overlaps to be small only compared with the excess `R` — which is the
-condition that the bound is not trivial.  It was written on 2026-11-28 after the review; its
-verification is described in §10.
+condition that the bound is not trivial.  It was written on 2026-11-28 after the first review.  **A second
+referee reviewed exactly this section** (`PHASE2_REVIEW_A1.md`; own enumeration over all tuples of centres in
+118 configurations, Monte Carlo at 16–20 sites in regimes where the overlaps are 0.4 to 6 times the tolerance,
+the recipe of the corollary up to `n = 2·10⁶`): the theorem, both oracle forms, Lemma 2.5(iv) and the corollary
+stand; it found the corner `δ > ½`, `η + η″ > 1` in which the displayed bound was false as a statement (the
+first version had the same corner; `δ ≤ ½` is now a hypothesis), five points of wording, and the sharper
+constant (`2` in place of `8`; it read the text with `8`).  All are incorporated; the text as it now stands
+was not re-read by a referee.
 
-**Corollary A′ (exponents) [P].**  Let `τ = e^{−γn}`, `ln ln M = βn + o(n)`, `λ = 2γ + β < a`, bounded
-accuracy.  Then the adaptive exponent with the oracle is at least
+**Corollary A′ (exponents) [P].**  Let `τ = e^{−γn}`, `ln ln(M + 2) ≤ βn + o(n)`, `λ = 2γ + β < a`, bounded
+accuracy, `δ < ½`.  Then the adaptive exponent with the oracle (O1) — and with an oracle (O2) answering
+`q` adaptive statistical queries, `ln ln(q + 2) ≤ βn + o(n)` — is at least
 
     h̄(λ)  :=  KL(ρ₀ − λ/u ‖ ½) − λ .
 
@@ -288,7 +306,8 @@ accuracy.  Then the adaptive exponent with the oracle is at least
 `1 − ℓ = 0.5100`; for `β = 0` the bound is positive up to `γ = a/2 = 0.0555`, while `h − 2γ` vanishes at
 `γ = h/2 = 0.01457`.
 
-*Proof.*  Let `r` be the largest radius with `8(2e^ε − 1)·m_r·ln(2M/η) ≤ τ²` and `L = ⌈2(e^ε − 1)/m_r⌉`.  Then
+*Proof.*  Fix `η < 1 − 2δ`.  Let `r` be the largest radius with `2(2e^ε − 1)·m_r·ln(2M/η) ≤ τ²` — it exists
+for large `n`, because `m_1 = (e^u − 1)2^{−n}` and `λ < a < ln 2` — and `L = ⌈2(e^ε − 1)/m_r⌉`.  Then
 `m_r < 1`, `2(e^ε − 1) ≤ R ≤ 2(e^ε − 1) + m_r ≤ 2e^ε − 1`, and the hypotheses of Theorem A′ hold.  Consecutive
 masses differ by a factor `e^{o(n)}`: `m_{r+1} ≤ (e^u + 1 + n)·m_r` (term by term
 `e^{u(r+1−j)} − 1 ≤ (e^u + 1)(e^{u(r−j)} − 1)` for `j < r`, and the new shell has at most `n` times the points of
@@ -310,8 +329,8 @@ the last one).  Hence `m_r = e^{−λn + o(n)}`, `L = e^{λn + o(n)}`; by `n^{�
 | 0.050 | — | 0.000302 | 0.027037 |
 | `a/2 = 0.05547` | — | 0 | 0.026807 |
 
-The gap between the last two columns is open (§11, problem 1); beyond `γ = a/2` there is no lower
-bound at all, while the upper bound stays positive up to `γ = ln 2`.
+The gap between the last two columns is open (§11, problem 1); beyond `γ = a/2` Theorems A and A′ give no
+lower bound for randomised algorithms, while the upper bound stays positive up to `γ = ln 2`.
 
 ### 2.4 Any reference measure, any homogeneous space: the flat mixture
 
@@ -781,16 +800,16 @@ not "new".**
 
 | item | status |
 |---|---|
-| Lemmas 2.1, 2.2, 2.3, 2.6, 3.1, 3.2; the form of 2.4 used; the two deterministic steps of Lemma 2.5 (iv) (`sum_tuples_sup'_bias_eq_zero`, `abs_sup'_sub_sup'_le`) | **[V]** `proofs/Frontiers/ObservationInvariance.lean` (41 declarations; registered in `proofs/AxiomAudit.lean`) |
-| Theorems A, A′, A″, B, B′, C, C′, E; Lemma 5.1; Proposition 2.7 | **[P]** this file.  For A, A″, B the reductions to the machine-checked lemmas are short; nothing of Lemma 2.5 (ii)–(iii), A′, B′, C, C′, E, Lemma 5.1, Proposition 2.7 is machine-checked beyond the closure of the class under maxima, the two deterministic steps of Lemma 2.5 (iv) and two elementary inequalities of Theorem C (b); the bounded-differences inequality used in Theorem A′ is cited (McDiarmid 1989), not formalised; the argument for adaptive statistical queries is on paper only |
+| Lemmas 2.1, 2.2, 2.3, 2.6, 3.1, 3.2; the form of 2.4 used; of Lemma 2.5 (iv): the mean-zero identity (`sum_tuples_sup'_bias_eq_zero`) and the 1-Lipschitz property of a maximum (`abs_sup'_sub_sup'_le`, which gives the bounded difference with `2‖ψ‖_∞` in place of the oscillation) | **[V]** `proofs/Frontiers/ObservationInvariance.lean` (41 declarations; registered in `proofs/AxiomAudit.lean`) |
+| Theorems A, A′, A″, B, B′, C, C′, E; Lemma 5.1; Proposition 2.7 | **[P]** this file.  For A, A″, B the reductions to the machine-checked lemmas are short; nothing of Lemma 2.5 (ii)–(iii), A′, B′, C, C′, E, Lemma 5.1, Proposition 2.7 is machine-checked beyond the closure of the class under maxima, the mean-zero identity of Lemma 2.5 (iv) with the 1-Lipschitz property of a maximum, and two elementary inequalities of Theorem C (b); the bounded-differences inequality used in Theorem A′ is cited (McDiarmid 1989), not formalised; the argument for adaptive statistical queries is on paper only |
 | the identities and inequalities of §§2–6 listed in the script's output, on small cubes (not: the chain of Theorem A′, Theorem B′ (ii), the halving guarantee, the median bound, Theorem E beyond `ν*` — the referee simulated several of these); the exponent functions | **[N]** exact enumeration, `experiments/phase2/p2_checks.py` (37 checks) and harness block XXVIII (four tests, 27 mutations, all caught).  For the new form of Theorem A′: Lemma 2.5 (iv), the exact tails against the bounded-differences bound and the overlap step by enumeration of all tuples of centres on cubes of 4–6 sites (checks A4d–A4g; harness XXVIII.2, six mutations), and the recipe of Corollary A′ at `n = 2000, 20000, 200000` beyond the old side condition (A4h) |
-| internal review | one adversarial AI referee, `docs/phase2/PHASE2_REVIEW.md`: every numbered theorem of the first version stands; two numerical claims wrong and corrected; the Lean statements say what the report says they say (its §9); it did not compile the Lean file or run the harness.  <!-- A1b -->The present form of Theorem A′ / Corollary A′ was written afterwards; a second referee was asked to review that proof alone (`docs/phase2/PHASE2_REVIEW_A1.md`, when present)<!-- /A1b --> |
+| internal review | one adversarial AI referee, `docs/phase2/PHASE2_REVIEW.md`: every numbered theorem of the first version stands; two numerical claims wrong and corrected; the Lean statements say what the report says they say (its §9); it did not compile the Lean file or run the harness.  The present form of Theorem A′ / Corollary A′ was written afterwards and reviewed by a second AI referee, that section alone (`docs/phase2/PHASE2_REVIEW_A1.md`): it stands, with `δ ≤ ½` added to the statement; that referee did not compile the Lean file, run `p2_checks.py` or the harness, and did not re-read the text after its corrections were applied |
 | upper bounds | rest on the cube theorems 11.44, 11.54, 11.58 ([P], refereed internally) |
 
 ## 11. Open problems
 
 1. **The exponent at tolerance `e^{−γn}`**: between `h̄(2γ)` and `(1 − γ/ln 2)h` for `γ < a/2` (§5); for
-   `a/2 ≤ γ < ln 2` there is no lower bound at all and the upper bound is still positive.  Equivalently:
+   `a/2 ≤ γ < ln 2` there is no lower bound for randomised algorithms and the upper bound is still positive.  Equivalently:
    what is the least number of atoms of a hiding family that fools every bounded observable to
    `τ` — `τ^{−2}` (random), or fewer with structure?
 2. **Samples**: is there an algorithm with samples below `e^{nh}` on the whole class?  Lower bound
