@@ -7,7 +7,9 @@ all marked in that file).  Status of every statement is given by a label: **[V]*
 (declaration named; file under `experiments/mbar/lean/MBAR/`), **[P]** paper proof given here,
 **[K]** known (cited), **[X]** external theorem assumed with its statement, **[N]** numerical check
 (script named), **[C]** conjecture or unproved claim.  Internal review: `docs/mbar/REVIEW_A.md`.
-No statement here has been read by a human expert.  Prior art: `docs/mbar/PRIOR_ART.md`.*
+No statement here has been read by a human expert.  Prior art: `docs/mbar/PRIOR_ART.md`.
+After the exchange with the other Phase II divisions (`SYNTHESIS.md` §S8) four remarks were added — in
+A11, B6, B7 and C3 — and no statement was changed.*
 
 The handoff package (`experiments/mbar/handoff/MBAR_strengthened/proofs/MAIN_RESULTS.md`) is cited as
 "the handoff"; its labels A1, A2, B1–B5, C1–C3, D1, D2, E1–E3, G1, G2 are kept.  New statements of
@@ -305,6 +307,12 @@ at the interior point exceeds the chord by 55 % of the chord (35 % of the value 
 MBAR minimises `Σ_k Var_k(r_k)/s_k`, not `Σ_k Γ_k(r_k)/s_k`; it is the wrong minimiser for the
 correlated objective and the perspective argument does not apply to it.
 
+*Found independently by the foundations division* (THY-MSG-0024 §2.4; their commit `e074b14`, 25 seconds
+after ours), with a sharper instance and a simulation: three states on four points sampled by lazy
+chains, where the value at the midpoint of a segment (183.78) exceeds the values at both ends (69.00,
+163.95).  So `V^{corr}_c` **is not even quasi-convex**.  Reproduced with our code
+(`bench/check_inbound.py`, `VALIDATION_TABLES.md` T11).
+
 ## A12. Correlated sampling: what remains true
 
 **Proposition A12** [P; N].
@@ -540,6 +548,11 @@ has mean `s_k E_k A` at `f*` (independent bounded summands: KL-Chernoff interval
 `y(f*)/y(f₀) ∈ [e^{−r}, e^{r}]` for `r = sup_{f∈C} osc(f − f₀)`.  The interval has failure probability
 `≤ α + α_o` (`certificates.observable_interval`; [P]).  Unbounded observables and unsampled target
 states with unbounded importance ratios are not covered and cannot be without further assumptions.
+*Rare events* (observation of the certified-inference division, ENG-MSG-0011 §5.1, measured there):
+the summands `π_k(f₀; x)A(x)` are treated as numbers in `[0, 1]`, so the interval has an absolute floor of
+order `log(1/α)/(N s_k)` and is useless for an event whose probability is below it; their composition
+of the region of B2 with a product test (their Theorem M1) is the right tool there (`SYNTHESIS.md`
+S8.3; `DEAD_ENDS.md` N18).
 
 ## B7. What cannot be certified from the samples
 
@@ -556,6 +569,11 @@ independent sampling [K: Eberlein; Yu 1994, Lemma 4.1]; so a certificate valid a
 independent samples is valid at level `α + Σ_k(n′_k − 1)β_k(g)` on the thinned sample.  The
 coefficients `β_k` are an assumption; a statistical inefficiency estimated from the same trajectory
 is not a bound on them.
+*An envelope of the kind (b) asks for* (adaptive-hierarchy division, HIE-MSG-0003 §2.2–2.3; their
+proof, the extremal identity checked here): if the energy difference to a Gaussian reference is
+`L`-Lipschitz and at least `b` outside a region `S` of reference probability `Φ̄(t)`, then
+`∫_S e^{−ΔU}dγ ≤ e^{−b}·e^{L²/2 − Lt}·Φ̄(t − L)` in any dimension, with equality for a half-space.  The
+hypothesis is not observable from the samples.
 
 Measured (experiments B, C in `VALIDATION.md`): with one trapped state the region of B2 and the
 asymptotic interval both exclude the truth in every repetition, and B5 rejects in all repetitions at
@@ -667,6 +685,13 @@ expansion and the benchmark scales like `√(R_c/N)`, with `R_c/V_c → 1` in we
 interval (ratio 2–3 to the asymptotic interval), the regime `N ≲ R_c` (both bounds degenerate; D1's
 saturation), and growing `K` (the regret term of B2 and the dimension term of B4 grow with `K`; C1
 does not see `K`).
+
+*Outside the central-limit regime* (pointed out by the adaptive-hierarchy division, HIE-MSG-0003 §2;
+`SYNTHESIS.md` S8.2(e)).  C1 needs `N ≥ N₀`, and `N₀` is of the order of the variance itself; for
+`N` below it, and for targets that are not sampled, the variance is not the quantity that governs a
+fixed-confidence guarantee: on the programme's cube class the exponent of the number of draws is the
+largest relative entropy of the target from the reference, exponentially below the second moment
+that makes `V` finite in A3(b).  Nothing in parts A–C is a statement about that regime.
 
 ## C4. What the limits are limits of
 

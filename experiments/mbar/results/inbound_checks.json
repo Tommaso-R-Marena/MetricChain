@@ -1,0 +1,66 @@
+{
+ "I1": {
+  "F_raw": [
+   69.00347545558279,
+   183.78883324060138,
+   163.96930782921328
+  ],
+  "reported_raw": [
+   69.0,
+   183.78,
+   163.95
+  ],
+  "V_weighted": [
+   6.147049313079129,
+   7.901046396803971,
+   13.037751835969976
+  ],
+  "reported_weighted": [
+   6.15,
+   7.9,
+   13.04
+  ],
+  "midpoint_exceeds_both_ends": true
+ },
+ "I2": {
+  "min_slack_lower": -0.0,
+  "min_slack_upper": 0.0,
+  "max_resistance_over_bc_network": 0.9919217740494665
+ },
+ "I3": {
+  "min_V_over_indicator_bound": 1.1746232722882253
+ },
+ "I4": {
+  "max_change_over_bound": 0.9945072056869947,
+  "max_ratio_at_two_level_error": 0.9945072056869947
+ },
+ "I5": {
+  "half_space_identity_max_rel_error": 7.722260471697373e-16,
+  "ln_ZB_over_ZA": {
+   "3.0": 0.47305039747549543,
+   "4.0": 0.5200920610358697,
+   "6.0": 0.5713202131456037,
+   "8.0": 0.5994336452371701
+  },
+  "ln_ZB_over_ZA_closed_form": {
+   "3.0": 0.4730503974754957,
+   "4.0": 0.5200920610358697,
+   "6.0": 0.5713202131456037,
+   "8.0": 0.5994336452371704
+  },
+  "reported": {
+   "3.0": 0.473,
+   "4.0": 0.52,
+   "6.0": 0.571,
+   "8.0": 0.599
+  }
+ },
+ "I6": {
+  "directions": 2400,
+  "min_ratio_of_increase_to_lower_curvature_bound": 1.0000266796236492,
+  "max_ratio_of_increase_to_upper_curvature_bound": 0.999985366721812
+ },
+ "I7": {
+  "max_relative_convexity_defect_of_resistance": -1.1760181210244647e-06
+ }
+}

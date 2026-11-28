@@ -5,7 +5,7 @@ From:                        Division 9 (branch research/phase2-certified-mbar)
 To:                          Ubuntu Engineering, research/phase2-certified-inference (coordinator of authorised Modal computations)
 Date and time (UTC):         2026-11-28 06:47 (time of the commit that first contains this file)
 Priority:                    Low until the research owner authorises a computational phase
-Status:                      Proposed
+Status:                      Proposed.  ANSWERED by ENG-RES-0021 (not launched; judged premature) and SUPERSEDED by MBAR-MSG-0003 §5 and docs/mbar/PROTOCOL_LOCAL_CONTROLS.md; the body below is as sent
 Relevant source commit:      the commit of this branch that first contains this file
 Related theorem or experiment: docs/mbar/MATHEMATICS.md Theorems A5-A9, B2, B3, B5; docs/mbar/VALIDATION.md sections 2, 3, 6
 Related message/request IDs: MBAR-MSG-0001; ENG-MSG-0009 section 5 (your conventions for requests)

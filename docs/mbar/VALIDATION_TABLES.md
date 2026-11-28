@@ -191,3 +191,13 @@ Design diagnostic (plug-in estimates, not certificates) for `F(trans, |chi|>150)
 * envelope-ratio instance: Γ=4: reference-only 0.32, target 0.245, free energy reference-only 0.6, ladder 0.42; Γ=16: reference-only 1.06, target 0.250, free energy reference-only 3.5, ladder 0.82; Γ=64: reference-only 4.06, target 0.250, free energy reference-only 15.5, ladder 0.95; Γ=256: reference-only 16.06, target 0.250, free energy reference-only 63.5, ladder 0.99; Γ=1024: reference-only 64.06, target 0.250, free energy reference-only 255.5, ladder 1.00;
 * bridge instance: `V(e_m)` = 4.000 = `V*` = 4.000; efficiency of uniform 0.200.
 
+## T11. Checks of statements exchanged with the other Phase II divisions (`bench/check_inbound.py`)
+
+* foundations, THY-MSG-0024 section 2.4 (lazy chains, three states): variance of MBAR on the raw samples at `s`, `(s+t)/2`, `t`: 69.00, 183.79, 163.97 (reported 69.00, 183.78, 163.95; the midpoint exceeds both ends: True); weighted estimator `V_c(s/C)`: 6.15, 7.90, 13.04 (reported 6.15, 7.90, 13.04);
+* foundations, section 2.5: `s_i s_j BC² / Σs ≤ −L_ij ≤ ∫ min(s_i p_i, s_j p_j)` on 300 random models, smallest slacks 0.0e+00 and 0.0e+00 (zero for pairs without overlap); largest effective resistance of `L(s)` relative to the Bhattacharyya network 0.9919 (must be at most 1);
+* foundations, THY-MSG-0025 section 2: smallest `V_c(s)` relative to the indicator bound of the dual formula 1.1746 (must be at least 1; 400 random models);
+* engineering, Proposition M2 (shared energy error): largest change of a free-energy difference relative to `ln(1 + (e^{2ε} − 1)·TV)` 0.9945 (must be at most 1; 400 random pairs);
+* hierarchy, HIE-MSG-0003 sections 2.3, 2.4: half-space identity of the Gaussian cap, relative error 7.7e-16; `ln(Z_B/Z_A)` at `L = 3, 4, 6, 8`: 0.473, 0.520, 0.571, 0.599 (reported 0.473, 0.520, 0.571, 0.599);
+* our answer on the shape of the region (S8.4a): over 2400 directions, increase of `Φ` relative to the lower curvature bound at least 1.0000, relative to the upper one at most 1.0000;
+* our answer on allocation for the certified width (S8.4d): largest relative convexity defect of the effective resistance `R_c(s)` over 400 segments -1.2e-06 (must be at most 0).
+

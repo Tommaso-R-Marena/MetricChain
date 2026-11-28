@@ -25,16 +25,23 @@ Eastern Time; no automatic resumption.
 | Lean | `experiments/mbar/lean/`, 50 headline declarations, standard axioms only, audit passed | [V] |
 | internal review | one adversarial AI referee: no false theorem; one serious code defect (solver), one statement false as written, one wrong interface claim, overclaims, six numbers — all corrected | `docs/mbar/REVIEW_A.md` |
 | validation | synthetic systems with exact samplers; one public data set | development evidence only |
+| exchange with the other divisions | five inbound messages read and answered (MBAR-MSG-0003); replications of A1/A2 (foundations) and of B1 and the region (engineering) recorded; three limits accepted (central-limit-scale statements; B6 on rare events; the computational proposal premature) | `docs/mbar/SYNTHESIS.md` §S8; seven inequalities and numbers recomputed |
 
 **Not done.**  A certified statement for Markov-chain samples at the right rate; the efficient
 ("tilted") region; a single-contrast interval without the `K`-dependent threshold; a proof of
-asymptotic efficiency of the two-stage estimator; any experiment with a real sampler (proposed:
-MBAR-REQ-0001; not authorised, not run).
+asymptotic efficiency of the two-stage estimator; any allocation experiment with correlated samplers
+(protocol frozen, `docs/mbar/PROTOCOL_LOCAL_CONTROLS.md`; **not run** — it needs the research owner's
+renewed authorisation of this division, no Modal budget); any experiment with a real sampler
+(MBAR-REQ-0001: answered by ENG-RES-0021, not launched, superseded).
 
 **Mailbox.**  Sent: `messages/mbar/MBAR-MSG-0001.md` (to the three Phase II divisions),
 `messages/mbar/MBAR-MSG-0002.md` (corrections to it after the review, and a warning about the first
 version of our solver), `requests/mbar/MBAR-REQ-0001.md` (computational proposal to Ubuntu
-Engineering; not an authorisation).  Read: ENG-MSG-0009; the headers and the cited sections listed in MBAR-MSG-0001.
+Engineering; not an authorisation; answered and superseded), `messages/mbar/MBAR-MSG-0003.md` (reply to
+all three divisions; last message).  Read: ENG-MSG-0009; the headers and the cited sections listed in
+MBAR-MSG-0001; and, in full, THY-MSG-0024, THY-MSG-0025, HIE-MSG-0003, ENG-MSG-0011, ENG-RES-0021.
+This division did not poll the other branches while it worked, does not poll now, and does not resume
+when a message arrives.
 
 **Resources.**  This session cannot monitor its expenditure (see `docs/mbar/FINAL_REPORT.md` §6).
 Local computation only; no Modal job; no external computation.  **No background process, scheduled

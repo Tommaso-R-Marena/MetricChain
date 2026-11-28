@@ -12,13 +12,16 @@ The work is bounded and has stopped; it does not resume without authorisation.*
 | 2 | [`MATHEMATICS.md`](MATHEMATICS.md) | every statement with its proof and status: A (allocation), B (certificates), C (information limits); audit of the handoff |
 | 3 | [`REVIEW_A.md`](REVIEW_A.md) | the internal adversarial review and what was changed because of it |
 | 4 | [`VALIDATION.md`](VALIDATION.md), [`VALIDATION_TABLES.md`](VALIDATION_TABLES.md) | what was run and what it shows; tables generated from stored results |
-| 5 | [`SYNTHESIS.md`](SYNTHESIS.md) | mathematical links with the three other Phase II divisions |
+| 5 | [`SYNTHESIS.md`](SYNTHESIS.md) | mathematical links with the three other Phase II divisions; §S8: what they sent, what was checked, what it changes |
 | 6 | [`DEAD_ENDS.md`](DEAD_ENDS.md) | negative results, limitations, our own errors |
 | 7 | [`PRIOR_ART.md`](PRIOR_ART.md) | bounded prior-art search and novelty matrix |
 | 8 | [`LEAN_CORRESPONDENCE.md`](LEAN_CORRESPONDENCE.md) | pins, audit, statement-by-statement correspondence |
 | 9 | [`PROVENANCE.md`](PROVENANCE.md), [`RESEARCH_LOG.md`](RESEARCH_LOG.md) | base commit, imported package, chronology |
+| 10 | [`PROTOCOL_LOCAL_CONTROLS.md`](PROTOCOL_LOCAL_CONTROLS.md) | frozen protocol of the recommended next experiment (correlated samplers with exact answers); **not run** |
 
-Mailbox: `docs/collaboration/messages/mbar/`, `requests/mbar/`, `status/mbar.md`, `MBAR_TO_ALL.md`.
+Mailbox: `docs/collaboration/messages/mbar/` (MBAR-MSG-0001, its corrections MBAR-MSG-0002, the reply
+to the other divisions MBAR-MSG-0003), `requests/mbar/` (MBAR-REQ-0001: answered, superseded),
+`status/mbar.md`, `MBAR_TO_ALL.md`.
 
 ## Layout of the code
 
@@ -30,12 +33,14 @@ experiments/mbar/
                             certificates.py likelihood-ratio region, restricted intervals, observables, model check, baselines
   tests/                    test_population.py, test_certificates.py
   bench/                    bench_certificates.py, bench_allocation.py, bench_robustness.py,
-                            bench_public_umbrella.py, check_lower_bounds_and_chains.py, check_synthesis.py, make_tables.py
+                            bench_public_umbrella.py, check_lower_bounds_and_chains.py, check_synthesis.py,
+                            check_inbound.py (statements exchanged with the other divisions), make_tables.py
   results/                  stored outputs (json, logs), including one run kept as INVALID and the first allocation run
   data/pymbar_umbrella/     public data used in VALIDATION.md section 6 (MIT licence; provenance in its README)
   lean/                     standalone Lake project: MBAR/{Allocation,EValue,LowerBound,Localization,AxiomAudit}.lean, audit.sh, logs/
   review/                   the referee's scripts and raw report
-  build_zip.sh              builds the consolidated archive of this division
+  build_zip.sh              builds the consolidated archive of this division (ZIP_MANIFEST.sha256: hashes of its files;
+                            zip_root/README.md: the README placed at the root of the archive)
 ```
 
 ## Reproduce
@@ -50,6 +55,7 @@ python experiments/mbar/tests/test_population.py            # ~2 min   allocatio
 python experiments/mbar/tests/test_certificates.py          # ~2 min   estimators and certificates, incl. equivariance under energy offsets
 python $B/check_lower_bounds_and_chains.py                  # ~2 min   T9
 python $B/check_synthesis.py                                # ~1 min   T10
+python $B/check_inbound.py                                  # seconds  T11
 python $B/bench_certificates.py --trials 200 --boot-trials 40 --out $R/certificates_coverage_v3.json > $R/certificates_coverage_v3.log   # T1, ~25 min on 3 cores
 python $B/bench_allocation.py --reps 2000 --first-run-stream --out $R/allocation_benchmark_2000.json > $R/allocation_benchmark_2000.log   # T2, ~80 min on 3 cores
 python $B/bench_allocation.py --reps 2000 --only costly_ends,costly_middle --out $R/allocation_benchmark_costpilot2.json > $R/allocation_benchmark_costpilot2.log   # T3
@@ -85,7 +91,10 @@ its neighbours.  (3) Finite-sample lower bounds at every instance, and a proof t
 allocation cannot beat the optimal fixed allocation by more than a constant factor.  An internal
 adversarial review found no false theorem but one serious defect in the first version of the solver
 (wrong free energies, without warning, when the states' energies differ by tens of kT) and several
-overstatements; all are corrected and documented (`REVIEW_A.md`).  The limits are stated as plainly: everything
+overstatements; all are corrected and documented (`REVIEW_A.md`).  The three other divisions replicated
+two of the statements with their own code, found the correlated-sampling counterexample independently,
+and set three limits that are accepted (`SYNTHESIS.md` §S8).  The limits are stated as plainly: everything
 assumes independent equilibrium samples; consistent trapping is undetectable from samples (a
 theorem); nothing is certified for Markov-chain data without an assumed mixing rate; and nothing here
-has been tested on a real sampler.
+has been tested on a real sampler; the optimality statements are central-limit-scale statements; and
+the next experiment (correlated samplers with exact answers) is specified but not run.

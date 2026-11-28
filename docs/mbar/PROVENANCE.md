@@ -13,6 +13,7 @@ Division 9".*
 | why this tree | it is the common ancestor tree of every division; it holds the common collaboration protocol (`docs/collaboration/README.md`), the programme's Lean pins (`lean-toolchain`: `leanprover/lean4:v4.31.0`; `lake-manifest.json`: Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`, tag `v4.31.0`) and the audit scripts.  `research/phase2-foundations` and `research/phase2-adaptive-hierarchy` are based on the same commit |
 | immutable reference | consolidated archive `fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f` (`research/consolidated-archive`), read-only; entry point `consolidated/00_MASTER_INDEX.md` |
 | other branches read (never written) | `research/phase2-foundations` at `d3b13a291ab350874b8c1797069f21f157e46ab8`; `research/phase2-adaptive-hierarchy` at `c66a4019a0ee0301034b90f8917bfdf9522bacb1`; `research/phase2-certified-inference` at `1bb0dcc6c7e272b6bd34720b0ad48360d821ca33` (heads at 2026-11-28 05:23 UTC) |
+| the same branches, second read (messages addressed to this division only) | `research/phase2-foundations` at `3daa07d4ad2c82374cb925fa0a953084411bcd2e`; `research/phase2-adaptive-hierarchy` at `3e3e7d9d77dfe867bb23111af2f5a123dfd41e8f`; `research/phase2-certified-inference` at `2d0255f0117b4a9f3fa1b8d9bc7511c387306504` (heads at 2026-11-28 08:53 UTC) |
 
 Nothing outside the paths of §3 is modified on this branch (checked: `git diff --stat b3c5d61 HEAD` lists
 only those paths).  No merge into any established branch, no

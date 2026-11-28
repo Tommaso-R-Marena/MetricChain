@@ -232,6 +232,7 @@ def main():
               f"* optimally weighted value `W`: largest convexity defect {cc['max_convexity_defect_of_W']:.2e}, largest `(W − V_corr)/V_corr` "
               f"{cc['max_excess_of_W_over_Vcorr']:.2e};",
               f"* scalar inefficiency model: relative error of `V_corr(s) = V(s/g)` {cc['scalar_model_max_relative_error']:.1e}.", ""]
+    ib = load("inbound_checks.json")
     sy = load("synthesis_checks.json")
     if sy:
         L += ["## T10. Exact checks of the synthesis statements", "",
@@ -243,6 +244,29 @@ def main():
                   f"free energy reference-only {r['V_free_energy_reference_only']:.1f}, ladder {r['V_free_energy_optimal_ladder']:.2f}" for r in sy["S3"]) + ";",
               f"* bridge instance: `V(e_m)` = {sy['S4']['V_bridge_only']:.3f} = `V*` = {sy['S4']['V_optimal']:.3f}; efficiency of uniform "
               f"{sy['S4']['uniform_efficiency']:.3f}.", ""]
+    if ib:
+        a, b = ib["I1"], ib["I5"]
+        L += ["## T11. Checks of statements exchanged with the other Phase II divisions (`bench/check_inbound.py`)", "",
+              "* foundations, THY-MSG-0024 section 2.4 (lazy chains, three states): variance of MBAR on the raw samples at `s`, "
+              f"`(s+t)/2`, `t`: {a['F_raw'][0]:.2f}, {a['F_raw'][1]:.2f}, {a['F_raw'][2]:.2f} (reported 69.00, 183.78, 163.95; "
+              f"the midpoint exceeds both ends: {a['midpoint_exceeds_both_ends']}); weighted estimator `V_c(s/C)`: "
+              f"{a['V_weighted'][0]:.2f}, {a['V_weighted'][1]:.2f}, {a['V_weighted'][2]:.2f} (reported 6.15, 7.90, 13.04);",
+              f"* foundations, section 2.5: `s_i s_j BC² / Σs ≤ −L_ij ≤ ∫ min(s_i p_i, s_j p_j)` on 300 random models, smallest slacks "
+              f"{ib['I2']['min_slack_lower'] + 0.0:.1e} and {ib['I2']['min_slack_upper'] + 0.0:.1e} (zero for pairs without overlap); "
+              f"largest effective resistance of `L(s)` relative "
+              f"to the Bhattacharyya network {ib['I2']['max_resistance_over_bc_network']:.4f} (must be at most 1);",
+              f"* foundations, THY-MSG-0025 section 2: smallest `V_c(s)` relative to the indicator bound of the dual formula "
+              f"{ib['I3']['min_V_over_indicator_bound']:.4f} (must be at least 1; 400 random models);",
+              f"* engineering, Proposition M2 (shared energy error): largest change of a free-energy difference relative to "
+              f"`ln(1 + (e^{{2ε}} − 1)·TV)` {ib['I4']['max_change_over_bound']:.4f} (must be at most 1; 400 random pairs);",
+              f"* hierarchy, HIE-MSG-0003 sections 2.3, 2.4: half-space identity of the Gaussian cap, relative error "
+              f"{b['half_space_identity_max_rel_error']:.1e}; `ln(Z_B/Z_A)` at `L = 3, 4, 6, 8`: "
+              + ", ".join(f"{b['ln_ZB_over_ZA'][k]:.3f}" for k in ("3.0", "4.0", "6.0", "8.0")) + " (reported 0.473, 0.520, 0.571, 0.599);",
+              f"* our answer on the shape of the region (S8.4a): over {ib['I6']['directions']} directions, increase of `Φ` relative to "
+              f"the lower curvature bound at least {ib['I6']['min_ratio_of_increase_to_lower_curvature_bound']:.4f}, relative to the "
+              f"upper one at most {ib['I6']['max_ratio_of_increase_to_upper_curvature_bound']:.4f};",
+              f"* our answer on allocation for the certified width (S8.4d): largest relative convexity defect of the effective "
+              f"resistance `R_c(s)` over 400 segments {ib['I7']['max_relative_convexity_defect_of_resistance']:.1e} (must be at most 0).", ""]
     text = "\n".join(L) + "\n"
     if "--check" in sys.argv:
         ok = os.path.exists(OUT) and open(OUT).read() == text

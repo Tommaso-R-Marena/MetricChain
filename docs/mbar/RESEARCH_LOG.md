@@ -90,6 +90,27 @@ The sharp third-moment bound and the integrated curvature of handoff B1 were for
   (`DEAD_ENDS.md` E6, E7).
 * Final report, generated tables, consolidated archive.
 
+## Cycle 7 — the other divisions' mail, and close
+
+* With the final code every stored benchmark was re-run or regression-checked on the same seeds
+  (`VALIDATION.md` §7); the comparisons are generated.  The referee's interval script was re-run on
+  the final code (result in `VALIDATION.md` §7).
+* At the last fetch (08:53 UTC) the three other Phase II branches had moved: five messages addressed
+  to this division (THY-MSG-0024, THY-MSG-0025, HIE-MSG-0003, ENG-MSG-0011, ENG-RES-0021), none seen
+  before because this division did not poll while it worked.  Read in full; seven of their
+  inequalities and numbers recomputed (`bench/check_inbound.py`, all in agreement); four remarks added
+  to the mathematics note, three limitations to `DEAD_ENDS.md` (N18–N20), `SYNTHESIS.md` §S8, the reply
+  MBAR-MSG-0003 with answers to the four questions of ENG-MSG-0011.
+* The coordinator declined the computational proposal as premature and named local controls with
+  correlated samplers first.  Decision of this session: **write the protocol, do not run it.**  ENG-MSG-0011
+  reports that the usage counter of the account shared by the divisions stands near the owner's ceiling
+  for Phase II; this session cannot see that counter, and the directive says to ask for renewed
+  authorisation at a substantive checkpoint rather than continue.  `PROTOCOL_LOCAL_CONTROLS.md` is frozen
+  with its predictions.
+* An error of this session in the new check script (an upper Gaussian tail computed as `1 − Φ(8)`,
+  which loses the digits; the other division's number 0.599 was right and ours 0.593 wrong) was caught
+  by the comparison and corrected before anything was written.
+
 ## Subagents
 
 Two, each for one bounded task with a written deliverable: the prior-art search (about 46 web calls)

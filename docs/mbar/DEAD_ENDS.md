@@ -100,6 +100,28 @@ benchmark is consistent with it.
 synthetic systems with exact samplers.  The public data set has no ground truth; the numbers computed
 from it are development evidence.
 
+**N18.  The observable interval B6 is useless for rare events.**  Pointed out and measured by the
+certified-inference division (ENG-MSG-0011 §5.1, on the handoff's G2, of which B6 is the version with
+our region): the summands are treated as numbers in `[0, 1]`, the bound has an absolute floor of order
+`log(1/α)/(N s_k)`, and on events of probability `10⁻⁵`–`10⁻⁶` it was 14 to 1600 times the exact value
+where their composition of our region with a product test was within 17–51 %.
+
+**N19.  Our optimality statements are central-limit-scale statements.**  Pointed out by the
+adaptive-hierarchy division (HIE-MSG-0003 §2).  For a target that is not sampled, at low overlap, the
+number of draws for a bounded accuracy at fixed confidence is governed by a relative entropy, which is
+exponentially smaller than the second moment in A3(b); C1 needs `N ≥ N₀` of the order of the variance;
+C2 is about allocation among given states and does not see that stages of *redesign* change exponents.
+The sentence "the cost of the envelope ratio is a `χ²`" (S3) is a statement about variance only.
+
+**N20.  The computational proposal was premature.**  MBAR-REQ-0001 (alchemical molecular dynamics,
+$80–$130) was answered by the coordinator (ENG-RES-0021): not launched, outside any present authority
+($25 of Modal for all divisions), and premature because two cheaper routes were untried — correlated
+samplers with exact answers on the local machine, and a replay of stored public trajectories.  We
+agree.  The first route is written down as a frozen protocol (`PROTOCOL_LOCAL_CONTROLS.md`) and was
+not run.  Until it is, **no allocation experiment of ours has correlated samplers**: under correlation
+we have population-level statements (A11, A12), the foundations division's simulation of one instance
+with lazy chains (`SYNTHESIS.md` S8.1), and the behaviour of the certificate (experiment C).
+
 ## Errors of this division, found and corrected
 
 **E1.  Convergence flag of the Newton solver.**  A fit that had reached the minimum to machine

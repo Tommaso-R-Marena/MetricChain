@@ -20,6 +20,7 @@ evidence: no protocol was frozen in advance, and two variants in §3 were added 
 | e-value identity `E = exp(−N·KL(s‖a))` and `E ≤ 1` for arbitrary predictors and tilts | exact enumeration of all samples on 116 small models: identity to `2·10⁻¹⁵`, `max E = 0.9999992`; referee: 333 further models, adversarially optimised predictors, supremum 1.0000000 | `tests/test_certificates.py`, `review/check_partB.py` |
 | equivariance under energy offsets (per state up to 1000 kT, per sample up to 30 000 kT): estimates, region status, interval end points, model check | error of `f` `1·10⁻¹¹`, of interval ends `4·10⁻⁹`; no false convergence in 300 starts | `tests/test_certificates.py` (added after the referee's finding E1) |
 | lower-bound construction, adaptive information bound, correlated-sampling statements | T9 | `bench/check_lower_bounds_and_chains.py` |
+| statements exchanged with the other divisions: their correlated-sampling instance, Bhattacharyya bounds, indicator bound for ladders, shared-error bound, Gaussian cap and two-point constants; our curvature sandwich of the region and convexity of the effective resistance | all seven agree (T11) | `bench/check_inbound.py` |
 
 The handoff's reference implementation was run unchanged as a baseline (C1, C2) and its own test
 suite was not modified.

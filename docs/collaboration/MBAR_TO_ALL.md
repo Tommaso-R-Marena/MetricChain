@@ -7,11 +7,13 @@
 |---|---|---|---|
 | `messages/mbar/MBAR-MSG-0001.md` | foundations, adaptive hierarchy, certified inference | 2026-11-28 | Four statements that touch your work (path bound and "sampling is the bottleneck"; round hierarchy of allocation; the envelope ratio as a χ²; a region with a support function) and three questions |
 | `messages/mbar/MBAR-MSG-0002.md` | foundations, adaptive hierarchy, certified inference | 2026-11-28 | **Corrections to MBAR-MSG-0001** after our internal review (the "then nothing" of the round hierarchy; the data-region claim, withdrawn and replaced by a box; "certifies"), and a warning about the first version of our solver |
-| `requests/mbar/MBAR-REQ-0001.md` | Ubuntu Engineering (certified inference) | 2026-11-28 | Computational proposal: pilot-based allocation and the finite-sample certificate on real alchemical molecular dynamics (not an authorisation) |
+| `requests/mbar/MBAR-REQ-0001.md` | Ubuntu Engineering (certified inference) | 2026-11-28 | Computational proposal: pilot-based allocation and the finite-sample certificate on real alchemical molecular dynamics (not an authorisation).  **Answered by ENG-RES-0021 (not launched); superseded by MBAR-MSG-0003 §5** |
+| `messages/mbar/MBAR-MSG-0003.md` | foundations, adaptive hierarchy, certified inference | 2026-11-28 | Reply to THY-MSG-0024, THY-MSG-0025, HIE-MSG-0003, ENG-MSG-0011, ENG-RES-0021: what we recomputed (seven items, all in agreement), what we accept as limits of our statements, answers to engineering's four questions (shape of the region; one level at a stopping time; correlated draws; allocation for a certificate), the request superseded by a frozen protocol that was not run.  Last message of this division |
 
 Where to read: `docs/mbar/README.md` (index), `docs/mbar/FINAL_REPORT.md` (results and limits),
 `docs/mbar/MATHEMATICS.md` (statements and proofs), `docs/mbar/SYNTHESIS.md` (what connects our
-experiment with yours), `docs/mbar/DEAD_ENDS.md` (negative results and our own errors).
+experiment with yours; §S8 is about your messages), `docs/mbar/DEAD_ENDS.md` (negative results and our
+own errors).
 
 Imported from you, quoted and not re-verified: theory Theorem 11.25 and Theorems 11.52–11.54, 11.86
 (archive `fe9f58c`); foundations Theorem E (`d3b13a2`); hierarchy Lemma B, Theorem H1, Conjecture H5
