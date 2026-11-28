@@ -23,7 +23,7 @@ from scipy.stats import norm
 from .estimators import (_validate, fitted_distributions, mbar, minimize_lse, plugin_variance,
                          support_strongly_connected)
 
-__all__ = ["LRRegion", "lr_confidence_region", "asymptotic_interval", "bootstrap_interval",
+__all__ = ["LRRegion", "lr_confidence_region", "restricted_interval", "asymptotic_interval", "bootstrap_interval",
            "make_batches", "kl_interval", "observable_interval", "classifier_evalue"]
 
 
@@ -124,15 +124,25 @@ class LRRegion:
         return lo, hi
 
 
-def lr_confidence_region(U, labels, alpha=0.05, n_batches=8, skip=1, rng=None, plugin=None):
+def lr_confidence_region(U, labels, alpha=0.05, n_batches=8, skip=1, rng=None, plugin=None,
+                         batches=None):
     """Prequential likelihood-ratio region (Theorem B2).  Batches follow the sample order within
     each state (pass rng to permute).  Batch b >= skip is evaluated against the MBAR fit of batches
     < b (or against plugin(b, U_prev, labels_prev) if given); a batch whose plug-in cannot be
-    computed is left out (its e-value is 1), which keeps the statement valid."""
+    computed is left out (its e-value is 1), which keeps the statement valid.
+
+    `batches`: optional explicit list of index arrays (rounds of an adaptive simulation, in time
+    order).  The composition of a round may depend on earlier rounds (adaptive allocation) but must
+    be fixed before the round is sampled; the statement then holds simultaneously at every round
+    (Theorem B3), so the region may be recomputed after each round and sampling may halt at will."""
     U, labels, K = _validate(U, labels)
     if not 0 < alpha < 1:
         raise ValueError("alpha")
-    batches = make_batches(labels, n_batches, rng)
+    if batches is None:
+        batches = make_batches(labels, n_batches, rng)
+    else:
+        batches = [np.asarray(b, int) for b in batches]
+        n_batches = len(batches)
     rowsA, rowsy, ref, used, skipped = [], [], 0.0, [], []
     for b in range(skip, n_batches):
         prev = np.concatenate(batches[:b])
@@ -167,6 +177,26 @@ def lr_confidence_region(U, labels, alpha=0.05, n_batches=8, skip=1, rng=None, p
     if reg.status == "OK":
         reg.meta["regret"] = ref - reg.phi_min     # threshold above the minimum, minus log(1/alpha)
     return reg
+
+
+def restricted_interval(U, labels, c, states, alpha=0.05, **kwargs):
+    """Interval for a contrast supported on `states`, from the sub-experiment that keeps only the
+    samples and the energy columns of those states (Proposition B2': the sub-experiment is a
+    multistate experiment of the same kind, so Theorem B2 applies to it with |states| - 1 nuisance
+    directions instead of K - 1).  `states` must be chosen without looking at the samples (by the
+    design of the ladder), or the levels of several candidate sets must be added up.
+    Returns (lo, hi, region)."""
+    U, labels, K = _validate(U, labels)
+    states = np.asarray(sorted(set(int(k) for k in states)), int)
+    c = np.asarray(c, float)
+    if np.any(np.abs(np.delete(c, states)) > 0):
+        raise ValueError("the contrast must be supported on the retained states")
+    keep = np.isin(labels, states)
+    relabel = -np.ones(K, int)
+    relabel[states] = np.arange(len(states))
+    reg = lr_confidence_region(U[keep][:, states], relabel[labels[keep]], alpha=alpha, **kwargs)
+    lo, hi = reg.interval(c[states])
+    return lo, hi, reg
 
 
 def asymptotic_interval(U, labels, c, alpha=0.05):
@@ -271,4 +301,6 @@ def classifier_evalue(U, labels, prob, n_batches=8, skip=1):
     A, y = np.vstack(rowsA), np.concatenate(rowsy)
     t0 = np.bincount(y, minlength=K) / len(y)
     fh, v, info = minimize_lse(A, t0)
-    return len(y) * v - loss, dict(mbar_loss=len(y) * v, classifier_loss=loss, converged=info["converged"])
+    # -log pi_y(f; x) = LSE_j(A_j + f_j) - (A_y + f_y): the best MBAR log-loss in hindsight
+    mbar_loss = len(y) * v - float(np.sum(A[np.arange(len(y)), y]))
+    return mbar_loss - loss, dict(mbar_loss=mbar_loss, classifier_loss=loss, converged=info["converged"])

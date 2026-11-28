@@ -1,0 +1,20 @@
+
+estimated statistical inefficiencies: min 1.0 median 1.6 max 12.0
+all_snapshots: N=13026 status=OK regret=59.33870843957993 | vs pymbar 5.2e-08 | model check logE=-1434.4 reject=False
+   pair [0, 1] est 5.720  se 0.107  LR [4.276, 7.250]  width ratio 7.09 | sub-ladder of 3 states: [5.264, 6.204] ratio 2.24
+   pair [12, 13] est -2.027  se 0.106  LR [-3.467, -0.565]  width ratio 7.02 | sub-ladder of 2 states: [-2.538, -1.598] ratio 2.27
+   pair [0, 6] est 3.858  se 0.246  LR [0.711, 6.790]  width ratio 6.32 | sub-ladder of 8 states: [1.565, 5.482] ratio 4.07
+   pair [0, 13] est 13.067  se 0.269  LR [9.816, 16.417]  width ratio 6.26 | sub-ladder of 13 states: [10.203, 16.765] ratio 6.22
+subsampled_by_g: N=7443 status=OK regret=31.638830525982485 | vs pymbar 3.7e-11 | model check logE=-739.7 reject=False
+   pair [0, 1] est 5.671  se 0.121  LR [4.498, 6.981]  width ratio 5.25 | sub-ladder of 3 states: [5.239, 6.263] ratio 2.16
+   pair [12, 13] est -1.964  se 0.131  LR [-3.323, -0.620]  width ratio 5.25 | sub-ladder of 2 states: [-2.479, -1.507] ratio 1.89
+   pair [0, 6] est 3.892  se 0.374  LR [0.225, 7.045]  width ratio 4.65 | sub-ladder of 8 states: [1.067, 6.165] ratio 3.48
+   pair [0, 13] est 13.078  se 0.426  LR [9.186, 16.940]  width ratio 4.64 | sub-ladder of 13 states: [9.300, 17.141] ratio 4.69
+every_10th: N=1326 status=OK regret=42.550751861815115 | vs pymbar 3.9e-07 | model check logE=-104.4 reject=False
+   pair [0, 1] est 5.671  se 0.345  LR [1.324, 9.434]  width ratio 6.00 | sub-ladder of 3 states: [3.863, 7.009] ratio 2.33
+   pair [12, 13] est -1.779  se 0.328  LR [-5.639, 2.007]  width ratio 5.95 | sub-ladder of 2 states: [-2.948, -0.700] ratio 1.75
+   pair [0, 6] est 4.445  se 0.797  LR [-4.919, 11.843]  width ratio 5.36 | sub-ladder of 8 states: [-2.026, 8.537] ratio 3.38
+   pair [0, 13] est 13.827  se 0.866  LR [4.753, 23.119]  width ratio 5.41 | sub-ladder of 13 states: [6.136, 22.901] ratio 4.94
+design diagnostic (plug-in estimates): rotamer dF = -1.823, se at the actual allocation 0.381, at the plug-in optimum 0.232 (variance ratio 0.370; efficiency bound of the actual allocation >= 0.069)
+   umbrellas carrying the plug-in optimum: [(-150.0, 0.17), (-120.0, 0.168), (-135.0, 0.165), (-90.0, 0.15), (-165.0, 0.098), (-110.0, 0.087)]
+written results/public_umbrella.json

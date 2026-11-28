@@ -9,6 +9,9 @@ B = sum_k cost_k n_k; methods differ only in how the samples are divided among t
   EQUALCOST   equal cost in all states (n_k ~ 1/cost_k); differs from UNIFORM only if costs differ
   PILOT2      this division: pilot with equal counts (20% of B), plug-in convex allocation from the
               pilot fit only, 25% safeguard mixture with uniform (estimators.pilot_allocation)
+  PILOT2C     the same as PILOT2 with a cost-aware pilot: equal cost (not equal counts) per state
+              (added after the first runs showed that an equal-count pilot wastes a third of the
+              budget on a costly state the optimal design never samples; see VALIDATION.md)
   PILOT4      the same in four stages (20% / 40% / 70% / 100% of B), re-fitted at every stage
   NEYMAN1     established one-step rule: extra samples ~ s_k sqrt(Var_k(z)/cost_k) at the pilot
               allocation (Neyman allocation with frozen influence functions, as for EMUS)
@@ -179,6 +182,14 @@ def one_rep(args):
                 U2, y2 = draw(rng, sysm, extra)
                 Us, ys = np.vstack([Us, U2]), np.concatenate([ys, y2])
         out["PILOT4"] = (float(c @ mbar(Us, ys)[0] - c @ sysm["f"]), np.bincount(ys, minlength=K).tolist(), dts, fb)
+        # PILOT2C: the same procedure with a cost-aware pilot (equal cost, not equal counts, per state)
+        n0c = np.maximum(integer_counts(pilot_frac * B / (K * a), pilot_frac * B, a), 2)
+        Upc, ypc = draw(rng, sysm, n0c)
+        t0 = time.time()
+        extra, info = pilot_allocation(Upc, ypc, c, B, cost=a, safeguard=0.25)
+        dt = time.time() - t0
+        err, cnt = finish(rng, sysm, Upc, ypc, extra)
+        out["PILOT2C"] = (err, cnt.tolist(), dt, info["fallback"] is not None)
         # NEYMAN1 and RESIST from the same pilot
         rem = B - a @ n0
         try:
@@ -253,7 +264,7 @@ def main():
         failed = [r for r in rows if "FAILED" in r]
         rows = [r for r in rows if "FAILED" not in r]
         methods = {}
-        for m in ("UNIFORM", "EQUALCOST", "PILOT2", "PILOT4", "NEYMAN1", "RESIST", "ORACLE"):
+        for m in ("UNIFORM", "EQUALCOST", "PILOT2", "PILOT2C", "PILOT4", "NEYMAN1", "RESIST", "ORACLE"):
             errs = np.array([r[m][0] for r in rows])
             mse = float(np.mean(errs**2))
             methods[m] = dict(rmse=float(np.sqrt(mse)), mse=mse, bias=float(errs.mean()),
