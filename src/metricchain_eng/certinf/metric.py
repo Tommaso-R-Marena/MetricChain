@@ -17,7 +17,8 @@ from scipy.optimize import linprog, minimize
 
 from .core import Box, dh_sup, _vec
 
-__all__ = ["hypercube", "lp_ratio_class", "additive_interval", "projection_stress", "stress_values", "sq_distances"]
+__all__ = ["hypercube", "lp_ratio_class", "additive_interval", "sequential_upper", "sequential_interval",
+           "projection_stress", "stress_values", "sq_distances"]
 
 
 def hypercube(n: int):
@@ -85,6 +86,50 @@ def additive_interval(site_pi, site_u, f_sites, phi_sites=None, region=None) -> 
 
     hi, eta_hi = upper(f_sites)
     lo, eta_lo = upper([-_vec(g) for g in f_sites])
+    return dict(lo=-lo, hi=hi, eta_lo=eta_lo, eta_hi=eta_hi, empty=bool(hi < -lo - 1e-9))
+
+
+def sequential_upper(site_pi, site_u, site_stats, terminal) -> float:
+    """Proposition 9.6: an upper bound of sup E_p[terminal(S)] over the bounded-influence class with a product
+    reference, S = sum_i stats_i[x_i] a vector of non-negative integer statistics and ``terminal`` an array indexed
+    by S.  Sites are integrated out one at a time, each by the one-site threshold rule (the conditional law of a
+    site given the earlier ones lies in the one-site class).  Exact for additive and for coordinatewise monotone
+    functions; in general the bound of a larger ("sequential") class.  Cost: sites x cells x states."""
+    nsite = len(site_pi)
+    us = np.broadcast_to(np.asarray(site_u, dtype=float), (nsite,))
+    stats = [np.asarray(st, dtype=int).reshape(len(p), -1) for p, st in zip(site_pi, site_stats)]
+    g = np.asarray(terminal, dtype=float)
+    if tuple(g.shape) != tuple(int(t) + 1 for t in sum(st.max(axis=0) for st in stats)):
+        raise ValueError("terminal must be indexed by the statistic vector")
+    for i in reversed(range(nsite)):
+        pi, st, gam = _vec(site_pi[i]), stats[i], math.exp(us[i])
+        prev = tuple(int(d) - int(m) for d, m in zip(g.shape, st.max(axis=0)))
+        vals = np.stack([g[tuple(slice(int(a), int(a) + d) for a, d in zip(sa, prev))] for sa in st], axis=0)
+        order = np.argsort(-vals, axis=0, kind="stable")
+        v, pr = np.take_along_axis(vals, order, axis=0), pi[order]
+        zero = np.zeros((1,) + prev)
+        cp, cpv = np.concatenate([zero, np.cumsum(pr, axis=0)]), np.concatenate([zero, np.cumsum(pr * v, axis=0)])
+        g = ((gam * cpv + (cpv[-1] - cpv)) / (gam * cp + (cp[-1] - cp))).max(axis=0)      # best threshold, cell by cell
+    return float(g.reshape(-1)[0])
+
+
+def sequential_interval(site_pi, site_u, site_stats, target, phi=None, region=None) -> dict:
+    """Outer interval of E_p[target(S)] over the bounded-influence class given E_p[phi(S)] in the region, by the
+    sequential bound of Proposition 9.6 under the multipliers of Theorem 4.1: a sound outer bound, computed
+    without sampling at any number of sites.  ``target`` has the shape of the statistic lattice, ``phi`` that
+    shape plus a last axis of length m."""
+    target = np.asarray(target, dtype=float)
+    m = 0 if phi is None or region is None else region.m
+
+    def upper(tg):
+        if m == 0:
+            return sequential_upper(site_pi, site_u, site_stats, tg), np.zeros(0)
+        fun = lambda e: region.h(e) + sequential_upper(site_pi, site_u, site_stats, tg - np.asarray(phi, dtype=float) @ e)  # noqa: E731
+        r = minimize(fun, np.zeros(m), method="Nelder-Mead", options=dict(xatol=1e-9, fatol=1e-12, maxiter=2000 * m))
+        return float(r.fun), np.asarray(r.x, dtype=float)
+
+    hi, eta_hi = upper(target)
+    lo, eta_lo = upper(-target)
     return dict(lo=-lo, hi=hi, eta_lo=eta_lo, eta_hi=eta_hi, empty=bool(hi < -lo - 1e-9))
 
 

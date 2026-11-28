@@ -23,10 +23,12 @@ subagent is recorded in `REVIEW_A.md`; until it is, read every proof as unrefere
 5. **The class that repairs this is in the archive**: the theory division's bounded-influence
    (Lipschitz) energies, for which it already has the linear structure and a transport duality with
    gains (its Theorems 11.12 and 11.105; Theorem 9.1 here is that duality applied to a tilted score).
-   What is added here: for product references the class is closed under marginalisation, and for
-   additive observables the identified set — with observations — is computed exactly at any system
-   size without sampling (Proposition 9.2, Corollary 9.3), where the rectangular hull of the same class
-   gives an interval that tends to the trivial one exponentially fast (§9.4).
+   What is added here: for product references the class is closed under marginalisation; for additive
+   observables the identified set — with observations — is computed exactly at any system size
+   without sampling (Proposition 9.2, Corollary 9.3); for functions of a few additive statistics a
+   sound outer interval is computed by dynamic programming (Proposition 9.6; within a factor 1.4 of
+   exact where it could be compared).  The rectangular hull of the same class gives an interval that
+   tends to the trivial one exponentially fast (§9.4).
 6. **Novelty is low, and much of the exact theory was already in the archive.**  The exact dual of §4
    for exact data is the science division's item 89(d); its form with regions is the ensemble
    division's E17.2 for the model-free case; S3's sampler is the theory division's Proposition 11.113
@@ -364,9 +366,9 @@ with gains" dual, with weak duality machine-checked, and names flows with gains 
 metric form of differential privacy as the known neighbours.  The science division's item 89(a) notes
 that the box is the class of a "hub" metric.  Theorem 9.1 below is Theorem 11.105 applied to the
 measure `π·|s|` with `A = {s > 0}`, `B = {s < 0}` — it is stated for a general graph and for a signed
-score because that is the form the multipliers of §4 need.  Propositions 9.2 and 9.4 and Corollary 9.3
-were not found in the archive; the theory report says of closed forms that they are "special to
-single states".
+score because that is the form the multipliers of §4 need.  Proposition 9.5 is the science division's
+machine-checked stochastic sandwich.  Propositions 9.2, 9.4, 9.6 and Corollary 9.3 were not found in
+the archive; the theory report says of closed forms that they are "special to single states".
 
 **Definition.**  Let `π > 0` on `X`, `E` a set of ordered pairs, `C_{xy} > 0` for `(x,y) ∈ E`.  The
 **ratio-constrained class** is `𝒞 = {r ≥ 0 : r(x) ≤ C_{xy}·r(y) for (x,y) ∈ E}`, a polyhedral cone, with
@@ -418,6 +420,45 @@ every tuple of such marginals is realised by the product `r(x) = Π r_i(x_i)`, w
 problem is a convex programme over a product of one-site polytopes; its Lagrangian separates, and
 Sion's theorem gives the formula.  ∎
 
+**Proposition 9.5 (monotone targets: the science division's stochastic sandwich) [in the archive,
+machine-checked].**  For binary sites, every ensemble of the class lies, in the stochastic order,
+between the two product measures `ν_−`, `ν_+` with one-site odds `e^{θ_i − u_i}` and `e^{θ_i + u_i}`,
+both of which belong to the class.  Hence for every target `g` that is monotone in each coordinate the
+identified interval without data is exactly `[E_{ν_−}g, E_{ν_+}g]`; relabelling the two states of a
+site covers targets that increase in some coordinates and decrease in others.  This is the science
+division's Theorem A11 (theory report Theorem 11.106a; `proofs/Frontiers/MonotoneSandwich.lean`,
+`cube_sandwich_mean`, `cube_mean_range_eq_Icc`), proved there by Holley's inequality for a submodular
+known part; for a product reference it also follows from the one-site bound
+`p(x_i = 1 | x_{−i}) ≤ σ(θ_i + u_i)` and a sequential coupling.
+**Consequence for certification.**  For a monotone score the certificate `sup_p E_p s ≤ 0` is one
+expectation under a product measure, estimated by ordinary Monte Carlo: no envelope ratio enters, at
+any system size.  A score with active multipliers is in general not monotone (it is a difference of
+monotone functions), so this settles the first open problem of §12 for monotone scores only.
+
+**Proposition 9.6 (sequential bound; functions of a few additive statistics) [P; N].**  In the setting
+of Proposition 9.2, for every `g`,
+
+    sup_{p ∈ 𝒞_u} E_p g  ≤  SEQ(g) := T_1 T_2 ⋯ T_n g,        (T_i g)(x_{<i}) = D_i⁺( g(x_{<i}, ·) ),
+
+with `D_i⁺` the one-site threshold rule of Corollary 9.3; hence `V⁺ ≤ inf_η [h_R(η) + SEQ(f − η·φ)]`.
+If `g` depends on `x` through a vector of additive lattice-valued statistics, so does each
+`T_i ⋯ T_n g` through the partial sums, and `SEQ(g)` is computed by dynamic programming in time
+(sites × cells × states), at any number of sites, without sampling.  Equality holds for additive `g`
+and for coordinatewise monotone `g`.
+
+*Proof.*  As in Proposition 9.2, the conditional law under `p` of `x_i` given `x_{<i}` is
+`π_i·r̄` with `r̄(a) = Σ_z π_{>i}(z)·r(x_{<i}, a, z)`, whose ratio is at most `e^{u_i}`: it lies in the
+one-site class.  So `E_p[g | x_{<n}] ≤ (T_n g)(x_{<n})`, and induction over the sites gives the bound.
+For additive `g` every `T_i` acts on its own term; for monotone `g` the maximising thresholds are those
+of `ν_+`.  ∎
+
+The bound is the exact value for a larger class — all ensembles whose one-step conditionals lie in the
+one-site classes — and is therefore not tight in general.  Measured against the exact programme on a
+cube of ten sites, two slopes, five targets, with and without one measured average
+(`experiments/eng/phase2_seq/`, twenty cases): exact for the monotone, the additive and the
+bi-monotone target without data; in the other cases an interval 1.13 to 1.40 times as wide as the
+exact one; sound in every case.
+
 **9.4 Exponential separation from the box class [P].**  Uniform cube, `π_i = ½`, slope `u` at every
 site, target `f = x_1`, no observations.  Bounded-influence class: `V⁺ = σ(u)`, for every `n`.  Every
 box class containing it has ratio at least `e^{un}` (a box needs `U(x) ≥ e^{un}L(x̄)` for antipodal
@@ -460,6 +501,8 @@ the references was read in full by this division.
 | Theorem 6.1 (cost `∝ Γ`) | — | not found; a standard two-point argument |
 | Theorem 9.1 (flow duality) | the theory division's Theorem 11.105 (in the archive; its own search found the general duality "not found in six searches at summary level"); generalised flows (Jewell); metric differential privacy | in the archive; a corollary |
 | Proposition 9.2, Corollary 9.3 (closure; additive observables) | closure of metric differential privacy under post-processing is the same inequality | not found for partial identification; the proofs are two lines each |
+| Proposition 9.5 (monotone targets) | the science division's Theorem A11 (Holley's inequality), machine-checked | in the archive |
+| Proposition 9.6 (sequential bound) | nested one-step robust expectations are the dynamic programming of robust Markov decision processes with rectangular uncertainty | a known device applied here; not searched |
 | the application (energy envelope + averaged data → guaranteed interval or inconsistency) | "maximum occurrence" of a conformation given averaged data (Bertini et al.), without energies; bounds on Gibbs averages in a Kullback–Leibler ball (Katsoulakis, Rey-Bellet and co-authors), without data; maximum-entropy, BioEn, BME, metainference: one ensemble or a posterior, not a set | not found |
 
 ## 11. What is demonstrated, and what is not
@@ -476,10 +519,12 @@ the references was read in full by this division.
 
 ## 12. Open problems, in order of value
 
-1. **Sampled certificates for bounded-influence classes without a global ratio.**  Needed: a tail
-   certificate — a bound on the mass that local transport leaves — from the large-deviation exponents
-   of the class (the theory division's exponents `a`, `h` are exactly of this kind), or an analytic
-   transport for structured scores.
+1. **Sampled certificates for bounded-influence classes without a global ratio.**  Settled for
+   monotone scores by the stochastic sandwich (Proposition 9.5), and for functions of a few additive
+   statistics there is the deterministic outer bound of Proposition 9.6.  Open for a general score
+   with active multipliers.  Needed: a tail certificate — a bound on the mass that local transport
+   leaves — from the large-deviation exponents of the class (the theory division's exponents `a`, `h`
+   are of this kind), or a way to tighten the sequential class.
 2. **References that are not products.**  Closure fails; under a Dobrushin-type smallness of the
    reference's own influences a perturbed closure should hold (the theory division's results on
    certified and uncertified influence, its Theorems 11.119 and 11.121, are the natural input).

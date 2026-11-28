@@ -274,3 +274,37 @@ def test_stress_observable():
     d2 = ci.sq_distances(other)
     off = om - np.diag(np.diag(om))
     assert np.allclose(ci.stress_values(other, om), -0.5 * np.einsum("ij,kij->k", off, d2))
+
+
+def test_sequential_bound_monotone_additive_and_sound():
+    """Proposition 9.6 against the programme on the cube; monotone targets against the extreme product tilt (the
+    science division's stochastic sandwich, its Theorem A11)."""
+    rng = np.random.default_rng(17)
+    n = 8
+    states, edges, site = ci.hypercube(n)
+    p1, slope = rng.uniform(0.25, 0.75, n), rng.uniform(0.2, 0.9, n)
+    pi = np.prod(np.where(states == 1, p1, 1 - p1), axis=1)
+    C = np.exp(slope[site])
+    site_pi = [[1 - p, p] for p in p1]
+    stats = [[[0, 0], [1, 0]] if i < 4 else [[0, 0], [0, 1]] for i in range(n)]
+    s1, s2 = states[:, :4].sum(axis=1).astype(int), states[:, 4:].sum(axis=1).astype(int)
+    k1, k2 = np.meshgrid(np.arange(5), np.arange(5), indexing="ij")
+    # monotone, not additive: at least five ones
+    mono = (k1 + k2 >= 5).astype(float)
+    lo, hi = ci.lp_ratio_class(pi, edges, C, mono[s1, s2])
+    up = ci.product_joint_law([[1 - q, q] for q in 1 / (1 + (1 - p1) / p1 * np.exp(-slope))], stats)
+    dn = ci.product_joint_law([[1 - q, q] for q in 1 / (1 + (1 - p1) / p1 * np.exp(slope))], stats)
+    seq = ci.sequential_interval(site_pi, slope, stats, mono)
+    assert abs(hi - float((up * mono).sum())) < 1e-7 and abs(lo - float((dn * mono).sum())) < 1e-7
+    assert abs(seq["hi"] - hi) < 1e-7 and abs(seq["lo"] - lo) < 1e-7
+    # additive with additive data: equal to Corollary 9.3 and to the programme
+    box = ci.Box([float(pi @ s2) / 4 + 0.05], 0.03)
+    lin = (k1 - 0.5 * k2) / 4.0
+    lo, hi = ci.lp_ratio_class(pi, edges, C, lin[s1, s2], (s2 / 4.0)[:, None], box)
+    seq = ci.sequential_interval(site_pi, slope, stats, lin, (k2 / 4.0)[..., None], box)
+    assert abs(seq["hi"] - hi) < 1e-5 and abs(seq["lo"] - lo) < 1e-5
+    # neither monotone nor additive: a sound outer bound
+    odd = np.abs(k1 - k2) / 4.0
+    lo, hi = ci.lp_ratio_class(pi, edges, C, odd[s1, s2], (s2 / 4.0)[:, None], box)
+    seq = ci.sequential_interval(site_pi, slope, stats, odd, (k2 / 4.0)[..., None], box)
+    assert seq["hi"] >= hi - 1e-7 and seq["lo"] <= lo + 1e-7
