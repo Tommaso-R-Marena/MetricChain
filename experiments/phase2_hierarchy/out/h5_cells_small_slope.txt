@@ -1,0 +1,18 @@
+theta = 0.25: plain dip value 1 - 2 sqrt(theta) = +0.0000; grid step 0.01 (envelopes exact on the grid; region boundaries rounded to it)
+   largest gain +0.0033 at phi1 0.10 phi2 0.45 R1 0.050, hidden type (0.27, 0.67, 0.67)
+   largest gain +0.0032 at phi1 0.45 phi2 0.10 R1 0.200, hidden type (0.63, 0.30, 0.67)
+   largest gain +0.0031 at phi1 0.10 phi2 0.10 R1 0.050, hidden type (0.32, 0.32, 0.89)
+   largest gain +0.0031 at phi1 0.10 phi2 0.10 R1 0.100, hidden type (0.32, 0.32, 0.89)
+   smallest gain -0.2119; 252 parameter sets
+theta = 0.26: plain dip value 1 - 2 sqrt(theta) = -0.0198; grid step 0.01 (envelopes exact on the grid; region boundaries rounded to it)
+   largest gain -0.0151 at phi1 0.10 phi2 0.45 R1 0.050, hidden type (0.32, 0.67, 0.67)
+   largest gain -0.0151 at phi1 0.45 phi2 0.10 R1 0.200, hidden type (0.67, 0.32, 0.67)
+   largest gain -0.0176 at phi1 0.05 phi2 0.20 R1 0.050, hidden type (0.22, 0.45, 0.87)
+   largest gain -0.0176 at phi1 0.05 phi2 0.20 R1 0.100, hidden type (0.22, 0.45, 0.87)
+   smallest gain -0.2263; 252 parameter sets
+theta = 0.28: plain dip value 1 - 2 sqrt(theta) = -0.0583; grid step 0.01 (envelopes exact on the grid; region boundaries rounded to it)
+   largest gain -0.0545 at phi1 0.10 phi2 0.45 R1 0.050, hidden type (0.32, 0.67, 0.67)
+   largest gain -0.0545 at phi1 0.10 phi2 0.45 R1 0.100, hidden type (0.32, 0.67, 0.67)
+   largest gain -0.0556 at phi1 0.20 phi2 0.20 R1 0.100, hidden type (0.45, 0.45, 0.77)
+   largest gain -0.0556 at phi1 0.20 phi2 0.20 R1 0.150, hidden type (0.45, 0.45, 0.77)
+   smallest gain -0.2474; 252 parameter sets

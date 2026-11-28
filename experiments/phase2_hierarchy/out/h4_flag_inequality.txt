@@ -1,0 +1,10 @@
+(1) factorisation identity holds: True
+    q(rho) = 16 rho^3 - 8 rho^2 - 6 rho - 1 on [1/2, cos(pi/8)]: max = -0.7544 (negative, as needed)
+(2) theta = 0.25: min of Delta^2 + 2 (theta/rho) Delta + rho^2 - 2 sqrt(Delta^2 + (rho - sqrt(theta))^2) on the grid: 0.000e+00
+(2) theta = 0.26: min of Delta^2 + 2 (theta/rho) Delta + rho^2 - 2 sqrt(Delta^2 + (rho - sqrt(theta))^2) on the grid: 1.980e-02
+(2) theta = 0.30: min of Delta^2 + 2 (theta/rho) Delta + rho^2 - 2 sqrt(Delta^2 + (rho - sqrt(theta))^2) on the grid: 9.545e-02
+(2) theta = 0.50: min of Delta^2 + 2 (theta/rho) Delta + rho^2 - 2 sqrt(Delta^2 + (rho - sqrt(theta))^2) on the grid: 4.142e-01
+(2) theta = 1.00: min of Delta^2 + 2 (theta/rho) Delta + rho^2 - 2 sqrt(Delta^2 + (rho - sqrt(theta))^2) on the grid: 1.000e+00
+(3) theta = 0.25: brute-force max over hidden points of min over anchors: +0.0101 at [0.   0.1  0.97]  (anchor-grid error up to +0.043; plain dip value 1 - 2 sqrt(theta) = +0.0000)
+(3) theta = 0.27: brute-force max over hidden points of min over anchors: -0.0282 at [0.   0.1  0.97]  (anchor-grid error up to +0.045; plain dip value 1 - 2 sqrt(theta) = -0.0392)
+(3) theta = 0.30: brute-force max over hidden points of min over anchors: -0.0831 at [0.   0.1  0.99]  (anchor-grid error up to +0.047; plain dip value 1 - 2 sqrt(theta) = -0.0954)

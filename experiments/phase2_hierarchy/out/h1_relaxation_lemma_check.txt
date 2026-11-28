@@ -1,0 +1,125 @@
+u=0.5 ns=(36, 162, 162) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.276 (allowance 89.8) | hidden max=  -0.417 vs n h - Theta=  +0.000
+u=0.5 ns=(36, 162, 162) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -0.276 (allowance 89.8) | hidden max=  -0.917 vs n h - Theta=  -0.276
+u=0.5 ns=(36, 162, 162) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -0.276 (allowance 89.8) | hidden max=  -1.917 vs n h - Theta=  -0.829
+u=0.5 ns=(72, 144, 144) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.506 (allowance 89.8) | hidden max=  -0.506 vs n h - Theta=  +0.000
+u=0.5 ns=(72, 144, 144) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -0.552 (allowance 89.8) | hidden max=  -1.032 vs n h - Theta=  -0.276
+u=0.5 ns=(72, 144, 144) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -0.552 (allowance 89.8) | hidden max=  -2.032 vs n h - Theta=  -0.829
+u=0.5 ns=(144, 108, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.851 (allowance 89.8) | hidden max=  -1.102 vs n h - Theta=  +0.000
+u=0.5 ns=(144, 108, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -0.900 (allowance 89.8) | hidden max=  -1.602 vs n h - Theta=  -0.276
+u=0.5 ns=(144, 108, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -1.061 (allowance 89.8) | hidden max=  -2.440 vs n h - Theta=  -0.829
+u=0.5 ns=(216, 36, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.773 (allowance 89.8) | hidden max=  -1.208 vs n h - Theta=  +0.000
+u=0.5 ns=(216, 36, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -0.827 (allowance 89.8) | hidden max=  -1.614 vs n h - Theta=  -0.276
+u=0.5 ns=(216, 36, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -1.103 (allowance 89.8) | hidden max=  -2.571 vs n h - Theta=  -0.829
+u=0.5 ns=(108, 18, 234) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.796 (allowance 89.8) | hidden max=  -1.051 vs n h - Theta=  +0.000
+u=0.5 ns=(108, 18, 234) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -0.796 (allowance 89.8) | hidden max=  -1.623 vs n h - Theta=  -0.276
+u=0.5 ns=(108, 18, 234) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -0.829 (allowance 89.8) | hidden max=  -2.656 vs n h - Theta=  -0.829
+u=0.5 ns=(120, 120, 120) roles=PTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.783 (allowance 89.8) | hidden max=  -1.378 vs n h - Theta=  +0.000
+u=0.5 ns=(120, 120, 120) roles=PTT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -0.864 (allowance 89.8) | hidden max=  -1.959 vs n h - Theta=  -0.276
+u=0.5 ns=(120, 120, 120) roles=PTT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -0.910 (allowance 89.8) | hidden max=  -2.505 vs n h - Theta=  -0.829
+u=0.5 ns=(120, 120, 120) roles=PPT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.670 (allowance 89.8) | hidden max=  -1.086 vs n h - Theta=  +0.000
+u=0.5 ns=(120, 120, 120) roles=PPT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -0.853 (allowance 89.8) | hidden max=  -1.770 vs n h - Theta=  -0.276
+u=0.5 ns=(120, 120, 120) roles=PPT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -1.037 (allowance 89.8) | hidden max=  -2.453 vs n h - Theta=  -0.829
+u=0.5 ns=(120, 120, 120) roles=QQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +0.226 (allowance 89.8) | hidden max=  +0.226 vs n h - Theta=  +0.000
+u=0.5 ns=(120, 120, 120) roles=QQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.002 (allowance 89.8) | hidden max=  -0.274 vs n h - Theta=  -0.276
+u=0.5 ns=(120, 120, 120) roles=QQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 89.8) | hidden max=  -1.274 vs n h - Theta=  -0.829
+u=0.5 ns=(120, 120, 120) roles=QTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +0.226 (allowance 89.8) | hidden max=  +0.226 vs n h - Theta=  +0.000
+u=0.5 ns=(120, 120, 120) roles=QTT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.002 (allowance 89.8) | hidden max=  -0.274 vs n h - Theta=  -0.276
+u=0.5 ns=(120, 120, 120) roles=QTT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 89.8) | hidden max=  -1.274 vs n h - Theta=  -0.829
+u=1.0 ns=(36, 162, 162) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -1.049 (allowance 91.3) | hidden max=  -1.846 vs n h - Theta=  +0.000
+u=1.0 ns=(36, 162, 162) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -1.049 (allowance 91.3) | hidden max=  -3.846 vs n h - Theta=  -1.049
+u=1.0 ns=(36, 162, 162) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -1.049 (allowance 91.3) | hidden max=  -6.846 vs n h - Theta=  -3.147
+u=1.0 ns=(72, 144, 144) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -2.098 (allowance 91.3) | hidden max=  -3.056 vs n h - Theta=  +0.000
+u=1.0 ns=(72, 144, 144) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -2.098 (allowance 91.3) | hidden max=  -5.149 vs n h - Theta=  -1.049
+u=1.0 ns=(72, 144, 144) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -2.098 (allowance 91.3) | hidden max=  -9.149 vs n h - Theta=  -3.147
+u=1.0 ns=(144, 108, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -3.482 (allowance 91.3) | hidden max=  -4.621 vs n h - Theta=  +0.000
+u=1.0 ns=(144, 108, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -3.684 (allowance 91.3) | hidden max=  -6.307 vs n h - Theta=  -1.049
+u=1.0 ns=(144, 108, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -3.989 (allowance 91.3) | hidden max= -10.056 vs n h - Theta=  -3.147
+u=1.0 ns=(216, 36, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -3.032 (allowance 91.3) | hidden max=  -5.008 vs n h - Theta=  +0.000
+u=1.0 ns=(216, 36, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -3.447 (allowance 91.3) | hidden max=  -6.832 vs n h - Theta=  -1.049
+u=1.0 ns=(216, 36, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -4.409 (allowance 91.3) | hidden max= -10.315 vs n h - Theta=  -3.147
+u=1.0 ns=(108, 18, 234) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -3.038 (allowance 91.3) | hidden max=  -5.401 vs n h - Theta=  +0.000
+u=1.0 ns=(108, 18, 234) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -3.115 (allowance 91.3) | hidden max=  -6.478 vs n h - Theta=  -1.049
+u=1.0 ns=(108, 18, 234) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -3.147 (allowance 91.3) | hidden max= -10.510 vs n h - Theta=  -3.147
+u=1.0 ns=(120, 120, 120) roles=PTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -3.175 (allowance 91.3) | hidden max=  -5.610 vs n h - Theta=  +0.000
+u=1.0 ns=(120, 120, 120) roles=PTT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -3.316 (allowance 91.3) | hidden max=  -7.751 vs n h - Theta=  -1.049
+u=1.0 ns=(120, 120, 120) roles=PTT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -3.497 (allowance 91.3) | hidden max= -10.932 vs n h - Theta=  -3.147
+u=1.0 ns=(120, 120, 120) roles=PPT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -2.646 (allowance 91.3) | hidden max=  -5.119 vs n h - Theta=  +0.000
+u=1.0 ns=(120, 120, 120) roles=PPT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -3.419 (allowance 91.3) | hidden max=  -6.891 vs n h - Theta=  -1.049
+u=1.0 ns=(120, 120, 120) roles=PPT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -4.450 (allowance 91.3) | hidden max= -10.945 vs n h - Theta=  -3.147
+u=1.0 ns=(120, 120, 120) roles=QQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +0.603 (allowance 91.3) | hidden max=  +0.603 vs n h - Theta=  +0.000
+u=1.0 ns=(120, 120, 120) roles=QQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 91.3) | hidden max=  -1.397 vs n h - Theta=  -1.049
+u=1.0 ns=(120, 120, 120) roles=QQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 91.3) | hidden max=  -5.420 vs n h - Theta=  -3.147
+u=1.0 ns=(120, 120, 120) roles=QTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +0.603 (allowance 91.3) | hidden max=  +0.603 vs n h - Theta=  +0.000
+u=1.0 ns=(120, 120, 120) roles=QTT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 91.3) | hidden max=  -1.397 vs n h - Theta=  -1.049
+u=1.0 ns=(120, 120, 120) roles=QTT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 91.3) | hidden max=  -5.397 vs n h - Theta=  -3.147
+u=2.0 ns=(36, 162, 162) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -3.502 (allowance 94.3) | hidden max=  -6.585 vs n h - Theta=  +0.000
+u=2.0 ns=(36, 162, 162) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -3.502 (allowance 94.3) | hidden max= -12.585 vs n h - Theta=  -3.502
+u=2.0 ns=(36, 162, 162) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -3.502 (allowance 94.3) | hidden max= -26.585 vs n h - Theta= -10.506
+u=2.0 ns=(72, 144, 144) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -7.004 (allowance 94.3) | hidden max= -12.006 vs n h - Theta=  +0.000
+u=2.0 ns=(72, 144, 144) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -7.004 (allowance 94.3) | hidden max= -19.735 vs n h - Theta=  -3.502
+u=2.0 ns=(72, 144, 144) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -7.004 (allowance 94.3) | hidden max= -32.165 vs n h - Theta= -10.506
+u=2.0 ns=(144, 108, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol= -12.470 (allowance 94.3) | hidden max= -16.425 vs n h - Theta=  +0.000
+u=2.0 ns=(144, 108, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol= -13.184 (allowance 94.3) | hidden max= -23.385 vs n h - Theta=  -3.502
+u=2.0 ns=(144, 108, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol= -13.962 (allowance 94.3) | hidden max= -36.886 vs n h - Theta= -10.506
+u=2.0 ns=(216, 36, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol= -10.997 (allowance 94.3) | hidden max= -19.326 vs n h - Theta=  +0.000
+u=2.0 ns=(216, 36, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol= -13.220 (allowance 94.3) | hidden max= -25.951 vs n h - Theta=  -3.502
+u=2.0 ns=(216, 36, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol= -16.372 (allowance 94.3) | hidden max= -37.142 vs n h - Theta= -10.506
+u=2.0 ns=(108, 18, 234) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol= -10.506 (allowance 94.3) | hidden max= -19.741 vs n h - Theta=  +0.000
+u=2.0 ns=(108, 18, 234) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol= -10.506 (allowance 94.3) | hidden max= -25.801 vs n h - Theta=  -3.502
+u=2.0 ns=(108, 18, 234) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol= -10.506 (allowance 94.3) | hidden max= -35.827 vs n h - Theta= -10.506
+u=2.0 ns=(120, 120, 120) roles=PTT theta/h=1.00 | H1 True H2 True step<=u True | viol= -11.322 (allowance 94.3) | hidden max= -20.670 vs n h - Theta=  +0.000
+u=2.0 ns=(120, 120, 120) roles=PTT theta/h=1.10 | H1 True H2 True step<=u True | viol= -11.629 (allowance 94.3) | hidden max= -26.977 vs n h - Theta=  -3.502
+u=2.0 ns=(120, 120, 120) roles=PTT theta/h=1.30 | H1 True H2 True step<=u True | viol= -11.674 (allowance 94.3) | hidden max= -37.022 vs n h - Theta= -10.506
+u=2.0 ns=(120, 120, 120) roles=PPT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -9.886 (allowance 94.3) | hidden max= -20.050 vs n h - Theta=  +0.000
+u=2.0 ns=(120, 120, 120) roles=PPT theta/h=1.10 | H1 True H2 True step<=u True | viol= -12.331 (allowance 94.3) | hidden max= -26.494 vs n h - Theta=  -3.502
+u=2.0 ns=(120, 120, 120) roles=PPT theta/h=1.30 | H1 True H2 True step<=u True | viol= -15.899 (allowance 94.3) | hidden max= -36.420 vs n h - Theta= -10.506
+u=2.0 ns=(120, 120, 120) roles=QQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +1.467 (allowance 94.3) | hidden max=  +1.467 vs n h - Theta=  +0.000
+u=2.0 ns=(120, 120, 120) roles=QQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 94.3) | hidden max=  -6.533 vs n h - Theta=  -3.502
+u=2.0 ns=(120, 120, 120) roles=QQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 94.3) | hidden max= -18.890 vs n h - Theta= -10.506
+u=2.0 ns=(120, 120, 120) roles=QTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +1.467 (allowance 94.3) | hidden max=  +1.467 vs n h - Theta=  +0.000
+u=2.0 ns=(120, 120, 120) roles=QTT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 94.3) | hidden max=  -6.533 vs n h - Theta=  -3.502
+u=2.0 ns=(120, 120, 120) roles=QTT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 94.3) | hidden max= -18.533 vs n h - Theta= -10.506
+u=4.0 ns=(36, 162, 162) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -8.613 (allowance 100.3) | hidden max= -16.086 vs n h - Theta=  +0.000
+u=4.0 ns=(36, 162, 162) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  -8.613 (allowance 100.3) | hidden max= -36.086 vs n h - Theta=  -8.613
+u=4.0 ns=(36, 162, 162) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  -8.613 (allowance 100.3) | hidden max=    -inf vs n h - Theta= -25.839
+u=4.0 ns=(72, 144, 144) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol= -17.226 (allowance 100.3) | hidden max= -35.722 vs n h - Theta=  +0.000
+u=4.0 ns=(72, 144, 144) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol= -17.226 (allowance 100.3) | hidden max= -56.962 vs n h - Theta=  -8.613
+u=4.0 ns=(72, 144, 144) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol= -17.226 (allowance 100.3) | hidden max=    -inf vs n h - Theta= -25.839
+u=4.0 ns=(144, 108, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol= -34.309 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  +0.000
+u=4.0 ns=(144, 108, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol= -34.452 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  -8.613
+u=4.0 ns=(144, 108, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol= -34.452 (allowance 100.3) | hidden max=    -inf vs n h - Theta= -25.839
+u=4.0 ns=(216, 36, 108) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol= -34.988 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  +0.000
+u=4.0 ns=(216, 36, 108) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol= -40.338 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  -8.613
+u=4.0 ns=(216, 36, 108) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol= -48.666 (allowance 100.3) | hidden max=    -inf vs n h - Theta= -25.839
+u=4.0 ns=(108, 18, 234) roles=PQT theta/h=1.00 | H1 True H2 True step<=u True | viol= -25.839 (allowance 100.3) | hidden max= -55.416 vs n h - Theta=  +0.000
+u=4.0 ns=(108, 18, 234) roles=PQT theta/h=1.10 | H1 True H2 True step<=u True | viol= -25.839 (allowance 100.3) | hidden max= -71.416 vs n h - Theta=  -8.613
+u=4.0 ns=(108, 18, 234) roles=PQT theta/h=1.30 | H1 True H2 True step<=u True | viol= -25.839 (allowance 100.3) | hidden max= -99.416 vs n h - Theta= -25.839
+u=4.0 ns=(120, 120, 120) roles=PTT theta/h=1.00 | H1 True H2 True step<=u True | viol= -28.710 (allowance 100.3) | hidden max= -59.365 vs n h - Theta=  +0.000
+u=4.0 ns=(120, 120, 120) roles=PTT theta/h=1.10 | H1 True H2 True step<=u True | viol= -28.710 (allowance 100.3) | hidden max= -75.365 vs n h - Theta=  -8.613
+u=4.0 ns=(120, 120, 120) roles=PTT theta/h=1.30 | H1 True H2 True step<=u True | viol= -28.710 (allowance 100.3) | hidden max=-103.365 vs n h - Theta= -25.839
+u=4.0 ns=(120, 120, 120) roles=PPT theta/h=1.00 | H1 True H2 True step<=u True | viol= -31.579 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  +0.000
+u=4.0 ns=(120, 120, 120) roles=PPT theta/h=1.10 | H1 True H2 True step<=u True | viol= -38.746 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  -8.613
+u=4.0 ns=(120, 120, 120) roles=PPT theta/h=1.30 | H1 True H2 True step<=u True | viol= -49.291 (allowance 100.3) | hidden max=    -inf vs n h - Theta= -25.839
+u=4.0 ns=(120, 120, 120) roles=QQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +4.952 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  +0.000
+u=4.0 ns=(120, 120, 120) roles=QQT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 100.3) | hidden max=    -inf vs n h - Theta=  -8.613
+u=4.0 ns=(120, 120, 120) roles=QQT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 100.3) | hidden max=    -inf vs n h - Theta= -25.839
+u=4.0 ns=(120, 120, 120) roles=QTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  +4.952 (allowance 100.3) | hidden max=  +4.952 vs n h - Theta=  +0.000
+u=4.0 ns=(120, 120, 120) roles=QTT theta/h=1.10 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 100.3) | hidden max= -19.048 vs n h - Theta=  -8.613
+u=4.0 ns=(120, 120, 120) roles=QTT theta/h=1.30 | H1 True H2 True step<=u True | viol=  +0.000 (allowance 100.3) | hidden max= -55.048 vs n h - Theta= -25.839
+u=1.0 ns=(40, 40, 60, 60) roles=PPQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -1.863 (allowance 110.1) | hidden max=  -1.958 vs n h - Theta=  +0.000
+u=1.0 ns=(40, 40, 60, 60) roles=PPQT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -2.096 (allowance 110.1) | hidden max=  -4.335 vs n h - Theta=  -1.166
+u=1.0 ns=(30, 50, 50, 70) roles=PQTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -0.874 (allowance 110.1) | hidden max=  -1.228 vs n h - Theta=  +0.000
+u=1.0 ns=(30, 50, 50, 70) roles=PQTT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -0.874 (allowance 110.1) | hidden max=  -3.228 vs n h - Theta=  -1.166
+u=1.0 ns=(50, 50, 50, 50) roles=PQQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -1.257 (allowance 110.1) | hidden max=  -1.257 vs n h - Theta=  +0.000
+u=1.0 ns=(50, 50, 50, 50) roles=PQQT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -1.457 (allowance 110.1) | hidden max=  -3.725 vs n h - Theta=  -1.166
+u=1.0 ns=(40, 60, 40, 60) roles=PTQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -1.166 (allowance 110.1) | hidden max=  -1.433 vs n h - Theta=  +0.000
+u=1.0 ns=(40, 60, 40, 60) roles=PTQT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -1.166 (allowance 110.1) | hidden max=  -3.433 vs n h - Theta=  -1.166
+u=2.0 ns=(40, 40, 60, 60) roles=PPQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -6.550 (allowance 114.1) | hidden max=  -9.087 vs n h - Theta=  +0.000
+u=2.0 ns=(40, 40, 60, 60) roles=PPQT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -7.494 (allowance 114.1) | hidden max= -16.077 vs n h - Theta=  -3.891
+u=2.0 ns=(30, 50, 50, 70) roles=PQTT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -2.918 (allowance 114.1) | hidden max=  -4.977 vs n h - Theta=  +0.000
+u=2.0 ns=(30, 50, 50, 70) roles=PQTT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -2.918 (allowance 114.1) | hidden max= -10.977 vs n h - Theta=  -3.891
+u=2.0 ns=(50, 50, 50, 50) roles=PQQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -4.864 (allowance 114.1) | hidden max=  -6.374 vs n h - Theta=  +0.000
+u=2.0 ns=(50, 50, 50, 50) roles=PQQT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -4.864 (allowance 114.1) | hidden max= -15.610 vs n h - Theta=  -3.891
+u=2.0 ns=(40, 60, 40, 60) roles=PTQT theta/h=1.00 | H1 True H2 True step<=u True | viol=  -3.891 (allowance 114.1) | hidden max=  -5.306 vs n h - Theta=  +0.000
+u=2.0 ns=(40, 60, 40, 60) roles=PTQT theta/h=1.20 | H1 True H2 True step<=u True | viol=  -3.891 (allowance 114.1) | hidden max= -13.306 vs n h - Theta=  -3.891
+worst value of viol over all cases: +4.952 nats;  all constructed functions admissible and satisfying (H1),(H2): True
