@@ -37,11 +37,11 @@ algorithm also receives information about the normalised ensemble `μ_w = wπ/A(
 |---|---|---|---|
 | **A** | means of `M` arbitrary observables `φ_i : X → [−1,1]`, each to absolute tolerance `τ` (answers adversarial inside the tolerance) | at most the factor `L = ⌈2τ^{−2} ln(4M/η)⌉`: `N ≥ (1−η)(1−2δ)·N₀/L` for both lower bounds (`N₀ = 2ⁿ/\|B\|` adaptive, `2ⁿ/\|D\|` non-adaptive).  **Both exponents unchanged if `ln(1/τ) = o(n)` and `ln ln M = o(n)`** — S1 is correct — **and neither condition can be dropped** (row C) | [P]; cores [V] |
 | **A′** | the same, exponentially precise: `τ = e^{−γn}`, `ln ln M ≈ βn`, `λ = 2γ + β` | adaptive exponent `≥ h̄(λ) := KL(ρ₀ − λ/u ‖ ½) − λ = h − (1−ℓ)λ + O(λ²)` whenever `h̄(λ) > γ` (S1's argument gives `h − λ`); `ℓ = u^{−1}ln((1−ρ₀)/ρ₀)` is the Chernoff parameter (`0.4900` at `u = 1`).  Upper bound `(1 − γ/ln 2)h`.  Non-adaptive: `≥ a − λ`, `≤ (1 − γ/ln 2)a` | [P]; gap open |
-| **A″** | the same on any vertex-transitive finite metric space and for **any reference measure `π`** (any known part) | `N ≥ (1−η)(1−2δ)/(L·P_hit)`; hidden centres are drawn from the *thermally blurred reference* `q ∝ π ∗ e^{−u d}` — the unique law for which mass-normalised cones add up to a constant.  The exponent of the uniform cube for homogeneous references; with a field a positive but smaller exponent at every baseline `e^{−γ\|x\|}`, the constant one included: 49 % and 22 % of the class exponent in two cases (§2.4) | [P]; identity [V] |
+| **A″** | the same on any vertex-transitive finite metric space and for **any reference measure `π`** (any known part) | `N ≥ (1−η)(1−2δ)/(L·P_hit)`; hidden centres are drawn from the *thermally blurred reference* `q ∝ π ∗ e^{−u d}` — the unique law for which mass-normalised cones add up to a constant.  For homogeneous references: the factor `L` in the dip-packing bound of the space (on the cube: the exponents `h`, `a`); with a field a positive but smaller exponent at every baseline `e^{−γ\|x\|}`, the constant one included: 49 % and 22 % of the class exponent in two cases (§2.4) | [P]; identity [V] |
 | **2.7** | the same for a **dependent reference** `π ∝ e^{−f}`, `f` any known `κ`-Lipschitz energy (`κ < u`) | sandwich by absorption: lower bounds at the slope `u − κ`, upper bounds at `u + κ`; so `h(u − κ) ≤` exponent `≤ h(u + κ)`; the lower bound also with observations in the regime of row A | [P] |
 | **B** | **exact** means of any observables whose joint Walsh spectrum has `M` non-zero frequencies | at most the factor `\|C\| < 2(M+1)` (S2 is correct); refined: exponent `≥ h̄(ln M/n)`.  For the subgroup method the bound on `\|C\|` is tight up to the factor 2 (`S = W∖{0}`, `W` a subspace: least `\|C\| = M + 1`) | [P]; cores [V] |
 | **C** | the exact joint law of `b = θn` coordinates (or that law to total-variation `τ ≤ c·εδ`; `M = 2^{2^b}` unions of cells) | **exponent exactly `(1 − θ)h`** (and `(1 − θ)a` non-adaptively) — so `ln ln M = o(n)` cannot be dropped from A | [P] |
-| **C′** | every bounded observable to a tolerance `τ` below a constant multiple of `ε` | **`O(ln(1/δ)/ln(ε/τ))` evaluations** suffice for randomised algorithms; deterministic ones still need `τ·2ⁿ` up to polynomial factors.  One exact point probability: one evaluation (the science division's, A8) | [P] |
+| **C′** | every bounded observable to a tolerance `τ` below a constant multiple of `ε` | **`O(ln(1/δ)/ln(κ/τ))` evaluations**, `κ = 1 − e^{−ε/2}`, suffice for randomised algorithms; deterministic ones still need `τ·2ⁿ` up to polynomial factors.  One exact point probability: one evaluation (the science division's, A8) | [P] |
 | **E** | `m = e^{νn}` independent samples of the ensemble | for accuracies `ε < ln(11/8)` (any bounded accuracy with the variant of Remark (4)): `N ≥ exp(n[h̄(ν) − ν] − o(n))` for `ν < ν*`, `h̄(ν*) = 2ν*`; hence samples plus evaluations cost at least `e^{ν* n}`, `ν* = 0.4024·h` at `u = 1`.  Upper bound: `h` (no better algorithm known) | [P] lower; gap open |
 
 In one sentence: *on the uniform cube, averaged data whose error bars may hide any value within `τ`
@@ -333,9 +333,11 @@ reached slowly (`0.0214` and `0.0153` at `n = 160`; `0.0109` and `0.0056` at `n 
 `γ` are `0.0122` and `0.0106`, against the class exponents `0.0250` and `0.0481` of Theorem 11.59: **49 % and
 22 %** (43 % and 12 % at the constant weight).  So with a field **a positive exponent survives every
 family of `exp(e^{o(n)})` observables at sub-exponential precision** [P]; whether the class exponent
-itself is invariant is open (§11, problem 4).  For one-body data with a field exact invariance of both
-class exponents is known by a different mechanism (compensation; theory report Theorem 11.109a,
-science division).
+itself is invariant is open (§11, problem 4).  (Flatness is the identity `ρ₁(a) = 1`, so the flat exponent
+is positive for every product reference and every `|γ| < u`; at `γ = 0`, `p < ½` the mode is the binding
+query for every `u` — the referee's remarks, review §4.3.)  For one-body data with a field exact
+invariance of both class exponents is known by a different mechanism (compensation; theory report
+Theorem 11.109a, science division).
 *Two errors of the first versions of this paragraph, found by the referee:* it said that the bound is
 "void at the exponential scale at the constant baseline" — an extrapolation from `n ≤ 160`, where the
 exponent is still falling; and its numbers for tilted baselines (`0.0236`, `0.0203`, "40 %–95 %") came
@@ -634,9 +636,9 @@ a sampled centre would reveal the scale `1/K` of an averaged dip.  (2) In terms 
 the cone is again `e^{nh}` (`h` is the Chernoff information between `π` and the cone's ensemble).
 With samples of *pinned* ensembles the problem is polynomial (self-reducibility; science
 division, addendum A7).  (4) *Larger accuracies.*  The theorem is stated for `ε < ln(11/8)`.  For any
-bounded `ε` compare `K` dips with `CK` dips, `C = ⌈e^ε⌉ + 1`: the ratio of the partition functions is at least
-`(1 + (C − ¼)R)/(1 + R)`, there are `(C − 1)K` extra centres, the constants change by factors of `C` and the
-exponent does not.  (5) In the proof, `E|Q₀|` is first the cost in the coupled experiment; coupling the
+bounded `ε` compare `K` dips with `CK` dips, `C = ⌈2e^ε⌉`: the ratio of the partition functions is at least
+`(1 + (C − ¼)R)/(1 + R) ≥ (40C − 9)/41 > e^ε` (as `R ≥ 40`), there are `(C − 1)K` extra centres, the hypothesis
+becomes `N* ≥ 40C²m/η₁` and the bound `(1 − 2δ − O(η₁))N*/(C − 1)`; the exponent does not change.  (5) In the proof, `E|Q₀|` is first the cost in the coupled experiment; coupling the
 coupled pair (instance, samples) maximally with the true one costs the bad-sampling probability of
 experiment 0 once more, which is the term `1.55η₁` on the left of the last display.
 

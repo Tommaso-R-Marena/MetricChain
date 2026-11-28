@@ -7,18 +7,22 @@ script were not run; git was used read-only.*
 
 Verdict vocabulary: **correct as stated** / **correct after a repair** / **gap** / **wrong**.
 
-**Which text was reviewed.**  The report changed twice while this review was running (not by the
-referee):
+**Which text was reviewed.**  The report changed several times while this review was running (not by
+the referee):
 
 * **v1** — the 614-line text of commit `8e2d8e6` (sha256 `b892cc0c…`), the text the brief describes.
   It was read whole and every statement in it was re-derived.  **Line numbers "L n" below are v1 line
-  numbers**; §13 maps them to the current text.
-* **current** — the 693-line text of commits `4b77c0b`/`76e3218` (sha256 `7e0d70b7…`): v1 plus §5.1
+  numbers**; §13 maps them to the next text.
+* **pre-revision** — the 693-line text of commits `4b77c0b`/`76e3218` (sha256 `7e0d70b7…`): v1 plus §5.1
   (Lemma 5.1, "attenuated bias", added in `d267d15`), §2.5 (Proposition 2.7, "absorption", added in
   `4b77c0b`), one row in each of two tables, and three one-line edits.  Nothing else of v1 was changed
   — in particular none of the passages criticised below.  The two additions were checked (§11), with
-  less depth than v1.  `docs/phase2/MANUSCRIPT.md` is not under review and was not read (only
-  searched, §4.4).
+  less depth than v1.
+* **revised** — commit `e4991d7` (750 lines, sha256 `10345a25…`), in which the coordinator applied
+  §§1–10 of this file while it was still being written.  What was checked of it, and the one thing in
+  it that still has to change, is in §11b.
+
+`docs/phase2/MANUSCRIPT.md` is not under review and was not read (only searched, §4.4).
 
 ## 0. Summary
 
@@ -102,9 +106,14 @@ prediction (`0.0294` against `0.02945`; `0.0348` against `0.0349`; `0.1997` agai
 the proof's bound in every run; `E TV(μ_w, μ̃) ≤ K_i V/2ⁿ` and `P(O_1 > R/4)` as claimed.
 
 **1.7 Minor.**  (i) The theorem is stated for `ε < ln(11/8)` only, while §0 (row E, L34) and §7 (L527)
-quote the exponent for "bounded accuracy".  *Repair:* compare `K` with `CK` dips, `C = ⌈e^ε⌉ + 1`: ratio
-`≥ (1 + (C − ¼)R)/(1 + R)`, `(C−1)K` extra centres, all constants change by factors of `C`, the exponent
-does not.  Or restrict the two quotations.  (ii) Remark (2), "`N ≳ N₀/m^{2−ℓ}`", is first order in `ν`
+quote the exponent for "bounded accuracy".  *Repair:* compare `K` with `CK` dips: the ratio is at least
+`(1 + (C − ¼)R)/(1 + R) ≥ (40C − 9)/41` (increasing in `R ≥ 40`), which exceeds `e^ε` for `C = ⌈2e^ε⌉`; there are
+`(C−1)K` extra centres; the constants change by factors depending on `C` only (hypothesis
+`N* ≥ 40C²m/η₁` for the overlap of `CK` centres, bound `(1 − 2δ − O(η₁))N*/(C − 1)`), the exponent does
+not.  Or restrict the two quotations.  **Correction of an earlier version of this paragraph:** it
+proposed `C = ⌈e^ε⌉ + 1`, which is enough only for `e^ε < 31` (at `R = 40`, `ε = 4`: `C = 56`, ratio bound
+`54.4 < e^4 = 54.6`); the revised report (Remark (4) of §6 in the working tree at 01:53 UTC) copied
+that constant and should use `⌈2e^ε⌉`.  (ii) Remark (2), "`N ≳ N₀/m^{2−ℓ}`", is first order in `ν`
 (the inequality direction is right by convexity of `h̄`).
 
 ## 2. Theorem A, §2.2 — **(a) for (O1), (b), (c): correct as stated; (a) for (O2): correct after a repair**
@@ -212,10 +221,16 @@ Chernoff, for every `n`, every query `x` and every `t ≥ 0`:
     q({c : x ∈ B_c})  ≤  ε₀^t ∏_i E_q (k(x_i,c_i)/s_{c_i})^t  ≤  ε₀^t · max( ρ_t(0), ρ_t(1) )ⁿ ,
     ρ_t(0) = θ(z₁/s₁)^t + (1−θ)s₀^{−t},     ρ_t(1) = (1−θ)(z₀/s₀)^t + θ s₁^{−t} ,
 
-so `−n^{−1}ln P_hit ≥ max_t min_a(−ln ρ_t(a)) − O(1/n)`, with equality in the limit (Cramér).  For the
-query `x = 0` (the mode when `p < ½`) at `γ = 0` the rate is `KL(κ*‖θ)`, `κ* = ln(1/s₀)/(u + ln(s₁/s₀)) < θ`,
-positive for every `0 < p < ½` (the margin `θ − κ*` vanishes only as `p → 0`); in both examples of the
-report this query is the binding one (`−ln ρ_{t*}(1) = 0.057`, `0.323` against `−ln ρ_{t*}(0) = 0.0109`, `0.0056`).
+so `−n^{−1}ln P_hit ≥ max_t min_a(−ln ρ_t(a)) − O(1/n)`, with equality in the limit (Cramér).  Two
+general facts.  (i) *The exponent is positive for every product reference and every tilt `|γ| < u`:*
+flatness is exactly `ρ_1(a) = θ k(a,1)/s₁ + (1−θ)k(a,0)/s₀ = 1` for both letters `a`, and `ρ_0(a) = 1`; `t ↦ ρ_t(a)`
+is strictly convex (a moment generating function of a non-constant variable when `0 < p′ < 1`), so
+`ρ_t(a) < 1` on `(0, 1)` and already `t = ½` gives `P_hit ≤ ε₀^{1/2}·max_a ρ_{1/2}(a)ⁿ`, exponentially small.
+(ii) *At `γ = 0`, `p < ½`, the binding query is the mode, for every `u`:*
+`ρ_t(0) − ρ_t(1) = (1 − e^{−ut})(s₀^{1−t} − s₁^{1−t})/(s₀ + s₁) ≥ 0` on `[0, 1]` because `s₀ > s₁`; the rate is that of
+the binomial tail `P(Bin(n, θ) < κ*n)`, i.e. `KL(κ*‖θ)`, `κ* = ln(1/s₀)/(u + ln(s₁/s₀)) < θ` (the margin `θ − κ*`
+vanishes only as `p → 0`).  In the two examples `−ln ρ_{t*}(1) = 0.057`, `0.323` against
+`−ln ρ_{t*}(0) = 0.0109`, `0.0056`.
 
 | | `θ` | `κ*` | limit | exact `−ln P_hit/n` at `n = 160, 480` (all queries) | mode query at `n = 10³, 10⁴, 10⁵, 10⁶` |
 |---|---|---|---|---|---|
@@ -475,6 +490,26 @@ plus pair interaction on 9 sites).  `h` and `a` are increasing in `u` ✓; `h(¾
 the lower bound in the regime of Theorem A only (the corollary says so; the row does not).  See
 §10.7 for its first sentence.
 
+## 11b. The revision of commit `e4991d7` (750 lines, sha256 `10345a25…`)
+
+The coordinator revised the report from §§1–10 of this file while it was being written ("the internal
+referee's findings applied").  The changed passages were read once (the diff against commit
+`76e3218`); they were not re-derived with the depth of v1.  Found correct: the (O2) statement and the oracle "defined once and for all" in its proof; Lemma
+2.5 (iii) with `Õ_c`; the (O2) paragraph after Theorem A′; the product weights
+`(e^{−γ} − e^{−u})/(1 − e^{−(u+γ)})`; the new §2.4 (3) — including its general sentence "at the constant weight
+and `p < ½` the worst query is the mode", which is true for every `u` (§4.3 (ii) above) — and §2.4 (4);
+the new Remark (1) of §2.5 (`h(u − κ) = 0.00073` at `κ = 0.847`); Corollary C (ii) with `τ2^{−b−1}` and `2b`
+queries; C′ (a)–(c) (`TV ≤ p`, `p ≤ τ/2`, `2b` queries); the rewritten "Reading"; the §7 row with
+`(1 − (γ+β)/ln 2)h`; the novelty row; §10.
+**One thing to change:** Remark (4) of §6 (lines 636–637 of that revision, `C = ⌈e^ε⌉ + 1`) — the
+referee's own slip, see §1.7: use `C = ⌈2e^ε⌉` and say that the constants depend on `C`.
+Two wording points: row A″ of the §0 table (line 40) now begins "The exponent of the uniform cube
+for homogeneous references" — what is proved there is the factor `L` in the dip-packing bound of the
+space (§2.4 (2)); row C′ (line 44) has `ln(ε/τ)` where the proof has `ln(κ/τ)`, `κ = 1 − e^{−ε/2} ≤ 1` (they
+differ for large `ε`).  Theorem B (c) as reworded ("tight up to the factor 2 … about the subgroup
+method") is right.  The scripts `p2_field_flat.py`, `p2_field_flat_exact.py` as rewritten give the referee's
+numbers; they were read, not run.
+
 ## 12. Verdicts
 
 | statement | verdict |
@@ -502,9 +537,9 @@ the lower bound in the regime of Theorem A only (the corollary says so; the row 
 
 ## 13. Line map and what was not checked
 
-**Line map**, v1 (commit `8e2d8e6`, 614 lines) → current (commit `76e3218`, 693 lines):
+**Line map**, v1 (commit `8e2d8e6`, 614 lines) → pre-revision (commit `76e3218`, 693 lines):
 
-| passage | v1 | current |
+| passage | v1 | pre-revision |
 |---|---|---|
 | §0 table, row A ("iff") | 28 | 28 |
 | §0 table, row A″ ("only around tilted baselines") | 30 | 30 |
@@ -541,11 +576,12 @@ the lower bound in the regime of Theorem A only (the corollary says so; the row 
 * Prior art outside the programme (no network).
 * `docs/phase2/MANUSCRIPT.md`, `docs/THEORY_REPORT.md` §11.34, `THY-MSG-0023`, `DEAD_ENDS.md` D71: only
   searched for the statements of §4.4.
-* §5.1 beyond Lemma 5.1 (the table, the heuristics); the remark (3) of §2.5 (marginalisation); site-
-  dependent `κ_i`.
+* §5.1 beyond Lemma 5.1 and the union-of-cosets count (the table's entries, the closing heuristics);
+  the remark (3) of §2.5 (marginalisation); site-dependent `κ_i`.
 * The single-type exponents with a field at more than two parameter pairs; the flat family for
   references other than `Bernoulli(p)ⁿ`.
 * Theorem E was checked by re-derivation and, for its sampling part, by Monte Carlo at `m = 2` on
   cubes of 13–15 sites — far from the regime `m = e^{νn}`; the evaluation part is a union bound and
   was not simulated.
-* Anything written to the report after 01:37 UTC.
+* Anything written to the report after commit `e4991d7`; of that revision, only the changed passages
+  listed in §11b, read once.

@@ -413,9 +413,11 @@ reached slowly (`0.0214` and `0.0153` at `n = 160`; `0.0109` and `0.0056` at `n 
 `γ` are `0.0122` and `0.0106`, against the class exponents `0.0250` and `0.0481` of Theorem 11.59: **49 % and
 22 %** (43 % and 12 % at the constant weight).  So with a field **a positive exponent survives every
 family of `exp(e^{o(n)})` observables at sub-exponential precision** [P]; whether the class exponent
-itself is invariant is open (open problem 4).  For one-body data with a field exact invariance of both
-class exponents is known by a different mechanism (compensation; theory report Theorem 11.109a,
-science division).
+itself is invariant is open (open problem 4).  (Flatness is the identity `ρ₁(a) = 1`, so the flat exponent
+is positive for every product reference and every `|γ| < u`; at `γ = 0`, `p < ½` the mode is the binding
+query for every `u` — the referee's remarks, review §4.3.)  For one-body data with a field exact
+invariance of both class exponents is known by a different mechanism (compensation; theory report
+Theorem 11.109a, science division).
 *Two errors of the first versions of this paragraph, found by the referee:* it said that the bound is
 "void at the exponential scale at the constant baseline" — an extrapolation from `n ≤ 160`, where the
 exponent is still falling; and its numbers for tilted baselines (`0.0236`, `0.0203`, "40 %–95 %") came
@@ -714,9 +716,9 @@ a sampled centre would reveal the scale `1/K` of an averaged dip.  (2) In terms 
 the cone is again `e^{nh}` (`h` is the Chernoff information between `π` and the cone's ensemble).
 With samples of *pinned* ensembles the problem is polynomial (self-reducibility; science
 division, addendum A7).  (4) *Larger accuracies.*  The theorem is stated for `ε < ln(11/8)`.  For any
-bounded `ε` compare `K` dips with `CK` dips, `C = ⌈e^ε⌉ + 1`: the ratio of the partition functions is at least
-`(1 + (C − ¼)R)/(1 + R)`, there are `(C − 1)K` extra centres, the constants change by factors of `C` and the
-exponent does not.  (5) In the proof, `E|Q₀|` is first the cost in the coupled experiment; coupling the
+bounded `ε` compare `K` dips with `CK` dips, `C = ⌈2e^ε⌉`: the ratio of the partition functions is at least
+`(1 + (C − ¼)R)/(1 + R) ≥ (40C − 9)/41 > e^ε` (as `R ≥ 40`), there are `(C − 1)K` extra centres, the hypothesis
+becomes `N* ≥ 40C²m/η₁` and the bound `(1 − 2δ − O(η₁))N*/(C − 1)`; the exponent does not change.  (5) In the proof, `E|Q₀|` is first the cost in the coupled experiment; coupling the
 coupled pair (instance, samples) maximally with the true one costs the bad-sampling probability of
 experiment 0 once more, which is the term `1.55η₁` on the left of the last display.
 
