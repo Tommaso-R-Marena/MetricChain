@@ -1,0 +1,15 @@
+p=0.50 u=1.0
+   n=  20  ln P_hit =   -2.0281   -ln P_hit / n = 0.10140   worst query weight/n = 0.150
+   n=  40  ln P_hit =   -2.5649   -ln P_hit / n = 0.06412   worst query weight/n = 0.350
+   n=  80  ln P_hit =   -4.1046   -ln P_hit / n = 0.05131   worst query weight/n = 0.912
+   n= 160  ln P_hit =   -6.9312   -ln P_hit / n = 0.04332   worst query weight/n = 0.825
+p=0.30 u=1.0
+   n=  20  ln P_hit =   -1.2916   -ln P_hit / n = 0.06458   worst query weight/n = 0.050
+   n=  40  ln P_hit =   -1.6920   -ln P_hit / n = 0.04230   worst query weight/n = 0.000
+   n=  80  ln P_hit =   -2.3696   -ln P_hit / n = 0.02962   worst query weight/n = 0.013
+   n= 160  ln P_hit =   -3.4254   -ln P_hit / n = 0.02141   worst query weight/n = 0.006
+p=0.10 u=2.0
+   n=  20  ln P_hit =   -0.8395   -ln P_hit / n = 0.04198   worst query weight/n = 0.000
+   n=  40  ln P_hit =   -1.1677   -ln P_hit / n = 0.02919   worst query weight/n = 0.000
+   n=  80  ln P_hit =   -1.6584   -ln P_hit / n = 0.02073   worst query weight/n = 0.000
+   n= 160  ln P_hit =   -2.4553   -ln P_hit / n = 0.01535   worst query weight/n = 0.000

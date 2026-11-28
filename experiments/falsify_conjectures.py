@@ -14957,6 +14957,289 @@ def t_product_tails(rng, trials):
     return True, stats
 
 
+# ---------------------------------------------------------------------------------------------
+# XXVIII. Phase II: observation oracles (docs/phase2/PHASE2_REPORT.md)
+# ---------------------------------------------------------------------------------------------
+
+def oi_cube(n):
+    N = 1 << n
+    idx = np.arange(N)
+    x = idx[:, None] ^ idx[None, :]
+    D = np.zeros((N, N), dtype=np.int16)
+    for i in range(n):
+        D += (x >> i) & 1
+    return N, idx, D
+
+
+def oi_admissible(w, n, u):
+    idx = np.arange(len(w))
+    return all(np.all(w <= math.exp(u) * w[idx ^ (1 << i)] * (1 + 1e-12)) for i in range(n))
+
+
+def oi_random_weight(rng, n, u, D, k=5):
+    cs = rng.integers(0, D.shape[0], size=k)
+    off = rng.uniform(0, n / 2, size=k)
+    f = np.min(D[:, cs] + off[None, :], axis=1)
+    return np.exp(-u * float(rng.choice([-1.0, 1.0])) * f)
+
+
+def oi_par(a, b):
+    return bin(int(a) & int(b)).count("1") & 1
+
+
+def oi_span(gens):
+    C = {0}
+    for g in gens:
+        C |= {c ^ int(g) for c in C}
+    return sorted(C)
+
+
+def oi_consts(u):
+    pu = 1 / (1 + math.exp(u))
+    kl = lambda x, q: x * math.log(x / q) + (1 - x) * math.log((1 - x) / (1 - q))
+    a = kl(pu, 0.5)
+    rho0 = math.log(2 / (1 + math.exp(-u))) / u
+    return pu, a, rho0, kl(rho0, 0.5), math.log((1 - rho0) / rho0) / u, kl
+
+
+def oi_hoeffding(M, L, tau, width):
+    """P(some of M means of L independent terms with range `width` deviates by >= tau)."""
+    return 2 * M * math.exp(-2 * L * tau ** 2 / width ** 2)
+
+
+def oi_hbar(lam, u):
+    pu, a, rho0, h, ell, kl = oi_consts(u)
+    return kl(rho0 - lam / u, 0.5) - lam
+
+
+@conjecture("XXVIII.1 Phase II, Theorem A (noisy means of arbitrary observables; the proposed theorem S1), on cubes of 8 sites, exact sums.  (a) Lemma 2.2: a convex combination of translates of an admissible weight is admissible, has the same partition function, and its ensemble is the combination of the translated ensembles; the mean over a uniform translation of E_mu[phi] is the uniform mean of phi.  (b) Hoeffding: for the dip w (ln A = Delta) the means Y(c) = E_{mu_{w(. + c)}} phi lie in an interval of length 2(1 - e^{-Delta}), and for L independent uniform translations the frequency of the event 'some of M observables deviates by more than tau from its uniform mean' is below 2M exp(-L tau^2 / (2 (1 - e^{-Delta})^2)) (checked with four observables at L = 40, and for a dictator — whose means take two values — at L = 8 with its own range, where the true frequency is 0.29 and the bound 0.74); the range 2(1 - e^{-Delta}) is attained up to 20 % by the indicator of the dip's ball.  (c) Lemma 2.6 (flat mixture) for an ARBITRARY reference measure pi: with m(c) = E_pi e^{-u d(.,c)}, q = m / Sigma_0, H = eps0 / m: q is a probability vector, sum_c q(c) H(c) e^{-u d(x,c)} = eps0 at every x, the dips max(1, H(c) e^{-u d(.,c)}) are admissible, their q-mixture is 1 + eps0 - delta_tr, and the ensemble of the mixture is within xi/(1 + eps0 - xi) of pi in total variation (xi = E_pi delta_tr)")
+def t_oi_noisy(rng, trials):
+    quick = trials < 100
+    n, u = 8, 1.0
+    N, idx, D = oi_cube(n)
+    stats = dict(instances=0, worst_freq_over_bound=0.0)
+    for _ in range(3 if quick else 8):
+        w = oi_random_weight(rng, n, u, D)
+        cs = rng.integers(0, N, size=5)
+        lam = rng.dirichlet(np.ones(5))
+        wbar = sum(l * w[idx ^ c] for l, c in zip(lam, cs))
+        A = w.mean()
+        phi = rng.uniform(-1, 1, size=N)
+        if not (oi_admissible(w, n, u) and oi_admissible(wbar, n, u)):
+            return False, dict(reason="a convex combination of translates is not admissible")
+        if abs(wbar.mean() - A) > 1e-11 * A:
+            return False, dict(reason="averaging translates changed the partition function")
+        lhs = (wbar * phi).mean() / wbar.mean()
+        rhs = sum(l * (w[idx ^ c] * phi).mean() / A for l, c in zip(lam, cs))
+        if abs(lhs - rhs) > 1e-10:
+            return False, dict(reason="the ensemble of the average is not the average of the ensembles", lhs=lhs, rhs=rhs)
+        allmean = np.mean([(w[idx ^ c] * phi).mean() / A for c in range(N)])
+        if abs(allmean - phi.mean()) > 1e-10:
+            return False, dict(reason="a uniform translation does not reproduce the uniform mean")
+        stats["instances"] += 1
+    # (b) Hoeffding for random translates of a dip
+    r = 4
+    dip = np.maximum(1.0, np.exp(u * (r - D[:, 0].astype(float))))
+    Ad = dip.mean()
+    M = 4
+    phis = rng.choice([-1.0, 1.0], size=(M, N))
+    phis[0] = 1 - 2 * (idx & 1)                                   # a dictator: two-valued means
+    phis[1] = 2.0 * (D[:, 0] < r) - 1                             # the indicator of the dip's ball: extremal range
+    G = np.empty((M, N))
+    for c in range(N):
+        G[:, c] = (phis[:, idx ^ c] * dip[None, :]).mean(axis=1) / Ad
+    phibar = phis.mean(axis=1)
+    width = 2 * (1 - 1 / Ad)
+    spans = G.max(axis=1) - G.min(axis=1)
+    if np.abs(G.mean(axis=1) - phibar).max() > 1e-10 or spans.max() > width + 1e-10:
+        return False, dict(reason="mean or range of the translated ensemble means", width=width, span=float(spans.max()))
+    if spans[1] < 0.8 * width:
+        return False, dict(reason="the range 2(1 - 1/A) is not nearly attained by the indicator of the ball", width=width, span=float(spans[1]))
+    runs = 400 if quick else 3000
+    for (rows, L, tau, wd) in (([0, 1, 2, 3], 40, 0.3, width), ([0], 8, spans[0] / 4, spans[0])):
+        bad = 0
+        for _ in range(runs):
+            c = rng.integers(0, N, size=L)
+            bad += bool(np.any(np.abs(G[rows][:, c].mean(axis=1) - phibar[rows]) >= tau - 1e-12))
+        bound = oi_hoeffding(len(rows), L, tau, wd)
+        stats["worst_freq_over_bound"] = max(stats["worst_freq_over_bound"], (bad / runs) / bound)
+        if bad / runs > bound + 4 * math.sqrt(bound / runs):
+            return False, dict(reason="Hoeffding and the union bound are violated", freq=bad / runs, bound=bound, L=L)
+    # (c) the flat mixture for an arbitrary reference
+    for _ in range(2 if quick else 5):
+        pi = rng.dirichlet(np.full(N, 0.3))
+        K = np.exp(-u * D.astype(float))
+        S0 = K.sum(axis=1)
+        m = pi @ K
+        q = m / S0[0]
+        eps0 = float(rng.uniform(0.3, 1.5))
+        H = eps0 / m
+        if np.abs(S0 - S0[0]).max() > 1e-9 or abs(q.sum() - 1) > 1e-10:
+            return False, dict(reason="row sums or normalisation of the hiding law")
+        flat = (K * (q * H)[None, :]).sum(axis=1)
+        if np.abs(flat - eps0).max() > 1e-10:
+            return False, dict(reason="the mixture of the mass-normalised cones is not flat", spread=float(np.abs(flat - eps0).max()))
+        Wc = np.maximum(1.0, K * H[None, :])
+        if not all(oi_admissible(Wc[:, c], n, u) for c in range(0, N, 37)):
+            return False, dict(reason="a dip of the family is not admissible")
+        dtr = (np.minimum(1.0, K * H[None, :]) * q[None, :]).sum(axis=1)
+        winf = (Wc * q[None, :]).sum(axis=1)
+        xi = float(pi @ dtr)
+        mu = pi * winf / (pi @ winf)
+        tv = 0.5 * np.abs(mu - pi).sum()
+        if np.abs(winf - (1 + eps0 - dtr)).max() > 1e-10 or tv > xi / (1 + eps0 - xi) + 1e-12:
+            return False, dict(reason="truncated mixture or its total-variation bound", tv=tv, bound=xi / (1 + eps0 - xi))
+    return True, stats
+
+
+@conjecture("XXVIII.2 Phase II, Lemma 2.5 and Corollary A' (maxima of narrow dips).  On the cube of 9 sites: w_c = 1 + max_j e_r(. + c_j) is admissible; L m_r - O_c <= A(w_c) - 1 <= L m_r with O_c the sum of the pairwise overlaps E_pi min(e, e'); the average over all pairs of centres of the pair overlap is at most m_r V(n, r-1)/2^n; TV(mu_{w_c}, ideal mixture) <= O_c/(1 + L m_r - O_c).  Exponent function hbar(lam) = KL(rho_0 - lam/u || 1/2) - lam: hbar(0) = h, hbar(a) = 0, slope -(1 - ell) at 0, convex; rho_0 = p_u + a/u and KL(rho_0||1/2) = KL(rho_0||p_u) (h is the Chernoff information of the two site laws); hbar(2 gamma) >= h - 2 gamma and <= (1 - gamma/ln 2) h on the range where it is positive")
+def t_oi_narrow(rng, trials):
+    quick = trials < 100
+    n, u = 9, 1.0
+    N, idx, D = oi_cube(n)
+    stats = dict(configurations=0)
+    for trial in range(5 if quick else 21):
+        L = int(rng.integers(2, 7))
+        r = int(rng.integers(2, 5))
+        cs = rng.integers(0, N, size=L)
+        if trial == 0:                                            # two overlapping dips at adjacent centres
+            L, r, cs = 2, 3, np.array([0, 1])
+        E = np.maximum(0.0, np.exp(u * (r - D[:, cs].astype(float))) - 1.0)
+        wmax = 1.0 + E.max(axis=1)
+        if not oi_admissible(wmax, n, u):
+            return False, dict(reason="a maximum of dips is not admissible")
+        m_r = E[:, 0].mean()
+        O = sum(np.minimum(E[:, i], E[:, j]).mean() for i in range(L) for j in range(i))
+        exc = wmax.mean() - 1
+        if not (L * m_r - O - 1e-12 <= exc <= L * m_r + 1e-12):
+            return False, dict(reason="mass of a maximum of dips outside [L m - O, L m]", exc=exc, Lm=L * m_r, O=O)
+        mu = wmax / wmax.sum()
+        ideal = (1.0 + E.sum(axis=1)) / (N * (1 + L * m_r))
+        tv = 0.5 * np.abs(mu - ideal).sum()
+        if O < 1 + L * m_r and tv > O / (1 + L * m_r - O) + 1e-12:
+            return False, dict(reason="distance to the ideal mixture exceeds O/(1 + L m - O)", tv=tv)
+        e0 = np.maximum(0.0, np.exp(u * (r - D[:, 0].astype(float))) - 1.0)
+        V = int(np.count_nonzero(D[:, 0] < r))
+        mean_pair = np.mean([np.minimum(e0, e0[idx ^ c]).mean() for c in range(N)])
+        if mean_pair > m_r * V / N + 1e-14:
+            return False, dict(reason="mean pair overlap exceeds m_r V / 2^n", mean_pair=float(mean_pair))
+        stats["configurations"] += 1
+    for uu in (0.5, 1.0, 2.0):
+        pu, a, rho0, h, ell, kl = oi_consts(uu)
+        if abs(rho0 - (pu + a / uu)) > 1e-12 or abs(kl(rho0, pu) - h) > 1e-12:
+            return False, dict(reason="rho_0 or the Chernoff identity", u=uu)
+        if abs(oi_hbar(0.0, uu) - h) > 1e-12 or abs(oi_hbar(a * (1 - 1e-12), uu)) > 1e-9:
+            return False, dict(reason="end values of hbar", u=uu)
+        if abs((oi_hbar(1e-6, uu) - h) / 1e-6 + (1 - ell)) > 1e-4:
+            return False, dict(reason="slope of hbar at zero", u=uu)
+        for x in np.linspace(0, 0.95 * a, 40):
+            if oi_hbar(x, uu) + oi_hbar(x + 2e-3 * a, uu) - 2 * oi_hbar(x + 1e-3 * a, uu) < -1e-13:
+                return False, dict(reason="hbar is not convex", u=uu, x=float(x))
+        for g in np.linspace(0, 0.49 * a, 30):
+            if oi_hbar(2 * g, uu) < max(0.0, h - 2 * g) - 1e-13 or oi_hbar(2 * g, uu) > (1 - g / math.log(2)) * h + 1e-13:
+                return False, dict(reason="hbar(2 gamma) outside [h - 2 gamma, (1 - gamma/ln 2) h]", u=uu, gamma=float(g))
+    return True, stats
+
+
+@conjecture("XXVIII.3 Phase II, Theorem B (exact observables; the proposed theorem S2), cube of 8 sites.  For random sets S of M non-zero Walsh frequencies and r = ceil(log2(M+1)): random search finds r generators such that every s in S has s.g_i = 1 for some i; the subgroup C they span has |C| < 2(M+1); averaging any admissible weight over C keeps it admissible, keeps the partition function and multiplies its Walsh coefficients by the indicator of the annihilator of C (so all coefficients in S vanish exactly).  Counting identity behind the union bound: for s != 0 exactly 2^{(n-1)r} of the 2^{nr} generator tuples are orthogonal to s.  Tightness: for S = W minus 0, W a subspace of dimension 2 of F_2^4, the least |C| over all subgroups whose annihilator avoids S is 4 = M + 1")
+def t_oi_exact(rng, trials):
+    quick = trials < 100
+    n, u = 8, 1.0
+    N, idx, D = oi_cube(n)
+    stats = dict(sets=0, largest_ratio=0.0)
+    chi = lambda s_: 1 - 2 * np.array([oi_par(s_, v) for v in range(N)])
+    for M in ((1, 3, 12) if quick else (1, 2, 3, 7, 12, 30, 60)):
+        w = oi_random_weight(rng, n, u, D)
+        what = np.array([(w * chi(s_)).mean() for s_ in range(N)])
+        S = rng.choice(np.arange(1, N), size=M, replace=False)
+        rr = math.ceil(math.log2(M + 1))
+        gens = None
+        for _ in range(5000):
+            cand = rng.integers(0, N, size=rr)
+            if all(any(oi_par(s_, g) for g in cand) for s_ in S):
+                gens = cand
+                break
+        if gens is None:
+            return False, dict(reason="no generators found", M=M, r=rr)
+        C = oi_span(gens)
+        if len(C) >= 2 * (M + 1):
+            return False, dict(reason="subgroup too large", M=M, size=len(C))
+        wC = sum(w[idx ^ c] for c in C) / len(C)
+        inperp = np.array([all(oi_par(s_, c) == 0 for c in C) for s_ in range(N)])
+        coef = np.array([(wC * chi(s_)).mean() for s_ in range(N)])
+        if inperp[S].any() or np.abs(coef - what * inperp).max() > 1e-10:
+            return False, dict(reason="subgroup averaging does not act as the projection on the annihilator", M=M)
+        if not oi_admissible(wC, n, u) or abs(wC.mean() - w.mean()) > 1e-11 * w.mean():
+            return False, dict(reason="subgroup average: admissibility or partition function", M=M)
+        stats["sets"] += 1
+        stats["largest_ratio"] = max(stats["largest_ratio"], len(C) / (M + 1))
+    n2, r2 = 4, 2
+    for s2 in (0b0110, 0b1000, 0b1111):
+        cnt = sum(1 for g in itertools.product(range(1 << n2), repeat=r2) if all(oi_par(s2, gi) == 0 for gi in g))
+        if cnt != 2 ** ((n2 - 1) * r2):
+            return False, dict(reason="count of orthogonal generator tuples", s=s2, count=cnt)
+    subs = set()
+    for k in range(5):
+        for gs in itertools.combinations(range(1, 16), k):
+            Csub = tuple(oi_span(gs))
+            if len(Csub) == 1 << k:
+                subs.add(Csub)
+    Sw = [1, 2, 3]
+    least = min(len(Csub) for Csub in subs if not any(all(oi_par(s_, c) == 0 for c in Csub) for s_ in Sw))
+    if least != 4:
+        return False, dict(reason="tightness example", least=least)
+    return True, stats
+
+
+@conjecture("XXVIII.4 Phase II, Theorems C and C' (where invariance stops), cube of 8 sites with cells = the first 3 coordinates.  (a) zoom identity A(w) = E_S[w] 2^{-b} / mu_w(S) for every cell S, and A(w) = w(z) 2^{-n} / mu_w(z) for every point; a cylinder weight w(s, y) = v(y) is admissible with exactly uniform cell masses and A(w) = A(v).  (b) the random-cell estimator: for every law nu-hat of the cells, P_{S ~ nu-hat}(|nu(S)/nu-hat(S) - 1| > kappa) <= ||nu - nu-hat||_1 / kappa; the same for points (the full oracle).  (c) wells against deterministic algorithms: w = min(e^Delta, e^{u d(., Q)}) is admissible, equals 1 on Q, has A(w) > e^Delta (1 - p) and TV(mu_w, pi) <= p/(1 - p), p the measure of the points within distance < Delta/u of Q")
+def t_oi_sharp(rng, trials):
+    quick = trials < 100
+    n, b, u = 8, 3, 1.0
+    N, idx, D = oi_cube(n)
+    cell = idx & ((1 << b) - 1)
+    stats = dict(weights=0, worst_tv_ratio=0.0)
+    Nv, _, Dv = oi_cube(n - b)
+    for _ in range(10 if quick else 60):
+        w = oi_random_weight(rng, n, u, D)
+        mu = w / w.sum()
+        nu = np.bincount(cell, weights=mu, minlength=1 << b)
+        zoom = np.array([w[cell == s_].mean() * 2.0 ** -b / nu[s_] for s_ in range(1 << b)])
+        if np.abs(zoom / w.mean() - 1).max() > 1e-10 or np.abs(w / N / mu / w.mean() - 1).max() > 1e-10:
+            return False, dict(reason="zoom identity")
+        v = oi_random_weight(rng, n - b, u, Dv)
+        wc = v[idx >> b]
+        nuc = np.bincount(cell, weights=wc / wc.sum(), minlength=1 << b)
+        if not oi_admissible(wc, n, u) or np.abs(nuc - 2.0 ** -b).max() > 1e-13 or abs(wc.mean() - v.mean()) > 1e-12 * v.mean():
+            return False, dict(reason="cylinder instance")
+        nuh = np.maximum(nu + rng.normal(0, 0.02, size=1 << b), 1e-3)
+        nuh /= nuh.sum()
+        muh = 0.95 * mu + 0.05 * rng.dirichlet(np.ones(N))
+        for kappa in (0.05, 0.2, 0.5):
+            if nuh[np.abs(nu / nuh - 1) > kappa].sum() > np.abs(nu - nuh).sum() / kappa + 1e-12:
+                return False, dict(reason="random-cell estimator bound", kappa=kappa)
+            adv = nu.copy()                                       # all the error on one cell, just above kappa
+            adv[0] = nu[0] / (1 + 1.01 * kappa)
+            adv[1:] += (nu[0] - adv[0]) / (len(nu) - 1)
+            if adv[np.abs(nu / adv - 1) > kappa].sum() > np.abs(nu - adv).sum() / kappa + 1e-12:
+                return False, dict(reason="random-cell estimator bound, adversarial report", kappa=kappa)
+            if muh[np.abs(mu / muh - 1) > kappa].sum() > np.abs(mu - muh).sum() / kappa + 1e-12:
+                return False, dict(reason="full-oracle estimator bound", kappa=kappa)
+        Delta = float(rng.uniform(0.4, 2.5))
+        Q = rng.integers(0, N, size=int(rng.integers(1, 10)))
+        dQ = D[:, Q].min(axis=1).astype(float)
+        wel = np.minimum(math.exp(Delta), np.exp(u * dQ))
+        pm = np.count_nonzero(u * dQ < Delta) / N
+        tv = 0.5 * np.abs(wel / wel.sum() - 1.0 / N).sum()
+        if not oi_admissible(wel, n, u) or np.any(wel[Q] != 1.0):
+            return False, dict(reason="wells: admissibility or value on the queries")
+        if not (wel.mean() > math.exp(Delta) * (1 - pm)) or (pm < 1 and tv > pm / (1 - pm) + 1e-12):
+            return False, dict(reason="wells: partition function or total variation", tv=tv, p=pm)
+        if pm < 1:
+            stats["worst_tv_ratio"] = max(stats["worst_tv_ratio"], tv * (1 - pm) / pm)
+        stats["weights"] += 1
+    return True, stats
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true", help="fewer trials (CI mode)")

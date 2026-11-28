@@ -89,6 +89,7 @@ import proofs.Frontiers.ResolvedPenalties
 import proofs.Frontiers.GibbsRecovery
 import proofs.Frontiers.Bonferroni
 import proofs.Frontiers.FactorElimination
+import proofs.Frontiers.ObservationInvariance
 import proofs.AuditCommand
 
 /-!
@@ -1977,6 +1978,31 @@ elimination, and the termwise relaxation of a factor (items R-1 and R-3 of STRUC
 #print axioms MetricChain.sum_boxFinset_elim
 #print axioms MetricChain.sum_boxFinset_sumOut
 #print axioms MetricChain.sum_boxFinset_relax
+
+/-! ### Phase II: observation oracles (tolerant-oracle packing bounds, the admissible cone,
+mixtures, the flat mixture, exact observables, the counting form of the union bound, Hoeffding
+for independent translations; `ObservationInvariance.lean`) -/
+
+#print axioms MetricChain.tolerant_oracle_packing
+#print axioms MetricChain.tolerant_oracle_packing_nonadaptive
+#print axioms MetricChain.LogLip.comp_isometry
+#print axioms MetricChain.LogLip.convex_comb
+#print axioms MetricChain.LogLip.sup'
+#print axioms MetricChain.LogLip.dip
+#print axioms MetricChain.massOf_convex_comb_eq
+#print axioms MetricChain.ensOf_convex_comb
+#print axioms MetricChain.ensOf_comp_equiv
+#print axioms MetricChain.sum_translates_eq
+#print axioms MetricChain.hiding_law_sum
+#print axioms MetricChain.flat_mixture
+#print axioms MetricChain.flat_mixture_truncated
+#print axioms MetricChain.sum_mul_char_eq_zero
+#print axioms MetricChain.ensemble_mean_eq_of_spectrum
+#print axioms MetricChain.exists_separating_tuple
+#print axioms MetricChain.parity_balanced
+#print axioms MetricChain.exists_generators_cube
+#print axioms MetricChain.exists_generators_kill
+#print axioms MetricChain.hoeffding_iid_mean
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/
