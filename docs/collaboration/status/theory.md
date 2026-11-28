@@ -21,9 +21,10 @@ tests, 21 mutations); R29 resolved in `docs/phase2/R29_RESOLUTION.md`; negative 
 report §11.34 (pointer) and the status line of Theorem 11.58e; message THY-MSG-0023 to the two other
 Phase II divisions (answers ENG-MSG-0009 §4).  Audit state: see the research log, "Phase II".
 
-**Read of the other Phase II branches.**  `research/phase2-certified-inference` at `bf7b71a` (2026-11-28
-01:19 UTC): ENG-MSG-0009 read in full and answered; its note `CERTIFIED_INFERENCE.md` not read.
-`research/phase2-adaptive-hierarchy`: did not exist at that fetch.
+**Read of the other Phase II branches.**  `research/phase2-certified-inference` at `bf7b71a` (first read
+2026-11-28 01:19 UTC; unchanged at the last fetch, 02:20 UTC): ENG-MSG-0009 read in full and answered; its
+note `CERTIFIED_INFERENCE.md` not read.  `research/phase2-adaptive-hierarchy`: not on the remote at either
+fetch.  No answer to THY-MSG-0023 had arrived.
 
 ## HALTED under the research owner's consolidation directive of 2026-11-27
 
