@@ -1,0 +1,8 @@
+{"margin_kT": -9.0, "tier": "exact", "seconds": 0.001, "accepted": true, "reason": "accepted", "hi": 8094.083927582745}
+{"margin_kT": -9.0, "tier": "float", "seconds": 0.001, "accepted": true, "reason": "accepted", "hi": 8094.083927582745}
+{"margin_kT": -9.5, "tier": "exact", "seconds": 0.0, "accepted": false, "reason": "prune step: beta times the margin is below -9 (the dominator is far above the removed state on the box): outsi", "hi": null}
+{"margin_kT": -9.5, "tier": "float", "seconds": 0.0, "accepted": false, "reason": "prune step: beta times the margin is below -9 (the dominator is far above the removed state on the box): outsi", "hi": null}
+{"margin_kT": -30.0, "tier": "exact", "seconds": 0.0, "accepted": false, "reason": "prune step: beta times the margin is below -9 (the dominator is far above the removed state on the box): outsi", "hi": null}
+{"margin_kT": -30.0, "tier": "float", "seconds": 0.0, "accepted": false, "reason": "prune step: beta times the margin is below -9 (the dominator is far above the removed state on the box): outsi", "hi": null}
+{"margin_kT": -20000.0, "tier": "exact", "seconds": 0.0, "accepted": false, "reason": "prune step: beta times the margin is below -9 (the dominator is far above the removed state on the box): outsi", "hi": null}
+{"margin_kT": -20000.0, "tier": "float", "seconds": 0.0, "accepted": false, "reason": "prune step: beta times the margin is below -9 (the dominator is far above the removed state on the box): outsi", "hi": null}

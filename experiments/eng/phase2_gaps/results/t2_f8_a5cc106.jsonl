@@ -1,0 +1,10 @@
+{"q": "0.3333333333333333", "log2_relative_width": -78.46967109153974, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [86, 86], "seconds": 0.0001}
+{"q": "1000000.1428571428", "log2_relative_width": -74.48710093185296, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [106, 106], "seconds": 0.0001}
+{"q": "1000000000.1428572", "log2_relative_width": -74.67956012312575, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [116, 116], "seconds": 0.0001}
+{"q": "1.8446744073709552e+19", "log2_relative_width": -69.18264038067413, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [150, 150], "seconds": 0.0002}
+{"q": "1.6069380442589903e+60", "log2_relative_width": -78.50095191771797, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [287, 287], "seconds": 0.0018}
+{"q": "-0.3333333333333333", "log2_relative_width": -78.99553969698, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [86, 86], "seconds": 0.0001}
+{"q": "-1000000.1428571428", "log2_relative_width": -74.44945775149, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [106, 106], "seconds": 0.0001}
+{"q": "-1000000000.1428572", "log2_relative_width": -74.64707356132064, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [116, 116], "seconds": 0.0001}
+{"q": "-1.8446744073709552e+19", "log2_relative_width": -69.13913334078268, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [150, 150], "seconds": 0.0002}
+{"q": "-1.6069380442589903e+60", "log2_relative_width": -79.10344973180202, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [287, 287], "seconds": 0.0016}

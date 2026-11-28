@@ -1,0 +1,12 @@
+        text = gen.dumps(doc)
+        tr = _truth(tables, doc)
+        mine = Z.check_text(text, model)
+        th = B.their_check_text(text, B.pair_model(tables), "exact")
+>       assert mine.accepted and th["accepted"]
+E       AssertionError: assert (True and False)
+E        +  where True = Result(accepted=True, reason='', kind='ok', ln_z_lo=Fraction(-53399675898022752059875542654238802865067613058916319248..., stats={'nodes': 1, 'leaves': 1, 'prunes': 1, 'relaxes': 0, 'max_table': 1, 'entries': 1, 'distinct_exponentials': 3}).accepted
+
+tests/eng/test_sb_zcheck.py:388: AssertionError
+=========================== short test summary info ============================
+XFAIL tests/eng/test_sb_zcheck.py::test_finding_f2_float_interval_does_not_contain_exact_interval - finding F2 is present: a float-tier interval that does not contain the exact-tier interval (lower ends differ by 6.39e-14)
+1 failed, 11 passed, 1 xfailed in 4.86s

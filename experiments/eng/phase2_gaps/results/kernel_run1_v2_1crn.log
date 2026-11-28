@@ -1,0 +1,50 @@
+# cmd lake env lean --run experiments/eng/sb_review/lean_kernel/RunKernel.lean full v2_1CRN.tokens v2_1CRN.bound.tokens v2_1CRN.witness-entry.tokens v2_1CRN.prune-order.tokens
+     94.5 file v2_1CRN.tokens
+     94.5 n 26 k 82 den 8192 tokens 131306 certificate_tokens 65774 size 350
+     94.5 claimed_bound -44557810/1
+     94.5 verifyM_claimed_bound true
+     94.5 verifyM_bound_plus_one_unit false
+     94.5 ms_verifyM 1583 ms_verifyM_plus_one 1581
+     94.5 witness_in_box true
+     94.5 witness_energy -44557810/1
+     94.5 digest_h 235210037503136
+     94.5 digest_J 1259826153668581299
+     94.5 non_integer_entries 0
+     94.5 ms_rest 6082
+    104.7 file v2_1CRN.bound.tokens
+    104.7 n 26 k 82 den 8192 tokens 131306 certificate_tokens 65774 size 350
+    104.7 claimed_bound -182508789759/4096
+    104.7 verifyM_claimed_bound false
+    104.7 verifyM_bound_plus_one_unit false
+    104.7 ms_verifyM 1570 ms_verifyM_plus_one 1568
+    104.7 witness_in_box true
+    104.7 witness_energy -44557810/1
+    104.7 digest_h 235210037503136
+    104.7 digest_J 1259826153668581299
+    104.7 non_integer_entries 0
+    104.7 ms_rest 6265
+    115.1 file v2_1CRN.witness-entry.tokens
+    115.1 n 26 k 82 den 8192 tokens 131306 certificate_tokens 65774 size 350
+    115.1 claimed_bound -44557810/1
+    115.1 verifyM_claimed_bound false
+    115.1 verifyM_bound_plus_one_unit false
+    115.1 ms_verifyM 1578 ms_verifyM_plus_one 1642
+    115.1 witness_in_box true
+    115.1 witness_energy -44557811/1
+    115.1 digest_h 235210037503134
+    115.1 digest_J 1259826153668581299
+    115.1 non_integer_entries 0
+    115.1 ms_rest 6376
+    122.0 file v2_1CRN.prune-order.tokens
+    122.0 n 26 k 82 den 8192 tokens 131306 certificate_tokens 65774 size 350
+    122.0 claimed_bound -44557810/1
+    122.0 verifyM_claimed_bound false
+    122.0 verifyM_bound_plus_one_unit false
+    122.0 ms_verifyM 6 ms_verifyM_plus_one 5
+    122.0 witness_in_box true
+    122.0 witness_energy -44557810/1
+    122.0 digest_h 235210037503136
+    122.0 digest_J 1259826153668581299
+    122.0 non_integer_entries 0
+    122.0 ms_rest 6177
+    122.3 exit 1

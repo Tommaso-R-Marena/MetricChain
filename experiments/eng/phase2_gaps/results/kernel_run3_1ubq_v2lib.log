@@ -1,0 +1,14 @@
+# cmd lake env lean --run experiments/eng/sb_review/lean_kernel/RunKernel.lean full v2-lib_1UBQ.tokens
+    283.6 file v2-lib_1UBQ.tokens
+    283.6 n 65 k 81 den 8192 tokens 8137893 certificate_tokens 6737252 size 1545
+    283.6 claimed_bound -1863122/1
+    283.6 verifyM_claimed_bound true
+    283.6 verifyM_bound_plus_one_unit false
+    283.6 ms_verifyM 121184 ms_verifyM_plus_one 28941
+    283.6 witness_in_box true
+    283.6 witness_energy -1863122/1
+    283.6 digest_h 3599314807026321
+    283.6 digest_J 923092931832201732
+    283.6 non_integer_entries 0
+    283.6 ms_rest 41994
+    283.9 exit 0

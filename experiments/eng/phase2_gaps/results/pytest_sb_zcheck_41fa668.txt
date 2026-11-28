@@ -1,0 +1,6 @@
+.........xx.x                                                            [100%]
+=========================== short test summary info ============================
+XFAIL tests/eng/test_sb_zcheck.py::test_finding_f1_float_tier_with_large_exp_bits - finding F1 is present: float tier, exp_bits=990 accepts [-677.000000, -676.999996] while ln Z = [-676.686738312 +/- 4.82e-10]
+XFAIL tests/eng/test_sb_zcheck.py::test_finding_f2_float_interval_does_not_contain_exact_interval - finding F2 is present: a float-tier interval that does not contain the exact-tier interval (lower ends differ by 6.39e-14)
+XFAIL tests/eng/test_sb_zcheck.py::test_finding_f4_loader_raises_other_exceptions - finding F4 is present: their loader raised ['EXC RecursionError', 'EXC ValueError'] on malformed files
+10 passed, 3 xfailed in 4.68s

@@ -1,0 +1,446 @@
+[
+ {
+  "model": "v2",
+  "pdb_id": "1CRN",
+  "sites": 26,
+  "states_total": 380,
+  "pairs": 325,
+  "cert_bytes": 37015,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 349,
+   "message_integers": 9500
+  },
+  "claimed_kcal": -42.49363899230957,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.03,
+   0.061,
+   0.077,
+   0.034
+  ]
+ },
+ {
+  "model": "v2",
+  "pdb_id": "5PTI",
+  "sites": 36,
+  "states_total": 1152,
+  "pairs": 630,
+  "cert_bytes": 131859,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 1074,
+   "message_integers": 40320
+  },
+  "claimed_kcal": -121.34466171264648,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.122,
+   0.494,
+   0.409,
+   0.193
+  ]
+ },
+ {
+  "model": "v2",
+  "pdb_id": "1BPI",
+  "sites": 36,
+  "states_total": 1152,
+  "pairs": 630,
+  "cert_bytes": 127042,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 1089,
+   "message_integers": 40320
+  },
+  "claimed_kcal": -123.73556137084961,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.143,
+   0.483,
+   0.41,
+   0.184
+  ]
+ },
+ {
+  "model": "v2",
+  "pdb_id": "1PGA",
+  "sites": 46,
+  "states_total": 967,
+  "pairs": 1035,
+  "cert_bytes": 200381,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 775,
+   "message_integers": 43515
+  },
+  "claimed_kcal": 4.513693809509277,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.127,
+   0.361,
+   0.373,
+   0.177
+  ]
+ },
+ {
+  "model": "v2",
+  "pdb_id": "2IGD",
+  "sites": 49,
+  "states_total": 1027,
+  "pairs": 1176,
+  "cert_bytes": 2119287,
+  "stats": {
+   "leaf": 13,
+   "branch": 1,
+   "prune": 1383,
+   "message_integers": 640848
+  },
+  "claimed_kcal": -21.79852294921875,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.716,
+   0.767,
+   1.051,
+   0.682
+  ]
+ },
+ {
+  "model": "v2",
+  "pdb_id": "1UBQ",
+  "sites": 65,
+  "states_total": 1763,
+  "pairs": 2080,
+  "cert_bytes": 15901276,
+  "stats": {
+   "leaf": 30,
+   "branch": 4,
+   "prune": 2428,
+   "message_integers": 3384960
+  },
+  "claimed_kcal": -76.09370422363281,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   2.85,
+   4.154,
+   4.137,
+   2.444
+  ]
+ },
+ {
+  "model": "v2-lib",
+  "pdb_id": "1CRN",
+  "sites": 26,
+  "states_total": 354,
+  "pairs": 325,
+  "cert_bytes": 35392,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 323,
+   "message_integers": 8850
+  },
+  "claimed_kcal": 12.097670555114746,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.032,
+   0.052,
+   0.046,
+   0.033
+  ]
+ },
+ {
+  "model": "v2-lib",
+  "pdb_id": "5PTI",
+  "sites": 36,
+  "states_total": 1116,
+  "pairs": 630,
+  "cert_bytes": 127491,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 1047,
+   "message_integers": 39060
+  },
+  "claimed_kcal": 118.87440586090088,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.121,
+   0.535,
+   0.357,
+   0.188
+  ]
+ },
+ {
+  "model": "v2-lib",
+  "pdb_id": "1BPI",
+  "sites": 36,
+  "states_total": 1116,
+  "pairs": 630,
+  "cert_bytes": 133237,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 1030,
+   "message_integers": 39060
+  },
+  "claimed_kcal": 397.94412326812744,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.138,
+   0.469,
+   0.389,
+   0.171
+  ]
+ },
+ {
+  "model": "v2-lib",
+  "pdb_id": "1PGA",
+  "sites": 46,
+  "states_total": 921,
+  "pairs": 1035,
+  "cert_bytes": 191412,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 746,
+   "message_integers": 41445
+  },
+  "claimed_kcal": 855.1929559707642,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.127,
+   0.315,
+   0.288,
+   0.152
+  ]
+ },
+ {
+  "model": "v2-lib",
+  "pdb_id": "2IGD",
+  "sites": 49,
+  "states_total": 978,
+  "pairs": 1176,
+  "cert_bytes": 208325,
+  "stats": {
+   "leaf": 1,
+   "branch": 0,
+   "prune": 804,
+   "message_integers": 46944
+  },
+  "claimed_kcal": 198.22042560577393,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   0.149,
+   0.348,
+   0.309,
+   0.17
+  ]
+ },
+ {
+  "model": "v2-lib",
+  "pdb_id": "1UBQ",
+  "sites": 65,
+  "states_total": 1698,
+  "pairs": 2080,
+  "cert_bytes": 10035244,
+  "stats": {
+   "leaf": 19,
+   "branch": 2,
+   "prune": 1382,
+   "message_integers": 2064768
+  },
+  "claimed_kcal": -1.7768115997314453,
+  "files": true,
+  "indep": true,
+  "sb": true,
+  "full_box": [
+   true,
+   true,
+   true
+  ],
+  "proves_eq_claim": true,
+  "gap": 0,
+  "same_stats": true,
+  "checksum": true,
+  "sb_row_bound": true,
+  "sb_row_bound_exact": true,
+  "file_sha": true,
+  "toulbar2": true,
+  "seconds": [
+   1.902,
+   2.332,
+   2.325,
+   1.675
+  ]
+ }
+]

@@ -1,0 +1,710 @@
+{
+ "what": "minimal reproductions of findings; reviewed commit 0544ff4",
+ "F1_float_tier_unsound_for_large_exp_bits": {
+  "tables": {
+   "unary": [
+    [
+     0,
+     678
+    ],
+    [
+     0
+    ]
+   ],
+   "pair": {
+    "0,1": [
+     [
+      677
+     ],
+     [
+      0
+     ]
+    ]
+   },
+   "scale_bits": 0
+  },
+  "certificate": "{\"format\":\"structbio-zcert/1\",\"model_sha256\":\"c93c651da1c591813d468f9e7016567b0ff08d906dfa92c6b0085c390ff51560\",\"beta\":\"1/1\",\"domains\":[[0,1],[0]],\"keep\":null,\"claim\":{},\"root\":{\"steps\":[],\"order\":[1,0]},\"meta\":\"{}\"}",
+  "truth_ln_z": "-676.68673831248177717",
+  "indep_zcheck": {
+   "accepted": true,
+   "lo": "-676.686738312481",
+   "hi": "-676.686738312481",
+   "contains_truth": "yes"
+  },
+  "by_exp_bits": [
+   {
+    "exp_bits": 64,
+    "float": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 500,
+    "float": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 900,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 900 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 950,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 950 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 960,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 960 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 965,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 965 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 970,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 970 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 971,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 971 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 972,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 972 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 973,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 973 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 975,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 975 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 980,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 980 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 985,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 985 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 990,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 990 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 991,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 991 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 992,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 992 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 993,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 993 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   },
+   {
+    "exp_bits": 1000,
+    "float": {
+     "accepted": false,
+     "reason": "exp_bits = 1000 is outside the range of the float tier (16 to 512)"
+    },
+    "exact": {
+     "accepted": true,
+     "lo": "-676.686738313097",
+     "hi": "-676.686738311866",
+     "contains_truth": "yes"
+    }
+   }
+  ],
+  "unsound_exp_bits": [],
+  "sound_or_rejected_exp_bits": [
+   64,
+   500,
+   900,
+   950,
+   960,
+   965,
+   970,
+   971,
+   972,
+   973,
+   975,
+   980,
+   985,
+   990,
+   991,
+   992,
+   993,
+   1000
+  ]
+ },
+ "F3_prune_with_negative_margin": {
+  "re_run_here": [
+   {
+    "margin_in_kT": -2,
+    "certificate_bytes": 258,
+    "their_accepted": true,
+    "their_upper": "5.389056",
+    "their_contains_truth": "yes",
+    "ideal_upper_indep_zcheck": "0.126928",
+    "truth": "0.126928011043",
+    "their_seconds": 0.001,
+    "mine_seconds": 0.0002
+   },
+   {
+    "margin_in_kT": -5,
+    "certificate_bytes": 258,
+    "their_accepted": true,
+    "their_upper": "143.413159",
+    "their_contains_truth": "yes",
+    "ideal_upper_indep_zcheck": "0.006715",
+    "truth": "0.00671534848912",
+    "their_seconds": 0.001,
+    "mine_seconds": 0.0002
+   },
+   {
+    "margin_in_kT": -10,
+    "certificate_bytes": 258,
+    "their_accepted": false,
+    "their_upper": null,
+    "their_contains_truth": null,
+    "ideal_upper_indep_zcheck": "0.000045",
+    "truth": "4.53988992169e-5",
+    "their_seconds": 0.0002,
+    "mine_seconds": 0.0002
+   },
+   {
+    "margin_in_kT": -15,
+    "certificate_bytes": 258,
+    "their_accepted": false,
+    "their_upper": null,
+    "their_contains_truth": null,
+    "ideal_upper_indep_zcheck": "0.000000",
+    "truth": "3.05902273714e-7",
+    "their_seconds": 0.0001,
+    "mine_seconds": 0.0002
+   }
+  ],
+  "observed_in_an_ad_hoc_probe_not_re_run": {
+   "conditions": "same one-site certificate (258 bytes), exact tier, address space limited to 2 GB",
+   "rows": [
+    {
+     "margin_in_kT": -30,
+     "their_seconds": 9.7,
+     "outcome": "rejected: MemoryError while checking"
+    },
+    {
+     "margin_in_kT": -100,
+     "their_seconds": 10.1,
+     "outcome": "rejected: MemoryError while checking"
+    },
+    {
+     "margin_in_kT": -300,
+     "their_seconds": 14.0,
+     "outcome": "rejected: MemoryError while checking"
+    },
+    {
+     "margin_in_kT": -1000,
+     "their_seconds": 12.3,
+     "outcome": "rejected: MemoryError while checking"
+    },
+    {
+     "margin_in_kT": -3000,
+     "their_seconds": 8.3,
+     "outcome": "rejected: MemoryError while checking"
+    },
+    {
+     "margin_in_kT": -10000,
+     "their_seconds": 18.6,
+     "outcome": "rejected: MemoryError while checking"
+    },
+    {
+     "margin_in_kT": -20000,
+     "their_seconds": ">30",
+     "outcome": "no return within 30 s (stopped)"
+    }
+   ],
+   "peak_resident_memory_seen_GB": 1.6
+  }
+ },
+ "F4_file_loader": {
+  "cases": [
+   {
+    "case": "valid",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "duplicate key",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: duplicate key 'keep'"
+   },
+   {
+    "case": "float where an integer is required",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: non-integer number '0.0'"
+   },
+   {
+    "case": "boolean where an integer is required",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: root: order: not a list of integers"
+   },
+   {
+    "case": "string where an integer is required",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: root: order: not a list of integers"
+   },
+   {
+    "case": "NaN",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: non-finite number 'NaN'"
+   },
+   {
+    "case": "Infinity",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: non-finite number 'Infinity'"
+   },
+   {
+    "case": "integer written -0",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "malformed: non-canonical integer '-0'"
+   },
+   {
+    "case": "beta not in lowest terms",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: beta: rational not in lowest terms"
+   },
+   {
+    "case": "beta with a plus sign",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: beta: not a canonical rational 'p/q'"
+   },
+   {
+    "case": "beta '--5/3'",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: beta: not a canonical rational 'p/q'"
+   },
+   {
+    "case": "beta with a superscript digit",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: beta: not a canonical rational 'p/q'"
+   },
+   {
+    "case": "beta with 5000 digits",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "abstain: beta: an integer of more than 4300 digits"
+   },
+   {
+    "case": "claim '--1/1'",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: claim is neither {} nor exactly {ln_z_lo, ln_z_hi}"
+   },
+   {
+    "case": "claim with one bound only",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "malformed: claim is neither {} nor exactly {ln_z_lo, ln_z_hi}"
+   },
+   {
+    "case": "unknown top-level field",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: top-level keys: missing [], unknown ['extra']"
+   },
+   {
+    "case": "unknown field in a step",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: root step 0: a prune step has exactly the keys op, site, rem"
+   },
+   {
+    "case": "unknown field in a node",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: root: a node has exactly the keys steps + order, or steps + "
+   },
+   {
+    "case": "leaf with a 'children' field",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: root: a node has exactly the keys steps + order, or steps + "
+   },
+   {
+    "case": "missing 'keep'",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "malformed: top-level keys: missing ['keep'], unknown []"
+   },
+   {
+    "case": "missing 'meta'",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "malformed: top-level keys: missing ['meta'], unknown []"
+   },
+   {
+    "case": "missing 'claim'",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: top-level keys: missing ['claim'], unknown []"
+   },
+   {
+    "case": "meta is not JSON text",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "meta holds 100000 nested brackets",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "domain not sorted",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "malformed: domain of site 0 is not strictly increasing within 0..1"
+   },
+   {
+    "case": "domain with a repeated state",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: domain of site 0 is not strictly increasing within 0..1"
+   },
+   {
+    "case": "wrong checksum",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: model_sha256 is not the checksum of the instance"
+   },
+   {
+    "case": "truncated file",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: not valid JSON: Unterminated string starting at: line 1 colu"
+   },
+   {
+    "case": "trailing text",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "malformed: not valid JSON: Extra data: line 1 column 211 (char 210)"
+   },
+   {
+    "case": "insignificant whitespace",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "conditioning nested 500 deep",
+    "their_loader": "loaded",
+    "their_checker": "accepted",
+    "their_dumps": true,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "conditioning nested 990 deep",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "conditioning nested 1000 deep",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "conditioning nested 2000 deep",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "accepted"
+   },
+   {
+    "case": "conditioning nested 5000 deep",
+    "their_loader": "refused (MalformedZCertificate)",
+    "their_checker": null,
+    "their_dumps": null,
+    "indep_zcheck": "abstain: JSON nested too deep for the parser"
+   }
+  ],
+  "their_loader_raised_something_else_than_MalformedZCertificate": [],
+  "loaded_by_theirs_and_refused_by_indep_zcheck": [
+   "integer written -0",
+   "claim with one bound only",
+   "missing 'keep'",
+   "missing 'meta'",
+   "domain not sorted"
+  ]
+ },
+ "F6_model_without_sites": {
+  "theirs": "rejected: IndexError while checking",
+  "their_exception": null,
+  "indep_zcheck": [
+   "0",
+   "0"
+  ]
+ },
+ "cost_small_dense": [
+  {
+   "sites": 6,
+   "states": 3,
+   "certificate_bytes": 436,
+   "their_exact": {
+    "seconds": 0.0243,
+    "peak_python_MB": 0.54,
+    "width": 2.0337899633488168e-11,
+    "largest_table": 729
+   },
+   "their_float": {
+    "seconds": 0.0063,
+    "peak_python_MB": 0.08,
+    "width": 2.0586589591004546e-11,
+    "largest_table": 729
+   },
+   "mine_exact": {
+    "seconds": 0.0148,
+    "peak_python_MB": 0.24,
+    "width": 1.963937077575188e-85,
+    "largest_table": 729
+   },
+   "mine_rounded_128": {
+    "seconds": 0.0115,
+    "peak_python_MB": 0.16,
+    "width": 2.0373153750164885e-37,
+    "largest_table": 729
+   }
+  },
+  {
+   "sites": 8,
+   "states": 3,
+   "certificate_bytes": 457,
+   "their_exact": {
+    "seconds": 0.2263,
+    "peak_python_MB": 4.99,
+    "width": 1.8532333402181633e-11,
+    "largest_table": 6561
+   },
+   "their_float": {
+    "seconds": 0.0089,
+    "peak_python_MB": 0.48,
+    "width": 1.8571413252647653e-11,
+    "largest_table": 6561
+   },
+   "mine_exact": {
+    "seconds": 0.1732,
+    "peak_python_MB": 2.04,
+    "width": 3.7445073618677865e-85,
+    "largest_table": 6561
+   },
+   "mine_rounded_128": {
+    "seconds": 0.1368,
+    "peak_python_MB": 1.07,
+    "width": 3.476782149090656e-37,
+    "largest_table": 6561
+   }
+  }
+ ]
+}

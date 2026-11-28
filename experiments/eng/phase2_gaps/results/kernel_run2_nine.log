@@ -1,0 +1,110 @@
+# cmd lake env lean --run experiments/eng/sb_review/lean_kernel/RunKernel.lean full v2-lib_1CRN.tokens v2-lib_5PTI.tokens v2_1BPI.tokens v2_5PTI.tokens v2-lib_1BPI.tokens v2-lib_1PGA.tokens v2_1PGA.tokens v2-lib_2IGD.tokens v2_2IGD.tokens
+     61.5 file v2-lib_1CRN.tokens
+     61.5 n 26 k 81 den 8192 tokens 120649 certificate_tokens 64344 size 324
+     61.5 claimed_bound 12685327/1
+     61.5 verifyM_claimed_bound true
+     61.5 verifyM_bound_plus_one_unit false
+     61.5 ms_verifyM 1403 ms_verifyM_plus_one 1432
+     61.5 witness_in_box true
+     61.5 witness_energy 12685327/1
+     61.5 digest_h 235025477715748
+     61.5 digest_J 1414363673011009535
+     61.5 non_integer_entries 0
+     61.5 ms_rest 5972
+     96.2 file v2-lib_5PTI.tokens
+     96.2 n 36 k 81 den 8192 tokens 737875 certificate_tokens 147794 size 1048
+     96.2 claimed_bound 124648849/1
+     96.2 verifyM_claimed_bound true
+     96.2 verifyM_bound_plus_one_unit false
+     96.2 ms_verifyM 8661 ms_verifyM_plus_one 8627
+     96.2 witness_in_box true
+     96.2 witness_energy 124648849/1
+     96.2 digest_h 1428453262611436
+     96.2 digest_J 1899713038934679394
+     96.2 non_integer_entries 0
+     96.2 ms_rest 12290
+    133.3 file v2_1BPI.tokens
+    133.3 n 36 k 82 den 8192 tokens 780577 certificate_tokens 150734 size 1090
+    133.3 claimed_bound -129746140/1
+    133.3 verifyM_claimed_bound true
+    133.3 verifyM_bound_plus_one_unit false
+    133.3 ms_verifyM 9261 ms_verifyM_plus_one 9346
+    133.3 witness_in_box true
+    133.3 witness_energy -129746140/1
+    133.3 digest_h 1321086744689819
+    133.3 digest_J 286655734814494215
+    133.3 non_integer_entries 0
+    133.3 ms_rest 12847
+    169.8 file v2_5PTI.tokens
+    169.8 n 36 k 82 den 8192 tokens 779977 certificate_tokens 150134 size 1075
+    169.8 claimed_bound -127239100/1
+    169.8 verifyM_claimed_bound true
+    169.8 verifyM_bound_plus_one_unit false
+    169.8 ms_verifyM 9156 ms_verifyM_plus_one 9190
+    169.8 witness_in_box true
+    169.8 witness_energy -127239100/1
+    169.8 digest_h 1429028605844193
+    169.8 digest_J 913241301755877055
+    169.8 non_integer_entries 0
+    169.8 ms_rest 12625
+    205.2 file v2-lib_1BPI.tokens
+    205.2 n 36 k 81 den 8192 tokens 737195 certificate_tokens 147114 size 1031
+    205.2 claimed_bound 417274657/1
+    205.2 verifyM_claimed_bound true
+    205.2 verifyM_bound_plus_one_unit false
+    205.2 ms_verifyM 8731 ms_verifyM_plus_one 8893
+    205.2 witness_in_box true
+    205.2 witness_energy 417274657/1
+    205.2 digest_h 1320468608502586
+    205.2 digest_J 2203967010301627378
+    205.2 non_integer_entries 0
+    205.2 ms_rest 12468
+    244.6 file v2-lib_1PGA.tokens
+    244.6 n 46 k 81 den 8192 tokens 615073 certificate_tokens 211274 size 747
+    244.6 claimed_bound 896734809/1
+    244.6 verifyM_claimed_bound true
+    244.6 verifyM_bound_plus_one_unit false
+    244.6 ms_verifyM 7842 ms_verifyM_plus_one 8150
+    244.6 witness_in_box true
+    244.6 witness_energy 896734809/1
+    244.6 digest_h 1076011234352420
+    244.6 digest_J 1547358040091504634
+    244.6 non_integer_entries 0
+    244.6 ms_rest 19296
+    286.0 file v2_1PGA.tokens
+    286.0 n 46 k 82 den 8192 tokens 661165 certificate_tokens 214794 size 776
+    286.0 claimed_bound 4732951/1
+    286.0 verifyM_claimed_bound true
+    286.0 verifyM_bound_plus_one_unit false
+    286.0 ms_verifyM 8520 ms_verifyM_plus_one 8476
+    286.0 witness_in_box true
+    286.0 witness_energy 4732951/1
+    286.0 digest_h 1076807106677635
+    286.0 digest_J 421931639846761057
+    286.0 non_integer_entries 0
+    286.0 ms_rest 19875
+    330.2 file v2-lib_2IGD.tokens
+    330.2 n 49 k 81 den 8192 tokens 695712 certificate_tokens 240280 size 805
+    330.2 claimed_bound 207849181/1
+    330.2 verifyM_claimed_bound true
+    330.2 verifyM_bound_plus_one_unit false
+    330.2 ms_verifyM 8893 ms_verifyM_plus_one 8867
+    330.2 witness_in_box true
+    330.2 witness_energy 207849181/1
+    330.2 digest_h 1270722313204359
+    330.2 digest_J 1813792192673958057
+    330.2 non_integer_entries 0
+    330.2 ms_rest 21799
+    396.9 file v2_2IGD.tokens
+    396.9 n 49 k 82 den 8192 tokens 3177225 certificate_tokens 2673575 size 1466
+    396.9 claimed_bound -22857408/1
+    396.9 verifyM_claimed_bound true
+    396.9 verifyM_bound_plus_one_unit false
+    396.9 ms_verifyM 22396 ms_verifyM_plus_one 9350
+    396.9 witness_in_box true
+    396.9 witness_energy -22857408/1
+    396.9 digest_h 1271406183957115
+    396.9 digest_J 1731951363053512482
+    396.9 non_integer_entries 0
+    396.9 ms_rest 22479
+    397.3 exit 0

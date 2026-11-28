@@ -1,0 +1,4 @@
+{"q": "0.3333333333333333", "log2_relative_width": -78.46967109153974, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [86, 86], "seconds": 0.0001}
+{"q": "1000000.1428571428", "log2_relative_width": -74.48710093185296, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [106, 106], "seconds": 0.0001}
+{"q": "1000000000.1428572", "log2_relative_width": -64.97262189187835, "width_below_2_to_minus_64": true, "sound_by_arb": true, "mantissa_bits": [116, 116], "seconds": 0.0001}
+{"q": "1.8446744073709552e+19", "log2_relative_width": -29.742520125866292, "width_below_2_to_minus_64": false, "sound_by_arb": true, "mantissa_bits": [150, 150], "seconds": 0.0002}

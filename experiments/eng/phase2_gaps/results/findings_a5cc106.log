@@ -1,0 +1,61 @@
+F1 unsound exp_bits: [] | truth -676.68673831248177717
+    64 {'accepted': True, 'lo': '-676.686738313097', 'hi': '-676.686738311866', 'contains_truth': 'yes'} | exact tier: yes
+    500 {'accepted': True, 'lo': '-676.686738313097', 'hi': '-676.686738311866', 'contains_truth': 'yes'} | exact tier: yes
+    900 {'accepted': False, 'reason': 'exp_bits = 900 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    950 {'accepted': False, 'reason': 'exp_bits = 950 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    960 {'accepted': False, 'reason': 'exp_bits = 960 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    965 {'accepted': False, 'reason': 'exp_bits = 965 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    970 {'accepted': False, 'reason': 'exp_bits = 970 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    971 {'accepted': False, 'reason': 'exp_bits = 971 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    972 {'accepted': False, 'reason': 'exp_bits = 972 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    973 {'accepted': False, 'reason': 'exp_bits = 973 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    975 {'accepted': False, 'reason': 'exp_bits = 975 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    980 {'accepted': False, 'reason': 'exp_bits = 980 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    985 {'accepted': False, 'reason': 'exp_bits = 985 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    990 {'accepted': False, 'reason': 'exp_bits = 990 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    991 {'accepted': False, 'reason': 'exp_bits = 991 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    992 {'accepted': False, 'reason': 'exp_bits = 992 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    993 {'accepted': False, 'reason': 'exp_bits = 993 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+    1000 {'accepted': False, 'reason': 'exp_bits = 1000 is outside the range of the float tier (16 to 512)'} | exact tier: yes
+F3 {'margin_in_kT': -2, 'certificate_bytes': 258, 'their_accepted': True, 'their_upper': '5.389056', 'their_contains_truth': 'yes', 'ideal_upper_indep_zcheck': '0.126928', 'truth': '0.126928011043', 'their_seconds': 0.001, 'mine_seconds': 0.0002}
+F3 {'margin_in_kT': -5, 'certificate_bytes': 258, 'their_accepted': True, 'their_upper': '143.413159', 'their_contains_truth': 'yes', 'ideal_upper_indep_zcheck': '0.006715', 'truth': '0.00671534848912', 'their_seconds': 0.001, 'mine_seconds': 0.0002}
+F3 {'margin_in_kT': -10, 'certificate_bytes': 258, 'their_accepted': False, 'their_upper': None, 'their_contains_truth': None, 'ideal_upper_indep_zcheck': '0.000045', 'truth': '4.53988992169e-5', 'their_seconds': 0.0002, 'mine_seconds': 0.0002}
+F3 {'margin_in_kT': -15, 'certificate_bytes': 258, 'their_accepted': False, 'their_upper': None, 'their_contains_truth': None, 'ideal_upper_indep_zcheck': '0.000000', 'truth': '3.05902273714e-7', 'their_seconds': 0.0001, 'mine_seconds': 0.0002}
+F4 {'case': 'valid', 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': 'accepted'}
+F4 {'case': 'duplicate key', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: duplicate key 'keep'"}
+F4 {'case': 'float where an integer is required', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: non-integer number '0.0'"}
+F4 {'case': 'boolean where an integer is required', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: root: order: not a list of integers'}
+F4 {'case': 'string where an integer is required', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: root: order: not a list of integers'}
+F4 {'case': 'NaN', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: non-finite number 'NaN'"}
+F4 {'case': 'Infinity', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: non-finite number 'Infinity'"}
+F4 {'case': 'integer written -0', 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': "malformed: non-canonical integer '-0'"}
+F4 {'case': 'beta not in lowest terms', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: beta: rational not in lowest terms'}
+F4 {'case': 'beta with a plus sign', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: beta: not a canonical rational 'p/q'"}
+F4 {'case': "beta '--5/3'", 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: beta: not a canonical rational 'p/q'"}
+F4 {'case': 'beta with a superscript digit', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: beta: not a canonical rational 'p/q'"}
+F4 {'case': 'beta with 5000 digits', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'abstain: beta: an integer of more than 4300 digits'}
+F4 {'case': "claim '--1/1'", 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: claim is neither {} nor exactly {ln_z_lo, ln_z_hi}'}
+F4 {'case': 'claim with one bound only', 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': 'malformed: claim is neither {} nor exactly {ln_z_lo, ln_z_hi}'}
+F4 {'case': 'unknown top-level field', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: top-level keys: missing [], unknown ['extra']"}
+F4 {'case': 'unknown field in a step', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: root step 0: a prune step has exactly the keys op, site, rem'}
+F4 {'case': 'unknown field in a node', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: root: a node has exactly the keys steps + order, or steps + '}
+F4 {'case': "leaf with a 'children' field", 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: root: a node has exactly the keys steps + order, or steps + '}
+F4 {'case': "missing 'keep'", 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': "malformed: top-level keys: missing ['keep'], unknown []"}
+F4 {'case': "missing 'meta'", 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': "malformed: top-level keys: missing ['meta'], unknown []"}
+F4 {'case': "missing 'claim'", 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': "malformed: top-level keys: missing ['claim'], unknown []"}
+F4 {'case': 'meta is not JSON text', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'accepted'}
+F4 {'case': 'meta holds 100000 nested brackets', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'accepted'}
+F4 {'case': 'domain not sorted', 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': 'malformed: domain of site 0 is not strictly increasing within 0..1'}
+F4 {'case': 'domain with a repeated state', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: domain of site 0 is not strictly increasing within 0..1'}
+F4 {'case': 'wrong checksum', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: model_sha256 is not the checksum of the instance'}
+F4 {'case': 'truncated file', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: not valid JSON: Unterminated string starting at: line 1 colu'}
+F4 {'case': 'trailing text', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'malformed: not valid JSON: Extra data: line 1 column 211 (char 210)'}
+F4 {'case': 'insignificant whitespace', 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': 'accepted'}
+F4 {'case': 'conditioning nested 500 deep', 'their_loader': 'loaded', 'their_checker': 'accepted', 'their_dumps': True, 'indep_zcheck': 'accepted'}
+F4 {'case': 'conditioning nested 990 deep', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'accepted'}
+F4 {'case': 'conditioning nested 1000 deep', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'accepted'}
+F4 {'case': 'conditioning nested 2000 deep', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'accepted'}
+F4 {'case': 'conditioning nested 5000 deep', 'their_loader': 'refused (MalformedZCertificate)', 'their_checker': None, 'their_dumps': None, 'indep_zcheck': 'abstain: JSON nested too deep for the parser'}
+F6 {'theirs': 'rejected: IndexError while checking', 'their_exception': None, 'indep_zcheck': ['0', '0']}
+cost {'sites': 6, 'states': 3, 'certificate_bytes': 436, 'their_exact': {'seconds': 0.0243, 'peak_python_MB': 0.54, 'width': 2.0337899633488168e-11, 'largest_table': 729}, 'their_float': {'seconds': 0.0063, 'peak_python_MB': 0.08, 'width': 2.0586589591004546e-11, 'largest_table': 729}, 'mine_exact': {'seconds': 0.0148, 'peak_python_MB': 0.24, 'width': 1.963937077575188e-85, 'largest_table': 729}, 'mine_rounded_128': {'seconds': 0.0115, 'peak_python_MB': 0.16, 'width': 2.0373153750164885e-37, 'largest_table': 729}}
+cost {'sites': 8, 'states': 3, 'certificate_bytes': 457, 'their_exact': {'seconds': 0.2263, 'peak_python_MB': 4.99, 'width': 1.8532333402181633e-11, 'largest_table': 6561}, 'their_float': {'seconds': 0.0089, 'peak_python_MB': 0.48, 'width': 1.8571413252647653e-11, 'largest_table': 6561}, 'mine_exact': {'seconds': 0.1732, 'peak_python_MB': 2.04, 'width': 3.7445073618677865e-85, 'largest_table': 6561}, 'mine_rounded_128': {'seconds': 0.1368, 'peak_python_MB': 1.07, 'width': 3.476782149090656e-37, 'largest_table': 6561}}

@@ -1,0 +1,1060 @@
+{
+ "campaign": "z12",
+ "seed": 101,
+ "seconds": 29.5,
+ "by_source": {
+  "gen producer": {
+   "cases": 600,
+   "mine_accept": 600,
+   "mine_ok": 600,
+   "their_accept": 590,
+   "agree_accept": 590,
+   "mine_truth_yes": 600,
+   "mine_pop_yes": 678,
+   "their_truth_yes": 590,
+   "their_pop_yes": 678,
+   "their_not_run_hazard": 10,
+   "their_not_run_hazard_prune": 6,
+   "mine_accept_where_theirs_not_run": 10,
+   "mine_accept_rounded_mode": 5,
+   "their_not_run_hazard_magnitude": 4
+  },
+  "their producer": {
+   "cases": 280,
+   "mine_accept": 280,
+   "mine_ok": 280,
+   "their_accept": 280,
+   "agree_accept": 280,
+   "mine_truth_yes": 280,
+   "mine_pop_yes": 302,
+   "their_truth_yes": 280,
+   "their_pop_yes": 302,
+   "mine_accept_rounded_mode": 1
+  },
+  "variant beta_negative": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_invalid": 300,
+   "their_reject": 300,
+   "agree_reject": 300
+  },
+  "variant beta_zero": {
+   "cases": 300,
+   "mine_accept": 300,
+   "mine_ok": 300,
+   "their_accept": 300,
+   "agree_accept": 300,
+   "mine_truth_yes": 300,
+   "their_truth_yes": 300,
+   "mine_pop_yes": 343,
+   "their_pop_yes": 343
+  },
+  "variant branch_child_key_leading_zero": {
+   "cases": 66,
+   "mine_reject": 66,
+   "mine_malformed": 66,
+   "their_reject": 66,
+   "agree_reject": 66
+  },
+  "variant branch_missing_child": {
+   "cases": 66,
+   "mine_reject": 66,
+   "mine_invalid": 66,
+   "their_reject": 66,
+   "agree_reject": 66
+  },
+  "variant branch_on_kept_site": {
+   "cases": 146,
+   "mine_reject": 146,
+   "mine_invalid": 146,
+   "their_reject": 145,
+   "agree_reject": 145,
+   "their_not_run_hazard": 1,
+   "their_not_run_hazard_magnitude": 1
+  },
+  "variant branch_on_kept_site_same_arity": {
+   "cases": 13,
+   "mine_reject": 13,
+   "mine_invalid": 13,
+   "their_reject": 13,
+   "agree_reject": 13
+  },
+  "variant branch_on_single_state_site": {
+   "cases": 236,
+   "mine_accept": 236,
+   "mine_ok": 236,
+   "their_accept": 233,
+   "agree_accept": 233,
+   "mine_truth_yes": 236,
+   "their_truth_yes": 233,
+   "mine_pop_yes": 247,
+   "their_pop_yes": 247,
+   "mine_accept_rounded_mode": 2,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "mine_accept_where_theirs_not_run": 3,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant branch_site_negative_alias": {
+   "cases": 66,
+   "mine_reject": 66,
+   "mine_invalid": 66,
+   "their_reject": 66,
+   "agree_reject": 66
+  },
+  "variant branch_site_out_of_range": {
+   "cases": 66,
+   "mine_reject": 66,
+   "mine_invalid": 66,
+   "their_reject": 66,
+   "agree_reject": 66
+  },
+  "variant branch_surplus_child_out_of_range": {
+   "cases": 66,
+   "mine_reject": 66,
+   "mine_invalid": 66,
+   "their_reject": 66,
+   "agree_reject": 66
+  },
+  "variant branch_surplus_child_outside_domain": {
+   "cases": 29,
+   "mine_reject": 29,
+   "mine_invalid": 29,
+   "their_accept": 29,
+   "only_theirs_accepts": 29,
+   "their_truth_yes": 29,
+   "their_pop_yes": 26
+  },
+  "variant child_prunes_conditioned_state": {
+   "cases": 43,
+   "mine_reject": 43,
+   "mine_invalid": 43,
+   "their_reject": 43,
+   "agree_reject": 43
+  },
+  "variant domain_duplicate_state": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_malformed": 300,
+   "their_reject": 297,
+   "agree_reject": 297,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant domain_empty": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_invalid": 300,
+   "their_reject": 300,
+   "agree_reject": 300
+  },
+  "variant domain_negative_aliases": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_malformed": 300,
+   "their_reject": 297,
+   "agree_reject": 297,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant domain_not_sorted": {
+   "cases": 253,
+   "mine_reject": 253,
+   "mine_malformed": 253,
+   "their_accept": 250,
+   "only_theirs_accepts": 250,
+   "their_truth_yes": 250,
+   "their_pop_yes": 305,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant domain_state_out_of_range": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_malformed": 300,
+   "their_reject": 300,
+   "agree_reject": 300
+  },
+  "variant domains_one_too_many": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_malformed": 300,
+   "their_reject": 297,
+   "agree_reject": 297,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant keep_minus_one": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_malformed": 300,
+   "their_reject": 297,
+   "agree_reject": 297,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant keep_out_of_range": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_malformed": 300,
+   "their_reject": 297,
+   "agree_reject": 297,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant order_contains_kept_site": {
+   "cases": 146,
+   "mine_reject": 146,
+   "mine_invalid": 146,
+   "their_reject": 145,
+   "agree_reject": 145,
+   "their_not_run_hazard": 1,
+   "their_not_run_hazard_magnitude": 1
+  },
+  "variant order_missing_site": {
+   "cases": 277,
+   "mine_reject": 277,
+   "mine_invalid": 277,
+   "their_reject": 274,
+   "agree_reject": 274,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant order_negative_aliases": {
+   "cases": 277,
+   "mine_reject": 277,
+   "mine_invalid": 277,
+   "their_reject": 274,
+   "agree_reject": 274,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant order_repeat_replaces_site": {
+   "cases": 221,
+   "mine_reject": 221,
+   "mine_invalid": 221,
+   "their_reject": 218,
+   "agree_reject": 218,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant order_repeated_site": {
+   "cases": 277,
+   "mine_reject": 277,
+   "mine_invalid": 277,
+   "their_reject": 274,
+   "agree_reject": 274,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant order_site_out_of_range": {
+   "cases": 300,
+   "mine_reject": 300,
+   "mine_invalid": 300,
+   "their_reject": 297,
+   "agree_reject": 297,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant order_without_conditioned_sites": {
+   "cases": 66,
+   "mine_reject": 66,
+   "mine_invalid": 66,
+   "their_reject": 66,
+   "agree_reject": 66
+  },
+  "variant prune_by_removed_state": {
+   "cases": 164,
+   "mine_reject": 164,
+   "mine_invalid": 164,
+   "their_reject": 161,
+   "agree_reject": 161,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant prune_dominator_is_removed": {
+   "cases": 164,
+   "mine_reject": 164,
+   "mine_invalid": 164,
+   "their_reject": 162,
+   "agree_reject": 162,
+   "their_not_run_hazard": 2,
+   "their_not_run_hazard_magnitude": 2
+  },
+  "variant prune_dominator_minus_one": {
+   "cases": 164,
+   "mine_reject": 164,
+   "mine_invalid": 164,
+   "their_reject": 162,
+   "agree_reject": 162,
+   "their_not_run_hazard": 2,
+   "their_not_run_hazard_magnitude": 2
+  },
+  "variant prune_dominator_out_of_range": {
+   "cases": 164,
+   "mine_reject": 164,
+   "mine_invalid": 164,
+   "their_reject": 162,
+   "agree_reject": 162,
+   "their_not_run_hazard": 2,
+   "their_not_run_hazard_magnitude": 2
+  },
+  "variant prune_dominator_outside_domain": {
+   "cases": 215,
+   "mine_reject": 215,
+   "mine_invalid": 215,
+   "their_reject": 212,
+   "agree_reject": 212,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant prune_last_state_by_itself": {
+   "cases": 259,
+   "mine_reject": 259,
+   "mine_invalid": 259,
+   "their_reject": 256,
+   "agree_reject": 256,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant prune_removed_outside_domain": {
+   "cases": 215,
+   "mine_reject": 215,
+   "mine_invalid": 215,
+   "their_reject": 212,
+   "agree_reject": 212,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant prune_repeated": {
+   "cases": 164,
+   "mine_reject": 164,
+   "mine_invalid": 164,
+   "their_reject": 161,
+   "agree_reject": 161,
+   "their_not_run_hazard": 3,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 1
+  },
+  "variant prune_roles_swapped": {
+   "cases": 164,
+   "mine_accept": 142,
+   "mine_ok": 142,
+   "their_not_run_hazard": 36,
+   "their_not_run_hazard_prune": 35,
+   "mine_accept_where_theirs_not_run": 31,
+   "mine_truth_yes": 142,
+   "their_accept": 111,
+   "agree_accept": 111,
+   "their_truth_yes": 111,
+   "mine_pop_yes": 134,
+   "their_pop_yes": 134,
+   "mine_accept_rounded_mode": 2,
+   "mine_reject": 22,
+   "mine_invalid": 22,
+   "their_reject": 17,
+   "agree_reject": 17,
+   "their_not_run_hazard_magnitude": 1
+  },
+  "variant prune_site_negative_alias": {
+   "cases": 164,
+   "mine_reject": 164,
+   "mine_invalid": 164,
+   "their_reject": 160,
+   "agree_reject": 160,
+   "their_not_run_hazard": 4,
+   "their_not_run_hazard_magnitude": 2,
+   "their_not_run_hazard_prune": 2
+  },
+  "variant prune_site_out_of_range": {
+   "cases": 164,
+   "mine_reject": 164,
+   "mine_invalid": 164,
+   "their_reject": 164,
+   "agree_reject": 164
+  },
+  "variant relax_f_too_long": {
+   "cases": 134,
+   "mine_reject": 134,
+   "mine_invalid": 134,
+   "their_reject": 132,
+   "agree_reject": 132,
+   "their_not_run_hazard": 2,
+   "their_not_run_hazard_magnitude": 2
+  },
+  "variant relax_g_too_short": {
+   "cases": 93,
+   "mine_reject": 93,
+   "mine_invalid": 93,
+   "their_reject": 93,
+   "agree_reject": 93
+  },
+  "variant relax_other_f": {
+   "cases": 134,
+   "mine_accept": 134,
+   "mine_ok": 134,
+   "their_accept": 132,
+   "agree_accept": 132,
+   "mine_truth_yes": 134,
+   "their_truth_yes": 132,
+   "mine_pop_yes": 155,
+   "their_pop_yes": 155,
+   "mine_accept_rounded_mode": 2,
+   "their_not_run_hazard": 2,
+   "their_not_run_hazard_magnitude": 2,
+   "mine_accept_where_theirs_not_run": 2
+  },
+  "variant relax_pair_reversed_consistent": {
+   "cases": 134,
+   "mine_accept": 134,
+   "mine_ok": 134,
+   "their_reject": 134,
+   "only_mine_accepts": 134,
+   "mine_truth_yes": 134,
+   "mine_pop_yes": 159,
+   "mine_accept_rounded_mode": 2
+  },
+  "variant relax_pair_reversed_same_shapes": {
+   "cases": 23,
+   "mine_accept": 23,
+   "mine_ok": 23,
+   "mine_accept_rounded_mode": 1,
+   "their_reject": 23,
+   "only_mine_accepts": 23,
+   "mine_truth_yes": 23,
+   "mine_pop_yes": 26
+  },
+  "variant relax_pair_same_site": {
+   "cases": 134,
+   "mine_reject": 134,
+   "mine_invalid": 134,
+   "their_reject": 134,
+   "agree_reject": 134
+  },
+  "variant relax_repeated": {
+   "cases": 134,
+   "mine_reject": 134,
+   "mine_invalid": 134,
+   "their_reject": 134,
+   "agree_reject": 134
+  },
+  "variant relax_site_negative_alias": {
+   "cases": 134,
+   "mine_reject": 134,
+   "mine_invalid": 134,
+   "their_reject": 134,
+   "agree_reject": 134
+  },
+  "variant relax_unlisted_pair": {
+   "cases": 167,
+   "mine_reject": 167,
+   "mine_invalid": 167,
+   "their_reject": 167,
+   "agree_reject": 167
+  }
+ },
+ "relation": {
+  "instances_tempered": 272,
+  "instances": 300,
+  "their_producer_certificates": 280,
+  "their_producer_with_branch": 25,
+  "both_accept": 1646,
+  "both_accept_exact": 1645,
+  "mine_inside_theirs": 1646,
+  "pop_compared": 1634,
+  "mine_pop_inside_theirs": 1634,
+  "instances_not_tempered": 28,
+  "their_producer_abstained": 20,
+  "both_accept_rounded": 1
+ },
+ "float_tier": {
+  "with_their_exact_claim": 280,
+  "with_their_exact_claim_rejected_by_float_tier": 181,
+  "cases": 3349,
+  "both_tiers_accept": 1924,
+  "float_contains_exact": 1096,
+  "float_lo_above_exact_lo": 568,
+  "float_hi_below_exact_hi": 382,
+  "float_truth_yes": 1924,
+  "float_pop_yes": 2187,
+  "both_tiers_reject": 1424,
+  "tiers_disagree_on_acceptance": 1,
+  "only_exact_accepts": 1
+ },
+ "excess_lo_relative": {
+  "n": 1646,
+  "min": 1.5989079437714144e-15,
+  "median": 9.059105166076784e-13,
+  "p99": 9.295243852155545e-13,
+  "max": 1.0614293789614472e-12
+ },
+ "excess_hi_relative": {
+  "n": 1646,
+  "min": 3.4683903273936116e-14,
+  "median": 9.217493936113738e-13,
+  "p99": 272.34600317932046,
+  "max": 49412.08083957821
+ },
+ "excess_hi_relative_without_prunes": {
+  "n": 738,
+  "min": 3.4683903273936116e-14,
+  "median": 9.094947017729282e-13,
+  "p99": 9.310952009400352e-13,
+  "max": 9.557382373342657e-13
+ },
+ "float_inside_exact_gap_relative": {
+  "n": 828,
+  "min": 3.2286890717386585e-19,
+  "median": 2.307245900083216e-15,
+  "p99": 3.5730776826438284e-14,
+  "max": 9.947598300641403e-14
+ },
+ "disagreements": {
+  "variant domain_not_sorted | theirs accepts | mine: malformed: domain of site # is not strictly increasing within #..#": 250,
+  "variant relax_pair_reversed_consistent | mine accepts | theirs: malformed: relax: pair must be a listed pair [i, j] with i < j": 134,
+  "variant branch_surplus_child_outside_domain | theirs accepts | mine: invalid: the children are not exactly the states of the working domain of site ": 29,
+  "variant relax_pair_reversed_same_shapes | mine accepts | theirs: malformed: relax: pair must be a listed pair [i, j] with i < j": 23,
+  "tiers | exact: accepted | float: abstained: the lower bound of the partition sum is not positive at thi": 1
+ },
+ "their_reject_reasons": {
+  "prune step": 1219,
+  "loader: malformed: prune: dominator out of range": 324,
+  "loader: malformed: prune: site out of range": 324,
+  "relax step": 134,
+  "loader: malformed: relax: f must list one integer per state of site ": 132,
+  "loader: malformed: relax: g must list one integer per state of site ": 93,
+  "loader: malformed: relax: pair must be a listed pair [i, j] with i <": 592,
+  "loader: malformed: order must list every site other than `keep` exac": 1548,
+  "loader: malformed: domain of site # must be a non-empty duplicate-fr": 1194,
+  "loader: malformed: domains must list # sites": 297,
+  "loader: malformed: beta must be a nonnegative Fraction": 300,
+  "loader: malformed: keep must be a site or None": 594,
+  "loader: malformed: branch: a site other than the kept one": 290,
+  "branch on site # has no child for state #": 71,
+  "loader: malformed: branch: child state out of range": 66,
+  "loader: malformed: branch: child key '##' is not a canonical natural": 66
+ },
+ "examples": [
+  {
+   "kind": "float tier not containing exact tier",
+   "certificate": "{\"format\":\"structbio-zcert/1\",\"model_sha256\":\"f99945e12c5344b81cd698e3ee74fc616f8375e2cb08038709597a6b2f629dd5\",\"beta\":\"1/2\",\"domains\":[[0,1],[0,1,2],[0,1,2,3],[0],[0,1]],\"keep\":0,\"claim\":{},\"root\":{\"steps\":[{\"op\":\"relax\",\"pair\":[1,3],\"f\":[4995,3,2],\"g\":[0]},{\"op\":\"relax\",\"pair\":[1,4],\"f\":[-6,3,-29],\"g\":[-6,6]},{\"op\":\"relax\",\"pair\":[2,3],\"f\":[-43,-19,-4,-49],\"g\":[0]},{\"op\":\"relax\",\"pair\":[2,4],\"f\":[-7,5,18,-12],\"g\":[-1,1]},{\"op\":\"relax\",\"pair\":[3,4],\"f\":[2500],\"g\":[-2499,2498]}],\"order\":[3,4,1,2]},\"meta\":\"{\\\"arithmetic\\\": \\\"exact\\\", \\\"planned_largest_table\\\": 24, \\\"planned_leaves\\\": 1, \\\"producer\\\": \\\"metricchain_sb.partition.certify_partition\\\", \\\"tau\\\": \\\"625/16\\\", \\\"theta\\\": \\\"3\\\"}\"}",
+   "tables": {
+    "unary": [
+     [
+      -2,
+      2
+     ],
+     [
+      -1,
+      -3,
+      5002
+     ],
+     [
+      0,
+      2,
+      398,
+      1
+     ],
+     [
+      396
+     ],
+     [
+      2,
+      -2
+     ]
+    ],
+    "pair": {
+     "0,1": [
+      [
+       4,
+       5,
+       401
+      ],
+      [
+       398,
+       396,
+       405
+      ]
+     ],
+     "0,2": [
+      [
+       3,
+       -25,
+       -9,
+       19
+      ],
+      [
+       -13,
+       -41,
+       -25,
+       3
+      ]
+     ],
+     "0,3": [
+      [
+       14
+      ],
+      [
+       -26
+      ]
+     ],
+     "0,4": [
+      [
+       404,
+       397
+      ],
+      [
+       3,
+       4997
+      ]
+     ],
+     "1,2": [
+      [
+       -5,
+       -4,
+       4,
+       403
+      ],
+      [
+       4996,
+       404,
+       5,
+       5
+      ],
+      [
+       4998,
+       2,
+       -4,
+       -1
+      ]
+     ],
+     "1,3": [
+      [
+       4995
+      ],
+      [
+       3
+      ],
+      [
+       2
+      ]
+     ],
+     "1,4": [
+      [
+       -12,
+       0
+      ],
+      [
+       -3,
+       9
+      ],
+      [
+       -35,
+       -23
+      ]
+     ],
+     "2,3": [
+      [
+       -43
+      ],
+      [
+       -19
+      ],
+      [
+       -4
+      ],
+      [
+       -49
+      ]
+     ],
+     "2,4": [
+      [
+       -8,
+       -6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       17,
+       19
+      ],
+      [
+       -12,
+       -11
+      ]
+     ],
+     "3,4": [
+      [
+       1,
+       4998
+      ]
+     ]
+    },
+    "scale_bits": 7
+   },
+   "exact": [
+    "-1.9044798158983253231925997",
+    "-1.9005735658948646473018956"
+   ],
+   "float": [
+    "-1.9044798158983679557567453",
+    "-1.9005735658948930690113260"
+   ]
+  },
+  {
+   "kind": "float tier not containing exact tier",
+   "certificate": "{\"format\":\"structbio-zcert/1\",\"model_sha256\":\"f99945e12c5344b81cd698e3ee74fc616f8375e2cb08038709597a6b2f629dd5\",\"beta\":\"1/3\",\"domains\":[[0,1],[0,1,2],[0,1,2,3],[0],[0,1]],\"keep\":4,\"claim\":{},\"root\":{\"steps\":[{\"op\":\"relax\",\"pair\":[1,2],\"f\":[-5,5,-4],\"g\":[0,1,0,0]},{\"op\":\"relax\",\"pair\":[0,4],\"f\":[0,0],\"g\":[0,0]}],\"order\":[1,2,3,0]},\"meta\":\"{}\"}",
+   "tables": {
+    "unary": [
+     [
+      -2,
+      2
+     ],
+     [
+      -1,
+      -3,
+      5002
+     ],
+     [
+      0,
+      2,
+      398,
+      1
+     ],
+     [
+      396
+     ],
+     [
+      2,
+      -2
+     ]
+    ],
+    "pair": {
+     "0,1": [
+      [
+       4,
+       5,
+       401
+      ],
+      [
+       398,
+       396,
+       405
+      ]
+     ],
+     "0,2": [
+      [
+       3,
+       -25,
+       -9,
+       19
+      ],
+      [
+       -13,
+       -41,
+       -25,
+       3
+      ]
+     ],
+     "0,3": [
+      [
+       14
+      ],
+      [
+       -26
+      ]
+     ],
+     "0,4": [
+      [
+       404,
+       397
+      ],
+      [
+       3,
+       4997
+      ]
+     ],
+     "1,2": [
+      [
+       -5,
+       -4,
+       4,
+       403
+      ],
+      [
+       4996,
+       404,
+       5,
+       5
+      ],
+      [
+       4998,
+       2,
+       -4,
+       -1
+      ]
+     ],
+     "1,3": [
+      [
+       4995
+      ],
+      [
+       3
+      ],
+      [
+       2
+      ]
+     ],
+     "1,4": [
+      [
+       -12,
+       0
+      ],
+      [
+       -3,
+       9
+      ],
+      [
+       -35,
+       -23
+      ]
+     ],
+     "2,3": [
+      [
+       -43
+      ],
+      [
+       -19
+      ],
+      [
+       -4
+      ],
+      [
+       -49
+      ]
+     ],
+     "2,4": [
+      [
+       -8,
+       -6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       17,
+       19
+      ],
+      [
+       -12,
+       -11
+      ]
+     ],
+     "3,4": [
+      [
+       1,
+       4998
+      ]
+     ]
+    },
+    "scale_bits": 7
+   },
+   "exact": [
+    "-25.4736512063001088346993828",
+    "0.5575987937239688108093105"
+   ],
+   "float": [
+    "-25.4736512063000946238446676",
+    "0.5575987937239972325187409"
+   ]
+  },
+  {
+   "kind": "float tier not containing exact tier",
+   "certificate": "{\"format\":\"structbio-zcert/1\",\"model_sha256\":\"f99945e12c5344b81cd698e3ee74fc616f8375e2cb08038709597a6b2f629dd5\",\"beta\":\"5/2\",\"domains\":[[0,1],[0,2],[3],[0],[0,1]],\"keep\":null,\"claim\":{},\"root\":{\"steps\":[{\"op\":\"prune\",\"site\":4,\"remove\":1,\"dominator\":0},{\"op\":\"prune\",\"site\":1,\"remove\":2,\"dominator\":0},{\"op\":\"relax\",\"pair\":[2,4],\"f\":[-7863,-5430,5146,3429],\"g\":[-6680,-1551]}],\"order\":[2,4,3,1,0]},\"meta\":\"{}\"}",
+   "tables": {
+    "unary": [
+     [
+      -2,
+      2
+     ],
+     [
+      -1,
+      -3,
+      5002
+     ],
+     [
+      0,
+      2,
+      398,
+      1
+     ],
+     [
+      396
+     ],
+     [
+      2,
+      -2
+     ]
+    ],
+    "pair": {
+     "0,1": [
+      [
+       4,
+       5,
+       401
+      ],
+      [
+       398,
+       396,
+       405
+      ]
+     ],
+     "0,2": [
+      [
+       3,
+       -25,
+       -9,
+       19
+      ],
+      [
+       -13,
+       -41,
+       -25,
+       3
+      ]
+     ],
+     "0,3": [
+      [
+       14
+      ],
+      [
+       -26
+      ]
+     ],
+     "0,4": [
+      [
+       404,
+       397
+      ],
+      [
+       3,
+       4997
+      ]
+     ],
+     "1,2": [
+      [
+       -5,
+       -4,
+       4,
+       403
+      ],
+      [
+       4996,
+       404,
+       5,
+       5
+      ],
+      [
+       4998,
+       2,
+       -4,
+       -1
+      ]
+     ],
+     "1,3": [
+      [
+       4995
+      ],
+      [
+       3
+      ],
+      [
+       2
+      ]
+     ],
+     "1,4": [
+      [
+       -12,
+       0
+      ],
+      [
+       -3,
+       9
+      ],
+      [
+       -35,
+       -23
+      ]
+     ],
+     "2,3": [
+      [
+       -43
+      ],
+      [
+       -19
+      ],
+      [
+       -4
+      ],
+      [
+       -49
+      ]
+     ],
+     "2,4": [
+      [
+       -8,
+       -6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       17,
+       19
+      ],
+      [
+       -12,
+       -11
+      ]
+     ],
+     "3,4": [
+      [
+       1,
+       4998
+      ]
+     ]
+    },
+    "scale_bits": 7
+   },
+   "exact": [
+    "-118.9442325617392900608698538",
+    "2885.3936977434272136613260981"
+   ],
+   "float": [
+    "-118.9442325617392190065962777",
+    "2885.3936977434272136613260981"
+   ]
+  }
+ ],
+ "findings": [],
+ "instances": 300
+}
