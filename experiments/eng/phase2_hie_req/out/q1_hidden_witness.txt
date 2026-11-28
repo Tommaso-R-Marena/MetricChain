@@ -1,0 +1,10 @@
+[feasibility] ns=(30, 30, 50, 70) roles=QQTT u=1.0 th/h=1.1: Vhid=+0.61733; dict-class spread=0.0e+00, max step=1.000000 (u=1.0), max nu on V0=+0.0e+00  -> witness is feasible: True
+[feasibility] ns=(120, 120, 120) roles=QQT u=0.5 th/h=1.1: Vhid=+0.01879; dict-class spread=0.0e+00, max step=0.500000 (u=0.5), max nu on V0=+0.0e+00  -> witness is feasible: True
+[small analogues] Dijkstra / LP recomputation of the hidden bracket at Theta >= 1.1 nh
+ns=(12, 12, 20, 28) roles=QQTT u=1.0 th/h=1.1: Vhid(min-plus)=+0.40783 Vhid(Dijkstra)=+0.40783 at y=(3, 3, 5, 7)
+ns=(15, 15, 25, 35) roles=QQTT u=1.0 th/h=1.1: Vhid(min-plus)=+0.61829 Vhid(Dijkstra)=+0.61829 at y=(4, 4, 6, 9)
+ns=(10, 10, 16, 24) roles=QQTT u=2.0 th/h=1.1: Vhid(min-plus)=+2.34498 Vhid(Dijkstra)=+2.34498 at y=(1, 1, 2, 2)
+ns=(8, 8, 12, 16) roles=QQTT u=4.0 th/h=1.1: Vhid(min-plus)=+4.38212 Vhid(Dijkstra)=+4.38212 at y=(0, 0, 0, 0)
+ns=(6, 6, 10, 14) roles=QQTT u=4.0 th/h=1.1: Vhid(min-plus)=+1.33304 Vhid(Dijkstra)=+1.33304 at y=(0, 0, 0, 0) Vhid(LP)=+1.33304 [LP size (8085, 63213, 11190)]
+ns=(20, 20, 30) roles=QQT u=0.5 th/h=1.1: Vhid(min-plus)=+0.43291 Vhid(Dijkstra)=+0.43291 at y=(7, 7, 11)
+# time 22s

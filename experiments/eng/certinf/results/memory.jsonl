@@ -1,0 +1,9 @@
+{"method": "M1", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88888, "peak_rss_kib": 105912, "wall": 0.2814720180031145}
+{"method": "M2", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88904, "peak_rss_kib": 106056, "wall": 0.2516338650020771}
+{"method": "M3", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88748, "peak_rss_kib": 130716, "wall": 2.712663837999571}
+{"method": "M4", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88900, "peak_rss_kib": 130304, "wall": 2.4625698650052072}
+{"method": "M5", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88644, "peak_rss_kib": 130604, "wall": 2.438286942007835}
+{"method": "M6", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88824, "peak_rss_kib": 130660, "wall": 2.429803578997962}
+{"method": "B1", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88748, "peak_rss_kib": 108076, "wall": 1.8131541899929289}
+{"method": "B2", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88808, "peak_rss_kib": 109032, "wall": 0.17039312100678217}
+{"method": "B3", "cell": "F1|nnn_corr|1.15|100000", "base_rss_kib": 88708, "peak_rss_kib": 108932, "wall": 0.1390371790039353}

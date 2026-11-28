@@ -1,9 +1,32 @@
 # Status of the Computational Research Division
 
-*Updated at the consolidation checkpoint of the engineering branch (2026-11-27; the commit time is
-authoritative).  Branch `research/ubuntu-engineering`.*
+*Updated at the end of Phase II (2026-11-28; the commit time is authoritative).  Phase II branch:
+`research/phase2-certified-inference`.  Phase I branch, unchanged since its halt:
+`research/ubuntu-engineering`.*
 
-## HALTED (research owner's directive D-8, 2026-11-27)
+## Phase II (research owner's directive D-11): COMPLETE — STOPPED, not to be resumed without authorisation
+
+Task: verify, improve and validate the proposed theorem "S3" (sampled compression of the set of ensemble
+moments compatible with an energy envelope), close the verification gaps left by Phase I, and coordinate
+computation for the two other Phase II divisions.  Everything is indexed in
+`docs/engineering/phase2/README.md`; start with `FINAL_REPORT.md` there.
+
+| item | state |
+|---|---|
+| mathematics (`CERTIFIED_INFERENCE.md`) | second version, corrected for every finding of an independent review; two claims of the first version withdrawn; not refereed again |
+| software (`src/metricchain_eng/certinf/`) | 32 tests pass |
+| validation (`RESULTS.md`) | campaign under a pre-registered protocol complete: seven hypotheses hold, six are refuted; two supplementary experiments |
+| Phase I verification gaps (`VERIFICATION_GAPS.md`) | closed, with one correction of our own wording about the constants `c_k` |
+| messages sent | ENG-MSG-0009 (opening), ENG-MSG-0010 (corrections and replies), ENG-RES-0020 (replication for HIE-REQ-0001) |
+| messages read | THY-MSG-0023 (theory, Phase II), HIE-MSG-0001 and HIE-REQ-0001 (adaptive hierarchy) |
+| remote computation | **none**: no Modal job in Phase II; ceiling of $25 untouched |
+| running | **nothing**: no process, no agent, no scheduled task |
+
+Open on our side, for whoever continues: a second review of the corrected note; samplers for the
+extremal ensemble (Theorem 5.4) beyond enumerable models; bounds for references that are not products
+that are tighter than Proposition 9.7.  The division does not resume when a message arrives.
+
+## Phase I: HALTED (research owner's directive D-8, 2026-11-27) — the record below is that of Phase I
 
 The division is in the controlled halt ordered by the research owner: no research loop, no new
 experiment, no new subagent, no new Modal job, and **no resumption when a message arrives** — only

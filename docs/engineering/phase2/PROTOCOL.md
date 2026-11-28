@@ -99,4 +99,32 @@ sealed held-out list is not involved in any way.
 
 ## 7. Deviations
 
-*(none at the time of writing)*
+*(none at the time of writing — the entries below were added on 2026-11-28 after the runs; nothing above
+this section was edited)*
+
+Recorded after the runs.  The campaign's own list, with reasons, is `experiments/eng/certinf/REPORT.md`
+§2 (D1–D16); outcomes and their reading are in `RESULTS.md`.
+
+1. **Repetitions** (D1): 100 at `n = 10³` and `10⁴`, 30 at `10⁵`, instead of 200 and 50 — runtime.  The
+   threshold of H-C is computed with the actual numbers.
+2. **Baselines restricted** (D2, D3): the bootstrap B1 only at `n = 10³` on F1, F2 and one cell of F3; the
+   pool programme B3 on F3 only for one target at `n = 10³`, `Γ ≤ 10` — runtime.
+3. **Choices the protocol left open** (D5, D11, D12): the sizes and cells of the sensitivity runs; the
+   state-dependent envelope of F1; the shape of the true residual; data regions centred at the exact
+   averages of the true ensemble, with no simulated measurement noise.
+4. **H-D** (D6): the least `n` was located by a separate sweep (ten sample sizes, 20 repetitions), because
+   the grid's three sizes cannot locate it.
+5. **Readings of criteria** fixed by the campaign before its tables (its §2): "excess" is the sum over
+   both ends; envelope thresholds refer to the nominal ratios; the inconsistency certificate is one test
+   at `δ = 0.05` (D9).
+6. **The library changed during the campaign** (D16), at 02:35:33 UTC, in answer to the independent
+   review: certificates unchanged for valid input; model-free problems on a region that is not a box are
+   now solved correctly.  The grid ran before the change.  **The baseline B3 on F3 had been too wide —
+   in favour of the hypotheses — and was recomputed on the same draws**; the superseded values are kept.
+7. **The exact reference on F3** (D10) was not independently checked by the campaign; the coordinator
+   verified it afterwards (`experiments/eng/phase2_coord_checks/`).
+8. **Outside the protocol:** the supplementary experiments S1 (draws from the extremal ensemble) and S2
+   (references that are not products) were designed after the review and after the first results were
+   known.  They are reported as such in `RESULTS.md` §4 and decide no hypothesis.
+9. **A count corrected by the coordinator:** H-F(i) is met in 8 of 10 cells, not 9 as the campaign's table
+   says (one cell is at exactly 5 misses in 100).

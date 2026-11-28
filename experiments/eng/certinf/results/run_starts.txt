@@ -1,0 +1,10 @@
+grid part 1 start: 2026-11-28 00:55:39 UTC
+grid part 2 (resume) start: 2026-11-28 01:08:26 UTC
+c start: 2026-11-28 02:34:28 UTC
+a start: 2026-11-28 02:47:36 UTC
+b start: 2026-11-28 02:57:47 UTC
+d start: 2026-11-28 02:58:32 UTC
+contexts start: 2026-11-28 02:59:35 UTC
+memory start: 2026-11-28 03:06:02 UTC
+done start: 2026-11-28 03:06:22 UTC
+rerun_b3_f3 start: 2026-11-28 03:02:3x UTC (after structure F4/F6, concurrent with F5)

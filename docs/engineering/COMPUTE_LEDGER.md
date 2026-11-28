@@ -237,12 +237,24 @@ criteria, estimated cost, worst-case committed cost, expected value) and an expl
 |---|---|
 | ceiling for this phase | $25 |
 | committed (worst cases of running or queued jobs) | $0 |
-| spent | $0 — **no Modal job was launched in Phase II** (state at the last commit of this file) |
-| requests from the other Phase II divisions | none received (their branches did not exist on the remote at the first synchronisations) |
+| spent | $0 — **no Modal job was launched and no Modal command was run in Phase II** (final state, 2026-11-28) |
+| running or deployed by this division | nothing |
+| requests from the other Phase II divisions | one: HIE-REQ-0001 (adaptive hierarchy), which asked for local CPU only — accepted for Q1 and Q2, declined for Q3, answered in ENG-RES-0020; no Modal cost.  The theory instance sent no request |
+| proposals for larger computation sent to the research owner | none: nothing in this phase needed more than the local machine |
 
-Local computation of this phase: the validation campaign, the review's checks and the verification of
-the structural-biology certificates, a few core-hours in all; recorded in the reports under
-`docs/engineering/phase2/`.
+The workspace's Modal figures are therefore those of the final reconciliation of Phase I above (credits
+consumed, billed cost $0.00); they were not queried again in Phase II.
+
+Local computation of this phase (8 threads, at most four to five processes at a time):
+
+| what | wall time | where |
+|---|---|---|
+| validation campaign under the protocol (grid, sensitivity, structure, recomputed baseline) | 2.2 h (about 6.5 core-hours of worker time in the grid) | `experiments/eng/certinf/REPORT.md` §7 |
+| supplementary experiment S1 | about 5 minutes on three processes | `experiments/eng/phase2_tilt/` |
+| supplementary experiment S2, the sequential bound, the coordinator's checks | minutes | `experiments/eng/phase2_nonproduct/`, `phase2_seq/`, `phase2_coord_checks/` |
+| the referee's checks | not timed as a whole; scripts of seconds to minutes each | `experiments/eng/phase2_review/` |
+| verification of the structural-biology certificates and of the memoised kernel | 1.4 s to 196 s per certificate in the kernel, peak memory 4.9 GB | `experiments/eng/phase2_gaps/REPORT.md` |
+| replication for HIE-REQ-0001 | about 13 minutes of script time, two processes | `experiments/eng/phase2_hie_req/REPORT.md` |
 
 ## Remote jobs
 
