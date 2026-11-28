@@ -1,0 +1,8 @@
+PART A: 20000 hidden types in random instances (101755 draws); largest value of each quantity (all must be <= 0 up to rounding)
+   (a) cost_1(e') - theta, units of h       max +8.298e-14   (at u=0.25, theta=1.30h, 4 classes, |G1|=1, |G2|=2)
+   (b) |avg_2 e' - m'|                      max +3.331e-16   (at u=0.25, theta=1.00h, 6 classes, |G1|=2, |G2|=3)
+   (b) r(m') - theta, units of h            max +2.889e-14   (at u=0.25, theta=1.00h, 6 classes, |G1|=1, |G2|=2)
+   (c) B - (h - theta), units of h          max -1.098e-03   (at u=1, theta=1.00h, 2 classes, |G1|=1, |G2|=1)
+   (d) cell price - phi_g h, units of h     max +1.071e-14   (at u=0.25, theta=1.30h, 4 classes, |G1|=2, |G2|=2)
+       T(e') - T(e), units of h             max +4.818e-14   (at u=0.25, theta=1.00h, 5 classes, |G1|=2, |G2|=3)
+   all checks passed: True

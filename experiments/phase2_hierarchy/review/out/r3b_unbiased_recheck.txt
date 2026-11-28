@@ -1,0 +1,19 @@
+seed 1 flat+dip-at-rare-type        M=1 runs=20000 A=4.606638 mean=4.598300 z=-0.45
+seed 1 flat+dip-at-rare-type        M=3 runs=20000 A=4.606638 mean=4.602268 z=-0.90
+seed 1 radial-dip                   M=1 runs=20000 A=2.880468 mean=2.898474 z=+1.17
+seed 1 radial-dip                   M=3 runs=20000 A=2.880468 mean=2.881000 z=+0.39
+seed 1 block2-only-deep-in-block1   M=1 runs=20000 A=0.607488 mean=0.606793 z=-1.03
+seed 1 block2-only-deep-in-block1   M=3 runs=20000 A=0.607488 mean=0.607396 z=-2.83
+seed 2 flat+dip-at-rare-type        M=1 runs=20000 A=4.606638 mean=4.602762 z=-0.21
+seed 2 flat+dip-at-rare-type        M=3 runs=20000 A=4.606638 mean=4.608405 z=+0.37
+seed 2 radial-dip                   M=1 runs=20000 A=2.880468 mean=2.875370 z=-0.39
+seed 2 radial-dip                   M=3 runs=20000 A=2.880468 mean=2.879294 z=-1.05
+seed 2 block2-only-deep-in-block1   M=1 runs=20000 A=0.607488 mean=0.606670 z=-1.23
+seed 2 block2-only-deep-in-block1   M=3 runs=20000 A=0.607488 mean=0.607521 z=+1.06
+seed 3 flat+dip-at-rare-type        M=1 runs=20000 A=4.606638 mean=4.630019 z=+1.23
+seed 3 flat+dip-at-rare-type        M=3 runs=20000 A=4.606638 mean=4.599975 z=-1.41
+seed 3 radial-dip                   M=1 runs=20000 A=2.880468 mean=2.894054 z=+0.89
+seed 3 radial-dip                   M=3 runs=20000 A=2.880468 mean=2.881759 z=+1.21
+seed 3 block2-only-deep-in-block1   M=1 runs=20000 A=0.607488 mean=0.607470 z=-0.03
+seed 3 block2-only-deep-in-block1   M=3 runs=20000 A=0.607488 mean=0.607412 z=-1.64
+exit 0

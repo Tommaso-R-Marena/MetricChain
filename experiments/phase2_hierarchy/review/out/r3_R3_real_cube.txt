@@ -1,0 +1,26 @@
+config (10, 10) u=4 done (44 s)
+config (8, 12) u=1 done (80 s)
+config (7, 7, 6) u=2 done (180 s)
+config (9, 5) u=0.5 done (191 s)
+config (6, 6, 6) u=1 done (259 s)
+config (11, 9) u=2 done (298 s)
+small config (4, 4) u=1 done (307 s)
+small config (3, 3, 2) u=1 done (324 s)
+small config (5, 4) u=2 done (337 s)
+
+T0 exhaustive reveal test: 44151962 revealing (point, block) pairs, failures (not two values / candidate not centre or antipode): 0
+T1 candidates inside R3: 2804475 revealing points, "exactly two values" failures 0, candidate failures 0
+T2a exact unbiasedness identity (realised and arbitrary candidates): 1056 cases, max |E/A - 1| = 2.52e-12
+T2b statistical unbiasedness on small cubes: 67 (instance, M) cells with 500 runs each (32 further cells have A_hat = A in every run);
+     z-scores of the mean of A_hat against A: max |z| = 3.61, mean z = -0.164, rms z = 1.003, cells with |z| > 3: 1
+     largest |z|: ns=(3, 3, 2) u=1 radial-dip                   M=1 A=2.88047 mean=2.73349 z=-3.61 (sd/A=0.316)
+     largest |z|: ns=(5, 4) u=2 cones-min-0                  M=1 A=0.190076 mean=0.188832 z=-2.47 (sd/A=0.0593)
+     largest |z|: ns=(4, 4) u=1 cone(1)+2-periodic(last)     M=5 A=0.314996 mean=0.318132 z=+1.84 (sd/A=0.121)
+     largest |z|: ns=(3, 3, 2) u=1 2-periodic-all               M=2 A=0.758668 mean=0.767089 z=+1.84 (sd/A=0.135)
+T3 runs with S_2 = all blocks: 28194, max |A_hat/A - 1| = 5.11e-15
+T4 path argument, round 1: 4686 samples (292 with an unrevealed block and |V_0| >= 20), "F sees only S_1 on V_0(Theta_1)" failed 0 times (without the parity qualifier it would fail 180 times); |V_0| between 0 and 348 types, median 0
+T4 path argument, round 2: 4686 samples (253 with an unrevealed block and |V_{S_1}| >= 20), "F sees only S_2 on V_{S_1}(Theta_2)" failed 0 times (without parity: 171); |V_{S_1}| between 0 and 448 types, median 0
+T5 evaluation count above 3 (n+1)^(m+1) M: 0 of 54186 runs
+(|S_1|, |S_2|, m) histogram over runs: {(0, 0, 2): 9570, (0, 0, 3): 4881, (0, 1, 2): 1351, (0, 1, 3): 643, (0, 2, 2): 1047, (0, 2, 3): 448, (0, 3, 3): 121, (1, 1, 2): 3707, (1, 1, 3): 1328, (1, 2, 2): 5430, (1, 2, 3): 1488, (1, 3, 3): 694, (2, 2, 2): 15019, (2, 2, 3): 2576, (2, 3, 3): 1965, (3, 3, 3): 3918}
+total time 337 s, seed 20261128
+exit 0

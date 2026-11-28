@@ -1,0 +1,3 @@
+author rows parsed: 124
+u=0.5 ns=[36, 162, 162] PQT theta/h=1.00 | author viol=  -0.276 hid=   -0.417 | reviewer (no parity) X=  -0.276 hid=   -0.417 | with parity X=  -0.264
+u=0.5 ns=[72, 144, 144] PQT theta/h=1.10 | author viol=  -0.552 hid=   -1.032 | reviewer (no parity) X=  -0.552 hid=   -1.032 | with parity X=  -0.539

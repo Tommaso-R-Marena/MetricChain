@@ -1,0 +1,21 @@
+u=2 PQTT (0.25, 0.25, 0.25, 0.25) Theta=1.00 n h+2mL par=1 :: n=84: -2.043, +nan (97) | n=168: -3.993, +nan (111)
+u=2 PQTT (0.25, 0.25, 0.25, 0.25) Theta=1.30 n h+2mL par=1 :: n=84: -2.043, +nan (97) | n=168: -3.993, +nan (111)
+u=2 PPQT (0.2, 0.2, 0.3, 0.3) Theta=1.00 n h+2mL par=1 :: n=84: -3.308, +nan (97) | n=168: -6.576, +nan (111)
+u=2 PPQT (0.2, 0.2, 0.3, 0.3) Theta=1.30 n h+2mL par=1 :: n=84: -3.308, +nan (97) | n=168: -6.576, +nan (111)
+u=2 PQQT (0.25, 0.25, 0.25, 0.25) Theta=1.00 n h+2mL par=1 :: n=84: -2.043, +nan (97) | n=168: -4.039, +nan (111)
+u=2 PQQT (0.25, 0.25, 0.25, 0.25) Theta=1.30 n h+2mL par=1 :: n=84: -2.043, +nan (97) | n=168: -4.039, +nan (111)
+u=2 QTTT (0.25, 0.25, 0.25, 0.25) Theta=1.00 n h+2mL par=1 :: n=84: +0.000, +nan (97) | n=168: +0.140, -14.65 (111)
+u=2 QTTT (0.25, 0.25, 0.25, 0.25) Theta=1.30 n h+2mL par=1 :: n=84: +0.000, +nan (97) | n=168: +0.140, -14.40 (111)
+u=4 PQTT (0.25, 0.25, 0.25, 0.25) Theta=1.00 n h+2mL par=1 :: n=84: -5.024, +nan (105) | n=168: -9.955, +nan (119)
+u=4 PQTT (0.25, 0.25, 0.25, 0.25) Theta=1.30 n h+2mL par=1 :: n=84: -5.024, +nan (105) | n=168: -9.955, +nan (119)
+u=4 PPQT (0.2, 0.2, 0.3, 0.3) Theta=1.00 n h+2mL par=1 :: n=84: -8.134, +nan (105) | n=168: -16.230, +nan (119)
+u=4 PPQT (0.2, 0.2, 0.3, 0.3) Theta=1.30 n h+2mL par=1 :: n=84: -8.134, +nan (105) | n=168: -16.230, +nan (119)
+u=4 PQQT (0.25, 0.25, 0.25, 0.25) Theta=1.00 n h+2mL par=1 :: n=84: -5.024, +nan (105) | n=168: -10.002, +nan (119)
+u=4 PQQT (0.25, 0.25, 0.25, 0.25) Theta=1.30 n h+2mL par=1 :: n=84: -5.024, +nan (105) | n=168: -10.002, +nan (119)
+u=4 QTTT (0.25, 0.25, 0.25, 0.25) Theta=1.00 n h+2mL par=1 :: n=84: +0.000, +nan (105) | n=168: +0.140, +nan (119)
+u=4 QTTT (0.25, 0.25, 0.25, 0.25) Theta=1.30 n h+2mL par=1 :: n=84: +0.000, +nan (105) | n=168: +0.140, +nan (119)
+columns per n:  X, Xhidden (allowance m(u+5L));  X = max_y [nu*(y) - n phi_P h + min{t_T(y), Theta - n(1-phi_P)h}],
+                Xhidden = max over y with t_T(y) > Theta of [nu*(y) + (Theta - n h)];  the lemma claims both <= allowance
+largest X in this group: +0.140; largest Xhidden: -14.396
+group scale4 finished in 23.6 s; lemma respected in every case of this group: True
+exit 0

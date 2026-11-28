@@ -1,0 +1,20 @@
+c0 == rho^4 - 4 (rho - 1/2)^2 : True
+16 rho^4 (4 c0 - c2^2) == -(2 rho - 1)^3 (16 rho^3 - 8 rho^2 - 6 rho - 1) : True
+expansion of (D^2 + rho^2 + D/(2 rho))^2 : True
+reduction to D^4 + c2 D^2 + c0 : True
+roots of the cubic: ['0.958994+0.000000i', '-0.229497-0.111819i', '-0.229497+0.111819i']  cos(pi/8) = 0.923880
+max of the cubic on [1/2, cos(pi/8)] = -0.7544 (must be < 0)
+c2 at cos(pi/8): -5.55e-17 (must be 0);  c2 >= 0 for rho >= cos(pi/8): True
+G0 on a grid (Delta in (0,40], rho in [1/2,40]): min = 1.118e-07 at Delta = 0.5003, rho = 0.5000
+random instances (400000): anchor in D: True; |Y*-e| formula max error 1.8e-15; b >= theta/rho: True; max of the bound = -1.362e-10 (must be <= 0)
+margin: max over (y*, q*, w*) of the bound, against 1 - 2 sqrt(theta)
+   theta = 0.25: max bound = +0.00000   1 - 2 sqrt(theta) = +0.00000
+   theta = 0.26: max bound = -0.01980   1 - 2 sqrt(theta) = -0.01980
+   theta = 0.30: max bound = -0.09545   1 - 2 sqrt(theta) = -0.09545
+   theta = 0.50: max bound = -0.41421   1 - 2 sqrt(theta) = -0.41421
+   theta = 1.00: max bound = -1.00000   1 - 2 sqrt(theta) = -1.00000
+   theta = 2.00: max bound = -2.00000   1 - 2 sqrt(theta) = -1.82843
+monotonicity of the bracket in theta: most negative increment 0.00e+00 (must be >= 0)
+scaling identity B(theta; D, rho) = s^2 G0(D/s, rho/s) + 2 s (s-1) R(D/s, rho/s), s = 2 sqrt(theta): max error 5.7e-14
+part G finished in 12 s
+exit 0

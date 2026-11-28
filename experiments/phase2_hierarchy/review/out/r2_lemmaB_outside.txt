@@ -1,0 +1,65 @@
+u=1 roles=PQT ns=(80, 80, 80) Theta=1.00 n h (hyp Theta: 0) | parity: X=-2.083 Xhid=-2.853 | no parity: X=-2.108 Xhid=-2.878 | allowance 85.3
+u=1 roles=PQT ns=(80, 80, 80) Theta=1.10 n h (hyp Theta: 0) | parity: X=-2.218 Xhid=-3.178 | no parity: X=-2.243 Xhid=-3.178 | allowance 85.3
+u=1 roles=PQT ns=(80, 80, 80) Theta=1.30 n h (hyp Theta: 0) | parity: X=-2.293 Xhid=-4.224 | no parity: X=-2.318 Xhid=-4.224 | allowance 85.3
+u=1 roles=PTT ns=(60, 100, 120) Theta=1.00 n h (hyp Theta: 0) | parity: X=-1.712 Xhid=-2.320 | no parity: X=-1.748 Xhid=-2.337 | allowance 87.6
+u=1 roles=PTT ns=(60, 100, 120) Theta=1.10 n h (hyp Theta: 0) | parity: X=-1.712 Xhid=-3.504 | no parity: X=-1.748 Xhid=-3.521 | allowance 87.6
+u=1 roles=PTT ns=(60, 100, 120) Theta=1.30 n h (hyp Theta: 0) | parity: X=-1.712 Xhid=-4.889 | no parity: X=-1.748 Xhid=-4.889 | allowance 87.6
+u=1 roles=QTT ns=(81, 99, 100) Theta=1.00 n h (hyp Theta: 0) | parity: X=+0.992 Xhid=+0.992 | no parity: X=+0.992 Xhid=+0.992 | allowance 87.6
+u=1 roles=QTT ns=(81, 99, 100) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.020 Xhid=-0.192 | no parity: X=+0.000 Xhid=-0.192 | allowance 87.6
+u=1 roles=QTT ns=(81, 99, 100) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.020 Xhid=-1.560 | no parity: X=+0.000 Xhid=-1.560 | allowance 87.6
+u=1 roles=TTT ns=(70, 90, 80) Theta=1.00 n h (hyp Theta: 0) | parity: X=+1.181 Xhid=+1.181 | no parity: X=+1.181 Xhid=+1.181 | allowance 85.3
+u=1 roles=TTT ns=(70, 90, 80) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.075 Xhid=-0.120 | no parity: X=+0.000 Xhid=-0.120 | allowance 85.3
+u=1 roles=TTT ns=(70, 90, 80) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.075 Xhid=-1.696 | no parity: X=+0.000 Xhid=-1.721 | allowance 85.3
+u=1 roles=PT ns=(300, 301) Theta=1.00 n h (hyp Theta: 0) | parity: X=-5.658 Xhid=-11.140 | no parity: X=-5.658 Xhid=-11.140 | allowance 66.0
+u=1 roles=PT ns=(300, 301) Theta=1.10 n h (hyp Theta: 0) | parity: X=-6.518 Xhid=-12.249 | no parity: X=-6.518 Xhid=-12.249 | allowance 66.0
+u=1 roles=PT ns=(300, 301) Theta=1.30 n h (hyp Theta: 0) | parity: X=-7.453 Xhid=-14.681 | no parity: X=-7.453 Xhid=-14.681 | allowance 66.0
+u=1 roles=QT ns=(301, 300) Theta=1.00 n h (hyp Theta: 0) | parity: X=+0.929 Xhid=+0.929 | no parity: X=+0.929 Xhid=+0.929 | allowance 66.0
+u=1 roles=QT ns=(301, 300) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-1.320 | no parity: X=+0.000 Xhid=-1.320 | allowance 66.0
+u=1 roles=QT ns=(301, 300) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-3.818 | no parity: X=+0.000 Xhid=-3.818 | allowance 66.0
+u=1 roles=TT ns=(299, 300) Theta=1.00 n h (hyp Theta: 0) | parity: X=+0.689 Xhid=+0.689 | no parity: X=+0.689 Xhid=+0.689 | allowance 66.0
+u=1 roles=TT ns=(299, 300) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-1.566 | no parity: X=+0.000 Xhid=-1.566 | allowance 66.0
+u=1 roles=TT ns=(299, 300) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-4.075 | no parity: X=+0.000 Xhid=-4.075 | allowance 66.0
+u=2 roles=PQT ns=(80, 80, 80) Theta=1.00 n h (hyp Theta: 0) | parity: X=-7.568 Xhid=-10.664 | no parity: X=-7.593 Xhid=-10.714 | allowance 88.3
+u=2 roles=PQT ns=(80, 80, 80) Theta=1.10 n h (hyp Theta: 0) | parity: X=-7.718 Xhid=-13.053 | no parity: X=-7.743 Xhid=-13.053 | allowance 88.3
+u=2 roles=PQT ns=(80, 80, 80) Theta=1.30 n h (hyp Theta: 0) | parity: X=-7.758 Xhid=-16.201 | no parity: X=-7.782 Xhid=-16.225 | allowance 88.3
+u=2 roles=PTT ns=(60, 100, 120) Theta=1.00 n h (hyp Theta: 0) | parity: X=-5.801 Xhid=-9.690 | no parity: X=-5.837 Xhid=-9.707 | allowance 90.6
+u=2 roles=PTT ns=(60, 100, 120) Theta=1.10 n h (hyp Theta: 0) | parity: X=-5.801 Xhid=-12.983 | no parity: X=-5.837 Xhid=-12.983 | allowance 90.6
+u=2 roles=PTT ns=(60, 100, 120) Theta=1.30 n h (hyp Theta: 0) | parity: X=-5.801 Xhid=-15.535 | no parity: X=-5.837 Xhid=-15.535 | allowance 90.6
+u=2 roles=QTT ns=(81, 99, 100) Theta=1.00 n h (hyp Theta: 0) | parity: X=+0.756 Xhid=+0.756 | no parity: X=+0.756 Xhid=+0.756 | allowance 90.6
+u=2 roles=QTT ns=(81, 99, 100) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.020 Xhid=-0.520 | no parity: X=+0.000 Xhid=-0.520 | allowance 90.6
+u=2 roles=QTT ns=(81, 99, 100) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.020 Xhid=-7.073 | no parity: X=+0.000 Xhid=-7.073 | allowance 90.6
+u=2 roles=TTT ns=(70, 90, 80) Theta=1.00 n h (hyp Theta: 0) | parity: X=+1.410 Xhid=+1.410 | no parity: X=+1.410 Xhid=+1.410 | allowance 88.3
+u=2 roles=TTT ns=(70, 90, 80) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.075 Xhid=-0.256 | no parity: X=+0.000 Xhid=-0.256 | allowance 88.3
+u=2 roles=TTT ns=(70, 90, 80) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.075 Xhid=-5.564 | no parity: X=+0.000 Xhid=-5.586 | allowance 88.3
+u=2 roles=PT ns=(300, 301) Theta=1.00 n h (hyp Theta: 0) | parity: X=-21.017 Xhid=-41.832 | no parity: X=-21.017 Xhid=-41.832 | allowance 68.0
+u=2 roles=PT ns=(300, 301) Theta=1.10 n h (hyp Theta: 0) | parity: X=-23.328 Xhid=-46.297 | no parity: X=-23.328 Xhid=-46.297 | allowance 68.0
+u=2 roles=PT ns=(300, 301) Theta=1.30 n h (hyp Theta: 0) | parity: X=-26.884 Xhid=-52.160 | no parity: X=-26.884 Xhid=-52.160 | allowance 68.0
+u=2 roles=QT ns=(301, 300) Theta=1.00 n h (hyp Theta: 0) | parity: X=+0.567 Xhid=+0.567 | no parity: X=+0.567 Xhid=+0.567 | allowance 68.0
+u=2 roles=QT ns=(301, 300) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-5.587 | no parity: X=+0.000 Xhid=-5.587 | allowance 68.0
+u=2 roles=QT ns=(301, 300) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-15.893 | no parity: X=+0.000 Xhid=-15.893 | allowance 68.0
+u=2 roles=TT ns=(299, 300) Theta=1.00 n h (hyp Theta: 0) | parity: X=+1.702 Xhid=+1.702 | no parity: X=+1.702 Xhid=+1.702 | allowance 68.0
+u=2 roles=TT ns=(299, 300) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-4.471 | no parity: X=+0.000 Xhid=-4.471 | allowance 68.0
+u=2 roles=TT ns=(299, 300) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-16.816 | no parity: X=+0.000 Xhid=-16.816 | allowance 68.0
+u=4 roles=PQT ns=(80, 80, 80) Theta=1.00 n h (hyp Theta: 0) | parity: X=-19.115 Xhid=+nan | no parity: X=-19.140 Xhid=+nan | allowance 94.3
+u=4 roles=PQT ns=(80, 80, 80) Theta=1.10 n h (hyp Theta: 0) | parity: X=-19.115 Xhid=+nan | no parity: X=-19.140 Xhid=+nan | allowance 94.3
+u=4 roles=PQT ns=(80, 80, 80) Theta=1.30 n h (hyp Theta: 0) | parity: X=-19.115 Xhid=+nan | no parity: X=-19.140 Xhid=+nan | allowance 94.3
+u=4 roles=PTT ns=(60, 100, 120) Theta=1.00 n h (hyp Theta: 0) | parity: X=-14.319 Xhid=-29.845 | no parity: X=-14.355 Xhid=-29.861 | allowance 96.6
+u=4 roles=PTT ns=(60, 100, 120) Theta=1.10 n h (hyp Theta: 0) | parity: X=-14.319 Xhid=-35.162 | no parity: X=-14.355 Xhid=-35.162 | allowance 96.6
+u=4 roles=PTT ns=(60, 100, 120) Theta=1.30 n h (hyp Theta: 0) | parity: X=-14.319 Xhid=-49.748 | no parity: X=-14.355 Xhid=-49.764 | allowance 96.6
+u=4 roles=QTT ns=(81, 99, 100) Theta=1.00 n h (hyp Theta: 0) | parity: X=+3.007 Xhid=+3.007 | no parity: X=+3.007 Xhid=+3.007 | allowance 96.6
+u=4 roles=QTT ns=(81, 99, 100) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.020 Xhid=-6.294 | no parity: X=+0.000 Xhid=-6.294 | allowance 96.6
+u=4 roles=QTT ns=(81, 99, 100) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.020 Xhid=-20.896 | no parity: X=+0.000 Xhid=-20.896 | allowance 96.6
+u=4 roles=TTT ns=(70, 90, 80) Theta=1.00 n h (hyp Theta: 0) | parity: X=+2.027 Xhid=+2.027 | no parity: X=+2.027 Xhid=+2.027 | allowance 94.3
+u=4 roles=TTT ns=(70, 90, 80) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.075 Xhid=-4.209 | no parity: X=+0.000 Xhid=-4.231 | allowance 94.3
+u=4 roles=TTT ns=(70, 90, 80) Theta=1.30 n h (hyp Theta: 0) | parity: X=+0.075 Xhid=-16.725 | no parity: X=+0.000 Xhid=-16.747 | allowance 94.3
+u=4 roles=PT ns=(300, 301) Theta=1.00 n h (hyp Theta: 0) | parity: X=-63.074 Xhid=-125.140 | no parity: X=-63.074 Xhid=-125.140 | allowance 72.0
+u=4 roles=PT ns=(300, 301) Theta=1.10 n h (hyp Theta: 0) | parity: X=-68.312 Xhid=-135.999 | no parity: X=-68.312 Xhid=-135.999 | allowance 72.0
+u=4 roles=PT ns=(300, 301) Theta=1.30 n h (hyp Theta: 1) | parity: X=-71.775 Xhid=-143.099 | no parity: X=-71.775 Xhid=-143.099 | allowance 72.0
+u=4 roles=QT ns=(301, 300) Theta=1.00 n h (hyp Theta: 0) | parity: X=+4.991 Xhid=+4.991 | no parity: X=+4.991 Xhid=+4.991 | allowance 72.0
+u=4 roles=QT ns=(301, 300) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-16.630 | no parity: X=+0.000 Xhid=-16.630 | allowance 72.0
+u=4 roles=QT ns=(301, 300) Theta=1.30 n h (hyp Theta: 1) | parity: X=+0.007 Xhid=-52.260 | no parity: X=+0.000 Xhid=-52.260 | allowance 72.0
+u=4 roles=TT ns=(299, 300) Theta=1.00 n h (hyp Theta: 0) | parity: X=+2.341 Xhid=+2.341 | no parity: X=+2.341 Xhid=+2.341 | allowance 72.0
+u=4 roles=TT ns=(299, 300) Theta=1.10 n h (hyp Theta: 0) | parity: X=+0.007 Xhid=-19.328 | no parity: X=+0.000 Xhid=-19.328 | allowance 72.0
+u=4 roles=TT ns=(299, 300) Theta=1.30 n h (hyp Theta: 1) | parity: X=+0.007 Xhid=-50.666 | no parity: X=+0.000 Xhid=-50.666 | allowance 72.0
+group outside finished in 115.3 s; lemma respected in every case of this group: True
+exit 0

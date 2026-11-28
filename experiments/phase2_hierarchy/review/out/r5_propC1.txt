@@ -1,0 +1,15 @@
+C1: 385562 instances, 198711 with y outside W_3; region checks failed: 0; proof bound > 0: 0
+C1: largest value of the proof bound on U_D(y) - r(y) - m_vis, in units of (theta - h) [theta > h] or of h [theta = h]:
+     ('x<=R', 'T not relaxed', 'theta=h')     +0.0000
+     ('x<=R', 'T not relaxed', 'theta>h')     +0.0000
+     ('x<=R', 'T relaxed', 'theta=h')         +0.0000
+     ('x<=R', 'T relaxed', 'theta>h')         -1.0943
+     ('x>R', 'T relaxed', 'theta=h')          -0.0048
+     ('x>R', 'T relaxed', 'theta>h')          -1.2346
+C1: instances with theta > h where the proof bound is within 1e-3 h of 0 (no margin): 9100; examples:
+     bound=+8.99e-17 u=4 theta/h=1.05 R/theta=1.02 roles=['P', 'P', 'T'] phi=[0.091, 0.719, 0.19] y=[0.018, 0.018, 0.5]
+     bound=+1.65e-17 u=1 theta/h=1.5 R/theta=1.04 roles=['P', 'P', 'Q'] phi=[0.351, 0.596, 0.054] y=[0.5, 0.2689, 0.5]
+     bound=+1.02e-17 u=1 theta/h=1.05 R/theta=3.11 roles=['P', 'Q', 'Q'] phi=[0.093, 0.275, 0.632] y=[0.2689, 0.2689, 0.5]
+     bound=+1.60e-17 u=1 theta/h=1.05 R/theta=1.10 roles=['P', 'P', 'Q', 'Q'] phi=[0.318, 0.106, 0.053, 0.522] y=[0.5, 0.5, 0.2689, 0.2689]
+part C1 finished in 33 s
+exit 0

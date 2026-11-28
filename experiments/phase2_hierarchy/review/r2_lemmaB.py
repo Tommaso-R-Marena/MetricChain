@@ -242,7 +242,10 @@ def group_small(us=(1.0, 2.0, 4.0, 8.0)):
 
 
 def scaling(patterns, n_list, us, ratios, parities=(True, False)):
+    """fixed proportions and fixed Theta/(n h), growing n: does X stay bounded (lemma) or grow like n (refutation)?"""
     ok = True
+    gmaxX = -1e300
+    gmaxXh = -1e300
     for u in us:
         c = consts(u)
         for roles, props in patterns:
@@ -257,13 +260,17 @@ def scaling(patterns, n_list, us, ratios, parities=(True, False)):
                             continue
                         L = math.log(sum(ns) + 1.0)
                         Theta = ratio * sum(ns) * c['h'] + 2 * m * L
-                        t0 = time.time()
                         o = extremal(ns, roles, u, Theta, parity=parity)
                         ok = ok and (o['X'] <= o['allow'])
-                        row.append((sum(ns), o['X'], o['Xhidden'], o['allow'], time.time() - t0, tuple(o['ytype']), tuple(ns)))
-                    s = ' | '.join('n=%d X=%+.3f Xhid=%+.3f allow=%.1f' % (r[0], r[1], r[2], r[3]) for r in row)
-                    print('u=%g roles=%s props=%s Theta=%.2f n h+2mL parity=%d :: %s   [argmax y at largest n: %s of %s]'
-                          % (u, roles, props, ratio, parity, s, row[-1][5], row[-1][6]), flush=True)
+                        gmaxX = max(gmaxX, o['X'])
+                        if o['Xhidden'] == o['Xhidden']:
+                            gmaxXh = max(gmaxXh, o['Xhidden'])
+                        row.append((sum(ns), o['X'], o['Xhidden'], o['allow']))
+                    s = ' | '.join('n=%d: %+.3f, %+.2f (%.0f)' % r for r in row)
+                    print('u=%g %s %s Theta=%.2f n h+2mL par=%d :: %s' % (u, roles, tuple(round(p, 3) for p in props), ratio, parity, s), flush=True)
+    print('columns per n:  X, Xhidden (allowance m(u+5L));  X = max_y [nu*(y) - n phi_P h + min{t_T(y), Theta - n(1-phi_P)h}],')
+    print('                Xhidden = max over y with t_T(y) > Theta of [nu*(y) + (Theta - n h)];  the lemma claims both <= allowance')
+    print('largest X in this group: %+.3f; largest Xhidden: %+.3f' % (gmaxX, gmaxXh))
     return ok
 
 
@@ -295,7 +302,8 @@ if __name__ == '__main__':
     elif what == 'scale2':
         pats = [('PT', (0.5, 0.5)), ('QT', (0.5, 0.5)), ('TT', (0.5, 0.5)), ('PT', (0.25, 0.75)), ('PT', (0.75, 0.25)),
                 ('QT', (0.3, 0.7)), ('PQ', (0.5, 0.5))]
-        ok = scaling(pats, [250, 500, 1000, 2000, 4000], [1.0, 4.0], [1.0, 1.15, 1.3, 2.0])
+        us = [float(x) for x in sys.argv[2:]] if len(sys.argv) > 2 else [1.0, 4.0]
+        ok = scaling(pats, [500, 1000, 2000, 4000], us, [1.0, 1.15, 1.3, 2.0], parities=(True,))
     elif what == 'scale3':
         pats = [('PQT', (1 / 3, 1 / 3, 1 / 3)), ('PQT', (0.2, 0.3, 0.5)), ('PTT', (0.3, 0.3, 0.4)), ('QQT', (0.25, 0.25, 0.5)),
                 ('QTT', (0.3, 0.3, 0.4)), ('PPT', (0.2, 0.3, 0.5)), ('TTT', (1 / 3, 1 / 3, 1 / 3))]

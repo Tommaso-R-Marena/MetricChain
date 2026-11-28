@@ -1,0 +1,20 @@
+Algorithm R3P on real cubes (u = 1, 40 runs per line).  z = (mean estimate - A)/standard error.
+  cones    classes (6, 6)       M= 2 | partitions ok True, cells of G2: 2.0 | shells constant in 40 runs, exact there True | max rel. error 0.0e+00 | z = +0.00 | mutation uniform weights |z| = 1.57e+301 | no learning z = -0.90
+  cones    classes (6, 6)       M=12 | partitions ok True, cells of G2: 2.0 | shells constant in 40 runs, exact there True | max rel. error 1.7e-16 | z = +0.00 | mutation uniform weights |z| = 1.57e+301 | no learning z = +0.55
+  cones    classes (4, 3, 5)    M= 2 | partitions ok True, cells of G2: 4.7 | shells constant in 40 runs, exact there True | max rel. error 2.3e-15 | z = +0.00 | mutation uniform weights |z| = 5.97 | no learning z = -2.02
+  cones    classes (4, 3, 5)    M=12 | partitions ok True, cells of G2: 3.1 | shells constant in 40 runs, exact there True | max rel. error 3.9e-16 | z = +0.00 | mutation uniform weights |z| = 12.9 | no learning z = -0.75
+  cones    classes (2, 5, 2, 3) M= 2 | partitions ok True, cells of G2: 6.0 | shells constant in 40 runs, exact there True | max rel. error 3.1e-15 | z = +0.00 | mutation uniform weights |z| = 16 | no learning z = -0.24
+  cones    classes (2, 5, 2, 3) M=12 | partitions ok True, cells of G2: 4.0 | shells constant in 40 runs, exact there True | max rel. error 8.4e-16 | z = +0.00 | mutation uniform weights |z| = 203 | no learning z = -0.05
+  coupled  classes (6, 6)       M= 2 | partitions ok True, cells of G2: 2.4 | shells constant in 40 runs, exact there True | max rel. error 1.0e-15 | z = +0.00 | mutation uniform weights |z| = 11.3 | no learning z = +1.44
+  coupled  classes (6, 6)       M=12 | partitions ok True, cells of G2: 2.1 | shells constant in 40 runs, exact there True | max rel. error 6.9e-16 | z = +0.00 | mutation uniform weights |z| = 25.5 | no learning z = -0.37
+  coupled  classes (4, 3, 5)    M= 2 | partitions ok True, cells of G2: 4.1 | shells constant in 40 runs, exact there True | max rel. error 2.0e-15 | z = +0.00 | mutation uniform weights |z| = 2.41 | no learning z = +0.33
+  coupled  classes (4, 3, 5)    M=12 | partitions ok True, cells of G2: 3.2 | shells constant in 40 runs, exact there True | max rel. error 6.1e-16 | z = +0.00 | mutation uniform weights |z| = 13.3 | no learning z = +0.39
+  coupled  classes (2, 5, 2, 3) M= 2 | partitions ok True, cells of G2: 5.8 | shells constant in 40 runs, exact there True | max rel. error 5.0e-15 | z = +0.00 | mutation uniform weights |z| = 14.6 | no learning z = -0.20
+  coupled  classes (2, 5, 2, 3) M=12 | partitions ok True, cells of G2: 4.1 | shells constant in 40 runs, exact there True | max rel. error 2.9e-16 | z = +0.00 | mutation uniform weights |z| = 1.27e+299 | no learning z = -0.49
+  periodic classes (6, 6)       M= 2 | partitions ok True, cells of G2: 2.0 | shells constant in 40 runs, exact there True | max rel. error 0.0e+00 | z = +0.00 | mutation uniform weights |z| = 1.05e+299 | no learning z = +0.24
+  periodic classes (6, 6)       M=12 | partitions ok True, cells of G2: 2.0 | shells constant in 40 runs, exact there True | max rel. error 0.0e+00 | z = +0.00 | mutation uniform weights |z| = 1.05e+299 | no learning z = -0.56
+  periodic classes (4, 3, 5)    M= 2 | partitions ok True, cells of G2: 2.0 | shells constant in 40 runs, exact there True | max rel. error 1.8e-16 | z = +0.00 | mutation uniform weights |z| = 67.7 | no learning z = +0.60
+  periodic classes (4, 3, 5)    M=12 | partitions ok True, cells of G2: 2.0 | shells constant in 40 runs, exact there True | max rel. error 1.8e-16 | z = +0.00 | mutation uniform weights |z| = 1.1e+299 | no learning z = +1.23
+  periodic classes (2, 5, 2, 3) M= 2 | partitions ok True, cells of G2: 3.6 | shells constant in 40 runs, exact there True | max rel. error 5.8e-16 | z = +0.00 | mutation uniform weights |z| = 17.6 | no learning z = +0.26
+  periodic classes (2, 5, 2, 3) M=12 | partitions ok True, cells of G2: 2.0 | shells constant in 40 runs, exact there True | max rel. error 1.9e-16 | z = +0.00 | mutation uniform weights |z| = 4.81e+16 | no learning z = -1.28
+failures of (a), (b), (c): 0

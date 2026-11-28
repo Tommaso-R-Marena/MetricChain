@@ -1,0 +1,20 @@
+theta = 0.346
+  phiP=0.600  2 blocks: -0.0183 | T split 0.50: -0.0106 at (0.77,0.45,0.45) | T split 0.85: -0.0174 at (0.77,0.58,0.24)
+  phiP=0.654  2 blocks: +0.0001 | T split 0.50: +0.0000 at (0.74,0.42,0.42) | T split 0.85: -0.0001 at (0.81,0.55,0.21)
+  phiP=0.700  2 blocks: -0.0018 | T split 0.50: -0.0021 at (0.83,0.42,0.42) | T split 0.85: -0.0020 at (0.74,0.54,0.24)
+  phiP=0.750  2 blocks: -0.0081 | T split 0.50: -0.0088 at (0.68,0.42,0.42) | T split 0.85: -0.0082 at (0.68,0.55,0.21)
+theta = 0.36
+  phiP=0.600  2 blocks: -0.0353 | T split 0.50: -0.0285 at (0.77,0.45,0.45) | T split 0.85: -0.0358 at (0.77,0.58,0.24)
+  phiP=0.654  2 blocks: -0.0178 | T split 0.50: -0.0113 at (0.81,0.42,0.43) | T split 0.85: -0.0167 at (0.81,0.55,0.24)
+  phiP=0.700  2 blocks: -0.0039 | T split 0.50: -0.0029 at (0.83,0.42,0.43) | T split 0.85: -0.0028 at (0.81,0.55,0.24)
+  phiP=0.750  2 blocks: -0.0121 | T split 0.50: -0.0102 at (0.72,0.42,0.43) | T split 0.85: -0.0101 at (0.73,0.55,0.24)
+theta = 0.38
+  phiP=0.600  2 blocks: -0.0606 | T split 0.50: -0.0553 at (0.77,0.45,0.45) | T split 0.85: -0.0610 at (0.77,0.58,0.24)
+  phiP=0.654  2 blocks: -0.0419 | T split 0.50: -0.0372 at (0.81,0.44,0.44) | T split 0.85: -0.0417 at (0.81,0.57,0.24)
+  phiP=0.700  2 blocks: -0.0271 | T split 0.50: -0.0270 at (0.84,0.44,0.44) | T split 0.85: -0.0273 at (0.84,0.57,0.24)
+  phiP=0.750  2 blocks: -0.0165 | T split 0.50: -0.0166 at (0.87,0.44,0.44) | T split 0.85: -0.0145 at (0.87,0.57,0.24)
+
+Grid refinement (phiP = 0.6, theta = 0.36, T split 0.50 against two blocks; the difference is a discretisation artefact):
+d=0.020  two blocks -0.0354   T split 0.50: -0.0196 at (0.78, 0.44, 0.44)   difference +0.0158
+d=0.010  two blocks -0.0353   T split 0.50: -0.0285 at (0.77, 0.45, 0.45)   difference +0.0068
+d=0.005  two blocks -0.0353   T split 0.50: -0.0329 at (0.78, 0.45, 0.45)   difference +0.0024

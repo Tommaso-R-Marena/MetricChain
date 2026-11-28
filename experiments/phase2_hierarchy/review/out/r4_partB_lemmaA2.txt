@@ -1,0 +1,173 @@
+# Part B: Lemma A2, exact extremal functions (parity version).  H = max hidden nu - nu_1.
+# columns: u phi1 n (n1,n2) Theta/(n h) | H | (A1) bound | (A2) bound (if applicable) | n*min{Xi,phi2 k(y1)} (archive gap formula) | violations
+u=1 phi1=0.300 n=800 (240,560) Theta=1.0000 n h (theta/vartheta=0.891) | H=   +5.342 at (64, 150) | A1:   +64.323 | A2:      +nan | formula:    +5.107 | ok
+u=1 phi1=0.300 n=800 (240,560) Theta=1.1221 n h (theta/vartheta=1.000) | H=   +0.339 at (64, 150) | A1:   +56.532 | A2:      +nan | formula:    +0.001 | ok
+u=1 phi1=0.300 n=800 (240,560) Theta=1.2000 n h (theta/vartheta=1.069) | H=   -2.857 at (64, 150) | A1:   +52.041 | A2:      +nan | formula:    -3.099 | ok
+u=1 phi1=0.300 n=800 (240,560) Theta=1.2221 n h (theta/vartheta=1.089) | H=   -3.630 at (64, 150) | A1:   +50.823 | A2:      +nan | formula:    -3.958 | ok
+u=1 phi1=0.300 n=800 (240,560) Theta=2.0000 n h (theta/vartheta=1.782) | H=  -29.621 at (64, 150) | A1:   +17.221 | A2:      +nan | formula:   -29.976 | ok
+u=1 phi1=0.300 n=800 (240,560) Theta=2.9652 n h (theta/vartheta=2.643) | H=  -54.866 at (64, 143) | A1:   -12.144 | A2:   +14.371 | formula:      +nan | ok
+u=1 phi1=0.300 n=800 (240,560) Theta=3.0000 n h (theta/vartheta=2.674) | H=  -55.943 at (64, 142) | A1:   -13.062 | A2:   +14.366 | formula:      +nan | ok
+u=1 phi1=0.300 n=3200 (960,2240) Theta=1.0000 n h (theta/vartheta=0.891) | H=  +20.669 at (258, 602) | A1:   +86.170 | A2:      +nan | formula:   +20.428 | ok
+u=1 phi1=0.300 n=3200 (960,2240) Theta=1.1221 n h (theta/vartheta=1.000) | H=   +0.187 at (258, 602) | A1:   +63.651 | A2:      +nan | formula:    +0.002 | ok
+u=1 phi1=0.300 n=3200 (960,2240) Theta=1.2000 n h (theta/vartheta=1.069) | H=  -12.185 at (258, 602) | A1:   +50.103 | A2:      +nan | formula:   -12.397 | ok
+u=1 phi1=0.300 n=3200 (960,2240) Theta=1.2221 n h (theta/vartheta=1.089) | H=  -15.553 at (258, 602) | A1:   +46.363 | A2:      +nan | formula:   -15.833 | ok
+u=1 phi1=0.300 n=3200 (960,2240) Theta=2.0000 n h (theta/vartheta=1.782) | H= -119.703 at (258, 602) | A1:   -64.768 | A2:      +nan | formula:  -119.905 | ok
+u=1 phi1=0.300 n=3200 (960,2240) Theta=2.9652 n h (theta/vartheta=2.643) | H= -220.964 at (258, 575) | A1:  -169.811 | A2:   +16.709 | formula:      +nan | ok
+u=1 phi1=0.300 n=3200 (960,2240) Theta=3.0000 n h (theta/vartheta=2.674) | H= -224.662 at (258, 572) | A1:  -173.169 | A2:   +16.560 | formula:      +nan | ok
+u=1 phi1=0.500 n=800 (400,400) Theta=1.0000 n h (theta/vartheta=0.804) | H=   +3.991 at (107, 107) | A1:   +66.125 | A2:      +nan | formula:    +3.748 | ok
+u=1 phi1=0.500 n=800 (400,400) Theta=1.2000 n h (theta/vartheta=0.965) | H=   +1.774 at (107, 107) | A1:   +54.618 | A2:      +nan | formula:    +1.542 | ok
+u=1 phi1=0.500 n=800 (400,400) Theta=1.2437 n h (theta/vartheta=1.000) | H=   +0.364 at (107, 107) | A1:   +52.395 | A2:      +nan | formula:    +0.002 | ok
+u=1 phi1=0.500 n=800 (400,400) Theta=1.3437 n h (theta/vartheta=1.080) | H=   -3.221 at (107, 107) | A1:   +47.602 | A2:      +nan | formula:    -3.408 | ok
+u=1 phi1=0.500 n=800 (400,400) Theta=2.0000 n h (theta/vartheta=1.608) | H=  -22.578 at (107, 105) | A1:   +22.627 | A2:      +nan | formula:      +nan | ok
+u=1 phi1=0.500 n=800 (400,400) Theta=2.2037 n h (theta/vartheta=1.772) | H=  -27.914 at (107, 100) | A1:   +16.333 | A2:   +14.371 | formula:      +nan | ok
+u=1 phi1=0.500 n=800 (400,400) Theta=3.0000 n h (theta/vartheta=2.412) | H=  -48.891 at (107, 85) | A1:    -4.517 | A2:   +12.473 | formula:      +nan | ok
+u=1 phi1=0.500 n=3200 (1600,1600) Theta=1.0000 n h (theta/vartheta=0.804) | H=  +15.182 at (430, 430) | A1:   +99.459 | A2:      +nan | formula:   +14.993 | ok
+u=1 phi1=0.500 n=3200 (1600,1600) Theta=1.2000 n h (theta/vartheta=0.965) | H=   +6.400 at (430, 430) | A1:   +66.261 | A2:      +nan | formula:    +6.170 | ok
+u=1 phi1=0.500 n=3200 (1600,1600) Theta=1.2437 n h (theta/vartheta=1.000) | H=   +0.204 at (430, 430) | A1:   +59.521 | A2:      +nan | formula:    +0.006 | ok
+u=1 phi1=0.500 n=3200 (1600,1600) Theta=1.3437 n h (theta/vartheta=1.080) | H=  -13.401 at (430, 430) | A1:   +44.678 | A2:      +nan | formula:   -13.634 | ok
+u=1 phi1=0.500 n=3200 (1600,1600) Theta=2.0000 n h (theta/vartheta=1.608) | H=  -90.908 at (430, 421) | A1:   -37.948 | A2:   +17.141 | formula:      +nan | ok
+u=1 phi1=0.500 n=3200 (1600,1600) Theta=2.2037 n h (theta/vartheta=1.772) | H= -112.591 at (430, 403) | A1:   -59.824 | A2:   +16.544 | formula:      +nan | ok
+u=1 phi1=0.500 n=3200 (1600,1600) Theta=3.0000 n h (theta/vartheta=2.412) | H= -196.059 at (430, 341) | A1:  -134.292 | A2:    +5.755 | formula:      +nan | ok
+u=1 phi1=0.641 n=800 (513,287) Theta=1.0000 n h (theta/vartheta=0.732) | H=   +0.868 at (138, 77) | A1:   +67.525 | A2:      +nan | formula:    +0.744 | ok
+u=1 phi1=0.641 n=800 (513,287) Theta=1.2000 n h (theta/vartheta=0.878) | H=   +0.222 at (138, 77) | A1:   +56.651 | A2:      +nan | formula:    +0.141 | ok
+u=1 phi1=0.641 n=800 (513,287) Theta=1.3669 n h (theta/vartheta=1.000) | H=   +0.010 at (138, 77) | A1:   +49.089 | A2:      +nan | formula:      +nan | ok
+u=1 phi1=0.641 n=800 (513,287) Theta=1.4669 n h (theta/vartheta=1.073) | H=   -2.770 at (138, 74) | A1:   +45.016 | A2:      +nan | formula:      +nan | ok
+u=1 phi1=0.641 n=800 (513,287) Theta=1.6669 n h (theta/vartheta=1.220) | H=   -8.725 at (138, 70) | A1:   +37.641 | A2:   +14.371 | formula:      +nan | ok
+u=1 phi1=0.641 n=800 (513,287) Theta=2.0000 n h (theta/vartheta=1.463) | H=  -18.106 at (138, 63) | A1:   +27.039 | A2:   +13.852 | formula:      +nan | ok
+u=1 phi1=0.641 n=800 (513,287) Theta=3.0000 n h (theta/vartheta=2.195) | H=  -45.842 at (138, 47) | A1:    +2.603 | A2:    +8.230 | formula:      +nan | ok
+u=1 phi1=0.641 n=3200 (2051,1149) Theta=1.0000 n h (theta/vartheta=0.732) | H=   +3.152 at (551, 309) | A1:  +110.036 | A2:      +nan | formula:    +2.994 | ok
+u=1 phi1=0.641 n=3200 (2051,1149) Theta=1.2000 n h (theta/vartheta=0.878) | H=   +0.648 at (551, 309) | A1:   +79.237 | A2:      +nan | formula:    +0.571 | ok
+u=1 phi1=0.641 n=3200 (2051,1149) Theta=1.3669 n h (theta/vartheta=1.000) | H=   -0.001 at (551, 308) | A1:   +56.277 | A2:      +nan | formula:    +0.000 | ok
+u=1 phi1=0.641 n=3200 (2051,1149) Theta=1.4669 n h (theta/vartheta=1.073) | H=  -11.638 at (551, 299) | A1:   +43.473 | A2:   +17.139 | formula:      +nan | ok
+u=1 phi1=0.641 n=3200 (2051,1149) Theta=1.6669 n h (theta/vartheta=1.220) | H=  -35.107 at (551, 282) | A1:   +19.629 | A2:   +16.327 | formula:      +nan | ok
+u=1 phi1=0.641 n=3200 (2051,1149) Theta=2.0000 n h (theta/vartheta=1.463) | H=  -73.018 at (551, 256) | A1:   -15.897 | A2:   +12.280 | formula:      +nan | ok
+u=1 phi1=0.641 n=3200 (2051,1149) Theta=3.0000 n h (theta/vartheta=2.195) | H= -183.083 at (551, 190) | A1:  -101.791 | A2:   -13.962 | formula:      +nan | ok
+u=1 phi1=0.800 n=800 (640,160) Theta=0.7615 n h (theta/vartheta=1.000) | H=   -0.009 at (172, 42) | A1:   +86.356 | A2:      +nan | formula:      +nan | ok
+u=1 phi1=0.800 n=800 (640,160) Theta=0.8615 n h (theta/vartheta=1.131) | H=   -0.125 at (172, 40) | A1:   +78.144 | A2:      +nan | formula:      +nan | ok
+u=1 phi1=0.800 n=800 (640,160) Theta=1.0000 n h (theta/vartheta=1.313) | H=   -0.547 at (172, 37) | A1:   +69.268 | A2:      +nan | formula:      +nan | ok
+u=1 phi1=0.800 n=800 (640,160) Theta=1.0615 n h (theta/vartheta=1.394) | H=   -0.756 at (172, 36) | A1:   +65.910 | A2:   +14.370 | formula:      +nan | ok
+u=1 phi1=0.800 n=800 (640,160) Theta=1.2000 n h (theta/vartheta=1.576) | H=   -1.600 at (172, 33) | A1:   +59.235 | A2:   +14.190 | formula:      +nan | ok
+u=1 phi1=0.800 n=800 (640,160) Theta=2.0000 n h (theta/vartheta=2.626) | H=  -17.032 at (172, 21) | A1:   +32.935 | A2:    +9.241 | formula:      +nan | ok
+u=1 phi1=0.800 n=800 (640,160) Theta=3.0000 n h (theta/vartheta=3.940) | H=  -45.573 at (172, 11) | A1:   +12.444 | A2:    -2.172 | formula:      +nan | ok
+u=1 phi1=0.800 n=3200 (2560,640) Theta=0.7615 n h (theta/vartheta=1.000) | H=   +0.005 at (688, 172) | A1:  +163.159 | A2:      +nan | formula:      +nan | ok
+u=1 phi1=0.800 n=3200 (2560,640) Theta=0.8615 n h (theta/vartheta=1.131) | H=   -0.393 at (688, 162) | A1:  +145.545 | A2:   +17.136 | formula:      +nan | ok
+u=1 phi1=0.800 n=3200 (2560,640) Theta=1.0000 n h (theta/vartheta=1.313) | H=   -1.779 at (688, 151) | A1:  +123.759 | A2:   +16.412 | formula:      +nan | ok
+u=1 phi1=0.800 n=3200 (2560,640) Theta=1.0615 n h (theta/vartheta=1.394) | H=   -2.752 at (688, 146) | A1:  +114.872 | A2:   +15.748 | formula:      +nan | ok
+u=1 phi1=0.800 n=3200 (2560,640) Theta=1.2000 n h (theta/vartheta=1.576) | H=   -5.367 at (688, 136) | A1:   +96.298 | A2:   +13.601 | formula:      +nan | ok
+u=1 phi1=0.800 n=3200 (2560,640) Theta=2.0000 n h (theta/vartheta=2.626) | H=  -66.086 at (688, 88) | A1:   +14.166 | A2:   -11.105 | formula:      +nan | ok
+u=1 phi1=0.800 n=3200 (2560,640) Theta=3.0000 n h (theta/vartheta=3.940) | H= -182.673 at (688, 45) | A1:   -56.252 | A2:   -59.979 | formula:      +nan | ok
+u=2 phi1=0.300 n=800 (240,560) Theta=1.0000 n h (theta/vartheta=0.893) | H=  +18.744 at (28, 66) | A1:   +75.957 | A2:      +nan | formula:   +17.640 | ok
+u=2 phi1=0.300 n=800 (240,560) Theta=1.1201 n h (theta/vartheta=1.000) | H=   +0.747 at (28, 66) | A1:   +56.367 | A2:      +nan | formula:    +0.007 | ok
+u=2 phi1=0.300 n=800 (240,560) Theta=1.2000 n h (theta/vartheta=1.071) | H=  -10.421 at (28, 66) | A1:   +44.136 | A2:      +nan | formula:   -11.097 | ok
+u=2 phi1=0.300 n=800 (240,560) Theta=1.2201 n h (theta/vartheta=1.089) | H=  -13.158 at (28, 66) | A1:   +41.149 | A2:      +nan | formula:   -13.819 | ok
+u=2 phi1=0.300 n=800 (240,560) Theta=2.0000 n h (theta/vartheta=1.785) | H= -101.981 at (28, 66) | A1:   -54.701 | A2:      +nan | formula:  -102.729 | ok
+u=2 phi1=0.300 n=800 (240,560) Theta=2.6588 n h (theta/vartheta=2.374) | H= -161.207 at (28, 55) | A1:  -115.799 | A2:   +14.801 | formula:      +nan | ok
+u=2 phi1=0.300 n=800 (240,560) Theta=3.0000 n h (theta/vartheta=2.678) | H= -190.265 at (28, 43) | A1:  -142.721 | A2:   +11.710 | formula:      +nan | ok
+u=2 phi1=0.300 n=3200 (960,2240) Theta=1.0000 n h (theta/vartheta=0.893) | H=  +71.205 at (114, 267) | A1:  +138.866 | A2:      +nan | formula:   +70.559 | ok
+u=2 phi1=0.300 n=3200 (960,2240) Theta=1.1201 n h (theta/vartheta=1.000) | H=   +0.669 at (114, 267) | A1:   +66.177 | A2:      +nan | formula:    +0.027 | ok
+u=2 phi1=0.300 n=3200 (960,2240) Theta=1.2000 n h (theta/vartheta=1.071) | H=  -43.762 at (114, 267) | A1:   +20.508 | A2:      +nan | formula:   -44.389 | ok
+u=2 phi1=0.300 n=3200 (960,2240) Theta=1.2201 n h (theta/vartheta=1.089) | H=  -54.626 at (114, 267) | A1:    +9.325 | A2:      +nan | formula:   -55.275 | ok
+u=2 phi1=0.300 n=3200 (960,2240) Theta=2.0000 n h (theta/vartheta=1.785) | H= -410.517 at (114, 267) | A1:  -354.213 | A2:      +nan | formula:  -410.914 | ok
+u=2 phi1=0.300 n=3200 (960,2240) Theta=2.6588 n h (theta/vartheta=2.374) | H= -645.918 at (114, 222) | A1:  -589.025 | A2:   +14.434 | formula:      +nan | ok
+u=2 phi1=0.300 n=3200 (960,2240) Theta=3.0000 n h (theta/vartheta=2.678) | H= -762.997 at (114, 176) | A1:  -692.897 | A2:    +0.296 | formula:      +nan | ok
+u=2 phi1=0.500 n=800 (400,400) Theta=1.0000 n h (theta/vartheta=0.807) | H=  +10.821 at (48, 47) | A1:   +87.312 | A2:      +nan | formula:   +10.292 | ok
+u=2 phi1=0.500 n=800 (400,400) Theta=1.2000 n h (theta/vartheta=0.968) | H=   +4.994 at (48, 47) | A1:   +58.003 | A2:      +nan | formula:    +4.823 | ok
+u=2 phi1=0.500 n=800 (400,400) Theta=1.2399 n h (theta/vartheta=1.000) | H=   +0.645 at (47, 47) | A1:   +52.602 | A2:      +nan | formula:    -0.004 | ok
+u=2 phi1=0.500 n=800 (400,400) Theta=1.3399 n h (theta/vartheta=1.081) | H=  -11.355 at (47, 47) | A1:   +39.619 | A2:      +nan | formula:   -11.809 | ok
+u=2 phi1=0.500 n=800 (400,400) Theta=1.9849 n h (theta/vartheta=1.601) | H=  -76.902 at (47, 36) | A1:   -29.821 | A2:   +14.582 | formula:      +nan | ok
+u=2 phi1=0.500 n=800 (400,400) Theta=2.0000 n h (theta/vartheta=1.613) | H=  -77.905 at (47, 36) | A1:   -31.216 | A2:   +14.470 | formula:      +nan | ok
+u=2 phi1=0.500 n=800 (400,400) Theta=3.0000 n h (theta/vartheta=2.420) | H= -175.302 at (47, 8) | A1:  -107.559 | A2:    -6.982 | formula:      +nan | ok
+u=2 phi1=0.500 n=3200 (1600,1600) Theta=1.0000 n h (theta/vartheta=0.807) | H=  +41.430 at (191, 190) | A1:  +190.340 | A2:      +nan | formula:   +41.166 | ok
+u=2 phi1=0.500 n=3200 (1600,1600) Theta=1.2000 n h (theta/vartheta=0.968) | H=  +19.513 at (190, 190) | A1:   +81.899 | A2:      +nan | formula:   +19.291 | ok
+u=2 phi1=0.500 n=3200 (1600,1600) Theta=1.2399 n h (theta/vartheta=1.000) | H=   +0.564 at (190, 190) | A1:   +61.771 | A2:      +nan | formula:    -0.014 | ok
+u=2 phi1=0.500 n=3200 (1600,1600) Theta=1.3399 n h (theta/vartheta=1.081) | H=  -46.636 at (190, 190) | A1:   +13.226 | A2:      +nan | formula:   -47.236 | ok
+u=2 phi1=0.500 n=3200 (1600,1600) Theta=1.9849 n h (theta/vartheta=1.601) | H= -309.476 at (190, 146) | A1:  -249.336 | A2:   +13.029 | formula:      +nan | ok
+u=2 phi1=0.500 n=3200 (1600,1600) Theta=2.0000 n h (theta/vartheta=1.613) | H= -315.161 at (190, 144) | A1:  -254.646 | A2:   +12.467 | formula:      +nan | ok
+u=2 phi1=0.500 n=3200 (1600,1600) Theta=3.0000 n h (theta/vartheta=2.420) | H= -697.155 at (190, 36) | A1:  -546.588 | A2:   -79.643 | formula:      +nan | ok
+u=2 phi1=0.641 n=800 (513,287) Theta=1.0000 n h (theta/vartheta=0.827) | H=   +1.296 at (62, 34) | A1:   +96.288 | A2:      +nan | formula:    +1.179 | ok
+u=2 phi1=0.641 n=800 (513,287) Theta=1.2000 n h (theta/vartheta=0.992) | H=   +0.022 at (63, 34) | A1:   +69.062 | A2:      +nan | formula:    +0.002 | ok
+u=2 phi1=0.641 n=800 (513,287) Theta=1.2097 n h (theta/vartheta=1.000) | H=   -0.011 at (61, 33) | A1:   +67.837 | A2:      +nan | formula:      +nan | ok
+u=2 phi1=0.641 n=800 (513,287) Theta=1.3097 n h (theta/vartheta=1.083) | H=   -0.250 at (61, 30) | A1:   +55.650 | A2:   +15.366 | formula:      +nan | ok
+u=2 phi1=0.641 n=800 (513,287) Theta=1.5097 n h (theta/vartheta=1.248) | H=  -16.076 at (61, 23) | A1:   +33.404 | A2:   +14.282 | formula:      +nan | ok
+u=2 phi1=0.641 n=800 (513,287) Theta=2.0000 n h (theta/vartheta=1.653) | H=  -69.144 at (61, 9) | A1:   -12.014 | A2:    +4.830 | formula:      +nan | ok
+u=2 phi1=0.641 n=800 (513,287) Theta=3.0000 n h (theta/vartheta=2.480) | H=     +nan at - | A1:   -78.098 | A2:   -21.057 | formula:      +nan | ok
+u=2 phi1=0.641 n=3200 (2051,1149) Theta=1.0000 n h (theta/vartheta=0.827) | H=   +4.851 at (244, 137) | A1:  +231.158 | A2:      +nan | formula:    +4.761 | ok
+u=2 phi1=0.641 n=3200 (2051,1149) Theta=1.2000 n h (theta/vartheta=0.992) | H=   +0.023 at (244, 137) | A1:  +130.966 | A2:      +nan | formula:    +0.010 | ok
+u=2 phi1=0.641 n=3200 (2051,1149) Theta=1.2097 n h (theta/vartheta=1.000) | H=   -0.001 at (245, 136) | A1:  +126.429 | A2:      +nan | formula:    +0.000 | ok
+u=2 phi1=0.641 n=3200 (2051,1149) Theta=1.3097 n h (theta/vartheta=1.083) | H=   -1.040 at (245, 121) | A1:   +81.166 | A2:   +17.608 | formula:      +nan | ok
+u=2 phi1=0.641 n=3200 (2051,1149) Theta=1.5097 n h (theta/vartheta=1.248) | H=  -66.305 at (244, 94) | A1:    -1.965 | A2:   +11.179 | formula:      +nan | ok
+u=2 phi1=0.641 n=3200 (2051,1149) Theta=2.0000 n h (theta/vartheta=1.653) | H= -277.998 at (244, 39) | A1:  -173.192 | A2:   -30.839 | formula:      +nan | ok
+u=2 phi1=0.641 n=3200 (2051,1149) Theta=3.0000 n h (theta/vartheta=2.480) | H=     +nan at - | A1:  -423.897 | A2:  -127.698 | formula:      +nan | ok
+u=2 phi1=0.800 n=800 (640,160) Theta=0.6740 n h (theta/vartheta=1.000) | H=   -0.011 at (76, 18) | A1:  +158.769 | A2:      +nan | formula:      +nan | ok
+u=2 phi1=0.800 n=800 (640,160) Theta=0.7740 n h (theta/vartheta=1.148) | H=   -0.425 at (76, 15) | A1:  +141.148 | A2:   +15.363 | formula:      +nan | ok
+u=2 phi1=0.800 n=800 (640,160) Theta=0.9740 n h (theta/vartheta=1.445) | H=   -4.157 at (76, 8) | A1:  +111.208 | A2:   +13.511 | formula:      +nan | ok
+u=2 phi1=0.800 n=800 (640,160) Theta=1.0000 n h (theta/vartheta=1.484) | H=   -4.157 at (76, 8) | A1:  +107.722 | A2:   +13.056 | formula:      +nan | ok
+u=2 phi1=0.800 n=800 (640,160) Theta=1.2000 n h (theta/vartheta=1.781) | H=  -10.561 at (76, 3) | A1:   +83.319 | A2:    +8.108 | formula:      +nan | ok
+u=2 phi1=0.800 n=800 (640,160) Theta=2.0000 n h (theta/vartheta=2.968) | H=     +nan at - | A1:   +13.619 | A2:    -4.937 | formula:      +nan | ok
+u=2 phi1=0.800 n=800 (640,160) Theta=3.0000 n h (theta/vartheta=4.451) | H=     +nan at - | A1:   -37.327 | A2:    -4.937 | formula:      +nan | ok
+u=2 phi1=0.800 n=3200 (2560,640) Theta=0.6740 n h (theta/vartheta=1.000) | H=   +0.009 at (306, 76) | A1:  +464.802 | A2:      +nan | formula:      +nan | ok
+u=2 phi1=0.800 n=3200 (2560,640) Theta=0.7740 n h (theta/vartheta=1.148) | H=   -1.755 at (305, 61) | A1:  +403.219 | A2:   +17.191 | formula:      +nan | ok
+u=2 phi1=0.800 n=3200 (2560,640) Theta=0.9740 n h (theta/vartheta=1.445) | H=  -14.321 at (305, 36) | A1:  +296.355 | A2:    +6.234 | formula:      +nan | ok
+u=2 phi1=0.800 n=3200 (2560,640) Theta=1.0000 n h (theta/vartheta=1.484) | H=  -16.876 at (305, 33) | A1:  +283.764 | A2:    +4.005 | formula:      +nan | ok
+u=2 phi1=0.800 n=3200 (2560,640) Theta=1.2000 n h (theta/vartheta=1.781) | H=  -41.085 at (305, 14) | A1:  +194.895 | A2:   -18.784 | formula:      +nan | ok
+u=2 phi1=0.800 n=3200 (2560,640) Theta=2.0000 n h (theta/vartheta=2.968) | H=     +nan at - | A1:   -63.532 | A2:   -63.091 | formula:      +nan | ok
+u=2 phi1=0.800 n=3200 (2560,640) Theta=3.0000 n h (theta/vartheta=4.451) | H=     +nan at - | A1:  -252.520 | A2:   -63.091 | formula:      +nan | ok
+u=4 phi1=0.300 n=800 (240,560) Theta=1.0000 n h (theta/vartheta=0.900) | H=  +48.873 at (4, 10) | A1:  +112.831 | A2:      +nan | formula:   +46.793 | ok
+u=4 phi1=0.300 n=800 (240,560) Theta=1.1116 n h (theta/vartheta=1.000) | H=   +1.984 at (4, 10) | A1:   +63.597 | A2:      +nan | formula:    +0.001 | ok
+u=4 phi1=0.300 n=800 (240,560) Theta=1.2000 n h (theta/vartheta=1.080) | H=  -32.676 at (4, 10) | A1:   +27.323 | A2:      +nan | formula:   -34.554 | ok
+u=4 phi1=0.300 n=800 (240,560) Theta=1.2116 n h (theta/vartheta=1.090) | H=  -36.673 at (4, 10) | A1:   +22.727 | A2:      +nan | formula:   -38.936 | ok
+u=4 phi1=0.300 n=800 (240,560) Theta=2.0000 n h (theta/vartheta=1.799) | H= -277.708 at (4, 0) | A1:  -219.728 | A2:   +12.113 | formula:      +nan | ok
+u=4 phi1=0.300 n=800 (240,560) Theta=2.0644 n h (theta/vartheta=1.857) | H=     +nan at - | A1:  -234.403 | A2:    +7.208 | formula:      +nan | ok
+u=4 phi1=0.300 n=800 (240,560) Theta=3.0000 n h (theta/vartheta=2.699) | H=     +nan at - | A1:  -343.255 | A2:    +7.208 | formula:      +nan | ok
+u=4 phi1=0.300 n=3200 (960,2240) Theta=1.0000 n h (theta/vartheta=0.900) | H= +188.760 at (17, 40) | A1:  +264.549 | A2:      +nan | formula:  +187.172 | ok
+u=4 phi1=0.300 n=3200 (960,2240) Theta=1.1116 n h (theta/vartheta=1.000) | H=   +1.950 at (17, 40) | A1:   +74.522 | A2:      +nan | formula:    +0.003 | ok
+u=4 phi1=0.300 n=3200 (960,2240) Theta=1.2000 n h (theta/vartheta=1.080) | H= -136.726 at (17, 40) | A1:   -65.718 | A2:      +nan | formula:  -138.215 | ok
+u=4 phi1=0.300 n=3200 (960,2240) Theta=1.2116 n h (theta/vartheta=1.090) | H= -154.060 at (17, 40) | A1:   -83.497 | A2:      +nan | formula:  -155.743 | ok
+u=4 phi1=0.300 n=3200 (960,2240) Theta=2.0000 n h (theta/vartheta=1.799) | H=-1111.837 at (17, 2) | A1: -1022.319 | A2:    -7.126 | formula:      +nan | ok
+u=4 phi1=0.300 n=3200 (960,2240) Theta=2.0644 n h (theta/vartheta=1.857) | H=     +nan at - | A1: -1078.889 | A2:   -20.513 | formula:      +nan | ok
+u=4 phi1=0.300 n=3200 (960,2240) Theta=3.0000 n h (theta/vartheta=2.699) | H=     +nan at - | A1: -1471.709 | A2:   -20.513 | formula:      +nan | ok
+u=4 phi1=0.500 n=800 (400,400) Theta=1.0000 n h (theta/vartheta=0.819) | H=  +10.609 at (8, 7) | A1:  +145.477 | A2:      +nan | formula:   +10.340 | ok
+u=4 phi1=0.500 n=800 (400,400) Theta=1.2000 n h (theta/vartheta=0.983) | H=   +0.665 at (7, 7) | A1:   +66.772 | A2:      +nan | formula:    +0.575 | ok
+u=4 phi1=0.500 n=800 (400,400) Theta=1.2213 n h (theta/vartheta=1.000) | H=   +0.332 at (8, 7) | A1:   +59.088 | A2:      +nan | formula:    -0.010 | ok
+u=4 phi1=0.500 n=800 (400,400) Theta=1.3213 n h (theta/vartheta=1.082) | H=  -31.975 at (7, 4) | A1:   +24.613 | A2:   +17.260 | formula:      +nan | ok
+u=4 phi1=0.500 n=800 (400,400) Theta=1.5603 n h (theta/vartheta=1.278) | H=     +nan at - | A1:   -48.145 | A2:   +10.112 | formula:      +nan | ok
+u=4 phi1=0.500 n=800 (400,400) Theta=2.0000 n h (theta/vartheta=1.638) | H=     +nan at - | A1:  -151.686 | A2:   +10.112 | formula:      +nan | ok
+u=4 phi1=0.500 n=800 (400,400) Theta=3.0000 n h (theta/vartheta=2.456) | H=     +nan at - | A1:  -235.255 | A2:   +10.112 | formula:      +nan | ok
+u=4 phi1=0.500 n=3200 (1600,1600) Theta=1.0000 n h (theta/vartheta=0.819) | H=  +41.976 at (28, 28) | A1:  +401.765 | A2:      +nan | formula:   +41.359 | ok
+u=4 phi1=0.500 n=3200 (1600,1600) Theta=1.2000 n h (theta/vartheta=0.983) | H=   +2.513 at (31, 28) | A1:   +98.737 | A2:      +nan | formula:    +2.300 | ok
+u=4 phi1=0.500 n=3200 (1600,1600) Theta=1.2213 n h (theta/vartheta=1.000) | H=   +1.168 at (28, 28) | A1:   +69.111 | A2:      +nan | formula:    -0.040 | ok
+u=4 phi1=0.500 n=3200 (1600,1600) Theta=1.3213 n h (theta/vartheta=1.082) | H= -132.438 at (28, 17) | A1:   -63.870 | A2:   +18.444 | formula:      +nan | ok
+u=4 phi1=0.500 n=3200 (1600,1600) Theta=1.5603 n h (theta/vartheta=1.278) | H=     +nan at - | A1:  -344.601 | A2:    -8.897 | formula:      +nan | ok
+u=4 phi1=0.500 n=3200 (1600,1600) Theta=2.0000 n h (theta/vartheta=1.638) | H=     +nan at - | A1:  -742.446 | A2:    -8.897 | formula:      +nan | ok
+u=4 phi1=0.500 n=3200 (1600,1600) Theta=3.0000 n h (theta/vartheta=2.456) | H=     +nan at - | A1: -1039.711 | A2:    -8.897 | formula:      +nan | ok
+u=4 phi1=0.641 n=800 (513,287) Theta=0.9049 n h (theta/vartheta=1.000) | H=   -0.036 at (10, 4) | A1:  +210.344 | A2:      +nan | formula:      +nan | ok
+u=4 phi1=0.641 n=800 (513,287) Theta=1.0000 n h (theta/vartheta=1.105) | H=   -3.475 at (9, 0) | A1:  +170.753 | A2:   +16.490 | formula:      +nan | ok
+u=4 phi1=0.641 n=800 (513,287) Theta=1.0049 n h (theta/vartheta=1.111) | H=   -3.475 at (9, 0) | A1:  +168.803 | A2:   +16.336 | formula:      +nan | ok
+u=4 phi1=0.641 n=800 (513,287) Theta=1.2000 n h (theta/vartheta=1.326) | H=     +nan at - | A1:   +97.494 | A2:   +12.163 | formula:      +nan | ok
+u=4 phi1=0.641 n=800 (513,287) Theta=1.2049 n h (theta/vartheta=1.332) | H=     +nan at - | A1:   +95.849 | A2:   +12.163 | formula:      +nan | ok
+u=4 phi1=0.641 n=800 (513,287) Theta=2.0000 n h (theta/vartheta=2.210) | H=     +nan at - | A1:   -97.912 | A2:   +12.163 | formula:      +nan | ok
+u=4 phi1=0.641 n=800 (513,287) Theta=3.0000 n h (theta/vartheta=3.315) | H=     +nan at - | A1:  -158.981 | A2:   +12.163 | formula:      +nan | ok
+u=4 phi1=0.641 n=3200 (2051,1149) Theta=0.9049 n h (theta/vartheta=1.000) | H=   +0.015 at (36, 20) | A1:  +659.533 | A2:      +nan | formula:    +0.000 | ok
+u=4 phi1=0.641 n=3200 (2051,1149) Theta=1.0000 n h (theta/vartheta=1.105) | H=   -9.428 at (36, 4) | A1:  +507.918 | A2:   +13.127 | formula:      +nan | ok
+u=4 phi1=0.641 n=3200 (2051,1149) Theta=1.0049 n h (theta/vartheta=1.111) | H=  -11.085 at (36, 3) | A1:  +500.444 | A2:   +12.225 | formula:      +nan | ok
+u=4 phi1=0.641 n=3200 (2051,1149) Theta=1.2000 n h (theta/vartheta=1.326) | H=     +nan at - | A1:  +226.672 | A2:    -0.712 | formula:      +nan | ok
+u=4 phi1=0.641 n=3200 (2051,1149) Theta=1.2049 n h (theta/vartheta=1.332) | H=     +nan at - | A1:  +220.351 | A2:    -0.712 | formula:      +nan | ok
+u=4 phi1=0.641 n=3200 (2051,1149) Theta=2.0000 n h (theta/vartheta=2.210) | H=     +nan at - | A1:  -521.666 | A2:    -0.712 | formula:      +nan | ok
+u=4 phi1=0.641 n=3200 (2051,1149) Theta=3.0000 n h (theta/vartheta=3.315) | H=     +nan at - | A1:  -735.287 | A2:    -0.712 | formula:      +nan | ok
+u=4 phi1=0.800 n=800 (640,160) Theta=0.5041 n h (theta/vartheta=1.000) | H=   +0.036 at (55, 2) | A1:  +441.609 | A2:      +nan | formula:    +0.000 | ok
+u=4 phi1=0.800 n=800 (640,160) Theta=0.6041 n h (theta/vartheta=1.198) | H=     +nan at - | A1:  +380.957 | A2:   +15.371 | formula:      +nan | ok
+u=4 phi1=0.800 n=800 (640,160) Theta=0.8041 n h (theta/vartheta=1.595) | H=     +nan at - | A1:  +280.837 | A2:   +14.468 | formula:      +nan | ok
+u=4 phi1=0.800 n=800 (640,160) Theta=1.0000 n h (theta/vartheta=1.984) | H=     +nan at - | A1:  +201.993 | A2:   +14.468 | formula:      +nan | ok
+u=4 phi1=0.800 n=800 (640,160) Theta=1.2000 n h (theta/vartheta=2.380) | H=     +nan at - | A1:  +135.683 | A2:   +14.468 | formula:      +nan | ok
+u=4 phi1=0.800 n=800 (640,160) Theta=2.0000 n h (theta/vartheta=3.967) | H=     +nan at - | A1:   -31.133 | A2:   +14.468 | formula:      +nan | ok
+u=4 phi1=0.800 n=800 (640,160) Theta=3.0000 n h (theta/vartheta=5.951) | H=     +nan at - | A1:   -73.256 | A2:   +14.468 | formula:      +nan | ok
+u=4 phi1=0.800 n=3200 (2560,640) Theta=0.5041 n h (theta/vartheta=1.000) | H=   +0.041 at (222, 11) | A1: +1545.059 | A2:      +nan | formula:    +0.000 | ok
+u=4 phi1=0.800 n=3200 (2560,640) Theta=0.6041 n h (theta/vartheta=1.198) | H=     +nan at - | A1: +1318.324 | A2:    +8.526 | formula:      +nan | ok
+u=4 phi1=0.800 n=3200 (2560,640) Theta=0.8041 n h (theta/vartheta=1.595) | H=     +nan at - | A1:  +940.076 | A2:    +8.526 | formula:      +nan | ok
+u=4 phi1=0.800 n=3200 (2560,640) Theta=1.0000 n h (theta/vartheta=1.984) | H=     +nan at - | A1:  +639.879 | A2:    +8.526 | formula:      +nan | ok
+u=4 phi1=0.800 n=3200 (2560,640) Theta=1.2000 n h (theta/vartheta=2.380) | H=     +nan at - | A1:  +386.546 | A2:    +8.526 | formula:      +nan | ok
+u=4 phi1=0.800 n=3200 (2560,640) Theta=2.0000 n h (theta/vartheta=3.967) | H=     +nan at - | A1:  -247.004 | A2:    +8.526 | formula:      +nan | ok
+u=4 phi1=0.800 n=3200 (2560,640) Theta=3.0000 n h (theta/vartheta=5.951) | H=     +nan at - | A1:  -391.713 | A2:    +8.526 | formula:      +nan | ok
+violations of (A1)/(A2): 0
+part B finished in 336 s
+exit 0
