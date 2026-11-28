@@ -1,0 +1,26 @@
+selftest ns=[5, 6] roles=TP u=0.7 Theta=3.82 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 6] roles=TP u=0.7 Theta=3.82 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[4, 6] roles=QP u=3 Theta=1.93 parity=1: max |LP - shortest path| = 8.88e-16
+selftest ns=[4, 6] roles=QP u=3 Theta=1.93 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 3, 3] roles=TTT u=1.5 Theta=1.65 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 3, 3] roles=TTT u=1.5 Theta=1.65 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[6, 3] roles=PP u=1.5 Theta=0.97 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[6, 3] roles=PP u=1.5 Theta=0.97 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[4, 6] roles=PQ u=0.7 Theta=3.13 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[4, 6] roles=PQ u=0.7 Theta=3.13 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[4, 4] roles=QP u=3 Theta=3.87 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[4, 4] roles=QP u=3 Theta=3.87 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 4] roles=QT u=0.7 Theta=1.06 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 4] roles=QT u=0.7 Theta=1.06 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[6, 4] roles=QP u=0.7 Theta=2.68 parity=1: max |LP - shortest path| = 2.22e-16
+selftest ns=[6, 4] roles=QP u=0.7 Theta=2.68 parity=0: max |LP - shortest path| = 2.22e-16
+selftest ns=[6, 4] roles=QT u=3 Theta=0.64 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[6, 4] roles=QT u=3 Theta=0.64 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 6, 4] roles=QPQ u=1.5 Theta=3.48 parity=1: max |LP - shortest path| = 2.22e-16
+selftest ns=[5, 6, 4] roles=QPQ u=1.5 Theta=3.48 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 6] roles=PQ u=3 Theta=2.28 parity=1: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 6] roles=PQ u=3 Theta=2.28 parity=0: max |LP - shortest path| = 0.00e+00
+selftest ns=[5, 6, 6] roles=PPQ u=3 Theta=2.89 parity=1: max |LP - shortest path| = 2.22e-16
+selftest ns=[5, 6, 6] roles=PPQ u=3 Theta=2.89 parity=0: max |LP - shortest path| = 2.22e-16
+selftest worst deviation 8.88e-16
+group selftest finished in 0.4 s; lemma respected in every case of this group: True

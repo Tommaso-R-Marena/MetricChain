@@ -1,0 +1,10 @@
+u=1 done, cases so far 1116, largest X - allowance so far -39.612
+u=2 done, cases so far 2232, largest X - allowance so far -35.880
+u=4 done, cases so far 3348, largest X - allowance so far -35.880
+u=8 done, cases so far 4464, largest X - allowance so far -35.880
+small group: 4464 cases; largest X - m(u+5L) = -35.880 in case:
+worst    ns=(12, 12)               roles=TT    u=2    Theta=   15.210 (=6.515 n h; n h+2mL=  15.210) hyp[Theta,N_u]=11 | nu0=+0.0e+00 X=  +0.308 at y=(1, 1)             Xhidden=    +nan | allowance m(u+5L)=  36.19 | lip/u=0.077075 | classes 4 of 169
+largest X itself = 0.893 in case:
+maxX     ns=(8, 8, 8, 8)           roles=TTTT  u=4    Theta=   35.628 (=4.654 n h; n h+2mL=  35.628) hyp[Theta,N_u]=11 | nu0=+0.0e+00 X=  +0.893 at y=(1, 1, 1, 1)       Xhidden=    +nan | allowance m(u+5L)=  85.93 | lip/u=0.055786 | classes 16 of 6561
+group small finished in 110.1 s; lemma respected in every case of this group: True
+exit 0
