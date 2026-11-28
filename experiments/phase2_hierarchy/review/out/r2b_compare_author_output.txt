@@ -1,3 +1,36 @@
 author rows parsed: 124
 u=0.5 ns=[36, 162, 162] PQT theta/h=1.00 | author viol=  -0.276 hid=   -0.417 | reviewer (no parity) X=  -0.276 hid=   -0.417 | with parity X=  -0.264
 u=0.5 ns=[72, 144, 144] PQT theta/h=1.10 | author viol=  -0.552 hid=   -1.032 | reviewer (no parity) X=  -0.552 hid=   -1.032 | with parity X=  -0.539
+u=0.5 ns=[144, 108, 108] PQT theta/h=1.30 | author viol=  -1.061 hid=   -2.440 | reviewer (no parity) X=  -1.061 hid=   -2.440 | with parity X=  -0.977
+u=0.5 ns=[108, 18, 234] PQT theta/h=1.00 | author viol=  -0.796 hid=   -1.051 | reviewer (no parity) X=  -0.796 hid=   -1.051 | with parity X=  -0.716
+u=0.5 ns=[120, 120, 120] PTT theta/h=1.10 | author viol=  -0.864 hid=   -1.959 | reviewer (no parity) X=  -0.864 hid=   -1.959 | with parity X=  -0.830
+u=0.5 ns=[120, 120, 120] PPT theta/h=1.30 | author viol=  -1.037 hid=   -2.453 | reviewer (no parity) X=  -1.037 hid=   -2.453 | with parity X=  -1.020
+u=0.5 ns=[120, 120, 120] QTT theta/h=1.00 | author viol=  +0.226 hid=   +0.226 | reviewer (no parity) X=  +0.226 hid=   +0.226 | with parity X=  +0.226
+u=1 ns=[36, 162, 162] PQT theta/h=1.10 | author viol=  -1.049 hid=   -3.846 | reviewer (no parity) X=  -1.049 hid=   -3.846 | with parity X=  -1.037
+u=1 ns=[72, 144, 144] PQT theta/h=1.30 | author viol=  -2.098 hid=   -9.149 | reviewer (no parity) X=  -2.098 hid=   -9.149 | with parity X=  -2.084
+u=1 ns=[216, 36, 108] PQT theta/h=1.00 | author viol=  -3.032 hid=   -5.008 | reviewer (no parity) X=  -3.032 hid=   -5.008 | with parity X=  -3.013
+u=1 ns=[108, 18, 234] PQT theta/h=1.10 | author viol=  -3.115 hid=   -6.478 | reviewer (no parity) X=  -3.115 hid=   -6.478 | with parity X=  -3.107
+u=1 ns=[120, 120, 120] PTT theta/h=1.30 | author viol=  -3.497 hid=  -10.932 | reviewer (no parity) X=  -3.497 hid=  -10.932 | with parity X=  -3.464
+u=1 ns=[120, 120, 120] QQT theta/h=1.00 | author viol=  +0.603 hid=   +0.603 | reviewer (no parity) X=  +0.603 hid=   +0.603 | with parity X=  +0.619
+u=1 ns=[120, 120, 120] QTT theta/h=1.10 | author viol=  +0.000 hid=   -1.397 | reviewer (no parity) X=  +0.000 hid=   -1.397 | with parity X=  +0.033
+u=2 ns=[36, 162, 162] PQT theta/h=1.30 | author viol=  -3.502 hid=  -26.585 | reviewer (no parity) X=  -3.502 hid=  -26.585 | with parity X=  -3.490
+u=2 ns=[144, 108, 108] PQT theta/h=1.00 | author viol= -12.470 hid=  -16.425 | reviewer (no parity) X= -12.470 hid=  -16.425 | with parity X= -12.452
+u=2 ns=[216, 36, 108] PQT theta/h=1.10 | author viol= -13.220 hid=  -25.951 | reviewer (no parity) X= -13.220 hid=  -25.951 | with parity X= -13.202
+u=2 ns=[108, 18, 234] PQT theta/h=1.30 | author viol= -10.506 hid=  -35.827 | reviewer (no parity) X= -10.506 hid=  -35.827 | with parity X= -10.498
+u=2 ns=[120, 120, 120] PPT theta/h=1.00 | author viol=  -9.886 hid=  -20.050 | reviewer (no parity) X=  -9.886 hid=  -20.050 | with parity X=  -9.870
+u=2 ns=[120, 120, 120] QQT theta/h=1.10 | author viol=  +0.000 hid=   -6.533 | reviewer (no parity) X=  +0.000 hid=   -6.533 | with parity X=  +0.017
+u=2 ns=[120, 120, 120] QTT theta/h=1.30 | author viol=  +0.000 hid=  -18.533 | reviewer (no parity) X=  +0.000 hid=  -18.533 | with parity X=  +0.033
+u=4 ns=[36, 162, 162] PQT theta/h=1.00 | author viol=  -8.613 hid=  -16.086 | reviewer (no parity) X=  -8.613 hid=  -16.086 | with parity X=  -8.601
+u=4 ns=[72, 144, 144] PQT theta/h=1.00 | author viol= -17.226 hid=  -35.722 | reviewer (no parity) X= -17.226 hid=  -35.722 | with parity X= -17.212
+u=4 ns=[144, 108, 108] PQT theta/h=1.00 | author viol= -34.309 hid=     -inf | reviewer (no parity) X= -34.309 hid=     -inf | with parity X= -34.291
+u=4 ns=[144, 108, 108] PQT theta/h=1.10 | author viol= -34.452 hid=     -inf | reviewer (no parity) X= -34.452 hid=     -inf | with parity X= -34.434
+u=4 ns=[216, 36, 108] PQT theta/h=1.00 | author viol= -34.988 hid=     -inf | reviewer (no parity) X= -34.988 hid=     -inf | with parity X= -34.916
+u=4 ns=[216, 36, 108] PQT theta/h=1.30 | author viol= -48.666 hid=     -inf | reviewer (no parity) X= -48.666 hid=     -inf | with parity X= -48.648
+u=4 ns=[108, 18, 234] PQT theta/h=1.00 | author viol= -25.839 hid=  -55.416 | reviewer (no parity) X= -25.839 hid=  -55.416 | with parity X= -25.830
+u=4 ns=[120, 120, 120] PTT theta/h=1.00 | author viol= -28.710 hid=  -59.365 | reviewer (no parity) X= -28.710 hid=  -59.365 | with parity X= -28.677
+u=4 ns=[120, 120, 120] PPT theta/h=1.00 | author viol= -31.579 hid=     -inf | reviewer (no parity) X= -31.579 hid=     -inf | with parity X= -31.562
+u=4 ns=[120, 120, 120] PPT theta/h=1.10 | author viol= -38.746 hid=     -inf | reviewer (no parity) X= -38.746 hid=     -inf | with parity X= -38.729
+u=4 ns=[120, 120, 120] QQT theta/h=1.00 | author viol=  +4.952 hid=     -inf | reviewer (no parity) X=  +4.952 hid=     -inf | with parity X=  +4.969
+u=4 ns=[120, 120, 120] QQT theta/h=1.30 | author viol=  +0.000 hid=     -inf | reviewer (no parity) X=  +0.000 hid=     -inf | with parity X=  +0.017
+u=4 ns=[120, 120, 120] QTT theta/h=1.00 | author viol=  +4.952 hid=   +4.952 | reviewer (no parity) X=  +4.952 hid=   +4.952 | with parity X=  +4.969
+u=1 ns=[40, 40, 60, 60] PPQT theta/h=1.00 | author viol=  -1.863 hid=   -1.958 | reviewer (no parity) X=  -1.863 hid=   -1.958 | with parity X=  -1.830
