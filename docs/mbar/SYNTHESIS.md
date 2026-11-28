@@ -1,6 +1,8 @@
 # Division 9 — cross-divisional mathematical synthesis
 
-*Written by the coordinating AI session of Division 9.  Statements of other divisions are imported with
+*Written by the coordinating AI session of Division 9; revised after the internal review
+(`REVIEW_A.md`: S2's proof completed for two states, S4(ii) withdrawn and replaced, three wordings
+weakened, two numbers corrected).  Statements of other divisions are imported with
 their branch, commit and status and are **not re-verified here** unless said; a statement of this note
 that depends on one of them is conditional on it.  Labels as in `MATHEMATICS.md`.  Numerical checks:
 `experiments/mbar/bench/check_synthesis.py` → `results/synthesis_checks.json`.*
@@ -41,14 +43,20 @@ squared sum of the χ-distances of the steps.  Checked on 300 random models (`V/
 
 **Corollary S1′ (tempering ladder on the cube class)** [P; N].  Let `ψ` have oscillation at most `Ω`
 (for a `u`-Lipschitz `ψ` on `{0,1}ⁿ`: `Ω ≤ un`), `K′ = ⌈Ω⌉`, and states `q_j = e^{−(j/K′)ψ}`, `j = 0, …, K′`,
-over any reference.  Each step has density ratio with oscillation at most `e`, hence
-`χ² ≤ (e−1)²/(4e) < 0.272` (Bhatia–Davis), and for the free energy `ln E_π e^{−ψ}`
+over any reference.  For each step the density ratio `p_{j+1}/p_j` has `sup/inf ≤ e` (the oscillation
+of `ψ/K′` is at most 1), hence `χ² ≤ (e−1)²/(4e) < 0.272` (Bhatia–Davis), and for the free energy
+`ln E_π e^{−ψ}`
 
-    V*_c ≤ V_c(uniform on the K′ sampled states) ≤ 0.272 · K′² .
+    V*_c ≤ V_c(uniform on the K′ sampled states j < K′) ≤ 0.272 · K′² .
 
 So with exact samplers of the tempered ensembles, `0.272⌈un⌉²(1.96/ε)²` samples give accuracy `ε`
-asymptotically, and the region of Theorem B2 certifies it; on 27 random Lipschitz energies on cubes of
-8–12 sites the exact `V_c` is 5–14 % of the bound.
+asymptotically; on 27 random Lipschitz energies on cubes of 8–12 sites the exact `V_c` is 5–14 % of
+the bound.  *Certification.*  In this design the target state `K′` is not sampled, and the region of
+Theorem B2 constrains only states that occur as labels: to certify the free energy with B2 the target
+must be sampled as well (uniform allocation on all `K′ + 1` states: the same argument gives
+`V_c ≤ 0.272·K′(K′+1)`), and the width of the region is then 2–3 times the asymptotic one in our
+benchmarks, with no proved bound (`MATHEMATICS.md` §B2).  The fully proved finite-sample statement
+on this class is the elementary one used in S1″.
 
 **Corollary S1″ (a query lower bound for sampling)** [P, conditional on the theory division's Theorem
 11.25, lower bound [V] in its tree, not re-verified here].  Theorem 11.25 states that every randomised
@@ -95,25 +103,30 @@ on block-radial classes, Theorem H1).
 **This division** (Theorems A5, A6, C2; Proposition S2 below).  In the multistate sampling experiment:
 
 1. the best fixed allocation has variance `V*_c(B)`, the squared Elfving gauge of the contrast (A5);
-2. no adaptive strategy, with any number of rounds, beats `V*_c(B)` beyond constants, at every instance
-   (C2): "adaptive = oracle design";
+2. no adaptive strategy, with any number of rounds, beats `V*_c(B)` by more than a universal constant
+   factor, locally at every instance and for budgets above a threshold (C2);
 3. **Proposition S2 (one round)** [P; N].  Over all `K`-state instances, an allocation fixed in advance
    has worst-case efficiency `min_k s_k`; uniform allocation attains the optimum `1/K`.
    *Proof.*  Upper bound: `V(u) ≤ max_k(s*_k/u_k)V(s*) ≤ K·V(s*)` by monotonicity and homogeneity.  Lower
-   bound: the *bridge instance* — `P_a` uniform on a block `A`, `P_b` uniform on `B`, `P_m` uniform on `A ∪ B`,
-   the other states copies of `P_a`: samples of every state except `m` are constant in the energies
-   and carry no information about `f_b − f_a`, so `V(s) = 4/s_m` and the efficiency of `s` is exactly `s_m`;
-   the adversary chooses which state is the bridge.  ∎  (Checked: efficiency `= s_m` to `10⁻¹⁵`.)
+   bound, `K ≥ 3`: the *bridge instance* — `P_a` uniform on a block `A`, `P_b` uniform on `B`, `P_m` uniform
+   on `A ∪ B`, the other states copies of `P_a`: samples of every state except `m` are constant in the
+   energies and carry no information about `f_b − f_a`, so `V(s) = 4/s_m` and the efficiency of `s` is
+   exactly `s_m`; the adversary chooses which state is the bridge.  `K = 2` (the bridge instance needs
+   three states; pointed out by the referee): `P_1` uniform on `A`, `P_2` uniform on `A ∪ B`, contrast
+   `f_2 − f_1`; samples of state 1 are constant in the energies, the efficiency of `s` is exactly `s_2`,
+   and the adversary chooses which of the two states is the larger one.  ∎  (Checked: `K = 3, 4, 6`
+   and the two-state instance, efficiency equal to the stated value to `10⁻⁹` or better.)
 4. two rounds (a pilot and one adapted round) reach `V*_c(B)(1 + o(1))` on every fixed instance
    [C: standard for sequential designs, not proved here; consistent with the benchmark, where the
    two-stage rule matches the oracle allocation within noise in 6 of 8 systems].
 
-So the round hierarchy of the sampling experiment is: **one round loses a factor up to `K`; two rounds
-lose nothing at leading order; more rounds cannot gain** — a multiplicative gap that closes after one
-adaptive round, against an exponential gap in the query model whose closure after three rounds is the
-hierarchy division's open conjecture.  The structural parallel is exact in one respect: in both models
+So the round hierarchy of the sampling experiment is: **one round loses a factor up to `K` (proved);
+no number of rounds gains more than a universal constant factor over the best fixed allocation
+(proved: C2, two-point, local); that a single adaptive round already recovers the optimum at leading
+order is a conjecture supported by the benchmark** — a multiplicative gap, against an exponential gap
+in the query model whose closure after three rounds is the hierarchy division's open conjecture.  The structural parallel is exact in one respect: in both models
 the value of adaptivity is the value of a *hint about the design* (theory: "adaptive = hinted";
-here: "adaptive = oracle allocation"), and in both the lower bound is proved by exhibiting one
+here: "adaptive ≈ oracle allocation", up to a constant), and in both the lower bound is proved by exhibiting one
 perturbation that is hard for every design simultaneously (here: the Elfving dual direction `h°` of
 C2, whose variance per unit cost is small in *every* state).
 
@@ -134,7 +147,7 @@ certificate independent of `Γ`.
 **In the terms of this division** [P; N].  Reference-only sampling of a target ensemble is the
 boundary point `s = e_ref` of Theorem A3: the variance is `∫ρ² dm`, a χ²-type divergence between the
 target and the reference, and on the two-point instance of Theorem 6.1(a) (`π(1) = 1/Γ`, weights
-`1, Γ`) it equals `Γ/16·(1 + o(1))` exactly (computed: `V/Γ = 0.0625` at `Γ ≥ 64`).  Sampling the
+`1, Γ`) it is asymptotic to `Γ/16` (computed: `V/Γ = 0.0635, 0.0627, 0.0626` at `Γ = 64, 256, 1024`).  Sampling the
 target itself gives `Var_p(f) ≤ ¼`; and for the *free energy* of the target relative to the
 reference, reference-only sampling costs `≈ Γ/4` while a ladder of `⌈ln Γ⌉` intermediate ensembles
 costs at most `0.272⌈ln Γ⌉²` (S1′; on this instance the optimal ladder has `V ≤ 1.0` for all `Γ` up to
@@ -160,22 +173,25 @@ measured averages `E_p φ ∈ R`, the identified interval of `E_p f` is `inf_η 
 holds "with no assumption" for any `R` containing the true averages.  (The ensemble division's E17.2
 gives the same interface through support functions; archive `04_ensemble_identifiability`.)
 
-**Proposition S4** [P].  Let `R̂` be a random convex region with `P(E_p φ ∈ R̂) ≥ 1 − α`.  Then the
-interval of Theorem 4.1 computed with `R̂` contains `E_p f` with probability at least `1 − α`.
-Two regions of this division qualify: (i) for `φ` bounded observables of a sampled state, the box of
-the intervals of `MATHEMATICS.md` B6 (levels added up); (ii) for `φ` free-energy differences between
-thermodynamic states (populations of macrostates are of this form, `−log` of a ratio), the
-likelihood-ratio region `C` of B2 itself — convex, with support function
-`h_C(η) = sup_{f∈C} η·f` computed by one convex programme per direction
-(`LRRegion.interval`).
+**Proposition S4** [P].  Let `R̂` be a random convex region *in the space of the averages* with
+`P(E_p φ ∈ R̂) ≥ 1 − α`.  Then the interval of Theorem 4.1 computed with `R̂` contains `E_p f` with
+probability at least `1 − α`.  What this division can supply:
+(i) for `φ` bounded observables of a sampled state, the box of the intervals of `MATHEMATICS.md` B6
+(levels added up);
+(ii) for populations of macrostates or ratios of partition functions, a **box obtained from the region
+`C` of B2 without any union bound**: `C` is simultaneous for all contrasts, so the intervals
+`[inf_C cᵀf, sup_C cᵀf]` for any finite list of contrasts hold jointly at level `α`; exponentiating
+gives a box for the corresponding ratios.
 
 *Proof.*  Soundness of Theorem 4.1(a) on the event `{E_p φ ∈ R̂}`.  ∎
 
-The statement is elementary; its content is the interface: a *simultaneous* region with a computable
-support function is exactly what the dual of Theorem 4.1 consumes, and the region of B2 has both
-properties without a union bound over observables.  Not done: running the certified-inference
-library on such a region (its `core.py` accepts boxes and ellipsoids; a general support function
-would need a small adapter) — proposed in MBAR-MSG-0001.
+*Correction (found by the referee).*  The first version claimed that `C` itself can be passed as the
+data region through its support function `sup_{f∈C} η·f`.  That is wrong as stated: `C` is convex in the
+free energies, i.e. in *minus the logarithms* of ratios of populations; its image in the space of
+averages is not convex in general, and its support function is a support function in the wrong
+coordinates for the dual `T(η) = h_R(η) + max_p E_p[f − η·φ]`.  The box of (ii) is the valid form.  It
+was sent in the wrong form in MBAR-MSG-0001 §4(b) and is corrected in MBAR-MSG-0002.  Not done:
+running the certified-inference library on such a box.
 
 ## S5. Geometric stress certificates and thermodynamic population estimates
 
@@ -208,8 +224,8 @@ the samples; this is a plug-in estimate on one data set, not a demonstrated savi
 |---|---|---|
 | S1, S1′ | path/thermodynamic-length bound for MBAR; polynomial certified free energies on the cube class given ladder samplers | [P], [N] |
 | S1″ | sampling the tempering ladder needs `e^{nh}` evaluations | [P], conditional on Theorem 11.25 |
-| S2 | round hierarchy of allocation: `1/K`, then nothing; contrast with the query model | (1)–(3) [P]; (4) [C] |
+| S2 | round hierarchy of allocation: `1/K` for one round; at most a constant factor for any number of rounds; contrast with the query model | (1)–(3) [P]; (4) [C] |
 | S3 | the envelope-ratio cost is a χ²; paths give `(ln Γ)²` | [P], [N]; composition [V] |
-| S4 | regions with support functions as data regions | [P], elementary; not run |
+| S4 | simultaneous boxes from the region of B2 as data regions (first form withdrawn) | [P], elementary; not run |
 | S5 | intervals for second moments and populations | interface only |
 | S6 | allocation for observables | theory [P]; one plug-in example |

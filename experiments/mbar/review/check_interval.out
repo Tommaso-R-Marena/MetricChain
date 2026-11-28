@@ -1,0 +1,4 @@
+{'datasets': 216, 'ok': 101, 'abstain': 109, 'reject': 0, 'intervals': 541, 'crashes': 6, 'narrow': 0, 'truth_bad': 0, 'nonfinite': 18}
+crash messages: {'LinAlgError: Singular matrix': ('disc', 4, 6, 0.0, 20)}
+elapsed 1218.1
+exit 0

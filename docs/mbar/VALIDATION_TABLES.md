@@ -35,7 +35,8 @@ Median plug-in regret `ρ` of LR8 and median time per region (seconds):
 | harmonic K = 2, spacing 1.0, n = 1000 | 0.37 | 0.020 | 0.003 | 0.0029 |
 | harmonic K = 10, spacing 0.25, n = 500 | 6.30 | 0.224 | 0.049 | 0.0209 |
 
-Rerun with the corrected interval code (`certificates_coverage_v2.json`, same seeds): largest change of coverage, finite count or median width of LR8/LR2 over the 11 regimes: 0.00e+00.
+This table is from the run with the final code (`certificates_coverage_v3.json`) when that file exists.  Earlier runs with the same seeds: `certificates_coverage.json` (first code), `certificates_coverage_v2.json` (after the two corrections of the interval code, `DEAD_ENDS.md` E7).
+Against the run 'after E7': largest change of coverage, of the finite count, or relative change of the median width, over all regimes and the methods LR8, LR2, C1, C2, ASY: 0.0e+00.
 
 ## T2. Allocation: mean-square error relative to equal counts, 2000 replicates
 *Pilot fraction 0.2; budget = 3000 × mean cost; every method ends with MBAR on all its samples.  Cells: MSE ratio to UNIFORM [bootstrap 95 % interval].  'predicted' = population variance ratio of the oracle design (uses ground truth).  All ratios of a row share one UNIFORM estimate.*
@@ -106,6 +107,8 @@ Allocations (mean final counts) and overhead:
 | dirichlet1 | [1.0, 1.0, 1.0, 1.0] | [2032.87, 52.87, 68.61, 845.65] | [1634.4, 300.0, 300.0, 765.6] | 0.386 | 0.008 | 0 | 0.0348 | 0.0290 | +0.0001 |
 | dirichlet2 | [1.0, 1.0, 1.0, 1.0] | [1535.92, 398.05, 272.38, 793.64] | [1343.7, 478.9, 409.7, 767.6] | 0.812 | 0.088 | 0 | 0.0294 | 0.0279 | +0.0005 |
 
+*Robustness tables T5-T7: parts none are from the rerun with the final code (same seeds); the first run is kept in `results/robustness.log`.*
+
 ## T5. Experiment A: every round, adaptive allocation, halting on the interval width
 *12 rounds of 400 samples; allocation of each round from the plug-in design of the earlier rounds; region recomputed every round; halt when the interval of the contrast is below the target width.*
 
@@ -145,18 +148,18 @@ Allocations (mean final counts) and overhead:
 
 | treatment | samples | max diff. to PyMBAR | region | regret | pair | estimate | asymptotic se | LR interval (all 26 states) | width / asymptotic | sub-ladder states | sub-ladder interval | width / asymptotic | model check log e |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| all_snapshots | 13026 | 5.2e-08 | OK | 59.3 | [0, 1] | 5.720 | 0.107 | [4.28, 7.25] | 7.09 | 3 | [5.26, 6.20] | 2.24 | -1434.4 |
-| all_snapshots | 13026 | 5.2e-08 | OK | 59.3 | [12, 13] | -2.027 | 0.106 | [-3.47, -0.56] | 7.02 | 2 | [-2.54, -1.60] | 2.27 | -1434.4 |
-| all_snapshots | 13026 | 5.2e-08 | OK | 59.3 | [0, 6] | 3.858 | 0.246 | [0.71, 6.79] | 6.32 | 8 | [1.56, 5.48] | 4.07 | -1434.4 |
-| all_snapshots | 13026 | 5.2e-08 | OK | 59.3 | [0, 13] | 13.067 | 0.269 | [9.82, 16.42] | 6.26 | 13 | [10.20, 16.77] | 6.22 | -1434.4 |
-| subsampled_by_g | 7443 | 3.7e-11 | OK | 31.6 | [0, 1] | 5.671 | 0.121 | [4.50, 6.98] | 5.25 | 3 | [5.24, 6.26] | 2.16 | -739.7 |
-| subsampled_by_g | 7443 | 3.7e-11 | OK | 31.6 | [12, 13] | -1.964 | 0.131 | [-3.32, -0.62] | 5.25 | 2 | [-2.48, -1.51] | 1.89 | -739.7 |
-| subsampled_by_g | 7443 | 3.7e-11 | OK | 31.6 | [0, 6] | 3.892 | 0.374 | [0.23, 7.04] | 4.65 | 8 | [1.07, 6.17] | 3.48 | -739.7 |
-| subsampled_by_g | 7443 | 3.7e-11 | OK | 31.6 | [0, 13] | 13.078 | 0.426 | [9.19, 16.94] | 4.64 | 13 | [9.30, 17.14] | 4.69 | -739.7 |
-| every_10th | 1326 | 3.9e-07 | OK | 42.6 | [0, 1] | 5.671 | 0.345 | [1.32, 9.43] | 6.00 | 3 | [3.86, 7.01] | 2.33 | -104.4 |
-| every_10th | 1326 | 3.9e-07 | OK | 42.6 | [12, 13] | -1.779 | 0.328 | [-5.64, 2.01] | 5.95 | 2 | [-2.95, -0.70] | 1.75 | -104.4 |
-| every_10th | 1326 | 3.9e-07 | OK | 42.6 | [0, 6] | 4.445 | 0.797 | [-4.92, 11.84] | 5.36 | 8 | [-2.03, 8.54] | 3.38 | -104.4 |
-| every_10th | 1326 | 3.9e-07 | OK | 42.6 | [0, 13] | 13.827 | 0.866 | [4.75, 23.12] | 5.41 | 13 | [6.14, 22.90] | 4.94 | -104.4 |
+| all_snapshots | 13026 | 2.6e-09 | OK | 59.3 | [0, 1] | 5.720 | 0.107 | [4.28, 7.25] | 7.09 | 3 | [5.26, 6.20] | 2.24 | -1434.4 |
+| all_snapshots | 13026 | 2.6e-09 | OK | 59.3 | [12, 13] | -2.027 | 0.106 | [-3.47, -0.56] | 7.02 | 2 | [-2.54, -1.60] | 2.27 | -1434.4 |
+| all_snapshots | 13026 | 2.6e-09 | OK | 59.3 | [0, 6] | 3.858 | 0.246 | [0.71, 6.79] | 6.32 | 8 | [1.56, 5.48] | 4.07 | -1434.4 |
+| all_snapshots | 13026 | 2.6e-09 | OK | 59.3 | [0, 13] | 13.067 | 0.269 | [9.82, 16.42] | 6.26 | 13 | [10.20, 16.77] | 6.22 | -1434.4 |
+| subsampled_by_g | 7443 | 1.2e-13 | OK | 31.6 | [0, 1] | 5.671 | 0.121 | [4.50, 6.98] | 5.25 | 3 | [5.24, 6.26] | 2.16 | -739.7 |
+| subsampled_by_g | 7443 | 1.2e-13 | OK | 31.6 | [12, 13] | -1.964 | 0.131 | [-3.32, -0.62] | 5.25 | 2 | [-2.48, -1.51] | 1.89 | -739.7 |
+| subsampled_by_g | 7443 | 1.2e-13 | OK | 31.6 | [0, 6] | 3.892 | 0.374 | [0.23, 7.04] | 4.65 | 8 | [1.07, 6.17] | 3.48 | -739.7 |
+| subsampled_by_g | 7443 | 1.2e-13 | OK | 31.6 | [0, 13] | 13.078 | 0.426 | [9.19, 16.94] | 4.64 | 13 | [9.30, 17.14] | 4.69 | -739.7 |
+| every_10th | 1326 | 1.1e-09 | OK | 42.6 | [0, 1] | 5.671 | 0.345 | [1.32, 9.43] | 6.00 | 3 | [3.86, 7.01] | 2.33 | -104.4 |
+| every_10th | 1326 | 1.1e-09 | OK | 42.6 | [12, 13] | -1.779 | 0.328 | [-5.64, 2.01] | 5.95 | 2 | [-2.95, -0.70] | 1.75 | -104.4 |
+| every_10th | 1326 | 1.1e-09 | OK | 42.6 | [0, 6] | 4.445 | 0.797 | [-4.92, 11.84] | 5.36 | 8 | [-2.03, 8.54] | 3.38 | -104.4 |
+| every_10th | 1326 | 1.1e-09 | OK | 42.6 | [0, 13] | 13.827 | 0.866 | [4.75, 23.12] | 5.41 | 13 | [6.14, 22.90] | 4.94 | -104.4 |
 
 Design diagnostic (plug-in estimates, not certificates) for `F(trans, |chi|>150) - F(gauche-, -90<chi<-30) in the unbiased ensemble`: estimate -1.823; standard error at the actual allocation 0.381, at the plug-in optimum 0.232 (variance ratio 0.370); efficiency bound of the actual allocation 0.069; umbrellas carrying the plug-in optimum (centre in degrees, fraction): -150: 0.170, -120: 0.168, -135: 0.165, -90: 0.150, -165: 0.098, -110: 0.087.
 

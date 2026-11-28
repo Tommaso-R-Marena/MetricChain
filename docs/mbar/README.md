@@ -46,7 +46,7 @@ Python 3.13, NumPy 2.5.3, SciPy 1.18.1, CVXPY 1.9.3 (tests of the conic identiti
 ```bash
 export OPENBLAS_NUM_THREADS=1
 python experiments/mbar/tests/test_population.py            # ~2 min   allocation theory, exact
-python experiments/mbar/tests/test_certificates.py          # ~1 min   estimators and certificates
+python experiments/mbar/tests/test_certificates.py          # ~2 min   estimators and certificates, incl. equivariance under energy offsets
 python experiments/mbar/bench/check_lower_bounds_and_chains.py   # ~2 min
 python experiments/mbar/bench/check_synthesis.py                 # ~1 min
 python experiments/mbar/bench/bench_certificates.py --trials 200 # ~25 min on 3 cores
@@ -71,7 +71,10 @@ set of the MBAR objective, justified by a new e-value identity for stratified sa
 times wider than the usual asymptotic interval for up to ten states, 1.4–8 times narrower than the
 handoff's certificates, and it comes with a model check that detects a sampler that disagrees with
 its neighbours.  (3) Finite-sample lower bounds at every instance, and a proof that adaptive
-allocation cannot beat the optimal fixed allocation.  The limits are stated as plainly: everything
+allocation cannot beat the optimal fixed allocation by more than a constant factor.  An internal
+adversarial review found no false theorem but one serious defect in the first version of the solver
+(wrong free energies, without warning, when the states' energies differ by tens of kT) and several
+overstatements; all are corrected and documented (`REVIEW_A.md`).  The limits are stated as plainly: everything
 assumes independent equilibrium samples; consistent trapping is undetectable from samples (a
 theorem); nothing is certified for Markov-chain data without an assumed mixing rate; and nothing here
 has been tested on a real sampler.

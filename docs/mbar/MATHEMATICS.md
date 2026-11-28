@@ -1,7 +1,9 @@
 # Division 9 — mathematics of certified multistate free-energy estimation
 
-*Written by the coordinating AI session of Division 9 (branch `research/phase2-certified-mbar`).
-Status of every statement is given by a label: **[V]** machine-checked in Lean 4 for finite supports
+*Written by the coordinating AI session of Division 9 (branch `research/phase2-certified-mbar`);
+revised after the internal adversarial review (`docs/mbar/REVIEW_A.md`: no false theorem or wrong
+constant was found; one boundedness criterion, several hypotheses and several wordings were corrected,
+all marked in that file).  Status of every statement is given by a label: **[V]** machine-checked in Lean 4 for finite supports
 (declaration named; file under `experiments/mbar/lean/MBAR/`), **[P]** paper proof given here,
 **[K]** known (cited), **[X]** external theorem assumed with its statement, **[N]** numerical check
 (script named), **[C]** conjecture or unproved claim.  Internal review: `docs/mbar/REVIEW_A.md`.
@@ -43,7 +45,7 @@ statements below are statements about this experiment (§C4).
 | B5 | model check: a rejection certifies inconsistency with equilibrium sampling | [P]; [N] |
 | B7 | what no certificate can do: consistent trapping; estimated mixing | [P]; [N] |
 | handoff D1, D2 | D1 verified ([V] cores); D2 read, not reconstructed | §C0 |
-| C1–C2 | finite-sample two-point bound `≍ √(V_c/N)` at every instance; adaptive allocation cannot beat the optimal static allocation | [P]; [V] cores; chain rule and Pinsker [X]; [N] |
+| C1–C2 | finite-sample two-point bound of order `√(V_c/N)` at every instance; no adaptive allocation strategy beats the optimal static allocation by more than a universal constant factor (two-point, local, for budgets above a threshold) | [P]; [V] cores; chain rule and Pinsker [X]; [N] |
 
 ---
 
@@ -130,7 +132,8 @@ covered by the sampled ones in the `χ²` sense of (b); this is MBAR with unsamp
 
 *Proof.*  (a) A supremum of functions that are affine, continuous and nonincreasing in `s`; degree `−1`
 by the substitution `h → h/a`.  The radial limit is the continuity of a closed convex function along a
-segment into the interior of its domain [K: Rockafellar, *Convex Analysis*, Cor. 7.5.1].
+segment into the interior of its domain [K: Rockafellar, *Convex Analysis*, Cor. 7.5.1]; here it is also
+elementary, since `V_ν` is nonincreasing and lower semicontinuous.
 (b), (c) If `ν` charges a set where `m = 0`, or `ρ ∉ L²(m)`, take `h` concentrated accordingly: since
 `Q(s,h) ≤ ∫h² dm`, the supremum is `≥ sup_h 2∫ρh dm − ∫h² dm = ∫ρ² dm`.  Otherwise write
 `Q(s,h) = ⟨h, (I − T)h⟩_{L²(m)}` with `Th = Σ_{k∈A} π_k E_k h`, a self-adjoint Markov operator of finite
@@ -149,7 +152,7 @@ sit on the boundary (§A6), so (c) is the formula to use.
 
 ## A4. Precision is concave and superadditive
 
-**Theorem A4** [P; V].  On `{0 < V_ν < ∞}`, `I_ν(s) := 1/V_ν(s) = inf { Q(s, h) : ℓ_ν(h) = 1 }`.  Hence
+**Theorem A4** [P; V on the open orthant, for contrasts, in multiplicative form].  On `{0 < V_ν < ∞}`, `I_ν(s) := 1/V_ν(s) = inf { Q(s, h) : ℓ_ν(h) = 1 }`.  Hence
 `I_ν` is concave, positively homogeneous of degree 1, nondecreasing, and superadditive:
 `I_ν(s + t) ≥ I_ν(s) + I_ν(t)`.  In particular `V(γs + (1−γ)t) ≤ [γ/V(s) + (1−γ)/V(t)]^{−1}`.
 
@@ -195,8 +198,12 @@ state-wise influence functions.  Gill–Vardi–Wellner posed the design questio
 
 ## A6. Equivalence theorem and a certified efficiency bound
 
-**Theorem A6** [P; V for (i),(ii); N].  Let `V_ν(s) < ∞`, `h_s` its dual maximiser, and suppose `h_s` is
-defined `P_k`-a.s. for every `k` (e.g. all states have the same support); `g_k = Var_k(h_s)`.
+**Theorem A6** [P; V for (i), (ii) on the open orthant and for contrasts; N].  Let `V_ν(s) < ∞`, `h_s` a
+dual maximiser — unique up to an additive constant on the support of each overlap component of the
+sampled states — and suppose `h_s` is defined `P_k`-a.s. for every `k` (e.g. all states have the same
+support); `g_k = Var_k(h_s)`.  When the sampled states form several components, `g_k` of an unsampled
+state that straddles components depends on the choice of the constants; (i) and (ii) hold for every
+choice (`population.state_variances` takes the pseudo-inverse choice).
 (i) *Efficiency bound.*  `V*_ν(B)/V_ν(s) ≥ [V_ν(s)/B] / max_k (g_k/a_k)` for every `s ∈ 𝒮_B`.
 (ii) *Sufficiency.*  If `g_k/a_k ≤ V_ν(s)/B` for all `k`, then `s` is optimal in `𝒮_B`.
 (iii) *Necessity (finite support).*  If `s` is optimal there is a dual maximiser `h` of `Φ(s,·)` with
@@ -205,12 +212,15 @@ With lower bounds `s ≥ s^{lo}`: `V*/V(s) ≥ 2 − [g·s^{lo} + (B − a·s^{l
 
 *Proof.*  (i) Insert `h_s` in the second expression of A5: `ℓ_ν(h_s) = V_ν(s)`.  (ii) from (i).
 (iii) In finite support the outer supremum of A5 is attained (the objective is invariant under
-adding functions constant on the union of supports and coercive modulo those); with A5 this gives a saddle point `(s, h)`: `h` maximises `Φ(s,·)` and `s` minimises
+adding functions that are constant on each overlap component of all the states, and coercive modulo
+those); with A5 this gives a saddle point `(s, h)`: `h` maximises `Φ(s,·)` and `s` minimises
 `Φ(·,h)` over `𝒮_B`, which is the stated condition; equality on the support by Euler's identity
 `Σ_k s_k g_k = V`.  The bound with lower bounds is convexity plus Euler:
 `V(t) ≥ V(s) − g·(t − s) = 2V(s) − g·t`.  ∎
 
-Lean: `Model.efficiency_bound`, `Model.equivalence_sufficient`.
+Lean: `Model.efficiency_bound`, `Model.equivalence_sufficient` — both for strictly positive
+allocations `s`, `t` and for contrasts; the boundary cases, where optimal designs often sit, are
+covered by the paper proof only.
 
 (i) is a certificate computable at *any* allocation: **uniform allocation loses at most the factor
 `mean_k g_k / max_k g_k`** (unit costs).  From pilot data it is an estimate, not a certificate.
@@ -272,7 +282,10 @@ samples in weak overlap the plug-in sees no overlap and the procedure falls back
 For targets `ν_1, …, ν_M`: `Σ_i w_i V_{ν_i}` (`w ≥ 0`) and `max_i V_{ν_i}` are convex in `s` (A3a).  For
 the sum the analogue of A6 holds with `g_k = Σ_i w_i Var_k(h_{s,i})` (same proof; `Σ_i w_i V_{ν_i}` is
 again a supremum of affine functions, over tuples `(h_i)`).  For the maximum,
-`min_s max_i V_{ν_i}(s) = max_{w ∈ Δ} min_s Σ_i w_i V_{ν_i}(s)` [Sion, X].  Implemented (`objective="sum"`,
+`min_s max_i V_{ν_i}(s) = max_{w ∈ Δ} min_s Σ_i w_i V_{ν_i}(s)`: on `{s ≥ ε}` (`ε > 0` small) all `V_{ν_i}`
+are finite and continuous and Sion's theorem [X] applies; as `ε ↓ 0` both sides converge by A3(a)
+(monotone limits of lower semicontinuous functions on compact sets).  On the closed set itself the
+function `(s, w) ↦ Σ_i w_iV_{ν_i}(s)` takes the value `+∞` and Sion's theorem cannot be applied directly.  Implemented (`objective="sum"`,
 `"max"`); the max criterion by a damped subgradient iteration without a certificate.
 
 ## A11. Correlated sampling: convexity fails for MBAR
@@ -282,9 +295,12 @@ Let state `k` be sampled by a stationary Markov chain with invariant law `P_k`, 
 asymptotically linear with the same influence functions as in the independent case [K: Li et al.
 2023], so `N·Var → V^{corr}_c(s) = Σ_k Γ_k(r*_k(s))/s_k`.
 
-**Counterexample A11** [N].  `V^{corr}_c` need not be convex in `s`.  With reversible chains on 4–7
-points whose mixing differs between states, 768 of 3000 random segments violate midpoint-type
-convexity, the worst by 35 % (`bench/check_lower_bounds_and_chains.py`; the worst instance is stored in
+**Counterexample A11** [N; reproduced independently by the referee].  `V^{corr}_c` need not be convex in
+`s`.  With reversible chains on 4–7 points whose mixing differs between states, 768 of 3000 random
+segments (random end points and a random interior weight) violate convexity; in the worst, the value
+at the interior point exceeds the chord by 55 % of the chord (35 % of the value itself): values
+399.65 and 126.76 at the ends, 298.58 at weight 0.241, chord 192.55
+(`bench/check_lower_bounds_and_chains.py`; the instance is stored in
 `results/lower_bounds_and_chains.json` with its transition matrices).  The reason is visible in A1:
 MBAR minimises `Σ_k Var_k(r_k)/s_k`, not `Σ_k Γ_k(r_k)/s_k`; it is the wrong minimiser for the
 correlated objective and the perspective argument does not apply to it.
@@ -292,9 +308,12 @@ correlated objective and the perspective argument does not apply to it.
 ## A12. Correlated sampling: what remains true
 
 **Proposition A12** [P; N].
-(a) *Optimally weighted value.*  `W_c(s) := min_{r∈F_c} Σ_k Γ_k(r_k)/s_k` is convex in `s`, satisfies
-`W_c ≤ V^{corr}_c`, and A5–A8 hold for it with `‖r_k‖² := Γ_k(r_k)` (the proofs use only that the
-state-wise forms are nonnegative quadratic forms).  It is the variance bound for estimators that are
+(a) *Optimally weighted value.*  `W_c(s) := min_{r∈F_c} Σ_k Γ_k(r_k)/s_k` is convex in `s` and satisfies
+`W_c ≤ V^{corr}_c`.  The primal statements carry over verbatim with `‖r_k‖² := Γ_k(r_k)`: the group-norm
+expression of A5, the monotone step A7 and the rounding bound A8 (their proofs use only that the
+state-wise forms are nonnegative quadratic forms).  The dual statements (the second expression of A5,
+the equivalence theorem A6) hold with `Var_k(h)` replaced by the *dual* quadratic forms of the `Γ_k`,
+which is not a renaming; they are not written out here.  It is the variance bound for estimators that are
 asymptotically linear with influence functions in `F_c`; an estimator attaining it would need the
 operators `Γ_k`, and none is proposed here.
 (b) *Scalar inefficiency.*  If `Γ_k = g_k Var_k` on the relevant functions, MBAR applied with weights
@@ -353,7 +372,7 @@ need population quantities, and its two observable certificates are far from the
 
 ## B1. The stratified likelihood-ratio e-value
 
-**Theorem B1** [P; V].  Let `λ : X → [0,1]^K` be measurable with `Σ_k λ_k ≤ 1` (a *label predictor*) and
+**Theorem B1** [P; V for the inequality].  Let `λ : X → [0,1]^K` be measurable with `Σ_k λ_k ≤ 1` (a *label predictor*) and
 `w ∈ [0,1]^K` with `Σ_k w_k ≤ 1` (a *tilt*), both independent of the sample, `m_w = Σ_j w_j p_j`.  Under
 stratified sampling with `s_k = n_k/N`,
 
@@ -369,8 +388,12 @@ the weighted inequality of arithmetic and geometric means `Π_k b_k^{n_k} = (Π_
 In the special case `b_k = a_k/s_k` with `Σ a_k = 1`.  ∎
 
 Lean (finite support): `Model.expect_stat`, `Model.prod_pow_le_one`, `Model.stratified_evalue`,
-`Model.lr_family_evalue`.  Numerics: exact enumeration of all samples on 286 small models
-(`E ≤ 0.9999998` for arbitrary predictors and tilts; the identity to `3·10⁻¹⁵`).
+`Model.lr_family_evalue` (the inequality; the identity `exp(−N·KL(s‖a))` is a paper computation).
+Numerics: exact enumeration of all samples on 116 small models in the unit test
+(`tests/test_certificates.py`: largest expectation `0.9999992`, identity to `2·10⁻¹⁵`), and by the
+referee on 333 further models with predictors and tilts optimised adversarially (supremum `1.0000000`;
+with proportions in the statistic that differ from the batch's, the expectation is
+`exp(N·KL(s‖s′)) > 1`: the weights in `π` must be the batch's own proportions).
 
 *Remarks.*  With random labels (mixture sampling) the likelihood ratio is an ordinary conditional
 likelihood ratio and the statement is universal inference [K: Wasserman–Ramdas–Balakrishnan 2020].
@@ -387,23 +410,31 @@ For batch `b` let `f′_b` be any estimate computed from batches `< b`, and
 
     Φ_b(f) = Σ_{n ∈ b} [ log Σ_j β^b_j e^{f_j} q_j(x_n) − f_{y_n} ] .
 
-**Theorem B2** [P; V for one batch and fixed `f′`, finite support].  For any set `E` of batches,
+**Theorem B2** [P; V for one batch and fixed `f′`, finite support].  Let `E` be a set of batches fixed in
+advance (more generally: whether batch `b` belongs to `E` may depend on the batches before `b` only —
+not on batch `b` itself or on later ones; a set chosen after looking at the batches' own statistics
+breaks the statement: the referee's enumeration gives expectations 1.31, 1.52, 1.11 for three such
+choices).  Then
 
     C = { f :  Σ_{b∈E} Φ_b(f)  ≤  log(1/α) + Σ_{b∈E} Φ_b(f′_b) }
 
 satisfies `P(f* ∈ C) ≥ 1 − α` at every sample size, for every `K`, with no condition on the energies.
 `C` is convex and invariant under `f → f + const`; for every contrast, `[inf_C cᵀf, sup_C cᵀf]` is a
-confidence interval, simultaneously over all contrasts.  `C` is bounded modulo constants iff the
-directed support graph of the evaluated samples (handoff E1) is strongly connected; otherwise some
-intervals are infinite.
+confidence interval, simultaneously over all contrasts.  `C` is bounded modulo constants iff the *batchwise* directed support graph is strongly
+connected — an edge `i → j` whenever some evaluated draw of state `i` lies in a batch that contains
+state `j` and has `q_j > 0` there; otherwise some intervals are infinite.  (For batches that all contain
+all states this is the graph of handoff E1.  A state absent from a batch does not enter that batch's
+`Φ_b`: two batches each made of a single state give `C = ` everything, whatever the supports — a
+correction of the first version of this statement, found by the referee; the code always used the
+batchwise graph.)
 
 *Proof.*  `exp(Φ_b(f*) − Φ_b(f′_b)) = Π_{n∈b} π^{β^b}_{y_n}(f′_b)/π^{β^b}_{y_n}(f*)` (the terms `log β_y q_y(x)` cancel).
 Conditionally on the earlier batches this is the statistic of B1 with `s = β^b`, so its conditional
 expectation is `≤ 1`; by the tower property the product over `b ∈ E` has expectation `≤ 1`, and Markov's
 inequality gives `P(Σ_b[Φ_b(f*) − Φ_b(f′_b)] > log(1/α)) ≤ α`.  Convexity: each `Φ_b` is a sum of
 log-sum-exp functions minus a linear function.  Boundedness: the recession function of `Σ_bΦ_b` is
-`h ↦ Σ_n [max_{j: q_j(x_n)>0} h_j − h_{y_n}]`, which vanishes on a nonconstant `h` iff the graph is not
-strongly connected.  ∎
+`h ↦ Σ_n [max_{j: β^{b(n)}_j q_j(x_n)>0} h_j − h_{y_n}]`, which vanishes on a nonconstant `h` iff the batchwise
+graph is not strongly connected.  ∎
 
 Lean: `Model.markov_finite`, `Model.lr_region_coverage`.  Implementation: `certificates.lr_confidence_region`
 (default: 8 batches, the first used only for training); the interval of a contrast is obtained from
@@ -412,8 +443,15 @@ tolerance.  Two points of the implementation are part of its validity: a profile
 unconverged inner minimisation is an *upper* bound of the true minimum and would shrink the interval,
 so such a point is counted as inside the region; and a batch is left out only for a reason that
 depends on *earlier* batches (its plug-in cannot be computed) — if the plug-in gives probability zero
-to an observed label of the batch itself, the batch's e-value is 0 and the code abstains.  Floating
-point is not certified.
+to an observed label of the batch itself, the batch's e-value is 0 and the code abstains.  The rounds
+passed to the code must be disjoint index sets (cumulative prefixes re-use samples on which the
+plug-in was fitted: the referee measured 10.3 % non-coverage at nominal 5 %; the code now refuses
+them).  An empty region (`REJECT_MODEL`) is an event of probability at most `α` under the model and is
+part of the non-coverage budget; it is declared only when the minimisation of `Φ` is verified, and
+otherwise the code abstains (`ABSTAIN_NUMERICS`).  By default the batches follow the order in which
+the samples of each state are given; for independent samples any order fixed without looking at the
+values is equally valid, and an order chosen after looking at them is not.  Floating point is not
+certified.
 
 **Proposition B2′ (restriction to a sub-ladder)** [P].  Let `S` be a set of states chosen without
 reference to the samples.  The samples of the states of `S`, with the energies of those states only,
@@ -423,12 +461,15 @@ levels `α_1 + … + α_m ≤ α`, the intersection of the resulting intervals o
 `α`.  (`certificates.restricted_interval`.)  The restriction discards the samples of the other states;
 it pays when the contrast is local (adjacent states of a long ladder) and not otherwise (§B8, O3).
 
-*Size.*  With `f̂` the minimiser of `Φ = Σ_bΦ_b` and `H` its Hessian there, the region is to second order
+*Size* [N; not a theorem].  What is proved about `C` is its coverage.  Its width is described here by a
+second-order expansion with no proved bound on the regret, and supported by the benchmark only.  With
+`f̂` the minimiser of `Φ = Σ_bΦ_b` and `H` its Hessian there, the region is to second order
 the ellipsoid `(f − f̂)ᵀH(f − f̂) ≤ 2(log(1/α) + ρ)`, `ρ = Σ_bΦ_b(f′_b) − Φ(f̂)` (the "regret" of the
 plug-ins; typically of order `(K−1)` times a logarithmic factor; it can be negative).  The half-width
 for a contrast is `≈ √(2(log(1/α) + ρ)·cᵀH^+c)`, and `N_E·cᵀH^+c` is the *observed* effective resistance
-of the contrast.  So the interval has the rate `√(R_c/N)` of the lower bound (C1), uses the full
-Laplacian (cycles included, no path sums), and is contrast-specific.  Measured
+of the contrast.  So the interval scales like `√(R_c/N)` — to be compared with the lower bound
+`√(V_c/N)` of C1, `R_c ≥ V_c` (§B4) — uses the full Laplacian (cycles included, no path sums), and is
+contrast-specific.  Measured
 (`results/certificates_coverage.json`, 11 regimes × 200 repetitions): coverage 100 %, always finite,
 width 2.0–3.1 times the width of the asymptotic interval `±1.96·se`, and 1.4–8.3 times narrower than
 C1 and C2 of the handoff where those are finite.
@@ -484,7 +525,11 @@ the best MBAR classifier chosen in hindsight*.  A violation is a finite-sample-v
 *Proof.*  The left side is `min_f log Π λ/π(f) ≤ log Π λ/π(f*)`, the logarithm of the supermartingale of
 B1/B3 with `w = β^b`.  ∎
 
-Implementation: `certificates.classifier_evalue`.  It detects samplers that disagree *with each other*
+Implementation: `certificates.classifier_evalue`; the statistic is issued only if the minimisation over
+`f` is verified (otherwise no rejection is possible).  In the first version of the code that
+minimisation could stop at its starting point when the states' energies differ by tens of kT, and the
+check then rejected correct models (the referee's finding E1, `REVIEW_A.md`; corrected, with a
+regression test under offsets up to 1000 kT).  It detects samplers that disagree *with each other*
 through their overlap (one state trapped in a basin that its neighbours visit); it has no power
 against failures that are consistent across states (B7).
 
@@ -565,15 +610,18 @@ two-point inequality.  ∎
 Lean: `Model.tilt_sum_one`, `Model.chisq_tilt`, `Model.chisq_budget`, `log_one_add_le`,
 `log_one_add_ge`, `kl_le_chisq`, `le_cam`, `Model.ell_zfun`.  Numerics
 (`bench/check_lower_bounds_and_chains.py`): on 300 random models the exact divergence is at most
-`0.31·(16/9)τ²` and the exact separation is within 5 % of `τ√(V/N)`.
+`0.31·(16/9)τ²` and the exact separation is within 5 % of `τ√(V/N)`; the referee, at the smallest admitted
+`N = N₀` on 8766 cases: density within `[¾, 5/4]`, divergence at most `0.42·(16/9)τ²`, separation at least
+1.88 times the bound used, `max D/R_c = 1.000` for pair contrasts.
 
-This is the finite-sample form of the local asymptotic minimax bound of the biased sampling model
-[K: Gill–Vardi–Wellner 1988 state the convolution theorem and note that the minimax statement
-follows].  It is *local*: the two instances are at distance `O(N^{−1/2})`.  It does not answer the
+This is a finite-sample two-point bound *of the order of* the local asymptotic minimax bound of the
+biased sampling model [K: Gill–Vardi–Wellner 1988 state the convolution theorem and note that the
+minimax statement follows]; its constants (`⅛`, probability 0.26) are not sharp.  It is *local*: the
+two instances are at distance `O(N^{−1/2})`.  It does not answer the
 question, left open in Micaletto 2026, of a minimax bound over all estimators uniformly over a
 *fixed* class of pairs of distributions.
 
-## C2. Adaptive allocation cannot beat the optimal static allocation
+## C2. Adaptive allocation cannot beat the optimal static allocation by more than a constant factor
 
 A *strategy* chooses the state of each draw from the earlier draws and internal randomness, with
 total cost `Σ_t a_{k_t} ≤ B` almost surely, and then outputs an estimate.
@@ -594,20 +642,28 @@ C1, `KL(p_k‖p_{k,t}) ≤ χ²(p_k‖p_{k,t}) = E_k[(tH − u_k)²/((1+u_k)(1+t
 least-favourable direction of the *design problem*: it has small variance, relative to cost, in every
 state simultaneously.  Separation `≥ t|ℓ_c(h°)|/2 = (τ/2)|ℓ_c(h°)|/√(BM°) ≥ (τ/2)√((1−η)V*(B))`.  ∎
 
-Lean: the inequality `Σ_k n_k Var_k(h) ≤ B·G` for every allocation of cost `B` is inside
-`Model.efficiency_bound`.  Numerics: over random allocations the accumulated information never
-exceeds `B·M°` (ratio `≤ 1.000000`).
+Lean: `Model.Q_le_budget` (`Σ_k t_k Var_k(h) ≤ B·G` for every allocation `t ≥ 0` of cost `B`, any `h`).
+Numerics: over random allocations the accumulated information never exceeds `B·M°` (ratio
+`≤ 1.000000`).
 
-So adaptivity in the choice of states is worth nothing beyond learning the static optimum: in this
-experiment "adaptive = oracle design" at the level of the leading constant.  The same conclusion is
-known for adaptive treatment assignment [K: Armstrong 2022] and for active estimation in bandit
-models; we did not find it for the biased sampling model.
+*What this does and does not say.*  For budgets above the threshold implied by the two side
+conditions (`B ≥ B₀(h°)`; in infinite support `D°` may grow as `η → 0`, so for a fixed budget the bound
+is available down to some `η(B)` only), every strategy errs by at least `(τ/4)√((1−η)V*(B))` with
+probability at least `½(1 − 0.943τ)` at one of two instances at distance `O(B^{−1/2})`: for `τ = ½`, one
+eighth of `√V*(B)` with probability 0.26.  So **adaptivity in the choice of states cannot gain more
+than a universal constant factor over the optimal static allocation, locally at every instance.**  It
+is *not* shown that adaptivity gains nothing at the level of the leading constant; that would need a
+local asymptotic minimax theorem (Hájek–Le Cam, van Trees) for adaptive designs, which is not given
+here [C].  The corresponding conclusion is known for adaptive treatment assignment [K: Armstrong
+2022] and for active estimation in bandit models; we did not find it for the biased sampling model.
 
 ## C3. Upper bounds that match
 
-The handoff's B4 has leading term `√(2V_c log(6M/α)/N)`: with C1, the rate `√(V_c/N)` is the finite-sample
-minimax rate at every instance once `N/R ≳ d·log K` (B4's threshold).  The region of B2 is observable
-and has the rate `√(R_c/N)`; `R_c/V_c → 1` in weak overlap.  Not settled: the constant in the certified
+The handoff's B4 has leading term `√(2V_c log(6M/α)/N)`; its remainder `√R_c κ B` is below the leading
+term only when `N ≳ (R_c/V_c)·R·d·log²(K/α)` (the smaller threshold `N/R ≳ d log K` is the one under which
+B4 *applies*).  In that range, with C1, `√(V_c/N)` is the finite-sample minimax rate at every instance.
+The region of B2 is observable; its width is not bounded by a theorem (§B2, *Size*) and in the
+expansion and the benchmark scales like `√(R_c/N)`, with `R_c/V_c → 1` in weak overlap.  Not settled: the constant in the certified
 interval (ratio 2–3 to the asymptotic interval), the regime `N ≲ R_c` (both bounds degenerate; D1's
 saturation), and growing `K` (the regret term of B2 and the dimension term of B4 grow with `K`; C1
 does not see `K`).
@@ -624,7 +680,7 @@ does not see `K`).
    limits of *estimation from equilibrium samples*, not of computation.
 3. *Query complexity of MetricChain.*  There the algorithm chooses evaluation points and no sampler is
    given; the costs are exponential in the number of sites and adaptivity changes the exponent.  Here
-   samplers are given and adaptivity changes nothing at leading order.  The two statements are about
+   samplers are given and adaptivity changes the cost by at most a constant factor.  The two statements are about
    different experiments; `docs/mbar/SYNTHESIS.md` states what connects them.
 
 ---

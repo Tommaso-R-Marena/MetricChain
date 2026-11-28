@@ -1,0 +1,13 @@
+rep 14: offsets [-25.6   6.4 -26.8  26.5]
+   returned f - f[0] = [0. 0. 0. 0.]   correct = [ 0.   31.89 -1.3  51.93]   max error 51.9
+   info: converged=True iterations=1 grad=5.148e-01 decrement=-1.998e+15 step=6.053e+15
+   objective at returned f = 24.930267; at the correct f = 4.159217  (difference 20.7711 per sample, 8308.4 in total)
+rep 19: offsets [-24.7  53.8 -25.   -7. ]
+   returned f - f[0] = [0. 0. 0. 0.]   correct = [ 0.   78.52 -0.27 17.76]   max error 78.5
+   info: converged=True iterations=1 grad=3.700e-01 decrement=-2.002e+15 step=6.005e+15
+   objective at returned f = 23.404702; at the correct f = -0.023933  (difference 23.4286 per sample, 9371.5 in total)
+rep 23: offsets [-29.7 -11.   38.6   5.8]
+   returned f - f[0] = [0. 0. 0. 0.]   correct = [ 0.   18.61 68.27 35.44]   max error 68.3
+   info: converged=True iterations=1 grad=7.500e-01 decrement=-6.071e+14 step=1.822e+15
+   objective at returned f = 26.917622; at the correct f = -1.659390  (difference 28.5770 per sample, 11430.8 in total)
+offset scale 30, K=4, n=100 per state, strong overlap: mbar returned a wrong estimate with converged=True in 93 of 400 data sets

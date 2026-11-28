@@ -1,0 +1,8 @@
+offset | mbar: ok / wrong-but-'converged' / exception | region statuses | false REJECT | phi_min excess>1e-6 | intervals: total / too narrow (max shortfall) / truth wrongly excluded / infinite
+   0.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+   3.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+  10.0 | 55 / 1 (max err 40.2) / 4 | {'ABSTAIN_NO_DATA': 4, 'OK': 56} | 0 | 1 (max 2.9e+03) | 112 / 0 (max 0 of the width) / 0 / 2
+  20.0 | 27 / 19 (max err 80.4) / 14 | {'ABSTAIN_NO_DATA': 11, 'OK': 44, 'ABSTAIN_SUPPORT': 5} | 0 | 17 (max 5.97e+03) | 88 / 0 (max 0 of the width) / 0 / 26
+  30.0 | 13 / 19 (max err 94.6) / 28 | {'ABSTAIN_NO_DATA': 24, 'OK': 28, 'ABSTAIN_SUPPORT': 6, 'EXC LinAlgError': 2} | 0 | 15 (max 6.46e+03) | 56 / 0 (max 0 of the width) / 0 / 22
+  50.0 | 6 / 21 (max err 169) / 33 | {'ABSTAIN_NO_DATA': 31, 'OK': 20, 'EXC LinAlgError': 3, 'ABSTAIN_SUPPORT': 6} | 0 | 14 (max 6.74e+03) | 40 / 0 (max 0 of the width) / 0 / 23
+ 100.0 | 0 / 12 (max err 338) / 48 | {'ABSTAIN_NO_DATA': 46, 'OK': 9, 'ABSTAIN_SUPPORT': 4, 'EXC LinAlgError': 1} | 0 | 9 (max 1.83e+04) | 18 / 0 (max 0 of the width) / 0 / 15

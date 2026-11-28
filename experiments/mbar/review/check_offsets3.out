@@ -1,0 +1,7 @@
+offset | classifier_evalue: rejections at alpha=0.05 (of which info['converged']=True) | lr_confidence_region with a correct plug-in: statuses, truth excluded
+   0.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+   5.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+  10.0 | 21/200 (7) | {'OK': 179, 'ABSTAIN_SUPPORT': 14, 'REJECT_MODEL': 7}, truth excluded or region declared empty: 7/200
+  20.0 | 96/200 (54) | {'OK': 73, 'ABSTAIN_SUPPORT': 42, 'REJECT_MODEL': 54, 'clf EXC LinAlgError': 31, 'region EXC LinAlgError': 31}, truth excluded or region declared empty: 54/200
+  30.0 | 87/200 (50) | {'OK': 26, 'clf EXC LinAlgError': 87, 'region EXC LinAlgError': 87, 'REJECT_MODEL': 50, 'ABSTAIN_SUPPORT': 37}, truth excluded or region declared empty: 50/200
+  50.0 | 44/200 (27) | {'OK': 12, 'clf EXC LinAlgError': 144, 'region EXC LinAlgError': 144, 'ABSTAIN_SUPPORT': 17, 'REJECT_MODEL': 27}, truth excluded or region declared empty: 27/200

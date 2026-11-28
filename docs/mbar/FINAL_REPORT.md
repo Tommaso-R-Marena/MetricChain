@@ -28,9 +28,19 @@ of the directive.  Every statement was produced and reviewed by AI sessions only
   for up to ten states, 1.4–8.3 times narrower than the handoff's certificates.  It abstains by
   construction when supports do not connect, and it comes with a model check that detects a sampler
   inconsistent with its neighbours.
-* **Limits of information.**  A finite-sample bound of order `√(V_c/N)` at every instance, and a proof
-  that adaptive allocation cannot beat the optimal fixed allocation: adaptivity is worth exactly the
-  knowledge of the design.
+* **Limits of information.**  A finite-sample two-point bound of order `√(V_c/N)` at every instance,
+  and a proof that no adaptive allocation strategy beats the optimal fixed allocation by more than a
+  universal constant factor (locally, for budgets above a threshold): adaptivity is worth, up to a
+  constant, the knowledge of the design.  That it is worth nothing more at the level of the leading
+  constant is not proved.
+* **The internal review changed the work.**  An adversarial AI referee with its own code found no
+  false theorem and no wrong constant, but one serious defect in our code — the solver could report
+  convergence at its starting point on data whose energies differ by tens of kT between states, giving
+  silently wrong free energies and false rejections outside the range of our benchmarks — plus one
+  statement false as written, an interface claim that was wrong, several overclaims and six loose
+  numbers.  All are corrected and recorded (`REVIEW_A.md`, `DEAD_ENDS.md` E6–E14); the solver was
+  rewritten, and the benchmarks were re-run or regression-checked with the final code
+  (`VALIDATION.md` §7).  The corrected documents were not refereed again.
 * **What it does not do.**  Everything assumes independent equilibrium samples.  Consistent trapping is
   undetectable from samples (a theorem here), an estimated correlation time is not a certificate
   (shown), the region is 5–7 times wider than the asymptotic interval at 26 states, and no experiment
@@ -57,9 +67,9 @@ by the region of Theorem B2.  Handoff D2 was read and not reconstructed.
 | restriction to a sub-ladder | B2′ | [P] | elementary |
 | impossibility under consistent trapping; thinning under β-mixing | B7 | [P] | elementary / known lemma |
 | finite-sample two-point bound at every instance | C1 | [P], cores [V], [N] | asymptotic local minimax is known (Gill–Vardi–Wellner); finite-sample form not found |
-| adaptive allocation cannot beat the static optimum | C2 | [P], [N] | known in other models (treatment assignment, bandits); not found for this model |
+| no adaptive allocation beats the static optimum by more than a constant factor (two-point, local) | C2 | [P], [N]; leading-constant version [C] | known in other models (treatment assignment, bandits); not found for this model |
 | path / thermodynamic-length bound; ladder on the cube class; sampling lower bound | S1, S1′, S1″ | [P]; S1″ conditional on theory's Theorem 11.25 | thermodynamic length is a known heuristic; the non-asymptotic bound for MBAR was not found |
-| round hierarchy of allocation (`1/K`, then nothing) | S2 | [P]; two-round optimality [C] | not found |
+| round hierarchy of allocation (`1/K` for one round; at most a constant factor for any number) | S2 | [P]; two-round optimality [C] | not found |
 
 "Not found" means not found in one bounded search by an AI subagent, with several primary sources not
 opened (listed in `PRIOR_ART.md` §4).  The honest summary: **the allocation theory is the
@@ -71,18 +81,21 @@ usable.
 ## 3. Lean formalisations and verification logs
 
 `experiments/mbar/lean/` — standalone Lake project, Lean 4.31.0, Mathlib `fabf563a` (the programme's
-pins).  Four modules, 49 headline declarations, only `propext`, `Classical.choice`, `Quot.sound`;
+pins).  Four modules, 50 headline declarations, only `propext`, `Classical.choice`, `Quot.sound`;
 `audit.sh` (token scan, build without warnings, axiom audit) passes; logs in `lean/logs/`.
 Correspondence with the paper statements, and the list of what is *not* formalised (existence of the
 Laplacian solution, measure theory, Sion, Ville, Pinsker, the chain rule, every imported
 concentration inequality): `LEAN_CORRESPONDENCE.md`.  Formalised by calculus rather than assumed: the
-sharp third-moment bound of handoff B1 (`Softmax.kappa_ge`, `Softmax.curvature_integrated`).
+sharp third-moment bound of handoff B1 (`Softmax.kappa_ge`, `Softmax.curvature_integrated`).  The
+formal statements of the allocation theory are for strictly positive allocations and for contrasts;
+the boundary cases, where optimal designs often sit, are paper proofs.
 
 ## 4. Reproducible implementation and benchmarks
 
-`experiments/mbar/src/d9mbar/` (about 870 lines), tests, benchmark scripts, stored results, generated
+`experiments/mbar/src/d9mbar/` (about 1000 lines), tests, benchmark scripts, stored results, generated
 tables; commands in `README.md`.  The handoff's reference implementation is kept unchanged and is run
-as a baseline.  The solver agrees with PyMBAR to `10⁻¹³`.
+as a baseline.  The solver agrees with PyMBAR to `10⁻¹³` and, after its rewrite in response to the
+review, is exactly equivariant under energy offsets up to 1000 kT per state (tested).
 
 ## 5. Genuine pilot-based allocation evidence
 
@@ -102,6 +115,9 @@ made beyond these synthetic systems.
 
 `DEAD_ENDS.md` (N1–N17, E1–E5).  The ones that matter most:
 
+0. The first version of our own solver was wrong outside the range we had tested (review finding E1);
+   it is corrected and tested, but the episode shows what our benchmarks did not cover: real data
+   with large energy offsets were represented by one public data set only.
 1. No guarantee without independent equilibrium samples; consistent trapping is undetectable (B7).
 2. The certified region pays for `K`: 5–7 times the asymptotic width at 26 states (public data).
 3. Under correlated sampling MBAR's variance is not convex in the allocation (counterexample stored).
@@ -128,12 +144,14 @@ on the programme's cube class a tempering ladder makes the certified free energy
 samples, so (conditionally on the theory division's Theorem 11.25) producing those samples costs
 `e^{nh}` evaluations: *the exponent of the query model is a cost of sampling, not of estimation*, and
 it complements the foundations division's Theorem E (samples of the target alone leave an exponent).
-(S2) The round hierarchy of allocation is `1/K` for one round and nothing afterwards, against an
-exponential hierarchy in the query model; in both, adaptivity is worth a hint about the design.
+(S2) The round hierarchy of allocation is `1/K` for one round and at most a universal constant factor
+for any number of rounds, against an exponential hierarchy in the query model; in both, adaptivity is
+worth a hint about the design.
 (S3) The envelope-ratio cost `Γ` of the certified-inference division is a χ²-divergence between the
-sampled and the target law; a path replaces it by `(ln Γ)²`.  Interfaces only: confidence regions as
-data regions for partial identification (S4); intervals for second moments and populations as inputs
-to the geometric criteria (S5).
+sampled and the target law; a path replaces it by `(ln Γ)²`.  Interfaces only: simultaneous boxes
+from our region as data regions for partial identification (S4; a first, stronger form of this claim
+was wrong and is withdrawn — MBAR-MSG-0002); intervals for second moments and populations as inputs to
+the geometric criteria (S5).
 
 ## 8. Publication candidates and outstanding obstacles
 

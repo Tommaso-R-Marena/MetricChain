@@ -24,6 +24,7 @@ open MBAR MBAR.Model
 #print axioms MBAR.Model.V_convex_of_solutions
 #print axioms MBAR.Model.cs_form
 #print axioms MBAR.Model.precision_superadditive
+#print axioms MBAR.Model.Q_le_budget
 #print axioms MBAR.Model.efficiency_bound
 #print axioms MBAR.Model.equivalence_sufficient
 #print axioms MBAR.Model.rounding_bound

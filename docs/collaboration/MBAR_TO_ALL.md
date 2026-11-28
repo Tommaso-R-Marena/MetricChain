@@ -6,6 +6,7 @@
 | ID | to | date | title |
 |---|---|---|---|
 | `messages/mbar/MBAR-MSG-0001.md` | foundations, adaptive hierarchy, certified inference | 2026-11-28 | Four statements that touch your work (path bound and "sampling is the bottleneck"; round hierarchy of allocation; the envelope ratio as a χ²; a region with a support function) and three questions |
+| `messages/mbar/MBAR-MSG-0002.md` | foundations, adaptive hierarchy, certified inference | 2026-11-28 | **Corrections to MBAR-MSG-0001** after our internal review (the "then nothing" of the round hierarchy; the data-region claim, withdrawn and replaced by a box; "certifies"), and a warning about the first version of our solver |
 | `requests/mbar/MBAR-REQ-0001.md` | Ubuntu Engineering (certified inference) | 2026-11-28 | Computational proposal: pilot-based allocation and the finite-sample certificate on real alchemical molecular dynamics (not an authorisation) |
 
 Where to read: `docs/mbar/README.md` (index), `docs/mbar/FINAL_REPORT.md` (results and limits),

@@ -1,0 +1,8 @@
+offset scale     0.0: {('mbar ok (err 1e-01)', 'region OK finite'): 15, ('mbar ok (err 1e+00)', 'region OK finite'): 5}
+offset scale    10.0: {('mbar ok (err 1e-01)', 'region OK finite'): 13, ('mbar ok (err 1e+00)', 'region OK finite'): 4, ('mbar RuntimeError', 'region ABSTAIN_NO_DATA'): 3}
+offset scale    30.0: {('mbar LinAlgError', 'region ABSTAIN_NO_DATA'): 14, ('mbar RuntimeError', 'region ABSTAIN_NO_DATA'): 2, ('mbar ok (err 1e-01)', 'region OK finite'): 2, ('mbar ok (err 1e+02)', 'region ABSTAIN_SUPPORT'): 2}
+offset scale    50.0: {('mbar LinAlgError', 'region ABSTAIN_NO_DATA'): 16, ('mbar ok (err 1e+02)', 'region OK INFINITE interval'): 1, ('mbar LinAlgError', 'region EXCEPTION LinAlgError'): 1, ('mbar RuntimeError', 'region OK finite'): 1, ('mbar RuntimeError', 'region ABSTAIN_SUPPORT'): 1}
+    traceback tail: ~~~~~~~~~~~~~~~^^^^^^^^^^^ | File "/usr/local/lib/python3.13/site-packages/numpy/linalg/_linalg.py", line 463, in solve | r = gufunc(a, b, signature=signature) | File "/usr/local/lib/python3.13/site-packages/numpy/linalg/_linalg.py", line 144, in _raise_linalgerror_singular | raise LinAlgError("Singular matrix") | numpy.linalg.LinAlgError: Singular matrix
+offset scale   100.0: {('mbar LinAlgError', 'region ABSTAIN_NO_DATA'): 19, ('mbar ok (err 1e+02)', 'region OK finite'): 1}
+offset scale   300.0: {('mbar LinAlgError', 'region ABSTAIN_NO_DATA'): 20}
+offset scale  1000.0: {('mbar LinAlgError', 'region ABSTAIN_NO_DATA'): 20}

@@ -49,17 +49,19 @@ class LRRegion:
     labels: np.ndarray
     level: float                  # Phi(f) <= level
     alpha: float
-    status: str = "OK"            # OK | ABSTAIN_SUPPORT | ABSTAIN_NO_DATA | ABSTAIN_PLUGIN | REJECT_MODEL
+    status: str = "OK"   # OK | ABSTAIN_SUPPORT | ABSTAIN_NO_DATA | ABSTAIN_PLUGIN | ABSTAIN_NUMERICS | REJECT_MODEL
     meta: dict = field(default_factory=dict)
 
     def __post_init__(self):
-        self.N, self.K = self.A.shape if self.A.size else (0, 0)
+        self.N, self.K = self.A.shape
         if self.status == "OK":
             self.t0 = np.bincount(self.labels, minlength=self.K) / self.N
-            self.fhat, v, info = minimize_lse(self.A, self.t0)
+            self.fhat, v, info = minimize_lse(self.A, self.t0, f0=self.meta.get("start"))
             self.phi_min = self.N * v
+            self.meta["fit"] = dict(grad=info["grad"], step=info["step"], iterations=info["iterations"])
             if not info["converged"]:
-                self.status = "ABSTAIN_SUPPORT"
+                # the minimum is not verified: neither an interval nor a rejection is issued
+                self.status = "ABSTAIN_NUMERICS"
             elif self.phi_min > self.level:
                 self.status = "REJECT_MODEL"       # no f is compatible: evidence against the model
             else:
@@ -84,13 +86,23 @@ class LRRegion:
         return self.N * v, f, bool(info["converged"])
 
     def interval(self, c, xtol=1e-6):
-        """[inf, sup] of c.f over the region; (-inf, inf) when the certificate abstains."""
+        """[inf, sup] of c.f over the region; (-inf, inf) when the certificate abstains.
+        If the region is empty (status REJECT_MODEL) the answer is (nan, nan): under the model this
+        event has probability at most alpha and is part of the non-coverage budget -- it is a
+        rejection of the model, not an interval."""
         c = np.asarray(c, float)
+        if c.shape != (self.K,) or abs(c.sum()) > 1e-9 * max(1.0, np.abs(c).max()):
+            raise ValueError("a contrast must have one entry per state and sum to zero")
         if self.status != "OK":
             return (-np.inf, np.inf) if self.status != "REJECT_MODEL" else (np.nan, np.nan)
         th = float(c @ self.fhat)
         Jm = np.full((self.K, self.K), 1.0 / self.K)
-        Rc = float(c @ (np.linalg.inv(self.H + Jm) - Jm) @ c)
+        try:
+            Rc = float(c @ (np.linalg.inv(self.H + Jm) - Jm) @ c)
+        except np.linalg.LinAlgError:
+            Rc = np.nan
+        if not np.isfinite(Rc) or Rc <= 0:               # ill-conditioned curvature: start from a unit step
+            Rc = 1.0 / max(2 * (self.level - self.phi_min), 1e-12)
         d0 = np.sqrt(max(2 * (self.level - self.phi_min) * Rc, 1e-300))
         ends = []
         for sgn in (-1.0, 1.0):
@@ -115,7 +127,8 @@ class LRRegion:
                 return val - self.level if ok else -1.0      # unconverged: count the point as inside
 
             root = brentq(gap, lo_t, hi_t, xtol=xtol * max(1.0, d0), rtol=1e-10)
-            ends.append(th + sgn * (root + xtol * max(1.0, d0)))     # outward by the tolerance
+            # outward by more than the root finder's own tolerance (absolute + relative)
+            ends.append(th + sgn * (root + 2 * xtol * max(1.0, d0) + 4e-10 * abs(root)))
         return ends[0], ends[1]
 
     def pair_matrix(self):
@@ -151,7 +164,12 @@ def lr_confidence_region(U, labels, alpha=0.05, n_batches=8, skip=1, rng=None, p
     else:
         batches = [np.asarray(b, int) for b in batches]
         n_batches = len(batches)
-    rowsA, rowsy, ref, used, skipped = [], [], 0.0, [], []
+        allidx = np.concatenate(batches) if batches else np.zeros(0, int)
+        if len(np.unique(allidx)) != len(allidx):
+            # e.g. cumulative prefixes "the data so far" passed as rounds: the plug-in of a round would
+            # then have been fitted on samples of that round (REVIEW_A.md, G4: coverage 0.90 at 0.95)
+            raise ValueError("batches must be disjoint index sets (rounds), not cumulative prefixes")
+    rowsA, rowsy, ref, used, skipped, last_plugin = [], [], 0.0, [], [], None
     for b in range(skip, n_batches):
         prev = np.concatenate(batches[:b])
         cur = batches[b]
@@ -166,7 +184,12 @@ def lr_confidence_region(U, labels, alpha=0.05, n_batches=8, skip=1, rng=None, p
             continue
         with np.errstate(divide="ignore"):
             Ab = np.log(nb / nb.sum())[None, :] - U[cur]
-        val = float(np.sum(logsumexp(Ab + fb, axis=1) - fb[labels[cur]]))
+        # Rows are centred on the logit of the sample's own state: Phi_b is then exactly the negative
+        # log-likelihood sum_n -log pi_{y_n}(f; x_n), free of large common energies (the centring
+        # constant is the same on both sides of the region's inequality).
+        Ab = Ab - Ab[np.arange(len(cur)), labels[cur]][:, None]
+        fb_use = np.where(np.isfinite(Ab).any(axis=0), fb, 0.0)     # states absent from this batch do not enter
+        val = float(np.sum(logsumexp(Ab + fb_use, axis=1) - fb_use[labels[cur]]))
         if not np.isfinite(val):
             # The plug-in gives probability zero to an observed label of THIS batch: the e-value
             # of the batch is 0.  Dropping the batch here would be a decision taken on its own data
@@ -174,10 +197,11 @@ def lr_confidence_region(U, labels, alpha=0.05, n_batches=8, skip=1, rng=None, p
             return LRRegion(np.zeros((0, K)), np.zeros(0, int), np.inf, alpha, "ABSTAIN_PLUGIN",
                             dict(n_batches=n_batches, used=used, skipped=skipped, failed_batch=b))
         ref += val
+        last_plugin = fb_use
         rowsA.append(Ab)
         rowsy.append(labels[cur])
         used.append(b)
-    meta = dict(n_batches=n_batches, used=used, skipped=skipped, reference=ref)
+    meta = dict(n_batches=n_batches, used=used, skipped=skipped, reference=ref, start=last_plugin)
     if not used:
         return LRRegion(np.zeros((0, K)), np.zeros(0, int), np.inf, alpha, "ABSTAIN_NO_DATA", meta)
     A = np.vstack(rowsA)
@@ -254,7 +278,8 @@ def kl_interval(y, n, t):
     z = t / n
     lo = 0.0 if y == 0 else brentq(lambda q: kl(y, q) - z, 1e-300, y) if kl(y, 1e-300) > z else 0.0
     hi = 1.0 if y == 1 else brentq(lambda q: kl(y, q) - z, y, 1 - 1e-16) if kl(y, 1 - 1e-16) > z else 1.0
-    return max(0.0, lo * (1 - 1e-12)), min(1.0, hi * (1 + 1e-12))
+    # outward by more than brentq's default tolerance (absolute 2e-12, relative 8.9e-16)
+    return max(0.0, lo * (1 - 1e-9) - 1e-11), min(1.0, hi * (1 + 1e-9) + 1e-11)
 
 
 def observable_interval(region, U, labels, k, A01, alpha_obs=0.025):
@@ -319,11 +344,15 @@ def classifier_evalue(U, labels, prob, n_batches=8, skip=1):
         lam = lam / lam.sum(axis=1, keepdims=True)
         loss += float(-np.sum(np.log(lam[np.arange(len(cur)), labels[cur]])))
         with np.errstate(divide="ignore"):
-            rowsA.append(np.log(nb / nb.sum())[None, :] - U[cur])
+            Ab = np.log(nb / nb.sum())[None, :] - U[cur]
+        rowsA.append(Ab - Ab[np.arange(len(cur)), labels[cur]][:, None])     # own-state logit = 0
         rowsy.append(labels[cur])
     A, y = np.vstack(rowsA), np.concatenate(rowsy)
     t0 = np.bincount(y, minlength=K) / len(y)
     fh, v, info = minimize_lse(A, t0)
-    # -log pi_y(f; x) = LSE_j(A_j + f_j) - (A_y + f_y): the best MBAR log-loss in hindsight
-    mbar_loss = len(y) * v - float(np.sum(A[np.arange(len(y)), y]))
-    return mbar_loss - loss, dict(mbar_loss=mbar_loss, classifier_loss=loss, converged=info["converged"])
+    # with centred rows, LSE_j(A_j + f_j) - f_y = -log pi_y(f; x): N * v is the best MBAR log-loss
+    # in hindsight.  If that minimisation is not verified the statistic is not defined: no rejection.
+    mbar_loss = len(y) * v
+    if not info["converged"]:
+        return -np.inf, dict(mbar_loss=np.nan, classifier_loss=loss, converged=False)
+    return mbar_loss - loss, dict(mbar_loss=mbar_loss, classifier_loss=loss, converged=True)

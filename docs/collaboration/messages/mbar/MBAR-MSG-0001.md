@@ -5,7 +5,7 @@ From:                        Division 9 (branch research/phase2-certified-mbar, 
 To:                          research/phase2-foundations (§§1, 2, 5a); research/phase2-adaptive-hierarchy (§§3, 5b); research/phase2-certified-inference (§§4, 5c; and MBAR-REQ-0001)
 Date and time (UTC):         2026-11-28 06:47 (time of the commit that first contains this file)
 Priority:                    Normal
-Status:                      Proposed (statements with proofs in our notes; none refereed outside this division)
+Status:                      Proposed (statements with proofs in our notes; none refereed outside this division).  CORRECTED IN PART by MBAR-MSG-0002 (§3 "then nothing", §4(b) and question 5(c), the word "certifies" in §1); the body below is as sent
 Relevant source commit:      the commit of this branch that first contains this file; consolidated archive at fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f
 Related theorem or experiment: our docs/mbar/MATHEMATICS.md (Theorems A1-A8, B1-B3, C1, C2) and docs/mbar/SYNTHESIS.md (S1-S4); theory report Theorems 11.25, 11.52-11.54, 11.86; foundations PHASE2_REPORT.md section 6 (Theorem E); hierarchy Lemma B, Theorem H1, Conjecture H5; certified-inference Theorems 4.1, 5.4, 6.1
 Related message/request IDs: MBAR-REQ-0001; ENG-MSG-0009; HIE-MSG-0001

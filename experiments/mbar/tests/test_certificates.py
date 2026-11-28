@@ -158,6 +158,71 @@ def test_model_check_is_quiet_under_the_model():
     assert logE < 0 and info["converged"]
 
 
+def test_equivariance_under_energy_offsets():
+    """Referee finding E1.  Adding a constant off_k to the energies of state k, and any constant to all
+    energies of a sample, must move every free energy by off_k and nothing else: estimates, region
+    status, intervals and the model check must be unaffected, for offsets from 10 to 1000 kT."""
+    rng = np.random.default_rng(11)
+    K = 3
+    worst_f = worst_int = 0.0
+    for sd in (10.0, 100.0, 1000.0):
+        for _ in range(25):
+            U0, y, ftrue, x = harmonic(rng, 60, K=K)
+            off = rng.normal(0, sd, K)
+            U = U0 + off[None, :] + rng.normal(0, 30 * sd, len(y))[:, None]
+            f0, i0 = mbar(U0, y)
+            f, i1 = mbar(U, y)
+            assert i1["converged"]
+            worst_f = max(worst_f, np.max(np.abs((f - f[0]) - (f0 - f0[0]) - (off - off[0]))))
+            r0 = lr_confidence_region(U0, y, n_batches=4)
+            r = lr_confidence_region(U, y, n_batches=4)
+            assert r.status == r0.status
+            if r.status == "OK":
+                c = np.array([-1.0, 0.0, 1.0])
+                a0, a = r0.interval(c), r.interval(c)
+                sh = off[2] - off[0]
+                worst_int = max(worst_int, abs(a[0] - sh - a0[0]), abs(a[1] - sh - a0[1]))
+                assert abs((r.level - r.phi_min) - (r0.level - r0.phi_min)) < 1e-6
+            lE0, _ = classifier_evalue(U0, y, lambda b, prev, cur: np.full((len(cur), K), 1 / K), n_batches=4)
+            lE, info = classifier_evalue(U, y, lambda b, prev, cur: np.full((len(cur), K), 1 / K), n_batches=4)
+            assert info["converged"] and abs(lE - lE0) < 1e-6 and lE < np.log(20)
+    assert worst_f < 1e-7 and worst_int < 1e-4, (worst_f, worst_int)
+    return worst_f, worst_int
+
+
+def test_solver_never_claims_convergence_at_a_saturated_start():
+    """The exact failure the referee found: energies offset by tens of kT, solver started anywhere."""
+    from d9mbar.estimators import minimize_lse
+    rng = np.random.default_rng(12)
+    bad = 0
+    for _ in range(100):
+        U0, y, ftrue, x = harmonic(rng, 50, K=4)
+        off = rng.normal(0, 30.0, 4)
+        n = np.bincount(y)
+        A = np.log(n / n.sum())[None, :] - (U0 + off[None, :])
+        for start in (None, np.zeros(4), rng.normal(0, 50, 4)):
+            f, v, info = minimize_lse(A, n / n.sum(), f0=start)
+            if info["converged"]:
+                err = np.max(np.abs((f - f[0]) - (ftrue - ftrue[0]) - (off - off[0])))
+                bad += err > 1.0                        # statistical error is ~0.1; 1.0 would be a wrong fit
+            else:
+                bad += 1                                 # with overlapping supports the fit must also succeed
+    assert bad == 0, bad
+
+
+def test_overlapping_rounds_are_refused():
+    rng = np.random.default_rng(13)
+    U, y, ftrue, x = harmonic(rng, 40, K=3)
+    idx = np.arange(len(y))
+    try:
+        lr_confidence_region(U, y, batches=[idx[:40], idx[:80], idx])      # cumulative prefixes
+        raise AssertionError("overlapping batches must be refused")
+    except ValueError:
+        pass
+    reg = lr_confidence_region(U, y, batches=[idx[:40], idx[40:80], idx[80:]])
+    assert reg.status == "OK"
+
+
 if __name__ == "__main__":
     print("exact e-value enumeration (max E, identity error):", test_evalue_exact_enumeration())
     test_mbar_against_closed_form_and_plugin()
@@ -166,4 +231,7 @@ if __name__ == "__main__":
     print("small coverage simulation (misses of 300 regions, of 40 observable intervals):", test_small_coverage_simulation())
     test_kl_interval_and_pilot_allocation()
     test_model_check_is_quiet_under_the_model()
+    print("equivariance under offsets up to 1000 kT (max error of f, of interval ends):", test_equivariance_under_energy_offsets())
+    test_solver_never_claims_convergence_at_a_saturated_start()
+    test_overlapping_rounds_are_refused()
     print("ALL CERTIFICATE TESTS PASSED")

@@ -1,0 +1,19 @@
+=== check_falseconv.py ===
+offset scale 30, K=4, n=100 per state, strong overlap: mbar returned a wrong estimate with converged=True in 0 of 400 data sets
+=== check_offsets2.py ===
+offset | mbar: ok / wrong-but-'converged' / exception | region statuses | false REJECT | phi_min excess>1e-6 | intervals: total / too narrow (max shortfall) / truth wrongly excluded / infinite
+   0.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+   3.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+  10.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+  20.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+  30.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+  50.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+ 100.0 | 60 / 0 (max err 0) / 0 | {'OK': 60} | 0 | 0 (max 0) | 120 / 0 (max 0 of the width) / 0 / 0
+=== check_offsets3.py ===
+offset | classifier_evalue: rejections at alpha=0.05 (of which info['converged']=True) | lr_confidence_region with a correct plug-in: statuses, truth excluded
+   0.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+   5.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+  10.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+  20.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+  30.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+  50.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200

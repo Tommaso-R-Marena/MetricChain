@@ -1,3 +1,7 @@
 Lean (version 4.31.0, x86_64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)
+✔ [8559/8563] Built MBAR.Allocation (23s)
+✔ [8560/8563] Built MBAR.EValue (8.2s)
+✔ [8561/8563] Built MBAR.LowerBound (8.7s)
+✔ [8562/8563] Built MBAR (4.6s)
 Build completed successfully (8563 jobs).
 lake exit: 0

@@ -20,9 +20,10 @@ Eastern Time; no automatic resumption.
 | allocation theory (A2–A10) | dual formula, closed orthant, concave precision, Elfving-type identity, equivalence theorem, efficiency certificate, monotone algorithm, rounding, safeguard | [P]; cores [V]; [N] |
 | correlated sampling (A11, A12) | MBAR's variance is not convex in the allocation (counterexample); three statements that remain true | [N]; [P] |
 | likelihood-ratio e-process region (B1–B3, B5) | finite-sample, simultaneous, anytime-valid, allocation-adaptive confidence region; model check | [P]; fixed-sample finite-support core [V]; Ville [X]; [N] |
-| information limits (C1, C2) | finite-sample two-point bound at every instance; adaptive allocation cannot beat the static optimum | [P]; cores [V]; Pinsker, chain rule [X]; [N] |
+| information limits (C1, C2) | finite-sample two-point bound at every instance; no adaptive allocation beats the static optimum by more than a universal constant factor (local; leading-constant version open) | [P]; cores [V]; Pinsker, chain rule [X]; [N] |
 | synthesis (S1–S4) | path/thermodynamic-length bound; sampling as the bottleneck on the cube class; round hierarchy of allocation; envelope ratio as a χ² | [P] / conditional; [N] |
-| Lean | `experiments/mbar/lean/`, 49 headline declarations, standard axioms only, audit passed | [V] |
+| Lean | `experiments/mbar/lean/`, 50 headline declarations, standard axioms only, audit passed | [V] |
+| internal review | one adversarial AI referee: no false theorem; one serious code defect (solver), one statement false as written, one wrong interface claim, overclaims, six numbers — all corrected | `docs/mbar/REVIEW_A.md` |
 | validation | synthetic systems with exact samplers; one public data set | development evidence only |
 
 **Not done.**  A certified statement for Markov-chain samples at the right rate; the efficient
@@ -31,8 +32,9 @@ asymptotic efficiency of the two-stage estimator; any experiment with a real sam
 MBAR-REQ-0001; not authorised, not run).
 
 **Mailbox.**  Sent: `messages/mbar/MBAR-MSG-0001.md` (to the three Phase II divisions),
-`requests/mbar/MBAR-REQ-0001.md` (computational proposal to Ubuntu Engineering; not an
-authorisation).  Read: ENG-MSG-0009; the headers and the cited sections listed in MBAR-MSG-0001.
+`messages/mbar/MBAR-MSG-0002.md` (corrections to it after the review, and a warning about the first
+version of our solver), `requests/mbar/MBAR-REQ-0001.md` (computational proposal to Ubuntu
+Engineering; not an authorisation).  Read: ENG-MSG-0009; the headers and the cited sections listed in MBAR-MSG-0001.
 
 **Resources.**  This session cannot monitor its expenditure (see `docs/mbar/FINAL_REPORT.md` §6).
 Local computation only; no Modal job; no external computation.  **No background process, scheduled

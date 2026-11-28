@@ -1,0 +1,53 @@
+................                                                         [100%]
+=============================== warnings summary ===============================
+tests/test_certificates.py::test_evalue_exact_enumeration
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_certificates.py::test_evalue_exact_enumeration returned <class 'tuple'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+tests/test_certificates.py::test_small_coverage_simulation
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_certificates.py::test_small_coverage_simulation returned <class 'tuple'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+tests/test_population.py::test_four_routes_agree
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_population.py::test_four_routes_agree returned <class 'numpy.float64'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+tests/test_population.py::test_gradient_and_euler
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_population.py::test_gradient_and_euler returned <class 'numpy.float64'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+tests/test_population.py::test_convexity_and_concave_precision
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_population.py::test_convexity_and_concave_precision returned <class 'tuple'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+tests/test_population.py::test_boundary_extension
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_population.py::test_boundary_extension returned <class 'float'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+tests/test_population.py::test_elfving_identity_and_equivalence
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_population.py::test_elfving_identity_and_equivalence returned <class 'float'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+tests/test_population.py::test_neyman_step_monotone_and_efficiency_bound
+  /usr/local/lib/python3.13/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but tests/test_population.py::test_neyman_step_monotone_and_efficiency_bound returned <class 'tuple'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+16 passed, 8 warnings in 136.39s (0:02:16)
+exit 0

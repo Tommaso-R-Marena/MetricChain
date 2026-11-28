@@ -13,8 +13,9 @@ example; table in `RESEARCH_LOG.md`, cycle 1).  Optimal designs do sit on the bo
 matters.  The formula of Theorem A3(c) — a sum of two nonnegative terms — has no cancellation.
 
 **N2.  Under correlated sampling the variance of MBAR is not convex in the allocation.**
-768 of 3000 random segments violate convexity, the worst by 35 % (`results/lower_bounds_and_chains.json`
-stores the instance).  The convexity theorem is a theorem about independent samples, or about the
+768 of 3000 random segments violate convexity; in the worst the interior value exceeds the chord by
+55 % of the chord, i.e. 35 % of the value (`results/lower_bounds_and_chains.json` stores the instance;
+reproduced by the referee).  The convexity theorem is a theorem about independent samples, or about the
 optimally weighted estimator, or about a scalar inefficiency model (`MATHEMATICS.md` A11, A12).
 
 **N3.  The handoff's cut-score certificate C1 has the wrong rate.**  Its radius scales like
@@ -27,15 +28,17 @@ likelihood-ratio region (union bound over `4|E|` tails; path sums that ignore cy
 
 **N5.  The likelihood-ratio region is not sharp either: the price of `K`.**  It is 2.0–3.1 times wider
 than the asymptotic interval `±1.96·se` for `K ≤ 10` in the synthetic benchmark, and 4.6–7.1 times wider
-for the 26 umbrellas of the public data set.  Two causes: (a) it is simultaneous for all contrasts,
-with a threshold `2(log(1/α) + ρ)` whose regret `ρ` grows like `(K−1)` times a logarithm (measured
-`ρ ≈ 32` at `K = 26`); against the asymptotic *simultaneous* region (`χ²_{K−1}`) the ratio is about
+for the 26 umbrellas of the public data set (over the three treatments of time correlation).  Two
+causes: (a) it is simultaneous for all contrasts, with a threshold `2(log(1/α) + ρ)` whose regret `ρ`
+grows like `(K−1)` times a logarithm (measured at `K = 26`: `ρ = 32` on the decorrelated data, 59 with
+all snapshots, 43 with every tenth); against the asymptotic *simultaneous* region (`χ²_{K−1}`) the ratio is about
 1.4; (b) it is built on the retrospective information `L` rather than the efficient information, a
 factor `√(R_c/V_c)` of 1.02–1.9 for end-to-end contrasts and 3–4 for contrasts between adjacent states
 of a ladder.  A certified interval for a single contrast without the `K`-dependent
 threshold is open (O3).  Partial remedy that is valid and implemented: restriction to a sub-ladder
 chosen from the design (`restricted_interval`), which brings adjacent-umbrella contrasts on the public
-data to 1.9–2.2 times the asymptotic width.
+data to 1.9–2.2 times the asymptotic width on the decorrelated data (1.75–2.33 over the three
+treatments).
 
 **N6.  The efficient ("tilted") region was analysed but not built.**  The tilt that recovers the
 efficient information depends on the candidate `f`; the region stops being a convex sublevel set and
@@ -53,8 +56,8 @@ hoc.
 **N8.  Where the ladder is well designed, re-allocation gains little.**  Homogeneous five-state
 ladder: predicted ratio 0.94, measured `0.92 [0.85, 1.01]` — not distinguishable from no gain with
 2000 replicates.  "Widths": predicted 0.91, measured `0.90 [0.82, 0.98]`.  The large gains are confined
-to heterogeneous costs (factors 3–6 against equal counts) and to badly balanced overlap
-(Dirichlet models, bottleneck: 24–55 %).  Against the naive *equal-cost* rule the gain of the pilot
+to heterogeneous costs (factors 3–6 against equal counts) and to badly balanced overlap (two-stage
+rule: bottleneck 24 %, Dirichlet 0: 52 %, Dirichlet 1: 29 %; Dirichlet 2 only 11 %, `[0.82, 0.97]`).  Against the naive *equal-cost* rule the gain of the pilot
 rule in the two costly systems is small (0.166 against 0.182; 0.292 against 0.321).
 
 **N9.  The one-step Neyman rule (the rule that is correct for EMUS) is inferior for MBAR** in every
@@ -142,3 +145,58 @@ own labels was dropped; dropping a batch because of its own data is not licensed
 batch's e-value is 0, not 1).  The code now abstains.  Neither path was exercised by the stored
 benchmark: the rerun with the corrected code reproduces every coverage count and median width
 (`results/certificates_coverage_v2.json`).
+
+## Found by the internal adversarial review (`REVIEW_A.md`)
+
+**E8.  The solver could declare convergence at its starting point — the most serious error of this
+division.**  When the reduced potentials of the states differ by constants of some tens of kT (the
+normal situation for real data, where free energies are large) the softmax is saturated at `f = 0`,
+the Hessian is numerically zero, and the linear solve returned a meaningless step with a huge
+*negative* "decrement"; the convergence test `decrement < 1e-14` — the very test introduced as the fix
+of E1 — accepted it.  Consequences measured by the referee under exact equilibrium sampling: `mbar()`
+silently wrong by 50–340 kT; the model check rejecting a correct model in up to 48 % of data sets at
+`α = 0.05`; the region with a correct user plug-in declared empty in up to 27 %; uncaught
+linear-algebra exceptions.  The default region stayed valid in the referee's tests (the plug-ins fail
+the same way and inflate the threshold) but became vacuous.  Not seen by us because every synthetic
+benchmark has free energies of order 1 and the public data have small bias constants.
+*Correction*: the solver was rewritten — internal coordinates in which per-state offsets cancel
+exactly, likelihood rows centred on the sample's own state, a monotone iterative-scaling warm-up,
+regularised Newton steps, and convergence declared only when an unregularised Newton system is solved
+consistently and its solution is below `10⁻⁸` (or the gradient below `10⁻¹⁰`); a rejection of the model
+or an interval is issued only on a verified fit.  Regression tests: exact equivariance of estimates,
+region status, interval end points and model check under per-state offsets of 10–1000 kT and
+per-sample offsets up to 30 000 kT (`test_equivariance_under_energy_offsets`,
+`test_solver_never_claims_convergence_at_a_saturated_start`).  The referee's three failing scripts were
+re-run on the corrected code (`review/rerun_after_fix.out`): 0 wrong fits of 400 and of 420, 0 false
+rejections of 1200, 0 intervals too narrow of 840.  The stored benchmarks were re-run or
+regression-checked with the final code (`VALIDATION.md` §7 says which).
+
+**E9.  A boundedness criterion false as written** (Theorem B2, first version): it referred to the
+support graph of all evaluated samples, where the batchwise graph is needed (two batches each made of
+one state give the whole space as region).  The code was right; the statement is corrected.
+
+**E10.  "For any set of batches"** (Theorem B2) is true only for sets fixed in advance or chosen
+predictably; and the code accepted overlapping rounds (cumulative prefixes), which re-use samples on
+which the plug-in was fitted: 10.3 % non-coverage at nominal 5 % in the referee's test.  Statement
+corrected; overlapping rounds are now refused.
+
+**E11.  Proposition S4(ii) was wrong as stated**: the region of B2 is convex in the free energies, not
+in the space of averages, and its support function cannot be passed to the certified-inference dual.
+Replaced by the box of simultaneous intervals; corrected towards the other divisions in MBAR-MSG-0002.
+
+**E12.  Overclaims.**  "Adaptive allocation cannot beat the optimal static allocation at the level of
+the leading constant" — what Theorem C2 proves is "not by more than a universal constant factor,
+locally, for budgets above a threshold"; "two rounds lose nothing at leading order" is a conjecture;
+"the region of Theorem B2 certifies" the tempering-ladder bound required the target state to be
+sampled; "the interval has the rate of the lower bound" is an expansion and a benchmark, not a
+theorem; the `[V]` labels of A4, A6 and B1 cover the open orthant, contrasts, and the inequality only;
+the docstring of `pilot_allocation` promised the safeguard for integer counts without its condition.
+All corrected.
+
+**E13.  Six numbers quoted loosely** (number of enumerated models; `V/Γ` at `Γ = 64`; a line count;
+two ranges that mixed runs or rules; "worst by 35 %" without saying of what).  Corrected.
+
+**E14.  Gaps in proofs** completed or restated: the dual maximiser of A6 is unique only up to one
+constant per overlap component; Sion's theorem in A10 needs the restriction to `{s ≥ ε}`; A12(a)
+transfers the primal statements only; C2 has a hidden budget threshold; S2's proof did not cover two
+states.

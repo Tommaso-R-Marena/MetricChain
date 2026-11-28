@@ -281,6 +281,7 @@ def optimal_allocation(P, target, cost=None, budget=1.0, lower=None, s0=None, it
     s = np.where(s > 10 * floor, s, lo)
     if (a @ s) > 0:
         s = lo + (s - lo) * (budget - a @ lo) / max(a @ (s - lo), 1e-300)
+    V = val_grad(s)[0]                                  # the value AT the returned allocation
     return s, V, dict(iterations=it + 1, kkt_gap=float(1 - e), efficiency_lower_bound=float(e),
                       multiplier=V / budget, state_variances=g, values=vals, mode=mode)
 

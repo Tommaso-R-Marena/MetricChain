@@ -13,6 +13,7 @@
 'MBAR.Model.V_convex_of_solutions' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MBAR.Model.cs_form' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MBAR.Model.precision_superadditive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MBAR.Model.Q_le_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MBAR.Model.efficiency_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MBAR.Model.equivalence_sufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MBAR.Model.rounding_bound' depends on axioms: [propext, Classical.choice, Quot.sound]

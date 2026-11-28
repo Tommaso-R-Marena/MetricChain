@@ -7,92 +7,92 @@
    "samples": 13026,
    "counts_min": 501,
    "counts_max": 501,
-   "max_abs_difference_to_pymbar": 5.209141384909799e-08,
+   "max_abs_difference_to_pymbar": 2.631397322261364e-09,
    "region_status": "OK",
-   "regret": 59.33870843957993,
+   "regret": 59.33871143327178,
    "pairs": [
     {
      "pair": [
       0,
       1
      ],
-     "estimate": 5.71992745456068,
-     "asymptotic_se": 0.10696955040753638,
+     "estimate": 5.719927457318354,
+     "asymptotic_se": 0.10696955038857725,
      "pymbar_se": 0.10696955038516362,
      "lr_interval": [
-      4.276214338807025,
-      7.249819690244205
+      4.276212815068872,
+      7.249821213766445
      ],
-     "lr_width_over_asymptotic_width": 7.091483425366726,
+     "lr_width_over_asymptotic_width": 7.091490693760306,
      "sub_ladder_states": 3,
      "sub_ladder_interval": [
-      5.264043553770739,
-      6.204490340885907
+      5.264042553574489,
+      6.204491341082073
      ],
-     "sub_ladder_width_over_asymptotic_width": 2.2427867908037347
+     "sub_ladder_width_over_asymptotic_width": 2.242791561756842
     },
     {
      "pair": [
       12,
       13
      ],
-     "estimate": -2.02697796588955,
-     "asymptotic_se": 0.1055511773353496,
+     "estimate": -2.026977963531518,
+     "asymptotic_se": 0.10555117733231803,
      "pymbar_se": 0.10555117733209785,
      "lr_interval": [
-      -3.4672120015200103,
-      -0.5646273782280748
+      -3.467213493332892,
+      -0.5646258896895346
      ],
-     "lr_width_over_asymptotic_width": 7.015130287854013,
+     "lr_width_over_asymptotic_width": 7.015137491136971,
      "sub_ladder_states": 2,
      "sub_ladder_interval": [
-      -2.5376236225330366,
-      -1.5982232625557038
+      -2.5376246227334374,
+      -1.5982222623597844
      ],
-     "sub_ladder_width_over_asymptotic_width": 2.2703957930514886
+     "sub_ladder_width_over_asymptotic_width": 2.270400627787391
     },
     {
      "pair": [
       0,
       6
      ],
-     "estimate": 3.8577172924631022,
-     "asymptotic_se": 0.24555248154296364,
+     "estimate": 3.8577173221694174,
+     "asymptotic_se": 0.24555248159090087,
      "pymbar_se": 0.24555248160915266,
      "lr_interval": [
-      0.7107886208302139,
-      6.79026603075083
+      0.7107855052960117,
+      6.79026914561895
      ],
-     "lr_width_over_asymptotic_width": 6.315908862424385,
+     "lr_width_over_asymptotic_width": 6.315915333894638,
      "sub_ladder_states": 8,
      "sub_ladder_interval": [
-      1.5646694399988959,
-      5.482227424701977
+      1.5646675390290696,
+      5.482229326186731
      ],
-     "sub_ladder_width_over_asymptotic_width": 4.069912185917751
+     "sub_ladder_width_over_asymptotic_width": 4.069916135455613
     },
     {
      "pair": [
       0,
       13
      ],
-     "estimate": 13.067294309427748,
-     "asymptotic_se": 0.26911009021370064,
+     "estimate": 13.06729435898243,
+     "asymptotic_se": 0.269110090310135,
      "pymbar_se": 0.2691100903190033,
      "lr_interval": [
-      9.815763610190336,
-      16.416935658602696
+      9.815760228993506,
+      16.416939040134675
      ],
-     "lr_width_over_asymptotic_width": 6.257559722091577,
+     "lr_width_over_asymptotic_width": 6.257566130556138,
      "sub_ladder_states": 13,
      "sub_ladder_interval": [
-      10.20346202995798,
-      16.765257803121823
+      10.203458436060146,
+      16.76526139982154
      ],
-     "sub_ladder_width_over_asymptotic_width": 6.220233109151627
+     "sub_ladder_width_over_asymptotic_width": 6.220239923226355
     }
    ],
-   "model_check_logE": -1434.4449017190454,
+   "model_check_logE": -1434.4449025900667,
    "model_check_rejects": false
   },
   {
@@ -100,92 +100,92 @@
    "samples": 7443,
    "counts_min": 42,
    "counts_max": 501,
-   "max_abs_difference_to_pymbar": 3.7406522324090474e-11,
+   "max_abs_difference_to_pymbar": 1.2434497875801753e-13,
    "region_status": "OK",
-   "regret": 31.638830525982485,
+   "regret": 31.638830446056545,
    "pairs": [
     {
      "pair": [
       0,
       1
      ],
-     "estimate": 5.6711518479692185,
-     "asymptotic_se": 0.12068390570867331,
+     "estimate": 5.671151847971222,
+     "asymptotic_se": 0.12068390570867006,
      "pymbar_se": 0.12068390570866686,
      "lr_interval": [
-      4.4976866634428685,
-      6.980687228568604
+      4.4976854226437855,
+      6.980688469373558
      ],
-     "lr_width_over_asymptotic_width": 5.248574843448613,
+     "lr_width_over_asymptotic_width": 5.248580089071612,
      "sub_ladder_states": 3,
      "sub_ladder_interval": [
-      5.2387942870032616,
-      6.262948381865364
+      5.23879328679405,
+      6.262949382074442
      ],
-     "sub_ladder_width_over_asymptotic_width": 2.16486032810706
+     "sub_ladder_width_over_asymptotic_width": 2.1648645565979447
     },
     {
      "pair": [
       12,
       13
      ],
-     "estimate": -1.9643471435384754,
-     "asymptotic_se": 0.1314132050074488,
+     "estimate": -1.9643471435361466,
+     "asymptotic_se": 0.13141320500741177,
      "pymbar_se": 0.1314132050074093,
      "lr_interval": [
-      -3.3232642460464232,
-      -0.6203977881601326
+      -3.323265598492305,
+      -0.6203964355222
      ],
-     "lr_width_over_asymptotic_width": 5.246860461410296,
+     "lr_width_over_asymptotic_width": 5.246865712576613,
      "sub_ladder_states": 2,
      "sub_ladder_interval": [
-      -2.479182891970291,
-      -1.5066533062330385
+      -2.4791838947476252,
+      -1.5066523036476596
      ],
-     "sub_ladder_width_over_asymptotic_width": 1.8878946150180818
+     "sub_ladder_width_over_asymptotic_width": 1.8878985078703299
     },
     {
      "pair": [
       0,
       6
      ],
-     "estimate": 3.891592092862455,
-     "asymptotic_se": 0.37374528955521436,
+     "estimate": 3.891592092880538,
+     "asymptotic_se": 0.3737452895550842,
      "pymbar_se": 0.3737452895550265,
      "lr_interval": [
-      0.2254864517102959,
-      7.044845726251799
+      0.22548305383321265,
+      7.044849124380052
      ],
-     "lr_width_over_asymptotic_width": 4.654593694185625,
+     "lr_width_over_asymptotic_width": 4.654598332840574,
      "sub_ladder_states": 8,
      "sub_ladder_interval": [
-      1.067110378058795,
-      6.165471994841086
+      1.0671078515406922,
+      6.165474522706846
      ],
-     "sub_ladder_width_over_asymptotic_width": 3.479916642718375
+     "sub_ladder_width_over_asymptotic_width": 3.4799200926189564
     },
     {
      "pair": [
       0,
       13
      ],
-     "estimate": 13.077780268726166,
-     "asymptotic_se": 0.42619558100979604,
+     "estimate": 13.077780268761815,
+     "asymptotic_se": 0.42619558100974875,
      "pymbar_se": 0.4261955810096873,
      "lr_interval": [
-      9.186350170681209,
-      16.939519405668115
+      9.186346300111744,
+      16.939523276271984
      ],
-     "lr_width_over_asymptotic_width": 4.6407081226730424,
+     "lr_width_over_asymptotic_width": 4.640712756201458,
      "sub_ladder_states": 13,
      "sub_ladder_interval": [
-      9.299934733567106,
-      17.14078983144969
+      9.299930814958431,
+      17.140793750081265
      ],
-     "sub_ladder_width_over_asymptotic_width": 4.693193046431353
+     "sub_ladder_width_over_asymptotic_width": 4.6931977374612295
     }
    ],
-   "model_check_logE": -739.7300789637411,
+   "model_check_logE": -739.7300789430674,
    "model_check_rejects": false
   },
   {
@@ -193,92 +193,92 @@
    "samples": 1326,
    "counts_min": 51,
    "counts_max": 51,
-   "max_abs_difference_to_pymbar": 3.854001366931925e-07,
+   "max_abs_difference_to_pymbar": 1.1274199351873904e-09,
    "region_status": "OK",
-   "regret": 42.550751861815115,
+   "regret": 42.550754458799815,
    "pairs": [
     {
      "pair": [
       0,
       1
      ],
-     "estimate": 5.671349832164095,
-     "asymptotic_se": 0.3446470314465748,
+     "estimate": 5.671349841922902,
+     "asymptotic_se": 0.3446470306534844,
      "pymbar_se": 0.34464703065280544,
      "lr_interval": [
-      1.3241216835240674,
-      9.433527411479513
+      1.3241174630699017,
+      9.433531626969614
      ],
-     "lr_width_over_asymptotic_width": 6.002448192651049,
+     "lr_width_over_asymptotic_width": 6.002454450610327,
      "sub_ladder_states": 3,
      "sub_ladder_interval": [
-      3.862548349267133,
-      7.0094837812290365
+      3.862546779823338,
+      7.009485350847534
      ],
-     "sub_ladder_width_over_asymptotic_width": 2.3293096349652833
+     "sub_ladder_width_over_asymptotic_width": 2.329311963807487
     },
     {
      "pair": [
       12,
       13
      ],
-     "estimate": -1.7793277705563888,
-     "asymptotic_se": 0.32780387419870266,
+     "estimate": -1.7793277577505986,
+     "asymptotic_se": 0.3278038742241914,
      "pymbar_se": 0.32780387422416385,
      "lr_interval": [
-      -5.639287096364214,
-      2.0071126740780003
+      -5.639291203417422,
+      2.007116773999192
      ],
-     "lr_width_over_asymptotic_width": 5.950546469609173,
+     "lr_width_over_asymptotic_width": 5.95055285594079,
      "sub_ladder_states": 2,
      "sub_ladder_interval": [
-      -2.948329829823619,
-      -0.6999346103436346
+      -2.9483309576371464,
+      -0.6999334825349679
      ],
-     "sub_ladder_width_over_asymptotic_width": 1.7497359067310452
+     "sub_ladder_width_over_asymptotic_width": 1.7497376619550427
     },
     {
      "pair": [
       0,
       6
      ],
-     "estimate": 4.444751781745664,
-     "asymptotic_se": 0.7971765876914533,
+     "estimate": 4.444752056698087,
+     "asymptotic_se": 0.7971765891887079,
      "pymbar_se": 0.7971765891896039,
      "lr_interval": [
-      -4.918766590286911,
-      11.843042785686604
+      -4.918775280060082,
+      11.843051458836467
      ],
-     "lr_width_over_asymptotic_width": 5.363895334618247,
+     "lr_width_over_asymptotic_width": 5.363900880799662,
      "sub_ladder_states": 8,
      "sub_ladder_interval": [
-      -2.0255179191816253,
-      8.536821939244168
+      -2.025523291748369,
+      8.536827307684792
      ],
-     "sub_ladder_width_over_asymptotic_width": 3.380022061966206
+     "sub_ladder_width_over_asymptotic_width": 3.380025492814757
     },
     {
      "pair": [
       0,
       13
      ],
-     "estimate": 13.827276527160091,
-     "asymptotic_se": 0.8662500349948514,
+     "estimate": 13.8272769091154,
+     "asymptotic_se": 0.8662500383752628,
      "pymbar_se": 0.8662500383842564,
      "lr_interval": [
-      4.753062261839693,
-      23.118679739894866
+      4.753052803241015,
+      23.118689203078155
      ],
-     "lr_width_over_asymptotic_width": 5.40849213302683,
+     "lr_width_over_asymptotic_width": 5.408497684198034,
      "sub_ladder_states": 13,
      "sub_ladder_interval": [
-      6.13649523441762,
-      22.901258101602426
+      6.136486865518586,
+      22.90126646986671
      ],
-     "sub_ladder_width_over_asymptotic_width": 4.93705633298593
+     "sub_ladder_width_over_asymptotic_width": 4.937061242648324
     }
    ],
-   "model_check_logE": -104.44030863604712,
+   "model_check_logE": -104.44031009093158,
    "model_check_rejects": false
   }
  ],
@@ -289,41 +289,41 @@
  },
  "design_diagnostic": {
   "target": "F(trans, |chi|>150) - F(gauche-, -90<chi<-30) in the unbiased ensemble",
-  "estimate": -1.823430390556676,
-  "plugin_se_actual_allocation": 0.38147179010213,
-  "plugin_se_optimal_allocation": 0.23197394570000648,
-  "plugin_variance_ratio_optimal_over_actual": 0.36978863921822314,
-  "plugin_efficiency_lower_bound_of_actual": 0.0690122291465542,
+  "estimate": -1.8234303905779718,
+  "plugin_se_actual_allocation": 0.38147179010200855,
+  "plugin_se_optimal_allocation": 0.23197394569992802,
+  "plugin_variance_ratio_optimal_over_actual": 0.3697886392182085,
+  "plugin_efficiency_lower_bound_of_actual": 0.06901222914656852,
   "umbrellas_with_most_optimal_weight": [
    {
     "umbrella": 1,
     "centre": -150.0,
-    "fraction": 0.17023347285901858
+    "fraction": 0.1702334728590718
    },
    {
     "umbrella": 3,
     "centre": -120.0,
-    "fraction": 0.16813398962225887
+    "fraction": 0.16813398962218473
    },
    {
     "umbrella": 2,
     "centre": -135.0,
-    "fraction": 0.16450852567279428
+    "fraction": 0.16450852567277585
    },
    {
     "umbrella": 6,
     "centre": -90.0,
-    "fraction": 0.14955064038953808
+    "fraction": 0.1495506403896842
    },
    {
     "umbrella": 23,
     "centre": -165.0,
-    "fraction": 0.09765507876644484
+    "fraction": 0.09765507876648025
    },
    {
     "umbrella": 4,
     "centre": -110.0,
-    "fraction": 0.08662526946123165
+    "fraction": 0.08662526946148998
    }
   ]
  }

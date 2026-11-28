@@ -59,7 +59,7 @@ CVXPY, PyMBAR installed.  One background subagent for the prior-art search (`PRI
 
 ## Cycle 4 — Lean
 
-Standalone Lake project with the programme's pins.  Four modules, 49 headline declarations; three
+Standalone Lake project with the programme's pins.  Four modules, 49 headline declarations (50 after the review added `Model.Q_le_budget`); three
 compile-fix rounds in total (noncomputable division; function-valued derivatives; a numeral cast).
 The sharp third-moment bound and the integrated curvature of handoff B1 were formalised by calculus
 (two monotonicity arguments), not assumed.  Audit passed.
@@ -81,7 +81,11 @@ The sharp third-moment bound and the integrated curvature of handoff B1 were for
   bound), the tempering-ladder corollary on the cube class, the round hierarchy of allocation, and the
   reading of the envelope-ratio cost as a χ².  MBAR-MSG-0001, MBAR-REQ-0001.
 * One adversarial referee (subagent) on the mathematics note, the synthesis note and the code;
-  findings and corrections in `REVIEW_A.md`.
+  findings and corrections in `REVIEW_A.md`.  Its main finding — false convergence of our solver on
+  data with large energy offsets — led to a rewrite of the solver, regression tests, a re-run of the
+  referee's failing scripts and of every stored benchmark, and MBAR-MSG-0002.  While the review ran we
+  found ourselves two ways an interval could come out too narrow and an ambiguous argument
+  (`DEAD_ENDS.md` E6, E7).
 * Final report, generated tables, consolidated archive.
 
 ## Subagents

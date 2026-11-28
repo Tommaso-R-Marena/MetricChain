@@ -1,0 +1,6 @@
+== kl_interval: exact failure probability for Bernoulli samples vs 2 exp(-t)
+  max over (n, mu, t) of P(mu not in interval) / (2 e^-t) = 0.5539  (claim <= 1)
+== classifier_evalue: statistic vs log prod lambda/pi(f*) computed from the definition
+  max of (code statistic - value at the truth) = -2.856e-04 (claim <= 0); rejections at alpha=0.05: 0/400; unconverged fits: 0
+== observable_interval: coverage of E_k[A] (alpha = 0.05, alpha_obs = 0.025)
+  misses 0/150 (claim: probability <= 0.075); nontrivial intervals 150; median width 0.521

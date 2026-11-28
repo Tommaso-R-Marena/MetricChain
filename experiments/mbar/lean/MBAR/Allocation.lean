@@ -490,6 +490,17 @@ theorem precision_superadditive {c s t v : ι → ℝ} (hs : ∀ k, 0 < s k) (ht
       rw [this]; exact h3
     exact le_of_mul_le_mul_left h4 hpos
 
+/-- **Budget of information** (the step of Theorem C2 that holds for every design): along a direction
+`h` with `Var_k(h) ≤ G·a_k` in every state, any allocation `t ≥ 0` (zeros allowed) of cost
+`Σ a_k t_k = B` accumulates at most `Q(t, h) ≤ B·G`. -/
+theorem Q_le_budget {t a : ι → ℝ} {G B : ℝ} (ht : ∀ k, 0 ≤ t k) (h : α → ℝ)
+    (hG : ∀ k, M.Var k h ≤ G * a k) (hB : ∑ k, a k * t k = B) : M.Q t h ≤ B * G := by
+  have h1 : M.Q t h ≤ ∑ k, t k * (G * a k) :=
+    Finset.sum_le_sum (fun k _ => mul_le_mul_of_nonneg_left (hG k) (ht k))
+  have e : ∑ k, t k * (G * a k) = B * G := by
+    rw [← hB, Finset.sum_mul]; exact Finset.sum_congr rfl (fun k _ => by ring)
+  linarith
+
 /-- **Efficiency bound** (the inequality behind the equivalence theorem): if
 `Var_k(z_s) ≤ G·a_k` for all `k`, then every allocation `t` of cost `Σ a_k t_k = B` and every
 feasible `r` satisfy `V(s)² ≤ B·G·J(t,r)`. -/

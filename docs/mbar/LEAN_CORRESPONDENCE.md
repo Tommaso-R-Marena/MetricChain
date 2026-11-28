@@ -7,16 +7,17 @@
 | location | `experiments/mbar/lean/` — a standalone Lake project (package `mbar`, library `MBAR`); nothing under the theory division's `proofs/` is touched and its audit is unaffected |
 | Lean | `leanprover/lean4:v4.31.0` (`lean-toolchain`), commit `68218e876d2a38b1985b8590fff244a83c321783` |
 | Mathlib | tag `v4.31.0`, revision `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` (`lake-manifest.json`, copied from the repository root: the programme's pin) |
-| sources | `MBAR/Allocation.lean` (599 lines), `MBAR/EValue.lean` (213), `MBAR/LowerBound.lean` (248), `MBAR/Localization.lean` (341), `MBAR/AxiomAudit.lean`, `MBAR.lean` |
+| sources | `MBAR/Allocation.lean` (610 lines), `MBAR/EValue.lean` (213), `MBAR/LowerBound.lean` (248), `MBAR/Localization.lean` (341), `MBAR/AxiomAudit.lean` (64), `MBAR.lean` (4) |
 | build | `cd experiments/mbar/lean && lake exe cache get && ./audit.sh`  (on this machine `.lake/packages` is a link to the repository root's fetched packages) |
 | logs | `experiments/mbar/lean/logs/build.log`, `logs/axioms.log` |
 
 `audit.sh` does three things and fails if any does: (1) a scan of every source for `sorry`, `admit`,
 `axiom`, native evaluation, `implemented_by`, `unsafe`, debugging tactics, `#guard_msgs` and anonymous
 `example`s (the theory division's list); (2) `lake build MBAR` with no error and no warning; (3)
-`#print axioms` for the 49 headline declarations, each of which must depend on `propext`,
-`Classical.choice`, `Quot.sound` only.  **Result on 2026-11-28: AUDIT PASSED** — 49 declarations, 1464
-lines, no warning.
+`#print axioms` for the 50 headline declarations, each of which must depend on `propext`,
+`Classical.choice`, `Quot.sound` only.  **Result on 2026-11-28: AUDIT PASSED** — 50 declarations, 1476
+lines in `MBAR/*.lean` (1480 with the four-line root file), no warning.  The internal referee read 11
+declarations against this table and did not run the build.
 
 ## 2. What is and is not formalised
 
@@ -53,15 +54,15 @@ No imported concentration inequality is presented as machine-checked.
 | A2: weak duality | `Model.weak_duality` | `D c s h ≤ J s r` for all `h`, feasible `r` |
 | A2: strong duality, maximiser | `Model.strong_duality`, `Model.zfun_maximises`, `Model.ell_zfun` | `D c s z = J s r*`; `D c s h ≤ D c s z`; `ℓ_c(z) = Q(s, z)` |
 | A2/A4: information inequality | `Model.cs_form` | `ℓ_c(h)² ≤ Q(s, h) · J s r` |
-| A4: superadditive precision | `Model.precision_superadditive` | `V(s+t)·(J s r + J t r′) ≤ J s r · J t r′` for feasible `r, r′` (with the minimisers: `1/V(s+t) ≥ 1/V(s) + 1/V(t)`) |
+| A4: superadditive precision | `Model.precision_superadditive` | for `s, t > 0`: `V(s+t)·(J s r + J t r′) ≤ J s r · J t r′` for feasible `r, r′` (with the minimisers: `1/V(s+t) ≥ 1/V(s) + 1/V(t)`); the closed orthant and general targets are paper proofs |
 | A4/A8: monotone, homogeneous | `Model.J_anti`, `Model.J_smul` | `J t r ≤ J s r` if `s ≤ t`; `J (a·s) r = J s r / a` |
 | A5: Cauchy–Schwarz step (E2) | `neyman_lower`, `neyman_attained` | `(Σ ra_k σ_k)² ≤ (Σ ra_k² s_k)(Σ σ_k²/s_k)`; equality data for `s_k = Bσ_k/(ra_k T)` |
-| A6(i): efficiency bound | `Model.efficiency_bound` | if `Var_k(z_s) ≤ G a_k` for all `k` and `Σ a_k t_k = B` then `V(s)² ≤ B·G·J t r` |
-| A6(ii): sufficiency | `Model.equivalence_sufficient` | if `Var_k(z_s)/a_k ≤ V(s)/B` for all `k` then `V(s) ≤ J t r` for every `t` of cost `B` |
+| A6(i): efficiency bound | `Model.efficiency_bound` | for `s > 0`, `t > 0` (strictly) and a contrast: if `Var_k(z_s) ≤ G a_k` for all `k` and `Σ a_k t_k = B` then `V(s)² ≤ B·G·J t r` |
+| A6(ii): sufficiency | `Model.equivalence_sufficient` | for `s > 0`, `t > 0`, `B > 0`: if `Var_k(z_s)/a_k ≤ V(s)/B` for all `k` then `V(s) ≤ J t r` for every `t` of cost `B`.  Designs on the boundary (zeros in `s` or `t`) are **not** covered by the formal statements |
 | A8: rounding | `Model.rounding_bound` | `n ≥ ρ s` ⇒ `J n r ≤ J s r / ρ` |
 | B1: independence | `Model.expect_stat` | `Σ_x prob(x) Π_k Π_i g_k(x_{k,i}) = Π_k (E_k g_k)^{n_k}` |
 | B1: weighted AM–GM | `Model.prod_pow_le_one` | `Σ n_k b_k ≤ Σ n_k` ⇒ `Π b_k^{n_k} ≤ 1` |
-| B1: e-value | `Model.stratified_evalue`, `Model.lr_family_evalue` | expectation `≤ 1` for the family `g_k = λ_k m_w/(s_k p_k)`, any predictor `λ`, any tilt `w` |
+| B1: e-value | `Model.stratified_evalue`, `Model.lr_family_evalue` | expectation `≤ 1` for the family `g_k = λ_k m_w/(s_k p_k)`, any predictor `λ ≥ 0` with `Σ_k λ_k ≤ 1`, any tilt `w ≥ 0` with `Σ w ≤ 1`, `Σ n_k > 0`.  The identity `E = exp(−N·KL(s‖a))` is not formalised |
 | B2: fixed-sample coverage | `Model.markov_finite`, `Model.lr_region_coverage` | the probability that the statistic is `≥ 1/a` is `≤ a` |
 | handoff B1: third moment | `Softmax.kappa_ge` | `κ₃ ≥ −ρ·Var` when `osc h ≤ ρ` (constant 1) |
 | handoff B1: derivatives | `Softmax.hasDerivAt_m`, `Softmax.hasDerivAt_Vr` | tilted mean and variance have derivatives `Var`, `κ₃` |
@@ -73,12 +74,12 @@ No imported concentration inequality is presented as machine-checked.
 | handoff D1: least squares | `weighted_ls_identity`, `edge_energy_identity` | the divergence budget equals the Laplacian energy |
 | handoff D1: χ² with private category | `chisq_categorical` | `Σ Δ²/w + (ΣΔ)²/(1−W) ≤ (Σ Δ²/w)/(1−W)` |
 | handoff D1: exponential | `abs_exp_sub_one_le_mul_exp` | `|e^z − 1| ≤ |z|e^{|z|}` |
-| handoff D1 / C1: `KL ≤ χ²` | `kl_le_chisq` | finite laws, `0·log 0 = 0` |
+| handoff D1 / C1: `KL ≤ χ²` | `kl_le_chisq` | finite laws, reference law strictly positive, `0·log 0 = 0` |
 | handoff D1: maximum principle | `max_principle`, `harmonic_extremes` | harmonic away from source and sink on a connected network ⇒ extremes at sink and source |
 | C1, D1: two-point testing | `le_cam` | `P₀(A) + P₁(Aᶜ) ≥ 1 − TV` |
 | C1: submodel | `Model.tilt_sum_one`, `Model.chisq_tilt`, `Model.chisq_budget` | the tilted law is normalised; its χ² is `t² Var_k h/(1 + tE_k h)²` |
 | C1: separation | `log_one_add_le`, `log_one_add_ge` | `u − 2u² ≤ log(1+u) ≤ u` for `u ≥ −½` |
-| C2: budget of information | inside `Model.efficiency_bound` | `Σ t_k Var_k h ≤ B·G` for every allocation of cost `B` |
+| C2: budget of information | `Model.Q_le_budget` | for every `h` with `Var_k h ≤ G a_k` and every allocation `t ≥ 0` (zeros allowed) of cost `B`: `Σ t_k Var_k h ≤ B·G` |
 
 ## 4. Reading the formal statements against the paper ones
 

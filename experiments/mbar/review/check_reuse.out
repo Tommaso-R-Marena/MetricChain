@@ -1,0 +1,3 @@
+batches = disjoint  : P(f* not in region) = 0.0000   (nominal <= 0.05)
+batches = overlap1  : P(f* not in region) = 0.0007   (nominal <= 0.05)
+batches = cumulative: P(f* not in region) = 0.1027   (nominal <= 0.05)

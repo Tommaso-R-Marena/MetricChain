@@ -1,0 +1,4 @@
+gap 30.0: status OK, interval (np.float64(-29.200581306806686), np.float64(29.202916432741024)), level-phi_min = 2.9957322735539833
+gap 200.0: status ABSTAIN_NO_DATA, interval None, level-phi_min = None
+gap 800.0: status ABSTAIN_NO_DATA, interval None, level-phi_min = None
+gap 2000.0: status ABSTAIN_NO_DATA, interval None, level-phi_min = None

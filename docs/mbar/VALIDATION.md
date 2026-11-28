@@ -17,7 +17,8 @@ evidence: no protocol was frozen in advance, and two variants in §3 were added 
 | optimal allocation: multiplicative iteration against two conic programmes (group norm; dual) | agree to `2.4·10⁻⁷`, 40 models with random costs | same |
 | MBAR solver against PyMBAR 4.0.3 | `4·10⁻¹³` (harmonic test), `4·10⁻¹¹`–`4·10⁻⁷` (public data) | `tests/test_certificates.py`, T8 |
 | plug-in variance (Theorem A3 on the fitted distributions) against PyMBAR's standard errors | 13 digits | `RESEARCH_LOG.md`, cycle 1 |
-| e-value identity `E = exp(−N·KL(s‖a))` and `E ≤ 1` for arbitrary predictors and tilts | exact enumeration of all samples on small models: identity to `2·10⁻¹⁵`, `max E = 0.9999992` | `tests/test_certificates.py` |
+| e-value identity `E = exp(−N·KL(s‖a))` and `E ≤ 1` for arbitrary predictors and tilts | exact enumeration of all samples on 116 small models: identity to `2·10⁻¹⁵`, `max E = 0.9999992`; referee: 333 further models, adversarially optimised predictors, supremum 1.0000000 | `tests/test_certificates.py`, `review/check_partB.py` |
+| equivariance under energy offsets (per state up to 1000 kT, per sample up to 30 000 kT): estimates, region status, interval end points, model check | error of `f` `1·10⁻¹¹`, of interval ends `4·10⁻⁹`; no false convergence in 300 starts | `tests/test_certificates.py` (added after the referee's finding E1) |
 | lower-bound construction, adaptive information bound, correlated-sampling statements | T9 | `bench/check_lower_bounds_and_chains.py` |
 
 The handoff's reference implementation was run unchanged as a baseline (C1, C2) and its own test
@@ -121,7 +122,7 @@ the halting round the interval covered in every repetition.
 
 26 umbrellas, 501 snapshots each (`experiments/mbar/data/pymbar_umbrella/README.md`); no ground truth.
 
-* Our solver and PyMBAR agree to `4·10⁻¹¹` kT on the decorrelated data.
+* Our solver and PyMBAR agree to `1·10⁻¹³` kT on the decorrelated data (final code).
 * The joint region is finite in all three treatments of time correlation.  Its intervals are 4.6–7.1
   times wider than `±1.96·se`: with 25 nuisance directions the regret is 32–59 nats.  For adjacent
   umbrellas the sub-ladder restriction (Proposition B2′) gives 1.9–2.2 times the asymptotic width; for
@@ -133,7 +134,24 @@ the halting round the interval covered in every repetition.
   of the samples.  This is a prediction from one data set.  It is the kind of statement the
   proposed computational phase would test.
 
-## 7. Summary against the directive's list of measurements
+## 7. After the review: the solver was rewritten; what was re-run
+
+The referee found that the first solver could report convergence at its starting point on data whose
+energies differ by tens of kT between states (`REVIEW_A.md` E1; `DEAD_ENDS.md` E8).  None of the
+experiments above has such offsets, so none of their numbers depended on the defect; this was checked
+rather than assumed.  With the final code and the same seeds:
+
+| what | result |
+|---|---|
+| referee's failing scripts (`review/rerun_after_fix.out`) | wrong fits reported as converged: 0 of 400 and 0 of 420 (were 93 of 400 and up to 21 of 60); model check rejecting a correct model: 0 of 1200 (was up to 96 of 200); region with a correct plug-in declared empty: 0 of 1200 (was up to 54 of 200); intervals narrower than the exact reference: 0 of 840 |
+| new unit tests | estimates, region status, interval end points and model check unchanged under per-state offsets of 10–1000 kT and per-sample offsets up to 30 000 kT (errors `1·10⁻¹¹` and `4·10⁻⁹`); no convergence claimed at a saturated start in 300 starts; overlapping rounds refused |
+| certificate benchmark (T1) | re-run in full; T1 is from the final code; differences from the first run are given under T1 |
+| allocation benchmark | the 400-replicate run was repeated: the mean-square-error ratios of the methods whose random stream is unchanged (equal cost, two-stage, four-stage, oracle) agree with the first run to three digits in all eight systems (`results/allocation_benchmark_regression400.json`).  The 2000-replicate runs (T2, T3) were **not** repeated |
+| robustness A, B, C | re-run in full with the same seeds; T5–T7 say which parts are from the final code |
+| public data (T8) | re-run: intervals and statistics identical to the printed precision; agreement with PyMBAR improved from `4·10⁻¹¹`–`4·10⁻⁷` to `1·10⁻¹³`–`3·10⁻⁹` kT |
+| population-level checks (T9, T10), Lean audit | unaffected by the solver; re-run and passing |
+
+## 8. Summary against the directive's list of measurements
 
 | measurement | where | result in one line |
 |---|---|---|
