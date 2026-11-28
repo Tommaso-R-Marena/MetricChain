@@ -22,3 +22,29 @@ time limit reached at case ('harm', 4, 4.5, 60, 0.0)
 {'datasets': 94, 'ok': 94, 'abstain': 0, 'reject': 0, 'intervals': 562, 'crashes': 0, 'narrow': 0, 'truth_bad': 0, 'nonfinite': 0}
 crash messages: {}
 elapsed 1507.8
+=== check_interval.py, remaining cases on the final code, in four chunks (check_interval_chunk.py: same script; seed 424242 + CHUNK, case filter, time limit raised) ===
+(a sequential run of the unchanged case list without the time limit was stopped by us after 60 CPU-minutes, without output: the referee's witness search runs up to 110 nested optimisations per interval end, and the final code no longer abstains on the data sets with offsets)
+--- CHUNK=4
+chunk 4 cases 1
+{'datasets': 2, 'ok': 2, 'abstain': 0, 'reject': 0, 'intervals': 14, 'crashes': 0, 'narrow': 0, 'truth_bad': 0, 'nonfinite': 0}
+crash messages: {}
+elapsed 65.0
+exit 0
+--- CHUNK=2
+chunk 2 cases 12
+{'datasets': 24, 'ok': 24, 'abstain': 0, 'reject': 0, 'intervals': 168, 'crashes': 0, 'narrow': 0, 'truth_bad': 0, 'nonfinite': 0}
+crash messages: {}
+elapsed 900.6
+exit 0
+--- CHUNK=3
+chunk 3 cases 12
+{'datasets': 24, 'ok': 24, 'abstain': 0, 'reject': 0, 'intervals': 168, 'crashes': 0, 'narrow': 0, 'truth_bad': 0, 'nonfinite': 2}
+crash messages: {}
+elapsed 1237.3
+exit 0
+--- CHUNK=1
+chunk 1 cases 36
+{'datasets': 72, 'ok': 67, 'abstain': 5, 'reject': 0, 'intervals': 291, 'crashes': 0, 'narrow': 0, 'truth_bad': 0, 'nonfinite': 0}
+crash messages: {}
+elapsed 631.1
+exit 0

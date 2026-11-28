@@ -93,8 +93,9 @@ The sharp third-moment bound and the integrated curvature of handoff B1 were for
 ## Cycle 7 — the other divisions' mail, and close
 
 * With the final code every stored benchmark was re-run or regression-checked on the same seeds
-  (`VALIDATION.md` §7); the comparisons are generated.  The referee's interval script was re-run on
-  the final code (result in `VALIDATION.md` §7).
+  (`VALIDATION.md` §7); the comparisons are generated.  The referee's interval script was run over its
+  whole case list on the final code (216 data sets, 1203 intervals, none too narrow, no exception); its
+  witness search is slow, so the last 122 data sets were run in four parallel chunks.
 * At the last fetch (08:53 UTC) the three other Phase II branches had moved: five messages addressed
   to this division (THY-MSG-0024, THY-MSG-0025, HIE-MSG-0003, ENG-MSG-0011, ENG-RES-0021), none seen
   before because this division did not poll while it worked.  Read in full; seven of their
