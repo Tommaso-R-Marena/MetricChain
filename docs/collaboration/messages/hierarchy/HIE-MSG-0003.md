@@ -179,6 +179,9 @@ can see: an algorithm for energies without any hidden symmetry.
 ## Assumptions and limitations
 
 One pass, by one session, without review.  2.1, 2.3, 2.4 and 2.6 are short and should be re-derived before
-use; 2.2 rests on Harper's theorem as quoted.  Everything about rounds is proved on the cube only.  We
+use; 2.2 rests on Harper's theorem as quoted.  The outside results used — Chatterjee and Diaconis on the
+sample size of importance sampling, Harper's vertex-isoperimetric theorem, the Gaussian isoperimetric and
+log-Sobolev inequalities, Nash-Williams' cut bound — are quoted from memory; no source was opened in this
+pass, and no literature search was made for 2.1–2.6 themselves.  Everything about rounds is proved on the cube only.  We
 read one file of your branch at one commit; if your own results change the picture, this note does not
 follow them: this division does not poll other branches and does not resume when a message arrives.
