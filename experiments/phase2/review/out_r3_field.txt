@@ -49,6 +49,10 @@ p=0.1 u=2.0: s0=0.913534 s1=0.221802 hiding law theta=0.195362
    mode query only: n=  100000  -ln q(c: 0 in B_c)/n = 0.005605
    mode query only: n= 1000000  -ln q(c: 0 in B_c)/n = 0.005567
 
+== Part 1b: the Chernoff bound is non-asymptotic: P_hit <= eps0^t exp(-n min(g_t(0), g_t(1))) for every n, t >= 0 ==
+   p=0.3 u=1.0: t*=0.49145  g_t*(0)=0.010881  g_t*(1)=0.056569  rate=0.010881;  n=160: exact ln P_hit=-3.4254 <= -1.7410: True;  n=480: exact ln P_hit=-7.2926 <= -5.2230: True;
+   p=0.1 u=2.0: t*=0.48322  g_t*(0)=0.005562  g_t*(1)=0.322614  rate=0.005562;  n=160: exact ln P_hit=-2.4553 <= -0.8899: True;  n=480: exact ln P_hit=-4.4572 <= -2.6697: True;
+
 == Part 2: tilted baselines; exponent of P_hit for the flat family ==
    columns: gamma | correct weights: theta, dual exponent, grid(121^3) | report's inverted ratio: theta, dual exponent, grid(121^3)
    (a grid minimum over a coarse grid lies slightly above the true minimum; the dual formula is exact in the limit)
@@ -113,12 +117,15 @@ p=0.1 u=2.0
    p=0.3 u=1.0 gamma=-0.308: n=1000: 0.014602;  n=10000: 0.012556;  n=100000: 0.012245   [dual limit over all queries 0.012197]
    p=0.1 u=2.0 gamma=+0.800: n=1000: 0.004214;  n=10000: 0.002589;  n=100000: 0.002354   [dual limit over all queries 0.002316]
    p=0.1 u=2.0 gamma=-1.174: n=1000: 0.013239;  n=10000: 0.010997;  n=100000: 0.010686   [dual limit over all queries 0.010637]
+   exact sums over ALL query types at the best tilts (correct weights), against the Chernoff rate (a lower bound for every n):
+   p=0.3 u=1.0 gamma=-0.308: n=160: 0.02219 (worst w/n=0.00);  n=320: 0.01809 (worst w/n=0.00);  n=640: 0.01563 (worst w/n=0.00)   [rate 0.012197; at t*=0.500: g(0)=0.012197, g(1)=0.046060]
+   p=0.1 u=2.0 gamma=-1.174: n=160: 0.02225 (worst w/n=0.01);  n=320: 0.01726 (worst w/n=0.00);  n=640: 0.01439 (worst w/n=0.00)   [rate 0.010637; at t*=0.500: g(0)=0.010637, g(1)=0.164089]
 
 == Part 3: single-type dip families (brute-force grid), max over the type and over gamma ==
    p=0.5 u=1.0: best single-type exponent on the 39-gamma grid = 0.02953 at gamma=+0.000, type 0.500
    p=0.3 u=1.0: best single-type exponent on the 39-gamma grid = 0.02515 at gamma=-0.100, type 0.500
    p=0.1 u=2.0: best single-type exponent on the 39-gamma grid = 0.04861 at gamma=-0.700, type 0.530
 
-real	0m38.757s
-user	0m38.144s
-sys	0m0.671s
+real	0m44.086s
+user	0m41.880s
+sys	0m0.615s

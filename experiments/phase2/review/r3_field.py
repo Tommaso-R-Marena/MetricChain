@@ -207,6 +207,20 @@ if __name__ == "__main__":
                 print(f"   any query: n={n:8d}  -ln P_hit/n = {-lp/n:.6f}")
 
     print()
+    print("== Part 1b: the Chernoff bound is non-asymptotic: P_hit <= eps0^t exp(-n min(g_t(0), g_t(1))) for every n, t >= 0 ==")
+    for (p, u) in [(0.3, 1.0), (0.1, 2.0)]:
+        pp, z0, z1, s0, s1, th = setup(p, u, 0.0)
+        g0 = lambda t: -math.log(th * (z1 / s1) ** t + (1 - th) * s0 ** (-t))
+        g1 = lambda t: -math.log((1 - th) * (z0 / s0) ** t + th * s1 ** (-t))
+        ts = np.linspace(0, 5, 500001)
+        tstar = float(ts[int(np.argmax([min(g0(t), g1(t)) for t in ts]))])
+        rate = min(g0(tstar), g1(tstar))
+        line = f"   p={p} u={u}: t*={tstar:.5f}  g_t*(0)={g0(tstar):.6f}  g_t*(1)={g1(tstar):.6f}  rate={rate:.6f};"
+        for n in (160, 480):
+            v, w = phit_exact(n, p, u)
+            line += f"  n={n}: exact ln P_hit={v:.4f} <= {-n*rate:.4f}: {v <= -n*rate + 1e-9};"
+        print(line)
+    print()
     print("== Part 2: tilted baselines; exponent of P_hit for the flat family ==")
     print("   columns: gamma | correct weights: theta, dual exponent, grid(121^3) | report's inverted ratio: theta, dual exponent, grid(121^3)")
     print("   (a grid minimum over a coarse grid lies slightly above the true minimum; the dual formula is exact in the limit)")
@@ -250,6 +264,19 @@ if __name__ == "__main__":
             kmax = math.ceil((-n * math.log(s0)) / (u + gam + math.log(s1 / s0)) - 1e-9) - 1
             out.append(f"n={n}: {-log_binom_cdf(kmax, n, th)/n:.6f}")
         print(f"   p={p} u={u} gamma={gam:+.3f}: " + ";  ".join(out) + f"   [dual limit over all queries {d:.6f}]")
+    print("   exact sums over ALL query types at the best tilts (correct weights), against the Chernoff rate (a lower bound for every n):")
+    for (p, u, gam) in [(0.3, 1.0, -0.308), (0.1, 2.0, -1.174)]:
+        pp, z0, z1, s0, s1, th = setup(p, u, gam)
+        g0 = lambda t: -math.log(th * (z1 / s1) ** t + (1 - th) * s0 ** (-t))
+        g1 = lambda t: -math.log((1 - th) * (z0 / s0) ** t + th * s1 ** (-t))
+        d, _ = dual_exponent(p, u, gam)
+        ts = np.linspace(0, 5, 50001)
+        tstar = float(ts[int(np.argmax([min(g0(t), g1(t)) for t in ts]))])
+        out = []
+        for n in (160, 320, 640):
+            v, w = phit_exact(n, p, u, gam)
+            out.append(f"n={n}: {-v/n:.5f} (worst w/n={w/n:.2f})")
+        print(f"   p={p} u={u} gamma={gam:+.3f}: " + ";  ".join(out) + f"   [rate {d:.6f}; at t*={tstar:.3f}: g(0)={g0(tstar):.6f}, g(1)={g1(tstar):.6f}]")
     print()
     print("== Part 3: single-type dip families (brute-force grid), max over the type and over gamma ==")
     for (p, u) in [(0.5, 1.0), (0.3, 1.0), (0.1, 2.0)]:

@@ -24,8 +24,8 @@ necessary: with the joint law of `θn` sites, exact or to a small total-variatio
 exponents are exactly `(1 − θ)h` and `(1 − θ)a`; with all bounded observables at a small constant
 tolerance a bounded number of evaluations suffices, while deterministic algorithms still need
 `τ·2ⁿ` up to polynomial factors.  (3) Exact means of observables whose joint Walsh spectrum has `M`
-non-zero frequencies cost at most the factor `2(M + 1)`, and this is optimal as a statement about
-invariant instances.  (4) At exponential precision `τ = e^{−γn}` the adaptive exponent lies between
+non-zero frequencies cost at most the factor `2(M + 1)`, which is tight up to the factor 2 for the
+subgroup method.  (4) At exponential precision `τ = e^{−γn}` the adaptive exponent lies between
 `KL(ρ₀ − 2γ/u‖½) − 2γ` and `(1 − γ/ln 2)h`; the gap is open.  (5) With `e^{νn}` independent samples of `μ`
 at least `exp(n[h̄(ν) − ν])` evaluations are needed, by a birthday argument.  The lower bounds hide many
 small perturbations whose superposition is *flat*; a single spectral quantity — the bias of the set of
@@ -47,17 +47,20 @@ ball is hit.
 In applications one rarely has evaluations alone.  There are measurements: averages of observables in
 the ensemble `μ ∝ e^{−ψ}`, with error bars.  Do they help?  At the instances that make the problem hard
 they should: a dip of constant relative mass shifts the mean of a suitable observable by a constant.
-The answer of this paper is that **averaged data with honest error bars are worth exactly a factor of
-order `τ^{−2} ln M` in the worst case, whatever is measured**, and that this is sharp in the sense that the
-conclusion fails as soon as either the precision or the logarithm of the number of observables is
-exponential in `n`.
+The answer of this paper is that, on the uniform cube, **averaged data whose error bars may hide any
+value within `τ` are worth at most a factor of order `τ^{−2} ln M` in the worst case, whatever is measured**,
+and that neither condition can be dropped: there are families of observables for which the exponent
+drops as soon as the precision, or the logarithm of the number of observables, is exponential in `n`.
+(The tolerance is adversarial; for independent statistical noise on each reported mean nothing is
+claimed.)
 
 **Results.**  Precise statements are in the sections named.
 
 * *Noisy means (Section 2).*  Theorem A: the factor `L = ⌈2τ^{−2} ln(4M/η)⌉` for both lower bounds, for
   fixed observables and for adaptive statistical queries.  Theorem A′: with narrow dips the adaptive
   exponent at tolerance `e^{−γn}` is at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`.  Theorem A″: the
-  construction on homogeneous spaces and for an arbitrary reference measure, with its limits.
+  construction on homogeneous spaces and for an arbitrary reference measure (with a field: a positive
+  but smaller exponent).
   Proposition 2.7: for a reference `e^{−f}π₀` with a known `κ`-Lipschitz energy — interacting or not — every
   lower bound holds at the slope `u − κ` and every upper bound at `u + κ`.
 * *Exact means (Section 3).*  Theorem B: the factor `2(M + 1)` for a joint spectrum of `M` frequencies;
@@ -211,8 +214,8 @@ well, and its target differs from that of `g₀` by more than `ε`.  Then
     (1 − 2δ) · Σ_{j good} wgt_j  ≤  E|Q(g₀; o₀)| · B .
 
 The same holds for non-adaptive algorithms and pairs `(g_j, g′_j)`, a pair being good if `o₀` is
-admissible for both members.  (For a functional oracle this is the science division's Lemma 1,
-`lemma1a`, `lemma1b`; the proof is the same reduction to the packing bound without an oracle,
+admissible for both members.  (For a functional oracle this is Lemma 1 of the science division's workstream F —
+`lemma1a`, `lemma1b` in `OracleLowerBound.lean`, not the orthogonal-array Lemma 1 of its `INFERENCE_LIMITS.md`; the proof is the same reduction to the packing bound without an oracle,
 applied to the instances for which `o₀` is admissible.)
 
 **Lemma 2.4 (Hoeffding for independent translations) [K; the form used: V] (`hoeffding_iid_mean`).**
@@ -228,8 +231,8 @@ and with the oracle's answers `o_i = E_π φ_i`,
 
     E|Q|  ≥  (1 − η)(1 − 2δ) · 2ⁿ / ( L · V(n,k) )
 
-evaluations in expectation.  With an oracle (O2) the same holds with `M` replaced by the number
-`q` of statistical queries.
+evaluations in expectation.  With an oracle (O2) making at most `q` statistical queries and
+`L ≥ 2τ^{−2}(1 − e^{−Δ_k})² ln(2q/η)`: `E|Q| ≥ (1 − η − 2δ)·2ⁿ/(L·V(n,k))`.
 (b) *Non-adaptive algorithms.*  Let `L ≥ 2τ^{−2} ln(4M/η)` and let `w₀, w₁ ∈ 𝒲_u` differ only on a set
 `D`, with `|ln A(w₁) − ln A(w₀)| > ε`.  Every non-adaptive `(ε/2, δ)`-correct algorithm with an oracle (O1)
 makes, when the oracle answers `o_i = E_π φ_i`, at least `(1 − η)(1 − 2δ)·2ⁿ/(L·|D|)` evaluations in
@@ -254,11 +257,13 @@ baseline `1`, alternatives `w^c` and weights `P(c)`: the good alternatives have 
 `1 − η`; a fixed point `x` lies in `D_c` with probability at most `L·V(n,k)/2ⁿ` (union over `j`; each
 `c_j` is uniform).  Hence `(1 − 2δ)(1 − η) ≤ E|Q|·L·V(n,k)/2ⁿ`.
 
-For (O2): fix the seed `ω`.  In the run at the constant weight in which every statistical query is
+For (O2): define the oracle at `w^c` once and for all — *a query `φ` is answered by `E_πφ` if
+`|E_πφ − E_{μ_{w^c}}φ| ≤ τ`, and by the true mean otherwise*; it is admissible and does not depend on the
+seed.  Fix the seed `ω`.  In the run at the constant weight in which every statistical query is
 answered by the uniform mean, the queried functions `φ_1^ω, …, φ_q^ω` are determined by `ω` alone.
-The run at `w^c` in which the oracle gives the same answers coincides with it as long as no
-evaluation falls in `D_c`; these answers are admissible if `c ∈ G_ω` (the event `G` for `φ_i^ω`), and
-`P_c(G_ω) ≥ 1 − η` for every `ω`.  The two outputs cannot both be correct, so for every `c`
+The run at `w^c` coincides with it as long as no evaluation falls in `D_c`, provided `c ∈ G_ω` (the event
+`G` for `φ_i^ω`: then this oracle gives the uniform answers along the run), and `P_c(G_ω) ≥ 1 − η` for
+every `ω`.  The two outputs cannot both be correct, so for every `c`
 `P_ω(c ∈ G_ω, Q_ω ∩ D_c = ∅) ≤ 2δ`; integrating over `c`,
 `1 − η ≤ P(c ∈ G_ω) ≤ 2δ + P(Q_ω ∩ D_c ≠ ∅) ≤ 2δ + E|Q|·L·V(n,k)/2ⁿ`, which gives
 `E|Q| ≥ (1 − η − 2δ)2ⁿ/(L·V(n,k))` (the form `(1−η)(1−2δ)` needs the fixed observables of (O1)).
@@ -291,7 +296,8 @@ a dip with excess `m_r ≈ m_{r*}/L` has radius `r ≈ r* − u^{−1}ln L` and 
 `c = (c_1, …, c_L)` put `w_c = 1 + max_j e_r(· ⊕ c_j)`.  (i) `w_c ∈ 𝒲_u`, and `w_c = 1` off `∪_j B(c_j, r−1)`.
 (ii) `L m_r − O_c ≤ A(w_c) − 1 ≤ L m_r` with `O_c = Σ_{j<j′} E_π min(e_r(·⊕c_j), e_r(·⊕c_{j′}))`, and for
 independent uniform centres `E O_c ≤ C(L,2)·m_r·V(n,r−1)/2ⁿ`.  (iii) With the probability measure
-`μ̃_c = (π + Σ_j e_r(·⊕c_j)π)/(1 + L m_r)`: `TV(μ_{w_c}, μ̃_c) ≤ O_c/(1 + L m_r − O_c)`.
+`μ̃_c = (π + Σ_j e_r(·⊕c_j)π)/(1 + L m_r)`: `TV(μ_{w_c}, μ̃_c) ≤ Õ_c/(1 + L m_r − Õ_c)`,
+`Õ_c = E_π(Σ_j e_j − max_j e_j) ≤ O_c`; hence `≤ O_c/(1 + L m_r − O_c)` whenever `O_c < 1 + L m_r`.
 
 *Proof.*  (i) `w_c` is the maximum of the dips `w_{c_j, r}`.  (ii) For nonnegative numbers
 `Σ_j a_j − Σ_{j<j′} min(a_j, a_{j′}) ≤ max_j a_j ≤ Σ_j a_j` (order them; the second largest is counted once
@@ -312,6 +318,10 @@ inequality with Lemma 2.5(ii), `P(Gᶜ) ≤ 2M e^{−Lτ²/8} + 5L²m_rV(n,r−1
 `|E_{μ_{w_c}}φ_i − E_πφ_i| ≤ τ/2 + 2·(τ/5)/(1 − 1/5) = τ` (Lemma 2.5(iii)), so the uniform answers are admissible,
 and `A(w_c) ≥ 1 + L m_r − τ/5 > e^ε`.  A point lies in `∪_j B(c_j, r−1)` with probability at most
 `L V(n,r−1)/2ⁿ`.  Lemma 2.3.  ∎
+
+*Adaptive statistical queries.*  The per-seed argument of Theorem A applies verbatim, with the good
+event of the seed `ω` = {the `τ/2`-concentration for the queries of `ω`, and `O_c ≤ τ/5`}: for an oracle (O2)
+with at most `q` queries and `L ≥ 8τ^{−2}ln(2q/η)`, `E|Q| ≥ (1 − η − η′ − 2δ)·2ⁿ/(L·V(n, r−1))`.
 
 **Corollary A′ (exponents) [P].**  Let `τ = e^{−γn}`, `ln ln M = βn + o(n)`, `λ = 2γ + β < a`, bounded
 accuracy.  Then the adaptive exponent with the oracle is at least
@@ -375,7 +385,7 @@ with probability at most `L·P_hit`.  Lemma 2.3.  ∎
 
 **Corollary A″ (any baseline that is a mixture of cones) [P].**  Let `w₀ ∈ 𝒲_u` satisfy
 `w₀(x) = Σ_c λ(c)e^{−u d(x,c)}` for all `x`, with weights `λ ≥ 0` (on the cube every `e^{−γ|x|}`, `|γ| < u`, is of
-this form with product weights, `λ₁/λ₀ = (1 − e^{−(u+γ)})/(1 − e^{−(u−γ)})` per site).  Then Theorem A″ holds
+this form with product weights, `λ₁/λ₀ = (e^{−γ} − e^{−u})/(1 − e^{−(u+γ)})` per site — nonnegative iff `|γ| ≤ u`).  Then Theorem A″ holds
 at the baseline `w₀` for the members `w_c = max(w₀, H(c)e^{−u d(·,c)})`, with `π` replaced by `μ_{w₀}`,
 `m(c) = E_π e^{−u d(·,c)}/A(w₀)`, `H(c) = ε₀/m(c)`, the hiding law `q(c) = λ(c)m(c)` and
 `B_c = {x : H(c)e^{−u d(x,c)} > w₀(x)}`.  (Apply Lemma 2.6 to the kernel `λ(c)e^{−u d(x,c)}/w₀(x)`, whose rows
@@ -387,26 +397,41 @@ vertex-transitive space with the uniform measure (slices, Hamming spaces, Cayley
 word metric, finite homogeneous spaces) the proof of Theorem A applies verbatim with random
 group elements: **an oracle (O1) costs at most the factor `L` in the dip-packing bound of that
 space** — whether that bound is the true complexity there is a separate question (it is on the
-cube).  (3) **For a non-uniform reference the theorem is true but can be weak, and at the
-constant baseline it is void at the exponential scale** [N, exact sums over types, `n ≤ 160`,
-and a grid evaluation of the exponents: `experiments/phase2/p2_field_flat.py`].  The flat mixture is
-unique — the kernel is invertible, so cones must be superposed with equal *heights* — and with a
-field this forces centres near the mode of `π`, whose mass-normalised dips are wide: for
-`π = Bernoulli(p)ⁿ`, `p ≠ ½`, `−n^{−1}ln P_hit → 0` at the constant weight (`0.015` at `n = 160`, still falling,
-for `p = 0.1`, `u = 2`; the worst query is the mode).  Around *tilted* baselines `e^{−γ|x|}` (Corollary A″)
-the flat family does give an exponent: its best value over `γ` is `0.0236` at `p = 0.3`, `u = 1` and `0.0203`
-at `p = 0.1`, `u = 2`, against `0.0253` and `0.0489` for the best single-type dip family over `γ` on the
-same grid (the latter is not hidden from observables: it shifts the magnetisation).  So with
-a field **a positive exponent survives every family of `exp(e^{o(n)})` observables at sub-exponential
-precision** [P for the bound, N for its value], between 40 % and 95 % of the dip-packing exponent in these two cases; whether the
-class exponent itself is invariant is open (open problem 4).  For one-body data with a field
-exact invariance of both class exponents is known by a different mechanism (compensation; theory
-report Theorem 11.109a, science division).
+cube).  (3) **For a non-uniform reference the theorem gives a positive but smaller exponent** [P for the
+limits; N for the numbers: `experiments/phase2/p2_field_flat.py`, `p2_field_flat_exact.py`; the referee's
+`experiments/phase2/review/r3_field.py`].  For `π = Bernoulli(p)ⁿ` and the baseline `e^{−γ|x|}` write
+`μ_{w₀} = Bernoulli(p′)ⁿ` (`logit p′ = logit p − γ`), `z₀ = e^{−(u−γ)}`, `z₁ = e^{−(u+γ)}`, `s₀ = 1 − p′ + p′z₀`,
+`s₁ = p′ + (1 − p′)z₁`.  The hiding law is `Bernoulli(θ)ⁿ`, `θ = (1 − z₀)s₁/(1 − z₀z₁)`, and for every `n`, every
+query and every `t ≥ 0` (Chernoff)
+
+    P_hit  ≤  ε₀^t · max( ρ_t(0), ρ_t(1) )ⁿ ,     ρ_t(0) = θ(z₁/s₁)^t + (1−θ)s₀^{−t},   ρ_t(1) = (1−θ)(z₀/s₀)^t + θ s₁^{−t} ,
+
+with equality at the exponential scale (Cramér): `−n^{−1}ln P_hit → max_t min_a(−ln ρ_t(a))`.  At the
+constant weight and `p < ½` the worst query is the mode and the limit is `KL(κ*‖θ)`,
+`κ* = ln(1/s₀)/(u + ln(s₁/s₀)) < θ`: **`0.0109` at `p = 0.3`, `u = 1` and `0.0056` at `p = 0.1`, `u = 2`** — positive, and
+reached slowly (`0.0214` and `0.0153` at `n = 160`; `0.0109` and `0.0056` at `n = 10⁵`).  The best values over
+`γ` are `0.0122` and `0.0106`, against the class exponents `0.0250` and `0.0481` of Theorem 11.59: **49 % and
+22 %** (43 % and 12 % at the constant weight).  So with a field **a positive exponent survives every
+family of `exp(e^{o(n)})` observables at sub-exponential precision** [P]; whether the class exponent
+itself is invariant is open (open problem 4).  For one-body data with a field exact invariance of both
+class exponents is known by a different mechanism (compensation; theory report Theorem 11.109a,
+science division).
+*Two errors of the first versions of this paragraph, found by the referee:* it said that the bound is
+"void at the exponential scale at the constant baseline" — an extrapolation from `n ≤ 160`, where the
+exponent is still falling; and its numbers for tilted baselines (`0.0236`, `0.0203`, "40 %–95 %") came
+from a script with the reciprocal of the correct product weights, i.e. from a family that is not
+flat.  (`docs/DEAD_ENDS.md`, D71.)
+(4) *What is unique.*  The kernel is invertible (least eigenvalue `(1 − e^{−u})ⁿ` on the cube), so the
+coefficients `q(c)H(c)` of a flat superposition of cones are forced to be constant: cones of equal
+*height*.  The hiding law is not forced: every `q̃ > 0` with heights `ε₀/(Σ₀q̃(c))` is flat.  What singles
+out `q ∝ m` is the normalisation "all members have the same mass" — it minimises the second moment
+`ε₀²Σ_c q(c)²/q̃(c)` of the masses, which is what the concentration step pays for.  Whether unequal
+masses do better with a field was not examined.
 
 ### 2.5 Dependent references: a sandwich by absorption
 
-The flat mixture is the wrong tool for a non-uniform reference.  A cruder one works for every known
-part of bounded local oscillation, dependent or not.
+For an *interacting* known part the flat family has not been evaluated.  A cruder tool works for every
+known part of bounded local oscillation, dependent or not.
 
 **Proposition 2.7 (absorption) [P].**  Let `π₀` be a reference measure on the cube, `f` a *known* function
 with `|f(x) − f(y)| ≤ κ·d(x, y)`, `0 ≤ κ < u`, and `π = e^{−f}π₀/Z_f`, `Z_f = E_{π₀}e^{−f}`.  Write `P(π, u)` for the
@@ -437,9 +462,11 @@ bounds `κ_i` the same holds with site-dependent slopes `u ∓ κ_i` (classes wi
 report §11.26).
 
 *Remarks.*  (1) The sandwich is not sharp — for a field the exact class exponent is known
-(Theorem 11.59) and lies strictly inside — but it needs no structure of `f` beyond the bound `κ`, and it
-is the only statement we have that covers **interacting** known parts together with **arbitrary**
-observables.  (2) It answers, in this weak form, the question the science division left open after
+(Theorem 11.59) and lies strictly inside, and with observations the flat family of §2.4 does better
+(`0.0109`–`0.0122` against `h(u − κ) = 0.0007` at `p = 0.3`, `u = 1`, where `κ = 0.847`; at `p = 0.1`, `u = 2` one has
+`κ = 2.197 ≥ u` and the proposition does not apply at all) — but it needs no structure of `f` beyond the
+bound `κ`, and it is the only statement we have that covers **interacting** known parts together with
+**arbitrary** observables.  (2) It answers, in this weak form, the question the science division left open after
 its Theorem 4 ("a known part that is not invariant under a large group of translations: open"), for
 noisy data of every kind; for exact one-body data with a field its compensation theorem is sharp.
 (3) The same absorption shows that the class is stable under *marginalisation with a dependent
@@ -472,8 +499,9 @@ with `C^⊥ ∩ S = ∅` (one with `|C| < 2(M+1)` exists).
 `(1 − 2δ)·2ⁿ/(|C|·V(n,k))` evaluations in expectation.
 (b) For `w₀, w₁ ∈ 𝒲_u` that differ only on `D`, `|ln A(w₁) − ln A(w₀)| > ε`: every non-adaptive
 `(ε/2, δ)`-correct algorithm makes at least `(1 − 2δ)·2ⁿ/(|C|·|D|)` evaluations in expectation.
-(c) *The bound on `|C|` cannot be improved in general:* if `S = W∖{0}` for a subspace `W` of dimension
-`d` (`M = 2^d − 1`), every subgroup with `C^⊥ ∩ S = ∅` has `|C| ≥ 2^d = M + 1`.
+(c) *The bound on `|C|` is tight up to the factor 2:* if `S = W∖{0}` for a subspace `W` of dimension
+`d` (`M = 2^d − 1`), every subgroup with `C^⊥ ∩ S = ∅` has `|C| ≥ 2^d = M + 1`.  (This is about the subgroup
+method; for a coordinate subspace the complexity itself is given by Theorem C.)
 (d) Hence exact means of observables with joint spectrum of size `e^{o(n)}` — in particular all
 marginals of order `k = o(n)`, `M < V(n,k)` — change neither leading exponent.
 
@@ -535,10 +563,11 @@ most `ε/4` outside an event of probability `δ/2`.  (c) Theorems 11.25, 11.45, 
 functions of unions of cells at tolerance `τ/4` (two laws that agree on every union to within `τ/2`
 differ by at most `τ` in `‖·‖₁`).  So with `ln ln M = θn·ln 2` and *constant* tolerance
 the adaptive exponent drops to `(1 − θ)h`: **`ln ln M = o(n)` cannot be dropped.**
-(ii) It is also obtained from the `2^b` indicator functions of the cells at tolerance `τ2^{−b}`.  So with
+(ii) It is also obtained from the `2^b` indicator functions of the cells at tolerance `τ2^{−b−1}` (a law
+consistent with the reports is within `τ` in `‖·‖₁`).  So with
 `M = e^{γn}` observables at tolerance `e^{−γn − O(1)}` the exponent is at most `(1 − γ/ln 2)h`:
-**`ln(1/τ) = o(n)` cannot be dropped.**  With adaptive statistical queries (O2), `b` queries suffice
-(halving, keeping the heavier half).
+**`ln(1/τ) = o(n)` cannot be dropped.**  With adaptive statistical queries (O2), `2b` queries suffice
+(halving: both halves are queried at each level and the heavier one is kept).
 (iii) Consequently `(1 − γ/ln 2)h` is an upper bound for the exponent in the regime of Corollary A′.
 
 **Proposition C′ (the full oracle; one exact number) [P].**
@@ -546,26 +575,32 @@ the adaptive exponent drops to `(1 − θ)h`: **`ln ln M = o(n)` cannot be dropp
 tolerance `τ/4` give).  Draw `x_1, …, x_k ~ μ̂` independently and return the median of
 `ln w(x_i) − n ln 2 − ln μ̂(x_i)`.  Each term is within `ε/2` of `ln A(w)` unless `|μ_w(x_i)/μ̂(x_i) − 1| > κ := 1 − e^{−ε/2}`,
 which has probability at most `τ/κ`; so `k` evaluations are `(ε/2, δ)`-correct as soon as
-`(4τ/κ)^{k/2} ≤ δ`: **`O(ln(1/δ)/ln(κ/τ))` evaluations, independently of `n`.**
-(b) One exact value `μ_w(z)` and one evaluation give `A(w) = w(z)2^{−n}/μ_w(z)`.  So for *exact*
+`(4τ/κ)^{k/2} ≤ δ` (this needs `τ < κ/4`): **`O(ln(1/δ)/ln(κ/τ))` evaluations, independently of `n`**; with
+`τ ≤ κδ` one evaluation suffices.
+(b) One exact value `μ_w(z)` and one evaluation give `A(w) = w(z)2^{−n}/μ_w(z)` (**[K]**: the science
+division's addendum A8, "the full law at one point").  So for *exact*
 observables the size of the spectrum in Theorem B is the right parameter: the indicator of a point
 has full spectrum.
 (c) *Deterministic algorithms do not profit in the same way.*  For a deterministic algorithm with
 any oracle (O1)/(O2) of tolerance `τ`, any number of observables: let it evaluate the set `Q` at the
 constant weight (uniform answers), and put `ρ = ⌈Δ/u⌉ − 1`, `Δ = ε + ln 2`, `p = π(∪_{x∈Q} B(x, ρ))`.  The
 weight `w = min(e^Δ, e^{u·d(·,Q)})` is admissible, equals `1` on `Q`, and has `A(w) > e^Δ(1 − p)` and
-`TV(μ_w, π) ≤ p/(1 − p)`.  If `p ≤ τ/3`, every answer given at the constant weight is admissible for `w`
-(`2p/(1−p) ≤ τ`) and `A(w) > e^ε`, so the algorithm errs; hence `|Q| ≥ (τ/3)·2ⁿ/V(n, ρ)`.  Conversely, for
-`τ ≤ κ/8`, `κ = 1 − e^{−ε/4}`: `b = ⌊log₂(κ/(8τ))⌋` halving queries (indicators of subcubes, keeping the half
-with the larger reported mass) find a subcube `T` of codimension `b` with `μ_w(T) ≥ 6τ/κ`, known to
+`TV(μ_w, π) ≤ p` (`w < A` only inside the balls).  If `p ≤ τ/2`, every answer given at the constant weight is
+admissible for `w` and `A(w) > e^ε`, so the algorithm errs; hence `|Q| ≥ (τ/2)·2ⁿ/V(n, ρ)`.  Conversely, for
+`τ ≤ κ/8`, `κ = 1 − e^{−ε/4}`, and `b = ⌊log₂(κ/(8τ))⌋`: `2b` halving queries (indicators of subcubes; both
+halves are queried at each level and the one with the larger reported mass is kept) find a subcube
+`T` of codimension `b` with `μ_w(T) ≥ 6τ/κ`, known to
 relative accuracy `κ/6`, and a `⌊ε/(4u)⌋`-net of `T` determines `E_π[w1_T]` to within `e^{±ε/4}`:
 `2^{n−b} ≤ (16τ/κ)·2ⁿ` evaluations.  **Deterministic cost with observations at tolerance `τ`: `τ·2ⁿ` up to
 factors polynomial in `n`** — the tolerance buys exactly its own factor, whatever is observed.
 
-*Reading.*  Rows A, C, C′ together: for randomised algorithms the value of averaged data is
-governed by `τ^{−2}ln M` — the number of *samples of the hidden structure that the data cannot tell
-from the continuum* — and it is negligible, a constant fraction of the exponent, or everything,
-according to whether `ln(τ^{−2}ln M)` is `o(n)`, `Θ(n)`, or `n ln 2`.
+*Reading.*  Rows A, C, C′ together: for randomised algorithms the *lower* bounds are governed by
+`τ^{−2}ln M` — the number of samples of the hidden structure that the data cannot tell from the
+continuum.  The value of the data is negligible while `ln(τ^{−2}ln M) = o(n)`; it is a constant fraction
+of the exponent in the examples with `ln ln M` or `ln(1/τ)` of order `n` (Theorem C, Corollary C); and it is
+everything when `ln ln M ≈ n ln 2` (all indicator functions, C′ (a)) or `τ ≈ 2^{−n}` (C′ (b)).  The known
+upper bounds weight `ln(1/τ)` once, not twice: with cell indicators at `τ = 2^{−n/2}` the exponent is at most
+`h/2`, not `0`; between the bounds the truth is open (§5).
 
 ---
 
@@ -605,7 +640,8 @@ shift multiplies by `χ_s(a)`), and the characters are orthonormal in `a`.  ∎
 
 So, by Chebyshev's inequality, a family of dips at `Γ ⊕ a` is hidden from a given observable at
 tolerance `τ` with probability `1 − η` as soon as its **attenuated bias** `β(Γ) = max_{s≠0}|ρ̃_Γ(s)|·t^{|s|}` is at
-most `τ√η`, and it is not hidden from the character at the maximising frequency if `β(Γ) > τ`.  The
+most `τ√η`, and it is not hidden from the character at the maximising frequency if `β(Γ)` exceeds `τ`
+divided by the factor `1 − 1/A` between the excess measure and the ensemble.  The
 three known constructions are the three ways of making `β` small:
 
 | centres `Γ` | bias `ρ̃_Γ(s)` | atoms needed |
@@ -616,8 +652,9 @@ three known constructions are the three ways of making `β` small:
 
 For `τ = e^{−γn}` with small `γ` the first is the cheapest (`e^{2γn}` against `e^{n h₂(κ)}`,
 `κ = γ/ln coth(u/2)`), and unions of `m` random cosets of a code of dual distance `J` cost
-`V(n, J/2)·τ^{−2}t^{2J}`, which is increasing in `J` at `J = 0`: **no hiding family of this kind has fewer than
-about `τ^{−2}` atoms at small `γ`.**  Whether fewer atoms can hide (a set with attenuated bias `τ` and
+`V(n, J/2)·τ^{−2}t^{2J}`, which is increasing in `J` at `J = 0` (and concave on `[0, k_τ]`, so its minimum is at an end): **none of these
+constructions has fewer than about `τ^{−2}` atoms at small `γ`** — a statement about the constructions,
+not a lower bound for hiding families.  Whether fewer atoms can hide (a set with attenuated bias `τ` and
 `τ^{−2+c}` points), or whether, conversely, an algorithm can turn the detectable bias of a smaller
 family into a *localisation* of its dips — detection is not localisation: for `L` random dips the
 one-body biases are of size `L^{−1/2}` and tilt the density of centres by `e^{n/√L}` only — is exactly
@@ -670,13 +707,18 @@ leave room.  The bound is for the average over the random instance `w₀`, hence
 *Remarks.*  (1) The two mechanisms are the birthday bound (`m² ≪ K`: no two samples share a
 basin, so the number of basins is invisible) and hiding (the basins not sampled must be found
 by evaluations).  The family must be a *maximum* of dips, not an average: exact evaluations near
-a sampled centre would reveal the scale `1/K` of an averaged dip.  (2) In terms of `m`:
-`N ≳ N₀/m^{2−ℓ}` — a sample is worth at most `m^{1−ℓ}` per sample, against `(τ^{−2}ln M)^{1−ℓ}` for means.
+a sampled centre would reveal the scale `1/K` of an averaged dip.  (2) In terms of `m`, to first order in `ν`:
+`N ≳ N₀/m^{2−ℓ}` — against `(τ^{−2}ln M)^{1−ℓ}` for means.
 (3) **No algorithm is known that uses samples to beat `e^{nh}` on the whole class**
 [open: open problem 2].  The identity `A = E_π[w·1_T]/μ_w(T)` with `T = {w ≤ θ}` costs `1/μ_w(w ≤ A)` samples, which at
 the cone is again `e^{nh}` (`h` is the Chernoff information between `π` and the cone's ensemble).
 With samples of *pinned* ensembles the problem is polynomial (self-reducibility; science
-division, addendum A7).
+division, addendum A7).  (4) *Larger accuracies.*  The theorem is stated for `ε < ln(11/8)`.  For any
+bounded `ε` compare `K` dips with `CK` dips, `C = ⌈e^ε⌉ + 1`: the ratio of the partition functions is at least
+`(1 + (C − ¼)R)/(1 + R)`, there are `(C − 1)K` extra centres, the constants change by factors of `C` and the
+exponent does not.  (5) In the proof, `E|Q₀|` is first the cost in the coupled experiment; coupling the
+coupled pair (instance, samples) maximally with the true one costs the bad-sampling probability of
+experiment 0 once more, which is the term `1.55η₁` on the left of the last display.
 
 ---
 
@@ -721,8 +763,9 @@ inequality of Sections 3–7 that can be stated at finite `n`, and the exponent 
 `experiments/falsify_conjectures.py`, tests XXVIII.1–XXVIII.4, with 21 mutations of
 `experiments/mutation_tests.py` (each mutation falsifies one tested claim and must be caught);
 `experiments/phase2/p2_field_flat.py`, `p2_field_flat_exact.py` (the flat family with a field —
-exploratory).  The internal review (`docs/phase2/PHASE2_REVIEW.md`) replicated a part of these with
-independent code.
+the limits are proved, the numbers computed).  The internal review (`docs/phase2/PHASE2_REVIEW.md`)
+replicated these with independent code (`experiments/phase2/review/`) and found two numerical claims of
+an earlier version wrong; they are corrected.
 
 ## Appendix C. What is not claimed
 

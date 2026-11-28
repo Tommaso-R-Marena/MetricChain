@@ -1,0 +1,19 @@
+== Part A: Lemma 5.1 (n = 10) ==
+   |Gamma|=2: E_a(dev^2) = 4.764611e-03 = sum_s phi^2 rho~^2 nu~^2 = 4.764611e-03 <= 1.726293e-01
+   |Gamma|=4: E_a(dev^2) = 2.304037e-03 = sum_s phi^2 rho~^2 nu~^2 = 2.304037e-03 <= 8.155400e-02
+   |Gamma|=1: E_a(dev^2) = 1.058982e-02 = sum_s phi^2 rho~^2 nu~^2 = 1.058982e-02 <= 1.757517e-01
+   |Gamma|=3: E_a(dev^2) = 3.057208e-03 = sum_s phi^2 rho~^2 nu~^2 = 3.057208e-03 <= 1.688337e-01
+   |Gamma|=2: E_a(dev^2) = 3.695259e-03 = sum_s phi^2 rho~^2 nu~^2 = 3.695259e-03 <= 1.688437e-01
+   Lemma 5.1 identity and inequality: True
+== Part B: |nu~(s) - t^|s|| at the critical radius, t = tanh(u/2) (Krawtchouk recurrence, float64, orders j <= 60) ==
+   u=1.0 n=100: r=38 (rho0 n = 38.0); max_(j<=60) |nu~ - t^j| = 3.582e-03   (archive A10 quotes its bound tau_0 = 1.9e-2, 1.3e-3, 2.7e-6, 1.7e-11 at n = 100..800; true deviation 5-10 times smaller)
+   u=1.0 n=200: r=76 (rho0 n = 76.0); max_(j<=60) |nu~ - t^j| = 1.425e-04   (archive A10 quotes its bound tau_0 = 1.9e-2, 1.3e-3, 2.7e-6, 1.7e-11 at n = 100..800; true deviation 5-10 times smaller)
+   u=1.0 n=400: r=152 (rho0 n = 152.0); max_(j<=60) |nu~ - t^j| = 3.034e-07   (archive A10 quotes its bound tau_0 = 1.9e-2, 1.3e-3, 2.7e-6, 1.7e-11 at n = 100..800; true deviation 5-10 times smaller)
+   u=1.0 n=800: r=304 (rho0 n = 303.9); max_(j<=60) |nu~ - t^j| = 1.853e-12   (archive A10 quotes its bound tau_0 = 1.9e-2, 1.3e-3, 2.7e-6, 1.7e-11 at n = 100..800; true deviation 5-10 times smaller)
+== Part C: Proposition 2.7 (absorption) ==
+   the two maps, the equal ensembles and the shifted targets (n = 9, field + pair interaction): True
+   u=1.0, kappa=0.25: h(u-kappa) = 0.01689, h(u) = 0.02914, h(u+kappa) = 0.04388;  a(u-kappa) = 0.06566, a(u) = 0.11094, a(u+kappa) = 0.16284
+   h and a increasing in u on [0.05, 6]: True
+== Part D: a field (product reference Bernoulli(p)^n): absorption against the flat family ==
+   p=0.3, u=1.0: field strength kappa = ln((1-p)/p) = 0.8473 < u: absorption lower bound h(u-kappa) = 0.000727; flat family (Theorem A''): 0.010881 at the constant baseline, 0.01220 at the best tilt  [values from r3_field.py]
+   p=0.1, u=2.0: field strength kappa = 2.1972 >= u: Proposition 2.7 does not apply; flat family (Theorem A''): 0.005562 at the constant baseline, 0.01064 at the best tilt  [values from r3_field.py]

@@ -1,0 +1,7 @@
+p=0.5 u=1.0: (i) Theorem 11.59 closed form: max F = 0.029139 at gamma=+0.0000, t=0.49 (with -theta: 0.029139);  (ii) referee's single-type exponent: 0.029139 at gamma=+0.0000, type m=0.500
+p=0.3 u=1.0: (i) Theorem 11.59 closed form: max F = 0.025034 at gamma=-0.0910, t=0.49 (with -theta: 0.025033);  (ii) referee's single-type exponent: 0.025033 at gamma=-0.0900, type m=0.500
+p=0.1 u=2.0: (i) Theorem 11.59 closed form: max F = 0.048128 at gamma=-0.6220, t=0.47 (with -theta: 0.048127);  (ii) referee's single-type exponent: 0.048130 at gamma=-0.6200, type m=0.506
+
+real	1m8.788s
+user	1m6.360s
+sys	0m0.071s

@@ -5,7 +5,7 @@ import proofs.Frontiers.NonAdaptive
 /-!
 # Phase II: observation oracles — the machine-checked cores
 
-Source: `docs/phase2/PHASE2_REPORT.md` (Theorems A, A″, B; Lemmas 2.1–2.4, 3.1–3.3).
+Source: `docs/phase2/PHASE2_REPORT.md` (Theorems A, A″, B, C; Lemmas 2.1–2.4, 2.6, 3.1, 3.2).
 
 An *observation oracle* gives an algorithm, besides evaluations of the residual, information
 about the normalised ensemble.  The report proves that such information changes the query

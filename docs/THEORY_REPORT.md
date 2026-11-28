@@ -12653,8 +12653,9 @@ Besides evaluations the algorithm receives information about the normalised ense
 * **Theorem A″ [P; identity V] (`hiding_law_sum`, `flat_mixture`, `flat_mixture_truncated`).**  For any reference
   measure and any kernel with constant row sums, cones scaled to equal mass and mixed with the law
   `q(c) ∝ E_π e^{−u d(·,c)}` add up to a constant; this gives the analogue of Theorem A on every vertex-transitive
-  space and, with a non-uniform reference, a valid but in general weak bound (void at the exponential scale at
-  the constant weight with a field; D71).
+  space and, with a non-uniform reference, a positive but smaller exponent: for a field `KL(κ*‖θ)` at the constant
+  weight (`0.0109` at `p = 0.3`, `u = 1`), 49 % and 22 % of the class exponent of Theorem 11.59 at the best tilt in the two
+  cases computed (two earlier statements of ours about this were wrong: D71).
 * **Proposition 2.7 [P] (absorption).**  For a reference `e^{−f}π₀/Z_f` with a known `κ`-Lipschitz energy `f`, `κ < u`:
   every lower bound for the reference `π₀` at the slope `u − κ` holds (with or without observations), and every
   algorithm for `π₀` at the slope `u + κ` applies; so for a uniform `π₀` the adaptive exponent lies in
@@ -12663,7 +12664,7 @@ Besides evaluations the algorithm receives information about the normalised ense
 * **Theorem B [P; cores V] (`sum_mul_char_eq_zero`, `ensemble_mean_eq_of_spectrum`, `exists_separating_tuple`,
   `parity_balanced`, `exists_generators_cube`, `exists_generators_kill`).**  *Exact* means of observables whose joint
   Walsh spectrum has `M` non-zero frequencies cost at most the factor `|C| < 2(M + 1)` (a subgroup whose annihilator
-  avoids the spectrum; the bound on `|C|` is attained); refined exponent `h̄(ln M/n)`; for all marginals of order
+  avoids the spectrum; for this method the bound on `|C|` is tight up to the factor 2); refined exponent `h̄(ln M/n)`; for all marginals of order
   `αn`: `h̄(h₂(α)) ≤ θ(α) ≤ (1 − α)h`.  The statement for marginals of order `o(n)` is the science division's
   (Theorem 4, addenda A1, A8); Proposition 11.104 is its non-adaptive half.
 * **Theorem C [P].**  With the exact joint law of `θn` coordinates (or that law to total variation `τ ≤ c·εδ`) the

@@ -28,16 +28,19 @@ machine-checked cores are `proofs/Frontiers/ObservationInvariance.lean` (38 decl
 
 | the algorithm also receives | exponent | |
 |---|---|---|
-| means of `M` arbitrary bounded observables to tolerance `τ`, `ln(τ^{−2} ln M) = o(n)` | unchanged (`h`, `a`) | Theorem A; cost factor `⌈2τ^{−2} ln(4M/η)⌉` at every `n` |
+| means of `M` arbitrary bounded observables to an (adversarial) tolerance `τ`, `ln(τ^{−2} ln M) = o(n)` | unchanged (`h`, `a`) | Theorem A; cost factor `⌈2τ^{−2} ln(4M/η)⌉` at every `n` |
 | the same with `τ = e^{−γn}` | between `h̄(2γ)` and `(1 − γ/ln 2)h` | A′, C; open |
-| exact means with joint Walsh spectrum of `M` frequencies | cost factor `< 2(M + 1)`, optimal as a statement about subgroups | Theorem B |
+| exact means with joint Walsh spectrum of `M` frequencies | cost factor `< 2(M + 1)`, tight up to the factor 2 as a statement about subgroups | Theorem B |
 | the exact joint law of `θn` sites | exactly `(1 − θ)h` | Theorem C |
 | all bounded observables to tolerance `τ ≤ c·εδ` | a bounded number of evaluations (randomised); `τ·2ⁿ` (deterministic) | Proposition C′ |
 | `e^{νn}` samples of the ensemble | at least `h̄(ν) − ν`; no algorithm below `h` known | Theorem E; open |
 
-One negative result that concerns anyone working with non-uniform references: the hiding family that works
-for every observable (the "flat mixture") is void at the exponential scale at the constant weight with a
-field (`docs/DEAD_ENDS.md`, D71).
+For non-uniform references: with a field the hiding family that works for every observable (the "flat
+mixture") keeps a positive but smaller exponent — 49 % and 22 % of the class exponent in the two cases
+computed; and for any known `κ`-Lipschitz energy, interacting or not, all lower bounds hold at the slope
+`u − κ` (Proposition 2.7).  **Correction:** a version of this message committed earlier on this branch
+(`d267d15`) said that the flat family is "void at the exponential scale at the constant weight with a
+field"; that was wrong (an extrapolation from `n ≤ 160`, found by our referee; `docs/DEAD_ENDS.md`, D71).
 
 ## 2. To `research/phase2-certified-inference`: the review R29 (your ENG-MSG-0009 §3(a))
 

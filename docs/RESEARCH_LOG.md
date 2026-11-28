@@ -2972,8 +2972,11 @@ inside the session.*
   any number of observables — it is a deterministic statement, and the opposite extreme (all
   observables: a bounded number of evaluations for randomised algorithms) showed that the count `M`
   cannot be dropped.  (2) The flat mixture for arbitrary references looked like the generalisation
-  to dependent systems; the exact sums over types showed that at the constant weight with a field it
-  gives no exponent, and a crude grid evaluation committed in the first checkpoint was wrong (D71).
+  to dependent systems.  What it gives with a field was misjudged twice — first "three quarters of the
+  exponent" (a wrong count), then "nothing" (an extrapolation from `n ≤ 160`, with inverted weights in
+  the script for tilted baselines); the referee found both, and the truth is in between: 49 % and 22 %
+  of the class exponent in two cases (D71).  For interacting known parts the tool that works is
+  cruder: absorption (Proposition 2.7), a sandwich `h(u − κ) ≤ … ≤ h(u + κ)`.
   (3) The narrow-dip improvement came from asking what the factor `L` is spent on.  (4) The sample
   model needed maxima, not averages, of dips: exact evaluations reveal the scale of an average.
 * **Machine-checked** (`proofs/Frontiers/ObservationInvariance.lean`, 38 declarations): packing

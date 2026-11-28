@@ -36,8 +36,8 @@ necessary: with the joint law of `θn` sites, exact or to a small total-variatio
 exponents are exactly `(1 − θ)h` and `(1 − θ)a`; with all bounded observables at a small constant
 tolerance a bounded number of evaluations suffices, while deterministic algorithms still need
 `τ·2ⁿ` up to polynomial factors.  (3) Exact means of observables whose joint Walsh spectrum has `M`
-non-zero frequencies cost at most the factor `2(M + 1)`, and this is optimal as a statement about
-invariant instances.  (4) At exponential precision `τ = e^{−γn}` the adaptive exponent lies between
+non-zero frequencies cost at most the factor `2(M + 1)`, which is tight up to the factor 2 for the
+subgroup method.  (4) At exponential precision `τ = e^{−γn}` the adaptive exponent lies between
 `KL(ρ₀ − 2γ/u‖½) − 2γ` and `(1 − γ/ln 2)h`; the gap is open.  (5) With `e^{νn}` independent samples of `μ`
 at least `exp(n[h̄(ν) − ν])` evaluations are needed, by a birthday argument.  The lower bounds hide many
 small perturbations whose superposition is *flat*; a single spectral quantity — the bias of the set of
@@ -59,17 +59,20 @@ ball is hit.
 In applications one rarely has evaluations alone.  There are measurements: averages of observables in
 the ensemble `μ ∝ e^{−ψ}`, with error bars.  Do they help?  At the instances that make the problem hard
 they should: a dip of constant relative mass shifts the mean of a suitable observable by a constant.
-The answer of this paper is that **averaged data with honest error bars are worth exactly a factor of
-order `τ^{−2} ln M` in the worst case, whatever is measured**, and that this is sharp in the sense that the
-conclusion fails as soon as either the precision or the logarithm of the number of observables is
-exponential in `n`.
+The answer of this paper is that, on the uniform cube, **averaged data whose error bars may hide any
+value within `τ` are worth at most a factor of order `τ^{−2} ln M` in the worst case, whatever is measured**,
+and that neither condition can be dropped: there are families of observables for which the exponent
+drops as soon as the precision, or the logarithm of the number of observables, is exponential in `n`.
+(The tolerance is adversarial; for independent statistical noise on each reported mean nothing is
+claimed.)
 
 **Results.**  Precise statements are in the sections named.
 
 * *Noisy means (Section 2).*  Theorem A: the factor `L = ⌈2τ^{−2} ln(4M/η)⌉` for both lower bounds, for
   fixed observables and for adaptive statistical queries.  Theorem A′: with narrow dips the adaptive
   exponent at tolerance `e^{−γn}` is at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`.  Theorem A″: the
-  construction on homogeneous spaces and for an arbitrary reference measure, with its limits.
+  construction on homogeneous spaces and for an arbitrary reference measure (with a field: a positive
+  but smaller exponent).
   Proposition 2.7: for a reference `e^{−f}π₀` with a known `κ`-Lipschitz energy — interacting or not — every
   lower bound holds at the slope `u − κ` and every upper bound at `u + κ`.
 * *Exact means (Section 3).*  Theorem B: the factor `2(M + 1)` for a joint spectrum of `M` frequencies;
@@ -189,8 +192,9 @@ inequality of Sections 3–7 that can be stated at finite `n`, and the exponent 
 `experiments/falsify_conjectures.py`, tests XXVIII.1–XXVIII.4, with 21 mutations of
 `experiments/mutation_tests.py` (each mutation falsifies one tested claim and must be caught);
 `experiments/phase2/p2_field_flat.py`, `p2_field_flat_exact.py` (the flat family with a field —
-exploratory).  The internal review (`docs/phase2/PHASE2_REVIEW.md`) replicated a part of these with
-independent code.
+the limits are proved, the numbers computed).  The internal review (`docs/phase2/PHASE2_REVIEW.md`)
+replicated these with independent code (`experiments/phase2/review/`) and found two numerical claims of
+an earlier version wrong; they are corrected.
 
 ## Appendix C. What is not claimed
 
