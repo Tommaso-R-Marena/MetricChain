@@ -2667,3 +2667,37 @@ report; these are the attempts that failed, in the order in which they were made
    between `h̄(2γ)` (`γ < a/2`) and `(1 − γ/ln 2)h` is open.
 6. **"At the hardest instance with a field the optimal single-type family is the flat one."**  Not
    supported by the grid computation (the best tilts differ in sign).
+
+## D72. Phase II, the bridge note (overlap, samples, observables of the energy): what did not work, and three statements that were wrong before they were committed (2026-11-28)  **[`docs/phase2/BRIDGE_NOTE.md`; `experiments/phase2/p2_bridge.py`]**
+
+The owner's collaboration update asked for relations between the certified-MBAR division's findings
+and ours.  The statements that survived are in the bridge note; these did not, or needed a repair.
+
+1. **Lower bounds of the sample model do not transfer to ours, and ours do not transfer to it.**  The
+   first hope was a common lower bound "`N ≳` effective resistance".  It is a law of the model in which
+   the base measure is unknown: the pair (reference, cone) has resistance `e^{nh}` and is solved exactly
+   by `n + 1` evaluations by an algorithm that knows it faces a cone.  Conversely every hiding pair of
+   ours is at a constant total-variation distance (Proposition F3) and so is easy for samples.  What
+   coincides is a number — the largest resistance of the class and its adaptive cost both have the
+   exponent `h` — not a mechanism.
+2. **One dip against two at a random centre** (first proof of the lower bound for observables of the
+   energy).  The overlap of two dips at independent centres changes the law of the energy by an amount of
+   the order of `V(n, r−1)/2ⁿ`, which must be below the tolerance: a side condition `θ_hint(γ) > γ`
+   (`γ < 0.020` at `u = 1`), of the same kind as the one removed from Theorem A′ earlier that day.  The
+   second dip at the *antipode* has no overlap at all when `2(r−1) < n`, the two laws of the energy are
+   mixtures of the same two components, and the condition disappears.  At small `n` the first version
+   had looked fine only because the check accepted a bound that was trivially true (`V/2ⁿ` close to one).
+3. **A conductance bound without the total weight.**  `−L_{ij}(s) ≥ s_is_j·BC_{ij}²` holds on the simplex
+   and fails off it; the correct bound divides by `Σ_k s_k`.  Found by the harness test on its first run,
+   because its random weights were not normalised.
+4. **The cap `½` of Theorem F looked superfluous** on the first instances (slope 1): a mutation that
+   replaced it by 1 was not caught.  At a small slope the cap is the binding term (`Ω₁ < 1` for every
+   non-constant member while the other term is 1); instances at `u = 0.05` were added and the mutation is
+   caught.  A mutation that is not caught is a statement about the test first.
+5. **The counterexample for correlated samples at 2.9 standard errors.**  With 240 replicates the
+   simulated excess over the mean of the endpoints was `51 ± 18`; it was not stated on that basis.  With
+   1 000 replicates (two seeds) it is `60 ± 9` and `64 ± 9`, and the formula gives `67.3`.
+6. **Not obtained.**  A lower bound for algorithms with samples above the `0.40·h` of Theorem E; an
+   adaptive algorithm with observables of the energy that reaches `θ_hint(γ)`; a common model with both
+   the base measure and the energy partly unknown; any meaning for the coincidence of the two `1/k²`
+   scalings (nested levels; rungs of a ladder).

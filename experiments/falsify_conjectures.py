@@ -15275,6 +15275,184 @@ def t_oi_sharp(rng, trials):
     return True, stats
 
 
+
+def br_m(n, u, r):
+    """m_r = 2^{-n} sum_{j<r} C(n,j) (e^{u(r-j)} - 1): the mass of the excess of a dip of radius r."""
+    return sum(math.comb(n, j) * (math.exp(u * (r - j)) - 1.0) for j in range(r)) / 2.0 ** n
+
+
+def br_V(n, k):
+    return sum(math.comb(n, j) for j in range(k + 1)) if k >= 0 else 0
+
+
+def br_bound(n, u, s):
+    """Theorem F: min(1/2, s (V(n, r_s) + 1) / 2^n), r_s = max{r in 0..n-1 : s m_{r+1} <= 1/2} (or -1)."""
+    r = -1
+    while r + 1 <= n - 1 and s * br_m(n, u, r + 2) <= 0.5:
+        r += 1
+    return min(0.5, s * (br_V(n, r) + 1) / 2.0 ** n)
+
+
+def br_theta_na(gam, u):
+    """min{ KL(rho || 1/2) : KL(rho || p_u) <= gam }, rho in [p_u, 1/2]."""
+    pu, a, rho0, h, ell, kl = oi_consts(u)
+    lo, hi = pu, 0.5
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        if kl(mid, pu) < gam:
+            lo = mid
+        else:
+            hi = mid
+    return kl(0.5 * (lo + hi), 0.5)
+
+
+def br_mbar(P, s):
+    """the MBAR matrices of K states with probability vectors P[k] and sample weights s:
+    L(s) = int m (diag pi - pi pi^T) (K x K) and M(s) = sum_k s_k (diag p_k - p_k p_k^T) (support x support)."""
+    mix = s @ P
+    Pi = (s[:, None] * P) / mix[None, :]
+    L = np.diag(s) - (Pi * mix[None, :]) @ Pi.T
+    M = sum(s[k] * (np.diag(P[k]) - np.outer(P[k], P[k])) for k in range(P.shape[0]))
+    return L, M, Pi
+
+
+@conjecture("XXVIII.5 Phase II, the bridge note (docs/phase2/BRIDGE_NOTE.md): overlap of the reference with an ensemble of the class, on cubes of 8 sites, exact sums.  (a) Theorem F: for every member w, g = w/A and every s > 0, Omega_s = E_pi min(g, s) >= min(1/2, s (V(n, r_s) + 1)/2^n) with r_s the largest r such that s m_{r+1} <= 1/2; behind it the tail inequality E (g - s)_+ <= s m_{r+1} whenever 0 < |{g > s}| <= V(n, r) (Lemma 11.43(b)), with equality for dips at the floor.  (b) the bridge identity A = E_pi[min(w, theta)] / E_mu[min(1, theta/w)] for every theta; the two-state MBAR conductance l = s0 s1 int p0 p1/(s0 p0 + s1 p1) equals (1 - Delta/2)/4 at equal weights (Delta the triangular discrimination) and lies between Omega/4 and Omega/2, with equality on the left for identical states.  (c) Proposition F3: if w1 >= w0 agree off D then TV(mu0, mu1) >= mu0(D^c)(1 - A0/A1).  (d) Theorem J: a dip at c against dips at c and at its antipode (2(r-1) < n): A0 = 1 + m_r, A1 = 1 + 2 m_r, and the laws of the weight under the two ensembles are at total variation distance (m_r + v)/((1 + m_r)(1 + 2 m_r)) <= 1/(1 + 2 m_r), v = V(n, r-1)/2^n; every point lies in exactly V(n, r-1) balls of radius r-1.  (e) exponents: theta_na(0) = a, theta_na(h) = h, theta_hint(gamma) = KL(rho_0 + gamma/u || 1/2) <= theta_na(gamma), both zero at gamma = ln cosh(u/2) = KL(1/2 || p_u).  (f) the MBAR division's allocation theorem in dual form, on random finite instances: c^T L(s)^+ c - sum_k c_k^2/s_k = b^T M(s)^+ b with b = sum_k c_k p_k and M(s) = sum_k s_k (diag p_k - p_k p_k^T) linear in s; every test function a gives (sum_k c_k E_k a)^2 <= V_c(s) sum_k s_k Var_k(a), with equality at a = z; s_i s_j BC_ij^2 / sum_k s_k <= l_ij <= sum min(s_i p_i, s_j p_j) for the off-diagonal conductances (BC the Bhattacharyya coefficient)")
+def t_oi_bridge(rng, trials):
+    quick = trials < 100
+    n, u = 8, 1.0
+    N, idx, D = oi_cube(n)
+    d0 = D[:, 0].astype(float)
+    stats = dict(pairs=0, least_ratio=float("inf"), tail_equalities=0, mbar_instances=0)
+    members = [np.ones(N), np.exp(-u * d0)] + [np.maximum(1.0, np.exp(u * (r - d0))) for r in range(1, n)]
+    for _ in range(8 if quick else 40):
+        members.append(oi_random_weight(rng, n, u, D))
+        cs = rng.integers(0, N, size=int(rng.integers(2, 7)))
+        members.append(np.maximum.reduce([np.maximum(1.0, np.exp(u * (int(rng.integers(1, n)) - D[:, c]))) for c in cs]))
+    for w in members:
+        if not oi_admissible(w, n, u):
+            return False, dict(reason="instance not admissible")
+        A = w.mean()
+        g = w / A
+        mu = w / w.sum()
+        sgrid = list(np.exp(np.linspace(math.log(g.min()) - 0.5, math.log(g.max()) + 0.5, 15))) + [1.0, 1.0 / A, 0.999999 / A]
+        for s in sgrid:
+            om = float(np.minimum(g, s).mean())
+            b = br_bound(n, u, s)
+            if om < b * (1 - 1e-12):
+                return False, dict(reason="Theorem F", s=float(s), omega=om, bound=b)
+            stats["least_ratio"] = min(stats["least_ratio"], om / b)
+            stats["pairs"] += 1
+            Dn = int(np.count_nonzero(g > s))
+            if 0 < Dn < N:
+                r = 0
+                while br_V(n, r) < Dn:
+                    r += 1
+                if r <= n - 1:
+                    exc = float(np.maximum(g - s, 0).mean())
+                    if exc > s * br_m(n, u, r + 1) * (1 + 1e-12) + 1e-15:
+                        return False, dict(reason="tail inequality", s=float(s), r=r)
+                    if abs(exc - s * br_m(n, u, r + 1)) < 1e-12 * exc:
+                        stats["tail_equalities"] += 1
+        for theta in A * np.exp(rng.uniform(-5, 5, size=4)):
+            num = np.minimum(w, theta).mean()
+            den = float((mu * np.minimum(1.0, theta / w)).sum())
+            if abs(num / den / A - 1) > 1e-10:
+                return False, dict(reason="bridge identity")
+        p0 = np.full(N, 1.0 / N)
+        ell = 0.25 * float((p0 * mu / (0.5 * p0 + 0.5 * mu)).sum())
+        Delta = float(((p0 - mu) ** 2 / (p0 + mu)).sum())
+        Om = float(np.minimum(p0, mu).sum())
+        if abs(ell - 0.25 * (1 - Delta / 2)) > 1e-12 or not (Om / 4 - 1e-13 <= ell <= Om / 2 + 1e-13):
+            return False, dict(reason="conductance of two states", ell=ell, omega=Om)
+        # (c) a lifted dip on top of w
+        c = int(rng.integers(0, N))
+        r = int(rng.integers(1, n))
+        w1 = np.maximum(w, float(rng.uniform(0.5, 4.0)) * w[c] * np.exp(u * (r - D[:, c])))
+        Dset = w1 != w
+        if Dset.any():
+            A1 = w1.mean()
+            mu1 = w1 / w1.sum()
+            tv = 0.5 * float(np.abs(mu - mu1).sum())
+            if tv < float(mu[~Dset].sum()) * (1 - A / A1) - 1e-12:
+                return False, dict(reason="Proposition F3", tv=tv)
+    if stats["tail_equalities"] == 0:
+        return False, dict(reason="the tail inequality was never tight: the test would not see a wrong radius")
+    # a small slope: every radius satisfies s m_{r+1} <= 1/2 near s = 1, and the cap 1/2 of Theorem F is the binding term
+    us = 0.05
+    for w in [np.exp(-us * d0)] + [np.maximum(1.0, np.exp(us * (r - d0))) for r in range(1, n)]:
+        g = w / w.mean()
+        for s in (0.9, 1.0, 1.1, 0.999 * float(g.max())):
+            om = float(np.minimum(g, s).mean())
+            if om < br_bound(n, us, s) * (1 - 1e-12):
+                return False, dict(reason="Theorem F at a small slope", s=float(s), omega=om, bound=br_bound(n, us, s))
+    # (d) the pair of Theorem J
+    for (nn, uu, radii) in ((8, 1.0, (2, 3, 4)), (8, 3.0, (2, 3, 4)), (9, 2.0, (2, 4, 5))):
+        NN, _, DD = oi_cube(nn)
+        dn = DD[:, 0].astype(float)
+        anti = DD[:, NN - 1].astype(float)                      # distance to the antipode of 0
+        for r in radii:
+            if not 2 * (r - 1) < nn:
+                return False, dict(reason="radius too large for disjoint balls")
+            mr, v = br_m(nn, uu, r), br_V(nn, r - 1) / NN
+            w0 = np.maximum(1.0, np.exp(uu * (r - dn)))
+            w1 = np.maximum(w0, np.exp(uu * (r - anti)))
+            if abs(w0.mean() - (1 + mr)) > 1e-10 * (1 + mr) or abs(w1.mean() - (1 + 2 * mr)) > 1e-10 * (1 + 2 * mr):
+                return False, dict(reason="partition functions of one and two dips", r=r)
+            L0 = np.bincount(np.rint(np.log(w0) / uu).astype(int), weights=w0 / w0.sum(), minlength=r + 1)
+            L1 = np.bincount(np.rint(np.log(w1) / uu).astype(int), weights=w1 / w1.sum(), minlength=r + 1)
+            tv = 0.5 * float(np.abs(L0 - L1).sum())
+            if abs(tv - (mr + v) / ((1 + mr) * (1 + 2 * mr))) > 1e-12 or tv > 1 / (1 + 2 * mr) + 1e-15:
+                return False, dict(reason="laws of the energy of one and two dips", r=r, tv=tv)
+            if int(np.count_nonzero(DD[:, int(rng.integers(0, NN))] <= r - 1)) != br_V(nn, r - 1):
+                return False, dict(reason="counting identity of Proposition F2")
+    # (e) exponents
+    for uu in (0.5, 1.0, 2.0):
+        pu, a, rho0, h, ell_, kl = oi_consts(uu)
+        estar = math.log(math.cosh(uu / 2))
+        if abs(br_theta_na(0.0, uu) - a) > 1e-7 or abs(br_theta_na(h, uu) - h) > 1e-9 or abs(kl(0.5, pu) - estar) > 1e-12:
+            return False, dict(reason="theta_na at 0 and at h", u=uu)
+        if abs(rho0 + estar / uu - 0.5) > 1e-12 or br_theta_na(estar, uu) > 1e-9:
+            return False, dict(reason="threshold ln cosh(u/2)", u=uu)
+        for frac in (0.1, 0.3, 0.5, 0.7, 0.9):
+            gam = frac * estar
+            if kl(rho0 + gam / uu, 0.5) > br_theta_na(gam, uu) + 1e-12:
+                return False, dict(reason="theta_hint above theta_na", u=uu, gamma=gam)
+    # (f) the allocation theorem of the MBAR division in dual form
+    for _ in range(20 if quick else 120):
+        K = int(rng.integers(2, 5))
+        msup = int(rng.integers(K + 1, 9))
+        P = rng.dirichlet(np.full(msup, float(rng.uniform(0.2, 2.0))), size=K) + 1e-6
+        P /= P.sum(axis=1, keepdims=True)
+        sv = rng.dirichlet(np.ones(K)) * float(rng.uniform(0.5, 3.0)) + 0.02
+        cv = rng.normal(size=K)
+        cv -= cv.mean()
+        L, M, Pi = br_mbar(P, sv)
+        v = np.linalg.pinv(L, rcond=1e-12) @ cv
+        Vp = float(cv @ v - np.sum(cv ** 2 / sv))
+        bvec = cv @ P
+        Vd = float(bvec @ np.linalg.pinv(M, rcond=1e-12) @ bvec)
+        if abs(Vp - Vd) > 1e-7 * max(1.0, abs(Vp)):
+            return False, dict(reason="dual form of the variance", primal=Vp, dual=Vd)
+        z = v @ Pi
+        for a_ in (z, rng.normal(size=msup), (rng.random(msup) < 0.5).astype(float)):
+            mean_k = P @ a_
+            var_k = P @ a_ ** 2 - mean_k ** 2
+            lhs = float(cv @ mean_k) ** 2
+            rhs = Vp * float(sv @ var_k)
+            if lhs > rhs * (1 + 1e-7) + 1e-12:
+                return False, dict(reason="weak duality", lhs=lhs, rhs=rhs)
+            if a_ is z and abs(lhs - rhs) > 1e-6 * max(1e-12, rhs):
+                return False, dict(reason="no equality at a = z", lhs=lhs, rhs=rhs)
+        for i in range(K):
+            for j in range(i + 1, K):
+                lij = -L[i, j]
+                bc = float(np.sqrt(P[i] * P[j]).sum())
+                if not (sv[i] * sv[j] * bc ** 2 / sv.sum() - 1e-12 <= lij <= float(np.minimum(sv[i] * P[i], sv[j] * P[j]).sum()) + 1e-12):
+                    return False, dict(reason="conductance bounds", lij=float(lij))
+        stats["mbar_instances"] += 1
+    return True, stats
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true", help="fewer trials (CI mode)")

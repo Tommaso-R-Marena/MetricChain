@@ -26,6 +26,13 @@ lemma and its corollary correct, except in a degenerate corner of the statement 
 supplied a sharper constant; its seven findings are incorporated, and it read the corrected section and
 the remark on homogeneous spaces once more (§2.3, Note; §10).
 
+*After the owner's collaboration update of 2026-11-28* (a fourth Phase II division, certified MBAR): the
+relations between its statements and ours are in a separate note, `docs/phase2/BRIDGE_NOTE.md` — the
+overlap of the reference with every ensemble of the class (Theorem F), samples in place of adaptivity
+(Corollary F1), the price of a sample (Proposition F2), observables of the energy with a sharp
+threshold (Theorem J).  **That note has had no referee**; the two reviews above predate it.  Its results
+appear below only as two rows of the table of §7 and in §11.
+
 *Starting point.*  The consolidated archive at `fe9f58c` (read through
 `consolidated/00_MASTER_INDEX.md`); the two extensions S1, S2 proposed by an independent
 preliminary synthesis (GPT-6.2) and handed to this division to "challenge, verify, strengthen,
@@ -745,6 +752,8 @@ Cost of `ln A` to bounded accuracy on the cube class, randomised algorithms, lea
 | + exact marginals of every order `≤ αn` | in `[h̄(h₂(α)), (1 − α)h]` | Corollary B′ |
 | + the mean energy (calorimetry) | `h` in the worst case | science division, Proposition 5b |
 | + `e^{νn}` samples | in `[h̄(ν) − ν, h]`; total cost `≥ ν*` | Theorem E |
+| + `e^{νn}` samples, evaluations only at them and at uniform points (non-adaptive) | at most `θ_na(ν)`: `a` at `ν = 0`, `h` at `ν = h`, `0` from `ν = ln cosh(u/2)` on | bridge note, Corollary F1 [P, unrefereed] |
+| + means of functions of the *energy* at tolerance `e^{−γn}` | in `[θ_hint(γ), min(h, θ_na(γ))]` for `γ < ln cosh(u/2)`; `0` (a bounded number of evaluations) beyond | bridge note, Theorem J [P, unrefereed] |
 | + all bounded observables at tolerance `τ ≤ cεδ` | `0` (a bounded number of evaluations) | Proposition C′(a) |
 | + one exact point probability | `0` (one evaluation) | Proposition C′(b) |
 | + samples or one-body marginals of pinned ensembles | `0` (polynomial) | science division A7 [K] |
@@ -835,7 +844,9 @@ not "new".**
    what is the least number of atoms of a hiding family that fools every bounded observable to
    `τ` — `τ^{−2}` (random), or fewer with structure?
 2. **Samples**: is there an algorithm with samples below `e^{nh}` on the whole class?  Lower bound
-   `ν* ≈ 0.40h`.
+   `ν* ≈ 0.40h`.  (Bridge note, Corollary F1: `e^{nh}` samples make the evaluations non-adaptive — every
+   ensemble of the class overlaps the reference by at least `e^{−nh−O(log n)}` — which reaches `h` and does
+   not go below it; Proposition F2: one sample costs at least `e^{n(h−o(1))}` evaluations.)
 3. **Exact marginals of linear order**: `[h̄(h₂(α)), (1 − α)h]`.
 4. **Non-uniform references**: close the sandwich of Proposition 2.7 — is the class exponent with a
    field (Theorem 11.59), or with an interacting known part, invariant under arbitrary bounded
@@ -844,3 +855,7 @@ not "new".**
    complexity?  (Then Theorem A is an invariance theorem there, as on the cube.)
 6. Machine-checking the passage from the cores to the displayed bounds of Theorems A and B on the
    cube (finite `n`; needs the product measure on `X^L`), and any upper bound.
+7. **Observables of the energy** (bridge note, Theorem J): the exponent at tolerance `e^{−γn}` lies in
+   `[θ_hint(γ), min(h, θ_na(γ))]`; the threshold `γ* = ln cosh(u/2)` is exact, the interior is open — do
+   adaptive evaluations of the truncated weight reach `θ_hint(γ)`?
+8. **An independent reading of the bridge note**, which has had none.

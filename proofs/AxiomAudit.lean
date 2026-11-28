@@ -90,6 +90,7 @@ import proofs.Frontiers.GibbsRecovery
 import proofs.Frontiers.Bonferroni
 import proofs.Frontiers.FactorElimination
 import proofs.Frontiers.ObservationInvariance
+import proofs.Frontiers.BridgeOverlap
 import proofs.AuditCommand
 
 /-!
@@ -2010,6 +2011,20 @@ for independent translations, cores of the upper bounds, maxima of random transl
 #print axioms MetricChain.sum_tuples_bias_eq_zero
 #print axioms MetricChain.sum_tuples_sup'_bias_eq_zero
 #print axioms MetricChain.abs_sup'_sub_sup'_le
+
+/-! ### Phase II, the bridge note: the overlap of a reference with an ensemble (the bridge identity,
+the dichotomy behind Theorem F, a change of the partition function cannot be hidden from samples,
+the laws of the energy of one and two dips, conductances of the multistate equations;
+`BridgeOverlap.lean`) -/
+
+#print axioms MetricChain.bridge_identity
+#print axioms MetricChain.overlap_ge_of_tail_bound
+#print axioms MetricChain.tv_ge_of_agree_off
+#print axioms MetricChain.one_two_dips_gap
+#print axioms MetricChain.mixture_mean_diff_le
+#print axioms MetricChain.ratio_within
+#print axioms MetricChain.harmonic_between_min
+#print axioms MetricChain.sq_sum_sqrt_mul_le
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

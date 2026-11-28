@@ -1485,6 +1485,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/Bonferroni.lean` | `pairSum`, `sum_sq_le_sq_sum`, `pairSum_nonneg`, `pairSum_insert`, `prod_one_sub_le`, `one_sub_sum_le_prod`, `prod_one_sub_mem`, `pairSum_eq_offDiag` (the second Bonferroni inequality for a product of numbers in `[0, 1]`, `∏(1 − c_i) ≤ 1 − Σc_i + Σ_{pairs} c_ic_j`, with the first as its lower partner — inequality (c) of the Scientific Discovery Division's Proposition A17.23 (its SCI-RES-0035: an upper end for a partition function from the laws of single held sites and of pairs of held sites under the floor); the statement and the induction are that division's, the file is the coordinator's; twenty-fourth checkpoint) |
 | `proofs/Frontiers/FactorElimination.lean` | `sum_boxFinset_branch`, `sum_boxFinset_elim`, `sum_boxFinset_sumOut`, `sum_boxFinset_relax` (summing a site out of a box sum for *arbitrary* summands — the identity behind bucket elimination, of which `WInstance.elim1` and `WInstance.elim2` are the cases that stay pairwise — and the termwise relaxation of a factor; semantic rules asked for by the Structural & Computational Biology division, STRUCTBIO-REQ-0003 items R-1 and R-3; not an executable kernel: a table-level checker that implements them is not verified by this file) |
 | `proofs/Frontiers/ObservationInvariance.lean` | `tolerant_oracle_packing`, `tolerant_oracle_packing_nonadaptive` (packing bounds with a *tolerant* oracle: a relation "the answer is admissible for the instance"; the bound counts the alternatives for which the baseline's answer is admissible), `LogLip`, `LogLip.comp_isometry`, `LogLip.convex_comb`, `LogLip.max`, `LogLip.sup'`, `LogLip.cone`, `LogLip.dip` (the admissible cone), `massOf_convex_comb_eq`, `ensOf_convex_comb`, `massOf_comp_equiv`, `ensOf_comp_equiv`, `sum_translates_eq` (mixtures and translations), `hiding_law_sum`, `flat_mixture`, `flat_mixture_truncated` (the flat mixture for an arbitrary reference), `sum_mul_char_eq_zero`, `ensemble_mean_eq_of_spectrum`, `exists_separating_tuple`, `walsh_add`, `parity_balanced`, `exists_generators_cube`, `exists_generators_kill` (exact observables: invariance kills characters; fewer than `2^r` frequencies are avoided by `r` generators), `hoeffding_iid_mean`, `chebyshev_iid_mean` (Hoeffding and Chebyshev for independent draws, from Mathlib's inequalities on a product measure), `abs_log_le_of_abs_sub_one_le`, `random_cell_failure_le` (cores of the Phase II upper bounds), `sum_tuples_bias_eq_zero`, `sum_tuples_sup'_bias_eq_zero`, `abs_sup'_sub_sup'_le` (maxima of random translates: no bias on average against a centred observable; a maximum is 1-Lipschitz in each argument) | §11.34; `docs/phase2/PHASE2_REPORT.md` |
+| `proofs/Frontiers/BridgeOverlap.lean` | `mul_min_one_div`, `bridge_identity` (`E_π[min(w,θ)] = A·E_μ[min(1,θ/w)]`), `min_eq_sub_max`, `sum_min_eq_sub_tail`, `card_superlevel_mul_le_sum_min`, `overlap_ge_of_tail_bound` (the dichotomy behind Theorem F of the bridge note: a tail bound on small super-level sets gives `Σ min(g, s) ≥ min(N/2, s(V+1))`), `tv_ge_of_agree_off` (weights that agree off `D`: total variation of the ensembles at least `μ₀(Dᶜ)(1 − A₀/A₁)`), `one_two_dips_gap`, `mixture_mean_diff_le` (the laws of the energy of one and two disjoint dips), `ratio_within`, `harmonic_between_min`, `sq_sum_sqrt_mul_le` (an off-diagonal conductance of the multistate equations is at least the squared Bhattacharyya coefficient over the total weight) | §11.34 (last item); `docs/phase2/BRIDGE_NOTE.md` |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -9225,6 +9226,19 @@ do with `e^{nθ₂* + o(n)}` evaluations *at* the flat-histogram instance (Corol
 (3) Strict monotonicity of `τ^{(r)}` and the rate of
 `τ^{(r)} → h`.  (4) The same questions with a known part.
 
+*Added in Phase II (2026-11-28) — reported by the Phase II adaptive-hierarchy division
+(`research/phase2-adaptive-hierarchy`, messages HIE-MSG-0001 and its linked correction HIE-MSG-0002);
+**not verified by us**: we read the two messages and its status file, not its reports.*  (d): "three
+do" is reported proved for every bounded number of known blocks (its Theorem H1, with a relaxation
+lemma for what two rounds do not reveal), reviewed by an AI referee of that division and replicated
+by the engineering division (ENG-RES-0020).  Open question (1): three rounds are reported to reach `h`
+on every class of energies with a bounded number of *hidden* symmetry classes (its Theorems P and
+H6: hidden blocks, hidden partitions, overlapping centres), so that a three-round separation, if
+there is one, needs unboundedly many hidden classes; the general class `L_u` remains open (its
+Conjecture H5).  The numerical statement at the end of (e) is reported as a theorem at every slope
+for boundedly many blocks (its Corollary H4, as narrowed in HIE-MSG-0002).  Theorems 11.84–11.86 are
+unchanged and were reproduced by that division.
+
 *Harness.*  Block XX of `experiments/falsify_conjectures.py`: XX.1 (Theorem 11.86: the twins
 on type grids — Lipschitz property, coincidence on `V₂`, dependence on `d₁` only on `W₁`,
 `A(F_S) ≤ (n+1)²`, and a gap above 1 at a budget whose exponent exceeds the bound for all
@@ -12684,6 +12698,23 @@ Besides evaluations the algorithm receives information about the normalised ense
 * Also machine-checked there: Chebyshev's inequality for the mean of independent draws (`chebyshev_iid_mean`),
   the probabilistic core of Theorem 11.44 (plain Monte Carlo); the bound on the relative variance over the class
   remains a paper proof.
+* **Added after the owner's collaboration update of 2026-11-28 (a division on certified MBAR): the bridge note,
+  `docs/phase2/BRIDGE_NOTE.md` — [P], unrefereed; exact steps V (`proofs/Frontiers/BridgeOverlap.lean`:
+  `bridge_identity`, `overlap_ge_of_tail_bound`, `tv_ge_of_agree_off`, `one_two_dips_gap`, `mixture_mean_diff_le`,
+  `ratio_within`, `harmonic_between_min`, `sq_sum_sqrt_mul_le`); harness XXVIII.5.**  *Theorem F:* by Lemma 11.43(b),
+  every member of the cube class has `E_π min(w/A, s) ≥ min(½, s(V(n, r_s)+1)/2ⁿ)`, `r_s` the largest radius with
+  `s·m_{r+1} ≤ ½`; in particular `1 − TV(π, μ_w) ≥ e^{−nh−O(log n)}`, attained by the cone — so the largest two-state
+  effective resistance of bridge sampling over the class has the exponent `h` of adaptive evaluation.
+  *Corollary F1:* with `e^{ν₁n}` samples of the ensemble, `e^{(θ_na(ν₁)+o(1))n}` non-adaptive evaluations suffice on the
+  whole class (the bridge identity `A = E_π[min(w,θ)]/E_μ[min(1,θ/w)]` on a grid of thresholds): `a` without
+  samples, `h` with `e^{nh}` of them, `0` with `e^{n ln cosh(u/2)}` — the curve `θ_na` of Theorem 11.44, with the number of
+  samples in the place of the accuracy.  *Proposition F2:* one approximate sample of the ensemble costs at least
+  `e^{n(h−o(1))}` evaluations.  *Proposition F3:* weights that agree off `D` have ensembles at total variation at
+  least `μ₀(Dᶜ)(1 − A₀/A₁)` — no hiding pair of this report is hard for samples.  *Theorem J:* with means of functions
+  of the *energy* at tolerance `e^{−γn}` the exponent lies in `[θ_hint(γ), min(h, θ_na(γ))]`, and the cost is bounded
+  beyond `γ* = ln cosh(u/2)`: an exact threshold, where for observables of the position (Theorem A′) the two bounds
+  are far apart.  The note also relates these to the statements of the MBAR division (its allocation theorem in
+  dual form as a `c`-optimal design problem; a counterexample to convexity for correlated samples).
 
 ## 12. Strongest unresolved questions, and what a publication would need
 

@@ -3029,6 +3029,52 @@ inside the session.*
   196 tests (166 survive, 30 documented refutations); 645 mutations (644 caught, 1 expected pass); document
   references re-checked on the final tree.
 
+#### Phase II, continued (2026-11-28, after 05:30 UTC): the owner's collaboration update — relations with the certified-MBAR division
+
+*The update: a fourth Phase II division (`research/phase2-certified-mbar`) investigates rigorous
+improvements of the multistate Bennett acceptance ratio; we are to stay informed, look for
+mathematically substantive relations without assuming the oracle models equivalent, exchange
+statements, proofs and counterexamples, and not duplicate its work.  No additional expenditure.*
+
+* **Inbound read** (fetch of 05:27 UTC).  The MBAR branch at `003dad8` (a provenance file and an imported
+  package; its main note read in full).  ENG-MSG-0010 (engineering, `1bb0dcc`): it withdraws the
+  statement about the envelope ratio that THY-MSG-0023 had quoted, uses our marginalisation inequality
+  with credit and reports it sound in 24 of 24 exact cases, and has stopped.  HIE-MSG-0001/-0002
+  (adaptive hierarchy, `e3e6e30`): three rounds reported sufficient on every class with boundedly many
+  hidden symmetry classes; its reports were not read, its request for an attack on its Lemma B was not
+  met; recorded under Proposition 11.88 as reported, not verified.
+* **The first observation.**  For two states the MBAR Laplacian is, up to a factor two, the truncated
+  mean `E_π min(w/A, s)` — the overlap — and Lemma 11.43(b) of Phase I (the mass above a threshold is at
+  most the excess of a dip on a ball of the size of the super-level set) bounds it *for every member of
+  the class*: Theorem F.  At `s = 1` the exponent is `h`: the adaptive exponent is also the exponent of the
+  largest effective resistance of bridge sampling over the class.
+* **What followed.**  (i) The bridge identity `A = E_π[min(w,θ)]/E_μ[min(1,θ/w)]` with a grid of thresholds
+  gives a *non-adaptive* algorithm with samples on the whole class (Corollary F1); the trade-off between
+  samples and evaluations is the curve `θ_na` that Phase I had for accuracy against evaluations.
+  (ii) One sample costs `e^{nh}` evaluations (F2); (iii) a change of `ln A` cannot be hidden from samples
+  (F3) — which is why none of our hiding pairs is hard for samples and why Theorem E needs the birthday
+  mechanism; (iv) the identity turns a *function of the energy* into the useful observable: Theorem J,
+  with an exact threshold `ln cosh(u/2)` for the precision.
+* **For the other division.**  Its convexity theorem for the allocation of samples checked on 300 random
+  instances; its variance has a dual form with an information operator *linear* in the allocation
+  (so: `c`-optimal design); and a **counterexample**: with correlated samples of unequal correlation
+  times the variance of MBAR on the raw samples is not convex, not even quasi-convex, in the allocation
+  (three states on four points; simulated at seven standard errors), while the estimator weighted by the
+  correlation times is.  Sent as THY-MSG-0024.
+* **Negative results and corrections on the way** (`DEAD_ENDS.md` D72).  The first pair for the lower
+  bound of Theorem J (a second dip at a random centre) needed a side condition, because the overlap of
+  the two dips moves the law of the energy by more than the tolerance; the antipodal dip has no overlap
+  and no condition.  A conductance bound was stated without the total weight and is false off the
+  simplex (found by the harness).  A first choice of test instances did not see that the cap `½` of
+  Theorem F is needed (found by a mutation that was not caught).  Simulating the counterexample with 240
+  replicates gave 2.9 standard errors; it was stated only after 1 000.
+* **Verification.**  `proofs/Frontiers/BridgeOverlap.lean` (12 declarations); `experiments/phase2/p2_bridge.py`
+  (11 checks); harness XXVIII.5 with 13 mutations, all caught.  **No referee**: the session's expenditure
+  cannot be monitored and a third review was not started.
+<!-- LOG:AUDIT2 -->
+* **Audit.**  *(running when this entry was written)*
+<!-- /LOG:AUDIT2 -->
+
 ### Resume here (cycle 10, twenty-fourth checkpoint; valid at the consolidation halt of 2026-11-27 with the changes stated first)
 
 **HALTED.**  This branch is halted under the research owner's consolidation directive of 2026-11-27; do not
