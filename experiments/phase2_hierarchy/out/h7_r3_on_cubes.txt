@@ -1,0 +1,20 @@
+Algorithm R3 on real cubes (u = 1).  z = (mean estimate - A)/standard error over the runs.
+  cones    blocks (6, 6)    M= 3  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 2.7e-16 | z = +0.00 | mutation uniform weights: |z| = 1.45e+16 | no reveal: z = +0.75
+  cones    blocks (6, 6)    M=30  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 1.3e-16 | z = +0.00 | mutation uniform weights: |z| = 1.47e+16 | no reveal: z = +0.21
+  cones    blocks (5, 4, 5) M= 3  revealed 2.0 of 3 | candidates ok True | exact when all revealed True | max rel. error 1.4e-16 | z = +0.00 | mutation uniform weights: |z| = 1.02e+301 | no reveal: z = -1.15
+  cones    blocks (5, 4, 5) M=30  revealed 2.0 of 3 | candidates ok True | exact when all revealed True | max rel. error 1.4e-16 | z = +0.00 | mutation uniform weights: |z| = 1.82e+16 | no reveal: z = -0.10
+  cones    blocks (7, 7)    M= 3  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 5.1e-16 | z = +0.00 | mutation uniform weights: |z| = 8.94e+15 | no reveal: z = -0.56
+  cones    blocks (7, 7)    M=30  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 3.9e-16 | z = +0.00 | mutation uniform weights: |z| = 7.33e+15 | no reveal: z = +1.91
+  periodic blocks (6, 6)    M= 3  revealed 1.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 2.0e-01 | z = +1.96 | mutation uniform weights: |z| = 45.4 | no reveal: z = +0.78
+  periodic blocks (6, 6)    M=30  revealed 1.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 6.7e-02 | z = +0.84 | mutation uniform weights: |z| = 152 | no reveal: z = +0.84
+  periodic blocks (5, 4, 5) M= 3  revealed 2.0 of 3 | candidates ok True | exact when all revealed True | max rel. error 1.0e-01 | z = -0.65 | mutation uniform weights: |z| = 62.6 | no reveal: z = -0.37
+  periodic blocks (5, 4, 5) M=30  revealed 2.0 of 3 | candidates ok True | exact when all revealed True | max rel. error 2.9e-02 | z = +1.23 | mutation uniform weights: |z| = 203 | no reveal: z = -0.34
+  periodic blocks (7, 7)    M= 3  revealed 1.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 1.6e-01 | z = -0.42 | mutation uniform weights: |z| = 51.6 | no reveal: z = +1.33
+  periodic blocks (7, 7)    M=30  revealed 1.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 5.0e-02 | z = -2.34 | mutation uniform weights: |z| = 167 | no reveal: z = +1.02
+  far      blocks (6, 6)    M= 3  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 2.0e-16 | z = +0.00 | mutation uniform weights: |z| = 2.97e+16 | no reveal: z = +0.17
+  far      blocks (6, 6)    M=30  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 2.0e-16 | z = +0.00 | mutation uniform weights: |z| = 2.56e+16 | no reveal: z = +0.45
+  far      blocks (5, 4, 5) M= 3  revealed 3.0 of 3 | candidates ok True | exact when all revealed True | max rel. error 4.0e-16 | z = +0.00 | mutation uniform weights: |z| = 1.76e+16 | no reveal: z = -0.44
+  far      blocks (5, 4, 5) M=30  revealed 3.0 of 3 | candidates ok True | exact when all revealed True | max rel. error 6.6e-16 | z = +0.00 | mutation uniform weights: |z| = 1.23e+16 | no reveal: z = -0.66
+  far      blocks (7, 7)    M= 3  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 5.1e-16 | z = +0.00 | mutation uniform weights: |z| = 2.26e+16 | no reveal: z = +0.56
+  far      blocks (7, 7)    M=30  revealed 2.0 of 2 | candidates ok True | exact when all revealed True | max rel. error 6.4e-16 | z = +0.00 | mutation uniform weights: |z| = 1.95e+16 | no reveal: z = +0.20
+failures of (a), (b), (c): 0
