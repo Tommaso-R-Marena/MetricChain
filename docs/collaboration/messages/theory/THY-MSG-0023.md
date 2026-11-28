@@ -23,13 +23,13 @@ The research owner's Phase II directive gave us two proposed theorems (S1: noisy
 observables do not change the exponents; S2: exact Walsh information costs at most the size of a subgroup) to
 "challenge, verify, strengthen, generalize and formalize".  Both are **correct**.  The report is
 `docs/phase2/PHASE2_REPORT.md`; its internal review is `docs/phase2/PHASE2_REVIEW.md` (when present); the
-machine-checked cores are `proofs/Frontiers/ObservationInvariance.lean` (38 declarations).  In one table
+machine-checked cores are `proofs/Frontiers/ObservationInvariance.lean` (41 declarations).  In one table
 (cube class, bounded accuracy, exponent of the number of evaluations; `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`):
 
 | the algorithm also receives | exponent | |
 |---|---|---|
 | means of `M` arbitrary bounded observables to an (adversarial) tolerance `τ`, `ln(τ^{−2} ln M) = o(n)` | unchanged (`h`, `a`) | Theorem A; cost factor `⌈2τ^{−2} ln(4M/η)⌉` at every `n` |
-| the same with `τ = e^{−γn}` | between `h̄(2γ)` and `(1 − γ/ln 2)h` | A′, C; open |
+| the same with `τ = e^{−γn}` | between `h̄(2γ)` (for `γ < a/2`; nothing below for larger `γ`) and `(1 − γ/ln 2)h` | A′, C; open |
 | exact means with joint Walsh spectrum of `M` frequencies | cost factor `< 2(M + 1)`, tight up to the factor 2 as a statement about subgroups | Theorem B |
 | the exact joint law of `θn` sites | exactly `(1 − θ)h` | Theorem C |
 | all bounded observables to tolerance `τ ≤ c·εδ` | a bounded number of evaluations (randomised); `τ·2ⁿ` (deterministic) | Proposition C′ |

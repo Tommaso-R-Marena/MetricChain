@@ -2979,15 +2979,16 @@ inside the session.*
   cruder: absorption (Proposition 2.7), a sandwich `h(u − κ) ≤ … ≤ h(u + κ)`.
   (3) The narrow-dip improvement came from asking what the factor `L` is spent on.  (4) The sample
   model needed maxima, not averages, of dips: exact evaluations reveal the scale of an average.
-* **Machine-checked** (`proofs/Frontiers/ObservationInvariance.lean`, 38 declarations): packing
+* **Machine-checked** (`proofs/Frontiers/ObservationInvariance.lean`, 41 declarations): packing
   bounds with a tolerant oracle; the cone; mixtures; the flat mixture; characters and the counting
   form of the union bound; parities on the cube; Hoeffding and Chebyshev for independent draws (from
-  Mathlib's inequalities on product measures); two cores of the new upper bounds.  Chebyshev for
+  Mathlib's inequalities on product measures); two cores of the new upper bounds; maxima of random
+  translates (no bias on average, 1-Lipschitz in each argument — the deterministic steps of Theorem A′).  Chebyshev for
   independent draws is also the probabilistic core of plain Monte Carlo (Theorem 11.44) — the one step
   of "strengthening the formal verification of the upper bounds" taken in Phase II; the bound on the
   relative variance of the class and the nested algorithm remain paper proofs.
-* **Checks.**  `experiments/phase2/p2_checks.py` (32 exact checks); harness block XXVIII (four
-  tests) with 21 mutations, all caught.
+* **Checks.**  `experiments/phase2/p2_checks.py` (37 checks, exact enumeration or closed forms); harness block
+  XXVIII (four tests) with 27 mutations, all caught.
 * **R29** (`docs/phase2/R29_RESOLUTION.md`): F2 applied; F3–F6 had been applied before the halt after
   our own referee's report; F7 unchanged ([N]); F1 resolved by making the independent exact checker the
   stated evidence and measuring it against mutations of the script.
@@ -2997,8 +2998,8 @@ inside the session.*
   in THY-MSG-0023 (marginalisation with a non-product reference: constant `u + κ`; additivity is
   essential for exact intervals once `u ≥ C ln n`).  `research/phase2-adaptive-hierarchy` did not exist
   at the last fetch.
-* **Open** (most consequential first): the exponent at tolerance `e^{−γn}` (between `h̄(2γ)` and
-  `(1 − γ/ln 2)h`); an algorithm that uses samples; exact marginals of linear order; invariance with a
+* **Open** (most consequential first): the exponent at tolerance `e^{−γn}` (between `h̄(2γ)`, `γ < a/2`,
+  and `(1 − γ/ln 2)h`; nothing below for `γ ≥ a/2`); an algorithm that uses samples; exact marginals of linear order; invariance with a
   field; second-order terms.
 * **Audit.**  See the last lines of this entry in the final Phase II commit.
 

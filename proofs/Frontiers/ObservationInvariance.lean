@@ -5,7 +5,7 @@ import proofs.Frontiers.NonAdaptive
 /-!
 # Phase II: observation oracles — the machine-checked cores
 
-Source: `docs/phase2/PHASE2_REPORT.md` (Theorems A, A″, B, C; Lemmas 2.1–2.4, 2.6, 3.1, 3.2).
+Source: `docs/phase2/PHASE2_REPORT.md` (Theorems A, A′, A″, B, C; Lemmas 2.1–2.4, 2.5 (iv), 2.6, 3.1, 3.2).
 
 An *observation oracle* gives an algorithm, besides evaluations of the residual, information
 about the normalised ensemble.  The report proves that such information changes the query
@@ -44,6 +44,12 @@ parts of those proofs that are not probability theory:
   (`abs_log_le_of_abs_sub_one_le`); the random-cell estimator of Theorem C (b) and of the full
   oracle (`random_cell_failure_le`); Chebyshev's inequality for the mean of independent draws —
   the probabilistic core of plain Monte Carlo, theory report Theorem 11.44 (`chebyshev_iid_mean`).
+
+* Part 8 — **maxima of random translates** (Lemma 2.5 (iv), the two deterministic steps of
+  Theorem A′): the bias of any translation-equivariant family against an observable of zero
+  sum vanishes when summed over all tuples of centres (`sum_tuples_bias_eq_zero`; for maxima of
+  translates: `sum_tuples_sup'_bias_eq_zero`); a maximum is 1-Lipschitz in each argument
+  (`abs_sup'_sub_sup'_le`).  The bounded-differences inequality itself is cited, not proved.
 
 Nothing is assumed: no statement of the report enters as a hypothesis.  What is *not* here: the
 passage from these cores to exponents (binomial asymptotics), the bound on the relative variance
@@ -760,5 +766,76 @@ theorem chebyshev_iid_mean {Ω₀ : Type*} [MeasurableSpace Ω₀] (ν : Measure
   field_simp
 
 end UpperBounds
+
+/-! # Part 8: maxima of random translates — no bias on average, bounded differences
+
+Lemma 2.5 (iv) of the report.  For independent uniform centres `c = (c_j)` the weight
+`w_c = 1 + max_j e(· − c_j)` has, against every observable `ψ` of zero mean, a bias
+`E_π[(w_c − 1)ψ]` whose average over the centres is exactly zero — overlaps of the translates
+included — because the construction commutes with translations; and changing one centre changes
+`w_c` pointwise by at most the difference of the two translates.  With the bounded-differences
+inequality (cited in the report, not formalised) these two facts give Theorem A′. -/
+
+section MaximaOfTranslates
+
+/-- **No bias on average.**  Let `F c x` be a family of functions on a finite abelian group,
+indexed by tuples of centres, that commutes with translations.  Then for every `ψ` of zero sum
+the pairings `∑ x, F c x * ψ x` add up to zero over all tuples of centres. -/
+theorem sum_tuples_bias_eq_zero {X ι : Type*} [AddCommGroup X] [Fintype X] [Fintype ι]
+    [DecidableEq ι] (F : (ι → X) → X → ℝ)
+    (hF : ∀ (c : ι → X) (a x : X), F (fun j => c j + a) (x + a) = F c x)
+    (ψ : X → ℝ) (hψ : ∑ x, ψ x = 0) :
+    ∑ c : ι → X, ∑ x, F c x * ψ x = 0 := by
+  have key : ∀ x : X, ∑ c : ι → X, F c x = ∑ c : ι → X, F c 0 := by
+    intro x
+    have h1 : ∀ c : ι → X, F (fun j => c j + x) x = F c 0 := by
+      intro c
+      have h := hF c x 0
+      rwa [zero_add] at h
+    calc ∑ c : ι → X, F c x
+        = ∑ c : ι → X, F ((Equiv.piCongrRight fun _ : ι => Equiv.addRight x) c) x :=
+          (Equiv.sum_comp (Equiv.piCongrRight fun _ : ι => Equiv.addRight x)
+            (fun c => F c x)).symm
+      _ = ∑ c : ι → X, F c 0 := Finset.sum_congr rfl fun c _ => h1 c
+  rw [Finset.sum_comm]
+  calc ∑ x, ∑ c : ι → X, F c x * ψ x = ∑ x, (∑ c : ι → X, F c 0) * ψ x := by
+        refine Finset.sum_congr rfl fun x _ => ?_
+        rw [← Finset.sum_mul, key x]
+    _ = (∑ c : ι → X, F c 0) * ∑ x, ψ x := by rw [Finset.mul_sum]
+    _ = 0 := by rw [hψ, mul_zero]
+
+/-- **Lemma 2.5 (iv), first part.**  The maximum of the translates `e(· − c_j)` of any function,
+paired with an observable of zero sum, adds up to zero over all tuples of centres. -/
+theorem sum_tuples_sup'_bias_eq_zero {X ι : Type*} [AddCommGroup X] [Fintype X] [Fintype ι]
+    [DecidableEq ι] [Nonempty ι] (e ψ : X → ℝ) (hψ : ∑ x, ψ x = 0) :
+    ∑ c : ι → X, ∑ x, (univ.sup' univ_nonempty fun j => e (x - c j)) * ψ x = 0 :=
+  sum_tuples_bias_eq_zero (fun c x => univ.sup' univ_nonempty fun j => e (x - c j))
+    (fun c a x => by simp only [add_sub_add_right_eq_sub]) ψ hψ
+
+/-- **Lemma 2.5 (iv), second part.**  A maximum is 1-Lipschitz in each argument: if two finite
+families of reals differ at one index only, their maxima differ by at most the difference
+there. -/
+theorem abs_sup'_sub_sup'_le {ι : Type*} [Fintype ι] [Nonempty ι] (g g' : ι → ℝ) (j : ι)
+    (h : ∀ i, i ≠ j → g i = g' i) :
+    |univ.sup' univ_nonempty g - univ.sup' univ_nonempty g'| ≤ |g j - g' j| := by
+  have one : ∀ p q : ι → ℝ, (∀ i, i ≠ j → p i = q i) →
+      univ.sup' univ_nonempty p ≤ univ.sup' univ_nonempty q + |p j - q j| := by
+    intro p q hpq
+    refine Finset.sup'_le _ _ fun i _ => ?_
+    have h1 : q i ≤ univ.sup' univ_nonempty q := Finset.le_sup' q (Finset.mem_univ i)
+    by_cases hij : i = j
+    · rw [hij] at h1 ⊢
+      have h2 : p j - q j ≤ |p j - q j| := le_abs_self _
+      linarith
+    · rw [hpq i hij]
+      have h2 := abs_nonneg (p j - q j)
+      linarith
+  have a1 := one g g' h
+  have a2 := one g' g (fun i hi => (h i hi).symm)
+  rw [abs_sub_comm (g' j) (g j)] at a2
+  rw [abs_le]
+  constructor <;> linarith
+
+end MaximaOfTranslates
 
 end MetricChain

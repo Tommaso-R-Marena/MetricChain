@@ -1981,7 +1981,8 @@ elimination, and the termwise relaxation of a factor (items R-1 and R-3 of STRUC
 
 /-! ### Phase II: observation oracles (tolerant-oracle packing bounds, the admissible cone,
 mixtures, the flat mixture, exact observables, the counting form of the union bound, Hoeffding
-for independent translations, cores of the upper bounds; `ObservationInvariance.lean`) -/
+for independent translations, cores of the upper bounds, maxima of random translates;
+`ObservationInvariance.lean`) -/
 
 #print axioms MetricChain.tolerant_oracle_packing
 #print axioms MetricChain.tolerant_oracle_packing_nonadaptive
@@ -2006,6 +2007,9 @@ for independent translations, cores of the upper bounds; `ObservationInvariance.
 #print axioms MetricChain.abs_log_le_of_abs_sub_one_le
 #print axioms MetricChain.random_cell_failure_le
 #print axioms MetricChain.chebyshev_iid_mean
+#print axioms MetricChain.sum_tuples_bias_eq_zero
+#print axioms MetricChain.sum_tuples_sup'_bias_eq_zero
+#print axioms MetricChain.abs_sup'_sub_sup'_le
 
 /-! ### Automatic audit of every declaration (run last, so that it also covers the definitions
 used by the witnesses above) -/

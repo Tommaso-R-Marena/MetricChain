@@ -15092,7 +15092,7 @@ def t_oi_noisy(rng, trials):
     return True, stats
 
 
-@conjecture("XXVIII.2 Phase II, Lemma 2.5 and Corollary A' (maxima of narrow dips).  On the cube of 9 sites: w_c = 1 + max_j e_r(. + c_j) is admissible; L m_r - O_c <= A(w_c) - 1 <= L m_r with O_c the sum of the pairwise overlaps E_pi min(e, e'); the average over all pairs of centres of the pair overlap is at most m_r V(n, r-1)/2^n; TV(mu_{w_c}, ideal mixture) <= O_c/(1 + L m_r - O_c).  Exponent function hbar(lam) = KL(rho_0 - lam/u || 1/2) - lam: hbar(0) = h, hbar(a) = 0, slope -(1 - ell) at 0, convex; rho_0 = p_u + a/u and KL(rho_0||1/2) = KL(rho_0||p_u) (h is the Chernoff information of the two site laws); hbar(2 gamma) >= h - 2 gamma and <= (1 - gamma/ln 2) h on the range where it is positive")
+@conjecture("XXVIII.2 Phase II, Lemma 2.5 and Corollary A' (maxima of narrow dips).  On the cube of 9 sites: w_c = 1 + max_j e_r(. + c_j) is admissible; L m_r - O_c <= A(w_c) - 1 <= L m_r with O_c the sum of the pairwise overlaps E_pi min(e, e'); the average over all pairs of centres of the pair overlap is at most m_r V(n, r-1)/2^n; TV(mu_{w_c}, ideal mixture) <= O_c/(1 + L m_r - O_c).  Lemma 2.5(iv) and the probabilistic steps of Theorem A' (bounded differences), by exact enumeration of ALL tuples of centres on cubes of 4 to 6 sites: for a centred psi the bias functional G(c) = E_pi[(w_c - 1) psi] has mean zero over the tuples, overlaps included; changing one centre moves it by at most 2 |psi|_inf m_r; its variance is at most L d^2/4 and its exact tails are below the bounded-differences bound 2 exp(-2 t^2/(L d^2)), d = 2 |psi|_inf m_r; A(w_c) - 1 >= R - O_c for every tuple and P(O_c >= R/2) <= (L-1) V(n, r-1)/2^n, R = L m_r.  Exponent function hbar(lam) = KL(rho_0 - lam/u || 1/2) - lam: hbar(0) = h, hbar(a) = 0, slope -(1 - ell) at 0, convex; rho_0 = p_u + a/u and KL(rho_0||1/2) = KL(rho_0||p_u) (h is the Chernoff information of the two site laws); hbar(2 gamma) >= h - 2 gamma and <= (1 - gamma/ln 2) h on the range where it is positive; hbar > 0 on [0, a)")
 def t_oi_narrow(rng, trials):
     quick = trials < 100
     n, u = 9, 1.0
@@ -15124,6 +15124,39 @@ def t_oi_narrow(rng, trials):
         if mean_pair > m_r * V / N + 1e-14:
             return False, dict(reason="mean pair overlap exceeds m_r V / 2^n", mean_pair=float(mean_pair))
         stats["configurations"] += 1
+    # Lemma 2.5 (iv) and the probabilistic steps of Theorem A' (bounded differences): exact enumeration of all tuples
+    stats["tuples_enumerated"] = 0
+    for (n4, r4, L4, u4) in (((5, 2, 3, 1.0), (4, 3, 4, 1.5)) if quick else ((5, 2, 3, 1.0), (6, 2, 2, 1.0), (4, 3, 4, 1.5), (5, 3, 3, 0.7))):
+        N4 = 1 << n4
+        wt4 = np.array([bin(x).count("1") for x in range(N4)])
+        e4 = np.where(wt4 < r4, np.exp(u4 * (r4 - wt4)) - 1.0, 0.0)
+        Em = e4[np.bitwise_xor.outer(np.arange(N4), np.arange(N4))]                  # Em[x, c] = e_r(x + c)
+        parts = [Em.reshape((N4,) + tuple(N4 if i == j else 1 for i in range(L4))) for j in range(L4)]
+        W4 = parts[0]
+        for q4 in parts[1:]:
+            W4 = np.maximum(W4, q4)                                                  # (w_c - 1)(x) for every tuple c
+        O4 = np.broadcast_to(sum(np.minimum(parts[i], parts[j]).mean(axis=0) for i in range(L4) for j in range(i)), (N4,) * L4)
+        m4, V4 = e4.mean(), int(np.count_nonzero(wt4 < r4))
+        R4 = L4 * m4
+        if not np.all(W4.mean(axis=0) >= R4 - O4 - 1e-12):
+            return False, dict(reason="A(w_c) - 1 < R - O_c for some tuple of centres", n=n4, L=L4)
+        if (O4 >= R4 / 2 - 1e-15).mean() > (L4 - 1) * V4 / N4 + 1e-12:
+            return False, dict(reason="P(O_c >= R/2) exceeds (L-1) V / 2^n", n=n4, L=L4)
+        for phi4 in (rng.choice([-1.0, 1.0], size=N4), rng.uniform(-1, 1, size=N4)):
+            psi4 = phi4 - phi4.mean()
+            G4 = np.tensordot(psi4, W4, axes=(0, 0)) / N4                            # the bias functional, all tuples
+            d4 = 2 * np.abs(psi4).max() * m4
+            if abs(G4.mean()) > 1e-12 * max(1.0, m4):
+                return False, dict(reason="the bias of a maximum of random dips against a centred observable does not average to zero", mean=float(G4.mean()))
+            if (G4.max(axis=-1) - G4.min(axis=-1)).max() > d4 + 1e-12:
+                return False, dict(reason="one centre moves the bias functional by more than 2 |psi|_inf m_r", n=n4, L=L4)
+            if G4.var() > L4 * d4 * d4 / 4 + 1e-12:
+                return False, dict(reason="variance of the bias functional exceeds L d^2/4", n=n4, L=L4)
+            for t4 in (0.5, 1.0, 1.5, 2.0, 3.0):
+                tt = t4 * math.sqrt(L4) * d4 / 2
+                if (np.abs(G4) >= tt - 1e-15).mean() > 2 * math.exp(-2 * tt * tt / (L4 * d4 * d4)) + 1e-12:
+                    return False, dict(reason="exact tail of the bias functional exceeds the bounded-differences bound", t=t4, n=n4, L=L4)
+        stats["tuples_enumerated"] += N4 ** L4
     for uu in (0.5, 1.0, 2.0):
         pu, a, rho0, h, ell, kl = oi_consts(uu)
         if abs(rho0 - (pu + a / uu)) > 1e-12 or abs(kl(rho0, pu) - h) > 1e-12:
@@ -15138,6 +15171,8 @@ def t_oi_narrow(rng, trials):
         for g in np.linspace(0, 0.49 * a, 30):
             if oi_hbar(2 * g, uu) < max(0.0, h - 2 * g) - 1e-13 or oi_hbar(2 * g, uu) > (1 - g / math.log(2)) * h + 1e-13:
                 return False, dict(reason="hbar(2 gamma) outside [h - 2 gamma, (1 - gamma/ln 2) h]", u=uu, gamma=float(g))
+        if any(oi_hbar(x, uu) <= 0 for x in np.linspace(0, 0.999 * a, 60)):
+            return False, dict(reason="hbar is not positive on [0, a)", u=uu)
     return True, stats
 
 

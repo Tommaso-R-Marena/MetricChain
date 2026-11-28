@@ -37,9 +37,9 @@ exponents are exactly `(1 − θ)h` and `(1 − θ)a`; with all bounded observab
 tolerance a bounded number of evaluations suffices, while deterministic algorithms still need
 `τ·2ⁿ` up to polynomial factors.  (3) Exact means of observables whose joint Walsh spectrum has `M`
 non-zero frequencies cost at most the factor `2(M + 1)`, which is tight up to the factor 2 for the
-subgroup method.  (4) At exponential precision `τ = e^{−γn}` the adaptive exponent lies between
-`KL(ρ₀ − 2γ/u‖½) − 2γ` and `(1 − γ/ln 2)h`; the gap is open.  (5) With `e^{νn}` independent samples of `μ`
-at least `exp(n[h̄(ν) − ν])` evaluations are needed, by a birthday argument.  The lower bounds hide many
+subgroup method.  (4) At exponential precision `τ = e^{−γn}` the adaptive exponent is at most `(1 − γ/ln 2)h` and, for
+`γ < a/2`, at least `h̄(2γ)`, where `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ > 0`; the gap is open.  (5) With `e^{νn}` independent samples of `μ`, `ν` below a
+threshold `ν* ≈ 0.40·h`, at least `exp(n[h̄(ν) − ν])` evaluations are needed, by a birthday argument.  The lower bounds hide many
 small perturbations whose superposition is *flat*; a single spectral quantity — the bias of the set of
 hidden centres, attenuated by `tanh(u/2)` per order — decides whether a family is hidden.  The
 combinatorial cores of the proofs are machine-checked.
@@ -70,7 +70,8 @@ claimed.)
 
 * *Noisy means (Section 2).*  Theorem A: the factor `L = ⌈2τ^{−2} ln(4M/η)⌉` for both lower bounds, for
   fixed observables and for adaptive statistical queries.  Theorem A′: with narrow dips the adaptive
-  exponent at tolerance `e^{−γn}` is at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`.  Theorem A″: the
+  exponent at tolerance `e^{−γn}` is at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`, for every `γ < a/2` (by the
+  bounded-differences inequality: the bias of a maximum of random dips has mean zero).  Theorem A″: the
   construction on homogeneous spaces and for an arbitrary reference measure (with a field: a positive
   but smaller exponent).
   Proposition 2.7: for a reference `e^{−f}π₀` with a known `κ`-Lipschitz energy — interacting or not — every
@@ -88,7 +89,11 @@ translations of the cube.  Averaging `L` translates of a dip gives an admissible
 partition function whose ensemble is the average of the translated ensembles; over a uniformly random
 translation the mean of any observable is its uniform mean, so `L` independent translations
 reproduce `M` uniform means to within `τ` once `L ≳ τ^{−2} ln M` (Hoeffding).  The oracle may then answer as
-if the weight were constant, and the algorithm has to find one of `L` balls instead of one.  For exact
+if the weight were constant, and the algorithm has to find one of `L` balls instead of one.  The same
+symmetry gives more for *maxima* of many narrow dips, which occupy less space: the bias of such a maximum
+against any centred observable averages to zero over the centres exactly — overlaps included — and one
+centre moves it by at most twice the mass of a dip, so the bounded-differences inequality (McDiarmid 1989)
+takes the place of Hoeffding's.  For exact
 data, averaging over a subgroup annihilates every Walsh coefficient outside the annihilator of the
 subgroup, and a subgroup of fewer than `2(M + 1)` elements avoids `M` prescribed frequencies.  In the
 other direction, the identity `A = E_π[w·1_T]/μ(T)` turns the measured mass of any set `T` into a
@@ -158,7 +163,8 @@ and "exactly").
 
 BACK = r'''## 7. Open problems
 
-1. **The exponent at tolerance `e^{−γn}`**: between `h̄(2γ)` and `(1 − γ/ln 2)h`.  Equivalently (Lemma 5.1):
+1. **The exponent at tolerance `e^{−γn}`**: between `h̄(2γ)` and `(1 − γ/ln 2)h` for `γ < a/2`; for
+   `a/2 ≤ γ < ln 2` there is no lower bound at all.  Equivalently (Lemma 5.1):
    what is the least number of points of a set of centres with attenuated bias at most `τ` — `τ^{−2}`
    (random), or fewer with structure — and can an algorithm turn a detectable bias into a localisation?
 2. **Samples**: is there an algorithm that uses samples of the ensemble to beat `e^{nh}` on the whole
@@ -184,6 +190,7 @@ File `proofs/Frontiers/ObservationInvariance.lean` (Lean 4, Mathlib; no `sorry`;
 | fewer than `2^r` frequencies are avoided by `r` generators (Lemma 3.2) | `exists_separating_tuple`, `parity_balanced`, `exists_generators_cube`, `exists_generators_kill` |
 | Hoeffding and Chebyshev for independent draws (Lemma 2.4; plain Monte Carlo) | `hoeffding_iid_mean`, `chebyshev_iid_mean` |
 | cores of the upper bounds of Theorem C and Proposition C′ | `random_cell_failure_le`, `abs_log_le_of_abs_sub_one_le` |
+| maxima of random translates: no bias on average; a maximum is 1-Lipschitz in each argument (Lemma 2.5 (iv)) | `sum_tuples_bias_eq_zero`, `sum_tuples_sup'_bias_eq_zero`, `abs_sup'_sub_sup'_le` |
 | Lemma 0 (in the programme's library) | `expected_queries_ge_packing`, `nonadaptive_expected_queries_ge` |
 
 Not machine-checked: the assembly of these cores into the displayed bounds (it needs the product
@@ -194,7 +201,7 @@ and all upper bounds of Theorem 0.
 
 `experiments/phase2/p2_checks.py` (exact enumeration on cubes of 8–10 sites: every identity and
 inequality of Sections 3–7 that can be stated at finite `n`, and the exponent functions);
-`experiments/falsify_conjectures.py`, tests XXVIII.1–XXVIII.4, with 21 mutations of
+`experiments/falsify_conjectures.py`, tests XXVIII.1–XXVIII.4, with 27 mutations of
 `experiments/mutation_tests.py` (each mutation falsifies one tested claim and must be caught);
 `experiments/phase2/p2_field_flat.py`, `p2_field_flat_exact.py` (the flat family with a field —
 the limits are proved, the numbers computed).  The internal review (`docs/phase2/PHASE2_REVIEW.md`)

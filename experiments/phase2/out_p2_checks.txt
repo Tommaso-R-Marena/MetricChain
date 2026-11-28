@@ -17,6 +17,18 @@ PASS  A3d L >= 2 tau^-2 ln(2M/eta) makes the bound <= eta
 PASS  A4a maximum of dips is admissible
 PASS  A4b sum - pair overlaps <= max <= sum (masses)
 PASS  A4c expected pair overlap <= m(r) V(n,r-1)/2^n   5.690e-03 <= 8.561e-03
+PASS  A4d Lemma 2.5(iv): E_c E_pi[(w_c - 1) psi] = 0 for centred psi, all tuples of centres, overlaps included
+PASS  A4e Lemma 2.5(iv): one centre moves E_pi[(w_c - 1) psi] by at most 2 |psi|_inf m_r   largest observed change / bound = 0.797
+PASS  A4f exact tails of the bias functional are below the bounded-differences (McDiarmid) bound
+PASS  A4g A(w_c) - 1 >= R - O_c for every tuple, and P(O_c >= R/2) <= (L-1) V(n,r-1)/2^n
+   Theorem A' at finite n (u = 1, eps = 1, M = 100, eta = 0.1): n, gamma, r/n, L m_r, exponents
+          n =   2000 gamma = 0.005: r/n = 0.3670 (limit 0.3699), n^-1 ln(2^n/(L V)) = 0.02414 (limit hbar(2 gamma) = 0.02425), ln eta'' = -48.3, ln eta' (first version) = -36.1
+          n =   2000 gamma = 0.030: r/n = 0.3170 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00711 (limit hbar(2 gamma) = 0.00636), ln eta'' = -14.2, ln eta' (first version) = +47.9
+          n =  20000 gamma = 0.030: r/n = 0.3196 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00649 (limit hbar(2 gamma) = 0.00636), ln eta'' = -129.9, ln eta' (first version) = +472.3
+          n =  20000 gamma = 0.045: r/n = 0.2896 (limit 0.2899), n^-1 ln(2^n/(L V)) = 0.00128 (limit hbar(2 gamma) = 0.00110), ln eta'' = -25.6, ln eta' (first version) = +876.6
+          n = 200000 gamma = 0.030: r/n = 0.3199 (limit 0.3199), n^-1 ln(2^n/(L V)) = 0.00638 (limit hbar(2 gamma) = 0.00636), ln eta'' = -1276.5, ln eta' (first version) = +4725.7
+          n = 200000 gamma = 0.045: r/n = 0.2899 (limit 0.2899), n^-1 ln(2^n/(L V)) = 0.00112 (limit hbar(2 gamma) = 0.00110), ln eta'' = -224.3, ln eta' (first version) = +8777.8
+PASS  A4h the recipe of Corollary A' at n = 2000, 20000, 200000: hypotheses hold, eta'' < 1e-3, the exponent of the bound is positive and within 0.004 of hbar(2 gamma) (also where eta' of the first version exceeds one)
 PASS  A5 attenuated bias: E_a(dev^2) = sum_{s != 0} phihat(s)^2 rho~(s)^2 nu~(s)^2 <= E phi^2 max (|rho~| |nu~|)^2
 PASS  A6 absorption: v e^{f} in W_u for v in W_{u-kappa}, w e^{-f} in W_{u+kappa}; same ensembles; targets differ by ln Z_f
 == B. exact observables: subgroup averaging ==
@@ -32,10 +44,10 @@ PASS  C2 full oracle: one evaluation at x ~ mu-hat fails with probability <= ||m
 == D. deterministic algorithms: wells at the query points ==
 PASS  D1 wells min(e^Delta, e^{u d(x,Q)}): admissible, = 1 on Q, A >= e^Delta (1-p), TV(mu, pi) <= p   largest TV/p = 0.592
 == E. exponent functions ==
-   u      p_u       a         rho_0     h         ell     2(1-ell)  h/ln2   gamma_max(S1) gamma_max(A') alpha_0   alpha_1   nu*      nu*/h
-   0.5  0.377541  0.030300  0.438140  0.007673  0.4974  1.0051    0.0111  0.003836      0.004100      0.000966  0.004778  0.003097 0.4037
-   1.0  0.268941  0.110944  0.379885  0.029139  0.4900  1.0199    0.0420  0.014570      0.015439      0.004562  0.023387  0.011726 0.4024
-   2.0  0.119203  0.327813  0.283110  0.097281  0.4645  1.0709    0.1403  0.048640      0.050078      0.019805  0.101247  0.038738 0.3982
+   u      p_u       a         rho_0     h         ell     2(1-ell)  h/ln2   gamma_max(S1) gamma_1 (first version of A') a/2 (A')  alpha_0   alpha_1   nu*      nu*/h
+   0.5  0.377541  0.030300  0.438140  0.007673  0.4974  1.0051    0.0111  0.003836      0.004100                     0.015150  0.000966  0.004778  0.003097 0.4037
+   1.0  0.268941  0.110944  0.379885  0.029139  0.4900  1.0199    0.0420  0.014570      0.015439                     0.055472  0.004562  0.023387  0.011726 0.4024
+   2.0  0.119203  0.327813  0.283110  0.097281  0.4645  1.0709    0.1403  0.048640      0.050078                     0.163907  0.019805  0.101247  0.038738 0.3982
 PASS  E1 identities: rho_0 = p_u + a/u, KL(rho_0||1/2) = KL(rho_0||p_u) = h, hbar(0) = h, hbar(a) = 0, hbar' (0) = -(1 - ell), hbar convex
    u = 1: gamma, S1 bound max(0, h-2gamma), refined hbar(2gamma), upper (1-gamma/ln2)h
           0.0000   0.029139   0.029139   0.029139
@@ -44,7 +56,11 @@ PASS  E1 identities: rho_0 = p_u + a/u, KL(rho_0||1/2) = KL(rho_0||p_u) = h, hba
           0.0100   0.009139   0.019795   0.028719
           0.0145   0.000139   0.016154   0.028530
           0.0200   0.000000   0.012188   0.028298
+          0.0300   0.000000   0.006364   0.027878
           0.0400   0.000000   0.002380   0.027458
+          0.0500   0.000000   0.000302   0.027037
+          0.0555   0.000000   0.000000   0.026807
 PASS  E2 refined bound dominates h - 2 gamma and stays below the zoom upper bound
+PASS  E3 hbar > 0 on [0, a), hbar >= h - lambda, and hbar(a - x) ~ x^2/(2 u^2 p_u (1 - p_u)) (double zero at a)
 
 ALL CHECKS PASS

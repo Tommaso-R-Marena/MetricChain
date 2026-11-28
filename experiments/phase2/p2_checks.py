@@ -143,6 +143,88 @@ exp_pair = np.mean([np.minimum(e0, e0[idx3 ^ c]).mean() for c in range(N3)])
 check("A4c expected pair overlap <= m(r) V(n,r-1)/2^n", exp_pair <= m_r * V / N3 + 1e-15,
       "%.3e <= %.3e" % (exp_pair, m_r * V / N3))
 
+# A4d-g: Lemma 2.5 (iv) and the two probabilistic steps of Theorem A' (the form with bounded differences),
+# by EXACT enumeration of all L-tuples of centres on small cubes: for centred psi the bias functional
+# G(c) = E_pi[(w_c - 1) psi] has mean zero (overlaps included); one centre moves it by at most 2 |psi|_inf m_r;
+# its exact tails are below McDiarmid's bound; P(O_c >= R/2) <= (L-1) V / 2^n.
+def all_tuples_max(n_, r_, L_, u_):
+    N_ = 1 << n_
+    wt_ = np.array([bin(x).count("1") for x in range(N_)])
+    e_ = np.where(wt_ < r_, np.exp(u_ * (r_ - wt_)) - 1.0, 0.0)
+    Em = e_[np.bitwise_xor.outer(np.arange(N_), np.arange(N_))]              # Em[x, c] = e_r(x xor c)
+    parts = [Em.reshape((N_,) + tuple(N_ if i == j else 1 for i in range(L_))) for j in range(L_)]
+    W = parts[0]
+    for q in parts[1:]:
+        W = np.maximum(W, q)                                                 # (w_c - 1)(x), all tuples c
+    Opair = sum(np.minimum(parts[i], parts[j]).mean(axis=0) for i in range(L_) for j in range(i))
+    Opair = np.broadcast_to(Opair, (N_,) * L_)
+    return N_, wt_, e_.mean(), int((wt_ < r_).sum()), W, Opair
+okd = oke = okf = okg = True
+worst_ratio = 0.0
+for (n4, r4, L4, u4) in [(5, 2, 3, 1.0), (6, 2, 2, 1.0), (4, 3, 4, 1.5), (5, 3, 3, 0.7)]:
+    N4, wt4, m4, V4, W4, O4 = all_tuples_max(n4, r4, L4, u4)
+    R4 = L4 * m4
+    okg &= (O4 >= R4 / 2 - 1e-15).mean() <= (L4 - 1) * V4 / N4 + 1e-12
+    okg &= bool(np.all(W4.mean(axis=0) >= R4 - O4 - 1e-12))                  # A(w_c) - 1 >= R - O_c for EVERY tuple
+    for phi4 in (rng.choice([-1.0, 1.0], size=N4), rng.uniform(-1, 1, size=N4),
+                 np.array([1.0 if x & 1 else -1.0 for x in range(N4)]), np.where(wt4 <= n4 // 2 - 1, 1.0, -1.0)):
+        psi4 = phi4 - phi4.mean()
+        G4 = np.tensordot(psi4, W4, axes=(0, 0)) / N4                        # G(c) for all tuples
+        d4 = 2 * np.abs(psi4).max() * m4
+        okd &= abs(G4.mean()) < 1e-12 * max(1.0, m4)
+        osc = (G4.max(axis=-1) - G4.min(axis=-1)).max()                      # one centre (the last; symmetric)
+        oke &= osc <= d4 + 1e-12
+        worst_ratio = max(worst_ratio, osc / d4)
+        for t4 in (0.5, 1.0, 1.5, 2.0, 3.0):
+            tt = t4 * math.sqrt(L4) * d4 / 2
+            okf &= (np.abs(G4) >= tt - 1e-15).mean() <= 2 * math.exp(-2 * tt * tt / (L4 * d4 * d4)) + 1e-12
+check("A4d Lemma 2.5(iv): E_c E_pi[(w_c - 1) psi] = 0 for centred psi, all tuples of centres, overlaps included", okd)
+check("A4e Lemma 2.5(iv): one centre moves E_pi[(w_c - 1) psi] by at most 2 |psi|_inf m_r", oke,
+      "largest observed change / bound = %.3f" % worst_ratio)
+check("A4f exact tails of the bias functional are below the bounded-differences (McDiarmid) bound", okf)
+check("A4g A(w_c) - 1 >= R - O_c for every tuple, and P(O_c >= R/2) <= (L-1) V(n,r-1)/2^n", okg)
+
+# A4h: Theorem A' at finite n beyond the side condition of its first version (u = 1, eps = 1, M = 100, eta = 0.1):
+# the recipe of Corollary A' (largest r with 8 (2e^eps - 1) m_r ln(2M/eta) <= tau^2, L = ceil(2(e^eps - 1)/m_r)).
+def log_binom_row(n_):
+    lg = [math.lgamma(n_ + 1) - math.lgamma(j + 1) - math.lgamma(n_ - j + 1) for j in range(n_ + 1)]
+    return np.array(lg)
+def lse(v):
+    mx = np.max(v)
+    return mx + math.log(np.sum(np.exp(v - mx)))
+okh = True
+print("   Theorem A' at finite n (u = 1, eps = 1, M = 100, eta = 0.1): n, gamma, r/n, L m_r, exponents")
+u7, eps7, M7, eta7 = 1.0, 1.0, 100, 0.1
+pu7 = 1 / (1 + math.exp(u7)); rho07 = math.log(2 / (1 + math.exp(-u7))) / u7
+kl7 = lambda x, p_: x * math.log(x / p_) + (1 - x) * math.log((1 - x) / (1 - p_))
+hbar7 = lambda lam: kl7(rho07 - lam / u7, 0.5) - lam
+for n7, gam7 in [(2000, 0.005), (2000, 0.03), (20000, 0.03), (20000, 0.045), (200000, 0.03), (200000, 0.045)]:
+    lb = log_binom_row(n7) - n7 * math.log(2)
+    ltau2 = -2 * gam7 * n7
+    lthr = ltau2 - math.log(8 * (2 * math.exp(eps7) - 1) * math.log(2 * M7 / eta7))
+    def log_m(r_):                                                    # ln m_r
+        j = np.arange(r_)
+        x_ = u7 * (r_ - j)
+        return lse(lb[:r_] + x_ + np.log1p(-np.exp(-x_)))              # ln(e^x - 1) without overflow
+    lo_, hi_ = 1, n7 // 2
+    while hi_ - lo_ > 1:                                              # largest r with ln m_r <= lthr
+        mid = (lo_ + hi_) // 2
+        if log_m(mid) <= lthr: lo_ = mid
+        else: hi_ = mid
+    r7 = lo_
+    lm = log_m(r7)
+    lL = math.log(2 * (math.exp(eps7) - 1)) - lm                      # ln L (L = ceil(...): the ceiling changes ln L by < e^{lm})
+    lV = lse(lb[:r7]) + n7 * math.log(2)                              # ln V(n, r-1)
+    expo = (n7 * math.log(2) - lL - lV) / n7                          # n^-1 ln(2^n / (L V))
+    leta2 = lL + lV - n7 * math.log(2)                                # ln eta''
+    leta1 = math.log(5 * 2 * (math.exp(eps7) - 1) / 2) + gam7 * n7 + leta2    # ln eta' of the first version
+    okh &= lm <= lthr and log_m(r7 + 1) > lthr and leta2 < math.log(1e-3) and abs(r7 / n7 - (rho07 - 2 * gam7 / u7)) < 0.02
+    okh &= expo > 0 and abs(expo - hbar7(2 * gam7)) < 0.004
+    print("          n = %6d gamma = %.3f: r/n = %.4f (limit %.4f), n^-1 ln(2^n/(L V)) = %.5f (limit hbar(2 gamma) = %.5f), ln eta'' = %.1f, ln eta' (first version) = %+.1f"
+          % (n7, gam7, r7 / n7, rho07 - 2 * gam7 / u7, expo, hbar7(2 * gam7), leta2, leta1))
+check("A4h the recipe of Corollary A' at n = 2000, 20000, 200000: hypotheses hold, eta'' < 1e-3, the exponent of the bound is positive "
+      "and within 0.004 of hbar(2 gamma) (also where eta' of the first version exceeds one)", okh)
+
 # A5: Lemma 5.1 (attenuated bias): E_a (E_{nu_{Gamma+a}} phi - mean phi)^2 = sum_{s != 0} phihat^2 rhotilde^2 nutilde^2
 n5a, u5a = 8, 1.0
 N5a, idx5a, D5a = cube(n5a)
@@ -324,7 +406,7 @@ def bisect(f, lo, hi):
         if f(lo) * f(mid) <= 0: hi = mid
         else: lo = mid
     return 0.5 * (lo + hi)
-print("   u      p_u       a         rho_0     h         ell     2(1-ell)  h/ln2   gamma_max(S1) gamma_max(A') alpha_0   alpha_1   nu*      nu*/h")
+print("   u      p_u       a         rho_0     h         ell     2(1-ell)  h/ln2   gamma_max(S1) gamma_1 (first version of A') a/2 (A')  alpha_0   alpha_1   nu*      nu*/h")
 okE = True
 for u in (0.5, 1.0, 2.0):
     pu, a, rho0, h, ell = consts(u)
@@ -335,21 +417,29 @@ for u in (0.5, 1.0, 2.0):
     okE &= abs(d + (1 - ell)) < 1e-4                            # slope of hbar at 0 is -(1 - ell)
     okE &= all(hbar(x, u) + hbar(x + 2e-3, u) - 2 * hbar(x + 1e-3, u) >= -1e-12
                for x in np.linspace(0, a * 0.95, 50))           # convex
-    g1 = bisect(lambda g: hbar(2 * g, u) - g, 0.0, a / 2)       # side condition hbar(2 gamma) > gamma
+    g1 = bisect(lambda g: hbar(2 * g, u) - g, 0.0, a / 2)       # hbar(2 gamma) = gamma: the side condition of the FIRST version of Theorem A'
     a0 = bisect(lambda al: h2(al) - h, 1e-9, 0.4)
     a1 = bisect(lambda al: h2(al) - a, 1e-9, 0.4)
     nu = bisect(lambda v: hbar(v, u) - 2 * v, 0.0, a)
-    print("   %.1f  %.6f  %.6f  %.6f  %.6f  %.4f  %.4f    %.4f  %.6f      %.6f      %.6f  %.6f  %.6f %.4f"
-          % (u, pu, a, rho0, h, ell, 2 * (1 - ell), h / math.log(2), h / 2, g1, a0, a1, nu, nu / h))
+    print("   %.1f  %.6f  %.6f  %.6f  %.6f  %.4f  %.4f    %.4f  %.6f      %.6f                     %.6f  %.6f  %.6f  %.6f %.4f"
+          % (u, pu, a, rho0, h, ell, 2 * (1 - ell), h / math.log(2), h / 2, g1, a / 2, a0, a1, nu, nu / h))
 check("E1 identities: rho_0 = p_u + a/u, KL(rho_0||1/2) = KL(rho_0||p_u) = h, hbar(0) = h, hbar(a) = 0, "
       "hbar' (0) = -(1 - ell), hbar convex", okE)
 u = 1.0; pu, a, rho0, h, ell = consts(u)
-tab = [(g, max(0.0, h - 2 * g), hbar(2 * g, u), (1 - g / math.log(2)) * h) for g in (0.0, 0.002, 0.005, 0.01, 0.0145, 0.02, 0.04)]
+tab = [(g, max(0.0, h - 2 * g), hbar(2 * g, u), (1 - g / math.log(2)) * h) for g in (0.0, 0.002, 0.005, 0.01, 0.0145, 0.02, 0.03, 0.04, 0.05, a / 2)]
 print("   u = 1: gamma, S1 bound max(0, h-2gamma), refined hbar(2gamma), upper (1-gamma/ln2)h")
 for row in tab:
     print("          %.4f   %.6f   %.6f   %.6f" % row)
 check("E2 refined bound dominates h - 2 gamma and stays below the zoom upper bound",
       all(r[2] >= r[1] - 1e-15 and r[2] <= r[3] + 1e-15 for r in tab))
+okE3 = True
+for u in (0.5, 1.0, 2.0):
+    pu, a, rho0, h, ell = consts(u)
+    okE3 &= all(hbar(x, u) > 0 for x in np.linspace(0, a * (1 - 1e-6), 400))             # positive on [0, a)
+    okE3 &= all(hbar(x, u) >= max(0.0, h - x) - 1e-15 for x in np.linspace(0, a * (1 - 1e-6), 400))
+    for x in (1e-2 * a, 1e-3 * a):                                                         # double zero at a
+        okE3 &= abs(hbar(a - x, u) / (x * x / (2 * u * u * pu * (1 - pu))) - 1) < 0.05
+check("E3 hbar > 0 on [0, a), hbar >= h - lambda, and hbar(a - x) ~ x^2/(2 u^2 p_u (1 - p_u)) (double zero at a)", okE3)
 
 print()
 print("ALL CHECKS PASS" if not FAILS else "FAILED: " + ", ".join(FAILS))

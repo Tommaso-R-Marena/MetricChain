@@ -2664,6 +2664,6 @@ report; these are the attempts that failed, in the order in which they were made
    `(1 − γ/ln 2)h` at tolerance `e^{−γn}` comes from subcubes, where smaller dips matter; in a
    random-like part of the same measure dips are not over-represented, but then integrating over
    the part is as hard as over the cube.  No partition with cost `τ^{1−ℓ}·N₀` was found; the gap
-   between `h̄(2γ)` and `(1 − γ/ln 2)h` is open.
+   between `h̄(2γ)` (`γ < a/2`) and `(1 − γ/ln 2)h` is open.
 6. **"At the hardest instance with a field the optimal single-type family is the flat one."**  Not
    supported by the grid computation (the best tilts differ in sign).
