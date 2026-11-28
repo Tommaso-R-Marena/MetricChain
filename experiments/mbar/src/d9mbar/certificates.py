@@ -48,7 +48,7 @@ class LRRegion:
     labels: np.ndarray
     level: float                  # Phi(f) <= level
     alpha: float
-    status: str = "OK"            # OK | ABSTAIN_SUPPORT | ABSTAIN_NO_DATA | REJECT_MODEL
+    status: str = "OK"            # OK | ABSTAIN_SUPPORT | ABSTAIN_NO_DATA | ABSTAIN_PLUGIN | REJECT_MODEL
     meta: dict = field(default_factory=dict)
 
     def __post_init__(self):
@@ -74,8 +74,13 @@ class LRRegion:
         return self.status == "OK" and self.phi(f) <= self.level
 
     def _profile(self, c, theta, f0):
+        """min of Phi over {c.f = theta}.  Returns (value, f, ok).  The computed value of an
+        unconverged solve is an UPPER bound of the true minimum and would make the interval too
+        narrow; such a point is therefore reported with ok = False and treated as inside the region."""
         f, v, info = minimize_lse(self.A, self.t0, f0=f0, constraint=(c, theta))
-        return self.N * v, f
+        if not info["converged"]:
+            f, v, info = minimize_lse(self.A, self.t0, f0=self.fhat, constraint=(c, theta), maxit=500)
+        return self.N * v, f, bool(info["converged"])
 
     def interval(self, c, xtol=1e-6):
         """[inf, sup] of c.f over the region; (-inf, inf) when the certificate abstains."""
@@ -91,11 +96,13 @@ class LRRegion:
             lo_t, f_lo = 0.0, self.fhat
             step, hi_t, f_hi = d0, None, None
             for _ in range(80):
-                val, fx = self._profile(c, th + sgn * step, f_lo)
-                if val > self.level:
+                val, fx, ok = self._profile(c, th + sgn * step, f_lo)
+                if ok and val > self.level:
                     hi_t, f_hi = step, fx
                     break
-                lo_t, f_lo = step, fx
+                lo_t = step
+                if ok:
+                    f_lo = fx
                 step *= 1.7
             if hi_t is None:
                 ends.append(sgn * np.inf)
@@ -103,8 +110,8 @@ class LRRegion:
             cache = {"f": f_lo}
 
             def gap(t):
-                val, fx = self._profile(c, th + sgn * t, cache["f"])
-                return val - self.level
+                val, fx, ok = self._profile(c, th + sgn * t, cache["f"])
+                return val - self.level if ok else -1.0      # unconverged: count the point as inside
 
             root = brentq(gap, lo_t, hi_t, xtol=xtol * max(1.0, d0), rtol=1e-10)
             ends.append(th + sgn * (root + xtol * max(1.0, d0)))     # outward by the tolerance
@@ -159,9 +166,12 @@ def lr_confidence_region(U, labels, alpha=0.05, n_batches=8, skip=1, rng=None, p
         with np.errstate(divide="ignore"):
             Ab = np.log(nb / nb.sum())[None, :] - U[cur]
         val = float(np.sum(logsumexp(Ab + fb, axis=1) - fb[labels[cur]]))
-        if not np.isfinite(val):          # the plug-in gives probability zero to an observed label
-            skipped.append(b)
-            continue
+        if not np.isfinite(val):
+            # The plug-in gives probability zero to an observed label of THIS batch: the e-value
+            # of the batch is 0.  Dropping the batch here would be a decision taken on its own data
+            # and is not licensed by Theorem B2; the valid reading is that nothing can be excluded.
+            return LRRegion(np.zeros((0, K)), np.zeros(0, int), np.inf, alpha, "ABSTAIN_PLUGIN",
+                            dict(n_batches=n_batches, used=used, skipped=skipped, failed_batch=b))
         ref += val
         rowsA.append(Ab)
         rowsy.append(labels[cur])

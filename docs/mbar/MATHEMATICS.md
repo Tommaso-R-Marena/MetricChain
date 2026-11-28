@@ -252,10 +252,13 @@ over `{s ≥ n⁰, a·s = B}`; (4) extra samples `= (1−γ)·(plug-in) + γ·(c
 samples.  At `s = n⁰` the plug-in variance is the usual MBAR variance estimate (it reproduces PyMBAR's
 standard errors to 13 digits).
 
-**Proposition A9 (safeguard)** [P].  Whatever the pilot data, the final allocation `n = n⁰ + extra`
-satisfies `V_ν(n) ≤ V_ν(n^{unif})/γ'`, where `n^{unif}` is the pilot plus a cost-uniform split of the
-whole remaining budget and `γ' = γ` (indeed `n ≥ γ n^{unif}` coordinatewise as soon as the plug-in part
-is nonnegative, and then monotonicity and homogeneity apply; A4 gives the sharper harmonic bound).
+**Proposition A9 (safeguard)** [P].  Whatever the pilot data, the real-valued allocation
+`n = n⁰ + (1−γ)·plug-in + γ·u` satisfies `V_ν(n) ≤ V_ν(n⁰ + u)/γ`, where `u` is the naive split of the
+whole remaining budget that the plug-in part is mixed with (equal counts, or equal cost per state):
+`n ≥ γ(n⁰ + u)` coordinatewise because the plug-in part is nonnegative, and monotonicity and
+homogeneity apply; A4 gives the sharper harmonic bound.  The integer counts returned by the code are
+the floors of these numbers with the remainder distributed, so the bound holds for them up to one
+sample per state (A8).
 
 Not proved here [C]: that the two-stage estimator is asymptotically normal with variance
 `V_ν(s°)/N` when the plug-in allocation converges to an optimal `s°`.  It is the standard conclusion
@@ -404,7 +407,20 @@ strongly connected.  ∎
 Lean: `Model.markov_finite`, `Model.lr_region_coverage`.  Implementation: `certificates.lr_confidence_region`
 (default: 8 batches, the first used only for training); the interval of a contrast is obtained from
 the convex profile `θ ↦ min_{cᵀf = θ} ΣΦ_b(f)` by root finding, with the endpoint moved outward by the
-tolerance.  Floating point is not certified.
+tolerance.  Two points of the implementation are part of its validity: a profile value from an
+unconverged inner minimisation is an *upper* bound of the true minimum and would shrink the interval,
+so such a point is counted as inside the region; and a batch is left out only for a reason that
+depends on *earlier* batches (its plug-in cannot be computed) — if the plug-in gives probability zero
+to an observed label of the batch itself, the batch's e-value is 0 and the code abstains.  Floating
+point is not certified.
+
+**Proposition B2′ (restriction to a sub-ladder)** [P].  Let `S` be a set of states chosen without
+reference to the samples.  The samples of the states of `S`, with the energies of those states only,
+form a multistate experiment of the same kind, so Theorem B2 applied to it gives a region for
+`(f_k)_{k∈S}` with `|S| − 1` nuisance directions instead of `K − 1`.  For `m` candidate sets used at
+levels `α_1 + … + α_m ≤ α`, the intersection of the resulting intervals of a contrast is valid at level
+`α`.  (`certificates.restricted_interval`.)  The restriction discards the samples of the other states;
+it pays when the contrast is local (adjacent states of a long ladder) and not otherwise (§B8, O3).
 
 *Size.*  With `f̂` the minimiser of `Φ = Σ_bΦ_b` and `H` its Hessian there, the region is to second order
 the ellipsoid `(f − f̂)ᵀH(f − f̂) ≤ 2(log(1/α) + ρ)`, `ρ = Σ_bΦ_b(f′_b) − Φ(f̂)` (the "regret" of the

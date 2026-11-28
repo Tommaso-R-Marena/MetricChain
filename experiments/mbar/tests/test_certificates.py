@@ -92,8 +92,8 @@ def test_region_basic_properties():
     assert lo5 <= lo2 <= c @ r05.fhat <= hi2 <= hi5            # nested in alpha, contains the centre
     assert abs(r05.phi(r05.fhat + 3.0) - r05.phi(r05.fhat)) < 1e-8      # gauge invariance
     # endpoints are on the boundary of the region (up to the outward tolerance)
-    val, _ = r05._profile(c, hi5, r05.fhat)
-    assert val >= r05.level - 1e-6 and val - r05.level < 1e-2 * max(1.0, r05.level)
+    val, _, ok = r05._profile(c, hi5, r05.fhat)
+    assert ok and val >= r05.level - 1e-6 and val - r05.level < 1e-2 * max(1.0, r05.level)
     # restriction to the two end states is a valid (wider or narrower) interval and contains the truth here
     lo, hi, _ = restricted_interval(U, y, c, [0, 3])
     assert lo <= ftrue[3] - ftrue[0] <= hi

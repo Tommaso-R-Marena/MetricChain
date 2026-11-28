@@ -171,7 +171,8 @@ def integer_counts(extra, budget, cost):
     return n
 
 
-def pilot_allocation(U, labels, target, total_budget, cost=None, safeguard=0.25, objective=None):
+def pilot_allocation(U, labels, target, total_budget, cost=None, safeguard=0.25, objective=None,
+                     safeguard_mode="equal_counts"):
     """Second-stage allocation from pilot data only (no population quantity).
 
     Fits MBAR to the pilot, inserts the fitted distributions in V, minimises the plug-in V over
@@ -186,7 +187,9 @@ def pilot_allocation(U, labels, target, total_budget, cost=None, safeguard=0.25,
     if total_budget <= spent:
         raise ValueError("pilot already exhausts the budget")
     rem = total_budget - spent
-    uniform_extra = np.full(K, rem / a.sum())
+    # the allocation the plug-in part is mixed with: equal counts (default), or equal cost per state
+    # (n_k ~ 1/a_k), which is the better naive rule when costs differ (VALIDATION.md, section 3)
+    uniform_extra = np.full(K, rem / a.sum()) if safeguard_mode == "equal_counts" else rem / (K * a)
     info = dict(pilot_counts=n0.astype(int), fallback=None)
     try:
         f, _ = mbar(U, labels)
