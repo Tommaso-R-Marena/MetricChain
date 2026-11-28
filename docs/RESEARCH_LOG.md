@@ -3015,7 +3015,11 @@ inside the session.*
 * **Open** (most consequential first): the exponent at tolerance `e^{−γn}` (between `h̄(2γ)`, `γ < a/2`,
   and `(1 − γ/ln 2)h`; nothing below for `γ ≥ a/2`); an algorithm that uses samples; exact marginals of linear order; invariance with a
   field; second-order terms.
-* **Audit.**  See the last lines of this entry in the final Phase II commit.
+* **Audit.**  `bash scripts/audit_all.sh` passed on 2026-11-28 04:20 UTC on the code of commit `ddae0c3`
+  (afterwards only documents, stored outputs, the second referee's files and archived logs changed): 93 Lean
+  files, 50 211 lines, 5128 declarations on the three standard axioms, 721 headline theorems; full harness
+  196 tests (166 survive, 30 documented refutations); 645 mutations (644 caught, 1 expected pass); document
+  references re-checked on the final tree.
 
 ### Resume here (cycle 10, twenty-fourth checkpoint; valid at the consolidation halt of 2026-11-27 with the changes stated first)
 

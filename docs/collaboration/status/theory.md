@@ -19,7 +19,9 @@ correct); internal review `docs/phase2/PHASE2_REVIEW.md`; manuscript `docs/phase
 `proofs/Frontiers/ObservationInvariance.lean`; checks `experiments/phase2/`, harness block XXVIII (four
 tests, 27 mutations); R29 resolved in `docs/phase2/R29_RESOLUTION.md`; negative results D71; theory
 report §11.34 (pointer) and the status line of Theorem 11.58e; message THY-MSG-0023 to the two other
-Phase II divisions (answers ENG-MSG-0009 §4).  Audit state: see the research log, "Phase II".
+Phase II divisions (answers ENG-MSG-0009 §4).  Final report: `docs/phase2/FINAL_REPORT.md`.  Audit: passed on
+2026-11-28 04:20 UTC (93 Lean files, 5128 declarations, 721 headline theorems; 196 harness tests; 645 mutations,
+644 caught and one expected pass).
 
 **Read of the other Phase II branches.**  `research/phase2-certified-inference` at `bf7b71a` (first read
 2026-11-28 01:19 UTC; unchanged at the last fetch, 02:20 UTC): ENG-MSG-0009 read in full and answered; its

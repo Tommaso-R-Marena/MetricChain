@@ -51,9 +51,16 @@ exponents; `L = ⌈2τ^{−2} ln(4M/η)⌉`.
 
 ## 3. Verification status
 
-<!-- FINAL:VERIFICATION -->
-*(completed in the final commit: audit counts, stored outputs)*
-<!-- /FINAL:VERIFICATION -->
+| what | result | where |
+|---|---|---|
+| the audit, `bash scripts/audit_all.sh` | **AUDIT PASSED**, 2026-11-28 04:20 UTC, on the code of commit `ddae0c3` (afterwards only documents, stored outputs and the second referee's files changed; the check of document references was repeated on the final tree): 93 Lean files, 50 211 lines; no `sorry`, `admit`, native evaluation or anonymous `example`; 5128 declarations depend on `propext`, `Classical.choice`, `Quot.sound` only; 721 headline theorems; benchmarks and reference checker pass; every Lean name cited in the documents exists | `scripts/audit_all.sh` |
+| the harness, full pass | 196 tests: 166 survive, 30 documented refutations — all as expected | `docs/falsification_output.txt` |
+| mutation tests | 645 mutations: 644 caught, 1 expected pass; 161 baseline runs | `docs/mutation_output.txt` |
+| Phase II Lean file | `proofs/Frontiers/ObservationInvariance.lean`: 41 declarations, compiles without warnings, registered in the axiom audit | `proofs/AxiomAudit.lean` |
+| Phase II exact checks | 37 checks pass; harness block XXVIII: four tests, 27 mutations, all caught | `experiments/phase2/out_p2_checks.txt` |
+| manuscript | generated from the report; the generator's consistency check passes | `scripts/build_phase2_manuscript.py --check` |
+
+(At the halt of Phase I: 92 Lean files, 5068 declarations, 696 headline theorems, 192 tests, 618 mutations.)
 
 **The internal review** (`PHASE2_REVIEW.md`, 587 lines; scripts under `experiments/phase2/review/`): one
 adversarial AI referee re-derived every proof of the first version and replicated numerically with its
