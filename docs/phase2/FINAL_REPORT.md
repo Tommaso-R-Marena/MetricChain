@@ -77,7 +77,12 @@ The science division's review SCI-REV-0030 said, in its major finding, that the 
 
 * **The mutation study** (`experiments/workstreams/Z/z6_pipeline_mutations.py`):
 <!-- FINAL:MUTATIONS -->
-  *(results in the final commit)*
+  on a small instance (`u = 1`, four levels, 40 sample points) the unmutated script is accepted; of ten
+  gross mutations that break the certificate, **nine still end with the script's own "ALL CHECKS PASS"**
+  (the tenth trips an assertion) and **the independent checker rejects all ten**; of six mutations that
+  only remove a safety margin it rejects two and accepts four — and an accepted output is a valid
+  certificate (the checker exhibits a proved pair for every line).  Ten mutations on one instance do not
+  show that the checker rejects every invalid output.
 <!-- /FINAL:MUTATIONS -->
 * **The 400-level run** (`K = 4000`; the source of the certified exponent at `k = 400` and of the constants
   quoted by the engineering division), which two referees had left unchecked: **our independent checker

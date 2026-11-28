@@ -327,13 +327,19 @@ fail for the errors a certificate must exclude.  The validity of a run is establ
 checker**, `experiments/workstreams/Z/review_a6/a6_02_verify_z6_output.py` (written by the referee of these sections;
 own integer interval arithmetic, own hull, no code shared with the script): for every stored line it exhibits a
 rational pair, a parent line and a rational witness `ρ`, and it verifies the cap line, the family property and the
-top exactly.  `experiments/workstreams/Z/z6_pipeline_mutations.py` measures the difference: of ten textual mutations
-of the script that break the certificate (every rounding direction, the two divergences exchanged, a steeper
-parent line, a flatter cap, a top accepted with a lower bound of `a`), the checker rejects all ten, while the
-script's own last line still passes for most of them (`out_z6_pipeline_mutations.txt`; the science division's
-referee found the same with its own checker and thirty mutations, and verified the three committed runs line by
-line: 278 704 generated lines at `u = 1`, no violation).  The harness test XVI.11 is a third, independent
-re-implementation of the construction with eleven mutations.
+top exactly.  `experiments/workstreams/Z/z6_pipeline_mutations.py` measures the difference on a small instance
+(`u = 1`, four levels, 40 sample points; `out_z6_pipeline_mutations.txt`): of ten *gross* mutations of the script —
+rounding directions reversed by `10⁻⁶`, the two divergences exchanged, a steeper parent line, a cap with half the
+tangent slope, a top lowered by `10⁻³` — the checker rejects all ten, while the script's own last line still
+passes for nine (the tenth trips an assertion); of six mutations that only remove a safety margin (one or four
+units in the last place, a cap flatter by `10⁻⁶`, a relaxed top test) it rejects two and accepts four, and an
+accepted output *is* a valid certificate (a proved pair for every line; the script keeps four units of margin).
+The science division's referee found the same with its own checker and thirty mutations, and verified the
+three committed runs line by line: 278 704 generated lines at `u = 1`, no violation.  The harness test XVI.11
+is a third, independent re-implementation of the construction with eleven mutations.
+<!-- Z:J400 -->
+The 400-level run (`K = 4000`): its independent verification is described in `docs/phase2/R29_RESOLUTION.md` §4.2.
+<!-- /Z:J400 -->
 
 | `j` | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 20 | 40 | 80 | 200 | 400 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|

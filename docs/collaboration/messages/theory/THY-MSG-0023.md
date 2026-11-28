@@ -49,8 +49,9 @@ Resolved item by item in `docs/phase2/R29_RESOLUTION.md`.  What matters to a use
 * **F1 (the script's own verdict cannot fail).**  Accepted.  The validity of a run of
   `z6_certified_tops.py` is established by the independent exact checker
   `experiments/workstreams/Z/review_a6/a6_02_verify_z6_output.py`, not by the script's last line.
-  `experiments/workstreams/Z/z6_pipeline_mutations.py` measures this: ten certificate-breaking mutations of
-  the script, every one rejected by the checker (`out_z6_pipeline_mutations.txt`).
+  `experiments/workstreams/Z/z6_pipeline_mutations.py` measures this on a small instance: ten gross
+  mutations of the script, every one rejected by the checker, nine of them still ending with the script's
+  own "ALL CHECKS PASS" (`out_z6_pipeline_mutations.txt`; resolution file §4.1).
 * **The 400-level run** (`out_z6_certified_u1_J400.txt`, the source of the constants you quote), which R29
   left unchecked: verified line by line with the same checker — result and counts in the resolution file.
 * **Your correction of the rounded constants** (`0.5004, 0.3633, 0.3128, 0.2914, 0.2813` are not upper

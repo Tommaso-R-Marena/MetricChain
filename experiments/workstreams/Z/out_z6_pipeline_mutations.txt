@@ -1,0 +1,23 @@
+# z6_pipeline_mutations.py  u = 1, 4 levels, K = 40
+# columns: mutation | verdict of the mutant's own last line | verdict of the independent checker | as required?
+M00 baseline (no mutation)                           | ALL CHECKS PASS              | accepted                                 | yes
+G01 up() rounds towards minus infinity (abar < a)    | ALL CHECKS PASS              | REJECTED: FAILED: ["abar = 0.11094407167 | yes
+G02 the rate e' too small by 1e-6                    | ALL CHECKS PASS              | REJECTED: FAILED: ["level 1 (C) the cap  | yes
+G03 the bound of theta too small by 1e-6             | ALL CHECKS PASS              | REJECTED: FAILED: ["level 1 (C) the cap  | yes
+G04 the two divergences exchanged                    | ALL CHECKS PASS              | REJECTED: FAILED: ["level 1 (C) the cap  | yes
+G05 theta bounded at rho (1 + 1e-7)                  | ALL CHECKS PASS              | REJECTED: FAILED: ["level 1 (C) the cap  | yes
+G06 the slope of a stored line too large by 1e-6     | ALL CHECKS PASS              | REJECTED: FAILED: ["level 1 (C) the cap  | yes
+G07 the intercept of a stored line too small by 1e-6 | ALL CHECKS PASS              | REJECTED: FAILED: ["level 1 (C) the cap  | yes
+G08 the parent line steeper by 1e-9                  | ALL CHECKS PASS              | REJECTED: FAILED: ['level 2 (L) every ot | yes
+G09 the cap line through (c', 1) with half the tangent slope | CRASH: AssertionError        | REJECTED: CRASH: AssertionError          | yes
+G10 the top lowered by 1e-3 after it was found       | ALL CHECKS PASS              | REJECTED: FAILED: ['level 1 (T) top', 'l | yes
+U05 the slope of the cap line too small by 1e-6      | ALL CHECKS PASS              | accepted                                 | yes
+U06 the exact test of the top with a (1 - 1e-6) in place of abar | ALL CHECKS PASS              | accepted                                 | yes
+U01 the rate e' rounded down (one unit in the last place) | ALL CHECKS PASS              | accepted                                 | yes
+U02 the bound of theta rounded down (one unit)       | ALL CHECKS PASS              | accepted                                 | yes
+U03 the slope of a stored line rounded up (four units) | ALL CHECKS PASS              | REJECTED: FAILED: ["level 1 (C) the cap  | yes
+U04 the intercept of a stored line rounded down (four units) | ALL CHECKS PASS              | REJECTED: FAILED: ["level 4 (C) the cap  | yes
+
+gross mutations: 10; the script's own last line still passes for 9 of them; the independent checker rejects 10 of them
+rounding-direction mutations: 6; own last line passes for 6; the checker rejects 2 and accepts 4 (an accepted output IS a valid certificate: the stored lines carry a margin of four units in the last place)
+STUDY AS REQUIRED

@@ -28,11 +28,16 @@ not reach.  Everything below is the work of AI sessions; the referee's scripts w
   it exhibits a parent line, a rational pair `(e₀, ϑ₀)` and a rational witness `ρ` with
   `KL(ρ‖p_u) ≤ e₀`, `KL(ρ‖½) ≤ ϑ₀`; the cap line, the family property and the top are verified exactly.
 * **Mutation study of the pipeline** (`experiments/workstreams/Z/z6_pipeline_mutations.py`, output
-  `out_z6_pipeline_mutations.txt`; `u = 1`, six levels, 300 sample points): ten textual mutations of the
-  script that break the certificate — `up()` rounding down, the rate rounded down, the bound of `θ`
-  rounded down, the two divergences exchanged, `θ` bounded at a shifted rate, the slope of a stored
-  line rounded up, its intercept rounded down, a steeper parent line, a flatter cap, a top accepted
-  with a lower bound of `a`.  **Result: see the stored output and §4.**
+  `out_z6_pipeline_mutations.txt`; `u = 1`, four levels, 40 sample points — small, so that every mutant is
+  checked to the end).  Each textual mutant of the script (a scratch copy; the repository file is never
+  modified) is run through its own `main()`, and its output through the independent checker (the referee's
+  file, unmodified).  Two kinds: *gross* mutations break the certificate by a margin far above rounding
+  and must be rejected — `up()` rounding down, the rate and the bound of `θ` too small by `10⁻⁶`, the two
+  divergences exchanged, `θ` bounded at a shifted rate, a stored slope too large and an intercept too
+  small by `10⁻⁶`, a steeper parent line, a cap with half the tangent slope, a top lowered by `10⁻³`;
+  *margin* mutations only remove a safety margin (one or four units in the last place, a cap flatter by
+  `10⁻⁶`, a relaxed top test), so whether the output is still a certificate depends on the instance, and
+  the checker's verdict is reported.  **Result: §4.1.**
 * **Coverage of the committed runs** by independent exact checkers: the science division's referee
   verified the three committed runs at `u = 1` (80 levels), `u = 2`, `u = ½` (40 levels), `K = 3000`, line by
   line (278 704 generated lines at `u = 1`, no violation, no top differing from the committed output);
@@ -62,6 +67,25 @@ did not run another division's unreviewed code.
 ## 4. Phase II results (filled in when the runs finished)
 
 <!-- R29:RESULTS -->
-*(pending: the mutation study and the verification of the 400-level run were still running when this
-file was first committed; this section is completed in a later commit.)*
+### 4.1 The mutation study (finished 2026-11-28 02:53 UTC; `experiments/workstreams/Z/out_z6_pipeline_mutations.txt`)
+
+| | number | the script's own last line | the independent checker |
+|---|---|---|---|
+| unmutated script | 1 | "ALL CHECKS PASS" | accepts |
+| gross mutations G01–G10 | 10 | **still "ALL CHECKS PASS" for 9**; the tenth (a cap with half the tangent slope) trips an assertion of the script | **rejects all 10** |
+| margin mutations U01–U06 | 6 | "ALL CHECKS PASS" for all 6 | rejects 2 (a stored slope rounded up, an intercept rounded down — four units in the last place each); accepts 4 (the rate and the bound of `θ` rounded down by one unit; a cap flatter by `10⁻⁶`; a relaxed top test) |
+
+This is finding F1 in our own numbers: nine mutations that break the certificate end with the script's
+own "ALL CHECKS PASS", and the independent checker rejects every one.  The four accepted margin mutants
+are not misses: when the checker accepts, it has exhibited a proved rational pair for every stored line
+and dominated the cap by lines of its own, so that *output* is a valid certificate — the mutation removed
+a margin (the script keeps four units in the last place) that this instance did not need.  **What the
+study does not show:** that the checker rejects every invalid output (ten gross mutations, one small
+instance); and nothing about the script's behaviour at `K = 4000` — that is §4.2.
+
+### 4.2 The 400-level run
+
+<!-- R29:J400 -->
+*(pending: the exact re-verification of the 400-level run was still running when this text was committed.)*
+<!-- /R29:J400 -->
 <!-- /R29:RESULTS -->
