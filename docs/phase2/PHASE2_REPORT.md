@@ -712,8 +712,13 @@ sharp value for a block of coordinates.
 | Theorem A″, Lemma 2.6; Proposition 2.7 | compensation for one-body data with a field (Theorem 11.109a); "a known part that is not `C`-invariant: open" (their §4, §13 item 2) | every bounded observable and every `κ`-Lipschitz known part, interacting or not — in sandwich form (`u ∓ κ`), not sharp |
 | Theorems C, C′, E | the upper bound `(1 − α)h` for marginals of order `αn` and the exact zoom behind it (A8); **one exact point probability gives `ln A` with one evaluation** (A8: "the full law at one point: 0"; A7) — Proposition C′ (b) is theirs; the remark that a sampler finds the dips (A10) | the tolerant versions; the matching (cylinder) lower bound for a block; that neither hypothesis of S1 can be dropped; the full-oracle collapse C′ (a) and its deterministic counterpart C′ (c); the sample lower bound |
 
-**Prior art outside the programme** (from memory and one bounded search — §12; nothing below was
-found stated for free energies of Lipschitz classes).  Statistical-query learning: `O(τ^{−2}log M)`
+**Prior art outside the programme** (from memory, and a bounded search of five queries and one abstract
+recorded in `docs/phase2/PRIOR_ART.md` — read at the level of search summaries; nothing below was found
+stated for free energies of Lipschitz classes).  The search adds: the cell-hiding lower bound for
+log-concave normalising constants (Ge–Lee–Lu 2020); partition functions from *sampling* oracles at
+chosen temperatures, with lower bounds and an adaptive/non-adaptive distinction of its own (Kolmogorov
+2018; Harris–Kolmogorov; Guo–Liu–Yang–Yin–Zhang 2026) — a different access model from Theorem E; no
+statistical-query lower bound for partition functions was returned.  Statistical-query learning: `O(τ^{−2}log M)`
 samples answer `M` statistical queries (Kearns 1998) — Theorem A uses the same count in the opposite
 direction, for an adversary.  Averaging over a code to kill low-order statistics: orthogonal
 arrays, `k`-wise independence (Rao 1947; Alon–Babai–Itai 1986); the random-subgroup argument of

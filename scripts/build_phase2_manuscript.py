@@ -98,7 +98,11 @@ reduction of the problem to `T`.
 adaption and randomisation), Traub–Wasilkowski–Woźniakowski; relative-error Monte Carlo:
 Dagum–Karp–Luby–Ross (2000); estimation of normalising constants by annealing, splitting and nested
 sampling (Jerrum–Sinclair; Skilling; Cérou–Del Moral–Furon–Guyader); solvable integration problems
-(Kunsch–Novak–Rudolf 2019).  *Statistical queries*: Kearns (1998); `O(τ^{−2} log M)` samples answer `M`
+(Kunsch–Novak–Rudolf 2019); lower bounds for log-concave normalising constants by hidden cells
+(Ge–Lee–Lu 2020); partition functions from sampling oracles at chosen temperatures, with lower bounds
+for adaptive and non-adaptive schedules (Štefankovič–Vempala–Vigoda 2009; Huber 2015; Kolmogorov 2018;
+Harris–Kolmogorov; Guo–Liu–Yang–Yin–Zhang 2026) — an access model without evaluations of an unknown
+function; sample complexity with a proposal (Block–Shetty 2026).  *Statistical queries*: Kearns (1998); `O(τ^{−2} log M)` samples answer `M`
 statistical queries — the count used here for the adversary; lower bounds by statistical dimension
 (Blum et al. 1994; Feldman et al. 2017) concern learning and search problems with a statistical-query
 oracle *only*, whereas here the oracle is added to exact evaluations of an unnormalised density.
@@ -109,7 +113,8 @@ Within the programme: the invariance of the exponents under exact marginals of b
 under Walsh correlations at tolerance `e^{−o(n/ln n)}` is due to its Scientific Discovery Division
 (`INFERENCE_LIMITS.md`, Theorem 4 and addenda A1, A8, A10 in the consolidated archive); Section 9 of
 `docs/phase2/PHASE2_REPORT.md` says precisely what is added here.  We know of no statement of Theorems A, C or E in the
-literature, and have no evidence that a specialist would not consider them folklore.
+literature (a bounded search: `docs/phase2/PRIOR_ART.md`, five queries read at the level of summaries),
+and have no evidence that a specialist would not consider them folklore.
 
 **Organisation.**  Preliminaries: the packing lemma and what is known without an oracle.  Section 1:
 setting.  Sections 2–6: the results with proofs.  Section 7: open problems.  Appendix: what is machine-checked,

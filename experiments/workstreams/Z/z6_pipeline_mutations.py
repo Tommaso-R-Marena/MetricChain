@@ -12,9 +12,11 @@ addendum; shares no code with the script).  This file measures both statements:
   mutant's output, and record the two verdicts.
 
 Two kinds of mutation: "gross" ones make the output invalid by a margin far above rounding (relative 1e-9 or
-more, or structurally) and must be rejected by (ii); "ulp" ones flip a rounding direction by a few units in the
-last place — whether the output is then still a valid certificate depends on the instance, and the checker's
-verdict is reported (if it accepts, it has exhibited a rational witness for every line: the output is valid).
+more, or structurally) and must be rejected by (ii); "ulp" ones remove a safety margin — a rounding direction
+flipped by a few units in the last place, a cap flatter by 1e-6 (still below the true envelope when the sample
+is coarse), a relaxed exact test that the floating-point search never reaches — so that whether the OUTPUT is
+still a valid certificate depends on the instance; the checker's verdict is reported (if it accepts, it has
+exhibited a rational witness for every line and dominated the cap by lines of its own: the output is valid).
 
 A mutation that breaks the certificate must NOT be accepted by (ii): the checker must end with a
 rejection.  (For an invalid line the checker searches long for a witness that does not exist; a run that
@@ -64,10 +66,14 @@ MUTS = [
        "        be_new.append(float(upw(np.float64(th_ * (1.0 + b0) / e_))) * (1 - 1e-6))")], "gross"),
     ("G08 the parent line steeper by 1e-9",
      [("        a0 = float(V.al[i_]) if i_ >= 0 else 0.0", "        a0 = float(V.al[i_]) * (1 + 1e-9) if i_ >= 0 else 0.0")], "gross"),
-    ("G09 the slope of the cap line too small by 1e-6",
-     [("        bL = float(Fr(m) * C - 1)", "        m = m * (1 - 1e-6)\n        bL = float(Fr(m) * C - 1)")], "gross"),
-    ("G10 the top accepted with a (1 - 1e-6) in place of abar",
-     [("    A = Fr(ABAR)\n    C = Fr(V.c)", "    A = Fr(ALOW) * (1 - Fr(1, 10 ** 6))\n    C = Fr(V.c)")], "gross"),
+    ("G09 the cap line through (c', 1) with half the tangent slope",
+     [("        bL = float(Fr(m) * C - 1)", "        m = m * 0.5\n        bL = float(Fr(m) * C - 1)")], "gross"),
+    ("G10 the top lowered by 1e-3 after it was found",
+     [("def step(V):\n    c = next_top(V)", "def step(V):\n    c = next_top(V) * (1 - 1e-3)")], "gross"),
+    ("U05 the slope of the cap line too small by 1e-6",
+     [("        bL = float(Fr(m) * C - 1)", "        m = m * (1 - 1e-6)\n        bL = float(Fr(m) * C - 1)")], "ulp"),
+    ("U06 the exact test of the top with a (1 - 1e-6) in place of abar",
+     [("    A = Fr(ABAR)\n    C = Fr(V.c)", "    A = Fr(ALOW) * (1 - Fr(1, 10 ** 6))\n    C = Fr(V.c)")], "ulp"),
     ("U01 the rate e' rounded down (one unit in the last place)",
      [("    return up(e), max(0.0, up(kl_iv(r, HALF)))", "    return dn(e), max(0.0, up(kl_iv(r, HALF)))")], "ulp"),
     ("U02 the bound of theta rounded down (one unit)",
