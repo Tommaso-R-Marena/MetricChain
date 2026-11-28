@@ -47,6 +47,34 @@ def test_gap_certificate_honours_the_declaration():
     assert run(plain, gg=-1.0).status == "void"
 
 
+def test_gap_certificate_with_enclosures_of_b_and_G():
+    """Section 7.2: only enclosures of b and an upper bound of G are known."""
+    b, G, f, phi, region, exact = _gap_instance()
+    tr, va = slice(0, 1000), slice(1000, None)
+    d = ci.Declared(-1, 1, [-1], [1], U_max=math.inf)
+    plain = ci.certify_upper_gap(b, G, f[tr], phi[tr], f[va], phi[va], region, d, 0.05)
+    same = ci.certify_upper_gap(b, G, f[tr], phi[tr], f[va], phi[va], region, d, 0.05, b_hi=b, G_hi=G)
+    assert same.status == "certified" and abs(same.value - plain.value) < 1e-9
+    width = 0.01 * np.abs(b) + 1e-3
+    wide = ci.certify_upper_gap(b - width, 0.97 * G, f[tr], phi[tr], f[va], phi[va], region, d, 0.05, b_hi=b + width, G_hi=1.03 * G)
+    assert wide.status == "certified" and wide.value > plain.value            # the enclosure costs width
+    assert ci.certify_upper_gap(b + width, G, f[tr], phi[tr], f[va], phi[va], region, d, 0.05, b_hi=b - width).status == "void"
+    assert ci.certify_upper_gap(b, 1.1 * G, f[tr], phi[tr], f[va], phi[va], region, d, 0.05, G_hi=G).status == "void"
+    # validity when the truth is anywhere in the enclosure: repeat with fresh draws
+    rng = np.random.default_rng(42)
+    pi = np.random.default_rng(0).dirichlet(np.ones(8))                        # the reference of _gap_instance
+    f_all, phi_all = np.random.default_rng(0).uniform(-1, 1, 8), None
+    misses = 0
+    for _ in range(100):
+        b2, G2, f2, phi2, region2, exact2 = _gap_instance(seed=int(rng.integers(1, 10 ** 6)))
+        w2 = 0.02 * np.abs(b2) + 1e-3
+        shift = rng.uniform(-1, 1, 3) * w2                                     # the enclosure is not centred on the truth
+        out = ci.certify_upper_gap(b2 + shift - w2, G2 * 0.95, f2[tr], phi2[tr], f2[va], phi2[va], region2, d, 0.05,
+                                   b_hi=b2 + shift + w2, G_hi=G2 * 1.05)
+        misses += out.value < exact2 - 1e-9
+    assert misses <= 12
+
+
 def test_gap_zero_is_handled_explicitly():
     b, G, f, phi, region, _ = _gap_instance()
     d = ci.Declared(-1, 1, [-1], [1], U_max=math.inf)

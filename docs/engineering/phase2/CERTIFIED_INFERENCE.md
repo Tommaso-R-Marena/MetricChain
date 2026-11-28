@@ -439,8 +439,10 @@ version said "ball arithmetic" without this qualification.)
 **7.2 `b`, `G`, `Z_l` (gap sampling only).**  With `b ∈ [b⁻, b⁺]` componentwise and `G ≤ G⁺`,
 `Ψ ≤ Σ_i max(λ_i b_i⁻, λ_i b_i⁺) + G⁺·E_q s₊`; certify the right-hand side.  If `b` itself is estimated
 from a sample of `p_l ∝ l`, a second test and a split of `δ` are needed.  Reference sampling needs
-neither — the reason to prefer it whenever a reference exists.  (A rule on paper: the prototype takes
-`b` and `G` as exact.)
+neither — the reason to prefer it whenever a reference exists.  (Implemented after the review for a
+componentwise enclosure of `b` and an upper bound of `G` — the arguments `b_hi`, `G_hi` of the gap
+certificate, which tests `s₊ + sup_b λ·b / G⁺`; the second test for a `b` estimated from a sample is not
+implemented.)
 
 **7.3 Approximate sampling.**  If the sampler's law `π'` satisfies `π'/π ∈ [1/β, β]`, replace `(L, U)`
 by `(L/β, βU)`.  If only `‖π' − π‖_TV ≤ ε_TV` is known, then
@@ -746,7 +748,7 @@ the references was read in full by this division.
 | M4 | Theorem 4.1(c) ill-posed | restated with complementary slackness; counterexample kept |
 | M5 | completeness for `l ≡ 0` used and unproved | one proof for every envelope (the referee's) |
 | M6 | the total-variation rule of §7.3 not monotone in `τ` | §7.3 states the constant allowance that the code uses |
-| M7 | claims without support (`RESULTS.md`, "ball arithmetic", §7.2) | §7.1, §7.2, §11 reworded; `RESULTS.md` written from the stored runs |
+| M7 | claims without support (`RESULTS.md`, "ball arithmetic", §7.2) | §7.1, §7.2, §11 reworded; the enclosure rule of §7.2 implemented and tested; `RESULTS.md` written from the stored runs |
 | M8 | Proposition 5.2 is an upper estimate; capped bets | restated with both regimes |
 | K1 | non-finite draws reported as certified | code: void; tests |
 | K2 | `G = 0` not handled | code: the exact value in the gap certificate, abstention in the S3 routine; tests |

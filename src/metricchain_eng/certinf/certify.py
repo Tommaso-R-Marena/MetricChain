@@ -288,24 +288,34 @@ def certify_inconsistent(train: Sample, valid: Sample, region, d: Declared, delt
 # ---------------------------------------------------------------------------------------------
 # Gap sampling with exact b, G (S3's access model), certified by one function
 # ---------------------------------------------------------------------------------------------
-def certify_upper_gap(b, G: float, f_tr, phi_tr, f_va, phi_va, region, d: Declared, delta: float) -> Bound:
+def certify_upper_gap(b, G: float, f_tr, phi_tr, f_va, phi_va, region, d: Declared, delta: float,
+                      b_hi=None, G_hi: float | None = None) -> Bound:
     """Draws from q = (u - l)/G, with b = sum l v and G exact: Psi = lin + G E_q[s_+].  ``d.U_max`` is not used.
     The declaration is honoured as in ``certify_upper`` (sections 7.3-7.5; REVIEW_A, findings C1 and K2): abstention
     for dependent draws, a void certificate for a draw outside the declared ranges, the allowances beta, eps_tv,
-    phi_err and f_err; and for G = 0, where q does not exist, the exact value from b."""
+    phi_err and f_err; and for G = 0, where q does not exist, the exact value from b.
+
+    If only enclosures of b and G are known (section 7.2), pass the lower end of b as ``b``, its upper end as
+    ``b_hi`` and an upper bound of G as ``G_hi`` (``G`` is then a nominal value, used to fit the multipliers only).
+    The certificate holds for every b in the enclosure and every G <= G_hi: the tested variable is
+    s_+ + sup_b lin / G_hi, and G_hi E[s_+] + sup_b lin >= Psi.  The draws must still be exact draws of q, which
+    does not depend on the scale G."""
     b = _vec(b)
+    b_up = b if b_hi is None else _vec(b_hi)
+    g_up = G if G_hi is None else float(G_hi)
     f_tr, f_va = _vec(f_tr), _vec(f_va)
     phi_tr, phi_va = np.asarray(phi_tr, float).reshape(f_tr.size, -1), np.asarray(phi_va, float).reshape(f_va.size, -1)
     m = phi_va.shape[1]
     msg = d.invalid() or _bad_delta(delta)
-    if not msg and (b.size != m + 2 or not np.all(np.isfinite(b)) or not (math.isfinite(G) and G >= 0) or not b[0] >= 0):
-        msg = "b = (Z_l, sum l phi, sum l f) and G must be finite, with Z_l >= 0 and G >= 0"
+    if not msg and (b.size != m + 2 or b_up.size != m + 2 or not np.all(np.isfinite(b)) or not np.all(np.isfinite(b_up))
+                    or not (math.isfinite(G) and math.isfinite(g_up) and 0 <= G <= g_up) or not b[0] >= 0 or np.any(b > b_up)):
+        msg = "b = (Z_l, sum l phi, sum l f) and G must be finite, with Z_l >= 0, 0 <= G <= G_hi and b <= b_hi"
     if msg:
         return Bound(d.f_hi, "void", msg)
-    if G == 0:
+    if g_up == 0:
         if not b[0] > 0:
-            return Bound(d.f_hi, "abstain", "G = 0 and Z_l = 0: the class contains no ensemble")
-        val = float(b[-1] / b[0])
+            return Bound(d.f_hi, "abstain", "G = 0 and Z_l = 0 is not excluded: the class may contain no ensemble")
+        val = float(b_up[-1] / (b[0] if b_up[-1] >= 0 else b_up[0]))          # sup of b_f / b_0 over the enclosure
         return Bound(val + d.f_err, "certified", "G = 0: the class is the one ensemble l/Z_l and its average is exact from b; no draw is used, "
                                                  "and consistency with the region is not examined", np.zeros(m), val, 0)
     if not d.iid:
@@ -316,21 +326,25 @@ def certify_upper_gap(b, G: float, f_tr, phi_tr, f_va, phi_va, region, d: Declar
     reg = _region(region, d)
     tau_tr, eta = math.nan, np.zeros(m)
     if f_tr.size:
-        tau_tr, eta = solve_upper(Problem(f_tr, phi_tr, Lw=0.0, Gw=G, region=reg, wt=np.full(f_tr.size, 1.0 / f_tr.size), b=b))
+        g_fit = G if G > 0 else g_up
+        tau_tr, eta = solve_upper(Problem(f_tr, phi_tr, Lw=0.0, Gw=g_fit, region=reg, wt=np.full(f_tr.size, 1.0 / f_tr.size), b=0.5 * (b + b_up)))
         eta = _vec(eta)
         if not np.all(np.isfinite(eta)):
             tau_tr, eta = math.nan, np.zeros(m)
     h = reg.h(eta)
     _, s_hi = _spread(eta, d, h)
-    b0, const = b[0], b[-1] - float(eta @ b[1:-1]) + h * b[0]
+    const = b_up[-1] + float(np.maximum(-eta * b[1:-1], -eta * b_up[1:-1]).sum())     # sup of b_f - eta . b_phi
     top = max(d.f_hi + s_hi - d.f_lo, 0.0)                    # sup of s_+ over the declared ranges and the bracket
     shift = d.eps_tv * d.beta * top
     s0 = f_va - phi_va @ eta + h
 
-    def zfun(tau):                       # E_q z <= 0  =>  Psi(tau, eta) <= 0
-        return d.beta * np.maximum(s0 - tau, 0.0) + shift + (const - b0 * tau) / G
+    def lin_hi(tau):                     # sup of lin(tau, eta) over the enclosure of b; non-increasing in tau
+        return const + max((h - tau) * b[0], (h - tau) * b_up[0])
 
-    big = d.beta * top + shift + (const - b0 * d.f_lo) / G
+    def zfun(tau):                       # E_q z <= 0  =>  Psi(tau, eta) <= 0 for every admissible (b, G)
+        return d.beta * np.maximum(s0 - tau, 0.0) + shift + lin_hi(tau) / g_up
+
+    big = d.beta * top + shift + lin_hi(d.f_lo) / g_up
     tau = _smallest_tau(zfun, big, d.f_lo, d.f_hi, math.log(1.0 / delta))
     if tau is None:
         return Bound(d.f_hi + d.f_err, "trivial", "the validation sample certifies nothing below the declared range", eta, tau_tr, f_va.size)
