@@ -367,8 +367,8 @@ It gives a Hoeffding-type supermartingale, not a variance-adaptive betting produ
 can be computed for the chains of an enumerable control; for molecular dynamics we know no bound, and
 an estimated autocorrelation time is not one (B7(c), experiment C, open problem O1).
 
-**(d) Allocation for a certificate.**  To second order the squared width of our region for a contrast
-is `2(log(1/α) + ρ)·R_c(s)/N` with the effective resistance `R_c(s) = cᵀL(s)^+c = V_c(s) + Σc_k²/s_k`, and
+**(d) Allocation for a certificate.**  To second order the squared half-width of our region for a
+contrast is `2(log(1/α) + ρ)·R_c(s)/N` with the effective resistance `R_c(s) = cᵀL(s)^+c = V_c(s) + Σc_k²/s_k`, and
 `R_c` **is convex in the allocation** [P; T11]: `vᵀL(s)v = Σ_k s_kv_k² − ∫(Σ_k s_kp_kv_k)²/m_s dG` is linear
 minus a perspective function, hence concave in `s`, and `R_c(s) = sup_v{2cᵀv − vᵀL(s)v}`.  So allocating
 for the certified width is the resistance design — the criterion of the earlier programme, which we
