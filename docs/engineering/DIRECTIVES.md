@@ -632,3 +632,87 @@ computational-results collection task."  Operative content:
   re-pinned to it.
 
 D-8 remains the operative directive: the division is halted.
+
+## D-11 — Phase II: constructive mathematical synthesis, certified inference and computational validation (2026-11-28, received about 00:00 UTC)
+
+Addressed to this division.  "I explicitly authorize you to resume research under this new,
+targeted Phase II directive.  The previous broad autonomous research loops remain superseded."
+Baseline: the consolidated archive at commit `fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f`.
+"Create a separate research branch named `research/phase2-certified-inference`, based on your
+existing Engineering branch.  Preserve all eight original research branches and the
+consolidated archive."  Operative content, in the owner's words:
+
+1. **Objective.**  "Transform the accumulated mathematics of MetricChain into a genuinely
+   useful, rigorously validated computational capability that established approaches may
+   lack."  A synthesis by another AI system proposes "theorem S3: Certified sampled
+   compression of the ensemble moment body" (the full text is quoted in
+   `docs/engineering/phase2/CERTIFIED_INFERENCE.md` §1).  "Your task is to investigate whether
+   this combination produces materially stronger mathematical or scientific capabilities.  Do
+   not assume that it does."  "Do not assume that this theorem is correct or novel merely
+   because GPT derived it."
+2. **Workstream A (mathematics)**: re-derive and adversarially review S3; hidden assumptions
+   and counterexamples; exact normalisation and error propagation; "uncertainty in b, G, Z_l,
+   energy envelopes, and approximate sampling"; better concentration ("variance-sensitive
+   methods, empirical-process theory, Rademacher complexity"); "deterministic alternatives,
+   low-rank representations, adaptive sampling, and structured optimization"; the relation to
+   "random-zonotope approximation, robust Bayesian density-ratio methods and stochastic
+   optimization"; whether more MetricChain mathematics gives "substantially stronger
+   results"; "Handle G=0 explicitly and investigate the efficiency limitations of sampling
+   from the gap distribution."
+3. **Workstream B (prototype)**: exact full-state optimisation, compressed sampled
+   optimisation, certified uncertainty propagation, model-free and energy-constrained
+   inference, geometric stress observables, consistency and falsification certificates,
+   correlated measurement errors, "explicit abstention when assumptions or resource
+   requirements are not satisfied".  "Keep the implementation small, auditable, and
+   reproducible."
+4. **Workstream C (verification gaps)**: the twelve later structural-biology certificates;
+   the old floating-point exploit and the repair; the memoised kernel; "the R29
+   numerical-certificate concerns where relevant"; "the distinction between actual certified
+   computation and calculations of theoretical cost formulas".  "Do not undertake expensive
+   benchmarking merely to close administrative obligations.  Preserve all unfavorable
+   findings."
+5. **Workstream D (validation)**: enumerable synthetic and existing development instances;
+   against exact full-state optimisation, established robust density-ratio methods,
+   model-free partial identification, established ensemble reweighting, existing MetricChain
+   certificates; "at matched accuracy, confidence and computational resources"; coverage,
+   width, sample count, cost, overhead, memory, abstention and failure rates, sensitivity to
+   inaccurate energy models and to insufficient or inconsistent observations.  "The goal is
+   to demonstrate a meaningful improvement after including every certification allowance, not
+   merely that raw sampled estimates resemble exact answers."  "Do not claim biological
+   accuracy from idealized force-field computations."
+6. **Workstream E (Modal)**: this division stays the coordinator; "Use local computation
+   first.  An initial Modal expenditure ceiling of $25 is authorized for small, bounded
+   pilots"; "Do not launch large-scale benchmark campaigns."  A larger computation needs a
+   written proposal (objective, protocol, competing methods, criteria, estimated and
+   worst-case cost, expected value) and explicit authorisation.  "Do not restart the
+   previously missing M-016 cell merely for completeness."
+7. **Collaboration**: `research/phase2-foundations` (the original theory instance) and
+   `research/phase2-adaptive-hierarchy` (a new mathematical division); "Use existing GitHub
+   collaboration conventions."  "The six other original divisions remain stopped.  Their
+   archived mathematics is available for use, but do not restart them."
+8. **Discipline**: bounded cycles (capability → smallest prototype → verification →
+   strongest baseline → limitations → improvements); "Use subagents selectively for
+   independent verification or well-defined research tasks.  Do not launch a new wave of
+   broadly exploratory agents."  "Preserve counterexamples and negative results."
+9. **Integrity**: "Do not access, decrypt, alter or compromise the sealed held-out evaluation
+   material.  Do not tune methods on held-out data.  Any eventual held-out evaluation
+   requires a separate explicit authorization and a frozen protocol."
+10. **Resources and stopping**: "Initial Claude expenditure ceiling: $500.  Initial Modal
+    expenditure ceiling: $25.  If Claude usage cannot be monitored reliably, report that
+    limitation and keep the workstream bounded.  Maintain the existing hard stop of November
+    30, 2026, at 3:00 PM Eastern Time.  Regularly commit and push substantive progress."
+    Deliverables: new results with proofs; reproducible software and verification
+    artifacts; comparative benchmark evidence; demonstrated against speculative
+    capabilities; negative results and obstacles; exact resource expenditure and
+    commitments; a recommendation.  "Stop at completion or the resource ceiling.  Do not
+    automatically resume."
+
+**How it is applied.**  D-8's halt is lifted for this directive's scope only; the broad loops
+of D-2 … D-5 stay superseded.  Branch `research/phase2-certified-inference` was created from
+`research/ubuntu-engineering` at `67b6bc2`; that branch and the other seven stay as they are.
+Claude spending is read as the increase of the account's extra-usage counter since
+2026-11-28 00:04 UTC (the counter's own value is account information and is not recorded in
+this public repository); the counter is account-wide, so its increase bounds this division's
+spending from above if other sessions run at the same time — the limitation the directive
+asks to be reported.  Subagents used: listed with their briefs' purposes in
+`docs/engineering/phase2/README.md`.  Records of this phase: `docs/engineering/phase2/`.
