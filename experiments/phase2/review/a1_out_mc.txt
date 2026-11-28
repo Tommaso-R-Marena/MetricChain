@@ -4,7 +4,7 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
 == self-test: sparse instance code against a dense computation from the definitions ==
    25 instances (n = 7..10, equal centres included): max |sparse - dense| over (A-1, O_c, G, G_sum, bias) = 1.0e-13 ok
 
-== regime A (overlaps > tau): n=20 u=1 r=2 L=10000, 2000 instances [38s]  -- narrow dips of radius 2; overlaps comparable with / above tau
+== regime A (overlaps > tau): n=20 u=1 r=2 L=10000, 2000 instances [49s]  -- narrow dips of radius 2; overlaps comparable with / above tau
    m_r=3.887e-05  V(n,r-1)=21  R=L m_r=0.3887  eta''=L V/2^n=0.2003  sigma0=sqrt(R m_r)=0.003887
    M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.02477 (<=1);  largest accuracy eps=ln(1+R/2)=0.1776;  new bound factor 1-eta-eta''=0.700
    first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.06372): eta' = 7.86 at tau_min, 3.05 at max(tau_min, 0.06372)  => void in this regime (eta' >= 1 - eta)
@@ -22,8 +22,9 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
    1-2*B(0,5)     1.959 |     +0.0031  +0.83 |    0.1684 |  0.0000  0.0000  0.0000  0.0000 |        0.0132 0.0496 0.0671    0.0000 |    -0.0000     0.0060      0.0297
    rand_pm1       1.001 |     -0.0079  -1.63 |    0.2169 |  0.0000  0.0000  0.0000  0.0000 |        0.0177 0.0619 0.0843    0.0000 |    -0.0000     0.0102      0.0394
    all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.300);  max |z| of the means = 1.63;  tail violations: 0
+   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = 0.01238 (<=1);  E O_c/tau2 = 2.80, E Otilde_c/tau2 = 2.62;  max |bias|/tau2 = 0.6292;  max_i P(|bias_i| > tau2) = 0.0000 (theorem: <= eta/M = 0.0125);  P(exists i: |bias_i| > tau2) = 0.0000 (<= eta = 0.10);  P(not good) = 0.0000 (<= eta+eta'' = 0.300)
 
-== regime B (overlaps >> tau): n=20 u=1 r=1 L=200000, 2000 instances [38s]  -- dips = single points; many coincident centres; overlaps ~ 8 tau
+== regime B (overlaps >> tau): n=20 u=1 r=1 L=200000, 2000 instances [48s]  -- dips = single points; many coincident centres; overlaps ~ 8 tau
    m_r=1.639e-06  V(n,r-1)=1  R=L m_r=0.3277  eta''=L V/2^n=0.1907  sigma0=sqrt(R m_r)=0.0007328
    M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.00467 (<=1);  largest accuracy eps=ln(1+R/2)=0.1517;  new bound factor 1-eta-eta''=0.709
    first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.01425): eta' = 33.5 at tau_min, 11 at max(tau_min, 0.01425)  => void in this regime (eta' >= 1 - eta)
@@ -41,8 +42,9 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
    1-2*B(0,5)     1.959 |     -0.0038  -0.69 |    0.2442 |  0.0000  0.0000  0.0000  0.0000 |        0.0194 0.0755 0.1138    0.0000 |    +0.0005     0.0142      0.0509
    rand_pm1       1.001 |     +0.0229  +1.20 |    0.8515 |  0.2510  0.0140  0.0000  0.0000 |        0.0720 0.2534 0.3398    0.0000 |    +0.0007     0.0486      0.1644
    all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.291);  max |z| of the means = 2.38;  tail violations: 0
+   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = 0.002335 (<=1);  E O_c/tau2 = 13.39, E Otilde_c/tau2 = 12.58;  max |bias|/tau2 = 0.7411;  max_i P(|bias_i| > tau2) = 0.0000 (theorem: <= eta/M = 0.0125);  P(exists i: |bias_i| > tau2) = 0.0000 (<= eta = 0.10);  P(not good) = 0.0000 (<= eta+eta'' = 0.291)
 
-== regime C: n=20 u=1 r=3 L=1000, 2000 instances [39s]  -- radius 3, L = 1000
+== regime C: n=20 u=1 r=3 L=1000, 2000 instances [49s]  -- radius 3, L = 1000
    m_r=0.0004514  V(n,r-1)=211  R=L m_r=0.4514  eta''=L V/2^n=0.2012  sigma0=sqrt(R m_r)=0.01427
    M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.09096 (<=1);  largest accuracy eps=ln(1+R/2)=0.2035;  new bound factor 1-eta-eta''=0.699
    first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.2015): eta' = 2.5 at tau_min, 1.13 at max(tau_min, 0.2015)  => void in this regime (eta' >= 1 - eta)
@@ -60,8 +62,9 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
    1-2*B(0,5)     1.959 |     -0.0010  -0.33 |    0.1321 |  0.0000  0.0000  0.0000  0.0000 |        0.0098 0.0372 0.0498    0.0000 |    -0.0000     0.0037      0.0166
    rand_pm1       1.001 |     -0.0008  -0.41 |    0.0813 |  0.0000  0.0000  0.0000  0.0000 |        0.0062 0.0239 0.0345    0.0000 |    -0.0000     0.0029      0.0108
    all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.301);  max |z| of the means = 1.84;  tail violations: 0
+   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = 0.04548 (<=1);  E O_c/tau2 = 0.78, E Otilde_c/tau2 = 0.74;  max |bias|/tau2 = 0.5948;  max_i P(|bias_i| > tau2) = 0.0000 (theorem: <= eta/M = 0.0125);  P(exists i: |bias_i| > tau2) = 0.0000 (<= eta = 0.10);  P(not good) = 0.0000 (<= eta+eta'' = 0.301)
 
-== regime D: n=18 u=2 r=2 L=3000, 2000 instances [9s]  -- steeper slope u = 2
+== regime D: n=18 u=2 r=2 L=3000, 2000 instances [12s]  -- steeper slope u = 2
    m_r=0.0006432  V(n,r-1)=19  R=L m_r=1.9295  eta''=L V/2^n=0.2174  sigma0=sqrt(R m_r)=0.03523
    M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.2245 (<=1);  largest accuracy eps=ln(1+R/2)=0.6754;  new bound factor 1-eta-eta''=0.683
    first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.1163): eta' = 4.67 at tau_min, 4.67 at max(tau_min, 0.1163)  => void in this regime (eta' >= 1 - eta)
@@ -79,8 +82,9 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
    1-2*B(0,4)     1.969 |     -0.0001  -0.03 |    0.1497 |  0.0000  0.0000  0.0000  0.0000 |        0.0055 0.0216 0.0302    0.0000 |    -0.0000     0.0046      0.0213
    rand_pm1       1.000 |     -0.0126  -1.70 |    0.3316 |  0.0025  0.0000  0.0000  0.0000 |        0.0127 0.0471 0.0704    0.0000 |    -0.0000     0.0096      0.0326
    all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.317);  max |z| of the means = 1.70;  tail violations: 0
+   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = 0.1122 (<=1);  E O_c/tau2 = 1.37, E Otilde_c/tau2 = 1.28;  max |bias|/tau2 = 0.3209;  max_i P(|bias_i| > tau2) = 0.0000 (theorem: <= eta/M = 0.0125);  P(exists i: |bias_i| > tau2) = 0.0000 (<= eta = 0.10);  P(not good) = 0.0000 (<= eta+eta'' = 0.317)
 
-== regime G (overlaps >> tau): n=20 u=0.3 r=2 L=20000, 1500 instances [65s]  -- flat slope u = 0.3, radius 2; overlaps ~ 4 tau
+== regime G (overlaps >> tau): n=20 u=0.3 r=2 L=20000, 1500 instances [78s]  -- flat slope u = 0.3, radius 2; overlaps ~ 4 tau
    m_r=7.457e-06  V(n,r-1)=21  R=L m_r=0.1491  eta''=L V/2^n=0.4005  sigma0=sqrt(R m_r)=0.001055
    M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=0.00672 (<=1);  largest accuracy eps=ln(1+R/2)=0.0719;  new bound factor 1-eta-eta''=0.499
    first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.04506): eta' = 22.2 at tau_min, 3.31 at max(tau_min, 0.04506)  => void in this regime (eta' >= 1 - eta)
@@ -98,6 +102,7 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
    1-2*B(0,5)     1.959 |     +0.0067  +1.85 |    0.1410 |  0.0000  0.0000  0.0000  0.0000 |        0.0126 0.0504 0.0805    0.0000 |    +0.0004     0.0105      0.0453
    rand_pm1       1.001 |     -0.0052  -1.14 |    0.1778 |  0.0000  0.0000  0.0000  0.0000 |        0.0169 0.0617 0.0888    0.0000 |    -0.0008     0.0149      0.0491
    all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.501);  max |z| of the means = 2.16;  tail violations: 0
+   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = 0.00336 (<=1);  E O_c/tau2 = 8.38, E Otilde_c/tau2 = 7.37;  max |bias|/tau2 = 0.6748;  max_i P(|bias_i| > tau2) = 0.0000 (theorem: <= eta/M = 0.0125);  P(exists i: |bias_i| > tau2) = 0.0000 (<= eta = 0.10);  P(not good) = 0.0000 (<= eta+eta'' = 0.501)
 
 == regime F (control): n=16 u=1 r=2 L=300, 3000 instances [3s]  -- overlaps small compared with tau: the regime of the first version
    m_r=0.000517  V(n,r-1)=17  R=L m_r=0.1551  eta''=L V/2^n=0.0778  sigma0=sqrt(R m_r)=0.008955
@@ -117,8 +122,9 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
    1-2*B(0,3)     1.979 |     -0.0006  -0.27 |    0.1205 |  0.0000  0.0000  0.0000  0.0000 |        0.0113 0.0424 0.0734    0.0000 |    -0.0000     0.0021      0.0227
    rand_pm1       1.005 |     -0.0026  -0.53 |    0.2646 |  0.0000  0.0000  0.0000  0.0000 |        0.0246 0.0969 0.1357    0.0000 |    +0.0001     0.0068      0.0269
    all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 0.178);  max |z| of the means = 1.04;  tail violations: 0
+   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = 0.02853 (<=1);  E O_c/tau2 = 0.18, E Otilde_c/tau2 = 0.18;  max |bias|/tau2 = 0.7892;  max_i P(|bias_i| > tau2) = 0.0000 (theorem: <= eta/M = 0.0125);  P(exists i: |bias_i| > tau2) = 0.0000 (<= eta = 0.10);  P(not good) = 0.0000 (<= eta+eta'' = 0.178)
 
-== regime E (heavy overlap): n=16 u=1 r=3 L=1000, 2000 instances [22s]  -- eta'' > 1: the theorem is void, Lemma 2.5(iv) + McDiarmid still have to hold
+== regime E (heavy overlap): n=16 u=1 r=3 L=1000, 2000 instances [25s]  -- eta'' > 1: the theorem is void, Lemma 2.5(iv) + McDiarmid still have to hold
    m_r=0.004997  V(n,r-1)=137  R=L m_r=4.9973  eta''=L V/2^n=2.0905  sigma0=sqrt(R m_r)=0.158
    M=8, eta=0.10:  least tolerance allowed tau_min=sqrt(8 R m_r ln(2M/eta))=1.007 (>1: hypotheses not satisfiable);  largest accuracy eps=ln(1+R/2)=1.2524;  new bound factor 1-eta-eta''=-1.190
    first version (eta' = (5 L m_r/(2 tau)) L V/2^n; needs L >= 8 tau^-2 ln(2M/eta), i.e. tau >= 0.2015): eta' = 25.9 at tau_min, 25.9 at max(tau_min, 0.2015)  => void in this regime (eta' >= 1 - eta)
@@ -136,5 +142,6 @@ tau = the LEAST tolerance for which the hypotheses of the new Theorem A' hold (M
    1-2*B(0,3)     1.979 |     +0.0009  +1.10 |    0.0356 |  0.0000  0.0000  0.0000  0.0000 |        0.0010 0.0037 0.0055    0.0000 |    +0.0001     0.0094      0.0441
    rand_pm1       1.005 |     -0.0011  -0.67 |    0.0727 |  0.0000  0.0000  0.0000  0.0000 |        0.0020 0.0076 0.0124    0.0000 |    -0.0003     0.0099      0.0351
    all 8 observables:  P(exists i: |bias_i| > tau_min) = 0.0000 (theorem: <= eta = 0.10);  P(not good) = 0.0000 (theorem: <= eta+eta'' = 2.190);  max |z| of the means = 1.32;  tail violations: 0
+   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = 0.5035 (<=1);  E O_c/tau2 = 7.77, E Otilde_c/tau2 = 4.43;  max |bias|/tau2 = 0.0977;  max_i P(|bias_i| > tau2) = 0.0000 (theorem: <= eta/M = 0.0125);  P(exists i: |bias_i| > tau2) = 0.0000 (<= eta = 0.10);  P(not good) = 0.0000 (<= eta+eta'' = 2.190)
 
 summary: self-test ok; regimes 7; largest |z| of a mean of G_psi over all 56 (regime, observable) pairs: 2.38; tail violations (beyond 3 sigma MC error): 0

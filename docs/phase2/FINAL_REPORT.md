@@ -23,7 +23,7 @@ division for computation.
 | 1. Prove or refute S1 and S2 | **Both are correct.**  S1 = Theorem A (explicit constants; adaptive statistical queries); S2 = Theorem B (arbitrary exact observables through their joint Walsh spectrum; the bound on the subgroup is tight up to a factor 2) | `PHASE2_REPORT.md` §§2, 3, 9 |
 | 2. Formalise their essential cores in Lean | `proofs/Frontiers/ObservationInvariance.lean`, 41 declarations: packing bounds with a tolerant oracle, the admissible cone, mixtures and translations, the flat mixture, characters, the counting form of the union bound, parities on the cube, Hoeffding and Chebyshev for independent draws, two cores of the new upper bounds, maxima of random translates (no bias on average; 1-Lipschitz in each argument) | §10 of the report; theory report §9 (index row) |
 | 3. Stronger results in the exponentially precise regime | adaptive exponent at tolerance `e^{−γn}`: at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`, for every `γ < a/2` (S1's argument gives `h − 2γ`, positive for `γ < h/2` only; at `u = 1` the two thresholds are `0.0555` and `0.0146`), and at most `(1 − γ/ln 2)h`; a spectral criterion (attenuated bias) that unifies the constructions.  **The gap is open**; for `γ ≥ a/2` there is no lower bound for randomised algorithms.  The lower bound in this generality was found on the last day: the first version needed `γ < 0.0154` (at `u = 1`), an artefact of bounding overlaps by Markov's inequality — the bias of a maximum of random dips averages to zero exactly, and the bounded-differences inequality does the rest | Theorem A′, Corollary C, §5, Lemma 5.1 |
-| 4. Exact non-Walsh observables, non-uniform references, transitive spaces, richer oracles | exact observables by spectrum (Theorem B); one exact point probability trivialises the problem (the archive's); any vertex-transitive space (Theorem A″; Theorem A′ too, by a remark added last and not refereed); product references: a positive but smaller exponent (flat mixture: 49 % and 22 % of the class exponent in two cases); any known `κ`-Lipschitz energy: a sandwich `h(u − κ) ≤ … ≤ h(u + κ)` (Proposition 2.7); partition laws (Theorem C); all observables (Proposition C′); samples (Theorem E) | §§2.4, 2.5, 3, 4, 6 |
+| 4. Exact non-Walsh observables, non-uniform references, transitive spaces, richer oracles | exact observables by spectrum (Theorem B); one exact point probability trivialises the problem (the archive's); any vertex-transitive space (Theorem A″; Theorem A′ too, by a remark added last, which the second referee read once and checked on four graphs); product references: a positive but smaller exponent (flat mixture: 49 % and 22 % of the class exponent in two cases); any known `κ`-Lipschitz energy: a sandwich `h(u − κ) ≤ … ≤ h(u + κ)` (Proposition 2.7); partition laws (Theorem C); all observables (Proposition C′); samples (Theorem E) | §§2.4, 2.5, 3, 4, 6 |
 | 5. Sharp characterisations for experimentally motivated operators | sharp: means with error bars in the sub-exponential regime (nothing); the law of a block of `θn` sites (exactly `(1 − θ)h`); all observables (a bounded number of evaluations; deterministic `τ·2ⁿ`); a histogram with polynomially many bins and constant error bars (nothing).  Two-sided with a gap: exponential precision; exact marginals of linear order; samples | §§4, 7, 8 |
 | 6. A deeper relation between precision, structure, concentration and computation | partial: (i) an observation oracle with `M` observables at tolerance `τ` cannot tell a continuum of hidden perturbations from `τ^{−2} ln M` random ones; (ii) dividing a perturbation's mass by `L` shrinks its volume by `L^{ℓ}`, `ℓ` the Chernoff parameter, so atoms cost `L^{1−ℓ}`; (iii) thermal noise attenuates a test of order `j` by `tanh(u/2)^j`, and one quantity — the attenuated bias of the set of hidden centres — decides hiding (Lemma 5.1); (iv) `A = E_π[w1_T]/μ(T)`: a measured mass is a reduction of the problem to a set.  No single law was found; the open problem of row 3 is where one would be | §§5.1, 7 |
 | 7. Dependent or physically structured systems | Proposition 2.7 (absorption): every lower bound at the slope `u − κ`, every algorithm at `u + κ`, for any known energy with single-site oscillation `κ < u` — interacting or not; not sharp.  Marginalisation with a dependent reference keeps the class with the constant `u + κ` (THY-MSG-0023) | §2.5 |
@@ -66,16 +66,20 @@ D71 records the two errors.  The referee did not compile the Lean file or run th
 
 **After the review.**  Theorem A′ / Corollary A′ were strengthened (the side condition of the first
 version removed; see §1, row 3).  The first referee did not see the new proof.
-**The second review** (`PHASE2_REVIEW_A1.md`, 161 lines; scripts `experiments/phase2/review/a1_*`): a second
+**The second review** (`PHASE2_REVIEW_A1.md`, 213 lines; scripts `experiments/phase2/review/a1_*`): a second
 adversarial AI referee read that section alone.  Verdict: the new theorem (both oracle forms), its lemma and
 its corollary stand; every step re-derived; the removal of the side condition is legitimate.  It found one
 error in a degenerate corner of the *statement* — for `δ > ½` and `η + η″ > 1` the displayed product of two
 negative factors is a false positive bound (an explicit counterexample on a cube of four sites; the first
 version had the same corner) — repaired by the hypothesis `δ ≤ ½`; five points of wording; and a sharper
 constant (`2` for `8`).  Replication with its own code: exact enumeration over all tuples of centres in 118
-configurations; Monte Carlo at 16–20 sites where the overlaps are 0.4 to 6 times the tolerance (the regime
-the first version could not treat): no violation of the hidden-answer event in 14 500 instances; the recipe
-of the corollary up to `n = 2·10⁶`.  All incorporated; the corrected text was not re-read by a referee.
+configurations; Monte Carlo at 16–20 sites where the overlaps are 0.7 to 12.6 times the least admissible
+tolerance (the regime the first version could not treat): no violation of the hidden-answer event in
+14 500 instances; the recipe of the corollary up to `n = 2·10⁶`.  All incorporated; the referee then read
+the corrected section and the remark on homogeneous spaces once ("correct as they stand"; the remark
+checked by enumeration on the Petersen graph, a Johnson scheme, a ternary Hamming space and a cycle, with a
+path and a star as negative controls) and made four more points of wording, also applied.  The text after
+those last edits was not read again.
 Neither referee checked McDiarmid's inequality itself (cited), and the argument for adaptive statistical
 queries is on paper only.
 

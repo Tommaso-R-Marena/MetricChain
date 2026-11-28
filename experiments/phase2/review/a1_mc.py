@@ -12,7 +12,9 @@ the script samples instances and records, for a few FIXED observables phi with v
             version of the theorem bounded it by Otilde_c ||psi|| and needed Otilde_c << tau).
 Compared with:  E G_psi = 0 (Lemma 2.5 (iv));  P(|G_psi| > t) <= 2 exp(-t^2/(8 R m_r)) (the report's
 McDiarmid bound, d = 4 m_r) and <= 2 exp(-t^2/(2 R m_r)) (referee's constant, d = 2 m_r);
-tau_min = sqrt(8 R m_r ln(2M/eta)) = the least tolerance the theorem allows for M observables;
+tau_min = sqrt(8 R m_r ln(2M/eta)) = the least tolerance the theorem allows for M observables in the
+text that was reviewed (commit 67956b7); the text as revised after this review (2026-11-28 03:17 UTC)
+has the constant 2, i.e. the least tolerance tau2 = tau_min/2: the lines "revised text" report that;
 P(O_c >= R/2) <= eta''.  The regimes are chosen so that the overlaps are NOT small compared with
 tau_min (there the first version of the theorem is void: eta' > 1), plus one control regime and one
 regime with heavy overlaps (eta'' > 1, where only Lemma 2.5 (iv) + McDiarmid are tested).
@@ -224,8 +226,16 @@ def run(name, n, u, r, L, n_inst, seed, note):
             c.mean() / tau, c.std(ddof=1) / tau, float(np.abs(c).max()) / tau))
     bad_any = float((np.abs(D).max(axis=1) > tau).mean())
     not_good = float(((np.abs(D).max(axis=1) > tau) | (A <= R / 2)).mean())
+    tau2 = tau / 2                                             # least tolerance of the revised text (constant 2)
+    bad_any2 = float((np.abs(D).max(axis=1) > tau2).mean())
+    not_good2 = float(((np.abs(D).max(axis=1) > tau2) | (A <= R / 2)).mean())
+    per_obs2 = float((np.abs(D) > tau2).mean(axis=0).max())
     print("   all %d observables:  P(exists i: |bias_i| > tau_min) = %.4f (theorem: <= eta = %.2f);  P(not good) = %.4f (theorem: <= eta+eta'' = %.3f);  max |z| of the means = %.2f;  tail violations: %d"
           % (K, bad_any, ETA, not_good, ETA + eta2, zmax, viol))
+    print("   revised text (2 R m_r ln(2M/eta) <= tau^2): least tolerance tau2 = %.4g %s;  E O_c/tau2 = %.2f, E Otilde_c/tau2 = %.2f;  max |bias|/tau2 = %.4f;  "
+          "max_i P(|bias_i| > tau2) = %.4f (theorem: <= eta/M = %.4f);  P(exists i: |bias_i| > tau2) = %.4f (<= eta = %.2f);  P(not good) = %.4f (<= eta+eta'' = %.3f)"
+          % (tau2, "(<=1)" if tau2 <= 1 else "(>1)", O.mean() / tau2, Ot.mean() / tau2, float(np.abs(D).max()) / tau2,
+             per_obs2, ETA / K, bad_any2, ETA, not_good2, ETA + eta2))
     print()
     sys.stdout.flush()
     return dict(zmax=zmax, viol=viol, bad_any=bad_any, not_good=not_good, eta2=eta2, zs=None)

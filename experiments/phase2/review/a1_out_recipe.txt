@@ -150,7 +150,17 @@ a1_recipe.py -- referee A1
       eps=1.0 n=200000  : r/n=0.289865 ln m_r/n=-0.090020 ln L/n=0.090027 R=3.4366 hyp ok (margin 0.78) | expo 0.001123 = hbar +0.000025 | ln eta''=   -224.55 | bound 0.001121 | ln eta'(old)=+3777.6
       eps=1.0 n=2000000 : r/n=0.289884 ln m_r/n=-0.090002 ln L/n=0.090003 R=3.4366 hyp ok (margin 0.67) | expo 0.001101 = hbar +0.000003 | ln eta''=  -2202.22 | bound 0.001101 | ln eta'(old)=+37799.9
 
-== F. degenerate corner: delta > 1/2 together with eta + eta'' > 1 ==
+== E2. the same recipe with the constant 2 (text as revised after this review: 2 R m_r ln(2M/eta) <= tau^2;
+       radius = largest r with 2 (2e^eps - 1) m_r ln(2M/eta) <= tau^2);  u = 1, eps = 1, eta = 0.1 ==
+   gamma=0.005 M=100  hbar(2 gamma)=0.024252:  n=2000: expo 0.024369, ln eta''=-48.7, ln eta'(old)=-36.6, hyp ok;  n=20000: expo 0.024321, ln eta''=-486.4, ln eta'(old)=-384.3, hyp ok;  n=200000: expo 0.024264, ln eta''=-4852.8, ln eta'(old)=-3850.7, hyp ok;  n=2000000: expo 0.024254, ln eta''=-48508.5, ln eta'(old)=-38506.3, hyp ok;
+   gamma=0.030 M=100  hbar(2 gamma)=0.006364:  n=2000: expo 0.007224, ln eta''=-14.4, ln eta'(old)=+47.7, hyp ok;  n=20000: expo 0.006506, ln eta''=-130.1, ln eta'(old)=+472.0, hyp ok;  n=200000: expo 0.006384, ln eta''=-1276.7, ln eta'(old)=+4725.4, hyp ok;  n=2000000: expo 0.006367, ln eta''=-12733.2, ln eta'(old)=+47269.0, hyp ok;
+   gamma=0.045 M=100  hbar(2 gamma)=0.001098:  n=2000: expo 0.002389, ln eta''=-4.8, ln eta'(old)=+87.4, hyp ok;  n=20000: expo 0.001285, ln eta''=-25.7, ln eta'(old)=+876.5, hyp ok;  n=200000: expo 0.001122, ln eta''=-224.5, ln eta'(old)=+8777.7, hyp ok;  n=2000000: expo 0.001101, ln eta''=-2202.1, ln eta'(old)=+87800.0, hyp ok;
+   gamma=0.030 M=1    hbar(2 gamma)=0.006364:  n=2000: expo 0.007340, ln eta''=-14.7, ln eta'(old)=+47.5, hyp ok;  n=20000: expo 0.006518, ln eta''=-130.4, ln eta'(old)=+471.8, hyp ok;  n=200000: expo 0.006385, ln eta''=-1277.0, ln eta'(old)=+4725.2, hyp ok;  n=2000000: expo 0.006367, ln eta''=-12733.4, ln eta'(old)=+47268.7, hyp ok;
+   gamma=0.045 M=1    hbar(2 gamma)=0.001098:  n=2000: expo 0.002436, ln eta''=-4.9, ln eta'(old)=+87.3, hyp ok;  n=20000: expo 0.001290, ln eta''=-25.8, ln eta'(old)=+876.4, hyp ok;  n=200000: expo 0.001123, ln eta''=-224.6, ln eta'(old)=+8777.6, hyp ok;  n=2000000: expo 0.001101, ln eta''=-2202.2, ln eta'(old)=+87799.9, hyp ok;
+   gamma=0.050 M=1    hbar(2 gamma)=0.000302:  n=2000: expo 0.001676, ln eta''=-3.4, ln eta'(old)=+98.8, hyp ok;  n=20000: expo 0.000506, ln eta''=-10.1, ln eta'(old)=+992.0, hyp ok;  n=200000: expo 0.000328, ln eta''=-65.6, ln eta'(old)=+9936.5, hyp ok;  n=2000000: expo 0.000305, ln eta''=-610.5, ln eta'(old)=+99391.7, hyp ok;
+
+== F. degenerate corner: delta > 1/2 together with eta + eta'' > 1  (the statement of commit 67956b7, which had no
+      restriction on delta; the revised text assumes delta <= 1/2.  With the revised constant 2 the same example works.) ==
    n=4 u=0.1 r=1 L=16 eps=0.05 tau=1 M=1 eta=0.5: m_r=0.006573 R=0.105171 >= 2(e^eps-1)=0.102542: True;  8 R m_r ln(2M/eta)=0.00767 <= tau^2: True;  eta''=1
    interval for ln A(w) - ln w(x0): [-0.19500, 0.20500], length 0.40000 = n u = 0.40000;  grid of K = 8 points of mesh eps
    4002 admissible weights: ln A(w) - ln w(x0) in [-0.19500, 0.20500] ok

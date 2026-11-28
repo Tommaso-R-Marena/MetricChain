@@ -312,7 +312,7 @@ independent uniform centres `E O_c ≤ C(L,2)·m_r·V(n,r−1)/2ⁿ`.  (iii) Wit
 (iv) *No bias on average; bounded differences.*  For `ψ` with `E_πψ = 0` put `G_ψ(c) = E_π[(w_c − 1)ψ]`, so that
 `E_{μ_{w_c}}φ − E_πφ = G_ψ(c)/A(w_c)` for `ψ = φ − E_πφ`.  For independent uniform centres `E_c G_ψ(c) = 0` —
 overlaps included — and if `c` and `c′` differ in one centre only, `|G_ψ(c) − G_ψ(c′)| ≤ (sup ψ − inf ψ)·m_r`
-(attained: one dip, two antipodal centres).
+(attained when `2(r − 1) < n`: one dip, two antipodal centres, `ψ` the difference of the indicators of the two balls).
 
 *Proof.*  (i) `w_c` is the maximum of the dips `w_{c_j, r}`.  (ii) For nonnegative numbers
 `Σ_j a_j − Σ_{j<j′} min(a_j, a_{j′}) ≤ max_j a_j ≤ Σ_j a_j` (order them; the second largest is counted once
@@ -335,7 +335,7 @@ Let `M ≥ 1`, `0 < τ ≤ 1`, `0 < η < 1`, `δ ≤ ½`, and let the radius `r 
 
     R ≥ 2(e^ε − 1)        and        2 R m_r ln(2M/η) ≤ τ²
 
-(equivalently `m_r ≤ τ²/(2R ln(2M/η))`: every single dip is far below the tolerance; for a given radius,
+(equivalently `m_r ≤ τ²/(2R ln(2M/η))`, so that every single dip is below the tolerance, `m_r < 0.85τ`; for a given radius,
 `2(e^ε − 1)/m_r ≤ L ≤ τ²/(2m_r² ln(2M/η))`).  Every `(ε/2, δ)`-correct randomised algorithm with an oracle (O1)
 makes at the constant weight, with truthful uniform answers,
 
@@ -358,9 +358,11 @@ alternative with `ln A(w_c) > ε` for which the uniform answers are admissible. 
 
 *Adaptive statistical queries.*  The per-seed argument of Theorem A applies verbatim, with the good
 event of the seed `ω` = {`|G_ψ(c)| ≤ τ` for the queries of `ω`, and `O_c < R/2`}: for an oracle (O2) with at most `q`
-queries and `2 R m_r ln(2q/η) ≤ τ²`, `E|Q| ≥ (1 − η − η″ − 2δ)·2ⁿ/(L·V(n, r−1))` (no restriction on `δ` in this form).
+queries, `R ≥ 2(e^ε − 1)` and `2 R m_r ln(2q/η) ≤ τ²`, `E|Q| ≥ (1 − η − η″ − 2δ)·2ⁿ/(L·V(n, r−1))` (no restriction on `δ` in
+this form).
 
-*Remark (homogeneous spaces) [P; added after both reviews, not seen by a referee].*  Lemma 2.5 and
+*Remark (homogeneous spaces) [P; added after both reviews; then read once by the second referee, who found
+it correct as stated and checked it by enumeration on four graphs — `PHASE2_REVIEW_A1.md` §6].*  Lemma 2.5 and
 Theorem A′ use the cube through three facts only: maxima of dips are admissible (any metric space,
 Lemma 2.1); the reference is uniform; and the number of points at each distance from a point does not
 depend on the point.  The last one gives `E_π e_r(d(·, c)) = m_r` for every centre, the probability
@@ -369,8 +371,10 @@ the fact that for independent uniform centres the law of `(d(x, c_j))_j` does no
 (iv): `E_c max_j e_r(d(x, c_j))` is a constant).  Hence both statements hold verbatim, with `|X|` in
 place of `2ⁿ` and `V(r−1)` the size of a ball, on every finite metric space with that property —
 vertex-transitive graphs with their path metric, Hamming spaces over any alphabet, Johnson schemes.
-(Machine-checked for finite abelian groups only, `sum_tuples_sup'_bias_eq_zero`.)  Whether the bound is
-the adaptive complexity there is open (open problem 5).
+(For a metric that is not integer-valued, `V(r−1)` is the number of points at distance less than `r`.  The
+mean-zero identity is machine-checked for finite abelian groups only, `sum_tuples_sup'_bias_eq_zero`.
+Corollary A′ remains a statement about the cube.)  Whether the bound is the adaptive complexity there is
+open (open problem 5).
 
 *Note (the first version, and what changed).*  The version of this theorem that the first referee
 read and found correct (`PHASE2_REVIEW.md` §3.2; the (O2) form §3.3) had the hypotheses `L ≥ 8τ^{−2}ln(2M/η)`,
@@ -383,12 +387,14 @@ the bounded-differences inequality controls their fluctuations together with tho
 term.  The present form needs the overlaps to be small only compared with the excess `R` — which is the
 condition that the bound is not trivial.  It was written on 2026-11-28 after the first review.  **A second
 referee reviewed exactly this section** (`PHASE2_REVIEW_A1.md`; own enumeration over all tuples of centres in
-118 configurations, Monte Carlo at 16–20 sites in regimes where the overlaps are 0.4 to 6 times the tolerance,
-the recipe of the corollary up to `n = 2·10⁶`): the theorem, both oracle forms, Lemma 2.5(iv) and the corollary
-stand; it found the corner `δ > ½`, `η + η″ > 1` in which the displayed bound was false as a statement (the
-first version had the same corner; `δ ≤ ½` is now a hypothesis), five points of wording, and the sharper
-constant (`2` in place of `8`; it read the text with `8`).  All are incorporated; the text as it now stands
-was not re-read by a referee.
+118 configurations, Monte Carlo at 16–20 sites in regimes where the overlaps are 0.7 to 12.6 times the least
+tolerance the hypothesis allows — the first version is void there —, the recipe of the corollary up to
+`n = 2·10⁶`): the theorem, both oracle forms, Lemma 2.5(iv) and the corollary stand; it found the corner
+`δ > ½`, `η + η″ > 1` in which the displayed bound was false as a statement (the first version had the same
+corner; `δ ≤ ½` is now a hypothesis), five points of wording, and the sharper constant (`2` in place of `8`;
+it first read the text with `8`).  All are incorporated.  The referee then read the corrected section and
+the remark above once (its §6: "correct as they stand") and made four further points of wording, which
+are applied too; the text after those last edits was not read again.
 
 **Corollary A′ (exponents) [P].**  Let `τ = e^{−γn}`, `ln ln(M + 2) ≤ βn + o(n)`, `λ = 2γ + β < a`, bounded
 accuracy, `δ < ½`.  Then the adaptive exponent with the oracle (O1) — and with an oracle (O2) answering
@@ -401,7 +407,9 @@ accuracy, `δ < ½`.  Then the adaptive exponent with the oracle (O1) — and wi
 `1 − ℓ = 0.5100`; for `β = 0` the bound is positive up to `γ = a/2 = 0.0555`, while `h − 2γ` vanishes at
 `γ = h/2 = 0.01457`.
 
-*Proof.*  Fix `η < 1 − 2δ`.  Let `r` be the largest radius with `2(2e^ε − 1)·m_r·ln(2M/η) ≤ τ²` — it exists
+*Proof.*  It suffices to treat equality, `ln ln(M + 2) = βn + o(n)`: an algorithm may ignore observables (or
+make fewer queries), so a bound for a larger family holds for every subfamily.  Fix `η < 1 − 2δ`.  Let `r` be the
+largest radius with `2(2e^ε − 1)·m_r·ln(2M/η) ≤ τ²` — it exists
 for large `n`, because `m_1 = (e^u − 1)2^{−n}` and `λ < a < ln 2` — and `L = ⌈2(e^ε − 1)/m_r⌉`.  Then
 `m_r < 1`, `2(e^ε − 1) ≤ R ≤ 2(e^ε − 1) + m_r ≤ 2e^ε − 1`, and the hypotheses of Theorem A′ hold.  Consecutive
 masses differ by a factor `e^{o(n)}`: `m_{r+1} ≤ (e^u + 1 + n)·m_r` (term by term

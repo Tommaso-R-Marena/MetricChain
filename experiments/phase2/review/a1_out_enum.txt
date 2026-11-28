@@ -15,352 +15,440 @@ n=4 u=0.25 r=1 L=1           tuples=16        m_r=0.017752 R=0.017752 V=1 eta''=
    (c) max |bias - G/A| = 8.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4021 ok; d=exact osc: 0.8244 | 0.4021 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.0625 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0964 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
-   (f) M=10 eta=0.90 tau=0.0884 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0964 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0884 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0482 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0442 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
 n=4 u=0.25 r=1 L=2           tuples=256       m_r=0.017752 R=0.035503 V=1 eta''=0.125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0011095 <= 0.0011095 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 5.64e-18 (R = 0.0355) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 8.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5124 | 0.0000 ok; d=2m_r: 0.5946 | 0.5946 ok; d=exact osc: 0.5946 | 0.5946 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.0625 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.12109 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.1364 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
-   (f) M=10 eta=0.90 tau=0.1250 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
+   (f) C=8 M=10 eta=0.50 tau=0.1364 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.1250 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0682 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0625 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
 n=4 u=0.25 r=1 L=3           tuples=4096      m_r=0.017752 R=0.053255 V=1 eta''=0.1875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0033284 <= 0.0033284 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 3.33e-17 (R = 0.0533) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5003 | 0.0149 ok; d=2m_r: 0.5353 | 0.3676 ok; d=exact osc: 0.5353 | 0.3676 ok
    (e) P(O_c>=R/2) = 0.0039062 <= (L-1)V/2^n = 0.125 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.17603 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.1670 eps=0.0263: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 0.6875 ok
-   (f) M=10 eta=0.90 tau=0.1531 eps=0.0263: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
+   (f) C=8 M=10 eta=0.50 tau=0.1670 eps=0.0263: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 0.6875 ok
+   (f) C=8 M=10 eta=0.90 tau=0.1531 eps=0.0263: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0835 eps=0.0263: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 0.6875 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0766 eps=0.0263: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
 n=4 u=0.25 r=1 L=4           tuples=65536     m_r=0.017752 R=0.071006 V=1 eta''=0.25  [0.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0066568 <= 0.0066568 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 3.97e-17 (R = 0.071) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5002 | 0.0024 ok; d=2m_r: 0.5010 | 0.1894 ok; d=exact osc: 0.5038 | 0.1894 ok
    (e) P(O_c>=R/2) = 0.025879 <= (L-1)V/2^n = 0.1875 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.22752 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.1929 eps=0.0349: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 0.75 ok
-   (f) M=10 eta=0.90 tau=0.1768 eps=0.0349: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 1.15 ok
+   (f) C=8 M=10 eta=0.50 tau=0.1929 eps=0.0349: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 0.75 ok
+   (f) C=8 M=10 eta=0.90 tau=0.1768 eps=0.0349: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 1.15 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0964 eps=0.0349: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 0.75 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0884 eps=0.0349: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0.00366; P(not good) = 0.029541 <= eta+eta'' = 1.15 ok
 n=4 u=0.25 r=2 L=1           tuples=16        m_r=0.11155 R=0.11155 V=5 eta''=0.3125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 2.60e-18 (R = 0.112) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.0e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5299 | 0.0000 ok; d=2m_r: 0.6308 | 0.0804 ok; d=exact osc: 0.8244 | 0.1231 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.3125 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.6060 eps=0.0543: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.8125 ok
-   (f) M=10 eta=0.90 tau=0.5556 eps=0.0543: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.212 ok
+   (f) C=8 M=10 eta=0.50 tau=0.6060 eps=0.0543: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.8125 ok
+   (f) C=8 M=10 eta=0.90 tau=0.5556 eps=0.0543: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.212 ok
+   (f) C=2 M=10 eta=0.50 tau=0.3030 eps=0.0543: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.8125 ok
+   (f) C=2 M=10 eta=0.90 tau=0.2778 eps=0.0543: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.212 ok
 n=4 u=0.25 r=2 L=2           tuples=256       m_r=0.11155 R=0.2231 V=5 eta''=0.625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.029161 <= 0.03486 ok (ratio 0.837)
    (b) max_psi |mean G_psi| = 5.18e-18 (R = 0.223) ok; one-centre oscillation / m_r: max over psi = 1.8011  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5001 | 0.0000 ok; d=exact osc: 0.5040 | 0.0849 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.3125 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.52734 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.8570 eps=0.1058: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.125 ok
-   (f) M=10 eta=0.90 tau=0.7858 eps=0.1058: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.525 ok
+   (f) C=8 M=10 eta=0.50 tau=0.8570 eps=0.1058: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.125 ok
+   (f) C=8 M=10 eta=0.90 tau=0.7858 eps=0.1058: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.525 ok
+   (f) C=2 M=10 eta=0.50 tau=0.4285 eps=0.1058: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.125 ok
+   (f) C=2 M=10 eta=0.90 tau=0.3929 eps=0.1058: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.525 ok
 n=4 u=0.25 r=2 L=3           tuples=4096      m_r=0.11155 R=0.33465 V=5 eta''=0.9375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -3.55e-02 ok; E O_c = 0.087484 <= 0.10458 ok (ratio 0.837)
    (b) max_psi |mean G_psi| = 1.56e-17 (R = 0.335) ok; one-centre oscillation / m_r: max over psi = 1.8011  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.9e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5002 | 0.0716 ok
    (e) P(O_c>=R/2) = 0.12109 <= (L-1)V/2^n = 0.625 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.67505 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.050 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90 tau=0.9624 eps=0.1547: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.837 ok
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.050 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90 tau=0.9624 eps=0.1547: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.837 ok
+   (f) C=2 M=10 eta=0.50 tau=0.5248 eps=0.1547: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.438 ok
+   (f) C=2 M=10 eta=0.90 tau=0.4812 eps=0.1547: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.837 ok
 n=4 u=0.25 r=2 L=4           tuples=65536     m_r=0.11155 R=0.44621 V=5 eta''=1.25  [0.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -7.10e-02 ok; E O_c = 0.17497 <= 0.20916 ok (ratio 0.837)
    (b) max_psi |mean G_psi| = 3.26e-17 (R = 0.446) ok; one-centre oscillation / m_r: max over psi = 1.8011  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0000 ok
    (e) P(O_c>=R/2) = 0.15771 <= (L-1)V/2^n = 0.9375 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.7766 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.212 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.111 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.212 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.111 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.6060 eps=0.2014: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 1.75 ok
+   (f) C=2 M=10 eta=0.90 tau=0.5556 eps=0.2014: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 2.15 ok
 n=4 u=0.25 r=3 L=1           tuples=16        m_r=0.3385 R=0.3385 V=11 eta''=0.6875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 1.56e-17 (R = 0.339) ok; one-centre oscillation / m_r: max over psi = 1.3707  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5126 | 0.0000 ok; d=2m_r: 0.5522 | 0.0000 ok; d=exact osc: 0.8244 | 0.0826 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.6875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.839 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.686 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.839 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.686 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.9194 eps=0.1564: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.188 ok
+   (f) C=2 M=10 eta=0.90 tau=0.8430 eps=0.1564: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.587 ok
 n=4 u=0.25 r=3 L=2           tuples=256       m_r=0.3385 R=0.677 V=11 eta''=1.375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -1.07e-01 ok; E O_c = 0.17169 <= 0.23272 ok (ratio 0.738)
    (b) max_psi |mean G_psi| = 7.18e-17 (R = 0.677) ok; one-centre oscillation / m_r: max over psi = 0.9424  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5377 | 0.5377 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.6875 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.90234 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.601 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 2.384 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.601 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 2.384 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.300 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.192 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=0.25 r=3 L=3           tuples=4096      m_r=0.3385 R=1.0155 V=11 eta''=2.062  [0.0s]
    (a) max[(R-O_c)-(A-1)] = -5.33e-02 ok; max[(A-1)-R] = -3.47e-01 ok; E O_c = 0.51507 <= 0.69816 ok (ratio 0.738)
    (b) max_psi |mean G_psi| = 2.21e-17 (R = 1.02) ok; one-centre oscillation / m_r: max over psi = 0.9424  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.9e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5001 | 0.0716 ok
    (e) P(O_c>=R/2) = 0.41406 <= (L-1)V/2^n = 1.375 ok; P(A-1<=R/2) = 0.12109; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.96948 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 3.185 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 2.920 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 3.185 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 2.920 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.593 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.460 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=0.25 r=3 L=4           tuples=65536     m_r=0.3385 R=1.354 V=11 eta''=2.75  [0.2s]
    (a) max[(R-O_c)-(A-1)] = -2.13e-01 ok; max[(A-1)-R] = -5.88e-01 ok; E O_c = 1.0301 <= 1.3963 ok (ratio 0.738)
    (b) max_psi |mean G_psi| = 3.44e-17 (R = 1.35) ok; one-centre oscillation / m_r: max over psi = 0.9424  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0000 ok
    (e) P(O_c>=R/2) = 1 <= (L-1)V/2^n = 2.0625 ok; P(A-1<=R/2) = 0.5752; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.99046 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 3.678 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 3.372 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 3.678 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 3.372 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.839 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.686 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=1 L=1              tuples=16        m_r=0.10739 R=0.10739 V=1 eta''=0.0625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 3.47e-18 (R = 0.107) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.2e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4021 ok; d=exact osc: 0.8244 | 0.4021 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.0625 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.5834 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
-   (f) M=10 eta=0.90 tau=0.5349 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=10 eta=0.50 tau=0.5834 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.5349 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=10 eta=0.50 tau=0.2917 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.2675 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
 n=4 u=1 r=1 L=2              tuples=256       m_r=0.10739 R=0.21479 V=1 eta''=0.125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.006712 <= 0.006712 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 8.00e-17 (R = 0.215) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 8.3e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5124 | 0.0000 ok; d=2m_r: 0.5946 | 0.5946 ok; d=exact osc: 0.5946 | 0.5946 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.0625 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.12109 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.8251 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
-   (f) M=10 eta=0.90 tau=0.7565 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
+   (f) C=8 M=10 eta=0.50 tau=0.8251 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.7565 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
+   (f) C=2 M=10 eta=0.50 tau=0.4125 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.3782 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
 n=4 u=1 r=1 L=3              tuples=4096      m_r=0.10739 R=0.32218 V=1 eta''=0.1875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.020136 <= 0.020136 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 1.06e-16 (R = 0.322) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5003 | 0.0149 ok; d=2m_r: 0.5353 | 0.3676 ok; d=exact osc: 0.5353 | 0.3676 ok
    (e) P(O_c>=R/2) = 0.0039062 <= (L-1)V/2^n = 0.125 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.17603 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.010 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90 tau=0.9265 eps=0.1494: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.010 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90 tau=0.9265 eps=0.1494: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
+   (f) C=2 M=10 eta=0.50 tau=0.5052 eps=0.1494: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 0.6875 ok
+   (f) C=2 M=10 eta=0.90 tau=0.4632 eps=0.1494: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
 n=4 u=1 r=1 L=4              tuples=65536     m_r=0.10739 R=0.42957 V=1 eta''=0.25  [0.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.040272 <= 0.040272 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 1.45e-16 (R = 0.43) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5002 | 0.0024 ok; d=2m_r: 0.5010 | 0.1894 ok; d=exact osc: 0.5038 | 0.1894 ok
    (e) P(O_c>=R/2) = 0.025879 <= (L-1)V/2^n = 0.1875 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.22752 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.167 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.070 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.167 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.070 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.5834 eps=0.1946: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 0.75 ok
+   (f) C=2 M=10 eta=0.90 tau=0.5349 eps=0.1946: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 1.15 ok
 n=4 u=1 r=2 L=1              tuples=16        m_r=0.82889 R=0.82889 V=5 eta''=0.3125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 2.08e-17 (R = 0.829) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5355 | 0.0000 ok; d=2m_r: 0.6579 | 0.0804 ok; d=exact osc: 0.8244 | 0.1421 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.3125 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 4.503 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 4.129 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 4.503 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 4.129 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 2.251 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 2.064 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=2 L=2              tuples=256       m_r=0.82889 R=1.6578 V=5 eta''=0.625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +2.22e-16 ok; E O_c = 0.18605 <= 0.25903 ok (ratio 0.718)
    (b) max_psi |mean G_psi| = 4.21e-17 (R = 1.66) ok; one-centre oscillation / m_r: max over psi = 1.8380  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5001 | 0.0000 ok; d=exact osc: 0.5003 | 0.0849 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.3125 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.52734 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 6.368 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 5.839 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 6.368 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 5.839 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 3.184 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 2.919 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=2 L=3              tuples=4096      m_r=0.82889 R=2.4867 V=5 eta''=0.9375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -2.15e-01 ok; E O_c = 0.55814 <= 0.77708 ok (ratio 0.718)
    (b) max_psi |mean G_psi| = 1.73e-16 (R = 2.49) ok; one-centre oscillation / m_r: max over psi = 1.8380  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.1742 ok
    (e) P(O_c>=R/2) = 0.12109 <= (L-1)V/2^n = 0.625 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.67505 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 7.799 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 7.151 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 7.799 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 7.151 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 3.900 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 3.575 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=2 L=4              tuples=65536     m_r=0.82889 R=3.3155 V=5 eta''=1.25  [0.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -4.30e-01 ok; E O_c = 1.1163 <= 1.5542 ok (ratio 0.718)
    (b) max_psi |mean G_psi| = 2.28e-16 (R = 3.32) ok; one-centre oscillation / m_r: max over psi = 1.8380  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0570 ok
    (e) P(O_c>=R/2) = 0.15771 <= (L-1)V/2^n = 0.9375 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.7766 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 9.006 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 8.257 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 9.006 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 8.257 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 4.503 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 4.129 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=3 L=1              tuples=16        m_r=3.4345 R=3.4345 V=11 eta''=0.6875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 2.78e-16 (R = 3.43) ok; one-centre oscillation / m_r: max over psi = 1.6248  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5215 | 0.0000 ok; d=2m_r: 0.5915 | 0.0000 ok; d=exact osc: 0.8244 | 0.1199 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.6875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 18.657 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 17.107 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 18.657 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 17.107 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 9.329 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 8.553 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=3 L=2              tuples=256       m_r=3.4345 R=6.8689 V=11 eta''=1.375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -6.44e-01 ok; E O_c = 1.3179 <= 2.3612 ok (ratio 0.558)
    (b) max_psi |mean G_psi| = 1.97e-15 (R = 6.87) ok; one-centre oscillation / m_r: max over psi = 1.2918  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.8e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5001 | 0.0000 ok; d=exact osc: 0.5005 | 0.4825 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.6875 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.90234 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 26.386 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 24.192 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 26.386 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 24.192 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 13.193 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 12.096 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=3 L=3              tuples=4096      m_r=3.4345 R=10.303 V=11 eta''=2.062  [0.0s]
    (a) max[(R-O_c)-(A-1)] = -3.22e-01 ok; max[(A-1)-R] = -2.41e+00 ok; E O_c = 3.9536 <= 7.0836 ok (ratio 0.558)
    (b) max_psi |mean G_psi| = 5.52e-16 (R = 10.3) ok; one-centre oscillation / m_r: max over psi = 1.2918  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.8e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5001 | 0.1824 ok
    (e) P(O_c>=R/2) = 0.12109 <= (L-1)V/2^n = 1.375 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.96948 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 32.316 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 29.629 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 32.316 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 29.629 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 16.158 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 14.815 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=1 r=3 L=4              tuples=65536     m_r=3.4345 R=13.738 V=11 eta''=2.75  [0.2s]
    (a) max[(R-O_c)-(A-1)] = -1.29e+00 ok; max[(A-1)-R] = -4.17e+00 ok; E O_c = 7.9073 <= 14.167 ok (ratio 0.558)
    (b) max_psi |mean G_psi| = 5.71e-16 (R = 13.7) ok; one-centre oscillation / m_r: max over psi = 1.2918  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0570 ok
    (e) P(O_c>=R/2) = 0.75098 <= (L-1)V/2^n = 2.0625 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.99046 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 37.315 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 34.213 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 37.315 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 34.213 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 18.657 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 17.107 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=1 L=1              tuples=16        m_r=0.39932 R=0.39932 V=1 eta''=0.0625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 3.12e-17 (R = 0.399) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4021 ok; d=exact osc: 0.8244 | 0.4021 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.0625 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.169 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.989 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.169 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.989 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.085 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90 tau=0.9945 eps=0.1820: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
 n=4 u=2 r=1 L=2              tuples=256       m_r=0.39932 R=0.79863 V=1 eta''=0.125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.024957 <= 0.024957 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 2.69e-16 (R = 0.799) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5124 | 0.0000 ok; d=2m_r: 0.5946 | 0.5946 ok; d=exact osc: 0.5946 | 0.5946 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.0625 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.12109 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 3.068 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 2.813 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 3.068 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 2.813 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.534 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.406 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=1 L=3              tuples=4096      m_r=0.39932 R=1.1979 V=1 eta''=0.1875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.074872 <= 0.074872 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 4.61e-16 (R = 1.2) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5003 | 0.0149 ok; d=2m_r: 0.5353 | 0.3676 ok; d=exact osc: 0.5353 | 0.3676 ok
    (e) P(O_c>=R/2) = 0.0039062 <= (L-1)V/2^n = 0.125 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.17603 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 3.757 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 3.445 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 3.757 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 3.445 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.879 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.722 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=1 L=4              tuples=65536     m_r=0.39932 R=1.5973 V=1 eta''=0.25  [0.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.14974 <= 0.14974 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 1.81e-16 (R = 1.6) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5002 | 0.0024 ok; d=2m_r: 0.5010 | 0.1894 ok; d=exact osc: 0.5038 | 0.1894 ok
    (e) P(O_c>=R/2) = 0.025879 <= (L-1)V/2^n = 0.1875 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.22752 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 4.338 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 3.978 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 4.338 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 3.978 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 2.169 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.989 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=2 L=1              tuples=16        m_r=4.9471 R=4.9471 V=5 eta''=0.3125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 2.50e-16 (R = 4.95) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5459 | 0.0000 ok; d=2m_r: 0.7107 | 0.0804 ok; d=exact osc: 0.8244 | 0.1624 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.3125 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 26.875 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 24.641 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 26.875 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 24.641 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 13.437 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 12.320 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=2 L=2              tuples=256       m_r=4.9471 R=9.8943 V=5 eta''=0.625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.80834 <= 1.546 ok (ratio 0.523)
    (b) max_psi |mean G_psi| = 2.74e-16 (R = 9.89) ok; one-centre oscillation / m_r: max over psi = 1.8991  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5022 | 0.0000 ok; d=2m_r: 0.5089 | 0.0819 ok; d=exact osc: 0.5099 | 0.5097 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.3125 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.52734 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 38.007 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 34.848 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 38.007 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 34.848 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 19.003 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 17.424 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=2 L=3              tuples=4096      m_r=4.9471 R=14.841 V=5 eta''=0.9375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +1.78e-15 ok; max[(A-1)-R] = -7.99e-01 ok; E O_c = 2.425 <= 4.638 ok (ratio 0.523)
    (b) max_psi |mean G_psi| = 6.38e-16 (R = 14.8) ok; one-centre oscillation / m_r: max over psi = 1.8991  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.1725 ok; d=exact osc: 0.5051 | 0.2733 ok
    (e) P(O_c>=R/2) = 0.0039062 <= (L-1)V/2^n = 0.625 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.67505 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 46.549 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 42.679 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 46.549 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 42.679 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 23.274 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 21.340 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=2 L=4              tuples=65536     m_r=4.9471 R=19.789 V=5 eta''=1.25  [0.2s]
    (a) max[(R-O_c)-(A-1)] = +3.55e-15 ok; max[(A-1)-R] = -1.60e+00 ok; E O_c = 4.8501 <= 9.2759 ok (ratio 0.523)
    (b) max_psi |mean G_psi| = 1.42e-15 (R = 19.8) ok; one-centre oscillation / m_r: max over psi = 1.8991  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0608 ok; d=exact osc: 0.5006 | 0.1246 ok
    (e) P(O_c>=R/2) = 0.025879 <= (L-1)V/2^n = 0.9375 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.7766 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 53.750 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 49.282 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 53.750 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 49.282 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 26.875 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 24.641 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=3 L=1              tuples=16        m_r=40.947 R=40.947 V=11 eta''=0.6875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 7.55e-15 (R = 40.9) ok; one-centre oscillation / m_r: max over psi = 1.8830  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5393 | 0.0000 ok; d=2m_r: 0.6766 | 0.0689 ok; d=exact osc: 0.8244 | 0.1578 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.6875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 222.442 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 203.952 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 222.442 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 203.952 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 111.221 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 101.976 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=3 L=2              tuples=256       m_r=40.947 R=81.894 V=11 eta''=1.375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -2.40e+00 ok; E O_c = 8.9927 <= 28.151 ok (ratio 0.319)
    (b) max_psi |mean G_psi| = 1.03e-14 (R = 81.9) ok; one-centre oscillation / m_r: max over psi = 1.7222  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5018 | 0.0000 ok; d=2m_r: 0.5071 | 0.0363 ok; d=exact osc: 0.5097 | 0.5097 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.6875 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.90234 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 314.580 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 288.431 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 314.580 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 288.431 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 157.290 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 144.215 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=3 L=3              tuples=4096      m_r=40.947 R=122.84 V=11 eta''=2.062  [0.0s]
    (a) max[(R-O_c)-(A-1)] = -1.20e+00 ok; max[(A-1)-R] = -1.27e+01 ok; E O_c = 26.978 <= 84.454 ok (ratio 0.319)
    (b) max_psi |mean G_psi| = 5.11e-15 (R = 123) ok; one-centre oscillation / m_r: max over psi = 1.7222  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0181 ok; d=exact osc: 0.5051 | 0.2733 ok
    (e) P(O_c>=R/2) = 0.0039062 <= (L-1)V/2^n = 1.375 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.96948 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 385.281 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 353.254 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 385.281 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 353.254 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 192.640 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 176.627 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=2 r=3 L=4              tuples=65536     m_r=40.947 R=163.79 V=11 eta''=2.75  [0.2s]
    (a) max[(R-O_c)-(A-1)] = -4.79e+00 ok; max[(A-1)-R] = -2.30e+01 ok; E O_c = 53.956 <= 168.91 ok (ratio 0.319)
    (b) max_psi |mean G_psi| = 1.70e-14 (R = 164) ok; one-centre oscillation / m_r: max over psi = 1.7222  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0513 ok; d=exact osc: 0.5005 | 0.1257 ok
    (e) P(O_c>=R/2) = 0.11377 <= (L-1)V/2^n = 2.0625 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.99046 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 444.884 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 407.903 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 444.884 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 407.903 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 222.442 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 203.952 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=0.25 r=1 L=1           tuples=32        m_r=0.0088758 R=0.0088758 V=1 eta''=0.03125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 1.11e-18 (R = 0.00888) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.3e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4021 ok; d=exact osc: 0.8244 | 0.4021 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.03125 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0482 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
-   (f) M=10 eta=0.90 tau=0.0442 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0482 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0442 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0241 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0221 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
 n=5 u=0.25 r=1 L=2           tuples=1024      m_r=0.0088758 R=0.017752 V=1 eta''=0.0625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.00027737 <= 0.00027737 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 3.20e-18 (R = 0.0178) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 8.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5124 | 0.0000 ok; d=2m_r: 0.6371 | 0.6371 ok; d=exact osc: 0.6371 | 0.6371 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.03125 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.061523 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0682 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
-   (f) M=10 eta=0.90 tau=0.0625 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0682 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0625 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0341 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0313 eps=0.0088: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
 n=5 u=0.25 r=1 L=3           tuples=32768     m_r=0.0088758 R=0.026627 V=1 eta''=0.09375  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.00083211 <= 0.00083211 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 7.32e-17 (R = 0.0266) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5115 | 0.0223 ok; d=2m_r: 0.5630 | 0.4595 ok; d=exact osc: 0.5630 | 0.4595 ok
    (e) P(O_c>=R/2) = 0.00097656 <= (L-1)V/2^n = 0.0625 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.090851 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0835 eps=0.0132: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
-   (f) M=10 eta=0.90 tau=0.0766 eps=0.0132: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.9938 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0835 eps=0.0132: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0766 eps=0.0132: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.9938 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0418 eps=0.0132: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0.00366; P(not good) = 0.0046387 <= eta+eta'' = 0.5938 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0383 eps=0.0132: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0.00366; P(not good) = 0.0046387 <= eta+eta'' = 0.9938 ok
 n=5 u=0.25 r=1 L=4           tuples=1048576   m_r=0.0088758 R=0.035503 V=1 eta''=0.125  [2.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0016642 <= 0.0016642 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 1.03e-16 (R = 0.0355) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5039 | 0.0062 ok; d=2m_r: 0.5159 | 0.3078 ok; d=exact osc: 0.5159 | 0.3078 ok
    (e) P(O_c>=R/2) = 0.0066528 <= (L-1)V/2^n = 0.09375 ok; P(A-1<=R/2) = 0.0066528; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.11926 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0964 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 0.625 ok
-   (f) M=10 eta=0.90 tau=0.0884 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.025 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0964 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 0.625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0884 eps=0.0176: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.025 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0482 eps=0.0176: P(exists i |G_i|>tau) = 0.00515 <= eta ok; P(exists i |bias_i|>tau) = 0.000343; P(not good) = 0.0069962 <= eta+eta'' = 0.625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0442 eps=0.0176: P(exists i |G_i|>tau) = 0.00515 <= eta ok; P(exists i |bias_i|>tau) = 0.00515; P(not good) = 0.011803 <= eta+eta'' = 1.025 ok
 n=5 u=0.25 r=2 L=1           tuples=32        m_r=0.064652 R=0.064652 V=6 eta''=0.1875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 3.25e-18 (R = 0.0647) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 9.0e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5340 | 0.0000 ok; d=2m_r: 0.6505 | 0.0585 ok; d=exact osc: 0.8244 | 0.0791 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.1875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.3512 eps=0.0318: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6875 ok
-   (f) M=10 eta=0.90 tau=0.3220 eps=0.0318: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.087 ok
+   (f) C=8 M=10 eta=0.50 tau=0.3512 eps=0.0318: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6875 ok
+   (f) C=8 M=10 eta=0.90 tau=0.3220 eps=0.0318: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.087 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1756 eps=0.0318: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6875 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1610 eps=0.0318: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.087 ok
 n=5 u=0.25 r=2 L=2           tuples=1024      m_r=0.064652 R=0.1293 V=6 eta''=0.375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +2.78e-17 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.010341 <= 0.012122 ok (ratio 0.853)
    (b) max_psi |mean G_psi| = 8.39e-18 (R = 0.129) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.7e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5003 | 0.0000 ok; d=2m_r: 0.5012 | 0.0617 ok; d=exact osc: 0.5047 | 0.2124 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.1875 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.33984 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.4967 eps=0.0626: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.875 ok
-   (f) M=10 eta=0.90 tau=0.4554 eps=0.0626: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 1.275 ok
+   (f) C=8 M=10 eta=0.50 tau=0.4967 eps=0.0626: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.875 ok
+   (f) C=8 M=10 eta=0.90 tau=0.4554 eps=0.0626: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 1.275 ok
+   (f) C=2 M=10 eta=0.50 tau=0.2483 eps=0.0626: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.875 ok
+   (f) C=2 M=10 eta=0.90 tau=0.2277 eps=0.0626: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 1.275 ok
 n=5 u=0.25 r=2 L=3           tuples=32768     m_r=0.064652 R=0.19395 V=6 eta''=0.5625  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +2.78e-17 ok; E O_c = 0.031024 <= 0.036366 ok (ratio 0.853)
    (b) max_psi |mean G_psi| = 5.51e-17 (R = 0.194) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.8e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5001 | 0.0089 ok; d=exact osc: 0.5083 | 0.2071 ok
    (e) P(O_c>=R/2) = 0.044922 <= (L-1)V/2^n = 0.375 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.46362 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.6083 eps=0.0926: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 1.062 ok
-   (f) M=10 eta=0.90 tau=0.5578 eps=0.0926: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 1.462 ok
-n=5 u=0.25 r=2 L=4           tuples=1048576   m_r=0.064652 R=0.25861 V=6 eta''=0.75  [2.1s]
+   (f) C=8 M=10 eta=0.50 tau=0.6083 eps=0.0926: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 1.062 ok
+   (f) C=8 M=10 eta=0.90 tau=0.5578 eps=0.0926: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 1.462 ok
+   (f) C=2 M=10 eta=0.50 tau=0.3042 eps=0.0926: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 1.062 ok
+   (f) C=2 M=10 eta=0.90 tau=0.2789 eps=0.0926: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 1.462 ok
+n=5 u=0.25 r=2 L=4           tuples=1048576   m_r=0.064652 R=0.25861 V=6 eta''=0.75  [2.0s]
    (a) max[(R-O_c)-(A-1)] = +2.78e-17 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.062049 <= 0.072733 ok (ratio 0.853)
    (b) max_psi |mean G_psi| = 4.96e-17 (R = 0.259) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0012 ok; d=exact osc: 0.5003 | 0.0981 ok
    (e) P(O_c>=R/2) = 0.045105 <= (L-1)V/2^n = 0.5625 ok; P(A-1<=R/2) = 0.0066528; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.56419 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.7024 eps=0.1216: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.25 ok
-   (f) M=10 eta=0.90 tau=0.6440 eps=0.1216: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.65 ok
+   (f) C=8 M=10 eta=0.50 tau=0.7024 eps=0.1216: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.25 ok
+   (f) C=8 M=10 eta=0.90 tau=0.6440 eps=0.1216: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.65 ok
+   (f) C=2 M=10 eta=0.50 tau=0.3512 eps=0.1216: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.25 ok
+   (f) C=2 M=10 eta=0.90 tau=0.3220 eps=0.1216: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.65 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -6.7e-18     0.9402     0.5881    1.4509    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        parity        -4.8e-19     0.3162     0.2356    0.7457    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -378,96 +466,120 @@ n=5 u=0.25 r=3 L=1           tuples=32        m_r=0.22503 R=0.22503 V=16 eta''=0
    (c) max |bias - G/A| = 1.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5161 | 0.0000 ok; d=2m_r: 0.5678 | 0.0000 ok; d=exact osc: 0.8244 | 0.0559 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.5 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.222 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.121 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.222 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.121 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.6112 eps=0.1066: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1 ok
+   (f) C=2 M=10 eta=0.90 tau=0.5604 eps=0.1066: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.4 ok
 n=5 u=0.25 r=3 L=2           tuples=1024      m_r=0.22503 R=0.45005 V=16 eta''=1  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +1.67e-16 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.084285 <= 0.11251 ok (ratio 0.749)
    (b) max_psi |mean G_psi| = 1.39e-16 (R = 0.45) ok; one-centre oscillation / m_r: max over psi = 1.2676  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5001 | 0.0000 ok; d=2m_r: 0.5003 | 0.0000 ok; d=exact osc: 0.5012 | 0.4985 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.5 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.75 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.729 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.585 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=0.25 r=3 L=3           tuples=32768     m_r=0.22503 R=0.67508 V=16 eta''=1.5  [0.0s]
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.729 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.585 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.8644 eps=0.2030: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 1.5 ok
+   (f) C=2 M=10 eta=0.90 tau=0.7925 eps=0.2030: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 1.9 ok
+n=5 u=0.25 r=3 L=3           tuples=32768     m_r=0.22503 R=0.67508 V=16 eta''=1.5  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +1.11e-16 ok; max[(A-1)-R] = -1.51e-01 ok; E O_c = 0.25285 <= 0.33754 ok (ratio 0.749)
    (b) max_psi |mean G_psi| = 3.47e-17 (R = 0.675) ok; one-centre oscillation / m_r: max over psi = 1.2676  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.6e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5008 | 0.1492 ok
    (e) P(O_c>=R/2) = 0.044922 <= (L-1)V/2^n = 1 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.117 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.941 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=0.25 r=3 L=4           tuples=1048576   m_r=0.22503 R=0.90011 V=16 eta''=2  [1.9s]
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.117 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.941 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.059 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90 tau=0.9707 eps=0.2908: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 2.4 ok
+n=5 u=0.25 r=3 L=4           tuples=1048576   m_r=0.22503 R=0.90011 V=16 eta''=2  [2.0s]
    (a) max[(R-O_c)-(A-1)] = +2.22e-16 ok; max[(A-1)-R] = -2.84e-01 ok; E O_c = 0.50571 <= 0.67508 ok (ratio 0.749)
    (b) max_psi |mean G_psi| = 5.89e-17 (R = 0.9) ok; one-centre oscillation / m_r: max over psi = 1.2676  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5002 | 0.0000 ok
    (e) P(O_c>=R/2) = 0.59351 <= (L-1)V/2^n = 1.5 ok; P(A-1<=R/2) = 0.078064; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.9375 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.445 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 2.242 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.445 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 2.242 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.222 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.121 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=1 r=1 L=1              tuples=32        m_r=0.053696 R=0.053696 V=1 eta''=0.03125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 4.34e-18 (R = 0.0537) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4021 ok; d=exact osc: 0.8244 | 0.4021 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.03125 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.2917 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
-   (f) M=10 eta=0.90 tau=0.2675 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
+   (f) C=8 M=10 eta=0.50 tau=0.2917 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
+   (f) C=8 M=10 eta=0.90 tau=0.2675 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1459 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1337 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
 n=5 u=1 r=1 L=2              tuples=1024      m_r=0.053696 R=0.10739 V=1 eta''=0.0625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.001678 <= 0.001678 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 2.16e-16 (R = 0.107) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5124 | 0.0000 ok; d=2m_r: 0.6371 | 0.6371 ok; d=exact osc: 0.6371 | 0.6371 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.03125 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.061523 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.4125 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
-   (f) M=10 eta=0.90 tau=0.3782 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=10 eta=0.50 tau=0.4125 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.3782 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=10 eta=0.50 tau=0.2063 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1891 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
 n=5 u=1 r=1 L=3              tuples=32768     m_r=0.053696 R=0.16109 V=1 eta''=0.09375  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.005034 <= 0.005034 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 1.32e-16 (R = 0.161) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5115 | 0.0223 ok; d=2m_r: 0.5630 | 0.4595 ok; d=exact osc: 0.5630 | 0.4595 ok
    (e) P(O_c>=R/2) = 0.00097656 <= (L-1)V/2^n = 0.0625 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.090851 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.5052 eps=0.0775: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
-   (f) M=10 eta=0.90 tau=0.4632 eps=0.0775: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.9938 ok
-n=5 u=1 r=1 L=4              tuples=1048576   m_r=0.053696 R=0.21479 V=1 eta''=0.125  [2.0s]
+   (f) C=8 M=10 eta=0.50 tau=0.5052 eps=0.0775: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
+   (f) C=8 M=10 eta=0.90 tau=0.4632 eps=0.0775: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.9938 ok
+   (f) C=2 M=10 eta=0.50 tau=0.2526 eps=0.0775: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
+   (f) C=2 M=10 eta=0.90 tau=0.2316 eps=0.0775: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.9938 ok
+n=5 u=1 r=1 L=4              tuples=1048576   m_r=0.053696 R=0.21479 V=1 eta''=0.125  [2.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.010068 <= 0.010068 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 2.91e-16 (R = 0.215) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5039 | 0.0062 ok; d=2m_r: 0.5159 | 0.3078 ok; d=exact osc: 0.5159 | 0.3078 ok
    (e) P(O_c>=R/2) = 0.0066528 <= (L-1)V/2^n = 0.09375 ok; P(A-1<=R/2) = 0.0066528; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.11926 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.5834 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 0.625 ok
-   (f) M=10 eta=0.90 tau=0.5349 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.025 ok
+   (f) C=8 M=10 eta=0.50 tau=0.5834 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 0.625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.5349 eps=0.1020: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.025 ok
+   (f) C=2 M=10 eta=0.50 tau=0.2917 eps=0.1020: P(exists i |G_i|>tau) = 0.00515 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 0.625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.2675 eps=0.1020: P(exists i |G_i|>tau) = 0.00515 <= eta ok; P(exists i |bias_i|>tau) = 0.000343; P(not good) = 0.0069962 <= eta+eta'' = 1.025 ok
 n=5 u=1 r=2 L=1              tuples=32        m_r=0.46814 R=0.46814 V=6 eta''=0.1875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +5.55e-17 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 3.47e-17 (R = 0.468) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5385 | 0.0000 ok; d=2m_r: 0.6728 | 0.0585 ok; d=exact osc: 0.8244 | 0.0871 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.1875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.543 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 2.332 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.543 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 2.332 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.272 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.166 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=1 r=2 L=2              tuples=1024      m_r=0.46814 R=0.93628 V=6 eta''=0.375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +2.22e-16 ok; E O_c = 0.06497 <= 0.087776 ok (ratio 0.740)
    (b) max_psi |mean G_psi| = 2.46e-16 (R = 0.936) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5001 | 0.0642 ok; d=exact osc: 0.5026 | 0.4837 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.1875 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.33984 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 3.597 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 3.298 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=1 r=2 L=3              tuples=32768     m_r=0.46814 R=1.4044 V=6 eta''=0.5625  [0.0s]
+   (f) C=8 M=10 eta=0.50: least tau allowed = 3.597 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 3.298 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.798 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.649 > 1 -- hypotheses of Theorem A' cannot be met here
+n=5 u=1 r=2 L=3              tuples=32768     m_r=0.46814 R=1.4044 V=6 eta''=0.5625  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +2.22e-16 ok; E O_c = 0.19491 <= 0.26333 ok (ratio 0.740)
    (b) max_psi |mean G_psi| = 2.06e-16 (R = 1.4) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5004 | 0.0604 ok; d=exact osc: 0.5174 | 0.2394 ok
    (e) P(O_c>=R/2) = 0.00097656 <= (L-1)V/2^n = 0.375 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.46362 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 4.405 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 4.039 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=1 r=2 L=4              tuples=1048576   m_r=0.46814 R=1.8726 V=6 eta''=0.75  [1.9s]
+   (f) C=8 M=10 eta=0.50: least tau allowed = 4.405 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 4.039 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 2.202 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 2.019 > 1 -- hypotheses of Theorem A' cannot be met here
+n=5 u=1 r=2 L=4              tuples=1048576   m_r=0.46814 R=1.8726 V=6 eta''=0.75  [2.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +4.44e-16 ok; E O_c = 0.38982 <= 0.52666 ok (ratio 0.740)
    (b) max_psi |mean G_psi| = 3.36e-16 (R = 1.87) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0319 ok; d=exact osc: 0.5000 | 0.1142 ok
    (e) P(O_c>=R/2) = 0.028625 <= (L-1)V/2^n = 0.5625 ok; P(A-1<=R/2) = 0.0066528; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.56419 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 5.086 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 4.663 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 5.086 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 4.663 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 2.543 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 2.332 > 1 -- hypotheses of Theorem A' cannot be met here
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -1.9e-17     1.0883     0.6559    1.5412    2.0000    0.5000 |  0.0000    0.5000 |  0.0319
        parity        +2.2e-18     0.1605     0.1111    0.4588    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -485,56 +597,70 @@ n=5 u=1 r=3 L=1              tuples=32        m_r=2.1317 R=2.1317 V=16 eta''=0.5
    (c) max |bias - G/A| = 4.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5239 | 0.0000 ok; d=2m_r: 0.6027 | 0.0000 ok; d=exact osc: 0.8244 | 0.0757 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.5 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 11.580 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 10.618 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 11.580 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 10.618 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 5.790 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 5.309 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=1 r=3 L=2              tuples=1024      m_r=2.1317 R=4.2634 V=16 eta''=1  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +8.88e-16 ok; max[(A-1)-R] = -8.88e-16 ok; E O_c = 0.60618 <= 1.0658 ok (ratio 0.569)
    (b) max_psi |mean G_psi| = 2.59e-15 (R = 4.26) ok; one-centre oscillation / m_r: max over psi = 1.4600  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5015 | 0.5015 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.5 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.75 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 16.377 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 15.015 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 16.377 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 15.015 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 8.188 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 7.508 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=1 r=3 L=3              tuples=32768     m_r=2.1317 R=6.395 V=16 eta''=1.5  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +1.78e-15 ok; max[(A-1)-R] = -9.13e-01 ok; E O_c = 1.8185 <= 3.1975 ok (ratio 0.569)
    (b) max_psi |mean G_psi| = 9.16e-16 (R = 6.4) ok; one-centre oscillation / m_r: max over psi = 1.4600  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5064 | 0.2252 ok
    (e) P(O_c>=R/2) = 0.044922 <= (L-1)V/2^n = 1 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 20.057 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 18.390 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=1 r=3 L=4              tuples=1048576   m_r=2.1317 R=8.5267 V=16 eta''=2  [2.0s]
+   (f) C=8 M=10 eta=0.50: least tau allowed = 20.057 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 18.390 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 10.029 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 9.195 > 1 -- hypotheses of Theorem A' cannot be met here
+n=5 u=1 r=3 L=4              tuples=1048576   m_r=2.1317 R=8.5267 V=16 eta''=2  [2.1s]
    (a) max[(R-O_c)-(A-1)] = +1.78e-15 ok; max[(A-1)-R] = -1.72e+00 ok; E O_c = 3.6371 <= 6.395 ok (ratio 0.569)
    (b) max_psi |mean G_psi| = 2.07e-15 (R = 8.53) ok; one-centre oscillation / m_r: max over psi = 1.4600  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.1006 ok
    (e) P(O_c>=R/2) = 0.20807 <= (L-1)V/2^n = 1.5 ok; P(A-1<=R/2) = 0.0066528; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.9375 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 23.160 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 21.235 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 23.160 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 21.235 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 11.580 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 10.618 > 1 -- hypotheses of Theorem A' cannot be met here
 n=6 u=0.25 r=1 L=1           tuples=64        m_r=0.0044379 R=0.0044379 V=1 eta''=0.01562  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) max_psi |mean G_psi| = 2.85e-19 (R = 0.00444) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4105 ok; d=exact osc: 0.8244 | 0.4105 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.015625 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0241 eps=0.0022: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
-   (f) M=10 eta=0.90 tau=0.0221 eps=0.0022: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0241 eps=0.0022: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0221 eps=0.0022: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0121 eps=0.0022: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0111 eps=0.0022: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
 n=6 u=0.25 r=1 L=2           tuples=4096      m_r=0.0044379 R=0.0088758 V=1 eta''=0.03125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 6.9342e-05 <= 6.9342e-05 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 7.04e-18 (R = 0.00888) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 8.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5060 | 0.0113 ok; d=2m_r: 0.6583 | 0.6583 ok; d=exact osc: 0.6583 | 0.6583 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.015625 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.031006 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0341 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
-   (f) M=10 eta=0.90 tau=0.0313 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0341 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0313 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0170 eps=0.0044: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0156 eps=0.0044: P(exists i |G_i|>tau) = 0.0103 <= eta ok; P(exists i |bias_i|>tau) = 0.0103; P(not good) = 0.025879 <= eta+eta'' = 0.9313 ok
 n=6 u=0.25 r=1 L=3           tuples=262144    m_r=0.0044379 R=0.013314 V=1 eta''=0.04688  [1.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.00020803 <= 0.00020803 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 8.91e-17 (R = 0.0133) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5091 | 0.0013 ok; d=2m_r: 0.5768 | 0.5088 ok; d=exact osc: 0.5768 | 0.5088 ok
    (e) P(O_c>=R/2) = 0.00024414 <= (L-1)V/2^n = 0.03125 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.046146 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.0418 eps=0.0066: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.5469 ok
-   (f) M=10 eta=0.90 tau=0.0383 eps=0.0066: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.9469 ok
+   (f) C=8 M=10 eta=0.50 tau=0.0418 eps=0.0066: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.5469 ok
+   (f) C=8 M=10 eta=0.90 tau=0.0383 eps=0.0066: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.9469 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0209 eps=0.0066: P(exists i |G_i|>tau) = 0.000801 <= eta ok; P(exists i |bias_i|>tau) = 0.000801; P(not good) = 0.0010452 <= eta+eta'' = 0.5469 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0191 eps=0.0066: P(exists i |G_i|>tau) = 0.000801 <= eta ok; P(exists i |bias_i|>tau) = 0.000801; P(not good) = 0.0010452 <= eta+eta'' = 0.9469 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -6.8e-20     1.6915     1.0000    2.0000    2.0000    0.5091 |  0.0000    0.5768 |  0.5088
        parity        +1.4e-20     1.6915     1.0000    2.0000    2.0000    0.5091 |  0.0000    0.5768 |  0.5088
@@ -552,24 +678,30 @@ n=6 u=0.25 r=2 L=1           tuples=64        m_r=0.036764 R=0.036764 V=7 eta''=
    (c) max |bias - G/A| = 1.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5373 | 0.0000 ok; d=2m_r: 0.6667 | 0.0382 ok; d=exact osc: 0.8244 | 0.0463 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.10938 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.1997 eps=0.0182: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6094 ok
-   (f) M=10 eta=0.90 tau=0.1831 eps=0.0182: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.009 ok
+   (f) C=8 M=10 eta=0.50 tau=0.1997 eps=0.0182: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6094 ok
+   (f) C=8 M=10 eta=0.90 tau=0.1831 eps=0.0182: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.009 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0999 eps=0.0182: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6094 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0916 eps=0.0182: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.009 ok
 n=6 u=0.25 r=2 L=2           tuples=4096      m_r=0.036764 R=0.073527 V=7 eta''=0.2188  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +1.39e-17 ok; max[(A-1)-R] = +1.39e-17 ok; E O_c = 0.0034868 <= 0.004021 ok (ratio 0.867)
    (b) max_psi |mean G_psi| = 2.71e-16 (R = 0.0735) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.9e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5001 | 0.0000 ok; d=2m_r: 0.5003 | 0.0222 ok; d=exact osc: 0.5016 | 0.4912 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.10938 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.20679 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.2824 eps=0.0361: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.7188 ok
-   (f) M=10 eta=0.90 tau=0.2590 eps=0.0361: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.119 ok
+   (f) C=8 M=10 eta=0.50 tau=0.2824 eps=0.0361: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.7188 ok
+   (f) C=8 M=10 eta=0.90 tau=0.2590 eps=0.0361: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.119 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1412 eps=0.0361: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.7188 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1295 eps=0.0361: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.119 ok
 n=6 u=0.25 r=2 L=3           tuples=262144    m_r=0.036764 R=0.11029 V=7 eta''=0.3281  [1.2s]
    (a) max[(R-O_c)-(A-1)] = +2.78e-17 ok; max[(A-1)-R] = +1.39e-17 ok; E O_c = 0.01046 <= 0.012063 ok (ratio 0.867)
    (b) max_psi |mean G_psi| = 4.26e-17 (R = 0.11) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5105 | 0.0260 ok; d=exact osc: 0.5276 | 0.2552 ok
    (e) P(O_c>=R/2) = 0.00024414 <= (L-1)V/2^n = 0.21875 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.29354 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.3459 eps=0.0537: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.8281 ok
-   (f) M=10 eta=0.90 tau=0.3172 eps=0.0537: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 1.228 ok
+   (f) C=8 M=10 eta=0.50 tau=0.3459 eps=0.0537: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.8281 ok
+   (f) C=8 M=10 eta=0.90 tau=0.3172 eps=0.0537: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 1.228 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1730 eps=0.0537: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.8281 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1586 eps=0.0537: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 1.228 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     1.1046     0.7586    1.5171    2.0000    0.5000 |  0.0000    0.5105 |  0.0260
        parity        -2.4e-19     0.5875     0.4486    0.8971    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -587,24 +719,30 @@ n=6 u=0.25 r=3 L=1           tuples=64        m_r=0.14484 R=0.14484 V=22 eta''=0
    (c) max |bias - G/A| = 2.0e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5195 | 0.0000 ok; d=2m_r: 0.5828 | 0.0000 ok; d=exact osc: 0.8244 | 0.0355 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.34375 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.7868 eps=0.0699: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.8438 ok
-   (f) M=10 eta=0.90 tau=0.7214 eps=0.0699: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.244 ok
+   (f) C=8 M=10 eta=0.50 tau=0.7868 eps=0.0699: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.8438 ok
+   (f) C=8 M=10 eta=0.90 tau=0.7214 eps=0.0699: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.244 ok
+   (f) C=2 M=10 eta=0.50 tau=0.3934 eps=0.0699: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.8438 ok
+   (f) C=2 M=10 eta=0.90 tau=0.3607 eps=0.0699: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.244 ok
 n=6 u=0.25 r=3 L=2           tuples=4096      m_r=0.14484 R=0.28968 V=22 eta''=0.6875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +1.11e-16 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.038039 <= 0.049788 ok (ratio 0.764)
    (b) max_psi |mean G_psi| = 7.14e-17 (R = 0.29) ok; one-centre oscillation / m_r: max over psi = 1.6323  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.2506 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.34375 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.56934 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.113 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.020 > 1 -- hypotheses of Theorem A' cannot be met here
-n=6 u=0.25 r=3 L=3           tuples=262144    m_r=0.14484 R=0.43452 V=22 eta''=1.031  [1.2s]
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.113 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.020 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.5564 eps=0.1353: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.188 ok
+   (f) C=2 M=10 eta=0.90 tau=0.5101 eps=0.1353: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.587 ok
+n=6 u=0.25 r=3 L=3           tuples=262144    m_r=0.14484 R=0.43452 V=22 eta''=1.031  [1.3s]
    (a) max[(R-O_c)-(A-1)] = +1.67e-16 ok; max[(A-1)-R] = -5.33e-02 ok; E O_c = 0.11412 <= 0.14937 ok (ratio 0.764)
    (b) max_psi |mean G_psi| = 1.78e-16 (R = 0.435) ok; one-centre oscillation / m_r: max over psi = 1.6323  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.0e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5025 | 0.0445 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.6875 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.71738 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.363 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.250 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.363 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.250 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.6814 eps=0.1966: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 1.531 ok
+   (f) C=2 M=10 eta=0.90 tau=0.6248 eps=0.1966: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 1.931 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -8.7e-19     0.5925     0.3844    1.1073    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        parity        -1.4e-20     0.0617     0.1068    0.3204    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -622,24 +760,30 @@ n=6 u=1 r=1 L=1              tuples=64        m_r=0.026848 R=0.026848 V=1 eta''=
    (c) max |bias - G/A| = 1.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4105 ok; d=exact osc: 0.8244 | 0.4105 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.015625 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.1459 eps=0.0133: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
-   (f) M=10 eta=0.90 tau=0.1337 eps=0.0133: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
+   (f) C=8 M=10 eta=0.50 tau=0.1459 eps=0.0133: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
+   (f) C=8 M=10 eta=0.90 tau=0.1337 eps=0.0133: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
+   (f) C=2 M=10 eta=0.50 tau=0.0729 eps=0.0133: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0669 eps=0.0133: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
 n=6 u=1 r=1 L=2              tuples=4096      m_r=0.026848 R=0.053696 V=1 eta''=0.03125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0004195 <= 0.0004195 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 3.56e-16 (R = 0.0537) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.4e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5060 | 0.0113 ok; d=2m_r: 0.6583 | 0.6583 ok; d=exact osc: 0.6583 | 0.6583 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.015625 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.031006 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.2063 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
-   (f) M=10 eta=0.90 tau=0.1891 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
+   (f) C=8 M=10 eta=0.50 tau=0.2063 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
+   (f) C=8 M=10 eta=0.90 tau=0.1891 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1031 eps=0.0265: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
+   (f) C=2 M=10 eta=0.90 tau=0.0946 eps=0.0265: P(exists i |G_i|>tau) = 0.0103 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
 n=6 u=1 r=1 L=3              tuples=262144    m_r=0.026848 R=0.080544 V=1 eta''=0.04688  [1.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0012585 <= 0.0012585 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 1.35e-15 (R = 0.0805) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 1.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5091 | 0.0013 ok; d=2m_r: 0.5768 | 0.5088 ok; d=exact osc: 0.5768 | 0.5088 ok
    (e) P(O_c>=R/2) = 0.00024414 <= (L-1)V/2^n = 0.03125 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.046146 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.2526 eps=0.0395: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.5469 ok
-   (f) M=10 eta=0.90 tau=0.2316 eps=0.0395: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.9469 ok
+   (f) C=8 M=10 eta=0.50 tau=0.2526 eps=0.0395: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.5469 ok
+   (f) C=8 M=10 eta=0.90 tau=0.2316 eps=0.0395: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.9469 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1263 eps=0.0395: P(exists i |G_i|>tau) = 0.000801 <= eta ok; P(exists i |bias_i|>tau) = 0.000801; P(not good) = 0.0010452 <= eta+eta'' = 0.5469 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1158 eps=0.0395: P(exists i |G_i|>tau) = 0.000801 <= eta ok; P(exists i |bias_i|>tau) = 0.000801; P(not good) = 0.0010452 <= eta+eta'' = 0.9469 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +5.4e-20     1.6915     1.0000    2.0000    2.0000    0.5091 |  0.0000    0.5768 |  0.5088
        parity        +5.4e-20     1.6915     1.0000    2.0000    2.0000    0.5091 |  0.0000    0.5768 |  0.5088
@@ -657,24 +801,30 @@ n=6 u=1 r=2 L=1              tuples=64        m_r=0.26092 R=0.26092 V=7 eta''=0.
    (c) max |bias - G/A| = 2.8e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5410 | 0.0000 ok; d=2m_r: 0.6854 | 0.0382 ok; d=exact osc: 0.8244 | 0.0492 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.10938 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.417 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.300 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.417 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.300 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.7087 eps=0.1226: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6094 ok
+   (f) C=2 M=10 eta=0.90 tau=0.6498 eps=0.1226: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.009 ok
 n=6 u=1 r=2 L=2              tuples=4096      m_r=0.26092 R=0.52184 V=7 eta''=0.2188  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +5.55e-17 ok; max[(A-1)-R] = +1.11e-16 ok; E O_c = 0.021696 <= 0.028538 ok (ratio 0.760)
    (b) max_psi |mean G_psi| = 8.99e-16 (R = 0.522) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.1e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0229 ok; d=exact osc: 0.5167 | 0.5167 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.10938 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.20679 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.005 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.838 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.005 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.838 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.002 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90 tau=0.9189 eps=0.2318: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.119 ok
 n=6 u=1 r=2 L=3              tuples=262144    m_r=0.26092 R=0.78275 V=7 eta''=0.3281  [1.2s]
    (a) max[(R-O_c)-(A-1)] = +1.11e-16 ok; max[(A-1)-R] = +1.11e-16 ok; E O_c = 0.065088 <= 0.085614 ok (ratio 0.760)
    (b) max_psi |mean G_psi| = 2.87e-16 (R = 0.783) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.9e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5173 | 0.1452 ok; d=exact osc: 0.5351 | 0.2855 ok
    (e) P(O_c>=R/2) = 0.00024414 <= (L-1)V/2^n = 0.21875 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.29354 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.455 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 2.251 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.455 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 2.251 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.228 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.125 > 1 -- hypotheses of Theorem A' cannot be met here
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -8.7e-19     1.1898     0.7942    1.5884    2.0000    0.5000 |  0.0000    0.5173 |  0.1452
        parity        -1.5e-18     0.2638     0.2348    0.4696    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -692,24 +842,30 @@ n=6 u=1 r=3 L=1              tuples=64        m_r=1.2999 R=1.2999 V=22 eta''=0.3
    (c) max |bias - G/A| = 2.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5263 | 0.0000 ok; d=2m_r: 0.6136 | 0.0000 ok; d=exact osc: 0.8244 | 0.0444 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.34375 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 7.062 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 6.475 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 7.062 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 6.475 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 3.531 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 3.237 > 1 -- hypotheses of Theorem A' cannot be met here
 n=6 u=1 r=3 L=2              tuples=4096      m_r=1.2999 R=2.5998 V=22 eta''=0.6875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +4.44e-16 ok; max[(A-1)-R] = +4.44e-16 ok; E O_c = 0.26201 <= 0.44684 ok (ratio 0.586)
    (b) max_psi |mean G_psi| = 6.05e-16 (R = 2.6) ok; one-centre oscillation / m_r: max over psi = 1.7522  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.3e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5002 | 0.2826 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.34375 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.56934 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 9.987 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 9.157 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 9.987 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 9.157 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 4.993 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 4.578 > 1 -- hypotheses of Theorem A' cannot be met here
 n=6 u=1 r=3 L=3              tuples=262144    m_r=1.2999 R=3.8997 V=22 eta''=1.031  [1.2s]
    (a) max[(R-O_c)-(A-1)] = +4.44e-16 ok; max[(A-1)-R] = -3.22e-01 ok; E O_c = 0.78604 <= 1.3405 ok (ratio 0.586)
    (b) max_psi |mean G_psi| = 1.27e-15 (R = 3.9) ok; one-centre oscillation / m_r: max over psi = 1.7522  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 6.5e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5151 | 0.2062 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.6875 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.71738 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 12.231 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 11.214 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 12.231 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 11.214 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 6.116 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 5.607 > 1 -- hypotheses of Theorem A' cannot be met here
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -8.7e-18     0.8052     0.5228    1.2797    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        parity        -1.1e-18     0.0551     0.0523    0.2246    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -727,160 +883,200 @@ n=4 u=ln2(exact) r=1 L=1     tuples=16        m_r=0.0625 R=0.0625 V=1 eta''=0.06
    (c) max |bias - G/A| = 2.1e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4021 ok; d=exact osc: 0.8244 | 0.4021 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.0625 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.3346 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
-   (f) M=9 eta=0.90 tau=0.3060 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=9 eta=0.50 tau=0.3346 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=9 eta=0.90 tau=0.3060 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=9 eta=0.50 tau=0.1673 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=9 eta=0.90 tau=0.1530 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9625 ok
 n=4 u=ln2(exact) r=1 L=2     tuples=256       m_r=0.0625 R=0.125 V=1 eta''=0.125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0039062 <= 0.0039062 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5124 | 0.0000 ok; d=2m_r: 0.5946 | 0.5946 ok; d=exact osc: 0.5946 | 0.5946 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.0625 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.12109 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.4733 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
-   (f) M=9 eta=0.90 tau=0.4327 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
+   (f) C=8 M=9 eta=0.50 tau=0.4733 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
+   (f) C=8 M=9 eta=0.90 tau=0.4327 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
+   (f) C=2 M=9 eta=0.50 tau=0.2366 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 0.625 ok
+   (f) C=2 M=9 eta=0.90 tau=0.2164 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0625 <= eta+eta'' = 1.025 ok
 n=4 u=ln2(exact) r=1 L=3     tuples=4096      m_r=0.0625 R=0.1875 V=1 eta''=0.1875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.011719 <= 0.011719 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5003 | 0.0149 ok; d=2m_r: 0.5353 | 0.3676 ok; d=exact osc: 0.5353 | 0.3676 ok
    (e) P(O_c>=R/2) = 0.0039062 <= (L-1)V/2^n = 0.125 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.17603 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.5796 eps=0.0896: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 0.6875 ok
-   (f) M=9 eta=0.90 tau=0.5300 eps=0.0896: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
+   (f) C=8 M=9 eta=0.50 tau=0.5796 eps=0.0896: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 0.6875 ok
+   (f) C=8 M=9 eta=0.90 tau=0.5300 eps=0.0896: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
+   (f) C=2 M=9 eta=0.50 tau=0.2898 eps=0.0896: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 0.6875 ok
+   (f) C=2 M=9 eta=0.90 tau=0.2650 eps=0.0896: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0039062 <= eta+eta'' = 1.087 ok
 n=4 u=ln2(exact) r=1 L=4     tuples=65536     m_r=0.0625 R=0.25 V=1 eta''=0.25  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.023438 <= 0.023438 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.2e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5002 | 0.0024 ok; d=2m_r: 0.5010 | 0.1894 ok; d=exact osc: 0.5038 | 0.1894 ok
    (e) P(O_c>=R/2) = 0.025879 <= (L-1)V/2^n = 0.1875 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.22752 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.6693 eps=0.1178: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 0.75 ok
-   (f) M=9 eta=0.90 tau=0.6119 eps=0.1178: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 1.15 ok
+   (f) C=8 M=9 eta=0.50 tau=0.6693 eps=0.1178: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 0.75 ok
+   (f) C=8 M=9 eta=0.90 tau=0.6119 eps=0.1178: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 1.15 ok
+   (f) C=2 M=9 eta=0.50 tau=0.3346 eps=0.1178: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 0.75 ok
+   (f) C=2 M=9 eta=0.90 tau=0.3060 eps=0.1178: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.025879 <= eta+eta'' = 1.15 ok
 n=4 u=ln2(exact) r=2 L=1     tuples=16        m_r=0.4375 R=0.4375 V=5 eta''=0.3125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5329 | 0.0000 ok; d=2m_r: 0.6453 | 0.0804 ok; d=exact osc: 0.8244 | 0.1345 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.3125 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 2.342 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 2.142 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 2.342 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 2.142 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 1.171 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 1.071 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=ln2(exact) r=2 L=2     tuples=256       m_r=0.4375 R=0.875 V=5 eta''=0.625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.10547 <= 0.13672 ok (ratio 0.771)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.8214  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5001 | 0.0000 ok; d=2m_r: 0.5004 | 0.0000 ok; d=exact osc: 0.5011 | 0.0849 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.3125 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.52734 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 3.313 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 3.029 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 3.313 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 3.029 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 1.656 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 1.514 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=ln2(exact) r=2 L=3     tuples=4096      m_r=0.4375 R=1.3125 V=5 eta''=0.9375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -1.25e-01 ok; E O_c = 0.31641 <= 0.41016 ok (ratio 0.771)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.8214  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0788 ok
    (e) P(O_c>=R/2) = 0.12109 <= (L-1)V/2^n = 0.625 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.67505 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 4.057 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 3.710 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 4.057 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 3.710 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 2.029 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 1.855 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=ln2(exact) r=2 L=4     tuples=65536     m_r=0.4375 R=1.75 V=5 eta''=1.25  [0.1s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -2.50e-01 ok; E O_c = 0.63281 <= 0.82031 ok (ratio 0.771)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.8214  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0466 ok
    (e) P(O_c>=R/2) = 0.15771 <= (L-1)V/2^n = 0.9375 ok; P(A-1<=R/2) = 0.025879; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.7766 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 4.685 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 4.284 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 4.685 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 4.284 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 2.342 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 2.142 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=ln2(exact) r=3 L=1     tuples=16        m_r=1.5625 R=1.5625 V=11 eta''=0.6875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.5200  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5172 | 0.0000 ok; d=2m_r: 0.5724 | 0.0000 ok; d=exact osc: 0.8244 | 0.1045 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.6875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 8.366 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 7.649 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 8.366 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 7.649 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 4.183 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 3.825 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=ln2(exact) r=3 L=2     tuples=256       m_r=1.5625 R=3.125 V=11 eta''=1.375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -3.75e-01 ok; E O_c = 0.68359 <= 1.0742 ok (ratio 0.636)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.1300  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5001 | 0.0000 ok; d=2m_r: 0.5005 | 0.0000 ok; d=exact osc: 0.5014 | 0.4917 ok
    (e) P(O_c>=R/2) = 0.0625 <= (L-1)V/2^n = 0.6875 ok; P(A-1<=R/2) = 0.0625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.90234 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 11.831 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 10.818 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 11.831 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 10.818 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 5.916 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 5.409 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=ln2(exact) r=3 L=3     tuples=4096      m_r=1.5625 R=4.6875 V=11 eta''=2.062  [0.0s]
    (a) max[(R-O_c)-(A-1)] = -1.88e-01 ok; max[(A-1)-R] = -1.31e+00 ok; E O_c = 2.0508 <= 3.2227 ok (ratio 0.636)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.1300  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5001 | 0.1711 ok
    (e) P(O_c>=R/2) = 0.12109 <= (L-1)V/2^n = 1.375 ok; P(A-1<=R/2) = 0.0039062; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.96948 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 14.490 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 13.249 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 14.490 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 13.249 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 7.245 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 6.624 > 1 -- hypotheses of Theorem A' cannot be met here
 n=4 u=ln2(exact) r=3 L=4     tuples=65536     m_r=1.5625 R=6.25 V=11 eta''=2.75  [0.1s]
    (a) max[(R-O_c)-(A-1)] = -7.50e-01 ok; max[(A-1)-R] = -2.25e+00 ok; E O_c = 4.1016 <= 6.4453 ok (ratio 0.636)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.1300  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0466 ok
    (e) P(O_c>=R/2) = 0.98535 <= (L-1)V/2^n = 2.0625 ok; P(A-1<=R/2) = 0.24561; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.99046 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 16.732 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 15.298 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 16.732 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 15.298 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 8.366 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 7.649 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=ln2(exact) r=1 L=1     tuples=32        m_r=0.03125 R=0.03125 V=1 eta''=0.03125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.2e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4021 ok; d=exact osc: 0.8244 | 0.4021 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.03125 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.1673 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
-   (f) M=9 eta=0.90 tau=0.1530 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
+   (f) C=8 M=9 eta=0.50 tau=0.1673 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
+   (f) C=8 M=9 eta=0.90 tau=0.1530 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
+   (f) C=2 M=9 eta=0.50 tau=0.0837 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5312 ok
+   (f) C=2 M=9 eta=0.90 tau=0.0765 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9313 ok
 n=5 u=ln2(exact) r=1 L=2     tuples=1024      m_r=0.03125 R=0.0625 V=1 eta''=0.0625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.00097656 <= 0.00097656 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.2e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5124 | 0.0000 ok; d=2m_r: 0.6371 | 0.6371 ok; d=exact osc: 0.6371 | 0.6371 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.03125 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.061523 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.2366 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
-   (f) M=9 eta=0.90 tau=0.2164 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=9 eta=0.50 tau=0.2366 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=9 eta=0.90 tau=0.2164 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=9 eta=0.50 tau=0.1183 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=9 eta=0.90 tau=0.1082 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.9625 ok
 n=5 u=ln2(exact) r=1 L=3     tuples=32768     m_r=0.03125 R=0.09375 V=1 eta''=0.09375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0029297 <= 0.0029297 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.0e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5115 | 0.0223 ok; d=2m_r: 0.5630 | 0.4595 ok; d=exact osc: 0.5630 | 0.4595 ok
    (e) P(O_c>=R/2) = 0.00097656 <= (L-1)V/2^n = 0.0625 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.090851 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.2898 eps=0.0458: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
-   (f) M=9 eta=0.90 tau=0.2650 eps=0.0458: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.9938 ok
+   (f) C=8 M=9 eta=0.50 tau=0.2898 eps=0.0458: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
+   (f) C=8 M=9 eta=0.90 tau=0.2650 eps=0.0458: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.9938 ok
+   (f) C=2 M=9 eta=0.50 tau=0.1449 eps=0.0458: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00097656 <= eta+eta'' = 0.5938 ok
+   (f) C=2 M=9 eta=0.90 tau=0.1325 eps=0.0458: P(exists i |G_i|>tau) = 0.00366 <= eta ok; P(exists i |bias_i|>tau) = 0.00366; P(not good) = 0.0046387 <= eta+eta'' = 0.9938 ok
 n=5 u=ln2(exact) r=1 L=4     tuples=1048576   m_r=0.03125 R=0.125 V=1 eta''=0.125  [1.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0058594 <= 0.0058594 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.0e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5039 | 0.0062 ok; d=2m_r: 0.5159 | 0.3078 ok; d=exact osc: 0.5159 | 0.3078 ok
    (e) P(O_c>=R/2) = 0.0066528 <= (L-1)V/2^n = 0.09375 ok; P(A-1<=R/2) = 0.0066528; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.11926 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.3346 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 0.625 ok
-   (f) M=9 eta=0.90 tau=0.3060 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.025 ok
+   (f) C=8 M=9 eta=0.50 tau=0.3346 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 0.625 ok
+   (f) C=8 M=9 eta=0.90 tau=0.3060 eps=0.0606: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0066528 <= eta+eta'' = 1.025 ok
+   (f) C=2 M=9 eta=0.50 tau=0.1673 eps=0.0606: P(exists i |G_i|>tau) = 0.00515 <= eta ok; P(exists i |bias_i|>tau) = 0.000343; P(not good) = 0.0069962 <= eta+eta'' = 0.625 ok
+   (f) C=2 M=9 eta=0.90 tau=0.1530 eps=0.0606: P(exists i |G_i|>tau) = 0.00515 <= eta ok; P(exists i |bias_i|>tau) = 0.000343; P(not good) = 0.0069962 <= eta+eta'' = 1.025 ok
 n=5 u=ln2(exact) r=2 L=1     tuples=32        m_r=0.25 R=0.25 V=6 eta''=0.1875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.2e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5364 | 0.0000 ok; d=2m_r: 0.6624 | 0.0585 ok; d=exact osc: 0.8244 | 0.0839 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.1875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 1.339 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 1.224 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 1.339 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 1.224 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50 tau=0.6693 eps=0.1178: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6875 ok
+   (f) C=2 M=9 eta=0.90 tau=0.6119 eps=0.1178: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.087 ok
 n=5 u=ln2(exact) r=2 L=2     tuples=1024      m_r=0.25 R=0.5 V=6 eta''=0.375  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.037109 <= 0.046875 ok (ratio 0.792)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5003 | 0.0000 ok; d=2m_r: 0.5011 | 0.0630 ok; d=exact osc: 0.5033 | 0.4694 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.1875 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.33984 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 1.893 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 1.731 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=ln2(exact) r=2 L=3     tuples=32768     m_r=0.25 R=0.75 V=6 eta''=0.5625  [0.1s]
+   (f) C=8 M=9 eta=0.50: least tau allowed = 1.893 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 1.731 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50 tau=0.9465 eps=0.2231: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 0.875 ok
+   (f) C=2 M=9 eta=0.90 tau=0.8654 eps=0.2231: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.03125 <= eta+eta'' = 1.275 ok
+n=5 u=ln2(exact) r=2 L=3     tuples=32768     m_r=0.25 R=0.75 V=6 eta''=0.5625  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.11133 <= 0.14062 ok (ratio 0.792)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5001 | 0.0094 ok; d=exact osc: 0.5132 | 0.2242 ok
    (e) P(O_c>=R/2) = 0.044922 <= (L-1)V/2^n = 0.375 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.46362 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 2.318 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 2.120 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=ln2(exact) r=2 L=4     tuples=1048576   m_r=0.25 R=1 V=6 eta''=0.75  [1.2s]
+   (f) C=8 M=9 eta=0.50: least tau allowed = 2.318 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 2.120 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 1.159 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 1.060 > 1 -- hypotheses of Theorem A' cannot be met here
+n=5 u=ln2(exact) r=2 L=4     tuples=1048576   m_r=0.25 R=1 V=6 eta''=0.75  [1.3s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.22266 <= 0.28125 ok (ratio 0.792)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0093 ok; d=exact osc: 0.5000 | 0.1102 ok
    (e) P(O_c>=R/2) = 0.045105 <= (L-1)V/2^n = 0.5625 ok; P(A-1<=R/2) = 0.0066528; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.56419 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 2.677 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 2.448 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 2.677 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 2.448 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 1.339 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 1.224 > 1 -- hypotheses of Theorem A' cannot be met here
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     1.0205     0.6250    1.5000    2.0000    0.5000 |  0.0000    0.5000 |  0.0093
        parity        +0.0e+00     0.1702     0.1250    0.5000    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -897,56 +1093,70 @@ n=5 u=ln2(exact) r=3 L=1     tuples=32        m_r=1 R=1 V=16 eta''=0.5  [0.0s]
    (c) max |bias - G/A| = 0.0e+00 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5202 | 0.0000 ok; d=2m_r: 0.5857 | 0.0000 ok; d=exact osc: 0.8244 | 0.0679 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.5 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 5.354 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 4.895 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 5.354 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 4.895 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 2.677 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 2.448 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=ln2(exact) r=3 L=2     tuples=1024      m_r=1 R=2 V=16 eta''=1  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.32422 <= 0.5 ok (ratio 0.648)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.3750  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5002 | 0.0000 ok; d=exact osc: 0.5005 | 0.4967 ok
    (e) P(O_c>=R/2) = 0.03125 <= (L-1)V/2^n = 0.5 ok; P(A-1<=R/2) = 0.03125; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.75 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 7.572 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 6.923 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 7.572 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 6.923 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 3.786 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 3.462 > 1 -- hypotheses of Theorem A' cannot be met here
 n=5 u=ln2(exact) r=3 L=3     tuples=32768     m_r=1 R=3 V=16 eta''=1.5  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -5.31e-01 ok; E O_c = 0.97266 <= 1.5 ok (ratio 0.648)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.3750  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5018 | 0.2090 ok
    (e) P(O_c>=R/2) = 0.044922 <= (L-1)V/2^n = 1 ok; P(A-1<=R/2) = 0.00097656; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.875 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 9.274 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 8.479 > 1 -- hypotheses of Theorem A' cannot be met here
-n=5 u=ln2(exact) r=3 L=4     tuples=1048576   m_r=1 R=4 V=16 eta''=2  [1.2s]
+   (f) C=8 M=9 eta=0.50: least tau allowed = 9.274 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 8.479 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 4.637 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 4.240 > 1 -- hypotheses of Theorem A' cannot be met here
+n=5 u=ln2(exact) r=3 L=4     tuples=1048576   m_r=1 R=4 V=16 eta''=2  [0.8s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -1.00e+00 ok; E O_c = 1.9453 <= 3 ok (ratio 0.648)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.3750  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.0818 ok
    (e) P(O_c>=R/2) = 0.37561 <= (L-1)V/2^n = 1.5 ok; P(A-1<=R/2) = 0.028625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.9375 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 10.709 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 9.791 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 10.709 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 9.791 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 5.354 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 4.895 > 1 -- hypotheses of Theorem A' cannot be met here
 n=6 u=ln2(exact) r=1 L=1     tuples=64        m_r=0.015625 R=0.015625 V=1 eta''=0.01562  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0 <= 0 ok (ratio nan)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5666 | 0.0000 ok; d=2m_r: 0.8244 | 0.4105 ok; d=exact osc: 0.8244 | 0.4105 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.015625 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.0837 eps=0.0078: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
-   (f) M=9 eta=0.90 tau=0.0765 eps=0.0078: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
+   (f) C=8 M=9 eta=0.50 tau=0.0837 eps=0.0078: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
+   (f) C=8 M=9 eta=0.90 tau=0.0765 eps=0.0078: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
+   (f) C=2 M=9 eta=0.50 tau=0.0418 eps=0.0078: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.5156 ok
+   (f) C=2 M=9 eta=0.90 tau=0.0382 eps=0.0078: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.9156 ok
 n=6 u=ln2(exact) r=1 L=2     tuples=4096      m_r=0.015625 R=0.03125 V=1 eta''=0.03125  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.00024414 <= 0.00024414 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 3.4e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5060 | 0.0113 ok; d=2m_r: 0.6583 | 0.6583 ok; d=exact osc: 0.6583 | 0.6583 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.015625 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.031006 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.1183 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
-   (f) M=9 eta=0.90 tau=0.1082 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
-n=6 u=ln2(exact) r=1 L=3     tuples=262144    m_r=0.015625 R=0.046875 V=1 eta''=0.04688  [0.8s]
+   (f) C=8 M=9 eta=0.50 tau=0.1183 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
+   (f) C=8 M=9 eta=0.90 tau=0.1082 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
+   (f) C=2 M=9 eta=0.50 tau=0.0592 eps=0.0155: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.5312 ok
+   (f) C=2 M=9 eta=0.90 tau=0.0541 eps=0.0155: P(exists i |G_i|>tau) = 0.0103 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.9313 ok
+n=6 u=ln2(exact) r=1 L=3     tuples=262144    m_r=0.015625 R=0.046875 V=1 eta''=0.04688  [1.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.00073242 <= 0.00073242 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.9e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5091 | 0.0013 ok; d=2m_r: 0.5768 | 0.5088 ok; d=exact osc: 0.5768 | 0.5088 ok
    (e) P(O_c>=R/2) = 0.00024414 <= (L-1)V/2^n = 0.03125 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.046146 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.1449 eps=0.0232: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.5469 ok
-   (f) M=9 eta=0.90 tau=0.1325 eps=0.0232: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.9469 ok
+   (f) C=8 M=9 eta=0.50 tau=0.1449 eps=0.0232: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.5469 ok
+   (f) C=8 M=9 eta=0.90 tau=0.1325 eps=0.0232: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.9469 ok
+   (f) C=2 M=9 eta=0.50 tau=0.0725 eps=0.0232: P(exists i |G_i|>tau) = 0.000801 <= eta ok; P(exists i |bias_i|>tau) = 0.000801; P(not good) = 0.0010452 <= eta+eta'' = 0.5469 ok
+   (f) C=2 M=9 eta=0.90 tau=0.0662 eps=0.0232: P(exists i |G_i|>tau) = 0.000801 <= eta ok; P(exists i |bias_i|>tau) = 0.000801; P(not good) = 0.0010452 <= eta+eta'' = 0.9469 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     1.6915     1.0000    2.0000    2.0000    0.5091 |  0.0000    0.5768 |  0.5088
        parity        +0.0e+00     1.6915     1.0000    2.0000    2.0000    0.5091 |  0.0000    0.5768 |  0.5088
@@ -963,24 +1173,30 @@ n=6 u=ln2(exact) r=2 L=1     tuples=64        m_r=0.14062 R=0.14062 V=7 eta''=0.
    (c) max |bias - G/A| = 2.8e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5393 | 0.0000 ok; d=2m_r: 0.6766 | 0.0382 ok; d=exact osc: 0.8244 | 0.0481 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.10938 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.7529 eps=0.0680: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6094 ok
-   (f) M=9 eta=0.90 tau=0.6884 eps=0.0680: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.009 ok
+   (f) C=8 M=9 eta=0.50 tau=0.7529 eps=0.0680: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6094 ok
+   (f) C=8 M=9 eta=0.90 tau=0.6884 eps=0.0680: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.009 ok
+   (f) C=2 M=9 eta=0.50 tau=0.3765 eps=0.0680: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 0.6094 ok
+   (f) C=2 M=9 eta=0.90 tau=0.3442 eps=0.0680: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0 <= eta+eta'' = 1.009 ok
 n=6 u=ln2(exact) r=2 L=2     tuples=4096      m_r=0.14062 R=0.28125 V=7 eta''=0.2188  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.012451 <= 0.015381 ok (ratio 0.810)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0226 ok; d=exact osc: 0.5049 | 0.5049 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.10938 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.20679 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 1.065 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90 tau=0.9736 eps=0.1316: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.119 ok
-n=6 u=ln2(exact) r=2 L=3     tuples=262144    m_r=0.14062 R=0.42188 V=7 eta''=0.3281  [0.5s]
+   (f) C=8 M=9 eta=0.50: least tau allowed = 1.065 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90 tau=0.9736 eps=0.1316: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.119 ok
+   (f) C=2 M=9 eta=0.50 tau=0.5324 eps=0.1316: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 0.7188 ok
+   (f) C=2 M=9 eta=0.90 tau=0.4868 eps=0.1316: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.015625 <= eta+eta'' = 1.119 ok
+n=6 u=ln2(exact) r=2 L=3     tuples=262144    m_r=0.14062 R=0.42188 V=7 eta''=0.3281  [1.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.037354 <= 0.046143 ok (ratio 0.810)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5141 | 0.1385 ok; d=exact osc: 0.5316 | 0.2712 ok
    (e) P(O_c>=R/2) = 0.00024414 <= (L-1)V/2^n = 0.21875 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.29354 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 1.304 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 1.192 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 1.304 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 1.192 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50 tau=0.6521 eps=0.1914: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 0.8281 ok
+   (f) C=2 M=9 eta=0.90 tau=0.5962 eps=0.1914: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.00024414 <= eta+eta'' = 1.228 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     1.1504     0.7778    1.5556    2.0000    0.5000 |  0.0000    0.5141 |  0.1385
        parity        +0.0e+00     0.4108     0.3333    0.6667    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -997,24 +1213,30 @@ n=6 u=ln2(exact) r=3 L=1     tuples=64        m_r=0.625 R=0.625 V=22 eta''=0.343
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5230 | 0.0000 ok; d=2m_r: 0.5986 | 0.0000 ok; d=exact osc: 0.8244 | 0.0410 ok
    (e) P(O_c>=R/2) = 0 <= (L-1)V/2^n = 0 ok; P(A-1<=R/2) = 0; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.34375 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 3.346 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 3.060 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 3.346 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 3.060 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 1.673 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 1.530 > 1 -- hypotheses of Theorem A' cannot be met here
 n=6 u=ln2(exact) r=3 L=2     tuples=4096      m_r=0.625 R=1.25 V=22 eta''=0.6875  [0.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.14307 <= 0.21484 ok (ratio 0.666)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.7000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5000 | 0.2688 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.34375 ok; P(A-1<=R/2) = 0.015625; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.56934 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 4.733 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 4.327 > 1 -- hypotheses of Theorem A' cannot be met here
-n=6 u=ln2(exact) r=3 L=3     tuples=262144    m_r=0.625 R=1.875 V=22 eta''=1.031  [0.7s]
+   (f) C=8 M=9 eta=0.50: least tau allowed = 4.733 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 4.327 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 2.366 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 2.164 > 1 -- hypotheses of Theorem A' cannot be met here
+n=6 u=ln2(exact) r=3 L=3     tuples=262144    m_r=0.625 R=1.875 V=22 eta''=1.031  [1.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -1.88e-01 ok; E O_c = 0.4292 <= 0.64453 ok (ratio 0.666)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.7000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5091 | 0.1399 ok
    (e) P(O_c>=R/2) = 0.015625 <= (L-1)V/2^n = 0.6875 ok; P(A-1<=R/2) = 0.00024414; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.71738 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 5.796 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 5.300 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 5.796 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 5.300 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 2.898 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 2.650 > 1 -- hypotheses of Theorem A' cannot be met here
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     0.7069     0.4583    1.2000    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        parity        +0.0e+00     0.0467     0.0667    0.2000    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -1025,14 +1247,16 @@ n=6 u=ln2(exact) r=3 L=3     tuples=262144    m_r=0.625 R=1.875 V=22 eta''=1.031
        halfcube      +0.0e+00     0.3535     0.2292    0.6000    1.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_pm1      +0.0e+00     0.3299     0.3953    1.2328    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_tern     +0.0e+00     0.2967     0.3542    0.9750    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
-n=6 u=1 r=2 L=4              tuples=16777216  m_r=0.26092 R=1.0437 V=7 eta''=0.4375  [38.6s]
+n=6 u=1 r=2 L=4              tuples=16777216  m_r=0.26092 R=1.0437 V=7 eta''=0.4375  [43.4s]
    (a) max[(R-O_c)-(A-1)] = +1.11e-16 ok; max[(A-1)-R] = +2.22e-16 ok; E O_c = 0.13018 <= 0.17123 ok (ratio 0.760)
    (b) max_psi |mean G_psi| = 1.03e-15 (R = 1.04) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.9e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (grid; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5001 | 0.1036 ok; d=exact osc: 0.5019 | 0.1562 ok
    (e) P(O_c>=R/2) = 0.0064926 <= (L-1)V/2^n = 0.32812 ok; P(A-1<=R/2) = 0.0016861; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.37081 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 2.835 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 2.599 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 2.835 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 2.599 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50: least tau allowed = 1.417 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.90: least tau allowed = 1.300 > 1 -- hypotheses of Theorem A' cannot be met here
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +8.5e-18     1.2820     0.7942    1.5884    2.0000    0.5000 |  0.0000    0.5000 |  0.1036
        parity        +1.6e-18     0.2432     0.2348    0.6174    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -1044,14 +1268,16 @@ n=6 u=1 r=2 L=4              tuples=16777216  m_r=0.26092 R=1.0437 V=7 eta''=0.4
        rand_pm1      -7.5e-17     0.7544     0.7533    1.8392    2.0000    0.5000 |  0.0000    0.5000 |  0.0007
        rand_tern     -8.6e-18     0.6805     0.6748    1.5112    2.0000    0.5000 |  0.0000    0.5000 |  0.0001
        rand_unif     -4.0e-18     0.3839     0.3828    1.1662    1.9446    0.5000 |  0.0000    0.5000 |  0.0000
-n=6 u=0.25 r=2 L=4           tuples=16777216  m_r=0.036764 R=0.14705 V=7 eta''=0.4375  [36.5s]
+n=6 u=0.25 r=2 L=4           tuples=16777216  m_r=0.036764 R=0.14705 V=7 eta''=0.4375  [64.9s]
    (a) max[(R-O_c)-(A-1)] = +2.78e-17 ok; max[(A-1)-R] = +2.78e-17 ok; E O_c = 0.020921 <= 0.024126 ok (ratio 0.867)
    (b) max_psi |mean G_psi| = 1.93e-16 (R = 0.147) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 4.6e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (grid; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0559 ok; d=exact osc: 0.5042 | 0.1406 ok
    (e) P(O_c>=R/2) = 0.0064926 <= (L-1)V/2^n = 0.32812 ok; P(A-1<=R/2) = 0.0016861; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.37081 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.3994 eps=0.0709: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9375 ok
-   (f) M=10 eta=0.90 tau=0.3662 eps=0.0709: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 1.337 ok
+   (f) C=8 M=10 eta=0.50 tau=0.3994 eps=0.0709: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9375 ok
+   (f) C=8 M=10 eta=0.90 tau=0.3662 eps=0.0709: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 1.337 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1997 eps=0.0709: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9375 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1831 eps=0.0709: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 1.337 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +1.3e-17     1.1726     0.7586    1.5171    2.0000    0.5000 |  0.0000    0.5000 |  0.0559
        parity        +2.9e-18     0.5874     0.4486    0.8971    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -1063,14 +1289,16 @@ n=6 u=0.25 r=2 L=4           tuples=16777216  m_r=0.036764 R=0.14705 V=7 eta''=0
        rand_pm1      -2.6e-18     0.6175     0.6727    1.8114    2.0000    0.5000 |  0.0000    0.5000 |  0.0001
        rand_tern     +5.8e-19     0.5641     0.5969    1.4266    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_unif     -1.4e-18     0.3110     0.3523    1.0562    1.9446    0.5000 |  0.0000    0.5000 |  0.0000
-n=6 u=1 r=1 L=4              tuples=16777216  m_r=0.026848 R=0.10739 V=1 eta''=0.0625  [45.9s]
+n=6 u=1 r=1 L=4              tuples=16777216  m_r=0.026848 R=0.10739 V=1 eta''=0.0625  [62.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.002517 <= 0.002517 ok (ratio 1.000)
    (b) max_psi |mean G_psi| = 1.11e-15 (R = 0.107) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 2.2e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (grid; all t | only t where the bound is < 1): d=4m_r: 0.5062 | 0.0190 ok; d=2m_r: 0.5280 | 0.3801 ok; d=exact osc: 0.5280 | 0.3801 ok
    (e) P(O_c>=R/2) = 0.0016861 <= (L-1)V/2^n = 0.046875 ok; P(A-1<=R/2) = 0.0016861; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.06105 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50 tau=0.2917 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.5625 ok
-   (f) M=10 eta=0.90 tau=0.2675 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=10 eta=0.50 tau=0.2917 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=10 eta=0.90 tau=0.2675 eps=0.0523: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=10 eta=0.50 tau=0.1459 eps=0.0523: P(exists i |G_i|>tau) = 5.01e-05 <= eta ok; P(exists i |bias_i|>tau) = 5.01e-05; P(not good) = 0.0017362 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=10 eta=0.90 tau=0.1337 eps=0.0523: P(exists i |G_i|>tau) = 0.00298 <= eta ok; P(exists i |bias_i|>tau) = 5.01e-05; P(not good) = 0.0017362 <= eta+eta'' = 0.9625 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -1.5e-19     1.9302     1.0000    2.0000    2.0000    0.5000 |  0.0000    0.5000 |  0.3801
        parity        -3.6e-18     1.9302     1.0000    2.0000    2.0000    0.5000 |  0.0000    0.5000 |  0.3801
@@ -1082,14 +1310,16 @@ n=6 u=1 r=1 L=4              tuples=16777216  m_r=0.026848 R=0.10739 V=1 eta''=0
        rand_pm1      -1.1e-15     1.8834     1.2188    2.0000    2.0000    0.5019 |  0.0190    0.5280 |  0.3782
        rand_tern     -6.9e-17     1.5821     1.1250    2.0000    2.0000    0.5019 |  0.0000    0.5086 |  0.2214
        rand_unif     +4.0e-18     1.1210     0.9118    1.9446    1.9446    0.5000 |  0.0000    0.5000 |  0.0322
-n=6 u=0.25 r=3 L=4           tuples=16777216  m_r=0.14484 R=0.57936 V=22 eta''=1.375  [39.2s]
+n=6 u=0.25 r=3 L=4           tuples=16777216  m_r=0.14484 R=0.57936 V=22 eta''=1.375  [61.4s]
    (a) max[(R-O_c)-(A-1)] = +2.22e-16 ok; max[(A-1)-R] = -1.07e-01 ok; E O_c = 0.22823 <= 0.29873 ok (ratio 0.764)
    (b) max_psi |mean G_psi| = 1.40e-16 (R = 0.579) ok; one-centre oscillation / m_r: max over psi = 1.6323  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 7.0e-16 ok
    (d) sup_t P(|G|>=t)/McDiarmid (grid; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5003 | 0.0000 ok
    (e) P(O_c>=R/2) = 0.14268 <= (L-1)V/2^n = 1.0312 ok; P(A-1<=R/2) = 0.0064926; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.81453 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=10 eta=0.50: least tau allowed = 1.574 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=10 eta=0.90: least tau allowed = 1.443 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.50: least tau allowed = 1.574 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=10 eta=0.90: least tau allowed = 1.443 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=10 eta=0.50 tau=0.7868 eps=0.2544: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0064926 <= eta+eta'' = 1.875 ok
+   (f) C=2 M=10 eta=0.90 tau=0.7214 eps=0.2544: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0064926 <= eta+eta'' = 2.275 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         -1.7e-17     0.5610     0.3085    1.1073    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        parity        -5.9e-20     0.0578     0.0849    0.3893    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -1101,14 +1331,16 @@ n=6 u=0.25 r=3 L=4           tuples=16777216  m_r=0.14484 R=0.57936 V=22 eta''=1
        rand_pm1      +7.8e-19     0.2551     0.2390    1.1036    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_tern     +1.0e-17     0.2282     0.2259    0.8754    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_unif     -5.4e-18     0.1156     0.1242    0.4902    1.9446    0.5000 |  0.0000    0.5000 |  0.0000
-n=6 u=ln2(exact) r=2 L=4     tuples=16777216  m_r=0.14062 R=0.5625 V=7 eta''=0.4375  [51.7s]
+n=6 u=ln2(exact) r=2 L=4     tuples=16777216  m_r=0.14062 R=0.5625 V=7 eta''=0.4375  [61.0s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.074707 <= 0.092285 ok (ratio 0.810)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0795 ok; d=exact osc: 0.5024 | 0.1447 ok
    (e) P(O_c>=R/2) = 0.0064926 <= (L-1)V/2^n = 0.32812 ok; P(A-1<=R/2) = 0.0016861; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.37081 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 1.506 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 1.377 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 1.506 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 1.377 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50 tau=0.7529 eps=0.2478: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9375 ok
+   (f) C=2 M=9 eta=0.90 tau=0.6884 eps=0.2478: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 1.337 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     1.2314     0.7778    1.5556    2.0000    0.5000 |  0.0000    0.5000 |  0.0795
        parity        +0.0e+00     0.3964     0.3333    0.6667    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -1119,14 +1351,16 @@ n=6 u=ln2(exact) r=2 L=4     tuples=16777216  m_r=0.14062 R=0.5625 V=7 eta''=0.4
        halfcube      +0.0e+00     0.6157     0.3889    0.7778    1.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_pm1      +0.0e+00     0.6859     0.7161    1.8264    2.0000    0.5000 |  0.0000    0.5000 |  0.0002
        rand_tern     +0.0e+00     0.6234     0.6389    1.4722    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
-n=6 u=ln2(exact) r=3 L=4     tuples=16777216  m_r=0.625 R=2.5 V=22 eta''=1.375  [36.1s]
+n=6 u=ln2(exact) r=3 L=4     tuples=16777216  m_r=0.625 R=2.5 V=22 eta''=1.375  [61.2s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = -3.75e-01 ok; E O_c = 0.8584 <= 1.2891 ok (ratio 0.666)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 1.7000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5000 | 0.0000 ok; d=2m_r: 0.5000 | 0.0000 ok; d=exact osc: 0.5001 | 0.0577 ok
    (e) P(O_c>=R/2) = 0.077789 <= (L-1)V/2^n = 1.0312 ok; P(A-1<=R/2) = 0.0016861; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.81453 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50: least tau allowed = 6.693 > 1 -- hypotheses of Theorem A' cannot be met here
-   (f) M=9 eta=0.90: least tau allowed = 6.119 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.50: least tau allowed = 6.693 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=8 M=9 eta=0.90: least tau allowed = 6.119 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.50: least tau allowed = 3.346 > 1 -- hypotheses of Theorem A' cannot be met here
+   (f) C=2 M=9 eta=0.90: least tau allowed = 3.060 > 1 -- hypotheses of Theorem A' cannot be met here
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     0.6992     0.4000    1.2000    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        parity        +0.0e+00     0.0651     0.1000    0.4250    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
@@ -1137,14 +1371,16 @@ n=6 u=ln2(exact) r=3 L=4     tuples=16777216  m_r=0.625 R=2.5 V=22 eta''=1.375  
        halfcube      +0.0e+00     0.3496     0.2000    0.6000    1.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_pm1      +0.0e+00     0.3443     0.3260    1.2328    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
        rand_tern     +0.0e+00     0.3106     0.3086    0.9750    2.0000    0.5000 |  0.0000    0.5000 |  0.0000
-n=6 u=ln2(exact) r=1 L=4     tuples=16777216  m_r=0.015625 R=0.0625 V=1 eta''=0.0625  [36.8s]
+n=6 u=ln2(exact) r=1 L=4     tuples=16777216  m_r=0.015625 R=0.0625 V=1 eta''=0.0625  [47.3s]
    (a) max[(R-O_c)-(A-1)] = +0.00e+00 ok; max[(A-1)-R] = +0.00e+00 ok; E O_c = 0.0014648 <= 0.0014648 ok (ratio 1.000)
    (b) sum over all tuples of N^2*G_psi = 0 for all psi (integers) ok; one-centre oscillation / m_r: max over psi = 2.0000  [<= 2||psi|| ok, <= 4 ok, <= osc(phi) (referee) ok]
    (c) max |bias - G/A| = 5.6e-17 ok
    (d) sup_t P(|G|>=t)/McDiarmid (exact; all t | only t where the bound is < 1): d=4m_r: 0.5061 | 0.0190 ok; d=2m_r: 0.5279 | 0.3801 ok; d=exact osc: 0.5279 | 0.3801 ok
    (e) P(O_c>=R/2) = 0.0016861 <= (L-1)V/2^n = 0.046875 ok; P(A-1<=R/2) = 0.0016861; [O_c<R/2 => A-1>R/2] ok; P(w_c(x0)!=1) = 0.06105 = 1-(1-V/2^n)^L <= eta'' ok
-   (f) M=9 eta=0.50 tau=0.1673 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.5625 ok
-   (f) M=9 eta=0.90 tau=0.1530 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9625 ok
+   (f) C=8 M=9 eta=0.50 tau=0.1673 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.5625 ok
+   (f) C=8 M=9 eta=0.90 tau=0.1530 eps=0.0308: P(exists i |G_i|>tau) = 0 <= eta ok; P(exists i |bias_i|>tau) = 0; P(not good) = 0.0016861 <= eta+eta'' = 0.9625 ok
+   (f) C=2 M=9 eta=0.50 tau=0.0837 eps=0.0308: P(exists i |G_i|>tau) = 5.01e-05 <= eta ok; P(exists i |bias_i|>tau) = 5.01e-05; P(not good) = 0.0017362 <= eta+eta'' = 0.5625 ok
+   (f) C=2 M=9 eta=0.90 tau=0.0765 eps=0.0308: P(exists i |G_i|>tau) = 0.00298 <= eta ok; P(exists i |bias_i|>tau) = 0.000125; P(not good) = 0.0018113 <= eta+eta'' = 0.9625 ok
        phi             mean G   sd G/m_r   max|G|/R   osc/m_r  osc(phi) ratio d=4m (all|nt) ratio d=2m (all|nt)
        chi_1         +0.0e+00     1.9302     1.0000    2.0000    2.0000    0.5000 |  0.0000    0.5000 |  0.3801
        parity        +0.0e+00     1.9302     1.0000    2.0000    2.0000    0.5000 |  0.0000    0.5000 |  0.3801

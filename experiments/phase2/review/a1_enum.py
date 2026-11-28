@@ -21,8 +21,10 @@ for a fixed list of observables phi with values in [-1, 1].  Checked:
       own hypothesis; a ratio > 1 there would mean a bug in this script).
   (e) Markov step:  P(O_c >= R/2) <= (L-1) V / 2^n <= eta'' ;  O_c < R/2  =>  A(w_c) - 1 > R/2.
   (f) the good event of Theorem A' where its hypotheses can be met on a small cube:
-      M = number of observables, tau = sqrt(8 R m_r ln(2M/eta)) (the least tolerance allowed),
+      M = number of observables, tau = sqrt(C R m_r ln(2M/eta)) (the least tolerance allowed),
       eps = ln(1 + R/2) (the largest accuracy allowed):  exact P(not good) against eta + eta''.
+      C = 8 is the text that was reviewed (commit 67956b7); C = 2 is the text as revised on
+      2026-11-28 03:17 UTC after this review (d = 2 m_r in McDiarmid's inequality).
 
 Two modes: floating point (any u) and exact integers (u = ln 2, where e_r is integer valued and all
 sums are integers; the float64 matrix products used there are exact because all partial sums are
@@ -185,10 +187,11 @@ def run_config(n, u, r, L, exact, seed=20261128, verbose=False, etas=(0.5, 0.9),
     max_lower_viol = -np.inf     # max of (R - O_c) - (A-1): must be <= 0
     max_upper_viol = -np.inf     # max of (A-1) - R: must be <= 0
     max_ident = 0.0
-    taus = [math.sqrt(8.0 * R * m_r * math.log(2.0 * K / eta)) for eta in etas]
-    n_badG = [0] * len(etas)      # exists i: |G_i| > tau
-    n_badD = [0] * len(etas)      # exists i: |D_i| > tau   (D = G / A: the actual bias)
-    n_bad = [0] * len(etas)       # not good: (exists i: |D_i| > tau) or A - 1 <= R/2
+    cases = [(cst, eta) for cst in (8.0, 2.0) for eta in etas]          # constant in the hypothesis, eta
+    taus = [math.sqrt(cst * R * m_r * math.log(2.0 * K / eta)) for cst, eta in cases]
+    n_badG = [0] * len(cases)     # exists i: |G_i| > tau
+    n_badD = [0] * len(cases)     # exists i: |D_i| > tau   (D = G / A: the actual bias)
+    n_bad = [0] * len(cases)      # not good: (exists i: |D_i| > tau) or A - 1 <= R/2
     sumS_exact = [0] * K
     probe = {}
 
@@ -312,7 +315,7 @@ def run_config(n, u, r, L, exact, seed=20261128, verbose=False, etas=(0.5, 0.9),
                EO=EO, EO_bound=EO_bound, P_O_ge=n_O_ge / ntot, P_A_le=n_A_le / ntot,
                n_implication_viol=n_implication_viol, P_hit0=n_hit0 / ntot,
                max_lower_viol=max_lower_viol, max_upper_viol=max_upper_viol, max_ident=max_ident,
-               ratios=ratios, key=key, taus=taus, etas=etas,
+               ratios=ratios, key=key, taus=taus, etas=etas, cases=cases,
                P_badG=[x / ntot for x in n_badG], P_badD=[x / ntot for x in n_badD], P_bad=[x / ntot for x in n_bad],
                sumS_exact=sumS_exact if exact else None, secs=time.time() - t0, probe=probe, K=K)
     return res
@@ -378,14 +381,14 @@ def report(res, verbose):
     c_e3 = check(abs(res["P_hit0"] - hit_exact) < 1e-12 and res["P_hit0"] <= res["eta2"] + 1e-15, tag + ": hitting probability")
     print("   (e) P(O_c>=R/2) = %.5g <= (L-1)V/2^n = %.5g %s; P(A-1<=R/2) = %.5g; [O_c<R/2 => A-1>R/2] %s; P(w_c(x0)!=1) = %.5g = 1-(1-V/2^n)^L <= eta'' %s" % (
         res["P_O_ge"], (L - 1) * V / (1 << n), c_e1, res["P_A_le"], c_e2, res["P_hit0"], c_e3))
-    for eta, tau, pg, pd, pb in zip(res["etas"], res["taus"], res["P_badG"], res["P_badD"], res["P_bad"]):
+    for (cst, eta), tau, pg, pd, pb in zip(res["cases"], res["taus"], res["P_badG"], res["P_badD"], res["P_bad"]):
         if tau <= 1.0:
-            c_f1 = check(pg <= eta + 1e-15, tag + ": P(exists |G|>tau) > eta")
-            c_f2 = check(pb <= eta + res["eta2"] + 1e-15, tag + ": P(not good) > eta + eta''")
-            print("   (f) M=%d eta=%.2f tau=%.4f eps=%.4f: P(exists i |G_i|>tau) = %.3g <= eta %s; P(exists i |bias_i|>tau) = %.3g; "
-                  "P(not good) = %.5g <= eta+eta'' = %.4g %s" % (K, eta, tau, math.log1p(R / 2), pg, c_f1, pd, pb, eta + res["eta2"], c_f2))
+            c_f1 = check(pg <= eta + 1e-15, tag + ": P(exists |G|>tau) > eta (C=%g)" % cst)
+            c_f2 = check(pb <= eta + res["eta2"] + 1e-15, tag + ": P(not good) > eta + eta'' (C=%g)" % cst)
+            print("   (f) C=%g M=%d eta=%.2f tau=%.4f eps=%.4f: P(exists i |G_i|>tau) = %.3g <= eta %s; P(exists i |bias_i|>tau) = %.3g; "
+                  "P(not good) = %.5g <= eta+eta'' = %.4g %s" % (cst, K, eta, tau, math.log1p(R / 2), pg, c_f1, pd, pb, eta + res["eta2"], c_f2))
         else:
-            print("   (f) M=%d eta=%.2f: least tau allowed = %.3f > 1 -- hypotheses of Theorem A' cannot be met here" % (K, eta, tau))
+            print("   (f) C=%g M=%d eta=%.2f: least tau allowed = %.3f > 1 -- hypotheses of Theorem A' cannot be met here" % (cst, K, eta, tau))
     if verbose:
         print("       %-11s %10s %10s %10s %9s %9s %19s %19s" % (
             "phi", "mean G", "sd G/m_r", "max|G|/R", "osc/m_r", "osc(phi)", "ratio d=4m (all|nt)", "ratio d=2m (all|nt)"))

@@ -9,9 +9,11 @@ Written from docs/phase2/PHASE2_REPORT.md (sections 1, 2.3) only; nothing import
     ell = ln((1-rho0)/rho0)/u,   hbar(lam) = KL(rho0 - lam/u || 1/2) - lam,
     m_r = 2^-n sum_{j<r} C(n,j) (e^{u(r-j)} - 1),   V(n,r-1) = sum_{j<r} C(n,j).
 
-Recipe (proof of Corollary A'):  r = largest radius with 8 (2 e^eps - 1) m_r ln(2M/eta) <= tau^2,
+Recipe (proof of Corollary A'):  r = largest radius with C (2 e^eps - 1) m_r ln(2M/eta) <= tau^2,
 L = ceil(2 (e^eps - 1)/m_r), tau = e^{-gamma n};  claimed: the hypotheses of Theorem A' hold and
 n^-1 ln(2^n/(L V(n,r-1))) -> hbar(2 gamma + beta), eta'' = L V(n,r-1)/2^n -> 0.
+C = 8 in the text that was reviewed (commit 67956b7; parts E, F); C = 2 in the text as revised after the
+review (commit ddae0c3; part E2).
 """
 import math
 import sys
@@ -181,11 +183,12 @@ def part_D():
 
 
 # ---------------------------------------------------------------- the recipe at finite n
-def recipe(n, u, gamma, eps, lnln):
-    """lnln = ln ln(2M/eta).  Everything in logarithms.  R = L m_r lies in [2(e^eps-1), 2(e^eps-1)+m_r]
+def recipe(n, u, gamma, eps, lnln, cst=8.0):
+    """lnln = ln ln(2M/eta); cst = the constant C in  C R m_r ln(2M/eta) <= tau^2  (8: the text reviewed; 2: the
+    text as revised after the review).  Everything in logarithms.  R = L m_r lies in [2(e^eps-1), 2(e^eps-1)+m_r]
     by the choice of L (ceiling); the second hypothesis of Theorem A' is checked with the upper end."""
     ln_tau2 = -2.0 * gamma * n
-    lnT = ln_tau2 - math.log(8.0 * (2.0 * math.exp(eps) - 1.0)) - lnln       # the condition is  m_r <= T
+    lnT = ln_tau2 - math.log(cst * (2.0 * math.exp(eps) - 1.0)) - lnln       # the condition is  m_r <= T
     if ln_m(n, u, 1) > lnT:
         return None
     lo, hi = 1, n + 2                      # invariant: ln m_lo <= lnT < ln m_hi
@@ -211,7 +214,7 @@ def recipe(n, u, gamma, eps, lnln):
     R_up = 2.0 * math.expm1(eps) + m_r
     lv = ln_V(n, r)
     expo = math.log(2.0) - (lnL + lv) / n
-    hypB_margin = ln_tau2 - (math.log(8.0) + math.log(R_up) + lm + lnln)     # >= 0 required
+    hypB_margin = ln_tau2 - (math.log(cst) + math.log(R_up) + lm + lnln)     # >= 0 required
     return dict(r=r, ln_m=lm, lnL=lnL, R=R_lo, m_lt_1=lm < 0, hypA=R_lo >= 2.0 * math.expm1(eps) * (1 - 1e-12),
                 hypB_margin=hypB_margin, R_hi=R_up <= 2 * math.exp(eps) - 1 + 1e-12,
                 expo=expo, ln_eta2=-n * expo, ln_eta_old=math.log(5.0 * R_lo / 2.0) + gamma * n - n * expo)
@@ -257,9 +260,26 @@ def part_E():
                          res["expo"], res["expo"] - hb, res["ln_eta2"], fin_s, res["ln_eta_old"]))
 
 
+def part_E2():
+    print("== E2. the same recipe with the constant 2 (text as revised after this review: 2 R m_r ln(2M/eta) <= tau^2;")
+    print("       radius = largest r with 2 (2e^eps - 1) m_r ln(2M/eta) <= tau^2);  u = 1, eps = 1, eta = 0.1 ==")
+    c = consts(1)
+    for (gamma, label, M) in ((0.005, "M=100", 100), (0.03, "M=100", 100), (0.045, "M=100", 100), (0.03, "M=1", 1), (0.045, "M=1", 1), (0.05, "M=1", 1)):
+        hb = float(hbar(c, mp.mpf(str(2 * gamma))))
+        lnln = math.log(math.log(2.0 * M / 0.1))
+        line = "   gamma=%.3f %-6s hbar(2 gamma)=%.6f:" % (gamma, label, hb)
+        for n in (2000, 20000, 200000, 2000000):
+            res = recipe(n, 1.0, gamma, 1.0, lnln, cst=2.0)
+            hyp = res["hypA"] and res["hypB_margin"] >= -1e-9 and res["m_lt_1"] and res["R_hi"]
+            check(hyp, "recipe (constant 2) hypotheses gamma=%s %s n=%d" % (gamma, label, n))
+            line += "  n=%d: expo %.6f, ln eta''=%.1f, ln eta'(old)=%+.1f, hyp %s;" % (n, res["expo"], res["ln_eta2"], res["ln_eta_old"], "ok" if hyp else "FAIL")
+        print(line)
+
+
 # ---------------------------------------------------------------- the corner delta > 1/2
 def part_F():
-    print("== F. degenerate corner: delta > 1/2 together with eta + eta'' > 1 ==")
+    print("== F. degenerate corner: delta > 1/2 together with eta + eta'' > 1  (the statement of commit 67956b7, which had no")
+    print("      restriction on delta; the revised text assumes delta <= 1/2.  With the revised constant 2 the same example works.) ==")
     n, u, r, L, eps, tau, M, eta = 4, 0.1, 1, 16, 0.05, 1.0, 1, 0.5
     m_r = math.expm1(u) / 2 ** n
     V = 1
@@ -314,6 +334,8 @@ def main():
     part_D()
     print()
     part_E()
+    print()
+    part_E2()
     print()
     part_F()
     print()
