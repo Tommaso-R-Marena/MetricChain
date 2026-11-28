@@ -2697,7 +2697,13 @@ and ours.  The statements that survived are in the bridge note; these did not, o
 5. **The counterexample for correlated samples at 2.9 standard errors.**  With 240 replicates the
    simulated excess over the mean of the endpoints was `51 ± 18`; it was not stated on that basis.  With
    1 000 replicates (two seeds) it is `60 ± 9` and `64 ± 9`, and the formula gives `67.3`.
-6. **Not obtained.**  A lower bound for algorithms with samples above the `0.40·h` of Theorem E; an
+6. **A result announced that was not ours.**  From the handoff alone we derived the dual form of the
+   MBAR division's variance and read its allocation problem as `c`-optimal design, and sent both as a
+   proposal with a prior-art pointer "to be read by you".  A second fetch forty minutes later showed
+   that the division had the dual formula, the Elfving identity, the equivalence theorem and
+   machine-checked duality in commits made before our message, and had read the 1988 paper we pointed
+   to.  Lesson: fetch again immediately before sending, not only before starting.
+7. **Not obtained.**  A lower bound for algorithms with samples above the `0.40·h` of Theorem E; an
    adaptive algorithm with observables of the energy that reaches `θ_hint(γ)`; a common model with both
    the base measure and the energy partly unknown; any meaning for the coincidence of the two `1/k²`
    scalings (nested levels; rungs of a ladder).

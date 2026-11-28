@@ -21,6 +21,16 @@ of its statements (A1, A2 numerically) and what we only relate to.  Its results 
 labels (A1, A2, B3, C2, D1, D2, E3, G1).  Ours carry the letters F and J, which neither it nor the
 Phase II report uses.
 
+*A second fetch, after this note was written* (06:44 UTC; that branch at `12af33a`, the hierarchy
+division's at `3e3e7d9`).  We read the MBAR division's `docs/mbar/PRIOR_ART.md` in full and the header of
+its Lean file `experiments/mbar/lean/MBAR/Allocation.lean`, and the hierarchy division's note to it,
+HIE-MSG-0003, in full.  Two consequences, entered below where they belong: **the dual form and the
+optimal-design reading of §6.2 had been found by the MBAR division itself an hour earlier**, with weak
+and strong duality machine-checked and a far wider literature search than ours — §6.2 is a second
+derivation and an independent numerical confirmation, not a contribution; and HIE-MSG-0003 gives the
+complementary reading of the two models, with a statement that pairs with Theorem F (§2, last
+paragraph).
+
 ---
 
 ## 0. Results at a glance
@@ -32,7 +42,7 @@ Phase II report uses.
 | **Proposition F2** | drawing one approximate sample of the ensemble costs at least `e^{n(h − o(1))}` evaluations | [P] |
 | **Proposition F3** | a change of `ln A` cannot be hidden from samples: weights that agree off `D` have ensembles at distance `≥ μ₀(Dᶜ)(1 − A₀/A₁)` | [V] |
 | **Theorem J** | observables that are functions of the *energy*, at tolerance `e^{−γn}`: the cost has exponent between `θ_hint(γ)` and `min(h, θ_na(γ))`; both vanish at `γ* = ln cosh(u/2)`, above which a bounded number of evaluations suffices — a sharp threshold | [P]; arithmetic [V]; [N] |
-| §6.2 | the MBAR division's variance (its A1) in dual form: `V_c(s) = max_a (Σ c_k E_k a)²/Σ s_k Var_k(a) = bᵀM(s)⁺b` with `M(s)` *linear* in `s` — allocation is a `c`-optimal design problem | [P] given its A1; [N] on 300 instances |
+| §6.2 | the MBAR division's variance (its A1) in dual form: `V_c(s) = max_a (Σ c_k E_k a)²/Σ s_k Var_k(a) = bᵀM(s)⁺b` with `M(s)` *linear* in `s` — allocation is a `c`-optimal design problem.  **Found first, independently, by that division**; ours is a second derivation | [P] given its A1; [N] on 300 instances |
 | §6.3 | with correlated samples of unequal correlation times the variance of MBAR on the raw samples is **not convex** in the allocation (counterexample, simulated); with effective counts it is | [N] counterexample; [P] |
 | §4, §6.4 | the oracle models are not equivalent, in either direction (two counterexamples) | [P] |
 
@@ -119,6 +129,15 @@ the class equals the exponent of its largest two-state effective resistance** �
 `h`, next to "hinted exponent" and "Chernoff information".  The same combinatorial number carries
 both: Theorem 11.25 gives `E|Q| ≥ (1−2δ)2ⁿ/V(n,k)` for an accuracy below `ln(1 + m_{k+1})`, and Theorem F
 gives `1/Ω₁ ≤ 2ⁿ/(V(n,k)+1)` at the largest `k` with `m_{k+1} ≤ ½`.
+
+*A pair.*  The hierarchy division's note to the MBAR division (HIE-MSG-0003 §2.1, read after this section
+was written; its proof is three lines of entropy inequalities, unreviewed, and not checked by us) states
+that the *largest relative entropy* `KL(μ_w‖π)` over the class is `n·a`, attained by the cone — the
+Chatterjee–Diaconis sample size of one-shot reweighting, uniformly over the class.  Theorem F is the
+statement of the same kind for the other exponent: the *smallest overlap* over the class is `e^{−nh}`,
+attained by the cone.  Stein's exponent and Chernoff's, each extremal at the cone over all of `𝒲_u`.
+That note reads the two models from the other side — ours is the MBAR model with an *unsampled*
+target and designed references — where §3 below samples the target.
 
 ---
 
@@ -339,9 +358,18 @@ the science division's statement for the mean energy (its Proposition 5b, in the
 by a pair of one dip against two.  With the *exact* law of the energy the problem is trivial:
 `E_μ[1/w] = 1/A`.
 
-(4) *Not settled.*  For `0 < γ < γ*` the two bounds differ; the upper bound uses the oracle with
-*non-adaptive* evaluations.  Whether adaptive evaluations of the truncated weight `min(w, θ)` — whose
-supremum is at most `e^{n(σ+γ)}` times its mean — reach `θ_hint(γ)` is the natural question.
+(4) *Not settled; a conjecture.*  For `0 < γ < γ*` the two bounds differ.  The upper bound evaluates the
+truncated weight `v = min(w, θ)` non-adaptively; `v` is admissible and bounded by `θ ≤ e^{nκ}·E_π v`, with
+`κ = KL(ρ‖½)` at the point `ρ` of the curve where `KL(ρ‖p_u) = γ`.  Among weights with such a cap the
+natural hard instance is a *capped dip* — a plateau at the cap, of radius `ρ′n` with `KL(ρ′‖½) = κ`, and
+a skirt of slope `u` down to the floor — which costs `2ⁿ/V(n, (ρ′ + κ/u)n)` evaluations to find.  Here
+`ρ′ = ρ`, and `ρ + KL(ρ‖½)/u = ρ₀ + γ/u` because `KL(ρ‖p_u) = KL(ρ‖½) + u(ρ − ρ₀)`: the capped dip costs
+`e^{nθ_hint(γ)}`, the lower bound of (a) seen from the other side.  We conjecture that the nested
+algorithms of the archive, run on a capped weight (the cap in place of their closure test), reach it.
+Then `θ_hint(γ)` would be the exponent for every `γ < γ*`, and **a tolerance `e^{−γn}` on observables of the
+energy would be worth exactly an extensive accuracy `γn`** — as `e^{γn}` samples are worth exactly that
+to non-adaptive evaluation (§3, remark 2).  A proof means redoing the level recursion (theory report,
+Theorems 11.52–11.58) for capped weights; it was not attempted.
 
 ---
 
@@ -358,6 +386,16 @@ differences to `10⁻⁷`; midpoint convexity without exception (`p2_bridge.py` 
 statements on small instances, not the proofs, and says nothing about continuous supports.
 
 ### 6.2 The dual (Cramér–Rao) form, and allocation as optimal design
+
+*Superseded as a contribution.*  When this subsection was written we had read only the handoff.  The
+MBAR division's own commits of 05:42 and 06:06 UTC (`0561f19`, `12af33a`) contain the dual formula
+`V = sup_h {2ℓ(h) − Σ_k s_k Var_k h}`, an Elfving-type identity, the equivalence theorem, the concavity
+and superadditivity of the precision, weak and strong duality machine-checked on finite supports, and
+a prior-art file which has read Gill, Vardi and Wellner (1988) — their information operator is linear
+in the sampling fractions, and their Problem 6.1 poses the design question — and concludes that A1–A6
+are "the optimal-design theory of the biased sampling model, written out".  The text below is kept
+as a second, independent derivation that arrives at the same place, with an independent numerical
+confirmation; the prior-art remark at its end is weaker than that division's own.
 
 **Proposition [P, given the primal representation and the minimiser of its A1; [N] in finite
 support].**  For `c ⊥ 1` and positive weights `s`,

@@ -3057,7 +3057,9 @@ statements, proofs and counterexamples, and not duplicate its work.  No addition
   with an exact threshold `ln cosh(u/2)` for the precision.
 * **For the other division.**  Its convexity theorem for the allocation of samples checked on 300 random
   instances; its variance has a dual form with an information operator *linear* in the allocation
-  (so: `c`-optimal design); and a **counterexample**: with correlated samples of unequal correlation
+  (so: `c`-optimal design) — **which that division had found itself an hour before** (seen at a second
+  fetch at 06:44 UTC, after our message; the note and the message were corrected to say that it is
+  theirs); and a **counterexample**: with correlated samples of unequal correlation
   times the variance of MBAR on the raw samples is not convex, not even quasi-convex, in the allocation
   (three states on four points; simulated at seven standard errors), while the estimator weighted by the
   correlation times is.  Sent as THY-MSG-0024.

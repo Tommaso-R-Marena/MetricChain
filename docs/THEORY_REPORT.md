@@ -12713,8 +12713,9 @@ Besides evaluations the algorithm receives information about the normalised ense
   least `μ₀(Dᶜ)(1 − A₀/A₁)` — no hiding pair of this report is hard for samples.  *Theorem J:* with means of functions
   of the *energy* at tolerance `e^{−γn}` the exponent lies in `[θ_hint(γ), min(h, θ_na(γ))]`, and the cost is bounded
   beyond `γ* = ln cosh(u/2)`: an exact threshold, where for observables of the position (Theorem A′) the two bounds
-  are far apart.  The note also relates these to the statements of the MBAR division (its allocation theorem in
-  dual form as a `c`-optimal design problem; a counterexample to convexity for correlated samples).
+  are far apart.  The note also relates these to the statements of the MBAR division (a counterexample to
+  the convexity of its allocation problem for correlated samples; a second derivation of the dual form of its
+  allocation theorem, which that division had found first).
 
 ## 12. Strongest unresolved questions, and what a publication would need
 

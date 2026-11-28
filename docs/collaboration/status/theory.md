@@ -23,10 +23,37 @@ Phase II divisions (answers ENG-MSG-0009 §4).  Final report: `docs/phase2/FINAL
 2026-11-28 04:20 UTC (93 Lean files, 5128 declarations, 721 headline theorems; 196 harness tests; 645 mutations,
 644 caught and one expected pass).
 
-**Read of the other Phase II branches.**  `research/phase2-certified-inference` at `bf7b71a` (first read
-2026-11-28 01:19 UTC; unchanged at the last fetch, 02:20 UTC): ENG-MSG-0009 read in full and answered; its
-note `CERTIFIED_INFERENCE.md` not read.  `research/phase2-adaptive-hierarchy`: not on the remote at either
-fetch.  No answer to THY-MSG-0023 had arrived.
+**After the owner's collaboration update of 2026-11-28** (a fourth Phase II division, certified MBAR;
+stay informed, relate, do not assume the oracle models equivalent; no additional expenditure):
+`docs/phase2/BRIDGE_NOTE.md` — every ensemble of the class overlaps the reference by at least
+`e^{−nh−O(log n)}` (Theorem F); samples in place of adaptivity (Corollary F1); one sample costs `e^{nh}`
+evaluations (F2); no hiding from samples (F3); observables of the energy with an exact precision
+threshold `ln cosh(u/2)` (Theorem J); that division's allocation theorem in dual form, and a
+counterexample to its extension to correlated samples.  **Unrefereed.**  `proofs/Frontiers/BridgeOverlap.lean`
+(12 declarations), `experiments/phase2/p2_bridge.py` (11 checks), harness XXVIII.5 (13 mutations; the block
+XXVIII now has five tests and 40 mutations).  Message THY-MSG-0024 (to the three other Phase II
+divisions; it also carries a linked correction of THY-MSG-0023 §2: the 400-level run is verified in
+full, with the checker changed in three places in memory — `docs/phase2/R29_RESOLUTION.md` §4.2).
+<!-- STATUS:AUDIT2 -->
+Audit after these additions: *(running when this was written)*.
+<!-- /STATUS:AUDIT2 -->
+
+**Read of the other Phase II branches** (last fetch 2026-11-28 05:27 UTC).
+`research/phase2-certified-inference` at `1bb0dcc` (the division has stopped): ENG-MSG-0009 and
+ENG-MSG-0010 read in full, answered in THY-MSG-0023 §§2–3 and THY-MSG-0024 §3; its note
+`CERTIFIED_INFERENCE.md` and its response ENG-RES-0020 not read.  `research/phase2-adaptive-hierarchy` at
+`e3e6e30` (the division has stopped): HIE-MSG-0001, HIE-MSG-0002, HIE-REQ-0001 and its status file read;
+**its reports were not read**, its request for an attack on its Lemma B and Theorem H1 was not met, and
+its results (three rounds suffice on every class with boundedly many hidden symmetry classes) are
+recorded under Proposition 11.88 of our theory report as reported, not verified; answered in
+THY-MSG-0024 §4; at `3e3e7d9` (fetch of 06:44 UTC) its note to the MBAR division, HIE-MSG-0003, read in
+full (it pairs with our Theorem F; not checked).  `research/phase2-certified-mbar` at `003dad8` (opened
+05:23 UTC): the provenance file and the main note of its imported package read in full; at `12af33a`
+(fetch of 06:44 UTC): its `PRIOR_ART.md` in full and the header of its Lean file on allocation — **it had
+found the dual form of its variance and the optimal-design reading before our message, which is
+corrected accordingly**; no code run, no archives unpacked, none of its proofs reviewed; THY-MSG-0024 §2
+is addressed to it.  No reply to either of our messages is awaited: this division does
+not resume when a message arrives.
 
 ## HALTED under the research owner's consolidation directive of 2026-11-27
 

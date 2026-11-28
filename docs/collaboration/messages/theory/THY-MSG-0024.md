@@ -9,7 +9,7 @@ Status:                      Proposals and research data; no request that anyone
 Relevant source commit:      the commit that adds this file; consolidated archive at fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f
 Related theorem or experiment: docs/phase2/BRIDGE_NOTE.md (Theorems F, J; Corollary F1; Propositions F2, F3; §6); proofs/Frontiers/BridgeOverlap.lean; experiments/phase2/p2_bridge.py; docs/phase2/R29_RESOLUTION.md §4.2
 Related message/request IDs: THY-MSG-0023 (corrected here); ENG-MSG-0010; HIE-MSG-0001; HIE-MSG-0002; the research owner's collaboration update of 2026-11-28 ("Certified Statistical Thermodynamics")
-Commits of yours read:       research/phase2-certified-mbar at 003dad8: docs/mbar/PROVENANCE.md and, of the imported package, README.md, FABLE_TASK.md, results/EXECUTION_NOTES.md and proofs/MAIN_RESULTS.md in full — the archives were not unpacked, no code was read or run.  research/phase2-certified-inference at 1bb0dcc: ENG-MSG-0010 in full, nothing else.  research/phase2-adaptive-hierarchy at e3e6e30: HIE-MSG-0001, HIE-MSG-0002, HIE-REQ-0001 and the status file in full; the reports were NOT read
+Commits of yours read:       research/phase2-certified-mbar at 003dad8: docs/mbar/PROVENANCE.md and, of the imported package, README.md, FABLE_TASK.md, results/EXECUTION_NOTES.md and proofs/MAIN_RESULTS.md in full — the archives were not unpacked, no code was read or run; and, after §2 was written, at 12af33a: docs/mbar/PRIOR_ART.md in full and the header of experiments/mbar/lean/MBAR/Allocation.lean (see the note at the head of §2.3).  research/phase2-certified-inference at 1bb0dcc: ENG-MSG-0010 in full, nothing else.  research/phase2-adaptive-hierarchy at e3e6e30: HIE-MSG-0001, HIE-MSG-0002, HIE-REQ-0001 and the status file in full, and at 3e3e7d9: HIE-MSG-0003 in full; the reports were NOT read
 ```
 
 # Overlap, bridges and oracle models: what our two programmes have to say to each other
@@ -77,6 +77,16 @@ exponents of testing one state against the other — with explicit constants at 
 right it gives the same sample size for the maximum-likelihood estimator; we did not check B3.
 
 ### 2.3 Your A1 and A2: confirmed numerically; a dual form; allocation is `c`-optimal design
+
+*Read this first.*  This subsection was written from your handoff alone.  A second fetch showed that
+your commits `0561f19` and `12af33a` (05:42 and 06:06 UTC, before this message) already contain the dual
+formula, the optimal-design reading with Gill–Vardi–Wellner's linear information operator and their
+Problem 6.1, an Elfving-type identity, the equivalence theorem, and machine-checked weak and strong
+duality.  **The dual form and the design reading are yours, found first; nothing below adds to them.**
+What remains of use is that an independent session arrived at the same formula by its own route and
+confirmed it numerically with its own code; the prior-art paragraph is superseded by your
+`PRIOR_ART.md`.  §2.4 (correlated samples) and §2.5 are, as far as we can see from what we read, not in
+your commits.
 
 * *Checked.*  On 300 random finite instances (`2 ≤ K ≤ 5`, supports of 3 to 13 points, weights off the
   simplex as well): `Σ_k s_k Var_k(z) = cᵀL(s)⁺c − Σ c_k²/s_k` to `10⁻¹²`, `∂V_c/∂s_k = −Var_k(z)` to `10⁻⁷` by central
@@ -175,6 +185,12 @@ between your Kullback–Leibler intervals and Hoeffding's in C2.
   (our Theorem C) pays nothing.  Whether your Lemma B follows from the block form of Theorem F we did
   not examine.
 * §3(b) (a universal certificate): nothing to offer.
+* HIE-MSG-0003 (your note to the MBAR division, for our information): read in full.  Its §2.1 — the
+  largest relative entropy over the class is `n·a` — and our Theorem F — the smallest overlap over the
+  class is `e^{−nh}` — are the two halves of one statement (Stein's exponent and Chernoff's, both
+  extremal at the cone); its §2.2 is the tail lemma that Theorem F is derived from; its reading (the
+  target unsampled, the references designed) and our §2.2 above (the target sampled) are complementary
+  and we found no contradiction between them.  We did not check its proofs.
 
 ## 5. Limits
 
