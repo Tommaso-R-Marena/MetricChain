@@ -3,8 +3,10 @@
 Branch `research/phase2-certified-inference`, created from `research/ubuntu-engineering` at `67b6bc2` on
 2026-11-28 under the research owner's directive D-11 (`../DIRECTIVES.md`).  Baseline for everything
 taken from other divisions: the consolidated archive at `fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f`.
-**The phase is complete and the division has stopped** (D-11: "Stop at completion or the resource
-ceiling.  Do not automatically resume.").  Start with `FINAL_REPORT.md`.
+**The phase was completed on 2026-11-28** (D-11: "Stop at completion or the resource ceiling.  Do not
+automatically resume."); start with `FINAL_REPORT.md`.  **Since the owner's directive D-12 of the same day**
+(a fourth division on multistate free-energy estimation; "Continue your existing bounded research cycles")
+the division works in bounded cycles on that collaboration only: `MBAR_INTEGRATION.md`.
 
 | file | what |
 |---|---|
@@ -13,16 +15,19 @@ ceiling.  Do not automatically resume.").  Start with `FINAL_REPORT.md`.
 | `REVIEW_A.md` | independent adversarial review of the first version of that note and of the library, by a subagent (three critical, eight major findings) |
 | `PROTOCOL.md` | validation protocol with hypotheses, committed before any run; its last section records the deviations |
 | `RESULTS.md` | outcomes of the hypotheses (seven hold, six refuted), the comparative tables, the supplementary experiments |
+| `MBAR_INTEGRATION.md` | addendum under D-12: compositions with multistate free-energy estimation — uncertainty of the free energies as an envelope (Theorem M1), an energy error shared by two states (Proposition M2), which sampling laws need free energies (Proposition M3), the seven sources of uncertainty, evidence, limits |
 | `VERIFICATION_GAPS.md` | Workstream C: the later structural-biology certificates, the old floating-point exploit and its repair, the memoised kernel, referee R29's concerns, certified computation against evaluated formulas |
 | `../../collaboration/messages/engineering/ENG-MSG-0009.md`, `ENG-MSG-0010.md` | opening message to the other two Phase II divisions; its correction after the review, with replies |
 | `../../collaboration/responses/engineering/ENG-RES-0020.md` | answer to the adaptive-hierarchy division's request for an independent replication |
+| `../../collaboration/messages/engineering/ENG-MSG-0011.md` | to the certified-MBAR division (and for the record of the other two): what composes, what we measured, what we would need |
 
-Software: `src/metricchain_eng/certinf/` (`core.py`, `certify.py`, `metric.py`); tests
-`tests/eng/test_certinf.py` (20) and `tests/eng/test_certinf_review.py` (12, one per finding of the review
-that concerns the library, and Theorem 5.4):
+Software: `src/metricchain_eng/certinf/` (`core.py`, `certify.py`, `metric.py`, and since D-12
+`multistate.py`); tests `tests/eng/test_certinf.py` (20), `tests/eng/test_certinf_review.py` (12, one per
+finding of the review that concerns the library, and Theorem 5.4) and `tests/eng/test_certinf_multistate.py`
+(14):
 
     source "$HOME/.venvs/metricchain/bin/activate"
-    python -m pytest tests/eng/test_certinf.py tests/eng/test_certinf_review.py -q
+    python -m pytest tests/eng/test_certinf.py tests/eng/test_certinf_review.py tests/eng/test_certinf_multistate.py -q
 
 Experiments, each with its scripts and stored outputs:
 
@@ -37,6 +42,7 @@ Experiments, each with its scripts and stored outputs:
 | `phase2_gaps/` | Workstream C |
 | `phase2_digest/` | digest of the archive; prior art on the web |
 | `phase2_hie_req/` | the replication for HIE-REQ-0001 |
+| `phase2_mbar/` | D-12: Theorem M1 on enumerable models (`PREDICTIONS.md` written before the runs), the shared energy error, the tail-event diagnostic |
 
 ## Subagents used in this phase
 

@@ -1,5 +1,10 @@
 # Phase II of the Computational Research Division — final report
 
+*Addendum, 2026-11-28, after the owner's directive D-12 (a fourth Phase II division on multistate
+free-energy estimation): `MBAR_INTEGRATION.md`.  The report below is unchanged; where it says that the
+division has stopped, read: stopped at that time, and continued since in bounded cycles for that
+collaboration only.*
+
 *Research owner's directive D-11 ("MetricChain Phase II — Constructive Mathematical Synthesis, Certified
 Inference and Computational Validation").  Branch `research/phase2-certified-inference`.  Written
 2026-11-28 by the coordinating AI session.  The phase is complete; the division has stopped and does not

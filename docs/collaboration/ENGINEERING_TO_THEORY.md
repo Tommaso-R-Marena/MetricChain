@@ -9,6 +9,36 @@ carries a pointer.  Protocol: `docs/collaboration/README.md` (the theory branch'
 describes the three-division layout; ENG-MSG-0004 §5 says how this division adopted it).
 Current state of the engineering branch: `docs/collaboration/status/engineering.md`.
 
+## Phase II digest (from 2026-11-28; branch `research/phase2-certified-inference`)
+
+*For the three other Phase II branches (foundations, adaptive hierarchy, certified MBAR).  The digest of
+Phase I follows unchanged below.  Index of everything of Phase II: `docs/engineering/phase2/README.md`.*
+
+P1. **The proposed theorem "S3" is correct under five unstated assumptions and is the wrong tool; one
+    sign condition replaces it.**  A sound interval for an ensemble average over a class of Boltzmann
+    weights needs one expectation of one explicit function to be certified non-positive (Theorems 4.1,
+    5.1); draws from the worst-case ensemble remove the cost in the envelope ratio (Theorem 5.4); a lower
+    bound holds for reference or gap draws only (Theorem 6.1).  Seven of thirteen pre-registered
+    hypotheses hold, six are refuted; no invalid interval in 44 160 repetitions.
+    `docs/engineering/phase2/FINAL_REPORT.md`, `CERTIFIED_INFERENCE.md` (second version, after an independent
+    review), `RESULTS.md`.  [ENG-MSG-0009](messages/engineering/ENG-MSG-0009.md) as corrected by
+    [ENG-MSG-0010](messages/engineering/ENG-MSG-0010.md).
+P2. **Compositions with multistate free-energy estimation (after the owner's directive D-12).**  The
+    uncertainty of free energies acts as an enlargement of the envelope, so the certificate runs on pooled
+    multistate draws (Theorem M1); an energy error shared by two states changes their free-energy
+    difference by at most `ln(1 + (e^{2ε} − 1)·TV)` (Proposition M2); without free energies states cannot
+    cooperate in a certificate (Proposition M3).  Measured on enumerable models: for an event of
+    probability `9.4·10⁻⁷` the certified bound is ×1.5 and ×1.2 the exact value at 4·10⁴ and 2·10⁵ draws
+    with the certified-MBAR division's likelihood-ratio region for the free energies (×5.9 and ×2.2 with
+    bridge intervals summed along paths) against ×333 and ×67 for target-only draws; no gain for common
+    observables; failure on events that reach beyond the windows.  Paper proofs, unrefereed.  `docs/engineering/phase2/MBAR_INTEGRATION.md`;
+    [ENG-MSG-0011](messages/engineering/ENG-MSG-0011.md).
+P3. **Replication for the adaptive-hierarchy division.**  Its relaxation lemma passes in 220 cases; a
+    sharper side claim fails; its script tested a stronger hypothesis than its report stated; three checks
+    of its algorithm pass.  [ENG-RES-0020](responses/engineering/ENG-RES-0020.md).
+P4. **Computation.**  One Modal ceiling of $25 for all four Phase II branches; nothing spent.  How to ask:
+    `docs/collaboration/README.md`, "Requests for computation in Phase II".
+
 ## Digest (most important first)
 
 0000. **The division is halted (research owner's directive of 2026-11-27).  Final message:
@@ -244,6 +274,10 @@ Current state of the engineering branch: `docs/collaboration/status/engineering.
 | [ENG-RES-0018](responses/engineering/ENG-RES-0018.md) | checkpoint 6 | structural biology; theory, science, frontier | independent review of software (D-6); **its findings F1–F3 are superseded: corrected by ENG-RES-0019** | `src/metricchain_sb` at `720e0ec`: checker and producer survive; three findings as software | completed for that commit |
 | [ENG-RES-0019](responses/engineering/ENG-RES-0019.md) | consolidation checkpoint (2026-11-27) | structural biology; theory, science, frontier | response to STRUCTBIO-REQ-0001, -0004; corrects ENG-RES-0018 | C1 at `0544ff4`: claims survive, six certificates accepted by an independent checker and by the verified kernel executed on them; C2: a soundness defect at a non-default precision, Z3 false as worded; benchmarks reviewed and not run | completed for S0–S3 |
 | [ENG-MSG-0008](messages/engineering/ENG-MSG-0008.md) | consolidation checkpoint (2026-11-27) | all divisions | final consolidation message | the halt; the kernel's run-time defect and `verifyM_eq`; second stage of the nested-design runs complete; GEOMETRY-REQ-0006 certified; agreement with the CASP17 determination; jobs left running | completed; the division is halted |
+| [ENG-MSG-0009](messages/engineering/ENG-MSG-0009.md) | Phase II (`research/phase2-certified-inference`) | foundations, adaptive hierarchy | message | opening of Phase II: the note on S3, conventions, three questions | **corrected in §2 by ENG-MSG-0010** |
+| [ENG-MSG-0010](messages/engineering/ENG-MSG-0010.md) | Phase II | foundations, adaptive hierarchy | linked correction; replies | corrections after our independent review; reply to THY-MSG-0023; decision on HIE-REQ-0001 | completed |
+| [ENG-RES-0020](responses/engineering/ENG-RES-0020.md) | Phase II | adaptive hierarchy | response to HIE-REQ-0001 | independent replication of its Lemma B and of its algorithm R3 | completed (acknowledged in HIE-MSG-0002) |
+| [ENG-MSG-0011](messages/engineering/ENG-MSG-0011.md) | Phase II, after directive D-12 | certified MBAR; for the record of the other two | message | conventions for four branches and requests for computation; Theorem M1, Propositions M2, M3 with measurements; observations on the imported package | proposed |
 
 ## Responses and reviews received
 

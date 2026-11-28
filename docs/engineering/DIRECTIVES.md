@@ -716,3 +716,75 @@ this public repository); the counter is account-wide, so its increase bounds thi
 spending from above if other sessions run at the same time — the limitation the directive
 asks to be reported.  Subagents used: listed with their briefs' purposes in
 `docs/engineering/phase2/README.md`.  Records of this phase: `docs/engineering/phase2/`.
+
+## D-12 — Phase II collaboration update: a fourth division (certified MBAR); integration and computational coordination (2026-11-28, received about 05:30 UTC)
+
+Addressed to this division ("`research/phase2-certified-inference` — your branch").  It arrived two hours
+after this division had declared Phase II complete and stopped (D-11: "Stop at completion or the resource
+ceiling.  Do not automatically resume.").  Operative content, in the owner's words:
+
+1. **A fourth Phase II division**: "A fourth Phase II research division is being established:
+   `research/phase2-certified-mbar`", to "investigate rigorous mathematical and algorithmic improvements
+   to multistate free-energy estimation, including: optimal and cost-aware simulation allocation;
+   finite-sample confidence certificates; overlap-dependent statistical complexity; correlated-sampling
+   guarantees; certified thermodynamic observables; integration of deterministic energy errors with
+   statistical uncertainty."  "Your existing constructive mathematical synthesis and certified
+   ensemble-inference objectives remain unchanged."
+2. **Cross-divisional integration**: "Investigate whether substantive findings from the MBAR division
+   can strengthen your current work, especially: using statistically certified thermodynamic estimates
+   as constraints in ensemble identified-set optimization; combining deterministic energy sandwiches
+   with statistical confidence regions; propagating MBAR uncertainty through geometric and structural
+   observables; improving the efficiency of sampling-based moment-body approximations; combining
+   experimental observations with simulations to obtain stronger certified conclusions; determining
+   when simulation data can reduce otherwise intractable computational uncertainty."  "Seek actual
+   mathematical compositions and computational capabilities rather than superficial integration."  "Do
+   not treat the MBAR division's proposed theorems as verified until their assumptions and proofs have
+   been checked."
+3. **Computational coordination**: "You remain the sole coordinator of authorized MetricChain Modal
+   computations.  The MBAR division may send you requests using the existing GitHub mailbox
+   conventions."  Requests are evaluated by "scientific necessity; mathematical maturity; expected
+   information gain; computational feasibility; availability of existing public datasets; relevant
+   comparison methods; expected and worst-case expenditure."  "Prefer existing simulation datasets,
+   analytically tractable systems, and local computational controls before authorizing new molecular
+   dynamics simulations."  "No substantial new computational campaign is authorized by this message."
+   "Your existing Modal pilot ceiling remains $25 in total, not $25 per division.  Any increase requires
+   my explicit authorization."
+4. **Collaboration**: the four active Phase II branches are `research/phase2-foundations`,
+   `research/phase2-adaptive-hierarchy`, `research/phase2-certified-inference` and
+   `research/phase2-certified-mbar`.  "Ensure the existing mailbox, status, research-digest, and
+   computational-request mechanisms support communication among all four."  "Monitor substantive
+   incoming findings during your normal research synchronization cycles.  Do not establish expensive
+   continuous model-based polling."  "Where a new mathematical finding enables a stronger algorithm or a
+   scientifically meaningful benchmark, investigate it within your existing authorization or request
+   additional resources."  "Do not restart any of the six halted original divisions."
+5. **Scientific integrity**: "Keep the following uncertainty sources distinct: deterministic
+   computational error; statistical sampling error; nonequilibrium and mixing error; energy-model
+   approximation error; physical force-field error; experimental measurement error; ensemble
+   identifiability limitations."  "Do not report narrow statistical confidence intervals as evidence of
+   accurate molecular predictions unless the remaining uncertainty sources are adequately addressed."
+   "Preserve all negative results, counterexamples, and failed benchmarks."
+6. **Limits**: "All existing research objectives, budgets, hard deadlines, branch protections, and
+   sealed evaluation restrictions remain unchanged.  No additional expenditure is authorized by this
+   message.  Continue your existing bounded research cycles."
+
+**How it is applied.**  The directive is read as the owner's explicit instruction to continue, in bounded
+cycles and for the purposes it names, inside the unchanged limits of D-11 (Claude ceiling $500 for the
+whole of Phase II; Modal ceiling $25 for all four divisions together; hard stop 2026-11-30 15:00
+Eastern).  Nothing else is resumed: the next phase recommended in `phase2/FINAL_REPORT.md` §7 is not
+started, no subagent is used, the six original divisions and their branches are not touched.
+
+* *Mailbox and requests for computation*: `docs/collaboration/README.md`, section "Phase II"; the
+  conventions already in use cover the fourth branch without change (its prefix is `MBAR-`, chosen by it).
+* *Integration*: `docs/engineering/phase2/MBAR_INTEGRATION.md` (statements with proofs, what was
+  measured, what does not work), `src/metricchain_eng/certinf/multistate.py`,
+  `experiments/eng/phase2_mbar/`; message ENG-MSG-0011 to the new division.  Its imported package is a
+  set of proposed theorems; only the two elementary facts our composition uses were checked by us, and
+  the note says which.
+* *Monitoring*: at this division's synchronisation points (`docs/collaboration/UPSTREAM_SYNC.md`); no
+  model-based polling.
+* *Spending*: the account's usage counter is shared with the sessions of the other three divisions,
+  which were running during this cycle, so its increase is no longer a usable upper bound for this
+  division alone; this is the limitation D-11 asks to be reported.  At 07:00 UTC the increase since the
+  start of Phase II, all sessions together, stood at about $472 of the $500 ceiling, so the division
+  stops at the end of this first cycle and schedules no further synchronisation until the owner has
+  decided how the ceiling is to be read (`phase2/MBAR_INTEGRATION.md` §11).  Modal: nothing launched.

@@ -1,10 +1,30 @@
 # Status of the Computational Research Division
 
-*Updated at the end of Phase II (2026-11-28; the commit time is authoritative).  Phase II branch:
-`research/phase2-certified-inference`.  Phase I branch, unchanged since its halt:
-`research/ubuntu-engineering`.*
+*Updated 2026-11-28 after the first cycle under the owner's directive D-12 (the commit time is
+authoritative).  Phase II branch: `research/phase2-certified-inference`.  Phase I branch, unchanged since
+its halt: `research/ubuntu-engineering`.*
 
-## Phase II (research owner's directive D-11): COMPLETE — STOPPED, not to be resumed without authorisation
+## Since directive D-12 (2026-11-28, about 05:30 UTC): bounded cycles for the collaboration with the fourth division
+
+The owner established a fourth Phase II division (`research/phase2-certified-mbar`, multistate
+free-energy estimation) and asked this division to look for real compositions with its work, to remain
+the coordinator of Modal computation for all four divisions (one ceiling of $25 in total), and to
+"continue your existing bounded research cycles".  The main work of Phase II stays complete (next
+section); what follows is the only thing in progress.
+
+| item | state |
+|---|---|
+| mailbox for four branches; how to request computation | `docs/collaboration/README.md`, section "Phase II" |
+| mathematics | `docs/engineering/phase2/MBAR_INTEGRATION.md`: Theorem M1 (uncertainty of free energies as an envelope), Proposition M2 (shared energy error), Proposition M3 (which sampling laws need free energies); paper proofs, **unrefereed** |
+| software | `src/metricchain_eng/certinf/multistate.py`; 14 new tests; 46 tests of the certified-inference library pass |
+| experiments | `experiments/eng/phase2_mbar/`: predictions written before the runs; outcomes, including the refuted ones, in `MBAR_INTEGRATION.md` §8 |
+| read from the new division | its provenance note, the four text files of its imported package and, at its second commit, its prior-art note, three theorem statements of its Lean file on e-values and its coverage logs — as proposals; its code was not run and its Lean project not rebuilt.  **Used:** its likelihood-ratio region for free energies (its Theorem B1), re-derived, implemented and tested by us; with it our certified bound for an event of probability 10⁻⁶ is within 22 % of the exact value at 2·10⁵ draws |
+| messages | sent: ENG-MSG-0011 (to the new division; copies for the record of the other two).  Read: HIE-MSG-0002 (adaptive hierarchy; asks nothing) |
+| requests for computation received | none |
+| remote computation | **none**; Modal ceiling of $25 untouched |
+| monitoring | at synchronisation points only (`UPSTREAM_SYNC.md`); no model-based polling.  **None is scheduled**: the account-wide usage counter, which the other divisions' sessions share, stands close to the ceiling of D-11, so the next synchronisation waits for the research owner |
+
+## Phase II (research owner's directive D-11): COMPLETE (2026-11-28) — its work is not resumed; see above for what continues under D-12
 
 Task: verify, improve and validate the proposed theorem "S3" (sampled compression of the set of ensemble
 moments compatible with an energy envelope), close the verification gaps left by Phase I, and coordinate
@@ -24,7 +44,10 @@ computation for the two other Phase II divisions.  Everything is indexed in
 
 Open on our side, for whoever continues: a second review of the corrected note; samplers for the
 extremal ensemble (Theorem 5.4) beyond enumerable models; bounds for references that are not products
-that are tighter than Proposition 9.7.  The division does not resume when a message arrives.
+that are tighter than Proposition 9.7.  (Written at completion: "The division does not resume when a
+message arrives."  Since D-12 it reads the mailbox of the three other Phase II branches at its
+synchronisation points and answers requests for computation; it still starts no new line of research
+on a message alone.)
 
 ## Phase I: HALTED (research owner's directive D-8, 2026-11-27) — the record below is that of Phase I
 

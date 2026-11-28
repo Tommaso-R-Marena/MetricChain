@@ -245,6 +245,14 @@ criteria, estimated cost, worst-case committed cost, expected value) and an expl
 The workspace's Modal figures are therefore those of the final reconciliation of Phase I above (credits
 consumed, billed cost $0.00); they were not queried again in Phase II.
 
+**Directive D-12 (2026-11-28, about 05:30 UTC).**  "Your existing Modal pilot ceiling remains $25 in total,
+not $25 per division.  Any increase requires my explicit authorization."  "No substantial new
+computational campaign is authorized by this message."  The table above therefore covers all four Phase
+II branches.  State after the first cycle under D-12: ceiling $25, committed $0, spent $0, nothing
+running or deployed, no Modal command run; requests received from the certified-MBAR division: none
+(how to send one, and the seven points by which it is judged: `docs/collaboration/README.md`, "Requests
+for computation in Phase II").  The experiments of this cycle ran on the local machine (last row below).
+
 Local computation of this phase (8 threads, at most four to five processes at a time):
 
 | what | wall time | where |
@@ -255,6 +263,7 @@ Local computation of this phase (8 threads, at most four to five processes at a 
 | the referee's checks | not timed as a whole; scripts of seconds to minutes each | `experiments/eng/phase2_review/` |
 | verification of the structural-biology certificates and of the memoised kernel | 1.4 s to 196 s per certificate in the kernel, peak memory 4.9 GB | `experiments/eng/phase2_gaps/REPORT.md` |
 | replication for HIE-REQ-0001 | about 13 minutes of script time, two processes | `experiments/eng/phase2_hie_req/REPORT.md` |
+| after D-12: Theorem M1 on enumerable models (16 cells, two runs, the second executed twice because of a defect of ours), the shared energy error, the tail-event diagnostic | 22, 19 and 13 minutes on seven processes for the three executions; about two minutes for the other two scripts | `experiments/eng/phase2_mbar/`; `docs/engineering/phase2/MBAR_INTEGRATION.md` §8 |
 
 ## Remote jobs
 

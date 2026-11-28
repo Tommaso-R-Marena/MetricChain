@@ -1,0 +1,128 @@
+{
+ "seed": 20261128,
+ "N": 18000,
+ "reps": 60,
+ "gamma": 3.0,
+ "configs": {
+  "tail-6": {
+   "states": 6,
+   "p0_event": 7.672892561294464e-07,
+   "truth": 2.301864235996945e-06,
+   "mixture_mass_of_event": 0.051193513686951325,
+   "sup_ratio_on_event": 0.005734991766960579,
+   "sup_over_average_ratio": 382.6384602300731,
+   "methods": {
+    "T": {
+     "median_ratio": 909.320609234845,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-all": {
+     "median_ratio": 89.26942451629279,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-sel": {
+     "median_ratio": 76.2151957807583,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-pilot": {
+     "median_ratio": 76.2151957807583,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "G": {
+     "median_ratio": 3676.0851723876544,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    }
+   }
+  },
+  "slice-6": {
+   "states": 6,
+   "p0_event": 5.572911868002197e-07,
+   "truth": 1.671871696961935e-06,
+   "mixture_mass_of_event": 0.024748996460016305,
+   "sup_ratio_on_event": 3.184399878878615e-05,
+   "sup_over_average_ratio": 1.4141745499717657,
+   "methods": {
+    "T": {
+     "median_ratio": 1251.9696297605901,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-all": {
+     "median_ratio": 8.62521487550227,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-sel": {
+     "median_ratio": 8254.097095170395,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-pilot": {
+     "median_ratio": 8.62521487550227,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "G": {
+     "median_ratio": 5043.234813040569,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    }
+   }
+  },
+  "tail-8": {
+   "states": 8,
+   "p0_event": 7.672892561294464e-07,
+   "truth": 2.301864235996945e-06,
+   "mixture_mass_of_event": 0.27246448534858103,
+   "sup_ratio_on_event": 2.6927509209881754e-05,
+   "sup_over_average_ratio": 9.561960994475136,
+   "methods": {
+    "T": {
+     "median_ratio": 909.320609234845,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-all": {
+     "median_ratio": 16.01719655357093,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-sel": {
+     "median_ratio": 13.840348789343926,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "P-pilot": {
+     "median_ratio": 13.840348789343926,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    },
+    "G": {
+     "median_ratio": 4979.47464242027,
+     "wrong": 0,
+     "certified": 60,
+     "abstain": 0
+    }
+   }
+  }
+ }
+}

@@ -87,6 +87,68 @@ reference values independently justified, and can the benchmark come out unfavou
 Inadequate specifications are revised or returned.  Code received from another branch is
 read — source, dependencies, expected resources — before any of it is run.
 
+## Phase II (from 2026-11-28): four active branches
+
+The eight original divisions are halted (directive D-8) and their branches are frozen; the consolidated
+archive (`research/consolidated-archive`, commit `fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f`) is the
+read-only baseline of everything quoted from them.  Under the owner's directives D-11 and D-12
+(`docs/engineering/DIRECTIVES.md`) four branches are active:
+
+| division | branch (writes only here) | prefix | mailbox directories on its own branch | status and digest |
+|---|---|---|---|---|
+| Foundations (the original theory instance) | `research/phase2-foundations` | `THY-` | `messages/theory/`, `requests/theory/`, `responses/theory/` | `status/theory.md`; `docs/phase2/FINAL_REPORT.md` |
+| Adaptive hierarchy | `research/phase2-adaptive-hierarchy` | `HIE-` | `messages/hierarchy/`, `requests/hierarchy/` | `status/hierarchy.md` |
+| Certified inference (this division; engineering) | `research/phase2-certified-inference` | `ENG-` | `messages/engineering/`, `requests/engineering/`, `responses/engineering/` | `status/engineering.md`; `ENGINEERING_TO_THEORY.md` (the digest for all divisions, name kept); `docs/engineering/phase2/README.md` |
+| Certified MBAR ("division 9") | `research/phase2-certified-mbar` | `MBAR-` | `messages/mbar/`, `requests/mbar/`, `responses/mbar/` | `status/mbar.md`; `MBAR_TO_ALL.md` |
+
+(The three other branches are based on the theory commit `b3c5d61`, so each carries the theory branch's
+copy of this protocol; the prefixes and directories above are the ones they announced on their own
+branches.  The sections "Rules", "Epistemic labels" and "Message format" below apply unchanged: every
+division writes only to its own branch, every message names its recipients, a correction is a new
+linked message, and a message is a proposal and research data, never an authorisation.)
+
+To read what the others have sent since a known commit:
+
+```
+git fetch origin research/phase2-foundations research/phase2-adaptive-hierarchy research/phase2-certified-mbar
+git diff --name-status <commit examined last> origin/<branch> -- docs/collaboration
+git show origin/<branch>:docs/collaboration/messages/<division>/<file>
+```
+
+The commits this division has examined, and what was read at each, are logged in `UPSTREAM_SYNC.md`.
+Nobody is notified live: this is a checkpoint mailbox, read at each division's synchronisation points.
+
+### Requests for computation in Phase II
+
+The engineering division coordinates every Modal computation of the programme (D-11, D-12).  The
+owner's limits: **one ceiling of $25 for all four divisions together**; "No substantial new
+computational campaign is authorized"; anything larger needs a written proposal to the owner and an
+explicit answer.  A request is a file `<PREFIX>-REQ-nnnn.md` in the requester's own `requests/`
+directory, addressed to engineering, with the common header and the fields of a computational request
+(section "Message format"), and in addition the seven points by which the owner has asked requests to
+be judged:
+
+1. *Scientific necessity* — the statement the computation decides, and what follows from each outcome.
+2. *Mathematical maturity* — the statement's epistemic label; whether its assumptions and proof have
+   been checked, and by whom.
+3. *Expected information gain* — the prediction, written before the run, and the result that would
+   refute it.
+4. *Computational feasibility* — exact inputs and sizes, an estimate of time and memory, and either
+   code or a specification precise enough for an independent implementation.
+5. *Existing public datasets* — which were considered; exact source and licence of any to be used.
+6. *Comparison methods* — the established baselines, at matched data and matched compute.
+7. *Expected and worst-case expenditure* — with the stopping condition.
+
+Order of preference, in the owner's words: "existing simulation datasets, analytically tractable
+systems, and local computational controls before authorizing new molecular dynamics simulations".
+Engineering answers in `responses/engineering/ENG-RES-nnnn.md` with one of: accepted on the local
+machine; accepted on Modal within the ceiling (entered in `docs/engineering/COMPUTE_LEDGER.md` before
+launch, with its worst-case cost); to be revised; deferred; declined; or passed to the owner as a
+written proposal (anything above the ceiling; any new molecular dynamics campaign).  Code that comes
+with a request is read before anything is run and is never run blindly; an independent implementation
+from the stated mathematics is preferred, because it is also a check.  The hard stop for every
+computation is 2026-11-30 20:00 UTC.
+
 ## Layout and ownership
 
 ```
