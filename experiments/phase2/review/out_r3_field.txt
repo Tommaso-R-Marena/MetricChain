@@ -1,0 +1,124 @@
+== Part 0: brute force over all pairs (x, c) at n = 9 ==
+   p=0.3 u=1.0 gamma=+0.0: q = Bernoulli(0.4076)^n [brute force agrees]; ln P_hit brute force -0.768579 = type sums -0.768579; relative mixture / eps0 in [1.000000, 1.000000]; with the report's ratio (theta=0.4076): in [1.0000, 1.0000]
+   p=0.3 u=1.0 gamma=+0.4: q = Bernoulli(0.2164)^n [brute force agrees]; ln P_hit brute force -0.946188 = type sums -0.946188; relative mixture / eps0 in [1.000000, 1.000000]; with the report's ratio (theta=0.4350): in [0.3395, 19.8462]
+   p=0.1 u=2.0 gamma=-0.7: q = Bernoulli(0.3853)^n [brute force agrees]; ln P_hit brute force -1.118276 = type sums -1.118276; relative mixture / eps0 in [1.000000, 1.000000]; with the report's ratio (theta=0.2760): in [0.0660, 1.6655]
+   p=0.5 u=1.0 gamma=+0.3: q = Bernoulli(0.3389)^n [brute force agrees]; ln P_hit brute force -1.011738 = type sums -1.011738; relative mixture / eps0 in [1.000000, 1.000000]; with the report's ratio (theta=0.5170): in [0.2486, 4.9108]
+   Part 0 all consistent: True
+
+== Part 1: constant baseline (gamma = 0) ==
+p=0.5 u=1.0: s0=0.683940 s1=0.683940 hiding law theta=0.500000
+   exact, all query types: n=  20  ln P_hit=   -2.0281  -ln P_hit/n=0.10140  worst query weight/n=0.150
+   exact, all query types: n=  40  ln P_hit=   -2.5649  -ln P_hit/n=0.06412  worst query weight/n=0.175
+   exact, all query types: n=  80  ln P_hit=   -4.1046  -ln P_hit/n=0.05131  worst query weight/n=0.000
+   exact, all query types: n= 160  ln P_hit=   -6.9312  -ln P_hit/n=0.04332  worst query weight/n=0.175
+   exact, all query types: n= 320  ln P_hit=  -11.7816  -ln P_hit/n=0.03682  worst query weight/n=0.106
+   exact, all query types: n= 480  ln P_hit=  -16.5209  -ln P_hit/n=0.03442  worst query weight/n=0.404
+   limit of -ln P_hit/n (dual formula max_t min) = 0.029139
+   uniform cube: limit should be h = KL(rho0||1/2) = 0.029139
+   any query: n=     160  -ln P_hit/n = 0.043320
+   any query: n=    1000  -ln P_hit/n = 0.032295
+   any query: n=   10000  -ln P_hit/n = 0.029567
+   any query: n=  100000  -ln P_hit/n = 0.029192
+   any query: n= 1000000  -ln P_hit/n = 0.029146
+p=0.3 u=1.0: s0=0.810364 s1=0.557516 hiding law theta=0.407577
+   exact, all query types: n=  20  ln P_hit=   -1.2916  -ln P_hit/n=0.06458  worst query weight/n=0.050
+   exact, all query types: n=  40  ln P_hit=   -1.6920  -ln P_hit/n=0.04230  worst query weight/n=0.000
+   exact, all query types: n=  80  ln P_hit=   -2.3696  -ln P_hit/n=0.02962  worst query weight/n=0.013
+   exact, all query types: n= 160  ln P_hit=   -3.4254  -ln P_hit/n=0.02141  worst query weight/n=0.006
+   exact, all query types: n= 320  ln P_hit=   -5.4653  -ln P_hit/n=0.01708  worst query weight/n=0.000
+   exact, all query types: n= 480  ln P_hit=   -7.2926  -ln P_hit/n=0.01519  worst query weight/n=0.000
+   limit of -ln P_hit/n (dual formula max_t min) = 0.010881
+   closed form for the mode query x=0: centre types k/n < kappa* = ln(1/s0)/(u+ln(s1/s0)) = 0.335894 (typical type theta=0.407577);  KL(kappa*||theta) = 0.010881
+   mode query only: n=     160  -ln q(c: 0 in B_c)/n = 0.022190
+   mode query only: n=    1000  -ln q(c: 0 in B_c)/n = 0.013497
+   mode query only: n=   10000  -ln q(c: 0 in B_c)/n = 0.011255
+   mode query only: n=  100000  -ln q(c: 0 in B_c)/n = 0.010928
+   mode query only: n= 1000000  -ln q(c: 0 in B_c)/n = 0.010887
+p=0.1 u=2.0: s0=0.913534 s1=0.221802 hiding law theta=0.195362
+   exact, all query types: n=  20  ln P_hit=   -0.8395  -ln P_hit/n=0.04198  worst query weight/n=0.000
+   exact, all query types: n=  40  ln P_hit=   -1.1677  -ln P_hit/n=0.02919  worst query weight/n=0.000
+   exact, all query types: n=  80  ln P_hit=   -1.6584  -ln P_hit/n=0.02073  worst query weight/n=0.000
+   exact, all query types: n= 160  ln P_hit=   -2.4553  -ln P_hit/n=0.01535  worst query weight/n=0.000
+   exact, all query types: n= 320  ln P_hit=   -3.4901  -ln P_hit/n=0.01091  worst query weight/n=0.000
+   exact, all query types: n= 480  ln P_hit=   -4.4572  -ln P_hit/n=0.00929  worst query weight/n=0.000
+   limit of -ln P_hit/n (dual formula max_t min) = 0.005562
+   closed form for the mode query x=0: centre types k/n < kappa* = ln(1/s0)/(u+ln(s1/s0)) = 0.154732 (typical type theta=0.195362);  KL(kappa*||theta) = 0.005562
+   mode query only: n=     160  -ln q(c: 0 in B_c)/n = 0.015346
+   mode query only: n=    1000  -ln q(c: 0 in B_c)/n = 0.007800
+   mode query only: n=   10000  -ln q(c: 0 in B_c)/n = 0.005882
+   mode query only: n=  100000  -ln q(c: 0 in B_c)/n = 0.005605
+   mode query only: n= 1000000  -ln q(c: 0 in B_c)/n = 0.005567
+
+== Part 2: tilted baselines; exponent of P_hit for the flat family ==
+   columns: gamma | correct weights: theta, dual exponent, grid(121^3) | report's inverted ratio: theta, dual exponent, grid(121^3)
+   (a grid minimum over a coarse grid lies slightly above the true minimum; the dual formula is exact in the limit)
+p=0.5 u=1.0
+   -0.950 | 0.978 0.00167 0.00308 | 0.128 -0.00000 0.00005
+   -0.800 | 0.911 0.00672 0.00699 | 0.326 -0.00000 0.00000
+   -0.650 | 0.840 0.01178 0.01248 | 0.412 -0.00000 0.00003
+   -0.500 | 0.765 0.01667 0.01738 | 0.455 -0.00000 0.00002
+   -0.350 | 0.687 0.02122 0.02207 | 0.478 -0.00000 0.00002
+   -0.200 | 0.608 0.02519 0.02552 | 0.490 0.00006 0.00010
+   -0.050 | 0.527 0.02833 0.02874 | 0.498 0.01731 0.01862
+   +0.100 | 0.446 0.02739 0.02776 | 0.504 0.00838 0.00972
+   +0.250 | 0.365 0.02394 0.02492 | 0.513 -0.00000 0.00003
+   +0.400 | 0.286 0.01975 0.01988 | 0.528 -0.00000 0.00002
+   +0.550 | 0.210 0.01507 0.01523 | 0.556 -0.00000 0.00001
+   +0.700 | 0.136 0.01010 0.01092 | 0.610 -0.00000 0.00001
+   +0.850 | 0.066 0.00503 0.00535 | 0.721 -0.00000 0.00004
+   on the report's grid of 39 gammas:  max flat exponent, correct weights = 0.02914 at gamma=+0.000;   with the inverted ratio = 0.02914 at gamma=+0.000
+   fine grid of 1999 gammas, correct weights: max flat exponent = 0.02914 at gamma=+0.0000
+   at gamma = 0: 0.02914
+p=0.3 u=1.0
+   -0.950 | 0.969 0.00198 0.00215 | 0.092 -0.00000 0.00000
+   -0.800 | 0.876 0.00668 0.00741 | 0.250 -0.00000 0.00000
+   -0.650 | 0.783 0.00976 0.01014 | 0.325 -0.00000 0.00000
+   -0.500 | 0.691 0.01149 0.01240 | 0.365 -0.00000 0.00001
+   -0.350 | 0.602 0.01217 0.01219 | 0.386 -0.00000 0.00002
+   -0.200 | 0.516 0.01201 0.01295 | 0.398 -0.00000 0.00001
+   -0.050 | 0.434 0.01124 0.01183 | 0.406 0.00431 0.00470
+   +0.100 | 0.356 0.01004 0.01074 | 0.412 0.02351 0.02360
+   +0.250 | 0.284 0.00854 0.00891 | 0.420 0.00105 0.00169
+   +0.400 | 0.216 0.00686 0.00770 | 0.435 -0.00000 0.00001
+   +0.550 | 0.154 0.00511 0.00582 | 0.463 -0.00000 0.00002
+   +0.700 | 0.098 0.00335 0.00372 | 0.519 -0.00000 0.00001
+   +0.850 | 0.046 0.00164 0.00210 | 0.640 -0.00000 0.00000
+   on the report's grid of 39 gammas:  max flat exponent, correct weights = 0.01220 at gamma=-0.300;   with the inverted ratio = 0.02351 at gamma=+0.100
+   fine grid of 1999 gammas, correct weights: max flat exponent = 0.01220 at gamma=-0.3080
+   at gamma = 0: 0.01088
+p=0.1 u=2.0
+   -1.900 | 0.944 0.00295 0.00320 | 0.136 -0.00000 0.00004
+   -1.600 | 0.780 0.00849 0.00915 | 0.290 -0.00000 0.00001
+   -1.300 | 0.630 0.01049 0.01084 | 0.318 -0.00000 0.00000
+   -1.000 | 0.498 0.01040 0.01071 | 0.305 -0.00000 0.00002
+   -0.700 | 0.385 0.00926 0.01022 | 0.276 -0.00000 0.00000
+   -0.400 | 0.292 0.00769 0.00873 | 0.241 0.00005 0.00017
+   -0.100 | 0.217 0.00607 0.00789 | 0.206 0.00363 0.00507
+   +0.200 | 0.157 0.00460 0.00672 | 0.175 0.00997 0.01205
+   +0.500 | 0.111 0.00334 0.00415 | 0.148 0.01672 0.01693
+   +0.800 | 0.075 0.00232 0.00487 | 0.128 0.01977 0.02007
+   +1.100 | 0.048 0.00150 0.00257 | 0.115 0.01900 0.01922
+   +1.400 | 0.027 0.00086 0.00242 | 0.114 0.01071 0.01081
+   +1.700 | 0.012 0.00037 0.00053 | 0.143 -0.00000 0.00001
+   on the report's grid of 39 gammas:  max flat exponent, correct weights = 0.01063 at gamma=-1.200;   with the inverted ratio = 0.01997 at gamma=+0.900
+   fine grid of 1999 gammas, correct weights: max flat exponent = 0.01064 at gamma=-1.1740
+   at gamma = 0: 0.00556
+
+== Part 2c: exact finite-n sums at a tilted baseline (correct weights), against the dual formula ==
+   p=0.3 u=1.0 gamma=+0.25: dual limit 0.00854; exact -ln P_hit/n: n=80: 0.02387 (w/n=0.00);  n=160: 0.01793 (w/n=0.00);  n=320: 0.01428 (w/n=0.00)
+   p=0.1 u=2.0 gamma=+0.80: dual limit 0.00232; exact -ln P_hit/n: n=80: 0.01619 (w/n=0.00);  n=160: 0.00916 (w/n=0.00);  n=320: 0.00668 (w/n=0.00)
+   p=0.5 u=1.0 gamma=+0.40: dual limit 0.01975; exact -ln P_hit/n: n=80: 0.03865 (w/n=0.04);  n=160: 0.03086 (w/n=0.02);  n=320: 0.02618 (w/n=0.01)
+   mode query (x = 0) at large n, tilted baselines (correct weights): -ln q(c: 0 in B_c)/n
+   p=0.3 u=1.0 gamma=+0.250: n=1000: 0.010808;  n=10000: 0.008870;  n=100000: 0.008583   [dual limit over all queries 0.008536]
+   p=0.3 u=1.0 gamma=-0.308: n=1000: 0.014602;  n=10000: 0.012556;  n=100000: 0.012245   [dual limit over all queries 0.012197]
+   p=0.1 u=2.0 gamma=+0.800: n=1000: 0.004214;  n=10000: 0.002589;  n=100000: 0.002354   [dual limit over all queries 0.002316]
+   p=0.1 u=2.0 gamma=-1.174: n=1000: 0.013239;  n=10000: 0.010997;  n=100000: 0.010686   [dual limit over all queries 0.010637]
+
+== Part 3: single-type dip families (brute-force grid), max over the type and over gamma ==
+   p=0.5 u=1.0: best single-type exponent on the 39-gamma grid = 0.02953 at gamma=+0.000, type 0.500
+   p=0.3 u=1.0: best single-type exponent on the 39-gamma grid = 0.02515 at gamma=-0.100, type 0.500
+   p=0.1 u=2.0: best single-type exponent on the 39-gamma grid = 0.04861 at gamma=-0.700, type 0.530
+
+real	0m38.757s
+user	0m38.144s
+sys	0m0.671s

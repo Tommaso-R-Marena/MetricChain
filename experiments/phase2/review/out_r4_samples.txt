@@ -1,0 +1,32 @@
+n=14 u=6.0 r=2 K=20: m_r=10.27758 V(n,r-1)=15 R=K m_r=205.552  N*=2^n/(K V)=54.6  (300 instances each)
+   Part A [K centres]: E TV(mu_w, ideal) = 0.00153 <= 2 K_i V/2^n = 0.03662 : True;  E O = 0.33154 +- 0.09578 (s.e.), exact value C(K_i,2)*pair = 0.17900 <= C(K_i,2) m_r V/2^n = 1.78779 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A [2K centres]: E TV(mu_w, ideal) = 0.00195 <= 2 K_i V/2^n = 0.07324 : True;  E O = 0.83293 +- 0.13750 (s.e.), exact value C(K_i,2)*pair = 0.73485 <= C(K_i,2) m_r V/2^n = 7.33933 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A: P(O_1 > R/4) = 0.0000 <= 8 K V/2^n = 0.1465 : True
+   Part B (m=2): TV between the laws of (x1+x2, floor flags) under K and 2K dips = 0.02943  (Monte-Carlo noise floor, half-sample against half-sample: 0.01079)
+           bound from the proof (bad sampling in either experiment + values) = 0.13311 : True
+   Part C: ideal model, TV of (class of the pair) = 0.02945  [FF, FD, DD-different, DD-same] K: 0.00002, 0.00964, 0.94082, 0.04952 ; 2K: 0.00001, 0.00484, 0.97027, 0.02488
+n=14 u=5.0 r=2 K=32: m_r=1.47029 V(n,r-1)=15 R=K m_r=47.049  N*=2^n/(K V)=34.1  (300 instances each)
+   Part A [K centres]: E TV(mu_w, ideal) = 0.00189 <= 2 K_i V/2^n = 0.05859 : True;  E O = 0.09487 +- 0.01529 (s.e.), exact value C(K_i,2)*pair = 0.10171 <= C(K_i,2) m_r V/2^n = 0.66766 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A [2K centres]: E TV(mu_w, ideal) = 0.00392 <= 2 K_i V/2^n = 0.11719 : True;  E O = 0.39434 +- 0.03020 (s.e.), exact value C(K_i,2)*pair = 0.41341 <= C(K_i,2) m_r V/2^n = 2.71372 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A: P(O_1 > R/4) = 0.0000 <= 8 K V/2^n = 0.2344 : True
+   Part B (m=2): TV between the laws of (x1+x2, floor flags) under K and 2K dips = 0.03481  (Monte-Carlo noise floor, half-sample against half-sample: 0.00317)
+           bound from the proof (bad sampling in either experiment + values) = 0.17975 : True
+   Part C: ideal model, TV of (class of the pair) = 0.03494  [FF, FD, DD-different, DD-same] K: 0.00043, 0.04076, 0.92885, 0.02996 ; 2K: 0.00011, 0.02081, 0.96378, 0.01530
+n=13 u=6.0 r=1 K=40: m_r=0.04912 V(n,r-1)=1 R=K m_r=1.965  N*=2^n/(K V)=204.8  (300 instances each)
+   Part A [K centres]: E TV(mu_w, ideal) = 0.00168 <= 2 K_i V/2^n = 0.00977 : True;  E O = 0.00508 +- 0.00090 (s.e.), exact value C(K_i,2)*pair = 0.00468 <= C(K_i,2) m_r V/2^n = 0.00468 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A [2K centres]: E TV(mu_w, ideal) = 0.00420 <= 2 K_i V/2^n = 0.01953 : True;  E O = 0.02096 +- 0.00170 (s.e.), exact value C(K_i,2)*pair = 0.01895 <= C(K_i,2) m_r V/2^n = 0.01895 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A: P(O_1 > R/4) = 0.0000 <= 8 K V/2^n = 0.0391 : True
+   Part B (m=2): TV between the laws of (x1+x2, floor flags) under K and 2K dips = 0.19965  (Monte-Carlo noise floor, half-sample against half-sample: 0.00221)
+           bound from the proof (bad sampling in either experiment + values) = 1.13924 : True
+   Part C: ideal model, TV of (class of the pair) = 0.19929  [FF, FD, DD-different, DD-same] K: 0.11375, 0.44704, 0.42823, 0.01098 ; 2K: 0.04114, 0.32339, 0.62752, 0.00794
+n=15 u=12.5 r=1 K=64: m_r=8.18897 V(n,r-1)=1 R=K m_r=524.094  N*=2^n/(K V)=512.0  (120 instances each)
+   Part A [K centres]: E TV(mu_w, ideal) = 0.00141 <= 2 K_i V/2^n = 0.00391 : True;  E O = 0.75066 +- 0.21661 (s.e.), exact value C(K_i,2)*pair = 0.50381 <= C(K_i,2) m_r V/2^n = 0.50381 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A [2K centres]: E TV(mu_w, ideal) = 0.00238 <= 2 K_i V/2^n = 0.00781 : True;  E O = 2.52493 +- 0.40883 (s.e.), exact value C(K_i,2)*pair = 2.03125 <= C(K_i,2) m_r V/2^n = 2.03125 : True;  all: K_i m_r - O <= A-1 <= K_i m_r : True
+   Part A: P(O_1 > R/4) = 0.0000 <= 8 K V/2^n = 0.0156 : True
+   Part B (m=2): TV between the laws of (x1+x2, floor flags) under K and 2K dips = 0.01026  (Monte-Carlo noise floor, half-sample against half-sample: 0.00522)
+           bound from the proof (bad sampling in either experiment + values) = 0.04064 : True
+   Part C: ideal model, TV of (class of the pair) = 0.00967  [FF, FD, DD-different, DD-same] K: 0.00000, 0.00380, 0.98063, 0.01557 ; 2K: 0.00000, 0.00190, 0.99030, 0.00780
+
+real	0m17.538s
+user	0m16.534s
+sys	0m0.578s

@@ -18,6 +18,7 @@ PASS  A4a maximum of dips is admissible
 PASS  A4b sum - pair overlaps <= max <= sum (masses)
 PASS  A4c expected pair overlap <= m(r) V(n,r-1)/2^n   5.690e-03 <= 8.561e-03
 PASS  A5 attenuated bias: E_a(dev^2) = sum_{s != 0} phihat(s)^2 rho~(s)^2 nu~(s)^2 <= E phi^2 max (|rho~| |nu~|)^2
+PASS  A6 absorption: v e^{f} in W_u for v in W_{u-kappa}, w e^{-f} in W_{u+kappa}; same ensembles; targets differ by ln Z_f
 == B. exact observables: subgroup averaging ==
 PASS  B1 a subgroup C with |C| < 2(M+1) kills M prescribed Walsh coefficients; averaging multiplies the coefficients by 1[s in C-perp]   (M, |C|): [(1, 2), (3, 4), (7, 8), (12, 16), (30, 32)]
 PASS  B2 number of generator tuples orthogonal to a fixed s != 0 is 2^{(n-1)r}

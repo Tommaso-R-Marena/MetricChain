@@ -1,0 +1,170 @@
+== A. Lemma 2.2 and identity (2.1) ==
+PASS  A0 n=8 u=1.0: the random weight is admissible
+PASS  A1 n=8: wbar admissible
+PASS  A2 n=8: A(wbar)=A(w)
+PASS  A3 n=8: mu_wbar = sum lam_j mu_(w(.+c_j))
+PASS  A4 n=8: E_mu_(w(.+c)) phi = E_mu_w phi(.+c)
+PASS  A5 n=8: (2.1) E_c E_mu_(w(.+c)) phi = E_pi phi
+PASS  A0 n=10 u=0.5: the random weight is admissible
+PASS  A1 n=10: wbar admissible
+PASS  A2 n=10: A(wbar)=A(w)
+PASS  A3 n=10: mu_wbar = sum lam_j mu_(w(.+c_j))
+PASS  A4 n=10: E_mu_(w(.+c)) phi = E_mu_w phi(.+c)
+PASS  A5 n=10: (2.1) E_c E_mu_(w(.+c)) phi = E_pi phi
+PASS  A0 n=10 u=2.0: the random weight is admissible
+PASS  A1 n=10: wbar admissible
+PASS  A2 n=10: A(wbar)=A(w)
+PASS  A3 n=10: mu_wbar = sum lam_j mu_(w(.+c_j))
+PASS  A4 n=10: E_mu_(w(.+c)) phi = E_mu_w phi(.+c)
+PASS  A5 n=10: (2.1) E_c E_mu_(w(.+c)) phi = E_pi phi
+== B. Theorem A: the range of Y_j and the good event ==
+PASS  B1 k=1: ln A(dip) = ln(1+m_(k+1))
+PASS  B2 k=1: dip = 1 off B(0,k), |B|=V(n,k)
+PASS  B3 k=1: range of Y_j <= 2(1-e^-Delta)   observed 0.04500 <= 0.04500
+PASS  B1 k=2: ln A(dip) = ln(1+m_(k+1))
+PASS  B2 k=2: dip = 1 off B(0,k), |B|=V(n,k)
+PASS  B3 k=2: range of Y_j <= 2(1-e^-Delta)   observed 0.27071 <= 0.27071
+PASS  B1 k=3: ln A(dip) = ln(1+m_(k+1))
+PASS  B2 k=3: dip = 1 off B(0,k), |B|=V(n,k)
+PASS  B3 k=3: range of Y_j <= 2(1-e^-Delta)   observed 0.83779 <= 0.83779
+PASS  B4 Theorem A(a) good event: L=88, fraction of bad c = 0.000 <= eta=0.2   (largest deviation seen 0.0403, tau=0.05; Delta_k=0.1454)
+== C. Lemma 2.5 ==
+PASS  C1 n=10 r=2: w_c admissible
+PASS  C2 n=10 r=2: w_c = 1 off the union of balls
+PASS  C1 n=10 r=2: w_c admissible
+PASS  C2 n=10 r=2: w_c = 1 off the union of balls
+PASS  C1 n=10 r=2: w_c admissible
+PASS  C2 n=10 r=2: w_c = 1 off the union of balls
+PASS  C3 n=10 u=1.0 r=2: (ii) lower  L m_r - O_c <= A-1   min slack -1.943e-16
+PASS  C4 n=10 u=1.0 r=2: (ii) upper  A-1 <= L m_r   min slack -1.249e-16
+PASS  C5 n=10 u=1.0 r=2: (iii) TV <= O_c/(1+L m_r-O_c) when O_c < 1+L m_r   min slack -1.138e-16
+PASS  C6 n=10 u=1.0 r=2: E min(e,e') <= m_r V(n,r-1)/2^n   exact 2.0273e-04 <= bound 2.4728e-04 (ratio 0.820)
+PASS  C1 n=10 r=3: w_c admissible
+PASS  C2 n=10 r=3: w_c = 1 off the union of balls
+PASS  C1 n=10 r=3: w_c admissible
+PASS  C2 n=10 r=3: w_c = 1 off the union of balls
+PASS  C1 n=10 r=3: w_c admissible
+PASS  C2 n=10 r=3: w_c = 1 off the union of balls
+PASS  C3 n=10 u=1.0 r=3: (ii) lower  L m_r - O_c <= A-1   min slack -4.441e-16
+PASS  C4 n=10 u=1.0 r=3: (ii) upper  A-1 <= L m_r   min slack -1.665e-16
+PASS  C5 n=10 u=1.0 r=3: (iii) TV <= O_c/(1+L m_r-O_c) when O_c < 1+L m_r   min slack -1.288e-16
+PASS  C6 n=10 u=1.0 r=3: E min(e,e') <= m_r V(n,r-1)/2^n   exact 5.6900e-03 <= bound 8.5609e-03 (ratio 0.665)
+PASS  C1 n=12 r=3: w_c admissible
+PASS  C2 n=12 r=3: w_c = 1 off the union of balls
+PASS  C1 n=12 r=3: w_c admissible
+PASS  C2 n=12 r=3: w_c = 1 off the union of balls
+PASS  C1 n=12 r=3: w_c admissible
+PASS  C2 n=12 r=3: w_c = 1 off the union of balls
+PASS  C3 n=12 u=0.5 r=3: (ii) lower  L m_r - O_c <= A-1   min slack -2.359e-16
+PASS  C4 n=12 u=0.5 r=3: (ii) upper  A-1 <= L m_r   min slack -2.082e-16
+PASS  C5 n=12 u=0.5 r=3: (iii) TV <= O_c/(1+L m_r-O_c) when O_c < 1+L m_r   min slack -1.224e-16
+PASS  C6 n=12 u=0.5 r=3: E min(e,e') <= m_r V(n,r-1)/2^n   exact 2.5220e-04 <= bound 3.1510e-04 (ratio 0.800)
+PASS  C1 n=12 r=2: w_c admissible
+PASS  C2 n=12 r=2: w_c = 1 off the union of balls
+PASS  C1 n=12 r=2: w_c admissible
+PASS  C2 n=12 r=2: w_c = 1 off the union of balls
+PASS  C1 n=12 r=2: w_c admissible
+PASS  C2 n=12 r=2: w_c = 1 off the union of balls
+PASS  C3 n=12 u=2.0 r=2: (ii) lower  L m_r - O_c <= A-1   min slack -1.665e-16
+PASS  C4 n=12 u=2.0 r=2: (ii) upper  A-1 <= L m_r   min slack -2.776e-16
+PASS  C5 n=12 u=2.0 r=2: (iii) TV <= O_c/(1+L m_r-O_c) when O_c < 1+L m_r   min slack -1.266e-16
+PASS  C6 n=12 u=2.0 r=2: E min(e,e') <= m_r V(n,r-1)/2^n   exact 6.7172e-05 <= bound 1.0094e-04 (ratio 0.665)
+      C7 degenerate case of Lemma 2.5(iii) (L=40 equal centres, n=10, u=2.0, r=4): O_c=7756.467, 1+L m_r=398.768, stated bound O_c/(1+L m_r-O_c)=-1.054, true TV=0.077
+PASS  C7 Lemma 2.5(iii) as stated FAILS without the proviso O_c < 1 + L m_r (expected: a counterexample)   the lemma needs the proviso; with O~ in place of O_c it is always true
+PASS  C8 the version with O~ = E(sum-max): TV <= O~/(1+L m_r-O~)
+== D. Theorem A': on the good event the uniform answers are admissible ==
+PASS  D1 n=12 u=2.0 r=1 tau=0.3 M=5 L=267 (L m_r=0.416, eta'=0.226): on G answers within tau, A >= 1+L m_r-tau/5   G in 276/300 trials; largest deviation on G 0.0447 <= tau
+PASS  D2 P(G) = 0.920 >= 1 - eta - eta' = 0.274 (simulation)
+PASS  D1 n=12 u=1.0 r=2 tau=0.6 M=5 L=67 (L m_r=0.442, eta'=0.391): on G answers within tau, A >= 1+L m_r-tau/5   G in 297/300 trials; largest deviation on G 0.0816 <= tau
+PASS  D2 P(G) = 0.990 >= 1 - eta - eta' = 0.109 (simulation)
+PASS  D1 n=12 u=1.0 r=2 tau=1.0 M=3 L=20 (L m_r=0.132, eta'=0.021): on G answers within tau, A >= 1+L m_r-tau/5   G in 294/300 trials; largest deviation on G 0.0546 <= tau
+PASS  D2 P(G) = 0.980 >= 1 - eta - eta' = 0.479 (simulation)
+== E. Lemma 2.6, Theorem A'', Corollary A'' ==
+PASS  E1 row sums of exp(-u d) constant
+PASS  E2 the kernel is invertible (all eigenvalues > 0)   min eigenvalue 2.5492e-02 = (1-e^-u)^n = 2.5492e-02
+PASS  E3.0 q is a probability vector
+PASS  E4.0 sum_c q(c) H(c) e^(-u d(x,c)) = eps0 for every x
+PASS  E5.0 sum_c q(c) w_c(x) = 1 + eps0 - delta_tr(x)
+PASS  E6.0 E_q Y = eps0 E_pi phi - E_pi[phi delta_tr];  E_q e = eps0 - xibar;  |Y|<=eps0, 0<=e<=eps0
+PASS  E3.1 q is a probability vector
+PASS  E4.1 sum_c q(c) H(c) e^(-u d(x,c)) = eps0 for every x
+PASS  E5.1 sum_c q(c) w_c(x) = 1 + eps0 - delta_tr(x)
+PASS  E6.1 E_q Y = eps0 E_pi phi - E_pi[phi delta_tr];  E_q e = eps0 - xibar;  |Y|<=eps0, 0<=e<=eps0
+PASS  E3.2 q is a probability vector
+PASS  E4.2 sum_c q(c) H(c) e^(-u d(x,c)) = eps0 for every x
+PASS  E5.2 sum_c q(c) w_c(x) = 1 + eps0 - delta_tr(x)
+PASS  E6.2 E_q Y = eps0 E_pi phi - E_pi[phi delta_tr];  E_q e = eps0 - xibar;  |Y|<=eps0, 0<=e<=eps0
+PASS  E7 any law q~ with heights H~ = eps0/(S0 q~) is also 'flat' (so only q*H is unique, not q)   member masses then range over [0.116, 838] instead of all = eps0
+   Corollary A'': product weights for w0 = exp(-gamma|x|)
+      gamma=+0.5 report  lambda1/lambda0=1.97441: sum_c lambda(c) e^(-u d(x,c)) / w0(x) ranges over [0.0016, 1] (x max)   -> NOT proportional to w0
+PASS  E9 gamma=0.5: the report's ratio (1-e^-(u+g))/(1-e^-(u-g)) does NOT reproduce w0 (expected: an error in line 286)
+      gamma=+0.5 referee lambda1/lambda0=0.30720: sum_c lambda(c) e^(-u d(x,c)) / w0(x) ranges over [1.0000, 1] (x max)   -> proportional to w0
+PASS  E8 gamma=0.5: referee's ratio (e^-g - e^-u)/(1 - e^-(u+g)) reproduces w0
+PASS  E10 gamma=0.5: Corollary A'': q=lambda*m is a law and sum_c q(c) max(w0, H e^(-u d))/w0 = 1+eps0-delta_tr
+PASS  E11 gamma=0.5: members max(w0, H(c) e^(-u d(.,c))) are admissible
+      gamma=-0.3 report  lambda1/lambda0=0.69201: sum_c lambda(c) e^(-u d(x,c)) / w0(x) ranges over [0.0235, 1] (x max)   -> NOT proportional to w0
+PASS  E9 gamma=-0.3: the report's ratio (1-e^-(u+g))/(1-e^-(u-g)) does NOT reproduce w0 (expected: an error in line 286)
+      gamma=-0.3 referee lambda1/lambda0=1.95064: sum_c lambda(c) e^(-u d(x,c)) / w0(x) ranges over [1.0000, 1] (x max)   -> proportional to w0
+PASS  E8 gamma=-0.3: referee's ratio (e^-g - e^-u)/(1 - e^-(u+g)) reproduces w0
+PASS  E10 gamma=-0.3: Corollary A'': q=lambda*m is a law and sum_c q(c) max(w0, H e^(-u d))/w0 = 1+eps0-delta_tr
+PASS  E11 gamma=-0.3: members max(w0, H(c) e^(-u d(.,c))) are admissible
+      gamma=+0.9 report  lambda1/lambda0=8.93662: sum_c lambda(c) e^(-u d(x,c)) / w0(x) ranges over [0.0000, 1] (x max)   -> NOT proportional to w0
+PASS  E9 gamma=0.9: the report's ratio (1-e^-(u+g))/(1-e^-(u-g)) does NOT reproduce w0 (expected: an error in line 286)
+      gamma=+0.9 referee lambda1/lambda0=0.04549: sum_c lambda(c) e^(-u d(x,c)) / w0(x) ranges over [1.0000, 1] (x max)   -> proportional to w0
+PASS  E8 gamma=0.9: referee's ratio (e^-g - e^-u)/(1 - e^-(u+g)) reproduces w0
+PASS  E10 gamma=0.9: Corollary A'': q=lambda*m is a law and sum_c q(c) max(w0, H e^(-u d))/w0 = 1+eps0-delta_tr
+PASS  E11 gamma=0.9: members max(w0, H(c) e^(-u d(.,c))) are admissible
+== F. Lemmas 3.1, 3.2, Theorems B, B' ==
+PASS  F1.0 M=30, r=5: a separating r-tuple exists (random success rate 0.35 >= 1 - M/2^r = 0.06 - noise)
+PASS  F2.0 |C|=32 <= 2^r < 2(M+1)
+PASS  F3.0 w_a^C admissible, A preserved, C-invariant
+PASS  F4.0 E_pi[w chi_s] = 0 for all s in S   max |coefficient| 2.78e-17
+PASS  F5.0 exact mean of an unbounded observable with spectrum in S equals its uniform mean
+PASS  F6.0 w_a^C = 1 off the union of |C| balls
+PASS  F1.1 M=42, r=6: a separating r-tuple exists (random success rate 0.49 >= 1 - M/2^r = 0.34 - noise)
+PASS  F2.1 |C|=64 <= 2^r < 2(M+1)
+PASS  F3.1 w_a^C admissible, A preserved, C-invariant
+PASS  F4.1 E_pi[w chi_s] = 0 for all s in S   max |coefficient| 9.54e-18
+PASS  F5.1 exact mean of an unbounded observable with spectrum in S equals its uniform mean
+PASS  F6.1 w_a^C = 1 off the union of |C| balls
+PASS  F1.2 M=31, r=5: a separating r-tuple exists (random success rate 0.36 >= 1 - M/2^r = 0.03 - noise)
+PASS  F2.2 |C|=32 <= 2^r < 2(M+1)
+PASS  F3.2 w_a^C admissible, A preserved, C-invariant
+PASS  F4.2 E_pi[w chi_s] = 0 for all s in S   max |coefficient| 7.81e-18
+PASS  F5.2 exact mean of an unbounded observable with spectrum in S equals its uniform mean
+PASS  F6.2 w_a^C = 1 off the union of |C| balls
+PASS  F1.3 M=15, r=4: a separating r-tuple exists (random success rate 0.35 >= 1 - M/2^r = 0.06 - noise)
+PASS  F2.3 |C|=16 <= 2^r < 2(M+1)
+PASS  F3.3 w_a^C admissible, A preserved, C-invariant
+PASS  F4.3 E_pi[w chi_s] = 0 for all s in S   max |coefficient| 2.82e-18
+PASS  F5.3 exact mean of an unbounded observable with spectrum in S equals its uniform mean
+PASS  F6.3 w_a^C = 1 off the union of |C| balls
+PASS  F1.4 M=49, r=6: a separating r-tuple exists (random success rate 0.48 >= 1 - M/2^r = 0.23 - noise)
+PASS  F2.4 |C|=64 <= 2^r < 2(M+1)
+PASS  F3.4 w_a^C admissible, A preserved, C-invariant
+PASS  F4.4 E_pi[w chi_s] = 0 for all s in S   max |coefficient| 1.73e-17
+PASS  F5.4 exact mean of an unbounded observable with spectrum in S equals its uniform mean
+PASS  F6.4 w_a^C = 1 off the union of |C| balls
+PASS  F1.5 M=34, r=6: a separating r-tuple exists (random success rate 0.55 >= 1 - M/2^r = 0.47 - noise)
+PASS  F2.5 |C|=64 <= 2^r < 2(M+1)
+PASS  F3.5 w_a^C admissible, A preserved, C-invariant
+PASS  F4.5 E_pi[w chi_s] = 0 for all s in S   max |coefficient| 1.39e-17
+PASS  F5.5 exact mean of an unbounded observable with spectrum in S equals its uniform mean
+PASS  F6.5 w_a^C = 1 off the union of |C| balls
+PASS  F7 Theorem B(c): for S = W\{0}, dim W = 3 (n=6), no subgroup of dimension <= 2 has C^perp cap S empty
+PASS  F8 Theorem B' side condition 4 K V <= 2^n (K=32, V=13)
+PASS  F9 Theorem B': P(C^perp meets S) = 0.210 <= M/K = 0.188;  P(O > K m_r/2) = 0.000 <= 1/4
+PASS  F10 Theorem B': for good generators (237/300) w_a is admissible, C-invariant, kills S, A-1 >= K m_r - O >= K m_r/2
+== G. Theorem C: the zoom identity and the sampling bound ==
+PASS  G1 A(w) = 2^-b E_y w(s,y) / nu_w(s) for every cell s
+PASS  G2 every restriction y -> w(s,y) is admissible on n-b sites
+PASS  G3 P_{s~nu^}(|nu_w(s)/nu^(s)-1|>kappa) <= ||nu^-nu_w||_1/kappa, and |ln ratio| <= eps/4 otherwise
+PASS  G4 a cylinder is admissible on X, has A(w)=A(v) and a uniform block law
+== H. Proposition C'(c): the wells ==
+PASS  H1 wells: admissible, =1 on Q, =e^Delta exactly off the balls B(x,rho), A > e^Delta(1-p), TV <= p (<= p/(1-p))   largest TV/p seen 0.620
+
+FAILED CHECKS: none
+
+real	0m17.213s
+user	0m17.432s
+sys	0m0.423s

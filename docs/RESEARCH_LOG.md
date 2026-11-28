@@ -2983,7 +2983,7 @@ inside the session.*
   independent draws is also the probabilistic core of plain Monte Carlo (Theorem 11.44) — the one step
   of "strengthening the formal verification of the upper bounds" taken in Phase II; the bound on the
   relative variance of the class and the nested algorithm remain paper proofs.
-* **Checks.**  `experiments/phase2/p2_checks.py` (31 exact checks); harness block XXVIII (four
+* **Checks.**  `experiments/phase2/p2_checks.py` (32 exact checks); harness block XXVIII (four
   tests) with 21 mutations, all caught.
 * **R29** (`docs/phase2/R29_RESOLUTION.md`): F2 applied; F3–F6 had been applied before the halt after
   our own referee's report; F7 unchanged ([N]); F1 resolved by making the independent exact checker the

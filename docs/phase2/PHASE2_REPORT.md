@@ -28,6 +28,7 @@ algorithm also receives information about the normalised ensemble `μ_w = wπ/A(
 | **A** | means of `M` arbitrary observables `φ_i : X → [−1,1]`, each to absolute tolerance `τ` (answers adversarial inside the tolerance) | at most the factor `L = ⌈2τ^{−2} ln(4M/η)⌉`: `N ≥ (1−η)(1−2δ)·N₀/L` for both lower bounds (`N₀ = 2ⁿ/\|B\|` adaptive, `2ⁿ/\|D\|` non-adaptive).  **Both exponents unchanged iff `ln(1/τ) = o(n)` and `ln ln M = o(n)`** — S1 is correct, and both conditions are necessary (row C) | [P]; cores [V] |
 | **A′** | the same, exponentially precise: `τ = e^{−γn}`, `ln ln M ≈ βn`, `λ = 2γ + β` | adaptive exponent `≥ h̄(λ) := KL(ρ₀ − λ/u ‖ ½) − λ = h − (1−ℓ)λ + O(λ²)` whenever `h̄(λ) > γ` (S1's argument gives `h − λ`); `ℓ = u^{−1}ln((1−ρ₀)/ρ₀)` is the Chernoff parameter (`0.4900` at `u = 1`).  Upper bound `(1 − γ/ln 2)h`.  Non-adaptive: `≥ a − λ`, `≤ (1 − γ/ln 2)a` | [P]; gap open |
 | **A″** | the same on any vertex-transitive finite metric space and for **any reference measure `π`** (any known part) | `N ≥ (1−η)(1−2δ)/(L·P_hit)`; hidden centres are drawn from the *thermally blurred reference* `q ∝ π ∗ e^{−u d}` — the unique law for which mass-normalised cones add up to a constant.  Exponentially strong for homogeneous references; with a field only around tilted baselines, and then below the dip-packing exponent (§2.4) | [P]; identity [V]; values [N] |
+| **2.7** | the same for a **dependent reference** `π ∝ e^{−f}`, `f` any known `κ`-Lipschitz energy (`κ < u`) | sandwich by absorption: lower bounds at the slope `u − κ`, upper bounds at `u + κ`; so `h(u − κ) ≤` exponent `≤ h(u + κ)`, with or without observations | [P] |
 | **B** | **exact** means of any observables whose joint Walsh spectrum has `M` non-zero frequencies | at most the factor `\|C\| < 2(M+1)` (S2 is correct); refined: exponent `≥ h̄(ln M/n)`.  The bound on `\|C\|` is attained (`S = W∖{0}`, `W` a subspace) | [P]; cores [V] |
 | **C** | the exact joint law of `b = θn` coordinates (or that law to total-variation `τ ≤ c·εδ`; `M = 2^{2^b}` unions of cells) | **exponent exactly `(1 − θ)h`** (and `(1 − θ)a` non-adaptively) — so `ln ln M = o(n)` cannot be dropped from A | [P] |
 | **C′** | every bounded observable to tolerance `τ ≤ c·εδ` | **`O(ln(1/δ)/ln(1/τ))` evaluations** suffice for randomised algorithms; deterministic ones still need `Θ̃(τ·2ⁿ)`.  One exact point probability: one evaluation | [P] |
@@ -311,6 +312,49 @@ class exponent itself is invariant is open (§11, problem 4).  For one-body data
 exact invariance of both class exponents is known by a different mechanism (compensation; theory
 report Theorem 11.109a, science division).
 
+### 2.5 Dependent references: a sandwich by absorption
+
+The flat mixture is the wrong tool for a non-uniform reference.  A cruder one works for every known
+part of bounded local oscillation, dependent or not.
+
+**Proposition 2.7 (absorption) [P].**  Let `π₀` be a reference measure on the cube, `f` a *known* function
+with `|f(x) − f(y)| ≤ κ·d(x, y)`, `0 ≤ κ < u`, and `π = e^{−f}π₀/Z_f`, `Z_f = E_{π₀}e^{−f}`.  Write `P(π, u)` for the
+problem "`ln E_π w` for `w ∈ 𝒲_u`, by evaluations of `w`, with any oracle about the ensemble `wπ/E_π w`".  Then
+
+    P(π₀, u − κ)   ≤   P(π, u)   ≤   P(π₀, u + κ)
+
+in the following sense: `w ↦ w e^{−f}` maps `𝒲_u` into `𝒲_{u+κ}` and `v ↦ v e^{f}` maps `𝒲_{u−κ}` into `𝒲_u`; in both
+cases the two instances have **the same ensemble**, their targets differ by the known constant `ln Z_f`,
+and an evaluation of one is an evaluation of the other.  Hence every lower bound for `P(π₀, u − κ)` —
+with or without an observation oracle — holds for `P(π, u)`, and every algorithm for `P(π₀, u + κ)` solves
+`P(π, u)` with the same number of evaluations.
+
+*Proof.*  `|ln(we^{−f})(x) − ln(we^{−f})(y)| ≤ (u + κ)d(x, y)`, and similarly for `ve^{f}` with `u − κ + κ`.
+`E_{π₀}[we^{−f}] = Z_f·E_π w`; the ensembles `we^{−f}π₀` and `wπ` are proportional.  ∎
+
+**Corollary 2.7 (observation invariance for dependent references, in sandwich form) [P, given the
+cube theorems].**  Let `π₀` be uniform and `f` be `κ`-Lipschitz, `κ < u` — a field, a pair interaction with
+`max_i (|θ_i| + Σ_j |J_{ij}|) ≤ κ`, any energy whose single-site moves cost at most `κ`.  Then for the
+reference `π ∝ e^{−f}` and bounded accuracy:
+
+    h(u − κ)  ≤  adaptive exponent  ≤  h(u + κ) ,        a(u − κ)  ≤  non-adaptive exponent  ≤  a(u + κ) ,
+
+and **the two lower bounds persist with means of `M` arbitrary bounded observables at tolerance `τ`
+whenever `ln(1/τ) = o(n)` and `ln ln M = o(n)`** (Theorem A at the slope `u − κ`), with the explicit factor
+`L` of Theorem A at every `n`.  At `u = 1`, `κ = ¼`: `0.0169 ≤ … ≤ 0.0439` (`h(1) = 0.0291`).  With site-dependent
+bounds `κ_i` the same holds with site-dependent slopes `u ∓ κ_i` (classes with several site types, theory
+report §11.26).
+
+*Remarks.*  (1) The sandwich is not sharp — for a field the exact class exponent is known
+(Theorem 11.59) and lies strictly inside — but it needs no structure of `f` beyond the bound `κ`, and it
+is the only statement we have that covers **interacting** known parts together with **arbitrary**
+observables.  (2) It answers, in this weak form, the question the science division left open after
+its Theorem 4 ("a known part that is not invariant under a large group of translations: open"), for
+noisy data of every kind; for exact one-body data with a field its compensation theorem is sharp.
+(3) The same absorption shows that the class is stable under *marginalisation with a dependent
+reference*: integrating out a block `Z` of sites turns `𝒲_u` into `𝒲_{u+κ}` on the remaining sites, `κ` the
+oscillation over `z` of the energy difference of a single-site move (THY-MSG-0023 §3).
+
 ---
 
 ## 3. Theorem B: exact observables (the proposed theorem S2)
@@ -554,6 +598,7 @@ Cost of `ln A` to bounded accuracy on the cube class, randomised algorithms, lea
 | evaluations only | `h` (adaptive), `a` (fixed sample) | theory report §§11.10–11.19 |
 | + means of `M` observables at tolerance `τ`, `ln(τ^{−2}ln M) = o(n)` | unchanged | Theorem A |
 | + the same with `ln(τ^{−2}ln M) = λn` | in `[h̄(λ), (1 − γ/ln 2)h]` | A′, C |
+| evaluations (+ such means) with a known `κ`-Lipschitz energy in the reference | in `[h(u − κ), h(u + κ)]` | Proposition 2.7 |
 | + exact means, joint spectrum `e^{λn}` | `≥ h̄(λ)`; `= (1 − θ)h` for the law of `θn` coordinates | B′, C |
 | + exact marginals of every order `≤ αn` | in `[h̄(h₂(α)), (1 − α)h]` | Corollary B′ |
 | + the mean energy (calorimetry) | `h` in the worst case | science division, Proposition 5b |
@@ -605,7 +650,7 @@ optimality of the bound on `|C|`; the exponent `h̄(λ)`; the sharp value for a 
 | Corollary B′: `θ(α) ≥ h̄(h₂(α))` | `θ(α) ≥ h − h₂(α)` (A8), "the gap between the bounds is open" | the lower bound; positive range `α < 0.0234` instead of `0.0046` (`u = 1`) |
 | Theorem A: arbitrary bounded observables, tolerance `τ`, both exponents | Theorem 4-τ (A10): Walsh characters of every order, `τ ≥ e^{−o(n/ln n)}`, adaptive exponent, by a code and the attenuation `tanh(u/2)^j` | arbitrary observables and the count `M`; the range `ln(1/τ) = o(n)`; the non-adaptive exponent; a different mechanism (random translates) |
 | Corollary A′ | A10 remark (2): "the crossover — tolerance `e^{−γn}` — is open" | two-sided bounds in the crossover |
-| Theorem A″, Lemma 2.6 | compensation for one-body data with a field (Theorem 11.109a) | every bounded observable, every reference measure — at the price of a non-optimal exponent off the uniform cube |
+| Theorem A″, Lemma 2.6; Proposition 2.7 | compensation for one-body data with a field (Theorem 11.109a); "a known part that is not `C`-invariant: open" (their §4, §13 item 2) | every bounded observable and every `κ`-Lipschitz known part, interacting or not — in sandwich form (`u ∓ κ`), not sharp |
 | Theorems C, C′, E | the upper bound `(1 − α)h` for marginals of order `αn` (A8); the remark that a sampler finds the dips (A10) | the matching lower bound for a block; necessity of S1's hypotheses; the full-oracle collapse and its deterministic counterpart; the sample lower bound |
 
 **Prior art outside the programme** (from memory and one bounded search — §12; nothing below was
@@ -627,7 +672,7 @@ not "new".**
 |---|---|
 | Lemmas 2.1, 2.2, 2.3, 2.6, 3.1, 3.2; the form of 2.4 used | **[V]** `proofs/Frontiers/ObservationInvariance.lean` (registered in `proofs/AxiomAudit.lean`) |
 | Theorems A, A′, A″, B, B′, C, C′, E | **[P]** this file; the reductions to the lemmas are short, the asymptotics are binomial estimates |
-| every identity and inequality of §§2–6 on small cubes; the exponent functions | **[N]** exact enumeration, `experiments/phase2/p2_checks.py` (31 checks) and harness block XXVIII (four tests, 21 mutations, all caught) |
+| every identity and inequality of §§2–6 on small cubes; the exponent functions | **[N]** exact enumeration, `experiments/phase2/p2_checks.py` (32 checks) and harness block XXVIII (four tests, 21 mutations, all caught) |
 | internal review | one adversarial AI referee — see `docs/phase2/PHASE2_REVIEW.md` when present |
 | upper bounds | rest on the cube theorems 11.44, 11.54, 11.58 ([P], refereed internally) |
 
@@ -639,8 +684,9 @@ not "new".**
 2. **Samples**: is there an algorithm with samples below `e^{nh}` on the whole class?  Lower bound
    `ν* ≈ 0.40h`.
 3. **Exact marginals of linear order**: `[h̄(h₂(α)), (1 − α)h]`.
-4. **Non-uniform references**: the optimal flat family (baseline and mixture) for a field; is the
-   class exponent with a field invariant under arbitrary bounded observables?  Chains.
+4. **Non-uniform references**: close the sandwich of Proposition 2.7 — is the class exponent with a
+   field (Theorem 11.59), or with an interacting known part, invariant under arbitrary bounded
+   observables at sub-exponential precision?  The optimal flat family (baseline and mixture).
 5. **Homogeneous spaces**: on which transitive spaces is the dip-packing bound the adaptive
    complexity?  (Then Theorem A is an invariance theorem there, as on the cube.)
 6. Machine-checking the passage from the cores to the displayed bounds of Theorems A and B on the

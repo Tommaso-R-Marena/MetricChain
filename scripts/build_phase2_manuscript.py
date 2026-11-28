@@ -70,6 +70,8 @@ exponential in `n`.
   fixed observables and for adaptive statistical queries.  Theorem A′: with narrow dips the adaptive
   exponent at tolerance `e^{−γn}` is at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`.  Theorem A″: the
   construction on homogeneous spaces and for an arbitrary reference measure, with its limits.
+  Proposition 2.7: for a reference `e^{−f}π₀` with a known `κ`-Lipschitz energy — interacting or not — every
+  lower bound holds at the slope `u − κ` and every upper bound at `u + κ`.
 * *Exact means (Section 3).*  Theorem B: the factor `2(M + 1)` for a joint spectrum of `M` frequencies;
   Theorem B′ and its corollary for marginals of linear order.
 * *Where invariance stops (Section 4).*  Theorem C: the exact exponent `(1 − θ)h` with the law of a

@@ -166,6 +166,24 @@ for _ in range(3):
     okA5 &= abs(lhs - rhs) < 1e-12 and rhs <= np.mean(phi5 ** 2) * np.max((np.abs(rho_t) * np.abs(nu_t))[1:]) ** 2 + 1e-12
 check("A5 attenuated bias: E_a(dev^2) = sum_{s != 0} phihat(s)^2 rho~(s)^2 nu~(s)^2 <= E phi^2 max (|rho~| |nu~|)^2", okA5)
 
+# A6: Proposition 2.7 (absorption): a kappa-Lipschitz known energy f moves the slope by at most kappa
+kap, uu = 0.3, 1.0
+okA6 = True
+for _ in range(5):
+    cs6 = rng.integers(0, N, size=4); off6 = rng.uniform(0, 3, size=4)
+    f6 = kap * np.min(D[:, cs6] + off6[None, :], axis=1) * float(rng.choice([-1.0, 1.0]))   # kappa-Lipschitz
+    Zf = np.exp(-f6).mean()
+    pi6 = np.exp(-f6) / np.exp(-f6).sum()
+    v6 = random_admissible(n, uu - kap, D)                    # instance of P(uniform, u - kappa)
+    w6 = v6 * np.exp(f6)                                      # instance of P(pi, u)
+    okA6 &= admissible(v6, n, uu - kap) and admissible(w6, n, uu)
+    okA6 &= abs((pi6 @ w6) - v6.mean() / Zf) < 1e-12 * v6.mean() / Zf
+    okA6 &= np.allclose(pi6 * w6 / (pi6 @ w6), v6 / v6.sum(), rtol=1e-11, atol=0)
+    w7 = random_admissible(n, uu, D)                          # instance of P(pi, u)
+    v7 = w7 * np.exp(-f6)                                     # instance of P(uniform, u + kappa)
+    okA6 &= admissible(v7, n, uu + kap) and abs(v7.mean() - Zf * (pi6 @ w7)) < 1e-12 * v7.mean()
+check("A6 absorption: v e^{f} in W_u for v in W_{u-kappa}, w e^{-f} in W_{u+kappa}; same ensembles; targets differ by ln Z_f", okA6)
+
 # ----------------------------------------------------------------------------- B
 print("== B. exact observables: subgroup averaging ==")
 nb = 8

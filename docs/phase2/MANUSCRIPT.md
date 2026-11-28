@@ -58,6 +58,8 @@ exponential in `n`.
   fixed observables and for adaptive statistical queries.  Theorem A′: with narrow dips the adaptive
   exponent at tolerance `e^{−γn}` is at least `h̄(2γ)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`.  Theorem A″: the
   construction on homogeneous spaces and for an arbitrary reference measure, with its limits.
+  Proposition 2.7: for a reference `e^{−f}π₀` with a known `κ`-Lipschitz energy — interacting or not — every
+  lower bound holds at the slope `u − κ` and every upper bound at `u + κ`.
 * *Exact means (Section 3).*  Theorem B: the factor `2(M + 1)` for a joint spectrum of `M` frequencies;
   Theorem B′ and its corollary for marginals of linear order.
 * *Where invariance stops (Section 4).*  Theorem C: the exact exponent `(1 − θ)h` with the law of a
@@ -400,6 +402,49 @@ precision** [P for the bound, N for its value], between 40 % and 95 % of the dip
 class exponent itself is invariant is open (open problem 4).  For one-body data with a field
 exact invariance of both class exponents is known by a different mechanism (compensation; theory
 report Theorem 11.109a, science division).
+
+### 2.5 Dependent references: a sandwich by absorption
+
+The flat mixture is the wrong tool for a non-uniform reference.  A cruder one works for every known
+part of bounded local oscillation, dependent or not.
+
+**Proposition 2.7 (absorption) [P].**  Let `π₀` be a reference measure on the cube, `f` a *known* function
+with `|f(x) − f(y)| ≤ κ·d(x, y)`, `0 ≤ κ < u`, and `π = e^{−f}π₀/Z_f`, `Z_f = E_{π₀}e^{−f}`.  Write `P(π, u)` for the
+problem "`ln E_π w` for `w ∈ 𝒲_u`, by evaluations of `w`, with any oracle about the ensemble `wπ/E_π w`".  Then
+
+    P(π₀, u − κ)   ≤   P(π, u)   ≤   P(π₀, u + κ)
+
+in the following sense: `w ↦ w e^{−f}` maps `𝒲_u` into `𝒲_{u+κ}` and `v ↦ v e^{f}` maps `𝒲_{u−κ}` into `𝒲_u`; in both
+cases the two instances have **the same ensemble**, their targets differ by the known constant `ln Z_f`,
+and an evaluation of one is an evaluation of the other.  Hence every lower bound for `P(π₀, u − κ)` —
+with or without an observation oracle — holds for `P(π, u)`, and every algorithm for `P(π₀, u + κ)` solves
+`P(π, u)` with the same number of evaluations.
+
+*Proof.*  `|ln(we^{−f})(x) − ln(we^{−f})(y)| ≤ (u + κ)d(x, y)`, and similarly for `ve^{f}` with `u − κ + κ`.
+`E_{π₀}[we^{−f}] = Z_f·E_π w`; the ensembles `we^{−f}π₀` and `wπ` are proportional.  ∎
+
+**Corollary 2.7 (observation invariance for dependent references, in sandwich form) [P, given the
+cube theorems].**  Let `π₀` be uniform and `f` be `κ`-Lipschitz, `κ < u` — a field, a pair interaction with
+`max_i (|θ_i| + Σ_j |J_{ij}|) ≤ κ`, any energy whose single-site moves cost at most `κ`.  Then for the
+reference `π ∝ e^{−f}` and bounded accuracy:
+
+    h(u − κ)  ≤  adaptive exponent  ≤  h(u + κ) ,        a(u − κ)  ≤  non-adaptive exponent  ≤  a(u + κ) ,
+
+and **the two lower bounds persist with means of `M` arbitrary bounded observables at tolerance `τ`
+whenever `ln(1/τ) = o(n)` and `ln ln M = o(n)`** (Theorem A at the slope `u − κ`), with the explicit factor
+`L` of Theorem A at every `n`.  At `u = 1`, `κ = ¼`: `0.0169 ≤ … ≤ 0.0439` (`h(1) = 0.0291`).  With site-dependent
+bounds `κ_i` the same holds with site-dependent slopes `u ∓ κ_i` (classes with several site types, theory
+report §11.26).
+
+*Remarks.*  (1) The sandwich is not sharp — for a field the exact class exponent is known
+(Theorem 11.59) and lies strictly inside — but it needs no structure of `f` beyond the bound `κ`, and it
+is the only statement we have that covers **interacting** known parts together with **arbitrary**
+observables.  (2) It answers, in this weak form, the question the science division left open after
+its Theorem 4 ("a known part that is not invariant under a large group of translations: open"), for
+noisy data of every kind; for exact one-body data with a field its compensation theorem is sharp.
+(3) The same absorption shows that the class is stable under *marginalisation with a dependent
+reference*: integrating out a block `Z` of sites turns `𝒲_u` into `𝒲_{u+κ}` on the remaining sites, `κ` the
+oscillation over `z` of the energy difference of a single-site move (THY-MSG-0023 §3).
 
 ---
 

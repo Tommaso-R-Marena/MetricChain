@@ -1,0 +1,69 @@
+== constants ==
+u=0.5: p_u=0.37754067 a=0.030299862 rho0=0.43814039 h=0.0076728665 ell=0.497425 1-ell=0.502575
+      identities: rho0-(p_u+a/u)=1.15e-41  KL(rho0||p_u)-h=5.74e-42  ln2-h2(rho0)-h=-4.3e-42
+      Chernoff information max_t J(t) = 0.0076728665 at t*=0.497425  (report: h, at t=ell; note: with J(t)=-ln sum (1/2)^(1-t) p^t the maximiser is the weight on Bernoulli(p_u))
+      hbar(0)-h=0.0  hbar(a)=7.17e-43  hbar'(0)=-0.50257476 (-(1-ell)=-0.50257476)  hbar'(a-)=-5.16e-13
+      hbar decreasing on [0,a): True; convex: True; hbar >= h-(1-ell)lam: True
+      nu* = 0.003097163  nu*/h = 0.40365   check hbar(nu*)-2nu* = 8.97e-44
+      Cor A' side condition hbar(2g)=g at g=0.00409979 (bound there 0.0040998);  h/2=0.00383643
+      alpha0 (h2=h) = 0.000966148   alpha1 (h2=a) = 0.00477818
+      Rao remark: min over alpha in (0,0.0095564) of (1-alpha)h - hbar(h2(alpha/2)) = 1.6698e-5 (>0 means: cannot close)
+      slopes at gamma=0: lower -2(1-ell) = -1.0051   upper -h/ln2 = -0.01107
+u=1: p_u=0.26894142 a=0.11094407 rho0=0.37988549 h=0.029139139 ell=0.490034 1-ell=0.509966
+      identities: rho0-(p_u+a/u)=5.74e-42  KL(rho0||p_u)-h=0.0  ln2-h2(rho0)-h=-2.87e-42
+      Chernoff information max_t J(t) = 0.029139139 at t*=0.490034  (report: h, at t=ell; note: with J(t)=-ln sum (1/2)^(1-t) p^t the maximiser is the weight on Bernoulli(p_u))
+      hbar(0)-h=0.0  hbar(a)=4.3e-42  hbar'(0)=-0.50996572 (-(1-ell)=-0.50996572)  hbar'(a-)=-5.64e-13
+      hbar decreasing on [0,a): True; convex: True; hbar >= h-(1-ell)lam: True
+      nu* = 0.01172613  nu*/h = 0.40242   check hbar(nu*)-2nu* = 2.87e-42
+      Cor A' side condition hbar(2g)=g at g=0.0154391 (bound there 0.015439);  h/2=0.0145696
+      alpha0 (h2=h) = 0.0045617   alpha1 (h2=a) = 0.0233873
+      Rao remark: min over alpha in (0,0.046775) of (1-alpha)h - hbar(h2(alpha/2)) = 7.296e-5 (>0 means: cannot close)
+      slopes at gamma=0: lower -2(1-ell) = -1.0199   upper -h/ln2 = -0.042039
+u=2: p_u=0.11920292 a=0.32781333 rho0=0.28310958 h=0.097280908 ell=0.464544 1-ell=0.535456
+      identities: rho0-(p_u+a/u)=5.74e-42  KL(rho0||p_u)-h=1.43e-41  ln2-h2(rho0)-h=1.15e-41
+      Chernoff information max_t J(t) = 0.097280908 at t*=0.464544  (report: h, at t=ell; note: with J(t)=-ln sum (1/2)^(1-t) p^t the maximiser is the weight on Bernoulli(p_u))
+      hbar(0)-h=0.0  hbar(a)=-1.15e-41  hbar'(0)=-0.53545553 (-(1-ell)=-0.53545553)  hbar'(a-)=-7.81e-13
+      hbar decreasing on [0,a): True; convex: True; hbar >= h-(1-ell)lam: True
+      nu* = 0.03873799  nu*/h = 0.39821   check hbar(nu*)-2nu* = -1.43e-42
+      Cor A' side condition hbar(2g)=g at g=0.0500778 (bound there 0.050078);  h/2=0.0486405
+      alpha0 (h2=h) = 0.0198054   alpha1 (h2=a) = 0.101247
+      Rao remark: min over alpha in (0,0.20249) of (1-alpha)h - hbar(h2(alpha/2)) = 0.00028518 (>0 means: cannot close)
+      slopes at gamma=0: lower -2(1-ell) = -1.0709   upper -h/ln2 = -0.14035
+
+== table of section 2.3 (u=1, beta=0) ==
+gamma    h-2g       hbar(2g)   (1-g/ln2)h   [hbar(2g)>g ?]
+0.0      0.0291391  0.0291391  0.0291391   True
+0.002    0.0251391  0.0271333  0.0290551   True
+0.005    0.0191391  0.0242525  0.0289289   True
+0.01     0.00913914  0.0197949  0.0287187   True
+0.0145   0.000139139  0.0161541  0.0285296   True
+
+== finite-n check of the asymptotics of section 1 (exact big-number sums) ==
+u=1 rho=0.3: target u(rho-rho0)=-0.0798855  KL(rho||1/2)=0.0822829
+     n=  500: ln(m_r)/n=-0.0800406   ln(2^n/V)/n=0.0876713
+     n= 2000: ln(m_r)/n=-0.0798861   ln(2^n/V)/n=0.0839736
+     n= 8000: ln(m_r)/n=-0.0798855   ln(2^n/V)/n=0.082792
+u=1 rho=0.35: target u(rho-rho0)=-0.0298855  KL(rho||1/2)=0.0457005
+     n=  500: ln(m_r)/n=-0.0298856   ln(2^n/V)/n=0.0507566
+     n= 2000: ln(m_r)/n=-0.0298855   ln(2^n/V)/n=0.0473055
+     n= 8000: ln(m_r)/n=-0.0298855   ln(2^n/V)/n=0.046188
+u=1 rho=0.379885: target u(rho-rho0)=-4.93042e-7  KL(rho||1/2)=0.0291394
+     n=  500: ln(m_r)/n=-0.00188549   ln(2^n/V)/n=0.0348519
+     n= 2000: ln(m_r)/n=-0.000385493   ln(2^n/V)/n=0.0308569
+     n= 8000: ln(m_r)/n=-1.0493e-5   ln(2^n/V)/n=0.0296122
+u=1 rho=0.45: target u(rho-rho0)=0.0701145  KL(rho||1/2)=0.00500837
+     n=  500: ln(m_r)/n=0.0701145   ln(2^n/V)/n=0.00851423
+     n= 2000: ln(m_r)/n=0.0701145   ln(2^n/V)/n=0.00618683
+     n= 8000: ln(m_r)/n=0.0701145   ln(2^n/V)/n=0.00538594
+
+== Theorem E, exponent of N* at finite n versus hbar(nu)-nu (u=1) ==
+nu=0.004 n=2000: r/n=0.376 (rho0-nu/u=0.375885)  ln N*/n=0.023025  hbar(nu)-nu=0.0231333  N*>=40m/eta1: True
+nu=0.004 n=8000: r/n=0.376 (rho0-nu/u=0.375885)  ln N*/n=0.0231484  hbar(nu)-nu=0.0231333  N*>=40m/eta1: True
+nu=0.008 n=2000: r/n=0.372 (rho0-nu/u=0.371885)  ln N*/n=0.0171053  hbar(nu)-nu=0.0171956  N*>=40m/eta1: True
+nu=0.008 n=8000: r/n=0.372 (rho0-nu/u=0.371885)  ln N*/n=0.0172138  hbar(nu)-nu=0.0171956  N*>=40m/eta1: True
+nu=0.0117 n=2000: r/n=0.3685 (rho0-nu/u=0.368185)  ln N*/n=0.0115813  hbar(nu)-nu=0.0117643  N*>=40m/eta1: False
+nu=0.0117 n=8000: r/n=0.36825 (rho0-nu/u=0.368185)  ln N*/n=0.0118122  hbar(nu)-nu=0.0117643  N*>=40m/eta1: False
+
+real	0m11.712s
+user	0m11.638s
+sys	0m0.004s

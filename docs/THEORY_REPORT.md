@@ -12655,6 +12655,11 @@ Besides evaluations the algorithm receives information about the normalised ense
   `q(c) ∝ E_π e^{−u d(·,c)}` add up to a constant; this gives the analogue of Theorem A on every vertex-transitive
   space and, with a non-uniform reference, a valid but in general weak bound (void at the exponential scale at
   the constant weight with a field; D71).
+* **Proposition 2.7 [P] (absorption).**  For a reference `e^{−f}π₀/Z_f` with a known `κ`-Lipschitz energy `f`, `κ < u`:
+  every lower bound for the reference `π₀` at the slope `u − κ` holds (with or without observations), and every
+  algorithm for `π₀` at the slope `u + κ` applies; so for a uniform `π₀` the adaptive exponent lies in
+  `[h(u − κ), h(u + κ)]` — the only statement of the programme that covers interacting known parts together with
+  arbitrary observables; not sharp (compare Theorem 11.59 for a field).
 * **Theorem B [P; cores V] (`sum_mul_char_eq_zero`, `ensemble_mean_eq_of_spectrum`, `exists_separating_tuple`,
   `parity_balanced`, `exists_generators_cube`, `exists_generators_kill`).**  *Exact* means of observables whose joint
   Walsh spectrum has `M` non-zero frequencies cost at most the factor `|C| < 2(M + 1)` (a subgroup whose annihilator
