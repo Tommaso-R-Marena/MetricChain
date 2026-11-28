@@ -1,8 +1,10 @@
 # Status of the Phase II adaptive-hierarchy division
 
 *Branch `research/phase2-adaptive-hierarchy` (based on the pinned theory commit `b3c5d61`; the original
-branches and the consolidated archive are not modified).  Updated 2026-11-28 05:15 UTC.  **The division
-has stopped; it does not resume when a message arrives.***
+branches and the consolidated archive are not modified).  Updated 2026-11-28 05:40 UTC.  **The division
+has stopped; it does not resume when a message arrives, and it does not poll other branches.**  It acts
+again only on a directive of the research owner (the last one: the collaboration update of 2026-11-28
+about Division 9, answered once by `HIE-MSG-0003`).*
 
 **Mandate** (research owner's directive "Foundational Adaptive-Complexity Moonshot"): determine whether
 every fixed number of adaptive rounds is suboptimal for certifying the log partition function of a
@@ -40,9 +42,23 @@ numerical over-claim of ours refuted and withdrawn).  No human expert has read a
 of the three proofs are hypotheses there, not formalised.
 
 **Mailbox.**  Sent: `messages/hierarchy/HIE-MSG-0001.md`, `HIE-MSG-0002.md` (linked correction of the first
-and the new result; to both other Phase II divisions), `requests/hierarchy/HIE-REQ-0001.md` (answered by
-`ENG-RES-0020`).  Read: THY-MSG-0023, ENG-MSG-0009, ENG-MSG-0010, ENG-RES-0020.  No message of the theory
-instance addresses this division.
+and the new result; to both other Phase II divisions), `HIE-MSG-0003.md` (to Division 9, certified MBAR),
+`requests/hierarchy/HIE-REQ-0001.md` (answered by `ENG-RES-0020`).  Read: THY-MSG-0023, ENG-MSG-0009,
+ENG-MSG-0010, ENG-RES-0020; of Division 9 (`research/phase2-certified-mbar` at `003dad8`, opened 05:23 UTC,
+no finding of its own yet) the provenance note and the imported `MAIN_RESULTS.md` (common model, minimax
+section, limitations).  No message of the theory instance or of Division 9 addresses this division.
+
+**Collaboration with Division 9 (owner's update of 2026-11-28).**  One bounded pass, recorded in
+`HIE-MSG-0003`: (i) the exact relation between statistical sampling complexity and evaluation query
+complexity — they coincide for reweighting to an *unsampled* target from designed references with known
+normalisers, and nowhere else; (ii) five statements that transfer, with status (the one-round exponent is
+the worst-case relative entropy and lies exponentially below the second-moment threshold; a sharp cap on
+what an unvisited region can hold, on the cube and in Gauss space; a two-point lower bound in the MBAR
+oracle model for an unsampled Lipschitz target; stages of design; effective resistance at exponentially
+small overlap is a bottleneck path); (iii) four candidate attacks on the round hierarchy from statistical
+techniques, examined and rejected (graph-structured hiding, many-hypothesis counting, thermodynamic
+length as the constant of the `1/k²` law — refuted numerically —, posterior allocation).  **No new attack
+on the general three-round problem was found.**  None of (ii) has been reviewed.
 
 **Resources.**  This session cannot monitor its expenditure; the scope was bounded instead (local
 computation of a few CPU-minutes per script; no external compute, no Modal job; two reviewing subagents,
