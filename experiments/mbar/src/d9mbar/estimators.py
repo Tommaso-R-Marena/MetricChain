@@ -80,10 +80,11 @@ def minimize_lse(A, target, f0=None, tol=1e-11, maxit=200, constraint=None):
             d = sol[:k]
             lam = sol[k:]
             gnorm = float(np.max(np.abs(g + C.T @ lam)))
-        info.update(iterations=it + 1, grad=gnorm)
-        dec = -(g @ d)
-        if gnorm < tol or dec < 1e-15:
-            info["converged"] = gnorm < max(tol, 1e-9)
+        dec = -(g @ d)                      # Newton decrement: Psi - min Psi ~ dec / 2
+        info.update(iterations=it + 1, grad=gnorm, decrement=float(dec), step=float(np.max(np.abs(d))))
+        if gnorm < tol or dec < 1e-14:
+            # at the minimum to the precision of the objective; `step` estimates the error of f
+            info["converged"] = True
             break
         step = 1.0
         while step > 1e-12:
