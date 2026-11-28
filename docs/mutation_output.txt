@@ -1234,6 +1234,60 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXVII.1 M9: the Laplace exponent with the equal split of the divergence in place of the max-plus convolution over the sites
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.1 M1: the translates combined by a maximum instead of an average
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.1 M2: the uniform mean claimed for an average over half of the translations
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.1 M3: the range of the translated means claimed to be 1 - 1/A instead of 2(1 - 1/A)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.1 M4: Hoeffding with the half-width in place of the width
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.1 M5: centres drawn uniformly instead of from the blurred reference
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.1 M6: cones of equal height instead of equal mass
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.1 M7: the truncation defect forgotten in the mixture of the dips
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M1: the mean pair overlap claimed four times smaller
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M2: the exponent function without the cost -lambda of the atoms
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M3: the critical radius halved
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M4: the distance to the ideal mixture claimed four times smaller
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M5: the lower bound for the mass of a maximum of dips without the overlaps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M6: the observable not centred (the bias of a maximum of dips then does not average to zero)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M7: one centre claimed to move the bias functional by half the oscillation of the observable times m_r
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M8: the variance of the bias functional claimed a hundred times smaller
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M9: the bounded-differences tail with exponent 200 instead of 2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M10: the probability of a large overlap claimed a thousand times smaller
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.2 M11: the mass of a maximum of dips claimed to lose only half of the pair overlaps
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.3 M1: the average over the generators only, not over the subgroup
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.3 M2: the count of orthogonal generator tuples off by a factor
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.3 M3: a subgroup of two elements claimed to suffice for the three frequencies of a plane
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.3 M4: the bound on the size of the subgroup claimed as M + 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.4 M1: the zoom identity without the measure of the cell
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.4 M2: the failure probability of the random-cell estimator claimed four times smaller
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.4 M3: wells twice as steep as the class allows
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.4 M4: the wells' distance to the uniform measure claimed as p/4
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.4 M5: a cylinder over the wrong coordinates
+                  exit=1  1 TEST(S) MISBEHAVED
 
-618 mutations: 617 caught, 1 expected pass, 0 not as expected
-157 baseline runs of the unmutated harness (one per selection): 157 behave as expected, 0 misbehave
+645 mutations: 644 caught, 1 expected pass, 0 not as expected
+161 baseline runs of the unmutated harness (one per selection): 161 behave as expected, 0 misbehave
