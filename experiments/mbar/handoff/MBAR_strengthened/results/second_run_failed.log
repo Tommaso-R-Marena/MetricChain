@@ -1,0 +1,15 @@
+Python float64 reference checks; seed 20261128; NumPy 2.3.5 SciPy 1.17.0
+PASS disconnected / tiny-rank / invalid-matrix / separated-solver / zero-bridge checks
+{'trials': 1500, 'max_positive_jensen_gap': 0.0, 'max_relative_gradient_error': np.float64(6.053947789733019e-09), 'max_variance_identity_error': np.float64(1.1191048088221578e-13), 'max_euler_error': 0.0}
+{'attempted': 60, 'converged': 60, 'median_reduction_vs_uniform': 0.1301566161381103, 'median_reduction_vs_resistance_optimum': 0.09299438808191923, 'max_reduction_vs_resistance_optimum': 0.32594482294208604}
+{'N_per_state': 100, 'overlap': 0.05, 'trials': 100, 'bridge_noncoverage': 0, 'bridge_all_finite': 100, 'bridge_median_endpoint_width': 8.852825454190302, 'cut_noncoverage': 0, 'solver_fallbacks': 0, 'cut_finite': 0, 'cut_median_width': inf}
+{'N_per_state': 100, 'overlap': 0.35, 'trials': 100, 'bridge_noncoverage': 0, 'bridge_all_finite': 100, 'bridge_median_endpoint_width': 3.2270218215838518, 'cut_noncoverage': 0, 'solver_fallbacks': 0, 'cut_finite': 100, 'cut_median_width': 6.149744555681658}
+{'N_per_state': 1000, 'overlap': 0.05, 'trials': 100, 'bridge_noncoverage': 0, 'bridge_all_finite': 100, 'bridge_median_endpoint_width': 2.4596495471516286, 'cut_noncoverage': 0, 'solver_fallbacks': 0, 'cut_finite': 0, 'cut_median_width': inf}
+{'N_per_state': 1000, 'overlap': 0.35, 'trials': 100, 'bridge_noncoverage': 0, 'bridge_all_finite': 100, 'bridge_median_endpoint_width': 0.9920070522079929, 'cut_noncoverage': 0, 'solver_fallbacks': 0, 'cut_finite': 100, 'cut_median_width': 0.7154401930893517}
+{'N_per_state': 10000, 'overlap': 0.05, 'trials': 100, 'bridge_noncoverage': 0, 'bridge_all_finite': 100, 'bridge_median_endpoint_width': 0.7660152671624095, 'cut_noncoverage': 0, 'solver_fallbacks': 0, 'cut_finite': 100, 'cut_median_width': 1.4977993015792241}
+{'N_per_state': 10000, 'overlap': 0.35, 'trials': 100, 'bridge_noncoverage': 0, 'bridge_all_finite': 100, 'bridge_median_endpoint_width': 0.30736040294730593, 'cut_noncoverage': 0, 'solver_fallbacks': 0, 'cut_finite': 100, 'cut_median_width': 0.19963543978217213}
+Traceback (most recent call last):
+  File "/mnt/data/MBAR_strengthened/software/test_and_benchmark.py", line 82, in <module>
+    assert kl<=bound+1e-10 and np.ptp(theta)<=d+1e-8 and V/R>=.75-1e-9
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

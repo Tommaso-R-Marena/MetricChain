@@ -1,0 +1,12 @@
+Python float64 reference checks; seed 20261128; NumPy 2.3.5 SciPy 1.17.0
+PASS disconnected / tiny-rank / invalid-matrix / separated-solver / zero-bridge checks
+{'trials': 1500, 'max_positive_jensen_gap': 0.0, 'max_relative_gradient_error': np.float64(6.053947789733019e-09), 'max_variance_identity_error': np.float64(1.1191048088221578e-13), 'max_euler_error': 0.0}
+{'attempted': 60, 'converged': 60, 'median_reduction_vs_uniform': 0.1301566161381103, 'median_reduction_vs_resistance_optimum': 0.09299438808191923, 'max_reduction_vs_resistance_optimum': 0.32594482294208604}
+Traceback (most recent call last):
+  File "/mnt/data/MBAR_strengthened/software/test_and_benchmark.py", line 61, in <module>
+    center,O,res=solve(U,labels); rad=observable_cut_radius(U,labels,center,.05); cut_finite+=int(np.isfinite(rad)); cut_bad+=int(np.ptp(center-fs)>rad+1e-12); cut_width.append(2*rad)
+                 ~~~~~^^^^^^^^^^
+  File "/mnt/data/MBAR_strengthened/software/mbar_certified.py", line 55, in solve
+    if not np.isfinite(res.fun) or residual>tol: raise RuntimeError(f'optimizer residual {residual}')
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: optimizer residual 2.1774848035782668e-09

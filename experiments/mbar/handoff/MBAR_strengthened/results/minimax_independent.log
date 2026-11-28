@@ -1,0 +1,2 @@
+Python float64 reference checks; seed 20261128; NumPy 2.3.5 SciPy 1.17.0
+{'trials': 1000, 'max_KL_to_bound_ratio': np.float64(0.2063088796987906), 'min_corrected_variance_to_resistance': 0.8749999999999961, 'max_resistance_ratio': 1.6463107530715366}
