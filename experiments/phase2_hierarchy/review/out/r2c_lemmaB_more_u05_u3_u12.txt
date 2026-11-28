@@ -1,0 +1,8 @@
+u=0.5 (N_u=41): sizes [(41, 41), (43, 82), (123, 41, 42), (41, 41, 41), (61, 83, 41)]: largest X = +0.047   [41 s]
+u=3 (N_u=9): sizes [(9, 9, 9, 9, 9), (9, 10, 11, 12, 13), (27, 9, 18, 9)]: largest X = +0.336   [61 s]
+u=12 (N_u=6): sizes [(6, 6, 6, 6, 6), (6, 7, 8, 9, 10), (30, 6, 12)]: largest X = +0.863   [64 s]
+978 cases, all inside the hypotheses of Lemma B (parity version)
+largest X          : +0.863 at (u, ns, roles, mult, allowance) = (12.0, (6, 6, 6, 6, 6), np.str_('QTTTQ'), 0.0, 145.84968011212865)
+largest X_hidden   : -0.146 at (0.5, (41, 41), 'TT', 0.0, 45.18840607796598)
+largest X-allowance: -45.188 at (0.5, (41, 41), 'QQ', 0.0, 45.18840607796598)  (the lemma requires <= 0)
+exit 0

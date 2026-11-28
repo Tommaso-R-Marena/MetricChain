@@ -1,15 +1,19 @@
 """
 Phase II (adaptive hierarchy) -- the relaxation principle for arbitrary nested hidden partitions
-(report section 7.3, Theorem P): two independent checks.
+(HIERARCHY_ADDENDUM.md, section A2, Theorem P): checks.
 
 Setting.  Fine classes c with weights phi_c; a type is z in [0,1]^C (density of ones per class);
 r(z) = sum phi_c f(z_c), f = KL(.||1/2); ||z - z'|| = sum phi_c |z_c - z'_c|.  Partitions G1 <= G2 of the
 classes (G2 refines G1).  avg_k = averaging over the cells of G_k, cost_k(z) = r(z) - r(avg_k z).
-   V0 = { r <= theta }            what a blind batch sees
+   K  = [kappa, 1-kappa]^C        the core (rate <= h: seen by a blind batch of e^{nh} points)
+   V0 = { r <= theta }            what a blind batch of e^{n theta} points sees (contains K when theta >= h)
    V1 = { cost_1 <= theta }       what a batch that knows G1 sees
    V2 = { cost_2 <= theta }       what a batch that knows G2 sees
-Hypotheses on a u-Lipschitz F:  F = F o avg_1 on V0,  F = F o avg_2 on V1.   nu0 = sup_{V0} (-F - r).
-Theorem P:  theta >= h  ==>  -F(y) - r(y) <= nu0 + h - theta  for every y outside V2.
+Theorem P (as stated in the addendum): F u-Lipschitz, F = F o avg_1 on K, F = F o avg_2 on V1, nu_K = sup_K (-F - r)
+   ==>  -F(y) - r(y) <= nu_K + h - theta  for every y outside V2.
+A weaker variant (hypothesis and normalisation on all of V0 instead of K; this is what the first round of
+the algorithm provides when theta >= h) follows from it.  Part A checks the chain of the proof, which uses K
+only.  Part B1/B2 compute extremal profiles for the weaker variant, part B3 for the theorem as stated.
 
 PART A (the chain of the proof, random instances, no grid).  For a random instance and a random y outside V2
 the script builds the three points of the proof,
@@ -28,6 +32,10 @@ exchanges between classes of the same G1-cell inside V0 and of the same G2-cell 
 components of the exchange graph, so nothing is assumed about the shape of the regions).  Reported:
    gain = max over types outside V2 of [U - R]      (theorem:  <= n h - Theta + O(#classes u) in entropy form,
                                                       + O(#classes log n) with exact binomial probabilities).
+In B3 the blind region V0 is replaced by the lattice points of the core K ("inner") or by the smallest
+lattice box that contains K ("outer"); the anchor of the proof sits at kappa*n_c, which is not a lattice
+point, so the inner version can exceed the bound by up to (u - |f'(kappa)|) per class and the outer version
+is slightly stronger than the theorem.  (Suggested by the reviewer of the addendum, who ran this first.)
 """
 import sys, itertools
 import numpy as np
@@ -170,7 +178,7 @@ def lip_pass(U, u):
         for i in range(U.shape[0] - 2, -1, -1): np.minimum(U[i], U[i + 1] + u, out=U[i])
         U = np.moveaxis(U, 0, ax)
     return U
-def extremal(u, ns, G1, G2, Theta, form="entropy", iters=400):
+def extremal(u, ns, G1, G2, Theta, form="entropy", iters=400, blind="budget"):
     """form = "entropy":  R = sum n_c f(k_c/n_c) and cost_G = R - sum_g n_g f(a_g/n_g)   (no polynomial prefactors)
        form = "binomial": R = -ln P(type), cost_G = -ln P(type | its G-shell)             (exact probabilities)"""
     shape = tuple(n + 1 for n in ns)
@@ -187,7 +195,13 @@ def extremal(u, ns, G1, G2, Theta, form="entropy", iters=400):
             ng = sum(ns[i] for i in g); ag = sum(grids[i] for i in g)
             c -= shell(ng, ag)
         return c
-    V0 = R <= Theta; V1 = cost(G1) <= Theta; V2 = cost(G2) <= Theta
+    V1 = cost(G1) <= Theta; V2 = cost(G2) <= Theta
+    if blind == "budget": V0 = R <= Theta
+    else:                                   # the core: kappa <= k_c/n_c <= 1 - kappa for every class
+        kap = consts(u)[4]; V0 = np.ones(shape, bool)
+        for n_c, k in zip(ns, grids):
+            lo = np.ceil(kap * n_c - 1e-9) if blind == "inner" else np.floor(kap * n_c + 1e-9)
+            V0 &= (k >= lo) & (k <= n_c - lo)
     pairs = lambda G: [(c, d) for g in G for c in g for d in g if c < d]
     lab0 = components(V0, shape, pairs(G1)); lab1 = components(V1, shape, pairs(G2))
     INF = 1e18
@@ -244,7 +258,40 @@ def part_B():
                 row.append("n=%d: %+.2f / %+.2f" % (n, ex[0], ex[1]))
             print("  u=%g %-38s %s" % (u, name, " | ".join(row))); sys.stdout.flush()
 
+def part_B3():
+    print("PART B3: the theorem as stated (hypothesis (H1) and the normalisation on the core K only), entropy form.")
+    print("         excess = [max over hidden types of (U - R)] - (n h - Theta), in units of u; inner / outer lattice core.")
+    worst_in = worst_out = -1e9
+    for u in (2.0, 4.0):
+        pu, L1, a, h, kap = consts(u)
+        for name, ns, G1, G2 in CASES:
+            n = sum(ns); row = []
+            for th in (1.0, 1.2, 1.5):
+                ex = []
+                for blind in ("inner", "outer"):
+                    gain, at, it = extremal(u, ns, G1, G2, th * n * h, blind=blind)
+                    ex.append((gain - (n * h - th * n * h)) / u)
+                row.append("%.1f: %+6.2f / %+6.2f" % (th, ex[0], ex[1]))
+                if np.isfinite(ex[0]): worst_in = max(worst_in, ex[0])
+                if np.isfinite(ex[1]): worst_out = max(worst_out, ex[1])
+            print("  u=%g n=%d sizes %-17s G1=%-17s G2=%-17s Theta/nh = %s" % (u, n, ns, G1, G2, " | ".join(row)))
+            sys.stdout.flush()
+    print("  largest excess: inner core %.2f u, outer core %.2f u" % (worst_in, worst_out))
+    print("  growth with n, two hidden classes 1:3 in one cell, u = 2 (inner / outer):")
+    pu, L1, a, h, kap = consts(2.0)
+    for th in (1.0, 1.2, 1.5):
+        row = []
+        for scale in (60, 120, 240, 480):
+            ns = (scale, 3 * scale); n = sum(ns); ex = []
+            for blind in ("inner", "outer"):
+                gain, at, it = extremal(2.0, ns, [[0, 1]], [[0, 1]], th * n * h, blind=blind)
+                ex.append((gain - (n * h - th * n * h)) / 2.0)
+            row.append("n=%d: %+.2f / %+.2f" % (n, ex[0], ex[1]))
+        print("    Theta = %.1f n h:  %s" % (th, " | ".join(row))); sys.stdout.flush()
+
 if __name__ == "__main__":
     which = sys.argv[1] if len(sys.argv) > 1 else "AB"
-    if "A" in which: part_A()
-    if "B" in which: part_B()
+    if which == "B3": part_B3()
+    else:
+        if "A" in which: part_A()
+        if "B" in which: part_B()

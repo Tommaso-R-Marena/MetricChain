@@ -34,3 +34,9 @@ u=4 ns=[120, 120, 120] QQT theta/h=1.00 | author viol=  +4.952 hid=     -inf | r
 u=4 ns=[120, 120, 120] QQT theta/h=1.30 | author viol=  +0.000 hid=     -inf | reviewer (no parity) X=  +0.000 hid=     -inf | with parity X=  +0.017
 u=4 ns=[120, 120, 120] QTT theta/h=1.00 | author viol=  +4.952 hid=   +4.952 | reviewer (no parity) X=  +4.952 hid=   +4.952 | with parity X=  +4.969
 u=1 ns=[40, 40, 60, 60] PPQT theta/h=1.00 | author viol=  -1.863 hid=   -1.958 | reviewer (no parity) X=  -1.863 hid=   -1.958 | with parity X=  -1.830
+u=1 ns=[50, 50, 50, 50] PQQT theta/h=1.00 | author viol=  -1.257 hid=   -1.257 | reviewer (no parity) X=  -1.257 hid=   -1.257 | with parity X=  -1.178
+u=2 ns=[40, 40, 60, 60] PPQT theta/h=1.00 | author viol=  -6.550 hid=   -9.087 | reviewer (no parity) X=  -6.550 hid=   -9.087 | with parity X=  -6.386
+u=2 ns=[50, 50, 50, 50] PQQT theta/h=1.00 | author viol=  -4.864 hid=   -6.374 | reviewer (no parity) X=  -4.864 hid=   -6.374 | with parity X=  -4.825
+max |reviewer X(no parity) - author viol| = 0.0005 ; max |difference of hidden maxima| = 0.0005 ; rows where the exact extremal value exceeds the author's by > 0.002: 0
+max increase of X due to parity-dependent profiles: 0.1640
+exit 0

@@ -1,0 +1,66 @@
+PART C: facts (C1)-(C4)
+   (C1) |cost_1(z) - cost_1(avg_2 z) - cost_2(z)|        max 3.11e-15
+   (C1) cost_2 - cost_1, r(avg z) - r(z), -cost           max +3.11e-15
+   (C2) ||avg z - avg z'|| - ||z - z'||                   max +2.22e-16
+   (C4) increase of T_g(max(z,lam)) in lam / of T_g(min(z,lam)) as lam decreases   max +9.21e-15
+   (C3) chi >= 0, chi(p_u) = 0, chi(kappa) = h, monotonicity, symmetry, p_u < kappa < 1/2, step identity; worst defect +1.07e-14 (11 slopes 0.01..40)
+   all facts hold: True
+PART A: the chain of Steps 1-5, own implementation; all quantities in units of h; each must be <= 0 (or = 0) up to rounding
+  12000 hidden instances (29239 draws).  by structure/family: random/fam0:985, random/fam1:1151, random/fam2:1361, random/fam3:466, random/fam4:1119, random/fam5:748, split-into-three/fam0:479, split-into-three/fam1:564, split-into-three/fam2:648, split-into-three/fam3:240, split-into-three/fam4:516, split-into-three/fam5:317, three-in-one-cell/fam0:582, three-in-one-cell/fam1:692, three-in-one-cell/fam2:746, three-in-one-cell/fam3:247, three-in-one-cell/fam4:634, three-in-one-cell/fam5:505
+   |Phi(s) - theta|  (existence of s)                   max +2.222e-12   at u=0.1 theta=277.0109h 4 classes |G1|=2 |G2|=2 min w=6.8e-03 fam1 random
+   |avg_2 e' - m'|                                      max +7.111e-13   at u=0.1 theta=1.3000h 7 classes |G1|=2 |G2|=4 min w=2.1e-05 fam1 random
+   | ||e-e'|| - ||m-m'|| |                              max +9.777e-13   at u=0.1 theta=1.0500h 3 classes |G1|=1 |G2|=1 min w=2.7e-03 fam3 three-in-one-cell
+   lambda_g beyond kappa                                max +7.111e-13   at u=0.1 theta=1.3000h 7 classes |G1|=2 |G2|=4 min w=2.1e-05 fam1 random
+   T(e') - T(e)                 [(C4)]                  max +2.666e-13   at u=0.1 theta=388.3482h 7 classes |G1|=1 |G2|=3 min w=6.2e-02 fam1 split-into-three
+   |cost_1(e') - T(e') - Q(m')|  [(C1)]                 max +4.859e-13   at u=0.1 theta=3.0000h 5 classes |G1|=1 |G2|=3 min w=6.2e-02 fam4 split-into-three
+   cost_1(e') - theta           [(H2) applicable]       max +3.668e-13   at u=0.1 theta=1.3000h 6 classes |G1|=1 |G2|=3 min w=8.6e-04 fam2 split-into-three
+   m', p outside K              [(H1), nu_K applicable] max +5.333e-13   at u=0.1 theta=168.0677h 7 classes |G1|=2 |G2|=3 min w=1.0e-06 fam2 random
+   Step 3 bookkeeping identity                          max +7.111e-13   at u=0.1 theta=1.0000h 3 classes |G1|=1 |G2|=1 min w=2.0e-04 fam1 three-in-one-cell
+   ||y-e'|| - ||y-e|| - ||m-m'||                        max +1.067e-12   at u=0.1 theta=1.0500h 3 classes |G1|=1 |G2|=1 min w=2.7e-03 fam3 three-in-one-cell
+   max_g A_g - phi_g h         [Step 4]                 max +2.949e-13   at u=0.1 theta=1.0010h 5 classes |G1|=1 |G2|=3 min w=1.8e-05 fam4 split-into-three
+   Pi_1 + Pi_2 - h              [Step 5]                max -1.979e-04   at u=10 theta=1.0000h 3 classes |G1|=1 |G2|=1 min w=1.6e-01 fam4 three-in-one-cell
+   B = r(p)-r(y)+u||y-e'||-(h-theta)  [conclusion]      max -1.979e-04   at u=10 theta=1.0000h 3 classes |G1|=1 |G2|=1 min w=1.6e-01 fam4 three-in-one-cell
+   (for information) same without the step F(m')=F(p)   max +5.675e-01   at u=2 theta=1.0010h 8 classes |G1|=1 |G2|=4 min w=1.2e-03 fam4 random
+  all claims hold: True
+PART O: sup over hidden y of B(y)/h by Nelder-Mead (5 starts per case); the proof says sup <= 0
+   two classes, one cell (tight case of Remark 4)   u=1 theta=1.0h : sup B/h = +0.000000 at y = [0.2689 0.7311]
+   two classes, one cell (tight case of Remark 4)   u=1 theta=1.2h : sup B/h = -0.000000 at y = [0.6153 0.8468]
+   two classes, one cell (tight case of Remark 4)   u=4 theta=1.0h : sup B/h = +0.000000 at y = [0.982 0.018]
+   two classes, one cell (tight case of Remark 4)   u=4 theta=1.2h : sup B/h = -0.270659 at y = [0.018 0.982]
+   two classes 1:9, one cell                        u=1 theta=1.0h : sup B/h = -0.000000 at y = [0.6118 0.2308]
+   two classes 1:9, one cell                        u=1 theta=1.2h : sup B/h = -0.000000 at y = [0.6453 0.2271]
+   two classes 1:9, one cell                        u=4 theta=1.0h : sup B/h = -0.265972 at y = [0.173 1.   ]
+   two classes 1:9, one cell                        u=4 theta=1.2h : sup B/h = -0.341878 at y = [0.0638 1.    ]
+   three classes (3%,47%,50%) in one cell           u=1 theta=1.0h : sup B/h = +0.000000 at y = [0.7311 0.7311 0.2689]
+   three classes (3%,47%,50%) in one cell           u=1 theta=1.2h : sup B/h = -0.000000 at y = [0.     0.3822 0.1786]
+   three classes (3%,47%,50%) in one cell           u=4 theta=1.0h : sup B/h = -0.042920 at y = [1.    0.    0.982]
+   three classes (3%,47%,50%) in one cell           u=4 theta=1.2h : sup B/h = -0.313297 at y = [1.    0.    0.982]
+   four classes, cell split into {0},{1},{2,3}      u=1 theta=1.0h : sup B/h = -0.000000 at y = [0.2689 0.2689 0.5869 0.1894]
+   four classes, cell split into {0},{1},{2,3}      u=1 theta=1.2h : sup B/h = -0.275008 at y = [0.4497 0.2865 0.5968 0.1668]
+   four classes, cell split into {0},{1},{2,3}      u=4 theta=1.0h : sup B/h = -0.109502 at y = [0.982 1.    1.    0.   ]
+   four classes, cell split into {0},{1},{2,3}      u=4 theta=1.2h : sup B/h = -inf at y = None
+   four classes, one cell -> pairs                  u=1 theta=1.0h : sup B/h = -0.000000 at y = [0.8766 0.5855 0.76   0.7021]
+   four classes, one cell -> pairs                  u=1 theta=1.2h : sup B/h = -0.000000 at y = [0.8906 0.5715 0.7048 0.7574]
+   four classes, one cell -> pairs                  u=4 theta=1.0h : sup B/h = -0.037931 at y = [1.    0.018 0.018 1.   ]
+   four classes, one cell -> pairs                  u=4 theta=1.2h : sup B/h = -0.327556 at y = [1.    0.    1.    0.018]
+   nested {0,1},{2,3} -> {0,1},{2},{3}              u=1 theta=1.0h : sup B/h = -0.000001 at y = [0.6136 0.907  0.7309 0.7311]
+   nested {0,1},{2,3} -> {0,1},{2},{3}              u=1 theta=1.2h : sup B/h = -0.000045 at y = [0.6033 0.922  0.7307 0.7319]
+   nested {0,1},{2,3} -> {0,1},{2},{3}              u=4 theta=1.0h : sup B/h = -0.043286 at y = [0.018 1.    0.018 0.982]
+   nested {0,1},{2,3} -> {0,1},{2},{3}              u=4 theta=1.2h : sup B/h = -0.324647 at y = [0.    1.    1.    0.018]
+   five classes -> {0,1},{2,3},{4}                  u=1 theta=1.0h : sup B/h = -0.010120 at y = [0.7311 0.2689 0.7311 0.2689 0.2689]
+   five classes -> {0,1},{2,3},{4}                  u=1 theta=1.2h : sup B/h = -0.190361 at y = [0.7311 0.2689 0.7311 0.7311 0.2689]
+   five classes -> {0,1},{2,3},{4}                  u=4 theta=1.0h : sup B/h = -0.013620 at y = [0.982 0.018 0.982 0.018 0.018]
+   five classes -> {0,1},{2,3},{4}                  u=4 theta=1.2h : sup B/h = -0.271909 at y = [0.982 0.018 0.982 0.018 0.018]
+   three hidden classes after split {0,1,2},{3}     u=1 theta=1.0h : sup B/h = -0.039047 at y = [0.7311 0.7311 0.2689 0.2689]
+   three hidden classes after split {0,1,2},{3}     u=1 theta=1.2h : sup B/h = -0.221885 at y = [0.2689 0.7311 0.2689 0.2689]
+   three hidden classes after split {0,1,2},{3}     u=4 theta=1.0h : sup B/h = -0.075554 at y = [0.018 0.982 0.018 0.018]
+   three hidden classes after split {0,1,2},{3}     u=4 theta=1.2h : sup B/h = -0.310814 at y = [0.018 0.982 0.018 0.018]
+   largest value found: +2.858e-15 h   (0 is attained in the two-class case at theta = h, y = (p_u, 1-p_u))
+PART L: theta < h.  If Phi(1) <= theta the chain applies verbatim; otherwise s = 1, e = clip_kappa(y) in K and (H1) alone give
+        -F(y) - r(y) <= nu_K + [r(avg_1 e) - r(y) + u||y - e||] <= nu_K + h - cost_1(e) < nu_K + h - theta.
+   4000 instances with theta in (0.05h, h): 2293 by (H1) alone, 1707 by the chain; max of [bound - (h - theta)]/h = -5.214e-03
+OVERALL: no violation found
+
+real	2m25.824s
+user	6m6.898s
+sys	0m0.315s

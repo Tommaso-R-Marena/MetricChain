@@ -1,0 +1,9 @@
+M2 theta=0.2501: min bracket = 0.000200, claimed lower bound s(s-1)/8 = 0.000025, sharp value 2 sqrt(theta)-1 = 0.000200
+M2 theta=0.2600: min bracket = 0.019804, claimed lower bound s(s-1)/8 = 0.002525, sharp value 2 sqrt(theta)-1 = 0.019804
+M2 theta=0.3000: min bracket = 0.095445, claimed lower bound s(s-1)/8 = 0.013069, sharp value 2 sqrt(theta)-1 = 0.095445
+M2 theta=0.5000: min bracket = 0.414214, claimed lower bound s(s-1)/8 = 0.073223, sharp value 2 sqrt(theta)-1 = 0.414214
+M2 theta=1.0000: min bracket = 1.000000, claimed lower bound s(s-1)/8 = 0.250000, sharp value 2 sqrt(theta)-1 = 1.000000
+M2 theta=2.0000: min bracket = 2.000000, claimed lower bound s(s-1)/8 = 0.646447, sharp value 2 sqrt(theta)-1 = 1.828427
+M2 theta=5.0000: min bracket = 5.000000, claimed lower bound s(s-1)/8 = 1.940983, sharp value 2 sqrt(theta)-1 = 3.472136
+M2: min over theta of (min bracket)/(s(s-1)/8) = 2.576 (must be >= 1)
+M3: 54155 hidden types in the sub-case "x <= R, T not relaxed" with theta > h; margin smaller than claimed: 0; min margin/claimed = 1.246

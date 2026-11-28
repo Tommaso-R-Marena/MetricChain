@@ -7,9 +7,15 @@ the theory division: **[V]** machine-checked, **[P]** paper proof in this file, 
 (script named), **[K]** quoted from the archive (with its own status), **[C]** conjecture.  "Reviewed"
 below always means reviewed by another AI session.  Nothing here has been read by a human expert.*
 
+*Later additions (same day), each marked where it occurs: the independent replication by the engineering
+division (`ENG-RES-0020` on `research/phase2-certified-inference`) and the corrections it led to (§3, §4);
+the outcome of the reviews (§12); and `HIERARCHY_ADDENDUM.md`, which extends Theorem H1 from known blocks to
+**hidden partitions** (Theorems P and H6 there) and settles open problems 1 and 2 of §8 for bounded
+structure.  Read the addendum together with this report: §0, §8 and §10 are stated here as updated by it.*
+
 *Resource note.  This session cannot see its own expenditure.  The work was therefore kept bounded:
 one line of attack at a time, all computations on the local container (no external compute, no Modal
-request), one reviewing subagent.  It stops at completion and does not resume when a message arrives.*
+request), two reviewing subagents (one for this report, one for the addendum), each used once.  It stops at completion and does not resume when a message arrives.*
 
 ---
 
@@ -31,21 +37,23 @@ functions, the cones and dips of the one-round and hinted lower bounds, the two-
 
 | | statement | status |
 |---|---|---|
-| **H1** | **Three rounds suffice on every block-radial class.**  For every `u`, `m`, every partition into `m` blocks and every `η > 0` there is a three-round algorithm that, for all large `n` and every `ψ ∈ BR_m`, returns a valid bracket of any prescribed ratio with probability `1 − δ` from at most `e^{n(h+η)}` evaluations.  Hence `c_3(BR_m) = h = c_∞(BR_m)`. | [P] §4; lower bound [K: Theorem 11.25, V]; simulation [N] |
+| **H1** | **Three rounds suffice on every block-radial class.**  For every `u`, `m`, every partition into `m` blocks of size at least a constant `N_u`, and every `η > 0` there is a three-round algorithm that, for all large `n` and every `ψ ∈ BR_m`, returns a valid bracket of any prescribed ratio with probability `1 − δ` from at most `e^{n(h+η)}` evaluations.  Hence `c_3(BR_m) = h = c_∞(BR_m)`.  (Blocks of any size, and unknown: Theorem H6 of the addendum.) | [P] §4, for `n ≥ n₀(u, m, η, ε, δ)`; lower bound [K: Theorem 11.25, V]; simulation and cube-level tests [N] |
 | **Lemma B** | *The relaxation lemma* behind H1: if a block-radial energy shows, to a blind batch of `e^{nθ}` points, dependence on the blocks `P` only, and, to a batch that knows the centres of `P`, dependence on `P ∪ Q` only, then **every** type that is atypical in the remaining blocks `T` beyond the budget carries at most `e^{n(h−θ)+O(log n)}` times the largest mass a blind batch sees.  "What two rounds do not reveal carries no mass." | [P] §3, complete at finite `n` with explicit constants; exact check on extremal functions [N] |
 | **H2** | **The two-round exponent of two blocks, exactly:** `c_2(BR_2(φ_1, φ_2)) = max{h, ϑ(φ_1), ϑ(φ_2)}`, with `ϑ(φ) = min{(1−φ)a, root of Ξ(·, φ)}` the threshold of Theorem 11.86.  The lower bound is the archive's; the matching upper bound — the step the archive left as "numerical" in its conjecture (U_REPORT §3.4, §8 item 2) — is proved here, for bounded accuracy. | [P] §5; lower bound [K: Theorem 11.86, P refereed; coupling V] |
-| **Hierarchy** | On block-radial classes the round hierarchy has **exactly three levels**: `a` (one round), a value in `(h, a)` equal to `θ₂*(u)` at the best two-block split (two rounds), and `h` from three rounds on.  At `u = 1`: `0.1109`, `0.0399`, `0.0291`. | corollary |
-| **Barrier** | Consequently **no argument that hides centres of a block-radial energy — the only technique by which a round lower bound has been proved in this programme — can show `c_3(u) > h`,** for any `u`, any number of blocks, any split.  The failure of the three-block chain is not a matter of parameters: Lemma B applies to every member of every `BR_m`. | corollary of Lemma B |
-| **Beyond blocks** | (i) In the small-slope limit the same obstruction holds for "flags" of hidden directions with *any* admissible Lipschitz body (centres that overlap instead of living in disjoint blocks), for every number of rounds `r ≥ 3`.  (ii) Exponentially many indistinguishable copies of a hidden structure ("a code of cells") dilute the later rounds, but cost the adversary exactly the same exponent in mass; the relaxation argument survives. | (i) [P] for the limit model, §7.1; (ii) [P] at the level of exponents, §7.2; both with [N] |
+| **Hierarchy** | On block-radial classes the round hierarchy has **at most three levels, and exactly three whenever some group of blocks is a fraction below `1 − h/a` of the cube**: `a` (one round), a value in `(h, a)` equal to `θ₂*(u)` at the best two-block split (two rounds), and `h` from three rounds on.  At `u = 1`: `0.1109`, `0.0399`, `0.0291`.  For a fixed class the middle level can coincide with `h` (two equal blocks when `u ≳ 6.1`), and `c_2(BR_m)` is not determined for `m ≥ 3`. | corollary |
+| **Barrier** | Consequently **no application of the archive's hiding lemma (Lemma 11.85: twins that a batch cannot tell apart even when it is handed the centres of the earlier levels) to block-radial energies on a bounded number of blocks can show `c_3(u) > h`,** for any `u`, any split, any profile; more generally for `m` blocks of size at least `N_u` with `m·ln n = o(n)`.  The failure of the three-block chain is not a matter of parameters.  The bound on `m` is essential (with one-coordinate blocks `BR_n = L_u`), and Lemma 11.85 does not model hidden partitions; for those see the addendum (Corollary H8). | corollary of Lemma B |
+| **Beyond blocks** | (i) In the small-slope limit the same obstruction holds for "flags" of hidden directions with *any* admissible Lipschitz body (centres that overlap instead of living in disjoint blocks), for every number of rounds `r ≥ 3`, with a margin `√θ(2√θ − 1)/4` in the exponent for `θ > ¼`.  (ii) Exponentially many indistinguishable copies of a hidden structure ("a code of cells") dilute the later rounds, but cost the adversary the same exponent in mass; the relaxation argument survives, with a positive margin for `θ > h`. | (i) [P] for the limit model, §7.1; (ii) [P] at the level of exponents, §7.2; both with [N].  The margins are the reviewer's (§12); as first written both proofs gave only "`≤`". |
+| **Addendum: P, H6** | **Three rounds suffice for every energy with a bounded hidden symmetry type**: `c_3(HP_m) = h`, where `HP_m` are the energies in `L_u` that are functions of the numbers of ones in the classes of an *unknown* partition of the coordinates into at most `m` classes (hidden blocks and centres; any bounded number of hidden centres with arbitrary overlaps; merged and nested blocks).  Behind it: the relaxation principle for arbitrary nested hidden partitions (Theorem P), with a short, dimension-free proof. | [P] `HIERARCHY_ADDENDUM.md` §A2–A5, finite `n`; brute-force and cube-level checks [N]; arithmetic [V] |
 | **Verification** | The two-round separation (priority 1) was re-derived and recomputed with own code: the thresholds `θ₂*(u)` at eight slopes and the exact finite-`n` twins reproduce the archive's tables digit for digit; the two Lean files of the coupling lemma build with the pinned toolchain. | §2 [N], [V] |
 
-**What is not established.**  Whether `c_3(u) = h` on all of `L_u`.  H1 is an *upper bound on a subclass*,
-and the barrier is a statement about a *proof technique*; neither decides the general question.  We state
-the conjecture `c_3(u) = h(u)` (§8) and what a proof or a refutation would have to look like.  The
-honest summary is: **the question "is every fixed number of rounds suboptimal" is answered negatively on
-the class where it had been asked concretely (three rounds are optimal there), and remains open on `L_u`,
-where it now requires either an algorithm that learns structure from local slopes without being told
-the block structure, or a hard family of a kind that does not yet exist in this programme.**
+**What is not established.**  Whether `c_3(u) = h` on all of `L_u`.  H1 and H6 are *upper bounds on
+subclasses*, and the barrier is a statement about families of bounded structure; neither decides the
+general question.  We state the conjecture `c_3(u) = h(u)` (§8) and what a proof or a refutation would
+have to look like.  The honest summary is: **the question "is every fixed number of rounds suboptimal" is
+answered negatively on every class of energies with a bounded hidden symmetry type — three rounds are
+optimal there, and the algorithm is not told the structure — and remains open on `L_u`, where a
+separation would need hidden information spread over a number of classes that grows with `n`, and a
+collapse would need an algorithm for energies with no symmetry at all.**
 
 ---
 
@@ -83,7 +91,7 @@ coordinate; then `|F(d) − F(d′)| ≤ u‖d − d′‖₁` and `ψ_{F,s}(x) 
 **Rounds.**  An `r`-round algorithm asks `r` batches; `c_r(𝒞)` denotes the exponent of the least number of
 evaluations with which a bounded accuracy is reached on the class `𝒞` (`limsup` for upper, `liminf` for lower
 bounds, as in the archive).  All algorithms below are valid for every `ψ` of the class, in every run up to
-the stated failure probability, and their cost is a deterministic number.
+the stated failure probability, and their cost is bounded by a deterministic number.
 
 ---
 
@@ -103,7 +111,10 @@ Theorem 11.86 (= U3) of the archive: for `φ₁, θ` with `Ξ(θ, φ₁) > 0` an
 * **Thresholds recomputed** [N] (`experiments/phase2_hierarchy/h2_two_round_verify.py`, part A; own
   minimisation and bisection, nothing imported): `θ₂*/a = 0.3460, 0.3469, 0.3495, 0.3594, 0.3940, 0.4396,
   0.4878, 0.5749` and best `φ₁ = 0.654, 0.653, 0.651, 0.641, 0.606, 0.560, 0.512, 0.425` at
-  `u = 0.05, 0.25, 0.5, 1, 2, 3, 4, 6` — the archive's table (U_REPORT §2.2) in every printed digit.
+  `u = 0.05, 0.25, 0.5, 1, 2, 3, 4, 6` — the archive's table (U_REPORT §2.2) in every printed digit.  (The
+  reviewer's own computation to six digits gives `0.3461` at `u = 0.05` and `0.39408` at `u = 2`: the fourth
+  digit of the archive's table and of ours is one unit low at these two slopes.  The agreement is real, the
+  last digit is not.)
 * **Exact finite-`n` twins rebuilt from scratch** [N] (same script, part B): the twins are constructed here
   as *the deepest admissible functions under the visibility constraints* (a different description from the
   archive's formulas), exact binomial arithmetic, all structural checks on (admissibility, equality on `V₂`,
@@ -194,17 +205,42 @@ budget on a smaller cube") is the special case of the anchor in which `e_P = y_P
 *also relaxes the revealed blocks to the hinted radius*, at the price `nφ_P h`, which is exactly what the
 `T`-blocks earn back by using the budget `Θ − nφ_Q h` instead of `nφ_T h`.
 
+**Machine-checked bookkeeping** [V].  `proofs/Frontiers/RelaxationCore.lean` (namespace
+`MetricChain.RelaxationCore`; built with the pinned toolchain; standard axioms only): `relaxation_core`
+derives the displayed bound from the four per-block inequalities, the cap and the Lipschitz step —
+exactly the inputs listed above, as hypotheses — and `relaxation_exhausted`, `relaxation_unmoved` are the
+cases (ii) and (i); `relax_step` is (R) from (F2) and (F4); `choose_mul_pow_le` and `choose_step` are the
+binomial facts (F2) and (F3) in exact form.  What is checked is the arithmetic of the proof (signs, which
+sums cancel, the constants) and those two facts.  The entropy bounds (F1), (F4), the existence of the
+anchor and the use of (H1), (H2) are **not** formalised.
+
 **Exact check** [N] (`experiments/phase2_hierarchy/h1_relaxation_lemma_check.py`, output
 `out/h1_relaxation_lemma_check.txt`).  For given blocks, roles and `Θ` the script builds the *pointwise
 deepest* admissible function satisfying (H1), (H2) and `ν ≤ 0` on `V_∅(Θ)` — a bound that holds for it holds
 for every function with these properties — and evaluates the left side of the lemma for all types with
 exact binomial costs.  124 cases (`n = 200` to `360`; three and four blocks; role patterns `PQT, PTT, PPT,
-QQT, QTT, PPQT, PQTT, PQQT, PTQT`; `u = 0.5, 1, 2, 4`; `θ/h ∈ {1, 1.1, 1.2, 1.3}`): the hypotheses and
-admissibility hold for every constructed function; the largest value of
+QQT, QTT, PPQT, PQTT, PQQT, PTQT`; `u = 0.5, 1, 2, 4`; `θ/h ∈ {1, 1.1, 1.3}` for three blocks and `{1, 1.2}` for
+four): the hypotheses and admissibility hold for every constructed function; the largest value of
 `ν(y) − ν₀ − nφ_P h + min{t_T(y), Θ − n(1−φ_P)h}` is `+4.95` nats (at `u = 4`, `θ = h` exactly, a plain dip at
-the critical budget), against the lemma's allowance `m(u + 5L) ≈ 100`.  At `θ ≥ 1.1h` the maximum of `ν` over the
-types with `t_T > Θ` is at most `ν₀ − n(θ − h) + 0.002` in every case (the lemma's conclusion without any
-logarithmic loss).
+the critical budget), against the lemma's allowance `m(u + 5L) ≈ 100`.
+
+*Corrections after an independent replication* (engineering division, `ENG-RES-0020`: own code written
+from this report, cross-checked by Dijkstra and by linear programmes; 220 cases, these 124 and 96 others).
+(1) The lemma's criterion holds in all 220 cases; largest value `+4.969` nats.  (2) The script imposes
+plain independence of the other coordinates, which is a *stronger* hypothesis than (H1), (H2) as stated
+above (independence up to parities); under the stated hypotheses the values are higher by up to `0.164`
+nats.  (3) An earlier version of this paragraph said that at `θ ≥ 1.1h` the hidden types stay below
+`ν₀ − n(θ − h) + 0.002` "without any logarithmic loss".  **That is withdrawn as a general statement**: it
+holds on the 124 cases without parities only; with parities two of them give `+0.019`, and other splits
+give up to `+0.617` nats (blocks `(30, 30, 50, 70)`, roles `QQTT`, `u = 1`).  An excess of the order of one
+lattice step `u` is what Theorem P of the addendum predicts (there: at most `0.95·u` in entropy form).
+(4) Every one of these cases lies *outside* the lemma's hypothesis `Θ ≥ nh + 2mL` (at these sizes that would
+need `Θ` between two and four times `nh`), and some have a block below `N_u`: the computations test a
+statement somewhat stronger than the lemma, at small sizes, and at `n ≤ 400` the allowance `m(u + 5L)` does
+not separate valid from invalid profiles (the replication's negative controls reach it only near
+`n = 1000`).  They show that the lemma is not false there and say little about its constants.  (5) The
+script builds the extremal function by a fixed sequence of passes; the replication found it equal to the
+exact fixed point on all 124 cases to print rounding.
 
 ---
 
@@ -286,6 +322,19 @@ what is seen) the algorithm controls only a sum of block distances, and the rela
 proved for that information structure.  §7.1 does this in the small-slope limit; at finite slope it is
 open (§8).
 
+*On real cubes* [N] (`experiments/phase2_hierarchy/h7_r3_on_cubes.py`, output `out/h7_r3_on_cubes.txt`).
+Algorithm R3 run literally (points, neighbours, candidates, shells) on energies given as tables on
+`Q_12`–`Q_14`, three kinds of profiles (minima of cones; a profile 2-periodic in one block; a profile that
+depends on a block only next to its centre), `M ∈ {3, 30}`, 60 runs each: every candidate is the centre or
+its antipode; the estimate is exact whenever all blocks on which the profile depends are revealed; it is
+unbiased otherwise (`|z| ≤ 2.4` in the six cases with a 2-periodic block, which is never revealed); the
+mutation "uniform shell weights" is caught in all 18 cases; the mutation "reveal nothing" stays unbiased,
+as the remark above says it must.  These sizes test the logic of the algorithm, not its exponent.
+*Independent replication* (`ENG-RES-0020`, own code): 32 instances with `n = 12…16`, `M` up to `10⁵`, 39 056
+runs — the candidate of a revealed block is the centre or its antipode without exception, the estimate
+is exact whenever all blocks are revealed, the conditional mean of the estimate over all `2ⁿ` points equals
+`A(ψ)` to `10⁻¹⁴` in every run, and the mutation is caught in 99 of 100 tests.
+
 ---
 
 ## 5. Theorem H2 — the two-round exponent of two blocks, exactly
@@ -342,36 +391,58 @@ place of `S₂` and "bad" meaning `t_{S₁^c}(d) > Θ`.  On `E₁`, `F` sees onl
 In every case `A_bad ≤ e^{−cn}A` for a constant `c = c(u, φ₁, η) > 0` and large `n`, and the estimate is
 analysed as before.  ∎
 
-*For more than two blocks* the same proof gives `c_2(BR_m) ≥` the best of the two-block thresholds over
-all pairs of disjoint groups of blocks (rescaled to the sub-cube they span), and we expect equality and
+*For more than two blocks* Theorem 11.86, applied to two disjoint groups of blocks, gives `c_2(BR_m) ≥` the
+best of the two-block thresholds over all such pairs (rescaled to the sub-cube they span) — a lower bound
+from the archive, not from the proof above — and we expect equality and
 `c_2(BR_m) ≤ θ₂*(u)`; the anchor argument for a hidden group in which only some blocks are deep needs one
 more case distinction, which we did not complete.  **[C]**
 
 ---
+
+*Remark.*  The lower-bound half of Theorem H2 is Theorem 11.86 and inherits its conditions (`δ < ½`,
+`n₁ = ⌊φ₁n⌋`); for block sizes with `n_j/n → φ_j` one needs its threshold `n₀` locally uniform in `φ₁`, which
+is plausible and not stated in the archive.
 
 ## 6. The hierarchy on block-radial classes, and a simulation
 
 **Corollary H3.**  For every `u > 0` and every two-block class with `φ₁ < 1 − h/a`:
 `c_1 = a > c_2 = max{h, ϑ(φ₁), ϑ(φ₂)} > h = c_3 = c_4 = …`; the supremum of `c_2` over splits is `θ₂*(u)`.
 For every `m`: `c_1(BR_m) = a` (cones against truncated cones are radial; Theorems 11.44/11.45 [K]),
-`c_r(BR_m) = h` for all `r ≥ 3`.  **The round hierarchy of block-radial energies has exactly three levels.**
+`c_r(BR_m) = h` for all `r ≥ 3`, and `h < c_2(BR_m) < a` whenever some group of blocks has a fraction
+`φ < 1 − h/a` (a function that is radial in a group of blocks is block-radial, so `BR_m` contains the two-block
+classes of all groupings and `c_2(BR_m) ≥ ϑ(φ) > h`; `c_2 ≤ T^{(2)}(0) < a` is Corollary 11.87 [K], valid on
+all of `L_u`).  **The round hierarchy of block-radial energies has exactly three levels whenever such a
+grouping exists**, and over all splits together.  For a class without one it has two: by Theorem H2 itself
+`c_2 = h` when `min(φ₁, φ₂) ≥ 1 − h/a`, which two equal blocks satisfy as soon as `h/a ≥ ½` (`u ≳ 6.1`).
 
 | `u` | `a` | `θ₂*` (two rounds, best split) | `h` (three rounds and more) |
 |---|---|---|---|
 | 0.5 | 0.03030 | 0.01059 | 0.00767 |
 | 1 | 0.11094 | 0.03987 | 0.02914 |
-| 2 | 0.32781 | 0.12916 | 0.09728 |
-| 4 | 0.60305 | 0.29417 | 0.23925 |
+| 2 | 0.32781 | 0.12918 | 0.09728 |
+| 4 | 0.60305 | 0.29415 | 0.23925 |
+
+(`θ₂*` at `u = 2, 4`: the reviewer's six-digit values `0.129184`, `0.294153`; our grid gave `0.12916`, `0.29417`.)
 
 **Corollary H4 (barrier).**  Let a lower bound for `r ≥ 3` rounds be attempted by the method of Lemma 11.85:
 twins `F_D, F_S` in some `BR_m`, regions `𝒲_1 ⊂ … ⊂ 𝒲_r` with `F_D = F_S` on `𝒲_r`, such that on `𝒲_t` the
 functions depend only on the blocks whose centres the first `t` batches may know, and such that `𝒲_t`
-contains what a batch of `e^{nθ}` points sees that knows the earlier centres.  If `θ > h`, then
-`ln A(F_D) − ln A(F_S) ≤ O(log n)`: there is no gap.  (Apply Lemma B to `F_D` with `P` the blocks of level 1,
-`Q` those of level 2, `T` the rest: every type outside `𝒲_r ⊃ V_{P∪Q}(nθ)` has mass at most
-`e^{−n(θ−h)+O(log n)}` times a mass that the two functions share.)  This holds for every slope, every number
-of blocks, every split, every profile, and — because a group of blocks may play the role of `P`, `Q` or `T`
-— for every assignment of blocks to rounds.
+contains what a batch of `e^{nθ}` points sees that knows the earlier centres.  If `θ > h`, `m` is fixed (more
+generally `m·ln n = o(n)`) and all blocks have size at least `N_u`, then with `Θ = nθ − o(n)`
+
+    |ln A(F_D) − ln A(F_S)| ≤ ln(1 + (n+1)^m e^{m(u+5L) − (Θ − nh)}) → 0 :
+
+there is no gap.  (Apply Lemma B to `F_D` with `P` the blocks of level 1, `Q` those of level 2, `T` the rest:
+every type outside `𝒲_r ⊃ V_{P∪Q}(Θ)` has mass at most `e^{−(Θ−nh)+m(u+5L)}` times a mass that the two functions
+share; the other direction because `F_S = F_D` on the `𝒲_t`.)  This holds for every slope, every split,
+every profile, and — because a group of blocks may play the role of `P`, `Q` or `T` — for every assignment
+of blocks to rounds.
+*Scope* (reviewer's finding M1).  This is a statement about applications of Lemma 11.85, in which every batch
+is handed the centres — hence the blocks — of the earlier levels, and about boundedly many blocks.  With
+one-coordinate blocks `BR_n = L_u`, and for `m ≳ n/ln n` the statement is empty: nothing here excludes a
+hard three-round family living on that many blocks.  The reviewer also checked the deduction against the
+lemma: its hypothesis `p_t ≤ e^{−nθ+o(n)}` forces `𝒲_t ⊇ V_{<t}(nθ − o(n))`, so (H1), (H2) hold for `r ≥ 3`.
+Hidden partitions, which Lemma 11.85 does not model, are the subject of the addendum.
 
 **Simulation** [N] (`experiments/phase2_hierarchy/h3_round_algorithms_sim.py`, output
 `out/h3_round_algorithms_sim.txt`).  For a block-radial energy everything the algorithms R1 (plain Monte
@@ -420,7 +491,7 @@ cross-polytope `‖g‖₁ ≤ 2` for pairwise orthogonal centres.  In this mode
 > **Proposition G (flags).**  In the limit model let `r ≥ 3`, `θ ≥ ¼`, `K` any body inside the ball of radius
 > 2, and let `F` be `K`-Lipschitz, depending only on `Y_{≤ r−2}` on `𝒲_{r−2}` and only on `Y_{≤ r−1}` on
 > `𝒲_{r−1}`.  Then every type `Y*` with `|Y*_r| ≥ √θ` has mass exponent `−F(Y*) − |Y*|²` at most
-> `M := sup_{𝒲_{r−2}} (−F − |·|²)`.
+> `M := sup_{𝒲_{r−2}} (−F − |·|²)`, and for `θ > ¼` at most `M − √θ(2√θ − 1)/4`.
 
 *Proof.*  Write `Y = (p, q, w)`, `p = Y_{≤r−2}` with last coordinate `y`, `q = Y_{r−1}`, `w = Y_r`.  On
 `D = {e : e_y² + e_q² ≤ θ, e_q² + e_w² ≤ θ}` the value `F(e)` is a value on `𝒲_{r−2}` (move `e_w`, then `e_q`, to
@@ -436,19 +507,37 @@ If `y* ≤ b` this is `2(ρ − √θ) − ρ² ≤ 1 − 2√θ ≤ 0`.  Otherw
 `(Δ² + ρ² + Δ/(2ρ))² ≥ Δ⁴ + 2Δ²ρ² + ρ⁴ + 2Δ² + Δ²/(4ρ²)` (the cross term is `Δ³/ρ + Δρ ≥ 2Δ²`), so
 `(Δ² + Δ/(2ρ) + ρ²)² − 4Δ² − 4(ρ − ½)² ≥ Δ⁴ + c₂Δ² + c₀` with `c₂ = 2ρ² − 2 + 1/(4ρ²)`,
 `c₀ = (ρ−1)²(ρ² + 2ρ − 1) ≥ 0`.  For `ρ ≥ cos(π/8)`, `c₂ ≥ 0`; for `½ ≤ ρ ≤ cos(π/8)`,
-`16ρ⁴(4c₀ − c₂²) = −(2ρ−1)³(16ρ³ − 8ρ² − 6ρ − 1) ≥ 0` because the cubic is negative there.  So `G₀ ≥ 0`.  ∎
+`16ρ⁴(4c₀ − c₂²) = −(2ρ−1)³(16ρ³ − 8ρ² − 6ρ − 1) ≥ 0` because the cubic is negative there.  So `G₀ ≥ 0`.
+
+*The margin for `θ > ¼`* (missing in the first version — equal exponents do not exclude a gap; the argument
+is the reviewer's, finding M2, and was re-derived here).  Let `s = 2√θ ≥ 1`, `Δ = sΔ′`, `ρ = sρ′` (so `ρ′ ≥ ½`),
+`R = √(Δ′² + (ρ′ − ½)²)`.  Substituting,
+
+    Δ² + 2θΔ/ρ + ρ² − 2√(Δ² + (ρ − √θ)²) = s²·G₀(Δ′, ρ′) + 2s(s − 1)·R,
+
+and both terms are nonnegative.  If `R ≥ 1/16` the second is at least `s(s−1)/8`; if `R < 1/16` then
+`G₀(Δ′, ρ′) ≥ ρ′² − 2R ≥ ⅛` and the first is at least `s²/8`.  With `b ≥ θ/ρ` the bracket of the case `y* > b` is
+therefore at least `s(s−1)/8 = √θ(2√θ − 1)/4`; the case `y* ≤ b` has the larger margin `2√θ − 1` (`θ ≤ 1`) or
+`θ` (`θ > 1`).  ∎
+
+The inequality `2√(Δ² + (ρ−½)²) ≤ Δ² + Δ/(2ρ) + ρ²` (`Δ ≥ 0`, `ρ ≥ ½`) is **machine-checked** [V]:
+`proofs/Frontiers/FlagInequality.lean`, theorem `MetricChain.FlagInequality.flag_ineq` (with `cubic_nonpos`,
+`quad_nonneg`, `flag_sq`; standard axioms only).  The reduction of the proposition to it is not formalised.
 
 (`experiments/phase2_hierarchy/h4_flag_inequality.py`: the factorisation checked symbolically; `G₀ ≥ 0` on a
-grid with minimum `0` at the plain dip `Δ = 0, ρ = 1`; for `θ > ¼` the minimum of the bracket is `2√θ − 1`,
+grid with minimum `0` at the plain dip `Δ = 0, ρ = 1` (it also vanishes at `Δ = ρ = ½`); for `θ > ¼` the minimum of the bracket is `2√θ − 1`,
 so numerically the bound is the plain-dip value `1 − 2√θ`; a brute-force maximisation over hidden points
 agrees within the anchor-grid error.)
 
 *What this says.*  In the small-slope limit **no flag of hidden directions — blocks, overlapping centres,
-hidden partitions, levels of any dimension — separates three or more rounds from `h`**, whatever the
+hidden partitions — separates three or more rounds from `h`**, whatever the
 Lipschitz body: the anchors that kill it lie in the region that the *penultimate* batch sees and where the
 function still shows only what the batch before it revealed.  For two rounds the same model gives the
 archive's value `0.346a` for every body (a cone at a vertex; the ball allows nothing more).  This is a
-statement about a limit model; at finite slope the block case is Lemma B and the general case is open.
+statement about a limit model, proved for scalar levels (with `y, q, w` replaced by norms and the anchor
+taken radially the proof extends to levels of any dimension; not written out).  At finite slope the block
+case is Lemma B; the general case was open when this was written and is now Theorem P of the addendum
+for every structure that comes from a partition of the coordinates.
 
 *Record of the attack that led here* (§9, F1): three full-cube centres with prescribed overlaps were tried
 first as a way round the "smaller residual cube" — after the first centre is revealed the residual
@@ -471,7 +560,9 @@ of the special cell at the cost `min(r_S(z), R) + r_{S^c}(z)` per point.
 
 > **Proposition C (cells do not help).**  Let `θ ≥ h`, and let `F, F_D` be admissible with `F = F_D` on
 > `𝒲₃ = {min(r_P + r_Q, R) + r_T ≤ θ}`, `F` depending only on `z_P` on `𝒲₁ = {r ≤ θ}` and only on `(z_P, z_Q)` on
-> `𝒲₂ = {min(r_P, R) + r_Q + r_T ≤ θ}`.  Then `max_z [U_D(z) − r(z)] ≤ m_vis`.  **[P, at the level of exponents]**
+> `𝒲₂ = {min(r_P, R) + r_Q + r_T ≤ θ}`.  Then `max_{z∉𝒲₃} [U_D(z) − r(z)] ≤ m_vis`, and for `θ > h`
+> `max_{z∉𝒲₃} [U_D(z) − r(z)] ≤ m_vis − min{(θ−h)/4, h/2, u(κ−ζ)h/(2 ln 2)}`, where `ζ ∈ [p_u, κ)` is defined by
+> `f(ζ) = min{a, h + (θ−h)/2}`.  **[P, at the level of exponents]**
 
 *Proof.*  For `y ∉ 𝒲₃` (reflected so that `y_j ≤ ½`) take `e_j = max(y_j, κ)` on `P ∪ Q` and let `x = r_P(e) ≤ φ_P h`.
 The cap is `U(e_P, ½, ½) ≤ m_vis + (x − R)₊`.
@@ -480,14 +571,45 @@ in `𝒲₁`, the cap is `m_vis`, and every block contributes at most `0` (relax
 relaxed deeper than `κ` contribute `≤ −(`rate`− h)`): `U_D(y) − r(y) ≤ m_vis`.
 *If `x > R`:* relax `T` to the rate `min(r_T(y), θ − R − r_Q(e))` (at least `φ_T h`, because `R < x ≤ φ_P h`).  The cap
 and the `P`-terms together give `x − R + Σ_P φ_j[u(e_j − y_j) − f(y_j)] ≤ φ_P h − R`, the `T`-terms at most
-`−(θ − R − r_Q(e)) + φ_T h` or `−r_T(y) < −(θ − R)`; in both cases the total is at most `h − θ ≤ 0`.  ∎
+`−(θ − R − r_Q(e)) + φ_T h` or `−r_T(y) < −(θ − R)`; in both cases the total is at most `h − θ ≤ 0`.
+*The margin for `θ > h`* (reviewer's finding M3: in the case `x ≤ R` with `T` not relaxed the bound above is
+exactly `m_vis` for every `θ` — for instance at the cone point of a group of `P ∪ Q`-blocks of weight above
+`θ/a` when `R > θ` — and equal exponents do not exclude a gap; the other sub-cases have the margin `θ − h`.
+The repair is the reviewer's; it was re-read here step by step).  Let `δ = θ − h > 0`.  If `r_T(y) ≥ δ/4` the
+bound of that case is `≤ m_vis − δ/4`.  Otherwise take the anchor `e′_j = max(y_j, ζ)` on `P ∪ Q`, `e′_T = y_T`.
+Then `r(e′) ≤ h + δ/2 + δ/4 < θ`, so `e′ ∈ 𝒲₁` and `U_D(e′) = U(e′_P, ½, ½) ≤ m_vis + (r_P(e′) − R)₊`; and
+`R < r_P(e′) ≤ h + δ/2` is impossible, because `y ∉ 𝒲₃` would then force `r_T(y) > θ − R > δ/2`.  So the cap is
+`m_vis` and, with `u(ζ − y_j) − f(y_j) = −k(y_j) − u(κ − ζ)`,
 
-So the dilution `R` of the later rounds is paid back exactly by the multiplicity `R` that the special cell
-must outweigh.  [N]: `h5_cells_small_slope.py` (exact min-plus envelopes on a grid, box body, small-slope
+    U_D(y) − r(y) ≤ m_vis − r_T(y) − Σ_{P∪Q: y_j ≥ ζ} φ_j f(y_j) − Σ_{P∪Q: y_j < ζ} φ_j [k(y_j) + u(κ − ζ)].
+
+Since `r(y) > θ` and `r_T(y) < δ/4`, the `P ∪ Q`-blocks carry a rate above `h`: either the first sum is at least
+`h/2`, or the blocks with `y_j < ζ` have weight at least `h/(2 ln 2)`.  ∎
+
+So the dilution `R` of the later rounds is paid back by the multiplicity `R` that the special cell must
+outweigh.  (The reviewer's own grid computation at finite slope, 432 parameter sets: the true hidden gain
+of the cell model is at most the plain-dip value `D(θ) = u f^{−1}(θ) − Λ₁ ≤ h − θ` plus one grid step.)  [N]: `h5_cells_small_slope.py` (exact min-plus envelopes on a grid, box body, small-slope
 limit): over 252 parameter sets the largest hidden gain equals the plain-dip value `1 − 2√θ` up to the
 rounding of the regions to the grid (`+0.003` at `θ = 0.25`; `−0.015` against `−0.020` at `0.26`; `−0.055`
-against `−0.058` at `0.28`).  Codes at several levels (a tree of cells) were not written out; the same
-two-case computation applies level by level.
+against `−0.058` at `0.28`).  At finite slope with exact binomial costs (`h8_cells_finite_slope.py`,
+`u = 1, 2`, three splits, `R/h ∈ {0, 0.1, 0.3, 0.6, 1.2}`): the largest hidden gain is negative in all 30
+cases at `θ = 1.2h` and `1.5h`, at most `+1.44` nats at `θ = h`, and positive (a hidden plain dip, as it must
+be) at `θ = 0.7h`.  Codes at several levels (a tree of cells) were not written out; the same two-case
+computation applies level by level.
+
+### 7.3 Hidden partitions and overlapping centres at finite slope (addendum)
+
+When this report was first written, the finite-slope version of §7.1 was open: Lemma B's anchor clips the
+block distances one by one, and for a *merged* block — two hidden classes of which the batches control
+only the sum — that anchor is not visible to the first batch as soon as the deep class is more than half
+of the block.  The remedy is one more move: after clipping, raise the lowest classes of every deep cell
+until the cell mean reaches the hinted radius; this move is aligned, so its Lipschitz cost is that of the
+mean, and it does not increase the within-cell cost.  With it the argument works for arbitrary nested
+partitions of hidden classes, with a per-cell price inequality that replaces (R).  Statement, proof,
+algorithm and checks: `HIERARCHY_ADDENDUM.md` (Theorem P, Theorem H6).  Two probes made before the theorem
+was found are kept there as checks: three overlapping centres at finite slope (`h10`), and the two-round
+game with the hidden group split in two (`h9`: the two-block value is not exceeded beyond grid error,
+supporting `c_2(BR_m) ≤ θ₂*`).
 
 ---
 
@@ -496,21 +618,23 @@ two-case computation applies level by level.
 > **Conjecture H5 [C].**  `c_3(u) = h(u)` for every `u > 0`: on all of `L_u` three rounds of adaptivity reach
 > the optimal exponent, and two do not.
 
-*Evidence.*  Theorem H1 (every block-radial class, every slope); Corollary H4 and Propositions G, C (every
-hard family that the known technique can analyse stops separating at three rounds, for a structural
-reason: the relaxed image of a hidden type is visible one round earlier and is Lipschitz-close);
-consistency with `c_1 = a`, `c_2 > h`, `c_∞ = h`.  *Against:* H1 uses the block structure twice — the
-algorithm is told the blocks, and Lemma B needs the visible dependence to be organised by blocks.  An
-arbitrary member of `L_u` has neither.  The only universal upper bounds remain those of the nested
-algorithms (`T^{(3)}(0) = 0.541a`, `T^{(r)}(0) − h ≈ 0.36a/(log₂ r)^p`), which never use slopes.
+*Evidence.*  Theorem H1 (every block-radial class, every slope) and Theorem H6 of the addendum (every
+energy with a bounded hidden symmetry type; the algorithm is told nothing but the bound); Corollary H4
+and Propositions G, C (every hard family of bounded structure that the known technique can analyse stops
+separating at three rounds, for a structural reason: the relaxed image of a hidden type is visible one round earlier and is
+Lipschitz-close); the inequality behind H6 (Theorem P) does not depend on the number of classes;
+consistency with `c_1 = a`, `c_2 > h`, `c_∞ = h`.  *Against:* the algorithms sample the shells of a partition
+with boundedly many cells, and their two hypotheses — each batch saw nothing finer than what it learned —
+are exact consequences of a hidden symmetry.  An arbitrary member of `L_u` has no symmetry.  The only
+universal upper bounds remain those of the nested algorithms (`T^{(3)}(0) = 0.541a`,
+`T^{(r)}(0) − h ≈ 0.36a/(log₂ r)^p`), which never use slopes.
 
 **Precise open problems.**
 1. *Hidden partition.*  Is `c_3 = h` on the union of the classes `BR_m` over all partitions into at most `m`
-   blocks?  The reveal step still finds the coordinates of a block and its centre from one point where the
-   profile depends on that block alone; when the profile couples blocks on what is seen, the batch controls
-   only combinations of block distances.  Needed: Lemma B for that information structure at finite slope
-   (Proposition G is its small-slope limit).
-2. *Multi-centre energies* `F(d(x, s¹), …, d(x, s^m))` with overlapping centres: the same question.
+   blocks?  **Settled: yes** (addendum, Theorem H6 with `HP_{2m}`), also when the profile couples blocks.
+2. *Multi-centre energies* `F(d(x, s¹), …, d(x, s^m))` with overlapping centres.  **Settled: `c_3 = h`** for
+   every fixed number of centres (addendum, `HP_{2^m}`).  Open in both problems: a number of classes that
+   grows faster than `(n/log n)^{1/5}`.
 3. *A universal certificate.*  For an arbitrary `ψ ∈ L_u` and a deep point `y`, the relaxation of `y` is the
    point obtained by re-randomising coordinates; Lemma B says its value was seen and is Lipschitz-close
    *because a round knew along which coordinates not to relax*.  Is there a three-round sampling scheme
@@ -519,17 +643,20 @@ algorithms (`T^{(3)}(0) = 0.541a`, `T^{(r)}(0) − h ≈ 0.36a/(log₂ r)^p`), w
 4. *Two rounds on `L_u`.*  `c_2(u) ∈ [θ₂*, T^{(2)}(0)] = [0.359a, 0.624a]` at `u = 1`.  Theorem H2 shows that
    the lower end is attained on two blocks by an algorithm that reads centres off slopes.  Conjecture:
    `c_2(u) = θ₂*(u)`.  Also open: `c_2(BR_m)` for `m ≥ 3` (§5).
-5. *A refutation of H5* would need a hard family with all of: (a) no block or flag structure that a batch
-   can learn (Lemma B, Proposition G); (b) hidden information that is not merely replicated (Proposition
-   C); (c) a hidden type whose relaxation to the hinted radius is invisible to the penultimate batch
-   although its cost there is below the budget.  We do not know such a family.
+5. *A refutation of H5* would need a hard family with all of: (a) no bounded hidden symmetry type — not
+   finitely many centres, blocks or classes in any arrangement (Theorem H6); (b) hidden information that
+   is not merely replicated (Proposition C); (c) a hidden type whose relaxation to the hinted radius is
+   invisible to the penultimate batch although its cost there is below the budget.  We do not know such
+   a family.
 6. *Rate over all algorithms* (priority 4).  On block-radial classes the question disappears (collapse at
    three).  On `L_u` the laws `1/k²` (levels) and `(log r)^{−p}` (rounds) are properties of nested
    algorithms; if H5 holds they say nothing about the problem.
-7. *Beyond the cube* (priority 5).  The proof of Lemma B uses, per block, only: a convex cost `t` of the
-   radius, the linear price `u` of a step, `γ = t + u·`radius `≥ nΛ`, and `γ(e) ≤ γ(y) + n·t(κ)/n` for
-   `y ≤ e ≤ κ = Λ/u`.  It therefore holds verbatim for products of identical blocks with any reference whose
-   radial costs have these properties.  For blocks of different kinds (several slopes, a field) the hinted
+7. *Beyond the cube* (priority 5).  The proof of Lemma B uses, per block: a cost `t` of the radius that is
+   convex, symmetric under reflection and unimodal, with jumps of at most `L` and `t = O(L)` at the
+   near-typical radii of both parities; the linear price `u` of a step; `γ = t + u·`radius `≥ nΛ − L`; and
+   `γ(e) ≤ γ(y) + t(κn) + O(L)` for `y ≤ e ≤ κn`, `κ = Λ/u`.  It should therefore carry over to products of
+   identical blocks with any reference whose radial costs have these properties (not checked).  Theorem P
+   of the addendum uses even less: a convex rate per class and the function `χ` built from it.  For blocks of different kinds (several slopes, a field) the hinted
    anchor trades rate between blocks and the per-block argument must be replaced; not done.
 
 ---
@@ -554,21 +681,35 @@ F4. **Finite-slope three-block chain**, caps only (`u = 0.5, 2, 4`): negative fo
  special case of Lemma B.
 F5. **A universal three-round algorithm** (follow pooled gradient patterns; certify by Lipschitz anchors):
  no certification inequality found for arbitrary `ψ`; this is open problem 3.
+F6. **Class-wise clipping for hidden partitions** (the first attempt at open problems 1 and 2): write the
+ lemma for classes instead of blocks and clip every class density towards `½` at the hinted radius.  For a
+ merged block the anchor's blind cost exceeds what the hidden part earns (`P(e) > T(e)`) as soon as the deep
+ class is more than half of the block — in the small-slope limit `P = θ·w/(1−w)` — so the first free step
+ is not available.  Contracting the deviations towards the cell means (the anchor of Proposition G) moves
+ classes *away* from `½` and its price is not controlled by (R) at finite slope.  What works is in between:
+ clip, then fill the deep cells from below (addendum §A2).
+F7. **A sharper numerical claim than the lemma** ("no logarithmic loss at `θ ≥ 1.1h`"), read off 124 cases:
+ false on other splits (§3, corrections).  The cases had been chosen by the author of the lemma.
 
 ---
 
 ## 10. Significance, closest prior art, publication assessment
 
-**What is new relative to the archive.**  Lemma B; Theorem H1 for every `m` and every slope with a complete
-finite-`n` proof (the archive: a sketch for two blocks, U10(b), and a numerical failure of one three-block
-family in the small-slope limit); the matching upper bound of Theorem H2 (the archive: a conjecture with
-its key step numerical); the barrier H4; Propositions G and C.
+**What is new relative to the archive.**  Lemma B (finite `n`, explicit constants); Theorem H1 for every `m`
+and every slope with a complete proof for `n ≥ n₀(u, m, η, ε, δ)`, `n₀` not explicit (the archive: a sketch for
+two blocks, U10(b), and a numerical failure of one three-block family in the small-slope limit); the matching upper bound of Theorem H2 (the archive: a conjecture with
+its key step numerical); the barrier H4; Propositions G and C; and, in the addendum, Theorem P (the
+relaxation principle for nested hidden partitions) and Theorem H6 (three rounds suffice on every class of
+bounded hidden symmetry type, with an algorithm that is not told the structure).
 
-**What it means.**  On the model class the hierarchy is `a > θ₂* > h = h = …`: *exactly three levels*.  The
-archive's statement "the particular hierarchy of nested algorithms approaches `h` with a sharp `1/k²` law"
-is about an algorithm; on block-radial energies an algorithm that reads centres off local slopes reaches
-`h` in three rounds.  The question for all Lipschitz energies is now a clean alternative (Conjecture H5
-against a family as in open problem 5).
+**What it means.**  On every class `HP_m`, `m ≥ 4`, of energies with a bounded hidden symmetry type the
+hierarchy is `a > c_2 > h = h = …`: *exactly three levels*, with `c_2 ≥ θ₂*(u)` (the best two-block split; for
+a single block-radial class with fixed block fractions the middle level can coincide with `h`, §6).  The archive's
+statement "the particular hierarchy of nested algorithms approaches `h` with a sharp `1/k²` law" is about an
+algorithm; an algorithm that reads the hidden structure off local slopes reaches `h` in three rounds.  The
+question for all Lipschitz energies is now a clean alternative (Conjecture H5 against a family as in
+open problem 5), and the second branch is narrow: every construction with finitely many hidden objects
+is excluded.
 
 **Closest prior art** (from the archive's sweeps and three searches of ours on 2026-11-28; *search-engine
 summaries only, no paper read*):
@@ -589,14 +730,20 @@ summaries only, no paper read*):
 three-stage result of this kind.
 
 **Publication assessment.**  (i) As a section of the candidate mathematics paper of the programme (adaptive
-query complexity of a certified free energy), Theorems H1, H2 with Theorem 11.86 make the treatment of
-rounds complete on the model class and replace an open-ended "two rounds are strictly between; three:
-unknown" by a theorem and a sharp conjecture.  That is a real strengthening of that paper.  (ii) As a
-standalone note it is a result about a model class plus a barrier; its weight depends on whether
-Conjecture H5 is later proved (then H1 is the model case of the proof) or refuted (then Lemma B is the
-reason the refutation had to look different).  (iii) Before any submission: an external human reading of
-§§3–5; the dependence on the archive's Theorems 11.25, 11.44/45 and 11.86 (paper proofs for the upper
-bounds, refereed internally only); a literature check by a specialist.  We do not claim the general
+query complexity of a certified free energy), Theorems H6 (with H1 as its explicit special case), H2 and
+Theorem 11.86 make the treatment of rounds complete on all energies of bounded hidden symmetry type and
+replace an open-ended "two rounds are strictly between; three: unknown" by a theorem and a sharp
+conjecture.  That is a real strengthening of that paper.  (ii) As a standalone note — "three rounds of
+adaptivity are necessary and sufficient for certifying a free energy with hidden symmetry" — it has a
+complete statement on a natural class (invariance under an unknown Young subgroup), a matching
+two-round lower bound from the archive, a short central inequality (Theorem P), and an honest open
+problem (no symmetry).  Its weight still depends on Conjecture H5, but less than before: the class is no
+longer a model class chosen to fit the lower-bound constructions.  (iii) Before any submission: an
+external human reading of §§3–5 and of the addendum §A2, §A4 (Theorem H6 is a paper proof found on the last
+day; its review is recorded in §12 and in the addendum §A6); the dependence on the archive's Theorems
+11.25, 11.44/45 and 11.86 (paper proofs for the upper bounds, refereed internally only); a literature
+check by a specialist — partition learning from slopes is close in spirit to learning juntas and
+symmetric structure from queries, and we have not searched that literature.  We do not claim the general
 problem solved.
 
 ---
@@ -614,7 +761,47 @@ run from that directory; one process, the 4-core container, no external computat
 | `h4_flag_inequality.py` | Proposition G: factorisation, grids, brute force | 7 min | `out/h4_flag_inequality.txt` |
 | `h5_run.py` (uses `h5_cells_small_slope.py`) | Proposition C: the cell game on a grid | 3 min | `out/h5_cells_small_slope.txt` |
 | `h6_failed_three_centres.py <π₁ π₂ π₃ π₄ θ>` | record of failed attack F1 | seconds per case | — |
+| `h7_r3_on_cubes.py` | Algorithm R3 literally on cubes `Q_12`–`Q_14`, with two mutations | 80 s | `out/h7_r3_on_cubes.txt` |
+| `h8_cells_finite_slope.py` | Proposition C at finite slope, exact binomials | 12 s | `out/h8_cells_finite_slope.txt` |
+| `h9` – `h12` | checks of the addendum (two rounds with a split group; three centres at finite slope; Theorem P; Algorithm R3P on cubes) | see addendum §A7 | `out/h9_*` … `out/h12_*` |
 
 Lean: `lake build proofs.Frontiers.TwoRounds proofs.Frontiers.TwoRoundsExpected` (pinned toolchain, Mathlib
-cache) — built here, 8559 jobs, no error.  Lean files of this division, if any, are listed in
-`docs/collaboration/status/hierarchy.md`.
+cache) — built here, 8559 jobs, no error.  This division's Lean files: `proofs/Frontiers/RelaxationCore.lean`
+(six theorems), `proofs/Frontiers/FlagInequality.lean` (four), `proofs/Frontiers/PartitionChain.lean` (four);
+each compiles without warnings with `lake env lean <file>`; axioms `propext`, `Classical.choice`,
+`Quot.sound` only.
+
+---
+
+## 12. Reviews and independent replication
+
+Everything in this section was done by AI sessions.
+
+**(1) Adversarial review of this report** (`HIERARCHY_REVIEW.md`; scripts and outputs in
+`experiments/phase2_hierarchy/review/`).  A second session with its own code reviewed the report as it stood
+at 02:43 UTC (before the additions of this version and before the addendum).  *Verdict: no critical
+finding; Lemma B, Theorem H1, Lemma A2 and Theorem H2 survived the paper check and every numerical attack*
+(facts (F1)–(F4), (R) exactly, 0 violations; Lemma B on about 6 000 exact extremal functions with
+parity-dependent profiles, inside the lemma's hypothesis, `m = 2…5`, `n` up to 4000: largest excess `+0.89`
+nats against allowances of 36–146, not growing with `n`; Algorithm R3 literally on cubes with `n ≤ 20`;
+Lemma A2 on 168 exact extremal cases, the hidden gain changing sign at `ϑ(φ₁)`).  Three major findings,
+all applied above:
+ * M1 — the barrier was announced for "any number of blocks"; it needs boundedly many blocks of size at
+   least `N_u` and concerns applications of Lemma 11.85 (§0, Corollary H4).
+ * M2 — Proposition G gave only "`≤ M`"; the margin for `θ > ¼` was supplied by the reviewer (§7.1).
+ * M3 — Proposition C had one sub-case without a margin; repaired by the reviewer with a second anchor (§7.2).
+Nine minor findings (hypothesis `n_j ≥ N_u` missing in §0; "exactly three levels" false for some fixed
+classes; the cases of §3 outside the lemma's hypothesis and without parity; two fifth digits in the table
+of §6; a deterministic *bound* on the cost; "`→ 0`" for "`O(log n)`" in H4; the list of ingredients in §8.7;
+"finite-`n`" for H1; the origin of the lower bound in §5): all applied.  *Not covered by that review:*
+the archive's theorems used here (11.25, 11.44/45, the proof of 11.86), §2, §9, the prior-art paragraph,
+the modelling steps of §7, the simulation of §6 (read, not re-run), and everything added later — the
+corrections of §3, §7.3, the Lean files, `h7`–`h12`, the addendum.
+
+**(2) Independent replication by the engineering division** (`ENG-RES-0020` on
+`research/phase2-certified-inference`; code written from this report, not from our scripts; predictions
+written before the runs).  Lemma B: criterion holds in 220 of 220 cases; our sharper numerical remark does
+not (§3, corrections).  Algorithm R3: properties (a)–(c) without exception on 32 instances, mutation caught
+(§4).
+
+**(3) Review of the addendum**: see `HIERARCHY_ADDENDUM.md` §A6.

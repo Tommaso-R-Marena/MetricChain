@@ -1,0 +1,6 @@
+u=0.25 (N_u=81): sizes [(81, 81), (83, 162), (81, 81, 82)]: largest X = +0.024   [82 s]
+135 cases, all inside the hypotheses of Lemma B (parity version)
+largest X          : +0.024 at (u, ns, roles, mult, allowance) = (0.25, (81, 81, 82), 'QQT', 0.0, 83.2688731581709)
+largest X_hidden   : -0.105 at (0.25, (81, 81), 'TT', 0.5, 51.437502008067625)
+largest X-allowance: -51.438 at (0.25, (81, 81), 'QQ', 0.0, 51.437502008067625)  (the lemma requires <= 0)
+exit 0

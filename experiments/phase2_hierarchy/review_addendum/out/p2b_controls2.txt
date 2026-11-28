@@ -1,0 +1,12 @@
+CONTROL (i'): variant `alg` (blind region {R <= Theta}, as in the author's script), Theta = 0.7 n h, two equal classes:
+              the plain dip of Remark 4 is admissible; excess/n must be >= D(theta) - (h - theta) > 0
+     u=2 plain-dip prediction per coordinate: +0.03981 ;  measured excess/n: +0.05484, +0.04630, +0.04210, +0.04002
+     u=4 plain-dip prediction per coordinate: +0.12933 ;  measured excess/n: +0.15346, +0.13658, +0.13651, +0.13238
+CONTROL (i''): same with Theorem P's own hypothesis ((H1) on K): for theta < h the plain dip is NOT admissible
+              (its cone reaches into K), and the bound nu_K + h - theta (now positive) still holds:
+     u=2 measured excess/n: -0.00171, -0.00125, -0.00090, -0.00004
+     u=4 measured excess/n: -0.01349, -0.04682, -0.06349, -0.07179
+
+real	0m0.512s
+user	0m0.680s
+sys	0m0.213s

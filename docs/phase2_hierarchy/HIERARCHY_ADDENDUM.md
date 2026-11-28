@@ -4,7 +4,8 @@
 by the same AI session as `HIERARCHY_REPORT.md`, after that report had gone to its reviewer.  Status
 labels as there: **[V]** machine-checked, **[P]** paper proof in this file, **[N]** numerical evidence
 (script named), **[K]** quoted from the archive, **[C]** conjecture.  Nothing here has been read by a human
-expert.  §A6 says what has and has not been checked by another AI session.*
+expert.  §A6 says what has and has not been checked by another AI session; the corrections that the
+review of this addendum led to are marked where they occur.*
 
 ---
 
@@ -18,8 +19,8 @@ them, for every bounded number of classes.
 
 | | statement | status |
 |---|---|---|
-| **Theorem P** | *The relaxation principle for nested hidden partitions.*  Types are vectors of densities on arbitrary classes of coordinates.  If a `u`-Lipschitz profile depends only on the cell means of a partition `𝒢₁` on the types whose densities all lie in `[κ, 1−κ]`, and only on the cell means of a finer partition `𝒢₂` on everything a batch of `e^{nθ}` points that knows `𝒢₁` sees, `θ ≥ h`, then every type that a batch knowing `𝒢₂` does not see carries at most `e^{n(h−θ)}` times the largest mass on the first set.  No assumption on the classes, their number, their sizes, or the way the partitions cut them. | [P] §A2, complete (a statement about functions on a cube of densities); [N] §A3: the chain rebuilt from the definitions on 20 000 random instances, and extremal profiles on lattices by brute force; arithmetic [V] |
-| **Theorem H6** | **Three rounds suffice for every energy with a bounded hidden symmetry type.**  `HP_m` := the energies `ψ ∈ L_u` that are functions of the numbers of ones in the classes of an *unknown* partition of the coordinates into at most `m` classes.  For every `u`, `m`, `η`, `δ` there is a three-round algorithm (R3P, §A4) that for all large `n` and every `ψ ∈ HP_m` returns `Â` with `(δ/2)Â ≤ A(ψ) ≤ 4Â` with probability `≥ 1 − δ` from at most `e^{n(h+η)}` evaluations.  Hence `c_3(HP_m) = h`. | [P] §A4–A5, complete at finite `n`; lower bound [K: Theorem 11.25, V] |
+| **Theorem P** | *The relaxation principle for nested hidden partitions.*  Types are vectors of densities on arbitrary classes of coordinates.  If a `u`-Lipschitz profile depends only on the cell means of a partition `𝒢₁` on the types whose densities all lie in `[κ, 1−κ]`, and only on the cell means of a finer partition `𝒢₂` on everything a batch of `e^{nθ}` points that knows `𝒢₁` sees, then every type that a batch knowing `𝒢₂` does not see carries at most `e^{n(h−θ)}` times the largest mass on the first set.  No assumption on the classes, their number, their sizes, or the way the partitions cut them.  (An algorithm needs `θ ≥ h` to see the first set.) | [P] §A2, complete (a statement about functions on a cube of densities); proof re-read line by line by a reviewer, no error found; [N] §A3: the chain rebuilt from the definitions on random instances (author 20 000, reviewer 12 000), extremal profiles on lattices by brute force (author and reviewer, independent codes); arithmetic [V] |
+| **Theorem H6** | **Three rounds suffice for every energy with a bounded hidden symmetry type.**  `HP_m` := the energies `ψ ∈ L_u` that are functions of the numbers of ones in the classes of an *unknown* partition of the coordinates into at most `m` classes.  For every `u`, `m`, `η`, `δ` there is a three-round algorithm (R3P, §A4) that for all large `n` and every `ψ ∈ HP_m` returns `Â` with `(δ/2)Â ≤ A(ψ) ≤ 4Â` with probability `≥ 1 − δ` from at most `e^{n(h+η)}` evaluations.  Hence `c_3(HP_m) = h`. | [P] §A4–A5, complete for `n ≥ n₀(u, m, η, δ)`; proof re-read step by step by a reviewer, who also executed step (e) literally with exact binomials; no error found; lower bound [K: Theorem 11.25, V] |
 | **Hierarchy** | `HP_m` contains: block-radial energies with *unknown* blocks and centres (`BR_m ⊂ HP_{2m}`), every function of the distances to `r` hidden centres with arbitrary overlaps (`⊂ HP_{2^r}`), and all their compositions.  For `m ≥ 4` the round hierarchy on `HP_m` has exactly three levels, `c_1 = a > c_2 > h = c_3 = c_4 = …`. | corollary, §A5 |
 | **Barrier** | **A family that separates three (or any fixed number `≥ 3` of) rounds from unrestricted adaptivity cannot have bounded hidden symmetry type**: not finitely many hidden centres in any overlap pattern, not finitely many hidden blocks, merged or nested in any way.  The proof tolerates `m = m(n)` classes as long as `m⁵ log n = o(n)`. | corollary, §A5 |
 
@@ -54,7 +55,7 @@ Facts used (`𝒢′` refines `𝒢`):
 
 * **(C1) chain rule.**  `cost_𝒢(z) = cost_𝒢(avg_{𝒢′} z) + cost_{𝒢′}(z)`; in particular `cost_{𝒢′} ≤ cost_𝒢` and
   `r(avg_𝒢 z) ≤ r(z)`.  (Because `avg_𝒢 avg_{𝒢′} = avg_𝒢`.)
-* **(C2)** `‖avg_𝒢 z − avg_𝒢 z′‖ ≤ ‖z − z′‖`.
+* **(C2)** `‖avg_𝒢 z − avg_𝒢 z′‖ ≤ ‖z − z′‖`.  (Not used below.)
 * **(C3) the price of a step towards ½.**  `p_u = 1/(1+e^u)`, `Λ₁ = ln(2/(1+e^{−u}))`, `κ = Λ₁/u`, `h = f(κ)`;
   `p_u < κ < ½`.  Put `χ(t) := f(t) + u·min(t, 1−t) − Λ₁`.  Then `χ ≥ 0`, `χ(p_u) = 0`, `χ(κ) = h`, `χ` is
   nonincreasing on `[0, p_u]`, nondecreasing on `[p_u, ½]`, and symmetric about `½`.  If `t′` lies between `t`
@@ -77,7 +78,7 @@ Facts used (`𝒢′` refines `𝒢`):
 ## A2. Theorem P
 
 > **Theorem P.**  Let `𝒢₁`, `𝒢₂` be partitions of `C`, `𝒢₂` a refinement of `𝒢₁`; write `avg_i`, `cost_i`.
-> Let `θ ≥ h` and let `F` be `u`-Lipschitz with
+> Let `θ ≥ 0` and let `F` be `u`-Lipschitz with
 >
 > * (H1) `F(z) = F(avg₁ z)` for all `z ∈ 𝒦`,
 > * (H2) `F(z) = F(avg₂ z)` for all `z` with `cost₁(z) ≤ θ`,
@@ -97,8 +98,9 @@ points, so `ν_𝒦` is at most the largest mass exponent that any batch sees.
 
     e(s) := clip_{sκ}(y),      m(s) := avg₂ e(s),      m′(s) := clip_κ(m(s)),      Φ(s) := T(e(s)) + Q(m′(s)).
 
-`Φ` is continuous, `Φ(0) ≥ T(y) > θ`, and `Φ(1) ≤ h ≤ θ`: at `s = 1`, `e ∈ 𝒦`, so `m ∈ 𝒦`, `m′ = m`, and
-`Φ(1) = cost₁(e) ≤ r(e) ≤ h`.  Fix `s` with `Φ(s) = θ` and write `ℓ = sκ`, `e`, `m`, `m′`.  Define `e′` cell by
+`Φ` is continuous and `Φ(0) ≥ T(y) > θ`.  At `s = 1`: `e ∈ 𝒦`, so `m ∈ 𝒦`, `m′ = m`, and
+`Φ(1) = cost₁(e) ≤ r(e) ≤ h`.  *Main case: `Φ(1) ≤ θ`* (always so when `θ ≥ h`).  Fix `s` with `Φ(s) = θ` and
+write `ℓ = sκ`, `e`, `m`, `m′`.  (The other case is treated at the end.)  Define `e′` cell by
 cell (`g ∈ 𝒢₂`, `m_g` the mean of `e` on `g`): if `m_g ∈ [κ, 1−κ]`, `e′ = e` on `g`; if `m_g < κ`,
 `e′ = max(e, λ_g)` on `g` with the level `λ_g ≤ κ` at which the mean on `g` equals `κ` (the mean of `max(e, λ)`
 is continuous and nondecreasing in `λ`, equals `m_g` for small `λ` and is `≥ κ` at `λ = κ`); if `m_g > 1−κ`,
@@ -131,7 +133,12 @@ if `ℓ < p_u` (then `χ(ℓ) ≤ χ(y_c)`, `χ` being monotone on `[0, p_u]`). 
 `ℓ ≤ m_g < κ`, hence `c_ℓ ≤ χ(m_g)` (monotonicity on `[p_u, ½]` if `ℓ ≥ p_u`; `c_ℓ = 0` otherwise), and
 `A_g ≤ φ_g χ(m_g) + φ_g h − φ_g χ(m_g) = φ_g h`.  The case `m_g > 1−κ` is the mirror image.
 
-*Step 5.*  `Π₁ + Π₂ ≤ Σ_g φ_g h = h`, so `−F(y) − r(y) ≤ ν_𝒦 + h − θ`.  ∎
+*Step 5.*  `Π₁ + Π₂ ≤ Σ_g φ_g h = h`, so `−F(y) − r(y) ≤ ν_𝒦 + h − θ`.
+
+*The case `Φ(1) > θ`* (it needs `θ < h`; pointed out by the reviewer, who noted that the hypothesis `θ ≥ h` of
+the first version was superfluous).  Take `e := clip_κ(y) ∈ 𝒦`.  By (H1), `F(e) = F(avg₁ e)`, `avg₁ e ∈ 𝒦`, and
+`−F(avg₁ e) ≤ ν_𝒦 + r(avg₁ e)`.  So `−F(y) − r(y) − ν_𝒦 ≤ [r(e) − r(y) + u‖y − e‖] − [r(e) − r(avg₁ e)]
+= Π₁ − cost₁(e) ≤ h − Φ(1) < h − θ`; here `Π₁ ≤ h` by the first half of Step 4 with `ℓ = κ`.  ∎
 
 **Remarks.**
 
@@ -150,11 +157,22 @@ if `ℓ < p_u` (then `χ(ℓ) ≤ χ(y_c)`, `χ` being monotone on `[0, p_u]`). 
    the block.
 3. *No dimension.*  Neither the statement nor the proof involves `|C|`, the sizes of the classes or the
    number of cells.
-4. *Sharpness of the threshold.*  For `C = {c₀, c₁}` in one cell of both partitions with equal weights (a
-   hidden centre that is never revealed) the plain dip — a cone around the centre cut off where the
-   second batch would see it — has hidden mass exponent `u·f^{−1}(θ) − Λ₁ = D(θ)` at its cone point: positive
-   for `θ < h`, zero at `θ = h`, where the bound of the theorem is attained.  So `h` cannot be lowered.  For
-   `θ > h` the bound `h − θ` is not attained by this example (`D′ ≤ −1`).
+4. *What `h` and `θ ≥ h` mean here* (rewritten: the first version of this remark was wrong, as the review
+   showed).  (a) The inequality holds for every budget; `h` enters through the core `𝒦`, on which (H1) and
+   the normalisation are assumed.  An algorithm can establish (H1) on `𝒦` by a blind batch only if that
+   batch sees `𝒦`, i.e. with `e^{nh}` points: this is where `θ ≥ h` is needed.  If (H1) and the normalisation
+   are assumed only on what a blind batch of `e^{nθ}` points sees, `{r ≤ θ}`, the conclusion fails for `θ < h`:
+   the plain dip (one cell `{c₀, c₁}` with equal weights — a hidden centre that is never revealed — and a cone
+   around the centre cut off where the second batch would see it) has hidden exponent
+   `u·f^{−1}(θ) − Λ₁ = D(θ) > 0` at its cone point.  For `θ < h` that dip reaches the type `(κ, 1−κ) ∈ 𝒦` and
+   violates (H1) there, so it is not a counterexample to the theorem.  (b) The constant `h` in the bound is
+   optimal and attained: by the plain dip at `θ = h`, and for larger `θ` by a construction of the reviewer —
+   one cell with two classes, `−F` equal to `f` of the cell mean on `[κ, 1−κ]`, continued with slope `u`
+   outside, and extended from `{cost₁ ≤ θ}` as the largest `u`-Lipschitz function; hidden types with cell
+   mean `p_u` and cost just above `θ` then have exponent `ν_𝒦 + h − θ` (such types exist, for instance, up to
+   `θ = 8.1h` at `u = 1` with equal weights).  In these profiles the *visible* maximum is `ν_𝒦 + h`, so the
+   sharpness is relative to `ν_𝒦` and says nothing about slack in Theorem H6, where hidden mass is
+   compared with visible mass.
 5. *More rounds.*  For `r ≥ 3` rounds apply the theorem to the partitions learned by the last two
    informed batches.
 
@@ -173,23 +191,42 @@ if `ℓ < p_u` (then `χ(ℓ) ≤ χ(y_c)`, `χ` being monotone on `[0, p_u]`). 
   *History:* the first run reported violations; they came from a reversed bisection in the script's own
   `fill` routine (the anchor `e′` did not have the cell means `m′`, which the second check showed
   directly).  After the correction that check is `3·10⁻¹⁶` and everything passes.
-* **[N] Extremal profiles by brute force** (same script, part `B`, output `out/h11_partition_chain_B.txt`).
-  On the lattice of types of `n = 160…240` coordinates in 2–4 classes: the pointwise largest `U = −F` with
-  unit steps `≤ u`, `U ≤ R` on what the blind batch sees, and `U` invariant under exchanges between classes
-  of a common `𝒢₁`-cell inside the blind region and of a common `𝒢₂`-cell inside the region of the second
-  batch (connected components of the exchange graph — nothing assumed about the regions).  Seven
-  information structures (a merged cell with two hidden classes; unequal classes; a merged cell split by
-  round two; a merged pair revealed first; nested pairs; two cells each hiding a pair; nothing learned in
-  round one), `u ∈ {1, 2, 4}`, `Θ/nh ∈ {0.7, 1, 1.2, 1.5, 2.5}`.  With rates in entropy form the largest hidden
-  mass exceeds `n h − Θ` by at most `0.95·u` (less than one lattice step) in all 84 cases with `Θ ≥ nh`, and
-  is far below it in most; for `Θ = 0.7nh` it is positive in all but one case, as expected below `h`.  With exact binomial
-  probabilities the difference is a `log n` term; doubling `n` at `Θ = 1.2nh` the excess goes
-  `+3.3, −2.0, −10.9, −28.2` (`u = 2`, a merged cell, `n = 240…1920`), i.e. it decreases linearly.
+* **[N] Extremal profiles by brute force** (same script, parts `B`, `B3`; outputs
+  `out/h11_partition_chain_B.txt`, `out/h11_partition_chain_B3.txt`).  On the lattice of types of
+  `n = 160…240` coordinates in 2–4 classes: the pointwise largest `U = −F` with unit steps `≤ u`, `U ≤ R` on a
+  blind set, and `U` invariant under exchanges between classes of a common `𝒢₁`-cell inside the blind set
+  and of a common `𝒢₂`-cell inside the region of the second batch (connected components of the exchange
+  graph — nothing assumed about the regions).  Seven cases with six different information structures (a
+  merged cell with two hidden classes, equal and unequal; a merged cell split by round two; a merged pair
+  revealed first; nested pairs, two sets of sizes; two cells each hiding a pair).
+  - *Blind set `{r ≤ θ}`* (parts B1, B2).  This is what the first round of the algorithm provides, and it is
+    a **stronger hypothesis than (H1) on the core: the test is of a weaker statement than Theorem P** (the
+    reviewer's main finding on this section).  `u ∈ {1, 2, 4}`, `Θ/nh ∈ {0.7, 1, 1.2, 1.5, 2.5}`, entropy form:
+    the largest hidden mass exceeds `nh − Θ` by at most `0.95·u` in all 84 cases with `Θ ≥ nh`; for `Θ = 0.7nh`
+    it is positive in all but one case.  At `u = 1` the test has little power (`nh` is 5–7 lattice steps).
+    With exact binomial probabilities the difference is a `log n` term; doubling `n` at `Θ = 1.2nh` the excess
+    goes `+3.3, −2.0, −10.9, −28.2` (`u = 2`, two classes in one cell, `n = 240…1920`) — a margin of the weaker
+    statement, not of the theorem.
+  - *Blind set = the core* (part B3, added after the review: the theorem as stated; `u ∈ {2, 4}`,
+    `Θ/nh ∈ {1, 1.2, 1.5}`).  With the lattice points of `𝒦` the largest excess is `+1.48·u` (four classes); with
+    the smallest lattice box containing `𝒦` it is `−0.50·u`.  The anchor of the proof sits at `κ·n_c`, which is
+    not a lattice point, and each class can cost up to `(u − |f′(κ)|)` times the rounding.  For two classes
+    in proportion 1:3 the excess stays between `−0.27u` and `+0.10u` from `n = 240` to `n = 1920` at all three
+    budgets: these instances sit on the bound and do not move with `n`.
+  - *The reviewer's own solver* (validated against Dijkstra; about 420 cases with 2–5 classes under the
+    exact hypotheses, among them three classes in one cell, a cell split into three, a class of 3 %): no
+    excess grows with `n` (up to `n = 1921 / 483 / 260 / 145` for 2 / 3 / 4 / 5 classes); the largest is
+    `+2.14·u` on a lattice with unaligned class sizes, where the rounding of the core predicts `2.13·u`, and
+    `+0.75·u` with aligned sizes.  Its controls: with (H1) only on `{r ≤ θ}` and `θ < h` the plain dip appears
+    with the predicted size; without (H2) the excess grows with `n`; the two-round analogue has gain `≈ 0` up
+    to `Θ ≈ 1.3nh` at `u = 2` (the archive's `θ₂*/h = 1.33`); without (H1) no violation appeared in the one
+    structure tried, so (H1) is needed by the proof and possibly not by the statement there.
 * **[N] Three overlapping centres at finite slope** (`h10_three_centres_finite_slope.py`, outputs
   `out/h10_*`), run before the theorem was found: 84 overlap patterns, `u ∈ {1,2,4}`; at `θ = 1.3h` every
-  hidden gain is `≤ −0.37h`; at `θ = h` the small positive values (`+0.25h` at grid 20) shrink under
-  refinement (`+0.16h`, `+0.10h` at grids 30, 40) — the grid enforces the two invariances only between
-  lattice points with exactly equal means, so it over-estimates.  Consistent with the theorem.
+  hidden gain is `≤ −0.37h`; at `θ = h` there are small positive values: at `u = 1` up to `+0.25h` at grid 20,
+  shrinking under refinement (`+0.16h`, `+0.10h` at grids 30, 40); at `u = 2` between `+0.02h` and `+0.08h` at
+  all three grids, without a monotone trend.  The grid enforces the two invariances only between lattice
+  points with exactly equal means, so it over-estimates.  Consistent with the theorem, not a test of it.
 * **[V] Arithmetic** (`proofs/Frontiers/PartitionChain.lean`, namespace `MetricChain.PartitionChain`,
   compiles without warnings with the pinned toolchain): `partition_chain` (Step 3 and Step 5 from their
   inputs), `cell_price_central`, `cell_price_deep` (the two cases of Step 4), `visible_of_fill` (Step 2).
@@ -301,7 +338,8 @@ round 1, `𝒢₁` and true types.
 
 **(d) The lower side on `E₃`.**  Let `𝒱 := {k : P(k | b(k)) ≥ e^{−Θ}}`, `A_vis := Σ_{k∈𝒱} P(k) e^{−F₂(k)}`,
 `A_hid := A − A_vis`.  On `E₃`, `Â ≥ Σ_{k∈𝒱} π(b(k))·[P(k | b(k))/2]·e^{−F₂(k)} = A_vis/2`.  Let
-`e^{ν₀} := max{P(κ) e^{−F(κ)} : P(κ) ≥ e^{−Θ+DL}}`.  The maximising `κ*` has at most `(n+1)^D` fine types, so one
+`e^{ν₀} := max{P(κ) e^{−F(κ)} : P(κ) ≥ e^{−Θ+DL}}` (the set is not empty for large `n`: the most likely true
+type has probability at least `(n+1)^{−m}`).  The maximising `κ*` has at most `(n+1)^D` fine types, so one
 of them, `k*`, has `P(k*) ≥ P(κ*)(n+1)^{−D} ≥ e^{−Θ}`; then `k* ∈ 𝒱` and
 
     A_vis ≥ (n+1)^{−D} e^{ν₀}.        (3)
@@ -349,14 +387,24 @@ by (4).  There are at most `(n+1)^D` fine types, so with (3) and `Θ − nh = η
 `P[(δ/2)Â ≤ A ≤ 4Â] ≥ 1 − δ`.  ∎
 
 **Remarks.**
-1. The proof uses `m` only through `D = m³` and `ρ₀ = m² + 2`: it gives the same conclusion for
-   `m = m(n)` with `m⁵ log n = o(n)` (and `η`, `δ` fixed).  This is not optimised.
+1. The proof uses `m` only through `D = m³`, `ρ₀ = m² + 2` and the number `(n+1)^{m²}` of shells: it gives
+   the same conclusion for `m = m(n)` with `m⁵ log n = o(n)` (and `η`, `δ` fixed).  This is not optimised.
+   The reviewer evaluated the conditions "for large `n`": they hold up to `m⁵ ln n ≈ 0.47·ηn`; the smallest
+   admissible `n` is about `2.5·10³` for `m = 2`, `η = 1` and `5.4·10⁵` for `m = 4`, `η = 0.1` (`u = 1`, `δ = 0.1`).
+   So the theorem is asymptotic in earnest: nothing is claimed at the sizes of the numerical checks.
 2. Nothing is assumed about the sizes of the classes; single coordinates are allowed.
 3. A ratio `e^ε` instead of the constant `8/δ`: repeat and take medians as in §4 of the report, or use
    `M·e^{o(n)}` points; the exponent is unchanged.
-4. If the profile changes by the same amount in both directions along a class (a `2`-periodic dependence),
-   that class is never separated from its complement inside a cell, and need not be: the profile then
-   depends on the cell count only, which is what (X1), (X2) say.
+4. *Parities need no separate treatment.*  Take a block with a hidden centre (two classes, the sites where
+   the centre is `0` and where it is `1`) and a profile that is `2`-periodic in the distance to the centre.
+   Flipping a site of either class at a point changes the distance by `±1`, and the two values of the
+   profile coincide: the two classes are never separated.  They need not be: the distance has the parity
+   of the cell count plus a constant, so the profile is a function of the cell count, which is what (X1),
+   (X2) say.  (Lemma B of the report had to carry parities through its hypotheses.)
+5. *Two idealisations of the query model.*  Choosing a partition with no separated pair inside a cell is
+   a graph-colouring problem; it costs no evaluation but possibly much time (when every separation between
+   two classes is witnessed for all pairs — the typical case — the cells are the twin classes of the
+   separation graph and are found at once).  "Separated" compares real numbers exactly.
 
 ---
 
@@ -396,23 +444,69 @@ point — a partition with boundedly many cells for every accuracy — together 
 Theorem P in which (H1), (H2) hold up to `εn`.  The chain of §A2 is stable under such errors (each free
 step is used once).  Not done; we do not know whether the local partitions can be chained.
 
+*Closest prior art for the phenomenon* (three further searches on 2026-11-28; **search-engine summaries
+only, no paper read**; the earlier searches are in §10 of the report).
+* *A constant number of stages reaches the adaptive optimum: group testing.*  For finding a hidden set of
+  defectives, non-adaptive designs are strictly worse than adaptive ones in some regimes, and the
+  information-theoretic adaptive rate is reported to be achievable with two stages in the noiseless case
+  (Coja-Oghlan, Gebhard, Hahn-Klimroth, Loick, arXiv 1911.02287 and 1911.06647), with two or three stages
+  under noise (Scarlett, arXiv 1803.05099), and with two to four stages depending on the number of
+  defectives (Damaschke and co-authors, "Randomized group testing both query-optimal and minimal
+  adaptive").  This is the nearest structural analogue we found of Corollary H7: a hidden combinatorial
+  object, a strict gap between one stage and full adaptivity, and a collapse after a small constant number
+  of stages.  The problems differ (identification against estimation of an integral; polynomial against
+  exponential scales).
+* *Hidden symmetry as a class of functions.*  Functions invariant under the permutations of all but a
+  constant number of variables are the *partially symmetric functions* of Blais, Weinstein and Yoshida
+  (FOCS 2012; SIAM J. Comput. 2015), who test and implicitly learn the asymmetric part with a notion of
+  symmetric influence.  `HP_m` is the analogous class with `m` orbits of arbitrary sizes; the separation
+  test of Algorithm R3P (equal bits, different slopes) plays the role of their influence test.  We do not
+  know whether a version of our partition-learning step exists in that literature.
+* *Rounds in query complexity:* the hierarchies that do not collapse listed in the report (property
+  testing, local search in rounds, parallel convex optimisation).  For adaptive numerical integration of
+  Lipschitz functions we found optimal adaptive algorithms in one dimension (Baran, Demaine, Katz) and no
+  count of rounds.
+"Not found" is not "new".
+
 ---
 
 ## A6. What has been checked, and by whom
 
-* Theorem P: proof in §A2; the chain re-evaluated from the definitions on random instances and compared
-  with brute-force extremal profiles (§A3) by the author's own scripts; arithmetic core in Lean.  The
-  review of the report by a second AI session (`HIERARCHY_REVIEW.md`) was commissioned before this addendum
-  existed and does **not** cover it unless that file says so.
-* Theorem H6: proof in §A4 only.  No part of it is machine-checked.  The logic of Algorithm R3P was run
+Everything in this section was done by AI sessions.
+
+* **Review of this addendum** (`HIERARCHY_ADDENDUM_REVIEW.md`; scripts and outputs in
+  `experiments/phase2_hierarchy/review_addendum/`).  A session that did not write the addendum, with its own
+  code, was asked to break Theorems P and H6.  *Verdict: no critical and no major finding; "Theorem P:
+  correct as stated; Theorem H6: correct, given the archive's lower bound".*  What it did: every line of
+  both proofs by hand; every intermediate claim of §A2 re-evaluated on 12 000 instances and by direct
+  maximisation (`sup` of the bound's defect `= 0`, attained, never exceeded); exact extremal profiles under
+  the theorem's hypotheses in about 420 cases with controls (§A3); (S), (U), (B), (1), (2) numerically; step
+  (e) of §A4 executed literally with exact binomials (`m = 2, 3`, `n` up to `110 000`, about `240 000` exchanges,
+  every hypothesis of (X1), (X2) evaluated); the "large `n`" conditions made explicit.  Twelve minor
+  findings, all applied in this version: the brute-force check of §A3 tested a weaker statement (now
+  said, and the exact one added); Remark 4 of §A2 was wrong as stated (rewritten); the hypothesis `θ ≥ h` of
+  Theorem P was superfluous (removed, with the extra case of the proof); (C2) is not used; a selective
+  quotation in the `h10` bullet; "seven structures" were six; the `|z|` values of the cube test (below); the
+  non-emptiness in step (d); the shell count in Remark 1; Remark 4 of §A4 unclear (rewritten); two
+  idealisations of the query model (Remark 5); the docstring of `h11`.  *Not checked by the reviewer:* the
+  proofs of the archive results; compilation of the Lean file (read only); Remark 2 of §A2 (Lemma B as a
+  special case) and the sentence on Proposition G in §A5; extremal profiles with more than five classes,
+  at slopes below 1, or with exact binomial rates; the internals of `h10`, `h12`.
+* Theorem P, by the author: proof in §A2; the chain re-evaluated from the definitions on random instances
+  and compared with brute-force extremal profiles (§A3); arithmetic core in Lean.  The review of the
+  *report* (`HIERARCHY_REVIEW.md`) does not cover this addendum.
+* Theorem H6: paper proof in §A4, read by the reviewer as described.  No part of it is machine-checked,
+  and it is asymptotic (Remark 1 of §A4).  The logic of Algorithm R3P was run
   literally on cubes `Q_12` (`h12_r3p_on_cubes.py`, [N]): hidden partitions into 2–4 classes, three kinds of
   profiles (minima of cones in the class counts; a profile that shows only the sum of two classes near
   the typical counts; a `2`-periodic one), `M ∈ {2, 12}`, 40 runs each.  In all 18 settings: the chosen
   partitions have no separated pair in a cell and at most `m`, `m²` cells, coordinates of one hidden class
   are never separated, and the estimate equals `A` up to rounding in every run (the energy was constant
-  on every shell of `𝒢₂` in every run).  The mutation "uniform shell weights" is detected in 17 settings
-  (`|z| ≥ 5.9`; `|z| = 2.4` in one), the mutation "learn nothing" stays unbiased (`|z| ≤ 2.1`).  These sizes
-  test the logic, not the exponent.
+  on every shell of `𝒢₂` in every run — so this test never meets a hidden type).  The mutation "uniform shell
+  weights" is detected in 17 settings: in 10 with `|z| ≥ 5.9`, and in 7 because the mutated estimate is the
+  same wrong number in every run (the printed `|z|` of `10¹⁶…10³⁰¹` there are divisions by a vanishing
+  standard error, not z-scores); in one setting it is missed (`|z| = 2.4`).  The mutation "learn nothing"
+  stays unbiased (`|z| ≤ 2.1`).  These sizes test the logic, not the exponent.
 * The statements quoted from the archive carry the archive's status.
 
 ## A7. Reproducibility
@@ -420,9 +514,12 @@ step is used once).  Not done; we do not know whether the local partitions can b
 | script (in `experiments/phase2_hierarchy/`) | what | runtime | output |
 |---|---|---|---|
 | `h11_partition_chain_check.py A` | the chain of Theorem P from the definitions, 20 000 random instances | 2 min | `out/h11_partition_chain_A.txt` |
-| `h11_partition_chain_check.py B` | extremal profiles on lattices, seven information structures; growth with `n` | 3 min | `out/h11_partition_chain_B.txt` |
+| `h11_partition_chain_check.py B` | extremal profiles on lattices, blind set `{r ≤ θ}` (weaker statement); growth with `n` | 3 min | `out/h11_partition_chain_B.txt` |
+| `h11_partition_chain_check.py B3` | the same under the theorem's exact hypotheses (core) | 70 s | `out/h11_partition_chain_B3.txt` |
 | `h10_three_centres_finite_slope.py [N]` | three overlapping centres, finite slope (before the theorem) | 1 min at `N = 20` | `out/h10_three_centres_finite_slope_N20.txt`, `…_refine.txt` |
 | `h12_r3p_on_cubes.py` | Algorithm R3P literally on cubes `Q_12`, with two mutations | 2 min | `out/h12_r3p_on_cubes.txt` |
 | `h9_two_rounds_three_blocks.py` | two rounds, hidden group split in two (small slope) | 1 min | `out/h9_two_rounds_three_blocks.txt` |
 
-Lean: `lake env lean proofs/Frontiers/PartitionChain.lean` (four theorems; no warnings).
+Lean: `lake env lean proofs/Frontiers/PartitionChain.lean` (four theorems; no warnings; axioms `propext`,
+`Classical.choice`, `Quot.sound`).  The reviewer's scripts: `experiments/phase2_hierarchy/review_addendum/`
+(table in §7 of `HIERARCHY_ADDENDUM_REVIEW.md`).

@@ -1,0 +1,13 @@
+ALIGNMENT EXPERIMENT (structure: one cell -> pairs {0,1},{2,3}; four equal classes of size N).
+  d = ceil(kappa N) - kappa N.  If the positive excess is a lattice effect of the core boundary it follows d, not n;
+  `P` = lattice points inside K (upper bound for the continuum), `Pout` = smallest lattice box containing K.
+  u=2 kappa=0.28311  (u - |f'(kappa)|) = 1.071 nats per unit of d and class
+   Th/nh=1: N=36 d=0.81: P +1.44u, Pout -0.78u | N=46 d=0.98: P +1.87u, Pout -0.14u | N=49 d=0.13: P +0.53u, Pout -1.88u | N=53 d=1.00: P +2.14u, Pout -0.02u | N=60 d=0.01: P +0.05u, Pout -2.32u | N=67 d=0.03: P +0.14u, Pout -2.19u
+   Th/nh=1.2: N=36 d=0.81: P +1.24u, Pout -0.98u | N=46 d=0.98: P +1.52u, Pout -0.72u | N=49 d=0.13: P -0.54u, Pout -1.57u | N=53 d=1.00: P +1.60u, Pout -0.63u | N=60 d=0.01: P -0.54u, Pout -1.62u | N=67 d=0.03: P -0.60u, Pout -2.25u
+  u=4 kappa=0.16875  (u - |f'(kappa)|) = 2.405 nats per unit of d and class
+   Th/nh=1: N=36 d=0.93: P +0.63u, Pout -0.38u | N=41 d=0.08: P +0.29u, Pout -3.50u | N=42 d=0.91: P +0.63u, Pout -0.39u | N=47 d=0.07: P +0.27u, Pout -3.73u | N=48 d=0.90: P +0.60u, Pout -0.41u | N=53 d=0.06: P +0.23u, Pout -3.77u | N=59 d=0.04: P +0.18u, Pout -3.82u | N=65 d=0.03: P +0.12u, Pout -3.88u
+   Th/nh=1.2: N=36 d=0.93: P -1.65u, Pout -1.65u | N=41 d=0.08: P -1.74u, Pout -1.74u | N=42 d=0.91: P -2.38u, Pout -2.38u | N=47 d=0.07: P -2.48u, Pout -2.48u | N=48 d=0.90: P -2.11u, Pout -2.11u | N=53 d=0.06: P -3.23u, Pout -3.23u | N=59 d=0.04: P -3.00u, Pout -3.00u | N=65 d=0.03: P -3.77u, Pout -3.77u
+
+real	2m11.013s
+user	3m45.139s
+sys	2m6.243s

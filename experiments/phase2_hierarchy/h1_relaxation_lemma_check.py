@@ -12,6 +12,19 @@ every F satisfying (H1), (H2) with nu_0 = max_{V_0} nu  (nu_0 = 0 here).
 Lemma B:   nu(y) <= nu_0 + n phi_P h - min{ t_T(y), Theta - n (1 - phi_P) h } + m (u + 5 ln(n+1))   for all y.
 Reported:  viol = max_y [ nu(y) - n phi_P h + min{...} ]  (to be compared with 0 and with the allowance
            m (u + 5 ln(n+1))),  and  hid = max over { t_T(y) > Theta } of nu(y)  against  n h - Theta.
+
+Notes added after two independent replications (ENG-RES-0020 of the engineering division; the review
+HIERARCHY_REVIEW.md), both with their own code:
+ * (H1), (H2) are imposed here as plain independence of the other coordinates.  The report states them up to
+   parities, which is weaker; under the report's hypotheses the values are higher by up to 0.16 nats.
+ * All cases below use Theta = (theta/h) n h with theta/h <= 1.3, which is BELOW the lemma's own hypothesis
+   Theta >= n h + 2 m ln(n+1) at these sizes, and some blocks are smaller than N_u.  The script therefore
+   tests a statement somewhat stronger than the lemma, at small sizes; at n <= 400 the allowance does not
+   separate valid from invalid profiles.
+ * The extremal function is built by a fixed sequence of passes, not iterated to a fixed point; on these
+   124 cases it equals the exact maximum to print rounding (both replications).
+ * "hid <= n h - Theta + 0.002 for theta >= 1.1 h" is a property of these 124 cases only (other splits: up to
+   +0.62 nats).
 """
 import sys, itertools
 import numpy as np

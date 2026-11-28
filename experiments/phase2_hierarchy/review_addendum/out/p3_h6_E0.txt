@@ -1,0 +1,6 @@
+PART E: step (e) literally (real types -> rounding -> two exchange paths -> final inequality), exact binomials
+   u=1 m=2 n~20000 eta=0.2: 14 hidden types (81 draws), 19686 + 1904 exchanges between different true classes checked
+      (4) violated by +2.22e-16 | rounding distances beyond the claims -3.02e-01 | (X2) hypothesis: max[-ln P(k^-|a) - Theta] = -782.7 | (X1): max[-ln P(kappa - e_j') - Theta] = -2038.6
+      claimed bounds: n cost_2 along path 1 -351.4 | n cost_1(k - e_d') -701.5 | rate along path 2 -736.5 | P(kappa(P'')) -1911.3 | ||y-E'|| -7.0 | -ln P(P'') -573.7 | final -1466.2   (all must be <= 0)
+      fraction of the error allowance D(rho_0+10)(L+1)+uD used by the final inequality: -0.057   -> OK
+OVERALL: all checks passed

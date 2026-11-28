@@ -1,0 +1,7 @@
+VALIDATION: closure iteration against scipy Dijkstra on the explicit graph (max |difference| of U*)
+  5-class lattices, 5 variants x 2 identification modes x 2 slopes x 3 budgets: max |U_closure - U_dijkstra| = 4.01e-12
+  PASS
+
+real	0m1.496s
+user	0m1.823s
+sys	0m0.169s

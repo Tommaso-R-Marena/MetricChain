@@ -1,0 +1,2 @@
+u=2: best phi1 = 0.605921, theta2* = 0.129184, theta2*/a = 0.39408, theta2*/h = 1.32795, Xi at theta2*: 7.08e-11
+u=4: best phi1 = 0.512227, theta2* = 0.294153, theta2*/a = 0.48777, theta2*/h = 1.22948, Xi at theta2*: -1.34e-11
