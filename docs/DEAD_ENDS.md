@@ -2705,5 +2705,6 @@ and ours.  The statements that survived are in the bridge note; these did not, o
    to.  Lesson: fetch again immediately before sending, not only before starting.
 7. **Not obtained.**  A lower bound for algorithms with samples above the `0.40·h` of Theorem E; an
    adaptive algorithm with observables of the energy that reaches `θ_hint(γ)`; a common model with both
-   the base measure and the energy partly unknown; any meaning for the coincidence of the two `1/k²`
-   scalings (nested levels; rungs of a ladder).
+   the base measure and the energy partly unknown.  The coincidence of the two `1/k²` scalings (nested
+   levels; rungs of a ladder) means nothing: the hierarchy division compared the constants and they
+   differ (HIE-MSG-0003 §3.3).

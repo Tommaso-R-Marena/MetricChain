@@ -1288,6 +1288,32 @@
                   exit=1  1 TEST(S) MISBEHAVED
 [         caught] XXVIII.4 M5: a cylinder over the wrong coordinates
                   exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M1: the tail above a threshold bounded by the excess of a dip one unit of radius too small
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M2: Theorem F with the radius defined by s m_{r+1} <= 8 instead of 1/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M3: Theorem F claimed with the cap 1 instead of 1/2
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M4: the bridge identity with the ensemble mean of min(1, w/theta)
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M5: the conductance of two states claimed to be at least a third of the overlap
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M6: the distance between two ensembles that agree off D claimed with A1/A0 - 1
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M7: the second dip at a neighbour of the first centre instead of the antipode
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M8: the laws of the energy of one and two dips claimed within 1/(4(1 + 2 m_r))
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M9: theta_na with the two divergences exchanged
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M10: the information matrix of the dual form with squared sample weights
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M11: the variational lower bound of the variance claimed with a factor one half
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M12: the conductance bounded below by the Bhattacharyya coefficient instead of its square
+                  exit=1  1 TEST(S) MISBEHAVED
+[         caught] XXVIII.5 M13: the conductance bound without the total weight (true on the simplex only)
+                  exit=1  1 TEST(S) MISBEHAVED
 
-645 mutations: 644 caught, 1 expected pass, 0 not as expected
-161 baseline runs of the unmutated harness (one per selection): 161 behave as expected, 0 misbehave
+658 mutations: 657 caught, 1 expected pass, 0 not as expected
+162 baseline runs of the unmutated harness (one per selection): 162 behave as expected, 0 misbehave

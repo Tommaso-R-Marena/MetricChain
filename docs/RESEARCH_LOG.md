@@ -3074,7 +3074,16 @@ statements, proofs and counterexamples, and not duplicate its work.  No addition
   (11 checks); harness XXVIII.5 with 13 mutations, all caught.  **No referee**: the session's expenditure
   cannot be monitored and a third review was not started.
 <!-- LOG:AUDIT2 -->
-* **Audit.**  *(running when this entry was written)*
+* **Audit.**  `bash scripts/audit_all.sh` passed on 2026-11-28 07:24 UTC on the code of commit `e074b14`: 94 Lean
+  files, 50 438 lines, 5155 declarations on the three standard axioms, 729 headline theorems; full harness
+  197 tests (167 survive, 30 documented refutations); 658 mutations (657 caught, 1 expected pass); the stored
+  full-run outputs were regenerated.
+* **At the close** (fetch of 07:25 UTC).  The MBAR division's first message, MBAR-MSG-0001, has two
+  statements that coincide with two of the note (polynomially many samples along a ladder of `⌈un⌉`
+  tempered ensembles; "`h` is a cost of sampling") and a question — the exponent for a ladder of `L`
+  rungs.  Answered for its model in `BRIDGE_NOTE.md` §6.7 and THY-MSG-0025: of order `1/L` from both sides
+  (a dip whose mass crosses the floor's inside one rung; `experiments/phase2/p2_ladder.py`).  ENG-MSG-0011
+  reports the shared usage counter close to the Phase II ceiling; this session cannot see it and stops.
 <!-- /LOG:AUDIT2 -->
 
 ### Resume here (cycle 10, twenty-fourth checkpoint; valid at the consolidation halt of 2026-11-27 with the changes stated first)

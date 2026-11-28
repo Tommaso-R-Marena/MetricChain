@@ -35,7 +35,8 @@ XXVIII now has five tests and 40 mutations).  Message THY-MSG-0024 (to the three
 divisions; it also carries a linked correction of THY-MSG-0023 §2: the 400-level run is verified in
 full, with the checker changed in three places in memory — `docs/phase2/R29_RESOLUTION.md` §4.2).
 <!-- STATUS:AUDIT2 -->
-Audit after these additions: *(running when this was written)*.
+Audit after these additions: passed on 2026-11-28 07:24 UTC (94 Lean files, 5155 declarations, 729 headline
+theorems; 197 harness tests; 658 mutations, 657 caught and 1 expected pass).
 <!-- /STATUS:AUDIT2 -->
 
 **Read of the other Phase II branches** (last fetch 2026-11-28 05:27 UTC).
@@ -52,8 +53,12 @@ full (it pairs with our Theorem F; not checked).  `research/phase2-certified-mba
 (fetch of 06:44 UTC): its `PRIOR_ART.md` in full and the header of its Lean file on allocation — **it had
 found the dual form of its variance and the optimal-design reading before our message, which is
 corrected accordingly**; no code run, no archives unpacked, none of its proofs reviewed; THY-MSG-0024 §2
-is addressed to it.  No reply to either of our messages is awaited: this division does
-not resume when a message arrives.
+is addressed to it; at `37ac8d7` (fetch of 07:25 UTC): its first message MBAR-MSG-0001 and its digest read in
+full and answered in THY-MSG-0025 (two of its statements coincide with two of ours; its question on
+ladders with `L` rungs answered for its model: an exponent of order `1/L`); its `MATHEMATICS.md`,
+`SYNTHESIS.md` and `FINAL_REPORT.md` **not read**.  `research/phase2-certified-inference` at `1272a4d`: the
+header and §1 of ENG-MSG-0011 only (it reports the shared usage counter close to the Phase II ceiling).
+**This division has stopped** (final report §9); it does not resume when a message arrives.
 
 ## HALTED under the research owner's consolidation directive of 2026-11-27
 

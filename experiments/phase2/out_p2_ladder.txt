@@ -1,0 +1,13 @@
+PASS L1 least overlap of the last two tempered ensembles (exponent), u=1, n=20000
+    L=2: 0.01987 (r/n=0.400, L x = 0.0397); L=3: 0.01511 (r/n=0.395, L x = 0.0453); L=4: 0.01190 (r/n=0.393, L x = 0.0476); L=8: 0.00564 (r/n=0.388, L x = 0.0451); L=16: 0.00261 (r/n=0.383, L x = 0.0418)
+PASS L2 lower bound for the variance of the end-to-end contrast, every allocation (exponent), u=1, n=20000
+    L=2: 0.01907 (r/n=0.400, L x = 0.0381; u/L = 0.5000); L=3: 0.01511 (r/n=0.395, L x = 0.0453; u/L = 0.3333); L=4: 0.01190 (r/n=0.393, L x = 0.0476; u/L = 0.2500); L=8: 0.00564 (r/n=0.388, L x = 0.0451; u/L = 0.1250); L=16: 0.00294 (r/n=0.398, L x = 0.0470; u/L = 0.0625)
+PASS L1 least overlap of the last two tempered ensembles (exponent), u=2, n=20000
+    L=2: 0.06378 (r/n=0.315, L x = 0.1276); L=3: 0.04878 (r/n=0.307, L x = 0.1463); L=4: 0.03798 (r/n=0.302, L x = 0.1519); L=8: 0.01878 (r/n=0.292, L x = 0.1502); L=16: 0.00878 (r/n=0.287, L x = 0.1405)
+PASS L2 lower bound for the variance of the end-to-end contrast, every allocation (exponent), u=2, n=20000
+    L=2: 0.06378 (r/n=0.315, L x = 0.1276; u/L = 1.0000); L=3: 0.04878 (r/n=0.307, L x = 0.1463; u/L = 0.6667); L=4: 0.03798 (r/n=0.302, L x = 0.1519; u/L = 0.5000); L=8: 0.01878 (r/n=0.292, L x = 0.1502; u/L = 0.2500); L=16: 0.00958 (r/n=0.310, L x = 0.1532; u/L = 0.1250)
+ALL PASS
+
+real	0m6.387s
+user	0m6.111s
+sys	0m0.642s

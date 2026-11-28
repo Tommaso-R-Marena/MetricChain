@@ -61,14 +61,14 @@ exponents; `L = ⌈2τ^{−2} ln(4M/η)⌉`.
 | what | result | where |
 |---|---|---|
 | the audit, `bash scripts/audit_all.sh` | **AUDIT PASSED**, 2026-11-28 04:20 UTC, on the code of commit `ddae0c3` (afterwards only documents, stored outputs and the second referee's files changed; the check of document references was repeated on the final tree): 93 Lean files, 50 211 lines; no `sorry`, `admit`, native evaluation or anonymous `example`; 5128 declarations depend on `propext`, `Classical.choice`, `Quot.sound` only; 721 headline theorems; benchmarks and reference checker pass; every Lean name cited in the documents exists | `scripts/audit_all.sh` |
-| the harness, full pass | 196 tests: 166 survive, 30 documented refutations — all as expected | `docs/falsification_output.txt` |
-| mutation tests | 645 mutations: 644 caught, 1 expected pass; 161 baseline runs | `docs/mutation_output.txt` |
+| the harness, full pass | 197 tests: 167 survive, 30 documented refutations — all as expected (196 with 166 surviving at the first audit; the stored output is that of the run after the bridge note) | `docs/falsification_output.txt` |
+| mutation tests | 658 mutations: 657 caught, 1 expected pass; 162 baseline runs (645, 644 and 161 at the first audit; the stored output is that of the run after the bridge note) | `docs/mutation_output.txt` |
 | Phase II Lean file | `proofs/Frontiers/ObservationInvariance.lean`: 41 declarations, compiles without warnings, registered in the axiom audit | `proofs/AxiomAudit.lean` |
 | Phase II exact checks | 37 checks pass; harness block XXVIII: four tests, 27 mutations, all caught | `experiments/phase2/out_p2_checks.txt` |
 | manuscript | generated from the report; the generator's consistency check passes | `scripts/build_phase2_manuscript.py --check` |
 | the bridge note (added 2026-11-28) | `proofs/Frontiers/BridgeOverlap.lean`: 12 declarations, compiles without warnings, eight listed in the axiom audit; `experiments/phase2/p2_bridge.py`: 11 checks pass; harness XXVIII.5 with 13 mutations, all caught | `experiments/phase2/out_p2_bridge.txt` |
 <!-- FINAL:AUDIT2 -->
-| the audit, repeated after the bridge note | *(running when this line was written)* | |
+| the audit, repeated after the bridge note | **AUDIT PASSED**, 2026-11-28 07:24 UTC, on the code of commit `e074b14` (afterwards only documents and stored outputs changed): 94 Lean files, 50 438 lines; 5155 declarations on the three standard axioms; 729 headline theorems; full harness 197 tests (167 survive, 30 documented refutations); 658 mutations (657 caught, 1 expected pass); 162 baseline runs; document references OK (3084 declarations indexed) | `scripts/audit_all.sh`; `docs/falsification_output.txt`, `docs/mutation_output.txt` (regenerated) |
 <!-- /FINAL:AUDIT2 -->
 
 (At the halt of Phase I: 92 Lean files, 5068 declarations, 696 headline theorems, 192 tests, 618 mutations.)
@@ -195,7 +195,10 @@ The science division's review SCI-REV-0030 said, in its major finding, that the 
    of the hierarchy division — its request that we attack its Lemma B and Theorem H1 was not met, and
    its results are recorded in our theory report as reported, not verified; the engineering note
    `CERTIFIED_INFERENCE.md`; the proofs, code and archives of the MBAR package beyond its main note.  The
-   messages of other divisions left unread at the halt of 27 November are still unread.
+   messages of other divisions left unread at the halt of 27 November are still unread.  At two later
+   fetches (06:44 and 07:25 UTC) the MBAR division had published its own mathematics — including the dual
+   form we had sent it as a proposal — and a first message, MBAR-MSG-0001, with a question for us; read
+   and answered in THY-MSG-0025 (`BRIDGE_NOTE.md` §6.7); its long documents were not read.
 6a. **The bridge note is unrefereed.**  Its proofs are short and its numerical claims are reproduced by
    exact enumeration and simulation with mutations, but no second reader has seen Theorems F and J,
    Corollary F1 or the statements sent to the MBAR division.
@@ -266,5 +269,26 @@ of a model in which base measure and energy are both partly unknown — the note
 ## 9. State at the stop
 
 <!-- FINAL:STATE -->
-*(completed in the final commit)*
+*Written 2026-11-28, about 07:35 UTC.*
+
+* **Branch** `research/phase2-foundations`, pushed; the original branch and the consolidated archive
+  were not touched; no pull request; nothing published outside the repository.
+* **Code state audited**: commit `e074b14` — `AUDIT PASSED` at 07:24 UTC (§3).  Later commits change
+  documents, stored outputs and the two exact-check scripts of the bridge note (`p2_bridge.py`, to which
+  a simulation with unequal sample sizes was added, and `p2_ladder.py`; neither is part of the audit;
+  both stored outputs end with "ALL PASS").
+* **Objectives of the directive**: 1–10 done to the extent stated in §1, with the open problems of §7.
+  The collaboration update of 28 November: done to the extent of §8 — one bounded cycle, unrefereed.
+* **Messages**: THY-MSG-0023, THY-MSG-0024 (with the correction that the dual form is the MBAR
+  division's), THY-MSG-0025 (reply to MBAR-MSG-0001).  Read at the last fetch (07:25 UTC): MBAR-MSG-0001 in
+  full; the header and first section of ENG-MSG-0011.  **Not read**: the MBAR division's
+  `MATHEMATICS.md`, `SYNTHESIS.md`, `FINAL_REPORT.md` and its other new files; the rest of ENG-MSG-0011 and
+  the engineering note `MBAR_INTEGRATION.md`; the hierarchy division's reports.
+* **Why it stops here.**  The objectives are complete; and ENG-MSG-0011 reports that the usage counter of
+  the account shared by the divisions is close to the Phase II ceiling.  This session cannot see that
+  counter — the limitation stated at the head of this report — and takes the report as the signal to
+  stop rather than start another cycle.  It does not resume automatically, and not because a message
+  arrives.
+* **No background process, subagent, scheduled session or computational job of this division is
+  active.**  No shared computing budget was used.
 <!-- /FINAL:STATE -->

@@ -208,7 +208,10 @@ cones, dips, maxima of 40 dips, regularised random energies — with overlaps fr
 `7·10⁻⁴`): at `N = 30/(ε²Ω₁)` no error beyond `ε = ½` on any instance (300 runs each; 60 for the two with
 `N > 10⁵`); at `N = 3/(ε²Ω₁)` between 0.3 and 20 %; at `N = 0.3/(ε²Ω₁)` 31 to 68 %.  The scale `1/Ω₁` is right
 for this estimator; the constant `54e` of the corollary is not optimised (it gives `N = 46 550` at
-`n = 14`, `u = 1`, `ε = ½`, `δ = 0.1`, where a few hundred suffice).
+`n = 14`, `u = 1`, `ε = ½`, `δ = 0.1`, where a few hundred suffice).  *Unequal sizes*: at `n = 16`, `u = 4`, with
+`N₁Ω_{s*}/e = 30/ε²` and `N₀/N₁ = e^{−3}, 1, e^{3}, e^{6}` — from 23 548 reference points with 472 975 samples to
+957 337 reference points with 2 373 samples on the cone — no error in 100 to 300 runs at any of the
+eight points: the two resources do trade along the curve.
 
 (4) *Not claimed.*  A lower bound for algorithms with samples in general.  The cone, on which the
 bridge needs `e^{nh}`, is trivial for an algorithm that may explore (§4).  The MBAR division's B3
@@ -508,6 +511,46 @@ of a variable of range `w = 2ε` (theory report, Theorem 11.110(a), `jensen_brac
 `ε²/2` around a measured mean.  They are statements about a finite configuration space with a known
 reference measure and a remainder bounded on all of it; they do not certify any molecular system.
 
+Theorem F with Corollary F1 is a composition of the same two kinds from the other end: a
+*deterministic* property of the energy — its Lipschitz constant, nothing else — certifies **in
+advance**, for every member of the class, the overlap that the *statistical* procedure needs, and so
+its sample size.  The certificates C1 and C2 of the MBAR division are computed from the data, after
+sampling, and may abstain; an a priori certificate of this kind cannot abstain, and pays for it with
+the worst case of the class.
+
+### 6.7 A question of the MBAR division: a tempering ladder with `L` rungs (MBAR-MSG-0001 §5(a))
+
+*Added at the close, after its first message arrived (06:47 UTC; read in full at `37ac8d7`).*  That
+message contains, independently of this note and at about the same time, two statements made here:
+its S1′ (with samples of `⌈un⌉` tempered ensembles the problem is polynomial) is the remark after
+Proposition F2, with a variance constant where we have a resistance bound; and its S1″ ("the exponent
+`h` is a cost of sampling, not of estimation", by a reduction to Theorem 11.25) is the conclusion of
+Proposition F2, which proves it directly for one sample.  Its question: is there an exponent `ν(L)` for
+samples of `L` tempered ensembles, between Theorem E (`L = 1`) and the polynomial regime?
+
+*In its model — for the variance of the end-to-end contrast on the ladder — the exponent is of order
+`1/L`, from both sides* [N for the lower side, exact binomial sums; `experiments/phase2/p2_ladder.py`].
+Upper side: its path bound, `χ² ≤ e^{un/L}/4` per step, exponent at most `u/L`.  Lower side: take the dip
+`max(1, e^{u(r−d)})` and choose `r` so that the mass of the dip crosses that of the floor *inside a rung* —
+a first-order transition between two consecutive tempered ensembles.  All states below the rung are
+floor-dominated and all states above it dip-dominated, and the test function `a = 1{d < r}` in the dual
+form of §6.2 gives, **for every allocation `s`**, `V_c(s) ≥ (f_L − f_0)²/max_k f_k(1 − f_k)`, `f_k` the
+probability of the dip under the `k`-th state.  At `n = 20 000` the exponent of this bound, maximised
+over `r`, times `L` is
+
+| `L` | 2 | 3 | 4 | 8 | 16 |
+|---|---|---|---|---|---|
+| `u = 1` | 0.038 | 0.045 | 0.048 | 0.045 | 0.047 |
+| `u = 2` | 0.128 | 0.146 | 0.152 | 0.150 | 0.153 |
+
+(against `u·1 = 1` and `2` for the upper side; the least overlap of the two ensembles of the last rung
+has the same exponents to within 15 %).  So a ladder with a bounded number of rungs has, on some
+member of the class, a variance `e^{Θ(n/L)}` whatever the allocation, and the polynomial regime needs a
+number of rungs of order `n`; the constant of the `1/L` law is known only up to the factor between
+these numbers and `u`.  *In our model* — the reference known, evaluations allowed around the samples —
+we have nothing beyond Theorem E at `L = 1` and Corollary F1; an algorithm that explores around samples
+is not bound by overlaps of consecutive states.
+
 ---
 
 ## 7. Ingredients of a common theory, and what is missing
@@ -529,9 +572,12 @@ reference measure and a remainder bounded on all of it; they do not certify any 
 energy observables for `0 < γ < γ*`; an upper bound for sampling; Theorem F for references other than
 the uniform cube (the tail lemma is isoperimetric; workstream I of the archive has the product case
 by induction) and for consecutive tempered ensembles, where it would give the worst-case number of
-rungs.  Two scalings coincide and we do not know whether it means anything: the exponent of `k` nested
-levels is `h + c/k²` (Theorem 11.53b), and a ladder of `k` rungs of Fisher–Rao length `D` has adjacent
-Chernoff exponents `nD²/(8k²)`.
+rungs.  Two scalings coincide — the exponent of `k` nested levels is `h + c/k²` (Theorem 11.53b), and a
+ladder of `k` rungs of Fisher–Rao length `D` has adjacent Chernoff exponents `nD²/(8k²)` — and they should
+not be identified: the hierarchy division tested it (HIE-MSG-0003 §3.3) and found the constant of the
+level law, `0.0712` at `u = 1`, different from half the squared Fisher–Rao length of each of three natural
+paths of tilts (`0.0294`, `0.115`, `0.0283`); the levels are adaptive stages, not a chain of overlapping
+states.  We re-computed the first of the three numbers and not the others.
 
 ---
 
@@ -540,6 +586,7 @@ Chernoff exponents `nD²/(8k²)`.
 | item | status |
 |---|---|
 | `proofs/Frontiers/BridgeOverlap.lean` | 12 declarations; `bridge_identity`, `overlap_ge_of_tail_bound`, `tv_ge_of_agree_off`, `one_two_dips_gap`, `mixture_mean_diff_le`, `ratio_within`, `harmonic_between_min`, `sq_sum_sqrt_mul_le` listed in `AxiomAudit.lean`; no `sorry`; `propext`, `Classical.choice`, `Quot.sound` only |
+| `experiments/phase2/p2_ladder.py` | 4 checks pass (`out_p2_ladder.txt`): the ladder of §6.7 |
 | `experiments/phase2/p2_bridge.py` | 11 checks pass (`out_p2_bridge.txt`): Theorem F and the tail inequality on 10 912 (member, level) pairs, `n ≤ 12`; exponents at `n = 2 000, 20 000`; identities; the estimator on 14 instances; F2, F3; the pair of Theorem J; A1/A2 and the dual form on 300 instances; a failure of convexity with correlated samples found by search (B8c, reported as information) and one such instance simulated (B9) |
 | harness XXVIII.5 | survives in both modes; 13 mutations, all caught (the block XXVIII: 40 of 40) |
 | not machine-checked | Lemma 11.43(b) (Harper), the Chernoff bounds, the coupling arguments of F2 and J(a), all exponents |

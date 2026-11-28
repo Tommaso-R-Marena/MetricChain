@@ -15,8 +15,9 @@ Checks (each prints PASS/FAIL; exit code 1 if any fails):
   B3  the bridge identity  A = E_pi[min(w, theta)] / E_mu[min(1, theta / w)]  for every theta, and the
       two-state MBAR conductance  l = s0 s1 int p0 p1 / (s0 p0 + s1 p1):  l(1/2,1/2) = (1 - Delta/2)/4
       (Delta the triangular discrimination),  Omega/4 <= l <= Omega/2.
-  B4  the bridge estimator of Corollary F1 by simulation (exact sampling of mu by enumeration, n = 14):
-      error rates at N = c / (eps^2 Omega) for several c, on cones, dips, maxima of dips, random members.
+  B4  the bridge estimator of Corollary F1 by simulation (exact sampling of mu by enumeration; cubes of 14,
+      16, 18 sites): error rates at N = c / (eps^2 Omega) for several c, on cones, dips, maxima of dips,
+      random members; and with unequal numbers of reference points and samples along the trade-off.
   B5  Proposition F3:  TV(mu_0, mu_1) >= mu_0(D^c) (1 - A_0/A_1)  for pairs that agree off D.
   B6  Proposition F2 (sampling): the counting identity  P_c(x in B(c, r-1)) = V(n, r-1)/2^n  and the
       numbers  (m_r/(1+m_r) - kappa) 2^n / V(n, r-1) - 1  at large n (exponent -> h).
@@ -378,7 +379,32 @@ def check_B4():
         bad += abs(est - math.log(A)) > eps
     lines.append("    Corollary F1's sample size at n=14, u=1, eps=0.5, delta=0.1: N0 = N1 = %d; errors on the cone in 40 runs: %d" % (Nthm, bad))
     ok &= bad == 0
-    report("B4 bridge estimator: error rate small at N = 300/(eps^2 Omega) (failures at N = 0.3/(eps^2 Omega) are expected)", ok,
+    # unequal numbers of reference points and samples: s* = N0/N1 = e^{ls}, N1 chosen so that N1 Omega_{s*}/e = 30/eps^2
+    n, u = 16, 4.0
+    X, _ = cube(n)
+    d0 = popcount(X)
+    for name, w in (("cone", np.exp(-u * d0)), ("dip r=4", np.maximum(1.0, np.exp(u * (4 - d0))))):
+        A = w.mean()
+        g = w / A
+        cdf = np.cumsum(w / w.sum())
+        cdf /= cdf[-1]
+        row = []
+        for ls in (-3.0, 0.0, 3.0, 6.0):
+            sst = math.exp(ls)
+            Oms = np.minimum(g, sst).mean()
+            N1 = max(2, int(math.ceil(30.0 * math.e / (eps ** 2 * Oms))))
+            N0 = max(2, int(round(sst * N1)))
+            K0 = int(math.ceil(u * n + abs(math.log(N0 / N1)))) + 1
+            nrep = 300 if max(N0, N1) < 200000 else 100
+            bad = 0
+            for _ in range(nrep):
+                X0 = rng.integers(0, 2 ** n, size=N0)
+                Y = np.minimum(np.searchsorted(cdf, rng.random(N1)), 2 ** n - 1)
+                bad += abs(bridge_estimate(w, X0, Y, w[0], n, u, K0) - math.log(A)) > eps
+            row.append("ln(N0/N1)=%+.0f: N0=%d N1=%d Omega_s=%.3g err %.3f" % (ls, N0, N1, Oms, bad / nrep))
+            ok &= bad / nrep <= 0.02
+        lines.append("    unequal sizes, n=16 u=4 %-8s | " % name + "; ".join(row))
+    report("B4 bridge estimator: error rate small at N = 300/(eps^2 Omega) (failures at N = 0.3/(eps^2 Omega) are expected); unequal sizes along the trade-off", ok,
            "\n" + "\n".join(lines))
 
 
