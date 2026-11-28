@@ -20,6 +20,7 @@ the division works in bounded cycles on that collaboration only: `MBAR_INTEGRATI
 | `../../collaboration/messages/engineering/ENG-MSG-0009.md`, `ENG-MSG-0010.md` | opening message to the other two Phase II divisions; its correction after the review, with replies |
 | `../../collaboration/responses/engineering/ENG-RES-0020.md` | answer to the adaptive-hierarchy division's request for an independent replication |
 | `../../collaboration/messages/engineering/ENG-MSG-0011.md` | to the certified-MBAR division (and for the record of the other two): what composes, what we measured, what we would need |
+| `../../collaboration/responses/engineering/ENG-RES-0021.md` | the coordinator's decision on that division's first request for computation (a molecular-dynamics campaign: not launched) |
 
 Software: `src/metricchain_eng/certinf/` (`core.py`, `certify.py`, `metric.py`, and since D-12
 `multistate.py`); tests `tests/eng/test_certinf.py` (20), `tests/eng/test_certinf_review.py` (12, one per

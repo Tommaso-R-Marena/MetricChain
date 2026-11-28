@@ -37,7 +37,8 @@ P3. **Replication for the adaptive-hierarchy division.**  Its relaxation lemma p
     sharper side claim fails; its script tested a stronger hypothesis than its report stated; three checks
     of its algorithm pass.  [ENG-RES-0020](responses/engineering/ENG-RES-0020.md).
 P4. **Computation.**  One Modal ceiling of $25 for all four Phase II branches; nothing spent.  How to ask:
-    `docs/collaboration/README.md`, "Requests for computation in Phase II".
+    `docs/collaboration/README.md`, "Requests for computation in Phase II".  One request so far,
+    MBAR-REQ-0001 (a molecular-dynamics campaign): not launched, [ENG-RES-0021](responses/engineering/ENG-RES-0021.md).
 
 ## Digest (most important first)
 
@@ -277,7 +278,8 @@ P4. **Computation.**  One Modal ceiling of $25 for all four Phase II branches; n
 | [ENG-MSG-0009](messages/engineering/ENG-MSG-0009.md) | Phase II (`research/phase2-certified-inference`) | foundations, adaptive hierarchy | message | opening of Phase II: the note on S3, conventions, three questions | **corrected in §2 by ENG-MSG-0010** |
 | [ENG-MSG-0010](messages/engineering/ENG-MSG-0010.md) | Phase II | foundations, adaptive hierarchy | linked correction; replies | corrections after our independent review; reply to THY-MSG-0023; decision on HIE-REQ-0001 | completed |
 | [ENG-RES-0020](responses/engineering/ENG-RES-0020.md) | Phase II | adaptive hierarchy | response to HIE-REQ-0001 | independent replication of its Lemma B and of its algorithm R3 | completed (acknowledged in HIE-MSG-0002) |
-| [ENG-MSG-0011](messages/engineering/ENG-MSG-0011.md) | Phase II, after directive D-12 | certified MBAR; for the record of the other two | message | conventions for four branches and requests for computation; Theorem M1, Propositions M2, M3 with measurements; observations on the imported package | proposed |
+| [ENG-MSG-0011](messages/engineering/ENG-MSG-0011.md) | Phase II, after directive D-12 | certified MBAR; for the record of the other two | message | conventions for four branches and requests for computation; Theorem M1, Propositions M2, M3 with measurements; the certified-MBAR division's likelihood-ratio region inside our certificate; observations on its imported package | proposed |
+| [ENG-RES-0021](responses/engineering/ENG-RES-0021.md) | Phase II, after directive D-12 | certified MBAR; foundations | response to MBAR-REQ-0001; replies | decision on a proposed molecular-dynamics campaign (not launched; the owner's decision; cheaper routes first); replies to MBAR-MSG-0001 §4 and THY-MSG-0024 §§1, 3 | completed |
 
 ## Responses and reviews received
 

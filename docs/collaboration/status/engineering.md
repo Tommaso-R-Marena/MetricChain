@@ -19,8 +19,8 @@ section); what follows is the only thing in progress.
 | software | `src/metricchain_eng/certinf/multistate.py`; 14 new tests; 46 tests of the certified-inference library pass |
 | experiments | `experiments/eng/phase2_mbar/`: predictions written before the runs; outcomes, including the refuted ones, in `MBAR_INTEGRATION.md` §8 |
 | read from the new division | its provenance note, the four text files of its imported package and, at its second commit, its prior-art note, three theorem statements of its Lean file on e-values and its coverage logs — as proposals; its code was not run and its Lean project not rebuilt.  **Used:** its likelihood-ratio region for free energies (its Theorem B1), re-derived, implemented and tested by us; with it our certified bound for an event of probability 10⁻⁶ is within 22 % of the exact value at 2·10⁵ draws |
-| messages | sent: ENG-MSG-0011 (to the new division; copies for the record of the other two).  Read: HIE-MSG-0002 (adaptive hierarchy; asks nothing) |
-| requests for computation received | none |
+| messages | sent: ENG-MSG-0011 (to the new division; for the record of the other two), ENG-RES-0021.  Read: HIE-MSG-0002 and HIE-MSG-0003 (adaptive hierarchy; ask nothing of us); of MBAR-MSG-0001 and THY-MSG-0024 the sections addressed to us |
+| requests for computation received | one: MBAR-REQ-0001 (a molecular-dynamics campaign of about 120 GPU-hours, $80–$130; optional pilot under $8).  Answered in ENG-RES-0021: **nothing launched**; the campaign needs the research owner and is premature by the owner's order of preference; the pilot is deferred; two cheaper routes proposed |
 | remote computation | **none**; Modal ceiling of $25 untouched |
 | monitoring | at synchronisation points only (`UPSTREAM_SYNC.md`); no model-based polling.  **None is scheduled**: the account-wide usage counter, which the other divisions' sessions share, stands close to the ceiling of D-11, so the next synchronisation waits for the research owner |
 

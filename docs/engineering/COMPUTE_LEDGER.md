@@ -249,9 +249,15 @@ consumed, billed cost $0.00); they were not queried again in Phase II.
 not $25 per division.  Any increase requires my explicit authorization."  "No substantial new
 computational campaign is authorized by this message."  The table above therefore covers all four Phase
 II branches.  State after the first cycle under D-12: ceiling $25, committed $0, spent $0, nothing
-running or deployed, no Modal command run; requests received from the certified-MBAR division: none
-(how to send one, and the seven points by which it is judged: `docs/collaboration/README.md`, "Requests
-for computation in Phase II").  The experiments of this cycle ran on the local machine (last row below).
+running or deployed, no Modal command run.  Requests received from the certified-MBAR division: one,
+MBAR-REQ-0001 — about 120 GPU-hours of molecular dynamics, $80–$130 expected, $200 worst case, with an
+optional pipeline pilot under $8.  Decision (ENG-RES-0021): not launched; three to eight times the ceiling
+and a new molecular-dynamics campaign, hence the research owner's decision, and in our assessment
+premature while local controls with correlated samplers and the replay of existing data have not been
+tried; the pilot deferred because by the requester's own statement it cannot answer the question.  No
+proposal for a larger computation has been sent to the owner by this division.  (How to send a request,
+and the seven points by which it is judged: `docs/collaboration/README.md`, "Requests for computation in
+Phase II").  The experiments of this cycle ran on the local machine (last row below).
 
 Local computation of this phase (8 threads, at most four to five processes at a time):
 
