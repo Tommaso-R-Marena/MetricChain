@@ -2992,7 +2992,15 @@ inside the session.*
   XXVIII (four tests) with 27 mutations, all caught.
 * **R29** (`docs/phase2/R29_RESOLUTION.md`): F2 applied; F3–F6 had been applied before the halt after
   our own referee's report; F7 unchanged ([N]); F1 resolved by making the independent exact checker the
-  stated evidence and measuring it against mutations of the script.
+  stated evidence and measuring it against mutations of the script (ten gross mutations: nine still end
+  with the script's own "ALL CHECKS PASS", the checker rejects all ten).  **The 400-level run, which two
+  referees had left unchecked, is verified in full** (05:29 UTC: 400 levels, 1 841 962 stored lines, no
+  failure) — *but not by the checker as it stood*: unmodified it failed all 22 cap tests of the first 66
+  levels checked.  Two limitations of the checker at `K = 4000` (the sample points of its cap test; six
+  candidate parents ranked by a margin that is noise for the lowest line of a level), diagnosed with its
+  own exact test and worked around in memory by `verify_z6_chunk.py` without touching its acceptance
+  criteria; the stopped attempts are archived.  A lesson of method: an independent checker is evidence
+  about the certificate only where it was itself exercised — the referee had run it at `K ≤ 3000`.
 * **Review.**  One adversarial AI referee on the Phase II report: `docs/phase2/PHASE2_REVIEW.md`;
   its findings and what was done about them are recorded at the head of the report.
 * **Collaboration.**  `research/phase2-certified-inference` read at `bf7b71a`; ENG-MSG-0009 answered

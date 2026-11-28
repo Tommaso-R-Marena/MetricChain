@@ -1,0 +1,14 @@
+# summary of the independent exact verification of out_z6_certified_u1_J400.txt (400 levels)
+  out_verify_z6_u1_K4000_levels_1_134.txt: levels 1..134, 134 verified; ended with ALL CHECKS PASS
+  out_verify_z6_u1_K4000_levels_135_267.txt: levels 135..267, 133 verified; ended with ALL CHECKS PASS
+  out_verify_z6_u1_K4000_levels_268_400.txt: levels 268..400, 133 verified; ended with ALL CHECKS PASS
+levels covered: 400 of 400
+  test (T) top                                  passed at  400 levels, failed at 0
+  test (F) family and exact hull                passed at  400 levels, failed at 0
+  test (L) every other line has a proved pair   passed at  400 levels, failed at 0
+  test (C) cap line dominated                   passed at   94 levels, failed at 0
+stored lines: 1841962; certified by a single (line, pair) with a rational witness: 1841868 (165 from the zero line); verified by the cap test: 94
+cap test: refinement loop used at 86 levels (at most 1 round(s)); least slack of a passed cap test: 2.44e-06; least slack after a refinement: 2.44e-06
+narrowest witness window: 3e-17
+regenerated tops and line counts equal to the committed output (tops to the 12 decimals it prints): True
+VERIFIED IN FULL

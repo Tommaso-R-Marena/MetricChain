@@ -114,7 +114,15 @@ The science division's review SCI-REV-0030 said, in its major finding, that the 
   lies above the cap.  `verify_z6_chunk.py` adds a refinement loop to that test (the same acceptance
   criterion, the same source of lines).
 <!-- FINAL:J400 -->
-  *(result of the re-verification in the final commit)*
+  A second limitation appeared behind the first: for the lowest line of a level the checker's
+  floating-point ranking of candidate parents is noise, and at five levels the true parent was not among
+  the six it tries; the wrapper tries sixty.  **With these changes (in memory; the referee's file is
+  unchanged; the acceptance criteria are the checker's) the run is verified in full** (finished
+  2026-11-28 05:29 UTC): 400 of 400 levels, 1 841 962 stored lines — 1 841 868 with a proved rational pair,
+  the 94 cap lines by exact domination — no failure, and the regenerated tops equal to the committed
+  output at every level.  The stopped attempts with the unmodified checker are archived as evidence
+  (`experiments/workstreams/Z/verify_z6_K4000_history/`).  Not established: the wrapper's changes have had
+  no second reader (`R29_RESOLUTION.md` §4.2 lists what else is not).
 <!-- /FINAL:J400 -->
 
 ## 5. Novelty evidence
@@ -151,7 +159,8 @@ The science division's review SCI-REV-0030 said, in its major finding, that the 
    from the third level on" remains a floating-point statement (an interval proof is within reach and not
    done); the referee's own unfinished items were not run by us.
 5. **The independent checker** `a6_02_verify_z6_output.py` is unchanged in the repository; its cap test
-   has the defect of §4, repaired only in the wrapper `verify_z6_chunk.py`.  The repair has had no reader.
+   and its search for the parent of a line have the limitations of §4 at `K = 4000`, worked around only in
+   the wrapper `verify_z6_chunk.py`.  The wrapper has had no second reader.
 6. **Collaboration.**  One message was sent (THY-MSG-0023: results, the R29 resolution, answers to the
    three questions of ENG-MSG-0009 §4); no answer had arrived at the last fetch (2026-11-28 02:20 UTC:
    `research/phase2-certified-inference` unchanged at `bf7b71a`; `research/phase2-adaptive-hierarchy` not

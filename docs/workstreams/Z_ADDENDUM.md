@@ -338,7 +338,11 @@ The science division's referee found the same with its own checker and thirty mu
 three committed runs line by line: 278 704 generated lines at `u = 1`, no violation.  The harness test XVI.11
 is a third, independent re-implementation of the construction with eleven mutations.
 <!-- Z:J400 -->
-The 400-level run (`K = 4000`): its independent verification is described in `docs/phase2/R29_RESOLUTION.md` §4.2.
+The 400-level run (`K = 4000`) was verified in full in Phase II (2026-11-28): all 400 levels, 1 841 962
+stored lines, no failure — with the checker changed in three places in memory, because as it stands its
+cap test and its search for the parent of a line fail at this resolution (two limitations of the checker,
+not of the certificate).  What was run, the counts, and what this does and does not establish:
+`docs/phase2/R29_RESOLUTION.md` §4.2.
 <!-- /Z:J400 -->
 
 | `j` | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 20 | 40 | 80 | 200 | 400 |

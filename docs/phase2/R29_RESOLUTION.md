@@ -86,6 +86,67 @@ instance); and nothing about the script's behaviour at `K = 4000` — that is §
 ### 4.2 The 400-level run
 
 <!-- R29:J400 -->
-*(pending: the exact re-verification of the 400-level run was still running when this text was committed.)*
+**Verified in full on 2026-11-28 05:29 UTC — with the independent checker changed in three places in
+memory, because as it stands it does not accept this run.**  Outputs:
+`experiments/workstreams/Z/out_verify_z6_u1_K4000_levels_{1_134,135_267,268_400}.txt`; the summary
+`out_verify_z6_u1_K4000_summary.txt` is produced from them by `summarize_verify_z6.py` (a reader of text).
+
+*What was run.*  `verify_z6_chunk.py 1 J0 J1 4000` in three processes (levels 1–134, 135–267, 268–400;
+7 637 s, 9 442 s and 9 899 s).  Each process reads the referee's file unchanged from the repository,
+re-runs the construction from level 1 with the script's own step, and verifies its range exactly.
+
+*Result.*
+
+| | |
+|---|---|
+| levels covered | 400 of 400, each once |
+| test (T), the top | passed at 400 levels |
+| test (F), family property and exact hull | passed at 400 levels |
+| test (L), every stored line has a proved pair | passed at 400 levels |
+| test (C), the cap line is dominated | passed at the 94 levels that have a cap line |
+| failures | none |
+| stored lines | 1 841 962; **1 841 868 certified by a single (line, pair) with a rational witness** (165 of them from the zero line); the 94 cap lines verified by test (C) |
+| cap test | refinement loop used at 86 of the 94 levels, one round each; least slack of a passed test `2.44·10⁻⁶` |
+| narrowest witness window | `3·10⁻¹⁷` |
+| regenerated tops and numbers of lines | equal to the committed output at all 400 levels, in each of the three processes (tops to the twelve decimals it prints); level 400: `c′ = 0.0291395835791104`, 4 772 lines |
+| the certified majorant `M_upper` (six rates) | the least double above the exact maximum at levels 134, 267 and 400 |
+
+*Why the checker could not be used as it stands* (the stopped attempts are kept, with a table, in
+`experiments/workstreams/Z/verify_z6_K4000_history/`).  Unmodified, it failed at 4 of the first 15
+levels; with the loop range as its only change, **all 22 cap tests of the first 66 levels checked
+failed**.  Two causes, both in the checker and neither in the certificate:
+
+1. *Its cap test.*  The checker compares the cap line with lines of its own at sample points chosen on
+   the assumption that the cap becomes active at a vertex of the hull of the other lines.  At `K = 4000`
+   it becomes active inside the last linear piece; the choice degenerates to 300 log-spaced points and
+   the (sufficient) comparison fails by `10⁻⁵ … 2·10⁻⁴`, although the checker's own line through the
+   failing vertex lies above the cap.  The wrapper adds more of the checker's own lines around the vertex
+   of least slack and repeats (at most eight rounds; one was enough everywhere).
+2. *Its search for the parent of a stored line.*  It ranks the lines of the previous level by a
+   floating-point margin and tries to prove the six best.  For the lowest line of a level the margins of
+   the true parent and of its neighbours are all of the order of `10⁻¹⁷`; at levels 7, 9, 152, 153 and 154
+   the true parent was not among the six, and the line fell through to the cap test, which failed by
+   `10⁻¹⁵ … 10⁻¹⁰`.  With the true parent the checker's own exact test proves the pair (level 7: witness
+   `ρ = 0.49998406577536852469`).  The wrapper tries the 60 best candidates.
+
+The acceptance criteria are those of the referee's file: a stored line is accepted only with the exact
+identity and a pair proved by `valid_pair`; a cap line only if the exact slack is nonnegative at every
+vertex of the exact hull of lines that are themselves certified.  The third change of the wrapper is the
+range of the verification loop.
+
+*What this establishes.*  The committed output of the 400-level run is a certificate in the sense of
+Proposition A13 of the addendum, as far as this checker decides it: every level's family is admissible
+and every top is a valid upper bound, so `τ_400 ≤ c′_400` with the printed digits (the nine-digit table
+prints to nearest — a rigorous reading adds one unit in the last place).  Finding F1 is thereby closed
+for every committed run: the three short runs were verified by the science division's referee, this
+one here.
+
+*What it does not establish.*  (i) The three in-memory changes were written and read by this session
+only; no second reader, and the referee who wrote the checker has not seen them.  (ii) The checker
+itself is the work of one AI session; the mutation study of §4.1 measures it on one small instance.
+(iii) Its test of the certified majorant ran at the last level of each process only (134, 267, 400), and
+the negative controls were skipped in these runs (they are in the stored outputs of the short runs).
+(iv) The mathematics that turns a valid output into a statement about nested algorithms — Proposition
+A13 and parts (b)–(d) of Theorem 11.58e — is as §3 says: read by our internal referees only.
 <!-- /R29:J400 -->
 <!-- /R29:RESULTS -->

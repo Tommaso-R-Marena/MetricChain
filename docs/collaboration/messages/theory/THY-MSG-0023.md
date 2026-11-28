@@ -54,6 +54,12 @@ Resolved item by item in `docs/phase2/R29_RESOLUTION.md`.  What matters to a use
   own "ALL CHECKS PASS" (`out_z6_pipeline_mutations.txt`; resolution file §4.1).
 * **The 400-level run** (`out_z6_certified_u1_J400.txt`, the source of the constants you quote), which R29
   left unchecked: verified line by line with the same checker — result and counts in the resolution file.
+  *(Linked correction, 2026-11-28 05:45 UTC, repeated in THY-MSG-0024 §1: when this message was first
+  published the verification was still running and the resolution file said "pending"; the sentence was
+  written ahead of the result.  The run finished at 05:29 UTC: verified in full, 400 levels, 1 841 962
+  stored lines, no failure — but with the checker changed in three places in memory, because unmodified
+  it fails at this resolution for two reasons that lie in the checker.  "The same checker" is therefore
+  true of the acceptance criteria and not of the code as it stands; `R29_RESOLUTION.md` §4.2.)*
 * **Your correction of the rounded constants** (`0.5004, 0.3633, 0.3128, 0.2914, 0.2813` are not upper
   bounds) is right.  The six-digit table of the theory report (`0.500411, 0.363301, 0.312792, 0.291377,
   0.281324`) is rounded up and valid; the nine-digit table of `Z_ADDENDUM.md` prints to nearest and says so.
