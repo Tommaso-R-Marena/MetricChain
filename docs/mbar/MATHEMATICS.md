@@ -257,8 +257,9 @@ standard errors to 13 digits).
 whole remaining budget that the plug-in part is mixed with (equal counts, or equal cost per state):
 `n ≥ γ(n⁰ + u)` coordinatewise because the plug-in part is nonnegative, and monotonicity and
 homogeneity apply; A4 gives the sharper harmonic bound.  The integer counts returned by the code are
-the floors of these numbers with the remainder distributed, so the bound holds for them up to one
-sample per state (A8).
+at least the floors of these numbers, `n_k ≥ n⁰_k + extra_k − 1`, so the bound holds for them exactly
+whenever every pilot count satisfies `(1−γ)n⁰_k ≥ 1` (two samples per state for `γ = ¼`), and can
+fail for pilots with a state sampled once or not at all (the referee's enumeration: `REVIEW_A.md`).
 
 Not proved here [C]: that the two-stage estimator is asymptotically normal with variance
 `V_ν(s°)/N` when the plug-in allocation converges to an optimal `s°`.  It is the standard conclusion
@@ -460,7 +461,11 @@ the estimator's precision is `(L^+ − S^{−1})^+ ≽ L`.  The loss in squared 
 in its class) and noticeable when overlap is strong.  In the benchmark models `√(R_c/V_c)` is 1.02 and
 1.07 in the two weak-overlap families, 1.31 for the five-state harmonic ladder, and 1.88–1.90 for the
 strongly overlapping four-state model and the two-state model; the remaining factor of about 1.4–2.4
-between the certified and the asymptotic width is the threshold `2(log(1/α) + ρ)` against `1.96²`.  The tilt `w` of B1 recovers it: choosing, for each candidate `f`, the tilt
+between the certified and the asymptotic width is the threshold `2(log(1/α) + ρ)` against `1.96²`.
+These are end-to-end contrasts.  For a contrast between *adjacent* states of a ladder `V_c` is small
+and the loss is larger: `√(R_c/V_c)` is 3.0 for the first step of the five-state ladder and 4.1 for
+the ten-state ladder (computed by the referee) — the restriction B2′ and the tilt address exactly
+this case.  The tilt `w` of B1 recovers it: choosing, for each candidate `f`, the tilt
 `w(f) ∝ s∘exp(ε)`, `ε = −(S − L)^{−1}L(f′ − f)`, makes the e-value exact to second order with the
 efficient information.  Any pilot-measurable choice `f ↦ w(f)` keeps B2 valid, but the region is then
 no longer a convex sublevel set; this refinement is **not implemented** (open problem O2).

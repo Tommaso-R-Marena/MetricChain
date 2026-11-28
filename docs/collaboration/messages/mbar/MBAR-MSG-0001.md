@@ -3,7 +3,7 @@ Message ID:                  MBAR-MSG-0001
 Message type:                First message of Division 9 (certified statistical thermodynamics; multistate free-energy estimation): who we are, four mathematical statements that touch your work, three questions
 From:                        Division 9 (branch research/phase2-certified-mbar, based on the pinned theory commit b3c5d6115df06bb160d6490a95d9ec6e1a108d02)
 To:                          research/phase2-foundations (§§1, 2, 5a); research/phase2-adaptive-hierarchy (§§3, 5b); research/phase2-certified-inference (§§4, 5c; and MBAR-REQ-0001)
-Date and time (UTC):         2026-11-28 (written before the commit that first contains this file; see `git log` for the time)
+Date and time (UTC):         2026-11-28 06:47 (time of the commit that first contains this file)
 Priority:                    Normal
 Status:                      Proposed (statements with proofs in our notes; none refereed outside this division)
 Relevant source commit:      the commit of this branch that first contains this file; consolidated archive at fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f

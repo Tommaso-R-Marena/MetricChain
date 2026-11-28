@@ -24,7 +24,8 @@ from .estimators import (_validate, fitted_distributions, mbar, minimize_lse, pl
                          support_strongly_connected)
 
 __all__ = ["LRRegion", "lr_confidence_region", "restricted_interval", "asymptotic_interval", "bootstrap_interval",
-           "make_batches", "kl_interval", "observable_interval", "classifier_evalue"]
+           "make_batches", "kl_interval", "observable_interval", "pmf_difference_interval",
+           "classifier_evalue"]
 
 
 def make_batches(labels, n_batches, rng=None):
@@ -284,6 +285,18 @@ def observable_interval(region, U, labels, k, A01, alpha_obs=0.025):
     u = kl_interval(min(1.0, np.exp(r) * y0), N, t)[1]
     sk = n[k] / N
     return max(0.0, l / sk), min(1.0, u / sk)
+
+
+def pmf_difference_interval(region, U, labels, k, in_A, in_B, alpha_obs=0.025):
+    """Interval for the free-energy difference F_B - F_A = -log(P_k(B)/P_k(A)) between two bins of a
+    sampled state k (handoff G2, last paragraph): the two bin probabilities get intervals at level
+    alpha_obs/2 each, so the failure probability is <= region.alpha + alpha_obs.  An endpoint is
+    infinite when a lower endpoint of a probability is 0 (no finite statement is invented)."""
+    lA, uA = observable_interval(region, U, labels, k, np.asarray(in_A, float), alpha_obs / 2)
+    lB, uB = observable_interval(region, U, labels, k, np.asarray(in_B, float), alpha_obs / 2)
+    lo = np.log(lA) - np.log(uB) if lA > 0 and uB > 0 else -np.inf
+    hi = np.log(uA) - np.log(lB) if lB > 0 and uA > 0 else np.inf
+    return float(lo), float(hi)
 
 
 def classifier_evalue(U, labels, prob, n_batches=8, skip=1):

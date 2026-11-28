@@ -31,7 +31,8 @@ for the 26 umbrellas of the public data set.  Two causes: (a) it is simultaneous
 with a threshold `2(log(1/α) + ρ)` whose regret `ρ` grows like `(K−1)` times a logarithm (measured
 `ρ ≈ 32` at `K = 26`); against the asymptotic *simultaneous* region (`χ²_{K−1}`) the ratio is about
 1.4; (b) it is built on the retrospective information `L` rather than the efficient information, a
-factor `√(R_c/V_c)` of 1.02–1.9.  A certified interval for a single contrast without the `K`-dependent
+factor `√(R_c/V_c)` of 1.02–1.9 for end-to-end contrasts and 3–4 for contrasts between adjacent states
+of a ladder.  A certified interval for a single contrast without the `K`-dependent
 threshold is open (O3).  Partial remedy that is valid and implemented: restriction to a sub-ladder
 chosen from the design (`restricted_interval`), which brings adjacent-umbrella contrasts on the public
 data to 1.9–2.2 times the asymptotic width.

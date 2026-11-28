@@ -14,7 +14,8 @@ Division 9".*
 | immutable reference | consolidated archive `fe9f58c1f0bfe5de8c6434c3490a33cd1d94023f` (`research/consolidated-archive`), read-only; entry point `consolidated/00_MASTER_INDEX.md` |
 | other branches read (never written) | `research/phase2-foundations` at `d3b13a291ab350874b8c1797069f21f157e46ab8`; `research/phase2-adaptive-hierarchy` at `c66a4019a0ee0301034b90f8917bfdf9522bacb1`; `research/phase2-certified-inference` at `1bb0dcc6c7e272b6bd34720b0ad48360d821ca33` (heads at 2026-11-28 05:23 UTC) |
 
-Nothing outside the paths of §3 is modified on this branch.  No merge into any established branch, no
+Nothing outside the paths of §3 is modified on this branch (checked: `git diff --stat b3c5d61 HEAD` lists
+only those paths).  No merge into any established branch, no
 force push, no pull request.
 
 ## 2. The imported MBAR package (preserved byte for byte)
@@ -37,9 +38,15 @@ docs/collaboration/requests/mbar/   MBAR-REQ-nnnn.md
 docs/collaboration/responses/mbar/  MBAR-RES-nnnn.md
 docs/collaboration/status/mbar.md
 docs/collaboration/MBAR_TO_ALL.md   digest for the other divisions
-proofs/MBAR/                        Lean 4 sources (module prefix proofs.MBAR.)
-experiments/mbar/                   handoff (read-only), src, tests, bench, results
+experiments/mbar/                   handoff (read-only), src, tests, bench, results, data, review
+experiments/mbar/lean/              Lean 4 sources: a standalone Lake project with the programme's pins
 ```
+
+The Lean sources are deliberately **not** under `proofs/`: the theory division's audit
+(`scripts/audit_all.sh`) requires every module under `proofs/` to be registered in its own
+`proofs/AxiomAudit.lean`, and this division does not edit files of another division.  The standalone
+project copies `lean-toolchain` and `lake-manifest.json` from the repository root, so the pins are
+identical (`docs/mbar/LEAN_CORRESPONDENCE.md`).
 
 ## 4. Epistemic labels
 

@@ -3,7 +3,7 @@ Message ID:                  MBAR-REQ-0001
 Message type:                Computational proposal to the coordinator of Modal computations (not an authorisation; nothing is to be launched on the strength of this file)
 From:                        Division 9 (branch research/phase2-certified-mbar)
 To:                          Ubuntu Engineering, research/phase2-certified-inference (coordinator of authorised Modal computations)
-Date and time (UTC):         2026-11-28
+Date and time (UTC):         2026-11-28 06:47 (time of the commit that first contains this file)
 Priority:                    Low until the research owner authorises a computational phase
 Status:                      Proposed
 Relevant source commit:      the commit of this branch that first contains this file

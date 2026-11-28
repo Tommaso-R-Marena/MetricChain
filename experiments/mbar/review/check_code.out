@@ -7,3 +7,10 @@
   1500 runs with a pilot count of 0 or 1 in one state: V_true(final) > V_true(n0+u)/gamma in 176; example: {'pilot': [5, 3, 0], 'rem': 2.0, 'counts': [0, 2, 0], 'final': [5, 5, 0], 'unif': [5.667, 3.667, 0.667], 'V_final': inf, 'bound': 1.3533945797436904, 'fallback': None}
   600 runs with every pilot count >= 2: violations 0
 == B3 through lr_confidence_region(batches=...): adversarial adaptive allocation, stop at first exclusion
+  overlap 0.05, rule gambler: P(truth ever excluded) = 0.0067 (claim <= 0.05; MC s.e. ~0.006); statuses {'OK': 9571}
+  overlap 0.3, rule gambler: P(truth ever excluded) = 0.0000 (claim <= 0.05; MC s.e. ~0.006); statuses {'OK': 9600}
+  overlap 0.05, rule random: P(truth ever excluded) = 0.0058 (claim <= 0.05; MC s.e. ~0.006); statuses {'OK': 9570}
+  overlap 0.3, rule fixed: P(truth ever excluded) = 0.0000 (claim <= 0.05; MC s.e. ~0.006); statuses {'OK': 9600}
+== B1 enumeration test of the division: models enumerated = 116, max E = 0.999999185, identity error = 2.44e-15
+== numerical trap: a state absent from prev and from the current batch, with no finite energy on prev
+  status: ABSTAIN_PLUGIN {'n_batches': 3, 'used': [], 'skipped': [], 'failed_batch': 1}

@@ -9,7 +9,8 @@ import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from d9mbar import population as pop  # noqa: E402
 from d9mbar.certificates import (asymptotic_interval, classifier_evalue, kl_interval,  # noqa: E402
-                                 lr_confidence_region, observable_interval, restricted_interval)
+                                 lr_confidence_region, observable_interval, pmf_difference_interval,
+                                 restricted_interval)
 from d9mbar.estimators import (fitted_distributions, mbar, pilot_allocation, plugin_variance,  # noqa: E402
                                support_strongly_connected)
 
@@ -130,6 +131,9 @@ def test_small_coverage_simulation():
         lo, hi = observable_interval(reg, U, y, 1, A)
         miss_obs += not (lo <= 0.5 <= hi)
         assert hi - lo < 1.0 or reg.status != "OK"
+        # free-energy difference between the two halves of state 1: exactly 0
+        dlo, dhi = pmf_difference_interval(reg, U, y, 1, x > 0.7, x <= 0.7)
+        miss_obs += not (dlo <= 0.0 <= dhi)
     assert miss_region <= 15 and miss_obs <= 4, (miss_region, miss_obs)
     return miss_region, miss_obs
 
