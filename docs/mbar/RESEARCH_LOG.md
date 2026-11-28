@@ -83,7 +83,9 @@ The sharp third-moment bound and the integrated curvature of handoff B1 were for
 * One adversarial referee (subagent) on the mathematics note, the synthesis note and the code;
   findings and corrections in `REVIEW_A.md`.  Its main finding — false convergence of our solver on
   data with large energy offsets — led to a rewrite of the solver, regression tests, a re-run of the
-  referee's failing scripts and of every stored benchmark, and MBAR-MSG-0002.  While the review ran we
+  referee's scripts, a re-run or regression check of every stored benchmark with the same seeds (the
+  2000-replicate allocation runs through their 400-replicate prefix; `VALIDATION.md` §7), and
+  MBAR-MSG-0002.  While the review ran we
   found ourselves two ways an interval could come out too narrow and an ambiguous argument
   (`DEAD_ENDS.md` E6, E7).
 * Final report, generated tables, consolidated archive.

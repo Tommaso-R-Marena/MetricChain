@@ -184,19 +184,20 @@ def one_rep(args):
                 U2, y2 = draw(rng, sysm, extra)
                 Us, ys = np.vstack([Us, U2]), np.concatenate([ys, y2])
         out["PILOT4"] = (float(c @ mbar(Us, ys)[0] - c @ sysm["f"]), np.bincount(ys, minlength=K).tolist(), dts, fb)
-        # PILOT2C: the same procedure with a cost-aware pilot (equal cost, not equal counts, per state)
-        n0c = np.maximum(integer_counts(pilot_frac * B / (K * a), pilot_frac * B, a), 2)
-        Upc, ypc = draw(rng, sysm, n0c)
-        t0 = time.time()
-        extra, info = pilot_allocation(Upc, ypc, c, B, cost=a, safeguard=0.25)
-        dt = time.time() - t0
-        err, cnt = finish(rng, sysm, Upc, ypc, extra)
-        out["PILOT2C"] = (err, cnt.tolist(), dt, info["fallback"] is not None)
-        # PILOT2CE: cost-aware pilot and equal-cost safeguard (second post hoc variant)
-        Upe, ype = draw(rng, sysm, n0c)
-        extra, info = pilot_allocation(Upe, ype, c, B, cost=a, safeguard=0.25, safeguard_mode="equal_cost")
-        err, cnt = finish(rng, sysm, Upe, ype, extra)
-        out["PILOT2CE"] = (err, cnt.tolist(), 0.0, info["fallback"] is not None)
+        if not _SKIP_POSTHOC:
+            # PILOT2C: the same procedure with a cost-aware pilot (equal cost, not equal counts, per state)
+            n0c = np.maximum(integer_counts(pilot_frac * B / (K * a), pilot_frac * B, a), 2)
+            Upc, ypc = draw(rng, sysm, n0c)
+            t0 = time.time()
+            extra, info = pilot_allocation(Upc, ypc, c, B, cost=a, safeguard=0.25)
+            dt = time.time() - t0
+            err, cnt = finish(rng, sysm, Upc, ypc, extra)
+            out["PILOT2C"] = (err, cnt.tolist(), dt, info["fallback"] is not None)
+            # PILOT2CE: cost-aware pilot and equal-cost safeguard (second post hoc variant)
+            Upe, ype = draw(rng, sysm, n0c)
+            extra, info = pilot_allocation(Upe, ype, c, B, cost=a, safeguard=0.25, safeguard_mode="equal_cost")
+            err, cnt = finish(rng, sysm, Upe, ype, extra)
+            out["PILOT2CE"] = (err, cnt.tolist(), 0.0, info["fallback"] is not None)
         # NEYMAN1 and RESIST from the same pilot
         rem = B - a @ n0
         try:
@@ -221,6 +222,11 @@ def one_rep(args):
 
 
 _ORACLE = {}
+# The two post hoc variants (PILOT2C, PILOT2CE) draw from the common generator before NEYMAN1 and RESIST.
+# With --first-run-stream they are skipped, so that every remaining method sees exactly the random numbers
+# it saw in the runs made before those variants existed (allocation_benchmark.json,
+# allocation_benchmark_2000.json).  Used for regression checks only.
+_SKIP_POSTHOC = False
 
 
 def prepare(si, B):
@@ -235,9 +241,10 @@ def prepare(si, B):
                 eff_bound_uniform=pop.efficiency_lower_bound(sysm["P"], su, nu, cost=a))
 
 
-def _init(oracles):
-    global _ORACLE
+def _init(oracles, skip_posthoc=False):
+    global _ORACLE, _SKIP_POSTHOC
     _ORACLE = oracles
+    _SKIP_POSTHOC = skip_posthoc
     _orig = systems
 
     def patched():
@@ -256,22 +263,28 @@ def main():
     ap.add_argument("--pilot", type=float, default=0.2)
     ap.add_argument("--procs", type=int, default=3)
     ap.add_argument("--only", default="")
+    ap.add_argument("--first-run-stream", action="store_true",
+                    help="skip the post hoc variants PILOT2C/PILOT2CE so that NEYMAN1 and RESIST see the random "
+                         "numbers of the runs made before those variants existed (regression checks)")
     ap.add_argument("--out", default=os.path.join(HERE, "..", "results", "allocation_benchmark.json"))
     a = ap.parse_args()
     syss = systems()
-    report = dict(reps=a.reps, pilot_fraction=a.pilot, seed_base=5150, systems=[])
+    report = dict(reps=a.reps, pilot_fraction=a.pilot, seed_base=5150, first_run_stream=bool(a.first_run_stream), systems=[])
     for si, sysm in enumerate(syss):
         if a.only and sysm["name"] not in a.only.split(","):
             continue
         B = a.samples * sysm["cost"].mean()
         prep = prepare(si, B)
         oc = integer_counts(prep["oracle"], B, sysm["cost"])
-        with Pool(a.procs, initializer=_init, initargs=({si: oc},)) as pool:
+        with Pool(a.procs, initializer=_init, initargs=({si: oc}, a.first_run_stream)) as pool:
             rows = pool.map(one_rep, [(si, 5150 + 100000 * si + r, B, a.pilot) for r in range(a.reps)], chunksize=4)
         failed = [r for r in rows if "FAILED" in r]
         rows = [r for r in rows if "FAILED" not in r]
         methods = {}
-        for m in ("UNIFORM", "EQUALCOST", "PILOT2", "PILOT2C", "PILOT2CE", "PILOT4", "NEYMAN1", "RESIST", "ORACLE"):
+        names = ("UNIFORM", "EQUALCOST", "PILOT2", "PILOT2C", "PILOT2CE", "PILOT4", "NEYMAN1", "RESIST", "ORACLE")
+        if a.first_run_stream:
+            names = tuple(m for m in names if m not in ("PILOT2C", "PILOT2CE"))
+        for m in names:
             errs = np.array([r[m][0] for r in rows])
             mse = float(np.mean(errs**2))
             methods[m] = dict(rmse=float(np.sqrt(mse)), mse=mse, bias=float(errs.mean()),

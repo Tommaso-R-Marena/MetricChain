@@ -17,3 +17,8 @@ offset | classifier_evalue: rejections at alpha=0.05 (of which info['converged']
   20.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
   30.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
   50.0 | 0/200 (0) | {'OK': 200}, truth excluded or region declared empty: 0/200
+=== check_interval.py (final code) ===
+time limit reached at case ('harm', 4, 4.5, 60, 0.0)
+{'datasets': 94, 'ok': 94, 'abstain': 0, 'reject': 0, 'intervals': 562, 'crashes': 0, 'narrow': 0, 'truth_bad': 0, 'nonfinite': 0}
+crash messages: {}
+elapsed 1507.8

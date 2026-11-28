@@ -25,8 +25,9 @@ question: *what does a sampler buy?*
 
 ## S1. Overlap geometry and information complexity: a thermodynamic-length bound, and "sampling is the bottleneck"
 
-**Proposition S1 (path bound)** [P; N].  Let `k_0, k_1, …, k_L` be any sequence of states with
-`P_{k_{j+1}} ≪ P_{k_j}`, and `c = e_{k_0} − e_{k_L}`.  Then for every allocation `s`
+**Proposition S1 (path bound)** [P; N].  Let `k_0, k_1, …, k_L` be distinct states with
+`P_{k_{j+1}} ≪ P_{k_j}`, and `c = e_{k_0} − e_{k_L}`.  (A sequence with repetitions contains such a path
+made of some of its own steps, so the bounds hold for it too.)  Then for every allocation `s`
 
     V_c(s) ≤ Σ_{j<L} χ²(P_{k_{j+1}} ‖ P_{k_j}) / s_{k_j} ,     and
     V*_c(B) ≤ (1/B) ( Σ_{j<L} √(a_{k_j} χ²(P_{k_{j+1}} ‖ P_{k_j})) )² .

@@ -470,7 +470,7 @@ for a contrast is `≈ √(2(log(1/α) + ρ)·cᵀH^+c)`, and `N_E·cᵀH^+c` is
 of the contrast.  So the interval scales like `√(R_c/N)` — to be compared with the lower bound
 `√(V_c/N)` of C1, `R_c ≥ V_c` (§B4) — uses the full Laplacian (cycles included, no path sums), and is
 contrast-specific.  Measured
-(`results/certificates_coverage.json`, 11 regimes × 200 repetitions): coverage 100 %, always finite,
+(`results/certificates_coverage_v3.json`, final code, 11 regimes × 200 repetitions): coverage 100 %, always finite,
 width 2.0–3.1 times the width of the asymptotic interval `±1.96·se`, and 1.4–8.3 times narrower than
 C1 and C2 of the handoff where those are finite.
 
@@ -491,7 +491,7 @@ supermartingales.  ∎
 
 A round consisting of a single state contributes the factor 1 (its likelihood ratio is identically
 1): information comes from *comparing* states within a round, so adaptive rounds must be mixed.
-Measured (`results/robustness.json`, experiment A): see `VALIDATION.md`.
+Measured (`results/robustness_final_AB.json`, experiment A; first run in `results/robustness.json`): see `VALIDATION.md`.
 
 ## B4. How much is lost, and how to recover it (analysis; not a theorem)
 

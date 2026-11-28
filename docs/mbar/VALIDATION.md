@@ -31,7 +31,8 @@ states; 100 to 10 000 samples per state), 200 repetitions each, six methods on t
 
 * **Likelihood-ratio region (B2), 8 batches:** covered the true contrast, and all free energies
   jointly, in 2200 of 2200 repetitions; never abstained; median width 2.05–3.05 times the width of
-  `±1.96·se`.  The 2-batch (split) version is 7–28 % wider.  Median time 0.01–0.43 s per region.
+  `±1.96·se`.  The 2-batch (split) version is 7–28 % wider.  Median time 0.02–0.71 s per region with
+  the final code (0.01–0.43 s with the first; both measured while other jobs shared the machine).
 * **Handoff C1:** `+∞` in every repetition of 4 regimes; 1.4–5.8 times wider than LR8 in the others.
 * **Handoff C2** (pilot = first half): always finite, 2.4–8.3 times wider than LR8.
 * **Asymptotic interval:** coverage 0.940–0.975.  **Bootstrap** (40 repetitions): 0.925–1.000.
@@ -139,17 +140,25 @@ the halting round the interval covered in every repetition.
 The referee found that the first solver could report convergence at its starting point on data whose
 energies differ by tens of kT between states (`REVIEW_A.md` E1; `DEAD_ENDS.md` E8).  None of the
 experiments above has such offsets, so none of their numbers depended on the defect; this was checked
-rather than assumed.  With the final code and the same seeds:
+rather than assumed.  With the final code and the same seeds (comparisons are generated: T1, T4b, the
+lines above T5):
 
 | what | result |
 |---|---|
 | referee's failing scripts (`review/rerun_after_fix.out`) | wrong fits reported as converged: 0 of 400 and 0 of 420 (were 93 of 400 and up to 21 of 60); model check rejecting a correct model: 0 of 1200 (was up to 96 of 200); region with a correct plug-in declared empty: 0 of 1200 (was up to 54 of 200); intervals narrower than the exact reference: 0 of 840 |
+| referee's interval script `review/check_interval.py` (awkward data sets: 5–120 samples per state, supports with holes, offsets of 50 and 300 kT; for every interval it searches for a point of the region outside the interval) | as it is, the script's own time limit of 1500 s stopped it after 94 of its 216 data sets (harmonic, 3 and 4 states): 94 regions, 562 intervals, none too narrow, none excluding a truth that lies in the region, none infinite, no exception.  With the first code (all 216 data sets, 541 intervals): none too narrow, but 6 exceptions (`Singular matrix`) and 109 abstentions |
 | new unit tests | estimates, region status, interval end points and model check unchanged under per-state offsets of 10–1000 kT and per-sample offsets up to 30 000 kT (errors `1·10⁻¹¹` and `4·10⁻⁹`); no convergence claimed at a saturated start in 300 starts; overlapping rounds refused |
-| certificate benchmark (T1) | re-run in full; T1 is from the final code; differences from the first run are given under T1 |
-| allocation benchmark | the 400-replicate run was repeated: the mean-square-error ratios of the methods whose random stream is unchanged (equal cost, two-stage, four-stage, oracle) agree with the first run to three digits in all eight systems (`results/allocation_benchmark_regression400.json`).  The 2000-replicate runs (T2, T3) were **not** repeated |
-| robustness A, B, C | re-run in full with the same seeds; T5–T7 say which parts are from the final code |
+| certificate benchmark (T1) | re-run in full; T1 is from the final code.  Against the first run every coverage and every count of finite intervals is identical; the largest relative change of a median width is `1.9·10⁻⁵` (the end points are moved outward by a slightly larger tolerance) |
+| allocation benchmark (T4b) | the 400-replicate run was repeated twice.  With all nine methods: the five whose random stream is unchanged (uniform, equal cost, two-stage, four-stage, oracle) reproduce the first run to `6·10⁻⁷` (relative; mean-square error and its ratio) in all eight systems; the one-step Neyman rule and the resistance criterion are drawn after the two post hoc variants and see other random numbers.  With the post hoc variants switched off (`--first-run-stream`) all seven methods of the first run are reproduced to `6·10⁻⁷`.  No replicate failed.  The 2000-replicate runs (T2, T3) were **not** repeated; their first 400 replicates use the same seeds |
+| robustness A, B, C (T5–T7) | re-run in full with the same seeds; T5–T7 are from the final code.  Every coverage, exclusion and rejection rate is identical to the first run; the largest relative change of any other entry is `8·10⁻⁶` (median widths) |
 | public data (T8) | re-run: intervals and statistics identical to the printed precision; agreement with PyMBAR improved from `4·10⁻¹¹`–`4·10⁻⁷` to `1·10⁻¹³`–`3·10⁻⁹` kT |
-| population-level checks (T9, T10), Lean audit | unaffected by the solver; re-run and passing |
+| population-level checks (T9, T10) | do not use the solver; re-run: `lower_bounds_and_chains.json` reproduced exactly, `synthesis_checks.json` to `9·10⁻¹⁰` |
+| unit tests, Lean audit | both test files pass on the final code; the audit passes (50 declarations, standard axioms only) |
+
+*Which code is "final".*  The solver was last changed at 07:54 UTC (rewrite) and the reruns of T1, T4b,
+T5/T6 and T8 started after that.  One later edit of the same file (08:18 UTC) only records a flag
+(`info["ill_conditioned"]`) that nothing reads; the runs of T7 and of the first-stream allocation
+regression started after it.
 
 ## 8. Summary against the directive's list of measurements
 
@@ -160,6 +169,6 @@ rather than assumed.  With the final code and the same seeds:
 | abstention | T1, tests | region: none in 2200 repetitions with overlapping supports; `±∞` when supports are separated; C1 abstains in 4 of 11 regimes |
 | effort for a given precision | T2 | equal to the MSE ratio (same estimator, same budget) |
 | pilot and allocation overhead | T2 | 0.01–0.09 s per allocation; 20 % pilot |
-| computational cost | T1 | region: 0.01–0.43 s for `N ≤ 40 000` (median); asymptotic: 0.002–0.07 s |
+| computational cost | T1 | region: 0.02–0.71 s for `N ≤ 40 000` (median, final code, machine shared with other jobs); asymptotic: 0.003–0.18 s |
 | weak overlap | T1 | region stays finite and valid at overlap 0.05 with 100 samples per state (width 2.9 kT); C1 infinite |
 | correlated samples, missed regions | T6, T7 | no guarantee; trapping of one state detected by the model check; consistent trapping undetectable |

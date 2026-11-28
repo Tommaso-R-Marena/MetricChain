@@ -113,7 +113,8 @@ made beyond these synthetic systems.
 
 ## 6. Explicit scientific limitations and counterexamples
 
-`DEAD_ENDS.md` (N1–N17, E1–E5).  The ones that matter most:
+`DEAD_ENDS.md` (N1–N17: negative results and limitations; E1–E14: our own errors, E8–E14 found by the
+internal review).  The ones that matter most:
 
 0. The first version of our own solver was wrong outside the range we had tested (review finding E1);
    it is corrected and tested, but the episode shows what our benchmarks did not cover: real data

@@ -102,6 +102,33 @@ def main():
                      f"{s['population']['efficiency_lower_bound_of_uniform']:.3f} | {p['median_alloc_time']:.3f} | {p['fallbacks']} | "
                      f"{s['methods']['UNIFORM']['rmse']:.4f} | {p['rmse']:.4f} | {p['bias']:+.4f} |")
         L.append("")
+    a_first = load("allocation_benchmark.json")
+    reg_lines = []
+    for fname, what in (("allocation_benchmark_regression400.json",
+                         "all nine methods; `NEYMAN1` and `RESIST` are drawn after the two post hoc variants and therefore "
+                         "see other random numbers than in the first run"),
+                        ("allocation_benchmark_regression400_firststream.json",
+                         "option `--first-run-stream`: the two post hoc variants are skipped, so every method sees the random "
+                         "numbers of the first run")):
+        b = load(fname)
+        if not (a_first and b) or len(b["systems"]) != len(a_first["systems"]) or b["reps"] != a_first["reps"]:
+            continue
+        worst = {}
+        for s1, s2 in zip(a_first["systems"], b["systems"]):
+            assert s1["name"] == s2["name"]
+            for k, d1 in s1["methods"].items():
+                if k in s2["methods"]:
+                    r1, r2 = d1["mse_ratio_vs_uniform"], s2["methods"][k]["mse_ratio_vs_uniform"]
+                    m1, m2 = d1["mse"], s2["methods"][k]["mse"]
+                    worst[k] = max(worst.get(k, 0.0), abs(r1 - r2) / r1, abs(m1 - m2) / m1)
+        reg_lines.append(f"| `{fname}` | {what} | " + ", ".join(f"{k} {v:.1e}" for k, v in worst.items()) + " | "
+                         + str(sum(s2["failed"] for s2 in b["systems"])) + " |")
+    if reg_lines:
+        L += ["## T4b. Allocation: the 400-replicate run repeated with the final code (same seeds)",
+              "*Largest relative change, over the eight systems, of the mean-square error and of its ratio to UNIFORM, "
+              "against the first run (T4).  The 2000-replicate runs (T2, T3) were not repeated; their first 400 replicates "
+              "use the seeds of T4.*", "",
+              "| file | random stream | largest relative change per method | failed |", "|---|---|---|---|"] + reg_lines + [""]
     plog = os.path.join(RES, "robustness.log")
     if os.path.exists(plog):
         def read_rows(path):
@@ -121,6 +148,25 @@ def main():
                 notes.append(part)
         L += ["*Robustness tables T5-T7: parts " + (", ".join(sorted(set(notes))) or "none") + " are from the rerun with the final "
               "code (same seeds); the first run is kept in `results/robustness.log`.*", ""]
+        props = ("ever_excluded_truth", "coverage_at_halt", "reject_rate", "lr_region_contains_truth",
+                 "asymptotic_covers_end_to_end", "asymptotic_covers_state2", "lr_coverage", "lr_joint", "asy_coverage")
+        for part in sorted(set(notes)):
+            dp, dr = 0.0, 0.0
+            for x, y in zip(first[part], rows[part]):
+                for k, v in x.items():
+                    w = y.get(k)
+                    if k in props and v is not None and w is not None:
+                        dp = max(dp, abs(v - w))
+                    elif isinstance(v, (int, float)) and isinstance(w, (int, float)) and not isinstance(v, bool):
+                        if v == v and w == w:
+                            dr = max(dr, abs(v - w) / max(abs(v), 1e-12))
+                    elif isinstance(v, list) and isinstance(w, list) and len(v) == len(w):
+                        for vi, wi in zip(v, w):
+                            if isinstance(vi, (int, float)) and isinstance(wi, (int, float)):
+                                dr = max(dr, abs(vi - wi) / max(abs(vi), 1e-12))
+            L += [f"Part {part}, final code against the first run: largest change of a proportion (coverage, exclusion or "
+                  f"rejection rate) {dp:.1e}; largest relative change of any other numerical entry {dr:.1e}."]
+        L.append("")
         if rows["A"]:
             L += ["## T5. Experiment A: every round, adaptive allocation, halting on the interval width",
                   "*12 rounds of 400 samples; allocation of each round from the plug-in design of the earlier rounds; "

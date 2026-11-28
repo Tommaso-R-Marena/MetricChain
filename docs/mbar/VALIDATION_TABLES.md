@@ -23,20 +23,21 @@ Median plug-in regret `ρ` of LR8 and median time per region (seconds):
 
 | regime | regret | time LR8 | time C2 | time ASY |
 |---|---|---|---|---|
-| discrete 4-state, overlap 0.05, n = 100 | 3.60 | 0.024 | 0.007 | 0.0023 |
-| discrete 4-state, overlap 0.35, n = 100 | 1.40 | 0.021 | 0.007 | 0.0023 |
-| discrete 4-state, overlap 0.05, n = 1000 | 3.96 | 0.052 | 0.009 | 0.0064 |
-| discrete 4-state, overlap 0.35, n = 1000 | 1.32 | 0.051 | 0.009 | 0.0071 |
-| discrete 4-state, overlap 0.05, n = 10000 | 4.27 | 0.427 | 0.035 | 0.0680 |
-| discrete 4-state, overlap 0.35, n = 10000 | 1.46 | 0.323 | 0.032 | 0.0559 |
-| harmonic K = 5, spacing 0.5, n = 100 | 1.64 | 0.028 | 0.010 | 0.0026 |
-| harmonic K = 5, spacing 0.5, n = 1000 | 1.70 | 0.088 | 0.014 | 0.0105 |
-| harmonic K = 2, spacing 1.0, n = 100 | 0.37 | 0.014 | 0.002 | 0.0017 |
-| harmonic K = 2, spacing 1.0, n = 1000 | 0.37 | 0.020 | 0.003 | 0.0029 |
-| harmonic K = 10, spacing 0.25, n = 500 | 6.30 | 0.224 | 0.049 | 0.0209 |
+| discrete 4-state, overlap 0.05, n = 100 | 3.60 | 0.054 | 0.011 | 0.0066 |
+| discrete 4-state, overlap 0.35, n = 100 | 1.40 | 0.023 | 0.008 | 0.0030 |
+| discrete 4-state, overlap 0.05, n = 1000 | 3.96 | 0.103 | 0.016 | 0.0181 |
+| discrete 4-state, overlap 0.35, n = 1000 | 1.32 | 0.052 | 0.010 | 0.0083 |
+| discrete 4-state, overlap 0.05, n = 10000 | 4.27 | 0.712 | 0.089 | 0.1783 |
+| discrete 4-state, overlap 0.35, n = 10000 | 1.46 | 0.288 | 0.036 | 0.0633 |
+| harmonic K = 5, spacing 0.5, n = 100 | 1.64 | 0.033 | 0.012 | 0.0041 |
+| harmonic K = 5, spacing 0.5, n = 1000 | 1.70 | 0.095 | 0.017 | 0.0159 |
+| harmonic K = 2, spacing 1.0, n = 100 | 0.37 | 0.017 | 0.003 | 0.0025 |
+| harmonic K = 2, spacing 1.0, n = 1000 | 0.37 | 0.024 | 0.004 | 0.0039 |
+| harmonic K = 10, spacing 0.25, n = 500 | 6.30 | 0.312 | 0.069 | 0.0569 |
 
 This table is from the run with the final code (`certificates_coverage_v3.json`) when that file exists.  Earlier runs with the same seeds: `certificates_coverage.json` (first code), `certificates_coverage_v2.json` (after the two corrections of the interval code, `DEAD_ENDS.md` E7).
-Against the run 'after E7': largest change of coverage, of the finite count, or relative change of the median width, over all regimes and the methods LR8, LR2, C1, C2, ASY: 0.0e+00.
+Against the run 'first code': largest change of coverage, of the finite count, or relative change of the median width, over all regimes and the methods LR8, LR2, C1, C2, ASY: 1.9e-05.
+Against the run 'after E7': largest change of coverage, of the finite count, or relative change of the median width, over all regimes and the methods LR8, LR2, C1, C2, ASY: 1.9e-05.
 
 ## T2. Allocation: mean-square error relative to equal counts, 2000 replicates
 *Pilot fraction 0.2; budget = 3000 × mean cost; every method ends with MBAR on all its samples.  Cells: MSE ratio to UNIFORM [bootstrap 95 % interval].  'predicted' = population variance ratio of the oracle design (uses ground truth).  All ratios of a row share one UNIFORM estimate.*
@@ -107,7 +108,19 @@ Allocations (mean final counts) and overhead:
 | dirichlet1 | [1.0, 1.0, 1.0, 1.0] | [2032.87, 52.87, 68.61, 845.65] | [1634.4, 300.0, 300.0, 765.6] | 0.386 | 0.008 | 0 | 0.0348 | 0.0290 | +0.0001 |
 | dirichlet2 | [1.0, 1.0, 1.0, 1.0] | [1535.92, 398.05, 272.38, 793.64] | [1343.7, 478.9, 409.7, 767.6] | 0.812 | 0.088 | 0 | 0.0294 | 0.0279 | +0.0005 |
 
-*Robustness tables T5-T7: parts none are from the rerun with the final code (same seeds); the first run is kept in `results/robustness.log`.*
+## T4b. Allocation: the 400-replicate run repeated with the final code (same seeds)
+*Largest relative change, over the eight systems, of the mean-square error and of its ratio to UNIFORM, against the first run (T4).  The 2000-replicate runs (T2, T3) were not repeated; their first 400 replicates use the seeds of T4.*
+
+| file | random stream | largest relative change per method | failed |
+|---|---|---|---|
+| `allocation_benchmark_regression400.json` | all nine methods; `NEYMAN1` and `RESIST` are drawn after the two post hoc variants and therefore see other random numbers than in the first run | UNIFORM 4.9e-07, EQUALCOST 3.9e-07, PILOT2 6.0e-07, PILOT4 4.8e-07, NEYMAN1 3.1e-01, RESIST 2.0e-01, ORACLE 5.3e-07 | 0 |
+| `allocation_benchmark_regression400_firststream.json` | option `--first-run-stream`: the two post hoc variants are skipped, so every method sees the random numbers of the first run | UNIFORM 4.9e-07, EQUALCOST 3.9e-07, PILOT2 6.0e-07, PILOT4 4.8e-07, NEYMAN1 5.9e-07, RESIST 4.4e-07, ORACLE 5.3e-07 | 0 |
+
+*Robustness tables T5-T7: parts A, B, C are from the rerun with the final code (same seeds); the first run is kept in `results/robustness.log`.*
+
+Part A, final code against the first run: largest change of a proportion (coverage, exclusion or rejection rate) 0.0e+00; largest relative change of any other numerical entry 8.3e-06.
+Part B, final code against the first run: largest change of a proportion (coverage, exclusion or rejection rate) 0.0e+00; largest relative change of any other numerical entry 5.2e-06.
+Part C, final code against the first run: largest change of a proportion (coverage, exclusion or rejection rate) 0.0e+00; largest relative change of any other numerical entry 7.9e-06.
 
 ## T5. Experiment A: every round, adaptive allocation, halting on the interval width
 *12 rounds of 400 samples; allocation of each round from the plug-in design of the earlier rounds; region recomputed every round; halt when the interval of the contrast is below the target width.*

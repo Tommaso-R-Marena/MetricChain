@@ -45,17 +45,28 @@ Python 3.13, NumPy 2.5.3, SciPy 1.18.1, CVXPY 1.9.3 (tests of the conic identiti
 
 ```bash
 export OPENBLAS_NUM_THREADS=1
+B=experiments/mbar/bench; R=experiments/mbar/results
 python experiments/mbar/tests/test_population.py            # ~2 min   allocation theory, exact
 python experiments/mbar/tests/test_certificates.py          # ~2 min   estimators and certificates, incl. equivariance under energy offsets
-python experiments/mbar/bench/check_lower_bounds_and_chains.py   # ~2 min
-python experiments/mbar/bench/check_synthesis.py                 # ~1 min
-python experiments/mbar/bench/bench_certificates.py --trials 200 # ~25 min on 3 cores
-python experiments/mbar/bench/bench_allocation.py --reps 2000 --out experiments/mbar/results/allocation_benchmark_2000.json   # ~80 min on 3 cores
-python experiments/mbar/bench/bench_robustness.py --trials 300   # ~3 h on 1 core (part C dominates)
-python experiments/mbar/bench/bench_public_umbrella.py           # ~1 min
-python experiments/mbar/bench/make_tables.py --check             # tables match the stored results
+python $B/check_lower_bounds_and_chains.py                  # ~2 min   T9
+python $B/check_synthesis.py                                # ~1 min   T10
+python $B/bench_certificates.py --trials 200 --boot-trials 40 --out $R/certificates_coverage_v3.json > $R/certificates_coverage_v3.log   # T1, ~25 min on 3 cores
+python $B/bench_allocation.py --reps 2000 --first-run-stream --out $R/allocation_benchmark_2000.json > $R/allocation_benchmark_2000.log   # T2, ~80 min on 3 cores
+python $B/bench_allocation.py --reps 2000 --only costly_ends,costly_middle --out $R/allocation_benchmark_costpilot2.json > $R/allocation_benchmark_costpilot2.log   # T3
+python $B/bench_allocation.py --reps 400 --first-run-stream --out $R/allocation_benchmark_regression400_firststream.json                  # T4 / T4b
+python $B/bench_robustness.py --trials 300 --parts AB --out $R/robustness_final_AB.json > $R/robustness_final_AB.log                      # T5, T6
+python $B/bench_robustness.py --trials 300 --parts C  --out $R/robustness_final_C.json  > $R/robustness_final_C.log                       # T7, ~30 min on 2 cores
+python $B/bench_public_umbrella.py > $R/public_umbrella.log                                                                               # T8, ~1 min
+python $B/make_tables.py --check                            # the tables match the stored results
 (cd experiments/mbar/lean && lake exe cache get && ./audit.sh)   # Lean 4.31.0 / Mathlib fabf563
 ```
+
+Seeds are fixed per repetition, so the numbers do not depend on `--procs`.  `--first-run-stream` skips
+the two post hoc variants of the allocation benchmark, so that the remaining seven methods see exactly
+the random numbers of the stored runs T2 and T4, which were made before those variants existed
+(`VALIDATION_TABLES.md` T4b); without it the one-step Neyman rule and the resistance criterion are
+drawn later in the stream and their numbers differ within noise.  The timing columns depend on the
+load of the machine.
 
 ## One-paragraph summary
 
