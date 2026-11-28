@@ -13,6 +13,7 @@ evaluation only.
 
 | you want | read |
 |---|---|
+| **Phase II (28 November 2026, branch `research/phase2-foundations`): what observational information is worth to a certified free energy** — noisy means of arbitrary observables cost at most a factor `τ^{−2} ln M` (both exponents unchanged until the precision or the logarithm of the number of observables is exponential), exact means cost at most the size of their Walsh spectrum, the law of a block of `θn` sites gives exactly `(1 − θ)h`, samples at least a birthday bound; machine-checked cores; the review R29 resolved | [`docs/phase2/PHASE2_REPORT.md`](docs/phase2/PHASE2_REPORT.md), manuscript [`docs/phase2/MANUSCRIPT.md`](docs/phase2/MANUSCRIPT.md), [`docs/phase2/R29_RESOLUTION.md`](docs/phase2/R29_RESOLUTION.md), `proofs/Frontiers/ObservationInvariance.lean` |
 | **the critical assessment at the consolidation halt of 27 November 2026** — what is established, what is conjectural or unrefereed, the strongest contributions with the evidence for and against their originality, negative results, what to do next | [`docs/collaboration/consolidation/theory.md`](docs/collaboration/consolidation/theory.md) |
 | the results, proofs, and an honest known-vs-new table | [`docs/THEORY_REPORT.md`](docs/THEORY_REPORT.md) |
 | to implement the checkers / solvers | [`docs/BLUEPRINT.md`](docs/BLUEPRINT.md) |

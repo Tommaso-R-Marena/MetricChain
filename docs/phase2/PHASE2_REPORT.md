@@ -449,11 +449,44 @@ according to whether `ln(τ^{−2}ln M)` is `o(n)`, `Θ(n)`, or `n ln 2`.
 The slopes at `γ = 0` are `−2(1 − ℓ) = −1.02` (lower) and `−h/ln 2 = −0.042` (upper).  Which is right
 is the main open problem of this report.  What the two bounds use: the lower bound hides
 `e^{2γn}` narrow dips at random; the upper bound zooms into a subcube, where dips *centred in the
-subcube* are over-represented and a smaller radius matters.  A sharp answer needs either an
-algorithm that integrates over parts in which dips are not over-represented (parts of measure
-`τ` whose dip-packing number is `τ^{1−ℓ}·N₀` — none is known), or a hiding family with fewer than
-`τ^{−2}` atoms that fools every bounded observable (impossible for random atoms: a dictator
-detects `L` random dips as soon as `L < (ε/τ)²`).
+subcube* are over-represented and a smaller radius matters.
+
+### 5.1 One criterion behind Theorems A, B and the science division's Theorem 4-τ
+
+For a probability measure `ρ` on centres write `ρ̃(s) = Σ_c ρ(c)χ_s(c)` (its bias at the frequency `s`), and
+let `ν` be the normalised excess of a dip, `ν̃(s)` its bias.  Let `Γ` be a finite set of centres, `ρ_Γ` the
+uniform measure on it, and `ν_{Γ⊕a} = |Γ|^{−1}Σ_{c∈Γ} ν(· ⊕ c ⊕ a)` the excess of the dips at `Γ ⊕ a`.
+
+**Lemma 5.1 (attenuated bias) [P; checked exactly on a cube of 8 sites].**  For every `φ` and a uniform shift `a`,
+
+    E_a ( E_{ν_{Γ⊕a}} φ − E_π φ )²  =  Σ_{s ≠ 0} φ̂(s)² · ρ̃_Γ(s)² · ν̃(s)²   ≤   E_π φ² · max_{s ≠ 0} ( |ρ̃_Γ(s)| · |ν̃(s)| )² ,
+
+with equality in the second place for `φ = χ_s` at a maximising `s`.  Moreover `|ν̃(s) − t^{|s|}|` is
+exponentially small at the critical radius, `t = tanh(u/2)` (the science division's attenuation lemma A10.2
+**[K]**): *thermal noise attenuates a test of order `j` by `t^j`*.
+
+*Proof.*  `E_{ν_{Γ⊕a}}φ = Σ_s φ̂(s)ρ̃_Γ(s)ν̃(s)χ_s(a)` (the bias of a convolution is the product of the biases; a
+shift multiplies by `χ_s(a)`), and the characters are orthonormal in `a`.  ∎
+
+So, by Chebyshev's inequality, a family of dips at `Γ ⊕ a` is hidden from a given observable at
+tolerance `τ` with probability `1 − η` as soon as its **attenuated bias** `β(Γ) = max_{s≠0}|ρ̃_Γ(s)|·t^{|s|}` is at
+most `τ√η`, and it is not hidden from the character at the maximising frequency if `β(Γ) > τ`.  The
+three known constructions are the three ways of making `β` small:
+
+| centres `Γ` | bias `ρ̃_Γ(s)` | atoms needed |
+|---|---|---|
+| `L` independent uniform points (Theorem A) | of size `L^{−1/2}` at every `s` | `τ^{−2}` (times `ln M` for `M` observables, by Hoeffding instead of Chebyshev) |
+| a subgroup `C` (Theorem B) | the indicator of `C^⊥` | zero error for every observable whose spectrum avoids `C^⊥`: `< 2(M+1)` |
+| a linear code of dual distance `k_τ = ln(1/τ)/ln(1/t)` (science division, Theorem 4-τ) | the indicator of `C^⊥`, attenuated by `t^{|s|} ≤ τ` on it | between `V(n, k_τ/2)` (Rao) and `e^{n h₂(k_τ/n)}` (Gilbert–Varshamov) |
+
+For `τ = e^{−γn}` with small `γ` the first is the cheapest (`e^{2γn}` against `e^{n h₂(κ)}`,
+`κ = γ/ln coth(u/2)`), and unions of `m` random cosets of a code of dual distance `J` cost
+`V(n, J/2)·τ^{−2}t^{2J}`, which is increasing in `J` at `J = 0`: **no hiding family of this kind has fewer than
+about `τ^{−2}` atoms at small `γ`.**  Whether fewer atoms can hide (a set with attenuated bias `τ` and
+`τ^{−2+c}` points), or whether, conversely, an algorithm can turn the detectable bias of a smaller
+family into a *localisation* of its dips — detection is not localisation: for `L` random dips the
+one-body biases are of size `L^{−1/2}` and tilt the density of centres by `e^{n/√L}` only — is exactly
+the open problem (§11, problem 1).
 
 ---
 
@@ -504,8 +537,8 @@ basin, so the number of basins is invisible) and hiding (the basins not sampled 
 by evaluations).  The family must be a *maximum* of dips, not an average: exact evaluations near
 a sampled centre would reveal the scale `1/K` of an averaged dip.  (2) In terms of `m`:
 `N ≳ N₀/m^{2−ℓ}` — a sample is worth at most `m^{1−ℓ}` per sample, against `(τ^{−2}ln M)^{1−ℓ}` for means.
-(3) **No algorithm is known that uses samples to beat `e^{nh}` on the whole class** [open, §11
-problem 2].  The identity `A = E_π[w·1_T]/μ_w(T)` with `T = {w ≤ θ}` costs `1/μ_w(w ≤ A)` samples, which at
+(3) **No algorithm is known that uses samples to beat `e^{nh}` on the whole class**
+[open: §11, problem 2].  The identity `A = E_π[w·1_T]/μ_w(T)` with `T = {w ≤ θ}` costs `1/μ_w(w ≤ A)` samples, which at
 the cone is again `e^{nh}` (`h` is the Chernoff information between `π` and the cone's ensemble).
 With samples of *pinned* ensembles the problem is polynomial (self-reducibility; science
 division, addendum A7).
@@ -594,7 +627,7 @@ not "new".**
 |---|---|
 | Lemmas 2.1, 2.2, 2.3, 2.6, 3.1, 3.2; the form of 2.4 used | **[V]** `proofs/Frontiers/ObservationInvariance.lean` (registered in `proofs/AxiomAudit.lean`) |
 | Theorems A, A′, A″, B, B′, C, C′, E | **[P]** this file; the reductions to the lemmas are short, the asymptotics are binomial estimates |
-| every identity and inequality of §§2–6 on small cubes; the exponent functions | **[N]** exact enumeration, `experiments/phase2/p2_checks.py` (30 checks) and harness block XXVIII (four tests, 21 mutations, all caught) |
+| every identity and inequality of §§2–6 on small cubes; the exponent functions | **[N]** exact enumeration, `experiments/phase2/p2_checks.py` (31 checks) and harness block XXVIII (four tests, 21 mutations, all caught) |
 | internal review | one adversarial AI referee — see `docs/phase2/PHASE2_REVIEW.md` when present |
 | upper bounds | rest on the cube theorems 11.44, 11.54, 11.58 ([P], refereed internally) |
 

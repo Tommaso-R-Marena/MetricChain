@@ -40,8 +40,14 @@ parts of those proofs that are not probability theory:
 * Part 6 — **Hoeffding for independent translations** (`hoeffding_iid_mean`): the form of
   Mathlib's Hoeffding inequality used in the report, for the coordinates of a product measure.
 
+* Part 7 — **cores of the upper bounds**: relative accuracy gives logarithmic accuracy
+  (`abs_log_le_of_abs_sub_one_le`); the random-cell estimator of Theorem C (b) and of the full
+  oracle (`random_cell_failure_le`); Chebyshev's inequality for the mean of independent draws —
+  the probabilistic core of plain Monte Carlo, theory report Theorem 11.44 (`chebyshev_iid_mean`).
+
 Nothing is assumed: no statement of the report enters as a hypothesis.  What is *not* here: the
-passage from these cores to exponents (binomial asymptotics), and every upper bound.
+passage from these cores to exponents (binomial asymptotics), the bound on the relative variance
+of the class, and the nested adaptive algorithm.
 -/
 
 set_option autoImplicit false
@@ -641,5 +647,118 @@ theorem hoeffding_iid_mean {Ω₀ : Type*} [MeasurableSpace Ω₀] (ν : Measure
   exact key
 
 end Hoeffding
+
+/-! # Part 7: cores of the upper bounds -/
+
+section UpperBounds
+
+/-- **Relative accuracy gives logarithmic accuracy.**  If `|x − 1| ≤ 1 − e^{−t}` then `|ln x| ≤ t`
+(used for an estimate `x·A` of `A`, and for a reported cell mass `ν̂ = ν/x`). -/
+theorem abs_log_le_of_abs_sub_one_le {x t : ℝ}
+    (hx : |x - 1| ≤ 1 - Real.exp (-t)) : |Real.log x| ≤ t := by
+  have hlo : Real.exp (-t) ≤ x := by
+    have := (abs_le.mp hx).1
+    linarith
+  have hhi : x ≤ Real.exp t := by
+    have h1 := (abs_le.mp hx).2
+    have h2 : (2 : ℝ) ≤ Real.exp t + Real.exp (-t) := by
+      have a1 := Real.add_one_le_exp t
+      have a2 := Real.add_one_le_exp (-t)
+      linarith
+    linarith
+  have hpos : 0 < x := lt_of_lt_of_le (Real.exp_pos _) hlo
+  rw [abs_le]
+  constructor
+  · have := Real.log_le_log (Real.exp_pos _) hlo
+    rwa [Real.log_exp] at this
+  · have := Real.log_le_log hpos hhi
+    rwa [Real.log_exp] at this
+
+variable {S : Type*} [Fintype S]
+
+open Classical in
+/-- **The random-cell estimator (Theorem C (b), Proposition C′ (a)).**  Let `ν` be the true masses of
+the cells (or points) and `ν̂ > 0` the reported ones.  The `ν̂`-probability of drawing a cell whose
+reported mass is off by more than the relative amount `κ` is at most `‖ν − ν̂‖₁/κ`. -/
+theorem random_cell_failure_le (ν νh : S → ℝ) (hνh : ∀ s, 0 < νh s) {κ : ℝ} (hκ : 0 < κ) :
+    ∑ s ∈ univ.filter (fun s => κ < |ν s / νh s - 1|), νh s ≤ (∑ s, |ν s - νh s|) / κ := by
+  rw [le_div_iff₀ hκ, Finset.sum_mul]
+  have h1 : ∀ s ∈ univ.filter (fun s => κ < |ν s / νh s - 1|), νh s * κ ≤ |ν s - νh s| := by
+    intro s hs
+    rw [Finset.mem_filter] at hs
+    have h2 : |ν s / νh s - 1| = |ν s - νh s| / νh s := by
+      rw [div_sub_one (hνh s).ne', abs_div, abs_of_pos (hνh s)]
+    rw [h2, lt_div_iff₀ (hνh s)] at hs
+    nlinarith [hs.2, hνh s]
+  calc ∑ s ∈ univ.filter (fun s => κ < |ν s / νh s - 1|), νh s * κ
+      ≤ ∑ s ∈ univ.filter (fun s => κ < |ν s / νh s - 1|), |ν s - νh s| := Finset.sum_le_sum h1
+    _ ≤ ∑ s, |ν s - νh s| :=
+        Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _) fun s _ _ => abs_nonneg _
+
+open MeasureTheory ProbabilityTheory in
+/-- **Plain Monte Carlo: the probabilistic core of the non-adaptive upper bound** (theory report,
+Theorem 11.44).  For `L` independent draws from `ν` and a bounded measurable `Y` (the weight at a
+sampled point), the sample mean misses the mean by `t` or more with probability at most
+`Var(Y)/(L t²)`.  With `t = κ·E Y` and `Var(Y) ≤ R·(E Y)²` this is `R/(L κ²)`: `L ≥ R/(κ² δ)`
+samples give relative accuracy `κ` with probability `1 − δ`.  (The bound `R = e^{2na + o(n)}` on
+the class is the paper part of Theorem 11.44.) -/
+theorem chebyshev_iid_mean {Ω₀ : Type*} [MeasurableSpace Ω₀] (ν : Measure Ω₀)
+    [IsProbabilityMeasure ν] (Y : Ω₀ → ℝ) (hY : Measurable Y) {Bd : ℝ} (hb : ∀ x, |Y x| ≤ Bd)
+    (L : ℕ) (hL : 0 < L) {t : ℝ} (ht : 0 < t) :
+    (Measure.pi fun _ : Fin L => ν)
+        {c | t ≤ |(∑ j : Fin L, Y (c j)) / L - ∫ x, Y x ∂ν|} ≤
+      ENNReal.ofReal (variance Y ν / (L * t ^ 2)) := by
+  set μ : Measure (Fin L → Ω₀) := Measure.pi fun _ : Fin L => ν with hμ
+  let X : Fin L → (Fin L → Ω₀) → ℝ := fun j c => Y (c j)
+  have hXmeas : ∀ j, Measurable (X j) := fun j => hY.comp (measurable_pi_apply j)
+  have hmap : ∀ j, μ.map (fun c : Fin L → Ω₀ => c j) = ν := fun j =>
+    (measurePreserving_eval (fun _ : Fin L => ν) j).map_eq
+  have hLp : ∀ j ∈ (Finset.univ : Finset (Fin L)), MemLp (X j) 2 μ := fun j _ =>
+    MemLp.of_bound (hXmeas j).aestronglyMeasurable Bd
+      (Filter.Eventually.of_forall fun c => by simpa [Real.norm_eq_abs] using hb (c j))
+  have hindep : iIndepFun X μ :=
+    iIndepFun_pi (X := fun (_ : Fin L) (x : Ω₀) => Y x) (fun _ => hY.aemeasurable)
+  have hpair : Set.Pairwise (↑(Finset.univ : Finset (Fin L))) fun i j => X i ⟂ᵢ[μ] X j :=
+    fun i _ j _ hij => hindep.indepFun hij
+  have hvar : variance (∑ j, X j) μ = L * variance Y ν := by
+    rw [IndepFun.variance_sum hLp hpair]
+    have h1 : ∀ j ∈ (Finset.univ : Finset (Fin L)), variance (X j) μ = variance Y ν := by
+      intro j _
+      have h := variance_map (μ := μ) (Y := fun c : Fin L → Ω₀ => c j) (X := Y)
+        (by rw [hmap j]; exact hY.aemeasurable) (measurable_pi_apply j).aemeasurable
+      rw [hmap j] at h
+      exact h.symm
+    rw [Finset.sum_congr rfl h1, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
+      nsmul_eq_mul]
+  have hmean : ∫ c, (∑ j, X j) c ∂μ = L * ∫ x, Y x ∂ν := by
+    have h2 : ∀ j ∈ (Finset.univ : Finset (Fin L)), ∫ c, X j c ∂μ = ∫ x, Y x ∂ν := by
+      intro j _
+      have h := integral_map (μ := μ) (φ := fun c : Fin L → Ω₀ => c j)
+        (measurable_pi_apply j).aemeasurable (f := Y)
+        (by rw [hmap j]; exact hY.aestronglyMeasurable)
+      rw [hmap j] at h
+      exact h.symm
+    simp_rw [Finset.sum_apply]
+    rw [integral_finsetSum _ fun j hj => (hLp j hj).integrable one_le_two,
+      Finset.sum_congr rfl h2, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
+      nsmul_eq_mul]
+  have hSLp : MemLp (∑ j, X j) 2 μ := memLp_finsetSum' _ hLp
+  have hLpos : (0 : ℝ) < L := Nat.cast_pos.mpr hL
+  have hcheb := meas_ge_le_variance_div_sq hSLp (c := L * t) (mul_pos hLpos ht)
+  rw [hvar, hmean] at hcheb
+  have hset : {c : Fin L → Ω₀ | t ≤ |(∑ j : Fin L, Y (c j)) / L - ∫ x, Y x ∂ν|} =
+      {c | (L : ℝ) * t ≤ |(∑ j, X j) c - L * ∫ x, Y x ∂ν|} := by
+    ext c
+    simp only [Set.mem_setOf_eq, Finset.sum_apply]
+    have h3 : (∑ j : Fin L, Y (c j)) / L - ∫ x, Y x ∂ν =
+        ((∑ j : Fin L, Y (c j)) - L * ∫ x, Y x ∂ν) / L := by
+      field_simp
+    rw [h3, abs_div, abs_of_pos hLpos, le_div_iff₀ hLpos, mul_comm]
+  rw [hset]
+  refine hcheb.trans (le_of_eq ?_)
+  congr 1
+  field_simp
+
+end UpperBounds
 
 end MetricChain

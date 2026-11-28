@@ -143,6 +143,29 @@ exp_pair = np.mean([np.minimum(e0, e0[idx3 ^ c]).mean() for c in range(N3)])
 check("A4c expected pair overlap <= m(r) V(n,r-1)/2^n", exp_pair <= m_r * V / N3 + 1e-15,
       "%.3e <= %.3e" % (exp_pair, m_r * V / N3))
 
+# A5: Lemma 5.1 (attenuated bias): E_a (E_{nu_{Gamma+a}} phi - mean phi)^2 = sum_{s != 0} phihat^2 rhotilde^2 nutilde^2
+n5a, u5a = 8, 1.0
+N5a, idx5a, D5a = cube(n5a)
+par = lambda a_, b_: bin(int(a_) & int(b_)).count("1") & 1
+CH = np.array([[1 - 2 * par(s_, x_) for x_ in range(N5a)] for s_ in range(N5a)], dtype=float)   # CH[s, x]
+e5 = np.maximum(0.0, np.exp(u5a * (4 - D5a[:, 0].astype(float))) - 1.0)
+nu0 = e5 / e5.sum()
+okA5 = True
+for _ in range(3):
+    Gam = rng.integers(0, N5a, size=int(rng.integers(2, 9)))
+    phi5 = rng.uniform(-1, 1, size=N5a)
+    devs = []
+    for a_ in range(N5a):
+        nuG = sum(nu0[idx5a ^ int(c) ^ a_] for c in Gam) / len(Gam)
+        devs.append(nuG @ phi5 - phi5.mean())
+    lhs = np.mean(np.square(devs))
+    phihat = CH @ phi5 / N5a
+    rho_t = CH[:, Gam].mean(axis=1)
+    nu_t = CH @ nu0
+    rhs = np.sum((phihat ** 2 * rho_t ** 2 * nu_t ** 2)[1:])
+    okA5 &= abs(lhs - rhs) < 1e-12 and rhs <= np.mean(phi5 ** 2) * np.max((np.abs(rho_t) * np.abs(nu_t))[1:]) ** 2 + 1e-12
+check("A5 attenuated bias: E_a(dev^2) = sum_{s != 0} phihat(s)^2 rho~(s)^2 nu~(s)^2 <= E phi^2 max (|rho~| |nu~|)^2", okA5)
+
 # ----------------------------------------------------------------------------- B
 print("== B. exact observables: subgroup averaging ==")
 nb = 8

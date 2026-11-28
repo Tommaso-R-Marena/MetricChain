@@ -2623,3 +2623,41 @@ theorems stand after a second, outside review with replication (Theorems 11.118,
 false certificate "from its description alone" — with the description's parameters.  The
 outside referee varied the threshold and the ladder and found the second mechanism, and
 tested the one sentence nobody had tested because it was a remark.
+
+## D71. Phase II (observation oracles): what did not work, and one sentence that was wrong when first committed (2026-11-28)  **[`docs/phase2/PHASE2_REPORT.md`; `experiments/phase2/p2_field_flat_exact.py`]**
+
+Phase II asked what information about the normalised ensemble is worth to a certified free
+energy (noisy means, exact means, laws of blocks, samples).  The theorems are in the Phase II
+report; these are the attempts that failed, in the order in which they were made.
+
+1. **"The flat mixture gives the invariance theorem for any reference measure."**  The identity is
+   true for every reference (`flat_mixture`), and the resulting lower bound is valid, but **at the
+   constant weight with a field it is void at the exponential scale**: the mixture is unique (the
+   kernel is invertible), it forces centres near the mode of the reference, and their
+   mass-normalised dips cover the mode with a probability that is not exponentially small
+   (`−ln P_hit/n = 0.042, 0.029, 0.021, 0.015` at `n = 20, 40, 80, 160` for `p = 0.1`, `u = 2`).  **The first
+   Phase II commit (`8e2d8e6`) said that "a crude evaluation … suggests that the flat family retains
+   about three quarters of the exponent"; that number came from a script that counted the points
+   around a centre where it should have counted the centres around a point, and it was wrong.**
+   Corrected in the next commit: around tilted baselines the flat family keeps between 40 % and
+   95 % of the best single-type exponent in the two cases computed; at the constant baseline, nothing.
+2. **Exact answers by Carathéodory.**  `M` means are reproduced *exactly* by a mixture of `M + 1`
+   translated dips with suitable unequal weights — but nothing hides such a mixture: the extreme
+   configurations have forced centres (for the indicator of a point every one of them covers the
+   point).  Consistent with Proposition C′(b): one exact point probability makes the problem trivial.
+3. **Wells as a lower bound for randomised algorithms.**  Removing from the uniform mixture of
+   all dips those that touch the query points gives an instance that no bounded observable
+   distinguishes from the constant one, at the cost of a factor `τ`, not `τ²`, and for any number of
+   observables.  It needs the instance to know the query points: a statement about deterministic
+   algorithms only (and for those the sharp bound is `τ·2ⁿ`, by narrower wells).  With all
+   observables a randomised algorithm needs a bounded number of evaluations.
+4. **A sum of narrow dips** is not admissible where two of them overlap; the maximum is.  **An
+   average of dips** is admissible but useless against samples: exact evaluations near a sampled
+   centre reveal the scale `1/K` of the average, hence the number of dips.  Theorem E uses maxima.
+5. **Zooming into parts in which dips are not over-represented.**  The upper bound
+   `(1 − γ/ln 2)h` at tolerance `e^{−γn}` comes from subcubes, where smaller dips matter; in a
+   random-like part of the same measure dips are not over-represented, but then integrating over
+   the part is as hard as over the cube.  No partition with cost `τ^{1−ℓ}·N₀` was found; the gap
+   between `h̄(2γ)` and `(1 − γ/ln 2)h` is open.
+6. **"At the hardest instance with a field the optimal single-type family is the flat one."**  Not
+   supported by the grid computation (the best tilts differ in sign).

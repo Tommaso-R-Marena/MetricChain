@@ -299,13 +299,16 @@ finitely many lines `ℓ_i`, let `(e_m, ϑ_m)` be pairs with `ϑ_m ≥ θ(e_m)`,
 
     [ B − ϑ_m·(1 − ℓ_i(B)) ] / e_m            *is below*  `Σ(B, V(B))`  *on*  `[0, c]`.
 
-*Hence, if `c′ ≤ c` satisfies `c′ + ā·V(c′) ≥ ā` or `c′ = c`, and `V′` is a maximum of the zero line and of lines that
-are below such lines on `[0, c′]`, with `V′(c′) ≤ 1`, then `(V, c), (V′, c′)` are two consecutive members of an
-admissible sequence (pair with infinite slope at zero).*
+*Hence, if `c′ ≤ c` satisfies `c′ + ā·V(c′) ≥ ā` or `c′ = c`, and `V′` is convex with `V′(0) = 0`, `V′(c′) ≤ 1` and
+`V′ ≤` the maximum of the zero line and of such lines on `[0, c′]`, then `(V, c), (V′, c′)` are two consecutive
+members of an admissible sequence (pair with infinite slope at zero).*  (Wording after finding F2 of the science
+division's review SCI-REV-0030: the cap line of the script is below the *maximum* of two such lines, below neither
+alone — a line through `(c′, 1)` that is below the hull at all its vertices is below the hull.)
 *Proof.*  `Σ(B, s) ≥ [B − (1 − s)θ(e_m)]/e_m ≥ [B − (1 − s)ϑ_m]/e_m` for `s ≤ 1`, and the right side is nondecreasing in
 `s`; `ℓ_i ≤ V ≤ 1` on `[0, c]`.  (S1): `Σ(B, V(B)) < ∞` forces `B ≤ (1 − V(B))a ≤ (1 − V(B))ā`, and `B + āV(B)` is
-increasing.  `V′` is convex (a maximum of lines), nondecreasing (the slopes `(1 + ϑ_mα_i)/e_m` are positive), zero
-at zero (every such line is nonpositive at `0`).  ∎
+increasing.  (S2) needs only `V′ ≤ max(0, such lines)`.  `V′` is a family: convex and zero at zero by hypothesis,
+nonnegative (it is used as a maximum with the zero line), hence nondecreasing (a convex nonnegative function that
+vanishes at `0` is nondecreasing).  ∎
 
 `z6_certified_tops.py` builds such a sequence for the cube from `V₀ ≡ 0` on `[0, ā]`: `θ(e) = KL(ρ‖½)` with
 `KL(ρ‖p_u) = e`, so for a floating-point `ρ` the pair "an upper bound of `KL(ρ‖p_u)`, an upper bound of `KL(ρ‖½)`" is
@@ -317,6 +320,21 @@ tangent line from `(c′, 1)` that caps the curve at one, the values at the top 
 **rigorous upper bounds for the exponents of the level recursion, `τ_j ≤ c_j`** — given those statements —
 and `T_j(g) ≤ max_B (B − V_j(B)g)` at every rate (the maximum is evaluated exactly at the vertices).
 
+**What is evidence for a run, and what is not (finding F1 of SCI-REV-0030; resolved in Phase II).**  The script's
+last line ("ALL CHECKS PASS") tests only that the tops are nonincreasing and above a floating-point `h`; the pairs
+and the rounding of the lines are valid *by construction* and are not re-checked by the script, so that line cannot
+fail for the errors a certificate must exclude.  The validity of a run is established by an **independent exact
+checker**, `experiments/workstreams/Z/review_a6/a6_02_verify_z6_output.py` (written by the referee of these sections;
+own integer interval arithmetic, own hull, no code shared with the script): for every stored line it exhibits a
+rational pair, a parent line and a rational witness `ρ`, and it verifies the cap line, the family property and the
+top exactly.  `experiments/workstreams/Z/z6_pipeline_mutations.py` measures the difference: of ten textual mutations
+of the script that break the certificate (every rounding direction, the two divergences exchanged, a steeper
+parent line, a flatter cap, a top accepted with a lower bound of `a`), the checker rejects all ten, while the
+script's own last line still passes for most of them (`out_z6_pipeline_mutations.txt`; the science division's
+referee found the same with its own checker and thirty mutations, and verified the three committed runs line by
+line: 278 704 generated lines at `u = 1`, no violation).  The harness test XVI.11 is a third, independent
+re-implementation of the construction with eleven mutations.
+
 | `j` | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 20 | 40 | 80 | 200 | 400 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | certified `c_j/a ≥ τ_j/a`, `u = 1` | `0.500410024` | `0.363300653` | `0.312791462` | `0.291376787` | `0.281323250` | `0.272750695` | `0.269065250` | `0.264243938` | `0.263047017` | `0.262747193` | `0.262663126` | `0.262651110` |
@@ -327,7 +345,7 @@ and `T_j(g) ≤ max_B (B − V_j(B)g)` at every rate (the maximum is evaluated e
 one unit in the last printed place**; the six-digit table of the theory report is rounded up.
 `h/a = 0.262647098, 0.296757, 0.253231` at `u = 1, 2, ½`; 3 000 sample points per level, 4 000 for the run to 400
 levels; `out_z6_certified_*.txt`.  The referee's postscript: all thirty certified tops lie above its own
-envelope tops, by at most `6·10⁻⁷·a`, as Corollary A4 requires; the script itself was not refereed.)  The certified tops exceed the floating-point envelope tops by `3·10⁻⁸` to
+envelope tops, by at most `6·10⁻⁷·a`, as Corollary A4 requires; the script has since been refereed twice — `Z_A6_REVIEW.md` §3 and the science division's SCI-REV-0030 — and found sound on the committed runs.)  The certified tops exceed the floating-point envelope tops by `3·10⁻⁸` to
 `2.5·10⁻³` of their distance to `h` (the larger figure at 78 levels; `1.7·10⁻³` at 80); at 400 levels `j²(c_j − h)/c_*² = 1.0009`.
 Harness XVI.11 runs a small instance with its exact-arithmetic checks, the comparison with the closed form
 for two levels, and three negative controls (eleven mutations, all caught).

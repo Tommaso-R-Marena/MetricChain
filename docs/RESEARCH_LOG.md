@@ -2946,6 +2946,59 @@ document references pass.
 authority beyond it).  **Active at the halt:** none — no subagent, no background process, no
 scheduled session, no computational job.
 
+### Phase II (2026-11-28): what observational information is worth — S1 and S2 verified, extended and bounded; R29 resolved
+
+*Branch `research/phase2-foundations` (from the consolidation checkpoint `b3c5d61`; the original
+branch and the consolidated archive are not modified).  Mandate: the research owner's directive
+"MetricChain Phase II — Foundational Mathematics and General Information Complexity".  Bounded
+work: one referee subagent, no external computation; actual expenditure cannot be monitored from
+inside the session.*
+
+* **The question.**  Besides evaluations, the algorithm receives information about the normalised
+  ensemble.  Two proposed theorems of an outside synthesis (S1: noisy means of `M` arbitrary
+  observables; S2: exact Walsh information) were to be challenged.  **Both are correct.**
+* **What was proved** (`docs/phase2/PHASE2_REPORT.md`; pointer in theory report §11.34).  Theorem A:
+  the cost factor `⌈2τ^{−2}ln(4M/η)⌉`, for both lower bounds, also for adaptive statistical queries;
+  both exponents unchanged iff `ln(1/τ) = o(n)` and `ln ln M = o(n)`.  Theorem A′: narrow dips give the
+  exponent `h̄(2γ + β)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`, at exponential precision.  Theorem A″: the flat
+  mixture (any reference; any kernel with constant row sums).  Theorem B: exact observables by joint
+  spectrum, `|C| < 2(M+1)`, optimal.  Theorem C: the law of a block of `θn` sites gives exactly
+  `(1 − θ)h`, so neither hypothesis of A can be dropped.  Proposition C′: with all observables a bounded
+  number of evaluations (randomised), `τ·2ⁿ` (deterministic).  Theorem E: samples — a birthday bound,
+  `ν* = 0.40·h`.  Lemma 5.1: one spectral criterion (attenuated bias) behind A, B and the science
+  division's Theorem 4-τ.
+* **How it went.**  (1) The first reading of S1 suggested stronger statements than are true: the
+  "wells" adversary (all dips except those touching the queries) seemed to give the factor `τ` for
+  any number of observables — it is a deterministic statement, and the opposite extreme (all
+  observables: a bounded number of evaluations for randomised algorithms) showed that the count `M`
+  cannot be dropped.  (2) The flat mixture for arbitrary references looked like the generalisation
+  to dependent systems; the exact sums over types showed that at the constant weight with a field it
+  gives no exponent, and a crude grid evaluation committed in the first checkpoint was wrong (D71).
+  (3) The narrow-dip improvement came from asking what the factor `L` is spent on.  (4) The sample
+  model needed maxima, not averages, of dips: exact evaluations reveal the scale of an average.
+* **Machine-checked** (`proofs/Frontiers/ObservationInvariance.lean`, 38 declarations): packing
+  bounds with a tolerant oracle; the cone; mixtures; the flat mixture; characters and the counting
+  form of the union bound; parities on the cube; Hoeffding and Chebyshev for independent draws (from
+  Mathlib's inequalities on product measures); two cores of the new upper bounds.  Chebyshev for
+  independent draws is also the probabilistic core of plain Monte Carlo (Theorem 11.44) — the one step
+  of "strengthening the formal verification of the upper bounds" taken in Phase II; the bound on the
+  relative variance of the class and the nested algorithm remain paper proofs.
+* **Checks.**  `experiments/phase2/p2_checks.py` (31 exact checks); harness block XXVIII (four
+  tests) with 21 mutations, all caught.
+* **R29** (`docs/phase2/R29_RESOLUTION.md`): F2 applied; F3–F6 had been applied before the halt after
+  our own referee's report; F7 unchanged ([N]); F1 resolved by making the independent exact checker the
+  stated evidence and measuring it against mutations of the script.
+* **Review.**  One adversarial AI referee on the Phase II report: `docs/phase2/PHASE2_REVIEW.md`;
+  its findings and what was done about them are recorded at the head of the report.
+* **Collaboration.**  `research/phase2-certified-inference` read at `bf7b71a`; ENG-MSG-0009 answered
+  in THY-MSG-0023 (marginalisation with a non-product reference: constant `u + κ`; additivity is
+  essential for exact intervals once `u ≥ C ln n`).  `research/phase2-adaptive-hierarchy` did not exist
+  at the last fetch.
+* **Open** (most consequential first): the exponent at tolerance `e^{−γn}` (between `h̄(2γ)` and
+  `(1 − γ/ln 2)h`); an algorithm that uses samples; exact marginals of linear order; invariance with a
+  field; second-order terms.
+* **Audit.**  See the last lines of this entry in the final Phase II commit.
+
 ### Resume here (cycle 10, twenty-fourth checkpoint; valid at the consolidation halt of 2026-11-27 with the changes stated first)
 
 **HALTED.**  This branch is halted under the research owner's consolidation directive of 2026-11-27; do not

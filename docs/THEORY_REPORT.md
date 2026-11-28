@@ -1484,6 +1484,7 @@ We prove no new expressivity or mixing theorem; the following are consequences o
 | `proofs/Frontiers/GibbsRecovery.lean` | `Z`, `avg`, `lower_jensen`, `lower_product`, `avg_ceiling_le_avg_true`, `upper_jensen`, `upper_product`, `ueStep`, `upStep`, `log_Z_le_of_steps`, `log_Z_le_ueStep_iterate`, `log_Z_le_upStep_iterate`, `ueStep_iterate_antitone`, `upStep_iterate_antitone` (**a statement of the Scientific Discovery Division** — its Proposition A17.19, SCI-MSG-0028, request A19-T1 —, machine-checked here: four inequalities that recover `ln Z` of an energy lying between a floor model and a ceiling model from the partition functions of the two models and means under the ceiling model of slack functions that bound the two gaps from below; the two iterated upper bounds are valid at every step and do not increase; the lower Jensen form needs no sign condition on the slacks) |
 | `proofs/Frontiers/Bonferroni.lean` | `pairSum`, `sum_sq_le_sq_sum`, `pairSum_nonneg`, `pairSum_insert`, `prod_one_sub_le`, `one_sub_sum_le_prod`, `prod_one_sub_mem`, `pairSum_eq_offDiag` (the second Bonferroni inequality for a product of numbers in `[0, 1]`, `∏(1 − c_i) ≤ 1 − Σc_i + Σ_{pairs} c_ic_j`, with the first as its lower partner — inequality (c) of the Scientific Discovery Division's Proposition A17.23 (its SCI-RES-0035: an upper end for a partition function from the laws of single held sites and of pairs of held sites under the floor); the statement and the induction are that division's, the file is the coordinator's; twenty-fourth checkpoint) |
 | `proofs/Frontiers/FactorElimination.lean` | `sum_boxFinset_branch`, `sum_boxFinset_elim`, `sum_boxFinset_sumOut`, `sum_boxFinset_relax` (summing a site out of a box sum for *arbitrary* summands — the identity behind bucket elimination, of which `WInstance.elim1` and `WInstance.elim2` are the cases that stay pairwise — and the termwise relaxation of a factor; semantic rules asked for by the Structural & Computational Biology division, STRUCTBIO-REQ-0003 items R-1 and R-3; not an executable kernel: a table-level checker that implements them is not verified by this file) |
+| `proofs/Frontiers/ObservationInvariance.lean` | `tolerant_oracle_packing`, `tolerant_oracle_packing_nonadaptive` (packing bounds with a *tolerant* oracle: a relation "the answer is admissible for the instance"; the bound counts the alternatives for which the baseline's answer is admissible), `LogLip`, `LogLip.comp_isometry`, `LogLip.convex_comb`, `LogLip.max`, `LogLip.sup'`, `LogLip.cone`, `LogLip.dip` (the admissible cone), `massOf_convex_comb_eq`, `ensOf_convex_comb`, `massOf_comp_equiv`, `ensOf_comp_equiv`, `sum_translates_eq` (mixtures and translations), `hiding_law_sum`, `flat_mixture`, `flat_mixture_truncated` (the flat mixture for an arbitrary reference), `sum_mul_char_eq_zero`, `ensemble_mean_eq_of_spectrum`, `exists_separating_tuple`, `walsh_add`, `parity_balanced`, `exists_generators_cube`, `exists_generators_kill` (exact observables: invariance kills characters; fewer than `2^r` frequencies are avoided by `r` generators), `hoeffding_iid_mean`, `chebyshev_iid_mean` (Hoeffding and Chebyshev for independent draws, from Mathlib's inequalities on a product measure), `abs_log_le_of_abs_sub_one_le`, `random_cell_failure_le` (cores of the Phase II upper bounds) | §11.34; `docs/phase2/PHASE2_REPORT.md` |
 | `proofs/AuditCommand.lean`, `proofs/AxiomAudit.lean` | `#audit_axioms proofs` (walk over every constant defined in a project module), headline `#print axioms`, named non-vacuity witnesses |
 
 ---
@@ -6153,7 +6154,7 @@ substance", seven findings of wording and numbers applied) and `Z_ADDENDUM_REVIE
 (g): "no error of substance", ten findings applied); (f), the equality in (e) and the small rates of (g) were
 added after those reviews and have since had a referee of their own, `Z_A6_REVIEW.md` (one closed form wrong
 as first stated and corrected in (e); everything else correct as stated or after a repair of wording; the
-certificate script sound, its output verified line by line with an independent verifier); rests on Theorem 11.56, Lemma 11.58b(ii), Proposition 11.58c(b), Proposition 11.57(a) and
+certificate script sound, its output verified line by line with an independent verifier); **reviewed in part by the Scientific Discovery Division** (SCI-REV-0030, workstream R29, published incomplete at the halt: (a), the equality in (e), (f) and the small rates of (g) — "no error of substance", the three committed certified runs reproduced digit for digit and verified by its own exact checker; its findings F1–F7 are reconciled in `docs/phase2/R29_RESOLUTION.md`; (b)–(d) were not reached by that referee); rests on Theorem 11.56, Lemma 11.58b(ii), Proposition 11.58c(b), Proposition 11.57(a) and
 Theorems 11.53a, 11.53b; harness XVI.10, XVI.11; exact nests of two to seven levels; not machine-checked].**
 Call `(W, b)` a *family* if `b > 0` and `W : [0, b] → [0, 1]` is convex, nondecreasing and continuous with `W(0) = 0`; it
 stands for the lines `B − W(B)·x`, `0 ≤ B ≤ b`, with upper envelope `M_{W,b}(x) = max_B (B − W(B)x)`.  A sequence of
@@ -12628,6 +12629,49 @@ down-sets; Talagrand's inductions); the exponents of isoperimetry in product spa
 known asymptotically (Ahlswede–Zhang; L. Yu, arXiv 2205.07596, with a dimension-free bound
 in the concentration regime); (c) is Marton's coupling with the exact single-letter
 trade-off, and no novelty is claimed for it beyond its use as a tail function.
+
+### 11.34 Phase II: what observational information is worth (pointer)
+
+*Added in Phase II (branch `research/phase2-foundations`, 2026-11-28).  Statements, proofs, status and the
+comparison with the science division's `INFERENCE_LIMITS.md` are in `docs/phase2/PHASE2_REPORT.md`; this section
+only records what was established, in the numbering of that report.  Not refereed by a human; internal review:
+`docs/phase2/PHASE2_REVIEW.md`.*
+
+Besides evaluations the algorithm receives information about the normalised ensemble `wπ/A(w)`.
+
+* **Theorem A [P; cores V] (`tolerant_oracle_packing`, `tolerant_oracle_packing_nonadaptive`, `LogLip.convex_comb`,
+  `massOf_convex_comb_eq`, `ensOf_convex_comb`, `sum_translates_eq`, `hoeffding_iid_mean`).**  Means of `M` arbitrary
+  observables with values in `[−1, 1]`, each to an absolute tolerance `τ` (any answer inside the tolerance may be
+  returned): both lower bounds of §§11.10, 11.16 lose at most the factor `L = ⌈2τ^{−2} ln(4M/η)⌉`,
+  `E|Q| ≥ (1 − η)(1 − 2δ)·2ⁿ/(L·|B|)`.  Hence **both exponents (`a`, `h`) are unchanged whenever `ln(1/τ) = o(n)` and
+  `ln ln M = o(n)`**; the same for `q` adaptive statistical queries.  Mechanism: the average of `L` independent
+  uniform translates of a dip is admissible, has the same partition function, and its ensemble means are within
+  `τ` of the uniform ones with probability `1 − η` (Hoeffding).
+* **Theorem A′ [P].**  With `L` narrow dips (a maximum, each carrying the `L`-th part of the excess) the adaptive
+  exponent at tolerance `e^{−γn}` with `ln ln M ≈ βn` is at least `h̄(2γ + β)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ = h − (1 − ℓ)λ + O(λ²)`
+  (`ℓ` the Chernoff parameter, `L` of §11.18), where `h̄(λ) > γ`.
+* **Theorem A″ [P; identity V] (`hiding_law_sum`, `flat_mixture`, `flat_mixture_truncated`).**  For any reference
+  measure and any kernel with constant row sums, cones scaled to equal mass and mixed with the law
+  `q(c) ∝ E_π e^{−u d(·,c)}` add up to a constant; this gives the analogue of Theorem A on every vertex-transitive
+  space and, with a non-uniform reference, a valid but in general weak bound (void at the exponential scale at
+  the constant weight with a field; D71).
+* **Theorem B [P; cores V] (`sum_mul_char_eq_zero`, `ensemble_mean_eq_of_spectrum`, `exists_separating_tuple`,
+  `parity_balanced`, `exists_generators_cube`, `exists_generators_kill`).**  *Exact* means of observables whose joint
+  Walsh spectrum has `M` non-zero frequencies cost at most the factor `|C| < 2(M + 1)` (a subgroup whose annihilator
+  avoids the spectrum; the bound on `|C|` is attained); refined exponent `h̄(ln M/n)`; for all marginals of order
+  `αn`: `h̄(h₂(α)) ≤ θ(α) ≤ (1 − α)h`.  The statement for marginals of order `o(n)` is the science division's
+  (Theorem 4, addenda A1, A8); Proposition 11.104 is its non-adaptive half.
+* **Theorem C [P].**  With the exact joint law of `θn` coordinates (or that law to total variation `τ ≤ c·εδ`) the
+  exponents are **exactly `(1 − θ)h` and `(1 − θ)a`**; hence neither hypothesis of Theorem A can be dropped.  With
+  every bounded observable to tolerance `τ ≤ c·εδ` a bounded number of evaluations suffices for randomised
+  algorithms (`random_cell_failure_le`, `abs_log_le_of_abs_sub_one_le`), while deterministic ones need `τ·2ⁿ` up
+  to polynomial factors.
+* **Theorem E [P].**  With `m = e^{νn}` independent samples of the ensemble, `E|Q| ≥ exp(n[h̄(ν) − ν] − o(n))` for
+  `ν < ν*`, `h̄(ν*) = 2ν*` (`ν* = 0.4024·h` at `u = 1`): a birthday bound for the number of basins and hiding for
+  the basins not sampled.  No algorithm with samples below `e^{nh}` is known.
+* Also machine-checked there: Chebyshev's inequality for the mean of independent draws (`chebyshev_iid_mean`),
+  the probabilistic core of Theorem 11.44 (plain Monte Carlo); the bound on the relative variance over the class
+  remains a paper proof.
 
 ## 12. Strongest unresolved questions, and what a publication would need
 
