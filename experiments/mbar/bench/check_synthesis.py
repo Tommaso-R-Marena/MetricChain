@@ -53,7 +53,7 @@ for trial in range(300):
     worst = max(worst, V / bound)
     assert V <= bound * (1 + 1e-9)
     a = np.exp(rng.normal(0, 0.7, K))
-    sopt, Vopt, _ = pop.optimal_allocation(P, pop.contrast_measure(P, c), cost=a, budget=1.0, tol=1e-8)
+    sopt, Vopt, _ = pop.optimal_allocation(P, pop.contrast_measure(P, c), cost=a, budget=1.0, tol=1e-8, kind="measure")
     length2 = float(np.sum(np.sqrt(a[path[:-1]] * chis)) ** 2)
     worst_len = max(worst_len, Vopt / length2)
     assert Vopt <= length2 * (1 + 1e-6)
@@ -89,7 +89,7 @@ for n in (8, 10, 12):
             c[0], c[-1] = 1.0, -1.0
             nu = pop.contrast_measure(P, c)
             Vu = pop.variance(P, np.full(Kp + 1, 1.0 / (Kp + 1)), nu)
-            sopt, Vopt, _ = pop.optimal_allocation(P, nu, tol=1e-7)
+            sopt, Vopt, _ = pop.optimal_allocation(P, nu, tol=1e-7, kind="measure")
             # telescoping estimator samples states 0..K'-1 uniformly: bound CHI_STEP * K'^2
             assert Vopt <= np.sum(np.sqrt(chis)) ** 2 * (1 + 1e-6) <= CHI_STEP * Kp ** 2 * (1 + 1e-6)
             rows.append(dict(n=n, u=u, osc=float(osc), ladder_states=Kp + 1, V_uniform=Vu, V_optimal=Vopt,
@@ -124,7 +124,7 @@ for Gamma in (4.0, 16.0, 64.0, 256.0, 1024.0):
     c[0], c[-1] = 1.0, -1.0
     nuF = pop.contrast_measure(P, c)
     VF_ref = pop.variance(P, only_ref, nuF)                      # exponential averaging from the reference
-    VF_ladder = pop.optimal_allocation(P, nuF, tol=1e-8)[1]
+    VF_ladder = pop.optimal_allocation(P, nuF, tol=1e-8, kind="measure")[1]
     rows.append(dict(Gamma=Gamma, ladder_states=Kp + 1, V_average_reference_only=V_ref, V_average_target_only=V_tgt,
                      V_free_energy_reference_only=VF_ref, V_free_energy_optimal_ladder=VF_ladder,
                      ratio_ref_over_Gamma=V_ref / Gamma, ladder_over_log2=VF_ladder / np.log(Gamma) ** 2))
@@ -146,7 +146,7 @@ for _ in range(200):
     s = rng.dirichlet(np.ones(K))
     V = pop.variance(P, s, nu)
     effs.append(abs(Vbest / V - s[2]))
-sopt, Vopt, _ = pop.optimal_allocation(P, nu, tol=1e-9)
+sopt, Vopt, _ = pop.optimal_allocation(P, nu, tol=1e-9, kind="measure")
 report["S4"] = dict(V_bridge_only=Vbest, V_optimal=Vopt, max_abs_efficiency_minus_s_m=float(max(effs)),
                     uniform_efficiency=float(Vbest / pop.variance(P, np.full(K, 1 / K), nu)))
 print("S4 bridge instance: V(e_m) = %.3f = V* = %.3f; |efficiency(s) - s_m| <= %.1e; uniform efficiency = %.3f = 1/K"

@@ -80,7 +80,7 @@ sharp third-moment bound of handoff B1 (`Softmax.kappa_ge`, `Softmax.curvature_i
 
 ## 4. Reproducible implementation and benchmarks
 
-`experiments/mbar/src/d9mbar/` (about 900 lines), tests, benchmark scripts, stored results, generated
+`experiments/mbar/src/d9mbar/` (about 870 lines), tests, benchmark scripts, stored results, generated
 tables; commands in `README.md`.  The handoff's reference implementation is kept unchanged and is run
 as a baseline.  The solver agrees with PyMBAR to `10⁻¹³`.
 
@@ -93,7 +93,9 @@ against equal counts (standard PyMBAR practice), equal cost, the one-step Neyman
 criterion and the oracle design.  Result: the predicted gains are realised where they exist
 (ratios 0.76, 0.90, 0.48, 0.71 with unit costs; 0.17 and 0.29 with unequal costs), not on the control
 (0.92, not significant); the rule beats the one-step Neyman rule and the resistance criterion; with
-unequal costs most of the gain is already in the equal-cost rule.  No claim of simulation savings is
+unequal costs most of the gain is already in the equal-cost rule (0.18 and 0.32), and two variants
+added after seeing this — a cost-aware pilot and an equal-cost safeguard — reach 0.14 and 0.23
+against the oracle design's 0.12 and 0.21 (post hoc; to be confirmed on a frozen protocol).  No claim of simulation savings is
 made beyond these synthetic systems.
 
 ## 6. Explicit scientific limitations and counterexamples

@@ -197,7 +197,7 @@ def pilot_allocation(U, labels, target, total_budget, cost=None, safeguard=0.25,
         tl = target if isinstance(target, (list, tuple)) else [target]
         nus = [pop.contrast_measure(P, np.asarray(t, float)) for t in tl]
         s, V, oinfo = pop.optimal_allocation(P, nus if len(nus) > 1 else nus[0], cost=a,
-                                             budget=total_budget, lower=n0, objective=objective,
+                                             budget=total_budget, lower=n0, objective=objective, kind="measure",
                                              iters=3000, tol=1e-6)
         if not np.isfinite(V):
             raise ValueError("plug-in variance infinite")

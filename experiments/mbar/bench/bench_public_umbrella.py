@@ -152,7 +152,7 @@ def main():
     V_act = pop.variance(P, n_act, nu)
     cost = np.concatenate([np.ones(K), [1e9, 1e9]])
     B = float(counts.sum())
-    sopt, Vopt, oinfo = pop.optimal_allocation(P, nu, cost=cost, budget=B, tol=1e-7, iters=6000)
+    sopt, Vopt, oinfo = pop.optimal_allocation(P, nu, cost=cost, budget=B, tol=1e-7, iters=6000, kind="measure")
     eff_lb = pop.efficiency_lower_bound(P, n_act, nu, cost=cost, budget=B)
     top = np.argsort(-sopt[:K])[:6]
     report["design_diagnostic"] = dict(

@@ -1,0 +1,37 @@
+== B1: exact enumeration, arbitrary predictors / tilts
+  333 models: max expectation = 0.9913875991  (claim: <= 1)
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:74: RuntimeWarning: overflow encountered in exp
+  lam = np.exp(z[:K * J].reshape(K, J)); lam = lam / lam.sum(axis=0, keepdims=True)
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:74: RuntimeWarning: invalid value encountered in divide
+  lam = np.exp(z[:K * J].reshape(K, J)); lam = lam / lam.sum(axis=0, keepdims=True)
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:75: RuntimeWarning: overflow encountered in exp
+  w = np.exp(z[K * J:]); w = w / w.sum()
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:75: RuntimeWarning: invalid value encountered in divide
+  w = np.exp(z[K * J:]); w = w / w.sum()
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:74: RuntimeWarning: overflow encountered in exp
+  lam = np.exp(z[:K * J].reshape(K, J)); lam = lam / lam.sum(axis=0, keepdims=True)
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:74: RuntimeWarning: invalid value encountered in divide
+  lam = np.exp(z[:K * J].reshape(K, J)); lam = lam / lam.sum(axis=0, keepdims=True)
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:75: RuntimeWarning: overflow encountered in exp
+  w = np.exp(z[K * J:]); w = w / w.sum()
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:75: RuntimeWarning: invalid value encountered in divide
+  w = np.exp(z[K * J:]); w = w / w.sum()
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:74: RuntimeWarning: overflow encountered in exp
+  lam = np.exp(z[:K * J].reshape(K, J)); lam = lam / lam.sum(axis=0, keepdims=True)
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:74: RuntimeWarning: invalid value encountered in divide
+  lam = np.exp(z[:K * J].reshape(K, J)); lam = lam / lam.sum(axis=0, keepdims=True)
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:75: RuntimeWarning: overflow encountered in exp
+  w = np.exp(z[K * J:]); w = w / w.sum()
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:75: RuntimeWarning: invalid value encountered in divide
+  w = np.exp(z[K * J:]); w = w / w.sum()
+  adversarially optimised predictor+tilt (60 models): sup of expectation found = 1.0000000000
+/home/user/MetricChain/experiments/mbar/review/check_partB.py:95: RuntimeWarning: invalid value encountered in divide
+  lam = num / num.sum(axis=0, keepdims=True)      # pi(f'; x)
+  identity E = exp(-N KL(s||a)): max abs error = 5.11e-15
+  wrong proportions in the statistic (s'=(.5,.5), counts (1,3)): E = 1.6875 (= exp(N KL(s||s')) = 1.6875 > 1)
+== B3: two rounds, adversarial adaptive composition and plug-in (exact enumeration)
+  adversarial adaptive rule (licensed):      sup E[Lambda_2] = 0.994433  (claim <= 1)
+  plug-in peeks at its own batch (unlicensed): sup E = 1.5219
+  data-dependent inclusion of a batch (unlicensed): sup E = 1.3104
+  data-dependent sub-batch (unlicensed): sup E = 1.1106
+  per-state factor expectations a_k/s_k: [0.253 1.747] (one exceeds 1; product over the batch <= 1)

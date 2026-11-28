@@ -1,0 +1,9 @@
+== A9 (1): integer_counts vs the coordinatewise domination n0 + counts >= gamma (n0 + u)
+  pilot count per state = 0: domination violated in 6309 of 9968 random cases (4, 22.0, [10.025, 1.562, 8.762, 1.651], [10, 1, 9, 2], 1.375)
+  pilot count per state = 1: domination violated in 299 of 9963 random cases (8, 25.0, [0.781, 0.781, 0.781, 19.531, 0.781, 0.781, 0.781, 0.781], [1, 1, 1, 19, 0, 1, 1, 1], 1.03125)
+  pilot count per state = 2: domination violated in 0 of 9933 random cases 
+  pilot count per state = 3: domination violated in 0 of 10136 random cases 
+== A9 (2): pilot_allocation itself; true population variance of the returned integer allocation
+  1500 runs with a pilot count of 0 or 1 in one state: V_true(final) > V_true(n0+u)/gamma in 176; example: {'pilot': [5, 3, 0], 'rem': 2.0, 'counts': [0, 2, 0], 'final': [5, 5, 0], 'unif': [5.667, 3.667, 0.667], 'V_final': inf, 'bound': 1.3533945797436904, 'fallback': None}
+  600 runs with every pilot count >= 2: violations 0
+== B3 through lr_confidence_region(batches=...): adversarial adaptive allocation, stop at first exclusion

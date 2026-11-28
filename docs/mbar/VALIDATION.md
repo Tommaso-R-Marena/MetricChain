@@ -40,6 +40,12 @@ states; 100 to 10 000 samples per state), 200 repetitions each, six methods on t
 What this does not show: behaviour for `K ≫ 10` (see §6: the ratio grows to 5–7 at `K = 26`), and
 anything about correlated samples (§5).
 
+*Rerun after two corrections of the interval code* (`DEAD_ENDS.md` E7: unconverged profile solves are
+now counted as inside the region; a batch is never dropped on its own data): the whole benchmark was
+repeated with the corrected code (`results/certificates_coverage_v2.json`); coverage, numbers of finite
+intervals and median widths of LR8 and LR2 are identical in all eleven regimes, i.e. neither hole was
+exercised by the stored runs.
+
 ## 3. Pilot-based allocation: actual errors at matched cost (T2, T3)
 
 Eight systems; total budget 3000 × mean cost; 2000 independent replicates per system and method;
@@ -67,9 +73,10 @@ Findings.
 3. **With unequal costs most of the gain is already obtained by equal cost per state**; the design
    adds 9 % (costly ends) and 9 % (costly middle).  The equal-count pilot and the equal-count
    safeguard waste budget on a costly state that the optimal design never samples.  *Post hoc
-   variants* (T3): a cost-aware pilot (`PILOT2C`) and, in addition, an equal-cost safeguard
-   (`PILOT2CE`); see T3 for their measured ratios.  Because they were introduced after the first
-   results they need an independent confirmation.
+   variants* (T3): a cost-aware pilot (`PILOT2C`: 0.148 and 0.265) and, in addition, an equal-cost
+   safeguard (`PILOT2CE`: 0.141 [0.13, 0.15] and 0.226 [0.21, 0.25], against the oracle's 0.124 and
+   0.205 and the equal-cost rule's 0.182 and 0.321).  Because they were introduced after the first
+   results they need an independent confirmation on a protocol frozen beforehand.
 4. Optimal designs sit on the boundary: in "costly ends" the oracle design puts **all** samples on
    two cheap intermediate states and none on the two end states whose free-energy difference is the
    target, nor on the middle state.
@@ -106,7 +113,9 @@ the halting round the interval covered in every repetition.
   covered in 98.7–100 % in all four treatments; this reflects its width, and — for time-ordered
   batches — a regret that grows when earlier batches predict later ones badly; **it is not a
   guarantee for correlated data** (B7c gives the only guarantee: thinning under an assumed mixing
-  rate).  The rows for `φ = 0.99` are in T7.
+  rate).  At `φ = 0.99`, treated as independent, the region's *joint* coverage was 92.3 % — below
+  nominal — and the asymptotic interval's 12 %; with the estimated inefficiency the asymptotic
+  interval covered in 70 %, the region in 99 %; with certified thinning both were at or above 95 %.
 
 ## 6. Public data: umbrella sampling of a valine side-chain torsion (T8)
 

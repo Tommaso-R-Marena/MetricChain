@@ -73,7 +73,7 @@ for trial in range(60):
     a = np.exp(rng.normal(0, 0.8, K))
     B = 1000.0
     nu = pop.contrast_measure(P, c)
-    sopt, Vopt, info = pop.optimal_allocation(P, nu, cost=a, budget=B, tol=1e-10)
+    sopt, Vopt, info = pop.optimal_allocation(P, nu, cost=a, budget=B, tol=1e-10, kind="measure")
     Vd, h, supp = pop.solve_dual(P, sopt, nu)
     g = pop.state_variances(P, sopt, nu)
     M = np.max(g / a)                                  # = Vopt / B at the optimum (equivalence theorem)

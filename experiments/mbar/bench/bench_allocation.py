@@ -226,7 +226,7 @@ _ORACLE = {}
 def prepare(si, B):
     sysm = systems()[si]
     nu = pop.contrast_measure(sysm["P"], sysm["c"])
-    s, V, info = pop.optimal_allocation(sysm["P"], nu, cost=sysm["cost"], budget=B, iters=20000, tol=1e-8)
+    s, V, info = pop.optimal_allocation(sysm["P"], nu, cost=sysm["cost"], budget=B, iters=20000, tol=1e-8, kind="measure")
     a, K = sysm["cost"], sysm["K"]
     su = np.full(K, B / a.sum())
     se = B / (K * a)

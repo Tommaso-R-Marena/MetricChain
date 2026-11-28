@@ -135,7 +135,7 @@ def test_elfving_identity_and_equivalence():
         K = len(c)
         cost = np.exp(rng.normal(0, 1.0, K)) if trial % 2 else np.ones(K)
         B = 1.0
-        s, V, info = optimal_allocation(P, c, cost=cost, budget=B)
+        s, V, info = optimal_allocation(P, c, cost=cost, budget=B, kind="contrast")
         pv, dv, sp = elfving_value(P, c, cost=cost, budget=B)
         worst = max(worst, abs(pv - V) / V, abs(dv - V) / V)
         assert info["kkt_gap"] < 1e-6, info["kkt_gap"]
@@ -159,7 +159,7 @@ def test_rounding_and_safeguard():
         cost = np.exp(rng.normal(0, 0.7, 4))
         N = int(rng.integers(40, 400))
         B = float(N) * cost.mean()
-        s, V, _ = optimal_allocation(P, c, cost=cost, budget=B)
+        s, V, _ = optimal_allocation(P, c, cost=cost, budget=B, kind="contrast")
         n = efficient_rounding(s, B, cost=cost)
         assert cost @ n <= B + 1e-9
         assert variance_primal(P, n.astype(float), c) <= V * B / (B - cost.sum()) * (1 + 1e-9)
@@ -197,12 +197,39 @@ def test_observables_and_multiple_targets():
         # more samples anywhere never hurt, and sampling all three beats either alone per unit
         assert variance(P, np.array([1.0, 1.0, 1.0]), nu) <= min(var0, snis) + 1e-12
         cs = [np.array([1.0, -1, 0]), np.array([0, 1.0, -1]), np.array([1.0, 0, -1])]
-        s, V, info = optimal_allocation(P, cs, objective="sum")
+        s, V, info = optimal_allocation(P, cs, objective="sum", kind="contrast")
         assert info["kkt_gap"] < 1e-6
-        s2, V2, info2 = optimal_allocation(P, cs, objective="max", iters=4000)
+        s2, V2, info2 = optimal_allocation(P, cs, objective="max", iters=4000, kind="contrast")
         for _ in range(30):
             t = rng.dirichlet(np.ones(3))
             assert max(variance_primal(P, t, ci) for ci in cs) >= V2 * (1 - 2e-3)
+
+
+def test_neyman_step_monotone_and_efficiency_bound():
+    """[A7] one step of iterated Neyman allocation never increases V;  [A6] the efficiency bound is a
+    true lower bound on V*/V(s), also in its version with lower limits on the allocation."""
+    rng = np.random.default_rng(9)
+    worst_step, worst_bound = -np.inf, -np.inf
+    for trial in range(150):
+        P, c = random_model(rng, K=int(rng.integers(2, 6)), J=int(rng.integers(5, 11)))
+        K = len(c)
+        nu = contrast_measure(P, c)
+        a = np.exp(rng.normal(0, 0.8, K))
+        s = rng.dirichlet(np.ones(K)) + 0.02
+        s /= a @ s                                      # budget 1
+        V = variance(P, s, nu)
+        g = _state_variances(P, s, nu)
+        sp = s * np.sqrt(g / a)
+        sp /= a @ sp
+        if sp.min() > 0:
+            worst_step = max(worst_step, (variance(P, sp, nu) - V) / V)
+        _, Vopt, _ = optimal_allocation(P, nu, cost=a, budget=1.0, tol=1e-9, kind="measure")
+        worst_bound = max(worst_bound, efficiency_lower_bound(P, s, nu, cost=a, budget=1.0) - Vopt / V)
+        lo = 0.3 * s
+        _, Vlo, _ = optimal_allocation(P, nu, cost=a, budget=1.0, lower=lo, tol=1e-9, kind="measure")
+        worst_bound = max(worst_bound, efficiency_lower_bound(P, s, nu, cost=a, budget=1.0, lower=lo) - Vlo / V)
+    assert worst_step < 1e-9 and worst_bound < 1e-6, (worst_step, worst_bound)
+    return worst_step, worst_bound
 
 
 if __name__ == "__main__":
@@ -214,4 +241,5 @@ if __name__ == "__main__":
     test_rounding_and_safeguard()
     test_laplacian_is_a_laplacian()
     test_observables_and_multiple_targets()
+    print("Neyman step (max increase), efficiency bound (max excess):", test_neyman_step_monotone_and_efficiency_bound())
     print("ALL POPULATION CHECKS PASSED")

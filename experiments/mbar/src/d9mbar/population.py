@@ -199,11 +199,12 @@ def efficiency_lower_bound(P, s, nu, cost=None, budget=None, lower=None):
 
 
 def optimal_allocation(P, target, cost=None, budget=1.0, lower=None, s0=None, iters=20000,
-                       tol=1e-9, objective=None):
+                       tol=1e-9, objective=None, kind=None):
     """Minimise V(s) over {s >= lower, cost.s = budget}.
 
     `target`: a contrast (length K, sum 0), a target measure (length J), or a list of either, combined
-    by objective in {'sum', 'max'} (A-type and minimax criteria).
+    by objective in {'sum', 'max'} (A-type and minimax criteria).  When K == J the reading must be
+    given: kind='measure' or kind='contrast'.
     Method: iterated Neyman allocation (Fellman's multiplicative rule) s_k <- s_k sqrt(g_k/a_k),
     g_k = Var_k(h_s), renormalised, with water-filling for the lower bounds and a floor so that a
     coordinate driven to zero can come back.  For one target each step does not increase V
@@ -218,13 +219,15 @@ def optimal_allocation(P, target, cost=None, budget=1.0, lower=None, s0=None, it
 
     def as_measure(t):
         t = np.asarray(t, float)
-        if t.shape == (K,) and K != J:
-            return contrast_measure(P, t)
-        if t.shape == (J,) and K != J:
+        if kind == "measure" or (kind is None and t.shape == (J,) and K != J):
+            if t.shape != (J,):
+                raise ValueError("a target measure must have one entry per support point")
             return t
-        if t.shape == (K,):                      # K == J: a zero-sum K-vector is read as a contrast
+        if kind == "contrast" or (kind is None and t.shape == (K,) and K != J):
             return contrast_measure(P, t)
-        raise ValueError("target shape")
+        # K == J and no `kind`: the two readings cannot be told apart (found by a test: a measure
+        # was silently re-read as a contrast).  Refuse rather than guess.
+        raise ValueError("ambiguous target: pass kind='measure' or kind='contrast'")
 
     tlist = target if isinstance(target, (list, tuple)) else [target]
     nus = [as_measure(t) for t in tlist]

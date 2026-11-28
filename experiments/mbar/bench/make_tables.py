@@ -55,6 +55,16 @@ def main():
             m = r["methods"]
             L.append(f"| {regime_name(r['regime'])} | {fmt(m['LR8']['median_regret'], 2)} | {m['LR8']['median_time']:.3f} | "
                      f"{m['C2']['median_time']:.3f} | {m['ASY']['median_time']:.4f} |")
+        v2 = load("certificates_coverage_v2.json")
+        if v2:
+            diffs = []
+            for r1, r2 in zip(c["regimes"], v2["regimes"]):
+                for k in ("LR8", "LR2"):
+                    a1, a2 = r1["methods"][k], r2["methods"][k]
+                    diffs.append(max(abs(a1["coverage"] - a2["coverage"]), abs(a1["finite"] - a2["finite"]),
+                                     abs(a1["median_width"] - a2["median_width"])))
+            L += ["", f"Rerun with the corrected interval code (`certificates_coverage_v2.json`, same seeds): largest change of "
+                  f"coverage, finite count or median width of LR8/LR2 over the {len(diffs) // 2} regimes: {max(diffs):.2e}."]
         L.append("")
     for fname, title in (("allocation_benchmark_2000.json", "T2. Allocation: mean-square error relative to equal counts, 2000 replicates"),
                          ("allocation_benchmark_costpilot2.json", "T3. Cost-heterogeneous systems with the post hoc pilot variants, 2000 replicates"),

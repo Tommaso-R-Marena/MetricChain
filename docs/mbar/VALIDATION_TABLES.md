@@ -35,6 +35,8 @@ Median plug-in regret `ρ` of LR8 and median time per region (seconds):
 | harmonic K = 2, spacing 1.0, n = 1000 | 0.37 | 0.020 | 0.003 | 0.0029 |
 | harmonic K = 10, spacing 0.25, n = 500 | 6.30 | 0.224 | 0.049 | 0.0209 |
 
+Rerun with the corrected interval code (`certificates_coverage_v2.json`, same seeds): largest change of coverage, finite count or median width of LR8/LR2 over the 11 regimes: 0.00e+00.
+
 ## T2. Allocation: mean-square error relative to equal counts, 2000 replicates
 *Pilot fraction 0.2; budget = 3000 × mean cost; every method ends with MBAR on all its samples.  Cells: MSE ratio to UNIFORM [bootstrap 95 % interval].  'predicted' = population variance ratio of the oracle design (uses ground truth).  All ratios of a row share one UNIFORM estimate.*
 
@@ -65,17 +67,17 @@ Allocations (mean final counts) and overhead:
 ## T3. Cost-heterogeneous systems with the post hoc pilot variants, 2000 replicates
 *Pilot fraction 0.2; budget = 3000 × mean cost; every method ends with MBAR on all its samples.  Cells: MSE ratio to UNIFORM [bootstrap 95 % interval].  'predicted' = population variance ratio of the oracle design (uses ground truth).  All ratios of a row share one UNIFORM estimate.*
 
-| system | predicted oracle | EQUALCOST | PILOT2 | PILOT2C | PILOT4 | NEYMAN1 | RESIST | ORACLE | failed |
-|---|---|---|---|---|---|---|---|---|---|
-| costly_ends | 0.129 | 0.182 [0.17, 0.20] | 0.166 [0.15, 0.18] | 0.148 [0.14, 0.16] | 0.174 [0.16, 0.19] | 0.401 [0.37, 0.43] | 0.358 [0.33, 0.39] | 0.124 [0.11, 0.14] | 0 |
-| costly_middle | 0.199 | 0.321 [0.29, 0.35] | 0.292 [0.27, 0.32] | 0.265 [0.24, 0.29] | 0.316 [0.29, 0.35] | 0.659 [0.60, 0.72] | 0.342 [0.31, 0.37] | 0.205 [0.19, 0.22] | 0 |
+| system | predicted oracle | EQUALCOST | PILOT2 | PILOT2C | PILOT2CE | PILOT4 | NEYMAN1 | RESIST | ORACLE | failed |
+|---|---|---|---|---|---|---|---|---|---|---|
+| costly_ends | 0.129 | 0.182 [0.17, 0.20] | 0.166 [0.15, 0.18] | 0.148 [0.14, 0.16] | 0.141 [0.13, 0.15] | 0.174 [0.16, 0.19] | 0.397 [0.36, 0.43] | 0.367 [0.34, 0.40] | 0.124 [0.11, 0.13] | 0 |
+| costly_middle | 0.199 | 0.321 [0.29, 0.35] | 0.292 [0.27, 0.32] | 0.265 [0.24, 0.29] | 0.226 [0.21, 0.25] | 0.316 [0.29, 0.35] | 0.652 [0.60, 0.72] | 0.332 [0.30, 0.36] | 0.205 [0.19, 0.22] | 0 |
 
 Allocations (mean final counts) and overhead:
 
 | system | costs | oracle design | PILOT2 mean counts | certified efficiency bound of uniform | median allocation time (s) | pilot fallbacks | UNIFORM RMSE | PILOT2 RMSE | PILOT2 bias |
 |---|---|---|---|---|---|---|---|---|---|
-| costly_ends | [20.0, 1.0, 1.0, 1.0, 20.0] | [0.0, 12900.0, 0.0, 12900.0, 0.0] | [240.0, 7910.9, 397.3, 7891.8, 240.0] | 0.082 | 0.027 | 0 | 0.0936 | 0.0381 | -0.0011 |
-| costly_middle | [1.0, 1.0, 20.0, 1.0, 1.0] | [887.56, 6312.44, 0.0, 6312.44, 887.56] | [713.2, 4090.9, 240.0, 4076.2, 719.7] | 0.176 | 0.011 | 0 | 0.0892 | 0.0482 | -0.0000 |
+| costly_ends | [20.0, 1.0, 1.0, 1.0, 20.0] | [0.0, 12900.0, 0.0, 12900.0, 0.0] | [240.0, 7910.9, 397.3, 7891.8, 240.0] | 0.082 | 0.026 | 0 | 0.0936 | 0.0381 | -0.0011 |
+| costly_middle | [1.0, 1.0, 20.0, 1.0, 1.0] | [887.56, 6312.44, 0.0, 6312.44, 887.56] | [713.2, 4090.9, 240.0, 4076.2, 719.7] | 0.176 | 0.012 | 0 | 0.0892 | 0.0482 | -0.0000 |
 
 ## T4. Allocation: first run, 400 replicates (kept for the record)
 *Pilot fraction 0.2; budget = 3000 × mean cost; every method ends with MBAR on all its samples.  Cells: MSE ratio to UNIFORM [bootstrap 95 % interval].  'predicted' = population variance ratio of the oracle design (uses ground truth).  All ratios of a row share one UNIFORM estimate.*
@@ -133,6 +135,10 @@ Allocations (mean final counts) and overhead:
 | 0.9 | iact | 300 | 5000 | 1.000 | 1.000 | 0.477 | 0.920 | 0.208 |
 | 0.9 | certified | 300 | 2275 | 1.000 | 1.000 | 0.680 | 0.970 | 0.309 |
 | 0.9 | estimated | 300 | 10042 | 0.997 | 0.997 | 0.362 | 0.827 | 0.147 |
+| 0.99 | naive | 300 | 100000 | 0.973 | 0.923 | 0.775 | 0.123 | 0.047 |
+| 0.99 | iact | 300 | 505 | 1.000 | 1.000 | 1.466 | 0.927 | 0.653 |
+| 0.99 | certified | 300 | 220 | 1.000 | 1.000 | 2.208 | 0.947 | 0.991 |
+| 0.99 | estimated | 300 | 2056 | 0.997 | 0.993 | 0.967 | 0.697 | 0.326 |
 
 ## T8. Public umbrella-sampling data (26 umbrellas; no ground truth; development evidence)
 *Estimated statistical inefficiencies: min 1.0, median 1.6, max 12.0.  Free energies in units of kT.*

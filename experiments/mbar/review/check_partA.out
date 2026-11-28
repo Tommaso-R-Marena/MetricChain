@@ -1,0 +1,11 @@
+== A3: formula (c) vs direct definition; finiteness criterion (b); radial limit (a)
+  finite 4508, infinite 1024, criterion mismatches 0, max rel |formula(c) - direct| = 1.50e-12, radial-limit rel diff (t=1e-9) = 2.48e-06
+  interior contrasts: max rel |c^T L^+ c - sum c^2/s - formula(c)| = 1.38e-10
+== A4: superadditivity 1/V(s+t) >= 1/V(s) + 1/V(t) on the closed orthant (1/inf = 0)
+  7431 pairs, max relative violation (I(s)+I(t)-I(s+t))/I(s+t) = 4.15e-14
+  adversarial search (25 models): max relative violation = 2.27e-15
+== A5: min_s V = dual^2/B = groupnorm^2/B ; A6: efficiency bounds ; A7: monotone step
+  A5: max rel disagreement of the three expressions = 5.10e-05; optimal design on the boundary in 45 models
+  A6(i): min over cases of [V*/V(s) - bound] = 2.142e-07  (must be >= 0); median (V*/V)/bound = 1.244
+  A6 lower limits: min of [V*_lo/V(s) - bound_lo] = 9.885e-06  (must be >= 0)
+  A7: max relative increase (V(s+) - V(s))/V(s) over random s incl. boundary = 0.00e+00

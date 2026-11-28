@@ -1,0 +1,37 @@
+== C1: constants at N = N0 (the smallest admitted N), tau in {1, 1/2, 0.1}
+  8766 cases: max |dG_t/dG - 1| = 0.2500 (claim <= 1/4); min separation/((tau/2)sqrt(V/N)) = 1.8806 (claim >= 1); max KL/((16/9)tau^2) = 0.4155 (claim <= 1); max D/R_c for pair contrasts = 1.000000 (claim <= 1)
+  worst KL case: {'K': 2, 'J': 4, 'V': 832.0295285795114, 'Rc': np.float64(833.3865165868305), 'D': np.float64(2764.8339418588416), 'N0': np.float64(367.58792866233114), 'tau': 0.1, 't': np.float64(0.0001808214758904043), 'Q': np.float64(832.0295285793915), 'umax': 0.2499706769794}
+  Le Cam/Pinsker arithmetic tau=1.0: 0.5*(1 - sqrt((16/9)tau^2/2)) = 0.0286   vs 0.5*(1-(2 sqrt2/3) tau) = 0.0286
+  Le Cam/Pinsker arithmetic tau=0.5: 0.5*(1 - sqrt((16/9)tau^2/2)) = 0.2643   vs 0.5*(1-(2 sqrt2/3) tau) = 0.2643
+== C2: least-favourable direction of the design problem; per-state divergence and separation
+  80 cases: max KL(p_k||p_k,t)/((16/9)t^2 Var_k) = 0.4228 (claim <= 1); min separation/((tau/2)sqrt(V*)) = 1.9233 (claim >= 1); max information ratio = 1.000000
+== S1: path bound (random models with common support, random paths incl. repeated states)
+  2528 cases: max V/bound = 1.000000 (claim <= 1)
+== S1': sup of (ea-1)(1-a) over a in [1/e,1] = 0.271540;  (e-1)^2/(4e) = 0.271540
+  random ladders: max step chi2 = 0.25845 (claim <= 0.27154); max V_uniform/(0.272 K'^2) = 0.7281 (claim <= 1)
+== S1'': K'=5, eps=0.1, delta=0.05: n1=353796, union failure = 0.02500 (claim <= delta/2 = 0.025); log error <= K'*max|log(1+-eta)| = 0.02506 (claim <= eps/2 = 0.05)
+== S1'': K'=40, eps=0.5, delta=0.01: n1=1463355, union failure = 0.00500 (claim <= delta/2 = 0.005); log error <= K'*max|log(1+-eta)| = 0.12520 (claim <= eps/2 = 0.25)
+== S1'': K'=1, eps=1.0, delta=0.3: n1=62, union failure = 0.14489 (claim <= delta/2 = 0.15); log error <= K'*max|log(1+-eta)| = 0.28768 (claim <= eps/2 = 0.5)
+== S2: bridge instance (K >= 3) and the nested instance (K = 2)
+  K=3: max |V*/V(s) - s_m| = 8.97e-14  (V* = 4)
+  K=4: max |V*/V(s) - s_m| = 2.14e-11  (V* = 4)
+  K=6: max |V*/V(s) - s_m| = 8.63e-10  (V* = 4)
+  K=2 nested (|A|=3,|B|=3): V(e_2) = 1.0000, max |eff(s) - s_2| = 1.11e-15
+  K=2 nested (|A|=1,|B|=5): V(e_2) = 5.0000, max |eff(s) - s_2| = 8.88e-16
+  K=2 nested (|A|=4,|B|=1): V(e_2) = 0.2500, max |eff(s) - s_2| = 1.78e-15
+== S3: two-point instance pi(1)=1/Gamma, weights (1, Gamma)
+  Gamma=     4: V_avg(ref only)/Gamma = 0.07997; V_avg(target) = 0.24490; V_free-energy(ref only)/Gamma = 0.13776
+  Gamma=    16: V_avg(ref only)/Gamma = 0.06653; V_avg(target) = 0.24974; V_free-energy(ref only)/Gamma = 0.21950
+  Gamma=    64: V_avg(ref only)/Gamma = 0.06348; V_avg(target) = 0.24998; V_free-energy(ref only)/Gamma = 0.24223
+  Gamma=   256: V_avg(ref only)/Gamma = 0.06274; V_avg(target) = 0.25000; V_free-energy(ref only)/Gamma = 0.24805
+  Gamma=  1024: V_avg(ref only)/Gamma = 0.06256; V_avg(target) = 0.25000; V_free-energy(ref only)/Gamma = 0.24951
+== A11: stored counterexample (results/lower_bounds_and_chains.json)
+  P shape (3, 6) T shape (3, 6, 6) rows of T sum to 1: True stationary: [True, True, True] reversible: [True, True, True]
+  contrast e0-e2, weight 0.2411: V(s)=399.6542 V(u)=126.7645 V(mix)=298.5757 chord=192.5473; (mix-chord)/mix = 0.3551, (mix-chord)/chord = 0.5507
+  contrast e2-e0, weight 0.2411: V(s)=399.6542 V(u)=126.7645 V(mix)=298.5757 chord=192.5473; (mix-chord)/mix = 0.3551, (mix-chord)/chord = 0.5507
+== B4: sqrt(R_c/V_c), uniform allocation, end-to-end contrast and adjacent contrast
+  discrete overlap 0.05: 1.071
+  discrete overlap 0.35: 1.875
+  harmonic K=5 spread=0.5: end-to-end 1.307; adjacent(0,1) 3.021
+  harmonic K=2 spread=1.0: end-to-end 1.901; adjacent(0,1) 1.901
+  harmonic K=10 spread=0.25: end-to-end 1.023; adjacent(0,1) 4.053

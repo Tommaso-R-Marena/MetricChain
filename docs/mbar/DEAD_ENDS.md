@@ -43,9 +43,11 @@ its exact computation is not a convex programme (`MATHEMATICS.md` B4).
 **N7.  An equal-count pilot wastes budget when costs differ.**  In the system "costly middle" the
 optimal design never samples the expensive state; the equal-count pilot spends a third of the budget
 on it, and the two-stage rule reaches a mean-square-error ratio `0.292 [0.27, 0.32]` against uniform
-where the oracle design reaches `0.205 [0.19, 0.22]`.  A pilot with equal *cost* per state was added
-after seeing this (`PILOT2C`; result in `VALIDATION.md` §3).  The protocol change was made after the
-first results and is therefore labelled post hoc.
+where the oracle design reaches `0.205 [0.19, 0.22]`.  The equal-count *safeguard* has the same
+defect.  A pilot with equal cost per state (`PILOT2C`: 0.265) and an equal-cost safeguard
+(`PILOT2CE`: `0.226 [0.21, 0.25]`; in "costly ends" `0.141 [0.13, 0.15]` against the oracle's 0.124)
+were added after seeing this.  Both changes were made after the first results and are labelled post
+hoc.
 
 **N8.  Where the ladder is well designed, re-allocation gains little.**  Homogeneous five-state
 ladder: predicted ratio 0.94, measured `0.92 [0.85, 1.01]` — not distinguishable from no gain with
@@ -79,9 +81,10 @@ concluded from the absence of a rejection.
 
 **N14.  An estimated statistical inefficiency is not a certificate.**  AR(1) samplers with
 contraction 0.9: after thinning by the estimated inefficiency the asymptotic interval covers in
-82.7 % of 300 repetitions (nominal 95 %); untreated, in 36 %.  The likelihood-ratio region covered in
-98.7 % (untreated) to 100 %, but only because it is 2–5 times wider; **this is not a guarantee** and
-is not claimed as one.
+82.7 % of 300 repetitions (nominal 95 %); untreated, in 36 %.  With contraction 0.99: 69.7 % and
+12.3 %.  The likelihood-ratio region covered the contrast in 97.3–100 % of the repetitions, but its
+*joint* coverage with untreated samples at contraction 0.99 was 92.3 % — below nominal.  Its apparent
+robustness comes from its width; **it is not a guarantee** and is not claimed as one.
 
 **N15.  Handoff D2 was not reconstructed.**  Its coupling argument was read and no error was seen; its
 limiting statements (`M → ∞` at fixed `N`) were not re-derived.
@@ -117,6 +120,24 @@ by thousands).  Fixed; the unit test `test_model_check_is_quiet_under_the_model`
 where the stored results say 2.4–8.3; an inequality sign for `R_c = V_c + Σc²/s`).  Found on re-reading
 against `results/certificates_coverage.json`; corrected before the first commit of the note.
 
-**E5.  Protocol change after seeing results** (N7): the cost-aware pilot was added after the
-equal-count pilot's weakness was observed.  Recorded here because a post hoc method cannot be judged
-by the same runs that motivated it.
+**E5.  Protocol change after seeing results** (N7): the cost-aware pilot and the equal-cost safeguard
+were added after the equal-count versions' weakness was observed.  Recorded here because a post hoc
+method cannot be judged by the same runs that motivated it.
+
+**E6.  An ambiguous argument in the allocation routine.**  `optimal_allocation` accepted either a
+contrast (one entry per state) or a target measure (one entry per support point) and told them apart
+by length; when the two lengths coincide a measure was silently re-read as a contrast.  Found by a
+new test (the efficiency bound appeared to be violated by 0.50; it was the comparison value that was
+computed for the wrong target).  No stored result used equal lengths except some trials of the
+synthesis check S1, which was re-run after the fix with the same outcome.  Fix: the reading must be
+stated (`kind=`), and the routine refuses to guess.
+
+**E7.  Two ways in which a certified interval could have come out too narrow.**  Found by re-reading
+the interval code against Theorem B2 while the review was running.  (a) The profile value at a
+candidate endpoint is the result of an inner minimisation; if that had stopped early, its value —
+an upper bound of the true minimum — would have moved the endpoint *inward*.  Such points are now
+counted as inside the region.  (b) A batch whose plug-in gave probability zero to one of the batch's
+own labels was dropped; dropping a batch because of its own data is not licensed by the theorem (the
+batch's e-value is 0, not 1).  The code now abstains.  Neither path was exercised by the stored
+benchmark: the rerun with the corrected code reproduces every coverage count and median width
+(`results/certificates_coverage_v2.json`).
