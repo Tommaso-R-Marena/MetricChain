@@ -2959,10 +2959,11 @@ inside the session.*
   observables; S2: exact Walsh information) were to be challenged.  **Both are correct.**
 * **What was proved** (`docs/phase2/PHASE2_REPORT.md`; pointer in theory report §11.34).  Theorem A:
   the cost factor `⌈2τ^{−2}ln(4M/η)⌉`, for both lower bounds, also for adaptive statistical queries;
-  both exponents unchanged iff `ln(1/τ) = o(n)` and `ln ln M = o(n)`.  Theorem A′: narrow dips give the
-  exponent `h̄(2γ + β)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`, at exponential precision.  Theorem A″: the flat
+  both exponents unchanged whenever `ln(1/τ) = o(n)` and `ln ln M = o(n)` (neither condition can be
+  dropped: Theorem C).  Theorem A′: narrow dips give the exponent `h̄(2γ + β)`, `h̄(λ) = KL(ρ₀ − λ/u‖½) − λ`,
+  at exponential precision — for every `2γ + β < a` in the form found on the last day (below).  Theorem A″: the flat
   mixture (any reference; any kernel with constant row sums).  Theorem B: exact observables by joint
-  spectrum, `|C| < 2(M+1)`, optimal.  Theorem C: the law of a block of `θn` sites gives exactly
+  spectrum, `|C| < 2(M+1)`, tight up to the factor 2 for the subgroup method.  Theorem C: the law of a block of `θn` sites gives exactly
   `(1 − θ)h`, so neither hypothesis of A can be dropped.  Proposition C′: with all observables a bounded
   number of evaluations (randomised), `τ·2ⁿ` (deterministic).  Theorem E: samples — a birthday bound,
   `ν* = 0.40·h`.  Lemma 5.1: one spectral criterion (attenuated bias) behind A, B and the science
