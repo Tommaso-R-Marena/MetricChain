@@ -419,9 +419,10 @@ problem is a convex programme over a product of one-site polytopes; its Lagrangi
 Sion's theorem gives the formula.  ∎
 
 **9.4 Exponential separation from the box class [P].**  Uniform cube, `π_i = ½`, slope `u` at every
-site, target `f = x_1`, no observations.  Bounded-influence class: `V⁺ = σ(u)`, for every `n`.  The
-smallest box class containing it has ratio `e^{un}`, for which `V⁺ = e^{un}/(1 + e^{un})`: within
-`e^{−un}` of the trivial bound 1.  And by Theorem 6.1 any sampled certificate over that box needs
+site, target `f = x_1`, no observations.  Bounded-influence class: `V⁺ = σ(u)`, for every `n`.  Every
+box class containing it has ratio at least `e^{un}` (a box needs `U(x) ≥ e^{un}L(x̄)` for antipodal
+`x, x̄`, so `U(x)U(x̄) ≥ e^{2un}L(x)L(x̄)`), and for the uniform box of that ratio — as for the box
+centred at a configuration — `V⁺ = e^{un}/(1 + e^{un})`: within `e^{−un}` of the trivial bound 1.  And by Theorem 6.1 any sampled certificate over that box needs
 `e^{un}` draws.  S3 applied to envelopes derived from a bounded-influence class therefore discards
 essentially all the information in the class.
 

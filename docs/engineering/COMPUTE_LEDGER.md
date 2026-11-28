@@ -224,6 +224,26 @@ shared workspace.
 
 *Results and what they decide:* `docs/engineering/benchmarks/X-011_ADDENDUM.md`.
 
+## Phase II (research owner's directive D-11, from 2026-11-28)
+
+Authorisation: "An initial Modal expenditure ceiling of $25 is authorized for small, bounded pilots that
+directly support the objectives of this directive, subject to the previously established resource
+restrictions."  "Use local computation first."  "Do not launch large-scale benchmark campaigns."  "Do
+not restart the previously missing M-016 cell merely for completeness."  A larger computation needs a
+written proposal to the research owner (objective, protocol, competing methods, success and failure
+criteria, estimated cost, worst-case committed cost, expected value) and an explicit answer.
+
+| | |
+|---|---|
+| ceiling for this phase | $25 |
+| committed (worst cases of running or queued jobs) | $0 |
+| spent | $0 — **no Modal job was launched in Phase II** (state at the last commit of this file) |
+| requests from the other Phase II divisions | none received (their branches did not exist on the remote at the first synchronisations) |
+
+Local computation of this phase: the validation campaign, the review's checks and the verification of
+the structural-biology certificates, a few core-hours in all; recorded in the reports under
+`docs/engineering/phase2/`.
+
 ## Remote jobs
 
 | id | date (UTC) | app / command | purpose | resources requested | worst-case bound | stopping condition | measured | status |
