@@ -1,0 +1,1 @@
+A {'overlap': 0.35, 'target_width': 0.6, 'trials': 300, 'ever_excluded_truth': 0.0, 'halted': 300, 'median_halt_round': 3.0, 'coverage_at_halt': 1.0, 'median_final_width': 0.24561730311965885, 'mean_final_counts': [1847.4, 540.0, 540.0, 1872.6]}
